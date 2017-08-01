@@ -16,8 +16,9 @@ describe('nb-sidebar-two', () => {
     Promise.all([
       element(by.css('nb-layout')).getSize(),
       element(by.css('nb-sidebar[fixed]')).getSize(),
-    ]).then(([layoutSize, sidebarSize]) => {
-      expect(sidebarSize.height).toEqual(layoutSize.height);
+      element(by.css('nb-layout-header')).getSize(),
+    ]).then(([layoutSize, sidebarSize, headerSize]) => {
+      expect(sidebarSize.height).toEqual(layoutSize.height - headerSize.height);
     });
   });
 
