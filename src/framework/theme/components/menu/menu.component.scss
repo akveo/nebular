@@ -7,9 +7,18 @@
 :host /deep/ {
   display: block;
 
+  .menu-item > .menu-items > .menu-item {
+    a {
+      padding-left: 2rem;
+    }
+  }
+
+  .menu-item > .menu-items {
+    padding: 0.5rem 0;
+  }
+
   .menu-items {
     list-style-type: none;
-    padding-left: 1.25rem;
     transition: visibility 0s, opacity 0.2s linear;
     padding: 0;
 
@@ -17,6 +26,7 @@
       visibility: hidden;
       opacity: 0;
       height: 0;
+      padding: 0;
     }
 
     &.expanded {
@@ -42,12 +52,6 @@
       .menu-title {
         flex: 1;
       }
-    }
-  }
-
-  .menu-item > .menu-items > .menu-item {
-    a {
-      padding-left: 2rem;
     }
   }
 }
