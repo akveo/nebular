@@ -41,7 +41,7 @@
     "version:bump": "gulp bump",
     "release:prepare": "npm run build:package",
     "release:validate": "npm run lint:ci && npm run build:wp:ci && npm run e2e:wp",
-    "release": "npm run version:bump && npm run release:prepare && npm run release:validate && npm publish src/.lib/theme && npm publish src/.lib/auth",
+    "release": "npm run version:bump && npm run release:prepare && npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth",
     "gulp": "gulp"
   },
   "keywords": [
