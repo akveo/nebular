@@ -6,24 +6,24 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
-import { NgaTabsetComponent, NgaTabComponent } from './tabset.component';
+import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 
-const NGA_TABSET_COMPONENTS = [
-  NgaTabsetComponent,
-  NgaTabComponent,
+const NB_TABSET_COMPONENTS = [
+  NbTabsetComponent,
+  NbTabComponent,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_TABSET_COMPONENTS,
+    ...NB_TABSET_COMPONENTS,
   ],
   exports: [
-    ...NGA_TABSET_COMPONENTS,
+    ...NB_TABSET_COMPONENTS,
   ],
 })
-export class NgaTabsetModule { }
+export class NbTabsetModule { }

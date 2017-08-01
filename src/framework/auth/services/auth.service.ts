@@ -9,11 +9,11 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/do';
 
-import { NgaAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NgaTokenService } from './token.service';
-import { ngaAuthProvidersToken } from '../auth.options';
+import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
+import { NbTokenService } from './token.service';
+import { nbAuthProvidersToken } from '../auth.options';
 
-export class NgaAuthResult {
+export class NbAuthResult {
 
   protected token: any;
   protected errors: string[] = [];
@@ -70,10 +70,10 @@ export class NgaAuthResult {
 }
 
 @Injectable()
-export class NgaAuthService {
+export class NbAuthService {
 
-  constructor(protected tokenService: NgaTokenService,
-              @Optional() @Inject(ngaAuthProvidersToken) protected providers = {}) {
+  constructor(protected tokenService: NbTokenService,
+              @Optional() @Inject(nbAuthProvidersToken) protected providers = {}) {
   }
 
   /**
@@ -117,11 +117,11 @@ export class NgaAuthService {
    *
    * @param provider
    * @param data
-   * @returns {Observable<NgaAuthResult>}
+   * @returns {Observable<NbAuthResult>}
    */
-  authenticate(provider: string, data?: any): Observable<NgaAuthResult> {
+  authenticate(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).authenticate(data)
-      .do((result: NgaAuthResult) => {
+      .do((result: NbAuthResult) => {
         if (result.isSuccess() && result.getTokenValue()) {
           this.tokenService.set(result.getTokenValue()).subscribe(() => {
           });
@@ -138,11 +138,11 @@ export class NgaAuthService {
    *
    * @param provider
    * @param data
-   * @returns {Observable<NgaAuthResult>}
+   * @returns {Observable<NbAuthResult>}
    */
-  register(provider: string, data?: any): Observable<NgaAuthResult> {
+  register(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).register(data)
-      .do((result: NgaAuthResult) => {
+      .do((result: NbAuthResult) => {
         if (result.isSuccess() && result.getTokenValue()) {
           this.tokenService.set(result.getTokenValue()).subscribe(() => {
           });
@@ -158,11 +158,11 @@ export class NgaAuthService {
    * logout('email')
    *
    * @param provider
-   * @returns {Observable<NgaAuthResult>}
+   * @returns {Observable<NbAuthResult>}
    */
-  logout(provider: string): Observable<NgaAuthResult> {
+  logout(provider: string): Observable<NbAuthResult> {
     return this.getProvider(provider).logout()
-      .do((result: NgaAuthResult) => {
+      .do((result: NbAuthResult) => {
         if (result.isSuccess()) {
           this.tokenService.clear().subscribe(() => { });
         }
@@ -177,9 +177,9 @@ export class NgaAuthService {
    *
    * @param provider
    * @param data
-   * @returns {Observable<NgaAuthResult>}
+   * @returns {Observable<NbAuthResult>}
    */
-  requestPassword(provider: string, data?: any): Observable<NgaAuthResult> {
+  requestPassword(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).requestPassword(data);
   }
 
@@ -191,15 +191,15 @@ export class NgaAuthService {
    *
    * @param provider
    * @param data
-   * @returns {Observable<NgaAuthResult>}
+   * @returns {Observable<NbAuthResult>}
    */
-  resetPassword(provider: string, data?: any): Observable<NgaAuthResult> {
+  resetPassword(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).resetPassword(data);
   }
 
-  getProvider(provider: string): NgaAbstractAuthProvider {
+  getProvider(provider: string): NbAbstractAuthProvider {
     if (!this.providers[provider]) {
-      throw new TypeError(`Nga auth provider '${provider}' is not registered`);
+      throw new TypeError(`Nb auth provider '${provider}' is not registered`);
     }
 
     return this.providers[provider].object;

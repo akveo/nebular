@@ -91,7 +91,7 @@
 }
 
 @mixin btn-outline-fg() {
-  color: nga-theme(btn-outline-fg);
+  color: nb-theme(btn-outline-fg);
 }
 
 @mixin btn-outline-bg() {
@@ -177,25 +177,25 @@
 
 // Border
 @mixin btn-outline-primary-border() {
-  @include btn-outline-border(nga-theme(btn-primary-bg));
+  @include btn-outline-border(nb-theme(btn-primary-bg));
 }
 
 @mixin btn-outline-warning-border() {
-  @include btn-outline-border(nga-theme(btn-warning-bg));
+  @include btn-outline-border(nb-theme(btn-warning-bg));
 }
 
 @mixin btn-outline-success-border() {
-  @include btn-outline-border(nga-theme(btn-success-bg));
+  @include btn-outline-border(nb-theme(btn-success-bg));
 }
 
 @mixin btn-outline-info-border() {
-  @include btn-outline-border(nga-theme(btn-info-bg));
+  @include btn-outline-border(nb-theme(btn-info-bg));
 }
 
 @mixin btn-outline-danger-border() {
-  @include btn-outline-border(nga-theme(btn-danger-bg));
+  @include btn-outline-border(nb-theme(btn-danger-bg));
 }
 
 @mixin btn-outline-secondary-border() {
-  @include btn-outline-border(nga-theme(btn-secondary-border));
+  @include btn-outline-border(nb-theme(btn-secondary-border));
 }

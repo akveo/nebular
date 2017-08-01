@@ -6,31 +6,31 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
 import {
-  NgaCardComponent,
-  NgaCardBodyComponent,
-  NgaCardFooterComponent,
-  NgaCardHeaderComponent,
+  NbCardComponent,
+  NbCardBodyComponent,
+  NbCardFooterComponent,
+  NbCardHeaderComponent,
 } from './card.component';
 
-const NGA_CARD_COMPONENTS = [
-  NgaCardComponent,
-  NgaCardBodyComponent,
-  NgaCardFooterComponent,
-  NgaCardHeaderComponent,
+const NB_CARD_COMPONENTS = [
+  NbCardComponent,
+  NbCardBodyComponent,
+  NbCardFooterComponent,
+  NbCardHeaderComponent,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_CARD_COMPONENTS,
+    ...NB_CARD_COMPONENTS,
   ],
   exports: [
-    ...NGA_CARD_COMPONENTS,
+    ...NB_CARD_COMPONENTS,
   ],
 })
-export class NgaCardModule { }
+export class NbCardModule { }

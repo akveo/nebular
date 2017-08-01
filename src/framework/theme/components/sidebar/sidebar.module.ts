@@ -6,43 +6,43 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
 import {
-  NgaSidebarComponent,
-  NgaSidebarFooterComponent,
-  NgaSidebarHeaderComponent,
+  NbSidebarComponent,
+  NbSidebarFooterComponent,
+  NbSidebarHeaderComponent,
 } from './sidebar.component';
 
-import { NgaSidebarService } from './sidebar.service';
+import { NbSidebarService } from './sidebar.service';
 
-const NGA_SIDEBAR_COMPONENTS = [
-  NgaSidebarComponent,
-  NgaSidebarFooterComponent,
-  NgaSidebarHeaderComponent,
+const NB_SIDEBAR_COMPONENTS = [
+  NbSidebarComponent,
+  NbSidebarFooterComponent,
+  NbSidebarHeaderComponent,
 ];
 
-const NGA_SIDEBAR_PROVIDERS = [
-  NgaSidebarService,
+const NB_SIDEBAR_PROVIDERS = [
+  NbSidebarService,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_SIDEBAR_COMPONENTS,
+    ...NB_SIDEBAR_COMPONENTS,
   ],
   exports: [
-    ...NGA_SIDEBAR_COMPONENTS,
+    ...NB_SIDEBAR_COMPONENTS,
   ],
 })
-export class NgaSidebarModule {
+export class NbSidebarModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
-      ngModule: NgaSidebarModule,
+      ngModule: NbSidebarModule,
       providers: [
-        ...NGA_SIDEBAR_PROVIDERS,
+        ...NB_SIDEBAR_PROVIDERS,
       ],
     };
   }

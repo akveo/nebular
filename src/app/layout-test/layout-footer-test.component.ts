@@ -7,14 +7,14 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-layout-footer-test',
+  selector: 'nb-layout-footer-test',
   template: `
-    <nga-layout>
-      <nga-layout-footer fixed>
+    <nb-layout>
+      <nb-layout-footer fixed>
         &copy; Akveo 2017
-      </nga-layout-footer>
-    </nga-layout>
+      </nb-layout-footer>
+    </nb-layout>
 `,
 })
-export class NgaLayoutFooterTestComponent {
+export class NbLayoutFooterTestComponent {
 }

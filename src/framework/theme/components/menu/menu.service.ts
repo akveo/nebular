@@ -21,33 +21,33 @@ const itemSelect$ = new ReplaySubject(1);
 const itemHover$ = new ReplaySubject(1);
 const submenuToggle$ = new ReplaySubject(1);
 
-export abstract class NgaMenuItem {
+export abstract class NbMenuItem {
   title: string;
   link?: string;
   url?: string;
   icon?: string;
   expanded?: boolean;
-  children?: List<NgaMenuItem>;
+  children?: List<NbMenuItem>;
   target?: string;
   hidden?: boolean;
   pathMath?: string = 'full'; // TODO: is not set if item is initialized by default, should be set anyway
   home?: boolean;
   group?: boolean;
-  parent?: NgaMenuItem;
+  parent?: NbMenuItem;
   selected?: boolean;
   data?: any;
 }
 
-export interface NgaMenuOptions {
-  items?: List<NgaMenuItem>;
+export interface NbMenuOptions {
+  items?: List<NbMenuItem>;
 }
 
-export const ngaMenuOptionsToken = new InjectionToken<NgaMenuOptions>('NGA_MENU_OPTIONS');
+export const nbMenuOptionsToken = new InjectionToken<NbMenuOptions>('NB_MENU_OPTIONS');
 
 // TODO: map select events to router change events
 @Injectable()
-export class NgaMenuService {
-  addItems(items: List<NgaMenuItem>, tag?: string) {
+export class NbMenuService {
+  addItems(items: List<NbMenuItem>, tag?: string) {
     addItems$.next({ tag, items });
   }
 
@@ -55,57 +55,57 @@ export class NgaMenuService {
     navigateHome$.next({ tag });
   }
 
-  getSelectedItem(tag?: string): Observable<{ tag: string; item: NgaMenuItem }> {
-    const listener = new BehaviorSubject<{ tag: string; item: NgaMenuItem }>(null);
+  getSelectedItem(tag?: string): Observable<{ tag: string; item: NbMenuItem }> {
+    const listener = new BehaviorSubject<{ tag: string; item: NbMenuItem }>(null);
 
     getSelectedItem$.next({ tag, listener });
 
     return listener.asObservable();
   }
 
-  onItemClick(): Observable<{ tag: string; item: NgaMenuItem }> {
+  onItemClick(): Observable<{ tag: string; item: NbMenuItem }> {
     return itemClick$.publish().refCount();
   }
 
-  onItemSelect(): Observable<{ tag: string; item: NgaMenuItem }> {
+  onItemSelect(): Observable<{ tag: string; item: NbMenuItem }> {
     return itemSelect$.publish().refCount();
   }
 
-  onItemHover(): Observable<{ tag: string; item: NgaMenuItem }> {
+  onItemHover(): Observable<{ tag: string; item: NbMenuItem }> {
     return itemHover$.publish().refCount();
   }
 
-  onSubmenuToggle(): Observable<{ tag: string; item: NgaMenuItem }> {
+  onSubmenuToggle(): Observable<{ tag: string; item: NbMenuItem }> {
     return submenuToggle$.publish().refCount();
   }
 }
 
 @Injectable()
-export class NgaMenuInternalService {
-  private stack = List<NgaMenuItem>();
+export class NbMenuInternalService {
+  private stack = List<NbMenuItem>();
 
-  private items = List<NgaMenuItem>();
+  private items = List<NbMenuItem>();
 
-  constructor(private router: Router, private location: Location, @Inject(ngaMenuOptionsToken) private options: any) {
+  constructor(private router: Router, private location: Location, @Inject(nbMenuOptionsToken) private options: any) {
     if (options && options.items) {
-      this.items = List<NgaMenuItem>(this.options.items);
+      this.items = List<NbMenuItem>(this.options.items);
     } else {
-      this.items = List<NgaMenuItem>();
+      this.items = List<NbMenuItem>();
     }
   }
 
-  getItems(): List<NgaMenuItem> {
-    return List<NgaMenuItem>(this.items);
+  getItems(): List<NbMenuItem> {
+    return List<NbMenuItem>(this.items);
   }
 
-  prepareItems(items: List<NgaMenuItem>) {
+  prepareItems(items: List<NbMenuItem>) {
     items.forEach(i => this.setParent(i));
     items.forEach(i => this.prepareItem(i));
 
     this.clearStack();
   }
 
-  onAddItem(): Observable<{ tag: string; items: List<NgaMenuItem> }> {
+  onAddItem(): Observable<{ tag: string; items: List<NbMenuItem> }> {
     return addItems$.publish().refCount();
   }
 
@@ -113,57 +113,57 @@ export class NgaMenuInternalService {
     return navigateHome$.publish().refCount();
   }
 
-  onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<{ tag: string; item: NgaMenuItem }> }> {
+  onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }> {
     return getSelectedItem$.publish().refCount();
   }
 
-  itemHover(item: NgaMenuItem, tag?: string) {
+  itemHover(item: NbMenuItem, tag?: string) {
     itemHover$.next({
       tag,
       item,
     });
   }
 
-  submenuToggle(item: NgaMenuItem, tag?: string) {
+  submenuToggle(item: NbMenuItem, tag?: string) {
     submenuToggle$.next({
       tag,
       item,
     });
   }
 
-  resetItems(items: List<NgaMenuItem>) {
+  resetItems(items: List<NbMenuItem>) {
     items.forEach(i => this.resetItem(i));
 
     this.clearStack();
   }
 
-  itemSelect(item: NgaMenuItem, tag?: string) {
+  itemSelect(item: NbMenuItem, tag?: string) {
     itemSelect$.next({
       tag,
       item,
     });
   }
 
-  itemClick(item: NgaMenuItem, tag?: string) {
+  itemClick(item: NbMenuItem, tag?: string) {
     itemClick$.next({
       tag,
       item,
     });
   }
 
-  collapseAll(items: List<NgaMenuItem>, except?: NgaMenuItem) {
+  collapseAll(items: List<NbMenuItem>, except?: NbMenuItem) {
     items.forEach(i => this.collapseItem(i, except));
 
     this.clearStack();
   }
 
-  private resetItem(parent: NgaMenuItem) {
+  private resetItem(parent: NbMenuItem) {
     parent.selected = false;
 
     this.stack = this.stack.push(parent);
 
     if (parent.children && parent.children.size > 0) {
-      const firstSelected = parent.children.filter((c: NgaMenuItem) => !this.stack.contains(c)).first();
+      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
 
       if (firstSelected) {
         firstSelected.selected = false;
@@ -177,7 +177,7 @@ export class NgaMenuInternalService {
     }
   }
 
-  private collapseItem(parent: NgaMenuItem, except?: NgaMenuItem) {
+  private collapseItem(parent: NbMenuItem, except?: NbMenuItem) {
     if (parent === except) {
       return;
     }
@@ -187,7 +187,7 @@ export class NgaMenuInternalService {
     this.stack = this.stack.push(parent);
 
     if (parent.children && parent.children.size > 0) {
-      const firstSelected = parent.children.filter((c: NgaMenuItem) => !this.stack.contains(c)).first();
+      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
 
       if (firstSelected) {
         firstSelected.expanded = false;
@@ -201,7 +201,7 @@ export class NgaMenuInternalService {
     }
   }
 
-  private setParent(parent: NgaMenuItem) {
+  private setParent(parent: NbMenuItem) {
     if (parent.children && parent.children.size > 0) {
       const firstItemWithoutParent = parent.children.filter(c => c.parent === null || c.parent === undefined).first();
 
@@ -217,7 +217,7 @@ export class NgaMenuInternalService {
     }
   }
 
-  private prepareItem(parent: NgaMenuItem) {
+  private prepareItem(parent: NbMenuItem) {
     parent.selected = false;
 
     this.stack = this.stack.push(parent);
@@ -239,7 +239,7 @@ export class NgaMenuInternalService {
     }
 
     if (parent.children && parent.children.size > 0) {
-      const firstUnchecked = parent.children.filter((c: NgaMenuItem) => !this.stack.contains(c)).first();
+      const firstUnchecked = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
 
       if (firstUnchecked) {
         this.prepareItem(firstUnchecked);

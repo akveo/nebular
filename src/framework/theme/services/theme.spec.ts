@@ -6,36 +6,36 @@
 
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { DEFAULT_MEDIA_BREAKPOINTS, NgaMediaBreakpointsService } from './breakpoints.service';
-import { NgaThemeService } from './theme.service';
-import { BUILT_IN_THEMES, NgaJSThemesRegistry } from './js-themes-registry.service';
+import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoints.service';
+import { NbThemeService } from './theme.service';
+import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
 import {
-  ngaBuiltInJSThemesToken, ngaJSThemesToken, ngaMediaBreakpointsToken,
-  ngaThemeOptionsToken,
+  nbBuiltInJSThemesToken, nbJSThemesToken, nbMediaBreakpointsToken,
+  nbThemeOptionsToken,
 } from '../theme.options';
 
 describe('theme-service', () => {
-  let breakpointService: NgaMediaBreakpointsService;
-  let themeService: NgaThemeService;
+  let breakpointService: NbMediaBreakpointsService;
+  let themeService: NbThemeService;
 
   beforeEach(() => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: ngaMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
-        NgaMediaBreakpointsService,
-        { provide: ngaJSThemesToken, useValue: [] },
-        { provide: ngaBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
-        NgaJSThemesRegistry,
-        { provide: ngaThemeOptionsToken, useValue: { name: 'default' } },
-        NgaThemeService,
+        { provide: nbMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
+        NbMediaBreakpointsService,
+        { provide: nbJSThemesToken, useValue: [] },
+        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        NbJSThemesRegistry,
+        { provide: nbThemeOptionsToken, useValue: { name: 'default' } },
+        NbThemeService,
       ],
     });
   });
 
 // Single async inject to save references; which are used in all tests below
   beforeEach(async(inject(
-    [NgaMediaBreakpointsService, NgaThemeService],
+    [NbMediaBreakpointsService, NbThemeService],
     (_breakpointService, _themeService) => {
       breakpointService = _breakpointService;
       themeService = _themeService;

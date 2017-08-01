@@ -107,13 +107,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "nga",
+      "nb",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      ["nga", "ngt"],
+      "nb",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

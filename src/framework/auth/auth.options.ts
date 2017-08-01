@@ -1,12 +1,12 @@
 import { InjectionToken } from '@angular/core';
 
-export interface NgaAuthOptions {
+export interface NbAuthOptions {
   providers?: any;
 }
 
-export interface NgaAuthProviders {
+export interface NbAuthProviders {
   [key: string]: any;
 }
 
-export const ngaAuthOptionsToken = new InjectionToken<NgaAuthOptions>('NGA_AUTH_OPTIONS');
-export const ngaAuthProvidersToken = new InjectionToken<NgaAuthProviders>('NGA_AUTH_OPTIONS');
+export const nbAuthOptionsToken = new InjectionToken<NbAuthOptions>('NB_AUTH_OPTIONS');
+export const nbAuthProvidersToken = new InjectionToken<NbAuthProviders>('NB_AUTH_OPTIONS');

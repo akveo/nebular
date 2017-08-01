@@ -18,12 +18,12 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/startWith';
 
-import { ngaThemeOptionsToken } from '../theme.options';
-import { NgaJSTheme, NgaJSThemesRegistry } from './js-themes-registry.service';
-import { NgaMediaBreakpointsService, NgaMediaBreakpoint } from './breakpoints.service';
+import { nbThemeOptionsToken } from '../theme.options';
+import { NbJSTheme, NbJSThemesRegistry } from './js-themes-registry.service';
+import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
 
 @Injectable()
-export class NgaThemeService {
+export class NbThemeService {
 
   // TODO: behavioral subject here?
   currentTheme: string;
@@ -34,9 +34,9 @@ export class NgaThemeService {
   private removeLayoutClass$ = new Subject();
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
-  constructor(@Inject(ngaThemeOptionsToken) protected options: any,
-              private breakpointService: NgaMediaBreakpointsService,
-              private jsThemesRegistry: NgaJSThemesRegistry) {
+  constructor(@Inject(nbThemeOptionsToken) protected options: any,
+              private breakpointService: NbMediaBreakpointsService,
+              private jsThemesRegistry: NbJSThemesRegistry) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
@@ -62,9 +62,9 @@ export class NgaThemeService {
    * Returns a theme object with variables (color/paddings/etc) on a theme change.
    * Once subscribed - returns current theme.
    *
-   * @returns {Observable<NgaJSTheme>}
+   * @returns {Observable<NbJSTheme>}
    */
-  getJsTheme(): Observable<NgaJSTheme> {
+  getJsTheme(): Observable<NbJSTheme> {
     return this.onThemeChange().map((theme: any) => {
       return this.jsThemesRegistry.get(theme.name);
     });
@@ -83,9 +83,9 @@ export class NgaThemeService {
    * ```
    *  [{ name: 'xs', width: 0 }, { name: 'md', width: 768 }] // change from `xs` to `md`
    * ```
-   * @returns {Observable<[NgaMediaBreakpoint, NgaMediaBreakpoint]>}
+   * @returns {Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>}
    */
-  onMediaQueryChange(): Observable<[NgaMediaBreakpoint, NgaMediaBreakpoint]> {
+  onMediaQueryChange(): Observable<[NbMediaBreakpoint, NbMediaBreakpoint]> {
     return this.changeWindowWidth$
       .startWith(undefined)
       .pairwise()
@@ -95,7 +95,7 @@ export class NgaThemeService {
           this.breakpointService.getBreakpoint(width),
         ]
       })
-      .filter(([prevPoint, point]: [NgaMediaBreakpoint, NgaMediaBreakpoint]) => {
+      .filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
         return prevPoint.name !== point.name;
       })
       .distinctUntilChanged(null, params => params[0].name + params[1].name)

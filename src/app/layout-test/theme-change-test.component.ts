@@ -5,41 +5,41 @@
  */
 
 import { Component } from '@angular/core';
-import { NgaThemeService } from '@akveo/nga-theme';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'nga-change-theme-test',
+  selector: 'nb-change-theme-test',
   template: `
-    <nga-layout>
-      <nga-layout-header fixed>
+    <nb-layout>
+      <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
         <button id="change-theme" (click)="changeTheme()">Change Theme</button>
-      </nga-layout-header>
+      </nb-layout-header>
 
-      <nga-sidebar right>
+      <nb-sidebar right>
           Sidebar content
-      </nga-sidebar>
+      </nb-sidebar>
 
-      <nga-layout-column>
-        <nga-card>
-          <nga-card-header>Hello</nga-card-header>
-          <nga-card-body>
+      <nb-layout-column>
+        <nb-card>
+          <nb-card-header>Hello</nb-card-header>
+          <nb-card-body>
             Some Test content
-          </nga-card-body>
-        </nga-card>
-      </nga-layout-column>
+          </nb-card-body>
+        </nb-card>
+      </nb-layout-column>
 
 
-      <nga-layout-footer fixed>
+      <nb-layout-footer fixed>
         &copy; Akveo 2017
-      </nga-layout-footer>
-    </nga-layout>
+      </nb-layout-footer>
+    </nb-layout>
 `,
 })
-export class NgaThemeChangeTestComponent {
+export class NbThemeChangeTestComponent {
   currentTheme = 'default';
 
-  constructor(private themeService: NgaThemeService) {}
+  constructor(private themeService: NbThemeService) {}
 
   changeTheme() {
     this.currentTheme = this.currentTheme === 'default' ? 'blue' : 'default';

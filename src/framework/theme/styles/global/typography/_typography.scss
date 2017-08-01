@@ -3,43 +3,43 @@
 }
 
 @function text-heading() {
-  @return nga-theme(color-fg-heading);
+  @return nb-theme(color-fg-heading);
 }
 
 @function text-body() {
-  @return nga-theme(color-fg-text);
+  @return nb-theme(color-fg-text);
 }
 
 @function text-hint() {
-  @return nga-theme(color-fg);
+  @return nb-theme(color-fg);
 }
 
 @function text-primary() {
-  @return main-to-text-color(nga-theme(color-primary));
+  @return main-to-text-color(nb-theme(color-primary));
 }
 
 @function text-warning() {
-  @return main-to-text-color(nga-theme(color-warning));
+  @return main-to-text-color(nb-theme(color-warning));
 }
 
 @function text-success() {
-  @return main-to-text-color(nga-theme(color-success));
+  @return main-to-text-color(nb-theme(color-success));
 }
 
 @function text-info() {
-  @return main-to-text-color(nga-theme(color-info));
+  @return main-to-text-color(nb-theme(color-info));
 }
 
 @function text-danger() {
-  @return main-to-text-color(nga-theme(color-danger));
+  @return main-to-text-color(nb-theme(color-danger));
 }
 
 @function text-white() {
-  @return nga-theme(color-white);
+  @return nb-theme(color-white);
 }
 
-@mixin nga-alert-variant($body-color) {
-  background-color: nga-theme(layout-bg);
+@mixin nb-alert-variant($body-color) {
+  background-color: nb-theme(layout-bg);
   border: none;
   color: $body-color;
 
@@ -53,7 +53,7 @@
   .alert-link {
     color: $body-color;
     text-decoration: none;
-    font-weight: nga-theme(font-weight-normal);
+    font-weight: nb-theme(font-weight-normal);
     border-bottom: 1px dashed $body-color;
 
     @include hover-focus {
@@ -62,10 +62,10 @@
   }
 }
 
-@mixin nga-typography {
+@mixin nb-typography {
 
   .font-secondary {
-    font-family: nga-theme(font-secondary);
+    font-family: nb-theme(font-secondary);
 
     .header .name {
       font-size: 4.5rem;
@@ -73,7 +73,7 @@
   }
 
   .font-main {
-    font-family: nga-theme(font-main);
+    font-family: nb-theme(font-main);
 
     .header .name {
       font-size: 2.5rem;
@@ -81,15 +81,15 @@
   }
 
   .font-w-light {
-    font-weight: nga-theme(font-weight-light);
+    font-weight: nb-theme(font-weight-light);
   }
 
   .font-w-regular {
-    font-weight: nga-theme(font-weight-normal);
+    font-weight: nb-theme(font-weight-normal);
   }
 
   .font-w-bold {
-    font-weight: nga-theme(font-weight-bold);
+    font-weight: nb-theme(font-weight-bold);
   }
 
   .text-primary {
@@ -152,17 +152,17 @@
   }
 
   .blockquote {
-    font-size: nga-theme(font-size);
-    border-left: 0.25rem solid nga-theme(color-fg-highlight);
-    color: nga-theme(color-fg-text);
+    font-size: nb-theme(font-size);
+    border-left: 0.25rem solid nb-theme(color-fg-highlight);
+    color: nb-theme(color-fg-text);
   }
   .blockquote-reverse {
-    font-size: nga-theme(font-size);
-    border-right: 0.25rem solid nga-theme(color-fg-highlight);
-    color: nga-theme(color-fg-text);
+    font-size: nb-theme(font-size);
+    border-right: 0.25rem solid nb-theme(color-fg-highlight);
+    color: nb-theme(color-fg-text);
   }
   .blockquote-footer {
-    color: nga-theme(color-fg);
+    color: nb-theme(color-fg);
     font-style: italic;
     font-size: 100%;
   }
@@ -174,20 +174,20 @@
   }
 
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: nga-theme(font-secondary);
-    color: nga-theme(color-fg-heading);
-    font-weight: nga-theme(font-weight-bolder);
+    font-family: nb-theme(font-secondary);
+    color: nb-theme(color-fg-heading);
+    font-weight: nb-theme(font-weight-bolder);
   }
 
   strong, b {
-    font-weight: nga-theme(font-weight-bold);
+    font-weight: nb-theme(font-weight-bold);
   }
 
   a {
-    color: nga-theme(link-color-active);
+    color: nb-theme(link-color-active);
 
     @include hover-focus {
-      color: nga-theme(link-color-hover);
+      color: nb-theme(link-color-hover);
     }
   }
 
@@ -200,22 +200,22 @@
   }
 
   .alert-success {
-    @include nga-alert-variant(text-success());
+    @include nb-alert-variant(text-success());
   }
   .alert-info {
-    @include nga-alert-variant(text-info());
+    @include nb-alert-variant(text-info());
   }
   .alert-warning {
-    @include nga-alert-variant(text-warning());
+    @include nb-alert-variant(text-warning());
   }
   .alert-danger {
-    @include nga-alert-variant(text-danger());
+    @include nb-alert-variant(text-danger());
   }
   .alert-primary {
-    @include nga-alert-variant(text-primary());
+    @include nb-alert-variant(text-primary());
   }
   .alert-hint {
-    @include nga-alert-variant(text-hint());
+    @include nb-alert-variant(text-hint());
   }
 
 }

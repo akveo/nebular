@@ -6,19 +6,19 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
-import { NgaRouteTabsetComponent } from './route-tabset.component';
+import { NbRouteTabsetComponent } from './route-tabset.component';
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    NgaRouteTabsetComponent,
+    NbRouteTabsetComponent,
   ],
   exports: [
-    NgaRouteTabsetComponent,
+    NbRouteTabsetComponent,
   ],
 })
-export class NgaRouteTabsetModule { }
+export class NbRouteTabsetModule { }

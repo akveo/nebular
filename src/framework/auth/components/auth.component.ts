@@ -4,19 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, OnDestroy } from '@angular/core';
-import { NgaAuthService } from '../services/auth.service';
+import { NbAuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'nga-auth',
+  selector: 'nb-auth',
   template: `
-    <nga-layout>
-      <nga-layout-column>
-        <nga-auth-block></nga-auth-block>
-      </nga-layout-column>
-    </nga-layout>
+    <nb-layout>
+      <nb-layout-column>
+        <nb-auth-block></nb-auth-block>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaAuthComponent implements OnDestroy {
+export class NbAuthComponent implements OnDestroy {
 
   subscription: any;
 
@@ -24,7 +24,7 @@ export class NgaAuthComponent implements OnDestroy {
   token: string = '';
 
   // showcase of how to use the onAuthenticationChange method
-  constructor(protected auth: NgaAuthService) {
+  constructor(protected auth: NbAuthService) {
 
     this.subscription = auth.onAuthenticationChange()
       .subscribe((authenticated: boolean) => {

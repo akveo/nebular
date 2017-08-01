@@ -7,13 +7,13 @@
 @import 'global/components';
 @import 'global/overrides';
 
-@mixin nga-theme-global() {
-  @include nga-theme-components();
-  @include nga-theme-overrides();
+@mixin nb-theme-global() {
+  @include nb-theme-components();
+  @include nb-theme-overrides();
 }
 
-@mixin nga-install() {
-  @include nga-install-global() {
+@mixin nb-install() {
+  @include nb-install-global() {
     @content;
   }
 }

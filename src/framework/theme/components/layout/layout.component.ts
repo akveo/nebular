@@ -24,8 +24,8 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/filter';
 
 import { convertToBoolProperty } from '../helpers';
-import { NgaThemeService } from '../../services/theme.service';
-import { NgaSpinnerService } from '../../services/spinner.service';
+import { NbThemeService } from '../../services/theme.service';
+import { NbSpinnerService } from '../../services/spinner.service';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -35,20 +35,20 @@ import { NgaSpinnerService } from '../../services/spinner.service';
  * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
  * moving it to the very first position:
  * ```
- * <nga-layout>
- *   <nga-layout-column>Second</nga-layout-column>
- *   <nga-layout-column>Third</nga-layout-column>
- *   <nga-layout-column left>First</nga-layout-column>
- * </nga-layout>
+ * <nb-layout>
+ *   <nb-layout-column>Second</nb-layout-column>
+ *   <nb-layout-column>Third</nb-layout-column>
+ *   <nb-layout-column left>First</nb-layout-column>
+ * </nb-layout>
  * ```
  */
 @Component({
-  selector: 'nga-layout-column',
+  selector: 'nb-layout-column',
   template: `
     <ng-content></ng-content>
   `,
 })
-export class NgaLayoutColumnComponent {
+export class NbLayoutColumnComponent {
 
   @HostBinding('class.left') leftValue: boolean;
 
@@ -66,22 +66,22 @@ export class NgaLayoutColumnComponent {
  * Page header component.
  * Located on top of the page above the layout columns and sidebars.
  * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
- * sticky to the top of the nga-layout (to of the page).
+ * sticky to the top of the nb-layout (to of the page).
  */
 @Component({
-  selector: 'nga-layout-header',
+  selector: 'nb-layout-header',
   template: `
     <nav [class.fixed]="fixedValue">
       <ng-content></ng-content>
     </nav>
   `,
 })
-export class NgaLayoutHeaderComponent {
+export class NbLayoutHeaderComponent {
 
   @HostBinding('class.fixed') fixedValue: boolean;
 
   /**
-   * Makes the header sticky to the top of the nga-layout.
+   * Makes the header sticky to the top of the nb-layout.
    * @param {boolean} val
    */
   @Input()
@@ -92,18 +92,18 @@ export class NgaLayoutHeaderComponent {
 
 /**
  * Page footer.
- * Located under the nga-layout content (specifically, under the columns).
+ * Located under the nb-layout content (specifically, under the columns).
  * Could be made `fixed`, becoming sticky to the bottom of the view port (window).
  */
 @Component({
-  selector: 'nga-layout-footer',
+  selector: 'nb-layout-footer',
   template: `
     <nav [class.fixed]="fixedValue">
       <ng-content></ng-content>
     </nav>
   `,
 })
-export class NgaLayoutFooterComponent {
+export class NbLayoutFooterComponent {
 
   @HostBinding('class.fixed') fixedValue: boolean;
 
@@ -120,31 +120,31 @@ export class NgaLayoutFooterComponent {
 
 /**
  * The general Nebular component-container.
- * It is required that all children component of the framework are located inside of the nga-layout.
+ * It is required that all children component of the framework are located inside of the nb-layout.
  * The theme styles and multi-theming are also applied starting from this component.
  *
  * Can contain the following components inside:
  * ```
- * nga-layout-header
- * nga-layout-column
- * nga-sidebar
- * nga-layout-footer
+ * nb-layout-header
+ * nb-layout-column
+ * nb-sidebar
+ * nb-layout-footer
  * ```
  * By default the layout fills up the full view-port.
- * The window scrollbars are disabled on the body and moved inside of the nga-layout, so that the scrollbars
- * won't mess with the fixed nga-header.
+ * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
+ * won't mess with the fixed nb-header.
  *
  * @example A simple layout example:
  * ```
- * <nga-layout>
- *   <nga-layout-header>Great Company</nga-layout-header>
+ * <nb-layout>
+ *   <nb-layout-header>Great Company</nb-layout-header>
  *
- *   <nga-layout-column>
+ *   <nb-layout-column>
  *     Hello World!
- *   </nga-layout-column>
+ *   </nb-layout-column>
  *
- *   <nga-layout-footer>Contact us</nga-layout-footer>
- * </nga-layout>
+ *   <nb-layout-footer>Contact us</nb-layout-footer>
+ * </nb-layout>
  * ```
  *
  * The children components are project into the flexible layout structure allowing to adjust the layout behavior
@@ -153,20 +153,20 @@ export class NgaLayoutFooterComponent {
  * @example For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
  * ```
- * <nga-layout center>
- *   <nga-layout-header>Great Company</nga-layout-header>
+ * <nb-layout center>
+ *   <nb-layout-header>Great Company</nb-layout-header>
  *
- *   <nga-layout-column>
+ *   <nb-layout-column>
  *     Hello World!
- *   </nga-layout-column>
+ *   </nb-layout-column>
  *
- *   <nga-layout-footer>Contact us</nga-layout-footer>
- * </nga-layout>
+ *   <nb-layout-footer>Contact us</nb-layout-footer>
+ * </nb-layout>
  * ```
  * Now the layout content (columns) becomes centered when the window width is more than
  * the value specified in the theme variable `layout-content-width` (900px by default).
  *
- * The layout also contains the area on the very top (the first child of the nga-layout), which could be used
+ * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
  * to dymanically append some components like modals or spinners/loaders
  * so that they are located on top of the elements hierarchy.
  * More details are below under the `ThemeService` section.
@@ -180,27 +180,27 @@ export class NgaLayoutFooterComponent {
  *
  */
 @Component({
-  selector: 'nga-layout',
+  selector: 'nb-layout',
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container">
       <div class="layout">
-        <ng-content select="nga-layout-header"></ng-content>
+        <ng-content select="nb-layout-header"></ng-content>
         <div class="layout-container">
-          <ng-content select="nga-sidebar"></ng-content>
+          <ng-content select="nb-sidebar"></ng-content>
           <div class="content" [class.center]="centerValue">
             <div class="columns">
-              <ng-content select="nga-layout-column"></ng-content>
+              <ng-content select="nb-layout-column"></ng-content>
             </div>
-            <ng-content select="nga-layout-footer"></ng-content>
+            <ng-content select="nb-layout-footer"></ng-content>
           </div>
         </div>
       </div>
     </div>
   `,
 })
-export class NgaLayoutComponent implements OnDestroy, AfterViewInit {
+export class NbLayoutComponent implements OnDestroy, AfterViewInit {
 
   centerValue: boolean = false;
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
@@ -255,17 +255,17 @@ export class NgaLayoutComponent implements OnDestroy, AfterViewInit {
   protected appendSubscription: Subscription;
   protected clearSubscription: Subscription;
 
-  constructor(protected themeService: NgaThemeService,
-              protected spinnerService: NgaSpinnerService,
+  constructor(protected themeService: NbThemeService,
+              protected spinnerService: NbSpinnerService,
               protected componentFactoryResolver: ComponentFactoryResolver,
               protected elementRef: ElementRef,
               protected renderer: Renderer2) {
     this.themeSubscription = this.themeService.onThemeChange().subscribe((theme) => {
 
       if (theme.previous) {
-        this.renderer.removeClass(this.elementRef.nativeElement, `nga-theme-${theme.previous}`);
+        this.renderer.removeClass(this.elementRef.nativeElement, `nb-theme-${theme.previous}`);
       }
-      this.renderer.addClass(this.elementRef.nativeElement, `nga-theme-${theme.name}`);
+      this.renderer.addClass(this.elementRef.nativeElement, `nb-theme-${theme.name}`);
     });
 
     this.appendClassSubscription = this.themeService.onAppendLayoutClass().subscribe((className) => {

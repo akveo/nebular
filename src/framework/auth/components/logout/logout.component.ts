@@ -6,19 +6,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NgaAuthService, NgaAuthResult } from '../../services/auth.service';
+import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 
 @Component({
-  selector: 'nga-logout',
+  selector: 'nb-logout',
   template: `
     <div>Logging out, please wait...</div>
   `,
 })
-export class NgaLogoutComponent implements OnInit {
+export class NbLogoutComponent implements OnInit {
 
   redirectDelay: number = 1500;
 
-  constructor(protected service: NgaAuthService,
+  constructor(protected service: NbAuthService,
               protected router: Router) {
   }
 
@@ -27,7 +27,7 @@ export class NgaLogoutComponent implements OnInit {
   }
 
   logout(provider: string): void {
-    this.service.logout(provider).subscribe((result: NgaAuthResult) => {
+    this.service.logout(provider).subscribe((result: NbAuthResult) => {
 
       const redirect = result.getRedirect();
       if (redirect) {

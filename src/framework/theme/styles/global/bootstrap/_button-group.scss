@@ -11,27 +11,27 @@
 }
 
 @mixin btn-group-primary-separator() {
-  @include btn-group-separator(nga-theme(color-primary));
+  @include btn-group-separator(nb-theme(color-primary));
 }
 
 @mixin btn-group-success-separator() {
-  @include btn-group-separator(nga-theme(color-success));
+  @include btn-group-separator(nb-theme(color-success));
 }
 
 @mixin btn-group-warning-separator() {
-  @include btn-group-separator(nga-theme(color-warning));
+  @include btn-group-separator(nb-theme(color-warning));
 }
 
 @mixin btn-group-info-separator() {
-  @include btn-group-separator(nga-theme(color-info));
+  @include btn-group-separator(nb-theme(color-info));
 }
 
 @mixin btn-group-danger-separator() {
-  @include btn-group-separator(nga-theme(color-danger));
+  @include btn-group-separator(nb-theme(color-danger));
 }
 
 @mixin btn-group-secondary-separator() {
-  @include btn-group-separator(nga-theme(color-primary));
+  @include btn-group-separator(nb-theme(color-primary));
 }
 
 
@@ -40,31 +40,31 @@
 }
 
 @mixin dropdown-primary-separator() {
-  @include dropdown-separator(nga-theme(btn-primary-bg));
+  @include dropdown-separator(nb-theme(btn-primary-bg));
 }
 
 @mixin dropdown-success-separator() {
-  @include dropdown-separator(nga-theme(btn-success-bg));
+  @include dropdown-separator(nb-theme(btn-success-bg));
 }
 
 @mixin dropdown-warning-separator() {
-  @include dropdown-separator(nga-theme(btn-warning-bg));
+  @include dropdown-separator(nb-theme(btn-warning-bg));
 }
 
 @mixin dropdown-info-separator() {
-  @include dropdown-separator(nga-theme(btn-info-bg));
+  @include dropdown-separator(nb-theme(btn-info-bg));
 }
 
 @mixin dropdown-danger-separator() {
-  @include dropdown-separator(nga-theme(btn-danger-bg));
+  @include dropdown-separator(nb-theme(btn-danger-bg));
 }
 
 @mixin dropdown-secondary-separator() {
-  @include dropdown-separator(nga-theme(btn-secondary-bg));
+  @include dropdown-separator(nb-theme(btn-secondary-bg));
 }
 
 
-@mixin nga-b-button-group-theme() {
+@mixin nb-b-button-group-theme() {
 
   .btn-group:not(.btn-toggle-group):not(.btn-divided-group) > .btn + .btn {
     &.btn-primary {
@@ -100,39 +100,39 @@
   .btn-toggle-group,
   .btn-divided-group {
     .btn:not(.active) {
-      background-color: shade(nga-theme(color-bg), 10%);
+      background-color: shade(nb-theme(color-bg), 10%);
     }
 
     .btn:active,
     .btn.active {
       &.btn-primary,
       &.btn-outline-primary {
-        background-color: nga-theme(btn-primary-bg);
+        background-color: nb-theme(btn-primary-bg);
       }
 
       &.btn-success,
       &.btn-outline-success {
-        background-color: nga-theme(btn-success-bg);
+        background-color: nb-theme(btn-success-bg);
       }
 
       &.btn-warning,
       &.btn-outline-warning {
-        background-color: nga-theme(btn-warning-bg);
+        background-color: nb-theme(btn-warning-bg);
       }
 
       &.btn-info,
       &.btn-outline-info {
-        background-color: nga-theme(btn-info-bg);
+        background-color: nb-theme(btn-info-bg);
       }
 
       &.btn-danger,
       &.btn-outline-danger {
-        background-color: nga-theme(btn-danger-bg);
+        background-color: nb-theme(btn-danger-bg);
       }
 
       &.btn-secondary,
       &.btn-outline-secondary {
-        border-color: nga-theme(btn-secondary-border);
+        border-color: nb-theme(btn-secondary-border);
       }
     }
 
@@ -209,7 +209,7 @@
 
     .btn:not(.active):not(:hover) + .btn:not(.active):not(:hover) {
       &::before {
-        background-color: nga-theme(separator);
+        background-color: nb-theme(separator);
       }
     }
   }
@@ -217,15 +217,15 @@
   .btn-divided-group {
     .btn:not(:first-child) {
       margin-left: 0.5rem;
-      border-radius: nga-theme(btn-border-radius);
+      border-radius: nb-theme(btn-border-radius);
     }
 
     .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-      border-radius: nga-theme(btn-border-radius);
+      border-radius: nb-theme(btn-border-radius);
     }
 
     .btn:not(:last-child):not(.dropdown-toggle) {
-      border-radius: nga-theme(btn-border-radius);
+      border-radius: nb-theme(btn-border-radius);
     }
   }
 

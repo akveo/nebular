@@ -8,9 +8,9 @@ import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@a
 import { Subscription } from 'rxjs/Subscription';
 
 import { convertToBoolProperty } from '../helpers';
-import { NgaThemeService } from '../../services/theme.service';
-import { NgaMediaBreakpoint } from '../../services/breakpoints.service';
-import { NgaSidebarService } from './sidebar.service';
+import { NbThemeService } from '../../services/theme.service';
+import { NbMediaBreakpoint } from '../../services/breakpoints.service';
+import { NbSidebarService } from './sidebar.service';
 
 
 /**
@@ -20,12 +20,12 @@ import { NgaSidebarService } from './sidebar.service';
  * placed at the very top of the sidebar outside of the scroll area.
  */
 @Component({
-  selector: 'nga-sidebar-header',
+  selector: 'nb-sidebar-header',
   template: `
     <ng-content></ng-content>
   `,
 })
-export class NgaSidebarHeaderComponent {
+export class NbSidebarHeaderComponent {
 }
 
 /**
@@ -35,12 +35,12 @@ export class NgaSidebarHeaderComponent {
  * placed at the very bottom of the sidebar outside of the scroll area.
  */
 @Component({
-  selector: 'nga-sidebar-footer',
+  selector: 'nb-sidebar-footer',
   template: `
     <ng-content></ng-content>
   `,
 })
-export class NgaSidebarFooterComponent {
+export class NbSidebarFooterComponent {
 }
 
 /**
@@ -54,23 +54,23 @@ export class NgaSidebarFooterComponent {
  *
  * @example Minimal sidebar example
  * ```
- * <nga-sidebar>
+ * <nb-sidebar>
  *   Sidebar content.
- * </nga-sidebar>
+ * </nb-sidebar>
  * ```
  *
  * @example Example of fixed sidebar located on the left side, initially collapsed.
  *
  * ```
- * <nga-sidebar left fixed state="collapsed">
- *  <nga-sidebar-header>Header</nga-sidebar-header>
- *  <nga-sidebar-content>
+ * <nb-sidebar left fixed state="collapsed">
+ *  <nb-sidebar-header>Header</nb-sidebar-header>
+ *  <nb-sidebar-content>
  *    Menu or another component here
- *  </nga-sidebar-content>
- *  <nga-sidebar-footer>
+ *  </nb-sidebar-content>
+ *  <nb-sidebar-footer>
  *    Footer components here
- *  </nga-sidebar-footer>
- * </nga-sidebar>
+ *  </nb-sidebar-footer>
+ * </nb-sidebar>
  * ```
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
@@ -90,19 +90,19 @@ export class NgaSidebarFooterComponent {
  *
  */
 @Component({
-  selector: 'nga-sidebar',
+  selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
   template: `
     <div class="main-container">
-      <ng-content select="nga-sidebar-header"></ng-content>
+      <ng-content select="nb-sidebar-header"></ng-content>
       <div class="scrollable" (click)="onClick($event)">
         <ng-content></ng-content>
       </div>
-      <ng-content select="nga-sidebar-footer"></ng-content>
+      <ng-content select="nb-sidebar-footer"></ng-content>
     </div>
   `,
 })
-export class NgaSidebarComponent implements OnInit, OnDestroy {
+export class NbSidebarComponent implements OnInit, OnDestroy {
 
   static readonly STATE_EXPANDED: string = 'expanded';
   static readonly STATE_COLLAPSED: string = 'collapsed';
@@ -122,15 +122,15 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
   // TODO: rename stateValue to state (take a look to the card component)
   @HostBinding('class.expanded')
   get expanded() {
-    return this.stateValue === NgaSidebarComponent.STATE_EXPANDED;
+    return this.stateValue === NbSidebarComponent.STATE_EXPANDED;
   }
   @HostBinding('class.collapsed')
   get collapsed() {
-    return this.stateValue === NgaSidebarComponent.STATE_COLLAPSED;
+    return this.stateValue === NbSidebarComponent.STATE_COLLAPSED;
   }
   @HostBinding('class.compacted')
   get compacted() {
-    return this.stateValue === NgaSidebarComponent.STATE_COMPACTED;
+    return this.stateValue === NbSidebarComponent.STATE_COMPACTED;
   }
 
   /**
@@ -193,10 +193,10 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
   private expandSubscription: Subscription;
   private collapseSubscription: Subscription;
   private mediaQuerySubscription: Subscription;
-  private responsiveState = NgaSidebarComponent.RESPONSIVE_STATE_PC;
+  private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
-  constructor(private sidebarService: NgaSidebarService,
-              private themeService: NgaThemeService,
+  constructor(private sidebarService: NbSidebarService,
+              private themeService: NbThemeService,
               private element: ElementRef) {
   }
 
@@ -241,7 +241,7 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
   }
 
   onClick(event): void {
-    const menu = this.element.nativeElement.querySelector('nga-menu');
+    const menu = this.element.nativeElement.querySelector('nb-menu');
     if (menu && menu.contains(event.target)) {
       this.expand();
     }
@@ -273,21 +273,21 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
    * Collapses the sidebar
    */
   collapse() {
-    this.state = NgaSidebarComponent.STATE_COLLAPSED;
+    this.state = NbSidebarComponent.STATE_COLLAPSED;
   }
 
   /**
    * Expands the sidebar
    */
   expand() {
-    this.state = NgaSidebarComponent.STATE_EXPANDED;
+    this.state = NbSidebarComponent.STATE_EXPANDED;
   }
 
   /**
    * Compacts the sidebar (minimizes)
    */
   compact() {
-    this.state = NgaSidebarComponent.STATE_COMPACTED;
+    this.state = NbSidebarComponent.STATE_COMPACTED;
   }
 
   /**
@@ -303,24 +303,24 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
    */
   toggle(compact: boolean = false) {
     if (this.responsiveEnabled()) {
-      if (this.responsiveState === NgaSidebarComponent.RESPONSIVE_STATE_MOBILE) {
+      if (this.responsiveState === NbSidebarComponent.RESPONSIVE_STATE_MOBILE) {
         compact = false;
       }
     }
 
-    const closedStates = [NgaSidebarComponent.STATE_COMPACTED, NgaSidebarComponent.STATE_COLLAPSED];
+    const closedStates = [NbSidebarComponent.STATE_COMPACTED, NbSidebarComponent.STATE_COLLAPSED];
     if (compact) {
       this.state = closedStates.indexOf(this.stateValue) >= 0 ?
-        NgaSidebarComponent.STATE_EXPANDED : NgaSidebarComponent.STATE_COMPACTED;
+        NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COMPACTED;
     } else {
       this.state = closedStates.indexOf(this.stateValue) >= 0 ?
-        NgaSidebarComponent.STATE_EXPANDED : NgaSidebarComponent.STATE_COLLAPSED;
+        NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COLLAPSED;
     }
   }
 
   protected onMediaQueryChanges(): Subscription {
     return this.themeService.onMediaQueryChange()
-      .subscribe(([prev, current]: [NgaMediaBreakpoint, NgaMediaBreakpoint]) => {
+      .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
         // TODO: move this into config
         const tablet = ['xs', 'sm', 'md'];
@@ -329,16 +329,16 @@ export class NgaSidebarComponent implements OnInit, OnDestroy {
         if (tablet.indexOf(current.name) !== -1) {
           this.fixed = true;
           this.compact();
-          this.responsiveState = NgaSidebarComponent.RESPONSIVE_STATE_TABLET;
+          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
         if (mobile.indexOf(current.name) !== -1) {
           this.collapse();
-          this.responsiveState = NgaSidebarComponent.RESPONSIVE_STATE_MOBILE;
+          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
         if (tablet.indexOf(current.name) === -1  && prev.width < current.width) {
           this.expand();
           this.fixed = false;
-          this.responsiveState = NgaSidebarComponent.RESPONSIVE_STATE_PC;
+          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
         }
       });
   }

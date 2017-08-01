@@ -6,14 +6,14 @@
 
 import { browser, element, by } from 'protractor';
 
-describe('nga-layout theme', () => {
+describe('nb-layout theme', () => {
 
   beforeEach(() => {
     browser.get('#/layout/change-theme');
   });
 
   it('should render default theme', () => {
-    element(by.css('nga-layout')).getAttribute('class').then(value => {
+    element(by.css('nb-layout')).getAttribute('class').then(value => {
       expect(value).toMatch('theme-default');
     });
   });
@@ -21,11 +21,11 @@ describe('nga-layout theme', () => {
   it('should switch theme', () => {
 
     const button = element(by.css('#change-theme'));
-    const layout = element(by.css('nga-layout'));
-    const cardHeader = element(by.css('nga-card-header'));
+    const layout = element(by.css('nb-layout'));
+    const cardHeader = element(by.css('nb-card-header'));
 
-    const themeDefault = 'nga-theme-default';
-    const themeBlue = 'nga-theme-blue';
+    const themeDefault = 'nb-theme-default';
+    const themeBlue = 'nb-theme-blue';
 
     button.click().then(() => {
       return browser.driver.wait(() => {

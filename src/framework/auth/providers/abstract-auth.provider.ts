@@ -1,10 +1,10 @@
 import { Response, ResponseOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { NgaAuthResult } from '../services/auth.service';
+import { NbAuthResult } from '../services/auth.service';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
-export abstract class NgaAbstractAuthProvider {
+export abstract class NbAbstractAuthProvider {
 
   protected defaultConfig: any = {};
   protected config: any = {};
@@ -17,15 +17,15 @@ export abstract class NgaAbstractAuthProvider {
     return getDeepFromObject(this.config, key, null);
   }
 
-  abstract authenticate(data?: any): Observable<NgaAuthResult>;
+  abstract authenticate(data?: any): Observable<NbAuthResult>;
 
-  abstract register(data?: any): Observable<NgaAuthResult>;
+  abstract register(data?: any): Observable<NbAuthResult>;
 
-  abstract requestPassword(data?: any): Observable<NgaAuthResult>;
+  abstract requestPassword(data?: any): Observable<NbAuthResult>;
 
-  abstract resetPassword(data?: any): Observable<NgaAuthResult>;
+  abstract resetPassword(data?: any): Observable<NbAuthResult>;
 
-  abstract logout(): Observable<NgaAuthResult>;
+  abstract logout(): Observable<NbAuthResult>;
 
   protected createFailResponse(data?: any): Response {
     return new Response(new ResponseOptions({ body: '{}', status: 401 }));

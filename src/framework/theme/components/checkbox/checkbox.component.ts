@@ -8,7 +8,7 @@ import { Component, Input, Output, HostBinding, forwardRef } from '@angular/core
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'nga-checkbox',
+  selector: 'nb-checkbox',
   template: `
     <label class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input"
@@ -23,11 +23,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NgaCheckboxComponent),
+    useExisting: forwardRef(() => NbCheckboxComponent),
     multi: true,
   }],
 })
-export class NgaCheckboxComponent implements ControlValueAccessor {
+export class NbCheckboxComponent implements ControlValueAccessor {
 
   status: string;
 

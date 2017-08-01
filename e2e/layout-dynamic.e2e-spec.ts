@@ -6,63 +6,63 @@
 
 import { browser, element, by } from 'protractor';
 
-describe('nga-layout theme', () => {
+describe('nb-layout theme', () => {
 
   beforeEach(() => {
     browser.get('#/layout/dynamic');
   });
 
   it('shown have layout first', () => {
-    element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
+    element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
       expect(value).toMatch('div');
     });
   });
 
-  it('should insert append into nga-layout', () => {
+  it('should insert append into nb-layout', () => {
 
     const button = element(by.css('#add-dynamic'));
 
     button.click().then(() => {
       return browser.driver.wait(() => {
-        return element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
-          return value === 'nga-dynamic-to-add';
+        return element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+          return value === 'nb-dynamic-to-add';
         });
       }, 10000);
     });
 
-    element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
-      expect(value).toMatch('nga-dynamic-to-add');
+    element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+      expect(value).toMatch('nb-dynamic-to-add');
     });
-    element(by.css('nga-layout')).$$('*').get(1).getTagName().then(value => {
+    element(by.css('nb-layout')).$$('*').get(1).getTagName().then(value => {
       expect(value).toMatch('div');
     });
   });
 
-  it('should clear dymamic nga-layout area', () => {
+  it('should clear dymamic nb-layout area', () => {
 
     const buttonAdd = element(by.css('#add-dynamic'));
     const buttonClear = element(by.css('#clear-dynamic'));
 
     buttonAdd.click().then(() => {
       return browser.driver.wait(() => {
-        return element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
-          return value === 'nga-dynamic-to-add';
+        return element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+          return value === 'nb-dynamic-to-add';
         });
       }, 10000);
     });
-    element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
-      expect(value).toMatch('nga-dynamic-to-add');
+    element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+      expect(value).toMatch('nb-dynamic-to-add');
     });
 
     buttonClear.click().then(() => {
       return browser.driver.wait(() => {
-        return element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
+        return element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
           return value === 'div';
         });
       }, 10000);
     });
 
-    element(by.css('nga-layout')).$$('*').first().getTagName().then(value => {
+    element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
       expect(value).toMatch('div');
     });
   });

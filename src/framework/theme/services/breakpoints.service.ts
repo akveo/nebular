@@ -5,14 +5,14 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { ngaMediaBreakpointsToken } from '../theme.options';
+import { nbMediaBreakpointsToken } from '../theme.options';
 
 /**
  * Media breakpoint type
  *
  * Where `name` - breakpoint name alias (e.g. xs, sm, md, etc), and width - min breakpoint width
  */
-export interface NgaMediaBreakpoint {
+export interface NbMediaBreakpoint {
   name: string;
   width: number;
 }
@@ -55,10 +55,10 @@ export const DEFAULT_MEDIA_BREAKPOINTS = [
  * e.g. 200px - *xs* breakpoint
  */
 @Injectable()
-export class NgaMediaBreakpointsService {
+export class NbMediaBreakpointsService {
 
 
-  constructor(@Inject(ngaMediaBreakpointsToken) private breakpoints) {
+  constructor(@Inject(nbMediaBreakpointsToken) private breakpoints) {
   }
 
   /**
@@ -66,7 +66,7 @@ export class NgaMediaBreakpointsService {
    * @param width number
    * @returns {Z|{name: string, width: number}}
    */
-  getBreakpoint(width: number): NgaMediaBreakpoint {
+  getBreakpoint(width: number): NbMediaBreakpoint {
     const unknown = { name: 'unknown', width: width };
     const breakpoints = this.getBreakpoints();
 
@@ -81,7 +81,7 @@ export class NgaMediaBreakpointsService {
    * Returns a list of configured breakpoins for the theme
    * @returns {{name: string, width: number}[]}
    */
-  getBreakpoints(): NgaMediaBreakpoint[] {
+  getBreakpoints(): NbMediaBreakpoint[] {
     return this.breakpoints;
   }
 }

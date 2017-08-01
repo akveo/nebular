@@ -6,12 +6,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NgaUser } from '../../models/user';
-import { NgaAuthService, NgaAuthResult } from '../../services/auth.service';
-import { NgaTokenService } from '../../services/token.service';
+import { NbUser } from '../../models/user';
+import { NbAuthService, NbAuthResult } from '../../services/auth.service';
+import { NbTokenService } from '../../services/token.service';
 
 @Component({
-  selector: 'nga-register',
+  selector: 'nb-register',
   styleUrls: ['./register.component.scss'],
   template: `
     <h2>Create new account</h2>
@@ -67,16 +67,16 @@ import { NgaTokenService } from '../../services/token.service';
     </div>
   `,
 })
-export class NgaRegisterComponent {
+export class NbRegisterComponent {
 
   redirectDelay: number = 1500;
   submitted = false;
   errors: string[] = [];
   messages: string[] = [];
-  user: NgaUser = new NgaUser();
+  user: NbUser = new NbUser();
 
-  constructor(protected service: NgaAuthService,
-              protected tokenService: NgaTokenService,
+  constructor(protected service: NbAuthService,
+              protected tokenService: NbTokenService,
               protected router: Router) {
   }
 
@@ -84,7 +84,7 @@ export class NgaRegisterComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.register(provider, this.user).subscribe((result: NgaAuthResult) => {
+    this.service.register(provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

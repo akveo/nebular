@@ -6,68 +6,68 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { NgaSuperSearchService } from '@akveo/nga-theme';
+import { NbSuperSearchService } from '@nebular/theme';
 
 @Component({
-  selector: 'nga-search-test',
+  selector: 'nb-search-test',
   template: `
-    <nga-layout>
-      <nga-layout-header fixed>
+    <nb-layout>
+      <nb-layout-header fixed>
         <a class="navbar-brand" href="#">ngx-admin</a>
-        <nga-search type="rotate-layout" tag="header-search"></nga-search>
-      </nga-layout-header>
-      <nga-layout-column>
-        <nga-card>
-          <nga-card-header>
+        <nb-search type="rotate-layout" tag="header-search"></nb-search>
+      </nb-layout-header>
+      <nb-layout-column>
+        <nb-card>
+          <nb-card-header>
             <span>Header</span>
-          </nga-card-header>
-          <nga-card-body>
+          </nb-card-header>
+          <nb-card-body>
             <span>Body</span>
-          </nga-card-body>
-          <nga-card-footer>
+          </nb-card-body>
+          <nb-card-footer>
             <span>Footer</span>
-          </nga-card-footer>
-        </nga-card>
-        <nga-card size="small">
-          <nga-card-header>
+          </nb-card-footer>
+        </nb-card>
+        <nb-card size="small">
+          <nb-card-header>
             <span>Header</span>
-          </nga-card-header>
-          <nga-card-body>
+          </nb-card-header>
+          <nb-card-body>
             <span>Body</span>
-          </nga-card-body>
-          <nga-card-footer>
+          </nb-card-body>
+          <nb-card-footer>
             <span>Footer</span>
-          </nga-card-footer>
-        </nga-card>
-        <nga-card size="medium">
-          <nga-card-header>
+          </nb-card-footer>
+        </nb-card>
+        <nb-card size="medium">
+          <nb-card-header>
             <span>Header</span>
-          </nga-card-header>
-          <nga-card-body>
+          </nb-card-header>
+          <nb-card-body>
             <span>Body</span>
-          </nga-card-body>
-          <nga-card-footer>
+          </nb-card-body>
+          <nb-card-footer>
             <span>Footer</span>
-          </nga-card-footer>
-        </nga-card>
-        <nga-card size="large">
-          <nga-card-header>
+          </nb-card-footer>
+        </nb-card>
+        <nb-card size="large">
+          <nb-card-header>
             <span>Header</span>
-          </nga-card-header>
-          <nga-card-body>
+          </nb-card-header>
+          <nb-card-body>
             <span>Body</span>
-          </nga-card-body>
-          <nga-card-footer>
+          </nb-card-body>
+          <nb-card-footer>
             <span>Footer</span>
-          </nga-card-footer>
-        </nga-card>
-      </nga-layout-column>
-    </nga-layout>
+          </nb-card-footer>
+        </nb-card>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaSearchTestComponent implements OnInit {
+export class NbSearchTestComponent implements OnInit {
 
-  constructor(private searchService: NgaSuperSearchService) {
+  constructor(private searchService: NbSuperSearchService) {
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-# @akveo/nga-auth
+# @nebular/auth
 
 
 // TODO: 4) custom headers

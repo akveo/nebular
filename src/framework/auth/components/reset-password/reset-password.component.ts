@@ -6,11 +6,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NgaUser } from '../../models/user';
-import { NgaAuthService, NgaAuthResult } from '../../services/auth.service';
+import { NbUser } from '../../models/user';
+import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 
 @Component({
-  selector: 'nga-reset-password-page',
+  selector: 'nb-reset-password-page',
   styleUrls: ['./reset-password.component.scss'],
   template: `
     <h2>Change password</h2>
@@ -51,15 +51,15 @@ import { NgaAuthService, NgaAuthResult } from '../../services/auth.service';
     </div>
   `,
 })
-export class NgaResetPasswordComponent {
+export class NbResetPasswordComponent {
 
   redirectDelay: number = 1500;
   submitted = false;
   errors: string[] = [];
   messages: string[] = [];
-  user: NgaUser = new NgaUser();
+  user: NbUser = new NbUser();
 
-  constructor(protected service: NgaAuthService,
+  constructor(protected service: NbAuthService,
               protected router: Router) {
   }
 
@@ -67,7 +67,7 @@ export class NgaResetPasswordComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.resetPassword(provider, this.user).subscribe((result: NgaAuthResult) => {
+    this.service.resetPassword(provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

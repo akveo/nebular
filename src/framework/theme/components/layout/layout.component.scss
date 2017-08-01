@@ -13,7 +13,7 @@
     flex-direction: column;
   }
 
-  /deep/ nga-layout-header {
+  /deep/ nb-layout-header {
     display: block;
 
     nav {
@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: row;
 
-    /deep/ nga-sidebar {
+    /deep/ nb-sidebar {
       order: 0;
 
       &.right {
@@ -66,7 +66,7 @@
         flex-direction: row;
         flex: 1;
 
-        /deep/ nga-layout-column {
+        /deep/ nb-layout-column {
           order: 2;
           flex: 1 0;
 
@@ -76,7 +76,7 @@
         }
       }
 
-      /deep/ nga-layout-footer {
+      /deep/ nb-layout-footer {
         display: block;
         margin-top: auto;
 

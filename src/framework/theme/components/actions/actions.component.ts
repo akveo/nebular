@@ -16,7 +16,7 @@ import { convertToBoolProperty } from '../helpers';
  * Action item, display a link with an icon, or any other content provided instead.
  */
 @Component({
-  selector: 'nga-action',
+  selector: 'nb-action',
   template: `
     <a href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
@@ -26,7 +26,7 @@ import { convertToBoolProperty } from '../helpers';
     </ng-template>
   `,
 })
-export class NgaActionComponent {
+export class NbActionComponent {
 
   @HostBinding('class.disabled') disabledValue: boolean = false;
 
@@ -51,22 +51,22 @@ export class NgaActionComponent {
  * Aligns items vertically.
  *
  * @theme
- * $nga-actions-size-small: 1.5rem !default;
- * $nga-actions-size-medium: 2.5rem !default;
- * $nga-actions-size-large: 4rem !default;
- * $nga-actions-color: $nga-color-inverse !default;
- * $nga-actions-background: transparent !default;
- * $nga-actions-color-inverse: $nga-color-default !default;
- * $nga-actions-background-inverse: $nga-background-inverse !default;
+ * $nb-actions-size-small: 1.5rem !default;
+ * $nb-actions-size-medium: 2.5rem !default;
+ * $nb-actions-size-large: 4rem !default;
+ * $nb-actions-color: $nb-color-inverse !default;
+ * $nb-actions-background: transparent !default;
+ * $nb-actions-color-inverse: $nb-color-default !default;
+ * $nb-actions-background-inverse: $nb-background-inverse !default;
  */
 @Component({
-  selector: 'nga-actions',
+  selector: 'nb-actions',
   styleUrls: ['./actions.component.scss'],
   template: `
-    <ng-content select="nga-action"></ng-content>
+    <ng-content select="nb-action"></ng-content>
   `,
 })
-export class NgaActionsComponent {
+export class NbActionsComponent {
 
   static readonly SIZE_SMALL = 'small';
   static readonly SIZE_MEDIUM = 'medium';
@@ -78,17 +78,17 @@ export class NgaActionsComponent {
 
   @HostBinding('class.small')
   get small() {
-    return this.sizeValue === NgaActionsComponent.SIZE_SMALL;
+    return this.sizeValue === NbActionsComponent.SIZE_SMALL;
   }
 
   @HostBinding('class.medium')
   get medium() {
-    return this.sizeValue === NgaActionsComponent.SIZE_MEDIUM;
+    return this.sizeValue === NbActionsComponent.SIZE_MEDIUM;
   }
 
   @HostBinding('class.large')
   get large() {
-    return this.sizeValue === NgaActionsComponent.SIZE_LARGE;
+    return this.sizeValue === NbActionsComponent.SIZE_LARGE;
   }
 
   @HostBinding('class.full-width')

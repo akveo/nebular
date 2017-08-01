@@ -8,22 +8,22 @@ import { Inject, Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/publish';
 
-import { ngaBuiltInJSThemesToken, ngaJSThemesToken } from '../theme.options';
+import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
 
 /**
  * Js Theme - theme variables accessible from angular components/services
  */
-export interface NgaJSTheme {
+export interface NbJSTheme {
   name: string;
   base?: string;
-  variables?: NgaJSThemeVariable;
+  variables?: NbJSThemeVariable;
 }
 
-export interface NgaJSThemeVariable {
-  [key: string]: string | string[] | NgaJSThemeVariable;
+export interface NbJSThemeVariable {
+  [key: string]: string | string[] | NbJSThemeVariable;
 }
 
-export const BUILT_IN_THEMES: NgaJSTheme[] = [
+export const BUILT_IN_THEMES: NbJSTheme[] = [
   {
     name: 'default',
     variables: {
@@ -79,12 +79,12 @@ export const BUILT_IN_THEMES: NgaJSTheme[] = [
  * Js Themes registry - provides access to the JS themes' variables.
  */
 @Injectable()
-export class NgaJSThemesRegistry {
+export class NbJSThemesRegistry {
 
   private themes: any = {};
 
-  constructor(@Inject(ngaBuiltInJSThemesToken) private builtInThemes: NgaJSTheme[],
-              @Inject(ngaJSThemesToken) private newThemes: NgaJSTheme[] = []) {
+  constructor(@Inject(nbBuiltInJSThemesToken) private builtInThemes: NbJSTheme[],
+              @Inject(nbJSThemesToken) private newThemes: NbJSTheme[] = []) {
 
     const themes = this.combineByNames(newThemes, builtInThemes);
 
@@ -102,25 +102,25 @@ export class NgaJSThemesRegistry {
     return !!this.themes[themeName];
   }
 
-  get(themeName: string): NgaJSTheme {
+  get(themeName: string): NbJSTheme {
     if (!this.themes[themeName]) {
-      throw Error(`NgaThemeConfig: no theme '${themeName}' found registered.`);
+      throw Error(`NbThemeConfig: no theme '${themeName}' found registered.`);
     }
     return JSON.parse(JSON.stringify(this.themes[themeName]));
   }
 
-  private combineByNames(newThemes: NgaJSTheme[], oldThemes: NgaJSTheme[]): NgaJSTheme[] {
+  private combineByNames(newThemes: NbJSTheme[], oldThemes: NbJSTheme[]): NbJSTheme[] {
     if (newThemes) {
-      const mergedThemes: NgaJSTheme[] = [];
-      newThemes.forEach((theme: NgaJSTheme) => {
-        const sameOld: NgaJSTheme = oldThemes.find((tm: NgaJSTheme) => tm.name === theme.name) || <NgaJSTheme>{};
+      const mergedThemes: NbJSTheme[] = [];
+      newThemes.forEach((theme: NbJSTheme) => {
+        const sameOld: NbJSTheme = oldThemes.find((tm: NbJSTheme) => tm.name === theme.name) || <NbJSTheme>{};
 
         const mergedTheme = this.mergeDeep({}, sameOld, theme);
         mergedThemes.push(mergedTheme);
       });
 
-      oldThemes.forEach((theme: NgaJSTheme) => {
-        if (!mergedThemes.find((tm: NgaJSTheme) => tm.name === theme.name)) {
+      oldThemes.forEach((theme: NbJSTheme) => {
+        if (!mergedThemes.find((tm: NbJSTheme) => tm.name === theme.name)) {
           mergedThemes.push(theme);
         }
       });

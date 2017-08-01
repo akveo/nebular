@@ -6,25 +6,25 @@
 
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { DEFAULT_MEDIA_BREAKPOINTS, NgaMediaBreakpointsService } from './breakpoints.service';
-import { ngaMediaBreakpointsToken } from '../theme.options';
+import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoints.service';
+import { nbMediaBreakpointsToken } from '../theme.options';
 
 describe('breakpoint-service', () => {
-  let breakpointService: NgaMediaBreakpointsService;
+  let breakpointService: NbMediaBreakpointsService;
 
   beforeEach(() => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: ngaMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
-        NgaMediaBreakpointsService,
+        { provide: nbMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
+        NbMediaBreakpointsService,
       ],
     });
   });
 
 // Single async inject to save references; which are used in all tests below
   beforeEach(async(inject(
-    [NgaMediaBreakpointsService],
+    [NbMediaBreakpointsService],
     (_breakpointService) => {
       breakpointService = _breakpointService
     },

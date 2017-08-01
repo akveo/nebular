@@ -4,28 +4,28 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { NgaLayoutModule } from '@akveo/nga-theme';
+import { NbLayoutModule } from '@nebular/theme';
 
-import { NgaAuthService } from './services/auth.service';
-import { NgaDummyAuthProvider } from './providers/dummy-auth.provider';
-import { NgaEmailPassAuthProvider } from './providers/email-pass-auth.provider';
+import { NbAuthService } from './services/auth.service';
+import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
+import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 
-import { NgaAuthOptions, ngaAuthOptionsToken, ngaAuthProvidersToken } from './auth.options';
+import { NbAuthOptions, nbAuthOptionsToken, nbAuthProvidersToken } from './auth.options';
 
-import { NgaAuthComponent } from './components/auth.component';
-import { NgaTokenService } from './services/token.service';
-import { NgaSecuredHttp } from './services/secured-http';
+import { NbAuthComponent } from './components/auth.component';
+import { NbTokenService } from './services/token.service';
+import { NbSecuredHttp } from './services/secured-http';
 
-import { NgaAuthBlockComponent } from './components/auth-block/auth-block.component';
-import { NgaLoginComponent } from './components/login/login.component';
-import { NgaRegisterComponent } from './components/register/register.component';
-import { NgaLogoutComponent } from './components/logout/logout.component';
-import { NgaRequestPasswordComponent } from './components/request-password/request-password.component';
-import { NgaResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { NbAuthBlockComponent } from './components/auth-block/auth-block.component';
+import { NbLoginComponent } from './components/login/login.component';
+import { NbRegisterComponent } from './components/register/register.component';
+import { NbLogoutComponent } from './components/logout/logout.component';
+import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
+import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 import { routes } from './auth.routes';
 
-export function ngaAuthServiceFactory(config: any, tokenService: NgaTokenService, injector: Injector) {
+export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
   const providers = config.providers || {};
 
   for (const key in providers) {
@@ -36,52 +36,52 @@ export function ngaAuthServiceFactory(config: any, tokenService: NgaTokenService
     }
   }
 
-  return new NgaAuthService(tokenService, providers);
+  return new NbAuthService(tokenService, providers);
 }
 
 @NgModule({
   imports: [
     CommonModule,
-    NgaLayoutModule,
+    NbLayoutModule,
     RouterModule.forChild(routes),
     FormsModule,
     HttpModule,
   ],
   declarations: [
-    NgaAuthComponent,
-    NgaAuthBlockComponent,
-    NgaLoginComponent,
-    NgaRegisterComponent,
-    NgaRequestPasswordComponent,
-    NgaResetPasswordComponent,
-    NgaLogoutComponent,
+    NbAuthComponent,
+    NbAuthBlockComponent,
+    NbLoginComponent,
+    NbRegisterComponent,
+    NbRequestPasswordComponent,
+    NbResetPasswordComponent,
+    NbLogoutComponent,
   ],
   exports: [
-    NgaAuthComponent,
-    NgaAuthBlockComponent,
-    NgaLoginComponent,
-    NgaRegisterComponent,
-    NgaRequestPasswordComponent,
-    NgaResetPasswordComponent,
-    NgaLogoutComponent,
+    NbAuthComponent,
+    NbAuthBlockComponent,
+    NbLoginComponent,
+    NbRegisterComponent,
+    NbRequestPasswordComponent,
+    NbResetPasswordComponent,
+    NbLogoutComponent,
   ],
 })
-export class NgaAuthModule {
-  static forRoot(ngaAuthOptions?: NgaAuthOptions): ModuleWithProviders {
+export class NbAuthModule {
+  static forRoot(nbAuthOptions?: NbAuthOptions): ModuleWithProviders {
     return <ModuleWithProviders> {
-      ngModule: NgaAuthModule,
+      ngModule: NbAuthModule,
       providers: [
-        { provide: ngaAuthOptionsToken, useValue: ngaAuthOptions },
-        { provide: ngaAuthProvidersToken, useValue: {} },
+        { provide: nbAuthOptionsToken, useValue: nbAuthOptions },
+        { provide: nbAuthProvidersToken, useValue: {} },
         {
-          provide: NgaAuthService,
-          useFactory: ngaAuthServiceFactory,
-          deps: [ngaAuthOptionsToken, NgaTokenService, Injector],
+          provide: NbAuthService,
+          useFactory: nbAuthServiceFactory,
+          deps: [nbAuthOptionsToken, NbTokenService, Injector],
         },
-        NgaTokenService,
-        NgaSecuredHttp,
-        NgaDummyAuthProvider,
-        NgaEmailPassAuthProvider,
+        NbTokenService,
+        NbSecuredHttp,
+        NbDummyAuthProvider,
+        NbEmailPassAuthProvider,
       ],
     };
   }

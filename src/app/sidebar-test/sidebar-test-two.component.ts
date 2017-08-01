@@ -7,31 +7,31 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-sidebar-test-one',
+  selector: 'nb-sidebar-test-one',
   styles: [
     `
-    :host /deep/ nga-layout-column {
+    :host /deep/ nb-layout-column {
       background-color: #76ecff;
     }
     `,
   ],
   template: `
-    <nga-layout>
+    <nb-layout>
 
-      <nga-layout-header></nga-layout-header>
+      <nb-layout-header></nb-layout-header>
 
-      <nga-sidebar>
+      <nb-sidebar>
         Left
-      </nga-sidebar>
+      </nb-sidebar>
 
-      <nga-sidebar right fixed>
+      <nb-sidebar right fixed>
         Right
-      </nga-sidebar>
+      </nb-sidebar>
 
-      <nga-layout-footer></nga-layout-footer>
+      <nb-layout-footer></nb-layout-footer>
 
-    </nga-layout>
+    </nb-layout>
 `,
 })
-export class NgaSidebarTestTwoComponent {
+export class NbSidebarTestTwoComponent {
 }

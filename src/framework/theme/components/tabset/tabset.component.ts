@@ -19,14 +19,14 @@ import { ActivatedRoute } from '@angular/router';
 import { convertToBoolProperty } from '../helpers';
 
 @Component({
-  selector: 'nga-tab',
+  selector: 'nb-tab',
   template: `
     <ng-container *ngIf="init">
       <ng-content></ng-content>
     </ng-container>
   `,
 })
-export class NgaTabComponent {
+export class NbTabComponent {
 
   @Input() tabTitle: string;
 
@@ -46,12 +46,12 @@ export class NgaTabComponent {
     }
   }
 
-  // TODO: it makes sense to add 'lazyLoad' input to 'nga-tabset' component and make this functionality configurable
+  // TODO: it makes sense to add 'lazyLoad' input to 'nb-tabset' component and make this functionality configurable
   init: boolean = false;
 }
 
 @Component({
-  selector: 'nga-tabset',
+  selector: 'nb-tabset',
   styleUrls: ['./tabset.component.scss'],
   template: `
     <ul>
@@ -61,12 +61,12 @@ export class NgaTabComponent {
         <a href (click)="$event.preventDefault()">{{ tab.tabTitle }}</a>
       </li>
     </ul>
-    <ng-content select="nga-tab"></ng-content>
+    <ng-content select="nb-tab"></ng-content>
   `,
 })
-export class NgaTabsetComponent implements AfterContentInit {
+export class NbTabsetComponent implements AfterContentInit {
 
-  @ContentChildren(NgaTabComponent) tabs: QueryList<NgaTabComponent>;
+  @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;
 
   @HostBinding('class.full-width')
   private fullWidthValue: boolean = false;
@@ -91,7 +91,7 @@ export class NgaTabsetComponent implements AfterContentInit {
       });
   }
 
-  selectTab(selectedTab: NgaTabComponent) {
+  selectTab(selectedTab: NbTabComponent) {
     this.tabs.forEach(tab => tab.active = tab === selectedTab);
     this.changeTab.emit(selectedTab);
   }

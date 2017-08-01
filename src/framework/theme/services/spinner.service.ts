@@ -7,10 +7,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class NgaSpinnerService {
+export class NbSpinnerService {
 
   private loaders: Promise<any>[] = [];
-  private selector: string = 'nga-global-spinner';
+  private selector: string = 'nb-global-spinner';
 
   registerLoader(method: Promise<any>): void {
     this.loaders.push(method);

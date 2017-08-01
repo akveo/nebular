@@ -1,4 +1,4 @@
-# @akveo/nga-theme
+# @nebular/theme
 
 
 // TODO

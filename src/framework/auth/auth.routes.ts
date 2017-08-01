@@ -5,41 +5,41 @@
  */
 import { Routes } from '@angular/router';
 
-import { NgaAuthComponent } from './components/auth.component';
-import { NgaLoginComponent } from './components/login/login.component';
-import { NgaRegisterComponent } from './components/register/register.component';
-import { NgaLogoutComponent } from './components/logout/logout.component';
-import { NgaRequestPasswordComponent } from './components/request-password/request-password.component';
-import { NgaResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { NbAuthComponent } from './components/auth.component';
+import { NbLoginComponent } from './components/login/login.component';
+import { NbRegisterComponent } from './components/register/register.component';
+import { NbLogoutComponent } from './components/logout/logout.component';
+import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
+import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
     path: 'auth',
-    component: NgaAuthComponent,
+    component: NbAuthComponent,
     children: [
       {
         path: '',
-        component: NgaLoginComponent,
+        component: NbLoginComponent,
       },
       {
         path: 'login',
-        component: NgaLoginComponent,
+        component: NbLoginComponent,
       },
       {
         path: 'register',
-        component: NgaRegisterComponent,
+        component: NbRegisterComponent,
       },
       {
         path: 'logout',
-        component: NgaLogoutComponent,
+        component: NbLogoutComponent,
       },
       {
         path: 'request-password',
-        component: NgaRequestPasswordComponent,
+        component: NbRequestPasswordComponent,
       },
       {
         path: 'reset-password',
-        component: NgaResetPasswordComponent,
+        component: NbResetPasswordComponent,
       },
     ],
   },

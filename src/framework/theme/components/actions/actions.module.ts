@@ -6,24 +6,24 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
-import { NgaActionComponent, NgaActionsComponent } from './actions.component';
+import { NbActionComponent, NbActionsComponent } from './actions.component';
 
-const NGA_ACTIONS_COMPONENTS = [
-  NgaActionComponent,
-  NgaActionsComponent,
+const NB_ACTIONS_COMPONENTS = [
+  NbActionComponent,
+  NbActionsComponent,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_ACTIONS_COMPONENTS,
+    ...NB_ACTIONS_COMPONENTS,
   ],
   exports: [
-    ...NGA_ACTIONS_COMPONENTS,
+    ...NB_ACTIONS_COMPONENTS,
   ],
 })
-export class NgaActionsModule { }
+export class NbActionsModule { }

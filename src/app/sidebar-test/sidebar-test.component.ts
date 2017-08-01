@@ -6,56 +6,56 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { NgaSidebarService } from '@akveo/nga-theme';
+import { NbSidebarService } from '@nebular/theme';
 
 @Component({
-  selector: 'nga-sidebar-test',
+  selector: 'nb-sidebar-test',
   styles: [
     `
-    :host /deep/ nga-layout-column {
+    :host /deep/ nb-layout-column {
       background-color: #76ecff;
     }
     `,
   ],
   template: `
-    <nga-layout>
-      <nga-layout-header fixed>
+    <nb-layout>
+      <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
 
         <button id="collapse-left" (click)="collapseLeft()">Collapse Left</button>
         <button id="collapse-right" (click)="collapseRight()">Collapse Right</button>
-      </nga-layout-header>
+      </nb-layout-header>
 
-      <nga-sidebar state="collapsed" fixed tag="left">
-      </nga-sidebar>
+      <nb-sidebar state="collapsed" fixed tag="left">
+      </nb-sidebar>
 
-      <nga-sidebar right state="compacted" tag="right">
-        <nga-sidebar-header>Some Header</nga-sidebar-header>
+      <nb-sidebar right state="compacted" tag="right">
+        <nb-sidebar-header>Some Header</nb-sidebar-header>
         {{ content }}
-      </nga-sidebar>
+      </nb-sidebar>
 
-      <nga-layout-column left>
+      <nb-layout-column left>
        {{ content }}
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
        {{ content }}
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
        {{ content }}
-      </nga-layout-column>
+      </nb-layout-column>
 
 
-      <nga-layout-footer fixed>
+      <nb-layout-footer fixed>
         &copy; Akveo 2017
-      </nga-layout-footer>
-    </nga-layout>
+      </nb-layout-footer>
+    </nb-layout>
 `,
 })
-export class NgaSidebarTestComponent implements OnInit {
+export class NbSidebarTestComponent implements OnInit {
 
   content = 'First ';
 
-  constructor(private sidebarService: NgaSidebarService) { }
+  constructor(private sidebarService: NbSidebarService) { }
 
   collapseLeft() {
     this.sidebarService.toggle(false, 'left');

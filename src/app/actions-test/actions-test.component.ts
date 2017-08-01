@@ -7,84 +7,84 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-actions-test',
+  selector: 'nb-actions-test',
   template: `
-    <nga-layout>
-      <nga-layout-header>
-        <nga-actions>
-          <nga-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nga-action>
-          <nga-action icon="ion-ios-bell-outline"></nga-action>
-          <nga-action>
-            <nga-user></nga-user>
-          </nga-action>
-          <nga-action icon="ion-ios-flower-outline"></nga-action>
-          <nga-action icon="ion-ios-medical-outline"></nga-action>
-          <nga-action icon="ion-ios-download-outline" disabled></nga-action>
-          <nga-action>
+    <nb-layout>
+      <nb-layout-header>
+        <nb-actions>
+          <nb-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nb-action>
+          <nb-action icon="ion-ios-bell-outline"></nb-action>
+          <nb-action>
+            <nb-user></nb-user>
+          </nb-action>
+          <nb-action icon="ion-ios-flower-outline"></nb-action>
+          <nb-action icon="ion-ios-medical-outline"></nb-action>
+          <nb-action icon="ion-ios-download-outline" disabled></nb-action>
+          <nb-action>
             Hello
-          </nga-action>
-        </nga-actions>
-      </nga-layout-header>
-      <nga-layout-column>
+          </nb-action>
+        </nb-actions>
+      </nb-layout-header>
+      <nb-layout-column>
 
-        <nga-card>
-          <nga-card-body>
-            <nga-actions inverse>
-              <nga-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nga-action>
-              <nga-action icon="ion-ios-bell-outline"></nga-action>
-              <nga-action>
-                <nga-user></nga-user>
-              </nga-action>
-              <nga-action icon="ion-ios-flower-outline"></nga-action>
-              <nga-action icon="ion-ios-medical-outline"></nga-action>
-              <nga-action icon="ion-ios-download-outline" disabled></nga-action>
-              <nga-action>
+        <nb-card>
+          <nb-card-body>
+            <nb-actions inverse>
+              <nb-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="ion-ios-bell-outline"></nb-action>
+              <nb-action>
+                <nb-user></nb-user>
+              </nb-action>
+              <nb-action icon="ion-ios-flower-outline"></nb-action>
+              <nb-action icon="ion-ios-medical-outline"></nb-action>
+              <nb-action icon="ion-ios-download-outline" disabled></nb-action>
+              <nb-action>
                 Hello
-              </nga-action>
-            </nga-actions>
-          </nga-card-body>
-        </nga-card>
+              </nb-action>
+            </nb-actions>
+          </nb-card-body>
+        </nb-card>
 
-        <nga-card>
-          <nga-card-body>
-            <nga-actions inverse size="medium">
-              <nga-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nga-action>
-              <nga-action icon="ion-ios-bell-outline"></nga-action>
-              <nga-action>
-                <nga-user></nga-user>
-              </nga-action>
-              <nga-action icon="ion-ios-flower-outline"></nga-action>
-              <nga-action icon="ion-ios-medical-outline"></nga-action>
-              <nga-action icon="ion-ios-download-outline" disabled></nga-action>
-              <nga-action>
+        <nb-card>
+          <nb-card-body>
+            <nb-actions inverse size="medium">
+              <nb-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="ion-ios-bell-outline"></nb-action>
+              <nb-action>
+                <nb-user></nb-user>
+              </nb-action>
+              <nb-action icon="ion-ios-flower-outline"></nb-action>
+              <nb-action icon="ion-ios-medical-outline"></nb-action>
+              <nb-action icon="ion-ios-download-outline" disabled></nb-action>
+              <nb-action>
                 Hello
-              </nga-action>
-            </nga-actions>
-          </nga-card-body>
-        </nga-card>
+              </nb-action>
+            </nb-actions>
+          </nb-card-body>
+        </nb-card>
 
-        <nga-card>
-          <nga-card-body>
-            <nga-actions inverse size="large">
-              <nga-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nga-action>
-              <nga-action icon="ion-ios-bell-outline"></nga-action>
-              <nga-action>
-                <nga-user></nga-user>
-              </nga-action>
-              <nga-action icon="ion-ios-flower-outline"></nga-action>
-              <nga-action icon="ion-ios-medical-outline"></nga-action>
-              <nga-action icon="ion-ios-download-outline" disabled></nga-action>
-              <nga-action>
+        <nb-card>
+          <nb-card-body>
+            <nb-actions inverse size="large">
+              <nb-action icon="ion-ios-email-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="ion-ios-bell-outline"></nb-action>
+              <nb-action>
+                <nb-user></nb-user>
+              </nb-action>
+              <nb-action icon="ion-ios-flower-outline"></nb-action>
+              <nb-action icon="ion-ios-medical-outline"></nb-action>
+              <nb-action icon="ion-ios-download-outline" disabled></nb-action>
+              <nb-action>
                 Hello
-              </nga-action>
-            </nga-actions>
-          </nga-card-body>
-        </nga-card>
-      </nga-layout-column>
-    </nga-layout>
+              </nb-action>
+            </nb-actions>
+          </nb-card-body>
+        </nb-card>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaActionsTestComponent {
+export class NbActionsTestComponent {
 
   actionOnClick(event: any) {
     console.info(event);

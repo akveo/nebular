@@ -7,31 +7,31 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-route-tabset-test-child1',
+  selector: 'nb-route-tabset-test-child1',
   template: `<h1>Child 1</h1>`,
 })
-export class NgaRouteTabsetTestChild1Component {
+export class NbRouteTabsetTestChild1Component {
 }
 
 @Component({
-  selector: 'nga-route-tabset-test-child2',
+  selector: 'nb-route-tabset-test-child2',
   template: `<h1>Child 2</h1>`,
 })
-export class NgaRouteTabsetTestChild2Component {
+export class NbRouteTabsetTestChild2Component {
 }
 
 @Component({
-  selector: 'nga-route-tabset-test',
+  selector: 'nb-route-tabset-test',
   template: `
-    <nga-layout>
-      <nga-layout-column>
-        <nga-route-tabset [tabs]="tabs"></nga-route-tabset>
-        <nga-route-tabset [tabs]="tabs" fullWidth></nga-route-tabset>
-      </nga-layout-column>
-    </nga-layout>
+    <nb-layout>
+      <nb-layout-column>
+        <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
+        <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaRouteTabsetTestComponent {
+export class NbRouteTabsetTestComponent {
   tabs: any[] = [
     {
       title: 'Tab #1',

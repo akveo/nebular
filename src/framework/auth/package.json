@@ -1,7 +1,7 @@
 {
-  "name": "@akveo/nga-auth",
+  "name": "@nebular/auth",
   "version": "2.0.0-alpha.1-dev.10",
-  "description": "@akveo/nga-auth",
+  "description": "@nebular/auth",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
@@ -31,6 +31,6 @@
     "@angular/router": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
-    "@akveo/nga-theme": "^2.0.0-alpha.1"
+    "@nebular/theme": "^2.0.0-alpha.1"
   }
 }

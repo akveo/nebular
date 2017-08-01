@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-/deep/ nga-layout.rotate-layout {
+/deep/ nb-layout.rotate-layout {
   .layout {
     transform-origin: 50vw 50vh;
     transform: perspective(1000px);
@@ -13,7 +13,7 @@
   }
 }
 
-/deep/ nga-layout.rotate-layout.with-search {
+/deep/ nb-layout.rotate-layout.with-search {
   .layout {
     transform-origin: 50vw 50vh;
     transform: perspective(1000px) translate3d(0, 50vh, 0) rotate3d(1, 0, 0, 30deg);
@@ -21,7 +21,7 @@
   }
 }
 
-/deep/ nga-layout.rotate-layout {
+/deep/ nb-layout.rotate-layout {
   position: fixed;
   overflow: hidden;
   width: 100%;

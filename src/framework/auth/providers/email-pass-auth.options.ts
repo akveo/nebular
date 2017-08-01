@@ -5,7 +5,7 @@
  */
 
 // TODO postfix to options
-export interface NgaEmailPassModuleConfig {
+export interface NbEmailPassModuleConfig {
   alwaysFail?: boolean;
   rememberMe?: boolean;
   endpoint?: string;
@@ -18,18 +18,18 @@ export interface NgaEmailPassModuleConfig {
 }
 
 // TODO postfix to options
-export interface NgaEmailPassResetModuleConfig extends NgaEmailPassModuleConfig {
+export interface NbEmailPassResetModuleConfig extends NbEmailPassModuleConfig {
   resetPasswordTokenKey?: string;
 }
 
 // TODO postfix to options
 export interface NgEmailPassAuthProviderConfig {
   baseEndpoint?: string;
-  login?: boolean | NgaEmailPassModuleConfig;
-  register?: boolean | NgaEmailPassModuleConfig;
-  requestPass?: boolean | NgaEmailPassModuleConfig;
-  resetPass?: boolean | NgaEmailPassResetModuleConfig;
-  logout?: boolean | NgaEmailPassResetModuleConfig;
+  login?: boolean | NbEmailPassModuleConfig;
+  register?: boolean | NbEmailPassModuleConfig;
+  requestPass?: boolean | NbEmailPassModuleConfig;
+  resetPass?: boolean | NbEmailPassResetModuleConfig;
+  logout?: boolean | NbEmailPassResetModuleConfig;
   token?: {
     key?: string;
     getter?: Function;

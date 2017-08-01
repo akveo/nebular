@@ -6,7 +6,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-auth-block',
+  selector: 'nb-auth-block',
   styleUrls: ['./auth-block.component.scss'],
   template: `
     <div class="auth-block">
@@ -14,5 +14,5 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class NgaAuthBlockComponent {
+export class NbAuthBlockComponent {
 }

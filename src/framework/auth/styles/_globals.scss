@@ -6,6 +6,6 @@
 
 @import 'global/components';
 
-@mixin nga-auth-global() {
-  @include nga-auth-components();
+@mixin nb-auth-global() {
+  @include nb-auth-components();
 }

@@ -6,7 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 
-describe('nga-layout', () => {
+describe('nb-layout', () => {
 
   beforeEach(() => {
     browser.get('#/layout');
@@ -19,48 +19,48 @@ describe('nga-layout', () => {
   });
 
   const columns = 3;
-  it(`should have ${columns} nga-layout-columns`, () => {
+  it(`should have ${columns} nb-layout-columns`, () => {
     expect(element(by.css('#layout-fluid > .layout > .layout-container > .content > .columns'))
-      .all(by.css('nga-layout-column')).count()).toEqual(columns);
+      .all(by.css('nb-layout-column')).count()).toEqual(columns);
   });
 
   it('should render left with flex: 1 0', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(0).getCssValue('flex').then(value => {
         expect(value).toMatch('1 0');
       });
   });
 
   it('should render left with order: 1', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(0).getCssValue('order').then(value => {
         expect(value).toMatch('1');
       });
   });
 
   it('should render center with flex: 1 0 auto', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(1).getCssValue('flex').then(value => {
         expect(value).toMatch('1 0 0%');
       });
   });
 
   it('should render center with order: 2', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(1).getCssValue('order').then(value => {
         expect(value).toMatch('2');
       });
   });
 
   it('should render right with flex: 1 0 auto', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(2).getCssValue('flex').then(value => {
         expect(value).toMatch('1 0 0%');
       });
   });
 
   it('should render right with order: 2', () => {
-    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nga-layout-column'))
+    element.all(by.css('#layout-fluid > .layout > .layout-container > .content > .columns > nb-layout-column'))
       .get(2).getCssValue('order').then(value => {
         expect(value).toMatch('2');
       });

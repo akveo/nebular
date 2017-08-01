@@ -2,54 +2,54 @@ import { Injectable } from '@angular/core';
 import { Response, ResponseOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { NgaAuthResult } from '../services/auth.service';
-import { NgaAbstractAuthProvider } from './abstract-auth.provider';
+import { NbAuthResult } from '../services/auth.service';
+import { NbAbstractAuthProvider } from './abstract-auth.provider';
 
-export interface NgaDummyAuthProviderConfig {
+export interface NbDummyAuthProviderConfig {
   delay?: number;
   alwaysFail?: boolean;
 }
 
 @Injectable()
-export class NgaDummyAuthProvider extends NgaAbstractAuthProvider {
+export class NbDummyAuthProvider extends NbAbstractAuthProvider {
 
-  protected defaultConfig: NgaDummyAuthProviderConfig = {
+  protected defaultConfig: NbDummyAuthProviderConfig = {
     delay: 1000,
   };
 
-  authenticate(data?: any): Observable<NgaAuthResult> {
+  authenticate(data?: any): Observable<NbAuthResult> {
     return Observable.of(this.createDummyResult(data))
       .delay(this.getConfigValue('delay'));
   }
 
-  register(data?: any): Observable<NgaAuthResult> {
+  register(data?: any): Observable<NbAuthResult> {
     return Observable.of(this.createDummyResult(data))
       .delay(this.getConfigValue('delay'));
   }
 
-  requestPassword(data?: any): Observable<NgaAuthResult> {
+  requestPassword(data?: any): Observable<NbAuthResult> {
     return Observable.of(this.createDummyResult(data))
       .delay(this.getConfigValue('delay'));
   }
 
-  resetPassword(data?: any): Observable<NgaAuthResult> {
+  resetPassword(data?: any): Observable<NbAuthResult> {
     return Observable.of(this.createDummyResult(data))
       .delay(this.getConfigValue('delay'));
   }
 
-  logout(data?: any): Observable<NgaAuthResult> {
+  logout(data?: any): Observable<NbAuthResult> {
     return Observable.of(this.createDummyResult(data))
       .delay(this.getConfigValue('delay'));
   }
 
-  protected createDummyResult(data?: any): NgaAuthResult {
+  protected createDummyResult(data?: any): NbAuthResult {
     if (this.getConfigValue('alwaysFail')) {
-      return new NgaAuthResult(false,
+      return new NbAuthResult(false,
         this.createFailResponse(data),
         null,
         ['Something went wrong.']);
     }
 
-    return new NgaAuthResult(true, '/', this.createSuccessResponse(data), ['Successfully logged in.']);
+    return new NbAuthResult(true, '/', this.createSuccessResponse(data), ['Successfully logged in.']);
   }
 }

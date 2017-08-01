@@ -7,14 +7,14 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-layout-header-test',
+  selector: 'nb-layout-header-test',
   template: `
-    <nga-layout>
-      <nga-layout-header fixed>
+    <nb-layout>
+      <nb-layout-header fixed>
         <a class="navbar-brand" href="#">ngx-admin</a>
-      </nga-layout-header>
-    </nga-layout>
+      </nb-layout-header>
+    </nb-layout>
 `,
 })
-export class NgaLayoutHeaderTestComponent {
+export class NbLayoutHeaderTestComponent {
 }

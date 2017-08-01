@@ -12,7 +12,7 @@ import { convertToBoolProperty } from '../helpers';
 *
 * I want to have capability to pass custom actions in menu.
 * */
-export class NgaUserMenuItem {
+export class NbUserMenuItem {
   /**
    * Menu title
    * @type string
@@ -46,18 +46,18 @@ export class NgaUserMenuItem {
  * Can be used as a user profile link or can bring a user context menu.
  *
  * @theme
- * $nga-user-size-small: 1.5rem !default;
- * $nga-user-size-medium: 3rem !default;
- * $nga-user-size-large: 4rem !default;
- * $nga-user-picture-background: $nga-color-gray !default;
- * $nga-user-menu-border: $nga-border-color !default;
+ * $nb-user-size-small: 1.5rem !default;
+ * $nb-user-size-medium: 3rem !default;
+ * $nb-user-size-large: 4rem !default;
+ * $nb-user-picture-background: $nb-color-gray !default;
+ * $nb-user-menu-border: $nb-border-color !default;
  */
 @Component({
-  selector: 'nga-user',
+  selector: 'nb-user',
   styleUrls: ['./user.component.scss'],
   templateUrl: './user.component.html',
 })
-export class NgaUserComponent {
+export class NbUserComponent {
 
   // TODO: it makes sense use object instead of list of variables (or even enum)
   /*
@@ -78,22 +78,22 @@ export class NgaUserComponent {
 
   @HostBinding('class.small')
   get small() {
-    return this.sizeValue === NgaUserComponent.SIZE_SMALL;
+    return this.sizeValue === NbUserComponent.SIZE_SMALL;
   }
 
   @HostBinding('class.medium')
   get medium() {
-    return this.sizeValue === NgaUserComponent.SIZE_MEDIUM;
+    return this.sizeValue === NbUserComponent.SIZE_MEDIUM;
   }
 
   @HostBinding('class.large')
   get large() {
-    return this.sizeValue === NgaUserComponent.SIZE_LARGE;
+    return this.sizeValue === NbUserComponent.SIZE_LARGE;
   }
 
   @HostBinding('class.xlarge')
   get xlarge() {
-    return this.sizeValue === NgaUserComponent.SIZE_XLARGE;
+    return this.sizeValue === NbUserComponent.SIZE_XLARGE;
   }
 
   /**
@@ -123,9 +123,9 @@ export class NgaUserComponent {
 
   /**
    * List of menu items for a user context menu (shown when clicked)
-   * @type NgaUserMenuItem[]
+   * @type NbUserMenuItem[]
    */
-  @Input() menu: NgaUserMenuItem[] = [];
+  @Input() menu: NbUserMenuItem[] = [];
 
   /**
    * Size of the component, small|medium|large
@@ -183,9 +183,9 @@ export class NgaUserComponent {
 
   /**
    * Outputs when a context menu item is clicked
-   * @type EventEmitter<NgaUserMenuItem>
+   * @type EventEmitter<NbUserMenuItem>
    */
-  @Output() menuClick = new EventEmitter<NgaUserMenuItem>();
+  @Output() menuClick = new EventEmitter<NbUserMenuItem>();
 
   showNameValue: boolean = true;
   showTitleValue: boolean = true;
@@ -194,7 +194,7 @@ export class NgaUserComponent {
 
   constructor(private el: ElementRef) { }
 
-  itemClick(event: any, item: NgaUserMenuItem): boolean {
+  itemClick(event: any, item: NbUserMenuItem): boolean {
     this.menuClick.emit(item);
     return false;
   }

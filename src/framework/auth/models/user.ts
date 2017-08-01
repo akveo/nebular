@@ -1,4 +1,4 @@
-export class NgaUser {
+export class NbUser {
 
   constructor(public id?: number,
               public email?: string,

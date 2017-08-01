@@ -7,26 +7,26 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngt-card',
+  selector: 'nb-card-test',
   template: `
-    <nga-layout>
-      <nga-layout-column>
-        <nga-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
-          <nga-card-header>
+    <nb-layout>
+      <nb-layout-column>
+        <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
+          <nb-card-header>
             <span>Header</span>
-          </nga-card-header>
-          <nga-card-body *ngIf="card.size !== 'xxsmall'">
+          </nb-card-header>
+          <nb-card-body *ngIf="card.size !== 'xxsmall'">
             <span>Body</span>
-          </nga-card-body>
-          <nga-card-footer *ngIf="card.size !== 'xxsmall'">
+          </nb-card-body>
+          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
             <span>Footer</span>
-          </nga-card-footer>
-        </nga-card>
-      </nga-layout-column>
-    </nga-layout>
+          </nb-card-footer>
+        </nb-card>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class CardComponent {
+export class NbCardTestComponent {
 
   sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];

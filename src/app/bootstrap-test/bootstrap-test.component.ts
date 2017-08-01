@@ -7,13 +7,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-bootstrap-test',
+  selector: 'nb-bootstrap-test',
   styles: [
     ``,
   ],
   template: `
-    <nga-layout>
-      <nga-layout-column>
+    <nb-layout>
+      <nb-layout-column>
         <h2>Buttons</h2>
         <div>
           <button class="btn btn-primary">Primary</button>
@@ -55,10 +55,10 @@ import { Component } from '@angular/core';
             </tr>
           </tbody>
         </table>
-      </nga-layout-column>
-    </nga-layout>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaBootstrapTestComponent {
+export class NbBootstrapTestComponent {
 
 }

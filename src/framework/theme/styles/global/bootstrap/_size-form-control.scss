@@ -19,15 +19,15 @@
 }
 
 @mixin form-control-sm() {
-  font-size: nga-theme(form-control-font-size-sm);
-  line-height: nga-theme(form-control-line-height-sm);
+  font-size: nb-theme(form-control-font-size-sm);
+  line-height: nb-theme(form-control-line-height-sm);
 }
 
 @mixin form-control-md() {
-  font-size: nga-theme(form-control-font-size);
+  font-size: nb-theme(form-control-font-size);
 }
 
 @mixin form-control-lg() {
-  font-size: nga-theme(form-control-font-size-lg);
-  line-height: nga-theme(form-control-font-size-lg);
+  font-size: nb-theme(form-control-font-size-lg);
+  line-height: nb-theme(form-control-font-size-lg);
 }

@@ -9,13 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
-import { NgaAuthResult } from '../services/auth.service';
-import { NgaAbstractAuthProvider } from './abstract-auth.provider';
+import { NbAuthResult } from '../services/auth.service';
+import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { getDeepFromObject } from '../helpers';
 
 
 @Injectable()
-export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
+export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
   protected defaultConfig: NgEmailPassAuthProviderConfig = {
     baseEndpoint: '',
@@ -108,7 +108,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
     super();
   }
 
-  authenticate(data?: any): Observable<NgaAuthResult> {
+  authenticate(data?: any): Observable<NbAuthResult> {
     return this.http.post(this.getActionEndpoint('login'), data)
       .map((res) => {
         if (this.getConfigValue('login.alwaysFail')) {
@@ -118,7 +118,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         return res;
       })
       .map((res) => {
-        return new NgaAuthResult(
+        return new NbAuthResult(
           true,
           res,
           this.getConfigValue('login.redirect.success'),
@@ -135,7 +135,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         }
 
         return Observable.of(
-          new NgaAuthResult(
+          new NbAuthResult(
             false,
             res,
             this.getConfigValue('login.redirect.failure'),
@@ -144,7 +144,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
       });
   }
 
-  register(data?: any): Observable<NgaAuthResult> {
+  register(data?: any): Observable<NbAuthResult> {
     return this.http.post(this.getActionEndpoint('register'), data)
       .map((res) => {
         if (this.getConfigValue('register.alwaysFail')) {
@@ -154,7 +154,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         return res;
       })
       .map((res) => {
-        return new NgaAuthResult(
+        return new NbAuthResult(
           true,
           res,
           this.getConfigValue('register.redirect.success'),
@@ -171,7 +171,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         }
 
         return Observable.of(
-          new NgaAuthResult(
+          new NbAuthResult(
             false,
             res,
             this.getConfigValue('register.redirect.failure'),
@@ -180,7 +180,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
       });
   }
 
-  requestPassword(data?: any): Observable<NgaAuthResult> {
+  requestPassword(data?: any): Observable<NbAuthResult> {
     return this.http.post(this.getActionEndpoint('requestPass'), data)
       .map((res) => {
         if (this.getConfigValue('requestPass.alwaysFail')) {
@@ -190,7 +190,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         return res;
       })
       .map((res) => {
-        return new NgaAuthResult(
+        return new NbAuthResult(
           true,
           res,
           this.getConfigValue('requestPass.redirect.success'),
@@ -206,7 +206,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         }
 
         return Observable.of(
-          new NgaAuthResult(
+          new NbAuthResult(
             false,
             res,
             this.getConfigValue('requestPass.redirect.failure'),
@@ -215,7 +215,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
       });
   }
 
-  resetPassword(data: any = {}): Observable<NgaAuthResult> {
+  resetPassword(data: any = {}): Observable<NbAuthResult> {
     const tokenKey = this.getConfigValue('resetPass.resetPasswordTokenKey');
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
 
@@ -228,7 +228,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         return res;
       })
       .map((res) => {
-        return new NgaAuthResult(
+        return new NbAuthResult(
           true,
           res,
           this.getConfigValue('resetPass.redirect.success'),
@@ -244,7 +244,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         }
 
         return Observable.of(
-          new NgaAuthResult(
+          new NbAuthResult(
             false,
             res,
             this.getConfigValue('resetPass.redirect.failure'),
@@ -253,7 +253,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
       });
   }
 
-  logout(): Observable<NgaAuthResult> {
+  logout(): Observable<NbAuthResult> {
     return this.http.delete(this.getActionEndpoint('logout'))
       .map((res) => {
         if (this.getConfigValue('logout.alwaysFail')) {
@@ -263,7 +263,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         return res;
       })
       .map((res) => {
-        return new NgaAuthResult(
+        return new NbAuthResult(
           true,
           res,
           this.getConfigValue('logout.redirect.success'),
@@ -279,7 +279,7 @@ export class NgaEmailPassAuthProvider extends NgaAbstractAuthProvider {
         }
 
         return Observable.of(
-          new NgaAuthResult(
+          new NbAuthResult(
             false,
             res,
             this.getConfigValue('logout.redirect.failure'),

@@ -9,19 +9,19 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
-  ngaBuiltInJSThemesToken,
-  ngaMediaBreakpointsToken,
-  NgaThemeOptions,
-  ngaThemeOptionsToken,
-  ngaJSThemesToken,
+  nbBuiltInJSThemesToken,
+  nbMediaBreakpointsToken,
+  NbThemeOptions,
+  nbThemeOptionsToken,
+  nbJSThemesToken,
 } from './theme.options';
-import { NgaThemeService } from './services/theme.service';
-import { NgaSpinnerService } from './services/spinner.service';
-import { BUILT_IN_THEMES, NgaJSTheme, NgaJSThemesRegistry } from './services/js-themes-registry.service';
+import { NbThemeService } from './services/theme.service';
+import { NbSpinnerService } from './services/spinner.service';
+import { BUILT_IN_THEMES, NbJSTheme, NbJSThemesRegistry } from './services/js-themes-registry.service';
 import {
   DEFAULT_MEDIA_BREAKPOINTS,
-  NgaMediaBreakpoint,
-  NgaMediaBreakpointsService,
+  NbMediaBreakpoint,
+  NbMediaBreakpointsService,
 } from './services/breakpoints.service';
 
 
@@ -34,24 +34,24 @@ import {
     NgbModule,
   ],
 })
-export class NgaThemeModule {
+export class NbThemeModule {
 
   // TODO: check the options (throw exception?)
   /**
    * Main Theme Module
    *
-   * @param ngaThemeOptions {NgaThemeOptions} Main theme options
-   * @param ngaJSThemes {NgaJSTheme[]} List of JS Themes, will be merged with default themes
-   * @param ngaMediaBreakpoints {NgaMediaBreakpoint} Available media breakpoints
+   * @param nbThemeOptions {NbThemeOptions} Main theme options
+   * @param nbJSThemes {NbJSTheme[]} List of JS Themes, will be merged with default themes
+   * @param nbMediaBreakpoints {NbMediaBreakpoint} Available media breakpoints
    *
    * @returns {ModuleWithProviders}
    */
-  static forRoot(ngaThemeOptions: NgaThemeOptions,
-                 ngaJSThemes?: NgaJSTheme[],
-                 ngaMediaBreakpoints?: NgaMediaBreakpoint[]): ModuleWithProviders {
+  static forRoot(nbThemeOptions: NbThemeOptions,
+                 nbJSThemes?: NbJSTheme[],
+                 nbMediaBreakpoints?: NbMediaBreakpoint[]): ModuleWithProviders {
 
     return <ModuleWithProviders> {
-      ngModule: NgaThemeModule,
+      ngModule: NbThemeModule,
       imports: [
         NgbModule.forRoot(),
       ],
@@ -59,14 +59,14 @@ export class NgaThemeModule {
         NgbModule,
       ],
       providers: [
-        { provide: ngaThemeOptionsToken, useValue: ngaThemeOptions || {} },
-        { provide: ngaBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
-        { provide: ngaJSThemesToken, useValue: ngaJSThemes || [] },
-        { provide: ngaMediaBreakpointsToken, useValue: ngaMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        NgaJSThemesRegistry,
-        NgaThemeService,
-        NgaMediaBreakpointsService,
-        NgaSpinnerService,
+        { provide: nbThemeOptionsToken, useValue: nbThemeOptions || {} },
+        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
+        { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
+        NbJSThemesRegistry,
+        NbThemeService,
+        NbMediaBreakpointsService,
+        NbSpinnerService,
       ],
     };
   }

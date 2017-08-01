@@ -4,123 +4,123 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-card-header() {
-  padding: nga-theme(card-padding);
-  border-bottom: 1px solid nga-theme(card-separator);
-  border-top-left-radius: nga-theme(card-border-radius);
-  border-top-right-radius: nga-theme(card-border-radius);
-  color: nga-theme(card-header-fg-heading);
+@mixin nb-card-header() {
+  padding: nb-theme(card-padding);
+  border-bottom: 1px solid nb-theme(card-separator);
+  border-top-left-radius: nb-theme(card-border-radius);
+  border-top-right-radius: nb-theme(card-border-radius);
+  color: nb-theme(card-header-fg-heading);
 
-  font-family: nga-theme(card-header-font-family);
-  font-size: nga-theme(card-header-font-size);
-  font-weight: nga-theme(card-header-font-weight);
+  font-family: nb-theme(card-header-font-family);
+  font-size: nb-theme(card-header-font-size);
+  font-weight: nb-theme(card-header-font-weight);
 
-  @include nga-headings();
+  @include nb-headings();
 }
 
-@mixin nga-card-theme() {
-  nga-card {
-    font-size: nga-theme(card-font-size);
-    line-height: nga-theme(card-line-height);
+@mixin nb-card-theme() {
+  nb-card {
+    font-size: nb-theme(card-font-size);
+    line-height: nb-theme(card-line-height);
 
-    background: nga-theme(card-bg);
-    color: nga-theme(card-fg-text);
+    background: nb-theme(card-bg);
+    color: nb-theme(card-fg-text);
     // TODO: move card margin style to layout
-    margin-bottom: nga-theme(card-margin);
-    border-radius: nga-theme(card-border-radius);
-    box-shadow: nga-theme(card-shadow);
-    font-weight: nga-theme(card-font-weight);
+    margin-bottom: nb-theme(card-margin);
+    border-radius: nb-theme(card-border-radius);
+    box-shadow: nb-theme(card-shadow);
+    font-weight: nb-theme(card-font-weight);
 
-    @include nga-scrollbars(
-        nga-theme(scrollbar-fg),
-        nga-theme(scrollbar-bg),
-        nga-theme(scrollbar-width));
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
 
     &.xxsmall-card {
-      height: nga-theme(card-height-xxsmall);
+      height: nb-theme(card-height-xxsmall);
     }
     &.xsmall-card {
-      height: nga-theme(card-height-xsmall);
+      height: nb-theme(card-height-xsmall);
     }
     &.small-card {
-      height: nga-theme(card-height-small);
+      height: nb-theme(card-height-small);
     }
     &.medium-card {
-      height: nga-theme(card-height-medium);
+      height: nb-theme(card-height-medium);
     }
     &.large-card {
-      height: nga-theme(card-height-large);
+      height: nb-theme(card-height-large);
     }
     &.xlarge-card {
-      height: nga-theme(card-height-xlarge);
+      height: nb-theme(card-height-xlarge);
     }
     &.xxlarge-card {
-      height: nga-theme(card-height-xxlarge);
+      height: nb-theme(card-height-xxlarge);
     }
 
     &.active-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-active-bg);
-        border-bottom-color: nga-theme(card-header-active-bg);
-        color: nga-theme(card-header-active-fg);
+      nb-card-header {
+        background-color: nb-theme(card-header-active-bg);
+        border-bottom-color: nb-theme(card-header-active-bg);
+        color: nb-theme(card-header-active-fg);
       }
     }
     &.disabled-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-disabled-bg);
-        border-bottom-color: nga-theme(card-header-disabled-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-disabled-bg);
+        border-bottom-color: nb-theme(card-header-disabled-bg);
       }
     }
     &.primary-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-primary-bg);
-        border-bottom-color: nga-theme(card-header-primary-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-primary-bg);
+        border-bottom-color: nb-theme(card-header-primary-bg);
       }
     }
     &.info-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-info-bg);
-        border-bottom-color: nga-theme(card-header-info-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-info-bg);
+        border-bottom-color: nb-theme(card-header-info-bg);
       }
     }
     &.success-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-success-bg);
-        border-bottom-color: nga-theme(card-header-success-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-success-bg);
+        border-bottom-color: nb-theme(card-header-success-bg);
       }
     }
     &.warning-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-warning-bg);
-        border-bottom-color: nga-theme(card-header-warning-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-warning-bg);
+        border-bottom-color: nb-theme(card-header-warning-bg);
       }
     }
     &.danger-card {
-      nga-card-header {
-        background-color: nga-theme(card-header-danger-bg);
-        border-bottom-color: nga-theme(card-header-danger-bg);
+      nb-card-header {
+        background-color: nb-theme(card-header-danger-bg);
+        border-bottom-color: nb-theme(card-header-danger-bg);
       }
     }
   }
 
-  nga-card-body {
+  nb-card-body {
     flex: 1;
     overflow: auto;
-    padding: nga-theme(card-padding);
-    @include nga-scrollbars(
-        nga-theme(scrollbar-fg),
-        nga-theme(scrollbar-bg),
-        nga-theme(scrollbar-width));
+    padding: nb-theme(card-padding);
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
   }
 
-  nga-card-footer {
-    padding: nga-theme(card-padding);
-    border-top: 1px solid nga-theme(card-separator);
-    border-bottom-left-radius: nga-theme(card-border-radius);
-    border-bottom-right-radius: nga-theme(card-border-radius);
+  nb-card-footer {
+    padding: nb-theme(card-padding);
+    border-top: 1px solid nb-theme(card-separator);
+    border-bottom-left-radius: nb-theme(card-border-radius);
+    border-bottom-right-radius: nb-theme(card-border-radius);
   }
 
-  nga-card-header {
-    @include nga-card-header();
+  nb-card-header {
+    @include nb-card-header();
   }
 }

@@ -14,7 +14,7 @@
     width: 1.25rem;
     height: 1.25rem;
 
-    @include custom-control-indicator-border(nga-theme(color-fg));
+    @include custom-control-indicator-border(nb-theme(color-fg));
   }
 
   .custom-checkbox > .custom-control-input {
@@ -22,7 +22,7 @@
       content: '';
       width: 0.5rem;
       height: 0.75rem;
-      border: solid nga-theme(color-fg-heading);
+      border: solid nb-theme(color-fg-heading);
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
@@ -33,7 +33,7 @@
       content: '';
       width: 0.75rem;
       height: 0.75rem;
-      background-color: nga-theme(color-fg-heading);
+      background-color: nb-theme(color-fg-heading);
       border-radius: 50%;
       position: absolute;
       top: 15%;
@@ -57,11 +57,11 @@
     }
 
     &:disabled:hover ~ .custom-control-indicator {
-      border-color: nga-theme(color-fg);
+      border-color: nb-theme(color-fg);
     }
 
     &:disabled ~ .custom-control-description {
-      color: nga-theme(color-fg);
+      color: nb-theme(color-fg);
       opacity: 0.2;
     }
 
@@ -74,37 +74,37 @@
     }
 
     &:hover ~ .custom-control-indicator {
-      border-color: nga-theme(color-fg-heading);
+      border-color: nb-theme(color-fg-heading);
     }
   }
 
   .custom-control-description {
     line-height: 1.875rem;
     padding-left: 0.25rem;
-    color: nga-theme(color-fg-heading);
+    color: nb-theme(color-fg-heading);
   }
 
   .custom-control {
     &.success {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-success));
+        @include custom-control-indicator-border(nb-theme(color-success));
       }
     }
 
     &.warning {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-warning));
+        @include custom-control-indicator-border(nb-theme(color-warning));
       }
     }
 
     &.danger {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-danger));
+        @include custom-control-indicator-border(nb-theme(color-danger));
       }
     }
 
     .custom-control-input:hover:checked ~ .custom-control-indicator {
-      border-color: nga-theme(color-fg-heading);
+      border-color: nb-theme(color-fg-heading);
     }
   }
 }

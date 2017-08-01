@@ -5,28 +5,28 @@
  */
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
-import { NgaSearchComponent, NgaSearchFieldComponent } from './search.component';
-import { NgaSuperSearchService } from './search.service';
+import { NbSharedModule } from '../shared/shared.module';
+import { NbSearchComponent, NbSearchFieldComponent } from './search.component';
+import { NbSuperSearchService } from './search.service';
 
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    NgaSearchComponent,
-    NgaSearchFieldComponent,
+    NbSearchComponent,
+    NbSearchFieldComponent,
   ],
   exports: [
-    NgaSearchComponent,
-    NgaSearchFieldComponent,
+    NbSearchComponent,
+    NbSearchFieldComponent,
   ],
   providers: [
-    NgaSuperSearchService,
+    NbSuperSearchService,
   ],
   entryComponents: [
-    NgaSearchFieldComponent,
+    NbSearchFieldComponent,
   ],
 })
-export class NgaSearchModule { }
+export class NbSearchModule { }

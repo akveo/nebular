@@ -7,25 +7,25 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { List } from 'immutable';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
-import { NgaMenuComponent, NgaMenuItemComponent } from './menu.component';
-import { NgaMenuService, NgaMenuInternalService, NgaMenuOptions, ngaMenuOptionsToken } from './menu.service';
+import { NbMenuComponent, NbMenuItemComponent } from './menu.component';
+import { NbMenuService, NbMenuInternalService, NbMenuOptions, nbMenuOptionsToken } from './menu.service';
 
-const ngaMenuComponents = [NgaMenuComponent, NgaMenuItemComponent];
+const nbMenuComponents = [NbMenuComponent, NbMenuItemComponent];
 
-const NGA_MENU_PROVIDERS = [NgaMenuService, NgaMenuInternalService];
+const NB_MENU_PROVIDERS = [NbMenuService, NbMenuInternalService];
 
 @NgModule({
-  imports: [NgaSharedModule],
-  declarations: [...ngaMenuComponents],
-  exports: [...ngaMenuComponents],
+  imports: [NbSharedModule],
+  declarations: [...nbMenuComponents],
+  exports: [...nbMenuComponents],
 })
-export class NgaMenuModule {
-  static forRoot(ngaMenuOptions?: NgaMenuOptions): ModuleWithProviders {
+export class NbMenuModule {
+  static forRoot(nbMenuOptions?: NbMenuOptions): ModuleWithProviders {
     return <ModuleWithProviders>{
-      ngModule: NgaMenuModule,
-      providers: [...NGA_MENU_PROVIDERS, { provide: ngaMenuOptionsToken, useValue: ngaMenuOptions }],
+      ngModule: NbMenuModule,
+      providers: [...NB_MENU_PROVIDERS, { provide: nbMenuOptionsToken, useValue: nbMenuOptions }],
     };
   }
 }

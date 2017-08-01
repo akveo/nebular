@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
 @Injectable()
-export class NgaSuperSearchService {
+export class NbSuperSearchService {
   private searchSubmittings$ = new Subject();
   private searchActivations$ = new Subject();
   private searchDeactivations$ = new Subject();

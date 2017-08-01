@@ -6,31 +6,31 @@
 
 @import '../../styles/global/bootstrap/hero-buttons';
 
-@mixin nga-tabset-theme() {
+@mixin nb-tabset-theme() {
 
-  nga-tabset {
+  nb-tabset {
     // TODO: move to global mixin
-    @include nga-scrollbars(
-        nga-theme(scrollbar-fg),
-        nga-theme(scrollbar-bg),
-        nga-theme(scrollbar-width));
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
 
     ul {
-      font-family: nga-theme(tabs-font-family);
-      font-size: nga-theme(tabs-font-size);
+      font-family: nb-theme(tabs-font-family);
+      font-size: nb-theme(tabs-font-size);
 
-      padding: 0 nga-theme(tabs-padding);
-      border-bottom: 1px solid nga-theme(tabs-separator);
+      padding: 0 nb-theme(tabs-padding);
+      border-bottom: 1px solid nb-theme(tabs-separator);
 
       li {
-        background: nga-theme(tabs-header-bg);
+        background: nb-theme(tabs-header-bg);
 
         a {
-          padding: nga-theme(tabs-padding);
-          color: nga-theme(tabs-fg);
+          padding: nb-theme(tabs-padding);
+          color: nb-theme(tabs-fg);
 
           &:hover {
-            color: nga-theme(color-fg-heading);
+            color: nb-theme(color-fg-heading);
           }
 
           &::before {
@@ -40,22 +40,22 @@
         }
 
         &.active {
-          background: nga-theme(tabs-active-bg);
+          background: nb-theme(tabs-active-bg);
 
           a {
-            font-weight: nga-theme(tabs-active-font-weight);
-            color: nga-theme(tabs-fg-heading);
+            font-weight: nb-theme(tabs-active-font-weight);
+            color: nb-theme(tabs-fg-heading);
           }
         }
       }
     }
 
-    nga-tab {
-      font-family: nga-theme(tabs-content-font-family);
-      font-size: nga-theme(tabs-content-font-size);
-      color: nga-theme(tabs-fg-text);
-      background-color: nga-theme(tabs-bg);
-      padding: nga-theme(tabs-content-padding);
+    nb-tab {
+      font-family: nb-theme(tabs-content-font-family);
+      font-size: nb-theme(tabs-content-font-size);
+      color: nb-theme(tabs-fg-text);
+      background-color: nb-theme(tabs-bg);
+      padding: nb-theme(tabs-content-padding);
     }
   }
 }

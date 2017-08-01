@@ -8,24 +8,24 @@ import { browser, element, by } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
-const group = by.css('nga-menu ul li:nth-child(1) span');
-const menu1 = by.css('nga-menu ul li:nth-child(2) a');
-const menu2 = by.css('nga-menu ul li:nth-child(3) a');
-const menu3 = by.css('nga-menu ul li:nth-child(4) a');
-const menu3SubMenu = by.css('nga-menu ul li:nth-child(4) ul');
-const menu31 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(1) a');
-const menu32 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(2) a');
-const menu33 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(3) a');
-const menu33SubMenu = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(3) ul');
-const menu331 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(1) a');
-const menu332 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(2) a');
-const menu333 = by.css('nga-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(3) a');
-const menu4 = by.css('nga-menu ul li:nth-child(5) a');
-const newMenu = by.css('nga-menu ul li:nth-child(7) a');
+const group = by.css('nb-menu ul li:nth-child(1) span');
+const menu1 = by.css('nb-menu ul li:nth-child(2) a');
+const menu2 = by.css('nb-menu ul li:nth-child(3) a');
+const menu3 = by.css('nb-menu ul li:nth-child(4) a');
+const menu3SubMenu = by.css('nb-menu ul li:nth-child(4) ul');
+const menu31 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(1) a');
+const menu32 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(2) a');
+const menu33 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) a');
+const menu33SubMenu = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul');
+const menu331 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(1) a');
+const menu332 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(2) a');
+const menu333 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(3) a');
+const menu4 = by.css('nb-menu ul li:nth-child(5) a');
+const newMenu = by.css('nb-menu ul li:nth-child(7) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
 
-describe('nga-menu', () => {
+describe('nb-menu', () => {
 
   beforeEach(() => {
     browser.get('#/menu');
@@ -39,7 +39,7 @@ describe('nga-menu', () => {
   });
 
   it('should display menu', () => {
-    expect(element(by.css('nga-menu')).isDisplayed()).toBeTruthy();
+    expect(element(by.css('nb-menu')).isDisplayed()).toBeTruthy();
     expect(browser.getCurrentUrl()).toContain('#/menu/1');
   });
 
@@ -194,7 +194,7 @@ describe('nga-menu', () => {
           .then(() => {
             element.all(menu333).first().getText()
               .then(val => {
-                expect(val).toEqual('@akveo/nga-theme');
+                expect(val).toEqual('@nebular/theme');
               });
 
             element.all(menu333).first().click()

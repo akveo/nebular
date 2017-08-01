@@ -7,7 +7,7 @@
 @import '../../components/auth-block/auth-block.component.theme';
 
 // Create a theme
-@mixin nga-auth-components() {
+@mixin nb-auth-components() {
 
-  @include nga-auth-block-theme();
+  @include nb-auth-block-theme();
 }

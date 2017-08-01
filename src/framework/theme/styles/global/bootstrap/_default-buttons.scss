@@ -32,7 +32,7 @@
 }
 
 @mixin btn-primary() {
-  background-color: nga-theme(btn-primary-bg);
+  background-color: nb-theme(btn-primary-bg);
 
   @include btn-primary-focus();
   @include btn-primary-hover();
@@ -41,7 +41,7 @@
 }
 
 @mixin btn-success() {
-  background-color: nga-theme(btn-success-bg);
+  background-color: nb-theme(btn-success-bg);
 
   @include btn-success-focus();
   @include btn-success-hover();
@@ -50,7 +50,7 @@
 }
 
 @mixin btn-warning() {
-  background-color: nga-theme(btn-warning-bg);
+  background-color: nb-theme(btn-warning-bg);
 
   @include btn-warning-focus();
   @include btn-warning-hover();
@@ -59,7 +59,7 @@
 }
 
 @mixin btn-info() {
-  background-color: nga-theme(btn-info-bg);
+  background-color: nb-theme(btn-info-bg);
 
   @include btn-info-focus();
   @include btn-info-hover();
@@ -68,7 +68,7 @@
 }
 
 @mixin btn-danger() {
-  background-color: nga-theme(btn-danger-bg);
+  background-color: nb-theme(btn-danger-bg);
 
   @include btn-danger-focus();
   @include btn-danger-hover();
@@ -87,11 +87,11 @@
 }
 
 @function btn-hover($bg, $percentage: 14%) {
-  @return tint(nga-theme($bg), $percentage);
+  @return tint(nb-theme($bg), $percentage);
 }
 
 @function btn-focus-active($bg, $percentage: 14%) {
-  @return shade(nga-theme($bg), $percentage);
+  @return shade(nb-theme($bg), $percentage);
 }
 
 @mixin btn-focus($focus) {
@@ -201,19 +201,19 @@
 // Disabled
 @mixin btn-disabled() {
   &:disabled {
-    opacity: nga-theme(btn-disabled-opacity);
+    opacity: nb-theme(btn-disabled-opacity);
   }
 }
 
 
 @mixin btn-secondary-border() {
-  border: 2px solid nga-theme(btn-secondary-border);
+  border: 2px solid nb-theme(btn-secondary-border);
 }
 
 @mixin btn-secondary-fg() {
-  color: nga-theme(btn-outline-fg);
+  color: nb-theme(btn-outline-fg);
 }
 
 @mixin btn-secondary-bg() {
-  background-color: nga-theme(btn-secondary-bg);
+  background-color: nb-theme(btn-secondary-bg);
 }

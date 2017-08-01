@@ -6,12 +6,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NgaUser } from '../../models/user';
-import { NgaAuthService, NgaAuthResult } from '../../services/auth.service';
-import { NgaTokenService } from '../../services/token.service';
+import { NbUser } from '../../models/user';
+import { NbAuthService, NbAuthResult } from '../../services/auth.service';
+import { NbTokenService } from '../../services/token.service';
 
 @Component({
-  selector: 'nga-login',
+  selector: 'nb-login',
   styleUrls: ['./login.component.scss'],
   template: `
     <h2>Please sign in</h2>
@@ -54,15 +54,15 @@ import { NgaTokenService } from '../../services/token.service';
     </div>
   `,
 })
-export class NgaLoginComponent {
+export class NbLoginComponent {
 
   redirectDelay: number = 1500;
   submitted = false;
   errors: string[] = [];
   messages: string[] = [];
-  user: NgaUser = new NgaUser();
+  user: NbUser = new NbUser();
 
-  constructor(protected service: NgaAuthService,
+  constructor(protected service: NbAuthService,
               protected router: Router) {
   }
 
@@ -70,7 +70,7 @@ export class NgaLoginComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.authenticate(provider, this.user).subscribe((result: NgaAuthResult) => {
+    this.service.authenticate(provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

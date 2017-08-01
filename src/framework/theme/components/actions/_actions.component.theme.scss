@@ -4,60 +4,60 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-actions-theme() {
-  nga-actions {
+@mixin nb-actions-theme() {
+  nb-actions {
 
-    font-size: nga-theme(actions-font-size);
-    font-family: nga-theme(actions-font-family);
-    line-height: nga-theme(actions-line-height);
+    font-size: nb-theme(actions-font-size);
+    font-family: nb-theme(actions-font-family);
+    line-height: nb-theme(actions-line-height);
 
-    nga-action {
-      height: nga-theme(actions-size-small);
-      padding: 0 nga-theme(actions-padding);
+    nb-action {
+      height: nb-theme(actions-size-small);
+      padding: 0 nb-theme(actions-padding);
 
       i.control-icon {
-        color: nga-theme(actions-fg);
-        font-size: nga-theme(actions-size-small);
+        color: nb-theme(actions-fg);
+        font-size: nb-theme(actions-size-small);
       }
-      border-left: 1px solid nga-theme(actions-separator);
+      border-left: 1px solid nb-theme(actions-separator);
       background: transparent;
     }
 
     &.inverse {
-      nga-action {
+      nb-action {
         i.control-icon {
-          color: nga-theme(actions-bg);
+          color: nb-theme(actions-bg);
         }
-        border-left: 1px solid nga-theme(actions-separator);
+        border-left: 1px solid nb-theme(actions-separator);
       }
     }
 
     &.small {
-      nga-action {
-        height: nga-theme(actions-size-small);
+      nb-action {
+        height: nb-theme(actions-size-small);
         i.control-icon {
-          font-size: nga-theme(actions-size-small);
+          font-size: nb-theme(actions-size-small);
         }
       }
     }
     &.medium {
-      nga-action {
-        height: nga-theme(actions-size-medium);
+      nb-action {
+        height: nb-theme(actions-size-medium);
         i.control-icon {
-          font-size: nga-theme(actions-size-medium);
+          font-size: nb-theme(actions-size-medium);
         }
       }
     }
     &.large {
-      nga-action {
-        height: nga-theme(actions-size-large);
+      nb-action {
+        height: nb-theme(actions-size-large);
         i.control-icon {
-          font-size: nga-theme(actions-size-large);
+          font-size: nb-theme(actions-size-large);
         }
       }
     }
 
-    &.full-width nga-action {
+    &.full-width nb-action {
       display: flex;
       justify-content: center;
       width: 100%;

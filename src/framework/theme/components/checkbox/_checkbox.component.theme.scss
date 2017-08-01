@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-checkbox-theme() {
+@mixin nb-checkbox-theme() {
   @mixin custom-control-indicator-border($color) {
     border-color: $color;
   }
 
-  nga-checkbox {
+  nb-checkbox {
     .custom-control-input {
       background-color: transparent;
 
@@ -17,9 +17,9 @@
         background-color: transparent;
         width: 1.25rem;
         height: 1.25rem;
-        border: 2px solid nga-theme(color-fg);
+        border: 2px solid nb-theme(color-fg);
 
-        @include custom-control-indicator-border(nga-theme(color-fg));
+        @include custom-control-indicator-border(nb-theme(color-fg));
       }
 
       &:focus ~ .custom-control-indicator {
@@ -35,7 +35,7 @@
           content: '';
           width: 0.5rem;
           height: 0.75rem;
-          border: solid nga-theme(color-fg-heading);
+          border: solid nb-theme(color-fg-heading);
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
@@ -47,11 +47,11 @@
       }
 
       &:disabled:hover ~ .custom-control-indicator {
-        border-color: nga-theme(color-fg);
+        border-color: nb-theme(color-fg);
       }
 
       &:disabled ~ .custom-control-description {
-        color: nga-theme(color-fg);
+        color: nb-theme(color-fg);
         opacity: 0.2;
       }
 
@@ -64,36 +64,36 @@
       }
 
       &:hover ~ .custom-control-indicator {
-        border-color: nga-theme(color-fg-heading);
+        border-color: nb-theme(color-fg-heading);
       }
     }
 
     .custom-control-description {
       line-height: 1.875rem;
       padding-left: 0.25rem;
-      color: nga-theme(color-fg-heading);
+      color: nb-theme(color-fg-heading);
     }
 
     &.success {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-success));
+        @include custom-control-indicator-border(nb-theme(color-success));
       }
     }
 
     &.warning {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-warning));
+        @include custom-control-indicator-border(nb-theme(color-warning));
       }
     }
 
     &.danger {
       .custom-control-input:checked ~ .custom-control-indicator {
-        @include custom-control-indicator-border(nga-theme(color-danger));
+        @include custom-control-indicator-border(nb-theme(color-danger));
       }
     }
 
     .custom-control-input:hover:checked ~ .custom-control-indicator {
-      border-color: nga-theme(color-fg-heading);
+      border-color: nb-theme(color-fg-heading);
     }
   }
 }

@@ -7,10 +7,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 
-import { NgaAuthService } from './auth.service';
+import { NbAuthService } from './auth.service';
 
 @Injectable()
-export class NgaSecuredHttp {
+export class NbSecuredHttp {
 
   protected onErrorSubject = new Subject<any>();
 
@@ -64,7 +64,7 @@ export class NgaSecuredHttp {
     headers.append('Authorization', `Bearer ${token}`);
   }
 
-  protected get authService(): NgaAuthService {
-    return this.injector.get(NgaAuthService);
+  protected get authService(): NbAuthService {
+    return this.injector.get(NbAuthService);
   }
 }

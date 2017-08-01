@@ -53,7 +53,7 @@ function prepareCards() {
   return result;
 }
 
-describe('nga-card', () => {
+describe('nb-card', () => {
 
   cards = prepareCards();
 
@@ -64,27 +64,27 @@ describe('nga-card', () => {
   cards.forEach(c => {
 
     it(`should display ${c.colorKey} card with ${c.name} size`, () => {
-      expect(element(by.css(`nga-card:nth-child(${c.elementNumber}) > nga-card-header`))
+      expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getText()).toEqual('Header');
 
       if (c.name !== 'xxsmall') {
-        expect(element(by.css(`nga-card:nth-child(${c.elementNumber}) > nga-card-body`))
+        expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-body`))
           .getText()).toEqual('Body');
 
-        expect(element(by.css(`nga-card:nth-child(${c.elementNumber}) > nga-card-footer`))
+        expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-footer`))
           .getText()).toEqual('Footer');
       }
 
-      element(by.css(`nga-card:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
+      element(by.css(`nb-card:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
         expect(height).toEqual(c.height);
       });
 
-      element(by.css(`nga-card:nth-child(${c.elementNumber}) > nga-card-header`))
+      element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getCssValue('background-color').then(bgColor => {
           expect(bgColor).toEqual(c.color);
         });
 
-      element(by.css(`nga-card:nth-child(${c.elementNumber}) > nga-card-header`))
+      element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getCssValue('border-bottom-color').then(bgColor => {
           expect(bgColor).toEqual(c.color);
         });

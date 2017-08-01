@@ -6,18 +6,18 @@
 
 
 // here you can override theme styles
-//nga-card-header {
+//nb-card-header {
   // TODO!!!! it should be possible to specify specific styles for a theme, probably in register theme
-  //color: nga-theme(color-primary) !important;
+  //color: nb-theme(color-primary) !important;
   //text-transform: capitalize !important;
   //text-decoration: underline;
 //}
 
 
-@import '~@akveo/nga-theme/styles/all';
-@import '~@akveo/nga-auth/styles/all';
+@import '~@nebular/theme/styles/all';
+@import '~@nebular/auth/styles/all';
 
-$nga-themes: nga-register-theme((
+$nb-themes: nb-register-theme((
   background-inverse: #5f1eff,
   header-foreground: #ce55bd,
   card-background: #cfe8ff,
@@ -28,12 +28,12 @@ $nga-themes: nga-register-theme((
 
 ), blue, cosmic);
 
-$nga-themes: nga-register-theme((
+$nb-themes: nb-register-theme((
   header-foreground: #76ff81,
 
 ), blue1, blue);
 
-@include nga-install() {
-  @include nga-theme-global();
-  @include nga-auth-global();
+@include nb-install() {
+  @include nb-theme-global();
+  @include nb-auth-global();
 };

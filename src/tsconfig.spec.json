@@ -10,7 +10,7 @@
       "node"
     ],
     "paths": {
-      "@akveo/nga-*": [
+      "@nebular/*": [
         "./framework/*"
       ]
     }

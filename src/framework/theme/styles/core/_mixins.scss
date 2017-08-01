@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
+@mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
   ::-webkit-scrollbar {
     width: $size;
     height: $size;
@@ -28,7 +28,7 @@
   }
 }
 
-@mixin nga-radial-gradient($color-1, $color-2, $color-3) {
+@mixin nb-radial-gradient($color-1, $color-2, $color-3) {
   background: $color-2; /* Old browsers */
   background: -moz-radial-gradient(bottom, ellipse cover, $color-1 0%,
                                                           $color-2 45%,
@@ -44,11 +44,11 @@
                                                      GradientType=1); /* IE6-9 fallback on horizontal gradient */
 }
 
-@mixin nga-right-gradient($left-color, $right-color) {
+@mixin nb-right-gradient($left-color, $right-color) {
   background-image: linear-gradient(to right, $left-color, $right-color);
 }
 
-@mixin nga-headings($from: 1, $to: 6) {
+@mixin nb-headings($from: 1, $to: 6) {
   @for $i from $from through $to {
     h#{$i} {
       margin: 0;

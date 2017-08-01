@@ -6,11 +6,11 @@ import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/do';
 
-import { ngaAuthOptionsToken } from '../auth.options';
+import { nbAuthOptionsToken } from '../auth.options';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 @Injectable()
-export class NgaTokenService {
+export class NbTokenService {
 
   protected defaultConfig: any = {
     token: {
@@ -26,7 +26,7 @@ export class NgaTokenService {
 
   protected token$: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor( @Inject(ngaAuthOptionsToken) protected options: any) {
+  constructor( @Inject(nbAuthOptionsToken) protected options: any) {
     this.setConfig(options);
 
     this.get().subscribe(token => this.publishToken(token));

@@ -5,102 +5,106 @@
  */
 
 import { Routes } from '@angular/router';
-import { NgaActionsTestComponent } from './actions-test/actions-test.component';
-import { NgaBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
+import { NbActionsTestComponent } from './actions-test/actions-test.component';
+import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
 
-import { NgaFormsTestComponent } from './forms-test/forms-test.component';
-import { NgaLayoutFooterTestComponent } from './layout-test/layout-footer-test.component';
-import { NgaLayoutHeaderTestComponent } from './layout-test/layout-header-test.component';
-import { NgaLayoutTestComponent } from './layout-test/layout-test.component';
-import { NgaThemeChangeTestComponent } from './layout-test/theme-change-test.component';
-import { NgaThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
-import { NgaThemeBreakpointTestComponent } from './layout-test/theme-breakpoint-test.component';
+import { NbFormsTestComponent } from './forms-test/forms-test.component';
+import { NbLayoutFooterTestComponent } from './layout-test/layout-footer-test.component';
+import { NbLayoutHeaderTestComponent } from './layout-test/layout-header-test.component';
+import { NbLayoutTestComponent } from './layout-test/layout-test.component';
+import { NbThemeChangeTestComponent } from './layout-test/theme-change-test.component';
+import { NbThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
+import { NbThemeBreakpointTestComponent } from './layout-test/theme-breakpoint-test.component';
 import {
-  NgaMenuItem1Component,
-  NgaMenuItem2Component,
-  NgaMenuItem31Component,
-  NgaMenuItem32Component,
-  NgaMenuItem331Component,
-  NgaMenuItem332Component,
-  NgaMenuItem33Component,
-  NgaMenuItem3Component,
-  NgaMenuItem4Component,
-  NgaMenuTestComponent,
+  NbMenuItem1Component,
+  NbMenuItem2Component,
+  NbMenuItem31Component,
+  NbMenuItem32Component,
+  NbMenuItem331Component,
+  NbMenuItem332Component,
+  NbMenuItem33Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
+  NbMenuTestComponent,
 } from './menu-test/menu-test.component';
 import {
-  NgaRouteTabsetTestChild1Component,
-  NgaRouteTabsetTestChild2Component,
-  NgaRouteTabsetTestComponent,
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestComponent,
 } from './route-tabset-test/route-tabset-test.component';
-import { NgaSearchTestComponent } from './search-test/search-test.component';
-import { NgaSidebarTestOneComponent } from './sidebar-test/sidebar-test-one.component';
-import { NgaSidebarTestThreeComponent } from './sidebar-test/sidebar-test-three.component';
-import { NgaSidebarTestTwoComponent } from './sidebar-test/sidebar-test-two.component';
-import { NgaSidebarTestComponent } from './sidebar-test/sidebar-test.component';
-import { NgaTabsetTestComponent } from './tabset-test/tabset-test.component';
-import { NgaUserTestComponent } from './user-test/user-test.component';
-import { CardComponent } from './card/card.component';
+import { NbSearchTestComponent } from './search-test/search-test.component';
+import { NbSidebarTestOneComponent } from './sidebar-test/sidebar-test-one.component';
+import { NbSidebarTestThreeComponent } from './sidebar-test/sidebar-test-three.component';
+import { NbSidebarTestTwoComponent } from './sidebar-test/sidebar-test-two.component';
+import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
+import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
+import { NbUserTestComponent } from './user-test/user-test.component';
+import { NbCardTestComponent } from './card-test/card-test.component';
 import {
-  NgaAuthComponent, NgaLoginComponent, NgaRegisterComponent, NgaLogoutComponent,
-  NgaRequestPasswordComponent, NgaResetPasswordComponent,
-} from '@akveo/nga-auth';
+  NbAuthComponent,
+  NbLoginComponent,
+  NbRegisterComponent,
+  NbLogoutComponent,
+  NbRequestPasswordComponent,
+  NbResetPasswordComponent,
+} from '@nebular/auth';
 
 export const routes: Routes = [
   {
     path: '',
-    component: CardComponent,
+    component: NbCardTestComponent,
   },
   {
     path: 'layout',
-    component: NgaLayoutTestComponent,
+    component: NbLayoutTestComponent,
   },
   {
     path: 'layout/header',
-    component: NgaLayoutHeaderTestComponent,
+    component: NbLayoutHeaderTestComponent,
   },
   {
     path: 'layout/footer',
-    component: NgaLayoutFooterTestComponent,
+    component: NbLayoutFooterTestComponent,
   },
   {
     path: 'layout/change-theme',
-    component: NgaThemeChangeTestComponent,
+    component: NbThemeChangeTestComponent,
   },
   {
     path: 'layout/dynamic',
-    component: NgaThemeDynamicTestComponent,
+    component: NbThemeDynamicTestComponent,
   },
   {
     path: 'layout/breakpoint',
-    component: NgaThemeBreakpointTestComponent,
+    component: NbThemeBreakpointTestComponent,
   },
   {
     path: 'tabset',
-    component: NgaTabsetTestComponent,
+    component: NbTabsetTestComponent,
   },
   {
     path: 'tabset/:tab',
-    component: NgaTabsetTestComponent,
+    component: NbTabsetTestComponent,
   },
   {
     path: 'sidebar',
-    component: NgaSidebarTestComponent,
+    component: NbSidebarTestComponent,
   },
   {
     path: 'sidebar/one',
-    component: NgaSidebarTestOneComponent,
+    component: NbSidebarTestOneComponent,
   },
   {
     path: 'sidebar/two',
-    component: NgaSidebarTestTwoComponent,
+    component: NbSidebarTestTwoComponent,
   },
   {
     path: 'sidebar/three',
-    component: NgaSidebarTestThreeComponent,
+    component: NbSidebarTestThreeComponent,
   },
   {
     path: 'route-tabset',
-    component: NgaRouteTabsetTestComponent,
+    component: NbRouteTabsetTestComponent,
     children: [
       {
         path: '',
@@ -109,17 +113,17 @@ export const routes: Routes = [
       },
       {
         path: 'tab1',
-        component: NgaRouteTabsetTestChild1Component,
+        component: NbRouteTabsetTestChild1Component,
       },
       {
         path: 'tab2',
-        component: NgaRouteTabsetTestChild2Component,
+        component: NbRouteTabsetTestChild2Component,
       },
     ],
   },
   {
     path: 'menu',
-    component: NgaMenuTestComponent,
+    component: NbMenuTestComponent,
     children: [
       {
         path: '',
@@ -128,15 +132,15 @@ export const routes: Routes = [
       },
       {
         path: '1',
-        component: NgaMenuItem1Component,
+        component: NbMenuItem1Component,
       },
       {
         path: '2',
-        component: NgaMenuItem2Component,
+        component: NbMenuItem2Component,
       },
       {
         path: '3',
-        component: NgaMenuItem3Component,
+        component: NbMenuItem3Component,
         children: [
           {
             path: '',
@@ -145,15 +149,15 @@ export const routes: Routes = [
           },
           {
             path: '1',
-            component: NgaMenuItem31Component,
+            component: NbMenuItem31Component,
           },
           {
             path: '2',
-            component: NgaMenuItem32Component,
+            component: NbMenuItem32Component,
           },
           {
             path: '3',
-            component: NgaMenuItem33Component,
+            component: NbMenuItem33Component,
             children: [
               {
                 path: '',
@@ -162,11 +166,11 @@ export const routes: Routes = [
               },
               {
                 path: '1',
-                component: NgaMenuItem331Component,
+                component: NbMenuItem331Component,
               },
               {
                 path: '2',
-                component: NgaMenuItem332Component,
+                component: NbMenuItem332Component,
               },
             ],
           },
@@ -174,62 +178,62 @@ export const routes: Routes = [
       },
       {
         path: '4',
-        component: NgaMenuItem4Component,
+        component: NbMenuItem4Component,
       },
     ],
   },
   {
     path: 'user',
-    component: NgaUserTestComponent,
+    component: NbUserTestComponent,
   },
   {
     path: 'auth',
-    component: NgaAuthComponent,
+    component: NbAuthComponent,
     children: [
       {
         path: '',
-        component: NgaLoginComponent,
+        component: NbLoginComponent,
       },
       {
         path: 'login',
-        component: NgaLoginComponent,
+        component: NbLoginComponent,
       },
       {
         path: 'register',
-        component: NgaRegisterComponent,
+        component: NbRegisterComponent,
       },
       {
         path: 'logout',
-        component: NgaLogoutComponent,
+        component: NbLogoutComponent,
       },
       {
         path: 'request-password',
-        component: NgaRequestPasswordComponent,
+        component: NbRequestPasswordComponent,
       },
       {
         path: 'reset-password',
-        component: NgaResetPasswordComponent,
+        component: NbResetPasswordComponent,
       },
     ],
   },
   {
     path: 'search',
-    component: NgaSearchTestComponent,
+    component: NbSearchTestComponent,
   },
   {
     path: 'bootstrap',
-    component: NgaBootstrapTestComponent,
+    component: NbBootstrapTestComponent,
   },
   {
     path: 'actions',
-    component: NgaActionsTestComponent,
+    component: NbActionsTestComponent,
   },
   {
     path: 'forms',
-    component: NgaFormsTestComponent,
+    component: NbFormsTestComponent,
   },
   {
     path: '**',
-    component: CardComponent,
+    component: NbCardTestComponent,
   },
 ];

@@ -7,17 +7,17 @@
 @mixin window-mode($padding-top) {
   padding-top: $padding-top;
 
-  nga-sidebar.fixed {
-    left: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
+  nb-sidebar.fixed {
+    left: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
   }
 
   .layout .layout-container {
-    nga-sidebar.fixed.right {
-      right: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
+    nb-sidebar.fixed.right {
+      right: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
     }
 
-    nga-sidebar.fixed {
-      top: calc(#{nga-theme(header-height)} + #{$padding-top});
+    nb-sidebar.fixed {
+      top: calc(#{nb-theme(header-height)} + #{$padding-top});
     }
   }
 
@@ -26,38 +26,38 @@
   }
 }
 
-@mixin nga-layout-theme() {
+@mixin nb-layout-theme() {
 
-  @include nga-scrollbars(
-      nga-theme(scrollbar-fg),
-      nga-theme(scrollbar-bg),
-      nga-theme(scrollbar-width));
+  @include nb-scrollbars(
+      nb-theme(scrollbar-fg),
+      nb-theme(scrollbar-bg),
+      nb-theme(scrollbar-width));
 
   &.window-mode {
 
-    background: nga-theme(layout-window-mode-bg);
+    background: nb-theme(layout-window-mode-bg);
     display: block;
 
     .scrollable-container {
-      max-width: nga-theme(layout-window-mode-max-width);
+      max-width: nb-theme(layout-window-mode-max-width);
       margin: 0 auto;
     }
 
-    .layout nga-layout-header nav {
-      max-width: nga-theme(layout-window-mode-max-width);
+    .layout nb-layout-header nav {
+      max-width: nb-theme(layout-window-mode-max-width);
       margin: 0 auto;
     }
 
-    @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 20px) {
-      @include window-mode(nga-theme(layout-window-mode-padding-top) / 3);
+    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 20px) {
+      @include window-mode(nb-theme(layout-window-mode-padding-top) / 3);
     }
 
-    @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 150px) {
-      @include window-mode(nga-theme(layout-window-mode-padding-top) / 2);
+    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 150px) {
+      @include window-mode(nb-theme(layout-window-mode-padding-top) / 2);
     }
 
-    @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 300px) {
-      @include window-mode(nga-theme(layout-window-mode-padding-top));
+    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 300px) {
+      @include window-mode(nb-theme(layout-window-mode-padding-top));
     }
   }
 
@@ -71,79 +71,79 @@
 
   .layout {
     // TODO: probably we need to separate this form here and move it to the typography scss module
-    font-family: nga-theme(layout-font-family);
-    font-size: nga-theme(layout-font-size);
-    line-height: nga-theme(layout-line-height);
-    color: nga-theme(layout-fg);
-    background: nga-theme(layout-bg);
-    min-height: nga-theme(layout-min-height);
+    font-family: nb-theme(layout-font-family);
+    font-size: nb-theme(layout-font-size);
+    line-height: nb-theme(layout-line-height);
+    color: nb-theme(layout-fg);
+    background: nb-theme(layout-bg);
+    min-height: nb-theme(layout-min-height);
 
-    nga-layout-header {
-      font-family: nga-theme(header-font-family);
-      font-size: nga-theme(header-font-size);
-      line-height: nga-theme(header-line-height);
+    nb-layout-header {
+      font-family: nb-theme(header-font-family);
+      font-size: nb-theme(header-font-size);
+      line-height: nb-theme(header-line-height);
 
       nav {
-        box-shadow: nga-theme(header-shadow);
-        height: nga-theme(header-height);
-        padding: nga-theme(header-padding);
-        background: nga-theme(header-bg);
-        color: nga-theme(header-fg);
+        box-shadow: nb-theme(header-shadow);
+        height: nb-theme(header-height);
+        padding: nb-theme(header-padding);
+        background: nb-theme(header-bg);
+        color: nb-theme(header-fg);
 
         a {
-          color: nga-theme(header-fg);
+          color: nb-theme(header-fg);
 
           @include hover-focus-active {
-            color: nga-theme(header-fg);
+            color: nb-theme(header-fg);
           }
         }
       }
 
       &.fixed ~ .layout-container {
-        padding-top: nga-theme(header-height);
+        padding-top: nb-theme(header-height);
       }
 
-      &.fixed ~ .layout-container > nga-sidebar > .main-container {
-        height: calc(#{nga-theme(sidebar-height)} - #{nga-theme(header-height)});
+      &.fixed ~ .layout-container > nb-sidebar > .main-container {
+        height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
       }
     }
 
     .layout-container {
 
-      nga-sidebar.fixed {
-        top: #{nga-theme(header-height)};
+      nb-sidebar.fixed {
+        top: #{nb-theme(header-height)};
       }
 
       .content {
 
-        nga-layout-footer {
-          box-shadow: nga-theme(footer-shadow);
+        nb-layout-footer {
+          box-shadow: nb-theme(footer-shadow);
 
           nav {
-            height: nga-theme(footer-height);
-            padding: nga-theme(footer-padding);
-            background: nga-theme(footer-bg);
-            color: nga-theme(footer-fg);
-            border-top: 1px solid nga-theme(footer-separator);
+            height: nb-theme(footer-height);
+            padding: nb-theme(footer-padding);
+            background: nb-theme(footer-bg);
+            color: nb-theme(footer-fg);
+            border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nga-theme(header-fg);
+              color: nb-theme(header-fg);
 
               @include hover-focus-active {
-                color: nga-theme(header-fg);
+                color: nb-theme(header-fg);
               }
             }
           }
         }
 
         &.center {
-          width: nga-theme(layout-content-width);
-          flex: 0 1 nga-theme(layout-content-width) !important;
+          width: nb-theme(layout-content-width);
+          flex: 0 1 nb-theme(layout-content-width) !important;
         }
 
         .columns {
-          nga-layout-column {
-            padding: nga-theme(layout-padding);
+          nb-layout-column {
+            padding: nb-theme(layout-padding);
           }
         }
       }

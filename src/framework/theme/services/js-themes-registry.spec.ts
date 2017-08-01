@@ -6,12 +6,12 @@
 
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { BUILT_IN_THEMES, NgaJSTheme, NgaJSThemesRegistry } from './js-themes-registry.service';
-import { ngaBuiltInJSThemesToken, ngaJSThemesToken } from '../theme.options';
+import { BUILT_IN_THEMES, NbJSTheme, NbJSThemesRegistry } from './js-themes-registry.service';
+import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
 
 describe('js-themes-registry-service', () => {
-  let jsThemesRegistry: NgaJSThemesRegistry;
-  const customThemes: NgaJSTheme[] = [
+  let jsThemesRegistry: NbJSThemesRegistry;
+  const customThemes: NbJSTheme[] = [
     {
       name: 'default',
       base: 'default',
@@ -38,16 +38,16 @@ describe('js-themes-registry-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: ngaJSThemesToken, useValue: customThemes },
-        { provide: ngaBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
-        NgaJSThemesRegistry,
+        { provide: nbJSThemesToken, useValue: customThemes },
+        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        NbJSThemesRegistry,
       ],
     });
   });
 
 // Single async inject to save references; which are used in all tests below
   beforeEach(async(inject(
-    [NgaJSThemesRegistry],
+    [NbJSThemesRegistry],
     (_jsThemesRegistry) => {
       jsThemesRegistry = _jsThemesRegistry;
     },

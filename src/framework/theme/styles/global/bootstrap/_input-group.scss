@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-b-input-group-theme() {
+@mixin nb-b-input-group-theme() {
 
   .input-group-addon,
   .input-group-icon {
@@ -13,32 +13,32 @@
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    color: nga-theme(form-control-placeholder-color);
+    color: nb-theme(form-control-placeholder-color);
   }
 
   .input-group-addon {
     &.primary {
-      color: nga-theme(color-primary);
+      color: nb-theme(color-primary);
     }
 
     &.success {
-      color: nga-theme(color-success);
+      color: nb-theme(color-success);
     }
 
     &.warning {
-      color: nga-theme(color-warning);
+      color: nb-theme(color-warning);
     }
 
     &.info {
-      color: nga-theme(color-info);
+      color: nb-theme(color-info);
     }
 
     &.danger {
-      color: nga-theme(color-danger);
+      color: nb-theme(color-danger);
     }
 
     &.secondary {
-      color: nga-theme(color-secondary);
+      color: nb-theme(color-secondary);
     }
   }
 

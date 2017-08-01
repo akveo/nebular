@@ -6,14 +6,14 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
-import { NgaCheckboxComponent } from './checkbox.component';
+import { NbSharedModule } from '../shared/shared.module';
+import { NbCheckboxComponent } from './checkbox.component';
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
-  declarations: [NgaCheckboxComponent],
-  exports: [NgaCheckboxComponent],
+  declarations: [NbCheckboxComponent],
+  exports: [NbCheckboxComponent],
 })
-export class NgaCheckboxModule { }
+export class NbCheckboxModule { }

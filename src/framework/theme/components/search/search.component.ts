@@ -10,19 +10,19 @@ import {
   OnDestroy, OnInit,
 } from '@angular/core';
 
-import { NgaSuperSearchService } from './search.service';
-import { NgaThemeService } from '../../services/theme.service';
+import { NbSuperSearchService } from './search.service';
+import { NbThemeService } from '../../services/theme.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 
 /**
- * search-field-component is used under the hood by nga-search component
+ * search-field-component is used under the hood by nb-search component
  * can't be used itself
  */
 @Component({
-  selector: 'nga-search-field',
+  selector: 'nb-search-field',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [
     'styles/search.component.modal-zoomin.scss',
@@ -53,7 +53,7 @@ import 'rxjs/add/operator/delay';
     </div>
   `,
 })
-export class NgaSearchFieldComponent {
+export class NbSearchFieldComponent {
 
   static readonly TYPE_MODAL_ZOOMIN = 'modal-zoomin';
   static readonly TYPE_ROTATE_LAYOUT = 'rotate-layout';
@@ -76,42 +76,42 @@ export class NgaSearchFieldComponent {
 
   @HostBinding('class.modal-zoomin')
   get modalZoomin() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_MODAL_ZOOMIN;
+    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_ZOOMIN;
   }
 
   @HostBinding('class.rotate-layout')
   get rotateLayout() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_ROTATE_LAYOUT;
+    return this.searchType === NbSearchFieldComponent.TYPE_ROTATE_LAYOUT;
   }
 
   @HostBinding('class.modal-move')
   get modalMove() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_MODAL_MOVE;
+    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_MOVE;
   }
 
   @HostBinding('class.curtain')
   get curtain() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_CURTAIN;
+    return this.searchType === NbSearchFieldComponent.TYPE_CURTAIN;
   }
 
   @HostBinding('class.column-curtain')
   get columnCurtain() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_COLUMN_CURTAIN;
+    return this.searchType === NbSearchFieldComponent.TYPE_COLUMN_CURTAIN;
   }
 
   @HostBinding('class.modal-drop')
   get modalDrop() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_MODAL_DROP;
+    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_DROP;
   }
 
   @HostBinding('class.modal-half')
   get modalHalf() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_MODAL_HALF;
+    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_HALF;
   }
 
   @HostBinding('class.simple-search')
   get simpleSearch() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH;
+    return this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH;
   }
 
   @Input()
@@ -130,14 +130,14 @@ export class NgaSearchFieldComponent {
   }
 
   onBlur() {
-    if (this.searchType === NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH && this.showSearch) {
+    if (this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH && this.showSearch) {
       this.closeSearch();
     }
   }
 }
 
 @Component({
-  selector: 'nga-search',
+  selector: 'nb-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
@@ -149,7 +149,7 @@ export class NgaSearchFieldComponent {
     </div>
     `,
 })
-export class NgaSearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() tag: string;
   @Input() placeholder: string = 'Search...';
@@ -164,13 +164,13 @@ export class NgaSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private activateSearchSubscription: Subscription;
   private deactivateSearchSubscription: Subscription;
 
-  constructor(private searchService: NgaSuperSearchService,
-    private themeService: NgaThemeService,
+  constructor(private searchService: NbSuperSearchService,
+    private themeService: NbThemeService,
     private componentFactoryResolver: ComponentFactoryResolver) { }
 
   @HostBinding('class.simple-search')
   get simpleSearch() {
-    return this.searchType === NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH;
+    return this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH;
   }
 
   @Input()
@@ -208,7 +208,7 @@ export class NgaSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.activateSearchSubscription = this.searchService.onSearchActivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = true;
-        if (this.searchType !== NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
+        if (this.searchType !== NbSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
           this.themeService.appendLayoutClass(this.searchType);
           Observable.of(null).delay(0).subscribe(() => {
             this.themeService.appendLayoutClass('with-search');
@@ -227,7 +227,7 @@ export class NgaSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchFieldComponentRef.instance.inputElement.nativeElement.value = '';
         this.searchFieldComponentRef.instance.inputElement.nativeElement.blur();
         this.searchFieldComponentRef.changeDetectorRef.detectChanges();
-        if (this.searchType !== NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
+        if (this.searchType !== NbSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
           this.themeService.removeLayoutClass('with-search');
           Observable.of(null).delay(500).subscribe(() => {
             this.themeService.removeLayoutClass(this.searchType);
@@ -238,9 +238,9 @@ export class NgaSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const fieldComponentObservable = this.searchType === NgaSearchFieldComponent.TYPE_SIMPLE_SEARCH ?
-      this.createAttachedSearch(NgaSearchFieldComponent)
-      : this.themeService.appendToLayoutTop(NgaSearchFieldComponent);
+    const fieldComponentObservable = this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH ?
+      this.createAttachedSearch(NbSearchFieldComponent)
+      : this.themeService.appendToLayoutTop(NbSearchFieldComponent);
     this.createFieldSubscription = fieldComponentObservable.subscribe((componentRef: ComponentRef<any>) => {
       if (componentRef) {
         this.connectToSearchField(componentRef);

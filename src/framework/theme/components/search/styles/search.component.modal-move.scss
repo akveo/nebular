@@ -4,13 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-/deep/ nga-layout.modal-move {
+/deep/ nb-layout.modal-move {
   .layout {
     transition: transform 0.5s;
   }
 }
 
-/deep/ nga-layout.modal-move.with-search {
+/deep/ nb-layout.modal-move.with-search {
   .layout {
     transform: scale3d(0.8, 0.8, 1);
     pointer-events: none;

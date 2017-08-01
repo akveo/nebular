@@ -7,62 +7,62 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nga-layout-test',
+  selector: 'nb-layout-test',
   styles: [
     `
-      :host /deep/ nga-layout-column {
+      :host /deep/ nb-layout-column {
         background-color: #fb75ff;
       }
-      :host /deep/ nga-layout-column.right {
+      :host /deep/ nb-layout-column.right {
         background-color: #aeff34;
       }
-      :host /deep/ nga-layout-column.left {
+      :host /deep/ nb-layout-column.left {
         background-color: #76ecff;
       }
 
     `,
   ],
   template: `
-    <nga-layout id="layout-fluid">
-      <nga-layout-header fixed>
+    <nb-layout id="layout-fluid">
+      <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
-      </nga-layout-header>
+      </nb-layout-header>
 
-      <nga-layout-column left>
+      <nb-layout-column left>
         Left
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
         Center
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
         Right
-      </nga-layout-column>
+      </nb-layout-column>
 
-      <nga-layout-footer>
+      <nb-layout-footer>
         &copy; Akveo 2017
-      </nga-layout-footer>
-    </nga-layout>
+      </nb-layout-footer>
+    </nb-layout>
 
-    <nga-layout center id="layout-center">
-      <nga-layout-header fixed>
+    <nb-layout center id="layout-center">
+      <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
-      </nga-layout-header>
+      </nb-layout-header>
 
-      <nga-layout-column left>
+      <nb-layout-column left>
         Left
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
         Center
-      </nga-layout-column>
-      <nga-layout-column>
+      </nb-layout-column>
+      <nb-layout-column>
         Right
-      </nga-layout-column>
+      </nb-layout-column>
 
-      <nga-layout-footer fixed>
+      <nb-layout-footer fixed>
         &copy; Akveo 2017
-      </nga-layout-footer>
-    </nga-layout>
+      </nb-layout-footer>
+    </nb-layout>
 `,
 })
-export class NgaLayoutTestComponent {
+export class NbLayoutTestComponent {
 }

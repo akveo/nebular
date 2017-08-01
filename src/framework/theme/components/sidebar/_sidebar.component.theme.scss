@@ -4,34 +4,34 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-sidebar-theme() {
+@mixin nb-sidebar-theme() {
 
-  nga-sidebar {
+  nb-sidebar {
 
-    font-size: nga-theme(sidebar-font-size);
-    line-height: nga-theme(sidebar-line-height);
+    font-size: nb-theme(sidebar-font-size);
+    line-height: nb-theme(sidebar-line-height);
 
-    @include nga-scrollbars(
-        nga-theme(scrollbar-fg),
-        nga-theme(scrollbar-bg),
-        nga-theme(scrollbar-width));
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
 
 
     .main-container {
-      height: nga-theme(sidebar-height);
-      width: nga-theme(sidebar-width);
-      background: nga-theme(sidebar-bg);
-      box-shadow: nga-theme(sidebar-shadow);
+      height: nb-theme(sidebar-height);
+      width: nb-theme(sidebar-width);
+      background: nb-theme(sidebar-bg);
+      box-shadow: nb-theme(sidebar-shadow);
     }
 
     .scrollable {
-      padding: nga-theme(sidebar-padding);
+      padding: nb-theme(sidebar-padding);
       position: relative;
     }
 
-    width: nga-theme(sidebar-width);
-    background: nga-theme(sidebar-bg);
-    color: nga-theme(sidebar-fg);
+    width: nb-theme(sidebar-width);
+    background: nb-theme(sidebar-bg);
+    color: nb-theme(sidebar-fg);
 
     // TODO: width used to use transition on width
     &.collapsed {
@@ -47,7 +47,7 @@
         overflow: hidden;
       }
 
-      nga-sidebar-header,  nga-sidebar-footer {
+      nb-sidebar-header,  nb-sidebar-footer {
         width: 0;
         padding: 0;
         overflow: hidden;
@@ -55,16 +55,16 @@
     }
 
     &.compacted {
-      width: nga-theme(sidebar-width-compact);
+      width: nb-theme(sidebar-width-compact);
       .main-container {
-        width: nga-theme(sidebar-width-compact);
+        width: nb-theme(sidebar-width-compact);
       }
 
-      nga-menu {
-        width: nga-theme(sidebar-width-compact);
+      nb-menu {
+        width: nb-theme(sidebar-width-compact);
 
         .menu-items > .menu-item {
-          border-bottom: 1px solid nga-theme(menu-item-separator);
+          border-bottom: 1px solid nb-theme(menu-item-separator);
           transition: border-color 1s ease;
 
           span, .chevron {
@@ -96,12 +96,12 @@
       }
       // we need to pull the content
       &.left.fixed ~ .content {
-        margin-left: nga-theme(sidebar-width-compact);
+        margin-left: nb-theme(sidebar-width-compact);
       }
 
       &.fixed.right ~ .content {
         margin-left: 0;
-        margin-right: nga-theme(sidebar-width-compact);
+        margin-right: nb-theme(sidebar-width-compact);
       }
     }
 
@@ -114,24 +114,24 @@
     }
 
     &.expanded {
-      width: nga-theme(sidebar-width);
+      width: nb-theme(sidebar-width);
       > .scrollable {
-        width: nga-theme(sidebar-width);
+        width: nb-theme(sidebar-width);
       }
     }
 
-    nga-sidebar-header {
-      padding: nga-theme(sidebar-padding);
-      height: nga-theme(sidebar-header-height);
+    nb-sidebar-header {
+      padding: nb-theme(sidebar-padding);
+      height: nb-theme(sidebar-header-height);
     }
 
-    nga-sidebar-footer {
-      padding: nga-theme(sidebar-padding);
-      height: nga-theme(sidebar-footer-height);
+    nb-sidebar-footer {
+      padding: nb-theme(sidebar-padding);
+      height: nb-theme(sidebar-footer-height);
     }
 
-    nga-menu {
-      margin: 0 -#{nga-theme(sidebar-padding)};
+    nb-menu {
+      margin: 0 -#{nb-theme(sidebar-padding)};
 
       .menu-items > .menu-item {
         border-bottom: 1px solid transparent;

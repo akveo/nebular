@@ -6,25 +6,25 @@
 
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
 import {
-  NgaUserComponent,
+  NbUserComponent,
 } from './user.component';
 
-const NGA_USER_COMPONENTS = [
-  NgaUserComponent,
+const NB_USER_COMPONENTS = [
+  NbUserComponent,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_USER_COMPONENTS,
+    ...NB_USER_COMPONENTS,
   ],
   exports: [
-    ...NGA_USER_COMPONENTS,
+    ...NB_USER_COMPONENTS,
   ],
 })
-export class NgaUserModule { }
+export class NbUserModule { }

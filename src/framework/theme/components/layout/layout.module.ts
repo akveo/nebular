@@ -5,31 +5,31 @@
  */
 import { NgModule } from '@angular/core';
 
-import { NgaSharedModule } from '../shared/shared.module';
+import { NbSharedModule } from '../shared/shared.module';
 
 import {
-  NgaLayoutComponent,
-  NgaLayoutColumnComponent,
-  NgaLayoutFooterComponent,
-  NgaLayoutHeaderComponent,
+  NbLayoutComponent,
+  NbLayoutColumnComponent,
+  NbLayoutFooterComponent,
+  NbLayoutHeaderComponent,
 } from './layout.component';
 
-const NGA_LAYOUT_COMPONENTS = [
-  NgaLayoutComponent,
-  NgaLayoutColumnComponent,
-  NgaLayoutFooterComponent,
-  NgaLayoutHeaderComponent,
+const NB_LAYOUT_COMPONENTS = [
+  NbLayoutComponent,
+  NbLayoutColumnComponent,
+  NbLayoutFooterComponent,
+  NbLayoutHeaderComponent,
 ];
 
 @NgModule({
   imports: [
-    NgaSharedModule,
+    NbSharedModule,
   ],
   declarations: [
-    ...NGA_LAYOUT_COMPONENTS,
+    ...NB_LAYOUT_COMPONENTS,
   ],
   exports: [
-    ...NGA_LAYOUT_COMPONENTS,
+    ...NB_LAYOUT_COMPONENTS,
   ],
 })
-export class NgaLayoutModule { }
+export class NbLayoutModule { }

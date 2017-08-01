@@ -8,99 +8,99 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { NgaMenuService, NgaMenuItem } from '@akveo/nga-theme';
+import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
-  selector: 'nga-menu-item1',
+  selector: 'nb-menu-item1',
   template: `
     <h1>Menu Item #1</h1>
   `,
 })
-export class NgaMenuItem1Component {}
+export class NbMenuItem1Component {}
 
 @Component({
-  selector: 'nga-menu-item2',
+  selector: 'nb-menu-item2',
   template: `
     <h1>Menu Item #2</h1>
   `,
 })
-export class NgaMenuItem2Component {}
+export class NbMenuItem2Component {}
 
 @Component({
-  selector: 'nga-menu-item3',
+  selector: 'nb-menu-item3',
   template: `
     <router-outlet></router-outlet>
   `,
 })
-export class NgaMenuItem3Component {}
+export class NbMenuItem3Component {}
 
 @Component({
-  selector: 'nga-menu-item31',
+  selector: 'nb-menu-item31',
   template: `
     <h1>Menu Item #3.1</h1>
   `,
 })
-export class NgaMenuItem31Component {}
+export class NbMenuItem31Component {}
 
 @Component({
-  selector: 'nga-menu-item32',
+  selector: 'nb-menu-item32',
   template: `
     <h1>Menu Item #3.2</h1>
   `,
 })
-export class NgaMenuItem32Component {}
+export class NbMenuItem32Component {}
 
 @Component({
-  selector: 'nga-menu-item33',
+  selector: 'nb-menu-item33',
   template: `
     <router-outlet></router-outlet>
   `,
 })
-export class NgaMenuItem33Component {}
+export class NbMenuItem33Component {}
 
 @Component({
-  selector: 'nga-menu-item331',
+  selector: 'nb-menu-item331',
   template: `
     <h1>Menu Item #3.3.1</h1>
   `,
 })
-export class NgaMenuItem331Component {}
+export class NbMenuItem331Component {}
 
 @Component({
-  selector: 'nga-menu-item332',
+  selector: 'nb-menu-item332',
   template: `
     <h1>Menu Item #3.3.2</h1>
   `,
 })
-export class NgaMenuItem332Component {}
+export class NbMenuItem332Component {}
 
 @Component({
-  selector: 'nga-menu-item4',
+  selector: 'nb-menu-item4',
   template: `
     <h1>Menu Item #4</h1>
   `,
 })
-export class NgaMenuItem4Component {}
+export class NbMenuItem4Component {}
 
 @Component({
-  selector: 'nga-menu-test',
+  selector: 'nb-menu-test',
   template: `
-    <nga-layout>
-      <nga-layout-column>
-        <nga-card size="medium">
-          <nga-card-body>
-            <nga-menu tag="firstMenu" [items]="menuItems"></nga-menu>
+    <nb-layout>
+      <nb-layout-column>
+        <nb-card size="medium">
+          <nb-card-body>
+            <nb-menu tag="firstMenu" [items]="menuItems"></nb-menu>
             <router-outlet></router-outlet>
             <button class="btn btn-primary" id="addBtn" (click)="addMenuItem()">Add</button>
             <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
-          </nga-card-body>
-        </nga-card>
-      </nga-layout-column>
-    </nga-layout>
+          </nb-card-body>
+        </nb-card>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class NgaMenuTestComponent implements OnInit, OnDestroy {
-  menuItems = List<NgaMenuItem>([
+export class NbMenuTestComponent implements OnInit, OnDestroy {
+  menuItems = List<NbMenuItem>([
     {
       title: 'Menu Items',
       group: true,
@@ -120,29 +120,29 @@ export class NgaMenuTestComponent implements OnInit, OnDestroy {
   private itemHoverSubscription: Subscription;
   private submenuToggleSubscription: Subscription;
 
-  constructor(private menuService: NgaMenuService) {}
+  constructor(private menuService: NbMenuService) {}
 
   ngOnInit() {
     this.itemClickSubscription = this.menuService
       .onItemClick()
-      .subscribe((data: { tag: string; item: NgaMenuItem }) => console.info(data));
+      .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.itemSelectSubscription = this.menuService
       .onItemSelect()
-      .subscribe((data: { tag: string; item: NgaMenuItem }) => console.info(data));
+      .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     // this.itemHoverSubscription = this.menuService.onItemHover()
-    //   .subscribe((data: { tag: string, item: NgaMenuItem }) => console.info(data));
+    //   .subscribe((data: { tag: string, item: NbMenuItem }) => console.info(data));
 
     this.submenuToggleSubscription = this.menuService
       .onSubmenuToggle()
-      .subscribe((data: { tag: string; item: NgaMenuItem }) => console.info(data));
+      .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService.addItems(
-      List<NgaMenuItem>([
+      List<NbMenuItem>([
         {
           title: 'Menu #3',
-          children: List<NgaMenuItem>([
+          children: List<NbMenuItem>([
             {
               title: 'Menu #3.1',
               link: '/menu/3/1',
@@ -153,7 +153,7 @@ export class NgaMenuTestComponent implements OnInit, OnDestroy {
             },
             {
               title: 'Menu #3.3',
-              children: List<NgaMenuItem>([
+              children: List<NbMenuItem>([
                 {
                   title: 'Menu #3.3.1',
                   link: '/menu/3/3/1',
@@ -164,7 +164,7 @@ export class NgaMenuTestComponent implements OnInit, OnDestroy {
                   home: true,
                 },
                 {
-                  title: '@akveo/nga-theme',
+                  title: '@nebular/theme',
                   target: '_blank',
                   url: 'https://github.com/akveo/ng2-admin',
                 },
@@ -185,7 +185,7 @@ export class NgaMenuTestComponent implements OnInit, OnDestroy {
   }
 
   addMenuItem() {
-    this.menuService.addItems(List<NgaMenuItem>([{ title: 'New Menu Item' }]), 'firstMenu');
+    this.menuService.addItems(List<NbMenuItem>([{ title: 'New Menu Item' }]), 'firstMenu');
   }
 
   navigateHome() {

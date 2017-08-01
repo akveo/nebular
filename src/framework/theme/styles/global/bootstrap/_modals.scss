@@ -6,54 +6,54 @@
 
 @import '../../core/mixins';
 
-@mixin nga-b-modals-theme() {
+@mixin nb-b-modals-theme() {
 
   .modal-content {
-    font-size: nga-theme(modal-font-size);
-    line-height: nga-theme(modal-line-height);
-    font-weight: nga-theme(modal-font-weight);
+    font-size: nb-theme(modal-font-size);
+    line-height: nb-theme(modal-line-height);
+    font-weight: nb-theme(modal-font-weight);
 
-    color: nga-theme(modal-fg);
-    background: nga-theme(modal-bg);
-    border-color: nga-theme(modal-border);
-    border-radius: nga-theme(modal-border-radius);
+    color: nb-theme(modal-fg);
+    background: nb-theme(modal-bg);
+    border-color: nb-theme(modal-border);
+    border-radius: nb-theme(modal-border-radius);
   }
 
   .modal-header {
-    padding: nga-theme(modal-padding);
-    border-bottom: 1px solid nga-theme(modal-separator);
-    border-top-left-radius: nga-theme(modal-border-radius);
-    border-top-right-radius: nga-theme(modal-border-radius);
-    color: nga-theme(modal-fg-heading);
+    padding: nb-theme(modal-padding);
+    border-bottom: 1px solid nb-theme(modal-separator);
+    border-top-left-radius: nb-theme(modal-border-radius);
+    border-top-right-radius: nb-theme(modal-border-radius);
+    color: nb-theme(modal-fg-heading);
 
-    font-family: nga-theme(modal-header-font-family);
-    font-size: nga-theme(modal-header-font-size);
-    font-weight: nga-theme(modal-header-font-weight);
+    font-family: nb-theme(modal-header-font-family);
+    font-size: nb-theme(modal-header-font-size);
+    font-weight: nb-theme(modal-header-font-weight);
 
-    @include nga-headings();
+    @include nb-headings();
 
     .close {
       text-shadow: none;
-      color: nga-theme(modal-fg-heading);
+      color: nb-theme(modal-fg-heading);
       &:hover {
-        color: nga-theme(modal-fg-heading);
+        color: nb-theme(modal-fg-heading);
       }
     }
   }
 
   .modal-body {
-    padding: nga-theme(modal-padding);
+    padding: nb-theme(modal-padding);
 
-    @include nga-scrollbars(
-        nga-theme(scrollbar-fg),
-        nga-theme(scrollbar-bg),
-        nga-theme(scrollbar-width));
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
   }
 
   .modal-footer {
-    padding: nga-theme(modal-padding);
-    border-top: 1px solid nga-theme(modal-separator);
-    border-bottom-left-radius: nga-theme(modal-border-radius);
-    border-bottom-right-radius: nga-theme(modal-border-radius);
+    padding: nb-theme(modal-padding);
+    border-top: 1px solid nb-theme(modal-separator);
+    border-bottom-left-radius: nb-theme(modal-border-radius);
+    border-bottom-right-radius: nb-theme(modal-border-radius);
   }
 }

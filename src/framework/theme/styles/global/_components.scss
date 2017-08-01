@@ -16,16 +16,16 @@
 @import '../../components/checkbox/checkbox.component.theme';
 
 
-@mixin nga-theme-components() {
+@mixin nb-theme-components() {
 
-  @include nga-layout-theme();
-  @include nga-sidebar-theme();
-  @include nga-card-theme();
-  @include nga-tabset-theme();
-  @include nga-route-tabset-theme();
-  @include nga-menu-theme();
-  @include nga-user-theme();
-  @include nga-actions-theme();
-  @include nga-search-theme();
-  @include nga-checkbox-theme();
+  @include nb-layout-theme();
+  @include nb-sidebar-theme();
+  @include nb-card-theme();
+  @include nb-tabset-theme();
+  @include nb-route-tabset-theme();
+  @include nb-menu-theme();
+  @include nb-user-theme();
+  @include nb-actions-theme();
+  @include nb-search-theme();
+  @include nb-checkbox-theme();
 }

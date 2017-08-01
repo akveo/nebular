@@ -4,58 +4,58 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nga-menu-theme() {
-  nga-menu {
-    font-family: nga-theme(menu-font-family);
-    font-size: nga-theme(menu-font-size);
+@mixin nb-menu-theme() {
+  nb-menu {
+    font-family: nb-theme(menu-font-family);
+    font-size: nb-theme(menu-font-size);
 
     .menu-group {
-      font-weight: nga-theme(menu-group-font-weight);
-      font-size: nga-theme(menu-group-font-size);
-      color: nga-theme(menu-group-fg);
+      font-weight: nb-theme(menu-group-font-weight);
+      font-size: nb-theme(menu-group-font-size);
+      color: nb-theme(menu-group-fg);
     }
 
     .menu-group,
     .menu-item > a {
-      padding: nga-theme(menu-item-padding);
+      padding: nb-theme(menu-item-padding);
     }
 
     .menu-item {
       a:hover {
-        background-color: nga-theme(menu-active-bg);
-        color: nga-theme(menu-active-fg);
+        background-color: nb-theme(menu-active-bg);
+        color: nb-theme(menu-active-fg);
       }
 
       a.active {
-        background-color: nga-theme(menu-active-bg);
-        color: nga-theme(menu-active-fg);
+        background-color: nb-theme(menu-active-bg);
+        color: nb-theme(menu-active-fg);
       }
     }
 
     .menu-items.expanded {
-      background-color: nga-theme(menu-submenu-bg);
+      background-color: nb-theme(menu-submenu-bg);
     }
   }
 
-  nga-menu.inverse {
+  nb-menu.inverse {
     .menu-item {
       a {
-        color: nga-theme(menu-bg);
+        color: nb-theme(menu-bg);
       }
 
       a:hover {
-        background-color: nga-theme(menu-active-fg);
-        color: nga-theme(menu-active-bg);
+        background-color: nb-theme(menu-active-fg);
+        color: nb-theme(menu-active-bg);
       }
 
       a.active {
-        background-color: nga-theme(menu-active-fg);
-        color: nga-theme(menu-active-bg);
+        background-color: nb-theme(menu-active-fg);
+        color: nb-theme(menu-active-bg);
       }
     }
 
     .menu-group {
-      color: nga-theme(menu-bg);
+      color: nb-theme(menu-bg);
     }
   }
 }

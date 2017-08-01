@@ -15,12 +15,12 @@
 
 @import 'typography/typography';
 
-@mixin nga-theme-overrides() {
-  @include nga-bootstrap-theme();
-  @include nga-charts-d3-theme();
-  @include nga-components-tree-theme();
-  @include nga-maps-leaflet-theme();
-  @include nga-tables-smart-table-theme();
-  @include nga-components-toaster-theme();
-  @include nga-typography();
+@mixin nb-theme-overrides() {
+  @include nb-bootstrap-theme();
+  @include nb-charts-d3-theme();
+  @include nb-components-tree-theme();
+  @include nb-maps-leaflet-theme();
+  @include nb-tables-smart-table-theme();
+  @include nb-components-toaster-theme();
+  @include nb-typography();
 }

@@ -7,36 +7,36 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 /**
- * Component intended to be used within  the `<nga-card>` component.
+ * Component intended to be used within  the `<nb-card>` component.
  * It adds styles for a preset header section.
  */
 @Component({
-  selector: 'nga-card-header',
+  selector: 'nb-card-header',
   template: `<ng-content></ng-content>`,
 })
-export class NgaCardHeaderComponent {
+export class NbCardHeaderComponent {
 }
 
 /**
- * Component intended to be used within  the `<nga-card>` component.
+ * Component intended to be used within  the `<nb-card>` component.
  * It adds styles for a preset body section.
  */
 @Component({
-  selector: 'nga-card-body',
+  selector: 'nb-card-body',
   template: `<ng-content></ng-content>`,
 })
-export class NgaCardBodyComponent {
+export class NbCardBodyComponent {
 }
 
 /**
- * Component intended to be used within  the `<nga-card>` component.
+ * Component intended to be used within  the `<nb-card>` component.
  * It adds styles for a preset footer section.
  */
 @Component({
-  selector: 'nga-card-footer',
+  selector: 'nb-card-footer',
   template: `<ng-content></ng-content>`,
 })
-export class NgaCardFooterComponent {
+export class NbCardFooterComponent {
 }
 
 /**
@@ -44,21 +44,21 @@ export class NgaCardFooterComponent {
  *
  * While this component can be used alone, it also provides a number
  * of child components for common card sections, including:
- * - nga-card-header
- * - nga-card-body
- * - nga-card-footer
+ * - nb-card-header
+ * - nb-card-body
+ * - nb-card-footer
  */
 @Component({
-  selector: 'nga-card',
+  selector: 'nb-card',
   styleUrls: ['./card.component.scss'],
   template: `
     <ng-content></ng-content>
-    <ng-content select="nga-card-header"></ng-content>
-    <ng-content select="nga-card-body"></ng-content>
-    <ng-content select="nga-card-footer"></ng-content>
+    <ng-content select="nb-card-header"></ng-content>
+    <ng-content select="nb-card-body"></ng-content>
+    <ng-content select="nb-card-footer"></ng-content>
   `,
 })
-export class NgaCardComponent {
+export class NbCardComponent {
 
   static readonly SIZE_XXSMALL = 'xxsmall';
   static readonly SIZE_XSMALL = 'xsmall';
@@ -81,72 +81,72 @@ export class NgaCardComponent {
 
   @HostBinding('class.xxsmall-card')
   private get xxsmall() {
-    return this.size === NgaCardComponent.SIZE_XXSMALL;
+    return this.size === NbCardComponent.SIZE_XXSMALL;
   }
 
   @HostBinding('class.xsmall-card')
   private get xsmall() {
-    return this.size === NgaCardComponent.SIZE_XSMALL;
+    return this.size === NbCardComponent.SIZE_XSMALL;
   }
 
   @HostBinding('class.small-card')
   private get small() {
-    return this.size === NgaCardComponent.SIZE_SMALL;
+    return this.size === NbCardComponent.SIZE_SMALL;
   }
 
   @HostBinding('class.medium-card')
   private get medium() {
-    return this.size === NgaCardComponent.SIZE_MEDIUM;
+    return this.size === NbCardComponent.SIZE_MEDIUM;
   }
 
   @HostBinding('class.large-card')
   private get large() {
-    return this.size === NgaCardComponent.SIZE_LARGE;
+    return this.size === NbCardComponent.SIZE_LARGE;
   }
 
   @HostBinding('class.xlarge-card')
   private get xlarge() {
-    return this.size === NgaCardComponent.SIZE_XLARGE;
+    return this.size === NbCardComponent.SIZE_XLARGE;
   }
 
   @HostBinding('class.xxlarge-card')
   private get xxlarge() {
-    return this.size === NgaCardComponent.SIZE_XXLARGE;
+    return this.size === NbCardComponent.SIZE_XXLARGE;
   }
 
   @HostBinding('class.active-card')
   private get active() {
-    return this.status === NgaCardComponent.STATUS_ACTIVE;
+    return this.status === NbCardComponent.STATUS_ACTIVE;
   }
 
   @HostBinding('class.disabled-card')
   private get disabled() {
-    return this.status === NgaCardComponent.STATUS_DISABLED;
+    return this.status === NbCardComponent.STATUS_DISABLED;
   }
 
   @HostBinding('class.primary-card')
   private get primary() {
-    return this.status === NgaCardComponent.STATUS_PRIMARY;
+    return this.status === NbCardComponent.STATUS_PRIMARY;
   }
 
   @HostBinding('class.info-card')
   private get info() {
-    return this.status === NgaCardComponent.STATUS_INFO;
+    return this.status === NbCardComponent.STATUS_INFO;
   }
 
   @HostBinding('class.success-card')
   private get success() {
-    return this.status === NgaCardComponent.STATUS_SUCCESS;
+    return this.status === NbCardComponent.STATUS_SUCCESS;
   }
 
   @HostBinding('class.warning-card')
   private get warning() {
-    return this.status === NgaCardComponent.STATUS_WARNING;
+    return this.status === NbCardComponent.STATUS_WARNING;
   }
 
   @HostBinding('class.danger-card')
   private get danger() {
-    return this.status === NgaCardComponent.STATUS_DANGER;
+    return this.status === NbCardComponent.STATUS_DANGER;
   }
 
   @Input('size')

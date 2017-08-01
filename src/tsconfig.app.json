@@ -6,7 +6,7 @@
     "baseUrl": "",
     "types": [],
     "paths": {
-      "@akveo/nga-*": [
+      "@nebular/*": [
         "./framework/*"
       ]
     }

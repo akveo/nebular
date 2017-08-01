@@ -168,9 +168,9 @@ const ROLLUP_GLOBALS = {
   'immutable': 'immutable',
   '@ng-bootstrap/ng-bootstrap': 'ng-bootstrap.ng-bootstrap',
 
-  // @nga dependencies
-  '@akveo/nga-theme': 'nga.theme',
-  '@akveo/nga-auth': 'nga.auth',
+  // @nebular dependencies
+  '@nebular/theme': 'nb.theme',
+  '@nebular/auth': 'nb.auth',
 };
 const ROLLUP_COMMON_CONFIG = {
   sourceMap: true,
@@ -243,7 +243,7 @@ function inlineResources() {
 function bundleUmdTheme() {
   const config = {
     src: `${LIB_DIR}/theme/**/*.js`,
-    moduleName: 'nga.theme',
+    moduleName: 'nb.theme',
     entry: `${LIB_DIR}/theme/index.js`,
     format: 'umd',
     output: 'theme.umd.js',
@@ -256,7 +256,7 @@ function bundleUmdTheme() {
 function bundleUmdAuth() {
   const config = {
     src: `${LIB_DIR}/auth/**/*.js`,
-    moduleName: 'nga.auth',
+    moduleName: 'nb.auth',
     entry: `${LIB_DIR}/auth/index.js`,
     format: 'umd',
     output: 'auth.umd.js',

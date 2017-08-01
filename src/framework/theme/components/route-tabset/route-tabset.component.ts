@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { convertToBoolProperty } from '../helpers';
 
 @Component({
-  selector: 'nga-route-tabset',
+  selector: 'nb-route-tabset',
   styleUrls: ['./route-tabset.component.scss'],
   template: `
     <ul>
@@ -25,7 +25,7 @@ import { convertToBoolProperty } from '../helpers';
     <router-outlet></router-outlet>
   `,
 })
-export class NgaRouteTabsetComponent {
+export class NbRouteTabsetComponent {
 
   @HostBinding('class.full-width') fullWidthValue: boolean = false;
 
