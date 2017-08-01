@@ -20,13 +20,12 @@ export interface NgaJSTheme {
 }
 
 export interface NgaJSThemeVariable {
-  [key: string]: string;
+  [key: string]: string | string[] | NgaJSThemeVariable;
 }
 
 export const BUILT_IN_THEMES: NgaJSTheme[] = [
   {
     name: 'default',
-    base: null,
     variables: {
       fontMain: 'Open Sans',
       fontSecondary: 'Exo',
@@ -87,38 +86,37 @@ export class NgaJSThemesRegistry {
   constructor(@Inject(ngaBuiltInJSThemesToken) private builtInThemes: NgaJSTheme[],
               @Inject(ngaJSThemesToken) private newThemes: NgaJSTheme[] = []) {
 
-    const themes = this.combineNewOld(newThemes, builtInThemes);
+    const themes = this.combineByNames(newThemes, builtInThemes);
 
     themes.forEach((theme: any) => {
-      this.register(theme.variables, theme.name, theme.base);
+      this.register(theme, theme.name, theme.base);
     });
   }
 
   register(config: any, themeName: string, baseTheme: string) {
     const base = this.has(baseTheme) ? this.get(baseTheme) : {};
-    this.themes[themeName] = Object.assign({}, base, config);
+    this.themes[themeName] = this.mergeDeep({}, base, config);
   }
 
   has(themeName: string): boolean {
     return !!this.themes[themeName];
   }
 
-  // TODO: probable return a full theme to give access to `name` and `base` parameters
-  get(themeName: string): NgaJSThemeVariable {
+  get(themeName: string): NgaJSTheme {
     if (!this.themes[themeName]) {
       throw Error(`NgaThemeConfig: no theme '${themeName}' found registered.`);
     }
-    return Object.assign({}, this.themes[themeName]);
+    return JSON.parse(JSON.stringify(this.themes[themeName]));
   }
 
-  private combineNewOld(newThemes: NgaJSTheme[], oldThemes: NgaJSTheme[]): NgaJSTheme[] {
+  private combineByNames(newThemes: NgaJSTheme[], oldThemes: NgaJSTheme[]): NgaJSTheme[] {
     if (newThemes) {
       const mergedThemes: NgaJSTheme[] = [];
       newThemes.forEach((theme: NgaJSTheme) => {
         const sameOld: NgaJSTheme = oldThemes.find((tm: NgaJSTheme) => tm.name === theme.name) || <NgaJSTheme>{};
 
-        theme.variables = Object.assign({}, sameOld.variables, theme.variables);
-        mergedThemes.push(theme);
+        let mergedTheme = this.mergeDeep({}, sameOld, theme);
+        mergedThemes.push(mergedTheme);
       });
 
       oldThemes.forEach((theme: NgaJSTheme) => {
@@ -129,5 +127,28 @@ export class NgaJSThemesRegistry {
       return mergedThemes;
     }
     return oldThemes;
+  }
+
+
+  private isObject(item) {
+    return item && typeof item === 'object' && !Array.isArray(item);
+  }
+
+  //TODO: move to helpers
+  private mergeDeep(target, ...sources) {
+    if (!sources.length) return target;
+    const source = sources.shift();
+
+    if (this.isObject(target) && this.isObject(source)) {
+      for (const key in source) {
+        if (this.isObject(source[key])) {
+          if (!target[key]) Object.assign(target, { [key]: {} });
+          this.mergeDeep(target[key], source[key]);
+        } else {
+          Object.assign(target, { [key]: source[key] });
+        }
+      }
+    }
+    return this.mergeDeep(target, ...sources);
   }
 }

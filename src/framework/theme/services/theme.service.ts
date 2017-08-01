@@ -19,7 +19,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/startWith';
 
 import { ngaThemeOptionsToken } from '../theme.options';
-import { NgaJSThemesRegistry, NgaJSThemeVariable } from './js-themes-registry.service';
+import { NgaJSTheme, NgaJSThemesRegistry } from './js-themes-registry.service';
 import { NgaMediaBreakpointsService, NgaMediaBreakpoint } from './breakpoints.service';
 
 @Injectable()
@@ -59,12 +59,12 @@ export class NgaThemeService {
   }
 
   /**
-   * Returns a list of theme variables (color/paddings/etc) on a theme change.
-   * Once subscribed - returns a list of the current theme.
+   * Returns a theme object with variables (color/paddings/etc) on a theme change.
+   * Once subscribed - returns current theme.
    *
-   * @returns {Observable<NgaJSThemeVariable>}
+   * @returns {Observable<NgaJSTheme>}
    */
-  getJsTheme(): Observable<NgaJSThemeVariable> {
+  getJsTheme(): Observable<NgaJSTheme> {
     return this.onThemeChange().map((theme: any) => {
       return this.jsThemesRegistry.get(theme.name);
     });

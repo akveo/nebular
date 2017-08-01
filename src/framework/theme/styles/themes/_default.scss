@@ -49,7 +49,7 @@ $theme: (
   color-primary: #8a7fff,
   color-success: #41d974,
   color-info: #4ca6ff,
-  color-warning: #ff874c,
+  color-warning: #ffa100,
   color-danger: #ff4c6a,
 
   // TODO: move to constants
@@ -308,7 +308,7 @@ $theme: (
   btn-hero-shadow: none,
   btn-hero-text-shadow: none,
   btn-hero-bevel-size: 0 0 0 0,
-  btn-hero-glow-size: 0 2px 16px 0,
+  btn-hero-glow-size: 0 0 0 0,
 
   form-control-text-primary-color: color-white,
   form-control-text-secondary-color: color-fg,
