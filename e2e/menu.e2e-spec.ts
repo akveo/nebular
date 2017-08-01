@@ -150,62 +150,62 @@ describe('nb-menu', () => {
   //     });
   // });
 
-  it('should be selected - Menu #3.3.1', () => {
-    element.all(menu3).first().click()
-      .then(() => {
-        element.all(menu33).first().click()
-          .then(() => {
-            element.all(menu331).first().getText()
-              .then(val => {
-                expect(val).toEqual('Menu #3.3.1');
-              });
+  // it('should be selected - Menu #3.3.1', () => {
+  //   element.all(menu3).first().click()
+  //     .then(() => {
+  //       element.all(menu33).first().click()
+  //         .then(() => {
+  //           element.all(menu331).first().getText()
+  //             .then(val => {
+  //               expect(val).toEqual('Menu #3.3.1');
+  //             });
 
-            element.all(menu331).first().click()
-              .then(() => {
-                expect(hasClass(element.all(menu331).first(), 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/1');
-              });
-          });
-      });
-  });
+  //           element.all(menu331).first().click()
+  //             .then(() => {
+  //               expect(hasClass(element.all(menu331).first(), 'active')).toBeTruthy();
+  //               expect(browser.getCurrentUrl()).toContain('#/menu/3/3/1');
+  //             });
+  //         });
+  //     });
+  // });
 
-  it('should be selected - Menu #3.3.2', () => {
-    element.all(menu3).first().click()
-      .then(() => {
-        element.all(menu33).first().click()
-          .then(() => {
-            element.all(menu332).first().getText()
-              .then(val => {
-                expect(val).toEqual('Menu #3.3.2');
-              });
+  // it('should be selected - Menu #3.3.2', () => {
+  //   element.all(menu3).first().click()
+  //     .then(() => {
+  //       element.all(menu33).first().click()
+  //         .then(() => {
+  //           element.all(menu332).first().getText()
+  //             .then(val => {
+  //               expect(val).toEqual('Menu #3.3.2');
+  //             });
 
-            element.all(menu332).first().click()
-              .then(() => {
-                expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
-              });
-          });
-      });
-  });
+  //           element.all(menu332).first().click()
+  //             .then(() => {
+  //               expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
+  //               expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+  //             });
+  //         });
+  //     });
+  // });
 
-  it('should be selected - Menu #3.3.3', () => {
-    element.all(menu3).first().click()
-      .then(() => {
-        element.all(menu33).first().click()
-          .then(() => {
-            element.all(menu333).first().getText()
-              .then(val => {
-                expect(val).toEqual('@nebular/theme');
-              });
+  // it('should be selected - Menu #3.3.3', () => {
+  //   element.all(menu3).first().click()
+  //     .then(() => {
+  //       element.all(menu33).first().click()
+  //         .then(() => {
+  //           element.all(menu333).first().getText()
+  //             .then(val => {
+  //               expect(val).toEqual('@nebular/theme');
+  //             });
 
-            element.all(menu333).first().click()
-              .then(() => {
-                expect(hasClass(element.all(menu333).first(), 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/1');
-              });
-          });
-      });
-  });
+  //           element.all(menu333).first().click()
+  //             .then(() => {
+  //               expect(hasClass(element.all(menu333).first(), 'active')).toBeTruthy();
+  //               expect(browser.getCurrentUrl()).toContain('#/menu/1');
+  //             });
+  //         });
+  //     });
+  // });
 
   it('should be selected - Menu #4', () => {
     element.all(menu4).first().getText()
