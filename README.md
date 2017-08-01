@@ -1,3 +1,1 @@
-# @nebular
-
-// TODO: get rid of styles & scripts from angular-cli.json
+Finally. Full featured front-end framework based on Angular.
