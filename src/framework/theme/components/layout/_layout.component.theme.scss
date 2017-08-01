@@ -4,6 +4,28 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@mixin window-mode($padding-top) {
+  padding-top: $padding-top;
+
+  nga-sidebar.fixed {
+    left: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
+  }
+
+  .layout .layout-container {
+    nga-sidebar.fixed.right {
+      right: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
+    }
+
+    nga-sidebar.fixed {
+      top: calc(#{nga-theme(header-height)} + #{$padding-top});
+    }
+  }
+
+  .scrollable-container {
+    height: calc(100vh - #{$padding-top});
+  }
+}
+
 @mixin nga-layout-theme() {
 
   @include nga-scrollbars(
@@ -12,6 +34,7 @@
       nga-theme(scrollbar-width));
 
   &.window-mode {
+
     background: nga-theme(layout-window-mode-bg);
     display: block;
 
@@ -26,25 +49,15 @@
     }
 
     @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 20px) {
-      padding-top: nga-theme(layout-window-mode-padding-top);
+      @include window-mode(nga-theme(layout-window-mode-padding-top) / 3);
+    }
 
-      nga-sidebar.fixed {
-        left: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
-      }
+    @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 150px) {
+      @include window-mode(nga-theme(layout-window-mode-padding-top) / 2);
+    }
 
-      .layout .layout-container {
-        nga-sidebar.fixed.right {
-          right: calc((100vw - #{nga-theme(layout-window-mode-max-width)}) / 2);
-        }
-
-        nga-sidebar.fixed {
-          top: calc(#{nga-theme(header-height)} + #{nga-theme(layout-window-mode-padding-top)});
-        }
-      }
-
-      .scrollable-container {
-        height: calc(100vh - #{nga-theme(layout-window-mode-padding-top)});
-      }
+    @media screen and (min-width: nga-theme(layout-window-mode-max-width) + 300px) {
+      @include window-mode(nga-theme(layout-window-mode-padding-top));
     }
   }
 
