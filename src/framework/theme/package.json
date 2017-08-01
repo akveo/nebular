@@ -21,7 +21,7 @@
     "ng2-admin",
     "ngx-admin",
     "theme",
-    "nga"
+    "nebular"
   ],
   "peerDependencies": {
     "@angular/common": "^4.0.0",

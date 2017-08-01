@@ -20,10 +20,11 @@
     "typescript",
     "ng2-admin",
     "ngx-admin",
+    "theme",
     "auth",
     "login",
     "register",
-    "nga"
+    "nebular"
   ],
   "peerDependencies": {
     "@angular/common": "^4.0.0",
