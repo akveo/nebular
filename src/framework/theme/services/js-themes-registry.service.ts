@@ -115,7 +115,7 @@ export class NgaJSThemesRegistry {
       newThemes.forEach((theme: NgaJSTheme) => {
         const sameOld: NgaJSTheme = oldThemes.find((tm: NgaJSTheme) => tm.name === theme.name) || <NgaJSTheme>{};
 
-        let mergedTheme = this.mergeDeep({}, sameOld, theme);
+        const mergedTheme = this.mergeDeep({}, sameOld, theme);
         mergedThemes.push(mergedTheme);
       });
 
@@ -134,15 +134,19 @@ export class NgaJSThemesRegistry {
     return item && typeof item === 'object' && !Array.isArray(item);
   }
 
-  //TODO: move to helpers
+  // TODO: move to helpers
   private mergeDeep(target, ...sources) {
-    if (!sources.length) return target;
+    if (!sources.length) {
+      return target;
+    }
     const source = sources.shift();
 
     if (this.isObject(target) && this.isObject(source)) {
       for (const key in source) {
         if (this.isObject(source[key])) {
-          if (!target[key]) Object.assign(target, { [key]: {} });
+          if (!target[key]) {
+            Object.assign(target, { [key]: {} });
+          }
           this.mergeDeep(target[key], source[key]);
         } else {
           Object.assign(target, { [key]: source[key] });
