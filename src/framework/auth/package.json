@@ -9,12 +9,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ng2-admin.git"
+    "url": "git+https://github.com/akveo/nebular.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ng2-admin/issues"
+    "url": "https://github.com/akveo/nebular/issues"
   },
-  "homepage": "https://github.com/akveo/ng2-admin#readme",
+  "homepage": "https://github.com/akveo/nebular#readme",
   "keywords": [
     "angular",
     "typescript",

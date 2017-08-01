@@ -4,10 +4,10 @@
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "bugs": {
-    "url": "https://github.com/akveo/ng2-admin/issues"
+    "url": "https://github.com/akveo/nebular/issues"
   },
-  "homepage": "https://github.com/akveo/ng2-admin#readme",
-  "repository": "git+https://github.com/akveo/ng2-admin.git",
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "repository": "git+https://github.com/akveo/nebular.git",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +19,7 @@
     "build:prod:aot": "npm run build:prod -- --aot",
     "build:ci": "npm run build:prod && npm run build:prod:aot",
     "build:wp:ci": "npm run build:prod -- --app playground-wp && npm run build:prod:aot -- --app playground-wp",
-    "build:ghpages": "npm run build:prod:aot -- --base-href \"https://akveo.github.io/ng2-admin/\" && ngh",
+    "build:ghpages": "npm run build:prod:aot -- --base-href \"https://akveo.github.io/nebular/\" && ngh",
     "build:package": "npm-run-all -s clean:tmp:lib gulp build:ts build:inline-resources build:bundle clean:tmp",
     "build:ts": "tsc -p tsconfig.publish.json && ngc -p tsconfig.publish.json",
     "build:inline-resources": "gulp inline-resources",
@@ -49,7 +49,8 @@
     "typescript",
     "ng2-admin",
     "ngx-admin",
-    "framework"
+    "framework",
+    "nebular"
   ],
   "dependencies": {
     "@angular/animations": "4.2.4",
