@@ -25,32 +25,40 @@ import { NbTokenService } from '../../services/token.service';
         <div *ngFor="let message of messages">{{ message }}</div>
       </div>
 
-      <label for="input-name" class="sr-only">Full name</label>
-      <input name="fullName" [(ngModel)]="user.fullName" type="text" id="input-name"
-        class="form-control form-control-lg first" placeholder="Full name"
-             [required]="getConfigValue('email', 'validation.fullName.required')"
-             [minlength]="getConfigValue('email', 'validation.fullName.minLength')"
-             [maxlength]="getConfigValue('email', 'validation.fullName.maxLength')"
-             autofocus>
+      <div class="form-group row">
+        <label for="input-name" class="sr-only">Full name</label>
+        <input name="fullName" [(ngModel)]="user.fullName" type="text" id="input-name"
+          class="form-control form-control-lg first" placeholder="Full name"
+               [required]="getConfigValue('email', 'validation.fullName.required')"
+               [minlength]="getConfigValue('email', 'validation.fullName.minLength')"
+               [maxlength]="getConfigValue('email', 'validation.fullName.maxLength')"
+               autofocus>
+      </div>
 
-      <label for="input-email" class="sr-only">Email address</label>
-      <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
-        class="form-control form-control-lg middle" placeholder="Email address"
-             [required]="getConfigValue('email', 'validation.email.required')">
+      <div class="form-group row">
+        <label for="input-email" class="sr-only">Email address</label>
+        <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
+          class="form-control form-control-lg middle" placeholder="Email address"
+               [required]="getConfigValue('email', 'validation.email.required')">
+      </div>
 
-      <label for="input-password" class="sr-only">Password</label>
-      <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-        class="form-control form-control-lg middle" placeholder="Password"
-             [required]="getConfigValue('email', 'validation.password.required')"
-             [minlength]="getConfigValue('email', 'validation.password.minLength')"
-             [maxlength]="getConfigValue('email', 'validation.password.maxLength')">
+      <div class="form-group row">
+        <label for="input-password" class="sr-only">Password</label>
+        <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
+          class="form-control form-control-lg middle" placeholder="Password"
+               [required]="getConfigValue('email', 'validation.password.required')"
+               [minlength]="getConfigValue('email', 'validation.password.minLength')"
+               [maxlength]="getConfigValue('email', 'validation.password.maxLength')">
+      </div>
 
+      <div class="form-group row">
       <label for="input-re-password" class="sr-only">Repeat password</label>
       <input name="confirmPassword" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
         class="form-control form-control-lg last" placeholder="Confirm Password"
              [required]="getConfigValue('email', 'validation.password.required')"
              [minlength]="getConfigValue('email', 'validation.password.minLength')"
              [maxlength]="getConfigValue('email', 'validation.password.maxLength')">
+      </div>
 
       <div class="checkbox" *ngIf="getConfigValue('email', 'register.terms')">
         <label>

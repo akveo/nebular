@@ -15,7 +15,7 @@ import { NbTokenService } from '../../services/token.service';
   styleUrls: ['./login.component.scss'],
   template: `
     <h2>Please sign in</h2>
-    <form (ngSubmit)="login('email')" #loginForm="ngForm">
+    <form (ngSubmit)="login('email')" #loginForm="ngForm" autocomplete="nope">
 
       <div *ngIf="errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
         <div><strong>Oh snap!</strong></div>
@@ -26,21 +26,24 @@ import { NbTokenService } from '../../services/token.service';
         <div *ngFor="let message of messages">{{ message }}</div>
       </div>
 
-      <label for="input-email" class="sr-only">Email address</label>
-      <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
-        class="form-control form-control-lg first" placeholder="Email address"
-             [required]="getConfigValue('email', 'validation.email.required')"
-             autofocus>
+      <div class="form-group row">
+        <label for="input-email" class="sr-only">Email address</label>
+        <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
+               class="form-control form-control-lg first" placeholder="Email address"
+               [required]="getConfigValue('email', 'validation.email.required')">
+      </div>
 
-      <label for="input-password" class="sr-only">Password</label>
-      <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-        class="form-control form-control-lg last" placeholder="Password"
-             [required]="getConfigValue('email', 'validation.password.required')"
-             [minlength]="getConfigValue('email', 'validation.password.minLength')"
-             [maxlength]="getConfigValue('email', 'validation.password.maxLength')">
+      <div class="form-group row">
+        <label for="input-password" class="sr-only">Password</label>
+        <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
+          class="form-control form-control-lg last" placeholder="Password"
+               [required]="getConfigValue('email', 'validation.password.required')"
+               [minlength]="getConfigValue('email', 'validation.password.minLength')"
+               [maxlength]="getConfigValue('email', 'validation.password.maxLength')">
+      </div>
 
-      <div class="checkbox" *ngIf="getConfigValue('email', 'login.rememberMe')">
-        <label>
+      <div class="checkbox">
+        <label *ngIf="getConfigValue('email', 'login.rememberMe')">
           <input name="rememberMe" [(ngModel)]="user.rememberMe" type="checkbox" value="remember-me"> Remember me
         </label>
         <a routerLink="../request-password">Forgot Password</a>

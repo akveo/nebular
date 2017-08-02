@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Response, ResponseOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { NbAuthResult } from '../services/auth.service';
@@ -50,6 +49,6 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
         ['Something went wrong.']);
     }
 
-    return new NbAuthResult(true, '/', this.createSuccessResponse(data), ['Successfully logged in.']);
+    return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
   }
 }
