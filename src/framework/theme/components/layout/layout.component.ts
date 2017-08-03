@@ -239,10 +239,11 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
 
     // TODO: is this the best way of doing it? as we don't have access to body from theme styles
     // TODO: add e2e test
+    const body = document.getElementsByTagName('body')[0];
     if (this.withScrollValue) {
-      this.renderer.setStyle(document.getElementsByTagName('body')[0], 'overflow', 'hidden');
+      this.renderer.setStyle(body, 'overflow', 'hidden');
     } else {
-      this.renderer.setStyle(document.getElementsByTagName('body')[0], 'overflow', 'initial');
+      this.renderer.setStyle(body, 'overflow', 'initial');
     }
   }
 
@@ -261,12 +262,14 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
               protected componentFactoryResolver: ComponentFactoryResolver,
               protected elementRef: ElementRef,
               protected renderer: Renderer2) {
+
     this.themeSubscription = this.themeService.onThemeChange().subscribe((theme) => {
 
+      const body = document.getElementsByTagName('body')[0];
       if (theme.previous) {
-        this.renderer.removeClass(this.elementRef.nativeElement, `nb-theme-${theme.previous}`);
+        this.renderer.removeClass(body, `nb-theme-${theme.previous}`);
       }
-      this.renderer.addClass(this.elementRef.nativeElement, `nb-theme-${theme.name}`);
+      this.renderer.addClass(body, `nb-theme-${theme.name}`);
     });
 
     this.appendClassSubscription = this.themeService.onAppendLayoutClass().subscribe((className) => {

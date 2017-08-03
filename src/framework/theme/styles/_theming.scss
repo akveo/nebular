@@ -78,16 +78,11 @@ $nb-enabled-themes: () !global;
   }
 }
 
-// TODO: another mixing for the almost same thing
 @mixin nb-install-root-component() {
+  @warn '`nb-install-root-component` is depricated, replace with `nb-install-component`, as `body` is root element now';
 
-  $themes-to-install: get-enabled-themes();
-
-  @each $theme-name, $theme in $themes-to-install {
-    :host .nb-theme-#{$theme-name} {
-      $theme: $theme !global;
-      @content;
-    }
+  @include nb-install-component() {
+    @content;
   }
 }
 

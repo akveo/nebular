@@ -28,12 +28,14 @@
 
 @mixin nb-layout-theme() {
 
-  @include nb-scrollbars(
-      nb-theme(scrollbar-fg),
-      nb-theme(scrollbar-bg),
-      nb-theme(scrollbar-width));
+  nb-layout {
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
+  }
 
-  &.window-mode {
+  nb-layout.window-mode {
 
     background: nb-theme(layout-window-mode-bg);
     display: block;
@@ -61,7 +63,7 @@
     }
   }
 
-  &.with-scroll {
+  nb-layout.with-scroll {
     .scrollable-container {
       overflow: auto;
       height: 100vh;
@@ -69,7 +71,8 @@
     }
   }
 
-  .layout {
+
+  nb-layout .layout {
     // TODO: probably we need to separate this form here and move it to the typography scss module
     font-family: nb-theme(layout-font-family);
     font-size: nb-theme(layout-font-size);
