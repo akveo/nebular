@@ -238,10 +238,11 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
     this.withScrollValue = convertToBoolProperty(val);
 
     // TODO: is this the best way of doing it? as we don't have access to body from theme styles
+    // TODO: add e2e test
     if (this.withScrollValue) {
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+      this.renderer.setStyle(document.getElementsByTagName('body')[0], 'overflow', 'hidden');
     } else {
-      document.getElementsByTagName('body')[0].style.overflow = 'initial';
+      this.renderer.setStyle(document.getElementsByTagName('body')[0], 'overflow', 'initial');
     }
   }
 
