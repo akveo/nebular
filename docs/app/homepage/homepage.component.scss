@@ -1,0 +1,15 @@
+@import '../styles/themes';
+@import '../styles/helpers';
+
+@include nb-install-root-component {
+
+  nb-layout-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section {
+    flex: 1;
+  }
+}
+

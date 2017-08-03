@@ -6,9 +6,10 @@ const rename = require('gulp-rename');
 const resolve = require('rollup-plugin-node-resolve');
 const semver = require('semver');
 const bump = require('gulp-bump');
-
+var typedoc = require('gulp-typedoc');
+var exec = require('child_process').exec;
 const VERSION = require('./package.json').version;
-
+var export_sass = require('./scripts/export-themes');
 const inline_recources = require('./scripts/inline-resources');
 
 const BUILD_DIR = './.ng_build';
@@ -275,4 +276,36 @@ function bundle(config) {
     })))
     .pipe(rename(config.output))
     .pipe(gulp.dest(config.dest));
+}
+
+gulp.task('generate-doc-json', generateDocJson);
+
+function generateDocJson() {
+  return gulp
+    .src(['src/framework/**/*.ts', '!src/framework/theme/**/node_modules{,/**}'])
+    .pipe(typedoc({
+      module: 'commonjs',
+      target: 'ES6',
+      // TODO: ignoreCompilerErrors, huh?
+      ignoreCompilerErrors: true,
+      includeDeclarations: true,
+      emitDecoratorMetadata: true,
+      experimentalDecorators: true,
+      excludeExternals: true,
+      exclude: 'node_modules/**/*',
+      json: 'docs/docs.json',
+      version: true,
+      noLib: true
+    }));
+}
+
+gulp.task('docs', ['generate-doc-json'], parseSassThemes);
+
+function parseSassThemes() {
+  exec("prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json");
+  return gulp
+    .src('docs/themes.scss')
+    .pipe(sass({
+      functions: export_sass('docs/'),
+    }));
 }

@@ -1,0 +1,11 @@
+// nb theming framework
+@import '../../../src/framework/theme/styles/theming';
+// nb our of the box themes
+@import '../../../src/framework/theme/styles/themes';
+
+// which themes you what to enable (empty to enable all - not recommended)
+$nb-enabled-themes: (default);
+
+$nb-themes: nb-register-theme((
+
+), default, default);

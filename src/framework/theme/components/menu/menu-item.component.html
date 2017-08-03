@@ -4,6 +4,7 @@
 </span>
 <a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
         [routerLink]="menuItem.link"
+        [fragment]="menuItem.fragment"
         [attr.target]="menuItem.target"
         [attr.title]="menuItem.title"
         [class.active]="menuItem.selected"

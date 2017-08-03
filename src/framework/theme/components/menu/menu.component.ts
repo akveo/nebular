@@ -103,6 +103,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
 
     this.getSelectedItemSubscription = this.menuInternalService
       .onGetSelectedItem()
+      .filter(data => !data.tag || data.tag === this.tag)
       .subscribe((data: { tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }) => {
         let selectedItem: NbMenuItem;
         this.items.forEach(i => {
@@ -115,6 +116,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
         });
 
         this.clearStack();
+
         data.listener.next({ tag: this.tag, item: selectedItem });
       });
 
@@ -124,6 +126,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
       }
     });
     this.items = this.items.push(...this.menuInternalService.getItems().toJS());
+
     this.menuInternalService.prepareItems(this.items);
   }
 

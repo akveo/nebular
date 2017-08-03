@@ -15,7 +15,7 @@
 $nb-themes: () !global;
 $nb-themes-non-processed: () !global;
 $nb-enabled-themes: () !global;
-
+$nb-themes-export: () !global;
 
 @function nb-theme($key) {
   @return map-get($theme, $key);
@@ -35,13 +35,22 @@ $nb-enabled-themes: () !global;
 
 @function nb-register-theme($theme, $name, $default: null) {
 
+  $theme-data: ();
+
 
   @if ($default != null) {
 
     $theme: map-merge(map-get($nb-themes-non-processed, $default), $theme);
     $nb-themes-non-processed: map-set($nb-themes-non-processed, $name, $theme) !global;
+
+    $theme-data: map-set($theme-data, data, $theme);
+    $nb-themes-export: map-set($nb-themes-export, $name, map-set($theme-data, parent, $default)) !global;
+
   } @else {
     $nb-themes-non-processed: map-set($nb-themes-non-processed, $name, $theme) !global;
+
+    $theme-data: map-set($theme-data, data, $theme);
+    $nb-themes-export: map-set($nb-themes-export, $name, map-set($theme-data, parent, null)) !global;
   }
 
   $theme-parsed: ();

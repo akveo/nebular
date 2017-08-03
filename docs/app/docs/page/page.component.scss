@@ -1,0 +1,175 @@
+@import '../../styles/themes';
+
+@include nb-install-component {
+  /deep/ nb-card {
+
+    //a {
+    //  color: nb-theme(color-fg-active);//TODO: is it need??
+		//
+    //  @include hover-focus-active() {
+    //    color: nb-theme(color-primary);
+    //  }
+    //}
+
+    .block-title {
+      font-size: nb-theme(block-title-font-size);
+      font-weight: bold;
+      margin-bottom: 2rem;
+
+    }
+
+    .block-subtitle {
+      font-size: nb-theme(block-subtitle-font-size);
+      font-weight: bold;
+    }
+
+    .block-container {
+      margin-bottom: nb-theme(block-margin);
+    }
+
+    .class-name {
+      color: nb-theme(color-primary);
+      font-size: nb-theme(class-name-font-size);
+      font-weight: bold;
+    }
+
+    .table {
+      td {
+        padding: 0.75rem 0.75rem 0.75rem 0;
+      }
+      thead {
+        font-weight: bold;
+        td {
+          border-top: none;
+        }
+      }
+    }
+
+    ngd-methods-block {
+      .method-signature {
+        margin-bottom: 1rem;
+      }
+    }
+
+    pre {
+      background: nb-theme(code-snippets-bg);
+      padding: 0.75rem 1rem;
+      code {
+        color: nb-theme(color-fg);
+      }
+    }
+
+    code {
+      color: nb-theme(inline-code-color);
+      background: nb-theme(code-snippets-bg);
+    }
+
+    ngd-code-highlighter {
+      display: none;
+      .code-title {
+        background: nb-theme(code-snippets-bg);
+        padding: 0.75rem 1rem;
+        border-radius: 3px;
+        border-bottom: 1px solid rgb(224, 225, 235);
+        position: relative;
+        i {
+          position: absolute;
+          right: 1rem;
+          color: rgb(224, 225, 235);
+        }
+      }
+    }
+
+    .fragment {
+      opacity: 0;
+      font-size: 2rem;
+      vertical-align: middle;
+      position: absolute;
+      bottom: -0.6rem;
+      left: -2rem;
+    }
+
+    .class-name , .block-title {
+      position: relative;
+      &:hover > .fragment {
+        opacity: 1;
+      }
+    }
+
+    .table-fragment {
+      transition: all ease-in .2s;
+    }
+
+    .theme-header {
+      height: 50px;
+      padding-top: 1rem;
+      background: nb-theme(color-bg);
+    }
+
+    .theme-filter {
+      display: inline-block;
+    }
+
+    .filter-warning {
+      color: nb-theme(color-warning);
+    }
+
+    .highlighted-row {
+      transition: all ease-in .2s;
+      background: #fffbdd;//TODO: move some variables to theme
+    }
+
+    .color-swatch {
+      display: inline-block;
+      border: 1px solid black;
+      width: 15px;
+      height: 15px;
+      margin-left: 7px;
+      border-radius: 2px;
+    }
+
+    ngd-themes-header {
+      position: fixed;
+      top: 80px;
+      height: 50px;
+      width: 100%;
+      z-index: 1;
+      // transition: all 0.2s ease;
+      &.transparent {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .inheritance-icon {
+      color: nb-theme(color-primary);
+    }
+
+    .theme-parents-cell {
+      &:hover {
+        .theme-prop-parents {
+          opacity: 1;
+          transition: all ease .2s;
+        }
+      }
+
+      .theme-prop-parents {
+        display: inline-block;
+        opacity: 0;
+        transition: all ease .2s;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      ngd-examples-block {
+        & > div > pre {
+          display: none;
+        }
+        ngd-code-highlighter {
+          display: block;
+        }
+      }
+    }
+  }
+}
+

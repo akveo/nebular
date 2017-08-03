@@ -36,6 +36,7 @@ export abstract class NbMenuItem {
   parent?: NbMenuItem;
   selected?: boolean;
   data?: any;
+  fragment?: string;
 }
 
 export interface NbMenuOptions {
@@ -229,8 +230,11 @@ export class NbMenuInternalService {
     }
 
     const exact: boolean = parent.pathMath === 'full';
+    const location: string = this.location.path();
 
-    if ((exact && this.location.path() === parent.link) || (!exact && this.location.path().includes(parent.link))) {
+    if ((exact && location === parent.link) || (!exact && location.includes(parent.link))
+      || (exact && parent.fragment && location.substr(location.indexOf('#') + 1).includes(parent.fragment))) {
+
       parent.selected = true;
 
       if (parent.parent) {

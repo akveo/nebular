@@ -1,0 +1,57 @@
+@import '../styles/themes';
+
+@include nb-install-root-component {
+
+  nb-layout-header {
+    border-bottom: 1px solid #eee;
+  }
+
+  /deep/ .layout-container {
+    max-width: nb-theme(content-width);
+    width: 100%;
+    margin-left:auto;
+    margin-right: auto;
+    .content {
+      min-width: 0;
+      nb-layout-column {
+        min-width: 0;
+      }
+    }
+
+    nb-sidebar {
+      z-index: auto; // Really need it to make sidebar content visible in ie
+      nb-menu {
+        ul li > ul > li > a {
+          padding: nb-theme(menu-item-padding);
+        }
+        & > ul > li {
+          padding: 0.5rem 0;
+          & > a:first-child {
+            font-weight: bold;
+            cursor: default;
+          }
+        }
+        a {
+          &.active {
+            font-weight: bold;
+          }
+        }
+        i {
+          display: none;
+        }
+        .menu-collapsed {
+          padding-left: 0;
+          visibility: visible;
+          opacity: 1;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    nb-sidebar {
+      display: none;
+    }
+  }
+}
