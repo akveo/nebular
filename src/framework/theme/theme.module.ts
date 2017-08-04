@@ -6,7 +6,6 @@
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   nbBuiltInJSThemesToken,
@@ -28,10 +27,8 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    NgbModule.forRoot(),
   ],
   exports: [
-    NgbModule,
   ],
 })
 export class NbThemeModule {
@@ -52,12 +49,6 @@ export class NbThemeModule {
 
     return <ModuleWithProviders> {
       ngModule: NbThemeModule,
-      imports: [
-        NgbModule.forRoot(),
-      ],
-      exports: [
-        NgbModule,
-      ],
       providers: [
         { provide: nbThemeOptionsToken, useValue: nbThemeOptions || {} },
         { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
