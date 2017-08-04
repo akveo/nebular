@@ -82,11 +82,25 @@ $nb-themes-export: () !global;
   @each $theme-name, $theme in $themes-to-install {
     :host-context(.nb-theme-#{$theme-name}) {
       $theme: $theme !global;
+      $theme-name: $theme-name!global;
       @content;
     }
   }
 }
 
+@mixin nb-for-theme($name) {
+  @if ($theme-name == $name) {
+    @content;
+  }
+}
+
+@mixin nb-except-theme($name) {
+  @if ($theme-name != $name) {
+    @content;
+  }
+}
+
+// TODO: another mixing for the almost same thing
 @mixin nb-install-root-component() {
   @warn '`nb-install-root-component` is depricated, replace with `nb-install-component`, as `body` is root element now';
 

@@ -39,7 +39,7 @@ $theme: (
   color-fg-text: #444444,
   color-fg-highlight: #42db7d,
 
-  separator: #dddddd,
+  separator: #ebeef2,
 
   color-gray: rgba(81, 113, 165, 0.15),
   color-neutral: transparent,
@@ -71,8 +71,8 @@ $theme: (
   link-color-hover: #14ffbe,
   link-color-visited: link-color-active,
 
-  scrollbar-fg: rgba(0, 0, 0, 0.6),
-  scrollbar-bg: rgba(255, 255, 255, 0.7),
+  scrollbar-fg: rgba(0, 0, 0, 0.1),
+  scrollbar-bg: rgba(0, 0, 0, 0.05),
   scrollbar-width: 5px,
   scrollbar-thumb-radius: 2.5px,
 

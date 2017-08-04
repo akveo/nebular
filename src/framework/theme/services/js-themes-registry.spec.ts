@@ -64,23 +64,23 @@ describe('js-themes-registry-service', () => {
   });
 
   it('has built in themes with inherited font', () => {
-    expect(jsThemesRegistry.get('default').fontMain).toEqual('Open Sans');
-    expect(jsThemesRegistry.get('cosmic').fontMain).toEqual('Open Sans');
-    expect(jsThemesRegistry.get('light').fontMain).toEqual('Open Sans');
+    expect(jsThemesRegistry.get('default').variables.fontMain).toEqual('Open Sans');
+    expect(jsThemesRegistry.get('cosmic').variables.fontMain).toEqual('Open Sans');
+    expect(jsThemesRegistry.get('light').variables.fontMain).toEqual('Open Sans');
   });
 
   it('has also new themes', () => {
     expect(jsThemesRegistry.get('super-new-theme')).not.toBeUndefined();
     expect(jsThemesRegistry.has('super-new-theme')).toBeTruthy();
-    expect(jsThemesRegistry.get('super-new-theme').someNewValueForCosmic).toEqual('blue');
+    expect(jsThemesRegistry.get('super-new-theme').variables.someNewValueForCosmic).toEqual('blue');
   });
 
   it('has changes from custom settings', () => {
-    expect(jsThemesRegistry.get('default').colorBg).toEqual('yellow');
+    expect(jsThemesRegistry.get('default').variables.colorBg).toEqual('yellow');
   });
 
   it('has new values from custom settings', () => {
-    expect(jsThemesRegistry.get('cosmic').someNewValueForCosmic).toEqual('red');
-    expect(jsThemesRegistry.get('default').someNewValue).toEqual('black');
+    expect(jsThemesRegistry.get('cosmic').variables.someNewValueForCosmic).toEqual('red');
+    expect(jsThemesRegistry.get('default').variables.someNewValue).toEqual('black');
   });
 });
