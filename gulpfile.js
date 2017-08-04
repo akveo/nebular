@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const path = require('path');
 const sass = require('gulp-sass');
 const replace = require('gulp-replace');
 const rollup = require('gulp-rollup');
@@ -219,7 +220,15 @@ function replaceScssWithCss() {
 function compileSass() {
   gulp.src(`${BUILD_DIR}/**/*.scss`)
     .pipe(sass({
-      outputStyle: 'compressed'
+      outputStyle: 'compressed',
+      importer: function (url, prev, done) {
+        if (url[0] === '~') {
+          url = path.resolve('node_modules', url.substr(1));
+        }
+        done({
+          file: url
+        });
+      }
     }))
     .pipe(gulp.dest(BUILD_DIR));
 }

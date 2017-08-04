@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'typography/fonts';
-
 @import 'bootstrap/bootstrap.theme';
 @import 'charts/d3.theme';
 @import 'components/tree.theme';
@@ -16,11 +14,12 @@
 @import 'typography/typography';
 
 @mixin nb-theme-overrides() {
+  @include nb-typography();
+
   @include nb-bootstrap-theme();
   @include nb-charts-d3-theme();
   @include nb-components-tree-theme();
   @include nb-maps-leaflet-theme();
   @include nb-tables-smart-table-theme();
   @include nb-components-toaster-theme();
-  @include nb-typography();
 }

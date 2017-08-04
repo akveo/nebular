@@ -5,7 +5,9 @@
  */
 
 $theme: (
-
+  auth-block-max-width: 600px,
+  auth-block-padding: 2rem,
+  auth-block-margin-top: 60px,
 );
 
 $nb-themes: nb-register-theme($theme, light, light);
