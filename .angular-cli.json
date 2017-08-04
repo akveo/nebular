@@ -20,6 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/typeface-exo/index.css",
+        "../node_modules/open-sans-fontface/open-sans.css",
         "styles.scss"
       ],
       "scripts": [
@@ -46,6 +49,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/typeface-exo/index.css",
+        "../node_modules/open-sans-fontface/open-sans.css",
         "styles.scss"
       ],
       "scripts": [
@@ -72,9 +78,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/ionicons/scss/ionicons.scss",
-        "../node_modules/prismjs/themes/prism.css"
+        "../node_modules/prismjs/themes/prism.css",
+        "styles.scss"
       ],
       "scripts": [
         "../node_modules/prismjs/prism.js"
