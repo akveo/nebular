@@ -34,10 +34,10 @@ $theme: (
 
   color-bg: #ffffff,
   color-bg-active: #e9edf2,
-  color-fg: #b2bac2,
-  color-fg-heading: #222222,
-  color-fg-text: #444444,
-  color-fg-highlight: #42db7d,
+  color-fg: #a4abb3,
+  color-fg-heading: #282828,
+  color-fg-text: #484848,
+  color-fg-highlight: #40dc7e,
 
   separator: #ebeef2,
 
@@ -47,7 +47,7 @@ $theme: (
   color-disabled: rgba(255, 255, 255, 0.4),
 
   color-primary: #8a7fff,
-  color-success: #41d974,
+  color-success: #40dc7e,
   color-info: #4ca6ff,
   color-warning: #ffa100,
   color-danger: #ff4c6a,
@@ -112,10 +112,6 @@ $theme: (
   card-header-warning-bg: color-warning,
   card-header-danger-bg: color-danger,
 
-  layout-font-family: font-main,
-  layout-font-size: font-size,
-  layout-line-height: line-height,
-
   header-font-family: font-secondary,
   header-font-size: font-size,
   header-line-height: line-height,
@@ -132,6 +128,9 @@ $theme: (
   footer-separator: separator,
   footer-shadow: shadow,
 
+  layout-font-family: font-main,
+  layout-font-size: font-size,
+  layout-line-height: line-height,
   layout-fg: color-fg,
   layout-bg: #ebeff5,
   layout-min-height: 100vh,
@@ -183,6 +182,7 @@ $theme: (
   tabs-fg-text: color-fg-text,
   tabs-fg-heading: color-fg-heading,
   tabs-bg: transparent,
+  tabs-selected: color-success,
 
   route-tabs-font-family: font-secondary,
   route-tabs-font-size: font-size-xlg,
@@ -194,6 +194,7 @@ $theme: (
   route-tabs-fg: color-fg,
   route-tabs-fg-heading: color-fg-heading,
   route-tabs-bg: transparent,
+  route-tabs-selected: color-success,
 
   user-font-size: font-size,
   user-line-height: line-height,

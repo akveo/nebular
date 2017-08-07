@@ -29,9 +29,17 @@
           padding: nb-theme(route-tabs-padding);
           color: nb-theme(route-tabs-fg);
 
+          &:hover {
+            color: nb-theme(color-fg-heading);
+          }
+
           &::before {
-            @include btn-hero-success-gradient();
-            box-shadow: 0 0 16px -2px btn-hero-success-middle-color();
+            background: nb-theme(route-tabs-selected);
+
+            @include nb-for-theme(cosmic) {
+              @include btn-hero-success-gradient();
+              box-shadow: 0 0 16px -2px btn-hero-success-middle-color();
+            }
           }
         }
 

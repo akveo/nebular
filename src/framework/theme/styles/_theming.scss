@@ -115,7 +115,7 @@ $nb-themes-export: () !global;
   @each $theme-name, $theme in $themes-to-install {
     .nb-theme-#{$theme-name} {
       $theme: $theme !global;
-
+      $theme-name: $theme-name!global;
       @content;
     }
   }

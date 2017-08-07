@@ -39,7 +39,7 @@ export const BUILT_IN_THEMES: NbJSTheme[] = [
       colorGray: 'rgba(81, 113, 165, 0.15)',
 
       colorPrimary: '#8a7fff',
-      colorSuccess: '#41d974',
+      colorSuccess: '#40dc7e',
       colorInfo: '#4ca6ff',
       colorWarning: '#ffa100',
       colorDanger: '#ff4c6a',
