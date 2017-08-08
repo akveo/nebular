@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable, Optional, Inject } from '@angular/core';
-// TODO: fix the import
-import { Observable } from 'rxjs/Rx';
 
-import 'rxjs/add/operator/do';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NbTokenService } from './token.service';
-import { nbAuthProvidersToken } from '../auth.options';
+import { NbAuthSimpleToken, NbTokenService } from './token.service';
+import { NB_AUTH_PROVIDERS_TOKEN } from '../auth.options';
 
 export class NbAuthResult {
 
@@ -25,7 +25,7 @@ export class NbAuthResult {
     protected redirect?: any,
     errors?: any,
     messages?: any,
-    token?: any) {
+    token?: NbAuthSimpleToken) {
 
     this.errors = this.errors.concat([errors]);
     if (errors instanceof Array) {
@@ -46,6 +46,10 @@ export class NbAuthResult {
 
   getTokenValue(): any {
     return this.token;
+  }
+
+  replaceToken(token: NbAuthSimpleToken): any {
+    this.token = token
   }
 
   getRedirect(): any {
@@ -73,19 +77,20 @@ export class NbAuthResult {
 export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
-              @Optional() @Inject(nbAuthProvidersToken) protected providers = {}) {
+              @Optional() @Inject(NB_AUTH_PROVIDERS_TOKEN) protected providers = {}) {
   }
 
   /**
    * Retrieves current authenticated token stored
    * @returns {Observable<any>}
    */
-  getToken(): Observable<any> {
+  getToken(): Observable<NbAuthSimpleToken> {
     return this.tokenService.get();
   }
 
   /**
    * Returns true if auth token is presented in the token storage
+   * // TODO: check exp date for JWT token
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<any> {
@@ -96,15 +101,16 @@ export class NbAuthService {
    * Returns tokens stream
    * @returns {Observable<any>}
    */
-  onTokenChange(): Observable<any> {
+  onTokenChange(): Observable<NbAuthSimpleToken> {
     return this.tokenService.tokenChange();
   }
 
   /**
    * Returns authentication status stream
+   *  // TODO: check exp date for JWT token
    * @returns {Observable<any>}
    */
-  onAuthenticationChange(): Observable<any> {
+  onAuthenticationChange(): Observable<boolean> {
     return this.onTokenChange().map(token => !!token);
   }
 
@@ -121,10 +127,14 @@ export class NbAuthService {
    */
   authenticate(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).authenticate(data)
-      .do((result: NbAuthResult) => {
+      .switchMap((result: NbAuthResult) => {
         if (result.isSuccess() && result.getTokenValue()) {
-          this.tokenService.set(result.getTokenValue()).subscribe(() => {
-          });
+          return this.tokenService.set(result.getTokenValue())
+            .switchMap(_ => this.tokenService.get())
+            .map(token => {
+              result.replaceToken(token);
+              return result;
+            });
         }
       });
   }
@@ -142,10 +152,14 @@ export class NbAuthService {
    */
   register(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).register(data)
-      .do((result: NbAuthResult) => {
+      .switchMap((result: NbAuthResult) => {
         if (result.isSuccess() && result.getTokenValue()) {
-          this.tokenService.set(result.getTokenValue()).subscribe(() => {
-          });
+          return this.tokenService.set(result.getTokenValue())
+            .switchMap(_ => this.tokenService.get())
+            .map(token => {
+              result.replaceToken(token);
+              return result;
+            });
         }
       });
   }

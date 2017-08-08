@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 
 import { NbUser } from '../../models/user';
 import { NbAuthService, NbAuthResult } from '../../services/auth.service';
-import { NbTokenService } from '../../services/token.service';
 
 @Component({
   selector: 'nb-login',

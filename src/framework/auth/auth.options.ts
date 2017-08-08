@@ -8,5 +8,6 @@ export interface NbAuthProviders {
   [key: string]: any;
 }
 
-export const nbAuthOptionsToken = new InjectionToken<NbAuthOptions>('NB_AUTH_OPTIONS');
-export const nbAuthProvidersToken = new InjectionToken<NbAuthProviders>('NB_AUTH_OPTIONS');
+export const NB_AUTH_OPTIONS_TOKEN = new InjectionToken<NbAuthOptions>('Nebular Auth Options');
+export const NB_AUTH_PROVIDERS_TOKEN = new InjectionToken<NbAuthProviders>('Nebular Auth Providers');
+export const NB_AUTH_TOKEN_WRAPPER_TOKEN = new InjectionToken<NbAuthProviders>('Nebular Auth Token');

@@ -11,18 +11,27 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { List } from 'immutable';
 
-import { NbThemeModule } from '@nebular/theme';
-import { NbCardModule } from '@nebular/theme';
-import { NbLayoutModule } from '@nebular/theme';
-import { NbMenuModule } from '@nebular/theme';
-import { NbRouteTabsetModule } from '@nebular/theme';
-import { NbSidebarModule } from '@nebular/theme';
-import { NbTabsetModule } from '@nebular/theme';
-import { NbUserModule } from '@nebular/theme';
-import { NbAuthModule, NbDummyAuthProvider, NbEmailPassAuthProvider } from '@nebular/auth';
-import { NbActionsModule } from '@nebular/theme';
-import { NbSearchModule } from '@nebular/theme';
-import { NbMenuItem } from '@nebular/theme';
+import {
+  NbActionsModule,
+  NbCardModule,
+  NbLayoutModule,
+  NbMenuItem,
+  NbMenuModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
+  NbSidebarModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbUserModule,
+} from '@nebular/theme';
+
+import {
+  NB_AUTH_TOKEN_WRAPPER_TOKEN,
+  NbAuthJWTToken,
+  NbAuthModule,
+  NbDummyAuthProvider,
+  NbEmailPassAuthProvider,
+} from '@nebular/auth';
 
 import { NbAppComponent } from './app.component';
 import { NbLayoutTestComponent } from './layout-test/layout-test.component';
@@ -32,9 +41,9 @@ import { NbThemeChangeTestComponent } from './layout-test/theme-change-test.comp
 import { NbThemeBreakpointTestComponent } from './layout-test/theme-breakpoint-test.component';
 import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import {
-  NbRouteTabsetTestComponent,
   NbRouteTabsetTestChild1Component,
   NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestComponent,
 } from './route-tabset-test/route-tabset-test.component';
 
 import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
@@ -42,19 +51,19 @@ import { NbSidebarTestOneComponent } from './sidebar-test/sidebar-test-one.compo
 import { NbSidebarTestTwoComponent } from './sidebar-test/sidebar-test-two.component';
 import { NbSidebarTestThreeComponent } from './sidebar-test/sidebar-test-three.component';
 import {
-  NbMenuTestComponent,
   NbMenuItem1Component,
   NbMenuItem2Component,
   NbMenuItem31Component,
-  NbMenuItem3Component,
   NbMenuItem32Component,
-  NbMenuItem33Component,
   NbMenuItem331Component,
   NbMenuItem332Component,
+  NbMenuItem33Component,
+  NbMenuItem3Component,
   NbMenuItem4Component,
+  NbMenuTestComponent,
 } from './menu-test/menu-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
-import { NbThemeDynamicTestComponent, NbDynamicToAddComponent } from './layout-test/theme-dynamic-test.component';
+import { NbDynamicToAddComponent, NbThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
 import { NbActionsTestComponent } from './actions-test/actions-test.component';
 import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
 
@@ -172,7 +181,9 @@ const NB_TEST_COMPONENTS = [
   entryComponents: [
     NbDynamicToAddComponent,
   ],
-  providers: [],
+  providers: [
+    { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
+  ],
   bootstrap: [NbAppComponent],
 })
 export class NbAppModule {

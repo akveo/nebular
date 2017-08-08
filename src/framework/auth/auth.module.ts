@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, Injector, Optional, SkipSelf } from '@angular/core';
+import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -10,10 +10,15 @@ import { NbAuthService } from './services/auth.service';
 import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 
-import { NbAuthOptions, nbAuthOptionsToken, nbAuthProvidersToken } from './auth.options';
+import {
+  NB_AUTH_OPTIONS_TOKEN,
+  NB_AUTH_PROVIDERS_TOKEN,
+  NB_AUTH_TOKEN_WRAPPER_TOKEN,
+  NbAuthOptions,
+} from './auth.options';
 
 import { NbAuthComponent } from './components/auth.component';
-import { NbTokenService } from './services/token.service';
+import { NbAuthSimpleToken, NbTokenService } from './services/token.service';
 import { NbSecuredHttp } from './services/secured-http';
 
 import { NbAuthBlockComponent } from './components/auth-block/auth-block.component';
@@ -71,12 +76,13 @@ export class NbAuthModule {
     return <ModuleWithProviders> {
       ngModule: NbAuthModule,
       providers: [
-        { provide: nbAuthOptionsToken, useValue: nbAuthOptions },
-        { provide: nbAuthProvidersToken, useValue: {} },
+        { provide: NB_AUTH_OPTIONS_TOKEN, useValue: nbAuthOptions },
+        { provide: NB_AUTH_PROVIDERS_TOKEN, useValue: {} },
+        { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken },
         {
           provide: NbAuthService,
           useFactory: nbAuthServiceFactory,
-          deps: [nbAuthOptionsToken, NbTokenService, Injector],
+          deps: [NB_AUTH_OPTIONS_TOKEN, NbTokenService, Injector],
         },
         NbTokenService,
         NbSecuredHttp,
