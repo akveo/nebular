@@ -31,6 +31,7 @@ import {
   NbAuthModule,
   NbDummyAuthProvider,
   NbEmailPassAuthProvider,
+  NbAuthJWTInterceptor,
 } from '@nebular/auth';
 
 import { NbAppComponent } from './app.component';
@@ -73,6 +74,7 @@ import { NbSearchTestComponent } from './search-test/search-test.component';
 import { NbFormsTestComponent } from './forms-test/forms-test.component';
 
 import { NbCardTestComponent } from './card-test/card-test.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -183,6 +185,7 @@ const NB_TEST_COMPONENTS = [
   ],
   providers: [
     { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
+    { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
   ],
   bootstrap: [NbAppComponent],
 })

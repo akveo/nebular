@@ -4,9 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
 import { NbAuthResult } from '../services/auth.service';
@@ -72,18 +74,18 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
     token: {
       key: 'data.token',
-      getter: (module: string, res: Response) => getDeepFromObject(this.getJsonSafe(res),
+      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
         this.getConfigValue('token.key')),
     },
     errors: {
       key: 'data.errors',
-      getter: (module: string, res: Response) => getDeepFromObject(this.getJsonSafe(res),
+      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
         this.getConfigValue('errors.key'),
         this.getConfigValue(`${module}.defaultErrors`)),
     },
     messages: {
       key: 'data.messages',
-      getter: (module: string, res: Response) => getDeepFromObject(this.getJsonSafe(res),
+      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
         this.getConfigValue('messages.key'),
         this.getConfigValue(`${module}.defaultMessages`)),
     },
@@ -104,12 +106,12 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
   };
 
-  constructor(protected http: Http, private route: ActivatedRoute) {
+  constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('login'), data)
+    return this.http.post(this.getActionEndpoint('login'), data, { observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('login.alwaysFail')) {
           throw this.createFailResponse(data);
@@ -128,7 +130,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof Response) {
+        if (res instanceof HttpResponse) {
           errors = this.getConfigValue('errors.getter')('login', res);
         } else {
           errors.push('Something went wrong.');
@@ -145,7 +147,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   }
 
   register(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('register'), data)
+    return this.http.post(this.getActionEndpoint('register'), data, { observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('register.alwaysFail')) {
           throw this.createFailResponse(data);
@@ -164,7 +166,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof Response) {
+        if (res instanceof HttpResponse) {
           errors = this.getConfigValue('errors.getter')('register', res);
         } else {
           errors.push('Something went wrong.');
@@ -181,7 +183,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('requestPass'), data)
+    return this.http.post(this.getActionEndpoint('requestPass'), data, { observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('requestPass.alwaysFail')) {
           throw this.createFailResponse();
@@ -199,7 +201,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof Response) {
+        if (res instanceof HttpResponse) {
           errors = this.getConfigValue('errors.getter')('requestPass', res);
         } else {
           errors.push('Something went wrong.');
@@ -219,7 +221,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     const tokenKey = this.getConfigValue('resetPass.resetPasswordTokenKey');
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
 
-    return this.http.post(this.getActionEndpoint('resetPass'), data)
+    return this.http.post(this.getActionEndpoint('resetPass'), data, { observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('resetPass.alwaysFail')) {
           throw this.createFailResponse();
@@ -237,7 +239,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof Response) {
+        if (res instanceof HttpResponse) {
           errors = this.getConfigValue('errors.getter')('resetPass', res);
         } else {
           errors.push('Something went wrong.');
@@ -253,8 +255,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       });
   }
 
+  // TODO: make this optional
   logout(): Observable<NbAuthResult> {
-    return this.http.delete(this.getActionEndpoint('logout'))
+    return this.http.delete(this.getActionEndpoint('logout'), { observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('logout.alwaysFail')) {
           throw this.createFailResponse();
@@ -272,7 +275,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof Response) {
+        if (res instanceof HttpResponse) {
           errors = this.getConfigValue('errors.getter')('logout', res);
         } else {
           errors.push('Something went wrong.');

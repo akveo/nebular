@@ -2,7 +2,7 @@ import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NbLayoutModule } from '@nebular/theme';
 
@@ -19,7 +19,6 @@ import {
 
 import { NbAuthComponent } from './components/auth.component';
 import { NbAuthSimpleToken, NbTokenService } from './services/token.service';
-import { NbSecuredHttp } from './services/secured-http';
 
 import { NbAuthBlockComponent } from './components/auth-block/auth-block.component';
 import { NbLoginComponent } from './components/login/login.component';
@@ -50,7 +49,7 @@ export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, 
     NbLayoutModule,
     RouterModule.forChild(routes),
     FormsModule,
-    HttpModule,
+    HttpClientModule,
   ],
   declarations: [
     NbAuthComponent,
@@ -85,7 +84,6 @@ export class NbAuthModule {
           deps: [NB_AUTH_OPTIONS_TOKEN, NbTokenService, Injector],
         },
         NbTokenService,
-        NbSecuredHttp,
         NbDummyAuthProvider,
         NbEmailPassAuthProvider,
       ],

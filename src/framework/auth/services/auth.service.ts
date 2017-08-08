@@ -136,6 +136,8 @@ export class NbAuthService {
               return result;
             });
         }
+
+        return Observable.of(result);
       });
   }
 
@@ -161,6 +163,8 @@ export class NbAuthService {
               return result;
             });
         }
+
+        return Observable.of(result);
       });
   }
 

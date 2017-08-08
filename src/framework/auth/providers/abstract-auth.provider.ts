@@ -1,4 +1,4 @@
-import { Response, ResponseOptions } from '@angular/http';
+import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import { NbAuthResult } from '../services/auth.service';
@@ -27,22 +27,15 @@ export abstract class NbAbstractAuthProvider {
 
   abstract logout(): Observable<NbAuthResult>;
 
-  protected createFailResponse(data?: any): Response {
-    return new Response(new ResponseOptions({ body: '{}', status: 401 }));
+  protected createFailResponse(data?: any): HttpResponse<Object> {
+    return new HttpResponse<Object>({ body: {}, status: 401 });
   }
 
-  protected createSuccessResponse(data?: any): Response {
-    return new Response(new ResponseOptions({ body: '{}', status: 200 }));
+  protected createSuccessResponse(data?: any): HttpResponse<Object> {
+    return new HttpResponse<Object>({ body: {}, status: 200 });
   }
 
-  protected getJsonSafe(res: Response): any {
-    let json;
-    try {
-      json = res.json();
-    } catch (e) {
-      json = {};
-    }
-
-    return json;
+  protected getJsonSafe(res: HttpResponse<Object>): any {
+    return res.body;
   }
 }
