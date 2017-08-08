@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, Output, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { convertToBoolProperty } from '../helpers';
 
 @Component({
   selector: 'nb-checkbox',
@@ -32,7 +33,12 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   status: string;
 
   @Input('value') _value: boolean = false;
-  @Input() disabled: boolean;
+
+  disabled: boolean = false;
+  @Input('disabled')
+  set setDisabled(val: boolean) {
+    this.disabled = convertToBoolProperty(val);
+  }
 
   @Input('status')
   private set setStatus(val: string) {

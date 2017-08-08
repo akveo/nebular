@@ -25,19 +25,19 @@
     &:focus {
       border: nb-theme(form-control-border-width)
               nb-theme(form-control-border-type)
-              nb-theme(form-control-primary-border-color);
+              nb-theme(form-control-selected-border-color);
       background-color: nb-theme(form-control-focus-bg);
     }
 
     &:disabled {
-      border-color: #504b95;
+      border-color: nb-theme(form-control-border-color);
 
-      @include install-placeholder(rgba(161, 161, 229, 0.2),
+      @include install-placeholder(rgba(nb-theme(form-control-placeholder-color), 0.5),
                                    nb-theme(form-control-placeholder-font-size));
     }
 
     @include form-control-validation(nb-theme(form-control-text-secondary-color));
-    @include install-placeholder(shade(nb-theme(form-control-placeholder-color), 14%),
+    @include install-placeholder(nb-theme(form-control-placeholder-color),
                                  nb-theme(form-control-placeholder-font-size));
   }
 

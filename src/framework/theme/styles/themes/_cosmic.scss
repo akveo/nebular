@@ -69,6 +69,14 @@ $theme: (
   btn-hero-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
   btn-hero-bevel-size: 0 3px 0 0,
   btn-hero-glow-size: 0 2px 8px 0,
+
+  form-control-bg: #37317a,
+  form-control-focus-bg: separator,
+  form-control-border-color: separator,
+  form-control-selected-border-color: color-primary,
+
+  checkbox-border-color: color-fg,
+  checkbox-selected-border-color: color-success,
 );
 
 // register the theme
