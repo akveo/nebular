@@ -20,11 +20,11 @@ const heights = {
 const colors = {
   // Make sure that you convert hex to rgba before validation
   primary: '#8a7fff',
-  success: '#41d974',
+  success: '#40dc7e',
   info: '#4ca6ff',
   warning: '#ffa100',
   danger: '#ff4c6a',
-  default: '#b2bac2',
+  default: '#a4abb3',
   disabled: 'rgba(255, 255, 255, 0.4)',
 };
 
