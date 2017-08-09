@@ -73,7 +73,7 @@ export class NbThemeService {
   clearLayoutTop(): Observable<any> {
     const observable = new BehaviorSubject(null);
     this.createLayoutTop$.next({ listener: observable });
-
+    this.appendToLayoutTop$ = new ReplaySubject(1);
     return observable.asObservable();
   }
 

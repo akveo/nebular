@@ -307,6 +307,7 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
+    this.themeService.clearLayoutTop();
     this.themeSubscription.unsubscribe();
     this.appendClassSubscription.unsubscribe();
     this.removeClassSubscription.unsubscribe();
