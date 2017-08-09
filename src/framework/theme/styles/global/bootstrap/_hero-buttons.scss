@@ -266,12 +266,10 @@
   }
 }
 
-@mixin btn-hero-focus($dark-gradient) {
+@mixin btn-hero-focus($light-gradient) {
   &:focus,
   .focus {
-    background-image: $dark-gradient;
-    box-shadow: none;
-    border-color: transparent;
+    background-image: $light-gradient;
   }
 }
 
@@ -493,23 +491,23 @@
 
 // Focus
 @mixin btn-hero-primary-focus() {
-  @include btn-hero-focus(btn-hero-primary-dark-gradient());
+  @include btn-hero-focus(btn-hero-primary-light-gradient());
 }
 
 @mixin btn-hero-success-focus() {
-  @include btn-hero-focus(btn-hero-success-dark-gradient());
+  @include btn-hero-focus(btn-hero-success-light-gradient());
 }
 
 @mixin btn-hero-warning-focus() {
-  @include btn-hero-focus(btn-hero-warning-dark-gradient());
+  @include btn-hero-focus(btn-hero-warning-light-gradient());
 }
 
 @mixin btn-hero-info-focus() {
-  @include btn-hero-focus(btn-hero-info-dark-gradient());
+  @include btn-hero-focus(btn-hero-info-light-gradient());
 }
 
 @mixin btn-hero-danger-focus() {
-  @include btn-hero-focus(btn-hero-danger-dark-gradient());
+  @include btn-hero-focus(btn-hero-danger-light-gradient());
 }
 
 @mixin btn-hero-secondary-focus() {
@@ -517,9 +515,7 @@
 
   &:focus,
   .focus {
-    border-color: shade($color, 14%);
-    box-shadow: none;
-    background: none;
+    border-color: tint($color, 14%);
   }
 }
 

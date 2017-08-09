@@ -200,7 +200,7 @@ $theme: (
   user-line-height: line-height,
   user-bg: color-bg,
   user-fg: color-fg,
-  user-fg-highlight: color-fg-highlight,
+  user-fg-highlight: #bcc3cc,
   user-font-family-secondary: font-secondary,
   user-size-small: 1.5rem,
   user-size-medium: 2.5rem,
@@ -349,6 +349,7 @@ $theme: (
   checkbox-border-color: form-control-border-color,
   checkbox-selected-border-color: color-success,
   checkbox-fg: color-fg-heading,
+  radio-fg: color-success,
 
   modal-font-size: font-size,
   modal-line-height: line-height,

@@ -90,7 +90,11 @@
   @return tint(nb-theme($bg), $percentage);
 }
 
-@function btn-focus-active($bg, $percentage: 14%) {
+@function btn-focus($bg, $percentage: 14%) {
+  @return tint(nb-theme($bg), $percentage);
+}
+
+@function btn-active($bg, $percentage: 14%) {
   @return shade(nb-theme($bg), $percentage);
 }
 
@@ -122,27 +126,27 @@
 
 // Focus
 @mixin btn-primary-focus() {
-  @include btn-focus(btn-focus-active(btn-primary-bg));
+  @include btn-focus(btn-focus(btn-primary-bg));
 }
 
 @mixin btn-success-focus() {
-  @include btn-focus(btn-focus-active(btn-success-bg));
+  @include btn-focus(btn-focus(btn-success-bg));
 }
 
 @mixin btn-warning-focus() {
-  @include btn-focus(btn-focus-active(btn-warning-bg));
+  @include btn-focus(btn-focus(btn-warning-bg));
 }
 
 @mixin btn-info-focus() {
-  @include btn-focus(btn-focus-active(btn-info-bg));
+  @include btn-focus(btn-focus(btn-info-bg));
 }
 
 @mixin btn-danger-focus() {
-  @include btn-focus(btn-focus-active(btn-danger-bg));
+  @include btn-focus(btn-focus(btn-danger-bg));
 }
 
 @mixin btn-secondary-focus() {
-  @include btn-focus(btn-focus-active(btn-secondary-border));
+  @include btn-focus(btn-focus(btn-secondary-border));
 }
 
 
@@ -174,27 +178,27 @@
 
 // Active
 @mixin btn-primary-active() {
-  @include btn-active(btn-focus-active(btn-primary-bg));
+  @include btn-active(btn-active(btn-primary-bg));
 }
 
 @mixin btn-success-active() {
-  @include btn-active(btn-focus-active(btn-success-bg));
+  @include btn-active(btn-active(btn-success-bg));
 }
 
 @mixin btn-warning-active() {
-  @include btn-active(btn-focus-active(btn-warning-bg));
+  @include btn-active(btn-active(btn-warning-bg));
 }
 
 @mixin btn-info-active() {
-  @include btn-active(btn-focus-active(btn-info-bg));
+  @include btn-active(btn-active(btn-info-bg));
 }
 
 @mixin btn-danger-active() {
-  @include btn-active(btn-focus-active(btn-danger-bg));
+  @include btn-active(btn-active(btn-danger-bg));
 }
 
 @mixin btn-secondary-active() {
-  @include btn-active(btn-focus-active(btn-secondary-border));
+  @include btn-active(btn-active(btn-secondary-border));
 }
 
 

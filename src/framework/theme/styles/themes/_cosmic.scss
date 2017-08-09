@@ -52,6 +52,7 @@ $theme: (
 
   user-fg: color-bg,
   user-bg: color-fg,
+  user-fg-highlight: color-fg-highlight,
 
   footer-height: header-height,
 
@@ -77,6 +78,7 @@ $theme: (
 
   checkbox-border-color: color-fg,
   checkbox-selected-border-color: color-success,
+  radio-fg: color-fg-heading,
 );
 
 // register the theme

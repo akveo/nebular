@@ -72,4 +72,11 @@
   .input-group-fill-only > .form-control {
     border-color: transparent;
   }
+
+  .input-group-btn:not(:last-child) > .btn,
+  .input-group-btn:not(:last-child) > .btn-group,
+  .input-group-btn:not(:first-child) > .btn,
+  .input-group-btn:not(:first-child) > .btn-group {
+    margin: 0;
+  }
 }

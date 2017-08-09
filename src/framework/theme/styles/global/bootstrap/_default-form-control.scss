@@ -9,6 +9,10 @@
     @include form-control-success();
   }
 
+  .form-control-info {
+    @include form-control-info();
+  }
+
   .form-control-danger {
     @include form-control-danger();
   }
@@ -19,25 +23,25 @@
 }
 
 @mixin form-control-success() {
-  @include form-control-success-focus();
+  &, &:focus {
+    border-color: nb-theme(form-control-success-border-color);
+  }
+}
+
+@mixin form-control-info() {
+  &, &:focus {
+    border-color: nb-theme(form-control-info-border-color);
+  }
 }
 
 @mixin form-control-danger() {
-  @include form-control-danger-focus();
+  &, &:focus {
+    border-color: nb-theme(form-control-danger-border-color);
+  }
 }
 
 @mixin form-control-warning() {
-  @include form-control-warning-focus();
-}
-
-@mixin form-control-success-focus() {
-  border-color: nb-theme(form-control-success-border-color);
-}
-
-@mixin form-control-danger-focus() {
-  border-color: nb-theme(form-control-danger-border-color);
-}
-
-@mixin form-control-warning-focus() {
-  border-color: nb-theme(form-control-warning-border-color);
+  &, &:focus {
+    border-color: nb-theme(form-control-warning-border-color);
+  }
 }
