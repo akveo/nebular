@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -79,7 +79,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
     errors: {
       key: 'data.errors',
-      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
+      getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,
         this.getConfigValue('errors.key'),
         this.getConfigValue(`${module}.defaultErrors`)),
     },
@@ -130,7 +130,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof HttpResponse) {
+        if (res instanceof HttpErrorResponse) {
           errors = this.getConfigValue('errors.getter')('login', res);
         } else {
           errors.push('Something went wrong.');
@@ -166,7 +166,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof HttpResponse) {
+        if (res instanceof HttpErrorResponse) {
           errors = this.getConfigValue('errors.getter')('register', res);
         } else {
           errors.push('Something went wrong.');
@@ -201,7 +201,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof HttpResponse) {
+        if (res instanceof HttpErrorResponse) {
           errors = this.getConfigValue('errors.getter')('requestPass', res);
         } else {
           errors.push('Something went wrong.');
@@ -239,7 +239,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof HttpResponse) {
+        if (res instanceof HttpErrorResponse) {
           errors = this.getConfigValue('errors.getter')('resetPass', res);
         } else {
           errors.push('Something went wrong.');
@@ -275,7 +275,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       })
       .catch((res) => {
         let errors = [];
-        if (res instanceof HttpResponse) {
+        if (res instanceof HttpErrorResponse) {
           errors = this.getConfigValue('errors.getter')('logout', res);
         } else {
           errors.push('Something went wrong.');
