@@ -8,6 +8,7 @@ import { Injectable, Optional, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
 import { NbAuthSimpleToken, NbTokenService } from './token.service';
@@ -94,7 +95,7 @@ export class NbAuthService {
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<any> {
-    return this.getToken().map(token => !!token);
+    return this.getToken().map(token => token && token.getValue());
   }
 
   /**
