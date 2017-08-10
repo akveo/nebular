@@ -21,6 +21,7 @@ const ROLLUP_GLOBALS = {
   '@angular/animations': 'ng.animations',
   '@angular/core': 'ng.core',
   '@angular/common': 'ng.common',
+  '@angular/common/http': 'ng.common.http',
   '@angular/forms': 'ng.forms',
   '@angular/http': 'ng.http',
   '@angular/platform-browser': 'ng.platformBrowser',
