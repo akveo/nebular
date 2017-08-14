@@ -255,9 +255,16 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       });
   }
 
-  // TODO: make this optional
   logout(): Observable<NbAuthResult> {
-    return this.http.delete(this.getActionEndpoint('logout'), { observe: 'response' })
+
+    return Observable.of({})
+      .switchMap((res: any) => {
+        if (!this.getConfigValue('logout.endpoint')) {
+          return Observable.of(res);
+        }
+
+        return this.http.delete(this.getActionEndpoint('logout'), { observe: 'response' });
+      })
       .map((res) => {
         if (this.getConfigValue('logout.alwaysFail')) {
           throw this.createFailResponse();
