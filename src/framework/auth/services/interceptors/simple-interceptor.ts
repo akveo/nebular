@@ -16,7 +16,7 @@ export class NbAuthSimpleInterceptor implements HttpInterceptor {
 
     return this.authService.getToken()
       .switchMap((token: NbAuthJWTToken) => {
-        if (token) {
+        if (token && token.getValue()) {
           req = req.clone({
             setHeaders: {
               [this.headerName]: token.getValue(),
