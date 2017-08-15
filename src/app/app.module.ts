@@ -135,6 +135,11 @@ const NB_TEST_COMPONENTS = [
     NbSearchModule,
     NbActionsModule,
     NbAuthModule.forRoot({
+      forms: {
+        login: {
+          redirectDelay: 3000,
+        },
+      },
       providers: {
         //
         // email: {

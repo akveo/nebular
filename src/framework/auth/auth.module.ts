@@ -11,6 +11,7 @@ import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 
 import {
+  defaultSettings,
   NB_AUTH_OPTIONS_TOKEN,
   NB_AUTH_PROVIDERS_TOKEN,
   NB_AUTH_TOKEN_WRAPPER_TOKEN,
@@ -28,6 +29,7 @@ import { NbRequestPasswordComponent } from './components/request-password/reques
 import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 import { routes } from './auth.routes';
+import { deepExtend } from './helpers';
 
 export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
   const providers = config.providers || {};
@@ -35,12 +37,12 @@ export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, 
   for (const key in providers) {
     if (providers.hasOwnProperty(key)) {
       const provider = providers[key];
-      provider.object = injector.get(provider.service);
-      provider.object.setConfig(provider.config || {});
+      const object = injector.get(provider.service);
+      object.setConfig(provider.config || {});
     }
   }
 
-  return new NbAuthService(tokenService, providers);
+  return new NbAuthService(tokenService, injector, providers);
 }
 
 @NgModule({
@@ -75,7 +77,7 @@ export class NbAuthModule {
     return <ModuleWithProviders> {
       ngModule: NbAuthModule,
       providers: [
-        { provide: NB_AUTH_OPTIONS_TOKEN, useValue: nbAuthOptions },
+        { provide: NB_AUTH_OPTIONS_TOKEN, useValue: deepExtend({}, defaultSettings, nbAuthOptions) },
         { provide: NB_AUTH_PROVIDERS_TOKEN, useValue: {} },
         { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken },
         {

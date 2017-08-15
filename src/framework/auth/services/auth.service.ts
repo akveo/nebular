@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Injectable, Optional, Inject } from '@angular/core';
+import { Injectable, Optional, Inject, Injector } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -78,6 +78,7 @@ export class NbAuthResult {
 export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
+              protected injector: Injector,
               @Optional() @Inject(NB_AUTH_PROVIDERS_TOKEN) protected providers = {}) {
   }
 
@@ -221,6 +222,6 @@ export class NbAuthService {
       throw new TypeError(`Nb auth provider '${provider}' is not registered`);
     }
 
-    return this.providers[provider].object;
+    return this.injector.get(this.providers[provider].service);
   }
 }

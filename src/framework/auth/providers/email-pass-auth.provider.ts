@@ -89,21 +89,6 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
         this.getConfigValue('messages.key'),
         this.getConfigValue(`${module}.defaultMessages`)),
     },
-    validation: {
-      password: {
-        required: true,
-        minLength: 4,
-        maxLength: 30,
-      },
-      email: {
-        required: true,
-      },
-      fullName: {
-        required: false,
-        minLength: 4,
-        maxLength: 50,
-      },
-    },
   };
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
