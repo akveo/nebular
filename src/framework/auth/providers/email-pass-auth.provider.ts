@@ -25,6 +25,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       alwaysFail: false,
       rememberMe: true,
       endpoint: '/api/auth/login',
+      method: 'post',
       redirect: {
         success: '/',
         failure: null,
@@ -36,6 +37,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       alwaysFail: false,
       rememberMe: true,
       endpoint: '/api/auth/register',
+      method: 'post',
       redirect: {
         success: '/',
         failure: null,
@@ -46,6 +48,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     logout: {
       alwaysFail: false,
       endpoint: '/api/auth/logout',
+      method: 'delete',
       redirect: {
         success: '/',
         failure: null,
@@ -55,6 +58,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
     requestPass: {
       endpoint: '/api/auth/request-pass',
+      method: 'post',
       redirect: {
         success: '/',
         failure: null,
@@ -64,6 +68,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
     resetPass: {
       endpoint: '/api/auth/reset-pass',
+      method: 'put',
       redirect: {
         success: '/',
         failure: null,
@@ -96,7 +101,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('login'), data, { observe: 'response' })
+    const method = this.getConfigValue('login.method');
+    const url = this.getActionEndpoint('login');
+    return this.http.request(method, url, { body: data, observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('login.alwaysFail')) {
           throw this.createFailResponse(data);
@@ -132,7 +139,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   }
 
   register(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('register'), data, { observe: 'response' })
+    const method = this.getConfigValue('register.method');
+    const url = this.getActionEndpoint('register');
+    return this.http.request(method, url, { body: data, observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('register.alwaysFail')) {
           throw this.createFailResponse(data);
@@ -168,7 +177,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
-    return this.http.post(this.getActionEndpoint('requestPass'), data, { observe: 'response' })
+    const method = this.getConfigValue('requestPass.method');
+    const url = this.getActionEndpoint('requestPass');
+    return this.http.request(method, url, { body: data, observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('requestPass.alwaysFail')) {
           throw this.createFailResponse();
@@ -206,7 +217,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     const tokenKey = this.getConfigValue('resetPass.resetPasswordTokenKey');
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
 
-    return this.http.post(this.getActionEndpoint('resetPass'), data, { observe: 'response' })
+    const method = this.getConfigValue('resetPass.method');
+    const url = this.getActionEndpoint('resetPass');
+    return this.http.request(method, url, { body: data, observe: 'response' })
       .map((res) => {
         if (this.getConfigValue('resetPass.alwaysFail')) {
           throw this.createFailResponse();
@@ -242,13 +255,15 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
   logout(): Observable<NbAuthResult> {
 
+    const method = this.getConfigValue('logout.method');
+    const url = this.getActionEndpoint('logout');
+
     return Observable.of({})
       .switchMap((res: any) => {
-        if (!this.getConfigValue('logout.endpoint')) {
+        if (!url) {
           return Observable.of(res);
         }
-
-        return this.http.delete(this.getActionEndpoint('logout'), { observe: 'response' });
+        return this.http.request(method, url, { observe: 'response' });
       })
       .map((res) => {
         if (this.getConfigValue('logout.alwaysFail')) {

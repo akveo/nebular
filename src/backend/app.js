@@ -98,7 +98,7 @@ app.post('/api/auth/request-pass', function (req, res) {
   });
 });
 
-app.post('/api/auth/reset-pass', function (req, res) {
+app.put('/api/auth/reset-pass', function (req, res) {
 
   if (req.body.reset_password_token) {
     return res.json({

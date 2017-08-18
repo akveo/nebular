@@ -9,6 +9,7 @@ export interface NbEmailPassModuleConfig {
   alwaysFail?: boolean;
   rememberMe?: boolean;
   endpoint?: string;
+  method?: string;
   redirect?: {
     success?: string | null;
     failure?: string | null;
