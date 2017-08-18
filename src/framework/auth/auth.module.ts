@@ -12,10 +12,11 @@ import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 
 import {
   defaultSettings,
+  NB_AUTH_USER_OPTIONS_TOKEN,
   NB_AUTH_OPTIONS_TOKEN,
   NB_AUTH_PROVIDERS_TOKEN,
   NB_AUTH_TOKEN_WRAPPER_TOKEN,
-  NbAuthOptions,
+  NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER,
 } from './auth.options';
 
 import { NbAuthComponent } from './components/auth.component';
@@ -43,6 +44,10 @@ export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, 
   }
 
   return new NbAuthService(tokenService, injector, providers);
+}
+
+export function nbOptionsFactory(options) {
+  return deepExtend(defaultSettings, options);
 }
 
 @NgModule({
@@ -77,9 +82,11 @@ export class NbAuthModule {
     return <ModuleWithProviders> {
       ngModule: NbAuthModule,
       providers: [
-        { provide: NB_AUTH_OPTIONS_TOKEN, useValue: deepExtend({}, defaultSettings, nbAuthOptions) },
+        { provide: NB_AUTH_USER_OPTIONS_TOKEN, useValue: nbAuthOptions },
+        { provide: NB_AUTH_OPTIONS_TOKEN, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS_TOKEN] },
         { provide: NB_AUTH_PROVIDERS_TOKEN, useValue: {} },
         { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken },
+        { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
         {
           provide: NbAuthService,
           useFactory: nbAuthServiceFactory,

@@ -63,7 +63,7 @@ import { getDeepFromObject } from '../../helpers';
              [maxlength]="getConfigValue('forms.validation.password.maxLength')">
       </div>
 
-      <div class="checkbox" *ngIf="getConfigValue('email', 'register.terms')">
+      <div class="checkbox" *ngIf="getConfigValue('forms.register.terms')">
         <label>
           <input name="rememberMe" [(ngModel)]="user.terms"
             type="checkbox" value="remember-me"> Agree to <a href="#" target="_blank">Terms & Conditions</a>
