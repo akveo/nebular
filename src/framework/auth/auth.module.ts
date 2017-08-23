@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NbLayoutModule } from '@nebular/theme';
+import { NbLayoutModule, NbCardModule } from '@nebular/theme';
 
 import { NbAuthService } from './services/auth.service';
 import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
@@ -54,6 +54,7 @@ export function nbOptionsFactory(options) {
   imports: [
     CommonModule,
     NbLayoutModule,
+    NbCardModule,
     RouterModule.forChild(routes),
     FormsModule,
     HttpClientModule,

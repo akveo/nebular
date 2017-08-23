@@ -10,7 +10,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth-block.component.scss'],
   template: `
     <div class="auth-block">
-      <router-outlet></router-outlet>
+      <nb-card size="xxlarge">
+        <router-outlet></router-outlet>
+      </nb-card>
     </div>
   `,
 })
