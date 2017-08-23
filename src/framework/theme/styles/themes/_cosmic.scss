@@ -21,6 +21,7 @@ $theme: (
   color-neutral: transparent,
   color-white: #ffffff,
   color-disabled: rgba(255, 255, 255, 0.4),
+
   color-primary: #7659ff,
   color-success: #00d977,
   color-info: #0088ff,
@@ -29,6 +30,8 @@ $theme: (
 
   separator: #342e73,
   shadow: 0 8px 20px 0 rgba(40, 37, 89, 0.6),
+
+  card-header-font-weight: font-weight-bolder,
 
   layout-bg: #2c2961,
 
@@ -70,6 +73,9 @@ $theme: (
   btn-hero-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
   btn-hero-bevel-size: 0 3px 0 0,
   btn-hero-glow-size: 0 2px 8px 0,
+  btn-secondary-border: color-primary,
+  btn-outline-fg: color-fg-heading,
+  btn-outline-hover-fg: color-fg-heading,
 
   form-control-bg: #37317a,
   form-control-focus-bg: separator,

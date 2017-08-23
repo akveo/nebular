@@ -20,7 +20,7 @@
     font-family: nb-theme(btn-font-family);
     line-height: nb-theme(btn-line-height);
     border: 2px solid transparent;
-    transition: none;
+    transition: color ease-out 0.1s, background-color ease-out 0.1s, border-color ease-out 0.1s;
 
     @include btn-md();
   }

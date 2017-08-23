@@ -36,12 +36,10 @@
   }
 
 
-  nb-layout.with-scroll {
-    .scrollable-container {
-      overflow: auto;
-      height: 100vh;
-      display: block;
-    }
+  nb-layout.with-scroll .scrollable-container {
+    overflow: auto;
+    height: 100vh;
+    display: block;
   }
 
   nb-layout.window-mode {

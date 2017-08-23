@@ -84,6 +84,12 @@
   @include btn-outline-secondary-focus();
   @include btn-outline-secondary-hover();
   @include btn-outline-secondary-active();
+
+  &:focus, &.focus,
+  &:hover, &.hover,
+  &:active, &.active {
+    @include btn-outline-fg();
+  }
 }
 
 @mixin btn-outline-border($color) {

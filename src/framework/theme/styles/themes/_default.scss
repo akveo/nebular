@@ -71,8 +71,8 @@ $theme: (
   link-color-hover: #14ffbe,
   link-color-visited: link-color-active,
 
-  scrollbar-fg: rgba(0, 0, 0, 0.1),
-  scrollbar-bg: rgba(0, 0, 0, 0.05),
+  scrollbar-fg: #dadada,
+  scrollbar-bg: #f2f2f2,
   scrollbar-width: 5px,
   scrollbar-thumb-radius: 2.5px,
 
@@ -99,7 +99,7 @@ $theme: (
   card-margin: margin,
   card-header-font-family: font-secondary,
   card-header-font-size: font-size-xlg,
-  card-header-font-weight: font-weight-bolder,
+  card-header-font-weight: font-weight-bold,
   card-separator: separator,
   card-header-fg: color-fg,
   card-header-fg-heading: color-fg-heading,
@@ -270,7 +270,6 @@ $theme: (
   toaster-error: color-danger,
 
   btn-fg: color-white,
-  btn-outline-fg: color-fg-heading,
   btn-font-family: font-secondary,
   btn-line-height: line-height,
   btn-disabled-opacity: 0.3,
@@ -282,8 +281,8 @@ $theme: (
   btn-warning-bg: color-warning,
   btn-danger-bg: color-danger,
 
-  btn-secondary-border: color-primary,
-  btn-secondary-fill: #665ebd,
+  btn-secondary-border: #dadfe6,
+  btn-secondary-border-width: 2px,
 
   btn-padding-y-lg: 0.875rem,
   btn-padding-x-lg: 1.75rem,
@@ -311,6 +310,9 @@ $theme: (
   btn-hero-text-shadow: none,
   btn-hero-bevel-size: 0 0 0 0,
   btn-hero-glow-size: 0 0 0 0,
+
+  btn-outline-fg: color-fg-heading,
+  btn-outline-hover-fg: #ffffff,
 
   form-control-text-primary-color: color-fg-heading,
   form-control-text-secondary-color: color-fg,
