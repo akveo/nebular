@@ -11,7 +11,11 @@ import { Component } from '@angular/core';
   template: `
     <div class="auth-block">
       <nb-card size="xxlarge">
-        <router-outlet></router-outlet>
+        <nb-card-body>
+          <div class="col-xl-4 col-lg-6 col-md-8 col-sm-12">
+            <router-outlet></router-outlet>
+          </div>
+        </nb-card-body>
       </nb-card>
     </div>
   `,

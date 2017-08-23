@@ -5,58 +5,81 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
+
+import { NbAuthResult, NbAuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'nb-login',
   styleUrls: ['./login.component.scss'],
   template: `
-    <h2>Please sign in</h2>
-    <form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="nope">
+    <h2 class="title">Sign In</h2>
+    <small class="form-text sub-title">Hello! Sign in with your username or email</small>
+
+    <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
       <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
            class="alert alert-danger" role="alert">
         <div><strong>Oh snap!</strong></div>
         <div *ngFor="let error of errors">{{ error }}</div>
       </div>
+
       <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
            class="alert alert-success" role="alert">
         <div><strong>Hooray!</strong></div>
         <div *ngFor="let message of messages">{{ message }}</div>
       </div>
 
-      <div class="form-group row">
-        <label for="input-email" class="sr-only">Email address</label>
+      <div class="form-group">
         <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
-               class="form-control form-control-lg first" placeholder="Email address"
+               class="form-control" placeholder="Email address" #email="ngModel"
+               [class.form-control-danger]="email.invalid && email.dirty"
                [required]="getConfigValue('forms.validation.email.required')">
+        <small class="form-text error"
+               [class.invisible]="email.valid || (email.pristine && !form.submitted)">
+          Email is required!
+        </small>
       </div>
 
-      <div class="form-group row">
-        <label for="input-password" class="sr-only">Password</label>
+      <div class="form-group">
         <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-          class="form-control form-control-lg last" placeholder="Password"
+               class="form-control" placeholder="Password" #password="ngModel"
+               [class.form-control-danger]="password.invalid && password.dirty"
                [required]="getConfigValue('forms.validation.password.required')"
                [minlength]="getConfigValue('forms.validation.password.minLength')"
                [maxlength]="getConfigValue('forms.validation.password.maxLength')">
+        <small class="form-text error" 
+               [class.invisible]="password.valid || (password.pristine && !password.submitted)">
+          Password is required! (with length from {{getConfigValue('forms.validation.password.minLength')}} to {{ getConfigValue('forms.validation.password.maxLength')}})
+        </small>
       </div>
 
-      <div class="checkbox">
-        <label *ngIf="getConfigValue('forms.login.rememberMe')">
-          <input name="rememberMe" [(ngModel)]="user.rememberMe" type="checkbox" value="remember-me"> Remember me
-        </label>
-        <a routerLink="../request-password">Forgot Password</a>
+      <div class="form-group remember-me-group col-sm-12">
+        <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">Remember me</nb-checkbox>
+        <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
       </div>
-      <button [disabled]="submitted || !loginForm.form.valid"
-        class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+      <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-primary"
+              [class.pulse]="submitted">
+        Sign In
+      </button>
     </form>
 
     <div class="links">
-      Don't have an account? <a routerLink="../register">Register</a>
+      <small class="form-text">Or connect with:</small>
+      
+      <div class="socials">
+        <a href="https://github.com/akveo" target="_blank" class="ion ion-social-github"></a>
+        <a href="https://www.facebook.com/akveo/" target="_blank" class="fa fa-facebook-square"></a>
+        <a href="https://twitter.com/akveo_inc" target="_blank" class="ion ion-social-twitter"></a>
+      </div>
+
+      <small class="form-text">
+        Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
+      </small>
     </div>
+
   `,
 })
 export class NbLoginComponent {
@@ -65,10 +88,10 @@ export class NbLoginComponent {
   showMessages: any = {};
   provider: string = '';
 
-  submitted = false;
   errors: string[] = [];
   messages: string[] = [];
   user: any = {};
+  submitted: boolean = false;
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
@@ -84,8 +107,8 @@ export class NbLoginComponent {
     this.submitted = true;
 
     this.service.authenticate(this.provider, this.user).subscribe((result: NbAuthResult) => {
-
       this.submitted = false;
+
       if (result.isSuccess()) {
         this.messages = result.getMessages();
       } else {

@@ -4,41 +4,52 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 :host {
-
   .auth-block {
     margin: 0 auto;
 
     /deep/ {
+      nb-card-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      form {
+        width: 100%;
+      }
+
+      .alert {
+        text-align: center;
+      }
+
+      .title {
+        margin-bottom: 0.75rem;
+      }
+
+      .sub-title {
+        margin-bottom: 2rem;
+      }
+
       .checkbox {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
         font-weight: normal;
       }
-      .form-control {
-        position: relative;
-        height: auto;
-        padding: 10px;
-      }
-      .form-control:focus {
-        z-index: 2;
-      }
-      input.middle {
-        border-radius: 0;
-        margin: -1px 0;
-      }
-      input.first {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      input.last {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
+
       .links {
-        padding-top: 2rem;
+        text-align: center;
+        margin-top: 1.75rem;
+
+        .socials {
+          margin: 1.5rem 0 2.5rem 0;
+        }
+
+        .socials a {
+          font-size: 2rem;
+          margin: 0 1rem;
+          text-decoration: none;
+        }
       }
     }
   }

@@ -8,5 +8,13 @@
     max-width: nb-theme(auth-block-max-width);
     padding: nb-theme(auth-block-padding);
     margin-top: nb-theme(auth-block-margin-top !important);
+
+    .form-text a {
+      color: nb-theme(color-fg);
+    }
+
+    .remember-me nb-checkbox .custom-control-description {
+      color: nb-theme(color-fg);
+    }
   }
 }

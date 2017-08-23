@@ -5,9 +5,11 @@
  */
 
 @import '../../components/auth-block/auth-block.component.theme';
+@import '../../components/login/login.component.theme';
 
 // Create a theme
 @mixin nb-auth-components() {
 
   @include nb-auth-block-theme();
+  @include nb-login-theme();
 }
