@@ -129,10 +129,6 @@
       width: 100%;
       text-align: left;
       position: relative;
-
-      &.btn {
-        padding-right: 2.75rem;
-      }
     }
 
     .dropdown-toggle::after {
@@ -332,32 +328,26 @@
 
     .btn-primary + .dropdown-menu {
       @include btn-outline-primary-border();
-      border-top: none;
     }
 
     .btn-success + .dropdown-menu {
       @include btn-outline-success-border();
-      border-top: none;
     }
 
     .btn-warning + .dropdown-menu {
       @include btn-outline-warning-border();
-      border-top: none;
     }
 
     .btn-info + .dropdown-menu {
       @include btn-outline-info-border();
-      border-top: none;
     }
 
     .btn-danger + .dropdown-menu {
       @include btn-outline-danger-border();
-      border-top: none;
     }
 
     .btn-secondary + .dropdown-menu {
       @include btn-outline-secondary-border();
-      border-top: none;
     }
 
     .btn-primary + .dropdown-menu > .dropdown-item {

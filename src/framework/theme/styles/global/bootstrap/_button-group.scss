@@ -100,7 +100,8 @@
   .btn-toggle-group,
   .btn-divided-group {
     .btn:not(.active) {
-      background-color: shade(nb-theme(color-bg), 10%);
+      background-color: nb-theme(btn-group-bg);
+      color: nb-theme(btn-group-fg);
     }
 
     .btn:active,
@@ -193,7 +194,7 @@
       &::before {
         content: '';
         position: absolute;
-        background-color: #312c66;
+        background-color: nb-theme(btn-group-separator);
         width: 1px;
         height: 100%;
         top: 0;
