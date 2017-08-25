@@ -32,26 +32,35 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </div>
 
       <div class="form-group">
-        <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
+        <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+\\@.+\\..+"
                class="form-control" placeholder="Email address" #email="ngModel"
-               [class.form-control-danger]="email.invalid && email.dirty"
+               [class.form-control-danger]="email.invalid && email.touched"
                [required]="getConfigValue('forms.validation.email.required')">
-        <small class="form-text error"
-               [class.invisible]="email.valid || (email.pristine && !form.submitted)">
+        <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
           Email is required!
+        </small>
+        <small class="form-text error"
+                *ngIf="email.invalid && email.touched && email.errors?.pattern">
+          Email should be the real one! 
         </small>
       </div>
 
       <div class="form-group">
         <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
                class="form-control" placeholder="Password" #password="ngModel"
-               [class.form-control-danger]="password.invalid && password.dirty"
+               [class.form-control-danger]="password.invalid && password.touched"
                [required]="getConfigValue('forms.validation.password.required')"
                [minlength]="getConfigValue('forms.validation.password.minLength')"
                [maxlength]="getConfigValue('forms.validation.password.maxLength')">
-        <small class="form-text error" 
-               [class.invisible]="password.valid || (password.pristine && !password.submitted)">
-          Password is required! (with length from {{getConfigValue('forms.validation.password.minLength')}} to {{ getConfigValue('forms.validation.password.maxLength')}})
+        <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
+          Password is required! 
+        </small>
+        <small class="form-text error"
+               *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+          Password should contains
+          from {{getConfigValue('forms.validation.password.minLength')}}
+          to {{getConfigValue('forms.validation.password.maxLength')}}
+          characters
         </small>
       </div>
 
