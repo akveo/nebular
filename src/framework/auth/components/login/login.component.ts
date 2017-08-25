@@ -32,6 +32,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </div>
 
       <div class="form-group">
+        <label for="input-email" class="sr-only">Email address</label>
         <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+\\@.+\\..+"
                class="form-control" placeholder="Email address" #email="ngModel"
                [class.form-control-danger]="email.invalid && email.touched"
@@ -46,6 +47,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </div>
 
       <div class="form-group">
+        <label for="input-password" class="sr-only">Password</label>
         <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
                class="form-control" placeholder="Password" #password="ngModel"
                [class.form-control-danger]="password.invalid && password.touched"
