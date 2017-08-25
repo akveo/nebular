@@ -5,16 +5,17 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
+
+import { NbAuthResult, NbAuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'nb-request-password-page',
   styleUrls: ['./request-password.component.scss'],
   template: `
-    <h2>Request password reset</h2>
+    <h2 class="title">Forgot Password</h2>
+    <small class="form-text sub-title">Enter your email adress and we’ll send a like to reset your password</small>
     <form (ngSubmit)="requestPass()" #requestPassForm="ngForm">
 
       <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
@@ -28,19 +29,35 @@ import { getDeepFromObject } from '../../helpers';
         <div *ngFor="let message of messages">{{ message }}</div>
       </div>
 
-      <label for="input-email" class="sr-only">Enter your email address</label>
-      <input name="email" [(ngModel)]="user.email" type="email" id="input-email"
-        class="form-control form-control-lg" placeholder="Email address"
-             [required]="getConfigValue('forms.validation.email.required')"
-             autofocus>
-      <div class="checkbox"></div>
+      <div class="form-group">
+        <label for="input-email" class="sr-only">Enter your email address</label>
+        <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
+               class="form-control" placeholder="Email address" pattern=".+\\@.+\\..+"
+               [class.form-control-danger]="email.invalid && email.touched"
+               [required]="getConfigValue('forms.validation.email.required')"
+               autofocus>
+        <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
+          Email is required!
+        </small>
+        <small class="form-text error"
+               *ngIf="email.invalid && email.touched && email.errors?.pattern">
+          Email should be the real one!
+        </small>
+      </div>
 
-      <button [disabled]="submitted || !requestPassForm.form.valid"
-        class="btn btn-lg btn-primary btn-block" type="submit">Request password</button>
+      <button [disabled]="submitted || !requestPassForm.form.valid" class="btn btn-hero-primary btn-block"
+              [class.pulse]="submitted">
+        Request password
+      </button>
     </form>
 
-    <div class="links">
-      <a routerLink="../login">Login</a> or <a routerLink="../register">Register</a>
+    <div class="links col-sm-12">
+      <small class="form-text">
+        Already have an account? <a routerLink="../login"><strong>Sign In</strong></a>
+      </small>
+      <small class="form-text">
+        <a routerLink="../register"><strong>Sign Up</strong></a>
+      </small>
     </div>
   `,
 })
