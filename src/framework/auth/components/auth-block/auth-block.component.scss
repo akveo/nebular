@@ -6,60 +6,60 @@
 :host {
   .auth-block {
     margin: 0 auto;
+  }
 
-    /deep/ {
-      nb-card-body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  /deep/ {
+    nb-card-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    .alert {
+      text-align: center;
+    }
+
+    .title {
+      margin-bottom: 2rem;
+    }
+
+    .sub-title {
+      margin-bottom: 2rem;
+    }
+
+    .checkbox {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+
+    .form-group.accept-group {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+
+      .forgot-password {
+        line-height: 2;
+      }
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 1.75rem;
+
+      .socials {
+        margin: 1.5rem 0 2.5rem 0;
       }
 
-      form {
-        width: 100%;
-      }
-
-      .alert {
-        text-align: center;
-      }
-
-      .title {
-        margin-bottom: 0.75rem;
-      }
-
-      .sub-title {
-        margin-bottom: 2rem;
-      }
-
-      .checkbox {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        font-weight: normal;
-      }
-
-      .form-group.accept-group {
-        display: flex;
-        justify-content: space-between;
-        margin: 2rem 0;
-
-        .forgot-password {
-          line-height: 2;
-        }
-      }
-
-      .links {
-        text-align: center;
-        margin-top: 1.75rem;
-
-        .socials {
-          margin: 1.5rem 0 2.5rem 0;
-        }
-
-        .socials a {
-          font-size: 2rem;
-          margin: 0 1rem;
-          text-decoration: none;
-        }
+      .socials a {
+        font-size: 2rem;
+        margin: 0 1rem;
+        text-decoration: none;
       }
     }
   }
