@@ -57,8 +57,16 @@
 
   .form-text {
     color: nb-theme(color-fg);
-    margin-left: 1rem;
     font-family: nb-theme(font-main);
+
+    &.hint {
+      margin-left: 1rem;
+    }
+
+    &.error {
+      margin-left: 1rem;
+      color: nb-theme(color-danger);
+    }
   }
 
   @include form-control-size();
