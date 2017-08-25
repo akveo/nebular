@@ -5,16 +5,17 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
+
+import { NbAuthResult, NbAuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'nb-reset-password-page',
   styleUrls: ['./reset-password.component.scss'],
   template: `
-    <h2>Change password</h2>
+    <h2 class="title">Change password</h2>
+    <small class="form-text sub-title">Please enter a new password</small>
     <form (ngSubmit)="resetPass()" #resetPassForm="ngForm">
 
       <div *ngIf="errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
@@ -26,29 +27,56 @@ import { getDeepFromObject } from '../../helpers';
         <div *ngFor="let message of messages">{{ message }}</div>
       </div>
 
-      <label for="input-password" class="sr-only">New Password</label>
-      <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-        class="form-control form-control-lg first" placeholder="New Password" required
-             [required]="getConfigValue('forms.validation.password.required')"
-             [minlength]="getConfigValue('forms.validation.password.minLength')"
-             [maxlength]="getConfigValue('forms.validation.password.maxLength')"
-             autofocus>
+      <div class="form-group">
+        <label for="input-password" class="sr-only">New Password</label>
+        <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
+               class="form-control form-control-lg first" placeholder="New Password" #password="ngModel"
+               [class.form-control-danger]="password.invalid && password.touched"
+               [required]="getConfigValue('forms.validation.password.required')"
+               [minlength]="getConfigValue('forms.validation.password.minLength')"
+               [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+               autofocus>
+        <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
+          Password is required!
+        </small>
+        <small class="form-text error"
+               *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+          Password should contains
+          from {{getConfigValue('forms.validation.password.minLength')}}
+          to {{getConfigValue('forms.validation.password.maxLength')}}
+          characters
+        </small>
+      </div>
 
-      <label for="input-re-password" class="sr-only">Confirm Password</label>
-      <input name="confirmPassword" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
-        class="form-control form-control-lg last" placeholder="Confirm Password"
-             [required]="getConfigValue('forms.validation.password.required')"
-             [minlength]="getConfigValue('forms.validation.password.minLength')"
-             [maxlength]="getConfigValue('forms.validation.password.maxLength')">
+      <div class="form-group">
+        <label for="input-re-password" class="sr-only">Confirm Password</label>
+        <input name="confirmPassword" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
+               class="form-control form-control-lg last" placeholder="Confirm Password" #confirmPassword="ngModel"
+               [class.form-control-danger]="(confirmPassword.invalid || password.value != confirmPassword.value) && confirmPassword.touched"
+               [required]="getConfigValue('forms.validation.password.required')">
+        <small class="form-text error"
+               *ngIf="confirmPassword.invalid && confirmPassword.touched && confirmPassword.errors?.required">
+          Password confirmation is required!
+        </small>
+        <small class="form-text error"
+               *ngIf="confirmPassword.touched && password.value != confirmPassword.value && !confirmPassword.errors?.required">
+          Password does not match the confirm password.
+        </small>
+      </div>
 
-      <div class="checkbox"></div>
-
-      <button [disabled]="submitted || !resetPassForm.form.valid"
-        class="btn btn-lg btn-primary btn-block" type="submit">Change password</button>
+      <button [disabled]="submitted || !resetPassForm.form.valid" class="btn btn-hero-primary btn-block"
+              [class.pulse]="submitted">
+        Change password
+      </button>
     </form>
 
-    <div class="links">
-      <a routerLink="../login">Login</a> or <a routerLink="../register">Register</a>
+    <div class="links col-sm-12">
+      <small class="form-text">
+        Already have an account? <a routerLink="../login"><strong>Sign In</strong></a>
+      </small>
+      <small class="form-text">
+        <a routerLink="../register"><strong>Sign Up</strong></a>
+      </small>
     </div>
   `,
 })
