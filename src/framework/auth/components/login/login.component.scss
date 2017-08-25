@@ -8,14 +8,4 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  .form-group.remember-me-group {
-    display: flex;
-    justify-content: space-between;
-    margin: 2rem 0;
-
-    .forgot-password {
-      line-height: 2;
-    }
-  }
 }

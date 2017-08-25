@@ -64,7 +64,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         </small>
       </div>
 
-      <div class="form-group remember-me-group col-sm-12">
+      <div class="form-group accept-group col-sm-12">
         <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">Remember me</nb-checkbox>
         <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
       </div>

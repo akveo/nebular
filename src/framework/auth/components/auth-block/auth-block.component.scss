@@ -37,6 +37,16 @@
         font-weight: normal;
       }
 
+      .form-group.accept-group {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 0;
+
+        .forgot-password {
+          line-height: 2;
+        }
+      }
+
       .links {
         text-align: center;
         margin-top: 1.75rem;
