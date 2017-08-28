@@ -65,7 +65,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </div>
 
       <button [disabled]="submitted || !resetPassForm.form.valid" class="btn btn-hero-primary btn-block"
-              [class.pulse]="submitted">
+              [class.btn-pulse]="submitted">
         Change password
       </button>
     </form>

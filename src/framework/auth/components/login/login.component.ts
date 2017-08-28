@@ -72,7 +72,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </div>
 
       <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-primary"
-              [class.pulse]="submitted">
+              [class.btn-pulse]="submitted">
         Sign In
       </button>
     </form>
