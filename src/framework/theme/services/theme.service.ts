@@ -19,7 +19,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/startWith';
 
 import { nbThemeOptionsToken } from '../theme.options';
-import { NbJSTheme, NbJSThemesRegistry } from './js-themes-registry.service';
+import { NbJSThemeOptions } from './js-themes/theme.options';
+import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
 
 @Injectable()
@@ -62,9 +63,9 @@ export class NbThemeService {
    * Returns a theme object with variables (color/paddings/etc) on a theme change.
    * Once subscribed - returns current theme.
    *
-   * @returns {Observable<NbJSTheme>}
+   * @returns {Observable<NbJSThemeOptions>}
    */
-  getJsTheme(): Observable<NbJSTheme> {
+  getJsTheme(): Observable<NbJSThemeOptions> {
     return this.onThemeChange().map((theme: any) => {
       return this.jsThemesRegistry.get(theme.name);
     });

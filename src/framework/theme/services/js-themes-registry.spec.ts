@@ -6,12 +6,13 @@
 
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { BUILT_IN_THEMES, NbJSTheme, NbJSThemesRegistry } from './js-themes-registry.service';
+import { NbJSThemeOptions } from './js-themes/theme.options';
+import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
 import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
 
 describe('js-themes-registry-service', () => {
   let jsThemesRegistry: NbJSThemesRegistry;
-  const customThemes: NbJSTheme[] = [
+  const customThemes: NbJSThemeOptions[] = [
     {
       name: 'default',
       base: 'default',

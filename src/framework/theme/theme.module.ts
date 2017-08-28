@@ -16,7 +16,8 @@ import {
 } from './theme.options';
 import { NbThemeService } from './services/theme.service';
 import { NbSpinnerService } from './services/spinner.service';
-import { BUILT_IN_THEMES, NbJSTheme, NbJSThemesRegistry } from './services/js-themes-registry.service';
+import { NbJSThemeOptions } from './services/js-themes/theme.options';
+import { BUILT_IN_THEMES, NbJSThemesRegistry } from './services/js-themes-registry.service';
 import {
   DEFAULT_MEDIA_BREAKPOINTS,
   NbMediaBreakpoint,
@@ -38,13 +39,13 @@ export class NbThemeModule {
    * Main Theme Module
    *
    * @param nbThemeOptions {NbThemeOptions} Main theme options
-   * @param nbJSThemes {NbJSTheme[]} List of JS Themes, will be merged with default themes
+   * @param nbJSThemes {NbJSThemeOptions[]} List of JS Themes, will be merged with default themes
    * @param nbMediaBreakpoints {NbMediaBreakpoint} Available media breakpoints
    *
    * @returns {ModuleWithProviders}
    */
   static forRoot(nbThemeOptions: NbThemeOptions,
-                 nbJSThemes?: NbJSTheme[],
+                 nbJSThemes?: NbJSThemeOptions[],
                  nbMediaBreakpoints?: NbMediaBreakpoint[]): ModuleWithProviders {
 
     return <ModuleWithProviders> {
