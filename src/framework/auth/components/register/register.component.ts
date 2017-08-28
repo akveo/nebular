@@ -106,7 +106,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         </nb-checkbox>
       </div>
 
-      <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-primary"
+      <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
               [class.btn-pulse]="submitted">
         Register
       </button>

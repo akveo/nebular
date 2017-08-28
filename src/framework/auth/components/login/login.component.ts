@@ -71,7 +71,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
       </div>
 
-      <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-primary"
+      <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
               [class.btn-pulse]="submitted">
         Sign In
       </button>

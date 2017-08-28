@@ -45,7 +45,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         </small>
       </div>
 
-      <button [disabled]="submitted || !requestPassForm.form.valid" class="btn btn-hero-primary btn-block"
+      <button [disabled]="submitted || !requestPassForm.form.valid" class="btn btn-hero-success btn-block"
               [class.btn-pulse]="submitted">
         Request password
       </button>
