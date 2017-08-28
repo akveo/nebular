@@ -138,6 +138,11 @@
   }
 }
 
+/**
+ * This mixin generates keyfames.
+ * Because of all keyframes can't be scoped,
+ * we need to puts unique name in each btn-pulse call.
+ */
 @mixin btn-pulse($name, $color) {
   &.btn-pulse {
     @include animation(btn-#{$name}-pulse 1.5s infinite);
