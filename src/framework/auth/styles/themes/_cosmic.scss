@@ -9,6 +9,11 @@ $theme: (
   auth-block-padding: 2rem,
   auth-block-margin-top: 60px,
   auth-block-height: 100%,
+
+  accept-group-link-color: link-color-active,
+
+  socials-color: color-fg,
+  socials-hover-color: color-white,
 );
 
 $nb-themes: nb-register-theme($theme, cosmic, cosmic);

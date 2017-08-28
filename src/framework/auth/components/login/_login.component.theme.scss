@@ -6,11 +6,11 @@
 @mixin nb-login-theme() {
   .socials a {
     &::before {
-      color: nb-theme(color-fg);
+      color: nb-theme(socials-color);
     }
 
     &:hover::before {
-      color: nb-theme(color-white);
+      color: nb-theme(socials-hover-color);
     }
   }
 }

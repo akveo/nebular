@@ -19,8 +19,14 @@
       color: nb-theme(color-fg);
     }
 
-    .remember-me nb-checkbox .custom-control-description {
-      color: nb-theme(color-fg);
+    .accept-group {
+      nb-checkbox .custom-control-description {
+        color: nb-theme(color-fg);
+      }
+
+      a {
+        color: nb-theme(accept-group-link-color);
+      }
     }
   }
 }
