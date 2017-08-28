@@ -39,27 +39,30 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
           Password is required!
         </small>
-        <small class="form-text error"
-               *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
-          Password should contains
-          from {{getConfigValue('forms.validation.password.minLength')}}
-          to {{getConfigValue('forms.validation.password.maxLength')}}
-          characters
+        <small
+          class="form-text error"
+          *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+            Password should contains
+            from {{getConfigValue('forms.validation.password.minLength')}}
+            to {{getConfigValue('forms.validation.password.maxLength')}}
+            characters
         </small>
       </div>
 
       <div class="form-group">
         <label for="input-re-password" class="sr-only">Confirm Password</label>
-        <input name="confirmPassword" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
-               class="form-control form-control-lg last" placeholder="Confirm Password" #confirmPassword="ngModel"
-               [class.form-control-danger]="(confirmPassword.invalid || password.value != confirmPassword.value) && confirmPassword.touched"
-               [required]="getConfigValue('forms.validation.password.required')">
+        <input
+          name="rePassword" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
+          class="form-control form-control-lg last" placeholder="Confirm Password" #rePassword="ngModel"
+          [class.form-control-danger]="(rePassword.invalid || password.value != rePassword.value) && rePassword.touched"
+          [required]="getConfigValue('forms.validation.password.required')">
         <small class="form-text error"
-               *ngIf="confirmPassword.invalid && confirmPassword.touched && confirmPassword.errors?.required">
+               *ngIf="rePassword.invalid && rePassword.touched && rePassword.errors?.required">
           Password confirmation is required!
         </small>
-        <small class="form-text error"
-               *ngIf="confirmPassword.touched && password.value != confirmPassword.value && !confirmPassword.errors?.required">
+        <small
+          class="form-text error"
+          *ngIf="rePassword.touched && password.value != rePassword.value && !rePassword.errors?.required">
           Password does not match the confirm password.
         </small>
       </div>

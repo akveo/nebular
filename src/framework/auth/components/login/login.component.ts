@@ -41,8 +41,8 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
           Email is required!
         </small>
         <small class="form-text error"
-                *ngIf="email.invalid && email.touched && email.errors?.pattern">
-          Email should be the real one! 
+               *ngIf="email.invalid && email.touched && email.errors?.pattern">
+          Email should be the real one!
         </small>
       </div>
 
@@ -55,14 +55,15 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
                [minlength]="getConfigValue('forms.validation.password.minLength')"
                [maxlength]="getConfigValue('forms.validation.password.maxLength')">
         <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
-          Password is required! 
+          Password is required!
         </small>
-        <small class="form-text error"
-               *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
-          Password should contains
-          from {{getConfigValue('forms.validation.password.minLength')}}
-          to {{getConfigValue('forms.validation.password.maxLength')}}
-          characters
+        <small
+          class="form-text error"
+          *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+            Password should contains
+            from {{ getConfigValue('forms.validation.password.minLength') }}
+            to {{ getConfigValue('forms.validation.password.maxLength') }}
+            characters
         </small>
       </div>
 
@@ -79,7 +80,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
 
     <div class="links">
       <small class="form-text">Or connect with:</small>
-      
+
       <div class="socials">
         <a href="https://github.com/akveo" target="_blank" class="ion ion-social-github"></a>
         <a href="https://www.facebook.com/akveo/" target="_blank" class="fa fa-facebook-square"></a>
@@ -90,7 +91,6 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
       </small>
     </div>
-
   `,
 })
 export class NbLoginComponent {
