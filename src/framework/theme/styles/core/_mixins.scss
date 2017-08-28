@@ -137,3 +137,24 @@
     @content;
   }
 }
+
+@mixin btn-pulse($name, $color) {
+  &.btn-pulse {
+    @include animation(btn-#{$name}-pulse 1.5s infinite);
+  }
+
+  @include keyframes(btn-#{$name}-pulse) {
+    0% {
+      box-shadow: none;
+      opacity: nb-theme(btn-disabled-opacity);
+    }
+    50% {
+      box-shadow: 0 0 1rem 0 $color;
+      opacity: 0.8;
+    }
+    100% {
+      box-shadow: none;
+      opacity: nb-theme(btn-disabled-opacity);
+    }
+  }
+}
