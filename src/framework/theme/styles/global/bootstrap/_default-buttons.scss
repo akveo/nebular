@@ -38,6 +38,7 @@
   @include btn-primary-hover();
   @include btn-primary-active();
   @include btn-disabled();
+  @include btn-primary-pulse();
 }
 
 @mixin btn-success() {
@@ -47,6 +48,7 @@
   @include btn-success-hover();
   @include btn-success-active();
   @include btn-disabled();
+  @include btn-success-pulse();
 }
 
 @mixin btn-warning() {
@@ -56,6 +58,7 @@
   @include btn-warning-hover();
   @include btn-warning-active();
   @include btn-disabled();
+  @include btn-warning-pulse();
 }
 
 @mixin btn-info() {
@@ -65,6 +68,7 @@
   @include btn-info-hover();
   @include btn-info-active();
   @include btn-disabled();
+  @include btn-info-pulse();
 }
 
 @mixin btn-danger() {
@@ -74,6 +78,7 @@
   @include btn-danger-hover();
   @include btn-danger-active();
   @include btn-disabled();
+  @include btn-danger-pulse();
 }
 
 @mixin btn-secondary() {
@@ -84,6 +89,7 @@
   @include btn-secondary-hover();
   @include btn-secondary-active();
   @include btn-disabled();
+  @include btn-secondary-pulse();
 
   &:focus, &.focus,
   &:hover, &.hover,
@@ -229,4 +235,24 @@
 
 @mixin btn-secondary-bg() {
   background-color: nb-theme(btn-secondary-bg);
+}
+
+// Pulse
+@mixin btn-primary-pulse() {
+  @include btn-pulse(primary, nb-theme(btn-primary-bg));
+}
+@mixin btn-success-pulse() {
+  @include btn-pulse(success, nb-theme(btn-success-bg));
+}
+@mixin btn-warning-pulse() {
+  @include btn-pulse(warning, nb-theme(btn-warning-bg));
+}
+@mixin btn-info-pulse() {
+  @include btn-pulse(info, nb-theme(btn-info-bg));
+}
+@mixin btn-danger-pulse() {
+  @include btn-pulse(danger, nb-theme(btn-danger-bg));
+}
+@mixin btn-secondary-pulse() {
+  @include btn-pulse(secondary, nb-theme(btn-secondary-border));
 }
