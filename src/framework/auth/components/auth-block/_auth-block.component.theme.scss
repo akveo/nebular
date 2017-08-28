@@ -8,6 +8,12 @@
     max-width: nb-theme(auth-block-max-width);
     padding: nb-theme(auth-block-padding);
     margin-top: nb-theme(auth-block-margin-top !important);
+    height: nb-theme(auth-block-height);
+
+    nb-card {
+      // TODO check it, I don't think this is the best decision
+      height: 100%;
+    }
 
     .form-text a {
       color: nb-theme(color-fg);
