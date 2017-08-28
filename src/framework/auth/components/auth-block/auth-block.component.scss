@@ -8,7 +8,26 @@
     margin: 0 auto;
   }
 
+  // TODO check when start responsive
+  @media (max-width: 550px) {
+    /deep/ {
+      nb-card {
+        margin: 0;
+      }
+
+      .auth-block {
+        padding: 0 !important;
+
+        .accept-group {
+          font-size: 12px;
+          padding: 0;
+        }
+      }
+    }
+  }
+
   /deep/ {
+
     nb-card-body {
       display: flex;
       align-items: center;

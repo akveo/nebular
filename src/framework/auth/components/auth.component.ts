@@ -8,6 +8,7 @@ import { NbAuthService } from '../services/auth.service';
 
 @Component({
   selector: 'nb-auth',
+  styleUrls: ['./auth.component.scss'],
   template: `
     <nb-layout>
       <nb-layout-column>

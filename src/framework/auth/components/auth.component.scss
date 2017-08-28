@@ -1,0 +1,8 @@
+:host {
+  // TODO check when start responsive
+  @media (max-width: 550px) {
+    /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: 0;
+    }
+  }
+}
