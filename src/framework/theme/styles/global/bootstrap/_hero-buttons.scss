@@ -105,6 +105,7 @@
   @include btn-hero-secondary-active();
   @include btn-hero-secondary-border();
   @include btn-hero-disabled();
+  @include btn-hero-secondary-pulse();
 }
 
 @function btn-hero-gradient-left($color, $degrees: 20deg) {
@@ -610,17 +611,20 @@
 
 // Pulse
 @mixin btn-hero-primary-pulse() {
-    @include btn-pulse(hero-primary, nb-theme(color-primary));
+  @include btn-pulse(hero-primary, nb-theme(color-primary));
 }
 @mixin btn-hero-success-pulse() {
-    @include btn-pulse(hero-success, nb-theme(color-success));
+  @include btn-pulse(hero-success, nb-theme(color-success));
 }
 @mixin btn-hero-danger-pulse() {
-    @include btn-pulse(hero-danger, nb-theme(color-danger));
+  @include btn-pulse(hero-danger, nb-theme(color-danger));
 }
 @mixin btn-hero-info-pulse() {
-    @include btn-pulse(hero-info, nb-theme(color-info));
+  @include btn-pulse(hero-info, nb-theme(color-info));
 }
 @mixin btn-hero-warning-pulse() {
-    @include btn-pulse(hero-warning, nb-theme(color-warning));
+  @include btn-pulse(hero-warning, nb-theme(color-warning));
+}
+@mixin btn-hero-secondary-pulse() {
+  @include  btn-pulse(hero-secondary, nb-theme(btn-secondary-border));
 }
