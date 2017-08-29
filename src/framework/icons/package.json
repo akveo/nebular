@@ -20,5 +20,12 @@
     "theme",
     "nebular",
     "icons"
-  ]
+  ],
+  "files": [
+    "style.css",
+    "fonts/"
+  ],
+  "scripts": {
+    "build": "node ./src/scripts/build"
+  }
 }
