@@ -4,6 +4,7 @@
  - describe framework and demo dependencies
  - create a new component guide
  - usage guide
+ - publish icons
  
 # MUST!
 - Don’t overcomplicate
