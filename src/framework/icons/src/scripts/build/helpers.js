@@ -7,39 +7,99 @@
 const fs = require('fs');
 const path = require('path');
 
+const srcRoot = './tmp';
+const cssRoot = './css';
+const scssRoot = './scss';
+
 const iconsName = 'nebular';
+const license = `/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+`;
 
-function renameFonts() {
-  const fontsPath = './fonts';
+function copyFonts() {
+  const srcFonts = './fonts';
 
-  fs.readdir(fontsPath, (err, files) => {
-    if (err) throw err;
+  const files = fs.readdirSync(path.join(srcRoot, srcFonts));
 
-    files.forEach(file => {
-      const newFileName = iconsName + '.' +file.split('.')[1];
-      fs.rename(path.join(fontsPath, file), path.join(fontsPath, newFileName), err => {
-        if (err) throw err;
-      });
-    })
+  if (!fs.existsSync(srcFonts)) {
+    fs.mkdirSync(srcFonts);
+  }
+
+  files.forEach(file => {
+    const newFileName = iconsName + '.' + file.split('.')[1];
+    fs.createReadStream(path.join(srcRoot, srcFonts, file))
+      .pipe(fs.createWriteStream(path.join(srcFonts, newFileName)));
   })
 }
 
 function fixCss() {
-  const styleFile = './style.css';
+  const srcCss = './style.css';
+  const buildCss = './nebular-icons.css';
+  const srcStylePath = path.join(srcRoot, srcCss);
 
-  fs.readFile(styleFile, (err, data) => {
-    if (err) throw err;
+  const file = fs.readFileSync(srcStylePath).toString();
+  const fixed = license + file
+    .replace(/icomoon/g, iconsName) // font name
+    .replace(/icon/g, 'nb') // prefix
+    .replace(/fonts/g, '../fonts') // fonts path
+    .replace(/:(before)/g, '::$1') // pseudo double semicol
+    .replace(/"nb-"/g, '\'nb-\'') // class selector quotes
+    .replace(/" nb-"/g, '\' nb-\'')
+    .replace(/(content: )"(.*)"/g, '$1\'$2\''); // content quotes
 
-    const file = data.toString();
-    const fixed = file.replace(/icomoon/g, iconsName).replace(/icon/g, 'nb');
+  if (!fs.existsSync(cssRoot)) {
+    fs.mkdirSync(cssRoot);
+  }
+  fs.writeFileSync(path.join(cssRoot, buildCss), fixed);
+}
 
-    fs.writeFile(styleFile, fixed, err => {
-      if (err) throw err;
-    })
-  })
+function genScss() {
+  if (!fs.existsSync(scssRoot)) {
+    fs.mkdirSync(scssRoot);
+  }
+
+  genScssRoot();
+  genScssVariables();
+  genScssFont();
+}
+
+function genScssRoot() {
+  const buildScss = './nebular-icons.scss';
+  const rootFileContent = `${license}
+@import 'nebular-icons-variables';
+@import 'nebular-icons-font';
+`;
+
+  fs.writeFileSync(path.join(scssRoot, buildScss), rootFileContent);
+}
+
+function genScssVariables() {
+  const buildScss = './nebular-icons-variables.scss';
+  const variablesContent = `${license}
+$nebular-icons-font-path: '../fonts' !default;
+$nebular-icons-font-family: 'nebular' !default;
+`;
+
+  fs.writeFileSync(path.join(scssRoot, buildScss), variablesContent);
+}
+
+function genScssFont() {
+  const buildScss = './nebular-icons-font.scss';
+  const buildCss = path.join(cssRoot, 'nebular-icons.css');
+
+  const file = fs.readFileSync(buildCss).toString();
+  const content = file
+    .replace(/\.\.\/fonts/g, '#{$nebular-icons-font-path}')
+    .replace(/(font-family: )(.*)(;)/g, '$1#{$nebular-icons-font-family}$3');
+
+  fs.writeFileSync(path.join(scssRoot, buildScss), content);
 }
 
 module.exports.fixFont = function () {
-  renameFonts();
+  copyFonts();
   fixCss();
+  genScss();
 };

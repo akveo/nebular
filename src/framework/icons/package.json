@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/icons",
-  "version": "2.0.0-alpha.1-dev.13",
-  "description": "@nebular/icons",
+  "name": "nebular-icons",
+  "version": "1.0.0",
+  "description": "Nebular icons - amazing icons crafted with love by Akveo team",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -13,16 +13,16 @@
   },
   "homepage": "https://github.com/akveo/nebular#readme",
   "keywords": [
-    "angular",
-    "typescript",
-    "ng2-admin",
-    "ngx-admin",
     "theme",
+    "fonts",
+    "icon font",
+    "icons",
     "nebular",
-    "icons"
+    "web font"
   ],
   "files": [
-    "style.css",
+    "css/",
+    "scss/",
     "fonts/"
   ],
   "scripts": {
