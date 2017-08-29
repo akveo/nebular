@@ -9,6 +9,11 @@
   .btn-icon {
     font-size: 1.5rem;
     padding: 0.25rem 1rem;
+
+    &:focus,
+    &.focus {
+      box-shadow: none;
+    }
   }
 
   .btn-with-icon {
