@@ -1,5 +1,5 @@
 import { NbJSThemeOptions } from './theme.options';
-import { tint } from './color.helper';
+import { NbColorHelper } from '../color.helper';
 
 const palette = {
   primary: '#8a7fff',
@@ -29,10 +29,10 @@ export const DEFAULT_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: tint(palette.primary, 15),
-    successLight: tint(palette.success, 15),
-    infoLight: tint(palette.info, 15),
-    warningLight: tint(palette.warning, 15),
-    dangerLight: tint(palette.danger, 15),
+    primaryLight: NbColorHelper.tint(palette.primary, 15),
+    successLight: NbColorHelper.tint(palette.success, 15),
+    infoLight: NbColorHelper.tint(palette.info, 15),
+    warningLight: NbColorHelper.tint(palette.warning, 15),
+    dangerLight: NbColorHelper.tint(palette.danger, 15),
   },
 };

@@ -1,5 +1,5 @@
 import { NbJSThemeOptions } from './theme.options';
-import { tint } from './color.helper';
+import { NbColorHelper } from '../color.helper';
 
 const palette = {
   primary: '#7659ff',
@@ -27,10 +27,10 @@ export const COSMIC_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: tint(palette.primary, 20),
-    successLight: tint(palette.success, 20),
-    infoLight: tint(palette.info, 20),
-    warningLight: tint(palette.warning, 20),
-    dangerLight: tint(palette.danger, 20),
+    primaryLight: NbColorHelper.tint(palette.primary, 20),
+    successLight: NbColorHelper.tint(palette.success, 20),
+    infoLight: NbColorHelper.tint(palette.info, 20),
+    warningLight: NbColorHelper.tint(palette.warning, 20),
+    dangerLight: NbColorHelper.tint(palette.danger, 20),
   },
 };
