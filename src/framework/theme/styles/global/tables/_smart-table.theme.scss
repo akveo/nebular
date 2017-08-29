@@ -65,7 +65,7 @@
     }
 
     thead tr {
-      background: nb-theme(smart-table-bg-active);
+      background: nb-theme(smart-table-header-bg);
 
       &.ng2-smart-filters th {
         padding: nb-theme(smart-table-filter-padding);
@@ -82,7 +82,7 @@
       }
 
       &:nth-child(2n) {
-        background-color: shade(nb-theme(smart-table-bg), 5%);
+        background-color: nb-theme(smart-table-bg-even);
       }
     }
 
@@ -92,15 +92,17 @@
         display: block;
         padding: nb-theme(smart-table-filter-padding);
         background: nb-theme(color-success);
+        color: #ffffff;
         border-radius: 0.375rem;
         text-align: center;
-        font-size: 1rem!important;
+        font-size: 1rem !important;
       }
     }
 
     .ng2-smart-actions {
       padding: 0;
-      height: 100%;
+      // fix for 100% height child
+      height: 1px;
 
       ng2-st-tbody-edit-delete, ng2-st-tbody-create-cancel, ng2-st-actions {
         display: flex;
@@ -114,8 +116,8 @@
         height: 100%;
         width: 100%;
 
-        font-size: 1.25rem!important;
-        color: nb-theme(smart-table-fg);
+        font-size: 1.25rem !important;
+        color: nb-theme(smart-table-fg-secondary);
 
         &:not(:last-child) {
          border-right: 1px solid nb-theme(smart-table-separator);
@@ -138,7 +140,7 @@
     // TODO: remove this hack, when it will be possible to identify the whole row in the edit state
     table-cell-edit-mode {
       display: block;
-      margin: -9px;
+      margin: -9px -12px;
     }
 
     //Paging
@@ -171,7 +173,7 @@
           a, > span {
             background: transparent;
             color: nb-theme(btn-outline-fg);
-            padding: nb-theme(btn-padding-y-md) nb-theme(btn-padding-x-md);
+            padding: 0.75rem 1.25rem;
             border: none;
 
             &:hover {
@@ -197,6 +199,7 @@
 
           &.active {
             a, a:hover, a:focus, > span, > span:hover, > span:focus {
+              color: nb-theme(smart-table-paging-fg-active);
               background-color: nb-theme(smart-table-paging-bg-active);
             }
           }

@@ -87,6 +87,16 @@ $theme: (
   checkbox-border-color: color-fg,
   checkbox-selected-border-color: color-success,
   radio-fg: color-fg-heading,
+
+  smart-table-header-font-weight: font-weight-normal,
+  smart-table-header-bg: color-bg-active,
+  smart-table-bg-even: #3a347a,
+
+  smart-table-paging-border-color: color-primary,
+  smart-table-paging-border-width: 2px,
+  smart-table-paging-fg-active: color-fg-heading,
+  smart-table-paging-bg-active: color-primary,
+  smart-table-paging-hover: rgba(0, 0, 0, 0.2),
 );
 
 // register the theme
