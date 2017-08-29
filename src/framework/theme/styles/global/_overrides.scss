@@ -5,7 +5,6 @@
  */
 
 @import 'bootstrap/bootstrap.theme';
-@import 'charts/d3.theme';
 @import 'components/tree.theme';
 @import 'components/toaster.theme';
 @import 'maps/leaflet.theme';
@@ -17,7 +16,6 @@
   @include nb-typography();
 
   @include nb-bootstrap-theme();
-  @include nb-charts-d3-theme();
   @include nb-components-tree-theme();
   @include nb-maps-leaflet-theme();
   @include nb-tables-smart-table-theme();
