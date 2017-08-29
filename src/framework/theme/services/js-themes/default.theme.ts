@@ -17,9 +17,9 @@ export const DEFAULT_THEME: NbJSThemeOptions = {
 
     bg: '#ffffff',
     fg: '#a4abb3',
-    fgHeading: '#282828',
-    fgText: '#484848',
-    fgHighlight: '#40dc7e',
+    fgHeading: '#2a2a2a',
+    fgText: '#3b3b3b',
+    fgHighlight: '#41d974',
     layoutBg: '#ebeff5',
     separator: '#ebeef2',
 

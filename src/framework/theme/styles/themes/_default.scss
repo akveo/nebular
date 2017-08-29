@@ -33,11 +33,11 @@ $theme: (
   line-height: 1.25,
 
   color-bg: #ffffff,
-  color-bg-active: #e9edf2,
+  color-bg-active: #e6f3ff,
   color-fg: #a4abb3,
-  color-fg-heading: #282828,
-  color-fg-text: #484848,
-  color-fg-highlight: #40dc7e,
+  color-fg-heading: #2a2a2a,
+  color-fg-text: #3b3b3b,
+  color-fg-highlight: #41d974,
 
   separator: #ebeef2,
 
@@ -228,9 +228,6 @@ $theme: (
   search-dash: color-fg,
   search-placeholder: color-fg,
 
-  d3-fg: color-fg,
-  d3-legend-bg: #e9e9e9, // TODO: default color?
-
   smart-table-header-font-family: font-secondary,
   smart-table-header-font-size: font-size,
   smart-table-header-font-weight: font-weight-normal,
@@ -293,7 +290,7 @@ $theme: (
   btn-padding-x-md: 1.5rem,
   btn-font-size-md: 1rem,
 
-  btn-padding-y-sm: 0.675rem,
+  btn-padding-y-sm: 0.625rem,
   btn-padding-x-sm: 1.5rem,
   btn-font-size-sm: 0.875rem,
 
