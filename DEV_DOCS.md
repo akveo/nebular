@@ -4,6 +4,7 @@
  - describe framework and demo dependencies
  - create a new component guide
  - usage guide
+ - move nebular-icons in separate repository
  
 # MUST!
 - Don’t overcomplicate
@@ -54,6 +55,7 @@ The main aim of the project is to create a second version of ng2-admin called ng
     - framework - Framework itself, divided into npm packages
         - theme - `@nebular/theme` npm package, main framework package
         - auth - `@nebular/auth` npm package, auth package (login, register, etc)       
+        - icons - `nebular-icons` npm package, cool icons font
       
       
 # Auth // TODO      
@@ -81,7 +83,9 @@ Located in `theme/styles`
 
 - core/ - Common mixins and functions
 - global/ - Root of the 3rd party components overrides and other global styles
+- prebuilt/ - Technical files of which css themes will be compiled
 - themes/ - built-in themes
+- common/ - Shared components styles
 - all.scss - exports all themes' variables, theming engine and global styles
 - components.scss - exports all themes' variables and theming engine but DOES NOT export global styles (should be used in a component)
 - globals.scss - exports all global styles (overrides, components' `*.theme.scss` themes, fonts, etc)
