@@ -1,8 +1,34 @@
-:host {
-  // TODO check when start responsive
+:host /deep/ {
+  $auth-layout-padding: 2.5rem;
+
+  nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding: $auth-layout-padding;
+  }
+
+  nb-card {
+    height: calc(100vh - 2 * #{$auth-layout-padding});
+  }
+
+  nb-card {
+    margin: 0;
+  }
+
+  nb-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // TODO rewrite when develop responsive
   @media (max-width: 550px) {
     /deep/ nb-layout .layout .layout-container .content .columns nb-layout-column {
       padding: 0;
     }
+
+    nb-card {
+      border-radius: 0;
+      height: 100vh;
+    }
   }
+
 }

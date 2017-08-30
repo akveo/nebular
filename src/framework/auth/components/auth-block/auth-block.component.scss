@@ -3,85 +3,63 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-:host {
-  .auth-block {
-    margin: 0 auto;
-  }
 
-  // TODO check when start responsive
+:host /deep/ {
+  // TODO rewrite when develop responsive
   @media (max-width: 550px) {
-    /deep/ {
-      nb-card {
-        margin: 0;
-      }
-
-      .auth-block {
-        padding: 0 !important;
-
-        .accept-group {
-          font-size: 12px;
-          padding: 0;
-        }
-      }
+    .accept-group {
+      font-size: 12px;
+      padding: 0;
     }
   }
 
-  /deep/ {
+  form {
+    width: 100%;
+  }
 
-    nb-card-body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  .alert {
+    text-align: center;
+  }
+
+  .title {
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .sub-title {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .checkbox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+
+  .form-group.accept-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+
+    .forgot-password {
+      line-height: 2;
+    }
+  }
+
+  .links {
+    text-align: center;
+    margin-top: 1.75rem;
+
+    .socials {
+      margin: 1.5rem 0 2.5rem;
     }
 
-    form {
-      width: 100%;
-    }
-
-    .alert {
-      text-align: center;
-    }
-
-    .title {
-      margin-bottom: 0.75rem;
-      text-align: center;
-    }
-
-    .sub-title {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .checkbox {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-weight: normal;
-    }
-
-    .form-group.accept-group {
-      display: flex;
-      justify-content: space-between;
-      margin: 2rem 0;
-
-      .forgot-password {
-        line-height: 2;
-      }
-    }
-
-    .links {
-      text-align: center;
-      margin-top: 1.75rem;
-
-      .socials {
-        margin: 1.5rem 0 2.5rem;
-      }
-
-      .socials a {
-        font-size: 2rem;
-        margin: 0 1rem;
-        text-decoration: none;
-      }
+    .socials a {
+      font-size: 2rem;
+      margin: 0 1rem;
+      text-decoration: none;
     }
   }
 }

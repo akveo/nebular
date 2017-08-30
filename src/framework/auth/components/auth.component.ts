@@ -12,7 +12,13 @@ import { NbAuthService } from '../services/auth.service';
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-auth-block></nb-auth-block>
+        <nb-card>
+          <nb-card-body>
+            <div class="col-xl-4 col-lg-6 col-md-8 col-sm-12">
+              <router-outlet></router-outlet>
+            </div>
+          </nb-card-body>
+        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,

@@ -3,18 +3,9 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+
 @mixin nb-auth-block-theme() {
-  nb-auth-block .auth-block {
-    max-width: nb-theme(auth-block-max-width);
-    padding: nb-theme(auth-block-padding);
-    margin-top: nb-theme(auth-block-margin-top !important);
-    height: nb-theme(auth-block-height);
-
-    nb-card {
-      // TODO check it, I don't think this is the best decision
-      height: 100%;
-    }
-
+  /deep/ {
     .form-text a {
       color: nb-theme(color-fg);
     }
@@ -26,6 +17,16 @@
 
       a {
         color: nb-theme(accept-group-link-color);
+      }
+    }
+
+    .socials a {
+      &::before {
+        color: nb-theme(socials-color);
+      }
+
+      &:hover::before {
+        color: nb-theme(socials-hover-color);
       }
     }
   }
