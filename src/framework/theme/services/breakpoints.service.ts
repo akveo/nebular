@@ -71,10 +71,22 @@ export class NbMediaBreakpointsService {
     const breakpoints = this.getBreakpoints();
 
     return breakpoints
-      .find((point: any, index: number) => {
+      .find((point: NbMediaBreakpoint, index: number) => {
         const next = breakpoints[index + 1];
         return width >= point.width && (!next || width < next.width);
       }) || unknown;
+  }
+
+  /**
+   * Returns a configured breakpoint by name
+   * @param name string
+   * @returns {Z|{name: string, width: number}}
+   */
+  getByName(name: string): NbMediaBreakpoint {
+    const unknown = { name: 'unknown', width: NaN };
+    const breakpoints = this.getBreakpoints();
+
+    return breakpoints.find((point: NbMediaBreakpoint) => name === point.name) || unknown;
   }
 
   /**

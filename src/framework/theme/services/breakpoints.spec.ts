@@ -84,4 +84,38 @@ describe('breakpoint-service', () => {
       expect(breakpointService.getByWidth(Number.POSITIVE_INFINITY).name).toEqual('xxxl');
     });
   });
+
+  describe('getByName', () => {
+    it(`handles unknown breakpoint`, () => {
+      expect(breakpointService.getByName('unknown name').width).toEqual(NaN);
+    });
+
+    it('has correct xs breakpoint', () => {
+      expect(breakpointService.getByName('xs').width).toEqual(0);
+    });
+
+    it('has correct sm breakpoint', () => {
+      expect(breakpointService.getByName('sm').width).toEqual(576);
+    });
+
+    it('has correct md breakpoint', () => {
+      expect(breakpointService.getByName('md').width).toEqual(768);
+    });
+
+    it('has correct lg breakpoint', () => {
+      expect(breakpointService.getByName('lg').width).toEqual(992);
+    });
+
+    it('has correct xl breakpoint', () => {
+      expect(breakpointService.getByName('xl').width).toEqual(1200);
+    });
+
+    it('has correct xxl breakpoint', () => {
+      expect(breakpointService.getByName('xxl').width).toEqual(1400);
+    });
+
+    it('has correct xxxl breakpoint', () => {
+      expect(breakpointService.getByName('xxxl').width).toEqual(1600);
+    });
+  });
 });
