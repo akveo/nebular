@@ -92,8 +92,8 @@ export class NbThemeService {
       .pairwise()
       .map(([prevWidth, width]: [number, number]) => {
         return [
-          this.breakpointService.getBreakpoint(prevWidth),
-          this.breakpointService.getBreakpoint(width),
+          this.breakpointService.getByWidth(prevWidth),
+          this.breakpointService.getByWidth(width),
         ]
       })
       .filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {

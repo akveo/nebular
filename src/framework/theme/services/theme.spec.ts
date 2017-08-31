@@ -91,16 +91,16 @@ describe('theme-service', () => {
       expect(current).toBeUndefined();
 
       themeService.changeWindowWidth(1920);
-      expect(current[0].name).toEqual(breakpointService.getBreakpoint(undefined).name);
+      expect(current[0].name).toEqual(breakpointService.getByWidth(undefined).name);
 
       const xs = 200;
       themeService.changeWindowWidth(xs);
-      expect(current[1].name).toEqual(breakpointService.getBreakpoint(xs).name);
+      expect(current[1].name).toEqual(breakpointService.getByWidth(xs).name);
 
       const sm = 576;
       themeService.changeWindowWidth(sm);
-      expect(current[0].name).toEqual(breakpointService.getBreakpoint(xs).name);
-      expect(current[1].name).toEqual(breakpointService.getBreakpoint(sm).name);
+      expect(current[0].name).toEqual(breakpointService.getByWidth(xs).name);
+      expect(current[1].name).toEqual(breakpointService.getByWidth(sm).name);
     } finally {
       subscription.unsubscribe();
     }
