@@ -367,8 +367,11 @@ $theme: (
   modal-border-radius: radius,
   modal-padding: padding,
   modal-header-font-family: font-secondary,
-  modal-header-font-size: font-size-xlg,
   modal-header-font-weight: font-weight-bolder,
+  modal-header-font-size: font-size-xlg,
+  modal-body-font-family: font-main,
+  modal-body-font-weight: font-weight-normal,
+  modal-body-font-size: font-size,
   modal-separator: separator,
 );
 

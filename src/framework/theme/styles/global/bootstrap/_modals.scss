@@ -27,8 +27,8 @@
     color: nb-theme(modal-fg-heading);
 
     font-family: nb-theme(modal-header-font-family);
-    font-size: nb-theme(modal-header-font-size);
     font-weight: nb-theme(modal-header-font-weight);
+    font-size: nb-theme(modal-header-font-size);
 
     @include nb-headings();
 
@@ -42,6 +42,10 @@
   }
 
   .modal-body {
+    font-family: nb-theme(modal-body-font-family);
+    font-weight: nb-theme(modal-body-font-weight);
+    font-size: nb-theme(modal-body-font-size);
+
     padding: nb-theme(modal-padding);
 
     @include nb-scrollbars(
