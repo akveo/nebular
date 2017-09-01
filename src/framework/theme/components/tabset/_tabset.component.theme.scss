@@ -30,7 +30,8 @@
           color: nb-theme(tabs-fg);
 
           &:hover {
-            color: nb-theme(color-fg-heading);
+            color: nb-theme(tabs-fg-heading);
+            font-weight: nb-theme(tabs-active-font-weight);
           }
 
           &::before {
