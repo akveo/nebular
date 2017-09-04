@@ -70,6 +70,38 @@
   left: 50%;
 }
 
+@mixin install-thumb() {
+  $thumb-selectors: (
+    '::-webkit-slider-thumb'
+    '::-moz-range-thumb'
+    '::-ms-thumb'
+  );
+
+  @each $selector in $thumb-selectors {
+    &#{$selector} {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      @content;
+    }
+  }
+}
+
+@mixin install-track() {
+  $thumb-selectors: (
+    '::-webkit-slider-runnable-track'
+    '::-moz-range-track'
+    '::-ms-track'
+  );
+
+  @each $selector in $thumb-selectors {
+    &#{$selector} {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      @content;
+    }
+  }
+}
+
 @mixin install-placeholder($color, $font-size) {
   $placeholder-selectors: (
     '::-webkit-input-placeholder'
