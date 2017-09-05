@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
-import { List } from 'immutable';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -29,7 +28,7 @@ import { DocsService } from '../../docs/docs.service';
 export class NgdHeaderComponent implements OnInit, OnDestroy {
 
   isMenuActive: boolean = false;
-  menuItems: List<NbMenuItem> = List([]);
+  menuItems: NbMenuItem[] = [];
 
   private structure: any;
   private menuSubscription: Subscription;

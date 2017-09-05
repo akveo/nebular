@@ -5,9 +5,7 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { List } from 'immutable';
-import { Subscription } from 'rxjs/Subscription';
-
+import 'rxjs/add/operator/takeWhile';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
@@ -16,7 +14,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
     <h1>Menu Item #1</h1>
   `,
 })
-export class NbMenuItem1Component {}
+export class NbMenuItem1Component { }
 
 @Component({
   selector: 'nb-menu-item2',
@@ -24,7 +22,7 @@ export class NbMenuItem1Component {}
     <h1>Menu Item #2</h1>
   `,
 })
-export class NbMenuItem2Component {}
+export class NbMenuItem2Component { }
 
 @Component({
   selector: 'nb-menu-item3',
@@ -32,7 +30,7 @@ export class NbMenuItem2Component {}
     <router-outlet></router-outlet>
   `,
 })
-export class NbMenuItem3Component {}
+export class NbMenuItem3Component { }
 
 @Component({
   selector: 'nb-menu-item31',
@@ -40,7 +38,7 @@ export class NbMenuItem3Component {}
     <h1>Menu Item #3.1</h1>
   `,
 })
-export class NbMenuItem31Component {}
+export class NbMenuItem31Component { }
 
 @Component({
   selector: 'nb-menu-item32',
@@ -48,7 +46,7 @@ export class NbMenuItem31Component {}
     <h1>Menu Item #3.2</h1>
   `,
 })
-export class NbMenuItem32Component {}
+export class NbMenuItem32Component { }
 
 @Component({
   selector: 'nb-menu-item33',
@@ -56,7 +54,7 @@ export class NbMenuItem32Component {}
     <router-outlet></router-outlet>
   `,
 })
-export class NbMenuItem33Component {}
+export class NbMenuItem33Component { }
 
 @Component({
   selector: 'nb-menu-item331',
@@ -64,7 +62,7 @@ export class NbMenuItem33Component {}
     <h1>Menu Item #3.3.1</h1>
   `,
 })
-export class NbMenuItem331Component {}
+export class NbMenuItem331Component { }
 
 @Component({
   selector: 'nb-menu-item332',
@@ -72,7 +70,7 @@ export class NbMenuItem331Component {}
     <h1>Menu Item #3.3.2</h1>
   `,
 })
-export class NbMenuItem332Component {}
+export class NbMenuItem332Component { }
 
 @Component({
   selector: 'nb-menu-item4',
@@ -80,7 +78,7 @@ export class NbMenuItem332Component {}
     <h1>Menu Item #4</h1>
   `,
 })
-export class NbMenuItem4Component {}
+export class NbMenuItem4Component { }
 
 @Component({
   selector: 'nb-menu-test',
@@ -100,7 +98,7 @@ export class NbMenuItem4Component {}
   `,
 })
 export class NbMenuTestComponent implements OnInit, OnDestroy {
-  menuItems = List<NbMenuItem>([
+  menuItems = [
     {
       title: 'Menu Items',
       group: true,
@@ -113,36 +111,36 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       title: 'Menu #2',
       link: '/menu/2',
     },
-  ]);
+  ];
 
-  private itemClickSubscription: Subscription;
-  private itemSelectSubscription: Subscription;
-  private itemHoverSubscription: Subscription;
-  private submenuToggleSubscription: Subscription;
+  private alive: boolean = true;
 
-  constructor(private menuService: NbMenuService) {}
+  constructor(private menuService: NbMenuService) { }
 
   ngOnInit() {
-    this.itemClickSubscription = this.menuService
+    this.menuService
       .onItemClick()
+      .takeWhile(() => this.alive)
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
-    this.itemSelectSubscription = this.menuService
+    this.menuService
       .onItemSelect()
+      .takeWhile(() => this.alive)
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     // this.itemHoverSubscription = this.menuService.onItemHover()
     //   .subscribe((data: { tag: string, item: NbMenuItem }) => console.info(data));
 
-    this.submenuToggleSubscription = this.menuService
+    this.menuService
       .onSubmenuToggle()
+      .takeWhile(() => this.alive)
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService.addItems(
-      List<NbMenuItem>([
+      [
         {
           title: 'Menu #3',
-          children: List<NbMenuItem>([
+          children: [
             {
               title: 'Menu #3.1',
               link: '/menu/3/1',
@@ -153,7 +151,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
             },
             {
               title: 'Menu #3.3',
-              children: List<NbMenuItem>([
+              children: [
                 {
                   title: 'Menu #3.3.1',
                   link: '/menu/3/3/1',
@@ -168,24 +166,21 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
                   target: '_blank',
                   url: 'https://github.com/akveo/ng2-admin',
                 },
-              ]),
+              ],
             },
-          ]),
+          ],
         },
-      ]),
+      ],
       'firstMenu',
     );
   }
 
   ngOnDestroy() {
-    this.itemClickSubscription.unsubscribe();
-    this.itemSelectSubscription.unsubscribe();
-    // this.itemHoverSubscription.unsubscribe();
-    this.submenuToggleSubscription.unsubscribe();
+    this.alive = false;
   }
 
   addMenuItem() {
-    this.menuService.addItems(List<NbMenuItem>([{ title: 'New Menu Item' }]), 'firstMenu');
+    this.menuService.addItems([{ title: 'New Menu Item' }], 'firstMenu');
   }
 
   navigateHome() {

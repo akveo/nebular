@@ -168,7 +168,6 @@ const ROLLUP_GLOBALS = {
   'rxjs/add/operator/zipProto': 'Rx.Observable.prototype',
 
   // 3rd party dependencies
-  'immutable': 'immutable',
   '@ng-bootstrap/ng-bootstrap': 'ng-bootstrap.ng-bootstrap',
 
   // @nebular dependencies

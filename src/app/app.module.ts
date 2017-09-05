@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { List } from 'immutable';
 
 import {
   NbActionsModule,
@@ -121,12 +120,12 @@ const NB_TEST_COMPONENTS = [
     NbCardModule,
     NbLayoutModule,
     NbMenuModule.forRoot({
-      items: List<NbMenuItem>([{
+      items: [{
         title: 'Menu #4',
         link: '/menu/4',
       }, {
         title: 'Menu #5',
-      }]),
+      }],
     }),
     NbRouteTabsetModule,
     NbSidebarModule.forRoot(),

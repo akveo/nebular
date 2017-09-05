@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { List } from 'immutable';
 import 'rxjs/add/operator/publish';
 
 const itemClick$ = new ReplaySubject(1);
@@ -27,7 +26,7 @@ export abstract class NbMenuItem {
   url?: string;
   icon?: string;
   expanded?: boolean;
-  children?: List<NbMenuItem>;
+  children?: NbMenuItem[];
   target?: string;
   hidden?: boolean;
   pathMath?: string = 'full'; // TODO: is not set if item is initialized by default, should be set anyway
@@ -40,7 +39,7 @@ export abstract class NbMenuItem {
 }
 
 export interface NbMenuOptions {
-  items?: List<NbMenuItem>;
+  items?: NbMenuItem[];
 }
 
 export const nbMenuOptionsToken = new InjectionToken<NbMenuOptions>('NB_MENU_OPTIONS');
@@ -48,7 +47,7 @@ export const nbMenuOptionsToken = new InjectionToken<NbMenuOptions>('NB_MENU_OPT
 // TODO: map select events to router change events
 @Injectable()
 export class NbMenuService {
-  addItems(items: List<NbMenuItem>, tag?: string) {
+  addItems(items: NbMenuItem[], tag?: string) {
     addItems$.next({ tag, items });
   }
 
@@ -83,30 +82,29 @@ export class NbMenuService {
 
 @Injectable()
 export class NbMenuInternalService {
-  private stack = List<NbMenuItem>();
-
-  private items = List<NbMenuItem>();
+  private stack: NbMenuItem[] = [];
+  private items: NbMenuItem[] = [];
 
   constructor(private router: Router, private location: Location, @Inject(nbMenuOptionsToken) private options: any) {
     if (options && options.items) {
-      this.items = List<NbMenuItem>(this.options.items);
+      this.items = [...this.options.items];
     } else {
-      this.items = List<NbMenuItem>();
+      this.items = [];
     }
   }
 
-  getItems(): List<NbMenuItem> {
-    return List<NbMenuItem>(this.items);
+  getItems(): NbMenuItem[] {
+    return this.items;
   }
 
-  prepareItems(items: List<NbMenuItem>) {
+  prepareItems(items: NbMenuItem[]) {
     items.forEach(i => this.setParent(i));
     items.forEach(i => this.prepareItem(i));
 
     this.clearStack();
   }
 
-  onAddItem(): Observable<{ tag: string; items: List<NbMenuItem> }> {
+  onAddItem(): Observable<{ tag: string; items: NbMenuItem[] }> {
     return addItems$.publish().refCount();
   }
 
@@ -132,7 +130,7 @@ export class NbMenuInternalService {
     });
   }
 
-  resetItems(items: List<NbMenuItem>) {
+  resetItems(items: NbMenuItem[]) {
     items.forEach(i => this.resetItem(i));
 
     this.clearStack();
@@ -152,7 +150,7 @@ export class NbMenuInternalService {
     });
   }
 
-  collapseAll(items: List<NbMenuItem>, except?: NbMenuItem) {
+  collapseAll(items: NbMenuItem[], except?: NbMenuItem) {
     items.forEach(i => this.collapseItem(i, except));
 
     this.clearStack();
@@ -161,10 +159,10 @@ export class NbMenuInternalService {
   private resetItem(parent: NbMenuItem) {
     parent.selected = false;
 
-    this.stack = this.stack.push(parent);
+    this.stack.push(parent);
 
-    if (parent.children && parent.children.size > 0) {
-      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
+    if (parent.children && parent.children.length > 0) {
+      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.includes(c))[0];
 
       if (firstSelected) {
         firstSelected.selected = false;
@@ -185,10 +183,10 @@ export class NbMenuInternalService {
 
     parent.expanded = false;
 
-    this.stack = this.stack.push(parent);
+    this.stack.push(parent);
 
-    if (parent.children && parent.children.size > 0) {
-      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
+    if (parent.children && parent.children.length > 0) {
+      const firstSelected = parent.children.filter((c: NbMenuItem) => !this.stack.includes(c))[0];
 
       if (firstSelected) {
         firstSelected.expanded = false;
@@ -203,8 +201,8 @@ export class NbMenuInternalService {
   }
 
   private setParent(parent: NbMenuItem) {
-    if (parent.children && parent.children.size > 0) {
-      const firstItemWithoutParent = parent.children.filter(c => c.parent === null || c.parent === undefined).first();
+    if (parent.children && parent.children.length > 0) {
+      const firstItemWithoutParent = parent.children.filter(c => c.parent === null || c.parent === undefined)[0];
 
       if (firstItemWithoutParent) {
         firstItemWithoutParent.parent = parent;
@@ -221,7 +219,7 @@ export class NbMenuInternalService {
   private prepareItem(parent: NbMenuItem) {
     parent.selected = false;
 
-    this.stack = this.stack.push(parent);
+    this.stack.push(parent);
 
     if (parent.expanded) {
       if (parent.parent) {
@@ -242,8 +240,8 @@ export class NbMenuInternalService {
       }
     }
 
-    if (parent.children && parent.children.size > 0) {
-      const firstUnchecked = parent.children.filter((c: NbMenuItem) => !this.stack.contains(c)).first();
+    if (parent.children && parent.children.length > 0) {
+      const firstUnchecked = parent.children.filter((c: NbMenuItem) => !this.stack.includes(c))[0];
 
       if (firstUnchecked) {
         this.prepareItem(firstUnchecked);
@@ -256,6 +254,6 @@ export class NbMenuInternalService {
   }
 
   private clearStack() {
-    this.stack = this.stack.clear();
+    this.stack = [];
   }
 }

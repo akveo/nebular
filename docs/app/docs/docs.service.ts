@@ -5,7 +5,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { List } from 'immutable';
 import { NbMenuItem } from '@nebular/theme';
 
 import { Subject } from 'rxjs/Subject';
@@ -126,6 +125,6 @@ export class DocsService {
       menuItems = prependMenu.concat(menuItems);
     }
 
-    return List<NbMenuItem>(menuItems);
+    return menuItems;
   }
 }

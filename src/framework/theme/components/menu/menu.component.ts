@@ -6,9 +6,8 @@
 
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { List } from 'immutable';
+import 'rxjs/add/operator/takeWhile';
 
 import { NbMenuInternalService, NbMenuItem } from './menu.service';
 import { convertToBoolProperty } from '../helpers';
@@ -26,7 +25,7 @@ export class NbMenuItemComponent {
   @Output() selectItem = new EventEmitter<any>();
   @Output() itemClick = new EventEmitter<any>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onToggleSubMenu(item: NbMenuItem) {
     this.toggleSubMenu.emit(item);
@@ -65,7 +64,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   @HostBinding('class.inverse') inverseValue: boolean;
 
   @Input() tag: string;
-  @Input() items = List<NbMenuItem>();
+  @Input() items: NbMenuItem[];
 
   /**
    * Makes colors inverse based on current theme
@@ -76,34 +75,35 @@ export class NbMenuComponent implements OnInit, OnDestroy {
     this.inverseValue = convertToBoolProperty(val);
   }
 
-  private stack = List<NbMenuItem>();
+  private stack: NbMenuItem[] = [];
+  private alive: boolean = true;
 
-  private addItemSubscription: Subscription;
-  private navigateHomeSubscription: Subscription;
-  private getSelectedItemSubscription: Subscription;
-
-  constructor(private menuInternalService: NbMenuInternalService, private router: Router) {}
+  constructor(private menuInternalService: NbMenuInternalService, private router: Router) { }
 
   ngOnInit() {
-    this.addItemSubscription = this.menuInternalService
+    this.menuInternalService
       .onAddItem()
-      .subscribe((data: { tag: string; items: List<NbMenuItem> }) => {
+      .takeWhile(() => this.alive)
+      .subscribe((data: { tag: string; items: NbMenuItem[] }) => {
         if (this.compareTag(data.tag)) {
-          this.items = this.items.push(...data.items.toJS());
+          this.items.push(...data.items);
 
           this.menuInternalService.prepareItems(this.items);
         }
       });
 
-    this.navigateHomeSubscription = this.menuInternalService.onNavigateHome().subscribe((data: { tag: string }) => {
-      if (this.compareTag(data.tag)) {
-        this.navigateHome();
-      }
-    });
+    this.menuInternalService.onNavigateHome()
+      .takeWhile(() => this.alive)
+      .subscribe((data: { tag: string }) => {
+        if (this.compareTag(data.tag)) {
+          this.navigateHome();
+        }
+      });
 
-    this.getSelectedItemSubscription = this.menuInternalService
+    this.menuInternalService
       .onGetSelectedItem()
       .filter(data => !data.tag || data.tag === this.tag)
+      .takeWhile(() => this.alive)
       .subscribe((data: { tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }) => {
         let selectedItem: NbMenuItem;
         this.items.forEach(i => {
@@ -125,15 +125,9 @@ export class NbMenuComponent implements OnInit, OnDestroy {
         this.menuInternalService.prepareItems(this.items);
       }
     });
-    this.items = this.items.push(...this.menuInternalService.getItems().toJS());
+    this.items.push(...this.menuInternalService.getItems());
 
     this.menuInternalService.prepareItems(this.items);
-  }
-
-  ngOnDestroy() {
-    this.addItemSubscription.unsubscribe();
-    this.navigateHomeSubscription.unsubscribe();
-    this.getSelectedItemSubscription.unsubscribe();
   }
 
   onHoverItem(item: NbMenuItem) {
@@ -156,6 +150,10 @@ export class NbMenuComponent implements OnInit, OnDestroy {
 
   onItemClick(item: NbMenuItem) {
     this.menuInternalService.itemClick(item, this.tag);
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   private navigateHome() {
@@ -184,14 +182,14 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   }
 
   private getHomeItem(parent: NbMenuItem): NbMenuItem {
-    this.stack = this.stack.push(parent);
+    this.stack.push(parent);
 
     if (parent.home) {
       return parent;
     }
 
-    if (parent.children && parent.children.size > 0) {
-      const first = parent.children.filter(c => !this.stack.contains(c)).first();
+    if (parent.children && parent.children.length > 0) {
+      const first = parent.children.filter(c => !this.stack.includes(c))[0];
 
       if (first) {
         return this.getHomeItem(first);
@@ -204,7 +202,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   }
 
   private clearStack() {
-    this.stack = this.stack.clear();
+    this.stack = [];
   }
 
   private compareTag(tag: string) {
@@ -212,14 +210,14 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   }
 
   private getSelectedItem(parent: NbMenuItem): NbMenuItem {
-    this.stack = this.stack.push(parent);
+    this.stack.push(parent);
 
     if (parent.selected) {
       return parent;
     }
 
-    if (parent.children && parent.children.size > 0) {
-      const first = parent.children.filter(c => !this.stack.contains(c)).first();
+    if (parent.children && parent.children.length > 0) {
+      const first = parent.children.filter(c => !this.stack.includes(c))[0];
 
       if (first) {
         return this.getSelectedItem(first);

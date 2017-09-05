@@ -5,8 +5,7 @@
  */
 
 import { Component, OnDestroy, ElementRef, Renderer2, OnInit, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute }  from '@angular/router';
-import { List } from 'immutable';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { NbMenuItem } from '@nebular/theme';
@@ -35,7 +34,7 @@ import 'rxjs/add/operator/filter';
 export class NgdDocsComponent implements OnDestroy, AfterViewInit {
 
   structure: any;
-  menuItems: List<NbMenuItem> = List([]);
+  menuItems: NbMenuItem[] = [];
   private routerSubscription: Subscription;
   private fragmentSubscription: Subscription;
 
@@ -52,7 +51,7 @@ export class NgdDocsComponent implements OnDestroy, AfterViewInit {
     this.routerSubscription = this.router.events
       .subscribe((event) => {
         if (event['url'] === '/docs') {
-          const firstMenuItem = this.menuItems.get(0).children.get(0);
+          const firstMenuItem = this.menuItems[0].children[0];
           this.menuInternalService.itemSelect(firstMenuItem);
           this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true });
         }
