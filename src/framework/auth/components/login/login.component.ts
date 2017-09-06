@@ -82,9 +82,9 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
         <small class="form-text">Or connect with:</small>
 
         <div class="socials">
-          <a href="https://github.com/akveo" target="_blank" class="ion ion-social-github"></a>
-          <a href="https://www.facebook.com/akveo/" target="_blank" class="fa fa-facebook-square"></a>
-          <a href="https://twitter.com/akveo_inc" target="_blank" class="ion ion-social-twitter"></a>
+          <a href="https://github.com/akveo" target="_blank" class="socicon-github"></a>
+          <a href="https://www.facebook.com/akveo/" target="_blank" class="socicon-facebook"></a>
+          <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon-twitter"></a>
         </div>
 
         <small class="form-text">
