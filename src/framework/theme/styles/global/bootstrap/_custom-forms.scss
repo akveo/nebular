@@ -27,27 +27,23 @@
       transform: translateY(-50%);
     }
 
-    .custom-checkbox > .custom-control-input {
-      &:checked ~ .custom-control-indicator::before {
-        content: '';
-        width: 0.5rem;
-        height: 0.75rem;
-        border: solid nb-theme(checkbox-fg);
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-      }
+    &.custom-checkbox > .custom-control-input:checked ~ .custom-control-indicator::before {
+      content: '';
+      width: 0.5rem;
+      height: 0.75rem;
+      border: solid nb-theme(checkbox-fg);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
 
-    .custom-radio > .custom-control-input {
-      &:checked ~ .custom-control-indicator::before {
-        content: '';
-        width: 0.75rem;
-        height: 0.75rem;
-        background-color: nb-theme(radio-fg);
-        border-radius: 50%;
-        position: absolute;
-        top: 15%;
-      }
+    &.custom-radio > .custom-control-input:checked ~ .custom-control-indicator::before {
+      content: '';
+      width: 0.75rem;
+      height: 0.75rem;
+      background-color: nb-theme(radio-fg);
+      border-radius: 50%;
+      position: absolute;
+      top: 15%;
     }
 
     .custom-control-input {
