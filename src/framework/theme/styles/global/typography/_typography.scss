@@ -167,6 +167,10 @@
     font-size: 100%;
   }
 
+  small, .small {
+    font-size: 0.875rem;
+  }
+
   mark, .mark {
     padding: 0.05em;
     background-color: text-primary();
