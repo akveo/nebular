@@ -34,11 +34,8 @@
     }
 
     &.rotate-layout {
-      .wrapper {
-        opacity: 0;
-        background: nb-theme(search-bg);
-      }
-
+      opacity: 0;
+      background: nb-theme(search-bg);
     }
 
     &.modal-zoomin {
@@ -77,18 +74,14 @@
     }
 
 		&.column-curtain {
-			.wrapper {
-        &::before {
-          background: nb-theme(search-bg);
-        }
-        &::after {
-          background: transparent;
-        }
+      &::before {
+        background: nb-theme(search-bg);
       }
-      &.show {
-        .wrapper::after {
-          background: nb-theme(search-bg-secondary);
-        }
+      &::after {
+        background: transparent;
+      }
+      &.show::after {
+        background: nb-theme(search-bg-secondary);
       }
 		}
   }

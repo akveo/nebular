@@ -34,19 +34,17 @@ import 'rxjs/add/operator/delay';
     'styles/search.component.modal-half.scss',
   ],
   template: `
-    <div class="wrapper">
-      <div class="search" (keyup.esc)="closeSearch()" >
-        <button (click)="closeSearch()">
-          <i class="ion-ios-close-outline"></i>
-        </button>
-        <div class="form-wrapper">
-          <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
-            <div class="form-content">
-              <input class="search-input" #searchInput autocomplete="off" [attr.placeholder]="placeholder"/>
-            </div>
-            <span class="info">Hit enter to search</span>
-          </form>
-        </div>
+    <div class="search" (keyup.esc)="closeSearch()" >
+      <button (click)="closeSearch()">
+        <i class="ion-ios-close-outline"></i>
+      </button>
+      <div class="form-wrapper">
+        <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
+          <div class="form-content">
+            <input class="search-input" #searchInput autocomplete="off" [attr.placeholder]="placeholder"/>
+          </div>
+          <span class="info">Hit enter to search</span>
+        </form>
       </div>
     </div>
   `,
