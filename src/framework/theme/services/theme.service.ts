@@ -29,7 +29,7 @@ export class NbThemeService {
   // TODO: behavioral subject here?
   currentTheme: string;
   private themeChanges$ = new ReplaySubject(1);
-  private appendToLayoutTop$ = new ReplaySubject(1);
+  private appendToLayoutTop$ = new ReplaySubject();
   private createLayoutTop$ = new Subject();
   private appendLayoutClass$ = new Subject();
   private removeLayoutClass$ = new Subject();
@@ -53,10 +53,9 @@ export class NbThemeService {
   }
 
   appendToLayoutTop<T>(component: Type<T>): Observable<any> {
-    const observable = new BehaviorSubject(null);
-    this.appendToLayoutTop$.next({ component, listener: observable });
-
-    return observable.asObservable();
+    const subject = new ReplaySubject(1);
+    this.appendToLayoutTop$.next({ component, listener: subject });
+    return subject.asObservable();
   }
 
   /**
@@ -74,7 +73,7 @@ export class NbThemeService {
   clearLayoutTop(): Observable<any> {
     const observable = new BehaviorSubject(null);
     this.createLayoutTop$.next({ listener: observable });
-    this.appendToLayoutTop$ = new ReplaySubject(1);
+    this.appendToLayoutTop$ = new ReplaySubject();
     return observable.asObservable();
   }
 
