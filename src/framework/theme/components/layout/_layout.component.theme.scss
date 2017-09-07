@@ -136,7 +136,7 @@
     .layout-container {
 
       nb-sidebar.fixed {
-        top: #{nb-theme(header-height)};
+        top: nb-theme(header-height);
       }
 
       .content {

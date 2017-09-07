@@ -8,32 +8,78 @@
   nb-menu {
     font-family: nb-theme(menu-font-family);
     font-size: nb-theme(menu-font-size);
+    font-weight: nb-theme(menu-font-weight);
+    background: nb-theme(menu-bg);
+    color: nb-theme(menu-fg);
 
     .menu-group {
       font-weight: nb-theme(menu-group-font-weight);
       font-size: nb-theme(menu-group-font-size);
       color: nb-theme(menu-group-fg);
-    }
-
-    .menu-group,
-    .menu-item > a {
       padding: nb-theme(menu-item-padding);
     }
 
     .menu-item {
-      a:hover {
-        background-color: nb-theme(menu-active-bg);
-        color: nb-theme(menu-active-fg);
+      a {
+        padding: nb-theme(menu-item-padding);
+        border-radius: nb-theme(menu-submenu-item-border-radius);
       }
 
+      a:hover,
       a.active {
         background-color: nb-theme(menu-active-bg);
         color: nb-theme(menu-active-fg);
+        font-weight: nb-theme(menu-active-font-weight);
+
+        .menu-icon,
+        .chevron {
+          color: nb-theme(menu-icon-active-color);
+        }
+      }
+
+      .menu-icon {
+        font-size: nb-theme(menu-icon-font-size);
+        width: nb-theme(menu-icon-font-size);
+        margin-right: 1rem;
+        text-align: center;
+        color: nb-theme(menu-icon-color);
+      }
+
+      .chevron {
+        font-size: 0.875rem;
+        color: nb-theme(menu-icon-color);
       }
     }
 
     .menu-items.expanded {
       background-color: nb-theme(menu-submenu-bg);
+    }
+
+    .menu-item > .menu-items {
+      padding: nb-theme(menu-submenu-padding);
+    }
+
+    .menu-item > .menu-items > .menu-item {
+      border: none;
+      background: nb-theme(menu-submenu-bg);
+      color: nb-theme(menu-submenu-fg);
+      padding: nb-theme(menu-submenu-item-padding);
+
+      a {
+        border: nb-theme(menu-submenu-item-border-width) solid nb-theme(menu-submenu-bg);
+      }
+
+      a:hover {
+        color: nb-theme(menu-submenu-hover-fg);
+        background: nb-theme(menu-submenu-hover-bg);
+      }
+
+      a.active {
+        background-color: nb-theme(menu-submenu-active-bg);
+        color: nb-theme(menu-submenu-active-fg);
+        border-color: nb-theme(menu-submenu-active-border-color);
+        box-shadow: nb-theme(menu-submenu-active-shadow);
+      }
     }
   }
 

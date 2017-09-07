@@ -63,6 +63,20 @@
       nb-menu {
         width: nb-theme(sidebar-width-compact);
 
+        .menu-item a.active {
+          position: relative;
+
+          &::before {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: nb-theme(color-fg-highlight);
+          }
+        }
+
         .menu-items > .menu-item {
           border-bottom: 1px solid nb-theme(menu-item-separator);
           transition: border-color 1s ease;
@@ -75,8 +89,7 @@
             display: block;
             color: transparent;
             width: 0;
-            padding-left: 0;
-            padding-right: 0;
+            padding: 0;
             overflow: hidden;
           }
 

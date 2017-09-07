@@ -7,17 +7,8 @@
 :host /deep/ {
   display: block;
 
-  .menu-item > .menu-items > .menu-item {
-    a {
-      padding-left: 2rem;
-    }
-  }
-
+  .menu-items,
   .menu-item > .menu-items {
-    padding: 0.5rem 0;
-  }
-
-  .menu-items {
     list-style-type: none;
     transition: visibility 0s, opacity 0.2s linear;
     padding: 0;
@@ -35,23 +26,14 @@
     }
   }
 
-  .menu-item {
-    a {
-      display: flex;
-      color: inherit;
-      text-decoration: none;
-      align-items: center;
+  .menu-item a {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    align-items: center;
 
-      .menu-icon {
-        font-size: 2rem;
-        margin-right: 1rem;
-        width: 2rem;
-        text-align: center;
-      }
-
-      .menu-title {
-        flex: 1;
-      }
+    .menu-title {
+      flex: 1;
     }
   }
 }

@@ -66,8 +66,14 @@ $theme: (
   menu-bg: color-bg,
   menu-active-fg: color-white,
   menu-group-fg: color-white,
+  menu-font-weight: font-weight-normal,
+  menu-active-font-weight: font-weight-bolder,
   menu-submenu-bg: layout-bg,
   menu-submenu-fg: color-fg,
+  menu-submenu-active-fg: color-fg-heading,
+  menu-submenu-active-bg: rgba(0, 255, 170, 0.25),
+  menu-submenu-active-border-color: color-fg-highlight,
+  menu-submenu-active-shadow: 0 2px 12px 0 rgba(0, 255, 170, 0.25),
 
   btn-hero-shadow: 0 4px 10px 0 rgba(33, 7, 77, 0.5),
   btn-hero-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
@@ -91,6 +97,7 @@ $theme: (
   smart-table-header-font-weight: font-weight-normal,
   smart-table-header-bg: color-bg-active,
   smart-table-bg-even: #3a347a,
+  smart-table-bg-active: color-bg-active,
 
   smart-table-paging-border-color: color-primary,
   smart-table-paging-border-width: 2px,
