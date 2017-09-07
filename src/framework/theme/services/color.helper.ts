@@ -1,10 +1,10 @@
 export class NbColorHelper {
   static shade(color, weight) {
-    return this.mix('#000000', color, weight);
+    return NbColorHelper.mix('#000000', color, weight);
   }
 
   static tint(color, weight) {
-    return this.mix('#ffffff', color, weight);
+    return NbColorHelper.mix('#ffffff', color, weight);
   }
 
   static mix(color1, color2, weight) {
