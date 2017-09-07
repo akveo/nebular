@@ -91,12 +91,6 @@
         }
       }
 		}
-
-    &.simple-search {
-      input {
-        border-bottom: 1px solid nb-theme(search-dash);
-      }
-    }
   }
 
   nb-search {
@@ -104,5 +98,4 @@
       color: nb-theme(search-btn-open-fg);
     }
   }
-
 }

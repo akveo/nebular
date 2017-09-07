@@ -32,19 +32,17 @@ import 'rxjs/add/operator/delay';
     'styles/search.component.column-curtain.scss',
     'styles/search.component.modal-drop.scss',
     'styles/search.component.modal-half.scss',
-    'styles/search.component.simple-search.scss',
   ],
   template: `
     <div class="wrapper">
       <div class="search" (keyup.esc)="closeSearch()" >
         <button (click)="closeSearch()">
-          <i class="ion-ios-close-outline icon">&nbsp;</i>
+          <i class="ion-ios-close-outline"></i>
         </button>
         <div class="form-wrapper">
           <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
             <div class="form-content">
-              <input class="search-input" #searchInput autocomplete="off" [attr.placeholder]="placeholder"
-              (blur)="onBlur()"/>
+              <input class="search-input" #searchInput autocomplete="off" [attr.placeholder]="placeholder"/>
             </div>
             <span class="info">Hit enter to search</span>
           </form>
@@ -62,7 +60,6 @@ export class NbSearchFieldComponent {
   static readonly TYPE_COLUMN_CURTAIN = 'column-curtain';
   static readonly TYPE_MODAL_DROP = 'modal-drop';
   static readonly TYPE_MODAL_HALF = 'modal-half';
-  static readonly TYPE_SIMPLE_SEARCH = 'simple-search';
 
   @Input() searchType: string;
   @Input() placeholder: string;
@@ -109,11 +106,6 @@ export class NbSearchFieldComponent {
     return this.searchType === NbSearchFieldComponent.TYPE_MODAL_HALF;
   }
 
-  @HostBinding('class.simple-search')
-  get simpleSearch() {
-    return this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH;
-  }
-
   @Input()
   set type(val: any) {
     this.searchType = val;
@@ -128,12 +120,6 @@ export class NbSearchFieldComponent {
       this.search.emit(term);
     }
   }
-
-  onBlur() {
-    if (this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH && this.showSearch) {
-      this.closeSearch();
-    }
-  }
 }
 
 @Component({
@@ -141,13 +127,11 @@ export class NbSearchFieldComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <div class="search-wrap">
-      <button (click)="openSearch()">
-        <i class="ion-ios-search icon">&nbsp;</i>
-      </button>
-      <ng-template #attachedSearchContainer></ng-template>
-    </div>
-    `,
+    <button (click)="openSearch()">
+      <i class="nb-search"></i>
+    </button>
+    <ng-template #attachedSearchContainer></ng-template>
+  `,
 })
 export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -160,18 +144,12 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private searchFieldComponentRef: ComponentRef<any> = null;
   private searchType: string = 'rotate-layout';
-  private createFieldSubscription: Subscription;
   private activateSearchSubscription: Subscription;
   private deactivateSearchSubscription: Subscription;
 
   constructor(private searchService: NbSuperSearchService,
     private themeService: NbThemeService,
     private componentFactoryResolver: ComponentFactoryResolver) { }
-
-  @HostBinding('class.simple-search')
-  get simpleSearch() {
-    return this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH;
-  }
 
   @Input()
   set type(val: any) {
@@ -208,12 +186,10 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.activateSearchSubscription = this.searchService.onSearchActivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = true;
-        if (this.searchType !== NbSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
-          this.themeService.appendLayoutClass(this.searchType);
-          Observable.of(null).delay(0).subscribe(() => {
-            this.themeService.appendLayoutClass('with-search');
-          });
-        }
+        this.themeService.appendLayoutClass(this.searchType);
+        Observable.of(null).delay(0).subscribe(() => {
+          this.themeService.appendLayoutClass('with-search');
+        });
         this.searchFieldComponentRef.instance.showSearch = true;
         this.searchFieldComponentRef.instance.inputElement.nativeElement.focus();
         this.searchFieldComponentRef.changeDetectorRef.detectChanges();
@@ -223,35 +199,29 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deactivateSearchSubscription = this.searchService.onSearchDeactivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = false;
+        // TODO: refactor long path of properties
         this.searchFieldComponentRef.instance.showSearch = false;
         this.searchFieldComponentRef.instance.inputElement.nativeElement.value = '';
         this.searchFieldComponentRef.instance.inputElement.nativeElement.blur();
         this.searchFieldComponentRef.changeDetectorRef.detectChanges();
-        if (this.searchType !== NbSearchFieldComponent.TYPE_SIMPLE_SEARCH) {
-          this.themeService.removeLayoutClass('with-search');
-          Observable.of(null).delay(500).subscribe(() => {
-            this.themeService.removeLayoutClass(this.searchType);
-          });
-        }
+        this.themeService.removeLayoutClass('with-search');
+        Observable.of(null).delay(500).subscribe(() => {
+          this.themeService.removeLayoutClass(this.searchType);
+        });
       }
     });
   }
 
   ngAfterViewInit() {
-    const fieldComponentObservable = this.searchType === NbSearchFieldComponent.TYPE_SIMPLE_SEARCH ?
-      this.createAttachedSearch(NbSearchFieldComponent)
-      : this.themeService.appendToLayoutTop(NbSearchFieldComponent);
-    this.createFieldSubscription = fieldComponentObservable.subscribe((componentRef: ComponentRef<any>) => {
-      if (componentRef) {
+    this.themeService.appendToLayoutTop(NbSearchFieldComponent)
+      .subscribe((componentRef: ComponentRef<any>) => {
         this.connectToSearchField(componentRef);
-      }
-    });
+      });
   }
 
   ngOnDestroy() {
     this.activateSearchSubscription.unsubscribe();
     this.deactivateSearchSubscription.unsubscribe();
-    this.createFieldSubscription.unsubscribe();
     // TODO: fix issue with destroy and remove this condition
     if (this.searchFieldComponentRef) {
       this.searchFieldComponentRef.destroy();

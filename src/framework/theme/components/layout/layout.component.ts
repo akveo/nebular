@@ -295,6 +295,7 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.component);
         const componentRef = this.veryTopRef.createComponent(componentFactory);
         data.listener.next(componentRef);
+        data.listener.complete();
       });
 
     this.clearSubscription = this.themeService.onClearLayoutTop()

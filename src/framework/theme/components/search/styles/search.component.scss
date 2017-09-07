@@ -6,10 +6,6 @@
 
 
 :host {
-  .search-wrap {
-    margin: 5px;
-  }
-
   button {
     font-size: 2rem;
 
@@ -22,21 +18,6 @@
     &:focus {
       box-shadow: none;
       outline: none;
-    }
-  }
-
-  &.simple-search {
-    .search-wrap {
-      display: flex;
-      transition: width 0.3s ease;
-      width: 2rem;
-      overflow: hidden;
-    }
-    &.show {
-      .search-wrap {
-        align-items: center;
-        width: 18rem;
-      }
     }
   }
 }
