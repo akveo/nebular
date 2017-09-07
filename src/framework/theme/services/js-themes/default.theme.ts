@@ -12,8 +12,8 @@ const palette = {
 export const DEFAULT_THEME: NbJSThemeOptions = {
   name: 'default',
   variables: {
-    fontMain: 'Open Sans',
-    fontSecondary: 'Exo',
+    fontMain: 'Helvetica',
+    fontSecondary: 'Helvetica',
 
     bg: '#ffffff',
     fg: '#a4abb3',

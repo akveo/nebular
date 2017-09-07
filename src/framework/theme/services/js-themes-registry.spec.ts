@@ -57,17 +57,14 @@ describe('js-themes-registry-service', () => {
   it('has built in themes', () => {
     expect(jsThemesRegistry.get('default')).not.toBeUndefined();
     expect(jsThemesRegistry.get('cosmic')).not.toBeUndefined();
-    expect(jsThemesRegistry.get('light')).not.toBeUndefined();
 
     expect(jsThemesRegistry.has('default')).toBeTruthy();
     expect(jsThemesRegistry.has('cosmic')).toBeTruthy();
-    expect(jsThemesRegistry.has('light')).toBeTruthy();
   });
 
   it('has built in themes with inherited font', () => {
-    expect(jsThemesRegistry.get('default').variables.fontMain).toEqual('Open Sans');
-    expect(jsThemesRegistry.get('cosmic').variables.fontMain).toEqual('Open Sans');
-    expect(jsThemesRegistry.get('light').variables.fontMain).toEqual('Open Sans');
+    expect(jsThemesRegistry.get('default').variables.fontMain).toEqual('Helvetica');
+    expect(jsThemesRegistry.get('cosmic').variables.fontMain).toEqual('Helvetica');
   });
 
   it('has also new themes', () => {
