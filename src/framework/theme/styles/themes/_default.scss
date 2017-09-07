@@ -236,9 +236,9 @@ $theme: (
 
   search-btn-open-fg: color-fg,
   search-btn-close-fg:	color-fg,
-  search-bg: linear-gradient(to right, #171749, #413789),//TODO: get rid of this hardcode, bg
+  search-bg: layout-bg,
   search-bg-secondary: color-fg,
-  search-text: color-inverse,
+  search-text: color-fg-heading,
   search-info: color-fg,
   search-dash: color-fg,
   search-placeholder: color-fg,
