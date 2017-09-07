@@ -77,7 +77,7 @@ function genScssRoot() {
 }
 
 function genScssVariables() {
-  const buildScss = './nebular-icons-variables.scss';
+  const buildScss = './_nebular-icons-variables.scss';
   const variablesContent = `${license}
 $nebular-icons-font-path: '../fonts' !default;
 $nebular-icons-font-family: 'nebular' !default;
@@ -87,7 +87,7 @@ $nebular-icons-font-family: 'nebular' !default;
 }
 
 function genScssFont() {
-  const buildScss = './nebular-icons-font.scss';
+  const buildScss = './_nebular-icons-font.scss';
   const buildCss = path.join(cssRoot, 'nebular-icons.css');
 
   const file = fs.readFileSync(buildCss).toString();
