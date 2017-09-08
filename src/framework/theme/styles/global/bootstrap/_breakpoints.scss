@@ -4,6 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+$grid-columns: 12 !default;
+$grid-gutter-width-base: 24px !default;
+$grid-gutter-widths: (
+  xs: $grid-gutter-width-base,
+  sm: $grid-gutter-width-base,
+  md: $grid-gutter-width-base,
+  lg: $grid-gutter-width-base,
+  xl: $grid-gutter-width-base
+) !default;
+
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -12,4 +23,13 @@ $grid-breakpoints: (
   xl: 1200px,
   xxl: 1400px,
   xxxl: 1600px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 1500px
 );
