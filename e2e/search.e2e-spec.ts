@@ -8,7 +8,7 @@ import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
 import { protractor } from 'protractor/built/ptor';
 
-fdescribe('nb-search', () => {
+describe('nb-search', () => {
 
   beforeEach(() => {
     browser.get('#/search');
