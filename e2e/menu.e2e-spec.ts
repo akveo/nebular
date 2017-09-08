@@ -206,6 +206,13 @@ describe('nb-menu', () => {
   //     });
   // });
 
+  // it('should be selected - Menu #3.2.2', () => {
+  //   element(homeButton).click()
+  //     .then(() => {
+  //       expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
+  //       expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+  //     });
+  // });
 
   it('should add new menu item', () => {
     element(addButton).click()
@@ -218,13 +225,4 @@ describe('nb-menu', () => {
         expect(browser.getCurrentUrl()).toContain('#/menu/1');
       });
   });
-
-  it('should be selected - Menu #3.2.2', () => {
-    element(homeButton).click()
-      .then(() => {
-        expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
-      });
-  });
-
 });

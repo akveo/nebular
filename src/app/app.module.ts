@@ -119,14 +119,7 @@ const NB_TEST_COMPONENTS = [
     NbThemeModule.forRoot({ name: 'default' }),
     NbCardModule,
     NbLayoutModule,
-    NbMenuModule.forRoot({
-      items: [{
-        title: 'Menu #4',
-        link: '/menu/4',
-      }, {
-        title: 'Menu #5',
-      }],
-    }),
+    NbMenuModule.forRoot(),
     NbMenuModule.forRoot(),
     NbRouteTabsetModule,
     NbSidebarModule.forRoot(),
