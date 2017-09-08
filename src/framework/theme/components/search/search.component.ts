@@ -36,7 +36,7 @@ import 'rxjs/add/operator/delay';
   template: `
     <div class="search" (keyup.esc)="closeSearch()" >
       <button (click)="closeSearch()">
-        <i class="ion-ios-close-outline"></i>
+        <i class="nb-close-circled"></i>
       </button>
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
@@ -125,7 +125,7 @@ export class NbSearchFieldComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button (click)="openSearch()">
+    <button class="start-search" (click)="openSearch()">
       <i class="nb-search"></i>
     </button>
     <ng-template #attachedSearchContainer></ng-template>

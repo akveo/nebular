@@ -24,6 +24,7 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/typeface-exo/index.css",
         "../node_modules/open-sans-fontface/open-sans.css",
+        "../node_modules/nebular-icons/scss/nebular-icons.scss",
         "styles.scss"
       ],
       "scripts": [
@@ -53,6 +54,7 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/typeface-exo/index.css",
         "../node_modules/open-sans-fontface/open-sans.css",
+        "../node_modules/nebular-icons/scss/nebular-icons.scss",
         "styles.scss"
       ],
       "scripts": [
