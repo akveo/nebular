@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "2.0.0-alpha.1-dev.13",
+  "version": "2.0.0-alpha.1-dev.14",
   "description": "@nebular/auth",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
