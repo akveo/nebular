@@ -5,42 +5,115 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'Installation',
+        name: 'What is Nebular?',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'index.md'
-          }
-        ]
+            source: 'index.md',
+          },
+        ],
       },
       {
         type: 'page',
-        name: 'Customization',
+        name: 'Where to start?',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'customization.md'
-          }
-        ]
+            source: 'start.md',
+          },
+        ],
       },
-      {
-        type: 'page',
-        name: 'Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'theme.md'
-          }
-        ]
-      }
     ],
   },
   {
     type: 'section',
-    name: 'UI Components',
+    name: 'Installation',
+    children: [
+      {
+        type: 'page',
+        name: 'From Scratch',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'install-from-scratch.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Based on Starter Kit',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'install-starter-kit.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Add into existing project',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'install-into-existing.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Concepts',
+    children: [
+      {
+        type: 'page',
+        name: 'Themes',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'concept-themes.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Layouts',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'concept-layouts.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Guides',
+    children: [
+      {
+        type: 'page',
+        name: 'Server Deployment',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'server-deployment.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Components',
     children: [
       {
         type: 'page',
@@ -87,13 +160,98 @@ export const STRUCTURE = [
             type: 'block',
             block: 'component',
             blockData: 'NbSidebarFooterComponent',
-            name: 'true'
+            name: 'true',
           },
           {
             type: 'block',
             block: 'component',
             blockData: 'NbSidebarService',
-          }
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Menu',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbMenuComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbMenuItem',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbMenuService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Card',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardHeaderComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardBodyComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardFooterComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Search',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbSearchComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Tabs',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbRouteTabsetComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbTabsetComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Actions',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbActionsComponent',
+          },
         ],
       },
       {
@@ -104,15 +262,37 @@ export const STRUCTURE = [
             type: 'block',
             block: 'component',
             blockData: 'NbUserComponent',
-          }
+          },
         ],
-      }
+      },
     ],
   },
   {
     type: 'section',
     name: 'Services',
     children: [
+      {
+        type: 'page',
+        name: 'ThemeService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbThemeService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'SpinnerService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbSpinnerService',
+          },
+        ],
+      },
       {
         type: 'page',
         name: 'MediaBreakpoints',
@@ -165,7 +345,24 @@ export const STRUCTURE = [
             blockData: 'cosmic',
           },
         ],
-      }
-    ]
-  }
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Auth',
+    children: [
+      {
+        type: 'page',
+        name: 'Concepts/Install',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-concepts-install.md',
+          },
+        ],
+      },
+    ],
+  },
 ];

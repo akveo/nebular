@@ -13,7 +13,6 @@ import { DocsService } from '../docs.service';
     '[attr.id]': '!remote ? fragment : null',
     '[class.table-fragment]': 'table',
   }
-
 })
 export class NgdFragmentDirective {
   table: boolean = false;

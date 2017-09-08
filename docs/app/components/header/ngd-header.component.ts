@@ -8,18 +8,15 @@ import { DocsService } from '../../docs/docs.service';
   selector: 'ngd-header',
   styleUrls: ['ngd-header.component.scss'],
   template: `
-    <div class="logo-container product-title">
+    <div class="logo-container">
       <a routerLink="/">
-        Title
+        <img src="assets/images/logo.png">
       </a>
     </div>
     <div class="menu">
       <a routerLink="/home" routerLinkActive="active-link">HOME</a>
       <a routerLink="/docs" routerLinkActive="active-link">DOCUMENTATION</a>
     </div>
-    <span> Need some help? Let us know!
-      <a class="contact-us" href="mailto:contact@akveo.com"><b>contact@akveo.com</b></a>
-    </span>
     <i class="menu-icon ion-navicon" (click)="toggleMenu()"></i>
     <nb-menu class="mobile-menu" [class.active]="isMenuActive" [items]="menuItems" tag="mobileMenu"></nb-menu>
   `,

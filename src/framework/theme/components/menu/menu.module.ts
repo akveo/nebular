@@ -7,9 +7,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-
 import { NbMenuComponent, NbMenuItemComponent } from './menu.component';
-import { NbMenuService, NbMenuInternalService, NbMenuOptions, nbMenuOptionsToken } from './menu.service';
+import { NbMenuService, NbMenuInternalService } from './menu.service';
 
 const nbMenuComponents = [NbMenuComponent, NbMenuItemComponent];
 
@@ -21,10 +20,12 @@ const NB_MENU_PROVIDERS = [NbMenuService, NbMenuInternalService];
   exports: [...nbMenuComponents],
 })
 export class NbMenuModule {
-  static forRoot(nbMenuOptions?: NbMenuOptions): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: NbMenuModule,
-      providers: [...NB_MENU_PROVIDERS, { provide: nbMenuOptionsToken, useValue: nbMenuOptions }],
+      providers: [
+        ...NB_MENU_PROVIDERS,
+      ],
     };
   }
 }

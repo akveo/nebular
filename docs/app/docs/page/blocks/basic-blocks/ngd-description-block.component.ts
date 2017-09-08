@@ -10,8 +10,10 @@ import { Component, Input, OnChanges } from '@angular/core';
   selector: 'ngd-description-block',
   template: `
     <div class="block-container">
-    <h5 class="class-name">
-    <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment> <i class="ion-link"></i></a> {{blockData.name}} </h5>
+      <h4 class="class-name">
+        <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment> <i class="ion-link"></i></a>
+        {{blockData.name}}
+      </h4>
       <p *ngIf="isShortDescription" class="short-description">
         {{ blockData?.shortDescription }}
       </p>
@@ -28,7 +30,10 @@ export class NgdDescriptionBlockComponent implements OnChanges {
   isShortDescription: boolean;
 
   ngOnChanges() {
-    this.isShortDescription = !!this.blockData.shortDescription && this.blockData.shortDescription != this.blockData.name;
-    this.isDescription = !!this.blockData.description && this.blockData.description != this.blockData.shortDescription;
+    this.isShortDescription = !!this.blockData.shortDescription &&
+      this.blockData.shortDescription !== this.blockData.name;
+
+    this.isDescription = !!this.blockData.description &&
+      this.blockData.description !== this.blockData.shortDescription;
   }
 }

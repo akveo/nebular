@@ -20,8 +20,7 @@ const menu33SubMenu = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul')
 const menu331 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(1) a');
 const menu332 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(2) a');
 const menu333 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(3) a');
-const menu4 = by.css('nb-menu ul li:nth-child(5) a');
-const newMenu = by.css('nb-menu ul li:nth-child(7) a');
+const newMenu = by.css('nb-menu ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
 
@@ -207,18 +206,6 @@ describe('nb-menu', () => {
   //     });
   // });
 
-  it('should be selected - Menu #4', () => {
-    element.all(menu4).first().getText()
-      .then(val => {
-        expect(val).toEqual('Menu #4');
-      });
-
-    element.all(menu4).first().click()
-      .then(() => {
-        expect(hasClass(element.all(menu4).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/4');
-      });
-  });
 
   it('should add new menu item', () => {
     element(addButton).click()

@@ -9,6 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { NbMenuService } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
 import { Title } from '@angular/platform-browser';
 
 

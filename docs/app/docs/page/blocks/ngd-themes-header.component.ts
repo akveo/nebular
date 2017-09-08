@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/fromEvent';
 
 import { DocsService } from '../../docs.service';
 

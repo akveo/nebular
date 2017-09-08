@@ -100,7 +100,8 @@ export class DocsService {
         const menuItem: any = {};
         const itemLink = item.type === 'block' ?
           `${parentLink}`
-          : `${parentLink ? parentLink : ''}/${item.name.replace(/\s/, '-').toLowerCase()}`;
+          : `${parentLink ? parentLink : ''}/${item.name.replace(/[^a-zA-Z0-9\s]+/g, '').replace(/\s/g, '-').toLowerCase()}`;
+
         if (item.type !== 'section' || !item.isSubpages) {
           menuItem['link'] = itemLink;
         }
@@ -108,7 +109,7 @@ export class DocsService {
         if (item.type === 'block') {
           menuItem['fragment'] = item.name;
         }
-        menuItem['pathMath'] = 'full';
+        menuItem['pathMatch'] = 'full';
         menuItem['title'] = item.name;
 
         if (item.children && item.children[0] && item.children[0].type === 'page') {

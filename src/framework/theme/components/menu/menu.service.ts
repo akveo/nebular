@@ -4,12 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Injectable, Inject, InjectionToken } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { List } from 'immutable';
 import 'rxjs/add/operator/publish';
 
 const itemClick$ = new ReplaySubject(1);
@@ -20,17 +21,65 @@ const itemSelect$ = new ReplaySubject(1);
 const itemHover$ = new ReplaySubject(1);
 const submenuToggle$ = new ReplaySubject(1);
 
+/**
+ * Menu Item options
+ * TODO: check if we need both URL and LINK
+ */
 export abstract class NbMenuItem {
+  /**
+   * Item Title
+   * @type {string}
+   */
   title: string;
+  /**
+   * Item relative link (for routerLink)
+   * @type {string}
+   */
   link?: string;
+  /**
+   * Item URL (absolute)
+   * @type {string}
+   */
   url?: string;
+  /**
+   * Icon class name
+   * @type {string}
+   */
   icon?: string;
+  /**
+   * Expanded by defaul
+   * @type {boolean}
+   */
   expanded?: boolean;
+  /**
+   * Children items
+   * @type {List<NbMenuItem>}
+   */
   children?: NbMenuItem[];
+  /**
+   * HTML Link target
+   * @type {string}
+   */
   target?: string;
+  /**
+   * Hidden Item
+   * @type {boolean}
+   */
   hidden?: boolean;
-  pathMath?: string = 'full'; // TODO: is not set if item is initialized by default, should be set anyway
+  /**
+   * Item is selected when partly or fully equal to the current url
+   * @type {string}
+   */
+  pathMatch?: string = 'full'; // TODO: is not set if item is initialized by default, should be set anyway
+  /**
+   * Where this is a home item
+   * @type {boolean}
+   */
   home?: boolean;
+  /**
+   * Whether the item is just a group (non-clickable)
+   * @type {boolean}
+   */
   group?: boolean;
   parent?: NbMenuItem;
   selected?: boolean;
@@ -38,23 +87,36 @@ export abstract class NbMenuItem {
   fragment?: string;
 }
 
-export interface NbMenuOptions {
-  items?: NbMenuItem[];
-}
-
-export const nbMenuOptionsToken = new InjectionToken<NbMenuOptions>('NB_MENU_OPTIONS');
-
 // TODO: map select events to router change events
+// TODO: review the interface
+/**
+ * Menu Service. Allows you to listen to menu events, or to interact with a menu.
+ */
 @Injectable()
 export class NbMenuService {
+
+  /**
+   * Add items to the end of the menu items list
+   * @param {List<NbMenuItem>} items
+   * @param {string} tag
+   */
   addItems(items: NbMenuItem[], tag?: string) {
     addItems$.next({ tag, items });
   }
 
+  /**
+   * Navigate to the home menu item
+   * @param {string} tag
+   */
   navigateHome(tag?: string) {
     navigateHome$.next({ tag });
   }
 
+  /**
+   * Returns currently selected item. Won't subscribe to the future events.
+   * @param {string} tag
+   * @returns {Observable<{tag: string; item: NbMenuItem}>}
+   */
   getSelectedItem(tag?: string): Observable<{ tag: string; item: NbMenuItem }> {
     const listener = new BehaviorSubject<{ tag: string; item: NbMenuItem }>(null);
 
@@ -84,8 +146,8 @@ export class NbMenuService {
 export class NbMenuInternalService {
   private items: NbMenuItem[] = [];
 
-  constructor(private router: Router, private location: Location, @Inject(nbMenuOptionsToken) private options: any) {
-    this.items = options && options.items ? [...this.options.items] : [];
+  constructor(private router: Router, private location: Location) {
+    this.items = [];
   }
 
   getItems(): NbMenuItem[] {
@@ -162,7 +224,7 @@ export class NbMenuInternalService {
   private prepareItem(item: NbMenuItem) {
     item.selected = false;
 
-    const exact: boolean = item.pathMath === 'full';
+    const exact: boolean = item.pathMatch === 'full';
     const location: string = this.location.path();
 
     if ((exact && location === item.link) || (!exact && location.includes(item.link))

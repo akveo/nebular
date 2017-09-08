@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnDestroy, ElementRef, Renderer2, OnInit, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/merge';
 
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';
@@ -31,19 +32,15 @@ import 'rxjs/add/operator/filter';
     </nb-layout>
   `,
 })
-export class NgdDocsComponent implements OnDestroy, AfterViewInit {
+export class NgdDocsComponent implements OnDestroy {
 
   structure: any;
   menuItems: NbMenuItem[] = [];
   private routerSubscription: Subscription;
-  private fragmentSubscription: Subscription;
 
   constructor(private service: DocsService,
               private router: Router,
-              private route: ActivatedRoute,
-              private menuInternalService: NbMenuInternalService,
-              private elementRef: ElementRef,
-              private renderer: Renderer2) {
+              private menuInternalService: NbMenuInternalService) {
 
     this.menuItems = this.service.getPreparedMenu();
     this.structure = this.service.getPreparedStructure();
@@ -58,31 +55,7 @@ export class NgdDocsComponent implements OnDestroy, AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
-    this.fragmentSubscription = this.route.fragment
-      .merge(this.service.onFragmentClick())
-      .delay(1)
-      .subscribe((fr) => {
-        if (fr) {
-          const el = this.elementRef.nativeElement.querySelector(`#${fr}`);
-          if (el) {
-            el.scrollIntoView();
-            if (new RegExp(/theme/i).test(fr)) {
-              window.scrollBy(0, -130);
-              this.renderer.addClass(el, 'highlighted-row');
-              setTimeout(() => this.renderer.removeClass(el, 'highlighted-row'), 1000);
-            } else {
-              window.scrollBy(0, -80);
-            }
-          }
-        } else {
-          window.scrollTo(0, 0);
-        }
-      });
-  }
-
   ngOnDestroy() {
     this.routerSubscription.unsubscribe();
-    this.fragmentSubscription.unsubscribe();
   }
 }

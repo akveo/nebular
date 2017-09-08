@@ -127,6 +127,7 @@ const NB_TEST_COMPONENTS = [
         title: 'Menu #5',
       }],
     }),
+    NbMenuModule.forRoot(),
     NbRouteTabsetModule,
     NbSidebarModule.forRoot(),
     NbTabsetModule,

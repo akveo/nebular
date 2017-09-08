@@ -1,5 +1,31 @@
 @import '../../styles/themes';
 
+/deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+  margin-top: -167px;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 0;
+  color: #a6adff;
+  font-size: 24px;
+
+  .footer-inner{
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    text-align: left;
+    padding: 0 100px 0 18%;
+  }
+}
+@media screen and (max-width: 1300px) {
+  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+    .footer-inner{
+      font-size: 18px;
+      padding-left: 20%;
+    }
+  }
+}
+
+
 @include nb-install-component {
 
   max-width: nb-theme(content-width);
@@ -18,6 +44,7 @@
       }
     }
   }
+
 
   @media screen and (max-width: 970px) {
     p {

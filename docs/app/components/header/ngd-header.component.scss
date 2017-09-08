@@ -1,4 +1,54 @@
+@import '../../../../node_modules/image-comparison/src/ImageComparison.css';
 @import '../../styles/themes';
+
+
+/deep/ .nb-theme-default nb-layout .layout nb-layout-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  nav {
+    padding: 0;
+    height: 4.75rem;
+    //box-shadow: 0 2px 12px 0 rgba(138, 127, 255, 0.5);
+    transition: all .6s ease-in-out;
+    ngd-header{
+      align-items: center;
+      padding: 0 45px;
+    }
+  }
+  &.transparent{
+    nav{
+      height: 6rem;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}
+/deep/ .nb-theme-default nb-layout .layout nb-layout-header nav a{
+  color: #a6adff;
+  &.active-link{
+    text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
+    &:before{
+      display: none;
+    }
+  }
+  &:hover{
+    color: #a6adff;
+    text-decoration: none;
+    text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
+  }
+}
+/deep/ .nb-theme-default .product-title.logo-container a{
+  font-size: 38px;
+  color: white;
+  &:hover{
+    color: white;
+    text-decoration: none;
+  }
+}
+
 
 @include nb-install-component {
   display: flex;
@@ -9,22 +59,20 @@
   .logo-container {
     font-size: 30px;
 
+    img {
+      width: 200px;
+    }
+
     a {
       display: flex;
       align-items: center;
-    }
-
-    .svg-logo {
-      width: 65px;
-      height: 44px;
-      margin-right: 20px;
     }
   }
 
   .menu {
     margin: auto;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    line-height: 4.75rem;
 
     a {
       position: relative;

@@ -182,7 +182,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Tags a sidebar with some ID, can be later used in sidebar service
+   * Tags a sidebar with some ID, can be later used in the sidebar service
    * to determine which sidebar triggered the action, if multiple sidebars exist on the page.
    *
    * @type {string}

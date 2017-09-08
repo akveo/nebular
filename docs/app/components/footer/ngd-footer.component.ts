@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'ngd-footer',
   styleUrls: ['ngd-footer.component.scss'],
   template: `
+    <div class="footer-inner">
       <div class="socio">
         <a href="https://github.com/akveo/ng2-admin" target="_blank" class="socicon socicon-github"></a>
         <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon socicon-twitter"></a>
@@ -13,9 +14,7 @@ import { Component } from '@angular/core';
         © 2015-2017 Akveo LLC<br>
         Documentation licensed under CC BY 4.0.
       </p>
-      <p>
-        Powered by <b>Angular</b>
-      </p>
+    </div>
   `,
 
 })

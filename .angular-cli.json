@@ -10,7 +10,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "favicon.png"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -68,7 +69,8 @@
       "outDir": "docs-dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "favicon.png"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -78,13 +80,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/typeface-exo/index.css",
+        "../node_modules/open-sans-fontface/open-sans.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/ionicons/scss/ionicons.scss",
+        "../node_modules/swiper/dist/css/swiper.css",
         "../node_modules/prismjs/themes/prism.css",
         "styles.scss"
       ],
       "scripts": [
-        "../node_modules/prismjs/prism.js"
+        "../node_modules/prismjs/prism.js",
+        "../node_modules/swiper/dist/js/swiper.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

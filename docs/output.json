@@ -159,7 +159,7 @@
         },
         {
           "shortDescription": "  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>",
-          "description": "The layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dymanically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.",
+          "description": "The layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.",
           "code": "\n<nb-layout center>\n  <nb-layout-header>Great Company</nb-layout-header>\n\n  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>\n\n  <nb-layout-footer>Contact us</nb-layout-footer>\n</nb-layout>\n"
         }
       ],
@@ -288,7 +288,7 @@
       ],
       "name": "NbLayoutComponent",
       "description": "Can contain the following components inside:\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n",
-      "shortDescription": "The general Nebular component-container.\nIt is required that all children component of the framework are located inside of the nb-layout.\nThe theme styles and multi-theming are also applied starting from this component.",
+      "shortDescription": "The general Nebular component-container.\nIt is required that all children component of the framework are located inside of the nb-layout.",
       "styles": []
     },
     {
@@ -329,6 +329,488 @@
       "methods": [],
       "name": "NbLayoutHeaderComponent",
       "shortDescription": "Page header component.\nLocated on top of the page above the layout columns and sidebars.\nCould be made `fixed` by setting the corresponding property. In the fixed mode the header becomes\nsticky to the top of the nb-layout (to of the page).",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "List",
+          "required": null,
+          "name": "items",
+          "shortDescription": "List of menu items."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "tag",
+          "shortDescription": "Tags a menu with some ID, can be later used in the menu service\nto determine which menu triggered the action, if multiple menus exist on the page."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "inverse",
+          "shortDescription": "Makes colors inverse based on current theme"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "menuInternalService",
+              "type": "NbMenuInternalService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "router",
+              "type": "Router",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbMenuComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clearStack",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "compareTag",
+          "type": [
+            "boolean"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "parent",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getHomeItem",
+          "type": [
+            "NbMenuItem"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "parent",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getSelectedItem",
+          "type": [
+            "NbMenuItem"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "navigateHome",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "item",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onHoverItem",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "item",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onItemClick",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "item",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onSelectItem",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "item",
+              "type": "NbMenuItem",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onToggleSubMenu",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbMenuComponent",
+      "description": "Accepts a list of menu items and renders them accordingly. Supports multi-level menus.\n",
+      "shortDescription": "Vertical menu component.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "List",
+          "required": null,
+          "name": "children",
+          "shortDescription": "Children items"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "expanded",
+          "shortDescription": "Expanded by defaul"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "group",
+          "shortDescription": "Whether the item is just a group (non-clickable)"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "hidden",
+          "shortDescription": "Hidden Item"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "home",
+          "shortDescription": "Where this is a home item"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "Icon class name"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "link",
+          "shortDescription": "Item relative link (for routerLink)"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "pathMatch",
+          "shortDescription": "Item is selected when partly or fully equal to the current url"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "target",
+          "shortDescription": "HTML Link target"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "title",
+          "shortDescription": "Item Title"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "url",
+          "shortDescription": "Item URL (absolute)"
+        }
+      ],
+      "methods": [],
+      "name": "NbMenuItem",
+      "shortDescription": "Menu Item options\nTODO: check if we need both URL and LINK",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "items",
+              "type": "List",
+              "required": null
+            },
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "addItems",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Add items to the end of the menu items list"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "getSelectedItem",
+          "type": [
+            ">}"
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns currently selected item. Won't subscribe to the future events."
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "navigateHome",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Navigate to the home menu item"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onItemClick",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onItemHover",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onItemSelect",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onSubmenuToggle",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbMenuService",
+      "shortDescription": "Menu Service. Allows you to listen to menu events, or to interact with a menu.",
       "styles": []
     },
     {
@@ -409,7 +891,7 @@
           "type": "string",
           "required": null,
           "name": "tag",
-          "shortDescription": "Tags a sidebar with some ID, can be later used in sidebar service\nto determine which sidebar triggered the action, if multiple sidebars exist on the page."
+          "shortDescription": "Tags a sidebar with some ID, can be later used in the sidebar service\nto determine which sidebar triggered the action, if multiple sidebars exist on the page."
         },
         {
           "kind": "input",
@@ -1596,7 +2078,7 @@
             },
             {
               "theme": "default",
-              "prop": "form-control-font-size-lg"
+              "prop": "form-control-lg-font-size"
             },
             {
               "theme": "default",
@@ -1638,11 +2120,11 @@
             },
             {
               "theme": "default",
-              "prop": "layout-font-size"
+              "prop": "header-font-size"
             },
             {
               "theme": "default",
-              "prop": "header-font-size"
+              "prop": "layout-font-size"
             },
             {
               "theme": "default",
@@ -1691,6 +2173,10 @@
           "value": "0.875rem",
           "parents": [],
           "childs": [
+            {
+              "theme": "default",
+              "prop": "form-control-sm-font-size"
+            },
             {
               "theme": "light",
               "prop": "font-size-sm"
@@ -1812,11 +2298,11 @@
             },
             {
               "theme": "default",
-              "prop": "layout-line-height"
+              "prop": "header-line-height"
             },
             {
               "theme": "default",
-              "prop": "header-line-height"
+              "prop": "layout-line-height"
             },
             {
               "theme": "default",
@@ -1903,6 +2389,14 @@
             },
             {
               "theme": "default",
+              "prop": "form-control-bg"
+            },
+            {
+              "theme": "default",
+              "prop": "form-control-focus-bg"
+            },
+            {
+              "theme": "default",
               "prop": "modal-bg"
             },
             {
@@ -1936,7 +2430,7 @@
         },
         "color-fg": {
           "name": "color-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [],
           "childs": [
             {
@@ -2013,21 +2507,13 @@
             },
             {
               "theme": "default",
-              "prop": "form-control-secondary-border-color"
-            },
-            {
-              "theme": "default",
               "prop": "form-control-placeholder-color"
-            },
-            {
-              "theme": "default",
-              "prop": "checkbox-fg-color"
             }
           ]
         },
         "color-fg-heading": {
           "name": "color-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [],
           "childs": [
             {
@@ -2088,6 +2574,14 @@
             },
             {
               "theme": "default",
+              "prop": "form-control-text-primary-color"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-fg"
+            },
+            {
+              "theme": "default",
               "prop": "modal-fg-heading"
             },
             {
@@ -2098,7 +2592,7 @@
         },
         "color-fg-text": {
           "name": "color-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [],
           "childs": [
             {
@@ -2121,7 +2615,7 @@
         },
         "color-fg-highlight": {
           "name": "color-fg-highlight",
-          "value": "#42db7d",
+          "value": "#40dc7e",
           "parents": [],
           "childs": [
             {
@@ -2136,7 +2630,7 @@
         },
         "separator": {
           "name": "separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [],
           "childs": [
             {
@@ -2229,10 +2723,6 @@
               "prop": "btn-fg"
             },
             {
-              "theme": "default",
-              "prop": "form-control-text-primary-color"
-            },
-            {
               "theme": "light",
               "prop": "color-white"
             },
@@ -2295,10 +2785,6 @@
               "prop": "btn-secondary-border"
             },
             {
-              "theme": "default",
-              "prop": "form-control-primary-border-color"
-            },
-            {
               "theme": "light",
               "prop": "color-primary"
             }
@@ -2306,12 +2792,20 @@
         },
         "color-success": {
           "name": "color-success",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [],
           "childs": [
             {
               "theme": "default",
               "prop": "card-header-success-bg"
+            },
+            {
+              "theme": "default",
+              "prop": "tabs-selected"
+            },
+            {
+              "theme": "default",
+              "prop": "route-tabs-selected"
             },
             {
               "theme": "default",
@@ -2323,7 +2817,15 @@
             },
             {
               "theme": "default",
+              "prop": "form-control-selected-border-color"
+            },
+            {
+              "theme": "default",
               "prop": "form-control-success-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-selected-border-color"
             },
             {
               "theme": "light",
@@ -2627,7 +3129,7 @@
         },
         "scrollbar-fg": {
           "name": "scrollbar-fg",
-          "value": "rgba(0, 0, 0, 0.6)",
+          "value": "rgba(0, 0, 0, 0.1)",
           "parents": [],
           "childs": [
             {
@@ -2638,7 +3140,7 @@
         },
         "scrollbar-bg": {
           "name": "scrollbar-bg",
-          "value": "rgba(255, 255, 255, 0.7)",
+          "value": "rgba(0, 0, 0, 0.05)",
           "parents": [],
           "childs": [
             {
@@ -2734,7 +3236,7 @@
         },
         "card-fg": {
           "name": "card-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -2745,7 +3247,7 @@
         },
         "card-fg-text": {
           "name": "card-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "default",
@@ -2756,7 +3258,7 @@
         },
         "card-fg-heading": {
           "name": "card-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -2966,7 +3468,7 @@
         },
         "card-separator": {
           "name": "card-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -2977,7 +3479,7 @@
         },
         "card-header-fg": {
           "name": "card-header-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -2988,7 +3490,7 @@
         },
         "card-header-fg-heading": {
           "name": "card-header-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -2999,7 +3501,7 @@
         },
         "card-header-active-bg": {
           "name": "card-header-active-bg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -3054,7 +3556,7 @@
         },
         "card-header-success-bg": {
           "name": "card-header-success-bg",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -3081,39 +3583,6 @@
             {
               "theme": "default",
               "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-family": {
-          "name": "layout-font-family",
-          "value": "Open Sans",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-size": {
-          "name": "layout-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "layout-line-height": {
-          "name": "layout-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "line-height"
             }
           ],
           "childs": []
@@ -3153,7 +3622,7 @@
         },
         "header-fg": {
           "name": "header-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3243,7 +3712,7 @@
         },
         "footer-fg": {
           "name": "footer-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3265,7 +3734,7 @@
         },
         "footer-separator": {
           "name": "footer-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -3291,9 +3760,42 @@
           ],
           "childs": []
         },
+        "layout-font-family": {
+          "name": "layout-font-family",
+          "value": "Open Sans",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "font-main"
+            }
+          ],
+          "childs": []
+        },
+        "layout-font-size": {
+          "name": "layout-font-size",
+          "value": "1rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "font-size"
+            }
+          ],
+          "childs": []
+        },
+        "layout-line-height": {
+          "name": "layout-line-height",
+          "value": 1.25,
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "line-height"
+            }
+          ],
+          "childs": []
+        },
         "layout-fg": {
           "name": "layout-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -3417,7 +3919,7 @@
         },
         "sidebar-fg": {
           "name": "sidebar-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3546,7 +4048,7 @@
         },
         "menu-fg": {
           "name": "menu-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3568,7 +4070,7 @@
         },
         "menu-active-fg": {
           "name": "menu-active-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3601,7 +4103,7 @@
         },
         "menu-submenu-fg": {
           "name": "menu-submenu-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3612,7 +4114,7 @@
         },
         "menu-submenu-active-fg": {
           "name": "menu-submenu-active-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3660,7 +4162,7 @@
         },
         "menu-group-fg": {
           "name": "menu-group-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -3680,7 +4182,7 @@
         },
         "menu-item-separator": {
           "name": "menu-item-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -3802,7 +4304,7 @@
         },
         "tabs-separator": {
           "name": "tabs-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -3813,7 +4315,7 @@
         },
         "tabs-fg": {
           "name": "tabs-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -3824,7 +4326,7 @@
         },
         "tabs-fg-text": {
           "name": "tabs-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "default",
@@ -3835,7 +4337,7 @@
         },
         "tabs-fg-heading": {
           "name": "tabs-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3858,6 +4360,17 @@
               "prop": "tabs-bg"
             }
           ]
+        },
+        "tabs-selected": {
+          "name": "tabs-selected",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
         },
         "route-tabs-font-family": {
           "name": "route-tabs-font-family",
@@ -3935,7 +4448,7 @@
         },
         "route-tabs-separator": {
           "name": "route-tabs-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -3946,7 +4459,7 @@
         },
         "route-tabs-fg": {
           "name": "route-tabs-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -3957,7 +4470,7 @@
         },
         "route-tabs-fg-heading": {
           "name": "route-tabs-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -3980,6 +4493,17 @@
               "prop": "route-tabs-bg"
             }
           ]
+        },
+        "route-tabs-selected": {
+          "name": "route-tabs-selected",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
         },
         "user-font-size": {
           "name": "user-font-size",
@@ -4016,7 +4540,7 @@
         },
         "user-fg": {
           "name": "user-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4027,7 +4551,7 @@
         },
         "user-fg-highlight": {
           "name": "user-fg-highlight",
-          "value": "#42db7d",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -4109,7 +4633,7 @@
         },
         "user-menu-border": {
           "name": "user-menu-border",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -4153,7 +4677,7 @@
         },
         "actions-fg": {
           "name": "actions-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4175,7 +4699,7 @@
         },
         "actions-separator": {
           "name": "actions-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -4242,7 +4766,7 @@
         },
         "search-btn-open-fg": {
           "name": "search-btn-open-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4253,7 +4777,7 @@
         },
         "search-btn-close-fg": {
           "name": "search-btn-close-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4279,7 +4803,7 @@
         },
         "search-bg-secondary": {
           "name": "search-bg-secondary",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4305,7 +4829,7 @@
         },
         "search-info": {
           "name": "search-info",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4316,7 +4840,7 @@
         },
         "search-dash": {
           "name": "search-dash",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4327,7 +4851,7 @@
         },
         "search-placeholder": {
           "name": "search-placeholder",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4338,7 +4862,7 @@
         },
         "d3-fg": {
           "name": "d3-fg",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4408,7 +4932,7 @@
         },
         "smart-table-header-fg": {
           "name": "smart-table-header-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -4463,7 +4987,7 @@
         },
         "smart-table-fg": {
           "name": "smart-table-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -4474,7 +4998,7 @@
         },
         "smart-table-fg-secondary": {
           "name": "smart-table-fg-secondary",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -4525,7 +5049,7 @@
         },
         "smart-table-separator": {
           "name": "smart-table-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -4694,7 +5218,7 @@
         },
         "toaster-success": {
           "name": "toaster-success",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -4760,7 +5284,7 @@
         },
         "btn-outline-fg": {
           "name": "btn-outline-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -4845,7 +5369,7 @@
         },
         "btn-success-bg": {
           "name": "btn-success-bg",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -5184,18 +5708,18 @@
         },
         "form-control-text-primary-color": {
           "name": "form-control-text-primary-color",
-          "value": "#ffffff",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
-              "prop": "color-white"
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []
         },
         "form-control-text-secondary-color": {
           "name": "form-control-text-secondary-color",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -5217,33 +5741,25 @@
         },
         "form-control-bg": {
           "name": "form-control-bg",
-          "value": "#37317a",
-          "parents": [],
-          "childs": [
+          "value": "#ffffff",
+          "parents": [
             {
-              "theme": "light",
-              "prop": "form-control-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-bg"
+              "theme": "default",
+              "prop": "color-bg"
             }
-          ]
+          ],
+          "childs": []
         },
         "form-control-focus-bg": {
           "name": "form-control-focus-bg",
-          "value": "#342e73",
-          "parents": [],
-          "childs": [
+          "value": "#ffffff",
+          "parents": [
             {
-              "theme": "light",
-              "prop": "form-control-focus-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-focus-bg"
+              "theme": "default",
+              "prop": "color-bg"
             }
-          ]
+          ],
+          "childs": []
         },
         "form-control-border-width": {
           "name": "form-control-border-width",
@@ -5257,21 +5773,6 @@
             {
               "theme": "cosmic",
               "prop": "form-control-border-width"
-            }
-          ]
-        },
-        "form-control-border-color": {
-          "name": "form-control-border-color",
-          "value": "#342e73",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-border-color"
             }
           ]
         },
@@ -5292,7 +5793,7 @@
         },
         "form-control-border-radius": {
           "name": "form-control-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [],
           "childs": [
             {
@@ -5305,24 +5806,28 @@
             }
           ]
         },
-        "form-control-primary-border-color": {
-          "name": "form-control-primary-border-color",
-          "value": "#8a7fff",
-          "parents": [
+        "form-control-border-color": {
+          "name": "form-control-border-color",
+          "value": "#dadfe6",
+          "parents": [],
+          "childs": [
             {
               "theme": "default",
-              "prop": "color-primary"
+              "prop": "checkbox-border-color"
+            },
+            {
+              "theme": "light",
+              "prop": "form-control-border-color"
             }
-          ],
-          "childs": []
+          ]
         },
-        "form-control-secondary-border-color": {
-          "name": "form-control-secondary-border-color",
-          "value": "#b2bac2",
+        "form-control-selected-border-color": {
+          "name": "form-control-selected-border-color",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
-              "prop": "color-fg"
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -5340,7 +5845,7 @@
         },
         "form-control-success-border-color": {
           "name": "form-control-success-border-color",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -5373,7 +5878,7 @@
         },
         "form-control-placeholder-color": {
           "name": "form-control-placeholder-color",
-          "value": "#b2bac2",
+          "value": "#a4abb3",
           "parents": [
             {
               "theme": "default",
@@ -5412,53 +5917,28 @@
             }
           ]
         },
-        "form-control-font-size-sm": {
-          "name": "form-control-font-size-sm",
+        "form-control-sm-font-size": {
+          "name": "form-control-sm-font-size",
           "value": "0.875rem",
-          "parents": [],
-          "childs": [
+          "parents": [
             {
-              "theme": "light",
-              "prop": "form-control-font-size-sm"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-font-size-sm"
+              "theme": "default",
+              "prop": "font-size-sm"
             }
-          ]
+          ],
+          "childs": []
         },
-        "form-control-line-height-sm": {
-          "name": "form-control-line-height-sm",
-          "value": "1rem",
+        "form-control-sm-padding": {
+          "name": "form-control-sm-padding",
+          "value": [
+            "0.375rem",
+            "1.125rem"
+          ],
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-line-height-sm"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-line-height-sm"
-            }
-          ]
+          "childs": []
         },
-        "form-control-border-radius-sm": {
-          "name": "form-control-border-radius-sm",
-          "value": "12px",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-border-radius-sm"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-border-radius-sm"
-            }
-          ]
-        },
-        "form-control-font-size-lg": {
-          "name": "form-control-font-size-lg",
+        "form-control-lg-font-size": {
+          "name": "form-control-lg-font-size",
           "value": "1.25rem",
           "parents": [
             {
@@ -5468,33 +5948,18 @@
           ],
           "childs": []
         },
-        "form-control-line-height-lg": {
-          "name": "form-control-line-height-lg",
-          "value": "1.375rem",
+        "form-control-lg-padding": {
+          "name": "form-control-lg-padding",
+          "value": "1.125rem",
           "parents": [],
           "childs": [
             {
               "theme": "light",
-              "prop": "form-control-line-height-lg"
+              "prop": "form-control-lg-padding"
             },
             {
               "theme": "cosmic",
-              "prop": "form-control-line-height-lg"
-            }
-          ]
-        },
-        "form-control-border-radius-lg": {
-          "name": "form-control-border-radius-lg",
-          "value": "12px",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-border-radius-lg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-border-radius-lg"
+              "prop": "form-control-lg-padding"
             }
           ]
         },
@@ -5539,13 +6004,80 @@
           ],
           "childs": []
         },
-        "checkbox-fg-color": {
-          "name": "checkbox-fg-color",
-          "value": "#b2bac2",
+        "checkbox-bg": {
+          "name": "checkbox-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "checkbox-bg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-bg"
+            }
+          ]
+        },
+        "checkbox-size": {
+          "name": "checkbox-size",
+          "value": "1.25rem",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "checkbox-size"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-size"
+            }
+          ]
+        },
+        "checkbox-border-size": {
+          "name": "checkbox-border-size",
+          "value": "2px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "checkbox-border-size"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-border-size"
+            }
+          ]
+        },
+        "checkbox-border-color": {
+          "name": "checkbox-border-color",
+          "value": "#dadfe6",
           "parents": [
             {
               "theme": "default",
-              "prop": "color-fg"
+              "prop": "form-control-border-color"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-selected-border-color": {
+          "name": "checkbox-selected-border-color",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-fg": {
+          "name": "checkbox-fg",
+          "value": "#282828",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []
@@ -5585,7 +6117,7 @@
         },
         "modal-fg": {
           "name": "modal-fg",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "default",
@@ -5596,7 +6128,7 @@
         },
         "modal-fg-heading": {
           "name": "modal-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -5688,7 +6220,7 @@
         },
         "modal-separator": {
           "name": "modal-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -5934,7 +6466,7 @@
             },
             {
               "theme": "light",
-              "prop": "form-control-font-size-lg"
+              "prop": "form-control-lg-font-size"
             },
             {
               "theme": "light",
@@ -5969,11 +6501,11 @@
             },
             {
               "theme": "light",
-              "prop": "layout-font-size"
+              "prop": "header-font-size"
             },
             {
               "theme": "light",
-              "prop": "header-font-size"
+              "prop": "layout-font-size"
             },
             {
               "theme": "light",
@@ -6018,7 +6550,12 @@
               "prop": "font-size-sm"
             }
           ],
-          "childs": []
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "form-control-sm-font-size"
+            }
+          ]
         },
         "font-size-xs": {
           "name": "font-size-xs",
@@ -6119,11 +6656,11 @@
             },
             {
               "theme": "light",
-              "prop": "layout-line-height"
+              "prop": "header-line-height"
             },
             {
               "theme": "light",
-              "prop": "header-line-height"
+              "prop": "layout-line-height"
             },
             {
               "theme": "light",
@@ -6204,6 +6741,14 @@
             {
               "theme": "light",
               "prop": "smart-table-bg"
+            },
+            {
+              "theme": "light",
+              "prop": "form-control-bg"
+            },
+            {
+              "theme": "light",
+              "prop": "form-control-focus-bg"
             },
             {
               "theme": "light",
@@ -6326,21 +6871,13 @@
             },
             {
               "theme": "light",
-              "prop": "form-control-secondary-border-color"
-            },
-            {
-              "theme": "light",
               "prop": "form-control-placeholder-color"
-            },
-            {
-              "theme": "light",
-              "prop": "checkbox-fg-color"
             }
           ]
         },
         "color-fg-heading": {
           "name": "color-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "default",
@@ -6390,13 +6927,21 @@
             },
             {
               "theme": "light",
+              "prop": "form-control-text-primary-color"
+            },
+            {
+              "theme": "light",
+              "prop": "checkbox-fg"
+            },
+            {
+              "theme": "light",
               "prop": "modal-fg-heading"
             }
           ]
         },
         "color-fg-text": {
           "name": "color-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "default",
@@ -6420,7 +6965,7 @@
         },
         "color-fg-highlight": {
           "name": "color-fg-highlight",
-          "value": "#42db7d",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -6436,7 +6981,7 @@
         },
         "separator": {
           "name": "separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "default",
@@ -6522,10 +7067,6 @@
             {
               "theme": "light",
               "prop": "btn-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-text-primary-color"
             }
           ]
         },
@@ -6582,16 +7123,12 @@
             {
               "theme": "light",
               "prop": "btn-secondary-border"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-primary-border-color"
             }
           ]
         },
         "color-success": {
           "name": "color-success",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -6605,6 +7142,14 @@
             },
             {
               "theme": "light",
+              "prop": "tabs-selected"
+            },
+            {
+              "theme": "light",
+              "prop": "route-tabs-selected"
+            },
+            {
+              "theme": "light",
               "prop": "toaster-success"
             },
             {
@@ -6613,7 +7158,15 @@
             },
             {
               "theme": "light",
+              "prop": "form-control-selected-border-color"
+            },
+            {
+              "theme": "light",
               "prop": "form-control-success-border-color"
+            },
+            {
+              "theme": "light",
+              "prop": "checkbox-selected-border-color"
             }
           ]
         },
@@ -6881,7 +7434,7 @@
         },
         "scrollbar-fg": {
           "name": "scrollbar-fg",
-          "value": "rgba(0, 0, 0, 0.6)",
+          "value": "rgba(0, 0, 0, 0.1)",
           "parents": [
             {
               "theme": "default",
@@ -6892,7 +7445,7 @@
         },
         "scrollbar-bg": {
           "name": "scrollbar-bg",
-          "value": "rgba(255, 255, 255, 0.7)",
+          "value": "rgba(0, 0, 0, 0.05)",
           "parents": [
             {
               "theme": "default",
@@ -7003,7 +7556,7 @@
         },
         "card-fg-text": {
           "name": "card-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "light",
@@ -7018,7 +7571,7 @@
         },
         "card-fg-heading": {
           "name": "card-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -7232,7 +7785,7 @@
         },
         "card-separator": {
           "name": "card-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -7258,7 +7811,7 @@
         },
         "card-header-fg-heading": {
           "name": "card-header-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -7344,7 +7897,7 @@
         },
         "card-header-success-bg": {
           "name": "card-header-success-bg",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -7383,51 +7936,6 @@
             {
               "theme": "default",
               "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-family": {
-          "name": "layout-font-family",
-          "value": "Open Sans",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-size": {
-          "name": "layout-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "layout-line-height": {
-          "name": "layout-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
             }
           ],
           "childs": []
@@ -7601,7 +8109,7 @@
         },
         "footer-separator": {
           "name": "footer-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -7627,6 +8135,51 @@
             {
               "theme": "light",
               "prop": "shadow"
+            }
+          ],
+          "childs": []
+        },
+        "layout-font-family": {
+          "name": "layout-font-family",
+          "value": "Open Sans",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
+            }
+          ],
+          "childs": []
+        },
+        "layout-font-size": {
+          "name": "layout-font-size",
+          "value": "1rem",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "font-size"
+            },
+            {
+              "theme": "default",
+              "prop": "font-size"
+            }
+          ],
+          "childs": []
+        },
+        "layout-line-height": {
+          "name": "layout-line-height",
+          "value": 1.25,
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "line-height"
+            },
+            {
+              "theme": "default",
+              "prop": "line-height"
             }
           ],
           "childs": []
@@ -7886,7 +8439,7 @@
         },
         "menu-active-fg": {
           "name": "menu-active-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -7931,7 +8484,7 @@
         },
         "menu-submenu-fg": {
           "name": "menu-submenu-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -7946,7 +8499,7 @@
         },
         "menu-submenu-active-fg": {
           "name": "menu-submenu-active-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -8022,7 +8575,7 @@
         },
         "menu-item-separator": {
           "name": "menu-item-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -8177,7 +8730,7 @@
         },
         "tabs-fg-text": {
           "name": "tabs-fg-text",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "light",
@@ -8192,7 +8745,7 @@
         },
         "tabs-fg-heading": {
           "name": "tabs-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -8212,6 +8765,21 @@
             {
               "theme": "default",
               "prop": "tabs-bg"
+            }
+          ],
+          "childs": []
+        },
+        "tabs-selected": {
+          "name": "tabs-selected",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-success"
+            },
+            {
+              "theme": "default",
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -8300,7 +8868,7 @@
         },
         "route-tabs-separator": {
           "name": "route-tabs-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -8326,7 +8894,7 @@
         },
         "route-tabs-fg-heading": {
           "name": "route-tabs-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -8346,6 +8914,21 @@
             {
               "theme": "default",
               "prop": "route-tabs-bg"
+            }
+          ],
+          "childs": []
+        },
+        "route-tabs-selected": {
+          "name": "route-tabs-selected",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-success"
+            },
+            {
+              "theme": "default",
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -8408,7 +8991,7 @@
         },
         "user-fg-highlight": {
           "name": "user-fg-highlight",
-          "value": "#42db7d",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -8482,7 +9065,7 @@
         },
         "user-menu-border": {
           "name": "user-menu-border",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -8568,7 +9151,7 @@
         },
         "actions-separator": {
           "name": "actions-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -8801,7 +9384,7 @@
         },
         "smart-table-header-fg": {
           "name": "smart-table-header-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -8876,7 +9459,7 @@
         },
         "smart-table-fg": {
           "name": "smart-table-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -8950,7 +9533,7 @@
         },
         "smart-table-separator": {
           "name": "smart-table-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -9136,7 +9719,7 @@
         },
         "toaster-success": {
           "name": "toaster-success",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -9226,7 +9809,7 @@
         },
         "btn-outline-fg": {
           "name": "btn-outline-fg",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -9323,7 +9906,7 @@
         },
         "btn-success-bg": {
           "name": "btn-success-bg",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -9618,15 +10201,15 @@
         },
         "form-control-text-primary-color": {
           "name": "form-control-text-primary-color",
-          "value": "#ffffff",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
-              "prop": "color-white"
+              "prop": "color-fg-heading"
             },
             {
               "theme": "default",
-              "prop": "color-white"
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []
@@ -9659,22 +10242,30 @@
         },
         "form-control-bg": {
           "name": "form-control-bg",
-          "value": "#37317a",
+          "value": "#ffffff",
           "parents": [
             {
+              "theme": "light",
+              "prop": "color-bg"
+            },
+            {
               "theme": "default",
-              "prop": "form-control-bg"
+              "prop": "color-bg"
             }
           ],
           "childs": []
         },
         "form-control-focus-bg": {
           "name": "form-control-focus-bg",
-          "value": "#342e73",
+          "value": "#ffffff",
           "parents": [
             {
+              "theme": "light",
+              "prop": "color-bg"
+            },
+            {
               "theme": "default",
-              "prop": "form-control-focus-bg"
+              "prop": "color-bg"
             }
           ],
           "childs": []
@@ -9686,17 +10277,6 @@
             {
               "theme": "default",
               "prop": "form-control-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-color": {
-          "name": "form-control-border-color",
-          "value": "#342e73",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-color"
             }
           ],
           "childs": []
@@ -9714,7 +10294,7 @@
         },
         "form-control-border-radius": {
           "name": "form-control-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -9723,28 +10303,33 @@
           ],
           "childs": []
         },
-        "form-control-primary-border-color": {
-          "name": "form-control-primary-border-color",
-          "value": "#8a7fff",
+        "form-control-border-color": {
+          "name": "form-control-border-color",
+          "value": "#dadfe6",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "form-control-border-color"
+            }
+          ],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "checkbox-border-color"
+            }
+          ]
+        },
+        "form-control-selected-border-color": {
+          "name": "form-control-selected-border-color",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
-              "prop": "color-primary"
+              "prop": "color-success"
             },
             {
               "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-secondary-border-color": {
-          "name": "form-control-secondary-border-color",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -9766,7 +10351,7 @@
         },
         "form-control-success-border-color": {
           "name": "form-control-success-border-color",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -9842,41 +10427,32 @@
           ],
           "childs": []
         },
-        "form-control-font-size-sm": {
-          "name": "form-control-font-size-sm",
+        "form-control-sm-font-size": {
+          "name": "form-control-sm-font-size",
           "value": "0.875rem",
           "parents": [
             {
-              "theme": "default",
-              "prop": "form-control-font-size-sm"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-line-height-sm": {
-          "name": "form-control-line-height-sm",
-          "value": "1rem",
-          "parents": [
+              "theme": "light",
+              "prop": "font-size-sm"
+            },
             {
               "theme": "default",
-              "prop": "form-control-line-height-sm"
+              "prop": "font-size-sm"
             }
           ],
           "childs": []
         },
-        "form-control-border-radius-sm": {
-          "name": "form-control-border-radius-sm",
-          "value": "12px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-radius-sm"
-            }
+        "form-control-sm-padding": {
+          "name": "form-control-sm-padding",
+          "value": [
+            "0.375rem",
+            "1.125rem"
           ],
+          "parents": [],
           "childs": []
         },
-        "form-control-font-size-lg": {
-          "name": "form-control-font-size-lg",
+        "form-control-lg-font-size": {
+          "name": "form-control-lg-font-size",
           "value": "1.25rem",
           "parents": [
             {
@@ -9890,24 +10466,13 @@
           ],
           "childs": []
         },
-        "form-control-line-height-lg": {
-          "name": "form-control-line-height-lg",
-          "value": "1.375rem",
+        "form-control-lg-padding": {
+          "name": "form-control-lg-padding",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "form-control-line-height-lg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-radius-lg": {
-          "name": "form-control-border-radius-lg",
-          "value": "12px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-radius-lg"
+              "prop": "form-control-lg-padding"
             }
           ],
           "childs": []
@@ -9949,13 +10514,80 @@
           ],
           "childs": []
         },
-        "checkbox-fg-color": {
-          "name": "checkbox-fg-color",
-          "value": "#2f3234",
+        "checkbox-bg": {
+          "name": "checkbox-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-size": {
+          "name": "checkbox-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-border-size": {
+          "name": "checkbox-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-border-color": {
+          "name": "checkbox-border-color",
+          "value": "#dadfe6",
           "parents": [
             {
               "theme": "light",
-              "prop": "color-fg"
+              "prop": "form-control-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "form-control-border-color"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-selected-border-color": {
+          "name": "checkbox-selected-border-color",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-success"
+            },
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-fg": {
+          "name": "checkbox-fg",
+          "value": "#282828",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-fg-heading"
+            },
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []
@@ -10007,7 +10639,7 @@
         },
         "modal-fg": {
           "name": "modal-fg",
-          "value": "#444444",
+          "value": "#484848",
           "parents": [
             {
               "theme": "light",
@@ -10022,7 +10654,7 @@
         },
         "modal-fg-heading": {
           "name": "modal-fg-heading",
-          "value": "#222222",
+          "value": "#282828",
           "parents": [
             {
               "theme": "light",
@@ -10138,7 +10770,7 @@
         },
         "modal-separator": {
           "name": "modal-separator",
-          "value": "#dddddd",
+          "value": "#ebeef2",
           "parents": [
             {
               "theme": "light",
@@ -10388,7 +11020,7 @@
             },
             {
               "theme": "cosmic",
-              "prop": "form-control-font-size-lg"
+              "prop": "form-control-lg-font-size"
             },
             {
               "theme": "cosmic",
@@ -10423,11 +11055,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "layout-font-size"
+              "prop": "header-font-size"
             },
             {
               "theme": "cosmic",
-              "prop": "header-font-size"
+              "prop": "layout-font-size"
             },
             {
               "theme": "cosmic",
@@ -10472,7 +11104,12 @@
               "prop": "font-size-sm"
             }
           ],
-          "childs": []
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "form-control-sm-font-size"
+            }
+          ]
         },
         "font-size-xs": {
           "name": "font-size-xs",
@@ -10577,11 +11214,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "layout-line-height"
+              "prop": "header-line-height"
             },
             {
               "theme": "cosmic",
-              "prop": "header-line-height"
+              "prop": "layout-line-height"
             },
             {
               "theme": "cosmic",
@@ -10766,15 +11403,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "form-control-secondary-border-color"
-            },
-            {
-              "theme": "cosmic",
               "prop": "form-control-placeholder-color"
             },
             {
               "theme": "cosmic",
-              "prop": "checkbox-fg-color"
+              "prop": "checkbox-border-color"
             }
           ]
         },
@@ -10814,6 +11447,14 @@
             {
               "theme": "cosmic",
               "prop": "btn-outline-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "form-control-text-primary-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-fg"
             },
             {
               "theme": "cosmic",
@@ -10890,6 +11531,14 @@
             },
             {
               "theme": "cosmic",
+              "prop": "form-control-focus-bg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "form-control-border-color"
+            },
+            {
+              "theme": "cosmic",
               "prop": "modal-separator"
             }
           ]
@@ -10950,10 +11599,6 @@
             {
               "theme": "cosmic",
               "prop": "btn-fg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-text-primary-color"
             }
           ]
         },
@@ -11008,7 +11653,7 @@
             },
             {
               "theme": "cosmic",
-              "prop": "form-control-primary-border-color"
+              "prop": "form-control-selected-border-color"
             }
           ]
         },
@@ -11023,6 +11668,14 @@
             },
             {
               "theme": "cosmic",
+              "prop": "tabs-selected"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "route-tabs-selected"
+            },
+            {
+              "theme": "cosmic",
               "prop": "toaster-success"
             },
             {
@@ -11032,6 +11685,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-success-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-selected-border-color"
             }
           ]
         },
@@ -11735,51 +12392,6 @@
           ],
           "childs": []
         },
-        "layout-font-family": {
-          "name": "layout-font-family",
-          "value": "Open Sans",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-size": {
-          "name": "layout-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "layout-line-height": {
-          "name": "layout-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
         "header-font-family": {
           "name": "header-font-family",
           "value": "Exo",
@@ -11967,6 +12579,51 @@
             {
               "theme": "cosmic",
               "prop": "shadow"
+            }
+          ],
+          "childs": []
+        },
+        "layout-font-family": {
+          "name": "layout-font-family",
+          "value": "Open Sans",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
+            }
+          ],
+          "childs": []
+        },
+        "layout-font-size": {
+          "name": "layout-font-size",
+          "value": "1rem",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "font-size"
+            },
+            {
+              "theme": "default",
+              "prop": "font-size"
+            }
+          ],
+          "childs": []
+        },
+        "layout-line-height": {
+          "name": "layout-line-height",
+          "value": 1.25,
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "line-height"
+            },
+            {
+              "theme": "default",
+              "prop": "line-height"
             }
           ],
           "childs": []
@@ -12543,6 +13200,17 @@
           ],
           "childs": []
         },
+        "tabs-selected": {
+          "name": "tabs-selected",
+          "value": "#00d977",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
         "route-tabs-font-family": {
           "name": "route-tabs-font-family",
           "value": "Exo",
@@ -12665,6 +13333,17 @@
             {
               "theme": "default",
               "prop": "route-tabs-bg"
+            }
+          ],
+          "childs": []
+        },
+        "route-tabs-selected": {
+          "name": "route-tabs-selected",
+          "value": "#00d977",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -13850,11 +14529,7 @@
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "color-white"
-            },
-            {
-              "theme": "default",
-              "prop": "color-white"
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []
@@ -13888,12 +14563,7 @@
         "form-control-bg": {
           "name": "form-control-bg",
           "value": "#37317a",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-bg"
-            }
-          ],
+          "parents": [],
           "childs": []
         },
         "form-control-focus-bg": {
@@ -13901,8 +14571,8 @@
           "value": "#342e73",
           "parents": [
             {
-              "theme": "default",
-              "prop": "form-control-focus-bg"
+              "theme": "cosmic",
+              "prop": "separator"
             }
           ],
           "childs": []
@@ -13914,17 +14584,6 @@
             {
               "theme": "default",
               "prop": "form-control-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-color": {
-          "name": "form-control-border-color",
-          "value": "#342e73",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-color"
             }
           ],
           "childs": []
@@ -13942,7 +14601,7 @@
         },
         "form-control-border-radius": {
           "name": "form-control-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -13951,24 +14610,24 @@
           ],
           "childs": []
         },
-        "form-control-primary-border-color": {
-          "name": "form-control-primary-border-color",
+        "form-control-border-color": {
+          "name": "form-control-border-color",
+          "value": "#342e73",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "separator"
+            }
+          ],
+          "childs": []
+        },
+        "form-control-selected-border-color": {
+          "name": "form-control-selected-border-color",
           "value": "#7659ff",
           "parents": [
             {
               "theme": "cosmic",
               "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-secondary-border-color": {
-          "name": "form-control-secondary-border-color",
-          "value": "#a1a1e5",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-fg"
             }
           ],
           "childs": []
@@ -14054,41 +14713,32 @@
           ],
           "childs": []
         },
-        "form-control-font-size-sm": {
-          "name": "form-control-font-size-sm",
+        "form-control-sm-font-size": {
+          "name": "form-control-sm-font-size",
           "value": "0.875rem",
           "parents": [
             {
-              "theme": "default",
-              "prop": "form-control-font-size-sm"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-line-height-sm": {
-          "name": "form-control-line-height-sm",
-          "value": "1rem",
-          "parents": [
+              "theme": "cosmic",
+              "prop": "font-size-sm"
+            },
             {
               "theme": "default",
-              "prop": "form-control-line-height-sm"
+              "prop": "font-size-sm"
             }
           ],
           "childs": []
         },
-        "form-control-border-radius-sm": {
-          "name": "form-control-border-radius-sm",
-          "value": "12px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-radius-sm"
-            }
+        "form-control-sm-padding": {
+          "name": "form-control-sm-padding",
+          "value": [
+            "0.375rem",
+            "1.125rem"
           ],
+          "parents": [],
           "childs": []
         },
-        "form-control-font-size-lg": {
-          "name": "form-control-font-size-lg",
+        "form-control-lg-font-size": {
+          "name": "form-control-lg-font-size",
           "value": "1.25rem",
           "parents": [
             {
@@ -14102,24 +14752,13 @@
           ],
           "childs": []
         },
-        "form-control-line-height-lg": {
-          "name": "form-control-line-height-lg",
-          "value": "1.375rem",
+        "form-control-lg-padding": {
+          "name": "form-control-lg-padding",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "form-control-line-height-lg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-radius-lg": {
-          "name": "form-control-border-radius-lg",
-          "value": "12px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-radius-lg"
+              "prop": "form-control-lg-padding"
             }
           ],
           "childs": []
@@ -14161,13 +14800,68 @@
           ],
           "childs": []
         },
-        "checkbox-fg-color": {
-          "name": "checkbox-fg-color",
+        "checkbox-bg": {
+          "name": "checkbox-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-size": {
+          "name": "checkbox-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-border-size": {
+          "name": "checkbox-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-border-color": {
+          "name": "checkbox-border-color",
           "value": "#a1a1e5",
           "parents": [
             {
               "theme": "cosmic",
               "prop": "color-fg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-selected-border-color": {
+          "name": "checkbox-selected-border-color",
+          "value": "#00d977",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-fg": {
+          "name": "checkbox-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
             }
           ],
           "childs": []

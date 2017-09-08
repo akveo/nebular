@@ -13,7 +13,7 @@ export * from './services/color.helper';
 export * from './components/card/card.module';
 export * from './components/layout/layout.module';
 export * from './components/menu/menu.module';
-export { NbMenuService, NbMenuOptions, NbMenuItem } from './components/menu/menu.service';
+export { NbMenuService, NbMenuItem } from './components/menu/menu.service';
 export * from './components/route-tabset/route-tabset.module';
 export * from './components/sidebar/sidebar.module';
 export * from './components/sidebar/sidebar.service';

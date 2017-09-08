@@ -44,6 +44,11 @@ export class NbMenuItemComponent {
   }
 }
 
+/**
+ * Vertical menu component.
+ *
+ * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
+ */
 @Component({
   selector: 'nb-menu',
   styleUrls: ['./menu.component.scss'],
@@ -63,7 +68,18 @@ export class NbMenuItemComponent {
 export class NbMenuComponent implements OnInit, OnDestroy {
   @HostBinding('class.inverse') inverseValue: boolean;
 
+  /**
+   * Tags a menu with some ID, can be later used in the menu service
+   * to determine which menu triggered the action, if multiple menus exist on the page.
+   *
+   * @type {string}
+   */
   @Input() tag: string;
+
+  /**
+   * List of menu items.
+   * @type {List<NbMenuItem> | List<any> | any}
+   */
   @Input() items: NbMenuItem[];
 
   /**
@@ -75,7 +91,6 @@ export class NbMenuComponent implements OnInit, OnDestroy {
     this.inverseValue = convertToBoolProperty(val);
   }
 
-  private stack: NbMenuItem[] = [];
   private alive: boolean = true;
 
   constructor(private menuInternalService: NbMenuInternalService, private router: Router) { }
@@ -105,19 +120,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
       .filter(data => !data.tag || data.tag === this.tag)
       .takeWhile(() => this.alive)
       .subscribe((data: { tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }) => {
-        let selectedItem: NbMenuItem;
-        this.items.forEach(i => {
-          const result = this.getSelectedItem(i);
-
-          if (result) {
-            selectedItem = result;
-            return;
-          }
-        });
-
-        this.clearStack();
-
-        data.listener.next({ tag: this.tag, item: selectedItem });
+        data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
       });
 
     this.router.events.subscribe(event => {
@@ -157,15 +160,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   }
 
   private navigateHome() {
-    let homeItem: NbMenuItem;
-    this.items.forEach(i => {
-      const result = this.getHomeItem(i);
-
-      if (result) {
-        homeItem = result;
-      }
-    });
-    this.clearStack();
+    const homeItem = this.getHomeItem(this.items);
 
     if (homeItem) {
       this.menuInternalService.resetItems(this.items);
@@ -181,51 +176,33 @@ export class NbMenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getHomeItem(parent: NbMenuItem): NbMenuItem {
-    this.stack.push(parent);
-
-    if (parent.home) {
-      return parent;
-    }
-
-    if (parent.children && parent.children.length > 0) {
-      const first = parent.children.filter(c => !this.stack.includes(c))[0];
-
-      if (first) {
-        return this.getHomeItem(first);
+  private getHomeItem(items: NbMenuItem[]): NbMenuItem {
+    let home = null;
+    items.forEach((item: NbMenuItem) => {
+      if (item.home) {
+        home = item;
       }
-    }
-
-    if (parent.parent) {
-      return this.getHomeItem(parent.parent);
-    }
-  }
-
-  private clearStack() {
-    this.stack = [];
+      if (item.home && item.children && item.children.length > 0) {
+        home = this.getHomeItem(item.children);
+      }
+    });
+    return home;
   }
 
   private compareTag(tag: string) {
     return !tag || tag === this.tag;
   }
 
-  private getSelectedItem(parent: NbMenuItem): NbMenuItem {
-    this.stack.push(parent);
-
-    if (parent.selected) {
-      return parent;
-    }
-
-    if (parent.children && parent.children.length > 0) {
-      const first = parent.children.filter(c => !this.stack.includes(c))[0];
-
-      if (first) {
-        return this.getSelectedItem(first);
+  private getSelectedItem(items: NbMenuItem[]): NbMenuItem {
+    let selected = null;
+    items.forEach((item: NbMenuItem) => {
+      if (item.selected) {
+        selected = item;
       }
-    }
-
-    if (parent.parent) {
-      return this.getSelectedItem(parent.parent);
-    }
+      if (item.selected && item.children && item.children.length > 0) {
+        selected = this.getSelectedItem(item.children);
+      }
+    });
+    return selected;
   }
 }

@@ -1,13 +1,178 @@
 <nb-layout>
-  <nb-layout-header fixed [ngClass]="{ 'transparent': transparentHeader }">
+  <nb-layout-header>
     <ngd-header></ngd-header>
   </nb-layout-header>
 
   <nb-layout-column>
 
-    <section>One</section>
-    <section>Two</section>
-    <section>Etc</section>
+    <a href="#" class="extra-link-support">
+      Support us on
+      <mark>Github</mark>
+    </a>
+    <nav class="nav">
+      <a *ngFor="let item of leftMenu"
+         [routerLink]=""
+         [fragment]="item.hash"
+         remoteLink
+         ngdFragment
+         class="nav-item"
+         [class.active]="item.active">
+        <i></i><span>{{ item.title }}</span>
+    </a>
+    </nav>
+
+    <i [style.top]="bgTop" class="fixed-pseudo-bg"></i>
+
+    <section #section class="hero" id="home">
+      <div class="section-container">
+        <div class="hero-i">
+          <div class="hero-i-helper">
+            <div class="img">
+              <div class="imgs-set" [class.animated]="animated">
+                <img src="assets/images/hero-img/1-2.png" class="hero-img hero-img-1">
+                <img src="assets/images/hero-img/3-4.png" class="hero-img hero-img-2">
+                <img src="assets/images/hero-img/5-6.png" class="hero-img hero-img-3">
+                <img src="assets/images/hero-img/7.png" class="hero-img hero-img-4">
+                <img src="assets/images/hero-img/8.png" class="hero-img hero-img-5">
+                <img src="assets/images/hero-img/9.png" class="hero-img hero-img-6">
+              </div>
+            </div>
+            <div class="txt">
+              <h1><span>Nebular</span></h1>
+              <div class="bigger">Full-featured front-end framework based on Angular.</div>
+              <p>Nebular's primary goal is to assemble together and connect the most awesome features and libraries
+                creating an efficient ecosystem to speed up and simpify the development.</p>
+              <div class="btn-hero-wrap">
+                <a href="#" class="btn btn-hero">Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section #section class="ui-kit" id="ui-kit">
+      <div class="section-container">
+        <div class="row">
+          <div class="col-md-7 img">
+            <div class="ui-kit-img">
+              <img src="assets/images/ui-kit-img-planet.png" alt="" class="ui-kit-img-planet">
+              <img src="assets/images/ui-kit-img-top.png" alt="" class="ui-kit-img-top">
+            </div>
+          </div>
+          <div class="col-md-5 txt">
+            <img src="assets/images/decor-img-ui-kit.png" class="decor-img-ui-kit">
+            <h2><span>UI KIT</span></h2>
+            <p>We crafted together the most important components you need to bootstrap your development.
+              Our UI Kit is framework agnostic, though you could mix it with a CSS-framework of your choice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section #section class="theme-system" id="theme-system">
+      <div class="section-container">
+        <div class="align-items-center">
+          <div class="row align-items-center txt">
+            <div class="col-md-8">
+              <img src="assets/images/decor-img-theming.png" class="decor-img-theming">
+              <h2><span>THEME SYSTEM</span></h2>
+            </div>
+            <div class="col-md-4">
+              <p>2 built-in themes + hundreds of variables to create your own.
+                Multiple themes with hot reload out of the box.</p>
+            </div>
+          </div>
+          <div #comparisonContainer class="js-comparison-container">
+            <img #comparisonImage class="comparison-image" src="assets/images/theme-cosmic.png" alt="">
+            <img #comparisonImage class="comparison-image" src="assets/images/theme-default.png" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section #section class="auth-module" id="auth-module">
+      <div class="section-container">
+        <div class="row">
+          <div class="col-md-7 txt">
+            <img src="assets/images/decor-img-auth-module.png" class="decor-img-auth-module">
+            <h2><span>Auth Module</span></h2>
+            <p>Now front-end authentication layer is just a matter of a configuration.</p>
+          </div>
+          <div class="col-md-5 img">
+            <img src="assets/images/auth-img.png" alt="" class="auth-module-img">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section #section class="built-with text-center" id="built-with">
+      <div class="section-container">
+        <h4><span>Built with nebular</span></h4>
+
+        <div class="carousel-slider">
+          <swiper class="swiper" [config]="swiperConfig">
+            <div class="swiper-wrapper test">
+              <div class="swiper-slide" *ngFor="let slide of slides">
+                <div class="txt">
+                  <h3><span>{{ slide.title }}</span></h3>
+                  <p>{{ slide.subTitle}}</p>
+                </div>
+                <img [src]="slide.img">
+              </div>
+            </div>
+          </swiper>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button swiper-button-prev">
+            <div>
+              <span class="icon-carousel-left icon-carousel-arr"></span>
+            </div>
+          </div>
+          <div class="swiper-button swiper-button-next">
+            <div>
+              <span class="icon-carousel-right icon-carousel-arr"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section #section class="support-us" id="support-us">
+      <div class="section-container text-center">
+        <div class="txt">
+          <h2><span>You can support us</span></h2>
+          <div class="row">
+            <p class="col-md-6 offset-3">Don’t let us feeling like an astronaut sending SOS from this tiny box</p>
+          </div>
+        </div>
+        <div class="social-block-container">
+          <div class="social-block">
+            <a href="#" target="_blank" class="social-item">
+              <span class="icon"><i class="socicon-github"></i></span>
+              <span class="txt">Star us</span>
+            </a>
+            <a href="#" target="_blank" class="social-item">
+              <span class="icon"><i class="socicon-twitter"></i></span>
+              <span class="txt">Follow us</span>
+            </a>
+            <a href="#" target="_blank" class="social-item">
+              <span class="icon"><i class="socicon-facebook"></i></span>
+              <span class="txt">Like us</span>
+            </a>
+          </div>
+          <i class="the-astronaut"></i>
+        </div>
+      </div>
+    </section>
+    <section #section class="contact-us" id="contact-us">
+      <div class="section-container">
+        <h2><span>Can i hire you?</span></h2>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Yes! We are available for hire. Visit our <a href="https://www.akveo.com/" target="_blank">homepage</a>
+              or
+              simply leave us a note at
+              <strong><a href="mailto:contact@akveo.com">contact@akveo.com</a></strong>. We will be happy to work with
+              you!</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </nb-layout-column>
   <nb-layout-footer>

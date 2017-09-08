@@ -121,7 +121,6 @@ export class NbLayoutFooterComponent {
 /**
  * The general Nebular component-container.
  * It is required that all children component of the framework are located inside of the nb-layout.
- * The theme styles and multi-theming are also applied starting from this component.
  *
  * Can contain the following components inside:
  * ```
@@ -167,14 +166,14 @@ export class NbLayoutFooterComponent {
  * the value specified in the theme variable `layout-content-width` (900px by default).
  *
  * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
- * to dymanically append some components like modals or spinners/loaders
+ * to dynamically append some components like modals or spinners/loaders
  * so that they are located on top of the elements hierarchy.
  * More details are below under the `ThemeService` section.
  *
  * The layout component is also responsible for changing of the application themes.
- * It listens to the `themeChange` event and change the theme CSS class appended to it.
+ * It listens to the `themeChange` event and change the theme CSS class appended to body.
  * Based on the class appended a specific CSS-theme is applied to the application.
- * More details of the theming topic could be found here TODO: link.
+ * More details of the Theme System could be found here TODO: link.
  *
  * TODO: theme variables
  *
