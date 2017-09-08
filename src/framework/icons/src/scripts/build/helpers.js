@@ -43,11 +43,11 @@ function fixCss() {
   const file = fs.readFileSync(srcStylePath).toString();
   const fixed = license + file
     .replace(/icomoon/g, iconsName) // font name
-    .replace(/icon/g, 'nb') // prefix
+    .replace(/\.(icon-)/g, '.') // prefix
     .replace(/fonts/g, '../fonts') // fonts path
     .replace(/:(before)/g, '::$1') // pseudo double semicol
-    .replace(/"nb-"/g, '\'nb-\'') // class selector quotes
-    .replace(/" nb-"/g, '\' nb-\'')
+    .replace(/"icon-"/g, '\'nb-\'') // class selector quotes
+    .replace(/" icon-"/g, '\' nb-\'')
     .replace(/(content: )"(.*)"/g, '$1\'$2\''); // content quotes
 
   if (!fs.existsSync(cssRoot)) {
