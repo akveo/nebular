@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { List } from 'immutable';
 import 'rxjs/add/operator/publish';
 
 const itemClick$ = new ReplaySubject(1);
