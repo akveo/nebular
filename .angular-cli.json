@@ -84,6 +84,7 @@
         "../node_modules/open-sans-fontface/open-sans.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/ionicons/scss/ionicons.scss",
+        "../node_modules/socicon/css/socicon.css",
         "../node_modules/swiper/dist/css/swiper.css",
         "../node_modules/prismjs/themes/prism.css",
         "styles.scss"

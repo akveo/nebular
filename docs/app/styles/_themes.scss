@@ -7,7 +7,7 @@
 $nb-enabled-themes: (default);
 
 $nb-themes: nb-register-theme((
-  font-secondary: font-main,
+  font-secondary: Exo,
   font-size-lg: 2rem,
   color-bg: white,
   color-fg-highlight: #7659ff,
@@ -56,5 +56,8 @@ $nb-themes: nb-register-theme((
   card-padding: 1rem,
   sidebar-padding: 0.5rem,
   footer-separator: rgba(0, 0, 0, 0.1),
+
+  landing-golden: #ffd22d,
+  landing-red: #fc3b41,
 ), default, default);
 

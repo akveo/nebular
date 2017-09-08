@@ -9,16 +9,13 @@
   font-style: normal;
 }
 @import '../styles/themes';
-@import '../styles/helpers';
-@import '~socicon/css/socicon.css';
 
+$img: '~assets/images/';
+$transition: all 0.2s ease-in-out;
 
+@include nb-install-component {
 
-@include nb-install-root-component {
-
-
-
-  [class^="icon-"], [class*=" icon-"] {
+  [class^='icon-'], [class*=' icon-'] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
@@ -33,21 +30,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  .icon-carousel-right:before {
-    content: "\e901";
+  .icon-carousel-right::before {
+    content: '\e901';
   }
-  .icon-carousel-left:before {
-    content: "\e900";
+  .icon-carousel-left::before {
+    content: '\e900';
   }
-
-  $golden: #ffd22d;
-  $red: #fc3b41;
-  $img: '~assets/images/';
-  $transition: all 0.2s ease-in-out;
 
   /deep/ nb-layout .layout {
     overflow: hidden;
-    font-family: Exo;
+    font-family: nb-theme(font-secondary);
   }
   nb-layout-column {
     padding: 0!important;
@@ -67,14 +59,14 @@
     font-size: 120px;
     margin-bottom: 0;
     font-weight: 600;
-    text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 1);
     display: inline-block;
     position: relative;
     > span {
       position: relative;
     }
-    &:before {
-      content: "";
+    &::before {
+      content: '';
       position: absolute;
       left: 15px;
       right: 15px;
@@ -89,15 +81,15 @@
     color: white;
     font-size: 100px;
     font-weight: 600;
-    text-shadow: 0px 0px 4px white;
+    text-shadow: 0 0 4px white;
     display: inline-block;
     position: relative;
     text-transform: uppercase;
     > span {
       position: relative;
     }
-    &:before {
-      content: "";
+    &::before {
+      content: '';
       position: absolute;
       left: 15px;
       right: 15px;
@@ -112,15 +104,15 @@
     color: white;
     font-size: 48px;
     font-weight: 600;
-    text-shadow: 0px 0px 4px white;
+    text-shadow: 0 0 4px white;
     display: inline-block;
     position: relative;
     text-transform: uppercase;
     > span {
       position: relative;
     }
-    &:before {
-      content: "";
+    &::before {
+      content: '';
       position: absolute;
       left: 15px;
       right: 15px;
@@ -149,7 +141,7 @@
     background-size: cover;
     background-position: top center;
     height: 6720px;
-    transform: translate3D(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   section {
     min-height: 100vh;
@@ -193,7 +185,7 @@
     }
     &:hover {
       mark {
-        text-shadow: 0 0 16px transparentize(white, .3);
+        text-shadow: 0 0 16px transparentize(white, 0.3);
       }
     }
   }
@@ -231,8 +223,8 @@
         position: relative;
         box-shadow: none;
         transition: $transition;
-        &:before {
-          content: "";
+        &::before {
+          content: '';
           width: 16px;
           height: 16px;
           position: absolute;
@@ -241,16 +233,16 @@
           transform: translate(-50%, -50%);
           border-radius: 50%;
           border: 2px solid nb-theme(color-fg);
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), .6);
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), 0.6);
           display: block;
           opacity: 0;
           transition: $transition;
         }
       }
       &:hover {
-        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg), .4);
+        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg), 0.4);
         i {
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), .6);
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), 0.6);
           &:before {
             opacity: 1;
           }
@@ -258,12 +250,12 @@
       }
       &.active {
         color: nb-theme(color-fg-highlight);
-        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg-highlight), .4);
+        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg-highlight), 0.4);
         cursor: default;
         i {
           border-color: nb-theme(color-fg-highlight);
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), .6);
-          &:before {
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.6);
+          &::before {
             opacity: 1;
             border-color: nb-theme(color-fg-highlight);
           }
@@ -277,7 +269,7 @@
       left: 13px;
       top: 38px;
       bottom: 38px;
-      background: transparentize(nb-theme(color-fg), .9);
+      background: transparentize(nb-theme(color-fg), 0.9);
       display: block;
       position: absolute;
     }
@@ -290,15 +282,15 @@
       max-height: 765px;
       padding: 80px;
       margin-left: 100px;
-      background: transparentize(nb-theme(color-fg), .96);
-      border: 2px solid transparentize(nb-theme(color-primary), .8);
+      background: transparentize(nb-theme(color-fg), 0.96);
+      border: 2px solid transparentize(nb-theme(color-primary), 0.8);
       border-radius: 60px;
       position: relative;
       z-index: 2;
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      box-shadow: 0px 2px 16px 0px transparentize(nb-theme(color-primary), .8);
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.8);
       .hero-i-helper {
         display: flex;
         flex-flow: row nowrap;
@@ -322,12 +314,12 @@
       padding-right: 40px;
       font-size: 24px;
       border: 4px solid nb-theme(color-fg-highlight);
-      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), .4),
-      0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), .4) inset;
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.4),
+      0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.4) inset;
       transition: $transition;
       &:hover {
-        box-shadow: 0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), .4),
-        0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), .4) inset;
+        box-shadow: 0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), 0.4),
+        0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), 0.4) inset;
       }
     }
     .bigger {
@@ -458,7 +450,7 @@
 
       @keyframes img-top-bouncing {
         from, 20%, 40%, 60%, 80%, to {
-          animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
         0% {
@@ -466,11 +458,11 @@
         }
 
         5% {
-          transform: scale3d(.95, .95, .95);
+          transform: scale3d(0.95, 0.95, 0.95);
         }
 
         10% {
-          transform: scale3d(.9 .9, .9);
+          transform: scale3d(0.9, 0.9, 0.9);
         }
 
         20% {
@@ -504,8 +496,8 @@
     margin-top: 40px;
     overflow: visible;
     .comparison-control__mask,
-    .comparison-control:before,
-    .comparison-control:after,
+    .comparison-control::before,
+    .comparison-control::after,
     .comparison-item__label {
       display: none;
     }
@@ -591,11 +583,11 @@
         line-height: 2.2;
         color: white;
         cursor: pointer;
-        border: 2px solid transparentize(nb-theme(color-primary), .6);
+        border: 2px solid transparentize(nb-theme(color-primary), 0.6);
         border-radius: 40px;
         display: block;
-        background: transparentize(nb-theme(color-primary), .8);
-        box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), .6);
+        background: transparentize(nb-theme(color-primary), 0.8);
+        box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.6);
         transition: $transition;
       }
       .txt {
@@ -610,9 +602,9 @@
         .icon {
           border: 6px solid white;
           background: transparent;
-          text-shadow: 0 0 8px $golden;
-          box-shadow: 0 0 12px 0 $golden,
-          0 0 12px 0 $golden inset;
+          text-shadow: 0 0 8px nb-theme(landing-golden);
+          box-shadow: 0 0 12px 0 nb-theme(landing-golden),
+          0 0 12px 0 nb-theme(landing-golden) inset;
         }
         .txt {
           text-decoration: none;
@@ -654,7 +646,7 @@
   //BUILT WITH
   .built-with {
     h4 {
-      margin-bottom: 0px;
+      margin-bottom: 0;
       font-size: 36px;
       color: nb-theme(color-fg);
       text-transform: uppercase;
@@ -716,22 +708,22 @@
       bottom: 30%;
       transform: translateY(-50%);
     }
-    &-prev{
+    &-prev {
       text-align: left;
     }
-    &-next{
+    &-next {
       text-align: right;
     }
-    .icon-carousel-arr{
+    .icon-carousel-arr {
       transition: $transition;
       text-shadow: 0 0 16px nb-theme(color-primary);
     }
     &:hover {
-      .icon-carousel-arr{
+      .icon-carousel-arr {
         color: white;
 
-        text-shadow: 0 0 30px $golden,
-                     0 0 40px $red;
+        text-shadow: 0 0 30px nb-theme(landing-golden),
+                     0 0 40px nb-theme(landing-red);
       }
     }
     &-disabled {
@@ -750,10 +742,10 @@
       width: 100%;
       display: inline-block;
       vertical-align: middle;
-      .txt{
+      .txt {
         padding: 50px 0 20px;
       }
-      img{
+      img {
         max-width: 100%;
       }
     }
@@ -764,38 +756,36 @@
     left: 0;
     right: 0;
   }
-  /deep/ .swiper-container {
-    //max-width: 890px;
-  }
+
   /deep/ .swiper-pagination-bullet {
     width: 32px;
     height: 32px;
     display: inline-block;
     vertical-align: middle;
-    background: transparentize(nb-theme(color-primary), .71);
+    background: transparentize(nb-theme(color-primary), 0.71);
     border: 2px solid nb-theme(color-primary);
-    box-shadow: 0px 0 16px 0px transparentize(nb-theme(color-primary), .4);
+    box-shadow: 0 0 16px 0 transparentize(nb-theme(color-primary), 0.4);
     border-radius: 5px;
     transition: $transition;
-    opacity: .4;
+    opacity: 0.4;
     + .swiper-pagination-bullet {
       margin-left: 10px;
     }
     &:hover {
-      box-shadow: 0px 2px 16px 0px transparentize(nb-theme(color-primary), .2);
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.2);
     }
     &-active {
       opacity: 1;
       cursor: default;
       background: transparent;
       border-color: white;
-      box-shadow: 0 0 20px 0px transparentize($golden, .5), 0 0 20px 0px transparentize($red, .3),
-      0px 0 20px 0 transparentize($golden, .5) inset, 0 0 20px 0px transparentize($red, .3) inset;
+      box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3),
+      0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3) inset;
       &:hover {
         background: transparent;
         border-color: white;
-        box-shadow: 0 0 20px 0px transparentize($golden, .6), 0 0 20px 0px transparentize($red, .4),
-        0px 0 20px 0 transparentize($golden, .6) inset, 0 0 20px 0px transparentize($red, .4) inset;
+        box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4),
+        0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4) inset;
       }
     }
   }
