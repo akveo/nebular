@@ -109,6 +109,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Backend integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'backend-integration.md',
+          },
+        ],
+      },
     ],
   },
   {
