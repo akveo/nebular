@@ -248,28 +248,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Some Static method
-   * // TODO: remove this
-   *
-   * @param {string} test
-   * @param {any} anotherOne
-   * @returns {number}
-   */
-  static someTestMethod(test: string, anotherOne: any) {
-    return 1;
-  }
-
-  /**
-   * Returns some value
-   * // TODO: remove this
-   *
-   * @returns number
-   */
-  returnSomeValue() {
-    return 1;
-  }
-
-  /**
    * Collapses the sidebar
    */
   collapse() {
@@ -323,7 +301,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
         // TODO: move this into config
-        const tablet = ['xs', 'sm', 'md'];
+        const tablet = ['xs', 'sm', 'md', 'lg'];
         const mobile = ['xs'];
 
         if (tablet.indexOf(current.name) !== -1) {
