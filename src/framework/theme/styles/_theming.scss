@@ -35,6 +35,25 @@ $nb-themes-export: () !global;
   @return map-get($theme, $key);
 }
 
+@function convert-to-css-variables($variables) {
+  $result: ();
+  @each $var, $value in $variables {
+    $result: map-set($result, $var, '--var(#{$var})');
+  }
+
+  @debug $result;
+  @return $result;
+}
+
+@function set-global-theme-vars($theme, $theme-name) {
+  $theme: $theme !global;
+  $theme-name: $theme-name !global;
+  @if ($nb-enable-css-variables) {
+    $theme: convert-to-css-variables($theme) !global;
+  }
+  @return $theme;
+}
+
 @function nb-register-theme($theme, $name, $default: null) {
 
   $theme-data: ();
@@ -60,6 +79,8 @@ $nb-themes-export: () !global;
     $theme-parsed: map-set($theme-parsed, $key, nb-get-value($theme, $key, $value));
   }
 
+  // enable right away when installed
+  $theme-parsed: set-global-theme-vars($theme-parsed, $name);
   @return map-set($nb-themes, $name, $theme-parsed);
 }
 
@@ -77,16 +98,6 @@ $nb-themes-export: () !global;
   @return $themes-to-install;
 }
 
-@function convert-to-css-variables($variables) {
-  $result: ();
-  @each $var, $value in $variables {
-    $result: map-set($result, $var, '--var(#{$var})');
-  }
-
-  @debug $result;
-  @return $result;
-}
-
 @mixin install-css-variables($theme-name, $variables) {
   .nb-theme-#{$theme-name} {
     @each $var, $value in $variables {
@@ -102,12 +113,7 @@ $nb-themes-export: () !global;
 
   @each $theme-name, $theme in $themes-to-install {
     :host-context(.nb-theme-#{$theme-name}) {
-      $theme: $theme !global;
-
-      @if ($nb-enable-css-variables) {
-        $theme: convert-to-css-variables($theme) !global;
-      }
-      $theme-name: $theme-name!global;
+      $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }
   }
@@ -139,12 +145,7 @@ $nb-themes-export: () !global;
 
   @each $theme-name, $theme in $themes-to-install {
     .nb-theme-#{$theme-name} {
-      $theme: $theme !global;
-
-      @if ($nb-enable-css-variables) {
-        $theme: convert-to-css-variables($theme) !global;
-      }
-      $theme-name: $theme-name!global;
+      $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }
   }
