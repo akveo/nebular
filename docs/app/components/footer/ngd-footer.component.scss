@@ -12,19 +12,29 @@
   .footer-inner{
     display: flex;
     flex-flow: row-reverse nowrap;
+    justify-content: space-between;
     text-align: left;
-    padding: 0 100px 0 18%;
+    padding: 0 100px;
+    width: 100%;
+  }
+  .socio a{
+    color: white;
   }
 }
 @media screen and (max-width: 1300px) {
   /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
     .footer-inner{
       font-size: 18px;
-      padding-left: 20%;
+      padding: 0 20px;
     }
   }
 }
 
+@media screen and (max-width: 1024px) {
+  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+    margin-top: -100px;
+  }
+}
 
 @include nb-install-component {
 

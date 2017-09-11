@@ -18,16 +18,16 @@
          class="nav-item"
          [class.active]="item.active">
         <i></i><span>{{ item.title }}</span>
-    </a>
+      </a>
     </nav>
 
     <i [style.top]="bgTop" class="fixed-pseudo-bg"></i>
-
     <section #section class="hero" id="home">
       <div class="section-container">
         <div class="hero-i">
           <div class="hero-i-helper">
             <div class="img">
+              <img src="assets/images/hero-img-static.png" class="hero-img-mobile">
               <div class="imgs-set" [class.animated]="animated">
                 <img src="assets/images/hero-img/1-2.png" class="hero-img hero-img-1">
                 <img src="assets/images/hero-img/3-4.png" class="hero-img hero-img-2">
@@ -58,6 +58,7 @@
               <img src="assets/images/ui-kit-img-planet.png" alt="" class="ui-kit-img-planet">
               <img src="assets/images/ui-kit-img-top.png" alt="" class="ui-kit-img-top">
             </div>
+            <img class="ui-kit-img-static" src="assets/images/ui-kit-img-static.png">
           </div>
           <div class="col-md-5 txt">
             <img src="assets/images/decor-img-ui-kit.png" class="decor-img-ui-kit">
@@ -137,7 +138,7 @@
         <div class="txt">
           <h2><span>You can support us</span></h2>
           <div class="row">
-            <p class="col-md-6 offset-3">Don’t let us feeling like an astronaut sending SOS from this tiny box</p>
+            <p class="col-md-6 offset-md-3">Don’t let us feeling like an astronaut sending SOS from this tiny box</p>
           </div>
         </div>
         <div class="social-block-container">
