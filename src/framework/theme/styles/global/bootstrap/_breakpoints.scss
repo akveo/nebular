@@ -17,6 +17,7 @@ $grid-gutter-widths: (
 
 $grid-breakpoints: (
   xs: 0,
+  is: 400px,
   sm: 576px,
   md: 768px,
   lg: 992px,
@@ -26,6 +27,7 @@ $grid-breakpoints: (
 );
 
 $container-max-widths: (
+  is: 380px,
   sm: 540px,
   md: 720px,
   lg: 960px,
