@@ -72,12 +72,23 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'Themes',
+        name: 'Theme System',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'concept-themes.md',
+            source: 'concept-theme-system.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'UI KIT',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'concept-ui-kit.md',
           },
         ],
       },
@@ -98,6 +109,17 @@ export const STRUCTURE = [
     type: 'section',
     name: 'Guides',
     children: [
+      {
+        type: 'page',
+        name: 'Enabling Theme System',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'enabling-theme-system.md',
+          },
+        ],
+      },
       {
         type: 'page',
         name: 'Server Deployment',

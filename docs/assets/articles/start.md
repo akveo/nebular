@@ -4,11 +4,11 @@ Nebular is based on [Angular](https://angular.io/) framework. Despite it is not 
 
 Based on current setup of your project and the goals you're trying to achieve, there are multiple starting points available:
 
-- Starting based on our Nebular Admin starter kit. - You should consider this tutorial if you are building admin or any other back office application and you need a template or a good starting kit.
-- Starting from scratch (add Nebular into empty Angular project). - Choose this tutorial if you starting your Angular application and want to make good use of Nebular framework components and modules.
-- Add into existing project. - This tutorial explains how to use Nebular if you already have some Angular code.
+- **Starting based on our Nebular Admin starter kit.** Consider this tutorial if you are building admin or any other back office application and you need a template or a good starting kit.
+- **Starting from scratch (add Nebular into empty Angular project).** Choose this tutorial if you are starting your Angular application and want to make a good use of Nebular framework components and modules.
+- **Add into existing project.** This tutorial explains how to use Nebular if you already have some Angular code.
 
-Please consider creating issue on GitHub if your use case is not described above. But we kindly ask to always look through documentation and the list of existing issues before doing that.
+Please consider creating issue on GitHub if your use case is not described above. But we kindly ask to always look through the documentation and the list of existing issues first.
   
 ## I'm new to Angular or web development in general
 
