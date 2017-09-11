@@ -300,9 +300,9 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this.themeService.onMediaQueryChange()
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
-        // TODO: move this into config
-        const tablet = ['xs', 'sm', 'md', 'lg'];
-        const mobile = ['xs'];
+        // TODO: get width by the key and define only max width for the tablets and mobiles
+        const tablet = ['xs', 'is', 'sm', 'md', 'lg'];
+        const mobile = ['xs', 'is'];
 
         if (tablet.indexOf(current.name) !== -1) {
           this.fixed = true;

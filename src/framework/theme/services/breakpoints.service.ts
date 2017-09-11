@@ -23,6 +23,10 @@ export const DEFAULT_MEDIA_BREAKPOINTS = [
     width: 0,
   },
   {
+    name: 'is',
+    width: 400,
+  },
+  {
     name: 'sm',
     width: 576,
   },
