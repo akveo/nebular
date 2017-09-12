@@ -14,19 +14,21 @@ $nb-themes: nb-register-theme((
   color-fg-text: rgba(black, 0.87),
   color-fg-landing: #e0e0ff,
   color-fg: #a6adff,
-  color-fg-active: color-fg-highlight,
+  color-fg-active: #42db7d,//color-fg-highlight,
   color-primary: #8a7fff,
   shadow: none,
+
+  //header-height: 4.75rem,
+  header-bg: #fff,
 
   layout-padding: 0,
   layout-bg: white,
   layout-content-padding: 0 1rem,
   sidebar-width: 12rem,
-  header-bg: transparent,
-  header-fg: rgba(black, 0.75),
+
   header-shadow: none,
   menu-font-size: 1.25rem,
-  menu-fg: color-fg,
+  menu-fg: color-fg-text,
   card-line-height: 1.25,
   card-header-font-size: 2.5rem,
 
@@ -39,7 +41,6 @@ $nb-themes: nb-register-theme((
   code-snippets-bg: #f5f6fc,
   inline-code-color: color-fg-highlight,
   header-padding: 0,
-  header-height: 80px,
   header-line-height: header-height,
   menu-active-bg: color-bg,
   menu-active-fg: color-fg-active,
