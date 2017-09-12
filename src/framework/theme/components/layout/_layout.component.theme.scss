@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/global/bootstrap/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
 @mixin window-mode($padding-top) {
   padding-top: $padding-top;
 
@@ -42,6 +45,10 @@
     display: block;
   }
 
+  .layout {
+    min-width: nb-theme(layout-window-mode-min-width);
+  }
+
   nb-layout.window-mode {
 
     background: nb-theme(layout-window-mode-bg);
@@ -58,7 +65,7 @@
     }
 
     @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 20px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top) / 3;
+      $padding-top: nb-theme(layout-window-mode-padding-top) / 4;
 
       @include window-mode($padding-top);
 
@@ -166,9 +173,15 @@
           flex: 0 1 nb-theme(layout-content-width) !important;
         }
 
-        .columns {
-          nb-layout-column {
-            padding: nb-theme(layout-padding);
+        .columns nb-layout-column {
+          padding: nb-theme(layout-padding);
+
+          @include media-breakpoint-down(md) {
+            padding: nb-theme(layout-medium-padding);
+          }
+
+          @include media-breakpoint-down(sm) {
+            padding: nb-theme(layout-small-padding);
           }
         }
       }
