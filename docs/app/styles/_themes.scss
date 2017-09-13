@@ -7,19 +7,30 @@
 $nb-enabled-themes: (default);
 
 $nb-themes: nb-register-theme((
-  font-secondary: Exo,
+  font-main: Roboto,
+  font-secondary: Roboto,//was Exo, may be needed for homepage
   font-size-lg: 2rem,
   color-bg: white,
   color-fg-highlight: #7659ff,
   color-fg-text: rgba(black, 0.87),
   color-fg-landing: #e0e0ff,
   color-fg: #a6adff,
-  color-fg-active: #42db7d,//color-fg-highlight,
+  color-fg-active: #42db7d,
   color-primary: #8a7fff,
   shadow: none,
 
-  //header-height: 4.75rem,
   header-bg: #fff,
+  menu-submenu-item-padding: 0,
+  menu-font-weight: font-weight-light,
+  menu-submenu-item-border-width: 0,
+  menu-active-fg: color-fg-text,
+  menu-submenu-active-fg: color-fg-active,
+  menu-submenu-hover-fg: color-fg-active,
+  menu-group-gap: 1rem,//custom variable
+  menu-item-padding: 0.125rem 1rem,
+
+  content-top-gap: 2rem,//custom variable
+  page-title-padding-top: 0.25rem,//custom variable
 
   layout-padding: 0,
   layout-bg: white,
@@ -43,8 +54,6 @@ $nb-themes: nb-register-theme((
   header-padding: 0,
   header-line-height: header-height,
   menu-active-bg: color-bg,
-  menu-active-fg: color-fg-active,
-  menu-submenu-active-fg: color-fg-active,
   menu-submenu-padding: 0,
   menu-submenu-active-bg: color-bg,
   footer-height: 100px,

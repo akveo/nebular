@@ -12,6 +12,7 @@
     margin-left:auto;
     margin-right: auto;
     .content {
+      margin-top: nb-theme(content-top-gap);
       min-width: 0;
       nb-layout-column {
         min-width: 0;
@@ -19,32 +20,39 @@
     }
 
     nb-sidebar {
-      z-index: auto; // Really need it to make sidebar content visible in ie
+      margin-top: nb-theme(content-top-gap);
+      z-index: auto; // Really need it to make  sidebar content visible in ie
       nb-menu {
-        ul li > ul > li > a {
-          padding: nb-theme(menu-item-padding);
+        span {
+          letter-spacing: -1px;
         }
-        & > ul > li {
-          padding: 0.5rem 0;
-          & > a:first-child {
-            font-weight: bold;
-            cursor: default;
-          }
-        }
-        a {
-          &.active {
-            font-weight: bold;
-          }
-        }
-        i {
-          display: none;
-        }
-        .menu-collapsed {
-          padding-left: 0;
+        .collapsed {
           visibility: visible;
           opacity: 1;
           height: 100%;
         }
+        i {
+          display: none;
+        }
+
+        & > ul > li {
+          & ~ li {
+            margin-top: nb-theme(menu-group-gap);
+          }
+          & > a:first-child {
+            font-weight: nb-theme(font-weight-bolder);
+            cursor: default;
+          }
+        }
+        a {
+          &:hover {
+            font-weight: nb-theme(menu-font-weight);
+          }
+          &.active {
+            font-weight: nb-theme(menu-active-font-weight);
+          }
+        }
+
       }
     }
   }

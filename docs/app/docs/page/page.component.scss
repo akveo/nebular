@@ -11,6 +11,10 @@
     //  }
     //}
 
+    nb-card-header {
+      padding-top: nb-theme(page-title-padding-top);
+    }
+
     .block-title {
       font-size: nb-theme(block-title-font-size);
       font-weight: bold;
