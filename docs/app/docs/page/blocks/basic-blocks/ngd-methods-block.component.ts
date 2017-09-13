@@ -33,7 +33,7 @@ import { Component, Input } from '@angular/core';
               <code>{{ method.type.join(",\\n") }}</code>
             </div>
           </div>
-          <div *ngIf="method.shortDescription || method.description" ngdDescription>
+          <div *ngIf="method.shortDescription || method.description" class="method-description" ngdDescription>
             {{method.shortDescription}} <br> {{ method.description }} 
           </div>
           </td>
