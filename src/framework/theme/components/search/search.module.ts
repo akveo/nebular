@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbSearchComponent, NbSearchFieldComponent } from './search.component';
-import { NbSuperSearchService } from './search.service';
+import { NbSearchService } from './search.service';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { NbSuperSearchService } from './search.service';
     NbSearchFieldComponent,
   ],
   providers: [
-    NbSuperSearchService,
+    NbSearchService,
   ],
   entryComponents: [
     NbSearchFieldComponent,

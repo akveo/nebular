@@ -48,6 +48,39 @@ export class NbMenuItemComponent {
  * Vertical menu component.
  *
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
+ *
+ * @styles
+ *
+ * menu-font-family:
+ * menu-font-size:
+ * menu-font-weight:
+ * menu-fg:
+ * menu-bg:
+ * menu-active-fg:
+ * menu-active-bg:
+ * menu-active-font-weight:
+ * menu-submenu-bg:
+ * menu-submenu-fg:
+ * menu-submenu-active-fg:
+ * menu-submenu-active-bg:
+ * menu-submenu-active-border-color:
+ * menu-submenu-active-shadow:
+ * menu-submenu-hover-fg:
+ * menu-submenu-hover-bg:
+ * menu-submenu-item-border-width:
+ * menu-submenu-item-border-radius:
+ * menu-submenu-item-padding:
+ * menu-submenu-item-container-padding:
+ * menu-submenu-padding:
+ * menu-group-font-weight:
+ * menu-group-font-size:
+ * menu-group-fg:
+ * menu-item-padding:
+ * menu-item-separator:
+ * menu-icon-font-size:
+ * menu-icon-margin:
+ * menu-icon-color:
+ * menu-icon-active-color:
  */
 @Component({
   selector: 'nb-menu',
@@ -78,7 +111,7 @@ export class NbMenuComponent implements OnInit, OnDestroy {
 
   /**
    * List of menu items.
-   * @type {List<NbMenuItem> | List<any> | any}
+   * @type List<NbMenuItem> | List<any> | any
    */
   @Input() items: NbMenuItem[];
 

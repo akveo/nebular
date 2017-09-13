@@ -123,17 +123,36 @@ export class NbLayoutFooterComponent {
  * It is required that all children component of the framework are located inside of the nb-layout.
  *
  * Can contain the following components inside:
+ *
  * ```
  * nb-layout-header
  * nb-layout-column
  * nb-sidebar
  * nb-layout-footer
  * ```
+ *
  * By default the layout fills up the full view-port.
  * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
  * won't mess with the fixed nb-header.
  *
+ * The children components are projected into the flexible layout structure allowing to adjust the layout behavior
+ * based on the settings provided.
+ *
+ * The layout content (columns) becomes centered when the window width is more than
+ * the value specified in the theme variable `layout-content-width`.
+ *
+ * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
+ * to dynamically append some components like modals or spinners/loaders
+ * so that they are located on top of the elements hierarchy.
+ * More details are below under the `ThemeService` section.
+ *
+ * The layout component is also responsible for changing of the application themes.
+ * It listens to the `themeChange` event and change the theme CSS class appended to body.
+ * Based on the class appended a specific CSS-theme is applied to the application.
+ * More details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)
+ *
  * @example A simple layout example:
+ *
  * ```
  * <nb-layout>
  *   <nb-layout-header>Great Company</nb-layout-header>
@@ -146,11 +165,9 @@ export class NbLayoutFooterComponent {
  * </nb-layout>
  * ```
  *
- * The children components are project into the flexible layout structure allowing to adjust the layout behavior
- * based on the settings provided.
- *
  * @example For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
+ *
  * ```
  * <nb-layout center>
  *   <nb-layout-header>Great Company</nb-layout-header>
@@ -162,21 +179,20 @@ export class NbLayoutFooterComponent {
  *   <nb-layout-footer>Contact us</nb-layout-footer>
  * </nb-layout>
  * ```
- * Now the layout content (columns) becomes centered when the window width is more than
- * the value specified in the theme variable `layout-content-width` (900px by default).
  *
- * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
- * to dynamically append some components like modals or spinners/loaders
- * so that they are located on top of the elements hierarchy.
- * More details are below under the `ThemeService` section.
+ * @styles
  *
- * The layout component is also responsible for changing of the application themes.
- * It listens to the `themeChange` event and change the theme CSS class appended to body.
- * Based on the class appended a specific CSS-theme is applied to the application.
- * More details of the Theme System could be found here TODO: link.
- *
- * TODO: theme variables
- *
+ * layout-font-family:
+ * layout-font-size:
+ * layout-line-height:
+ * layout-fg:
+ * layout-bg:
+ * layout-min-height:
+ * layout-padding:
+ * layout-content-width:
+ * layout-window-mode-max-width: window mode only, after this value layout turns into floating window
+ * layout-window-mode-bg: window mode only, background
+ * layout-window-mode-padding-top: window mode only, max padding from top
  */
 @Component({
   selector: 'nb-layout',

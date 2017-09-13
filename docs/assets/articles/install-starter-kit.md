@@ -1,4 +1,4 @@
-Starting Nebular from [Nebular Admin](https://github.com/ng2-admin/) starter kit is the easiest way to run your first Nebular application. 
+Starting Nebular from [Nebular Admin](https://github.com/ngx-admin/) starter kit is the easiest way to run your first Nebular application. 
  
 ___________________________
 Please note, that Nebular Admin is just a frontend web application. Backend integration can be done relatively simple, but you should be aware that all the data is mocked using Javascript objects. If you want data to be dynamic, you should develop integration on your own. Nebular team doesn't consider providing generic integration layer as a part of this project, because every backend API has different structure in terms of data format and URLs.
@@ -17,17 +17,14 @@ _______________
 ## Download the code
 After you finished with tools setup, you need to download code of Nebular Admin application. The easiest way to do that is to clone github repository:
 ```bash
-git clone https://github.com/akveo/ng2-admin.git
+git clone https://github.com/akveo/ngx-admin.git
 ```
 After clone is completed, you need to install npm modules.
 ```bash
-cd ng2-admin && npm i
+cd ngx-admin && npm i
 ```
-or
-```bash
-cd ng2-admin && yarn
-```
-Please make sure that installation process terminated without errors.
+
+**Please make sure that installation process terminated without errors.**
 
 ## Running local copy
 
@@ -60,8 +57,6 @@ or
 npm run build:prod:aot
 ```
 
-This will clear up your dist folder (where release files are located), generate a release build and start the 
-built-in server.
-Now you can copy the sources from the `dist` folder and use it with any backend framework or 
-simply put it under a web server.
+This will clear up your `dist` folder (where release files are located), generate a release build and start the built-in server.
+Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](/#/docs/guides/server-deployment).
 
