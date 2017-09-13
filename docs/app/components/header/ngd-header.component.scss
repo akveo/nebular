@@ -107,35 +107,34 @@
       overflow: hidden;
       background: nb-theme(color-bg);
       transition: height 0.3s ease-out;
-
-      a, a:hover {
-        color: nb-theme(color-fg);
-        font-weight: bold;
-        padding: 0.375rem 1rem;
+      line-height: nb-theme(line-height);
+      span {
+        letter-spacing: -1px;
       }
-      & > ul > li {
-        padding: 0.25rem 0;
-        & > a:first-child {
-          &:not([ng-reflect-router-link]) {
-            pointer-events: none;
-          }
-        }
+      .collapsed {
+        visibility: visible;
+        opacity: 1;
+        height: 100%;
       }
       i {
         display: none;
       }
 
-      .menu-collapsed, .menu-expanded {
-        visibility: visible;
-        opacity: 1;
-        height: 100%;
-        a {
-          padding-left: 1rem;
-          font-weight: normal;
-          &.active {
-            font-weight: bold;
-            color: nb-theme(color-fg-active);
-          }
+      & > ul > li {
+        & ~ li {
+          margin-top: nb-theme(menu-group-gap);
+        }
+        & > a:first-child {
+          font-weight: nb-theme(font-weight-bolder);
+          cursor: default;
+        }
+      }
+      a {
+        &:hover {
+          font-weight: nb-theme(menu-font-weight);
+        }
+        &.active {
+          font-weight: nb-theme(menu-active-font-weight);
         }
       }
     }

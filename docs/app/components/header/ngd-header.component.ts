@@ -43,10 +43,7 @@ export class NgdHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.menuItems = this.service.getPreparedMenu([
-      { title: 'Home', link: '/home' },
-      { title: 'Docs', link: '/docs' },
-    ]);
+    this.menuItems = this.service.getPreparedMenu();
     this.structure = this.service.getPreparedStructure();
     this.menuSubscription = this.menuService.onItemSelect().subscribe(event => {
       if (this.isMenuActive) {
