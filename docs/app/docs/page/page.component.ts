@@ -18,7 +18,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['page.component.scss'],
   template: `
     <nb-card>
-      <nb-card-header>{{ currentItem?.name }}</nb-card-header>
+      <nb-card-header><h1>{{ currentItem?.name }}</h1></nb-card-header>
       <nb-card-body>
         <ngd-themes-header *ngIf="currentItem?.name === 'NbThemes'"></ngd-themes-header>
         <ng-container *ngFor="let item of currentItem?.children">

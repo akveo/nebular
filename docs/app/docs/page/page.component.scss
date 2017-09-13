@@ -2,7 +2,6 @@
 
 @include nb-install-component {
   /deep/ nb-card {
-
     //a {
     //  color: nb-theme(color-fg-active);//TODO: is it need??
 		//
@@ -10,16 +9,18 @@
     //    color: nb-theme(color-primary);
     //  }
     //}
-
     nb-card-header {
       padding-top: nb-theme(page-title-padding-top);
+      h1 {
+        margin: 0;
+        font-weight: nb-theme(card-header-font-weight);
+        font-size: nb-theme(card-header-font-size);
+      }
     }
-
     .block-title {
       font-size: nb-theme(block-title-font-size);
-      font-weight: bold;
-      margin-bottom: 2rem;
-
+      font-weight: nb-theme(block-title-font-weight);
+      margin-bottom: nb-theme(block-title-margin-bottom);
     }
 
     .block-subtitle {
@@ -31,18 +32,17 @@
       margin-bottom: nb-theme(block-margin);
     }
 
-    .class-name {
-      color: nb-theme(color-primary);
-      font-size: nb-theme(class-name-font-size);
-      font-weight: bold;
+    h2 {
+      font-size: nb-theme(second-heading-font-size);
+      font-weight: nb-theme(second-heading-font-weight);
     }
 
     .table {
       td {
-        padding: 0.75rem 0.75rem 0.75rem 0;
+        padding: 0.25rem 0.75rem 0.25rem 0;
       }
       thead {
-        font-weight: bold;
+        font-weight: nb-theme(font-weight-normal);
         td {
           border-top: none;
         }

@@ -31,6 +31,12 @@ $nb-themes: nb-register-theme((
 
   content-top-gap: 2rem,//custom variable
   page-title-padding-top: 0.25rem,//custom variable
+  second-heading-font-size: 1.5rem,//custom variable
+  second-heading-font-weight: font-weight-normal,//custom variable
+  block-margin: 1.5rem,//custom variable
+  block-title-margin-bottom: 1rem,//custom variable
+  block-title-font-size: 1.25rem,//custom variable
+  block-title-font-weight: font-weight-normal,//custom variable
 
   layout-padding: 0,
   layout-bg: white,
@@ -41,7 +47,11 @@ $nb-themes: nb-register-theme((
   menu-font-size: 1.25rem,
   menu-fg: color-fg-text,
   card-line-height: 1.25,
-  card-header-font-size: 2.5rem,
+  card-header-font-size: 2rem,
+  card-header-font-weight: font-weight-normal,
+  card-font-weight: font-weight-light,
+  card-padding: 1rem 1rem 1rem 2.5rem,
+  card-separator: transparent,
 
   content-width: 1312px,
   layout-content-width: 1312px,
@@ -62,8 +72,7 @@ $nb-themes: nb-register-theme((
   footer-padding: 1rem,
   layout-line-height: 1.5,
   sidebar-bg: color-bg,
-  card-font-weight: 400,
-  card-padding: 1rem,
+
   sidebar-padding: 0.5rem,
   footer-separator: rgba(0, 0, 0, 0.1),
 

@@ -10,10 +10,10 @@ import { Component, Input, OnChanges } from '@angular/core';
   selector: 'ngd-description-block',
   template: `
     <div class="block-container">
-      <h4 class="class-name">
+      <h2 class="class-name">
         <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment> <i class="ion-link"></i></a>
         {{blockData.name}}
-      </h4>
+      </h2>
       <p *ngIf="isShortDescription" class="short-description">
         {{ blockData?.shortDescription }}
       </p>
