@@ -8,7 +8,7 @@ $nb-enabled-themes: (default);
 
 $nb-themes: nb-register-theme((
   font-main: Roboto,
-  font-secondary: Roboto,//was Exo, may be needed for homepage
+  //font-secondary: Roboto,//was Exo, may be needed for homepage
   font-size-lg: 2rem,
   color-bg: white,
   color-fg-highlight: #7659ff,
@@ -28,6 +28,10 @@ $nb-themes: nb-register-theme((
   menu-submenu-hover-fg: color-fg-active,
   menu-group-gap: 1rem,//custom variable
   menu-item-padding: 0.125rem 1rem,
+  menu-submenu-padding: 0,
+  menu-submenu-item-container-padding: 0 1rem,
+
+
 
   content-top-gap: 2rem,//custom variable
   page-title-padding-top: 0.25rem,//custom variable
@@ -53,6 +57,8 @@ $nb-themes: nb-register-theme((
   card-padding: 1rem 1rem 1rem 2.5rem,
   card-separator: transparent,
 
+
+
   content-width: 1312px,
   layout-content-width: 1312px,
   header-menu-width: 320px,
@@ -64,7 +70,6 @@ $nb-themes: nb-register-theme((
   header-padding: 0,
   header-line-height: header-height,
   menu-active-bg: color-bg,
-  menu-submenu-padding: 0,
   menu-submenu-active-bg: color-bg,
   footer-height: 100px,
   footer-bg: color-bg,

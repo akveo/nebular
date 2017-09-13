@@ -120,9 +120,9 @@
         display: none;
       }
 
-      & > ul > li {
-        & ~ li {
-          margin-top: nb-theme(menu-group-gap);
+      & > ul.menu-items > li.menu-item {
+        & > ul.menu-items {
+          margin-bottom: nb-theme(menu-group-gap);
         }
         & > a:first-child {
           font-weight: nb-theme(font-weight-bolder);
@@ -130,8 +130,9 @@
         }
       }
       a {
-        &:hover {
+        &:hover:not(.active) {
           font-weight: nb-theme(menu-font-weight);
+          color: nb-theme(color-fg-text) !important;
         }
         &.active {
           font-weight: nb-theme(menu-active-font-weight);

@@ -38,13 +38,17 @@
     }
 
     .table {
-      td {
-        padding: 0.25rem 0.75rem 0.25rem 0;
-      }
+
       thead {
         font-weight: nb-theme(font-weight-normal);
         td {
+          padding: 0.25rem 0.75rem 0.25rem 0;
           border-top: none;
+        }
+      }
+      tbody {
+        td {
+          padding: 0.75rem 0.75rem 0.75rem 0;
         }
       }
     }

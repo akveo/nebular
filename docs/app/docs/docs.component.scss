@@ -36,8 +36,8 @@
         }
 
         & > ul > li {
-          & ~ li {
-            margin-top: nb-theme(menu-group-gap);
+          & > ul.menu-items {
+            margin-bottom: nb-theme(menu-group-gap);
           }
           & > a:first-child {
             font-weight: nb-theme(font-weight-bolder);
