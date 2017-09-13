@@ -10,7 +10,7 @@ import {
   OnDestroy, OnInit,
 } from '@angular/core';
 
-import { NbSuperSearchService } from './search.service';
+import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -120,6 +120,20 @@ export class NbSearchFieldComponent {
   }
 }
 
+/**
+ * Beautiful full-page search control.
+ *
+ * @styles
+ *
+ * search-btn-open-fg:
+ * search-btn-close-fg:
+ * search-bg:
+ * search-bg-secondary:
+ * search-text:
+ * search-info:
+ * search-dash:
+ * search-placeholder:
+ */
 @Component({
   selector: 'nb-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -133,7 +147,18 @@ export class NbSearchFieldComponent {
 })
 export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  /**
+   * Tags a search with some ID, can be later used in the search service
+   * to determine which search component triggered the action, if multiple searches exist on the page.
+   *
+   * @type {string}
+   */
   @Input() tag: string;
+
+  /**
+   * Search input placeholder
+   * @type {string}
+   */
   @Input() placeholder: string = 'Search...';
 
   @HostBinding('class.show') showSearch: boolean = false;
@@ -145,10 +170,15 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private activateSearchSubscription: Subscription;
   private deactivateSearchSubscription: Subscription;
 
-  constructor(private searchService: NbSuperSearchService,
+  constructor(private searchService: NbSearchService,
     private themeService: NbThemeService,
     private componentFactoryResolver: ComponentFactoryResolver) { }
 
+  /**
+   * Search design type, available types are
+   * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
+   * @type {string}
+   */
   @Input()
   set type(val: any) {
     this.searchType = val;

@@ -23,6 +23,9 @@ import { NbJSThemeOptions } from './js-themes/theme.options';
 import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
 
+/**
+ * Main Nebular service. Includes various helper methods.
+ */
 @Injectable()
 export class NbThemeService {
 

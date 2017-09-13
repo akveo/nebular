@@ -7,11 +7,9 @@
 import { Component, Input, HostBinding, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 
-/*
-* TODO
-*
-* I want to have capability to pass custom actions in menu.
-* */
+/**
+ * Action dropdown menu
+ */
 export class NbUserMenuItem {
   /**
    * Menu title
@@ -45,12 +43,19 @@ export class NbUserMenuItem {
  *
  * Can be used as a user profile link or can bring a user context menu.
  *
- * @theme
- * $nb-user-size-small: 1.5rem !default;
- * $nb-user-size-medium: 3rem !default;
- * $nb-user-size-large: 4rem !default;
- * $nb-user-picture-background: $nb-color-gray !default;
- * $nb-user-menu-border: $nb-border-color !default;
+ * @styles
+ *
+ * user-font-size:
+ * user-line-height:
+ * user-bg:
+ * user-fg:
+ * user-fg-highlight:
+ * user-font-family-secondary:
+ * user-size-small:
+ * user-size-medium:
+ * user-size-large:
+ * user-size-xlarge:
+ * user-menu-border:
  */
 @Component({
   selector: 'nb-user',

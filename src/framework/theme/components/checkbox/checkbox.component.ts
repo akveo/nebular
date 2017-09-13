@@ -8,6 +8,31 @@ import { Component, Input, HostBinding, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
+/**
+ * Styled checkbox component
+ *
+ * @example Basic example
+ *
+ * ```
+ *  <nb-checkbox [(ngModel)]="enabled">Enabled?</nb-checkbox>
+ * ```
+ *
+ * @example Example with status
+ *
+ * ```
+ *  <nb-checkbox [(ngModel)]="enabled" status="danger">Enabled?</nb-checkbox>
+ * ```
+ *
+ * @styles
+ *
+ * checkbox-bg:
+ * checkbox-size:
+ * checkbox-border-size:
+ * checkbox-border-color:
+ * checkbox-selected-border-color:
+ * checkbox-fg:
+ * radio-fg:
+ */
 @Component({
   selector: 'nb-checkbox',
   template: `
@@ -32,6 +57,11 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   status: string;
 
+  /**
+   * Checkbox value
+   * @type {boolean}
+   * @private
+   */
   @Input('value') _value: boolean = false;
 
   disabled: boolean = false;
@@ -40,6 +70,10 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     this.disabled = convertToBoolProperty(val);
   }
 
+  /**
+   * Checkbox status (success, warning, danger)
+   * @param {string} val
+   */
   @Input('status')
   private set setStatus(val: string) {
     this.status = val;

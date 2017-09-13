@@ -47,17 +47,21 @@ export class NbActionComponent {
 }
 
 /**
- * Shows a a horizontal list of actions, available in multiple sizes
+ * Shows a horizontal list of actions, available in multiple sizes
  * Aligns items vertically.
  *
- * @theme
- * $nb-actions-size-small: 1.5rem !default;
- * $nb-actions-size-medium: 2.5rem !default;
- * $nb-actions-size-large: 4rem !default;
- * $nb-actions-color: $nb-color-inverse !default;
- * $nb-actions-background: transparent !default;
- * $nb-actions-color-inverse: $nb-color-default !default;
- * $nb-actions-background-inverse: $nb-background-inverse !default;
+ * @styles
+ *
+ * actions-font-size:
+ * actions-font-family:
+ * actions-line-height:
+ * actions-fg:
+ * actions-bg:
+ * actions-separator:
+ * actions-padding:
+ * actions-size-small:
+ * actions-size-medium:
+ * actions-size-large:
  */
 @Component({
   selector: 'nb-actions',

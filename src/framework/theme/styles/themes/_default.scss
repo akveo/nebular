@@ -82,9 +82,9 @@ $theme: (
   card-font-size: font-size,
   card-line-height: line-height,
   card-font-weight: font-weight-normal,
-  card-fg: color-fg,
+  card-fg: color-fg, // TODO: not used
   card-fg-text: color-fg-text,
-  card-fg-heading: color-fg-heading,
+  card-fg-heading: color-fg-heading, // TODO: not used
   card-bg: color-bg,
   card-height-xxsmall: 96px,
   card-height-xsmall: 216px,
@@ -101,7 +101,7 @@ $theme: (
   card-header-font-size: font-size-xlg,
   card-header-font-weight: font-weight-bold,
   card-separator: separator,
-  card-header-fg: color-fg,
+  card-header-fg: color-fg, // TODO: not used
   card-header-fg-heading: color-fg-heading,
   card-header-active-bg: color-fg,
   card-header-active-fg: color-bg,

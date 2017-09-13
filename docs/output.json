@@ -78,8 +78,54 @@
       ],
       "methods": [],
       "name": "NbActionsComponent",
-      "shortDescription": "Shows a a horizontal list of actions, available in multiple sizes\nAligns items vertically.",
-      "styles": []
+      "shortDescription": "Shows a horizontal list of actions, available in multiple sizes\nAligns items vertically.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "actions-font-size",
+              "description": ""
+            },
+            {
+              "name": "actions-font-family",
+              "description": ""
+            },
+            {
+              "name": "actions-line-height",
+              "description": ""
+            },
+            {
+              "name": "actions-fg",
+              "description": ""
+            },
+            {
+              "name": "actions-bg",
+              "description": ""
+            },
+            {
+              "name": "actions-separator",
+              "description": ""
+            },
+            {
+              "name": "actions-padding",
+              "description": ""
+            },
+            {
+              "name": "actions-size-small",
+              "description": ""
+            },
+            {
+              "name": "actions-size-medium",
+              "description": ""
+            },
+            {
+              "name": "actions-size-large",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -88,19 +134,113 @@
       "props": [],
       "methods": [],
       "name": "NbCardBodyComponent",
-      "shortDescription": "Component intended to be used within  the `<nb-card>` component.\nIt adds styles for a preset body section.",
+      "shortDescription": "Component intended to be used within  the `<nb-card>` component.\nAdds styles for a preset body section.",
       "styles": []
     },
     {
       "kind": "component",
       "platform": null,
-      "examples": [],
-      "props": [],
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n<nb-card-header></nb-card-header>\n<nb-card-body></nb-card-body>\n<nb-card-footer></nb-card-footer>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "",
+          "required": null,
+          "name": "setSize",
+          "shortDescription": "Card size, available sizes:\nxxsmall, xsmall, small, medium, large, xlarge, xxlarge"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "",
+          "required": null,
+          "name": "setStatus",
+          "shortDescription": "Card status (adds specific styles):\nactive, disabled, primary, info, success, warning, danger"
+        }
+      ],
       "methods": [],
       "name": "NbCardComponent",
-      "description": "While this component can be used alone, it also provides a number\nof child components for common card sections, including:\n- nb-card-header\n- nb-card-body\n- nb-card-footer\n",
-      "shortDescription": "A basic content container component",
-      "styles": []
+      "shortDescription": "Basic content container component.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "card-line-height",
+              "description": ""
+            },
+            {
+              "name": "card-font-weight",
+              "description": ""
+            },
+            {
+              "name": "card-fg-text",
+              "description": ""
+            },
+            {
+              "name": "card-bg",
+              "description": ""
+            },
+            {
+              "name": "card-height-xxsmall",
+              "description": ""
+            },
+            {
+              "name": "card-height-xsmall",
+              "description": ""
+            },
+            {
+              "name": "card-height-small",
+              "description": ""
+            },
+            {
+              "name": "card-height-medium",
+              "description": ""
+            },
+            {
+              "name": "card-height-large",
+              "description": ""
+            },
+            {
+              "name": "card-height-xlarge",
+              "description": ""
+            },
+            {
+              "name": "card-height-xxlarge",
+              "description": ""
+            },
+            {
+              "name": "card-shadow",
+              "description": ""
+            },
+            {
+              "name": "card-border-radius",
+              "description": ""
+            },
+            {
+              "name": "card-padding",
+              "description": ""
+            },
+            {
+              "name": "card-margin",
+              "description": ""
+            },
+            {
+              "name": "card-separator",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -109,7 +249,7 @@
       "props": [],
       "methods": [],
       "name": "NbCardFooterComponent",
-      "shortDescription": "Component intended to be used within  the `<nb-card>` component.\nIt adds styles for a preset footer section.",
+      "shortDescription": "Component intended to be used within  the `<nb-card>` component.\nAdds styles for a preset footer section.",
       "styles": []
     },
     {
@@ -120,7 +260,224 @@
       "methods": [],
       "name": "NbCardHeaderComponent",
       "shortDescription": "Component intended to be used within  the `<nb-card>` component.\nIt adds styles for a preset header section.",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "card-header-font-family",
+              "description": ""
+            },
+            {
+              "name": "card-header-font-size",
+              "description": ""
+            },
+            {
+              "name": "card-header-font-weight",
+              "description": ""
+            },
+            {
+              "name": "card-header-fg",
+              "description": ""
+            },
+            {
+              "name": "card-header-fg-heading",
+              "description": ""
+            },
+            {
+              "name": "card-header-active-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-active-fg",
+              "description": ""
+            },
+            {
+              "name": "card-header-disabled-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-primary-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-info-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-success-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-warning-bg",
+              "description": ""
+            },
+            {
+              "name": "card-header-danger-bg",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Basic example",
+          "description": "",
+          "code": "\n <nb-checkbox [(ngModel)]=\"enabled\">Enabled?</nb-checkbox>\n"
+        },
+        {
+          "shortDescription": "Example with status",
+          "description": "",
+          "code": "\n <nb-checkbox [(ngModel)]=\"enabled\" status=\"danger\">Enabled?</nb-checkbox>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "_value",
+          "shortDescription": "Checkbox value"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "",
+          "required": null,
+          "name": "setStatus",
+          "shortDescription": "Checkbox status (success, warning, danger)"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onChange",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onTouched",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "fn",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "registerOnChange",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "fn",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "registerOnTouched",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "val",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "writeValue",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbCheckboxComponent",
+      "shortDescription": "Styled checkbox component",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "checkbox-bg",
+              "description": ""
+            },
+            {
+              "name": "checkbox-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-border-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-selected-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-fg",
+              "description": ""
+            },
+            {
+              "name": "radio-fg",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -153,13 +510,13 @@
       "platform": null,
       "examples": [
         {
-          "shortDescription": "  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>",
-          "description": "The children components are project into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n",
+          "shortDescription": "A simple layout example:",
+          "description": "  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>",
           "code": "\n<nb-layout>\n  <nb-layout-header>Great Company</nb-layout-header>\n\n  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>\n\n  <nb-layout-footer>Contact us</nb-layout-footer>\n</nb-layout>\n"
         },
         {
-          "shortDescription": "  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>",
-          "description": "The layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.",
+          "shortDescription": "For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute\nto the layout:",
+          "description": "  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>",
           "code": "\n<nb-layout center>\n  <nb-layout-header>Great Company</nb-layout-header>\n\n  <nb-layout-column>\n    Hello World!\n  </nb-layout-column>\n\n  <nb-layout-footer>Contact us</nb-layout-footer>\n</nb-layout>\n"
         }
       ],
@@ -287,9 +644,59 @@
         }
       ],
       "name": "NbLayoutComponent",
-      "description": "Can contain the following components inside:\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n",
+      "description": "Can contain the following components inside:\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n\nThe children components are projected into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n\nThe layout content (columns) becomes centered when the window width is more than\nthe value specified in the theme variable `layout-content-width`.\n\nThe layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.\n\nThe layout component is also responsible for changing of the application themes.\nIt listens to the `themeChange` event and change the theme CSS class appended to body.\nBased on the class appended a specific CSS-theme is applied to the application.\nMore details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)\n",
       "shortDescription": "The general Nebular component-container.\nIt is required that all children component of the framework are located inside of the nb-layout.",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "layout-font-family",
+              "description": ""
+            },
+            {
+              "name": "layout-font-size",
+              "description": ""
+            },
+            {
+              "name": "layout-line-height",
+              "description": ""
+            },
+            {
+              "name": "layout-fg",
+              "description": ""
+            },
+            {
+              "name": "layout-bg",
+              "description": ""
+            },
+            {
+              "name": "layout-min-height",
+              "description": ""
+            },
+            {
+              "name": "layout-padding",
+              "description": ""
+            },
+            {
+              "name": "layout-content-width",
+              "description": ""
+            },
+            {
+              "name": "layout-window-mode-max-width",
+              "description": "window mode only, after this value layout turns into floating window"
+            },
+            {
+              "name": "layout-window-mode-bg",
+              "description": "window mode only, background"
+            },
+            {
+              "name": "layout-window-mode-padding-top",
+              "description": "window mode only, max padding from top"
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -569,7 +976,133 @@
       "name": "NbMenuComponent",
       "description": "Accepts a list of menu items and renders them accordingly. Supports multi-level menus.\n",
       "shortDescription": "Vertical menu component.",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "menu-font-family",
+              "description": ""
+            },
+            {
+              "name": "menu-font-size",
+              "description": ""
+            },
+            {
+              "name": "menu-font-weight",
+              "description": ""
+            },
+            {
+              "name": "menu-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-bg",
+              "description": ""
+            },
+            {
+              "name": "menu-active-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-active-bg",
+              "description": ""
+            },
+            {
+              "name": "menu-active-font-weight",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-bg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-active-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-active-bg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-active-border-color",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-active-shadow",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-hover-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-hover-bg",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-item-border-width",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-item-border-radius",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-item-padding",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-item-container-padding",
+              "description": ""
+            },
+            {
+              "name": "menu-submenu-padding",
+              "description": ""
+            },
+            {
+              "name": "menu-group-font-weight",
+              "description": ""
+            },
+            {
+              "name": "menu-group-font-size",
+              "description": ""
+            },
+            {
+              "name": "menu-group-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-item-padding",
+              "description": ""
+            },
+            {
+              "name": "menu-item-separator",
+              "description": ""
+            },
+            {
+              "name": "menu-icon-font-size",
+              "description": ""
+            },
+            {
+              "name": "menu-icon-margin",
+              "description": ""
+            },
+            {
+              "name": "menu-icon-color",
+              "description": ""
+            },
+            {
+              "name": "menu-icon-active-color",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "class",
@@ -799,6 +1332,339 @@
     {
       "kind": "component",
       "platform": null,
+      "examples": [
+        {
+          "shortDescription": "basic usage example",
+          "description": "",
+          "code": "\n tabs = [\n {\n   title: 'Route tab #1',\n   route: '/pages/description',\n },\n {\n   title: 'Route tab #2',\n   route: '/pages/images',\n   }\n ];\n\n <nb-route-tabset [tabs]=\"tabs\"></nb-route-tabset>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "output",
+          "platform": null,
+          "isStatic": false,
+          "type": "EventEmitter",
+          "required": null,
+          "name": "changeTab",
+          "shortDescription": "Emits when tab is selected"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "required": null,
+          "name": "tabs",
+          "shortDescription": "Tabs configuration"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "",
+          "required": null,
+          "name": "fullWidth",
+          "shortDescription": "Take full width of a parent"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "router",
+              "type": "Router",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbRouteTabsetComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tab",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "selectTab",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbRouteTabsetComponent",
+      "shortDescription": "Route tabset components.\nRenders tabs inside of a router-outlet.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "route-tabs-font-family",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-font-size",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-active-bg",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-active-font-weight",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-padding",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-header-bg",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-separator",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-fg",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-fg-heading",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-bg",
+              "description": ""
+            },
+            {
+              "name": "route-tabs-selected",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "placeholder",
+          "shortDescription": "Search input placeholder"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "tag",
+          "shortDescription": "Tags a search with some ID, can be later used in the search service\nto determine which search component triggered the action, if multiple searches exist on the page."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "type",
+          "shortDescription": "Search design type, available types are\nmodal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "searchService",
+              "type": "NbSearchService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbSearchComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "componentRef",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "connectToSearchField",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "component",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "createAttachedSearch",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngAfterViewInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "openSearch",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbSearchComponent",
+      "shortDescription": "Beautiful full-page search control.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "search-btn-open-fg",
+              "description": ""
+            },
+            {
+              "name": "search-btn-close-fg",
+              "description": ""
+            },
+            {
+              "name": "search-bg",
+              "description": ""
+            },
+            {
+              "name": "search-bg-secondary",
+              "description": ""
+            },
+            {
+              "name": "search-text",
+              "description": ""
+            },
+            {
+              "name": "search-info",
+              "description": ""
+            },
+            {
+              "name": "search-dash",
+              "description": ""
+            },
+            {
+              "name": "search-placeholder",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
       "examples": [],
       "props": [],
       "methods": [
@@ -837,6 +1703,119 @@
       ],
       "name": "NbSearchFieldComponent",
       "shortDescription": "search-field-component is used under the hood by nb-search component\ncan't be used itself",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "searchType",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "activateSearch",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Activate (open) search component"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "searchType",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "deactivateSearch",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Deactibate (close) search component"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onSearchActivate",
+          "type": [
+            "Observable<{searchType: string; tag?: string}>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Subscribe to 'activate' event"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onSearchDeactivate",
+          "type": [
+            "Observable<{searchType: string; tag?: string}>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Subscribe to 'deactivate' event"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onSearchSubmit",
+          "type": [
+            "Observable<{term: string; tag?: string}>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Subscribe to 'submit' event (when submit button clicked)"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "term",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "tag",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "submitSearch",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Trigger search submit"
+        }
+      ],
+      "name": "NbSearchService",
+      "shortDescription": "Search component service, connects you code to a page-level search component.",
       "styles": []
     },
     {
@@ -1048,17 +2027,6 @@
         },
         {
           "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "returnSomeValue",
-          "type": [
-            "number"
-          ],
-          "isStatic": false,
-          "shortDescription": "Returns some value\n// TODO: remove this"
-        },
-        {
-          "examples": [],
           "params": [
             {
               "name": "compact",
@@ -1094,32 +2062,10 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "test",
-              "type": "string",
-              "required": null
-            },
-            {
-              "name": "anotherOne",
-              "type": "any",
-              "required": null
-            }
-          ],
-          "platform": null,
-          "name": "someTestMethod",
-          "type": [
-            ""
-          ],
-          "isStatic": true,
-          "shortDescription": "Some Static method\n// TODO: remove this"
         }
       ],
       "name": "NbSidebarComponent",
-      "description": "Sidebar can be place on the the left or the right side of the layout, can be fixed (shown above the content)\nor can push the layout when opened.\n\nThere are three states - `expanded`, `collapsed`, `compacted`.\nBy default sidebar content is fixed and saves its position while the page is being scrolled.\n",
+      "description": "Sidebar can be place on the left or the right side of the layout, can be fixed (shown above the content)\nor can push the layout when opened.\n\nThere are three states - `expanded`, `collapsed`, `compacted`.\nBy default sidebar content is fixed and saves its position while the page is being scrolled.\n\nSidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.\n",
       "shortDescription": "Layout sidebar component.",
       "styles": [
         {
@@ -1300,6 +2246,179 @@
       "description": "Root module service to control the sidebar from any part of the app.\n",
       "shortDescription": "Sidebar service.",
       "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbTabComponent",
+      "shortDescription": "Specific tab container.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Basic tabset example",
+          "description": "",
+          "code": "\n<nb-tabset>\n <nb-tab tabTitle=\"Simple Tab #1\">\n   Tab content 1\n </nb-tab>\n <nb-tab tabTitle=\"Simple Tab #2\">\n   Tab content 2\n </nb-tab>\n</nb-tabset>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "output",
+          "platform": null,
+          "isStatic": false,
+          "type": "EventEmitter",
+          "required": null,
+          "name": "changeTab",
+          "shortDescription": "Emits when tab is selected"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "routeParam",
+          "shortDescription": "If specified - tabset listens to this parameter and selects corresponding tab."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "",
+          "required": null,
+          "name": "fullWidth",
+          "shortDescription": "Take full width of a parent"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "route",
+              "type": "ActivatedRoute",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbTabsetComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngAfterContentInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "selectedTab",
+              "type": "NbTabComponent",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "selectTab",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbTabsetComponent",
+      "shortDescription": "Dynamic tabset component.\nRenders `<nb-tab></ng-tab> containers inside.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "tabs-font-family",
+              "description": ""
+            },
+            {
+              "name": "tabs-font-size",
+              "description": ""
+            },
+            {
+              "name": "tabs-content-font-family",
+              "description": ""
+            },
+            {
+              "name": "tabs-content-font-size",
+              "description": ""
+            },
+            {
+              "name": "tabs-active-bg",
+              "description": ""
+            },
+            {
+              "name": "tabs-active-font-weight",
+              "description": ""
+            },
+            {
+              "name": "tabs-padding",
+              "description": ""
+            },
+            {
+              "name": "tabs-content-padding",
+              "description": ""
+            },
+            {
+              "name": "tabs-header-bg",
+              "description": ""
+            },
+            {
+              "name": "tabs-separator",
+              "description": ""
+            },
+            {
+              "name": "tabs-fg",
+              "description": ""
+            },
+            {
+              "name": "tabs-fg-text",
+              "description": ""
+            },
+            {
+              "name": "tabs-fg-heading",
+              "description": ""
+            },
+            {
+              "name": "tabs-bg",
+              "description": ""
+            },
+            {
+              "name": "tabs-selected",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -1521,6 +2640,112 @@
       "name": "NbUserComponent",
       "description": "Can be used as a user profile link or can bring a user context menu.\n",
       "shortDescription": "Represents a component showing a user avatar (picture) with a user name on the right.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "user-font-size",
+              "description": ""
+            },
+            {
+              "name": "user-line-height",
+              "description": ""
+            },
+            {
+              "name": "user-bg",
+              "description": ""
+            },
+            {
+              "name": "user-fg",
+              "description": ""
+            },
+            {
+              "name": "user-fg-highlight",
+              "description": ""
+            },
+            {
+              "name": "user-font-family-secondary",
+              "description": ""
+            },
+            {
+              "name": "user-size-small",
+              "description": ""
+            },
+            {
+              "name": "user-size-medium",
+              "description": ""
+            },
+            {
+              "name": "user-size-large",
+              "description": ""
+            },
+            {
+              "name": "user-size-xlarge",
+              "description": ""
+            },
+            {
+              "name": "user-menu-border",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "Icon class"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "link",
+          "shortDescription": "Menu link for [routerLink] directive"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "target",
+          "shortDescription": "Link target (_blank, _self, etc)"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "title",
+          "shortDescription": "Menu title"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "url",
+          "shortDescription": "URL for absolute urls, used directly in href"
+        }
+      ],
+      "methods": [],
+      "name": "NbUserMenuItem",
+      "shortDescription": "Action dropdown menu",
       "styles": []
     },
     {
@@ -1793,6 +3018,245 @@
       ],
       "name": "NbJSThemesRegistry",
       "shortDescription": "Js Themes registry - provides access to the JS themes' variables.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "options",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "breakpointService",
+              "type": "NbMediaBreakpointsService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "jsThemesRegistry",
+              "type": "NbJSThemesRegistry",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbThemeService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "className",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "appendLayoutClass",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "component",
+              "type": "Type",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "appendToLayoutTop",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "name",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "changeTheme",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "width",
+              "type": "number",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "changeWindowWidth",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clearLayoutTop",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "getJsTheme",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns a theme object with variables (color/paddings/etc) on a theme change.\nOnce subscribed - returns current theme."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onAppendLayoutClass",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onAppendToTop",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onClearLayoutTop",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onMediaQueryChange",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Triggers media query breakpoint change\nReturns a pair where the first item is previous media breakpoint and the second item is current breakpoit.\n```\n [{ name: 'xs', width: 0 }, { name: 'md', width: 768 }] // change from `xs` to `md`\n```"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onRemoveLayoutClass",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onThemeChange",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "className",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "removeLayoutClass",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbThemeService",
+      "shortDescription": "Main Nebular service. Includes various helper methods.",
       "styles": []
     }
   ],
@@ -4268,8 +5732,17 @@
         "menu-submenu-item-padding": {
           "name": "menu-submenu-item-padding",
           "value": [
+            "0.5rem",
+            "1rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "menu-submenu-item-container-padding": {
+          "name": "menu-submenu-item-container-padding",
+          "value": [
             0,
-            "1.5rem"
+            "1.25rem"
           ],
           "parents": [],
           "childs": []
@@ -4323,8 +5796,10 @@
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
-            "0.5rem",
-            "1rem"
+            "0.25rem",
+            "1rem",
+            "0.25rem",
+            "0.75rem"
           ],
           "parents": [],
           "childs": []
@@ -4342,7 +5817,7 @@
         },
         "menu-icon-font-size": {
           "name": "menu-icon-font-size",
-          "value": "2rem",
+          "value": "2.5rem",
           "parents": [],
           "childs": [
             {
@@ -4354,6 +5829,17 @@
               "prop": "menu-icon-font-size"
             }
           ]
+        },
+        "menu-icon-margin": {
+          "name": "menu-icon-margin",
+          "value": [
+            0,
+            "0.5rem",
+            0,
+            0
+          ],
+          "parents": [],
+          "childs": []
         },
         "menu-icon-color": {
           "name": "menu-icon-color",
@@ -8956,8 +10442,17 @@
         "menu-submenu-item-padding": {
           "name": "menu-submenu-item-padding",
           "value": [
+            "0.5rem",
+            "1rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "menu-submenu-item-container-padding": {
+          "name": "menu-submenu-item-container-padding",
+          "value": [
             0,
-            "1.5rem"
+            "1.25rem"
           ],
           "parents": [],
           "childs": []
@@ -9011,8 +10506,10 @@
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
-            "0.5rem",
-            "1rem"
+            "0.25rem",
+            "1rem",
+            "0.25rem",
+            "0.75rem"
           ],
           "parents": [],
           "childs": []
@@ -9034,13 +10531,24 @@
         },
         "menu-icon-font-size": {
           "name": "menu-icon-font-size",
-          "value": "2rem",
+          "value": "2.5rem",
           "parents": [
             {
               "theme": "default",
               "prop": "menu-icon-font-size"
             }
           ],
+          "childs": []
+        },
+        "menu-icon-margin": {
+          "name": "menu-icon-margin",
+          "value": [
+            0,
+            "0.5rem",
+            0,
+            0
+          ],
+          "parents": [],
           "childs": []
         },
         "menu-icon-color": {
@@ -13708,8 +15216,17 @@
         "menu-submenu-item-padding": {
           "name": "menu-submenu-item-padding",
           "value": [
+            "0.5rem",
+            "1rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "menu-submenu-item-container-padding": {
+          "name": "menu-submenu-item-container-padding",
+          "value": [
             0,
-            "1.5rem"
+            "1.25rem"
           ],
           "parents": [],
           "childs": []
@@ -13767,8 +15284,10 @@
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
-            "0.5rem",
-            "1rem"
+            "0.25rem",
+            "1rem",
+            "0.25rem",
+            "0.75rem"
           ],
           "parents": [],
           "childs": []
@@ -13786,13 +15305,24 @@
         },
         "menu-icon-font-size": {
           "name": "menu-icon-font-size",
-          "value": "2rem",
+          "value": "2.5rem",
           "parents": [
             {
               "theme": "default",
               "prop": "menu-icon-font-size"
             }
           ],
+          "childs": []
+        },
+        "menu-icon-margin": {
+          "name": "menu-icon-margin",
+          "value": [
+            0,
+            "0.5rem",
+            0,
+            0
+          ],
+          "parents": [],
           "childs": []
         },
         "menu-icon-color": {

@@ -46,11 +46,13 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
- * Sidebar can be place on the the left or the right side of the layout, can be fixed (shown above the content)
+ * Sidebar can be place on the left or the right side of the layout, can be fixed (shown above the content)
  * or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
  * By default sidebar content is fixed and saves its position while the page is being scrolled.
+ *
+ * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
  * @example Minimal sidebar example
  * ```
@@ -72,7 +74,6 @@ export class NbSidebarFooterComponent {
  *  </nb-sidebar-footer>
  * </nb-sidebar>
  * ```
- * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
  * @styles
  *

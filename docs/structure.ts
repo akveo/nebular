@@ -258,6 +258,11 @@ export const STRUCTURE = [
             block: 'component',
             blockData: 'NbSearchComponent',
           },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbSearchService',
+          },
         ],
       },
       {
@@ -267,12 +272,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbRouteTabsetComponent',
+            blockData: 'NbTabsetComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTabsetComponent',
+            blockData: 'NbTabComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbRouteTabsetComponent',
           },
         ],
       },
@@ -289,12 +299,23 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'UserComponent',
+        name: 'User (Avatar)',
         children: [
           {
             type: 'block',
             block: 'component',
             blockData: 'NbUserComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Checkbox',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCheckboxComponent',
           },
         ],
       },

@@ -15,3 +15,6 @@ Nebular is in *beta* now, meaning that we are on the final path to the release.
 ## Assumptions
 
 This documentation assumes that you are already familiar with JavaScript/TypeScript, Angular, CSS and Bootstrap.
+
+## Looking for ng2-admin?
+It's not gone and still supported! The ng2-admin is still available at ([Github branch](https://github.com/akveo/ng2-admin/tree/ng2-admin)).

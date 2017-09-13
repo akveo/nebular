@@ -9,6 +9,22 @@ import { Component, Input, HostBinding } from '@angular/core';
 /**
  * Component intended to be used within  the `<nb-card>` component.
  * It adds styles for a preset header section.
+ *
+ * @styles
+ *
+ * card-header-font-family:
+ * card-header-font-size:
+ * card-header-font-weight:
+ * card-header-fg:
+ * card-header-fg-heading:
+ * card-header-active-bg:
+ * card-header-active-fg:
+ * card-header-disabled-bg:
+ * card-header-primary-bg:
+ * card-header-info-bg:
+ * card-header-success-bg:
+ * card-header-warning-bg:
+ * card-header-danger-bg:
  */
 @Component({
   selector: 'nb-card-header',
@@ -19,7 +35,7 @@ export class NbCardHeaderComponent {
 
 /**
  * Component intended to be used within  the `<nb-card>` component.
- * It adds styles for a preset body section.
+ * Adds styles for a preset body section.
  */
 @Component({
   selector: 'nb-card-body',
@@ -30,7 +46,7 @@ export class NbCardBodyComponent {
 
 /**
  * Component intended to be used within  the `<nb-card>` component.
- * It adds styles for a preset footer section.
+ * Adds styles for a preset footer section.
  */
 @Component({
   selector: 'nb-card-footer',
@@ -40,13 +56,35 @@ export class NbCardFooterComponent {
 }
 
 /**
- * A basic content container component
+ * Basic content container component.
  *
- * While this component can be used alone, it also provides a number
- * of child components for common card sections, including:
- * - nb-card-header
- * - nb-card-body
- * - nb-card-footer
+ * @example While this component can be used alone, it also provides a number
+ * of child components for common card sections:
+ * ```
+ * <nb-card-header></nb-card-header>
+ * <nb-card-body></nb-card-body>
+ * <nb-card-footer></nb-card-footer>
+ * ```
+ *
+ * @styles
+ *
+ * card-line-height:
+ * card-font-weight:
+ * card-fg-text:
+ * card-bg:
+ * card-height-xxsmall:
+ * card-height-xsmall:
+ * card-height-small:
+ * card-height-medium:
+ * card-height-large:
+ * card-height-xlarge:
+ * card-height-xxlarge:
+ * card-shadow:
+ * card-border-radius:
+ * card-padding:
+ * card-margin:
+ * card-separator:
+ *
  */
 @Component({
   selector: 'nb-card',
@@ -149,11 +187,21 @@ export class NbCardComponent {
     return this.status === NbCardComponent.STATUS_DANGER;
   }
 
+  /**
+   * Card size, available sizes:
+   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * @param {string} val
+   */
   @Input('size')
   private set setSize(val: string) {
     this.size = val;
   }
 
+  /**
+   * Card status (adds specific styles):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} val
+   */
   @Input('status')
   private set setStatus(val: string) {
     this.status = val;
