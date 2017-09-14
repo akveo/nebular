@@ -87,6 +87,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
   bgTop = '';
   animated: boolean = false;
+  currentSectionId: string = 'home';
 
   constructor(private renderer: Renderer2,
               private titleService: Title) {
@@ -139,7 +140,8 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
       .map((item: any) => {
         item.active = item.hash === closestSection.id;
         return item;
-      })
+      });
+    this.currentSectionId = closestSection.id;
   }
 
   private calculateBgTopOffcet() {
