@@ -6,7 +6,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { NbSuperSearchService } from '@nebular/theme';
+import { NbSearchService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-search-test',
@@ -67,7 +67,7 @@ import { NbSuperSearchService } from '@nebular/theme';
 })
 export class NbSearchTestComponent implements OnInit {
 
-  constructor(private searchService: NbSuperSearchService) {
+  constructor(private searchService: NbSearchService) {
   }
 
   ngOnInit() {

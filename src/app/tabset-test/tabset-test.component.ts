@@ -45,7 +45,7 @@ import { Router } from '@angular/router';
             <span>Content #3</span>
           </nb-tab>
         </nb-tabset>
-        <nb-tabset (changeTab)="changeTab($event)" [routes]="true">
+        <nb-tabset (changeTab)="changeTab($event)" routeParam="tab">
           <nb-tab tabTitle="Tab #1" route="tab1">
             <span>Content #1</span>
           </nb-tab>
