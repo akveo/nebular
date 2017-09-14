@@ -11,7 +11,7 @@ import { DocsService } from '../../../docs.service';
   selector: 'ngd-styles-block',
   template: `
     <div class="block-container" *ngFor="let style of classStyles">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Styles" ngdFragment> <i class="ion-link"></i></a>Component themable styles</p>
+      <p class="block-title"><a [routerLink]="" fragment="{{className}}Styles" ngdFragment></a>Component themable styles</p>
       <table class="table">
         <thead>
           <tr>

@@ -1,5 +1,5 @@
 import {
-  Directive, Input, HostListener, ElementRef
+  Directive, Input, HostListener,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

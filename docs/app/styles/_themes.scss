@@ -19,6 +19,8 @@ $nb-themes: nb-register-theme((
   color-primary: #8a7fff,
   shadow: none,
 
+  link-color-active: #14ffbe,
+
   header-bg: #fff,
   menu-submenu-item-padding: 0,
   menu-font-weight: font-weight-light,
@@ -48,7 +50,7 @@ $nb-themes: nb-register-theme((
   layout-padding: 0,
   layout-bg: white,
   layout-content-padding: 0 1rem,
-  sidebar-width: 12rem,
+  sidebar-width: 15rem,
 
   header-shadow: none,
   menu-font-size: 1.25rem,

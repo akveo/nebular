@@ -10,7 +10,7 @@ import { DocsService } from '../../docs.service';
 <div class="block-container">
   <div class="theme-header" >
     <div class="theme-header-content">
-      <span class="block-title"><a [routerLink]="" fragment="{{themeName}}" ngdFragment> <i class="ion-link"></i></a> Theme {{themeName}}</span>
+      <span class="block-title"><a [routerLink]="" fragment="{{themeName}}" ngdFragment></a> Theme {{themeName}}</span>
         <span *ngIf="parentTheme">inherited from {{parentTheme}} theme</span>
       <div class="theme-filter">
         <input #searchInput [(ngModel)]="searchInputValue" (keyup)="searchTerms$.next(searchInput.value)">

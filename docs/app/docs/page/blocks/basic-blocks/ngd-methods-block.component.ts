@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
   selector: 'ngd-methods-block',
   template: `
     <div class="block-container">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Methods" ngdFragment> <i class="ion-link"></i></a> Methods</p>  
+      <p class="block-title"><a [routerLink]="" fragment="{{className}}Methods" ngdFragment></a> Methods</p>  
       <table class="table" *ngIf="classMethods?.length > 0">
         <thead>
           <tr>

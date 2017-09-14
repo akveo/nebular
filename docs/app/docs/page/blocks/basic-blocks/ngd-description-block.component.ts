@@ -11,7 +11,7 @@ import { Component, Input, OnChanges } from '@angular/core';
   template: `
     <div class="block-container">
       <h2 class="class-name">
-        <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment> <i class="ion-link"></i></a>
+        <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment></a>
         {{blockData.name}}
       </h2>
       <p *ngIf="isShortDescription" class="short-description">

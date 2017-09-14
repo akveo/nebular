@@ -11,7 +11,7 @@ import 'prismjs/components/prism-jsx.js';
 @Component({
   selector: 'ngd-examples-block',
   template: `
-    <p class="block-title"><a [routerLink]="" fragment="{{className}}Examples" ngdFragment> <i class="ion-link"></i></a> {{ title }}</p>
+    <p class="block-title"><a [routerLink]="" fragment="{{className}}Examples" ngdFragment></a> {{ title }}</p>
     <div class="block-container" *ngFor="let example of classExamples">
       <p class="block-subtitle">{{example.shortDescription}}</p>
       <p ngdDescription>{{example.description}}</p>

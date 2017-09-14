@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
   selector: 'ngd-props-block',
   template: `    
     <div  class="inputs block-container" *ngIf="classInputs.length > 0">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Inputs" ngdFragment> <i class="ion-link"></i></a> Inputs</p>
+      <p class="block-title"><a [routerLink]="" fragment="{{className}}Inputs" ngdFragment></a> Inputs</p>
       <table  class="table">
        <thead>
          <tr>
@@ -33,7 +33,7 @@ import { Component, Input } from '@angular/core';
       </table>
     </div>
     <div class="outputs block-container" *ngIf="classOutputs.length > 0">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Outputs" ngdFragment> <i class="ion-link"></i></a> Outputs</p>
+      <p class="block-title"><a [routerLink]="" fragment="{{className}}Outputs" ngdFragment></a> Outputs</p>
       <table  class="table">
        <thead>
          <tr>
