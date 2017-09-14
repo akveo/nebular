@@ -12,6 +12,10 @@
     background: nb-theme(menu-bg);
     color: nb-theme(menu-fg);
 
+    ul.menu-items {
+      margin: 0;
+    }
+
     .menu-group {
       font-weight: nb-theme(menu-group-font-weight);
       font-size: nb-theme(menu-group-font-size);
@@ -53,10 +57,6 @@
 
     .menu-items.expanded {
       background-color: nb-theme(menu-submenu-bg);
-    }
-
-    .menu-item > .menu-items {
-      padding: nb-theme(menu-submenu-padding);
     }
 
     .menu-item > .menu-items > .menu-item {

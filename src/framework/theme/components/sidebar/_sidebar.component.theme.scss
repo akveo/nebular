@@ -144,7 +144,7 @@
     }
 
     nb-menu {
-      margin: 0 -#{nb-theme(sidebar-padding)};
+      margin: 0 -#{nb-theme(sidebar-padding)} -#{nb-theme(sidebar-padding)};
 
       .menu-items > .menu-item {
         border-bottom: 1px solid transparent;
