@@ -25,8 +25,8 @@ import { Component, Input } from '@angular/core';
            <td>{{ prop.name }}</td>
            <td><code>{{ prop.type }}</code></td>
            <td>
-              <p *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</p>
-              <p *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</p>
+              <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
+              <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
            </td>
          </tr>
        </tbody>
@@ -47,8 +47,8 @@ import { Component, Input } from '@angular/core';
            <td>{{ prop.name }}</td>
            <td><code>{{ prop.type }}</code></td>
            <td>
-              <p *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</p>
-              <p *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</p>
+              <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
+              <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
            </td>
          </tr>
        </tbody>

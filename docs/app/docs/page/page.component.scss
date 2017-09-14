@@ -49,12 +49,15 @@
       tbody {
         td {
           padding: 0.75rem 0.75rem 0.75rem 0;
+          p {
+            margin: 0;
+          }
         }
       }
     }
 
     ngd-methods-block {
-      .method-description {
+      .method-signature ~ .method-description {
         margin-top: 1rem;
       }
     }
@@ -89,15 +92,16 @@
     }
 
     .fragment {
-      opacity: 0;
-      font-size: 2rem;
-      vertical-align: middle;
-      position: absolute;
-      bottom: -0.6rem;
-      left: -2rem;
-    }
+        opacity: 0;
+        font-size: 2rem;
+        vertical-align: middle;
+        position: absolute;
+        bottom: -0.6rem;
+        left: -2rem;
+      }
 
     .class-name , .block-title {
+      margin-bottom: 1rem;
       position: relative;
       &:hover > .fragment {
         opacity: 1;
