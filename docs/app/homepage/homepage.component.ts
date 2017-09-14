@@ -110,7 +110,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   }
 
   private createImageComparison(): any {
-    return new ImageComparison({
+    const comparison = new ImageComparison({
       container: this.comparisonContainer.nativeElement,
       startPosition: 70,
       data: this.comparisonImages.map((element: any) => {
@@ -119,6 +119,8 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
         }
       }),
     });
+
+    comparison._setImageSize();
   }
 
   private highlightMenu() {

@@ -644,7 +644,7 @@
         }
       ],
       "name": "NbLayoutComponent",
-      "description": "Can contain the following components inside:\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n\nThe children components are projected into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n\nThe layout content (columns) becomes centered when the window width is more than\nthe value specified in the theme variable `layout-content-width`.\n\nThe layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.\n\nThe layout component is also responsible for changing of the application themes.\nIt listens to the `themeChange` event and change the theme CSS class appended to body.\nBased on the class appended a specific CSS-theme is applied to the application.\nMore details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)\n",
+      "description": "Can contain the following components inside:\n\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\n\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n\nThe children components are projected into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n\nThe layout content (columns) becomes centered when the window width is more than\nthe value specified in the theme variable `layout-content-width`.\n\nThe layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.\n\nThe layout component is also responsible for changing of the application themes.\nIt listens to the `themeChange` event and change the theme CSS class appended to body.\nBased on the class appended a specific CSS-theme is applied to the application.\nMore details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)\n",
       "shortDescription": "The general Nebular component-container.\nIt is required that all children component of the framework are located inside of the nb-layout.",
       "styles": [
         {
@@ -3270,6 +3270,10 @@
           "childs": [
             {
               "theme": "default",
+              "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
               "prop": "layout-font-family"
             },
             {
@@ -3297,7 +3301,12 @@
         "font-secondary": {
           "name": "font-secondary",
           "value": "Helvetica",
-          "parents": [],
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "font-main"
+            }
+          ],
           "childs": [
             {
               "theme": "default",
@@ -3342,14 +3351,6 @@
             {
               "theme": "default",
               "prop": "modal-header-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "font-secondary"
             }
           ]
         },
@@ -4903,6 +4904,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -5066,6 +5071,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -5306,16 +5315,6 @@
             }
           ]
         },
-        "layout-padding": {
-          "name": "layout-padding",
-          "value": [
-            "2.25rem",
-            "2.25rem",
-            "0.75rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
         "layout-content-width": {
           "name": "layout-content-width",
           "value": "900px",
@@ -5328,6 +5327,21 @@
             {
               "theme": "cosmic",
               "prop": "layout-content-width"
+            }
+          ]
+        },
+        "layout-window-mode-min-width": {
+          "name": "layout-window-mode-min-width",
+          "value": "320px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "layout-window-mode-min-width"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "layout-window-mode-min-width"
             }
           ]
         },
@@ -5375,6 +5389,36 @@
               "prop": "layout-window-mode-padding-top"
             }
           ]
+        },
+        "layout-padding": {
+          "name": "layout-padding",
+          "value": [
+            "2.25rem",
+            "2.25rem",
+            "0.75rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "layout-medium-padding": {
+          "name": "layout-medium-padding",
+          "value": [
+            "1.5rem",
+            "1.5rem",
+            "0.5rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "layout-small-padding": {
+          "name": "layout-small-padding",
+          "value": [
+            "1rem",
+            "1rem",
+            0
+          ],
+          "parents": [],
+          "childs": []
         },
         "sidebar-font-size": {
           "name": "sidebar-font-size",
@@ -5512,6 +5556,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -5870,6 +5918,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -6055,6 +6107,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -6247,6 +6303,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -6340,6 +6400,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -6539,6 +6603,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -6949,6 +7017,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -7439,6 +7511,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -7907,6 +7983,10 @@
             {
               "theme": "default",
               "prop": "font-secondary"
+            },
+            {
+              "theme": "default",
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -7995,6 +8075,10 @@
           "childs": [
             {
               "theme": "light",
+              "prop": "font-secondary"
+            },
+            {
+              "theme": "light",
               "prop": "layout-font-family"
             },
             {
@@ -8016,8 +8100,12 @@
           "value": "Helvetica",
           "parents": [
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": [
@@ -9515,8 +9603,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -9726,8 +9818,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -9998,12 +10094,6 @@
           ],
           "childs": []
         },
-        "layout-padding": {
-          "name": "layout-padding",
-          "value": "2.5rem",
-          "parents": [],
-          "childs": []
-        },
         "layout-content-width": {
           "name": "layout-content-width",
           "value": "900px",
@@ -10011,6 +10101,17 @@
             {
               "theme": "default",
               "prop": "layout-content-width"
+            }
+          ],
+          "childs": []
+        },
+        "layout-window-mode-min-width": {
+          "name": "layout-window-mode-min-width",
+          "value": "320px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "layout-window-mode-min-width"
             }
           ],
           "childs": []
@@ -10046,6 +10147,32 @@
               "prop": "layout-window-mode-padding-top"
             }
           ],
+          "childs": []
+        },
+        "layout-padding": {
+          "name": "layout-padding",
+          "value": "2.5rem",
+          "parents": [],
+          "childs": []
+        },
+        "layout-medium-padding": {
+          "name": "layout-medium-padding",
+          "value": [
+            "1.5rem",
+            "1.5rem",
+            "0.5rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "layout-small-padding": {
+          "name": "layout-small-padding",
+          "value": [
+            "1rem",
+            "1rem",
+            0
+          ],
+          "parents": [],
           "childs": []
         },
         "sidebar-font-size": {
@@ -10176,8 +10303,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -10586,8 +10717,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -10786,8 +10921,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -11006,8 +11145,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -11095,8 +11238,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -11306,8 +11453,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -11809,8 +11960,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -12271,8 +12426,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -12784,8 +12943,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "light",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -12898,6 +13061,10 @@
           "childs": [
             {
               "theme": "cosmic",
+              "prop": "font-secondary"
+            },
+            {
+              "theme": "cosmic",
               "prop": "layout-font-family"
             },
             {
@@ -12919,8 +13086,12 @@
           "value": "Helvetica",
           "parents": [
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": [
@@ -14360,8 +14531,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -14543,8 +14718,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -14803,16 +14982,6 @@
           ],
           "childs": []
         },
-        "layout-padding": {
-          "name": "layout-padding",
-          "value": [
-            "2.25rem",
-            "2.25rem",
-            "0.75rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
         "layout-content-width": {
           "name": "layout-content-width",
           "value": "900px",
@@ -14820,6 +14989,17 @@
             {
               "theme": "default",
               "prop": "layout-content-width"
+            }
+          ],
+          "childs": []
+        },
+        "layout-window-mode-min-width": {
+          "name": "layout-window-mode-min-width",
+          "value": "320px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "layout-window-mode-min-width"
             }
           ],
           "childs": []
@@ -14855,6 +15035,36 @@
               "prop": "layout-window-mode-padding-top"
             }
           ],
+          "childs": []
+        },
+        "layout-padding": {
+          "name": "layout-padding",
+          "value": [
+            "2.25rem",
+            "2.25rem",
+            "0.75rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "layout-medium-padding": {
+          "name": "layout-medium-padding",
+          "value": [
+            "1.5rem",
+            "1.5rem",
+            "0.5rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
+        "layout-small-padding": {
+          "name": "layout-small-padding",
+          "value": [
+            "1rem",
+            "1rem",
+            0
+          ],
+          "parents": [],
           "childs": []
         },
         "sidebar-font-size": {
@@ -14990,8 +15200,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -15356,8 +15570,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -15549,8 +15767,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -15753,8 +15975,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -15838,8 +16064,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -16032,8 +16262,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -16472,8 +16706,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -16897,8 +17135,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
@@ -17348,8 +17590,12 @@
               "prop": "font-secondary"
             },
             {
+              "theme": "cosmic",
+              "prop": "font-main"
+            },
+            {
               "theme": "default",
-              "prop": "font-secondary"
+              "prop": "font-main"
             }
           ],
           "childs": []
