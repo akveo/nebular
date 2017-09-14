@@ -61,8 +61,13 @@ export const DEFAULT_MEDIA_BREAKPOINTS = [
 @Injectable()
 export class NbMediaBreakpointsService {
 
+  private breakpointsMap: { [breakpoint: string]: number };
 
   constructor(@Inject(nbMediaBreakpointsToken) private breakpoints) {
+    this.breakpointsMap = this.breakpoints.reduce((res, b: NbMediaBreakpoint) => {
+      res[b.name] = b.width;
+      return res;
+    }, {});
   }
 
   /**
@@ -94,10 +99,18 @@ export class NbMediaBreakpointsService {
   }
 
   /**
-   * Returns a list of configured breakpoins for the theme
+   * Returns a list of configured breakpoints for the theme
    * @returns {{name: string, width: number}[]}
    */
   getBreakpoints(): NbMediaBreakpoint[] {
     return this.breakpoints;
+  }
+
+  /**
+   * Returns a map of configured breakpoints for the theme
+   * @returns {{[p: string]: number}}
+   */
+  getBreakpointsMap(): { [breakpoint: string]: number } {
+    return this.breakpointsMap;
   }
 }
