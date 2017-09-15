@@ -58,7 +58,11 @@ $nb-themes: nb-register-theme((
   code-snippets-bg: #f5f6fc,//custom variable
   table-row-odd-bg: code-snippets-bg,//custom variable
 
+  card-padding-small: 1rem 1rem 1rem 1rem,
   layout-padding: 0,
+  layout-medium-padding: 0,
+  layout-small-padding: 0,
+
   layout-bg: white,
   layout-content-padding: 0 1rem,
   sidebar-width: 15rem,

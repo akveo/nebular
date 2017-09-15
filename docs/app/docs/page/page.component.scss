@@ -2,13 +2,6 @@
 
 @include nb-install-component {
   /deep/ nb-card {
-    //a {
-    //  color: nb-theme(color-fg-active);//TODO: is it need??
-		//
-    //  @include hover-focus-active() {
-    //    color: nb-theme(color-primary);
-    //  }
-    //}
     nb-card-header {
       padding-top: nb-theme(page-title-padding-top);
       h1 {
@@ -56,6 +49,10 @@
       }
     }
 
+    .table-container {
+      min-width: 768px;
+      overflow-x: auto;
+    }
     ngd-methods-block {
       .method-signature ~ .method-description {
         margin-top: 1rem;
@@ -226,7 +223,6 @@
       height: 50px;
       width: 100%;
       z-index: 1;
-      // transition: all 0.2s ease;
       &.transparent {
         opacity: 0;
         pointer-events: none;
@@ -252,13 +248,37 @@
       }
     }
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 768px) {
       ngd-examples-block {
         & > div > pre {
           display: none;
         }
         ngd-code-highlighter {
           display: block;
+        }
+      }
+      ngd-theme-block {
+        .theme-header .input-group {
+          width: 100%;
+          padding-right: 1rem;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 991px) {
+    /deep/ nb-card {
+      nb-card-header {
+        padding: nb-theme(card-padding-small);
+      }
+      nb-card-body {
+        padding: nb-theme(card-padding-small);
+        .fragment {
+          display: none;
+        }
+      }
+      ngd-theme-block {
+        .theme-header {
+          width: calc(100% + 1rem);
         }
       }
     }

@@ -17,6 +17,7 @@ import { DocsService } from '../../docs/docs.service';
       <a routerLink="/home" routerLinkActive="active-link">HOME</a>
       <a routerLink="/docs" routerLinkActive="active-link">DOCUMENTATION</a>
     </div>
+    <span>Need some help? Let us know! <a href="mailto:contact@akveo.com" target="_blank"><b>Contact@akveo.com</b></a></span>
     <i class="menu-icon ion-navicon" (click)="toggleMenu()"></i>
     <nb-menu class="mobile-menu" [class.active]="isMenuActive" [items]="menuItems" tag="mobileMenu"></nb-menu>
   `,

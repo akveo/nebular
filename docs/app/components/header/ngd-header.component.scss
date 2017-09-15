@@ -3,7 +3,7 @@
 
 
 /deep/ ngd-homepage nb-layout-header {
-  z-index: 2;
+  z-index: 3;
   nav {
     padding: 0;
     background: transparent !important;
@@ -49,7 +49,7 @@
         }
       }
       .menu a {
-        color: #a6adff;
+        color: nb-theme(color-fg);
         font-weight: nb-theme(font-weight-normal);
         &.active-link {
           text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
@@ -63,7 +63,12 @@
           text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
         }
       }
+      .menu-icon {
+        color: nb-theme(color-fg);
+      }
     }
+
+
     .menu {
       margin: auto;
       font-size: 18px;
@@ -112,7 +117,7 @@
         visibility: visible;
         opacity: 1;
         height: 100%;
-        max-width: 100%;
+        max-height: 100%;
       }
       i {
         display: none;
@@ -138,7 +143,7 @@
       }
     }
 
-    @media screen and (max-width: 1500px) and (min-width: 900px) {
+    @media screen and (max-width: 1500px) and (min-width: 991px) {
       padding-right: 150px;
     }
 
@@ -148,7 +153,7 @@
       }
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 991px) {
       .menu {
         display: none;
       }
