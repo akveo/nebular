@@ -78,7 +78,6 @@
         }
 
         .menu-items > .menu-item {
-          border-bottom: 1px solid nb-theme(menu-item-separator);
           transition: border-color 1s ease;
 
           span, .chevron {
@@ -145,10 +144,6 @@
 
     nb-menu {
       margin: 0 -#{nb-theme(sidebar-padding)} -#{nb-theme(sidebar-padding)};
-
-      .menu-items > .menu-item {
-        border-bottom: 1px solid transparent;
-      }
     }
   }
 }
