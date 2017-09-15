@@ -11,10 +11,6 @@
   }
 }
 
-:host-context(ngd-homepage) .logo-container a {
-
-}
-
   @include nb-install-component {
     display: flex;
     align-items: center;
@@ -116,6 +112,7 @@
         visibility: visible;
         opacity: 1;
         height: 100%;
+        max-width: 100%;
       }
       i {
         display: none;
