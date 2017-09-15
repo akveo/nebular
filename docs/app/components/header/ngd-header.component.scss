@@ -35,6 +35,10 @@
       }
     }
     &.homepage-header {
+      color: nb-theme(color-fg);
+      a {
+        color: nb-theme(color-fg);
+      }
       .logo-container a {
         .logo-title {
           .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
@@ -49,7 +53,6 @@
         }
       }
       .menu a {
-        color: nb-theme(color-fg);
         font-weight: nb-theme(font-weight-normal);
         &.active-link {
           text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
@@ -62,9 +65,6 @@
           text-decoration: none;
           text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
         }
-      }
-      .menu-icon {
-        color: nb-theme(color-fg);
       }
     }
 
