@@ -1,6 +1,6 @@
 @import '../../styles/themes';
 
-/deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+/deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav {
   margin-top: -167px;
   position: relative;
   z-index: 2;
@@ -9,21 +9,21 @@
   color: #a6adff;
   font-size: 24px;
 
-  .footer-inner{
+  .footer-inner {
     display: flex;
     flex-flow: row-reverse nowrap;
     justify-content: space-between;
     text-align: left;
     padding: 0 100px;
-    width: 100%;
   }
-  .socio a{
+  .socio a {
     color: white;
   }
 }
+
 @media screen and (max-width: 1300px) {
-  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
-    .footer-inner{
+  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav {
+    .footer-inner {
       font-size: 18px;
       padding: 0 20px;
     }
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav{
+  /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav {
     margin-top: -100px;
   }
 }
@@ -55,14 +55,13 @@
     }
   }
 
-
   @media screen and (max-width: 970px) {
     p {
       font-size: 0.75rem;
     }
   }
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     flex-direction: column-reverse;
     .socio {
       display: none;
