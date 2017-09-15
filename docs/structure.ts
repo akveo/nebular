@@ -377,29 +377,28 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'NbThemes',
-        isSubpages: true,
+        name: 'Default',
         children: [
           {
             type: 'block',
             block: 'theme',
-            name: 'default',
+            name: 'Default',
             blockData: 'default',
-          },
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'light',
-            blockData: 'light',
-          },
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'cosmic',
-            blockData: 'cosmic',
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Cosmic',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Cosmic',
+            blockData: 'cosmic',
+          },
+        ],
+      }
     ],
   },
   {

@@ -17,21 +17,24 @@ import { DocsService } from '../docs.service';
 export class NgdFragmentDirective {
   table: boolean = false;
   remote: boolean = false;
+
   @Input() fragment: string;
+
   @Input()
   set remoteLink(val: boolean) {
     this.remote = convertToBoolProperty(val);
   }
+
   @Input()
   set tableCell(val: boolean) {
     this.table = convertToBoolProperty(val);
   }
   constructor(private route: ActivatedRoute,
-              private docsService: DocsService) {}
+              private docsService: DocsService) { }
 
   @HostListener('click') onClick() {
     if (this.route.snapshot.fragment === this.fragment) {
-      this.docsService.newFragment(this.fragment);
+      this.docsService.emitFragment(this.fragment);
     }
   }
 }

@@ -18,8 +18,6 @@ const PARSEDDOCS: any = require('../../output.json');
 export class DocsService {
 
   private fragments$ = new Subject();
-  private positions$ = new Subject();
-  private filterings$ = new Subject();
 
   getStructure(): any {
     return STRUCTURE;
@@ -37,28 +35,12 @@ export class DocsService {
     return this.prepareStructure(this.getStructure(), this.getParsedDocs());
   }
 
-  newFragment(fragment: string): void {
+  emitFragment(fragment: string): void {
     this.fragments$.next(fragment);
   }
 
   onFragmentClick(): Observable<string> {
     return this.fragments$.share();
-  }
-
-  getThemesPositions(): Observable<{ name, position, parentTheme, isWarning, searchInputVAlue }> {
-    return this.positions$.share();
-  }
-
-  registerThemePosition(theme): void {
-    this.positions$.next(theme);
-  }
-
-  filterData(term: string, themeName: string): void {
-    this.filterings$.next({ term, theme: themeName });
-  }
-
-  onFiltering(): Observable<{ term: string, theme: any}> {
-    return this.filterings$.share();
   }
 
   mapThemedValues(classStyles: any): any {
@@ -109,7 +91,7 @@ export class DocsService {
         if (item.type === 'block') {
           menuItem['fragment'] = item.name;
         }
-        menuItem['pathMatch'] = 'full';
+        menuItem['pathMatch'] = 'prefix';
         menuItem['title'] = item.name;
 
         if (item.children && item.children[0] && item.children[0].type === 'page') {

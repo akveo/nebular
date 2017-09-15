@@ -36,7 +36,6 @@ import { NgdComponentBlockComponent } from './docs/page/blocks/ngd-component-blo
 import { NgdFragmentDirective } from './docs/utils/ngd-fragment.directive';
 import { NgdThemeComponent } from './docs/page/blocks/ngd-theme-block.component';
 import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directive';
-import { NgdThemesHeaderComponent } from './docs/page/blocks/ngd-themes-header.component';
 import { SwiperModule } from 'angular2-useful-swiper';
 
 
@@ -74,7 +73,6 @@ import { SwiperModule } from 'angular2-useful-swiper';
     NgdFragmentDirective,
     NgdThemeComponent,
     NgdSassPropValueDirective,
-    NgdThemesHeaderComponent,
   ],
   providers: [
     DocsService,
