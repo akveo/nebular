@@ -27,7 +27,7 @@ $theme: (
   font-size-sm: 0.875rem,
   font-size-xs: 0.75rem,
 
-  radius: 0.5rem,
+  radius: 0.375rem,
   padding: 1.25rem,
   margin: 1.5rem,
   line-height: 1.25,
@@ -98,7 +98,7 @@ $theme: (
   card-padding: padding,
   card-margin: margin,
   card-header-font-family: font-secondary,
-  card-header-font-size: font-size-xlg,
+  card-header-font-size: font-size-lg,
   card-header-font-weight: font-weight-bold,
   card-separator: separator,
   card-header-fg: color-fg, // TODO: not used
@@ -173,7 +173,7 @@ $theme: (
   menu-submenu-hover-fg: menu-submenu-active-fg,
   menu-submenu-hover-bg: menu-submenu-bg,
   menu-submenu-item-border-width: 0.125rem,
-  menu-submenu-item-border-radius: 0.375rem,
+  menu-submenu-item-border-radius: radius,
   menu-submenu-item-padding: 0.5rem 1rem,
   menu-submenu-item-container-padding: 0 1.25rem,
   menu-submenu-padding: 0.5rem,
@@ -181,7 +181,8 @@ $theme: (
   menu-group-font-weight: font-weight-bolder,
   menu-group-font-size: 0.875rem,
   menu-group-fg: color-fg,
-  menu-item-padding: 0.25rem 1rem 0.25rem 0.75rem,
+  menu-group-padding: 1rem 1.25rem,
+  menu-item-padding: 0.675rem 1rem 0.675rem 0.75rem,
   menu-item-separator: separator,
   menu-icon-font-size: 2.5rem,
   menu-icon-margin: 0 0.5rem 0 0,
@@ -189,7 +190,7 @@ $theme: (
   menu-icon-active-color: color-fg-heading,
 
   tabs-font-family: font-secondary,
-  tabs-font-size: font-size-xlg,
+  tabs-font-size: font-size-lg,
   tabs-content-font-family: font-main,
   tabs-content-font-size: font-size,
   tabs-active-bg: transparent,
@@ -205,7 +206,7 @@ $theme: (
   tabs-selected: color-success,
 
   route-tabs-font-family: font-secondary,
-  route-tabs-font-size: font-size-xlg,
+  route-tabs-font-size: font-size-lg,
   route-tabs-active-bg: transparent,
   route-tabs-active-font-weight: card-header-font-weight,
   route-tabs-padding: padding,
@@ -306,7 +307,7 @@ $theme: (
 
   btn-padding-y-lg: 0.875rem,
   btn-padding-x-lg: 1.75rem,
-  btn-font-size-lg: font-size-xlg,
+  btn-font-size-lg: font-size-lg,
 
   // default size
   btn-padding-y-md: 0.75rem,
@@ -321,10 +322,10 @@ $theme: (
   btn-padding-x-tn: 1.25rem,
   btn-font-size-tn: 0.75rem,
 
-  btn-border-radius: 0.75rem,
-  btn-rectangle-border-radius: 4px,
-  btn-semi-round-border-radius: 12px,
-  btn-round-border-radius: 24px,
+  btn-border-radius: radius,
+  btn-rectangle-border-radius: 0.25rem,
+  btn-semi-round-border-radius: 0.75rem,
+  btn-round-border-radius: 1.5rem,
 
   btn-hero-shadow: none,
   btn-hero-text-shadow: none,
@@ -346,7 +347,7 @@ $theme: (
 
   form-control-border-width: 2px,
   form-control-border-type: solid,
-  form-control-border-radius: 0.375rem,
+  form-control-border-radius: radius,
   form-control-border-color: #dadfe6,
   form-control-selected-border-color: color-success,
 
@@ -361,7 +362,7 @@ $theme: (
   form-control-font-size: 1rem,
   form-control-sm-font-size: font-size-sm,
   form-control-sm-padding: 0.375rem 1.125rem,
-  form-control-lg-font-size: font-size-xlg,
+  form-control-lg-font-size: font-size-lg,
   form-control-lg-padding: 1.125rem,
 
   form-control-label-font-weight: 400,
@@ -388,7 +389,7 @@ $theme: (
   modal-padding: padding,
   modal-header-font-family: font-secondary,
   modal-header-font-weight: font-weight-bolder,
-  modal-header-font-size: font-size-xlg,
+  modal-header-font-size: font-size-lg,
   modal-body-font-family: font-main,
   modal-body-font-weight: font-weight-normal,
   modal-body-font-size: font-size,

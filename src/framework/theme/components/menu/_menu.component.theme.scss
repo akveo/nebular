@@ -21,7 +21,7 @@
       font-weight: nb-theme(menu-group-font-weight);
       font-size: nb-theme(menu-group-font-size);
       color: nb-theme(menu-group-fg);
-      padding: nb-theme(menu-item-padding);
+      padding: nb-theme(menu-group-padding);
     }
 
     .menu-item {
@@ -53,6 +53,13 @@
       .chevron {
         font-size: 0.875rem;
         color: nb-theme(menu-icon-color);
+      }
+    }
+
+    .menu-items > .menu-item {
+      border-bottom: 1px solid nb-theme(menu-item-separator);
+      &:first-child {
+        border-top: 1px solid nb-theme(menu-item-separator);
       }
     }
 

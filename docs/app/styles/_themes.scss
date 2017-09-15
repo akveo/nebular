@@ -99,7 +99,13 @@ $nb-themes: nb-register-theme((
   sidebar-padding: 0.5rem,
   footer-separator: rgba(0, 0, 0, 0.1),
 
+  landing-font: Exo,
   landing-golden: #ffd22d,
   landing-red: #fc3b41,
+  landing-fg: #b7b7fe,
+  landing-fg-light: #e0e0ff,
+  landing-highlight: #42db7d,
+  landing-primary: #8a7fff,
+  landing-bg: #13113b,
 ), default, default);
 

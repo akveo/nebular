@@ -15,6 +15,262 @@
       "styles": []
     },
     {
+      "kind": "service",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n{\n baseEndpoint: '',\n login: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/login',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Login/Email combination is not correct, please try again.'],\n   defaultMessages: ['You have been successfully logged in.'],\n },\n register: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/register',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully registered.'],\n },\n logout: {\n   alwaysFail: false,\n   endpoint: '/api/auth/logout',\n   method: 'delete',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully logged out.'],\n },\n requestPass: {\n   endpoint: '/api/auth/request-pass',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Reset password instructions have been sent to your email.'],\n },\n resetPass: {\n   endpoint: '/api/auth/reset-pass',\n   method: 'put',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   resetPasswordTokenKey: 'reset_password_token',\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Your password has been successfully changed.'],\n },\n token: {\n   key: 'data.token',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('token.key')),\n },\n errors: {\n   key: 'data.errors',\n   getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,\n     this.getConfigValue('errors.key'),\n     this.getConfigValue(`${module}.defaultErrors`)),\n },\n messages: {\n   key: 'data.messages',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('messages.key'),\n     this.getConfigValue(`${module}.defaultMessages`)),\n },\n}\n"
+        }
+      ],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "http",
+              "type": "HttpClient",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "route",
+              "type": "ActivatedRoute",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbEmailPassAuthProvider"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "authenticate",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "createFailResponse",
+          "type": [
+            "HttpResponse"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "createSuccessResponse",
+          "type": [
+            "HttpResponse"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "action",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getActionEndpoint",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getConfigValue",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "res",
+              "type": "HttpResponse",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getJsonSafe",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "logout",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "register",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "requestPassword",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "resetPassword",
+          "type": [
+            "Observable"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "config",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "setConfig",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbEmailPassAuthProvider",
+      "shortDescription": "The most common authentication provider.\nThe following options are available (with default values):",
+      "styles": []
+    },
+    {
       "kind": "component",
       "platform": null,
       "examples": [],

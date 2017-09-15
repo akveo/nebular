@@ -75,6 +75,7 @@ export class NbMenuItemComponent {
  * menu-group-font-weight:
  * menu-group-font-size:
  * menu-group-fg:
+ * menu-group-padding
  * menu-item-padding:
  * menu-item-separator:
  * menu-icon-font-size:

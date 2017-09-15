@@ -16,6 +16,18 @@ $transition: all 0.2s ease-in-out;
 $tablet: 1024px;
 $mobile: 767px;
 
+@mixin gold-shadow() {
+  & {
+    box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3),
+    0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3) inset;
+
+    &:hover {
+      box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4),
+      0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4) inset;
+    }
+  }
+}
+
 @include nb-install-component {
 
   [class^='icon-'], [class*=' icon-'] {
@@ -42,7 +54,12 @@ $mobile: 767px;
 
   /deep/ nb-layout .layout {
     overflow: hidden;
-    font-family: nb-theme(font-secondary);
+    font-family: nb-theme(landing-font);
+    color: nb-theme(landing-fg);
+
+    nb-layout-header, .btn {
+      font-family: nb-theme(landing-font);
+    }
   }
   nb-layout-column {
     padding: 0 !important;
@@ -54,8 +71,7 @@ $mobile: 767px;
   }
   p {
     font-size: 24px;
-    color: nb-theme(color-fg-landing);
-
+    color: nb-theme(landing-fg);
   }
   h1 {
     color: white;
@@ -75,9 +91,9 @@ $mobile: 767px;
       right: 15px;
       top: 0;
       bottom: 0;
-      background-color: transparentize(nb-theme(color-primary), 0.8);
+      background-color: transparentize(nb-theme(landing-primary), 0.8);
       border-radius: 20px;
-      box-shadow: 0 0 100px 70px transparentize(nb-theme(color-primary), 0.8);
+      box-shadow: 0 0 100px 70px transparentize(nb-theme(landing-primary), 0.8);
     }
   }
   h2 {
@@ -98,9 +114,9 @@ $mobile: 767px;
       right: 15px;
       top: 0;
       bottom: 0;
-      background-color: transparentize(nb-theme(color-primary), 0.8);
+      background-color: transparentize(nb-theme(landing-primary), 0.8);
       border-radius: 20px;
-      box-shadow: 0 0 85px 70px transparentize(nb-theme(color-primary), 0.8);
+      box-shadow: 0 0 85px 70px transparentize(nb-theme(landing-primary), 0.8);
     }
   }
   h3 {
@@ -121,9 +137,9 @@ $mobile: 767px;
       right: 15px;
       top: 0;
       bottom: 0;
-      background-color: transparentize(nb-theme(color-primary), 0.8);
+      background-color: transparentize(nb-theme(landing-primary), 0.8);
       border-radius: 20px;
-      box-shadow: 0 28px 52px 52px transparentize(nb-theme(color-primary), 0.8);
+      box-shadow: 0 28px 52px 52px transparentize(nb-theme(landing-primary), 0.8);
     }
   }
   h1, h2, h3 {
@@ -132,13 +148,16 @@ $mobile: 767px;
       z-index: 2;
     }
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: nb-theme(landing-font);
+  }
   .fixed-pseudo-bg {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: #13113b;
+    background-color: nb-theme(landing-bg);
     background-image: url('#{$img}space.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -155,6 +174,13 @@ $mobile: 767px;
     align-items: center;
     opacity: 0.1;
     transition: opacity 0.3s ease-in-out;
+
+    .txt p {
+      color: nb-theme(landing-fg-light);
+      a {
+        font-weight: nb-theme(font-weight-bold);
+      }
+    }
 
     &.current {
       opacity: 1;
@@ -176,7 +202,7 @@ $mobile: 767px;
     top: 50%;
     z-index: 2;
     transform: rotate(-90deg) scale(1);
-    color: nb-theme(color-fg);
+    color: nb-theme(landing-fg);
     text-decoration: none;
     mark {
       font-weight: 700;
@@ -216,7 +242,7 @@ $mobile: 767px;
       text-transform: uppercase;
       display: flex;
       flex-flow: row nowrap;
-      color: nb-theme(color-fg);
+      color: nb-theme(landing-fg);
       align-items: center;
       cursor: pointer;
       transition: $transition;
@@ -230,7 +256,7 @@ $mobile: 767px;
         min-width: 28px;
         flex: 0 0 28px;
         margin-right: 24px;
-        border: 2px solid nb-theme(color-fg);
+        border: 2px solid nb-theme(landing-fg);
         border-radius: 50%;
         position: relative;
         box-shadow: none;
@@ -244,32 +270,32 @@ $mobile: 767px;
           top: 50%;
           transform: translate(-50%, -50%);
           border-radius: 50%;
-          border: 2px solid nb-theme(color-fg);
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), 0.6);
+          border: 2px solid nb-theme(landing-fg);
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-fg), 0.6);
           display: block;
           opacity: 0;
           transition: $transition;
         }
       }
       &:hover {
-        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg), 0.4);
+        text-shadow: 0 2px 16px transparentize(nb-theme(landing-fg), 0.4);
         i {
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg), 0.6);
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-fg), 0.6);
           &::before {
             opacity: 1;
           }
         }
       }
       &.active {
-        color: nb-theme(color-fg-highlight);
-        text-shadow: 0 2px 16px transparentize(nb-theme(color-fg-highlight), 0.4);
+        color: nb-theme(landing-highlight);
+        text-shadow: 0 2px 16px transparentize(nb-theme(landing-highlight), 0.4);
         cursor: default;
         i {
-          border-color: nb-theme(color-fg-highlight);
-          box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.6);
+          border-color: nb-theme(landing-highlight);
+          box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-highlight), 0.6);
           &::before {
             opacity: 1;
-            border-color: nb-theme(color-fg-highlight);
+            border-color: nb-theme(landing-highlight);
           }
         }
       }
@@ -281,7 +307,7 @@ $mobile: 767px;
       left: 13px;
       top: 38px;
       bottom: 38px;
-      background: transparentize(nb-theme(color-fg), 0.9);
+      background: transparentize(nb-theme(landing-fg), 0.9);
       display: block;
       position: absolute;
     }
@@ -294,15 +320,15 @@ $mobile: 767px;
       max-height: 765px;
       padding: 80px;
       margin-left: 100px;
-      background: transparentize(nb-theme(color-fg), 0.96);
-      border: 2px solid transparentize(nb-theme(color-primary), 0.8);
+      background: transparentize(nb-theme(landing-fg), 0.96);
+      border: 2px solid transparentize(nb-theme(landing-primary), 0.8);
       border-radius: 60px;
       position: relative;
       z-index: 2;
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.8);
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-primary), 0.8);
       .hero-i-helper {
         display: flex;
         flex-flow: row nowrap;
@@ -322,17 +348,18 @@ $mobile: 767px;
       margin-top: 30px;
     }
     .btn-hero {
-      padding-left: 40px;
-      padding-right: 40px;
-      font-size: 24px;
-      border: 4px solid nb-theme(color-fg-highlight);
-      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.4),
-      0 2px 16px 0 transparentize(nb-theme(color-fg-highlight), 0.4) inset;
+      padding-left: 70px;
+      padding-right: 70px;
+      font-size: 1.5rem;
+      border: 4px solid nb-theme(landing-highlight);
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-highlight), 0.4),
+      0 2px 16px 0 transparentize(nb-theme(landing-highlight), 0.4) inset;
       transition: $transition;
       &:hover {
-        box-shadow: 0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), 0.4),
-        0 2px 25px 0 transparentize(nb-theme(color-fg-highlight), 0.4) inset;
+        box-shadow: 0 2px 25px 0 transparentize(nb-theme(landing-highlight), 0.4),
+        0 2px 25px 0 transparentize(nb-theme(landing-highlight), 0.4) inset;
       }
+      border-radius: 12px;
     }
     .bigger {
       margin: 0 0 30px;
@@ -568,7 +595,25 @@ $mobile: 767px;
         padding-right: 60px;
       }
     }
+    @keyframes blink {
+      0% {
+        opacity: 0.8;
+      }
+      20% {
+        opacity: 1;
+      }
+      40% {
+        opacity: 0.6;
+      }
+      60% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0.8;
+      }
+    }
     .auth-module-img {
+      animation: blink 8s ease-in 0s infinite;
       width: 68vw;
       max-width: 1200px;
       position: absolute;
@@ -604,11 +649,11 @@ $mobile: 767px;
         line-height: 2.2;
         color: white;
         cursor: pointer;
-        border: 2px solid transparentize(nb-theme(color-primary), 0.6);
+        border: 2px solid transparentize(nb-theme(landing-primary), 0.6);
         border-radius: 40px;
         display: block;
-        background: transparentize(nb-theme(color-primary), 0.8);
-        box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.6);
+        background: transparentize(nb-theme(landing-primary), 0.8);
+        box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-primary), 0.6);
         transition: $transition;
       }
       .txt {
@@ -623,9 +668,7 @@ $mobile: 767px;
         .icon {
           border: 6px solid white;
           background: transparent;
-          text-shadow: 0 0 8px nb-theme(landing-golden);
-          box-shadow: 0 0 12px 0 nb-theme(landing-golden),
-          0 0 12px 0 nb-theme(landing-golden) inset;
+          @include gold-shadow();
         }
         .txt {
           text-decoration: none;
@@ -669,7 +712,7 @@ $mobile: 767px;
     h4 {
       margin-bottom: 0;
       font-size: 36px;
-      color: nb-theme(color-fg);
+      color: nb-theme(landing-fg);
       text-transform: uppercase;
     }
     .section-container {
@@ -688,6 +731,9 @@ $mobile: 767px;
     }
     p {
       color: white;
+    }
+    a {
+      font-weight: nb-theme(font-weight-bold);
     }
   }
 
@@ -719,7 +765,7 @@ $mobile: 767px;
     }
     .icon-carousel-arr {
       transition: $transition;
-      text-shadow: 0 0 16px nb-theme(color-primary);
+      text-shadow: 0 0 16px nb-theme(landing-primary);
     }
     &:hover {
       .icon-carousel-arr {
@@ -767,9 +813,9 @@ $mobile: 767px;
     height: 32px;
     display: inline-block;
     vertical-align: middle;
-    background: transparentize(nb-theme(color-primary), 0.71);
-    border: 2px solid nb-theme(color-primary);
-    box-shadow: 0 0 16px 0 transparentize(nb-theme(color-primary), 0.4);
+    background: transparentize(nb-theme(landing-primary), 0.71);
+    border: 2px solid nb-theme(landing-primary);
+    box-shadow: 0 0 16px 0 transparentize(nb-theme(landing-primary), 0.4);
     border-radius: 5px;
     transition: $transition;
     opacity: 0.4;
@@ -777,21 +823,15 @@ $mobile: 767px;
       margin-left: 10px;
     }
     &:hover {
-      box-shadow: 0 2px 16px 0 transparentize(nb-theme(color-primary), 0.2);
+      box-shadow: 0 2px 16px 0 transparentize(nb-theme(landing-primary), 0.2);
     }
     &-active {
       opacity: 1;
       cursor: default;
       background: transparent;
       border-color: white;
-      box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3),
-      0 0 20px 0 transparentize(nb-theme(landing-golden), 0.5) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.3) inset;
-      &:hover {
-        background: transparent;
-        border-color: white;
-        box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4),
-        0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4) inset;
-      }
+
+      @include gold-shadow();
     }
   }
 

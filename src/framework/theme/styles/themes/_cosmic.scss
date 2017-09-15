@@ -10,6 +10,8 @@
 
 // default the base theme
 $theme: (
+  radius: 0.5rem,
+
   color-bg: #3d3780,
   color-bg-active: #494299,
   color-fg: #a1a1e5,
@@ -33,7 +35,7 @@ $theme: (
 
   card-header-font-weight: font-weight-bolder,
 
-  layout-bg: #2c2961,
+  layout-bg: #2f296b,
 
   scrollbar-fg: #554db3,
   scrollbar-bg: #332e73,
@@ -74,6 +76,8 @@ $theme: (
   menu-submenu-active-bg: rgba(0, 255, 170, 0.25),
   menu-submenu-active-border-color: color-fg-highlight,
   menu-submenu-active-shadow: 0 2px 12px 0 rgba(0, 255, 170, 0.25),
+  menu-item-padding: 0.25rem 1rem 0.25rem 0.75rem,
+  menu-item-separator: transparent,
 
   btn-hero-shadow: 0 4px 10px 0 rgba(33, 7, 77, 0.5),
   btn-hero-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
