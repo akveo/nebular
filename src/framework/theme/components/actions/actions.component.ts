@@ -18,7 +18,7 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-action',
   template: `
-    <a href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
+    <a class="icon-container" href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
     <ng-template #showContent>

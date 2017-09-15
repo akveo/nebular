@@ -15,6 +15,12 @@
       height: nb-theme(actions-size-small);
       padding: 0 nb-theme(actions-padding);
 
+      a.icon-container {
+        &:hover, &:focus {
+          text-decoration: none;
+        }
+      }
+
       i.control-icon {
         color: nb-theme(actions-fg);
         font-size: nb-theme(actions-size-small);

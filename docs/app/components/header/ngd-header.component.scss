@@ -54,10 +54,10 @@
       }
       .menu a {
         color: #a6adff;
-        font-weight: nb-theme(font-weight-light);
+        font-weight: nb-theme(font-weight-normal);
         &.active-link {
           text-shadow: 0 2px 16px rgba(166, 173, 255, 0.6);
-          &:before {
+          &::before {
             display: none;
           }
         }
@@ -87,7 +87,7 @@
           height: 6px;
           background: nb-theme(color-fg-active);
           border-radius: 3px;
-          transition: .3s ease-in-out;
+          transition: 0.3s ease-in-out;
           bottom: -3px;
           left: 0;
           box-shadow: 0px 3px 5px 0 rgba(33, 7, 77, 0.2), 0 0 8px 0 rgba(35, 255, 181, 0.3);

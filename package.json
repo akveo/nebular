@@ -17,6 +17,7 @@
     "docs:serve": "npm run docs:parse && npm run docs:start",
     "docs:parse": "gulp docs",
     "docs:start": "ng serve --app docs",
+    "docs:build": "npm run docs:parse && npm run build:prod:aot -- --app docs",
     "build": "rimraf dist && ng build",
     "build:prod": "npm run build -- --prod",
     "build:prod:aot": "npm run build:prod -- --aot",

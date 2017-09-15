@@ -12,6 +12,11 @@
     background: nb-theme(menu-bg);
     color: nb-theme(menu-fg);
 
+    ul.menu-items {
+      margin: 0;
+      padding: 0;
+    }
+
     .menu-group {
       font-weight: nb-theme(menu-group-font-weight);
       font-size: nb-theme(menu-group-font-size);
@@ -51,12 +56,8 @@
       }
     }
 
-    .menu-items.expanded {
-      background-color: nb-theme(menu-submenu-bg);
-    }
-
     .menu-item > .menu-items {
-      padding: nb-theme(menu-submenu-padding);
+      background-color: nb-theme(menu-submenu-bg);
     }
 
     .menu-item > .menu-items > .menu-item {
@@ -64,6 +65,13 @@
       background: nb-theme(menu-submenu-bg);
       color: nb-theme(menu-submenu-fg);
       padding: nb-theme(menu-submenu-item-container-padding);
+
+      &:first-child {
+        margin-top: nb-theme(menu-submenu-padding);
+      }
+      &:last-child {
+        margin-bottom: nb-theme(menu-submenu-padding);
+      }
 
       a {
         border: nb-theme(menu-submenu-item-border-width) solid nb-theme(menu-submenu-bg);

@@ -124,7 +124,18 @@ export class NbMenuComponent implements OnInit, OnDestroy {
     this.inverseValue = convertToBoolProperty(val);
   }
 
+  /**
+   * Collapse all opened submenus on the toggle event
+   * Default value is "false"
+   * @type boolean
+   */
+  @Input()
+  set autoCollapse(val: boolean) {
+    this.autoCollapseValue = convertToBoolProperty(val);
+  }
+
   private alive: boolean = true;
+  private autoCollapseValue: boolean = false;
 
   constructor(private menuInternalService: NbMenuInternalService, private router: Router) { }
 
@@ -171,8 +182,9 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   }
 
   onToggleSubMenu(item: NbMenuItem) {
-    // TODO: make this optional
-    this.menuInternalService.collapseAll(this.items, item);
+    if (this.autoCollapseValue) {
+      this.menuInternalService.collapseAll(this.items, item);
+    }
     item.expanded = !item.expanded;
     this.menuInternalService.submenuToggle(item, this.tag);
   }

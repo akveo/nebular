@@ -10,19 +10,16 @@
   .menu-items,
   .menu-item > .menu-items {
     list-style-type: none;
-    transition: visibility 0s, opacity 0.2s linear;
-    padding: 0;
+    overflow: hidden;
 
     &.collapsed {
-      visibility: hidden;
-      opacity: 0;
-      height: 0;
-      padding: 0;
+      max-height: 0;
+      transition: max-height 0.15s ease-out;
     }
 
     &.expanded {
-      visibility: visible;
-      opacity: 1;
+      max-height: 300px;
+      transition: max-height 0.3s ease-in;
     }
   }
 
