@@ -10,6 +10,8 @@
 
 // default the base theme
 $theme: (
+  radius: 0.5rem,
+
   color-bg: #3d3780,
   color-bg-active: #494299,
   color-fg: #a1a1e5,
@@ -33,7 +35,7 @@ $theme: (
 
   card-header-font-weight: font-weight-bolder,
 
-  layout-bg: #2c2961,
+  layout-bg: #2f296b,
 
   scrollbar-fg: #554db3,
   scrollbar-bg: #332e73,

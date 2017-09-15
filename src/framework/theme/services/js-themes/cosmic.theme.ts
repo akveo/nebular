@@ -18,7 +18,7 @@ export const COSMIC_THEME: NbJSThemeOptions = {
     fgHeading: '#ffffff',
     fgText: '#d1d1ff',
     fgHighlight: '#00f9a6',
-    layoutBg: '#2c2961',
+    layoutBg: '#2f296b',
     separator: '#342e73',
 
     primary: palette.primary,
