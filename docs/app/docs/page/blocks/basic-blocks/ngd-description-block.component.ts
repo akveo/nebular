@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-description-block',
@@ -12,7 +12,7 @@ import { Component, Input, OnChanges } from '@angular/core';
     <div class="block-container">
       <h2 class="class-name">
         <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment></a>
-        {{blockData.name}}
+        {{blockData?.name}}
       </h2>
       <p *ngIf="isShortDescription" class="short-description">
         {{ blockData?.shortDescription }}
@@ -23,17 +23,21 @@ import { Component, Input, OnChanges } from '@angular/core';
     </div>
   `,
 })
-export class NgdDescriptionBlockComponent implements OnChanges {
+export class NgdDescriptionBlockComponent {
 
-  @Input() blockData: any;
-  isDescription: boolean;
-  isShortDescription: boolean;
+  @Input('blockData') set setBlockData(blockData: any) {
+    if (blockData) {
+      this.isShortDescription = !!blockData.shortDescription &&
+        blockData.shortDescription !== blockData.name;
 
-  ngOnChanges() {
-    this.isShortDescription = !!this.blockData.shortDescription &&
-      this.blockData.shortDescription !== this.blockData.name;
+      this.isDescription = !!blockData.description &&
+        blockData.description !== blockData.shortDescription;
+      this.blockData = blockData;
+    }
+  };
 
-    this.isDescription = !!this.blockData.description &&
-      this.blockData.description !== this.blockData.shortDescription;
-  }
+  blockData: any;
+  isDescription: boolean = false;
+  isShortDescription: boolean = false;
+
 }
