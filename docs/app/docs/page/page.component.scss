@@ -31,7 +31,7 @@
     }
 
     .table {
-
+      min-width: nb-theme(table-min-width);
       thead {
         font-weight: nb-theme(font-weight-normal);
         td {
@@ -50,7 +50,6 @@
     }
 
     .table-container {
-      min-width: 768px;
       overflow-x: auto;
     }
     ngd-methods-block {

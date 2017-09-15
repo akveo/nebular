@@ -27,42 +27,44 @@ import { Subscription } from 'rxjs/Subscription';
     </div>
     <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing filtered</div>
   </div>
-  <table class="table-striped table theme-table">
-    <thead>
-      <tr>
-        <td>Name</td>
-        <td>Value</td>
-        <td>Parent</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prop of filteredContent;" fragment="{{prop.name}}" tableCell ngdFragment>
-        <td>
-          <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a><span>{{ prop.name }}</span>
-        </td>
-        <td ngdSassValue>{{ prop.value }}</td>
-        <td class="theme-parents-cell">
-          <a routerLink="/docs/themes/{{prop.parents[0]?.theme}}" fragment="{{prop.parents[0]?.prop}}" tableCell ngdFragment>
-            {{ prop.parents[0]?.prop }}
-            <span *ngIf="prop.parents[0] && prop.parents[0].theme !== themeName">({{prop.parents[0]?.theme}})</span>
-          </a>
-          <div *ngIf="prop.parents.length > 1" class="theme-prop-parents">
-            <span *ngFor="let parent of prop.parents | slice:1">
-              <i class="inheritance-icon ion-arrow-left-c"></i>
-              <a routerLink="/docs/themes/{{parent.theme}}" fragment="{{parent.prop}}" remoteLink ngdFragment>
-                {{ parent.prop }}
-                <span *ngIf="parent.theme !== themeName">({{parent.theme}})</span>
-                </a>
-             </span>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container">  
+    <table class="table-striped table theme-table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Value</td>
+          <td>Parent</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prop of filteredContent;" fragment="{{prop.name}}" tableCell ngdFragment>
+          <td>
+            <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a><span>{{ prop.name }}</span>
+          </td>
+          <td ngdSassValue>{{ prop.value }}</td>
+          <td class="theme-parents-cell">
+            <a routerLink="/docs/themes/{{prop.parents[0]?.theme}}" fragment="{{prop.parents[0]?.prop}}" tableCell ngdFragment>
+              {{ prop.parents[0]?.prop }}
+              <span *ngIf="prop.parents[0] && prop.parents[0].theme !== themeName">({{prop.parents[0]?.theme}})</span>
+            </a>
+            <div *ngIf="prop.parents.length > 1" class="theme-prop-parents">
+              <span *ngFor="let parent of prop.parents | slice:1">
+                <i class="inheritance-icon ion-arrow-left-c"></i>
+                <a routerLink="/docs/themes/{{parent.theme}}" fragment="{{parent.prop}}" remoteLink ngdFragment>
+                  {{ parent.prop }}
+                  <span *ngIf="parent.theme !== themeName">({{parent.theme}})</span>
+                  </a>
+               </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 `,
 })
 export class NgdThemeComponent implements OnInit, OnDestroy {
-
+//TODO: remove warning
   themeTitle: string;
   filteredContent: any;
   themeContent: any;

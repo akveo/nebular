@@ -12,25 +12,27 @@ import { DocsService } from '../../../docs.service';
   template: `
     <div class="block-container" *ngFor="let style of classStyles">
       <p class="block-title"><a [routerLink]="" fragment="{{className}}Styles" ngdFragment></a>Component themable styles</p>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td *ngFor="let themedValue of style.styles[0].themedValues">{{themedValue.theme}}</td>
-            <td>Description</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of style.styles">
-            <td>{{ item.name}}</td>
-            <td *ngFor="let themedValue of item.themedValues" ngdSassValue>{{ themedValue.value }}</td>
-            <td>
-              <p *ngIf="item.shortDescription" ngdDescription>{{ item.shortDescription}}</p>
-              <p *ngIf="item.description" ngdDescription>{{ item.description }}</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td *ngFor="let themedValue of style.styles[0].themedValues">{{themedValue.theme}}</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of style.styles">
+              <td>{{ item.name}}</td>
+              <td *ngFor="let themedValue of item.themedValues" ngdSassValue>{{ themedValue.value }}</td>
+              <td>
+                <p *ngIf="item.shortDescription" ngdDescription>{{ item.shortDescription}}</p>
+                <p *ngIf="item.description" ngdDescription>{{ item.description }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
     </div>
 `,
 })

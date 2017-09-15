@@ -55,6 +55,7 @@ $nb-themes: nb-register-theme((
   theme-header-height: 160px,//used by app.component processFragment(), custom variable
   theme-active-row-bg: #e5f2ff,//custom variable
 
+  table-min-width: 768px,//custom varible
   code-snippets-bg: #f5f6fc,//custom variable
   table-row-odd-bg: code-snippets-bg,//custom variable
 
