@@ -188,7 +188,7 @@
   }
 
   a {
-    color: nb-theme(link-color-active);
+    color: nb-theme(link-color);
 
     @include hover-focus {
       color: nb-theme(link-color-hover);

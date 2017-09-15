@@ -65,11 +65,9 @@ $theme: (
   border-color: color-gray,
   shadow: 0 2px 12px 0 #dfe3eb,
 
-  // TODO: rename to link-color
-  link-color-active: #00f9a6,
-
+  link-color: #00f9a6,
   link-color-hover: #14ffbe,
-  link-color-visited: link-color-active,
+  link-color-visited: link-color,
 
   scrollbar-fg: #dadada,
   scrollbar-bg: #f2f2f2,
