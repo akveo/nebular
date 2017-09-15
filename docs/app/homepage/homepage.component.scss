@@ -568,7 +568,25 @@ $mobile: 767px;
         padding-right: 60px;
       }
     }
+    @keyframes blink {
+      0% {
+        opacity: 0.8;
+      }
+      20% {
+        opacity: 1;
+      }
+      40% {
+        opacity: 0.6;
+      }
+      60% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0.8;
+      }
+    }
     .auth-module-img {
+      animation: blink 8s ease-in 0s infinite;
       width: 68vw;
       max-width: 1200px;
       position: absolute;
