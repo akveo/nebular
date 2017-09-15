@@ -92,17 +92,6 @@ export const STRUCTURE = [
           },
         ],
       },
-      {
-        type: 'page',
-        name: 'Layouts',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'concept-layouts.md',
-          },
-        ],
-      },
     ],
   },
   {
@@ -416,6 +405,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Email & Password Provider',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbEmailPassAuthProvider',
+          },
+        ],
+      }
     ],
   },
 ];
