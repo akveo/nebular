@@ -49,9 +49,6 @@
       }
     }
 
-    .table-container {
-      overflow-x: auto;
-    }
     ngd-methods-block {
       .method-signature ~ .method-description {
         margin-top: 1rem;
@@ -261,6 +258,9 @@
           width: 100%;
           padding-right: 1rem;
         }
+      }
+      .table-container {
+        overflow-x: auto;
       }
     }
   }

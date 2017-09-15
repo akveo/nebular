@@ -39,7 +39,8 @@ import { Subscription } from 'rxjs/Subscription';
       <tbody>
         <tr *ngFor="let prop of filteredContent;" fragment="{{prop.name}}" tableCell ngdFragment>
           <td>
-            <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a><span>{{ prop.name }}</span>
+            <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a>
+            <a [routerLink]="" fragment="{{prop.name}}">{{ prop.name }}</a>
           </td>
           <td ngdSassValue>{{ prop.value }}</td>
           <td class="theme-parents-cell">
