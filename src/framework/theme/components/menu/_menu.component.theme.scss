@@ -14,6 +14,7 @@
 
     ul.menu-items {
       margin: 0;
+      padding: 0;
     }
 
     .menu-group {
@@ -55,7 +56,7 @@
       }
     }
 
-    .menu-items.expanded {
+    .menu-item > .menu-items {
       background-color: nb-theme(menu-submenu-bg);
     }
 
@@ -64,6 +65,13 @@
       background: nb-theme(menu-submenu-bg);
       color: nb-theme(menu-submenu-fg);
       padding: nb-theme(menu-submenu-item-container-padding);
+
+      &:first-child {
+        margin-top: nb-theme(menu-submenu-padding);
+      }
+      &:last-child {
+        margin-bottom: nb-theme(menu-submenu-padding);
+      }
 
       a {
         border: nb-theme(menu-submenu-item-border-width) solid nb-theme(menu-submenu-bg);

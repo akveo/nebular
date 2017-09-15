@@ -71,6 +71,7 @@ export class NbMenuItemComponent {
  * menu-submenu-item-border-radius:
  * menu-submenu-item-padding:
  * menu-submenu-item-container-padding:
+ * menu-submenu-padding:
  * menu-group-font-weight:
  * menu-group-font-size:
  * menu-group-fg:
