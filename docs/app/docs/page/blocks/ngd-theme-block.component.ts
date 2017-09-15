@@ -18,14 +18,14 @@ import { Subscription } from 'rxjs/Subscription';
         placeholder="Search for..."
         (keyup.enter)="filterThemeContent(searchInput.value)">
       <span class="input-group-btn">
-        <button 
+        <button
           class="btn btn-success"
           (click)="filterThemeContent(searchInput.value)">
           Search
         </button>
       </span>
     </div>
-    <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing filtered</div>
+    <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing found</div>
   </div>
   <div class="table-container">  
     <table class="table-striped table theme-table">
@@ -102,13 +102,8 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
       const filterResult = this.themeContent.filter(item => {
         return new RegExp(`${term}`, 'gi').test(`${item.name} ${item.value}`);
       });
-      if (filterResult.length > 0) {
-        this.filteredContent = filterResult;
-        this.isWarning = false;
-      } else {
-        this.filteredContent = this.themeContent;
-        this.isWarning = true;
-      }
+      this.filteredContent = filterResult;
+      this.isWarning = !(filterResult.length > 0);
       this.renderer.setProperty(document.body, 'scrollTop', 0);
     }
   }
