@@ -195,6 +195,21 @@
       }
     }
 
+    ngd-styles-block {
+      .table {
+        td {
+          padding-left: 1rem;
+        }
+        tbody tr {
+          &:nth-of-type(odd) {
+            background-color: nb-theme(table-row-odd-bg);
+          }
+          td ~ td {
+            border-left: 1px solid #ebeef2;
+          }
+        }
+      }
+    }
 
     .color-swatch {
       display: inline-block;
