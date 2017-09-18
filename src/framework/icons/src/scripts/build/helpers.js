@@ -41,7 +41,8 @@ function fixCss() {
   const srcStylePath = path.join(srcRoot, srcCss);
 
   const file = fs.readFileSync(srcStylePath).toString();
-  const fixed = license + file
+
+  let fixed = license + file
     .replace(/icomoon/g, iconsName) // font name
     .replace(/\.(icon-)/g, '.') // prefix
     .replace(/fonts/g, '../fonts') // fonts path
@@ -49,6 +50,10 @@ function fixCss() {
     .replace(/"icon-"/g, '\'nb-\'') // class selector quotes
     .replace(/" icon-"/g, '\' nb-\'')
     .replace(/(content: )"(.*)"/g, '$1\'$2\''); // content quotes
+
+  const iconRegex = /\.nb-.+::before/g;
+  const allIcons = fixed.match(iconRegex).join(',\n');
+  fixed = fixed.replace(/\[class\^='nb-'\], \[class\*=' nb-'\]/, allIcons);
 
   if (!fs.existsSync(cssRoot)) {
     fs.mkdirSync(cssRoot);
