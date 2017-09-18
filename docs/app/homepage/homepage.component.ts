@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
 import { Subject } from 'rxjs/Rx';
+import { NbSpinnerService } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-homepage',
@@ -92,15 +93,26 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   highlightMenu$ = new Subject();
 
   constructor(private renderer: Renderer2,
+              private spinnerService: NbSpinnerService,
               private titleService: Title) {
     this.renderer.setProperty(document.body, 'scrollTop', 0);
 
     this.highlightMenu();
+    this.spinnerService.registerLoader(Promise.all([
+      this.loadImage('assets/images/hero-img-static.png'),
+      this.loadImage('assets/images/hero-img/1-2.png'),
+      this.loadImage('assets/images/hero-img/3-4.png'),
+      this.loadImage('assets/images/hero-img/5-6.png'),
+      this.loadImage('assets/images/hero-img/7.png'),
+      this.loadImage('assets/images/hero-img/8.png'),
+      this.loadImage('assets/images/hero-img/9.png'),
+    ]).then(() => {
+      setTimeout(() => this.animated = true, 500);
+    }));
   }
 
   ngOnInit() {
     this.titleService.setTitle('Nebular - full featured front-end framework based on Angular.');
-    setTimeout(() => this.animated = true, 500);
   }
 
   ngAfterViewInit() {
@@ -130,7 +142,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
   private highlightMenu() {
     this.highlightMenu$
-      .debounceTime(100)
+      .debounceTime(30)
       .subscribe(() => {
         let closestSection = this.sections.first.nativeElement;
         this.sections
@@ -166,5 +178,15 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
     const documentHeight = Math.max(body.scrollHeight, body.offsetHeight,
       html.clientHeight, html.scrollHeight, html.offsetHeight);
     return documentHeight / (NgdHomepageComponent.BG_IMAGE_HEIGHT - html.clientHeight);
+  }
+
+  private loadImage(src): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.src = src;
+      img.onload = function () {
+        resolve(src);
+      };
+    });
   }
 }

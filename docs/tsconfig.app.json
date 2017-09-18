@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
@@ -15,8 +16,8 @@
     "baseUrl": ".",
     "types": [],
     "paths": {
-      "@nebular/theme": ["./../src/framework/theme"],
-      "@nebular/theme/*": ["./../src/framework/theme/*"]
+      "@nebular/theme": ["./framework/theme"],
+      "@nebular/theme/*": ["./framework/theme/*"]
     }
   },
   "exclude": [

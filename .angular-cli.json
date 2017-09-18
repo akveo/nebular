@@ -68,7 +68,7 @@
     {
       "name": "docs",
       "root": "docs",
-      "outDir": "docs-dist",
+      "outDir": "docs/dist",
       "assets": [
         "assets",
         "favicon.ico",

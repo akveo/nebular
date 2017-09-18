@@ -10,6 +10,7 @@
   "repository": "git+https://github.com/akveo/nebular.git",
   "scripts": {
     "ng": "ng",
+    "ngh": "ngh",
     "start": "ng serve",
     "start:hmr": "ng serve --hmr",
     "start:aot": "ng serve --aot",
@@ -17,7 +18,8 @@
     "docs:serve": "npm run docs:parse && npm run docs:start",
     "docs:parse": "gulp docs",
     "docs:start": "ng serve --app docs",
-    "docs:build": "npm run docs:parse && npm run build:prod:aot -- --app docs",
+    "docs:build": "npm run docs:parse && rimraf docs/dist && npm run build:prod:aot -- --app docs --base-href https://akveo.github.io/nebular/",
+    "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
     "build": "rimraf dist && ng build",
     "build:prod": "npm run build -- --prod",
     "build:prod:aot": "npm run build:prod -- --aot",
