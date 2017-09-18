@@ -56,22 +56,15 @@
 
   ul {
     margin: 0;
-    padding: 0;
+    padding: 0.5rem 0;
     list-style: none;
 
     li {
       display: block;
       white-space: nowrap;
       > a {
-        padding: 0.25rem 3rem;
+        padding: 0.375rem 3rem;
         display: block;
-      }
-
-      &:nth-child(2) > a {
-        padding-top: 0.75rem;
-      }
-      &:last-child > a {
-        padding-bottom: 0.75rem;
       }
 
       &.arrow {
@@ -89,9 +82,9 @@
           height: 0;
           top: -9px;
           left: 0;
-          margin-left: -10px;
+          margin-left: -12px;
           display: block;
-          border: 10px solid transparent;
+          border: 12px solid transparent;
         }
       }
     }

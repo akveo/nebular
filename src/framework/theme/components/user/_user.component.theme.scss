@@ -62,14 +62,16 @@
     }
 
     .user-context-menu {
-      background-color: nb-theme(user-fg);
-      border: 1px solid nb-theme(user-menu-border);
+      border: 2px solid nb-theme(user-menu-border);
+      background: nb-theme(user-menu-bg);
 
       ul > li > a {
-        color: nb-theme(link-color);
+        color: nb-theme(user-menu-fg);
 
         @include hover-focus-active {
-          color: nb-theme(link-color-hover);
+          color: nb-theme(user-menu-active-fg);
+          background: nb-theme(user-menu-active-bg);
+          text-decoration: none;
         }
       }
 
@@ -77,7 +79,7 @@
         border-bottom: 11px solid nb-theme(user-menu-border) !important;
 
         &::after {
-          border-bottom: 11px solid nb-theme(user-fg) !important;
+          border-bottom: 11px solid nb-theme(user-menu-bg) !important;
         }
       }
     }
