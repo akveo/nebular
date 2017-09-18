@@ -2954,6 +2954,22 @@
               "description": ""
             },
             {
+              "name": "user-menu-fg",
+              "description": ""
+            },
+            {
+              "name": "user-menu-bg",
+              "description": ""
+            },
+            {
+              "name": "user-menu-active-fg",
+              "description": ""
+            },
+            {
+              "name": "user-menu-active-bg",
+              "description": ""
+            },
+            {
               "name": "user-menu-border",
               "description": ""
             }
@@ -4129,6 +4145,10 @@
             },
             {
               "theme": "default",
+              "prop": "user-menu-bg"
+            },
+            {
+              "theme": "default",
               "prop": "actions-bg"
             },
             {
@@ -4298,6 +4318,10 @@
             },
             {
               "theme": "default",
+              "prop": "user-menu-fg"
+            },
+            {
+              "theme": "default",
               "prop": "search-text"
             },
             {
@@ -4404,10 +4428,6 @@
             {
               "theme": "default",
               "prop": "route-tabs-separator"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-border"
             },
             {
               "theme": "default",
@@ -4550,6 +4570,14 @@
             {
               "theme": "default",
               "prop": "route-tabs-selected"
+            },
+            {
+              "theme": "default",
+              "prop": "user-menu-active-bg"
+            },
+            {
+              "theme": "default",
+              "prop": "user-menu-border"
             },
             {
               "theme": "default",
@@ -6670,13 +6698,61 @@
             }
           ]
         },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#ebeef2",
+        "user-menu-fg": {
+          "name": "user-menu-fg",
+          "value": "#2a2a2a",
           "parents": [
             {
               "theme": "default",
-              "prop": "separator"
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-bg": {
+          "name": "user-menu-bg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-active-fg": {
+          "name": "user-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "user-menu-active-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "user-menu-active-fg"
+            }
+          ]
+        },
+        "user-menu-active-bg": {
+          "name": "user-menu-active-bg",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-border": {
+          "name": "user-menu-border",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -7347,6 +7423,21 @@
             {
               "theme": "cosmic",
               "prop": "btn-disabled-opacity"
+            }
+          ]
+        },
+        "btn-cursor": {
+          "name": "btn-cursor",
+          "value": "default",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "btn-cursor"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "btn-cursor"
             }
           ]
         },
@@ -8892,6 +8983,10 @@
             },
             {
               "theme": "light",
+              "prop": "user-menu-bg"
+            },
+            {
+              "theme": "light",
               "prop": "actions-bg"
             },
             {
@@ -9062,6 +9157,10 @@
             },
             {
               "theme": "light",
+              "prop": "user-menu-fg"
+            },
+            {
+              "theme": "light",
               "prop": "search-text"
             },
             {
@@ -9163,10 +9262,6 @@
             {
               "theme": "light",
               "prop": "route-tabs-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "user-menu-border"
             },
             {
               "theme": "light",
@@ -9298,6 +9393,14 @@
             {
               "theme": "light",
               "prop": "route-tabs-selected"
+            },
+            {
+              "theme": "light",
+              "prop": "user-menu-active-bg"
+            },
+            {
+              "theme": "light",
+              "prop": "user-menu-border"
             },
             {
               "theme": "light",
@@ -11521,17 +11624,73 @@
           ],
           "childs": []
         },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#ebeef2",
+        "user-menu-fg": {
+          "name": "user-menu-fg",
+          "value": "#2a2a2a",
           "parents": [
             {
               "theme": "light",
-              "prop": "separator"
+              "prop": "color-fg-heading"
             },
             {
               "theme": "default",
-              "prop": "separator"
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-bg": {
+          "name": "user-menu-bg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-bg"
+            },
+            {
+              "theme": "default",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-active-fg": {
+          "name": "user-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "user-menu-active-fg"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-active-bg": {
+          "name": "user-menu-active-bg",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-success"
+            },
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-border": {
+          "name": "user-menu-border",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "light",
+              "prop": "color-success"
+            },
+            {
+              "theme": "default",
+              "prop": "color-success"
             }
           ],
           "childs": []
@@ -12314,6 +12473,17 @@
             {
               "theme": "default",
               "prop": "btn-disabled-opacity"
+            }
+          ],
+          "childs": []
+        },
+        "btn-cursor": {
+          "name": "btn-cursor",
+          "value": "default",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "btn-cursor"
             }
           ],
           "childs": []
@@ -13902,6 +14072,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "user-menu-bg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "actions-bg"
             },
             {
@@ -14055,6 +14229,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "user-menu-fg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "search-text"
             },
             {
@@ -14153,10 +14331,6 @@
             {
               "theme": "cosmic",
               "prop": "route-tabs-separator"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-border"
             },
             {
               "theme": "cosmic",
@@ -14263,6 +14437,14 @@
             {
               "theme": "cosmic",
               "prop": "card-header-primary-bg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "user-menu-active-bg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "user-menu-border"
             },
             {
               "theme": "cosmic",
@@ -16368,13 +16550,57 @@
           ],
           "childs": []
         },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#342e73",
+        "user-menu-fg": {
+          "name": "user-menu-fg",
+          "value": "#ffffff",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "separator"
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-bg": {
+          "name": "user-menu-bg",
+          "value": "#3d3780",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-active-fg": {
+          "name": "user-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "user-menu-active-fg"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-active-bg": {
+          "name": "user-menu-active-bg",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "user-menu-border": {
+          "name": "user-menu-border",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
             }
           ],
           "childs": []
@@ -17073,6 +17299,17 @@
             {
               "theme": "default",
               "prop": "btn-disabled-opacity"
+            }
+          ],
+          "childs": []
+        },
+        "btn-cursor": {
+          "name": "btn-cursor",
+          "value": "default",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "btn-cursor"
             }
           ],
           "childs": []
