@@ -55,6 +55,10 @@ export class NbUserMenuItem {
  * user-size-medium:
  * user-size-large:
  * user-size-xlarge:
+ * user-menu-fg:
+ * user-menu-bg:
+ * user-menu-active-fg:
+ * user-menu-active-bg:
  * user-menu-border:
  */
 @Component({

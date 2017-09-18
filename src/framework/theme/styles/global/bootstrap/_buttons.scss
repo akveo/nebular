@@ -21,7 +21,14 @@
     line-height: nb-theme(btn-line-height);
     border: 2px solid transparent;
     transition: color ease-out 0.1s, background-color ease-out 0.1s, border-color ease-out 0.1s;
+    cursor: nb-theme(btn-cursor);
 
+    &:focus, .focus,
+    &:hover, .hover,
+    &:active, .active {
+      color: nb-theme(btn-fg);
+      cursor: nb-theme(btn-cursor);
+    }
     @include btn-md();
   }
 
