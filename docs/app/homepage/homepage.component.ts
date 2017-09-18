@@ -13,6 +13,7 @@ import { Title } from '@angular/platform-browser';
 
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'ngd-homepage',
@@ -88,10 +89,13 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   bgTop = '';
   animated: boolean = false;
   currentSectionId: string = 'home';
+  highlightMenu$ = new Subject();
 
   constructor(private renderer: Renderer2,
               private titleService: Title) {
     this.renderer.setProperty(document.body, 'scrollTop', 0);
+
+    this.highlightMenu();
   }
 
   ngOnInit() {
@@ -101,13 +105,13 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.createImageComparison();
-    setTimeout(() => this.highlightMenu());
+    setTimeout(() => this.highlightMenu$.next(0));
   }
 
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.highlightMenu();
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event) {
     this.calculateBgTopOffcet();
+    this.highlightMenu$.next(1);
   }
 
   private createImageComparison(): any {
@@ -125,23 +129,27 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   }
 
   private highlightMenu() {
-    let closestSection = this.sections.first.nativeElement;
-    this.sections
-      .map(section => section.nativeElement)
-      .forEach((section) => {
-        this.renderer.removeClass(section, 'current');
-        if (Math.abs(section.getBoundingClientRect().top) < Math.abs(closestSection.getBoundingClientRect().top)) {
-          closestSection = section;
-        }
-      });
+    this.highlightMenu$
+      .debounceTime(100)
+      .subscribe(() => {
+        let closestSection = this.sections.first.nativeElement;
+        this.sections
+          .map(section => section.nativeElement)
+          .forEach((section) => {
+            this.renderer.removeClass(section, 'current');
+            if (Math.abs(section.getBoundingClientRect().top) < Math.abs(closestSection.getBoundingClientRect().top)) {
+              closestSection = section;
+            }
+          });
 
-    this.renderer.addClass(closestSection, 'current');
-    this.leftMenu = this.leftMenu
-      .map((item: any) => {
-        item.active = item.hash === closestSection.id;
-        return item;
+        this.renderer.addClass(closestSection, 'current');
+        this.leftMenu = this.leftMenu
+          .map((item: any) => {
+            item.active = item.hash === closestSection.id;
+            return item;
+          });
+        this.currentSectionId = closestSection.id;
       });
-    this.currentSectionId = closestSection.id;
   }
 
   private calculateBgTopOffcet() {

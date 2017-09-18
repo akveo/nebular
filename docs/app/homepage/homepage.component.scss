@@ -174,7 +174,7 @@ $mobile: 767px;
     align-items: center;
     opacity: 0.1;
     transition: opacity 0.3s ease-in-out;
-
+    will-change: opacity;
     .txt p {
       color: nb-theme(landing-fg-light);
       a {
@@ -361,6 +361,7 @@ $mobile: 767px;
         0 2px 25px 0 transparentize(nb-theme(landing-highlight), 0.4) inset;
       }
       border-radius: 12px;
+      margin-right: 2rem;
     }
     .bigger {
       margin: 0 0 30px;
@@ -877,6 +878,12 @@ $mobile: 767px;
     }
   }
 
+  @media (max-width: 1190px) {
+    .hero .btn-hero {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
   @media (max-width: $tablet) {
     h1 {
       font-size: 80px;
@@ -891,6 +898,10 @@ $mobile: 767px;
       margin-bottom: 40px;
     }
     .hero {
+      .btn-hero {
+        padding-left: 70px;
+        padding-right: 70px;
+      }
       margin-top: 180px;
       display: block;
       .bigger {
