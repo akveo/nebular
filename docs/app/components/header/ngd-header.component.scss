@@ -189,6 +189,10 @@
   }
 
   @media screen and (max-width: 991px) {
+
+    &.homepage-header {
+      margin: auto;
+    }
     .menu {
       display: none;
     }

@@ -1022,6 +1022,15 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "autoCollapse",
+          "shortDescription": "Collapse all opened submenus on the toggle event\nDefault value is \"false\""
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
           "name": "inverse",
           "shortDescription": "Makes colors inverse based on current theme"
         }
@@ -1330,6 +1339,10 @@
             },
             {
               "name": "menu-group-fg",
+              "description": ""
+            },
+            {
+              "name": "menu-group-padding",
               "description": ""
             },
             {
@@ -3039,7 +3052,18 @@
             "[]}"
           ],
           "isStatic": false,
-          "shortDescription": "Returns a list of configured breakpoins for the theme"
+          "shortDescription": "Returns a list of configured breakpoints for the theme"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "getBreakpointsMap",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns a map of configured breakpoints for the theme"
         },
         {
           "examples": [],
@@ -3765,6 +3789,21 @@
           "parents": [],
           "childs": [
             {
+              "theme": "light",
+              "prop": "font-size-xlg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "font-size-xlg"
+            }
+          ]
+        },
+        "font-size-lg": {
+          "name": "font-size-lg",
+          "value": "1.125rem",
+          "parents": [],
+          "childs": [
+            {
               "theme": "default",
               "prop": "card-header-font-size"
             },
@@ -3788,21 +3827,6 @@
               "theme": "default",
               "prop": "modal-header-font-size"
             },
-            {
-              "theme": "light",
-              "prop": "font-size-xlg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "font-size-xlg"
-            }
-          ]
-        },
-        "font-size-lg": {
-          "name": "font-size-lg",
-          "value": "1.125rem",
-          "parents": [],
-          "childs": [
             {
               "theme": "light",
               "prop": "font-size-lg"
@@ -3912,7 +3936,7 @@
         },
         "radius": {
           "name": "radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [],
           "childs": [
             {
@@ -3921,7 +3945,19 @@
             },
             {
               "theme": "default",
+              "prop": "menu-submenu-item-border-radius"
+            },
+            {
+              "theme": "default",
               "prop": "smart-table-border-radius"
+            },
+            {
+              "theme": "default",
+              "prop": "btn-border-radius"
+            },
+            {
+              "theme": "default",
+              "prop": "form-control-border-radius"
             },
             {
               "theme": "default",
@@ -3929,10 +3965,6 @@
             },
             {
               "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "cosmic",
               "prop": "radius"
             }
           ]
@@ -4335,7 +4367,7 @@
         },
         "color-fg-highlight": {
           "name": "color-fg-highlight",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [],
           "childs": [
             {
@@ -4802,9 +4834,9 @@
             }
           ]
         },
-        "link-color-active": {
-          "name": "link-color-active",
-          "value": "#00f9a6",
+        "link-color": {
+          "name": "link-color",
+          "value": "#3dcc6d",
           "parents": [],
           "childs": [
             {
@@ -4813,17 +4845,17 @@
             },
             {
               "theme": "light",
-              "prop": "link-color-active"
+              "prop": "link-color"
             },
             {
               "theme": "cosmic",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ]
         },
         "link-color-hover": {
           "name": "link-color-hover",
-          "value": "#14ffbe",
+          "value": "#2ee56b",
           "parents": [],
           "childs": [
             {
@@ -4838,11 +4870,11 @@
         },
         "link-color-visited": {
           "name": "link-color-visited",
-          "value": "#00f9a6",
+          "value": "#3dcc6d",
           "parents": [
             {
               "theme": "default",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ],
           "childs": []
@@ -5122,7 +5154,7 @@
         },
         "card-border-radius": {
           "name": "card-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -5170,11 +5202,11 @@
         },
         "card-header-font-size": {
           "name": "card-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -5548,6 +5580,10 @@
           "childs": [
             {
               "theme": "default",
+              "prop": "layout-window-mode-bg"
+            },
+            {
+              "theme": "default",
               "prop": "search-bg"
             },
             {
@@ -5588,7 +5624,7 @@
         },
         "layout-window-mode-min-width": {
           "name": "layout-window-mode-min-width",
-          "value": "320px",
+          "value": "300px",
           "parents": [],
           "childs": [
             {
@@ -5618,18 +5654,14 @@
         },
         "layout-window-mode-bg": {
           "name": "layout-window-mode-bg",
-          "value": "linear-gradient(to right, #171749, #413789)",
-          "parents": [],
-          "childs": [
+          "value": "#ebeff5",
+          "parents": [
             {
-              "theme": "light",
-              "prop": "layout-window-mode-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "layout-window-mode-bg"
+              "theme": "default",
+              "prop": "layout-bg"
             }
-          ]
+          ],
+          "childs": []
         },
         "layout-window-mode-padding-top": {
           "name": "layout-window-mode-padding-top",
@@ -5953,7 +5985,7 @@
         },
         "menu-submenu-active-border-color": {
           "name": "menu-submenu-active-border-color",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -6021,17 +6053,13 @@
         "menu-submenu-item-border-radius": {
           "name": "menu-submenu-item-border-radius",
           "value": "0.375rem",
-          "parents": [],
-          "childs": [
+          "parents": [
             {
-              "theme": "light",
-              "prop": "menu-submenu-item-border-radius"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "menu-submenu-item-border-radius"
+              "theme": "default",
+              "prop": "radius"
             }
-          ]
+          ],
+          "childs": []
         },
         "menu-submenu-item-padding": {
           "name": "menu-submenu-item-padding",
@@ -6053,12 +6081,18 @@
         },
         "menu-submenu-padding": {
           "name": "menu-submenu-padding",
-          "value": [
-            "0.5rem",
-            0
-          ],
+          "value": "0.5rem",
           "parents": [],
-          "childs": []
+          "childs": [
+            {
+              "theme": "light",
+              "prop": "menu-submenu-padding"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "menu-submenu-padding"
+            }
+          ]
         },
         "menu-group-font-weight": {
           "name": "menu-group-font-weight",
@@ -6097,12 +6131,21 @@
           ],
           "childs": []
         },
+        "menu-group-padding": {
+          "name": "menu-group-padding",
+          "value": [
+            "1rem",
+            "1.25rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
-            "0.25rem",
+            "0.675rem",
             "1rem",
-            "0.25rem",
+            "0.675rem",
             "0.75rem"
           ],
           "parents": [],
@@ -6184,11 +6227,11 @@
         },
         "tabs-font-size": {
           "name": "tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -6373,11 +6416,11 @@
         },
         "route-tabs-font-size": {
           "name": "route-tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -7052,7 +7095,7 @@
         },
         "smart-table-border-radius": {
           "name": "smart-table-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -7435,11 +7478,11 @@
         },
         "btn-font-size-lg": {
           "name": "btn-font-size-lg",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -7581,22 +7624,18 @@
         },
         "btn-border-radius": {
           "name": "btn-border-radius",
-          "value": "0.75rem",
-          "parents": [],
-          "childs": [
+          "value": "0.375rem",
+          "parents": [
             {
-              "theme": "light",
-              "prop": "btn-border-radius"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "btn-border-radius"
+              "theme": "default",
+              "prop": "radius"
             }
-          ]
+          ],
+          "childs": []
         },
         "btn-rectangle-border-radius": {
           "name": "btn-rectangle-border-radius",
-          "value": "4px",
+          "value": "0.25rem",
           "parents": [],
           "childs": [
             {
@@ -7611,7 +7650,7 @@
         },
         "btn-semi-round-border-radius": {
           "name": "btn-semi-round-border-radius",
-          "value": "12px",
+          "value": "0.75rem",
           "parents": [],
           "childs": [
             {
@@ -7626,7 +7665,7 @@
         },
         "btn-round-border-radius": {
           "name": "btn-round-border-radius",
-          "value": "24px",
+          "value": "1.5rem",
           "parents": [],
           "childs": [
             {
@@ -7830,17 +7869,13 @@
         "form-control-border-radius": {
           "name": "form-control-border-radius",
           "value": "0.375rem",
-          "parents": [],
-          "childs": [
+          "parents": [
             {
-              "theme": "light",
-              "prop": "form-control-border-radius"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "form-control-border-radius"
+              "theme": "default",
+              "prop": "radius"
             }
-          ]
+          ],
+          "childs": []
         },
         "form-control-border-color": {
           "name": "form-control-border-color",
@@ -7975,11 +8010,11 @@
         },
         "form-control-lg-font-size": {
           "name": "form-control-lg-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -8212,7 +8247,7 @@
         },
         "modal-border-radius": {
           "name": "modal-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -8260,11 +8295,11 @@
         },
         "modal-header-font-size": {
           "name": "modal-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -8544,6 +8579,17 @@
               "prop": "font-size-xlg"
             }
           ],
+          "childs": []
+        },
+        "font-size-lg": {
+          "name": "font-size-lg",
+          "value": "1.125rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "font-size-lg"
+            }
+          ],
           "childs": [
             {
               "theme": "light",
@@ -8570,17 +8616,6 @@
               "prop": "modal-header-font-size"
             }
           ]
-        },
-        "font-size-lg": {
-          "name": "font-size-lg",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
         },
         "font-size": {
           "name": "font-size",
@@ -8671,7 +8706,7 @@
         },
         "radius": {
           "name": "radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "default",
@@ -8685,7 +8720,19 @@
             },
             {
               "theme": "light",
+              "prop": "menu-submenu-item-border-radius"
+            },
+            {
+              "theme": "light",
               "prop": "smart-table-border-radius"
+            },
+            {
+              "theme": "light",
+              "prop": "btn-border-radius"
+            },
+            {
+              "theme": "light",
+              "prop": "form-control-border-radius"
             },
             {
               "theme": "light",
@@ -9077,7 +9124,7 @@
         },
         "color-fg-highlight": {
           "name": "color-fg-highlight",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "default",
@@ -9502,13 +9549,13 @@
             }
           ]
         },
-        "link-color-active": {
-          "name": "link-color-active",
-          "value": "#00f9a6",
+        "link-color": {
+          "name": "link-color",
+          "value": "#3dcc6d",
           "parents": [
             {
               "theme": "default",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ],
           "childs": [
@@ -9520,7 +9567,7 @@
         },
         "link-color-hover": {
           "name": "link-color-hover",
-          "value": "#14ffbe",
+          "value": "#2ee56b",
           "parents": [
             {
               "theme": "default",
@@ -9531,15 +9578,15 @@
         },
         "link-color-visited": {
           "name": "link-color-visited",
-          "value": "#00f9a6",
+          "value": "#3dcc6d",
           "parents": [
             {
               "theme": "light",
-              "prop": "link-color-active"
+              "prop": "link-color"
             },
             {
               "theme": "default",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ],
           "childs": []
@@ -9807,7 +9854,7 @@
         },
         "card-border-radius": {
           "name": "card-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "light",
@@ -9871,15 +9918,15 @@
         },
         "card-header-font-size": {
           "name": "card-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -10331,6 +10378,10 @@
           "childs": [
             {
               "theme": "light",
+              "prop": "layout-window-mode-bg"
+            },
+            {
+              "theme": "light",
               "prop": "search-bg"
             },
             {
@@ -10363,7 +10414,7 @@
         },
         "layout-window-mode-min-width": {
           "name": "layout-window-mode-min-width",
-          "value": "320px",
+          "value": "300px",
           "parents": [
             {
               "theme": "default",
@@ -10385,11 +10436,11 @@
         },
         "layout-window-mode-bg": {
           "name": "layout-window-mode-bg",
-          "value": "linear-gradient(to right, #171749, #413789)",
+          "value": "#f6f7fc",
           "parents": [
             {
-              "theme": "default",
-              "prop": "layout-window-mode-bg"
+              "theme": "light",
+              "prop": "layout-bg"
             }
           ],
           "childs": []
@@ -10742,7 +10793,7 @@
         },
         "menu-submenu-active-border-color": {
           "name": "menu-submenu-active-border-color",
-          "value": "#41d974",
+          "value": "#40dc7e",
           "parents": [
             {
               "theme": "light",
@@ -10820,8 +10871,12 @@
           "value": "0.375rem",
           "parents": [
             {
+              "theme": "light",
+              "prop": "radius"
+            },
+            {
               "theme": "default",
-              "prop": "menu-submenu-item-border-radius"
+              "prop": "radius"
             }
           ],
           "childs": []
@@ -10846,11 +10901,13 @@
         },
         "menu-submenu-padding": {
           "name": "menu-submenu-padding",
-          "value": [
-            "0.5rem",
-            0
+          "value": "0.5rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "menu-submenu-padding"
+            }
           ],
-          "parents": [],
           "childs": []
         },
         "menu-group-font-weight": {
@@ -10890,12 +10947,21 @@
           ],
           "childs": []
         },
+        "menu-group-padding": {
+          "name": "menu-group-padding",
+          "value": [
+            "1rem",
+            "1.25rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
-            "0.25rem",
+            "0.675rem",
             "1rem",
-            "0.25rem",
+            "0.675rem",
             "0.75rem"
           ],
           "parents": [],
@@ -10985,15 +11051,15 @@
         },
         "tabs-font-size": {
           "name": "tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -11189,15 +11255,15 @@
         },
         "route-tabs-font-size": {
           "name": "route-tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -11952,7 +12018,7 @@
         },
         "smart-table-border-radius": {
           "name": "smart-table-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "light",
@@ -12384,15 +12450,15 @@
         },
         "btn-font-size-lg": {
           "name": "btn-font-size-lg",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -12498,18 +12564,22 @@
         },
         "btn-border-radius": {
           "name": "btn-border-radius",
-          "value": "0.75rem",
+          "value": "0.375rem",
           "parents": [
             {
+              "theme": "light",
+              "prop": "radius"
+            },
+            {
               "theme": "default",
-              "prop": "btn-border-radius"
+              "prop": "radius"
             }
           ],
           "childs": []
         },
         "btn-rectangle-border-radius": {
           "name": "btn-rectangle-border-radius",
-          "value": "4px",
+          "value": "0.25rem",
           "parents": [
             {
               "theme": "default",
@@ -12520,7 +12590,7 @@
         },
         "btn-semi-round-border-radius": {
           "name": "btn-semi-round-border-radius",
-          "value": "12px",
+          "value": "0.75rem",
           "parents": [
             {
               "theme": "default",
@@ -12531,7 +12601,7 @@
         },
         "btn-round-border-radius": {
           "name": "btn-round-border-radius",
-          "value": "24px",
+          "value": "1.5rem",
           "parents": [
             {
               "theme": "default",
@@ -12749,8 +12819,12 @@
           "value": "0.375rem",
           "parents": [
             {
+              "theme": "light",
+              "prop": "radius"
+            },
+            {
               "theme": "default",
-              "prop": "form-control-border-radius"
+              "prop": "radius"
             }
           ],
           "childs": []
@@ -12905,15 +12979,15 @@
         },
         "form-control-lg-font-size": {
           "name": "form-control-lg-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -13162,7 +13236,7 @@
         },
         "modal-border-radius": {
           "name": "modal-border-radius",
-          "value": "0.5rem",
+          "value": "0.375rem",
           "parents": [
             {
               "theme": "light",
@@ -13226,15 +13300,15 @@
         },
         "modal-header-font-size": {
           "name": "modal-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "light",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -13529,6 +13603,17 @@
               "prop": "font-size-xlg"
             }
           ],
+          "childs": []
+        },
+        "font-size-lg": {
+          "name": "font-size-lg",
+          "value": "1.125rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "font-size-lg"
+            }
+          ],
           "childs": [
             {
               "theme": "cosmic",
@@ -13555,17 +13640,6 @@
               "prop": "modal-header-font-size"
             }
           ]
-        },
-        "font-size-lg": {
-          "name": "font-size-lg",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
         },
         "font-size": {
           "name": "font-size",
@@ -13657,12 +13731,7 @@
         "radius": {
           "name": "radius",
           "value": "0.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
+          "parents": [],
           "childs": [
             {
               "theme": "cosmic",
@@ -13670,7 +13739,19 @@
             },
             {
               "theme": "cosmic",
+              "prop": "menu-submenu-item-border-radius"
+            },
+            {
+              "theme": "cosmic",
               "prop": "smart-table-border-radius"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "btn-border-radius"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "form-control-border-radius"
             },
             {
               "theme": "cosmic",
@@ -14067,10 +14148,6 @@
             },
             {
               "theme": "cosmic",
-              "prop": "menu-item-separator"
-            },
-            {
-              "theme": "cosmic",
               "prop": "tabs-separator"
             },
             {
@@ -14462,13 +14539,13 @@
             }
           ]
         },
-        "link-color-active": {
-          "name": "link-color-active",
-          "value": "#00f9a6",
+        "link-color": {
+          "name": "link-color",
+          "value": "#3dcc6d",
           "parents": [
             {
               "theme": "default",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ],
           "childs": [
@@ -14480,7 +14557,7 @@
         },
         "link-color-hover": {
           "name": "link-color-hover",
-          "value": "#14ffbe",
+          "value": "#2ee56b",
           "parents": [
             {
               "theme": "default",
@@ -14491,15 +14568,15 @@
         },
         "link-color-visited": {
           "name": "link-color-visited",
-          "value": "#00f9a6",
+          "value": "#3dcc6d",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "link-color-active"
+              "prop": "link-color"
             },
             {
               "theme": "default",
-              "prop": "link-color-active"
+              "prop": "link-color"
             }
           ],
           "childs": []
@@ -14740,10 +14817,6 @@
             {
               "theme": "cosmic",
               "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
             }
           ],
           "childs": []
@@ -14799,15 +14872,15 @@
         },
         "card-header-font-size": {
           "name": "card-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -15218,9 +15291,13 @@
         },
         "layout-bg": {
           "name": "layout-bg",
-          "value": "#2c2961",
+          "value": "#2f296b",
           "parents": [],
           "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "layout-window-mode-bg"
+            },
             {
               "theme": "cosmic",
               "prop": "menu-submenu-bg"
@@ -15251,7 +15328,7 @@
         },
         "layout-window-mode-min-width": {
           "name": "layout-window-mode-min-width",
-          "value": "320px",
+          "value": "300px",
           "parents": [
             {
               "theme": "default",
@@ -15273,11 +15350,11 @@
         },
         "layout-window-mode-bg": {
           "name": "layout-window-mode-bg",
-          "value": "linear-gradient(to right, #171749, #413789)",
+          "value": "#2f296b",
           "parents": [
             {
-              "theme": "default",
-              "prop": "layout-window-mode-bg"
+              "theme": "cosmic",
+              "prop": "layout-bg"
             }
           ],
           "childs": []
@@ -15561,7 +15638,7 @@
         },
         "menu-submenu-bg": {
           "name": "menu-submenu-bg",
-          "value": "#2c2961",
+          "value": "#2f296b",
           "parents": [
             {
               "theme": "cosmic",
@@ -15648,7 +15725,7 @@
         },
         "menu-submenu-hover-bg": {
           "name": "menu-submenu-hover-bg",
-          "value": "#2c2961",
+          "value": "#2f296b",
           "parents": [
             {
               "theme": "cosmic",
@@ -15674,11 +15751,11 @@
         },
         "menu-submenu-item-border-radius": {
           "name": "menu-submenu-item-border-radius",
-          "value": "0.375rem",
+          "value": "0.5rem",
           "parents": [
             {
-              "theme": "default",
-              "prop": "menu-submenu-item-border-radius"
+              "theme": "cosmic",
+              "prop": "radius"
             }
           ],
           "childs": []
@@ -15703,11 +15780,13 @@
         },
         "menu-submenu-padding": {
           "name": "menu-submenu-padding",
-          "value": [
-            "0.5rem",
-            0
+          "value": "0.5rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "menu-submenu-padding"
+            }
           ],
-          "parents": [],
           "childs": []
         },
         "menu-group-font-weight": {
@@ -15751,6 +15830,15 @@
           ],
           "childs": []
         },
+        "menu-group-padding": {
+          "name": "menu-group-padding",
+          "value": [
+            "1rem",
+            "1.25rem"
+          ],
+          "parents": [],
+          "childs": []
+        },
         "menu-item-padding": {
           "name": "menu-item-padding",
           "value": [
@@ -15764,13 +15852,8 @@
         },
         "menu-item-separator": {
           "name": "menu-item-separator",
-          "value": "#342e73",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "separator"
-            }
-          ],
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
           "childs": []
         },
         "menu-icon-font-size": {
@@ -15838,15 +15921,15 @@
         },
         "tabs-font-size": {
           "name": "tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -16035,15 +16118,15 @@
         },
         "route-tabs-font-size": {
           "name": "route-tabs-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -16741,10 +16824,6 @@
             {
               "theme": "cosmic",
               "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
             }
           ],
           "childs": []
@@ -17114,15 +17193,15 @@
         },
         "btn-font-size-lg": {
           "name": "btn-font-size-lg",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -17228,18 +17307,18 @@
         },
         "btn-border-radius": {
           "name": "btn-border-radius",
-          "value": "0.75rem",
+          "value": "0.5rem",
           "parents": [
             {
-              "theme": "default",
-              "prop": "btn-border-radius"
+              "theme": "cosmic",
+              "prop": "radius"
             }
           ],
           "childs": []
         },
         "btn-rectangle-border-radius": {
           "name": "btn-rectangle-border-radius",
-          "value": "4px",
+          "value": "0.25rem",
           "parents": [
             {
               "theme": "default",
@@ -17250,7 +17329,7 @@
         },
         "btn-semi-round-border-radius": {
           "name": "btn-semi-round-border-radius",
-          "value": "12px",
+          "value": "0.75rem",
           "parents": [
             {
               "theme": "default",
@@ -17261,7 +17340,7 @@
         },
         "btn-round-border-radius": {
           "name": "btn-round-border-radius",
-          "value": "24px",
+          "value": "1.5rem",
           "parents": [
             {
               "theme": "default",
@@ -17442,11 +17521,11 @@
         },
         "form-control-border-radius": {
           "name": "form-control-border-radius",
-          "value": "0.375rem",
+          "value": "0.5rem",
           "parents": [
             {
-              "theme": "default",
-              "prop": "form-control-border-radius"
+              "theme": "cosmic",
+              "prop": "radius"
             }
           ],
           "childs": []
@@ -17580,15 +17659,15 @@
         },
         "form-control-lg-font-size": {
           "name": "form-control-lg-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []
@@ -17814,10 +17893,6 @@
             {
               "theme": "cosmic",
               "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
             }
           ],
           "childs": []
@@ -17873,15 +17948,15 @@
         },
         "modal-header-font-size": {
           "name": "modal-header-font-size",
-          "value": "1.25rem",
+          "value": "1.125rem",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             },
             {
               "theme": "default",
-              "prop": "font-size-xlg"
+              "prop": "font-size-lg"
             }
           ],
           "childs": []

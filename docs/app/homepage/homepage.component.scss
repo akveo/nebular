@@ -732,6 +732,7 @@ $mobile: 767px;
     }
     p {
       color: white;
+      width: 50%;
     }
     a {
       font-weight: nb-theme(font-weight-bold);
@@ -973,6 +974,11 @@ $mobile: 767px;
     .section-container {
       padding: 0 50px;
     }
+    .contact-us {
+      p {
+        width: 100%;
+      }
+    }
   }
 
   @media (max-width: $mobile) {
@@ -1024,7 +1030,7 @@ $mobile: 767px;
       height: 16px;
     }
     .hero {
-      margin-top: 70px;
+      margin-top: 40px;
       display: block;
       .bigger {
         margin-top: 10px;
@@ -1109,9 +1115,16 @@ $mobile: 767px;
     }
   }
 
+  @media only screen and (max-device-height : 850px) {
+    .hero {
+      .hero-i {
+        height: auto;
+      }
+    }
+  }
+
   @media (max-width: 500px) {
     .hero {
-      margin-top: 100px;
       h1 {
         display: none;
       }
@@ -1182,6 +1195,7 @@ $mobile: 767px;
       }
     }
   }
+
 }
 
 

@@ -23,9 +23,10 @@
 
 @media screen and (max-width: 1300px) {
   /deep/ .nb-theme-default nb-layout .layout .layout-container .content nb-layout-footer nav {
+    margin-top: -100px;
     .footer-inner {
       font-size: 18px;
-      padding: 0 20px;
+      padding: 0 40px;
     }
   }
 }
