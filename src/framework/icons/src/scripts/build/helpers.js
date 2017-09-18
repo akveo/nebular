@@ -51,7 +51,7 @@ function fixCss() {
     .replace(/" icon-"/g, '\' nb-\'')
     .replace(/(content: )"(.*)"/g, '$1\'$2\''); // content quotes
 
-  const iconRegex = /\.nb-.+::before/g;
+  const iconRegex = /\.nb-.+(?=::before)/g;
   const allIcons = fixed.match(iconRegex).join(',\n');
   fixed = fixed.replace(/\[class\^='nb-'\], \[class\*=' nb-'\]/, allIcons);
 
