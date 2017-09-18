@@ -7,8 +7,11 @@
 @mixin nb-b-icon-buttons-theme() {
 
   .btn-icon {
-    font-size: 1.5rem;
-    padding: 0.25rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    padding: 0.5rem 1rem;
 
     &:focus,
     &.focus {
