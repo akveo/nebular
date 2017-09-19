@@ -105,6 +105,7 @@
 
   nb-card-body {
     flex: 1;
+    -ms-flex: 1 1 auto;
     overflow: auto;
     padding: nb-theme(card-padding);
     @include nb-scrollbars(

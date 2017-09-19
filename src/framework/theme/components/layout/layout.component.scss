@@ -30,11 +30,13 @@
   }
 
   .layout-container {
-    flex: 1;
     display: flex;
+    flex: 1;
+    -ms-flex: 1 1 auto;
     flex-direction: row;
 
     /deep/ nb-sidebar {
+      z-index: auto;
       order: 0;
 
       &.right {
@@ -52,6 +54,7 @@
     .content {
       display: flex;
       flex: 1;
+      -ms-flex: 1 1 auto;
       flex-direction: column;
 
       &.center {
@@ -63,12 +66,14 @@
 
       .columns {
         display: flex;
-        flex-direction: row;
         flex: 1;
+        -ms-flex: 1 1 auto;
+        flex-direction: row;
 
         /deep/ nb-layout-column {
           order: 2;
           flex: 1 0;
+          -ms-flex: 1 0 auto;
 
           &.left {
             order: 1;
