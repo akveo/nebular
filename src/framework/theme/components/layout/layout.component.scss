@@ -36,7 +36,6 @@
     flex-direction: row;
 
     /deep/ nb-sidebar {
-      z-index: auto;
       order: 0;
 
       &.right {
