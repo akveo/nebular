@@ -2,10 +2,10 @@
 
 ### What's included:
 
-- Reusable UI Kit
+- Reusable UI Kit, customizable with hundreds of variables
 - Flexibly configurable themes with **hot-reload**
 - Theme bindings for 3rd party modules
-- Auth module with multiple providers
+- Authentication module with multiple providers
 - Admin started kit [ngx-admin](http://github.com/akveo/ngx-admin)
 - Modular (dependencies available as npm modules)
 
