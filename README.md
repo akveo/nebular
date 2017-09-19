@@ -1,6 +1,6 @@
 # Full-featured front-end framework based on Angular
 
-<img src="https://raw.githubusercontent.com/akveo/nebular/github.png" width="600"/>
+<img src="https://i.imgur.com/aHuKN12.png" width="100%"/>
 
 
 ### What's included:
