@@ -27,7 +27,6 @@
     "@angular/common": "^4.0.0",
     "@angular/core": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "bootstrap": "4.0.0-alpha.6",
-    "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.26"
+    "bootstrap": "4.0.0-alpha.6"
   }
 }
