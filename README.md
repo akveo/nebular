@@ -2,14 +2,12 @@
 
 ### What's included:
 
-- Reusable UI Kit 
+- Reusable UI Kit
 - Flexibly configurable themes with **hot-reload**
-- Configurable layouts 
+- Theme bindings for 3rd party modules
 - Auth module with multiple providers
-- Admin Started Kit [ngx-admin](http://github.com/akveo/ngx-admin)
+- Admin started kit [ngx-admin](http://github.com/akveo/ngx-admin)
 - Modular (dependencies available as npm modules)
-  - @nebular/theme
-  - @nebular/auth
 
 ### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
@@ -22,8 +20,8 @@ Installation, customization and other useful articles: https://akveo.github.io/n
 
 <a href="http://akveo.com/ngx-admin"><img src="https://i.imgur.com/sY4pflD.jpg" /></a>
 
-### Based on
-Angular 4+, Angular CLI, Bootstrap 4.
+### License
+[MIT](LICENSE.txt) license.
 
 ### BrowserStack
 This project runs its tests on multiple desktop and mobile browsers using [BrowserStack](http://www.browserstack.com).
@@ -39,9 +37,6 @@ This project runs its tests on multiple desktop and mobile browsers using [Brows
 ### Can I hire you guys?
 Yes!  Visit [our homepage](http://akveo.com/) or simply leave us a message to [contact@akveo.com](mailto:contact@akveo.com). We will be happy to work with you!
 
-### License
-[MIT](LICENSE.txt) license.
-
-### From akveo
+### From Akveo
 Made with :heart:  by [Akveo team](http://akveo.com/). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news first!
 We're always happy to receive your feedback!
