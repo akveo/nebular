@@ -34,7 +34,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
       title: 'Nebular Dashboard',
       subTitle: 'IOT Admin Dashboard',
       img: 'assets/images/theme-cosmic.png',
-      url: 'http://akveo.com/ngx-admin?utm_source=documentation&utm_medium=demo_slider',
+      url: 'http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_slider',
     },
     {
       title: 'React Native UI Kitten',
@@ -50,6 +50,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
     prevButton: '.swiper-button-prev',
     slidesPerView: 1,
     spaceBetween: 15,
+    loop: true,
   };
   leftMenu = [
     {
@@ -101,6 +102,8 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
     this.highlightMenu();
     this.spinnerService.registerLoader(Promise.all([
+      this.loadImage('assets/images/theme-cosmic.png'),
+      this.loadImage('assets/images/theme-default.png'),
       this.loadImage('assets/images/hero-img-static.png'),
       this.loadImage('assets/images/hero-img/1-2.png'),
       this.loadImage('assets/images/hero-img/3-4.png'),

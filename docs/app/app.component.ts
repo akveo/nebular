@@ -42,7 +42,7 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy {
       const el = this.elementRef.nativeElement.querySelector(`#${fr}`);
       if (el) {
         el.scrollIntoView();
-        if (new RegExp(/theme/i).test(this.router.url)) {
+        if (new RegExp(/themes/i).test(this.router.url)) {
           window.scrollBy(0, -235);//header + theme-header
           this.renderer.addClass(el, 'highlighted-row');//TODO: move to theme block
           setTimeout(() => this.renderer.removeClass(el, 'highlighted-row'), 1000);

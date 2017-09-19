@@ -674,7 +674,10 @@ $mobile: 767px;
         .icon {
           border: 6px solid white;
           background: transparent;
-          @include gold-shadow();
+          text-shadow: 0 0 8px nb-theme(landing-golden);
+          box-shadow: 0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6), 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4),
+          0 0 20px 0 transparentize(nb-theme(landing-golden), 0.6) inset, 0 0 20px 0 transparentize(nb-theme(landing-red), 0.4) inset;
+
         }
         .txt {
           text-decoration: none;
