@@ -13,7 +13,7 @@ Note, in a simplest setup you may just include prebuilt CSS file of the theme of
 ## Example
 Here's a default theme from the [Admin Starter Kit](http://akveo.com/ng2-admin) demo application.
 
-```
+```scss
 $nb-themes: nb-register-theme((
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,

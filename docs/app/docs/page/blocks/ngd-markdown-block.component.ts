@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as Prism from 'prismjs';
-import 'prismjs/components/prism-jsx.js';
+// import * as Prism from 'prismjs';
 import * as marked from 'marked';
+declare var Prism;
 
 @Component({
   selector: 'ngd-markdown-block',
@@ -16,7 +16,9 @@ export class NgdMarkdownComponent implements OnInit {
     let markdownFile = this.block.source;
     this.markdown = require('raw-loader!../../../../assets/articles/' + markdownFile);
     let md = marked.setOptions({
-      highlight: (code) => Prism.highlight(code.trim(), Prism.languages.jsx)
+      highlight: (code, lang = 'jsx') => {
+        return Prism.highlight(code.trim(), Prism.languages[lang]);
+      }
     });
 
     this.markdown = md.parse(this.markdown.trim());

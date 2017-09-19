@@ -63,7 +63,7 @@ For example like this:
 
 Now you can start changing the colors.
 For example, after playing a bit with different colors, we changed the 2 first main variables in `_dark.scss` file:
-```sass
+```scss
 $body-bg: #636363;
 $bootstrap-panel-bg: rgba(#000000, 0.2);
 

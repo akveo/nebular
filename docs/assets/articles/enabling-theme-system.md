@@ -23,7 +23,7 @@ And that's it. In the future, if you need any of the advanced features - you can
 
 1) Create a `themes.scss` file with a Nebular theme declaration. We assume that the theme will be based on the `default` theme and we'll keep it as `default`.
 
-```
+```scss
 // import Nebular Theme System and the default theme
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
@@ -40,7 +40,7 @@ $nb-themes: nb-register-theme((
 
 2) Now, find your `styles.scss` (or create one and add it into `.angular-cli.json` under `"styles": [..]`) and paste the following:
 
-```
+```scss
 // this is your created themes.scss file, make sure the path to the file is correct
 @import 'themes';
 
@@ -57,7 +57,7 @@ $nb-themes: nb-register-theme((
 
 3) At this step you already can customize the variables to change components look and behavior. To be able to use these (or new) variables into your custom components, just add an import line into any `\*.component.scss` file:
 
-```
+```scss
 @import '../../../@theme/styles/themes';
 
 :host {
@@ -74,7 +74,7 @@ This setup assumes that you went through the *Normal Setup* steps.
 
 1) Assuming you already have the `themes.scss` file, let's add there a new theme, which will be based on the `cosmic` Nebular theme and named `dark`:
 
-```
+```scss
 ...
 
 // add cosmic theme import below the default theme
@@ -97,7 +97,7 @@ $nb-themes: nb-register-theme((
 
 So that your `themes.scss` file looks like this:
 
-```
+```scss
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
 @import '~@nebular/theme/styles/themes/cosmic';
@@ -123,7 +123,7 @@ $nb-themes: nb-register-theme((
 
 2) Now, to enable the magic of the hot reload, wrap all of your `\*.component.scss` styles with the `nb-install-component` mixin like this:
 
-```
+```scss
 
 @include nb-install-component() {
   background: nb-theme(card-bg); // now, for each theme registered the corresponding value will be inserted
@@ -138,7 +138,7 @@ $nb-themes: nb-register-theme((
 
 Done, now you can change a theme in the runtime. Here's how to do this from a component:
 
-```
+```scss
 // include the theme service
 constructor(private themeService: NbThemeService) {
 }

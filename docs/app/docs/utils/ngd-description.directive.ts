@@ -1,5 +1,5 @@
 import { Directive, ElementRef, AfterViewInit } from '@angular/core';
-import 'prismjs/components/prism-jsx.js';
+// import 'prismjs/components/prism-jsx.js';
 import * as marked from 'marked';
 
 @Directive({

@@ -32,7 +32,7 @@ Other helper services:
 
 3) Now, let's configure the module:
 
-```
+```typescript
 
 @NgModule({
   imports: [
@@ -56,7 +56,7 @@ Other helper services:
 4) Next, we need to show the auth pages somewhere, let's add them into your app.routes.ts
 
 
-```
+```typescript
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -106,7 +106,7 @@ export const routes: Routes = [
 
 5) Last but not least - install the component styles into your themes.scss ([More Details](/#/docs/guides/enabling-theme-system)):
 
-```
+```scss
 @import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/{theme-name}';
 
 // ... 

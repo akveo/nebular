@@ -94,6 +94,11 @@
       ],
       "scripts": [
         "../node_modules/prismjs/prism.js",
+        "../node_modules/prismjs/components/prism-jsx.js",
+        "../node_modules/prismjs/components/prism-bash.js",
+        "../node_modules/prismjs/components/prism-json.js",
+        "../node_modules/prismjs/components/prism-scss.js",
+        "../node_modules/prismjs/components/prism-typescript.js",
         "../node_modules/swiper/dist/js/swiper.js"
       ],
       "environmentSource": "environments/environment.ts",
