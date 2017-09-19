@@ -1,4 +1,4 @@
-# Full-featured front-end framework based on Angular
+## FULL-FEATURED FRAMEWORK BASED ON ANGULAR
 
 <img src="https://i.imgur.com/aHuKN12.png" width="100%"/>
 
@@ -13,30 +13,28 @@
 - Modular (dependencies available as npm modules)
   - @nebular/theme
   - @nebular/auth
-  
-  github.png
  
-## Documentation
+### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
 
-## Based on
+### Based on
 Angular 4+, Angular CLI, Bootstrap 4.
 
-## BrowserStack
+### BrowserStack
 This project runs its tests on multiple desktop and mobile browsers using [BrowserStack](http://www.browserstack.com).
 
 <img src="https://cloud.githubusercontent.com/assets/131406/22254249/534d889e-e254-11e6-8427-a759fb23b7bd.png" height="40" />
 
-## How can I support developers?
+### How can I support developers?
 - Star our GitHub repo :star:
 - Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
 - Follow us on [Twitter](https://twitter.com/akveo_inc) :feet:
 - Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
 
-## Can I hire you guys?
+### Can I hire you guys?
 Yes!  Visit [our homepage](http://akveo.com/) or simply leave us a message to [contact@akveo.com](mailto:contact@akveo.com). We will be happy to work with you!
 
-## License
+### License
 [MIT](LICENSE.txt) license.
 
 ### From akveo
