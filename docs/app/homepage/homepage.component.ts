@@ -50,7 +50,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
     prevButton: '.swiper-button-prev',
     slidesPerView: 1,
     spaceBetween: 15,
-    loop: true,
+    loop: false, // breaks the layout on smaller devices
   };
   leftMenu = [
     {
