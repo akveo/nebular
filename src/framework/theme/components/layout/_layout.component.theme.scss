@@ -43,6 +43,11 @@
     overflow: auto;
     height: 100vh;
     display: block;
+
+    @include media-breakpoint-down(sm) {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   .layout {

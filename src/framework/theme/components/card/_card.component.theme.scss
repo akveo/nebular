@@ -108,6 +108,7 @@
     -ms-flex: 1 1 auto;
     overflow: auto;
     padding: nb-theme(card-padding);
+    position: relative;
     @include nb-scrollbars(
         nb-theme(scrollbar-fg),
         nb-theme(scrollbar-bg),
