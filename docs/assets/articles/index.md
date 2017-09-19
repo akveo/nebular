@@ -10,6 +10,7 @@ Nebular is in *beta* now, meaning that we are on the final path to the release.
 - Flexibly configurable themes with **hot-reload**
 - Configurable layouts 
 - Auth module with multiple providers
+- Modular (dependencies available as npm modules)
 - Ready-to-go project structure ([Admin Starter Kit](/#/docs/installation/based-on-starter-kit))
 
 ## Assumptions
