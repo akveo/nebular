@@ -5,7 +5,7 @@
 
   <nb-layout-column class="section-{{ currentSectionId }}">
 
-    <a href="https://github.com/akveo/nebular" class="extra-link-support">
+    <a target="_blank" href="https://github.com/akveo/nebular" class="extra-link-support">
       Fork On
       <mark>Github</mark>
     </a>
@@ -113,10 +113,10 @@
             <div class="swiper-wrapper test">
               <div class="swiper-slide" *ngFor="let slide of slides">
                 <div class="txt">
-                  <h3><span>{{ slide.title }}</span></h3>
+                  <h3><a href="{{ slide.url }}" target="_blank">{{ slide.title }}</a></h3>
                   <p>{{ slide.subTitle}}</p>
                 </div>
-                <img [src]="slide.img">
+                <a href="{{ slide.url }}" target="_blank"><img [src]="slide.img"></a>
               </div>
             </div>
           </swiper>
@@ -163,7 +163,7 @@
     </section>
     <section #section class="contact-us" id="contact-us">
       <div class="section-container">
-        <h3><span>Looking for engineering services?</span></h3>
+        <h2><span>Looking for engineering services?</span></h2>
         <p>
           Visit our <a href="https://www.akveo.com/" target="_blank">homepage</a> or simply contact us at <strong><a href="mailto:contact@akveo.com">contact@akveo.com</a></strong>.
           We will be happy to work with you!

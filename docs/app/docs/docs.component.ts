@@ -50,7 +50,8 @@ export class NgdDocsComponent implements OnDestroy {
         if (event['url'] === '/docs') {
           const firstMenuItem = this.menuItems[0].children[0];
           this.menuInternalService.itemSelect(firstMenuItem);
-          this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true });
+          // angular bug with replaceUrl, temp fix with setTimeout
+          setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true }));
         }
       });
   }

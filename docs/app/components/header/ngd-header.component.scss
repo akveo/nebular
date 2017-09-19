@@ -205,7 +205,8 @@
 
     .mobile-menu.active {
       height: calc(100vh - #{nb-theme(header-height)});
-      overflow: auto;
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
     }
   }
 

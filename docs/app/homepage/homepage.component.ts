@@ -32,13 +32,15 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   slides = [
     {
       title: 'Nebular Dashboard',
-      subTitle: 'IOT Admin dashboard',
+      subTitle: 'IOT Admin Dashboard',
       img: 'assets/images/theme-cosmic.png',
+      url: 'http://akveo.com/ngx-admin?utm_source=documentation&utm_medium=demo_slider',
     },
     {
-      title: 'Nebular Dashboard',
-      subTitle: 'IOT Admin dashboard',
-      img: 'assets/images/theme-default.png',
+      title: 'React Native UI Kitten',
+      subTitle: 'Documentation Website',
+      img: 'assets/images/react-kitten.png',
+      url: 'https://akveo.github.io/react-native-ui-kitten',
     },
   ];
   swiperConfig: any = {

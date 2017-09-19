@@ -70,12 +70,12 @@ $mobile: 767px;
     color: white;
   }
   p {
-    font-size: 24px;
+    font-size: 1.125rem;
     color: nb-theme(landing-fg);
   }
   h1 {
     color: white;
-    font-size: 120px;
+    font-size: 6rem;
     margin-bottom: 0;
     font-weight: 600;
     text-shadow: 0 0 4px rgba(255, 255, 255, 1);
@@ -98,8 +98,8 @@ $mobile: 767px;
   }
   h2 {
     color: white;
-    font-size: 100px;
-    font-weight: 600;
+    font-size: 5rem;
+    font-weight: nb-theme(font-weight-bolder);
     text-shadow: 0 0 4px white;
     display: inline-block;
     position: relative;
@@ -167,7 +167,8 @@ $mobile: 767px;
     will-change: top;
   }
   section {
-    min-height: calc(100vh - 90px);
+    height: calc(100vh - 90px);
+    min-height: 765px;
     position: relative;
     flex: 1;
     display: flex;
@@ -182,7 +183,7 @@ $mobile: 767px;
   }
   .section-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1100px;
     padding: 0 100px;
     margin: 0 auto;
   }
@@ -306,8 +307,7 @@ $mobile: 767px;
     margin-top: -3%;
 
     .section-container {
-      max-width: 1600px;
-      margin-left: 15%;
+      max-width: 1500px;
     }
 
     .hero-i {
@@ -355,11 +355,17 @@ $mobile: 767px;
         0 2px 25px 0 transparentize(nb-theme(landing-highlight), 0.4) inset;
       }
       border-radius: 12px;
-      margin-right: 2rem;
-      margin-bottom: 1rem;
+      margin-right: 1rem;
+      cursor: pointer;
     }
     .docs {
-      font-weight: nb-theme(font-weight-bold);
+      font-weight: nb-theme(font-weight-normal);
+      font-size: 18px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: #b8b8ff;
+      padding-top: 1rem;
+      display: inline-block;
     }
     .bigger {
       margin: 0 0 30px;
@@ -725,6 +731,7 @@ $mobile: 767px;
   .contact-us {
     background: url('#{$img}hire-block-bg.png') no-repeat 50% 50%;
     background-size: cover;
+    margin-bottom: 0!important;
     .section-container {
       align-self: flex-start;
       padding-top: 10%;
@@ -794,6 +801,9 @@ $mobile: 767px;
       vertical-align: middle;
       .txt {
         padding: 50px 0 20px;
+        a {
+          position: relative;
+        }
       }
       img {
         max-width: 100%;
@@ -836,22 +846,27 @@ $mobile: 767px;
     }
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1919px) {
     .section-home {
       nav {
         opacity: 0;
       }
     }
-    .hero .section-container {
-      margin-left: 0;
-      max-width:  1400px;
-    }
+  }
 
+  @media (max-width: 1500px) {
     nav {
       left: 20px;
       span {
         display: none;
       }
+    }
+  }
+
+  @media (max-width: 1400px) {
+    .hero .section-container {
+      margin-left: 0;
+      max-width:  1400px;
     }
   }
 
@@ -882,6 +897,7 @@ $mobile: 767px;
       padding-right: 30px;
     }
   }
+
   @media (max-width: $tablet) {
     h1 {
       font-size: 80px;
@@ -891,11 +907,11 @@ $mobile: 767px;
     }
     section {
       opacity: 1;
-      text-align: center;
       padding: 20px 0;
       margin-bottom: 40px;
     }
     .hero {
+      text-align: center;
       .btn-hero {
         padding-left: 70px;
         padding-right: 70px;
@@ -1004,10 +1020,14 @@ $mobile: 767px;
       font-size: 30px;
     }
     section {
-      min-height: auto;
+      height: auto;
+      min-height: 500px;
       text-align: center;
       padding: 20px 0;
-      margin-bottom: 40px;
+      margin-bottom: 40px!important;
+    }
+    .hero {
+      min-height: 700px;
     }
     .section-container {
       padding: 0 20px;
@@ -1122,19 +1142,9 @@ $mobile: 767px;
     .txt .decor-img-theming {
       display: none;
     }
-  }
 
-  @media only screen and (max-device-height : 850px) {
-    .hero {
-      .hero-i {
-        height: auto;
-        padding: 50px;
-      }
-      padding-top: 30px;
-      padding-bottom: 50px;
-    }
-    section {
-      margin-bottom: 100px;
+    /deep/ .footer-inner p {
+      text-align: center;
     }
   }
 
@@ -1197,9 +1207,21 @@ $mobile: 767px;
     }
   }
 
+  @media (max-width: 400px) {
+
+    .support-us .social-item {
+      .icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+    }
+
+  }
+
   @media only screen
-  and (min-device-width : 320px)
-  and (max-device-width : 667px)
+  and (min-width: 320px)
+  and (max-width: 667px)
   and (orientation : landscape) {
     .fixed-pseudo-bg {
       top: 0!important;
@@ -1227,4 +1249,16 @@ $mobile: 767px;
     }
   }
 
+  @media (max-height: 850px) {
+    .hero {
+      .hero-i {
+        height: auto;
+      }
+      padding-top: 30px;
+      padding-bottom: 50px;
+    }
+    section {
+      margin-bottom: 100px;
+    }
+  }
 }

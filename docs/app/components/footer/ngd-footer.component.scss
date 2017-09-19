@@ -6,15 +6,11 @@
   z-index: 2;
   background: transparent;
   border: 0;
-  color: #a6adff;
-  font-size: 24px;
+  color: white;
+  font-size: 16px;
 
-  .footer-inner {
-    display: flex;
-    flex-flow: row-reverse nowrap;
-    justify-content: space-between;
-    text-align: left;
-    padding: 0 100px;
+  p {
+    flex: 1;
   }
   .socio a {
     color: white;
