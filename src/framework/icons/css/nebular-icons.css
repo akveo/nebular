@@ -31,7 +31,7 @@
 .nb-arrow-up,
 .nb-audio,
 .nb-bar-chart,
-.nb-chekmark,
+.nb-checkmark,
 .nb-chevron-down,
 .nb-chevron-down-outline,
 .nb-chevron-left,
@@ -166,7 +166,7 @@
 .nb-bar-chart::before {
   content: '\e910';
 }
-.nb-chekmark::before {
+.nb-checkmark::before {
   content: '\e911';
 }
 .nb-chevron-down::before {
