@@ -13,6 +13,8 @@ import { Title } from '@angular/platform-browser';
 
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
+import { Subject } from 'rxjs/Rx';
+import { NbSpinnerService } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-homepage',
@@ -88,26 +90,40 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   bgTop = '';
   animated: boolean = false;
   currentSectionId: string = 'home';
+  highlightMenu$ = new Subject();
 
   constructor(private renderer: Renderer2,
+              private spinnerService: NbSpinnerService,
               private titleService: Title) {
     this.renderer.setProperty(document.body, 'scrollTop', 0);
+
+    this.highlightMenu();
+    this.spinnerService.registerLoader(Promise.all([
+      this.loadImage('assets/images/hero-img-static.png'),
+      this.loadImage('assets/images/hero-img/1-2.png'),
+      this.loadImage('assets/images/hero-img/3-4.png'),
+      this.loadImage('assets/images/hero-img/5-6.png'),
+      this.loadImage('assets/images/hero-img/7.png'),
+      this.loadImage('assets/images/hero-img/8.png'),
+      this.loadImage('assets/images/hero-img/9.png'),
+    ]).then(() => {
+      setTimeout(() => this.animated = true, 500);
+    }));
   }
 
   ngOnInit() {
     this.titleService.setTitle('Nebular - full featured front-end framework based on Angular.');
-    setTimeout(() => this.animated = true, 500);
   }
 
   ngAfterViewInit() {
     this.createImageComparison();
-    setTimeout(() => this.highlightMenu());
+    setTimeout(() => this.highlightMenu$.next(0));
   }
 
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.highlightMenu();
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event) {
     this.calculateBgTopOffcet();
+    this.highlightMenu$.next(1);
   }
 
   private createImageComparison(): any {
@@ -125,23 +141,27 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   }
 
   private highlightMenu() {
-    let closestSection = this.sections.first.nativeElement;
-    this.sections
-      .map(section => section.nativeElement)
-      .forEach((section) => {
-        this.renderer.removeClass(section, 'current');
-        if (Math.abs(section.getBoundingClientRect().top) < Math.abs(closestSection.getBoundingClientRect().top)) {
-          closestSection = section;
-        }
-      });
+    this.highlightMenu$
+      .debounceTime(30)
+      .subscribe(() => {
+        let closestSection = this.sections.first.nativeElement;
+        this.sections
+          .map(section => section.nativeElement)
+          .forEach((section) => {
+            this.renderer.removeClass(section, 'current');
+            if (Math.abs(section.getBoundingClientRect().top) < Math.abs(closestSection.getBoundingClientRect().top)) {
+              closestSection = section;
+            }
+          });
 
-    this.renderer.addClass(closestSection, 'current');
-    this.leftMenu = this.leftMenu
-      .map((item: any) => {
-        item.active = item.hash === closestSection.id;
-        return item;
+        this.renderer.addClass(closestSection, 'current');
+        this.leftMenu = this.leftMenu
+          .map((item: any) => {
+            item.active = item.hash === closestSection.id;
+            return item;
+          });
+        this.currentSectionId = closestSection.id;
       });
-    this.currentSectionId = closestSection.id;
   }
 
   private calculateBgTopOffcet() {
@@ -158,5 +178,15 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
     const documentHeight = Math.max(body.scrollHeight, body.offsetHeight,
       html.clientHeight, html.scrollHeight, html.offsetHeight);
     return documentHeight / (NgdHomepageComponent.BG_IMAGE_HEIGHT - html.clientHeight);
+  }
+
+  private loadImage(src): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.src = src;
+      img.onload = function () {
+        resolve(src);
+      };
+    });
   }
 }

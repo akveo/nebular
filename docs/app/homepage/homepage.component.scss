@@ -164,6 +164,7 @@ $mobile: 767px;
     background-position: top center;
     height: 6720px;
     transform: translate3d(0, 0, 0);
+    will-change: top;
   }
   section {
     min-height: calc(100vh - 90px);
@@ -172,18 +173,11 @@ $mobile: 767px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    opacity: 0.1;
-    transition: opacity 0.3s ease-in-out;
-
     .txt p {
       color: nb-theme(landing-fg-light);
       a {
         font-weight: nb-theme(font-weight-bold);
       }
-    }
-
-    &.current {
-      opacity: 1;
     }
   }
   .section-container {
@@ -361,6 +355,11 @@ $mobile: 767px;
         0 2px 25px 0 transparentize(nb-theme(landing-highlight), 0.4) inset;
       }
       border-radius: 12px;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+    }
+    .docs {
+      font-weight: nb-theme(font-weight-bold);
     }
     .bigger {
       margin: 0 0 30px;
@@ -877,6 +876,12 @@ $mobile: 767px;
     }
   }
 
+  @media (max-width: 1190px) {
+    .hero .btn-hero {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
   @media (max-width: $tablet) {
     h1 {
       font-size: 80px;
@@ -891,6 +896,10 @@ $mobile: 767px;
       margin-bottom: 40px;
     }
     .hero {
+      .btn-hero {
+        padding-left: 70px;
+        padding-right: 70px;
+      }
       margin-top: 180px;
       display: block;
       .bigger {
@@ -1119,20 +1128,39 @@ $mobile: 767px;
     .hero {
       .hero-i {
         height: auto;
+        padding: 50px;
       }
+      padding-top: 30px;
+      padding-bottom: 50px;
+    }
+    section {
+      margin-bottom: 100px;
     }
   }
 
   @media (max-width: 500px) {
+    section {
+      margin-bottom: 40px;
+    }
     .hero {
+      margin-top: 0;
+      padding-top: 0;
+      .hero-i {
+        padding: 0;
+      }
+      .section-container {
+        padding: 0;
+      }
       h1 {
         display: none;
       }
       .btn-hero-wrap {
         margin-top: 2rem;
+        text-align: center;
       }
       .btn-hero {
         font-size: 18px;
+        margin: 1rem;
       }
     }
     .fixed-pseudo-bg {
@@ -1170,9 +1198,12 @@ $mobile: 767px;
   }
 
   @media only screen
-  and (min-device-width : 375px)
+  and (min-device-width : 320px)
   and (max-device-width : 667px)
   and (orientation : landscape) {
+    .fixed-pseudo-bg {
+      top: 0!important;
+    }
     .ui-kit {
       .row {
         flex-direction: column-reverse;
@@ -1197,10 +1228,3 @@ $mobile: 767px;
   }
 
 }
-
-
-
-
-
-
-
