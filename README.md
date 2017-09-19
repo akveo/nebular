@@ -1,8 +1,5 @@
 ## FULL-FEATURED FRAMEWORK BASED ON ANGULAR
 
-<img src="https://i.imgur.com/aHuKN12.png" width="100%"/>
-
-
 ### What's included:
 
 - Reusable UI Kit 
@@ -13,9 +10,17 @@
 - Modular (dependencies available as npm modules)
   - @nebular/theme
   - @nebular/auth
- 
+
 ### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
+
+### Architecture
+<img src="https://i.imgur.com/H4coTS7.png" />
+
+### Demo Application
+[ngx-admin](https://github.com/akveo/ngx-admin) is built on top of Nebular
+
+<a href="http://akveo.com/ngx-admin"><img src="https://i.imgur.com/sY4pflD.jpg" /></a>
 
 ### Based on
 Angular 4+, Angular CLI, Bootstrap 4.
