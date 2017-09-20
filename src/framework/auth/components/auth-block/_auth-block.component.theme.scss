@@ -5,7 +5,8 @@
  */
 
 @mixin nb-auth-block-theme() {
-  /deep/ {
+  nb-auth-block {
+
     .form-text a {
       color: nb-theme(color-fg);
     }

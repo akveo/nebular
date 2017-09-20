@@ -3592,10 +3592,6 @@
               "prop": "modal-body-font-family"
             },
             {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-main"
             }
@@ -3663,10 +3659,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "font-weight-thin"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-weight-thin"
             }
@@ -3677,10 +3669,6 @@
           "value": 300,
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "font-weight-light"
-            },
             {
               "theme": "cosmic",
               "prop": "font-weight-light"
@@ -3713,10 +3701,6 @@
               "prop": "modal-body-font-weight"
             },
             {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-weight-normal"
             }
@@ -3738,10 +3722,6 @@
             {
               "theme": "default",
               "prop": "modal-header-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "font-weight-bolder"
             },
             {
               "theme": "cosmic",
@@ -3767,10 +3747,6 @@
               "prop": "smart-table-header-font-weight"
             },
             {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-weight-bold"
             }
@@ -3781,10 +3757,6 @@
           "value": 800,
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "font-weight-ultra-bold"
-            },
             {
               "theme": "cosmic",
               "prop": "font-weight-ultra-bold"
@@ -3797,10 +3769,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "base-font-size"
-            },
-            {
               "theme": "cosmic",
               "prop": "base-font-size"
             }
@@ -3811,10 +3779,6 @@
           "value": "1.25rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "font-size-xlg"
-            },
             {
               "theme": "cosmic",
               "prop": "font-size-xlg"
@@ -3849,10 +3813,6 @@
             {
               "theme": "default",
               "prop": "modal-header-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
             },
             {
               "theme": "cosmic",
@@ -3914,10 +3874,6 @@
               "prop": "modal-body-font-size"
             },
             {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-size"
             }
@@ -3933,10 +3889,6 @@
               "prop": "form-control-sm-font-size"
             },
             {
-              "theme": "light",
-              "prop": "font-size-sm"
-            },
-            {
               "theme": "cosmic",
               "prop": "font-size-sm"
             }
@@ -3947,10 +3899,6 @@
           "value": "0.75rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "font-size-xs"
-            },
             {
               "theme": "cosmic",
               "prop": "font-size-xs"
@@ -3985,10 +3933,6 @@
             {
               "theme": "default",
               "prop": "modal-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "radius"
             }
           ]
         },
@@ -4022,10 +3966,6 @@
               "prop": "modal-padding"
             },
             {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
               "theme": "cosmic",
               "prop": "padding"
             }
@@ -4039,10 +3979,6 @@
             {
               "theme": "default",
               "prop": "card-margin"
-            },
-            {
-              "theme": "light",
-              "prop": "margin"
             },
             {
               "theme": "cosmic",
@@ -4094,10 +4030,6 @@
             {
               "theme": "default",
               "prop": "modal-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "line-height"
             },
             {
               "theme": "cosmic",
@@ -4177,10 +4109,6 @@
             {
               "theme": "default",
               "prop": "modal-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-bg"
             }
           ]
         },
@@ -4188,12 +4116,7 @@
           "name": "color-bg-active",
           "value": "#e9edf2",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "color-bg-active"
-            }
-          ]
+          "childs": []
         },
         "color-fg": {
           "name": "color-fg",
@@ -4358,10 +4281,6 @@
             {
               "theme": "default",
               "prop": "modal-fg-heading"
-            },
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
             }
           ]
         },
@@ -4389,10 +4308,6 @@
             {
               "theme": "default",
               "prop": "modal-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-fg-text"
             }
           ]
         },
@@ -4404,10 +4319,6 @@
             {
               "theme": "default",
               "prop": "menu-submenu-active-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "color-fg-highlight"
             }
           ]
         },
@@ -4451,10 +4362,6 @@
             {
               "theme": "default",
               "prop": "modal-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "separator"
             }
           ]
         },
@@ -4468,10 +4375,6 @@
               "prop": "border-color"
             },
             {
-              "theme": "light",
-              "prop": "color-gray"
-            },
-            {
               "theme": "cosmic",
               "prop": "color-gray"
             }
@@ -4482,10 +4385,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "color-neutral"
-            },
             {
               "theme": "cosmic",
               "prop": "color-neutral"
@@ -4506,10 +4405,6 @@
               "prop": "btn-fg"
             },
             {
-              "theme": "light",
-              "prop": "color-white"
-            },
-            {
               "theme": "cosmic",
               "prop": "color-white"
             }
@@ -4523,10 +4418,6 @@
             {
               "theme": "default",
               "prop": "card-header-disabled-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-disabled"
             },
             {
               "theme": "cosmic",
@@ -4554,10 +4445,6 @@
             {
               "theme": "default",
               "prop": "btn-primary-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-primary"
             }
           ]
         },
@@ -4613,10 +4500,6 @@
             {
               "theme": "default",
               "prop": "radio-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-success"
             }
           ]
         },
@@ -4640,10 +4523,6 @@
             {
               "theme": "default",
               "prop": "form-control-info-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "color-info"
             }
           ]
         },
@@ -4667,10 +4546,6 @@
             {
               "theme": "default",
               "prop": "form-control-warning-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "color-warning"
             },
             {
               "theme": "cosmic",
@@ -4698,10 +4573,6 @@
             {
               "theme": "default",
               "prop": "form-control-danger-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "color-danger"
             }
           ]
         },
@@ -4710,10 +4581,6 @@
           "value": "#3b5998",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "social-color-facebook"
-            },
             {
               "theme": "cosmic",
               "prop": "social-color-facebook"
@@ -4726,10 +4593,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "social-color-twitter"
-            },
-            {
               "theme": "cosmic",
               "prop": "social-color-twitter"
             }
@@ -4740,10 +4603,6 @@
           "value": "#dd4b39",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "social-color-google"
-            },
             {
               "theme": "cosmic",
               "prop": "social-color-google"
@@ -4756,10 +4615,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "social-color-linkedin"
-            },
-            {
               "theme": "cosmic",
               "prop": "social-color-linkedin"
             }
@@ -4770,10 +4625,6 @@
           "value": "#6b6b6b",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "social-color-github"
-            },
             {
               "theme": "cosmic",
               "prop": "social-color-github"
@@ -4786,10 +4637,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "social-color-stackoverflow"
-            },
-            {
               "theme": "cosmic",
               "prop": "social-color-stackoverflow"
             }
@@ -4801,10 +4648,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "social-color-dribble"
-            },
-            {
               "theme": "cosmic",
               "prop": "social-color-dribble"
             }
@@ -4815,10 +4658,6 @@
           "value": "#0093fa",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "social-color-behance"
-            },
             {
               "theme": "cosmic",
               "prop": "social-color-behance"
@@ -4877,10 +4716,6 @@
             {
               "theme": "default",
               "prop": "link-color-visited"
-            },
-            {
-              "theme": "light",
-              "prop": "link-color"
             }
           ]
         },
@@ -4888,12 +4723,7 @@
           "name": "link-color-hover",
           "value": "#2ee56b",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "link-color-hover"
-            }
-          ]
+          "childs": []
         },
         "link-color-visited": {
           "name": "link-color-visited",
@@ -4910,33 +4740,19 @@
           "name": "scrollbar-fg",
           "value": "#dadada",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "scrollbar-fg"
-            }
-          ]
+          "childs": []
         },
         "scrollbar-bg": {
           "name": "scrollbar-bg",
           "value": "#f2f2f2",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "scrollbar-bg"
-            }
-          ]
+          "childs": []
         },
         "scrollbar-width": {
           "name": "scrollbar-width",
           "value": "5px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "scrollbar-width"
-            },
             {
               "theme": "cosmic",
               "prop": "scrollbar-width"
@@ -4949,10 +4765,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "scrollbar-thumb-radius"
-            },
-            {
               "theme": "cosmic",
               "prop": "scrollbar-thumb-radius"
             }
@@ -4962,23 +4774,13 @@
           "name": "radial-gradient",
           "value": "none",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "radial-gradient"
-            }
-          ]
+          "childs": []
         },
         "linear-gradient": {
           "name": "linear-gradient",
           "value": "none",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "linear-gradient"
-            }
-          ]
+          "childs": []
         },
         "card-font-size": {
           "name": "card-font-size",
@@ -5063,10 +4865,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "card-height-xxsmall"
-            },
-            {
               "theme": "cosmic",
               "prop": "card-height-xxsmall"
             }
@@ -5077,10 +4875,6 @@
           "value": "216px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "card-height-xsmall"
-            },
             {
               "theme": "cosmic",
               "prop": "card-height-xsmall"
@@ -5093,10 +4887,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "card-height-small"
-            },
-            {
               "theme": "cosmic",
               "prop": "card-height-small"
             }
@@ -5107,10 +4897,6 @@
           "value": "456px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "card-height-medium"
-            },
             {
               "theme": "cosmic",
               "prop": "card-height-medium"
@@ -5123,10 +4909,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "card-height-large"
-            },
-            {
               "theme": "cosmic",
               "prop": "card-height-large"
             }
@@ -5138,10 +4920,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "card-height-xlarge"
-            },
-            {
               "theme": "cosmic",
               "prop": "card-height-xlarge"
             }
@@ -5152,10 +4930,6 @@
           "value": "816px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "card-height-xxlarge"
-            },
             {
               "theme": "cosmic",
               "prop": "card-height-xxlarge"
@@ -5444,10 +5218,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "header-height"
-            },
-            {
               "theme": "cosmic",
               "prop": "header-height"
             }
@@ -5458,10 +5228,6 @@
           "value": "1.25rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "header-padding"
-            },
             {
               "theme": "cosmic",
               "prop": "header-padding"
@@ -5496,10 +5262,6 @@
           "value": "1.25rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "footer-padding"
-            },
             {
               "theme": "cosmic",
               "prop": "footer-padding"
@@ -5625,10 +5387,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "layout-min-height"
-            },
-            {
               "theme": "cosmic",
               "prop": "layout-min-height"
             }
@@ -5639,10 +5397,6 @@
           "value": "900px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "layout-content-width"
-            },
             {
               "theme": "cosmic",
               "prop": "layout-content-width"
@@ -5655,10 +5409,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "layout-window-mode-min-width"
-            },
-            {
               "theme": "cosmic",
               "prop": "layout-window-mode-min-width"
             }
@@ -5669,10 +5419,6 @@
           "value": "1920px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "layout-window-mode-max-width"
-            },
             {
               "theme": "cosmic",
               "prop": "layout-window-mode-max-width"
@@ -5695,10 +5441,6 @@
           "value": "4.75rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "layout-window-mode-padding-top"
-            },
             {
               "theme": "cosmic",
               "prop": "layout-window-mode-padding-top"
@@ -5785,10 +5527,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "sidebar-height"
-            },
-            {
               "theme": "cosmic",
               "prop": "sidebar-height"
             }
@@ -5823,10 +5561,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "sidebar-header-height"
-            },
-            {
               "theme": "cosmic",
               "prop": "sidebar-header-height"
             }
@@ -5837,10 +5571,6 @@
           "value": "3.5rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "sidebar-footer-height"
-            },
             {
               "theme": "cosmic",
               "prop": "sidebar-footer-height"
@@ -6025,12 +5755,7 @@
           "name": "menu-submenu-active-shadow",
           "value": "none",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-active-shadow"
-            }
-          ]
+          "childs": []
         },
         "menu-submenu-hover-fg": {
           "name": "menu-submenu-hover-fg",
@@ -6067,10 +5792,6 @@
           "value": "0.125rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-item-border-width"
-            },
             {
               "theme": "cosmic",
               "prop": "menu-submenu-item-border-width"
@@ -6112,10 +5833,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "menu-submenu-padding"
-            },
-            {
               "theme": "cosmic",
               "prop": "menu-submenu-padding"
             }
@@ -6137,10 +5854,6 @@
           "value": "0.875rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-group-font-size"
-            },
             {
               "theme": "cosmic",
               "prop": "menu-group-font-size"
@@ -6194,10 +5907,6 @@
           "value": "2.5rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-icon-font-size"
-            },
             {
               "theme": "cosmic",
               "prop": "menu-icon-font-size"
@@ -6291,10 +6000,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "tabs-active-bg"
-            },
-            {
               "theme": "cosmic",
               "prop": "tabs-active-bg"
             }
@@ -6332,10 +6037,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "tabs-content-padding"
-            },
-            {
               "theme": "cosmic",
               "prop": "tabs-content-padding"
             }
@@ -6346,10 +6047,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "tabs-header-bg"
-            },
             {
               "theme": "cosmic",
               "prop": "tabs-header-bg"
@@ -6406,10 +6103,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "tabs-bg"
-            },
-            {
               "theme": "cosmic",
               "prop": "tabs-bg"
             }
@@ -6458,10 +6151,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "route-tabs-active-bg"
-            },
-            {
               "theme": "cosmic",
               "prop": "route-tabs-active-bg"
             }
@@ -6498,10 +6187,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "route-tabs-header-bg"
-            },
             {
               "theme": "cosmic",
               "prop": "route-tabs-header-bg"
@@ -6546,10 +6231,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "route-tabs-bg"
-            },
             {
               "theme": "cosmic",
               "prop": "route-tabs-bg"
@@ -6615,12 +6296,7 @@
           "name": "user-fg-highlight",
           "value": "#bcc3cc",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "user-fg-highlight"
-            }
-          ]
+          "childs": []
         },
         "user-font-family-secondary": {
           "name": "user-font-family-secondary",
@@ -6643,10 +6319,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "user-size-small"
-            },
-            {
               "theme": "cosmic",
               "prop": "user-size-small"
             }
@@ -6657,10 +6329,6 @@
           "value": "2.5rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "user-size-medium"
-            },
             {
               "theme": "cosmic",
               "prop": "user-size-medium"
@@ -6673,10 +6341,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "user-size-large"
-            },
-            {
               "theme": "cosmic",
               "prop": "user-size-large"
             }
@@ -6687,10 +6351,6 @@
           "value": "4rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "user-size-xlarge"
-            },
             {
               "theme": "cosmic",
               "prop": "user-size-xlarge"
@@ -6724,10 +6384,6 @@
           "value": "#ffffff",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "user-menu-active-fg"
-            },
             {
               "theme": "cosmic",
               "prop": "user-menu-active-fg"
@@ -6843,10 +6499,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "actions-size-small"
-            },
-            {
               "theme": "cosmic",
               "prop": "actions-size-small"
             }
@@ -6858,10 +6510,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "actions-size-medium"
-            },
-            {
               "theme": "cosmic",
               "prop": "actions-size-medium"
             }
@@ -6872,10 +6520,6 @@
           "value": "3.5rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "actions-size-large"
-            },
             {
               "theme": "cosmic",
               "prop": "actions-size-large"
@@ -7110,12 +6754,7 @@
           "name": "smart-table-bg-even",
           "value": "#f5f7fc",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "smart-table-bg-even"
-            }
-          ]
+          "childs": []
         },
         "smart-table-fg-secondary": {
           "name": "smart-table-fg-secondary",
@@ -7132,12 +6771,7 @@
           "name": "smart-table-bg-active",
           "value": "#e6f3ff",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "smart-table-bg-active"
-            }
-          ]
+          "childs": []
         },
         "smart-table-padding": {
           "name": "smart-table-padding",
@@ -7194,23 +6828,13 @@
           "name": "smart-table-paging-border-width",
           "value": "1px",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "smart-table-paging-border-width"
-            }
-          ]
+          "childs": []
         },
         "smart-table-paging-fg-active": {
           "name": "smart-table-paging-fg-active",
           "value": "#ffffff",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "smart-table-paging-fg-active"
-            }
-          ]
+          "childs": []
         },
         "smart-table-paging-bg-active": {
           "name": "smart-table-paging-bg-active",
@@ -7227,12 +6851,7 @@
           "name": "smart-table-paging-hover",
           "value": "rgba(0, 0, 0, 0.05)",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "smart-table-paging-hover"
-            }
-          ]
+          "childs": []
         },
         "toaster-bg": {
           "name": "toaster-bg",
@@ -7255,10 +6874,6 @@
               "prop": "toaster-btn-close-fg"
             },
             {
-              "theme": "light",
-              "prop": "toaster-fg-default"
-            },
-            {
               "theme": "cosmic",
               "prop": "toaster-fg-default"
             }
@@ -7269,10 +6884,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "toaster-btn-close-bg"
-            },
             {
               "theme": "cosmic",
               "prop": "toaster-btn-close-bg"
@@ -7416,10 +7027,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-disabled-opacity"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-disabled-opacity"
             }
@@ -7430,10 +7037,6 @@
           "value": "default",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-cursor"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-cursor"
@@ -7456,10 +7059,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-secondary-bg"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-secondary-bg"
@@ -7514,22 +7113,13 @@
           "name": "btn-secondary-border",
           "value": "#dadfe6",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-secondary-border"
-            }
-          ]
+          "childs": []
         },
         "btn-secondary-border-width": {
           "name": "btn-secondary-border-width",
           "value": "2px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-secondary-border-width"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-secondary-border-width"
@@ -7542,10 +7132,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-padding-y-lg"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-padding-y-lg"
             }
@@ -7556,10 +7142,6 @@
           "value": "1.75rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-padding-x-lg"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-padding-x-lg"
@@ -7583,10 +7165,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-padding-y-md"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-padding-y-md"
             }
@@ -7597,10 +7175,6 @@
           "value": "1.5rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-padding-x-md"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-padding-x-md"
@@ -7613,10 +7187,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-font-size-md"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-font-size-md"
             }
@@ -7627,10 +7197,6 @@
           "value": "0.625rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-padding-y-sm"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-padding-y-sm"
@@ -7643,10 +7209,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-padding-x-sm"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-padding-x-sm"
             }
@@ -7657,10 +7219,6 @@
           "value": "0.875rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-font-size-sm"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-font-size-sm"
@@ -7673,10 +7231,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-padding-y-tn"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-padding-y-tn"
             }
@@ -7688,10 +7242,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-padding-x-tn"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-padding-x-tn"
             }
@@ -7702,10 +7252,6 @@
           "value": "0.75rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-font-size-tn"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-font-size-tn"
@@ -7729,10 +7275,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-rectangle-border-radius"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-rectangle-border-radius"
             }
@@ -7743,10 +7285,6 @@
           "value": "0.75rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-semi-round-border-radius"
-            },
             {
               "theme": "cosmic",
               "prop": "btn-semi-round-border-radius"
@@ -7759,10 +7297,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "btn-round-border-radius"
-            },
-            {
               "theme": "cosmic",
               "prop": "btn-round-border-radius"
             }
@@ -7772,23 +7306,13 @@
           "name": "btn-hero-shadow",
           "value": "none",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-hero-shadow"
-            }
-          ]
+          "childs": []
         },
         "btn-hero-text-shadow": {
           "name": "btn-hero-text-shadow",
           "value": "none",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-hero-text-shadow"
-            }
-          ]
+          "childs": []
         },
         "btn-hero-bevel-size": {
           "name": "btn-hero-bevel-size",
@@ -7827,12 +7351,7 @@
           "name": "btn-outline-hover-fg",
           "value": "#ffffff",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-outline-hover-fg"
-            }
-          ]
+          "childs": []
         },
         "btn-group-bg": {
           "name": "btn-group-bg",
@@ -7860,12 +7379,7 @@
           "name": "btn-group-separator",
           "value": "#dadfe6",
           "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "btn-group-separator"
-            }
-          ]
+          "childs": []
         },
         "form-control-text-primary-color": {
           "name": "form-control-text-primary-color",
@@ -7932,10 +7446,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "form-control-border-width"
-            },
-            {
               "theme": "cosmic",
               "prop": "form-control-border-width"
             }
@@ -7946,10 +7456,6 @@
           "value": "solid",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-border-type"
-            },
             {
               "theme": "cosmic",
               "prop": "form-control-border-type"
@@ -7975,10 +7481,6 @@
             {
               "theme": "default",
               "prop": "checkbox-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-border-color"
             }
           ]
         },
@@ -8054,10 +7556,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "form-control-placeholder-font-size"
-            },
-            {
               "theme": "cosmic",
               "prop": "form-control-placeholder-font-size"
             }
@@ -8068,10 +7566,6 @@
           "value": "1rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-font-size"
-            },
             {
               "theme": "cosmic",
               "prop": "form-control-font-size"
@@ -8115,10 +7609,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "form-control-lg-padding"
-            },
-            {
               "theme": "cosmic",
               "prop": "form-control-lg-padding"
             }
@@ -8130,10 +7620,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "form-control-label-font-weight"
-            },
-            {
               "theme": "cosmic",
               "prop": "form-control-label-font-weight"
             }
@@ -8144,10 +7630,6 @@
           "value": "0.875rem",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-feedback-font-size"
-            },
             {
               "theme": "cosmic",
               "prop": "form-control-feedback-font-size"
@@ -8171,10 +7653,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "checkbox-bg"
-            },
-            {
               "theme": "cosmic",
               "prop": "checkbox-bg"
             }
@@ -8186,10 +7664,6 @@
           "parents": [],
           "childs": [
             {
-              "theme": "light",
-              "prop": "checkbox-size"
-            },
-            {
               "theme": "cosmic",
               "prop": "checkbox-size"
             }
@@ -8200,10 +7674,6 @@
           "value": "2px",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "checkbox-border-size"
-            },
             {
               "theme": "cosmic",
               "prop": "checkbox-border-size"
@@ -8325,10 +7795,6 @@
           "value": "rgba(0, 0, 0, 0)",
           "parents": [],
           "childs": [
-            {
-              "theme": "light",
-              "prop": "modal-border"
-            },
             {
               "theme": "cosmic",
               "prop": "modal-border"
@@ -8441,5110 +7907,6 @@
       },
       "name": "default",
       "parent": null
-    },
-    "light": {
-      "data": {
-        "font-main": {
-          "name": "font-main",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "layout-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-content-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-body-font-family"
-            }
-          ]
-        },
-        "font-secondary": {
-          "name": "font-secondary",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "header-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "user-font-family-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-font-family"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-header-font-family"
-            }
-          ]
-        },
-        "font-weight-thin": {
-          "name": "font-weight-thin",
-          "value": 200,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-thin"
-            }
-          ],
-          "childs": []
-        },
-        "font-weight-light": {
-          "name": "font-weight-light",
-          "value": 300,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-light"
-            }
-          ],
-          "childs": []
-        },
-        "font-weight-normal": {
-          "name": "font-weight-normal",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-feedback-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-body-font-weight"
-            }
-          ]
-        },
-        "font-weight-bolder": {
-          "name": "font-weight-bolder",
-          "value": 500,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-bolder"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-group-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-header-font-weight"
-            }
-          ]
-        },
-        "font-weight-bold": {
-          "name": "font-weight-bold",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-active-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-font-weight"
-            }
-          ]
-        },
-        "font-weight-ultra-bold": {
-          "name": "font-weight-ultra-bold",
-          "value": 800,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-weight-ultra-bold"
-            }
-          ],
-          "childs": []
-        },
-        "base-font-size": {
-          "name": "base-font-size",
-          "value": "16px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "base-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "font-size-xlg": {
-          "name": "font-size-xlg",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-xlg"
-            }
-          ],
-          "childs": []
-        },
-        "font-size-lg": {
-          "name": "font-size-lg",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-font-size-lg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-lg-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-header-font-size"
-            }
-          ]
-        },
-        "font-size": {
-          "name": "font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "header-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "layout-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "sidebar-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-content-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "user-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-font-size"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-body-font-size"
-            }
-          ]
-        },
-        "font-size-sm": {
-          "name": "font-size-sm",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-sm"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "form-control-sm-font-size"
-            }
-          ]
-        },
-        "font-size-xs": {
-          "name": "font-size-xs",
-          "value": "0.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "font-size-xs"
-            }
-          ],
-          "childs": []
-        },
-        "radius": {
-          "name": "radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-submenu-item-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-border-radius"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-border-radius"
-            }
-          ]
-        },
-        "padding": {
-          "name": "padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-padding"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-padding"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-padding"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-padding"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-padding"
-            }
-          ]
-        },
-        "margin": {
-          "name": "margin",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "margin"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-margin"
-            }
-          ]
-        },
-        "line-height": {
-          "name": "line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "header-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "layout-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "sidebar-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "user-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-line-height"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-line-height"
-            }
-          ]
-        },
-        "color-bg": {
-          "name": "color-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "card-header-active-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "header-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "footer-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "sidebar-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-active-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-submenu-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-submenu-active-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "user-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "user-menu-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-focus-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-bg"
-            }
-          ]
-        },
-        "color-bg-active": {
-          "name": "color-bg-active",
-          "value": "#e9edf2",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-bg-active"
-            }
-          ],
-          "childs": []
-        },
-        "color-fg": {
-          "name": "color-fg",
-          "value": "#2f3234",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "card-header-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "card-header-active-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "header-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "footer-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "layout-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-group-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-icon-color"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "user-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "search-btn-open-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "search-btn-close-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "search-bg-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "search-info"
-            },
-            {
-              "theme": "light",
-              "prop": "search-dash"
-            },
-            {
-              "theme": "light",
-              "prop": "search-placeholder"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-fg-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-text-secondary-color"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-placeholder-color"
-            }
-          ]
-        },
-        "color-fg-heading": {
-          "name": "color-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-fg-heading"
-            },
-            {
-              "theme": "light",
-              "prop": "card-header-fg-heading"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-active-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-submenu-active-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-icon-active-color"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-fg-heading"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-fg-heading"
-            },
-            {
-              "theme": "light",
-              "prop": "user-menu-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "search-text"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-header-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-outline-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-group-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-text-primary-color"
-            },
-            {
-              "theme": "light",
-              "prop": "checkbox-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-fg-heading"
-            }
-          ]
-        },
-        "color-fg-text": {
-          "name": "color-fg-text",
-          "value": "#4b4b4b",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-fg-text"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-fg-text"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-submenu-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-fg-text"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-fg"
-            }
-          ]
-        },
-        "color-fg-highlight": {
-          "name": "color-fg-highlight",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-fg-highlight"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-active-border-color"
-            }
-          ]
-        },
-        "separator": {
-          "name": "separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "footer-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "menu-item-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "actions-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-separator"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-paging-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "modal-separator"
-            }
-          ]
-        },
-        "color-gray": {
-          "name": "color-gray",
-          "value": "rgba(81, 113, 165, 0.15)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-gray"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "border-color"
-            }
-          ]
-        },
-        "color-neutral": {
-          "name": "color-neutral",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-neutral"
-            }
-          ],
-          "childs": []
-        },
-        "color-white": {
-          "name": "color-white",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-white"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "toaster-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-fg"
-            }
-          ]
-        },
-        "color-disabled": {
-          "name": "color-disabled",
-          "value": "rgba(255, 255, 255, 0.4)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-disabled"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-disabled-bg"
-            }
-          ]
-        },
-        "color-primary": {
-          "name": "color-primary",
-          "value": "#8a7fff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-primary-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-wait"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-primary-bg"
-            }
-          ]
-        },
-        "color-success": {
-          "name": "color-success",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-success-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "tabs-selected"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-selected"
-            },
-            {
-              "theme": "light",
-              "prop": "user-menu-active-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "user-menu-border"
-            },
-            {
-              "theme": "light",
-              "prop": "smart-table-paging-bg-active"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-success"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-success-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-selected-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-success-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "checkbox-selected-border-color"
-            },
-            {
-              "theme": "light",
-              "prop": "radio-fg"
-            }
-          ]
-        },
-        "color-info": {
-          "name": "color-info",
-          "value": "#4ca6ff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-info"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-info-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-info"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-info-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-info-border-color"
-            }
-          ]
-        },
-        "color-warning": {
-          "name": "color-warning",
-          "value": "#ffa100",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-warning"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-warning-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-warning"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-warning-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-warning-border-color"
-            }
-          ]
-        },
-        "color-danger": {
-          "name": "color-danger",
-          "value": "#ff4c6a",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-danger"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-header-danger-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-error"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-danger-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "form-control-danger-border-color"
-            }
-          ]
-        },
-        "social-color-facebook": {
-          "name": "social-color-facebook",
-          "value": "#3b5998",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-facebook"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-twitter": {
-          "name": "social-color-twitter",
-          "value": "#55acee",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-twitter"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-google": {
-          "name": "social-color-google",
-          "value": "#dd4b39",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-google"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-linkedin": {
-          "name": "social-color-linkedin",
-          "value": "#0177b5",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-linkedin"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-github": {
-          "name": "social-color-github",
-          "value": "#6b6b6b",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-github"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-stackoverflow": {
-          "name": "social-color-stackoverflow",
-          "value": "#2f96e8",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-stackoverflow"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-dribble": {
-          "name": "social-color-dribble",
-          "value": "#f26798",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-dribble"
-            }
-          ],
-          "childs": []
-        },
-        "social-color-behance": {
-          "name": "social-color-behance",
-          "value": "#0093fa",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "social-color-behance"
-            }
-          ],
-          "childs": []
-        },
-        "border-color": {
-          "name": "border-color",
-          "value": "rgba(81, 113, 165, 0.15)",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-gray"
-            },
-            {
-              "theme": "default",
-              "prop": "color-gray"
-            }
-          ],
-          "childs": []
-        },
-        "shadow": {
-          "name": "shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "card-shadow"
-            },
-            {
-              "theme": "light",
-              "prop": "header-shadow"
-            },
-            {
-              "theme": "light",
-              "prop": "footer-shadow"
-            },
-            {
-              "theme": "light",
-              "prop": "sidebar-shadow"
-            },
-            {
-              "theme": "light",
-              "prop": "toaster-shadow"
-            }
-          ]
-        },
-        "link-color": {
-          "name": "link-color",
-          "value": "#3dcc6d",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "link-color"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "link-color-visited"
-            }
-          ]
-        },
-        "link-color-hover": {
-          "name": "link-color-hover",
-          "value": "#2ee56b",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "link-color-hover"
-            }
-          ],
-          "childs": []
-        },
-        "link-color-visited": {
-          "name": "link-color-visited",
-          "value": "#3dcc6d",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "link-color"
-            },
-            {
-              "theme": "default",
-              "prop": "link-color"
-            }
-          ],
-          "childs": []
-        },
-        "scrollbar-fg": {
-          "name": "scrollbar-fg",
-          "value": "#dadada",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "scrollbar-fg"
-            }
-          ],
-          "childs": []
-        },
-        "scrollbar-bg": {
-          "name": "scrollbar-bg",
-          "value": "#f2f2f2",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "scrollbar-bg"
-            }
-          ],
-          "childs": []
-        },
-        "scrollbar-width": {
-          "name": "scrollbar-width",
-          "value": "5px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "scrollbar-width"
-            }
-          ],
-          "childs": []
-        },
-        "scrollbar-thumb-radius": {
-          "name": "scrollbar-thumb-radius",
-          "value": "2.5px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "scrollbar-thumb-radius"
-            }
-          ],
-          "childs": []
-        },
-        "radial-gradient": {
-          "name": "radial-gradient",
-          "value": "none",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "radial-gradient"
-            }
-          ],
-          "childs": []
-        },
-        "linear-gradient": {
-          "name": "linear-gradient",
-          "value": "none",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "linear-gradient"
-            }
-          ],
-          "childs": []
-        },
-        "card-font-size": {
-          "name": "card-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "card-line-height": {
-          "name": "card-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "card-font-weight": {
-          "name": "card-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": []
-        },
-        "card-fg": {
-          "name": "card-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "card-fg-text": {
-          "name": "card-fg-text",
-          "value": "#4b4b4b",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-text"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-text"
-            }
-          ],
-          "childs": []
-        },
-        "card-fg-heading": {
-          "name": "card-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "card-bg": {
-          "name": "card-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-xxsmall": {
-          "name": "card-height-xxsmall",
-          "value": "96px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-xxsmall"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-xsmall": {
-          "name": "card-height-xsmall",
-          "value": "216px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-xsmall"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-small": {
-          "name": "card-height-small",
-          "value": "336px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-small"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-medium": {
-          "name": "card-height-medium",
-          "value": "456px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-medium"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-large": {
-          "name": "card-height-large",
-          "value": "576px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-large"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-xlarge": {
-          "name": "card-height-xlarge",
-          "value": "696px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-xlarge"
-            }
-          ],
-          "childs": []
-        },
-        "card-height-xxlarge": {
-          "name": "card-height-xxlarge",
-          "value": "816px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "card-height-xxlarge"
-            }
-          ],
-          "childs": []
-        },
-        "card-shadow": {
-          "name": "card-shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "shadow"
-            }
-          ],
-          "childs": []
-        },
-        "card-border-radius": {
-          "name": "card-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "card-padding": {
-          "name": "card-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": []
-        },
-        "card-margin": {
-          "name": "card-margin",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "margin"
-            },
-            {
-              "theme": "default",
-              "prop": "margin"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-font-family": {
-          "name": "card-header-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-font-size": {
-          "name": "card-header-font-size",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-font-weight": {
-          "name": "card-header-font-weight",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "tabs-active-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "route-tabs-active-font-weight"
-            }
-          ]
-        },
-        "card-separator": {
-          "name": "card-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-fg": {
-          "name": "card-header-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-fg-heading": {
-          "name": "card-header-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-active-bg": {
-          "name": "card-header-active-bg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-active-fg": {
-          "name": "card-header-active-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-disabled-bg": {
-          "name": "card-header-disabled-bg",
-          "value": "rgba(255, 255, 255, 0.4)",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-disabled"
-            },
-            {
-              "theme": "default",
-              "prop": "color-disabled"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-primary-bg": {
-          "name": "card-header-primary-bg",
-          "value": "#8a7fff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-primary"
-            },
-            {
-              "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-info-bg": {
-          "name": "card-header-info-bg",
-          "value": "#4ca6ff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-info"
-            },
-            {
-              "theme": "default",
-              "prop": "color-info"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-success-bg": {
-          "name": "card-header-success-bg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-warning-bg": {
-          "name": "card-header-warning-bg",
-          "value": "#ffa100",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-warning"
-            },
-            {
-              "theme": "default",
-              "prop": "color-warning"
-            }
-          ],
-          "childs": []
-        },
-        "card-header-danger-bg": {
-          "name": "card-header-danger-bg",
-          "value": "#ff4c6a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-danger"
-            },
-            {
-              "theme": "default",
-              "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "header-font-family": {
-          "name": "header-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "header-font-size": {
-          "name": "header-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "header-line-height": {
-          "name": "header-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "header-fg": {
-          "name": "header-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "header-bg": {
-          "name": "header-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "header-height": {
-          "name": "header-height",
-          "value": "4.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "header-height"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "footer-height"
-            }
-          ]
-        },
-        "header-padding": {
-          "name": "header-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "header-padding"
-            }
-          ],
-          "childs": []
-        },
-        "header-shadow": {
-          "name": "header-shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "shadow"
-            }
-          ],
-          "childs": []
-        },
-        "footer-height": {
-          "name": "footer-height",
-          "value": "4.75rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "header-height"
-            },
-            {
-              "theme": "default",
-              "prop": "header-height"
-            }
-          ],
-          "childs": []
-        },
-        "footer-padding": {
-          "name": "footer-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "footer-padding"
-            }
-          ],
-          "childs": []
-        },
-        "footer-fg": {
-          "name": "footer-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "footer-bg": {
-          "name": "footer-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "footer-separator": {
-          "name": "footer-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "footer-shadow": {
-          "name": "footer-shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "shadow"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-family": {
-          "name": "layout-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "layout-font-size": {
-          "name": "layout-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "layout-line-height": {
-          "name": "layout-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "layout-fg": {
-          "name": "layout-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "layout-bg": {
-          "name": "layout-bg",
-          "value": "#f6f7fc",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "layout-window-mode-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "search-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "btn-group-bg"
-            }
-          ]
-        },
-        "layout-min-height": {
-          "name": "layout-min-height",
-          "value": "100vh",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "layout-min-height"
-            }
-          ],
-          "childs": []
-        },
-        "layout-content-width": {
-          "name": "layout-content-width",
-          "value": "900px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "layout-content-width"
-            }
-          ],
-          "childs": []
-        },
-        "layout-window-mode-min-width": {
-          "name": "layout-window-mode-min-width",
-          "value": "300px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "layout-window-mode-min-width"
-            }
-          ],
-          "childs": []
-        },
-        "layout-window-mode-max-width": {
-          "name": "layout-window-mode-max-width",
-          "value": "1920px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "layout-window-mode-max-width"
-            }
-          ],
-          "childs": []
-        },
-        "layout-window-mode-bg": {
-          "name": "layout-window-mode-bg",
-          "value": "#f6f7fc",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "layout-bg"
-            }
-          ],
-          "childs": []
-        },
-        "layout-window-mode-padding-top": {
-          "name": "layout-window-mode-padding-top",
-          "value": "4.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "layout-window-mode-padding-top"
-            }
-          ],
-          "childs": []
-        },
-        "layout-padding": {
-          "name": "layout-padding",
-          "value": "2.5rem",
-          "parents": [],
-          "childs": []
-        },
-        "layout-medium-padding": {
-          "name": "layout-medium-padding",
-          "value": [
-            "1.5rem",
-            "1.5rem",
-            "0.5rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "layout-small-padding": {
-          "name": "layout-small-padding",
-          "value": [
-            "1rem",
-            "1rem",
-            0
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "sidebar-font-size": {
-          "name": "sidebar-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-line-height": {
-          "name": "sidebar-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-fg": {
-          "name": "sidebar-fg",
-          "value": "color-secondary",
-          "parents": [],
-          "childs": []
-        },
-        "sidebar-bg": {
-          "name": "sidebar-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-height": {
-          "name": "sidebar-height",
-          "value": "100vh",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "sidebar-height"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-width": {
-          "name": "sidebar-width",
-          "value": "16.25rem",
-          "parents": [],
-          "childs": []
-        },
-        "sidebar-width-compact": {
-          "name": "sidebar-width-compact",
-          "value": "3.45rem",
-          "parents": [],
-          "childs": []
-        },
-        "sidebar-padding": {
-          "name": "sidebar-padding",
-          "value": 0,
-          "parents": [],
-          "childs": []
-        },
-        "sidebar-header-height": {
-          "name": "sidebar-header-height",
-          "value": "3.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "sidebar-header-height"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-footer-height": {
-          "name": "sidebar-footer-height",
-          "value": "3.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "sidebar-footer-height"
-            }
-          ],
-          "childs": []
-        },
-        "sidebar-shadow": {
-          "name": "sidebar-shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "shadow"
-            }
-          ],
-          "childs": []
-        },
-        "menu-font-family": {
-          "name": "menu-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "menu-font-size": {
-          "name": "menu-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "menu-font-weight": {
-          "name": "menu-font-weight",
-          "value": 500,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bolder"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bolder"
-            }
-          ],
-          "childs": []
-        },
-        "menu-fg": {
-          "name": "menu-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-bg": {
-          "name": "menu-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-active-fg": {
-          "name": "menu-active-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "menu-active-bg": {
-          "name": "menu-active-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-active-font-weight": {
-          "name": "menu-active-font-weight",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-bg": {
-          "name": "menu-submenu-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-hover-bg"
-            }
-          ]
-        },
-        "menu-submenu-fg": {
-          "name": "menu-submenu-fg",
-          "value": "#4b4b4b",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-text"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-text"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-active-fg": {
-          "name": "menu-submenu-active-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-hover-fg"
-            }
-          ]
-        },
-        "menu-submenu-active-bg": {
-          "name": "menu-submenu-active-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-active-border-color": {
-          "name": "menu-submenu-active-border-color",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-highlight"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-highlight"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-active-shadow": {
-          "name": "menu-submenu-active-shadow",
-          "value": "none",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "menu-submenu-active-shadow"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-hover-fg": {
-          "name": "menu-submenu-hover-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-active-fg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-hover-bg": {
-          "name": "menu-submenu-hover-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "menu-submenu-bg"
-            },
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-item-border-width": {
-          "name": "menu-submenu-item-border-width",
-          "value": "0.125rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "menu-submenu-item-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-item-border-radius": {
-          "name": "menu-submenu-item-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "menu-submenu-item-padding": {
-          "name": "menu-submenu-item-padding",
-          "value": [
-            "0.5rem",
-            "1rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "menu-submenu-item-container-padding": {
-          "name": "menu-submenu-item-container-padding",
-          "value": [
-            0,
-            "1.25rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "menu-submenu-padding": {
-          "name": "menu-submenu-padding",
-          "value": "0.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "menu-submenu-padding"
-            }
-          ],
-          "childs": []
-        },
-        "menu-group-font-weight": {
-          "name": "menu-group-font-weight",
-          "value": 500,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bolder"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bolder"
-            }
-          ],
-          "childs": []
-        },
-        "menu-group-font-size": {
-          "name": "menu-group-font-size",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "menu-group-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "menu-group-fg": {
-          "name": "menu-group-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-group-padding": {
-          "name": "menu-group-padding",
-          "value": [
-            "1rem",
-            "1.25rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "menu-item-padding": {
-          "name": "menu-item-padding",
-          "value": [
-            "0.675rem",
-            "1rem",
-            "0.675rem",
-            "0.75rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "menu-item-separator": {
-          "name": "menu-item-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "menu-icon-font-size": {
-          "name": "menu-icon-font-size",
-          "value": "2.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "menu-icon-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "menu-icon-margin": {
-          "name": "menu-icon-margin",
-          "value": [
-            0,
-            "0.5rem",
-            0,
-            0
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "menu-icon-color": {
-          "name": "menu-icon-color",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "menu-icon-active-color": {
-          "name": "menu-icon-active-color",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-font-family": {
-          "name": "tabs-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-font-size": {
-          "name": "tabs-font-size",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-content-font-family": {
-          "name": "tabs-content-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-content-font-size": {
-          "name": "tabs-content-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-active-bg": {
-          "name": "tabs-active-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "tabs-active-bg"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-active-font-weight": {
-          "name": "tabs-active-font-weight",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "card-header-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-padding": {
-          "name": "tabs-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-content-padding": {
-          "name": "tabs-content-padding",
-          "value": 0,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "tabs-content-padding"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-header-bg": {
-          "name": "tabs-header-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "tabs-header-bg"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-separator": {
-          "name": "tabs-separator",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [],
-          "childs": []
-        },
-        "tabs-fg": {
-          "name": "tabs-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-fg-text": {
-          "name": "tabs-fg-text",
-          "value": "#4b4b4b",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-text"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-text"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-fg-heading": {
-          "name": "tabs-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-bg": {
-          "name": "tabs-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "tabs-bg"
-            }
-          ],
-          "childs": []
-        },
-        "tabs-selected": {
-          "name": "tabs-selected",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-font-family": {
-          "name": "route-tabs-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-font-size": {
-          "name": "route-tabs-font-size",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-active-bg": {
-          "name": "route-tabs-active-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "route-tabs-active-bg"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-active-font-weight": {
-          "name": "route-tabs-active-font-weight",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "card-header-font-weight"
-            },
-            {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-padding": {
-          "name": "route-tabs-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-header-bg": {
-          "name": "route-tabs-header-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "route-tabs-header-bg"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-separator": {
-          "name": "route-tabs-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-fg": {
-          "name": "route-tabs-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-fg-heading": {
-          "name": "route-tabs-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-bg": {
-          "name": "route-tabs-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "route-tabs-bg"
-            }
-          ],
-          "childs": []
-        },
-        "route-tabs-selected": {
-          "name": "route-tabs-selected",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "user-font-size": {
-          "name": "user-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "user-line-height": {
-          "name": "user-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "user-bg": {
-          "name": "user-bg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "user-fg": {
-          "name": "user-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-fg-highlight": {
-          "name": "user-fg-highlight",
-          "value": "#bcc3cc",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-fg-highlight"
-            }
-          ],
-          "childs": []
-        },
-        "user-font-family-secondary": {
-          "name": "user-font-family-secondary",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "user-size-small": {
-          "name": "user-size-small",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-size-small"
-            }
-          ],
-          "childs": []
-        },
-        "user-size-medium": {
-          "name": "user-size-medium",
-          "value": "2.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-size-medium"
-            }
-          ],
-          "childs": []
-        },
-        "user-size-large": {
-          "name": "user-size-large",
-          "value": "3.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-size-large"
-            }
-          ],
-          "childs": []
-        },
-        "user-size-xlarge": {
-          "name": "user-size-xlarge",
-          "value": "4rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-size-xlarge"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-menu-active-fg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "actions-font-size": {
-          "name": "actions-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "actions-font-family": {
-          "name": "actions-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "actions-line-height": {
-          "name": "actions-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "actions-fg": {
-          "name": "actions-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "actions-bg": {
-          "name": "actions-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "actions-separator": {
-          "name": "actions-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "actions-padding": {
-          "name": "actions-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": []
-        },
-        "actions-size-small": {
-          "name": "actions-size-small",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "actions-size-small"
-            }
-          ],
-          "childs": []
-        },
-        "actions-size-medium": {
-          "name": "actions-size-medium",
-          "value": "2.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "actions-size-medium"
-            }
-          ],
-          "childs": []
-        },
-        "actions-size-large": {
-          "name": "actions-size-large",
-          "value": "3.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "actions-size-large"
-            }
-          ],
-          "childs": []
-        },
-        "search-btn-open-fg": {
-          "name": "search-btn-open-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "search-btn-close-fg": {
-          "name": "search-btn-close-fg",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "search-bg": {
-          "name": "search-bg",
-          "value": "#f6f7fc",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "layout-bg"
-            }
-          ],
-          "childs": []
-        },
-        "search-bg-secondary": {
-          "name": "search-bg-secondary",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "search-text": {
-          "name": "search-text",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "search-info": {
-          "name": "search-info",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "search-dash": {
-          "name": "search-dash",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "search-placeholder": {
-          "name": "search-placeholder",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-font-family": {
-          "name": "smart-table-header-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-font-size": {
-          "name": "smart-table-header-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-font-weight": {
-          "name": "smart-table-header-font-weight",
-          "value": 600,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bold"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bold"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-line-height": {
-          "name": "smart-table-header-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-fg": {
-          "name": "smart-table-header-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-header-bg": {
-          "name": "smart-table-header-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-font-family": {
-          "name": "smart-table-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-font-size": {
-          "name": "smart-table-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-font-weight": {
-          "name": "smart-table-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-line-height": {
-          "name": "smart-table-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-fg": {
-          "name": "smart-table-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-bg": {
-          "name": "smart-table-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-bg-even": {
-          "name": "smart-table-bg-even",
-          "value": "#f5f7fc",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "smart-table-bg-even"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-fg-secondary": {
-          "name": "smart-table-fg-secondary",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-bg-active": {
-          "name": "smart-table-bg-active",
-          "value": "#e6f3ff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "smart-table-bg-active"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-padding": {
-          "name": "smart-table-padding",
-          "value": [
-            "0.875rem",
-            "1.25rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "smart-table-filter-padding": {
-          "name": "smart-table-filter-padding",
-          "value": [
-            "0.375rem",
-            "0.5rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "smart-table-separator": {
-          "name": "smart-table-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-border-radius": {
-          "name": "smart-table-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-paging-border-color": {
-          "name": "smart-table-paging-border-color",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-paging-border-width": {
-          "name": "smart-table-paging-border-width",
-          "value": "1px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "smart-table-paging-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-paging-fg-active": {
-          "name": "smart-table-paging-fg-active",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "smart-table-paging-fg-active"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-paging-bg-active": {
-          "name": "smart-table-paging-bg-active",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "smart-table-paging-hover": {
-          "name": "smart-table-paging-hover",
-          "value": "rgba(0, 0, 0, 0.05)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "smart-table-paging-hover"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-bg": {
-          "name": "toaster-bg",
-          "value": "#8a7fff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-primary"
-            },
-            {
-              "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-fg-default": {
-          "name": "toaster-fg-default",
-          "value": "color-inverse",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "toaster-fg-default"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "toaster-btn-close-fg"
-            }
-          ]
-        },
-        "toaster-btn-close-bg": {
-          "name": "toaster-btn-close-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "toaster-btn-close-bg"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-btn-close-fg": {
-          "name": "toaster-btn-close-fg",
-          "value": "color-inverse",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "toaster-fg-default"
-            },
-            {
-              "theme": "default",
-              "prop": "toaster-fg-default"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-shadow": {
-          "name": "toaster-shadow",
-          "value": [
-            0,
-            "2px",
-            "12px",
-            0,
-            "#dfe3eb"
-          ],
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "shadow"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-fg": {
-          "name": "toaster-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-white"
-            },
-            {
-              "theme": "default",
-              "prop": "color-white"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-success": {
-          "name": "toaster-success",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-info": {
-          "name": "toaster-info",
-          "value": "#4ca6ff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-info"
-            },
-            {
-              "theme": "default",
-              "prop": "color-info"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-warning": {
-          "name": "toaster-warning",
-          "value": "#ffa100",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-warning"
-            },
-            {
-              "theme": "default",
-              "prop": "color-warning"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-wait": {
-          "name": "toaster-wait",
-          "value": "#8a7fff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-primary"
-            },
-            {
-              "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "toaster-error": {
-          "name": "toaster-error",
-          "value": "#ff4c6a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-danger"
-            },
-            {
-              "theme": "default",
-              "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "btn-fg": {
-          "name": "btn-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-white"
-            },
-            {
-              "theme": "default",
-              "prop": "color-white"
-            }
-          ],
-          "childs": []
-        },
-        "btn-font-family": {
-          "name": "btn-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "btn-line-height": {
-          "name": "btn-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "btn-disabled-opacity": {
-          "name": "btn-disabled-opacity",
-          "value": 0.3,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-disabled-opacity"
-            }
-          ],
-          "childs": []
-        },
-        "btn-cursor": {
-          "name": "btn-cursor",
-          "value": "default",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-cursor"
-            }
-          ],
-          "childs": []
-        },
-        "btn-primary-bg": {
-          "name": "btn-primary-bg",
-          "value": "#8a7fff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-primary"
-            },
-            {
-              "theme": "default",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "btn-secondary-bg": {
-          "name": "btn-secondary-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-secondary-bg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-info-bg": {
-          "name": "btn-info-bg",
-          "value": "#4ca6ff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-info"
-            },
-            {
-              "theme": "default",
-              "prop": "color-info"
-            }
-          ],
-          "childs": []
-        },
-        "btn-success-bg": {
-          "name": "btn-success-bg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "btn-warning-bg": {
-          "name": "btn-warning-bg",
-          "value": "#ffa100",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-warning"
-            },
-            {
-              "theme": "default",
-              "prop": "color-warning"
-            }
-          ],
-          "childs": []
-        },
-        "btn-danger-bg": {
-          "name": "btn-danger-bg",
-          "value": "#ff4c6a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-danger"
-            },
-            {
-              "theme": "default",
-              "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "btn-secondary-border": {
-          "name": "btn-secondary-border",
-          "value": "#dadfe6",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-secondary-border"
-            }
-          ],
-          "childs": []
-        },
-        "btn-secondary-border-width": {
-          "name": "btn-secondary-border-width",
-          "value": "2px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-secondary-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-y-lg": {
-          "name": "btn-padding-y-lg",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-y-lg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-x-lg": {
-          "name": "btn-padding-x-lg",
-          "value": "1.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-x-lg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-font-size-lg": {
-          "name": "btn-font-size-lg",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-y-md": {
-          "name": "btn-padding-y-md",
-          "value": "0.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-y-md"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-x-md": {
-          "name": "btn-padding-x-md",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-x-md"
-            }
-          ],
-          "childs": []
-        },
-        "btn-font-size-md": {
-          "name": "btn-font-size-md",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-font-size-md"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-y-sm": {
-          "name": "btn-padding-y-sm",
-          "value": "0.625rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-y-sm"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-x-sm": {
-          "name": "btn-padding-x-sm",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-x-sm"
-            }
-          ],
-          "childs": []
-        },
-        "btn-font-size-sm": {
-          "name": "btn-font-size-sm",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-font-size-sm"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-y-tn": {
-          "name": "btn-padding-y-tn",
-          "value": "0.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-y-tn"
-            }
-          ],
-          "childs": []
-        },
-        "btn-padding-x-tn": {
-          "name": "btn-padding-x-tn",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-padding-x-tn"
-            }
-          ],
-          "childs": []
-        },
-        "btn-font-size-tn": {
-          "name": "btn-font-size-tn",
-          "value": "0.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-font-size-tn"
-            }
-          ],
-          "childs": []
-        },
-        "btn-border-radius": {
-          "name": "btn-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "btn-rectangle-border-radius": {
-          "name": "btn-rectangle-border-radius",
-          "value": "0.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-rectangle-border-radius"
-            }
-          ],
-          "childs": []
-        },
-        "btn-semi-round-border-radius": {
-          "name": "btn-semi-round-border-radius",
-          "value": "0.75rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-semi-round-border-radius"
-            }
-          ],
-          "childs": []
-        },
-        "btn-round-border-radius": {
-          "name": "btn-round-border-radius",
-          "value": "1.5rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-round-border-radius"
-            }
-          ],
-          "childs": []
-        },
-        "btn-hero-shadow": {
-          "name": "btn-hero-shadow",
-          "value": "none",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-hero-shadow"
-            }
-          ],
-          "childs": []
-        },
-        "btn-hero-text-shadow": {
-          "name": "btn-hero-text-shadow",
-          "value": "none",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-hero-text-shadow"
-            }
-          ],
-          "childs": []
-        },
-        "btn-hero-bevel-size": {
-          "name": "btn-hero-bevel-size",
-          "value": [
-            0,
-            0,
-            0,
-            0
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "btn-hero-glow-size": {
-          "name": "btn-hero-glow-size",
-          "value": [
-            0,
-            0,
-            0,
-            0
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "btn-outline-fg": {
-          "name": "btn-outline-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "btn-outline-hover-fg": {
-          "name": "btn-outline-hover-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-outline-hover-fg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-group-bg": {
-          "name": "btn-group-bg",
-          "value": "#f6f7fc",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "layout-bg"
-            }
-          ],
-          "childs": []
-        },
-        "btn-group-fg": {
-          "name": "btn-group-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "btn-group-separator": {
-          "name": "btn-group-separator",
-          "value": "#dadfe6",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "btn-group-separator"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-text-primary-color": {
-          "name": "form-control-text-primary-color",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-text-secondary-color": {
-          "name": "form-control-text-secondary-color",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-font-family": {
-          "name": "form-control-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-bg": {
-          "name": "form-control-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-focus-bg": {
-          "name": "form-control-focus-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-width": {
-          "name": "form-control-border-width",
-          "value": "2px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-width"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-type": {
-          "name": "form-control-border-type",
-          "value": "solid",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-type"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-radius": {
-          "name": "form-control-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-border-color": {
-          "name": "form-control-border-color",
-          "value": "#dadfe6",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-border-color"
-            }
-          ],
-          "childs": [
-            {
-              "theme": "light",
-              "prop": "checkbox-border-color"
-            }
-          ]
-        },
-        "form-control-selected-border-color": {
-          "name": "form-control-selected-border-color",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-info-border-color": {
-          "name": "form-control-info-border-color",
-          "value": "#4ca6ff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-info"
-            },
-            {
-              "theme": "default",
-              "prop": "color-info"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-success-border-color": {
-          "name": "form-control-success-border-color",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-danger-border-color": {
-          "name": "form-control-danger-border-color",
-          "value": "#ff4c6a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-danger"
-            },
-            {
-              "theme": "default",
-              "prop": "color-danger"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-warning-border-color": {
-          "name": "form-control-warning-border-color",
-          "value": "#ffa100",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-warning"
-            },
-            {
-              "theme": "default",
-              "prop": "color-warning"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-placeholder-color": {
-          "name": "form-control-placeholder-color",
-          "value": "#2f3234",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-placeholder-font-size": {
-          "name": "form-control-placeholder-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-placeholder-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-font-size": {
-          "name": "form-control-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-sm-font-size": {
-          "name": "form-control-sm-font-size",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-sm"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-sm"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-sm-padding": {
-          "name": "form-control-sm-padding",
-          "value": [
-            "0.375rem",
-            "1.125rem"
-          ],
-          "parents": [],
-          "childs": []
-        },
-        "form-control-lg-font-size": {
-          "name": "form-control-lg-font-size",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-lg-padding": {
-          "name": "form-control-lg-padding",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-lg-padding"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-label-font-weight": {
-          "name": "form-control-label-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-label-font-weight"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-feedback-font-size": {
-          "name": "form-control-feedback-font-size",
-          "value": "0.875rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "form-control-feedback-font-size"
-            }
-          ],
-          "childs": []
-        },
-        "form-control-feedback-font-weight": {
-          "name": "form-control-feedback-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-bg": {
-          "name": "checkbox-bg",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "checkbox-bg"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-size": {
-          "name": "checkbox-size",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "checkbox-size"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-border-size": {
-          "name": "checkbox-border-size",
-          "value": "2px",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "checkbox-border-size"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-border-color": {
-          "name": "checkbox-border-color",
-          "value": "#dadfe6",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "default",
-              "prop": "form-control-border-color"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-selected-border-color": {
-          "name": "checkbox-selected-border-color",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "checkbox-fg": {
-          "name": "checkbox-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "radio-fg": {
-          "name": "radio-fg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-success"
-            },
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "modal-font-size": {
-          "name": "modal-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "modal-line-height": {
-          "name": "modal-line-height",
-          "value": 1.25,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "line-height"
-            },
-            {
-              "theme": "default",
-              "prop": "line-height"
-            }
-          ],
-          "childs": []
-        },
-        "modal-font-weight": {
-          "name": "modal-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": []
-        },
-        "modal-fg": {
-          "name": "modal-fg",
-          "value": "#4b4b4b",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-text"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-text"
-            }
-          ],
-          "childs": []
-        },
-        "modal-fg-heading": {
-          "name": "modal-fg-heading",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "modal-bg": {
-          "name": "modal-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "color-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "modal-border": {
-          "name": "modal-border",
-          "value": "rgba(0, 0, 0, 0)",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "modal-border"
-            }
-          ],
-          "childs": []
-        },
-        "modal-border-radius": {
-          "name": "modal-border-radius",
-          "value": "0.375rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "radius"
-            },
-            {
-              "theme": "default",
-              "prop": "radius"
-            }
-          ],
-          "childs": []
-        },
-        "modal-padding": {
-          "name": "modal-padding",
-          "value": "1.25rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "padding"
-            },
-            {
-              "theme": "default",
-              "prop": "padding"
-            }
-          ],
-          "childs": []
-        },
-        "modal-header-font-family": {
-          "name": "modal-header-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-secondary"
-            },
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "modal-header-font-weight": {
-          "name": "modal-header-font-weight",
-          "value": 500,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-bolder"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-bolder"
-            }
-          ],
-          "childs": []
-        },
-        "modal-header-font-size": {
-          "name": "modal-header-font-size",
-          "value": "1.125rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size-lg"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size-lg"
-            }
-          ],
-          "childs": []
-        },
-        "modal-body-font-family": {
-          "name": "modal-body-font-family",
-          "value": "Helvetica",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-main"
-            },
-            {
-              "theme": "default",
-              "prop": "font-main"
-            }
-          ],
-          "childs": []
-        },
-        "modal-body-font-weight": {
-          "name": "modal-body-font-weight",
-          "value": 400,
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-weight-normal"
-            },
-            {
-              "theme": "default",
-              "prop": "font-weight-normal"
-            }
-          ],
-          "childs": []
-        },
-        "modal-body-font-size": {
-          "name": "modal-body-font-size",
-          "value": "1rem",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "font-size"
-            },
-            {
-              "theme": "default",
-              "prop": "font-size"
-            }
-          ],
-          "childs": []
-        },
-        "modal-separator": {
-          "name": "modal-separator",
-          "value": "#ebeef2",
-          "parents": [
-            {
-              "theme": "light",
-              "prop": "separator"
-            },
-            {
-              "theme": "default",
-              "prop": "separator"
-            }
-          ],
-          "childs": []
-        }
-      },
-      "name": "light",
-      "parent": "default"
     },
     "cosmic": {
       "data": {
