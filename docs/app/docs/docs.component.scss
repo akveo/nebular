@@ -25,7 +25,15 @@
       .main-container {
         height: calc(100vh - #{nb-theme(header-height)} - #{nb-theme(content-top-gap)}) !important;
       }
+
       nb-menu {
+        & > ul > li > a:first-child {
+          margin: 0.5rem 0;
+        }
+
+        .menu-items > .menu-item:first-child {
+          border-top: none;
+        }
         span {
           letter-spacing: -1px;
         }

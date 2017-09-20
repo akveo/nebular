@@ -1789,6 +1789,13 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "router",
+              "type": "Router",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
