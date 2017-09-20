@@ -1,8 +1,0 @@
-@import '../../../theme/styles/all';
-@import '../all';
-
-$nb-enabled-themes: (light);
-
-@include nb-install() {
-  @include nb-auth-global();
-};
