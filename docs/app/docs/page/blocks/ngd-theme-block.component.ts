@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnDestroy, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { DocsService } from '../../docs.service';
 
 @Component({
   selector: 'ngd-theme-block',
@@ -64,8 +65,7 @@ import { Subscription } from 'rxjs/Subscription';
   </div>
 `,
 })
-export class NgdThemeComponent implements OnInit, OnDestroy {
-//TODO: remove warning
+export class NgdThemeComponent implements OnDestroy {
   themeTitle: string;
   filteredContent: any;
   themeContent: any;
@@ -87,15 +87,20 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
   }
 
   constructor(private renderer: Renderer2,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private docsService: DocsService,
+              private elementRef: ElementRef,
+              private router: Router) {
 
-  ngOnInit() {
     this.fragmentSubscription = this.route.fragment
+      .merge(this.docsService.onFragmentClick())
+      .delay(1)
       .subscribe(fr => {
-        this.filterThemeContent('');
-        this.searchTermModel = '';
+        this.removeRowHighlighting();
+        this.processFragment(fr);
       });
   }
+
 
   filterThemeContent(term) {
     if (term !== this.searchTermModel) {
@@ -106,6 +111,23 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
       this.filteredContent = filterResult;
       this.isWarning = !(filterResult.length > 0);
       this.renderer.setProperty(document.body, 'scrollTop', 0);
+      this.router.navigate([], { relativeTo: this.route });
+    }
+  }
+
+  processFragment(fr) {
+    this.filterThemeContent('');
+    this.searchTermModel = '';
+    const el = this.elementRef.nativeElement.querySelector(`#${fr}`);
+    if (el) {
+      this.renderer.addClass(el, 'highlighted-row');
+    }
+  }
+
+  removeRowHighlighting() {
+    const highlightedRowElement = this.elementRef.nativeElement.querySelector('.highlighted-row');
+    if (highlightedRowElement) {
+      this.renderer.removeClass(highlightedRowElement, 'highlighted-row');
     }
   }
 

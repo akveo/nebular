@@ -22,17 +22,16 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy {
   private fragmentSubscription: Subscription;
 
 
-  constructor(private service: DocsService,
+  constructor(private docsService: DocsService,
               private router: Router,
               private route: ActivatedRoute,
-              private elementRef: ElementRef,
-              private renderer: Renderer2) {
+              private elementRef: ElementRef) {
   }
 
   // TODO: refactor this
   ngAfterViewInit() {
     this.fragmentSubscription = this.route.fragment
-      .merge(this.service.onFragmentClick())
+      .merge(this.docsService.onFragmentClick())
       .delay(1)
       .subscribe(fr => this.processFragment(fr));
   }
@@ -44,8 +43,6 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy {
         el.scrollIntoView();
         if (new RegExp(/themes/i).test(this.router.url)) {
           window.scrollBy(0, -235);//header + theme-header
-          this.renderer.addClass(el, 'highlighted-row');//TODO: move to theme block
-          setTimeout(() => this.renderer.removeClass(el, 'highlighted-row'), 1000);
         } else {
           window.scrollBy(0, -80);
         }
