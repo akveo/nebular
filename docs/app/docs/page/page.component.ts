@@ -69,7 +69,7 @@ export class NgdPageComponent implements OnDestroy, OnInit {
       !this.currentItem.children[0].block ||
       this.currentItem.children[0].block !== 'theme';
 
-    this.titleService.setTitle(`NGA Documentation - ${event.item.data.name}`);
+    this.titleService.setTitle(`Nebular Documentation - ${event.item.data.name}`);
   }
 
   ngOnDestroy() {

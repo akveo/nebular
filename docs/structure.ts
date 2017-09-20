@@ -92,6 +92,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: '3rd-party components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'concept-3rd-party.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -106,6 +117,17 @@ export const STRUCTURE = [
             type: 'block',
             block: 'markdown',
             source: 'enabling-theme-system.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Component Theme Variables',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'component-theme-variables.md',
           },
         ],
       },
