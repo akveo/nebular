@@ -69,7 +69,7 @@ $bootstrap-panel-bg: rgba(#000000, 0.2);
 
 ```
 
-After this is done, you need to setup javascript to use the **same colors**. These colors 
+When it is done, you need to setup javascript to use the **same colors**. These colors 
 are used for javascript charts and other components (maps, etc); 
 Let's completely change the JS colors to a new set.
 To do this, add the following code to the configuration block inside `src/app/theme/theme.config.ts`:
