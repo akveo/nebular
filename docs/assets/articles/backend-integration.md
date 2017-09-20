@@ -1,4 +1,4 @@
-This section describes approaches of integration of Nebular application with backend API. Despite we understand that every backend in really different, we think that we can cover several most commonly used ways.
+This section describes approaches of integration of Nebular application with backend API. Despite we understand that every backend is really different, we think that we can cover several most commonly used ways.
 
 ## Integration with JSON REST server
 
