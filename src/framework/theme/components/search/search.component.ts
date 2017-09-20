@@ -42,7 +42,12 @@ import { Router, NavigationEnd } from '@angular/router';
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
           <div class="form-content">
-            <input class="search-input" #searchInput autocomplete="off" [attr.placeholder]="placeholder"/>
+            <input class="search-input" 
+              #searchInput
+              autocomplete="off"
+              [attr.placeholder]="placeholder"
+              tabindex="-1"
+              (blur)="tabOut.next($event)"/>
           </div>
           <span class="info">Hit enter to search</span>
         </form>
@@ -65,6 +70,8 @@ export class NbSearchFieldComponent {
 
   @Output() searchClose = new EventEmitter();
   @Output() search = new EventEmitter();
+  @Output() tabOut = new EventEmitter();
+
 
   @ViewChild('searchInput') inputElement: ElementRef;
 
@@ -203,6 +210,10 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchService.submitSearch(term, this.tag);
       this.searchService.deactivateSearch(this.searchType, this.tag);
     });
+
+    componentRef.instance.tabOut
+      .subscribe(() => this.showSearch && this.searchFieldComponentRef.instance.inputElement.nativeElement.focus());
+
     componentRef.changeDetectorRef.detectChanges();
   }
 
