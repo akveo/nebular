@@ -1,4 +1,5 @@
 ## FULL-FEATURED FRAMEWORK BASED ON ANGULAR
+<img src="https://i.imgur.com/kNXbNkR.jpg" />
 
 ### What's included:
 
@@ -16,9 +17,7 @@ Installation, customization and other useful articles: https://akveo.github.io/n
 <img src="https://i.imgur.com/H4coTS7.png" />
 
 ### Demo Application
-[ngx-admin](https://github.com/akveo/ngx-admin) is built on top of Nebular
-
-<a href="http://akveo.com/ngx-admin"><img src="https://i.imgur.com/sY4pflD.jpg" /></a>
+Our beautiful [ngx-admin](https://github.com/akveo/ngx-admin) is built on top of Nebular.
 
 ### License
 [MIT](LICENSE.txt) license.
