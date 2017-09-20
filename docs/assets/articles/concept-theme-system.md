@@ -3,7 +3,7 @@ The main goal of the Nebular Theme System is to provide developers a way to cust
 In simple words, Nebular theme - is a SCSS map with a list of keys (variables) and their values.
 
 Theme System supports **hot reload** - so multiple themes at the same time and ability to switch themes *in runtime*.
-Note, in a simplest setup you may just include prebuilt CSS file of the theme of your choice and that's  it. More details on the installation under [Enabling Theme System](/#/docs/guides/enabling-theme-system) page.
+Note, in a simplest setup you may just include prebuilt CSS file of the theme of your choice and that's  it. More details on the installation under [Enabling Theme System](#/docs/guides/enabling-theme-system) page.
 
 ## Vocabulary
 - *Theme System* - Nebular's feature allowing developers to manage application look and feel.

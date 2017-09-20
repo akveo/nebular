@@ -1,4 +1,4 @@
-*Note*: if you use our [Starter Kit](/#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+*Note*: if you use our [Starter Kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
 
 ## Very basic setup
 **When**: You just need the default styles provided by Nebular (cosmic or default theme) and don't plan to use variables or hot-reload support.

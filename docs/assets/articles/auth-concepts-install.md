@@ -123,5 +123,5 @@ export const routes: Routes = [
 
 ## Where to next
 
-[Email & Password provider settings](/#/docs/auth/email--password-provider)
+[Email & Password provider settings](#/docs/auth/email--password-provider)
 

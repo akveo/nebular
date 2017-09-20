@@ -58,5 +58,5 @@ npm run build:prod:aot
 ```
 
 This will clear up your `dist` folder (where release files are located), generate a release build and start the built-in server.
-Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](/#/docs/guides/server-deployment).
+Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](#/docs/guides/server-deployment).
 
