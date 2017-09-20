@@ -48,6 +48,9 @@
         }
 
         & > ul > li {
+          ul a {
+            font-size: 1.125rem;
+          }
           & > ul.menu-items {
             margin-bottom: nb-theme(menu-group-gap);
           }

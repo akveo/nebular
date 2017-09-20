@@ -900,7 +900,7 @@
         }
       ],
       "name": "NbLayoutComponent",
-      "description": "Can contain the following components inside:\n\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\n\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n\nThe children components are projected into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n\nThe layout content (columns) becomes centered when the window width is more than\nthe value specified in the theme variable `layout-content-width`.\n\nThe layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.\n\nThe layout component is also responsible for changing of the application themes.\nIt listens to the `themeChange` event and change the theme CSS class appended to body.\nBased on the class appended a specific CSS-theme is applied to the application.\nMore details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)\n",
+      "description": "Can contain the following components inside:\n\n```\nnb-layout-header\nnb-layout-column\nnb-sidebar\nnb-layout-footer\n```\n\nBy default the layout fills up the full view-port.\nThe window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars\nwon't mess with the fixed nb-header.\n\nThe children components are projected into the flexible layout structure allowing to adjust the layout behavior\nbased on the settings provided.\n\nThe layout content (columns) becomes centered when the window width is more than\nthe value specified in the theme variable `layout-content-width`.\n\nThe layout also contains the area on the very top (the first child of the nb-layout), which could be used\nto dynamically append some components like modals or spinners/loaders\nso that they are located on top of the elements hierarchy.\nMore details are below under the `ThemeService` section.\n\nThe layout component is also responsible for changing of the application themes.\nIt listens to the `themeChange` event and change the theme CSS class appended to body.\nBased on the class appended a specific CSS-theme is applied to the application.\nMore details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)\n",
       "shortDescription": "The general Nebular component-container.\nIt is required that all children component of the framework are located inside of the nb-layout.",
       "styles": [
         {
@@ -4881,10 +4881,6 @@
             {
               "theme": "light",
               "prop": "link-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "link-color"
             }
           ]
         },
@@ -4895,10 +4891,6 @@
           "childs": [
             {
               "theme": "light",
-              "prop": "link-color-hover"
-            },
-            {
-              "theme": "cosmic",
               "prop": "link-color-hover"
             }
           ]
@@ -14730,13 +14722,8 @@
         },
         "link-color": {
           "name": "link-color",
-          "value": "#3dcc6d",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "link-color"
-            }
-          ],
+          "value": "#00f9a6",
+          "parents": [],
           "childs": [
             {
               "theme": "cosmic",
@@ -14746,25 +14733,16 @@
         },
         "link-color-hover": {
           "name": "link-color-hover",
-          "value": "#2ee56b",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "link-color-hover"
-            }
-          ],
+          "value": "#14ffbe",
+          "parents": [],
           "childs": []
         },
         "link-color-visited": {
           "name": "link-color-visited",
-          "value": "#3dcc6d",
+          "value": "#00f9a6",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "link-color"
-            },
-            {
-              "theme": "default",
               "prop": "link-color"
             }
           ],

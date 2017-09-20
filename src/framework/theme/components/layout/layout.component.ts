@@ -149,7 +149,7 @@ export class NbLayoutFooterComponent {
  * The layout component is also responsible for changing of the application themes.
  * It listens to the `themeChange` event and change the theme CSS class appended to body.
  * Based on the class appended a specific CSS-theme is applied to the application.
- * More details of the Theme System could be found here [Enabling Theme System](/#/docs/concepts/theme-system)
+ * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
  * @example A simple layout example:
  *
