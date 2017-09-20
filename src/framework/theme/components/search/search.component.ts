@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
+import { Router, NavigationEnd } from '@angular/router';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -169,10 +170,12 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchType: string = 'rotate-layout';
   private activateSearchSubscription: Subscription;
   private deactivateSearchSubscription: Subscription;
+  private routerSubscription: Subscription;
 
   constructor(private searchService: NbSearchService,
     private themeService: NbThemeService,
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private router: Router) { }
 
   /**
    * Search design type, available types are
@@ -211,6 +214,9 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.routerSubscription = this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
     this.activateSearchSubscription = this.searchService.onSearchActivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = true;
@@ -227,7 +233,6 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deactivateSearchSubscription = this.searchService.onSearchDeactivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = false;
-        // TODO: refactor long path of properties
         this.searchFieldComponentRef.instance.showSearch = false;
         this.searchFieldComponentRef.instance.inputElement.nativeElement.value = '';
         this.searchFieldComponentRef.instance.inputElement.nativeElement.blur();
@@ -250,7 +255,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.activateSearchSubscription.unsubscribe();
     this.deactivateSearchSubscription.unsubscribe();
-    // TODO: fix issue with destroy and remove this condition
+    this.routerSubscription.unsubscribe();
     if (this.searchFieldComponentRef) {
       this.searchFieldComponentRef.destroy();
     }
