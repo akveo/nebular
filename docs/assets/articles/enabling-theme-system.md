@@ -70,7 +70,7 @@ $nb-themes: nb-register-theme((
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
 
-This setup assumes that you went through the *Normal Setup* steps.
+This setup assumes that you have gone through the *Normal Setup* steps.
 
 1) Assuming you already have the `themes.scss` file, let's add there a new theme, which will be based on the `cosmic` Nebular theme and named `dark`:
 

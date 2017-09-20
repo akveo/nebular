@@ -1,4 +1,4 @@
-The main goal of the Nebular Theme System is to provide developers a way to customize the look and feel of the application without changing CSS.
+The main goal of the Nebular Theme System is to provide developers with a way to customize the look and feel of the application without changing CSS.
 
 In simple words, Nebular theme - is a SCSS map with a list of keys (variables) and their values.
 
@@ -36,5 +36,5 @@ Thus, if you change the `color-bg` variable once, all the child variables will c
 
 ## Multiple themes & hot reload
 
-Multiple themes setup can be useful when you need to switch between different themes dynamically in the runtime. For example, you man need a different theme for Premium users of your application.
+Multiple themes setup can be useful when you need to switch between different themes dynamically in the runtime. For example, you may need a different theme for Premium users of your application.
 Under the hood this is achieved by generating different style sets per theme, which means that this feature should be used with caution, as it increases the build size. 

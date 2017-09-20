@@ -1,5 +1,5 @@
 The main goal of this module is to provide a plugable set of components and services for easier setup of the authentication layer on the UI side. 
-It also incorporates a layer of Auth Providers, meaning that Authentication layer could be extended or changed by a configuration.
+Also it incorporates a layer of Auth Providers, meaning that Authentication layer could be extended or changed by a configuration.
 *Note*: the setup will still require a backend services to communicate with.
 
 ## What's included

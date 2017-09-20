@@ -2,7 +2,7 @@ Nebular is based on [Angular](https://angular.io/) framework. Despite it is not 
 
 ## Quickstart tutorials
 
-Based on current setup of your project and the goals you're trying to achieve, there are multiple starting points available:
+Based on a current setup of your project and the goals you're trying to achieve, there are multiple starting points available:
 
 - **Starting based on our Nebular Admin starter kit.** Consider this tutorial if you are building admin or any other back office application and you need a template or a good starting kit.
 - **Starting from scratch (add Nebular into empty Angular project).** Choose this tutorial if you are starting your Angular application and want to make a good use of Nebular framework components and modules.
@@ -12,4 +12,4 @@ Please consider creating issue on GitHub if your use case is not described above
   
 ## I'm new to Angular or web development in general
 
-Very often we receive emails and messages where people ask us what advices can we give them if they are completely new to software engineering and/or Angular in particular. Well, we can't say that there's some general way unfortunately. Each advice should be based on particular person, his current skill set and goals. That's why we believe that each person knows better for himself. But in any case there are multiple resources like https://www.coursera.org/ or https://egghead.io/ which focus on providing online education. 
+Quite often we receive emails and messages from people who ask us for the advices we can give them if they are completely new to software engineering and/or Angular in particular. Well, we can't say that there's some general way, unfortunately. Each advice should be aimed on particular person, his current skills set and goals. That's why we believe that each person knows better for himself. But in any case there are multiple resources like https://www.coursera.org/ or https://egghead.io/ which focus on providing online education. 
