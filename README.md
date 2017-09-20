@@ -7,7 +7,7 @@
 - Flexibly configurable themes with **hot-reload**
 - Theme bindings for 3rd party modules
 - Authentication module with multiple providers
-- Admin started kit [ngx-admin](http://github.com/akveo/ngx-admin)
+- Admin starter kit [ngx-admin](http://github.com/akveo/ngx-admin)
 - Modular (dependencies available as npm modules)
 
 ### Documentation
