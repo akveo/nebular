@@ -4,12 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'style-loader!./styles/styles.scss';
 import { Subscription } from 'rxjs/Subscription';
 import { DocsService } from './docs/docs.service';
+import { Analytics } from './docs/utils/analytics.service';
 
 @Component({
   selector: 'ngd-app-root',
@@ -17,7 +18,7 @@ import { DocsService } from './docs/docs.service';
     <router-outlet></router-outlet>
   `,
 })
-export class NgdAppComponent implements AfterViewInit, OnDestroy {
+export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private fragmentSubscription: Subscription;
 
@@ -25,7 +26,12 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy {
   constructor(private docsService: DocsService,
               private router: Router,
               private route: ActivatedRoute,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private analytics: Analytics) {
+  }
+
+  ngOnInit(): void {
+    this.analytics.trackPageViews();
   }
 
   // TODO: refactor this

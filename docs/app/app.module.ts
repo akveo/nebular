@@ -37,7 +37,7 @@ import { NgdFragmentDirective } from './docs/utils/ngd-fragment.directive';
 import { NgdThemeComponent } from './docs/page/blocks/ngd-theme-block.component';
 import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directive';
 import { SwiperModule } from 'angular2-useful-swiper';
-
+import { Analytics } from './docs/utils/analytics.service';
 
 @NgModule({
   imports: [
@@ -76,6 +76,7 @@ import { SwiperModule } from 'angular2-useful-swiper';
   ],
   providers: [
     DocsService,
+    Analytics,
     Title,
   ],
   entryComponents: [
