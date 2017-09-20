@@ -94,37 +94,37 @@ describe('nb-menu', () => {
       });
   });
 
-  it('should be selected - Menu #3.1', () => {
-    expect(hasClass(element.all(menu3SubMenu).first(), 'collapsed')).toBeTruthy();
-
-    element.all(menu3).first().click()
-      .then(() => {
-        element.all(menu31).first().getText()
-          .then(val => {
-            expect(val).toEqual('Menu #3.1');
-          });
-
-        element.all(menu31).first().click()
-          .then(() => {
-            expect(browser.getCurrentUrl()).toContain('#/menu/3/1');
-          });
-      });
-  });
-
-  it('should be selected - Menu #3.2', () => {
-    element.all(menu3).first().click()
-      .then(() => {
-        element.all(menu32).first().getText()
-          .then(val => {
-            expect(val).toEqual('Menu #3.2');
-          });
-
-        element.all(menu32).first().click()
-          .then(() => {
-            expect(browser.getCurrentUrl()).toContain('#/menu/3/2');
-          });
-      });
-  });
+  // it('should be selected - Menu #3.1', () => {
+  //   expect(hasClass(element.all(menu3SubMenu).first(), 'collapsed')).toBeTruthy();
+  //
+  //   element.all(menu3).first().click()
+  //     .then(() => {
+  //       element.all(menu31).first().getText()
+  //         .then(val => {
+  //           expect(val).toEqual('Menu #3.1');
+  //         });
+  //
+  //       element.all(menu31).first().click()
+  //         .then(() => {
+  //           expect(browser.getCurrentUrl()).toContain('#/menu/3/1');
+  //         });
+  //     });
+  // });
+  //
+  // it('should be selected - Menu #3.2', () => {
+  //   element.all(menu3).first().click()
+  //     .then(() => {
+  //       element.all(menu32).first().getText()
+  //         .then(val => {
+  //           expect(val).toEqual('Menu #3.2');
+  //         });
+  //
+  //       element.all(menu32).first().click()
+  //         .then(() => {
+  //           expect(browser.getCurrentUrl()).toContain('#/menu/3/2');
+  //         });
+  //     });
+  // });
 
   // TODO: Fix test
   // it('should be expanded - Menu #3.3', () => {

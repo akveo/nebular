@@ -1,6 +1,1 @@
-# @nebular/auth
-
-
-// TODO: 4) custom headers
-// TODO: 5) tests
-// TODO: 5) make sure package.json is correct
+### @nebular/auth module, more details https://akveo.github.io/nebular/
