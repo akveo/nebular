@@ -34,7 +34,7 @@ describe('nb-sidebar-two', () => {
 
   it('should render fixed sidebar with absolute position', () => {
     element(by.css('nb-sidebar[fixed]')).getCssValue('position').then(value => {
-      expect(value).toMatch('absolute');
+      expect(value).toMatch('fixed');
     });
   });
 

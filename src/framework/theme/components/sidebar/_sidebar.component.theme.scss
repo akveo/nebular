@@ -27,6 +27,12 @@
     .scrollable {
       padding: nb-theme(sidebar-padding);
       position: relative;
+
+      -webkit-transform: translate3d(0, 0, 0); // ios optimisation
+      @include media-breakpoint-down(sm) {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
     }
 
     width: nb-theme(sidebar-width);
@@ -45,11 +51,6 @@
         width: 0;
         padding: 0;
         overflow: hidden;
-        -webkit-transform: translate3d(0, 0, 0); // ios optimisation
-        @include media-breakpoint-down(sm) {
-          overflow-y: scroll;
-          -webkit-overflow-scrolling: touch;
-        }
       }
 
       nb-sidebar-header,  nb-sidebar-footer {

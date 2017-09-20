@@ -31,8 +31,10 @@
     margin-left: auto;
   }
 
+  // TODO: in this case this will won't work when header is not fixed and sidebar is
   &.fixed {
-    position: absolute;
+    position: fixed;
+    height: 100%;
     z-index: 999;
     top: 0;
     bottom: 0;
