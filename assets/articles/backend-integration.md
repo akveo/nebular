@@ -1,4 +1,4 @@
-This section describes approaches of integration of Nebular application with backend API. Despite we understand that every backend in really different, we think that we can cover several most commonly used ways.
+This section describes approaches of integration of Nebular application with backend API. Despite we understand that every backend is really different, we think that we can cover several most commonly used ways.
 
 ## Integration with JSON REST server
 
@@ -6,7 +6,7 @@ Despite there's an option to do CORS requests to API server directly, we don't a
 
 The solution we suggest is to use proxy for your API server. In this case you can make your app accessible through some sub-url. For example, if your application hosted under url `website.com` and your index file is located at `website.com/index.html`, you can make your API root accessible on `website.com/api`. This is well supported by angular-cli/webpack-dev-server for development setup and by web servers for production setup. Let's review these setups:
 
-### angular-cli/webpack-dev-server setup
+## angular-cli/webpack-dev-server setup
 
 There's not so much needs to be done to proxy your api using angular-cli. You can read detailed documentation in their docs: https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md But the most important topics are:
 
@@ -28,7 +28,7 @@ ng serve --proxy-config proxy.conf.json
 ```
 That's it. Now you can access `/api` URL from your Nebular application and your requests will be forwarded to your API server.
 
-### Production setup
+## Production setup
 
 Production setup is not much different from development setup. The only difference is that usually you don't use there angular-cli or webpack-dev-server to host your HTML/CSS/JS. You usually want to use some web server for that. We at Akveo mostly use [nginx](https://nginx.org/en/) for this use case. Below is the sample configuration for this particular web server. For others it is not that much different.
 

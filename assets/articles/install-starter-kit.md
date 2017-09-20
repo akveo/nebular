@@ -1,7 +1,7 @@
 Starting Nebular from [Nebular Admin](https://github.com/ngx-admin/) starter kit is the easiest way to run your first Nebular application. 
  
 ___________________________
-Please note, that Nebular Admin is just a frontend web application. Backend integration can be done relatively simple, but you should be aware that all the data is mocked using Javascript objects. If you want data to be dynamic, you should develop integration on your own. Nebular team doesn't consider providing generic integration layer as a part of this project, because every backend API has different structure in terms of data format and URLs.
+Please note, that Nebular Admin is just a frontend web application. Backend integration can be done relatively simple, but you should be aware that all the data is mocked using Javascript objects. If you want data to be dynamic, you should develop integration by your own. Nebular team doesn't consider providing generic integration layer as a part of this project, because every backend API has different structure in terms of data format and URLs.
 __________________________
 
 ## Install tools
@@ -37,7 +37,7 @@ npm start
 Go to http://0.0.0.0:4200 or http://localhost:4200 in your browser.
 
 
-To run the local copy in production mode and build the sources, execute:
+To run the local copy in a production mode and build the sources, execute:
 
 ```bash
 npm run start:prod
@@ -58,5 +58,5 @@ npm run build:prod:aot
 ```
 
 This will clear up your `dist` folder (where release files are located), generate a release build and start the built-in server.
-Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](/#/docs/guides/server-deployment).
+Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](#/docs/guides/server-deployment).
 
