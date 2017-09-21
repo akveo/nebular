@@ -931,11 +931,11 @@
               "description": ""
             },
             {
-              "name": "layout-padding",
+              "name": "layout-content-width",
               "description": ""
             },
             {
-              "name": "layout-content-width",
+              "name": "layout-window-mode-min-width",
               "description": ""
             },
             {
@@ -949,6 +949,22 @@
             {
               "name": "layout-window-mode-padding-top",
               "description": "window mode only, max padding from top"
+            },
+            {
+              "name": "layout-window-shadow",
+              "description": "window mode shadow"
+            },
+            {
+              "name": "layout-padding",
+              "description": ""
+            },
+            {
+              "name": "layout-medium-padding",
+              "description": ""
+            },
+            {
+              "name": "layout-small-padding",
+              "description": ""
             }
           ]
         }
@@ -3226,7 +3242,7 @@
           "platform": null,
           "name": "has",
           "type": [
-            ""
+            "boolean"
           ],
           "isStatic": false,
           "shortDescription": "Checks whether the theme is registered"
@@ -4797,6 +4813,10 @@
             },
             {
               "theme": "default",
+              "prop": "layout-window-shadow"
+            },
+            {
+              "theme": "default",
               "prop": "sidebar-shadow"
             },
             {
@@ -5543,6 +5563,23 @@
               "prop": "layout-window-mode-padding-top"
             }
           ]
+        },
+        "layout-window-shadow": {
+          "name": "layout-window-shadow",
+          "value": [
+            0,
+            "2px",
+            "12px",
+            0,
+            "#dfe3eb"
+          ],
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "shadow"
+            }
+          ],
+          "childs": []
         },
         "layout-padding": {
           "name": "layout-padding",
@@ -9171,6 +9208,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "layout-window-shadow"
+            },
+            {
+              "theme": "cosmic",
               "prop": "sidebar-shadow"
             },
             {
@@ -9992,6 +10033,23 @@
             {
               "theme": "default",
               "prop": "layout-window-mode-padding-top"
+            }
+          ],
+          "childs": []
+        },
+        "layout-window-shadow": {
+          "name": "layout-window-shadow",
+          "value": [
+            0,
+            "8px",
+            "20px",
+            0,
+            "rgba(40, 37, 89, 0.6)"
+          ],
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "shadow"
             }
           ],
           "childs": []
