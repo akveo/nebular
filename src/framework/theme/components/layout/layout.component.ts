@@ -182,17 +182,22 @@ export class NbLayoutFooterComponent {
  *
  * @styles
  *
- * layout-font-family:
- * layout-font-size:
- * layout-line-height:
- * layout-fg:
- * layout-bg:
- * layout-min-height:
- * layout-padding:
- * layout-content-width:
+ * layout-font-family
+ * layout-font-size
+ * layout-line-height
+ * layout-fg
+ * layout-bg
+ * layout-min-height
+ * layout-content-width
+ * layout-window-mode-min-width
  * layout-window-mode-max-width: window mode only, after this value layout turns into floating window
  * layout-window-mode-bg: window mode only, background
  * layout-window-mode-padding-top: window mode only, max padding from top
+ * layout-window-shadow: window mode shadow
+ * layout-padding
+ * layout-medium-padding
+ * layout-small-padding
+
  */
 @Component({
   selector: 'nb-layout',

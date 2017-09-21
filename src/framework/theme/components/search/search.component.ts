@@ -42,7 +42,7 @@ import { Router, NavigationEnd } from '@angular/router';
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
           <div class="form-content">
-            <input class="search-input" 
+            <input class="search-input"
               #searchInput
               autocomplete="off"
               [attr.placeholder]="placeholder"

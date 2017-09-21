@@ -26,6 +26,7 @@
 
   .scrollable-container {
     height: calc(100vh - #{$padding-top});
+    box-shadow: nb-theme(layout-window-shadow);
   }
 }
 
@@ -51,6 +52,7 @@
   }
 
   .layout {
+    // TODO: check this prop name
     min-width: nb-theme(layout-window-mode-min-width);
   }
 
