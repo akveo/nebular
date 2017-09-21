@@ -20,6 +20,7 @@ export const BUILT_IN_THEMES: NbJSThemeOptions[] = [
 
 /**
  * Js Themes registry - provides access to the JS themes' variables.
+ * Usually shouldn't be used directly, but through the NbThemeService class methods (getJsTheme).
  */
 @Injectable()
 export class NbJSThemesRegistry {
@@ -36,15 +37,31 @@ export class NbJSThemesRegistry {
     });
   }
 
+  /**
+   * Registers a new JS theme
+   * @param config any
+   * @param themeName string
+   * @param baseTheme string
+   */
   register(config: any, themeName: string, baseTheme: string) {
     const base = this.has(baseTheme) ? this.get(baseTheme) : {};
     this.themes[themeName] = this.mergeDeep({}, base, config);
   }
 
+  /**
+   * Checks whether the theme is registered
+   * @param themeName
+   * @returns boolean
+   */
   has(themeName: string): boolean {
     return !!this.themes[themeName];
   }
 
+  /**
+   * Return a theme
+   * @param themeName
+   * @returns NbJSThemeOptions
+   */
   get(themeName: string): NbJSThemeOptions {
     if (!this.themes[themeName]) {
       throw Error(`NbThemeConfig: no theme '${themeName}' found registered.`);

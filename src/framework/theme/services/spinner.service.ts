@@ -6,20 +6,34 @@
 
 import { Injectable } from '@angular/core';
 
+/**
+ * Service to control the global page spinner.
+ */
 @Injectable()
 export class NbSpinnerService {
 
   private loaders: Promise<any>[] = [];
   private selector: string = 'nb-global-spinner';
 
+  /**
+   * Appends new loader to the list of loader to be completed before
+   * spinner will be hidden
+   * @param method Promise<any>
+   */
   registerLoader(method: Promise<any>): void {
     this.loaders.push(method);
   }
 
+  /**
+   * Clears the list of loader
+   */
   clear(): void {
     this.loaders = [];
   }
 
+  /**
+   * Start the loader process, show spinnder and execute loaders
+   */
   load(): void {
     this.showSpinner();
     this.executeAll();

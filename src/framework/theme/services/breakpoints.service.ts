@@ -89,7 +89,7 @@ export class NbMediaBreakpointsService {
   /**
    * Returns a configured breakpoint by name
    * @param name string
-   * @returns {Z|{name: string, width: number}}
+   * @returns NbMediaBreakpoint
    */
   getByName(name: string): NbMediaBreakpoint {
     const unknown = { name: 'unknown', width: NaN };
@@ -100,7 +100,7 @@ export class NbMediaBreakpointsService {
 
   /**
    * Returns a list of configured breakpoints for the theme
-   * @returns {{name: string, width: number}[]}
+   * @returns NbMediaBreakpoint[]
    */
   getBreakpoints(): NbMediaBreakpoint[] {
     return this.breakpoints;
@@ -108,7 +108,7 @@ export class NbMediaBreakpointsService {
 
   /**
    * Returns a map of configured breakpoints for the theme
-   * @returns {{[p: string]: number}}
+   * @returns {[p: string]: number}
    */
   getBreakpointsMap(): { [breakpoint: string]: number } {
     return this.breakpointsMap;

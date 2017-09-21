@@ -3072,7 +3072,7 @@
           "platform": null,
           "name": "getBreakpoints",
           "type": [
-            "[]}"
+            "NbMediaBreakpoint[]"
           ],
           "isStatic": false,
           "shortDescription": "Returns a list of configured breakpoints for the theme"
@@ -3101,7 +3101,7 @@
           "platform": null,
           "name": "getByName",
           "type": [
-            ""
+            "NbMediaBreakpoint"
           ],
           "isStatic": false,
           "shortDescription": "Returns a configured breakpoint by name"
@@ -3203,9 +3203,7 @@
             {
               "name": "themeName",
               "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "required": null
             }
           ],
           "platform": null,
@@ -3214,8 +3212,7 @@
             "NbJSThemeOptions"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Return a theme"
         },
         {
           "examples": [],
@@ -3223,19 +3220,16 @@
             {
               "name": "themeName",
               "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "required": null
             }
           ],
           "platform": null,
           "name": "has",
           "type": [
-            "boolean"
+            ""
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Checks whether the theme is registered"
         },
         {
           "examples": [],
@@ -3291,22 +3285,19 @@
               "name": "config",
               "type": "any",
               "required": null,
-              "shortDescription": "",
-              "description": ""
+              "description": "any"
             },
             {
               "name": "themeName",
               "type": "string",
               "required": null,
-              "shortDescription": "",
-              "description": ""
+              "description": "string"
             },
             {
               "name": "baseTheme",
               "type": "string",
               "required": null,
-              "shortDescription": "",
-              "description": ""
+              "description": "string\n"
             }
           ],
           "platform": null,
@@ -3315,12 +3306,118 @@
             "void"
           ],
           "isStatic": false,
+          "shortDescription": "Registers a new JS theme"
+        }
+      ],
+      "name": "NbJSThemesRegistry",
+      "shortDescription": "Js Themes registry - provides access to the JS themes' variables.\nUsually shouldn't be used directly, but through the NbThemeService class methods (getJsTheme).",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clear",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Clears the list of loader"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "done",
+              "type": "(Anonymous function)",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "executeAll",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "getSpinnerElement",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hideSpinner",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "load",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Start the loader process, show spinnder and execute loaders"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "method",
+              "type": "Promise",
+              "required": null,
+              "description": "Promise<any>\n"
+            }
+          ],
+          "platform": null,
+          "name": "registerLoader",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Appends new loader to the list of loader to be completed before\nspinner will be hidden"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "showSpinner",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
           "shortDescription": "",
           "description": ""
         }
       ],
-      "name": "NbJSThemesRegistry",
-      "shortDescription": "Js Themes registry - provides access to the JS themes' variables.",
+      "name": "NbSpinnerService",
+      "shortDescription": "Service to control the global page spinner.",
       "styles": []
     },
     {
