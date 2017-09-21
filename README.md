@@ -1,5 +1,5 @@
 ## FULL-FEATURED FRAMEWORK BASED ON ANGULAR
-<img src="https://i.imgur.com/BqjNqQa.png" />
+<img src="https://i.imgur.com/baznxCs.png" />
 
 ### What's included:
 
