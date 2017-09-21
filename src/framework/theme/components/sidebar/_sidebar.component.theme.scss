@@ -121,6 +121,15 @@
         margin-left: 0;
         margin-right: nb-theme(sidebar-width-compact);
       }
+
+      &.left.fixed ~ .content.center {
+        padding-left: nb-theme(sidebar-width-compact);
+      }
+
+      &.fixed.right ~ .content.center {
+        padding-left: 0;
+        padding-right: nb-theme(sidebar-width-compact);
+      }
     }
 
     &.fixed.left.collapsed + .content {

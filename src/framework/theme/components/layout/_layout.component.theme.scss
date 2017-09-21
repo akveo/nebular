@@ -176,7 +176,7 @@
 
         &.center {
           width: nb-theme(layout-content-width);
-          flex: 0 1 nb-theme(layout-content-width) !important;
+          flex: 0 100 nb-theme(layout-content-width) !important;
         }
 
         .columns nb-layout-column {
