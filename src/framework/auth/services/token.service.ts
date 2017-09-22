@@ -9,6 +9,9 @@ import 'rxjs/add/observable/of';
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.options';
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 
+/**
+ * Wrapper for simple (text) token
+ */
 @Injectable()
 export class NbAuthSimpleToken {
 
@@ -18,15 +21,26 @@ export class NbAuthSimpleToken {
     this.token = token;
   }
 
+  /**
+   * Returns the token value
+   * @returns string
+   */
   getValue() {
     return this.token;
   }
 }
 
+/**
+ * Wrapper for JWT token with additional methods.
+ */
 @Injectable()
 export class NbAuthJWTToken extends NbAuthSimpleToken {
 
-  getPayload() {
+  /**
+   * Returns payload object
+   * @returns any
+   */
+  getPayload(): any {
     const parts = this.token.split('.');
 
     if (parts.length !== 3) {
@@ -41,6 +55,10 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
     return JSON.parse(decoded);
   }
 
+  /**
+   * Returns expiration date
+   * @returns Date
+   */
   getTokenExpDate(): Date {
     const decoded = this.getPayload();
     if (!decoded.hasOwnProperty('exp')) {
@@ -54,6 +72,25 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
   }
 }
 
+/**
+ * Nebular token service. Provides access to the stored token.
+ * By default returns NbAuthSimpleToken instance,
+ * but you can inject NbAuthJWTToken if you need additional methods for JWT token.
+ *
+ * @example Injecting NbAuthJWTToken, so that NbTokenService will now return NbAuthJWTToken instead
+ * of the default NbAuthSimpleToken
+ *
+ * ```
+ * // import token and service into your AppModule
+ * import { NB_AUTH_TOKEN_WRAPPER_TOKEN,  NbAuthJWTToken} from '@nebular/auth';
+ *
+ * // add to a list of providers
+ * providers: [
+ *  // ...
+ *  { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
+ * ],
+ * ```
+ */
 @Injectable()
 export class NbTokenService {
 
@@ -97,6 +134,11 @@ export class NbTokenService {
     return getDeepFromObject(this.config, key, null);
   }
 
+  /**
+   * Sets the token into the storage. This method is used by the NbAuthService automatically.
+   * @param {string} rawToken
+   * @returns {Observable<any>}
+   */
   set(rawToken: string): Observable<null> {
     return this.getConfigValue('token.setter')(rawToken)
       .switchMap(_ => this.get())
@@ -105,14 +147,26 @@ export class NbTokenService {
       });
   }
 
+  /**
+   * Returns observable of current token
+   * @returns {Observable<NbAuthSimpleToken>}
+   */
   get(): Observable<NbAuthSimpleToken> {
     return this.getConfigValue('token.getter')();
   }
 
+  /**
+   * Publishes token when it changes.
+   * @returns {Observable<NbAuthSimpleToken>}
+   */
   tokenChange(): Observable<NbAuthSimpleToken> {
     return this.token$.publish().refCount();
   }
 
+  /**
+   * Removes the token
+   * @returns {Observable<any>}
+   */
   clear(): Observable<any> {
     this.publishToken(null);
 

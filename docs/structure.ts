@@ -437,7 +437,28 @@ export const STRUCTURE = [
             blockData: 'NbEmailPassAuthProvider',
           },
         ],
-      }
+      },
+      {
+        type: 'page',
+        name: 'NbTokenService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbTokenService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAuthSimpleToken',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAuthJWTToken',
+          },
+        ],
+      },
     ],
   },
 ];

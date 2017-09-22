@@ -123,5 +123,6 @@ export const routes: Routes = [
 
 ## Where to next
 
-[Email & Password provider settings](#/docs/auth/email--password-provider)
+- Configuring a provider [Email & Password provider settings](#/docs/auth/email--password-provider)
+- Getting auth token after authentication [NbTokenService](#/docs/auth/nbtokenservice)
 
