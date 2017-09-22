@@ -1,4 +1,4 @@
-Starting Nebular from [Nebular Admin](https://github.com/ngx-admin/) starter kit is the easiest way to run your first Nebular application. 
+Starting Nebular from [Nebular Admin](https://github.com/akveo/ngx-admin/) starter kit is the easiest way to run your first Nebular application. 
  
 ___________________________
 Please note, that Nebular Admin is just a frontend web application. Backend integration can be done relatively simple, but you should be aware that all the data is mocked using Javascript objects. If you want data to be dynamic, you should develop integration by your own. Nebular team doesn't consider providing generic integration layer as a part of this project, because every backend API has different structure in terms of data format and URLs.
