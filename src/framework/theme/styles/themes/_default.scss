@@ -8,7 +8,7 @@
 @import '../core/mixins';
 
 $theme: (
-  font-main: Helvetica,
+  font-main: unquote('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
   font-secondary: font-main,
 
   font-weight-thin: 200,
