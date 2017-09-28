@@ -1,14 +1,22 @@
-## FULL-FEATURED FRAMEWORK BASED ON ANGULAR
+## Nebular is a set of essential modules for your next Angular application.
 <img src="https://i.imgur.com/baznxCs.png" />
 
 ### What's included:
 
-- Pure UI Kit, customizable with hundreds of variables
-- Flexibly configurable themes with **hot-reload**
-- Theme bindings for 3rd party modules
-- Authentication module with multiple providers
-- Modular (dependencies available as npm modules)
-- Admin starter kit [ngx-admin](http://github.com/akveo/ngx-admin)
+What is included:
+1) [x] @nebular/theme
+  - Theme System - guidelines on how to manage SCSS variables and component styles with hot reload in place.
+  - Pure Angular UI Kit with two style themes and no dependencies.
+  - Style overridings for 3rd party modules (Bootstrap, ng2-smart-table) to have a consistent look and feel.
+2) [x] @nebular/auth
+  - Authentication components (login/register/reset password/restore password).
+  - Multiple configurable providers (backend connectors).
+  - Helpers for token management (storing, passing with HTTP requests, etc).
+3) [ ] @nebular/acl - module for roles and permissions management
+4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
+5) [ ] @nebular/data - application data & state management
+6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nubular modules with beautiful IOT components.
+7) [ ] More great features! 
 
 ### Demo Application:
 
@@ -20,7 +28,7 @@
 Nebular is a great toolkit if you build a Rich UI application based on Angular, and don't want to spend your time on painful project setup. It provides you with a unified approach for managing styles for various components (3rd party including), pure components tightly connect to Angular and authentication layer easily configurable for your API.
 
 ### The purpose
-There are a lot of awesome front-end frameworks out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we decided to assemble together the most awesome frameworks and libraries, join them with a unified application and graphical interface creating a higher level abstraction for easier setup.
+There are a lot of awesome front-end frameworks out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
 
 ### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
