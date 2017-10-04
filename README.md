@@ -15,7 +15,7 @@ What is included:
 3) [ ] @nebular/acl - module for roles and permissions management
 4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
 5) [ ] @nebular/data - application data & state management
-6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nubular modules with beautiful IOT components.
+6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
 7) [ ] More great features! 
 
 ### Demo Application:
