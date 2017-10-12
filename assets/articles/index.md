@@ -1,7 +1,7 @@
 Nebular is a set of essential modules for your next Angular application.
 Its primary goal is to assemble together and connect the most awesome features and libraries creating an efficient ecosystem to speed up and simplify the development.
 
-In simpler words, Nebular is a set of generic modules (components, services & styles) helping you to solve generic tasks easier and focus on business logic.
+In simpler words, Nebular is a set of modules (components, services & styles) helping you to solve generic tasks easier so that you can focus on business logic.
 <hr class="section-end">
 
 <div class="note note-info">
@@ -31,15 +31,25 @@ What is included:
 - **Admin dashboard starter kit** [ngx-admin](https://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
 <hr class="section-end">
 
+## The purpose
+
+There are a lot of awesome front-end frameworks out there these days. 
+They provide a massive quantity of useful features making our lives more comfortable. 
+Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. 
+But as developers, we feel that nowadays front-end development is disjointed. 
+You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. 
+That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
+<hr class="section-end">
+
 ## Assumptions
 
 This documentation assumes that you are already familiar with JavaScript/TypeScript, Angular, CSS and Bootstrap.
 <hr class="section-end">
 
 ## Looking for ng2-admin?
-It's not gone and still supported! The ng2-admin is still available at ([Github branch](https://github.com/akveo/ng2-admin/tree/ng2-admin)).
+It's not gone and still supported! The ng2-admin is still available at [GitHub branch](https://github.com/akveo/ng2-admin/tree/ng2-admin).
 <hr class="section-end">
 
 ## Have questions?
-Didn't find something here? Look through the issues https://github.com/akveo/nebular/issues or simply drop us a line at <a href="mailto:contact@akveo.com">contact@akveo.com</a>.
+Didn't find something here? Look through the [issues](https://github.com/akveo/nebular/issues) or simply drop us a line at <a href="mailto:contact@akveo.com">contact@akveo.com</a>.
 <hr class="section-end">
