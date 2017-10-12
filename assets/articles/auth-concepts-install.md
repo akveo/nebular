@@ -13,7 +13,7 @@ Four pages:
   
 Two auth providers:
   - Dummy auth provider - for testing purposes
-  - EmalPass auth provider - the most common email and password authentication
+  - EmailPass auth provider - the most common email and password authentication
     
 Other helper services:
   - Token Service, JWT token and Simple token - helper services for token handling

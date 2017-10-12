@@ -49,7 +49,7 @@ and put your theme name, in our case it is `dark`
   this._baConfig.changeTheme({name: 'dark'});
 ``` 
 Beside notifying the system which scheme is currently enabled, this also puts a css class to a main element 
-of the page. Thus you can freely create theme-specific css selectors in your code without breakking other themes' styles.
+of the page. Thus you can freely create theme-specific css selectors in your code without breaking other themes' styles.
 
 For example like this:
 ```scss
