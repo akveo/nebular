@@ -3941,7 +3941,7 @@
       "data": {
         "font-main": {
           "name": "font-main",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [],
           "childs": [
             {
@@ -3972,7 +3972,7 @@
         },
         "font-secondary": {
           "name": "font-secondary",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -5365,7 +5365,7 @@
         },
         "card-header-font-family": {
           "name": "card-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -5532,7 +5532,7 @@
         },
         "header-font-family": {
           "name": "header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -5697,7 +5697,7 @@
         },
         "layout-font-family": {
           "name": "layout-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -5990,7 +5990,7 @@
         },
         "menu-font-family": {
           "name": "menu-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -6342,7 +6342,7 @@
         },
         "tabs-font-family": {
           "name": "tabs-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -6368,7 +6368,7 @@
         },
         "tabs-content-font-family": {
           "name": "tabs-content-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -6515,7 +6515,7 @@
         },
         "route-tabs-font-family": {
           "name": "route-tabs-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -6694,7 +6694,7 @@
         },
         "user-font-family-secondary": {
           "name": "user-font-family-secondary",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -6819,7 +6819,7 @@
         },
         "actions-font-family": {
           "name": "actions-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -7010,7 +7010,7 @@
         },
         "smart-table-header-font-family": {
           "name": "smart-table-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -7080,7 +7080,7 @@
         },
         "smart-table-font-family": {
           "name": "smart-table-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -7391,7 +7391,7 @@
         },
         "btn-font-family": {
           "name": "btn-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -7799,7 +7799,7 @@
         },
         "form-control-font-family": {
           "name": "form-control-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -8219,7 +8219,7 @@
         },
         "modal-header-font-family": {
           "name": "modal-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -8256,7 +8256,7 @@
         },
         "modal-body-font-family": {
           "name": "modal-body-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -8306,7 +8306,7 @@
       "data": {
         "font-main": {
           "name": "font-main",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "default",
@@ -8338,7 +8338,7 @@
         },
         "font-secondary": {
           "name": "font-secondary",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -9780,7 +9780,7 @@
         },
         "card-header-font-family": {
           "name": "card-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -9967,7 +9967,7 @@
         },
         "header-font-family": {
           "name": "header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -10162,7 +10162,7 @@
         },
         "layout-font-family": {
           "name": "layout-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -10470,7 +10470,7 @@
         },
         "menu-font-family": {
           "name": "menu-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -10846,7 +10846,7 @@
         },
         "tabs-font-family": {
           "name": "tabs-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -10880,7 +10880,7 @@
         },
         "tabs-content-font-family": {
           "name": "tabs-content-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -11043,7 +11043,7 @@
         },
         "route-tabs-font-family": {
           "name": "route-tabs-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -11251,7 +11251,7 @@
         },
         "user-font-family-secondary": {
           "name": "user-font-family-secondary",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -11384,7 +11384,7 @@
         },
         "actions-font-family": {
           "name": "actions-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -11582,7 +11582,7 @@
         },
         "smart-table-header-font-family": {
           "name": "smart-table-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -11668,7 +11668,7 @@
         },
         "smart-table-font-family": {
           "name": "smart-table-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -12022,7 +12022,7 @@
         },
         "btn-font-family": {
           "name": "btn-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -12462,7 +12462,7 @@
         },
         "form-control-font-family": {
           "name": "form-control-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -12913,7 +12913,7 @@
         },
         "modal-header-font-family": {
           "name": "modal-header-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",
@@ -12962,7 +12962,7 @@
         },
         "modal-body-font-family": {
           "name": "modal-body-font-family",
-          "value": "Helvetica",
+          "value": "\"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           "parents": [
             {
               "theme": "cosmic",

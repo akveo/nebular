@@ -1,9 +1,8 @@
-import { Directive, ElementRef, AfterViewInit } from '@angular/core';
-// import 'prismjs/components/prism-jsx.js';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import * as marked from 'marked';
 
 @Directive({
-    selector: '[ngdDescription]',
+  selector: '[ngdDescription]',
 })
 export class NgdDescriptionDirective implements AfterViewInit {
 
@@ -11,7 +10,7 @@ export class NgdDescriptionDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    let md = marked.setOptions({});
+    const md = marked.setOptions({});
     this.el.nativeElement.innerHTML = md.parse(this.el.nativeElement.innerHTML.trim());
   }
 }

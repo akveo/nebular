@@ -33,18 +33,7 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'From Scratch',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'install-from-scratch.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Based on Starter Kit',
+        name: 'Based on starter kit (ngx-admin)',
         children: [
           {
             type: 'block',
@@ -83,7 +72,7 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'UI KIT',
+        name: 'UI Kit',
         children: [
           {
             type: 'block',
@@ -100,6 +89,23 @@ export const STRUCTURE = [
             type: 'block',
             block: 'markdown',
             source: 'concept-3rd-party.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'ngx-admin tutorials',
+    children: [
+      {
+        type: 'page',
+        name: 'Updating ngx-admin to the latest version',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'ngx-admin-update.md',
           },
         ],
       },

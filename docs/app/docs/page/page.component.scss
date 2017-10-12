@@ -30,6 +30,54 @@
       font-weight: nb-theme(second-heading-font-weight);
     }
 
+    .note {
+      border-radius: 0.125rem;
+      border: 1px solid nb-theme(border-color);
+      margin-bottom: 1rem;
+
+      .note-title {
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        font-weight: nb-theme(font-weight-bold);
+        line-height: 2rem;
+        padding: 0 1rem;
+        background: nb-theme(border-color);
+      }
+
+      .note-body {
+        padding: 1rem;
+      }
+
+      &.note-success {
+        border: 1px solid nb-theme(color-success);
+        .note-title {
+          background: nb-theme(color-success);
+          color: white;
+        }
+      }
+      &.note-warning {
+        border: 1px solid nb-theme(color-warning);
+        .note-title {
+          background: nb-theme(color-warning);
+          color: white;
+        }
+      }
+      &.note-danger {
+        border: 1px solid nb-theme(color-danger);
+        .note-title {
+          background: nb-theme(color-danger);
+          color: white;
+        }
+      }
+      &.note-info {
+        border: 1px solid nb-theme(color-info);
+        .note-title {
+          background: nb-theme(color-info);
+          color: white;
+        }
+      }
+    }
+
     .table {
       min-width: nb-theme(table-min-width);
       thead {
@@ -55,11 +103,27 @@
       }
     }
 
+    p {
+      line-height: 1.5;
+    }
+
     pre {
       background: nb-theme(code-snippets-bg);
       padding: 0.75rem 1rem;
       code {
         color: nb-theme(color-fg);
+      }
+    }
+
+    .section-end {
+      margin-bottom: 3rem;
+      border-top: none;
+    }
+
+    ul li {
+      margin-bottom: 0.25rem;
+     & > ul {
+       margin-bottom: 0.5rem;
       }
     }
 
