@@ -1,8 +1,8 @@
-<span *ngIf="menuItem.group">
+<span *ngIf="menuItem.group && !menuItem.hidden">
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   {{ menuItem.title }}
 </span>
-<a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
+<a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group && !menuItem.hidden"
         [routerLink]="menuItem.link"
         [fragment]="menuItem.fragment"
         [attr.target]="menuItem.target"
@@ -13,7 +13,7 @@
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
-<a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
+<a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group && !menuItem.hidden"
         [attr.href]="menuItem.url"
         [attr.target]="menuItem.target"
         [attr.title]="menuItem.title"
@@ -23,7 +23,7 @@
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
-<a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
+<a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group && !menuItem.hidden"
    [attr.target]="menuItem.target"
    [attr.title]="menuItem.title"
    [class.active]="menuItem.selected"
@@ -32,7 +32,7 @@
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
-<a *ngIf="menuItem.children"
+<a *ngIf="menuItem.children && !menuItem.hidden"
    (click)="$event.preventDefault(); onToggleSubMenu(menuItem);"
    [attr.target]="menuItem.target"
    [attr.title]="menuItem.title"
@@ -44,7 +44,7 @@
   <i class="ion chevron" [class.ion-chevron-left]="!menuItem.expanded"
                  [class.ion-chevron-down]="menuItem.expanded"></i>
 </a>
-<ul *ngIf="menuItem.children"
+<ul *ngIf="menuItem.children && !menuItem.hidden"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"
     [class.expanded]="menuItem.expanded"
     class="menu-items">
