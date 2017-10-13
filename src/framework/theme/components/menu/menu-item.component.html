@@ -45,15 +45,15 @@
                  [class.ion-chevron-down]="menuItem.expanded"></i>
 </a>
 <a *ngIf="menuItem.children && !menuItem.hidden && menuItem.link"
-[attr.target]="menuItem.target"
-[attr.title]="menuItem.title"
-[class.active]="menuItem.selected"
-(mouseenter)="onHoverItem(menuItem)"
-href="#">
-<i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
-<span class="menu-title">{{ menuItem.title }}</span>
-<i class="ion chevron" [class.ion-chevron-left]="!menuItem.expanded"
-              [class.ion-chevron-down]="menuItem.expanded" (click)="$event.preventDefault(); onToggleSubMenu(menuItem);"></i>
+  [attr.target]="menuItem.target"
+  [attr.title]="menuItem.title"
+  [class.active]="menuItem.selected"
+  (mouseenter)="onHoverItem(menuItem)"
+  href="#">
+  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <span class="menu-title">{{ menuItem.title }}</span>
+  <i class="ion chevron" [class.ion-chevron-left]="!menuItem.expanded"
+                [class.ion-chevron-down]="menuItem.expanded" (click)="$event.preventDefault(); onToggleSubMenu(menuItem);"></i>
 </a>
 <ul *ngIf="menuItem.children && !menuItem.hidden"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"
