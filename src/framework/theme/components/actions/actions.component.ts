@@ -18,7 +18,7 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-action',
   template: `
-    <a class="icon-container" href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
+    <a class="icon-container" [attr.href]="href" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
     <ng-template #showContent>
@@ -35,6 +35,12 @@ export class NbActionComponent {
    * @type string
    */
   @Input() icon: string;
+
+  /**
+   * Optional href link
+   * @type string
+   */
+  @Input() href = '#';
 
   /**
    * Disables the item (changes item opacity and mouse cursor)
