@@ -17,7 +17,7 @@
     "start:wp:aot": "npm run start:aot -- --app playground-wp",
     "docs:serve": "npm run docs:parse && npm run docs:start",
     "docs:parse": "gulp docs",
-    "docs:start": "ng serve --app docs",
+    "docs:start": "ng serve --app docs --port 4100",
     "docs:build": "npm run docs:parse && rimraf docs/dist && npm run build:prod:aot -- --app docs --base-href https://akveo.github.io/nebular/",
     "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
     "build": "rimraf dist && ng build",
@@ -46,7 +46,7 @@
     "clean:tmp:lib": "npm run clean:tmp && rimraf src/.lib",
     "version:bump": "gulp bump",
     "release:prepare": "npm run build:package",
-    "release:validate": "npm run release:prepare && npm run lint:ci && npm run build:wp:ci && npm run e2e:wp",
+    "release:validate": "npm run release:prepare && npm run lint:ci && npm run build:wp:ci && npm run e2e:wp && npm run test",
     "release": "npm run version:bump && npm run release:prepare && npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth",
     "gulp": "gulp"
   },
