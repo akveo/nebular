@@ -17,7 +17,7 @@ describe('nb-layout', () => {
     });
   });
 
-  fit('should have correct font-family', () => {
+  it('should have correct font-family', () => {
     element(by.css('#layout-fluid > .scrollable-container > .layout')).getCssValue('font-family').then(value => {
       expect(value).toMatch('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
     });
