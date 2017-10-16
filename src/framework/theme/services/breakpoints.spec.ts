@@ -30,7 +30,7 @@ describe('breakpoint-service', () => {
     },
   )));
 
-  const total = 7;
+  const total = 8;
   it(`has ${total} default breakpoints`, () => {
     expect(breakpointService.getBreakpoints().length).toEqual(total);
   });
@@ -45,7 +45,13 @@ describe('breakpoint-service', () => {
 
     it(`has correct xs breakpoint`, () => {
       expect(breakpointService.getByWidth(0).name).toEqual('xs');
-      expect(breakpointService.getByWidth(575).name).toEqual('xs');
+      expect(breakpointService.getByWidth(399).name).toEqual('xs');
+    });
+
+    it(`has correct is breakpoint`, () => {
+      expect(breakpointService.getByWidth(400).name).toEqual('is');
+      expect(breakpointService.getByWidth(490).name).toEqual('is');
+      expect(breakpointService.getByWidth(575).name).toEqual('is');
     });
 
     it(`has correct sm breakpoint`, () => {
