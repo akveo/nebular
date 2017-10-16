@@ -18,7 +18,7 @@ declare var Prism;
       <p ngdDescription>{{example.description}}</p>
       <ngd-code-highlighter [code]="example.code.trim()"></ngd-code-highlighter>
       <pre><code [innerHTML]="getContent(example.code)"></code></pre>
-    </div>   
+    </div>
 `,
 })
 export class NgdExamplesBlockComponent {

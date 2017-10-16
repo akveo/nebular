@@ -415,7 +415,7 @@ export const STRUCTURE = [
             blockData: 'cosmic',
           },
         ],
-      }
+      },
     ],
   },
   {

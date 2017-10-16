@@ -48,7 +48,7 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
       if (el) {
         el.scrollIntoView();
         if (new RegExp(/themes/i).test(this.router.url)) {
-          window.scrollBy(0, -235);//header + theme-header
+          window.scrollBy(0, -235); // header + theme-header
         } else {
           window.scrollBy(0, -80);
         }
