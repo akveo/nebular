@@ -1248,7 +1248,37 @@
       "methods": [],
       "name": "NbLayoutFooterComponent",
       "shortDescription": "Page footer.\nLocated under the nb-layout content (specifically, under the columns).\nCould be made `fixed`, becoming sticky to the bottom of the view port (window).",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "footer-height",
+              "description": ""
+            },
+            {
+              "name": "footer-padding",
+              "description": ""
+            },
+            {
+              "name": "footer-fg",
+              "description": ""
+            },
+            {
+              "name": "footer-bg",
+              "description": ""
+            },
+            {
+              "name": "footer-separator",
+              "description": ""
+            },
+            {
+              "name": "footer-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -1268,7 +1298,41 @@
       "methods": [],
       "name": "NbLayoutHeaderComponent",
       "shortDescription": "Page header component.\nLocated on top of the page above the layout columns and sidebars.\nCould be made `fixed` by setting the corresponding property. In the fixed mode the header becomes\nsticky to the top of the nb-layout (to of the page).",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "header-font-family",
+              "description": ""
+            },
+            {
+              "name": "header-line-height",
+              "description": ""
+            },
+            {
+              "name": "header-fg",
+              "description": ""
+            },
+            {
+              "name": "header-bg",
+              "description": ""
+            },
+            {
+              "name": "header-height",
+              "description": ""
+            },
+            {
+              "name": "header-padding",
+              "description": ""
+            },
+            {
+              "name": "header-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",

@@ -92,7 +92,7 @@ $nb-themes: nb-register-theme((
 
   color-bg: black,
   color-fg: gray,
-), dark, commic); 
+), dark, cosmic); 
 ```
 
 So that your `themes.scss` file looks like this:
@@ -117,7 +117,7 @@ $nb-themes: nb-register-theme((
 
   color-bg: black,
   color-fg: gray,
-), dark, commic); 
+), dark, cosmic); 
 
 ```
 

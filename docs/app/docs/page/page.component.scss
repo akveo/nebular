@@ -30,6 +30,11 @@
       font-weight: nb-theme(second-heading-font-weight);
     }
 
+    h3 {
+      font-size: nb-theme(third-heading-font-size);
+      font-weight: nb-theme(third-heading-font-weight);
+    }
+
     .note {
       border-radius: 0.125rem;
       border: 1px solid nb-theme(border-color);

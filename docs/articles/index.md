@@ -11,7 +11,6 @@ In simpler words, Nebular is a set of modules (components, services & styles) he
   </div>
 </div>
 <hr class="section-end">
-<hr class="section-end">
 
 ## What's included
 

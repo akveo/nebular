@@ -1,40 +1,123 @@
-The main goal of the Nebular Theme System is to provide developers with a way to customize the look and feel of the application without changing CSS.
+Nebular Theme System - is a set of rules we put into how SCSS files and variables are organized to achieve the following goals:
 
-In simple words, Nebular theme - is a SCSS map with a list of keys (variables) and their values.
+- ability to flexibly change looks & feel of the application by managing variables, without changing SCSS itself;
+- ability to switch between visual themes in a runtime without reloading the page;
+- support of CSS-variables (implemented partially).
+<hr class="section-end">
 
-Theme System supports **hot reload** - so multiple themes at the same time and ability to switch themes *in runtime*.
-Note, in a simplest setup you may just include prebuilt CSS file of the theme of your choice and that's  it. More details on the installation under [Enabling Theme System](#/docs/guides/enabling-theme-system) page.
+### Theme Map
 
-## Vocabulary
-- *Theme System* - Nebular's feature allowing developers to manage application look and feel.
-- *Theme Variables* - key-value `SCSS map` of theme variables accessible with `nb-theme(variable-name)` function.
-- *Hot Reload* - ability to dynamically change look and feel of the app in runtime with no need to reload/rebuilt the app.
-
-## Example
-Here's a default theme from the [Admin Starter Kit](http://akveo.com/ng2-admin) demo application.
+Each theme is represented as an SCSS map with a list of key-value pairs:
 
 ```scss
-$nb-themes: nb-register-theme((
-  sidebar-header-gap: 2rem,
-  sidebar-header-height: initial,
-  layout-content-width: 1400px,
+$theme: (
+  font-main: unquote('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
+  font-secondary: font-main,
 
-  font-main: Roboto,
-  font-secondary: Exo,
-), default, default);
+  font-weight-thin: 200,
+  font-weight-light: 300,
+  font-weight-normal: 400,
+  font-weight-bolder: 500,
+  font-weight-bold: 600,
+  font-weight-ultra-bold: 800,
+
+  base-font-size: 16px,
+
+  font-size-xlg: 1.25rem,
+  font-size-lg: 1.125rem,
+  font-size: 1rem,
+  font-size-sm: 0.875rem,
+  font-size-xs: 0.75rem,
+
+  radius: 0.375rem,
+  padding: 1.25rem,
+  margin: 1.5rem,
+  line-height: 1.25,
+  
+  ...
+```
+Where _key_ - is a variable name, and _value_ - is a raw SCSS value (color, string, etc) or **parent variable name**, so that you can inherit values from different variables:
+
+```scss
+$theme: (
+  font-main: unquote('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
+  font-secondary: font-main,
+```
+Here `font-secondary` inherits its value from `font-main`.
+
+<hr class="section-end">
+
+### Component Variables
+
+Then, for each component of the Nebular UI Kit, there is a list of variables you can change.
+For example - header component variables:
+
+```scss
+  ...
+  
+  header-font-family: font-secondary,
+  header-font-size: font-size,
+  header-line-height: line-height,
+  header-fg: color-fg-heading,
+  header-bg: color-bg,
+  header-height: 4.75rem,
+  header-padding: 1.25rem,
+  header-shadow: shadow,
+  
+  ...
+```
+As you can see, you have 8 variables for a pretty simple component and from the other side, 6 of them are inherited from the default values.
+That means that if you want to create a new theme with a united look & feel of the components - in most cased you would need to change around 10 generic variables, such as `color-bg`, `shadow`, etc 
+to change the UI completely.
+
+List of component style variables is specified in the component documentation, for example [styles for header component](#/docs/components/layout#NbLayoutHeaderComponentStyles).
+<hr class="section-end">
+
+### Variables Usage
+
+Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](#/docs/guides/enabling-theme-system) is call `nb-theme(var-name)` function:
+
+```scss
+@import '../../../@theme/styles/themes';
+
+:host {
+
+  background: nb-theme(card-bg); // and use it
+}
+```
+Depending of the currently enabled theme and the way `card-bg` inherited in your theme - you will get the right color.
+<hr class="section-end">
+
+### Built-in themes
+
+Currently, there are 2 built-in themes: 
+- `default` - clean white business theme.
+- `cosmic` - dark theme.
+
+Themes can also be inherited from each other, `cosmic`, for instance, is inherited from the `default` theme.
+<hr class="section-end">
+
+### Magic of multiple themes with hot-reload
+
+As you can see from the [ngx-admin demo](http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=doc_page), you can switch themes in the runtime without reloading the page.
+That is useful when you have multiple visual themes per user role or want to provide your user with such configuration so that the user can decide which theme works best for him.
+The only requirement for the feature to work is to wrap all of your component styles into special mixin `nb-install-component` and use `nb-theme` to get the right value:
+
+```scss
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  background: nb-theme(card-bg); // now, for each theme registered the corresponding value will be inserted
+  
+  .container {
+    background: nb-theme(color-bg);
+    font-weight: nb-theme(font-weight-bold);
+  }
+}
 ```
 
-## Variables & Inheritance concepts
+## Next
 
-The idea of the variables isn't new, moreover, each grownup application or library uses SCSS/LESS variables to allow the developer to customize the behavior.
-We also took this concept and put it inside of the Nebular UI Kit, so that the components heavily utilize the variables.
-Currently, the default theme has 300+ variables describing the components.
-To simplify the usage, we also put the *inheritance* concept inside, thus a variable may inherit its value from the parent variable. 
-Thus, if you change the `color-bg` variable once, all the child variables will change accordingly.
-
-*Note*: Nebular uses SCSS map as a storage of the variables and `nb-theme(variable-name)` function as a getter. 
-
-## Multiple themes & hot reload
-
-Multiple themes setup can be useful when you need to switch between different themes dynamically in the runtime. For example, you may need a different theme for Premium users of your application.
-Under the hood this is achieved by generating different style sets per theme, which means that this feature should be used with caution, as it increases the build size. 
+- [Enable Theme System](#/docs/guides/enabling-theme-system).
+- [Default Theme variables table](#/docs/themes/default).
+- [Cosmic Theme variables table](#/docs/themes/cosmic).
