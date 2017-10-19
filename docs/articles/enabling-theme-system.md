@@ -148,3 +148,9 @@ enableDarkTheme() {
   this.themeService.changeTheme('dark');
 }
 ```
+
+## Next
+
+- [Theme System Concepts](#/docs/concepts/theme-system).
+- [Default Theme variables table](#/docs/themes/default).
+- [Cosmic Theme variables table](#/docs/themes/cosmic).
