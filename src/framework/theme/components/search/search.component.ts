@@ -14,6 +14,7 @@ import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import { Router, NavigationEnd } from '@angular/router';
