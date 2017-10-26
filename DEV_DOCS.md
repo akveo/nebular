@@ -177,3 +177,4 @@ To start a new release (publish the framework packages on NPM) you need:
   * npm run release - will update all package.json's, run prepare & validate and finally publish the packages to NPM
   * manually correct the changelog
   * commit, git tag, git push 
+5. create release on github  
