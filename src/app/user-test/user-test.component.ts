@@ -66,7 +66,7 @@ import { Component } from '@angular/core';
 export class NbUserTestComponent {
 
   contextMenu = [
-    { title: 'Profile', link: 'some/link' },
+    { title: 'Profile', link: 'some/link', icon: 'nb-person' },
     { title: 'Billing', target: '_blank', url: 'http://akveo.com' },
     { title: 'Exit', key: 'exit' },
   ];
