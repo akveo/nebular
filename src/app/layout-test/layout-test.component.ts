@@ -35,7 +35,10 @@ import { Component } from '@angular/core';
         Center
       </nb-layout-column>
       <nb-layout-column>
-        Right
+        Right<br>
+        <div style="overflow: hidden">
+          <div style="width: 20000px; background: red;">super long </div>
+        </div>
       </nb-layout-column>
 
       <nb-layout-footer>
@@ -55,7 +58,10 @@ import { Component } from '@angular/core';
         Center
       </nb-layout-column>
       <nb-layout-column>
-        Right
+        Right<br>
+        <div style="overflow: hidden">
+          <div style="width: 20000px; background: red;">super long </div>
+        </div>
       </nb-layout-column>
 
       <nb-layout-footer fixed>

@@ -55,6 +55,7 @@
       flex: 1;
       -ms-flex: 1 1 auto;
       flex-direction: column;
+      min-width: 0;
 
       &.center {
         max-width: 100%;
@@ -68,11 +69,12 @@
         flex: 1;
         -ms-flex: 1 1 auto;
         flex-direction: row;
+        width: 100%;
 
         /deep/ nb-layout-column {
           order: 2;
           flex: 1 0;
-
+          width:  0; // this might be a strange workaround
           &.left {
             order: 1;
           }
