@@ -9,13 +9,10 @@
       "@nebular/*": [
         "./framework/*"
       ]
-    },
-    "include": [
-      "./src/**/*.ts"
-    ]
+    }
   },
   "include": [
-    "./src/**/*"
+    "../src/**/*"
   ],
   "exclude": [
     "test.ts",

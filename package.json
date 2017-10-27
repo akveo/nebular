@@ -48,7 +48,7 @@
     "version:bump": "gulp bump",
     "release:prepare": "npm run build:package",
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
-    "release:validate": "npm run release:prepare && npm run lint:ci && npm run build:wp:ci && npm run e2e:wp && npm run test",
+    "release:validate": "npm run build:ci && npm run release:prepare && npm run lint:ci && npm run build:wp:ci && npm run e2e:wp && npm run test",
     "release": "npm run version:bump && npm run release:prepare && npm run release:validate && npm run release:changelog && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth",
     "gulp": "gulp"
   },
