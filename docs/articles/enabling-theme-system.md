@@ -1,4 +1,10 @@
-*Note*: if you use our [Starter Kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+<div class="note note-info">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+  </div>
+</div>
+
 
 ## Very basic setup
 **When**: You just need the default styles provided by Nebular (cosmic or default theme) and don't plan to use variables or hot-reload support.
@@ -14,7 +20,7 @@
 ```
 
 And that's it. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.
-
+<hr class="section-end">
 
 ## Normal setup
 **When**: You need to be able to change theme-variables and want to use them in your code.
@@ -66,6 +72,7 @@ $nb-themes: nb-register-theme((
 }
 ``` 
 *Note*: variables are accessible simply using a call of nb-theme(variable-name) function. 
+<hr class="section-end">
 
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
@@ -134,7 +141,13 @@ $nb-themes: nb-register-theme((
   }
 }
 ```
-*Note*: the install mixin covers the `:host` declaration inside of it, meaning that you don't need to specify it manually anymore.
+<div class="note note-info">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    The `install-component` mixin 'covers' the `:host` declaration inside of it, meaning that you don't need to specify `:host` manually inside of `@include nb-install-component() {` 
+    and styles written right inside of the mixing will be applied to the host.
+  </div>
+</div>
 
 Done, now you can change a theme in the runtime. Here's how to do this from a component:
 
@@ -148,6 +161,7 @@ enableDarkTheme() {
   this.themeService.changeTheme('dark');
 }
 ```
+<hr class="section-end">
 
 ## Next
 
