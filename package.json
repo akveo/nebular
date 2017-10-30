@@ -20,6 +20,7 @@
     "docs:parse": "gulp docs",
     "docs:start": "ng serve --app docs --port 4100",
     "docs:build": "npm run docs:parse && rimraf docs/dist && npm run build:prod:aot -- --app docs --base-href https://akveo.github.io/nebular/",
+    "docs:ci": "cd ./docs && ln -sf ../src/framework ./framework && cd ../ && npm run docs:build",
     "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
     "build": "rimraf dist && ng build",
     "build:prod": "npm run build -- --prod",
