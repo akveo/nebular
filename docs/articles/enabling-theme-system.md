@@ -71,8 +71,13 @@ $nb-themes: nb-register-theme((
   background: nb-theme(card-bg); // and use it
 }
 ``` 
-*Note*: variables are accessible simply using a call of nb-theme(variable-name) function. 
-<hr class="section-end">
+
+<div class="note note-info section-end">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    Variables are accessible simply using a call of nb-theme(variable-name) function.
+  </div>
+</div>
 
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
@@ -128,7 +133,7 @@ $nb-themes: nb-register-theme((
 
 ```
 
-2) Now, to enable the magic of the hot reload, wrap all of your `\*.component.scss` styles with the `nb-install-component` mixin like this:
+2) Now, to enable the magic of the hot reload, wrap all of your `*.component.scss` styles with the `nb-install-component` mixin like this:
 
 ```scss
 
@@ -149,7 +154,7 @@ $nb-themes: nb-register-theme((
   </div>
 </div>
 
-Done, now you can change a theme in the runtime. Here's how to do this from a component:
+Done, now you can change a theme in the runtime. Here's how you can do this from a component:
 
 ```scss
 // include the theme service
