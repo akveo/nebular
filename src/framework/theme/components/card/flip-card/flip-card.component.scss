@@ -1,0 +1,85 @@
+.flipcard-container {
+  position: relative;
+  z-index: 1;
+  -webkit-perspective: 1200px;
+     -moz-perspective: 1200px;
+       -o-perspective: 1200px;
+          perspective: 1200px;
+}
+.flipcard {
+  position: relative;
+  display: flex;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  -o-transition: -o-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+       -o-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+.flipcard.flipped {
+  -webkit-transform: rotateY( 180deg );
+     -moz-transform: rotateY( 180deg );
+       -o-transform: rotateY( 180deg );
+          transform: rotateY( 180deg );
+}
+
+.card-front-container, .card-back-container {
+	-webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+       -o-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.card-front-container {
+	z-index: 2;
+}
+
+.card-back-container {
+  z-index: 3;
+  height: 100%;
+  -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+      -o-transform: rotateY( 180deg );
+          transform: rotateY( 180deg );
+}
+
+.card-front-container, .card-back-container {
+  width: 100%;
+}
+
+.flipcard.flipped .card-back-container {
+  z-index: 5;
+  margin-left: -100%;
+}
+
+.flipcard:not(.flipped) .card-front-container {
+  z-index: 4;
+  margin-right: -100%;
+}
+
+.flip-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  z-index: 5;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .card-front-container, .card-back-container {
+      -ms-backface-visibility: visible;
+          backface-visibility: visible;
+  }
+
+  .card-back-container {
+      visibility: hidden;
+      -ms-transition: all 0.2s cubic-bezier(0.92, 0.01, 0.83, 0.67);
+  }
+
+  .flipcard.flipped .card-back-container {
+    visibility: visible;
+  }
+}
