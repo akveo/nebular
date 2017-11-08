@@ -5,9 +5,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-// import * as Prism from 'prismjs';
-// import 'prismjs/components/prism-jsx.js';
-declare var Prism;
+declare const Prism;
 
 @Component({
   selector: 'ngd-examples-block',

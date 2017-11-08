@@ -48,6 +48,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { AuthGuard } from './auth-guard.service';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,11 @@ export const routes: Routes = [
   },
   {
     path: 'layout',
+    component: NbLayoutTestComponent,
+  },
+  {
+    path: 'restricted-route',
+    canActivate: [AuthGuard],
     component: NbLayoutTestComponent,
   },
   {

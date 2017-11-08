@@ -74,6 +74,10 @@ export class NbAuthResult {
   }
 }
 
+/**
+ * Common authentication service.
+ * Should be used to as an interlayer between UI Components and Auth Providers.
+ */
 @Injectable()
 export class NbAuthService {
 

@@ -37,6 +37,7 @@ export class NbAuthSimpleToken {
 export class NbAuthJWTToken extends NbAuthSimpleToken {
 
   /**
+   * TODO: check for this.token to be not null
    * Returns payload object
    * @returns any
    */

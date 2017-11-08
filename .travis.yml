@@ -36,6 +36,7 @@ script:
   - npm run lint:ci
   - npm run build:ci
   - npm run release:prepare
+  - npm run docs:ci
 
 git:
   depth: 1

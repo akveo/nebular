@@ -16,14 +16,13 @@ import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { getDeepFromObject } from '../helpers';
 
 /**
- * The most common authentication provider.
- * The following options are available (with default values):
- *
+ * The most common authentication provider for email/password strategy.
  *
  *
  * @example
  *
  * Default settings object:
+ *
  * ```
  * {
  *  baseEndpoint: '',
@@ -101,6 +100,11 @@ import { getDeepFromObject } from '../helpers';
  *      this.getConfigValue(`${module}.defaultMessages`)),
  *  },
  *}
+ *
+ * // Note, there is no need to copy over the whole object to change the settings you need.
+ * // Also, this.getConfigValue call won't work outside ofthe default config declaration
+ * // (which is inside of the `NbEmailPassAuthProvider` class), so you have to replace it with a custom helper function
+ * // if you need it.
  * ```
  */
 @Injectable()
