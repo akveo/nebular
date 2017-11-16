@@ -3,9 +3,11 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { NB_AUTH_OPTIONS_TOKEN } from '@nebular/auth/auth.options';
+import { getDeepFromObject } from '@nebular/auth/helpers';
 import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 
 @Component({
@@ -19,11 +21,12 @@ export class NbLogoutComponent implements OnInit {
   redirectDelay: number = 1500;
 
   constructor(protected service: NbAuthService,
+              @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
               protected router: Router) {
   }
 
   ngOnInit(): void {
-    this.logout('email');
+    this.logout(this.getConfigValue('forms.logout.provider'));
   }
 
   logout(provider: string): void {
@@ -36,5 +39,10 @@ export class NbLogoutComponent implements OnInit {
         }, this.redirectDelay);
       }
     });
+  }
+  
+  
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.config, key, null);
   }
 }
