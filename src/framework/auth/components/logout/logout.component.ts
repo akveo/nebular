@@ -6,8 +6,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NB_AUTH_OPTIONS_TOKEN } from '@nebular/auth/auth.options';
-import { getDeepFromObject } from '@nebular/auth/helpers';
+import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
+import { getDeepFromObject } from '../../helpers';
 import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 
 @Component({
