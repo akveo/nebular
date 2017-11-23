@@ -56,19 +56,11 @@ To run the local copy in a production mode and build the sources, execute:
 ```bash
 npm run start:prod
 ```
-or in AOT mode
-```bash
-npm run start:prod:aot
-```
 
 To create a bundle in production mode, execute:
 
 ```bash
 npm run build:prod
-```
-or
-```bash
-npm run build:prod:aot
 ```
 
 This will clear up your `dist` folder (where release files are located) and generate a release build.
