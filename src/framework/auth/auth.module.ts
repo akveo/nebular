@@ -9,6 +9,7 @@ import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 import { NbAuthService } from './services/auth.service';
 import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
+import { NbFirebaseAuthProvider } from './providers/firebase-auth.provider';
 
 import {
   defaultSettings,
@@ -40,6 +41,7 @@ export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, 
       const provider = providers[key];
       const object = injector.get(provider.service);
       object.setConfig(provider.config || {});
+      object.init();
     }
   }
 
@@ -97,6 +99,7 @@ export class NbAuthModule {
         NbTokenService,
         NbDummyAuthProvider,
         NbEmailPassAuthProvider,
+        NbFirebaseAuthProvider,
       ],
     };
   }

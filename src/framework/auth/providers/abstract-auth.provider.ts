@@ -17,6 +17,8 @@ export abstract class NbAbstractAuthProvider {
     return getDeepFromObject(this.config, key, null);
   }
 
+  init(): void {}
+
   abstract authenticate(data?: any): Observable<NbAuthResult>;
 
   abstract register(data?: any): Observable<NbAuthResult>;

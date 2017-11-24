@@ -512,6 +512,17 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'NbFirebaseAuthProvider',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbFirebaseAuthProvider',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbTokenService',
         children: [
           {
