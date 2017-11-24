@@ -1,3 +1,6 @@
+:host flex-centered {
+  margin: auto;
+}
 :host /deep/ {
   $auth-layout-padding: 2.5rem;
 
@@ -15,8 +18,6 @@
 
   nb-card-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   // TODO rewrite when develop responsive
