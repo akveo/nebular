@@ -1,6 +1,3 @@
-:host flex-centered {
-  margin: auto;
-}
 :host /deep/ {
   $auth-layout-padding: 2.5rem;
 
@@ -15,7 +12,9 @@
   nb-card {
     margin: 0;
   }
-
+  .flex-centered {
+      margin: auto;
+  }
   nb-card-body {
     display: flex;
   }
