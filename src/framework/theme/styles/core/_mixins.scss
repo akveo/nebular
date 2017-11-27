@@ -22,10 +22,8 @@
 
   // TODO: remove
   // For Internet Explorer
-  body {
-    scrollbar-face-color: $fg;
-    scrollbar-track-color: $bg;
-  }
+  scrollbar-face-color: $fg;
+  scrollbar-track-color: $bg;
 }
 
 @mixin nb-radial-gradient($color-1, $color-2, $color-3) {
