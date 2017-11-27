@@ -187,7 +187,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
   private loadImage(src): Promise<any> {
     return new Promise((resolve, reject) => {
-      let img = new Image();
+      const img = new Image();
       img.src = src;
       img.onload = function () {
         resolve(src);

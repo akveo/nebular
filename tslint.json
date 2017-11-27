@@ -106,18 +106,27 @@
     "directive-selector": [
       true,
       "attribute",
-      "nb",
+      ["nb", "ngd"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "nb",
+      ["nb", "ngd"],
       "kebab-case"
+    ],
+    "ban": [
+      true,
+      "eval",
+      "fit",
+      "fdescribe",
+      {
+        "name": "$",
+        "message": "please don't"
+      }
     ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,

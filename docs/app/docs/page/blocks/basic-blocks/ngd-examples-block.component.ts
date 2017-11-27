@@ -5,9 +5,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-// import * as Prism from 'prismjs';
-// import 'prismjs/components/prism-jsx.js';
-declare var Prism;
+declare const Prism;
 
 @Component({
   selector: 'ngd-examples-block',
@@ -18,7 +16,7 @@ declare var Prism;
       <p ngdDescription>{{example.description}}</p>
       <ngd-code-highlighter [code]="example.code.trim()"></ngd-code-highlighter>
       <pre><code [innerHTML]="getContent(example.code)"></code></pre>
-    </div>   
+    </div>
 `,
 })
 export class NgdExamplesBlockComponent {

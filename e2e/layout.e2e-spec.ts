@@ -17,7 +17,7 @@ describe('nb-layout', () => {
     });
   });
 
-  fit('should have correct font-family', () => {
+  it('should have correct font-family', () => {
     element(by.css('#layout-fluid > .scrollable-container > .layout')).getCssValue('font-family').then(value => {
       expect(value).toMatch('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
     });
@@ -115,6 +115,44 @@ describe('nb-layout', () => {
       .getAttribute('class')
       .then(value => {
         expect(value).toMatch('content center');
+      });
+  });
+
+  it('should prevent column expansion if child content is too long in fixed layout', () => {
+
+    const content =  element(by.css('#layout-center > .scrollable-container > .layout > .layout-container > .content'));
+    element
+      .all(
+        by.css(`#layout-center >
+     .scrollable-container > .layout > .layout-container > .content > .columns > nb-layout-column`),
+      )
+      .get(2)
+      .getSize()
+      .then(size => {
+
+        content.getSize().then(contentSize => {
+          // one third of the content widht (as we have 3 columns)
+          expect(size.width).toEqual(Math.ceil(contentSize.width / 3));
+        })
+      });
+  });
+
+  it('should prevent column expansion if child content is too long in fluid layout', () => {
+
+    const content =  element(by.css('#layout-fluid > .scrollable-container > .layout > .layout-container > .content'));
+    element
+      .all(
+        by.css(`#layout-fluid >
+     .scrollable-container > .layout > .layout-container > .content > .columns > nb-layout-column`),
+      )
+      .get(2)
+      .getSize()
+      .then(size => {
+
+        content.getSize().then(contentSize => {
+          // one third of the content widht (as we have 3 columns)
+          expect(size.width).toEqual(Math.ceil(contentSize.width / 3));
+        })
       });
   });
 });

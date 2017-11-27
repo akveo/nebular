@@ -20,8 +20,8 @@
       "examples": [
         {
           "shortDescription": "",
-          "description": "",
-          "code": "\n{\n baseEndpoint: '',\n login: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/login',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Login/Email combination is not correct, please try again.'],\n   defaultMessages: ['You have been successfully logged in.'],\n },\n register: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/register',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully registered.'],\n },\n logout: {\n   alwaysFail: false,\n   endpoint: '/api/auth/logout',\n   method: 'delete',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully logged out.'],\n },\n requestPass: {\n   endpoint: '/api/auth/request-pass',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Reset password instructions have been sent to your email.'],\n },\n resetPass: {\n   endpoint: '/api/auth/reset-pass',\n   method: 'put',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   resetPasswordTokenKey: 'reset_password_token',\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Your password has been successfully changed.'],\n },\n token: {\n   key: 'data.token',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('token.key')),\n },\n errors: {\n   key: 'data.errors',\n   getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,\n     this.getConfigValue('errors.key'),\n     this.getConfigValue(`${module}.defaultErrors`)),\n },\n messages: {\n   key: 'data.messages',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('messages.key'),\n     this.getConfigValue(`${module}.defaultMessages`)),\n },\n}\n"
+          "description": "Default settings object:",
+          "code": "\n{\n baseEndpoint: '',\n login: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/login',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Login/Email combination is not correct, please try again.'],\n   defaultMessages: ['You have been successfully logged in.'],\n },\n register: {\n   alwaysFail: false,\n   rememberMe: true,\n   endpoint: '/api/auth/register',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully registered.'],\n },\n logout: {\n   alwaysFail: false,\n   endpoint: '/api/auth/logout',\n   method: 'delete',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['You have been successfully logged out.'],\n },\n requestPass: {\n   endpoint: '/api/auth/request-pass',\n   method: 'post',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Reset password instructions have been sent to your email.'],\n },\n resetPass: {\n   endpoint: '/api/auth/reset-pass',\n   method: 'put',\n   redirect: {\n     success: '/',\n     failure: null,\n   },\n   resetPasswordTokenKey: 'reset_password_token',\n   defaultErrors: ['Something went wrong, please try again.'],\n   defaultMessages: ['Your password has been successfully changed.'],\n },\n token: {\n   key: 'data.token',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('token.key')),\n },\n errors: {\n   key: 'data.errors',\n   getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,\n     this.getConfigValue('errors.key'),\n     this.getConfigValue(`${module}.defaultErrors`)),\n },\n messages: {\n   key: 'data.messages',\n   getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,\n     this.getConfigValue('messages.key'),\n     this.getConfigValue(`${module}.defaultMessages`)),\n },\n}\n\n// Note, there is no need to copy over the whole object to change the settings you need.\n// Also, this.getConfigValue call won't work outside ofthe default config declaration\n// (which is inside of the `NbEmailPassAuthProvider` class), so you have to replace it with a custom helper function\n// if you need it.\n"
         }
       ],
       "props": [],
@@ -267,7 +267,225 @@
         }
       ],
       "name": "NbEmailPassAuthProvider",
-      "shortDescription": "The most common authentication provider.\nThe following options are available (with default values):",
+      "shortDescription": "The most common authentication provider for email/password strategy.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tokenService",
+              "type": "NbTokenService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "injector",
+              "type": "Injector",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "providers",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAuthService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "data",
+              "type": "any",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "authenticate",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Authenticates with the selected provider\nStores received token in the token storage",
+          "description": "Example:\nauthenticate('email', {email: 'email@example.com', password: 'test'})\n"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getProvider",
+          "type": [
+            "NbAbstractAuthProvider"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "getToken",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Retrieves current authenticated token stored"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "isAuthenticated",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "logout",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Sign outs with the selected provider\nRemoves token from the token storage",
+          "description": "Example:\nlogout('email')\n"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onAuthenticationChange",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onTokenChange",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns tokens stream"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "data",
+              "type": "any",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "register",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Registers with the selected provider\nStores received token in the token storage",
+          "description": "Example:\nregister('email', {email: 'email@example.com', name: 'Some Name', password: 'test'})\n"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "data",
+              "type": "any",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "requestPassword",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Sends forgot password request to the selected provider",
+          "description": "Example:\nrequestPassword('email', {email: 'email@example.com'})\n"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "provider",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "data",
+              "type": "any",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "resetPassword",
+          "type": [
+            ""
+          ],
+          "isStatic": false,
+          "shortDescription": "Tries to reset password with the selected provider",
+          "description": "Example:\nresetPassword('email', {newPassword: 'test'})\n"
+        }
+      ],
+      "name": "NbAuthService",
+      "shortDescription": "Common authentication service.\nShould be used to as an interlayer between UI Components and Auth Providers.",
       "styles": []
     },
     {
@@ -285,7 +503,7 @@
             "any"
           ],
           "isStatic": false,
-          "shortDescription": "Returns payload object"
+          "shortDescription": "TODO: check for this.token to be not null\nReturns payload object"
         },
         {
           "examples": [],
@@ -1248,7 +1466,37 @@
       "methods": [],
       "name": "NbLayoutFooterComponent",
       "shortDescription": "Page footer.\nLocated under the nb-layout content (specifically, under the columns).\nCould be made `fixed`, becoming sticky to the bottom of the view port (window).",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "footer-height",
+              "description": ""
+            },
+            {
+              "name": "footer-padding",
+              "description": ""
+            },
+            {
+              "name": "footer-fg",
+              "description": ""
+            },
+            {
+              "name": "footer-bg",
+              "description": ""
+            },
+            {
+              "name": "footer-separator",
+              "description": ""
+            },
+            {
+              "name": "footer-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",
@@ -1268,7 +1516,41 @@
       "methods": [],
       "name": "NbLayoutHeaderComponent",
       "shortDescription": "Page header component.\nLocated on top of the page above the layout columns and sidebars.\nCould be made `fixed` by setting the corresponding property. In the fixed mode the header becomes\nsticky to the top of the nb-layout (to of the page).",
-      "styles": []
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "header-font-family",
+              "description": ""
+            },
+            {
+              "name": "header-line-height",
+              "description": ""
+            },
+            {
+              "name": "header-fg",
+              "description": ""
+            },
+            {
+              "name": "header-bg",
+              "description": ""
+            },
+            {
+              "name": "header-height",
+              "description": ""
+            },
+            {
+              "name": "header-padding",
+              "description": ""
+            },
+            {
+              "name": "header-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "kind": "component",

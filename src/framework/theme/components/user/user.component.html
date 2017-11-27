@@ -12,15 +12,23 @@
   </div>
 
   <div *ngIf="hasMenu()"
-        [ngStyle]="{display: isMenuShown ? 'block' : 'none'}" class="user-context-menu">
+       [ngStyle]="{display: isMenuShown ? 'block' : 'none'}" class="user-context-menu">
     <ul>
       <li class="arrow"></li>
-      <li *ngFor="let item of menu">
-        <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
-        <a *ngIf="item.link && !item.url" [routerLink]="item.link" [attr.target]="item.target">{{ item.title }}</a>
-        <a *ngIf="item.url && !item.link" [attr.href]="item.url" [attr.target]="item.target">{{ item.title }}</a>
+      <li *ngFor="let item of menu" [class.with-icon]="item.icon">
+        <a *ngIf="item.link && !item.url" [routerLink]="item.link" [attr.target]="item.target">
+          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
+          {{ item.title }}
+        </a>
+        <a *ngIf="item.url && !item.link" [attr.href]="item.url" [attr.target]="item.target">
+          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
+          {{ item.title }}
+        </a>
         <a *ngIf="!item.link && !item.url" href="#" [attr.target]="item.target"
-                                                    (click)="itemClick($event, item)">{{ item.title }}</a>
+           (click)="itemClick($event, item)">
+          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
+          {{ item.title }}
+        </a>
       </li>
     </ul>
   </div>

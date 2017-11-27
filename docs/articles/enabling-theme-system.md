@@ -1,4 +1,10 @@
-*Note*: if you use our [Starter Kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+<div class="note note-info">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+  </div>
+</div>
+
 
 ## Very basic setup
 **When**: You just need the default styles provided by Nebular (cosmic or default theme) and don't plan to use variables or hot-reload support.
@@ -14,7 +20,7 @@
 ```
 
 And that's it. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.
-
+<hr class="section-end">
 
 ## Normal setup
 **When**: You need to be able to change theme-variables and want to use them in your code.
@@ -65,7 +71,13 @@ $nb-themes: nb-register-theme((
   background: nb-theme(card-bg); // and use it
 }
 ``` 
-*Note*: variables are accessible simply using a call of nb-theme(variable-name) function. 
+
+<div class="note note-info section-end">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    Variables are accessible simply using a call of nb-theme(variable-name) function.
+  </div>
+</div>
 
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
@@ -92,7 +104,7 @@ $nb-themes: nb-register-theme((
 
   color-bg: black,
   color-fg: gray,
-), dark, commic); 
+), dark, cosmic); 
 ```
 
 So that your `themes.scss` file looks like this:
@@ -117,11 +129,11 @@ $nb-themes: nb-register-theme((
 
   color-bg: black,
   color-fg: gray,
-), dark, commic); 
+), dark, cosmic); 
 
 ```
 
-2) Now, to enable the magic of the hot reload, wrap all of your `\*.component.scss` styles with the `nb-install-component` mixin like this:
+2) Now, to enable the magic of the hot reload, wrap all of your `*.component.scss` styles with the `nb-install-component` mixin like this:
 
 ```scss
 
@@ -134,9 +146,15 @@ $nb-themes: nb-register-theme((
   }
 }
 ```
-*Note*: the install mixin covers the `:host` declaration inside of it, meaning that you don't need to specify it manually anymore.
+<div class="note note-info">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    The `install-component` mixin 'covers' the `:host` declaration inside of it, meaning that you don't need to specify `:host` manually inside of `@include nb-install-component() {` 
+    and styles written right inside of the mixing will be applied to the host.
+  </div>
+</div>
 
-Done, now you can change a theme in the runtime. Here's how to do this from a component:
+Done, now you can change a theme in the runtime. Here's how you can do this from a component:
 
 ```scss
 // include the theme service
@@ -148,3 +166,10 @@ enableDarkTheme() {
   this.themeService.changeTheme('dark');
 }
 ```
+<hr class="section-end">
+
+## Next
+
+- [Theme System Concepts](#/docs/concepts/theme-system).
+- [Default Theme variables table](#/docs/themes/default).
+- [Cosmic Theme variables table](#/docs/themes/cosmic).

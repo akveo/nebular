@@ -2,8 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app-wp",
+    "baseUrl": "./",
     "module": "es2015",
-    "baseUrl": "",
     "types": [],
     "paths": {
       "@nebular/*": [

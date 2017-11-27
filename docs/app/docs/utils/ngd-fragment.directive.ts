@@ -12,9 +12,10 @@ import { DocsService } from '../docs.service';
     '[class.fragment]': '!remote && !table',
     '[attr.id]': '!remote ? fragment : null',
     '[class.table-fragment]': 'table',
-  }
+  },
 })
 export class NgdFragmentDirective {
+
   table: boolean = false;
   remote: boolean = false;
 

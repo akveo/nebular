@@ -33,7 +33,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
 
         <div class="form-group">
           <label for="input-email" class="sr-only">Email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+\\@.+\\..+"
+          <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+@.+\..+"
                  class="form-control" placeholder="Email address" #email="ngModel"
                  [class.form-control-danger]="email.invalid && email.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">

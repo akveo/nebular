@@ -1,4 +1,4 @@
-If you don't have any code yet, please consider checking [Angular CLI](https://cli.angular.io/) documentation for help creating your app.
+If you don't have any code yet, please consider checking <a href="https://cli.angular.io" target="_blank">Angular CLI</a> documentation for help creating your app.
 In case you want to start based on our ngx-admin starter kit, please check out [Based on Starter Kit (ngx-admin)](#/docs/installation/based-on-starter-kit-ngxadmin) article.
 
 <div class="note note-info">

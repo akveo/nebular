@@ -7,6 +7,7 @@ import { DocsService } from '../../docs/docs.service';
 @Component({
   selector: 'ngd-header',
   styleUrls: ['ngd-header.component.scss'],
+  // tslint:disable
   template: `
     <div class="logo-container">
       <a routerLink="/">
@@ -21,7 +22,7 @@ import { DocsService } from '../../docs/docs.service';
     <nb-menu class="mobile-menu" [class.active]="isMenuActive" [items]="menuItems" tag="mobileMenu"></nb-menu>
   `,
 })
-
+// tslint:enable
 export class NgdHeaderComponent implements OnInit, OnDestroy {
 
   isMenuActive: boolean = false;

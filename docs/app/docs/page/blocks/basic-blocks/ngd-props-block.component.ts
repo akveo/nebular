@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-props-block',
-  template: `    
+  template: `
     <div  class="inputs block-container" *ngIf="classInputs.length > 0">
       <p class="block-title"><a [routerLink]="" fragment="{{className}}Inputs" ngdFragment></a> Inputs</p>
       <div class="table-container">
@@ -57,7 +57,7 @@ import { Component, Input } from '@angular/core';
           </tbody>
         </table>
       </div>
-    </div>  
+    </div>
   `,
 })
 export class NgdPropsBlockComponent {
@@ -67,8 +67,8 @@ export class NgdPropsBlockComponent {
 
   @Input('blockData')
   set setProps(blockData: any) {
-    this.classInputs = blockData.props.filter(item => item.kind === "input");
-    this.classOutputs = blockData.props.filter(item => item.kind === "output");
+    this.classInputs = blockData.props.filter(item => item.kind === 'input');
+    this.classOutputs = blockData.props.filter(item => item.kind === 'output');
     this.className = blockData.name;
   }
 

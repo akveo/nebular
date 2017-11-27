@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-declare var Prism;
+import { Component, Input, OnInit } from '@angular/core';
+declare const Prism;
 
 
 @Component({
@@ -8,12 +8,12 @@ declare var Prism;
     <div *ngIf="isHideEnable" class="code-title" (click)="showCode()">
       Example Code
       <i [hidden]="isCodeShown" class="ion-chevron-down"></i>
-      <i [hidden]="!isCodeShown" class="ion-chevron-up"></i>  
+      <i [hidden]="!isCodeShown" class="ion-chevron-up"></i>
       </div>
     <pre [hidden]="!isCodeShown"><code [innerHtml]="code"></code></pre>
-`
+`,
 })
-export class NgdHighlighterComponent {
+export class NgdHighlighterComponent implements OnInit {
   @Input() code: string;
   isCodeShown: boolean = true;
   isHideEnable: boolean = false;

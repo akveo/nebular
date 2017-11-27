@@ -74,6 +74,10 @@ export class NbAuthResult {
   }
 }
 
+/**
+ * Common authentication service.
+ * Should be used to as an interlayer between UI Components and Auth Providers.
+ */
 @Injectable()
 export class NbAuthService {
 
@@ -96,7 +100,7 @@ export class NbAuthService {
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<any> {
-    return this.getToken().map(token => token && token.getValue());
+    return this.getToken().map(token => !!(token && token.getValue()));
   }
 
   /**
@@ -113,7 +117,7 @@ export class NbAuthService {
    * @returns {Observable<any>}
    */
   onAuthenticationChange(): Observable<boolean> {
-    return this.onTokenChange().map(token => !!token);
+    return this.onTokenChange().map(token => !!(token && token.getValue()));
   }
 
   /**

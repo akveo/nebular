@@ -1,4 +1,4 @@
-Nebular is a set of modules for [Angular](https://angular.io/) framework. Despite it is not required to know Angular framework to set up your first Nebular project, it is highly recommended to go through the Angular tutorial beforehand and be familiar with basic Angular concepts.
+Nebular is a set of modules for <a href="https://angular.io/" target="_blank">Angular</a>. Despite it is not required to know Angular framework to set up your first Nebular project, it is highly recommended to go through the Angular tutorial beforehand and be familiar with basic Angular concepts.
 <hr class="section-end">
 
 ## Quickstart tutorials
