@@ -27,6 +27,7 @@
               nb-theme(form-control-border-type)
               nb-theme(form-control-selected-border-color);
       background-color: nb-theme(form-control-focus-bg);
+      box-shadow: none;
     }
 
     &:disabled {
