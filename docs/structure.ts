@@ -424,18 +424,84 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'Concepts/Install',
+        name: 'Introduction',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'auth-concepts-install.md',
+            source: 'auth-intro.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Email & Password Provider',
+        name: 'Installation',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-install.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Configuring a provider',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-provider.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Configuring UI',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-ui.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Getting User Token',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-token.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Protecting application routes',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-guard.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAuthService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAuthService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbEmailPassAuthProvider',
         children: [
           {
             type: 'block',

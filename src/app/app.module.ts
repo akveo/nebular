@@ -74,6 +74,7 @@ import { NbFormsTestComponent } from './forms-test/forms-test.component';
 
 import { NbCardTestComponent } from './card-test/card-test.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './auth-guard.service';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -182,6 +183,7 @@ const NB_TEST_COMPONENTS = [
     NbDynamicToAddComponent,
   ],
   providers: [
+    AuthGuard,
     { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
   ],
