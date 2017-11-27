@@ -173,5 +173,8 @@ To start a new release (publish the framework packages on NPM) you need:
 2. npm run release:validate - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
 3. MANUALLY update a version in main ./package.json to a new one
 4. release:
-  * make sure you are logged in as corresponding NPM user
+  * make sure you are logged in as a corresponding NPM user
   * npm run release - will update all package.json's, run prepare & validate and finally publish the packages to NPM
+  * manually correct the changelog
+  * commit, git tag, git push 
+5. create release on github  

@@ -1,4 +1,4 @@
-Nebular Ui Kit includes a list of essential component allowing you to quickly create a new page and start filling it with business logic not worrying about essential layout components.
+Nebular Ui Kit includes a list of essential component allowing you to quickly create a new page and start filling it with business logic not worrying about essential layout elements.
 
 Here's a list of Nebular components:
 

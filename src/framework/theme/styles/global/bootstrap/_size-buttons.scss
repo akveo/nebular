@@ -26,6 +26,7 @@
   @include button-size(nb-theme(btn-padding-y-lg),
                        nb-theme(btn-padding-x-lg),
                        nb-theme(btn-font-size-lg),
+                       nb-theme(btn-line-height),
                        nb-theme(btn-border-radius));
 }
 
@@ -33,6 +34,7 @@
   @include button-size(nb-theme(btn-padding-y-md),
                        nb-theme(btn-padding-x-md),
                        nb-theme(btn-font-size-md),
+                       nb-theme(btn-line-height),
                        nb-theme(btn-border-radius));
 }
 
@@ -40,6 +42,7 @@
   @include button-size(nb-theme(btn-padding-y-sm),
                        nb-theme(btn-padding-x-sm),
                        nb-theme(btn-font-size-sm),
+                       nb-theme(btn-line-height),
                        nb-theme(btn-border-radius));
 }
 
@@ -47,5 +50,6 @@
   @include button-size(nb-theme(btn-padding-y-tn),
                        nb-theme(btn-padding-x-tn),
                        nb-theme(btn-font-size-tn),
+                       nb-theme(btn-line-height),
                        nb-theme(btn-border-radius));
 }

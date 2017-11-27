@@ -26,6 +26,7 @@ $nb-themes: nb-register-theme((
 
   header-bg: #fff,
   menu-submenu-item-padding: 0.125rem 0,
+  menu-icon-color: #a4abb3,
   menu-font-weight: font-weight-normal,
   menu-active-font-weight: font-weight-bolder,
   menu-submenu-item-border-width: 0,
@@ -46,6 +47,8 @@ $nb-themes: nb-register-theme((
   page-title-padding-top: 0.25rem,//custom variable
   second-heading-font-size: 1.5rem,//custom variable
   second-heading-font-weight: font-weight-bolder,//custom variable
+  third-heading-font-size: 1.125rem,//custom variable
+  third-heading-font-weight: font-weight-bolder,//custom variable
   block-margin: 2rem,//custom variable
   block-title-margin-bottom: 1rem,//custom variable
   block-title-font-size: 1.25rem,//custom variable

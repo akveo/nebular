@@ -1,28 +1,13 @@
-The main goal of this module is to provide a plugable set of components and services for easier setup of the authentication layer on the UI side. 
-Also it incorporates a layer of Auth Providers, meaning that Authentication layer could be extended or changed by a configuration.
-*Note*: the setup will still require a backend services to communicate with.
+<div class="note note-info section-end">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Auth module in place.
+  </div>
+</div>
 
-## What's included
+## Installation steps
 
-Four pages:
-  - Login
-  - Register
-  - Password Recover
-  - Password Reset
-  
-  
-Two auth providers:
-  - Dummy auth provider - for testing purposes
-  - EmailPass auth provider - the most common email and password authentication
-    
-Other helper services:
-  - Token Service, JWT token and Simple token - helper services for token handling
-  - JWT and Simple HTTP interceptors - intercepts the token into your HTTP requests
-  
-
-## How to start
-
-1) First, let's install the module as it's distributed as npm package:
+1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
 
 `npm i @nebular/auth`
     
@@ -30,7 +15,7 @@ Other helper services:
 
 `import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';`
 
-3) Now, let's configure the module:
+3) Now, let's configure the module by specifying available providers, in your case we add `NbEmailPassAuthProvider`:
 
 ```typescript
 
@@ -47,13 +32,16 @@ Other helper services:
              },
            },
          },
+         forms: {},
        }), 
   ],
 });
 
 ```
 
-4) Next, we need to show the auth pages somewhere, let's add them into your app.routes.ts
+We also specify a `forms` key, which configures available options for the UI components, but let's leave it empty for now and get back to it in the [Configuring UI](#/docs/auth/configuring-ui) article.
+
+4) Next, we need to configure UI part, let's add UI components into your `app-routing.module.ts`:
 
 
 ```typescript
@@ -102,9 +90,15 @@ export const routes: Routes = [
   
 ];
 ```
-*Note*: we wrap the pages into AuthComponent which is optional and just provides some basic styling for the page.
 
-5) Last but not least - install the component styles into your themes.scss ([More Details](/#/docs/guides/enabling-theme-system)):
+<div class="note note-info">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    The components are wrapped by `NbAuthBlockComponent`, which is optional and just provides some basic styling for the page.
+  </div>
+</div>
+
+5) Last but not least - install the component styles into your themes.scss ([more details](/#/docs/guides/enabling-theme-system)):
 
 ```scss
 @import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/{theme-name}';
@@ -118,11 +112,11 @@ export const routes: Routes = [
 
 ```
 
-5) At this point if you navigate to http://localhost:4200/#/auth/login the login from will be shown.
+At this point, if you navigate to http://localhost:4200/#/auth/login the login form is shown.
 
+<hr class="section-end">
 
 ## Where to next
 
-- Configuring a provider [Email & Password provider settings](#/docs/auth/email--password-provider)
-- Getting auth token after authentication [NbTokenService](#/docs/auth/nbtokenservice)
-
+- [Configuring a provider](#/docs/auth/configuring-a-provider)
+- Adjusting [Auth Components UI](#/docs/auth/configuring-ui)

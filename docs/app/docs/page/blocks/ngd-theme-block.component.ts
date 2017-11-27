@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { DocsService } from '../../docs.service';
@@ -6,38 +6,38 @@ import { DocsService } from '../../docs.service';
 @Component({
   selector: 'ngd-theme-block',
   template: `
-  <div class="theme-header" >
-    <div class="theme-title">{{ themeTitle }} Theme
-      <span *ngIf="parentTheme">inherited from {{parentTheme}} theme</span>
-    </div>
-    <div class="input-group">
-      <input #searchInput
-        type="text"
-        class="form-control"
-        [ngModel]="searchTermModel"
-        [class.form-control-warning]="isWarning && searchInput.value"
-        placeholder="Search for..."
-        (keyup.enter)="filterThemeContent(searchInput.value)">
-      <span class="input-group-btn">
+    <div class="theme-header">
+      <div class="theme-title">{{ themeTitle }} Theme
+        <span *ngIf="parentTheme">inherited from {{parentTheme}} theme</span>
+      </div>
+      <div class="input-group">
+        <input #searchInput
+               type="text"
+               class="form-control"
+               [ngModel]="searchTermModel"
+               [class.form-control-warning]="isWarning && searchInput.value"
+               placeholder="Search for..."
+               (keyup.enter)="filterThemeContent(searchInput.value)">
+        <span class="input-group-btn">
         <button
           class="btn btn-success"
           (click)="filterThemeContent(searchInput.value)">
           Search
         </button>
       </span>
+      </div>
+      <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing found</div>
     </div>
-    <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing found</div>
-  </div>
-  <div class="table-container">  
-    <table class="table-striped table theme-table">
-      <thead>
+    <div class="table-container">
+      <table class="table-striped table theme-table">
+        <thead>
         <tr>
           <td>Name</td>
           <td>Value</td>
           <td>Parent</td>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr *ngFor="let prop of filteredContent;" fragment="{{prop.name}}" tableCell ngdFragment>
           <td>
             <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a>
@@ -45,7 +45,8 @@ import { DocsService } from '../../docs.service';
           </td>
           <td ngdSassValue>{{ prop.value }}</td>
           <td class="theme-parents-cell">
-            <a routerLink="/docs/themes/{{prop.parents[0]?.theme}}" fragment="{{prop.parents[0]?.prop}}" tableCell ngdFragment>
+            <a routerLink="/docs/themes/{{prop.parents[0]?.theme}}"
+               fragment="{{prop.parents[0]?.prop}}" tableCell ngdFragment>
               {{ prop.parents[0]?.prop }}
               <span *ngIf="prop.parents[0] && prop.parents[0].theme !== themeName">({{prop.parents[0]?.theme}})</span>
             </a>
@@ -60,10 +61,10 @@ import { DocsService } from '../../docs.service';
             </div>
           </td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-`,
+        </tbody>
+      </table>
+    </div>
+  `,
 })
 export class NgdThemeComponent implements OnDestroy {
   themeTitle: string;
@@ -111,7 +112,7 @@ export class NgdThemeComponent implements OnDestroy {
       this.filteredContent = filterResult;
       this.isWarning = !(filterResult.length > 0);
       this.renderer.setProperty(document.body, 'scrollTop', 0);
-      this.router.navigate([], { relativeTo: this.route });
+      this.router.navigate([], {relativeTo: this.route});
     }
   }
 

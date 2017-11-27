@@ -111,16 +111,16 @@ describe('theme-service', () => {
 
     const subscription = themeService.getJsTheme()
       .subscribe((change: any) => {
-        current = change;
+        current = change.variables;
       });
     try {
       expect(current).not.toBeUndefined();
-      expect(current.fontMain).toEqual('Open Sans');
-      expect(current.colorBg).toEqual('#3d3780');
+      expect(current.fontMain).toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+      expect(current.bg).toEqual('#ffffff');
 
       themeService.changeTheme('cosmic');
 
-      expect(current.colorBg).toEqual('#3d3780');
+      expect(current.bg).toEqual('#3d3780');
 
     } finally {
       subscription.unsubscribe();

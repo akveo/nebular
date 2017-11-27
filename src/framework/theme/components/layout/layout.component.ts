@@ -67,6 +67,16 @@ export class NbLayoutColumnComponent {
  * Located on top of the page above the layout columns and sidebars.
  * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
  * sticky to the top of the nb-layout (to of the page).
+ *
+ * @styles
+ *
+ * header-font-family
+ * header-line-height
+ * header-fg
+ * header-bg
+ * header-height
+ * header-padding
+ * header-shadow
  */
 @Component({
   selector: 'nb-layout-header',
@@ -94,6 +104,15 @@ export class NbLayoutHeaderComponent {
  * Page footer.
  * Located under the nb-layout content (specifically, under the columns).
  * Could be made `fixed`, becoming sticky to the bottom of the view port (window).
+ *
+ * @styles
+ *
+ * footer-height
+ * footer-padding
+ * footer-fg
+ * footer-bg
+ * footer-separator
+ * footer-shadow
  */
 @Component({
   selector: 'nb-layout-footer',
@@ -197,7 +216,6 @@ export class NbLayoutFooterComponent {
  * layout-padding
  * layout-medium-padding
  * layout-small-padding
-
  */
 @Component({
   selector: 'nb-layout',

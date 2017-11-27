@@ -47,11 +47,13 @@ export class DocsService {
     return classStyles.map(item => {
       item.styles.map(prop => {
         prop.themedValues = [];
-        for (let themeName in PARSEDDOCS.themes) {
-          prop.themedValues.push({
-            theme: PARSEDDOCS.themes[themeName].name,
-            value: PARSEDDOCS.themes[themeName].data[prop.name].value,
-          });
+        for (const themeName in PARSEDDOCS.themes) {
+          if (PARSEDDOCS.themes.hasOwnProperty(themeName)) {
+            prop.themedValues.push({
+              theme: PARSEDDOCS.themes[themeName].name,
+              value: PARSEDDOCS.themes[themeName].data[prop.name].value,
+            });
+          }
         }
         return prop;
       });
@@ -80,9 +82,8 @@ export class DocsService {
     let menuItems = structure.map((item: any) => {
       if (item.name) {
         const menuItem: any = {};
-        const itemLink = item.type === 'block' ?
-          `${parentLink}`
-          : `${parentLink ? parentLink : ''}/${item.name.replace(/[^a-zA-Z0-9\s]+/g, '').replace(/\s/g, '-').toLowerCase()}`;
+        const name = item.name.replace(/[^a-zA-Z0-9\s]+/g, '').replace(/\s/g, '-').toLowerCase();
+        const itemLink = item.type === 'block' ? parentLink : `${parentLink ? parentLink : ''}/${name}`;
 
         if (item.type !== 'section' || !item.isSubpages) {
           menuItem['link'] = itemLink;

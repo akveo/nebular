@@ -15,7 +15,7 @@ export class NgdMarkdownComponent implements OnInit {
   markdown: string;
 
   ngOnInit() {
-    const input = require(`raw-loader!../../../../assets/articles/${this.block.source}`);
+    const input = require(`raw-loader!../../../../articles/${this.block.source}`);
     const md = marked.setOptions({
       highlight: (code, lang = 'jsx') => {
         return Prism.highlight(code.trim(), Prism.languages[lang]);

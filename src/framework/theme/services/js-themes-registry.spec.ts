@@ -63,8 +63,10 @@ describe('js-themes-registry-service', () => {
   });
 
   it('has built in themes with inherited font', () => {
-    expect(jsThemesRegistry.get('default').variables.fontMain).toEqual('Helvetica');
-    expect(jsThemesRegistry.get('cosmic').variables.fontMain).toEqual('Helvetica');
+    expect(jsThemesRegistry.get('default').variables.fontMain)
+      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+    expect(jsThemesRegistry.get('cosmic').variables.fontMain)
+      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
   });
 
   it('has also new themes', () => {

@@ -70,7 +70,7 @@ export class NgdPageComponent implements OnDestroy, OnInit {
       this.currentItem.children[0].block !== 'theme';
 
     this.titleService.setTitle(`Nebular Documentation - ${event.item.data.name}`);
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   ngOnDestroy() {

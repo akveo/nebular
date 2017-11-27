@@ -35,8 +35,6 @@
       @include install-placeholder(rgba(nb-theme(form-control-placeholder-color), 0.5),
                                    nb-theme(form-control-placeholder-font-size));
     }
-
-    @include form-control-validation(nb-theme(form-control-text-secondary-color));
     @include install-placeholder(nb-theme(form-control-placeholder-color),
                                  nb-theme(form-control-placeholder-font-size));
   }

@@ -122,6 +122,12 @@
     },
     {
       "project": "e2e/tsconfig.e2e.json"
+    },
+    {
+      "project": "docs/tsconfig.spec.json"
+    },
+    {
+      "project": "docs/tsconfig.app.json"
     }
   ],
   "test": {
