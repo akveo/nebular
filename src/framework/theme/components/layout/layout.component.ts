@@ -366,7 +366,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .filter(event => event instanceof NavigationEnd)
       .takeWhile(() => this.alive)
       .subscribe(() => {
-        this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
+        this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
       });
   }
 }
