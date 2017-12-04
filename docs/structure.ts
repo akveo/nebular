@@ -512,6 +512,17 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'NbOAuth2Provider',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbOAuth2Provider',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbTokenService',
         children: [
           {

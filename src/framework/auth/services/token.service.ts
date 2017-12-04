@@ -74,6 +74,23 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
 }
 
 /**
+ * Wrapper for OAuth2 (both access and refresh tokens) with additional methods.
+ */
+@Injectable()
+export class NbOAuth2Token extends NbAuthSimpleToken {
+  private refreshToken = '';
+
+  getRefreshToken(): string {
+    return this.refreshToken;
+  }
+
+  setRefreshToken(refreshToken: string): void {
+    this.refreshToken = refreshToken;
+  }
+}
+
+// TODO: TokenService should support both access and refresh tokens
+/**
  * Nebular token service. Provides access to the stored token.
  * By default returns NbAuthSimpleToken instance,
  * but you can inject NbAuthJWTToken if you need additional methods for JWT token.

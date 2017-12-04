@@ -9,6 +9,7 @@ import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 import { NbAuthService } from './services/auth.service';
 import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
+import {NbOAuth2Provider} from './providers/oauth2-auth-provider';
 
 import {
   defaultSettings,
@@ -97,6 +98,7 @@ export class NbAuthModule {
         NbTokenService,
         NbDummyAuthProvider,
         NbEmailPassAuthProvider,
+        NbOAuth2Provider,
       ],
     };
   }
