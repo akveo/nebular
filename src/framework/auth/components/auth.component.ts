@@ -14,7 +14,7 @@ import { NbAuthService } from '../services/auth.service';
       <nb-layout-column>
         <nb-card>
           <nb-card-body>
-            <div class="col-xl-4 col-lg-6 col-md-8 col-sm-12">
+            <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
               <router-outlet></router-outlet>
             </div>
           </nb-card-body>

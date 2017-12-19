@@ -12,11 +12,11 @@
   nb-card {
     margin: 0;
   }
-
+  .flex-centered {
+      margin: auto;
+  }
   nb-card-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   // TODO rewrite when develop responsive
