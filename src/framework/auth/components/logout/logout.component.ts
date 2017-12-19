@@ -18,15 +18,18 @@ import { NbAuthService, NbAuthResult } from '../../services/auth.service';
 })
 export class NbLogoutComponent implements OnInit {
 
-  redirectDelay: number = 1500;
+  redirectDelay: number = 0;
+  provider: string = '';
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
               protected router: Router) {
+    this.redirectDelay = this.getConfigValue('forms.logout.redirectDelay');
+    this.provider = this.getConfigValue('forms.logout.provider');
   }
 
   ngOnInit(): void {
-    this.logout(this.getConfigValue('forms.logout.provider'));
+    this.logout(this.provider);
   }
 
   logout(provider: string): void {
