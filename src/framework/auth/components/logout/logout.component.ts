@@ -41,7 +41,6 @@ export class NbLogoutComponent implements OnInit {
     });
   }
   
-  
   getConfigValue(key: string): any {
     return getDeepFromObject(this.config, key, null);
   }
