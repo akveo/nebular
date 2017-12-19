@@ -190,6 +190,10 @@ export class NbUserComponent {
     this.inverseValue = convertToBoolProperty(val);
   }
 
+  @Input() badgeText: string;
+  @Input() badgeStatus: string;
+  @Input() badgePosition: string;
+
   /**
    * Outputs when a context menu item is clicked
    * @type EventEmitter<NbUserMenuItem>

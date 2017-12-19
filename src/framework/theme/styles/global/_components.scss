@@ -14,7 +14,7 @@
 @import '../../components/actions/actions.component.theme';
 @import '../../components/search/search.component.theme';
 @import '../../components/checkbox/checkbox.component.theme';
-
+@import '../../components/badge/badge.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -28,4 +28,5 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-checkbox-theme();
+  @include nb-badge-theme();
 }

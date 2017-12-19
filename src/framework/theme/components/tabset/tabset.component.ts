@@ -49,6 +49,10 @@ export class NbTabComponent {
     }
   }
 
+  @Input() badgeText: string;
+  @Input() badgeStatus: string;
+  @Input() badgePosition: string;
+
   // TODO: it makes sense to add 'lazyLoad' input to 'nb-tabset' component and make this functionality configurable
   init: boolean = false;
 }
@@ -103,6 +107,7 @@ export class NbTabComponent {
           (click)="selectTab(tab)"
           [class.active]="tab.active">
         <a href (click)="$event.preventDefault()">{{ tab.tabTitle }}</a>
+        <nb-badge *ngIf="tab.badgeText" text={{tab.badgeText}} status={{tab.badgeStatus}} position={{tab.badgePosition}}></nb-badge>
       </li>
     </ul>
     <ng-content select="nb-tab"></ng-content>
