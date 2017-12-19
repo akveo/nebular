@@ -6,6 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
+import Badge from "../src/framework/theme/components/badge/badge.component";
 
 describe('nb-tabset', () => {
   beforeEach(() => {
@@ -78,5 +79,22 @@ describe('nb-tabset', () => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
         expect(browser.getCurrentUrl()).toContain('/#/tabset/tab1');
       });
+  });
+
+  fit('should display badge with correct status and position', () => {
+    const badgeText = '29';
+    const badges = [
+      { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
+      { position: Badge.TOP_LEFT, status: Badge.STATUS_INFO, badgeText },
+      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_SUCCESS, badgeText },
+      { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_DANGER, badgeText },
+      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_WARNING, badgeText },
+    ];
+    for (let i = 0; i < badges.length; i++) {
+      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
+      expect(badgeEl.getText()).toEqual(badges[i].badgeText);
+      expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
+      expect(badgeEl.getAttribute('class')).toContain(badges[i].status);
+    }
   });
 });
