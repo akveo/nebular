@@ -10,13 +10,13 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/publish';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pairwise';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/share';
 
 import { nbThemeOptionsToken } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
@@ -38,9 +38,11 @@ export class NbThemeService {
   private removeLayoutClass$ = new Subject();
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
-  constructor(@Inject(nbThemeOptionsToken) protected options: any,
-              private breakpointService: NbMediaBreakpointsService,
-              private jsThemesRegistry: NbJSThemesRegistry) {
+  constructor(
+    @Inject(nbThemeOptionsToken) protected options: any,
+    private breakpointService: NbMediaBreakpointsService,
+    private jsThemesRegistry: NbJSThemesRegistry,
+  ) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
@@ -88,7 +90,7 @@ export class NbThemeService {
    * ```
    * @returns {Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>}
    */
-  onMediaQueryChange(): Observable<[NbMediaBreakpoint, NbMediaBreakpoint]> {
+  onMediaQueryChange(): Observable<NbMediaBreakpoint[]> {
     return this.changeWindowWidth$
       .startWith(undefined)
       .pairwise()
@@ -102,8 +104,7 @@ export class NbThemeService {
         return prevPoint.name !== point.name;
       })
       .distinctUntilChanged(null, params => params[0].name + params[1].name)
-      .publish()
-      .refCount();
+      .share();
   }
 
   onThemeChange(): Observable<any> {

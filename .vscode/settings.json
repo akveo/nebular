@@ -1,4 +1,20 @@
 {
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "tslint.enable": false
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "tslint.enable": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+
+    // exclude .js and .js.map files, when in a TypeScript project
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": true,
+
+    // exclude @nebular build folders
+    "**/.lib": true
+  }
 }
