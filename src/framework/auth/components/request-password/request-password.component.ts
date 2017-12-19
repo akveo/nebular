@@ -16,7 +16,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
   template: `
     <nb-auth-block>
       <h2 class="title">Forgot Password</h2>
-      <small class="form-text sub-title">Enter your email adress and we’ll send a like to reset your password</small>
+      <small class="form-text sub-title">Enter your email adress and we’ll send a link to reset your password</small>
       <form (ngSubmit)="requestPass()" #requestPassForm="ngForm">
 
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
