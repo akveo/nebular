@@ -5,23 +5,15 @@
  */
 
 import {
-  AfterViewInit,
-  Component,
-  ComponentFactoryResolver,
-  ElementRef,
-  HostBinding,
-  HostListener,
-  Input,
-  OnDestroy,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
+  AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
+  Renderer2, ViewChild, ViewContainerRef, OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/takeWhile';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -222,7 +214,7 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div class="scrollable-container">
+    <div class="scrollable-container" #scrollableContainer>
       <div class="layout">
         <ng-content select="nb-layout-header"></ng-content>
         <div class="layout-container">
@@ -238,9 +230,10 @@ export class NbLayoutFooterComponent {
     </div>
   `,
 })
-export class NbLayoutComponent implements OnDestroy, AfterViewInit {
+export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   centerValue: boolean = false;
+
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
 
@@ -286,40 +279,47 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
   }
 
   @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
+  @ViewChild('scrollableContainer', { read: ElementRef }) scrollableContainerRef: ElementRef;
 
   protected afterViewInit$ = new BehaviorSubject(null);
 
-  protected appendClassSubscription: Subscription;
-  protected removeClassSubscription: Subscription;
-  protected themeSubscription: Subscription;
-  protected appendSubscription: Subscription;
-  protected clearSubscription: Subscription;
+  private alive: boolean = true;
 
-  constructor(protected themeService: NbThemeService,
-              protected spinnerService: NbSpinnerService,
-              protected componentFactoryResolver: ComponentFactoryResolver,
-              protected elementRef: ElementRef,
-              protected renderer: Renderer2) {
+  constructor(
+    protected themeService: NbThemeService,
+    protected spinnerService: NbSpinnerService,
+    protected componentFactoryResolver: ComponentFactoryResolver,
+    protected elementRef: ElementRef,
+    protected renderer: Renderer2,
+    protected router: Router,
+  ) {
 
-    this.themeSubscription = this.themeService.onThemeChange().subscribe((theme) => {
+    this.themeService.onThemeChange()
+      .takeWhile(() => this.alive)
+      .subscribe((theme) => {
+        const body = document.getElementsByTagName('body')[0];
+        if (theme.previous) {
+          this.renderer.removeClass(body, `nb-theme-${theme.previous}`);
+        }
+        this.renderer.addClass(body, `nb-theme-${theme.name}`);
+      });
 
-      const body = document.getElementsByTagName('body')[0];
-      if (theme.previous) {
-        this.renderer.removeClass(body, `nb-theme-${theme.previous}`);
-      }
-      this.renderer.addClass(body, `nb-theme-${theme.name}`);
-    });
+    this.themeService.onAppendLayoutClass()
+      .takeWhile(() => this.alive)
+      .subscribe((className) => {
+        this.renderer.addClass(this.elementRef.nativeElement, className);
+      });
 
-    this.appendClassSubscription = this.themeService.onAppendLayoutClass().subscribe((className) => {
-      this.renderer.addClass(this.elementRef.nativeElement, className);
-    });
-
-    this.removeClassSubscription = this.themeService.onRemoveLayoutClass().subscribe((className) => {
-      this.renderer.removeClass(this.elementRef.nativeElement, className);
-    });
+    this.themeService.onRemoveLayoutClass()
+      .takeWhile(() => this.alive)
+      .subscribe((className) => {
+        this.renderer.removeClass(this.elementRef.nativeElement, className);
+      });
 
     this.spinnerService.registerLoader(new Promise((resolve, reject) => {
-      this.afterViewInit$.subscribe((_) => resolve());
+      this.afterViewInit$
+        .takeWhile(() => this.alive)
+        .subscribe((_) => resolve());
     }));
     this.spinnerService.load();
 
@@ -327,8 +327,9 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
     this.themeService.changeWindowWidth(window.innerWidth);
   }
 
-  ngAfterViewInit(): void {
-    this.appendSubscription = this.themeService.onAppendToTop()
+  ngAfterViewInit() {
+    this.themeService.onAppendToTop()
+      .takeWhile(() => this.alive)
       .subscribe((data: { component: any, listener: Subject<any> }) => {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.component);
         const componentRef = this.veryTopRef.createComponent(componentFactory);
@@ -336,7 +337,8 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
         data.listener.complete();
       });
 
-    this.clearSubscription = this.themeService.onClearLayoutTop()
+    this.themeService.onClearLayoutTop()
+      .takeWhile(() => this.alive)
       .subscribe((data: { listener: Subject<any> }) => {
         this.veryTopRef.clear();
         data.listener.next(true);
@@ -345,17 +347,26 @@ export class NbLayoutComponent implements OnDestroy, AfterViewInit {
     this.afterViewInit$.next(true);
   }
 
-  ngOnDestroy(): void {
+  ngOnInit() {
+    this.initScrollTop();
+  }
+
+  ngOnDestroy() {
     this.themeService.clearLayoutTop();
-    this.themeSubscription.unsubscribe();
-    this.appendClassSubscription.unsubscribe();
-    this.removeClassSubscription.unsubscribe();
-    this.appendSubscription.unsubscribe();
-    this.clearSubscription.unsubscribe();
+    this.alive = false;
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.themeService.changeWindowWidth(event.target.innerWidth);
+  }
+
+  private initScrollTop() {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
+      });
   }
 }
