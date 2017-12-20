@@ -81,7 +81,7 @@ describe('nb-tabset', () => {
       });
   });
 
-  fit('should display badge with correct status and position', () => {
+  it('should display badge with correct status and position', () => {
     const badgeText = '29';
     const badges = [
       { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
