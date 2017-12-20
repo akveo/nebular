@@ -198,7 +198,7 @@ export class NbUserComponent {
 
   /**
    * Badge status (adds specific styles):
-   * Badge.STATUS_[PRIMARY | INFO | SUCCESS | WARNING | DANGER]
+   * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
   @Input() badgeStatus: string;
@@ -206,7 +206,7 @@ export class NbUserComponent {
   /**
    * Badge position.
    * Can be set to any class or to one of predefined positions:
-   * Badge.[TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT]
+   * 'top left', 'top right', 'bottom left', 'bottom right'
    * @type string
    */
   @Input() badgePosition: string;
