@@ -19,10 +19,10 @@ import { convertToBoolProperty } from '../helpers';
   selector: 'nb-action',
   template: `
     <a class="icon-container" href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
-    <i class="control-icon {{ icon }}"></i>
+      <i class="control-icon {{ icon }}"></i>
     </a>
     <ng-template #showContent>
-    <ng-content></ng-content>
+      <ng-content></ng-content>
     </ng-template>
     <nb-badge *ngIf="badgeText" text={{badgeText}} status={{badgeStatus}} position={{badgePosition}}></nb-badge>
   `,
