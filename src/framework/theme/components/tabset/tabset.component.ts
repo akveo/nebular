@@ -49,8 +49,25 @@ export class NbTabComponent {
     }
   }
 
+  /**
+   * Badge text to display
+   * @type string
+   */
   @Input() badgeText: string;
+
+  /**
+   * Badge status (adds specific styles):
+   * Badge.STATUS_[PRIMARY | INFO | SUCCESS | WARNING | DANGER]
+   * @param {string} val
+   */
   @Input() badgeStatus: string;
+
+  /**
+   * Badge position.
+   * Can be set to any class or to one of predefined positions:
+   * Badge.[TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT]
+   * @type string
+   */
   @Input() badgePosition: string;
 
   // TODO: it makes sense to add 'lazyLoad' input to 'nb-tabset' component and make this functionality configurable

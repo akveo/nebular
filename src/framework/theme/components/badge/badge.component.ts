@@ -7,7 +7,16 @@
 import { Component, Input, HostBinding } from "@angular/core";
 
 /**
- * Badge component
+ * Badge - labeling component
+ *
+ * @styles
+ *
+ * badge-fg-text:
+ * badge-primary-bg-color:
+ * badge-success-bg-color:
+ * badge-info-bg-color:
+ * badge-warning-bg-color:
+ * badge-danger-bg-color:
  */
 @Component({
   selector: 'nb-badge',
@@ -31,8 +40,18 @@ export default class Badge {
   positionClass: string = Badge.TOP_RIGHT;
   colorClass: string = Badge.STATUS_PRIMARY;
 
+  /**
+   * Badge text to display
+   * @type string
+   */
   @Input() text: string = '';
 
+  /**
+   * Badge position
+   * Can be set to any class or to one of predefined positions:
+   * Badge.[TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT]
+   * @type string
+   */
   @Input() set position(value) {
     if (value) {
       this.positionClass = value;
@@ -41,7 +60,7 @@ export default class Badge {
 
   /**
    * Badge status (adds specific styles):
-   * primary, info, success, warning, danger
+   * Badge.STATUS_[PRIMARY | INFO | SUCCESS | WARNING | DANGER]
    * @param {string} val
    */
   @Input() set status(value) {
