@@ -7,6 +7,7 @@
 import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
 import Badge from '../src/framework/theme/components/badge/badge.component';
+import badgeTests from './badge.e2e-spec';
 
 describe('nb-tabset', () => {
   beforeEach(() => {
@@ -81,40 +82,18 @@ describe('nb-tabset', () => {
       });
   });
 
-  it('should display badge with correct text', () => {
+  describe('badge', () => {
     const badgeText = '29';
-    const badgesCount = 5;
-    for (let i = 0; i < badgesCount; i++) {
-      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
-      expect(badgeEl.getText()).toEqual(badgeText);
-    }
-  });
-
-  it('should display badge with correct status', () => {
-    const badgesStatuses = [
-      Badge.STATUS_PRIMARY,
-      Badge.STATUS_INFO,
-      Badge.STATUS_SUCCESS,
-      Badge.STATUS_DANGER,
-      Badge.STATUS_WARNING,
-    ];
-    for (let i = 0; i < badgesStatuses.length; i++) {
-      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
-      expect(badgeEl.getAttribute('class')).toContain(badgesStatuses[i]);
-    }
-  });
-
-  it('should display badge in correct position', () => {
-    const badgesPositions = [
-      Badge.TOP_RIGHT,
-      Badge.TOP_LEFT,
-      Badge.BOTTOM_RIGHT,
-      Badge.BOTTOM_LEFT,
-      Badge.BOTTOM_RIGHT,
-    ];
-    for (let i = 0; i < badgesPositions.length; i++) {
-      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
-      expect(badgeEl.getAttribute('class')).toContain(badgesPositions[i]);
-    }
-  });
+    const badgesConf = {
+      selector: (i) => `nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`,
+      badges: [
+        { text: badgeText, status: Badge.STATUS_PRIMARY, position: Badge.TOP_RIGHT },
+        { text: badgeText, status: Badge.STATUS_INFO, position: Badge.TOP_LEFT },
+        { text: badgeText, status: Badge.STATUS_SUCCESS, position: Badge.BOTTOM_RIGHT },
+        { text: badgeText, status: Badge.STATUS_DANGER, position: Badge.BOTTOM_LEFT },
+        { text: badgeText, status: Badge.STATUS_WARNING, position: Badge.BOTTOM_RIGHT },
+      ],
+    };
+    badgeTests(badgesConf);
+  })
 });

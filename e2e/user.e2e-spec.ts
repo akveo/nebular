@@ -6,6 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import Badge from '../src/framework/theme/components/badge/badge.component';
+import badgeTests from './badge.e2e-spec';
 
 describe('nb-user', () => {
 
@@ -19,22 +20,20 @@ describe('nb-user', () => {
   //   });
   // });
 
-  it('should display badge with correct status and position', () => {
+  describe('badge', () => {
     const elementsOffset = 10;
     const badgeText = '29';
-    const badges = [
-      { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
-      { position: Badge.TOP_LEFT, status: Badge.STATUS_INFO, badgeText },
-      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_SUCCESS, badgeText },
-      { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_WARNING, badgeText },
-      { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, badgeText },
-    ];
-    for (let i = 0; i < badges.length; i++) {
-      const badgeEl = element(by.css(`.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`));
-      expect(badgeEl.getText()).toEqual(badges[i].badgeText);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].status);
-    }
+    const badgesConf = {
+      selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`,
+      badges: [
+        { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, text: badgeText },
+        { position: Badge.TOP_LEFT, status: Badge.STATUS_INFO, text: badgeText },
+        { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_SUCCESS, text: badgeText },
+        { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_WARNING, text: badgeText },
+        { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, text: badgeText },
+      ],
+    };
+    badgeTests(badgesConf);
   });
 
 });

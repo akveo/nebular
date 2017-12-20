@@ -6,6 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import Badge from '../src/framework/theme/components/badge/badge.component';
+import badgeTests from './badge.e2e-spec';
 
 describe('nb-action', () => {
 
@@ -13,23 +14,21 @@ describe('nb-action', () => {
     browser.get('#/actions');
   });
 
-  it('should display badge with correct status and position', () => {
+  describe('badge', () => {
     const badgeText = '29';
-    const badges = [
-      { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_SUCCESS, badgeText },
-      { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, badgeText },
-      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_WARNING, badgeText },
-      { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_SUCCESS, badgeText },
-      { position: Badge.TOP_RIGHT, status: Badge.STATUS_INFO, badgeText },
-      { position: Badge.TOP_RIGHT, status: Badge.STATUS_INFO, badgeText },
-      { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
-    ];
-    for (let i = 0; i < badges.length; i++) {
-      const badgeEl = element(by.css(`nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`));
-      expect(badgeEl.getText()).toEqual(badges[i].badgeText);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].status);
-    }
+    const badgesConf = {
+      selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`,
+      badges: [
+        { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_SUCCESS, text: badgeText },
+        { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, text: badgeText },
+        { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_WARNING, text: badgeText },
+        { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_SUCCESS, text: badgeText },
+        { position: Badge.TOP_RIGHT, status: Badge.STATUS_INFO, text: badgeText },
+        { position: Badge.TOP_RIGHT, status: Badge.STATUS_INFO, text: badgeText },
+        { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, text: badgeText },
+      ],
+    };
+    badgeTests(badgesConf);
   });
 
 });
