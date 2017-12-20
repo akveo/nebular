@@ -124,7 +124,11 @@ export class NbTabComponent {
           (click)="selectTab(tab)"
           [class.active]="tab.active">
         <a href (click)="$event.preventDefault()">{{ tab.tabTitle }}</a>
-        <nb-badge *ngIf="tab.badgeText" text={{tab.badgeText}} status={{tab.badgeStatus}} position={{tab.badgePosition}}></nb-badge>
+        <nb-badge *ngIf="tab.badgeText"
+          text={{tab.badgeText}}
+          status={{tab.badgeStatus}}
+          position={{tab.badgePosition}}>
+        </nb-badge>
       </li>
     </ul>
     <ng-content select="nb-tab"></ng-content>

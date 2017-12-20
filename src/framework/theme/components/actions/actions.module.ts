@@ -20,7 +20,7 @@ const NB_ACTIONS_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
-    NbBadgeModule
+    NbBadgeModule,
   ],
   declarations: [
     ...NB_ACTIONS_COMPONENTS,

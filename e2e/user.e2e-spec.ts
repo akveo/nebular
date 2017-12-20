@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import Badge from "../src/framework/theme/components/badge/badge.component";
+import Badge from '../src/framework/theme/components/badge/badge.component';
 
 describe('nb-user', () => {
 
@@ -30,7 +30,7 @@ describe('nb-user', () => {
       { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, badgeText },
     ];
     for (let i = 0; i < badges.length; i++) {
-      const badgeEl = element(by.css(`.test-row:nth-child(${ elementsOffset + i + 1 }) nb-badge > span`));
+      const badgeEl = element(by.css(`.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`));
       expect(badgeEl.getText()).toEqual(badges[i].badgeText);
       expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
       expect(badgeEl.getAttribute('class')).toContain(badges[i].status);

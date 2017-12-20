@@ -19,7 +19,7 @@ const NB_TABSET_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
-    NbBadgeModule
+    NbBadgeModule,
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,

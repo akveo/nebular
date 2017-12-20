@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import Badge from "framework/theme/components/badge/badge.component";
+import Badge from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-user-test',

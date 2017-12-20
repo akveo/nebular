@@ -9,6 +9,6 @@ import Badge from './badge.component';
 
 @NgModule({
   exports: [ Badge ],
-  declarations: [ Badge ]
+  declarations: [ Badge ],
 })
 export class NbBadgeModule { }

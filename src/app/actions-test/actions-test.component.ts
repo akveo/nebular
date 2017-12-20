@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import Badge from "framework/theme/components/badge/badge.component";
+import Badge from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-actions-test',
@@ -85,14 +85,43 @@ import Badge from "framework/theme/components/badge/badge.component";
         <nb-card>
           <nb-card-body>
             <nb-actions size="large">
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_SUCCESS }}" badgePosition="{{ badge.BOTTOM_LEFT }}">
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_SUCCESS }}"
+                badgePosition="{{ badge.BOTTOM_LEFT }}">
                 <nb-user></nb-user>
               </nb-action>
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_DANGER }}" badgePosition="{{ badge.TOP_LEFT }}" icon="ion-ios-flower-outline"></nb-action>
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_WARNING }}" badgePosition="{{ badge.BOTTOM_RIGHT }}" icon="ion-ios-medical-outline"></nb-action>
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_SUCCESS }}" badgePosition="{{ badge.BOTTOM_LEFT }}" icon="ion-ios-download-outline"></nb-action>
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_INFO }}" badgePosition="{{ badge.TOP_RIGHT }}" icon="ion-ios-download-outline"></nb-action>
-              <nb-action badgeText="29" badgeStatus="{{ badge.STATUS_INFO }}" badgePosition="{{ badge.TOP_RIGHT }}" icon="ion-ios-download-outline" disabled></nb-action>
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_DANGER }}"
+                badgePosition="{{ badge.TOP_LEFT }}"
+                icon="ion-ios-flower-outline">
+              </nb-action>
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_WARNING }}"
+                badgePosition="{{ badge.BOTTOM_RIGHT }}"
+                icon="ion-ios-medical-outline">
+              </nb-action>
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_SUCCESS }}"
+                badgePosition="{{ badge.BOTTOM_LEFT }}"
+                icon="ion-ios-download-outline">
+              </nb-action>
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_INFO }}"
+                badgePosition="{{ badge.TOP_RIGHT }}"
+                icon="ion-ios-download-outline">
+              </nb-action>
+              <nb-action
+                badgeText="29"
+                badgeStatus="{{ badge.STATUS_INFO }}"
+                badgePosition="{{ badge.TOP_RIGHT }}"
+                icon="ion-ios-download-outline"
+                disabled>
+              </nb-action>
               <nb-action badgeText="29">Badge</nb-action>
             </nb-actions>
           </nb-card-body>

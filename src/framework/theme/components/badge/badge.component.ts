@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding } from "@angular/core";
+import { Component, Input, HostBinding } from '@angular/core';
 
 /**
  * Badge - labeling component
@@ -23,9 +23,9 @@ import { Component, Input, HostBinding } from "@angular/core";
   styleUrls: ['./badge.component.scss'],
   template: `
     <span class="nb-badge {{positionClass}} nb-badge-{{colorClass}}">{{text}}</span>
-  `
+  `,
 })
-export default class Badge {
+export default class BadgeComponent {
   static readonly TOP_LEFT = 'top left';
   static readonly TOP_RIGHT = 'top right';
   static readonly BOTTOM_LEFT = 'bottom left';
@@ -37,8 +37,8 @@ export default class Badge {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  positionClass: string = Badge.TOP_RIGHT;
-  colorClass: string = Badge.STATUS_PRIMARY;
+  positionClass: string = BadgeComponent.TOP_RIGHT;
+  colorClass: string = BadgeComponent.STATUS_PRIMARY;
 
   /**
    * Badge text to display

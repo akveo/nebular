@@ -6,7 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
-import Badge from "../src/framework/theme/components/badge/badge.component";
+import Badge from '../src/framework/theme/components/badge/badge.component';
 
 describe('nb-tabset', () => {
   beforeEach(() => {
@@ -81,20 +81,40 @@ describe('nb-tabset', () => {
       });
   });
 
-  it('should display badge with correct status and position', () => {
+  it('should display badge with correct text', () => {
     const badgeText = '29';
-    const badges = [
-      { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
-      { position: Badge.TOP_LEFT, status: Badge.STATUS_INFO, badgeText },
-      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_SUCCESS, badgeText },
-      { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_DANGER, badgeText },
-      { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_WARNING, badgeText },
-    ];
-    for (let i = 0; i < badges.length; i++) {
+    const badgesCount = 5;
+    for (let i = 0; i < badgesCount; i++) {
       const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
-      expect(badgeEl.getText()).toEqual(badges[i].badgeText);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].status);
+      expect(badgeEl.getText()).toEqual(badgeText);
+    }
+  });
+
+  it('should display badge with correct status', () => {
+    const badgesStatuses = [
+      Badge.STATUS_PRIMARY,
+      Badge.STATUS_INFO,
+      Badge.STATUS_SUCCESS,
+      Badge.STATUS_DANGER,
+      Badge.STATUS_WARNING,
+    ];
+    for (let i = 0; i < badgesStatuses.length; i++) {
+      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
+      expect(badgeEl.getAttribute('class')).toContain(badgesStatuses[i]);
+    }
+  });
+
+  it('should display badge in correct position', () => {
+    const badgesPositions = [
+      Badge.TOP_RIGHT,
+      Badge.TOP_LEFT,
+      Badge.BOTTOM_RIGHT,
+      Badge.BOTTOM_LEFT,
+      Badge.BOTTOM_RIGHT,
+    ];
+    for (let i = 0; i < badgesPositions.length; i++) {
+      const badgeEl = element(by.css(`nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`));
+      expect(badgeEl.getAttribute('class')).toContain(badgesPositions[i]);
     }
   });
 });

@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import Badge from "../src/framework/theme/components/badge/badge.component";
+import Badge from '../src/framework/theme/components/badge/badge.component';
 
 describe('nb-action', () => {
 
@@ -25,7 +25,7 @@ describe('nb-action', () => {
       { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, badgeText },
     ];
     for (let i = 0; i < badges.length; i++) {
-      const badgeEl = element(by.css(`nb-card:nth-child(4) nb-actions nb-action:nth-child(${ i + 1 }) nb-badge > span`));
+      const badgeEl = element(by.css(`nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`));
       expect(badgeEl.getText()).toEqual(badges[i].badgeText);
       expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
       expect(badgeEl.getAttribute('class')).toContain(badges[i].status);

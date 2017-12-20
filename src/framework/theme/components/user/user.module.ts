@@ -20,7 +20,7 @@ const NB_USER_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
-    NbBadgeModule
+    NbBadgeModule,
   ],
   declarations: [
     ...NB_USER_COMPONENTS,
