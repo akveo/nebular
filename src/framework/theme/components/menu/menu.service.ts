@@ -12,13 +12,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/publish';
 
-const itemClick$ = new ReplaySubject(1);
-const addItems$ = new ReplaySubject(1);
-const navigateHome$ = new ReplaySubject(1);
-const getSelectedItem$ = new ReplaySubject(1);
-const itemSelect$ = new ReplaySubject(1);
-const itemHover$ = new ReplaySubject(1);
-const submenuToggle$ = new ReplaySubject(1);
+const itemClick$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
+const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
+const navigateHome$ = new ReplaySubject<{ tag: string }>(1);
+const getSelectedItem$
+  = new ReplaySubject<{ tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem; }> }>(1);
+const itemSelect$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
+const itemHover$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
+const submenuToggle$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
 
 /**
  * Menu Item options

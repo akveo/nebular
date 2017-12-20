@@ -14,9 +14,9 @@ import 'rxjs/add/operator/share';
  */
 @Injectable()
 export class NbSearchService {
-  private searchSubmittings$ = new Subject();
-  private searchActivations$ = new Subject();
-  private searchDeactivations$ = new Subject();
+  private searchSubmittings$ = new Subject<{ term: string, tag?: string }>();
+  private searchActivations$ = new Subject<{ searchType: string, tag?: string }>();
+  private searchDeactivations$ = new Subject<{ searchType: string, tag?: string }>();
 
   /***
    * Activate (open) search component

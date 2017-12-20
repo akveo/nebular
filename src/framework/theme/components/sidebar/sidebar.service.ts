@@ -17,9 +17,9 @@ import 'rxjs/add/operator/publish';
 @Injectable()
 export class NbSidebarService {
 
-  private toggle$ = new Subject();
-  private expand$ = new Subject();
-  private collapse$ = new Subject();
+  private toggle$ = new Subject<{ compact: boolean, tag: string }>();
+  private expand$ = new Subject<{ tag: string }>();
+  private collapse$ = new Subject<{ tag: string }>();
 
   /**
    * Subscribe to toggle events
