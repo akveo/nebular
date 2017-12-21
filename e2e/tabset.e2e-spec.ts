@@ -6,7 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
-import Badge from '../src/framework/theme/components/badge/badge.component';
+import { BadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-tabset', () => {
@@ -87,11 +87,11 @@ describe('nb-tabset', () => {
     const badgesConf = {
       selector: (i) => `nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`,
       badges: [
-        { text: badgeText, status: Badge.STATUS_PRIMARY, position: Badge.TOP_RIGHT },
-        { text: badgeText, status: Badge.STATUS_INFO, position: Badge.TOP_LEFT },
-        { text: badgeText, status: Badge.STATUS_SUCCESS, position: Badge.BOTTOM_RIGHT },
-        { text: badgeText, status: Badge.STATUS_DANGER, position: Badge.BOTTOM_LEFT },
-        { text: badgeText, status: Badge.STATUS_WARNING, position: Badge.BOTTOM_RIGHT },
+        { text: badgeText, status: BadgeComponent.STATUS_PRIMARY, position: BadgeComponent.TOP_RIGHT },
+        { text: badgeText, status: BadgeComponent.STATUS_INFO, position: BadgeComponent.TOP_LEFT },
+        { text: badgeText, status: BadgeComponent.STATUS_SUCCESS, position: BadgeComponent.BOTTOM_RIGHT },
+        { text: badgeText, status: BadgeComponent.STATUS_DANGER, position: BadgeComponent.BOTTOM_LEFT },
+        { text: badgeText, status: BadgeComponent.STATUS_WARNING, position: BadgeComponent.BOTTOM_RIGHT },
       ],
     };
     badgeTests(badgesConf);

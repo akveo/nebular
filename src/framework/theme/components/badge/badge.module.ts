@@ -5,10 +5,10 @@
  */
 
 import { NgModule } from '@angular/core';
-import Badge from './badge.component';
+import { BadgeComponent } from './badge.component';
 
 @NgModule({
-  exports: [ Badge ],
-  declarations: [ Badge ],
+  exports: [ BadgeComponent ],
+  declarations: [ BadgeComponent ],
 })
 export class NbBadgeModule { }

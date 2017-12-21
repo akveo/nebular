@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import Badge from '../src/framework/theme/components/badge/badge.component';
+import { BadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-user', () => {
@@ -26,11 +26,11 @@ describe('nb-user', () => {
     const badgesConf = {
       selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`,
       badges: [
-        { position: Badge.TOP_RIGHT, status: Badge.STATUS_PRIMARY, text: badgeText },
-        { position: Badge.TOP_LEFT, status: Badge.STATUS_INFO, text: badgeText },
-        { position: Badge.BOTTOM_RIGHT, status: Badge.STATUS_SUCCESS, text: badgeText },
-        { position: Badge.BOTTOM_LEFT, status: Badge.STATUS_WARNING, text: badgeText },
-        { position: Badge.TOP_LEFT, status: Badge.STATUS_DANGER, text: badgeText },
+        { position: BadgeComponent.TOP_RIGHT, status: BadgeComponent.STATUS_PRIMARY, text: badgeText },
+        { position: BadgeComponent.TOP_LEFT, status: BadgeComponent.STATUS_INFO, text: badgeText },
+        { position: BadgeComponent.BOTTOM_RIGHT, status: BadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: BadgeComponent.BOTTOM_LEFT, status: BadgeComponent.STATUS_WARNING, text: badgeText },
+        { position: BadgeComponent.TOP_LEFT, status: BadgeComponent.STATUS_DANGER, text: badgeText },
       ],
     };
     badgeTests(badgesConf);

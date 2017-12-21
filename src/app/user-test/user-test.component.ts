@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import Badge from 'framework/theme/components/badge/badge.component';
+import { BadgeComponent } from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-user-test',
@@ -114,7 +114,7 @@ import Badge from 'framework/theme/components/badge/badge.component';
 })
 export class NbUserTestComponent {
 
-  badge = Badge;
+  badge = BadgeComponent;
 
   contextMenu = [
     { title: 'Profile', link: 'some/link', icon: 'nb-person' },

@@ -6,7 +6,7 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import Badge from 'framework/theme/components/badge/badge.component';
+import { BadgeComponent } from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-tabset-test',
@@ -133,7 +133,7 @@ import Badge from 'framework/theme/components/badge/badge.component';
 })
 export class NbTabsetTestComponent {
 
-  badge = Badge;
+  badge = BadgeComponent;
 
   constructor(private router: Router) {
   }
