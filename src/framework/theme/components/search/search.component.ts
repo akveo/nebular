@@ -9,15 +9,16 @@ import {
   ComponentRef, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, ComponentFactoryResolver, ViewContainerRef,
   OnDestroy, OnInit,
 } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { filter } from 'rxjs/operators/filter';
+import { of } from 'rxjs/observable/of';
+import { delay } from 'rxjs/operators/delay';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/delay';
-import { Router, NavigationEnd } from '@angular/router';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -222,18 +223,21 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.attachedSearchContainer.createComponent(componentFactory);
 
-    return Observable.of(componentRef);
+    return of(componentRef);
   }
 
   ngOnInit() {
     this.routerSubscription = this.router.events
-      .filter(event => event instanceof NavigationEnd)
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+      )
       .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
+
     this.activateSearchSubscription = this.searchService.onSearchActivate().subscribe((data) => {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = true;
         this.themeService.appendLayoutClass(this.searchType);
-        Observable.of(null).delay(0).subscribe(() => {
+        of(null).pipe(delay(0)).subscribe(() => {
           this.themeService.appendLayoutClass('with-search');
         });
         this.searchFieldComponentRef.instance.showSearch = true;
@@ -250,7 +254,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchFieldComponentRef.instance.inputElement.nativeElement.blur();
         this.searchFieldComponentRef.changeDetectorRef.detectChanges();
         this.themeService.removeLayoutClass('with-search');
-        Observable.of(null).delay(500).subscribe(() => {
+        of(null).pipe(delay(500)).subscribe(() => {
           this.themeService.removeLayoutClass(this.searchType);
         });
       }

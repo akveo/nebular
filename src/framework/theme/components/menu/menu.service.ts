@@ -4,22 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/operator/publish';
+import { share } from 'rxjs/operators/share';
 
-const itemClick$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
+interface NbMenuBag { tag: string; item: NbMenuItem }
+
+const itemClick$ = new ReplaySubject<NbMenuBag>(1);
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
 const navigateHome$ = new ReplaySubject<{ tag: string }>(1);
 const getSelectedItem$
-  = new ReplaySubject<{ tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem; }> }>(1);
-const itemSelect$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
-const itemHover$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
-const submenuToggle$ = new ReplaySubject<{ tag: string; item: NbMenuItem }>(1);
+  = new ReplaySubject<{ tag: string; listener: BehaviorSubject<NbMenuBag> }>(1);
+const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
+const itemHover$ = new ReplaySubject<NbMenuBag>(1);
+const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
 
 /**
  * Menu Item options
@@ -117,28 +119,28 @@ export class NbMenuService {
    * @param {string} tag
    * @returns {Observable<{tag: string; item: NbMenuItem}>}
    */
-  getSelectedItem(tag?: string): Observable<{ tag: string; item: NbMenuItem }> {
-    const listener = new BehaviorSubject<{ tag: string; item: NbMenuItem }>(null);
+  getSelectedItem(tag?: string): Observable<NbMenuBag> {
+    const listener = new BehaviorSubject<NbMenuBag>(null);
 
     getSelectedItem$.next({ tag, listener });
 
     return listener.asObservable();
   }
 
-  onItemClick(): Observable<{ tag: string; item: NbMenuItem }> {
-    return itemClick$.publish().refCount();
+  onItemClick(): Observable<NbMenuBag> {
+    return itemClick$.pipe(share());
   }
 
-  onItemSelect(): Observable<{ tag: string; item: NbMenuItem }> {
-    return itemSelect$.publish().refCount();
+  onItemSelect(): Observable<NbMenuBag> {
+    return itemSelect$.pipe(share());
   }
 
-  onItemHover(): Observable<{ tag: string; item: NbMenuItem }> {
-    return itemHover$.publish().refCount();
+  onItemHover(): Observable<NbMenuBag> {
+    return itemHover$.pipe(share());
   }
 
-  onSubmenuToggle(): Observable<{ tag: string; item: NbMenuItem }> {
-    return submenuToggle$.publish().refCount();
+  onSubmenuToggle(): Observable<NbMenuBag> {
+    return submenuToggle$.pipe(share());
   }
 }
 
@@ -168,15 +170,15 @@ export class NbMenuInternalService {
   }
 
   onAddItem(): Observable<{ tag: string; items: NbMenuItem[] }> {
-    return addItems$.publish().refCount();
+    return addItems$.pipe(share());
   }
 
   onNavigateHome(): Observable<{ tag: string }> {
-    return navigateHome$.publish().refCount();
+    return navigateHome$.pipe(share());
   }
 
-  onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }> {
-    return getSelectedItem$.publish().refCount();
+  onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<NbMenuBag> }> {
+    return getSelectedItem$.pipe(share());
   }
 
   itemHover(item: NbMenuItem, tag?: string) {
