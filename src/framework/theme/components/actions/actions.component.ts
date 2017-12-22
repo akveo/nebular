@@ -24,7 +24,7 @@ import { convertToBoolProperty } from '../helpers';
     <ng-template #showContent>
       <ng-content></ng-content>
     </ng-template>
-    <nb-badge *ngIf="badgeText" text={{badgeText}} status={{badgeStatus}} position={{badgePosition}}></nb-badge>
+    <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
   `,
 })
 export class NbActionComponent {

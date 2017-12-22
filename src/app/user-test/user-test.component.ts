@@ -69,8 +69,8 @@ import { BadgeComponent } from 'framework/theme/components/badge/badge.component
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            badgeStatus="{{ badge.STATUS_INFO }}"
-            badgePosition="{{ badge.TOP_LEFT }}">
+            [badgeStatus]="badge.STATUS_INFO"
+            [badgePosition]="badge.TOP_LEFT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -80,8 +80,8 @@ import { BadgeComponent } from 'framework/theme/components/badge/badge.component
             title="Worker"
             showTitle="false"
             badgeText="29"
-            badgeStatus="{{ badge.STATUS_SUCCESS }}"
-            badgePosition="{{ badge.BOTTOM_RIGHT }}">
+            [badgeStatus]="badge.STATUS_SUCCESS"
+            [badgePosition]="badge.BOTTOM_RIGHT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -91,8 +91,8 @@ import { BadgeComponent } from 'framework/theme/components/badge/badge.component
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            badgeStatus="{{ badge.STATUS_WARNING }}"
-            badgePosition="{{ badge.BOTTOM_LEFT }}">
+            [badgeStatus]="badge.STATUS_WARNING"
+            [badgePosition]="badge.BOTTOM_LEFT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -104,8 +104,8 @@ import { BadgeComponent } from 'framework/theme/components/badge/badge.component
             [menu]="contextMenu"
             (menuClick)="onMenuItemClick($event)"
             badgeText="29"
-            badgeStatus="{{ badge.STATUS_DANGER }}"
-            badgePosition="{{ badge.TOP_LEFT }}">
+            [badgeStatus]="badge.STATUS_DANGER"
+            [badgePosition]="badge.TOP_LEFT">
           </nb-user>
         </div>
       </nb-layout-column>
