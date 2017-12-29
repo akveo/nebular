@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs/observable/of';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
@@ -222,7 +222,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             errors.push('Something went wrong.');
           }
 
-          return of(
+          return observableOf(
             new NbAuthResult(
               false,
               res,
@@ -262,7 +262,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             errors.push('Something went wrong.');
           }
 
-          return of(
+          return observableOf(
             new NbAuthResult(
               false,
               res,
@@ -301,7 +301,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             errors.push('Something went wrong.');
           }
 
-          return of(
+          return observableOf(
             new NbAuthResult(
               false,
               res,
@@ -343,7 +343,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             errors.push('Something went wrong.');
           }
 
-          return of(
+          return observableOf(
             new NbAuthResult(
               false,
               res,
@@ -359,11 +359,11 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     const method = this.getConfigValue('logout.method');
     const url = this.getActionEndpoint('logout');
 
-    return of({})
+    return observableOf({})
       .pipe(
         switchMap((res: any) => {
           if (!url) {
-            return of(res);
+            return observableOf(res);
           }
           return this.http.request(method, url, {observe: 'response'});
         }),
@@ -390,7 +390,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             errors.push('Something went wrong.');
           }
 
-          return of(
+          return observableOf(
             new NbAuthResult(
               false,
               res,

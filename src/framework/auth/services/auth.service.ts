@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { tap } from 'rxjs/operators/tap';
-import { of } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
 import { NbAuthSimpleToken, NbTokenService } from './token.service';
@@ -147,7 +147,7 @@ export class NbAuthService {
               );
           }
 
-          return of(result);
+          return observableOf(result);
         }),
       );
   }
@@ -178,7 +178,7 @@ export class NbAuthService {
               );
           }
 
-          return of(result);
+          return observableOf(result);
         }),
       );
   }

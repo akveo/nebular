@@ -14,7 +14,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { filter } from 'rxjs/operators/filter';
-import { of } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators/delay';
 
 import { NbSearchService } from './search.service';
@@ -223,7 +223,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.attachedSearchContainer.createComponent(componentFactory);
 
-    return of(componentRef);
+    return observableOf(componentRef);
   }
 
   ngOnInit() {
@@ -237,7 +237,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
       if (!this.tag || data.tag === this.tag) {
         this.showSearch = true;
         this.themeService.appendLayoutClass(this.searchType);
-        of(null).pipe(delay(0)).subscribe(() => {
+        observableOf(null).pipe(delay(0)).subscribe(() => {
           this.themeService.appendLayoutClass('with-search');
         });
         this.searchFieldComponentRef.instance.showSearch = true;
@@ -254,7 +254,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchFieldComponentRef.instance.inputElement.nativeElement.blur();
         this.searchFieldComponentRef.changeDetectorRef.detectChanges();
         this.themeService.removeLayoutClass('with-search');
-        of(null).pipe(delay(500)).subscribe(() => {
+        observableOf(null).pipe(delay(500)).subscribe(() => {
           this.themeService.removeLayoutClass(this.searchType);
         });
       }
