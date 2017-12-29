@@ -17,7 +17,7 @@ const PARSEDDOCS: any = require('../../output.json');
 @Injectable()
 export class DocsService {
 
-  private fragments$ = new Subject();
+  private fragments$ = new Subject<string>();
 
   getStructure(): any {
     return STRUCTURE;
