@@ -139,7 +139,7 @@ export class NbAuthService {
           if (result.isSuccess() && result.getTokenValue()) {
             return this.tokenService.set(result.getTokenValue())
               .pipe(
-                switchMap(_ => this.tokenService.get()),
+                switchMap(() => this.tokenService.get()),
                 map((token: NbAuthSimpleToken) => {
                   result.replaceToken(token);
                   return result;

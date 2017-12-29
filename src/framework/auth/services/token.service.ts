@@ -143,7 +143,7 @@ export class NbTokenService {
   set(rawToken: string): Observable<null> {
     return this.getConfigValue('token.setter')(rawToken)
       .pipe(
-        switchMap(_ => this.get()),
+        switchMap(() => this.get()),
         tap((token: NbAuthSimpleToken) => {
           this.publishToken(token);
         }),

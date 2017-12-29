@@ -120,12 +120,12 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuService
       .onItemClick()
-      .pipe(takeWhile(_ => this.alive))
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService
       .onItemSelect()
-      .pipe(takeWhile(_ => this.alive))
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     // this.itemHoverSubscription = this.menuService.onItemHover()
@@ -133,7 +133,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
 
     this.menuService
       .onSubmenuToggle()
-      .pipe(takeWhile(_ => this.alive))
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService.addItems(
