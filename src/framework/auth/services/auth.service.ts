@@ -3,12 +3,13 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Injectable, Optional, Inject, Injector } from '@angular/core';
+import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { map } from 'rxjs/operators/map';
+import { tap } from 'rxjs/operators/tap';
+import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
 import { NbAuthSimpleToken, NbTokenService } from './token.service';
@@ -100,7 +101,7 @@ export class NbAuthService {
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<any> {
-    return this.getToken().map(token => !!(token && token.getValue()));
+    return this.getToken().pipe(map(token => !!(token && token.getValue())));
   }
 
   /**
@@ -117,7 +118,7 @@ export class NbAuthService {
    * @returns {Observable<any>}
    */
   onAuthenticationChange(): Observable<boolean> {
-    return this.onTokenChange().map(token => !!(token && token.getValue()));
+    return this.onTokenChange().pipe(map((token: NbAuthSimpleToken) => !!(token && token.getValue())));
   }
 
   /**
@@ -133,18 +134,22 @@ export class NbAuthService {
    */
   authenticate(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).authenticate(data)
-      .switchMap((result: NbAuthResult) => {
-        if (result.isSuccess() && result.getTokenValue()) {
-          return this.tokenService.set(result.getTokenValue())
-            .switchMap(_ => this.tokenService.get())
-            .map(token => {
-              result.replaceToken(token);
-              return result;
-            });
-        }
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          if (result.isSuccess() && result.getTokenValue()) {
+            return this.tokenService.set(result.getTokenValue())
+              .pipe(
+                switchMap(() => this.tokenService.get()),
+                map((token: NbAuthSimpleToken) => {
+                  result.replaceToken(token);
+                  return result;
+                }),
+              );
+          }
 
-        return Observable.of(result);
-      });
+          return observableOf(result);
+        }),
+      );
   }
 
   /**
@@ -160,18 +165,22 @@ export class NbAuthService {
    */
   register(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).register(data)
-      .switchMap((result: NbAuthResult) => {
-        if (result.isSuccess() && result.getTokenValue()) {
-          return this.tokenService.set(result.getTokenValue())
-            .switchMap(_ => this.tokenService.get())
-            .map(token => {
-              result.replaceToken(token);
-              return result;
-            });
-        }
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          if (result.isSuccess() && result.getTokenValue()) {
+            return this.tokenService.set(result.getTokenValue())
+              .pipe(
+                switchMap(_ => this.tokenService.get()),
+                map((token: NbAuthSimpleToken) => {
+                  result.replaceToken(token);
+                  return result;
+                }),
+              );
+          }
 
-        return Observable.of(result);
-      });
+          return observableOf(result);
+        }),
+      );
   }
 
   /**
@@ -186,11 +195,14 @@ export class NbAuthService {
    */
   logout(provider: string): Observable<NbAuthResult> {
     return this.getProvider(provider).logout()
-      .do((result: NbAuthResult) => {
-        if (result.isSuccess()) {
-          this.tokenService.clear().subscribe(() => { });
-        }
-      });
+      .pipe(
+        tap((result: NbAuthResult) => {
+          if (result.isSuccess()) {
+            this.tokenService.clear().subscribe(() => {
+            });
+          }
+        }),
+      );
   }
 
   /**

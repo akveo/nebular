@@ -27,11 +27,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/router": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0",
+    "@angular/router": "^5.1.0",
+    "@angular/forms": "^5.1.0",
+    "@angular/http": "^5.1.0",
     "@nebular/theme": "2.0.0-rc.3"
   }
 }

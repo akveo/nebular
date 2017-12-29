@@ -14,8 +14,8 @@
 //}
 
 
-@import '~@nebular/theme/styles/all';
-@import '~@nebular/auth/styles/all';
+@import 'theme/styles/all';
+@import 'auth/styles/all';
 
 $nb-themes: nb-register-theme((
   background-inverse: #5f1eff,

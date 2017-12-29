@@ -7,7 +7,8 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/takeWhile';
+import { takeWhile } from 'rxjs/operators/takeWhile';
+import { filter } from 'rxjs/operators/filter';
 
 import { NbMenuInternalService, NbMenuItem } from './menu.service';
 import { convertToBoolProperty } from '../helpers';
@@ -143,7 +144,9 @@ export class NbMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuInternalService
       .onAddItem()
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+      )
       .subscribe((data: { tag: string; items: NbMenuItem[] }) => {
         if (this.compareTag(data.tag)) {
           this.items.push(...data.items);
@@ -153,7 +156,9 @@ export class NbMenuComponent implements OnInit, OnDestroy {
       });
 
     this.menuInternalService.onNavigateHome()
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+      )
       .subscribe((data: { tag: string }) => {
         if (this.compareTag(data.tag)) {
           this.navigateHome();
@@ -162,8 +167,10 @@ export class NbMenuComponent implements OnInit, OnDestroy {
 
     this.menuInternalService
       .onGetSelectedItem()
-      .filter(data => !data.tag || data.tag === this.tag)
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: any) => !data.tag || data.tag === this.tag),
+      )
       .subscribe((data: { tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }) => {
         data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
       });

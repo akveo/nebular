@@ -6,7 +6,6 @@
 
 import { Inject, Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/publish';
 
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { DEFAULT_THEME } from './js-themes/default.theme';

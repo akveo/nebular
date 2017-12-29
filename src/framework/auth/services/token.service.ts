@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/of';
+import { of as observableOf } from 'rxjs/observable/of';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { tap } from 'rxjs/operators/tap';
+import { share } from 'rxjs/operators/share';
 
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.options';
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
@@ -102,18 +102,18 @@ export class NbTokenService {
       getter: (): Observable<NbAuthSimpleToken> => {
         const tokenValue = localStorage.getItem(this.getConfigValue('token.key'));
         this.tokenWrapper.setValue(tokenValue);
-        return Observable.of(this.tokenWrapper);
+        return observableOf(this.tokenWrapper);
       },
 
-      setter: (token: string|NbAuthSimpleToken): Observable<null> => {
+      setter: (token: string | NbAuthSimpleToken): Observable<null> => {
         const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
         localStorage.setItem(this.getConfigValue('token.key'), raw);
-        return Observable.of(null);
+        return observableOf(null);
       },
 
       deleter: (): Observable<null> => {
         localStorage.removeItem(this.getConfigValue('token.key'));
-        return Observable.of(null);
+        return observableOf(null);
       },
     },
   };
@@ -142,10 +142,12 @@ export class NbTokenService {
    */
   set(rawToken: string): Observable<null> {
     return this.getConfigValue('token.setter')(rawToken)
-      .switchMap(_ => this.get())
-      .do((token: NbAuthSimpleToken) => {
-        this.publishToken(token);
-      });
+      .pipe(
+        switchMap(() => this.get()),
+        tap((token: NbAuthSimpleToken) => {
+          this.publishToken(token);
+        }),
+      );
   }
 
   /**
@@ -161,7 +163,7 @@ export class NbTokenService {
    * @returns {Observable<NbAuthSimpleToken>}
    */
   tokenChange(): Observable<NbAuthSimpleToken> {
-    return this.token$.publish().refCount();
+    return this.token$.pipe(share());
   }
 
   /**

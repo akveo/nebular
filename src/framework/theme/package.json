@@ -24,9 +24,9 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0",
+    "@angular/router": "^5.1.0",
     "bootstrap": "^4.0.0-beta.2"
   }
 }

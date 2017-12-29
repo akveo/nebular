@@ -7,13 +7,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/merge';
 
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';
 import { DocsService } from './docs.service';
-
-import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'ngd-docs',

@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/publish';
+import { share } from 'rxjs/operators/share';
 
 /**
  * Sidebar service.
@@ -17,9 +17,9 @@ import 'rxjs/add/operator/publish';
 @Injectable()
 export class NbSidebarService {
 
-  private toggle$ = new Subject();
-  private expand$ = new Subject();
-  private collapse$ = new Subject();
+  private toggle$ = new Subject<{ compact: boolean, tag: string }>();
+  private expand$ = new Subject<{ tag: string }>();
+  private collapse$ = new Subject<{ tag: string }>();
 
   /**
    * Subscribe to toggle events
@@ -27,7 +27,7 @@ export class NbSidebarService {
    * @returns Observable<{ compact: boolean, tag: string }>
    */
   onToggle(): Observable<{ compact: boolean, tag: string }> {
-    return this.toggle$.publish().refCount();
+    return this.toggle$.pipe(share());
   }
 
   /**
@@ -35,7 +35,7 @@ export class NbSidebarService {
    * @returns Observable<{ tag: string }>
    */
   onExpand(): Observable<{ tag: string }> {
-    return this.expand$.publish().refCount();
+    return this.expand$.pipe(share());
   }
 
   /**
@@ -43,22 +43,22 @@ export class NbSidebarService {
    * @returns Observable<{ tag: string }>
    */
   onCollapse(): Observable<{ tag: string }> {
-    return this.collapse$.publish().refCount();
+    return this.collapse$.pipe(share());
   }
 
   /**
    * Toggle a sidebar
-   * @param boolean compact
-   * @param tag tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * @param {boolean} compact
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    * to specify which sidebar you want to control
    */
-  toggle(compact: boolean = false, tag?: string) {
+  toggle(compact = false, tag?: string) {
     this.toggle$.next({ compact, tag });
   }
 
   /**
    * Expands a sidebar
-   * @param tag tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    * to specify which sidebar you want to control
    */
   expand(tag?: string) {
@@ -67,7 +67,7 @@ export class NbSidebarService {
 
   /**
    * Collapses a sidebar
-   * @param {tag} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    * to specify which sidebar you want to control
    */
   collapse(tag?: string) {

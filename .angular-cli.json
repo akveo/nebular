@@ -33,6 +33,11 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "framework"
+        ]
       }
     },
     {
@@ -63,6 +68,11 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          ".lib"
+        ]
       }
     },
     {
