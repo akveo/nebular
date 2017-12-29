@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { share } from 'rxjs/operators/share';
 
-interface NbMenuBag { tag: string; item: NbMenuItem }
+export interface NbMenuBag { tag: string; item: NbMenuItem }
 
 const itemClick$ = new ReplaySubject<NbMenuBag>(1);
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
