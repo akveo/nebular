@@ -1,5 +1,5 @@
 <a name="2.0.0-rc.4"></a>
-# [2.0.0-rc.4](https://github.com/akveo/nebular/compare/2.0.0-rc.3...2.0.0-rc.4) (2017-12-29)
+# [2.0.0-rc.4](https://github.com/akveo/nebular/compare/2.0.0-rc.3...2.0.0-rc.4) (2017-12-31) :christmas_tree:
 
 This release features an update to angular 5+, rxjs 5.5+. Make sure to update these dependencies in your project.
  
@@ -44,6 +44,3 @@ This release features an update to angular 5+, rxjs 5.5+. Make sure to update th
 ### BREAKING CHANGES
 
 * **dependencies:** since bootstrap is updated please look through the bootstrap release notes (https://github.com/twbs/bootstrap/releases) for proper steps to update your styles
-
-
-
