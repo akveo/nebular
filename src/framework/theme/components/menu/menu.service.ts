@@ -59,6 +59,11 @@ export abstract class NbMenuItem {
    */
   children?: NbMenuItem[];
   /**
+   * Children items height
+   * @type {number}
+   */
+  subMenuHeight?: number = 0;
+  /**
    * HTML Link target
    * @type {string}
    */
@@ -158,15 +163,21 @@ export class NbMenuInternalService {
 
   prepareItems(items: NbMenuItem[]) {
     items.forEach(i => this.setParent(i));
-    items.forEach(i => this.prepareItem(i));
+  }
+
+  updateSelection(items: NbMenuItem[], tag: string, collapseOther: boolean = false) {
+    if (collapseOther) {
+      this.collapseAll(items, tag);
+    }
+    items.forEach(item => this.selectItemByUrl(item, tag));
   }
 
   resetItems(items: NbMenuItem[]) {
     items.forEach(i => this.resetItem(i));
   }
 
-  collapseAll(items: NbMenuItem[], except?: NbMenuItem) {
-    items.forEach(i => this.collapseItem(i, except));
+  collapseAll(items: NbMenuItem[], tag: string, except?: NbMenuItem) {
+    items.forEach(i => this.collapseItem(i, tag, except));
   }
 
   onAddItem(): Observable<{ tag: string; items: NbMenuItem[] }> {
@@ -205,15 +216,17 @@ export class NbMenuInternalService {
     });
   }
 
-  private collapseItem(item: NbMenuItem, except?: NbMenuItem) {
+  private collapseItem(item: NbMenuItem, tag: string, except?: NbMenuItem) {
     if (except && item === except) {
       return;
     }
+    const oldValue = !!item.expanded;
     item.expanded = false;
+    if (oldValue !== item.expanded) {
+      this.submenuToggle(item);
+    }
 
-    item.children && item.children.forEach(child => {
-      this.collapseItem(child);
-    });
+    item.children && item.children.forEach(child => this.collapseItem(child, tag));
   }
 
   private setParent(item: NbMenuItem) {
@@ -223,30 +236,48 @@ export class NbMenuInternalService {
     });
   }
 
-  private prepareItem(item: NbMenuItem) {
-    item.selected = false;
+  selectItem(item: NbMenuItem, tag: string) {
+    item.selected = true;
+    this.itemSelect(item, tag);
+    this.selectParent(item, tag);
+  }
 
+  private selectParent({ parent: item }: NbMenuItem, tag: string) {
+    if (!item) {
+      return;
+    }
+
+    if (!item.expanded) {
+      item.expanded = true;
+      this.submenuToggle(item, tag);
+    }
+
+    if (item.selected) {
+      this.selectParent(item, tag);
+    } else {
+      this.selectItem(item, tag);
+    }
+  }
+
+  private selectItemByUrl(item: NbMenuItem, tag: string) {
+    const wasSelected = item.selected;
+    const isSelected = this.selectedInUrl(item);
+    if (!wasSelected && isSelected) {
+      this.selectItem(item, tag);
+    }
+    if (item.children) {
+      this.updateSelection(item.children, tag);
+    }
+  }
+
+  private selectedInUrl(item: NbMenuItem): boolean {
     const exact: boolean = item.pathMatch === 'full';
     const location: string = this.location.path();
 
-    if ((exact && location === item.link) || (!exact && location.includes(item.link))
-      || (exact && item.fragment && location.substr(location.indexOf('#') + 1).includes(item.fragment))) {
-
-      item.selected = true;
-      this.selectParent(item);
-    }
-
-    item.children && item.children.forEach(child => {
-      this.prepareItem(child);
-    });
-  }
-
-  private selectParent(item: NbMenuItem) {
-    const parent = item.parent;
-    if (parent) {
-      parent.selected = true;
-      parent.expanded = true;
-      this.selectParent(parent);
-    }
+    return (
+      (exact && location === item.link) ||
+      (!exact && location.includes(item.link)) ||
+      (exact && item.fragment && location.substr(location.indexOf('#') + 1).includes(item.fragment))
+    );
   }
 }
