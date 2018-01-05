@@ -24,6 +24,8 @@ const newMenu = by.css('nb-menu ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
 
+const waitTime = 10 * 1000;
+
 describe('nb-menu', () => {
 
   beforeEach(() => {
@@ -100,7 +102,8 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu31el = element.all(menu31).first();
-        browser.wait(ec.visibilityOf(menu31el), 5000);
+        browser.wait(ec.elementToBeClickable(menu31el), waitTime);
+
         menu31el.getText()
           .then(val => {
             expect(val).toEqual('Menu #3.1');
@@ -117,7 +120,8 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu32el = element.all(menu32).first();
-        browser.wait(ec.visibilityOf(menu32el), 5000);
+        browser.wait(ec.elementToBeClickable(menu32el), waitTime);
+
         menu32el.getText()
           .then(val => {
             expect(val).toEqual('Menu #3.2');
@@ -134,7 +138,8 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu33el = element.all(menu33).first();
-        browser.wait(ec.visibilityOf(menu33el), 5000);
+        browser.wait(ec.elementToBeClickable(menu33el), waitTime);
+
         menu33el.getText()
           .then(val => {
             expect(val).toEqual('Menu #3.3');
@@ -158,11 +163,13 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu33el = element.all(menu33).first();
-        browser.wait(ec.visibilityOf(menu33el), 5000);
+        browser.wait(ec.elementToBeClickable(menu33el), waitTime);
+
         menu33el.click()
           .then(() => {
             const menu331el = element.all(menu331).first();
-            browser.wait(ec.visibilityOf(menu331el), 5000);
+            browser.wait(ec.elementToBeClickable(menu331el), waitTime);
+
             menu331el.getText()
               .then(val => {
                 expect(val).toEqual('Menu #3.3.1');
@@ -181,11 +188,13 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu33el = element.all(menu33).first();
-        browser.wait(ec.visibilityOf(menu33el), 5000);
+        browser.wait(ec.elementToBeClickable(menu33el), waitTime);
+
         menu33el.click()
           .then(() => {
             const menu332el = element.all(menu332).first();
-            browser.wait(ec.visibilityOf(menu332el), 5000);
+            browser.wait(ec.elementToBeClickable(menu332el), waitTime);
+
             menu332el.getText()
               .then(val => {
                 expect(val).toEqual('Menu #3.3.2');
@@ -204,11 +213,13 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         const menu33el = element.all(menu33).first();
-        browser.wait(ec.visibilityOf(menu33el), 5000);
+        browser.wait(ec.elementToBeClickable(menu33el), waitTime);
+
         menu33el.click()
           .then(() => {
             const menu333el = element.all(menu333).first();
-            browser.wait(ec.visibilityOf(menu333el), 5000);
+            browser.wait(ec.elementToBeClickable(menu333el), waitTime);
+
             menu333el.getText()
               .then(val => {
                 expect(val).toEqual('@nebular/theme');
