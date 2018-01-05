@@ -15,7 +15,7 @@ Help us keep Nebular open and inclusive. Please read and follow our [Code of Con
 
 ## <a name="question"></a> Got a Question or Problem?
 
-Please do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on [StackOverflow](stackoverflow) where the questions should be tagged with tag `nebular`.
+Please do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on [StackOverflow][stackoverflow] where the questions should be tagged with tag `nebular`.
 
 StackOverflow is a much better place to ask questions since:
 
@@ -34,7 +34,7 @@ diagnose the problem. Screenshots and error stack traces are also helpful.
 
 Please follow this simple checklist before submitting:
 
-* If you have a question about using Nebular, please ask on the [StackOverflow](stackoverflow).
+* If you have a question about using Nebular, please ask on the [StackOverflow][stackoverflow].
 
 * It is required that you clearly describe the steps necessary to reproduce the issue you are running into. Although we would love to help our users as much as possible, diagnosing issues without clear reproduction steps is extremely time-consuming and simply not sustainable.
 
@@ -42,7 +42,7 @@ Please follow this simple checklist before submitting:
 
 * Issues with no clear steps to reproduce will not be triaged. If an issue is labeled with "needs info" and receives no further replies from the author of the issue for more than 5 days, it will be closed.
 
-* If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported](issues). You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.
+* If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported][issues]. You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.
 
 * Next, [create a new issue](#submit-issue) that thoroughly explains the problem. Please fill out the populated issue form before submitting the issue.
 
@@ -64,13 +64,13 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue.
 Help us to maximize the effort we can spend fixing issues and adding new
 features by not reporting duplicate issues. Please make sure to fill out the populated issue form before submitting the issue.
 
-You can file new issues by providing the information [here](new_issue).
+You can file new issues by providing the information [here][new_issue].
 
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-* Search [GitHub](pulls) for an open or closed PR
+* Search [GitHub][pulls] for an open or closed PR
   that relates to your submission. You don't want to duplicate effort.
 * Make your changes in a new git branch:
 
