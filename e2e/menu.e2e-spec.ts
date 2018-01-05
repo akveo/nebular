@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by } from 'protractor';
+import { browser, element, by, ExpectedConditions as ec } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
@@ -94,125 +94,142 @@ describe('nb-menu', () => {
       });
   });
 
-  // it('should be selected - Menu #3.1', () => {
-  //   expect(hasClass(element.all(menu3SubMenu).first(), 'collapsed')).toBeTruthy();
-  //
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu31).first().getText()
-  //         .then(val => {
-  //           expect(val).toEqual('Menu #3.1');
-  //         });
-  //
-  //       element.all(menu31).first().click()
-  //         .then(() => {
-  //           expect(browser.getCurrentUrl()).toContain('#/menu/3/1');
-  //         });
-  //     });
-  // });
-  //
-  // it('should be selected - Menu #3.2', () => {
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu32).first().getText()
-  //         .then(val => {
-  //           expect(val).toEqual('Menu #3.2');
-  //         });
-  //
-  //       element.all(menu32).first().click()
-  //         .then(() => {
-  //           expect(browser.getCurrentUrl()).toContain('#/menu/3/2');
-  //         });
-  //     });
-  // });
+  it('should be selected - Menu #3.1', () => {
+    expect(hasClass(element.all(menu3SubMenu).first(), 'collapsed')).toBeTruthy();
 
-  // TODO: Fix test
-  // it('should be expanded - Menu #3.3', () => {
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu33).first().getText()
-  //         .then(val => {
-  //           expect(val).toEqual('Menu #3.3');
-  //         });
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu31el = element.all(menu31).first();
+        browser.wait(ec.visibilityOf(menu31el), 5000);
+        menu31el.getText()
+          .then(val => {
+            expect(val).toEqual('Menu #3.1');
+          });
 
-  //       element.all(menu33).first().click()
-  //         .then(() => {
-  //           expect(hasClass(element.all(menu33SubMenu).first(), 'expanded')).toBeTruthy();
-  //           expect(browser.getCurrentUrl()).toContain('#/menu/1');
+        menu31el.click()
+          .then(() => {
+            expect(browser.getCurrentUrl()).toContain('#/menu/3/1');
+          });
+      });
+  });
 
-  //           element.all(menu33).first().click()
-  //             .then(() => {
-  //               expect(hasClass(element.all(menu33SubMenu).first(), 'collapsed')).toBeTruthy();
-  //               expect(browser.getCurrentUrl()).toContain('#/menu/1');
-  //             });
-  //         });
-  //     });
-  // });
+  it('should be selected - Menu #3.2', () => {
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu32el = element.all(menu32).first();
+        browser.wait(ec.visibilityOf(menu32el), 5000);
+        menu32el.getText()
+          .then(val => {
+            expect(val).toEqual('Menu #3.2');
+          });
 
-  // it('should be selected - Menu #3.3.1', () => {
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu33).first().click()
-  //         .then(() => {
-  //           element.all(menu331).first().getText()
-  //             .then(val => {
-  //               expect(val).toEqual('Menu #3.3.1');
-  //             });
+        menu32el.click()
+          .then(() => {
+            expect(browser.getCurrentUrl()).toContain('#/menu/3/2');
+          });
+      });
+  });
 
-  //           element.all(menu331).first().click()
-  //             .then(() => {
-  //               expect(hasClass(element.all(menu331).first(), 'active')).toBeTruthy();
-  //               expect(browser.getCurrentUrl()).toContain('#/menu/3/3/1');
-  //             });
-  //         });
-  //     });
-  // });
+  it('should be expanded - Menu #3.3', () => {
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu33el = element.all(menu33).first();
+        browser.wait(ec.visibilityOf(menu33el), 5000);
+        menu33el.getText()
+          .then(val => {
+            expect(val).toEqual('Menu #3.3');
+          });
 
-  // it('should be selected - Menu #3.3.2', () => {
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu33).first().click()
-  //         .then(() => {
-  //           element.all(menu332).first().getText()
-  //             .then(val => {
-  //               expect(val).toEqual('Menu #3.3.2');
-  //             });
+        menu33el.click()
+          .then(() => {
+            expect(hasClass(element.all(menu33SubMenu).first(), 'expanded')).toBeTruthy();
+            expect(browser.getCurrentUrl()).toContain('#/menu/1');
 
-  //           element.all(menu332).first().click()
-  //             .then(() => {
-  //               expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
-  //               expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
-  //             });
-  //         });
-  //     });
-  // });
+            menu33el.click()
+              .then(() => {
+                expect(hasClass(element.all(menu33SubMenu).first(), 'collapsed')).toBeTruthy();
+                expect(browser.getCurrentUrl()).toContain('#/menu/1');
+              });
+          });
+      });
+  });
 
-  // it('should be selected - Menu #3.3.3', () => {
-  //   element.all(menu3).first().click()
-  //     .then(() => {
-  //       element.all(menu33).first().click()
-  //         .then(() => {
-  //           element.all(menu333).first().getText()
-  //             .then(val => {
-  //               expect(val).toEqual('@nebular/theme');
-  //             });
+  it('should be selected - Menu #3.3.1', () => {
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu33el = element.all(menu33).first();
+        browser.wait(ec.visibilityOf(menu33el), 5000);
+        menu33el.click()
+          .then(() => {
+            const menu331el = element.all(menu331).first();
+            browser.wait(ec.visibilityOf(menu331el), 5000);
+            menu331el.getText()
+              .then(val => {
+                expect(val).toEqual('Menu #3.3.1');
+              });
 
-  //           element.all(menu333).first().click()
-  //             .then(() => {
-  //               expect(hasClass(element.all(menu333).first(), 'active')).toBeTruthy();
-  //               expect(browser.getCurrentUrl()).toContain('#/menu/1');
-  //             });
-  //         });
-  //     });
-  // });
+            menu331el.click()
+              .then(() => {
+                expect(hasClass(menu331el, 'active')).toBeTruthy();
+                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/1');
+              });
+          });
+      });
+  });
 
-  // it('should be selected - Menu #3.2.2', () => {
-  //   element(homeButton).click()
-  //     .then(() => {
-  //       expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
-  //       expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
-  //     });
-  // });
+  it('should be selected - Menu #3.3.2', () => {
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu33el = element.all(menu33).first();
+        browser.wait(ec.visibilityOf(menu33el), 5000);
+        menu33el.click()
+          .then(() => {
+            const menu332el = element.all(menu332).first();
+            browser.wait(ec.visibilityOf(menu332el), 5000);
+            menu332el.getText()
+              .then(val => {
+                expect(val).toEqual('Menu #3.3.2');
+              });
+
+            menu332el.click()
+              .then(() => {
+                expect(hasClass(menu332el, 'active')).toBeTruthy();
+                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+              });
+          });
+      });
+  });
+
+  it('should be selected - Menu #3.3.3', () => {
+    element.all(menu3).first().click()
+      .then(() => {
+        const menu33el = element.all(menu33).first();
+        browser.wait(ec.visibilityOf(menu33el), 5000);
+        menu33el.click()
+          .then(() => {
+            const menu333el = element.all(menu333).first();
+            browser.wait(ec.visibilityOf(menu333el), 5000);
+            menu333el.getText()
+              .then(val => {
+                expect(val).toEqual('@nebular/theme');
+              });
+
+            menu333el.click()
+              .then(() => {
+                expect(hasClass(menu333el, 'active')).toBeTruthy();
+                expect(browser.getCurrentUrl()).toContain('#/menu/1');
+              });
+          });
+      });
+  });
+
+  it('should be selected - Menu #3.2.2 (navigate home)', () => {
+    element(homeButton).click()
+      .then(() => {
+        expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
+        expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+      });
+  });
 
   it('should add new menu item', () => {
     element(addButton).click()
