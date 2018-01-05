@@ -6,7 +6,6 @@
 
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -153,7 +152,7 @@ export class NbMenuService {
 export class NbMenuInternalService {
   private items: NbMenuItem[] = [];
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private location: Location) {
     this.items = [];
   }
 

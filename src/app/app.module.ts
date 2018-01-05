@@ -13,7 +13,6 @@ import {
   NbActionsModule,
   NbCardModule,
   NbLayoutModule,
-  NbMenuItem,
   NbMenuModule,
   NbRouteTabsetModule,
   NbSearchModule,
@@ -27,7 +26,6 @@ import {
   NB_AUTH_TOKEN_WRAPPER_TOKEN,
   NbAuthJWTToken,
   NbAuthModule,
-  NbDummyAuthProvider,
   NbEmailPassAuthProvider,
   NbAuthJWTInterceptor,
 } from '@nebular/auth';
