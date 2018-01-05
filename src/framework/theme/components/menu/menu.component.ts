@@ -218,14 +218,17 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events
       .pipe(takeWhile(() => this.alive))
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue));
+      .subscribe(() => {
+        this.menuInternalService.resetItems(this.items);
+        this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue)
+      });
 
     this.items.push(...this.menuInternalService.getItems());
   }
 
   ngAfterViewInit() {
     setTimeout(() => this.menuInternalService.updateSelection(this.items, this.tag));
-      }
+  }
 
   onAddItem(data: { tag: string; items: NbMenuItem[] }) {
     this.items.push(...data.items);
@@ -264,9 +267,6 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     const homeItem = this.getHomeItem(this.items);
 
     if (homeItem) {
-      this.menuInternalService.resetItems(this.items);
-      homeItem.selected = true;
-
       if (homeItem.link) {
         this.router.navigate([homeItem.link]);
       }
@@ -278,16 +278,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {
-    let home = null;
-    items.forEach((item: NbMenuItem) => {
-      if (item.home) {
-        home = item;
-      }
-      if (item.home && item.children && item.children.length > 0) {
-        home = this.getHomeItem(item.children);
-      }
-    });
-    return home;
+    return items.find((item: NbMenuItem) => item.home || (item.children && !!this.getHomeItem(item.children)));
   }
 
   private compareTag(tag: string) {
