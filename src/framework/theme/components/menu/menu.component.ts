@@ -278,7 +278,17 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {
-    return items.find((item: NbMenuItem) => item.home || (item.children && !!this.getHomeItem(item.children)));
+    let homeItem;
+
+    items.some((item: NbMenuItem) => {
+      homeItem = item.home
+        ? item
+        : item.children && this.getHomeItem(item.children);
+
+      return homeItem;
+    });
+
+    return homeItem;
   }
 
   private compareTag(tag: string) {
