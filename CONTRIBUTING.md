@@ -213,8 +213,8 @@ reference GitHub issues that this commit **Closes**.
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
 The rest of the commit message is then used for this.
 
-[coc]: https://github.com/akveo/nebular/CODE_OF_CONDUCT.md
-[dev-doc]: https://github.com/akveo/nebular/blob/master/DEV_DOCS.md
+[coc]: CODE_OF_CONDUCT.md
+[dev-doc]: DEV_DOCS.md
 [github]: https://github.com/akveo/nebular
 [stackoverflow]: https://stackoverflow.com/questions/tagged/nebular
 [issues]: https://github.com/akveo/nebular/issues
