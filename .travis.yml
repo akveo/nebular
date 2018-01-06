@@ -4,8 +4,6 @@ dist: trusty
 language: node_js
 
 node_js:
-  - '6'
-  - '7'
   - '8'
 
 cache:
@@ -41,6 +39,3 @@ script:
 
 git:
   depth: 1
-
-notifications:
-  slack: akveo:q559HckfZMSyZRb803aiLcjH
