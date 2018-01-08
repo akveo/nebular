@@ -220,9 +220,10 @@ export class NbMenuInternalService {
     if (except && item === except) {
       return;
     }
-    const oldValue = !!item.expanded;
+
+    const wasExpanded = item.expanded;
     item.expanded = false;
-    if (oldValue !== item.expanded) {
+    if (wasExpanded) {
       this.submenuToggle(item);
     }
 

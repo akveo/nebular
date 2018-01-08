@@ -22,7 +22,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { filter } from 'rxjs/operators/filter';
 
-import { NbMenuInternalService, NbMenuItem, NbMenuService } from './menu.service';
+import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';
 
 function sumSubmenuHeight(item: NbMenuItem) {
@@ -197,27 +197,35 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.menuInternalService
       .onAddItem()
-      .pipe(takeWhile(() => this.alive))
-      .pipe(filter(data => this.compareTag(data.tag)))
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string; items: NbMenuItem[] }) => this.compareTag(data.tag)),
+      )
       .subscribe(data => this.onAddItem(data));
 
     this.menuInternalService
       .onNavigateHome()
-      .pipe(takeWhile(() => this.alive))
-      .pipe(filter(data => this.compareTag(data.tag)))
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string; items: NbMenuItem[] }) => this.compareTag(data.tag)),
+      )
       .subscribe(() => this.navigateHome());
 
     this.menuInternalService
       .onGetSelectedItem()
-      .pipe(takeWhile(() => this.alive))
-      .pipe(filter(data => this.compareTag(data.tag)))
-      .subscribe((data: { tag: string; listener: BehaviorSubject<{ tag: string; item: NbMenuItem }> }) => {
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string; listener: BehaviorSubject<NbMenuBag> }) => this.compareTag(data.tag)),
+      )
+      .subscribe((data: { tag: string; listener: BehaviorSubject<NbMenuBag> }) => {
         data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
       });
 
     this.router.events
-      .pipe(takeWhile(() => this.alive))
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(event => event instanceof NavigationEnd),
+      )
       .subscribe(() => {
         this.menuInternalService.resetItems(this.items);
         this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue)
@@ -278,17 +286,16 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {
-    let homeItem;
+    for (const item of items) {
+      if (item.home) {
+        return item;
+      }
 
-    items.some((item: NbMenuItem) => {
-      homeItem = item.home
-        ? item
-        : item.children && this.getHomeItem(item.children);
-
-      return homeItem;
-    });
-
-    return homeItem;
+      const homeItem = item.children && this.getHomeItem(item.children);
+      if (homeItem) {
+        return homeItem;
+      }
+    }
   }
 
   private compareTag(tag: string) {
