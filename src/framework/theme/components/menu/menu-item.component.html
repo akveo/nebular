@@ -8,8 +8,7 @@
         [attr.target]="menuItem.target"
         [attr.title]="menuItem.title"
         [class.active]="menuItem.selected"
-        (mouseenter)="onHoverItem(menuItem)"
-        (click)="onSelectItem(menuItem)">
+        (mouseenter)="onHoverItem(menuItem)">
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
