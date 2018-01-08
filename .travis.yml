@@ -1,7 +1,7 @@
+language: node_js
+
 sudo: false
 dist: trusty
-
-language: node_js
 
 node_js:
   - '8'
@@ -9,6 +9,10 @@ node_js:
 cache:
   directories:
     - node_modules
+
+branches:
+  only:
+  - master
 
 addons:
   apt:
@@ -26,7 +30,7 @@ before_install:
   - npm i -g npm@latest
 
 install:
-  - npm i
+  - travis_retry npm i
 
 before_script:
 
