@@ -351,7 +351,7 @@ export const STRUCTURE = [
             blockData: 'NbBadgeComponent',
           },
         ],
-      }
+      },
     ],
   },
   {
