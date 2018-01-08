@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { BadgeComponent } from 'framework/theme/components/badge/badge.component';
+import { NbBadgeComponent } from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-actions-test',
@@ -132,7 +132,7 @@ import { BadgeComponent } from 'framework/theme/components/badge/badge.component
 })
 export class NbActionsTestComponent {
 
-  badge = BadgeComponent;
+  badge = NbBadgeComponent;
 
   actionOnClick(event: any) {
     console.info(event);

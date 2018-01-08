@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { BadgeComponent } from '../src/framework/theme/components/badge/badge.component';
+import { NbBadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-action', () => {
@@ -19,13 +19,13 @@ describe('nb-action', () => {
     const badgesConf = {
       selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`,
       badges: [
-        { position: BadgeComponent.BOTTOM_LEFT, status: BadgeComponent.STATUS_SUCCESS, text: badgeText },
-        { position: BadgeComponent.TOP_LEFT, status: BadgeComponent.STATUS_DANGER, text: badgeText },
-        { position: BadgeComponent.BOTTOM_RIGHT, status: BadgeComponent.STATUS_WARNING, text: badgeText },
-        { position: BadgeComponent.BOTTOM_LEFT, status: BadgeComponent.STATUS_SUCCESS, text: badgeText },
-        { position: BadgeComponent.TOP_RIGHT, status: BadgeComponent.STATUS_INFO, text: badgeText },
-        { position: BadgeComponent.TOP_RIGHT, status: BadgeComponent.STATUS_INFO, text: badgeText },
-        { position: BadgeComponent.TOP_RIGHT, status: BadgeComponent.STATUS_PRIMARY, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: NbBadgeComponent.TOP_LEFT, status: NbBadgeComponent.STATUS_DANGER, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_RIGHT, status: NbBadgeComponent.STATUS_WARNING, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
       ],
     };
     badgeTests(badgesConf);

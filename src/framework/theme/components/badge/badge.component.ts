@@ -25,7 +25,7 @@ import { Component, Input, HostBinding } from '@angular/core';
     <span class="nb-badge {{positionClass}} nb-badge-{{colorClass}}">{{text}}</span>
   `,
 })
-export class BadgeComponent {
+export class NbBadgeComponent {
   static readonly TOP_LEFT = 'top left';
   static readonly TOP_RIGHT = 'top right';
   static readonly BOTTOM_LEFT = 'bottom left';
@@ -37,8 +37,8 @@ export class BadgeComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  positionClass: string = BadgeComponent.TOP_RIGHT;
-  colorClass: string = BadgeComponent.STATUS_PRIMARY;
+  positionClass: string = NbBadgeComponent.TOP_RIGHT;
+  colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
    * Badge text to display
