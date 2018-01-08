@@ -341,6 +341,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Badge',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbBadgeComponent',
+          },
+        ],
+      }
     ],
   },
   {

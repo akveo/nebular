@@ -759,6 +759,33 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "badgePosition",
+          "shortDescription": "Badge position.\nCan be set to any class or to one of predefined positions:\n'top left', 'top right', 'bottom left', 'bottom right'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeStatus",
+          "shortDescription": "Badge status (adds specific styles):\n'primary', 'info', 'success', 'warning', 'danger'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeText",
+          "shortDescription": "Badge text to display"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
           "name": "icon",
           "shortDescription": "Icon class to display"
         },
@@ -855,6 +882,87 @@
             },
             {
               "name": "actions-size-large",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Badge with default position and status(color):",
+          "description": "",
+          "code": "\n<nb-badge text=\"badgeText\"></nb-badge>\n"
+        },
+        {
+          "shortDescription": "Badge located on the bottom right with warning status:",
+          "description": "",
+          "code": "\n<nb-badge text=\"badgeText\" status=\"warning\" position=\"bottom right\">\n</nb-badge>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "text",
+          "shortDescription": "Text to display"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "position",
+          "shortDescription": "Badge position",
+          "description": "Can be set to any class or to one of predefined positions:\n'top left', 'top right', 'bottom left', 'bottom right'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "Badge status (adds specific styles):\n'primary', 'info', 'success', 'warning', 'danger'"
+        }
+      ],
+      "methods": [],
+      "name": "NbBadgeComponent",
+      "description": "Element is absolute positioned, so parent should be\n[positioned element](https://developer.mozilla.org/en-US/docs/Web/CSS/position).\nIt means parent `position` should be set to anything except `static`, e.g. `relative`,\n`absolute`, `fixed`, or `sticky`.\n\n",
+      "shortDescription": "Badge is a simple labeling component.\nIt can be used to add additional information to any content or highlight unread items.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "badge-fg-text",
+              "description": ""
+            },
+            {
+              "name": "badge-primary-bg-color",
+              "description": ""
+            },
+            {
+              "name": "badge-success-bg-color",
+              "description": ""
+            },
+            {
+              "name": "badge-info-bg-color",
+              "description": ""
+            },
+            {
+              "name": "badge-warning-bg-color",
+              "description": ""
+            },
+            {
+              "name": "badge-danger-bg-color",
               "description": ""
             }
           ]
@@ -1321,12 +1429,31 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "router",
+              "type": "Router",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
           "name": "constructor",
           "type": [
             "NbLayoutComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "initScrollTop",
+          "type": [
+            "void"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -1349,6 +1476,18 @@
           "params": [],
           "platform": null,
           "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
           "type": [
             "void"
           ],
@@ -2657,7 +2796,7 @@
       "platform": null,
       "examples": [
         {
-          "shortDescription": "",
+          "shortDescription": "Minimal sidebar example",
           "description": "",
           "code": "\n<nb-sidebar>\n  Sidebar content.\n</nb-sidebar>\n"
         },
@@ -3085,7 +3224,35 @@
       "kind": "component",
       "platform": null,
       "examples": [],
-      "props": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgePosition",
+          "shortDescription": "Badge position.\nCan be set to any class or to one of predefined positions:\n'top left', 'top right', 'bottom left', 'bottom right'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeStatus",
+          "shortDescription": "Badge status (adds specific styles):\n'primary', 'info', 'success', 'warning', 'danger'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeText",
+          "shortDescription": "Badge text to display"
+        }
+      ],
       "methods": [],
       "name": "NbTabComponent",
       "shortDescription": "Specific tab container.",
@@ -3259,6 +3426,33 @@
       "platform": null,
       "examples": [],
       "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgePosition",
+          "shortDescription": "Badge position.\nCan be set to any class or to one of predefined positions:\n'top left', 'top right', 'bottom left', 'bottom right'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeStatus",
+          "shortDescription": "Badge status (adds specific styles):\n'primary', 'info', 'success', 'warning', 'danger'"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "badgeText",
+          "shortDescription": "Badge text to display"
+        },
         {
           "kind": "input",
           "platform": null,
@@ -5060,6 +5254,10 @@
               "prop": "btn-fg"
             },
             {
+              "theme": "default",
+              "prop": "badge-fg-text"
+            },
+            {
               "theme": "cosmic",
               "prop": "color-white"
             }
@@ -5100,6 +5298,10 @@
             {
               "theme": "default",
               "prop": "btn-primary-bg"
+            },
+            {
+              "theme": "default",
+              "prop": "badge-primary-bg-color"
             }
           ]
         },
@@ -5155,6 +5357,10 @@
             {
               "theme": "default",
               "prop": "radio-fg"
+            },
+            {
+              "theme": "default",
+              "prop": "badge-success-bg-color"
             }
           ]
         },
@@ -5178,6 +5384,10 @@
             {
               "theme": "default",
               "prop": "form-control-info-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "badge-info-bg-color"
             }
           ]
         },
@@ -5201,6 +5411,10 @@
             {
               "theme": "default",
               "prop": "form-control-warning-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "badge-warning-bg-color"
             },
             {
               "theme": "cosmic",
@@ -5228,6 +5442,10 @@
             {
               "theme": "default",
               "prop": "form-control-danger-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "badge-danger-bg-color"
             }
           ]
         },
@@ -8579,6 +8797,72 @@
             }
           ],
           "childs": []
+        },
+        "badge-fg-text": {
+          "name": "badge-fg-text",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "badge-primary-bg-color": {
+          "name": "badge-primary-bg-color",
+          "value": "#8a7fff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "badge-success-bg-color": {
+          "name": "badge-success-bg-color",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "badge-info-bg-color": {
+          "name": "badge-info-bg-color",
+          "value": "#4ca6ff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-info"
+            }
+          ],
+          "childs": []
+        },
+        "badge-warning-bg-color": {
+          "name": "badge-warning-bg-color",
+          "value": "#ffa100",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-warning"
+            }
+          ],
+          "childs": []
+        },
+        "badge-danger-bg-color": {
+          "name": "badge-danger-bg-color",
+          "value": "#ff4c6a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-danger"
+            }
+          ],
+          "childs": []
         }
       },
       "name": "default",
@@ -9447,6 +9731,10 @@
             {
               "theme": "cosmic",
               "prop": "btn-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-fg-text"
             }
           ]
         },
@@ -9510,6 +9798,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-selected-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-primary-bg-color"
             }
           ]
         },
@@ -9545,6 +9837,10 @@
             {
               "theme": "cosmic",
               "prop": "checkbox-selected-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-success-bg-color"
             }
           ]
         },
@@ -9568,6 +9864,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-info-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-info-bg-color"
             }
           ]
         },
@@ -9596,6 +9896,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-warning-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-warning-bg-color"
             }
           ]
         },
@@ -9619,6 +9923,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-danger-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "badge-danger-bg-color"
             }
           ]
         },
@@ -13294,6 +13602,80 @@
             {
               "theme": "cosmic",
               "prop": "separator"
+            }
+          ],
+          "childs": []
+        },
+        "badge-fg-text": {
+          "name": "badge-fg-text",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-white"
+            },
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "badge-primary-bg-color": {
+          "name": "badge-primary-bg-color",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "badge-success-bg-color": {
+          "name": "badge-success-bg-color",
+          "value": "#00d977",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "badge-info-bg-color": {
+          "name": "badge-info-bg-color",
+          "value": "#0088ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-info"
+            }
+          ],
+          "childs": []
+        },
+        "badge-warning-bg-color": {
+          "name": "badge-warning-bg-color",
+          "value": "#ffa100",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-warning"
+            },
+            {
+              "theme": "default",
+              "prop": "color-warning"
+            }
+          ],
+          "childs": []
+        },
+        "badge-danger-bg-color": {
+          "name": "badge-danger-bg-color",
+          "value": "#ff386a",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-danger"
             }
           ],
           "childs": []

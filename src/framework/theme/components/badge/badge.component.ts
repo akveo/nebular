@@ -7,7 +7,27 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 /**
- * Badge - labeling component
+ * Badge is a simple labeling component.
+ * It can be used to add additional information to any content or highlight unread items.
+ *
+ * Element is absolute positioned, so parent should be
+ * [positioned element](https://developer.mozilla.org/en-US/docs/Web/CSS/position).
+ * It means parent `position` should be set to anything except `static`, e.g. `relative`,
+ * `absolute`, `fixed`, or `sticky`.
+ *
+ *
+ * @example Badge with default position and status(color):
+ *
+ * ```
+ * <nb-badge text="badgeText"></nb-badge>
+ * ```
+ *
+ * @example Badge located on the bottom right with warning status:
+ *
+ * ```
+ * <nb-badge text="badgeText" status="warning" position="bottom right">
+ * </nb-badge>
+ * ```
  *
  * @styles
  *
@@ -41,13 +61,14 @@ export class NbBadgeComponent {
   colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
-   * Badge text to display
+   * Text to display
    * @type string
    */
   @Input() text: string = '';
 
   /**
    * Badge position
+   *
    * Can be set to any class or to one of predefined positions:
    * 'top left', 'top right', 'bottom left', 'bottom right'
    * @type string
@@ -62,6 +83,7 @@ export class NbBadgeComponent {
    * Badge status (adds specific styles):
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
+   * @type string
    */
   @Input() set status(value) {
     if (value) {
