@@ -10,8 +10,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { NbMenuService } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/do';
+
+import { switchMap } from 'rxjs/operators/switchMap';
 
 @Component({
   selector: 'ngd-page',
@@ -55,7 +55,9 @@ export class NgdPageComponent implements OnDestroy, OnInit {
 
     this.routerSubscription = this.router.events
       .filter(event => event instanceof NavigationEnd)
-      .switchMap(event => this.menuService.getSelectedItem('leftMenu'))
+      .pipe(
+        switchMap(event => this.menuService.getSelectedItem('leftMenu')),
+      )
       .subscribe((event: {tag: string, item: any}) => {
         if (event && event.item && event.item.data) {
           this.setupPage(event);

@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import 'rxjs/add/operator/takeWhile';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
@@ -120,12 +120,12 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuService
       .onItemClick()
-      .takeWhile(() => this.alive)
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService
       .onItemSelect()
-      .takeWhile(() => this.alive)
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     // this.itemHoverSubscription = this.menuService.onItemHover()
@@ -133,7 +133,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
 
     this.menuService
       .onSubmenuToggle()
-      .takeWhile(() => this.alive)
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService.addItems(

@@ -11,9 +11,8 @@ import {
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/takeWhile';
+import { filter } from 'rxjs/operators/filter';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -295,8 +294,10 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
   ) {
 
     this.themeService.onThemeChange()
-      .takeWhile(() => this.alive)
-      .subscribe((theme) => {
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe((theme: any) => {
         const body = document.getElementsByTagName('body')[0];
         if (theme.previous) {
           this.renderer.removeClass(body, `nb-theme-${theme.previous}`);
@@ -305,20 +306,26 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       });
 
     this.themeService.onAppendLayoutClass()
-      .takeWhile(() => this.alive)
-      .subscribe((className) => {
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe((className: string) => {
         this.renderer.addClass(this.elementRef.nativeElement, className);
       });
 
     this.themeService.onRemoveLayoutClass()
-      .takeWhile(() => this.alive)
-      .subscribe((className) => {
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe((className: string) => {
         this.renderer.removeClass(this.elementRef.nativeElement, className);
       });
 
     this.spinnerService.registerLoader(new Promise((resolve, reject) => {
       this.afterViewInit$
-        .takeWhile(() => this.alive)
+        .pipe(
+          takeWhile(() => this.alive),
+        )
         .subscribe((_) => resolve());
     }));
     this.spinnerService.load();
@@ -329,7 +336,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.themeService.onAppendToTop()
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+      )
       .subscribe((data: { component: any, listener: Subject<any> }) => {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.component);
         const componentRef = this.veryTopRef.createComponent(componentFactory);
@@ -338,7 +347,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       });
 
     this.themeService.onClearLayoutTop()
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+      )
       .subscribe((data: { listener: Subject<any> }) => {
         this.veryTopRef.clear();
         data.listener.next(true);
@@ -363,8 +374,10 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private initScrollTop() {
     this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .takeWhile(() => this.alive)
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(event => event instanceof NavigationEnd),
+      )
       .subscribe(() => {
         this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
       });

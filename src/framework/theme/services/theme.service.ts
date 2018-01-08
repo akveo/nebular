@@ -10,13 +10,12 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/pairwise';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/share';
+import { map } from 'rxjs/operators/map';
+import { filter } from 'rxjs/operators/filter';
+import { pairwise } from 'rxjs/operators/pairwise';
+import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { startWith } from 'rxjs/operators/startWith';
+import { share } from 'rxjs/operators/share';
 
 import { nbThemeOptionsToken } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
@@ -70,9 +69,11 @@ export class NbThemeService {
    * @returns {Observable<NbJSThemeOptions>}
    */
   getJsTheme(): Observable<NbJSThemeOptions> {
-    return this.onThemeChange().map((theme: any) => {
-      return this.jsThemesRegistry.get(theme.name);
-    });
+    return this.onThemeChange().pipe(
+      map((theme: any) => {
+        return this.jsThemesRegistry.get(theme.name);
+      }),
+    );
   }
 
   clearLayoutTop(): Observable<any> {
@@ -92,31 +93,33 @@ export class NbThemeService {
    */
   onMediaQueryChange(): Observable<NbMediaBreakpoint[]> {
     return this.changeWindowWidth$
-      .startWith(undefined)
-      .pairwise()
-      .map(([prevWidth, width]: [number, number]) => {
-        return [
-          this.breakpointService.getByWidth(prevWidth),
-          this.breakpointService.getByWidth(width),
-        ]
-      })
-      .filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
-        return prevPoint.name !== point.name;
-      })
-      .distinctUntilChanged(null, params => params[0].name + params[1].name)
-      .share();
+      .pipe(
+        startWith(undefined),
+        pairwise(),
+        map(([prevWidth, width]: [number, number]) => {
+          return [
+            this.breakpointService.getByWidth(prevWidth),
+            this.breakpointService.getByWidth(width),
+          ]
+        }),
+        filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
+          return prevPoint.name !== point.name;
+        }),
+        distinctUntilChanged(null, params => params[0].name + params[1].name),
+        share(),
+      );
   }
 
   onThemeChange(): Observable<any> {
-    return this.themeChanges$.publish().refCount();
+    return this.themeChanges$.pipe(share());
   }
 
   onAppendToTop(): Observable<any> {
-    return this.appendToLayoutTop$.publish().refCount();
+    return this.appendToLayoutTop$.pipe(share());
   }
 
   onClearLayoutTop(): Observable<any> {
-    return this.createLayoutTop$.publish().refCount();
+    return this.createLayoutTop$.pipe(share());
   }
 
   appendLayoutClass(className: string) {
@@ -124,7 +127,7 @@ export class NbThemeService {
   }
 
   onAppendLayoutClass(): Observable<any> {
-    return this.appendLayoutClass$.publish().refCount();
+    return this.appendLayoutClass$.pipe(share());
   }
 
   removeLayoutClass(className: string) {
@@ -132,6 +135,6 @@ export class NbThemeService {
   }
 
   onRemoveLayoutClass(): Observable<any> {
-    return this.removeLayoutClass$.publish().refCount();
+    return this.removeLayoutClass$.pipe(share());
   }
 }

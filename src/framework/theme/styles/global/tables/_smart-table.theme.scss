@@ -152,11 +152,16 @@
       margin: -7.5px -12px;
     }
 
+    ng2-smart-table-pager {
+      display: block;
+    }
+
     //Paging
     nav.ng2-smart-pagination-nav {
       display: flex;
       justify-content: center;
       margin-top: nb-theme(margin);
+
 
       .ng2-smart-pagination {
         display: flex;
@@ -177,6 +182,10 @@
         li {
           &:not(:last-child) {
             border-right: 1px solid nb-theme(smart-table-separator);
+          }
+
+          a.page-link-prev, a.page-link-next {
+            font-size: nb-theme(btn-font-size-md);
           }
 
           a, > span {

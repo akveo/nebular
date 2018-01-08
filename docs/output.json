@@ -3145,7 +3145,7 @@
               "name": "tag",
               "type": "string",
               "required": null,
-              "description": "tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here\nto specify which sidebar you want to control\n"
+              "description": "If you have multiple sidebars on the page, mark them with `tag` input property and pass it here\nto specify which sidebar you want to control\n"
             }
           ],
           "platform": null,
@@ -3195,15 +3195,13 @@
             {
               "name": "compact",
               "type": "boolean",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "required": null
             },
             {
               "name": "tag",
               "type": "string",
               "required": null,
-              "description": "tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here\nto specify which sidebar you want to control\n"
+              "description": "If you have multiple sidebars on the page, mark them with `tag` input property and pass it here\nto specify which sidebar you want to control\n"
             }
           ],
           "platform": null,

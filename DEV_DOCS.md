@@ -1,83 +1,73 @@
-# TODO
- - RXJS import
- - steps to start the development
- - describe framework and demo dependencies
- - create a new component guide
- - usage guide
- - move nebular-icons in separate repository
- 
-# MUST!
+# Things you must follow before contributing
 - Don’t overcomplicate
 - Don’t make things too abstract
-- Use tslint, styles-lint
+- Use tslint, styles-lint to check the code style
 - Use lifecycle interfaces
 - Use default angular view encapsulation
-- Try to use changeDetection: ChangeDetectionStrategy.OnPush
-- Never forget typedoc comments
-- Do tests
+- Use changeDetection: ChangeDetectionStrategy.OnPush where applicable
+- Never forget typedoc comments for public methods/properties
+- Write tests
 - Create playground page per each new component/feature
 
 
-# NEW Feature Checklist
+# New Feature Checklist
 - lint checks are passing
-- tests are added/updated
+- tests are added/updated and passing
 - showcase in the playground updated
-- demo updated
-- SCSS variables added/updated
+- Styles variables added/updated
 - tsdocs added/updated
 - commit message is properly formatted
-- for the override - registered in a list of overrides
+- for the override styles - registered in a list of overrides
 - component *.theme registered in a list of component themes
 - looks great on all default themes
-- takes into account `inverse` feature
 - requires approval from several core team contributors
 
 # Objectives
-The main aim of the project is to create a second version of ng2-admin called ngx-admin which will fix all the architecture issues of the current version:
+The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 
-  - make it modular
-  - publish it npm on package
-  - customizable color themes with HOT reload support
-  - create a library of custom layout components
-  - expanded documentation and guides
-  - replace ng2-bootstrap with ng-bootstrap
-  - get rid of jQuery
-  - follow Angular code style
-  - use Angular CLI
-
+We have to:
+  - [x] make it modular
+  - [x] publish it as npm package
+  - [x] customizable color themes with HOT reload support
+  - [x] create a library of custom layout components
+  - [x] expanded documentation and guides
+  - [x] replace ng2-bootstrap with ng-bootstrap
+  - [x] get rid of jQuery
+  - [x] follow Angular code style
+  - [x] use Angular CLI
 
 # Framework Structure
-
 - src
     - app - Components playground, used for components development showcase, also covered with UI tests
     - docs - Documentation and framework website built on top on the framework
-    - backend - Small backend example to run UI tests for @nebular/auth 
+    - backend - Small backend example
     - framework - Framework itself, divided into npm packages
         - theme - `@nebular/theme` npm package, main framework package
         - auth - `@nebular/auth` npm package, auth package (login, register, etc)       
         - icons - `nebular-icons` npm package, cool icons font
       
       
-# Auth // TODO      
+## Auth // TODO      
 
-# Theme
+## Theme
 Theme module is the main framework module, consisting of:
  
   - custom UI Kit components (layout, cards, tabs, etc)
   - css-themes with hot reload support 
   - appearance overrides for 3rd party libraries.
 
-## UI Kit structure 
+### UI Kit structure 
 
 Located in `theme/components`.
-Each component consists of the standard angular component structure + `*.theme.scss` file, which is a customizable part (customizable here means dependable on a specific theme variables) of component's styles.
+Each component consists of the standard angular component structure + `*.theme.scss` file, 
+which is a customizable part (customizable here means dependable on a specific theme variables) of component's styles.
 
-## Services
+### Services
 
 Located in `theme/services`.
 Global theme services.
 
-## Styles structure
+### Styles structure
 
 Located in `theme/styles`
 
@@ -86,13 +76,13 @@ Located in `theme/styles`
 - prebuilt/ - Technical files of which css themes will be compiled
 - themes/ - built-in themes
 - common/ - Shared components styles
-- all.scss - exports all themes' variables, theming engine and global styles
-- components.scss - exports all themes' variables and theming engine but DOES NOT export global styles (should be used in a component)
-- globals.scss - exports all global styles (overrides, components' `*.theme.scss` themes, fonts, etc)
-- themes.scss - all built-in themes
-- theming.scss - themesation engine 
+- all.scss -Exports all themes' variables, theming engine and global styles
+- components.scss - Exports all themes' variables and theming engine but DOES NOT export global styles (should be used in a component)
+- globals.scss - Exports all global styles (overrides, components' `*.theme.scss` themes, fonts, etc)
+- themes.scss - All built-in themes
+- theming.scss - Theme system engine 
 
-### CSS Themes
+#### CSS Themes
 
 - Problem
   Customizable themes support doesn't work good with angular, as encapsulated in framework components' styles can't access user app variables unless you make them non-encapsulated and export as scss-files).
@@ -111,7 +101,7 @@ Located in `theme/styles`
     - CSS variables (currently lack of browsers support)
  
   
-### Multi Themes
+#### Multi Themes
 
 - Problem
   We cannot change SCSS variables in the runtime as user change the theme (possible with CSS variables but browser support is quite limited). 
@@ -155,26 +145,39 @@ Located in `theme/styles`
 - Possible future solution
   - CSS variables
 
-
-// TODO: create and use custom themes
-      
-## JS Themes - // TODO
+   
+### JS Themes - // TODO
 
 TBD
 
-## Documentation
+# Documentation
 Documentation is generated by the custom generator built on top of @nebular/theme.
 
-## Release
+// TODO how to add a page to the documentation
+
+# Release
 
 To start a new release (publish the framework packages on NPM) you need:
 
-1. npm run release:prepare - this will create ready for publishing packages in src/.lib
-2. npm run release:validate - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
-3. MANUALLY update a version in main ./package.json to a new one
-4. release:
-  * make sure you are logged in as a corresponding NPM user
-  * npm run release - will update all package.json's, run prepare & validate and finally publish the packages to NPM
-  * manually correct the changelog
-  * commit, git tag, git push 
-5. create release on github  
+1. create a new release branch called `release:v1.0.2`
+2. npm run release:prepare - this will create ready for publishing packages in src/.lib
+3. npm run release:validate - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
+4. MANUALLY update a version in main ./package.json to a new one
+5. 
+  * npm run version:bump
+  * update dependent modules with correct peer module versions 
+6. 
+  * npm run release:changelog
+  * fix/expand changelog manually
+7. push the branch, create PR, approve - merge
+8. pull the upstream (master)   
+9. npm run release - run prepare & validate and finally publish the packages to NPM
+10. create and push git tag
+11. create release on github  
+
+# TODO
+ - steps to start the development
+ - describe framework and demo dependencies
+ - create a new component guide
+ - usage guide
+ - move nebular-icons in separate repository

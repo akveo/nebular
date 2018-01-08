@@ -7,16 +7,16 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import { share } from 'rxjs/operators/share';
 
 /**
  * Search component service, connects you code to a page-level search component.
  */
 @Injectable()
 export class NbSearchService {
-  private searchSubmittings$ = new Subject();
-  private searchActivations$ = new Subject();
-  private searchDeactivations$ = new Subject();
+  private searchSubmittings$ = new Subject<{ term: string, tag?: string }>();
+  private searchActivations$ = new Subject<{ searchType: string, tag?: string }>();
+  private searchDeactivations$ = new Subject<{ searchType: string, tag?: string }>();
 
   /***
    * Activate (open) search component
@@ -50,7 +50,7 @@ export class NbSearchService {
    * @returns Observable<{searchType: string; tag?: string}>
    */
   onSearchActivate(): Observable<{ searchType: string, tag?: string }> {
-    return this.searchActivations$.share();
+    return this.searchActivations$.pipe(share());
   }
 
   /**
@@ -58,7 +58,7 @@ export class NbSearchService {
    * @returns Observable<{searchType: string; tag?: string}>
    */
   onSearchDeactivate(): Observable<{ searchType: string, tag?: string }> {
-    return this.searchDeactivations$.share();
+    return this.searchDeactivations$.pipe(share());
   }
 
   /**
@@ -66,6 +66,6 @@ export class NbSearchService {
    * @returns Observable<{term: string; tag?: string}>
    */
   onSearchSubmit(): Observable<{ term: string, tag?: string }> {
-    return this.searchSubmittings$.share();
+    return this.searchSubmittings$.pipe(share());
   }
 }
