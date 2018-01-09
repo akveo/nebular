@@ -253,11 +253,8 @@ export class NbMenuInternalService {
       this.submenuToggle(item, tag);
     }
 
-    if (item.selected) {
-      this.selectParent(item, tag);
-    } else {
-      this.selectItem(item, tag);
-    }
+    item.selected = true;
+    this.selectParent(item, tag);
   }
 
   private selectItemByUrl(item: NbMenuItem, tag: string) {
