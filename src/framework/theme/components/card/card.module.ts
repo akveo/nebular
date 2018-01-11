@@ -13,7 +13,6 @@ import {
   NbCardBodyComponent,
   NbCardFooterComponent,
   NbCardHeaderComponent,
-  NbCardAccentComponent,
 } from './card.component';
 
 import { NbRevealCardComponent } from './reveal-card/reveal-card.component';
@@ -24,7 +23,6 @@ const NB_CARD_COMPONENTS = [
   NbCardBodyComponent,
   NbCardFooterComponent,
   NbCardHeaderComponent,
-  NbCardAccentComponent,
   NbRevealCardComponent,
   NbFlipCardComponent,
 ];

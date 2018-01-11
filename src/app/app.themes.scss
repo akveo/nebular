@@ -37,5 +37,3 @@ $nb-themes: nb-register-theme((
   @include nb-theme-global();
   @include nb-auth-global();
 };
-
-.accent-custom-accent {background-color: #bfff00;}

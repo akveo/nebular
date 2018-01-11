@@ -55,20 +55,6 @@ export class NbCardBodyComponent {
 export class NbCardFooterComponent {
 }
 
-
-@Component({
-  selector: 'nb-card-accent',
-  template: `
-    <div class="accent" [ngClass]="'accent-' + accent"></div>
-  `,
-  styleUrls: ['./card.component.scss'],
-})
-export class NbCardAccentComponent {
-
-  @Input() accent = '';
-
-}
-
 /**
  * Basic content container component.
  *
@@ -104,7 +90,6 @@ export class NbCardAccentComponent {
   selector: 'nb-card',
   styleUrls: ['./card.component.scss'],
   template: `
-    <nb-card-accent accent="{{accent}}"></nb-card-accent>
     <ng-content></ng-content>
     <ng-content select="nb-card-header"></ng-content>
     <ng-content select="nb-card-body"></ng-content>
@@ -209,27 +194,32 @@ export class NbCardComponent {
     return this.status === NbCardComponent.STATUS_DANGER;
   }
 
-  @HostBinding('class.primary-card-accent')
+  @HostBinding('class.accent')
+  private get hasAccent() {
+    return this.accent;
+  }
+
+  @HostBinding('class.accent-primary')
   private get primaryAccent() {
     return this.accent === NbCardComponent.ACCENT_PRIMARY;
   }
 
-  @HostBinding('class.info-card-accent')
+  @HostBinding('class.accent-info')
   private get infoAccent() {
     return this.accent === NbCardComponent.ACCENT_INFO;
   }
 
-  @HostBinding('class.success-card-accent')
+  @HostBinding('class.accent-success')
   private get successAccent() {
     return this.accent === NbCardComponent.ACCENT_SUCCESS;
   }
 
-  @HostBinding('class.warning-card-accent')
+  @HostBinding('class.accent-warning')
   private get warningAccent() {
     return this.accent === NbCardComponent.ACCENT_WARNING;
   }
 
-  @HostBinding('class.danger-card-accent')
+  @HostBinding('class.accent-danger')
   private get dangerAccent() {
     return this.accent === NbCardComponent.ACCENT_DANGER;
   }
