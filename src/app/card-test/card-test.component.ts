@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
     <nb-layout>
       <nb-layout-column>
 
-        <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status" [accent]="card.accent">
+        <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
           <nb-card-header>
             <span>Header</span>
           </nb-card-header>
@@ -89,7 +89,7 @@ export class NbCardTestComponent {
 
   sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
-  accents = ['primary', 'success', 'info', 'warning', 'danger', 'custom-accent', ''];
+  accents = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
 
   cards: any[];
   enhancedCards: any[];
