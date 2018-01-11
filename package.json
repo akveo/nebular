@@ -45,10 +45,10 @@
     "clean:tmp": "rimraf .ng_build .ng_compiled",
     "clean:tmp:lib": "npm run clean:tmp && rimraf src/.lib",
     "version:bump": "gulp bump",
+    "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:prepare": "npm run build:package",
-    "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:validate": "npm run build && npm run release:prepare && npm run lint:ci && npm run build:wp && npm run e2e:wp && npm run test",
-    "release": "npm run version:bump && npm run release:prepare && npm run release:validate && npm run release:changelog && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth"
+    "release": "npm run release:prepare && npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth"
   },
   "keywords": [
     "angular",
@@ -77,7 +77,7 @@
     "image-comparison": "2.0.4",
     "ionicons": "2.0.1",
     "leaflet": "1.0.3",
-    "marked": "0.3.6",
+    "marked": "0.3.9",
     "nebular-icons": "1.0.6",
     "normalize.css": "6.0.0",
     "open-sans-fontface": "1.4.0",
