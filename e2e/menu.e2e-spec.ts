@@ -24,7 +24,7 @@ const newMenu = by.css('nb-menu ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
 
-const waitTime = 10 * 1000;
+const waitTime = 20 * 1000;
 
 describe('nb-menu', () => {
 
