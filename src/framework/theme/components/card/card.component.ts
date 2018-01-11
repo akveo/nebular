@@ -114,6 +114,8 @@ export class NbCardComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
+  static readonly ACCENT_ACTIVE = 'active';
+  static readonly ACCENT_DISABLED = 'disabled';
   static readonly ACCENT_PRIMARY = 'primary';
   static readonly ACCENT_INFO = 'info';
   static readonly ACCENT_SUCCESS = 'success';
@@ -224,6 +226,16 @@ export class NbCardComponent {
     return this.accent === NbCardComponent.ACCENT_DANGER;
   }
 
+  @HostBinding('class.accent-active')
+  private get activeAccent() {
+    return this.accent === NbCardComponent.ACCENT_ACTIVE;
+  }
+
+  @HostBinding('class.accent-disabled')
+  private get disabledAccent() {
+    return this.accent === NbCardComponent.ACCENT_DISABLED;
+  }
+
   /**
    * Card size, available sizes:
    * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
@@ -246,7 +258,7 @@ export class NbCardComponent {
 
   /**
    * Card accent:
-   * primary, info, success, warning, danger
+   * active, disabled, primary, info, success, warning, danger
    * @param {string} val
    */
   @Input('accent')
