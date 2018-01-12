@@ -31,6 +31,7 @@ node_modules
 npm-debug.log
 testem.log
 /typings
+/docs/framework
 
 # e2e
 /e2e/*.js
