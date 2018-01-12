@@ -81,7 +81,13 @@ export class NgdThemeComponent implements OnDestroy {
   @Input('block')
   set setProps(block: any) {
     this.themeTitle = block.name;
-    this.themeContent = Object.keys(block.blockData.data).map(key => block.blockData.data[key]);
+    this.themeContent = Object.keys(block.blockData.data).map(key => {
+      const property = block.blockData.data[key];
+      property.value = Array.isArray(property.value)
+        ? property.value.join(' ')
+        : property.value;
+      return property;
+    });
     this.filteredContent = this.themeContent;
     this.themeName = block.blockData.name;
     this.parentTheme = block.blockData.parent;
@@ -102,7 +108,6 @@ export class NgdThemeComponent implements OnDestroy {
       });
   }
 
-
   filterThemeContent(term) {
     if (term !== this.searchTermModel) {
       this.searchTermModel = term;
@@ -112,7 +117,7 @@ export class NgdThemeComponent implements OnDestroy {
       this.filteredContent = filterResult;
       this.isWarning = !(filterResult.length > 0);
       this.renderer.setProperty(document.body, 'scrollTop', 0);
-      this.router.navigate([], {relativeTo: this.route});
+      this.router.navigate([], { relativeTo: this.route });
     }
   }
 
