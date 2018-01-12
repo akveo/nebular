@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
 
 describe('nb-tabset', () => {
-  beforeEach(() => {
-    browser.get('#/tabset');
+  beforeEach((done) => {
+    browser.get('#/tabset').then(() => done());
   });
 
   it('should display default tabset', () => {

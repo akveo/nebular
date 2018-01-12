@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-layout-header', () => {
 
-  beforeEach(() => {
-    browser.get('#/layout/header');
+  beforeEach((done) => {
+    browser.get('#/layout/header').then(() => done());
   });
 
   it('should render default header', () => {
