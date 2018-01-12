@@ -26,8 +26,8 @@ const homeButton = by.css('#homeBtn');
 
 describe('nb-menu', () => {
 
-  beforeEach(() => {
-    browser.get('#/menu');
+  beforeEach((done) => {
+    browser.get('#/menu').then(() => done());
   });
 
   it('should display group title', () => {

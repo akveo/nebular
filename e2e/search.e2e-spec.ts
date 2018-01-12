@@ -10,8 +10,8 @@ import { protractor } from 'protractor/built/ptor';
 
 describe('nb-search', () => {
 
-  beforeEach(() => {
-    browser.get('#/search');
+  beforeEach((done) => {
+    browser.get('#/search').then(() => done());
   });
 
   it('should be able to show search-field', () => {

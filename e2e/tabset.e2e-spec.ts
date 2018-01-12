@@ -10,8 +10,8 @@ import { NbBadgeComponent } from '../src/framework/theme/components/badge/badge.
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-tabset', () => {
-  beforeEach(() => {
-    browser.get('#/tabset');
+  beforeEach((done) => {
+    browser.get('#/tabset').then(() => done());
   });
 
   it('should display default tabset', () => {

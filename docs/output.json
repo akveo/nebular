@@ -67,7 +67,7 @@
           "platform": null,
           "name": "authenticate",
           "type": [
-            "Observable"
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -87,7 +87,7 @@
           "platform": null,
           "name": "createFailResponse",
           "type": [
-            "HttpResponse"
+            "HttpResponse<Object>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -107,7 +107,7 @@
           "platform": null,
           "name": "createSuccessResponse",
           "type": [
-            "HttpResponse"
+            "HttpResponse<Object>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -179,7 +179,7 @@
           "platform": null,
           "name": "logout",
           "type": [
-            "Observable"
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -199,7 +199,7 @@
           "platform": null,
           "name": "register",
           "type": [
-            "Observable"
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -219,7 +219,7 @@
           "platform": null,
           "name": "requestPassword",
           "type": [
-            "Observable"
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -239,7 +239,7 @@
           "platform": null,
           "name": "resetPassword",
           "type": [
-            "Observable"
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -295,6 +295,7 @@
             },
             {
               "name": "providers",
+              "type": "",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -326,7 +327,7 @@
           "platform": null,
           "name": "authenticate",
           "type": [
-            ""
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "Authenticates with the selected provider\nStores received token in the token storage",
@@ -358,7 +359,7 @@
           "platform": null,
           "name": "getToken",
           "type": [
-            ""
+            "Observable<NbAuthSimpleToken>"
           ],
           "isStatic": false,
           "shortDescription": "Retrieves current authenticated token stored"
@@ -369,7 +370,7 @@
           "platform": null,
           "name": "isAuthenticated",
           "type": [
-            ""
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token"
@@ -386,7 +387,7 @@
           "platform": null,
           "name": "logout",
           "type": [
-            ""
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "Sign outs with the selected provider\nRemoves token from the token storage",
@@ -398,7 +399,7 @@
           "platform": null,
           "name": "onAuthenticationChange",
           "type": [
-            ""
+            "Observable<boolean>"
           ],
           "isStatic": false,
           "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token"
@@ -409,7 +410,7 @@
           "platform": null,
           "name": "onTokenChange",
           "type": [
-            ""
+            "Observable<NbAuthSimpleToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns tokens stream"
@@ -431,7 +432,7 @@
           "platform": null,
           "name": "register",
           "type": [
-            ""
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "Registers with the selected provider\nStores received token in the token storage",
@@ -454,7 +455,7 @@
           "platform": null,
           "name": "requestPassword",
           "type": [
-            ""
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "Sends forgot password request to the selected provider",
@@ -477,7 +478,7 @@
           "platform": null,
           "name": "resetPassword",
           "type": [
-            ""
+            "Observable<NbAuthResult>"
           ],
           "isStatic": false,
           "shortDescription": "Tries to reset password with the selected provider",
@@ -511,7 +512,7 @@
           "platform": null,
           "name": "getTokenExpDate",
           "type": [
-            "Date"
+            "Date\n"
           ],
           "isStatic": false,
           "shortDescription": "Returns expiration date"
@@ -639,7 +640,7 @@
           "platform": null,
           "name": "clear",
           "type": [
-            ""
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "Removes the token"
@@ -650,7 +651,7 @@
           "platform": null,
           "name": "get",
           "type": [
-            ""
+            "Observable<NbAuthSimpleToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns observable of current token"
@@ -707,7 +708,7 @@
           "platform": null,
           "name": "set",
           "type": [
-            ""
+            "Observable<null>"
           ],
           "isStatic": false,
           "shortDescription": "Sets the token into the storage. This method is used by the NbAuthService automatically."
@@ -738,7 +739,7 @@
           "platform": null,
           "name": "tokenChange",
           "type": [
-            ""
+            "Observable<NbAuthSimpleToken>"
           ],
           "isStatic": false,
           "shortDescription": "Publishes token when it changes."
@@ -994,18 +995,18 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "string",
           "required": null,
-          "name": "setSize",
+          "name": "size",
           "shortDescription": "Card size, available sizes:\nxxsmall, xsmall, small, medium, large, xlarge, xxlarge"
         },
         {
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "string",
           "required": null,
-          "name": "setStatus",
+          "name": "status",
           "shortDescription": "Card status (adds specific styles):\nactive, disabled, primary, info, success, warning, danger"
         }
       ],
@@ -1184,16 +1185,16 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
-          "name": "_value",
+          "name": "value",
           "shortDescription": "Checkbox value"
         },
         {
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "string",
           "required": null,
-          "name": "setStatus",
+          "name": "status",
           "shortDescription": "Checkbox status (success, warning, danger)"
         }
       ],
@@ -1336,7 +1337,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "left",
           "shortDescription": "Move the column to the very left position in the layout."
@@ -1367,7 +1368,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "center",
           "shortDescription": "Defines whether the layout columns will be centered after some width"
@@ -1376,7 +1377,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "windowMode",
           "shortDescription": "Defines whether the layout enters a 'window' mode, when the layout content (including sidebars and fixed header)\nbecomes centered by width with a margin from the top of the screen, like a floating window.\nAutomatically enables `withScroll` mode, as in the window mode scroll must be inside the layout and cannot be on\nwindow. (TODO: check this)"
@@ -1385,7 +1386,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "withScroll",
           "shortDescription": "Defines whether to move the scrollbars to layout or leave it at the body level.\nAutomatically set to true when `windowMode` is enabled."
@@ -1596,7 +1597,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "fixed",
           "shortDescription": "Makes the footer sticky to the bottom of the window."
@@ -1646,7 +1647,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "fixed",
           "shortDescription": "Makes the header sticky to the top of the nb-layout."
@@ -1700,6 +1701,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
+          "type": "NbMenuItem[]",
           "required": null,
           "name": "items",
           "shortDescription": "List of menu items."
@@ -1785,6 +1787,7 @@
           "params": [
             {
               "name": "items",
+              "type": "NbMenuItem[]",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -1804,6 +1807,7 @@
           "params": [
             {
               "name": "items",
+              "type": "NbMenuItem[]",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -2079,8 +2083,8 @@
           "kind": "property",
           "platform": null,
           "isStatic": false,
+          "type": "NbMenuItem[]",
           "required": null,
-          "name": "children",
           "shortDescription": "Children items"
         },
         {
@@ -2089,7 +2093,6 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
-          "name": "expanded",
           "shortDescription": "Expanded by defaul"
         },
         {
@@ -2098,7 +2101,6 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
-          "name": "group",
           "shortDescription": "Whether the item is just a group (non-clickable)"
         },
         {
@@ -2107,7 +2109,6 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
-          "name": "hidden",
           "shortDescription": "Hidden Item"
         },
         {
@@ -2116,7 +2117,6 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
-          "name": "home",
           "shortDescription": "Where this is a home item"
         },
         {
@@ -2125,7 +2125,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "icon",
           "shortDescription": "Icon class name"
         },
         {
@@ -2134,7 +2133,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "link",
           "shortDescription": "Item relative link (for routerLink)"
         },
         {
@@ -2143,7 +2141,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "pathMatch",
           "shortDescription": "Item is selected when partly or fully equal to the current url"
         },
         {
@@ -2152,7 +2149,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "target",
           "shortDescription": "HTML Link target"
         },
         {
@@ -2161,7 +2157,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "title",
           "shortDescription": "Item Title"
         },
         {
@@ -2170,7 +2165,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "url",
           "shortDescription": "Item URL (absolute)"
         }
       ],
@@ -2190,6 +2184,7 @@
           "params": [
             {
               "name": "items",
+              "type": "NbMenuItem[]",
               "required": null
             },
             {
@@ -2219,7 +2214,7 @@
           "platform": null,
           "name": "getSelectedItem",
           "type": [
-            ">}"
+            "Observable<NbMenuBag>"
           ],
           "isStatic": false,
           "shortDescription": "Returns currently selected item. Won't subscribe to the future events."
@@ -2248,7 +2243,7 @@
           "platform": null,
           "name": "onItemClick",
           "type": [
-            "Observable"
+            "Observable<NbMenuBag>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2260,7 +2255,7 @@
           "platform": null,
           "name": "onItemHover",
           "type": [
-            "Observable"
+            "Observable<NbMenuBag>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2272,7 +2267,7 @@
           "platform": null,
           "name": "onItemSelect",
           "type": [
-            "Observable"
+            "Observable<NbMenuBag>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2284,7 +2279,7 @@
           "platform": null,
           "name": "onSubmenuToggle",
           "type": [
-            "Observable"
+            "Observable<NbMenuBag>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2310,7 +2305,7 @@
           "kind": "output",
           "platform": null,
           "isStatic": false,
-          "type": "EventEmitter",
+          "type": "EventEmitter<any>",
           "required": null,
           "name": "changeTab",
           "shortDescription": "Emits when tab is selected"
@@ -2319,6 +2314,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
+          "type": "any[]",
           "required": null,
           "name": "tabs",
           "shortDescription": "Tabs configuration"
@@ -2327,7 +2323,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "fullWidth",
           "shortDescription": "Take full width of a parent"
@@ -2538,7 +2534,7 @@
           "platform": null,
           "name": "createAttachedSearch",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2736,7 +2732,7 @@
           "platform": null,
           "name": "onSearchActivate",
           "type": [
-            "Observable<{searchType: string; tag?: string}>"
+            "Observable<{searchType: string; tag?: string}>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to 'activate' event"
@@ -2747,7 +2743,7 @@
           "platform": null,
           "name": "onSearchDeactivate",
           "type": [
-            "Observable<{searchType: string; tag?: string}>"
+            "Observable<{searchType: string; tag?: string}>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to 'deactivate' event"
@@ -2758,7 +2754,7 @@
           "platform": null,
           "name": "onSearchSubmit",
           "type": [
-            "Observable<{term: string; tag?: string}>"
+            "Observable<{term: string; tag?: string}>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to 'submit' event (when submit button clicked)"
@@ -3162,7 +3158,7 @@
           "platform": null,
           "name": "onCollapse",
           "type": [
-            "Observable<{ tag: string }>"
+            "Observable<{ tag: string }>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to collapse evens"
@@ -3173,7 +3169,7 @@
           "platform": null,
           "name": "onExpand",
           "type": [
-            "Observable<{ tag: string }>"
+            "Observable<{ tag: string }>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to expand events"
@@ -3184,7 +3180,7 @@
           "platform": null,
           "name": "onToggle",
           "type": [
-            "Observable<{ compact: boolean, tag: string }>"
+            "Observable<{ compact: boolean, tag: string }>\n"
           ],
           "isStatic": false,
           "shortDescription": "Subscribe to toggle events"
@@ -3271,7 +3267,7 @@
           "kind": "output",
           "platform": null,
           "isStatic": false,
-          "type": "EventEmitter",
+          "type": "EventEmitter<any>",
           "required": null,
           "name": "changeTab",
           "shortDescription": "Emits when tab is selected"
@@ -3289,7 +3285,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "",
+          "type": "boolean",
           "required": null,
           "name": "fullWidth",
           "shortDescription": "Take full width of a parent"
@@ -3464,6 +3460,7 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
+          "type": "NbUserMenuItem[]",
           "required": null,
           "name": "menu",
           "shortDescription": "List of menu items for a user context menu (shown when clicked)"
@@ -3472,7 +3469,7 @@
           "kind": "output",
           "platform": null,
           "isStatic": false,
-          "type": "EventEmitter",
+          "type": "EventEmitter<NbUserMenuItem>",
           "required": null,
           "name": "menuClick",
           "shortDescription": "Outputs when a context menu item is clicked"
@@ -3745,7 +3742,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "icon",
           "shortDescription": "Icon class"
         },
         {
@@ -3754,7 +3750,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "link",
           "shortDescription": "Menu link for [routerLink] directive"
         },
         {
@@ -3763,7 +3758,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "target",
           "shortDescription": "Link target (_blank, _self, etc)"
         },
         {
@@ -3772,7 +3766,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "title",
           "shortDescription": "Menu title"
         },
         {
@@ -3781,7 +3774,6 @@
           "isStatic": false,
           "type": "string",
           "required": null,
-          "name": "url",
           "shortDescription": "URL for absolute urls, used directly in href"
         }
       ],
@@ -3833,7 +3825,7 @@
           "platform": null,
           "name": "getBreakpointsMap",
           "type": [
-            ""
+            "{[breakpoint: string]: number}"
           ],
           "isStatic": false,
           "shortDescription": "Returns a map of configured breakpoints for the theme"
@@ -3851,7 +3843,7 @@
           "platform": null,
           "name": "getByName",
           "type": [
-            "NbMediaBreakpoint"
+            "NbMediaBreakpoint\n"
           ],
           "isStatic": false,
           "shortDescription": "Returns a configured breakpoint by name"
@@ -3869,7 +3861,7 @@
           "platform": null,
           "name": "getByWidth",
           "type": [
-            ""
+            "NbMediaBreakpoint"
           ],
           "isStatic": false,
           "shortDescription": "Returns a configured breakpoint by width"
@@ -3902,12 +3894,14 @@
           "params": [
             {
               "name": "builtInThemes",
+              "type": "NbJSThemeOptions[]",
               "required": null,
               "shortDescription": "",
               "description": ""
             },
             {
               "name": "newThemes",
+              "type": "NbJSThemeOptions[]",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -3927,12 +3921,14 @@
           "params": [
             {
               "name": "newThemes",
+              "type": "NbJSThemeOptions[]",
               "required": null,
               "shortDescription": "",
               "description": ""
             },
             {
               "name": "oldThemes",
+              "type": "NbJSThemeOptions[]",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -3941,7 +3937,7 @@
           "platform": null,
           "name": "combineByNames",
           "type": [
-            null
+            "NbJSThemeOptions[]"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -3959,7 +3955,7 @@
           "platform": null,
           "name": "get",
           "type": [
-            "NbJSThemeOptions"
+            "NbJSThemeOptions\n"
           ],
           "isStatic": false,
           "shortDescription": "Return a theme"
@@ -4140,7 +4136,7 @@
           "params": [
             {
               "name": "method",
-              "type": "Promise",
+              "type": "Promise<any>\n",
               "required": null,
               "description": "Promise<any>\n"
             }
@@ -4244,7 +4240,7 @@
           "platform": null,
           "name": "appendToLayoutTop",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4296,7 +4292,7 @@
           "platform": null,
           "name": "clearLayoutTop",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4308,7 +4304,7 @@
           "platform": null,
           "name": "getJsTheme",
           "type": [
-            ""
+            "Observable<NbJSThemeOptions>"
           ],
           "isStatic": false,
           "shortDescription": "Returns a theme object with variables (color/paddings/etc) on a theme change.\nOnce subscribed - returns current theme."
@@ -4319,7 +4315,7 @@
           "platform": null,
           "name": "onAppendLayoutClass",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4331,7 +4327,7 @@
           "platform": null,
           "name": "onAppendToTop",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4343,7 +4339,7 @@
           "platform": null,
           "name": "onClearLayoutTop",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4355,7 +4351,7 @@
           "platform": null,
           "name": "onMediaQueryChange",
           "type": [
-            ""
+            "Observable<NbMediaBreakpoint[]>"
           ],
           "isStatic": false,
           "shortDescription": "Triggers media query breakpoint change\nReturns a pair where the first item is previous media breakpoint and the second item is current breakpoit.\n```\n [{ name: 'xs', width: 0 }, { name: 'md', width: 768 }] // change from `xs` to `md`\n```"
@@ -4366,7 +4362,7 @@
           "platform": null,
           "name": "onRemoveLayoutClass",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -4378,7 +4374,7 @@
           "platform": null,
           "name": "onThemeChange",
           "type": [
-            "Observable"
+            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",

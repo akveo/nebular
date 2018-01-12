@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-sidebar-one', () => {
 
-  beforeEach(() => {
-    browser.get('#/sidebar/one');
+  beforeEach((done) => {
+    browser.get('#/sidebar/one').then(() => done());
   });
 
   it('should render sidebar full pages', () => {

@@ -10,8 +10,8 @@ import badgeTests from './badge.e2e-spec';
 
 describe('nb-user', () => {
 
-  beforeEach(() => {
-    browser.get('#/user');
+  beforeEach((done) => {
+    browser.get('#/user').then(() => done());
   });
 
   // fit('should render main-container', () => {

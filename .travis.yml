@@ -37,7 +37,6 @@ before_script:
 script:
   - npm run lint:ci
   - npm run build:prod
-  - npm run release:prepare
   - npm run release:validate
   - npm run docs:ci
 
