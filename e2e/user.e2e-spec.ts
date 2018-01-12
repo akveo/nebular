@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-user', () => {
 
-  beforeEach(() => {
-    browser.get('#/user');
+  beforeEach((done) => {
+    browser.get('#/user').then(() => done());
   });
 
   // fit('should render main-container', () => {
