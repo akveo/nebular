@@ -24,8 +24,7 @@ import { Component, Input } from '@angular/core';
             <ng-container *ngIf="method.shortDescription || method.description">
               <td>{{ method.name }} <br><i *ngIf="method.isStatic">static method</i></td>
               <td>
-                <div class="method-signature"
-                     *ngIf="method.params.length > 0 && method.type.length > 0 && method.type[0] !== 'void'">
+                <div class="method-signature" *ngIf="method.type[0] !== 'void'">
                   <div *ngIf="method.params.length > 0"><i>parameters:</i>
                     <span *ngFor="let param of method.params; let last = last">
                       {{param.name}}: <code>{{param.type}}</code><span *ngIf="!last">,</span>
