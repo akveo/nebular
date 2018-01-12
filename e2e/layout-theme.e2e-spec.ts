@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-layout theme', () => {
 
-  beforeEach(() => {
-    browser.get('#/layout/change-theme');
+  beforeEach((done) => {
+    browser.get('#/layout/change-theme').then(() => done());
   });
 
   it('should render default theme', () => {

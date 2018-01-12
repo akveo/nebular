@@ -7,8 +7,8 @@
 import { browser, element, by } from 'protractor';
 
 describe('nb-layout', () => {
-  beforeEach(() => {
-    browser.get('#/layout');
+  beforeEach((done) => {
+    browser.get('#/layout').then(() => done());
   });
 
   it('should render container', () => {

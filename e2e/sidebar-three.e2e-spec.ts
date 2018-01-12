@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-sidebar-three', () => {
 
-  beforeEach(() => {
-    browser.get('#/sidebar/three');
+  beforeEach((done) => {
+    browser.get('#/sidebar/three').then(() => done());
   });
 
   it('should render sidebar hidden', () => {

@@ -4,7 +4,8 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 120000,
+  getPageTimeout: 120000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
@@ -19,7 +20,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 120000,
     print: function() {}
   },
   onPrepare() {
@@ -27,6 +28,8 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
 
+    const failFast = require('jasmine-fail-fast');
+    jasmine.getEnv().addReporter(failFast.init());
     jasmine.getEnv().addReporter(new SpecReporter({ acspec: { displayStacktrace: true } }));
   }
 };
