@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-sidebar-two', () => {
 
-  beforeEach(() => {
-    browser.get('#/sidebar/two');
+  beforeEach((done) => {
+    browser.get('#/sidebar/two').then(() => done());
   });
 
   // it('should render right fixed sidebar height equal layout height', () => {

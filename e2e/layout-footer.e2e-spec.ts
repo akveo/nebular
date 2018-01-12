@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-layout-footer', () => {
 
-  beforeEach(() => {
-    browser.get('#/layout/footer');
+  beforeEach((done) => {
+    browser.get('#/layout/footer').then(() => done());
   });
 
   it('should render default footer', () => {

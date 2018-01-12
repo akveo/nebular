@@ -28,6 +28,8 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
 
+    const failFast = require('jasmine-fail-fast');
+    jasmine.getEnv().addReporter(failFast.init());
     jasmine.getEnv().addReporter(new SpecReporter({ acspec: { displayStacktrace: true } }));
   }
 };

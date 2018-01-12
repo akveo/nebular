@@ -9,8 +9,8 @@ import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
 
 describe('nb-route-tabset', () => {
-  beforeEach(() => {
-    browser.get('#/route-tabset');
+  beforeEach((done) => {
+    browser.get('#/route-tabset').then(() => done());
   });
 
   it('should display default route-tabset', () => {

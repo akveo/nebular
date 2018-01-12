@@ -76,6 +76,7 @@
     "gulp-bump": "2.7.0",
     "image-comparison": "2.0.4",
     "ionicons": "2.0.1",
+    "jasmine-fail-fast": "2.0.0",
     "leaflet": "1.0.3",
     "marked": "0.3.9",
     "nebular-icons": "1.0.6",

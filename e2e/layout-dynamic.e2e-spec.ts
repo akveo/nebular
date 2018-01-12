@@ -8,8 +8,8 @@ import { browser, element, by } from 'protractor';
 
 describe('nb-layout theme', () => {
 
-  beforeEach(() => {
-    browser.get('#/layout/dynamic');
+  beforeEach((done) => {
+    browser.get('#/layout/dynamic').then(() => done());
   });
 
   it('shown have layout first', () => {
