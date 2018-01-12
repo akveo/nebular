@@ -176,6 +176,33 @@ To start a new release (publish the framework packages on NPM) you need:
 10. create and push git tag
 11. create release on github  
 
+#ngx-admin development on the latest Nebular sources
+
+1. `rm -rf node_modules/@nebular` to remove a package install from npm
+2. run `npm link` for the each Nebular module in *nebular/src/framework* except for *icons*
+3. make sure you don't have *node_modules* in nebular (this may cause an issue an issue the angular-cli)
+4. link Nebular in ngx-admin: `npm link @nebular/{auth,theme}`
+
+#ngx-admin release
+1. update version
+2. create changelog
+3. create PR, approve, pull
+4. create a tag
+5. create changelog
+6. merge into `sandbox`, create changelog
+7. create PR, approve, pull
+8. create a tag
+9. create changelog
+
+#ngx-admin demo update
+
+1. pull the sources 
+2. check everything is running correctly
+3. relate `demo` branch onto `master`
+4. build with npm run build:prod
+5. upload code using `scp -r dist/ server_details`
+
+
 # TODO
  - steps to start the development
  - describe framework and demo dependencies
