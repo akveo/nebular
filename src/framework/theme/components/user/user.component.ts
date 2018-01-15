@@ -191,6 +191,27 @@ export class NbUserComponent {
   }
 
   /**
+   * Badge text to display
+   * @type string
+   */
+  @Input() badgeText: string;
+
+  /**
+   * Badge status (adds specific styles):
+   * 'primary', 'info', 'success', 'warning', 'danger'
+   * @param {string} val
+   */
+  @Input() badgeStatus: string;
+
+  /**
+   * Badge position.
+   * Can be set to any class or to one of predefined positions:
+   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * @type string
+   */
+  @Input() badgePosition: string;
+
+  /**
    * Outputs when a context menu item is clicked
    * @type EventEmitter<NbUserMenuItem>
    */

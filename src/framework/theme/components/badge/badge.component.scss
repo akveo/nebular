@@ -1,0 +1,22 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+.nb-badge {
+  position: absolute;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+
+  &.top { top: 0; }
+  &.right { right: 0; }
+  &.bottom { bottom: 0; }
+  &.left { left: 0; }
+}

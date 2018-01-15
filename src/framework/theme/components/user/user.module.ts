@@ -11,6 +11,7 @@ import { NbSharedModule } from '../shared/shared.module';
 import {
   NbUserComponent,
 } from './user.component';
+import { NbBadgeModule } from '../badge/badge.module';
 
 const NB_USER_COMPONENTS = [
   NbUserComponent,
@@ -19,6 +20,7 @@ const NB_USER_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
+    NbBadgeModule,
   ],
   declarations: [
     ...NB_USER_COMPONENTS,
