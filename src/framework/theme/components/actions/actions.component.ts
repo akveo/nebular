@@ -24,6 +24,7 @@ import { convertToBoolProperty } from '../helpers';
     <ng-template #showContent>
       <ng-content></ng-content>
     </ng-template>
+    <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
   `,
 })
 export class NbActionComponent {
@@ -44,6 +45,28 @@ export class NbActionComponent {
   set disabled(val: boolean) {
     this.disabledValue = convertToBoolProperty(val);
   }
+
+  /**
+   * Badge text to display
+   * @type string
+   */
+  @Input() badgeText: string;
+
+  /**
+   * Badge status (adds specific styles):
+   * 'primary', 'info', 'success', 'warning', 'danger'
+   * @param {string} val
+   */
+  @Input() badgeStatus: string;
+
+  /**
+   * Badge position.
+   * Can be set to any class or to one of predefined positions:
+   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * @type string
+   */
+  @Input() badgePosition: string;
+
 }
 
 /**

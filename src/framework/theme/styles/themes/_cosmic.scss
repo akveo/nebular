@@ -115,6 +115,13 @@ $theme: (
   smart-table-paging-fg-active: color-fg-heading,
   smart-table-paging-bg-active: color-primary,
   smart-table-paging-hover: rgba(0, 0, 0, 0.2),
+
+  badge-fg-text: color-white,
+  badge-primary-bg-color: color-primary,
+  badge-success-bg-color: color-success,
+  badge-info-bg-color: color-info,
+  badge-warning-bg-color: color-warning,
+  badge-danger-bg-color: color-danger,
 );
 
 // register the theme

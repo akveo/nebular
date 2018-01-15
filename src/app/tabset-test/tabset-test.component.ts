@@ -6,6 +6,7 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbBadgeComponent } from 'framework/theme/components/badge/badge.component';
 
 @Component({
   selector: 'nb-tabset-test',
@@ -67,11 +68,73 @@ import { Router } from '@angular/router';
             <span>Content #3</span>
           </nb-tab>
         </nb-tabset>
+
+        <nb-tabset fullWidth>
+          <nb-tab tabTitle="Tab #1" badgeText="29">
+            <span>Content #1</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #2"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_INFO"
+            [badgePosition]="badge.TOP_LEFT">
+            <span>Content #2</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #3"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_SUCCESS"
+            [badgePosition]="badge.BOTTOM_RIGHT">
+            <span>Content #3</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #4"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_DANGER"
+            [badgePosition]="badge.BOTTOM_LEFT">
+            <span>Content #4</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #5"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_WARNING"
+            [badgePosition]="badge.BOTTOM_RIGHT">
+            <span>Content #5</span>
+          </nb-tab>
+        </nb-tabset>
+        <nb-tabset>
+          <nb-tab tabTitle="Tab #1" badgeText="29">
+            <span>Content #1</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #2"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_INFO"
+            [badgePosition]="badge.BOTTOM_RIGHT">
+            <span>Content #2</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #3"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_SUCCESS"
+            [badgePosition]="badge.TOP_LEFT">
+            <span>Content #3</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #4"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_DANGER"
+            [badgePosition]="badge.BOTTOM_LEFT">
+            <span>Content #4</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #5"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_WARNING"
+            [badgePosition]="badge.BOTTOM_RIGHT">
+            <span>Content #5</span>
+          </nb-tab>
+        </nb-tabset>
       </nb-layout-column>
     </nb-layout>
   `,
 })
 export class NbTabsetTestComponent {
+
+  badge = NbBadgeComponent;
+
   constructor(private router: Router) {
   }
 

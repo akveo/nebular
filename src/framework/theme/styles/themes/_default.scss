@@ -398,6 +398,13 @@ $theme: (
   modal-body-font-weight: font-weight-normal,
   modal-body-font-size: font-size,
   modal-separator: separator,
+
+  badge-fg-text: color-white,
+  badge-primary-bg-color: color-primary,
+  badge-success-bg-color: color-success,
+  badge-info-bg-color: color-info,
+  badge-warning-bg-color: color-warning,
+  badge-danger-bg-color: color-danger,
 );
 
 // register the theme

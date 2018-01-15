@@ -55,6 +55,7 @@ export class NbSidebarFooterComponent {
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
  * @example Minimal sidebar example
+ *
  * ```
  * <nb-sidebar>
  *   Sidebar content.

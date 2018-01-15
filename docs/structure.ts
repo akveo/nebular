@@ -312,6 +312,11 @@ export const STRUCTURE = [
             block: 'component',
             blockData: 'NbActionsComponent',
           },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbActionComponent',
+          },
         ],
       },
       {
@@ -333,6 +338,17 @@ export const STRUCTURE = [
             type: 'block',
             block: 'component',
             blockData: 'NbCheckboxComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Badge',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbBadgeComponent',
           },
         ],
       },
