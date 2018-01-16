@@ -1,18 +1,7 @@
-language: node_js
-
 sudo: false
-dist: trusty
-
+language: node_js
 node_js:
   - '8'
-
-cache:
-  directories:
-    - node_modules
-
-branches:
-  only:
-  - master
 
 addons:
   apt:
@@ -23,22 +12,36 @@ addons:
       - g++-4.8
       - google-chrome-stable
 
+env:
+  global:
+    - SAUCE_USERNAME=nixa
+    - SAUCE_ACCESS_KEY=a922753805a4-7538-6644-c450-48fdf18c
+    - BROWSER_PROVIDER_READY_FILE=/tmp/sauce-connect-ready
+    - LOGS_DIR=/tmp/logs
+
+branches:
+  only:
+  - master
+
+git:
+  depth: 1
+
 before_install:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm i -g npm@latest
 
 install:
-  - travis_retry npm i
+  - npm install
 
 before_script:
+  - mkdir -p $LOGS_DIR
+  - ./scripts/ci/sauce/start-tunnel.sh
 
 script:
-  - npm run lint:ci
-  - npm run build:prod
-  - npm run release:validate
-  - npm run docs:ci
+  - npm run build:package
+  - ./scripts/ci/sauce/wait-tunnel.sh
+  - npm run e2e:wp
 
-git:
-  depth: 1
+after_script:
+  - ./scripts/ci/sauce/stop-tunnel.sh
