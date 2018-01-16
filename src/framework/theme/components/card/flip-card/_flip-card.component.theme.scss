@@ -1,26 +1,5 @@
-.flipcard .flip-button {
-  padding: nb-theme(card-padding);
+.flip-button {
+  line-height: nb-theme(card-line-height);
   margin-bottom: nb-theme(card-margin);
-}
-
-.flipcard.nb-card-xxsmall nb-card {
-  height: nb-theme(card-height-xxsmall);
-}
-.flipcard.nb-card-xsmall nb-card {
-  height: nb-theme(card-height-xsmall);
-}
-.flipcard.nb-card-small nb-card {
-  height: nb-theme(card-height-small);
-}
-.flipcard.nb-card-medium nb-card {
-  height: nb-theme(card-height-medium);
-}
-.flipcard.nb-card-large nb-card {
-  height: nb-theme(card-height-large);
-}
-.flipcard.nb-card-xlarge nb-card {
-  height: nb-theme(card-height-xlarge);
-}
-.flipcard.nb-card-xxlarge nb-card {
-  height: nb-theme(card-height-xxlarge);
+  padding: nb-theme(card-padding);
 }

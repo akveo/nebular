@@ -59,28 +59,34 @@ import { Component } from '@angular/core';
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xl-4 col-md-6 col-sm-12" *ngFor="let card of enhancedCards">
-            <nb-flip-card [size]="card.size">
-              <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
-                <nb-card-header *ngIf="card.size !== 'xxsmall'">
-                  <span>Header</span>
-                </nb-card-header>
-                <nb-card-body>
-                <span>Flip Card Body</span>
-                </nb-card-body>
-                <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-                  <span>Footer</span>
-                </nb-card-footer>
-              </nb-card>
-              <nb-card class="card-back">
-                <nb-card-body>
-                  <span>Back</span>
-                </nb-card-body>
-              </nb-card>
-            </nb-flip-card>
-          </div>
-        </div>
+        <nb-flip-card *ngFor="let card of enhancedCards" [size]="card.size">
+          <nb-card-front>
+            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+              <nb-card-header *ngIf="card.size !== 'xxsmall'">
+                <span>Front Header</span>
+              </nb-card-header>
+              <nb-card-body>
+                <span>Front Flip Card Body</span>
+              </nb-card-body>
+              <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+                <span>Front Footer</span>
+              </nb-card-footer>
+            </nb-card>
+          </nb-card-front>
+          <nb-card-back>
+            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+              <nb-card-header *ngIf="card.size !== 'xxsmall'">
+                <span>Back Header</span>
+              </nb-card-header>
+              <nb-card-body>
+                <span>Back Flip Card Body</span>
+              </nb-card-body>
+              <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+                <span>Back Footer</span>
+              </nb-card-footer>
+            </nb-card>
+          </nb-card-back>
+        </nb-flip-card>
       </nb-layout-column>
     </nb-layout>
   `,

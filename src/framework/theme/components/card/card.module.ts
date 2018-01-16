@@ -16,7 +16,7 @@ import {
 } from './card.component';
 
 import { NbRevealCardComponent } from './reveal-card/reveal-card.component';
-import { NbFlipCardComponent } from './flip-card/flip-card.component';
+import { NbFlipCardComponent, NbFrontComponent, NbBackComponent } from './flip-card/flip-card.component';
 
 const NB_CARD_COMPONENTS = [
   NbCardComponent,
@@ -25,6 +25,8 @@ const NB_CARD_COMPONENTS = [
   NbCardHeaderComponent,
   NbRevealCardComponent,
   NbFlipCardComponent,
+  NbFrontComponent,
+  NbBackComponent,
 ];
 
 @NgModule({
