@@ -31,9 +31,6 @@ export class NbFlipCardComponent {
   @HostBinding('class.flipped')
   flipped: boolean = false;
 
-  @Input()
-  size: string = NbCardComponent.SIZE_MEDIUM;
-
   toggleFlip() {
     this.flipped = !this.flipped;
   }
