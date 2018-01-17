@@ -1,22 +1,44 @@
-const path = require('path');
+// Protractor configuration file, see link for more information
+// https://github.com/angular/protractor/blob/master/lib/config.ts
+
+const { SpecReporter } = require('jasmine-spec-reporter');
 
 const E2E_BASE_URL = process.env['E2E_BASE_URL'] || 'http://localhost:4200';
+
 const config = {
   useAllAngular2AppRoots: true,
-  specs: [ path.join(__dirname, './e2e/**/*.e2e-spec.ts') ],
-  baseUrl: E2E_BASE_URL,
   allScriptsTimeout: 120000,
   getPageTimeout: 120000,
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 120000,
+  specs: [
+    './e2e/**/*.e2e-spec.ts'
+  ],
+  capabilities: {
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': ['show-fps-counter=true', '--no-sandbox']
+    }
   },
+  // directConnect: true,
+  baseUrl: E2E_BASE_URL,
+  framework: 'jasmine',
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 120000,
+    print: function() {}
+  },
+  onPrepare() {
+    require('ts-node').register({
+      project: 'e2e/tsconfig.e2e.json'
+    });
 
-  plugins: [
-  ]
+    const failFast = require('jasmine-fail-fast');
+    jasmine.getEnv().addReporter(failFast.init());
+    jasmine.getEnv().addReporter(new SpecReporter({ acspec: { displayStacktrace: true } }));
+  }
 };
 
 if (process.env['TRAVIS']) {
-  const key = require('./scripts/ci/sauce/config.js');
+  const key = require('./scripts/ci/sauce/config');
   config.sauceUser = process.env['SAUCE_USERNAME'];
   config.sauceKey = key;
   config.capabilities = {
@@ -24,19 +46,17 @@ if (process.env['TRAVIS']) {
     'version': 'latest',
     'tunnel-identifier': process.env['TRAVIS_JOB_ID'],
     'build': process.env['TRAVIS_JOB_ID'],
-    'name': 'Material E2E Tests',
+    'name': 'Nebular E2E Tests',
 
     // Enables concurrent testing in the Webdriver. Currently runs five e2e files in parallel.
-    // 'maxInstances': 5,
-    // 'shardTestFiles': true,
+    'maxInstances': 1,
+    'shardTestFiles': true,
 
     // By default Saucelabs tries to record the whole e2e run. This can slow down the builds.
-    'recordVideo': false,
-    'recordScreenshots': false
+    'recordVideo': true,
+    'recordScreenshots': true
   };
 }
 
-
-console.log(config);
 
 exports.config = config;
