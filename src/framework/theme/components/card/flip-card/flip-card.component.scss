@@ -21,7 +21,7 @@
 
   .flipcard-body {
     display: flex;
-    transition: transform 0.5s linear;
+    transition: transform 0.5s;
     transform-style: preserve-3d;
 
     .front-container,
@@ -35,7 +35,7 @@
         right: 0;
         bottom: 0;
         opacity: 1;
-        transition: opacity 0s 0.25s;
+        transition: opacity 0s 0.15s;
       }
     }
 
