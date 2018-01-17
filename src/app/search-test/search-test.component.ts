@@ -14,9 +14,7 @@ import { NbSearchService } from '@nebular/theme';
     <nb-layout>
       <nb-layout-header fixed>
         <a class="navbar-brand" href="#">ngx-admin</a>
-        <nb-search id="customized-search" type="rotate-layout" tag="header-search-customized" hint="Custom hint">
-        </nb-search>
-        <nb-search id="default-search" type="rotate-layout" tag="header-search-default"></nb-search>
+        <nb-search type="rotate-layout" tag="header-search"></nb-search>
       </nb-layout-header>
       <nb-layout-column>
         <nb-card>
