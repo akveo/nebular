@@ -72,4 +72,10 @@ describe('nb-search', () => {
     expect(hasClass(browser.driver.switchTo().activeElement(), 'search-input')).toBeFalsy();
     expect(element(by.css('.search-input')).getAttribute('value')).toEqual('');
   });
+
+  it('hint for search customised successfully', () => {
+    element(by.css('.start-search')).click();
+    expect(element(by.css('span'))).toBeTruthy();
+    expect(element(by.css('span')).getText()).toContain('Custom hint');
+  })
 });
