@@ -9,10 +9,10 @@ import { NbCardComponent } from '../card.component'
  * ```
  * <nb-reveal-card>
  *   <nb-card-front>
- *     <nb-card>Front Card</nb-card>
+ *     <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>
  *   </nb-card-front>
  *   <nb-card-back>
- *     <nb-card>Back Card</nb-card>
+ *     <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>
  *   </nb-card-back>
  * </nb-reveal-card>
  * ```

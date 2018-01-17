@@ -2,7 +2,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 import { NbCardComponent } from '../card.component'
 
 /**
- * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` component.
+ * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.
  *
  * Use it as a container for the front card.
  */
@@ -13,7 +13,7 @@ import { NbCardComponent } from '../card.component'
 export class NbCardFrontComponent { }
 
 /**
- * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` component.
+ * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.
  *
  * Use it as a container for the back card.
  */
