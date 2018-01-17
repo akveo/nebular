@@ -5,7 +5,7 @@ import { Component, Input, HostBinding } from '@angular/core';
   styleUrls: ['./reveal-card.component.scss'],
   template: `
     <ng-content select="nb-card-front"></ng-content>
-    <div class="hidden-card-container">
+    <div class="second-card-container">
       <ng-content select="nb-card-back"></ng-content>
     </div>
     <a class="reveal-button" (click)="toggleReveal()">
