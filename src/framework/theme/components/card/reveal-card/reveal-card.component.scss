@@ -3,8 +3,13 @@
   position: relative;
 
   &.revealed {
-    .second-card-container /deep/ nb-card-back {
+    .second-card-container {
       top: 0;
+      transition: none;
+
+      /deep/ nb-card-back {
+        top: 0;
+      }
     }
     .reveal-button {
       transform: none;
@@ -18,10 +23,11 @@
 
   .second-card-container {
     position: absolute;
-    top: 0;
+    top: 100%;
     right: 0;
     left: 0;
     overflow: hidden;
+    transition: top 0s 0.5s;
 
     /deep/ nb-card-back {
       position: absolute;
