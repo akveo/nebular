@@ -49,12 +49,12 @@ if (process.env['TRAVIS']) {
     'name': 'Nebular E2E Tests',
 
     // Enables concurrent testing in the Webdriver. Currently runs five e2e files in parallel.
-    'maxInstances': 1,
+    'maxInstances': 5,
     'shardTestFiles': true,
 
     // By default Saucelabs tries to record the whole e2e run. This can slow down the builds.
-    'recordVideo': true,
-    'recordScreenshots': true
+    'recordVideo': false,
+    'recordScreenshots': false
   };
 }
 
