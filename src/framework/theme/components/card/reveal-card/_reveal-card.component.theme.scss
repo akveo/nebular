@@ -1,36 +1,10 @@
-.revealcard .reveal {
-  margin-bottom: nb-theme(card-margin);
+.hidden-card-container {
+  height: calc(100% - #{nb-theme(card-margin)});
+  border-radius: nb-theme(card-border-radius);
 }
-.revealcard .reveal-button {
+
+.reveal-button {
+  line-height: nb-theme(card-line-height);
   padding: nb-theme(card-padding);
   margin-bottom: nb-theme(card-margin);
-}
-.revealcard .card-back-container {
-  height:  calc(100% - (#{nb-theme(card-margin)} + #{nb-theme(card-border-radius)}));
-}
-
-.revealcard nb-card.card-back {
-  height: calc(100% + #{nb-theme(card-padding)});
-}
-
-.revealcard.nb-card-xxsmall nb-card {
-  height: nb-theme(card-height-xxsmall);
-}
-.revealcard.nb-card-xsmall nb-card {
-  height: nb-theme(card-height-xsmall);
-}
-.revealcard.nb-card-small nb-card {
-  height: nb-theme(card-height-small);
-}
-.revealcard.nb-card-medium nb-card {
-  height: nb-theme(card-height-medium);
-}
-.revealcard.nb-card-large nb-card {
-  height: nb-theme(card-height-large);
-}
-.revealcard.nb-card-xlarge nb-card {
-  height: nb-theme(card-height-xlarge);
-}
-.revealcard.nb-card-xxlarge nb-card {
-  height: nb-theme(card-height-xxlarge);
 }
