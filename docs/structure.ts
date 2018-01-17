@@ -278,12 +278,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbFrontComponent',
+            blockData: 'NbCardFrontComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbBackComponent',
+            blockData: 'NbCardBackComponent',
           },
         ],
       },
@@ -299,12 +299,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbFrontComponent',
+            blockData: 'NbCardFrontComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbBackComponent',
+            blockData: 'NbCardBackComponent',
           },
         ],
       },
