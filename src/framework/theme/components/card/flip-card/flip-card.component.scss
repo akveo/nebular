@@ -9,19 +9,34 @@
   perspective: 1200px;
   position: relative;
 
-  &.flipped .flipcard-body {
-    transform: rotateY(180deg);
+  &.flipped {
+    .flipcard-body {
+      transform: rotateY(180deg);
+
+      .front-container .flip-button {
+        opacity: 0;
+      }
+    }
   }
 
   .flipcard-body {
     display: flex;
-    transition: transform 0.5s;
+    transition: transform 0.5s linear;
     transform-style: preserve-3d;
 
     .front-container,
     .back-container {
       backface-visibility: hidden;
       flex: 1;
+
+      .flip-button {
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        opacity: 1;
+        transition: opacity 0s 0.25s;
+      }
     }
 
     .front-container {
@@ -31,12 +46,5 @@
     .back-container {
       transform: rotateY(180deg);
     }
-  }
-
-  .flip-button {
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
 }
