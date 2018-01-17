@@ -13,7 +13,7 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
-    client:{
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
@@ -28,7 +28,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadlessLocal'],
     customLaunchers: {
       ChromeHeadlessLocal: {
         base: 'ChromeHeadless',
@@ -37,18 +37,18 @@ module.exports = function (config) {
           '--window-size=1024,768'
         ]
       },
-      ChromeHeadlessCI: {
+      ChromeCI: {
         base: 'SauceLabs',
         browserName: 'chrome',
         version: 'latest'
-      },
+      }
     },
     browserConsoleLogOptions: {
       terminal: true,
       level: 'log'
     },
     sauceLabs: {
-      testName: 'nebular',
+      testName: 'Nebular Unit Tests',
       startConnect: false,
       recordVideo: false,
       recordScreenshots: false,
@@ -61,12 +61,14 @@ module.exports = function (config) {
 
   if (process.env['TRAVIS']) {
 
+    const key = require('./scripts/ci/sauce/config');
+
+    configuration.reporters.push('saucelabs');
     configuration.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
     configuration.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_ID;
-
-    configuration.browsers = ['ChromeHeadlessCI'];
+    configuration.sauceLabs.username = process.env['SAUCE_USERNAME'];
+    configuration.sauceLabs.accessKey = key;
+    configuration.browsers = ['ChromeCI'];
   }
-
-  console.log(configuration);
   config.set(configuration);
 };

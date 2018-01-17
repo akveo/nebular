@@ -3,9 +3,6 @@ language: node_js
 node_js:
   - '8'
 
-addons:
-  chrome: stable
-
 env:
   global:
     - SAUCE_USERNAME=nixa
@@ -29,8 +26,7 @@ before_script:
 
 script:
   - ./scripts/ci/sauce/wait-tunnel.sh
-#  - npm run release:validate
-  - npm run test
+  - npm run release:validate
 
 after_script:
   - ./scripts/ci/sauce/stop-tunnel.sh
