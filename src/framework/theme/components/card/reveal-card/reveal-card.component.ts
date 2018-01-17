@@ -3,6 +3,8 @@ import { Component, Input, HostBinding } from '@angular/core';
 /**
  * Reveal card component.
  *
+ * ![image](assets/images/components/reveal-card.gif)
+ *
  * @example
  *
  * ```

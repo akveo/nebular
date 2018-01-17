@@ -4,6 +4,8 @@ import { NbCardComponent } from '../card.component'
 /**
  * Flip card component.
  *
+ * ![image](assets/images/components/flip-card.gif)
+ *
  * @example
  *
  * ```
