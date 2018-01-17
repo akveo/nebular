@@ -23,6 +23,8 @@
   @include nb-layout-theme();
   @include nb-sidebar-theme();
   @include nb-card-theme();
+  @include nd-reveal-card-theme();
+  @include nd-flip-card-theme();
   @include nb-tabset-theme();
   @include nb-route-tabset-theme();
   @include nb-menu-theme();
