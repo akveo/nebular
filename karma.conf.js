@@ -8,6 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-sauce-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
@@ -29,17 +30,43 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     customLaunchers: {
-      Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
+      ChromeHeadlessLocal: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--window-size=1024,768'
+        ]
+      },
+      ChromeHeadlessCI: {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+        version: 'latest'
+      },
+    },
+    browserConsoleLogOptions: {
+      terminal: true,
+      level: 'log'
+    },
+    sauceLabs: {
+      testName: 'nebular',
+      startConnect: false,
+      recordVideo: false,
+      recordScreenshots: false,
+      idleTimeout: 600,
+      commandTimeout: 600,
+      maxDuration: 5400
     },
     singleRun: false
   };
 
-  if (process.env.TRAVIS) {
-    configuration.browsers = ['Chrome_travis_ci'];
+  if (process.env['TRAVIS']) {
+
+    configuration.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
+    configuration.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_ID;
+
+    configuration.browsers = ['ChromeHeadlessCI'];
   }
 
+  console.log(configuration);
   config.set(configuration);
 };
