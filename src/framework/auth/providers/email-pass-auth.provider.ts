@@ -404,6 +404,9 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
   protected getActionEndpoint(action: string): string {
     const actionEndpoint: string = this.getConfigValue(`${action}.endpoint`);
     const baseEndpoint: string = this.getConfigValue('baseEndpoint');
+    if (!actionEndpoint) {
+      return null;
+    }
     return baseEndpoint + actionEndpoint;
   }
 }
