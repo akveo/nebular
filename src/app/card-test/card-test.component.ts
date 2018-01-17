@@ -38,7 +38,7 @@ import { Component } from '@angular/core';
 
         <nb-reveal-card *ngFor="let card of enhancedCards">
           <nb-card-front>
-            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+            <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
                 <span>Front Header</span>
               </nb-card-header>
@@ -51,7 +51,7 @@ import { Component } from '@angular/core';
             </nb-card>
           </nb-card-front>
           <nb-card-back>
-            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+            <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
                 <span>Back Header</span>
               </nb-card-header>
@@ -67,7 +67,7 @@ import { Component } from '@angular/core';
 
         <nb-flip-card *ngFor="let card of enhancedCards">
           <nb-card-front>
-            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+            <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
                 <span>Front Header</span>
               </nb-card-header>
@@ -80,7 +80,7 @@ import { Component } from '@angular/core';
             </nb-card>
           </nb-card-front>
           <nb-card-back>
-            <nb-card class="card-front" [accent]="card.accent" [status]="card.status">
+            <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
                 <span>Back Header</span>
               </nb-card-header>
