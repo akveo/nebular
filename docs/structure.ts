@@ -268,6 +268,48 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'Flip Card',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbFlipCardComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbFrontComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbBackComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Reveal Card',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbRevealCardComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbFrontComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbBackComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Search',
         children: [
           {

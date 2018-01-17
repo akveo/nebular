@@ -1,5 +1,21 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
+/**
+ * Reveal card component.
+ *
+ * @example
+ *
+ * ```
+ * <nb-reveal-card>
+ *   <nb-card-front>
+ *     <nb-card>Front Card</nb-card>
+ *   </nb-card-front>
+ *   <nb-card-back>
+ *     <nb-card>Back Card</nb-card>
+ *   </nb-card-back>
+ * </nb-reveal-card>
+ * ```
+ */
 @Component({
   selector: 'nb-reveal-card',
   styleUrls: ['./reveal-card.component.scss'],
@@ -14,6 +30,10 @@ import { Component, Input, HostBinding } from '@angular/core';
   `,
 })
 export class NbRevealCardComponent {
+  /**
+   * Reveal state
+   * @type boolean
+   */
   @Input()
   @HostBinding('class.revealed')
   revealed: boolean = false;

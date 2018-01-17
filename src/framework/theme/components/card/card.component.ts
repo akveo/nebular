@@ -60,6 +60,7 @@ export class NbCardFooterComponent {
  *
  * @example While this component can be used alone, it also provides a number
  * of child components for common card sections:
+ *
  * ```
  * <nb-card-header></nb-card-header>
  * <nb-card-body></nb-card-body>
@@ -257,7 +258,7 @@ export class NbCardComponent {
   }
 
   /**
-   * Card accent:
+   * Card accent (color of the top border):
    * active, disabled, primary, info, success, warning, danger
    * @param {string} val
    */
