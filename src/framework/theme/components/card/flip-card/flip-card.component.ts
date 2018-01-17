@@ -22,12 +22,19 @@ import { NbCardComponent } from '../card.component'
   styleUrls: ['./flip-card.component.scss'],
   template: `
     <div class="flipcard-body">
-      <ng-content select="nb-card-front"></ng-content>
-      <ng-content select="nb-card-back"></ng-content>
+      <div class="front-container">
+        <ng-content select="nb-card-front"></ng-content>
+        <a class="flip-button" (click)="toggleFlip()">
+          <i class="nb-arrow-dropleft" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="back-container">
+        <ng-content select="nb-card-back"></ng-content>
+        <a class="flip-button" (click)="toggleFlip()">
+          <i class="nb-arrow-dropleft" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
-    <a class="flip-button" (click)="toggleFlip()">
-      <i class="nb-arrow-dropleft" aria-hidden="true"></i>
-    </a>
   `,
 })
 export class NbFlipCardComponent {

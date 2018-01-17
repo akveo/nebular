@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host /deep/ {
+:host {
   display: block;
   perspective: 1200px;
   position: relative;
@@ -18,17 +18,17 @@
     transition: transform 0.5s;
     transform-style: preserve-3d;
 
-    nb-card-front,
-    nb-card-back {
+    .front-container,
+    .back-container {
       backface-visibility: hidden;
       flex: 1;
     }
 
-    nb-card-front {
+    .front-container {
       margin-right: -100%;
     }
 
-    nb-card-back {
+    .back-container {
       transform: rotateY(180deg);
     }
   }
