@@ -20,7 +20,7 @@ const cards = sizes.map((size, i) => ({
   i,
 }));
 
-fdescribe('nb-reveal-card', () => {
+describe('nb-reveal-card', () => {
   beforeEach((done) => {
     browser.get('#/card-status').then(() => done());
   });
