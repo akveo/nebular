@@ -21,8 +21,8 @@ jobs:
   include:
     - env: "MODE=lint"
     - env: "MODE=build"
-    - env: "MODE=e2e"
-    - env: "MODE=unit_test"
+    - env: "MODE=sauce_e2e"
+    - env: "MODE=sauce_unit_test"
     - env: "MODE=docs"
 
 install:

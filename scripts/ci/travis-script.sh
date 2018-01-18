@@ -47,9 +47,9 @@ if [[ "${MODE}" = lint ]]; then
   npm run ci:lint
 elif [[ "${MODE}" = build ]]; then
   npm run ci:build
-elif [[ "${MODE}" = e2e ]]; then
+elif [[ "${MODE}" =~ ^.*_(e2e)$ ]]; then
   npm run ci:e2e
-elif [[ "${MODE}" = unit_test ]]; then
+elif [[ "${MODE}" =~ ^.*_(unit_test)$ ]]; then
   npm run ci:test
 elif [[ "${MODE}" = docs ]]; then
   npm run ci:docs

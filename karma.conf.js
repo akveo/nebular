@@ -61,14 +61,20 @@ module.exports = function (config) {
 
   if (process.env['TRAVIS']) {
 
-    const key = require('./scripts/ci/sauce/config');
+    const [platform] = process.env.MODE.split('_');
 
-    configuration.reporters.push('saucelabs');
-    configuration.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
-    configuration.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_ID;
-    configuration.sauceLabs.username = process.env['SAUCE_USERNAME'];
-    configuration.sauceLabs.accessKey = key;
-    configuration.browsers = ['ChromeCI'];
+    if (platform === 'sauce') {
+      const key = require('./scripts/ci/sauce/config');
+
+      configuration.reporters.push('saucelabs');
+      configuration.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
+      configuration.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_ID;
+      configuration.sauceLabs.username = process.env['SAUCE_USERNAME'];
+      configuration.sauceLabs.accessKey = key;
+      configuration.browsers = ['ChromeCI'];
+    } else if (platform === 'browserstack') {
+      // TODO: browser stack setup
+    }
   }
   config.set(configuration);
 };
