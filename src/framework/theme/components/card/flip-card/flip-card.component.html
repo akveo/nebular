@@ -1,0 +1,16 @@
+<div class="flipcard-container">
+  <div class="flipcard nb-card-{{size}}" [ngClass]="{'flipped': flipped}">
+    <div class="card-front-container">
+      <ng-content select=".card-front"></ng-content>
+      <a class="flip-button" (click)="flipped = true">
+        <i class="nb-arrow-dropright" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="card-back-container">
+      <ng-content select=".card-back"></ng-content>
+      <a class="flip-button" (click)="flipped = false">
+        <i class="nb-arrow-dropleft" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>

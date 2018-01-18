@@ -1,0 +1,16 @@
+<div class="revealcard nb-card-{{size}}" [ngClass]="{'revealed': revealed}">
+  <div class="card-front-container">
+    <ng-content select=".card-front"></ng-content>
+    <a class="reveal-button" (click)="revealed = true">
+      <i class="nb-arrow-dropup" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="card-back-container">
+    <div class="reveal">
+      <ng-content select=".card-back"></ng-content>
+      <a class="reveal-button" (click)="revealed = false">
+        <i class="nb-arrow-dropdown" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
