@@ -17,16 +17,19 @@ branches:
 git:
   depth: 1
 
+jobs:
+  include:
+    - env: "MODE=lint"
+    - env: "MODE=build"
+    - env: "MODE=e2e"
+    - env: "MODE=unit_test"
+    - env: "MODE=docs"
+
 install:
   - npm install
 
 before_script:
   - mkdir -p $LOGS_DIR
-  - ./scripts/ci/sauce/start-tunnel.sh
 
 script:
-  - ./scripts/ci/sauce/wait-tunnel.sh
-  - npm run release:validate
-
-after_script:
-  - ./scripts/ci/sauce/stop-tunnel.sh
+  - ./scripts/ci/travis-script.sh

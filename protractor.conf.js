@@ -21,6 +21,7 @@ const config = {
   // directConnect: true,
   baseUrl: E2E_BASE_URL,
   framework: 'jasmine',
+  directConnect: true,
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 120000,
@@ -41,6 +42,7 @@ if (process.env['TRAVIS']) {
   const key = require('./scripts/ci/sauce/config');
   config.sauceUser = process.env['SAUCE_USERNAME'];
   config.sauceKey = key;
+  config.directConnect = false;
   config.capabilities = {
     'browserName': 'chrome',
     'version': 'latest',
