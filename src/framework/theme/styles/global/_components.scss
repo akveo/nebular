@@ -7,6 +7,8 @@
 @import '../../components/layout/layout.component.theme';
 @import '../../components/sidebar/sidebar.component.theme';
 @import '../../components/card/card.component.theme';
+@import '../../components/card/flip-card/flip-card.component.theme';
+@import '../../components/card/reveal-card/reveal-card.component.theme';
 @import '../../components/tabset/tabset.component.theme';
 @import '../../components/route-tabset/route-tabset.component.theme';
 @import '../../components/menu/menu.component.theme';
@@ -21,6 +23,8 @@
   @include nb-layout-theme();
   @include nb-sidebar-theme();
   @include nb-card-theme();
+  @include nd-reveal-card-theme();
+  @include nd-flip-card-theme();
   @include nb-tabset-theme();
   @include nb-route-tabset-theme();
   @include nb-menu-theme();

@@ -60,6 +60,7 @@ export class NbCardFooterComponent {
  *
  * @example While this component can be used alone, it also provides a number
  * of child components for common card sections:
+ *
  * ```
  * <nb-card-header></nb-card-header>
  * <nb-card-body></nb-card-body>
@@ -114,8 +115,17 @@ export class NbCardComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
+  static readonly ACCENT_ACTIVE = 'active';
+  static readonly ACCENT_DISABLED = 'disabled';
+  static readonly ACCENT_PRIMARY = 'primary';
+  static readonly ACCENT_INFO = 'info';
+  static readonly ACCENT_SUCCESS = 'success';
+  static readonly ACCENT_WARNING = 'warning';
+  static readonly ACCENT_DANGER = 'danger';
+
   size: string;
   status: string;
+  accent: string;
 
   @HostBinding('class.xxsmall-card')
   private get xxsmall() {
@@ -187,6 +197,46 @@ export class NbCardComponent {
     return this.status === NbCardComponent.STATUS_DANGER;
   }
 
+  @HostBinding('class.accent')
+  private get hasAccent() {
+    return this.accent;
+  }
+
+  @HostBinding('class.accent-primary')
+  private get primaryAccent() {
+    return this.accent === NbCardComponent.ACCENT_PRIMARY;
+  }
+
+  @HostBinding('class.accent-info')
+  private get infoAccent() {
+    return this.accent === NbCardComponent.ACCENT_INFO;
+  }
+
+  @HostBinding('class.accent-success')
+  private get successAccent() {
+    return this.accent === NbCardComponent.ACCENT_SUCCESS;
+  }
+
+  @HostBinding('class.accent-warning')
+  private get warningAccent() {
+    return this.accent === NbCardComponent.ACCENT_WARNING;
+  }
+
+  @HostBinding('class.accent-danger')
+  private get dangerAccent() {
+    return this.accent === NbCardComponent.ACCENT_DANGER;
+  }
+
+  @HostBinding('class.accent-active')
+  private get activeAccent() {
+    return this.accent === NbCardComponent.ACCENT_ACTIVE;
+  }
+
+  @HostBinding('class.accent-disabled')
+  private get disabledAccent() {
+    return this.accent === NbCardComponent.ACCENT_DISABLED;
+  }
+
   /**
    * Card size, available sizes:
    * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
@@ -206,4 +256,15 @@ export class NbCardComponent {
   private set setStatus(val: string) {
     this.status = val;
   }
+
+  /**
+   * Card accent (color of the top border):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} val
+   */
+  @Input('accent')
+  private set setAccent(val: string) {
+    this.accent = val;
+  }
+
 }
