@@ -24,7 +24,14 @@ import { Component } from '@angular/core';
           </nb-card-footer>
         </nb-card>
 
-        <nb-card *ngFor="let accent of accents" size="small" [accent]="accent">
+        <h3>Accent Cards</h3>
+
+        <nb-card
+          *ngFor="let card of enhancedCards.accentCards"
+          [size]="card.size"
+          [status]="card.status"
+          [accent]="card.accent"
+        >
           <nb-card-header>
             <span>Header</span>
           </nb-card-header>
@@ -36,7 +43,9 @@ import { Component } from '@angular/core';
           </nb-card-footer>
         </nb-card>
 
-        <nb-reveal-card *ngFor="let card of enhancedCards">
+        <h3>Reveal Cards</h3>
+
+        <nb-reveal-card *ngFor="let card of enhancedCards.revealCards">
           <nb-card-front>
             <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
@@ -65,7 +74,9 @@ import { Component } from '@angular/core';
           </nb-card-back>
         </nb-reveal-card>
 
-        <nb-flip-card *ngFor="let card of enhancedCards">
+        <h3>Flip Cards</h3>
+
+        <nb-flip-card *ngFor="let card of enhancedCards.flipCards">
           <nb-card-front>
             <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
               <nb-card-header *ngIf="card.size !== 'xxsmall'">
@@ -104,7 +115,7 @@ export class NbCardTestComponent {
   accents = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
 
   cards: any[];
-  enhancedCards: any[];
+  enhancedCards: any;
 
   constructor() {
     this.cards = this.prepareCards();
@@ -126,22 +137,32 @@ export class NbCardTestComponent {
     return result;
   }
 
-  private prepareEnhancedCards(): any[] {
-    const result = [];
-    const statusSamples = ['', 'primary']
+  private prepareEnhancedCards() {
+    const { sizes, statuses, accents } = this;
+    const accentCards = [];
+    const revealCards = [];
+    const flipCards = [];
 
-    this.sizes.forEach(size => {
-      this.accents.forEach(accent => {
-        statusSamples.forEach(status => {
-          result.push({
-            size,
-            accent,
-            status,
-         });
+    statuses.forEach(status => {
+      accents.forEach(accent => {
+        accentCards.push({
+          size: 'small',
+          status,
+          accent,
         });
-      });
+      })
+    })
+
+    sizes.forEach(size => {
+      const card = { size, accent: '', status: '' };
+      revealCards.push(card);
+      flipCards.push(card);
     });
 
-    return result;
+    return {
+      accentCards,
+      revealCards,
+      flipCards,
+    };
   }
 }
