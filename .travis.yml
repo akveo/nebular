@@ -1,44 +1,42 @@
-language: node_js
-
 sudo: false
-dist: trusty
-
+language: node_js
 node_js:
   - '8'
 
-cache:
-  directories:
-    - node_modules
+env:
+  global:
+    - SAUCE_USERNAME=nixa
+    - SAUCE_ACCESS_KEY=a922753805a4-7538-6644-c450-48fdf18c
+    - BROWSER_STACK_USERNAME=debac1
+    - BROWSER_STACK_ACCESS_KEY=V5ykpyxrTxXLSsRBmXpL
+    - BROWSER_PROVIDER_READY_FILE=/tmp/nebular/readyfile
+    - BROWSER_PROVIDER_ERROR_FILE=/tmp/nebular/errorfile
+    - LOGS_DIR=/tmp/nebular/logs
+  matrix:
+    - MODE=sauce_e2e
+    - MODE=browserstack_e2e
+    - MODE=sauce_unit_test
+    - MODE=browserstack_unit_test
+    - MODE=build
+    - MODE=docs
+    - MODE=lint
 
 branches:
   only:
   - master
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - google-chrome
-    packages:
-      - g++-4.8
-      - google-chrome-stable
-
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - npm i -g npm@latest
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: "MODE=sauce_e2e"
+    - env: "MODE=sauce_unit_test"
+    - env: "MODE=browserstack_unit_test"
 
 install:
-  - travis_retry npm i
+  - npm install
 
 before_script:
+  - mkdir -p $LOGS_DIR
 
 script:
-  - npm run lint:ci
-  - npm run build:prod
-  - npm run release:validate
-  - npm run docs:ci
-
-git:
-  depth: 1
+  - ./scripts/ci/travis-script.sh
