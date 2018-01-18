@@ -20,12 +20,10 @@ env:
     - MODE=build
     - MODE=docs
     - MODE=lint
+
 branches:
   only:
   - master
-
-git:
-  depth: 1
 
 matrix:
   fast_finish: true
