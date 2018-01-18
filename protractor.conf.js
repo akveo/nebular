@@ -71,7 +71,8 @@ if (process.env['TRAVIS']) {
     config.browserstackKey = key;
 
     config.capabilities = {
-      'tunnel-identifier': process.env['TRAVIS_JOB_ID'],
+      'browserstack.localIdentifier': process.env['TRAVIS_JOB_ID'],
+      'browserstack.local': 'true',
       'build': process.env['TRAVIS_JOB_ID'],
       'name': 'Nebular E2E Tests',
       'browserName': 'chrome',
