@@ -9,6 +9,7 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-sauce-launcher'),
+      require('karma-browserstack-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
@@ -37,9 +38,14 @@ module.exports = function (config) {
           '--window-size=1024,768'
         ]
       },
-      ChromeCI: {
+      SauceChromeCI: {
         base: 'SauceLabs',
         browserName: 'chrome',
+        version: 'latest'
+      },
+      BrowserstackChromeCI: {
+        base: 'BrowserStack',
+        browser: 'Chrome',
         version: 'latest'
       }
     },
@@ -56,25 +62,43 @@ module.exports = function (config) {
       commandTimeout: 600,
       maxDuration: 5400
     },
+    browserStack: {
+      project: 'Nebular Unit Tests',
+      startTunnel: false,
+      retryLimit: 1,
+      timeout: 600,
+      pollingTimeout: 20000,
+      video: false,
+    },
     singleRun: false
   };
 
   if (process.env['TRAVIS']) {
 
     const [platform] = process.env.MODE.split('_');
+    const buildId = `TRAVIS #${process.env['TRAVIS_BUILD_NUMBER']} (${process.env['TRAVIS_BUILD_ID']})`;
 
     if (platform === 'sauce') {
       const key = require('./scripts/ci/sauce/config');
 
       configuration.reporters.push('saucelabs');
-      configuration.sauceLabs.build = `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`;
-      configuration.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_ID;
+      configuration.sauceLabs.build = buildId;
+      configuration.sauceLabs.tunnelIdentifier = process.env['TRAVIS_JOB_ID'];
       configuration.sauceLabs.username = process.env['SAUCE_USERNAME'];
       configuration.sauceLabs.accessKey = key;
-      configuration.browsers = ['ChromeCI'];
+      configuration.browsers = ['SauceChromeCI'];
     } else if (platform === 'browserstack') {
-      // TODO: browser stack setup
+      const key = require('./scripts/ci/browserstack/config');
+
+      configuration.reporters.push('BrowserStack');
+      configuration.browserStack.build = buildId;
+      configuration.browserStack.tunnelIdentifier = process.env['TRAVIS_JOB_ID'];
+      configuration.browserStack.username = process.env['BROWSER_STACK_USERNAME'];
+      configuration.browserStack.accessKey = key;
+      configuration.browsers = ['BrowserstackChromeCI'];
     }
   }
+
+  console.log(configuration);
   config.set(configuration);
 };

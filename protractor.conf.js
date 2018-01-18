@@ -42,11 +42,12 @@ if (process.env['TRAVIS']) {
 
   const [platform] = process.env.MODE.split('_');
 
+  config.directConnect = false;
+
   if (platform === 'sauce') {
     const key = require('./scripts/ci/sauce/config');
     config.sauceUser = process.env['SAUCE_USERNAME'];
     config.sauceKey = key;
-    config.directConnect = false;
     config.capabilities = {
       'browserName': 'chrome',
       'version': 'latest',
@@ -63,7 +64,18 @@ if (process.env['TRAVIS']) {
       'recordScreenshots': false
     };
   } else if (platform === 'browserstack') {
-    // TODO: browser stack setup
+
+    const key = require('./scripts/ci/browserstack/config');
+
+    config.browserstackUser = process.env['BROWSER_STACK_USERNAME'];
+    config.browserstackKey = key;
+
+    config.capabilities = {
+      'tunnel-identifier': process.env['TRAVIS_JOB_ID'],
+      'build': process.env['TRAVIS_JOB_ID'],
+      'name': 'Nebular E2E Tests',
+      'browserName': 'chrome',
+    };
   }
 }
 

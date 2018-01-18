@@ -14,10 +14,7 @@ echo "Building sources and running tests. Running mode: ${MODE}"
 echo ""
 
 # Load the retry-call utility function.
-source ./scripts/ci/retry-call.sh
-
-# Variable the specifies how often the wait script should be invoked if it fails.
-WAIT_RETRIES=2
+source ./scripts/ci/tunnel.sh
 
 if [[ -z "$TRAVIS" ]]; then
   echo "This script can only run inside of Travis build jobs."
@@ -37,11 +34,8 @@ if [[ ${fileDiff} =~ ^(.*\.md\s*)*$ ]]; then
   exit 0
 fi
 
-# Start tunnel to sauce labs
-./scripts/ci/sauce/start-tunnel.sh
-
-# Wait when connected
-retryCall ${WAIT_RETRIES} ./scripts/ci/sauce/wait-tunnel.sh
+start_tunnel
+wait_for_tunnel
 
 if [[ "${MODE}" = lint ]]; then
   npm run ci:lint
@@ -55,5 +49,4 @@ elif [[ "${MODE}" = docs ]]; then
   npm run ci:docs
 fi
 
-# Shut down the tunnel
-./scripts/ci/sauce/stop-tunnel.sh
+teardown_tunnel
