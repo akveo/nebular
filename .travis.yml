@@ -12,7 +12,14 @@ env:
     - BROWSER_PROVIDER_READY_FILE=/tmp/nebular/readyfile
     - BROWSER_PROVIDER_ERROR_FILE=/tmp/nebular/errorfile
     - LOGS_DIR=/tmp/nebular/logs
-
+  matrix:
+    - MODE=sauce_e2e
+    - MODE=browserstack_e2e
+    - MODE=sauce_unit_test
+    - MODE=browserstack_unit_test
+    - MODE=build
+    - MODE=docs
+    - MODE=lint
 branches:
   only:
   - master
@@ -20,15 +27,12 @@ branches:
 git:
   depth: 1
 
-jobs:
-  include:
-#    - env: "MODE=lint"
-#    - env: "MODE=build"
-#    - env: "MODE=sauce_e2e"
-#    - env: "MODE=sauce_unit_test"
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: "MODE=sauce_e2e"
+    - env: "MODE=sauce_unit_test"
     - env: "MODE=browserstack_unit_test"
-    - env: "MODE=browserstack_e2e"
-#    - env: "MODE=docs"
 
 install:
   - npm install
