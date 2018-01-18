@@ -74,8 +74,14 @@ describe('nb-search', () => {
   });
 
   it('hint for search customised successfully', () => {
-    element(by.css('.start-search')).click();
+    element(by.css('#customized-search')).click();
     expect(element(by.css('span'))).toBeTruthy();
-    expect(element(by.css('span')).getText()).toContain('Custom hint');
-  })
+    expect(element.all(by.css('span')).get(0).getText()).toContain('Custom hint');
+  });
+
+  it('default hint for the search displayed', () => {
+    element(by.css('#default-search')).click();
+    expect(element(by.css('span'))).toBeTruthy();
+    expect(element.all(by.css('span')).get(1).getText()).toContain('Hit enter to search');
+  });
 });
