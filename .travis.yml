@@ -13,13 +13,13 @@ env:
     - BROWSER_PROVIDER_ERROR_FILE=/tmp/nebular/errorfile
     - LOGS_DIR=/tmp/nebular/logs
   matrix:
-    - MODE=sauce_e2e
-    - MODE=browserstack_e2e
-    - MODE=sauce_unit_test
+#    - MODE=sauce_e2e
+#    - MODE=browserstack_e2e
+#    - MODE=sauce_unit_test
     - MODE=browserstack_unit_test
-    - MODE=build
-    - MODE=docs
-    - MODE=lint
+#    - MODE=build
+#    - MODE=docs
+#    - MODE=lint
 
 branches:
   only:
