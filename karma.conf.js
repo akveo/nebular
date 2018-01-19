@@ -46,7 +46,9 @@ module.exports = function (config) {
       BrowserstackChromeCI: {
         base: 'BrowserStack',
         browser: 'Chrome',
-        browser_version: 'latest'
+        version: 'latest',
+        os: 'Windows',
+        os_version: '10'
       }
     },
     browserConsoleLogOptions: {
