@@ -4,27 +4,29 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by, ExpectedConditions as ec } from 'protractor';
+import { browser, by, element, ExpectedConditions as ec } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
-const group = by.css('nb-menu ul li:nth-child(1) span');
-const menu1 = by.css('nb-menu ul li:nth-child(2) a');
-const menu2 = by.css('nb-menu ul li:nth-child(3) a');
-const menu3 = by.css('nb-menu ul li:nth-child(4) a');
-const menu3SubMenu = by.css('nb-menu ul li:nth-child(4) ul');
-const menu31 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(1) a');
-const menu32 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(2) a');
-const menu33 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) a');
-const menu33SubMenu = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul');
-const menu331 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(1) a');
-const menu332 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(2) a');
-const menu333 = by.css('nb-menu ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(3) a');
-const newMenu = by.css('nb-menu ul li:nth-child(5) a');
+const group = by.css('#menu-first ul li:nth-child(1) span');
+const menu1 = by.css('#menu-first ul li:nth-child(2) a');
+const menu2 = by.css('#menu-first ul li:nth-child(3) a');
+const menu3 = by.css('#menu-first ul li:nth-child(4) a');
+const menu3SubMenu = by.css('#menu-first ul li:nth-child(4) ul');
+const menu31 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(1) a');
+const menu32 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(2) a');
+const menu33 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) a');
+const menu33SubMenu = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul');
+const menu331 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(1) a');
+const menu332 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(2) a');
+const menu333 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:nth-child(3) a');
+const newMenu = by.css('#menu-first ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
 
 const waitTime = 20 * 1000;
+
+const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) a > span');
 
 describe('nb-menu', () => {
 
@@ -94,6 +96,11 @@ describe('nb-menu', () => {
             expect(browser.getCurrentUrl()).toContain('#/menu/1');
           });
       });
+  });
+
+  it('collapsed sidebar item span should not be display:none', () => {
+    element(sidebarMenu31)
+      .getCssValue('display').then(value => expect(value).toEqual('block'));
   });
 
   it('should be selected - Menu #3.1', () => {

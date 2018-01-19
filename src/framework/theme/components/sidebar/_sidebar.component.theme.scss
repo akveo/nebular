@@ -83,12 +83,14 @@
           }
         }
 
-        .menu-items > .menu-item {
-          transition: border-color 1s ease;
-
+        > .menu-items > .menu-item > a {
           span, .chevron {
             display: none;
           }
+        }
+
+        .menu-items > .menu-item {
+          transition: border-color 1s ease;
 
           &.menu-group {
             display: block;
