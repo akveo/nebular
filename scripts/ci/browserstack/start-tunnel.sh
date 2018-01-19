@@ -11,7 +11,7 @@ TUNNEL_URL="https://www.browserstack.com/browserstack-local/${TUNNEL_FILE}"
 TUNNEL_DIR="/tmp/browserstack-tunnel"
 TUNNEL_LOG="${LOGS_DIR}/browserstack-tunnel.log"
 
-BROWSER_STACK_ACCESS_KEY=`echo ${BROWSER_STACK_ACCESS_KEY} | rev`
+BROWSER_STACK_KEY=`echo ${BROWSER_STACK_KEY} | rev`
 
 # Cleanup and create the folder structure for the tunnel connector.
 rm -rf ${TUNNEL_DIR} ${BROWSER_PROVIDER_READY_FILE}
@@ -63,7 +63,7 @@ function create_ready_file {
   touch ${BROWSER_PROVIDER_READY_FILE}
 }
 
-browserstack-tunnel/BrowserStackLocal -k ${BROWSER_STACK_ACCESS_KEY} ${ARGS} 2>&1 >> ${TUNNEL_LOG} &
+browserstack-tunnel/BrowserStackLocal -k ${BROWSER_STACK_KEY} ${ARGS} 2>&1 >> ${TUNNEL_LOG} &
 
 # Wait for the tunnel to be ready and create the readyfile with the Browserstack PID
 create_ready_file &

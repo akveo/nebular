@@ -46,7 +46,9 @@ module.exports = function (config) {
       BrowserstackChromeCI: {
         base: 'BrowserStack',
         browser: 'Chrome',
-        version: 'latest'
+        version: 'latest',
+        os: 'Windows',
+        os_version: '10'
       }
     },
     browserConsoleLogOptions: {
@@ -70,7 +72,7 @@ module.exports = function (config) {
       pollingTimeout: 20000,
       video: false,
     },
-    singleRun: false
+    singleRun: true
   };
 
   if (process.env['TRAVIS']) {
