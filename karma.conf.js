@@ -47,14 +47,7 @@ module.exports = function (config) {
         base: 'BrowserStack',
         browser: 'Chrome',
         browser_version: 'latest'
-      },
-      bs_firefox_mac: {
-        base: 'BrowserStack',
-        browser: 'firefox',
-        browser_version: '21.0',
-        os: 'OS X',
-        os_version: 'Mountain Lion'
-      },
+      }
     },
     browserConsoleLogOptions: {
       terminal: true,
@@ -102,7 +95,7 @@ module.exports = function (config) {
       configuration.browserStack.tunnelIdentifier = process.env['TRAVIS_JOB_ID'];
       configuration.browserStack.username = process.env['BROWSER_STACK_USERNAME'];
       configuration.browserStack.accessKey = key;
-      configuration.browsers = ['bs_firefox_mac'];
+      configuration.browsers = ['BrowserstackChromeCI'];
     }
   }
 
