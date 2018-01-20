@@ -26,7 +26,9 @@ const homeButton = by.css('#homeBtn');
 
 const waitTime = 20 * 1000;
 
-const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) a > span');
+const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) > a > span');
+const sidebarMenu1 = by.css('#menu-sidebar ul li:nth-child(2) a');
+const sidebarMenu3 = by.css('#menu-sidebar ul li:nth-child(4) a');
 
 describe('nb-menu', () => {
 
@@ -42,7 +44,7 @@ describe('nb-menu', () => {
   });
 
   it('should display menu', () => {
-    expect(element(by.css('nb-menu')).isDisplayed()).toBeTruthy();
+    expect(element(by.css('#menu-first')).isDisplayed()).toBeTruthy();
     expect(browser.getCurrentUrl()).toContain('#/menu/1');
   });
 
@@ -101,6 +103,20 @@ describe('nb-menu', () => {
   it('collapsed sidebar item span should not be display:none', () => {
     element(sidebarMenu31)
       .getCssValue('display').then(value => expect(value).toEqual('block'));
+  });
+
+  it('should not expand sidebar when item has no children', () => {
+    element.all(sidebarMenu1).first().click()
+      .then(() => {
+        expect(hasClass(element.all(by.css('nb-sidebar')).first(), 'compacted')).toBeTruthy();
+      });
+  });
+
+  it('should expand sidebar when item has children', () => {
+    element.all(sidebarMenu3).first().click()
+      .then(() => {
+        expect(hasClass(element.all(by.css('nb-sidebar')).first(), 'expanded')).toBeTruthy();
+      });
   });
 
   it('should be selected - Menu #3.1', () => {
