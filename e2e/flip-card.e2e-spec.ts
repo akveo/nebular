@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by, ExpectedConditions as ec } from 'protractor';
-import { hexToRgbA } from './e2e-helper';
+import { browser, element, by } from 'protractor';
 import { sizes } from './cards-shared';
 
 const waitTime = 500;
@@ -22,7 +21,6 @@ describe('nb-flip-card', () => {
       function shouldShowFrontCard () {
         const flipCard = element.all(by.tagName('nb-flip-card')).get(c.i);
         const frontCard = flipCard.all(by.tagName('.front-container')).first();
-        const backCard = flipCard.all(by.tagName('.back-container')).first();
 
         expect(flipCard.getAttribute('class')).not.toContain('flipped', `flip card shouldn't be flipped`)
         expect(frontCard.isDisplayed()).toBe(true, 'front card should be visible');

@@ -49,7 +49,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(NbMenuItemComponent, { read: ElementRef }) subMenu: QueryList<ElementRef>;
   maxHeight: number = 0;
 
-  constructor(private router: Router, private menuService: NbMenuService) { }
+  constructor(private menuService: NbMenuService) { }
 
   ngAfterViewInit() {
     this.subMenu.changes
