@@ -2436,6 +2436,15 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "hint",
+          "shortDescription": "Hint showing under the input field to improve user experience"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
           "name": "placeholder",
           "shortDescription": "Search input placeholder"
         },

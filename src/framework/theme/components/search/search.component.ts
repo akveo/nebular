@@ -51,7 +51,7 @@ import { NbThemeService } from '../../services/theme.service';
               tabindex="-1"
               (blur)="tabOut.next($event)"/>
           </div>
-          <span class="info">Hit enter to search</span>
+          <span class="info">{{ hint }}</span>
         </form>
       </div>
     </div>
@@ -69,6 +69,7 @@ export class NbSearchFieldComponent {
 
   @Input() searchType: string;
   @Input() placeholder: string;
+  @Input() hint: string;
 
   @Output() searchClose = new EventEmitter();
   @Output() search = new EventEmitter();
@@ -171,6 +172,13 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   @Input() placeholder: string = 'Search...';
 
+  /**
+   * Hint showing under the input field to improve user experience
+   *
+   * @type {string}
+   */
+  @Input() hint: string = 'Hit enter to search';
+
   @HostBinding('class.show') showSearch: boolean = false;
 
   @ViewChild('attachedSearchContainer', { read: ViewContainerRef }) attachedSearchContainer: ViewContainerRef;
@@ -204,6 +212,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchFieldComponentRef = componentRef;
     componentRef.instance.searchType = this.searchType;
     componentRef.instance.placeholder = this.placeholder;
+    componentRef.instance.hint = this.hint;
     componentRef.instance.searchClose.subscribe(() => {
       this.searchService.deactivateSearch(this.searchType, this.tag);
     });
