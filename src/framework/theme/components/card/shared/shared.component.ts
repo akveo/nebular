@@ -1,5 +1,4 @@
-import { Component, Input, HostBinding } from '@angular/core';
-import { NbCardComponent } from '../card.component'
+import { Component } from '@angular/core';
 
 /**
  * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.
