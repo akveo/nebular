@@ -35,6 +35,10 @@
       font-weight: nb-theme(third-heading-font-weight);
     }
 
+    p > img {
+      max-width: 100%;
+    }
+
     .note {
       border-radius: 0.125rem;
       border: 1px solid nb-theme(border-color);
