@@ -985,12 +985,21 @@
       "platform": null,
       "examples": [
         {
-          "shortDescription": "",
+          "shortDescription": "While this component can be used alone, it also provides a number\nof child components for common card sections:",
           "description": "",
           "code": "\n<nb-card-header></nb-card-header>\n<nb-card-body></nb-card-body>\n<nb-card-footer></nb-card-footer>\n"
         }
       ],
       "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "accent",
+          "shortDescription": "Card accent (color of the top border):\nactive, disabled, primary, info, success, warning, danger"
+        },
         {
           "kind": "input",
           "platform": null,
@@ -1162,6 +1171,108 @@
           ]
         }
       ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n<nb-reveal-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-reveal-card>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "flipped",
+          "shortDescription": "Flip state"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggleFlip",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbFlipCardComponent",
+      "description": "![image](assets/images/components/flip-card.gif)\n",
+      "shortDescription": "Flip card component.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n<nb-reveal-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-reveal-card>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "revealed",
+          "shortDescription": "Reveal state"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggleReveal",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbRevealCardComponent",
+      "description": "![image](assets/images/components/reveal-card.gif)\n",
+      "shortDescription": "Reveal card component.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbCardBackComponent",
+      "description": "Use it as a container for the back card.\n",
+      "shortDescription": "Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbCardFrontComponent",
+      "description": "Use it as a container for the front card.\n",
+      "shortDescription": "Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.",
+      "styles": []
     },
     {
       "kind": "component",
@@ -1838,6 +1949,18 @@
           "examples": [],
           "params": [],
           "platform": null,
+          "name": "ngAfterViewInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
           "name": "ngOnDestroy",
           "type": [
             "void"
@@ -1851,6 +1974,26 @@
           "params": [],
           "platform": null,
           "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onAddItem",
           "type": [
             "void"
           ],
@@ -2142,6 +2285,14 @@
           "type": "string",
           "required": null,
           "shortDescription": "Item is selected when partly or fully equal to the current url"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "number",
+          "required": null,
+          "shortDescription": "Children items height"
         },
         {
           "kind": "property",
