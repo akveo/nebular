@@ -1,0 +1,12 @@
+@mixin nd-reveal-card-theme {
+  .second-card-container {
+    height: calc(100% - #{nb-theme(card-margin)});
+    border-radius: nb-theme(card-border-radius);
+  }
+
+  .reveal-button {
+    line-height: nb-theme(card-line-height);
+    padding: nb-theme(card-padding);
+    margin-bottom: nb-theme(card-margin);
+  }
+}

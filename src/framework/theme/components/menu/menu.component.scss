@@ -11,16 +11,7 @@
   .menu-item > .menu-items {
     list-style-type: none;
     overflow: hidden;
-
-    &.collapsed {
-      max-height: 0;
-      transition: max-height 0.15s ease-out;
-    }
-
-    &.expanded {
-      max-height: 300px;
-      transition: max-height 0.3s ease-in;
-    }
+    transition: max-height 0.3s ease-in;
   }
 
   .menu-item a {

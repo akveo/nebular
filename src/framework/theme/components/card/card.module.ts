@@ -15,11 +15,19 @@ import {
   NbCardHeaderComponent,
 } from './card.component';
 
+import { NbRevealCardComponent } from './reveal-card/reveal-card.component';
+import { NbFlipCardComponent } from './flip-card/flip-card.component';
+import { NbCardFrontComponent, NbCardBackComponent } from './shared/shared.component';
+
 const NB_CARD_COMPONENTS = [
   NbCardComponent,
   NbCardBodyComponent,
   NbCardFooterComponent,
   NbCardHeaderComponent,
+  NbRevealCardComponent,
+  NbFlipCardComponent,
+  NbCardFrontComponent,
+  NbCardBackComponent,
 ];
 
 @NgModule({
