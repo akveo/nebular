@@ -101,6 +101,37 @@
         border-bottom-color: nb-theme(card-header-danger-bg);
       }
     }
+
+    &.accent {
+      border-top-style: solid;
+      border-top-width: nb-theme(card-border-radius);
+
+      & nb-card-header {
+        border-radius: 0;
+      }
+    }
+
+    &.accent-active {
+      border-top-color: nb-theme(card-header-active-bg);
+    }
+    &.accent-disabled {
+      border-top-color: nb-theme(card-header-disabled-bg);
+    }
+    &.accent-primary {
+      border-top-color: nb-theme(card-header-primary-bg);
+    }
+    &.accent-success {
+      border-top-color: nb-theme(card-header-success-bg);
+    }
+    &.accent-info {
+      border-top-color: nb-theme(card-header-info-bg);
+    }
+    &.accent-warning {
+      border-top-color: nb-theme(card-header-warning-bg);
+    }
+    &.accent-danger {
+      border-top-color: nb-theme(card-header-danger-bg);
+    }
   }
 
   nb-card-body {
@@ -126,3 +157,4 @@
     @include nb-card-header();
   }
 }
+
