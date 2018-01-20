@@ -1,5 +1,4 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { NbCardComponent } from '../card.component'
 
 /**
  * Flip card component.

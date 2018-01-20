@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by, ExpectedConditions as ec } from 'protractor';
-import { hexToRgbA } from './e2e-helper';
+import { browser, element, by } from 'protractor';
 import { sizes } from './cards-shared';
 import { protractor } from 'protractor/built/ptor';
 
@@ -60,7 +59,6 @@ describe('nb-reveal-card', () => {
 
       it(`should hide back card`, () => {
         const revealCard = element.all(by.tagName('nb-reveal-card')).get(c.i);
-        const backCardContainer = revealCard.all(by.css('.second-card-container')).first();
         const revealButton = revealCard.all(by.css('.reveal-button')).first();
 
         revealButton.click()
