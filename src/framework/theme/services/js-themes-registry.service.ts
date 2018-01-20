@@ -26,8 +26,8 @@ export class NbJSThemesRegistry {
 
   private themes: any = {};
 
-  constructor(@Inject(nbBuiltInJSThemesToken) private builtInThemes: NbJSThemeOptions[],
-              @Inject(nbJSThemesToken) private newThemes: NbJSThemeOptions[] = []) {
+  constructor(@Inject(nbBuiltInJSThemesToken) builtInThemes: NbJSThemeOptions[],
+              @Inject(nbJSThemesToken) newThemes: NbJSThemeOptions[] = []) {
 
     const themes = this.combineByNames(newThemes, builtInThemes);
 
