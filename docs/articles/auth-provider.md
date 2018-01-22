@@ -13,7 +13,7 @@ Each provider has a list of configurations available with the default values set
   
 ## Configuration
 
-As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is all set by default, so please take a look at the [default configuration values]((#/docs/auth/email--password-provider) before modifying them.
+As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is configured by default, please take a look at the [default configuration values](#/docs/auth/nbemailpassauthprovider) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
