@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { switchMapTo } from 'rxjs/operators/switchMapTo';
 import { tap } from 'rxjs/operators/tap';
 import { share } from 'rxjs/operators/share';
 
@@ -15,6 +15,7 @@ import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 @Injectable()
 export class NbAuthSimpleToken {
 
+  // TODO Why empty string. localStorage will set a null value anyway
   protected token: string = '';
 
   setValue(token: string) {
@@ -27,6 +28,14 @@ export class NbAuthSimpleToken {
    */
   getValue() {
     return this.token;
+  }
+
+  /**
+   * Is current token could be processed
+   * @returns {boolean}
+   */
+  isValid(): boolean {
+    return this.token == null;
   }
 }
 
@@ -71,6 +80,18 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
 
     return date;
   }
+
+  /**
+   * Is data expired
+   * @returns {boolean}
+   */
+  isValid(): boolean {
+    const expDate: Date = this.getTokenExpDate();
+    if (expDate === null) {
+      return true;
+    }
+    return Date.now() - expDate.getTime() > 0;
+  }
 }
 
 /**
@@ -105,6 +126,7 @@ export class NbTokenService {
         return observableOf(this.tokenWrapper);
       },
 
+      // FIXME is it possible to unify interface
       setter: (token: string | NbAuthSimpleToken): Observable<null> => {
         const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
         localStorage.setItem(this.getConfigValue('token.key'), raw);
@@ -137,13 +159,15 @@ export class NbTokenService {
 
   /**
    * Sets the token into the storage. This method is used by the NbAuthService automatically.
+   *
+   * Note: don't forget to subscribe
    * @param {string} rawToken
    * @returns {Observable<any>}
    */
   set(rawToken: string): Observable<null> {
     return this.getConfigValue('token.setter')(rawToken)
       .pipe(
-        switchMap(() => this.get()),
+        switchMapTo(this.fetch()),
         tap((token: NbAuthSimpleToken) => {
           this.publishToken(token);
         }),
@@ -155,7 +179,7 @@ export class NbTokenService {
    * @returns {Observable<NbAuthSimpleToken>}
    */
   get(): Observable<NbAuthSimpleToken> {
-    return this.getConfigValue('token.getter')();
+    return this.fetch();
   }
 
   /**
@@ -168,12 +192,23 @@ export class NbTokenService {
 
   /**
    * Removes the token
+   *
+   * Note: don't forget to subscribe
    * @returns {Observable<any>}
    */
-  clear(): Observable<any> {
-    this.publishToken(null);
+  clear(): Observable<NbAuthSimpleToken> {
+    return this.getConfigValue('token.deleter')()
+      .pipe(
+        switchMapTo(this.fetch()),
+        tap((token: NbAuthSimpleToken) => {
+          token.setValue(null);
+          this.publishToken(token);
+        }),
+      );
+  }
 
-    return this.getConfigValue('token.deleter')();
+  private fetch(): Observable<NbAuthSimpleToken> {
+    return this.getConfigValue('token.getter')();
   }
 
   protected publishToken(token: NbAuthSimpleToken): void {
