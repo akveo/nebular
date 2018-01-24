@@ -5,7 +5,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';

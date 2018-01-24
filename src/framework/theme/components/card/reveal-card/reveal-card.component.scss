@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  position: relative;
+
+  &.revealed {
+    .second-card-container {
+      top: 0;
+      transition: none;
+
+      /deep/ nb-card-back {
+        top: 0;
+      }
+    }
+    .reveal-button {
+      transform: none;
+    }
+  }
+
+  /deep/ nb-card-front {
+    display: block;
+    height: 100%;
+  }
+
+  .second-card-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    transition: top 0s 0.5s;
+
+    /deep/ nb-card-back {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      transition: top 0.5s;
+    }
+  }
+
+  .reveal-button {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+  }
+}
