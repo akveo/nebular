@@ -15,8 +15,7 @@ import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 @Injectable()
 export class NbAuthSimpleToken {
 
-  // TODO Why empty string. localStorage will set a null value anyway
-  protected token: string = '';
+  protected token: string;
 
   setValue(token: string) {
     this.token = token;
@@ -35,7 +34,7 @@ export class NbAuthSimpleToken {
    * @returns {boolean}
    */
   isValid(): boolean {
-    return this.token == null;
+    return !!this.token;
   }
 }
 
@@ -86,11 +85,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * @returns {boolean}
    */
   isValid(): boolean {
-    const expDate: Date = this.getTokenExpDate();
-    if (expDate === null) {
-      return true;
-    }
-    return Date.now() - expDate.getTime() > 0;
+    return super.isValid() && new Date() < this.getTokenExpDate();
   }
 }
 
@@ -126,7 +121,7 @@ export class NbTokenService {
         return observableOf(this.tokenWrapper);
       },
 
-      // FIXME is it possible to unify interface
+      // TODO is it possible to unify interface
       setter: (token: string | NbAuthSimpleToken): Observable<null> => {
         const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
         localStorage.setItem(this.getConfigValue('token.key'), raw);

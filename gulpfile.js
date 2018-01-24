@@ -64,6 +64,7 @@ const ROLLUP_GLOBALS = {
   'rxjs/operators/startWith': 'Rx.operators',
   'rxjs/operators/auditTime': 'Rx.operators',
   'rxjs/operators/switchMap': 'Rx.operators',
+  'rxjs/operators/switchMapTo': 'Rx.operators',
   'rxjs/operators/finalize': 'Rx.operators',
   'rxjs/operators/catchError': 'Rx.operators',
   'rxjs/operators/share': 'Rx.operators',

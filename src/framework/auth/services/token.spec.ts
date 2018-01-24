@@ -49,17 +49,14 @@ describe('token-service: default config', () => {
   )));
 
   it('set test token', () => {
-      tokenService.set(testTokenValue)
-
+      tokenService.set(testTokenValue).subscribe();
       expect(localStorage.getItem(testTokenKey)).toEqual(testTokenValue);
     },
   );
 
   it('set null as string', () => {
       tokenService.set(null);
-
       expect(localStorage.getItem(testTokenKey)).toEqual('null');
-      // TODO is it correct behavior? localStorage stringify null
     },
   );
 
@@ -80,7 +77,7 @@ describe('token-service: default config', () => {
   it('clear remove token', () => {
     localStorage.setItem(testTokenKey, testTokenValue);
 
-    tokenService.clear();
+    tokenService.clear().subscribe();
 
     expect(localStorage.getItem(testTokenKey)).toBeNull();
   });
@@ -89,7 +86,7 @@ describe('token-service: default config', () => {
     localStorage.setItem(testTokenKey, testTokenValue);
     localStorage.setItem(testTokenKey + '2', testTokenValue);
 
-    tokenService.clear();
+    tokenService.clear().subscribe();
 
     expect(localStorage.getItem(testTokenKey + '2')).toEqual(testTokenValue);
     expect(localStorage.getItem(testTokenKey)).toBeNull();
@@ -102,10 +99,11 @@ describe('token-service: default config', () => {
       .subscribe((changedToken: NbAuthSimpleToken) => {
         token = changedToken;
       });
+
     try {
       expect(token.getValue()).toBeNull();
 
-      tokenService.set(testTokenValue).subscribe(() => {});
+      tokenService.set(testTokenValue).subscribe();
       expect(token.getValue()).toEqual(testTokenValue);
 
       tokenService.clear().subscribe();
