@@ -205,6 +205,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
           return res;
         }),
+        this.validateToken('login'),
         map((res) => {
           return new NbAuthResult(
             true,
@@ -245,6 +246,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
           return res;
         }),
+        this.validateToken('register'),
         map((res) => {
           return new NbAuthResult(
             true,
@@ -399,6 +401,21 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             ));
         }),
       );
+  }
+
+  protected validateToken (module: string): any {
+    return map((res) => {
+      const token = this.getConfigValue('token.getter')(module, res);
+      if (!token) {
+        const key = this.getConfigValue('token.key');
+        console.warn(`NbEmailPassAuthProvider:
+                          Token is not provided under '${key}' key
+                          with getter '${this.getConfigValue('token.getter')}', check your auth configuration.`);
+
+        throw new Error('Could not extract token from the response.');
+      }
+      return res;
+    });
   }
 
   protected getActionEndpoint(action: string): string {
