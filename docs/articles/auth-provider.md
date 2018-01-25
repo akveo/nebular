@@ -38,7 +38,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 
-Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/email--password-provider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 {

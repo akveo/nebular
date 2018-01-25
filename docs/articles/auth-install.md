@@ -1,7 +1,7 @@
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Auth module in place.
+    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit-ngxadmin-ngxadmin) then you already have the Auth module in place.
   </div>
 </div>
 
