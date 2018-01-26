@@ -4,6 +4,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAuthResult } from '../services/auth.service';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
+import 'rxjs/add/operator/delay';
 
 export interface NbDummyAuthProviderConfig {
   delay?: number;
@@ -44,12 +45,14 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
 
   protected createDummyResult(data?: any): NbAuthResult {
     if (this.getConfigValue('alwaysFail')) {
+      // TODO we dont call tokenService clear during logout in case result is not success
       return new NbAuthResult(false,
         this.createFailResponse(data),
         null,
         ['Something went wrong.']);
     }
 
+    // TODO is it missed messages here, is it token should be defined
     return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
   }
 }
