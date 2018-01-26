@@ -7,7 +7,7 @@
 import { NbAuthSimpleToken, NbTokenService } from './token.service';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN, NB_AUTH_USER_OPTIONS_TOKEN } from '../auth.options';
-import { NbAuthResult, NbAuthService } from './auth.service';
+import { NbAuthService } from './auth.service';
 import { nbAuthServiceFactory } from '../../../../docs/framework/auth/auth.module';
 import { Injector } from '@angular/core';
 import { NbDummyAuthProvider } from '../providers/dummy-auth.provider';
@@ -15,6 +15,7 @@ import { nbOptionsFactory } from '../auth.module';
 import { HttpResponse } from '@angular/common/http';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
+import { NbAuthResult } from './auth-result';
 
 describe('auth-service', () => {
   let authService: NbAuthService;
