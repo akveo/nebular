@@ -1,0 +1,64 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../../styles/core/mixins';
+
+:host {
+  $arrow-size: 11px;
+  $arrow-offset: -($arrow-size * 2);
+
+  position: absolute;
+  z-index: 1000;
+  border-radius: 5px;
+  top: 200px;
+
+  .text {
+    padding: 0.375rem 3rem;
+  }
+
+  .arrow {
+    @include center-horizontal-absolute();
+
+    width: 0;
+    height: 0;
+    border: $arrow-size solid transparent;
+
+    &::after {
+      position: absolute;
+      content: ' ';
+      width: 0;
+      height: 0;
+      top: -9px;
+      left: 0;
+      margin-left: -12px;
+      display: block;
+      border: 12px solid transparent;
+    }
+  }
+
+  &.bottom .arrow {
+    top: $arrow-offset;
+  }
+
+  &.left .arrow {
+    transform: rotate(90deg);
+    right: $arrow-offset;
+    top: calc(50% - #{$arrow-size});
+    left: auto;
+  }
+
+  &.top .arrow {
+    transform: rotate(180deg);
+    bottom: $arrow-offset;
+    left: calc(50% - #{$arrow-size});
+  }
+
+  &.right .arrow {
+    transform: rotate(-90deg);
+    left: $arrow-offset;
+    top: calc(50% - #{$arrow-size});
+  }
+}

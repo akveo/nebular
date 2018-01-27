@@ -50,6 +50,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 
@@ -248,6 +249,10 @@ export const routes: Routes = [
   {
     path: 'forms',
     component: NbFormsTestComponent,
+  },
+  {
+    path: 'popover',
+    component: NbPopoverTestComponent,
   },
   {
     path: 'acl',
