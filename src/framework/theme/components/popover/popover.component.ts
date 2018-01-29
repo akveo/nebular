@@ -21,7 +21,7 @@ import { NbPopoverContent } from './popover.directive';
     <ng-container *ngIf="isTemplate" [ngTemplateOutlet]="content"></ng-container>
     <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
     <ng-container *ngIf="isString">
-      <div class="basic-popover">{{content}}</div>
+      <div class="primitive-popover">{{content}}</div>
     </ng-container>
   `,
 })
