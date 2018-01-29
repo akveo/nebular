@@ -5,13 +5,12 @@
  */
 
 import { NbAuthSimpleToken, NbTokenService } from './token.service';
-import { async, inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN, NB_AUTH_USER_OPTIONS_TOKEN } from '../auth.options';
 import { NbAuthService } from './auth.service';
-import { nbAuthServiceFactory } from '../../../../docs/framework/auth/auth.module';
 import { Injector } from '@angular/core';
 import { NbDummyAuthProvider } from '../providers/dummy-auth.provider';
-import { nbOptionsFactory } from '../auth.module';
+import { nbAuthServiceFactory, nbOptionsFactory } from '../auth.module';
 import { HttpResponse } from '@angular/common/http';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
@@ -21,7 +20,6 @@ describe('auth-service', () => {
   let authService: NbAuthService;
   let tokenService: NbTokenService;
   let dummyAuthProvider: NbDummyAuthProvider;
-  let store;
   const testTokenValue = 'test-token';
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
@@ -62,21 +60,6 @@ describe('auth-service', () => {
     ['Successfully requested password.']);
 
   beforeEach(() => {
-// mock for local storage
-    store = {};
-    const localStorage = window.localStorage;
-    spyOn(localStorage, 'getItem').and.callFake(function (key) {
-      return store[key] !== undefined ? store[key] : null;
-    });
-    spyOn(localStorage, 'setItem').and.callFake(function (key, value) {
-      return store[key] = value + '';
-    });
-    spyOn(localStorage, 'removeItem').and.callFake(function (key, value) {
-      delete store[key];
-    });
-    spyOn(localStorage, 'clear').and.callFake(function () {
-      store = {};
-    });
     TestBed.configureTestingModule({
       providers: [
         {provide: NB_AUTH_OPTIONS_TOKEN, useValue: {}},
@@ -109,18 +92,11 @@ describe('auth-service', () => {
         NbDummyAuthProvider,
       ],
     });
+    authService = TestBed.get(NbAuthService);
     tokenService = TestBed.get(NbTokenService);
     dummyAuthProvider = TestBed.get(NbDummyAuthProvider);
     tokenWrapper.setValue(testTokenValue);
   });
-
-  // Single async inject to save references; which are used in all tests below
-  beforeEach(async(inject(
-    [NbAuthService],
-    (_authService) => {
-      authService = _authService
-    },
-  )));
 
   it('get test token before set', () => {
       const spy = spyOn(tokenService, 'get')
@@ -175,7 +151,7 @@ describe('auth-service', () => {
   );
 
   // TODO Could be removed if token immutable
-  it('onTokenChange return correct stream and return null token', (done) => {
+  it('onTokenChange return correct stream and retrieve null token', (done) => {
       tokenWrapper.setValue(null);
       const spy = spyOn(tokenService, 'tokenChange')
         .and
@@ -191,7 +167,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('authenticate failed with dummy provider', (done) => {
+  it('authenticate failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'authenticate')
         .and
         .returnValue(observableOf(failResult).delay(1000));
@@ -210,7 +186,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('authenticate succeed with dummy provider', (done) => {
+  it('authenticate succeed', (done) => {
       const providerSpy = spyOn(dummyAuthProvider, 'authenticate')
         .and
         .returnValue(observableOf(successResult).delay(1000));
@@ -241,7 +217,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('register failed with dummy provider', (done) => {
+  it('register failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'register')
         .and
         .returnValue(observableOf(failResult).delay(1000));
@@ -260,7 +236,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('register succeed with dummy provider', (done) => {
+  it('register succeed', (done) => {
       const providerSpy = spyOn(dummyAuthProvider, 'register')
         .and
         .returnValue(observableOf(successResult).delay(1000));
@@ -291,7 +267,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('logout failed with dummy provider', (done) => {
+  it('logout failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'logout')
         .and
         .returnValue(observableOf(failResult).delay(1000));
@@ -311,7 +287,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('logout succeed with dummy provider', (done) => {
+  it('logout succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'logout')
         .and
         .returnValue(observableOf(successLogoutResult).delay(1000));
@@ -334,7 +310,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('requestPassword failed with dummy provider', (done) => {
+  it('requestPassword failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'requestPassword')
         .and
         .returnValue(observableOf(failResult).delay(1000));
@@ -354,7 +330,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('requestPassword succeed with dummy provider', (done) => {
+  it('requestPassword succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'requestPassword')
         .and
         .returnValue(observableOf(successRequestPasswordResult).delay(1000));
@@ -374,7 +350,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('resetPassword failed with dummy provider', (done) => {
+  it('resetPassword failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'resetPassword')
         .and
         .returnValue(observableOf(failResult).delay(1000));
@@ -394,7 +370,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('resetPassword succeed with dummy provider', (done) => {
+  it('resetPassword succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'resetPassword')
         .and
         .returnValue(observableOf(successResetPasswordResult).delay(1000));
