@@ -97,6 +97,7 @@ Let's modify our guard a bit to reflect this logic:
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
+import { tap } from 'rxjs/operators/tap';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -106,11 +107,13 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     return this.authService.isAuthenticated()
-      .do(authenticated => {
-        if (!authenticated) {
-          this.router.navigate(['auth/login']);
-        }
-      });
+      .pipe(
+        tap(authenticated => {
+          if (!authenticated) {
+            this.router.navigate(['auth/login']);
+          }
+        }),
+      );
   }
 }
 ```
