@@ -5,7 +5,7 @@
  */
 
 import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, TemplateRef, Type } from '@angular/core';
-import { NbPlacement, NbPosition, PositioningHelper } from './positioning.helper';
+import { NbPlacement, NbPosition, NbPositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
@@ -210,7 +210,7 @@ export class NbPopoverDirective implements OnDestroy {
   private relocate() {
     const hostRect = this.element.nativeElement.getBoundingClientRect();
     const containerRect = this.containerElement.getBoundingClientRect();
-    const position = PositioningHelper.calculatePosition(containerRect, hostRect, this.placement);
+    const position = NbPositioningHelper.calculatePosition(containerRect, hostRect, this.placement);
     this.patchPopoverPosition(position);
   }
 

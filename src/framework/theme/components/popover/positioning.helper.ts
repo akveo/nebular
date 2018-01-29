@@ -22,7 +22,7 @@ export class NbPosition {
   left: number;
 }
 
-export class PositioningHelper {
+export class NbPositioningHelper {
 
   /**
    * Describes height of the popover arrow.
@@ -32,14 +32,14 @@ export class PositioningHelper {
   private static positionCalculator = {
     [NbPlacement.TOP](positioned: ClientRect, host: ClientRect): NbPosition {
       return {
-        top: host.top - positioned.height - PositioningHelper.ARROW_SIZE,
+        top: host.top - positioned.height - NbPositioningHelper.ARROW_SIZE,
         left: host.left + host.width / 2 - positioned.width / 2,
       }
     },
 
     [NbPlacement.BOTTOM](positioned: ClientRect, host: ClientRect): NbPosition {
       return {
-        top: host.top + host.height + PositioningHelper.ARROW_SIZE,
+        top: host.top + host.height + NbPositioningHelper.ARROW_SIZE,
         left: host.left + host.width / 2 - positioned.width / 2,
       }
     },
@@ -47,14 +47,14 @@ export class PositioningHelper {
     [NbPlacement.LEFT](positioned: ClientRect, host: ClientRect): NbPosition {
       return {
         top: host.top + host.height / 2 - positioned.height / 2,
-        left: host.left - positioned.width - PositioningHelper.ARROW_SIZE,
+        left: host.left - positioned.width - NbPositioningHelper.ARROW_SIZE,
       }
     },
 
     [NbPlacement.RIGHT](positioned: ClientRect, host: ClientRect): NbPosition {
       return {
         top: host.top + host.height / 2 - positioned.height / 2,
-        left: host.left + host.width + PositioningHelper.ARROW_SIZE,
+        left: host.left + host.width + NbPositioningHelper.ARROW_SIZE,
       }
     },
   };
@@ -63,7 +63,7 @@ export class PositioningHelper {
    * Calculates position of the element relatively to the host element based on the placement.
    * */
   public static calculatePosition(positioned: ClientRect, host: ClientRect, placement: NbPlacement): NbPosition {
-    const positionCalculator: Function = PositioningHelper.positionCalculator[placement];
-    return positionCalculator.call(PositioningHelper.positionCalculator, positioned, host);
+    const positionCalculator: Function = NbPositioningHelper.positionCalculator[placement];
+    return positionCalculator.call(NbPositioningHelper.positionCalculator, positioned, host);
   }
 }
