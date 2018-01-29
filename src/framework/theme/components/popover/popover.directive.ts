@@ -120,6 +120,9 @@ export class NbPopoverDirective {
 
   /**
    * Toggle popover on host element click.
+   *
+   * TODO
+   * Fix tslint to add capability make HostListener private
    * */
   @HostListener('click')
   onClick() {
