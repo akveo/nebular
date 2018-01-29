@@ -7,7 +7,7 @@
 import { ComponentRef, Directive, ElementRef, HostListener, Input, TemplateRef, Type } from '@angular/core';
 import { NbPlacement, NbPosition, PositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
-import { NbThemeService } from '../../';
+import { NbThemeService } from '../../services/theme.service';
 
 /**
  * Popover can be one of the following types:
