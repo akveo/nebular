@@ -20,7 +20,7 @@ import { NbPopoverContent } from './popover.directive';
 
     <ng-container *ngIf="isTemplate" [ngTemplateOutlet]="content"></ng-container>
     <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
-    <ng-container *ngIf="isString">
+    <ng-container *ngIf="isPrimitive">
       <div class="primitive-popover">{{content}}</div>
     </ng-container>
   `,
@@ -64,9 +64,9 @@ export class NbPopoverComponent {
   }
 
   /**
-   * Check that content is a basic string.
+   * Check that if content is not a TemplateRef or an angular component it means a primitive.
    * */
-  get isString(): boolean {
-    return typeof this.content === 'string';
+  get isPrimitive(): boolean {
+    return !this.isTemplate && !this.isComponent;
   }
 }

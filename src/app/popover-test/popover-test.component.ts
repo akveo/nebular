@@ -33,7 +33,18 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
               Component Test
             </button>
 
-            <button class="btn btn-primary" nbPopover="Hi, I'm popover!" nbPopoverPlacement="left">String Test</button>
+            <button class="btn btn-primary" nbPopover="Hi, I'm popover!" nbPopoverPlacement="bottom">String Test
+            </button>
+
+            <button class="btn btn-primary" [nbPopover]="125123" nbPopoverPlacement="bottom">Number Test
+            </button>
+
+            <button class="btn btn-primary" [nbPopover]="{ isAdmin: false }" nbPopoverPlacement="bottom">Object Test
+            </button>
+
+            <button class="btn btn-primary" [nbPopover]="['Nikita', 'Poltoratsky']" nbPopoverPlacement="bottom">Array
+              Test
+            </button>
           </nb-card-body>
         </nb-card>
 
