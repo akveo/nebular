@@ -62,7 +62,7 @@ export class NbPositioningHelper {
   /**
    * Calculates position of the element relatively to the host element based on the placement.
    * */
-  public static calculatePosition(positioned: ClientRect, host: ClientRect, placement: NbPlacement): NbPosition {
+  static calculatePosition(positioned: ClientRect, host: ClientRect, placement: NbPlacement): NbPosition {
     const positionCalculator: Function = NbPositioningHelper.positionCalculator[placement];
     return positionCalculator.call(NbPositioningHelper.positionCalculator, positioned, host);
   }
