@@ -184,7 +184,13 @@ export class NbPopoverDirective implements OnDestroy {
         /**
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
-         * But we should have size on this step to calculate popover position correctly.*/
+         * But we should have size on this step to calculate popover position correctly.
+         *
+         * TODO
+         * I don't think we have to call detectChanges each time we're using {@link NbThemeService#appendToLayoutTop}.
+         * Investigate, maybe we can create method in the NbThemeService
+         * which will call appendToLayoutTop and 'do' detectChanges instead of service client.
+         * */
         this.containerRef.changeDetectorRef.detectChanges();
         this.relocate();
       });
