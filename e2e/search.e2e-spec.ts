@@ -73,9 +73,32 @@ describe('nb-search', () => {
     expect(element(by.css('.search-input')).getAttribute('value')).toEqual('');
   });
 
-  it('hint for search customised successfully', () => {
+  it('should display default hint', () => {
     element(by.css('.start-search')).click();
-    expect(element(by.css('span'))).toBeTruthy();
-    expect(element(by.css('span')).getText()).toContain('Custom hint');
-  })
+    expect(element(by.css('.show .search span'))).toBeTruthy();
+    expect(element(by.css('.show .search span')).getText()).toContain('Hit enter to search');
+  });
+
+  it('should display default placeholder', () => {
+    element(by.css('.start-search')).click();
+    expect(element(by.css('.search-input')).getAttribute('placeholder')).toEqual('Search...');
+  });
+});
+
+describe('nb-search-customized', () => {
+
+  beforeEach((done) => {
+    browser.get('#/search-2').then(() => done());
+  });
+
+  it('should display customised hint', () => {
+    element(by.css('.start-search')).click();
+    expect(element(by.css('.show .search span'))).toBeTruthy();
+    expect(element(by.css('.show .search span')).getText()).toContain('Custom hint');
+  });
+
+  it('should display customised placeholder', () => {
+    element(by.css('.start-search')).click();
+    expect(element(by.css('.search-input')).getAttribute('placeholder')).toEqual('Type here.');
+  });
 });
