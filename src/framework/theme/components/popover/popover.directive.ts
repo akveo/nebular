@@ -92,7 +92,7 @@ export class NbPopoverDirective {
   /**
    * Show popover if it isn't shown.
    * */
-  show(): void {
+  show() {
     if (this.isHidden) {
       this.renderPopover();
     }
@@ -101,7 +101,7 @@ export class NbPopoverDirective {
   /**
    * Hide popover if it's shown.
    * */
-  hide(): void {
+  hide() {
     if (this.isShown) {
       this.destroyPopover();
     }
@@ -110,7 +110,7 @@ export class NbPopoverDirective {
   /**
    * Toggle popover state.
    * */
-  toggle(): void {
+  toggle() {
     if (this.isShown) {
       this.hide();
     } else {
