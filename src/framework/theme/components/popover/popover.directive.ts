@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Directive, ElementRef, HostListener, Input, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, TemplateRef, Type } from '@angular/core';
 import { NbPlacement, NbPosition, PositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 /**
  * Popover can be one of the following types:
@@ -46,7 +47,7 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * ```
  * */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective {
+export class NbPopoverDirective implements OnDestroy {
 
   /**
    * Popover content which will be rendered in {@link NbPopoverComponent}.
@@ -76,6 +77,8 @@ export class NbPopoverDirective {
     return !this.containerRef;
   }
 
+  private alive: boolean = true;
+
   private containerRef: ComponentRef<NbPopoverComponent>;
 
   private get container(): NbPopoverComponent {
@@ -87,6 +90,10 @@ export class NbPopoverDirective {
   }
 
   constructor(private element: ElementRef, private themeService: NbThemeService) {
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   /**
@@ -170,6 +177,7 @@ export class NbPopoverDirective {
    * */
   private renderPopover() {
     this.themeService.appendToLayoutTop(NbPopoverComponent)
+      .pipe(takeWhile(() => this.alive))
       .subscribe((ref: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = ref;
         this.patchPopoverContentAndPlacement();
