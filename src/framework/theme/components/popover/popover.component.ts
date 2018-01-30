@@ -11,6 +11,9 @@ import { NbPopoverContent } from './popover.directive';
 /**
  * Popover container.
  * Renders provided content inside.
+ *
+ * TODO
+ * Add emergence animation with angular animation integration.
  * */
 @Component({
   selector: 'nb-popover',
