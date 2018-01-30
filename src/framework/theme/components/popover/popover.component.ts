@@ -11,9 +11,6 @@ import { NbPopoverContent } from './popover.directive';
 /**
  * Popover container.
  * Renders provided content inside.
- *
- * TODO
- * Add emergence animation with angular animation integration.
  * */
 @Component({
   selector: 'nb-popover',
@@ -37,7 +34,7 @@ export class NbPopoverComponent {
   content: NbPopoverContent;
 
   /**
-   * Popover calculatePosition relatively directive host element.
+   * Popover calcPosition relatively directive host element.
    * Helps us draw chevron on correct place.
    * */
   @Input()

@@ -219,7 +219,7 @@ export class NbPopoverDirective implements OnDestroy {
     const containerRect = this.containerElement.getBoundingClientRect();
 
     const placement = this.adjustPlacement(containerRect, hostRect, this.placement);
-    const position = NbPositioningHelper.calculatePosition(containerRect, hostRect, placement);
+    const position = NbPositioningHelper.calcPosition(containerRect, hostRect, placement);
 
     this.patchPopoverPlacement(placement);
     this.patchPopoverPosition(position);
