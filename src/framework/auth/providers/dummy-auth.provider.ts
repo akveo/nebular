@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
+import { delay } from 'rxjs/operators/delay';
 
-import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import 'rxjs/add/operator/delay';
+import { NbAuthResult } from '../services/auth-result';
 
 export interface NbDummyAuthProviderConfig {
   delay?: number;
@@ -20,27 +21,37 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
 
   authenticate(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
-      .delay(this.getConfigValue('delay'));
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
   }
 
   register(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
-      .delay(this.getConfigValue('delay'));
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
-      .delay(this.getConfigValue('delay'));
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
   }
 
   resetPassword(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
-      .delay(this.getConfigValue('delay'));
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
   }
 
   logout(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
-      .delay(this.getConfigValue('delay'));
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
   }
 
   protected createDummyResult(data?: any): NbAuthResult {

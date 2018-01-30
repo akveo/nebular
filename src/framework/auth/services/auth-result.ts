@@ -37,7 +37,7 @@ export class NbAuthResult {
     return this.token;
   }
 
-  // TODO could we rid of this method
+  // TODO could we get rid of this method
   replaceToken(token: NbAuthSimpleToken): any {
     this.token = token
   }

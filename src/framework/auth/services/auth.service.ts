@@ -39,7 +39,7 @@ export class NbAuthService {
   /**
    * Returns true if auth token is presented in the token storage
    * // TODO: check exp date for JWT token
-   * // TODO: for implement previous todo lets use isValid method of token
+   * // TODO: to implement previous todo lets use isValid method of token
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<boolean> {
@@ -57,7 +57,7 @@ export class NbAuthService {
   /**
    * Returns authentication status stream
    *  // TODO: check exp date for JWT token
-   *  // TODO: for implement previous todo lets use isValid method of token
+   *  // TODO: to implement previous todo lets use isValid method of token
    * @returns {Observable<boolean>}
    */
   onAuthenticationChange(): Observable<boolean> {

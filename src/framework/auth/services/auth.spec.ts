@@ -15,6 +15,7 @@ import { HttpResponse } from '@angular/common/http';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
+import { delay } from 'rxjs/operators/delay';
 
 describe('auth-service', () => {
   let authService: NbAuthService;
@@ -170,7 +171,10 @@ describe('auth-service', () => {
   it('authenticate failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'authenticate')
         .and
-        .returnValue(observableOf(failResult).delay(1000));
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
@@ -189,7 +193,10 @@ describe('auth-service', () => {
   it('authenticate succeed', (done) => {
       const providerSpy = spyOn(dummyAuthProvider, 'authenticate')
         .and
-        .returnValue(observableOf(successResult).delay(1000));
+        .returnValue(observableOf(successResult)
+          .pipe(
+            delay(1000),
+          ));
 
       const tokenServiceSetSpy = spyOn(tokenService, 'set')
         .and
@@ -220,7 +227,10 @@ describe('auth-service', () => {
   it('register failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'register')
         .and
-        .returnValue(observableOf(failResult).delay(1000));
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.register('dummy').subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
@@ -239,7 +249,10 @@ describe('auth-service', () => {
   it('register succeed', (done) => {
       const providerSpy = spyOn(dummyAuthProvider, 'register')
         .and
-        .returnValue(observableOf(successResult).delay(1000));
+        .returnValue(observableOf(successResult)
+          .pipe(
+            delay(1000),
+          ));
 
       const tokenServiceSetSpy = spyOn(tokenService, 'set')
         .and
@@ -270,7 +283,10 @@ describe('auth-service', () => {
   it('logout failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'logout')
         .and
-        .returnValue(observableOf(failResult).delay(1000));
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.logout('dummy').subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
@@ -290,8 +306,10 @@ describe('auth-service', () => {
   it('logout succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'logout')
         .and
-        .returnValue(observableOf(successLogoutResult).delay(1000));
-
+        .returnValue(observableOf(successLogoutResult)
+          .pipe(
+            delay(1000),
+          ));
       const tokenServiceClearSpy = spyOn(tokenService, 'clear').and.returnValue(observableOf('STUB'));
 
       authService.logout('dummy').subscribe((authRes: NbAuthResult) => {
@@ -313,7 +331,10 @@ describe('auth-service', () => {
   it('requestPassword failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'requestPassword')
         .and
-        .returnValue(observableOf(failResult).delay(1000));
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.requestPassword('dummy').subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
@@ -333,7 +354,10 @@ describe('auth-service', () => {
   it('requestPassword succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'requestPassword')
         .and
-        .returnValue(observableOf(successRequestPasswordResult).delay(1000));
+        .returnValue(observableOf(successRequestPasswordResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.requestPassword('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerLogoutSpy).toHaveBeenCalled();
@@ -353,7 +377,10 @@ describe('auth-service', () => {
   it('resetPassword failed', (done) => {
       const spy = spyOn(dummyAuthProvider, 'resetPassword')
         .and
-        .returnValue(observableOf(failResult).delay(1000));
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.resetPassword('dummy').subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
@@ -373,7 +400,10 @@ describe('auth-service', () => {
   it('resetPassword succeed', (done) => {
       const providerLogoutSpy = spyOn(dummyAuthProvider, 'resetPassword')
         .and
-        .returnValue(observableOf(successResetPasswordResult).delay(1000));
+        .returnValue(observableOf(successResetPasswordResult)
+          .pipe(
+            delay(1000),
+          ));
 
       authService.resetPassword('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerLogoutSpy).toHaveBeenCalled();
