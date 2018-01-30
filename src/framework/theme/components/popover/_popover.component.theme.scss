@@ -8,6 +8,7 @@
   nb-popover {
     border: 2px solid nb-theme(popover-border);
     background: nb-theme(popover-bg);
+    box-shadow: nb-theme(popover-shadow);
 
     .primitive-popover {
       color: nb-theme(popover-fg);
