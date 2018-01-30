@@ -78,6 +78,7 @@ const ROLLUP_GLOBALS = {
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',
   '@nebular/auth': 'nb.auth',
+  '@nebular/acl': 'nb.acl',
 };
 const ROLLUP_COMMON_CONFIG = {
   sourceMap: true,
@@ -98,11 +99,17 @@ gulp.task('default', ['copy-sources']);
 gulp.task('inline-resources', copyResources);
 gulp.task('bundle:umd:theme', bundleUmdTheme);
 gulp.task('bundle:umd:auth', bundleUmdAuth);
-gulp.task('bundle', ['bundle:umd:theme', 'bundle:umd:auth']);
+gulp.task('bundle:umd:acl', bundleUmdAcl);
+gulp.task('bundle', ['bundle:umd:theme', 'bundle:umd:auth', 'bundle:umd:acl']);
 gulp.task('bump', bumpVersions);
 
 function bumpVersions() {
-  gulp.src(['./package.json', './src/framework/theme/package.json', './src/framework/auth/package.json'], {base: './'})
+  gulp.src([
+    './package.json',
+    './src/framework/theme/package.json',
+    './src/framework/auth/package.json',
+    './src/framework/acl/package.json',
+  ], {base: './'})
     .pipe(bump({
       version: VERSION
     }))
@@ -176,6 +183,19 @@ function bundleUmdAuth() {
     format: 'umd',
     output: 'auth.umd.js',
     dest: `${LIB_DIR}/auth/bundles`,
+  };
+
+  bundle(config);
+}
+
+function bundleUmdAcl() {
+  const config = {
+    src: `${LIB_DIR}/acl/**/*.js`,
+    moduleName: 'nb.acl',
+    entry: `${LIB_DIR}/acl/index.js`,
+    format: 'umd',
+    output: 'acl.umd.js',
+    dest: `${LIB_DIR}/acl/bundles`,
   };
 
   bundle(config);
