@@ -62,6 +62,13 @@ export class NbPopoverDirective implements OnDestroy {
   placement: NbPlacement = NbPlacement.TOP;
 
   /**
+   * TODO
+   * add documentation.
+   * */
+  @Input('nbPopoverAutoAdjust')
+  autoAdjust: boolean = true;
+
+  /**
    * Returns true if popover already shown.
    * @return boolean
    * */
@@ -180,7 +187,7 @@ export class NbPopoverDirective implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((ref: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = ref;
-        this.patchPopoverContentAndPlacement();
+        this.patchPopoverContent(this.content);
         /**
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
@@ -210,16 +217,26 @@ export class NbPopoverDirective implements OnDestroy {
   private relocate() {
     const hostRect = this.element.nativeElement.getBoundingClientRect();
     const containerRect = this.containerElement.getBoundingClientRect();
-    const position = NbPositioningHelper.calculatePosition(containerRect, hostRect, this.placement);
+
+    const placement = this.adjustPlacement(containerRect, hostRect, this.placement);
+    const position = NbPositioningHelper.calculatePosition(containerRect, hostRect, placement);
+
+    this.patchPopoverPlacement(placement);
     this.patchPopoverPosition(position);
   }
 
   /**
-   * Set container content and placement.
+   * Set container content.
    * */
-  private patchPopoverContentAndPlacement() {
-    this.container.content = this.content;
-    this.container.placement = this.placement;
+  private patchPopoverContent(content: NbPopoverContent) {
+    this.container.content = content;
+  }
+
+  /**
+   * Set container placement.
+   * */
+  private patchPopoverPlacement(placement: NbPlacement) {
+    this.container.placement = placement;
   }
 
   /**
@@ -228,5 +245,13 @@ export class NbPopoverDirective implements OnDestroy {
   private patchPopoverPosition(position: NbPosition) {
     this.container.positionTop = position.top;
     this.container.positionLeft = position.left;
+  }
+
+  private adjustPlacement(positioned: ClientRect, host: ClientRect, placement: NbPlacement) {
+    if (this.autoAdjust) {
+      return NbPositioningHelper.adjust(positioned, host, placement);
+    }
+
+    return placement;
   }
 }

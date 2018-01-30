@@ -51,6 +51,23 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
         <nb-card>
           <nb-card-header>Popover Positions</nb-card-header>
           <nb-card-body>
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
+              Left
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
+              Bottom
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
+              Top
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
+              Right
+            </button>
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-body>
             <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
               Right
             </button>
@@ -63,6 +80,92 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
               Left
             </button>
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
+              Right
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
+              Bottom
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
+              Top
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
+              Left
+            </button>
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
+              Left
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
+              Bottom
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
+              Top
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
+              Right
+            </button>
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary"
+                    nbPopover="Left Popover!"
+                    nbPopoverPlacement="left"
+                    [nbPopoverAutoAdjust]="false">
+              Left
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom"
+                    [nbPopoverAutoAdjust]="false">
+              Bottom
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top"
+                    [nbPopoverAutoAdjust]="false">
+              Top
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right"
+                    [nbPopoverAutoAdjust]="false">
+              Right
+            </button>
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>User Popover</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary" [nbPopover]="menu" nbPopoverPlacement="bottom">
+              Right
+            </button>
+            <ng-template #menu>
+              <div [style.width.rem]="9">
+                <nb-menu [items]="menuItems"></nb-menu>
+              </div>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>User Popover</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary" [nbPopover]="menu" nbPopoverPlacement="bottom">
+              Right
+            </button>
+            <ng-template #menu>
+              <div [style.width.rem]="9">
+                <nb-menu [items]="menuItems"></nb-menu>
+              </div>
+            </ng-template>
           </nb-card-body>
         </nb-card>
 
