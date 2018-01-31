@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
@@ -9,16 +9,31 @@ import { share } from 'rxjs/operators/share';
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.options';
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 
+export interface NbAuthToken {
+  create(rawToken): NbAuthToken;
+  getValue(): string;
+  isValid(): boolean;
+  toString(): string;
+}
+
 /**
  * Wrapper for simple (text) token
  */
 @Injectable()
-export class NbAuthSimpleToken {
+export class NbAuthSimpleToken implements NbAuthToken {
+  readonly token: string;
 
-  protected token: string;
-
-  setValue(token: string) {
+  constructor(@Optional() token: string) {
     this.token = token;
+  }
+
+  /**
+   * Create new instance of wrapper.
+   * @param {string} rawToken
+   * @returns {NbAuthToken}
+   */
+  create(rawToken: string): NbAuthSimpleToken {
+    return new NbAuthSimpleToken(rawToken);
   }
 
   /**
@@ -53,11 +68,14 @@ export class NbAuthSimpleToken {
 export class NbAuthJWTToken extends NbAuthSimpleToken {
 
   /**
-   * TODO: check for this.token to be not null
    * Returns payload object
    * @returns any
    */
   getPayload(): any {
+    if (!this.token) {
+      throw new Error('Token can not be null.');
+    }
+
     const parts = this.token.split('.');
 
     if (parts.length !== 3) {
@@ -123,18 +141,12 @@ export class NbTokenService {
     token: {
       key: 'auth_app_token',
 
-      getter: (): Observable<NbAuthSimpleToken> => {
-        const tokenValue = localStorage.getItem(this.getConfigValue('token.key'));
-        this.tokenWrapper.setValue(tokenValue);
-        return observableOf(this.tokenWrapper);
+      getter: (): Observable<NbAuthToken> => {
+        const rawToken = localStorage.getItem(this.getConfigValue('token.key'));
+        return observableOf(this.tokenWrapper.create(rawToken));
       },
 
-      // TODO is it possible to unify interface
-      setter: (token: string | NbAuthSimpleToken): Observable<null> => {
-        if (!(token instanceof NbAuthSimpleToken)) {
-          this.tokenWrapper.setValue(token);
-          token = this.tokenWrapper;
-        }
+      setter: (token: NbAuthToken): Observable<null> => {
         localStorage.setItem(this.getConfigValue('token.key'), token.toString());
         return observableOf(null);
       },
@@ -147,13 +159,15 @@ export class NbTokenService {
   };
 
   protected config: any = {};
-  protected token$: BehaviorSubject<any> = new BehaviorSubject(null);
+  protected token$: BehaviorSubject<NbAuthToken> = new BehaviorSubject(null);
 
   constructor(@Inject(NB_AUTH_OPTIONS_TOKEN) protected options: any,
-              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected tokenWrapper: NbAuthSimpleToken) {
+              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected tokenWrapper: NbAuthToken) {
     this.setConfig(options);
 
-    this.get().subscribe(token => this.publishToken(token));
+    this.get().subscribe(token => {
+      this.publishToken(token)
+    });
   }
 
   setConfig(config: any): void {
@@ -172,10 +186,10 @@ export class NbTokenService {
    * @returns {Observable<any>}
    */
   set(rawToken: string): Observable<null> {
-    return this.getConfigValue('token.setter')(rawToken)
+    return this.getConfigValue('token.setter')(this.tokenWrapper.create(rawToken))
       .pipe(
         switchMapTo(this.fetch()),
-        tap((token: NbAuthSimpleToken) => {
+        tap((token: NbAuthToken) => {
           this.publishToken(token);
         }),
       );
@@ -183,17 +197,17 @@ export class NbTokenService {
 
   /**
    * Returns observable of current token
-   * @returns {Observable<NbAuthSimpleToken>}
+   * @returns {Observable<NbAuthToken>}
    */
-  get(): Observable<NbAuthSimpleToken> {
+  get(): Observable<NbAuthToken> {
     return this.fetch();
   }
 
   /**
    * Publishes token when it changes.
-   * @returns {Observable<NbAuthSimpleToken>}
+   * @returns {Observable<NbAuthToken>}
    */
-  tokenChange(): Observable<NbAuthSimpleToken> {
+  tokenChange(): Observable<NbAuthToken> {
     return this.token$.pipe(share());
   }
 
@@ -203,22 +217,21 @@ export class NbTokenService {
    * Note: don't forget to subscribe
    * @returns {Observable<any>}
    */
-  clear(): Observable<NbAuthSimpleToken> {
+  clear(): Observable<NbAuthToken> {
     return this.getConfigValue('token.deleter')()
       .pipe(
         switchMapTo(this.fetch()),
-        tap((token: NbAuthSimpleToken) => {
-          token.setValue(null);
+        tap((token: NbAuthToken) => {
           this.publishToken(token);
         }),
       );
   }
 
-  private fetch(): Observable<NbAuthSimpleToken> {
+  private fetch(): Observable<NbAuthToken> {
     return this.getConfigValue('token.getter')();
   }
 
-  protected publishToken(token: NbAuthSimpleToken): void {
+  protected publishToken(token: NbAuthToken): void {
     this.token$.next(token);
   }
 }

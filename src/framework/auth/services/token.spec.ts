@@ -103,20 +103,15 @@ describe('token-service: default config', () => {
 });
 
 describe('auth JWT token', () => {
-  const validJWTToken = new NbAuthJWTToken();
   // tslint:disable
-  validJWTToken.setValue('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-  const emptyJWTToken = new NbAuthJWTToken();
-  emptyJWTToken.setValue('..');
+  const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+  const emptyJWTToken = new NbAuthJWTToken('..');
 
-  const invakidJWTToken = new NbAuthJWTToken();
-  invakidJWTToken.setValue('.');
+  const invakidJWTToken = new NbAuthJWTToken('.');
 
-  const noExpJWTToken = new NbAuthJWTToken();
-  noExpJWTToken.setValue('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+  const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
 
-  const expiredJWTToken = new NbAuthJWTToken();
-  expiredJWTToken.setValue('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+  const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
   // tslint:enable
 
   it('getPayload success', () => {
@@ -156,7 +151,7 @@ describe('auth JWT token', () => {
 
   it('isValid fail', () => {
     // without token
-    expect(new NbAuthJWTToken().isValid()).toBeFalsy();
+    expect(new NbAuthJWTToken('').isValid()).toBeFalsy();
 
     // expired date
     expect(expiredJWTToken.isValid()).toBeFalsy();
