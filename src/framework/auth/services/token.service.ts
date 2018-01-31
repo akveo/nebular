@@ -36,6 +36,14 @@ export class NbAuthSimpleToken {
   isValid(): boolean {
     return !!this.token;
   }
+
+  /**
+   * Validate value and convert to string, if value is not valid return empty string
+   * @returns {string}
+   */
+  toString(): string {
+    return !!this.token ? this.token : '';
+  }
 }
 
 /**
@@ -123,8 +131,11 @@ export class NbTokenService {
 
       // TODO is it possible to unify interface
       setter: (token: string | NbAuthSimpleToken): Observable<null> => {
-        const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
-        localStorage.setItem(this.getConfigValue('token.key'), raw);
+        if (!(token instanceof NbAuthSimpleToken)) {
+          this.tokenWrapper.setValue(token);
+          token = this.tokenWrapper;
+        }
+        localStorage.setItem(this.getConfigValue('token.key'), token.toString());
         return observableOf(null);
       },
 
@@ -134,6 +145,7 @@ export class NbTokenService {
       },
     },
   };
+
   protected config: any = {};
   protected token$: BehaviorSubject<any> = new BehaviorSubject(null);
 
