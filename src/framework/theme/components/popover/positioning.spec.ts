@@ -6,10 +6,6 @@
 
 import { NbPlacement, NbPositioningHelper } from './positioning.helper';
 
-/**
- * TODO
- * add tests with page offset.
- * */
 describe('positioning-helper', () => {
   const placedRect: ClientRect = {
     top: 50,
@@ -51,5 +47,45 @@ describe('positioning-helper', () => {
     const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPlacement.RIGHT);
     expect(position.top).toEqual(125);
     expect(position.left).toEqual(210);
+  });
+
+  it('correctly locates top placement when view port has offset', () => {
+    spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+    spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPlacement.TOP);
+
+    expect(position.top).toEqual(1040);
+    expect(position.left).toEqual(1125);
+  });
+
+  it('correctly locates bottom placement when view port has offset', () => {
+    spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+    spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPlacement.BOTTOM);
+
+    expect(position.top).toEqual(1210);
+    expect(position.left).toEqual(1125);
+  });
+
+  it('correctly locates left placement when view port has offset', () => {
+    spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+    spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPlacement.LEFT);
+
+    expect(position.top).toEqual(1125);
+    expect(position.left).toEqual(1040);
+  });
+
+  it('correctly locates right placement when view port has offset', () => {
+    spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+    spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPlacement.RIGHT);
+
+    expect(position.top).toEqual(1125);
+    expect(position.left).toEqual(1210);
   });
 });

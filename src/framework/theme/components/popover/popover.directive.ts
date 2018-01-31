@@ -249,7 +249,7 @@ export class NbPopoverDirective implements OnDestroy {
 
   private adjustPlacement(positioned: ClientRect, host: ClientRect, placement: NbPlacement) {
     if (this.autoAdjust) {
-      return NbPositioningHelper.adjust(positioned, host, placement);
+      // return NbPositioningHelper.adjust(positioned, host, placement);
     }
 
     return placement;
