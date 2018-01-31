@@ -8,6 +8,8 @@ import { browser, element, by } from 'protractor';
 import { hasClass } from './e2e-helper';
 import { protractor } from 'protractor/built/ptor';
 
+const EC = protractor.ExpectedConditions;
+
 describe('nb-search', () => {
 
   beforeEach((done) => {
@@ -76,7 +78,11 @@ describe('nb-search', () => {
   it('should display default hint', () => {
     element(by.css('.start-search')).click();
     expect(element(by.css('.show .search span'))).toBeTruthy();
-    expect(element(by.css('.show .search span')).getText()).toContain('Hit enter to search');
+
+    const spanEl = element(by.css('.show .search span'));
+    const text = 'Hit enter to search';
+    browser.wait(EC.textToBePresentInElement(spanEl, text), 5000);
+    expect(spanEl.getText()).toContain(text);
   });
 
   it('should display default placeholder', () => {
@@ -94,7 +100,11 @@ describe('nb-search-customized', () => {
   it('should display customised hint', () => {
     element(by.css('.start-search')).click();
     expect(element(by.css('.show .search span'))).toBeTruthy();
-    expect(element(by.css('.show .search span')).getText()).toContain('Custom hint');
+
+    const spanEl = element(by.css('.show .search span'));
+    const text = 'Custom hint';
+    browser.wait(EC.textToBePresentInElement(spanEl, text), 5000);
+    expect(spanEl.getText()).toContain(text);
   });
 
   it('should display customised placeholder', () => {
