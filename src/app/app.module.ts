@@ -182,7 +182,7 @@ const NB_TEST_COMPONENTS = [
   ],
   providers: [
     AuthGuard,
-    { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
+    { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
   ],
   bootstrap: [NbAppComponent],
