@@ -13,7 +13,7 @@ Each provider has a list of configurations available with the default values set
   
 ## Configuration
 
-As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is all set by default, so please take a look at the [default configuration values]((#/docs/auth/email--password-provider) before modifying them.
+As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is configured by default, please take a look at the [default configuration values](#/docs/auth/nbemailpassauthprovider) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -38,7 +38,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 
-Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/email--password-provider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 {

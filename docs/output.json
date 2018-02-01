@@ -264,6 +264,26 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "module",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateToken",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         }
       ],
       "name": "NbEmailPassAuthProvider",

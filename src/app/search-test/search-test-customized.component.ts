@@ -9,12 +9,16 @@ import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-search-test',
+  selector: 'nb-search-test-customized',
   template: `
     <nb-layout>
       <nb-layout-header fixed>
         <a class="navbar-brand" href="#">ngx-admin</a>
-        <nb-search type="rotate-layout" tag="header-search"></nb-search>
+        <nb-search id="customized-search"
+                   type="rotate-layout"
+                   tag="header-search-customized"
+                   hint="Custom hint"
+                   placeholder="Type here."></nb-search>
       </nb-layout-header>
       <nb-layout-column>
         <nb-card>
@@ -65,7 +69,7 @@ import { NbSearchService } from '@nebular/theme';
     </nb-layout>
   `,
 })
-export class NbSearchTestComponent implements OnInit {
+export class NbSearchTestCustomizedComponent implements OnInit {
 
   constructor(private searchService: NbSearchService) {
   }

@@ -4,14 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
 
 import { NbMenuService } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
-
-import { switchMap } from 'rxjs/operators/switchMap';
 
 @Component({
   selector: 'ngd-page',
@@ -33,31 +30,16 @@ import { switchMap } from 'rxjs/operators/switchMap';
      </nb-card>
   `,
 })
-export class NgdPageComponent implements OnDestroy, OnInit {
+export class NgdPageComponent implements OnDestroy {
   currentItem: any;
   isHeader: boolean = true;
 
-  private routerSubscription: Subscription;
-  private initialSubscription: Subscription;
+  private menuSubscription: Subscription;
 
   constructor(private menuService: NbMenuService,
-              private router: Router,
-              private titleService: Title) { }
+              private titleService: Title) {
 
-  ngOnInit() {
-
-    this.initialSubscription = this.menuService.getSelectedItem('leftMenu')
-      .subscribe((event: {tag: string, item: any}) => {
-        if (event && event.item && event.item.data) {
-          this.setupPage(event);
-        }
-      });
-
-    this.routerSubscription = this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .pipe(
-        switchMap(event => this.menuService.getSelectedItem('leftMenu')),
-      )
+    this.menuSubscription = this.menuService.onItemSelect()
       .subscribe((event: {tag: string, item: any}) => {
         if (event && event.item && event.item.data) {
           this.setupPage(event);
@@ -76,7 +58,6 @@ export class NgdPageComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy() {
-    this.initialSubscription.unsubscribe();
-    this.routerSubscription.unsubscribe();
+    this.menuSubscription.unsubscribe();
   }
 }
