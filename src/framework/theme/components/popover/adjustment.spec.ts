@@ -3,13 +3,13 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { NbAdjustment, NbAdjustmentHelper } from './adjustment.helper';
+import { NbAdjustmentHelper, NbAdjustmentStrategy } from './adjustment.helper';
 import { NbPlacement } from './positioning.helper';
 
 /**
  * TODO
- * window mocking required.
- * */
+ * check window offset
+* */
 describe('adjustment-helper', () => {
   const placedRect: ClientRect = {
     top: 50,
@@ -56,21 +56,26 @@ describe('adjustment-helper', () => {
   };
 
   describe('clockwise strategy', () => {
-    const adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+    const adjustmentStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
 
     it('adjust top to right', () => {
-      const placement = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, NbPlacement.TOP, adjustment);
-      expect(placement).toEqual(NbPlacement.RIGHT);
+      const adjuster = new NbAdjustmentHelper(placedRect, hostRect.topLeft, NbPlacement.TOP);
+      const adjustment = adjuster.adjust(adjustmentStrategy);
+
+      expect(adjustment.placement).toEqual(NbPlacement.RIGHT);
+      expect(adjustment.position.top).toEqual(35);
+      expect(adjustment.position.left).toEqual(120);
     });
 
     it('adjust top to bottom', () => {
-      const placement = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, NbPlacement.TOP, adjustment);
-      expect(placement).toEqual(NbPlacement.BOTTOM);
+      // const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, NbPlacement.TOP, adjustmentStrategy);
+      //
+      // expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+      // expect(adjustment.position.top).toEqual(120);
+      // expect(adjustment.position.left).toEqual(975);
     });
 
     it('adjust top to left', () => {
-      const placement = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, NbPlacement.TOP, adjustment);
-      expect(placement).toEqual(NbPlacement.BOTTOM);
     });
 
     it('can\'t find adjustment from top', () => {
@@ -107,57 +112,6 @@ describe('adjustment-helper', () => {
     });
 
     it('adjust left to bottom', () => {
-    });
-
-    it('can\'t find adjustment from left', () => {
-    });
-  });
-
-  describe('adjust with counterclockwise strategy', () => {
-
-    it('adjust top to left', () => {
-    });
-
-    it('adjust top to bottom', () => {
-    });
-
-    it('adjust top to right', () => {
-    });
-
-    it('can\'t find adjustment from top', () => {
-    });
-
-    it('adjust right to top', () => {
-    });
-
-    it('adjust right to left', () => {
-    });
-
-    it('adjust right to bottom', () => {
-    });
-
-    it('can\'t find adjustment from right', () => {
-    });
-
-    it('adjust bottom to right', () => {
-    });
-
-    it('adjust bottom to top', () => {
-    });
-
-    it('adjust bottom to left', () => {
-    });
-
-    it('can\'t find adjustment from bottom', () => {
-    });
-
-    it('adjust left to bottom', () => {
-    });
-
-    it('adjust left to right', () => {
-    });
-
-    it('adjust left to top', () => {
     });
 
     it('can\'t find adjustment from left', () => {

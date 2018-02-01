@@ -9,6 +9,7 @@ import { NbPlacement, NbPosition, NbPositioningHelper } from './positioning.help
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
+import { NbAdjustment, NbAdjustmentHelper, NbAdjustmentStrategy } from './adjustment.helper';
 
 /**
  * Popover can be one of the following types:
@@ -65,8 +66,8 @@ export class NbPopoverDirective implements OnDestroy {
    * TODO
    * add documentation.
    * */
-  @Input('nbPopoverAutoAdjust')
-  autoAdjust: boolean = true;
+  @Input('nbPopoverAdjustmentStrategy')
+  adjustmentStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
 
   /**
    * Returns true if popover already shown.
@@ -218,8 +219,7 @@ export class NbPopoverDirective implements OnDestroy {
     const hostRect = this.element.nativeElement.getBoundingClientRect();
     const containerRect = this.containerElement.getBoundingClientRect();
 
-    const placement = this.adjustPlacement(containerRect, hostRect, this.placement);
-    const position = NbPositioningHelper.calcPosition(containerRect, hostRect, placement);
+    const { placement, position } = this.adjust(containerRect, hostRect);
 
     this.patchPopoverPlacement(placement);
     this.patchPopoverPosition(position);
@@ -247,11 +247,14 @@ export class NbPopoverDirective implements OnDestroy {
     this.container.positionLeft = position.left;
   }
 
-  private adjustPlacement(positioned: ClientRect, host: ClientRect, placement: NbPlacement) {
-    if (this.autoAdjust) {
-      // return NbPositioningHelper.adjust(positioned, host, placement);
+  private adjust(positioned: ClientRect, host: ClientRect): NbAdjustment {
+    if (this.adjustmentStrategy) {
+      return NbAdjustmentHelper.adjust(positioned, host, this.placement, this.adjustmentStrategy);
     }
 
-    return placement;
+    return {
+      position: NbPositioningHelper.calcPosition(positioned, host, this.placement),
+      placement: this.placement,
+    };
   }
 }
