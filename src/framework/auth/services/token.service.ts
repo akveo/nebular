@@ -1,4 +1,5 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
@@ -10,7 +11,6 @@ import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.opti
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 
 export interface NbAuthToken {
-  create(rawToken): NbAuthToken;
   getValue(): string;
   isValid(): boolean;
   toString(): string;
@@ -19,21 +19,9 @@ export interface NbAuthToken {
 /**
  * Wrapper for simple (text) token
  */
-@Injectable()
 export class NbAuthSimpleToken implements NbAuthToken {
-  readonly token: string;
 
-  constructor(@Optional() token: string) {
-    this.token = token;
-  }
-
-  /**
-   * Create new instance of wrapper.
-   * @param {string} rawToken
-   * @returns {NbAuthToken}
-   */
-  create(rawToken: string): NbAuthSimpleToken {
-    return new NbAuthSimpleToken(rawToken);
+  constructor(readonly token: string) {
   }
 
   /**
@@ -64,7 +52,6 @@ export class NbAuthSimpleToken implements NbAuthToken {
 /**
  * Wrapper for JWT token with additional methods.
  */
-@Injectable()
 export class NbAuthJWTToken extends NbAuthSimpleToken {
 
   /**
@@ -115,6 +102,10 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
   }
 }
 
+export interface NbTokenWrapperClass {
+  new (raw: string): NbAuthToken
+}
+
 /**
  * Nebular token service. Provides access to the stored token.
  * By default returns NbAuthSimpleToken instance,
@@ -143,7 +134,7 @@ export class NbTokenService {
 
       getter: (): Observable<NbAuthToken> => {
         const rawToken = localStorage.getItem(this.getConfigValue('token.key'));
-        return observableOf(this.tokenWrapper.create(rawToken));
+        return observableOf(new this.TokenWrapperClass(rawToken));
       },
 
       setter: (token: NbAuthToken): Observable<null> => {
@@ -162,7 +153,7 @@ export class NbTokenService {
   protected token$: BehaviorSubject<NbAuthToken> = new BehaviorSubject(null);
 
   constructor(@Inject(NB_AUTH_OPTIONS_TOKEN) protected options: any,
-              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected tokenWrapper: NbAuthToken) {
+              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected TokenWrapperClass: NbTokenWrapperClass) {
     this.setConfig(options);
 
     this.get().subscribe(token => {
@@ -186,7 +177,7 @@ export class NbTokenService {
    * @returns {Observable<any>}
    */
   set(rawToken: string): Observable<null> {
-    return this.getConfigValue('token.setter')(this.tokenWrapper.create(rawToken))
+    return this.getConfigValue('token.setter')(new this.TokenWrapperClass(rawToken))
       .pipe(
         switchMapTo(this.fetch()),
         tap((token: NbAuthToken) => {

@@ -17,7 +17,7 @@ describe('token-service: default config', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: NB_AUTH_OPTIONS_TOKEN, useValue: {}},
-        {provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken},
+        {provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthSimpleToken},
         NbTokenService,
       ],
     });
