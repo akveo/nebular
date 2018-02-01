@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit,
+  Renderer2, ViewChild, ViewContainerRef, OnInit, Inject,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
@@ -17,6 +17,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
+import { nbWindowToken } from '../../theme.options';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -285,6 +286,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
   private alive: boolean = true;
 
   constructor(
+    @Inject(nbWindowToken) protected window: Window,
     protected themeService: NbThemeService,
     protected spinnerService: NbSpinnerService,
     protected componentFactoryResolver: ComponentFactoryResolver,
@@ -331,7 +333,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.spinnerService.load();
 
     // trigger first time so that after the change we have the initial value
-    this.themeService.changeWindowWidth(window.innerWidth);
+    this.themeService.changeWindowWidth(this.window.innerWidth);
   }
 
   ngAfterViewInit() {

@@ -8,6 +8,7 @@ import { share } from 'rxjs/operators/share';
 
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.options';
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
+import { nbLocalStorageToken } from '../../theme';
 
 /**
  * Wrapper for simple (text) token
@@ -100,19 +101,19 @@ export class NbTokenService {
       key: 'auth_app_token',
 
       getter: (): Observable<NbAuthSimpleToken> => {
-        const tokenValue = localStorage.getItem(this.getConfigValue('token.key'));
+        const tokenValue = this.localStorage.getItem(this.getConfigValue('token.key'));
         this.tokenWrapper.setValue(tokenValue);
         return observableOf(this.tokenWrapper);
       },
 
       setter: (token: string | NbAuthSimpleToken): Observable<null> => {
         const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
-        localStorage.setItem(this.getConfigValue('token.key'), raw);
+        this.localStorage.setItem(this.getConfigValue('token.key'), raw);
         return observableOf(null);
       },
 
       deleter: (): Observable<null> => {
-        localStorage.removeItem(this.getConfigValue('token.key'));
+        this.localStorage.removeItem(this.getConfigValue('token.key'));
         return observableOf(null);
       },
     },
@@ -120,7 +121,8 @@ export class NbTokenService {
   protected config: any = {};
   protected token$: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(@Inject(NB_AUTH_OPTIONS_TOKEN) protected options: any,
+  constructor(@Inject(nbLocalStorageToken) protected localStorage: Storage,
+              @Inject(NB_AUTH_OPTIONS_TOKEN) protected options: any,
               @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected tokenWrapper: NbAuthSimpleToken) {
     this.setConfig(options);
 
