@@ -6,6 +6,7 @@
 
 import { browser, element, by } from 'protractor';
 import { colors, sizes } from './cards-shared';
+import { waitFor } from './e2e-helper';
 
 let cards: any[] = [];
 
@@ -57,6 +58,7 @@ describe('nb-card', () => {
   cards.forEach(c => {
 
     it(`should display ${c.colorKey} card with ${c.size} size`, () => {
+      waitFor(`nb-card:nth-child(${c.elementNumber})`);
       expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getText()).toEqual('Header');
 
