@@ -222,7 +222,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
 
-    combineLatest([
+    this.activateSearchSubscription = combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchActivate(),
     ])
@@ -241,7 +241,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         componentRef.changeDetectorRef.detectChanges();
       });
 
-    combineLatest([
+    this.deactivateSearchSubscription = combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchDeactivate(),
     ])
