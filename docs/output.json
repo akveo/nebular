@@ -2657,13 +2657,6 @@
               "description": ""
             },
             {
-              "name": "componentFactoryResolver",
-              "type": "ComponentFactoryResolver",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
               "name": "router",
               "type": "Router",
               "required": null,
@@ -2695,26 +2688,6 @@
           "name": "connectToSearchField",
           "type": [
             "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "component",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "createAttachedSearch",
-          "type": [
-            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
