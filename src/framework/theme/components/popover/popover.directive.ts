@@ -66,8 +66,8 @@ export class NbPopoverDirective implements OnDestroy {
    * TODO
    * add documentation.
    * */
-  @Input('nbPopoverAdjustmentStrategy')
-  adjustmentStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
+  @Input('nbPopoverAdjust')
+  adjustStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
 
   /**
    * Returns true if popover already shown.
@@ -248,8 +248,8 @@ export class NbPopoverDirective implements OnDestroy {
   }
 
   private adjust(positioned: ClientRect, host: ClientRect): NbAdjustment {
-    if (this.adjustmentStrategy) {
-      return NbAdjustmentHelper.adjust(positioned, host, this.placement, this.adjustmentStrategy);
+    if (this.adjustStrategy) {
+      return NbAdjustmentHelper.adjust(positioned, host, this.placement, this.adjustStrategy);
     }
 
     return {

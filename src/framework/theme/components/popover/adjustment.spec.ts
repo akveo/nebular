@@ -3,13 +3,14 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+
 import { NbAdjustmentHelper, NbAdjustmentStrategy } from './adjustment.helper';
 import { NbPlacement } from './positioning.helper';
 
 /**
  * TODO
  * check window offset
-* */
+ * */
 describe('adjustment-helper', () => {
   const placedRect: ClientRect = {
     top: 50,
@@ -56,65 +57,173 @@ describe('adjustment-helper', () => {
   };
 
   describe('clockwise strategy', () => {
-    const adjustmentStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
+    const strategy = NbAdjustmentStrategy.CLOCKWISE;
 
-    it('adjust top to right', () => {
-      const adjuster = new NbAdjustmentHelper(placedRect, hostRect.topLeft, NbPlacement.TOP);
-      const adjustment = adjuster.adjust(adjustmentStrategy);
+    describe('top placement', () => {
+      const placement = NbPlacement.TOP;
 
-      expect(adjustment.placement).toEqual(NbPlacement.RIGHT);
-      expect(adjustment.position.top).toEqual(35);
-      expect(adjustment.position.left).toEqual(120);
-    });
+      it('adjust top to right when host in top left corner', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
 
-    it('adjust top to bottom', () => {
-      // const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, NbPlacement.TOP, adjustmentStrategy);
-      //
-      // expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
-      // expect(adjustment.position.top).toEqual(120);
-      // expect(adjustment.position.left).toEqual(975);
-    });
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
-    it('adjust top to left', () => {
-    });
+        expect(adjustment.placement).toEqual(NbPlacement.RIGHT);
+        expect(adjustment.position.top).toEqual(35);
+        expect(adjustment.position.left).toEqual(120);
+      });
 
-    it('can\'t find adjustment from top', () => {
-    });
+      it('adjust top to bottom when host in top right corner', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
 
-    it('adjust right to bottom', () => {
-    });
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-    it('adjust right to left', () => {
-    });
+        expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+        expect(adjustment.position.top).toEqual(120);
+        expect(adjustment.position.left).toEqual(1025);
+      });
 
-    it('adjust right to top', () => {
-    });
+      it('doesn\'t adjust top when in bottom right corner', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
 
-    it('can\'t find adjustment from right', () => {
-    });
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
 
-    it('adjust bottom to left', () => {
-    });
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(940);
+        expect(adjustment.position.left).toEqual(1025);
+      });
 
-    it('adjust bottom to top', () => {
-    });
+      it('doesn\'t adjust top when in bottom left corner', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
 
-    it('adjust bottom to right', () => {
-    });
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
 
-    it('can\'t find adjustment from bottom', () => {
-    });
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(940);
+        expect(adjustment.position.left).toEqual(35);
+      });
 
-    it('adjust left to top', () => {
-    });
+      it('adjust top to left when host in the right part of the narrow rectangular view port', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(120);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
 
-    it('adjust left to right', () => {
-    });
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-    it('adjust left to bottom', () => {
-    });
+        expect(adjustment.placement).toEqual(NbPlacement.LEFT);
+        expect(adjustment.position.top).toEqual(35);
+        expect(adjustment.position.left).toEqual(940);
+      });
 
-    it('can\'t find adjustment from left', () => {
-    });
+      it('doesn\'t change position when there are no suitable positions at all', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(120);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(120);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(-50);
+        expect(adjustment.position.left).toEqual(35);
+      });
+
+      it('adjust top to right when host in top left corner with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.RIGHT);
+        expect(adjustment.position.top).toEqual(1035);
+        expect(adjustment.position.left).toEqual(1120);
+      });
+
+      it('adjust top to bottom when host in top right corner with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+        expect(adjustment.position.top).toEqual(1120);
+        expect(adjustment.position.left).toEqual(2025);
+      });
+
+      it('doesn\'t adjust top when in bottom right corner with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(1940);
+        expect(adjustment.position.left).toEqual(2025);
+      });
+
+      it('doesn\'t adjust top when in bottom left corner with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(1940);
+        expect(adjustment.position.left).toEqual(1035);
+      });
+
+      it('adjust top to left when host in the right part of the narrow rectangular view port with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(120);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.LEFT);
+        expect(adjustment.position.top).toEqual(1035);
+        expect(adjustment.position.left).toEqual(1940);
+      });
+
+      it('doesn\'t change position when there are no suitable positions at all with page offset', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(120);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(120);
+        spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
+        spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.TOP);
+        expect(adjustment.position.top).toEqual(950);
+        expect(adjustment.position.left).toEqual(1035);
+      });
+    })
+  });
+
+  describe('counterclockwise strategy', () => {
+    const strategy = NbAdjustmentStrategy.COUNTERCLOCKWISE;
+
+    describe('top placement', () => {
+      const placement = NbPlacement.TOP;
+
+      it('adjust top to bottom when host in top left corner', () => {
+        spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
+        spyOnProperty(window, 'innerWidth', 'get').and.returnValue(1110);
+
+        const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+
+        expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+        expect(adjustment.position.top).toEqual(120);
+        expect(adjustment.position.left).toEqual(35);
+      });
+    })
   });
 });

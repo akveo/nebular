@@ -7,48 +7,67 @@ export class NbAdjustment {
 
 export enum NbAdjustmentStrategy {
   CLOCKWISE = 'clockwise',
+  COUNTERCLOCKWISE = 'counterclockwise',
 }
 
-const NB_ADJUSTMENT_STRATEGY_PLACEMENT_ORDER = {
+/**
+ * Describes the bypass order of the {@link NbPlacement} in the {@link NbAdjustmentStrategy}.
+ * */
+const NB_ORDERED_PLACEMENTS = {
   [NbAdjustmentStrategy.CLOCKWISE]: [
     NbPlacement.TOP,
     NbPlacement.RIGHT,
     NbPlacement.BOTTOM,
     NbPlacement.LEFT,
   ],
+
+  [NbAdjustmentStrategy.COUNTERCLOCKWISE]: [
+    NbPlacement.TOP,
+    NbPlacement.LEFT,
+    NbPlacement.BOTTOM,
+    NbPlacement.RIGHT,
+  ],
 };
 
 export class NbAdjustmentHelper {
 
-  constructor(private placed: ClientRect,
-              private host: ClientRect,
-              private placement: NbPlacement) {
-  }
-
-  adjust(adjustmentStrategy: NbAdjustmentStrategy): NbAdjustment {
-    const possibleAdjustments: NbAdjustment[] = this.calcPossibleAdjustments(adjustmentStrategy);
-    return this.chooseBestAdjustment(possibleAdjustments);
-  }
-
-  private calcPossibleAdjustments(adjustment: NbAdjustmentStrategy): NbAdjustment[] {
-    const placementOrder: NbPlacement[] = NB_ADJUSTMENT_STRATEGY_PLACEMENT_ORDER[adjustment];
-    const pos = placementOrder.findIndex(pl => pl === this.placement);
-    const start = placementOrder.splice(pos, 1);
-    const orderedPlacements = placementOrder.concat(...start);
-    return orderedPlacements.map(pl => ({
-      position: NbPositioningHelper.calcPosition(this.placed, this.host, pl),
+  /**
+   * Calculated {@link NbAdjustment} based on placed element, host element,
+   * placed element placement and adjustment strategy.
+   * */
+  static adjust(placed: ClientRect, host: ClientRect, placement: NbPlacement, strategy: NbAdjustmentStrategy): NbAdjustment {
+    const placements = NB_ORDERED_PLACEMENTS[strategy].slice();
+    const ordered = NbAdjustmentHelper.orderPlacements(placement, placements);
+    const possible = ordered.map(pl => ({
+      position: NbPositioningHelper.calcPosition(placed, host, pl),
       placement: pl,
     }));
+
+    return NbAdjustmentHelper.chooseBest(placed, possible);
   }
 
-  private chooseBestAdjustment(possibleAdjustment: NbAdjustment[]): NbAdjustment {
-    return possibleAdjustment.find(adj => this.inViewPort(adj)) || possibleAdjustment.pop();
+  /**
+   * Searches first adjustment which doesn't go beyond.
+   * */
+  private static chooseBest(placed: ClientRect, possible: NbAdjustment[]): NbAdjustment {
+    return possible.find(adjust => NbAdjustmentHelper.inViewPort(placed, adjust)) || possible.shift();
   }
 
-  private inViewPort(adjustment: NbAdjustment): boolean {
-    return adjustment.position.top > 0 &&
-      adjustment.position.left > 0 &&
-      adjustment.position.top + this.placed.height < window.innerHeight &&
-      adjustment.position.left + this.placed.width < window.innerWidth;
+  /**
+   * Finds out is adjustment doesn't go beyond.
+   * */
+  private static inViewPort(placed: ClientRect, adjustment: NbAdjustment): boolean {
+    return adjustment.position.top - window.pageYOffset > 0 && adjustment.position.left - window.pageXOffset > 0 &&
+      adjustment.position.top + placed.height < window.innerHeight + window.pageYOffset &&
+      adjustment.position.left + placed.width < window.innerWidth + window.pageXOffset;
+  }
+
+  /**
+   * Loop placements list to make this.placement start point.
+   * */
+  private static orderPlacements(placement: NbPlacement, placements: NbPlacement[]): NbPlacement[] {
+    const index = placements.indexOf(placement);
+    const start = placements.splice(index, placements.length);
+    return start.concat(...placements);
   }
 }

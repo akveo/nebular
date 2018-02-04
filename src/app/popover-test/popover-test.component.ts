@@ -122,20 +122,16 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
           <nb-card-body>
             <button class="btn btn-outline-secondary"
                     nbPopover="Left Popover!"
-                    nbPopoverPlacement="left"
-                    [nbPopoverAutoAdjust]="false">
+                    nbPopoverPlacement="left">
               Left
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom"
-                    [nbPopoverAutoAdjust]="false">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom" >
               Bottom
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top"
-                    [nbPopoverAutoAdjust]="false">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top" >
               Top
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right"
-                    [nbPopoverAutoAdjust]="false">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right" >
               Right
             </button>
           </nb-card-body>
