@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAdjustmentHelper, NbAdjustmentStrategy } from './adjustment.helper';
+import { NbAdjustmentHelper, NbAdjustment } from './adjustment.helper';
 import { NbPlacement } from './positioning.helper';
 
 /**
@@ -57,7 +57,7 @@ describe('adjustment-helper', () => {
   };
 
   describe('clockwise strategy', () => {
-    const strategy = NbAdjustmentStrategy.CLOCKWISE;
+    const strategy = NbAdjustment.CLOCKWISE;
 
     describe('top placement', () => {
       const placement = NbPlacement.TOP;
@@ -209,7 +209,7 @@ describe('adjustment-helper', () => {
   });
 
   describe('counterclockwise strategy', () => {
-    const strategy = NbAdjustmentStrategy.COUNTERCLOCKWISE;
+    const strategy = NbAdjustment.COUNTERCLOCKWISE;
 
     describe('top placement', () => {
       const placement = NbPlacement.TOP;

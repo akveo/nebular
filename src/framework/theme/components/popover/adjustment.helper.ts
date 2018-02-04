@@ -1,27 +1,33 @@
-import { NbPlacement, NbPosition, NbPositioningHelper } from './positioning.helper';
+import { NbPlacement, NbPositioningHelper } from './positioning.helper';
 
-export class NbAdjustment {
-  position: NbPosition;
+export class NbPosition {
   placement: NbPlacement;
+  position: {
+    top: number;
+    left: number;
+  };
 }
 
-export enum NbAdjustmentStrategy {
+/**
+ * Adjustment strategies.
+ * */
+export enum NbAdjustment {
   CLOCKWISE = 'clockwise',
   COUNTERCLOCKWISE = 'counterclockwise',
 }
 
 /**
- * Describes the bypass order of the {@link NbPlacement} in the {@link NbAdjustmentStrategy}.
+ * Describes the bypass order of the {@link NbPlacement} in the {@link NbAdjustment}.
  * */
 const NB_ORDERED_PLACEMENTS = {
-  [NbAdjustmentStrategy.CLOCKWISE]: [
+  [NbAdjustment.CLOCKWISE]: [
     NbPlacement.TOP,
     NbPlacement.RIGHT,
     NbPlacement.BOTTOM,
     NbPlacement.LEFT,
   ],
 
-  [NbAdjustmentStrategy.COUNTERCLOCKWISE]: [
+  [NbAdjustment.COUNTERCLOCKWISE]: [
     NbPlacement.TOP,
     NbPlacement.LEFT,
     NbPlacement.BOTTOM,
@@ -32,11 +38,11 @@ const NB_ORDERED_PLACEMENTS = {
 export class NbAdjustmentHelper {
 
   /**
-   * Calculated {@link NbAdjustment} based on placed element, host element,
+   * Calculated {@link NbPosition} based on placed element, host element,
    * placed element placement and adjustment strategy.
    * */
-  static adjust(placed: ClientRect, host: ClientRect, placement: NbPlacement, strategy: NbAdjustmentStrategy): NbAdjustment {
-    const placements = NB_ORDERED_PLACEMENTS[strategy].slice();
+  static adjust(placed: ClientRect, host: ClientRect, placement: NbPlacement, adjustment: NbAdjustment): NbPosition {
+    const placements = NB_ORDERED_PLACEMENTS[adjustment].slice();
     const ordered = NbAdjustmentHelper.orderPlacements(placement, placements);
     const possible = ordered.map(pl => ({
       position: NbPositioningHelper.calcPosition(placed, host, pl),
@@ -49,15 +55,16 @@ export class NbAdjustmentHelper {
   /**
    * Searches first adjustment which doesn't go beyond.
    * */
-  private static chooseBest(placed: ClientRect, possible: NbAdjustment[]): NbAdjustment {
+  private static chooseBest(placed: ClientRect, possible: NbPosition[]): NbPosition {
     return possible.find(adjust => NbAdjustmentHelper.inViewPort(placed, adjust)) || possible.shift();
   }
 
   /**
-   * Finds out is adjustment doesn't go beyond.
+   * Finds out is adjustment doesn't go beyond of the view port.
    * */
-  private static inViewPort(placed: ClientRect, adjustment: NbAdjustment): boolean {
-    return adjustment.position.top - window.pageYOffset > 0 && adjustment.position.left - window.pageXOffset > 0 &&
+  private static inViewPort(placed: ClientRect, adjustment: NbPosition): boolean {
+    return adjustment.position.top - window.pageYOffset > 0 &&
+      adjustment.position.left - window.pageXOffset > 0 &&
       adjustment.position.top + placed.height < window.innerHeight + window.pageYOffset &&
       adjustment.position.left + placed.width < window.innerWidth + window.pageXOffset;
   }

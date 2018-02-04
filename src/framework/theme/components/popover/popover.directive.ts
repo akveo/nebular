@@ -5,11 +5,11 @@
  */
 
 import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, TemplateRef, Type } from '@angular/core';
-import { NbPlacement, NbPosition, NbPositioningHelper } from './positioning.helper';
+import { NbPlacement, NbPositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
-import { NbAdjustment, NbAdjustmentHelper, NbAdjustmentStrategy } from './adjustment.helper';
+import { NbPosition, NbAdjustmentHelper, NbAdjustment } from './adjustment.helper';
 
 /**
  * Popover can be one of the following types:
@@ -67,7 +67,7 @@ export class NbPopoverDirective implements OnDestroy {
    * add documentation.
    * */
   @Input('nbPopoverAdjust')
-  adjustStrategy: NbAdjustmentStrategy = NbAdjustmentStrategy.CLOCKWISE;
+  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Returns true if popover already shown.
@@ -242,18 +242,22 @@ export class NbPopoverDirective implements OnDestroy {
   /**
    * Set container position.
    * */
-  private patchPopoverPosition(position: NbPosition) {
-    this.container.positionTop = position.top;
-    this.container.positionLeft = position.left;
+  private patchPopoverPosition({ top: top, left: left }) {
+    this.container.positionTop = top;
+    this.container.positionLeft = left;
   }
 
-  private adjust(positioned: ClientRect, host: ClientRect): NbAdjustment {
-    if (this.adjustStrategy) {
-      return NbAdjustmentHelper.adjust(positioned, host, this.placement, this.adjustStrategy);
+  /**
+   * Checks if {@link NbPopoverDirective#adjustment} can be performed and runs it.
+   * If not, just calculates element position.
+   * */
+  private adjust(placed: ClientRect, host: ClientRect): NbPosition {
+    if (this.adjustment) {
+      return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment);
     }
 
     return {
-      position: NbPositioningHelper.calcPosition(positioned, host, this.placement),
+      position: NbPositioningHelper.calcPosition(placed, host, this.placement),
       placement: this.placement,
     };
   }
