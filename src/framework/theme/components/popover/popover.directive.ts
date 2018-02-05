@@ -4,12 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, TemplateRef,
+  Type,
+} from '@angular/core';
 import { NbPlacement, NbPositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbPosition, NbAdjustmentHelper, NbAdjustment } from './adjustment.helper';
+import { NbPopoverMode, NbTriggerHelper } from './trigger.helper';
 
 /**
  * Popover can be one of the following types:
@@ -48,26 +51,37 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * ```
  * */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements OnDestroy {
+export class NbPopoverDirective implements OnInit, OnDestroy {
 
   /**
    * Popover content which will be rendered in {@link NbPopoverComponent}.
+   * see {@link NbPopoverContent}
    * */
   @Input('nbPopover')
   content: NbPopoverContent;
 
   /**
    * Position will be calculated relatively host element based on the placement.
+   * see {@link NbPlacement}
    * */
   @Input('nbPopoverPlacement')
   placement: NbPlacement = NbPlacement.TOP;
 
   /**
-   * TODO
-   * add documentation.
+   * Container placement will be changes automatically based on this strategy if container can't fit view port.
+   * Set this property to null if you want to disable automatically adjustment.
+   * see {@link NbAdjustment} {@link NbAdjustmentHelper}
    * */
   @Input('nbPopoverAdjust')
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+
+  /**
+   * Describes when the container will be shown.
+   * Available options for now: 'click' and 'hover'
+   * see {@link NbPopoverMode}
+   * */
+  @Input('nbPopoverMode')
+  mode: NbPopoverMode = NbPopoverMode.CLICK;
 
   /**
    * Returns true if popover already shown.
@@ -85,6 +99,9 @@ export class NbPopoverDirective implements OnDestroy {
     return !this.containerRef;
   }
 
+  /**
+   * Is used for unsubscribe all subscriptions after component destructuring.
+   * */
   private alive: boolean = true;
 
   private containerRef: ComponentRef<NbPopoverComponent>;
@@ -93,11 +110,19 @@ export class NbPopoverDirective implements OnDestroy {
     return this.containerRef.instance;
   }
 
-  private get containerElement(): any {
+  private get containerElement(): HTMLElement {
     return this.containerRef.location.nativeElement;
   }
 
-  constructor(private element: ElementRef, private themeService: NbThemeService) {
+  private get hostElement(): HTMLElement {
+    return this.hostRef.nativeElement;
+  }
+
+  constructor(private hostRef: ElementRef, private themeService: NbThemeService) {
+  }
+
+  ngOnInit() {
+    this.registerTriggers();
   }
 
   ngOnDestroy() {
@@ -105,7 +130,7 @@ export class NbPopoverDirective implements OnDestroy {
   }
 
   /**
-   * Show popover if it isn't shown.
+   * Show popover if it is hidden.
    * */
   show() {
     if (this.isHidden) {
@@ -134,60 +159,43 @@ export class NbPopoverDirective implements OnDestroy {
   }
 
   /**
-   * Toggle popover on host element click.
-   *
-   * TODO
-   * Fix tslint to add capability make HostListener private
-   * */
-  @HostListener('click')
-  onClick() {
-    this.toggle();
-  }
-
-  /**
-   * Hide popover on document click.
-   * */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    if (this.isShown && !this.eventOnContainer(event) && !this.eventOnHost(event)) {
-      this.hide();
-    }
-  }
-
-  /**
    * Adjust popover position on window resize.
    * Window resize may change host element position, so popover relocation required.
+   *
+   * TODO
+   * Fix tslint to add capability make HostListener private.
    * */
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (this.isShown) {
-      this.relocate();
+      this.place();
     }
   }
 
   /**
-   * Checks that event was fired on popover container.
+   * Subscribe to the popover triggers created from the {@link NbPopoverDirective#mode}.
+   * see {@link NbTriggerHelper}
    * */
-  private eventOnContainer(event: Event) {
-    return this.containerElement.contains(event.target);
-  }
+  private registerTriggers() {
+    const { open, close } = NbTriggerHelper.createTrigger(this.hostElement, () => this.containerRef, this.mode);
 
-  /**
-   * Checks that event was fired on host element.
-   * */
-  private eventOnHost(event: Event) {
-    return this.element.nativeElement.contains(event.target);
+    open.pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.toggle());
+
+    close.pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.hide());
   }
 
   /**
    * Renders popover putting {@link NbPopoverComponent} in the top of {@link NbLayoutComponent}
-   * and positioning container based on {@link NbPopoverDirective#placement}.
+   * and positioning container based on {@link NbPopoverDirective#placement}
+   * and {@link NbPopoverDirective#adjustment}.
    * */
   private renderPopover() {
     this.themeService.appendToLayoutTop(NbPopoverComponent)
       .pipe(takeWhile(() => this.alive))
-      .subscribe((ref: ComponentRef<NbPopoverComponent>) => {
-        this.containerRef = ref;
+      .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
+        this.containerRef = containerRef;
         this.patchPopoverContent(this.content);
         /**
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
@@ -196,11 +204,12 @@ export class NbPopoverDirective implements OnDestroy {
          *
          * TODO
          * I don't think we have to call detectChanges each time we're using {@link NbThemeService#appendToLayoutTop}.
-         * Investigate, maybe we can create method in the NbThemeService
-         * which will call appendToLayoutTop and 'do' detectChanges instead of service client.
+         * Investigate, maybe we can create method in the {@link NbThemeService}
+         * which will call {@link NbThemeService#appendToLayoutTop} and 'do' detectChanges,
+         * instead of performing this call by service client.
          * */
         this.containerRef.changeDetectorRef.detectChanges();
-        this.relocate();
+        this.place();
       });
   }
 
@@ -213,16 +222,13 @@ export class NbPopoverDirective implements OnDestroy {
   }
 
   /**
-   * Locates {@link NbPopoverComponent} relatively host component based on the {@link NbPopoverDirective#placement}.
+   * Moves {@link NbPopoverComponent} relatively host component based on the {@link NbPopoverDirective#placement}.
    * */
-  private relocate() {
-    const hostRect = this.element.nativeElement.getBoundingClientRect();
+  private place() {
+    const hostRect = this.hostElement.getBoundingClientRect();
     const containerRect = this.containerElement.getBoundingClientRect();
 
-    const { placement, position } = this.adjust(containerRect, hostRect);
-
-    this.patchPopoverPlacement(placement);
-    this.patchPopoverPosition(position);
+    this.adjust(containerRect, hostRect);
   }
 
   /**
@@ -248,17 +254,43 @@ export class NbPopoverDirective implements OnDestroy {
   }
 
   /**
+   * Calculates container adjustment and sets container position and placement.
+   * */
+  private adjust(containerRect: ClientRect, hostRect: ClientRect) {
+    const { placement, position } = this.performAdjustment(containerRect, hostRect);
+
+    this.patchPopoverPlacement(placement);
+    this.patchPopoverPosition(position);
+  }
+
+  /**
    * Checks if {@link NbPopoverDirective#adjustment} can be performed and runs it.
    * If not, just calculates element position.
    * */
-  private adjust(placed: ClientRect, host: ClientRect): NbPosition {
+  private performAdjustment(placed: ClientRect, host: ClientRect): NbPosition {
     if (this.adjustment) {
-      return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment);
+      return this.calcAdjustment(placed, host);
     }
 
+    return this.calcPosition(placed, host);
+  }
+
+  /**
+   * Calculate adjustment.
+   * see {@link NbAdjustmentHelper}.
+   * */
+  private calcAdjustment(placed: ClientRect, host: ClientRect): NbPosition {
+    return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
+  }
+
+  /**
+   * Calculate position.
+   * see {@link NbPositioningHelper}
+   * */
+  private calcPosition(placed: ClientRect, host: ClientRect): NbPosition {
     return {
       position: NbPositioningHelper.calcPosition(placed, host, this.placement),
       placement: this.placement,
-    };
+    }
   }
 }

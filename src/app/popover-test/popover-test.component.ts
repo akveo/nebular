@@ -103,16 +103,20 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
         <nb-card>
           <nb-card-header>Popover Positions</nb-card-header>
           <nb-card-body>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left"
+                    nbPopoverMode="hover">
               Left
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom"
+                    nbPopoverMode="hover">
               Bottom
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top"
+                    nbPopoverMode="hover">
               Top
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right"
+                    nbPopoverMode="hover">
               Right
             </button>
           </nb-card-body>
@@ -125,13 +129,13 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
                     nbPopoverPlacement="left">
               Left
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom" >
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
               Bottom
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top" >
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
               Top
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right" >
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
               Right
             </button>
           </nb-card-body>
