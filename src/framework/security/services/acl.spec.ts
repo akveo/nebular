@@ -453,4 +453,66 @@ describe('acl-service', () => {
       expect(aclService.can('super_user', 'view', 'users')).toBe(false);
     });
   });
+
+  describe('with bulk resources', () => {
+
+    const defaultSettings = {
+      accessControl: {
+        guest: {
+          parent: null,
+          can: {
+            count: ['users'],
+          },
+        },
+        moderator: {
+          parent: 'guest',
+          can: {
+            view: ['*'],
+            count: ['*'],
+          },
+        },
+        super_user: {
+          parent: 'admin',
+          can: {
+            manage: ['all'],
+          },
+        },
+      },
+    };
+
+    beforeEach(() => {
+      // Configure testbed to prepare services
+      TestBed.configureTestingModule({
+        providers: [
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings },
+          NbAclService,
+        ],
+      });
+    });
+
+    // Single async inject to save references; which are used in all tests below
+    beforeEach(async(inject(
+      [NbAclService],
+      (_aclService) => {
+        aclService = _aclService
+      },
+    )));
+
+    it(`has predefined default state`, () => {
+      expect(aclService['state']).toEqual(defaultSettings.accessControl);
+    });
+
+    sharedAclTests(defaultSettings);
+
+    it(`can access anything with '*'`, () => {
+      expect(aclService.can('moderator', 'view', 'all')).toBe(true);
+      expect(aclService.can('moderator', 'view', 'users')).toBe(true);
+      expect(aclService.can('moderator', 'view', 'dashboard')).toBe(true);
+      expect(aclService.can('moderator', 'count', 'all')).toBe(true);
+      expect(aclService.can('moderator', 'count', 'any')).toBe(true);
+      expect(aclService.can('moderator', 'count', 'some')).toBe(true);
+
+      expect(aclService.can('moderator', 'delete', 'all')).toBe(false);
+    });
+  });
 });

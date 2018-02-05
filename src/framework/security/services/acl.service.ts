@@ -12,6 +12,8 @@ import { NB_SECURITY_OPTIONS_TOKEN, NbAclRules, NbAclOptions, NbAclRole, NbAclSt
 @Injectable()
 export class NbAclService {
 
+  private static readonly ANY_RESOURCE = '*';
+
   private state: NbAclState = {};
 
   constructor(@Optional() @Inject(NB_SECURITY_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
@@ -102,7 +104,7 @@ export class NbAclService {
 
   private exactCan(role: string, permission: string, resource: string) {
     const resources = this.getRoleResources(role, permission);
-    return resources.includes(resource);
+    return resources.includes(resource) || resources.includes(NbAclService.ANY_RESOURCE);
   }
 
   private getRoleResources(role: string, permission: string): string[] {
