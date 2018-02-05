@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable, Optional } from '@angular/core';
-import { NB_ACL_USER_OPTIONS_TOKEN, NbAclAbilities, NbAclOptions, NbAclRole, NbAclState } from '../acl.options';
+import { NB_SECURITY_OPTIONS_TOKEN, NbAclRules, NbAclOptions, NbAclRole, NbAclState } from '../security.options';
 
 /**
  * Common acl service.
@@ -14,10 +14,10 @@ export class NbAclService {
 
   private state: NbAclState = {};
 
-  constructor(@Optional() @Inject(NB_ACL_USER_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
+  constructor(@Optional() @Inject(NB_SECURITY_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
 
-    if (settings.roles) {
-      this.setState(settings.roles);
+    if (settings.accessControl) {
+      this.setState(settings.accessControl);
     }
   }
 
@@ -35,9 +35,9 @@ export class NbAclService {
    * Register a new role with a list of abilities (permission/resources combinations)
    * @param {string} role
    * @param {string} parent
-   * @param {NbAclAbilities} abilities
+   * @param {NbAclRules} abilities
    */
-  register(role: string, parent: string = null, abilities: NbAclAbilities = {}) {
+  register(role: string, parent: string = null, abilities: NbAclRules = {}) {
 
     this.checkRole(role);
 
@@ -109,7 +109,7 @@ export class NbAclService {
     return this.getRoleAbilities(role)[permission] || [];
   }
 
-  private getRoleAbilities(role: string): NbAclAbilities {
+  private getRoleAbilities(role: string): NbAclRules {
     return this.state[role] ? this.state[role]['can'] : {};
   }
 

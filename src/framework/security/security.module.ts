@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NB_ACL_USER_OPTIONS_TOKEN, NbAclOptions } from './acl.options';
+import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions } from './security.options';
 import { NbAclService } from './services/acl.service';
 
 @NgModule({
@@ -12,11 +12,11 @@ import { NbAclService } from './services/acl.service';
   exports: [],
 })
 export class NbAclModule {
-  static forRoot(nbAclOptions?: NbAclOptions): ModuleWithProviders {
+  static forRoot(nbSecurityOptions?: NbAclOptions): ModuleWithProviders {
     return <ModuleWithProviders> {
       ngModule: NbAclModule,
       providers: [
-        { provide: NB_ACL_USER_OPTIONS_TOKEN, useValue: nbAclOptions },
+        { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: nbSecurityOptions },
         NbAclService,
       ],
     };

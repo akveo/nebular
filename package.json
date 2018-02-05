@@ -51,7 +51,7 @@
     "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:prepare": "npm run build:package",
     "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp",
-    "release": "npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/acl"
+    "release": "npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security"
   },
   "keywords": [
     "angular",

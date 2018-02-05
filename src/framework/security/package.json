@@ -1,8 +1,8 @@
 {
-  "name": "@nebular/acl",
+  "name": "@nebular/security",
   "version": "2.0.0-rc.4",
-  "description": "@nebular/acl",
-  "main": "./bundles/acl.umd.js",
+  "description": "@nebular/security",
+  "main": "./bundles/security.umd.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
   "author": "akveo",
@@ -23,6 +23,7 @@
     "theme",
     "auth",
     "acl",
+    "security",
     "login",
     "register",
     "nebular"

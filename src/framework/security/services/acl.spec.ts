@@ -6,7 +6,7 @@
 
 import { TestBed, inject, async } from '@angular/core/testing';
 import { NbAclService } from './acl.service';
-import { NB_ACL_USER_OPTIONS_TOKEN } from '../acl.options';
+import { NB_SECURITY_OPTIONS_TOKEN } from '../security.options';
 import { deepExtend } from '../../auth/helpers'; // TODO: common module?
 
 
@@ -15,7 +15,7 @@ let aclService: NbAclService;
 function sharedAclTests (defaultSettings) {
 
   it(`should store different object`, () => {
-    expect(defaultSettings.roles).not.toBe(aclService['state']);
+    expect(defaultSettings.accessControl).not.toBe(aclService['state']);
   });
 
   it(`forbidden for any role - permission - resource`, () => {
@@ -23,7 +23,7 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`can register a role`, () => {
-    const modifiedRoles = deepExtend({}, defaultSettings.roles);
+    const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: {},
@@ -34,7 +34,7 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`can register a role with default values`, () => {
-    const modifiedRoles = deepExtend({}, defaultSettings.roles);
+    const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: {},
@@ -45,7 +45,7 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`can register a role with custom values`, () => {
-    const modifiedRoles = deepExtend({}, defaultSettings.roles);
+    const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: { view: ['users'] },
@@ -58,7 +58,7 @@ function sharedAclTests (defaultSettings) {
   it(`will rewrite newly registered role`, () => {
     let modifiedRoles;
 
-    modifiedRoles = deepExtend({}, defaultSettings.roles);
+    modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: { view: ['users'] },
@@ -66,7 +66,7 @@ function sharedAclTests (defaultSettings) {
     aclService.register('guest', null, { view: ['users'] });
     expect(aclService['state']).toEqual(modifiedRoles);
 
-    modifiedRoles = deepExtend({}, defaultSettings.roles);
+    modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: { edit: ['users'] },
@@ -78,7 +78,7 @@ function sharedAclTests (defaultSettings) {
   it(`can register multiple roles`, () => {
     let modifiedRoles;
 
-    modifiedRoles = deepExtend({}, defaultSettings.roles);
+    modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: { view: ['users'] },
@@ -87,7 +87,7 @@ function sharedAclTests (defaultSettings) {
     aclService.register('guest', null, { view: ['users'] });
     expect(aclService['state']).toEqual(modifiedRoles);
 
-    modifiedRoles = deepExtend({}, defaultSettings.roles);
+    modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
       can: { view: ['users'] },
@@ -252,7 +252,7 @@ function sharedAclTests (defaultSettings) {
   it(`cannot be changed by reference through module options`, () => {
 
     const settings = {
-      roles: {
+      accessControl: {
         guest: {
           parent: null,
           can: {
@@ -268,14 +268,14 @@ function sharedAclTests (defaultSettings) {
       },
     };
 
-    aclService.setState(settings.roles);
+    aclService.setState(settings.accessControl);
 
     expect(aclService.can('admin', 'manage', 'all')).toBe(false);
     expect(aclService.can('admin', 'edit', 'users')).toBe(false);
     expect(aclService.can('super_user', 'view', 'users')).toBe(false);
     expect(aclService.can('super_user', 'edit', 'users')).toBe(false);
 
-    settings.roles['admin'] =  {
+    settings.accessControl['admin'] =  {
       parent: 'guest',
       can: {
         manage: ['all'],
@@ -283,7 +283,7 @@ function sharedAclTests (defaultSettings) {
       },
     };
 
-    settings.roles['admin'] =  {
+    settings.accessControl['admin'] =  {
       parent: 'guest',
       can: {
         manage: ['all'],
@@ -333,7 +333,7 @@ describe('acl-service', () => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
         providers: [
-          { provide: NB_ACL_USER_OPTIONS_TOKEN, useValue: {} },
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: {} },
           NbAclService,
         ],
       });
@@ -351,13 +351,13 @@ describe('acl-service', () => {
       expect(aclService['state']).toEqual({});
     });
 
-    sharedAclTests({ roles: {} });
+    sharedAclTests({ accessControl: {} });
   });
 
   describe('with some roles settings', () => {
 
      const defaultSettings = {
-      roles: {
+      accessControl: {
         guest: {
           parent: null,
           can: {
@@ -377,7 +377,7 @@ describe('acl-service', () => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
         providers: [
-          { provide: NB_ACL_USER_OPTIONS_TOKEN, useValue: defaultSettings },
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: defaultSettings },
           NbAclService,
         ],
       });
@@ -392,7 +392,7 @@ describe('acl-service', () => {
     )));
 
     it(`has predefined default state`, () => {
-      expect(aclService['state']).toEqual(defaultSettings.roles);
+      expect(aclService['state']).toEqual(defaultSettings.accessControl);
     });
 
     sharedAclTests(defaultSettings);
@@ -407,7 +407,7 @@ describe('acl-service', () => {
   describe('with some roles settings (not cloned)', () => {
 
     const defaultSettings = {
-      roles: {
+      accessControl: {
         guest: {
           parent: null,
           can: {
@@ -427,7 +427,7 @@ describe('acl-service', () => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
         providers: [
-          { provide: NB_ACL_USER_OPTIONS_TOKEN, useFactory: () => defaultSettings },
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings },
           NbAclService,
         ],
       });
@@ -442,7 +442,7 @@ describe('acl-service', () => {
     )));
 
     it(`has predefined default state`, () => {
-      expect(aclService['state']).toEqual(defaultSettings.roles);
+      expect(aclService['state']).toEqual(defaultSettings.accessControl);
     });
 
     sharedAclTests(defaultSettings);

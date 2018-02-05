@@ -1,12 +1,12 @@
 import { InjectionToken } from '@angular/core';
 
-export interface NbAclAbilities {
+export interface NbAclRules {
   [permission: string]: string[],
 }
 
 export interface NbAclRole {
   parent?: string,
-  can: NbAclAbilities,
+  can: NbAclRules,
 }
 
 export interface NbAclState {
@@ -14,7 +14,7 @@ export interface NbAclState {
 }
 
 export interface NbAclOptions {
-  roles?: NbAclState,
+  accessControl?: NbAclState,
 }
 
-export const NB_ACL_USER_OPTIONS_TOKEN = new InjectionToken<NbAclOptions>('Nebular Acl Options');
+export const NB_SECURITY_OPTIONS_TOKEN = new InjectionToken<NbAclOptions>('Nebular Security Options');
