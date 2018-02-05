@@ -16,3 +16,9 @@ export const nbThemeOptionsToken = new InjectionToken<NbThemeOptions>('NB_THEME_
 export const nbMediaBreakpointsToken = new InjectionToken<NbMediaBreakpoint[]>('NB_MEDIA_BREAKPOINTS');
 export const nbBuiltInJSThemesToken = new InjectionToken<NbJSThemeOptions[]>('NB_BUILT_IN_THEMES');
 export const nbJSThemesToken = new InjectionToken<NbJSThemeOptions[]>('NB_THEMES');
+
+/**
+ * We're providing browser apis with tokens to improve testing capabilities.
+ * */
+export const nbWindowToken = new InjectionToken<Window>('NB_WINDOW_TOKEN');
+export const nbLocalStorageToken = new InjectionToken<Storage>('NB_LOCAL_STORAGE_TOKEN');

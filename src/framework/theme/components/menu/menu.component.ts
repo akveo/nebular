@@ -5,18 +5,19 @@
  */
 
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    OnInit,
-    OnDestroy,
-    HostBinding,
-    ViewChildren,
-    QueryList,
-    ElementRef,
-    AfterViewInit,
-  } from '@angular/core';
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  AfterViewInit,
+  Inject,
+} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { takeWhile } from 'rxjs/operators/takeWhile';
@@ -24,6 +25,7 @@ import { filter } from 'rxjs/operators/filter';
 
 import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';
+import { nbWindowToken } from '../../theme.options';
 
 function sumSubmenuHeight(item: NbMenuItem) {
   return item.expanded
@@ -192,7 +194,10 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   private alive: boolean = true;
   private autoCollapseValue: boolean = false;
 
-  constructor(private menuInternalService: NbMenuInternalService, private router: Router) { }
+  constructor(@Inject(nbWindowToken) private window: Window,
+              private menuInternalService: NbMenuInternalService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.menuInternalService
@@ -282,7 +287,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       if (homeItem.url) {
-        window.location.href = homeItem.url;
+        this.window.location.href = homeItem.url;
       }
     }
   }
