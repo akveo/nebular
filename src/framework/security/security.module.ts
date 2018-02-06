@@ -11,10 +11,10 @@ import { NbAclService } from './services/acl.service';
   declarations: [],
   exports: [],
 })
-export class NbAclModule {
+export class NbSecurityModule {
   static forRoot(nbSecurityOptions?: NbAclOptions): ModuleWithProviders {
     return <ModuleWithProviders> {
-      ngModule: NbAclModule,
+      ngModule: NbSecurityModule,
       providers: [
         { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: nbSecurityOptions },
         NbAclService,
