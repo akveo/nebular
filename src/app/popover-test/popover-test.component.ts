@@ -14,7 +14,7 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
       <nb-layout-column>
 
         <nb-card>
-          <nb-card-header>Different Content Type</nb-card-header>
+          <nb-card-header>Content Type</nb-card-header>
           <nb-card-body>
             <button class="btn btn-info" [nbPopover]="popoverTemplate" nbPopoverPlacement="right">Template Ref Test
             </button>
@@ -42,48 +42,14 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             <button class="btn btn-primary" [nbPopover]="{ isAdmin: false }" nbPopoverPlacement="bottom">Object Test
             </button>
 
-            <button class="btn btn-primary" [nbPopover]="['Nikita', 'Poltoratsky']" nbPopoverPlacement="bottom">Array
+            <button class="btn btn-primary" [nbPopover]="['Test', 'Array']" nbPopoverPlacement="bottom">Array
               Test
             </button>
           </nb-card-body>
         </nb-card>
 
         <nb-card>
-          <nb-card-header>Popover Positions</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
-              Left
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
-              Bottom
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
-              Top
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
-              Right
-            </button>
-          </nb-card-body>
-        </nb-card>
-        <nb-card>
-          <nb-card-header>Popover Positions</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
-              Right
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
-              Bottom
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
-              Top
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
-              Left
-            </button>
-          </nb-card-body>
-        </nb-card>
-        <nb-card>
-          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-header>Placement</nb-card-header>
           <nb-card-body>
             <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
               Right
@@ -101,87 +67,17 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
         </nb-card>
 
         <nb-card>
-          <nb-card-header>Popover Positions</nb-card-header>
+          <nb-card-header>Trigger mode</nb-card-header>
           <nb-card-body>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left"
-                    nbPopoverMode="hover">
-              Left
+            <button class="btn btn-outline-secondary" nbPopover="Click Popover!">
+              Click
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom"
-                    nbPopoverMode="hover">
-              Bottom
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top"
-                    nbPopoverMode="hover">
-              Top
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right"
-                    nbPopoverMode="hover">
-              Right
-            </button>
-          </nb-card-body>
-        </nb-card>
-        <nb-card>
-          <nb-card-header>Popover Positions</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary"
-                    nbPopover="Left Popover!"
-                    nbPopoverPlacement="left">
-              Left
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverPlacement="bottom">
-              Bottom
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverPlacement="top">
-              Top
-            </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverPlacement="right">
-              Right
+            <button class="btn btn-outline-secondary" nbPopover="Hover Popover!" nbPopoverMode="hover">
+              Hover
             </button>
           </nb-card-body>
         </nb-card>
 
-        <nb-card>
-          <nb-card-header>User Popover</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary" [nbPopover]="menu" nbPopoverPlacement="bottom">
-              Right
-            </button>
-            <ng-template #menu>
-              <div [style.width.rem]="9">
-                <nb-menu [items]="menuItems"></nb-menu>
-              </div>
-            </ng-template>
-          </nb-card-body>
-        </nb-card>
-
-        <nb-card>
-          <nb-card-header>User Popover</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary" [nbPopover]="menu" nbPopoverPlacement="bottom">
-              Right
-            </button>
-            <ng-template #menu>
-              <div [style.width.rem]="9">
-                <nb-menu [items]="menuItems"></nb-menu>
-              </div>
-            </ng-template>
-          </nb-card-body>
-        </nb-card>
-
-        <nb-card>
-          <nb-card-header>User Popover</nb-card-header>
-          <nb-card-body>
-            <button class="btn btn-outline-secondary" [nbPopover]="menu" nbPopoverPlacement="bottom">
-              Right
-            </button>
-            <ng-template #menu>
-              <div [style.width.rem]="9">
-                <nb-menu [items]="menuItems"></nb-menu>
-              </div>
-            </ng-template>
-          </nb-card-body>
-        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,

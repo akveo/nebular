@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { filter } from 'rxjs/operators/filter';
-import 'rxjs/observable/fromEvent';
+import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 
 /**
  * NbPopoverMode describes when to trigger show and hide methods of the popover.
@@ -33,8 +33,8 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbTrigger {
     return {
-      open: Observable.fromEvent(host, 'click'),
-      close: Observable.fromEvent<Event>(document, 'click')
+      open: observableFromEvent(host, 'click'),
+      close: observableFromEvent<Event>(document, 'click')
         .pipe(
           filter(event => !host.contains(event.target as Node)),
           filter(() => getContainer()),
@@ -54,8 +54,8 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.HOVER](host: HTMLElement): NbTrigger {
     return {
-      open: Observable.fromEvent(host, 'mouseover'),
-      close: Observable.fromEvent(host, 'mouseout'),
+      open: observableFromEvent(host, 'mouseover'),
+      close: observableFromEvent(host, 'mouseout'),
     }
   },
 };
