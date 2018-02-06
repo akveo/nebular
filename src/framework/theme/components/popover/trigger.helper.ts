@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/filter';
+import { filter } from 'rxjs/operators/filter';
+import 'rxjs/observable/fromEvent';
 
 /**
  * NbPopoverMode describes when to trigger show and hide methods of the popover.
@@ -35,9 +35,11 @@ const NB_TRIGGERS = {
     return {
       open: Observable.fromEvent(host, 'click'),
       close: Observable.fromEvent<Event>(document, 'click')
-        .filter(event => !host.contains(event.target as Node))
-        .filter(() => getContainer())
-        .filter(event => !getContainer().location.nativeElement.contains(event.target)),
+        .pipe(
+          filter(event => !host.contains(event.target as Node)),
+          filter(() => getContainer()),
+          filter(event => !getContainer().location.nativeElement.contains(event.target)),
+        ),
     };
   },
 
