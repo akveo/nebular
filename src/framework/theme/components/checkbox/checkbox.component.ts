@@ -36,13 +36,13 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input"
+    <label class="customised-control customised-checkbox">
+      <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
              (change)="value = !value">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">
+      <span class="customised-control-indicator"></span>
+      <span class="customised-control-description">
         <ng-content></ng-content>
       </span>
     </label>
