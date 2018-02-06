@@ -1,12 +1,8 @@
 import { InjectionToken } from '@angular/core';
 
-export interface NbAclRules {
-  [permission: string]: string[],
-}
-
 export interface NbAclRole {
   parent?: string,
-  can: NbAclRules,
+  [permission: string]: string|string[],
 }
 
 export interface NbAclState {

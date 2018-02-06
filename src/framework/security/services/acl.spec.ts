@@ -26,7 +26,6 @@ function sharedAclTests (defaultSettings) {
     const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: {},
     };
 
     aclService.register('guest', null, {});
@@ -37,7 +36,6 @@ function sharedAclTests (defaultSettings) {
     const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: {},
     };
 
     aclService.register('guest');
@@ -48,7 +46,7 @@ function sharedAclTests (defaultSettings) {
     const modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: { view: ['users'] },
+      view: ['users'],
     };
 
     aclService.register('guest', null, { view: ['users'] });
@@ -61,7 +59,7 @@ function sharedAclTests (defaultSettings) {
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: { view: ['users'] },
+      view: ['users'],
     };
     aclService.register('guest', null, { view: ['users'] });
     expect(aclService['state']).toEqual(modifiedRoles);
@@ -69,7 +67,7 @@ function sharedAclTests (defaultSettings) {
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: { edit: ['users'] },
+      edit: ['users'],
     };
     aclService.register('guest', null, { edit: ['users'] });
     expect(aclService['state']).toEqual(modifiedRoles);
@@ -81,7 +79,7 @@ function sharedAclTests (defaultSettings) {
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: { view: ['users'] },
+      view: ['users'],
     };
 
     aclService.register('guest', null, { view: ['users'] });
@@ -90,11 +88,11 @@ function sharedAclTests (defaultSettings) {
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
       parent: null,
-      can: { view: ['users'] },
+      view: ['users'],
     };
     modifiedRoles.user = {
       parent: 'guest',
-      can: { edit: ['users'] },
+      edit: ['users'],
     };
     aclService.register('user', 'guest', { edit: ['users'] });
     expect(aclService['state']).toEqual(modifiedRoles);
@@ -103,6 +101,11 @@ function sharedAclTests (defaultSettings) {
   it(`cannot register a role with an empty name`, () => {
     expect(() => aclService.register('', null, { view: ['users'] }))
       .toThrow(new Error('NbAclService: role name cannot be empty'));
+  });
+
+  it(`cannot check bulk resource`, () => {
+    expect(() => aclService.can('guest', 'edit', '*'))
+      .toThrow(new Error(`NbAclService: cannot use empty or bulk '*' resource placeholder with 'can' method`));
   });
 
   it(`can handle permissions`, () => {
@@ -255,15 +258,11 @@ function sharedAclTests (defaultSettings) {
       accessControl: {
         guest: {
           parent: null,
-          can: {
-            count: ['users'],
-          },
+          count: ['users'],
         },
         super_user: {
           parent: 'admin',
-          can: {
-            manage: ['all'],
-          },
+          manage: ['all'],
         },
       },
     };
@@ -277,18 +276,14 @@ function sharedAclTests (defaultSettings) {
 
     settings.accessControl['admin'] =  {
       parent: 'guest',
-      can: {
-        manage: ['all'],
-        view: ['users'],
-      },
+      manage: ['all'],
+      view: ['users'],
     };
 
     settings.accessControl['admin'] =  {
       parent: 'guest',
-      can: {
-        manage: ['all'],
-        edit: ['users'],
-      },
+      manage: ['all'],
+      edit: ['users'],
     };
 
     expect(aclService.can('admin', 'manage', 'all')).toBe(false);
@@ -321,6 +316,16 @@ function sharedAclTests (defaultSettings) {
     expect(aclService.can('moderator', 'view', 'users')).toBe(true);
     expect(aclService.can('moderator', 'view', 'dashboard')).toBe(false);
     expect(aclService.can('moderator', 'edit', 'users')).toBe(false);
+  });
+
+  it(`can accept roles as string`, () => {
+
+    aclService.register('role', null, { view: 'all', edit: '*' });
+
+    expect(aclService.can('role', 'view', 'all')).toBe(true);
+    expect(aclService.can('role', 'edit', 'all')).toBe(true);
+    expect(aclService.can('role', 'edit', 'any')).toBe(true);
+    expect(aclService.can('role', 'delete', 'any')).toBe(false);
   });
 }
 
@@ -360,15 +365,11 @@ describe('acl-service', () => {
       accessControl: {
         guest: {
           parent: null,
-          can: {
-            count: ['users'],
-          },
+          count: ['users'],
         },
         super_user: {
           parent: 'admin',
-          can: {
-            manage: ['all'],
-          },
+          manage: ['all'],
         },
       },
     };
@@ -377,7 +378,7 @@ describe('acl-service', () => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
         providers: [
-          { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: defaultSettings },
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: defaultSettings }, // useValue will clone
           NbAclService,
         ],
       });
@@ -410,15 +411,11 @@ describe('acl-service', () => {
       accessControl: {
         guest: {
           parent: null,
-          can: {
-            count: ['users'],
-          },
+          count: ['users'],
         },
         super_user: {
           parent: 'admin',
-          can: {
-            manage: ['all'],
-          },
+          manage: ['all'],
         },
       },
     };
@@ -460,22 +457,16 @@ describe('acl-service', () => {
       accessControl: {
         guest: {
           parent: null,
-          can: {
-            count: ['users'],
-          },
+          count: ['users'],
         },
         moderator: {
           parent: 'guest',
-          can: {
-            view: ['*'],
-            count: ['*'],
-          },
+          view: ['*'],
+          count: ['*'],
         },
         super_user: {
           parent: 'admin',
-          can: {
-            manage: ['all'],
-          },
+          manage: ['all'],
         },
       },
     };
@@ -484,7 +475,7 @@ describe('acl-service', () => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
         providers: [
-          { provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings },
+          { provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings }, // will provide a reference
           NbAclService,
         ],
       });

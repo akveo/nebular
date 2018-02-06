@@ -4,7 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable, Optional } from '@angular/core';
-import { NB_SECURITY_OPTIONS_TOKEN, NbAclRules, NbAclOptions, NbAclRole, NbAclState } from '../security.options';
+import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions, NbAclRole, NbAclState } from '../security.options';
+
+const shallowObjectClone = (o) => Object.assign({}, o);
+const shallowArrayClone = (a) => Object.assign([], a);
+const popParent = (abilities) => {
+  const parent = abilities['parent'];
+  delete abilities['parent'];
+  return parent;
+};
 
 /**
  * Common acl service.
@@ -29,7 +37,9 @@ export class NbAclService {
    */
   setState(state: NbAclState) {
     for (const role of Object.keys(state)) {
-      this.register(role, state[role]['parent'], state[role]['can']);
+      const abilities = shallowObjectClone(state[role]);
+      const parent = popParent(abilities);
+      this.register(role, parent, abilities);
     }
   }
 
@@ -39,17 +49,17 @@ export class NbAclService {
    * @param {string} parent
    * @param {NbAclRules} abilities
    */
-  register(role: string, parent: string = null, abilities: NbAclRules = {}) {
+  register(role: string, parent: string = null, abilities: {[permission: string]: string|string[]} = {}) {
 
-    this.checkRole(role);
+    this.validateRole(role);
 
     this.state[role] = {
       parent: parent,
-      can: {},
     };
 
     for (const permission of Object.keys(abilities)) {
-      this.allow(role, permission, Object.assign([], abilities[permission]));
+      const resources = typeof abilities[permission] === 'string' ? [abilities[permission]] : abilities[permission];
+      this.allow(role, permission, shallowArrayClone(resources));
     }
   }
 
@@ -61,7 +71,7 @@ export class NbAclService {
    */
   allow(role: string, permission: string, resource: string|string[]) {
 
-    this.checkRole(role);
+    this.validateRole(role);
 
     if (!this.getRole(role)) {
       this.register(role, null, {});
@@ -69,10 +79,10 @@ export class NbAclService {
 
     resource = typeof resource === 'string' ? [resource] : resource;
 
-    let resources = Object.assign([], this.getRoleResources(role, permission));
+    let resources = shallowArrayClone(this.getRoleResources(role, permission));
     resources = resources.concat(resource);
 
-    this.state[role]['can'][permission] = resources
+    this.state[role][permission] = resources
       .filter((item, pos) => resources.indexOf(item) === pos);
   }
 
@@ -84,6 +94,8 @@ export class NbAclService {
    * @returns {boolean}
    */
   can(role: string, permission: string, resource: string) {
+    this.validateResource(resource);
+
     const parentRole = this.getRoleParent(role);
     let parentCan = false;
     if (parentRole) {
@@ -96,9 +108,15 @@ export class NbAclService {
     return this.state[role];
   }
 
-  private checkRole(role: string) {
+  private validateRole(role: string) {
     if (!role) {
       throw new Error('NbAclService: role name cannot be empty');
+    }
+  }
+
+  private validateResource(resource: string) {
+    if (!resource || [NbAclService.ANY_RESOURCE].includes(resource)) {
+      throw new Error(`NbAclService: cannot use empty or bulk '*' resource placeholder with 'can' method`);
     }
   }
 
@@ -111,8 +129,10 @@ export class NbAclService {
     return this.getRoleAbilities(role)[permission] || [];
   }
 
-  private getRoleAbilities(role: string): NbAclRules {
-    return this.state[role] ? this.state[role]['can'] : {};
+  private getRoleAbilities(role: string): {[permission: string]: string[]} {
+    const abilities = shallowObjectClone(this.state[role] || {});
+    popParent(shallowObjectClone(this.state[role] || {}));
+    return abilities;
   }
 
   private getRoleParent(role: string): string {
