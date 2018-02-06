@@ -378,8 +378,20 @@ $theme: (
   checkbox-size: 1.25rem,
   checkbox-border-size: 2px,
   checkbox-border-color: form-control-border-color,
-  checkbox-selected-border-color: color-success,
-  checkbox-fg: color-fg-heading,
+  checkbox-checkmark: form-control-border-color,
+
+  checkbox-checked-bg: transparent,
+  checkbox-checked-size: 1.25rem,
+  checkbox-checked-border-size: 2px,
+  checkbox-checked-border-color: color-success,
+  checkbox-checked-checkmark: color-fg-heading,
+
+  checkbox-disabled-bg: transparent,
+  checkbox-disabled-size: 1.25rem,
+  checkbox-disabled-border-size: 2px,
+  checkbox-disabled-border-color: color-fg-heading,
+  checkbox-disabled-checkmark: color-fg-heading,
+
   radio-fg: color-success,
 
   modal-font-size: font-size,
