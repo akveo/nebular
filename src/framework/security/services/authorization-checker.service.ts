@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { NbRoleProvider } from './role.provider';
 import { NbAclService } from './acl.service';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class NbAuthorizationChecker {
