@@ -22,6 +22,7 @@ import {
   NbTabsetModule,
   NbThemeModule,
   NbUserModule,
+  NbPopoverModule,
 } from '@nebular/theme';
 
 import {
@@ -78,6 +79,7 @@ import { NbCardTestComponent } from './card-test/card-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
 import { RoleProvider } from './role.provider';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -113,6 +115,7 @@ const NB_TEST_COMPONENTS = [
   NbThemeBreakpointTestComponent,
   NbActionsTestComponent,
   NbFormsTestComponent,
+  NbPopoverTestComponent,
   NbCheckboxTestComponent,
   NbAclTestComponent,
 ];
@@ -133,6 +136,7 @@ const NB_TEST_COMPONENTS = [
     NbUserModule,
     NbSearchModule,
     NbActionsModule,
+    NbPopoverModule,
     NbCheckboxModule,
     NbAuthModule.forRoot({
       forms: {
