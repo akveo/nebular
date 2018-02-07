@@ -47,6 +47,17 @@ elif [[ "${MODE}" =~ ^.*_(unit_test)$ ]]; then
   npm run ci:test
 elif [[ "${MODE}" = docs ]]; then
   npm run ci:docs
+elif [[ "${MODE}" = dev_deploy ]]; then
+  DEMO_PATH="demo-${TRAVIS_COMMIT}"
+  DOCS_PATH="docs-${TRAVIS_COMMIT}"
+  npm run build:prod -- --base-href "" --output-path "ci/dist/${DEMO_PATH}"
+  cd ./docs && ln -sf ../src/framework ./framework && cd ../
+  npm run docs:parse
+  npm run build:prod -- --app docs --preserve-symlinks --base-href "" --output-path "ci/dist/${DOCS_PATH}"
+  npm run firebase use dev -- --token="${FIREBASE_KEY}" && npm run firebase deploy -- --token="${FIREBASE_KEY}"
+
+  echo "Published playground at https://nebular-dev-demo.firebaseapp.com/${DEMO_PATH}"
+  echo "Published docs at https://nebular-dev-demo.firebaseapp.com/${DOCS_PATH}"
 fi
 
 teardown_tunnel
