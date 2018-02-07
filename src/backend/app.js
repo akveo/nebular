@@ -46,6 +46,7 @@ app.post('/api/auth/login', function (req, res) {
       var payload = {
         id: user.id,
         email: user.email,
+        role: 'user',
       };
       var token = jwt.encode(payload, cfg.jwtSecret);
       return res.json({
@@ -73,6 +74,7 @@ app.post('/api/auth/register', function (req, res) {
       var payload = {
         id: user.id,
         email: user.email,
+        role: 'user',
       };
       var token = jwt.encode(payload, cfg.jwtSecret);
       return res.json({

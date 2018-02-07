@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import {
   NbActionsModule,
@@ -29,6 +30,8 @@ import {
   NbEmailPassAuthProvider,
   NbAuthJWTInterceptor,
 } from '@nebular/auth';
+
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 import { NbAppComponent } from './app.component';
 import { NbLayoutTestComponent } from './layout-test/layout-test.component';
@@ -71,8 +74,9 @@ import { NbSearchTestCustomizedComponent } from './search-test/search-test-custo
 import { NbFormsTestComponent } from './forms-test/forms-test.component';
 
 import { NbCardTestComponent } from './card-test/card-test.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
+import { RoleProvider } from './role.provider';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -108,6 +112,7 @@ const NB_TEST_COMPONENTS = [
   NbThemeBreakpointTestComponent,
   NbActionsTestComponent,
   NbFormsTestComponent,
+  NbAclTestComponent,
 ];
 
 @NgModule({
@@ -173,6 +178,22 @@ const NB_TEST_COMPONENTS = [
         },
       },
     }),
+    NbSecurityModule.forRoot({
+      accessControl: {
+        guest: {
+          view: ['news', 'comments'],
+        },
+        user: {
+          parent: 'guest',
+          create: 'comments',
+        },
+        moderator: {
+          parent: 'user',
+          create: 'news',
+          remove: '*',
+        },
+      },
+    }),
   ],
   declarations: [
     ...NB_TEST_COMPONENTS,
@@ -184,6 +205,7 @@ const NB_TEST_COMPONENTS = [
     AuthGuard,
     { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
+    { provide: NbRoleProvider, useClass: RoleProvider },
   ],
   bootstrap: [NbAppComponent],
 })

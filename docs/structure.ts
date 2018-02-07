@@ -619,7 +619,7 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'ACL (Roles & Permissions) Configuration',
+        name: 'ACL Configuration & Usage',
         children: [
           {
             type: 'block',

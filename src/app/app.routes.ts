@@ -50,6 +50,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
+import { NbAclTestComponent } from './acl-test/acl-test.component';
 
 export const routes: Routes = [
   {
@@ -242,6 +243,10 @@ export const routes: Routes = [
   {
     path: 'forms',
     component: NbFormsTestComponent,
+  },
+  {
+    path: 'acl',
+    component: NbAclTestComponent,
   },
   {
     path: '**',

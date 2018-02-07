@@ -1,33 +1,24 @@
-The main goal of the Auth module is to provide a pluggable set of components and services for easier setup of the authentication layer for the Angular applications.
-The module separates the UI part (login/register components) from the business logic with help of the `authentication providers` layer. 
+Security is an important part of any adult web application. It is a common task to manage user access to particular resources.
+Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebular Security` helps you to `authorize` a user to access some of the application resources.
 
-<div class="note note-info">
-  <div class="note-title">Note</div>
+<div class="note note-warning">
+  <div class="note-title">Warning</div>
   <div class="note-body">
-    The setup still requires backend services to communicate with.
+    Front-end ACL won't resolve all of the security issues and just provides a better user expiriece for your application.
+    It is essential to duplicate security rules on the back-end side.
   </div>
 </div>
 <hr class="section-end">
 
 ## What's included
 
-Authentication UI components:
-  - Login
-  - Logout
-  - Register
-  - Password Recover
-  - Password Reset
-  
-Two auth providers:
-  - Dummy auth provider - simple provider for testing purposes, could be used to simulate backend responses while API is in the development;
-  - EmailPass auth provider - the most common email/password authentication strategy.
-    
-Other helper services:
-  - Token Service, JWT token, and Simple token - helper services for token management handling;
-  - JWT and Simple HTTP interceptors - intercepts the token into your HTTP requests.
+- ACL roles/permissions/resources configuration
+- RoleProvider
+- AuthorizationChecker - service that check whether access is granted or not
+- *ACL directive* - directive that helps to hide/show elements based on user permissions
 
 <hr class="section-end">
 
 ## Where to next
 
-- Auth Module [Installation](#/docs/auth/installation) 
+- Security Module [Installation](#/docs/security/installation) 

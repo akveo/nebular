@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions } from './security.options';
 import { NbAclService } from './services/acl.service';
+import { NbAuthorizationChecker } from './services/authorization-checker.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ export class NbSecurityModule {
       providers: [
         { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: nbSecurityOptions },
         NbAclService,
+        NbAuthorizationChecker,
       ],
     };
   }
