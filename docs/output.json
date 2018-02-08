@@ -1199,7 +1199,7 @@
         {
           "shortDescription": "",
           "description": "",
-          "code": "\n<nb-reveal-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-reveal-card>\n"
+          "code": "\n<nb-flip-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-flip-card>\n"
         }
       ],
       "props": [
@@ -2657,13 +2657,6 @@
               "description": ""
             },
             {
-              "name": "componentFactoryResolver",
-              "type": "ComponentFactoryResolver",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
               "name": "router",
               "type": "Router",
               "required": null,
@@ -2695,26 +2688,6 @@
           "name": "connectToSearchField",
           "type": [
             "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "component",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "createAttachedSearch",
-          "type": [
-            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",

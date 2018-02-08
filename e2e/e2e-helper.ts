@@ -1,3 +1,5 @@
+import { browser, by, element, ExpectedConditions } from 'protractor';
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -21,4 +23,12 @@ export const hexToRgbA = (hex, alpha = 1) => {
     return `rgba(${(c >> 16) & 255}, ${(c >> 8) & 255}, ${c & 255}, ${alpha})`;
   }
   throw new Error('Bad Hex');
+};
+
+/**
+ * Waiting till browser render element
+ * @param selector
+ */
+export const waitFor = (selector: any) => {
+  browser.wait(ExpectedConditions.presenceOf(element(by.css(selector))));
 };

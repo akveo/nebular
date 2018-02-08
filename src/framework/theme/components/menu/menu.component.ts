@@ -231,6 +231,8 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue)
       });
 
+    // TODO: this probably won't work if you pass items dynamically into items input
+    this.menuInternalService.prepareItems(this.items);
     this.items.push(...this.menuInternalService.getItems());
   }
 
