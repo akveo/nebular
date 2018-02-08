@@ -13,7 +13,6 @@ import {
   NbActionsModule,
   NbCardModule,
   NbLayoutModule,
-  NbMenuItem,
   NbMenuModule,
   NbRouteTabsetModule,
   NbSearchModule,
@@ -27,7 +26,6 @@ import {
   NB_AUTH_TOKEN_WRAPPER_TOKEN,
   NbAuthJWTToken,
   NbAuthModule,
-  NbDummyAuthProvider,
   NbEmailPassAuthProvider,
   NbAuthJWTInterceptor,
 } from '@nebular/auth';
@@ -69,6 +67,7 @@ import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.compon
 import { routes } from './app.routes';
 
 import { NbSearchTestComponent } from './search-test/search-test.component';
+import { NbSearchTestCustomizedComponent } from './search-test/search-test-customized.component';
 import { NbFormsTestComponent } from './forms-test/forms-test.component';
 
 import { NbCardTestComponent } from './card-test/card-test.component';
@@ -102,6 +101,7 @@ const NB_TEST_COMPONENTS = [
   NbUserTestComponent,
   NbThemeChangeTestComponent,
   NbSearchTestComponent,
+  NbSearchTestCustomizedComponent,
   NbBootstrapTestComponent,
   NbDynamicToAddComponent,
   NbThemeDynamicTestComponent,

@@ -5,28 +5,8 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { hexToRgbA } from './e2e-helper';
-
-const heights = {
-  xxsmall: '96px',
-  xsmall: '216px',
-  small: '336px',
-  medium: '456px',
-  large: '576px',
-  xlarge: '696px',
-  xxlarge: '816px',
-};
-
-const colors = {
-  // Make sure that you convert hex to rgba before validation
-  primary: '#8a7fff',
-  success: '#40dc7e',
-  info: '#4ca6ff',
-  warning: '#ffa100',
-  danger: '#ff4c6a',
-  default: '#a4abb3',
-  disabled: 'rgba(255, 255, 255, 0.4)',
-};
+import { colors, sizes } from './cards-shared';
+import { waitFor } from './e2e-helper';
 
 let cards: any[] = [];
 
@@ -34,23 +14,37 @@ function prepareCards() {
   const result: any[] = [];
 
   let elementNumber: number = 1;
-  for (const colorKey in colors) {
-    if (colors.hasOwnProperty(colorKey)) {
-      for (const heightKey in heights) {
-        if (heights.hasOwnProperty(heightKey)) {
-          result.push({
-            name: heightKey,
-            height: heights[heightKey],
-            colorKey,
-            color: colorKey === 'disabled' ? colors[colorKey] : hexToRgbA(colors[colorKey]),
-            elementNumber,
-          });
-          elementNumber++;
-        }
-      }
+  for (const { colorKey, color } of colors) {
+    for (const { sizeKey, height } of sizes) {
+      result.push({
+        size: sizeKey,
+        height: height,
+        colorKey,
+        color,
+        elementNumber,
+      });
+      elementNumber++;
     }
   }
+
   return result;
+}
+
+function prepareAccentCards(regularCardsOffset) {
+  function generateAccentCards(accentCardsOffset, colorKey, color) {
+    return colors.map((c, i) => ({
+      name: colorKey,
+      colorKey,
+      color,
+      accentColor: c.color,
+      accentKey: c.colorKey,
+      elementNumber: regularCardsOffset + accentCardsOffset + i,
+    }));
+  }
+
+  return colors.reduce((accentCards, { colorKey, color }) => {
+    return accentCards.concat(generateAccentCards(accentCards.length, colorKey, color));
+  }, []);
 }
 
 describe('nb-card', () => {
@@ -63,11 +57,12 @@ describe('nb-card', () => {
 
   cards.forEach(c => {
 
-    it(`should display ${c.colorKey} card with ${c.name} size`, () => {
+    it(`should display ${c.colorKey} card with ${c.size} size`, () => {
+      waitFor(`nb-card:nth-child(${c.elementNumber})`);
       expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getText()).toEqual('Header');
 
-      if (c.name !== 'xxsmall') {
+      if (c.size !== 'xxsmall') {
         expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-body`))
           .getText()).toEqual('Body');
 
@@ -87,6 +82,17 @@ describe('nb-card', () => {
       element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
         .getCssValue('border-bottom-color').then(bgColor => {
           expect(bgColor).toEqual(c.color);
+        });
+    });
+  });
+
+  const accentCards = prepareAccentCards(cards.length);
+  accentCards.forEach(c => {
+    it(`should display ${c.colorKey} card with ${c.accentKey} accent`, () => {
+      element.all(by.css(`nb-card`))
+        .get(c.elementNumber)
+        .getCssValue('border-top-color').then(borderColor => {
+          expect(borderColor).toEqual(c.accentColor, 'Accent is not correct');
         });
     });
   });

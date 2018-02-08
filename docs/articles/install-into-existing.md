@@ -15,7 +15,7 @@ In case you want to start based on our ngx-admin starter kit, please check out [
 1) At this step, we assume you already have Angular modules installed. Now let's install Angular Bootstrap which is the only peer dependency left:
 
 ```bash
-npm i -S bootstrap@4.0.0-alpha.6
+npm i -S bootstrap
 ```
 <hr class="section-end">
 
@@ -44,7 +44,7 @@ import { NbThemeModule } from '@nebular/theme';
 export class AppModule {
 
 ```
-Same way you can enable Auth Module, in more details this described under [Auth Module Concepts & Install](#/docs/auth/conceptsinstall) article.
+Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](#/docs/auth/conceptsinstall) article).
 <hr class="section-end">
 
 4) Now, let's import Nebular styles:
@@ -71,7 +71,7 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
 5) Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
 ```typescript
-
+import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
 import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
 
 ...
@@ -79,6 +79,7 @@ import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/them
 @NgModule({
   ...
   imports: [
+    RouterModule, // RouterModule.forRoot(routes, { useHash: true }), if this is your app.module
     NbLayoutModule,
     NbSidebarModule,
   ],
@@ -89,7 +90,7 @@ export class SomePageModule {
 
 ```
 
-Then let's add layout components with a sticky header into your `page.component.ts`:
+Then let's add layout components with a sticky header into your `some-page.component.ts`:
 ```typescript
 
 @Component({
@@ -109,7 +110,10 @@ export class SomePageComponent {
 
 ```
 
-And done! At this step, you should have a page with a simple layout on it.
+And done! At this step, you should have a page with a simple layout on it looking like this:
+
+![image](assets/images/articles/sample-page.png)
+
 <hr class="section-end">
 
 <div class="note note-info">

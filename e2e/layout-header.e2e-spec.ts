@@ -32,7 +32,7 @@ describe('nb-layout-header', () => {
 
   it('should align items vertically', () => {
     element(by.css('nb-layout-header nav')).getCssValue('justify-content').then(value => {
-      expect(value).toEqual('normal');
+      expect(value).toEqual('flex-start');
     });
   });
 

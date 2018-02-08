@@ -33,6 +33,7 @@ import {
   NbRouteTabsetTestComponent,
 } from './route-tabset-test/route-tabset-test.component';
 import { NbSearchTestComponent } from './search-test/search-test.component';
+import { NbSearchTestCustomizedComponent } from './search-test/search-test-customized.component';
 import { NbSidebarTestOneComponent } from './sidebar-test/sidebar-test-one.component';
 import { NbSidebarTestThreeComponent } from './sidebar-test/sidebar-test-three.component';
 import { NbSidebarTestTwoComponent } from './sidebar-test/sidebar-test-two.component';
@@ -225,6 +226,10 @@ export const routes: Routes = [
   {
     path: 'search',
     component: NbSearchTestComponent,
+  },
+  {
+    path: 'search-2',
+    component: NbSearchTestCustomizedComponent,
   },
   {
     path: 'bootstrap',

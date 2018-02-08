@@ -242,10 +242,23 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
   }
 
+  // TODO: this is more of a workaround, should be a better way to make components communicate to each other
   onClick(event): void {
     const menu = this.element.nativeElement.querySelector('nb-menu');
+
     if (menu && menu.contains(event.target)) {
-      this.expand();
+      let link = event.target;
+      const linkChildren = ['span', 'i'];
+
+      // if we clicked on span - get the link
+      if (linkChildren.indexOf(link.tagName.toLowerCase()) !== -1 && link.parentNode) {
+        link = event.target.parentNode;
+      }
+
+      // we only expand if an item has children
+      if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
+        this.expand();
+      }
     }
   }
 
