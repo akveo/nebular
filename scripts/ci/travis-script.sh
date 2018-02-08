@@ -58,8 +58,11 @@ elif [[ "${MODE}" = dev_deploy ]]; then
   npm run firebase use dev -- --token="${FIREBASE_KEY}"
   npm run firebase deploy -- --token="${FIREBASE_KEY}"
 
-  echo "Published playground at https://nebular-dev-demo.firebaseapp.com/${DEMO_DIR}"
-  echo "Published docs at https://nebular-dev-demo.firebaseapp.com/${DOCS_DIR}"
+  GREEN='\033[0;32m'
+  echo ""
+  echo -e "${GREEN}Published playground at ${DEV_DEPLOY_HOST}${DEMO_DIR}"
+  echo -e "${GREEN}Published docs at ${DEV_DEPLOY_HOST}/${DOCS_DIR}"
+  echo ""
 fi
 
 teardown_tunnel

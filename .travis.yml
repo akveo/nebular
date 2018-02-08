@@ -12,6 +12,7 @@ env:
     - BROWSER_PROVIDER_READY_FILE=/tmp/nebular/readyfile
     - BROWSER_PROVIDER_ERROR_FILE=/tmp/nebular/errorfile
     - LOGS_DIR=/tmp/nebular/logs
+    - DEV_DEPLOY_HOST=https://nebular-dev-demo.firebaseapp.com/
     - secure: axHRHuw65ArY0KYUcYKOYsn+9LBqDOmUVDRVKkTlEnT5Odp+sZ6wyWPnDDzCeuhY9xEZ8lkp7C/w28s0TN6GSdVeNe9Y+gA1fecRVQH7XFeOqxDgPqjiQzsumVUoDbo+l8aVuKOwxQ/bRk5pM2q/1hxo3xaz/OMGiFtV4kqwJKos4FXcpkHwkfM387IFu6CdY7XT6oxnni78jKQHRaIPjTC7DzaZdA06jth1xvcfbZXIEpMFHl2fEhVgt9gdS1cReJHUPwR66IiiGYqfPLtrtUkF0L6HcHFS0U1PfTl9E8RFu53w66/+JtVlMwmnX6Qv/wENG0OKyh3auN54Dlp4m1ESvUlFDsjEipFNRjatwePFuqUIROFVzFavbSadK8/IlvAnNQ1ftT5OPu0cOKCwQneXZeMlkc0Ipp+JaDburQ3i0dO170oJwMAXOulKntOCfBUfgAElm8B2EWr/bYU1a2btM39NGiNspGVgav2fw6PHuqSKEN/ylDh1ZAx1iXjPqK6z/9pQvDlK6TTjIuScY27mZEuhz/Fv1K7skW02XFVwDOmAT3FJd6brJOLm03DTm36+fEGutqFe9qqHDxWmi3zZBprXtRMSofEEGEmDWhBbqiGATvoW2XI2dqYOe7ZZU/aXxZ/fVLkq8LPkvOmqvaVaNAUgpnouRf/jmmDno0o=
   matrix:
     - MODE=sauce_e2e
