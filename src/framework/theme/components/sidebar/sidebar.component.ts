@@ -67,9 +67,9 @@ export class NbSidebarFooterComponent {
  * ```
  * <nb-sidebar left fixed state="collapsed">
  *  <nb-sidebar-header>Header</nb-sidebar-header>
- *  <nb-sidebar-content>
- *    Menu or another component here
- *  </nb-sidebar-content>
+ *
+ *    Sidebar content, menu or another component here.
+ *
  *  <nb-sidebar-footer>
  *    Footer components here
  *  </nb-sidebar-footer>
