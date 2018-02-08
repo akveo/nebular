@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
 import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
-import { NbAuthResult } from '../services/auth.service';
+import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { getDeepFromObject } from '../helpers';
 
