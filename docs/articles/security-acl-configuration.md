@@ -1,6 +1,6 @@
 ## Abstract
 
-Permissions control is a general task when it comes to development of more of less complex web application. Your application may have various roles and resources you need to protect.
+Permissions control is a general task when it comes to development of more or less complex web application. Your application may have various roles and resources you need to protect.
 ACL (access control list) provides a flexible way of configuring "who can do what against what resource".
 
 In this article we configure a common setup when the app has three roles (`guest`, `user` and `moderator`), the roles have different permissions (`view`, `create`, `remove`) 
@@ -10,8 +10,8 @@ and the application contains two type of resources that needs to be protected (`
 
 Nebular ACL has a simple way of setting it up. When registering a module you can specify the ACL rules by simply providing it as a module configuration object.
 
-Let's assume that our guest users can only `view` `news` and `comments`, users can do everything as guest, but also can `create` `comments`, and moderators can also `create` and `remove` `news` and `comments`.
-Now, let's convert this into ACL configuration object witch Nebular can understand. Open your `app.module.ts` and change the `NbSecurityModule.forRoot()` call as follows:
+Let's assume that our guest users can only `view` `news` and `comments`, users can do everything as guests, but also can `create` `comments`, and moderators can also `create` and `remove` `news` and `comments`.
+Now, let's convert this into ACL configuration object which Nebular can understand. Open your `app.module.ts` and change the `NbSecurityModule.forRoot()` call as follows:
 
 ```typescript
 
@@ -46,9 +46,9 @@ which means that we have a permission againts any resource (like moderators can 
 
 ## Role Configuration
 
-So far we told Nebular Security which roles-permissions-resources our application has. Now we need to specify how Nebular can determine a role of currently authenticated user.
+So far we told Nebular Security what roles-permissions-resources our application has. Now we need to specify how Nebular can determine a role of currently authenticated user.
 To do so we need to create a `RoleProvider` with one simple method `getRole`, which returns an `Observable<string>` of a role.
-In a simplest form we can provide this service directly in the main module:
+In a simpliest form we can provide this service directly in the main module:
 
 
 ```typescript
@@ -84,9 +84,9 @@ The good thing about this configuration is that it's not tightly coupled with th
 
 But, in our example the role is "hardcoded", which in the real world app would be dynamic and depend on the current user. 
 
-Assuming that you already have `Nebular Auth` module fully configured and functioning with `JWT` we will adjust the example to retrieve a role the user token.
+Assuming that you already have `Nebular Auth` module fully configured and functioning with `JWT` we will adjust the example to retrieve a role to the user token.
 
-Let's create a separate `role.provider.ts` service to not put a lot of logic into the module itself:
+Let's create a separate `role.provider.ts` service in order not to put a lot of logic into the module itself:
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -137,7 +137,7 @@ export class RoleProvider implements NbRoleProvider {
 }
 ``` 
 
-So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change is occurred. Then we simply get a tole from a token or return default `guest` value.
+So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. Then we simply get a tole from a token or return default `guest` value.
 
 And let's provide the service in the app module:
 
@@ -167,7 +167,7 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 ## Usage
 
 Finally, we can move on to the part where we start using the ACL. Let's assume that we have that `Post Comment` button, that should only be shown to authenticated users (with a role `user`).
-So we need to hide the button for guests. In your `comment-form.component.ts`, import the `NbAuthorizationChecker` service. It provides you with one method `isGranted`, which returns an `Observable<boolean>` of the ACL check result:
+So we need to hide the button for guests. In your `comment-form.component.ts`, import the `NbAuthorizationChecker` service. It provides you with a method `isGranted`, which returns an `Observable<boolean>` of the ACL check result:
 
 ```typescript
 import { Component } from '@angular/core';
