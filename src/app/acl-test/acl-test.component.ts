@@ -23,8 +23,7 @@ import { NbAuthorizationChecker } from '@nebular/security';
 })
 export class NbAclTestComponent {
 
-  /* tslint:disable-next-line:no-unused-variable */
-  constructor(private authorizationChecker: NbAuthorizationChecker) {
+  constructor(public authorizationChecker: NbAuthorizationChecker) {
   }
 
 }

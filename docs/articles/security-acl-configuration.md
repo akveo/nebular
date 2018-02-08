@@ -178,7 +178,7 @@ import { NbAuthorizationChecker } from '@nebular/security';
 })
 export class CommentFormComponent {
 
-  constructor(private authorizationChecker: NbAuthorizationChecker) { }
+  constructor(public authorizationChecker: NbAuthorizationChecker) { }
 }
 ``` 
 
