@@ -1438,15 +1438,47 @@
               "description": ""
             },
             {
-              "name": "checkbox-selected-border-color",
+              "name": "checkbox-checkmark",
               "description": ""
             },
             {
-              "name": "checkbox-fg",
+              "name": "checkbox-checked-bg",
               "description": ""
             },
             {
-              "name": "radio-fg",
+              "name": "checkbox-checked-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-border-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-checkmark",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-bg",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-border-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-checkmark",
               "description": ""
             }
           ]
@@ -5272,7 +5304,15 @@
             },
             {
               "theme": "default",
-              "prop": "checkbox-fg"
+              "prop": "checkbox-checked-checkmark"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-checkmark"
             },
             {
               "theme": "default",
@@ -5499,7 +5539,7 @@
             },
             {
               "theme": "default",
-              "prop": "checkbox-selected-border-color"
+              "prop": "checkbox-checked-border-color"
             },
             {
               "theme": "default",
@@ -8522,6 +8562,10 @@
             {
               "theme": "default",
               "prop": "checkbox-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-checkmark"
             }
           ]
         },
@@ -8732,8 +8776,52 @@
           ],
           "childs": []
         },
-        "checkbox-selected-border-color": {
-          "name": "checkbox-selected-border-color",
+        "checkbox-checkmark": {
+          "name": "checkbox-checkmark",
+          "value": "#dadfe6",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "form-control-border-color"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-bg": {
+          "name": "checkbox-checked-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-bg"
+            }
+          ]
+        },
+        "checkbox-checked-size": {
+          "name": "checkbox-checked-size",
+          "value": "1.25rem",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-size"
+            }
+          ]
+        },
+        "checkbox-checked-border-size": {
+          "name": "checkbox-checked-border-size",
+          "value": "2px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-border-size"
+            }
+          ]
+        },
+        "checkbox-checked-border-color": {
+          "name": "checkbox-checked-border-color",
           "value": "#40dc7e",
           "parents": [
             {
@@ -8743,8 +8831,63 @@
           ],
           "childs": []
         },
-        "checkbox-fg": {
-          "name": "checkbox-fg",
+        "checkbox-checked-checkmark": {
+          "name": "checkbox-checked-checkmark",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-bg": {
+          "name": "checkbox-disabled-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-bg"
+            }
+          ]
+        },
+        "checkbox-disabled-size": {
+          "name": "checkbox-disabled-size",
+          "value": "1.25rem",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-size"
+            }
+          ]
+        },
+        "checkbox-disabled-border-size": {
+          "name": "checkbox-disabled-border-size",
+          "value": "2px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-border-size"
+            }
+          ]
+        },
+        "checkbox-disabled-border-color": {
+          "name": "checkbox-disabled-border-color",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-checkmark": {
+          "name": "checkbox-disabled-checkmark",
           "value": "#2a2a2a",
           "parents": [
             {
@@ -9659,10 +9802,6 @@
             {
               "theme": "cosmic",
               "prop": "form-control-placeholder-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "checkbox-border-color"
             }
           ]
         },
@@ -9733,11 +9872,15 @@
             },
             {
               "theme": "cosmic",
-              "prop": "checkbox-fg"
+              "prop": "checkbox-checked-checkmark"
             },
             {
               "theme": "cosmic",
-              "prop": "radio-fg"
+              "prop": "checkbox-disabled-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-checkmark"
             },
             {
               "theme": "cosmic",
@@ -9983,7 +10126,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "checkbox-selected-border-color"
+              "prop": "checkbox-checked-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "radio-fg"
             },
             {
               "theme": "cosmic",
@@ -13275,7 +13422,16 @@
               "prop": "separator"
             }
           ],
-          "childs": []
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checkmark"
+            }
+          ]
         },
         "form-control-selected-border-color": {
           "name": "form-control-selected-border-color",
@@ -13491,17 +13647,69 @@
         },
         "checkbox-border-color": {
           "name": "checkbox-border-color",
-          "value": "#a1a1e5",
+          "value": "#342e73",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "color-fg"
+              "prop": "form-control-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "separator"
             }
           ],
           "childs": []
         },
-        "checkbox-selected-border-color": {
-          "name": "checkbox-selected-border-color",
+        "checkbox-checkmark": {
+          "name": "checkbox-checkmark",
+          "value": "#342e73",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "form-control-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "separator"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-bg": {
+          "name": "checkbox-checked-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-size": {
+          "name": "checkbox-checked-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-border-size": {
+          "name": "checkbox-checked-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-border-color": {
+          "name": "checkbox-checked-border-color",
           "value": "#00d977",
           "parents": [
             {
@@ -13511,8 +13719,63 @@
           ],
           "childs": []
         },
-        "checkbox-fg": {
-          "name": "checkbox-fg",
+        "checkbox-checked-checkmark": {
+          "name": "checkbox-checked-checkmark",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-bg": {
+          "name": "checkbox-disabled-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-size": {
+          "name": "checkbox-disabled-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-border-size": {
+          "name": "checkbox-disabled-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-border-color": {
+          "name": "checkbox-disabled-border-color",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-checkmark": {
+          "name": "checkbox-disabled-checkmark",
           "value": "#ffffff",
           "parents": [
             {
@@ -13524,11 +13787,11 @@
         },
         "radio-fg": {
           "name": "radio-fg",
-          "value": "#ffffff",
+          "value": "#00d977",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "color-fg-heading"
+              "prop": "color-success"
             }
           ],
           "childs": []

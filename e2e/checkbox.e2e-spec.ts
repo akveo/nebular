@@ -144,7 +144,7 @@ describe('nb-search', () => {
     expect(warning.getCssValue('border-color')).toEqual(warning_color);
   });
 
-  it('should apply style if status success', () => {
+  it('should apply style if status danger', () => {
     const danger = element(by.css('#danger .customised-control-indicator'));
     const other = element(by.css('#first .customised-control-indicator'));
 
