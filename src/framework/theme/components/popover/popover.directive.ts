@@ -22,11 +22,11 @@ import { NbPopoverMode, NbTriggerHelper } from './trigger.helper';
 export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
 
 /**
- * Powerful popover directive.
+ * Powerful popover directive, which provides the best UX for your users.
  *
- * @example popover can accept different content {@link NbPopoverContent}
- * and render it in the {@link NbPopoverComponent} such as:
+ * @example Popover can accept different content such as:
  * TemplateRef
+ *
  * ```
  * <button [nbPopover]="templateRef"></button>
  * <ng-template #templateRef>
@@ -34,51 +34,61 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * </ng-template>
  * ```
  *
- * Any components
+ * @example Custom components
+ *
  * ```
  * <button [nbPopover]="NbCardComponent"></button>
  * ```
  *
- * Just strings
+ * @example Primitive types
+ *
  * ```
  * <button [nbPopover]="'Hello, Popover!'"></button>
  * ```
  *
- * @example moreover popover has different placements, such as: top, bottom, left and right
+ * @example Popover has different placements, such as: top, bottom, left and right
  * which can be used as following:
+ *
  * ```
  * <button [nbPopover]="'Hello, Popover!'" [nbPopoverPlacement]="'left'"></button>
+ * ```
+ *
+ * @example By default popover will try to adjust itself to maximally fit viewport
+ * and provide the best user experience. It will try to change placement of the popover container.
+ * If you wanna disable this behaviour just set it falsy value.
+ *
+ * ```
+ * <button [nbPopover]="'Hello, Popover!'" [nbPopoverAdjust]="false"></button>
  * ```
  * */
 @Directive({ selector: '[nbPopover]' })
 export class NbPopoverDirective implements OnInit, OnDestroy {
 
   /**
-   * Popover content which will be rendered in {@link NbPopoverComponent}.
-   * see {@link NbPopoverContent}
+   * Popover content which will be rendered in NbPopoverComponent.
+   * Available content: template ref, component and any primitive.
    * */
   @Input('nbPopover')
   content: NbPopoverContent;
 
   /**
    * Position will be calculated relatively host element based on the placement.
-   * see {@link NbPlacement}
+   * Can be top, right, bottom and left.
    * */
   @Input('nbPopoverPlacement')
   placement: NbPlacement = NbPlacement.TOP;
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
-   * Set this property to null if you want to disable automatically adjustment.
-   * see {@link NbAdjustment} {@link NbAdjustmentHelper}
+   * Set this property to any falsy value if you want to disable automatically adjustment.
+   * Available values: clockwise, counterclockwise.
    * */
   @Input('nbPopoverAdjust')
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Describes when the container will be shown.
-   * Available options for now: 'click' and 'hover'
-   * see {@link NbPopoverMode}
+   * Available options: 'click' and 'hover'
    * */
   @Input('nbPopoverMode')
   mode: NbPopoverMode = NbPopoverMode.CLICK;
@@ -99,7 +109,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     return !this.containerRef;
   }
 
-  /**
+  /*
    * Is used for unsubscribe all subscriptions after component destructuring.
    * */
   private alive: boolean = true;
@@ -130,7 +140,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Show popover if it is hidden.
+   * Show popover.
    * */
   show() {
     if (this.isHidden) {
@@ -139,7 +149,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Hide popover if it's shown.
+   * Hide popover.
    * */
   hide() {
     if (this.isShown) {
@@ -158,7 +168,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     }
   }
 
-  /**
+  /*
    * Adjust popover position on window resize.
    * Window resize may change host element position, so popover relocation required.
    *
@@ -172,7 +182,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     }
   }
 
-  /**
+  /*
    * Subscribe to the popover triggers created from the {@link NbPopoverDirective#mode}.
    * see {@link NbTriggerHelper}
    * */
@@ -186,7 +196,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       .subscribe(() => this.hide());
   }
 
-  /**
+  /*
    * Renders popover putting {@link NbPopoverComponent} in the top of {@link NbLayoutComponent}
    * and positioning container based on {@link NbPopoverDirective#placement}
    * and {@link NbPopoverDirective#adjustment}.
@@ -197,7 +207,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
         this.patchPopoverContent(this.content);
-        /**
+        /*
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
          * But we should have size on this step to calculate popover position correctly.
@@ -213,7 +223,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       });
   }
 
-  /**
+  /*
    * Destroys the {@link NbPopoverComponent} and nullify its reference;
    * */
   private destroyPopover() {
@@ -221,7 +231,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     this.containerRef = null;
   }
 
-  /**
+  /*
    * Moves {@link NbPopoverComponent} relatively host component based on the {@link NbPopoverDirective#placement}.
    * */
   private place() {
@@ -231,21 +241,21 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     this.adjust(containerRect, hostRect);
   }
 
-  /**
+  /*
    * Set container content.
    * */
   private patchPopoverContent(content: NbPopoverContent) {
     this.container.content = content;
   }
 
-  /**
+  /*
    * Set container placement.
    * */
   private patchPopoverPlacement(placement: NbPlacement) {
     this.container.placement = placement;
   }
 
-  /**
+  /*
    * Set container position.
    * */
   private patchPopoverPosition({ top: top, left: left }) {
@@ -253,7 +263,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     this.container.positionLeft = left;
   }
 
-  /**
+  /*
    * Calculates container adjustment and sets container position and placement.
    * */
   private adjust(containerRect: ClientRect, hostRect: ClientRect) {
@@ -263,7 +273,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     this.patchPopoverPosition(position);
   }
 
-  /**
+  /*
    * Checks if {@link NbPopoverDirective#adjustment} can be performed and runs it.
    * If not, just calculates element position.
    * */
@@ -275,7 +285,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     return this.calcPosition(placed, host);
   }
 
-  /**
+  /*
    * Calculate adjustment.
    * see {@link NbAdjustmentHelper}.
    * */
@@ -283,7 +293,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
   }
 
-  /**
+  /*
    * Calculate position.
    * see {@link NbPositioningHelper}
    * */

@@ -11,6 +11,13 @@ import { NbPopoverContent } from './popover.directive';
 /**
  * Popover container.
  * Renders provided content inside.
+ *
+ * @styles
+ *
+ * popover-fg
+ * popover-bg
+ * popover-border
+ * popover-shadow
  * */
 @Component({
   selector: 'nb-popover',
@@ -34,8 +41,7 @@ export class NbPopoverComponent {
   content: NbPopoverContent;
 
   /**
-   * Popover calcPosition relatively directive host element.
-   * Helps us draw chevron on correct place.
+   * Popover placement relatively host element.
    * */
   @Input()
   @HostBinding('class')
@@ -51,6 +57,8 @@ export class NbPopoverComponent {
 
   /**
    * Check that content is a TemplateRef.
+   *
+   * @return boolean
    * */
   get isTemplate(): boolean {
     return this.content instanceof TemplateRef;
@@ -58,6 +66,8 @@ export class NbPopoverComponent {
 
   /**
    * Check that content is an angular component.
+   *
+   * @return boolean
    * */
   get isComponent(): boolean {
     return this.content instanceof Type;

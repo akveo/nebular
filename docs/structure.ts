@@ -394,6 +394,22 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Popover',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbPopoverDirective',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbPopoverComponent',
+          },
+        ],
+      },
     ],
   },
   {
