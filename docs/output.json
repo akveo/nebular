@@ -390,10 +390,10 @@
           "platform": null,
           "name": "isAuthenticated",
           "type": [
-            "Observable<any>"
+            "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token"
+          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token\n// TODO: to implement previous todo lets use isValid method of token"
         },
         {
           "examples": [],
@@ -422,7 +422,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token"
+          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token\n // TODO: to implement previous todo lets use isValid method of token"
         },
         {
           "examples": [],
@@ -1199,7 +1199,7 @@
         {
           "shortDescription": "",
           "description": "",
-          "code": "\n<nb-reveal-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-reveal-card>\n"
+          "code": "\n<nb-flip-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-flip-card>\n"
         }
       ],
       "props": [
@@ -2657,13 +2657,6 @@
               "description": ""
             },
             {
-              "name": "componentFactoryResolver",
-              "type": "ComponentFactoryResolver",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
               "name": "router",
               "type": "Router",
               "required": null,
@@ -2695,26 +2688,6 @@
           "name": "connectToSearchField",
           "type": [
             "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "component",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "createAttachedSearch",
-          "type": [
-            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",

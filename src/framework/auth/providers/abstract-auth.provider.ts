@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
+import { NbAuthResult } from '../services/auth-result';
 
-import { NbAuthResult } from '../services/auth.service';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAbstractAuthProvider {

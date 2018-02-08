@@ -14,66 +14,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
 import { NbAuthSimpleToken, NbAuthToken, NbTokenService } from './token.service';
 import { NB_AUTH_PROVIDERS_TOKEN } from '../auth.options';
-
-export class NbAuthResult {
-
-  protected token: any;
-  protected errors: string[] = [];
-  protected messages: string[] = [];
-
-  // TODO pass arguments in options object
-  constructor(protected success: boolean,
-    protected response?: any,
-    protected redirect?: any,
-    errors?: any,
-    messages?: any,
-    token?: NbAuthSimpleToken) {
-
-    this.errors = this.errors.concat([errors]);
-    if (errors instanceof Array) {
-      this.errors = errors;
-    }
-
-    this.messages = this.messages.concat([messages]);
-    if (messages instanceof Array) {
-      this.messages = messages;
-    }
-
-    this.token = token;
-  }
-
-  getResponse(): any {
-    return this.response;
-  }
-
-  getTokenValue(): any {
-    return this.token;
-  }
-
-  replaceToken(token: NbAuthSimpleToken): any {
-    this.token = token
-  }
-
-  getRedirect(): any {
-    return this.redirect;
-  }
-
-  getErrors(): string[] {
-    return this.errors.filter(val => !!val);
-  }
-
-  getMessages(): string[] {
-    return this.messages.filter(val => !!val);
-  }
-
-  isSuccess(): boolean {
-    return this.success;
-  }
-
-  isFailure(): boolean {
-    return !this.success;
-  }
-}
+import { NbAuthResult } from './auth-result';
 
 /**
  * Common authentication service.
@@ -98,15 +39,16 @@ export class NbAuthService {
   /**
    * Returns true if auth token is presented in the token storage
    * // TODO: check exp date for JWT token
+   * // TODO: to implement previous todo lets use isValid method of token
    * @returns {Observable<any>}
    */
-  isAuthenticated(): Observable<any> {
+  isAuthenticated(): Observable<boolean> {
     return this.getToken().pipe(map(token => !!(token && token.getValue())));
   }
 
   /**
    * Returns tokens stream
-   * @returns {Observable<any>}
+   * @returns {Observable<NbAuthSimpleToken>}
    */
   onTokenChange(): Observable<NbAuthToken> {
     return this.tokenService.tokenChange();
@@ -115,7 +57,8 @@ export class NbAuthService {
   /**
    * Returns authentication status stream
    *  // TODO: check exp date for JWT token
-   * @returns {Observable<any>}
+   *  // TODO: to implement previous todo lets use isValid method of token
+   * @returns {Observable<boolean>}
    */
   onAuthenticationChange(): Observable<boolean> {
     return this.onTokenChange().pipe(map((token: NbAuthSimpleToken) => !!(token && token.getValue())));
@@ -136,6 +79,8 @@ export class NbAuthService {
     return this.getProvider(provider).authenticate(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
+          // TODO move this duplicate code in the separate method (see register)
+          // TODO is it necessary to chech for token here
           if (result.isSuccess() && result.getTokenValue()) {
             return this.tokenService.set(result.getTokenValue())
               .pipe(
@@ -233,7 +178,7 @@ export class NbAuthService {
     return this.getProvider(provider).resetPassword(data);
   }
 
-  getProvider(provider: string): NbAbstractAuthProvider {
+  private getProvider(provider: string): NbAbstractAuthProvider {
     if (!this.providers[provider]) {
       throw new TypeError(`Nb auth provider '${provider}' is not registered`);
     }

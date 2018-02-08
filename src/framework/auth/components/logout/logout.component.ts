@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 
 import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
-import { NbAuthService, NbAuthResult } from '../../services/auth.service';
+import { NbAuthService } from '../../services/auth.service';
+import { NbAuthResult } from '../../services/auth-result';
 
 @Component({
   selector: 'nb-logout',
