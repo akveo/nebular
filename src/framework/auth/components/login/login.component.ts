@@ -5,7 +5,7 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
+import { NB_AUTH_OPTIONS_TOKEN, NbAuthSocialLink } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
@@ -80,13 +80,25 @@ import { NbAuthResult } from '../../services/auth-result';
       </form>
 
       <div class="links">
-        <small class="form-text">Or connect with:</small>
 
-        <div class="socials">
-          <a href="https://github.com/akveo" target="_blank" class="socicon-github"></a>
-          <a href="https://www.facebook.com/akveo/" target="_blank" class="socicon-facebook"></a>
-          <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon-twitter"></a>
-        </div>
+        <ng-container *ngIf="socialLinks && socialLinks.length > 0">
+          <small class="form-text">Or connect with:</small>
+
+          <div class="socials">
+            <ng-container *ngFor="let socialLink of socialLinks">
+              <a *ngIf="socialLink.link"
+                 [routerLink]="socialLink.link"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+              <a *ngIf="socialLink.url"
+                 [attr.href]="socialLink.url"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+            </ng-container>
+          </div>
+        </ng-container>
 
         <small class="form-text">
           Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
@@ -105,6 +117,7 @@ export class NbLoginComponent {
   messages: string[] = [];
   user: any = {};
   submitted: boolean = false;
+  socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
@@ -113,6 +126,7 @@ export class NbLoginComponent {
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.provider = this.getConfigValue('forms.login.provider');
+    this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
   login(): void {
