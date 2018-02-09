@@ -57,9 +57,14 @@
     }
 
     .socials a {
-      font-size: 2rem;
       margin: 0 1rem;
       text-decoration: none;
+      font-size: 1rem;
+      vertical-align: middle;
+
+      &.with-icon {
+        font-size: 2rem;
+      }
     }
   }
 }
