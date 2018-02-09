@@ -3244,8 +3244,8 @@
         },
         {
           "shortDescription": "Example of fixed sidebar located on the left side, initially collapsed.",
-          "description": "",
-          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n <nb-sidebar-content>\n   Menu or another component here\n </nb-sidebar-content>\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
+          "description": "   Sidebar content, menu or another component here.",
+          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n\n   Sidebar content, menu or another component here.\n\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
         }
       ],
       "props": [

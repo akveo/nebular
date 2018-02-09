@@ -7,13 +7,21 @@
 
 ## Installation steps
 
-1) First, let's install the module as it's distributed as an npm package. Security module doesn't have a dependency on Auth or Theme module, but it is recommended to use them in conjunction.
+1) First, let's install the module as it's distributed as an npm package. Security module doesn't have a dependency on Auth or Theme modules, but it is recommended to use them in conjunction.
 
-`npm i @nebular/security`
+
+```bash
+
+npm i @nebular/security
+```
     
 2) Import the module:
 
-`import { NbSecurityModule } from '@nebular/security';`
+```typescript
+
+import { NbSecurityModule } from '@nebular/security
+
+```
 
 3) Now, let's register the module in the root module:
 
@@ -27,7 +35,7 @@
 
 ```
 
-Great, at this stage we have installed the Security module and ready to configure it.
+Great, at this stage we have installed Nebular Security and ready to configure it.
 
 <hr class="section-end">
 
