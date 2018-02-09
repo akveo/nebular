@@ -27,7 +27,7 @@
 
 ```
 
-Great, as this stage we installed the Security module and ready to configure it.
+Great, at this stage we have installed the Security module and ready to configure it.
 
 <hr class="section-end">
 
