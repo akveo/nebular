@@ -133,6 +133,23 @@ const NB_TEST_COMPONENTS = [
       forms: {
         login: {
           redirectDelay: 3000,
+          socialLinks: [
+            {
+              url: 'https://github.com/akveo',
+              target: '_blank',
+              title: 'GitHub',
+            },
+            {
+              url: 'https://www.facebook.com/akveo',
+              target: '_blank',
+              icon: 'nb-home',
+            },
+            {
+              url: 'https://www.facebook.com/akveo',
+              target: '_blank',
+              title: 'Twitter',
+            },
+          ],
         },
       },
       providers: {
