@@ -5,10 +5,12 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NB_AUTH_OPTIONS_TOKEN } from '../../auth.options';
+import { NB_AUTH_OPTIONS_TOKEN, NbAuthSocialLink } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
 
-import { NbAuthResult, NbAuthService } from '../../services/auth.service';
+import { NbAuthService } from '../../services/auth.service';
+import { NbAuthResult } from '../../services/auth-result';
+
 
 @Component({
   selector: 'nb-register',
@@ -118,6 +120,26 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
       </form>
 
       <div class="links">
+
+        <ng-container *ngIf="socialLinks && socialLinks.length > 0">
+          <small class="form-text">Or connect with:</small>
+
+          <div class="socials">
+            <ng-container *ngFor="let socialLink of socialLinks">
+              <a *ngIf="socialLink.link"
+                 [routerLink]="socialLink.link"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+              <a *ngIf="socialLink.url"
+                 [attr.href]="socialLink.url"
+                 [attr.target]="socialLink.target"
+                 [attr.class]="socialLink.icon"
+                 [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+            </ng-container>
+          </div>
+        </ng-container>
+
         <small class="form-text">
           Already have an account? <a routerLink="../login"><strong>Sign in</strong></a>
         </small>
@@ -135,6 +157,7 @@ export class NbRegisterComponent {
   errors: string[] = [];
   messages: string[] = [];
   user: any = {};
+  socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
@@ -143,6 +166,7 @@ export class NbRegisterComponent {
     this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
     this.showMessages = this.getConfigValue('forms.register.showMessages');
     this.provider = this.getConfigValue('forms.register.provider');
+    this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
   register(): void {

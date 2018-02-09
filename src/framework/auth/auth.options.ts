@@ -9,16 +9,27 @@ export interface NbAuthProviders {
   [key: string]: any;
 }
 
+export interface NbAuthSocialLink {
+  link?: string,
+  url?: string,
+  target?: string,
+  title?: string,
+  icon?: string,
+}
+
+const socialLinks: NbAuthSocialLink[] = [];
+
 export const defaultSettings: any = {
   forms: {
     login: {
-      redirectDelay: 500,
-      provider: 'email',
-      rememberMe: true,
-      showMessages: {
+      redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
+      provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
+      rememberMe: true,   // whether to show or not the `rememberMe` checkbox
+      showMessages: {     // show/not show success/error messages
         success: true,
         error: true,
       },
+      socialLinks: socialLinks, // social links at the bottom of a page
     },
     register: {
       redirectDelay: 500,
@@ -28,6 +39,7 @@ export const defaultSettings: any = {
         error: true,
       },
       terms: true,
+      socialLinks: socialLinks,
     },
     requestPassword: {
       redirectDelay: 500,
@@ -36,6 +48,7 @@ export const defaultSettings: any = {
         success: true,
         error: true,
       },
+      socialLinks: socialLinks,
     },
     resetPassword: {
       redirectDelay: 500,
@@ -44,6 +57,7 @@ export const defaultSettings: any = {
         success: true,
         error: true,
       },
+      socialLinks: socialLinks,
     },
     logout: {
       redirectDelay: 500,
@@ -65,7 +79,6 @@ export const defaultSettings: any = {
       },
     },
   },
-
 };
 
 export const NB_AUTH_OPTIONS_TOKEN = new InjectionToken<NbAuthOptions>('Nebular Auth Options');
