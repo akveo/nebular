@@ -10,7 +10,7 @@ export enum NbPopoverMode {
   HOVER = 'hover',
 }
 
-export class NbTrigger {
+export class NbPopoverTrigger {
   open: Observable<Event>;
   close: Observable<Event>;
 }
@@ -29,9 +29,9 @@ const NB_TRIGGERS = {
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
    *
-   * @return {NbTrigger} open and close events streams.
+   * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbTrigger {
+  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
       open: observableFromEvent(host, 'click'),
       close: observableFromEvent<Event>(document, 'click')
@@ -50,9 +50,9 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    *
-   * @return {NbTrigger} open and close events streams.
+   * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.HOVER](host: HTMLElement): NbTrigger {
+  [NbPopoverMode.HOVER](host: HTMLElement): NbPopoverTrigger {
     return {
       open: observableFromEvent(host, 'mouseover'),
       close: observableFromEvent(host, 'mouseout'),
@@ -70,9 +70,9 @@ export class NbTriggerHelper {
    * Getter required because listen can be called when container isn't initialized.
    * @param mode {NbPopoverMode} describes container triggering strategy.
    *
-   * @return {NbTrigger} open and close events streams.
+   * @return {NbPopoverTrigger} open and close events streams.
    * */
-  static createTrigger(host: HTMLElement, getContainer: Function, mode: NbPopoverMode): NbTrigger {
+  static createTrigger(host: HTMLElement, getContainer: Function, mode: NbPopoverMode): NbPopoverTrigger {
     const createTrigger = NB_TRIGGERS[mode];
     return createTrigger.call(NB_TRIGGERS, host, getContainer);
   }

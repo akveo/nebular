@@ -7,11 +7,11 @@
 import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, TemplateRef,
   Type,
 } from '@angular/core';
-import { NbPlacement, NbPositioningHelper } from './positioning.helper';
+import { NbPopoverPlacement, NbPositioningHelper } from './positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
-import { NbPosition, NbAdjustmentHelper, NbAdjustment } from './adjustment.helper';
+import { NbPopoverPosition, NbAdjustmentHelper, NbPopoverAdjustment } from './adjustment.helper';
 import { NbPopoverMode, NbTriggerHelper } from './trigger.helper';
 
 /**
@@ -23,6 +23,8 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
+ *
+ * ![image](assets/images/components/popover.gif)
  *
  * @example Popover can accept different content such as:
  * TemplateRef
@@ -43,14 +45,14 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * @example Primitive types
  *
  * ```
- * <button [nbPopover]="'Hello, Popover!'"></button>
+ * <button nbPopover="Hello, Popover!"></button>
  * ```
  *
  * @example Popover has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
  * ```
- * <button [nbPopover]="'Hello, Popover!'" [nbPopoverPlacement]="'left'"></button>
+ * <button nbPopover="Hello, Popover!" nbPopoverPlacement="left"></button>
  * ```
  *
  * @example By default popover will try to adjust itself to maximally fit viewport
@@ -58,7 +60,7 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```
- * <button [nbPopover]="'Hello, Popover!'" [nbPopoverAdjust]="false"></button>
+ * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  * */
 @Directive({ selector: '[nbPopover]' })
@@ -76,7 +78,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Can be top, right, bottom and left.
    * */
   @Input('nbPopoverPlacement')
-  placement: NbPlacement = NbPlacement.TOP;
+  placement: NbPopoverPlacement = NbPopoverPlacement.TOP;
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
@@ -84,7 +86,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbPopoverAdjust')
-  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+  adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
 
   /**
    * Describes when the container will be shown.
@@ -251,7 +253,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   /*
    * Set container placement.
    * */
-  private patchPopoverPlacement(placement: NbPlacement) {
+  private patchPopoverPlacement(placement: NbPopoverPlacement) {
     this.container.placement = placement;
   }
 
@@ -277,7 +279,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Checks if {@link NbPopoverDirective#adjustment} can be performed and runs it.
    * If not, just calculates element position.
    * */
-  private performAdjustment(placed: ClientRect, host: ClientRect): NbPosition {
+  private performAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
     if (this.adjustment) {
       return this.calcAdjustment(placed, host);
     }
@@ -289,7 +291,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Calculate adjustment.
    * see {@link NbAdjustmentHelper}.
    * */
-  private calcAdjustment(placed: ClientRect, host: ClientRect): NbPosition {
+  private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
     return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
   }
 
@@ -297,7 +299,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Calculate position.
    * see {@link NbPositioningHelper}
    * */
-  private calcPosition(placed: ClientRect, host: ClientRect): NbPosition {
+  private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
     return {
       position: NbPositioningHelper.calcPosition(placed, host, this.placement),
       placement: this.placement,

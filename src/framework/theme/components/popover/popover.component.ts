@@ -5,7 +5,7 @@
  */
 
 import { Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
-import { NbPlacement } from './positioning.helper';
+import { NbPopoverPlacement } from './positioning.helper';
 import { NbPopoverContent } from './popover.directive';
 
 /**
@@ -45,7 +45,7 @@ export class NbPopoverComponent {
    * */
   @Input()
   @HostBinding('class')
-  placement: NbPlacement = NbPlacement.TOP;
+  placement: NbPopoverPlacement = NbPopoverPlacement.TOP;
 
   @Input()
   @HostBinding('style.top.px')

@@ -41,6 +41,7 @@ import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
 import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbCardTestComponent } from './card-test/card-test.component';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -50,7 +51,6 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
-import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 

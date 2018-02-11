@@ -68,18 +68,19 @@ import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbDynamicToAddComponent, NbThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
 import { NbActionsTestComponent } from './actions-test/actions-test.component';
 import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
+
+import { routes } from './app.routes';
+
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbSearchTestComponent } from './search-test/search-test.component';
 import { NbSearchTestCustomizedComponent } from './search-test/search-test-customized.component';
 import { NbFormsTestComponent } from './forms-test/forms-test.component';
 
-import { routes } from './app.routes';
-
 import { NbCardTestComponent } from './card-test/card-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
 import { RoleProvider } from './role.provider';
-import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,

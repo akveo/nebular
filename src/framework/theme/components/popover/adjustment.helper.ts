@@ -1,7 +1,7 @@
-import { NbPlacement, NbPositioningHelper } from './positioning.helper';
+import { NbPopoverPlacement, NbPositioningHelper } from './positioning.helper';
 
-export class NbPosition {
-  placement: NbPlacement;
+export class NbPopoverPosition {
+  placement: NbPopoverPlacement;
   position: {
     top: number;
     left: number;
@@ -11,44 +11,47 @@ export class NbPosition {
 /**
  * Adjustment strategies.
  * */
-export enum NbAdjustment {
+export enum NbPopoverAdjustment {
   CLOCKWISE = 'clockwise',
   COUNTERCLOCKWISE = 'counterclockwise',
 }
 
 /**
- * Describes the bypass order of the {@link NbPlacement} in the {@link NbAdjustment}.
+ * Describes the bypass order of the {@link NbPopoverPlacement} in the {@link NbPopoverAdjustment}.
  * */
 const NB_ORDERED_PLACEMENTS = {
-  [NbAdjustment.CLOCKWISE]: [
-    NbPlacement.TOP,
-    NbPlacement.RIGHT,
-    NbPlacement.BOTTOM,
-    NbPlacement.LEFT,
+  [NbPopoverAdjustment.CLOCKWISE]: [
+    NbPopoverPlacement.TOP,
+    NbPopoverPlacement.RIGHT,
+    NbPopoverPlacement.BOTTOM,
+    NbPopoverPlacement.LEFT,
   ],
 
-  [NbAdjustment.COUNTERCLOCKWISE]: [
-    NbPlacement.TOP,
-    NbPlacement.LEFT,
-    NbPlacement.BOTTOM,
-    NbPlacement.RIGHT,
+  [NbPopoverAdjustment.COUNTERCLOCKWISE]: [
+    NbPopoverPlacement.TOP,
+    NbPopoverPlacement.LEFT,
+    NbPopoverPlacement.BOTTOM,
+    NbPopoverPlacement.RIGHT,
   ],
 };
 
 export class NbAdjustmentHelper {
 
   /**
-   * Calculated {@link NbPosition} based on placed element, host element,
+   * Calculated {@link NbPopoverPosition} based on placed element, host element,
    * placed element placement and adjustment strategy.
    *
    * @param placed {ClientRect} placed element relatively host.
    * @param host {ClientRect} host element.
-   * @param placement {NbPlacement} placed element placement relatively host.
-   * @param adjustment {NbAdjustment} adjustment strategy.
+   * @param placement {NbPopoverPlacement} placed element placement relatively host.
+   * @param adjustment {NbPopoverAdjustment} adjustment strategy.
    *
-   * @return {NbPosition} calculated position.
+   * @return {NbPopoverPosition} calculated position.
    * */
-  static adjust(placed: ClientRect, host: ClientRect, placement: NbPlacement, adjustment: NbAdjustment): NbPosition {
+  static adjust(placed: ClientRect,
+                host: ClientRect,
+                placement: NbPopoverPlacement,
+                adjustment: NbPopoverAdjustment): NbPopoverPosition {
     const placements = NB_ORDERED_PLACEMENTS[adjustment].slice();
     const ordered = NbAdjustmentHelper.orderPlacements(placement, placements);
     const possible = ordered.map(pl => ({
@@ -63,11 +66,11 @@ export class NbAdjustmentHelper {
    * Searches first adjustment which doesn't go beyond the viewport.
    *
    * @param placed {ClientRect} placed element relatively host.
-   * @param possible {NbPosition[]} possible positions list ordered according to adjustment strategy.
+   * @param possible {NbPopoverPosition[]} possible positions list ordered according to adjustment strategy.
    *
-   * @return {NbPosition} calculated position.
+   * @return {NbPopoverPosition} calculated position.
    * */
-  private static chooseBest(placed: ClientRect, possible: NbPosition[]): NbPosition {
+  private static chooseBest(placed: ClientRect, possible: NbPopoverPosition[]): NbPopoverPosition {
     return possible.find(adjust => NbAdjustmentHelper.inViewPort(placed, adjust)) || possible.shift();
   }
 
@@ -75,11 +78,11 @@ export class NbAdjustmentHelper {
    * Finds out is adjustment doesn't go beyond of the view port.
    *
    * @param placed {ClientRect} placed element relatively host.
-   * @param position {NbPosition} position of the placed element.
+   * @param position {NbPopoverPosition} position of the placed element.
    *
    * @return {boolean} true if placed element completely viewport.
    * */
-  private static inViewPort(placed: ClientRect, position: NbPosition): boolean {
+  private static inViewPort(placed: ClientRect, position: NbPopoverPosition): boolean {
     return position.position.top - window.pageYOffset > 0 &&
       position.position.left - window.pageXOffset > 0 &&
       position.position.top + placed.height < window.innerHeight + window.pageYOffset &&
@@ -87,27 +90,28 @@ export class NbAdjustmentHelper {
   }
 
   /**
-   * Reorder placements list to make placement start point and fit {@link NbAdjustment}
+   * Reorder placements list to make placement start point and fit {@link NbPopoverAdjustment}
    *
-   * @param placement {NbPlacement} active placement
-   * @param placements {NbPlacement[]} placements list according to the active adjustment strategy.
+   * @param placement {NbPopoverPlacement} active placement
+   * @param placements {NbPopoverPlacement[]} placements list according to the active adjustment strategy.
    *
-   * @return {NbPlacement[]} correctly ordered placements list.
+   * @return {NbPopoverPlacement[]} correctly ordered placements list.
    *
-   * @example order placements for {@link NbPlacement#RIGHT} and {@link NbAdjustment#CLOCKWISE}
+   * @example order placements for {@link NbPopoverPlacement#RIGHT} and {@link NbPopoverAdjustment#CLOCKWISE}
    * ```
-   * const placements = NB_ORDERED_PLACEMENTS[NbAdjustment.CLOCKWISE];
-   * const ordered = orderPlacement(NbPlacement.RIGHT, placements);
+   * const placements = NB_ORDERED_PLACEMENTS[NbPopoverAdjustment.CLOCKWISE];
+   * const ordered = orderPlacement(NbPopoverPlacement.RIGHT, placements);
    *
    * expect(ordered).toEqual([
-   *  NbPlacement.RIGHT,
-   *  NbPlacement.BOTTOM,
-   *  NbPlacement.LEFT,
-   *  NbPlacement.TOP,
+   *  NbPopoverPlacement.RIGHT,
+   *  NbPopoverPlacement.BOTTOM,
+   *  NbPopoverPlacement.LEFT,
+   *  NbPopoverPlacement.TOP,
    * ]);
    * ```
    * */
-  private static orderPlacements(placement: NbPlacement, placements: NbPlacement[]): NbPlacement[] {
+  private static orderPlacements(placement: NbPopoverPlacement,
+                                 placements: NbPopoverPlacement[]): NbPopoverPlacement[] {
     const index = placements.indexOf(placement);
     const start = placements.splice(index, placements.length);
     return start.concat(...placements);

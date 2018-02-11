@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAdjustment, NbAdjustmentHelper } from './adjustment.helper';
-import { NbPlacement } from './positioning.helper';
+import { NbPopoverAdjustment, NbAdjustmentHelper } from './adjustment.helper';
+import { NbPopoverPlacement } from './positioning.helper';
 
 describe('adjustment-helper', () => {
   const placedRect: ClientRect = {
@@ -53,8 +53,8 @@ describe('adjustment-helper', () => {
   };
 
   describe('clockwise strategy', () => {
-    const strategy = NbAdjustment.CLOCKWISE;
-    const placement = NbPlacement.TOP;
+    const strategy = NbPopoverAdjustment.CLOCKWISE;
+    const placement = NbPopoverPlacement.TOP;
 
     it('adjust top to right when host in top left corner', () => {
       spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
@@ -64,7 +64,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.RIGHT);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.RIGHT);
       expect(adjustment.position.top).toEqual(1035);
       expect(adjustment.position.left).toEqual(1120);
     });
@@ -77,7 +77,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.BOTTOM);
       expect(adjustment.position.top).toEqual(1120);
       expect(adjustment.position.left).toEqual(2025);
     });
@@ -90,7 +90,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
       expect(adjustment.position.left).toEqual(2025);
     });
@@ -103,7 +103,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
       expect(adjustment.position.left).toEqual(1035);
     });
@@ -116,7 +116,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.LEFT);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
       expect(adjustment.position.left).toEqual(1940);
     });
@@ -129,15 +129,15 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(950);
       expect(adjustment.position.left).toEqual(1035);
     });
   });
 
   describe('counterclockwise strategy', () => {
-    const strategy = NbAdjustment.COUNTERCLOCKWISE;
-    const placement = NbPlacement.TOP;
+    const strategy = NbPopoverAdjustment.COUNTERCLOCKWISE;
+    const placement = NbPopoverPlacement.TOP;
 
     it('adjust top to bottom when host in top left corner', () => {
       spyOnProperty(window, 'innerHeight', 'get').and.returnValue(1110);
@@ -147,7 +147,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.BOTTOM);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.BOTTOM);
       expect(adjustment.position.top).toEqual(1120);
       expect(adjustment.position.left).toEqual(1035);
     });
@@ -160,7 +160,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.LEFT);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
       expect(adjustment.position.left).toEqual(1940);
     });
@@ -173,7 +173,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
       expect(adjustment.position.left).toEqual(2025);
     });
@@ -186,7 +186,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
       expect(adjustment.position.left).toEqual(1035);
     });
@@ -199,7 +199,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.LEFT);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
       expect(adjustment.position.left).toEqual(1940);
     });
@@ -212,7 +212,7 @@ describe('adjustment-helper', () => {
 
       const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
-      expect(adjustment.placement).toEqual(NbPlacement.TOP);
+      expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(950);
       expect(adjustment.position.left).toEqual(1035);
     });
