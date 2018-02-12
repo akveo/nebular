@@ -159,6 +159,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Themes - quick start',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'nebular-themes-quick-start.md',
+          },
+        ],
+      },
     ],
   },
   {
