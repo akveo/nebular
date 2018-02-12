@@ -5,8 +5,8 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
-import { NbPopoverPlacement } from './positioning.helper';
 import { NbPopoverContent } from './popover.directive';
+import { NbPopoverPlacement } from './helpers/model';
 
 /**
  * Popover container.

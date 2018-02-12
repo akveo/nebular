@@ -3,16 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-
-/**
- * Arrangement of one element relative to another.
- * */
-export enum NbPopoverPlacement {
-  TOP = 'top',
-  BOTTOM = 'bottom',
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+import { NbPopoverPlacement } from './model';
 
 export class NbPositioningHelper {
 

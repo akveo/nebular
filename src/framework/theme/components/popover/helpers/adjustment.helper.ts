@@ -1,20 +1,5 @@
-import { NbPopoverPlacement, NbPositioningHelper } from './positioning.helper';
-
-export class NbPopoverPosition {
-  placement: NbPopoverPlacement;
-  position: {
-    top: number;
-    left: number;
-  };
-}
-
-/**
- * Adjustment strategies.
- * */
-export enum NbPopoverAdjustment {
-  CLOCKWISE = 'clockwise',
-  COUNTERCLOCKWISE = 'counterclockwise',
-}
+import { NbPositioningHelper } from './positioning.helper';
+import { NbPopoverAdjustment, NbPopoverPlacement, NbPopoverPosition } from './model';
 
 /**
  * Describes the bypass order of the {@link NbPopoverPlacement} in the {@link NbPopoverAdjustment}.

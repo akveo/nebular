@@ -7,12 +7,13 @@
 import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, TemplateRef,
   Type,
 } from '@angular/core';
-import { NbPopoverPlacement, NbPositioningHelper } from './positioning.helper';
+import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
-import { NbPopoverPosition, NbAdjustmentHelper, NbPopoverAdjustment } from './adjustment.helper';
-import { NbPopoverMode, NbTriggerHelper } from './trigger.helper';
+import { NbAdjustmentHelper } from './helpers/adjustment.helper';
+import { NbTriggerHelper } from './helpers/trigger.helper';
+import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPosition } from './helpers/model';
 
 /**
  * Popover can be one of the following types:

@@ -1,20 +1,6 @@
-import { Observable } from 'rxjs/Observable';
 import { filter } from 'rxjs/operators/filter';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
-
-/**
- * NbPopoverMode describes when to trigger show and hide methods of the popover.
- * */
-export enum NbPopoverMode {
-  CLICK = 'click',
-  HOVER = 'hover',
-}
-
-export class NbPopoverTrigger {
-  toggle: Observable<Event>;
-  open: Observable<Event>;
-  close: Observable<Event>;
-}
+import { NbPopoverMode, NbPopoverTrigger } from './model';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.

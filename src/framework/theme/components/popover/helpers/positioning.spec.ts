@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbPopoverPlacement, NbPositioningHelper } from './positioning.helper';
+import { NbPositioningHelper } from './positioning.helper';
+import { NbPopoverPlacement } from './model';
 
 describe('positioning-helper', () => {
   const placedRect: ClientRect = {

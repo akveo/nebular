@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbPopoverAdjustment, NbAdjustmentHelper } from './adjustment.helper';
-import { NbPopoverPlacement } from './positioning.helper';
+import { NbAdjustmentHelper } from './adjustment.helper';
+import { NbPopoverAdjustment, NbPopoverPlacement } from './model';
 
 describe('adjustment-helper', () => {
   const placedRect: ClientRect = {
