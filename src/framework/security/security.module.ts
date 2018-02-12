@@ -4,13 +4,18 @@ import { CommonModule } from '@angular/common';
 import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions } from './security.options';
 import { NbAclService } from './services/acl.service';
 import { NbAccessChecker } from './services/authorization-checker.service';
+import { NbIsGrantedDirective } from './directives/is-granted.directive';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
-  declarations: [],
-  exports: [],
+  declarations: [
+    NbIsGrantedDirective,
+  ],
+  exports: [
+    NbIsGrantedDirective,
+  ],
 })
 export class NbSecurityModule {
   static forRoot(nbSecurityOptions?: NbAclOptions): ModuleWithProviders {
@@ -20,6 +25,9 @@ export class NbSecurityModule {
         { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: nbSecurityOptions },
         NbAclService,
         NbAccessChecker,
+      ],
+      exports: [
+        NbIsGrantedDirective,
       ],
     };
   }

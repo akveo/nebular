@@ -15,11 +15,11 @@ export class NbAccessChecker {
   constructor(protected roleProvider: NbRoleProvider, protected acl: NbAclService) {
   }
 
-  isGranted(permissoin: string, resource: string): Observable<boolean> {
+  isGranted(permission: string, resource: string): Observable<boolean> {
     return this.roleProvider.getRole()
       .pipe(
         map((role: string) => {
-          return this.acl.can(role, permissoin, resource);
+          return this.acl.can(role, permission, resource);
         }),
       );
   }
