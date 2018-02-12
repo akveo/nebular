@@ -19,6 +19,7 @@ What is included:
   - Helpers for token management (storing, passing with HTTP requests, etc).
 3) [x] @nebular/security
   - Roles and permissions management (ACL)
+  - `*nbIsGranted` conditional directive
 4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
 5) [ ] @nebular/data - application data & state management
 6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
