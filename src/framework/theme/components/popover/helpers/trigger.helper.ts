@@ -1,6 +1,7 @@
-import { filter } from 'rxjs/operators/filter';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
+import { debounceTime, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { empty as observableEmpty } from 'rxjs/observable/empty';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
@@ -20,14 +21,14 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
-      toggle: observableFromEvent(host, 'click'),
-      open: observableFromEvent(host, 'click'),
+      open: observableEmpty(),
       close: observableFromEvent<Event>(document, 'click')
         .pipe(
           filter(event => !host.contains(event.target as Node)
             && getContainer()
             && !getContainer().location.nativeElement.contains(event.target)),
         ),
+      toggle: observableFromEvent(host, 'click'),
     };
   },
 
@@ -37,14 +38,26 @@ const NB_TRIGGERS = {
    * Fires close event when mouse leaves the host element.
    *
    * @param host {HTMLElement} popover host element.
+   * @param getContainer {Function} popover container getter.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.HOVER](host: HTMLElement): NbPopoverTrigger {
+  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
-      toggle: observableFromEvent(host, 'mouseover'),
-      open: observableFromEvent(host, 'mouseenter'),
-      close: observableFromEvent(host, 'mouseout'),
+      open: observableFromEvent<Event>(host, 'mouseenter'),
+      close: observableFromEvent<Event>(host, 'mouseout').pipe(
+        mergeMap(() => observableFromEvent<Event>(document, 'mousemove')
+          .pipe(
+            debounceTime(100),
+            takeWhile(() => !!getContainer()),
+            filter(event => {
+              return !host.contains(event.target as Node)
+                && !getContainer().location.nativeElement.contains(event.target)
+            }),
+          ),
+        ),
+      ),
+      toggle: observableEmpty(),
     }
   },
 };

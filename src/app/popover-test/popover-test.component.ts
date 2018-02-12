@@ -65,6 +65,24 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             </button>
           </nb-card-body>
         </nb-card>
+        
+        <nb-card>
+          <nb-card-header>Multiple Hints</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hover">
+              show hint
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hover">
+              show hint
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hover">
+              show hint
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hover">
+              show hint
+            </button>
+          </nb-card-body>
+        </nb-card>
 
         <nb-card>
           <nb-card-header>Trigger mode</nb-card-header>
