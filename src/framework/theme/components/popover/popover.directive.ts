@@ -62,7 +62,15 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * ```
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
+ *
  * */
+ /*
+ *
+ * TODO
+ * Rendering strategy have to be refactored.
+ * For now directive creates and deletes popover container each time.
+ * I think we can handle this slightly smarter and show/hide in any situations.
+ */
 @Directive({ selector: '[nbPopover]' })
 export class NbPopoverDirective implements OnInit, OnDestroy {
 
