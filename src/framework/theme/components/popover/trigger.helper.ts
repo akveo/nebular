@@ -11,6 +11,7 @@ export enum NbPopoverMode {
 }
 
 export class NbPopoverTrigger {
+  toggle: Observable<Event>;
   open: Observable<Event>;
   close: Observable<Event>;
 }
@@ -33,6 +34,7 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
+      toggle: observableFromEvent(host, 'click'),
       open: observableFromEvent(host, 'click'),
       close: observableFromEvent<Event>(document, 'click')
         .pipe(
@@ -54,7 +56,8 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.HOVER](host: HTMLElement): NbPopoverTrigger {
     return {
-      open: observableFromEvent(host, 'mouseover'),
+      toggle: observableFromEvent(host, 'mouseover'),
+      open: observableFromEvent(host, 'mouseenter'),
       close: observableFromEvent(host, 'mouseout'),
     }
   },

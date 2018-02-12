@@ -189,9 +189,9 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbTriggerHelper}
    * */
   private registerTriggers() {
-    const { open, close } = NbTriggerHelper.createTrigger(this.hostElement, () => this.containerRef, this.mode);
+    const { toggle, close } = NbTriggerHelper.createTrigger(this.hostElement, () => this.containerRef, this.mode);
 
-    open.pipe(takeWhile(() => this.alive))
+    toggle.pipe(takeWhile(() => this.alive))
       .subscribe(() => this.toggle());
 
     close.pipe(takeWhile(() => this.alive))
