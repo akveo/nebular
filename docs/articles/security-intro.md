@@ -14,7 +14,7 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
 
 - ACL roles/permissions/resources configuration
 - RoleProvider
-- AuthorizationChecker - service that checks whether access is granted or not
+- AccessChecker - service that checks whether access is granted or not
 
 
 - *ACL directive* - directive that helps to hide/show elements based on user permissions, coming soon.

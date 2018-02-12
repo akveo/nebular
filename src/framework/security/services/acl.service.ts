@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable, Optional } from '@angular/core';
-import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions, NbAclRole, NbAclState } from '../security.options';
+import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions, NbAclRole, NbAccessControl } from '../security.options';
 
 const shallowObjectClone = (o) => Object.assign({}, o);
 const shallowArrayClone = (a) => Object.assign([], a);
@@ -22,7 +22,7 @@ export class NbAclService {
 
   private static readonly ANY_RESOURCE = '*';
 
-  private state: NbAclState = {};
+  private state: NbAccessControl = {};
 
   constructor(@Optional() @Inject(NB_SECURITY_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
 
@@ -33,9 +33,9 @@ export class NbAclService {
 
   /**
    * Set/Reset ACL service state
-   * @param {NbAclState} state
+   * @param {NbAccessControl} state
    */
-  setState(state: NbAclState) {
+  setState(state: NbAccessControl) {
     for (const role of Object.keys(state)) {
       const abilities = shallowObjectClone(state[role]);
       const parent = popParent(abilities);

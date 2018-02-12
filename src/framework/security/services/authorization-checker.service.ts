@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 
 @Injectable()
-export class NbAuthorizationChecker {
+export class NbAccessChecker {
 
   constructor(protected roleProvider: NbRoleProvider, protected acl: NbAclService) {
   }

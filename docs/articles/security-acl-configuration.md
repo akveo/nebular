@@ -80,7 +80,7 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
   ],
 ``` 
 That's easy we have just provided a role, so that Nebular can determine which user is currently accessing the app.
-The good thing about this configuration is that it's not tightly coupled with the rest of your authentication flow, which gives you a lof of flexibility over it.
+The good thing about this configuration is that it's not tightly coupled with the rest of your authentication flow, which gives you a lot of flexibility over it.
 
 But, in our example the role is "hardcoded", which in the real world app would be dynamic and depend on the current user. 
 
@@ -137,7 +137,7 @@ export class RoleProvider implements NbRoleProvider {
 }
 ``` 
 
-So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. Then we simply get a tole from a token or return default `guest` value.
+So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. Then we simply get a role from a token or return default `guest` value.
 
 Don't worry if your setup does not use Nebular Auth. You can adjust this code to retrieve a user role from any service of your own. 
 
@@ -170,19 +170,19 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 ## Usage
 
 Finally, we can move on to the part where we start using the ACL. Let's assume that we have that `Post Comment` button, that should only be shown to authenticated users (with a role `user`).
-So we need to hide the button for guests. In your `comment-form.component.ts`, import the `NbAuthorizationChecker` service. 
+So we need to hide the button for guests. In your `comment-form.component.ts`, import the `NbAccessChecker` service. 
 It provides you with a method `isGranted`, which returns an `Observable<boolean>` of the ACL check result:
 
 ```typescript
 import { Component } from '@angular/core';
-import { NbAuthorizationChecker } from '@nebular/security';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   // ...
 })
 export class CommentFormComponent {
 
-  constructor(public authorizationChecker: NbAuthorizationChecker) { }
+  constructor(public accessChecker: NbAccessChecker) { }
 }
 ``` 
 
@@ -192,7 +192,7 @@ And let's add an `if` statement to the `Post Comment` button, so that it is only
 @Component({
   // ...
   template: `
-      <button *ngIf="authorizationChecker.isGranted('create', 'comments') | async" >Post Comment</button>
+      <button *ngIf="accessChecker.isGranted('create', 'comments') | async" >Post Comment</button>
     `,
 })
 export class CommentFormComponent {

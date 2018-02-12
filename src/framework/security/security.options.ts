@@ -5,12 +5,12 @@ export interface NbAclRole {
   [permission: string]: string|string[],
 }
 
-export interface NbAclState {
+export interface NbAccessControl {
   [role: string]: NbAclRole,
 }
 
 export interface NbAclOptions {
-  accessControl?: NbAclState,
+  accessControl?: NbAccessControl,
 }
 
 export const NB_SECURITY_OPTIONS_TOKEN = new InjectionToken<NbAclOptions>('Nebular Security Options');

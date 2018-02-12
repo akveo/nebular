@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbAuthorizationChecker } from '@nebular/security';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'nb-actions-test',
@@ -14,7 +14,7 @@ import { NbAuthorizationChecker } from '@nebular/security';
       <nb-layout-column>
         <nb-card>
           <nb-card-body>
-            <button *ngIf="authorizationChecker.isGranted('create', 'comments') | async" >Post Comment</button>
+            <button *ngIf="accessChecker.isGranted('create', 'comments') | async" >Post Comment</button>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>
@@ -23,7 +23,7 @@ import { NbAuthorizationChecker } from '@nebular/security';
 })
 export class NbAclTestComponent {
 
-  constructor(public authorizationChecker: NbAuthorizationChecker) {
+  constructor(public accessChecker: NbAccessChecker) {
   }
 
 }

@@ -8,9 +8,9 @@ import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbRoleProvider } from './role.provider';
 import { NbAclService } from './acl.service';
-import { NbAuthorizationChecker } from './authorization-checker.service';
+import { NbAccessChecker } from './authorization-checker.service';
 
-let authorizationChecker: NbAuthorizationChecker;
+let accessChecker: NbAccessChecker;
 
 function setupAcl(can) {
   beforeEach(() => {
@@ -33,16 +33,16 @@ function setupAcl(can) {
             },
           },
         },
-        NbAuthorizationChecker,
+        NbAccessChecker,
       ],
     });
   });
 
   // Single async inject to save references; which are used in all tests below
   beforeEach(async(inject(
-    [NbAuthorizationChecker],
-    (_authorizationChecker) => {
-      authorizationChecker = _authorizationChecker
+    [NbAccessChecker],
+    (_accessChecker) => {
+      accessChecker = _accessChecker
     },
   )));
 }
@@ -53,7 +53,7 @@ describe('authorization checker', () => {
     setupAcl(true);
 
     it(`checks against provided role`, (done) => {
-      authorizationChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
+      accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(true);
         done();
       })
@@ -64,7 +64,7 @@ describe('authorization checker', () => {
     setupAcl(false);
 
     it(`checks against provided role`, (done) => {
-      authorizationChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
+      accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(false);
         done();
       })
