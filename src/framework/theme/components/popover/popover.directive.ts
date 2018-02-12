@@ -4,23 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, TemplateRef,
-  Type,
-} from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { NbPositioningHelper } from './helpers/positioning.helper';
-import { NbPopoverComponent } from './popover.component';
+import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
 import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPosition } from './helpers/model';
-
-/**
- * Popover can be one of the following types:
- * template, component or plain js string.
- * So NbPopoverContent provides types alias for this purposes.
- * */
-export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
 
 /**
  * Powerful popover directive, which provides the best UX for your users.

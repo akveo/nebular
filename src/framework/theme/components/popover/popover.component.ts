@@ -5,8 +5,14 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
-import { NbPopoverContent } from './popover.directive';
 import { NbPopoverPlacement } from './helpers/model';
+
+/**
+ * Popover can be one of the following types:
+ * template, component or plain js string.
+ * So NbPopoverContent provides types alias for this purposes.
+ * */
+export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
 
 /**
  * Popover container.
