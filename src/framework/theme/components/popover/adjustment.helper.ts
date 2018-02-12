@@ -83,10 +83,10 @@ export class NbAdjustmentHelper {
    * @return {boolean} true if placed element completely viewport.
    * */
   private static inViewPort(placed: ClientRect, position: NbPopoverPosition): boolean {
-    return position.position.top - window.pageYOffset > 0 &&
-      position.position.left - window.pageXOffset > 0 &&
-      position.position.top + placed.height < window.innerHeight + window.pageYOffset &&
-      position.position.left + placed.width < window.innerWidth + window.pageXOffset;
+    return position.position.top - window.pageYOffset > 0
+      && position.position.left - window.pageXOffset > 0
+      && position.position.top + placed.height < window.innerHeight + window.pageYOffset
+      && position.position.left + placed.width < window.innerWidth + window.pageXOffset;
   }
 
   /**

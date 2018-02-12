@@ -36,9 +36,9 @@ const NB_TRIGGERS = {
       open: observableFromEvent(host, 'click'),
       close: observableFromEvent<Event>(document, 'click')
         .pipe(
-          filter(event => !host.contains(event.target as Node)),
-          filter(() => getContainer()),
-          filter(event => !getContainer().location.nativeElement.contains(event.target)),
+          filter(event => !host.contains(event.target as Node)
+            && getContainer()
+            && !getContainer().location.nativeElement.contains(event.target)),
         ),
     };
   },
