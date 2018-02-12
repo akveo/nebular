@@ -82,7 +82,8 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "favicon.png"
+        "favicon.png",
+        "google46533d2e7a851062.html"
       ],
       "index": "index.html",
       "main": "main.ts",
