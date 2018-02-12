@@ -23,11 +23,12 @@ Then install Nebular module:
 ```bash
 npm i -S @nebular/theme
 ```
+<hr class="section-end">
 
 3) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
    
 
-```
+```typescript
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   ...
@@ -59,11 +60,12 @@ npm i -S @nebular/theme
    ```
 
 _// You may take a quick look at [UI Kit Consept](https://akveo.github.io/nebular/#/docs/concepts/ui-kit) to understand Nebular base components._
+<hr class="section-end">
 
 5) Now, let's create a simple Nebular page (header + sidebar) in your project. 
 * Create new component `ng g component page` and add [NbLayoutComponent](https://akveo.github.io/nebular/#/docs/components/layout) to page template: 
 
-```
+```typescript
 import { Component } from '@angular/core';
 
 @Component({
@@ -82,11 +84,19 @@ import { Component } from '@angular/core';
 export class PageComponent {
 }
 ```
-_// The general Nebular component-container. It is required that all children component of the framework are located inside of the nb-layout_
+
+<div class="note note-info">
+  <div class="note-title">Adding into existing page</div>
+  <div class="note-body">
+    In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
+    For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
+  </div>
+</div>
+<hr class="section-end">
 
 * Open your `app.module.ts` and import necessary layout components:
 
-```
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -121,21 +131,77 @@ const routes: Routes = [
 export class AppModule {
 }
 ```
-
-6) We are ready to check a result. Let's run `npm start` by [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`
-   
-![image](assets/images/articles/sample-page.png)
-
 <hr class="section-end">
 
-<div class="note note-info">
-  <div class="note-title">Adding into existing page</div>
-  <div class="note-body">
-    In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
-  </div>
-</div>
-<hr class="section-end"> 
+6) We are ready to check a result. Let's run `npm start` by [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme, lets customize it in next step.
+![image](assets/images/articles/sample-page.png)
+
+7) In the `src` of you project create `themes.scss` and paste following:
+
+```scss
+// import Nebular Theme System and the default theme
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+// and change the variables you need, or simply leave the map empty to use the default values
+// let's make it blue-ish instead of the default white color
+$nb-themes: nb-register-theme((
+  color-bg: #4ca6ff,
+  shadow: 0 1px 2px 0 #3780c0,
+  layout-bg: #ffffff,
+  color-fg: #222222
+), default, default); // let's leave it as default
+```
+ <hr class="section-end">
+ 
+8) Now, find your styles.scss (or create one in the `src`) and paste the following:
+
+```typescript
+// this is your created themes.scss file, make sure the path to the file is correct
+@import 'themes';
+
+// framework component styles which will use your new theme
+@import '~@nebular/theme/styles/globals';
+
+// install the framework
+@include nb-install() {
+  @include nb-theme-global();
+};
+```
+<hr class="section-end">
+
+9) In the `.angular-cli.json` let's replace
+```json
+{
+...
+  "apps": [
+    {
+     ...
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/@nebular/theme/styles/prebuilt/default.css"
+      ],
+```
+to 
+```json
+{
+  ...
+  },
+  "apps": [
+    {
+     ...
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "styles.scss"
+      ],
+```
+
+That's it, now app could be reloaded to see changes and in the `src/themes` you can override default value of variables.
+
+![image](assets/images/articles/blue-theme.png)
+_Details in the [Enabling Theme System](https://akveo.github.io/nebular/#/docs/guides/enabling-theme-system): Normal setup_
+
+
    
 Addition info:
 * [Angular CLI Config Schema](https://github.com/angular/angular-cli/wiki/angular-cli)
