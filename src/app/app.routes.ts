@@ -50,6 +50,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
+import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 
 export const routes: Routes = [
@@ -231,6 +232,10 @@ export const routes: Routes = [
   {
     path: 'search-2',
     component: NbSearchTestCustomizedComponent,
+  },
+  {
+    path: 'checkbox',
+    component: NbCheckboxTestComponent,
   },
   {
     path: 'bootstrap',

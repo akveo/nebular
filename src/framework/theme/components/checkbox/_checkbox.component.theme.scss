@@ -5,88 +5,161 @@
  */
 
 @mixin nb-checkbox-theme() {
-  @mixin hover-checked-border($color) {
-    .custom-control-input:hover ~ .custom-control-indicator,
-    .custom-control-input:checked ~ .custom-control-indicator,
-    .custom-control-input:hover:checked ~ .custom-control-indicator {
+  @mixin hover-border($color) {
+    .customised-control-input:checked ~ .customised-control-indicator {
       border-color: $color;
+    }
+    .customised-control-input:hover:enabled ~ .customised-control-indicator {
+      border-color: lighten($color, 10%);
     }
   }
 
-  nb-checkbox {
+  @mixin checkmark($size, $color, $border-size) {
+    &::before {
+      content: '';
+      position: absolute;
+      height: calc(#{$size} * 0.6);
+      width: calc(#{$size} * 0.4);
+      border: solid $color;
+      border-width: 0 $border-size $border-size 0;
+      transform: rotate(45deg);
+    }
+  }
 
-    .custom-control {
+  @mixin set-style($bg, $size, $border-size, $border-color) {
+    background-color: $bg;
+    width: $size;
+    height: $size;
+    border: $border-size solid $border-color;
+  }
+
+  @mixin description-style {
+    color: nb-theme(color-fg-heading);
+    opacity: 0.5;
+    flex-shrink: 0;
+    padding-left: 0.25rem;
+  }
+
+  nb-checkbox {
+    .customised-control {
+      position: relative;
+      display: inline-flex;
       margin: 0;
       min-height: inherit;
       padding: 0.375rem 1.5rem;
     }
 
-    .custom-control-indicator {
+    .customised-control-indicator {
+      @include set-style(
+          nb-theme(checkbox-bg),
+          nb-theme(checkbox-size),
+          nb-theme(checkbox-border-size),
+          nb-theme(checkbox-border-color)
+      );
+
+      border-radius: 0.25rem;
       position: absolute;
-      background-color: nb-theme(checkbox-bg);
-      width: nb-theme(checkbox-size);
-      height: nb-theme(checkbox-size);
-      border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);
       top: 50%;
       transform: translateY(-50%);
+      left: 0;
+      flex: none;
+      display: flex;
+      justify-content: center;
+
+      @include checkmark(
+          nb-theme(checkbox-size),
+          nb-theme(checkbox-checkmark),
+          nb-theme(checkbox-border-size)
+      );
     }
 
-    .custom-control-input {
-      background-color: transparent;
+    .customised-control-input {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
 
-      &:focus ~ .custom-control-indicator {
-        box-shadow: none;
-      }
+    .customised-control-input {
+      &:checked ~ .customised-control-indicator {
+        @include set-style(
+            nb-theme(checkbox-checked-bg),
+            nb-theme(checkbox-checked-size),
+            nb-theme(checkbox-checked-border-size),
+            nb-theme(checkbox-checked-border-color)
+        );
 
-      &:checked ~ .custom-control-indicator {
-        background-image: none;
         display: flex;
         justify-content: center;
 
-        &::before {
-          content: '';
-          width: 0.5rem;
-          height: 0.75rem;
-          border: solid nb-theme(checkbox-fg);
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
+        @include checkmark(
+            nb-theme(checkbox-checked-size),
+            nb-theme(checkbox-checked-checkmark),
+            nb-theme(checkbox-checked-border-size)
+        );
+      }
+
+      &:disabled ~ {
+        .customised-control-indicator {
+          @include set-style(
+              nb-theme(checkbox-disabled-bg),
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-border-size),
+              nb-theme(checkbox-border-color)
+          );
+          opacity: 0.5;
+          display: flex;
+          justify-content: center;
+
+          @include checkmark(
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-border-color),
+              nb-theme(checkbox-disabled-border-size)
+          );
+        }
+
+        .customised-control-description {
+          @include description-style;
         }
       }
 
-      &:disabled ~,
-      &:disabled:hover ~ {
-        .custom-control-indicator {
-          background-color: transparent;
-          border-color: nb-theme(checkbox-border-color);
+      &:disabled:checked ~ {
+        .customised-control-indicator {
+          @include set-style(
+              nb-theme(checkbox-disabled-bg),
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-border-size),
+              nb-theme(checkbox-checked-border-color)
+          );
           opacity: 0.5;
+          display: flex;
+          justify-content: center;
+
+          @include checkmark(
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-checkmark),
+              nb-theme(checkbox-disabled-border-size)
+          );
         }
 
-        .custom-control-description {
-          color: nb-theme(checkbox-fg);
-          opacity: 0.5;
+        .customised-control-description {
+          @include description-style;
         }
-      }
-
-      &:checked ~ .custom-control-indicator,
-      &:active ~ .custom-control-indicator {
-        background-color: nb-theme(checkbox-bg);
       }
     }
 
-    @include hover-checked-border(nb-theme(checkbox-selected-border-color));
+    @include hover-border(nb-theme(checkbox-checked-border-color));
     &.success {
-      @include hover-checked-border(nb-theme(color-success));
+      @include hover-border(nb-theme(color-success));
     }
     &.warning {
-      @include hover-checked-border(nb-theme(color-warning));
+      @include hover-border(nb-theme(color-warning));
     }
     &.danger {
-      @include hover-checked-border(nb-theme(color-danger));
+      @include hover-border(nb-theme(color-danger));
     }
 
-    .custom-control-description {
-      padding-left: 0.25rem;
-      color: nb-theme(color-fg-heading);
+    .customised-control-description {
+      @include description-style;
     }
   }
 }
