@@ -18,8 +18,8 @@
     &::before {
       content: '';
       position: absolute;
-      height: calc(#{$size} * 0.7);
-      width: calc(#{$size} * 0.35);
+      height: calc(#{$size} * 0.6);
+      width: calc(#{$size} * 0.4);
       border: solid $color;
       border-width: 0 $border-size $border-size 0;
       transform: rotate(45deg);

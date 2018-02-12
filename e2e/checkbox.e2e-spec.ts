@@ -69,7 +69,7 @@ describe('nb-search', () => {
       'window.getComputedStyle(document.querySelector(' +
       '"#first .customised-control-indicator"' +
       '), ":before").borderTopColor')
-      .then(data => expect(data).toBe(border_color));
+      .then(data => expect(data).toBe(transparent));
 
     indicator.click();
     browser.actions().mouseMove(otherElement).perform();
