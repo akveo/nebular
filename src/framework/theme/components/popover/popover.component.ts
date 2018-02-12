@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
 import { NbPopoverPlacement } from './positioning.helper';
 import { NbPopoverContent } from './popover.directive';
 
@@ -21,6 +21,7 @@ import { NbPopoverContent } from './popover.directive';
  * */
 @Component({
   selector: 'nb-popover',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./popover.component.scss'],
   template: `
     <span class="arrow"></span>
