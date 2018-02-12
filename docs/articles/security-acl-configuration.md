@@ -169,9 +169,25 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 ## Usage
 
-Finally, we can move on to the part where we start using the ACL. Let's assume that we have that `Post Comment` button, that should only be shown to authenticated users (with a role `user`).
-So we need to hide the button for guests. In your `comment-form.component.ts`, import the `NbAccessChecker` service. 
-It provides you with a method `isGranted`, which returns an `Observable<boolean>` of the ACL check result:
+Finally, we can move on to the part where we start putting security rules in our app. Let's assume that we have that `Post Comment` button, that should only be shown to authenticated users (with a role `user`).
+So we need to hide the button for guests. 
+
+Nebular Security provides us with a simple `*nbIsGranted` conditional directive, which under the hood works as `*ngIf`, showing or hiding a template block based on a user role:
+
+```typescript
+@Component({
+  // ...
+  template: `
+      <button *nbIsGranted="['create', 'comments']" >Post Comment</button>
+    `,
+})
+export class CommentFormComponent {
+// ...
+```
+We just need to pass a `permission` and some `resource` in order to control the button visibility.
+
+For more advanced use cases, we can directly use the `NbAccessChecker` service. It provides you with `isGranted` method , which returns an `Observable<boolean>` of the ACL check result.
+We can adjust our example to utilize it. In your `comment-form.component.ts`, import the `NbAccessChecker` service. 
 
 ```typescript
 import { Component } from '@angular/core';
