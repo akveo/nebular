@@ -50,7 +50,7 @@
           ul a {
             font-size: 1.125rem;
           }
-          & > ul.menu-items {
+          & > ul.menu-items.expanded {
             margin-bottom: nb-theme(menu-group-gap);
           }
           & > a:first-child {
