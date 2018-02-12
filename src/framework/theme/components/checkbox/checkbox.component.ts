@@ -29,9 +29,17 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-size:
  * checkbox-border-size:
  * checkbox-border-color:
- * checkbox-selected-border-color:
- * checkbox-fg:
- * radio-fg:
+ * checkbox-checkmark:
+ * checkbox-checked-bg:
+ * checkbox-checked-size:
+ * checkbox-checked-border-size:
+ * checkbox-checked-border-color:
+ * checkbox-checked-checkmark:
+ * checkbox-disabled-bg:
+ * checkbox-disabled-size:
+ * checkbox-disabled-border-size:
+ * checkbox-disabled-border-color:
+ * checkbox-disabled-checkmark:
  */
 @Component({
   selector: 'nb-checkbox',
