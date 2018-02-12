@@ -161,7 +161,7 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Themes - quick start',
+        name: 'Themes Tutorial',
         children: [
           {
             type: 'block',
