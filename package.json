@@ -75,9 +75,9 @@
     "@angular/platform-browser": "~5.1.0",
     "@angular/platform-browser-dynamic": "~5.1.0",
     "@angular/router": "~5.1.0",
-    "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.8",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0",
     "angular2-useful-swiper": "4.0.7",
-    "bootstrap": "4.0.0-beta.2",
+    "bootstrap": "4.0.0",
     "colors.js": "1.2.4",
     "core-js": "2.5.1",
     "gulp-bump": "2.7.0",
@@ -98,7 +98,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.3",
+    "@angular/cli": "1.6.7",
     "@angular/compiler-cli": "~5.1.0",
     "@angular/language-service": "~5.1.0",
     "@types/jasmine": "2.8.3",
