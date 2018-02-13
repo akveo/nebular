@@ -267,7 +267,7 @@ function sharedAclTests (defaultSettings) {
       },
     };
 
-    aclService.setState(settings.accessControl);
+    aclService.setAccessControl(settings.accessControl);
 
     expect(aclService.can('admin', 'manage', 'all')).toBe(false);
     expect(aclService.can('admin', 'edit', 'users')).toBe(false);

@@ -27,17 +27,17 @@ export class NbAclService {
   constructor(@Optional() @Inject(NB_SECURITY_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
 
     if (settings.accessControl) {
-      this.setState(settings.accessControl);
+      this.setAccessControl(settings.accessControl);
     }
   }
 
   /**
-   * Set/Reset ACL service state
-   * @param {NbAccessControl} state
+   * Set/Reset ACL list
+   * @param {NbAccessControl} list
    */
-  setState(state: NbAccessControl) {
-    for (const role of Object.keys(state)) {
-      const abilities = shallowObjectClone(state[role]);
+  setAccessControl(list: NbAccessControl) {
+    for (const role of Object.keys(list)) {
+      const abilities = shallowObjectClone(list[role]);
       const parent = popParent(abilities);
       this.register(role, parent, abilities);
     }
@@ -47,7 +47,7 @@ export class NbAclService {
    * Register a new role with a list of abilities (permission/resources combinations)
    * @param {string} role
    * @param {string} parent
-   * @param {NbAclRules} abilities
+   * @param {[permission: string]: string|string[]} abilities
    */
   register(role: string, parent: string = null, abilities: {[permission: string]: string|string[]} = {}) {
 
@@ -97,11 +97,8 @@ export class NbAclService {
     this.validateResource(resource);
 
     const parentRole = this.getRoleParent(role);
-    let parentCan = false;
-    if (parentRole) {
-      parentCan = this.can(this.getRoleParent(role), permission, resource);
-    }
-    return parentCan ? parentCan : this.exactCan(role, permission, resource);
+    const parentCan = parentRole && this.can(this.getRoleParent(role), permission, resource);
+    return parentCan || this.exactCan(role, permission, resource);
   }
 
   private getRole(role: string): NbAclRole {
