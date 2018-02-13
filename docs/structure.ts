@@ -591,4 +591,43 @@ export const STRUCTURE = [
       },
     ],
   },
+  {
+    type: 'section',
+    name: 'Security',
+    children: [
+      {
+        type: 'page',
+        name: 'Introduction',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-intro.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Installation',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-install.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'ACL Configuration & Usage',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-acl-configuration.md',
+          },
+        ],
+      },
+    ],
+  },
 ];

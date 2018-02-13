@@ -4,7 +4,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es7",
+      "es2017",
       "dom"
     ],
     "module": "es2015",

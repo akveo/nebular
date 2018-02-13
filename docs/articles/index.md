@@ -14,7 +14,7 @@ In simpler words, Nebular is a set of modules (components, services & styles) he
 
 ## What's included
 
-What is included:
+Nebular modules are distributed as separated `npm` packages, here's a list of currently available:
 
 - **@nebular/theme**
   - Theme System - set of SCSS rules, which allow you to modify application looks & feel by changing style-variables, with fewer custom styles.
@@ -24,7 +24,9 @@ What is included:
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable providers (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
-- *@nebular/acl* - module for roles and permissions management. Coming soon.
+- **@nebular/security** - module for roles and permissions management.
+
+
 - *@nebular/dashboard* - module for draggable/resizable dashboards creation. Coming soon.
 - *@nebular/data* - application data & state management. Coming soon.
 - **Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a>** - application based on Nebular modules with beautiful IOT components.

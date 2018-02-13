@@ -770,6 +770,299 @@
       "styles": []
     },
     {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "settings",
+              "type": "NbAclOptions",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAclService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "allow",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Allow a permission for specific resources to a role"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "can",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "Check whether the role has a permission to a resource"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "exactCan",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRole",
+          "type": [
+            "NbAclRole"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleAbilities",
+          "type": [
+            "{}"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleParent",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleResources",
+          "type": [
+            "string[]"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "parent",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "abilities",
+              "type": "",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "register",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Register a new role with a list of abilities (permission/resources combinations)"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "list",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setAccessControl",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Set/Reset ACL list"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateResource",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateRole",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbAclService",
+      "shortDescription": "Common acl service.",
+      "styles": []
+    },
+    {
       "kind": "component",
       "platform": null,
       "examples": [],
@@ -2983,8 +3276,8 @@
         },
         {
           "shortDescription": "Example of fixed sidebar located on the left side, initially collapsed.",
-          "description": "",
-          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n <nb-sidebar-content>\n   Menu or another component here\n </nb-sidebar-content>\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
+          "description": "   Sidebar content, menu or another component here.",
+          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n\n   Sidebar content, menu or another component here.\n\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
         }
       ],
       "props": [
@@ -8562,10 +8855,6 @@
             {
               "theme": "default",
               "prop": "checkbox-border-color"
-            },
-            {
-              "theme": "default",
-              "prop": "checkbox-checkmark"
             }
           ]
         },
@@ -8778,14 +9067,14 @@
         },
         "checkbox-checkmark": {
           "name": "checkbox-checkmark",
-          "value": "#dadfe6",
-          "parents": [
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
             {
-              "theme": "default",
-              "prop": "form-control-border-color"
+              "theme": "cosmic",
+              "prop": "checkbox-checkmark"
             }
-          ],
-          "childs": []
+          ]
         },
         "checkbox-checked-bg": {
           "name": "checkbox-checked-bg",
@@ -9802,6 +10091,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-placeholder-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-border-color"
             }
           ]
         },
@@ -13422,16 +13715,7 @@
               "prop": "separator"
             }
           ],
-          "childs": [
-            {
-              "theme": "cosmic",
-              "prop": "checkbox-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "checkbox-checkmark"
-            }
-          ]
+          "childs": []
         },
         "form-control-selected-border-color": {
           "name": "form-control-selected-border-color",
@@ -13647,30 +13931,22 @@
         },
         "checkbox-border-color": {
           "name": "checkbox-border-color",
-          "value": "#342e73",
+          "value": "#a1a1e5",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "separator"
+              "prop": "color-fg"
             }
           ],
           "childs": []
         },
         "checkbox-checkmark": {
           "name": "checkbox-checkmark",
-          "value": "#342e73",
+          "value": "rgba(0, 0, 0, 0)",
           "parents": [
             {
-              "theme": "cosmic",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "separator"
+              "theme": "default",
+              "prop": "checkbox-checkmark"
             }
           ],
           "childs": []
