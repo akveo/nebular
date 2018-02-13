@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
-
 :host {
   $arrow-size: 11px;
   $arrow-offset: -($arrow-size * 2);
@@ -20,45 +18,48 @@
   }
 
   .arrow {
-    @include center-horizontal-absolute();
+    position: absolute;
 
     width: 0;
     height: 0;
-    border: $arrow-size solid transparent;
+  }
+
+  .arrow {
+    border-left: $arrow-size solid transparent;
+    border-right: $arrow-size solid transparent;
 
     &::after {
       position: absolute;
       content: ' ';
       width: 0;
       height: 0;
-      top: -9px;
-      left: 0;
-      margin-left: -12px;
-      display: block;
-      border: 12px solid transparent;
+      top: 3px;
+      left: calc(50% - #{$arrow-size});
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
     }
   }
 
   &.bottom .arrow {
-    top: $arrow-offset;
-  }
-
-  &.left .arrow {
-    transform: rotate(90deg);
-    right: $arrow-offset;
-    top: calc(50% - #{$arrow-size});
-    left: auto;
-  }
-
-  &.top .arrow {
-    transform: rotate(180deg);
-    bottom: $arrow-offset;
+    top: -#{$arrow-size};
     left: calc(50% - #{$arrow-size});
   }
 
+  &.left .arrow {
+    right: -#{$arrow-size + $arrow-size / 2};
+    top: calc(50% - #{$arrow-size / 2});
+    transform: rotate(90deg);
+  }
+
+  &.top .arrow {
+    bottom: -#{$arrow-size};
+    left: calc(50% - #{$arrow-size});
+    transform: rotate(180deg);
+  }
+
   &.right .arrow {
-    transform: rotate(-90deg);
-    left: $arrow-offset;
-    top: calc(50% - #{$arrow-size});
+    left: -#{$arrow-size + $arrow-size / 2};
+    top: calc(50% - #{$arrow-size / 2});
+    transform: rotate(270deg);
   }
 }

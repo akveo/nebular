@@ -6,6 +6,7 @@
 
 @mixin nb-popover-theme {
   nb-popover {
+    $arrow-size: 11px;
     border: 2px solid nb-theme(popover-border);
     background: nb-theme(popover-bg);
     box-shadow: nb-theme(popover-shadow);
@@ -15,10 +16,10 @@
     }
 
     .arrow {
-      border-bottom: 11px solid nb-theme(popover-border) !important;
+      border-bottom: $arrow-size solid nb-theme(popover-border);
 
       &::after {
-        border-bottom: 11px solid nb-theme(popover-bg) !important;
+        border-bottom: $arrow-size solid nb-theme(popover-bg);
       }
     }
   }
