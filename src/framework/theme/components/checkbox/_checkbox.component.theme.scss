@@ -5,17 +5,42 @@
  */
 
 @mixin nb-checkbox-theme() {
-  @mixin hover-checked-border($color) {
-    .customised-control-input:hover ~ .customised-control-indicator,
-    .customised-control-input:checked ~ .customisedised-control-indicator,
-    .customised-control-input:hover:checked ~ .customised-control-indicator {
-      //border-color: $color;
-      // TODO implement hover variables
+  @mixin hover-border($color) {
+    .customised-control-input:checked ~ .customised-control-indicator {
+      border-color: $color;
+    }
+    .customised-control-input:hover:enabled ~ .customised-control-indicator {
+      border-color: lighten($color, 10%);
     }
   }
 
-  nb-checkbox {
+  @mixin checkmark($size, $color, $border-size) {
+    &::before {
+      content: '';
+      position: absolute;
+      height: calc(#{$size} * 0.6);
+      width: calc(#{$size} * 0.4);
+      border: solid $color;
+      border-width: 0 $border-size $border-size 0;
+      transform: rotate(45deg);
+    }
+  }
 
+  @mixin set-style($bg, $size, $border-size, $border-color) {
+    background-color: $bg;
+    width: $size;
+    height: $size;
+    border: $border-size solid $border-color;
+  }
+
+  @mixin description-style {
+    color: nb-theme(color-fg-heading);
+    opacity: 0.5;
+    flex-shrink: 0;
+    padding-left: 0.25rem;
+  }
+
+  nb-checkbox {
     .customised-control {
       position: relative;
       display: inline-flex;
@@ -26,27 +51,27 @@
     }
 
     .customised-control-indicator {
-      background-color: nb-theme(checkbox-bg);
-      width: nb-theme(checkbox-size);
-      height: nb-theme(checkbox-size);
-      border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);
+      @include set-style(
+          nb-theme(checkbox-bg),
+          nb-theme(checkbox-size),
+          nb-theme(checkbox-border-size),
+          nb-theme(checkbox-border-color)
+      );
 
-      transform: translateY(-50%);
       border-radius: 0.25rem;
-      position: relative;
+      position: absolute;
       top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      flex: none;
       display: flex;
       justify-content: center;
 
-      &::before {
-        content: '';
-        position: absolute;
-        height: calc(#{nb-theme(checkbox-size)} * 0.7);
-        width: calc(#{nb-theme(checkbox-size)} * 0.35);
-        border: solid nb-theme(checkbox-checkmark);
-        border-width: 0 nb-theme(checkbox-border-size) nb-theme(checkbox-border-size) 0;
-        transform: rotate(45deg);
-      }
+      @include checkmark(
+          nb-theme(checkbox-size),
+          nb-theme(checkbox-checkmark),
+          nb-theme(checkbox-border-size)
+      );
     }
 
     .customised-control-input {
@@ -57,67 +82,85 @@
 
     .customised-control-input {
       &:checked ~ .customised-control-indicator {
-        background-color: nb-theme(checkbox-checked-bg);
-        width: nb-theme(checkbox-checked-size);
-        height: nb-theme(checkbox-checked-size);
-        border: nb-theme(checkbox-checked-border-size) solid nb-theme(checkbox-checked-border-color);
+        @include set-style(
+            nb-theme(checkbox-checked-bg),
+            nb-theme(checkbox-checked-size),
+            nb-theme(checkbox-checked-border-size),
+            nb-theme(checkbox-checked-border-color)
+        );
 
         display: flex;
         justify-content: center;
 
-        &::before {
-          content: '';
-          height: calc(#{nb-theme(checkbox-checked-size)} * 0.7);
-          width: calc(#{nb-theme(checkbox-checked-size)} * 0.35);
-          border: solid nb-theme(checkbox-checked-checkmark);
-          border-width: 0 nb-theme(checkbox-checked-border-size) nb-theme(checkbox-checked-border-size) 0;
-          transform: rotate(45deg);
+        @include checkmark(
+            nb-theme(checkbox-checked-size),
+            nb-theme(checkbox-checked-checkmark),
+            nb-theme(checkbox-checked-border-size)
+        );
+      }
+
+      &:disabled ~ {
+        .customised-control-indicator {
+          @include set-style(
+              nb-theme(checkbox-disabled-bg),
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-border-size),
+              nb-theme(checkbox-border-color)
+          );
+          opacity: 0.5;
+          display: flex;
+          justify-content: center;
+
+          @include checkmark(
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-border-color),
+              nb-theme(checkbox-disabled-border-size)
+          );
+        }
+
+        .customised-control-description {
+          @include description-style;
         }
       }
 
       &:disabled:checked ~ {
         .customised-control-indicator {
-          background-color: nb-theme(checkbox-disabled-bg);
-          width: nb-theme(checkbox-disabled-size);
-          height: nb-theme(checkbox-disabled-size);
-          border: nb-theme(checkbox-disabled-border-size) solid nb-theme(checkbox-checked-border-color);
-
+          @include set-style(
+              nb-theme(checkbox-disabled-bg),
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-border-size),
+              nb-theme(checkbox-checked-border-color)
+          );
           opacity: 0.5;
           display: flex;
           justify-content: center;
 
-          &::before {
-            content: '';
-            position: absolute;
-            height: calc(#{nb-theme(checkbox-disabled-size)} * 0.7);
-            width: calc(#{nb-theme(checkbox-disabled-size)} * 0.35);
-            border: solid nb-theme(checkbox-disabled-checkmark);
-            border-width: 0 nb-theme(checkbox-disabled-border-size) nb-theme(checkbox-disabled-border-size) 0;
-            transform: rotate(45deg);
-          }
+          @include checkmark(
+              nb-theme(checkbox-disabled-size),
+              nb-theme(checkbox-disabled-checkmark),
+              nb-theme(checkbox-disabled-border-size)
+          );
         }
 
         .customised-control-description {
-          color: nb-theme(color-fg-heading);
-          opacity: 0.5;
+          @include description-style;
         }
       }
     }
 
-    @include hover-checked-border(nb-theme(checkbox-selected-border-color));
+    @include hover-border(nb-theme(checkbox-checked-border-color));
     &.success {
-      @include hover-checked-border(nb-theme(color-success));
+      @include hover-border(nb-theme(color-success));
     }
     &.warning {
-      @include hover-checked-border(nb-theme(color-warning));
+      @include hover-border(nb-theme(color-warning));
     }
     &.danger {
-      @include hover-checked-border(nb-theme(color-danger));
+      @include hover-border(nb-theme(color-danger));
     }
 
     .customised-control-description {
-      padding-left: 0.25rem;
-      color: nb-theme(color-fg-heading);
+      @include description-style;
     }
   }
 }
