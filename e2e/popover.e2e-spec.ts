@@ -3,15 +3,13 @@ import { browser, by, element } from 'protractor';
 const contentTemplate = by.css('nb-card:nth-child(1) button:nth-child(1)');
 const contentComponent = by.css('nb-card:nth-child(1) button:nth-child(2)');
 const contentString = by.css('nb-card:nth-child(1) button:nth-child(3)');
-const contentNumber = by.css('nb-card:nth-child(1) button:nth-child(4)');
-const contentObject = by.css('nb-card:nth-child(1) button:nth-child(5)');
-const contentArray = by.css('nb-card:nth-child(1) button:nth-child(6)');
 const placementRight = by.css('nb-card:nth-child(2) button:nth-child(1)');
 const placementBottom = by.css('nb-card:nth-child(2) button:nth-child(2)');
 const placementTop = by.css('nb-card:nth-child(2) button:nth-child(3)');
 const placementLeft = by.css('nb-card:nth-child(2) button:nth-child(4)');
-const modeClick = by.css('nb-card:nth-child(3) button:nth-child(1)');
-const modeHover = by.css('nb-card:nth-child(3) button:nth-child(2)');
+const modeClick = by.css('nb-card:nth-child(4) button:nth-child(1)');
+const modeHover = by.css('nb-card:nth-child(4) button:nth-child(2)');
+const modeHint = by.css('nb-card:nth-child(4) button:nth-child(3)');
 const popover = by.css('nb-layout > nb-popover');
 
 describe('nb-popover', () => {
@@ -32,36 +30,12 @@ describe('nb-popover', () => {
     expect(containerContent.isPresent()).toBeTruthy();
   });
 
-  it('render string', () => {
+  it('render primitive', () => {
     element(contentString).click();
     const containerContent = element(popover).element(by.css('div'));
     expect(containerContent.isPresent()).toBeTruthy();
     expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
     expect(containerContent.getText()).toEqual('Hi, I\'m popover!');
-  });
-
-  it('render number', () => {
-    element(contentNumber).click();
-    const containerContent = element(popover).element(by.css('div'));
-    expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
-    expect(containerContent.getText()).toEqual('125123');
-  });
-
-  it('render object', () => {
-    element(contentObject).click();
-    const containerContent = element(popover).element(by.css('div'));
-    expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
-    expect(containerContent.getText()).toEqual('[object Object]');
-  });
-
-  it('render array', () => {
-    element(contentArray).click();
-    const containerContent = element(popover).element(by.css('div'));
-    expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
-    expect(containerContent.getText()).toEqual('Test,Array');
   });
 
   it('render container with arrow', () => {
@@ -152,5 +126,29 @@ describe('nb-popover', () => {
       .perform();
 
     expect(container.isPresent()).toBeFalsy();
+  });
+
+  it('doesn\'t close popover by hover on container', () => {
+    browser.actions()
+      .mouseMove(element(modeHover))
+      .perform();
+
+    const container = element(popover);
+    expect(container.isPresent()).toBeTruthy();
+
+    browser.actions()
+      .mouseMove(container)
+      .perform();
+
+    expect(container.isPresent()).toBeTruthy();
+  });
+
+  it('open popover by hover on host with hint', () => {
+    browser.actions()
+      .mouseMove(element(modeHint))
+      .perform();
+
+    const container = element(popover);
+    expect(container.isPresent()).toBeTruthy();
   });
 });

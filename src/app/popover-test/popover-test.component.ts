@@ -35,16 +35,6 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
 
             <button class="btn btn-primary" nbPopover="Hi, I'm popover!" nbPopoverPlacement="bottom">String Test
             </button>
-
-            <button class="btn btn-primary" [nbPopover]="125123" nbPopoverPlacement="bottom">Number Test
-            </button>
-
-            <button class="btn btn-primary" [nbPopover]="{ isAdmin: false }" nbPopoverPlacement="bottom">Object Test
-            </button>
-
-            <button class="btn btn-primary" [nbPopover]="['Test', 'Array']" nbPopoverPlacement="bottom">Array
-              Test
-            </button>
           </nb-card-body>
         </nb-card>
 
@@ -65,7 +55,7 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             </button>
           </nb-card-body>
         </nb-card>
-        
+
         <nb-card>
           <nb-card-header>Multiple Hints</nb-card-header>
           <nb-card-body>
@@ -135,6 +125,14 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
           </nb-card-body>
         </nb-card>
 
+        <nb-card>
+          <nb-card-header>Popover</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-success" nbPopover="Click Popover!">
+              Show me popover
+            </button>
+          </nb-card-body>
+        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -142,22 +140,4 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
 export class NbPopoverTestComponent {
 
   customPopoverComponent = NbDynamicToAddComponent;
-
-  menuItems = [
-    {
-      title: 'Menu #1',
-      link: '/menu/1',
-      icon: 'nb-keypad',
-    },
-    {
-      title: 'Menu #2',
-      link: '/menu/2',
-      icon: 'nb-keypad',
-    },
-    {
-      title: 'Menu #3',
-      link: '/menu/3',
-      icon: 'nb-keypad',
-    },
-  ];
 }
