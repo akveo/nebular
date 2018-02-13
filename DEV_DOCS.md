@@ -45,6 +45,8 @@ We have to:
         - theme - `@nebular/theme` npm package, main framework package
         - auth - `@nebular/auth` npm package, auth package (login, register, etc)       
         - icons - `nebular-icons` npm package, cool icons font
+        - security - `@nebular/security` npm package, security framework package
+        
       
       
 ## Auth // TODO      

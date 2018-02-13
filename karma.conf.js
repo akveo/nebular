@@ -12,6 +12,7 @@ module.exports = function (config) {
       require('karma-browserstack-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-spec-reporter'),
       require('@angular/cli/plugins/karma')
     ],
     client: {
@@ -24,7 +25,7 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['spec', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -71,14 +72,15 @@ module.exports = function (config) {
       timeout: 600,
       pollingTimeout: 20000,
       video: false,
-    },
-    singleRun: false
+    }
   };
 
   if (process.env['TRAVIS']) {
 
     const [platform] = process.env.MODE.split('_');
     const buildId = `TRAVIS #${process.env['TRAVIS_BUILD_NUMBER']} (${process.env['TRAVIS_BUILD_ID']})`;
+
+    configuration.singleRun = true;
 
     if (platform === 'sauce') {
       const key = require('./scripts/ci/sauce/config');
@@ -101,6 +103,5 @@ module.exports = function (config) {
     }
   }
 
-  console.log(configuration);
   config.set(configuration);
 };
