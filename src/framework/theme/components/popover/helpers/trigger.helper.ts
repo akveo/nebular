@@ -1,7 +1,14 @@
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
-import { debounceTime, delay, filter, mergeMap, repeat, takeUntil, takeWhile } from 'rxjs/operators';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
+import { filter } from 'rxjs/operators/filter';
+import { delay } from 'rxjs/operators/delay';
+import { takeWhile } from 'rxjs/operators/takeWhile';
+import { debounceTime } from 'rxjs/operators/debounceTime';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { repeat } from 'rxjs/operators/repeat';
+import { takeUntil } from 'rxjs/operators/takeUntil';
+
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
@@ -52,7 +59,7 @@ const NB_TRIGGERS = {
         ),
       close: observableFromEvent<Event>(host, 'mouseleave')
         .pipe(
-          mergeMap(() => observableFromEvent<Event>(document, 'mousemove')
+          switchMap(() => observableFromEvent<Event>(document, 'mousemove')
             .pipe(
               debounceTime(100),
               takeWhile(() => !!getContainer()),

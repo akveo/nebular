@@ -72,6 +72,7 @@ const ROLLUP_GLOBALS = {
   'rxjs/operators/pairwise': 'Rx.operators',
   'rxjs/operators/distinctUntilChanged': 'Rx.operators',
   'rxjs/operators/takeWhile': 'Rx.operators',
+  'rxjs/operators/repeat': 'Rx.operators',
 
   // 3rd party dependencies
 
