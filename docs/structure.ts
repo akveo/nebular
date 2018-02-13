@@ -100,12 +100,34 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'Updating ngx-admin to the latest version',
+        name: 'Themes Tutorial. Basic setup',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'ngx-admin-update.md',
+            source: 'nebular-themes-tutorial-basic.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Themes Tutorial. Custom theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'nebular-themes-tutorial-custom.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Themes Tutorial. Hot reload',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'nebular-themes-tutorial-hot-reload.md',
           },
         ],
       },
@@ -183,12 +205,12 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Themes Tutorial',
+        name: 'Updating ngx-admin to the latest version',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'nebular-themes-tutorial.md',
+            source: 'ngx-admin-update.md',
           },
         ],
       },
