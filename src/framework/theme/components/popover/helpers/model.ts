@@ -1,5 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 
+/**
+ * Describes placement of the UI element on the screen.
+ * */
 export class NbPopoverPosition {
   placement: NbPopoverPlacement;
   position: {
@@ -35,6 +38,10 @@ export enum NbPopoverMode {
   HINT = 'hint',
 }
 
+/**
+ * Popover uses different triggers for different {@link NbPopoverMode}.
+ * see {@link NbTriggerHelper}
+ * */
 export class NbPopoverTrigger {
   toggle: Observable<Event>;
   open: Observable<Event>;
