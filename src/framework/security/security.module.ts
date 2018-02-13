@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions } from './security.options';
 import { NbAclService } from './services/acl.service';
-import { NbAccessChecker } from './services/authorization-checker.service';
+import { NbAccessChecker } from './services/access-checker.service';
 import { NbIsGrantedDirective } from './directives/is-granted.directive';
 
 @NgModule({

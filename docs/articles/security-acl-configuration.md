@@ -130,14 +130,15 @@ export class RoleProvider implements NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          return token && token.getPayload() ? token.getPayload()['role'] : 'guest';
+          return token ? token.getPayload()['role'] : 'guest';
         }),
       );
   }
 }
 ``` 
 
-So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. Then we simply get a role from a token or return default `guest` value.
+So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. 
+Then we simply get a role from a token (for example simplicity, we assume that token payload always has a role value) or return default `guest` value.
 
 Don't worry if your setup does not use Nebular Auth. You can adjust this code to retrieve a user role from any service of your own. 
 

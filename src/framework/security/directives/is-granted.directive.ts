@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 
-import { NbAccessChecker } from '../services/authorization-checker.service';
+import { NbAccessChecker } from '../services/access-checker.service';
 
 @Directive({ selector: '[nbIsGranted]'})
 export class NbIsGrantedDirective implements OnDestroy {

@@ -8,7 +8,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbRoleProvider } from './role.provider';
 import { NbAclService } from './acl.service';
-import { NbAccessChecker } from './authorization-checker.service';
+import { NbAccessChecker } from './access-checker.service';
 
 let accessChecker: NbAccessChecker;
 

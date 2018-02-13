@@ -1003,19 +1003,19 @@
           "examples": [],
           "params": [
             {
-              "name": "state",
+              "name": "list",
               "type": "\n",
               "required": null,
               "description": "\n"
             }
           ],
           "platform": null,
-          "name": "setState",
+          "name": "setAccessControl",
           "type": [
             "void"
           ],
           "isStatic": false,
-          "shortDescription": "Set/Reset ACL service state"
+          "shortDescription": "Set/Reset ACL list"
         },
         {
           "examples": [],
@@ -8855,10 +8855,6 @@
             {
               "theme": "default",
               "prop": "checkbox-border-color"
-            },
-            {
-              "theme": "default",
-              "prop": "checkbox-checkmark"
             }
           ]
         },
@@ -9071,14 +9067,14 @@
         },
         "checkbox-checkmark": {
           "name": "checkbox-checkmark",
-          "value": "#dadfe6",
-          "parents": [
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
             {
-              "theme": "default",
-              "prop": "form-control-border-color"
+              "theme": "cosmic",
+              "prop": "checkbox-checkmark"
             }
-          ],
-          "childs": []
+          ]
         },
         "checkbox-checked-bg": {
           "name": "checkbox-checked-bg",
@@ -10095,6 +10091,10 @@
             {
               "theme": "cosmic",
               "prop": "form-control-placeholder-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-border-color"
             }
           ]
         },
@@ -13715,16 +13715,7 @@
               "prop": "separator"
             }
           ],
-          "childs": [
-            {
-              "theme": "cosmic",
-              "prop": "checkbox-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "checkbox-checkmark"
-            }
-          ]
+          "childs": []
         },
         "form-control-selected-border-color": {
           "name": "form-control-selected-border-color",
@@ -13940,30 +13931,22 @@
         },
         "checkbox-border-color": {
           "name": "checkbox-border-color",
-          "value": "#342e73",
+          "value": "#a1a1e5",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "separator"
+              "prop": "color-fg"
             }
           ],
           "childs": []
         },
         "checkbox-checkmark": {
           "name": "checkbox-checkmark",
-          "value": "#342e73",
+          "value": "rgba(0, 0, 0, 0)",
           "parents": [
             {
-              "theme": "cosmic",
-              "prop": "form-control-border-color"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "separator"
+              "theme": "default",
+              "prop": "checkbox-checkmark"
             }
           ],
           "childs": []
