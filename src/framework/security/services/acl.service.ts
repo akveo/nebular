@@ -36,8 +36,8 @@ export class NbAclService {
    * @param {NbAccessControl} list
    */
   setAccessControl(list: NbAccessControl) {
-    for (const role of Object.keys(list)) {
-      const abilities = shallowObjectClone(list[role]);
+    for (const [role, value] of Object.entries(list)) {
+      const abilities = shallowObjectClone(value);
       const parent = popParent(abilities);
       this.register(role, parent, abilities);
     }
@@ -57,8 +57,8 @@ export class NbAclService {
       parent: parent,
     };
 
-    for (const permission of Object.keys(abilities)) {
-      const resources = typeof abilities[permission] === 'string' ? [abilities[permission]] : abilities[permission];
+    for (const [permission, value] of Object.entries(abilities)) {
+      const resources = typeof value === 'string' ? [value] : value;
       this.allow(role, permission, shallowArrayClone(resources));
     }
   }
