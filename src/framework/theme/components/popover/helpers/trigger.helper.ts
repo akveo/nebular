@@ -1,7 +1,8 @@
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
-import { debounceTime, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { debounceTime, filter, map, mergeMap, takeWhile } from 'rxjs/operators';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
@@ -44,7 +45,14 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
-      open: observableFromEvent<Event>(host, 'mouseenter'),
+      open: combineLatest(
+        observableFromEvent<Event>(host, 'mouseenter')
+          .pipe(debounceTime(100)),
+        observableFromEvent<Event>(host, 'mouseout'),
+      ).pipe(
+        filter(([e1, e2]) => e1.timeStamp - e2.timeStamp > 100),
+        map(([e1]) => e1),
+      ),
       close: observableFromEvent<Event>(host, 'mouseout').pipe(
         mergeMap(() => observableFromEvent<Event>(document, 'mousemove')
           .pipe(
