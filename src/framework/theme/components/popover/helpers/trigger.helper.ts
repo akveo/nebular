@@ -1,7 +1,7 @@
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
-import { NbPopoverMode, NbPopoverTrigger } from './model';
-import { debounceTime, delay, filter, mergeMap, repeat, takeUntil, takeWhile } from 'rxjs/operators';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
+import { debounceTime, delay, filter, mergeMap, repeat, takeUntil, takeWhile } from 'rxjs/operators';
+import { NbPopoverMode, NbPopoverTrigger } from './model';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
