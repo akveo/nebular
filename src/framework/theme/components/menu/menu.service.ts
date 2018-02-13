@@ -215,8 +215,14 @@ export class NbMenuInternalService {
     });
   }
 
+  private isParent(parent, child) {
+    return child.parent
+      ? child.parent === parent || this.isParent(parent, child.parent)
+      : false;
+  }
+
   private collapseItem(item: NbMenuItem, tag: string, except?: NbMenuItem) {
-    if (except && item === except) {
+    if (except && (item === except || this.isParent(item, except))) {
       return;
     }
 
