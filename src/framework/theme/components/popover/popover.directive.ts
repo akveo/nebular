@@ -90,7 +90,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   /**
    * Describes when the container will be shown.
-   * Available options: 'click' and 'hover'
+   * Available options: click, hover and hint
    * */
   @Input('nbPopoverMode')
   mode: NbPopoverMode = NbPopoverMode.CLICK;
