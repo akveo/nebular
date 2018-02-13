@@ -32,6 +32,7 @@ export enum NbPopoverPlacement {
 export enum NbPopoverMode {
   CLICK = 'click',
   HOVER = 'hover',
+  HINT = 'hint',
 }
 
 export class NbPopoverTrigger {

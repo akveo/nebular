@@ -1,8 +1,7 @@
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
-import { debounceTime, filter, map, mergeMap, takeWhile } from 'rxjs/operators';
+import { debounceTime, delay, filter, mergeMap, repeat, takeUntil, takeWhile } from 'rxjs/operators';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
-import { combineLatest } from 'rxjs/observable/combineLatest';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
@@ -10,8 +9,8 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 const NB_TRIGGERS = {
 
   /**
-   * Creates open and close events streams based on popover {@link NbPopoverMode#CLICK} mode.
-   * Fires open event when click was performed on the host element.
+   * Creates toggle and close events streams based on popover {@link NbPopoverMode#CLICK} mode.
+   * Fires toggle event when click was performed on the host element.
    * Fires close event when click was performed on the document but
    * not on the host or container or popover container isn't rendered yet.
    *
@@ -35,8 +34,8 @@ const NB_TRIGGERS = {
 
   /**
    * Creates open and close events streams based on popover {@link NbPopoverMode#HOVER} mode.
-   * Fires open event when mouse hovers over the host element.
-   * Fires close event when mouse leaves the host element.
+   * Fires open event when mouse hovers over the host element and stay over at least 100 milliseconds.
+   * Fires close event when mouse leaves the host element and stops out of the host and popover container.
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
@@ -45,26 +44,46 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
     return {
-      open: combineLatest(
-        observableFromEvent<Event>(host, 'mouseenter')
-          .pipe(debounceTime(100)),
-        observableFromEvent<Event>(host, 'mouseout'),
-      ).pipe(
-        filter(([e1, e2]) => e1.timeStamp - e2.timeStamp > 100),
-        map(([e1]) => e1),
-      ),
-      close: observableFromEvent<Event>(host, 'mouseout').pipe(
-        mergeMap(() => observableFromEvent<Event>(document, 'mousemove')
-          .pipe(
-            debounceTime(100),
-            takeWhile(() => !!getContainer()),
-            filter(event => {
-              return !host.contains(event.target as Node)
-                && !getContainer().location.nativeElement.contains(event.target)
-            }),
+      open: observableFromEvent<Event>(host, 'mouseenter')
+        .pipe(
+          delay(100),
+          takeUntil(observableFromEvent(host, 'mouseleave')),
+          repeat(),
+        ),
+      close: observableFromEvent<Event>(host, 'mouseleave')
+        .pipe(
+          mergeMap(() => observableFromEvent<Event>(document, 'mousemove')
+            .pipe(
+              debounceTime(100),
+              takeWhile(() => !!getContainer()),
+              filter(event => !host.contains(event.target as Node)
+                && !getContainer().location.nativeElement.contains(event.target),
+              ),
+            ),
           ),
         ),
-      ),
+      toggle: observableEmpty(),
+    }
+  },
+
+  /**
+   * Creates open and close events streams based on popover {@link NbPopoverMode#HOVER} mode.
+   * Fires open event when mouse hovers over the host element and stay over at least 100 milliseconds.
+   * Fires close event when mouse leaves the host element.
+   *
+   * @param host {HTMLElement} popover host element.
+   *
+   * @return {NbPopoverTrigger} open and close events streams.
+   * */
+  [NbPopoverMode.HINT](host: HTMLElement): NbPopoverTrigger {
+    return {
+      open: observableFromEvent<Event>(host, 'mouseenter')
+        .pipe(
+          delay(100),
+          takeUntil(observableFromEvent(host, 'mouseleave')),
+          repeat(),
+        ),
+      close: observableFromEvent(host, 'mouseleave'),
       toggle: observableEmpty(),
     }
   },

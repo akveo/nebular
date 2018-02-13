@@ -69,52 +69,52 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
         <nb-card>
           <nb-card-header>Multiple Hints</nb-card-header>
           <nb-card-body>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Right Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Bottom Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Top Popover!" nbPopoverMode="hint">
               show hint
             </button>
-            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hover">
+            <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverMode="hint">
               show hint
             </button>
           </nb-card-body>
@@ -128,6 +128,9 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             </button>
             <button class="btn btn-outline-secondary" nbPopover="Hover Popover!" nbPopoverMode="hover">
               Hover
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="Hint Popover!" nbPopoverMode="hint">
+              HInt
             </button>
           </nb-card-body>
         </nb-card>
