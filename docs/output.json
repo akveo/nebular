@@ -3723,6 +3723,24 @@
           "required": null,
           "name": "badgeText",
           "shortDescription": "Badge text to display"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "active",
+          "shortDescription": "Specifies active tab"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "lazyLoad",
+          "shortDescription": "Lazy load content before tab selection"
         }
       ],
       "methods": [],
