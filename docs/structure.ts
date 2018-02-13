@@ -117,12 +117,34 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'Enabling Theme System',
+        name: 'Enabling Theme System (Basic setup)',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'enabling-theme-system.md',
+            source: 'enabling-theme-system-basic.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Enabling Theme System (Custom theme)',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'enabling-theme-system-custom.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Enabling Theme System (Hot reload)',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'enabling-theme-system-hot-reload.md',
           },
         ],
       },
@@ -166,7 +188,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'markdown',
-            source: 'nebular-themes-quick-start.md',
+            source: 'nebular-themes-tutorial.md',
           },
         ],
       },
