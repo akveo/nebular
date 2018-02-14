@@ -1,9 +1,4 @@
-This section describes steps to create new Angular project with Nebular theme framework.
-Please take a look 
-[Theme System](https://akveo.github.io/nebular/#/docs/concepts/theme-system) in a first to be familiar with concept.
-
-By the end of the tutorial you will be able to do the following:
-* Use you own styles based on Nebular (cosmic or default theme)
+This section describes steps to customize default theme provided by Nebular. We assume that you already did [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and have working app with installed Nebular and default them. 
 <hr class="section-end">
 
 ## Steps:
@@ -11,12 +6,9 @@ By the end of the tutorial you will be able to do the following:
 1) In the `src` of you project create `themes.scss` and paste following:
 
 ```scss
-// import Nebular Theme System and the default theme
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
 
-// and change the variables you need, or simply leave the map empty to use the default values
-// let's make it blue-ish instead of the default white color
 $nb-themes: nb-register-theme((
   color-bg: #4ca6ff,
   shadow: 0 1px 2px 0 #3780c0,
@@ -24,25 +16,30 @@ $nb-themes: nb-register-theme((
   color-fg: #222222
 ), default, default); // let's leave it as default
 ```
+- Import Nebular Theme System and the default theme
+- Change the variables you need, or simply leave the map empty to use the default values. To be able to detect changes let's make it blue-ish instead of the default white color
+- For now, we leave theme name as default but you could specify it according to your point of view.
+
  <hr class="section-end">
  
 2) Now, find your styles.scss (or create one in the `src`) and paste the following:
 
 ```typescript
-// this is your created themes.scss file
 @import 'themes';
-
-// framework component styles which will use your new theme
 @import '~@nebular/theme/styles/globals';
 
-// install the framework
 @include nb-install() {
   @include nb-theme-global();
 };
 ```
+* Import `themes.scss` file created in first step
+* Import framework component styles which will use your new theme
+* Install the framework with usage of [mixin](http://sass-lang.com/guide#topic-6) provided by Nebular
+
+
 <hr class="section-end">
 
-3) In the `.angular-cli.json` let's replace
+3) Now we are ready to spesify new theme to app config. In the `.angular-cli.json` let's replace
 ```json
 {
 ...
@@ -67,8 +64,9 @@ to
         "styles.scss"
       ],
 ```
+* this is [SCSS](http://sass-lang.com/guide) which you have create recently.
 
-That's it, now app could be reloaded to see changes. Also you can override default value of variables in the `src/themes.scss`.
+That's it, now app could be reloaded to see changes or run it by `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. At this point, you can override the default value of variables in the `src/themes.scss` and make app appearance according to your vision.
 
 ![image](assets/images/articles/blue-theme.png)
 <hr class="section-end">
@@ -77,9 +75,9 @@ That's it, now app could be reloaded to see changes. Also you can override defau
 * [Enabling Theme System (Custom theme)](#/docs/guides/enabling-theme-system-custom-theme)
 
 ## Previous
-- [Themes Tutorial. Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup).
+- [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup).
 
 ## Next
-- [Themes Tutorial. Hot reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
+- [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
 - [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
 - [Deploying to production server](#/docs/guides/server-deployment).
