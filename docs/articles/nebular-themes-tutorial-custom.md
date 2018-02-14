@@ -68,16 +68,16 @@ to
 
 That's it, now app could be reloaded to see changes or run it by `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. At this point, you can override the default value of variables in the `src/themes.scss` and make app appearance according to your vision.
 
-![image](assets/images/articles/blue-theme.png)
+![image](assets/images/articles/smart-house-blue-theme.png)
 <hr class="section-end">
+
+## Previous
+* [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup).
+
+## Next
+* [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
+* [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
+* [Deploying to production server](#/docs/guides/server-deployment).
 
 ## Addition info:
 * [Enabling Theme System (Custom theme)](#/docs/guides/enabling-theme-system-custom-theme)
-
-## Previous
-- [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup).
-
-## Next
-- [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
-- [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
-- [Deploying to production server](#/docs/guides/server-deployment).

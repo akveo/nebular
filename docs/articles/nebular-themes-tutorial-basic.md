@@ -1,7 +1,4 @@
 This section describes steps to create a new Angular project with Nebular theme framework.
-
-By the end of the tutorial you will be able to do the following:
-* Use default styles provided by Nebular (cosmic or default theme)
 <hr class="section-end">
 
 ## Steps: 
@@ -146,11 +143,11 @@ Here we use [Angular Router](https://angular.io/tutorial/toh-pt5#routing), which
 <hr class="section-end">
 
 6) We are ready to check a result. Let's run `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme. The way to customize it describe in the next step [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
-![image](assets/images/articles/sample-page.png)
+![image](assets/images/articles/smart-house-sample-page.png)
 
 ## Next
 
-- [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
-- [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
-- [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
-- [Deploying to production server](#/docs/guides/server-deployment).
+* [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
+* [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
+* [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
+* [Deploying to production server](#/docs/guides/server-deployment).

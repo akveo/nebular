@@ -59,7 +59,7 @@ So when you enable your dark theme in the `src/app/app.module.ts`:
 })
 ```
 your page should look like this:
-![image](assets/images/articles/dark-theme.png)
+![image](assets/images/articles/smart-house-dark-page.png)
  
 2) To register themes which will be accessible to hot reload add following line to `src/themes.scss`:
 ```scss
@@ -87,48 +87,65 @@ Now, to enable the magic of the hot reload, wrap all of your *.component.scss (`
 }
 ```
 
-For a test purpose add two buttons on a page to be able to reload themes at runtime:
+Looks like now we are ready to use an ability to hot reload to apply dark or bluish theme depends on the period of the day. Let's show our content light-faced from 7.30 till 22.30.
 ```typescript
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'app-page',
   template: `
     <nb-layout>
-      <nb-layout-header fixed>Company Name</nb-layout-header>
+      <nb-layout-header fixed>List of views for your smart house devices (Dashboard, Lists etc.)</nb-layout-header>
       <nb-sidebar>
-        <button (click)="this.enableDarkTheme()">Enable Dark Theme</button>
-        <button (click)="this.enableDefaultTheme()">Enable Default Theme</button>
+        List of devices
       </nb-sidebar>
-      <nb-layout-column>Page Content</nb-layout-column>
+      <nb-layout-column>Control panel of concrete device</nb-layout-column>
     </nb-layout>
   `,
   styleUrls: ['page.component.scss'],
 })
-export class PageComponent {
+
+export class PageComponent implements OnInit {
+
+  ngOnInit(): void {
+    const minute = 60 * 1000;
+
+    const wakeUpTime = new Date();
+    wakeUpTime.setHours(7);
+    wakeUpTime.setMinutes(30);
+
+    const sleepTime = new Date();
+    sleepTime.setHours(22);
+    sleepTime.setMinutes(30);
+
+    setInterval(() => {
+      console.log('check time')
+      const now = new Date();
+
+      if (now.getTime() >= wakeUpTime.getTime() && now.getTime() <= sleepTime.getTime()) {
+        this.themeService.changeTheme('default');
+      } else {
+        this.themeService.changeTheme('dark');
+      }
+    }, minute);
+  }
 
   constructor(private themeService: NbThemeService) {
   }
-
-  enableDarkTheme() {
-    this.themeService.changeTheme('dark');
-  }
-
-  enableDefaultTheme() {
-    this.themeService.changeTheme('default');
-  }
 }
-```
-<hr class="section-end">
 
-## Addition info:
-* [Enabling Theme System (Hot reload)](#/docs/guides/enabling-theme-system-hot-reload)
+```
+So now your app will check the local time every minute and update style if it necessary.
+<hr class="section-end">
 
 ## Previous
 * [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup)
 * [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
 
 ## Next
-- [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
-- [Deploying to production server](#/docs/guides/server-deployment).
+* [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
+* [Deploying to production server](#/docs/guides/server-deployment).
+
+## Addition info:
+* [Enabling Theme System (Hot reload)](#/docs/guides/enabling-theme-system-hot-reload)

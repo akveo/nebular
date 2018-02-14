@@ -13,7 +13,7 @@ By the end of the tutorial you will be able to do the following:
 
 ## What you'll build
 
-In the first steps, you will learn how to use one place of CSS rules to make project structure easy to read and be able efficient to manage it.
+In the first steps, you will learn how to use one place of CSS rules to make project structure easy to read and be efficient to manage it.
 
 // TODO screenshots and examples
 
