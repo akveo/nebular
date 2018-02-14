@@ -1,17 +1,18 @@
-This section describes steps to create new Angular project with Nebular theme framework.
-Please take a look 
-[Theme System](https://akveo.github.io/nebular/#/docs/concepts/theme-system) in a first to be familiar with concept.
+This section describes steps to create a new Angular project with Nebular theme framework.
 
 By the end of the tutorial you will be able to do the following:
 * Use default styles provided by Nebular (cosmic or default theme)
 <hr class="section-end">
 
-## Steps:
+## Steps: 
 
-1) In a first to create new project run `ng new themes-example | cd themes-example` in the [CLI](https://github.com/angular/angular-cli)
-or use existence.
+1) In a first to create new project run following command in the [Angular CLI](https://github.com/angular/angular-cli). 
+```bash
+ng new themes-example && cd themes-example
+```
 
-2) At this step, we assume you already have Angular modules installed. Now let's install Angular Bootstrap which is the only peer dependency left:
+
+2) Now let's install Angular Bootstrap which is the only peer dependency left:
 
 ```bash
 npm i -S bootstrap
@@ -22,12 +23,13 @@ Then install Nebular module:
 ```bash
 npm i -S @nebular/theme
 ```
+At this point you have done with dependency, let's include prepared styles to project.
 <hr class="section-end">
 
-3) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
+3) You just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
    
 
-```typescript
+```json
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   ...
@@ -39,50 +41,32 @@ npm i -S @nebular/theme
         "../node_modules/@nebular/theme/styles/prebuilt/default.css"
       ],
 ```
+Now you have attached external CSS. More information about style structure in the [Theme System](#/docs/concepts/theme-system), it'll be covered in the tutorial later.
 
 4) Let's configure Nebular in the app module.
    
 ```typescript
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { NbLayoutModule, NbSidebarModule, NbSidebarService, NbThemeModule } from '@nebular/theme';
-import { RouterModule, Routes } from '@angular/router';
-import { PageComponent } from './page/page.component';
-
-const routes: Routes = [
- {
-   path: '**',
-   component: PageComponent,
- },
-];
+import { NbThemeModule } from '@nebular/theme';
 
 @NgModule({
- declarations: [
-   AppComponent,
-   PageComponent
- ],
+ ...
  imports: [
    BrowserModule,
    NbThemeModule.forRoot({name: 'default'}),
-   RouterModule.forRoot(routes, {useHash: true}),
-   NbLayoutModule,
-   NbSidebarModule,
+   ...
  ],
- providers: [NbSidebarService],
- bootstrap: [AppComponent]
 })
 
 export class AppModule {
 }
 ```
 
-_// You may take a quick look at [UI Kit Consept](https://akveo.github.io/nebular/#/docs/concepts/ui-kit) to understand Nebular base components._
+Now angular module has configured with `default` theme and we could move to creating the first page.
 <hr class="section-end">
 
-5) Now, let's create a simple Nebular page (header + sidebar) in your project. 
+5) The simple Nebular page it is base component which includes header and sidebar. It's required that all staff in your project based on Nebular should wrap in `<nb-layout>`. More information about the list of essential components provided in the [UI Kit Consept](https://akveo.github.io/nebular/#/docs/concepts/ui-kit)), we will talk about it later in the scope of next parts of the tutorial.
 * Create new component `ng g component page` and add [NbLayoutComponent](https://akveo.github.io/nebular/#/docs/components/layout) to page template: 
 
 ```typescript
@@ -105,17 +89,9 @@ import { Component } from '@angular/core';
 export class PageComponent {
 }
 ```
-
-<div class="note note-info">
-  <div class="note-title">Adding into existing page</div>
-  <div class="note-body">
-    In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
-  </div>
-</div>
 <hr class="section-end">
 
-* Open your `app.module.ts` and import necessary layout components:
+* Also add new component to your `app.module.ts` and import necessary layout components:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -152,14 +128,29 @@ const routes: Routes = [
 export class AppModule {
 }
 ```
+
+As soon as we add Router to module let's update `app/app.component.ts` `template` like this:
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<router-outlet></router-outlet>`,
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+}
+
+```
+Here we use [Angular Router](https://angular.io/tutorial/toh-pt5#routing), which is not covered here, but you can read it in the Angular docs.
 <hr class="section-end">
 
-6) We are ready to check a result. Let's run `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme. THe way to customize it describe in the [Themes Tutorial. Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
+6) We are ready to check a result. Let's run `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme. The way to customize it describe in the next step [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
 ![image](assets/images/articles/sample-page.png)
 
 ## Next
 
-- [Themes Tutorial. Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
-- [Themes Tutorial. Hot reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
+- [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
+- [Themes hot-reload](#/docs/ngxadmin-tutorials/themes-tutorial-hot-reload).
 - [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
 - [Deploying to production server](#/docs/guides/server-deployment).

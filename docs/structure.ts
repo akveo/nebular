@@ -96,11 +96,22 @@ export const STRUCTURE = [
   },
   {
     type: 'section',
-    name: 'ngx-admin tutorials',
+    name: 'Tutorial',
     children: [
       {
         type: 'page',
-        name: 'Themes Tutorial. Basic setup',
+        name: 'Introduction',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'introduction.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Basic setup',
         children: [
           {
             type: 'block',
@@ -111,7 +122,7 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Themes Tutorial. Custom theme',
+        name: 'Custom theme',
         children: [
           {
             type: 'block',
@@ -122,7 +133,7 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Themes Tutorial. Hot reload',
+        name: 'Theme hot-reload',
         children: [
           {
             type: 'block',
