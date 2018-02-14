@@ -1,22 +1,14 @@
-This section describes steps to create new Angular project with Nebular theme framework.
-Please take a look 
-[Theme System](https://akveo.github.io/nebular/#/docs/concepts/theme-system) in a first to be familiar with concept.
+This section describes steps to configure the app to be able to reload theme in the browser without reloading page. We assume that you already did [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme) and have working app with installed Nebular and one custom them.
 
-By the end of the tutorial you will be able to do the following:
-* Use magic of multiple themes with hot-reload
 <hr class="section-end">
 
 ## Steps:
 
-1) Let's add to `src/themes.scss` a new theme, which will be based on the cosmic Nebular theme and named dark:
+1) At this point, we need to specify the second theme which will replace existence. Let's add it to `src/themes.scss`. A new theme will be based on the cosmic Nebular theme and named dark:
 
 ```scss
-
-// add cosmic theme import below the default theme;
 @import '~@nebular/theme/styles/themes/cosmic';
 
-// and change the variables you need, or simply leave the map empty to use the default values
-// let's make it blue-ish instead of the default white color
 $nb-themes: nb-register-theme((
 
   color-bg: #222222,
@@ -25,6 +17,9 @@ $nb-themes: nb-register-theme((
   layout-bg: #ededed,
 ), dark, cosmic);
 ```
+* Add cosmic theme import below the default theme
+* And change the variables you need, or simply leave the map empty to use the default values
+* Let's make it dark by specified background color as black and named it `dark`
 
 So that your `src/themes.scss` file looks like this:
 
@@ -52,7 +47,7 @@ $nb-themes: nb-register-theme((
 ), dark, cosmic);
 ```
 
-At this point when you enable your dark theme in the `src/app/app.module.ts`:
+So when you enable your dark theme in the `src/app/app.module.ts`:
 ```typescript
 @NgModule({
 ...
@@ -66,7 +61,7 @@ At this point when you enable your dark theme in the `src/app/app.module.ts`:
 your page should look like this:
 ![image](assets/images/articles/dark-theme.png)
  
-2) To register themes which will be accessible to hot reload to `src/themes.scss` add following line:
+2) To register themes which will be accessible to hot reload add following line to `src/themes.scss`:
 ```scss
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
@@ -130,7 +125,10 @@ export class PageComponent {
 ## Addition info:
 * [Enabling Theme System (Hot reload)](#/docs/guides/enabling-theme-system-hot-reload)
 
-## Next
+## Previous
+* [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup)
+* [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
 
+## Next
 - [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
 - [Deploying to production server](#/docs/guides/server-deployment).
