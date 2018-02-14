@@ -4,45 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { convertToBoolProperty } from '../helpers';
 
 /**
- * Action dropdown menu
- */
-export class NbUserMenuItem {
-  /**
-   * Menu title
-   * @type string
-   */
-  title: string;
-  /**
-   * Menu link for [routerLink] directive
-   * @type string
-   */
-  link?: string;
-  /**
-   * URL for absolute urls, used directly in href
-   * @type string
-   */
-  url?: string;
-  /**
-   * Link target (_blank, _self, etc)
-   * @type string
-   */
-  target?: string;
-  /**
-   * Icon class
-   * @type string
-   */
-  icon?: string;
-}
-
-/**
  * Represents a component showing a user avatar (picture) with a user name on the right.
  *
- * Can be used as a user profile link or can bring a user context menu.
+ * Can be used as a user profile link.
  *
  * @styles
  *
@@ -56,11 +25,6 @@ export class NbUserMenuItem {
  * user-size-medium:
  * user-size-large:
  * user-size-xlarge:
- * user-menu-fg:
- * user-menu-bg:
- * user-menu-active-fg:
- * user-menu-active-bg:
- * user-menu-border:
  */
 @Component({
   selector: 'nb-user',
@@ -132,12 +96,6 @@ export class NbUserComponent {
    * @type string
    */
   @Input() color: string;
-
-  /**
-   * List of menu items for a user context menu (shown when clicked)
-   * @type NbUserMenuItem[]
-   */
-  @Input() menu: NbUserMenuItem[] = [];
 
   /**
    * Size of the component, small|medium|large
@@ -214,40 +172,13 @@ export class NbUserComponent {
    */
   @Input() badgePosition: string;
 
-  /**
-   * Outputs when a context menu item is clicked
-   * @type EventEmitter<NbUserMenuItem>
-   */
-  @Output() menuClick = new EventEmitter<NbUserMenuItem>();
-
   imageBackgroundStyle: SafeStyle;
   showNameValue: boolean = true;
   showTitleValue: boolean = true;
   showInitialsValue: boolean = true;
   isMenuShown: boolean = false;
 
-  constructor(
-    private el: ElementRef,
-    private domSanitizer: DomSanitizer) { }
-
-  itemClick(event: any, item: NbUserMenuItem): boolean {
-    this.menuClick.emit(item);
-    return false;
-  }
-
-  /**
-   * Toggles a context menu
-   */
-  toggleMenu() {
-    this.isMenuShown = !this.isMenuShown;
-  }
-
-  @HostListener('document:click', ['$event'])
-  hideMenu(event: any) {
-    if (!this.el.nativeElement.contains(event.target)) {
-      this.isMenuShown = false;
-    }
-  }
+  constructor(private domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
     if (this.name) {
@@ -258,9 +189,4 @@ export class NbUserComponent {
 
     return '';
   }
-
-  hasMenu(): boolean {
-    return this.menu && this.menu.length > 0;
-  }
-
 }

@@ -60,28 +60,5 @@
         width: nb-theme(user-size-xlarge);
       }
     }
-
-    .user-context-menu {
-      border: 2px solid nb-theme(user-menu-border);
-      background: nb-theme(user-menu-bg);
-
-      ul > li > a {
-        color: nb-theme(user-menu-fg);
-
-        @include hover-focus-active {
-          color: nb-theme(user-menu-active-fg);
-          background: nb-theme(user-menu-active-bg);
-          text-decoration: none;
-        }
-      }
-
-      ul > li.arrow {
-        border-bottom: 11px solid nb-theme(user-menu-border) !important;
-
-        &::after {
-          border-bottom: 11px solid nb-theme(user-menu-bg) !important;
-        }
-      }
-    }
   }
 }
