@@ -85,7 +85,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Set this property to any falsy value if you want to disable automatically adjustment.
    * Available values: clockwise, counterclockwise.
    * */
-  @Input('nbPopoverAdjust')
+  @Input('nbPopoverAdjustment')
   adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
 
   /**
