@@ -1,4 +1,4 @@
-This section describes steps to customize default theme provided by Nebular. We assume that you already did [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and have working app with installed Nebular and default them. 
+This section describes steps how to customize default theme provided by Nebular. We assume that you have already done [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and have working app with installed Nebular and default them. 
 <hr class="section-end">
 
 ## Steps:
@@ -14,11 +14,11 @@ $nb-themes: nb-register-theme((
   shadow: 0 1px 2px 0 #3780c0,
   layout-bg: #ffffff,
   color-fg: #222222
-), default, default); // let's leave it as default
+), default, default);
 ```
 - Import Nebular Theme System and the default theme
 - Change the variables you need, or simply leave the map empty to use the default values. To be able to detect changes let's make it blue-ish instead of the default white color
-- For now, we leave theme name as default but you could specify it according to your point of view.
+- For now, we leave theme name as default but you may customize it.
 
  <hr class="section-end">
  
@@ -33,7 +33,7 @@ $nb-themes: nb-register-theme((
 };
 ```
 * Import `themes.scss` file created in first step
-* Import framework component styles which will use your new theme
+* Import framework component styles that will be used in your new theme
 * Install the framework with usage of [mixin](http://sass-lang.com/guide#topic-6) provided by Nebular
 
 

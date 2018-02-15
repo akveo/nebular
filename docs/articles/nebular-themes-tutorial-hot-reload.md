@@ -1,10 +1,10 @@
-This section describes steps to configure the app to be able to reload theme in the browser without reloading page. We assume that you already did [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme) and have working app with installed Nebular and one custom them.
+This section describes the steps how to configure the app to reload theme in the browser without reloading a page. We assume that you already done [Basic setup](#/docs/ngxadmin-tutorials/themes-tutorial-basic-setup) and [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme) and have a working app with installed Nebular and the only custom theme.
 
 <hr class="section-end">
 
 ## Steps:
 
-1) At this point, we need to specify the second theme which will replace existence. Let's add it to `src/themes.scss`. A new theme will be based on the cosmic Nebular theme and named dark:
+1) At this point, we need to specify the second theme which will replace existent one. Let's add it to `src/themes.scss`. A new theme will be based on the cosmic Nebular theme and named dark:
 
 ```scss
 @import '~@nebular/theme/styles/themes/cosmic';
@@ -19,7 +19,7 @@ $nb-themes: nb-register-theme((
 ```
 * Add cosmic theme import below the default theme
 * And change the variables you need, or simply leave the map empty to use the default values
-* Let's make it dark by specified background color as black and named it `dark`
+* Let's make it dark with specified background color as black and named it `dark`
 
 So that your `src/themes.scss` file looks like this:
 
@@ -87,7 +87,7 @@ Now, to enable the magic of the hot reload, wrap all of your *.component.scss (`
 }
 ```
 
-Looks like now we are ready to use an ability to hot reload to apply dark or bluish theme depends on the period of the day. Let's show our content light-faced from 7.30 till 22.30.
+It feels like now we are ready to use an ability of hot-reload to apply dark or blu-ish theme depending on the time of the day. Let's show our content light-faced from 7.30 till 22.30.
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';

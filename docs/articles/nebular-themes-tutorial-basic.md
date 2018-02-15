@@ -3,7 +3,7 @@ This section describes steps to create a new Angular project with Nebular theme 
 
 ## Steps: 
 
-1) In a first to create new project run following command in the [Angular CLI](https://github.com/angular/angular-cli). 
+1) For the first to create a new project run the following command in the [Angular CLI](https://github.com/angular/angular-cli). 
 ```bash
 ng new themes-example && cd themes-example
 ```
@@ -20,10 +20,10 @@ Then install Nebular module:
 ```bash
 npm i -S @nebular/theme
 ```
-At this point you have done with dependency, let's include prepared styles to project.
+At this point you have done with the dependencies, let's include prepared styles in the project.
 <hr class="section-end">
 
-3) You just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
+3) You just need to include a CSS file of a theme you want to use for your `.angular-cli.json` file like this:
    
 
 ```json
@@ -60,10 +60,10 @@ export class AppModule {
 }
 ```
 
-Now angular module has configured with `default` theme and we could move to creating the first page.
+Now angular module has configured with `default` theme and we could move to create the first page.
 <hr class="section-end">
 
-5) The simple Nebular page it is base component which includes header and sidebar. It's required that all staff in your project based on Nebular should wrap in `<nb-layout>`. More information about the list of essential components provided in the [UI Kit Consept](https://akveo.github.io/nebular/#/docs/concepts/ui-kit)), we will talk about it later in the scope of next parts of the tutorial.
+5) The simple Nebular page is a base component that includes a header and sidebar. It's required that all stuff in your project based on Nebular should wrap in `<nb-layout>`. More information about the list of essential components is provided in the [UI Kit Consept](https://akveo.github.io/nebular/#/docs/concepts/ui-kit)), we will talk about it later in the scope of next parts of the tutorial.
 * Create new component `ng g component page` and add [NbLayoutComponent](https://akveo.github.io/nebular/#/docs/components/layout) to page template: 
 
 ```typescript
@@ -126,7 +126,7 @@ export class AppModule {
 }
 ```
 
-As soon as we add Router to module let's update `app/app.component.ts` `template` like this:
+As soon as we have added Router to the module let's update `app/app.component.ts` `template` like this:
 ```typescript
 import { Component } from '@angular/core';
 
@@ -139,10 +139,10 @@ export class AppComponent {
 }
 
 ```
-Here we use [Angular Router](https://angular.io/tutorial/toh-pt5#routing), which is not covered here, but you can read it in the Angular docs.
+Here we use [Angular Router](https://angular.io/tutorial/toh-pt5#routing), that is not covered here, but you can read it in the Angular docs.
 <hr class="section-end">
 
-6) We are ready to check a result. Let's run `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme. The way to customize it describe in the next step [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
+6) We are ready to check the result. Let's run `npm start` with [CLI](https://github.com/angular/angular-cli) and open in your browser `http://localhost:4200/`. Now we use default Nebular theme. How to customize is described in the next step [Custom theme](#/docs/ngxadmin-tutorials/themes-tutorial-custom-theme).
 ![image](assets/images/articles/smart-house-sample-page.png)
 
 ## Next

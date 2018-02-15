@@ -3,7 +3,7 @@
 In this tutorial you will build an app that could manage your smart house.
 In the process of creating you will learn many useful things to make app efficient and beautiful.
 
-This basic app will show you many ways to use already implemented components you'd use in the data-driven application to do application efficient and save your time. 
+This basic app will show you use many ways to apply ready-to-use components, which could be added to the data-driven application to make an app efficient and readable.It would definitely save your time. 
 
 By the end of the tutorial you will be able to do the following:
 * Use default styles provided for whole application (Nebular cosmic or default theme)
@@ -13,7 +13,7 @@ By the end of the tutorial you will be able to do the following:
 
 ## What you'll build
 
-In the first steps, you will learn how to use one place of CSS rules to make project structure easy to read and be efficient to manage it.
+On the first steps, you will learn how to use CSS rules taken from one place to make project structure easier to read and be efficient to manage.
 
 // TODO screenshots and examples
 
