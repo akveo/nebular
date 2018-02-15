@@ -36,7 +36,6 @@
   @mixin description-style {
     color: nb-theme(color-fg-heading);
     opacity: 0.5;
-    flex-shrink: 0;
     padding-left: 0.25rem;
   }
 
