@@ -16,7 +16,10 @@ import {
     QueryList,
     ElementRef,
     AfterViewInit,
+    PLATFORM_ID,
+    Inject,
   } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { takeWhile } from 'rxjs/operators/takeWhile';
@@ -49,7 +52,10 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(NbMenuItemComponent, { read: ElementRef }) subMenu: QueryList<ElementRef>;
   maxHeight: number = 0;
 
-  constructor(private menuService: NbMenuService) { }
+  constructor(
+    private menuService: NbMenuService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) { }
 
   ngAfterViewInit() {
     this.subMenu.changes
@@ -74,7 +80,12 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   }
 
   updateSubmenuHeight() {
-    this.menuItem.subMenuHeight = this.subMenu.reduce((acc, c) => acc + getElementHeight(c.nativeElement), 0);
+    if (isPlatformBrowser(this.platformId)) {
+      this.menuItem.subMenuHeight = this.subMenu.reduce(
+        (acc, c) => acc + getElementHeight(c.nativeElement),
+        0,
+      )
+    }
   }
 
   updateMaxHeight() {
