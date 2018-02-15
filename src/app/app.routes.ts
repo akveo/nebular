@@ -41,6 +41,7 @@ import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
 import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbCardTestComponent } from './card-test/card-test.component';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -248,6 +249,10 @@ export const routes: Routes = [
   {
     path: 'forms',
     component: NbFormsTestComponent,
+  },
+  {
+    path: 'popover',
+    component: NbPopoverTestComponent,
   },
   {
     path: 'acl',
