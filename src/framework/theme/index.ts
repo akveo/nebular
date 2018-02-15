@@ -26,4 +26,5 @@ export * from './components/checkbox/checkbox.component';
 export * from './components/checkbox/checkbox.module';
 export * from './components/badge/badge.component';
 export * from './components/badge/badge.module';
-
+export * from './components/popover/popover.directive';
+export * from './components/popover/popover.module';
