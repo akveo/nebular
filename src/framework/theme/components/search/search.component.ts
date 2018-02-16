@@ -30,6 +30,7 @@ import { delay } from 'rxjs/operators/delay';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -169,6 +170,8 @@ export class NbSearchFieldComponent {
 })
 export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  private alive = true;
+
   /**
    * Tags a search with some ID, can be later used in the search service
    * to determine which search component triggered the action, if multiple searches exist on the page.
@@ -218,6 +221,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.routerSubscription = this.router.events
       .pipe(
+        takeWhile(() => this.alive),
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
@@ -227,6 +231,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchService.onSearchActivate(),
     ])
       .pipe(
+        takeWhile(() => this.alive),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
       .subscribe(([componentRef]: [ComponentRef<any>]) => {
@@ -246,6 +251,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchService.onSearchDeactivate(),
     ])
       .pipe(
+        takeWhile(() => this.alive),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
       .subscribe(([componentRef]: [ComponentRef<any>]) => {
@@ -294,9 +300,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.activateSearchSubscription.unsubscribe();
-    this.deactivateSearchSubscription.unsubscribe();
-    this.routerSubscription.unsubscribe();
+    this.alive = false;
 
     const componentRef = this.searchFieldComponentRef$.getValue();
     if (componentRef) {
