@@ -16,12 +16,15 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
         <nb-card>
           <nb-card-header>Content Type</nb-card-header>
           <nb-card-body>
-            <button class="btn btn-info" [nbPopover]="popoverTemplate" nbPopoverPlacement="right">Template Ref Test
+            <button class="btn btn-info" [nbPopover]="popoverTemplate"
+                    [nbPopoverContext]="{text: 'Example context'}"
+                    nbPopoverPlacement="right">
+              Template Ref Test
             </button>
-            <ng-template #popoverTemplate>
+            <ng-template #popoverTemplate let-text="text">
               <nb-card [style.margin.px]="0" [style.boxShadow]="'none'">
                 <nb-card-body>
-                  <label class="form-control-label" for="success-form-control">Success Form Control</label>
+                  <label class="form-control-label" for="success-form-control">{{text}}</label>
                   <input class="form-control form-control-success" id="success-form-control"
                          placeholder="Success Form Control">
                   <span class="form-control-feedback">Help text</span>
@@ -29,7 +32,8 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
               </nb-card>
             </ng-template>
 
-            <button class="btn btn-warning" [nbPopover]="customPopoverComponent">
+            <button class="btn btn-warning" [nbPopover]="customPopoverComponent"
+                    [nbPopoverContext]="{text: 'Example context'}">
               Component Test
             </button>
 
