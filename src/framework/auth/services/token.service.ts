@@ -1,24 +1,27 @@
 import { Inject, Injectable } from '@angular/core';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { switchMapTo } from 'rxjs/operators/switchMapTo';
 import { tap } from 'rxjs/operators/tap';
 import { share } from 'rxjs/operators/share';
 
 import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN } from '../auth.options';
 import { deepExtend, getDeepFromObject, urlBase64Decode } from '../helpers';
 
+export interface NbAuthToken {
+  getValue(): string;
+  isValid(): boolean;
+  toString(): string;
+}
+
 /**
  * Wrapper for simple (text) token
  */
-@Injectable()
-export class NbAuthSimpleToken {
+export class NbAuthSimpleToken implements NbAuthToken {
 
-  protected token: string = '';
-
-  setValue(token: string) {
-    this.token = token;
+  constructor(readonly token: string) {
   }
 
   /**
@@ -28,20 +31,38 @@ export class NbAuthSimpleToken {
   getValue() {
     return this.token;
   }
+
+  /**
+   * Is current token could be processed
+   * @returns {boolean}
+   */
+  isValid(): boolean {
+    return !!this.token;
+  }
+
+  /**
+   * Validate value and convert to string, if value is not valid return empty string
+   * @returns {string}
+   */
+  toString(): string {
+    return !!this.token ? this.token : '';
+  }
 }
 
 /**
  * Wrapper for JWT token with additional methods.
  */
-@Injectable()
 export class NbAuthJWTToken extends NbAuthSimpleToken {
 
   /**
-   * TODO: check for this.token to be not null
    * Returns payload object
    * @returns any
    */
   getPayload(): any {
+    if (!this.token) {
+      throw new Error('Token can not be null.');
+    }
+
     const parts = this.token.split('.');
 
     if (parts.length !== 3) {
@@ -71,6 +92,18 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
 
     return date;
   }
+
+  /**
+   * Is data expired
+   * @returns {boolean}
+   */
+  isValid(): boolean {
+    return super.isValid() && new Date() < this.getTokenExpDate();
+  }
+}
+
+export interface NbTokenWrapperClass {
+  new (raw: string): NbAuthToken
 }
 
 /**
@@ -99,15 +132,13 @@ export class NbTokenService {
     token: {
       key: 'auth_app_token',
 
-      getter: (): Observable<NbAuthSimpleToken> => {
-        const tokenValue = localStorage.getItem(this.getConfigValue('token.key'));
-        this.tokenWrapper.setValue(tokenValue);
-        return observableOf(this.tokenWrapper);
+      getter: (): Observable<NbAuthToken> => {
+        const rawToken = localStorage.getItem(this.getConfigValue('token.key'));
+        return observableOf(new this.TokenWrapperClass(rawToken));
       },
 
-      setter: (token: string | NbAuthSimpleToken): Observable<null> => {
-        const raw = token instanceof NbAuthSimpleToken ? token.getValue() : token;
-        localStorage.setItem(this.getConfigValue('token.key'), raw);
+      setter: (token: NbAuthToken): Observable<null> => {
+        localStorage.setItem(this.getConfigValue('token.key'), token.toString());
         return observableOf(null);
       },
 
@@ -117,14 +148,17 @@ export class NbTokenService {
       },
     },
   };
+
   protected config: any = {};
-  protected token$: BehaviorSubject<any> = new BehaviorSubject(null);
+  protected token$: BehaviorSubject<NbAuthToken> = new BehaviorSubject(null);
 
   constructor(@Inject(NB_AUTH_OPTIONS_TOKEN) protected options: any,
-              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected tokenWrapper: NbAuthSimpleToken) {
+              @Inject(NB_AUTH_TOKEN_WRAPPER_TOKEN) protected TokenWrapperClass: NbTokenWrapperClass) {
     this.setConfig(options);
 
-    this.get().subscribe(token => this.publishToken(token));
+    this.get().subscribe(token => {
+      this.publishToken(token)
+    });
   }
 
   setConfig(config: any): void {
@@ -137,14 +171,16 @@ export class NbTokenService {
 
   /**
    * Sets the token into the storage. This method is used by the NbAuthService automatically.
+   *
+   * Note: don't forget to subscribe
    * @param {string} rawToken
    * @returns {Observable<any>}
    */
   set(rawToken: string): Observable<null> {
-    return this.getConfigValue('token.setter')(rawToken)
+    return this.getConfigValue('token.setter')(new this.TokenWrapperClass(rawToken))
       .pipe(
-        switchMap(() => this.get()),
-        tap((token: NbAuthSimpleToken) => {
+        switchMapTo(this.fetch()),
+        tap((token: NbAuthToken) => {
           this.publishToken(token);
         }),
       );
@@ -152,31 +188,41 @@ export class NbTokenService {
 
   /**
    * Returns observable of current token
-   * @returns {Observable<NbAuthSimpleToken>}
+   * @returns {Observable<NbAuthToken>}
    */
-  get(): Observable<NbAuthSimpleToken> {
-    return this.getConfigValue('token.getter')();
+  get(): Observable<NbAuthToken> {
+    return this.fetch();
   }
 
   /**
    * Publishes token when it changes.
-   * @returns {Observable<NbAuthSimpleToken>}
+   * @returns {Observable<NbAuthToken>}
    */
-  tokenChange(): Observable<NbAuthSimpleToken> {
+  tokenChange(): Observable<NbAuthToken> {
     return this.token$.pipe(share());
   }
 
   /**
    * Removes the token
+   *
+   * Note: don't forget to subscribe
    * @returns {Observable<any>}
    */
-  clear(): Observable<any> {
-    this.publishToken(null);
-
-    return this.getConfigValue('token.deleter')();
+  clear(): Observable<NbAuthToken> {
+    return this.getConfigValue('token.deleter')()
+      .pipe(
+        switchMapTo(this.fetch()),
+        tap((token: NbAuthToken) => {
+          this.publishToken(token);
+        }),
+      );
   }
 
-  protected publishToken(token: NbAuthSimpleToken): void {
+  private fetch(): Observable<NbAuthToken> {
+    return this.getConfigValue('token.getter')();
+  }
+
+  protected publishToken(token: NbAuthToken): void {
     this.token$.next(token);
   }
 }

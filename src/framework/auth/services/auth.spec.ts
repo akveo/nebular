@@ -26,7 +26,9 @@ describe('auth-service', () => {
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  const tokenWrapper = new NbAuthSimpleToken();
+  const testToken = new NbAuthSimpleToken(testTokenValue);
+  const replacedValue = new NbAuthSimpleToken('Replaced');
+  const emptyToken = new NbAuthSimpleToken(null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -40,7 +42,7 @@ describe('auth-service', () => {
     ['Successfully logged in.'],
 
     // TODO in case we dont set this optional param we will not replace to new one during authenticate
-    tokenWrapper);
+    testToken);
 
   const successLogoutResult = new NbAuthResult(true,
     resp200,
@@ -64,7 +66,7 @@ describe('auth-service', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: NB_AUTH_OPTIONS_TOKEN, useValue: {}},
-        {provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken},
+        {provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthSimpleToken},
         {
           provide: NB_AUTH_USER_OPTIONS_TOKEN, useValue: {
             forms: {
@@ -96,13 +98,12 @@ describe('auth-service', () => {
     authService = TestBed.get(NbAuthService);
     tokenService = TestBed.get(NbTokenService);
     dummyAuthProvider = TestBed.get(NbDummyAuthProvider);
-    tokenWrapper.setValue(testTokenValue);
   });
 
   it('get test token before set', () => {
       const spy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(testToken));
 
       authService.getToken().subscribe((val: NbAuthSimpleToken) => {
         expect(spy).toHaveBeenCalled();
@@ -114,7 +115,7 @@ describe('auth-service', () => {
   it('is authenticated true if token exists', () => {
       const spy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(testToken));
 
       authService.isAuthenticated().subscribe((isAuth: boolean) => {
         expect(spy).toHaveBeenCalled();
@@ -124,10 +125,9 @@ describe('auth-service', () => {
   );
 
   it('is authenticated false if token doesn\'t exist', () => {
-      tokenWrapper.setValue('');
       const spy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(emptyToken));
 
       authService.isAuthenticated().subscribe((isAuth: boolean) => {
         expect(spy).toHaveBeenCalled();
@@ -139,30 +139,13 @@ describe('auth-service', () => {
   it('onTokenChange return correct stream and gets test token', (done) => {
       const spy = spyOn(tokenService, 'tokenChange')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(testToken));
 
       authService.onTokenChange()
         .pipe(first())
         .subscribe((token: NbAuthSimpleToken) => {
           expect(spy).toHaveBeenCalled();
           expect(token.getValue()).toEqual(testTokenValue);
-          done();
-        });
-    },
-  );
-
-  // TODO Could be removed if token immutable
-  it('onTokenChange return correct stream and retrieve null token', (done) => {
-      tokenWrapper.setValue(null);
-      const spy = spyOn(tokenService, 'tokenChange')
-        .and
-        .returnValue(observableOf(tokenWrapper));
-
-      authService.onTokenChange()
-        .pipe(first())
-        .subscribe((token: NbAuthSimpleToken) => {
-          expect(spy).toHaveBeenCalled();
-          expect(token.getValue()).toBeNull();
           done();
         });
     },
@@ -202,10 +185,9 @@ describe('auth-service', () => {
         .and
         .returnValue(observableOf('STUB'));
 
-      tokenWrapper.setValue('Replaced');
-      const tokenServiceGetSpy = spyOn(tokenService, 'get')
+    const tokenServiceGetSpy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(replacedValue));
 
       authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerSpy).toHaveBeenCalled();
@@ -217,7 +199,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toEqual(tokenWrapper);
+        expect(authRes.getTokenValue()).toEqual(replacedValue);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -258,10 +240,9 @@ describe('auth-service', () => {
         .and
         .returnValue(observableOf('STUB'));
 
-      tokenWrapper.setValue('Replaced');
       const tokenServiceGetSpy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(tokenWrapper));
+        .returnValue(observableOf(replacedValue));
 
       authService.register('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerSpy).toHaveBeenCalled();
@@ -273,7 +254,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toEqual(tokenWrapper);
+        expect(authRes.getTokenValue()).toEqual(replacedValue);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })

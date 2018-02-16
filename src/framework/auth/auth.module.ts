@@ -87,7 +87,7 @@ export class NbAuthModule {
         { provide: NB_AUTH_USER_OPTIONS_TOKEN, useValue: nbAuthOptions },
         { provide: NB_AUTH_OPTIONS_TOKEN, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS_TOKEN] },
         { provide: NB_AUTH_PROVIDERS_TOKEN, useValue: {} },
-        { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthSimpleToken },
+        { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
         {
           provide: NbAuthService,
