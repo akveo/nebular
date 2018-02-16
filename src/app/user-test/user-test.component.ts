@@ -108,6 +108,10 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             [badgePosition]="badge.TOP_LEFT">
           </nb-user>
         </div>
+        <div class="test-row" id="base64-image">
+          <nb-user
+            [picture]="'data:image/png;base64,aaa'"></nb-user>
+        </div>
       </nb-layout-column>
     </nb-layout>
   `,
