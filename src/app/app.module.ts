@@ -23,6 +23,7 @@ import {
   NbThemeModule,
   NbUserModule,
   NbPopoverModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
 
 import {
@@ -138,6 +139,7 @@ const NB_TEST_COMPONENTS = [
     NbSearchModule,
     NbActionsModule,
     NbPopoverModule,
+    NbContextMenuModule,
     NbCheckboxModule,
     NbAuthModule.forRoot({
       forms: {
