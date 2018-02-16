@@ -112,7 +112,7 @@
 
           @include checkmark(
               nb-theme(checkbox-disabled-size),
-              nb-theme(checkbox-border-color),
+              nb-theme(checkbox-checkmark),
               nb-theme(checkbox-disabled-border-size)
           );
         }
