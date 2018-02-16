@@ -779,6 +779,67 @@
           "examples": [],
           "params": [
             {
+              "name": "roleProvider",
+              "type": "NbRoleProvider",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "acl",
+              "type": "NbAclService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAccessChecker"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "isGranted",
+          "type": [
+            "Observable<boolean>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Checks whether access is granted or not"
+        }
+      ],
+      "name": "NbAccessChecker",
+      "description": "Injects `NbRoleProvider` to determine current user role, and checks access permissions using `NbAclService`\n",
+      "shortDescription": "Access checker service.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
               "name": "settings",
               "type": "NbAclOptions",
               "required": null,
@@ -2573,6 +2634,7 @@
           "isStatic": false,
           "type": "NbMenuItem[]",
           "required": null,
+          "name": "children",
           "shortDescription": "Children items"
         },
         {
@@ -2581,6 +2643,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "expanded",
           "shortDescription": "Expanded by defaul"
         },
         {
@@ -2589,6 +2652,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "group",
           "shortDescription": "Whether the item is just a group (non-clickable)"
         },
         {
@@ -2597,6 +2661,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "hidden",
           "shortDescription": "Hidden Item"
         },
         {
@@ -2605,6 +2670,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "home",
           "shortDescription": "Where this is a home item"
         },
         {
@@ -2613,6 +2679,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "icon",
           "shortDescription": "Icon class name"
         },
         {
@@ -2621,6 +2688,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "link",
           "shortDescription": "Item relative link (for routerLink)"
         },
         {
@@ -2629,6 +2697,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "pathMatch",
           "shortDescription": "Item is selected when partly or fully equal to the current url"
         },
         {
@@ -2637,6 +2706,7 @@
           "isStatic": false,
           "type": "number",
           "required": null,
+          "name": "subMenuHeight",
           "shortDescription": "Children items height"
         },
         {
@@ -2645,6 +2715,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "target",
           "shortDescription": "HTML Link target"
         },
         {
@@ -2653,6 +2724,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "title",
           "shortDescription": "Item Title"
         },
         {
@@ -2661,6 +2733,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "url",
           "shortDescription": "Item URL (absolute)"
         }
       ],
@@ -2784,6 +2857,509 @@
       ],
       "name": "NbMenuService",
       "shortDescription": "Menu Service. Allows you to listen to menu events, or to interact with a menu.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverPosition",
+      "shortDescription": "Describes placement of the UI element on the screen.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverTrigger",
+      "shortDescription": "Popover uses different triggers for different {@link NbPopoverMode}.\nsee {@link NbTriggerHelper}",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "content",
+          "shortDescription": "Content which will be rendered."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "placement",
+          "shortDescription": "Popover placement relatively host element."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isComponent",
+          "shortDescription": "Check that content is an angular component."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isPrimitive",
+          "shortDescription": "Check that if content is not a TemplateRef or an angular component it means a primitive."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isTemplate",
+          "shortDescription": "Check that content is a TemplateRef."
+        }
+      ],
+      "methods": [],
+      "name": "NbPopoverComponent",
+      "shortDescription": "Popover container.\nRenders provided content inside.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "popover-fg",
+              "description": ""
+            },
+            {
+              "name": "popover-bg",
+              "description": ""
+            },
+            {
+              "name": "popover-border",
+              "description": ""
+            },
+            {
+              "name": "popover-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "directive",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Popover can accept different content such as:\nTemplateRef",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"templateRef\"></button>\n<ng-template #templateRef>\n  <span>Hello, Popover!</span>\n</ng-template>\n"
+        },
+        {
+          "shortDescription": "Custom components",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"NbCardComponent\"></button>\n"
+        },
+        {
+          "shortDescription": "Primitive types",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\"></button>\n"
+        },
+        {
+          "shortDescription": "Popover has different placements, such as: top, bottom, left and right\nwhich can be used as following:",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" nbPopoverPlacement=\"left\"></button>\n"
+        },
+        {
+          "shortDescription": "By default popover will try to adjust itself to maximally fit viewport\nand provide the best user experience. It will try to change placement of the popover container.\nIf you wanna disable this behaviour just set it falsy value.",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" [nbPopoverAdjust]=\"false\"></button>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverAdjustment",
+          "required": null,
+          "name": "nbPopoverAdjustment",
+          "shortDescription": "Container placement will be changes automatically based on this strategy if container can't fit view port.\nSet this property to any falsy value if you want to disable automatically adjustment.\nAvailable values: clockwise, counterclockwise."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "nbPopover",
+          "shortDescription": "Popover content which will be rendered in NbPopoverComponent.\nAvailable content: template ref, component and any primitive."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverMode",
+          "required": null,
+          "name": "nbPopoverMode",
+          "shortDescription": "Describes when the container will be shown.\nAvailable options: click, hover and hint"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "nbPopoverPlacement",
+          "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isHidden",
+          "shortDescription": "Returns true if popover hidden."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isShown",
+          "shortDescription": "Returns true if popover already shown."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "hostRef",
+              "type": "ElementRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbPopoverDirective"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "containerRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "hostRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "adjust",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcPosition",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "destroyPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Hide popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onResize",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "content",
+              "type": "NbPopoverContent",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverContent",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placement",
+              "type": "NbPopoverPlacement",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPlacement",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "__namedParameters",
+              "type": "",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPosition",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "performAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "place",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "registerTriggers",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "renderPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Show popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggle",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Toggle popover state."
+        }
+      ],
+      "name": "NbPopoverDirective",
+      "description": "![image](assets/images/components/popover.gif)\n",
+      "shortDescription": "Powerful popover directive, which provides the best UX for your users.",
       "styles": []
     },
     {
@@ -4238,6 +4814,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "icon",
           "shortDescription": "Icon class"
         },
         {
@@ -4246,6 +4823,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "link",
           "shortDescription": "Menu link for [routerLink] directive"
         },
         {
@@ -4254,6 +4832,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "target",
           "shortDescription": "Link target (_blank, _self, etc)"
         },
         {
@@ -4262,6 +4841,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "title",
           "shortDescription": "Menu title"
         },
         {
@@ -4270,6 +4850,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "url",
           "shortDescription": "URL for absolute urls, used directly in href"
         }
       ],
@@ -5427,6 +6008,10 @@
             },
             {
               "theme": "default",
+              "prop": "popover-bg"
+            },
+            {
+              "theme": "default",
               "prop": "actions-bg"
             },
             {
@@ -5588,6 +6173,10 @@
             {
               "theme": "default",
               "prop": "user-menu-fg"
+            },
+            {
+              "theme": "default",
+              "prop": "popover-fg"
             },
             {
               "theme": "default",
@@ -5827,6 +6416,10 @@
             {
               "theme": "default",
               "prop": "user-menu-border"
+            },
+            {
+              "theme": "default",
+              "prop": "popover-border"
             },
             {
               "theme": "default",
@@ -7802,6 +8395,45 @@
               "prop": "color-success"
             }
           ],
+          "childs": []
+        },
+        "popover-fg": {
+          "name": "popover-fg",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "popover-bg": {
+          "name": "popover-bg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "popover-border": {
+          "name": "popover-border",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": "none",
+          "parents": [],
           "childs": []
         },
         "actions-font-size": {
@@ -9994,6 +10626,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "popover-bg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "actions-bg"
             },
             {
@@ -10148,6 +10784,10 @@
             {
               "theme": "cosmic",
               "prop": "user-menu-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-fg"
             },
             {
               "theme": "cosmic",
@@ -10371,6 +11011,10 @@
             {
               "theme": "cosmic",
               "prop": "user-menu-border"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-border"
             },
             {
               "theme": "cosmic",
@@ -10668,6 +11312,10 @@
             {
               "theme": "cosmic",
               "prop": "sidebar-shadow"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-shadow"
             },
             {
               "theme": "cosmic",
@@ -12558,6 +13206,56 @@
             {
               "theme": "cosmic",
               "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "popover-fg": {
+          "name": "popover-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "popover-bg": {
+          "name": "popover-bg",
+          "value": "#3d3780",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "popover-border": {
+          "name": "popover-border",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": [
+            0,
+            "8px",
+            "20px",
+            0,
+            "rgba(40, 37, 89, 0.6)"
+          ],
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "shadow"
             }
           ],
           "childs": []
