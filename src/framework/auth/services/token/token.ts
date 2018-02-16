@@ -26,7 +26,7 @@ export class NbAuthSimpleToken implements NbAuthToken {
    * Returns the token value
    * @returns string
    */
-  getValue() {
+  getValue(): string {
     return this.token;
   }
 
