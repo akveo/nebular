@@ -3,12 +3,11 @@ import { Inject, Injectable } from '@angular/core';
 import { NB_AUTH_TOKEN_CLASS } from '../../auth.options';
 import { NbAuthToken, nbCreateToken, NbTokenClass } from './token';
 
-@Injectable()
 export abstract class NbTokenStorage {
 
   abstract get(): NbAuthToken;
   abstract set(token: NbAuthToken);
-  abstract setRawToken(token: string);
+  abstract setRaw(token: string);
   abstract clear();
 }
 
@@ -44,7 +43,7 @@ export class NbTokenLocalStorage implements NbTokenStorage {
   }
 
   /**
-   * Sets token to to localStorage
+   * Sets token to localStorage
    * @param {NbAuthToken} token
    */
   set(token: NbAuthToken) {
@@ -55,7 +54,7 @@ export class NbTokenLocalStorage implements NbTokenStorage {
    * Sets raw (string) token to localStorage
    * @param {string} token
    */
-  setRawToken(token: string) {
+  setRaw(token: string) {
     localStorage.setItem(this.key, token);
   }
 

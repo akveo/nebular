@@ -39,14 +39,14 @@ describe('token-storage', () => {
   });
 
   it('set test raw token', () => {
-      tokenStorage.setRawToken(testTokenValue);
+      tokenStorage.setRaw(testTokenValue);
       expect(localStorage.getItem(testTokenKey)).toEqual(testTokenValue);
   });
 
   it('setter set raw invalid token to localStorage as raw value', () => {
-      tokenStorage.setRawToken(null);
+      tokenStorage.setRaw(null);
       expect(localStorage.getItem(testTokenKey)).toEqual('null');
-      tokenStorage.setRawToken(undefined);
+      tokenStorage.setRaw(undefined);
       expect(localStorage.getItem(testTokenKey)).toEqual('undefined');
   });
 

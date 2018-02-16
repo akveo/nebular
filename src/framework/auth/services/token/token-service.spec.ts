@@ -43,14 +43,14 @@ describe('token-service', () => {
   });
 
   it('set test raw token', () => {
-      tokenService.setRawToken(testTokenValue).subscribe(noop);
+      tokenService.setRaw(testTokenValue).subscribe(noop);
       expect(localStorage.getItem(testTokenKey)).toEqual(testTokenValue);
   });
 
   it('setter set raw invalid token to localStorage as raw value', () => {
-      tokenService.setRawToken(null).subscribe(noop);
+      tokenService.setRaw(null).subscribe(noop);
       expect(localStorage.getItem(testTokenKey)).toEqual('null');
-      tokenService.setRawToken(undefined).subscribe(noop);
+      tokenService.setRaw(undefined).subscribe(noop);
       expect(localStorage.getItem(testTokenKey)).toEqual('undefined');
   });
 
@@ -118,7 +118,7 @@ describe('token-service', () => {
   });
 
   it('raw token should be published as token object', (done) => {
-    tokenService.setRawToken(testTokenValue).subscribe(noop);
+    tokenService.setRaw(testTokenValue).subscribe(noop);
     tokenService.tokenChange()
       .subscribe((token: NbAuthToken) => {
         expect(token.getValue()).toEqual(testTokenValue);

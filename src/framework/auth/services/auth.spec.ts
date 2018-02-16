@@ -184,7 +184,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'setRawToken')
+      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
         .and
         .returnValue(observableOf(null));
 
@@ -242,7 +242,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'setRawToken')
+      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
         .and
         .returnValue(observableOf(null));
 

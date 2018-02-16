@@ -11,8 +11,9 @@ describe('auth JWT token', () => {
   // tslint:disable
   const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
   const emptyJWTToken = new NbAuthJWTToken('..');
+  const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
 
-  const invakidJWTToken = new NbAuthJWTToken('.');
+  const invalidJWTToken = new NbAuthJWTToken('.');
 
   const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
 
@@ -26,10 +27,10 @@ describe('auth JWT token', () => {
 
   it('getPayload, not valid JWT token, must consist of three parts', () => {
     expect(() => {
-      invakidJWTToken.getPayload();
+      invalidJWTToken.getPayload();
     })
       .toThrow(new Error(
-        `The token ${invakidJWTToken.getValue()} is not valid JWT token and must consist of three parts.`));
+        `The token ${invalidJWTToken.getValue()} is not valid JWT token and must consist of three parts.`));
   });
 
   it('getPayload, not valid JWT token, cannot be decoded', () => {
@@ -38,6 +39,14 @@ describe('auth JWT token', () => {
     })
       .toThrow(new Error(
         `The token ${emptyJWTToken.getValue()} is not valid JWT token and cannot be decoded.`));
+  });
+
+  it('getPayload, not valid base64 in JWT token, cannot be decoded', () => {
+    expect(() => {
+      invalidBase64JWTToken.getPayload();
+    })
+      .toThrow(new Error(
+        `The token ${invalidBase64JWTToken.getValue()} is not valid JWT token and cannot be parsed.`));
   });
 
   it('getTokenExpDate success', () => {

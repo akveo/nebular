@@ -47,11 +47,11 @@ export class NbTokenService {
   /**
    * Sets a raw token into the storage. This method is used by the NbAuthService automatically.
    *
-   * @param {NbAuthToken} token
+   * @param {string} token
    * @returns {Observable<any>}
    */
-  setRawToken(token: string): Observable<null> {
-    this.tokenStorage.setRawToken(token);
+  setRaw(token: string): Observable<null> {
+    this.tokenStorage.setRaw(token);
     this.publishStoredToken();
     return observableOf(null);
   }

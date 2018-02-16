@@ -68,7 +68,13 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
       throw new Error(`The token ${this.token} is not valid JWT token and must consist of three parts.`);
     }
 
-    const decoded = urlBase64Decode(parts[1]);
+    let decoded;
+    try {
+      decoded = urlBase64Decode(parts[1]);
+    } catch (e) {
+      throw new Error(`The token ${this.token} is not valid JWT token and cannot be parsed.`);
+    }
+
     if (!decoded) {
       throw new Error(`The token ${this.token} is not valid JWT token and cannot be decoded.`);
     }
