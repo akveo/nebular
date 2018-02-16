@@ -379,7 +379,7 @@
           "platform": null,
           "name": "getToken",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Retrieves current authenticated token stored"
@@ -393,7 +393,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token\n// TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns true if auth token is presented in the token storage"
         },
         {
           "examples": [],
@@ -422,7 +422,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token\n // TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns authentication status stream"
         },
         {
           "examples": [],
@@ -430,10 +430,30 @@
           "platform": null,
           "name": "onTokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns tokens stream"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "result",
+              "type": "NbAuthResult",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "processResultToken",
+          "type": [
+            "Observable<NbAuthResult>"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         },
         {
           "examples": [],
@@ -510,11 +530,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAuthJWTToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -524,7 +564,7 @@
             "any"
           ],
           "isStatic": false,
-          "shortDescription": "TODO: check for this.token to be not null\nReturns payload object"
+          "shortDescription": "Returns payload object"
         },
         {
           "examples": [],
@@ -550,6 +590,39 @@
         },
         {
           "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "isValid",
+          "type": [
+            "boolean"
+          ],
+          "isStatic": false,
+          "shortDescription": "Is data expired"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
+        }
+      ],
+      "name": "NbAuthJWTToken",
+      "shortDescription": "Wrapper for JWT token with additional methods.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
           "params": [
             {
               "name": "token",
@@ -560,25 +633,14 @@
             }
           ],
           "platform": null,
-          "name": "setValue",
+          "name": "constructor",
           "type": [
-            "void"
+            "NbAuthSimpleToken"
           ],
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        }
-      ],
-      "name": "NbAuthJWTToken",
-      "shortDescription": "Wrapper for JWT token with additional methods.",
-      "styles": []
-    },
-    {
-      "kind": "service",
-      "platform": null,
-      "examples": [],
-      "props": [],
-      "methods": [
+        },
         {
           "examples": [],
           "params": [],
@@ -592,23 +654,25 @@
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "token",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "setValue",
+          "name": "isValid",
           "type": [
-            "void"
+            "boolean"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Is non empty and valid"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
         }
       ],
       "name": "NbAuthSimpleToken",
@@ -618,28 +682,105 @@
     {
       "kind": "service",
       "platform": null,
-      "examples": [
-        {
-          "shortDescription": "Injecting NbAuthJWTToken, so that NbTokenService will now return NbAuthJWTToken instead\nof the default NbAuthSimpleToken",
-          "description": "",
-          "code": "\n// import token and service into your AppModule\nimport { NB_AUTH_TOKEN_WRAPPER_TOKEN,  NbAuthJWTToken} from '@nebular/auth';\n\n// add to a list of providers\nproviders: [\n // ...\n { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },\n],\n"
-        }
-      ],
+      "examples": [],
       "props": [],
       "methods": [
         {
           "examples": [],
           "params": [
             {
-              "name": "options",
-              "type": "any",
+              "name": "tokenClass",
+              "type": "NbTokenClass",
               "required": null,
               "shortDescription": "",
               "description": ""
-            },
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbTokenLocalStorage"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clear",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Clears token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "get",
+          "type": [
+            "NbAuthToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
             {
-              "name": "tokenWrapper",
-              "type": "NbAuthSimpleToken",
+              "name": "token",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "set",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets token to to localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setRawToken",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets raw (string) token to localStorage"
+        }
+      ],
+      "name": "NbTokenLocalStorage",
+      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you want to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your app.module:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
+      "shortDescription": "Storage service for storing tokens in a browser local storage.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tokenStorage",
+              "type": "NbTokenStorage",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -660,10 +801,10 @@
           "platform": null,
           "name": "clear",
           "type": [
-            "Observable<any>"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Removes the token"
+          "shortDescription": "Removes the token and published token value"
         },
         {
           "examples": [],
@@ -671,26 +812,18 @@
           "platform": null,
           "name": "get",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns observable of current token"
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "key",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "getConfigValue",
+          "name": "publishStoredToken",
           "type": [
-            "any"
+            "void"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -701,27 +834,7 @@
           "params": [
             {
               "name": "token",
-              "type": "NbAuthSimpleToken",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "publishToken",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "rawToken",
-              "type": "string",
+              "type": "NbAuthToken",
               "required": null
             }
           ],
@@ -731,27 +844,24 @@
             "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Sets the token into the storage. This method is used by the NbAuthService automatically."
+          "shortDescription": "Sets a token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
           "params": [
             {
-              "name": "config",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "name": "token",
+              "type": "string",
+              "required": null
             }
           ],
           "platform": null,
-          "name": "setConfig",
+          "name": "setRawToken",
           "type": [
-            "void"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Sets a raw token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
@@ -759,14 +869,14 @@
           "platform": null,
           "name": "tokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Publishes token when it changes."
         }
       ],
       "name": "NbTokenService",
-      "shortDescription": "Nebular token service. Provides access to the stored token.\nBy default returns NbAuthSimpleToken instance,\nbut you can inject NbAuthJWTToken if you need additional methods for JWT token.",
+      "shortDescription": "Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.",
       "styles": []
     },
     {
@@ -2573,6 +2683,7 @@
           "isStatic": false,
           "type": "NbMenuItem[]",
           "required": null,
+          "name": "children",
           "shortDescription": "Children items"
         },
         {
@@ -2581,6 +2692,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "expanded",
           "shortDescription": "Expanded by defaul"
         },
         {
@@ -2589,6 +2701,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "group",
           "shortDescription": "Whether the item is just a group (non-clickable)"
         },
         {
@@ -2597,6 +2710,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "hidden",
           "shortDescription": "Hidden Item"
         },
         {
@@ -2605,6 +2719,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "home",
           "shortDescription": "Where this is a home item"
         },
         {
@@ -2613,6 +2728,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "icon",
           "shortDescription": "Icon class name"
         },
         {
@@ -2621,6 +2737,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "link",
           "shortDescription": "Item relative link (for routerLink)"
         },
         {
@@ -2629,6 +2746,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "pathMatch",
           "shortDescription": "Item is selected when partly or fully equal to the current url"
         },
         {
@@ -2637,6 +2755,7 @@
           "isStatic": false,
           "type": "number",
           "required": null,
+          "name": "subMenuHeight",
           "shortDescription": "Children items height"
         },
         {
@@ -2645,6 +2764,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "target",
           "shortDescription": "HTML Link target"
         },
         {
@@ -2653,6 +2773,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "title",
           "shortDescription": "Item Title"
         },
         {
@@ -2661,6 +2782,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "url",
           "shortDescription": "Item URL (absolute)"
         }
       ],
@@ -2784,6 +2906,509 @@
       ],
       "name": "NbMenuService",
       "shortDescription": "Menu Service. Allows you to listen to menu events, or to interact with a menu.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverPosition",
+      "shortDescription": "Describes placement of the UI element on the screen.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverTrigger",
+      "shortDescription": "Popover uses different triggers for different {@link NbPopoverMode}.\nsee {@link NbTriggerHelper}",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "content",
+          "shortDescription": "Content which will be rendered."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "placement",
+          "shortDescription": "Popover placement relatively host element."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isComponent",
+          "shortDescription": "Check that content is an angular component."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isPrimitive",
+          "shortDescription": "Check that if content is not a TemplateRef or an angular component it means a primitive."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isTemplate",
+          "shortDescription": "Check that content is a TemplateRef."
+        }
+      ],
+      "methods": [],
+      "name": "NbPopoverComponent",
+      "shortDescription": "Popover container.\nRenders provided content inside.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "popover-fg",
+              "description": ""
+            },
+            {
+              "name": "popover-bg",
+              "description": ""
+            },
+            {
+              "name": "popover-border",
+              "description": ""
+            },
+            {
+              "name": "popover-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "directive",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Popover can accept different content such as:\nTemplateRef",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"templateRef\"></button>\n<ng-template #templateRef>\n  <span>Hello, Popover!</span>\n</ng-template>\n"
+        },
+        {
+          "shortDescription": "Custom components",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"NbCardComponent\"></button>\n"
+        },
+        {
+          "shortDescription": "Primitive types",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\"></button>\n"
+        },
+        {
+          "shortDescription": "Popover has different placements, such as: top, bottom, left and right\nwhich can be used as following:",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" nbPopoverPlacement=\"left\"></button>\n"
+        },
+        {
+          "shortDescription": "By default popover will try to adjust itself to maximally fit viewport\nand provide the best user experience. It will try to change placement of the popover container.\nIf you wanna disable this behaviour just set it falsy value.",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" [nbPopoverAdjust]=\"false\"></button>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverAdjustment",
+          "required": null,
+          "name": "nbPopoverAdjustment",
+          "shortDescription": "Container placement will be changes automatically based on this strategy if container can't fit view port.\nSet this property to any falsy value if you want to disable automatically adjustment.\nAvailable values: clockwise, counterclockwise."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "nbPopover",
+          "shortDescription": "Popover content which will be rendered in NbPopoverComponent.\nAvailable content: template ref, component and any primitive."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverMode",
+          "required": null,
+          "name": "nbPopoverMode",
+          "shortDescription": "Describes when the container will be shown.\nAvailable options: click, hover and hint"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "nbPopoverPlacement",
+          "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isHidden",
+          "shortDescription": "Returns true if popover hidden."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isShown",
+          "shortDescription": "Returns true if popover already shown."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "hostRef",
+              "type": "ElementRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbPopoverDirective"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "containerRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "hostRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "adjust",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcPosition",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "destroyPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Hide popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onResize",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "content",
+              "type": "NbPopoverContent",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverContent",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placement",
+              "type": "NbPopoverPlacement",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPlacement",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "__namedParameters",
+              "type": "",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPosition",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "performAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "place",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "registerTriggers",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "renderPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Show popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggle",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Toggle popover state."
+        }
+      ],
+      "name": "NbPopoverDirective",
+      "description": "![image](assets/images/components/popover.gif)\n",
+      "shortDescription": "Powerful popover directive, which provides the best UX for your users.",
       "styles": []
     },
     {
@@ -4238,6 +4863,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "icon",
           "shortDescription": "Icon class"
         },
         {
@@ -4246,6 +4872,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "link",
           "shortDescription": "Menu link for [routerLink] directive"
         },
         {
@@ -4254,6 +4881,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "target",
           "shortDescription": "Link target (_blank, _self, etc)"
         },
         {
@@ -4262,6 +4890,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "title",
           "shortDescription": "Menu title"
         },
         {
@@ -4270,6 +4899,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "url",
           "shortDescription": "URL for absolute urls, used directly in href"
         }
       ],
@@ -5427,6 +6057,10 @@
             },
             {
               "theme": "default",
+              "prop": "popover-bg"
+            },
+            {
+              "theme": "default",
               "prop": "actions-bg"
             },
             {
@@ -5588,6 +6222,10 @@
             {
               "theme": "default",
               "prop": "user-menu-fg"
+            },
+            {
+              "theme": "default",
+              "prop": "popover-fg"
             },
             {
               "theme": "default",
@@ -5827,6 +6465,10 @@
             {
               "theme": "default",
               "prop": "user-menu-border"
+            },
+            {
+              "theme": "default",
+              "prop": "popover-border"
             },
             {
               "theme": "default",
@@ -7802,6 +8444,45 @@
               "prop": "color-success"
             }
           ],
+          "childs": []
+        },
+        "popover-fg": {
+          "name": "popover-fg",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "popover-bg": {
+          "name": "popover-bg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "popover-border": {
+          "name": "popover-border",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
+          "childs": []
+        },
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": "none",
+          "parents": [],
           "childs": []
         },
         "actions-font-size": {
@@ -9994,6 +10675,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "popover-bg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "actions-bg"
             },
             {
@@ -10148,6 +10833,10 @@
             {
               "theme": "cosmic",
               "prop": "user-menu-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-fg"
             },
             {
               "theme": "cosmic",
@@ -10371,6 +11060,10 @@
             {
               "theme": "cosmic",
               "prop": "user-menu-border"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-border"
             },
             {
               "theme": "cosmic",
@@ -10668,6 +11361,10 @@
             {
               "theme": "cosmic",
               "prop": "sidebar-shadow"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-shadow"
             },
             {
               "theme": "cosmic",
@@ -12558,6 +13255,56 @@
             {
               "theme": "cosmic",
               "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "popover-fg": {
+          "name": "popover-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "popover-bg": {
+          "name": "popover-bg",
+          "value": "#3d3780",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-bg"
+            }
+          ],
+          "childs": []
+        },
+        "popover-border": {
+          "name": "popover-border",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
+            }
+          ],
+          "childs": []
+        },
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": [
+            0,
+            "8px",
+            "20px",
+            0,
+            "rgba(40, 37, 89, 0.6)"
+          ],
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "shadow"
             }
           ],
           "childs": []

@@ -8,13 +8,13 @@ import { Inject, Injectable, Injector, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
-import { tap } from 'rxjs/operators/tap';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NbAuthSimpleToken, NbAuthToken, NbTokenService } from './token.service';
-import { NB_AUTH_PROVIDERS_TOKEN } from '../auth.options';
+import { NB_AUTH_PROVIDERS } from '../auth.options';
 import { NbAuthResult } from './auth-result';
+import { NbTokenService } from './token/token.service';
+import { NbAuthToken } from './token/token';
 
 /**
  * Common authentication service.
@@ -25,7 +25,7 @@ export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
               protected injector: Injector,
-              @Optional() @Inject(NB_AUTH_PROVIDERS_TOKEN) protected providers = {}) {
+              @Optional() @Inject(NB_AUTH_PROVIDERS) protected providers = {}) {
   }
 
   /**
@@ -38,12 +38,11 @@ export class NbAuthService {
 
   /**
    * Returns true if auth token is presented in the token storage
-   * // TODO: check exp date for JWT token
-   * // TODO: to implement previous todo lets use isValid method of token
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<boolean> {
-    return this.getToken().pipe(map(token => !!(token && token.getValue())));
+    return this.getToken()
+      .pipe(map((token: NbAuthToken) => token.isValid()));
   }
 
   /**
@@ -56,12 +55,11 @@ export class NbAuthService {
 
   /**
    * Returns authentication status stream
-   *  // TODO: check exp date for JWT token
-   *  // TODO: to implement previous todo lets use isValid method of token
    * @returns {Observable<boolean>}
    */
   onAuthenticationChange(): Observable<boolean> {
-    return this.onTokenChange().pipe(map((token: NbAuthSimpleToken) => !!(token && token.getValue())));
+    return this.onTokenChange()
+      .pipe(map((token: NbAuthToken) => token.isValid()));
   }
 
   /**
@@ -79,20 +77,7 @@ export class NbAuthService {
     return this.getProvider(provider).authenticate(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
-          // TODO move this duplicate code in the separate method (see register)
-          // TODO is it necessary to chech for token here
-          if (result.isSuccess() && result.getTokenValue()) {
-            return this.tokenService.set(result.getTokenValue())
-              .pipe(
-                switchMap(() => this.tokenService.get()),
-                map((token: NbAuthSimpleToken) => {
-                  result.replaceToken(token);
-                  return result;
-                }),
-              );
-          }
-
-          return observableOf(result);
+          return this.processResultToken(result);
         }),
       );
   }
@@ -112,18 +97,7 @@ export class NbAuthService {
     return this.getProvider(provider).register(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
-          if (result.isSuccess() && result.getTokenValue()) {
-            return this.tokenService.set(result.getTokenValue())
-              .pipe(
-                switchMap(_ => this.tokenService.get()),
-                map((token: NbAuthSimpleToken) => {
-                  result.replaceToken(token);
-                  return result;
-                }),
-              );
-          }
-
-          return observableOf(result);
+          return this.processResultToken(result);
         }),
       );
   }
@@ -141,11 +115,12 @@ export class NbAuthService {
   logout(provider: string): Observable<NbAuthResult> {
     return this.getProvider(provider).logout()
       .pipe(
-        tap((result: NbAuthResult) => {
+        switchMap((result: NbAuthResult) => {
           if (result.isSuccess()) {
-            this.tokenService.clear().subscribe(() => {
-            });
+            this.tokenService.clear()
+              .pipe(map(() => result));
           }
+          return observableOf(result);
         }),
       );
   }
@@ -176,6 +151,21 @@ export class NbAuthService {
    */
   resetPassword(provider: string, data?: any): Observable<NbAuthResult> {
     return this.getProvider(provider).resetPassword(data);
+  }
+
+  private processResultToken(result: NbAuthResult) {
+    if (result.isSuccess() && result.getRawToken()) {
+      return this.tokenService.setRawToken(result.getRawToken())
+        .pipe(
+          switchMap(() => this.tokenService.get()),
+          map((token: NbAuthToken) => {
+            result.setToken(token);
+            return result;
+          }),
+        );
+    }
+
+    return observableOf(result);
   }
 
   private getProvider(provider: string): NbAbstractAuthProvider {

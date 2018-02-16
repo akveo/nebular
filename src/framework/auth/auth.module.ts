@@ -9,18 +9,18 @@ import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 import { NbAuthService } from './services/auth.service';
 import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
-
+import { NbTokenService } from './services/token/token.service';
+import { NbAuthSimpleToken } from './services/token/token';
+import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
 import {
   defaultSettings,
-  NB_AUTH_USER_OPTIONS_TOKEN,
-  NB_AUTH_OPTIONS_TOKEN,
-  NB_AUTH_PROVIDERS_TOKEN,
-  NB_AUTH_TOKEN_WRAPPER_TOKEN,
-  NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER,
+  NB_AUTH_USER_OPTIONS,
+  NB_AUTH_OPTIONS,
+  NB_AUTH_PROVIDERS,
+  NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER, NB_AUTH_TOKEN_CLASS,
 } from './auth.options';
 
 import { NbAuthComponent } from './components/auth.component';
-import { NbAuthSimpleToken, NbTokenService } from './services/token.service';
 
 import { NbAuthBlockComponent } from './components/auth-block/auth-block.component';
 import { NbLoginComponent } from './components/login/login.component';
@@ -84,16 +84,17 @@ export class NbAuthModule {
     return <ModuleWithProviders> {
       ngModule: NbAuthModule,
       providers: [
-        { provide: NB_AUTH_USER_OPTIONS_TOKEN, useValue: nbAuthOptions },
-        { provide: NB_AUTH_OPTIONS_TOKEN, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS_TOKEN] },
-        { provide: NB_AUTH_PROVIDERS_TOKEN, useValue: {} },
-        { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_USER_OPTIONS, useValue: nbAuthOptions },
+        { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
+        { provide: NB_AUTH_PROVIDERS, useValue: {} },
+        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
         {
           provide: NbAuthService,
           useFactory: nbAuthServiceFactory,
-          deps: [NB_AUTH_OPTIONS_TOKEN, NbTokenService, Injector],
+          deps: [NB_AUTH_OPTIONS, NbTokenService, Injector],
         },
+        { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
         NbDummyAuthProvider,
         NbEmailPassAuthProvider,

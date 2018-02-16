@@ -605,6 +605,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'NbTokenLocalStorage',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbTokenLocalStorage',
+          },
+        ],
+      },
     ],
   },
   {

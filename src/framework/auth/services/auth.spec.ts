@@ -4,31 +4,34 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthSimpleToken, NbTokenService } from './token.service';
 import { TestBed } from '@angular/core/testing';
-import { NB_AUTH_OPTIONS_TOKEN, NB_AUTH_TOKEN_WRAPPER_TOKEN, NB_AUTH_USER_OPTIONS_TOKEN } from '../auth.options';
-import { NbAuthService } from './auth.service';
 import { Injector } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS } from '../auth.options';
+import { NbAuthService } from './auth.service';
 import { NbDummyAuthProvider } from '../providers/dummy-auth.provider';
 import { nbAuthServiceFactory, nbOptionsFactory } from '../auth.module';
-import { HttpResponse } from '@angular/common/http';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
 import { delay } from 'rxjs/operators/delay';
+import { NbTokenService } from './token/token.service';
+import { NbAuthSimpleToken, nbCreateToken } from './token/token';
+import { NbTokenLocalStorage, NbTokenStorage } from './token/token-storage';
 
 describe('auth-service', () => {
   let authService: NbAuthService;
   let tokenService: NbTokenService;
   let dummyAuthProvider: NbDummyAuthProvider;
   const testTokenValue = 'test-token';
+  const replacedTokenValue = 'replaced-value';
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  const testToken = new NbAuthSimpleToken(testTokenValue);
-  const replacedValue = new NbAuthSimpleToken('Replaced');
-  const emptyToken = new NbAuthSimpleToken(null);
+  const testToken = nbCreateToken(NbAuthSimpleToken, testTokenValue);
+  const replacedToken = nbCreateToken(NbAuthSimpleToken, replacedTokenValue);
+  const emptyToken = nbCreateToken(NbAuthSimpleToken, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -40,9 +43,7 @@ describe('auth-service', () => {
     '/',
     [],
     ['Successfully logged in.'],
-
-    // TODO in case we dont set this optional param we will not replace to new one during authenticate
-    testToken);
+    testTokenValue);
 
   const successLogoutResult = new NbAuthResult(true,
     resp200,
@@ -65,10 +66,10 @@ describe('auth-service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide: NB_AUTH_OPTIONS_TOKEN, useValue: {}},
-        {provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthSimpleToken},
+        { provide: NB_AUTH_OPTIONS, useValue: {} },
+        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
         {
-          provide: NB_AUTH_USER_OPTIONS_TOKEN, useValue: {
+          provide: NB_AUTH_USER_OPTIONS, useValue: {
             forms: {
               login: {
                 redirectDelay: 3000,
@@ -85,12 +86,14 @@ describe('auth-service', () => {
             },
           },
         },
-        {provide: NB_AUTH_OPTIONS_TOKEN, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS_TOKEN]},
+        { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
+        { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
+
         NbTokenService,
         {
           provide: NbAuthService,
           useFactory: nbAuthServiceFactory,
-          deps: [NB_AUTH_OPTIONS_TOKEN, NbTokenService, Injector],
+          deps: [NB_AUTH_OPTIONS, NbTokenService, Injector],
         },
         NbDummyAuthProvider,
       ],
@@ -166,7 +169,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -181,25 +184,27 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'set')
+      const tokenServiceSetSpy = spyOn(tokenService, 'setRawToken')
         .and
-        .returnValue(observableOf('STUB'));
+        .returnValue(observableOf(null));
 
     const tokenServiceGetSpy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(replacedValue));
+        .returnValue(observableOf(replacedToken));
 
       authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerSpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
         expect(tokenServiceGetSpy).toHaveBeenCalled();
 
+
         expect(authRes.isFailure()).toBeFalsy();
         expect(authRes.isSuccess()).toBeTruthy();
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toEqual(replacedValue);
+        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
+        expect(authRes.getToken()).toEqual(replacedToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -221,7 +226,8 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -236,13 +242,13 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'set')
+      const tokenServiceSetSpy = spyOn(tokenService, 'setRawToken')
         .and
-        .returnValue(observableOf('STUB'));
+        .returnValue(observableOf(null));
 
       const tokenServiceGetSpy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(replacedValue));
+        .returnValue(observableOf(replacedToken));
 
       authService.register('dummy').subscribe((authRes: NbAuthResult) => {
         expect(providerSpy).toHaveBeenCalled();
@@ -254,7 +260,8 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toEqual(replacedValue);
+        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
+        expect(authRes.getToken()).toEqual(replacedToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -277,7 +284,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -302,7 +309,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged out.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -325,7 +332,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -348,7 +355,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully requested password.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -371,7 +378,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -394,7 +401,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully reset password.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getTokenValue()).toBeUndefined();
+        expect(authRes.getRawToken()).toBeUndefined();
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
