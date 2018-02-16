@@ -743,7 +743,7 @@
             "void"
           ],
           "isStatic": false,
-          "shortDescription": "Sets token to to localStorage"
+          "shortDescription": "Sets token to localStorage"
         },
         {
           "examples": [],
@@ -756,7 +756,7 @@
             }
           ],
           "platform": null,
-          "name": "setRawToken",
+          "name": "setRaw",
           "type": [
             "void"
           ],
@@ -765,8 +765,8 @@
         }
       ],
       "name": "NbTokenLocalStorage",
-      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you want to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your app.module:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
-      "shortDescription": "Storage service for storing tokens in a browser local storage.",
+      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your `app.module`:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
+      "shortDescription": "Service that uses browser localStorage as a storage.",
       "styles": []
     },
     {
@@ -856,7 +856,7 @@
             }
           ],
           "platform": null,
-          "name": "setRawToken",
+          "name": "setRaw",
           "type": [
             "Observable<null>"
           ],
