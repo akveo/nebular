@@ -84,7 +84,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
       this.menuItem.subMenuHeight = this.subMenu.reduce(
         (acc, c) => acc + getElementHeight(c.nativeElement),
         0,
-      )
+      );
     }
   }
 
