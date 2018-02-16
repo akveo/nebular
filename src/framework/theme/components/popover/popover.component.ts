@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, TemplateRef, Type, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NbPopoverPlacement } from './helpers/model';
 import { NgComponentOutlet } from '@angular/common';
 
@@ -33,7 +33,7 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
     <span class="arrow"></span>
 
     <ng-container *ngIf="isTemplate">
-      <ng-template *ngTemplateOutlet="content; context: context"></ng-template>
+      <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
     </ng-container>
     <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
     <ng-container *ngIf="isPrimitive">
@@ -78,6 +78,13 @@ export class NbPopoverComponent {
   set componentOutlet(el) {
     if (this.isComponent) {
       Object.assign(el._componentRef.instance, this.context);
+      /**
+       * Change detection have to performed here, because another way applied context
+       * will be rendered on the next change detection loop and
+       * we'll have incorrect positioning. Because rendered component may change its size
+       * based on the context.
+       * */
+      this.changeDetectorRef.detectChanges();
     }
   }
 
@@ -104,5 +111,8 @@ export class NbPopoverComponent {
    * */
   get isPrimitive(): boolean {
     return !this.isTemplate && !this.isComponent;
+  }
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
 }
