@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem } from '../menu/menu.service';
