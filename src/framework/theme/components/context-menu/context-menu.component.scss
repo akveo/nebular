@@ -18,14 +18,20 @@
       border: none;
       white-space: nowrap;
 
-      a {
-        cursor: pointer;
-        padding: 0.375rem 3rem;
-        border-radius: 0;
-      }
-
       &:first-child {
         border: none;
+      }
+
+      a {
+        cursor: pointer;
+        padding: 0.375rem 3rem 0.375rem 1rem;
+        border-radius: 0;
+
+        .menu-icon {
+          padding: 0;
+          font-size: 1.5rem;
+          width: auto;
+        }
       }
     }
   }

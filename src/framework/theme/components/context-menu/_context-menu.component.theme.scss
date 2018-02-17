@@ -11,10 +11,18 @@
     color: nb-theme(context-menu-fg);
     font-weight: nb-theme(font-weight-normal);
 
+    .menu-icon {
+      color: nb-theme(context-menu-fg);
+    }
+
     @include hover-focus-active {
       color: nb-theme(context-menu-active-fg);
       background: nb-theme(context-menu-active-bg);
       font-weight: nb-theme(font-weight-normal);
+
+      .menu-icon {
+        color: nb-theme(context-menu-active-fg);
+      }
     }
   }
 }

@@ -21,7 +21,7 @@ import { Component } from '@angular/core';
 export class NbContextMenuTestComponent {
 
   items = [
-    { title: 'Profile', link: '/user' },
-    { title: 'Logout', link: '/popover' },
+    { title: 'Profile', link: '/user', icon: 'nb-compose' },
+    { title: 'Logout', link: '/popover', icon: 'nb-gear' },
   ];
 }
