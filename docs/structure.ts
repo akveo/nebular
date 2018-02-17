@@ -410,6 +410,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Context Menu',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbContextMenuDirective',
+          },
+        ],
+      },
     ],
   },
   {
