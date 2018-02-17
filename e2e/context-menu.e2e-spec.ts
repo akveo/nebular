@@ -1,9 +1,9 @@
 import { browser, by, element } from 'protractor';
 
-const withContextMenu = by.css('nb-card:nth-child(1) button:nth-child(1)');
+const withContextMenu = by.css('nb-card:nth-child(1) nb-user:nth-child(1)');
 const popover = by.css('nb-layout > nb-popover');
 
-describe('nb-popover', () => {
+describe('nb-context-menu', () => {
 
   beforeEach((done) => {
     browser.get('#/context-menu').then(done);
