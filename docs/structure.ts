@@ -419,6 +419,11 @@ export const STRUCTURE = [
             block: 'component',
             blockData: 'NbContextMenuDirective',
           },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbContextMenuComponent',
+          },
         ],
       },
     ],

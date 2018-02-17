@@ -9,6 +9,12 @@ import { NbMenuItem } from '../../';
 
 /**
  * Used as popover content within NbContextMenuDirective.
+ *
+ * @styles
+ *
+ * context-menu-fg
+ * context-menu-active-fg
+ * context-menu-active-bg
  * */
 @Component({
   selector: 'nb-context-menu',
