@@ -25,6 +25,13 @@ export class NbContextMenuDirective extends NbPopoverDirective implements OnInit
 
   ngOnInit() {
     super.ngOnInit();
+    this.validateItems();
     this.context = { items: this.items };
+  }
+
+  private validateItems() {
+    if (!this.items || !this.items.length) {
+      throw Error(`List of menu items expected, but given: ${this.items}`)
+    }
   }
 }
