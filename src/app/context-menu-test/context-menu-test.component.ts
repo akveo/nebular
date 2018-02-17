@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-context-menu-test',
   template: `
-
     <nb-layout>
       <nb-layout-column>
         <nb-card>
