@@ -70,6 +70,7 @@ import { NbDynamicToAddComponent, NbThemeDynamicTestComponent } from './layout-t
 import { NbActionsTestComponent } from './actions-test/actions-test.component';
 import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
 import { NbPopoverTestComponent } from './popover-test/popover-test.component';
+import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
 
 import { routes } from './app.routes';
 
@@ -120,6 +121,7 @@ const NB_TEST_COMPONENTS = [
   NbPopoverTestComponent,
   NbCheckboxTestComponent,
   NbAclTestComponent,
+  NbContextMenuTestComponent,
 ];
 
 @NgModule({

@@ -39,10 +39,6 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
 
             <button class="btn btn-primary" nbPopover="Hi, I'm popover!" nbPopoverPlacement="bottom">String Test
             </button>
-            
-            <button class="btn btn-outline-danger" [nbContextMenu]="items">
-              Context menu test
-            </button>
           </nb-card-body>
         </nb-card>
 
@@ -149,5 +145,5 @@ export class NbPopoverTestComponent {
 
   customPopoverComponent = NbDynamicToAddComponent;
 
-  items = [{ title: 'Profile' }, { title: 'Log out' }, { title: 'Log outasdfhasigjaljeliagje' }];
+  items = [{ title: 'Profile', link: '/card' }, { title: 'Log out', link: '/auth' }];
 }
