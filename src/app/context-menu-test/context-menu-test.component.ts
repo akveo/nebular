@@ -8,9 +8,8 @@ import { Component } from '@angular/core';
         <nb-card>
           <nb-card-header>Context Menu</nb-card-header>
           <nb-card-body>
-            <button class="btn btn-outline-danger" [nbContextMenu]="items">
-              Context menu test
-            </button>
+            <nb-user name="Nikita Poltoratsky" title="full-stack developer" [nbContextMenu]="items">
+            </nb-user>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>
