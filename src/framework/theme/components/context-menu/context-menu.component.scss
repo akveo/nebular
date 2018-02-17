@@ -1,3 +1,32 @@
-:host > nb-menu {
-  width: 150px;
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host /deep/ nb-menu {
+  display: inline;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+
+  ul.menu-items {
+    margin: 0;
+    padding: 0.5rem 0;
+
+    .menu-item {
+      border: none;
+      white-space: nowrap;
+
+      a {
+        cursor: pointer;
+        padding: 0.375rem 3rem;
+        border-radius: 0;
+      }
+
+      &:first-child {
+        border: none;
+      }
+    }
+  }
 }
