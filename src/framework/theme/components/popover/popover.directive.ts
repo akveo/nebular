@@ -74,6 +74,12 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   content: NbPopoverContent;
 
   /**
+   * Container content context. Will be applied to the rendered component.
+   * */
+  @Input('nbPopoverContext')
+  context: Object;
+
+  /**
    * Position will be calculated relatively host element based on the placement.
    * Can be top, right, bottom and left.
    * */
@@ -212,6 +218,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
         this.patchPopoverContent(this.content);
+        this.patchPopoverContext(this.context);
         /*
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
@@ -251,6 +258,13 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * */
   private patchPopoverContent(content: NbPopoverContent) {
     this.container.content = content;
+  }
+
+  /*
+   * Set container context.
+   * */
+  private patchPopoverContext(context: Object) {
+    this.container.context = context;
   }
 
   /*

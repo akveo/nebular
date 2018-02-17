@@ -12,11 +12,13 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'nb-dynamic-to-add',
   template: `
     <div>
-      <strong>hello from dynamically inserted component</strong>
+      <strong>hello from dynamically inserted component: {{text}}</strong>
     </div>
   `,
 })
-export class NbDynamicToAddComponent {}
+export class NbDynamicToAddComponent {
+  text: string = '';
+}
 
 @Component({
   selector: 'nb-dynamic-test',
