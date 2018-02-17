@@ -73,7 +73,7 @@ export class NbContextMenuDirective extends NbPopoverDirective implements OnInit
     this.context = { items: this.items };
   }
 
-  /**
+  /*
    * NbMenuComponent will crash if don't pass menu items to it.
    * So, we just validating them and throw custom obvious error.
    * */
