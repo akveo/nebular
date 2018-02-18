@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
-import { NbContextMenuComponent } from './context-menu.component';
 import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
+import { NbContextMenuComponent } from './context-menu.component';
 
 /**
  * Full featured context menu directive.
@@ -41,7 +41,7 @@ import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/mode
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective extends NbPopoverDirective implements OnInit {
+export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   /**
    * Basic menu items, will be passed to the NbMenuComponent.
@@ -61,16 +61,49 @@ export class NbContextMenuDirective extends NbPopoverDirective implements OnInit
   @Input('nbContextMenuAdjustment')
   adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
 
-  constructor(hostRef: ElementRef, themeService: NbThemeService) {
-    super(hostRef, themeService);
+  protected popover: NbPopoverDirective;
 
-    this.content = NbContextMenuComponent;
+  constructor(hostRef: ElementRef, themeService: NbThemeService) {
+    this.popover = new NbPopoverDirective(hostRef, themeService);
+    this.popover.content = NbContextMenuComponent;
+    this.popover.placement = this.placement;
+    this.popover.adjustment = this.adjustment;
   }
 
   ngOnInit() {
-    super.ngOnInit();
+    this.popover.ngOnInit();
     this.validateItems();
-    this.context = { items: this.items };
+    this.patchPopoverContext();
+  }
+
+  ngOnDestroy() {
+    this.popover.ngOnDestroy();
+  }
+
+  /**
+   * Show popover.
+   * */
+  show() {
+    this.popover.show();
+  }
+
+  /**
+   * Hide popover.
+   * */
+  hide() {
+    this.popover.hide();
+  }
+
+  /**
+   * Toggle popover state.
+   * */
+  toggle() {
+    this.popover.toggle();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.popover.onResize();
   }
 
   /*
@@ -81,5 +114,9 @@ export class NbContextMenuDirective extends NbPopoverDirective implements OnInit
     if (!this.items || !this.items.length) {
       throw Error(`List of menu items expected, but given: ${this.items}`)
     }
+  }
+
+  private patchPopoverContext() {
+    this.popover.context = { items: this.items };
   }
 }
