@@ -12,6 +12,14 @@ import { Component } from '@angular/core';
             </nb-user>
           </nb-card-body>
         </nb-card>
+
+        <nb-card>
+          <nb-card-header>Context Menu</nb-card-header>
+          <nb-card-body>
+            <nb-user name="Nikita Poltoratsky" title="full-stack developer" [nbContextMenu]="itemsWithIcons">
+            </nb-user>
+          </nb-card-body>
+        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -19,6 +27,11 @@ import { Component } from '@angular/core';
 export class NbContextMenuTestComponent {
 
   items = [
+    { title: 'Profile', link: '/user' },
+    { title: 'Logout', link: '/popover' },
+  ];
+
+  itemsWithIcons = [
     { title: 'Profile', link: '/user', icon: 'nb-compose' },
     { title: 'Logout', link: '/popover', icon: 'nb-gear' },
   ];
