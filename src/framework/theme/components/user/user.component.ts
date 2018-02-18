@@ -124,8 +124,8 @@ export class NbUserComponent {
    * @type string
    */
   @Input() set picture(value: string) {
-    this.pictureValue = value;
-    this.backgroundImageStyle = this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`);
+    //this.pictureValue = value;
+    this.imageBackgroundStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
   }
 
   /**
@@ -222,7 +222,7 @@ export class NbUserComponent {
   @Output() menuClick = new EventEmitter<NbUserMenuItem>();
 
   pictureValue: string;
-  backgroundImageStyle: SafeStyle;
+  imageBackgroundStyle: SafeStyle;
   showNameValue: boolean = true;
   showTitleValue: boolean = true;
   showInitialsValue: boolean = true;
