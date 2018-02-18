@@ -50,14 +50,19 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
-  items: NbMenuItem[];
+  set items(items: NbMenuItem[]) {
+    this.validateItems(items);
+    this.popover.context = { items };
+  };
 
   /**
    * Position will be calculated relatively host element based on the placement.
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  placement: NbPopoverPlacement = NbPopoverPlacement.BOTTOM;
+  set placement(placement: NbPopoverPlacement) {
+    this.popover.placement = placement;
+  };
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
@@ -65,7 +70,9 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbContextMenuAdjustment')
-  adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
+  set adjustment(adjustment: NbPopoverAdjustment) {
+    this.popover.adjustment = adjustment;
+  }
 
   protected popover: NbPopoverDirective;
 
@@ -75,14 +82,11 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
      * */
     this.popover = new NbPopoverDirective(hostRef, themeService);
     this.popover.content = NbContextMenuComponent;
-    this.popover.placement = this.placement;
-    this.popover.adjustment = this.adjustment;
+    this.popover.placement = NbPopoverPlacement.BOTTOM;
   }
 
   ngOnInit() {
     this.popover.ngOnInit();
-    this.validateItems();
-    this.patchPopoverContext();
   }
 
   ngOnDestroy() {
@@ -119,16 +123,9 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * NbMenuComponent will crash if don't pass menu items to it.
    * So, we just validating them and throw custom obvious error.
    * */
-  private validateItems() {
-    if (!this.items || !this.items.length) {
-      throw Error(`List of menu items expected, but given: ${this.items}`)
+  private validateItems(items: NbMenuItem[]) {
+    if (!items || !items.length) {
+      throw Error(`List of menu items expected, but given: ${items}`)
     }
-  }
-
-  /*
-   * Set internal popover context.
-   * */
-  private patchPopoverContext() {
-    this.popover.context = { items: this.items };
   }
 }
