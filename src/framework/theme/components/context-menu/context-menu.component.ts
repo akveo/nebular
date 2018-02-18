@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 import { NbMenuItem } from '../../';
 
 /**
- * Used as popover content within NbContextMenuDirective.
+ * Context menu component used as content within NbContextMenuDirective.
  *
  * @styles
  *

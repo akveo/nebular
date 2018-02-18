@@ -24,7 +24,8 @@ import { NbContextMenuComponent } from './context-menu.component';
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example Also supports placement:
+ * @example Context menu has different placements, such as: top, bottom, left and right
+ * which can be used as following:
  *
  * ```
  * <button [nbContextMenu]="items" nbContextMenuPlacement="right"></button>
@@ -32,7 +33,9 @@ import { NbContextMenuComponent } from './context-menu.component';
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example And adjustment:
+ * @example By default context menu will try to adjust itself to maximally fit viewport
+ * and provide the best user experience. It will try to change placement of the context menu.
+ * If you wanna disable this behaviour just set it falsy value.
  *
  * ```
  * <button [nbContextMenu]="items" nbContextMenuAdjustment="counterclockwise"></button>
@@ -44,19 +47,22 @@ import { NbContextMenuComponent } from './context-menu.component';
 export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   /**
-   * Basic menu items, will be passed to the NbMenuComponent.
+   * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
   items: NbMenuItem[];
 
   /**
-   * Placement which will be passed to the popover.
+   * Position will be calculated relatively host element based on the placement.
+   * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
   placement: NbPopoverPlacement = NbPopoverPlacement.BOTTOM;
 
   /**
-   * Adjustment which will be passed to the popover.
+   * Container placement will be changes automatically based on this strategy if container can't fit view port.
+   * Set this property to any falsy value if you want to disable automatically adjustment.
+   * Available values: clockwise, counterclockwise.
    * */
   @Input('nbContextMenuAdjustment')
   adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
@@ -64,6 +70,9 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   protected popover: NbPopoverDirective;
 
   constructor(hostRef: ElementRef, themeService: NbThemeService) {
+    /**
+     * Initialize popover with all the important inputs.
+     * */
     this.popover = new NbPopoverDirective(hostRef, themeService);
     this.popover.content = NbContextMenuComponent;
     this.popover.placement = this.placement;
@@ -81,21 +90,21 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Show popover.
+   * Show context menu.
    * */
   show() {
     this.popover.show();
   }
 
   /**
-   * Hide popover.
+   * Hide context menu.
    * */
   hide() {
     this.popover.hide();
   }
 
   /**
-   * Toggle popover state.
+   * Toggle context menu state.
    * */
   toggle() {
     this.popover.toggle();
@@ -116,6 +125,9 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
     }
   }
 
+  /*
+   * Set internal popover context.
+   * */
   private patchPopoverContext() {
     this.popover.context = { items: this.items };
   }
