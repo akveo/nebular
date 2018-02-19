@@ -23,6 +23,7 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * popover-fg
  * popover-bg
  * popover-border
+ * popover-border-radius
  * popover-shadow
  * */
 @Component({

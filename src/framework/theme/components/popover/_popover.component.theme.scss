@@ -8,6 +8,7 @@
   nb-popover {
     $arrow-size: 11px;
     border: 2px solid nb-theme(popover-border);
+    border-radius: nb-theme(popover-border-radius);
     background: nb-theme(popover-bg);
     box-shadow: nb-theme(popover-shadow);
 
