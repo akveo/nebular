@@ -1,7 +1,7 @@
 ## A provider
 
-In Nebular terms `auth provider` is a class containing authentication logic using by the application UI. 
-It accepts user input (login/email/password/oauth token/etc), communicates the input to the backend API and finally provides some resulting output back to the UI layer.
+In Nebular terms `auth provider` is a class containing authentication logic specific for some authentication flow (email&password, OAuth, etc). 
+It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
 Currently, there are two Auth Providers available out of the box:
 
 Two auth providers:

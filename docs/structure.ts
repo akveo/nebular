@@ -605,6 +605,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'NbTokenLocalStorage',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbTokenLocalStorage',
+          },
+        ],
+      },
     ],
   },
   {
@@ -641,6 +652,28 @@ export const STRUCTURE = [
             type: 'block',
             block: 'markdown',
             source: 'security-acl-configuration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAclService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAclService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAccessChecker',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAccessChecker',
           },
         ],
       },

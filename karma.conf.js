@@ -72,7 +72,7 @@ module.exports = function (config) {
       timeout: 600,
       pollingTimeout: 20000,
       video: false,
-    },
+    }
   };
 
   if (process.env['TRAVIS']) {
