@@ -184,7 +184,7 @@ To start a new release (publish the framework packages on NPM) you need:
 2. run `npm link` for each Nebular module in *nebular/src/framework* except for *icons*
 3. make sure you don't have *node_modules* in Nebular project (this may cause an issue an issue the angular-cli)
 4. link Nebular in ngx-admin: `npm link @nebular/{auth,theme}`
-5. run ngx-admin with `--preserve-symlinks` flag.
+5. run ngx-admin `npm start -- --preserve-symlinks`.
 
 #ngx-admin release
 1. update version
