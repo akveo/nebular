@@ -5,6 +5,7 @@
  */
 
 import { Component, Input, HostBinding, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -118,11 +119,13 @@ export class NbUserComponent {
   @Input() title: string;
 
   /**
-   * Absolute path to a user picture
+   * Absolute path to a user picture. Or base64 image
    * User name initials (JD for John Doe) will be shown if no picture specified
    * @type string
    */
-  @Input() picture: string;
+  @Input() set picture(value: string) {
+    this.imageBackgroundStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
+  }
 
   /**
    * Color of the area shown when no picture specified
@@ -217,12 +220,15 @@ export class NbUserComponent {
    */
   @Output() menuClick = new EventEmitter<NbUserMenuItem>();
 
+  imageBackgroundStyle: SafeStyle;
   showNameValue: boolean = true;
   showTitleValue: boolean = true;
   showInitialsValue: boolean = true;
   isMenuShown: boolean = false;
 
-  constructor(private el: ElementRef) { }
+  constructor(
+    private el: ElementRef,
+    private domSanitizer: DomSanitizer) { }
 
   itemClick(event: any, item: NbUserMenuItem): boolean {
     this.menuClick.emit(item);
