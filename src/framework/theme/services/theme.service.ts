@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Inject, Injectable, Type } from '@angular/core';
+import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -41,6 +41,7 @@ export class NbThemeService {
     @Inject(nbThemeOptionsToken) protected options: any,
     private breakpointService: NbMediaBreakpointsService,
     private jsThemesRegistry: NbJSThemesRegistry,
+    private componentFactoryResolver: ComponentFactoryResolver,
   ) {
     if (options && options.name) {
       this.changeTheme(options.name);
@@ -57,8 +58,18 @@ export class NbThemeService {
   }
 
   appendToLayoutTop<T>(component: Type<T>): Observable<any> {
+    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+    return this.appendToLayoutTopFactory(factory);
+  }
+
+  /*
+  * Have to be used in case of appending entry components from the lazy loaded modules.
+  * It's known angular issue and can be solved by resolving component factory in the lazy loaded module
+  * and passing this factory to the appendToLayoutTopFactory method.
+  * */
+  appendToLayoutTopFactory<T>(factory: ComponentFactory<T>): Observable<any> {
     const subject = new ReplaySubject(1);
-    this.appendToLayoutTop$.next({ component, listener: subject });
+    this.appendToLayoutTop$.next({ factory, listener: subject });
     return subject.asObservable();
   }
 
