@@ -889,6 +889,67 @@
           "examples": [],
           "params": [
             {
+              "name": "roleProvider",
+              "type": "NbRoleProvider",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "acl",
+              "type": "NbAclService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAccessChecker"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "isGranted",
+          "type": [
+            "Observable<boolean>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Checks whether access is granted or not"
+        }
+      ],
+      "name": "NbAccessChecker",
+      "description": "Injects `NbRoleProvider` to determine current user role, and checks access permissions using `NbAclService`\n",
+      "shortDescription": "Access checker service.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
               "name": "settings",
               "type": "NbAclOptions",
               "required": null,

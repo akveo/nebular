@@ -655,6 +655,28 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'NbAclService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAclService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAccessChecker',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAccessChecker',
+          },
+        ],
+      },
     ],
   },
 ];
