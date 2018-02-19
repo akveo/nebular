@@ -114,6 +114,7 @@ describe('theme-service', () => {
         current = change.variables;
       });
     try {
+      // TODO could be rewrite with usage of done()
       expect(current).not.toBeUndefined();
       expect(current.fontMain).toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
       expect(current.bg).toEqual('#ffffff');
