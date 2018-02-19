@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators/tap';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NbAuthSimpleToken, NbTokenService } from './token.service';
+import { NbAuthSimpleToken, NbAuthToken, NbTokenService } from './token.service';
 import { NB_AUTH_PROVIDERS_TOKEN } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 
@@ -32,7 +32,7 @@ export class NbAuthService {
    * Retrieves current authenticated token stored
    * @returns {Observable<any>}
    */
-  getToken(): Observable<NbAuthSimpleToken> {
+  getToken(): Observable<NbAuthToken> {
     return this.tokenService.get();
   }
 
@@ -50,7 +50,7 @@ export class NbAuthService {
    * Returns tokens stream
    * @returns {Observable<NbAuthSimpleToken>}
    */
-  onTokenChange(): Observable<NbAuthSimpleToken> {
+  onTokenChange(): Observable<NbAuthToken> {
     return this.tokenService.tokenChange();
   }
 
