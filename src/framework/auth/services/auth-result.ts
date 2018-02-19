@@ -1,19 +1,18 @@
-import { NbAuthSimpleToken } from './token.service';
+import { NbAuthToken } from './token/token';
 
 export class NbAuthResult {
 
-  protected token: any;
-  // TODO add field rawToken: string;
+  protected token: NbAuthToken;
+  protected rawToken: string;
   protected errors: string[] = [];
   protected messages: string[] = [];
 
-  // TODO pass arguments in options object
   constructor(protected success: boolean,
               protected response?: any,
               protected redirect?: any,
               errors?: any,
               messages?: any,
-              token?: NbAuthSimpleToken) {
+              rawToken?: string) {
 
     this.errors = this.errors.concat([errors]);
     if (errors instanceof Array) {
@@ -25,21 +24,24 @@ export class NbAuthResult {
       this.messages = messages;
     }
 
+    this.rawToken = rawToken;
+  }
+
+  setToken(token: NbAuthToken) {
     this.token = token;
+    this.rawToken = token.toString();
   }
 
   getResponse(): any {
     return this.response;
   }
 
-  // TODO is it really return value?
-  getTokenValue(): any {
-    return this.token;
+  getRawToken(): any {
+    return this.rawToken;
   }
 
-  // TODO could we get rid of this method
-  replaceToken(token: NbAuthSimpleToken): any {
-    this.token = token
+  getToken(): any {
+    return this.token;
   }
 
   getRedirect(): any {

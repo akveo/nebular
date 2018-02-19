@@ -26,7 +26,7 @@ import {
 } from '@nebular/theme';
 
 import {
-  NB_AUTH_TOKEN_WRAPPER_TOKEN,
+  NB_AUTH_TOKEN_CLASS,
   NbAuthJWTToken,
   NbAuthModule,
   NbEmailPassAuthProvider,
@@ -228,7 +228,7 @@ const NB_TEST_COMPONENTS = [
   ],
   providers: [
     AuthGuard,
-    { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },
+    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
     { provide: NbRoleProvider, useClass: RoleProvider },
   ],
