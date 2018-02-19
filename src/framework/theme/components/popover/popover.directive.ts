@@ -217,8 +217,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
-        this.patchPopoverContent(this.content);
-        this.patchPopoverContext(this.context);
+        this.patchPopover(this.content, this.context);
         /*
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
@@ -254,16 +253,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   }
 
   /*
-   * Set container content.
+   * Set container content and context.
    * */
-  private patchPopoverContent(content: NbPopoverContent) {
+  private patchPopover(content: NbPopoverContent, context: Object) {
     this.container.content = content;
-  }
-
-  /*
-   * Set container context.
-   * */
-  private patchPopoverContext(context: Object) {
     this.container.context = context;
   }
 
