@@ -4,9 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { convertToBoolProperty } from '../helpers';
+import { CanStatus, mixinStatus, Status } from '../../mixins/mixinStatus';
+import { mixinControlValueAccessor } from '../../mixins/mixinControlValueAccessor';
+import { BaseInputAttributes, mixinBaseInputAttributes } from '../../mixins/mixinBaseInputAtributes';
+
+// Increasing integer for generating unique ids for checkbox components.
+let nextUniqueId = 0;
+
+export class NbCheckboxBase {
+}
+
+export const _NbCheckboxMixinBase = mixinBaseInputAttributes(mixinControlValueAccessor(mixinStatus(NbCheckboxBase)));
 
 /**
  * Styled checkbox component
@@ -46,8 +56,10 @@ import { convertToBoolProperty } from '../helpers';
   template: `
     <label class="customised-control customised-checkbox">
       <input type="checkbox" class="customised-control-input"
+             [id]="id"
              [disabled]="disabled"
-             [checked]="value"
+             [required]="required"
+             [checked]="checked"
              (change)="value = !value">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
@@ -61,69 +73,22 @@ import { convertToBoolProperty } from '../helpers';
     multi: true,
   }],
 })
-export class NbCheckboxComponent implements ControlValueAccessor {
+export class NbCheckboxComponent extends _NbCheckboxMixinBase implements ControlValueAccessor,
+  BaseInputAttributes, CanStatus {
 
-  status: string;
+  private _uniqueId: string = `nb-checkbox-${++nextUniqueId}`;
 
-  /**
-   * Checkbox value
-   * @type {boolean}
-   * @private
-   */
-  @Input('value') _value: boolean = false;
+  @Input() value: boolean = false;
 
-  disabled: boolean = false;
-  @Input('disabled')
-  set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
-  }
+  @Input() status: Status = Status.EMPTY;
 
-  /**
-   * Checkbox status (success, warning, danger)
-   * @param {string} val
-   */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
+  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  @Input() id: string = this._uniqueId;
 
-  @HostBinding('class.success')
-  private get success() {
-    return this.status === 'success';
-  }
+  @Input() disabled: boolean = false;
 
-  @HostBinding('class.warning')
-  private get warning() {
-    return this.status === 'warning';
-  }
+  @Input() required: boolean = false;
 
-  @HostBinding('class.danger')
-  private get danger() {
-    return this.status === 'danger';
-  }
+  @Input() checked: boolean = false;
 
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  writeValue(val: any) {
-    this.value = val;
-  }
 }

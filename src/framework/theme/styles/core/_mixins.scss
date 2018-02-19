@@ -193,3 +193,25 @@
     }
   }
 }
+
+@mixin nb-input-status-color($origin-border-color) {
+  @include input-border-color($origin-border-color);
+  &.success {
+    @include input-border-color(nb-theme(color-success));
+  }
+  &.warning {
+    @include input-border-color(nb-theme(color-warning));
+  }
+  &.danger {
+    @include input-border-color(nb-theme(color-danger));
+  }
+}
+
+@mixin input-border-color($color) {
+  .customised-control-input:checked ~ .customised-control-indicator {
+    border-color: $color;
+  }
+  .customised-control-input:hover:enabled ~ .customised-control-indicator {
+    border-color: lighten($color, 10%);
+  }
+}

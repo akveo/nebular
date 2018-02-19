@@ -4,20 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-checkbox-theme() {
+@mixin nb-radio-theme() {
   @mixin checkmark($size, $color, $border-size) {
     &::before {
       content: '';
       position: absolute;
+      background-color: $color;
       height: calc(#{$size} * 0.6);
-      width: calc(#{$size} * 0.4);
+      width: calc(#{$size} * 0.6);
       border: solid $color;
-      border-width: 0 $border-size $border-size 0;
-      transform: rotate(45deg);
+      border-radius: 50%;
     }
   }
 
-  @mixin color-size($bg, $size, $border-size, $border-color) {
+  @mixin set-style($bg, $size, $border-size, $border-color) {
     background-color: $bg;
     width: $size;
     height: $size;
@@ -27,29 +27,27 @@
   @mixin description-style {
     color: nb-theme(color-fg-heading);
     opacity: 0.5;
-    flex-shrink: 0;
     padding-left: 0.25rem;
   }
 
-  nb-checkbox {
+  nb-radio {
     .customised-control {
       position: relative;
       display: inline-flex;
       margin: 0;
       min-height: inherit;
       padding: 0.375rem 1.5rem;
-      line-height: 0;
     }
 
     .customised-control-indicator {
-      @include color-size(
+      @include set-style(
           nb-theme(checkbox-bg),
           nb-theme(checkbox-size),
           nb-theme(checkbox-border-size),
           nb-theme(checkbox-border-color)
       );
 
-      border-radius: 0.25rem;
+      border-radius: 50%;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -57,6 +55,7 @@
       flex: none;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       @include checkmark(
           nb-theme(checkbox-size),
@@ -73,7 +72,7 @@
 
     .customised-control-input {
       &:checked ~ .customised-control-indicator {
-        @include color-size(
+        @include set-style(
             nb-theme(checkbox-checked-bg),
             nb-theme(checkbox-checked-size),
             nb-theme(checkbox-checked-border-size),
@@ -82,6 +81,7 @@
 
         display: flex;
         justify-content: center;
+        align-items: center;
 
         @include checkmark(
             nb-theme(checkbox-checked-size),
@@ -92,7 +92,7 @@
 
       &:disabled ~ {
         .customised-control-indicator {
-          @include color-size(
+          @include set-style(
               nb-theme(checkbox-disabled-bg),
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-border-size),
@@ -101,6 +101,7 @@
           opacity: 0.5;
           display: flex;
           justify-content: center;
+          align-items: center;
 
           @include checkmark(
               nb-theme(checkbox-disabled-size),
@@ -116,7 +117,7 @@
 
       &:disabled:checked ~ {
         .customised-control-indicator {
-          @include color-size(
+          @include set-style(
               nb-theme(checkbox-disabled-bg),
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-border-size),
@@ -125,6 +126,7 @@
           opacity: 0.5;
           display: flex;
           justify-content: center;
+          align-items: center;
 
           @include checkmark(
               nb-theme(checkbox-disabled-size),
@@ -139,7 +141,7 @@
       }
     }
 
-    @include nb-input-status-color(nb-theme(checkbox-checked-border-color));
+   @include nb-input-status-color(nb-theme(checkbox-checked-border-color));
 
     .customised-control-description {
       @include description-style;

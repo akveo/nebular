@@ -42,6 +42,8 @@ import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbCardTestComponent } from './card-test/card-test.component';
 import { NbPopoverTestComponent } from './popover-test/popover-test.component';
+import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
+import { NbRadioTestComponent } from './radio-test/radio-test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -51,7 +53,6 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
-import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 
 export const routes: Routes = [
@@ -237,6 +238,10 @@ export const routes: Routes = [
   {
     path: 'checkbox',
     component: NbCheckboxTestComponent,
+  },
+  {
+    path: 'radio',
+    component: NbRadioTestComponent,
   },
   {
     path: 'bootstrap',
