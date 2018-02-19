@@ -34,8 +34,16 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
 
             <button class="btn btn-warning" [nbPopover]="customPopoverComponent"
                     [nbPopoverContext]="{text: 'Example context'}">
-              Component Test
+              Component with context test
             </button>
+
+            <button class="btn btn-warning" [nbPopover]="popoverTemplateWithContext"
+                    [nbPopoverContext]="{text: 'Example context'}">
+              Template with context test
+            </button>
+            <ng-template #popoverTemplateWithContext let-text="text">
+              <nb-dynamic-to-add [text]="text"></nb-dynamic-to-add>
+            </ng-template>
 
             <button class="btn btn-primary" nbPopover="Hi, I'm popover!" nbPopoverPlacement="bottom">String Test
             </button>

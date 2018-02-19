@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
 
@@ -17,6 +17,8 @@ import { NbThemeService } from '@nebular/theme';
   `,
 })
 export class NbDynamicToAddComponent {
+
+  @Input()
   text: string = '';
 }
 
