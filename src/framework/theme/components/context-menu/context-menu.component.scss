@@ -1,0 +1,48 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host /deep/ nb-menu {
+  display: inline;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+
+  ul.menu-items {
+    margin: 0;
+    padding: 0.5rem 0;
+
+    .menu-item {
+      border: none;
+      white-space: nowrap;
+
+      &:first-child {
+        border: none;
+      }
+
+      a {
+        cursor: pointer;
+        border-radius: 0;
+        padding: 0;
+
+        .menu-icon {
+          font-size: 1.5rem;
+          width: auto;
+        }
+
+        .menu-title {
+          padding: 0.375rem 3rem;
+        }
+
+        .menu-icon ~ .menu-title {
+          padding-left: 0;
+        }
+
+        .menu-icon:first-child {
+          padding-left: 1rem;
+        }
+      }
+    }
+  }
+}

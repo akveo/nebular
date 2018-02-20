@@ -152,4 +152,6 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
 export class NbPopoverTestComponent {
 
   customPopoverComponent = NbDynamicToAddComponent;
+
+  items = [{ title: 'Profile', link: '/card' }, { title: 'Log out', link: '/auth' }];
 }

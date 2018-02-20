@@ -7,6 +7,7 @@
 @mixin nb-popover-theme {
   nb-popover {
     $arrow-size: 11px;
+    $arrow-content-size: 9px;
     border: 2px solid nb-theme(popover-border);
     background: nb-theme(popover-bg);
     box-shadow: nb-theme(popover-shadow);
@@ -19,7 +20,7 @@
       border-bottom: $arrow-size solid nb-theme(popover-border);
 
       &::after {
-        border-bottom: $arrow-size solid nb-theme(popover-bg);
+        border-bottom: $arrow-content-size solid nb-theme(popover-bg);
       }
     }
   }
