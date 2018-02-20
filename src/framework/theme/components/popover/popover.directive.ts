@@ -218,7 +218,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * */
   private renderPopover() {
     const factory = this.componentFactoryResolver.resolveComponentFactory(NbPopoverComponent);
-    this.themeService.appendToLayoutTopFactory(factory)
+    this.themeService.appendToLayoutTop(factory)
       .pipe(takeWhile(() => this.alive))
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;

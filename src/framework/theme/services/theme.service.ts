@@ -57,17 +57,13 @@ export class NbThemeService {
     this.changeWindowWidth$.next(width);
   }
 
-  appendToLayoutTop<T>(component: Type<T>): Observable<any> {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-    return this.appendToLayoutTopFactory(factory);
-  }
+  appendToLayoutTop<T>(entity: Type<T> | ComponentFactory<T>): Observable<any> {
+    let factory = entity;
 
-  /*
-  * Have to be used in case of appending entry components from the lazy loaded modules.
-  * It's known angular issue and can be solved by resolving component factory in the lazy loaded module
-  * and passing this factory to the appendToLayoutTopFactory method.
-  * */
-  appendToLayoutTopFactory<T>(factory: ComponentFactory<T>): Observable<any> {
+    if (entity instanceof Type) {
+      factory = this.componentFactoryResolver.resolveComponentFactory(entity);
+    }
+
     const subject = new ReplaySubject(1);
     this.appendToLayoutTop$.next({ factory, listener: subject });
     return subject.asObservable();
