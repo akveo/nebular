@@ -1,4 +1,4 @@
-<div class="user-container" (click)="toggleMenu()" [ngClass]="{'with-menu' : hasMenu()}">
+<div class="user-container">
   <div *ngIf="imageBackgroundStyle" class="user-picture image" [style.background-image]="imageBackgroundStyle">
     <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
   </div>
@@ -12,27 +12,5 @@
   <div class="info-container">
     <div *ngIf="showNameValue && name" class="user-name">{{ name }}</div>
     <div *ngIf="showTitleValue && title" class="user-title">{{ title }}</div>
-  </div>
-
-  <div *ngIf="hasMenu()"
-       [ngStyle]="{display: isMenuShown ? 'block' : 'none'}" class="user-context-menu">
-    <ul>
-      <li class="arrow"></li>
-      <li *ngFor="let item of menu" [class.with-icon]="item.icon">
-        <a *ngIf="item.link && !item.url" [routerLink]="item.link" [attr.target]="item.target">
-          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
-          {{ item.title }}
-        </a>
-        <a *ngIf="item.url && !item.link" [attr.href]="item.url" [attr.target]="item.target">
-          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
-          {{ item.title }}
-        </a>
-        <a *ngIf="!item.link && !item.url" href="#" [attr.target]="item.target"
-           (click)="itemClick($event, item)">
-          <span *ngIf="item.icon" class="item-icon {{ item.icon  }}"></span>
-          {{ item.title }}
-        </a>
-      </li>
-    </ul>
   </div>
 </div>
