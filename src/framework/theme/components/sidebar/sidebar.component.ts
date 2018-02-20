@@ -6,6 +6,7 @@
 
 import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -117,6 +118,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   protected stateValue: string;
   protected responsiveValue: boolean = false;
 
+  private alive = true;
+
   @HostBinding('class.fixed') fixedValue: boolean = false;
   @HostBinding('class.right') rightValue: boolean = false;
   @HostBinding('class.left') leftValue: boolean = true;
@@ -212,6 +215,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.toggleSubscription = this.sidebarService.onToggle()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { compact: boolean, tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.toggle(data.compact);
@@ -219,6 +223,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       });
 
     this.expandSubscription = this.sidebarService.onExpand()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.expand();
@@ -226,6 +231,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       });
 
     this.collapseSubscription = this.sidebarService.onCollapse()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.collapse();
@@ -234,9 +240,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.toggleSubscription.unsubscribe();
-    this.expandSubscription.unsubscribe();
-    this.collapseSubscription.unsubscribe();
+    this.alive = false;
     if (this.mediaQuerySubscription) {
       this.mediaQuerySubscription.unsubscribe();
     }
