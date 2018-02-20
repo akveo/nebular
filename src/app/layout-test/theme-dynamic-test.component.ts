@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ComponentFactoryResolver } from '@angular/core';
+import { Component, Input, ComponentFactoryResolver } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
 
@@ -12,11 +12,15 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'nb-dynamic-to-add',
   template: `
     <div>
-      <strong>hello from dynamically inserted component</strong>
+      <strong>hello from dynamically inserted component: {{text}}</strong>
     </div>
   `,
 })
-export class NbDynamicToAddComponent {}
+export class NbDynamicToAddComponent {
+
+  @Input()
+  text: string = '';
+}
 
 @Component({
   selector: 'nb-dynamic-test',
