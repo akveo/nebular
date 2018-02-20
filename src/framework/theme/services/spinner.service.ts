@@ -4,16 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * Service to control the global page spinner.
  */
-@Injectable()
 export class NbSpinnerService {
 
   private loaders: Promise<any>[] = [];
   private selector: string = 'nb-global-spinner';
+
+  constructor(@Inject(DOCUMENT) private document) {}
 
   /**
    * Appends new loader to the list of loader to be completed before
@@ -66,6 +68,6 @@ export class NbSpinnerService {
   }
 
   private getSpinnerElement() {
-    return document.getElementById(this.selector);
+    return this.document.getElementById(this.selector);
   }
 }
