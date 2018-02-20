@@ -2,7 +2,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { Constructor } from './Constructor';
 
 export function mixinControlValueAccessor<T extends Constructor<{}>>(base: T): Constructor<ControlValueAccessor> & T {
-  class MyControlValueAccessor extends base {
+  return class extends base {
 
     /**
      * Checkbox value
@@ -13,6 +13,7 @@ export function mixinControlValueAccessor<T extends Constructor<{}>>(base: T): C
 
     onChange: any = () => {
     };
+
     onTouched: any = () => {
     };
 
@@ -38,6 +39,4 @@ export function mixinControlValueAccessor<T extends Constructor<{}>>(base: T): C
       this.value = val;
     }
   }
-
-  return MyControlValueAccessor
 }

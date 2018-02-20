@@ -2,6 +2,7 @@ import { NbCheckboxComponent } from './checkbox.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Status } from '../../mixins/mixinStatus';
 
 describe('Component: NbCheckbox', () => {
 
@@ -41,31 +42,31 @@ describe('Component: NbCheckbox', () => {
   });
 
   it('Setting value to true makes checkbox input checked', () => {
-    checkbox.value = true;
+    checkbox.checked = true;
     fixture.detectChanges();
     expect(checkboxInput.nativeElement.checked).toBeTruthy();
   });
 
   it('Setting value to false makes checkbox input unchecked', () => {
-    checkbox.value = false;
+    checkbox.checked = false;
     fixture.detectChanges();
     expect(checkboxInput.nativeElement.checked).toBeFalsy();
   });
 
   it('Setting status to success apply corresponding class to host element', () => {
-    checkbox.status = 'success';
+    checkbox.status = Status.SUCCESS;
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('success')).toBeTruthy();
   });
 
   it('Setting status to warning apply corresponding class to host element', () => {
-    checkbox.status = 'warning';
+    checkbox.status = Status.WARNING;
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('warning')).toBeTruthy();
   });
 
   it('Setting status to danger apply corresponding class to host element', () => {
-    checkbox.status = 'danger';
+    checkbox.status = Status.DANGER;
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('danger')).toBeTruthy();
   });

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-radio-test',
+  selector: 'nb-app-radio-test',
   template: `
     <nb-layout>
       <nb-layout-column>
