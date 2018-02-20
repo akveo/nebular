@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit, Inject, PLATFORM_ID,
+  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
@@ -344,9 +344,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
       )
-      .subscribe((data: { component: any, listener: Subject<any> }) => {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.component);
-        const componentRef = this.veryTopRef.createComponent(componentFactory);
+      .subscribe((data: { factory: ComponentFactory<any>, listener: Subject<any> }) => {
+        const componentRef = this.veryTopRef.createComponent(data.factory);
         data.listener.next(componentRef);
         data.listener.complete();
       });

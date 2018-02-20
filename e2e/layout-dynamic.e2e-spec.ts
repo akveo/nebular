@@ -18,9 +18,29 @@ describe('nb-layout theme', () => {
     });
   });
 
-  it('should insert append into nb-layout', () => {
+  it('should append into nb-layout', () => {
 
     const button = element(by.css('#add-dynamic'));
+
+    button.click().then(() => {
+      return browser.driver.wait(() => {
+        return element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+          return value === 'nb-dynamic-to-add';
+        });
+      }, 10000);
+    });
+
+    element(by.css('nb-layout')).$$('*').first().getTagName().then(value => {
+      expect(value).toMatch('nb-dynamic-to-add');
+    });
+    element(by.css('nb-layout')).$$('*').get(1).getTagName().then(value => {
+      expect(value).toMatch('div');
+    });
+  });
+
+  it('should append by factory into nb-layout', () => {
+
+    const button = element(by.css('#add-dynamic-by-factory'));
 
     button.click().then(() => {
       return browser.driver.wait(() => {

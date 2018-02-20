@@ -5,8 +5,8 @@
  */
 
 import {
-  ComponentRef, Directive, ElementRef, HostListener,
-  Input, OnDestroy, OnInit, PLATFORM_ID, Inject,
+  ComponentFactoryResolver, ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy,
+  OnInit, PLATFORM_ID, Inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NbPositioningHelper } from './helpers/positioning.helper';
@@ -143,6 +143,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   constructor(
     private hostRef: ElementRef,
     private themeService: NbThemeService,
+    private componentFactoryResolver: ComponentFactoryResolver,
     @Inject(PLATFORM_ID) private platformId,
   ) {}
 
@@ -222,7 +223,8 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * and {@link NbPopoverDirective#adjustment}.
    * */
   private renderPopover() {
-    this.themeService.appendToLayoutTop(NbPopoverComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbPopoverComponent);
+    this.themeService.appendToLayoutTop(factory)
       .pipe(takeWhile(() => this.alive))
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
