@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
 
@@ -25,6 +25,7 @@ export class NbDynamicToAddComponent {}
       <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
         <button id="add-dynamic" (click)="addDynamicComponent()">Add Dynamic Copmonent</button>
+        <button id="add-dynamic-by-factory" (click)="addDynamicByFactory()">Add Dynamic By Factory</button>
         <button id="clear-dynamic" (click)="clearDynamicComponents()">Clear Dynamic Copmonents</button>
       </nb-layout-header>
 
@@ -49,10 +50,15 @@ export class NbDynamicToAddComponent {}
 `,
 })
 export class NbThemeDynamicTestComponent {
-  constructor(private themeService: NbThemeService) {}
+  constructor(private themeService: NbThemeService, private componentFactoryResolver: ComponentFactoryResolver) {}
 
   addDynamicComponent() {
     this.themeService.appendToLayoutTop(NbDynamicToAddComponent).subscribe(cRef => console.info(cRef));
+  }
+
+  addDynamicByFactory() {
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbDynamicToAddComponent);
+    this.themeService.appendToLayoutTop(factory).subscribe(cRef => console.info(cRef));
   }
 
   clearDynamicComponents() {
