@@ -9,15 +9,16 @@
 ### What's included:
 
 What is included:
-1) [x] @nebular/theme
+1) [x] @nebular/theme :art:
   - Theme System - guidelines on how to manage SCSS variables and component styles with hot reload in place.
   - Pure Angular UI Kit with two style themes and no dependencies.
-  - Style overridings for 3rd party modules (Bootstrap, ng2-smart-table) to have a consistent look and feel.
-2) [x] @nebular/auth
+  - Style overridings for 3rd party modules (Bootstrap 4, ng2-smart-table) to have a consistent look and feel.
+  - Server-side rendering compatibility!
+2) [x] @nebular/auth :closed_lock_with_key:
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable providers (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
-3) [x] @nebular/security
+3) [x] @nebular/security :cop:
   - Roles and permissions management (ACL)
   - `*nbIsGranted` conditional directive
 4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
@@ -39,9 +40,6 @@ There are a lot of awesome front-end frameworks and libraries out there these da
 
 ### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
-
-### Architecture
-<img src="https://i.imgur.com/H4coTS7.png" />
 
 ### License
 [MIT](LICENSE.txt) license.
