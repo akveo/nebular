@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
-
 :host {
   display: flex;
 }
@@ -14,10 +12,6 @@
   position: relative;
   display: flex;
   align-items: center;
-
-  &.with-menu {
-    cursor: pointer;
-  }
 }
 
 .user-picture {
@@ -43,60 +37,4 @@
 
 .info-container {
   margin-left: 0.5rem;
-}
-
-.user-context-menu {
-  @include center-horizontal-absolute();
-
-  z-index: 1000;
-  top: calc(100% + 10px);
-  background-clip: padding-box;
-  border-radius: 5px;
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-
-  ul {
-    margin: 0;
-    padding: 0.5rem 0;
-    list-style: none;
-
-    li {
-      display: block;
-      white-space: nowrap;
-      > a {
-        padding: 0.375rem 3rem;
-        display: flex;
-      }
-
-      &.with-icon > a {
-        padding-left: 1rem;
-
-        .item-icon {
-          font-size: 1.5rem;
-          padding-right: 0.5rem;
-        }
-      }
-
-      &.arrow {
-        @include center-horizontal-absolute();
-
-        top: -22px;
-        width: 0;
-        height: 0;
-        border: 11px solid transparent;
-
-        &::after {
-          position: absolute;
-          content: ' ';
-          width: 0;
-          height: 0;
-          top: -9px;
-          left: 0;
-          margin-left: -12px;
-          display: block;
-          border: 12px solid transparent;
-        }
-      }
-    }
-  }
 }

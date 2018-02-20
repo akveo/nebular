@@ -17,14 +17,19 @@ Authentication UI components:
   - Register
   - Password Recover
   - Password Reset
+
+You can use the built-in components or create your custom ones.  
   
-Two auth providers:
-  - Dummy auth provider - simple provider for testing purposes, could be used to simulate backend responses while API is in the development;
-  - EmailPass auth provider - the most common email/password authentication strategy.
+Auth providers:
+  - `NbDummyAuthProvider` - simple provider for testing purposes, could be used to simulate backend responses while API is in the development;
+  - `NbEmailPassAuthProvider` - the most common email/password authentication strategy.
     
 Other helper services:
-  - Token Service, JWT token, and Simple token - helper services for token management handling;
-  - JWT and Simple HTTP interceptors - intercepts the token into your HTTP requests.
+  - `NbAuthService` - facade service to communicate with a configured provider;
+  - `NbTokenService` - service that allows you to manage authentication token - get, set, clear and also listen to token changes over time;
+  - `NbTokenLocalStorage` - storage service for storing tokens in a browser local storage;
+  - `NbAuthJWTToken` and `NbAuthSimpleToken` - helper classes to work with your token;
+  - `NbAuthJWTInterceptor` and `NbAuthSimpleInterceptor` - http interceptors to inject token value into http requests.
 
 <hr class="section-end">
 

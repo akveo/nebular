@@ -379,7 +379,7 @@
           "platform": null,
           "name": "getToken",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Retrieves current authenticated token stored"
@@ -393,7 +393,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token\n// TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns true if auth token is presented in the token storage"
         },
         {
           "examples": [],
@@ -422,7 +422,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token\n // TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns authentication status stream"
         },
         {
           "examples": [],
@@ -430,10 +430,30 @@
           "platform": null,
           "name": "onTokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns tokens stream"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "result",
+              "type": "NbAuthResult",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "processResultToken",
+          "type": [
+            "Observable<NbAuthResult>"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         },
         {
           "examples": [],
@@ -510,11 +530,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAuthJWTToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -524,7 +564,7 @@
             "any"
           ],
           "isStatic": false,
-          "shortDescription": "TODO: check for this.token to be not null\nReturns payload object"
+          "shortDescription": "Returns payload object"
         },
         {
           "examples": [],
@@ -550,6 +590,39 @@
         },
         {
           "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "isValid",
+          "type": [
+            "boolean"
+          ],
+          "isStatic": false,
+          "shortDescription": "Is data expired"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
+        }
+      ],
+      "name": "NbAuthJWTToken",
+      "shortDescription": "Wrapper for JWT token with additional methods.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
           "params": [
             {
               "name": "token",
@@ -560,25 +633,14 @@
             }
           ],
           "platform": null,
-          "name": "setValue",
+          "name": "constructor",
           "type": [
-            "void"
+            "NbAuthSimpleToken"
           ],
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        }
-      ],
-      "name": "NbAuthJWTToken",
-      "shortDescription": "Wrapper for JWT token with additional methods.",
-      "styles": []
-    },
-    {
-      "kind": "service",
-      "platform": null,
-      "examples": [],
-      "props": [],
-      "methods": [
+        },
         {
           "examples": [],
           "params": [],
@@ -592,23 +654,25 @@
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "token",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "setValue",
+          "name": "isValid",
           "type": [
-            "void"
+            "boolean"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Is non empty and valid"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
         }
       ],
       "name": "NbAuthSimpleToken",
@@ -618,28 +682,105 @@
     {
       "kind": "service",
       "platform": null,
-      "examples": [
-        {
-          "shortDescription": "Injecting NbAuthJWTToken, so that NbTokenService will now return NbAuthJWTToken instead\nof the default NbAuthSimpleToken",
-          "description": "",
-          "code": "\n// import token and service into your AppModule\nimport { NB_AUTH_TOKEN_WRAPPER_TOKEN,  NbAuthJWTToken} from '@nebular/auth';\n\n// add to a list of providers\nproviders: [\n // ...\n { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },\n],\n"
-        }
-      ],
+      "examples": [],
       "props": [],
       "methods": [
         {
           "examples": [],
           "params": [
             {
-              "name": "options",
-              "type": "any",
+              "name": "tokenClass",
+              "type": "NbTokenClass",
               "required": null,
               "shortDescription": "",
               "description": ""
-            },
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbTokenLocalStorage"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clear",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Clears token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "get",
+          "type": [
+            "NbAuthToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
             {
-              "name": "tokenWrapper",
-              "type": "NbAuthSimpleToken",
+              "name": "token",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "set",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets token to localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setRaw",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets raw (string) token to localStorage"
+        }
+      ],
+      "name": "NbTokenLocalStorage",
+      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your `app.module`:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
+      "shortDescription": "Service that uses browser localStorage as a storage.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tokenStorage",
+              "type": "NbTokenStorage",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -660,10 +801,10 @@
           "platform": null,
           "name": "clear",
           "type": [
-            "Observable<any>"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Removes the token"
+          "shortDescription": "Removes the token and published token value"
         },
         {
           "examples": [],
@@ -671,26 +812,18 @@
           "platform": null,
           "name": "get",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns observable of current token"
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "key",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "getConfigValue",
+          "name": "publishStoredToken",
           "type": [
-            "any"
+            "void"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -701,27 +834,7 @@
           "params": [
             {
               "name": "token",
-              "type": "NbAuthSimpleToken",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "publishToken",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "rawToken",
-              "type": "string",
+              "type": "NbAuthToken",
               "required": null
             }
           ],
@@ -731,27 +844,24 @@
             "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Sets the token into the storage. This method is used by the NbAuthService automatically."
+          "shortDescription": "Sets a token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
           "params": [
             {
-              "name": "config",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "name": "token",
+              "type": "string",
+              "required": null
             }
           ],
           "platform": null,
-          "name": "setConfig",
+          "name": "setRaw",
           "type": [
-            "void"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Sets a raw token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
@@ -759,14 +869,14 @@
           "platform": null,
           "name": "tokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Publishes token when it changes."
         }
       ],
       "name": "NbTokenService",
-      "shortDescription": "Nebular token service. Provides access to the stored token.\nBy default returns NbAuthSimpleToken instance,\nbut you can inject NbAuthJWTToken if you need additional methods for JWT token.",
+      "shortDescription": "Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.",
       "styles": []
     },
     {
@@ -1954,6 +2064,20 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "Object",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "document",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
@@ -3057,6 +3181,13 @@
             {
               "name": "themeService",
               "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "any",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -4532,37 +4663,10 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "NbUserMenuItem[]",
-          "required": null,
-          "name": "menu",
-          "shortDescription": "List of menu items for a user context menu (shown when clicked)"
-        },
-        {
-          "kind": "output",
-          "platform": null,
-          "isStatic": false,
-          "type": "EventEmitter<NbUserMenuItem>",
-          "required": null,
-          "name": "menuClick",
-          "shortDescription": "Outputs when a context menu item is clicked"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
           "type": "string",
           "required": null,
           "name": "name",
           "shortDescription": "Specifies a name to be shown on the right of a user picture"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "picture",
-          "shortDescription": "Absolute path to a user picture\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -4590,6 +4694,15 @@
           "required": null,
           "name": "onlyPicture",
           "shortDescription": "Whether to show only a picture or also show the name and title"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "picture",
+          "shortDescription": "Absolute path to a user picture. Or base64 image\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -4633,8 +4746,8 @@
           "examples": [],
           "params": [
             {
-              "name": "el",
-              "type": "ElementRef",
+              "name": "domSanitizer",
+              "type": "DomSanitizer",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -4660,80 +4773,10 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "hasMenu",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "hideMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
-              "name": "item",
-              "type": "NbUserMenuItem",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "itemClick",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "toggleMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "Toggles a context menu"
         }
       ],
       "name": "NbUserComponent",
-      "description": "Can be used as a user profile link or can bring a user context menu.\n",
+      "description": "Can be used as a user profile link.\n",
       "shortDescription": "Represents a component showing a user avatar (picture) with a user name on the right.",
       "styles": [
         {
@@ -4778,86 +4821,10 @@
             {
               "name": "user-size-xlarge",
               "description": ""
-            },
-            {
-              "name": "user-menu-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-border",
-              "description": ""
             }
           ]
         }
       ]
-    },
-    {
-      "kind": "class",
-      "platform": null,
-      "examples": [],
-      "props": [
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "icon",
-          "shortDescription": "Icon class"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "link",
-          "shortDescription": "Menu link for [routerLink] directive"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "target",
-          "shortDescription": "Link target (_blank, _self, etc)"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "title",
-          "shortDescription": "Menu title"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "url",
-          "shortDescription": "URL for absolute urls, used directly in href"
-        }
-      ],
-      "methods": [],
-      "name": "NbUserMenuItem",
-      "shortDescription": "Action dropdown menu",
-      "styles": []
     },
     {
       "kind": "service",
@@ -5137,11 +5104,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "document",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbSpinnerService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -6004,10 +5991,6 @@
             },
             {
               "theme": "default",
-              "prop": "user-menu-bg"
-            },
-            {
-              "theme": "default",
               "prop": "popover-bg"
             },
             {
@@ -6169,10 +6152,6 @@
             {
               "theme": "default",
               "prop": "route-tabs-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-fg"
             },
             {
               "theme": "default",
@@ -6408,14 +6387,6 @@
             {
               "theme": "default",
               "prop": "route-tabs-selected"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-active-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-border"
             },
             {
               "theme": "default",
@@ -8341,61 +8312,6 @@
               "prop": "user-size-xlarge"
             }
           ]
-        },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-active-fg"
-            }
-          ]
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
         },
         "popover-fg": {
           "name": "popover-fg",
@@ -10622,10 +10538,6 @@
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-bg"
-            },
-            {
-              "theme": "cosmic",
               "prop": "popover-bg"
             },
             {
@@ -10780,10 +10692,6 @@
             {
               "theme": "cosmic",
               "prop": "route-tabs-fg-heading"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-fg"
             },
             {
               "theme": "cosmic",
@@ -11003,14 +10911,6 @@
             {
               "theme": "cosmic",
               "prop": "card-header-primary-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-active-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-border"
             },
             {
               "theme": "cosmic",
@@ -13151,61 +13051,6 @@
             {
               "theme": "default",
               "prop": "user-size-xlarge"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
-          "value": "#3d3780",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-menu-active-fg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
-          "value": "#7659ff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#7659ff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-primary"
             }
           ],
           "childs": []

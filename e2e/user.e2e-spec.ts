@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser } from 'protractor';
+import { browser, element, by } from 'protractor';
 import { NbBadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
@@ -34,6 +34,12 @@ describe('nb-user', () => {
       ],
     };
     badgeTests(badgesConf);
+  });
+
+  it('background image should have base64 image', () => {
+    element(by.css('#base64-image .user-picture.image')).getCssValue('background-image').then(value => {
+      expect(value).toEqual('url("data:image/png;base64,aaa")');
+    });
   });
 
 });

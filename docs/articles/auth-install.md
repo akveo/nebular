@@ -7,7 +7,10 @@
 
 ## Installation steps
 
-1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
+1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
+Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without `Nebular Theme`. 
+
+Let's assume that we need to setup email & password authentication based on Nebular Auth and NbEmailPassAuthProvider.
 
 `npm i @nebular/auth`
     
@@ -39,9 +42,9 @@
 
 ```
 
-We also specify a `forms` key, which configures available options for the UI components, but let's leave it empty for now and get back to it in the [Configuring UI](#/docs/auth/configuring-ui) article.
+We also specified a `forms` key, which configures available options for the Auth Components. We'll leave it empty for now and get back to it in the [Configuring UI](#/docs/auth/configuring-ui) article.
 
-4) Next, we need to configure UI part, let's add UI components into your `app-routing.module.ts`:
+4) Next, we need to configure Auth Components routes, let's add those into your `app-routing.module.ts`:
 
 
 ```typescript
@@ -90,13 +93,6 @@ export const routes: Routes = [
   
 ];
 ```
-
-<div class="note note-info">
-  <div class="note-title">Note</div>
-  <div class="note-body">
-    The components are wrapped by `NbAuthBlockComponent`, which is optional and just provides some basic styling for the page.
-  </div>
-</div>
 
 5) Last but not least - install the component styles into your themes.scss ([more details](/#/docs/guides/enabling-theme-system)):
 

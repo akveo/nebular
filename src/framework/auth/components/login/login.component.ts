@@ -5,7 +5,7 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NB_AUTH_OPTIONS_TOKEN, NbAuthSocialLink } from '../../auth.options';
+import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
@@ -120,7 +120,7 @@ export class NbLoginComponent {
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS_TOKEN) protected config = {},
+              @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');

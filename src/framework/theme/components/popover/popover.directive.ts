@@ -4,7 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ComponentFactoryResolver, ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy,
+  OnInit, PLATFORM_ID, Inject,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
@@ -136,11 +140,17 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     return this.hostRef.nativeElement;
   }
 
-  constructor(private hostRef: ElementRef, private themeService: NbThemeService) {
-  }
+  constructor(
+    private hostRef: ElementRef,
+    private themeService: NbThemeService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    @Inject(PLATFORM_ID) private platformId,
+  ) {}
 
   ngOnInit() {
-    this.registerTriggers();
+    if (isPlatformBrowser(this.platformId)) {
+      this.registerTriggers();
+    }
   }
 
   ngOnDestroy() {
@@ -213,12 +223,12 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * and {@link NbPopoverDirective#adjustment}.
    * */
   private renderPopover() {
-    this.themeService.appendToLayoutTop(NbPopoverComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbPopoverComponent);
+    this.themeService.appendToLayoutTop(factory)
       .pipe(takeWhile(() => this.alive))
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
-        this.patchPopoverContent(this.content);
-        this.patchPopoverContext(this.context);
+        this.patchPopover(this.content, this.context);
         /*
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
@@ -254,16 +264,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   }
 
   /*
-   * Set container content.
+   * Set container content and context.
    * */
-  private patchPopoverContent(content: NbPopoverContent) {
+  private patchPopover(content: NbPopoverContent, context: Object) {
     this.container.content = content;
-  }
-
-  /*
-   * Set container context.
-   * */
-  private patchPopoverContext(context: Object) {
     this.container.context = context;
   }
 
