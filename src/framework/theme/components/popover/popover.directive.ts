@@ -5,8 +5,8 @@
  */
 
 import {
-  ComponentRef, Directive, ElementRef, HostListener,
-  Input, OnDestroy, OnInit, PLATFORM_ID, Inject,
+  ComponentFactoryResolver, ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy,
+  OnInit, PLATFORM_ID, Inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NbPositioningHelper } from './helpers/positioning.helper';
@@ -78,6 +78,12 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   content: NbPopoverContent;
 
   /**
+   * Container content context. Will be applied to the rendered component.
+   * */
+  @Input('nbPopoverContext')
+  context: Object;
+
+  /**
    * Position will be calculated relatively host element based on the placement.
    * Can be top, right, bottom and left.
    * */
@@ -137,6 +143,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   constructor(
     private hostRef: ElementRef,
     private themeService: NbThemeService,
+    private componentFactoryResolver: ComponentFactoryResolver,
     @Inject(PLATFORM_ID) private platformId,
   ) {}
 
@@ -216,11 +223,12 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * and {@link NbPopoverDirective#adjustment}.
    * */
   private renderPopover() {
-    this.themeService.appendToLayoutTop(NbPopoverComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbPopoverComponent);
+    this.themeService.appendToLayoutTop(factory)
       .pipe(takeWhile(() => this.alive))
       .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
         this.containerRef = containerRef;
-        this.patchPopoverContent(this.content);
+        this.patchPopover(this.content, this.context);
         /*
          * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
          * and haven't got calculated size.
@@ -256,10 +264,11 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   }
 
   /*
-   * Set container content.
+   * Set container content and context.
    * */
-  private patchPopoverContent(content: NbPopoverContent) {
+  private patchPopover(content: NbPopoverContent, context: Object) {
     this.container.content = content;
+    this.container.context = context;
   }
 
   /*
