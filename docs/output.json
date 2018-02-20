@@ -379,7 +379,7 @@
           "platform": null,
           "name": "getToken",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Retrieves current authenticated token stored"
@@ -393,7 +393,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token\n// TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns true if auth token is presented in the token storage"
         },
         {
           "examples": [],
@@ -422,7 +422,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token\n // TODO: to implement previous todo lets use isValid method of token"
+          "shortDescription": "Returns authentication status stream"
         },
         {
           "examples": [],
@@ -430,10 +430,30 @@
           "platform": null,
           "name": "onTokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns tokens stream"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "result",
+              "type": "NbAuthResult",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "processResultToken",
+          "type": [
+            "Observable<NbAuthResult>"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         },
         {
           "examples": [],
@@ -510,11 +530,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAuthJWTToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -524,7 +564,7 @@
             "any"
           ],
           "isStatic": false,
-          "shortDescription": "TODO: check for this.token to be not null\nReturns payload object"
+          "shortDescription": "Returns payload object"
         },
         {
           "examples": [],
@@ -550,6 +590,39 @@
         },
         {
           "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "isValid",
+          "type": [
+            "boolean"
+          ],
+          "isStatic": false,
+          "shortDescription": "Is data expired"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
+        }
+      ],
+      "name": "NbAuthJWTToken",
+      "shortDescription": "Wrapper for JWT token with additional methods.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
           "params": [
             {
               "name": "token",
@@ -560,25 +633,14 @@
             }
           ],
           "platform": null,
-          "name": "setValue",
+          "name": "constructor",
           "type": [
-            "void"
+            "NbAuthSimpleToken"
           ],
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        }
-      ],
-      "name": "NbAuthJWTToken",
-      "shortDescription": "Wrapper for JWT token with additional methods.",
-      "styles": []
-    },
-    {
-      "kind": "service",
-      "platform": null,
-      "examples": [],
-      "props": [],
-      "methods": [
+        },
         {
           "examples": [],
           "params": [],
@@ -592,23 +654,25 @@
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "token",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "setValue",
+          "name": "isValid",
           "type": [
-            "void"
+            "boolean"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Is non empty and valid"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
         }
       ],
       "name": "NbAuthSimpleToken",
@@ -618,28 +682,105 @@
     {
       "kind": "service",
       "platform": null,
-      "examples": [
-        {
-          "shortDescription": "Injecting NbAuthJWTToken, so that NbTokenService will now return NbAuthJWTToken instead\nof the default NbAuthSimpleToken",
-          "description": "",
-          "code": "\n// import token and service into your AppModule\nimport { NB_AUTH_TOKEN_WRAPPER_TOKEN,  NbAuthJWTToken} from '@nebular/auth';\n\n// add to a list of providers\nproviders: [\n // ...\n { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },\n],\n"
-        }
-      ],
+      "examples": [],
       "props": [],
       "methods": [
         {
           "examples": [],
           "params": [
             {
-              "name": "options",
-              "type": "any",
+              "name": "tokenClass",
+              "type": "NbTokenClass",
               "required": null,
               "shortDescription": "",
               "description": ""
-            },
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbTokenLocalStorage"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clear",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Clears token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "get",
+          "type": [
+            "NbAuthToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
             {
-              "name": "tokenWrapper",
-              "type": "NbAuthSimpleToken",
+              "name": "token",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "set",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets token to localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setRaw",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets raw (string) token to localStorage"
+        }
+      ],
+      "name": "NbTokenLocalStorage",
+      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your `app.module`:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
+      "shortDescription": "Service that uses browser localStorage as a storage.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tokenStorage",
+              "type": "NbTokenStorage",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -660,10 +801,10 @@
           "platform": null,
           "name": "clear",
           "type": [
-            "Observable<any>"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Removes the token"
+          "shortDescription": "Removes the token and published token value"
         },
         {
           "examples": [],
@@ -671,26 +812,18 @@
           "platform": null,
           "name": "get",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns observable of current token"
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "key",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "getConfigValue",
+          "name": "publishStoredToken",
           "type": [
-            "any"
+            "void"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -701,27 +834,7 @@
           "params": [
             {
               "name": "token",
-              "type": "NbAuthSimpleToken",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "publishToken",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "rawToken",
-              "type": "string",
+              "type": "NbAuthToken",
               "required": null
             }
           ],
@@ -731,27 +844,24 @@
             "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Sets the token into the storage. This method is used by the NbAuthService automatically."
+          "shortDescription": "Sets a token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
           "params": [
             {
-              "name": "config",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
+              "name": "token",
+              "type": "string",
+              "required": null
             }
           ],
           "platform": null,
-          "name": "setConfig",
+          "name": "setRaw",
           "type": [
-            "void"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Sets a raw token into the storage. This method is used by the NbAuthService automatically."
         },
         {
           "examples": [],
@@ -759,14 +869,14 @@
           "platform": null,
           "name": "tokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Publishes token when it changes."
         }
       ],
       "name": "NbTokenService",
-      "shortDescription": "Nebular token service. Provides access to the stored token.\nBy default returns NbAuthSimpleToken instance,\nbut you can inject NbAuthJWTToken if you need additional methods for JWT token.",
+      "shortDescription": "Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.",
       "styles": []
     },
     {
