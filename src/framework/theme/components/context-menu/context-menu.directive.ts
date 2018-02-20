@@ -4,7 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
+  OnInit, PLATFORM_ID,
+} from '@angular/core';
 import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
@@ -76,11 +79,14 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   protected popover: NbPopoverDirective;
 
-  constructor(hostRef: ElementRef, themeService: NbThemeService) {
+  constructor(hostRef: ElementRef,
+              themeService: NbThemeService,
+              componentFactoryResolver: ComponentFactoryResolver,
+              @Inject(PLATFORM_ID) platformId) {
     /**
      * Initialize popover with all the important inputs.
      * */
-    this.popover = new NbPopoverDirective(hostRef, themeService);
+    this.popover = new NbPopoverDirective(hostRef, themeService, componentFactoryResolver, platformId);
     this.popover.content = NbContextMenuComponent;
     this.popover.placement = NbPopoverPlacement.BOTTOM;
   }
