@@ -385,6 +385,17 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'Radio',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbRadioComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Badge',
         children: [
           {

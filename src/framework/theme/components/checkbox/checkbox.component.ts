@@ -78,17 +78,26 @@ export class NbCheckboxComponent extends _NbCheckboxMixinBase implements Control
 
   private _uniqueId: string = `nb-checkbox-${++nextUniqueId}`;
 
-  @Input() value: boolean = false;
-
+  /**
+   * Element status. Adds specific styles:
+   * success, warning, danger. Either leave it empty
+   * @constructor
+   */
   @Input() status: Status = Status.EMPTY;
 
-  /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+  /**
+   * A unique id for the radio input. If none is supplied, it will be auto-generated
+   * @type {string}
+   */
   @Input() id: string = this._uniqueId;
 
+  /** @type {boolean} */
   @Input() disabled: boolean = false;
 
+  /** @type {boolean} */
   @Input() required: boolean = false;
 
+  /** @type {boolean} */
   @Input() checked: boolean = false;
 
 }
