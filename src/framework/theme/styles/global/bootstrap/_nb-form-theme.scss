@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-b-checkbox-theme() {
+@mixin nb-b-form-theme() {
 
   @mixin checkmark($size, $color, $wight, $opacity) {
     ~ .custom-control-label::after {
@@ -19,6 +19,21 @@
       border-width: 0 $wight $wight 0;
       transform: rotate(45deg);
       opacity: $opacity;
+    }
+  }
+
+  @mixin radio($size, $color, $opacity) {
+    ~ .custom-control-label::after {
+      content: '';
+      position: absolute;
+      background-color: $color;
+      height: calc(#{$size} * 0.5);
+      width: calc(#{$size} * 0.5);
+      border: solid $color 0.35rem;
+      border-radius: 50%;
+      opacity: $opacity;
+      top: calc(#{$size} * 0.5);
+      left: calc(#{$size} * 0.21);
     }
   }
 
@@ -45,7 +60,7 @@
     }
   }
 
-  .custom-control-input {
+  input.custom-control-input[type='checkbox'] {
     position: absolute;
     z-index: -1;
     opacity: 0;
@@ -98,6 +113,60 @@
           nb-theme(checkbox-disabled-size),
           nb-theme(checkbox-disabled-checkmark),
           nb-theme(checkbox-disabled-border-size),
+          0.5
+      );
+    }
+  }
+
+  input.custom-control-input[type='radio'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:active ~ .custom-control-label::before {
+      background-color: transparent !important;
+    }
+
+    &:focus ~ .custom-control-label::before {
+      box-shadow: none !important;
+    }
+
+    & {
+      @include label(nb-theme(checkbox-border-color), 1);
+      @include radio(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checkmark),
+          1
+      );
+    }
+
+    &:checked {
+      @include label(nb-theme(checkbox-checked-border-color), 1);
+      @include radio(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checked-checkmark),
+          1
+      );
+    }
+
+    &:hover {
+      @include label(lighten(nb-theme(checkbox-checked-border-color), 10%), 1);
+    }
+
+    &:disabled {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include radio(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-checkmark),
+          0.5
+      );
+    }
+
+    &:disabled:checked {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include radio(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-disabled-checkmark),
           0.5
       );
     }
