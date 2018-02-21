@@ -23,6 +23,7 @@ import {
   NbThemeModule,
   NbUserModule,
   NbPopoverModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
 
 import {
@@ -69,6 +70,7 @@ import { NbDynamicToAddComponent, NbThemeDynamicTestComponent } from './layout-t
 import { NbActionsTestComponent } from './actions-test/actions-test.component';
 import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
 import { NbPopoverTestComponent } from './popover-test/popover-test.component';
+import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
 
 import { routes } from './app.routes';
 
@@ -122,6 +124,7 @@ const NB_TEST_COMPONENTS = [
   NbCheckboxTestComponent,
   NbRadioTestComponent,
   NbAclTestComponent,
+  NbContextMenuTestComponent,
 ];
 
 @NgModule({
@@ -141,6 +144,7 @@ const NB_TEST_COMPONENTS = [
     NbSearchModule,
     NbActionsModule,
     NbPopoverModule,
+    NbContextMenuModule,
     NbCheckboxModule,
     NbRadioModule,
     NbAuthModule.forRoot({

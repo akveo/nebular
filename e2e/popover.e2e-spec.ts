@@ -1,8 +1,9 @@
 import { browser, by, element } from 'protractor';
 
 const contentTemplate = by.css('nb-card:nth-child(1) button:nth-child(1)');
-const contentComponent = by.css('nb-card:nth-child(1) button:nth-child(2)');
-const contentString = by.css('nb-card:nth-child(1) button:nth-child(3)');
+const contentComponentWithContext = by.css('nb-card:nth-child(1) button:nth-child(2)');
+const contentTemplateWithContext = by.css('nb-card:nth-child(1) button:nth-child(3)');
+const contentString = by.css('nb-card:nth-child(1) button:nth-child(4)');
 const placementRight = by.css('nb-card:nth-child(2) button:nth-child(1)');
 const placementBottom = by.css('nb-card:nth-child(2) button:nth-child(2)');
 const placementTop = by.css('nb-card:nth-child(2) button:nth-child(3)');
@@ -25,7 +26,7 @@ describe('nb-popover', () => {
   });
 
   it('render component ref', () => {
-    element(contentComponent).click();
+    element(contentComponentWithContext).click();
     const containerContent = element(popover).element(by.css('nb-dynamic-to-add'));
     expect(containerContent.isPresent()).toBeTruthy();
   });
@@ -150,5 +151,17 @@ describe('nb-popover', () => {
 
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
+  });
+
+  it('have to render component with context', () => {
+    element(contentComponentWithContext).click();
+    const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
+    expect(text).toEqual('hello from dynamically inserted component: Example context');
+  });
+
+  it('have to render template with context', () => {
+    element(contentTemplateWithContext).click();
+    const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
+    expect(text).toEqual('hello from dynamically inserted component: Example context');
   });
 });

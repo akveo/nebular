@@ -6,8 +6,9 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit,
+  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
 } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -255,7 +256,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input()
   set windowMode(val: boolean) {
     this.windowModeValue = convertToBoolProperty(val);
-    this.withScroll = true;
+    this.withScroll = this.windowModeValue;
   }
 
   /**
@@ -269,7 +270,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
     // TODO: is this the best way of doing it? as we don't have access to body from theme styles
     // TODO: add e2e test
-    const body = document.getElementsByTagName('body')[0];
+    const body = this.document.getElementsByTagName('body')[0];
     if (this.withScrollValue) {
       this.renderer.setStyle(body, 'overflow', 'hidden');
     } else {
@@ -291,6 +292,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected router: Router,
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    @Inject(DOCUMENT) protected document: any,
   ) {
 
     this.themeService.onThemeChange()
@@ -298,7 +301,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         takeWhile(() => this.alive),
       )
       .subscribe((theme: any) => {
-        const body = document.getElementsByTagName('body')[0];
+        const body = this.document.getElementsByTagName('body')[0];
         if (theme.previous) {
           this.renderer.removeClass(body, `nb-theme-${theme.previous}`);
         }
@@ -331,7 +334,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.spinnerService.load();
 
     // trigger first time so that after the change we have the initial value
-    this.themeService.changeWindowWidth(window.innerWidth);
+    if (isPlatformBrowser(this.platformId)) {
+      this.themeService.changeWindowWidth(window.innerWidth);
+    }
   }
 
   ngAfterViewInit() {
@@ -339,9 +344,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
       )
-      .subscribe((data: { component: any, listener: Subject<any> }) => {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.component);
-        const componentRef = this.veryTopRef.createComponent(componentFactory);
+      .subscribe((data: { factory: ComponentFactory<any>, listener: Subject<any> }) => {
+        const componentRef = this.veryTopRef.createComponent(data.factory);
         data.listener.next(componentRef);
         data.listener.complete();
       });

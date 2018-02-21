@@ -2064,6 +2064,20 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "Object",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "document",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
@@ -3167,6 +3181,13 @@
             {
               "name": "themeService",
               "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "any",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -4642,37 +4663,10 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "NbUserMenuItem[]",
-          "required": null,
-          "name": "menu",
-          "shortDescription": "List of menu items for a user context menu (shown when clicked)"
-        },
-        {
-          "kind": "output",
-          "platform": null,
-          "isStatic": false,
-          "type": "EventEmitter<NbUserMenuItem>",
-          "required": null,
-          "name": "menuClick",
-          "shortDescription": "Outputs when a context menu item is clicked"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
           "type": "string",
           "required": null,
           "name": "name",
           "shortDescription": "Specifies a name to be shown on the right of a user picture"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "picture",
-          "shortDescription": "Absolute path to a user picture\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -4700,6 +4694,15 @@
           "required": null,
           "name": "onlyPicture",
           "shortDescription": "Whether to show only a picture or also show the name and title"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "picture",
+          "shortDescription": "Absolute path to a user picture. Or base64 image\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -4743,8 +4746,8 @@
           "examples": [],
           "params": [
             {
-              "name": "el",
-              "type": "ElementRef",
+              "name": "domSanitizer",
+              "type": "DomSanitizer",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -4770,80 +4773,10 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "hasMenu",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "hideMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
-              "name": "item",
-              "type": "NbUserMenuItem",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "itemClick",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "toggleMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "Toggles a context menu"
         }
       ],
       "name": "NbUserComponent",
-      "description": "Can be used as a user profile link or can bring a user context menu.\n",
+      "description": "Can be used as a user profile link.\n",
       "shortDescription": "Represents a component showing a user avatar (picture) with a user name on the right.",
       "styles": [
         {
@@ -4888,86 +4821,10 @@
             {
               "name": "user-size-xlarge",
               "description": ""
-            },
-            {
-              "name": "user-menu-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-border",
-              "description": ""
             }
           ]
         }
       ]
-    },
-    {
-      "kind": "class",
-      "platform": null,
-      "examples": [],
-      "props": [
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "icon",
-          "shortDescription": "Icon class"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "link",
-          "shortDescription": "Menu link for [routerLink] directive"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "target",
-          "shortDescription": "Link target (_blank, _self, etc)"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "title",
-          "shortDescription": "Menu title"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "url",
-          "shortDescription": "URL for absolute urls, used directly in href"
-        }
-      ],
-      "methods": [],
-      "name": "NbUserMenuItem",
-      "shortDescription": "Action dropdown menu",
-      "styles": []
     },
     {
       "kind": "service",
@@ -5247,11 +5104,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "document",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbSpinnerService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -6114,10 +5991,6 @@
             },
             {
               "theme": "default",
-              "prop": "user-menu-bg"
-            },
-            {
-              "theme": "default",
               "prop": "popover-bg"
             },
             {
@@ -6279,10 +6152,6 @@
             {
               "theme": "default",
               "prop": "route-tabs-fg-heading"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-fg"
             },
             {
               "theme": "default",
@@ -6518,14 +6387,6 @@
             {
               "theme": "default",
               "prop": "route-tabs-selected"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-active-bg"
-            },
-            {
-              "theme": "default",
-              "prop": "user-menu-border"
             },
             {
               "theme": "default",
@@ -8451,61 +8312,6 @@
               "prop": "user-size-xlarge"
             }
           ]
-        },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
-          "value": "#2a2a2a",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-active-fg"
-            }
-          ]
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#40dc7e",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "color-success"
-            }
-          ],
-          "childs": []
         },
         "popover-fg": {
           "name": "popover-fg",
@@ -10732,10 +10538,6 @@
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-bg"
-            },
-            {
-              "theme": "cosmic",
               "prop": "popover-bg"
             },
             {
@@ -10890,10 +10692,6 @@
             {
               "theme": "cosmic",
               "prop": "route-tabs-fg-heading"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-fg"
             },
             {
               "theme": "cosmic",
@@ -11113,14 +10911,6 @@
             {
               "theme": "cosmic",
               "prop": "card-header-primary-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-active-bg"
-            },
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-border"
             },
             {
               "theme": "cosmic",
@@ -13261,61 +13051,6 @@
             {
               "theme": "default",
               "prop": "user-size-xlarge"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-fg-heading"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
-          "value": "#3d3780",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-bg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-menu-active-fg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
-          "value": "#7659ff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-primary"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-border": {
-          "name": "user-menu-border",
-          "value": "#7659ff",
-          "parents": [
-            {
-              "theme": "cosmic",
-              "prop": "color-primary"
             }
           ],
           "childs": []
