@@ -16,7 +16,6 @@
 @import './forms';
 @import './input-group';
 @import './modals';
-@import 'nb-form-theme';
 
 @mixin nb-bootstrap-theme() {
   @include nb-b-buttons-theme();
@@ -26,5 +25,4 @@
   @include nb-b-forms-theme();
   @include nb-b-input-group-theme();
   @include nb-b-modals-theme();
-  @include nb-b-form-theme();
 }

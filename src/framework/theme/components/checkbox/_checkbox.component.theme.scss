@@ -35,7 +35,6 @@
 
   @mixin description-style {
     color: nb-theme(color-fg-heading);
-    opacity: 0.5;
     padding-left: 0.25rem;
   }
 
@@ -46,7 +45,6 @@
       margin: 0;
       min-height: inherit;
       padding: 0.375rem 1.5rem;
-      line-height: 0;
     }
 
     .customised-control-indicator {
@@ -118,6 +116,7 @@
         }
 
         .customised-control-description {
+          opacity: 0.5;
           @include description-style;
         }
       }
@@ -142,6 +141,7 @@
         }
 
         .customised-control-description {
+          opacity: 0.5;
           @include description-style;
         }
       }
