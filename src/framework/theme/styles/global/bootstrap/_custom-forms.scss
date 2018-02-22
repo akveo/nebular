@@ -17,14 +17,20 @@
     margin: 0;
     min-height: inherit;
     padding: 0.375rem 1.5rem;
+    display: flex;
+    align-items: center;
 
     .custom-control-indicator {
       background-color: nb-theme(checkbox-bg);
       width: nb-theme(checkbox-size);
       height: nb-theme(checkbox-size);
       border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);
-      top: 50%;
-      transform: translateY(-50%);
+      flex-shrink: 0;
+      position: absolute;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &.custom-checkbox > .custom-control-input:checked ~ .custom-control-indicator::before {
@@ -36,6 +42,16 @@
       transform: rotate(45deg);
     }
 
+    .custom-control-label {
+      &::before {
+        top: auto;
+      }
+
+      &::after {
+        top: 0.35rem;
+      }
+    }
+
     &.custom-radio > .custom-control-input:checked ~ .custom-control-indicator::before {
       content: '';
       width: 0.75rem;
@@ -43,8 +59,6 @@
       background-color: nb-theme(radio-fg);
       border-radius: 50%;
       position: absolute;
-      top: 15%;
-      left: 2px;
     }
 
     .custom-control-input {
