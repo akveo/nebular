@@ -53,6 +53,7 @@ import {
 import { AuthGuard } from './auth-guard.service';
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
+import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
 
 export const routes: Routes = [
   {
@@ -257,6 +258,10 @@ export const routes: Routes = [
   {
     path: 'acl',
     component: NbAclTestComponent,
+  },
+  {
+    path: 'context-menu',
+    component: NbContextMenuTestComponent,
   },
   {
     path: '**',
