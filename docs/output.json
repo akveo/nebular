@@ -1952,6 +1952,219 @@
     {
       "kind": "component",
       "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbContextMenuComponent",
+      "shortDescription": "Context menu component used as content within NbContextMenuDirective.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "context-menu-fg",
+              "description": ""
+            },
+            {
+              "name": "context-menu-active-fg",
+              "description": ""
+            },
+            {
+              "name": "context-menu-active-bg",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "directive",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Juts pass basic menu items:",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        },
+        {
+          "shortDescription": "Context menu has different placements, such as: top, bottom, left and right\nwhich can be used as following:",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\" nbContextMenuPlacement=\"right\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        },
+        {
+          "shortDescription": "By default context menu will try to adjust itself to maximally fit viewport\nand provide the best user experience. It will try to change placement of the context menu.\nIf you wanna disable this behaviour just set it falsy value.",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\" nbContextMenuAdjustment=\"counterclockwise\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverAdjustment",
+          "required": null,
+          "name": "nbContextMenuAdjustment",
+          "shortDescription": "Container placement will be changes automatically based on this strategy if container can't fit view port.\nSet this property to any falsy value if you want to disable automatically adjustment.\nAvailable values: clockwise, counterclockwise."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "required": null,
+          "name": "nbContextMenu",
+          "shortDescription": "Basic menu items, will be passed to the internal NbMenuComponent."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "nbContextMenuPlacement",
+          "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "hostRef",
+              "type": "ElementRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbContextMenuDirective"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Hide context menu."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onResize",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Show context menu."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggle",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Toggle context menu state."
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "items",
+              "type": "NbMenuItem[]",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateItems",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbContextMenuDirective",
+      "description": "![image](assets/images/components/context-menu.gif)\n",
+      "shortDescription": "Full featured context menu directive.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
       "examples": [
         {
           "shortDescription": "",
@@ -3021,10 +3234,28 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
+          "type": "Object",
+          "required": null,
+          "name": "context",
+          "shortDescription": "Context which will be passed to rendered component instance."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
           "type": "NbPopoverPlacement",
           "required": null,
           "name": "placement",
           "shortDescription": "Popover placement relatively host element."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "any",
+          "required": null,
+          "name": "componentOutlet",
+          "shortDescription": "If content type is TemplateRef we're passing context as template outlet param.\nBut if we have custom component content we're just assigning passed context to the component instance."
         },
         {
           "kind": "property",
@@ -3054,7 +3285,28 @@
           "shortDescription": "Check that content is a TemplateRef."
         }
       ],
-      "methods": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "changeDetectorRef",
+              "type": "ChangeDetectorRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbPopoverComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
       "name": "NbPopoverComponent",
       "shortDescription": "Popover container.\nRenders provided content inside.",
       "styles": [
@@ -3134,6 +3386,15 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
+          "type": "Object",
+          "required": null,
+          "name": "nbPopoverContext",
+          "shortDescription": "Container content context. Will be applied to the rendered component."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
           "type": "NbPopoverMode",
           "required": null,
           "name": "nbPopoverMode",
@@ -3181,6 +3442,13 @@
             {
               "name": "themeService",
               "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -3351,10 +3619,17 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "context",
+              "type": "Object",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
-          "name": "patchPopoverContent",
+          "name": "patchPopover",
           "type": [
             "void"
           ],
@@ -5259,6 +5534,13 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
@@ -5294,8 +5576,8 @@
           "examples": [],
           "params": [
             {
-              "name": "component",
-              "type": "Type",
+              "name": "entity",
+              "type": "",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -6159,6 +6441,10 @@
             },
             {
               "theme": "default",
+              "prop": "context-menu-fg"
+            },
+            {
+              "theme": "default",
               "prop": "search-text"
             },
             {
@@ -6313,6 +6599,10 @@
           "childs": [
             {
               "theme": "default",
+              "prop": "context-menu-active-fg"
+            },
+            {
+              "theme": "default",
               "prop": "toaster-fg"
             },
             {
@@ -6391,6 +6681,10 @@
             {
               "theme": "default",
               "prop": "popover-border"
+            },
+            {
+              "theme": "default",
+              "prop": "context-menu-active-bg"
             },
             {
               "theme": "default",
@@ -8350,6 +8644,39 @@
           "name": "popover-shadow",
           "value": "none",
           "parents": [],
+          "childs": []
+        },
+        "context-menu-fg": {
+          "name": "context-menu-fg",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-fg": {
+          "name": "context-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-bg": {
+          "name": "context-menu-active-bg",
+          "value": "#40dc7e",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-success"
+            }
+          ],
           "childs": []
         },
         "actions-font-size": {
@@ -10699,6 +11026,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "context-menu-fg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "search-text"
             },
             {
@@ -10875,6 +11206,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "context-menu-active-fg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "toaster-fg"
             },
             {
@@ -10915,6 +11250,10 @@
             {
               "theme": "cosmic",
               "prop": "popover-border"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "context-menu-active-bg"
             },
             {
               "theme": "cosmic",
@@ -13101,6 +13440,43 @@
             {
               "theme": "cosmic",
               "prop": "shadow"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-fg": {
+          "name": "context-menu-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-fg": {
+          "name": "context-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-white"
+            },
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-bg": {
+          "name": "context-menu-active-bg",
+          "value": "#7659ff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-primary"
             }
           ],
           "childs": []
