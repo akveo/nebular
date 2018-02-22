@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.component';
 
 @Component({
   selector: 'nb-popover-test',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-layout>
       <nb-layout-column>

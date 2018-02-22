@@ -240,6 +240,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
          * which will call {@link NbThemeService#appendToLayoutTop} and 'do' detectChanges,
          * instead of performing this call by service client.
          * */
+        this.containerRef.changeDetectorRef.markForCheck();
         this.containerRef.changeDetectorRef.detectChanges();
         this.place();
       });
