@@ -33,6 +33,7 @@ import {
   NbRouteTabsetTestComponent,
 } from './route-tabset-test/route-tabset-test.component';
 import { NbSearchTestComponent } from './search-test/search-test.component';
+import { NbSearchTestCustomizedComponent } from './search-test/search-test-customized.component';
 import { NbSidebarTestOneComponent } from './sidebar-test/sidebar-test-one.component';
 import { NbSidebarTestThreeComponent } from './sidebar-test/sidebar-test-three.component';
 import { NbSidebarTestTwoComponent } from './sidebar-test/sidebar-test-two.component';
@@ -40,6 +41,7 @@ import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
 import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbCardTestComponent } from './card-test/card-test.component';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -49,6 +51,9 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
+import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
+import { NbAclTestComponent } from './acl-test/acl-test.component';
+import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
 
 export const routes: Routes = [
   {
@@ -227,6 +232,14 @@ export const routes: Routes = [
     component: NbSearchTestComponent,
   },
   {
+    path: 'search-2',
+    component: NbSearchTestCustomizedComponent,
+  },
+  {
+    path: 'checkbox',
+    component: NbCheckboxTestComponent,
+  },
+  {
     path: 'bootstrap',
     component: NbBootstrapTestComponent,
   },
@@ -237,6 +250,18 @@ export const routes: Routes = [
   {
     path: 'forms',
     component: NbFormsTestComponent,
+  },
+  {
+    path: 'popover',
+    component: NbPopoverTestComponent,
+  },
+  {
+    path: 'acl',
+    component: NbAclTestComponent,
+  },
+  {
+    path: 'context-menu',
+    component: NbContextMenuTestComponent,
   },
   {
     path: '**',

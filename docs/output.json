@@ -264,6 +264,26 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "module",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateToken",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         }
       ],
       "name": "NbEmailPassAuthProvider",
@@ -359,7 +379,7 @@
           "platform": null,
           "name": "getToken",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Retrieves current authenticated token stored"
@@ -370,10 +390,10 @@
           "platform": null,
           "name": "isAuthenticated",
           "type": [
-            "Observable<any>"
+            "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns true if auth token is presented in the token storage\n// TODO: check exp date for JWT token"
+          "shortDescription": "Returns true if auth token is presented in the token storage"
         },
         {
           "examples": [],
@@ -402,7 +422,7 @@
             "Observable<boolean>"
           ],
           "isStatic": false,
-          "shortDescription": "Returns authentication status stream\n // TODO: check exp date for JWT token"
+          "shortDescription": "Returns authentication status stream"
         },
         {
           "examples": [],
@@ -410,10 +430,30 @@
           "platform": null,
           "name": "onTokenChange",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns tokens stream"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "result",
+              "type": "NbAuthResult",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "processResultToken",
+          "type": [
+            "Observable<NbAuthResult>"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
         },
         {
           "examples": [],
@@ -490,11 +530,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAuthJWTToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -504,7 +564,7 @@
             "any"
           ],
           "isStatic": false,
-          "shortDescription": "TODO: check for this.token to be not null\nReturns payload object"
+          "shortDescription": "Returns payload object"
         },
         {
           "examples": [],
@@ -530,6 +590,39 @@
         },
         {
           "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "isValid",
+          "type": [
+            "boolean"
+          ],
+          "isStatic": false,
+          "shortDescription": "Is data expired"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
+        }
+      ],
+      "name": "NbAuthJWTToken",
+      "shortDescription": "Wrapper for JWT token with additional methods.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
           "params": [
             {
               "name": "token",
@@ -540,25 +633,14 @@
             }
           ],
           "platform": null,
-          "name": "setValue",
+          "name": "constructor",
           "type": [
-            "void"
+            "NbAuthSimpleToken"
           ],
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        }
-      ],
-      "name": "NbAuthJWTToken",
-      "shortDescription": "Wrapper for JWT token with additional methods.",
-      "styles": []
-    },
-    {
-      "kind": "service",
-      "platform": null,
-      "examples": [],
-      "props": [],
-      "methods": [
+        },
         {
           "examples": [],
           "params": [],
@@ -572,23 +654,25 @@
         },
         {
           "examples": [],
-          "params": [
-            {
-              "name": "token",
-              "type": "string",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
+          "params": [],
           "platform": null,
-          "name": "setValue",
+          "name": "isValid",
           "type": [
-            "void"
+            "boolean"
           ],
           "isStatic": false,
-          "shortDescription": "",
-          "description": ""
+          "shortDescription": "Is non empty and valid"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toString",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "Validate value and convert to string, if value is not valid return empty string"
         }
       ],
       "name": "NbAuthSimpleToken",
@@ -598,28 +682,105 @@
     {
       "kind": "service",
       "platform": null,
-      "examples": [
-        {
-          "shortDescription": "Injecting NbAuthJWTToken, so that NbTokenService will now return NbAuthJWTToken instead\nof the default NbAuthSimpleToken",
-          "description": "",
-          "code": "\n// import token and service into your AppModule\nimport { NB_AUTH_TOKEN_WRAPPER_TOKEN,  NbAuthJWTToken} from '@nebular/auth';\n\n// add to a list of providers\nproviders: [\n // ...\n { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useClass: NbAuthJWTToken },\n],\n"
-        }
-      ],
+      "examples": [],
       "props": [],
       "methods": [
         {
           "examples": [],
           "params": [
             {
-              "name": "options",
-              "type": "any",
+              "name": "tokenClass",
+              "type": "NbTokenClass",
               "required": null,
               "shortDescription": "",
               "description": ""
-            },
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbTokenLocalStorage"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "clear",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Clears token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "get",
+          "type": [
+            "NbAuthToken"
+          ],
+          "isStatic": false,
+          "shortDescription": "Returns token from localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
             {
-              "name": "tokenWrapper",
-              "type": "NbAuthSimpleToken",
+              "name": "token",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "set",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets token to localStorage"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setRaw",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets raw (string) token to localStorage"
+        }
+      ],
+      "name": "NbTokenLocalStorage",
+      "description": "The token storage is provided into auth module the following way:\n```\n{ provide: NbTokenStorage, useClass: NbTokenLocalStorage },\n```\n\nIf you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`\nor `NbTokenLocalStorage` and provide in your `app.module`:\n```\n{ provide: NbTokenStorage, useClass: NbTokenCustomStorage },\n```\n\n",
+      "shortDescription": "Service that uses browser localStorage as a storage.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "tokenStorage",
+              "type": "NbTokenStorage",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -640,10 +801,10 @@
           "platform": null,
           "name": "clear",
           "type": [
-            "Observable<any>"
+            "Observable<null>"
           ],
           "isStatic": false,
-          "shortDescription": "Removes the token"
+          "shortDescription": "Removes the token and published token value"
         },
         {
           "examples": [],
@@ -651,16 +812,234 @@
           "platform": null,
           "name": "get",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "Observable<NbAuthToken>"
           ],
           "isStatic": false,
           "shortDescription": "Returns observable of current token"
         },
         {
           "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "publishStoredToken",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
           "params": [
             {
-              "name": "key",
+              "name": "token",
+              "type": "NbAuthToken",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "set",
+          "type": [
+            "Observable<null>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets a token into the storage. This method is used by the NbAuthService automatically."
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "token",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "setRaw",
+          "type": [
+            "Observable<null>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Sets a raw token into the storage. This method is used by the NbAuthService automatically."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "tokenChange",
+          "type": [
+            "Observable<NbAuthToken>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Publishes token when it changes."
+        }
+      ],
+      "name": "NbTokenService",
+      "shortDescription": "Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "roleProvider",
+              "type": "NbRoleProvider",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "acl",
+              "type": "NbAclService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAccessChecker"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "isGranted",
+          "type": [
+            "Observable<boolean>"
+          ],
+          "isStatic": false,
+          "shortDescription": "Checks whether access is granted or not"
+        }
+      ],
+      "name": "NbAccessChecker",
+      "description": "Injects `NbRoleProvider` to determine current user role, and checks access permissions using `NbAclService`\n",
+      "shortDescription": "Access checker service.",
+      "styles": []
+    },
+    {
+      "kind": "service",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "settings",
+              "type": "NbAclOptions",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbAclService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "allow",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Allow a permission for specific resources to a role"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "resource",
+              "type": "string",
+              "required": null
+            }
+          ],
+          "platform": null,
+          "name": "can",
+          "type": [
+            "any"
+          ],
+          "isStatic": false,
+          "shortDescription": "Check whether the role has a permission to a resource"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "resource",
               "type": "string",
               "required": null,
               "shortDescription": "",
@@ -668,7 +1047,7 @@
             }
           ],
           "platform": null,
-          "name": "getConfigValue",
+          "name": "exactCan",
           "type": [
             "any"
           ],
@@ -680,17 +1059,17 @@
           "examples": [],
           "params": [
             {
-              "name": "token",
-              "type": "NbAuthSimpleToken",
+              "name": "role",
+              "type": "string",
               "required": null,
               "shortDescription": "",
               "description": ""
             }
           ],
           "platform": null,
-          "name": "publishToken",
+          "name": "getRole",
           "type": [
-            "void"
+            "NbAclRole"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -700,32 +1079,128 @@
           "examples": [],
           "params": [
             {
-              "name": "rawToken",
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleAbilities",
+          "type": [
+            "{}"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleParent",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "permission",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "getRoleResources",
+          "type": [
+            "string[]"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "role",
               "type": "string",
               "required": null
+            },
+            {
+              "name": "parent",
+              "type": "string",
+              "required": null
+            },
+            {
+              "name": "abilities",
+              "type": "",
+              "required": null,
+              "description": "\n"
             }
           ],
           "platform": null,
-          "name": "set",
+          "name": "register",
           "type": [
-            "Observable<null>"
+            "void"
           ],
           "isStatic": false,
-          "shortDescription": "Sets the token into the storage. This method is used by the NbAuthService automatically."
+          "shortDescription": "Register a new role with a list of abilities (permission/resources combinations)"
         },
         {
           "examples": [],
           "params": [
             {
-              "name": "config",
-              "type": "any",
+              "name": "list",
+              "type": "\n",
+              "required": null,
+              "description": "\n"
+            }
+          ],
+          "platform": null,
+          "name": "setAccessControl",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Set/Reset ACL list"
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "resource",
+              "type": "string",
               "required": null,
               "shortDescription": "",
               "description": ""
             }
           ],
           "platform": null,
-          "name": "setConfig",
+          "name": "validateResource",
           "type": [
             "void"
           ],
@@ -735,18 +1210,27 @@
         },
         {
           "examples": [],
-          "params": [],
+          "params": [
+            {
+              "name": "role",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
           "platform": null,
-          "name": "tokenChange",
+          "name": "validateRole",
           "type": [
-            "Observable<NbAuthSimpleToken>"
+            "void"
           ],
           "isStatic": false,
-          "shortDescription": "Publishes token when it changes."
+          "shortDescription": "",
+          "description": ""
         }
       ],
-      "name": "NbTokenService",
-      "shortDescription": "Nebular token service. Provides access to the stored token.\nBy default returns NbAuthSimpleToken instance,\nbut you can inject NbAuthJWTToken if you need additional methods for JWT token.",
+      "name": "NbAclService",
+      "shortDescription": "Common acl service.",
       "styles": []
     },
     {
@@ -985,12 +1469,21 @@
       "platform": null,
       "examples": [
         {
-          "shortDescription": "",
+          "shortDescription": "While this component can be used alone, it also provides a number\nof child components for common card sections:",
           "description": "",
           "code": "\n<nb-card-header></nb-card-header>\n<nb-card-body></nb-card-body>\n<nb-card-footer></nb-card-footer>\n"
         }
       ],
       "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "accent",
+          "shortDescription": "Card accent (color of the top border):\nactive, disabled, primary, info, success, warning, danger"
+        },
         {
           "kind": "input",
           "platform": null,
@@ -1168,6 +1661,108 @@
       "platform": null,
       "examples": [
         {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n<nb-flip-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-flip-card>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "flipped",
+          "shortDescription": "Flip state"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggleFlip",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbFlipCardComponent",
+      "description": "![image](assets/images/components/flip-card.gif)\n",
+      "shortDescription": "Flip card component.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "\n<nb-reveal-card>\n  <nb-card-front>\n    <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>\n  </nb-card-front>\n  <nb-card-back>\n    <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>\n  </nb-card-back>\n</nb-reveal-card>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "revealed",
+          "shortDescription": "Reveal state"
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggleReveal",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbRevealCardComponent",
+      "description": "![image](assets/images/components/reveal-card.gif)\n",
+      "shortDescription": "Reveal card component.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbCardBackComponent",
+      "description": "Use it as a container for the back card.\n",
+      "shortDescription": "Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbCardFrontComponent",
+      "description": "Use it as a container for the front card.\n",
+      "shortDescription": "Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
           "shortDescription": "Basic example",
           "description": "",
           "code": "\n <nb-checkbox [(ngModel)]=\"enabled\">Enabled?</nb-checkbox>\n"
@@ -1307,20 +1902,265 @@
               "description": ""
             },
             {
-              "name": "checkbox-selected-border-color",
+              "name": "checkbox-checkmark",
               "description": ""
             },
             {
-              "name": "checkbox-fg",
+              "name": "checkbox-checked-bg",
               "description": ""
             },
             {
-              "name": "radio-fg",
+              "name": "checkbox-checked-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-border-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-checked-checkmark",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-bg",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-border-size",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-border-color",
+              "description": ""
+            },
+            {
+              "name": "checkbox-disabled-checkmark",
               "description": ""
             }
           ]
         }
       ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbContextMenuComponent",
+      "shortDescription": "Context menu component used as content within NbContextMenuDirective.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "context-menu-fg",
+              "description": ""
+            },
+            {
+              "name": "context-menu-active-fg",
+              "description": ""
+            },
+            {
+              "name": "context-menu-active-bg",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "directive",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Juts pass basic menu items:",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        },
+        {
+          "shortDescription": "Context menu has different placements, such as: top, bottom, left and right\nwhich can be used as following:",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\" nbContextMenuPlacement=\"right\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        },
+        {
+          "shortDescription": "By default context menu will try to adjust itself to maximally fit viewport\nand provide the best user experience. It will try to change placement of the context menu.\nIf you wanna disable this behaviour just set it falsy value.",
+          "description": "",
+          "code": "\n<button [nbContextMenu]=\"items\" nbContextMenuAdjustment=\"counterclockwise\"></button>\n...\nitems = [{ title: 'Profile' }, { title: 'Log out' }];\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverAdjustment",
+          "required": null,
+          "name": "nbContextMenuAdjustment",
+          "shortDescription": "Container placement will be changes automatically based on this strategy if container can't fit view port.\nSet this property to any falsy value if you want to disable automatically adjustment.\nAvailable values: clockwise, counterclockwise."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "required": null,
+          "name": "nbContextMenu",
+          "shortDescription": "Basic menu items, will be passed to the internal NbMenuComponent."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "nbContextMenuPlacement",
+          "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "hostRef",
+              "type": "ElementRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbContextMenuDirective"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Hide context menu."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onResize",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Show context menu."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggle",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Toggle context menu state."
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "items",
+              "type": "NbMenuItem[]",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "validateItems",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbContextMenuDirective",
+      "description": "![image](assets/images/components/context-menu.gif)\n",
+      "shortDescription": "Full featured context menu directive.",
+      "styles": []
     },
     {
       "kind": "component",
@@ -1434,6 +2274,20 @@
             {
               "name": "router",
               "type": "Router",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "Object",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "document",
+              "type": "any",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -1838,6 +2692,18 @@
           "examples": [],
           "params": [],
           "platform": null,
+          "name": "ngAfterViewInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
           "name": "ngOnDestroy",
           "type": [
             "void"
@@ -1851,6 +2717,26 @@
           "params": [],
           "platform": null,
           "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "data",
+              "type": "",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "onAddItem",
           "type": [
             "void"
           ],
@@ -2085,6 +2971,7 @@
           "isStatic": false,
           "type": "NbMenuItem[]",
           "required": null,
+          "name": "children",
           "shortDescription": "Children items"
         },
         {
@@ -2093,6 +2980,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "expanded",
           "shortDescription": "Expanded by defaul"
         },
         {
@@ -2101,6 +2989,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "group",
           "shortDescription": "Whether the item is just a group (non-clickable)"
         },
         {
@@ -2109,6 +2998,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "hidden",
           "shortDescription": "Hidden Item"
         },
         {
@@ -2117,6 +3007,7 @@
           "isStatic": false,
           "type": "boolean",
           "required": null,
+          "name": "home",
           "shortDescription": "Where this is a home item"
         },
         {
@@ -2125,6 +3016,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "icon",
           "shortDescription": "Icon class name"
         },
         {
@@ -2133,6 +3025,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "link",
           "shortDescription": "Item relative link (for routerLink)"
         },
         {
@@ -2141,7 +3034,17 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "pathMatch",
           "shortDescription": "Item is selected when partly or fully equal to the current url"
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "number",
+          "required": null,
+          "name": "subMenuHeight",
+          "shortDescription": "Children items height"
         },
         {
           "kind": "property",
@@ -2149,6 +3052,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "target",
           "shortDescription": "HTML Link target"
         },
         {
@@ -2157,6 +3061,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "title",
           "shortDescription": "Item Title"
         },
         {
@@ -2165,6 +3070,7 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "url",
           "shortDescription": "Item URL (absolute)"
         }
       ],
@@ -2288,6 +3194,578 @@
       ],
       "name": "NbMenuService",
       "shortDescription": "Menu Service. Allows you to listen to menu events, or to interact with a menu.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverPosition",
+      "shortDescription": "Describes placement of the UI element on the screen.",
+      "styles": []
+    },
+    {
+      "kind": "class",
+      "platform": null,
+      "examples": [],
+      "props": [],
+      "methods": [],
+      "name": "NbPopoverTrigger",
+      "shortDescription": "Popover uses different triggers for different {@link NbPopoverMode}.\nsee {@link NbTriggerHelper}",
+      "styles": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "content",
+          "shortDescription": "Content which will be rendered."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "Object",
+          "required": null,
+          "name": "context",
+          "shortDescription": "Context which will be passed to rendered component instance."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "placement",
+          "shortDescription": "Popover placement relatively host element."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "any",
+          "required": null,
+          "name": "componentOutlet",
+          "shortDescription": "If content type is TemplateRef we're passing context as template outlet param.\nBut if we have custom component content we're just assigning passed context to the component instance."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isComponent",
+          "shortDescription": "Check that content is an angular component."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isPrimitive",
+          "shortDescription": "Check that if content is not a TemplateRef or an angular component it means a primitive."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isTemplate",
+          "shortDescription": "Check that content is a TemplateRef."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "changeDetectorRef",
+              "type": "ChangeDetectorRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbPopoverComponent"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "name": "NbPopoverComponent",
+      "shortDescription": "Popover container.\nRenders provided content inside.",
+      "styles": [
+        {
+          "shortDescription": "",
+          "styles": [
+            {
+              "name": "popover-fg",
+              "description": ""
+            },
+            {
+              "name": "popover-bg",
+              "description": ""
+            },
+            {
+              "name": "popover-border",
+              "description": ""
+            },
+            {
+              "name": "popover-shadow",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "directive",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "Popover can accept different content such as:\nTemplateRef",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"templateRef\"></button>\n<ng-template #templateRef>\n  <span>Hello, Popover!</span>\n</ng-template>\n"
+        },
+        {
+          "shortDescription": "Custom components",
+          "description": "",
+          "code": "\n<button [nbPopover]=\"NbCardComponent\"></button>\n"
+        },
+        {
+          "shortDescription": "Primitive types",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\"></button>\n"
+        },
+        {
+          "shortDescription": "Popover has different placements, such as: top, bottom, left and right\nwhich can be used as following:",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" nbPopoverPlacement=\"left\"></button>\n"
+        },
+        {
+          "shortDescription": "By default popover will try to adjust itself to maximally fit viewport\nand provide the best user experience. It will try to change placement of the popover container.\nIf you wanna disable this behaviour just set it falsy value.",
+          "description": "",
+          "code": "\n<button nbPopover=\"Hello, Popover!\" [nbPopoverAdjust]=\"false\"></button>\n"
+        }
+      ],
+      "props": [
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverAdjustment",
+          "required": null,
+          "name": "nbPopoverAdjustment",
+          "shortDescription": "Container placement will be changes automatically based on this strategy if container can't fit view port.\nSet this property to any falsy value if you want to disable automatically adjustment.\nAvailable values: clockwise, counterclockwise."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverContent",
+          "required": null,
+          "name": "nbPopover",
+          "shortDescription": "Popover content which will be rendered in NbPopoverComponent.\nAvailable content: template ref, component and any primitive."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "Object",
+          "required": null,
+          "name": "nbPopoverContext",
+          "shortDescription": "Container content context. Will be applied to the rendered component."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverMode",
+          "required": null,
+          "name": "nbPopoverMode",
+          "shortDescription": "Describes when the container will be shown.\nAvailable options: click, hover and hint"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "NbPopoverPlacement",
+          "required": null,
+          "name": "nbPopoverPlacement",
+          "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isHidden",
+          "shortDescription": "Returns true if popover hidden."
+        },
+        {
+          "kind": "property",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isShown",
+          "shortDescription": "Returns true if popover already shown."
+        }
+      ],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "hostRef",
+              "type": "ElementRef",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "themeService",
+              "type": "NbThemeService",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "platformId",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbPopoverDirective"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "containerRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "hostRect",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "adjust",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "calcPosition",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "destroyPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Hide popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnDestroy",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "ngOnInit",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "onResize",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "content",
+              "type": "NbPopoverContent",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "context",
+              "type": "Object",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placement",
+              "type": "NbPopoverPlacement",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPlacement",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "__namedParameters",
+              "type": "",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "patchPopoverPosition",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "placed",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "host",
+              "type": "ClientRect",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "performAdjustment",
+          "type": [
+            "NbPopoverPosition"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "place",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "registerTriggers",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "renderPopover",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Show popover."
+        },
+        {
+          "examples": [],
+          "params": [],
+          "platform": null,
+          "name": "toggle",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "Toggle popover state."
+        }
+      ],
+      "name": "NbPopoverDirective",
+      "description": "![image](assets/images/components/popover.gif)\n",
+      "shortDescription": "Powerful popover directive, which provides the best UX for your users.",
       "styles": []
     },
     {
@@ -2436,6 +3914,15 @@
           "isStatic": false,
           "type": "string",
           "required": null,
+          "name": "hint",
+          "shortDescription": "Hint showing under the input field to improve user experience"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
           "name": "placeholder",
           "shortDescription": "Search input placeholder"
         },
@@ -2477,13 +3964,6 @@
               "description": ""
             },
             {
-              "name": "componentFactoryResolver",
-              "type": "ComponentFactoryResolver",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
               "name": "router",
               "type": "Router",
               "required": null,
@@ -2515,26 +3995,6 @@
           "name": "connectToSearchField",
           "type": [
             "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "component",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "createAttachedSearch",
-          "type": [
-            "Observable<any>"
           ],
           "isStatic": false,
           "shortDescription": "",
@@ -2798,8 +4258,8 @@
         },
         {
           "shortDescription": "Example of fixed sidebar located on the left side, initially collapsed.",
-          "description": "",
-          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n <nb-sidebar-content>\n   Menu or another component here\n </nb-sidebar-content>\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
+          "description": "   Sidebar content, menu or another component here.",
+          "code": "\n<nb-sidebar left fixed state=\"collapsed\">\n <nb-sidebar-header>Header</nb-sidebar-header>\n\n   Sidebar content, menu or another component here.\n\n <nb-sidebar-footer>\n   Footer components here\n </nb-sidebar-footer>\n</nb-sidebar>\n"
         }
       ],
       "props": [
@@ -3245,6 +4705,24 @@
           "required": null,
           "name": "badgeText",
           "shortDescription": "Badge text to display"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "active",
+          "shortDescription": "Specifies active tab"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "lazyLoad",
+          "shortDescription": "Lazy load content before tab selection"
         }
       ],
       "methods": [],
@@ -3460,37 +4938,10 @@
           "kind": "input",
           "platform": null,
           "isStatic": false,
-          "type": "NbUserMenuItem[]",
-          "required": null,
-          "name": "menu",
-          "shortDescription": "List of menu items for a user context menu (shown when clicked)"
-        },
-        {
-          "kind": "output",
-          "platform": null,
-          "isStatic": false,
-          "type": "EventEmitter<NbUserMenuItem>",
-          "required": null,
-          "name": "menuClick",
-          "shortDescription": "Outputs when a context menu item is clicked"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
           "type": "string",
           "required": null,
           "name": "name",
           "shortDescription": "Specifies a name to be shown on the right of a user picture"
-        },
-        {
-          "kind": "input",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "name": "picture",
-          "shortDescription": "Absolute path to a user picture\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -3518,6 +4969,15 @@
           "required": null,
           "name": "onlyPicture",
           "shortDescription": "Whether to show only a picture or also show the name and title"
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "picture",
+          "shortDescription": "Absolute path to a user picture. Or base64 image\nUser name initials (JD for John Doe) will be shown if no picture specified"
         },
         {
           "kind": "input",
@@ -3561,8 +5021,8 @@
           "examples": [],
           "params": [
             {
-              "name": "el",
-              "type": "ElementRef",
+              "name": "domSanitizer",
+              "type": "DomSanitizer",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -3588,80 +5048,10 @@
           "isStatic": false,
           "shortDescription": "",
           "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "hasMenu",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "hideMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [
-            {
-              "name": "event",
-              "type": "any",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            },
-            {
-              "name": "item",
-              "type": "NbUserMenuItem",
-              "required": null,
-              "shortDescription": "",
-              "description": ""
-            }
-          ],
-          "platform": null,
-          "name": "itemClick",
-          "type": [
-            "boolean"
-          ],
-          "isStatic": false,
-          "shortDescription": "",
-          "description": ""
-        },
-        {
-          "examples": [],
-          "params": [],
-          "platform": null,
-          "name": "toggleMenu",
-          "type": [
-            "void"
-          ],
-          "isStatic": false,
-          "shortDescription": "Toggles a context menu"
         }
       ],
       "name": "NbUserComponent",
-      "description": "Can be used as a user profile link or can bring a user context menu.\n",
+      "description": "Can be used as a user profile link.\n",
       "shortDescription": "Represents a component showing a user avatar (picture) with a user name on the right.",
       "styles": [
         {
@@ -3706,81 +5096,10 @@
             {
               "name": "user-size-xlarge",
               "description": ""
-            },
-            {
-              "name": "user-menu-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-fg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-active-bg",
-              "description": ""
-            },
-            {
-              "name": "user-menu-border",
-              "description": ""
             }
           ]
         }
       ]
-    },
-    {
-      "kind": "class",
-      "platform": null,
-      "examples": [],
-      "props": [
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "shortDescription": "Icon class"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "shortDescription": "Menu link for [routerLink] directive"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "shortDescription": "Link target (_blank, _self, etc)"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "shortDescription": "Menu title"
-        },
-        {
-          "kind": "property",
-          "platform": null,
-          "isStatic": false,
-          "type": "string",
-          "required": null,
-          "shortDescription": "URL for absolute urls, used directly in href"
-        }
-      ],
-      "methods": [],
-      "name": "NbUserMenuItem",
-      "shortDescription": "Action dropdown menu",
-      "styles": []
     },
     {
       "kind": "service",
@@ -4060,11 +5379,31 @@
       "styles": []
     },
     {
-      "kind": "service",
+      "kind": "class",
       "platform": null,
       "examples": [],
       "props": [],
       "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "document",
+              "type": "any",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "constructor",
+          "type": [
+            "NbSpinnerService"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": ""
+        },
         {
           "examples": [],
           "params": [],
@@ -4195,6 +5534,13 @@
               "required": null,
               "shortDescription": "",
               "description": ""
+            },
+            {
+              "name": "componentFactoryResolver",
+              "type": "ComponentFactoryResolver",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
             }
           ],
           "platform": null,
@@ -4230,8 +5576,8 @@
           "examples": [],
           "params": [
             {
-              "name": "component",
-              "type": "Type",
+              "name": "entity",
+              "type": "",
               "required": null,
               "shortDescription": "",
               "description": ""
@@ -4927,7 +6273,7 @@
             },
             {
               "theme": "default",
-              "prop": "user-menu-bg"
+              "prop": "popover-bg"
             },
             {
               "theme": "default",
@@ -5091,7 +6437,11 @@
             },
             {
               "theme": "default",
-              "prop": "user-menu-fg"
+              "prop": "popover-fg"
+            },
+            {
+              "theme": "default",
+              "prop": "context-menu-fg"
             },
             {
               "theme": "default",
@@ -5119,7 +6469,15 @@
             },
             {
               "theme": "default",
-              "prop": "checkbox-fg"
+              "prop": "checkbox-checked-checkmark"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-border-color"
+            },
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-checkmark"
             },
             {
               "theme": "default",
@@ -5241,6 +6599,10 @@
           "childs": [
             {
               "theme": "default",
+              "prop": "context-menu-active-fg"
+            },
+            {
+              "theme": "default",
               "prop": "toaster-fg"
             },
             {
@@ -5318,11 +6680,11 @@
             },
             {
               "theme": "default",
-              "prop": "user-menu-active-bg"
+              "prop": "popover-border"
             },
             {
               "theme": "default",
-              "prop": "user-menu-border"
+              "prop": "context-menu-active-bg"
             },
             {
               "theme": "default",
@@ -5346,7 +6708,7 @@
             },
             {
               "theme": "default",
-              "prop": "checkbox-selected-border-color"
+              "prop": "checkbox-checked-border-color"
             },
             {
               "theme": "default",
@@ -7245,8 +8607,8 @@
             }
           ]
         },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
+        "popover-fg": {
+          "name": "popover-fg",
           "value": "#2a2a2a",
           "parents": [
             {
@@ -7256,8 +8618,8 @@
           ],
           "childs": []
         },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
+        "popover-bg": {
+          "name": "popover-bg",
           "value": "#ffffff",
           "parents": [
             {
@@ -7267,19 +8629,8 @@
           ],
           "childs": []
         },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [],
-          "childs": [
-            {
-              "theme": "cosmic",
-              "prop": "user-menu-active-fg"
-            }
-          ]
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
+        "popover-border": {
+          "name": "popover-border",
           "value": "#40dc7e",
           "parents": [
             {
@@ -7289,8 +8640,36 @@
           ],
           "childs": []
         },
-        "user-menu-border": {
-          "name": "user-menu-border",
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": "none",
+          "parents": [],
+          "childs": []
+        },
+        "context-menu-fg": {
+          "name": "context-menu-fg",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-fg": {
+          "name": "context-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-bg": {
+          "name": "context-menu-active-bg",
           "value": "#40dc7e",
           "parents": [
             {
@@ -8579,8 +9958,52 @@
           ],
           "childs": []
         },
-        "checkbox-selected-border-color": {
-          "name": "checkbox-selected-border-color",
+        "checkbox-checkmark": {
+          "name": "checkbox-checkmark",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checkmark"
+            }
+          ]
+        },
+        "checkbox-checked-bg": {
+          "name": "checkbox-checked-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-bg"
+            }
+          ]
+        },
+        "checkbox-checked-size": {
+          "name": "checkbox-checked-size",
+          "value": "1.25rem",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-size"
+            }
+          ]
+        },
+        "checkbox-checked-border-size": {
+          "name": "checkbox-checked-border-size",
+          "value": "2px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-checked-border-size"
+            }
+          ]
+        },
+        "checkbox-checked-border-color": {
+          "name": "checkbox-checked-border-color",
           "value": "#40dc7e",
           "parents": [
             {
@@ -8590,8 +10013,63 @@
           ],
           "childs": []
         },
-        "checkbox-fg": {
-          "name": "checkbox-fg",
+        "checkbox-checked-checkmark": {
+          "name": "checkbox-checked-checkmark",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-bg": {
+          "name": "checkbox-disabled-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-bg"
+            }
+          ]
+        },
+        "checkbox-disabled-size": {
+          "name": "checkbox-disabled-size",
+          "value": "1.25rem",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-size"
+            }
+          ]
+        },
+        "checkbox-disabled-border-size": {
+          "name": "checkbox-disabled-border-size",
+          "value": "2px",
+          "parents": [],
+          "childs": [
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-border-size"
+            }
+          ]
+        },
+        "checkbox-disabled-border-color": {
+          "name": "checkbox-disabled-border-color",
+          "value": "#2a2a2a",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-checkmark": {
+          "name": "checkbox-disabled-checkmark",
           "value": "#2a2a2a",
           "parents": [
             {
@@ -9387,7 +10865,7 @@
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-bg"
+              "prop": "popover-bg"
             },
             {
               "theme": "cosmic",
@@ -9544,7 +11022,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-fg"
+              "prop": "popover-fg"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "context-menu-fg"
             },
             {
               "theme": "cosmic",
@@ -9580,11 +11062,15 @@
             },
             {
               "theme": "cosmic",
-              "prop": "checkbox-fg"
+              "prop": "checkbox-checked-checkmark"
             },
             {
               "theme": "cosmic",
-              "prop": "radio-fg"
+              "prop": "checkbox-disabled-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "checkbox-disabled-checkmark"
             },
             {
               "theme": "cosmic",
@@ -9720,6 +11206,10 @@
             },
             {
               "theme": "cosmic",
+              "prop": "context-menu-active-fg"
+            },
+            {
+              "theme": "cosmic",
               "prop": "toaster-fg"
             },
             {
@@ -9759,11 +11249,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-active-bg"
+              "prop": "popover-border"
             },
             {
               "theme": "cosmic",
-              "prop": "user-menu-border"
+              "prop": "context-menu-active-bg"
             },
             {
               "theme": "cosmic",
@@ -9830,7 +11320,11 @@
             },
             {
               "theme": "cosmic",
-              "prop": "checkbox-selected-border-color"
+              "prop": "checkbox-checked-border-color"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "radio-fg"
             },
             {
               "theme": "cosmic",
@@ -10057,6 +11551,10 @@
             {
               "theme": "cosmic",
               "prop": "sidebar-shadow"
+            },
+            {
+              "theme": "cosmic",
+              "prop": "popover-shadow"
             },
             {
               "theme": "cosmic",
@@ -11896,8 +13394,8 @@
           ],
           "childs": []
         },
-        "user-menu-fg": {
-          "name": "user-menu-fg",
+        "popover-fg": {
+          "name": "popover-fg",
           "value": "#ffffff",
           "parents": [
             {
@@ -11907,8 +13405,8 @@
           ],
           "childs": []
         },
-        "user-menu-bg": {
-          "name": "user-menu-bg",
+        "popover-bg": {
+          "name": "popover-bg",
           "value": "#3d3780",
           "parents": [
             {
@@ -11918,19 +13416,8 @@
           ],
           "childs": []
         },
-        "user-menu-active-fg": {
-          "name": "user-menu-active-fg",
-          "value": "#ffffff",
-          "parents": [
-            {
-              "theme": "default",
-              "prop": "user-menu-active-fg"
-            }
-          ],
-          "childs": []
-        },
-        "user-menu-active-bg": {
-          "name": "user-menu-active-bg",
+        "popover-border": {
+          "name": "popover-border",
           "value": "#7659ff",
           "parents": [
             {
@@ -11940,8 +13427,51 @@
           ],
           "childs": []
         },
-        "user-menu-border": {
-          "name": "user-menu-border",
+        "popover-shadow": {
+          "name": "popover-shadow",
+          "value": [
+            0,
+            "8px",
+            "20px",
+            0,
+            "rgba(40, 37, 89, 0.6)"
+          ],
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "shadow"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-fg": {
+          "name": "context-menu-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-fg": {
+          "name": "context-menu-active-fg",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-white"
+            },
+            {
+              "theme": "default",
+              "prop": "color-white"
+            }
+          ],
+          "childs": []
+        },
+        "context-menu-active-bg": {
+          "name": "context-menu-active-bg",
           "value": "#7659ff",
           "parents": [
             {
@@ -13347,8 +14877,52 @@
           ],
           "childs": []
         },
-        "checkbox-selected-border-color": {
-          "name": "checkbox-selected-border-color",
+        "checkbox-checkmark": {
+          "name": "checkbox-checkmark",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checkmark"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-bg": {
+          "name": "checkbox-checked-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-size": {
+          "name": "checkbox-checked-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-border-size": {
+          "name": "checkbox-checked-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-checked-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-checked-border-color": {
+          "name": "checkbox-checked-border-color",
           "value": "#00d977",
           "parents": [
             {
@@ -13358,8 +14932,63 @@
           ],
           "childs": []
         },
-        "checkbox-fg": {
-          "name": "checkbox-fg",
+        "checkbox-checked-checkmark": {
+          "name": "checkbox-checked-checkmark",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-bg": {
+          "name": "checkbox-disabled-bg",
+          "value": "rgba(0, 0, 0, 0)",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-bg"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-size": {
+          "name": "checkbox-disabled-size",
+          "value": "1.25rem",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-border-size": {
+          "name": "checkbox-disabled-border-size",
+          "value": "2px",
+          "parents": [
+            {
+              "theme": "default",
+              "prop": "checkbox-disabled-border-size"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-border-color": {
+          "name": "checkbox-disabled-border-color",
+          "value": "#ffffff",
+          "parents": [
+            {
+              "theme": "cosmic",
+              "prop": "color-fg-heading"
+            }
+          ],
+          "childs": []
+        },
+        "checkbox-disabled-checkmark": {
+          "name": "checkbox-disabled-checkmark",
           "value": "#ffffff",
           "parents": [
             {
@@ -13371,11 +15000,11 @@
         },
         "radio-fg": {
           "name": "radio-fg",
-          "value": "#ffffff",
+          "value": "#00d977",
           "parents": [
             {
               "theme": "cosmic",
-              "prop": "color-fg-heading"
+              "prop": "color-success"
             }
           ],
           "childs": []

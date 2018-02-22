@@ -1,0 +1,37 @@
+{
+  "name": "@nebular/security",
+  "version": "2.0.0-rc.6",
+  "description": "@nebular/security",
+  "main": "./bundles/security.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/nebular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/nebular/issues"
+  },
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "keywords": [
+    "angular",
+    "typescript",
+    "ng2-admin",
+    "ngx-admin",
+    "theme",
+    "auth",
+    "acl",
+    "security",
+    "login",
+    "register",
+    "nebular"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0",
+    "@angular/router": "^5.1.0",
+    "rxjs": "~5.5.5"
+  }
+}

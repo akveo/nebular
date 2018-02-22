@@ -19,8 +19,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
   template: `
     <nb-layout id="layout-fluid">
       <nb-layout-header fixed>
-        <nb-user showInitials size="medium" name="Dmitry Nehaychik" title="Worker"
-                  [menu]="contextMenu" (menuClick)="onMenuItemClick($event)"></nb-user>
+        <nb-user showInitials size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
       </nb-layout-header>
 
 
@@ -44,21 +43,17 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
           <nb-user inverse onlyPicture size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse size="medium" name="Dmitry Nehaychik" title="Worker"
-                    [menu]="contextMenu" (menuClick)="onMenuItemClick($event)"></nb-user>
+          <nb-user inverse size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse onlyPicture size="medium" name="Dmitry Nehaychik" title="Worker"
-                    [menu]="contextMenu" (menuClick)="onMenuItemClick($event)"></nb-user>
+          <nb-user inverse onlyPicture size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
         <div class="test-row">
           <nb-user inverse size="large" picture="http://lorempixel.com/400/200/animals/"
-                    name="Dmitry Nehaychik" title="Worker"
-                    [menu]="contextMenu" (menuClick)="onMenuItemClick($event)"></nb-user>
+                   name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse showInitials size="medium" name="Dmitry Nehaychik" title="Worker"
-                    [menu]="contextMenu" (menuClick)="onMenuItemClick($event)"></nb-user>
+          <nb-user inverse showInitials size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
 
         <div class="test-row">
@@ -101,12 +96,14 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             picture="http://lorempixel.com/400/200/animals/"
             name="Dmitry Nehaychik"
             title="Worker"
-            [menu]="contextMenu"
-            (menuClick)="onMenuItemClick($event)"
             badgeText="29"
             [badgeStatus]="badge.STATUS_DANGER"
             [badgePosition]="badge.TOP_LEFT">
           </nb-user>
+        </div>
+        <div class="test-row" id="base64-image">
+          <nb-user
+            [picture]="'data:image/png;base64,aaa'"></nb-user>
         </div>
       </nb-layout-column>
     </nb-layout>
@@ -115,14 +112,4 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
 export class NbUserTestComponent {
 
   badge = NbBadgeComponent;
-
-  contextMenu = [
-    { title: 'Profile', link: 'some/link', icon: 'nb-person' },
-    { title: 'Billing', target: '_blank', url: 'http://akveo.com' },
-    { title: 'Exit', key: 'exit' },
-  ];
-
-  onMenuItemClick(event) {
-    console.info(event);
-  }
 }

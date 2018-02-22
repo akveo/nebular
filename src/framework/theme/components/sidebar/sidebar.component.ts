@@ -6,6 +6,7 @@
 
 import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -67,9 +68,9 @@ export class NbSidebarFooterComponent {
  * ```
  * <nb-sidebar left fixed state="collapsed">
  *  <nb-sidebar-header>Header</nb-sidebar-header>
- *  <nb-sidebar-content>
- *    Menu or another component here
- *  </nb-sidebar-content>
+ *
+ *    Sidebar content, menu or another component here.
+ *
  *  <nb-sidebar-footer>
  *    Footer components here
  *  </nb-sidebar-footer>
@@ -116,6 +117,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   protected stateValue: string;
   protected responsiveValue: boolean = false;
+
+  private alive = true;
 
   @HostBinding('class.fixed') fixedValue: boolean = false;
   @HostBinding('class.right') rightValue: boolean = false;
@@ -212,6 +215,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.toggleSubscription = this.sidebarService.onToggle()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { compact: boolean, tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.toggle(data.compact);
@@ -219,6 +223,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       });
 
     this.expandSubscription = this.sidebarService.onExpand()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.expand();
@@ -226,6 +231,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       });
 
     this.collapseSubscription = this.sidebarService.onCollapse()
+      .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.collapse();
@@ -234,18 +240,29 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.toggleSubscription.unsubscribe();
-    this.expandSubscription.unsubscribe();
-    this.collapseSubscription.unsubscribe();
+    this.alive = false;
     if (this.mediaQuerySubscription) {
       this.mediaQuerySubscription.unsubscribe();
     }
   }
 
+  // TODO: this is more of a workaround, should be a better way to make components communicate to each other
   onClick(event): void {
     const menu = this.element.nativeElement.querySelector('nb-menu');
+
     if (menu && menu.contains(event.target)) {
-      this.expand();
+      let link = event.target;
+      const linkChildren = ['span', 'i'];
+
+      // if we clicked on span - get the link
+      if (linkChildren.indexOf(link.tagName.toLowerCase()) !== -1 && link.parentNode) {
+        link = event.target.parentNode;
+      }
+
+      // we only expand if an item has children
+      if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
+        this.expand();
+      }
     }
   }
 

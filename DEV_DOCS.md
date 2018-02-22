@@ -45,6 +45,8 @@ We have to:
         - theme - `@nebular/theme` npm package, main framework package
         - auth - `@nebular/auth` npm package, auth package (login, register, etc)       
         - icons - `nebular-icons` npm package, cool icons font
+        - security - `@nebular/security` npm package, security framework package
+        
       
       
 ## Auth // TODO      
@@ -175,6 +177,34 @@ To start a new release (publish the framework packages on NPM) you need:
 9. `npm run release` - run prepare & validate and finally publish the packages to NPM
 10. create and push git tag
 11. create release on github  
+
+#ngx-admin development on the latest Nebular sources
+
+1. `rm -rf node_modules/@nebular` to remove the package installed
+2. run `npm link` for each Nebular module in *nebular/src/framework* except for *icons*
+3. make sure you don't have *node_modules* in Nebular project (this may cause an issue an issue the angular-cli)
+4. link Nebular in ngx-admin: `npm link @nebular/{auth,theme}`
+5. run ngx-admin with corresponding flag `npm start -- --preserve-symlinks`
+
+#ngx-admin release
+1. update version
+2. create changelog
+3. create PR, approve, pull
+4. create a tag
+5. create changelog
+6. merge into `sandbox`, create changelog
+7. create PR, approve, pull
+8. create a tag
+9. create changelog
+10. create github release
+
+#ngx-admin demo update
+1. pull the sources 
+2. check everything is running correctly
+3. relate `demo` branch onto `master`
+4. build with npm run build:prod
+5. upload code using `scp -r dist/ server_details`
+
 
 # TODO
  - steps to start the development

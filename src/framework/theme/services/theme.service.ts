@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Inject, Injectable, Type } from '@angular/core';
+import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -41,6 +41,7 @@ export class NbThemeService {
     @Inject(nbThemeOptionsToken) protected options: any,
     private breakpointService: NbMediaBreakpointsService,
     private jsThemesRegistry: NbJSThemesRegistry,
+    private componentFactoryResolver: ComponentFactoryResolver,
   ) {
     if (options && options.name) {
       this.changeTheme(options.name);
@@ -56,9 +57,15 @@ export class NbThemeService {
     this.changeWindowWidth$.next(width);
   }
 
-  appendToLayoutTop<T>(component: Type<T>): Observable<any> {
+  appendToLayoutTop<T>(entity: Type<T> | ComponentFactory<T>): Observable<any> {
+    let factory = entity;
+
+    if (entity instanceof Type) {
+      factory = this.componentFactoryResolver.resolveComponentFactory(entity);
+    }
+
     const subject = new ReplaySubject(1);
-    this.appendToLayoutTop$.next({ component, listener: subject });
+    this.appendToLayoutTop$.next({ factory, listener: subject });
     return subject.asObservable();
   }
 

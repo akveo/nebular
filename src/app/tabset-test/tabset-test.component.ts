@@ -10,6 +10,13 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
 
 @Component({
   selector: 'nb-tabset-test',
+  styles: [
+    `
+      nb-tabset {
+        margin-bottom: 40px;
+      }
+    `,
+  ],
   template: `
     <nb-layout>
       <nb-layout-column>
@@ -68,7 +75,6 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             <span>Content #3</span>
           </nb-tab>
         </nb-tabset>
-
         <nb-tabset fullWidth>
           <nb-tab tabTitle="Tab #1" badgeText="29">
             <span>Content #1</span>
@@ -125,6 +131,20 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             [badgeStatus]="badge.STATUS_WARNING"
             [badgePosition]="badge.BOTTOM_RIGHT">
             <span>Content #5</span>
+          </nb-tab>
+        </nb-tabset>
+        <nb-tabset>
+          <nb-tab tabTitle="Tab #1">
+            <span>Content #1</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #2">
+            <span>Content #2</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #3" lazyLoad>
+            <span>Content #3</span>
+          </nb-tab>
+          <nb-tab tabTitle="Tab #4" lazyLoad>
+            <span>Content #4</span>
           </nb-tab>
         </nb-tabset>
       </nb-layout-column>

@@ -14,6 +14,11 @@
     .content {
       margin-top: nb-theme(content-top-gap);
       min-width: 0;
+
+      .columns {
+        letter-spacing: 0.3px;
+      }
+
       nb-layout-column {
         min-width: 0;
       }
@@ -38,14 +43,14 @@
           border-bottom: none;
         }
         span {
-          letter-spacing: -1px;
+          letter-spacing: -0.5px;
         }
 
         & > ul > li {
           ul a {
             font-size: 1.125rem;
           }
-          & > ul.menu-items {
+          & > ul.menu-items.expanded {
             margin-bottom: nb-theme(menu-group-gap);
           }
           & > a:first-child {

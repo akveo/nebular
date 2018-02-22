@@ -29,20 +29,28 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-size:
  * checkbox-border-size:
  * checkbox-border-color:
- * checkbox-selected-border-color:
- * checkbox-fg:
- * radio-fg:
+ * checkbox-checkmark:
+ * checkbox-checked-bg:
+ * checkbox-checked-size:
+ * checkbox-checked-border-size:
+ * checkbox-checked-border-color:
+ * checkbox-checked-checkmark:
+ * checkbox-disabled-bg:
+ * checkbox-disabled-size:
+ * checkbox-disabled-border-size:
+ * checkbox-disabled-border-color:
+ * checkbox-disabled-checkmark:
  */
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input"
+    <label class="customised-control customised-checkbox">
+      <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
              (change)="value = !value">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">
+      <span class="customised-control-indicator"></span>
+      <span class="customised-control-description">
         <ng-content></ng-content>
       </span>
     </label>

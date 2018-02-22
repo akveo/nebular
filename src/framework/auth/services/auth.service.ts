@@ -8,72 +8,13 @@ import { Inject, Injectable, Injector, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
-import { tap } from 'rxjs/operators/tap';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NbAuthSimpleToken, NbTokenService } from './token.service';
-import { NB_AUTH_PROVIDERS_TOKEN } from '../auth.options';
-
-export class NbAuthResult {
-
-  protected token: any;
-  protected errors: string[] = [];
-  protected messages: string[] = [];
-
-  // TODO pass arguments in options object
-  constructor(protected success: boolean,
-    protected response?: any,
-    protected redirect?: any,
-    errors?: any,
-    messages?: any,
-    token?: NbAuthSimpleToken) {
-
-    this.errors = this.errors.concat([errors]);
-    if (errors instanceof Array) {
-      this.errors = errors;
-    }
-
-    this.messages = this.messages.concat([messages]);
-    if (messages instanceof Array) {
-      this.messages = messages;
-    }
-
-    this.token = token;
-  }
-
-  getResponse(): any {
-    return this.response;
-  }
-
-  getTokenValue(): any {
-    return this.token;
-  }
-
-  replaceToken(token: NbAuthSimpleToken): any {
-    this.token = token
-  }
-
-  getRedirect(): any {
-    return this.redirect;
-  }
-
-  getErrors(): string[] {
-    return this.errors.filter(val => !!val);
-  }
-
-  getMessages(): string[] {
-    return this.messages.filter(val => !!val);
-  }
-
-  isSuccess(): boolean {
-    return this.success;
-  }
-
-  isFailure(): boolean {
-    return !this.success;
-  }
-}
+import { NB_AUTH_PROVIDERS } from '../auth.options';
+import { NbAuthResult } from './auth-result';
+import { NbTokenService } from './token/token.service';
+import { NbAuthToken } from './token/token';
 
 /**
  * Common authentication service.
@@ -84,41 +25,41 @@ export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
               protected injector: Injector,
-              @Optional() @Inject(NB_AUTH_PROVIDERS_TOKEN) protected providers = {}) {
+              @Optional() @Inject(NB_AUTH_PROVIDERS) protected providers = {}) {
   }
 
   /**
    * Retrieves current authenticated token stored
    * @returns {Observable<any>}
    */
-  getToken(): Observable<NbAuthSimpleToken> {
+  getToken(): Observable<NbAuthToken> {
     return this.tokenService.get();
   }
 
   /**
    * Returns true if auth token is presented in the token storage
-   * // TODO: check exp date for JWT token
    * @returns {Observable<any>}
    */
-  isAuthenticated(): Observable<any> {
-    return this.getToken().pipe(map(token => !!(token && token.getValue())));
+  isAuthenticated(): Observable<boolean> {
+    return this.getToken()
+      .pipe(map((token: NbAuthToken) => token.isValid()));
   }
 
   /**
    * Returns tokens stream
-   * @returns {Observable<any>}
+   * @returns {Observable<NbAuthSimpleToken>}
    */
-  onTokenChange(): Observable<NbAuthSimpleToken> {
+  onTokenChange(): Observable<NbAuthToken> {
     return this.tokenService.tokenChange();
   }
 
   /**
    * Returns authentication status stream
-   *  // TODO: check exp date for JWT token
-   * @returns {Observable<any>}
+   * @returns {Observable<boolean>}
    */
   onAuthenticationChange(): Observable<boolean> {
-    return this.onTokenChange().pipe(map((token: NbAuthSimpleToken) => !!(token && token.getValue())));
+    return this.onTokenChange()
+      .pipe(map((token: NbAuthToken) => token.isValid()));
   }
 
   /**
@@ -136,18 +77,7 @@ export class NbAuthService {
     return this.getProvider(provider).authenticate(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
-          if (result.isSuccess() && result.getTokenValue()) {
-            return this.tokenService.set(result.getTokenValue())
-              .pipe(
-                switchMap(() => this.tokenService.get()),
-                map((token: NbAuthSimpleToken) => {
-                  result.replaceToken(token);
-                  return result;
-                }),
-              );
-          }
-
-          return observableOf(result);
+          return this.processResultToken(result);
         }),
       );
   }
@@ -167,18 +97,7 @@ export class NbAuthService {
     return this.getProvider(provider).register(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
-          if (result.isSuccess() && result.getTokenValue()) {
-            return this.tokenService.set(result.getTokenValue())
-              .pipe(
-                switchMap(_ => this.tokenService.get()),
-                map((token: NbAuthSimpleToken) => {
-                  result.replaceToken(token);
-                  return result;
-                }),
-              );
-          }
-
-          return observableOf(result);
+          return this.processResultToken(result);
         }),
       );
   }
@@ -196,11 +115,12 @@ export class NbAuthService {
   logout(provider: string): Observable<NbAuthResult> {
     return this.getProvider(provider).logout()
       .pipe(
-        tap((result: NbAuthResult) => {
+        switchMap((result: NbAuthResult) => {
           if (result.isSuccess()) {
-            this.tokenService.clear().subscribe(() => {
-            });
+            this.tokenService.clear()
+              .pipe(map(() => result));
           }
+          return observableOf(result);
         }),
       );
   }
@@ -233,7 +153,22 @@ export class NbAuthService {
     return this.getProvider(provider).resetPassword(data);
   }
 
-  getProvider(provider: string): NbAbstractAuthProvider {
+  private processResultToken(result: NbAuthResult) {
+    if (result.isSuccess() && result.getRawToken()) {
+      return this.tokenService.setRaw(result.getRawToken())
+        .pipe(
+          switchMap(() => this.tokenService.get()),
+          map((token: NbAuthToken) => {
+            result.setToken(token);
+            return result;
+          }),
+        );
+    }
+
+    return observableOf(result);
+  }
+
+  private getProvider(provider: string): NbAbstractAuthProvider {
     if (!this.providers[provider]) {
       throw new TypeError(`Nb auth provider '${provider}' is not registered`);
     }

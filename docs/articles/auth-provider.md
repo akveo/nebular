@@ -1,7 +1,7 @@
 ## A provider
 
-In Nebular terms `auth provider` is a class containing authentication logic using by the application UI. 
-It accepts user input (login/email/password/oauth token/etc), communicates the input to the backend API and finally provides some resulting output back to the UI layer.
+In Nebular terms `auth provider` is a class containing authentication logic specific for some authentication flow (email&password, OAuth, etc). 
+It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
 Currently, there are two Auth Providers available out of the box:
 
 Two auth providers:
@@ -13,7 +13,7 @@ Each provider has a list of configurations available with the default values set
   
 ## Configuration
 
-As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is all set by default, so please take a look at the [default configuration values]((#/docs/auth/email--password-provider) before modifying them.
+As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is configured by default, please take a look at the [default configuration values](#/docs/auth/nbemailpassauthprovider) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -38,7 +38,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 
-Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/email--password-provider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 {

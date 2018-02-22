@@ -117,7 +117,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Nebular - full-featured framework based on Angular.');
+    this.titleService.setTitle('Nebular is a set of essential modules for your next Angular application.');
   }
 
   ngAfterViewInit() {

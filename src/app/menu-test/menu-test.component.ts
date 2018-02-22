@@ -84,10 +84,13 @@ export class NbMenuItem4Component { }
   selector: 'nb-menu-test',
   template: `
     <nb-layout>
+      <nb-sidebar state="compacted">
+        <nb-menu id="menu-sidebar" tag="sidebarMenu" [items]="menuItems"></nb-menu>
+      </nb-sidebar>
       <nb-layout-column>
-        <nb-card size="medium">
+        <nb-card size="xxlarge">
           <nb-card-body>
-            <nb-menu tag="firstMenu" [items]="menuItems"></nb-menu>
+            <nb-menu id="menu-first" tag="firstMenu" [items]="menuItems" [autoCollapse]="true"></nb-menu>
             <router-outlet></router-outlet>
             <button class="btn btn-primary" id="addBtn" (click)="addMenuItem()">Add</button>
             <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
@@ -102,14 +105,17 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
     {
       title: 'Menu Items',
       group: true,
+      icon: 'nb-keypad',
     },
     {
       title: 'Menu #1',
       link: '/menu/1',
+      icon: 'nb-keypad',
     },
     {
       title: 'Menu #2',
       link: '/menu/2',
+      icon: 'nb-keypad',
     },
   ];
 
@@ -140,6 +146,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       [
         {
           title: 'Menu #3',
+          icon: 'nb-keypad',
           children: [
             {
               title: 'Menu #3.1',

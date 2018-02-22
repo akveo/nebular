@@ -9,19 +9,22 @@
 ### What's included:
 
 What is included:
-1) [x] @nebular/theme
+1) [x] @nebular/theme :art:
   - Theme System - guidelines on how to manage SCSS variables and component styles with hot reload in place.
   - Pure Angular UI Kit with two style themes and no dependencies.
-  - Style overridings for 3rd party modules (Bootstrap, ng2-smart-table) to have a consistent look and feel.
-2) [x] @nebular/auth
+  - Style overridings for 3rd party modules (Bootstrap 4, ng2-smart-table) to have a consistent look and feel.
+  - Server-side rendering compatibility!
+2) [x] @nebular/auth :closed_lock_with_key:
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable providers (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
-3) [ ] @nebular/acl - module for roles and permissions management
+3) [x] @nebular/security :cop:
+  - Roles and permissions management (ACL)
+  - `*nbIsGranted` conditional directive
 4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
 5) [ ] @nebular/data - application data & state management
 6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
-7) [ ] More great features! 
+7) [ ] More great features to come! 
 
 ### Demo Application:
 
@@ -30,16 +33,13 @@ What is included:
 
 
 ### Use cases
-Nebular is a great toolkit if you build a Rich UI application based on Angular, and don't want to spend your time on painful project setup. It provides you with a unified approach for managing styles for various components (3rd party including), pure components tightly connect to Angular and authentication layer easily configurable for your API.
+Nebular is a great toolkit if you build a Rich UI web-application based on Angular, and don't want to spend your time on painful project setup. It provides you with a unified approach for managing styles of various components (3rd party including), pure components tightly connected to Angular and authentication layer easily configurable for your API.
 
 ### The purpose
-There are a lot of awesome front-end frameworks out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
+There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
 
 ### Documentation
 Installation, customization and other useful articles: https://akveo.github.io/nebular
-
-### Architecture
-<img src="https://i.imgur.com/H4coTS7.png" />
 
 ### License
 [MIT](LICENSE.txt) license.

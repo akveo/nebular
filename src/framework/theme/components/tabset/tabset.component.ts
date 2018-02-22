@@ -38,6 +38,10 @@ export class NbTabComponent {
   @HostBinding('class.content-active')
   activeValue: boolean = false;
 
+  /**
+   * Specifies active tab
+   * @returns {boolean}
+   */
   @Input()
   get active() {
     return this.activeValue;
@@ -47,6 +51,15 @@ export class NbTabComponent {
     if (this.activeValue) {
       this.init = true;
     }
+  }
+
+  /**
+   * Lazy load content before tab selection
+   * @param {boolean} val
+   */
+  @Input()
+  set lazyLoad(val: boolean) {
+    this.init = convertToBoolProperty(val);
   }
 
   /**
@@ -70,7 +83,6 @@ export class NbTabComponent {
    */
   @Input() badgePosition: string;
 
-  // TODO: it makes sense to add 'lazyLoad' input to 'nb-tabset' component and make this functionality configurable
   init: boolean = false;
 }
 

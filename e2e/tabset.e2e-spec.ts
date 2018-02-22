@@ -82,6 +82,22 @@ describe('nb-tabset', () => {
       });
   });
 
+  it('should lazy load tab content', () => {
+    expect(element(by.css('nb-tabset:nth-child(8) > nb-tab[tabTitle="Tab #1"] > span'))
+      .getText()).toEqual('Content #1');
+
+    expect(element(by.css('nb-tabset:nth-child(8) > nb-tab[tabTitle="Tab #2"]'))
+      .getText()).toEqual('');
+
+    const tab3 = element(by.css('nb-tabset:nth-child(8) > nb-tab[tabTitle="Tab #3"] > span'));
+    const tab3Text = 'Content #3';
+    expect(browser.executeScript('return arguments[0].innerHTML;', tab3)).toEqual(tab3Text);
+
+    const tab4 = element(by.css('nb-tabset:nth-child(8) > nb-tab[tabTitle="Tab #4"] > span'));
+    const tab4Text = 'Content #4';
+    expect(browser.executeScript('return arguments[0].innerHTML;', tab4)).toEqual(tab4Text);
+  });
+
   describe('badge', () => {
     const badgeText = '29';
     const badgesConf = {

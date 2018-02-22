@@ -268,6 +268,48 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'Flip Card',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbFlipCardComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardFrontComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardBackComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Reveal Card',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbRevealCardComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardFrontComponent',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbCardBackComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Search',
         children: [
           {
@@ -349,6 +391,38 @@ export const STRUCTURE = [
             type: 'block',
             block: 'component',
             blockData: 'NbBadgeComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Popover',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbPopoverDirective',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbPopoverComponent',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Context Menu',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbContextMenuDirective',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbContextMenuComponent',
           },
         ],
       },
@@ -544,6 +618,78 @@ export const STRUCTURE = [
             type: 'block',
             block: 'component',
             blockData: 'NbAuthJWTToken',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbTokenLocalStorage',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbTokenLocalStorage',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Security',
+    children: [
+      {
+        type: 'page',
+        name: 'Introduction',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-intro.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Installation',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-install.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'ACL Configuration & Usage',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-acl-configuration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAclService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAclService',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbAccessChecker',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            blockData: 'NbAccessChecker',
           },
         ],
       },

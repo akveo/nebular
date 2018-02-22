@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
 
 import { NbAuthService } from '../auth.service';
-import { NbAuthJWTToken } from '../token.service';
 import { NB_AUTH_INTERCEPTOR_HEADER } from '../../auth.options';
+import { NbAuthJWTToken } from '../token/token';
 
 @Injectable()
 export class NbAuthSimpleInterceptor implements HttpInterceptor {

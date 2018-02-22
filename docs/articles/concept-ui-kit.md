@@ -11,6 +11,8 @@ Here's a list of Nebular components:
 - [Actions](#/docs/components/actions)
 - [User(Avatar)](#/docs/components/user-avatar)
 - [Checkbox](#/docs/components/checkbox)
+- [Popover](#/docs/components/popover)
+- [Context Menu](#/docs/components/context-menu)
 <hr class="section-end">
 
 <div class="note note-success">

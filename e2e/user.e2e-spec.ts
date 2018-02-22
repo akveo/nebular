@@ -36,4 +36,10 @@ describe('nb-user', () => {
     badgeTests(badgesConf);
   });
 
+  it('background image should have base64 image', () => {
+    element(by.css('#base64-image .user-picture.image')).getCssValue('background-image').then(value => {
+      expect(value).toEqual('url("data:image/png;base64,aaa")');
+    });
+  });
+
 });
