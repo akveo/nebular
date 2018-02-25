@@ -60,8 +60,8 @@ export class NgdMethodsBlockComponent {
   @Input() block: any;
 
   @Input('block')
-  set setProps(blockData: any) {
-    this.classMethods = blockData.methods;
-    this.className = blockData.name;
+  set setProps(source: any) {
+    this.classMethods = source.methods;
+    this.className = source.name;
   };
 }

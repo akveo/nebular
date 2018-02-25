@@ -172,22 +172,22 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbLayoutComponent',
+            source: 'NbLayoutComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbLayoutHeaderComponent',
+            source: 'NbLayoutHeaderComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbLayoutColumnComponent',
+            source: 'NbLayoutColumnComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbLayoutFooterComponent',
+            source: 'NbLayoutFooterComponent',
           },
 
         ],
@@ -199,23 +199,23 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSidebarComponent',
+            source: 'NbSidebarComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSidebarHeaderComponent',
+            source: 'NbSidebarHeaderComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSidebarFooterComponent',
+            source: 'NbSidebarFooterComponent',
             name: 'true',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSidebarService',
+            source: 'NbSidebarService',
           },
         ],
       },
@@ -226,17 +226,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbMenuComponent',
+            source: 'NbMenuComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbMenuItem',
+            source: 'NbMenuItem',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbMenuService',
+            source: 'NbMenuService',
           },
         ],
       },
@@ -247,22 +247,22 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardComponent',
+            source: 'NbCardComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardHeaderComponent',
+            source: 'NbCardHeaderComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardBodyComponent',
+            source: 'NbCardBodyComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardFooterComponent',
+            source: 'NbCardFooterComponent',
           },
         ],
       },
@@ -273,17 +273,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbFlipCardComponent',
+            source: 'NbFlipCardComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardFrontComponent',
+            source: 'NbCardFrontComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardBackComponent',
+            source: 'NbCardBackComponent',
           },
         ],
       },
@@ -294,17 +294,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbRevealCardComponent',
+            source: 'NbRevealCardComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardFrontComponent',
+            source: 'NbCardFrontComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCardBackComponent',
+            source: 'NbCardBackComponent',
           },
         ],
       },
@@ -315,12 +315,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSearchComponent',
+            source: 'NbSearchComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSearchService',
+            source: 'NbSearchService',
           },
         ],
       },
@@ -331,17 +331,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTabsetComponent',
+            source: 'NbTabsetComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTabComponent',
+            source: 'NbTabComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbRouteTabsetComponent',
+            source: 'NbRouteTabsetComponent',
           },
         ],
       },
@@ -352,12 +352,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbActionsComponent',
+            source: 'NbActionsComponent',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbActionComponent',
+            source: 'NbActionComponent',
           },
         ],
       },
@@ -368,7 +368,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbUserComponent',
+            source: 'NbUserComponent',
           },
         ],
       },
@@ -379,7 +379,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbCheckboxComponent',
+            source: 'NbCheckboxComponent',
           },
         ],
       },
@@ -390,7 +390,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbBadgeComponent',
+            source: 'NbBadgeComponent',
           },
         ],
       },
@@ -401,12 +401,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbPopoverDirective',
+            source: 'NbPopoverDirective',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbPopoverComponent',
+            source: 'NbPopoverComponent',
           },
         ],
       },
@@ -417,12 +417,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbContextMenuDirective',
+            source: 'NbContextMenuDirective',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbContextMenuComponent',
+            source: 'NbContextMenuComponent',
           },
         ],
       },
@@ -439,7 +439,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbThemeService',
+            source: 'NbThemeService',
           },
         ],
       },
@@ -450,7 +450,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSpinnerService',
+            source: 'NbSpinnerService',
           },
         ],
       },
@@ -461,7 +461,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbMediaBreakpointsService',
+            source: 'NbMediaBreakpointsService',
           },
         ],
       },
@@ -472,7 +472,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbJSThemesRegistry',
+            source: 'NbJSThemesRegistry',
           },
         ],
       },
@@ -490,7 +490,7 @@ export const STRUCTURE = [
             type: 'block',
             block: 'theme',
             name: 'Default',
-            blockData: 'default',
+            source: 'default',
           },
         ],
       },
@@ -502,7 +502,7 @@ export const STRUCTURE = [
             type: 'block',
             block: 'theme',
             name: 'Cosmic',
-            blockData: 'cosmic',
+            source: 'cosmic',
           },
         ],
       },
@@ -585,7 +585,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthService',
+            source: 'NbAuthService',
           },
         ],
       },
@@ -596,7 +596,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbEmailPassAuthProvider',
+            source: 'NbEmailPassAuthProvider',
           },
         ],
       },
@@ -607,17 +607,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTokenService',
+            source: 'NbTokenService',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthSimpleToken',
+            source: 'NbAuthSimpleToken',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthJWTToken',
+            source: 'NbAuthJWTToken',
           },
         ],
       },
@@ -628,7 +628,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTokenLocalStorage',
+            source: 'NbTokenLocalStorage',
           },
         ],
       },
@@ -678,7 +678,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAclService',
+            source: 'NbAclService',
           },
         ],
       },
@@ -689,7 +689,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAccessChecker',
+            source: 'NbAccessChecker',
           },
         ],
       },

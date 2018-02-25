@@ -81,16 +81,16 @@ export class NgdThemeComponent implements OnDestroy {
   @Input('block')
   set setProps(block: any) {
     this.themeTitle = block.name;
-    this.themeContent = Object.keys(block.blockData.data).map(key => {
-      const property = block.blockData.data[key];
+    this.themeContent = Object.keys(block.source.data).map(key => {
+      const property = block.source.data[key];
       property.value = Array.isArray(property.value)
         ? property.value.join(' ')
         : property.value;
       return property;
     });
     this.filteredContent = this.themeContent;
-    this.themeName = block.blockData.name;
-    this.parentTheme = block.blockData.parent;
+    this.themeName = block.source.name;
+    this.parentTheme = block.source.parent;
   }
 
   constructor(private renderer: Renderer2,
