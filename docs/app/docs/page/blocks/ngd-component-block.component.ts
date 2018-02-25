@@ -1,24 +1,49 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'ngd-component-block',
-    template: `
-      <ngd-description-block *ngIf="blockData?.name || blockData?.shortDescription || blockData?.description"
-                             [blockData]="blockData">
-      </ngd-description-block>
-      <ngd-examples-block *ngIf="blockData?.examples?.length > 0" [blockData]="blockData"></ngd-examples-block>
-      <ngd-props-block *ngIf="blockData?.props?.length > 0" [blockData]="blockData"></ngd-props-block>
-      <ngd-methods-block *ngIf="isMethods()" [blockData]="blockData"></ngd-methods-block>
-      <ngd-styles-block *ngIf="blockData?.styles?.length > 0" [blockData]="blockData"></ngd-styles-block>
-`,
+  selector: 'ngd-component-block',
+  template: `
+    <ngd-description-block *ngIf="hasDescription" [block]="block"></ngd-description-block>
+    <ngd-examples-block *ngIf="hasExamples" [block]="block"></ngd-examples-block>
+    <ngd-props-block *ngIf="hasProps" [block]="block"></ngd-props-block>
+    <ngd-methods-block *ngIf="hasMethods" [block]="block"></ngd-methods-block>
+    <ngd-styles-block *ngIf="hasStyles" [block]="block"></ngd-styles-block>
+  `,
 })
 export class NgdComponentBlockComponent {
 
-  @Input() blockData: any;
+  @Input() block: any;
 
-  isMethods() {
-    return this.blockData.methods &&
-      this.blockData.methods.length > 0 &&
-      this.blockData.methods.some(method => method.shortDescription || method.description);
+  get hasDescription(): boolean {
+    return this.block && (
+      this.block.name ||
+      this.block.shortDescription ||
+      this.block.description
+    );
+  }
+
+  get hasExamples(): boolean {
+    return this.block &&
+      this.block.examples &&
+      this.block.examples.length > 0;
+  }
+
+  get hasProps(): boolean {
+    return this.block &&
+      this.block.props &&
+      this.block.props.length > 0;
+  }
+
+  get hasMethods(): boolean {
+    return this.block &&
+      this.block.methods &&
+      this.block.methods.length > 0 &&
+      this.block.methods.some(method => method.shortDescription || method.description);
+  }
+
+  get hasStyles(): boolean {
+    return this.block &&
+      this.block.styles &&
+      this.block.styles.length > 0;
   }
 }

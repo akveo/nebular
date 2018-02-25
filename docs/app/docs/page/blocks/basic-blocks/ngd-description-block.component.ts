@@ -25,7 +25,7 @@ import { Component, Input } from '@angular/core';
 })
 export class NgdDescriptionBlockComponent {
 
-  @Input('blockData') set setBlockData(blockData: any) {
+  @Input('block') set setBlockData(blockData: any) {
     if (blockData) {
       this.isShortDescription = !!blockData.shortDescription &&
         blockData.shortDescription !== blockData.name;

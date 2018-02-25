@@ -27,6 +27,7 @@ import { NgdExamplesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-e
 import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-props-block.component';
 import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
+import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
 
 import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { NgdHeaderComponent } from './components/header/ngd-header.component';
@@ -72,6 +73,7 @@ import { Analytics } from './docs/utils/analytics.service';
     NgdComponentBlockComponent,
     NgdFragmentDirective,
     NgdThemeComponent,
+    NgdBlockComponent,
     NgdSassPropValueDirective,
   ],
   providers: [

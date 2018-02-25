@@ -25,7 +25,7 @@ export class NgdExamplesBlockComponent {
   className: string;
 
   @Input() title: any = 'Usage';
-  @Input('blockData')
+  @Input('block')
   set setProps(blockData: any) {
     this.classExamples = blockData.examples;
     this.className = blockData.name;
