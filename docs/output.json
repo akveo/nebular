@@ -2023,6 +2023,15 @@
           "required": null,
           "name": "nbContextMenuPlacement",
           "shortDescription": "Position will be calculated relatively host element based on the placement.\nCan be top, right, bottom and left."
+        },
+        {
+          "kind": "input",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "nbContextMenuTag",
+          "shortDescription": "Set NbMenu tag, which helps identify menu when working with NbMenuService."
         }
       ],
       "methods": [

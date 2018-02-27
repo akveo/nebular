@@ -19,10 +19,13 @@ import { NbMenuItem } from '../../';
 @Component({
   selector: 'nb-context-menu',
   styleUrls: ['./context-menu.component.scss'],
-  template: '<nb-menu class="context-menu" [items]="items"></nb-menu>',
+  template: '<nb-menu class="context-menu" [items]="items" [tag]="tag"></nb-menu>',
 })
 export class NbContextMenuComponent {
 
   @Input()
   items: NbMenuItem[] = [];
+
+  @Input()
+  tag: string;
 }
