@@ -25,7 +25,12 @@ import { Component, Input } from '@angular/core';
 })
 export class NgdDescriptionBlockComponent {
 
-  @Input('block') set setBlockData(source: any) {
+  source: any;
+  isDescription: boolean = false;
+  isShortDescription: boolean = false;
+
+  @Input('source')
+  set setSource(source: any) {
     if (source) {
       this.isShortDescription = !!source.shortDescription &&
         source.shortDescription !== source.name;
@@ -35,9 +40,4 @@ export class NgdDescriptionBlockComponent {
       this.source = source;
     }
   };
-
-  source: any;
-  isDescription: boolean = false;
-  isShortDescription: boolean = false;
-
 }

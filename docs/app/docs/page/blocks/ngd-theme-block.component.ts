@@ -79,7 +79,7 @@ export class NgdThemeComponent implements OnDestroy {
   private fragmentSubscription: Subscription;
 
   @Input('block')
-  set setProps(block: any) {
+  set setBlock(block: any) {
     this.themeTitle = block.name;
     this.themeContent = Object.keys(block.source.data).map(key => {
       const property = block.source.data[key];

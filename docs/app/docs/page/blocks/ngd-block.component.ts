@@ -4,8 +4,8 @@ import { Component, Input } from '@angular/core';
   selector: 'ngd-block',
   template: `
     <ng-container [ngSwitch]="block.block">
-      <ngd-markdown-block *ngSwitchCase="'markdown'" [block]="block"></ngd-markdown-block>
-      <ngd-component-block *ngSwitchCase="'component'" [block]="block.source"></ngd-component-block>
+      <ngd-markdown-block *ngSwitchCase="'markdown'" [source]="block.source"></ngd-markdown-block>
+      <ngd-component-block *ngSwitchCase="'component'" [source]="block.source"></ngd-component-block>
       <ngd-theme-block *ngSwitchCase="'theme'" [block]="block"></ngd-theme-block>
     </ng-container>
   `,
