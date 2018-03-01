@@ -2,16 +2,16 @@
 
   <nb-tab tabTitle="Overview">
     <ng-container *ngFor="let component of source">
-      <ngd-description-block [source]="component" *ngIf="hasDescription(component)">
+      <ngd-description-block [source]="component" *ngIf="blockHelper.hasDescription(component)">
       </ngd-description-block>
-      <ngd-examples-block [source]="component" *ngIf="hasExamples(component)">
+      <ngd-examples-block [source]="component" *ngIf="blockHelper.hasExamples(component)">
       </ngd-examples-block>
     </ng-container>
   </nb-tab>
 
   <nb-tab tabTitle="Theme">
     <ng-container *ngFor="let component of source">
-      <ng-container *ngIf="hasTheme(component)">
+      <ng-container *ngIf="blockHelper.hasTheme(component)">
         <h2 class="class-name">{{component.name}}</h2>
         <ngd-styles-block [source]="component"></ngd-styles-block>
       </ng-container>
@@ -20,11 +20,11 @@
 
   <nb-tab tabTitle="API">
     <ng-container *ngFor="let component of source">
-      <h2 class="class-name" *ngIf="hasProps(component) || hasMethods(component)">
+      <h2 class="class-name" *ngIf="blockHelper.hasProps(component) || blockHelper.hasMethods(component)">
         {{component.name}}
       </h2>
-      <ngd-props-block [source]="component" *ngIf="hasProps(component)"></ngd-props-block>
-      <ngd-methods-block [source]="component" *ngIf="hasMethods(component)"></ngd-methods-block>
+      <ngd-props-block [source]="component" *ngIf="blockHelper.hasProps(component)"></ngd-props-block>
+      <ngd-methods-block [source]="component" *ngIf="blockHelper.hasMethods(component)"></ngd-methods-block>
     </ng-container>
   </nb-tab>
 

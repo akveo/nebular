@@ -41,6 +41,7 @@ import { NgdThemeComponent } from './docs/page/blocks/ngd-theme-block.component'
 import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directive';
 import { SwiperModule } from 'angular2-useful-swiper';
 import { Analytics } from './docs/utils/analytics.service';
+import { BlockHelperService } from './docs/utils/block-helper.service';
 
 @NgModule({
   imports: [
@@ -81,6 +82,7 @@ import { Analytics } from './docs/utils/analytics.service';
     NgdSassPropValueDirective,
   ],
   providers: [
+    BlockHelperService,
     DocsService,
     Analytics,
     Title,
