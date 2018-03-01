@@ -1,0 +1,9 @@
+@import '../../../../styles/themes';
+
+@include nb-install-component {
+
+  /deep/ nb-tabset > ul {
+    padding: 0 0 1.5rem;
+    border-bottom: 0;
+  }
+}

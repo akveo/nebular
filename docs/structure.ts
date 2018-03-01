@@ -400,14 +400,22 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            source: 'NbPopoverDirective',
+            block: 'tabbed',
+            source: [
+              'NbPopoverDirective',
+              'NbPopoverComponent',
+            ],
           },
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbPopoverComponent',
-          },
+          // {
+          //   type: 'block',
+          //   block: 'component',
+          //   source: 'NbPopoverDirective',
+          // },
+          // {
+          //   type: 'block',
+          //   block: 'component',
+          //   source: 'NbPopoverComponent',
+          // },
         ],
       },
       {

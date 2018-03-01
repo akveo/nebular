@@ -14,6 +14,7 @@ import {
   NbCardModule,
   NbLayoutModule,
   NbMenuModule,
+  NbTabsetModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -28,6 +29,7 @@ import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-prop
 import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
 import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
+import { NgdTabbedBlockComponent } from './docs/page/blocks/tabbed-block/ngd-tabbed-block.component';
 
 import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { NgdHeaderComponent } from './components/header/ngd-header.component';
@@ -50,6 +52,7 @@ import { Analytics } from './docs/utils/analytics.service';
     NbCardModule,
     SwiperModule,
     NbLayoutModule,
+    NbTabsetModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
@@ -74,6 +77,7 @@ import { Analytics } from './docs/utils/analytics.service';
     NgdFragmentDirective,
     NgdThemeComponent,
     NgdBlockComponent,
+    NgdTabbedBlockComponent,
     NgdSassPropValueDirective,
   ],
   providers: [
