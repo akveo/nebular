@@ -55,7 +55,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   @Input('nbContextMenu')
   set items(items: NbMenuItem[]) {
     this.validateItems(items);
-    this.popover.context = { items };
+    this.popover.context = Object.assign(this.context, { items });
   };
 
   /**
@@ -77,7 +77,16 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
     this.popover.adjustment = adjustment;
   }
 
+  /**
+   * Set NbMenu tag, which helps identify menu when working with NbMenuService.
+   * */
+  @Input('nbContextMenuTag')
+  set tag(tag: string) {
+    this.popover.context = Object.assign(this.context, { tag });
+  }
+
   protected popover: NbPopoverDirective;
+  protected context = {};
 
   constructor(hostRef: ElementRef,
               themeService: NbThemeService,
