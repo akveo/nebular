@@ -25,10 +25,11 @@ export class NgdExamplesBlockComponent {
   className: string;
 
   @Input() title: any = 'Usage';
-  @Input('blockData')
-  set setProps(blockData: any) {
-    this.classExamples = blockData.examples;
-    this.className = blockData.name;
+
+  @Input('source')
+  set setSource(source: any) {
+    this.classExamples = source.examples;
+    this.className = source.name;
   }
 
   getContent(str) {

@@ -43,10 +43,10 @@ export class NgdStylesBlockComponent implements OnInit {
   classStyles: any;
   className: string;
 
-  @Input('blockData')
-  set setProps(blockData: any) {
-    this.classStyles = blockData.styles;
-    this.className = blockData.name;
+  @Input('source')
+  set setSource(source: any) {
+    this.classStyles = source.styles;
+    this.className = source.name;
   };
 
   constructor(private docsService: DocsService) {}

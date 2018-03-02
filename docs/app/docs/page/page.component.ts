@@ -17,14 +17,8 @@ import { Title } from '@angular/platform-browser';
     <nb-card>
       <nb-card-header *ngIf="isHeader"><h1>{{ currentItem?.name }}</h1></nb-card-header>
       <nb-card-body>
-        <ng-container *ngFor="let item of currentItem?.children">
-          <ng-container [ngSwitch]="item.block">
-
-            <ngd-markdown-block *ngSwitchCase="'markdown'" [block]="item"></ngd-markdown-block>
-            <ngd-component-block *ngSwitchCase="'component'" [blockData]="item.blockData"></ngd-component-block>
-            <ngd-theme-block *ngSwitchCase="'theme'" [block]="item"></ngd-theme-block>
-
-          </ng-container>
+        <ng-container *ngFor="let block of currentItem?.children">
+          <ngd-block [block]="block"></ngd-block>
         </ng-container>
        </nb-card-body>
      </nb-card>
