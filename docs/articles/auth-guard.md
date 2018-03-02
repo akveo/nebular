@@ -51,7 +51,7 @@ import { AuthGuard } from '../auth-guard.service';
   imports: [
     // ...
   ],
-  provoders: [
+  providers: [
     // ...
     AuthGuard
   ]
