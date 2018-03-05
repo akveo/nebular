@@ -1,6 +1,6 @@
 <nb-tabset>
 
-  <nb-tab tabTitle="Overview">
+  <nb-tab tabTitle="Overview" *ngIf="isOverview">
     <ng-container *ngFor="let component of source">
       <ngd-description-block [source]="component" *ngIf="blockHelper.hasDescription(component)">
       </ngd-description-block>
@@ -9,7 +9,7 @@
     </ng-container>
   </nb-tab>
 
-  <nb-tab tabTitle="Theme">
+  <nb-tab tabTitle="Theme" *ngIf="isTheme">
     <ng-container *ngFor="let component of source">
       <ng-container *ngIf="blockHelper.hasTheme(component)">
         <h2 class="class-name">{{component.name}}</h2>
@@ -18,7 +18,7 @@
     </ng-container>
   </nb-tab>
 
-  <nb-tab tabTitle="API">
+  <nb-tab tabTitle="API" *ngIf="isAPI">
     <ng-container *ngFor="let component of source">
       <ng-container *ngIf="blockHelper.hasProps(component) || blockHelper.hasMethods(component)">
         <h2 class="class-name">
