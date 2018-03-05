@@ -20,11 +20,13 @@
 
   <nb-tab tabTitle="API">
     <ng-container *ngFor="let component of source">
-      <h2 class="class-name" *ngIf="blockHelper.hasProps(component) || blockHelper.hasMethods(component)">
-        {{component.name}}
-      </h2>
-      <ngd-props-block [source]="component" *ngIf="blockHelper.hasProps(component)"></ngd-props-block>
-      <ngd-methods-block [source]="component" *ngIf="blockHelper.hasMethods(component)"></ngd-methods-block>
+      <ng-container *ngIf="blockHelper.hasProps(component) || blockHelper.hasMethods(component)">
+        <h2 class="class-name">
+          {{component.name}}
+        </h2>
+        <ngd-props-block [source]="component" *ngIf="blockHelper.hasProps(component)"></ngd-props-block>
+        <ngd-methods-block [source]="component" *ngIf="blockHelper.hasMethods(component)"></ngd-methods-block>
+      </ng-container>
     </ng-container>
   </nb-tab>
 
