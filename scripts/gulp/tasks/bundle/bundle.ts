@@ -1,5 +1,6 @@
 import { dest, src, task } from 'gulp';
-import { LIB_DIR, ROLLUP_COMMON_CONFIG } from './rollup-config';
+import { ROLLUP_COMMON_CONFIG } from './rollup-config';
+import { LIB_DIR } from '../config';
 
 const rollup = require('gulp-rollup');
 const rename = require('gulp-rename');

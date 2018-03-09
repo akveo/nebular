@@ -30,6 +30,6 @@ function parseSassThemes() {
   exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
   return src('docs/themes.scss')
     .pipe(sass({
-      functions: exportThemes('docs/'),
+      functions: exportThemes('docs/', ''),
     }));
 }

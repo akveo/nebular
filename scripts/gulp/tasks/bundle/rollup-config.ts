@@ -81,5 +81,3 @@ export const ROLLUP_COMMON_CONFIG = {
     }),
   ],
 };
-
-export const LIB_DIR = './src/.lib';

@@ -1,10 +1,8 @@
 import { dest, src, task } from 'gulp';
 import { copyResources } from './copy-resources';
+import { BUILD_DIR, LIB_DIR } from '../config';
 
-const LIB_DIR = './src/.lib';
-const BUILD_DIR = './.ng_build';
-
-task('inline-inline-resources', () => {
+task('inline-resources', () => {
   src([
     `${BUILD_DIR}/**/*.html`,
     `${BUILD_DIR}/**/*.css`,
