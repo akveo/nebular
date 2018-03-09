@@ -6,15 +6,13 @@ const gulp = require('gulp');
 const path = require('path');
 const sass = require('gulp-sass');
 const replace = require('gulp-replace');
-const typedoc = require('gulp-typedoc');
-const exec = require('child_process').execSync;
-const export_sass = require('../export-themes');
 
 const BUILD_DIR = './.ng_build';
 
-import './tasks/bundle';
+import './tasks/inline-resources/inline-resources';
+import './tasks/bundle/bundle';
+import './tasks/docs/docs';
 import './tasks/bump-versions';
-import './tasks/inline-resources';
 
 gulp.task('copy-sources', copySources);
 gulp.task('default', ['copy-sources']);
@@ -47,32 +45,3 @@ function compileSass() {
     .pipe(gulp.dest(BUILD_DIR));
 }
 
-gulp.task('generate-doc-json', generateDocJson);
-function generateDocJson() {
-  return gulp
-    .src(['src/framework/**/*.ts', '!src/framework/theme/**/node_modules{,/**}'])
-    .pipe(typedoc({
-      module: 'commonjs',
-      target: 'ES6',
-      // TODO: ignoreCompilerErrors, huh?
-      ignoreCompilerErrors: true,
-      includeDeclarations: true,
-      emitDecoratorMetadata: true,
-      experimentalDecorators: true,
-      excludeExternals: true,
-      exclude: 'node_modules/**/*',
-      json: 'docs/docs.json',
-      version: true,
-      noLib: true,
-    }));
-}
-
-gulp.task('docs', ['generate-doc-json'], parseSassThemes);
-function parseSassThemes() {
-  exec("prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json");
-  return gulp
-    .src('docs/themes.scss')
-    .pipe(sass({
-      functions: export_sass('docs/'),
-    }));
-}

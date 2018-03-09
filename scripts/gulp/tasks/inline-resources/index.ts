@@ -1,1 +1,0 @@
-import './inline-resources';
