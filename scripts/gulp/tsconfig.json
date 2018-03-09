@@ -8,8 +8,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "strictNullChecks": true,
-    "noEmitOnError": true,
-    "noImplicitAny": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"

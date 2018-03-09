@@ -2,9 +2,9 @@
 
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as glob from 'glob';
 
 /**
  * Simple Promiseify function that takes a Node API and return a version that supports promises.
@@ -12,8 +12,7 @@ const glob = require('glob');
  * faster. It also simplify the code.
  */
 function promiseify(fn) {
-  return function () {
-    const args = [].slice.call(arguments, 0);
+  return function (...args) {
     return new Promise((resolve, reject) => {
       fn.apply(this, args.concat([function (err, value) {
         if (err) {
@@ -30,7 +29,7 @@ const readFile = promiseify(fs.readFile);
 const writeFile = promiseify(fs.writeFile);
 
 
-function inlineResources(globs) {
+export function copyResources(globs) {
   if (typeof globs == 'string') {
     globs = [globs];
   }
@@ -72,12 +71,12 @@ function inlineResourcesFromString(content, urlResolver) {
   return [
     inlineTemplate,
     inlineStyle,
-    removeModuleId
+    removeModuleId,
   ].reduce((content, fn) => fn(content, urlResolver), content);
 }
 
 if (require.main === module) {
-  inlineResources(process.argv.slice(2));
+  copyResources(process.argv.slice(2));
 }
 
 
@@ -89,7 +88,7 @@ if (require.main === module) {
  * @return {string} The content with all templates inlined.
  */
 function inlineTemplate(content, urlResolver) {
-  return content.replace(/templateUrl:\s*'([^']+?\.html)'/g, function (m, templateUrl) {
+  return content.replace(/templateUrl:\s*'([^']+?\.html)'/g, function (_, templateUrl) {
     const templateFile = urlResolver(templateUrl);
     const templateContent = fs.readFileSync(templateFile, 'utf-8');
     const shortenedTemplate = templateContent
@@ -108,7 +107,7 @@ function inlineTemplate(content, urlResolver) {
  * @return {string} The content with all styles inlined.
  */
 function inlineStyle(content, urlResolver) {
-  return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, function (m, styleUrls) {
+  return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, function (_, styleUrls) {
     const urls = eval(styleUrls);
     return 'styles: [' +
       urls.map(styleUrl => {
@@ -119,7 +118,7 @@ function inlineStyle(content, urlResolver) {
           .replace(/"/g, '\\"');
         return `"${shortenedStyle}"`;
       })
-      .join(',\n') +
+        .join(',\n') +
       ']';
   });
 }
@@ -133,7 +132,3 @@ function inlineStyle(content, urlResolver) {
 function removeModuleId(content) {
   return content.replace(/\s*moduleId:\s*module\.id\s*,?\s*/gm, '');
 }
-
-
-module.exports = inlineResources;
-module.exports.inlineResourcesFromString = inlineResourcesFromString;
