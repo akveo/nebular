@@ -1,30 +1,42 @@
-'use strict';
-(function (module) {
-  var _ = require('lodash');
-  var fs = require('fs');
-  var Colors = require('colors.js');
+const _ = require('lodash');
+const fs = require('fs');
+const Colors = require('colors.js');
 
-  var exporter = {};
+class Prop {
+  public name: string;
+  public value: any = null;
+  public parents: any[] = [];
+  public childs: any[] = [];
 
-  module.exports = function (path, name) {
-    var out = {};
-    out[exporter.interface(name)] = exporter.function(path);
-    return out;
+  constructor(name) {
+    this.name = name;
   };
+}
 
-  exporter.get_value = function get_value(a) {
-    var value, i;
+class PropLink {
+  public theme: any;
+  public prop: any;
+
+  constructor(theme, prop) {
+    this.theme = theme;
+    this.prop = prop;
+  }
+}
+
+const exporter = {
+  get_value(a) {
+    let value, i;
     switch (a.constructor.name) {
       case 'SassList':
         value = [];
         for (i = 0; i < a.getLength(); i++) {
-          value.push(get_value(a.getValue(i)));
+          value.push(exporter.get_value(a.getValue(i)));
         }
         break;
       case 'SassMap':
         value = {};
         for (i = 0; i < a.getLength(); i++) {
-          value[a.getKey(i).getValue()] = get_value(a.getValue(i));
+          value[a.getKey(i).getValue()] = exporter.get_value(a.getValue(i));
         }
         break;
       case 'SassColor':
@@ -48,26 +60,10 @@
         value = a.getValue();
     }
     return value;
-  };
+  },
 
-  class Prop {
-    constructor(name) {
-      this.name = name;
-      this.value = null;
-      this.parents = [];
-      this.childs = [];
-    };
-  }
-
-  class PropLink {
-    constructor(theme, prop) {
-      this.theme = theme;
-      this.prop = prop;
-    }
-  }
-
-  exporter.parseThemes = function(THEMES) {
-    var result = {};
+  parseThemes(THEMES) {
+    let result = {};
     for (let themeName in THEMES) {
       result[themeName] = result[themeName] ? result[themeName] : {};
       result[themeName].data = result[themeName].data ? result[themeName].data : {};
@@ -82,9 +78,9 @@
     let output = {};
     output['themes'] = result;
     return output;
-  }
+  },
 
-  exporter.getParent = function(prop, scopedThemeName, resultThemeName, resultProp, resultObj, THEMES) {
+  getParent(prop, scopedThemeName, resultThemeName, resultProp, resultObj, THEMES) {
     let scopedTheme = THEMES[scopedThemeName].data;
     let scopedParent = THEMES[scopedThemeName].parent;
     let value = scopedTheme[prop];
@@ -103,10 +99,10 @@
       }
     }
     return resultObj;
-  }
+  },
 
 
-  exporter.linkProps = function (resultObj, parentThemeName, parentPropName, childThemeName, childPropName) {
+  linkProps(resultObj, parentThemeName, parentPropName, childThemeName, childPropName) {
     if (!resultObj.hasOwnProperty(parentThemeName)) {
       resultObj[parentThemeName].data = {};
       resultObj[parentThemeName].data[parentPropName] = new Prop(parentPropName);
@@ -116,21 +112,28 @@
     resultObj[childThemeName].data[childPropName].parents.push(new PropLink(parentThemeName, parentPropName));
     resultObj[parentThemeName].data[parentPropName].childs.push(new PropLink(childThemeName, childPropName));
     return resultObj;
-  }
+  },
 
-  exporter.function = function (path) {
+
+  function(path) {
     return function (file, value, options) {
-      let opt = _.defaults(exporter.get_value(options), {prefix: '', suffix: '', extend: false});
+      let opt = _.defaults(exporter.get_value(options), { prefix: '', suffix: '', extend: false });
       let output = exporter.get_value(value);
       output = exporter.parseThemes(output);
       output = _.defaults(JSON.parse(fs.readFileSync(path + '/' + file.getValue())), output);
       fs.writeFileSync(path + '/' + file.getValue(), opt.prefix + JSON.stringify(output, null, '  ') + opt.suffix);
       return value;
     }
-  };
+  },
 
-  exporter.interface = function (name) {
+  interface(name) {
     name = name || 'export';
     return name + '($file, $value, $options:())';
-  };
-})(module);
+  },
+};
+
+export function exportThemes(path, name) {
+  const out = {};
+  out[exporter.interface(name)] = exporter.function(path);
+  return out;
+}
