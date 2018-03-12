@@ -13,19 +13,19 @@ export class NgdTabbedBlockComponent {
   constructor(public blockHelper: BlockHelperService) {
   }
 
-  get isOverview(): boolean {
+  get hasOverview(): boolean {
     return this.source.some(source => {
       return this.blockHelper.hasDescription(source) || this.blockHelper.hasExamples(source);
     })
   }
 
-  get isTheme(): boolean {
+  get hasTheme(): boolean {
     return this.source.some(source => {
       return this.blockHelper.hasTheme(source);
     })
   }
 
-  get isAPI(): boolean {
+  get hasAPI(): boolean {
     return this.source.some(source => {
       return this.blockHelper.hasMethods(source) || this.blockHelper.hasProps(source);
     })
