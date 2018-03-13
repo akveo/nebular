@@ -17,6 +17,7 @@ const PARSEDDOCS: any = require('../../output.json');
 export class DocsService {
 
   private fragments$ = new Subject<string>();
+  private preparedStructure = this.prepareStructure(this.getStructure(), this.getParsedDocs());
 
   getStructure(): any {
     return STRUCTURE;
@@ -31,7 +32,7 @@ export class DocsService {
   }
 
   getPreparedStructure(): any {
-    return this.prepareStructure(this.getStructure(), this.getParsedDocs());
+    return this.preparedStructure;
   }
 
   emitFragment(fragment: string): void {
@@ -70,6 +71,10 @@ export class DocsService {
         if (item.block === 'component') {
           item.source = preparedDocs.classes.find((data) => data.name === item.source);
         }
+      }
+
+      if (item.block === 'tabbed' && typeof item.source === 'object' && item.source.length > 0) {
+        item.source = item.source.map(source => preparedDocs.classes.find((data) => data.name === source));
       }
 
       if (item.children) {
