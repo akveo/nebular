@@ -10,14 +10,14 @@ Let's assume that your backend returns a JWT token so that we can use the token 
 
 ```typescript
 
-import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
+import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
 
 @NgModule({
   imports: [ ... ].
   
   providers: [
     ...
-    { provide: NB_AUTH_TOKEN_WRAPPER_TOKEN, useValue: NbAuthJWTToken },
+    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
   ],
 });
 
