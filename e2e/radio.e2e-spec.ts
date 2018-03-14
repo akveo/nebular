@@ -21,18 +21,22 @@ describe('nb-search', () => {
 
 
   beforeEach((done) => {
-    browser.get('#/checkbox').then(() => done());
+    browser.get('#/radio').then(() => done());
   });
 
   it('should apply check on click', () => {
-    const input = element(by.css('#first input'));
-    const indicator = element(by.css('#first .customised-control-indicator'));
+    const firstInput = element(by.css('#first input'));
+    const secondInput = element(by.css('#second input'));
+    const firstIndicator = element(by.css('#first .customised-control-indicator'));
+    const secondIndicator = element(by.css('#second .customised-control-indicator'));
 
-    expect(input.getAttribute('checked')).toBeFalsy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeTruthy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeFalsy();
+    expect(firstInput.getAttribute('checked')).toBeFalsy();
+    firstIndicator.click();
+    expect(firstInput.getAttribute('checked')).toBeTruthy();
+    expect(secondInput.getAttribute('checked')).toBeFalsy();
+    secondIndicator.click();
+    expect(firstInput.getAttribute('checked')).toBeFalsy();
+    expect(secondInput.getAttribute('checked')).toBeTruthy();
   });
 
   it('should ignore click if disable', () => {

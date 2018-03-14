@@ -1,0 +1,150 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-radio-theme() {
+  @mixin radio($size, $color, $border-size) {
+    &::before {
+      content: '';
+      position: absolute;
+      background-color: $color;
+      height: calc(#{$size} * 0.6);
+      width: calc(#{$size} * 0.6);
+      border: solid $color;
+      border-radius: 50%;
+    }
+  }
+
+  @mixin set-style($bg, $size, $border-size, $border-color) {
+    background-color: $bg;
+    width: $size;
+    height: $size;
+    border: $border-size solid $border-color;
+  }
+
+  @mixin description-style {
+    color: nb-theme(color-fg-heading);
+    opacity: 0.5;
+    padding-left: 0.25rem;
+  }
+
+  nb-radio {
+    .customised-control {
+      position: relative;
+      display: inline-flex;
+      margin: 0;
+      min-height: inherit;
+      padding: 0.375rem 1.5rem;
+    }
+
+    .customised-control-indicator {
+      @include set-style(
+          nb-theme(radio-bg),
+          nb-theme(radio-size),
+          nb-theme(radio-border-size),
+          nb-theme(radio-border-color)
+      );
+
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      flex: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include radio(
+          nb-theme(radio-size),
+          nb-theme(radio-checkmark),
+          nb-theme(radio-border-size)
+      );
+    }
+
+    .customised-control-input {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .customised-control-input {
+      &:checked ~ .customised-control-indicator {
+        @include set-style(
+            nb-theme(radio-checked-bg),
+            nb-theme(radio-checked-size),
+            nb-theme(radio-checked-border-size),
+            nb-theme(radio-checked-border-color)
+        );
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include radio(
+            nb-theme(radio-checked-size),
+            nb-theme(radio-checked-checkmark),
+            nb-theme(radio-checked-border-size)
+        );
+      }
+
+      &:disabled ~ {
+        .customised-control-indicator {
+          @include set-style(
+              nb-theme(radio-disabled-bg),
+              nb-theme(radio-disabled-size),
+              nb-theme(radio-disabled-border-size),
+              nb-theme(radio-border-color)
+          );
+          opacity: 0.5;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          @include radio(
+              nb-theme(radio-disabled-size),
+              nb-theme(radio-checkmark),
+              nb-theme(radio-disabled-border-size)
+          );
+        }
+
+        .customised-control-description {
+          @include description-style;
+        }
+      }
+
+      &:disabled:checked ~ {
+        .customised-control-indicator {
+          @include set-style(
+              nb-theme(radio-disabled-bg),
+              nb-theme(radio-disabled-size),
+              nb-theme(radio-disabled-border-size),
+              nb-theme(radio-checked-border-color)
+          );
+          opacity: 0.5;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          @include radio(
+              nb-theme(radio-disabled-size),
+              nb-theme(radio-disabled-checkmark),
+              nb-theme(radio-disabled-border-size)
+          );
+        }
+
+        .customised-control-description {
+          @include description-style;
+        }
+      }
+    }
+
+   @include nb-input-status-color(nb-theme(radio-checked-border-color));
+
+    .customised-control-description {
+      @include description-style;
+    }
+  }
+}

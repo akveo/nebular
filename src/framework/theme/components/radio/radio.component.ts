@@ -1,65 +1,59 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
-import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
 import { CanStatus, mixinStatus, Status } from '../../mixins/mixinStatus';
 import { mixinControlValueAccessor } from '../../mixins/mixinControlValueAccessor';
 import { BaseInputAttributes, mixinBaseInputAttributes } from '../../mixins/mixinBaseInputAtributes';
 
-// Increasing integer for generating unique ids for checkbox components.
+// Increasing integer for generating unique ids for radio components.
 let nextUniqueId = 0;
 
-export class NbCheckboxBase {
+export class NbRadioBase {
 }
 
-export const _NbCheckboxMixinBase = mixinBaseInputAttributes(mixinControlValueAccessor(mixinStatus(NbCheckboxBase)));
+export const _NbRadioMixinBase = mixinBaseInputAttributes(mixinControlValueAccessor(mixinStatus(NbRadioBase)));
 
 /**
- * Styled checkbox component
+ * Styled radio component
  *
  * @example Basic example
  *
  * ```
- *  <nb-checkbox [(ngModel)]="enabled">Enabled?</nb-checkbox>
+ *  <nb-radio [(ngModel)]="enabled">Enabled?</nb-radio>
  * ```
  *
  * @example Example with status
  *
  * ```
- *  <nb-checkbox [(ngModel)]="enabled" status="danger">Enabled?</nb-checkbox>
+ *  <nb-radio [(ngModel)]="enabled" status="danger">Enabled?</nb-radio>
  * ```
  *
  * @styles
  *
- * checkbox-bg:
- * checkbox-size:
- * checkbox-border-size:
- * checkbox-border-color:
- * checkbox-checkmark:
- * checkbox-checked-bg:
- * checkbox-checked-size:
- * checkbox-checked-border-size:
- * checkbox-checked-border-color:
- * checkbox-checked-checkmark:
- * checkbox-disabled-bg:
- * checkbox-disabled-size:
- * checkbox-disabled-border-size:
- * checkbox-disabled-border-color:
- * checkbox-disabled-checkmark:
+ * radio-bg:
+ * radio-size:
+ * radio-border-size:
+ * radio-border-color:
+ * radio-checkmark:
+ * radio-checked-bg:
+ * radio-checked-size:
+ * radio-checked-border-size:
+ * radio-checked-border-color:
+ * radio-checked-checkmark:
+ * radio-disabled-bg:
+ * radio-disabled-size:
+ * radio-disabled-border-size:
+ * radio-disabled-border-color:
+ * radio-disabled-checkmark:
  */
 @Component({
-  selector: 'nb-checkbox',
+  selector: 'nb-radio',
   template: `
-    <label class="customised-control customised-checkbox">
-      <input type="checkbox" class="customised-control-input"
+    <label class="customised-control customised-radio">
+      <input type="radio" class="customised-control-input"
              [id]="id"
              [disabled]="disabled"
-             [required]="required"
              [checked]="checked"
+             [name]="name"
              (change)="value = !value">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
@@ -69,14 +63,21 @@ export const _NbCheckboxMixinBase = mixinBaseInputAttributes(mixinControlValueAc
   `,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCheckboxComponent),
+    useExisting: forwardRef(() => NbRadioComponent),
     multi: true,
   }],
 })
-export class NbCheckboxComponent extends _NbCheckboxMixinBase implements ControlValueAccessor,
+
+export class NbRadioComponent extends _NbRadioMixinBase implements ControlValueAccessor,
   BaseInputAttributes, CanStatus {
 
-  private _uniqueId: string = `nb-checkbox-${++nextUniqueId}`;
+  private _uniqueId: string = `nb-radio-${++nextUniqueId}`;
+
+  /**
+   * A unique value to group couple of radios
+   * @type {string}
+   */
+  @Input('name') name: string = '';
 
   /**
    * Element status. Adds specific styles:
@@ -92,6 +93,7 @@ export class NbCheckboxComponent extends _NbCheckboxMixinBase implements Control
   @Input() id: string = this._uniqueId;
 
   /** @type {boolean} */
+
   @Input() disabled: boolean = false;
 
   /** @type {boolean} */
@@ -99,5 +101,4 @@ export class NbCheckboxComponent extends _NbCheckboxMixinBase implements Control
 
   /** @type {boolean} */
   @Input() checked: boolean = false;
-
 }

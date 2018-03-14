@@ -396,6 +396,24 @@ $theme: (
   checkbox-disabled-border-color: color-fg-heading,
   checkbox-disabled-checkmark: color-fg-heading,
 
+  radio-bg: transparent,
+  radio-size: 1.25rem,
+  radio-border-size: 2px,
+  radio-border-color: form-control-border-color,
+  radio-checkmark: transparent,
+
+  radio-checked-bg: transparent,
+  radio-checked-size: 1.25rem,
+  radio-checked-border-size: 2px,
+  radio-checked-border-color: color-success,
+  radio-checked-checkmark: color-fg-heading,
+
+  radio-disabled-bg: transparent,
+  radio-disabled-size: 1.25rem,
+  radio-disabled-border-size: 2px,
+  radio-disabled-border-color: color-fg-heading,
+  radio-disabled-checkmark: color-fg-heading,
+
   radio-fg: color-success,
 
   modal-font-size: font-size,

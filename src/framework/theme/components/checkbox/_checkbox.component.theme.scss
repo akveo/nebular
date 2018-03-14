@@ -5,15 +5,6 @@
  */
 
 @mixin nb-checkbox-theme() {
-  @mixin hover-border($color) {
-    .customised-control-input:checked ~ .customised-control-indicator {
-      border-color: $color;
-    }
-    .customised-control-input:hover:enabled ~ .customised-control-indicator {
-      border-color: lighten($color, 10%);
-    }
-  }
-
   @mixin checkmark($size, $color, $border-size) {
     &::before {
       content: '';
@@ -26,7 +17,7 @@
     }
   }
 
-  @mixin set-style($bg, $size, $border-size, $border-color) {
+  @mixin color-size($bg, $size, $border-size, $border-color) {
     background-color: $bg;
     width: $size;
     height: $size;
@@ -48,7 +39,7 @@
     }
 
     .customised-control-indicator {
-      @include set-style(
+      @include color-size(
           nb-theme(checkbox-bg),
           nb-theme(checkbox-size),
           nb-theme(checkbox-border-size),
@@ -79,7 +70,7 @@
 
     .customised-control-input {
       &:checked ~ .customised-control-indicator {
-        @include set-style(
+        @include color-size(
             nb-theme(checkbox-checked-bg),
             nb-theme(checkbox-checked-size),
             nb-theme(checkbox-checked-border-size),
@@ -98,7 +89,7 @@
 
       &:disabled ~ {
         .customised-control-indicator {
-          @include set-style(
+          @include color-size(
               nb-theme(checkbox-disabled-bg),
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-border-size),
@@ -123,7 +114,7 @@
 
       &:disabled:checked ~ {
         .customised-control-indicator {
-          @include set-style(
+          @include color-size(
               nb-theme(checkbox-disabled-bg),
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-border-size),
@@ -147,16 +138,7 @@
       }
     }
 
-    @include hover-border(nb-theme(checkbox-checked-border-color));
-    &.success {
-      @include hover-border(nb-theme(color-success));
-    }
-    &.warning {
-      @include hover-border(nb-theme(color-warning));
-    }
-    &.danger {
-      @include hover-border(nb-theme(color-danger));
-    }
+    @include nb-input-status-color(nb-theme(checkbox-checked-border-color));
 
     .customised-control-description {
       @include description-style;

@@ -83,6 +83,8 @@ import { NbCardTestComponent } from './card-test/card-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
 import { RoleProvider } from './role.provider';
+import { NbRadioTestComponent } from './radio-test/radio-test.component';
+import { NbRadioModule } from '../framework/theme/components/radio/radio.module';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -120,6 +122,7 @@ const NB_TEST_COMPONENTS = [
   NbFormsTestComponent,
   NbPopoverTestComponent,
   NbCheckboxTestComponent,
+  NbRadioTestComponent,
   NbAclTestComponent,
   NbContextMenuTestComponent,
 ];
@@ -143,6 +146,7 @@ const NB_TEST_COMPONENTS = [
     NbPopoverModule,
     NbContextMenuModule,
     NbCheckboxModule,
+    NbRadioModule,
     NbAuthModule.forRoot({
       forms: {
         login: {
