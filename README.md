@@ -6,7 +6,7 @@
 ## Nebular is a set of essential modules for your next Angular application.
 
 Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
-It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including), authentication and security layers easily configurable for your API. 
+It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including) and authentication and security layers easily configurable for your API. 
 At the same time, Nebular allows you to use it in pair with any other UI library of your choice.
 
 #### Getting started
