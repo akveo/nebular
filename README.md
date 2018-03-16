@@ -17,7 +17,7 @@ At the same time, Nebular allows you to use it in pair with any other UI library
 
 Main Nebular module which includes UI Kit and Theme System.
 
-##### Native Angular Components
+#### Native Angular Components
 
 | Component    | Description                                                          |
 |--------------|----------------------------------------------------------------------|
@@ -37,13 +37,13 @@ Main Nebular module which includes UI Kit and Theme System.
 | Context Menu | A directive to attach a menu to any element.                         |
 | Checkbox     | Simple checkbox with two-way data binding support.                   |
 
-##### Theme System
+#### Theme System
 A set of beautiful styles with handy mixins and guidelines to create and support multiple themes in one project. With themes **hot reload** without a page refresh.
 
-##### Bootstrap Styles
+#### Bootstrap Styles
 Overridings for bootstrap styles for elements consistency with the rest of your theme.
 
-##### Server Side Rendering 
+#### Server Side Rendering 
 Components are compatible with SSR, meaning that it is possible to render them on a server.
 
 
@@ -52,7 +52,7 @@ Components are compatible with SSR, meaning that it is possible to render them o
 
 UI and logic for front-end authentication flow.
 
-##### Auth UI Components
+#### Auth UI Components
 | Component        | Description                                                     |
 |------------------|-----------------------------------------------------------------|
 |                  |                                                                 |
@@ -62,22 +62,22 @@ UI and logic for front-end authentication flow.
 | Restore Password | A page to set up a new password.                                |
 | Auth Block       | Wrapper to center auth component on a page.                     |
 
-##### Auth Providers
+#### Auth Providers
 Auth UI decoupled from the communication to a particular back-end throughout authentication provider services allowing you to connect to any backend API.
 
-##### Token Management
+#### Token Management
 Services to retrieve, store and publish authentication token with helpers for JWT.
 
-##### Token Storage
+#### Token Storage
 Configurable token storage service.
 
-##### Auth Interceptors
+#### Auth Interceptors
 HTTP interceptors to pass authentication token with any HTTP-request.
 
 ### :cop: Security
 @nebular/security
 
-##### ACL
+#### ACL
 Roles and permission management based on access control list. `*nbIsGranted` conditional directive.
 
 
