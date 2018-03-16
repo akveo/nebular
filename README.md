@@ -5,14 +5,18 @@
 
 ## Nebular is a set of essential modules for your next Angular application.
 
-### What's included:
+Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and don't want to spend your time on painful project setup. 
+It provides you with a unified approach for managing styles of various components (3rd party including), native Angular components, authentication and security layers easily configurable for your API.
 
-#### :art: Theme
+#### Getting started
+[Documentation](https://akveo.github.io/nebular/#/docs/getting-started/what-is-nebular) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
+
+### :art: Theme
 @nebular/theme
 
 Main Nebular module which includes UI Kit and Theme System.
 
-##### Native Angular Components
+#### Native Angular Components
 
 | Component    | Description                                                          |
 |--------------|----------------------------------------------------------------------|
@@ -32,22 +36,22 @@ Main Nebular module which includes UI Kit and Theme System.
 | Context Menu | A directive to attache a menu to any element.                        |
 | Checkbox     | Simple checkbox with two-way data binding support.                   |
 
-##### Theme System
+#### Theme System
 A set of beautiful styles with handy mixins and guidelines to create and support multiple themes in one project. With themes **hot reload** without a page refresh.
 
-##### Bootstrap Styles
+#### Bootstrap Styles
 Overridings for bootstrap styles for elements consistency with the rest of your theme.
 
-##### Server Side Rendering 
+#### Server Side Rendering 
 Components are compatible with SSR, meaning that it is possible to render them on server.
 
 
-#### :closed_lock_with_key: Auth
+### :closed_lock_with_key: Auth
 @nebular/auth
 
 UI and logic for front-end authentication flow.
 
-##### Auth UI Components
+#### Auth UI Components
 
 | Component        | Description                                                     |
 |------------------|-----------------------------------------------------------------|
@@ -58,24 +62,24 @@ UI and logic for front-end authentication flow.
 | Restore Password | A page to setup a new password.                                 |
 | Auth Block       | Wrapper to center auth component on a page.                     |
 
-##### Auth Providers
+#### Auth Providers
 
 Auth UI decoupled from the communication to a particular back-end through out authentication provider services allowing you to connect to any backend API.
 
-##### Token Management
+#### Token Management
 
 Services to retrieve, store and publish authentication token with helpers for JWT.
 
-##### Token Storage
+#### Token Storage
 
 Configurable token storage service.
 
-##### Auth Interceptors
+#### Auth Interceptors
 
-#### :cop: Security
+### :cop: Security
 @nebular/security
 
-##### ACL
+#### ACL
 
 Roles and permission management based on access control list. `*nbIsGranted` conditional directive.
 
@@ -92,14 +96,8 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 - Click [here](https://github.com/akveo/ngx-admin) to find ngx-admin repository.
 
 
-### Use cases
-Nebular is a great toolkit if you build a Rich UI web-application based on Angular, and don't want to spend your time on painful project setup. It provides you with a unified approach for managing styles of various components (3rd party including), pure components tightly connected to Angular and authentication layer easily configurable for your API.
-
 ### The purpose
 There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
-
-### Documentation
-Installation, customization and other useful articles: https://akveo.github.io/nebular
 
 ### License
 [MIT](LICENSE.txt) license.
