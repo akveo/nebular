@@ -5,9 +5,9 @@
 
 ## Nebular is a set of essential modules for your next Angular application.
 
-Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
+Nebular is a great toolkit if you build Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
 It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including) and authentication and security layers easily configurable for your API. 
-At the same time, Nebular allows you to use it in pair with any other UI library of your choice.
+At the same time, Nebular allows you to use it together with any other UI library you choose.
 
 #### Getting started
 [Documentation](https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_readme#/docs/getting-started/what-is-nebular) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
@@ -53,6 +53,7 @@ Components are compatible with SSR, meaning that it is possible to render them o
 UI and logic for front-end authentication flow.
 
 #### Auth UI Components
+
 | Component        | Description                                                     |
 |------------------|-----------------------------------------------------------------|
 |                  |                                                                 |
@@ -63,21 +64,24 @@ UI and logic for front-end authentication flow.
 | Auth Block       | Wrapper to center auth component on a page.                     |
 
 #### Auth Providers
+
 Auth UI decoupled from the communication to a particular back-end throughout authentication provider services allowing you to connect to any backend API.
 
 #### Token Management
+
 Services to retrieve, store and publish authentication token with helpers for JWT.
 
 #### Token Storage
+
 Configurable token storage service.
 
 #### Auth Interceptors
-HTTP interceptors to pass authentication token with any HTTP-request.
 
 ### :cop: Security
 @nebular/security
 
 #### ACL
+
 Roles and permission management based on access control list. `*nbIsGranted` conditional directive.
 
 
@@ -88,7 +92,7 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 
 
 ### From Developers
-There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most useful modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
+There are lots of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features that make our life more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. As developers, we feel front-end development is disjointed nowadays. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most useful modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
 
 ### License
 [MIT](LICENSE.txt) license.
