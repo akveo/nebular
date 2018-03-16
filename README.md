@@ -5,8 +5,9 @@
 
 ## Nebular is a set of essential modules for your next Angular application.
 
-Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and don't want to spend your time on painful project setup. 
-It provides you with a unified approach for managing styles of various components (3rd party including), native Angular components, authentication and security layers easily configurable for your API.
+Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
+It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including), authentication and security layers easily configurable for your API. 
+At the same time, Nebular allows you to use it in pair with any other UI library of your choice.
 
 #### Getting started
 [Documentation](https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_readme#/docs/getting-started/what-is-nebular) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
@@ -30,10 +31,10 @@ Main Nebular module which includes UI Kit and Theme System.
 | Search       | Global search with amazing showing animations.                       |
 | Tabs         | Basic and route-based tab components.                                |
 | Actions      | Horizontal actions bar.                                              |
-| User         | User avatar with context menu.                                       |
+| User         | User avatar with a context menu.                                     |
 | Badge        | Simple helper components for showing a badge.                        |
 | Popover      | Pop-up box that appears when a user clicks on an element.            |
-| Context Menu | A directive to attache a menu to any element.                        |
+| Context Menu | A directive to attach a menu to any element.                         |
 | Checkbox     | Simple checkbox with two-way data binding support.                   |
 
 #### Theme System
@@ -43,7 +44,7 @@ A set of beautiful styles with handy mixins and guidelines to create and support
 Overridings for bootstrap styles for elements consistency with the rest of your theme.
 
 #### Server Side Rendering 
-Components are compatible with SSR, meaning that it is possible to render them on server.
+Components are compatible with SSR, meaning that it is possible to render them on a server.
 
 
 ### :closed_lock_with_key: Auth
@@ -58,13 +59,13 @@ UI and logic for front-end authentication flow.
 |                  |                                                                 |
 | Login            | Email & password login page.                                    |
 | Register         | Sign up page component.                                         |
-| Reset Password   | A page to request password reset.                               |
-| Restore Password | A page to setup a new password.                                 |
+| Reset Password   | A page to request a password reset.                             |
+| Restore Password | A page to set up a new password.                                |
 | Auth Block       | Wrapper to center auth component on a page.                     |
 
 #### Auth Providers
 
-Auth UI decoupled from the communication to a particular back-end through out authentication provider services allowing you to connect to any backend API.
+Auth UI decoupled from the communication to a particular back-end throughout authentication provider services allowing you to connect to any backend API.
 
 #### Token Management
 
@@ -91,7 +92,7 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 
 
 ### From Developers
-There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most usefule modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
+There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most useful modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
 
 ### License
 [MIT](LICENSE.txt) license.
