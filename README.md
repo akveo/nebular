@@ -5,9 +5,9 @@
 
 ## Nebular is a set of essential modules for your next Angular application.
 
-Nebular is a great toolkit if you are building a Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
+Nebular is a great toolkit if you build Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
 It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including) and authentication and security layers easily configurable for your API. 
-At the same time, Nebular allows you to use it in pair with any other UI library of your choice.
+At the same time, Nebular allows you to use it together with any other UI library you choose.
 
 #### Getting started
 [Documentation](https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_readme#/docs/getting-started/what-is-nebular) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
