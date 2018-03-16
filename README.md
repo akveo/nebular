@@ -4,27 +4,87 @@
 [![Dependency Status](https://david-dm.org/akveo/ngx-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
 
 ## Nebular is a set of essential modules for your next Angular application.
-<img src="https://i.imgur.com/baznxCs.png" />
 
 ### What's included:
 
-What is included:
-1) [x] @nebular/theme :art:
-  - Theme System - guidelines on how to manage SCSS variables and component styles with hot reload in place.
-  - Pure Angular UI Kit with two style themes and no dependencies.
-  - Style overridings for 3rd party modules (Bootstrap 4, ng2-smart-table) to have a consistent look and feel.
-  - Server-side rendering compatibility!
-2) [x] @nebular/auth :closed_lock_with_key:
-  - Authentication components (login/register/reset password/restore password).
-  - Multiple configurable providers (backend connectors).
-  - Helpers for token management (storing, passing with HTTP requests, etc).
-3) [x] @nebular/security :cop:
-  - Roles and permissions management (ACL)
-  - `*nbIsGranted` conditional directive
-4) [ ] @nebular/dashboard - module for draggable/resizable dashboards creation
-5) [ ] @nebular/data - application data & state management
-6) [x] Admin dashboard starter kit [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
-7) [ ] More great features to come! 
+#### :art: Theme
+@nebular/theme
+
+Main Nebular module which includes UI Kit and Theme System.
+
+##### Native Angular Components
+
+| Component    | Description                                                          |
+|--------------|----------------------------------------------------------------------|
+|              |                                                                      |
+| Layout       | Page layout component, with configurable columns, header and footer. |
+| Sidebar      | Layout sidebar with multiple states.                                 |
+| Menu         | Multi-depth menu component.                                          |
+| Card         | Basic card with arbitrary header and footer.                         |
+| Flip Card    | A card with back and front sides and "flip" switching effect.        |
+| Reveal Card  | A card with back and front sides and "reveal" switching effect.      |
+| Search       | Global search with amazing showing animations.                       |
+| Tabs         | Basic and route-based tab components.                                |
+| Actions      | Horizontal actions bar.                                              |
+| User         | User avatar with context menu.                                       |
+| Badge        | Simple helper components for showing a badge.                        |
+| Popover      | Pop-up box that appears when a user clicks on an element.            |
+| Context Menu | A directive to attache a menu to any element.                        |
+| Checkbox     | Simple checkbox with two-way data binding support.                   |
+
+##### Theme System
+A set of beautiful styles with handy mixins and guidelines to create and support multiple themes in one project. With themes **hot reload** without a page refresh.
+
+##### Bootstrap Styles
+Overridings for bootstrap styles for elements consistency with the rest of your theme.
+
+##### Server Side Rendering 
+Components are compatible with SSR, meaning that it is possible to render them on server.
+
+
+#### :closed_lock_with_key: Auth
+@nebular/auth
+
+UI and logic for front-end authentication flow.
+
+##### Auth UI Components
+
+| Component        | Description                                                     |
+|------------------|-----------------------------------------------------------------|
+|                  |                                                                 |
+| Login            | Email & password login page.                                    |
+| Register         | Sign up page component.                                         |
+| Reset Password   | A page to request password reset.                               |
+| Restore Password | A page to setup a new password.                                 |
+| Auth Block       | Wrapper to center auth component on a page.                     |
+
+##### Auth Providers
+
+Auth UI decoupled from the communication to a particular back-end through out authentication provider services allowing you to connect to any backend API.
+
+##### Token Management
+
+Services to retrieve, store and publish authentication token with helpers for JWT.
+
+##### Token Storage
+
+Configurable token storage service.
+
+##### Auth Interceptors
+
+#### :cop: Security
+@nebular/security
+
+##### ACL
+
+Roles and permission management based on access control list. `*nbIsGranted` conditional directive.
+
+
+### Starter Kits
+
+[ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components.
+[ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
+
 
 ### Demo Application:
 
