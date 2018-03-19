@@ -32,6 +32,8 @@ npm-debug.log
 testem.log
 /typings
 /docs/framework
+/docs/docs.json
+/docs/output.json
 
 # e2e
 /e2e/*.js
