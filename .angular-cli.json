@@ -139,6 +139,9 @@
     },
     {
       "project": "docs/tsconfig.app.json"
+    },
+    {
+      "project": "scripts/gulp/tsconfig.json"
     }
   ],
   "test": {
