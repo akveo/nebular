@@ -26,7 +26,7 @@ const writeFile = promiseify(fs.writeFile);
 
 
 export function copyResources(globs) {
-  if (typeof globs == 'string') {
+  if (typeof globs === 'string') {
     globs = [globs];
   }
 
@@ -68,7 +68,7 @@ function inlineResourcesFromString(content, urlResolver) {
     inlineTemplate,
     inlineStyle,
     removeModuleId,
-  ].reduce((content, fn) => fn(content, urlResolver), content);
+  ].reduce((с, fn) => fn(с, urlResolver), content);
 }
 
 if (require.main === module) {
@@ -104,6 +104,7 @@ function inlineTemplate(content, urlResolver) {
  */
 function inlineStyle(content, urlResolver) {
   return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, function (_, styleUrls) {
+    // tslint:disable-next-line
     const urls = eval(styleUrls);
     return 'styles: [' +
       urls.map(styleUrl => {
