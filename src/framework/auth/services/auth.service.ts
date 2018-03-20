@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators/map';
 import { of as observableOf } from 'rxjs/observable/of';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NB_AUTH_PROVIDERS } from '../auth.options';
+import { NbAuthProviders, NB_AUTH_PROVIDERS } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 import { NbTokenService } from './token/token.service';
 import { NbAuthToken } from './token/token';
@@ -25,7 +25,7 @@ export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
               protected injector: Injector,
-              @Optional() @Inject(NB_AUTH_PROVIDERS) protected providers = {}) {
+              @Optional() @Inject(NB_AUTH_PROVIDERS) protected providers: NbAuthProviders = {}) {
   }
 
   /**
@@ -173,6 +173,6 @@ export class NbAuthService {
       throw new TypeError(`Nb auth provider '${provider}' is not registered`);
     }
 
-    return this.injector.get(this.providers[provider].service);
+    return this.injector.get(this.providers[provider]);
   }
 }

@@ -24,15 +24,10 @@ We assume you already have the Auth module installed inside of your `*.module.ts
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
-       }), 
+     providers: [
+       NbEmailPassAuthProvider.install('email', { ... }),
+     ],
+   }),
   ],
 });
 
@@ -41,28 +36,31 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
-{
- ...
- baseEndpoint: '',
- login: {
-   ...
-   endpoint: '/api/auth/login',
-   ...
- },
- register: {
-   ...
-   endpoint: '/api/auth/register',
-   ...
- },
+
+// ...
+
+NbAuthModule.forRoot({
+  providers: [
+    NbEmailPassAuthProvider.install('email', {
+      baseEndpoint: '',
+      login: {
+        endpoint: '/api/auth/login',
+      },
+      register: {
+        endpoint: '/api/auth/register',
+      },
+    }),
+  ],
+}),
 ```
 
 Let's assume that our API is localed on a separate server `http://example.com/app-api/v1` and change the `baseEndpoint` accordingly:
 
 ```typescript
 {
- ...
- baseEndpoint: 'http://example.com/app-api/v1',
- ...
+ // ...
+  baseEndpoint: 'http://example.com/app-api/v1',
+ // ...
 }
 ```
 
@@ -70,14 +68,14 @@ And configure the endpoints, considering that the final endpoint will consist of
 
 ```typescript
 {
- baseEndpoint: 'http://example.com/app-api/v1',
- login: {
-   endpoint: '/auth/sign-in',
- },
- register: {
-   endpoint: '/auth/sign-up',
- },
- logout: {
+  baseEndpoint: 'http://example.com/app-api/v1',
+  login: {
+    endpoint: '/auth/sign-in',
+  },
+  register: {
+    endpoint: '/auth/sign-up',
+  },
+  logout: {
     endpoint: '/auth/sign-out',
   },
   requestPass: {
@@ -93,16 +91,16 @@ Finally, let's presume that unlike in the default provider settings, our API acc
 
 ```typescript
 {
- baseEndpoint: 'http://example.com/app-api/v1',
- login: {
-   endpoint: '/auth/sign-in',
-   method: 'post',
- },
- register: {
-   endpoint: '/auth/sign-up',
-   method: 'post',
- },
- logout: {
+  baseEndpoint: 'http://example.com/app-api/v1',
+  login: {
+    endpoint: '/auth/sign-in',
+    method: 'post',
+  },
+  register: {
+    endpoint: '/auth/sign-up',
+    method: 'post',
+  },
+  logout: {
     endpoint: '/auth/sign-out',
     method: 'post',
   },

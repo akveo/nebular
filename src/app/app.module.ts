@@ -166,46 +166,40 @@ const NB_TEST_COMPONENTS = [
           ],
         },
       },
-      providers: {
-        //
-        // email: {
-        //   service: NbDummyAuthProvider,
-        //   config: {
-        //     alwaysFail: true,
-        //     delay: 1000,
-        //   },
-        // },
-        email: {
-          service: NbEmailPassAuthProvider,
-          config: {
-            login: {
-              endpoint: 'http://localhost:4400/api/auth/login',
-            },
-            register: {
-              endpoint: 'http://localhost:4400/api/auth/register',
-            },
-            logout: {
-              endpoint: 'http://localhost:4400/api/auth/logout',
-              redirect: {
-                success: '/auth/login',
-                failure: '/auth/login',
-              },
-            },
-            requestPass: {
-              endpoint: 'http://localhost:4400/api/auth/request-pass',
-              redirect: {
-                success: '/auth/reset-password',
-              },
-            },
-            resetPass: {
-              endpoint: 'http://localhost:4400/api/auth/reset-pass',
-              redirect: {
-                success: '/auth/login',
-              },
+      providers: [
+        // NbDummyAuthProvider.install('email', {
+        //   alwaysFail: true,
+        //   delay: 1000,
+        // }),
+
+        NbEmailPassAuthProvider.install('email', {
+          login: {
+            endpoint: 'http://localhost:4400/api/auth/login',
+          },
+          register: {
+            endpoint: 'http://localhost:4400/api/auth/register',
+          },
+          logout: {
+            endpoint: 'http://localhost:4400/api/auth/logout',
+            redirect: {
+              success: '/auth/login',
+              failure: '/auth/login',
             },
           },
-        },
-      },
+          requestPass: {
+            endpoint: 'http://localhost:4400/api/auth/request-pass',
+            redirect: {
+              success: '/auth/reset-password',
+            },
+          },
+          resetPass: {
+            endpoint: 'http://localhost:4400/api/auth/reset-pass',
+            redirect: {
+              success: '/auth/login',
+            },
+          },
+        }),
+      ],
     }),
     NbSecurityModule.forRoot({
       accessControl: {

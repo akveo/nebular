@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
-import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
+import { NbEmailPassAuthProviderConfig } from './email-pass-auth.options';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { getDeepFromObject } from '../helpers';
@@ -112,7 +112,7 @@ import { getDeepFromObject } from '../helpers';
 @Injectable()
 export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
-  protected defaultConfig: NgEmailPassAuthProviderConfig = {
+  protected defaultConfig: NbEmailPassAuthProviderConfig = {
     baseEndpoint: '/api/auth/',
     login: {
       alwaysFail: false,
@@ -188,6 +188,10 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
         this.getConfigValue(`${module}.defaultMessages`)),
     },
   };
+
+  static install(name: string, config: NbEmailPassAuthProviderConfig) {
+    return [name, NbEmailPassAuthProvider, config];
+  }
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();

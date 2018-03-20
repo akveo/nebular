@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { NbAuthToken } from './services';
+import { NbAbstractAuthProvider } from './providers';
 
 export interface NbAuthOptions {
   forms?: any;
@@ -7,7 +8,7 @@ export interface NbAuthOptions {
 }
 
 export interface NbAuthProviders {
-  [key: string]: any;
+  [name: string]: new () => NbAbstractAuthProvider,
 }
 
 export interface NbAuthSocialLink {
@@ -21,6 +22,7 @@ export interface NbAuthSocialLink {
 const socialLinks: NbAuthSocialLink[] = [];
 
 export const defaultSettings: any = {
+  providers: [],
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user

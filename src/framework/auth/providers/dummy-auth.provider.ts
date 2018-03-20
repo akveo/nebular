@@ -19,6 +19,10 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
     delay: 1000,
   };
 
+  static install(name: string, config: NbDummyAuthProviderConfig) {
+    return [name, NbDummyAuthProvider, config];
+  }
+
   authenticate(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(

@@ -24,7 +24,7 @@ export interface NbEmailPassResetModuleConfig extends NbEmailPassModuleConfig {
 }
 
 // TODO postfix to options
-export interface NgEmailPassAuthProviderConfig {
+export interface NbEmailPassAuthProviderConfig {
   baseEndpoint?: string;
   login?: boolean | NbEmailPassModuleConfig;
   register?: boolean | NbEmailPassModuleConfig;

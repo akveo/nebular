@@ -27,16 +27,11 @@ Let's assume that we need to setup email & password authentication based on Nebu
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
-         forms: {},
-       }), 
+     providers: [
+       NbEmailPassAuthProvider.install('email', { ... }),
+     ],
+     forms: {},
+   }), 
   ],
 });
 

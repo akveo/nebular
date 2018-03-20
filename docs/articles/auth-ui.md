@@ -18,19 +18,14 @@ Alongside with the provider's configuration `AuthModule` also accepts a list of 
 
 @NgModule({
   imports: [
-   // ...
+    // ...
     
-   NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
-         forms: {},
-       }), 
+    NbAuthModule.forRoot({
+      providers: [
+        NbEmailPassAuthProvider.install('email', { ... }),
+      ],
+      forms: {},
+    }), 
   ],
 });
 
@@ -121,45 +116,40 @@ So, for instance, to remove the redirectDelay setting and disable the success me
   imports: [
    // ...
     
-   NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
-         forms: {
-          login: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          register: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          requestPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          resetPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          logout: {
-            redirectDelay: 0,
+  NbAuthModule.forRoot({
+       providers: [
+         NbEmailPassAuthProvider.install('email', { ... }),
+       ],
+       forms: {
+        login: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
           },
         },
-     }), 
+        register: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        requestPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        resetPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+   }), 
   ],
 });
 
@@ -181,24 +171,19 @@ const formSetting: any = {
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
+       providers: [
+         NbEmailPassAuthProvider.install('email', { ... }),
+       ],
+       forms: {
+         login: formSetting,
+         register: formSetting,
+         requestPassword: formSetting,
+         resetPassword: formSetting,
+         logout: {
+           redirectDelay: 0,
          },
-         forms: {
-          login: formSetting,
-          register: formSetting,
-          requestPassword: formSetting,
-          resetPassword: formSetting,
-          logout: {
-            redirectDelay: 0,
-          },
-        },
-     }), 
+       },
+   }),
   ],
 });
 

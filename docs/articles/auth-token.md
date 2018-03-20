@@ -42,19 +42,16 @@ We'll assume that our API returns a token as just `{token: 'some-jwt-token'}` no
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-               ...
-                
-               token: {
-                 key: 'token', // this parameter tells Nebular where to look for the token
-               },
-             },
-           },
+     providers: [
+       NbEmailPassAuthProvider.install('email', {
+         ...
+        
+         token: {
+           key: 'token', // this parameter tells Nebular where to look for the token
          },
-       }), 
+       }),
+     ],
+   }), 
   ],
 });
 ```  
