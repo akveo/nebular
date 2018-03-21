@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbLayoutModule, NbPopoverModule, NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
 import { PlaygroundRoutingModule } from './playground-routing.module';
 import { PlaygroundComponent } from './playground.component';
