@@ -140,14 +140,14 @@
 
 @mixin btn-active($active) {
   &:active,
-  &.active {
+  &.active,
+  &:active:focus {
     color: nb-theme(btn-outline-hover-fg);
     background-color: $active;
     border-color: transparent;
     box-shadow: none;
   }
 }
-
 
 // Focus
 @mixin btn-primary-focus() {
