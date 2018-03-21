@@ -6,16 +6,16 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PopoverExampleComponent } from './examples';
-import { PlaygroundComponent } from './playground.component';
+import { NbPopoverExampleComponent } from './examples';
+import { NbPlaygroundComponent } from './playground.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: PlaygroundComponent,
+    component: NbPlaygroundComponent,
     children: [
-      { path: 'popover', component: PopoverExampleComponent },
+      { path: 'popover', component: NbPopoverExampleComponent },
     ],
   },
 ];
@@ -24,5 +24,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PlaygroundRoutingModule {
+export class NbPlaygroundRoutingModule {
 }

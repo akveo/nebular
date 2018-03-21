@@ -12,7 +12,7 @@ import { NbThemeService } from '@nebular/theme';
   template: '<router-outlet></router-outlet>',
 })
 
-export class PlaygroundComponent implements OnInit {
+export class NbPlaygroundComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }
 

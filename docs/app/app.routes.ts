@@ -33,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'example',
-    loadChildren: '../../src/playground/playground.module#PlaygroundModule',
+    loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
   },
   {
     path: '**',

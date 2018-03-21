@@ -150,7 +150,7 @@ import { NbDynamicToAddComponent } from '../../app/dynamic.component';
     </nb-layout>
   `,
 })
-export class PopoverExampleComponent {
+export class NbPopoverExampleComponent {
 
   customPopoverComponent = NbDynamicToAddComponent;
 

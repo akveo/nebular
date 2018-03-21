@@ -8,9 +8,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
-import { PlaygroundRoutingModule } from './playground-routing.module';
-import { PlaygroundComponent } from './playground.component';
-import { PopoverExampleComponent } from './examples';
+import { NbPlaygroundRoutingModule } from './playground-routing.module';
+import { NbPlaygroundComponent } from './playground.component';
+import { NbPopoverExampleComponent } from './examples';
 import { NbDynamicToAddComponent } from '../app/dynamic.component';
 
 export const NB_MODULES = [
@@ -20,7 +20,7 @@ export const NB_MODULES = [
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
-  PopoverExampleComponent,
+  NbPopoverExampleComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
@@ -30,11 +30,15 @@ export const NB_ENTRY_COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
-    PlaygroundRoutingModule,
+    NbPlaygroundRoutingModule,
     ...NB_MODULES,
   ],
+  exports: [
+    ...NB_ENTRY_COMPONENTS,
+    ...NB_EXAMPLE_COMPONENTS,
+  ],
   declarations: [
-    PlaygroundComponent,
+    NbPlaygroundComponent,
     ...NB_ENTRY_COMPONENTS,
     ...NB_EXAMPLE_COMPONENTS,
   ],
@@ -42,5 +46,5 @@ export const NB_ENTRY_COMPONENTS = [
     ...NB_ENTRY_COMPONENTS,
   ],
 })
-export class PlaygroundModule {
+export class NbPlaygroundModule {
 }
