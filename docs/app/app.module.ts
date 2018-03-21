@@ -55,7 +55,7 @@ import { BlockHelperService } from './docs/utils/block-helper.service';
     NbLayoutModule,
     NbTabsetModule,
     NbMenuModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: 'docs' }),
     NbSidebarModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: true }),
   ],
