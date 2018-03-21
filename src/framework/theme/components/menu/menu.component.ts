@@ -5,20 +5,20 @@
  */
 
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    OnInit,
-    OnDestroy,
-    HostBinding,
-    ViewChildren,
-    QueryList,
-    ElementRef,
-    AfterViewInit,
-    PLATFORM_ID,
-    Inject,
-  } from '@angular/core';
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  AfterViewInit,
+  PLATFORM_ID,
+  Inject,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -153,14 +153,17 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   styleUrls: ['./menu.component.scss'],
   template: `
     <ul class="menu-items">
-      <li nbMenuItem *ngFor="let item of items"
-                      [menuItem]="item"
-                      [class.menu-group]="item.group"
-                      (hoverItem)="onHoverItem($event)"
-                      (toggleSubMenu)="onToggleSubMenu($event)"
-                      (selectItem)="onSelectItem($event)"
-                      (itemClick)="onItemClick($event)"
-                      class="menu-item"></li>
+      <ng-container *ngFor="let item of items">
+        <li nbMenuItem *ngIf="!item.hidden"
+            [menuItem]="item"
+            [class.menu-group]="item.group"
+            (hoverItem)="onHoverItem($event)"
+            (toggleSubMenu)="onToggleSubMenu($event)"
+            (selectItem)="onSelectItem($event)"
+            (itemClick)="onItemClick($event)"
+            class="menu-item">
+        </li>
+      </ng-container>
     </ul>
   `,
 })
