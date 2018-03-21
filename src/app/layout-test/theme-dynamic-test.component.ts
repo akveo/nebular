@@ -4,23 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
-
-@Component({
-  selector: 'nb-dynamic-to-add',
-  template: `
-    <div>
-      <strong>hello from dynamically inserted component: {{text}}</strong>
-    </div>
-  `,
-})
-export class NbDynamicToAddComponent {
-
-  @Input()
-  text: string = '';
-}
+import { NbDynamicToAddComponent } from '../dynamic.component';
 
 @Component({
   selector: 'nb-dynamic-test',
@@ -34,7 +21,7 @@ export class NbDynamicToAddComponent {
       </nb-layout-header>
 
       <nb-sidebar right>
-          Sidebar content
+        Sidebar content
       </nb-sidebar>
 
       <nb-layout-column>
@@ -51,10 +38,11 @@ export class NbDynamicToAddComponent {
         &copy; Akveo 2017
       </nb-layout-footer>
     </nb-layout>
-`,
+  `,
 })
 export class NbThemeDynamicTestComponent {
-  constructor(private themeService: NbThemeService, private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private themeService: NbThemeService, private componentFactoryResolver: ComponentFactoryResolver) {
+  }
 
   addDynamicComponent() {
     this.themeService.appendToLayoutTop(NbDynamicToAddComponent).subscribe(cRef => console.info(cRef));

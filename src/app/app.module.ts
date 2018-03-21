@@ -66,7 +66,7 @@ import {
   NbMenuTestComponent,
 } from './menu-test/menu-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
-import { NbDynamicToAddComponent, NbThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
+import { NbThemeDynamicTestComponent } from './layout-test/theme-dynamic-test.component';
 import { NbActionsTestComponent } from './actions-test/actions-test.component';
 import { NbBootstrapTestComponent } from './bootstrap-test/bootstrap-test.component';
 import { NbPopoverTestComponent } from './popover-test/popover-test.component';
@@ -83,6 +83,7 @@ import { NbCardTestComponent } from './card-test/card-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
 import { RoleProvider } from './role.provider';
+import { NbDynamicToAddComponent } from './dynamic.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,

@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
 import { NbCardModule, NbLayoutModule, NbPopoverModule, NbThemeModule } from '@nebular/theme';
 
 import { PlaygroundRoutingModule } from './playground-routing.module';
-import { NbDynamicToAddComponent } from '../app/layout-test/theme-dynamic-test.component';
 import { PlaygroundComponent } from './playground.component';
 import { PopoverExampleComponent } from './examples';
+import { NbDynamicToAddComponent } from '../app/dynamic.component';
 
 export const NB_MODULES = [
   NbCardModule,

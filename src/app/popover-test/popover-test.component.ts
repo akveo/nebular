@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.component';
+import { NbDynamicToAddComponent } from '../dynamic.component';
 
 @Component({
   selector: 'nb-popover-test',
