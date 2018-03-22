@@ -41,7 +41,6 @@ import { NbSidebarTestComponent } from './sidebar-test/sidebar-test.component';
 import { NbTabsetTestComponent } from './tabset-test/tabset-test.component';
 import { NbUserTestComponent } from './user-test/user-test.component';
 import { NbCardTestComponent } from './card-test/card-test.component';
-import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -54,8 +53,10 @@ import { AuthGuard } from './auth-guard.service';
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
+import { routes as playgroundRoutes } from '../playground/playground-routing.module';
 
 export const routes: Routes = [
+  ...playgroundRoutes,
   {
     path: '',
     component: NbCardTestComponent,
@@ -250,10 +251,6 @@ export const routes: Routes = [
   {
     path: 'forms',
     component: NbFormsTestComponent,
-  },
-  {
-    path: 'popover',
-    component: NbPopoverTestComponent,
   },
   {
     path: 'acl',

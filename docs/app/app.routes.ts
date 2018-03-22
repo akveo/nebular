@@ -32,6 +32,10 @@ export const routes: Routes = [
       }],
   },
   {
+    path: 'example',
+    loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

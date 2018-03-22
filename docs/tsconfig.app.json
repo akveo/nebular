@@ -23,5 +23,9 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
+  ],
+  "include": [
+    "../docs/**/*",
+    "../src/playground/playground.module.ts"
   ]
 }
