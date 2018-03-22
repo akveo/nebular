@@ -110,6 +110,15 @@
   @return shade(nb-theme($bg), $percentage);
 }
 
+@mixin btn-outline-focus($focus) {
+  &:focus,
+  &.focus {
+    color: nb-theme(btn-outline-hover-fg);
+    border-color: $focus;
+    box-shadow: none;
+  }
+}
+
 @mixin btn-focus($focus) {
   &:focus,
   &.focus {
@@ -131,14 +140,14 @@
 
 @mixin btn-active($active) {
   &:active,
-  &.active {
+  &.active,
+  &:active:focus {
     color: nb-theme(btn-outline-hover-fg);
     background-color: $active;
     border-color: transparent;
     box-shadow: none;
   }
 }
-
 
 // Focus
 @mixin btn-primary-focus() {
@@ -162,7 +171,7 @@
 }
 
 @mixin btn-secondary-focus() {
-  @include btn-focus(btn-focus-color(btn-secondary-border));
+  @include btn-outline-focus(btn-focus-color(btn-secondary-border, 20%));
 }
 
 

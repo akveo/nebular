@@ -99,7 +99,7 @@
 
   .btn-toggle-group,
   .btn-divided-group {
-    .btn:not(.active) {
+    .btn {
       background-color: nb-theme(btn-group-bg);
       color: nb-theme(btn-group-fg);
     }
@@ -231,7 +231,7 @@
   }
 
   .btn-outline-divided-group {
-    .btn:not(.active) {
+    .btn {
       background-color: transparent;
     }
   }
