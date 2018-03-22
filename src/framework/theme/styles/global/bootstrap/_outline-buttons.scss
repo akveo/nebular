@@ -131,27 +131,27 @@
 
 // Focus
 @mixin btn-outline-primary-focus() {
-  @include btn-primary-focus();
+  @include btn-outline-focus(btn-focus-color(btn-primary-bg, 20%));
 }
 
 @mixin btn-outline-warning-focus() {
-  @include btn-warning-focus();
+  @include btn-outline-focus(btn-focus-color(btn-warning-bg, 20%));
 }
 
 @mixin btn-outline-success-focus() {
-  @include btn-success-focus();
+  @include btn-outline-focus(btn-focus-color(btn-success-bg, 20%));
 }
 
 @mixin btn-outline-info-focus() {
-  @include btn-info-focus();
+  @include btn-outline-focus(btn-focus-color(btn-info-bg, 20%));
 }
 
 @mixin btn-outline-danger-focus() {
-  @include btn-danger-focus();
+  @include btn-outline-focus(btn-focus-color(btn-danger-bg, 20%));
 }
 
 @mixin btn-outline-secondary-focus() {
-  @include btn-secondary-focus();
+  @include btn-outline-focus(btn-focus-color(btn-secondary-border, 20%));
 }
 
 
