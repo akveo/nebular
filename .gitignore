@@ -4,6 +4,7 @@
 /.ng_compiled
 /.ng_build
 .lib
+docs/assets/examples/*
 
 # dependencies
 node_modules
