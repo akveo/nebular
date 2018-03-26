@@ -289,7 +289,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (homeItem) {
       if (homeItem.link) {
-        this.router.navigate([homeItem.link]);
+        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams });
       }
 
       if (homeItem.url) {

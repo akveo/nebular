@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { share } from 'rxjs/operators/share';
+import { Params } from '@angular/router';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -87,6 +88,10 @@ export abstract class NbMenuItem {
    * @type {boolean}
    */
   group?: boolean;
+  /** Map of query parameters
+   *@type {Params}
+   */
+  queryParams?: Params;
   parent?: NbMenuItem;
   selected?: boolean;
   data?: any;
