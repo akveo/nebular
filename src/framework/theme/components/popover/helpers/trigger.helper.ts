@@ -1,3 +1,5 @@
+import { NbDocument } from '../../../theme.options';
+
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
@@ -23,10 +25,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
+   * @param document {NbDocument} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
+  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
     return {
       open: observableEmpty(),
       close: observableFromEvent<Event>(document, 'click')
@@ -46,10 +49,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
+   * @param document {NbDocument} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
+  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
     return {
       open: observableFromEvent<Event>(host, 'mouseenter')
         .pipe(
