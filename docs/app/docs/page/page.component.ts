@@ -6,7 +6,7 @@
 
 import { Component, OnDestroy } from '@angular/core';
 
-import { NbMenuService } from '@nebular/theme';
+import { NbMenuService, NbWindow } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
 
@@ -30,7 +30,8 @@ export class NgdPageComponent implements OnDestroy {
 
   private menuSubscription: Subscription;
 
-  constructor(private menuService: NbMenuService,
+  constructor(private window: NbWindow,
+              private menuService: NbMenuService,
               private titleService: Title) {
 
     this.menuSubscription = this.menuService.onItemSelect()
@@ -48,7 +49,7 @@ export class NgdPageComponent implements OnDestroy {
       this.currentItem.children[0].block !== 'theme';
 
     this.titleService.setTitle(`Nebular Documentation - ${event.item.data.name}`);
-    window.scrollTo(0, 0);
+    this.window.scrollTo(0, 0);
   }
 
   ngOnDestroy() {
