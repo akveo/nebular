@@ -113,11 +113,11 @@ import { getDeepFromObject } from '../helpers';
 export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
   protected defaultConfig: NgEmailPassAuthProviderConfig = {
-    baseEndpoint: '',
+    baseEndpoint: '/api/auth/',
     login: {
       alwaysFail: false,
-      rememberMe: true,
-      endpoint: '/api/auth/login',
+      rememberMe: true, // TODO: what does that mean?
+      endpoint: 'login',
       method: 'post',
       redirect: {
         success: '/',
@@ -129,7 +129,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     register: {
       alwaysFail: false,
       rememberMe: true,
-      endpoint: '/api/auth/register',
+      endpoint: 'register',
       method: 'post',
       redirect: {
         success: '/',
@@ -140,7 +140,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
     logout: {
       alwaysFail: false,
-      endpoint: '/api/auth/logout',
+      endpoint: 'logout',
       method: 'delete',
       redirect: {
         success: '/',
@@ -150,7 +150,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       defaultMessages: ['You have been successfully logged out.'],
     },
     requestPass: {
-      endpoint: '/api/auth/request-pass',
+      endpoint: 'request-pass',
       method: 'post',
       redirect: {
         success: '/',
@@ -160,7 +160,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       defaultMessages: ['Reset password instructions have been sent to your email.'],
     },
     resetPass: {
-      endpoint: '/api/auth/reset-pass',
+      endpoint: 'reset-pass',
       method: 'put',
       redirect: {
         success: '/',
