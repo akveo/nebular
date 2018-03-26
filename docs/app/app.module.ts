@@ -43,6 +43,8 @@ import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directi
 import { SwiperModule } from 'angular2-useful-swiper';
 import { Analytics } from './docs/utils/analytics.service';
 import { BlockHelperService } from './docs/utils/block-helper.service';
+import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
+import { IframeCommunicatorService } from './components/example/iframe-communicator';
 
 @NgModule({
   imports: [
@@ -82,8 +84,10 @@ import { BlockHelperService } from './docs/utils/block-helper.service';
     NgdOverviewBlockComponent,
     NgdLiveExampleComponent,
     NgdSassPropValueDirective,
+    NgdExampleRendererComponent,
   ],
   providers: [
+    IframeCommunicatorService,
     BlockHelperService,
     DocsService,
     Analytics,
