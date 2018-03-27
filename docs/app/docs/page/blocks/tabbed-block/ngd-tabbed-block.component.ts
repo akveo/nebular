@@ -14,9 +14,7 @@ export class NgdTabbedBlockComponent {
   }
 
   get hasOverview(): boolean {
-    return this.source.some(source => {
-      return this.blockHelper.hasDescription(source) || this.blockHelper.hasExamples(source);
-    })
+    return this.source.some(source => this.blockHelper.hasOverview(source));
   }
 
   get hasTheme(): boolean {
