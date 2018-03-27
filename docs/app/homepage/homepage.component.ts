@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
 import { Subject } from 'rxjs/Rx';
-import { NbSpinnerService } from '@nebular/theme';
+import { NbSpinnerService, NbWindow } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-homepage',
@@ -95,7 +95,8 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   currentSectionId: string = 'home';
   highlightMenu$ = new Subject();
 
-  constructor(private renderer: Renderer2,
+  constructor(private window: NbWindow,
+              private renderer: Renderer2,
               private spinnerService: NbSpinnerService,
               private titleService: Title) {
     this.renderer.setProperty(document.body, 'scrollTop', 0);
@@ -170,7 +171,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   }
 
   private calculateBgTopOffcet() {
-    let bgScrollTop = window.pageYOffset / this.getScrollSpeedRatio();
+    let bgScrollTop = this.window.pageYOffset / this.getScrollSpeedRatio();
     if (bgScrollTop > NgdHomepageComponent.BG_IMAGE_HEIGHT) {
       bgScrollTop = NgdHomepageComponent.BG_IMAGE_HEIGHT;
     }
