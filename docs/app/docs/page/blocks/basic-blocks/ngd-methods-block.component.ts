@@ -44,11 +44,6 @@ import { Component, Input } from '@angular/core';
           </tbody>
         </table>
       </div>
-      <div *ngFor="let method of classMethods">
-        <div *ngIf="method.examples.length > 0">
-          <ngd-examples-block [source]="method" [title]="'Examples of usage ' + method.name"></ngd-examples-block>
-        </div>
-      </div>
     </div>
   `,
 })

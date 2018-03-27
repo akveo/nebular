@@ -45,6 +45,10 @@ import { Analytics } from './docs/utils/analytics.service';
 import { BlockHelperService } from './docs/utils/block-helper.service';
 import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
 import { IframeCommunicatorService } from './components/example/iframe-communicator';
+import { NgdCodeBlockComponent } from './docs/page/blocks/basic-blocks/ngd-code-block.component';
+import { NgdInlineExampleComponent } from './docs/page/blocks/inline-example/ngd-inline-example.component';
+import { NgdFullExampleComponent } from './docs/page/blocks/inline-example/ngd-full-example.component';
+import { NgdOneFileExampleComponent } from './docs/page/blocks/inline-example/ngd-one-file-example.component';
 
 @NgModule({
   imports: [
@@ -85,6 +89,10 @@ import { IframeCommunicatorService } from './components/example/iframe-communica
     NgdLiveExampleComponent,
     NgdSassPropValueDirective,
     NgdExampleRendererComponent,
+    NgdInlineExampleComponent,
+    NgdCodeBlockComponent,
+    NgdFullExampleComponent,
+    NgdOneFileExampleComponent,
   ],
   providers: [
     IframeCommunicatorService,
