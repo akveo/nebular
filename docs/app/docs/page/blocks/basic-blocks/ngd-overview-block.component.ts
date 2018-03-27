@@ -14,9 +14,8 @@ import { Component, Input, OnInit } from '@angular/core';
         </p>
         <ngd-live-example *ngIf="node.type === 'live-example'" [id]="node.content">
         </ngd-live-example>
-        <p *ngIf="node.type === 'inline-example'">
-          <!-- TODO use inline-example renderer here -->
-        </p>
+        <ngd-inline-example *ngIf="node.type === 'inline-example'" [content]="node.content">
+        </ngd-inline-example>
       </ng-container>
     </div>
   `,
