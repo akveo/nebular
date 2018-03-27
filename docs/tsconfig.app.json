@@ -22,7 +22,8 @@
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "assets/**/*.*"
   ],
   "include": [
     "../docs/**/*",

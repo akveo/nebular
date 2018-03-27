@@ -34,6 +34,7 @@ testem.log
 /docs/framework
 /docs/docs.json
 /docs/output.json
+/docs/assets/examples
 
 # e2e
 /e2e/*.js

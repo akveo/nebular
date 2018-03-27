@@ -1,11 +1,12 @@
 import { src, task } from 'gulp';
 import { exportThemes } from './export-themes';
+import './copy-examples';
 
 const typedoc = require('gulp-typedoc');
 const sass = require('gulp-sass');
 const exec = require('child_process').execSync;
 
-task('docs', ['generate-doc-json'], parseSassThemes);
+task('docs', ['generate-doc-json', 'copy-examples'], parseSassThemes);
 task('generate-doc-json', generateDocJson);
 
 function generateDocJson() {
