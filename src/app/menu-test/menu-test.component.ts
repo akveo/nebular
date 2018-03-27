@@ -111,6 +111,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       title: 'Menu #1',
       link: '/menu/1',
       icon: 'nb-keypad',
+      queryParams: { param: 1 },
     },
     {
       title: 'Menu #2',
@@ -166,6 +167,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
                 {
                   title: 'Menu #3.3.2',
                   link: '/menu/3/3/2',
+                  queryParams: { param: 2 },
                   home: true,
                 },
                 {
