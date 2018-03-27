@@ -4,10 +4,8 @@ import { BlockHelperService } from '../../utils/block-helper.service';
 @Component({
   selector: 'ngd-component-block',
   template: `
-    <ngd-description-block *ngIf="blockHelper.hasDescription(source)" [source]="source">
-    </ngd-description-block>
-    <ngd-examples-block *ngIf="blockHelper.hasExamples(source)" [source]="source">
-    </ngd-examples-block>
+    <ngd-overview-block *ngIf="blockHelper.hasOverview(source)" [source]="source">
+    </ngd-overview-block>
     <ngd-props-block *ngIf="blockHelper.hasProps(source)" [source]="source">
     </ngd-props-block>
     <ngd-methods-block *ngIf="blockHelper.hasMethods(source)" [source]="source">
