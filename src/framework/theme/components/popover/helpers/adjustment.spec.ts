@@ -3,9 +3,12 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { async, inject, TestBed } from '@angular/core/testing';
 
 import { NbAdjustmentHelper } from './adjustment.helper';
 import { NbPopoverAdjustment, NbPopoverPlacement } from './model';
+import { NbDocument, NbWindow } from '../../../theme.options';
+import { NbPositioningHelper } from './positioning.helper';
 
 describe('adjustment-helper', () => {
   const placedRect: ClientRect = {
@@ -52,6 +55,28 @@ describe('adjustment-helper', () => {
     },
   };
 
+  let adjustmentHelper: NbAdjustmentHelper;
+
+  beforeEach(() => {
+    // Configure testbed to prepare services
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: NbWindow, useValue: window },
+        { provide: NbDocument, useValue: document },
+        NbPositioningHelper,
+        NbAdjustmentHelper,
+      ],
+    });
+  });
+
+  // Single async inject to save references; which are used in all tests below
+  beforeEach(async(inject(
+    [NbAdjustmentHelper],
+    (_adjustmentHelper) => {
+      adjustmentHelper = _adjustmentHelper
+    },
+  )));
+
   describe('clockwise strategy', () => {
     const strategy = NbPopoverAdjustment.CLOCKWISE;
     const placement = NbPopoverPlacement.TOP;
@@ -62,7 +87,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.RIGHT);
       expect(adjustment.position.top).toEqual(1035);
@@ -75,7 +100,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.BOTTOM);
       expect(adjustment.position.top).toEqual(1120);
@@ -88,7 +113,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
@@ -101,7 +126,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
@@ -114,7 +139,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
@@ -127,7 +152,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(950);
@@ -145,7 +170,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.BOTTOM);
       expect(adjustment.position.top).toEqual(1120);
@@ -158,7 +183,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
@@ -171,7 +196,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.bottomRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
@@ -184,7 +209,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.bottomLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(1940);
@@ -197,7 +222,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topRight, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.LEFT);
       expect(adjustment.position.top).toEqual(1035);
@@ -210,7 +235,7 @@ describe('adjustment-helper', () => {
       spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
       spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-      const adjustment = NbAdjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
+      const adjustment = adjustmentHelper.adjust(placedRect, hostRect.topLeft, placement, strategy);
 
       expect(adjustment.placement).toEqual(NbPopoverPlacement.TOP);
       expect(adjustment.position.top).toEqual(950);
