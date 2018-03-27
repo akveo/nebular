@@ -5,6 +5,7 @@
 <a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group && !menuItem.hidden"
         [routerLink]="menuItem.link"
         [fragment]="menuItem.fragment"
+        [queryParams]="menuItem.queryParams"
         [attr.target]="menuItem.target"
         [attr.title]="menuItem.title"
         [class.active]="menuItem.selected"
