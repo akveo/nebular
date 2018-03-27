@@ -2,10 +2,7 @@
 
   <nb-tab tabTitle="Overview" *ngIf="hasOverview">
     <ng-container *ngFor="let component of source">
-      <ngd-description-block [source]="component" *ngIf="blockHelper.hasDescription(component)">
-      </ngd-description-block>
-      <ngd-examples-block [source]="component" *ngIf="blockHelper.hasExamples(component)">
-      </ngd-examples-block>
+      <ngd-overview-block [source]="component" *ngIf="blockHelper.hasOverview(component)"></ngd-overview-block>
     </ng-container>
   </nb-tab>
 
