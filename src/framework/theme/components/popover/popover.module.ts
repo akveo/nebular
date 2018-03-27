@@ -8,12 +8,16 @@ import { NgModule } from '@angular/core';
 import { NbPopoverComponent } from './popover.component';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbPopoverDirective } from './popover.directive';
+import { NbAdjustmentHelper } from './helpers/adjustment.helper';
+import { NbPositioningHelper } from './helpers/positioning.helper';
+import { NbTriggerHelper } from './helpers/trigger.helper';
 
 @NgModule({
   imports: [NbSharedModule],
   declarations: [NbPopoverComponent, NbPopoverDirective],
   exports: [NbPopoverDirective],
   entryComponents: [NbPopoverComponent],
+  providers: [NbAdjustmentHelper, NbPositioningHelper, NbTriggerHelper],
 })
 export class NbPopoverModule {
 }
