@@ -276,4 +276,18 @@ describe('nb-menu', () => {
         expect(browser.getCurrentUrl()).toContain('#/menu/1');
       });
   });
+
+  it('should add query string to url', () => {
+    element.all(menu1).first().click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('param=1');
+      })
+  });
+
+  it('should add query string to url (navigate home)', () => {
+    element(homeButton).click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('param=2');
+      })
+  });
 });
