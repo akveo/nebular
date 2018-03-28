@@ -12,9 +12,8 @@ import { Component, Input, OnInit } from '@angular/core';
         <p *ngIf="node.type === 'text'" ngdDescription class="description">
           {{node.content}}
         </p>
-        <p *ngIf="node.type === 'live-example'">
-          <!-- TODO use live-example renderer here -->
-        </p>
+        <ngd-live-example *ngIf="node.type === 'live-example'" [id]="node.content">
+        </ngd-live-example>
         <p *ngIf="node.type === 'inline-example'">
           <!-- TODO use inline-example renderer here -->
         </p>
