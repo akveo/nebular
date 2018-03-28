@@ -11,6 +11,7 @@ import 'style-loader!./styles/styles.scss';
 import { Subscription } from 'rxjs/Subscription';
 import { DocsService } from './docs/docs.service';
 import { Analytics } from './docs/utils/analytics.service';
+import { NbWindow } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-app-root',
@@ -23,7 +24,8 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
   private fragmentSubscription: Subscription;
 
 
-  constructor(private docsService: DocsService,
+  constructor(private window: NbWindow,
+              private docsService: DocsService,
               private router: Router,
               private route: ActivatedRoute,
               private elementRef: ElementRef,
@@ -48,13 +50,13 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
       if (el) {
         el.scrollIntoView();
         if (new RegExp(/themes/i).test(this.router.url)) {
-          window.scrollBy(0, -235); // header + theme-header
+          this.window.scrollBy(0, -235); // header + theme-header
         } else {
-          window.scrollBy(0, -80);
+          this.window.scrollBy(0, -80);
         }
       }
     } else {
-      window.scrollTo(0, 0);
+      this.window.scrollTo(0, 0);
     }
   }
 

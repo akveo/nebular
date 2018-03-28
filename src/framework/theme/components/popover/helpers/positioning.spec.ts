@@ -3,9 +3,11 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { async, inject, TestBed } from '@angular/core/testing';
 
 import { NbPositioningHelper } from './positioning.helper';
 import { NbPopoverPlacement } from './model';
+import { NbDocument, NbWindow } from '../../../theme.options';
 
 describe('positioning-helper', () => {
   const placedRect: ClientRect = {
@@ -26,26 +28,47 @@ describe('positioning-helper', () => {
     width: 100,
   };
 
+  let positioningHelper: NbPositioningHelper;
+
+  beforeEach(() => {
+    // Configure testbed to prepare services
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: NbWindow, useValue: window },
+        { provide: NbDocument, useValue: document },
+        NbPositioningHelper,
+      ],
+    });
+  });
+
+  // Single async inject to save references; which are used in all tests below
+  beforeEach(async(inject(
+    [NbPositioningHelper],
+    (_positioningHelper) => {
+      positioningHelper = _positioningHelper
+    },
+  )));
+
   it('correctly locates top placement', () => {
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.TOP);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.TOP);
     expect(position.top).toEqual(40);
     expect(position.left).toEqual(125);
   });
 
   it('correctly locates bottom placement', () => {
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.BOTTOM);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.BOTTOM);
     expect(position.top).toEqual(210);
     expect(position.left).toEqual(125);
   });
 
   it('correctly locates left placement', () => {
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.LEFT);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.LEFT);
     expect(position.top).toEqual(125);
     expect(position.left).toEqual(40);
   });
 
   it('correctly locates right placement', () => {
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.RIGHT);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.RIGHT);
     expect(position.top).toEqual(125);
     expect(position.left).toEqual(210);
   });
@@ -54,7 +77,7 @@ describe('positioning-helper', () => {
     spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
     spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.TOP);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.TOP);
 
     expect(position.top).toEqual(1040);
     expect(position.left).toEqual(1125);
@@ -64,7 +87,7 @@ describe('positioning-helper', () => {
     spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
     spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.BOTTOM);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.BOTTOM);
 
     expect(position.top).toEqual(1210);
     expect(position.left).toEqual(1125);
@@ -74,7 +97,7 @@ describe('positioning-helper', () => {
     spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
     spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.LEFT);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.LEFT);
 
     expect(position.top).toEqual(1125);
     expect(position.left).toEqual(1040);
@@ -84,7 +107,7 @@ describe('positioning-helper', () => {
     spyOnProperty(window, 'pageXOffset', 'get').and.returnValue(1000);
     spyOnProperty(window, 'pageYOffset', 'get').and.returnValue(1000);
 
-    const position = NbPositioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.RIGHT);
+    const position = positioningHelper.calcPosition(placedRect, hostRect, NbPopoverPlacement.RIGHT);
 
     expect(position.top).toEqual(1125);
     expect(position.left).toEqual(1210);
