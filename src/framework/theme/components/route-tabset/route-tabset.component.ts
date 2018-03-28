@@ -5,7 +5,6 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { convertToBoolProperty } from '../helpers';
 
@@ -19,11 +18,11 @@ import { convertToBoolProperty } from '../helpers';
  *  tabs = [
  *  {
  *    title: 'Route tab #1',
- *    route: '/pages/description',
+ *    route: 'description',
  *  },
  *  {
  *    title: 'Route tab #2',
- *    route: '/pages/images',
+ *    route: ['images'],
  *    }
  *  ];
  *
@@ -49,12 +48,13 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./route-tabset.component.scss'],
   template: `
     <ul>
-      <li *ngFor="let tab of tabs"
-          (click)="$event.preventDefault(); selectTab(tab)"
-          routerLink="{{tab.route}}"
+      <li *ngFor="let tab of tabs">
+        <a (click)="selectTab(tab)"
+          [routerLink]="tab.route"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
-        <a href>{{tab.title}}</a>
+          {{tab.title}}
+        </a>
       </li>
     </ul>
     <router-outlet></router-outlet>
@@ -66,7 +66,7 @@ export class NbRouteTabsetComponent {
 
   /**
    * Tabs configuration
-   * @param Object{route: string, title: string, tag?: string}
+   * @param Object{route: string|array, title: string, tag?: string}
    */
   @Input() tabs: any[];
 
@@ -85,12 +85,7 @@ export class NbRouteTabsetComponent {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private router: Router) {
-  }
-
   selectTab(tab: any) {
     this.changeTab.emit(tab);
-
-    this.router.navigate([tab.route]);
   }
 }

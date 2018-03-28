@@ -15,10 +15,6 @@ ul {
     margin-bottom: -1px;
     text-align: center;
 
-    &.active a::before {
-      display: block;
-    }
-
     a {
       position: relative;
       text-decoration: none;
@@ -33,6 +29,10 @@ ul {
         border-radius: 3px;
         bottom: -2px;
         left: 0;
+      }
+
+      &.active::before {
+        display: block;
       }
     }
   }
