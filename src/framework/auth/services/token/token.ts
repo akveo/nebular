@@ -13,10 +13,10 @@ export abstract class NbAuthToken {
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: string): NbAuthToken;
+  new (raw: any): NbAuthToken;
 }
 
-export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: string) {
+export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: any) {
   return new tokenClass(token);
 }
 

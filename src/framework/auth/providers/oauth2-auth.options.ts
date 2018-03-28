@@ -12,8 +12,9 @@ export interface NbOAuth2AuthOptions {
     success?: string | null;
     failure?: string | null;
   };
+  defaultErrors?: any[];
+  defaultMessages?: any[];
   authorize?: {
-    alwaysFail?: boolean;
     endpoint?: string;
     redirectUri?: string;
     responseType?: string;

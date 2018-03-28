@@ -11,11 +11,11 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
+import { NbWindow } from '@nebular/theme';
 
 import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { NbOAuth2AuthOptions } from './oauth2-auth.options';
-
 
 export enum NbOAuth2ResponseType {
   CODE = 'code',
@@ -28,6 +28,9 @@ export enum NbOAuth2GrantType {
   REFRESH_TOKEN = 'refresh_token',
 }
 
+// TODO: handle state
+// TODO: refresh token
+// TODO: oauth2 token
 @Injectable()
 export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
 
@@ -47,9 +50,12 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
       success: '/',
       failure: null,
     },
+    defaultErrors: ['Something went wrong, please try again.'],
+    defaultMessages: ['You have been successfully authenticated.'],
     authorize: {
       endpoint: 'authorize',
       responseType: NbOAuth2ResponseType.CODE,
+
     },
     token: {
       endpoint: 'token',
@@ -57,7 +63,9 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
     },
   };
 
-  constructor(protected http: HttpClient, private route: ActivatedRoute) {
+  constructor(protected http: HttpClient,
+              private route: ActivatedRoute,
+              private window: NbWindow) {
     super();
   }
 
@@ -69,7 +77,6 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
             this.authorizeRedirect();
             return observableOf(null);
           }
-
           return this.getAuthorizationResult();
         }),
       );
@@ -83,45 +90,80 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
     }
 
     throw new Error(`'${this.getConfigValue('authorize.responseType')}' responseType is not supported,
-                      only 'token' and 'code' are supported now.`);
+                      only 'token' and 'code' are supported now`);
   }
 
   protected authorizeRedirect() {
-    window.location.href = this.buildRedirectUrl();
+    this.window.location.href = this.buildRedirectUrl();
+  }
+
+  protected isRedirectResult(): Observable<boolean> {
+    return this.isTypeCode ? this.isCodeRedirectResult() : this.isTokenRedirectResult();
+  }
+
+  protected isCodeRedirectResult(): Observable<boolean> {
+    return this.route.queryParams.pipe(
+      map((params: any) => !!(params && (params.code || params.error))),
+    );
+  }
+
+  protected isTokenRedirectResult(): Observable<boolean> {
+    return this.route.params.pipe(
+      map((params: any) => !!(params && (params.access_token || params.error))),
+    );
   }
 
   protected getCodeRedirectResult(): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('token');
-
     return this.route.queryParams.pipe(
       switchMap((params: any) => {
-        return this.http.post(url, this.buildCodeRequestData(params.code));
-      }),
-      map((res) => {
-        return new NbAuthResult(
-          true,
-          res,
-          this.getConfigValue('redirect.success'),
-          [],
-          res);
-      }),
-      catchError((res) => {
-        let errors = [];
-        if (res instanceof HttpErrorResponse) {
-          errors = res.error['error'];
-        } else {
-          errors.push('Something went wrong.');
+        if (params.code) {
+          return this.requestToken(params.code)
         }
 
         return observableOf(
           new NbAuthResult(
             false,
-            res,
+            params,
             this.getConfigValue('redirect.failure'),
-            errors,
+            this.getConfigValue('defaultErrors'),
+            [],
           ));
       }),
     );
+  }
+
+  protected requestToken(code: string) {
+    const url = this.getActionEndpoint('token');
+
+    return this.http.post(url, this.buildCodeRequestData(code))
+      .pipe(
+        map((res) => {
+          return new NbAuthResult(
+            true,
+            res,
+            this.getConfigValue('redirect.success'),
+            [],
+            this.getConfigValue('defaultMessages'),
+            res);
+        }),
+        catchError((res) => {
+          let errors = [];
+          if (res instanceof HttpErrorResponse) {
+            errors = this.getConfigValue('defaultErrors');
+          } else {
+            errors.push('Something went wrong.');
+          }
+
+          return observableOf(
+            new NbAuthResult(
+              false,
+              res,
+              this.getConfigValue('redirect.failure'),
+              errors,
+              [],
+            ));
+        }),
+      );
   }
 
   protected getTokenRedirectResult(): Observable<NbAuthResult> {
@@ -133,56 +175,53 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
             params,
             this.getConfigValue('redirect.success'),
             [],
+            this.getConfigValue('defaultMessages'),
             params);
         }
 
-        new NbAuthResult(
+        return new NbAuthResult(
           false,
           params,
           this.getConfigValue('redirect.failure'),
-          params,
-        );
+          this.getConfigValue('defaultErrors'),
+          [],
+          );
       }),
     );
   }
 
-  protected isRedirectResult(): Observable<boolean> {
-    return this.isTypeCode ? this.isCodeRedirectResult() : this.isTokenRedirectResult();
-  }
-
-  protected isCodeRedirectResult(): Observable<boolean> {
-    return this.route.queryParams.pipe(
-      map((params: any) => params && (params.code || params.error)),
-    );
-  }
-
-  protected isTokenRedirectResult(): Observable<boolean> {
-    return this.route.params.pipe(
-      map((params: any) => params && (params.access_token || params.error)),
-    );
-  }
-
   protected buildCodeRequestData(code: string): any {
-    return {
+    const params = {
       grant_type: this.getConfigValue('token.grantType'),
       code: code,
       redirect_uri: this.getConfigValue('token.redirectUri'),
       client_id: this.getConfigValue('clientId'),
-    }
+    };
+
+    Object.entries(params)
+      .forEach(([key, val]) => !val && delete params[key]);
+
+    return params;
   }
 
   protected buildRedirectUrl() {
     const params = {
       response_type: this.getConfigValue('authorize.responseType'),
       client_id: this.getConfigValue('clientId'),
-      redirect_uri: this.getConfigValue('redirectUri'),
+      redirect_uri: this.getConfigValue('authorize.redirectUri'),
       scope: this.getConfigValue('authorize.scope'),
       state: this.getConfigValue('authorize.state'),
 
       ...this.getConfigValue('authorize.params'),
     };
 
-    return Object.entries(params).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&');
+    const endpoint = this.getActionEndpoint('authorize');
+    const query = Object.entries(params)
+      .filter(([key, val]) => !!val)
+      .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+      .join('&');
+
+    return `${endpoint}?${query}`;
   }
 
   register(data?: any): Observable<NbAuthResult> {
