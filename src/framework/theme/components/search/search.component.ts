@@ -232,6 +232,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     ])
       .pipe(
         takeWhile(() => this.alive),
+        filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
       .subscribe(([componentRef]: [ComponentRef<any>]) => {
@@ -252,6 +253,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
     ])
       .pipe(
         takeWhile(() => this.alive),
+        filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
       .subscribe(([componentRef]: [ComponentRef<any>]) => {
