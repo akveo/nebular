@@ -29,6 +29,7 @@ import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-me
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
 import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
 import { NgdTabbedBlockComponent } from './docs/page/blocks/tabbed-block/ngd-tabbed-block.component';
+import { NgdLiveExampleComponent } from './docs/page/blocks/live-example/ngd-live-example.component';
 
 import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { NgdHeaderComponent } from './components/header/ngd-header.component';
@@ -42,6 +43,8 @@ import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directi
 import { SwiperModule } from 'angular2-useful-swiper';
 import { Analytics } from './docs/utils/analytics.service';
 import { BlockHelperService } from './docs/utils/block-helper.service';
+import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
+import { IframeCommunicatorService } from './components/example/iframe-communicator';
 
 @NgModule({
   imports: [
@@ -79,9 +82,12 @@ import { BlockHelperService } from './docs/utils/block-helper.service';
     NgdBlockComponent,
     NgdTabbedBlockComponent,
     NgdOverviewBlockComponent,
+    NgdLiveExampleComponent,
     NgdSassPropValueDirective,
+    NgdExampleRendererComponent,
   ],
   providers: [
+    IframeCommunicatorService,
     BlockHelperService,
     DocsService,
     Analytics,
