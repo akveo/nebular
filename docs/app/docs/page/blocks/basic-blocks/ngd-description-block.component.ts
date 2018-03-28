@@ -11,33 +11,33 @@ import { Component, Input } from '@angular/core';
   template: `
     <div class="block-container">
       <h2 class="class-name">
-        <a [routerLink]="" fragment="{{blockData.name}}" ngdFragment></a>
-        {{blockData?.name}}
+        <a [routerLink]="" fragment="{{source.name}}" ngdFragment></a>
+        {{source?.name}}
       </h2>
       <p *ngIf="isShortDescription" class="short-description">
-        {{ blockData?.shortDescription }}
+        {{ source?.shortDescription }}
       </p>
       <p *ngIf="isDescription" ngdDescription class="description">
-        {{blockData?.description}}
+        {{source?.description}}
       </p>
     </div>
   `,
 })
 export class NgdDescriptionBlockComponent {
 
-  @Input('blockData') set setBlockData(blockData: any) {
-    if (blockData) {
-      this.isShortDescription = !!blockData.shortDescription &&
-        blockData.shortDescription !== blockData.name;
-
-      this.isDescription = !!blockData.description &&
-        blockData.description !== blockData.shortDescription;
-      this.blockData = blockData;
-    }
-  };
-
-  blockData: any;
+  source: any;
   isDescription: boolean = false;
   isShortDescription: boolean = false;
 
+  @Input('source')
+  set setSource(source: any) {
+    if (source) {
+      this.isShortDescription = !!source.shortDescription &&
+        source.shortDescription !== source.name;
+
+      this.isDescription = !!source.description &&
+        source.description !== source.shortDescription;
+      this.source = source;
+    }
+  };
 }

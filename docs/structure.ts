@@ -171,25 +171,14 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbLayoutComponent',
+            block: 'tabbed',
+            source: [
+              'NbLayoutComponent',
+              'NbLayoutHeaderComponent',
+              'NbLayoutColumnComponent',
+              'NbLayoutFooterComponent',
+            ],
           },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbLayoutHeaderComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbLayoutColumnComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbLayoutFooterComponent',
-          },
-
         ],
       },
       {
@@ -198,24 +187,13 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbSidebarComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbSidebarHeaderComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbSidebarFooterComponent',
-            name: 'true',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbSidebarService',
+            block: 'tabbed',
+            source: [
+              'NbSidebarComponent',
+              'NbSidebarHeaderComponent',
+              'NbSidebarFooterComponent',
+              'NbSidebarService',
+            ],
           },
         ],
       },
@@ -225,18 +203,12 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbMenuComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbMenuItem',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbMenuService',
+            block: 'tabbed',
+            source: [
+              'NbMenuComponent',
+              'NbMenuItem',
+              'NbMenuService',
+            ],
           },
         ],
       },
@@ -246,23 +218,13 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbCardComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardHeaderComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardBodyComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardFooterComponent',
+            block: 'tabbed',
+            source: [
+              'NbCardComponent',
+              'NbCardHeaderComponent',
+              'NbCardBodyComponent',
+              'NbCardFooterComponent',
+            ],
           },
         ],
       },
@@ -272,18 +234,12 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbFlipCardComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardFrontComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardBackComponent',
+            block: 'tabbed',
+            source: [
+              'NbFlipCardComponent',
+              'NbCardFrontComponent',
+              'NbCardBackComponent',
+            ],
           },
         ],
       },
@@ -293,18 +249,12 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbRevealCardComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardFrontComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbCardBackComponent',
+            block: 'tabbed',
+            source: [
+              'NbRevealCardComponent',
+              'NbCardFrontComponent',
+              'NbCardBackComponent',
+            ],
           },
         ],
       },
@@ -314,13 +264,11 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbSearchComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbSearchService',
+            block: 'tabbed',
+            source: [
+              'NbSearchComponent',
+              'NbSearchService',
+            ],
           },
         ],
       },
@@ -330,18 +278,12 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbTabsetComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbTabComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbRouteTabsetComponent',
+            block: 'tabbed',
+            source: [
+              'NbTabsetComponent',
+              'NbTabComponent',
+              'NbRouteTabsetComponent',
+            ],
           },
         ],
       },
@@ -351,13 +293,11 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbActionsComponent',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbActionComponent',
+            block: 'tabbed',
+            source: [
+              'NbActionsComponent',
+              'NbActionComponent',
+            ],
           },
         ],
       },
@@ -367,8 +307,10 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbUserComponent',
+            block: 'tabbed',
+            source: [
+              'NbUserComponent',
+            ],
           },
         ],
       },
@@ -378,8 +320,10 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbCheckboxComponent',
+            block: 'tabbed',
+            source: [
+              'NbCheckboxComponent',
+            ],
           },
         ],
       },
@@ -389,8 +333,10 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbBadgeComponent',
+            block: 'tabbed',
+            source: [
+              'NbBadgeComponent',
+            ],
           },
         ],
       },
@@ -400,13 +346,11 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbPopoverDirective',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbPopoverComponent',
+            block: 'tabbed',
+            source: [
+              'NbPopoverDirective',
+              'NbPopoverComponent',
+            ],
           },
         ],
       },
@@ -416,13 +360,11 @@ export const STRUCTURE = [
         children: [
           {
             type: 'block',
-            block: 'component',
-            blockData: 'NbContextMenuDirective',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            blockData: 'NbContextMenuComponent',
+            block: 'tabbed',
+            source: [
+              'NbContextMenuDirective',
+              'NbContextMenuComponent',
+            ],
           },
         ],
       },
@@ -439,7 +381,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbThemeService',
+            source: 'NbThemeService',
           },
         ],
       },
@@ -450,7 +392,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbSpinnerService',
+            source: 'NbSpinnerService',
           },
         ],
       },
@@ -461,7 +403,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbMediaBreakpointsService',
+            source: 'NbMediaBreakpointsService',
           },
         ],
       },
@@ -472,7 +414,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbJSThemesRegistry',
+            source: 'NbJSThemesRegistry',
           },
         ],
       },
@@ -490,7 +432,7 @@ export const STRUCTURE = [
             type: 'block',
             block: 'theme',
             name: 'Default',
-            blockData: 'default',
+            source: 'default',
           },
         ],
       },
@@ -502,7 +444,7 @@ export const STRUCTURE = [
             type: 'block',
             block: 'theme',
             name: 'Cosmic',
-            blockData: 'cosmic',
+            source: 'cosmic',
           },
         ],
       },
@@ -585,7 +527,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthService',
+            source: 'NbAuthService',
           },
         ],
       },
@@ -596,7 +538,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbEmailPassAuthProvider',
+            source: 'NbEmailPassAuthProvider',
           },
         ],
       },
@@ -607,17 +549,17 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTokenService',
+            source: 'NbTokenService',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthSimpleToken',
+            source: 'NbAuthSimpleToken',
           },
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAuthJWTToken',
+            source: 'NbAuthJWTToken',
           },
         ],
       },
@@ -628,7 +570,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbTokenLocalStorage',
+            source: 'NbTokenLocalStorage',
           },
         ],
       },
@@ -678,7 +620,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAclService',
+            source: 'NbAclService',
           },
         ],
       },
@@ -689,7 +631,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'component',
-            blockData: 'NbAccessChecker',
+            source: 'NbAccessChecker',
           },
         ],
       },

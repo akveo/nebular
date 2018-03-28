@@ -9,10 +9,11 @@ import {
   OnInit, PLATFORM_ID, Inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { takeWhile } from 'rxjs/operators/takeWhile';
+
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
-import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
 import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPosition } from './helpers/model';
@@ -144,6 +145,9 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     private hostRef: ElementRef,
     private themeService: NbThemeService,
     private componentFactoryResolver: ComponentFactoryResolver,
+    private positioningHelper: NbPositioningHelper,
+    private adjustmentHelper: NbAdjustmentHelper,
+    private triggerHelper: NbTriggerHelper,
     @Inject(PLATFORM_ID) private platformId,
   ) {}
 
@@ -205,7 +209,8 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbTriggerHelper}
    * */
   private registerTriggers() {
-    const { open, close, toggle } = NbTriggerHelper.createTrigger(this.hostElement, () => this.containerRef, this.mode);
+    const { open, close, toggle } = this.triggerHelper
+      .createTrigger(this.hostElement, () => this.containerRef, this.mode);
 
     open.pipe(takeWhile(() => this.alive))
       .subscribe(() => this.show());
@@ -314,7 +319,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbAdjustmentHelper}.
    * */
   private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    return NbAdjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
+    return this.adjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
   }
 
   /*
@@ -323,7 +328,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * */
   private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
     return {
-      position: NbPositioningHelper.calcPosition(placed, host, this.placement),
+      position: this.positioningHelper.calcPosition(placed, host, this.placement),
       placement: this.placement,
     }
   }

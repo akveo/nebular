@@ -5,15 +5,14 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.component';
+import { NbDynamicToAddComponent } from '../../app/dynamic.component';
 
 @Component({
-  selector: 'nb-popover-test',
+  selector: 'nb-popover-example',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-card>
           <nb-card-header>Content Type</nb-card-header>
           <nb-card-body>
@@ -146,11 +145,12 @@ import { NbDynamicToAddComponent } from '../layout-test/theme-dynamic-test.compo
             </button>
           </nb-card-body>
         </nb-card>
+
       </nb-layout-column>
     </nb-layout>
   `,
 })
-export class NbPopoverTestComponent {
+export class NbPopoverExampleComponent {
 
   customPopoverComponent = NbDynamicToAddComponent;
 

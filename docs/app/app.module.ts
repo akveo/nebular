@@ -14,6 +14,7 @@ import {
   NbCardModule,
   NbLayoutModule,
   NbMenuModule,
+  NbTabsetModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -27,6 +28,8 @@ import { NgdExamplesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-e
 import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-props-block.component';
 import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
+import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
+import { NgdTabbedBlockComponent } from './docs/page/blocks/tabbed-block/ngd-tabbed-block.component';
 
 import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { NgdHeaderComponent } from './components/header/ngd-header.component';
@@ -38,6 +41,7 @@ import { NgdThemeComponent } from './docs/page/blocks/ngd-theme-block.component'
 import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directive';
 import { SwiperModule } from 'angular2-useful-swiper';
 import { Analytics } from './docs/utils/analytics.service';
+import { BlockHelperService } from './docs/utils/block-helper.service';
 
 @NgModule({
   imports: [
@@ -49,8 +53,9 @@ import { Analytics } from './docs/utils/analytics.service';
     NbCardModule,
     SwiperModule,
     NbLayoutModule,
+    NbTabsetModule,
     NbMenuModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: 'docs' }),
     NbSidebarModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: true }),
   ],
@@ -72,9 +77,12 @@ import { Analytics } from './docs/utils/analytics.service';
     NgdComponentBlockComponent,
     NgdFragmentDirective,
     NgdThemeComponent,
+    NgdBlockComponent,
+    NgdTabbedBlockComponent,
     NgdSassPropValueDirective,
   ],
   providers: [
+    BlockHelperService,
     DocsService,
     Analytics,
     Title,

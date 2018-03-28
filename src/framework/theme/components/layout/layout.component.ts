@@ -8,7 +8,7 @@ import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
   Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
 } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -18,6 +18,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
+import { NbWindow, NbDocument } from '../../theme.options';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -292,8 +293,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected router: Router,
+    protected window: NbWindow,
+    protected document: NbDocument,
     @Inject(PLATFORM_ID) protected platformId: Object,
-    @Inject(DOCUMENT) protected document: any,
   ) {
 
     this.themeService.onThemeChange()
@@ -333,9 +335,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }));
     this.spinnerService.load();
 
-    // trigger first time so that after the change we have the initial value
     if (isPlatformBrowser(this.platformId)) {
-      this.themeService.changeWindowWidth(window.innerWidth);
+      // trigger first time so that after the change we have the initial value
+      this.themeService.changeWindowWidth(this.window.innerWidth);
     }
   }
 

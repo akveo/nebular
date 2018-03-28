@@ -17,6 +17,7 @@ const PARSEDDOCS: any = require('../../output.json');
 export class DocsService {
 
   private fragments$ = new Subject<string>();
+  private preparedStructure = this.prepareStructure(this.getStructure(), this.getParsedDocs());
 
   getStructure(): any {
     return STRUCTURE;
@@ -31,7 +32,7 @@ export class DocsService {
   }
 
   getPreparedStructure(): any {
-    return this.prepareStructure(this.getStructure(), this.getParsedDocs());
+    return this.preparedStructure;
   }
 
   emitFragment(fragment: string): void {
@@ -60,15 +61,22 @@ export class DocsService {
     })
   }
 
-  protected prepareStructure(structure: any , preparedDocs: any): any {
+  protected prepareStructure(structure: any, preparedDocs: any): any {
     structure.map((item: any) => {
-      if (item.type === 'block' && typeof item.blockData === 'string') {
+      if (item.type === 'block' && typeof item.source === 'string') {
         if (item.block === 'theme') {
-          item.blockData = preparedDocs.themes[item.blockData];
-        } else {
-          item.blockData = preparedDocs.classes.find((data) => data.name === item.blockData );
+          item.source = preparedDocs.themes[item.source];
+        }
+
+        if (item.block === 'component') {
+          item.source = preparedDocs.classes.find((data) => data.name === item.source);
         }
       }
+
+      if (item.block === 'tabbed' && typeof item.source === 'object' && item.source.length > 0) {
+        item.source = item.source.map(source => preparedDocs.classes.find((data) => data.name === source));
+      }
+
       if (item.children) {
         item.children = this.prepareStructure(item.children, preparedDocs);
       }

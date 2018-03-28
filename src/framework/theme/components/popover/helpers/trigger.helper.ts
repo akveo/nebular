@@ -1,6 +1,6 @@
+import { Injectable } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
-import { NbPopoverMode, NbPopoverTrigger } from './model';
 import { filter } from 'rxjs/operators/filter';
 import { delay } from 'rxjs/operators/delay';
 import { takeWhile } from 'rxjs/operators/takeWhile';
@@ -9,6 +9,9 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { repeat } from 'rxjs/operators/repeat';
 import { takeUntil } from 'rxjs/operators/takeUntil';
 
+
+import { NbDocument } from '../../../theme.options';
+import { NbPopoverMode, NbPopoverTrigger } from './model';
 
 /**
  * Describes popover triggers strategies based on popover {@link NbPopoverMode} mode.
@@ -23,10 +26,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
+   * @param document {NbDocument} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
+  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
     return {
       open: observableEmpty(),
       close: observableFromEvent<Event>(document, 'click')
@@ -46,10 +50,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
+   * @param document {NbDocument} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function): NbPopoverTrigger {
+  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
     return {
       open: observableFromEvent<Event>(host, 'mouseenter')
         .pipe(
@@ -96,7 +101,11 @@ const NB_TRIGGERS = {
   },
 };
 
+@Injectable()
 export class NbTriggerHelper {
+
+  constructor(private document: NbDocument) {
+  }
 
   /**
    * Creates open and close events streams based on popover {@link NbPopoverMode} mode.
@@ -108,8 +117,8 @@ export class NbTriggerHelper {
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  static createTrigger(host: HTMLElement, getContainer: Function, mode: NbPopoverMode): NbPopoverTrigger {
+  createTrigger(host: HTMLElement, getContainer: Function, mode: NbPopoverMode): NbPopoverTrigger {
     const createTrigger = NB_TRIGGERS[mode];
-    return createTrigger.call(NB_TRIGGERS, host, getContainer);
+    return createTrigger.call(NB_TRIGGERS, host, getContainer, this.document);
   }
 }

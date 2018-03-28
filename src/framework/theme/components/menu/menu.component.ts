@@ -5,20 +5,20 @@
  */
 
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    OnInit,
-    OnDestroy,
-    HostBinding,
-    ViewChildren,
-    QueryList,
-    ElementRef,
-    AfterViewInit,
-    PLATFORM_ID,
-    Inject,
-  } from '@angular/core';
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  AfterViewInit,
+  PLATFORM_ID,
+  Inject,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -27,6 +27,7 @@ import { filter } from 'rxjs/operators/filter';
 
 import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';
+import { NbWindow } from '../../theme.options';
 
 function sumSubmenuHeight(item: NbMenuItem) {
   return item.expanded
@@ -153,14 +154,17 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   styleUrls: ['./menu.component.scss'],
   template: `
     <ul class="menu-items">
-      <li nbMenuItem *ngFor="let item of items"
-                      [menuItem]="item"
-                      [class.menu-group]="item.group"
-                      (hoverItem)="onHoverItem($event)"
-                      (toggleSubMenu)="onToggleSubMenu($event)"
-                      (selectItem)="onSelectItem($event)"
-                      (itemClick)="onItemClick($event)"
-                      class="menu-item"></li>
+      <ng-container *ngFor="let item of items">
+        <li nbMenuItem *ngIf="!item.hidden"
+            [menuItem]="item"
+            [class.menu-group]="item.group"
+            (hoverItem)="onHoverItem($event)"
+            (toggleSubMenu)="onToggleSubMenu($event)"
+            (selectItem)="onSelectItem($event)"
+            (itemClick)="onItemClick($event)"
+            class="menu-item">
+        </li>
+      </ng-container>
     </ul>
   `,
 })
@@ -203,7 +207,10 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   private alive: boolean = true;
   private autoCollapseValue: boolean = false;
 
-  constructor(private menuInternalService: NbMenuInternalService, private router: Router) { }
+  constructor(private window: NbWindow,
+              private menuInternalService: NbMenuInternalService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.menuInternalService
@@ -289,11 +296,11 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (homeItem) {
       if (homeItem.link) {
-        this.router.navigate([homeItem.link]);
+        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams });
       }
 
       if (homeItem.url) {
-        window.location.href = homeItem.url;
+        this.window.location.href = homeItem.url;
       }
     }
   }

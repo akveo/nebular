@@ -13,6 +13,9 @@ import { NbMenuItem } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
 import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
 import { NbContextMenuComponent } from './context-menu.component';
+import { NbPositioningHelper } from '../popover/helpers/positioning.helper';
+import { NbAdjustmentHelper } from '../popover/helpers/adjustment.helper';
+import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
 
 /**
  * Full featured context menu directive.
@@ -91,11 +94,21 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   constructor(hostRef: ElementRef,
               themeService: NbThemeService,
               componentFactoryResolver: ComponentFactoryResolver,
+              positioningHelper: NbPositioningHelper,
+              adjustmentHelper: NbAdjustmentHelper,
+              triggerHelper: NbTriggerHelper,
               @Inject(PLATFORM_ID) platformId) {
     /**
      * Initialize popover with all the important inputs.
      * */
-    this.popover = new NbPopoverDirective(hostRef, themeService, componentFactoryResolver, platformId);
+    this.popover = new NbPopoverDirective(hostRef,
+      themeService,
+      componentFactoryResolver,
+      positioningHelper,
+      adjustmentHelper,
+      triggerHelper,
+      platformId,
+    );
     this.popover.content = NbContextMenuComponent;
     this.popover.placement = NbPopoverPlacement.BOTTOM;
   }

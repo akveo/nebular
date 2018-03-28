@@ -1,3 +1,6 @@
+import { Injectable } from '@angular/core';
+
+import { NbWindow } from '../../../theme.options';
 import { NbPositioningHelper } from './positioning.helper';
 import { NbPopoverAdjustment, NbPopoverPlacement, NbPopoverPosition } from './model';
 
@@ -20,7 +23,11 @@ const NB_ORDERED_PLACEMENTS = {
   ],
 };
 
+@Injectable()
 export class NbAdjustmentHelper {
+
+  constructor(private positioningHelper: NbPositioningHelper, private window: NbWindow) {
+  }
 
   /**
    * Calculated {@link NbPopoverPosition} based on placed element, host element,
@@ -33,18 +40,18 @@ export class NbAdjustmentHelper {
    *
    * @return {NbPopoverPosition} calculated position.
    * */
-  static adjust(placed: ClientRect,
-                host: ClientRect,
-                placement: NbPopoverPlacement,
-                adjustment: NbPopoverAdjustment): NbPopoverPosition {
+  adjust(placed: ClientRect,
+         host: ClientRect,
+         placement: NbPopoverPlacement,
+         adjustment: NbPopoverAdjustment): NbPopoverPosition {
     const placements = NB_ORDERED_PLACEMENTS[adjustment].slice();
-    const ordered = NbAdjustmentHelper.orderPlacements(placement, placements);
+    const ordered = this.orderPlacements(placement, placements);
     const possible = ordered.map(pl => ({
-      position: NbPositioningHelper.calcPosition(placed, host, pl),
+      position: this.positioningHelper.calcPosition(placed, host, pl),
       placement: pl,
     }));
 
-    return NbAdjustmentHelper.chooseBest(placed, possible);
+    return this.chooseBest(placed, possible);
   }
 
   /**
@@ -55,8 +62,8 @@ export class NbAdjustmentHelper {
    *
    * @return {NbPopoverPosition} calculated position.
    * */
-  private static chooseBest(placed: ClientRect, possible: NbPopoverPosition[]): NbPopoverPosition {
-    return possible.find(adjust => NbAdjustmentHelper.inViewPort(placed, adjust)) || possible.shift();
+  private chooseBest(placed: ClientRect, possible: NbPopoverPosition[]): NbPopoverPosition {
+    return possible.find(adjust => this.inViewPort(placed, adjust)) || possible.shift();
   }
 
   /**
@@ -67,11 +74,11 @@ export class NbAdjustmentHelper {
    *
    * @return {boolean} true if placed element completely viewport.
    * */
-  private static inViewPort(placed: ClientRect, position: NbPopoverPosition): boolean {
-    return position.position.top - window.pageYOffset > 0
-      && position.position.left - window.pageXOffset > 0
-      && position.position.top + placed.height < window.innerHeight + window.pageYOffset
-      && position.position.left + placed.width < window.innerWidth + window.pageXOffset;
+  private inViewPort(placed: ClientRect, position: NbPopoverPosition): boolean {
+    return position.position.top - this.window.pageYOffset > 0
+      && position.position.left - this.window.pageXOffset > 0
+      && position.position.top + placed.height < this.window.innerHeight + this.window.pageYOffset
+      && position.position.left + placed.width < this.window.innerWidth + this.window.pageXOffset;
   }
 
   /**
@@ -95,8 +102,7 @@ export class NbAdjustmentHelper {
    * ]);
    * ```
    * */
-  private static orderPlacements(placement: NbPopoverPlacement,
-                                 placements: NbPopoverPlacement[]): NbPopoverPlacement[] {
+  private orderPlacements(placement: NbPopoverPlacement, placements: NbPopoverPlacement[]): NbPopoverPlacement[] {
     const index = placements.indexOf(placement);
     const start = placements.splice(index, placements.length);
     return start.concat(...placements);

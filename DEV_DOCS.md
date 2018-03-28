@@ -176,7 +176,8 @@ To start a new release (publish the framework packages on NPM) you need:
 8. pull the upstream (master)   
 9. `npm run release` - run prepare & validate and finally publish the packages to NPM
 10. create and push git tag
-11. create release on github  
+11. create release on github
+12. publish docs  
 
 #ngx-admin development on the latest Nebular sources
 

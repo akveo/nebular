@@ -11,9 +11,6 @@ import { DocsService } from '../../../docs.service';
   selector: 'ngd-styles-block',
   template: `
     <div class="block-container" *ngFor="let style of classStyles">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Styles" ngdFragment></a>
-        Component themable styles
-      </p>
       <div class="table-container">
         <table class="table table-striped">
           <thead>
@@ -43,10 +40,10 @@ export class NgdStylesBlockComponent implements OnInit {
   classStyles: any;
   className: string;
 
-  @Input('blockData')
-  set setProps(blockData: any) {
-    this.classStyles = blockData.styles;
-    this.className = blockData.name;
+  @Input('source')
+  set setSource(source: any) {
+    this.classStyles = source.styles;
+    this.className = source.name;
   };
 
   constructor(private docsService: DocsService) {}

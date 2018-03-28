@@ -3,9 +3,16 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { NbPopoverPlacement } from './model';
+import { Injectable } from '@angular/core';
 
+import { NbPopoverPlacement } from './model';
+import { NbWindow } from '../../../theme.options';
+
+@Injectable()
 export class NbPositioningHelper {
+
+  constructor(private window: NbWindow) {
+  }
 
   /**
    * Describes height of the popover arrow.
@@ -48,14 +55,14 @@ export class NbPositioningHelper {
   /**
    * Calculates position of the element relatively to the host element based on the placement.
    * */
-  static calcPosition(positioned: ClientRect,
-                      host: ClientRect,
-                      placement: NbPopoverPlacement): { top: number, left: number } {
+  calcPosition(positioned: ClientRect,
+               host: ClientRect,
+               placement: NbPopoverPlacement): { top: number, left: number } {
     const positionCalculator: Function = NbPositioningHelper.positionCalculator[placement];
     const position = positionCalculator.call(NbPositioningHelper.positionCalculator, positioned, host);
 
-    position.top += window.pageYOffset;
-    position.left += window.pageXOffset;
+    position.top += this.window.pageYOffset;
+    position.left += this.window.pageXOffset;
 
     return position;
   }

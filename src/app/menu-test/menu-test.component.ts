@@ -96,6 +96,11 @@ export class NbMenuItem4Component { }
             <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
+        <nb-card size="xxlarge">
+          <nb-card-body>
+            <nb-menu id="menu-second" tag="secondMenu" [items]="menuItems1"></nb-menu>
+          </nb-card-body>
+        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -111,11 +116,34 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       title: 'Menu #1',
       link: '/menu/1',
       icon: 'nb-keypad',
+      queryParams: { param: 1 },
     },
     {
       title: 'Menu #2',
       link: '/menu/2',
       icon: 'nb-keypad',
+    },
+  ];
+
+  menuItems1 = [
+    {
+      title: 'Menu #1',
+    },
+    {
+      title: 'Menu #2',
+      children: [
+        {
+          title: 'Menu #2.1',
+        },
+        {
+          title: 'Hidden Submenu Item',
+          hidden: true,
+        },
+      ],
+    },
+    {
+      title: 'Hidden Menu Item',
+      hidden: true,
     },
   ];
 
@@ -166,6 +194,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
                 {
                   title: 'Menu #3.3.2',
                   link: '/menu/3/3/2',
+                  queryParams: { param: 2 },
                   home: true,
                 },
                 {
@@ -180,17 +209,17 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       ],
       'firstMenu',
     );
-  }
+}
 
-  ngOnDestroy() {
-    this.alive = false;
-  }
+ngOnDestroy() {
+  this.alive = false;
+}
 
-  addMenuItem() {
-    this.menuService.addItems([{ title: 'New Menu Item' }], 'firstMenu');
-  }
+addMenuItem() {
+  this.menuService.addItems([{ title: 'New Menu Item' }], 'firstMenu');
+}
 
-  navigateHome() {
-    this.menuService.navigateHome('firstMenu');
-  }
+navigateHome() {
+  this.menuService.navigateHome('firstMenu');
+}
 }
