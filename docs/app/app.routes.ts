@@ -8,6 +8,7 @@ import { Routes } from '@angular/router';
 import { NgdHomepageComponent } from './homepage/homepage.component';
 import { NgdPageComponent } from './docs/page/page.component';
 import { NgdDocsComponent } from './docs/docs.component';
+import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,11 @@ export const routes: Routes = [
   },
   {
     path: 'example',
-    loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
+    component: NgdExampleRendererComponent,
+    children: [{
+      path: '',
+      loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
+    }],
   },
   {
     path: '**',
