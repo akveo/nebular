@@ -4,7 +4,7 @@
 @import '../../../src/framework/theme/styles/themes';
 
 // which themes you what to enable (empty to enable all - not recommended)
-$nb-enabled-themes: (docs, default);
+$nb-enabled-themes: (docs, default, cosmic);
 
 // TODO remove
 $nb-themes: nb-register-theme((
@@ -17,6 +17,16 @@ $nb-themes: nb-register-theme((
   landing-primary: #8a7fff,
   landing-bg: #13113b,
 ), default, default);
+$nb-themes: nb-register-theme((
+  landing-font: Exo,
+  landing-golden: #ffd22d,
+  landing-red: #fc3b41,
+  landing-fg: #b7b7fe,
+  landing-fg-light: #e0e0ff,
+  landing-highlight: #42db7d,
+  landing-primary: #8a7fff,
+  landing-bg: #13113b,
+), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((
   font-main: Roboto,
