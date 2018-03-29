@@ -4,15 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin custom-forms() {
-  @mixin hover-checked-border($color) {
-    .custom-control-input:hover ~ .custom-control-indicator,
-    .custom-control-input:checked ~ .custom-control-indicator,
-    .custom-control-input:hover:checked ~ .custom-control-indicator {
-      border-color: $color;
-    }
+// locally used mixin
+@mixin hover-checked-border($color) {
+  .custom-control-input:hover ~ .custom-control-indicator,
+  .custom-control-input:checked ~ .custom-control-indicator,
+  .custom-control-input:hover:checked ~ .custom-control-indicator {
+    border-color: $color;
   }
+}
 
+@mixin custom-forms() {
   .custom-control {
     margin: 0;
     min-height: inherit;
@@ -111,3 +112,4 @@
     }
   }
 }
+

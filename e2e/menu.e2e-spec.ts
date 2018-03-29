@@ -23,7 +23,8 @@ const menu333 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:
 const newMenu = by.css('#menu-first ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
-
+const hiddenMenuItem = by.css('#menu-second ul li:nth-child(3)');
+const hiddenSubmenuItem = by.css('#menu-second ul li:nth-child(2) ul li:nth-child(2)');
 const waitTime = 20 * 1000;
 
 const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) > a > span');
@@ -276,6 +277,14 @@ describe('nb-menu', () => {
         expect(browser.getCurrentUrl()).toContain('#/menu/1');
       });
   });
+
+  it('hidden menu item should not be present', () => {
+    expect(element(hiddenMenuItem).isPresent()).toBeFalsy();
+  });
+
+  it('hidden submenu item should not be present', () => {
+    expect(element(hiddenSubmenuItem).isPresent()).toBeFalsy();
+  })
 
   it('should add query string to url', () => {
     element.all(menu1).first().click()
