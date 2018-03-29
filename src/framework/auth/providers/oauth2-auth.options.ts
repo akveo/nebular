@@ -27,4 +27,9 @@ export interface NbOAuth2AuthOptions {
     grantType?: string;
     redirectUri?: string;
   };
+  refresh?: {
+    endpoint?: string;
+    grantType?: string;
+    scope?: string;
+  };
 }

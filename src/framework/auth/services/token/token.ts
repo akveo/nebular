@@ -11,6 +11,10 @@ export abstract class NbAuthToken {
   }
 }
 
+export interface NbAuthRefreshableToken {
+  getRefresh(): string;
+}
+
 export interface NbAuthTokenClass {
   NAME: string;
   new (raw: any): NbAuthToken;
@@ -27,7 +31,7 @@ export class NbAuthSimpleToken extends NbAuthToken {
 
   static NAME = 'nb:auth:simple:token';
 
-  constructor(readonly token: string) {
+  constructor(protected readonly token: any) {
     super();
   }
 
@@ -48,7 +52,7 @@ export class NbAuthSimpleToken extends NbAuthToken {
    * @returns {boolean}
    */
   isValid(): boolean {
-    return !!this.token;
+    return !!this.getValue();
   }
 
   /**
@@ -119,5 +123,83 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    */
   isValid(): boolean {
     return super.isValid() && (!this.getTokenExpDate() || new Date() < this.getTokenExpDate());
+  }
+}
+
+/**
+ * Wrapper for simple (text) token
+ */
+export class NbAuthOAuth2Token extends NbAuthSimpleToken {
+
+  constructor(protected data: { [key: string]: string|number }|string = {}) {
+    // we may get it as string when retrieving from a storage
+    super(typeof data === 'string' ? JSON.parse(data) : data);
+  }
+
+  /**
+   * Returns the token value
+   * @returns string
+   */
+  getValue(): string {
+    return this.token.access_token;
+  }
+
+  /**
+   * Returns the refresh token
+   * @returns string
+   */
+  getRefresh(): string {
+    return this.token.refresh_token;
+  }
+
+  /**
+   * Returns token payload
+   * @returns any
+   */
+  getPayload(): any {
+    if (!this.token || !Object.keys(this.token).length) {
+      throw new Error('Cannot extract payload from an empty token.');
+    }
+
+    return this.token;
+  }
+
+  /**
+   * Returns the token type
+   * @returns string
+   */
+  getType(): string {
+    return this.token.token_type;
+  }
+
+  /**
+   * Is data expired
+   * @returns {boolean}
+   */
+  isValid(): boolean {
+    return super.isValid() && (!this.getTokenExpDate() || new Date() < this.getTokenExpDate());
+  }
+
+  /**
+   * Returns expiration date
+   * @returns Date
+   */
+  getTokenExpDate(): Date {
+    if (!this.token.hasOwnProperty('expires_in')) {
+      return null;
+    }
+
+    const date = new Date();
+    date.setUTCSeconds(new Date().getUTCSeconds() + Number(this.token.expires_in));
+
+    return date;
+  }
+
+  /**
+   * Validate value and convert to string, if value is not valid return empty string
+   * @returns {string}
+   */
+  toString(): string {
+    return JSON.stringify(this.token);
   }
 }

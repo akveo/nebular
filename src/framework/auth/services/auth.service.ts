@@ -14,7 +14,7 @@ import { NbAuthStrategy } from '../strategies/auth-strategy';
 import { NB_AUTH_STRATEGIES } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 import { NbTokenService } from './token/token.service';
-import { NbAuthToken } from './token/token';
+import { NbAuthRefreshableToken, NbAuthToken } from './token/token';
 
 /**
  * Common authentication service.
@@ -189,6 +189,15 @@ export class NbAuthService {
     }
 
     return found;
+  }
+
+  refreshToken(provider: string, token: NbAuthRefreshableToken) {
+    return this.getProvider(provider).refreshToken(token.getRefresh())
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          return this.processResultToken(result);
+        }),
+      );
   }
 
   private processResultToken(result: NbAuthResult) {

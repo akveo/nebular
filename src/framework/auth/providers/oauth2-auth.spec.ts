@@ -114,26 +114,6 @@ describe('oauth2-auth-provider', () => {
       ).flush(tokenSuccessResponse);
     });
 
-    it('handle success redirect back with token request', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
-
-      provider.authenticate()
-        .subscribe((result: NbAuthResult) => {
-          expect(result).toBeTruthy();
-          expect(result.isSuccess()).toBe(true);
-          expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
-          expect(result.getMessages()).toEqual(successMessages);
-          expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
-          expect(result.getRedirect()).toEqual('/');
-          done();
-        });
-
-      httpMock.expectOne('http://example.com/token')
-        .flush(tokenSuccessResponse);
-    });
-
     it('handle error redirect back', (done: DoneFn) => {
       routeMock.queryParams = observableOf(tokenErrorResponse);
 
@@ -156,6 +136,53 @@ describe('oauth2-auth-provider', () => {
       routeMock.queryParams = observableOf({code: 'code'});
 
       provider.authenticate()
+        .subscribe((result: NbAuthResult) => {
+
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(false);
+          expect(result.isFailure()).toBe(true);
+          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getResponse().error).toEqual(tokenErrorResponse);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()).toEqual(errorMessages);
+          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getRedirect()).toEqual(null);
+          done();
+        });
+
+      httpMock.expectOne('http://example.com/token')
+        .flush(tokenErrorResponse, { status: 400, statusText: 'Bad Request' });
+    });
+
+    it('handle refresh token', (done: DoneFn) => {
+
+      const refreshToken = 'someToken';
+
+      provider.refreshToken(refreshToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === refreshToken
+          && !req.body['scope'],
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle error token refresh response', (done: DoneFn) => {
+      const refreshToken = 'someToken';
+
+      provider.refreshToken(refreshToken)
         .subscribe((result: NbAuthResult) => {
 
           expect(result).toBeTruthy();
@@ -249,6 +276,7 @@ describe('oauth2-auth-provider', () => {
           failure: '/failure',
         },
         authorize: {
+          endpoint: 'custom',
           redirectUri: 'http://localhost:4200/callback',
           scope: 'read',
           params: {
@@ -257,7 +285,12 @@ describe('oauth2-auth-provider', () => {
           },
         },
         token: {
+          endpoint: 'custom',
           redirectUri: 'http://localhost:4200/callback',
+        },
+        refresh: {
+          endpoint: 'custom',
+          scope: 'read',
         },
       });
     });
@@ -265,7 +298,7 @@ describe('oauth2-auth-provider', () => {
     it('redirect to auth server', (done: DoneFn) => {
       windowMock.location = {
         set href(value: string) {
-          const baseUrl = 'http://example.com/authorize?response_type=code&client_id=clientId&redirect_uri=';
+          const baseUrl = 'http://example.com/custom?response_type=code&client_id=clientId&redirect_uri=';
           const redirect = encodeURIComponent('http://localhost:4200/callback');
           const url = `${baseUrl}${redirect}&scope=read&display=popup&foo=bar`;
 
@@ -295,7 +328,7 @@ describe('oauth2-auth-provider', () => {
         });
 
       httpMock.expectOne(
-        req => req.url === 'http://example.com/token'
+        req => req.url === 'http://example.com/custom'
           && req.body['grant_type'] === NbOAuth2GrantType.AUTHORIZATION_CODE
           && req.body['code'] === 'code'
           && req.body['client_id'] === 'clientId'
@@ -319,7 +352,7 @@ describe('oauth2-auth-provider', () => {
           done();
         });
 
-      httpMock.expectOne('http://example.com/token')
+      httpMock.expectOne('http://example.com/custom')
         .flush(tokenSuccessResponse);
     });
 
@@ -341,6 +374,31 @@ describe('oauth2-auth-provider', () => {
         });
     });
 
+    it('handle refresh token', (done: DoneFn) => {
+
+      const refreshToken = 'someToken';
+
+      provider.refreshToken(refreshToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
+          expect(result.getRedirect()).toEqual('/success');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/custom'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === refreshToken
+          && req.body['scope'] === 'read',
+      ).flush(tokenSuccessResponse);
+    });
+
     it('handle error token response', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
@@ -359,7 +417,7 @@ describe('oauth2-auth-provider', () => {
           done();
         });
 
-      httpMock.expectOne('http://example.com/token')
+      httpMock.expectOne('http://example.com/custom')
         .flush(tokenErrorResponse, { status: 400, statusText: 'Bad Request' });
     });
   });
