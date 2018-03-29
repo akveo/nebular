@@ -6,7 +6,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {
   NbThemeModule,
@@ -23,7 +23,6 @@ import { DocsService } from './docs/docs.service';
 import { NgdDocsComponent } from './docs/docs.component';
 import { NgdPageComponent } from './docs/page/page.component';
 import { NgdMarkdownComponent } from './docs/page/blocks/ngd-markdown-block.component';
-import { NgdExamplesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-examples-block.component';
 import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-props-block.component';
 import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
@@ -31,7 +30,6 @@ import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
 import { NgdTabbedBlockComponent } from './docs/page/blocks/tabbed-block/ngd-tabbed-block.component';
 import { NgdLiveExampleComponent } from './docs/page/blocks/live-example/ngd-live-example.component';
 
-import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { NgdHeaderComponent } from './components/header/ngd-header.component';
 import { NgdFooterComponent } from './components/footer/ngd-footer.component';
 import { NgdStylesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-styles-block.component';
@@ -47,14 +45,15 @@ import { NgdExampleRendererComponent } from './components/example/example-render
 import { IframeCommunicatorService } from './components/example/iframe-communicator';
 import { NgdCodeBlockComponent } from './docs/page/blocks/basic-blocks/ngd-code-block.component';
 import { NgdInlineExampleComponent } from './docs/page/blocks/inline-example/ngd-inline-example.component';
-import { NgdFullExampleComponent } from './docs/page/blocks/inline-example/ngd-full-example.component';
-import { NgdOneFileExampleComponent } from './docs/page/blocks/inline-example/ngd-one-file-example.component';
+import { NgdTabbedExampleComponent } from './docs/page/blocks/inline-example/ngd-tabbed-example.component';
+import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-example.component';
+import { CodeLoaderService } from './docs/utils/code-loader.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     NbThemeModule,
     NbSidebarModule,
     NbCardModule,
@@ -72,11 +71,9 @@ import { NgdOneFileExampleComponent } from './docs/page/blocks/inline-example/ng
     NgdDocsComponent,
     NgdPageComponent,
     NgdMarkdownComponent,
-    NgdExamplesBlockComponent,
     NgdPropsBlockComponent,
     NgdMethodsBlockComponent,
     NgdDescriptionDirective,
-    NgdHighlighterComponent,
     NgdHeaderComponent,
     NgdFooterComponent,
     NgdStylesBlockComponent,
@@ -91,11 +88,12 @@ import { NgdOneFileExampleComponent } from './docs/page/blocks/inline-example/ng
     NgdExampleRendererComponent,
     NgdInlineExampleComponent,
     NgdCodeBlockComponent,
-    NgdFullExampleComponent,
-    NgdOneFileExampleComponent,
+    NgdTabbedExampleComponent,
+    NgdExampleComponent,
   ],
   providers: [
     IframeCommunicatorService,
+    CodeLoaderService,
     BlockHelperService,
     DocsService,
     Analytics,
