@@ -21,6 +21,8 @@ if [[ -z "$TRAVIS" ]]; then
   exit 1
 fi
 
+CURRENT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+
 # Get commit diff
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   fileDiff=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
@@ -63,6 +65,19 @@ elif [[ "${MODE}" = dev_deploy ]]; then
   echo -e "${GREEN}Published playground at ${DEV_DEPLOY_HOST}${DEMO_DIR}"
   echo -e "${GREEN}Published docs at ${DEV_DEPLOY_HOST}/${DOCS_DIR}"
   echo ""
+elif [[ "${MODE}" = dev_publish ]]; then
+
+  echo "current branch ${CURRENT_BRANCH}"
+  echo "current npm token ${NPM_TOKEN_DEV}"
+
+
+  if [ "${CURRENT_BRANCH}" = feat/dev-publish ]; then
+    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN_DEV}" > ~/.npmrc
+    echo "NPM authenticated as ${npm whoami}"
+  else
+    echo "Skipping development build publish as only allowed on master branch."
+    exit 0
+  fi
 fi
 
 teardown_tunnel
