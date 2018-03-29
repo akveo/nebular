@@ -13,8 +13,10 @@ echo ""
 echo "Building sources and running tests. Running mode: ${MODE}"
 echo ""
 
-# Load the retry-call utility function.
+# Load utility function.
 source ./scripts/ci/tunnel.sh
+source ./scripts/ci/publish.sh
+source ./scripts/ci/deploy.sh
 
 if [[ -z "$TRAVIS" ]]; then
   echo "This script can only run inside of Travis build jobs."
@@ -49,35 +51,10 @@ elif [[ "${MODE}" =~ ^.*_(unit_test)$ ]]; then
   npm run ci:test
 elif [[ "${MODE}" = docs ]]; then
   npm run ci:docs
-elif [[ "${MODE}" = dev_deploy ]]; then
-  DEMO_DIR="demo-${TRAVIS_COMMIT}"
-  DOCS_DIR="docs-${TRAVIS_COMMIT}"
-
-  npm run build:prod -- --base-href "" --output-path "ci/dist/${DEMO_DIR}"
-  npm run docs:prepare
-  npm run docs:build -- --output-path "ci/dist/${DOCS_DIR}"
-
-  npm run firebase use dev -- --token="${FIREBASE_KEY}"
-  npm run firebase deploy -- --token="${FIREBASE_KEY}"
-
-  GREEN='\033[0;32m'
-  echo ""
-  echo -e "${GREEN}Published playground at ${DEV_DEPLOY_HOST}${DEMO_DIR}"
-  echo -e "${GREEN}Published docs at ${DEV_DEPLOY_HOST}/${DOCS_DIR}"
-  echo ""
-elif [[ "${MODE}" = dev_publish ]]; then
-
-  echo "current branch ${CURRENT_BRANCH}"
-  echo "current npm token ${NPM_TOKEN_DEV}"
-
-
-  if [ "${CURRENT_BRANCH}" = feat/dev-publish ]; then
-    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN_DEV}" > ~/.npmrc
-    echo "NPM authenticated as ${npm whoami}"
-  else
-    echo "Skipping development build publish as only allowed on master branch."
-    exit 0
-  fi
+elif [[ "${MODE}" = deploy_dev ]]; then
+  deploy_dev
+elif [[ "${MODE}" = publish_dev ]]; then
+  publish_dev
 fi
 
 teardown_tunnel
