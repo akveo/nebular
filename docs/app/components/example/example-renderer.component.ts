@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { IframeCommunicatorService } from './iframe-communicator';
 import { Router } from '@angular/router';
+import { NbDocument } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-example-renderer',
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 export class NgdExampleRendererComponent implements OnInit, AfterViewInit {
   private id: string;
 
-  constructor(private communicator: IframeCommunicatorService, private router: Router) {
+  constructor(private communicator: IframeCommunicatorService,
+              private router: Router,
+              private document: NbDocument) {
   }
 
   ngOnInit() {
@@ -25,6 +28,6 @@ export class NgdExampleRendererComponent implements OnInit, AfterViewInit {
   }
 
   private sendHeight() {
-    this.communicator.send({ id: this.id, height: document.body.clientHeight });
+    this.communicator.send({ id: this.id, height: this.document.body.clientHeight });
   }
 }
