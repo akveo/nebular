@@ -15,10 +15,6 @@
     align-items: center;
     position: relative;
 
-    &:first-child {
-      border-left: none!important;
-    }
-
     i.control-icon {
       &:hover {
         cursor: pointer;
