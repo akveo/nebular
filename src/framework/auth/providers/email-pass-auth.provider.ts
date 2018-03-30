@@ -189,7 +189,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
   };
 
-  static install(name: string, config: NbEmailPassAuthProviderConfig) {
+  static register(name: string, config: NbEmailPassAuthProviderConfig) {
     return [name, NbEmailPassAuthProvider, config];
   }
 

@@ -167,12 +167,12 @@ const NB_TEST_COMPONENTS = [
         },
       },
       providers: [
-        // NbDummyAuthProvider.install('email', {
+        // NbDummyAuthProvider.register('email', {
         //   alwaysFail: true,
         //   delay: 1000,
         // }),
 
-        NbEmailPassAuthProvider.install('email', {
+        NbEmailPassAuthProvider.register('email', {
           login: {
             endpoint: 'http://localhost:4400/api/auth/login',
           },

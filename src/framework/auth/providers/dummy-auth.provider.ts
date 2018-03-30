@@ -19,7 +19,7 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
     delay: 1000,
   };
 
-  static install(name: string, config: NbDummyAuthProviderConfig) {
+  static register(name: string, config: NbDummyAuthProviderConfig) {
     return [name, NbDummyAuthProvider, config];
   }
 

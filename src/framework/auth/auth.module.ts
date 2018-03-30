@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
 import { NbAuthService } from './services/auth.service';
+import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
+import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 import { NbTokenService } from './services/token/token.service';
 import { NbAuthSimpleToken } from './services/token/token';
 import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
@@ -85,13 +87,12 @@ export class NbAuthModule {
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
         { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
-        ...nbAuthOptions.providers.map(([name, providerClass]: [string, any]) => {
-          return providerClass;
-        }),
         { provide: NB_AUTH_PROVIDERS, useFactory: nbProvidersFactory, deps: [NB_AUTH_OPTIONS, Injector] },
         NbAuthService,
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
+        NbDummyAuthProvider,
+        NbEmailPassAuthProvider,
       ],
     };
   }
