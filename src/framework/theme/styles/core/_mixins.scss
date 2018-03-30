@@ -193,3 +193,18 @@
     }
   }
 }
+
+@mixin rtl($prop, $ltr-value, $rtl-value) {
+  #{$prop}: $ltr-value;
+  [dir=rtl] & {
+    #{$prop}: $rtl-value;
+  }
+}
+
+@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value) {
+  #{$ltr-prop}: $value;
+  [dir=rtl] & {
+    #{$ltr-prop}: $reset-value;
+    #{$rtl-prop}: $value;
+  }
+}
