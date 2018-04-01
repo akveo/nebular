@@ -25,13 +25,17 @@ We assume you already have the Auth module installed inside of your `*.module.ts
     
    NbAuthModule.forRoot({
      providers: [
-       NbEmailPassAuthProvider.install('email', { ... }),
+       NbEmailPassAuthProvider.register('email', { ... }),
      ],
    }),
   ],
 });
 
 ```
+
+`email` here is an alias we assign to the provider, so that we can mention it later on dynamically. Plus we can configure multiple providers with various configurations
+under different names. Then we can use then separately, if that's the case.
+`{ ... }` is a configuration we provide, such as API endpoints, token extractors, etc.
 
 Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
@@ -41,7 +45,7 @@ Now, let's add API endpoints. According to the [NbEmailPassAuthProvider document
 
 NbAuthModule.forRoot({
   providers: [
-    NbEmailPassAuthProvider.install('email', {
+    NbEmailPassAuthProvider.register('email', {
       baseEndpoint: '',
       login: {
         endpoint: '/api/auth/login',

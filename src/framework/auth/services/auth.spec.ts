@@ -77,7 +77,7 @@ describe('auth-service', () => {
               },
             },
             providers: [
-              NbDummyAuthProvider.install('dummy', {
+              NbDummyAuthProvider.register('dummy', {
                 alwaysFail: true,
                 delay: 1000,
               }),

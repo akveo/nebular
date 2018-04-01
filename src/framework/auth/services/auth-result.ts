@@ -3,7 +3,6 @@ import { NbAuthToken } from './token/token';
 export class NbAuthResult {
 
   protected token: NbAuthToken;
-  protected rawToken: string;
   protected errors: string[] = [];
   protected messages: string[] = [];
 
@@ -12,7 +11,7 @@ export class NbAuthResult {
               protected redirect?: any,
               errors?: any,
               messages?: any,
-              rawToken?: string) {
+              token: NbAuthToken = null) {
 
     this.errors = this.errors.concat([errors]);
     if (errors instanceof Array) {
@@ -24,20 +23,15 @@ export class NbAuthResult {
       this.messages = messages;
     }
 
-    this.rawToken = rawToken;
+    this.token = token;
   }
 
   setToken(token: NbAuthToken) {
     this.token = token;
-    this.rawToken = token.toString();
   }
 
   getResponse(): any {
     return this.response;
-  }
-
-  getRawToken(): any {
-    return this.rawToken;
   }
 
   getToken(): any {

@@ -27,16 +27,12 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 export class NbAuthComponent implements OnDestroy {
 
   private alive = true;
-
-  subscription: any;
-
   authenticated: boolean = false;
-  token: string = '';
 
   // showcase of how to use the onAuthenticationChange method
   constructor(protected auth: NbAuthService) {
 
-    this.subscription = auth.onAuthenticationChange()
+    auth.onAuthenticationChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe((authenticated: boolean) => {
         this.authenticated = authenticated;

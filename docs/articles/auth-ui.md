@@ -22,7 +22,7 @@ Alongside with the provider's configuration `AuthModule` also accepts a list of 
     
     NbAuthModule.forRoot({
       providers: [
-        NbEmailPassAuthProvider.install('email', { ... }),
+        NbEmailPassAuthProvider.register('email', { ... }),
       ],
       forms: {},
     }), 
@@ -118,7 +118,7 @@ So, for instance, to remove the redirectDelay setting and disable the success me
     
   NbAuthModule.forRoot({
        providers: [
-         NbEmailPassAuthProvider.install('email', { ... }),
+         NbEmailPassAuthProvider.register('email', { ... }),
        ],
        forms: {
         login: {
@@ -172,7 +172,7 @@ const formSetting: any = {
     
    NbAuthModule.forRoot({
        providers: [
-         NbEmailPassAuthProvider.install('email', { ... }),
+         NbEmailPassAuthProvider.register('email', { ... }),
        ],
        forms: {
          login: formSetting,

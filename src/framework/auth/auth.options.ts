@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { NbAuthToken } from './services';
+import { NbTokenClass } from './services';
 import { NbAbstractAuthProvider } from './providers';
 
 export interface NbAuthOptions {
@@ -7,9 +7,13 @@ export interface NbAuthOptions {
   providers?: any;
 }
 
+type NbProviderClass = new (...params: any[]) => NbAbstractAuthProvider;
+
 export interface NbAuthProviders {
-  [name: string]: new () => NbAbstractAuthProvider,
+  [name: string]: NbProviderClass,
 }
+
+export type NbProviderRegister = [string, NbProviderClass, { [key: string]: any }, NbTokenClass];
 
 export interface NbAuthSocialLink {
   link?: string,
@@ -87,5 +91,5 @@ export const defaultSettings: any = {
 export const NB_AUTH_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular Auth Options');
 export const NB_AUTH_USER_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular User Auth Options');
 export const NB_AUTH_PROVIDERS = new InjectionToken<NbAuthProviders>('Nebular Auth Providers');
-export const NB_AUTH_TOKEN_CLASS = new InjectionToken<NbAuthToken>('Nebular Token Class');
+export const NB_AUTH_TOKENS = new InjectionToken<NbAuthProviders>('Nebular Auth Tokens');
 export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<NbAuthProviders>('Nebular Simple Interceptor Header');

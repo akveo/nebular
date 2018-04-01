@@ -5,7 +5,8 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators/delay';
 
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { NbAuthResult } from '../services/auth-result';
+import { NbAuthResult, NbAuthSimpleToken, NbTokenClass } from '../services';
+import { NbProviderRegister } from '../auth.options';
 
 export interface NbDummyAuthProviderConfig {
   delay?: number;
@@ -19,8 +20,10 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
     delay: 1000,
   };
 
-  static register(name: string, config: NbDummyAuthProviderConfig) {
-    return [name, NbDummyAuthProvider, config];
+  static register(name: string,
+                  config: NbDummyAuthProviderConfig,
+                  token: NbTokenClass = NbAuthSimpleToken): NbProviderRegister {
+    return [name, NbDummyAuthProvider, config, token];
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
@@ -67,7 +70,11 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
         ['Something went wrong.']);
     }
 
-    // TODO is it missed messages here, is it token should be defined
-    return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
+    return new NbAuthResult(true,
+      this.createSuccessResponse(data),
+      '/',
+      [],
+      ['Successfully logged in.'],
+      this.createToken('test token'));
   }
 }

@@ -13,9 +13,10 @@ import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
 import { NbEmailPassAuthProviderConfig } from './email-pass-auth.options';
-import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { getDeepFromObject } from '../helpers';
+import { NbAuthResult, NbAuthSimpleToken, NbTokenClass } from '../services';
+import { NbProviderRegister } from '../auth.options';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -189,8 +190,10 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
   };
 
-  static register(name: string, config: NbEmailPassAuthProviderConfig) {
-    return [name, NbEmailPassAuthProvider, config];
+  static register(name: string,
+                  config: NbEmailPassAuthProviderConfig,
+                  token: NbTokenClass = NbAuthSimpleToken): NbProviderRegister {
+    return [name, NbEmailPassAuthProvider, config, token];
   }
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
@@ -217,7 +220,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             this.getConfigValue('login.redirect.success'),
             [],
             this.getConfigValue('messages.getter')('login', res),
-            this.getConfigValue('token.getter')('login', res));
+            this.createToken(this.getConfigValue('token.getter')('login', res)));
         }),
         catchError((res) => {
           let errors = [];
@@ -258,7 +261,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
             this.getConfigValue('register.redirect.success'),
             [],
             this.getConfigValue('messages.getter')('register', res),
-            this.getConfigValue('token.getter')('register', res));
+            this.createToken(this.getConfigValue('token.getter')('register', res)));
         }),
         catchError((res) => {
           let errors = [];
