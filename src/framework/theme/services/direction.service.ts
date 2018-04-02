@@ -7,11 +7,14 @@ export const LAYOUT_DIRECTION = new InjectionToken<Direction>('Flow direction');
 
 @Injectable()
 export class NbDirectionService {
+  dir: Direction;
+
   constructor(
     private document: NbDocument,
-    @Optional() @Inject(LAYOUT_DIRECTION) private dir: Direction = 'ltr',
+    @Optional() @Inject(LAYOUT_DIRECTION) dir = 'ltr',
   ) {
-    this.setDirection(dir);
+    this.dir = <Direction>dir;
+    this.setDirection(<Direction>dir);
   }
 
   getDirection(): Direction {
