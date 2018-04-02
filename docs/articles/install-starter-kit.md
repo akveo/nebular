@@ -51,12 +51,6 @@ npm start
 Go to <a href="http://0.0.0.0:4200" target="_blank">http://0.0.0.0:4200</a> or <a href="http://localhost:4200" target="_blank">http://localhost:4200</a> in your browser.
 <hr class="section-end">
 
-To run the local copy in a production mode and build the sources, execute:
-
-```bash
-npm run start:prod
-```
-
 To create a bundle in production mode, execute:
 
 ```bash
