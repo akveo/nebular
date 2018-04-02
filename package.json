@@ -32,6 +32,7 @@
     "build:ts": "tsc -p tsconfig.publish.json && ngc -p tsconfig.publish.json",
     "build:inline-resources": "gulp inline-resources",
     "build:bundle": "gulp bundle",
+    "build:rename:dev": "gulp bundle:rename-dev",
     "test": "ng test -sr",
     "test:wp": "npm run test -- --app playground-wp",
     "test:watch": "ng test -w",
@@ -51,11 +52,14 @@
     "ci:build": "npm-run-all build:prod build:package build:wp",
     "ci:test": "npm-run-all build:package test:wp",
     "ci:e2e": "npm-run-all build:package e2e:wp",
-    "version:bump": "gulp bump",
+    "version:bump": "gulp version",
     "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:prepare": "npm run build:package",
+    "release:prepare:dev": "npm-run-all version:bump release:prepare build:rename:dev ",
     "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp",
-    "release": "npm run release:validate && npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security"
+    "release:dev": "npm-run-all release:prepare:dev publish",
+    "release": "npm-run-all release:validate publish",
+    "publish": "npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security"
   },
   "keywords": [
     "angular",
@@ -115,6 +119,7 @@
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
     "gulp-clean-css": "3.0.4",
+    "gulp-json-modify": "^1.0.2",
     "gulp-rename": "1.2.2",
     "gulp-replace": "0.5.4",
     "gulp-rollup": "2.13.0",
