@@ -58,17 +58,43 @@ import { Component, Input } from '@angular/core';
         </table>
       </div>
     </div>
+    <div  class="inputs block-container" *ngIf="classProps.length > 0">
+      <p class="block-title"><a [routerLink]="" fragment="{{className}}Properties" ngdFragment></a> Properties</p>
+      <div class="table-container">
+        <table  class="table">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prop of classProps">
+              <td>{{ prop.name }}</td>
+              <td><code>{{ prop.type }}</code></td>
+              <td>
+                 <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
+                 <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   `,
 })
 export class NgdPropsBlockComponent {
   classOutputs: any = [];
   classInputs: any = [];
+  classProps: any = [];
   className: string;
 
   @Input('source')
   set setSource(source: any) {
     this.classInputs = source.props.filter(item => item.kind === 'input');
     this.classOutputs = source.props.filter(item => item.kind === 'output');
+    this.classProps = source.props.filter(item => item.kind === 'property');
     this.className = source.name;
   }
 }

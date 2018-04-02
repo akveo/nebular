@@ -23,9 +23,9 @@ const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
 
+// TODO: check if we need both URL and LINK
 /**
  * Menu Item options
- * TODO: check if we need both URL and LINK
  */
 export abstract class NbMenuItem {
   /**
