@@ -208,3 +208,9 @@
     #{$rtl-prop}: $value;
   }
 }
+
+@mixin rtl-only($prop, $value) {
+  [dir=rtl] & {
+    #{$prop}: $value;
+  }
+}
