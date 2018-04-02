@@ -1,7 +1,10 @@
 import { dest, src, task } from 'gulp';
 
-const bump = require('gulp-bump');
-const VERSION = require('../../../package.json').version;
+const modify = require('gulp-json-modify');
+
+const VERSION_APPENDIX = process.env.NEBULAR_VERSION_APPENDIX;
+const VERSION = process.env.NEBULAR_VERSION || require('../../../package.json').version +
+  (VERSION_APPENDIX ? '-' + VERSION_APPENDIX : '');
 
 task('bump', () => {
   src([
@@ -10,8 +13,20 @@ task('bump', () => {
     './src/framework/auth/package.json',
     './src/framework/security/package.json',
   ], { base: './' })
-    .pipe(bump({
-      version: VERSION,
+    .pipe(modify({
+      key: 'version',
+      value: VERSION,
+    }))
+    .pipe(dest('./'));
+});
+
+task('bump-peer', () => {
+  src([
+    './src/framework/auth/package.json',
+  ], { base: './' })
+    .pipe(modify({
+      key: 'peerDependencies.@nebular/theme',
+      value: VERSION,
     }))
     .pipe(dest('./'));
 });

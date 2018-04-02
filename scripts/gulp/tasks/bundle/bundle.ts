@@ -4,11 +4,13 @@ import { LIB_DIR } from '../config';
 
 const rollup = require('gulp-rollup');
 const rename = require('gulp-rename');
+const replace = require('gulp-replace');
 
 task('bundle', ['bundle:umd:theme', 'bundle:umd:auth', 'bundle:umd:security']);
 task('bundle:umd:theme', bundleUmdTheme);
 task('bundle:umd:auth', bundleUmdAuth);
 task('bundle:umd:security', bundleUmdSecurity);
+task('bundle:rename-dev', bundleRenameDev);
 
 function bundleUmdTheme() {
   const config = {
@@ -58,5 +60,13 @@ function bundle(config: any) {
     })))
     .pipe(rename(config.output))
     .pipe(dest(config.dest));
+}
+
+function bundleRenameDev() {
+  src([
+    `${LIB_DIR}/**/*.*`,
+  ], { base: './' })
+    .pipe(replace('@nebular', '@nebular-dev'))
+    .pipe(dest('./'));
 }
 
