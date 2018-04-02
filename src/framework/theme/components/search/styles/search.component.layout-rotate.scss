@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../../styles/core/mixins';
+
 /deep/ nb-layout.rotate-layout {
   position: fixed;
   overflow: hidden;
@@ -48,7 +50,7 @@
     button {
       position: absolute;
       top: 3rem;
-      right: 3rem;
+      @include rtl-prop(right, left, 3rem, auto);
       font-size: 2.5rem;
       opacity: 0;
       transform: scale3d(0.8, 0.8, 1);

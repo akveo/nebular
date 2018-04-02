@@ -4,6 +4,8 @@
 * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
+@import '../../../styles/core/mixins';
+
 /deep/ nb-layout.column-curtain.with-search .layout {
   pointer-events: none;
 }
@@ -41,7 +43,7 @@
     button {
       position: absolute;
       top: 2rem;
-      right: 2rem;
+      @include rtl-prop(right, left, 2rem, auto);
       font-size: 2.5rem;
       opacity: 0;
       transition: opacity 0.5s;

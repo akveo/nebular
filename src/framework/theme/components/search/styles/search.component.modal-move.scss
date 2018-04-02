@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../../styles/core/mixins';
+
 /deep/ nb-layout.modal-move {
   .layout {
     transition: transform 0.5s;
@@ -38,7 +40,7 @@
     button {
       position: absolute;
       top: 3rem;
-      right: 3rem;
+      @include rtl-prop(right, left, 3rem, auto);
       font-size: 2.5rem;
       opacity: 0;
       transition: opacity 0.5s;
