@@ -6,21 +6,23 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbPopoverModule, NbButtonModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundComponent } from './playground.component';
-import { NbPopoverExampleComponent } from './examples';
+import { NbPopoverExampleComponent, NbButtonExampleComponent } from './examples';
 import { NbDynamicToAddComponent } from '../app/dynamic.component';
 
 export const NB_MODULES = [
   NbCardModule,
   NbLayoutModule,
   NbPopoverModule,
+  NbButtonModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
   NbPopoverExampleComponent,
+  NbButtonExampleComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

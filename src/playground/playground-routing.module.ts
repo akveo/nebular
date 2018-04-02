@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NbPopoverExampleComponent } from './examples';
+import { NbPopoverExampleComponent, NbButtonExampleComponent } from './examples';
 import { NbPlaygroundComponent } from './playground.component';
 
 
@@ -16,6 +16,7 @@ export const routes: Routes = [
     component: NbPlaygroundComponent,
     children: [
       { path: 'popover', component: NbPopoverExampleComponent },
+      { path: 'button', component: NbButtonExampleComponent },
     ],
   },
 ];

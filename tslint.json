@@ -111,9 +111,9 @@
     ],
     "component-selector": [
       true,
-      "element",
+      ["element", "attribute"],
       ["nb", "ngd"],
-      "kebab-case"
+      ["kebab-case", "camelCase"]
     ],
     "ban": [
       true,
