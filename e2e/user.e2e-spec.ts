@@ -26,11 +26,11 @@ describe('nb-user', () => {
     const badgesConf = {
       selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`,
       badges: [
-        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
-        { position: NbBadgeComponent.TOP_LEFT, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
-        { position: NbBadgeComponent.BOTTOM_RIGHT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
-        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_WARNING, text: badgeText },
-        { position: NbBadgeComponent.TOP_LEFT, status: NbBadgeComponent.STATUS_DANGER, text: badgeText },
+        { position: NbBadgeComponent.TOP_END, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
+        { position: NbBadgeComponent.TOP_START, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_END, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_START, status: NbBadgeComponent.STATUS_WARNING, text: badgeText },
+        { position: NbBadgeComponent.TOP_START, status: NbBadgeComponent.STATUS_DANGER, text: badgeText },
       ],
     };
     badgeTests(badgesConf);

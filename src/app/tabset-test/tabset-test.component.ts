@@ -82,25 +82,25 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
           <nb-tab tabTitle="Tab #2"
             badgeText="29"
             [badgeStatus]="badge.STATUS_INFO"
-            [badgePosition]="badge.TOP_LEFT">
+            [badgePosition]="badge.TOP_START">
             <span>Content #2</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #3"
             badgeText="29"
             [badgeStatus]="badge.STATUS_SUCCESS"
-            [badgePosition]="badge.BOTTOM_RIGHT">
+            [badgePosition]="badge.BOTTOM_END">
             <span>Content #3</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #4"
             badgeText="29"
             [badgeStatus]="badge.STATUS_DANGER"
-            [badgePosition]="badge.BOTTOM_LEFT">
+            [badgePosition]="badge.BOTTOM_START">
             <span>Content #4</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #5"
             badgeText="29"
             [badgeStatus]="badge.STATUS_WARNING"
-            [badgePosition]="badge.BOTTOM_RIGHT">
+            [badgePosition]="badge.BOTTOM_END">
             <span>Content #5</span>
           </nb-tab>
         </nb-tabset>
@@ -111,25 +111,25 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
           <nb-tab tabTitle="Tab #2"
             badgeText="29"
             [badgeStatus]="badge.STATUS_INFO"
-            [badgePosition]="badge.BOTTOM_RIGHT">
+            [badgePosition]="badge.BOTTOM_END">
             <span>Content #2</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #3"
             badgeText="29"
             [badgeStatus]="badge.STATUS_SUCCESS"
-            [badgePosition]="badge.TOP_LEFT">
+            [badgePosition]="badge.TOP_START">
             <span>Content #3</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #4"
             badgeText="29"
             [badgeStatus]="badge.STATUS_DANGER"
-            [badgePosition]="badge.BOTTOM_LEFT">
+            [badgePosition]="badge.BOTTOM_START">
             <span>Content #4</span>
           </nb-tab>
           <nb-tab tabTitle="Tab #5"
             badgeText="29"
             [badgeStatus]="badge.STATUS_WARNING"
-            [badgePosition]="badge.BOTTOM_RIGHT">
+            [badgePosition]="badge.BOTTOM_END">
             <span>Content #5</span>
           </nb-tab>
         </nb-tabset>

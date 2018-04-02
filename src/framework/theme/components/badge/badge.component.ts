@@ -22,10 +22,10 @@ import { Component, Input } from '@angular/core';
  * <nb-badge text="badgeText"></nb-badge>
  * ```
  *
- * @example Badge located on the bottom right with warning status:
+ * @example Badge located on the bottom end with warning status:
  *
  * ```
- * <nb-badge text="badgeText" status="warning" position="bottom right">
+ * <nb-badge text="badgeText" status="warning" position="bottom end">
  * </nb-badge>
  * ```
  *
@@ -46,10 +46,10 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class NbBadgeComponent {
-  static readonly TOP_LEFT = 'top left';
-  static readonly TOP_RIGHT = 'top right';
-  static readonly BOTTOM_LEFT = 'bottom left';
-  static readonly BOTTOM_RIGHT = 'bottom right';
+  static readonly TOP_START = 'top start';
+  static readonly TOP_END = 'top end';
+  static readonly BOTTOM_START = 'bottom start';
+  static readonly BOTTOM_END = 'bottom end';
 
   static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
@@ -57,7 +57,7 @@ export class NbBadgeComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  positionClass: string = NbBadgeComponent.TOP_RIGHT;
+  positionClass: string = NbBadgeComponent.TOP_END;
   colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
@@ -70,7 +70,7 @@ export class NbBadgeComponent {
    * Badge position
    *
    * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
   @Input() set position(value) {

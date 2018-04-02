@@ -88,37 +88,37 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_SUCCESS"
-                [badgePosition]="badge.BOTTOM_LEFT">
+                [badgePosition]="badge.BOTTOM_START">
                 <nb-user></nb-user>
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_DANGER"
-                [badgePosition]="badge.TOP_LEFT"
+                [badgePosition]="badge.TOP_START"
                 icon="ion-ios-flower-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_WARNING"
-                [badgePosition]="badge.BOTTOM_RIGHT"
+                [badgePosition]="badge.BOTTOM_END"
                 icon="ion-ios-medical-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_SUCCESS"
-                [badgePosition]="badge.BOTTOM_LEFT"
+                [badgePosition]="badge.BOTTOM_START"
                 icon="ion-ios-download-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_INFO"
-                [badgePosition]="badge.TOP_RIGHT"
+                [badgePosition]="badge.TOP_END"
                 icon="ion-ios-download-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_INFO"
-                [badgePosition]="badge.TOP_RIGHT"
+                [badgePosition]="badge.TOP_END"
                 icon="ion-ios-download-outline"
                 disabled>
               </nb-action>
