@@ -6,7 +6,7 @@
 
 @import '../../styles/core/mixins';
 
-.nb-badge {
+:host .nb-badge {
   position: absolute;
   padding: 0.25em 0.4em;
   font-size: 75%;
@@ -21,9 +21,9 @@
     &.bottom { bottom: 0; }
 
     &.start {
-      @include rtl-prop(left, right, 0, none);
+      @include rtl-prop(left, right, 0, auto);
     }
     &.end {
-      @include rtl-prop(right, left, 0, none);
+      @include rtl-prop(right, left, 0, auto);
     }
 }
