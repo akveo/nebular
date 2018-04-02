@@ -4,37 +4,39 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
   display: flex;
-}
 
-.user-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.user-picture {
-  position: relative;
-  border-radius: 50%;
-  flex-shrink: 0;
-
-  &.image {
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  &.background {
+  .user-container {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
-}
 
-.user-title {
-  font-size: 0.75rem;
-}
+  .user-picture {
+    position: relative;
+    border-radius: 50%;
+    flex-shrink: 0;
 
-.info-container {
-  margin-left: 0.5rem;
+    &.image {
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    &.background {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .user-title {
+    font-size: 0.75rem;
+  }
+
+  .info-container {
+    @include rtl-prop(margin-left, margin-right, 0.5rem, 0);
+  }
 }
