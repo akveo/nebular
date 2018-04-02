@@ -25,6 +25,7 @@ import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
 } from './services/breakpoints.service';
+import { NbDirectionService, Direction, LAYOUT_DIRECTION } from './services/direction.service';
 
 export function nbWindowFactory() {
   return window;
@@ -51,7 +52,8 @@ export class NbThemeModule {
    */
   static forRoot(nbThemeOptions: NbThemeOptions,
                  nbJSThemes?: NbJSThemeOptions[],
-                 nbMediaBreakpoints?: NbMediaBreakpoint[]): ModuleWithProviders {
+                 nbMediaBreakpoints?: NbMediaBreakpoint[],
+                 layoutDirection?: Direction): ModuleWithProviders {
 
     return <ModuleWithProviders> {
       ngModule: NbThemeModule,
@@ -66,6 +68,12 @@ export class NbThemeModule {
         NbThemeService,
         NbMediaBreakpointsService,
         NbSpinnerService,
+        { provide: LAYOUT_DIRECTION, useValue: layoutDirection || 'ltr' },
+        {
+          provide: NbDirectionService,
+          useClass: NbDirectionService,
+          deps: [ NbDocument, LAYOUT_DIRECTION ],
+        },
       ],
     };
   }
