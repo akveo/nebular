@@ -26,7 +26,7 @@ describe('nb-sidebar', () => {
 
   it('should open/close sidebar', () => {
 
-    const button = element(by.css('#collapse-left'));
+    const button = element(by.css('#collapse-start'));
     const sidebar = element(by.css('nb-sidebar[fixed]'));
 
     button.click().then(() => {
@@ -56,8 +56,8 @@ describe('nb-sidebar', () => {
 
   it('should open/compact sidebar', () => {
 
-    const button = element(by.css('#collapse-right'));
-    const sidebar = element(by.css('nb-sidebar[right]'));
+    const button = element(by.css('#collapse-end'));
+    const sidebar = element(by.css('nb-sidebar[end]'));
 
     button.click().then(() => {
       return browser.driver.wait(() => {

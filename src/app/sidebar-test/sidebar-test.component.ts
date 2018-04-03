@@ -22,14 +22,14 @@ import { NbSidebarService } from '@nebular/theme';
       <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
 
-        <button id="collapse-left" (click)="collapseLeft()">Collapse Left</button>
-        <button id="collapse-right" (click)="collapseRight()">Collapse Right</button>
+        <button id="collapse-start" (click)="collapseLeft()">Collapse Start</button>
+        <button id="collapse-end" (click)="collapseRight()">Collapse End</button>
       </nb-layout-header>
 
-      <nb-sidebar state="collapsed" fixed tag="left">
+      <nb-sidebar state="collapsed" fixed tag="start">
       </nb-sidebar>
 
-      <nb-sidebar right state="compacted" tag="right">
+      <nb-sidebar end state="compacted" tag="end">
         <nb-sidebar-header>Some Header</nb-sidebar-header>
         {{ content }}
       </nb-sidebar>
@@ -58,11 +58,11 @@ export class NbSidebarTestComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService) { }
 
   collapseLeft() {
-    this.sidebarService.toggle(false, 'left');
+    this.sidebarService.toggle(false, 'start');
   }
 
   collapseRight() {
-    this.sidebarService.toggle(true, 'right');
+    this.sidebarService.toggle(true, 'end');
   }
 
   ngOnInit() {

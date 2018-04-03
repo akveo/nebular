@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -25,7 +27,7 @@
     flex-direction: column;
   }
 
-  &.right {
+  &.end {
     order: 4;
     margin-right: 0;
     margin-left: auto;
@@ -39,10 +41,10 @@
     top: 0;
     bottom: 0;
 
-    left: 0;
+    @include rtl-prop(left, right, 0, auto);
 
-    &.right {
-      right: 0;
+    &.end {
+      @include rtl-prop(right, left, 0, auto);
     }
   }
 

@@ -16,7 +16,7 @@ import { NbThemeService } from '@nebular/theme';
         <button id="change-theme" (click)="changeTheme()">Change Theme</button>
       </nb-layout-header>
 
-      <nb-sidebar right>
+      <nb-sidebar end>
           Sidebar content
       </nb-sidebar>
 

@@ -21,7 +21,7 @@ import { Component } from '@angular/core';
         Left
       </nb-sidebar>
 
-      <nb-sidebar right>
+      <nb-sidebar end>
         Right
       </nb-sidebar>
     </nb-layout>

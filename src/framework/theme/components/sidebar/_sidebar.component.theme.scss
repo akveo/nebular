@@ -75,7 +75,7 @@
           &::before {
             position: absolute;
             content: '';
-            left: 0;
+            @include rtl-prop(left, right, 0, auto);
             top: 0;
             height: 100%;
             width: 4px;
@@ -115,30 +115,28 @@
 
       }
       // we need to pull the content
-      &.left.fixed ~ .content {
-        margin-left: nb-theme(sidebar-width-compact);
+      &.start.fixed ~ .content {
+        @include rtl-prop(margin-left, margin-right, nb-theme(sidebar-width-compact), 0);
       }
 
-      &.fixed.right ~ .content {
-        margin-left: 0;
-        margin-right: nb-theme(sidebar-width-compact);
+      &.fixed.end ~ .content {
+        @include rtl-prop(margin-right, margin-left, nb-theme(sidebar-width-compact), 0);
       }
 
-      &.left.fixed ~ .content.center {
-        padding-left: nb-theme(sidebar-width-compact);
+      &.start.fixed ~ .content.center {
+        @include rtl-prop(padding-left, padding-right, nb-theme(sidebar-width-compact), 0);
       }
 
-      &.fixed.right ~ .content.center {
-        padding-left: 0;
-        padding-right: nb-theme(sidebar-width-compact);
+      &.fixed.end ~ .content.center {
+        @include rtl-prop(padding-right, padding-left, nb-theme(sidebar-width-compact), 0);
       }
     }
 
-    &.fixed.left.collapsed + .content {
+    &.fixed.start.collapsed + .content {
       margin-left: 0;
     }
 
-    &.fixed.right.collapsed + .content {
+    &.fixed.end.collapsed + .content {
       margin-right: 0;
     }
 

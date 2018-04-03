@@ -47,7 +47,7 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
- * Sidebar can be place on the left or the right side of the layout, can be fixed (shown above the content)
+ * Sidebar can be place on the start or the end side of the layout, can be fixed (shown above the content)
  * or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
@@ -63,10 +63,10 @@ export class NbSidebarFooterComponent {
  * </nb-sidebar>
  * ```
  *
- * @example Example of fixed sidebar located on the left side, initially collapsed.
+ * @example Example of fixed sidebar located on the start side, initially collapsed.
  *
  * ```
- * <nb-sidebar left fixed state="collapsed">
+ * <nb-sidebar start fixed state="collapsed">
  *  <nb-sidebar-header>Header</nb-sidebar-header>
  *
  *    Sidebar content, menu or another component here.
@@ -121,8 +121,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   private alive = true;
 
   @HostBinding('class.fixed') fixedValue: boolean = false;
-  @HostBinding('class.right') rightValue: boolean = false;
-  @HostBinding('class.left') leftValue: boolean = true;
+  @HostBinding('class.start') startValue: boolean = true;
+  @HostBinding('class.end') endValue: boolean = false;
 
   // TODO: rename stateValue to state (take a look to the card component)
   @HostBinding('class.expanded')
@@ -139,23 +139,23 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Places sidebar on the left side
+   * Places sidebar on the start side
    * @type {boolean}
    */
   @Input()
-  set right(val: boolean) {
-    this.rightValue = convertToBoolProperty(val);
-    this.leftValue = !this.rightValue;
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
+    this.endValue = !this.startValue;
   }
 
   /**
-   * Places sidebar on the right side
+   * Places sidebar on the end side
    * @type {boolean}
    */
   @Input()
-  set left(val: boolean) {
-    this.leftValue = convertToBoolProperty(val);
-    this.rightValue = !this.leftValue;
+  set end(val: boolean) {
+    this.endValue = convertToBoolProperty(val);
+    this.startValue = !this.endValue;
   }
 
   /**
