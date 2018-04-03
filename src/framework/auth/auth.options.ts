@@ -7,7 +7,7 @@ export interface NbAuthOptions {
   providers?: any;
 }
 
-type NbProviderClass = new (...params: any[]) => NbAbstractAuthProvider;
+export type NbProviderClass = new (...params: any[]) => NbAbstractAuthProvider;
 
 export interface NbAuthProviders {
   [name: string]: NbProviderClass,

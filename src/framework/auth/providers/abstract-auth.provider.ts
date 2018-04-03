@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { NbAuthResult, nbCreateToken, NbTokenClass } from '../services';
+import { NbAuthToken, NbAuthResult, nbCreateToken, NbTokenClass } from '../services';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAbstractAuthProvider {
@@ -18,7 +18,7 @@ export abstract class NbAbstractAuthProvider {
     this.tokenClass = tokenClass;
   }
 
-  createToken(rawValue: string) {
+  createToken(rawValue: string): NbAuthToken {
     return nbCreateToken(this.tokenClass, rawValue);
   }
 
