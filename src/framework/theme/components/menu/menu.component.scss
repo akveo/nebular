@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host /deep/ {
   display: block;
 
@@ -22,6 +24,7 @@
 
     .menu-title {
       flex: 1;
+      @include rtl-only(text-align, right);
     }
   }
 }
