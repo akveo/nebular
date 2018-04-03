@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { NbAuthToken } from './token';
-import { NbAuthTokenPacker } from './token-packer';
+import { NbAuthTokenParceler } from './token-parceler';
 
 export abstract class NbTokenStorage {
 
@@ -31,7 +31,7 @@ export class NbTokenLocalStorage extends NbTokenStorage {
 
   protected key = 'auth_app_token';
 
-  constructor(private tokenPacker: NbAuthTokenPacker) {
+  constructor(private tokenPacker: NbAuthTokenParceler) {
     super();
   }
 
@@ -40,7 +40,8 @@ export class NbTokenLocalStorage extends NbTokenStorage {
    * @returns {NbAuthToken}
    */
   get(): NbAuthToken {
-    return this.tokenPacker.unpack(localStorage.getItem(this.key));
+    const raw = localStorage.getItem(this.key);
+    return this.tokenPacker.unwrap(raw);
   }
 
   /**
@@ -48,7 +49,8 @@ export class NbTokenLocalStorage extends NbTokenStorage {
    * @param {NbAuthToken} token
    */
   set(token: NbAuthToken) {
-    localStorage.setItem(this.key, this.tokenPacker.pack(token));
+    const raw = this.tokenPacker.wrap(token);
+    localStorage.setItem(this.key, raw);
   }
 
   /**

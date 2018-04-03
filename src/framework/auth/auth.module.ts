@@ -11,7 +11,7 @@ import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
 import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
 import { NbTokenService } from './services/token/token.service';
 import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
-import { NbAuthTokenPacker } from './services/token/token-packer';
+import { NbAuthTokenParceler } from './services/token/token-parceler';
 import { NbAbstractAuthProvider } from './providers';
 import {
   defaultSettings,
@@ -99,7 +99,7 @@ export class NbAuthModule {
         { provide: NB_AUTH_PROVIDERS, useFactory: nbProvidersFactory, deps: [NB_AUTH_OPTIONS, Injector] },
         { provide: NB_AUTH_TOKENS, useFactory: nbTokensFactory, deps: [NB_AUTH_OPTIONS] },
         NbAuthService,
-        NbAuthTokenPacker,
+        NbAuthTokenParceler,
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
         NbDummyAuthProvider,

@@ -6,6 +6,7 @@ export class NbAuthResult {
   protected errors: string[] = [];
   protected messages: string[] = [];
 
+  // TODO: better pass object
   constructor(protected success: boolean,
               protected response?: any,
               protected redirect?: any,

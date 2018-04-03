@@ -9,27 +9,27 @@ interface NbTokenPack {
 }
 
 /**
- *
+ * Creates a token parcel which could be stored/restored
  */
 @Injectable()
-export class NbAuthTokenPacker {
+export class NbAuthTokenParceler {
 
   constructor(@Inject(NB_AUTH_TOKENS) private availableTokens) {
   }
 
-  pack(token: NbAuthToken): string {
+  wrap(token: NbAuthToken): string {
     return JSON.stringify({
       class: token.constructor.name,
       value: token.toString(),
     });
   }
 
-  unpack(rawToken: string): NbAuthToken {
+  unwrap(rawToken: string): NbAuthToken {
     let tokenPack: NbTokenPack;
     try {
       tokenPack = JSON.parse(rawToken);
     } catch (e) {
-      console.warn('NbAuthToken: Can not unpack token, using empty `NbAuthSimpleToken`.');
+      console.warn('NbAuthToken: Can not unwrap token, using empty `NbAuthSimpleToken`.');
     }
 
     let tokenClass = NbAuthSimpleToken;
