@@ -29,8 +29,8 @@
 
   &.end {
     order: 4;
-    margin-right: 0;
-    margin-left: auto;
+    @include rtl-prop(margin-right, margin-left, 0, auto);
+    @include rtl-prop(margin-left, margin-right, auto, 0);
   }
 
   // TODO: in this case this will won't work when header is not fixed and sidebar is
