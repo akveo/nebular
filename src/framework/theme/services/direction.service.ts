@@ -1,27 +1,27 @@
 import { InjectionToken, Optional, Inject, Injectable } from '@angular/core';
 import { NbDocument } from '../theme.options';
 
-export type Direction = 'ltr' | 'rtl';
+export type NbDirection = 'ltr' | 'rtl';
 
-export const LAYOUT_DIRECTION = new InjectionToken<Direction>('Flow direction');
+export const NB_LAYOUT_DIRECTION = new InjectionToken<NbDirection>('Layout direction');
 
 @Injectable()
 export class NbDirectionService {
-  dir: Direction;
+  dir: NbDirection;
 
   constructor(
     private document: NbDocument,
-    @Optional() @Inject(LAYOUT_DIRECTION) dir = 'ltr',
+    @Optional() @Inject(NB_LAYOUT_DIRECTION) dir = 'ltr',
   ) {
-    this.dir = <Direction>dir;
-    this.setDirection(<Direction>dir);
+    this.dir = <NbDirection>dir;
+    this.setDirection(<NbDirection>dir);
   }
 
-  getDirection(): Direction {
+  getDirection(): NbDirection {
     return this.dir;
   }
 
-  setDirection(dir: Direction) {
+  setDirection(dir: NbDirection) {
     this.dir = dir;
     this.document.dir = this.dir;
   }
