@@ -60,7 +60,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      @include rtl-prop(left, right, 0, unset);
+      @include rtl-prop(left, right, 0, auto);
       flex: none;
       display: flex;
       justify-content: center;
