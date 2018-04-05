@@ -76,7 +76,7 @@
           order: 2;
           flex: 1 0;
           min-width: 0; // fix for flexbug https://github.com/philipwalton/flexbugs#flexbug-1
-          &.left {
+          &.start {
             order: 1;
           }
         }

@@ -34,7 +34,7 @@ import { NbSidebarService } from '@nebular/theme';
         {{ content }}
       </nb-sidebar>
 
-      <nb-layout-column left>
+      <nb-layout-column start>
        {{ content }}
       </nb-layout-column>
       <nb-layout-column>

@@ -43,15 +43,15 @@ import { NbWindow, NbDocument } from '../../theme.options';
 })
 export class NbLayoutColumnComponent {
 
-  @HostBinding('class.left') leftValue: boolean;
+  @HostBinding('class.start') startValue: boolean;
 
   /**
-   * Move the column to the very left position in the layout.
+   * Make columnt first in the layout.
    * @param {boolean} val
    */
   @Input()
-  set left(val: boolean) {
-    this.leftValue = convertToBoolProperty(val);
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
   }
 }
 
