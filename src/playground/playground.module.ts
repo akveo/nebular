@@ -10,7 +10,7 @@ import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundComponent } from './playground.component';
-import { NbPopoverExampleComponent } from './examples';
+import { NbPopoverExampleComponent } from './popover';
 import { NbDynamicToAddComponent } from '../app/dynamic.component';
 
 export const NB_MODULES = [

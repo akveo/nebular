@@ -16,7 +16,7 @@ export class NgdExampleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.codeLoader.load(this.content.id, this.content.lang)
+    this.codeLoader.load(this.content.path)
       .subscribe((code: string) => this.code = code);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ExampleHelperService } from '../../../utils/example-helper.service';
 
 @Component({
   selector: 'ngd-inline-example',
@@ -11,11 +12,14 @@ export class NgdInlineExampleComponent {
 
   @Input() content;
 
+  constructor(private exampleHelper: ExampleHelperService) {
+  }
+
   get isOneFile(): boolean {
-    return !!this.content.lang;
+    return !this.isFull;
   }
 
   get isFull(): boolean {
-    return !this.isOneFile;
+    return this.exampleHelper.isFull(this.content.path);
   }
 }
