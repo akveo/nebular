@@ -29,6 +29,11 @@ export enum NbPopoverPlacement {
   RIGHT = 'right',
 }
 
+export enum NbPopoverLogicalPlacement {
+  START = 'start',
+  END = 'end',
+}
+
 /**
  * NbPopoverMode describes when to trigger show and hide methods of the popover.
  * */

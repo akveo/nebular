@@ -16,6 +16,7 @@ import { NbContextMenuComponent } from './context-menu.component';
 import { NbPositioningHelper } from '../popover/helpers/positioning.helper';
 import { NbAdjustmentHelper } from '../popover/helpers/adjustment.helper';
 import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 
 /**
  * Full featured context menu directive.
@@ -97,7 +98,8 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
               positioningHelper: NbPositioningHelper,
               adjustmentHelper: NbAdjustmentHelper,
               triggerHelper: NbTriggerHelper,
-              @Inject(PLATFORM_ID) platformId) {
+              @Inject(PLATFORM_ID) platformId,
+              directionService: NbLayoutDirectionService) {
     /**
      * Initialize popover with all the important inputs.
      * */
@@ -108,6 +110,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
       adjustmentHelper,
       triggerHelper,
       platformId,
+      directionService,
     );
     this.popover.content = NbContextMenuComponent;
     this.popover.placement = NbPopoverPlacement.BOTTOM;
