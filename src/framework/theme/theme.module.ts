@@ -5,7 +5,7 @@
  */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 import {
   nbBuiltInJSThemesToken,
@@ -28,10 +28,6 @@ import {
 
 export function nbWindowFactory() {
   return window;
-}
-
-export function nbDocumentFactory() {
-  return document;
 }
 
 @NgModule({
@@ -65,7 +61,7 @@ export class NbThemeModule {
         { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
         { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
         { provide: NbWindow, useFactory: nbWindowFactory },
-        { provide: NbDocument, useFactory: nbDocumentFactory },
+        { provide: NbDocument, useExisting: DOCUMENT },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,
