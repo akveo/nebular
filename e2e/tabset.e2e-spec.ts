@@ -103,11 +103,11 @@ describe('nb-tabset', () => {
     const badgesConf = {
       selector: (i) => `nb-tabset:nth-child(6) > ul > li:nth-child(${i + 1}) > nb-badge > span`,
       badges: [
-        { text: badgeText, status: NbBadgeComponent.STATUS_PRIMARY, position: NbBadgeComponent.TOP_END },
-        { text: badgeText, status: NbBadgeComponent.STATUS_INFO, position: NbBadgeComponent.TOP_START },
-        { text: badgeText, status: NbBadgeComponent.STATUS_SUCCESS, position: NbBadgeComponent.BOTTOM_END },
-        { text: badgeText, status: NbBadgeComponent.STATUS_DANGER, position: NbBadgeComponent.BOTTOM_START },
-        { text: badgeText, status: NbBadgeComponent.STATUS_WARNING, position: NbBadgeComponent.BOTTOM_END },
+        { text: badgeText, status: NbBadgeComponent.STATUS_PRIMARY, position: NbBadgeComponent.TOP_RIGHT },
+        { text: badgeText, status: NbBadgeComponent.STATUS_INFO, position: NbBadgeComponent.TOP_LEFT },
+        { text: badgeText, status: NbBadgeComponent.STATUS_SUCCESS, position: NbBadgeComponent.BOTTOM_RIGHT },
+        { text: badgeText, status: NbBadgeComponent.STATUS_DANGER, position: NbBadgeComponent.BOTTOM_LEFT },
+        { text: badgeText, status: NbBadgeComponent.STATUS_WARNING, position: NbBadgeComponent.BOTTOM_RIGHT },
       ],
     };
     badgeTests(badgesConf);

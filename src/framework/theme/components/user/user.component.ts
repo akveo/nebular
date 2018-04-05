@@ -167,7 +167,7 @@ export class NbUserComponent {
   /**
    * Badge position.
    * Can be set to any class or to one of predefined positions:
-   * 'top start', 'top end', 'bottom start', 'bottom end'
+   * 'top left', 'top right', 'bottom left', 'bottom right'
    * @type string
    */
   @Input() badgePosition: string;

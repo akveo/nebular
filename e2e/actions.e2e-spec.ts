@@ -19,13 +19,13 @@ describe('nb-action', () => {
     const badgesConf = {
       selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`,
       badges: [
-        { position: NbBadgeComponent.BOTTOM_START, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
-        { position: NbBadgeComponent.TOP_START, status: NbBadgeComponent.STATUS_DANGER, text: badgeText },
-        { position: NbBadgeComponent.BOTTOM_END, status: NbBadgeComponent.STATUS_WARNING, text: badgeText },
-        { position: NbBadgeComponent.BOTTOM_START, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
-        { position: NbBadgeComponent.TOP_END, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
-        { position: NbBadgeComponent.TOP_END, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
-        { position: NbBadgeComponent.TOP_END, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: NbBadgeComponent.TOP_LEFT, status: NbBadgeComponent.STATUS_DANGER, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_RIGHT, status: NbBadgeComponent.STATUS_WARNING, text: badgeText },
+        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_INFO, text: badgeText },
+        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
       ],
     };
     badgeTests(badgesConf);

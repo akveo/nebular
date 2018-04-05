@@ -65,7 +65,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             title="Worker"
             badgeText="29"
             [badgeStatus]="badge.STATUS_INFO"
-            [badgePosition]="badge.TOP_START">
+            [badgePosition]="badge.TOP_LEFT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -76,7 +76,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             showTitle="false"
             badgeText="29"
             [badgeStatus]="badge.STATUS_SUCCESS"
-            [badgePosition]="badge.BOTTOM_END">
+            [badgePosition]="badge.BOTTOM_RIGHT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -87,7 +87,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             title="Worker"
             badgeText="29"
             [badgeStatus]="badge.STATUS_WARNING"
-            [badgePosition]="badge.BOTTOM_START">
+            [badgePosition]="badge.BOTTOM_LEFT">
           </nb-user>
         </div>
         <div class="test-row">
@@ -98,7 +98,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
             title="Worker"
             badgeText="29"
             [badgeStatus]="badge.STATUS_DANGER"
-            [badgePosition]="badge.TOP_START">
+            [badgePosition]="badge.TOP_LEFT">
           </nb-user>
         </div>
         <div class="test-row" id="base64-image">

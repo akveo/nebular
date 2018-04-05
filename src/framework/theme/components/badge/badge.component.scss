@@ -17,13 +17,13 @@
   vertical-align: baseline;
   border-radius: 0.25rem;
 
-    &.top { top: 0; }
-    &.bottom { bottom: 0; }
+  &.top { top: 0; }
+  &.bottom { bottom: 0; }
 
-    &.start {
-      @include rtl-prop(left, right, 0, auto);
-    }
-    &.end {
-      @include rtl-prop(right, left, 0, auto);
-    }
+  &.start {
+    @include rtl-prop(left, right, 0, auto);
+  }
+  &.end {
+    @include rtl-prop(right, left, 0, auto);
+  }
 }
