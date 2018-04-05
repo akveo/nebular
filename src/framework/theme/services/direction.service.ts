@@ -10,11 +10,9 @@ export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout
 
 @Injectable()
 export class NbLayoutDirectionService {
-  private dir: NbLayoutDirection;
-
   constructor(
     private document: NbDocument,
-    @Optional() @Inject(NB_LAYOUT_DIRECTION) dir = NbLayoutDirection.LTR,
+    @Optional() @Inject(NB_LAYOUT_DIRECTION) private dir = NbLayoutDirection.LTR,
   ) {
     this.dir = dir;
     this.setDirection(<NbLayoutDirection>dir);
