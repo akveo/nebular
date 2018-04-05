@@ -4,18 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators/delay';
 
-import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { NbAuthResult } from '../services/auth-result';
+import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthResult } from '../../services/auth-result';
+import { NbDummyAuthStrategyOptions } from './dummy-strategy-options';
 
-export interface NbDummyAuthProviderConfig {
-  delay?: number;
-  alwaysFail?: boolean;
-}
 
 @Injectable()
-export class NbDummyAuthProvider extends NbAbstractAuthProvider {
+export class NbDummyAuthStrategy extends NbAuthStrategy {
 
-  protected defaultConfig: NbDummyAuthProviderConfig = {
+  protected defaultConfig: NbDummyAuthStrategyOptions = {
     delay: 1000,
   };
 
