@@ -48,6 +48,7 @@ import { NgdInlineExampleComponent } from './docs/page/blocks/inline-example/ngd
 import { NgdTabbedExampleComponent } from './docs/page/blocks/inline-example/ngd-tabbed-example.component';
 import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-example.component';
 import { CodeLoaderService } from './docs/utils/code-loader.service';
+import { ExampleHelperService } from './docs/utils/example-helper.service';
 
 @NgModule({
   imports: [
@@ -93,6 +94,7 @@ import { CodeLoaderService } from './docs/utils/code-loader.service';
   ],
   providers: [
     IframeCommunicatorService,
+    ExampleHelperService,
     CodeLoaderService,
     BlockHelperService,
     DocsService,

@@ -1,34 +1,40 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { ExampleHelperService } from '../../../utils/example-helper.service';
+import { CodeLoaderService } from '../../../utils/code-loader.service';
 
 @Component({
   selector: 'ngd-tabbed-example',
   styleUrls: ['./ngd-tabbed-example.component.scss'],
   template: `
-    <nb-tabset *ngIf="content">
-      <nb-tab tabTitle="ts">
-        <ngd-example [content]="content.ts"></ngd-example>
+    <nb-tabset>
+      <nb-tab tabTitle="ts" *ngIf="examples?.ts">
+        <ngd-code-block [code]="examples?.ts"></ngd-code-block>
       </nb-tab>
 
-      <nb-tab tabTitle="html">
-        <ngd-example [content]="content.html"></ngd-example>
+      <nb-tab tabTitle="html" *ngIf="examples?.html">
+        <ngd-code-block [code]="examples?.html"></ngd-code-block>
       </nb-tab>
 
-      <nb-tab tabTitle="scss">
-        <ngd-example [content]="content.scss"></ngd-example>
+      <nb-tab tabTitle="scss" *ngIf="examples?.scss">
+        <ngd-code-block [code]="examples?.scss"></ngd-code-block>
       </nb-tab>
     </nb-tabset>
   `,
 })
-export class NgdTabbedExampleComponent {
+export class NgdTabbedExampleComponent implements OnInit {
 
-  content;
+  @Input() content;
+  examples;
 
-  @Input('content')
-  set contentValue(content) {
-    this.content = {
-      ts: { ...content, lang: 'ts' },
-      html: { ...content, lang: 'html' },
-      scss: { ...content, lang: 'scss' },
-    };
+  constructor(private exampleHelper: ExampleHelperService,
+              private codeLoader: CodeLoaderService) {
+  }
+
+  ngOnInit() {
+    const paths = this.exampleHelper.fullExampleFiles(this.content.path);
+
+    forkJoin(paths.map(path => this.codeLoader.load(path)))
+      .subscribe(([ts, html, scss]) => this.examples = { ts, html, scss });
   }
 }

@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NbPopoverExampleComponent } from './examples';
+import { NbPopoverExampleComponent } from './popover';
 import { NbPlaygroundComponent } from './playground.component';
 
 
