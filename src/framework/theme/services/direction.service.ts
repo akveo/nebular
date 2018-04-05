@@ -20,6 +20,14 @@ export class NbLayoutDirectionService {
     this.setDirection(<NbLayoutDirection>dir);
   }
 
+  public get isLtr() {
+    return this.dir === NbLayoutDirection.LTR;
+  }
+
+  public get isRtl() {
+    return this.dir === NbLayoutDirection.RTL;
+  }
+
   getDirection(): NbLayoutDirection {
     return this.dir;
   }
