@@ -105,6 +105,17 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
           <nb-user
             [picture]="'data:image/png;base64,aaa'"></nb-user>
         </div>
+        <div class="test-row">
+          <nb-user inverse
+            size="large"
+            picture="http://lorempixel.com/400/200/animals/"
+            name="Dmitry Nehaychik"
+            title="Worker"
+            badgeText="29"
+            [badgeStatus]="badge.STATUS_DANGER"
+            [badgePosition]="badge.TOP_START">
+          </nb-user>
+        </div>
       </nb-layout-column>
     </nb-layout>
   `,
