@@ -418,6 +418,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'LayoutDirectionService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDirectionService',
+          },
+        ],
+      },
     ],
   },
   {
