@@ -69,11 +69,7 @@ export class NbThemeModule {
         NbMediaBreakpointsService,
         NbSpinnerService,
         { provide: NB_LAYOUT_DIRECTION, useValue: layoutDirection || 'ltr' },
-        {
-          provide: NbDirectionService,
-          useClass: NbDirectionService,
-          deps: [ NbDocument, NB_LAYOUT_DIRECTION ],
-        },
+        NbDirectionService,
       ],
     };
   }
