@@ -24,14 +24,14 @@ export class NbLayoutDirectionService {
     @Optional() @Inject(NB_LAYOUT_DIRECTION) private dir = NbLayoutDirection.LTR,
   ) {
     this.dir = dir;
-    this.setDirection(<NbLayoutDirection>dir);
+    this.setDirection(dir);
   }
 
   /**
    * Returns true if layout direction set to left to right.
    * @returns boolean.
    * */
-  public get isLtr() {
+  public get isLtr(): boolean {
     return this.dir === NbLayoutDirection.LTR;
   }
 
@@ -39,7 +39,7 @@ export class NbLayoutDirectionService {
    * Returns true if layout direction set to right to left.
    * @returns boolean.
    * */
-  public get isRtl() {
+  public get isRtl(): boolean {
     return this.dir === NbLayoutDirection.RTL;
   }
 
@@ -57,6 +57,6 @@ export class NbLayoutDirectionService {
    * */
   setDirection(dir: NbLayoutDirection) {
     this.dir = dir;
-    this.document.dir = this.dir;
+    this.document.dir = dir;
   }
 }
