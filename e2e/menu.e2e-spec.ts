@@ -23,13 +23,18 @@ const menu333 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:
 const newMenu = by.css('#menu-first ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
-const hiddenMenuItem = by.css('#menu-second ul li:nth-child(3)');
-const hiddenSubmenuItem = by.css('#menu-second ul li:nth-child(2) ul li:nth-child(2)');
+const hiddenMenuItem = by.css('#menu-third ul li:nth-child(3)');
+const hiddenSubmenuItem = by.css('#menu-third ul li:nth-child(2) ul li:nth-child(2)');
 const waitTime = 20 * 1000;
 
 const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) > a > span');
+
 const sidebarMenu1 = by.css('#menu-sidebar ul li:nth-child(2) a');
 const sidebarMenu3 = by.css('#menu-sidebar ul li:nth-child(4) a');
+
+const secondMenu1 = by.css('#menu-second ul li:nth-child(2) a');
+const secondMenu2 = by.css('#menu-second ul li:nth-child(3) a');
+const secondMenu4 = by.css('#menu-second ul li:nth-child(4) a');
 
 describe('nb-menu', () => {
 
@@ -299,4 +304,39 @@ describe('nb-menu', () => {
         expect(browser.getCurrentUrl()).toContain('param=2');
       })
   });
+
+  it('pathMatch: "full" should be applied by default', () => {
+    browser.get('#menu/3/3').then(() => {
+      expect(hasClass(element.all(secondMenu4).first(), 'active')).toBeFalsy();
+    })
+  });
+
+  it('pathMatch: "partial" should work by url segments', () => {
+    const menu1Element = element.all(secondMenu1).first();
+    const menu2Element = element.all(secondMenu2).first();
+    menu1Element.click()
+      .then(() => {
+        expect(hasClass(menu1Element, 'active')).toBeTruthy();
+      });
+    menu2Element.click()
+      .then(() => {
+        expect(hasClass(menu2Element, 'active')).toBeTruthy();
+        expect(hasClass(menu1Element, 'active')).toBeFalsy();
+      })
+  });
+
+  it('should add fragment to url', () => {
+    element.all(menu1).first().click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('#fragment');
+      })
+  });
+
+  it('should add fragment to url (navigate home)', () => {
+    element(homeButton).click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('#fragment');
+      })
+  });
+
 });
