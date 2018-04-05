@@ -329,7 +329,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Maps logical position to physical according to current layout direction.
    * */
   private get physicalPlacement(): NbPopoverPlacement {
-    const isLtr = this.layoutDirectionService.isLtr;
+    const { isLtr } = this.layoutDirectionService;
     if (this.placement === NbPopoverLogicalPlacement.START) {
       return isLtr ? NbPopoverPlacement.LEFT : NbPopoverPlacement.RIGHT;
     }
