@@ -20,21 +20,21 @@ import { NbAuthResult } from '../../services/auth-result';
 export class NbLogoutComponent implements OnInit {
 
   redirectDelay: number = 0;
-  provider: string = '';
+  strategy: string = '';
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router) {
     this.redirectDelay = this.getConfigValue('forms.logout.redirectDelay');
-    this.provider = this.getConfigValue('forms.logout.provider');
+    this.strategy = this.getConfigValue('forms.logout.strategy');
   }
 
   ngOnInit(): void {
-    this.logout(this.provider);
+    this.logout(this.strategy);
   }
 
-  logout(provider: string): void {
-    this.service.logout(provider).subscribe((result: NbAuthResult) => {
+  logout(strategy: string): void {
+    this.service.logout(strategy).subscribe((result: NbAuthResult) => {
 
       const redirect = result.getRedirect();
       if (redirect) {
