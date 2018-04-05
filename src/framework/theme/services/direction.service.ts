@@ -1,27 +1,30 @@
 import { InjectionToken, Optional, Inject, Injectable } from '@angular/core';
 import { NbDocument } from '../theme.options';
 
-export type NbDirection = 'ltr' | 'rtl';
+export enum NbLayoutDirection {
+  LTR = 'ltr',
+  RTL = 'rtl',
+};
 
-export const NB_LAYOUT_DIRECTION = new InjectionToken<NbDirection>('Layout direction');
+export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout direction');
 
 @Injectable()
-export class NbDirectionService {
-  dir: NbDirection;
+export class NbLayoutDirectionService {
+  private dir: NbLayoutDirection;
 
   constructor(
     private document: NbDocument,
-    @Optional() @Inject(NB_LAYOUT_DIRECTION) dir = 'ltr',
+    @Optional() @Inject(NB_LAYOUT_DIRECTION) dir = NbLayoutDirection.LTR,
   ) {
-    this.dir = <NbDirection>dir;
-    this.setDirection(<NbDirection>dir);
+    this.dir = dir;
+    this.setDirection(<NbLayoutDirection>dir);
   }
 
-  getDirection(): NbDirection {
+  getDirection(): NbLayoutDirection {
     return this.dir;
   }
 
-  setDirection(dir: NbDirection) {
+  setDirection(dir: NbLayoutDirection) {
     this.dir = dir;
     this.document.dir = this.dir;
   }
