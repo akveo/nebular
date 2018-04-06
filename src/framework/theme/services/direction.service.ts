@@ -1,5 +1,7 @@
 import { InjectionToken, Optional, Inject, Injectable } from '@angular/core';
-import { NbDocument } from '../theme.options';
+import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { share } from 'rxjs/operators/share';
 
 /**
  * Layout direction.
@@ -19,8 +21,9 @@ export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout
  */
 @Injectable()
 export class NbLayoutDirectionService {
+  private $directionChange = new ReplaySubject(1);
+
   constructor(
-    private document: NbDocument,
     @Optional() @Inject(NB_LAYOUT_DIRECTION) private direction = NbLayoutDirection.LTR,
   ) {
     this.setDirection(direction);
@@ -56,6 +59,13 @@ export class NbLayoutDirectionService {
    * */
   setDirection(direction: NbLayoutDirection) {
     this.direction = direction;
-    this.document.dir = direction;
+    this.$directionChange.next(direction);
+  }
+
+  /**
+   * Triggers direction change
+   */
+  onDirectionChange(): Observable<NbLayoutDirection> {
+    return this.$directionChange.pipe(share<NbLayoutDirection>());
   }
 }

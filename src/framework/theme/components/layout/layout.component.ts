@@ -18,6 +18,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbWindow, NbDocument } from '../../theme.options';
 
 /**
@@ -308,6 +309,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected window: NbWindow,
     protected document: NbDocument,
     @Inject(PLATFORM_ID) protected platformId: Object,
+    protected layoutDirectionService: NbLayoutDirectionService,
   ) {
 
     this.themeService.onThemeChange()
@@ -371,6 +373,13 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe((data: { listener: Subject<any> }) => {
         this.veryTopRef.clear();
         data.listener.next(true);
+      });
+
+    this.layoutDirectionService.onDirectionChange()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(direction => {
+        const { body } = this.document;
+        this.renderer.setAttribute(body, 'dir', direction);
       });
 
     this.afterViewInit$.next(true);
