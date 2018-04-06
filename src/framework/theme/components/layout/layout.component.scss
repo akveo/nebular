@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
 
   -webkit-font-smoothing: antialiased;
@@ -37,8 +39,12 @@
     flex-direction: row;
 
     /deep/ nb-sidebar {
-      order: 0;
-
+      &.left {
+        @include rtl(order, 0, 2);
+      }
+      &.right {
+        @include rtl(order, 2, 0);
+      }
       &.end {
         order: 2;
       }
@@ -73,11 +79,15 @@
         width: 100%;
 
         /deep/ nb-layout-column {
-          order: 2;
+          order: 1;
           flex: 1 0;
           min-width: 0; // fix for flexbug https://github.com/philipwalton/flexbugs#flexbug-1
+
+          &.left {
+            @include rtl(order, 0, 2);
+          }
           &.start {
-            order: 1;
+            order: 0;
           }
         }
       }
