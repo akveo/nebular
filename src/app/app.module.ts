@@ -170,7 +170,7 @@ const NB_TEST_COMPONENTS = [
         //
         // email: {
         //   service: NbDummyAuthStrategy,
-        //   config: {
+        //   options: {
         //     alwaysFail: true,
         //     delay: 1000,
         //   },

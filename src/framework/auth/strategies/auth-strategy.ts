@@ -6,15 +6,15 @@ import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAuthStrategy {
 
-  protected defaultConfig: any = {};
-  protected config: any = {};
+  protected defaultOptions: any = {};
+  protected options: any = {};
 
-  setConfig(config: any): void {
-    this.config = deepExtend({}, this.defaultConfig, config);
+  setOptions(options: any): void {
+    this.options = deepExtend({}, this.defaultOptions, options);
   }
 
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+  getOption(key: string): any {
+    return getDeepFromObject(this.options, key, null);
   }
 
   abstract authenticate(data?: any): Observable<NbAuthResult>;
@@ -33,9 +33,5 @@ export abstract class NbAuthStrategy {
 
   protected createSuccessResponse(data?: any): HttpResponse<Object> {
     return new HttpResponse<Object>({ body: {}, status: 200 });
-  }
-
-  protected getJsonSafe(res: HttpResponse<Object>): any {
-    return res.body;
   }
 }
