@@ -9,6 +9,10 @@ export abstract class NbAbstractAuthProvider {
   protected defaultConfig: any = {};
   protected config: any = {};
 
+  getDefaultConfig() {
+    return this.defaultConfig;
+  }
+
   setConfig(config: any): void {
     this.config = deepExtend({}, this.defaultConfig, config);
   }

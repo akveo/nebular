@@ -39,6 +39,10 @@ export interface NgEmailPassAuthProviderConfig {
     key?: string;
     getter?: Function;
   };
+  fieldErrors?: {
+    key?: string;
+    getter?: Function;
+  };
   messages?: {
     key?: string;
     getter?: Function;

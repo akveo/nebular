@@ -117,9 +117,16 @@ function deepCloneArray(arr: any[]): any {
 
 // getDeepFromObject({result: {data: 1}}, 'result.data', 2); // returns 1
 export function getDeepFromObject(object = {}, name: string, defaultValue?: any) {
-  const keys = name.split('.');
   // clone the object
   let level = deepExtend({}, object || {});
+
+  // add possibility to get the whole object from the config definition
+  if (name === '') {
+    return level;
+  }
+
+  const keys = name.split('.');
+
   keys.forEach((k) => {
     if (level && typeof level[k] !== 'undefined') {
       level = level[k];

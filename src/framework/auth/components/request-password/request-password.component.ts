@@ -6,10 +6,10 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS } from '../../auth.options';
-import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
+import {AbstractAuthComponent} from '../abstract-auth-component.class';
 
 @Component({
   selector: 'nb-request-password-page',
@@ -35,6 +35,7 @@ import { NbAuthResult } from '../../services/auth-result';
           <label for="input-email" class="sr-only">Enter your email address</label>
           <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
                  class="form-control" placeholder="Email address" pattern=".+@.+\..+"
+                 (keyup)="clearFieldErrors('email')"
                  [class.form-control-danger]="email.invalid && email.touched"
                  [required]="getConfigValue('forms.validation.email.required')"
                  autofocus>
@@ -44,6 +45,9 @@ import { NbAuthResult } from '../../services/auth-result';
           <small class="form-text error"
                  *ngIf="email.invalid && email.touched && email.errors?.pattern">
             Email should be the real one!
+          </small>
+          <small class="form-text error" *ngIf="fieldErrors.email?.length">
+            {{fieldErrors.email[0]}}
           </small>
         </div>
 
@@ -64,21 +68,13 @@ import { NbAuthResult } from '../../services/auth-result';
     </nb-auth-block>
   `,
 })
-export class NbRequestPasswordComponent {
+export class NbRequestPasswordComponent extends AbstractAuthComponent {
 
-  redirectDelay: number = 0;
-  showMessages: any = {};
-  provider: string = '';
-
-  submitted = false;
-  errors: string[] = [];
-  messages: string[] = [];
-  user: any = {};
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router) {
-
+    super(config);
     this.redirectDelay = this.getConfigValue('forms.requestPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.requestPassword.showMessages');
     this.provider = this.getConfigValue('forms.requestPassword.provider');
@@ -86,6 +82,7 @@ export class NbRequestPasswordComponent {
 
   requestPass(): void {
     this.errors = this.messages = [];
+    this.fieldErrors = {};
     this.submitted = true;
 
     this.service.requestPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
@@ -94,6 +91,7 @@ export class NbRequestPasswordComponent {
         this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();
+        this.fieldErrors = result.getFieldErrors();
       }
 
       const redirect = result.getRedirect();
@@ -105,7 +103,4 @@ export class NbRequestPasswordComponent {
     });
   }
 
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
-  }
 }

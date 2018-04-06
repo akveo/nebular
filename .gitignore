@@ -44,3 +44,4 @@ testem.log
 Thumbs.db
 debug.log
 local.log
+yarn-error.log

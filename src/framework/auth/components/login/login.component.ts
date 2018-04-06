@@ -6,10 +6,10 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../auth.options';
-import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
+import {AbstractAuthComponent} from '../abstract-auth-component.class';
 
 @Component({
   selector: 'nb-login',
@@ -36,6 +36,7 @@ import { NbAuthResult } from '../../services/auth-result';
           <label for="input-email" class="sr-only">Email address</label>
           <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+@.+\..+"
                  class="form-control" placeholder="Email address" #email="ngModel"
+                 (keyup)="clearFieldErrors('email')"
                  [class.form-control-danger]="email.invalid && email.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">
           <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
@@ -45,12 +46,16 @@ import { NbAuthResult } from '../../services/auth-result';
                  *ngIf="email.invalid && email.touched && email.errors?.pattern">
             Email should be the real one!
           </small>
+          <small class="form-text error" *ngIf="fieldErrors.email?.length">
+            {{fieldErrors.email[0]}}
+          </small>
         </div>
 
         <div class="form-group">
           <label for="input-password" class="sr-only">Password</label>
           <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
                  class="form-control" placeholder="Password" #password="ngModel"
+                 (keyup)="clearFieldErrors('password')"
                  [class.form-control-danger]="password.invalid && password.touched"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -65,6 +70,9 @@ import { NbAuthResult } from '../../services/auth-result';
             from {{ getConfigValue('forms.validation.password.minLength') }}
             to {{ getConfigValue('forms.validation.password.maxLength') }}
             characters
+          </small>
+          <small class="form-text error" *ngIf="fieldErrors.password?.length">
+            {{fieldErrors.password[0]}}
           </small>
         </div>
 
@@ -107,22 +115,14 @@ import { NbAuthResult } from '../../services/auth-result';
     </nb-auth-block>
   `,
 })
-export class NbLoginComponent {
+export class NbLoginComponent extends AbstractAuthComponent {
 
-  redirectDelay: number = 0;
-  showMessages: any = {};
-  provider: string = '';
-
-  errors: string[] = [];
-  messages: string[] = [];
-  user: any = {};
-  submitted: boolean = false;
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router) {
-
+    super(config);
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.provider = this.getConfigValue('forms.login.provider');
@@ -131,6 +131,7 @@ export class NbLoginComponent {
 
   login(): void {
     this.errors = this.messages = [];
+    this.fieldErrors = {};
     this.submitted = true;
 
     this.service.authenticate(this.provider, this.user).subscribe((result: NbAuthResult) => {
@@ -140,6 +141,7 @@ export class NbLoginComponent {
         this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();
+        this.fieldErrors = result.getFieldErrors();
       }
 
       const redirect = result.getRedirect();
@@ -151,7 +153,5 @@ export class NbLoginComponent {
     });
   }
 
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
-  }
+
 }

@@ -34,6 +34,17 @@ describe('email-pass-auth-provider', () => {
     'messages': ['Success message'],
     'errors': ['Error message'],
   };
+  const errorFieldsResponse: any = {
+    'token': 'token',
+    'messages': ['Success message'],
+    'errors': ['Error message'],
+    'data': {
+      'fieldErrors': {
+        'password': ['Should contain characters'],
+        'email': ['This email already exists'],
+      },
+    },
+  };
   const loginData: any = { email: 'test@test.com', password: '123456' };
 
   beforeEach(() => {
@@ -1164,12 +1175,62 @@ describe('email-pass-auth-provider', () => {
           expect(result.isFailure()).toBe(true);
           expect(result.isSuccess()).toBe(false);
           expect(result.getErrors()[0]).toBe('Error message');
-
           done();
         });
 
       httpMock.expectOne('/api/auth/register')
         .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
+  });
+
+  describe('error fields extractor', () => {
+
+    beforeEach(() => {
+      provider.setConfig({
+        token: {
+          key: 'token',
+        },
+        messages: {
+          getter: (module: string, res: HttpResponse<Object>) => res.body['messages'],
+        },
+        errors: {
+          getter: (module: string, res: HttpErrorResponse) => res.error['errors'],
+        },
+        register: {
+          fieldErrorsMap: {
+            password: 'new_password',
+          },
+        },
+      });
+    });
+
+    it('authenticate fail', (done: DoneFn) => {
+      provider.authenticate(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result.getFieldErrors()).toEqual({
+            'password': ['Should contain characters'],
+            'email': ['This email already exists'],
+          });
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/login')
+        .flush(errorFieldsResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
+    it('register fail', (done: DoneFn) => {
+      provider.register(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result.getFieldErrors()).toEqual({
+            'password': ['Should contain characters'],
+            'email': ['This email already exists'],
+          });
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/register')
+        .flush(errorFieldsResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
   });

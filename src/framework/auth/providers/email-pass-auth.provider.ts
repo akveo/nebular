@@ -15,7 +15,8 @@ import { catchError } from 'rxjs/operators/catchError';
 import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { getDeepFromObject } from '../helpers';
+import {getDeepFromObject} from '../helpers';
+import {FieldErrors} from '../services';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -104,14 +105,13 @@ import { getDeepFromObject } from '../helpers';
  *}
  *
  * // Note, there is no need to copy over the whole object to change the settings you need.
- * // Also, this.getConfigValue call won't work outside ofthe default config declaration
+ * // Also, this.getConfigValue call won't work outside of the default config declaration
  * // (which is inside of the `NbEmailPassAuthProvider` class), so you have to replace it with a custom helper function
  * // if you need it.
  * ```
  */
 @Injectable()
 export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
-
   protected defaultConfig: NgEmailPassAuthProviderConfig = {
     baseEndpoint: '/api/auth/',
     login: {
@@ -181,6 +181,13 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
         this.getConfigValue('errors.key'),
         this.getConfigValue(`${module}.defaultErrors`)),
     },
+    fieldErrors: {
+      key: 'data.fieldErrors',
+      getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(
+        res.error,
+        this.getConfigValue('fieldErrors.key'),
+      ),
+    },
     messages: {
       key: 'data.messages',
       getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
@@ -189,8 +196,14 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
     },
   };
 
-  constructor(protected http: HttpClient, private route: ActivatedRoute) {
+  constructor(protected http: HttpClient, protected route: ActivatedRoute) {
     super();
+  }
+
+  protected getErrorMessages(module: string, response: HttpErrorResponse): [string[], FieldErrors] {
+    const errors = this.getConfigValue('errors.getter')(module, response);
+    const fieldErrors = this.getConfigValue('fieldErrors.getter')(module, response);
+    return [errors, fieldErrors]
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
@@ -206,37 +219,45 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
           return res;
         }),
         this.validateToken('login'),
-        map((res) => {
-          return new NbAuthResult(
-            true,
-            res,
-            this.getConfigValue('login.redirect.success'),
-            [],
-            this.getConfigValue('messages.getter')('login', res),
-            this.getConfigValue('token.getter')('login', res));
+        map((response) => {
+          return new NbAuthResult({
+            success: true,
+            response,
+            redirect: this.getConfigValue('login.redirect.success'),
+            messages: this.getConfigValue('messages.getter')('login', response),
+            rawToken: this.getConfigValue('token.getter')('login', response),
+          });
         }),
-        catchError((res) => {
+        catchError((response) => {
           let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('errors.getter')('login', res);
+          let fieldErrors = {};
+          if (response instanceof HttpErrorResponse) {
+            [errors, fieldErrors] = this.getErrorMessages('login', response);
           } else {
             errors.push('Something went wrong.');
           }
 
           return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getConfigValue('login.redirect.failure'),
+            new NbAuthResult({
+              success: false,
+              response: response,
+              redirect: this.getConfigValue('login.redirect.failure'),
               errors,
-            ));
+              fieldErrors,
+            }),
+          );
         }),
       );
+  }
+
+  protected modifyRegisterData(data) {
+    return data;
   }
 
   register(data?: any): Observable<NbAuthResult> {
     const method = this.getConfigValue('register.method');
     const url = this.getActionEndpoint('register');
+    data = this.modifyRegisterData(data);
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
@@ -248,29 +269,32 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
         }),
         this.validateToken('register'),
         map((res) => {
-          return new NbAuthResult(
-            true,
-            res,
-            this.getConfigValue('register.redirect.success'),
-            [],
-            this.getConfigValue('messages.getter')('register', res),
-            this.getConfigValue('token.getter')('register', res));
+          return new NbAuthResult({
+            success: true,
+            response: res,
+            redirect: this.getConfigValue('register.redirect.success'),
+            messages: this.getConfigValue('messages.getter')('register', res),
+            rawToken: this.getConfigValue('token.getter')('register', res),
+          });
         }),
-        catchError((res) => {
+        catchError((response) => {
           let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('errors.getter')('register', res);
+          let fieldErrors = {};
+          if (response instanceof HttpErrorResponse) {
+            [errors, fieldErrors] = this.getErrorMessages('register', response);
           } else {
             errors.push('Something went wrong.');
           }
 
           return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getConfigValue('register.redirect.failure'),
+            new NbAuthResult({
+              success: false,
+              response,
+              redirect: this.getConfigValue('register.redirect.failure'),
               errors,
-            ));
+              fieldErrors,
+            }),
+          );
         }),
       );
   }
@@ -287,37 +311,46 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
           return res;
         }),
-        map((res) => {
-          return new NbAuthResult(
-            true,
-            res,
-            this.getConfigValue('requestPass.redirect.success'),
-            [],
-            this.getConfigValue('messages.getter')('requestPass', res));
+        map((response) => {
+          return new NbAuthResult({
+            success: true,
+            response,
+            redirect: this.getConfigValue('requestPass.redirect.success'),
+            messages: this.getConfigValue('messages.getter')('requestPass', response),
+          });
         }),
-        catchError((res) => {
+        catchError((response) => {
           let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('errors.getter')('requestPass', res);
+          let fieldErrors = {};
+          if (response instanceof HttpErrorResponse) {
+            [errors, fieldErrors] = this.getErrorMessages('requestPass', response);
           } else {
             errors.push('Something went wrong.');
           }
 
           return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getConfigValue('requestPass.redirect.failure'),
+            new NbAuthResult({
+              success: false,
+              response: response,
+              redirect: this.getConfigValue('requestPass.redirect.failure'),
               errors,
-            ));
+              fieldErrors,
+            }),
+          );
         }),
       );
   }
 
-  resetPassword(data: any = {}): Observable<NbAuthResult> {
+  protected modifyResetPasswordData(data) {
     const tokenKey = this.getConfigValue('resetPass.resetPasswordTokenKey');
-    data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
+    return {
+      ...data,
+      [tokenKey]: this.route.snapshot.queryParams[tokenKey],
+    };
+  }
 
+  resetPassword(data: any = {}): Observable<NbAuthResult> {
+    data = this.modifyResetPasswordData(data);
     const method = this.getConfigValue('resetPass.method');
     const url = this.getActionEndpoint('resetPass');
     return this.http.request(method, url, {body: data, observe: 'response'})
@@ -329,35 +362,37 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
           return res;
         }),
-        map((res) => {
-          return new NbAuthResult(
-            true,
-            res,
-            this.getConfigValue('resetPass.redirect.success'),
-            [],
-            this.getConfigValue('messages.getter')('resetPass', res));
+        map((response) => {
+          return new NbAuthResult({
+            success: true,
+            response,
+            redirect: this.getConfigValue('resetPass.redirect.success'),
+            messages: this.getConfigValue('messages.getter')('resetPass', response),
+          });
         }),
-        catchError((res) => {
+        catchError((response) => {
           let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('errors.getter')('resetPass', res);
+          let fieldErrors = {};
+          if (response instanceof HttpErrorResponse) {
+            [errors, fieldErrors] = this.getErrorMessages('resetPass', response);
           } else {
             errors.push('Something went wrong.');
           }
 
           return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getConfigValue('resetPass.redirect.failure'),
+            new NbAuthResult({
+              success: false,
+              redirect: this.getConfigValue('resetPass.redirect.failure'),
+              response,
               errors,
-            ));
+              fieldErrors,
+            }),
+          );
         }),
       );
   }
 
   logout(): Observable<NbAuthResult> {
-
     const method = this.getConfigValue('logout.method');
     const url = this.getActionEndpoint('logout');
 
@@ -376,29 +411,32 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
 
           return res;
         }),
-        map((res) => {
-          return new NbAuthResult(
-            true,
-            res,
-            this.getConfigValue('logout.redirect.success'),
-            [],
-            this.getConfigValue('messages.getter')('logout', res));
+        map((response) => {
+          return new NbAuthResult({
+            success: true,
+            response,
+            redirect: this.getConfigValue('logout.redirect.success'),
+            messages: this.getConfigValue('messages.getter')('logout', response),
+          });
         }),
-        catchError((res) => {
+        catchError((response) => {
           let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('errors.getter')('logout', res);
+          let fieldErrors = {};
+          if (response instanceof HttpErrorResponse) {
+            [errors, fieldErrors] = this.getErrorMessages('logout', response);
           } else {
             errors.push('Something went wrong.');
           }
 
           return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getConfigValue('logout.redirect.failure'),
+            new NbAuthResult({
+              success: false,
+              response,
+              redirect: this.getConfigValue('logout.redirect.failure'),
               errors,
-            ));
+              fieldErrors,
+            }),
+          );
         }),
       );
   }

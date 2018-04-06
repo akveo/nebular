@@ -57,13 +57,19 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
   protected createDummyResult(data?: any): NbAuthResult {
     if (this.getConfigValue('alwaysFail')) {
       // TODO we dont call tokenService clear during logout in case result is not success
-      return new NbAuthResult(false,
-        this.createFailResponse(data),
-        null,
-        ['Something went wrong.']);
+      return new NbAuthResult({
+          success: false,
+          response: this.createFailResponse(data),
+          errors: ['Something went wrong.'],
+      });
     }
 
     // TODO is it missed messages here, is it token should be defined
-    return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
+    return new NbAuthResult({
+      success: true,
+      response: this.createSuccessResponse(data),
+      redirect: '/',
+      messages: ['Successfully logged in.'],
+    });
   }
 }

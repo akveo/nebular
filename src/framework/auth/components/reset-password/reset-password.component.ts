@@ -6,10 +6,10 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS } from '../../auth.options';
-import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
+import {AbstractAuthComponent} from '../abstract-auth-component.class';
 
 @Component({
   selector: 'nb-reset-password-page',
@@ -33,6 +33,7 @@ import { NbAuthResult } from '../../services/auth-result';
           <label for="input-password" class="sr-only">New Password</label>
           <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
                  class="form-control form-control-lg first" placeholder="New Password" #password="ngModel"
+                 (keyup)="clearFieldErrors('password')"
                  [class.form-control-danger]="password.invalid && password.touched"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -49,6 +50,9 @@ import { NbAuthResult } from '../../services/auth-result';
             to {{getConfigValue('forms.validation.password.maxLength')}}
             characters
           </small>
+          <small class="form-text error" *ngIf="fieldErrors.password?.length">
+            {{fieldErrors.password[0]}}
+          </small>
         </div>
 
         <div class="form-group">
@@ -56,6 +60,7 @@ import { NbAuthResult } from '../../services/auth-result';
           <input
             name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
             class="form-control form-control-lg last" placeholder="Confirm Password" #rePass="ngModel"
+            (keyup)="clearFieldErrors('confirmPassword')"
             [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
             [required]="getConfigValue('forms.validation.password.required')">
           <small class="form-text error"
@@ -66,6 +71,9 @@ import { NbAuthResult } from '../../services/auth-result';
             class="form-text error"
             *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
             Password does not match the confirm password.
+          </small>
+          <small class="form-text error" *ngIf="fieldErrors.confirmPassword?.length">
+            {{fieldErrors.confirmPassword[0]}}
           </small>
         </div>
 
@@ -86,21 +94,13 @@ import { NbAuthResult } from '../../services/auth-result';
     </nb-auth-block>
   `,
 })
-export class NbResetPasswordComponent {
+export class NbResetPasswordComponent extends AbstractAuthComponent {
 
-  redirectDelay: number = 0;
-  showMessages: any = {};
-  provider: string = '';
-
-  submitted = false;
-  errors: string[] = [];
-  messages: string[] = [];
-  user: any = {};
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
               protected router: Router) {
-
+    super(config);
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.resetPassword.showMessages');
     this.provider = this.getConfigValue('forms.resetPassword.provider');
@@ -108,6 +108,7 @@ export class NbResetPasswordComponent {
 
   resetPass(): void {
     this.errors = this.messages = [];
+    this.fieldErrors = {};
     this.submitted = true;
 
     this.service.resetPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
@@ -116,6 +117,7 @@ export class NbResetPasswordComponent {
         this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();
+        this.fieldErrors = result.getFieldErrors();
       }
 
       const redirect = result.getRedirect();
@@ -127,7 +129,4 @@ export class NbResetPasswordComponent {
     });
   }
 
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
-  }
 }

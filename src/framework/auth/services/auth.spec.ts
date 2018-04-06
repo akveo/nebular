@@ -33,35 +33,40 @@ describe('auth-service', () => {
   const replacedToken = nbCreateToken(NbAuthSimpleToken, replacedTokenValue);
   const emptyToken = nbCreateToken(NbAuthSimpleToken, null);
 
-  const failResult = new NbAuthResult(false,
-    resp401,
-    null,
-    ['Something went wrong.']);
+  const failResult = new NbAuthResult({
+    success: false,
+    response: resp401,
+    errors: ['Something went wrong.'],
+  });
 
-  const successResult = new NbAuthResult(true,
-    resp200,
-    '/',
-    [],
-    ['Successfully logged in.'],
-    testTokenValue);
+  const successResult = new NbAuthResult({
+    success: true,
+    response: resp200,
+    redirect: '/',
+    messages: ['Successfully logged in.'],
+    rawToken: testTokenValue,
+  });
 
-  const successLogoutResult = new NbAuthResult(true,
-    resp200,
-    '/',
-    [],
-    ['Successfully logged out.']);
+  const successLogoutResult = new NbAuthResult({
+    success: true,
+    response: resp200,
+    redirect: '/',
+    messages: ['Successfully logged out.'],
+  });
 
-  const successResetPasswordResult = new NbAuthResult(true,
-    resp200,
-    '/',
-    [],
-    ['Successfully reset password.']);
+  const successResetPasswordResult = new NbAuthResult({
+    success: true,
+    response: resp200,
+    redirect: '/',
+    messages: ['Successfully reset password.'],
+  });
 
-  const successRequestPasswordResult = new NbAuthResult(true,
-    resp200,
-    '/',
-    [],
-    ['Successfully requested password.']);
+  const successRequestPasswordResult = new NbAuthResult({
+    success: true,
+    response: resp200,
+    redirect: '/',
+    messages: ['Successfully requested password.'],
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
