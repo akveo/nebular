@@ -20,7 +20,7 @@ import { NbDynamicToAddComponent } from '../dynamic.component';
         <button id="clear-dynamic" (click)="clearDynamicComponents()">Clear Dynamic Copmonents</button>
       </nb-layout-header>
 
-      <nb-sidebar end>
+      <nb-sidebar right>
         Sidebar content
       </nb-sidebar>
 

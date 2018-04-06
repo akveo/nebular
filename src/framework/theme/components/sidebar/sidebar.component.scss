@@ -27,6 +27,12 @@
     flex-direction: column;
   }
 
+  &.right {
+    @include rtl(order, 4, 0);
+    margin-right: 0;
+    margin-left: auto;
+  }
+
   &.end {
     order: 4;
     @include rtl-prop(margin-right, margin-left, 0, auto);
@@ -41,11 +47,18 @@
     top: 0;
     bottom: 0;
 
-    @include rtl-prop(left, right, 0, auto);
+    left: 0;
 
-    &.end {
-      @include rtl-prop(right, left, 0, auto);
+    &.right {
+      right: 0;
     }
+  }
+
+  &.fixed.start {
+    @include rtl-prop(left, right, 0, auto);
+  }
+  &.fixed.end {
+    @include rtl-prop(right, left, 0, auto);
   }
 
   /deep/ nb-sidebar-footer {

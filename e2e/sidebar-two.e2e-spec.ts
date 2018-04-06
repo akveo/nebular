@@ -22,7 +22,7 @@ describe('nb-sidebar-two', () => {
   //   });
   // });
 
-  it('should render start non-fixed sidebar height minus header', () => {
+  it('should render left non-fixed sidebar height minus header', () => {
     Promise.all<any, any, any>([
       element(by.css('nb-layout')).getSize(),
       element(by.css('nb-layout-header')).getSize(),
@@ -38,8 +38,8 @@ describe('nb-sidebar-two', () => {
     });
   });
 
-  it('should render fixed end sidebar at end', () => {
-    element(by.css('nb-sidebar[end]')).getCssValue('right').then(value => {
+  it('should render fixed right sidebar at right', () => {
+    element(by.css('nb-sidebar[right]')).getCssValue('right').then(value => {
       expect(value).toMatch('0');
     });
   });

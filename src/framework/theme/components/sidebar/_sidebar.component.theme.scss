@@ -115,6 +115,24 @@
 
       }
       // we need to pull the content
+      &.left.fixed ~ .content {
+        margin-left: nb-theme(sidebar-width-compact);
+      }
+
+      &.fixed.right ~ .content {
+        margin-left: 0;
+        margin-right: nb-theme(sidebar-width-compact);
+      }
+
+      &.left.fixed ~ .content.center {
+        padding-left: nb-theme(sidebar-width-compact);
+      }
+
+      &.fixed.right ~ .content.center {
+        padding-left: 0;
+        padding-right: nb-theme(sidebar-width-compact);
+      }
+
       &.start.fixed ~ .content {
         @include rtl-prop(margin-left, margin-right, nb-theme(sidebar-width-compact), 0);
       }
@@ -132,10 +150,12 @@
       }
     }
 
+    &.fixed.left.collapsed + .content,
     &.fixed.start.collapsed + .content {
       margin-left: 0;
     }
 
+    &.fixed.right.collapsed + .content,
     &.fixed.end.collapsed + .content {
       margin-right: 0;
     }
