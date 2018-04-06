@@ -98,7 +98,7 @@ export class NbBadgeComponent {
       return NbBadgeComponent.TOP_RIGHT;
     }
 
-    const { isLtr } = this.layoutDirectionService;
+    const isLtr = this.layoutDirectionService.isLtr();
     const startValue = isLtr ? 'left' : 'right';
     const endValue = isLtr ? 'right' : 'left';
     return this.position

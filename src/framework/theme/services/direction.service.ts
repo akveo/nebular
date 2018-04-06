@@ -30,7 +30,7 @@ export class NbLayoutDirectionService {
    * Returns true if layout direction set to left to right.
    * @returns boolean.
    * */
-  public get isLtr(): boolean {
+  public isLtr(): boolean {
     return this.direction === NbLayoutDirection.LTR;
   }
 
@@ -38,7 +38,7 @@ export class NbLayoutDirectionService {
    * Returns true if layout direction set to right to left.
    * @returns boolean.
    * */
-  public get isRtl(): boolean {
+  public isRtl(): boolean {
     return this.direction === NbLayoutDirection.RTL;
   }
 
