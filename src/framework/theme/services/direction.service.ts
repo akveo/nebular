@@ -21,10 +21,9 @@ export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout
 export class NbLayoutDirectionService {
   constructor(
     private document: NbDocument,
-    @Optional() @Inject(NB_LAYOUT_DIRECTION) private dir = NbLayoutDirection.LTR,
+    @Optional() @Inject(NB_LAYOUT_DIRECTION) private direction = NbLayoutDirection.LTR,
   ) {
-    this.dir = dir;
-    this.setDirection(dir);
+    this.setDirection(direction);
   }
 
   /**
@@ -32,7 +31,7 @@ export class NbLayoutDirectionService {
    * @returns boolean.
    * */
   public get isLtr(): boolean {
-    return this.dir === NbLayoutDirection.LTR;
+    return this.direction === NbLayoutDirection.LTR;
   }
 
   /**
@@ -40,7 +39,7 @@ export class NbLayoutDirectionService {
    * @returns boolean.
    * */
   public get isRtl(): boolean {
-    return this.dir === NbLayoutDirection.RTL;
+    return this.direction === NbLayoutDirection.RTL;
   }
 
   /**
@@ -48,15 +47,15 @@ export class NbLayoutDirectionService {
    * @returns NbLayoutDirection.
    * */
   getDirection(): NbLayoutDirection {
-    return this.dir;
+    return this.direction;
   }
 
   /**
    * Sets layout direction.
-   * @param dir {NbLayoutDirection} direction to set.
+   * @param direction {NbLayoutDirection} direction to set.
    * */
-  setDirection(dir: NbLayoutDirection) {
-    this.dir = dir;
-    this.document.dir = dir;
+  setDirection(direction: NbLayoutDirection) {
+    this.direction = direction;
+    this.document.dir = direction;
   }
 }
