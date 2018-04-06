@@ -14,7 +14,6 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
-import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
 import {
@@ -24,6 +23,7 @@ import {
   NbPopoverPosition,
   NbPopoverLogicalPlacement,
 } from './helpers/model';
+import { NbPlacementHelper } from './helpers/placement.helper';
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
@@ -156,7 +156,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     private adjustmentHelper: NbAdjustmentHelper,
     private triggerHelper: NbTriggerHelper,
     @Inject(PLATFORM_ID) private platformId,
-    private layoutDirectionService: NbLayoutDirectionService,
+    private placementHelper: NbPlacementHelper,
   ) {}
 
   ngOnInit() {
@@ -319,25 +319,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
       return this.calcAdjustment(placed, host);
     }
 
-    return {
-      position: this.calcPosition(placed, host),
-      placement: this.physicalPlacement,
-    };
-  }
-
-  /*
-   * Maps logical position to physical according to current layout direction.
-   * */
-  private get physicalPlacement(): NbPopoverPlacement {
-    const { isLtr } = this.layoutDirectionService;
-    if (this.placement === NbPopoverLogicalPlacement.START) {
-      return isLtr ? NbPopoverPlacement.LEFT : NbPopoverPlacement.RIGHT;
-    }
-    if (this.placement === NbPopoverLogicalPlacement.END) {
-      return isLtr ? NbPopoverPlacement.RIGHT : NbPopoverPlacement.LEFT;
-    }
-
-    return <NbPopoverPlacement>this.placement;
+    return this.calcPosition(placed, host);
   }
 
   /*
@@ -345,14 +327,19 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbAdjustmentHelper}.
    * */
   private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    return this.adjustmentHelper.adjust(placed, host, this.physicalPlacement, this.adjustment);
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
+    return this.adjustmentHelper.adjust(placed, host, placement, this.adjustment);
   }
 
   /*
    * Calculate position.
    * see {@link NbPositioningHelper}
    * */
-  private calcPosition(placed: ClientRect, host: ClientRect): {top: number, left: number} {
-    return this.positioningHelper.calcPosition(placed, host, this.physicalPlacement);
+  private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
+    return {
+      position: this.positioningHelper.calcPosition(placed, host, placement),
+      placement,
+    };
   }
 }
