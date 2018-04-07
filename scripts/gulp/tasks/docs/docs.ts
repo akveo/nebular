@@ -8,7 +8,7 @@ const typedoc = require('gulp-typedoc');
 const sass = require('gulp-sass');
 const exec = require('child_process').execSync;
 
-task('docs', ['generate-doc-json', 'copy-examples', 'find-full-examples', 'validate-examples']);
+task('docs', ['generate-doc-json', 'copy-examples', 'find-full-examples']);
 task('generate-doc-json', generateDocJson);
 task('parse-themes', parseThemes);
 
