@@ -1,21 +1,25 @@
-import { task } from 'gulp';
+import { dest, src, task } from 'gulp';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { DOCS_OUTPUT, EXTENSIONS, PLAYGROUND_ROOT } from '../config';
 import { join } from 'path';
 
+const EXAMPLES_SRC = './src/playground/**/*.*';
+const EXAMPLES_DEST = './docs/assets/examples';
+
+task('copy-examples', () => {
+  src(EXAMPLES_SRC).pipe(dest(EXAMPLES_DEST))
+});
 
 task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
   docs.classes.forEach(cls => {
     cls.overview = cls.overview.map(tag => {
       if (isTabbed(tag)) {
-        return extendExample(tag);
+        return unfoldExample(tag);
       }
 
       return tag;
     });
-
-    return cls;
   });
 
   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
@@ -31,15 +35,16 @@ function isTabbed(tag) {
     && !EXTENSIONS.some(extension => tag.content.path.endsWith(extension))
 }
 
-function extendExample(tag) {
-  const content = EXTENSIONS.map(extension => `${tag.content.path}.${extension}`)
-    .filter(isFileExists);
+function unfoldExample(tag) {
+  const content: any = EXTENSIONS.reduce((acc: any, extension) => {
+    const file = `${tag.content.path}.${extension}`;
 
-  if (content.length === 1) {
-    const component = tag.content.path;
-    const real = content.shift();
-    throw new Error(`${component} contains only one file, please specify concrete file: ${real} instead.`);
-  }
+    if (isFileExists(file)) {
+      acc[extension] = file;
+    }
+
+    return acc;
+  }, {});
 
   return { ...tag, content }
 }

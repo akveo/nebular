@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { ExampleHelperService } from '../../../utils/example-helper.service';
 import { CodeLoaderService } from '../../../utils/code-loader.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'ngd-tabbed-example',
@@ -27,14 +27,18 @@ export class NgdTabbedExampleComponent implements OnInit {
   @Input() content;
   examples;
 
-  constructor(private exampleHelper: ExampleHelperService,
-              private codeLoader: CodeLoaderService) {
+  constructor(private codeLoader: CodeLoaderService) {
   }
 
   ngOnInit() {
-    const paths = this.exampleHelper.fullExampleFiles(this.content.path);
+    forkJoin(Object.entries(this.content).map(file => this.load(file)))
+      .subscribe(files => {
+        this.examples = files.reduce((acc, file) => Object.assign(acc, file), {});
+      });
+  }
 
-    forkJoin(paths.map(path => this.codeLoader.load(path)))
-      .subscribe(([ts, html, scss]) => this.examples = { ts, html, scss });
+  private load([extension, path]): Observable<any> {
+    return this.codeLoader.load(path)
+      .map(file => ({ [extension]: file }));
   }
 }
