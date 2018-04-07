@@ -7,17 +7,17 @@ import { Observable } from 'rxjs/Observable';
   selector: 'ngd-tabbed-example',
   styleUrls: ['./ngd-tabbed-example.component.scss'],
   template: `
-    <nb-tabset>
-      <nb-tab tabTitle="ts" *ngIf="examples?.ts">
-        <ngd-code-block [code]="examples?.ts"></ngd-code-block>
+    <nb-tabset *ngIf="examples">
+      <nb-tab tabTitle="ts" *ngIf="examples.ts">
+        <ngd-code-block [code]="examples.ts"></ngd-code-block>
       </nb-tab>
 
-      <nb-tab tabTitle="html" *ngIf="examples?.html">
-        <ngd-code-block [code]="examples?.html"></ngd-code-block>
+      <nb-tab tabTitle="html" *ngIf="examples.html">
+        <ngd-code-block [code]="examples.html"></ngd-code-block>
       </nb-tab>
 
-      <nb-tab tabTitle="scss" *ngIf="examples?.scss">
-        <ngd-code-block [code]="examples?.scss"></ngd-code-block>
+      <nb-tab tabTitle="scss" *ngIf="examples.scss">
+        <ngd-code-block [code]="examples.scss"></ngd-code-block>
       </nb-tab>
     </nb-tabset>
   `,
