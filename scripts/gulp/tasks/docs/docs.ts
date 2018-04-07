@@ -1,8 +1,6 @@
 import { src, task } from 'gulp';
 import { exportThemes } from './export-themes';
-import './copy-examples';
-import './find-full-examples';
-import './validate-examples';
+import './example';
 
 const typedoc = require('gulp-typedoc');
 const sass = require('gulp-sass');
