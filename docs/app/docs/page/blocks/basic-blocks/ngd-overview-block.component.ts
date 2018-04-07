@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-overview-block',
@@ -20,20 +20,14 @@ import { Component, Input, OnInit } from '@angular/core';
     </div>
   `,
 })
-export class NgdOverviewBlockComponent implements OnInit {
+export class NgdOverviewBlockComponent {
+
+  source: any;
+  overview: any[] = [];
 
   @Input('source')
   set setSource(source: any) {
     this.source = source;
     this.overview = source.overview;
-  }
-
-  source: any;
-  overview: any[] = [];
-
-  constructor() {
-  }
-
-  ngOnInit() {
   }
 }
