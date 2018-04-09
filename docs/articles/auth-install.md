@@ -30,7 +30,7 @@ Let's assume that we need to setup email & password authentication based on Nebu
          providers: {
            email: {
              service: NbEmailPassAuthProvider,
-             config: {
+             options: {
               ...
              },
            },

@@ -151,7 +151,7 @@ export class NbRegisterComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};
-  provider: string = '';
+  strategy: string = '';
 
   submitted = false;
   errors: string[] = [];
@@ -165,7 +165,7 @@ export class NbRegisterComponent {
 
     this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
     this.showMessages = this.getConfigValue('forms.register.showMessages');
-    this.provider = this.getConfigValue('forms.register.provider');
+    this.strategy = this.getConfigValue('forms.register.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
@@ -173,7 +173,7 @@ export class NbRegisterComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.register(this.provider, this.user).subscribe((result: NbAuthResult) => {
+    this.service.register(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();

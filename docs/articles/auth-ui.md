@@ -24,7 +24,7 @@ Alongside with the provider's configuration `AuthModule` also accepts a list of 
          providers: {
            email: {
              service: NbEmailPassAuthProvider,
-             config: {
+             options: {
               ...
              },
            },
@@ -125,7 +125,7 @@ So, for instance, to remove the redirectDelay setting and disable the success me
          providers: {
            email: {
              service: NbEmailPassAuthProvider,
-             config: {
+             options: {
               ...
              },
            },
@@ -184,7 +184,7 @@ const formSetting: any = {
          providers: {
            email: {
              service: NbEmailPassAuthProvider,
-             config: {
+             options: {
               ...
              },
            },
