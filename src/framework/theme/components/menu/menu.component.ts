@@ -18,6 +18,7 @@ import {
   AfterViewInit,
   PLATFORM_ID,
   Inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
@@ -56,6 +57,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   constructor(
     private menuService: NbMenuService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetection: ChangeDetectorRef,
   ) { }
 
   ngAfterViewInit() {
@@ -70,10 +72,9 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.updateMaxHeight());
 
-    setTimeout(() => {
-      this.updateSubmenuHeight();
-      this.updateMaxHeight();
-    });
+    this.updateSubmenuHeight();
+    this.updateMaxHeight();
+    this.changeDetection.detectChanges();
   }
 
   ngOnDestroy() {
