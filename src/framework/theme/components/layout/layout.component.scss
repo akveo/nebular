@@ -75,7 +75,7 @@
         /deep/ nb-layout-column {
           order: 2;
           flex: 1 0;
-          width:  0; // this might be a strange workaround
+          min-width: 0; // fix for flexbug https://github.com/philipwalton/flexbugs#flexbug-1
           &.left {
             order: 1;
           }
