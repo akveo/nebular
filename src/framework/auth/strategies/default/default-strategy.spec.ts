@@ -778,7 +778,7 @@ describe('default-auth-strategy', () => {
 
     const messages = {
       defaultErrors: ['this is error message'],
-      defaultMessages: ['this is error message'],
+      defaultMessages: ['this is success message'],
     };
 
     beforeEach(() => {

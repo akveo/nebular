@@ -5,9 +5,10 @@
  */
 import { NbTokenClass } from '../services/';
 
-export interface NbAuthStrategyOptions {
+export class NbAuthStrategyOptions {
   name: string;
   token: {
     class: NbTokenClass;
+    [key: string]: any;
   };
 }

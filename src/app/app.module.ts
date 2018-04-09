@@ -177,7 +177,7 @@ const NB_TEST_COMPONENTS = [
         // },
         email: {
           service: NbDefaultAuthStrategy,
-          config: {
+          options: {
             login: {
               endpoint: 'http://localhost:4400/api/auth/login',
             },

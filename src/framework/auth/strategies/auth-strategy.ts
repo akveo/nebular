@@ -1,13 +1,13 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { NbAuthResult } from '../services/auth-result';
-
+import { NbAuthStrategyOptions } from './strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAuthStrategy {
 
-  protected defaultOptions: any = {};
-  protected options: any = {};
+  protected defaultOptions: NbAuthStrategyOptions;
+  protected options: NbAuthStrategyOptions;
 
   setOptions(options: any): void {
     this.options = deepExtend({}, this.defaultOptions, options);

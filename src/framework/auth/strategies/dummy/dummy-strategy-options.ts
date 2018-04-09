@@ -6,7 +6,7 @@
 import { NbAuthStrategyOptions } from '../strategy-options';
 import { NbAuthSimpleToken } from '../../services/';
 
-export class NbDummyAuthStrategyOptions implements NbAuthStrategyOptions {
+export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
   name: 'dummy';
   token = {
     class: NbAuthSimpleToken,

@@ -29,14 +29,14 @@ import { NbResetPasswordComponent } from './components/reset-password/reset-pass
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
-export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
-  const strategies = config.strategies || {};
+export function nbAuthServiceFactory(options: NbAuthOptions, tokenService: NbTokenService, injector: Injector) {
+  const strategies = options.strategies || {};
 
   for (const key in strategies) {
     if (strategies.hasOwnProperty(key)) {
       const strategy = strategies[key];
       const object = injector.get(strategy.service);
-      object.setConfig(strategy.config || {});
+      object.setOptions(strategy.options || {});
     }
   }
 

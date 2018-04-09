@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
@@ -12,10 +12,9 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
-import { NbDefaultAuthStrategyOptions } from './default-strategy-options';
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
-import { getDeepFromObject } from '../../helpers';
+import { defaultOptions } from './default-strategy-options';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -112,82 +111,7 @@ import { getDeepFromObject } from '../../helpers';
 @Injectable()
 export class NbDefaultAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions: NbDefaultAuthStrategyOptions = {
-    baseEndpoint: '/api/auth/',
-    login: {
-      alwaysFail: false,
-      rememberMe: true, // TODO: what does that mean?
-      endpoint: 'login',
-      method: 'post',
-      redirect: {
-        success: '/',
-        failure: null,
-      },
-      defaultErrors: ['Login/Email combination is not correct, please try again.'],
-      defaultMessages: ['You have been successfully logged in.'],
-    },
-    register: {
-      alwaysFail: false,
-      rememberMe: true,
-      endpoint: 'register',
-      method: 'post',
-      redirect: {
-        success: '/',
-        failure: null,
-      },
-      defaultErrors: ['Something went wrong, please try again.'],
-      defaultMessages: ['You have been successfully registered.'],
-    },
-    logout: {
-      alwaysFail: false,
-      endpoint: 'logout',
-      method: 'delete',
-      redirect: {
-        success: '/',
-        failure: null,
-      },
-      defaultErrors: ['Something went wrong, please try again.'],
-      defaultMessages: ['You have been successfully logged out.'],
-    },
-    requestPass: {
-      endpoint: 'request-pass',
-      method: 'post',
-      redirect: {
-        success: '/',
-        failure: null,
-      },
-      defaultErrors: ['Something went wrong, please try again.'],
-      defaultMessages: ['Reset password instructions have been sent to your email.'],
-    },
-    resetPass: {
-      endpoint: 'reset-pass',
-      method: 'put',
-      redirect: {
-        success: '/',
-        failure: null,
-      },
-      resetPasswordTokenKey: 'reset_password_token',
-      defaultErrors: ['Something went wrong, please try again.'],
-      defaultMessages: ['Your password has been successfully changed.'],
-    },
-    token: {
-      key: 'data.token',
-      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
-        this.getOption('token.key')),
-    },
-    errors: {
-      key: 'data.errors',
-      getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,
-        this.getOption('errors.key'),
-        this.getOption(`${module}.defaultErrors`)),
-    },
-    messages: {
-      key: 'data.messages',
-      getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
-        this.getOption('messages.key'),
-        this.getOption(`${module}.defaultMessages`)),
-    },
-  };
+  protected defaultOptions = defaultOptions;
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();
@@ -212,13 +136,13 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
             res,
             this.getOption('login.redirect.success'),
             [],
-            this.getOption('messages.getter')('login', res),
-            this.getOption('token.getter')('login', res));
+            this.getOption('messages.getter')('login', res, this.options),
+            this.getOption('token.getter')('login', res, this.options));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('login', res);
+            errors = this.getOption('errors.getter')('login', res, this.options);
           } else {
             errors.push('Something went wrong.');
           }
@@ -253,13 +177,13 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
             res,
             this.getOption('register.redirect.success'),
             [],
-            this.getOption('messages.getter')('register', res),
-            this.getOption('token.getter')('register', res));
+            this.getOption('messages.getter')('register', res, this.options),
+            this.getOption('token.getter')('register', res, this.options));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('register', res);
+            errors = this.getOption('errors.getter')('register', res, this.options);
           } else {
             errors.push('Something went wrong.');
           }
@@ -293,12 +217,12 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
             res,
             this.getOption('requestPass.redirect.success'),
             [],
-            this.getOption('messages.getter')('requestPass', res));
+            this.getOption('messages.getter')('requestPass', res, this.options));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('requestPass', res);
+            errors = this.getOption('errors.getter')('requestPass', res, this.options);
           } else {
             errors.push('Something went wrong.');
           }
@@ -335,12 +259,12 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
             res,
             this.getOption('resetPass.redirect.success'),
             [],
-            this.getOption('messages.getter')('resetPass', res));
+            this.getOption('messages.getter')('resetPass', res, this.options));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('resetPass', res);
+            errors = this.getOption('errors.getter')('resetPass', res, this.options);
           } else {
             errors.push('Something went wrong.');
           }
@@ -382,12 +306,12 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
             res,
             this.getOption('logout.redirect.success'),
             [],
-            this.getOption('messages.getter')('logout', res));
+            this.getOption('messages.getter')('logout', res, this.options));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('logout', res);
+            errors = this.getOption('errors.getter')('logout', res, this.options);
           } else {
             errors.push('Something went wrong.');
           }
@@ -405,7 +329,7 @@ export class NbDefaultAuthStrategy extends NbAuthStrategy {
 
   protected validateToken (module: string): any {
     return map((res) => {
-      const token = this.getOption('token.getter')(module, res);
+      const token = this.getOption('token.getter')(module, res, this.options);
       if (!token) {
         const key = this.getOption('token.key');
         console.warn(`NbEmailPassAuthProvider:

@@ -27,7 +27,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
          providers: {
            email: {
              service: NbEmailPassAuthProvider,
-             config: {
+             options: {
               ...
              },
            },
