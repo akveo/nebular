@@ -20,5 +20,5 @@ export const nbJSThemesToken = new InjectionToken<NbJSThemeOptions[]>('NB_THEMES
 /**
  * We're providing browser apis with tokens to improve testing capabilities.
  * */
-export abstract class NbWindow extends Window {}
-export abstract class NbDocument extends Document {}
+export const NB_WINDOW = new InjectionToken<Window>('NB_WINDOW');
+export const NB_DOCUMENT = new InjectionToken<Document>('NB_DOCUMENT');
