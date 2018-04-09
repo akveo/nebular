@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { of as observableOf } from 'rxjs/observable/of';
 import { CodeLoaderService } from '../../../utils/code-loader.service';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
+import { catchError } from 'rxjs/operators/catchError';
 
 @Component({
   selector: 'ngd-tabbed-example',
@@ -39,6 +42,9 @@ export class NgdTabbedExampleComponent implements OnInit {
 
   private load([extension, path]): Observable<any> {
     return this.codeLoader.load(path)
-      .map(file => ({ [extension]: file }));
+      .pipe(
+        map(file => ({ [extension]: file })),
+        catchError(e => observableOf('')),
+      );
   }
 }
