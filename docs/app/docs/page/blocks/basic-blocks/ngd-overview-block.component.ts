@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   template: `
     <div class="block-container">
       <h2 class="class-name">
-        <a [routerLink]="" fragment="{{source.name}}" ngdFragment></a>
+        <a [routerLink]="" fragment="{{ source.name }}" ngdFragment></a>
         {{source?.name}}
       </h2>
       <ng-container class="description" *ngFor="let node of overview">
