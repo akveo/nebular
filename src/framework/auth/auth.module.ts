@@ -6,17 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
-import { NbAuthService } from './services/auth.service';
-import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
-import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
-import { NbTokenService } from './services/token/token.service';
-import { NbAuthSimpleToken } from './services/token/token';
-import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
+import { NbAuthService, NbTokenService, NbAuthSimpleToken, NbTokenLocalStorage, NbTokenStorage } from './services';
+import { NbDummyAuthStrategy, NbDefaultAuthStrategy } from './strategies';
+
 import {
-  defaultSettings,
+  defaultOptions,
   NB_AUTH_USER_OPTIONS,
   NB_AUTH_OPTIONS,
-  NB_AUTH_PROVIDERS,
+  NB_AUTH_STRATEGIES,
   NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER, NB_AUTH_TOKEN_CLASS,
 } from './auth.options';
 
@@ -32,22 +29,22 @@ import { NbResetPasswordComponent } from './components/reset-password/reset-pass
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
-export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
-  const providers = config.providers || {};
+export function nbAuthServiceFactory(options: any, tokenService: NbTokenService, injector: Injector) {
+  const strategies = options.strategies || {};
 
-  for (const key in providers) {
-    if (providers.hasOwnProperty(key)) {
-      const provider = providers[key];
-      const object = injector.get(provider.service);
-      object.setConfig(provider.config || {});
+  for (const key in strategies) {
+    if (strategies.hasOwnProperty(key)) {
+      const strategy = strategies[key];
+      const object = injector.get(strategy.service);
+      object.setConfig(strategy.config || {});
     }
   }
 
-  return new NbAuthService(tokenService, injector, providers);
+  return new NbAuthService(tokenService, injector, strategies);
 }
 
 export function nbOptionsFactory(options) {
-  return deepExtend(defaultSettings, options);
+  return deepExtend(defaultOptions, options);
 }
 
 @NgModule({
@@ -86,7 +83,7 @@ export class NbAuthModule {
       providers: [
         { provide: NB_AUTH_USER_OPTIONS, useValue: nbAuthOptions },
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
-        { provide: NB_AUTH_PROVIDERS, useValue: {} },
+        { provide: NB_AUTH_STRATEGIES, useValue: {} },
         { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
         {
@@ -96,8 +93,8 @@ export class NbAuthModule {
         },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
-        NbDummyAuthProvider,
-        NbEmailPassAuthProvider,
+        NbDummyAuthStrategy,
+        NbDefaultAuthStrategy,
       ],
     };
   }
