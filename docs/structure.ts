@@ -478,12 +478,12 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Configuring a provider',
+        name: 'Configuring a Strategy',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'auth-provider.md',
+            source: 'auth-strategy.md',
           },
         ],
       },
@@ -533,12 +533,12 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'NbEmailPassAuthProvider',
+        name: 'NbDefaultAuthStrategy',
         children: [
           {
             type: 'block',
             block: 'component',
-            source: 'NbEmailPassAuthProvider',
+            source: 'NbDefaultAuthStrategy',
           },
         ],
       },

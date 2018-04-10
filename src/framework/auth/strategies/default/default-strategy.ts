@@ -12,10 +12,10 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 
-import { NgEmailPassAuthProviderConfig } from './email-pass-auth.options';
-import { NbAuthResult } from '../services/auth-result';
-import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { getDeepFromObject } from '../helpers';
+import { NbDefaultAuthStrategyOptions } from './default-strategy-options';
+import { NbAuthResult } from '../../services/auth-result';
+import { NbAuthStrategy } from '../auth-strategy';
+import { getDeepFromObject } from '../../helpers';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -105,14 +105,14 @@ import { getDeepFromObject } from '../helpers';
  *
  * // Note, there is no need to copy over the whole object to change the settings you need.
  * // Also, this.getConfigValue call won't work outside ofthe default config declaration
- * // (which is inside of the `NbEmailPassAuthProvider` class), so you have to replace it with a custom helper function
+ * // (which is inside of the `NbDefaultAuthStrategy` class), so you have to replace it with a custom helper function
  * // if you need it.
  * ```
  */
 @Injectable()
-export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
+export class NbDefaultAuthStrategy extends NbAuthStrategy {
 
-  protected defaultConfig: NgEmailPassAuthProviderConfig = {
+  protected defaultConfig: NbDefaultAuthStrategyOptions = {
     baseEndpoint: '/api/auth/',
     login: {
       alwaysFail: false,
@@ -408,7 +408,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       const token = this.getConfigValue('token.getter')(module, res);
       if (!token) {
         const key = this.getConfigValue('token.key');
-        console.warn(`NbEmailPassAuthProvider:
+        console.warn(`NbDefaultAuthStrategy:
                           Token is not provided under '${key}' key
                           with getter '${this.getConfigValue('token.getter')}', check your auth configuration.`);
 
