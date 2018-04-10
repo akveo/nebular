@@ -3,8 +3,8 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Injectable } from '@angular/core';
-import { NbDocument } from '../theme.options';
+import { Injectable, Inject } from '@angular/core';
+import { NB_DOCUMENT } from '../theme.options';
 
 /**
  * Service to control the global page spinner.
@@ -15,7 +15,7 @@ export class NbSpinnerService {
   private loaders: Promise<any>[] = [];
   private selector: string = 'nb-global-spinner';
 
-  constructor(private document: NbDocument) {}
+  constructor(@Inject(NB_DOCUMENT) private document) {}
 
   /**
    * Appends new loader to the list of loader to be completed before

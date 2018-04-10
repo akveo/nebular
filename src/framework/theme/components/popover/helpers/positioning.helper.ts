@@ -3,15 +3,15 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { NbPopoverPlacement } from './model';
-import { NbWindow } from '../../../theme.options';
+import { NB_WINDOW } from '../../../theme.options';
 
 @Injectable()
 export class NbPositioningHelper {
 
-  constructor(private window: NbWindow) {
+  constructor(@Inject(NB_WINDOW) private window) {
   }
 
   /**

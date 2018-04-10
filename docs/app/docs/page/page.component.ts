@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Inject } from '@angular/core';
 
-import { NbMenuService, NbWindow } from '@nebular/theme';
+import { NbMenuService, NB_WINDOW } from '@nebular/theme';
 import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
 
@@ -30,7 +30,7 @@ export class NgdPageComponent implements OnDestroy {
 
   private menuSubscription: Subscription;
 
-  constructor(private window: NbWindow,
+  constructor(@Inject(NB_WINDOW) private window,
               private menuService: NbMenuService,
               private titleService: Title) {
 
