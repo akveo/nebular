@@ -10,7 +10,7 @@ import { NbAuthService, NbTokenService, NbAuthSimpleToken, NbTokenLocalStorage, 
 import { NbDummyAuthStrategy, NbDefaultAuthStrategy } from './strategies';
 
 import {
-  defaultSettings,
+  defaultOptions,
   NB_AUTH_USER_OPTIONS,
   NB_AUTH_OPTIONS,
   NB_AUTH_STRATEGIES,
@@ -44,7 +44,7 @@ export function nbAuthServiceFactory(options: NbAuthOptions, tokenService: NbTok
 }
 
 export function nbOptionsFactory(options) {
-  return deepExtend(defaultSettings, options);
+  return deepExtend(defaultOptions, options);
 }
 
 @NgModule({

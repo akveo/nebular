@@ -12,7 +12,7 @@ Auth module comes with a list of authentication components:
 
 ## UI Settings
 
-Alongside with the provider's configuration `AuthModule` also accepts a list of settings for UI side under the `forms` key:
+Alongside with the strategies' configuration `AuthModule` also accepts a list of settings for UI side under the `forms` key:
 
 ```typescript
 
@@ -21,9 +21,9 @@ Alongside with the provider's configuration `AuthModule` also accepts a list of 
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
+             service: NbDefaultAuthStrategy,
              options: {
               ...
              },
@@ -54,7 +54,7 @@ export const defaultSettings: any = {
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
-      provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
+      strategy: 'email',  // strategy id key.
       rememberMe: true,   // whether to show or not the `rememberMe` checkbox
       showMessages: {     // show/not show success/error messages
         success: true,
@@ -64,7 +64,7 @@ export const defaultSettings: any = {
     },
     register: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -74,7 +74,7 @@ export const defaultSettings: any = {
     },
     requestPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -83,7 +83,7 @@ export const defaultSettings: any = {
     },
     resetPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -92,7 +92,7 @@ export const defaultSettings: any = {
     },
     logout: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
     },
     validation: {
       password: {
@@ -122,9 +122,9 @@ So, for instance, to remove the redirectDelay setting and disable the success me
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
+             service: NbDefaultAuthStrategy,
              options: {
               ...
              },
@@ -181,9 +181,9 @@ const formSetting: any = {
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
+             service: NbDefaultAuthStrategy,
              options: {
               ...
              },
@@ -312,7 +312,7 @@ export const routes: Routes = [
 ];
 ```
 
-That's it. Now you can adjust the components the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth providers.
+That's it. Now you can adjust the components the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth strategies.
 <hr class="section-end">
 
 ## Where to next

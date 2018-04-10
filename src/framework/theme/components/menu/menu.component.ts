@@ -18,6 +18,7 @@ import {
   AfterViewInit,
   PLATFORM_ID,
   Inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
@@ -27,7 +28,7 @@ import { filter } from 'rxjs/operators/filter';
 
 import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';
-import { NbWindow } from '../../theme.options';
+import { NB_WINDOW } from '../../theme.options';
 
 function sumSubmenuHeight(item: NbMenuItem) {
   return item.expanded
@@ -56,6 +57,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   constructor(
     private menuService: NbMenuService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetection: ChangeDetectorRef,
   ) { }
 
   ngAfterViewInit() {
@@ -70,10 +72,9 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.updateMaxHeight());
 
-    setTimeout(() => {
-      this.updateSubmenuHeight();
-      this.updateMaxHeight();
-    });
+    this.updateSubmenuHeight();
+    this.updateMaxHeight();
+    this.changeDetection.detectChanges();
   }
 
   ngOnDestroy() {
@@ -216,7 +217,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   private alive: boolean = true;
   private autoCollapseValue: boolean = false;
 
-  constructor(private window: NbWindow,
+  constructor(@Inject(NB_WINDOW) private window,
               private menuInternalService: NbMenuInternalService,
               private router: Router) {
   }

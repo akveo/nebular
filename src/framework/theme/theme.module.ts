@@ -13,8 +13,8 @@ import {
   NbThemeOptions,
   nbThemeOptionsToken,
   nbJSThemesToken,
-  NbDocument,
-  NbWindow,
+  NB_DOCUMENT,
+  NB_WINDOW,
 } from './theme.options';
 import { NbThemeService } from './services/theme.service';
 import { NbSpinnerService } from './services/spinner.service';
@@ -60,8 +60,8 @@ export class NbThemeModule {
         { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
         { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
         { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        { provide: NbWindow, useFactory: nbWindowFactory },
-        { provide: NbDocument, useExisting: DOCUMENT },
+        { provide: NB_WINDOW, useFactory: nbWindowFactory },
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { empty as observableEmpty } from 'rxjs/observable/empty';
 import { filter } from 'rxjs/operators/filter';
@@ -10,7 +10,7 @@ import { repeat } from 'rxjs/operators/repeat';
 import { takeUntil } from 'rxjs/operators/takeUntil';
 
 
-import { NbDocument } from '../../../theme.options';
+import { NB_DOCUMENT } from '../../../theme.options';
 import { NbPopoverMode, NbPopoverTrigger } from './model';
 
 /**
@@ -26,11 +26,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
-   * @param document {NbDocument} document ref.
+   * @param document {Document} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
+  [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function, document: Document): NbPopoverTrigger {
     return {
       open: observableEmpty(),
       close: observableFromEvent<Event>(document, 'click')
@@ -50,11 +50,11 @@ const NB_TRIGGERS = {
    *
    * @param host {HTMLElement} popover host element.
    * @param getContainer {Function} popover container getter.
-   * @param document {NbDocument} document ref.
+   * @param document {Document} document ref.
    *
    * @return {NbPopoverTrigger} open and close events streams.
    * */
-  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function, document: NbDocument): NbPopoverTrigger {
+  [NbPopoverMode.HOVER](host: HTMLElement, getContainer: Function, document: Document): NbPopoverTrigger {
     return {
       open: observableFromEvent<Event>(host, 'mouseenter')
         .pipe(
@@ -104,7 +104,7 @@ const NB_TRIGGERS = {
 @Injectable()
 export class NbTriggerHelper {
 
-  constructor(private document: NbDocument) {
+  constructor(@Inject(NB_DOCUMENT) private document) {
   }
 
   /**
