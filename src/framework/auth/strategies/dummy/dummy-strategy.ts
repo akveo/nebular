@@ -6,13 +6,31 @@ import { delay } from 'rxjs/operators/delay';
 
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthResult } from '../../services/auth-result';
-import { defaultOptions } from './dummy-strategy-options';
+import { dummyStrategyOptions } from './dummy-strategy-options';
 
 
+/**
+ * Dummy auth strategy. Could be useful for auth setup when backend is not available yet.
+ *
+ * @example
+ *
+ * Strategy settings.
+ *
+ * ```
+ * export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
+ *   name = 'dummy';
+ *   token = {
+ *     class: NbAuthSimpleToken,
+ *   };
+ *   delay? = 1000;
+ *   alwaysFail? = false;
+ * }
+ * ```
+ */
 @Injectable()
 export class NbDummyAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = defaultOptions;
+  protected defaultOptions = dummyStrategyOptions;
 
   authenticate(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))

@@ -14,7 +14,7 @@ import { catchError } from 'rxjs/operators/catchError';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
-import { defaultOptions } from './default-strategy-options';
+import { defaultStrategyOptions } from './default-strategy-options';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -22,15 +22,19 @@ import { defaultOptions } from './default-strategy-options';
  *
  * @example
  *
- * Default settings object:
+ * Strategy settings. Note, there is no need to copy over the whole object to change the settings you need.
+ * Also, this.getOption call won't work outside of the default options declaration
+ * (which is inside of the `NbDefaultAuthStrategy` class), so you have to replace it with a custom helper function
+ * if you need it.
  *
  * ```
- * {
- *  baseEndpoint: '',
- *  login: {
+ *export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
+ *  name = 'email';
+ *  baseEndpoint? = '/api/auth/';
+ *  login?: boolean | NbDefaultStrategyModule = {
  *    alwaysFail: false,
  *    rememberMe: true,
- *    endpoint: '/api/auth/login',
+ *    endpoint: 'login',
  *    method: 'post',
  *    redirect: {
  *      success: '/',
@@ -38,11 +42,11 @@ import { defaultOptions } from './default-strategy-options';
  *    },
  *    defaultErrors: ['Login/Email combination is not correct, please try again.'],
  *    defaultMessages: ['You have been successfully logged in.'],
- *  },
- *  register: {
+ *  };
+ *  register?: boolean | NbDefaultStrategyModule = {
  *    alwaysFail: false,
  *    rememberMe: true,
- *    endpoint: '/api/auth/register',
+ *    endpoint: 'register',
  *    method: 'post',
  *    redirect: {
  *      success: '/',
@@ -50,20 +54,9 @@ import { defaultOptions } from './default-strategy-options';
  *    },
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['You have been successfully registered.'],
- *  },
- *  logout: {
- *    alwaysFail: false,
- *    endpoint: '/api/auth/logout',
- *    method: 'delete',
- *    redirect: {
- *      success: '/',
- *      failure: null,
- *    },
- *    defaultErrors: ['Something went wrong, please try again.'],
- *    defaultMessages: ['You have been successfully logged out.'],
- *  },
- *  requestPass: {
- *    endpoint: '/api/auth/request-pass',
+ *  };
+ *  requestPass?: boolean | NbDefaultStrategyModule = {
+ *    endpoint: 'request-pass',
  *    method: 'post',
  *    redirect: {
  *      success: '/',
@@ -71,9 +64,9 @@ import { defaultOptions } from './default-strategy-options';
  *    },
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Reset password instructions have been sent to your email.'],
- *  },
- *  resetPass: {
- *    endpoint: '/api/auth/reset-pass',
+ *  };
+ *  resetPass?: boolean | NbDefaultStrategyReset = {
+ *    endpoint: 'reset-pass',
  *    method: 'put',
  *    redirect: {
  *      success: '/',
@@ -82,36 +75,64 @@ import { defaultOptions } from './default-strategy-options';
  *    resetPasswordTokenKey: 'reset_password_token',
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Your password has been successfully changed.'],
- *  },
- *  token: {
+ *  };
+ *  logout?: boolean | NbDefaultStrategyReset = {
+ *    alwaysFail: false,
+ *    endpoint: 'logout',
+ *    method: 'delete',
+ *    redirect: {
+ *      success: '/',
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['You have been successfully logged out.'],
+ *  };
+ *  token = {
  *    key: 'data.token',
- *    getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
- *      this.getOption('token.key')),
- *  },
- *  errors: {
+ *    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+ *      options.token.key,
+ *    ),
+ *    class: NbAuthSimpleToken,
+ *  };
+ *  errors? = {
  *    key: 'data.errors',
- *    getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,
- *      this.getOption('errors.key'),
- *      this.getOption(`${module}.defaultErrors`)),
- *  },
- *  messages: {
+ *    getter: (module: string, res: HttpErrorResponse, options: any) => getDeepFromObject(res.error,
+ *      options.errors.key,
+ *      options[module].defaultErrors,
+ *    ),
+ *  };
+ *  messages? = {
  *    key: 'data.messages',
- *    getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
- *      this.getOption('messages.key'),
- *      this.getOption(`${module}.defaultMessages`)),
- *  },
+ *    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+ *      options.messages.key,
+ *      options[module].defaultMessages,
+ *    ),
+ *  };
+ *  validation?: {
+ *    password?: {
+ *      required?: boolean;
+ *      minLength?: number | null;
+ *      maxLength?: number | null;
+ *      regexp?: string | null;
+ *    };
+ *    email?: {
+ *      required?: boolean;
+ *      regexp?: string | null;
+ *    };
+ *    fullName?: {
+ *      required?: boolean;
+ *      minLength?: number | null;
+ *      maxLength?: number | null;
+ *      regexp?: string | null;
+ *    };
+ *  };
  *}
- *
- * // Note, there is no need to copy over the whole object to change the settings you need.
- * // Also, this.getOption call won't work outside ofthe default options declaration
- * // (which is inside of the `NbDefaultAuthStrategy` class), so you have to replace it with a custom helper function
- * // if you need it.
  * ```
  */
 @Injectable()
 export class NbDefaultAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = defaultOptions;
+  protected defaultOptions = defaultStrategyOptions;
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();

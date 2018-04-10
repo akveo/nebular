@@ -544,6 +544,17 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'NbDummyAuthStrategy',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbDummyAuthStrategy',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbTokenService',
         children: [
           {

@@ -7,12 +7,12 @@ import { NbAuthStrategyOptions } from '../strategy-options';
 import { NbAuthSimpleToken } from '../../services/';
 
 export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
-  name: 'dummy';
+  name = 'dummy';
   token = {
     class: NbAuthSimpleToken,
   };
-  delay?: number = 1000;
-  alwaysFail?: boolean = false;
+  delay? = 1000;
+  alwaysFail? = false;
 }
 
-export const defaultOptions: NbDummyAuthStrategyOptions = new NbDummyAuthStrategyOptions();
+export const dummyStrategyOptions: NbDummyAuthStrategyOptions = new NbDummyAuthStrategyOptions();
