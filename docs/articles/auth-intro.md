@@ -1,5 +1,5 @@
 The main goal of the Auth module is to provide a pluggable set of components and services for easier setup of the authentication layer for the Angular applications.
-The module separates the UI part (login/register components) from the business logic with help of the `authentication providers` layer. 
+The module separates the UI part (login/register components) from the business logic with help of the authentication `Strategies` layer. 
 
 <div class="note note-info">
   <div class="note-title">Note</div>
@@ -20,12 +20,12 @@ Authentication UI components:
 
 You can use the built-in components or create your custom ones.  
   
-Auth providers:
-  - `NbDummyAuthProvider` - simple provider for testing purposes, could be used to simulate backend responses while API is in the development;
-  - `NbEmailPassAuthProvider` - the most common email/password authentication strategy.
+Auth Strategies:
+  - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
+  - `NbDefaultAuthStrategy` - the most common email/password authentication strategy.
     
 Other helper services:
-  - `NbAuthService` - facade service to communicate with a configured provider;
+  - `NbAuthService` - facade service to communicate with a configured strategy;
   - `NbTokenService` - service that allows you to manage authentication token - get, set, clear and also listen to token changes over time;
   - `NbTokenLocalStorage` - storage service for storing tokens in a browser local storage;
   - `NbAuthJWTToken` and `NbAuthSimpleToken` - helper classes to work with your token;

@@ -90,7 +90,7 @@ export class NbResetPasswordComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};
-  provider: string = '';
+  strategy: string = '';
 
   submitted = false;
   errors: string[] = [];
@@ -103,14 +103,14 @@ export class NbResetPasswordComponent {
 
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.resetPassword.showMessages');
-    this.provider = this.getConfigValue('forms.resetPassword.provider');
+    this.strategy = this.getConfigValue('forms.resetPassword.strategy');
   }
 
   resetPass(): void {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.resetPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
+    this.service.resetPassword(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();
