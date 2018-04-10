@@ -10,15 +10,15 @@
 1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
 Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without `Nebular Theme`. 
 
-Let's assume that we need to setup email & password authentication based on Nebular Auth and NbEmailPassAuthProvider.
+Let's assume that we need to setup email & password authentication based on Nebular Auth and `NbDefaultAuthStrategy`.
 
 `npm i @nebular/auth`
     
-2) Import the module and `NbEmailPassAuthProvider` provider:
+2) Import the module and `NbDefaultAuthStrategy` strategy:
 
-`import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';`
+`import { NbDefaultAuthStrategy, NbAuthModule } from '@nebular/auth';`
 
-3) Now, let's configure the module by specifying available providers, in your case we add `NbEmailPassAuthProvider`:
+3) Now, let's configure the module by specifying available strategies, in your case we add `NbDefaultAuthStrategy`:
 
 ```typescript
 
@@ -27,9 +27,9 @@ Let's assume that we need to setup email & password authentication based on Nebu
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
+             service: NbDefaultAuthStrategy,
              config: {
               ...
              },
@@ -114,5 +114,5 @@ At this point, if you navigate to http://localhost:4200/#/auth/login the login f
 
 ## Where to next
 
-- [Configuring a provider](#/docs/auth/configuring-a-provider)
+- [Configuring a Strategy](#/docs/auth/configuring-a-strategy)
 - Adjusting [Auth Components UI](#/docs/auth/configuring-ui)

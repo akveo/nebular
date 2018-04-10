@@ -4,7 +4,7 @@ import { NbAuthResult } from '../services/auth-result';
 
 import { deepExtend, getDeepFromObject } from '../helpers';
 
-export abstract class NbAbstractAuthProvider {
+export abstract class NbAuthStrategy {
 
   protected defaultConfig: any = {};
   protected config: any = {};

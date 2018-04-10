@@ -5,16 +5,16 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
-import { NbEmailPassAuthProvider } from './email-pass-auth.provider';
-import { NbAuthResult } from '../services/auth-result';
+import { NbDefaultAuthStrategy } from './default-strategy';
+import { NbAuthResult } from '../../services/auth-result';
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-describe('email-pass-auth-provider', () => {
+describe('default-auth-strategy', () => {
 
-  let provider: NbEmailPassAuthProvider;
+  let strategy: NbDefaultAuthStrategy;
   let httpMock: HttpTestingController;
 
   const successResponse: any = {
@@ -40,18 +40,18 @@ describe('email-pass-auth-provider', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        { provide: NbEmailPassAuthProvider, useClass: NbEmailPassAuthProvider },
+        { provide: NbDefaultAuthStrategy, useClass: NbDefaultAuthStrategy },
       ],
     });
   });
 
   beforeEach(async(inject(
-    [NbEmailPassAuthProvider, HttpTestingController],
-    (_provider, _httpMock) => {
-      provider = _provider;
+    [NbDefaultAuthStrategy, HttpTestingController],
+    (_strategy, _httpMock) => {
+      strategy = _strategy;
       httpMock = _httpMock;
 
-      provider.setConfig({});
+      strategy.setConfig({});
     },
   )));
 
@@ -62,11 +62,11 @@ describe('email-pass-auth-provider', () => {
   describe('out of the box', () => {
 
     beforeEach(() => {
-      provider.setConfig({});
+      strategy.setConfig({});
     });
 
     it('authenticate success', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
@@ -85,7 +85,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
@@ -104,7 +104,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register success', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
@@ -122,7 +122,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
@@ -141,7 +141,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword success', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
@@ -159,7 +159,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword fail', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
@@ -178,7 +178,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword success', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
@@ -196,7 +196,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword fail', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
@@ -214,7 +214,7 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse, { status: 401, statusText: 'Unauthorized' });
     });
     it('logout success', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
@@ -232,7 +232,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout fail', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
@@ -292,7 +292,7 @@ describe('email-pass-auth-provider', () => {
   describe('always fail', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         login: {
           alwaysFail: true,
         },
@@ -315,7 +315,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -329,7 +329,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -343,7 +343,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword fail', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -357,7 +357,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword fail', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -371,7 +371,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout fail', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -403,7 +403,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom endpoint', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         login: {
           endpoint: 'new',
         },
@@ -426,7 +426,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -440,7 +440,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -454,7 +454,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -468,7 +468,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -482,7 +482,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -514,13 +514,13 @@ describe('email-pass-auth-provider', () => {
   describe('custom base endpoint', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         baseEndpoint: '/api/auth/custom/',
       });
     });
 
     it('authenticate', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -534,7 +534,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -548,7 +548,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -562,7 +562,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -576,7 +576,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -608,7 +608,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom method', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         login: {
           method: 'get',
         },
@@ -631,7 +631,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -645,7 +645,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -659,7 +659,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -673,7 +673,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -687,7 +687,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -725,7 +725,7 @@ describe('email-pass-auth-provider', () => {
 
     beforeEach(() => {
 
-      provider.setConfig({
+      strategy.setConfig({
         login: {
           redirect,
         },
@@ -748,7 +748,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate success', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -761,7 +761,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -774,7 +774,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register success', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -787,7 +787,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -800,7 +800,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword success', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -813,7 +813,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword fail', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -826,7 +826,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword success', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -839,7 +839,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword fail', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -852,7 +852,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout success', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -865,7 +865,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout fail', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -914,7 +914,7 @@ describe('email-pass-auth-provider', () => {
 
     beforeEach(() => {
 
-      provider.setConfig({
+      strategy.setConfig({
         login: {
           ...messages,
         },
@@ -937,7 +937,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate success', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -950,7 +950,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -963,7 +963,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register success', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -976,7 +976,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -989,7 +989,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword success', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -1002,7 +1002,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('requestPassword fail', (done: DoneFn) => {
-      provider.requestPassword(loginData)
+      strategy.requestPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -1015,7 +1015,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword success', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -1028,7 +1028,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('resetPassword fail', (done: DoneFn) => {
-      provider.resetPassword(loginData)
+      strategy.resetPassword(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -1041,7 +1041,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout success', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -1054,7 +1054,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('logout fail', (done: DoneFn) => {
-      provider.logout()
+      strategy.logout()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -1097,7 +1097,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom token key', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         token: {
           key: 'token',
         },
@@ -1105,7 +1105,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1120,7 +1120,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1154,7 +1154,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom token extractor', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         token: {
           getter: (module: string, res: HttpResponse<Object>) => res.body['token'],
         },
@@ -1162,7 +1162,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1177,7 +1177,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1211,7 +1211,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom message key', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         token: {
           key: 'token',
         },
@@ -1225,7 +1225,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate success', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1240,7 +1240,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -1255,7 +1255,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register success', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1270,7 +1270,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -1319,7 +1319,7 @@ describe('email-pass-auth-provider', () => {
   describe('custom message extractor', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setConfig({
         token: {
           key: 'token',
         },
@@ -1333,7 +1333,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate success', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1348,7 +1348,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('authenticate fail', (done: DoneFn) => {
-      provider.authenticate(loginData)
+      strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -1363,7 +1363,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register success', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1378,7 +1378,7 @@ describe('email-pass-auth-provider', () => {
     });
 
     it('register fail', (done: DoneFn) => {
-      provider.register(loginData)
+      strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);

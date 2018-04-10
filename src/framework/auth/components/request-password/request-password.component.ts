@@ -68,7 +68,7 @@ export class NbRequestPasswordComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};
-  provider: string = '';
+  strategy: string = '';
 
   submitted = false;
   errors: string[] = [];
@@ -81,14 +81,14 @@ export class NbRequestPasswordComponent {
 
     this.redirectDelay = this.getConfigValue('forms.requestPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.requestPassword.showMessages');
-    this.provider = this.getConfigValue('forms.requestPassword.provider');
+    this.strategy = this.getConfigValue('forms.requestPassword.strategy');
   }
 
   requestPass(): void {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.requestPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
+    this.service.requestPassword(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();
