@@ -8,6 +8,8 @@
 
 :host {
 
+  @include rtl(text-align, left, right);
+
   -webkit-font-smoothing: antialiased;
 
   .layout {
