@@ -44,8 +44,8 @@ We'll assume that our API returns a token as just `{token: 'some-jwt-token'}` no
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
                ...
                 
                token: {

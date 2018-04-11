@@ -5,16 +5,16 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
-import { NbDefaultAuthStrategy } from './default-strategy';
+import { NbPasswordAuthStrategy } from './password-strategy';
 import { NbAuthResult } from '../../services/auth-result';
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-describe('default-auth-strategy', () => {
+describe('password-auth-strategy', () => {
 
-  let strategy: NbDefaultAuthStrategy;
+  let strategy: NbPasswordAuthStrategy;
   let httpMock: HttpTestingController;
 
   const successResponse: any = {
@@ -40,18 +40,18 @@ describe('default-auth-strategy', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        { provide: NbDefaultAuthStrategy, useClass: NbDefaultAuthStrategy },
+        { provide: NbPasswordAuthStrategy, useClass: NbPasswordAuthStrategy },
       ],
     });
   });
 
   beforeEach(async(inject(
-    [NbDefaultAuthStrategy, HttpTestingController],
+    [NbPasswordAuthStrategy, HttpTestingController],
     (_strategy, _httpMock) => {
       strategy = _strategy;
       httpMock = _httpMock;
 
-      strategy.setConfig({});
+      strategy.setOptions({});
     },
   )));
 
@@ -62,7 +62,7 @@ describe('default-auth-strategy', () => {
   describe('out of the box', () => {
 
     beforeEach(() => {
-      strategy.setConfig({});
+      strategy.setOptions({});
     });
 
     it('authenticate success', (done: DoneFn) => {
@@ -255,7 +255,7 @@ describe('default-auth-strategy', () => {
   describe('always fail', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         login: {
           alwaysFail: true,
         },
@@ -349,7 +349,7 @@ describe('default-auth-strategy', () => {
   describe('custom endpoint', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         login: {
           endpoint: 'new',
         },
@@ -443,7 +443,7 @@ describe('default-auth-strategy', () => {
   describe('custom base endpoint', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         baseEndpoint: '/api/auth/custom/',
       });
     });
@@ -523,7 +523,7 @@ describe('default-auth-strategy', () => {
   describe('custom method', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         login: {
           method: 'get',
         },
@@ -623,7 +623,7 @@ describe('default-auth-strategy', () => {
 
     beforeEach(() => {
 
-      strategy.setConfig({
+      strategy.setOptions({
         login: {
           redirect,
         },
@@ -778,12 +778,12 @@ describe('default-auth-strategy', () => {
 
     const messages = {
       defaultErrors: ['this is error message'],
-      defaultMessages: ['this is error message'],
+      defaultMessages: ['this is success message'],
     };
 
     beforeEach(() => {
 
-      strategy.setConfig({
+      strategy.setOptions({
         login: {
           ...messages,
         },
@@ -937,7 +937,7 @@ describe('default-auth-strategy', () => {
   describe('custom token key', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         token: {
           key: 'token',
         },
@@ -979,7 +979,7 @@ describe('default-auth-strategy', () => {
   describe('custom token extractor', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         token: {
           getter: (module: string, res: HttpResponse<Object>) => res.body['token'],
         },
@@ -1021,7 +1021,7 @@ describe('default-auth-strategy', () => {
   describe('custom message key', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         token: {
           key: 'token',
         },
@@ -1099,7 +1099,7 @@ describe('default-auth-strategy', () => {
   describe('custom message extractor', () => {
 
     beforeEach(() => {
-      strategy.setConfig({
+      strategy.setOptions({
         token: {
           key: 'token',
         },

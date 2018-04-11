@@ -160,7 +160,7 @@ export class NbRegisterComponent {
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected config = {},
+              @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
@@ -191,6 +191,6 @@ export class NbRegisterComponent {
   }
 
   getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+    return getDeepFromObject(this.options, key, null);
   }
 }
