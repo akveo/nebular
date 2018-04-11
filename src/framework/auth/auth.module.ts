@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
 import { NbAuthService, NbTokenService, NbAuthSimpleToken, NbTokenLocalStorage, NbTokenStorage } from './services';
-import { NbDummyAuthStrategy, NbDefaultAuthStrategy } from './strategies';
+import { NbDummyAuthStrategy, NbPasswordAuthStrategy } from './strategies';
 
 import {
   defaultOptions,
@@ -29,14 +29,14 @@ import { NbResetPasswordComponent } from './components/reset-password/reset-pass
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
-export function nbAuthServiceFactory(options: any, tokenService: NbTokenService, injector: Injector) {
+export function nbAuthServiceFactory(options: NbAuthOptions, tokenService: NbTokenService, injector: Injector) {
   const strategies = options.strategies || {};
 
   for (const key in strategies) {
     if (strategies.hasOwnProperty(key)) {
       const strategy = strategies[key];
       const object = injector.get(strategy.service);
-      object.setConfig(strategy.config || {});
+      object.setOptions(strategy.options || {});
     }
   }
 
@@ -94,7 +94,7 @@ export class NbAuthModule {
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
         NbDummyAuthStrategy,
-        NbDefaultAuthStrategy,
+        NbPasswordAuthStrategy,
       ],
     };
   }

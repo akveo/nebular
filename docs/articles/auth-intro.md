@@ -22,7 +22,7 @@ You can use the built-in components or create your custom ones.
   
 Auth Strategies:
   - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
-  - `NbDefaultAuthStrategy` - the most common email/password authentication strategy.
+  - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
     
 Other helper services:
   - `NbAuthService` - facade service to communicate with a configured strategy;

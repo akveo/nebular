@@ -84,7 +84,7 @@ describe('auth-service', () => {
             strategies: {
               dummy: {
                 service: NbDummyAuthStrategy,
-                config: {
+                options: {
                   alwaysFail: true,
                   delay: 1000,
                 },

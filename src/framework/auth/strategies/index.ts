@@ -1,4 +1,4 @@
 export * from './auth-strategy';
 export * from './dummy/dummy-strategy';
-export * from './default/default-strategy';
-export * from './default/default-strategy-options';
+export * from './password/password-strategy';
+export * from './password/password-strategy-options';
