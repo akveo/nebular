@@ -23,8 +23,8 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
               ...
              },
            },
@@ -124,8 +124,8 @@ So, for instance, to remove the redirectDelay setting and disable the success me
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
               ...
              },
            },
@@ -183,8 +183,8 @@ const formSetting: any = {
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
               ...
              },
            },
