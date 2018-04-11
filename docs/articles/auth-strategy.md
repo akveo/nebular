@@ -6,14 +6,14 @@ Currently, there are two Auth Providers available out of the box:
 
 Two auth Strategies:
   - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
-  - `NbDefaultAuthStrategy` - the most common email/password authentication strategy.
+  - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
   
 Each Strategy has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
 <hr class="section-end">
   
 ## Configuration
 
-As an example, let's configure API endpoints for the `NbDefaultAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](#/docs/auth/nbdefaultauthstrategy) if you need any custom behaviour.
+As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](#/docs/auth/NbPasswordAuthStrategy) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -26,8 +26,8 @@ We assume you already have the Auth module installed inside of your `*.module.ts
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
               ...
              },
            },
@@ -38,7 +38,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 
-Now, let's add API endpoints. According to the [NbDefaultAuthStrategy documentation](#/docs/auth/nbdefaultauthstrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](#/docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 {

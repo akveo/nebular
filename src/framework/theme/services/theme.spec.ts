@@ -42,7 +42,7 @@ describe('theme-service', () => {
     },
   )));
 
-  it('returns default theme specified in config', () => {
+  it('returns default theme specified in options', () => {
     let current: any;
 
     const subscription = themeService.onThemeChange()
