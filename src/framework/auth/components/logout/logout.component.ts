@@ -23,7 +23,7 @@ export class NbLogoutComponent implements OnInit {
   strategy: string = '';
 
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected config = {},
+              @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router) {
     this.redirectDelay = this.getConfigValue('forms.logout.redirectDelay');
     this.strategy = this.getConfigValue('forms.logout.strategy');
@@ -46,6 +46,6 @@ export class NbLogoutComponent implements OnInit {
   }
 
   getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+    return getDeepFromObject(this.options, key, null);
   }
 }

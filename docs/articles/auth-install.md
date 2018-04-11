@@ -10,15 +10,15 @@
 1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
 Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without `Nebular Theme`. 
 
-Let's assume that we need to setup email & password authentication based on Nebular Auth and `NbDefaultAuthStrategy`.
+Let's assume that we need to setup email & password authentication based on Nebular Auth and `NbPasswordAuthStrategy`.
 
 `npm i @nebular/auth`
     
-2) Import the module and `NbDefaultAuthStrategy` strategy:
+2) Import the module and `NbPasswordAuthStrategy` strategy:
 
-`import { NbDefaultAuthStrategy, NbAuthModule } from '@nebular/auth';`
+`import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';`
 
-3) Now, let's configure the module by specifying available strategies, in your case we add `NbDefaultAuthStrategy`:
+3) Now, let's configure the module by specifying available strategies, in your case we add `NbPasswordAuthStrategy`:
 
 ```typescript
 
@@ -29,7 +29,7 @@ Let's assume that we need to setup email & password authentication based on Nebu
    NbAuthModule.forRoot({
          strategies: {
            email: {
-             service: NbDefaultAuthStrategy,
+             service: NbPasswordAuthStrategy,
              options: {
               ...
              },

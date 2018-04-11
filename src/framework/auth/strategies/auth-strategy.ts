@@ -9,6 +9,8 @@ export abstract class NbAuthStrategy {
   protected defaultOptions: NbAuthStrategyOptions;
   protected options: NbAuthStrategyOptions;
 
+  // we should keep this any and validation should be done in `register` method instead
+  // otherwise it won't be possible to pass an empty object
   setOptions(options: any): void {
     this.options = deepExtend({}, this.defaultOptions, options);
   }

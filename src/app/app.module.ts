@@ -30,7 +30,7 @@ import {
   NB_AUTH_TOKEN_CLASS,
   NbAuthJWTToken,
   NbAuthModule,
-  NbDefaultAuthStrategy,
+  NbPasswordAuthStrategy,
   NbAuthJWTInterceptor,
 } from '@nebular/auth';
 
@@ -176,7 +176,7 @@ const NB_TEST_COMPONENTS = [
         //   },
         // },
         email: {
-          service: NbDefaultAuthStrategy,
+          service: NbPasswordAuthStrategy,
           options: {
             login: {
               endpoint: 'http://localhost:4400/api/auth/login',

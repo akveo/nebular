@@ -5,16 +5,16 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
-import { NbDefaultAuthStrategy } from './default-strategy';
+import { NbPasswordAuthStrategy } from './password-strategy';
 import { NbAuthResult } from '../../services/auth-result';
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-describe('default-auth-strategy', () => {
+describe('password-auth-strategy', () => {
 
-  let strategy: NbDefaultAuthStrategy;
+  let strategy: NbPasswordAuthStrategy;
   let httpMock: HttpTestingController;
 
   const successResponse: any = {
@@ -40,13 +40,13 @@ describe('default-auth-strategy', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        { provide: NbDefaultAuthStrategy, useClass: NbDefaultAuthStrategy },
+        { provide: NbPasswordAuthStrategy, useClass: NbPasswordAuthStrategy },
       ],
     });
   });
 
   beforeEach(async(inject(
-    [NbDefaultAuthStrategy, HttpTestingController],
+    [NbPasswordAuthStrategy, HttpTestingController],
     (_strategy, _httpMock) => {
       strategy = _strategy;
       httpMock = _httpMock;

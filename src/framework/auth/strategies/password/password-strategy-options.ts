@@ -9,7 +9,7 @@ import { NbAuthStrategyOptions } from '../strategy-options';
 import { getDeepFromObject } from '../../helpers';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
-export interface NbDefaultStrategyModule {
+export interface NbPasswordStrategyModule {
   alwaysFail?: boolean;
   rememberMe?: boolean;
   endpoint?: string;
@@ -22,14 +22,14 @@ export interface NbDefaultStrategyModule {
   defaultMessages?: string[];
 }
 
-export interface NbDefaultStrategyReset extends NbDefaultStrategyModule {
+export interface NbPasswordStrategyResetOptions extends NbPasswordStrategyModule {
   resetPasswordTokenKey?: string;
 }
 
-export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
+export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   name = 'email';
   baseEndpoint? = '/api/auth/';
-  login?: boolean | NbDefaultStrategyModule = {
+  login?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
     rememberMe: true, // TODO: what does that mean?
     endpoint: 'login',
@@ -41,7 +41,7 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Login/Email combination is not correct, please try again.'],
     defaultMessages: ['You have been successfully logged in.'],
   };
-  register?: boolean | NbDefaultStrategyModule = {
+  register?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
     rememberMe: true,
     endpoint: 'register',
@@ -53,7 +53,7 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully registered.'],
   };
-  requestPass?: boolean | NbDefaultStrategyModule = {
+  requestPass?: boolean | NbPasswordStrategyModule = {
     endpoint: 'request-pass',
     method: 'post',
     redirect: {
@@ -63,7 +63,7 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['Reset password instructions have been sent to your email.'],
   };
-  resetPass?: boolean | NbDefaultStrategyReset = {
+  resetPass?: boolean | NbPasswordStrategyResetOptions = {
     endpoint: 'reset-pass',
     method: 'put',
     redirect: {
@@ -74,7 +74,7 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['Your password has been successfully changed.'],
   };
-  logout?: boolean | NbDefaultStrategyReset = {
+  logout?: boolean | NbPasswordStrategyResetOptions = {
     alwaysFail: false,
     endpoint: 'logout',
     method: 'delete',
@@ -87,21 +87,24 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
   };
   token = {
     key: 'data.token',
-    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+      res.body,
       options.token.key,
     ),
     class: NbAuthSimpleToken,
   };
   errors? = {
     key: 'data.errors',
-    getter: (module: string, res: HttpErrorResponse, options: any) => getDeepFromObject(res.error,
+    getter: (module: string, res: HttpErrorResponse, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+      res.error,
       options.errors.key,
       options[module].defaultErrors,
     ),
   };
   messages? = {
     key: 'data.messages',
-    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+      res.body,
       options.messages.key,
       options[module].defaultMessages,
     ),
@@ -126,4 +129,4 @@ export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
   };
 }
 
-export const defaultStrategyOptions: NbDefaultAuthStrategyOptions = new NbDefaultAuthStrategyOptions();
+export const passwordStrategyOptions: NbPasswordAuthStrategyOptions = new NbPasswordAuthStrategyOptions();

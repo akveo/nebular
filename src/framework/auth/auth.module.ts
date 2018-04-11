@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
 import { NbAuthService, NbTokenService, NbAuthSimpleToken, NbTokenLocalStorage, NbTokenStorage } from './services';
-import { NbDummyAuthStrategy, NbDefaultAuthStrategy } from './strategies';
+import { NbDummyAuthStrategy, NbPasswordAuthStrategy } from './strategies';
 
 import {
   defaultOptions,
@@ -94,7 +94,7 @@ export class NbAuthModule {
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbTokenService,
         NbDummyAuthStrategy,
-        NbDefaultAuthStrategy,
+        NbPasswordAuthStrategy,
       ],
     };
   }

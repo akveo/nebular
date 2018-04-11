@@ -533,12 +533,12 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'NbDefaultAuthStrategy',
+        name: 'NbPasswordAuthStrategy',
         children: [
           {
             type: 'block',
             block: 'component',
-            source: 'NbDefaultAuthStrategy',
+            source: 'NbPasswordAuthStrategy',
           },
         ],
       },

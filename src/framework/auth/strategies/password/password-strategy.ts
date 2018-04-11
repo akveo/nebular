@@ -14,7 +14,7 @@ import { catchError } from 'rxjs/operators/catchError';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
-import { defaultStrategyOptions } from './default-strategy-options';
+import { passwordStrategyOptions } from './password-strategy-options';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -24,14 +24,14 @@ import { defaultStrategyOptions } from './default-strategy-options';
  *
  * Strategy settings. Note, there is no need to copy over the whole object to change the settings you need.
  * Also, this.getOption call won't work outside of the default options declaration
- * (which is inside of the `NbDefaultAuthStrategy` class), so you have to replace it with a custom helper function
+ * (which is inside of the `NbPasswordAuthStrategy` class), so you have to replace it with a custom helper function
  * if you need it.
  *
  * ```
- *export class NbDefaultAuthStrategyOptions extends NbAuthStrategyOptions {
+ *export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
  *  name = 'email';
  *  baseEndpoint? = '/api/auth/';
- *  login?: boolean | NbDefaultStrategyModule = {
+ *  login?: boolean | NbPasswordStrategyModule = {
  *    alwaysFail: false,
  *    rememberMe: true,
  *    endpoint: 'login',
@@ -43,7 +43,7 @@ import { defaultStrategyOptions } from './default-strategy-options';
  *    defaultErrors: ['Login/Email combination is not correct, please try again.'],
  *    defaultMessages: ['You have been successfully logged in.'],
  *  };
- *  register?: boolean | NbDefaultStrategyModule = {
+ *  register?: boolean | NbPasswordStrategyModule = {
  *    alwaysFail: false,
  *    rememberMe: true,
  *    endpoint: 'register',
@@ -55,7 +55,7 @@ import { defaultStrategyOptions } from './default-strategy-options';
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['You have been successfully registered.'],
  *  };
- *  requestPass?: boolean | NbDefaultStrategyModule = {
+ *  requestPass?: boolean | NbPasswordStrategyModule = {
  *    endpoint: 'request-pass',
  *    method: 'post',
  *    redirect: {
@@ -65,7 +65,7 @@ import { defaultStrategyOptions } from './default-strategy-options';
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Reset password instructions have been sent to your email.'],
  *  };
- *  resetPass?: boolean | NbDefaultStrategyReset = {
+ *  resetPass?: boolean | NbPasswordStrategyResetOptions = {
  *    endpoint: 'reset-pass',
  *    method: 'put',
  *    redirect: {
@@ -76,7 +76,7 @@ import { defaultStrategyOptions } from './default-strategy-options';
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Your password has been successfully changed.'],
  *  };
- *  logout?: boolean | NbDefaultStrategyReset = {
+ *  logout?: boolean | NbPasswordStrategyResetOptions = {
  *    alwaysFail: false,
  *    endpoint: 'logout',
  *    method: 'delete',
@@ -130,9 +130,9 @@ import { defaultStrategyOptions } from './default-strategy-options';
  * ```
  */
 @Injectable()
-export class NbDefaultAuthStrategy extends NbAuthStrategy {
+export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = defaultStrategyOptions;
+  protected defaultOptions = passwordStrategyOptions;
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();
