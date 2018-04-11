@@ -20,7 +20,8 @@
           border-left,
           border-right,
           none!important,
-          1px solid nb-theme(actions-separator)
+          1px solid nb-theme(actions-separator),
+          true
         );
       }
 
@@ -39,7 +40,8 @@
         border-left,
         border-right,
         1px solid nb-theme(actions-separator),
-        none
+        none,
+        true
       );
       background: transparent;
     }
@@ -54,7 +56,8 @@
           border-left,
           border-right,
           1px solid nb-theme(actions-separator),
-          none
+          none,
+          true
         );
       }
     }
