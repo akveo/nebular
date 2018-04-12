@@ -303,6 +303,12 @@
     .dropdown-toggle {
       box-shadow: none;
     }
+
+    .dropdown-menu.show {
+      // automatically set direction based on layout direction
+      // have to use important, since ngbDropdownToggle inlines styles to element
+      left: auto !important;
+    }
   }
 
   .dropdown.show {
