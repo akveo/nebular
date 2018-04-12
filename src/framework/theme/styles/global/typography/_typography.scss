@@ -210,7 +210,7 @@
   }
 
   ol,ul {
-    padding-left: 1.25rem;
+    @include rtl-prop(padding-left, padding-right, 1.25rem, 0, true);
   }
 
   .alert {
