@@ -8,8 +8,7 @@ Let's assume that your backend returns a JWT token so that we can use the token 
 
 1) Firstly, let's tell Nebular that we are waiting for JWT token, to do that we just need to provide a respective class. Open your `app.module.ts` and add the following:
 
-```typescript
-
+```ts
 import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
 
 @NgModule({
@@ -26,7 +25,7 @@ This line tells Angular to inject `NbAuthJWTToken` (instead of the default `NbAu
 
 2) Then, let's configure where Nebular should look for the token in the login/register response data. By default Nebular expects that your token is located under the `data.token` keys of the JSON response:
 
-```typescript
+```ts
 {
   data: {
     token: 'some-jwt-token'

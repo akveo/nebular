@@ -20,8 +20,7 @@ Let's assume that we need to setup email & password authentication based on Nebu
 
 3) Now, let's configure the module by specifying available providers, in your case we add `NbEmailPassAuthProvider`:
 
-```typescript
-
+```ts
 @NgModule({
   imports: [
    // ...
@@ -47,7 +46,7 @@ We also specified a `forms` key, which configures available options for the Auth
 4) Next, we need to configure Auth Components routes, let's add those into your `app-routing.module.ts`:
 
 
-```typescript
+```ts
 import {
   NbAuthComponent,
   NbLoginComponent,

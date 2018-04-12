@@ -23,40 +23,40 @@ import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPositi
  *
  * ![image](assets/images/components/popover.gif)
  *
- * @example Popover can accept different content such as:
+ * Popover can accept different content such as:
  * TemplateRef
  *
- * ```
+ * ```html
  * <button [nbPopover]="templateRef"></button>
  * <ng-template #templateRef>
  *   <span>Hello, Popover!</span>
  * </ng-template>
  * ```
  *
- * @example Custom components
+ * Custom components
  *
- * ```
+ * ```html
  * <button [nbPopover]="NbCardComponent"></button>
  * ```
  *
- * @example Primitive types
+ * Primitive types
  *
- * ```
+ * ```html
  * <button nbPopover="Hello, Popover!"></button>
  * ```
  *
- * @example Popover has different placements, such as: top, bottom, left and right
+ * Popover has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
- * ```
+ * ```html
  * <button nbPopover="Hello, Popover!" nbPopoverPlacement="left"></button>
  * ```
  *
- * @example By default popover will try to adjust itself to maximally fit viewport
+ * By default popover will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the popover container.
  * If you wanna disable this behaviour just set it falsy value.
  *
- * ```
+ * ```html
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  *

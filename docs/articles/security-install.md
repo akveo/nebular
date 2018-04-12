@@ -11,28 +11,23 @@
 
 
 ```bash
-
 npm i @nebular/security
 ```
     
 2) Import the module:
 
-```typescript
-
+```ts
 import { NbSecurityModule } from '@nebular/security
-
 ```
 
 3) Now, let's register the module in the root module:
 
-```typescript
-
+```ts
 @NgModule({
   imports: [
    // ...
     
    NbSecurityModule.forRoot(),
-
 ```
 
 Great, at this stage we have installed Nebular Security and ready to configure it.

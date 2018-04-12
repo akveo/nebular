@@ -7,7 +7,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  *
  * @example
  *
- * ```
+ * ```html
  * <nb-flip-card>
  *   <nb-card-front>
  *     <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>

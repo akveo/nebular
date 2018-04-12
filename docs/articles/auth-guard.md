@@ -9,7 +9,7 @@ Here's how we combine it with Nebular Auth to protect `/pages/*` from anonymous 
 
 1) Create `auth-guard.service.ts` somewhere near your `app-routing.module.ts` like this:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
 
 2) Then, let's import `NbAuthService` and complete the `canActivate` method:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
@@ -44,7 +44,7 @@ export class AuthGuard implements CanActivate {
 
 3) Now we need to register the service inside of the `app.module.ts`:
 
-```typescript
+```ts
 import { AuthGuard } from '../auth-guard.service';
 
 @NgModule({
@@ -62,7 +62,7 @@ import { AuthGuard } from '../auth-guard.service';
 
 4) Last step - reference the AuthGuard in the `app-routing.module.ts`:
 
-```typescript
+```ts
 import { AuthGuard } from '../auth-guard.service';
 
 // ...
@@ -93,7 +93,7 @@ As the result, it is not possible to access any of the `pages/*` if you are not 
 Additionally, you may want to redirect directly to `auth/login` when the user is accessing a restricted page.
 Let's modify our guard a bit to reflect this logic:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';

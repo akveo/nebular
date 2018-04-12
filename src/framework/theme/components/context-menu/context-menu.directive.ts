@@ -22,28 +22,28 @@ import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
  *
  * ![image](assets/images/components/context-menu.gif)
  *
- * @example Juts pass basic menu items:
+ * Juts pass basic menu items:
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example Context menu has different placements, such as: top, bottom, left and right
+ * Context menu has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items" nbContextMenuPlacement="right"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example By default context menu will try to adjust itself to maximally fit viewport
+ * By default context menu will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the context menu.
  * If you wanna disable this behaviour just set it falsy value.
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items" nbContextMenuAdjustment="counterclockwise"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
