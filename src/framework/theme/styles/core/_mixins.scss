@@ -235,3 +235,15 @@
     }
   }
 }
+
+@mixin ltr-only($prop, $value, $append: false) {
+  @if $append == true {
+    @at-root #{selector-append(':not([dir=rtl])', &)} {
+      #{$prop}: $value;
+    }
+  } @else {
+    :not([dir=rtl]) & {
+      #{$prop}: $value;
+    }
+  }
+}
