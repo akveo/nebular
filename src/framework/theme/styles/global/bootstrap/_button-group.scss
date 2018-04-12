@@ -66,7 +66,7 @@
 
 @mixin nb-b-button-group-theme() {
 
-  .btn-group:not(.btn-toggle-group):not(.btn-divided-group) > .btn + .btn {
+  .btn-group:not(.btn-divided-group) > .btn + .btn {
     &.btn-primary {
       @include dropdown-primary-separator();
     }
@@ -97,7 +97,6 @@
     padding: 0 1rem;
   }
 
-  .btn-toggle-group,
   .btn-divided-group {
     .btn {
       background-color: nb-theme(btn-group-bg);
@@ -167,38 +166,6 @@
       &.btn-secondary,
       &.btn-outline-secondary {
         @include btn-secondary-hover();
-      }
-    }
-  }
-
-  .btn-toggle-group {
-    .btn {
-      position: relative;
-    }
-
-    .btn:first-child {
-      border-right: none;
-    }
-
-    .btn:last-child {
-      border-left: none;
-      margin-left: 0;
-    }
-
-    .btn:not(:first-child):not(:last-child) {
-      border-left: none;
-      border-right: none;
-    }
-
-    .btn:not(.active):not(:hover) + .btn:not(.active):not(:hover) {
-      &::before {
-        content: '';
-        position: absolute;
-        background-color: nb-theme(btn-group-separator);
-        width: 1px;
-        height: 100%;
-        top: 0;
-        left: 0;
       }
     }
   }
