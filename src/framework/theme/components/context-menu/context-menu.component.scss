@@ -43,7 +43,7 @@
         }
 
         .menu-icon:first-child {
-          padding-left: 1rem;
+          @include rtl-prop(padding-left, padding-right, 1rem, 3rem);
         }
       }
     }
