@@ -103,12 +103,13 @@
     color: nb-theme(color-fg);
     font-family: nb-theme(font-main);
 
-    &.hint {
-      margin-left: 1rem;
+    &.hint,
+    &.error {
+      @include ltr-only(margin-left, 1rem);
+      @include rtl-only(margin-right, 1rem);
     }
 
     &.error {
-      margin-left: 1rem;
       color: nb-theme(color-danger);
     }
   }
