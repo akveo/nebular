@@ -119,9 +119,6 @@
     pre {
       background: nb-theme(code-snippets-bg);
       padding: 0.75rem 1rem;
-      code {
-        color: nb-theme(color-fg);
-      }
     }
 
     .section-end {
@@ -137,24 +134,8 @@
     }
 
     code {
-      color: nb-theme(inline-code-color);
+      //color: nb-theme(inline-code-color);
       background: nb-theme(code-snippets-bg);
-    }
-
-    ngd-code-highlighter {
-      display: none;
-      .code-title {
-        background: nb-theme(code-snippets-bg);
-        padding: 0.75rem 1rem;
-        border-radius: 3px;
-        border-bottom: 1px solid rgb(224, 225, 235);
-        position: relative;
-        i {
-          position: absolute;
-          right: 1rem;
-          color: rgb(224, 225, 235);
-        }
-      }
     }
 
     .fragment {
@@ -322,9 +303,6 @@
       ngd-examples-block {
         & > div > pre {
           display: none;
-        }
-        ngd-code-highlighter {
-          display: block;
         }
       }
       ngd-theme-block {

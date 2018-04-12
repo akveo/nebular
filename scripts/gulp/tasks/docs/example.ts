@@ -27,7 +27,7 @@ task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
 
 task('validate-examples', ['parse-themes'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => validateInlineExamples(cls));
+  docs.classes.forEach(cls =>  validateInlineExamples(cls));
 });
 
 function isTabbed(tag) {
