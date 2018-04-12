@@ -35,7 +35,8 @@
     table tr.ng2-smart-titles {
       th {
         padding: nb-theme(smart-table-padding);
-        padding-right: 1.75rem;
+        @include ltr-only(padding-right, 1.75rem, true);
+        @include rtl-only(padding-left, 1.75rem, true);
       }
 
       th a {
@@ -52,7 +53,7 @@
             border-width: 0.375rem;
             position: absolute;
             margin: 0;
-            right: 0.75rem;
+            @include rtl-prop(right, left, 0.75rem, auto, true);
             top: 50%;
             transform: translate(0, -50%);
           }
