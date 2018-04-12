@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'style-loader!./styles/styles.scss';
 import { Subscription } from 'rxjs/Subscription';
 import { DocsService } from './docs/docs.service';
 import { Analytics } from './docs/utils/analytics.service';
-import { NbWindow } from '@nebular/theme';
+import { NB_WINDOW } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-app-root',
@@ -24,7 +24,7 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
   private fragmentSubscription: Subscription;
 
 
-  constructor(private window: NbWindow,
+  constructor(@Inject(NB_WINDOW) private window,
               private docsService: DocsService,
               private router: Router,
               private route: ActivatedRoute,

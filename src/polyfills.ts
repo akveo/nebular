@@ -49,7 +49,8 @@ import 'core-js/es6/set';
 /** Evergreen browsers require these. **/
 import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
-
+import 'core-js/es7/array';
+import 'core-js/es7/object';
 
 /** ALL Firefox browsers require the following to support `@angular/animation`. **/
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.

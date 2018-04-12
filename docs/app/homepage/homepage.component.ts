@@ -8,13 +8,14 @@ import {
   Renderer2,
   ViewChild,
   ViewChildren,
+  Inject,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
 import { Subject } from 'rxjs/Rx';
-import { NbSpinnerService, NbWindow } from '@nebular/theme';
+import { NbSpinnerService, NB_WINDOW } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-homepage',
@@ -95,7 +96,7 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
   currentSectionId: string = 'home';
   highlightMenu$ = new Subject();
 
-  constructor(private window: NbWindow,
+  constructor(@Inject(NB_WINDOW) private window,
               private renderer: Renderer2,
               private spinnerService: NbSpinnerService,
               private titleService: Title) {

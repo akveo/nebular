@@ -19,7 +19,7 @@ import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
-import { NbWindow, NbDocument } from '../../theme.options';
+import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -306,8 +306,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected router: Router,
-    protected window: NbWindow,
-    protected document: NbDocument,
+    @Inject(NB_WINDOW) protected window,
+    @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
   ) {
