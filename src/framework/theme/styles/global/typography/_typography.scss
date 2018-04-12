@@ -153,13 +153,27 @@
 
   .blockquote {
     font-size: nb-theme(font-size);
-    border-left: 0.25rem solid nb-theme(color-fg-highlight);
     color: nb-theme(color-fg-text);
+
+    @include rtl-prop(
+      border-left,
+      border-right,
+      0.25rem solid nb-theme(color-fg-highlight),
+      0,
+      true
+    );
   }
   .blockquote-reverse {
     font-size: nb-theme(font-size);
-    border-right: 0.25rem solid nb-theme(color-fg-highlight);
     color: nb-theme(color-fg-text);
+
+    @include rtl-prop(
+      border-right,
+      border-left,
+      0.25rem solid nb-theme(color-fg-highlight),
+      0,
+      true
+    );
   }
   .blockquote-footer {
     color: nb-theme(color-fg);
