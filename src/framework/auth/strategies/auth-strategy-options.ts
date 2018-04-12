@@ -7,8 +7,8 @@ import { NbTokenClass } from '../services/';
 
 export class NbAuthStrategyOptions {
   name: string;
-  token: {
-    class: NbTokenClass;
+  token?: {
+    class?: NbTokenClass;
     [key: string]: any;
   };
 }

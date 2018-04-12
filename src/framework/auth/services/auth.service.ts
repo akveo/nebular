@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
@@ -24,8 +24,7 @@ import { NbAuthToken } from './token/token';
 export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
-              protected injector: Injector,
-              @Optional() @Inject(NB_AUTH_STRATEGIES) protected strategies = {}) {
+              @Inject(NB_AUTH_STRATEGIES) protected strategies) {
   }
 
   /**
@@ -169,10 +168,12 @@ export class NbAuthService {
   }
 
   private getStrategy(strategyName: string): NbAuthStrategy {
-    if (!this.strategies[strategyName]) {
-      throw new TypeError(`NbAuthStrategy '${strategyName}' is not registered`);
+    const found = this.strategies.find((strategy: NbAuthStrategy) => strategy.getName() === strategyName);
+
+    if (!found) {
+      throw new TypeError(`There is no Auth Strategy registered under '${strategyName}' name`);
     }
 
-    return this.injector.get(this.strategies[strategyName].service);
+    return found;
   }
 }

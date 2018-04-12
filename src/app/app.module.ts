@@ -32,6 +32,7 @@ import {
   NbAuthModule,
   NbPasswordAuthStrategy,
   NbAuthJWTInterceptor,
+  NbDummyAuthStrategy,
 } from '@nebular/auth';
 
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
@@ -166,46 +167,36 @@ const NB_TEST_COMPONENTS = [
           ],
         },
       },
-      strategies: {
-        //
-        // email: {
-        //   service: NbDummyAuthStrategy,
-        //   options: {
-        //     alwaysFail: true,
-        //     delay: 1000,
-        //   },
-        // },
-        email: {
-          service: NbPasswordAuthStrategy,
-          options: {
-            login: {
-              endpoint: 'http://localhost:4400/api/auth/login',
-            },
-            register: {
-              endpoint: 'http://localhost:4400/api/auth/register',
-            },
-            logout: {
-              endpoint: 'http://localhost:4400/api/auth/logout',
-              redirect: {
-                success: '/auth/login',
-                failure: '/auth/login',
-              },
-            },
-            requestPass: {
-              endpoint: 'http://localhost:4400/api/auth/request-pass',
-              redirect: {
-                success: '/auth/reset-password',
-              },
-            },
-            resetPass: {
-              endpoint: 'http://localhost:4400/api/auth/reset-pass',
-              redirect: {
-                success: '/auth/login',
-              },
+      strategies: [
+        NbDummyAuthStrategy.setup({
+          name: 'dummy',
+
+          alwaysFail: true,
+          delay: 1000,
+        }),
+
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+
+          baseEndpoint: 'http://localhost:4400/api/auth/',
+          logout: {
+            redirect: {
+              success: '/auth/login',
+              failure: '/auth/login',
             },
           },
-        },
-      },
+          requestPass: {
+            redirect: {
+              success: '/auth/reset-password',
+            },
+          },
+          resetPass: {
+            redirect: {
+              success: '/auth/login',
+            },
+          },
+        }),
+      ],
     }),
     NbSecurityModule.forRoot({
       accessControl: {
