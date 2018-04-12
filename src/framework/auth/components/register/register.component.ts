@@ -47,8 +47,8 @@ import { NbAuthResult } from '../../services/auth-result';
             class="form-text error"
             *ngIf="fullName.invalid && fullName.touched && (fullName.errors?.minlength || fullName.errors?.maxlength)">
             Full name should contains
-            from {{getConfigValue('forms.validation.password.minLength')}}
-            to {{getConfigValue('forms.validation.password.maxLength')}}
+            from {{getConfigValue('forms.validation.fullName.minLength')}}
+            to {{getConfigValue('forms.validation.fullName.maxLength')}}
             characters
           </small>
         </div>

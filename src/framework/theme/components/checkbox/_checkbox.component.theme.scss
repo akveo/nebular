@@ -4,40 +4,41 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+// locally used mixin
+@mixin hover-border($color) {
+  .customised-control-input:checked ~ .customised-control-indicator {
+    border-color: $color;
+  }
+  .customised-control-input:hover:enabled ~ .customised-control-indicator {
+    border-color: lighten($color, 10%);
+  }
+}
+// locally used mixin
+@mixin chackbox-checkmark($size, $color, $border-size) {
+  &::before {
+    content: '';
+    position: absolute;
+    height: calc(#{$size} * 0.6);
+    width: calc(#{$size} * 0.4);
+    border: solid $color;
+    border-width: 0 $border-size $border-size 0;
+    transform: rotate(45deg);
+  }
+}
+// locally used mixin
+@mixin set-style($bg, $size, $border-size, $border-color) {
+  background-color: $bg;
+  width: $size;
+  height: $size;
+  border: $border-size solid $border-color;
+}
+// locally used mixin
+@mixin description-style {
+  color: nb-theme(color-fg-heading);
+  padding-left: 0.25rem;
+}
+
 @mixin nb-checkbox-theme() {
-  @mixin hover-border($color) {
-    .customised-control-input:checked ~ .customised-control-indicator {
-      border-color: $color;
-    }
-    .customised-control-input:hover:enabled ~ .customised-control-indicator {
-      border-color: lighten($color, 10%);
-    }
-  }
-
-  @mixin checkmark($size, $color, $border-size) {
-    &::before {
-      content: '';
-      position: absolute;
-      height: calc(#{$size} * 0.6);
-      width: calc(#{$size} * 0.4);
-      border: solid $color;
-      border-width: 0 $border-size $border-size 0;
-      transform: rotate(45deg);
-    }
-  }
-
-  @mixin set-style($bg, $size, $border-size, $border-color) {
-    background-color: $bg;
-    width: $size;
-    height: $size;
-    border: $border-size solid $border-color;
-  }
-
-  @mixin description-style {
-    color: nb-theme(color-fg-heading);
-    padding-left: 0.25rem;
-  }
-
   nb-checkbox {
     .customised-control {
       position: relative;
@@ -64,7 +65,7 @@
       display: flex;
       justify-content: center;
 
-      @include checkmark(
+      @include chackbox-checkmark(
           nb-theme(checkbox-size),
           nb-theme(checkbox-checkmark),
           nb-theme(checkbox-border-size)
@@ -89,7 +90,7 @@
         display: flex;
         justify-content: center;
 
-        @include checkmark(
+        @include chackbox-checkmark(
             nb-theme(checkbox-checked-size),
             nb-theme(checkbox-checked-checkmark),
             nb-theme(checkbox-checked-border-size)
@@ -108,7 +109,7 @@
           display: flex;
           justify-content: center;
 
-          @include checkmark(
+          @include chackbox-checkmark(
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-checkmark),
               nb-theme(checkbox-disabled-border-size)
@@ -133,7 +134,7 @@
           display: flex;
           justify-content: center;
 
-          @include checkmark(
+          @include chackbox-checkmark(
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-checkmark),
               nb-theme(checkbox-disabled-border-size)
@@ -163,3 +164,4 @@
     }
   }
 }
+

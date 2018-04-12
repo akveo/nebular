@@ -10,8 +10,7 @@ export class BlockHelperService {
   hasProps(component): boolean {
     return component &&
       component.props &&
-      component.props.length > 0 &&
-      component.props.some(prop => prop.kind === 'input' || prop.kind === 'output');
+      component.props.length > 0;
   }
 
   hasMethods(component): boolean {
