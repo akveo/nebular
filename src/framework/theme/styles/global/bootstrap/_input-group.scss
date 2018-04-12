@@ -4,16 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../core/mixins';
+
 @mixin nb-b-input-group-theme() {
+
+  $border-width: nb-theme(form-control-border-width);
+  $border-type: nb-theme(form-control-border-type);
+  $border-color: nb-theme(form-control-border-color);
+  $form-control-border: $border-width $border-type $border-color;
 
   .input-group-addon,
   .input-group-icon {
     font-size: 1.5rem;
     padding: 0.25rem 1rem;
-    border-right: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
     color: nb-theme(form-control-placeholder-color);
+
+    @include rtl-prop(border-right, border-left, none, $form-control-border, true);
   }
 
   .input-group-addon {
@@ -42,9 +48,57 @@
     }
   }
 
-  .input-group-icon + .form-control {
-    border-left: none;
-    padding-left: 0;
+  .input-group {
+    .form-control:first-child,
+    .input-group-addon:first-child,
+    .input-group-prepend .btn:first-child,
+    .input-group-btn .btn:first-child {
+      @include rtl-prop(
+        border-top-right-radius,
+        border-top-left-radius,
+        0,
+        nb-theme(form-control-border-radius),
+        true
+      );
+
+      @include rtl-prop(
+        border-bottom-right-radius,
+        border-bottom-left-radius,
+        0,
+        nb-theme(form-control-border-radius),
+        true
+      );
+    }
+    .form-control:last-child,
+    .input-group-addon:last-child,
+    .input-group-append .btn:last-child,
+    .input-group-btn .btn:last-child {
+      @include rtl-prop(
+        border-top-left-radius,
+        border-top-right-radius,
+        0,
+        nb-theme(form-control-border-radius),
+        true
+      );
+
+      @include rtl-prop(
+        border-bottom-left-radius,
+        border-bottom-right-radius,
+        0,
+        nb-theme(form-control-border-radius),
+        true
+      );
+    }
+
+    .dropdown.show .btn.dropdown-toggle {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .dropup.show .btn.dropdown-toggle {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
 
   .input-group-sm > .form-control {
