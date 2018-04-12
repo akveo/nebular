@@ -133,8 +133,7 @@
       }
     }
 
-    code {
-      //color: nb-theme(inline-code-color);
+    code.hljs {
       background: nb-theme(code-snippets-bg);
     }
 
