@@ -217,7 +217,7 @@
 
   .btn-divided-group {
     .btn:not(:first-child) {
-      margin-left: 0.5rem;
+      @include rtl-prop(margin-left, margin-right, 0.5rem, 0, true);
       border-radius: nb-theme(btn-border-radius);
     }
 
