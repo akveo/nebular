@@ -10,7 +10,10 @@ import 'style-loader!./app.themes.scss';
 
 @Component({
   selector: 'nb-app-root',
-  template: `<router-outlet></router-outlet>`,
+  template: `
+    <nb-layout-direction-toggle></nb-layout-direction-toggle>
+    <router-outlet></router-outlet>
+  `,
 })
 export class NbAppComponent {
 }

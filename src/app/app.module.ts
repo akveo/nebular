@@ -84,6 +84,7 @@ import { AuthGuard } from './auth-guard.service';
 import { RoleProvider } from './role.provider';
 import { NbDynamicToAddComponent } from './dynamic.component';
 import { NbPlaygroundModule } from '../playground/playground.module';
+import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -226,6 +227,7 @@ const NB_TEST_COMPONENTS = [
   ],
   declarations: [
     ...NB_TEST_COMPONENTS,
+    NbLayoutDirectionToggleComponent,
   ],
   entryComponents: [
     NbDynamicToAddComponent,
