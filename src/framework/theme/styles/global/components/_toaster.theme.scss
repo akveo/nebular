@@ -8,7 +8,7 @@
 
   .toast-close-button {
     position: absolute;
-    right: 0.15rem;
+    @include rtl-prop(right, left, 0.15rem, auto);
     top: 0.2rem;
     opacity: 1;
     background-color: nb-theme(toaster-btn-close-bg);
