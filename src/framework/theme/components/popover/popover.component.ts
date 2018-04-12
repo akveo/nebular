@@ -19,6 +19,16 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  * Popover container.
  * Renders provided content inside.
  *
+ * @inline-example(popover/popover-example.component)
+ * @inline-example(popover/popover-example.component.ts)
+ * @live-example(popover)
+ *
+ * @more-live-examples
+ * popover1
+ * popover2
+ * popover3
+ * popover4
+ *
  * @styles
  *
  * popover-fg
