@@ -166,6 +166,7 @@
 
       .ng2-smart-pagination {
         display: flex;
+        padding: 0;
 
         .page-item.disabled .page-link, .page-item.disabled .page-link:focus, .page-item.disabled .page-link:hover {
           background-color: nb-theme(smart-table-paging-hover);
@@ -182,7 +183,13 @@
 
         li {
           &:not(:last-child) {
-            border-right: 1px solid nb-theme(smart-table-separator);
+            @include rtl-prop(
+              border-right,
+              border-left,
+              1px solid nb-theme(smart-table-separator),
+              none,
+              true
+            );
           }
 
           a.page-link-prev, a.page-link-next {
@@ -204,15 +211,39 @@
 
           &:first-child {
             a, > span {
-              border-top-left-radius: nb-theme(smart-table-border-radius);
-              border-bottom-left-radius: nb-theme(smart-table-border-radius);
+              @include rtl-prop(
+                border-top-left-radius,
+                border-top-right-radius,
+                nb-theme(smart-table-border-radius),
+                0,
+                true
+              );
+              @include rtl-prop(
+                border-bottom-left-radius,
+                border-bottom-right-radius,
+                nb-theme(smart-table-border-radius),
+                0,
+                true
+              );
             }
           }
 
           &:last-child {
             a, > span {
-              border-top-right-radius: nb-theme(smart-table-border-radius);
-              border-bottom-right-radius: nb-theme(smart-table-border-radius);
+              @include rtl-prop(
+                border-top-right-radius,
+                border-top-left-radius,
+                nb-theme(smart-table-border-radius),
+                0,
+                true
+              );
+              @include rtl-prop(
+                border-bottom-right-radius,
+                border-bottom-left-radius,
+                nb-theme(smart-table-border-radius),
+                0,
+                true
+              );
             }
           }
 
