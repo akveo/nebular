@@ -103,7 +103,7 @@
 
     .btn:first-child {
       width: 90%;
-      text-align: left;
+      @include rtl(text-align, left, right, true);
     }
 
     .dropdown-toggle {
@@ -126,14 +126,15 @@
 
   .dropdown.btn-group.show, .dropup.btn-group.show {
     .btn:first-child {
-      border-bottom-left-radius: 0;
+      @include ltr-only(border-bottom-left-radius, 0, true);
+      @include rtl-only(border-bottom-right-radius, 0, true);
     }
   }
 
   .dropdown, .dropup {
     .dropdown-toggle {
       width: 100%;
-      text-align: left;
+      @include rtl(text-align, left, right, true);
       position: relative;
     }
 
@@ -294,7 +295,7 @@
     .dropdown-toggle::after {
       top: 50%;
       transform: translate(0, -50%);
-      right: 0.75rem;
+      @include rtl-prop(right, left, 0.75rem, auto, true);
     }
   }
 
