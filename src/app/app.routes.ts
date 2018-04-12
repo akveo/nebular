@@ -151,6 +151,10 @@ export const routes: Routes = [
         component: NbMenuItem2Component,
       },
       {
+        path: '12',
+        component: NbMenuItem1Component,
+      },
+      {
         path: '3',
         component: NbMenuItem3Component,
         children: [

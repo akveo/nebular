@@ -96,6 +96,19 @@ export class NbMenuItem4Component { }
             <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
+        <nb-card size="xxlarge">
+          <nb-card-body>
+            <nb-menu id="menu-second" tag="SecondMenu" [items]="menuItems1"></nb-menu>
+            <router-outlet></router-outlet>
+            <button class="btn btn-primary" id="addBtn" (click)="addMenuItem()">Add</button>
+            <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
+          </nb-card-body>
+        </nb-card>
+        <nb-card size="xxlarge">
+          <nb-card-body>
+            <nb-menu id="menu-third" tag="thirdMenu" [items]="menuItems2"></nb-menu>
+          </nb-card-body>
+        </nb-card>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -112,11 +125,56 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       link: '/menu/1',
       icon: 'nb-keypad',
       queryParams: { param: 1 },
+      fragment: '#fragment',
     },
     {
       title: 'Menu #2',
       link: '/menu/2',
       icon: 'nb-keypad',
+    },
+  ];
+  menuItems1 = [
+    {
+      title: 'Menu items with fragments ',
+      group: true,
+    },
+    {
+      title: 'Menu #1',
+      link: '/menu/1',
+      icon: 'nb-keypad',
+      pathMatch: 'partial',
+    },
+    {
+      title: 'Menu #12 + fragment',
+      link: '/menu/12',
+      fragment: 'fragment',
+      icon: 'nb-keypad',
+    },
+    {
+      title: 'Menu #3',
+      link: '/menu/3',
+      icon: 'nb-keypad',
+    },
+  ];
+  menuItems2 = [
+    {
+      title: 'Menu #1',
+    },
+    {
+      title: 'Menu #2',
+      children: [
+        {
+          title: 'Menu #2.1',
+        },
+        {
+          title: 'Hidden Submenu Item',
+          hidden: true,
+        },
+      ],
+    },
+    {
+      title: 'Hidden Menu Item',
+      hidden: true,
     },
   ];
 
@@ -168,6 +226,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
                   title: 'Menu #3.3.2',
                   link: '/menu/3/3/2',
                   queryParams: { param: 2 },
+                  fragment: '#fragment',
                   home: true,
                 },
                 {

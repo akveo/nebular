@@ -5,7 +5,7 @@
  */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 import {
   nbBuiltInJSThemesToken,
@@ -26,6 +26,9 @@ import {
   NbMediaBreakpointsService,
 } from './services/breakpoints.service';
 
+export function nbWindowFactory() {
+  return window;
+}
 
 @NgModule({
   imports: [
@@ -57,8 +60,8 @@ export class NbThemeModule {
         { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
         { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
         { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        { provide: NbWindow, useValue: window },
-        { provide: NbDocument, useValue: document },
+        { provide: NbWindow, useFactory: nbWindowFactory },
+        { provide: NbDocument, useExisting: DOCUMENT },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,

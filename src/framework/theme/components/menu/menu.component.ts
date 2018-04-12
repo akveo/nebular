@@ -5,20 +5,21 @@
  */
 
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    OnInit,
-    OnDestroy,
-    HostBinding,
-    ViewChildren,
-    QueryList,
-    ElementRef,
-    AfterViewInit,
-    PLATFORM_ID,
-    Inject,
-  } from '@angular/core';
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  AfterViewInit,
+  PLATFORM_ID,
+  Inject,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -56,6 +57,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   constructor(
     private menuService: NbMenuService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetection: ChangeDetectorRef,
   ) { }
 
   ngAfterViewInit() {
@@ -70,10 +72,9 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.updateMaxHeight());
 
-    setTimeout(() => {
-      this.updateSubmenuHeight();
-      this.updateMaxHeight();
-    });
+    this.updateSubmenuHeight();
+    this.updateMaxHeight();
+    this.changeDetection.detectChanges();
   }
 
   ngOnDestroy() {
@@ -115,6 +116,15 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  *
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
  *
+ * @example Basic usage
+ *
+ * ```
+ * // ...
+ * menuItems: NbMenuItem[] = [{ title: home, link: '/' }, { title: dashboard, link: 'dashboard' }];
+ * // ...
+ * <nb-menu [items]="menuItems"></nb-menu>
+ * ```
+ *
  * @styles
  *
  * menu-font-family:
@@ -154,14 +164,17 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   styleUrls: ['./menu.component.scss'],
   template: `
     <ul class="menu-items">
-      <li nbMenuItem *ngFor="let item of items"
-                      [menuItem]="item"
-                      [class.menu-group]="item.group"
-                      (hoverItem)="onHoverItem($event)"
-                      (toggleSubMenu)="onToggleSubMenu($event)"
-                      (selectItem)="onSelectItem($event)"
-                      (itemClick)="onItemClick($event)"
-                      class="menu-item"></li>
+      <ng-container *ngFor="let item of items">
+        <li nbMenuItem *ngIf="!item.hidden"
+            [menuItem]="item"
+            [class.menu-group]="item.group"
+            (hoverItem)="onHoverItem($event)"
+            (toggleSubMenu)="onToggleSubMenu($event)"
+            (selectItem)="onSelectItem($event)"
+            (itemClick)="onItemClick($event)"
+            class="menu-item">
+        </li>
+      </ng-container>
     </ul>
   `,
 })
@@ -293,7 +306,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (homeItem) {
       if (homeItem.link) {
-        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams });
+        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams, fragment: homeItem.fragment });
       }
 
       if (homeItem.url) {

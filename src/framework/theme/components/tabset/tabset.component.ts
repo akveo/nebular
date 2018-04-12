@@ -106,6 +106,7 @@ export class NbTabComponent {
  *    Tab content 2
  *  </nb-tab>
  * </nb-tabset>
+ * ```
  *
  * @styles
  *
