@@ -9,9 +9,7 @@ import { Component, Input } from '@angular/core';
         {{source?.name}}
       </h2>
       <ng-container class="description" *ngFor="let node of overview">
-        <p *ngIf="node.type === 'text'" ngdDescription class="description">
-          {{node.content}}
-        </p>
+        <ngd-markdown-block *ngIf="node.type === 'text'" [source]="node.content"></ngd-markdown-block>
         <ngd-live-example *ngIf="node.type === 'live-example'" [id]="node.content">
         </ngd-live-example>
         <ngd-inline-example *ngIf="node.type === 'inline-example'" [content]="node.content">

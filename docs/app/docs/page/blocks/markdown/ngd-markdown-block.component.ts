@@ -9,18 +9,18 @@ import * as hljs from 'highlight.js';
 })
 export class NgdMarkdownComponent implements OnInit {
 
-  @Input() source: any;
+  @Input() source: string;
 
   markdown: string;
 
   ngOnInit() {
-    const input = require(`raw-loader!../../../../articles/${this.source}`);
     const md = marked.setOptions({
-      highlight(code, lang = 'jsx') {
-        return hljs.highlightAuto(code, [lang]).value;
+      langPrefix: 'hljs ',
+      highlight(code) {
+        return hljs.highlightAuto(code, ['ts', 'html', 'scss', 'nginx']).value;
       },
     });
 
-    this.markdown = md.parse(input.trim());
+    this.markdown = md.parse(this.source.trim());
   }
 }

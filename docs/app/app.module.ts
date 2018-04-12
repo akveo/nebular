@@ -22,7 +22,7 @@ import { NgdHomepageComponent } from './homepage/homepage.component';
 import { DocsService } from './docs/docs.service';
 import { NgdDocsComponent } from './docs/docs.component';
 import { NgdPageComponent } from './docs/page/page.component';
-import { NgdMarkdownComponent } from './docs/page/blocks/ngd-markdown-block.component';
+import { NgdMarkdownComponent } from './docs/page/blocks/markdown/ngd-markdown-block.component';
 import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-props-block.component';
 import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
 import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
@@ -48,6 +48,7 @@ import { NgdInlineExampleComponent } from './docs/page/blocks/inline-example/ngd
 import { NgdTabbedExampleComponent } from './docs/page/blocks/inline-example/ngd-tabbed-example.component';
 import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-example.component';
 import { CodeLoaderService } from './docs/utils/code-loader.service';
+import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdown-file.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { CodeLoaderService } from './docs/utils/code-loader.service';
     NgdCodeBlockComponent,
     NgdTabbedExampleComponent,
     NgdExampleComponent,
+    NgdMarkdownFileComponent,
   ],
   providers: [
     IframeCommunicatorService,
