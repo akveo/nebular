@@ -1,19 +1,17 @@
 import { Component, Input } from '@angular/core';
-
-declare const Prism;
+import { SafeHtml } from '@angular/platform-browser';
+import * as hljs from 'highlight.js';
 
 @Component({
   selector: 'ngd-code-block',
   template: `
-    <pre><code [innerHTML]="code"></code></pre>
-  `,
+    <pre><code class="hljs" [innerHTML]="code"></code></pre>`,
 })
 export class NgdCodeBlockComponent {
-
-  code: string;
+  code: SafeHtml;
 
   @Input('code')
-  set codeValue(code: string) {
-    this.code = Prism.highlight(code.trim(), Prism.languages.jsx);
+  set codeValues(code: string) {
+    this.code = hljs.highlightAuto(code, ['ts', 'html', 'scss']).value;
   }
 }
