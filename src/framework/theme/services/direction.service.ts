@@ -17,7 +17,8 @@ export enum NbLayoutDirection {
 export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout direction');
 
 /**
- * Layout Direction Service. Allows you to listen to menu events, or to interact with a menu.
+ * Layout Direction Service.
+ * Allows to set or get layout direction and listen to it's changes
  */
 @Injectable()
 export class NbLayoutDirectionService {
