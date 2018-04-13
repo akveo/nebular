@@ -194,56 +194,35 @@
   }
 }
 
-@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value: null, $append: false) {
+@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value: null) {
   #{$ltr-prop}: $value;
 
-  @if $append == true {
-    @at-root #{selector-append('[dir=rtl]', &)} {
-      #{$ltr-prop}: $reset-value;
-      #{$rtl-prop}: $value;
-    }
-  } @else {
-    [dir=rtl] & {
-      #{$ltr-prop}: $reset-value;
-      #{$rtl-prop}: $value;
-    }
+  @at-root #{selector-append('[dir=rtl]', &)},
+  [dir=rtl] & {
+    #{$ltr-prop}: $reset-value;
+    #{$rtl-prop}: $value;
   }
 }
 
-@mixin rtl($prop, $ltr-value, $rtl-value, $append: false) {
+@mixin rtl($prop, $ltr-value, $rtl-value) {
   #{$prop}: $ltr-value;
 
-  @if $append == true {
-    @at-root #{selector-append('[dir=rtl]', &)} {
-      #{$prop}: $rtl-value;
-    }
-  } @else {
-    [dir=rtl] & {
-      #{$prop}: $rtl-value;
-    }
+  @at-root #{selector-append('[dir=rtl]', &)},
+  [dir=rtl] & {
+    #{$prop}: $rtl-value;
   }
 }
 
-@mixin rtl-only($prop, $value, $append: false) {
-  @if $append == true {
-    @at-root #{selector-append('[dir=rtl]', &)} {
-      #{$prop}: $value;
-    }
-  } @else {
-    [dir=rtl] & {
-      #{$prop}: $value;
-    }
+@mixin rtl-only($prop, $value) {
+  @at-root #{selector-append('[dir=rtl]', &)},
+  [dir=rtl] & {
+    #{$prop}: $value;
   }
 }
 
-@mixin ltr-only($prop, $value, $append: false) {
-  @if $append == true {
-    @at-root #{selector-append(':not([dir=rtl])', &)} {
-      #{$prop}: $value;
-    }
-  } @else {
-    :not([dir=rtl]) & {
-      #{$prop}: $value;
-    }
+@mixin ltr-only($prop, $value) {
+  @at-root #{selector-append(':not([dir=rtl])', &)},
+  :not([dir=rtl]) & {
+    #{$prop}: $value;
   }
 }

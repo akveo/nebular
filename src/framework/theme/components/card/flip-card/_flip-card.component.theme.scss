@@ -6,6 +6,6 @@
   }
 
   .flipcard-body .front-container {
-    @include rtl-prop(margin-right, margin-left, -100%, auto, true);
+    @include rtl-prop(margin-right, margin-left, -100%, auto);
   }
 }

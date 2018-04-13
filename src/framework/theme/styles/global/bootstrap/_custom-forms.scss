@@ -28,7 +28,7 @@
       border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);
       flex-shrink: 0;
       position: absolute;
-      @include rtl-prop(left, right, 0, auto, true);
+      @include rtl-prop(left, right, 0, auto);
       display: flex;
       justify-content: center;
       align-items: center;

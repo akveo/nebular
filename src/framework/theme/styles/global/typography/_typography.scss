@@ -159,8 +159,7 @@
       border-left,
       border-right,
       0.25rem solid nb-theme(color-fg-highlight),
-      0,
-      true
+      0
     );
   }
   .blockquote-reverse {
@@ -171,8 +170,7 @@
       border-right,
       border-left,
       0.25rem solid nb-theme(color-fg-highlight),
-      0,
-      true
+      0
     );
   }
   .blockquote-footer {
@@ -210,7 +208,7 @@
   }
 
   ol,ul {
-    @include rtl-prop(padding-left, padding-right, 1.25rem, 0, true);
+    @include rtl-prop(padding-left, padding-right, 1.25rem, 0);
   }
 
   .alert {

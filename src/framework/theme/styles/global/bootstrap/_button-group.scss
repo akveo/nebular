@@ -98,15 +98,13 @@
         border-top-left-radius,
         border-top-right-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
       @include rtl-prop(
         border-bottom-left-radius,
         border-bottom-right-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
     &:last-child {
@@ -114,15 +112,13 @@
         border-top-right-radius,
         border-top-left-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
       @include rtl-prop(
         border-bottom-right-radius,
         border-bottom-left-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
   }
@@ -133,8 +129,7 @@
         border-top-left-radius,
         border-top-right-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
     & > .btn:last-of-type.dropdown-toggle {
@@ -142,8 +137,7 @@
         border-top-right-radius,
         border-top-left-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
 
@@ -153,8 +147,7 @@
           border-bottom-left-radius,
           border-bottom-right-radius,
           nb-theme(btn-border-radius),
-          0,
-          true
+          0
         );
       }
       & > .btn:last-of-type.dropdown-toggle {
@@ -162,8 +155,7 @@
           border-bottom-right-radius,
           border-bottom-left-radius,
           nb-theme(btn-border-radius),
-          0,
-          true
+          0
         );
       }
     }
@@ -180,8 +172,7 @@
         border-bottom-left-radius,
         border-bottom-right-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
     & > .btn:last-of-type.dropdown-toggle {
@@ -189,8 +180,7 @@
         border-bottom-right-radius,
         border-bottom-left-radius,
         nb-theme(btn-border-radius),
-        0,
-        true
+        0
       );
     }
 
@@ -200,8 +190,7 @@
           border-top-left-radius,
           border-top-right-radius,
           nb-theme(btn-border-radius),
-          0,
-          true
+          0
         );
       }
       & > .btn:last-of-type.dropdown-toggle {
@@ -209,8 +198,7 @@
           border-top-right-radius,
           border-top-left-radius,
           nb-theme(btn-border-radius),
-          0,
-          true
+          0
         );
       }
     }
@@ -313,7 +301,7 @@
 
   .btn-divided-group {
     .btn:not(:first-child) {
-      @include rtl-prop(margin-left, margin-right, 0.5rem, 0, true);
+      @include rtl-prop(margin-left, margin-right, 0.5rem, 0);
       border-radius: nb-theme(btn-border-radius);
     }
 
