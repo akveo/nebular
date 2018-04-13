@@ -49,7 +49,7 @@
   }
 
   .input-group {
-    .form-control:first-child,
+    .form-control:first-child:not(:only-child),
     .input-group-addon:first-child,
     .input-group-prepend .btn:first-child,
     .input-group-btn .btn:first-child {
@@ -67,7 +67,7 @@
         nb-theme(form-control-border-radius)
       );
     }
-    .form-control:last-child,
+    .form-control:last-child:not(:only-child),
     .input-group-addon:last-child,
     .input-group-append .btn:last-child,
     .input-group-btn .btn:last-child {
