@@ -35,6 +35,16 @@
       opacity: 1 !important;
     }
   }
+  // have to use id selector for specifity
+  /* stylelint-disable-next-line selector-max-id */
+  #toast-container > div.toast {
+    @include rtl-only(padding-left, 15px);
+    @include rtl-only(padding-right, 50px);
+  }
+  .toaster-icon {
+    @include rtl-only(right, 0);
+    @include rtl-only(background-position-x, 0);
+  }
   .toast-success {
     background-color: nb-theme(toaster-success);
     color: nb-theme(toaster-fg) !important;
