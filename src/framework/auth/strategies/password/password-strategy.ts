@@ -14,7 +14,7 @@ import { catchError } from 'rxjs/operators/catchError';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
-import { passwordStrategyOptions } from './password-strategy-options';
+import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -132,7 +132,7 @@ import { passwordStrategyOptions } from './password-strategy-options';
 @Injectable()
 export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = passwordStrategyOptions;
+  protected defaultOptions: NbPasswordAuthStrategyOptions = passwordStrategyOptions;
 
   constructor(protected http: HttpClient, private route: ActivatedRoute) {
     super();
