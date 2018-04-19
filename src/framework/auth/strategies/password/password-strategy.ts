@@ -14,6 +14,7 @@ import { catchError } from 'rxjs/operators/catchError';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
 
 /**
@@ -132,9 +133,9 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
 @Injectable()
 export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = passwordStrategyOptions;
+  protected defaultOptions: NbPasswordAuthStrategyOptions = passwordStrategyOptions;
 
-  static setup(options: NbPasswordAuthStrategyOptions) {
+  static setup(options: NbPasswordAuthStrategyOptions): [NbAuthStrategyClass, NbPasswordAuthStrategyOptions] {
     return [NbPasswordAuthStrategy, options];
   }
 

@@ -33,13 +33,15 @@ import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
-  return options.strategies
-    .map(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
+  const strategies = [];
+  options.strategies
+    .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
       const strategy: NbAuthStrategy = injector.get(strategyClass);
       strategy.setOptions(strategyOptions);
 
-      return strategy;
+      strategies.push(strategy);
     });
+  return strategies;
 }
 
 export function nbOptionsFactory(options) {
