@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
 import { filter } from 'rxjs/operators/filter';
 import { map } from 'rxjs/operators/map';
-import { NbWindow } from '@nebular/theme';
+import { NB_WINDOW } from '@nebular/theme';
 
 @Injectable()
 export class IframeCommunicatorService {
 
-  constructor(private window: NbWindow) {
+  constructor(@Inject(NB_WINDOW) private window) {
   }
 
   public send(payload: any, target: Window = this.window.parent) {
