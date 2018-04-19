@@ -1,19 +1,19 @@
-## A provider
+## A Strategy
 
-In Nebular terms `auth provider` is a class containing authentication logic specific for some authentication flow (email&password, OAuth, etc). 
+In Nebular terms `auth strategy` is a class containing authentication logic specific for some authentication flow (email&password, OAuth2, etc). 
 It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
 Currently, there are two Auth Providers available out of the box:
 
-Two auth providers:
-  - `NbDummyAuthProvider` - simple provider for testing purposes, could be used to simulate backend responses while API is in the development;
-  - `NbEmailPassAuthProvider` - the most common email/password authentication strategy.
+Two auth Strategies:
+  - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
+  - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
   
-Each provider has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
+Each Strategy has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
 <hr class="section-end">
   
 ## Configuration
 
-As an example, let's configure API endpoints for the `NbEmailPassAuthProvider`. The provider is configured by default, please take a look at the [default configuration values](#/docs/auth/nbemailpassauthprovider) if you need any custom behaviour.
+As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](#/docs/auth/NbPasswordAuthStrategy) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -24,10 +24,10 @@ We assume you already have the Auth module installed inside of your `*.module.ts
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
               ...
              },
            },
@@ -38,7 +38,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 
-Now, let's add API endpoints. According to the [NbEmailPassAuthProvider documentation](#/docs/auth/nbemailpassauthprovider), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](#/docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 {
@@ -89,7 +89,7 @@ And configure the endpoints, considering that the final endpoint will consist of
 }
 ```
 
-Finally, let's presume that unlike in the default provider settings, our API accepts only `HTTP POST`, so let's fix that too: 
+Finally, let's presume that unlike in the default strategy settings, our API accepts only `HTTP POST`, so let's fix that too: 
 
 ```typescript
 {
@@ -120,7 +120,7 @@ Finally, let's presume that unlike in the default provider settings, our API acc
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    No need to list all available configurations there. Your settings will be merged with default provider settings accordingly.
+    No need to list all available configurations there. Your settings will be merged with default strategy settings accordingly.
   </div>
 </div>
 

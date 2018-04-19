@@ -1,20 +1,22 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { NbAuthResult } from '../services/auth-result';
-
+import { NbAuthStrategyOptions } from './strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
-export abstract class NbAbstractAuthProvider {
+export abstract class NbAuthStrategy {
 
-  protected defaultConfig: any = {};
-  protected config: any = {};
+  protected defaultOptions: NbAuthStrategyOptions;
+  protected options: NbAuthStrategyOptions;
 
-  setConfig(config: any): void {
-    this.config = deepExtend({}, this.defaultConfig, config);
+  // we should keep this any and validation should be done in `register` method instead
+  // otherwise it won't be possible to pass an empty object
+  setOptions(options: any): void {
+    this.options = deepExtend({}, this.defaultOptions, options);
   }
 
-  getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+  getOption(key: string): any {
+    return getDeepFromObject(this.options, key, null);
   }
 
   abstract authenticate(data?: any): Observable<NbAuthResult>;
@@ -33,9 +35,5 @@ export abstract class NbAbstractAuthProvider {
 
   protected createSuccessResponse(data?: any): HttpResponse<Object> {
     return new HttpResponse<Object>({ body: {}, status: 200 });
-  }
-
-  protected getJsonSafe(res: HttpResponse<Object>): any {
-    return res.body;
   }
 }

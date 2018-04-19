@@ -1,7 +1,7 @@
 ## Receiving user token after login/registration
 
 At this step, we assume that Nebular Auth module is up and running, 
-you have successfully configured an auth provider and adjusted auth look & fell accordingly with your requirements.
+you have successfully configured an auth strategy and adjusted auth look & fell accordingly with your requirements.
 
 It's time to get a user token after successful authentication to be able to communicate with the server and, for instance, show a username in the header of the application.
 Let's assume that your backend returns a JWT token so that we can use the token payload to extract a user info out of it.
@@ -42,10 +42,10 @@ We'll assume that our API returns a token as just `{token: 'some-jwt-token'}` no
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
+         strategies: {
            email: {
-             service: NbEmailPassAuthProvider,
-             config: {
+             service: NbPasswordAuthStrategy,
+             options: {
                ...
                 
                token: {

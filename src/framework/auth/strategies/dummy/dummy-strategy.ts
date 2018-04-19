@@ -4,58 +4,71 @@ import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators/delay';
 
-import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { NbAuthResult } from '../services/auth-result';
+import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthResult } from '../../services/auth-result';
+import { NbDummyAuthStrategyOptions, dummyStrategyOptions } from './dummy-strategy-options';
 
-export interface NbDummyAuthProviderConfig {
-  delay?: number;
-  alwaysFail?: boolean;
-}
 
+/**
+ * Dummy auth strategy. Could be useful for auth setup when backend is not available yet.
+ *
+ * @example
+ *
+ * Strategy settings.
+ *
+ * ```
+ * export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
+ *   name = 'dummy';
+ *   token = {
+ *     class: NbAuthSimpleToken,
+ *   };
+ *   delay? = 1000;
+ *   alwaysFail? = false;
+ * }
+ * ```
+ */
 @Injectable()
-export class NbDummyAuthProvider extends NbAbstractAuthProvider {
+export class NbDummyAuthStrategy extends NbAuthStrategy {
 
-  protected defaultConfig: NbDummyAuthProviderConfig = {
-    delay: 1000,
-  };
+  protected defaultOptions: NbDummyAuthStrategyOptions = dummyStrategyOptions;
 
   authenticate(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
   register(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
   resetPassword(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
   logout(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
   protected createDummyResult(data?: any): NbAuthResult {
-    if (this.getConfigValue('alwaysFail')) {
+    if (this.getOption('alwaysFail')) {
       // TODO we dont call tokenService clear during logout in case result is not success
       return new NbAuthResult(false,
         this.createFailResponse(data),
