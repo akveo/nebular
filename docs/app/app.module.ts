@@ -49,6 +49,7 @@ import { NgdTabbedExampleComponent } from './docs/page/blocks/inline-example/ngd
 import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-example.component';
 import { CodeLoaderService } from './docs/utils/code-loader.service';
 import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdown-file.component';
+import { NgdHighlightService } from './docs/utils/highlight.service';
 
 @NgModule({
   imports: [
@@ -95,6 +96,7 @@ import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdo
   ],
   providers: [
     IframeCommunicatorService,
+    NgdHighlightService,
     CodeLoaderService,
     BlockHelperService,
     DocsService,

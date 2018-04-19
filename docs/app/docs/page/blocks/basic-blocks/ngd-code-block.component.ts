@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import * as hljs from 'highlight.js';
+import { NgdHighlightService } from '../../../utils/highlight.service';
 
 @Component({
   selector: 'ngd-code-block',
@@ -10,8 +11,11 @@ import * as hljs from 'highlight.js';
 export class NgdCodeBlockComponent {
   code: SafeHtml;
 
+  constructor(private highlightService: NgdHighlightService) {
+  }
+
   @Input('code')
   set codeValues(code: string) {
-    this.code = hljs.highlightAuto(code, ['ts', 'html', 'scss']).value;
+    this.code = this.highlightService.highlight(code);
   }
 }
