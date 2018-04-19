@@ -18,7 +18,8 @@ Let's assume that we need to setup email & password authentication based on Nebu
 
 `import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';`
 
-3) Now, let's configure the module by specifying available strategies, in your case we add `NbPasswordAuthStrategy`:
+3) Now, let's configure the module by specifying available strategies, in your case we add `NbPasswordAuthStrategy`.
+To add a strategy we need to call static `setup` method to pass a list of options:
 
 ```typescript
 
@@ -27,14 +28,11 @@ Let's assume that we need to setup email & password authentication based on Nebu
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-              ...
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
          forms: {},
        }), 
   ],
