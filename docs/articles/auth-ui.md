@@ -21,14 +21,11 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-              ...
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
          forms: {},
        }), 
   ],
@@ -122,44 +119,41 @@ So, for instance, to remove the redirectDelay setting and disable the success me
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-              ...
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {
+           login: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
              },
            },
+           register: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           requestPassword: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           resetPassword: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           logout: {
+             redirectDelay: 0,
+           },
          },
-         forms: {
-          login: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          register: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          requestPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          resetPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          logout: {
-            redirectDelay: 0,
-          },
-        },
-     }), 
+       }), 
   ],
 });
 
@@ -181,24 +175,21 @@ const formSetting: any = {
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-              ...
-             },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {
+           login: formSetting,
+           register: formSetting,
+           requestPassword: formSetting,
+           resetPassword: formSetting,
+           logout: {
+             redirectDelay: 0,
            },
          },
-         forms: {
-          login: formSetting,
-          register: formSetting,
-          requestPassword: formSetting,
-          resetPassword: formSetting,
-          logout: {
-            redirectDelay: 0,
-          },
-        },
-     }), 
+       }), 
   ],
 });
 

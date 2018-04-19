@@ -37,27 +37,27 @@ This line tells Angular to inject `NbAuthJWTToken` (instead of the default `NbAu
 We'll assume that our API returns a token as just `{token: 'some-jwt-token'}` not wrapping your response in the `data` property, let's tell that to Nebular:
 
 ```typescript
+
 @NgModule({
   imports: [
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-               ...
-                
-               token: {
-                 key: 'token', // this parameter tells Nebular where to look for the token
-               },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+             
+             token: {
+               key: 'token', // this parameter tells Nebular where to look for the token
              },
-           },
-         },
+           }),
+         ],
+         forms: {},
        }), 
   ],
 });
-```  
+
+``` 
 
 
 3) Okay, let's use the token to extract a payload and show a username in the header. Open your `header.component.ts` and import the following services:

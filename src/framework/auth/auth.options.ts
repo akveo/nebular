@@ -1,13 +1,14 @@
 import { InjectionToken } from '@angular/core';
 import { NbAuthToken } from './services';
+import { NbAuthStrategy, NbAuthStrategyOptions } from './strategies';
+
+export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;
+
+export type NbAuthStrategies  = [NbAuthStrategyClass, NbAuthStrategyOptions][];
 
 export interface NbAuthOptions {
   forms?: any;
-  strategies?: any;
-}
-
-export interface NbAuthStrategies {
-  [key: string]: any;
+  strategies?: NbAuthStrategies;
 }
 
 export interface NbAuthSocialLink {
@@ -20,7 +21,8 @@ export interface NbAuthSocialLink {
 
 const socialLinks: NbAuthSocialLink[] = [];
 
-export const defaultOptions: any = {
+export const defaultAuthOptions: any = {
+  strategies: [],
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user

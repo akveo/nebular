@@ -7,10 +7,10 @@
 import { TestBed } from '@angular/core/testing';
 import { Injector } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS } from '../auth.options';
+import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS, NB_AUTH_STRATEGIES } from '../auth.options';
 import { NbAuthService } from './auth.service';
 import { NbDummyAuthStrategy } from '../strategies';
-import { nbAuthServiceFactory, nbOptionsFactory } from '../auth.module';
+import { nbStrategiesFactory, nbOptionsFactory } from '../auth.module';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
@@ -82,26 +82,21 @@ describe('auth-service', () => {
                 redirectDelay: 3000,
               },
             },
-            strategies: {
-              dummy: {
-                service: NbDummyAuthStrategy,
-                options: {
-                  alwaysFail: true,
-                  delay: 1000,
-                },
-              },
-            },
+            strategies: [
+              NbDummyAuthStrategy.setup({
+                name: 'dummy',
+
+                alwaysFail: true,
+                delay: 1000,
+              }),
+            ],
           },
         },
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
+        { provide: NB_AUTH_STRATEGIES, useFactory: nbStrategiesFactory, deps: [NB_AUTH_OPTIONS, Injector] },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
-
         NbTokenService,
-        {
-          provide: NbAuthService,
-          useFactory: nbAuthServiceFactory,
-          deps: [NB_AUTH_OPTIONS, NbTokenService, Injector],
-        },
+        NbAuthService,
         NbDummyAuthStrategy,
       ],
     });

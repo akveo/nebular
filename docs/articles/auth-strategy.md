@@ -24,14 +24,12 @@ We assume you already have the Auth module installed inside of your `*.module.ts
    // ...
     
    NbAuthModule.forRoot({
-         strategies: {
-           email: {
-             service: NbPasswordAuthStrategy,
-             options: {
-              ...
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {},
        }), 
   ],
 });

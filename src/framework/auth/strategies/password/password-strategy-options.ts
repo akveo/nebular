@@ -5,7 +5,7 @@
  */
 
 import { NbAuthSimpleToken } from '../../services';
-import { NbAuthStrategyOptions } from '../strategy-options';
+import { NbAuthStrategyOptions } from '../auth-strategy-options';
 import { getDeepFromObject } from '../../helpers';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
@@ -27,7 +27,7 @@ export interface NbPasswordStrategyResetOptions extends NbPasswordStrategyModule
 }
 
 export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
-  name = 'email';
+  name: string;
   baseEndpoint? = '/api/auth/';
   login?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
@@ -85,7 +85,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully logged out.'],
   };
-  token = {
+  token? = {
     key: 'data.token',
     getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
       res.body,
