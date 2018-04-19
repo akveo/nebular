@@ -30,6 +30,18 @@ import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
+ * @example If you want to handle context menu clicks you have to pass nbContextMenuTag
+ * param and subscribe on NbMenuService. Because NbContextMenu renders plain NbMenu inside, so
+ * you have to work with it like with plain NbMenu:
+ *
+ * ```
+ * <button [nbContextMenu]="items" nbContextMenuTag="my-context-menu"></button>
+ * ...
+ * nbMenuService.onItemClick()
+ *   .pipe(filter(({ tag }) => tag === 'my-context-menu'))
+ *   .subscribe(...handle it somehow)
+ * ```
+ *
  * @example Context menu has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
