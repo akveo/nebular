@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthResult } from '../../services/auth-result';
-import { dummyStrategyOptions } from './dummy-strategy-options';
+import { NbDummyAuthStrategyOptions, dummyStrategyOptions } from './dummy-strategy-options';
 
 
 /**
@@ -30,6 +30,10 @@ import { dummyStrategyOptions } from './dummy-strategy-options';
 export class NbDummyAuthStrategy extends NbAuthStrategy {
 
   protected defaultOptions = dummyStrategyOptions;
+
+  static setup(options: NbDummyAuthStrategyOptions) {
+    return [NbDummyAuthStrategy, options];
+  }
 
   authenticate(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))

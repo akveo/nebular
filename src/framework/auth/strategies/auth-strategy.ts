@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NbAuthResult } from '../services/auth-result';
-import { NbAuthStrategyOptions } from './strategy-options';
+import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAuthStrategy {
@@ -17,6 +17,10 @@ export abstract class NbAuthStrategy {
 
   getOption(key: string): any {
     return getDeepFromObject(this.options, key, null);
+  }
+
+  getName(): string {
+    return this.getOption('name');
   }
 
   abstract authenticate(data?: any): Observable<NbAuthResult>;
