@@ -288,7 +288,7 @@ export const routes: Routes = [
       },
       {
         path: 'login',
-        component: NgxRegisterComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'register',
