@@ -112,9 +112,11 @@ $nb-themes-export: () !global;
   $themes-to-install: get-enabled-themes();
 
   @each $theme-name, $theme in $themes-to-install {
-    :host-context(#{$selector-prefix}.nb-theme-#{$theme-name}) {
-      $theme: set-global-theme-vars($theme, $theme-name);
-      @content;
+    .nb-theme-#{$theme-name} {
+      :host {
+        $theme: set-global-theme-vars($theme, $theme-name);
+        @content;
+      }
     }
   }
 }
