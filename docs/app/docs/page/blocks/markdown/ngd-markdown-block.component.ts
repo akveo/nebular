@@ -19,9 +19,7 @@ export class NgdMarkdownComponent implements OnInit {
   ngOnInit() {
     const md = marked.setOptions({
       langPrefix: 'hljs ',
-      highlight(code) {
-        return this.highlightService.highlight(code);
-      },
+      highlight: (code) => this.highlightService.highlight(code),
     });
 
     this.markdown = md.parse(this.source.trim());

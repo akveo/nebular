@@ -15,6 +15,7 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -50,6 +51,7 @@ import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-examp
 import { CodeLoaderService } from './docs/utils/code-loader.service';
 import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdown-file.component';
 import { NgdHighlightService } from './docs/utils/highlight.service';
+import { NgdStackedExampleComponent } from './docs/page/blocks/stacked-example/stacked-examples.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,7 @@ import { NgdHighlightService } from './docs/utils/highlight.service';
     SwiperModule,
     NbLayoutModule,
     NbTabsetModule,
+    NbCheckboxModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: 'docs' }),
     NbSidebarModule.forRoot(),
@@ -92,6 +95,7 @@ import { NgdHighlightService } from './docs/utils/highlight.service';
     NgdCodeBlockComponent,
     NgdTabbedExampleComponent,
     NgdExampleComponent,
+    NgdStackedExampleComponent,
     NgdMarkdownFileComponent,
   ],
   providers: [

@@ -14,6 +14,8 @@ import { Component, Input } from '@angular/core';
         </ngd-live-example>
         <ngd-inline-example *ngIf="node.type === 'inline-example'" [content]="node.content">
         </ngd-inline-example>
+        <ngd-stacked-example *ngIf="node.type === 'example'" [content]="node.content">
+        </ngd-stacked-example>
       </ng-container>
     </div>
   `,

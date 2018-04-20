@@ -15,7 +15,11 @@ task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
   docs.classes.forEach(cls => {
     cls.overview = cls.overview.map(tag => {
       if (isTabbed(tag)) {
-        return unfoldExample(tag);
+        return unfoldTabbed(tag);
+      }
+
+      if (isStacked(tag)) {
+        return unfoldStacked(tag);
       }
 
       return tag;
@@ -35,7 +39,12 @@ function isTabbed(tag) {
     && !EXTENSIONS.some(extension => tag.content.path.endsWith(extension))
 }
 
-function unfoldExample(tag) {
+function isStacked(tag) {
+  return tag.type === 'example'
+    && !EXTENSIONS.some(extension => tag.content.endsWith(extension))
+}
+
+function unfoldTabbed(tag) {
   const content: any = EXTENSIONS.reduce((acc: any, extension) => {
     const file = `${tag.content.path}.${extension}`;
 
@@ -47,6 +56,20 @@ function unfoldExample(tag) {
   }, {});
 
   return { ...tag, content }
+}
+
+function unfoldStacked(tag) {
+  const tabs = EXTENSIONS.reduce((acc: any, extension) => {
+    const file = `${tag.content}.${extension}`;
+
+    if (isFileExists(file)) {
+      acc[extension] = file;
+    }
+
+    return acc;
+  }, {});
+
+  return {...tag, content: { tabs, id: tag.content }}
 }
 
 function validateInlineExamples(cls) {

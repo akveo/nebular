@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import * as hljs from 'highlight.js';
 import { NgdHighlightService } from '../../../utils/highlight.service';
 
 @Component({
