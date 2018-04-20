@@ -16,12 +16,8 @@
       padding: 0 nb-theme(actions-padding);
 
       &:first-child {
-        @include rtl-prop(
-          border-left,
-          border-right,
-          none!important,
-          1px solid nb-theme(actions-separator)
-        );
+        @include nb-ltr(border-left, none!important);
+        @include nb-rtl(border-right, none!important);
       }
 
       a.icon-container {
@@ -35,12 +31,9 @@
         font-size: nb-theme(actions-size-small);
       }
 
-      @include rtl-prop(
-        border-left,
-        border-right,
-        1px solid nb-theme(actions-separator),
-        none
-      );
+      @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
+      @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
+
       background: transparent;
     }
 
@@ -50,12 +43,8 @@
           color: nb-theme(actions-bg);
         }
 
-        @include rtl-prop(
-          border-left,
-          border-right,
-          1px solid nb-theme(actions-separator),
-          none
-        );
+        @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
+        @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
       }
     }
 

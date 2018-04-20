@@ -28,15 +28,22 @@
   }
 
   &.right {
-    @include rtl(order, 4, 0);
+    @include nb-ltr(order, 4);
+    @include nb-rtl(order, 0);
     margin-right: 0;
     margin-left: auto;
   }
 
   &.end {
     order: 4;
-    @include rtl-prop(margin-right, margin-left, 0, auto);
-    @include rtl-prop(margin-left, margin-right, auto, 0);
+    @include nb-ltr() {
+      margin-right: 0;
+      margin-left: auto;
+    };
+    @include nb-rtl() {
+      margin-left: 0;
+      margin-right: auto;
+    };
   }
 
   // TODO: in this case this will won't work when header is not fixed and sidebar is
@@ -55,10 +62,12 @@
   }
 
   &.fixed.start {
-    @include rtl-prop(left, right, 0, auto);
+    @include nb-ltr(left, 0);
+    @include nb-rtl(right, 0);
   }
   &.fixed.end {
-    @include rtl-prop(right, left, 0, auto);
+    @include nb-ltr(right, 0);
+    @include nb-rtl(left, 0);
   }
 
   /deep/ nb-sidebar-footer {

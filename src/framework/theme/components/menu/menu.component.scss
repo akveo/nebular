@@ -24,7 +24,7 @@
 
     .menu-title {
       flex: 1;
-      @include rtl-only(text-align, right);
+      @include nb-rtl(text-align, right);
     }
   }
 }

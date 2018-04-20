@@ -8,7 +8,8 @@
 
 :host {
 
-  @include rtl(text-align, left, right);
+  @include nb-ltr(text-align, left);
+  @include nb-rtl(text-align, right);
 
   -webkit-font-smoothing: antialiased;
 
@@ -42,10 +43,12 @@
 
     /deep/ nb-sidebar {
       &.left {
-        @include rtl(order, 0, 2);
+        @include nb-ltr(order, 0);
+        @include nb-rtl(order, 2);
       }
       &.right {
-        @include rtl(order, 2, 0);
+        @include nb-ltr(order, 2);
+        @include nb-rtl(order, 0);
       }
       &.end {
         order: 2;
@@ -85,7 +88,8 @@
           flex: 1 0;
           min-width: 0; // fix for flexbug https://github.com/philipwalton/flexbugs#flexbug-1
           &.left {
-            @include rtl(order, 0, 2);
+            @include nb-ltr(order, 0);
+            @include nb-rtl(order, 2);
           }
           &.start {
             order: 0;

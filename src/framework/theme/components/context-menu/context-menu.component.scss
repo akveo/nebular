@@ -35,15 +35,17 @@
 
         .menu-title {
           padding: 0.375rem 3rem;
-          @include rtl-only(text-align, right);
+          @include nb-rtl(text-align, right);
         }
 
         .menu-icon ~ .menu-title {
-          @include rtl-prop(padding-left, padding-right, 0, 3rem);
+          @include nb-ltr(padding-left, 0);
+          @include nb-rtl(padding-right, 0);
         }
 
         .menu-icon:first-child {
-          @include rtl-prop(padding-left, padding-right, 1rem, 3rem);
+          @include nb-ltr(padding-left, 1rem);
+          @include nb-rtl(padding-right, 1rem);
         }
       }
     }

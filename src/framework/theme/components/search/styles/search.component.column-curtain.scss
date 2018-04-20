@@ -43,7 +43,8 @@
     button {
       position: absolute;
       top: 2rem;
-      @include rtl-prop(right, left, 2rem, auto);
+      @include nb-ltr(right, 2rem);
+      @include nb-rtl(left, 2rem);
       font-size: 2.5rem;
       opacity: 0;
       transition: opacity 0.5s;

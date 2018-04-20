@@ -155,23 +155,15 @@
     font-size: nb-theme(font-size);
     color: nb-theme(color-fg-text);
 
-    @include rtl-prop(
-      border-left,
-      border-right,
-      0.25rem solid nb-theme(color-fg-highlight),
-      0
-    );
+    @include nb-ltr(border-left, 0.25rem solid nb-theme(color-fg-highlight));
+    @include nb-rtl(border-right, 0.25rem solid nb-theme(color-fg-highlight));
   }
   .blockquote-reverse {
     font-size: nb-theme(font-size);
     color: nb-theme(color-fg-text);
 
-    @include rtl-prop(
-      border-right,
-      border-left,
-      0.25rem solid nb-theme(color-fg-highlight),
-      0
-    );
+    @include nb-ltr(border-right, 0.25rem solid nb-theme(color-fg-highlight));
+    @include nb-rtl(border-left, 0.25rem solid nb-theme(color-fg-highlight));
   }
   .blockquote-footer {
     color: nb-theme(color-fg);
@@ -208,7 +200,8 @@
   }
 
   ol,ul {
-    @include rtl-prop(padding-left, padding-right, 1.25rem, 0);
+    @include nb-ltr(padding-left, 1.25rem);
+    @include nb-rtl(padding-right, 1.25rem);
   }
 
   .alert {

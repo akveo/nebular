@@ -38,10 +38,11 @@
 
   .user-name,
   .user-title {
-    @include rtl-only(text-align, right);
+    @include nb-rtl(text-align, right);
   }
 
   .info-container {
-    @include rtl-prop(margin-left, margin-right, 0.5rem, 0);
+    @include nb-ltr(margin-left, 0.5rem);
+    @include nb-rtl(margin-right, 0.5rem);
   }
 }

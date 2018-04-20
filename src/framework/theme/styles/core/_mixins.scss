@@ -194,35 +194,42 @@
   }
 }
 
-@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value: null) {
-  #{$ltr-prop}: $value;
+@mixin _prepend-with-selector($selector, $prop: null, $value: null) {
+  /*
+    @at-root used to place result of concatenation of two selectors ($selector with '&')
+    at a very top level, i.e. do not nest inside selector where mixin was called.
 
-  @at-root #{selector-append('[dir=rtl]', &)},
-  [dir=rtl] & {
-    #{$ltr-prop}: $reset-value;
-    #{$rtl-prop}: $value;
+    consider next example:
+    :host {
+      @include _prepend-with-selector('.prepend-class') {
+        ...
+      }
+    }
+
+    result without @at-root
+    :host .prepend-class:host
+
+    result with @at-root
+    .prepend-class:host
+  */
+  @at-root #{selector-append($selector, &)},
+  #{$selector} & {
+    @if $prop != null {
+      #{$prop}: $value;
+    }
+
+    @content;
   }
 }
 
-@mixin rtl($prop, $ltr-value, $rtl-value) {
-  #{$prop}: $ltr-value;
-
-  @at-root #{selector-append('[dir=rtl]', &)},
-  [dir=rtl] & {
-    #{$prop}: $rtl-value;
+@mixin nb-ltr($prop: null, $value: null) {
+  @include _prepend-with-selector(':not([dir=rtl])', $prop, $value) {
+    @content;
   }
 }
 
-@mixin rtl-only($prop, $value) {
-  @at-root #{selector-append('[dir=rtl]', &)},
-  [dir=rtl] & {
-    #{$prop}: $value;
-  }
-}
-
-@mixin ltr-only($prop, $value) {
-  @at-root #{selector-append(':not([dir=rtl])', &)},
-  :not([dir=rtl]) & {
-    #{$prop}: $value;
-  }
+@mixin nb-rtl($prop: null, $value: null) {
+  @include _prepend-with-selector('[dir=rtl]', $prop, $value) {
+    @content;
+  };
 }

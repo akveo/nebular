@@ -32,7 +32,7 @@
 
     @include nb-headings();
 
-    @include rtl-only(flex-flow, row-reverse);
+    @include nb-rtl(flex-flow, row-reverse);
 
     .close {
       text-shadow: none;

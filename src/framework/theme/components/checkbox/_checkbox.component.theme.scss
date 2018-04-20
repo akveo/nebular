@@ -35,7 +35,8 @@
 // locally used mixin
 @mixin description-style {
   color: nb-theme(color-fg-heading);
-  @include rtl-prop(padding-left, padding-right, 0.25rem, 0);
+  @include nb-ltr(padding-left, 0.25rem);
+  @include nb-rtl(padding-right, 0.25rem);
 }
 
 @mixin nb-checkbox-theme() {
@@ -60,7 +61,8 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      @include rtl-prop(left, right, 0, auto);
+      @include nb-ltr(left, 0);
+      @include nb-rtl(right, 0);
       flex: none;
       display: flex;
       justify-content: center;

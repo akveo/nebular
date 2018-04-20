@@ -19,7 +19,8 @@
     padding: 0.25rem 1rem;
     color: nb-theme(form-control-placeholder-color);
 
-    @include rtl-prop(border-right, border-left, none, $form-control-border);
+    @include nb-ltr(border-right, none);
+    @include nb-rtl(border-left, none);
   }
 
   .input-group-addon {
@@ -53,37 +54,27 @@
     .input-group-addon:first-child,
     .input-group-prepend .btn:first-child,
     .input-group-btn .btn:first-child {
-      @include rtl-prop(
-        border-top-right-radius,
-        border-top-left-radius,
-        0,
-        nb-theme(form-control-border-radius)
-      );
-
-      @include rtl-prop(
-        border-bottom-right-radius,
-        border-bottom-left-radius,
-        0,
-        nb-theme(form-control-border-radius)
-      );
+      @include nb-ltr() {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      };
+      @include nb-rtl() {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      };
     }
     .form-control:last-child:not(:only-child),
     .input-group-addon:last-child,
     .input-group-append .btn:last-child,
     .input-group-btn .btn:last-child {
-      @include rtl-prop(
-        border-top-left-radius,
-        border-top-right-radius,
-        0,
-        nb-theme(form-control-border-radius)
-      );
-
-      @include rtl-prop(
-        border-bottom-left-radius,
-        border-bottom-right-radius,
-        0,
-        nb-theme(form-control-border-radius)
-      );
+      @include nb-ltr() {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      };
+      @include nb-rtl() {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      };
     }
 
     .dropdown.show .btn.dropdown-toggle {

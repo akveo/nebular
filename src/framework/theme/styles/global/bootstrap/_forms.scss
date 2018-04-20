@@ -105,8 +105,8 @@
 
     &.hint,
     &.error {
-      @include ltr-only(margin-left, 1rem);
-      @include rtl-only(margin-right, 1rem);
+      @include nb-ltr(margin-left, 1rem);
+      @include nb-rtl(margin-right, 1rem);
     }
 
     &.error {

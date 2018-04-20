@@ -94,69 +94,45 @@
 
   .btn-group:not(.btn-divided-group) > .btn:not(.dropdown-toggle) {
     &:first-child {
-      @include rtl-prop(
-        border-top-left-radius,
-        border-top-right-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
-      @include rtl-prop(
-        border-bottom-left-radius,
-        border-bottom-right-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
     }
     &:last-child {
-      @include rtl-prop(
-        border-top-right-radius,
-        border-top-left-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
-      @include rtl-prop(
-        border-bottom-right-radius,
-        border-bottom-left-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr() {
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+      };
     }
   }
 
   .btn-group.dropdown {
     & > .btn:first-of-type.dropdown-toggle {
-      @include rtl-prop(
-        border-top-left-radius,
-        border-top-right-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr(border-top-left-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-top-right-radius, nb-theme(btn-border-radius));
     }
     & > .btn:last-of-type.dropdown-toggle {
-      @include rtl-prop(
-        border-top-right-radius,
-        border-top-left-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr(border-top-right-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-top-left-radius, nb-theme(btn-border-radius));
     }
 
     &:not(.show) {
       & > .btn:first-of-type.dropdown-toggle {
-        @include rtl-prop(
-          border-bottom-left-radius,
-          border-bottom-right-radius,
-          nb-theme(btn-border-radius),
-          0
-        );
+        @include nb-ltr(border-bottom-left-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-bottom-right-radius, nb-theme(btn-border-radius));
       }
       & > .btn:last-of-type.dropdown-toggle {
-        @include rtl-prop(
-          border-bottom-right-radius,
-          border-bottom-left-radius,
-          nb-theme(btn-border-radius),
-          0
-        );
+        @include nb-ltr(border-bottom-right-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-bottom-left-radius, nb-theme(btn-border-radius));
       }
     }
 
@@ -168,38 +144,22 @@
 
   .btn-group.dropup {
     & > .btn:first-of-type.dropdown-toggle {
-      @include rtl-prop(
-        border-bottom-left-radius,
-        border-bottom-right-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr(border-bottom-left-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-bottom-right-radius, nb-theme(btn-border-radius));
     }
     & > .btn:last-of-type.dropdown-toggle {
-      @include rtl-prop(
-        border-bottom-right-radius,
-        border-bottom-left-radius,
-        nb-theme(btn-border-radius),
-        0
-      );
+      @include nb-ltr(border-bottom-right-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-bottom-left-radius, nb-theme(btn-border-radius));
     }
 
     &:not(.show) {
       & > .btn:first-of-type.dropdown-toggle {
-        @include rtl-prop(
-          border-top-left-radius,
-          border-top-right-radius,
-          nb-theme(btn-border-radius),
-          0
-        );
+        @include nb-ltr(border-top-left-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-top-right-radius, nb-theme(btn-border-radius));
       }
       & > .btn:last-of-type.dropdown-toggle {
-        @include rtl-prop(
-          border-top-right-radius,
-          border-top-left-radius,
-          nb-theme(btn-border-radius),
-          0
-        );
+        @include nb-ltr(border-top-right-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-top-left-radius, nb-theme(btn-border-radius));
       }
     }
 
@@ -301,7 +261,8 @@
 
   .btn-divided-group {
     .btn:not(:first-child) {
-      @include rtl-prop(margin-left, margin-right, 0.5rem, 0);
+      @include nb-ltr(margin-left, 0.5rem);
+      @include nb-rtl(margin-right, 0.5rem);
       border-radius: nb-theme(btn-border-radius);
     }
 

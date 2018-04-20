@@ -103,7 +103,8 @@
 
     .btn:first-child {
       width: 90%;
-      @include rtl(text-align, left, right);
+      @include nb-ltr(text-align, left);
+      @include nb-rtl(text-align, right);
     }
 
     .dropdown-toggle {
@@ -126,15 +127,16 @@
 
   .dropdown.btn-group.show, .dropup.btn-group.show {
     .btn:first-child {
-      @include ltr-only(border-bottom-left-radius, 0);
-      @include rtl-only(border-bottom-right-radius, 0);
+      @include nb-ltr(border-bottom-left-radius, 0);
+      @include nb-rtl(border-bottom-right-radius, 0);
     }
   }
 
   .dropdown, .dropup {
     .dropdown-toggle {
       width: 100%;
-      @include rtl(text-align, left, right);
+      @include nb-ltr(text-align, left);
+      @include nb-rtl(text-align, right);
       position: relative;
     }
 
@@ -295,7 +297,8 @@
     .dropdown-toggle::after {
       top: 50%;
       transform: translate(0, -50%);
-      @include rtl-prop(right, left, 0.75rem, auto);
+      @include nb-ltr(right, 0.75rem);
+      @include nb-rtl(left, 0.75rem);
     }
   }
 
