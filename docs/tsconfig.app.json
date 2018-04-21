@@ -24,7 +24,8 @@
     "test.ts",
     "**/*.spec.ts",
     "../src/framework/**/*.spec.ts",
-    "assets/**/*.ts"
+    "assets/**/*.ts",
+    "**/*.spec.ts"
   ],
   "include": [
     "../docs/**/*",
