@@ -75,6 +75,18 @@ MIT
 MIT
 MIT
 
+@angular/forms@5.2.6
+MIT
+MIT
+
+@angular/platform-browser@5.2.6
+MIT
+MIT
+
+@angular/router@5.2.6
+MIT
+MIT
+
 angular2-useful-swiper@4.0.7
 MIT
 The MIT License (MIT)
