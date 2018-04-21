@@ -2,8 +2,14 @@
 
 @include nb-install-component {
 
-  /deep/ nb-tabset > ul {
-    padding: 0 0 1.5rem;
-    border-bottom: 0;
+  /deep/ nb-tabset {
+    & > nb-tab {
+      overflow: inherit;
+    }
+
+    & > ul {
+      padding: 0 0 1.5rem;
+      border-bottom: 0;
+    }
   }
 }

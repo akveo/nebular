@@ -15,7 +15,7 @@ export const routes: Routes = [
     path: '',
     component: NbPlaygroundComponent,
     children: [
-      { path: 'popover', component: NbPopoverExampleComponent },
+      { path: 'popover/popover-example.component', component: NbPopoverExampleComponent },
     ],
   },
 ];

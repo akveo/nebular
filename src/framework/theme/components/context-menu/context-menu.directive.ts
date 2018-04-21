@@ -22,28 +22,40 @@ import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
  *
  * ![image](assets/images/components/context-menu.gif)
  *
- * Juts pass basic menu items:
+ * @example Juts pass basic menu items:
  *
- * ```html
+ * ```
  * <button [nbContextMenu]="items"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * Context menu has different placements, such as: top, bottom, left and right
+ * @example If you want to handle context menu clicks you have to pass nbContextMenuTag
+ * param and subscribe on NbMenuService. Because NbContextMenu renders plain NbMenu inside, so
+ * you have to work with it like with plain NbMenu:
+ *
+ * ```
+ * <button [nbContextMenu]="items" nbContextMenuTag="my-context-menu"></button>
+ * ...
+ * nbMenuService.onItemClick()
+ *   .pipe(filter(({ tag }) => tag === 'my-context-menu'))
+ *   .subscribe(...handle it somehow)
+ * ```
+ *
+ * @example Context menu has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
- * ```html
+ * ```
  * <button [nbContextMenu]="items" nbContextMenuPlacement="right"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * By default context menu will try to adjust itself to maximally fit viewport
+ * @example By default context menu will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the context menu.
  * If you wanna disable this behaviour just set it falsy value.
  *
- * ```html
+ * ```
  * <button [nbContextMenu]="items" nbContextMenuAdjustment="counterclockwise"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];

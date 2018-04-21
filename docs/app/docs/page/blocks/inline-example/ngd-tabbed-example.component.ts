@@ -12,15 +12,15 @@ import { catchError } from 'rxjs/operators/catchError';
   template: `
     <nb-tabset *ngIf="examples">
       <nb-tab tabTitle="ts" *ngIf="examples.ts">
-        <ngd-code-block [code]="examples.ts"></ngd-code-block>
+        <ngd-code-block [path]="content.ts" [code]="examples.ts"></ngd-code-block>
       </nb-tab>
 
       <nb-tab tabTitle="html" *ngIf="examples.html">
-        <ngd-code-block [code]="examples.html"></ngd-code-block>
+        <ngd-code-block [path]="content.html" [code]="examples.html"></ngd-code-block>
       </nb-tab>
 
       <nb-tab tabTitle="scss" *ngIf="examples.scss">
-        <ngd-code-block [code]="examples.scss"></ngd-code-block>
+        <ngd-code-block [path]="content.scss" [code]="examples.scss"></ngd-code-block>
       </nb-tab>
     </nb-tabset>
   `,

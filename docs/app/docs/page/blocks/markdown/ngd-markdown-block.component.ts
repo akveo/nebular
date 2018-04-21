@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as marked from 'marked';
-import * as hljs from 'highlight.js';
+import { NgdHighlightService } from '../../../utils/highlight.service';
 
 @Component({
   selector: 'ngd-markdown-block',
@@ -13,12 +13,13 @@ export class NgdMarkdownComponent implements OnInit {
 
   markdown: string;
 
+  constructor(private highlightService: NgdHighlightService) {
+  }
+
   ngOnInit() {
     const md = marked.setOptions({
       langPrefix: 'hljs ',
-      highlight(code) {
-        return hljs.highlightAuto(code, ['ts', 'html', 'scss', 'nginx']).value;
-      },
+      highlight: (code) => this.highlightService.highlight(code),
     });
 
     this.markdown = md.parse(this.source.trim());

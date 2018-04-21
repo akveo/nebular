@@ -15,6 +15,7 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -49,6 +50,8 @@ import { NgdTabbedExampleComponent } from './docs/page/blocks/inline-example/ngd
 import { NgdExampleComponent } from './docs/page/blocks/inline-example/ngd-example.component';
 import { CodeLoaderService } from './docs/utils/code-loader.service';
 import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdown-file.component';
+import { NgdHighlightService } from './docs/utils/highlight.service';
+import { NgdStackedExampleComponent } from './docs/page/blocks/stacked-example/stacked-examples.component';
 
 @NgModule({
   imports: [
@@ -61,6 +64,7 @@ import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdo
     SwiperModule,
     NbLayoutModule,
     NbTabsetModule,
+    NbCheckboxModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: 'docs' }),
     NbSidebarModule.forRoot(),
@@ -91,10 +95,12 @@ import { NgdMarkdownFileComponent } from './docs/page/blocks/markdown/ngd-markdo
     NgdCodeBlockComponent,
     NgdTabbedExampleComponent,
     NgdExampleComponent,
+    NgdStackedExampleComponent,
     NgdMarkdownFileComponent,
   ],
   providers: [
     IframeCommunicatorService,
+    NgdHighlightService,
     CodeLoaderService,
     BlockHelperService,
     DocsService,
