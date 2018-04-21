@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as marked from 'marked';
-
-declare const Prism;
+import { NgdHighlightService } from '../../../utils/highlight.service';
 
 @Component({
   selector: 'ngd-markdown-block',
@@ -10,19 +9,19 @@ declare const Prism;
 })
 export class NgdMarkdownComponent implements OnInit {
 
-  @Input() source: any;
+  @Input() source: string;
 
   markdown: string;
 
-  ngOnInit() {
-    const input = require(`raw-loader!../../../../articles/${this.source}`);
-    const md = marked.setOptions({
-      highlight: (code, lang = 'jsx') => {
-        return Prism.highlight(code.trim(), Prism.languages[lang]);
-      },
-    });
-
-    this.markdown = md.parse(input.trim());
+  constructor(private highlightService: NgdHighlightService) {
   }
 
+  ngOnInit() {
+    const md = marked.setOptions({
+      langPrefix: 'hljs ',
+      highlight: (code) => this.highlightService.highlight(code),
+    });
+
+    this.markdown = md.parse(this.source.trim());
+  }
 }
