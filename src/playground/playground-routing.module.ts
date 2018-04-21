@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NbPopoverExampleComponent } from './examples';
+import { NbPopoverExampleComponent } from './popover';
 import { NbPlaygroundComponent } from './playground.component';
 
 
@@ -15,7 +15,7 @@ export const routes: Routes = [
     path: '',
     component: NbPlaygroundComponent,
     children: [
-      { path: 'popover', component: NbPopoverExampleComponent },
+      { path: 'popover/popover-example.component', component: NbPopoverExampleComponent },
     ],
   },
 ];
