@@ -22,7 +22,7 @@ import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
  *
  * ![image](assets/images/components/context-menu.gif)
  *
- * @example Juts pass basic menu items:
+ * @example Just pass menu items array:
  *
  * ```
  * <button [nbContextMenu]="items"></button>
@@ -30,9 +30,10 @@ import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example If you want to handle context menu clicks you have to pass nbContextMenuTag
- * param and subscribe on NbMenuService. Because NbContextMenu renders plain NbMenu inside, so
- * you have to work with it like with plain NbMenu:
+ * @example If you want to handle context menu clicks you have to pass `nbContextMenuTag`
+ * param and subscribe to events using NbMenuService.
+ * `NbContextMenu` renders plain `NbMenu` inside, so
+ * you have to work with it just like with `NbMenu` component:
  *
  * ```
  * <button [nbContextMenu]="items" nbContextMenuTag="my-context-menu"></button>
