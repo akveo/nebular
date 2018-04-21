@@ -24,7 +24,10 @@ export class NgdExampleRendererComponent implements OnInit, AfterViewInit {
   }
 
   private getId(): string {
-    return this.router.url.split('/').pop();
+    const splitted = this.router.url.split('/');
+    // remove 'example' route prefix
+    splitted.splice(0, 2);
+    return splitted.join('/');
   }
 
   private sendHeight() {
