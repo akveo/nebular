@@ -10,7 +10,7 @@ import { HttpResponse } from '@angular/common/http';
 import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS } from '../auth.options';
 import { NbAuthService } from './auth.service';
 import { NbDummyAuthProvider } from '../providers/dummy-auth.provider';
-import { nbAuthServiceFactory, nbOptionsFactory } from '../auth.module';
+import { nbProvidersFactory, nbOptionsFactory } from '../auth.module';
 import { of as observableOf } from 'rxjs/observable/of';
 import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
@@ -18,6 +18,7 @@ import { delay } from 'rxjs/operators/delay';
 import { NbTokenService } from './token/token.service';
 import { NbAuthSimpleToken, nbCreateToken } from './token/token';
 import { NbTokenLocalStorage, NbTokenStorage } from './token/token-storage';
+import { NB_AUTH_PROVIDERS } from '../auth.options';
 
 describe('auth-service', () => {
   let authService: NbAuthService;
@@ -75,26 +76,19 @@ describe('auth-service', () => {
                 redirectDelay: 3000,
               },
             },
-            providers: {
-              dummy: {
-                service: NbDummyAuthProvider,
-                config: {
-                  alwaysFail: true,
-                  delay: 1000,
-                },
-              },
-            },
+            providers: [
+              NbDummyAuthProvider.register('dummy', {
+                alwaysFail: true,
+                delay: 1000,
+              }),
+            ],
           },
         },
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
+        { provide: NB_AUTH_PROVIDERS, useFactory: nbProvidersFactory, deps: [NB_AUTH_OPTIONS, Injector] },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
-
         NbTokenService,
-        {
-          provide: NbAuthService,
-          useFactory: nbAuthServiceFactory,
-          deps: [NB_AUTH_OPTIONS, NbTokenService, Injector],
-        },
+        NbAuthService,
         NbDummyAuthProvider,
       ],
     });

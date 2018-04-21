@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { NB_AUTH_TOKEN_CLASS } from '../../auth.options';
-import { NbAuthToken, nbCreateToken, NbTokenClass } from './token';
+import { NbAuthToken } from './token';
+import { NbAuthTokenParceler } from './token-parceler';
 
 export abstract class NbTokenStorage {
 
@@ -27,11 +27,12 @@ export abstract class NbTokenStorage {
  *
  */
 @Injectable()
-export class NbTokenLocalStorage implements NbTokenStorage {
+export class NbTokenLocalStorage extends NbTokenStorage {
 
   protected key = 'auth_app_token';
 
-  constructor(@Inject(NB_AUTH_TOKEN_CLASS) protected tokenClass: NbTokenClass) {
+  constructor(private tokenPacker: NbAuthTokenParceler) {
+    super();
   }
 
   /**
@@ -39,7 +40,8 @@ export class NbTokenLocalStorage implements NbTokenStorage {
    * @returns {NbAuthToken}
    */
   get(): NbAuthToken {
-    return nbCreateToken(this.tokenClass, localStorage.getItem(this.key));
+    const raw = localStorage.getItem(this.key);
+    return this.tokenPacker.unwrap(raw);
   }
 
   /**
@@ -47,7 +49,8 @@ export class NbTokenLocalStorage implements NbTokenStorage {
    * @param {NbAuthToken} token
    */
   set(token: NbAuthToken) {
-    localStorage.setItem(this.key, token.toString());
+    const raw = this.tokenPacker.wrap(token);
+    localStorage.setItem(this.key, raw);
   }
 
   /**

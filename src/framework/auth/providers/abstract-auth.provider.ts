@@ -1,16 +1,25 @@
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import { NbAuthResult } from '../services/auth-result';
 
+import { NbAuthToken, NbAuthResult, nbCreateToken, NbTokenClass } from '../services';
 import { deepExtend, getDeepFromObject } from '../helpers';
 
 export abstract class NbAbstractAuthProvider {
 
   protected defaultConfig: any = {};
   protected config: any = {};
+  protected tokenClass: NbTokenClass;
 
   setConfig(config: any): void {
     this.config = deepExtend({}, this.defaultConfig, config);
+  }
+
+  setTokenClass(tokenClass: NbTokenClass): void {
+    this.tokenClass = tokenClass;
+  }
+
+  createToken(rawValue: string): NbAuthToken {
+    return nbCreateToken(this.tokenClass, rawValue);
   }
 
   getConfigValue(key: string): any {

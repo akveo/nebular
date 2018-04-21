@@ -27,7 +27,6 @@ import {
 } from '@nebular/theme';
 
 import {
-  NB_AUTH_TOKEN_CLASS,
   NbAuthJWTToken,
   NbAuthModule,
   NbEmailPassAuthProvider,
@@ -166,46 +165,41 @@ const NB_TEST_COMPONENTS = [
           ],
         },
       },
-      providers: {
-        //
-        // email: {
-        //   service: NbDummyAuthProvider,
-        //   config: {
-        //     alwaysFail: true,
-        //     delay: 1000,
-        //   },
-        // },
-        email: {
-          service: NbEmailPassAuthProvider,
-          config: {
-            login: {
-              endpoint: 'http://localhost:4400/api/auth/login',
-            },
-            register: {
-              endpoint: 'http://localhost:4400/api/auth/register',
-            },
-            logout: {
-              endpoint: 'http://localhost:4400/api/auth/logout',
-              redirect: {
-                success: '/auth/login',
-                failure: '/auth/login',
-              },
-            },
-            requestPass: {
-              endpoint: 'http://localhost:4400/api/auth/request-pass',
-              redirect: {
-                success: '/auth/reset-password',
-              },
-            },
-            resetPass: {
-              endpoint: 'http://localhost:4400/api/auth/reset-pass',
-              redirect: {
-                success: '/auth/login',
-              },
+      providers: [
+        // NbDummyAuthProvider.register('email', {
+        //   alwaysFail: true,
+        //   delay: 1000,
+        // }),
+
+        NbEmailPassAuthProvider.register('email', {
+          baseEndpoint: 'http://localhost:4400/api/auth/',
+          login: {
+            endpoint: 'login',
+          },
+          register: {
+            endpoint: 'register',
+          },
+          logout: {
+            endpoint: 'logout',
+            redirect: {
+              success: '/auth/login',
+              failure: '/auth/login',
             },
           },
-        },
-      },
+          requestPass: {
+            endpoint: 'request-pass',
+            redirect: {
+              success: '/auth/reset-password',
+            },
+          },
+          resetPass: {
+            endpoint: 'reset-pass',
+            redirect: {
+              success: '/auth/login',
+            },
+          },
+        }, NbAuthJWTToken),
+      ],
     }),
     NbSecurityModule.forRoot({
       accessControl: {
@@ -232,7 +226,6 @@ const NB_TEST_COMPONENTS = [
   ],
   providers: [
     AuthGuard,
-    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
     { provide: NbRoleProvider, useClass: RoleProvider },
   ],
