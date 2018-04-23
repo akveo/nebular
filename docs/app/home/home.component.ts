@@ -18,26 +18,32 @@ export class NgdHomeComponent {
     {
       title: 'Introduction',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/intro.svg',
     },
     {
       title: 'Guides',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/guides.svg',
     },
     {
       title: 'Themes',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/themes.svg',
     },
     {
       title: 'Components',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/components.svg',
     },
     {
       title: 'Auth',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/auth.svg',
     },
     {
       title: 'Security',
       description: 'A set of essential modules for your next Angular App',
+      icon: 'assets/img/security.svg',
     },
   ];
 
