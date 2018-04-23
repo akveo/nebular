@@ -20,10 +20,11 @@
 
     ul {
       list-style: none;
-      li {
-        display: flex;
-        margin-bottom: 1.375rem;
-      }
+    }
+
+    li {
+      display: flex;
+      margin-bottom: 1.375rem;
     }
 
     &.logo {
@@ -44,6 +45,7 @@
 
     .copy {
       color: #8F9DB3;
+      display: list-item;
       font-size: 0.75rem;
     }
 
