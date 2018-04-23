@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  padding: 0 3rem 18rem 3rem;
+}
+
+.block, .shield {
+  flex: 1;
+  padding: 0 1.125rem;
+}
+
+.block {
+  margin-right: 3rem;
+}
+
+h1 {
+  font-size: 6.875rem;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  line-height: 2rem;
+  padding-right: 2rem;
+}
+
+.btn {
+  padding: 0.8rem 3.5rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #18F297 0%, #00E6E6 100%);
+  display: inline-block;
+  margin-bottom: 1rem;
+
+  &.get-started {
+    margin-right: 1rem;
+    background: white;
+    color: #3381FF;
+  }
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../../framework/theme/styles/theming';
+@import '../../../framework/theme/styles/themes/default';
+
+$nb-enabled-themes: (new-docs);
+
+$nb-themes: nb-register-theme((
+  // custom
+  content-width: 1144px,
+
+
+  separator: transparent,
+  color-bg: transparent,
+  color-fg: white,
+  color-fg-text: color-fg,
+  color-fg-heading: color-fg,
+  layout-bg: transparent,
+  shadow: none,
+  header-padding: 0 1.25rem,
+  header-height: 4.25rem,
+  footer-height: 18.75rem,
+  footer-padding: 1.25rem 0,
+  layout-padding: 0,
+  layout-medium-padding: 0,
+  layout-small-padding: 0,
+  menu-font-size: 0.95rem,
+  menu-item-padding: 0.675rem 1.5rem 0.675rem 1rem,
+), new-docs, default);

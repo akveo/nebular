@@ -41,6 +41,10 @@ export const routes: Routes = [
     }],
   },
   {
+    path: 'new-home',
+    loadChildren: './home/home.module#NgdHomeModule',
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

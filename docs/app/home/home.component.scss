@@ -1,0 +1,48 @@
+@import '../@theme/styles/styles';
+
+.content-center {
+  max-width: nb-theme(content-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  background: #436FCF;
+}
+
+ngd-hero {
+  flex: 1;
+  margin-top: 10rem;
+}
+
+.features {
+  margin-top: -7.5rem;
+}
+
+.features, .advantages {
+  margin-bottom: 5rem;
+}
+
+.advantages {
+  padding-bottom: 5.5rem;
+  position: relative;
+
+  > .content-center {
+    padding: 0 2rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 300px;
+    bottom: 0;
+    right: -30%;
+    left: -30%;
+    background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+    z-index: -1;
+    border-radius: 50%;
+  }
+}
