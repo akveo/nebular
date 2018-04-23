@@ -25,8 +25,6 @@ h1 {
 p {
   font-size: 1.25em;
   line-height: 2em;
-
-  margin-bottom: 2em;
   padding-right: 2em;
 }
 
@@ -36,7 +34,7 @@ p {
   font-weight: bold;
   border-radius: 3px;
   background: linear-gradient(90deg, #18F297 0%, #00E6E6 100%);
-  padding: 0.8em 3.5em;
+  padding: 0.8em 3em;
   margin-bottom: 1em;
 
   &.get-started {
