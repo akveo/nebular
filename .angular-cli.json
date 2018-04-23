@@ -93,18 +93,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/typeface-exo/index.css",
-        "../node_modules/open-sans-fontface/open-sans.css",
-        "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/ionicons/scss/ionicons.scss",
+        "../node_modules/bootstrap/scss/bootstrap-reboot.scss",
         "../node_modules/socicon/css/socicon.css",
-        "../node_modules/swiper/dist/css/swiper.css",
         "../node_modules/highlight.js/styles/dracula.css",
-        "styles.scss"
-      ],
-      "scripts": [
-        "../node_modules/swiper/dist/js/swiper.js"
+        "./app/@theme/styles/styles.scss"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

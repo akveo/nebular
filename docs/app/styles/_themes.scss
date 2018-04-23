@@ -4,7 +4,6 @@
 @import '../../../src/framework/theme/styles/themes';
 
 // which themes you what to enable (empty to enable all - not recommended)
-$nb-enabled-themes: (docs, default, cosmic);
 
 // TODO remove
 $nb-themes: nb-register-theme((

@@ -1,0 +1,30 @@
+<nb-layout>
+  <nb-layout-column>
+    <div class="hero-image">
+      <div class="content-center">
+        <ngd-header></ngd-header>
+        <ngd-hero></ngd-hero>
+      </div>
+    </div>
+
+    <div class="features content-center">
+      <ngd-icon-card *ngFor="let feature of features"
+                     [title]="feature.title"
+                     [description]="feature.description">
+      </ngd-icon-card>
+    </div>
+
+    <div class="advantages">
+      <div class="content-center">
+        <ngd-text-card *ngFor="let advantage of advantages; let index = index"
+                       [title]="advantage.title"
+                       [index]="index"
+                       [description]="advantage.description">
+        </ngd-text-card>
+      </div>
+    </div>
+
+    <ngd-footer class="content-center"></ngd-footer>
+
+  </nb-layout-column>
+</nb-layout>

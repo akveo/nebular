@@ -1,0 +1,58 @@
+:host {
+  display: flex;
+  flex: 1;
+
+  padding-top: 1.25rem;
+
+  > div {
+    flex: 1;
+    margin-right: 2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      color: #8F9DB3;
+    }
+
+    ul {
+      list-style: none;
+      li {
+        margin-bottom: 1.375rem;
+      }
+    }
+
+    &.logo {
+      margin-top: -1.2rem;
+      text-align: center;
+      img {
+        max-width: 9rem;
+      }
+    }
+
+    .title {
+      color: rgba(0, 0, 0, 0.74);
+      font-size: 1.125rem;
+      font-weight: bold;
+      line-height: 1.375rem;
+    }
+
+    .copy {
+      color: #8F9DB3;
+      font-size: 0.75rem;
+    }
+
+    .social {
+      display: flex;
+      width: 80%;
+      justify-content: space-between;
+
+      a {
+        font-size: 3rem;
+        text-decoration: none;
+        color: #CDD6E3;
+      }
+    }
+  }
+}
