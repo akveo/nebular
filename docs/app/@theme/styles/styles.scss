@@ -1,0 +1,15 @@
+@import 'themes';
+@import 'small-social';
+
+@import '../../../framework/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-layout-theme();
+  @include nb-sidebar-theme();
+  @include nb-menu-theme();
+  @include nb-actions-theme();
+  @include nb-search-theme();
+
+  @include nb-typography();
+  @include nb-b-buttons-theme();
+};

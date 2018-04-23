@@ -7,7 +7,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import 'style-loader!./styles/styles.scss';
 import { Subscription } from 'rxjs';
 import { delay, merge } from 'rxjs/operators';
 import { DocsService } from './docs/docs.service';

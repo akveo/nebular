@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex: 1;
+  padding: 0.875rem 1.125rem;
+
+  /deep/ nb-menu {
+    flex: 3;
+    .menu-items {
+      display: flex;
+
+      .menu-item {
+        border: none;
+
+        &:first-child {
+          border: none;
+        }
+      }
+    }
+  }
+
+  .logo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    strong {
+      font-size: 1.275rem;
+    }
+
+    .version {
+      font-size: 0.875rem;
+      font-weight: bold;
+    }
+  }
+}
