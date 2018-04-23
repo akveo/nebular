@@ -1,0 +1,27 @@
+:host {
+  border-radius: 7px;
+  background-color: #FFFFFF;
+  box-shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
+  display: flex;
+  padding: 3rem 2.25rem 3.625rem 2.25rem;
+  flex-grow: 1;
+  width: calc(33% - 2.5rem);
+  margin: 1.25rem;
+  flex-direction: column;
+  height: 400px; // TODO: temp
+}
+
+h2 {
+  color: #546D8D;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.8125rem;
+  text-align: center;
+}
+
+p {
+  color: #919FB1;
+  font-size: 0.95rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
