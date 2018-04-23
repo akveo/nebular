@@ -10,7 +10,9 @@
 }
 
 .hero-image {
-  background: #436FCF;
+  background: url('/assets/img/1920@2x.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   .content-center {
     flex-direction: column;
   }
@@ -47,32 +49,5 @@ ngd-hero {
     background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
     z-index: -1;
     border-radius: 50%;
-  }
-}
-
-@include media-breakpoint-down(xl) {
-  .hero-image {
-    background: #56a8cf;
-  }
-}
-
-@include media-breakpoint-down(lg) {
-  .hero-image {
-    background: #73bdcf;
-  }
-}
-
-@include media-breakpoint-down(md) {
-  .hero-image {
-    background: #99cfb5;
-  }
-}
-
-@include media-breakpoint-down(sm) {
-  .hero-image {
-    background: #bccf85;
-  }
-  ngd-hero {
-    margin-top: 5rem;
   }
 }

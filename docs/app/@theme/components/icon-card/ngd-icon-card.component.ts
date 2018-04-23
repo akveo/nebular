@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngd-icon-card',
   styleUrls: ['./ngd-icon-card.component.scss'],
   template: `
     <div class="icon"></div>
+    <img [src]="icon" />
     <h2>{{ title }}</h2>
     <p>{{ description }}</p>
   `,
@@ -13,5 +15,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class NgdIconCardComponent {
 
   @Input() title: string;
+  @Input() icon: SafeHtml;
   @Input() description: string;
 }
