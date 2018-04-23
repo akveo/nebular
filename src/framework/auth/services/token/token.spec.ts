@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthJWTToken } from './token';
+import { NbAuthJWTToken, NbAuthSimpleToken } from './token';
 
 
 describe('auth JWT token', () => {
   // tslint:disable
+  const simpleToken = new NbAuthSimpleToken('token');
   const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
   const emptyJWTToken = new NbAuthJWTToken('..');
   const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
@@ -73,5 +74,15 @@ describe('auth JWT token', () => {
 
     // expired date
     expect(expiredJWTToken.isValid()).toBeFalsy();
+  });
+
+  it('NbAuthJWTToken name', () => {
+    // without token
+    expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
+  });
+
+  it('NbAuthJWTToken name', () => {
+    // without token
+    expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
   });
 });

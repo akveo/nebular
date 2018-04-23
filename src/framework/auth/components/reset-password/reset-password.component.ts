@@ -90,7 +90,7 @@ export class NbResetPasswordComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};
-  provider: string = '';
+  strategy: string = '';
 
   submitted = false;
   errors: string[] = [];
@@ -98,19 +98,19 @@ export class NbResetPasswordComponent {
   user: any = {};
 
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected config = {},
+              @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.resetPassword.showMessages');
-    this.provider = this.getConfigValue('forms.resetPassword.provider');
+    this.strategy = this.getConfigValue('forms.resetPassword.strategy');
   }
 
   resetPass(): void {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.resetPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
+    this.service.resetPassword(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
         this.messages = result.getMessages();
@@ -128,6 +128,6 @@ export class NbResetPasswordComponent {
   }
 
   getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+    return getDeepFromObject(this.options, key, null);
   }
 }
