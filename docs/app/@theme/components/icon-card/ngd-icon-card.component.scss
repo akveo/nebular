@@ -1,9 +1,11 @@
+@import '../../../@theme/styles/themes';
+
 :host {
   border-radius: 7px;
   background-color: #FFFFFF;
   box-shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
   display: flex;
-  padding: 3rem 2.25rem 3.625rem 2.25rem;
+  padding: 3rem 2.25rem 3.625rem;
   flex-grow: 1;
   width: calc(33% - 2.5rem);
   margin: 1.25rem;
@@ -24,4 +26,16 @@ p {
   font-size: 0.95rem;
   line-height: 1.5rem;
   text-align: center;
+}
+
+@include media-breakpoint-down(md) {
+  :host {
+    width: calc(50% - 2.5rem);
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  :host {
+    width: 100%;
+  }
 }

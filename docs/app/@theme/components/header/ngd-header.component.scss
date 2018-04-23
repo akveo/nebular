@@ -1,6 +1,10 @@
+@import '../../../@theme/styles/themes';
+
 :host {
   display: flex;
   flex: 1;
+  flex-direction: row;
+  align-items: center;
   padding: 0.875rem 1.125rem;
 
   /deep/ nb-menu {
@@ -31,5 +35,31 @@
       font-size: 0.875rem;
       font-weight: bold;
     }
+  }
+
+  .stars {
+    width: 95px;
+    height: 20px;
+    margin-left: auto;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  /deep/ nb-menu .menu-items {
+    justify-content: flex-end;
+
+    li {
+      display: none;
+
+      &:nth-child(1), &:nth-child(2) {
+        display: flex;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  /deep/ nb-menu .menu-items li:nth-child(2) {
+    display: none;
   }
 }
