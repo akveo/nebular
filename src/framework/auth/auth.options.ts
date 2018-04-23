@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { NbAuthToken } from './services';
 import { NbAuthStrategy, NbAuthStrategyOptions } from './strategies';
+import { NbAuthTokenClass } from './services';
 
 export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;
 
@@ -87,5 +87,5 @@ export const defaultAuthOptions: any = {
 export const NB_AUTH_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular Auth Options');
 export const NB_AUTH_USER_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular User Auth Options');
 export const NB_AUTH_STRATEGIES = new InjectionToken<NbAuthStrategies>('Nebular Auth Strategies');
-export const NB_AUTH_TOKEN_CLASS = new InjectionToken<NbAuthToken>('Nebular Token Class');
+export const NB_AUTH_TOKENS = new InjectionToken<NbAuthTokenClass[]>('Nebular Auth Tokens');
 export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<NbAuthStrategies>('Nebular Simple Interceptor Header');

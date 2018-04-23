@@ -27,7 +27,6 @@ import {
 } from '@nebular/theme';
 
 import {
-  NB_AUTH_TOKEN_CLASS,
   NbAuthJWTToken,
   NbAuthModule,
   NbPasswordAuthStrategy,
@@ -178,6 +177,9 @@ const NB_TEST_COMPONENTS = [
         NbPasswordAuthStrategy.setup({
           name: 'email',
 
+          token: {
+            class: NbAuthJWTToken,
+          },
           baseEndpoint: 'http://localhost:4400/api/auth/',
           logout: {
             redirect: {
@@ -194,6 +196,9 @@ const NB_TEST_COMPONENTS = [
             redirect: {
               success: '/auth/login',
             },
+          },
+          errors: {
+            key: 'data.errors',
           },
         }),
       ],
@@ -223,7 +228,6 @@ const NB_TEST_COMPONENTS = [
   ],
   providers: [
     AuthGuard,
-    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
     { provide: NbRoleProvider, useClass: RoleProvider },
   ],

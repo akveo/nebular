@@ -74,14 +74,21 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
 
   protected createDummyResult(data?: any): NbAuthResult {
     if (this.getOption('alwaysFail')) {
-      // TODO we dont call tokenService clear during logout in case result is not success
-      return new NbAuthResult(false,
+      return new NbAuthResult(
+        false,
         this.createFailResponse(data),
         null,
-        ['Something went wrong.']);
+        ['Something went wrong.'],
+      );
     }
 
-    // TODO is it missed messages here, is it token should be defined
-    return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
+    return new NbAuthResult(
+      true,
+      this.createSuccessResponse(data),
+      '/',
+      [],
+      ['Successfully logged in.'],
+      this.createToken('test token'),
+    );
   }
 }

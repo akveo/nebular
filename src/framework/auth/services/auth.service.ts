@@ -153,12 +153,10 @@ export class NbAuthService {
   }
 
   private processResultToken(result: NbAuthResult) {
-    if (result.isSuccess() && result.getRawToken()) {
-      return this.tokenService.setRaw(result.getRawToken())
+    if (result.isSuccess() && result.getToken()) {
+      return this.tokenService.set(result.getToken())
         .pipe(
-          switchMap(() => this.tokenService.get()),
           map((token: NbAuthToken) => {
-            result.setToken(token);
             return result;
           }),
         );
