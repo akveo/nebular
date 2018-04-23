@@ -10,6 +10,11 @@ import { NbMenuItem } from '@nebular/theme';
       <span class="version">v1.2.0</span>
     </div>
     <nb-menu [items]="mainMenu"></nb-menu>
+    <iframe class="stars"
+            src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
+            frameborder="0"
+            scrolling="0">
+    </iframe>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

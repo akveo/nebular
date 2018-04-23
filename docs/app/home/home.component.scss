@@ -1,4 +1,4 @@
-@import '../@theme/styles/styles';
+@import '../@theme/styles/themes';
 
 .content-center {
   max-width: nb-theme(content-width);
@@ -11,10 +11,12 @@
 
 .hero-image {
   background: #436FCF;
+  .content-center {
+    flex-direction: column;
+  }
 }
 
 ngd-hero {
-  flex: 1;
   margin-top: 10rem;
 }
 
@@ -29,6 +31,7 @@ ngd-hero {
 .advantages {
   padding-bottom: 5.5rem;
   position: relative;
+  overflow: hidden;
 
   > .content-center {
     padding: 0 2rem;
@@ -44,5 +47,32 @@ ngd-hero {
     background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
     z-index: -1;
     border-radius: 50%;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .hero-image {
+    background: #56a8cf;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .hero-image {
+    background: #73bdcf;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .hero-image {
+    background: #99cfb5;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .hero-image {
+    background: #bccf85;
+  }
+  ngd-hero {
+    margin-top: 5rem;
   }
 }

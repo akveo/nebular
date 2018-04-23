@@ -1,46 +1,84 @@
+@import '../../../@theme/styles/themes';
+
 :host {
   display: flex;
-  padding: 0 3rem 18rem 3rem;
+  flex: 1;
+  padding: 0 3rem 18rem;
 }
 
 .block, .shield {
   flex: 1;
   padding: 0 1.125rem;
+  font-size: 1rem;
 }
 
 .block {
-  margin-right: 3rem;
+  margin-right: 2rem;
 }
 
 h1 {
-  font-size: 6.875rem;
+  font-size: 6.875em;
   font-weight: bold;
   margin-bottom: 0;
 }
 
 p {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  line-height: 2rem;
-  padding-right: 2rem;
+  font-size: 1.25em;
+  line-height: 2em;
+
+  margin-bottom: 2em;
+  padding-right: 2em;
 }
 
 .btn {
-  padding: 0.8rem 3.5rem;
-  font-size: 1.125rem;
+  display: inline-block;
+  font-size: 1.125em;
   font-weight: bold;
   border-radius: 3px;
   background: linear-gradient(90deg, #18F297 0%, #00E6E6 100%);
-  display: inline-block;
-  margin-bottom: 1rem;
+  padding: 0.8em 3.5em;
+  margin-bottom: 1em;
 
   &.get-started {
-    margin-right: 1rem;
+    margin-right: 1em;
     background: white;
     color: #3381FF;
   }
 
   &:hover, &:focus {
     text-decoration: none;
+  }
+}
+
+@include media-breakpoint-down(md) {
+
+  :host {
+    padding-bottom: 13rem;
+  }
+
+  .shield {
+    display: none;
+  }
+
+  .block {
+    font-size: 0.875rem;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  :host {
+    padding-bottom: 10rem;
+  }
+
+  .block {
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    font-size: 4em;
+  }
+
+  .btn {
+    padding: 0.8em 1.5em;
   }
 }
