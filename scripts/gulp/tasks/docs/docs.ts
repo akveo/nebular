@@ -8,7 +8,7 @@ const exec = require('child_process').execSync;
 
 task('docs', ['generate-doc-json', 'copy-examples', 'find-full-examples']);
 task('generate-doc-json', generateDocJson);
-task('parse-themes', parseThemes);
+task('parse-themes', ['generate-doc-json'], parseThemes);
 
 function generateDocJson() {
   return src(['src/framework/**/*.ts', '!src/framework/theme/**/node_modules{,/**}'])
