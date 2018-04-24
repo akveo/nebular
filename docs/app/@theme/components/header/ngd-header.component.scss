@@ -27,8 +27,11 @@
     flex: 1;
     flex-direction: column;
 
-    strong {
+    a {
       font-size: 1.275rem;
+      color: white;
+      text-decoration: none !important;
+      font-weight: bold;
     }
 
     .version {

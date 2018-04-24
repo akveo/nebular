@@ -4,12 +4,11 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '../../../framework/theme/styles/global/bootstrap/breakpoints';
 
-$nb-enabled-themes: (new-docs);
+$nb-enabled-themes: (docs-home, docs-page);
 
 $nb-themes: nb-register-theme((
   // custom
   content-width: 1144px,
-
 
   separator: transparent,
   color-bg: transparent,
@@ -27,4 +26,26 @@ $nb-themes: nb-register-theme((
   layout-small-padding: 0,
   menu-font-size: 0.95rem,
   menu-item-padding: 0.675rem 1.5rem 0.675rem 1rem,
-), new-docs, default);
+), docs-home, default);
+
+$nb-themes: nb-register-theme((
+  // custom
+  content-width: 1920px,
+
+  separator: transparent,
+  color-bg: transparent,
+  color-fg: #494949,
+  color-fg-text: red,
+  color-fg-heading: #8994A3,
+  layout-bg: transparent,
+  shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6),
+  header-padding: 0 1.25rem,
+  header-height: 4.25rem,
+  footer-height: 18.75rem,
+  footer-padding: 1.25rem 0,
+  layout-padding: 0,
+  layout-medium-padding: 0,
+  layout-small-padding: 0,
+  menu-font-size: 0.95rem,
+  menu-item-padding: 0.675rem 1.5rem 0.675rem 1rem,
+), docs-page, default);
