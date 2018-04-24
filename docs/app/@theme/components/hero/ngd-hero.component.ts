@@ -7,11 +7,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <div class="block">
       <h1>Nebular</h1>
       <p>A set of essential modules for your next Angular app</p>
-      <a class="btn btn-primary get-started" [routerLink]="docs">Get Started</a>
-      <a class="btn btn-success" href="#">Demo</a>
+      <a class="btn get-started" [routerLink]="docs">Get Started</a>
+      <a class="btn" href="http://akveo.com/ngx-admin">Demo</a>
     </div>
     <div class="shield">
-      <h3>Not Just Another UI kit</h3>
+      <h3>Not Just Another</h3>
+      <h3>UI kit</h3>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
