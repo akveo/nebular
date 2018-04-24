@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-home',
@@ -79,4 +80,8 @@ export class NgdHomeComponent {
       there live the blind texts.`,
     },
   ];
+
+  constructor(themeService: NbThemeService) {
+    themeService.changeTheme('docs-home');
+  }
 }
