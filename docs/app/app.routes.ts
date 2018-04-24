@@ -5,47 +5,29 @@
  */
 
 import { Routes } from '@angular/router';
-import { NgdHomepageComponent } from './homepage/homepage.component';
-import { NgdPageComponent } from './docs/page/page.component';
-import { NgdDocsComponent } from './docs/docs.component';
 import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
-    component: NgdHomepageComponent,
+    loadChildren: './home/home.module#NgdHomeModule',
   },
   {
     path: 'docs',
-    component: NgdDocsComponent,
-    children: [{
-      path: ':page',
-      component: NgdPageComponent,
-    },
-      {
-        path: ':page/:sub-page',
-        component: NgdPageComponent,
-      }],
+    loadChildren: './documentation/documentation.module#NgdDocumentationModule',
   },
   {
     path: 'example',
     component: NgdExampleRendererComponent,
-    children: [{
-      path: '',
-      loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
-    }],
-  },
-  {
-    path: 'new-home',
-    loadChildren: './home/home.module#NgdHomeModule',
+    children: [
+      {
+        path: '',
+        loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
   },
 ];

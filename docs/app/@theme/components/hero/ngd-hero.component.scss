@@ -16,6 +16,12 @@
   font-size: 1rem;
 }
 
+.right-block {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 .shield {
   background: url('/assets/img/shield@2x.png');
   background-repeat: no-repeat;
@@ -81,7 +87,7 @@ p {
   }
 }
 
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(macpro, (macpro: 1280px)) {
   .shield {
     height: 26rem;
     width: 26rem;
