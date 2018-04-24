@@ -5,6 +5,7 @@
   .container {
     display: flex;
     padding: 0;
+    font-size: 1rem;
 
     .lines {
       display: flex;
@@ -13,7 +14,6 @@
       padding: 0.5rem;
       background: nb-theme(code-snippets-bg);
       color: nb-theme(code-snippets-fg);
-      font-size: 1rem;
     }
 
     pre {
