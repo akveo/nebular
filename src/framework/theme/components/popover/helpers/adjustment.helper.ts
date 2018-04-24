@@ -94,8 +94,8 @@ export class NbAdjustmentHelper {
    *
    * @return {NbPopoverPlacement[]} correctly ordered placements list.
    *
-   * @example order placements for {@link NbPopoverPlacement#RIGHT} and {@link NbPopoverAdjustment#CLOCKWISE}
-   * ```
+   * order placements for {@link NbPopoverPlacement#RIGHT} and {@link NbPopoverAdjustment#CLOCKWISE}
+   * ```ts
    * const placements = NB_ORDERED_PLACEMENTS[NbPopoverAdjustment.CLOCKWISE];
    * const ordered = orderPlacement(NbPopoverPlacement.RIGHT, placements);
    *

@@ -16,15 +16,15 @@ import { Component, Input } from '@angular/core';
  * `absolute`, `fixed`, or `sticky`.
  *
  *
- * @example Badge with default position and status(color):
+ * Badge with default position and status(color):
  *
- * ```
+ * ```html
  * <nb-badge text="badgeText"></nb-badge>
  * ```
  *
- * @example Badge located on the bottom right with warning status:
+ * Badge located on the bottom right with warning status:
  *
- * ```
+ * ```html
  * <nb-badge text="badgeText" status="warning" position="bottom right">
  * </nb-badge>
  * ```

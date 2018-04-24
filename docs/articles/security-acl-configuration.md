@@ -13,8 +13,7 @@ Nebular ACL has a simple way of setting it up. When registering a module you can
 Let's assume that our guest users can only `view` `news` and `comments`, users can do everything as guests, but also can `create` `comments`, and moderators can also `create` and `remove` `news` and `comments`.
 Now, let's convert this into an ACL configuration object which Nebular can understand. Open your `app.module.ts` and change the `NbSecurityModule.forRoot()` call as follows:
 
-```typescript
-
+```ts
 @NgModule({
   imports: [
    // ...
@@ -51,7 +50,7 @@ To do so we need to create a `RoleProvider` with one simple method `getRole`, wh
 In a simplest form we can provide this service directly in the main module:
 
 
-```typescript
+```ts
 // ...
 
 import { of as observableOf } from 'rxjs/observable/of';
