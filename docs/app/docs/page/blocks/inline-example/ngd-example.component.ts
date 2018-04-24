@@ -4,7 +4,12 @@ import { CodeLoaderService } from '../../../utils/code-loader.service';
 @Component({
   selector: 'ngd-example',
   template: `
-    <ngd-code-block *ngIf="code" [path]="content.path" [code]="code"></ngd-code-block>
+    <ngd-code-block *ngIf="code"
+      [path]="content.path"
+      [firstLine]="content.firstLine"
+      [lastLine]="content.lastLine"
+      [code]="code">
+    </ngd-code-block>
   `,
 })
 export class NgdExampleComponent implements OnInit {
