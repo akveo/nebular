@@ -5,12 +5,17 @@
   background-color: #FFFFFF;
   box-shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
   display: flex;
-  padding: 3rem 2.25rem 3.625rem;
+  padding: 3rem 1rem 3.625rem;
   flex-grow: 1;
   width: calc(33% - 2.5rem);
   margin: 1.25rem;
   flex-direction: column;
-  height: 400px; // TODO: temp
+  cursor: pointer;
+  max-width: 30rem;
+
+  &:hover {
+    box-shadow: 0 16px 40px 0 rgba(230, 234, 240, 0.97);
+  }
 }
 
 h2 {
