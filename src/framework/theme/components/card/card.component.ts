@@ -58,10 +58,10 @@ export class NbCardFooterComponent {
 /**
  * Basic content container component.
  *
- * @example While this component can be used alone, it also provides a number
+ * While this component can be used alone, it also provides a number
  * of child components for common card sections:
  *
- * ```
+ * ```html
  * <nb-card-header></nb-card-header>
  * <nb-card-body></nb-card-body>
  * <nb-card-footer></nb-card-footer>

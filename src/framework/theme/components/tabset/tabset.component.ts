@@ -96,9 +96,9 @@ export class NbTabComponent {
  * Dynamic tabset component.
  * Renders `<nb-tab></ng-tab> containers inside.
  *
- * @example Basic tabset example
+ * Basic tabset example
  *
- * ```
+ * ```html
  * <nb-tabset>
  *  <nb-tab tabTitle="Simple Tab #1">
  *    Tab content 1
@@ -107,6 +107,7 @@ export class NbTabComponent {
  *    Tab content 2
  *  </nb-tab>
  * </nb-tabset>
+ * ```
  *
  * @styles
  *

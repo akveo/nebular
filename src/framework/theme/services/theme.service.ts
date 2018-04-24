@@ -85,7 +85,7 @@ export class NbThemeService {
   /**
    * Triggers media query breakpoint change
    * Returns a pair where the first item is previous media breakpoint and the second item is current breakpoit.
-   * ```
+   * ```ts
    *  [{ name: 'xs', width: 0 }, { name: 'md', width: 768 }] // change from `xs` to `md`
    * ```
    * @returns {Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>}
