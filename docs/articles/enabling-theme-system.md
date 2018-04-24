@@ -10,8 +10,7 @@
 
 1) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
 
-```
-
+```scss
 "styles": [
         "../node_modules/@nebular/theme/styles/prebuilt/cosmic.css", // or default.css
       ],
@@ -148,7 +147,6 @@ At this point when you enable your `dark` theme your page should look like this:
 2) Now, to enable the magic of the `hot reload`, wrap all of your `*.component.scss` styles with the `nb-install-component` mixin like this:
 
 ```scss
-
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {

@@ -29,7 +29,7 @@ You can remove `@nebular/auth` from the command if you don't need authentication
 
 3) At this stage you have everything in place, let's configure Nebular in the app module.
 
-```typescript
+```ts
 
 import { NbThemeModule } from '@nebular/theme';
 
@@ -51,7 +51,7 @@ Same way you can enable Auth Module (more details under [Auth Module Concepts & 
 
 Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.json` file:
 
-```
+```scss
 "styles": [
   "../node_modules/bootstrap/dist/css/bootstrap.css",
   "../node_modules/@nebular/theme/styles/prebuilt/default.css", // or cosmic.css
@@ -70,7 +70,7 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
 
 5) Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
-```typescript
+```ts
 import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
 import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
 
@@ -91,8 +91,7 @@ export class SomePageModule {
 ```
 
 Then let's add layout components with a sticky header into your `some-page.component.ts`:
-```typescript
-
+```ts
 @Component({
   ...
   template: `
