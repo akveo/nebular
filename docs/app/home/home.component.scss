@@ -10,7 +10,7 @@
 }
 
 .hero-image {
-  background: url('/assets/img/1920@2x.png');
+  background: url('/assets/img/bg.svg');
   background-repeat: no-repeat;
   background-size: cover;
   .content-center {
@@ -18,12 +18,17 @@
   }
 }
 
+.concave {
+  margin-bottom: -5px;
+}
+
 ngd-hero {
-  margin-top: 10rem;
+  margin-top: 6rem;
 }
 
 .features {
-  margin-top: -7.5rem;
+  margin-top: -12.5rem;
+  justify-content: center;
 }
 
 .features, .advantages {
@@ -51,3 +56,28 @@ ngd-hero {
     border-radius: 50%;
   }
 }
+
+@include media-breakpoint-down(sm) {
+  ngd-hero {
+    margin-top: 4rem;
+  }
+}
+
+@include media-breakpoint-down(xxl) {
+  .features {
+    margin-top: -10rem;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .features {
+    margin-top: -9rem;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .features {
+    margin-top: -8rem;
+  }
+}
+
