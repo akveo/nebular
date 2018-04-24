@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import {
-  NbThemeModule,
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
+  NbSidebarModule,
 } from '@nebular/theme';
 
 import {
@@ -26,11 +26,8 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    NbThemeModule,
-    NbThemeModule.forRoot({
-      name: 'new-docs',
-    }),
     NbLayoutModule,
+    NbSidebarModule,
     NbMenuModule,
     NbTabsetModule,
     RouterModule,
@@ -45,8 +42,8 @@ import {
   exports: [
     CommonModule,
     RouterModule,
-    NbThemeModule,
     NbLayoutModule,
+    NbSidebarModule,
     NbMenuModule,
     NbTabsetModule,
     NgdHeaderComponent,

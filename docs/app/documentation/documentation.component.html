@@ -1,0 +1,11 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <ngd-header></ngd-header>
+  </nb-layout-header>
+  <nb-sidebar>
+    <nb-menu [items]="menuItems" tag="leftMenu"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

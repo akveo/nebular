@@ -10,9 +10,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <a class="btn get-started" [routerLink]="docs">Get Started</a>
       <a class="btn" href="http://akveo.com/ngx-admin">Demo</a>
     </div>
-    <div class="shield">
-      <h3>Not Just Another</h3>
-      <h3>UI kit</h3>
+    <div class="right-block">
+      <div class="shield">
+        <h3>Not Just Another</h3>
+        <h3>UI kit</h3>
+      </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,7 +6,7 @@ import { NbMenuItem } from '@nebular/theme';
   styleUrls: ['./ngd-header.component.scss'],
   template: `
     <div class="logo">
-      <strong>Nebular</strong>
+      <a href="#">Nebular</a>
       <span class="version">v1.2.0</span>
     </div>
     <nb-menu [items]="mainMenu"></nb-menu>
@@ -27,19 +27,19 @@ export class NgdHeaderComponent {
     },
     {
       title: 'Components',
-      link: 'docs/components',
+      link: '/docs/components',
     },
     {
       title: 'Theme',
-      link: 'docs/theme',
+      link: '/docs/theme',
     },
     {
       title: 'Auth',
-      link: 'docs/auth',
+      link: '/docs/auth',
     },
     {
       title: 'Security',
-      link: 'docs/security',
+      link: '/docs/security',
     },
   ];
 }
