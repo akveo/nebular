@@ -37,7 +37,7 @@ Production setup is not much different from development setup. The only differen
 
 Usually you create new virtual host with some similar configuration:
 
-```
+```nginx
 server {
   listen 80;
   server_name website.com;
@@ -55,7 +55,7 @@ server {
 
 The only thing you need to add is proxy-pass to `/api` URL like below:
 
-```
+```nginx
 server {
   listen 80;
   server_name website.com;

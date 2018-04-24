@@ -56,17 +56,17 @@ export class NbSidebarFooterComponent {
  *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
- * @example Minimal sidebar example
+ * Minimal sidebar example
  *
- * ```
+ * ```html
  * <nb-sidebar>
  *   Sidebar content.
  * </nb-sidebar>
  * ```
  *
- * @example Example of fixed sidebar located on the left side, initially collapsed.
+ * Example of fixed sidebar located on the left side, initially collapsed.
  *
- * ```
+ * ```html
  * <nb-sidebar left fixed state="collapsed">
  *  <nb-sidebar-header>Header</nb-sidebar-header>
  *
@@ -320,9 +320,9 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * @param {boolean} compact If true, then sidebar state will be changed between expanded & compacted,
    * otherwise - between expanded & collapsed. False by default.
    *
-   * @example Toggle sidebar state
+   * Toggle sidebar state
    *
-   * ```
+   * ```ts
    * this.sidebar.toggle(true);
    * ```
    */
