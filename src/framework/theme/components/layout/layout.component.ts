@@ -24,10 +24,10 @@ import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
  * A container component which determines a content position inside of the layout.
  * The layout could contain unlimited columns (not including the sidebars).
  *
- * @example By default the columns are ordered from the left to the right,
+ * By default the columns are ordered from the left to the right,
  * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
  * moving it to the very first position:
- * ```
+ * ```html
  * <nb-layout>
  *   <nb-layout-column>Second</nb-layout-column>
  *   <nb-layout-column>Third</nb-layout-column>
@@ -136,7 +136,7 @@ export class NbLayoutFooterComponent {
  *
  * Can contain the following components inside:
  *
- * ```
+ * ```html
  * nb-layout-header
  * nb-layout-column
  * nb-sidebar
@@ -163,9 +163,9 @@ export class NbLayoutFooterComponent {
  * Based on the class appended a specific CSS-theme is applied to the application.
  * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
- * @example A simple layout example:
+ * A simple layout example:
  *
- * ```
+ * ```html
  * <nb-layout>
  *   <nb-layout-header>Great Company</nb-layout-header>
  *
@@ -177,10 +177,10 @@ export class NbLayoutFooterComponent {
  * </nb-layout>
  * ```
  *
- * @example For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
+ * For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
  *
- * ```
+ * ```html
  * <nb-layout center>
  *   <nb-layout-header>Great Company</nb-layout-header>
  *

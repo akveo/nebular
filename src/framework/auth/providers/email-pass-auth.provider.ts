@@ -25,7 +25,7 @@ import { getDeepFromObject } from '../helpers';
  *
  * Default settings object:
  *
- * ```
+ * ```ts
  * {
  *  baseEndpoint: '',
  *  login: {

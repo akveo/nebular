@@ -13,9 +13,9 @@ import { convertToBoolProperty } from '../helpers';
  * Route tabset components.
  * Renders tabs inside of a router-outlet.
  *
- * @example basic usage example
+ * basic usage example
  *
- * ```
+ * ```ts
  *  tabs = [
  *  {
  *    title: 'Route tab #1',
