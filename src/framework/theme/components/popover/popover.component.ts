@@ -21,7 +21,7 @@ export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
  *
  * @inline-example(popover/popover-example.component)
  * first description
- * @inline-example(popover/popover-example.component.ts)
+ * @inline-example(popover/popover-example.component.ts, 15, 20)
  * second description
  * @live-example(popover/popover-example.component)
  * third description

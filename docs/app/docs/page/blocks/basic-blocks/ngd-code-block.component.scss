@@ -1,0 +1,26 @@
+@import '../../../../styles/themes';
+
+@include nb-install-component {
+
+  .container {
+    display: flex;
+    padding: 0;
+
+    .lines {
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+      padding: 0.5rem;
+      background: nb-theme(code-snippets-bg);
+      color: nb-theme(code-snippets-fg);
+      font-size: 1rem;
+    }
+
+    pre {
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+      width: 100%;
+    }
+  }
+}
