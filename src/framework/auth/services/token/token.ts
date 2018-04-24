@@ -3,6 +3,7 @@ import { urlBase64Decode } from '../../helpers';
 export abstract class NbAuthToken {
   abstract getValue(): string;
   abstract isValid(): boolean;
+  abstract getPayload(): string;
   abstract toString(): string;
 
   getName(): string {
@@ -36,6 +37,10 @@ export class NbAuthSimpleToken extends NbAuthToken {
    */
   getValue(): string {
     return this.token;
+  }
+
+  getPayload(): string {
+    return null;
   }
 
   /**

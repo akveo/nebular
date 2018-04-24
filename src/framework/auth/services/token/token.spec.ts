@@ -81,8 +81,13 @@ describe('auth JWT token', () => {
     expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
   });
 
-  it('NbAuthJWTToken name', () => {
+  it('NbAuthSimpleToken name', () => {
     // without token
     expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
+  });
+
+  it('NbAuthSimpleToken has payload', () => {
+    // without token
+    expect(simpleToken.getPayload()).toEqual(null);
   });
 });
