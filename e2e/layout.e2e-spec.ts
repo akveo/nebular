@@ -155,4 +155,10 @@ describe('nb-layout', () => {
         })
       });
   });
+
+  it('should set default document direction', () => {
+    browser.executeScript('return document.dir').then(function (direction) {
+      expect(direction).toBe('ltr');
+    });
+  });
 });
