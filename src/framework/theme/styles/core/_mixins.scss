@@ -195,24 +195,6 @@
 }
 
 @mixin _prepend-with-selector($selector, $prop: null, $value: null) {
-  /*
-    @at-root used to place result of concatenation of two selectors ($selector with '&')
-    at a very top level, i.e. do not nest inside selector where mixin was called.
-
-    consider next example:
-    :host {
-      @include _prepend-with-selector('.prepend-class') {
-        ...
-      }
-    }
-
-    result without @at-root
-    :host .prepend-class:host
-
-    result with @at-root
-    .prepend-class:host
-  */
-  @at-root #{selector-append($selector, &)},
   #{$selector} & {
     @if $prop != null {
       #{$prop}: $value;
@@ -223,7 +205,7 @@
 }
 
 @mixin nb-ltr($prop: null, $value: null) {
-  @include _prepend-with-selector(':not([dir=rtl])', $prop, $value) {
+  @include _prepend-with-selector('[dir=ltr]', $prop, $value) {
     @content;
   }
 }

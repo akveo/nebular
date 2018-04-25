@@ -378,8 +378,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe(direction => {
-        const { body } = this.document;
-        this.renderer.setAttribute(body, 'dir', direction);
+        this.renderer.setProperty(this.document, 'dir', direction);
       });
 
     this.afterViewInit$.next(true);
