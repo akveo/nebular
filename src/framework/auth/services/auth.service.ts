@@ -154,6 +154,26 @@ export class NbAuthService {
   }
 
   /**
+   * Sends a refresh token request
+   * Stores received token in the token storage
+   *
+   * Example:
+   * authenticate('email', {email: 'email@example.com', password: 'test'})
+   *
+   * @param {string} provider
+   * @param data
+   * @returns {Observable<NbAuthResult>}
+   */
+  refreshToken(provider: string, data?: any): Observable<NbAuthResult> {
+    return this.getProvider(provider).refreshToken()
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          return this.processResultToken(result);
+        }),
+      );
+  }
+
+  /**
    * Gets the selected provider
    *
    * Example:

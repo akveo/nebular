@@ -27,6 +27,8 @@ export abstract class NbAbstractAuthProvider {
 
   abstract logout(): Observable<NbAuthResult>;
 
+  abstract refreshToken(): Observable<NbAuthResult>;
+
   protected createFailResponse(data?: any): HttpResponse<Object> {
     return new HttpResponse<Object>({ body: {}, status: 401 });
   }
