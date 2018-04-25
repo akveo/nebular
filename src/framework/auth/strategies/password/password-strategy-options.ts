@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthSimpleToken } from '../../services';
+import { NbAuthSimpleToken, NbAuthTokenClass } from '../../services';
 import { NbAuthStrategyOptions } from '../auth-strategy-options';
 import { getDeepFromObject } from '../../helpers';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
@@ -22,8 +22,19 @@ export interface NbPasswordStrategyModule {
   defaultMessages?: string[];
 }
 
-export interface NbPasswordStrategyResetOptions extends NbPasswordStrategyModule {
+export interface NbPasswordStrategyReset extends NbPasswordStrategyModule {
   resetPasswordTokenKey?: string;
+}
+
+export interface NbPasswordStrategyToken {
+  class?: NbAuthTokenClass,
+  key?: string,
+  getter?: Function,
+}
+
+export interface NbPasswordStrategyMessage {
+  key?: string,
+  getter?: Function,
 }
 
 export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
@@ -63,7 +74,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['Reset password instructions have been sent to your email.'],
   };
-  resetPass?: boolean | NbPasswordStrategyResetOptions = {
+  resetPass?: boolean | NbPasswordStrategyReset = {
     endpoint: 'reset-pass',
     method: 'put',
     redirect: {
@@ -74,7 +85,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['Your password has been successfully changed.'],
   };
-  logout?: boolean | NbPasswordStrategyResetOptions = {
+  logout?: boolean | NbPasswordStrategyReset = {
     alwaysFail: false,
     endpoint: 'logout',
     method: 'delete',
@@ -85,15 +96,15 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully logged out.'],
   };
-  token? = {
+  token?: NbPasswordStrategyToken = {
+    class: NbAuthSimpleToken,
     key: 'data.token',
     getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
       res.body,
       options.token.key,
     ),
-    class: NbAuthSimpleToken,
   };
-  errors? = {
+  errors?: NbPasswordStrategyMessage = {
     key: 'data.errors',
     getter: (module: string, res: HttpErrorResponse, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
       res.error,
@@ -101,7 +112,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
       options[module].defaultErrors,
     ),
   };
-  messages? = {
+  messages?: NbPasswordStrategyMessage = {
     key: 'data.messages',
     getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
       res.body,

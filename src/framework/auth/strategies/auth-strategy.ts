@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
+import { NbAuthToken, nbAuthCreateToken } from '../services/token/token';
 
 export abstract class NbAuthStrategy {
 
@@ -17,6 +18,10 @@ export abstract class NbAuthStrategy {
 
   getOption(key: string): any {
     return getDeepFromObject(this.options, key, null);
+  }
+
+  createToken(value: string): NbAuthToken {
+    return nbAuthCreateToken(this.getOption('token.class'), value);
   }
 
   getName(): string {

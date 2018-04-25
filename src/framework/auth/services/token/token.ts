@@ -1,25 +1,34 @@
 import { urlBase64Decode } from '../../helpers';
 
-export interface NbAuthToken {
-  getValue(): string;
-  isValid(): boolean;
-  toString(): string;
+export abstract class NbAuthToken {
+  abstract getValue(): string;
+  abstract isValid(): boolean;
+  abstract getPayload(): string;
+  abstract toString(): string;
+
+  getName(): string {
+    return (this.constructor as NbAuthTokenClass).NAME;
+  }
 }
 
-export interface NbTokenClass {
-  new (raw: string): NbAuthToken
+export interface NbAuthTokenClass {
+  NAME: string;
+  new (raw: string): NbAuthToken;
 }
 
-export function nbCreateToken(tokenClass: NbTokenClass, token: string) {
+export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: string) {
   return new tokenClass(token);
 }
 
 /**
  * Wrapper for simple (text) token
  */
-export class NbAuthSimpleToken implements NbAuthToken {
+export class NbAuthSimpleToken extends NbAuthToken {
+
+  static NAME = 'nb:auth:simple:token';
 
   constructor(readonly token: string) {
+    super();
   }
 
   /**
@@ -28,6 +37,10 @@ export class NbAuthSimpleToken implements NbAuthToken {
    */
   getValue(): string {
     return this.token;
+  }
+
+  getPayload(): string {
+    return null;
   }
 
   /**
@@ -51,6 +64,8 @@ export class NbAuthSimpleToken implements NbAuthToken {
  * Wrapper for JWT token with additional methods.
  */
 export class NbAuthJWTToken extends NbAuthSimpleToken {
+
+  static NAME = 'nb:auth:jwt:token';
 
   /**
    * Returns payload object

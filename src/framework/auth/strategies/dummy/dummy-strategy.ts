@@ -7,6 +7,7 @@ import { delay } from 'rxjs/operators/delay';
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthResult } from '../../services/auth-result';
 import { NbDummyAuthStrategyOptions, dummyStrategyOptions } from './dummy-strategy-options';
+import { NbAuthStrategyClass } from '../../auth.options';
 
 
 /**
@@ -30,9 +31,9 @@ import { NbDummyAuthStrategyOptions, dummyStrategyOptions } from './dummy-strate
 @Injectable()
 export class NbDummyAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = dummyStrategyOptions;
+  protected defaultOptions: NbDummyAuthStrategyOptions = dummyStrategyOptions;
 
-  static setup(options: NbDummyAuthStrategyOptions) {
+  static setup(options: NbDummyAuthStrategyOptions): [NbAuthStrategyClass, NbDummyAuthStrategyOptions] {
     return [NbDummyAuthStrategy, options];
   }
 
@@ -80,14 +81,21 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
 
   protected createDummyResult(data?: any): NbAuthResult {
     if (this.getOption('alwaysFail')) {
-      // TODO we dont call tokenService clear during logout in case result is not success
-      return new NbAuthResult(false,
+      return new NbAuthResult(
+        false,
         this.createFailResponse(data),
         null,
-        ['Something went wrong.']);
+        ['Something went wrong.'],
+      );
     }
 
-    // TODO is it missed messages here, is it token should be defined
-    return new NbAuthResult(true, this.createSuccessResponse(data), '/', ['Successfully logged in.']);
+    return new NbAuthResult(
+      true,
+      this.createSuccessResponse(data),
+      '/',
+      [],
+      ['Successfully logged in.'],
+      this.createToken('test token'),
+    );
   }
 }

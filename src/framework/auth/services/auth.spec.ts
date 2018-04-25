@@ -7,7 +7,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Injector } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS, NB_AUTH_STRATEGIES } from '../auth.options';
+import { NB_AUTH_OPTIONS, NB_AUTH_USER_OPTIONS, NB_AUTH_STRATEGIES, NB_AUTH_TOKENS } from '../auth.options';
 import { NbAuthService } from './auth.service';
 import { NbDummyAuthStrategy } from '../strategies';
 import { nbStrategiesFactory, nbOptionsFactory } from '../auth.module';
@@ -16,22 +16,21 @@ import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
 import { delay } from 'rxjs/operators/delay';
 import { NbTokenService } from './token/token.service';
-import { NbAuthSimpleToken, nbCreateToken } from './token/token';
+import { NbAuthSimpleToken, nbAuthCreateToken, NbAuthJWTToken } from './token/token';
 import { NbTokenLocalStorage, NbTokenStorage } from './token/token-storage';
+import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token/token-parceler';
 
 describe('auth-service', () => {
   let authService: NbAuthService;
   let tokenService: NbTokenService;
   let dummyAuthStrategy: NbDummyAuthStrategy;
   const testTokenValue = 'test-token';
-  const replacedTokenValue = 'replaced-value';
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  const testToken = nbCreateToken(NbAuthSimpleToken, testTokenValue);
-  const replacedToken = nbCreateToken(NbAuthSimpleToken, replacedTokenValue);
-  const emptyToken = nbCreateToken(NbAuthSimpleToken, null);
+  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -43,7 +42,7 @@ describe('auth-service', () => {
     '/',
     [],
     ['Successfully logged in.'],
-    testTokenValue);
+    testToken);
 
   const successLogoutResult = new NbAuthResult(true,
     resp200,
@@ -74,7 +73,9 @@ describe('auth-service', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: NB_AUTH_OPTIONS, useValue: {} },
-        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken] },
+        NbAuthTokenParceler,
         {
           provide: NB_AUTH_USER_OPTIONS, useValue: {
             forms: {
@@ -171,7 +172,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -186,18 +187,14 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
+      const tokenServiceSetSpy = spyOn(tokenService, 'set')
         .and
         .returnValue(observableOf(null));
 
-    const tokenServiceGetSpy = spyOn(tokenService, 'get')
-        .and
-        .returnValue(observableOf(replacedToken));
 
       authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
         expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
-        expect(tokenServiceGetSpy).toHaveBeenCalled();
 
 
         expect(authRes.isFailure()).toBeFalsy();
@@ -205,8 +202,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
-        expect(authRes.getToken()).toEqual(replacedToken);
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -228,8 +224,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
-        expect(authRes.getToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -244,26 +239,20 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
+      const tokenServiceSetSpy = spyOn(tokenService, 'set')
         .and
         .returnValue(observableOf(null));
-
-      const tokenServiceGetSpy = spyOn(tokenService, 'get')
-        .and
-        .returnValue(observableOf(replacedToken));
 
       authService.register('dummy').subscribe((authRes: NbAuthResult) => {
         expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
-        expect(tokenServiceGetSpy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeFalsy();
         expect(authRes.isSuccess()).toBeTruthy();
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
-        expect(authRes.getToken()).toEqual(replacedToken);
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -286,7 +275,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -311,7 +300,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged out.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -334,7 +323,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -357,7 +346,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully requested password.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -380,7 +369,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -403,7 +392,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully reset password.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
