@@ -6,15 +6,23 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NbCardModule, NbCheckboxModule, NbLayoutModule } from '@nebular/theme';
 
-import { NbAuthService, NbAuthSimpleToken, NbTokenLocalStorage, NbTokenService, NbTokenStorage } from './services';
-import { NbAuthStrategyOptions, NbDummyAuthStrategy, NbPasswordAuthStrategy, NbAuthStrategy } from './strategies';
+import {
+  NB_AUTH_FALLBACK_TOKEN,
+  NbAuthService,
+  NbAuthSimpleToken,
+  NbTokenLocalStorage,
+  NbTokenService,
+  NbTokenStorage,
+  NbAuthTokenClass,
+  NbAuthTokenParceler,
+} from './services';
+import { NbAuthStrategy, NbAuthStrategyOptions, NbDummyAuthStrategy, NbPasswordAuthStrategy } from './strategies';
 
 import {
   defaultAuthOptions,
   NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
-  NB_AUTH_STRATEGIES,
-  NB_AUTH_TOKEN_CLASS,
+  NB_AUTH_STRATEGIES, NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
   NbAuthOptions,
   NbAuthStrategyClass,
@@ -33,13 +41,24 @@ import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
-  return options.strategies
-    .map(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
+  const strategies = [];
+  options.strategies
+    .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
       const strategy: NbAuthStrategy = injector.get(strategyClass);
       strategy.setOptions(strategyOptions);
 
-      return strategy;
+      strategies.push(strategy);
     });
+  return strategies;
+}
+
+export function nbTokensFactory(strategies: NbAuthStrategy[]): NbAuthTokenClass[] {
+  const tokens = [];
+  strategies
+    .forEach((strategy: NbAuthStrategy) => {
+      tokens.push(strategy.getOption('token.class'));
+    });
+  return tokens;
 }
 
 export function nbOptionsFactory(options) {
@@ -83,9 +102,11 @@ export class NbAuthModule {
         { provide: NB_AUTH_USER_OPTIONS, useValue: nbAuthOptions },
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
         { provide: NB_AUTH_STRATEGIES, useFactory: nbStrategiesFactory, deps: [NB_AUTH_OPTIONS, Injector] },
-        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_TOKENS, useFactory: nbTokensFactory, deps: [NB_AUTH_STRATEGIES] },
+        { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
+        NbAuthTokenParceler,
         NbAuthService,
         NbTokenService,
         NbDummyAuthStrategy,

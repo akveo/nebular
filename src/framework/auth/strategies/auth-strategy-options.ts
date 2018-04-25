@@ -3,12 +3,12 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { NbTokenClass } from '../services/';
+import { NbAuthTokenClass } from '../services/';
 
 export class NbAuthStrategyOptions {
   name: string;
   token?: {
-    class?: NbTokenClass;
+    class?: NbAuthTokenClass;
     [key: string]: any;
   };
 }

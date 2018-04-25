@@ -11,6 +11,7 @@ import { NbAuthResult } from '../../services/auth-result';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { nbAuthCreateToken, NbAuthSimpleToken } from '../../services';
 
 describe('password-auth-strategy', () => {
 
@@ -24,6 +25,9 @@ describe('password-auth-strategy', () => {
       'errors': ['Error message'],
     },
   };
+
+  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token');
+
   const noMessageResponse: any = {
     data: {
       'token': 'token',
@@ -71,10 +75,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(successResponse.data.token);
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -90,10 +93,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -109,10 +111,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(successResponse.data.token);
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -127,10 +128,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -146,10 +146,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -164,10 +163,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -183,10 +181,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -201,10 +198,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -219,10 +215,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -237,10 +232,9 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getToken()).toBe(null);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -1110,7 +1104,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });
@@ -1125,7 +1119,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });
@@ -1140,7 +1134,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });
@@ -1167,7 +1161,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });

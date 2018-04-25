@@ -1,10 +1,9 @@
 ## A Strategy
 
-In Nebular terms `auth strategy` is a class containing authentication logic specific for some authentication flow (email&password, OAuth2, etc). 
+In Nebular terms `Auth Strategy` is a class containing authentication logic specific for some authentication flow (email/password, OAuth2, etc). 
 It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
-Currently, there are two Auth Providers available out of the box:
+Currently, there are two Auth Strategies available out of the box:
 
-Two auth Strategies:
   - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
   - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
   
@@ -35,32 +34,45 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 });
 
 ```
+`email` here is an alias we assign to the strategy, so that we can mention it later on dynamically. This also allows us to configure multiple strategies with various configurations in one app.
 
 Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](#/docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
-{
- ...
- baseEndpoint: '',
- login: {
-   ...
-   endpoint: '/api/auth/login',
-   ...
- },
- register: {
-   ...
-   endpoint: '/api/auth/register',
-   ...
- },
+
+@NgModule({
+  imports: [
+   // ...
+    
+   NbAuthModule.forRoot({
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+            
+             baseEndpoint: '',
+              login: {
+                // ...
+                endpoint: '/api/auth/login',
+              },
+              register: {
+                // ...
+                endpoint: '/api/auth/register',
+              },
+           }),
+         ],
+         forms: {},
+       }), 
+  ],
+});
 ```
 
 Let's assume that our API is localed on a separate server `http://example.com/app-api/v1` and change the `baseEndpoint` accordingly:
 
 ```typescript
 {
- ...
+ // ...
  baseEndpoint: 'http://example.com/app-api/v1',
- ...
+ // ...
 }
 ```
 
@@ -68,14 +80,14 @@ And configure the endpoints, considering that the final endpoint will consist of
 
 ```typescript
 {
- baseEndpoint: 'http://example.com/app-api/v1',
- login: {
-   endpoint: '/auth/sign-in',
- },
- register: {
-   endpoint: '/auth/sign-up',
- },
- logout: {
+  baseEndpoint: 'http://example.com/app-api/v1',
+  login: {
+    endpoint: '/auth/sign-in',
+  },
+  register: {
+    endpoint: '/auth/sign-up',
+  },
+  logout: {
     endpoint: '/auth/sign-out',
   },
   requestPass: {
@@ -91,16 +103,16 @@ Finally, let's presume that unlike in the default strategy settings, our API acc
 
 ```typescript
 {
- baseEndpoint: 'http://example.com/app-api/v1',
- login: {
-   endpoint: '/auth/sign-in',
-   method: 'post',
- },
- register: {
-   endpoint: '/auth/sign-up',
-   method: 'post',
- },
- logout: {
+  baseEndpoint: 'http://example.com/app-api/v1',
+  login: {
+    endpoint: '/auth/sign-in',
+    method: 'post',
+  },
+  register: {
+    endpoint: '/auth/sign-up',
+    method: 'post',
+  },
+  logout: {
     endpoint: '/auth/sign-out',
     method: 'post',
   },

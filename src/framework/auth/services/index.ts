@@ -5,3 +5,4 @@ export * from './interceptors/simple-interceptor';
 export * from './token/token';
 export * from './token/token-storage';
 export * from './token/token.service';
+export * from './token/token-parceler';

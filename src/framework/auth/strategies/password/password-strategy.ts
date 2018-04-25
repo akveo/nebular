@@ -11,6 +11,7 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
 
 /**
@@ -26,11 +27,11 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *
  * ```
  *export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
- *  name = 'email';
+ *  name: string;
  *  baseEndpoint? = '/api/auth/';
  *  login?: boolean | NbPasswordStrategyModule = {
  *    alwaysFail: false,
- *    rememberMe: true,
+ *    rememberMe: true, // TODO: what does that mean?
  *    endpoint: 'login',
  *    method: 'post',
  *    redirect: {
@@ -62,7 +63,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Reset password instructions have been sent to your email.'],
  *  };
- *  resetPass?: boolean | NbPasswordStrategyResetOptions = {
+ *  resetPass?: boolean | NbPasswordStrategyReset = {
  *    endpoint: 'reset-pass',
  *    method: 'put',
  *    redirect: {
@@ -73,7 +74,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Your password has been successfully changed.'],
  *  };
- *  logout?: boolean | NbPasswordStrategyResetOptions = {
+ *  logout?: boolean | NbPasswordStrategyReset = {
  *    alwaysFail: false,
  *    endpoint: 'logout',
  *    method: 'delete',
@@ -84,23 +85,26 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['You have been successfully logged out.'],
  *  };
- *  token = {
+ *  token?: NbPasswordStrategyToken = {
+ *    class: NbAuthSimpleToken,
  *    key: 'data.token',
- *    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+ *    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+ *      res.body,
  *      options.token.key,
  *    ),
- *    class: NbAuthSimpleToken,
  *  };
- *  errors? = {
+ *  errors?: NbPasswordStrategyMessage = {
  *    key: 'data.errors',
- *    getter: (module: string, res: HttpErrorResponse, options: any) => getDeepFromObject(res.error,
+ *    getter: (module: string, res: HttpErrorResponse, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+ *      res.error,
  *      options.errors.key,
  *      options[module].defaultErrors,
  *    ),
  *  };
- *  messages? = {
+ *  messages?: NbPasswordStrategyMessage = {
  *    key: 'data.messages',
- *    getter: (module: string, res: HttpResponse<Object>, options: any) => getDeepFromObject(res.body,
+ *    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
+ *      res.body,
  *      options.messages.key,
  *      options[module].defaultMessages,
  *    ),
@@ -120,18 +124,15 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *      required?: boolean;
  *      minLength?: number | null;
  *      maxLength?: number | null;
- *      regexp?: string | null;
- *    };
- *  };
  *}
  * ```
  */
 @Injectable()
 export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
-  protected defaultOptions = passwordStrategyOptions;
+  protected defaultOptions: NbPasswordAuthStrategyOptions = passwordStrategyOptions;
 
-  static setup(options: NbPasswordAuthStrategyOptions) {
+  static setup(options: NbPasswordAuthStrategyOptions): [NbAuthStrategyClass, NbPasswordAuthStrategyOptions] {
     return [NbPasswordAuthStrategy, options];
   }
 
@@ -159,7 +160,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('login.redirect.success'),
             [],
             this.getOption('messages.getter')('login', res, this.options),
-            this.getOption('token.getter')('login', res, this.options));
+            this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
           let errors = [];
@@ -200,7 +201,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('register.redirect.success'),
             [],
             this.getOption('messages.getter')('register', res, this.options),
-            this.getOption('token.getter')('register', res, this.options));
+            this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
           let errors = [];
@@ -391,6 +392,8 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       );
   }
 
+  // TODO: this should be optional
+  // TODO: we can add token.noTokenFailure = true|false
   protected validateToken (module: string): any {
     return map((res) => {
       const token = this.getOption('token.getter')(module, res, this.options);
