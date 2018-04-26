@@ -88,6 +88,16 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['You have been successfully logged out.'],
  *  };
+ *  refreshToken?: boolean | NbPasswordStrategyModule = {
+ *    endpoint: 'refresh-token',
+ *    method: 'post',
+ *    redirect: {
+ *      success: null,
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['Your token has been successfully refreshed.'],
+ *  };
  *  token?: NbPasswordStrategyToken = {
  *    class: NbAuthSimpleToken,
  *    key: 'data.token',
@@ -127,6 +137,9 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *      required?: boolean;
  *      minLength?: number | null;
  *      maxLength?: number | null;
+ *      regexp?: string | null;
+ *    };
+ *  };
  *}
  * ```
  */
@@ -354,6 +367,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
   }
 
   refreshToken(data?: any): Observable<NbAuthResult> {
+
     const method = this.getOption('refreshToken.method');
     const url = this.getActionEndpoint('refreshToken');
 
@@ -374,7 +388,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('refreshToken.redirect.success'),
             [],
             this.getOption('messages.getter')('refreshToken', res, this.options),
-            this.getOption('token.getter')('refreshToken', res, this.options));
+            this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
           let errors = [];
