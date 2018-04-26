@@ -131,6 +131,8 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
  */
 export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
+  static NAME = 'nb:auth:oauth2:token';
+
   constructor(protected data: { [key: string]: string|number }|string = {}) {
     // we may get it as string when retrieving from a storage
     super(typeof data === 'string' ? JSON.parse(data) : data);

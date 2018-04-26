@@ -8,16 +8,17 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
-import { NbWindow } from '@nebular/theme';
+import { NB_WINDOW } from '@nebular/theme';
 import { of as observableOf } from 'rxjs/observable/of';
 
-import { NbOAuth2AuthProvider, NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-auth.provider';
-import { NbAuthResult } from '../services/auth-result';
+import { NbOAuth2AuthStrategy } from './oauth2-strategy';
+import { NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
+import { NbAuthResult, nbAuthCreateToken, NbAuthOAuth2Token } from '../../services';
 
 
-describe('oauth2-auth-provider', () => {
+describe('oauth2-auth-strategy', () => {
 
-  let provider: NbOAuth2AuthProvider;
+  let strategy: NbOAuth2AuthStrategy;
   let httpMock: HttpTestingController;
   let routeMock: any;
   let windowMock: any;
@@ -38,6 +39,8 @@ describe('oauth2-auth-provider', () => {
     error_uri: 'some',
   };
 
+  const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse) as NbAuthOAuth2Token;
+
 
   beforeEach(() => {
     windowMock = { location: { href: '' } };
@@ -46,20 +49,20 @@ describe('oauth2-auth-provider', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        NbOAuth2AuthProvider,
+        NbOAuth2AuthStrategy,
         { provide: ActivatedRoute, useFactory: () => routeMock },
-        { provide: NbWindow, useFactory: () => windowMock }, // useValue will clone, we need reference
+        { provide: NB_WINDOW, useFactory: () => windowMock }, // useValue will clone, we need reference
       ],
     });
   });
 
   beforeEach(async(inject(
-    [NbOAuth2AuthProvider, HttpTestingController, ActivatedRoute],
-    (_provider, _httpMock) => {
-      provider = _provider;
+    [NbOAuth2AuthStrategy, HttpTestingController],
+    (_strategy, _httpMock) => {
+      strategy = _strategy;
       httpMock = _httpMock;
 
-      provider.setConfig({});
+      strategy.setOptions({});
     },
   )));
 
@@ -70,14 +73,14 @@ describe('oauth2-auth-provider', () => {
   describe('out of the box: type CODE', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setOptions({
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
       });
     });
 
-    it('redirect to auth server', (done: DoneFn) => {
+     it('redirect to auth server', (done: DoneFn) => {
       windowMock.location = {
         set href(value: string) {
           expect(value).toEqual('http://example.com/authorize?response_type=code&client_id=clientId');
@@ -85,22 +88,21 @@ describe('oauth2-auth-provider', () => {
         },
       };
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe(() => {});
     });
 
     it('handle success redirect and sends correct token request', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
           expect(result.getRedirect()).toEqual('/');
           done();
         });
@@ -117,16 +119,15 @@ describe('oauth2-auth-provider', () => {
     it('handle error redirect back', (done: DoneFn) => {
       routeMock.queryParams = observableOf(tokenErrorResponse);
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull();
           expect(result.getResponse()).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -135,17 +136,16 @@ describe('oauth2-auth-provider', () => {
     it('handle error token response', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
 
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull();
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -156,17 +156,15 @@ describe('oauth2-auth-provider', () => {
 
     it('handle refresh token', (done: DoneFn) => {
 
-      const refreshToken = 'someToken';
 
-      provider.refreshToken(refreshToken)
+      strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
           expect(result.getRedirect()).toEqual('/');
           done();
         });
@@ -174,25 +172,23 @@ describe('oauth2-auth-provider', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
-          && req.body['refresh_token'] === refreshToken
+          && req.body['refresh_token'] === successToken.getRefresh()
           && !req.body['scope'],
       ).flush(tokenSuccessResponse);
     });
 
     it('handle error token refresh response', (done: DoneFn) => {
-      const refreshToken = 'someToken';
 
-      provider.refreshToken(refreshToken)
+      strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
 
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull(); // we don't have a token at this stage yet
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -205,7 +201,7 @@ describe('oauth2-auth-provider', () => {
   describe('configured: type TOKEN', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setOptions({
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -223,23 +219,23 @@ describe('oauth2-auth-provider', () => {
         },
       };
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe(() => {});
     });
 
     it('handle success redirect back with token', (done: DoneFn) => {
       const token = { access_token: 'token', token_type: 'bearer' };
+
       routeMock.params = observableOf(token);
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(nbAuthCreateToken(NbAuthOAuth2Token, token));
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(token);
           expect(result.getRedirect()).toEqual('/');
           done();
         });
@@ -248,16 +244,15 @@ describe('oauth2-auth-provider', () => {
     it('handle error redirect back', (done: DoneFn) => {
       routeMock.params = observableOf(tokenErrorResponse);
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull(); // we don't have a token at this stage yet
           expect(result.getResponse()).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -267,7 +262,7 @@ describe('oauth2-auth-provider', () => {
   describe('configured redirect, redirectUri, scope and additional params: type TOKEN', () => {
 
     beforeEach(() => {
-      provider.setConfig({
+      strategy.setOptions({
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -307,22 +302,21 @@ describe('oauth2-auth-provider', () => {
         },
       };
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe(() => {});
     });
 
     it('handle success redirect and sends correct token request', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
           expect(result.getRedirect()).toEqual('/success');
           done();
         });
@@ -339,15 +333,14 @@ describe('oauth2-auth-provider', () => {
     it('handle success redirect back with token request', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
           expect(result.getRedirect()).toEqual('/success');
           done();
         });
@@ -359,16 +352,15 @@ describe('oauth2-auth-provider', () => {
     it('handle error redirect back', (done: DoneFn) => {
       routeMock.queryParams = observableOf(tokenErrorResponse);
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull();
           expect(result.getResponse()).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual('/failure');
           done();
         });
@@ -376,17 +368,14 @@ describe('oauth2-auth-provider', () => {
 
     it('handle refresh token', (done: DoneFn) => {
 
-      const refreshToken = 'someToken';
-
-      provider.refreshToken(refreshToken)
+      strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(tokenSuccessResponse);
           expect(result.getRedirect()).toEqual('/success');
           done();
         });
@@ -394,7 +383,7 @@ describe('oauth2-auth-provider', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/custom'
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
-          && req.body['refresh_token'] === refreshToken
+          && req.body['refresh_token'] === successToken.getRefresh()
           && req.body['scope'] === 'read',
       ).flush(tokenSuccessResponse);
     });
@@ -402,17 +391,16 @@ describe('oauth2-auth-provider', () => {
     it('handle error token response', (done: DoneFn) => {
       routeMock.queryParams = observableOf({code: 'code'});
 
-      provider.authenticate()
+      strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
 
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBeNull();
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(errorMessages);
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual('/failure');
           done();
         });

@@ -157,5 +157,9 @@ describe('auth token', () => {
     it('isValid success', () => {
       expect(validToken.isValid()).toEqual(true);
     });
+
+    it('name', () => {
+      expect(NbAuthOAuth2Token.NAME).toEqual(validToken.getName());
+    });
   });
 });

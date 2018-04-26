@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -11,64 +11,30 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
-import { NbWindow } from '@nebular/theme';
+import { NB_WINDOW } from '@nebular/theme';
 
-import { NbAuthResult } from '../services/auth-result';
-import { NbAbstractAuthProvider } from './abstract-auth.provider';
-import { NbOAuth2AuthOptions } from './oauth2-auth.options';
+import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthRefreshableToken, NbAuthResult } from '../../services/';
+import { NbOAuth2AuthStrategyOptions, NbOAuth2ResponseType, auth2StrategyOptions } from './oauth2-strategy.options';
 
-export enum NbOAuth2ResponseType {
-  CODE = 'code',
-  TOKEN = 'token',
-}
-
-// TODO: password, client_credentials
-export enum NbOAuth2GrantType {
-  AUTHORIZATION_CODE = 'authorization_code',
-  REFRESH_TOKEN = 'refresh_token',
-}
 
 // TODO: handle state
-// TODO: tests for auth service
 @Injectable()
-export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
+export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
   get isTypeCode(): boolean {
-    return this.getConfigValue('authorize.responseType') === NbOAuth2ResponseType.CODE;
+    return this.getOption('authorize.responseType') === NbOAuth2ResponseType.CODE;
   }
 
   get isTypeToken(): boolean {
-    return this.getConfigValue('authorize.responseType') === NbOAuth2ResponseType.TOKEN;
+    return this.getOption('authorize.responseType') === NbOAuth2ResponseType.TOKEN;
   }
 
-  protected defaultConfig: NbOAuth2AuthOptions = {
-    baseEndpoint: '',
-    clientId: '',
-    clientSecret: '',
-    redirect: {
-      success: '/',
-      failure: null,
-    },
-    defaultErrors: ['Something went wrong, please try again.'],
-    defaultMessages: ['You have been successfully authenticated.'],
-    authorize: {
-      endpoint: 'authorize',
-      responseType: NbOAuth2ResponseType.CODE,
-
-    },
-    token: {
-      endpoint: 'token',
-      grantType: NbOAuth2GrantType.AUTHORIZATION_CODE,
-    },
-    refresh: {
-      endpoint: 'token',
-      grantType: NbOAuth2GrantType.REFRESH_TOKEN,
-    },
-  };
+  protected defaultOptions: NbOAuth2AuthStrategyOptions = auth2StrategyOptions;
 
   constructor(protected http: HttpClient,
               private route: ActivatedRoute,
-              private window: NbWindow) {
+              @Inject(NB_WINDOW) private window: any) {
     super();
   }
 
@@ -92,28 +58,28 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
       return this.getTokenRedirectResult();
     }
 
-    throw new Error(`'${this.getConfigValue('authorize.responseType')}' responseType is not supported,
+    throw new Error(`'${this.getOption('authorize.responseType')}' responseType is not supported,
                       only 'token' and 'code' are supported now`);
   }
 
-  refreshToken(refreshToken: string): Observable<NbAuthResult> {
+  refreshToken(token: NbAuthRefreshableToken): Observable<NbAuthResult> {
     const url = this.getActionEndpoint('refresh');
 
-    return this.http.post(url, this.buildRefreshRequestData(refreshToken))
+    return this.http.post(url, this.buildRefreshRequestData(token))
       .pipe(
         map((res) => {
           return new NbAuthResult(
             true,
             res,
-            this.getConfigValue('redirect.success'),
+            this.getOption('redirect.success'),
             [],
-            this.getConfigValue('defaultMessages'),
-            res);
+            this.getOption('defaultMessages'),
+            this.createToken(res));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('defaultErrors');
+            errors = this.getOption('defaultErrors');
           } else {
             errors.push('Something went wrong.');
           }
@@ -122,7 +88,7 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
             new NbAuthResult(
               false,
               res,
-              this.getConfigValue('redirect.failure'),
+              this.getOption('redirect.failure'),
               errors,
               [],
             ));
@@ -161,8 +127,8 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
           new NbAuthResult(
             false,
             params,
-            this.getConfigValue('redirect.failure'),
-            this.getConfigValue('defaultErrors'),
+            this.getOption('redirect.failure'),
+            this.getOption('defaultErrors'),
             [],
           ));
       }),
@@ -178,15 +144,15 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
           return new NbAuthResult(
             true,
             res,
-            this.getConfigValue('redirect.success'),
+            this.getOption('redirect.success'),
             [],
-            this.getConfigValue('defaultMessages'),
-            res);
+            this.getOption('defaultMessages'),
+            this.createToken(res));
         }),
         catchError((res) => {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors = this.getConfigValue('defaultErrors');
+            errors = this.getOption('defaultErrors');
           } else {
             errors.push('Something went wrong.');
           }
@@ -195,7 +161,7 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
             new NbAuthResult(
               false,
               res,
-              this.getConfigValue('redirect.failure'),
+              this.getOption('redirect.failure'),
               errors,
               [],
             ));
@@ -210,17 +176,17 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
           return new NbAuthResult(
             true,
             params,
-            this.getConfigValue('redirect.success'),
+            this.getOption('redirect.success'),
             [],
-            this.getConfigValue('defaultMessages'),
-            params);
+            this.getOption('defaultMessages'),
+            this.createToken(params));
         }
 
         return new NbAuthResult(
           false,
           params,
-          this.getConfigValue('redirect.failure'),
-          this.getConfigValue('defaultErrors'),
+          this.getOption('redirect.failure'),
+          this.getOption('defaultErrors'),
           [],
           );
       }),
@@ -229,10 +195,10 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
 
   protected buildCodeRequestData(code: string): any {
     const params = {
-      grant_type: this.getConfigValue('token.grantType'),
+      grant_type: this.getOption('token.grantType'),
       code: code,
-      redirect_uri: this.getConfigValue('token.redirectUri'),
-      client_id: this.getConfigValue('clientId'),
+      redirect_uri: this.getOption('token.redirectUri'),
+      client_id: this.getOption('clientId'),
     };
 
     Object.entries(params)
@@ -241,11 +207,11 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
     return params;
   }
 
-  protected buildRefreshRequestData(refreshToken: string): any {
+  protected buildRefreshRequestData(token: NbAuthRefreshableToken): any {
     const params = {
-      grant_type: this.getConfigValue('refresh.grantType'),
-      refresh_token: refreshToken,
-      scope: this.getConfigValue('refresh.scope'),
+      grant_type: this.getOption('refresh.grantType'),
+      refresh_token: token.getRefresh(),
+      scope: this.getOption('refresh.scope'),
     };
 
     Object.entries(params)
@@ -256,13 +222,13 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
 
   protected buildRedirectUrl() {
     const params = {
-      response_type: this.getConfigValue('authorize.responseType'),
-      client_id: this.getConfigValue('clientId'),
-      redirect_uri: this.getConfigValue('authorize.redirectUri'),
-      scope: this.getConfigValue('authorize.scope'),
-      state: this.getConfigValue('authorize.state'),
+      response_type: this.getOption('authorize.responseType'),
+      client_id: this.getOption('clientId'),
+      redirect_uri: this.getOption('authorize.redirectUri'),
+      scope: this.getOption('authorize.scope'),
+      state: this.getOption('authorize.state'),
 
-      ...this.getConfigValue('authorize.params'),
+      ...this.getOption('authorize.params'),
     };
 
     const endpoint = this.getActionEndpoint('authorize');
@@ -275,18 +241,18 @@ export class NbOAuth2AuthProvider extends NbAbstractAuthProvider {
   }
 
   register(data?: any): Observable<NbAuthResult> {
-    throw new Error('`register` is not supported by `NbOAuth2AuthProvider`, use `authenticate`.');
+    throw new Error('`register` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
-    throw new Error('`requestPassword` is not supported by `NbOAuth2AuthProvider`, use `authenticate`.');
+    throw new Error('`requestPassword` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
   }
 
   resetPassword(data: any = {}): Observable<NbAuthResult> {
-    throw new Error('`resetPassword` is not supported by `NbOAuth2AuthProvider`, use `authenticate`.');
+    throw new Error('`resetPassword` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
   }
 
   logout(): Observable<NbAuthResult> {
-    throw new Error('`logout` is not supported by `NbOAuth2AuthProvider`, use `authenticate`.');
+    throw new Error('`logout` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
   }
 }
