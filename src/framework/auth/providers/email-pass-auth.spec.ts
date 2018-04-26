@@ -250,6 +250,43 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
+    it('refreshToken success', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getMessages()).toEqual(successResponse.data.messages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRawToken()).toEqual(successResponse.data.token);
+          expect(result.getRedirect()).toEqual(null);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token').flush(successResponse);
+    });
+
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(false);
+          expect(result.isFailure()).toBe(true);
+          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
+          expect(result.getRawToken()).toBeUndefined();
+          expect(result.getRedirect()).toEqual(null);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(successResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
   });
 
   describe('always fail', () => {
@@ -269,6 +306,9 @@ describe('email-pass-auth-provider', () => {
           alwaysFail: true,
         },
         resetPass: {
+          alwaysFail: true,
+        },
+        refreshToken: {
           alwaysFail: true,
         },
       });
@@ -344,6 +384,20 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse);
     });
 
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(successResponse);
+    });
+
   });
 
   describe('custom endpoint', () => {
@@ -363,6 +417,9 @@ describe('email-pass-auth-provider', () => {
           endpoint: 'new',
         },
         resetPass: {
+          endpoint: 'new',
+        },
+        refreshToken: {
           endpoint: 'new',
         },
       });
@@ -426,6 +483,20 @@ describe('email-pass-auth-provider', () => {
 
     it('logout', (done: DoneFn) => {
       provider.logout()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/new')
+        .flush(successResponse);
+    });
+
+    it('refreshToken', (done: DoneFn) => {
+      provider.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -518,6 +589,20 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse);
     });
 
+    it('refreshToken', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/custom/refresh-token')
+        .flush(successResponse);
+    });
+
   });
 
   describe('custom method', () => {
@@ -537,6 +622,9 @@ describe('email-pass-auth-provider', () => {
           method: 'get',
         },
         resetPass: {
+          method: 'get',
+        },
+        refreshToken: {
           method: 'get',
         },
       });
@@ -612,6 +700,20 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse);
     });
 
+    it('refreshToken', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+
+          done();
+        });
+
+      httpMock.expectOne({ method: 'get' })
+        .flush(successResponse);
+    });
+
   });
 
   describe('custom redirect', () => {
@@ -637,6 +739,9 @@ describe('email-pass-auth-provider', () => {
           redirect,
         },
         resetPass: {
+          redirect,
+        },
+        refreshToken: {
           redirect,
         },
       });
@@ -772,6 +877,32 @@ describe('email-pass-auth-provider', () => {
         .flush(successResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
+    it('refreshToken success', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.getRedirect()).toBe(redirect.success);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(successResponse);
+    });
+
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.getRedirect()).toBe(redirect.failure);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(successResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
   });
 
   describe('custom message', () => {
@@ -797,6 +928,9 @@ describe('email-pass-auth-provider', () => {
           ...messages,
         },
         resetPass: {
+          ...messages,
+        },
+        refreshToken: {
           ...messages,
         },
       });
@@ -932,6 +1066,32 @@ describe('email-pass-auth-provider', () => {
         .flush(noMessageResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
+    it('refreshToken success', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.getMessages()).toEqual(messages.defaultMessages);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(noMessageResponse);
+    });
+
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.getErrors()).toEqual(messages.defaultErrors);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(noMessageResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
   });
 
   describe('custom token key', () => {
@@ -974,6 +1134,21 @@ describe('email-pass-auth-provider', () => {
         .flush(customResponse);
     });
 
+    it('refreshToken', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getRawToken()).toBe('token');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(customResponse);
+    });
+
   });
 
   describe('custom token extractor', () => {
@@ -1013,6 +1188,21 @@ describe('email-pass-auth-provider', () => {
         });
 
       httpMock.expectOne('/api/auth/register')
+        .flush(customResponse);
+    });
+
+    it('refreshToken', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getRawToken()).toBe('token');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
         .flush(customResponse);
     });
 
@@ -1094,6 +1284,36 @@ describe('email-pass-auth-provider', () => {
         .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
+    it('refreshToken success', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toBe('Success message');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(customResponse);
+    });
+
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getErrors()[0]).toBe('Error message');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
   });
 
   describe('custom message extractor', () => {
@@ -1169,6 +1389,36 @@ describe('email-pass-auth-provider', () => {
         });
 
       httpMock.expectOne('/api/auth/register')
+        .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
+    });
+
+    it('refreshToken success', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toBe('Success message');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush(customResponse);
+    });
+
+    it('refreshToken fail', (done: DoneFn) => {
+      provider.refreshToken()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getErrors()[0]).toBe('Error message');
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
         .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
