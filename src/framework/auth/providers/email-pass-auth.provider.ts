@@ -84,6 +84,16 @@ import { getDeepFromObject } from '../helpers';
  *    defaultErrors: ['Something went wrong, please try again.'],
  *    defaultMessages: ['Your password has been successfully changed.'],
  *  },
+ *  refreshToken: {
+ *    endpoint: '/api/auth/refresh-token',
+ *    method: 'post',
+ *    redirect: {
+ *      success: null,
+ *      failure: null,
+ *    },
+ *    defaultErrors: ['Something went wrong, please try again.'],
+ *    defaultMessages: ['Your token has been successfully refreshed.'],
+ *  },
  *  token: {
  *    key: 'data.token',
  *    getter: (module: string, res: HttpResponse<Object>) => getDeepFromObject(res.body,
@@ -169,6 +179,16 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
       resetPasswordTokenKey: 'reset_password_token',
       defaultErrors: ['Something went wrong, please try again.'],
       defaultMessages: ['Your password has been successfully changed.'],
+    },
+    refreshToken: {
+      endpoint: 'refresh-token',
+      method: 'post',
+      redirect: {
+        success: null,
+        failure: null,
+      },
+      defaultErrors: ['Something went wrong, please try again.'],
+      defaultMessages: ['Your token has been successfully refreshed.'],
     },
     token: {
       key: 'data.token',
@@ -397,6 +417,48 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
               false,
               res,
               this.getConfigValue('logout.redirect.failure'),
+              errors,
+            ));
+        }),
+      );
+  }
+
+  refreshToken(data?: any): Observable<NbAuthResult> {
+    const method = this.getConfigValue('refreshToken.method');
+    const url = this.getActionEndpoint('refreshToken');
+
+    return this.http.request(method, url, {body: data, observe: 'response'})
+      .pipe(
+        map((res) => {
+          if (this.getConfigValue('refreshToken.alwaysFail')) {
+            throw this.createFailResponse(data);
+          }
+
+          return res;
+        }),
+        this.validateToken('refreshToken'),
+        map((res) => {
+          return new NbAuthResult(
+            true,
+            res,
+            this.getConfigValue('refreshToken.redirect.success'),
+            [],
+            this.getConfigValue('messages.getter')('refreshToken', res),
+            this.getConfigValue('token.getter')('refreshToken', res));
+        }),
+        catchError((res) => {
+          let errors = [];
+          if (res instanceof HttpErrorResponse) {
+            errors = this.getConfigValue('errors.getter')('refreshToken', res);
+          } else {
+            errors.push('Something went wrong.');
+          }
+
+          return observableOf(
+            new NbAuthResult(
+              false,
+              res,
+              this.getConfigValue('refreshToken.redirect.failure'),
               errors,
             ));
         }),
