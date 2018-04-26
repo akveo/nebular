@@ -96,6 +96,16 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully logged out.'],
   };
+  refreshToken?: boolean | NbPasswordStrategyModule = {
+    endpoint: 'refresh-token',
+    method: 'post',
+    redirect: {
+      success: null,
+      failure: null,
+    },
+    defaultErrors: ['Something went wrong, please try again.'],
+    defaultMessages: ['Your token has been successfully refreshed.'],
+  };
   token?: NbPasswordStrategyToken = {
     class: NbAuthSimpleToken,
     key: 'data.token',

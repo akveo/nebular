@@ -66,7 +66,7 @@ describe('auth-service', () => {
     null,
     [],
     ['Successfully refreshed token.'],
-    testTokenValue);
+    testToken);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -399,7 +399,7 @@ describe('auth-service', () => {
   );
 
   it('refreshToken failed', (done) => {
-      const spy = spyOn(dummyAuthProvider, 'refreshToken')
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(failResult)
           .pipe(
@@ -413,8 +413,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual([]);
         expect(authRes.getErrors()).toEqual(['Something went wrong.']);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getRawToken()).toBeUndefined();
-        expect(authRes.getToken()).toBeUndefined();
+        expect(authRes.getToken()).toBe(null);
         expect(authRes.getResponse()).toEqual(resp401);
         done();
       })
@@ -422,33 +421,27 @@ describe('auth-service', () => {
   );
 
   it('refreshToken succeed', (done) => {
-      const providerSpy = spyOn(dummyAuthProvider, 'refreshToken')
+      const strategySpy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(successRefreshTokenResult)
           .pipe(
             delay(1000),
           ));
 
-      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
+      const tokenServiceSetSpy = spyOn(tokenService, 'set')
         .and
         .returnValue(observableOf(null));
 
-      const tokenServiceGetSpy = spyOn(tokenService, 'get')
-        .and
-        .returnValue(observableOf(replacedToken));
-
       authService.refreshToken('dummy').subscribe((authRes: NbAuthResult) => {
-        expect(providerSpy).toHaveBeenCalled();
+        expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
-        expect(tokenServiceGetSpy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeFalsy();
         expect(authRes.isSuccess()).toBeTruthy();
         expect(authRes.getMessages()).toEqual(['Successfully refreshed token.']);
         expect(authRes.getErrors()).toEqual([]);
-        expect(authRes.getRedirect()).toEqual(null);
-        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
-        expect(authRes.getToken()).toEqual(replacedToken);
+        expect(authRes.getRedirect()).toBeNull();
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })

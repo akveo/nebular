@@ -245,15 +245,14 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken success', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toEqual(successToken);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getRawToken()).toEqual(successResponse.data.token);
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -263,15 +262,14 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
-          expect(result.getToken()).toBeUndefined(); // we don't have a token at this stage yet
+          expect(result.getToken()).toBe(null);
           expect(result.getMessages()).toEqual([]);
           expect(result.getErrors()).toEqual(successResponse.data.errors); // no error message, response is success
-          expect(result.getRawToken()).toBeUndefined();
           expect(result.getRedirect()).toEqual(null);
 
           done();
@@ -379,7 +377,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -490,7 +488,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -584,7 +582,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -695,7 +693,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -872,7 +870,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken success', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.success);
@@ -885,7 +883,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getRedirect()).toBe(redirect.failure);
@@ -1061,7 +1059,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken success', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getMessages()).toEqual(messages.defaultMessages);
@@ -1074,7 +1072,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.getErrors()).toEqual(messages.defaultErrors);
@@ -1129,7 +1127,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1176,7 +1174,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });
@@ -1186,12 +1184,12 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getRawToken()).toBe('token');
+          expect(result.getToken()).toEqual(successToken);
 
           done();
         });
@@ -1279,7 +1277,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken success', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1294,7 +1292,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
@@ -1387,7 +1385,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken success', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
@@ -1402,7 +1400,7 @@ describe('password-auth-strategy', () => {
     });
 
     it('refreshToken fail', (done: DoneFn) => {
-      provider.refreshToken()
+      strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);

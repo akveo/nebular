@@ -74,7 +74,7 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
   refreshToken(data?: any): Observable<NbAuthResult> {
     return observableOf(this.createDummyResult(data))
       .pipe(
-        delay(this.getConfigValue('delay')),
+        delay(this.getOption('delay')),
       );
   }
 
