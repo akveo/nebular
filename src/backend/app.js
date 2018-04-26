@@ -125,6 +125,21 @@ app.delete('/api/auth/logout', function (req, res) {
   });
 });
 
+app.post('/api/auth/refresh-token', function (req, res) {
+    var payload = {
+        id: users[0].id,
+        email: users[0].email,
+        role: 'user',
+    };
+    var token = jwt.encode(payload, cfg.jwtSecret);
+    return res.json({
+        data: {
+            message: 'Successfully refreshed token.',
+            token: token
+        }
+    });
+});
+
 app.listen(4400, function () {
   console.log('ngx-admin sample API is running on 4400');
 });

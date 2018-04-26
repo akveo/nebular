@@ -31,6 +31,7 @@ export interface NgEmailPassAuthProviderConfig {
   requestPass?: boolean | NbEmailPassModuleConfig;
   resetPass?: boolean | NbEmailPassResetModuleConfig;
   logout?: boolean | NbEmailPassResetModuleConfig;
+  refreshToken?: boolean | NbEmailPassModuleConfig;
   token?: {
     key?: string;
     getter?: Function;

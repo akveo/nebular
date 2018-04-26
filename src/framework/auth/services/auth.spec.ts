@@ -63,6 +63,13 @@ describe('auth-service', () => {
     [],
     ['Successfully requested password.']);
 
+  const successRefreshTokenResult = new NbAuthResult(true,
+    resp200,
+    null,
+    [],
+    ['Successfully refreshed token.'],
+    testTokenValue);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -402,6 +409,63 @@ describe('auth-service', () => {
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
         expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getResponse()).toEqual(resp200);
+        done();
+      })
+    },
+  );
+
+  it('refreshToken failed', (done) => {
+      const spy = spyOn(dummyAuthProvider, 'refreshToken')
+        .and
+        .returnValue(observableOf(failResult)
+          .pipe(
+            delay(1000),
+          ));
+
+      authService.refreshToken('dummy').subscribe((authRes: NbAuthResult) => {
+        expect(spy).toHaveBeenCalled();
+        expect(authRes.isFailure()).toBeTruthy();
+        expect(authRes.isSuccess()).toBeFalsy();
+        expect(authRes.getMessages()).toEqual([]);
+        expect(authRes.getErrors()).toEqual(['Something went wrong.']);
+        expect(authRes.getRedirect()).toBeNull();
+        expect(authRes.getRawToken()).toBeUndefined();
+        expect(authRes.getToken()).toBeUndefined();
+        expect(authRes.getResponse()).toEqual(resp401);
+        done();
+      })
+    },
+  );
+
+  it('refreshToken succeed', (done) => {
+      const providerSpy = spyOn(dummyAuthProvider, 'refreshToken')
+        .and
+        .returnValue(observableOf(successRefreshTokenResult)
+          .pipe(
+            delay(1000),
+          ));
+
+      const tokenServiceSetSpy = spyOn(tokenService, 'setRaw')
+        .and
+        .returnValue(observableOf(null));
+
+      const tokenServiceGetSpy = spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(replacedToken));
+
+      authService.refreshToken('dummy').subscribe((authRes: NbAuthResult) => {
+        expect(providerSpy).toHaveBeenCalled();
+        expect(tokenServiceSetSpy).toHaveBeenCalled();
+        expect(tokenServiceGetSpy).toHaveBeenCalled();
+
+        expect(authRes.isFailure()).toBeFalsy();
+        expect(authRes.isSuccess()).toBeTruthy();
+        expect(authRes.getMessages()).toEqual(['Successfully refreshed token.']);
+        expect(authRes.getErrors()).toEqual([]);
+        expect(authRes.getRedirect()).toEqual(null);
+        expect(authRes.getRawToken()).toEqual(replacedToken.getValue());
+        expect(authRes.getToken()).toEqual(replacedToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
