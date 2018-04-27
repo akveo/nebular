@@ -126,8 +126,18 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
   }
 }
 
+const validateOAuth2Token = (data) => {
+  let result;
+  if (typeof data === 'string') {
+    try {
+      result = JSON.parse(data)
+    } catch (e) {}
+  }
+  return result;
+};
+
 /**
- * Wrapper for simple (text) token
+ * Wrapper for OAuth2 token
  */
 export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
@@ -135,7 +145,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   constructor(protected data: { [key: string]: string|number }|string = {}) {
     // we may get it as string when retrieving from a storage
-    super(typeof data === 'string' ? JSON.parse(data) : data);
+    super(validateOAuth2Token(data));
   }
 
   /**
