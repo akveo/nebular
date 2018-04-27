@@ -1,6 +1,6 @@
 @import '../../../@theme/styles/themes';
 
-:host {
+@include nb-install-component() {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -29,14 +29,15 @@
 
     a {
       font-size: 1.275rem;
-      color: white;
+      color: nb-theme(header-fg);
       text-decoration: none !important;
       font-weight: bold;
     }
 
     .version {
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       font-weight: bold;
+      color: nb-theme(color-fg-heading);
     }
   }
 
@@ -45,24 +46,24 @@
     height: 20px;
     margin-left: auto;
   }
-}
 
-@include media-breakpoint-down(md) {
-  /deep/ nb-menu .menu-items {
-    justify-content: flex-end;
+  @include media-breakpoint-down(md) {
+    /deep/ nb-menu .menu-items {
+      justify-content: flex-end;
 
-    li {
-      display: none;
+      li {
+        display: none;
 
-      &:nth-child(1), &:nth-child(2) {
-        display: flex;
+        &:nth-child(1), &:nth-child(2) {
+          display: flex;
+        }
       }
     }
   }
-}
 
-@include media-breakpoint-down(sm) {
-  /deep/ nb-menu .menu-items li:nth-child(2) {
-    display: none;
+  @include media-breakpoint-down(sm) {
+    /deep/ nb-menu .menu-items li:nth-child(2) {
+      display: none;
+    }
   }
 }

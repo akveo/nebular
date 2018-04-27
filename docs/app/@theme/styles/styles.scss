@@ -6,6 +6,7 @@
 @include nb-install() {
   @include nb-layout-theme();
   @include nb-sidebar-theme();
+  @include nb-card-theme();
   @include nb-menu-theme();
   @include nb-actions-theme();
   @include nb-search-theme();

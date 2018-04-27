@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { NbCardModule } from '@nebular/theme';
 
 import { NgdDocumentationRoutingModule } from './documentation-routing.module';
 import { NgdThemeModule } from '../@theme/theme.module';
@@ -17,6 +18,7 @@ import { NgdDocumentationService } from './documentation.service';
   imports: [
     NgdDocumentationRoutingModule,
     NgdThemeModule,
+    NbCardModule,
   ],
   declarations: [
     NgdPageComponent,
