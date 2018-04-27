@@ -270,7 +270,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   protected buildRefreshRequestData(token: NbAuthRefreshableToken): any {
     const params = {
       grant_type: this.getOption('refresh.grantType'),
-      refresh_token: token.getRefresh(),
+      refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
     };
 

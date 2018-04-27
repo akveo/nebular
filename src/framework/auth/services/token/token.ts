@@ -12,7 +12,7 @@ export abstract class NbAuthToken {
 }
 
 export interface NbAuthRefreshableToken {
-  getRefresh(): string;
+  getRefreshToken(): string;
 }
 
 export interface NbAuthTokenClass {
@@ -159,7 +159,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    * Returns the refresh token
    * @returns string
    */
-  getRefresh(): string {
+  getRefreshToken(): string {
     return this.token.refresh_token;
   }
 

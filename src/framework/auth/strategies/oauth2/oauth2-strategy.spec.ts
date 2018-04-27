@@ -172,7 +172,7 @@ describe('oauth2-auth-strategy', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
-          && req.body['refresh_token'] === successToken.getRefresh()
+          && req.body['refresh_token'] === successToken.getRefreshToken()
           && !req.body['scope'],
       ).flush(tokenSuccessResponse);
     });
@@ -383,7 +383,7 @@ describe('oauth2-auth-strategy', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/custom'
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
-          && req.body['refresh_token'] === successToken.getRefresh()
+          && req.body['refresh_token'] === successToken.getRefreshToken()
           && req.body['scope'] === 'read',
       ).flush(tokenSuccessResponse);
     });

@@ -147,7 +147,7 @@ describe('auth token', () => {
     });
 
     it('getTokenExpDate is empty', () => {
-      expect(noExpToken.getRefresh()).toEqual(token.refresh_token);
+      expect(noExpToken.getRefreshToken()).toEqual(token.refresh_token);
     });
 
     it('no exp date token is valid', () => {
