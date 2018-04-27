@@ -85,13 +85,66 @@ import { NbOAuth2AuthStrategyOptions, NbOAuth2ResponseType, auth2StrategyOptions
 @Injectable()
 export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
-  get isTypeCode(): boolean {
-    return this.getOption('authorize.responseType') === NbOAuth2ResponseType.CODE;
+  get responseType() {
+    return this.getOption('authorize.responseType');
   }
 
-  get isTypeToken(): boolean {
-    return this.getOption('authorize.responseType') === NbOAuth2ResponseType.TOKEN;
-  }
+  protected redirectResultHandlers = {
+    [NbOAuth2ResponseType.CODE]: () => {
+      return this.route.queryParams.pipe(
+        switchMap((params: any) => {
+          if (params.code) {
+            return this.requestToken(params.code)
+          }
+
+          return observableOf(
+            new NbAuthResult(
+              false,
+              params,
+              this.getOption('redirect.failure'),
+              this.getOption('defaultErrors'),
+              [],
+            ));
+        }),
+      );
+    },
+    [NbOAuth2ResponseType.TOKEN]: () => {
+      return this.route.params.pipe(
+        map((params: any) => {
+          if (!params.error) {
+            return new NbAuthResult(
+              true,
+              params,
+              this.getOption('redirect.success'),
+              [],
+              this.getOption('defaultMessages'),
+              this.createToken(params));
+          }
+
+          return new NbAuthResult(
+            false,
+            params,
+            this.getOption('redirect.failure'),
+            this.getOption('defaultErrors'),
+            [],
+          );
+        }),
+      );
+    },
+  };
+
+  protected redirectResults = {
+    [NbOAuth2ResponseType.CODE]: () => {
+      return this.route.queryParams.pipe(
+        map((params: any) => !!(params && (params.code || params.error))),
+      );
+    },
+    [NbOAuth2ResponseType.TOKEN]: () => {
+      return this.route.params.pipe(
+        map((params: any) => !!(params && (params.access_token || params.error))),
+      );
+    },
+  };
 
   protected defaultOptions: NbOAuth2AuthStrategyOptions = auth2StrategyOptions;
 
@@ -115,13 +168,12 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   getAuthorizationResult(): Observable<any> {
-    if (this.isTypeCode) {
-      return this.getCodeRedirectResult();
-    } else if (this.isTypeToken) {
-      return this.getTokenRedirectResult();
+    const redirectResultHandler = this.redirectResultHandlers[this.responseType];
+    if (redirectResultHandler) {
+      return redirectResultHandler.call(this);
     }
 
-    throw new Error(`'${this.getOption('authorize.responseType')}' responseType is not supported,
+    throw new Error(`'${this.responseType}' responseType is not supported,
                       only 'token' and 'code' are supported now`);
   }
 
@@ -164,38 +216,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   protected isRedirectResult(): Observable<boolean> {
-    return this.isTypeCode ? this.isCodeRedirectResult() : this.isTokenRedirectResult();
-  }
-
-  protected isCodeRedirectResult(): Observable<boolean> {
-    return this.route.queryParams.pipe(
-      map((params: any) => !!(params && (params.code || params.error))),
-    );
-  }
-
-  protected isTokenRedirectResult(): Observable<boolean> {
-    return this.route.params.pipe(
-      map((params: any) => !!(params && (params.access_token || params.error))),
-    );
-  }
-
-  protected getCodeRedirectResult(): Observable<NbAuthResult> {
-    return this.route.queryParams.pipe(
-      switchMap((params: any) => {
-        if (params.code) {
-          return this.requestToken(params.code)
-        }
-
-        return observableOf(
-          new NbAuthResult(
-            false,
-            params,
-            this.getOption('redirect.failure'),
-            this.getOption('defaultErrors'),
-            [],
-          ));
-      }),
-    );
+    return this.redirectResults[this.responseType].call(this);
   }
 
   protected requestToken(code: string) {
@@ -230,30 +251,6 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             ));
         }),
       );
-  }
-
-  protected getTokenRedirectResult(): Observable<NbAuthResult> {
-    return this.route.params.pipe(
-      map((params: any) => {
-        if (!params.error) {
-          return new NbAuthResult(
-            true,
-            params,
-            this.getOption('redirect.success'),
-            [],
-            this.getOption('defaultMessages'),
-            this.createToken(params));
-        }
-
-        return new NbAuthResult(
-          false,
-          params,
-          this.getOption('redirect.failure'),
-          this.getOption('defaultErrors'),
-          [],
-          );
-      }),
-    );
   }
 
   protected buildCodeRequestData(code: string): any {
