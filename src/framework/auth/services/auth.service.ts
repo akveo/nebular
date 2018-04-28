@@ -153,6 +153,42 @@ export class NbAuthService {
     return this.getProvider(provider).resetPassword(data);
   }
 
+  /**
+   * Sends a refresh token request
+   * Stores received token in the token storage
+   *
+   * Example:
+   * authenticate('email', {email: 'email@example.com', password: 'test'})
+   *
+   * @param {string} provider
+   * @param data
+   * @returns {Observable<NbAuthResult>}
+   */
+  refreshToken(provider: string, data?: any): Observable<NbAuthResult> {
+    return this.getProvider(provider).refreshToken()
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          return this.processResultToken(result);
+        }),
+      );
+  }
+
+  /**
+   * Gets the selected provider
+   *
+   * Example:
+   * getProvider('email')
+   *
+   * @param {string} provider
+   * @returns {NbAbstractAuthProvider}
+   */
+  protected getProvider(provider: string): NbAbstractAuthProvider {
+    if (!this.providers[provider]) {
+      throw new TypeError(`Nb auth provider '${provider}' is not registered`);
+    }
+    return this.injector.get(this.providers[provider].service);
+  }
+
   private processResultToken(result: NbAuthResult) {
     if (result.isSuccess() && result.getRawToken()) {
       return this.tokenService.setRaw(result.getRawToken())
@@ -166,13 +202,5 @@ export class NbAuthService {
     }
 
     return observableOf(result);
-  }
-
-  private getProvider(provider: string): NbAbstractAuthProvider {
-    if (!this.providers[provider]) {
-      throw new TypeError(`Nb auth provider '${provider}' is not registered`);
-    }
-
-    return this.injector.get(this.providers[provider].service);
   }
 }

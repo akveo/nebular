@@ -54,6 +54,13 @@ export class NbDummyAuthProvider extends NbAbstractAuthProvider {
       );
   }
 
+  refreshToken(data?: any): Observable<NbAuthResult> {
+    return observableOf(this.createDummyResult(data))
+      .pipe(
+        delay(this.getConfigValue('delay')),
+      );
+  }
+
   protected createDummyResult(data?: any): NbAuthResult {
     if (this.getConfigValue('alwaysFail')) {
       // TODO we dont call tokenService clear during logout in case result is not success

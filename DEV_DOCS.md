@@ -192,21 +192,12 @@ To start a new release (publish the framework packages on NPM) you need:
 1. update version
 2. create changelog
 3. create PR, approve, pull
-4. create a tag
-5. create changelog
-6. merge into `sandbox`, create changelog
-7. create PR, approve, pull
-8. create a tag
-9. create changelog
-10. create github release
-
-#ngx-admin demo update
-1. pull the sources 
-2. check everything is running correctly
-3. relate `demo` branch onto `master`
-4. build with npm run build:prod
-5. upload code using `scp -r dist/ server_details`
-
+4. rebase sandbox on master, push
+5. rebase demo on master, push
+6. create a tag
+7. create github release
+8. build demo with npm run build:prod
+9. upload demo using `scp -r dist/ server_details`
 
 # TODO
  - steps to start the development
