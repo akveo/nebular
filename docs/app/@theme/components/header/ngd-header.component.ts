@@ -23,7 +23,7 @@ export class NgdHeaderComponent {
   mainMenu: NbMenuItem[] = [
     {
       title: 'Docs',
-      link: 'docs',
+      link: '/docs',
     },
     {
       title: 'Components',

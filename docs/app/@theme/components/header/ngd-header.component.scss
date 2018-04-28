@@ -15,8 +15,8 @@
       .menu-item {
         border: none;
 
-        &:first-child {
-          border: none;
+        &:first-child a {
+          padding-left: 0;
         }
       }
     }
@@ -25,6 +25,7 @@
   .logo {
     display: flex;
     flex: 1;
+    max-width: nb-theme(sidebar-width);
     flex-direction: column;
 
     a {

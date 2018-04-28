@@ -12,6 +12,7 @@ import {
   NbMenuModule,
   NbTabsetModule,
   NbSidebarModule,
+  NbCardModule,
 } from '@nebular/theme';
 
 import {
@@ -20,7 +21,13 @@ import {
   NgdIconCardComponent,
   NgdTextCardComponent,
   NgdFooterComponent,
+  NgdFragmentTargetDirective,
 } from './components/';
+
+import {
+  NgdHighlightService,
+  NgdTextService,
+} from './services';
 
 
 @NgModule({
@@ -28,6 +35,7 @@ import {
     CommonModule,
     NbLayoutModule,
     NbSidebarModule,
+    NbCardModule,
     NbMenuModule,
     NbTabsetModule,
     RouterModule,
@@ -38,12 +46,14 @@ import {
     NgdIconCardComponent,
     NgdTextCardComponent,
     NgdFooterComponent,
+    NgdFragmentTargetDirective,
   ],
   exports: [
     CommonModule,
     RouterModule,
     NbLayoutModule,
     NbSidebarModule,
+    NbCardModule,
     NbMenuModule,
     NbTabsetModule,
     NgdHeaderComponent,
@@ -51,6 +61,11 @@ import {
     NgdIconCardComponent,
     NgdTextCardComponent,
     NgdFooterComponent,
+    NgdFragmentTargetDirective,
+  ],
+  providers: [
+    NgdHighlightService,
+    NgdTextService,
   ],
 })
 export class NgdThemeModule {

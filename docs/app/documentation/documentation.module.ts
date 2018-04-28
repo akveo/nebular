@@ -12,6 +12,7 @@ import { NgdThemeModule } from '../@theme/theme.module';
 import { NgdPageComponent } from './page/page.component';
 import { NgdDocumentationComponent } from './documentation.component';
 import { NgdDocumentationService } from './documentation.service';
+import { NgdBlocksModule } from '../blocks/blocks.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { NgdDocumentationService } from './documentation.service';
     NgdDocumentationRoutingModule,
     NgdThemeModule,
     NbCardModule,
+    NgdBlocksModule,
   ],
   declarations: [
     NgdPageComponent,
