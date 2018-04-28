@@ -27,6 +27,8 @@ export class NgdDocumentationComponent implements OnDestroy {
     this.themeService.changeTheme('docs-page');
 
     this.menuItems = this.service.getPreparedMenu('/docs');
+
+    // TODO: can we do any better?
     this.router.events
       .pipe(takeWhile(() => this.alive))
       .subscribe((event: any) => {

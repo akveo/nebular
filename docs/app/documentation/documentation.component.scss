@@ -1,13 +1,26 @@
 @import '../@theme/styles/themes';
 
-/deep/ nb-layout .layout-container {
+.content-center {
+  max-width: nb-theme(content-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:host /deep/ nb-layout .scrollable {
+  padding-top: 3rem;
+}
+
+:host /deep/ nb-layout .layout-container {
   max-width: nb-theme(content-width);
   width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
-/deep/ nb-sidebar nb-menu {
+:host /deep/ nb-sidebar nb-menu {
   > ul > li {
     margin-bottom: 1.25rem;
     font-weight: bold;

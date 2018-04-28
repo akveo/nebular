@@ -4,25 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
-import { STRUCTURE } from '../../structure';
-const PARSED_DOCS: any = require('../../output.json');
+import { NgdTextService } from '../@theme/services';
+import { DOCS, STRUCTURE } from '../app.module';
 
 @Injectable()
 export class NgdDocumentationService {
 
-  getStructure(): any {
-    return STRUCTURE;
-  }
-
-  getParsedDocs(): any {
-    return PARSED_DOCS;
+  constructor(private textService: NgdTextService,
+              @Inject(STRUCTURE) private structure,
+              @Inject(DOCS) private docs) {
   }
 
   getPreparedMenu(basePath: string): any {
-    return this.prepareMenu(this.getStructure(), { link: basePath });
+    return this.prepareMenu(this.prepareStructure(this.structure, this.docs), {link: basePath});
   }
 
   protected prepareStructure(structure: any, preparedDocs: any): any {
@@ -41,6 +38,21 @@ export class NgdDocumentationService {
         item.source = item.source.map(source => preparedDocs.classes.find((data) => data.name === source));
       }
 
+      if (item.block === 'markdown') {
+        item.children = this.textService.splitIntoSections(require(`raw-loader!../../articles/${item.source}`))
+          .map((block) => {
+            const html = this.textService.mdToHTML(block);
+            const title = this.textService.extractTitle(block) || this.textService.extractFirstTwoWords(html);
+            const fragment = this.textService.createSlag(title);
+            return {
+              source: block,
+              title: title ? title : this.textService.extractFirstTwoWords(html),
+              fragment: fragment,
+              html: html,
+            }
+          });
+      }
+
       if (item.children) {
         item.children = this.prepareStructure(item.children, preparedDocs);
       }
@@ -55,23 +67,46 @@ export class NgdDocumentationService {
       .map((item: any) => {
         const menuItem: NbMenuItem = {
           title: item.name,
-          link: this.createItemLink(item),
           pathMatch: 'prefix',
-          parent,
+          parent: parent,
           data: item,
         };
+        menuItem.link = this.createItemLink(menuItem);
 
-        // TODO: not very good check
+        // TODO: not a very good check
         if (item.children && item.children[0] && item.children[0].type === 'page') {
-          menuItem.children = this.prepareMenu(item.children, item);
+          menuItem.children = this.prepareMenu(item.children, menuItem);
         }
 
+        if (item.type === 'page') {
+          menuItem.data.toc = this.prepareToc(menuItem);
+        }
         return menuItem;
       });
   }
 
+  protected prepareToc(page: any) {
+    return page.data.children.reduce((acc: any[], item: any) => {
+      if (item.block === 'markdown') {
+        return acc.concat(this.getTocForMd(item, page.link));
+      }
+      acc.push(item.source.name);
+      return acc;
+    }, []);
+  }
+
+  protected getTocForMd(block: any, baseLink: string) {
+    return block.children.map((section: any) => (
+      {
+        title: section.title,
+        link: section.link,
+        fragment: section.fragment,
+      }
+    ));
+  }
+
   protected createItemLink(item: any) {
-    const url = item.name.replace(/[^a-zA-Z0-9\s]+/g, '').replace(/\s/g, '-').toLowerCase();
+    const url = this.textService.createSlag(item.title);
     return item.parent ? `${item.parent.link}/${url}` : url;
   }
 }
