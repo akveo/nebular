@@ -5,10 +5,12 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
 
-import { STRUCTURE } from '../../structure';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
+const STRUCTURE = {};
+
 const PARSEDDOCS: any = require('../../output.json');
 
 @Injectable()
@@ -38,7 +40,7 @@ export class DocsService {
   }
 
   onFragmentClick(): Observable<string> {
-    return this.fragments$.pipe(share());
+    return this.fragments$.share();
   }
 
   mapThemedValues(classStyles: any): any {
