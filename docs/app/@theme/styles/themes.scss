@@ -25,13 +25,13 @@ $nb-themes: nb-register-theme((
   footer-height: 18.75rem,
   footer-padding: 1.25rem 0,
   menu-font-size: 0.95rem,
-  menu-item-padding: 0.675rem 1.5rem 0.675rem 1rem,
+  //menu-item-padding: 0.675rem 1.5rem 0.675rem 1rem,
   menu-font-weight: font-weight-normal,
 ), docs-home, default);
 
 $nb-themes: nb-register-theme((
   // custom
-  content-width: 1280px,
+  content-width: 1440px,
 
   radius: 0.25rem,
   separator: transparent,
@@ -43,9 +43,12 @@ $nb-themes: nb-register-theme((
   layout-bg: #fafafa,
   layout-padding: 3.25rem 1.25rem 3.25rem 1rem,
   header-bg: white,
-  sidebar-padding: 3.25rem 1.25rem,
+  sidebar-padding: 2rem,
   sidebar-shadow: none,
   color-fg-highlight: #5699F0,
+  link-color:	color-fg-highlight,
+  link-color-hover: color-fg-highlight,
+  link-color-visited: color-fg-highlight,
   header-padding: 0,
   header-fg: black,
   menu-fg: black,
@@ -59,4 +62,6 @@ $nb-themes: nb-register-theme((
   card-header-font-size: 2rem,
   card-header-font-weight: bold,
   card-header-fg-heading: black,
+  card-margin: 2.5rem,
+  card-padding: 2rem 3rem 3.25rem 2rem,
 ), docs-page, docs-home);

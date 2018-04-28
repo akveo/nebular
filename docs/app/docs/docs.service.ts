@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-import { STRUCTURE } from '../../structure';
+const STRUCTURE = {};
 
 const PARSEDDOCS: any = require('../../output.json');
 

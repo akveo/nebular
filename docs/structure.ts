@@ -1,4 +1,4 @@
-export const STRUCTURE = [
+export const structure = [
   {
     type: 'section',
     name: 'Getting Started',

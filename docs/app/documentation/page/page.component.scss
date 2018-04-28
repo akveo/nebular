@@ -1,1 +1,80 @@
 @import '../../@theme/styles/themes';
+
+:host {
+  display: flex;
+}
+
+.middle-column {
+  flex: 3;
+  min-width: 0;
+
+  /deep/ nb-card {
+    h1, h2, h3, h4, h5, h6 {
+      color: rgba(0, 0, 0, 0.88);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      font-weight: bold;
+    }
+    p {
+      color: #494949;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    ul {
+      margin-bottom: 2rem;
+      ul {
+        padding-left: 2.5rem;
+        list-style-type: none;
+        & > li {
+          text-indent: -5px;
+          position: relative;
+          margin-bottom: 0;
+
+          &::before {
+            content: '-';
+            position: absolute;
+            left: -1.25rem;
+          }
+        }
+      }
+      li {
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .note {
+      padding: 1.25rem 3rem 1.5rem 1.25rem;
+      border-radius: 0.25rem;
+
+      .note-title {
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .note-body {
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+
+      &.note-info {
+        color: #5699F0;
+        background-color: #F0F6FF;
+      }
+    }
+  }
+}
+
+.settings-column {
+  flex: 1;
+  padding: 0 1.875rem;
+  min-width: 0;
+}
+
+.fixed-panel {
+  position: fixed;
+  width: 16rem;
+}
