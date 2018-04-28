@@ -194,6 +194,123 @@
   }
 }
 
+/*
+
+According to the specification (https://www.w3.org/TR/css-scoping-1/#host-selector)
+:host and :host-context are pseudo-classes. So we assume they could be combined,
+like other pseudo-classes, even same ones.
+For example: ':nth-of-type(2n):nth-of-type(even)'.
+
+Ideal solution would be to prepend any selector with :host-context([dir=rtl]).
+Then nebular components will behave as an html element and respond to [dir] attribute on any level,
+so direction could be overridden on any component level.
+
+Implementation code:
+
+@mixin nb-rtl() {
+  // add # to scss interpolation statement.
+  // it works in comments and we can't use it here
+  @at-root {selector-append(':host-context([dir=rtl])', &)} {
+    @content;
+  }
+}
+
+And when we call it somewhere:
+
+:host {
+  .some-class {
+    @include nb-rtl() {
+      ...
+    }
+  }
+}
+:host-context(...) {
+  .some-class {
+    @include nb-rtl() {
+      ...
+    }
+  }
+}
+
+Result will look like:
+
+:host-context([dir=rtl]):host .some-class {
+  ...
+}
+:host-context([dir=rtl]):host-context(...) .some-class {
+  ...
+}
+
+*
+  Side note:
+  :host-context():host selector are valid. https://lists.w3.org/Archives/Public/www-style/2015Feb/0305.html
+
+  :host-context([dir=rtl]):host-context(...) should match any permutation,
+  so order is not important.
+*
+
+
+Currently, there're two problems with this approach:
+
+First, is that we can't combine :host, :host-context. Angular bugs #14349, #19199.
+For the moment of writing, the only possible way is:
+:host {
+  :host-context(...) {
+    ...
+  }
+}
+It doesn't work for us because mixin could be called somewhere deeper, like:
+:host {
+  p {
+    @include nb-rtl() { ... }
+  }
+}
+We are not able to go up to :host level to place content passed to mixin.
+
+The second problem is that we only can be sure that we appending :host-context([dir=rtl]) to another
+:host/:host-context pseudo-class when called in theme files (*.theme.scss).
+  *
+    Side note:
+    Currently, nb-install-component uses another approach where :host prepended with the theme name
+    (https://github.com/angular/angular/blob/5b96078624b0a4760f2dbcf6fdf0bd62791be5bb/packages/compiler/src/shadow_css.ts#L441),
+    but it was made to be able to use current realization of rtl and it can be rewritten back to
+    :host-context($theme) once we will be able to use multiple shadow selectors.
+  *
+But when it's called in *.component.scss we can't be sure, that selector starts with :host/:host-context,
+because angular allows omitting pseudo-classes if we don't need to style :host component itself.
+We can break such selectors, by just appending :host-context([dir=rtl]) to them.
+  ***
+    Possible solution
+    check if we in theme by some theme variables and if so append, otherwise nest like
+    @at-root :host-context([dir=rtl]) {
+      // add # to scss interpolation statement.
+      // it works in comments and we can't use it here
+      {&} {
+        @content;
+      }
+    }
+    What if :host specified? Can we add space in :host-context(...) :host?
+    Or maybe add :host selector anyway? If multiple :host selectors are allowed
+  ***
+
+
+Problems with the current approach.
+
+1. Direction can be applied only on document level, because mixin prepends theme class,
+which placed on the body.
+2. *.component.scss styles should be in :host selector. Otherwise angular will add host
+attribute to [dir=rtl] attribute as well.
+
+
+General problems.
+
+Ltr is default document direction, but for proper work of nb-ltr (means ltr only),
+[dir=ltr] should be specified at least somewhere. ':not([dir=rtl]' not applicable here,
+because it's satisfy any parent, that don't have [dir=rtl] attribute.
+Previous approach was to use single rtl mixin and reset ltr properties to initial value.
+But sometimes it's hard to find, what the previous value should be. And such mixin call looks too verbose.
+*/
+
 @mixin _prepend-with-selector($selector, $prop: null, $value: null) {
   #{$selector} & {
     @if $prop != null {
