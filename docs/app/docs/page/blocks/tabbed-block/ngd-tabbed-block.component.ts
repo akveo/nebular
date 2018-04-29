@@ -28,4 +28,8 @@ export class NgdTabbedBlockComponent {
       return this.blockHelper.hasMethods(source) || this.blockHelper.hasProps(source);
     })
   }
+
+  get hasExample(): boolean {
+    return this.source.some(source => this.blockHelper.hasExamples(source));
+  }
 }
