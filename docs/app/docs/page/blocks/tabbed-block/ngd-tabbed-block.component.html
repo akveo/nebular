@@ -27,4 +27,15 @@
     </ng-container>
   </nb-tab>
 
+  <nb-tab tabTitle="Examples" *ngIf="hasExample">
+    <ng-container *ngFor="let component of source">
+      <ng-container *ngIf="blockHelper.hasExamples(component)">
+        <h2 class="class-name">
+          {{component.name}}
+        </h2>
+        <ngd-live-example *ngFor="let example of component.liveExamples" [id]="example"></ngd-live-example>
+      </ng-container>
+    </ng-container>
+  </nb-tab>
+
 </nb-tabset>

@@ -23,4 +23,8 @@ export class BlockHelperService {
   hasOverview(component): boolean {
     return component && component.overview && component.overview.length;
   }
+
+  hasExamples(component): boolean {
+    return component.liveExamples && component.liveExamples.length;
+  }
 }
