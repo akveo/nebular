@@ -3,7 +3,7 @@ import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngd-icon-card',
-  styleUrls: ['./ngd-icon-card.component.scss'],
+  styleUrls: ['./icon-card.component.scss'],
   template: `
     <div class="icon"></div>
     <img [src]="icon" />

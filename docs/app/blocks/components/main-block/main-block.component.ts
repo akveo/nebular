@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-main-block',
@@ -16,6 +16,7 @@ import { Component, Input } from '@angular/core';
       <!--<ngd-theme-block *ngSwitchCase="'theme'" [block]="block"></ngd-theme-block>-->
     </ng-container>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdMainBlockComponent {
 

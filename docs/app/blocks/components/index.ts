@@ -1,3 +1,2 @@
-export * from './main-block/ngd-main-block.component';
-export * from './md-block/ngd-md-block.component';
-export * from './toc-block/ngd-toc-block.component';
+export * from './main-block/main-block.component';
+export * from './md-block/md-block.component';

@@ -13,8 +13,8 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 import { publishReplay, refCount, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngd-toc-block',
-  styleUrls: ['./toc-block.component.scss'],
+  selector: 'ngd-page-toc',
+  styleUrls: ['./page-toc.component.scss'],
   template: `
     <h4>Overview</h4>
     <ul *ngIf="(items$ | async).length > 0">
@@ -25,7 +25,7 @@ import { publishReplay, refCount, map } from 'rxjs/operators';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdTocBlockComponent implements OnDestroy {
+export class NgdPageTocComponent implements OnDestroy {
 
   items$: Observable<any[]> = observableOf([]);
 
