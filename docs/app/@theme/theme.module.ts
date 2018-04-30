@@ -22,6 +22,7 @@ import {
   NgdTextCardComponent,
   NgdFooterComponent,
   NgdFragmentTargetDirective,
+  NgdPageTocComponent,
 } from './components/';
 
 import {
@@ -47,6 +48,7 @@ import {
     NgdTextCardComponent,
     NgdFooterComponent,
     NgdFragmentTargetDirective,
+    NgdPageTocComponent,
   ],
   exports: [
     CommonModule,
@@ -62,6 +64,7 @@ import {
     NgdTextCardComponent,
     NgdFooterComponent,
     NgdFragmentTargetDirective,
+    NgdPageTocComponent,
   ],
   providers: [
     NgdHighlightService,

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-md-block',
@@ -14,9 +14,9 @@ import { Component, Input } from '@angular/core';
       <nb-card-body [innerHtml]="section.html"></nb-card-body>
     </nb-card>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdMdBLockComponent {
 
   @Input() source: string;
-
 }

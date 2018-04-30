@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-header',
-  styleUrls: ['./ngd-header.component.scss'],
+  styleUrls: ['./header.component.scss'],
   template: `
     <div class="logo">
       <a href="#">Nebular</a>

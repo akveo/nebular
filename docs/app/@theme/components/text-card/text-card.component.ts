@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngd-text-card',
-  styleUrls: ['./ngd-text-card.component.scss'],
+  styleUrls: ['./text-card.component.scss'],
   template: `
     <h2>
       <span>

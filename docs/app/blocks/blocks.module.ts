@@ -12,7 +12,6 @@ import { NgdThemeModule } from '../@theme/theme.module';
 import {
   NgdMainBlockComponent,
   NgdMdBLockComponent,
-  NgdTocBlockComponent,
 } from './components/';
 
 
@@ -25,13 +24,11 @@ import {
   declarations: [
     NgdMainBlockComponent,
     NgdMdBLockComponent,
-    NgdTocBlockComponent,
   ],
   exports: [
     CommonModule,
     RouterModule,
     NgdMainBlockComponent,
-    NgdTocBlockComponent,
   ],
 })
 export class NgdBlocksModule {
