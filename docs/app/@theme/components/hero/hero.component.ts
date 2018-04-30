@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'ngd-hero',
-  styleUrls: ['./ngd-hero.component.scss'],
+  styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
       <h1>Nebular</h1>
