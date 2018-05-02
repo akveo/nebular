@@ -73,8 +73,7 @@ export class NgdDocumentationService {
         };
         menuItem.link = this.createItemLink(menuItem);
 
-        // TODO: not a very good check
-        if (item.children && item.children[0] && item.children[0].type === 'page') {
+        if (item.children && item.children.some(child => child.type === 'page')) {
           menuItem.children = this.prepareMenu(item.children, menuItem);
         }
 
@@ -88,14 +87,14 @@ export class NgdDocumentationService {
   protected prepareToc(page: any) {
     return page.data.children.reduce((acc: any[], item: any) => {
       if (item.block === 'markdown') {
-        return acc.concat(this.getTocForMd(item, page.link));
+        return acc.concat(this.getTocForMd(item));
       }
       acc.push(item.source.name);
       return acc;
     }, []);
   }
 
-  protected getTocForMd(block: any, baseLink: string) {
+  protected getTocForMd(block: any) {
     return block.children.map((section: any) => (
       {
         title: section.title,
