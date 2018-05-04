@@ -288,6 +288,13 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Get current state of sidebar
+   */
+  getState() {
+    return this.stateValue;
+  }
+
+  /**
    * Toggles sidebar state (expanded|collapsed|compacted)
    * @param {boolean} compact If true, then sidebar state will be changed between expanded & compacted,
    * otherwise - between expanded & collapsed. False by default.
