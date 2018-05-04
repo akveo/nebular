@@ -166,206 +166,122 @@ export const structure = [
     name: 'Components',
     children: [
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Layout',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbLayoutComponent',
-              'NbLayoutHeaderComponent',
-              'NbLayoutColumnComponent',
-              'NbLayoutFooterComponent',
-            ],
-          },
+        source: [
+          'NbLayoutComponent',
+          'NbLayoutHeaderComponent',
+          'NbLayoutColumnComponent',
+          'NbLayoutFooterComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Sidebar',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbSidebarComponent',
-              'NbSidebarHeaderComponent',
-              'NbSidebarFooterComponent',
-              'NbSidebarService',
-            ],
-          },
+        source: [
+          'NbSidebarComponent',
+          'NbSidebarHeaderComponent',
+          'NbSidebarFooterComponent',
+          'NbSidebarService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Menu',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbMenuComponent',
-              'NbMenuItem',
-              'NbMenuService',
-            ],
-          },
+        source: [
+          'NbMenuComponent',
+          'NbMenuItem',
+          'NbMenuService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbCardComponent',
-              'NbCardHeaderComponent',
-              'NbCardBodyComponent',
-              'NbCardFooterComponent',
-            ],
-          },
+        source: [
+          'NbCardComponent',
+          'NbCardHeaderComponent',
+          'NbCardBodyComponent',
+          'NbCardFooterComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Flip Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbFlipCardComponent',
-              'NbCardFrontComponent',
-              'NbCardBackComponent',
-            ],
-          },
+        source: [
+          'NbFlipCardComponent',
+          'NbCardFrontComponent',
+          'NbCardBackComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Reveal Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbRevealCardComponent',
-              'NbCardFrontComponent',
-              'NbCardBackComponent',
-            ],
-          },
+        source: [
+          'NbRevealCardComponent',
+          'NbCardFrontComponent',
+          'NbCardBackComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Search',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbSearchComponent',
-              'NbSearchService',
-            ],
-          },
+        source: [
+          'NbSearchComponent',
+          'NbSearchService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Tabs',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbTabsetComponent',
-              'NbTabComponent',
-              'NbRouteTabsetComponent',
-            ],
-          },
+        source: [
+          'NbTabsetComponent',
+          'NbTabComponent',
+          'NbRouteTabsetComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Actions',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbActionsComponent',
-              'NbActionComponent',
-            ],
-          },
+        source: [
+          'NbActionsComponent',
+          'NbActionComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'User (Avatar)',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbUserComponent',
-            ],
-          },
+        source: [
+          'NbUserComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Checkbox',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbCheckboxComponent',
-            ],
-          },
+        source: [
+          'NbCheckboxComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Badge',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbBadgeComponent',
-            ],
-          },
+        source: [
+          'NbBadgeComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Popover',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbPopoverDirective',
-              'NbPopoverComponent',
-            ],
-          },
+        source: [
+          'NbPopoverDirective',
+          'NbPopoverComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Context Menu',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbContextMenuDirective',
-              'NbContextMenuComponent',
-            ],
-          },
+        source: [
+          'NbContextMenuDirective',
+          'NbContextMenuComponent',
         ],
       },
     ],

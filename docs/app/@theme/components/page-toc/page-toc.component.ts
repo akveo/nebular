@@ -17,8 +17,8 @@ import { publishReplay, refCount, map } from 'rxjs/operators';
   styleUrls: ['./page-toc.component.scss'],
   template: `
     <h4>Overview</h4>
-    <ul *ngIf="(items$ | async).length > 0">
-      <li *ngFor="let item of (items$ | async)" [class.selected]="item.selected">
+    <ul *ngIf="(items$ | async)?.length > 0">
+      <li *ngFor="let item of items$ | async" [class.selected]="item.selected">
         <a [routerLink]="item.link" [fragment]="item.fragment">{{ item.title }}</a>
       </li>
     </ul>

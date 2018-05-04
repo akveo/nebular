@@ -19,7 +19,11 @@ export const routes: Routes = [
         component: NgdPageComponent,
       },
       {
-        path: ':page/:sub-page',
+        path: ':page/:subPage',
+        component: NgdPageComponent,
+      },
+      {
+        path: ':page/:subPage/:tab',
         component: NgdPageComponent,
       },
     ],
