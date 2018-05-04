@@ -7,12 +7,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
   NbSidebarModule,
   NbCardModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 
 import {
@@ -23,11 +26,19 @@ import {
   NgdFooterComponent,
   NgdFragmentTargetDirective,
   NgdPageTocComponent,
+  NgdPageTabsComponent,
+  NgdColorSwatchDirective,
+  NgdDescriptionDirective,
 } from './components/';
 
 import {
   NgdHighlightService,
   NgdTextService,
+  NgdTabbedService,
+  NgdStructureService,
+  NgdCodeLoaderService,
+  NgdIframeCommunicatorService,
+  NgdStylesService,
 } from './services';
 
 
@@ -49,15 +60,21 @@ import {
     NgdFooterComponent,
     NgdFragmentTargetDirective,
     NgdPageTocComponent,
+    NgdPageTabsComponent,
+    NgdColorSwatchDirective,
+    NgdDescriptionDirective,
   ],
   exports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
     NbLayoutModule,
     NbSidebarModule,
     NbCardModule,
     NbMenuModule,
     NbTabsetModule,
+    NbCheckboxModule,
     NgdHeaderComponent,
     NgdHeroComponent,
     NgdIconCardComponent,
@@ -65,10 +82,18 @@ import {
     NgdFooterComponent,
     NgdFragmentTargetDirective,
     NgdPageTocComponent,
+    NgdPageTabsComponent,
+    NgdColorSwatchDirective,
+    NgdDescriptionDirective,
   ],
   providers: [
     NgdHighlightService,
     NgdTextService,
+    NgdTabbedService,
+    NgdStructureService,
+    NgdCodeLoaderService,
+    NgdIframeCommunicatorService,
+    NgdStylesService,
   ],
 })
 export class NgdThemeModule {

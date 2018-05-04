@@ -1,0 +1,34 @@
+<ng-container [ngSwitch]="currentTab?.tab">
+
+  <ng-container *ngFor="let component of source">
+
+    <ng-container *ngSwitchCase="'overview'">
+      <ngd-overview-block *ngIf="hasOverview(component)" [source]="component"></ngd-overview-block>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'theme'">
+      <h2 class="class-name">{{component.name}}</h2>
+      <ngd-styles-block *ngIf="hasTheme(component)" [source]="component"></ngd-styles-block>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'api'">
+      <h2 class="class-name">
+        {{component.name}}
+      </h2>
+      <ngd-props-block [source]="component" *ngIf="hasProps(component)"></ngd-props-block>
+      <ngd-methods-block [source]="component" *ngIf="hasMethods(component)"></ngd-methods-block>
+    </ng-container>
+
+
+    <ng-container *ngSwitchCase="'examples'">
+      <ng-container *ngIf="hasExamples(component)">
+        <h2 class="class-name">
+          {{ component.name }}
+        </h2>
+        <ngd-live-example-block *ngFor="let example of component.liveExamples" [id]="example"></ngd-live-example-block>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>
