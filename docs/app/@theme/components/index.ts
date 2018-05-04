@@ -5,3 +5,6 @@ export * from './icon-card/icon-card.component';
 export * from './text-card/text-card.component';
 export * from './fragment-target/fragment-target.directive';
 export * from './page-toc/page-toc.component';
+export * from './page-tabs/page-tabs.component';
+export * from './color-swatch/color-swatch.directive';
+export * from './description/description.directive';

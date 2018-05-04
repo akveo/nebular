@@ -10,10 +10,38 @@ import { CommonModule } from '@angular/common';
 import { NgdThemeModule } from '../@theme/theme.module';
 
 import {
-  NgdMainBlockComponent,
   NgdMdBLockComponent,
+  NgdTabbedBlockComponent,
+  NgdOverviewBlockComponent,
+  NgdExampleBlockComponent,
+  NgdInlineExampleBlockComponent,
+  NgdTabbedExampleBlockComponent,
+  NgdLiveExampleBlockComponent,
+  NgdStackedExampleComponent,
+  NgdCodeBlockComponent,
+  NgdMethodsBlockComponent,
+  NgdPropsBlockComponent,
+  NgdStylesBlockComponent,
+  NgdThemeComponent,
+  NgdComponentBlockComponent,
 } from './components/';
 
+const blocks = [
+  NgdMdBLockComponent,
+  NgdTabbedBlockComponent,
+  NgdOverviewBlockComponent,
+  NgdExampleBlockComponent,
+  NgdInlineExampleBlockComponent,
+  NgdTabbedExampleBlockComponent,
+  NgdLiveExampleBlockComponent,
+  NgdStackedExampleComponent,
+  NgdCodeBlockComponent,
+  NgdMethodsBlockComponent,
+  NgdPropsBlockComponent,
+  NgdStylesBlockComponent,
+  NgdThemeComponent,
+  NgdComponentBlockComponent,
+];
 
 @NgModule({
   imports: [
@@ -22,13 +50,12 @@ import {
     NgdThemeModule,
   ],
   declarations: [
-    NgdMainBlockComponent,
-    NgdMdBLockComponent,
+    ...blocks,
   ],
   exports: [
     CommonModule,
     RouterModule,
-    NgdMainBlockComponent,
+    ...blocks,
   ],
 })
 export class NgdBlocksModule {
