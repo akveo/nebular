@@ -9,9 +9,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'ngd-md-block',
   template: `
-    <nb-card *ngFor="let section of source">
+    <nb-card *ngFor="let section of source;">
       <a [name]="section.fragment"></a>
-      <nb-card-body [innerHtml]="section.html"></nb-card-body>
+      <nb-card-body>
+        <div [innerHtml]="section.html"></div>
+      </nb-card-body>
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -5,7 +5,6 @@
  */
 
 import { Routes } from '@angular/router';
-import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
 
 export const routes: Routes = [
   {
@@ -18,13 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'example',
-    component: NgdExampleRendererComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: '../../src/playground/playground.module#NbPlaygroundModule',
-      },
-    ],
+    loadChildren: './example/example.module#NgdExampleModule',
   },
   {
     path: '**',

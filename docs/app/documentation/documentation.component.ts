@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { NbThemeService, NbMenuItem } from '@nebular/theme';
 
-import { NgdDocumentationService } from './documentation.service';
+import { NgdMenuService } from './menu.service';
 
 @Component({
   selector: 'ngd-documentation',
@@ -21,7 +21,7 @@ export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];
   private alive = true;
 
-  constructor(private service: NgdDocumentationService,
+  constructor(private service: NgdMenuService,
               private router: Router,
               private  themeService: NbThemeService) {
     this.themeService.changeTheme('docs-page');

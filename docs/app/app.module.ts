@@ -20,8 +20,6 @@ import {
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
-// TODO: check this one
-import { NgdExampleRendererComponent } from './components/example/example-renderer.component';
 
 import { structure  } from '../structure';
 const docs = require('../output.json');
@@ -47,7 +45,6 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
   ],
   declarations: [
     NgdAppComponent,
-    NgdExampleRendererComponent,
   ],
   providers: [
     Title,

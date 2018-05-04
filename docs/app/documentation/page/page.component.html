@@ -1,11 +1,20 @@
 <div class="middle-column">
-  <ng-container *ngFor="let block of (currentItem$ | async)?.children">
-    <ngd-main-block [block]="block"></ngd-main-block>
+
+  <ng-container *ngFor="let block of currentItem?.children">
+    <ng-container [ngSwitch]="block.block">
+      <ngd-md-block *ngSwitchCase="'markdown'" [source]="block.children"></ngd-md-block>
+      <ngd-component-block *ngSwitchCase="'component'" [source]="block.source"></ngd-component-block>
+      <ngd-tabbed-block *ngSwitchCase="'tabbed'" [source]="block.children" [tabs]="currentItem.tabs"></ngd-tabbed-block>
+      <ngd-theme-block *ngSwitchCase="'theme'" [block]="block"></ngd-theme-block>
+    </ng-container>
   </ng-container>
+
 </div>
+
 <div class="settings-column">
   <div class="fixed-panel">
-    <ngd-page-toc [toc]="(currentItem$ | async)?.toc"></ngd-page-toc>
+    <ngd-page-tabs [tabs]="currentItem?.tabs"></ngd-page-tabs>
+    <ngd-page-toc [toc]="currentItem?.toc"></ngd-page-toc>
   </div>
 </div>
 
