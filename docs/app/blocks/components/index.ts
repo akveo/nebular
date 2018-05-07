@@ -9,6 +9,7 @@ export * from './live-example-block/live-example-block.component';
 export * from './stacked-example-block/stacked-examples.component';
 export * from './methods-block/methods-block.component';
 export * from './props-block/props-block.component';
+export * from './prop-block/prop-block.component';
 export * from './styles-block/styles-block.component';
 export * from './theme-block/theme-block.component';
 export * from './component-block/component-block.component';

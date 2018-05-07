@@ -10,9 +10,11 @@ import { NgdStylesService } from '../../../@theme/services';
 @Component({
   selector: 'ngd-styles-block',
   template: `
-    <div class="block-container" *ngFor="let style of classStyles">
-      <div class="table-container">
-        <table class="table table-striped">
+    <nb-card *ngFor="let style of classStyles">
+      <a [name]="slag"></a>
+      <nb-card-body>
+        <h2>{{ name }}</h2>
+        <table class="striped">
           <thead>
           <tr>
             <td>Name</td>
@@ -31,20 +33,22 @@ import { NgdStylesService } from '../../../@theme/services';
           </tr>
           </tbody>
         </table>
-      </div>
-    </div>
+      </nb-card-body>
+    </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdStylesBlockComponent {
 
   classStyles: any;
-  className: string;
+  name: string;
+  slag: string;
 
   @Input('source')
   set setSource(source: any) {
     this.classStyles = this.stylesService.mapThemedValues(source.styles);
-    this.className = source.name;
+    this.name = source.name;
+    this.slag = source.slag;
   };
 
   constructor(private stylesService: NgdStylesService) {

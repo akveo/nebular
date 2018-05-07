@@ -97,6 +97,7 @@ export class NgdStructureService {
     }
     return {
       ... component,
+      slag: this.textService.createSlag(component.name),
       overview: component.overview.map((node: any) => {
         if (node.type === 'text') {
           return {
