@@ -89,7 +89,6 @@ $nb-themes-export: () !global;
 
   @if (length($nb-enabled-themes) > 0) {
     @each $theme-name in $nb-enabled-themes {
-      @debug $theme-name;
       $themes-to-install: map-set($themes-to-install, $theme-name, map-get($nb-themes, $theme-name));
     }
   } @else {
