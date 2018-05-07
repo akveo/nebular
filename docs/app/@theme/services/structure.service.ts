@@ -123,8 +123,7 @@ export class NgdStructureService {
   }
 
   protected getTocForMd(block: any) {
-    return block.children.map((section: any) => (
-      {
+    return block.children.map((section: any) => ({
         title: section.title,
         fragment: section.fragment,
       }
@@ -132,8 +131,7 @@ export class NgdStructureService {
   }
 
   protected getTocForTabbed(block: any) {
-    return block.children.map((component: any) => (
-      {
+    return block.children.map((component: any) => ({
         title: component.name,
         fragment: this.textService.createSlag(component.name),
       }
