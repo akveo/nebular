@@ -21,11 +21,57 @@
       line-height: 1.5;
     }
 
+    code {
+      background: #F1F2F3;
+      color: #5699F0;
+      padding: 0.125rem 0.5rem;
+      border-radius: 0.25rem;
+    }
+
     code.hljs {
       padding: 2rem 2.5rem;
       border-radius: 8px;
       background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
       font-size: 0.875rem;
+    }
+
+    table {
+      font-size: 0.9375rem;
+      width: 100%;
+      thead {
+        color: #8994A3;
+        border-bottom: 1px solid #F1F2F3;
+
+        td {
+          padding: 1rem 0.5rem;
+        }
+      }
+
+      tr {
+        border-bottom: 1px solid #F1F2F3;
+
+        &:last-child {
+          border: none;
+        }
+      }
+
+      td {
+        padding: 0.5rem;
+
+        &:first-child {
+          font-weight: 500;
+        }
+      }
+
+      &.striped {
+        tbody tr:nth-child(odd) {
+          background: #F5F6F7;
+        }
+
+        td {
+          padding: 1rem 0.5rem;
+        }
+      }
     }
 
     ul {
@@ -71,6 +117,16 @@
         color: #5699F0;
         background-color: #F0F6FF;
       }
+    }
+
+    .color-swatch {
+      display: inline-block;
+      border: 1px solid black;
+      width: 0.875rem;
+      height: 0.875rem;
+      margin-left: 7px;
+      margin-bottom: -2px;
+      border-radius: 2px;
     }
   }
 }
