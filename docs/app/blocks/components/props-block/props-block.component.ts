@@ -10,92 +10,39 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'ngd-props-block',
   template: `
-    <div  class="inputs block-container" *ngIf="classInputs.length > 0">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Inputs" ngdFragment></a> Inputs</p>
-      <div class="table-container">
-        <table  class="table">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Type</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let prop of classInputs">
-              <td>{{ prop.name }}</td>
-              <td><code>{{ prop.type }}</code></td>
-              <td>
-                 <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
-                 <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="outputs block-container" *ngIf="classOutputs.length > 0">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Outputs" ngdFragment></a> Outputs</p>
-      <div class="table-container">
-        <table  class="table">
-          <thead>
-           <tr>
-             <td>Name</td>
-             <td>Type</td>
-             <td>Description</td>
-           </tr>
-          </thead>
-          <tbody>
-           <tr *ngFor="let prop of classOutputs">
-             <td>{{ prop.name }}</td>
-             <td><code>{{ prop.type }}</code></td>
-             <td>
-                <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
-                <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
-             </td>
-           </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div  class="inputs block-container" *ngIf="classProps.length > 0">
-      <p class="block-title"><a [routerLink]="" fragment="{{className}}Properties" ngdFragment></a> Properties</p>
-      <div class="table-container">
-        <table  class="table">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Type</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let prop of classProps">
-              <td>{{ prop.name }}</td>
-              <td><code>{{ prop.type }}</code></td>
-              <td>
-                 <div *ngIf="!!prop.shortDescription" ngdDescription>{{ prop.shortDescription }}</div>
-                 <div *ngIf="!!prop.description" ngdDescription>{{ prop.description }}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ngd-prop-block *ngIf="inputs.length > 0"
+                    [properties]="inputs"
+                    name="{{ name}} Inputs"
+                    [slag]="slag">
+    </ngd-prop-block>
+
+    <ngd-prop-block *ngIf="outputs.length > 0"
+                    [properties]="outputs"
+                    name="{{ name}} Outputs"
+                    [slag]="slag">
+    </ngd-prop-block>
+
+    <ngd-prop-block *ngIf="props.length > 0"
+                    [properties]="props"
+                    name="{{ name}} Properties"
+                    [slag]="slag">
+    </ngd-prop-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdPropsBlockComponent {
-  classOutputs: any = [];
-  classInputs: any = [];
-  classProps: any = [];
-  className: string;
+  outputs: any = [];
+  inputs: any = [];
+  props: any = [];
+  name: string;
+  slag: string;
 
   @Input('source')
   set setSource(source: any) {
-    this.classInputs = source.props.filter(item => item.kind === 'input');
-    this.classOutputs = source.props.filter(item => item.kind === 'output');
-    this.classProps = source.props.filter(item => item.kind === 'property');
-    this.className = source.name;
+    this.inputs = source.props.filter(item => item.kind === 'input');
+    this.outputs = source.props.filter(item => item.kind === 'output');
+    this.props = source.props.filter(item => item.kind === 'property');
+    this.name = source.name;
+    this.slag = source.slag;
   }
 }
