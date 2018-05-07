@@ -55,9 +55,9 @@ export class NbLayoutDirectionService {
   }
 
   /**
-   * Sets layout direction.
-   * @param direction {NbLayoutDirection} direction to set.
-   * */
+   * Sets layout direction
+   * @param {NbLayoutDirection} direction
+   */
   setDirection(direction: NbLayoutDirection) {
     this.direction = direction;
     this.$directionChange.next(direction);
