@@ -21,6 +21,13 @@
       line-height: 1.5;
     }
 
+    code.hljs {
+      padding: 2rem 2.5rem;
+      border-radius: 8px;
+      background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
+      font-size: 0.875rem;
+    }
+
     ul {
       margin-bottom: 2rem;
       ul {
