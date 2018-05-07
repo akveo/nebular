@@ -648,4 +648,32 @@ export const STRUCTURE = [
       },
     ],
   },
+  {
+    type: 'section',
+    name: 'Usability',
+    children: [
+      {
+        type: 'page',
+        name: 'RTL',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'rtl.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbLayoutDirectionService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDirectionService',
+          },
+        ],
+      },
+    ],
+  },
 ];
