@@ -1,8 +1,14 @@
-All Nebular components were updated to support RTL out of the box.
+All Nebular components support RTL out of the box.
 
-Now every component, that previously could be positioned via some setting, besides old `left` and `right` options, also support logical `start` and `end` properties, similar to flexbox. Value of `start` and `end` depends on current layout direction. For LTR it's left, for RTL - right.
+The components that accept a position as a setting now also support logical start and end values, similar to flexbox. Value of start and end depends on current layout direction. For LTR it's left and for RTL - right.
+For instance, if we need the sidebar to be positioned logically depending on a language direction, then instead of setting it to left we can set its position to start:
 
-You can set document direction via last parameter `forRoot` method of `NbThemeModule`. Supported values are 'ltr' and 'rtl'.
+```html
+<nb-sidebar start></nb-sidebar>
+```
+
+Document direction could be set through the NbThemeModule.forRoot call. Supported values are 'ltr' and 'rtl'.
+
 ```typescript
 @NgModule({
   imports: [
@@ -11,19 +17,11 @@ You can set document direction via last parameter `forRoot` method of `NbThemeMo
 })
 ```
 Default value is `ltr`.
-<div class="note note-info">
-  <div class="note-title">Note</div>
-  <div class="note-body">
-    1. Works only in layout component
-  </div>
-</div>
 
-If you need to change direction dynamically, get current value or listen to changes of direction, Nebular provides `NbLayoutDirectionService`. 
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    1. Listen only to changes made through service itself
-    2. Works only in layout component.
+    Components must be placed inside of the `<nb-layoyt></nb-layout>` component to correctly support language direction.
   </div>
 </div>
 
@@ -45,9 +43,6 @@ To help you add RTL support to your custom components, Nebular provides you with
 }
 ```
 
-<div class="note note-info">
-  <div class="note-title">Note</div>
-  <div class="note-body">
-    One thing to note, mixins should be called only inside of `:host` mixin or `nb-install-component`.
-  </div>
-</div>
+Please note, the mixins are only available within component `:host` selector or `nb-install-component()` mixin if used.
+
+If you need to change direction dynamically, get current value or listen to changes of direction, Nebular provides `NbLayoutDirectionService`.
