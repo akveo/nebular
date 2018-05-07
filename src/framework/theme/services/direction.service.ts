@@ -64,7 +64,8 @@ export class NbLayoutDirectionService {
   }
 
   /**
-   * Triggers direction change
+   * Triggered when direction was changed.
+   * @returns Observable<NbLayoutDirection>.
    */
   onDirectionChange(): Observable<NbLayoutDirection> {
     return this.$directionChange.pipe(share<NbLayoutDirection>());
