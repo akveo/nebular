@@ -7,7 +7,7 @@ For instance, if we need the sidebar to be positioned logically depending on a l
 <nb-sidebar start></nb-sidebar>
 ```
 
-Document direction could be set through the NbThemeModule.forRoot call. Supported values are 'ltr' and 'rtl'.
+Document direction could be set through the `NbThemeModule.forRoot` call. Supported values are `ltr` and `rtl`.
 
 ```typescript
 @NgModule({
