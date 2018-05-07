@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-import { publishReplay, refCount, map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'ngd-page-toc',
@@ -33,21 +33,24 @@ export class NgdPageTocComponent implements OnDestroy {
   set toc(value) {
     this.items$ = combineLatest(
       observableOf(value || []),
-      this.fragment$,
+      this.activatedRoute.fragment,
     )
       .pipe(
         takeWhile(() => this.alive),
+        filter(([toc, fragment]) => toc && toc.length),
         map(([toc, fragment]) => {
-          return toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
+          toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
+          if (!toc.find(item => item.selected)) {
+            toc[0].selected = true;
+          }
+          return toc;
         }),
       );
   }
 
   private alive = true;
-  private fragment$: Observable<any>;
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.fragment$ = this.activatedRoute.fragment.pipe(publishReplay(), refCount());
   }
 
   ngOnDestroy() {
