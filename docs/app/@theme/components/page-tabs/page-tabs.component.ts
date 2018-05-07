@@ -17,8 +17,9 @@ import { map, publishReplay, refCount } from 'rxjs/operators';
   styleUrls: ['./page-tabs.component.scss'],
   template: `
     <a *ngFor="let item of items$ | async" [class.selected]="item.selected" [routerLink]="['../', item.tab]">
-      <i [class]="item.icon"></i>
-      <span>{{ item.title }}</span>
+      <i class="icon {{ item.icon }}"></i>
+      <strong>{{ item.title }}</strong>
+      <i class="line"></i>
     </a>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,23 +51,23 @@ export class NgdPageTabsComponent implements OnDestroy {
     {
       tab: 'overview',
       title: 'Overview',
-      icon: 'some icon',
+      icon: 'feather-eye',
       selected: true,
     },
     {
       tab: 'api',
       title: 'API',
-      icon: 'some icon',
+      icon: 'feather-settings',
     },
     {
       tab: 'theme',
       title: 'Theme',
-      icon: 'some icon',
+      icon: 'feather-droplet',
     },
     {
       tab: 'examples',
       title: 'Examples',
-      icon: 'some icon',
+      icon: 'feather-image',
     },
   ];
   private alive = true;
