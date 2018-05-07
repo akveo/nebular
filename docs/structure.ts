@@ -654,19 +654,13 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
-        name: 'RTL',
+        name: 'Right-to-left (RTL)',
         children: [
           {
             type: 'block',
             block: 'markdown',
             source: 'rtl.md',
           },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbLayoutDirectionService',
-        children: [
           {
             type: 'block',
             block: 'component',
