@@ -1,3 +1,8 @@
+:host {
+  padding-left: 1rem;
+  display: block;
+}
+
 h4 {
   font-size: 1.25rem;
   font-weight: normal;
@@ -31,6 +36,7 @@ ul {
       height: 0.1875rem;
       width: 2rem;
       background: #457AE6;
+      border-radius: 1.5px;
     }
   }
 }
