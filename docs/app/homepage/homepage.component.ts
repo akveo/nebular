@@ -14,7 +14,8 @@ import { Title } from '@angular/platform-browser';
 
 import * as ImageComparison from 'image-comparison';
 import 'style-loader!image-comparison/src/ImageComparison.css';
-import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { NbSpinnerService, NB_WINDOW } from '@nebular/theme';
 
 @Component({
@@ -149,7 +150,9 @@ export class NgdHomepageComponent implements AfterViewInit, OnInit {
 
   private highlightMenu() {
     this.highlightMenu$
-      .debounceTime(30)
+      .pipe(
+        debounceTime(30),
+      )
       .subscribe(() => {
         let closestSection = this.sections.first.nativeElement;
         this.sections

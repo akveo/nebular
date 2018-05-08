@@ -21,16 +21,11 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subscription } from 'rxjs/Subscription';
-import { filter } from 'rxjs/operators/filter';
-import { of as observableOf } from 'rxjs/observable/of';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { delay } from 'rxjs/operators/delay';
+import { BehaviorSubject, of as observableOf, combineLatest } from 'rxjs';
+import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { takeWhile } from 'rxjs/operators/takeWhile';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -199,9 +194,6 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private searchFieldComponentRef$ = new BehaviorSubject<ComponentRef<any>>(null);
   private searchType: string = 'rotate-layout';
-  private activateSearchSubscription: Subscription;
-  private deactivateSearchSubscription: Subscription;
-  private routerSubscription: Subscription;
 
   constructor(private searchService: NbSearchService,
               private themeService: NbThemeService,
@@ -219,14 +211,14 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routerSubscription = this.router.events
+    this.router.events
       .pipe(
         takeWhile(() => this.alive),
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
 
-    this.activateSearchSubscription = combineLatest([
+    combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchActivate(),
     ])
@@ -235,7 +227,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef]: [ComponentRef<any>]) => {
+      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
         this.showSearch = true;
 
         this.themeService.appendLayoutClass(this.searchType);
@@ -247,7 +239,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         componentRef.changeDetectorRef.detectChanges();
       });
 
-    this.deactivateSearchSubscription = combineLatest([
+    combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchDeactivate(),
     ])
@@ -256,7 +248,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef]: [ComponentRef<any>]) => {
+      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
         this.showSearch = false;
 
         componentRef.instance.showSearch = false;

@@ -128,112 +128,112 @@ export class NbCardComponent {
   accent: string;
 
   @HostBinding('class.xxsmall-card')
-  private get xxsmall() {
+  get xxsmall() {
     return this.size === NbCardComponent.SIZE_XXSMALL;
   }
 
   @HostBinding('class.xsmall-card')
-  private get xsmall() {
+  get xsmall() {
     return this.size === NbCardComponent.SIZE_XSMALL;
   }
 
   @HostBinding('class.small-card')
-  private get small() {
+  get small() {
     return this.size === NbCardComponent.SIZE_SMALL;
   }
 
   @HostBinding('class.medium-card')
-  private get medium() {
+  get medium() {
     return this.size === NbCardComponent.SIZE_MEDIUM;
   }
 
   @HostBinding('class.large-card')
-  private get large() {
+  get large() {
     return this.size === NbCardComponent.SIZE_LARGE;
   }
 
   @HostBinding('class.xlarge-card')
-  private get xlarge() {
+  get xlarge() {
     return this.size === NbCardComponent.SIZE_XLARGE;
   }
 
   @HostBinding('class.xxlarge-card')
-  private get xxlarge() {
+  get xxlarge() {
     return this.size === NbCardComponent.SIZE_XXLARGE;
   }
 
   @HostBinding('class.active-card')
-  private get active() {
+  get active() {
     return this.status === NbCardComponent.STATUS_ACTIVE;
   }
 
   @HostBinding('class.disabled-card')
-  private get disabled() {
+  get disabled() {
     return this.status === NbCardComponent.STATUS_DISABLED;
   }
 
   @HostBinding('class.primary-card')
-  private get primary() {
+  get primary() {
     return this.status === NbCardComponent.STATUS_PRIMARY;
   }
 
   @HostBinding('class.info-card')
-  private get info() {
+  get info() {
     return this.status === NbCardComponent.STATUS_INFO;
   }
 
   @HostBinding('class.success-card')
-  private get success() {
+  get success() {
     return this.status === NbCardComponent.STATUS_SUCCESS;
   }
 
   @HostBinding('class.warning-card')
-  private get warning() {
+  get warning() {
     return this.status === NbCardComponent.STATUS_WARNING;
   }
 
   @HostBinding('class.danger-card')
-  private get danger() {
+  get danger() {
     return this.status === NbCardComponent.STATUS_DANGER;
   }
 
   @HostBinding('class.accent')
-  private get hasAccent() {
+  get hasAccent() {
     return this.accent;
   }
 
   @HostBinding('class.accent-primary')
-  private get primaryAccent() {
+  get primaryAccent() {
     return this.accent === NbCardComponent.ACCENT_PRIMARY;
   }
 
   @HostBinding('class.accent-info')
-  private get infoAccent() {
+  get infoAccent() {
     return this.accent === NbCardComponent.ACCENT_INFO;
   }
 
   @HostBinding('class.accent-success')
-  private get successAccent() {
+  get successAccent() {
     return this.accent === NbCardComponent.ACCENT_SUCCESS;
   }
 
   @HostBinding('class.accent-warning')
-  private get warningAccent() {
+  get warningAccent() {
     return this.accent === NbCardComponent.ACCENT_WARNING;
   }
 
   @HostBinding('class.accent-danger')
-  private get dangerAccent() {
+  get dangerAccent() {
     return this.accent === NbCardComponent.ACCENT_DANGER;
   }
 
   @HostBinding('class.accent-active')
-  private get activeAccent() {
+  get activeAccent() {
     return this.accent === NbCardComponent.ACCENT_ACTIVE;
   }
 
   @HostBinding('class.accent-disabled')
-  private get disabledAccent() {
+  get disabledAccent() {
     return this.accent === NbCardComponent.ACCENT_DISABLED;
   }
 

@@ -120,7 +120,7 @@ export class NbActionsComponent {
   }
 
   @HostBinding('class.full-width')
-  private fullWidthValue: boolean = false;
+  fullWidthValue: boolean = false;
 
   /**
    * Size of the component, small|medium|large

@@ -7,10 +7,7 @@ describe('Component: NbCheckbox', () => {
 
   let checkbox: NbCheckboxComponent;
   let fixture: ComponentFixture<NbCheckboxComponent>;
-  let checkboxLabel: DebugElement;
   let checkboxInput: DebugElement;
-  let checkboxIndicator: DebugElement;
-  let checkboxDescription: DebugElement;
   let testContainerEl: HTMLElement;
 
   beforeEach(() => {
@@ -22,10 +19,10 @@ describe('Component: NbCheckbox', () => {
     checkbox = fixture.componentInstance;
     testContainerEl = fixture.elementRef.nativeElement;
 
-    checkboxLabel = fixture.debugElement.query(By.css('label'));
     checkboxInput = fixture.debugElement.query(By.css('input'));
-    checkboxIndicator = fixture.debugElement.query(By.css('customised-control-indicator'));
-    checkboxDescription = fixture.debugElement.query(By.css('customised-control-description'));
+    fixture.debugElement.query(By.css('label'));
+    fixture.debugElement.query(By.css('customised-control-indicator'));
+    fixture.debugElement.query(By.css('customised-control-description'));
   });
 
   it('Setting disabled to true disables checkbox input', () => {
