@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host /deep/ nb-menu {
   display: inline;
   font-size: 0.875rem;
@@ -33,14 +35,17 @@
 
         .menu-title {
           padding: 0.375rem 3rem;
+          @include nb-rtl(text-align, right);
         }
 
         .menu-icon ~ .menu-title {
-          padding-left: 0;
+          @include nb-ltr(padding-left, 0);
+          @include nb-rtl(padding-right, 0);
         }
 
         .menu-icon:first-child {
-          padding-left: 1rem;
+          @include nb-ltr(padding-left, 1rem);
+          @include nb-rtl(padding-right, 1rem);
         }
       }
     }

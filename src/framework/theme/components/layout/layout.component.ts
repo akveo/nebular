@@ -18,6 +18,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
@@ -44,6 +45,7 @@ import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 export class NbLayoutColumnComponent {
 
   @HostBinding('class.left') leftValue: boolean;
+  @HostBinding('class.start') startValue: boolean;
 
   /**
    * Move the column to the very left position in the layout.
@@ -52,6 +54,17 @@ export class NbLayoutColumnComponent {
   @Input()
   set left(val: boolean) {
     this.leftValue = convertToBoolProperty(val);
+    this.startValue = false;
+  }
+
+  /**
+   * Make columnt first in the layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
+    this.leftValue = false;
   }
 }
 
@@ -296,6 +309,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(NB_WINDOW) protected window,
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
+    protected layoutDirectionService: NbLayoutDirectionService,
   ) {
 
     this.themeService.onThemeChange()
@@ -359,6 +373,12 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe((data: { listener: Subject<any> }) => {
         this.veryTopRef.clear();
         data.listener.next(true);
+      });
+
+    this.layoutDirectionService.onDirectionChange()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(direction => {
+        this.renderer.setProperty(this.document, 'dir', direction);
       });
 
     this.afterViewInit$.next(true);

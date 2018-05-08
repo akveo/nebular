@@ -20,11 +20,18 @@
   }
 
   .btn-with-icon {
-    text-align: left;
-    padding-left: 1rem;
+    @include nb-ltr() {
+      padding-left: 1rem;
+      text-align: left;
+    };
+    @include nb-rtl() {
+      padding-right: 1rem;
+      text-align: right;
+    };
 
     .icon {
-      margin-right: 1rem;
+      @include nb-ltr(margin-right, 1rem);
+      @include nb-rtl(margin-left, 1rem);
     }
   }
 }

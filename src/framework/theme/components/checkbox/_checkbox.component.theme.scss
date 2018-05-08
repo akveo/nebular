@@ -14,7 +14,7 @@
   }
 }
 // locally used mixin
-@mixin chackbox-checkmark($size, $color, $border-size) {
+@mixin checkbox-checkmark($size, $color, $border-size) {
   &::before {
     content: '';
     position: absolute;
@@ -35,7 +35,8 @@
 // locally used mixin
 @mixin description-style {
   color: nb-theme(color-fg-heading);
-  padding-left: 0.25rem;
+  @include nb-ltr(padding-left, 0.25rem);
+  @include nb-rtl(padding-right, 0.25rem);
 }
 
 @mixin nb-checkbox-theme() {
@@ -60,12 +61,13 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 0;
+      @include nb-ltr(left, 0);
+      @include nb-rtl(right, 0);
       flex: none;
       display: flex;
       justify-content: center;
 
-      @include chackbox-checkmark(
+      @include checkbox-checkmark(
           nb-theme(checkbox-size),
           nb-theme(checkbox-checkmark),
           nb-theme(checkbox-border-size)
@@ -90,7 +92,7 @@
         display: flex;
         justify-content: center;
 
-        @include chackbox-checkmark(
+        @include checkbox-checkmark(
             nb-theme(checkbox-checked-size),
             nb-theme(checkbox-checked-checkmark),
             nb-theme(checkbox-checked-border-size)
@@ -109,7 +111,7 @@
           display: flex;
           justify-content: center;
 
-          @include chackbox-checkmark(
+          @include checkbox-checkmark(
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-checkmark),
               nb-theme(checkbox-disabled-border-size)
@@ -134,7 +136,7 @@
           display: flex;
           justify-content: center;
 
-          @include chackbox-checkmark(
+          @include checkbox-checkmark(
               nb-theme(checkbox-disabled-size),
               nb-theme(checkbox-disabled-checkmark),
               nb-theme(checkbox-disabled-border-size)

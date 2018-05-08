@@ -16,7 +16,14 @@ import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
-import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPosition } from './helpers/model';
+import {
+  NbPopoverAdjustment,
+  NbPopoverMode,
+  NbPopoverPlacement,
+  NbPopoverPosition,
+  NbPopoverLogicalPlacement,
+} from './helpers/model';
+import { NbPlacementHelper } from './helpers/placement.helper';
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
@@ -61,13 +68,13 @@ import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPositi
  * ```
  *
  * */
- /*
- *
- * TODO
- * Rendering strategy have to be refactored.
- * For now directive creates and deletes popover container each time.
- * I think we can handle this slightly smarter and show/hide in any situations.
- */
+/*
+*
+* TODO
+* Rendering strategy have to be refactored.
+* For now directive creates and deletes popover container each time.
+* I think we can handle this slightly smarter and show/hide in any situations.
+*/
 @Directive({ selector: '[nbPopover]' })
 export class NbPopoverDirective implements OnInit, OnDestroy {
 
@@ -86,10 +93,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   /**
    * Position will be calculated relatively host element based on the placement.
-   * Can be top, right, bottom and left.
+   * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  placement: NbPopoverPlacement = NbPopoverPlacement.TOP;
+  placement: NbPopoverPlacement | NbPopoverLogicalPlacement = NbPopoverPlacement.TOP;
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
@@ -149,6 +156,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     private adjustmentHelper: NbAdjustmentHelper,
     private triggerHelper: NbTriggerHelper,
     @Inject(PLATFORM_ID) private platformId,
+    private placementHelper: NbPlacementHelper,
   ) {}
 
   ngOnInit() {
@@ -287,7 +295,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   /*
    * Set container position.
    * */
-  private patchPopoverPosition({ top: top, left: left }) {
+  private patchPopoverPosition({ top, left }) {
     this.container.positionTop = top;
     this.container.positionLeft = left;
   }
@@ -319,7 +327,8 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbAdjustmentHelper}.
    * */
   private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    return this.adjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
+    return this.adjustmentHelper.adjust(placed, host, placement, this.adjustment);
   }
 
   /*
@@ -327,9 +336,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbPositioningHelper}
    * */
   private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
     return {
-      position: this.positioningHelper.calcPosition(placed, host, this.placement),
-      placement: this.placement,
-    }
+      position: this.positioningHelper.calcPosition(placed, host, placement),
+      placement,
+    };
   }
 }

@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -26,9 +28,22 @@
   }
 
   &.right {
-    order: 4;
+    @include nb-ltr(order, 4);
+    @include nb-rtl(order, 0);
     margin-right: 0;
     margin-left: auto;
+  }
+
+  &.end {
+    order: 4;
+    @include nb-ltr() {
+      margin-right: 0;
+      margin-left: auto;
+    };
+    @include nb-rtl() {
+      margin-left: 0;
+      margin-right: auto;
+    };
   }
 
   // TODO: in this case this will won't work when header is not fixed and sidebar is
@@ -44,6 +59,15 @@
     &.right {
       right: 0;
     }
+  }
+
+  &.fixed.start {
+    @include nb-ltr(left, 0);
+    @include nb-rtl(right, 0);
+  }
+  &.fixed.end {
+    @include nb-ltr(right, 0);
+    @include nb-rtl(left, 0);
   }
 
   /deep/ nb-sidebar-footer {

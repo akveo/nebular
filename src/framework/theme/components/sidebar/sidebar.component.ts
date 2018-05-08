@@ -47,8 +47,9 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
- * Sidebar can be place on the left or the right side of the layout, can be fixed (shown above the content)
- * or can push the layout when opened.
+ * Sidebar can be placed on the left or the right side of the layout,
+ * or on start or end position of layout (depends on document direction, left to right or right to left)
+ * It can be fixed (shown above the content) or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
  * By default sidebar content is fixed and saves its position while the page is being scrolled.
@@ -123,6 +124,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   @HostBinding('class.fixed') fixedValue: boolean = false;
   @HostBinding('class.right') rightValue: boolean = false;
   @HostBinding('class.left') leftValue: boolean = true;
+  @HostBinding('class.start') startValue: boolean = false;
+  @HostBinding('class.end') endValue: boolean = false;
 
   // TODO: rename stateValue to state (take a look to the card component)
   @HostBinding('class.expanded')
@@ -139,23 +142,51 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Places sidebar on the left side
+   * Places sidebar on the right side
    * @type {boolean}
    */
   @Input()
   set right(val: boolean) {
     this.rightValue = convertToBoolProperty(val);
     this.leftValue = !this.rightValue;
+    this.startValue = false;
+    this.endValue = false;
   }
 
   /**
-   * Places sidebar on the right side
+   * Places sidebar on the left side
    * @type {boolean}
    */
   @Input()
   set left(val: boolean) {
     this.leftValue = convertToBoolProperty(val);
     this.rightValue = !this.leftValue;
+    this.startValue = false;
+    this.endValue = false;
+  }
+
+  /**
+   * Places sidebar on the start edge of layout
+   * @type {boolean}
+   */
+  @Input()
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
+    this.endValue = !this.startValue;
+    this.leftValue = false;
+    this.rightValue = false;
+  }
+
+  /**
+   * Places sidebar on the end edge of layout
+   * @type {boolean}
+   */
+  @Input()
+  set end(val: boolean) {
+    this.endValue = convertToBoolProperty(val);
+    this.startValue = !this.endValue;
+    this.leftValue = false;
+    this.rightValue = false;
   }
 
   /**

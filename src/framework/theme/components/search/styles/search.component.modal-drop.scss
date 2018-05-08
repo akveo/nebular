@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../../styles/core/mixins';
+
 /deep/ nb-layout.modal-drop .layout {
   position: relative;
   transition: transform 0.4s, opacity 0.4s;
@@ -48,7 +50,8 @@
       font-size: 2.5rem;
       position: absolute;
       top: 3rem;
-      right: 3rem;
+      @include nb-ltr(right, 3rem);
+      @include nb-rtl(left, 3rem);
       display: block;
       opacity: 0;
       transition: opacity 0.4s;

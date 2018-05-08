@@ -65,6 +65,12 @@ import { NbDynamicToAddComponent } from '../../app/dynamic.component';
             <button class="btn btn-outline-secondary" nbPopover="Left Popover!" nbPopoverPlacement="left">
               Left
             </button>
+            <button class="btn btn-outline-secondary" nbPopover="Start Popover!" nbPopoverPlacement="start">
+              Start
+            </button>
+            <button class="btn btn-outline-secondary" nbPopover="End Popover!" nbPopoverPlacement="end">
+              End
+            </button>
           </nb-card-body>
         </nb-card>
 
