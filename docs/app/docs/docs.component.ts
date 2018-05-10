@@ -6,7 +6,7 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { NbMenuItem } from '@nebular/theme';
 import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';

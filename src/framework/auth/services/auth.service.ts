@@ -5,10 +5,8 @@
  */
 import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { of as observableOf } from 'rxjs/observable/of';
+import { Observable, of as observableOf } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
 import { NB_AUTH_PROVIDERS } from '../auth.options';

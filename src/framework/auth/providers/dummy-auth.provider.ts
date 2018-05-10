@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { delay } from 'rxjs/operators/delay';
+import { Observable, of as observableOf } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { NbAbstractAuthProvider } from './abstract-auth.provider';
 import { NbAuthResult } from '../services/auth-result';

@@ -152,7 +152,7 @@ export class NbTabsetComponent implements AfterContentInit {
   @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;
 
   @HostBinding('class.full-width')
-  private fullWidthValue: boolean = false;
+  fullWidthValue: boolean = false;
 
   /**
    * Take full width of a parent

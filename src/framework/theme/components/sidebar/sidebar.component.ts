@@ -5,8 +5,8 @@
  */
 
 import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -225,9 +225,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Input() tag: string;
 
-  private toggleSubscription: Subscription;
-  private expandSubscription: Subscription;
-  private collapseSubscription: Subscription;
   private mediaQuerySubscription: Subscription;
   private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
@@ -245,7 +242,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.toggleSubscription = this.sidebarService.onToggle()
+    this.sidebarService.onToggle()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data: { compact: boolean, tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
@@ -253,7 +250,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.expandSubscription = this.sidebarService.onExpand()
+    this.sidebarService.onExpand()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
@@ -261,7 +258,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.collapseSubscription = this.sidebarService.onCollapse()
+    this.sidebarService.onCollapse()
       .pipe(takeWhile(() => this.alive))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {

@@ -10,10 +10,8 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { filter } from 'rxjs/operators/filter';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { filter, takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';

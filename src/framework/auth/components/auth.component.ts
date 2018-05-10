@@ -5,7 +5,7 @@
  */
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthService } from '../services/auth.service';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-auth',

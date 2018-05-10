@@ -6,16 +6,8 @@
 
 import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { map } from 'rxjs/operators/map';
-import { filter } from 'rxjs/operators/filter';
-import { pairwise } from 'rxjs/operators/pairwise';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { startWith } from 'rxjs/operators/startWith';
-import { share } from 'rxjs/operators/share';
+import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
+import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
 
 import { nbThemeOptionsToken } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';

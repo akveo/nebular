@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { async, TestBed, inject } from '@angular/core/testing';
-import { of as observableOf } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs';
 
 import { NbRoleProvider } from './role.provider';
 import { NbAclService } from './acl.service';

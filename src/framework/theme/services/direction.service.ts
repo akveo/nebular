@@ -1,7 +1,6 @@
 import { InjectionToken, Optional, Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { share } from 'rxjs/operators/share';
+import { Observable, ReplaySubject } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 /**
  * Layout direction.
