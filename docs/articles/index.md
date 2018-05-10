@@ -21,6 +21,7 @@ Nebular modules are distributed as separated `npm` packages, here's a list of cu
   - UI Kit - pure Angular components with two style themes and no 3rd party dependencies.
   - Style overriding for Bootstrap, so that the application has a consistent look & feel.
   - Server-side rendering compatibility!
+  - Right-to-left writing system support for all components.
 - **@nebular/auth**
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable providers (backend connectors).

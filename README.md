@@ -46,6 +46,9 @@ Overridings for bootstrap styles for elements consistency with the rest of your 
 #### Server Side Rendering 
 Components are compatible with SSR, meaning that it is possible to render them on a server.
 
+#### RTL
+Right-to-left writing system support for all components.
+
 
 ### :closed_lock_with_key: Auth
 @nebular/auth
