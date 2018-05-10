@@ -7,14 +7,13 @@
 import { TestBed } from '@angular/core/testing';
 import { Injector } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { of as observableOf } from 'rxjs';
+import { delay, first } from 'rxjs/operators';
 import { NB_AUTH_OPTIONS, NB_AUTH_TOKEN_CLASS, NB_AUTH_USER_OPTIONS } from '../auth.options';
 import { NbAuthService } from './auth.service';
 import { NbDummyAuthProvider } from '../providers/dummy-auth.provider';
 import { nbAuthServiceFactory, nbOptionsFactory } from '../auth.module';
-import { of as observableOf } from 'rxjs/observable/of';
-import { first } from 'rxjs/operators';
 import { NbAuthResult } from './auth-result';
-import { delay } from 'rxjs/operators/delay';
 import { NbTokenService } from './token/token.service';
 import { NbAuthSimpleToken, nbCreateToken } from './token/token';
 import { NbTokenLocalStorage, NbTokenStorage } from './token/token-storage';

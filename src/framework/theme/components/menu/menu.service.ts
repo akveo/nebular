@@ -6,11 +6,9 @@
 
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { share } from 'rxjs/operators/share';
 import { Params } from '@angular/router';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 

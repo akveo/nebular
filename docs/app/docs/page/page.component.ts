@@ -7,7 +7,7 @@
 import { Component, OnDestroy, Inject } from '@angular/core';
 
 import { NbMenuService, NB_WINDOW } from '@nebular/theme';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
 @Component({

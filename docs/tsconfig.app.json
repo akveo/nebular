@@ -16,16 +16,20 @@
     "baseUrl": ".",
     "types": [],
     "paths": {
-      "@nebular/theme": ["./framework/theme"],
-      "@nebular/theme/*": ["./framework/theme/*"]
+      "@nebular/theme": ["../src/framework/theme"],
+      "@nebular/theme/*": ["../src/framework/theme/*"]
     }
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../src/framework/**/*.spec.ts",
+    "assets/**/*.ts"
   ],
   "include": [
     "../docs/**/*",
-    "../src/playground/playground.module.ts"
+    "../src/playground/playground.module.ts",
+    "../src/framework/**/*",
+    "../src/app/dynamic.component.ts"
   ]
 }

@@ -6,7 +6,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {
   NbThemeModule,
@@ -47,7 +46,6 @@ import { BlockHelperService } from './docs/utils/block-helper.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     NbThemeModule,
     NbSidebarModule,
     NbCardModule,

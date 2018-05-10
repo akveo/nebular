@@ -9,7 +9,7 @@ import {
   OnInit, PLATFORM_ID, Inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';

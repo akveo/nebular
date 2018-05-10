@@ -1,13 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
-import { empty as observableEmpty } from 'rxjs/observable/empty';
-import { filter } from 'rxjs/operators/filter';
-import { delay } from 'rxjs/operators/delay';
-import { takeWhile } from 'rxjs/operators/takeWhile';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { repeat } from 'rxjs/operators/repeat';
-import { takeUntil } from 'rxjs/operators/takeUntil';
+import { fromEvent as observableFromEvent, EMPTY as EMPTY$ } from 'rxjs';
+import { filter, delay, takeWhile, debounceTime, switchMap, repeat, takeUntil } from 'rxjs/operators';
 
 
 import { NB_DOCUMENT } from '../../../theme.options';
@@ -32,7 +25,7 @@ const NB_TRIGGERS = {
    * */
   [NbPopoverMode.CLICK](host: HTMLElement, getContainer: Function, document: Document): NbPopoverTrigger {
     return {
-      open: observableEmpty(),
+      open: EMPTY$,
       close: observableFromEvent<Event>(document, 'click')
         .pipe(
           filter(event => !host.contains(event.target as Node)
@@ -74,7 +67,7 @@ const NB_TRIGGERS = {
             ),
           ),
         ),
-      toggle: observableEmpty(),
+      toggle: EMPTY$,
     }
   },
 
@@ -96,7 +89,7 @@ const NB_TRIGGERS = {
           repeat(),
         ),
       close: observableFromEvent(host, 'mouseleave'),
-      toggle: observableEmpty(),
+      toggle: EMPTY$,
     }
   },
 };

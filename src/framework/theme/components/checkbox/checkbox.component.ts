@@ -83,22 +83,22 @@ export class NbCheckboxComponent implements ControlValueAccessor {
    * @param {string} val
    */
   @Input('status')
-  private set setStatus(val: string) {
+  set setStatus(val: string) {
     this.status = val;
   }
 
   @HostBinding('class.success')
-  private get success() {
+  get success() {
     return this.status === 'success';
   }
 
   @HostBinding('class.warning')
-  private get warning() {
+  get warning() {
     return this.status === 'warning';
   }
 
   @HostBinding('class.danger')
-  private get danger() {
+  get danger() {
     return this.status === 'danger';
   }
 

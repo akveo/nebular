@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
