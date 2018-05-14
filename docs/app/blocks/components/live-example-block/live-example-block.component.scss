@@ -1,4 +1,76 @@
+// colors
+$color-white-default: #ffffff;
+$color-gray-background: #f1f2f3;
+$color-gray-text: #a4abb3;
+
+// border-radius
+$border-radius-8px: 8px;
+$border-radius-action-item: 6px;
+
 :host {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1.063rem 2.5rem 1.438rem;
+  background-color: $color-gray-background;
+  border-radius: $border-radius-8px;
+
+  .live-example-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.875rem;
+
+    .block-title {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .example-block-actions {
+      display: flex;
+
+      .icon {
+        font-size: 1.25rem;
+      }
+
+      .action-item {
+        background-color: $color-white-default;
+        border-radius: $border-radius-action-item;
+        line-height: 0;
+        border: none;
+        color: $color-gray-text;
+        padding: 0.6875rem;
+        margin-left: 0.625rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+      .action-selector {
+        position: relative;
+
+        .icon {
+          color: $color-gray-text;
+          position: absolute;
+          top: 0.75rem;
+          left: 1.25rem;
+        }
+
+        select {
+          font-size: 0.875rem;
+          padding-left: 2.5rem;
+          padding-right: 4.375rem;
+          line-height: normal;
+          appearance: none;
+
+          option {
+            padding: 0.6875rem;
+          }
+        }
+      }
+    }
+  }
+
   iframe {
     width: 100%;
     border: none;

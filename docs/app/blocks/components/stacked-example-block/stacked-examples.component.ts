@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   template: `
     <div>
       <nb-checkbox [(ngModel)]="isLive">Toggle view</nb-checkbox>
-      <ngd-live-example-block [hidden]="!isLive" [id]="content.id"></ngd-live-example-block>
+      <ngd-live-example-block [hidden]="!isLive" [id]="content.id" [title]="'example'"></ngd-live-example-block>
       <ngd-inline-example-block [hidden]="isLive" [content]="content.tabs"></ngd-inline-example-block>
     </div>
   `,

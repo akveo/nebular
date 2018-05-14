@@ -7,6 +7,7 @@ import { NgdIframeCommunicatorService } from '../@theme/services';
 @Component({
   selector: 'ngd-example',
   template: '<router-outlet></router-outlet>',
+  styleUrls: ['./example.component.scss'],
 })
 export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   private id: string;
