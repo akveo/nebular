@@ -5,7 +5,7 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
-import { take } from 'rxjs/operators/take';
+import { take } from 'rxjs/operators';
 
 import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
 import { NbAuthSimpleToken, NbAuthToken, nbAuthCreateToken } from './token';
