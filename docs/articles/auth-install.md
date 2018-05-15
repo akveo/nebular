@@ -8,17 +8,18 @@
 ## Installation steps
 
 1) First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebular/#/docs/installation/add-into-existing-project).
-Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without `Nebular Theme`. 
+Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.  
 
-Let's assume that we need to setup email & password authentication based on Nebular Auth and NbEmailPassAuthProvider.
+Let's assume that we need to setup email & password authentication based on Nebular Auth and `NbPasswordAuthStrategy`.
 
 `npm i @nebular/auth`
     
-2) Import the module and `NbEmailPassAuthProvider` provider:
+2) Import the module and `NbPasswordAuthStrategy` strategy:
 
-`import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';`
+`import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';`
 
-3) Now, let's configure the module by specifying available providers, in your case we add `NbEmailPassAuthProvider`:
+3) Now, let's configure the module by specifying available strategies, in our case we add `NbPasswordAuthStrategy`.
+To add a strategy we need to call static `setup` method to pass a list of options:
 
 ```typescript
 
@@ -27,14 +28,11 @@ Let's assume that we need to setup email & password authentication based on Nebu
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
          forms: {},
        }), 
   ],
@@ -42,7 +40,8 @@ Let's assume that we need to setup email & password authentication based on Nebu
 
 ```
 
-We also specified a `forms` key, which configures available options for the Auth Components. We'll leave it empty for now and get back to it in the [Configuring UI](#/docs/auth/configuring-ui) article.
+We also specified a `forms` key, which configures available options for the Auth Components.
+We leave it empty for now and get back to it in the [Configuring UI](#/docs/auth/configuring-ui) article.
 
 4) Next, we need to configure Auth Components routes, let's add those into your `app-routing.module.ts`:
 
@@ -114,5 +113,5 @@ At this point, if you navigate to http://localhost:4200/#/auth/login the login f
 
 ## Where to next
 
-- [Configuring a provider](#/docs/auth/configuring-a-provider)
+- [Configuring a Strategy](#/docs/auth/configuring-a-strategy)
 - Adjusting [Auth Components UI](#/docs/auth/configuring-ui)

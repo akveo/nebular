@@ -24,7 +24,7 @@ Nebular modules are distributed as separated `npm` packages, here's a list of cu
   - Right-to-left writing system support for all components.
 - **@nebular/auth**
   - Authentication components (login/register/reset password/restore password).
-  - Multiple configurable providers (backend connectors).
+  - Multiple configurable authentication Strategies (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
 - **@nebular/security** - module for roles and permissions management.
 

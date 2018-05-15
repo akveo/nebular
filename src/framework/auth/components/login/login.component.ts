@@ -111,7 +111,7 @@ export class NbLoginComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};
-  provider: string = '';
+  strategy: string = '';
 
   errors: string[] = [];
   messages: string[] = [];
@@ -120,12 +120,12 @@ export class NbLoginComponent {
   socialLinks: NbAuthSocialLink[] = [];
 
   constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected config = {},
+              @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
-    this.provider = this.getConfigValue('forms.login.provider');
+    this.strategy = this.getConfigValue('forms.login.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
@@ -133,7 +133,7 @@ export class NbLoginComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.authenticate(this.provider, this.user).subscribe((result: NbAuthResult) => {
+    this.service.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
 
       if (result.isSuccess()) {
@@ -152,6 +152,6 @@ export class NbLoginComponent {
   }
 
   getConfigValue(key: string): any {
-    return getDeepFromObject(this.config, key, null);
+    return getDeepFromObject(this.options, key, null);
   }
 }
