@@ -43,7 +43,7 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private changeTheme(payload) {
-    this.themeService.changeTheme(payload.theme)
+    this.themeService.changeTheme(payload.theme);
   }
 
   private getId(): string {
