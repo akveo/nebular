@@ -31,10 +31,11 @@ should be:
 })` 
 ```
 
-3. Register strategies through special `setup` method, so instead of the object:
+3. Register strategies through special `setup` method, so instead of the `providers` object, 
+where object key - is a strategy name and value is a configuration:  
 
 ```
-strategies: {
+providers: {
   email: {
     service: NbEmailPassAuthProvider,
     config: { ... }
@@ -42,7 +43,8 @@ strategies: {
 }
 ```
 
-should be this an array: 
+should be an array (called `strategies`) which accepts result of a call of `setup` method of a strategy,
+which in its turn accepts a configuration, with a `name` key.
 
 ```
 strategies: [
