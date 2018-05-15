@@ -2,7 +2,9 @@
 // colors
 $color-white-default: #ffffff;
 $color-gray-background: #f1f2f3;
+$color-cosmic-background: #2f296b;
 $color-gray-text: #a4abb3;
+$color-cosmic-text: #7d838b;
 
 // border-radius
 $border-radius-8px: 8px;
@@ -12,64 +14,78 @@ $border-radius-action-item: 6px;
   display: flex;
   flex-direction: column;
   padding: 0.5rem 1rem 2.5rem 1.5rem;
-  background-color: $color-gray-background;
   border-radius: $border-radius-8px;
 
-  .live-example-header {
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.875rem;
+  }
 
-    .block-title {
-      font-weight: bold;
-      text-transform: capitalize;
+  .title {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .actions {
+    display: flex;
+
+    .icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  .action-item {
+    background-color: $color-white-default;
+    border-radius: $border-radius-action-item;
+    line-height: 1;
+    border: none;
+    color: $color-gray-text;
+    padding: 0.75rem;
+    margin-left: 0.625rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .action-selector {
+    position: relative;
+
+    .icon {
+      color: $color-gray-text;
+      position: absolute;
+      top: 0.75rem;
+      left: 1.25rem;
     }
 
-    .example-block-actions {
-      display: flex;
+    /* Target IE9 - IE11 */
+    select::-ms-expand {
+      display: none;
+    }
 
-      .icon {
-        font-size: 1.25rem;
-      }
+    select {
+      font-size: 0.875rem;
+      padding-left: 2.5rem;
+      padding-right: 4.375rem;
+      line-height: normal;
+      appearance: none;
+    }
+  }
 
-      .action-item {
-        background-color: $color-white-default;
-        border-radius: $border-radius-action-item;
-        line-height: 1;
-        border: none;
-        color: $color-gray-text;
-        padding: 0.75rem;
-        margin-left: 0.625rem;
+  &.theme-default {
+    background-color: $color-gray-background;
+  }
 
-        &:first-child {
-          margin-left: 0;
-        }
-      }
+  &.theme-cosmic {
+    background-color: $color-cosmic-background;
 
-      .action-selector {
-        position: relative;
-
-        .icon {
-          color: $color-gray-text;
-          position: absolute;
-          top: 0.75rem;
-          left: 1.25rem;
-        }
-
-        /* Target IE9 - IE11 */
-        select::-ms-expand {
-          display: none;
-        }
-
-        select {
-          font-size: 0.875rem;
-          padding-left: 2.5rem;
-          padding-right: 4.375rem;
-          line-height: normal;
-          appearance: none;
-        }
-      }
+    .title {
+      color: white;
+    }
+    .action-item {
+      color: $color-cosmic-text;
     }
   }
 
