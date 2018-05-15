@@ -12,6 +12,9 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {takeWhile} from 'rxjs/operators/takeWhile';
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
 
+const THEMES_DEFAULT = 'Default';
+const THEMES_COSMIC = 'Cosmic';
+
 @Component({
   selector: 'ngd-live-example-block',
   styleUrls: ['./live-example-block.component.scss'],
@@ -27,7 +30,7 @@ import { NgdIframeCommunicatorService } from '../../../@theme/services';
         </button>
         <div class="action-selector">
           <i class="icon feather-aperture"></i>
-          <select class="action-item" (change)="switchTheme($event.target.value)">
+          <select class="action-item" [(ngModel)]="defaultTheme"  (change)="switchTheme($event.target.value)">
             <option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</option>
           </select>
         </div>
@@ -44,11 +47,15 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   @Input() title: string;
 
   iframeHeight: number;
+
   alive: boolean = true;
+
   themes: {label: string; value: string}[] = [
-    {label: 'Default', value: 'default'},
-    {label: 'Cosmic', value: 'cosmic'},
+    {label: THEMES_DEFAULT, value: 'default'},
+    {label: THEMES_COSMIC, value: 'cosmic'},
   ];
+
+  defaultTheme: string = 'default';
 
   get url(): SafeUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.id}`);
