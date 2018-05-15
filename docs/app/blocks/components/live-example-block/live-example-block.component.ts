@@ -12,9 +12,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {takeWhile} from 'rxjs/operators/takeWhile';
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
 
-const THEMES_DEFAULT = 'Default';
-const THEMES_COSMIC = 'Cosmic';
-
 @Component({
   selector: 'ngd-live-example-block',
   styleUrls: ['./live-example-block.component.scss'],
@@ -51,8 +48,8 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   alive: boolean = true;
 
   themes: {label: string; value: string}[] = [
-    {label: THEMES_DEFAULT, value: 'default'},
-    {label: THEMES_COSMIC, value: 'cosmic'},
+    { label: 'Default', value: 'default' },
+    { label: 'Cosmic', value: 'cosmic' },
   ];
 
   defaultTheme: string = 'default';

@@ -1,3 +1,4 @@
+// TODO: move some variables in Nebular themes
 // colors
 $color-white-default: #ffffff;
 $color-gray-background: #f1f2f3;
@@ -10,7 +11,7 @@ $border-radius-action-item: 6px;
 :host {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1.063rem 2.5rem 1.438rem;
+  padding: 0.5rem 1rem 2.5rem 1.5rem;
   background-color: $color-gray-background;
   border-radius: $border-radius-8px;
 
@@ -35,10 +36,10 @@ $border-radius-action-item: 6px;
       .action-item {
         background-color: $color-white-default;
         border-radius: $border-radius-action-item;
-        line-height: 0;
+        line-height: 1;
         border: none;
         color: $color-gray-text;
-        padding: 0.6875rem;
+        padding: 0.75rem;
         margin-left: 0.625rem;
 
         &:first-child {
@@ -56,16 +57,17 @@ $border-radius-action-item: 6px;
           left: 1.25rem;
         }
 
+        /* Target IE9 - IE11 */
+        select::-ms-expand {
+          display: none;
+        }
+
         select {
           font-size: 0.875rem;
           padding-left: 2.5rem;
           padding-right: 4.375rem;
           line-height: normal;
           appearance: none;
-
-          option {
-            padding: 0.6875rem;
-          }
         }
       }
     }
