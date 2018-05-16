@@ -1,18 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-component-block',
   template: `
-    <ngd-overview-block *ngIf="hasOverview(source)" [source]="source">
-    </ngd-overview-block>
-    <ngd-props-block *ngIf="hasProps(source)" [source]="source">
-    </ngd-props-block>
-    <ngd-methods-block *ngIf="hasMethods(source)" [source]="source">
-    </ngd-methods-block>
-    <ngd-styles-block *ngIf="hasTheme(source)" [source]="source">
-    </ngd-styles-block>
+    <ngd-overview-block *ngIf="hasOverview(source)" [source]="source"></ngd-overview-block>
+    <ngd-api-block *ngIf="hasAPI(source)" [source]="source"></ngd-api-block>
+    <ngd-styles-block *ngIf="hasTheme(source)" [source]="source"></ngd-styles-block>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdComponentBlockComponent {
 
@@ -39,5 +35,9 @@ export class NgdComponentBlockComponent {
 
   hasProps(component) {
     return this.tabbedService.componentHasProps(component);
+  }
+
+  hasAPI(component) {
+    return this.hasMethods(component) || this.hasProps(component);
   }
 }

@@ -11,8 +11,12 @@
     flex-wrap: wrap;
   }
 
-  /deep/ nb-layout .scrollable {
+  /deep/ nb-layout .main-container {
     padding-top: 3rem;
+
+    .scrollable {
+      padding-top: 0;
+    }
   }
 
   /deep/ nb-layout .layout-container {

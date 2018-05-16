@@ -18,8 +18,7 @@ export class NgdExampleBlockComponent implements OnInit {
   @Input() content;
   code: string;
 
-  constructor(private codeLoader: NgdCodeLoaderService,
-              private changeDetection: ChangeDetectorRef) {
+  constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {
   }
 
   // TODO: refactor
@@ -27,7 +26,7 @@ export class NgdExampleBlockComponent implements OnInit {
     this.codeLoader.load(this.content.path)
       .subscribe((code: string) => {
         this.code = code;
-        this.changeDetection.detectChanges();
+        this.cd.detectChanges();
       });
   }
 }
