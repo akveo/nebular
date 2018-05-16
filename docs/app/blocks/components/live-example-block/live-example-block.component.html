@@ -1,4 +1,4 @@
-<section class="header">
+<section class="header" *ngIf="!loading">
   <strong class="title">{{title}}</strong>
   <div class="actions">
     <button type="button"
@@ -17,4 +17,5 @@
     </div>
   </div>
 </section>
-<iframe #iframe *ngIf="id" [src]="url" [style.height.px]="iframeHeight"></iframe>
+<iframe #iframe *ngIf="id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+<span class="icon-loading feather-more-vertical" *ngIf="loading"></span>

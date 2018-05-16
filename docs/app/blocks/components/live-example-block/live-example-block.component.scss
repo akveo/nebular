@@ -18,6 +18,8 @@
   flex-direction: column;
   padding: 0.5rem 1rem 2.5rem 1.5rem;
   border-radius: $border-radius-8px;
+  position: relative;
+  margin-bottom: 3rem;
 
   .header {
     display: flex;
@@ -96,6 +98,30 @@
   iframe {
     width: 100%;
     border: none;
+
+    &.loading {
+      visibility: hidden;
+    }
+  }
+
+  .icon-loading {
+    animation: rotation 2s infinite linear;
+    color: $color-gray-text;
+    font-size: 1.5rem;
+    font-weight: normal;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @-webkit-keyframes rotation {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(359deg);
+    }
   }
 }
 
