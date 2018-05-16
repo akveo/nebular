@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgdHighlightService } from '../../../@theme/services';
 
@@ -13,24 +13,25 @@ import { NgdHighlightService } from '../../../@theme/services';
       <pre><code class="hljs" [innerHTML]="code"></code></pre>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdCodeBlockComponent implements OnInit {
+export class NgdCodeBlockComponent {
 
-  @Input('code') rawCode: string = '';
   @Input() path = '';
   @Input() firstLine: number;
   @Input() lastLine: number;
+
+  @Input('code')
+  set rawCode(value) {
+    const highlighted = this.highlightService.highlight(value);
+    this.code = this.getVisible(highlighted);
+    this.lines = this.createLines(this.code);
+  }
 
   code: SafeHtml;
   lines: number[] = [];
 
   constructor(private highlightService: NgdHighlightService) {
-  }
-
-  ngOnInit() {
-    const highlighted = this.highlightService.highlight(this.rawCode);
-    this.code = this.getVisible(highlighted);
-    this.lines = this.createLines(this.code);
   }
 
   getVisible(code): string {
