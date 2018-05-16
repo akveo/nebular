@@ -1,32 +1,35 @@
 @import '../@theme/styles/themes';
 
-.content-center {
-  max-width: nb-theme(content-width);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
-}
+@include nb-install-component() {
 
-:host /deep/ nb-layout .scrollable {
-  padding-top: 3rem;
-}
+  .content-center {
+    max-width: nb-theme(content-width);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-:host /deep/ nb-layout .layout-container {
-  max-width: nb-theme(content-width);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
+  /deep/ nb-layout .scrollable {
+    padding-top: 3rem;
+  }
 
-:host /deep/ nb-sidebar nb-menu {
-  > ul > li {
-    margin-bottom: 1.25rem;
-    font-weight: bold;
-    li {
-      font-size: 0.875rem;
-      font-weight: normal;
+  /deep/ nb-layout .layout-container {
+    max-width: nb-theme(content-width);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /deep/ nb-sidebar nb-menu {
+    > ul > li {
+      margin-bottom: 1.25rem;
+      font-weight: bold;
+      li {
+        font-size: 0.875rem;
+        font-weight: normal;
+      }
     }
   }
 }

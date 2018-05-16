@@ -1,83 +1,86 @@
 @import '../@theme/styles/themes';
 
-.content-center {
-  max-width: nb-theme(content-width);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
-}
+@include nb-install-component() {
 
-.hero-image {
-  background: url('/assets/img/bg.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
   .content-center {
-    flex-direction: column;
-  }
-}
-
-.concave {
-  margin-bottom: -5px;
-}
-
-ngd-hero {
-  margin-top: 6rem;
-}
-
-.features {
-  margin-top: -12.5rem;
-  justify-content: center;
-}
-
-.features, .advantages {
-  margin-bottom: 5rem;
-}
-
-.advantages {
-  padding-bottom: 5.5rem;
-  position: relative;
-  overflow: hidden;
-
-  > .content-center {
-    padding: 0 2rem;
+    max-width: nb-theme(content-width);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 300px;
-    bottom: 0;
-    right: -30%;
-    left: -30%;
-    background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
-    z-index: -1;
-    border-radius: 50%;
+  .hero-image {
+    background: url('/assets/img/bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .content-center {
+      flex-direction: column;
+    }
   }
-}
 
-@include media-breakpoint-down(sm) {
+  .concave {
+    margin-bottom: -5px;
+  }
+
   ngd-hero {
-    margin-top: 4rem;
+    margin-top: 6rem;
   }
-}
 
-@include media-breakpoint-down(xxl) {
   .features {
-    margin-top: -10rem;
+    margin-top: -12.5rem;
+    justify-content: center;
   }
-}
 
-@include media-breakpoint-down(xl) {
-  .features {
-    margin-top: -9rem;
+  .features, .advantages {
+    margin-bottom: 5rem;
   }
-}
 
-@include media-breakpoint-down(lg) {
-  .features {
-    margin-top: -8rem;
+  .advantages {
+    padding-bottom: 5.5rem;
+    position: relative;
+    overflow: hidden;
+
+    > .content-center {
+      padding: 0 2rem;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 300px;
+      bottom: 0;
+      right: -30%;
+      left: -30%;
+      background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+      z-index: -1;
+      border-radius: 50%;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngd-hero {
+      margin-top: 4rem;
+    }
+  }
+
+  @include media-breakpoint-down(xxl) {
+    .features {
+      margin-top: -10rem;
+    }
+  }
+
+  @include media-breakpoint-down(xl) {
+    .features {
+      margin-top: -9rem;
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    .features {
+      margin-top: -8rem;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 @import '../../../@theme/styles/themes';
 
-:host {
+@include nb-install-component() {
   display: flex;
   flex: 1;
   padding-top: 1.25rem;
@@ -60,27 +60,27 @@
       }
     }
   }
-}
 
-@include media-breakpoint-down(md) {
-  :host > div.logo {
-    display: none;
-  }
-}
-
-@include media-breakpoint-down(sm) {
-  :host > div {
-    width: 100%;
-    justify-content: center;
-    margin-right: 0;
-
-    li {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .logo {
+  @include media-breakpoint-down(md) {
+    > div.logo {
       display: none;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    > div {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+
+      li {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .logo {
+        display: none;
+      }
     }
   }
 }

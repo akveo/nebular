@@ -1,16 +1,19 @@
-// TODO: move some variables in Nebular themes
-// colors
-$color-white-default: #ffffff;
-$color-default-background: #ebeff5;
-$color-cosmic-background: #2f296b;
-$color-gray-text: #a4abb3;
-$color-cosmic-text: #7d838b;
+@import '../../../@theme/styles/themes';
 
-// border-radius
-$border-radius-8px: 8px;
-$border-radius-action-item: 6px;
+@include nb-install-component() {
 
-:host {
+  // TODO: move some variables in Nebular themes
+  // colors
+  $color-white-default: #ffffff;
+  $color-default-background: #ebeff5;
+  $color-cosmic-background: #2f296b;
+  $color-gray-text: #a4abb3;
+  $color-cosmic-text: #7d838b;
+
+  // border-radius
+  $border-radius-8px: 8px;
+  $border-radius-action-item: 6px;
+
   display: flex;
   flex-direction: column;
   padding: 0.5rem 1rem 2.5rem 1.5rem;
@@ -95,3 +98,4 @@ $border-radius-action-item: 6px;
     border: none;
   }
 }
+
