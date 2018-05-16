@@ -12,19 +12,19 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   template: `
     <ngd-prop-block *ngIf="inputs.length > 0"
                     [properties]="inputs"
-                    name="{{ name}} Inputs"
+                    name="Inputs"
                     [slag]="slag">
     </ngd-prop-block>
 
     <ngd-prop-block *ngIf="outputs.length > 0"
                     [properties]="outputs"
-                    name="{{ name}} Outputs"
+                    name="Outputs"
                     [slag]="slag">
     </ngd-prop-block>
 
     <ngd-prop-block *ngIf="props.length > 0"
                     [properties]="props"
-                    name="{{ name}} Properties"
+                    name="Properties"
                     [slag]="slag">
     </ngd-prop-block>
   `,

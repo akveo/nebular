@@ -81,7 +81,7 @@ export class NgdTabbedBlockComponent implements OnDestroy {
   }
 
   hasAPI(component) {
-    return this.hasMethods(component) || this.hasMethods(component);
+    return this.hasMethods(component) || this.hasProps(component);
   }
 
   ngOnDestroy() {

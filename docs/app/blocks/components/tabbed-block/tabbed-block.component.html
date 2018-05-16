@@ -11,10 +11,8 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'api'">
-      <ngd-props-block [source]="component" *ngIf="hasProps(component)"></ngd-props-block>
-      <ngd-methods-block [source]="component" *ngIf="hasMethods(component)"></ngd-methods-block>
+      <ngd-api-block *ngIf="hasAPI(component)" [source]="component" ></ngd-api-block>
     </ng-container>
-
 
     <ng-container *ngSwitchCase="'examples'">
       <ng-container *ngIf="hasExamples(component)">
