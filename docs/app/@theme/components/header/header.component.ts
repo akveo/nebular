@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
+import { NgdVersionService } from '../../services';
 
 @Component({
   selector: 'ngd-header',
@@ -7,7 +8,7 @@ import { NbMenuItem } from '@nebular/theme';
   template: `
     <div class="logo">
       <a href="#">Nebular</a>
-      <span class="version">v1.2.0</span>
+      <span class="version">v{{ currentVersion }}</span>
     </div>
     <nb-menu [items]="mainMenu"></nb-menu>
     <iframe class="stars"
@@ -19,6 +20,11 @@ import { NbMenuItem } from '@nebular/theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdHeaderComponent {
+  currentVersion: string;
+
+  constructor(versionService: NgdVersionService) {
+    this.currentVersion = versionService.getNebularVersion();
+  }
 
   mainMenu: NbMenuItem[] = [
     {
