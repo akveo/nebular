@@ -39,6 +39,7 @@ import {
   NgdCodeLoaderService,
   NgdIframeCommunicatorService,
   NgdStylesService,
+  NgdVersionService,
 } from './services';
 
 
@@ -94,6 +95,7 @@ import {
     NgdCodeLoaderService,
     NgdIframeCommunicatorService,
     NgdStylesService,
+    NgdVersionService,
   ],
 })
 export class NgdThemeModule {
