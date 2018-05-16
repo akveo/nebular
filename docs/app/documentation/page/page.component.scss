@@ -1,146 +1,146 @@
 @import '../../@theme/styles/themes';
 
-:host {
+@include nb-install-component() {
   display: flex;
-}
 
-.middle-column {
-  flex: 3;
-  min-width: 0;
+  .middle-column {
+    flex: 3;
+    min-width: 0;
 
-  /deep/ nb-card {
-    h1, h2, h3, h4, h5, h6 {
-      color: rgba(0, 0, 0, 0.88);
-      line-height: 1.25;
-      margin-bottom: 1.25rem;
-      font-weight: bold;
-    }
-    p {
-      color: #494949;
-      font-size: 0.9375rem;
-      line-height: 1.5;
-    }
-
-    code {
-      background: #F1F2F3;
-      color: #5699F0;
-      padding: 0.125rem 0.5rem;
-      border-radius: 0.25rem;
-    }
-
-    code.hljs {
-      padding: 2rem 2.5rem;
-      border-radius: 8px;
-      background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
-      font-size: 0.875rem;
-    }
-
-    table {
-      font-size: 0.9375rem;
-      width: 100%;
-      thead {
-        color: #8994A3;
-        border-bottom: 1px solid #F1F2F3;
-
-        td {
-          padding: 1rem 0.5rem;
-        }
+    /deep/ nb-card {
+      h1, h2, h3, h4, h5, h6 {
+        color: rgba(0, 0, 0, 0.88);
+        line-height: 1.25;
+        margin-bottom: 1.25rem;
+        font-weight: bold;
+      }
+      p {
+        color: #494949;
+        font-size: 0.9375rem;
+        line-height: 1.5;
       }
 
-      tr {
-        border-bottom: 1px solid #F1F2F3;
-
-        &:last-child {
-          border: none;
-        }
+      code {
+        background: #F1F2F3;
+        color: #5699F0;
+        padding: 0.125rem 0.5rem;
+        border-radius: 0.25rem;
       }
 
-      td {
-        padding: 0.5rem;
-
-        &:first-child {
-          font-weight: 500;
-        }
+      code.hljs {
+        padding: 2rem 2.5rem;
+        border-radius: 8px;
+        background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
+        font-size: 0.875rem;
       }
 
-      &.striped {
-        tbody tr:nth-child(odd) {
-          background: #F5F6F7;
+      table {
+        font-size: 0.9375rem;
+        width: 100%;
+        thead {
+          color: #8994A3;
+          border-bottom: 1px solid #F1F2F3;
+
+          td {
+            padding: 1rem 0.5rem;
+          }
+        }
+
+        tr {
+          border-bottom: 1px solid #F1F2F3;
+
+          &:last-child {
+            border: none;
+          }
         }
 
         td {
-          padding: 1rem 0.5rem;
+          padding: 0.5rem;
+
+          &:first-child {
+            font-weight: 500;
+          }
         }
-      }
-    }
 
-    ul {
-      margin-bottom: 2rem;
-      ul {
-        padding-left: 2.5rem;
-        list-style-type: none;
-        & > li {
-          text-indent: -5px;
-          position: relative;
-          margin-bottom: 0;
+        &.striped {
+          tbody tr:nth-child(odd) {
+            background: #F5F6F7;
+          }
 
-          &::before {
-            content: '-';
-            position: absolute;
-            left: -1.25rem;
+          td {
+            padding: 1rem 0.5rem;
           }
         }
       }
-      li {
-        font-size: 0.9375rem;
-        line-height: 1.5;
+
+      ul {
         margin-bottom: 2rem;
+        ul {
+          padding-left: 2.5rem;
+          list-style-type: none;
+          & > li {
+            text-indent: -5px;
+            position: relative;
+            margin-bottom: 0;
+
+            &::before {
+              content: '-';
+              position: absolute;
+              left: -1.25rem;
+            }
+          }
+        }
+        li {
+          font-size: 0.9375rem;
+          line-height: 1.5;
+          margin-bottom: 2rem;
+        }
       }
-    }
 
-    .note {
-      padding: 1.25rem 3rem 1.5rem 1.25rem;
-      border-radius: 0.25rem;
+      .note {
+        padding: 1.25rem 3rem 1.5rem 1.25rem;
+        border-radius: 0.25rem;
 
-      .note-title {
-        font-weight: 500;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
+        .note-title {
+          font-weight: 500;
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+        }
+
+        .note-body {
+          font-size: 0.875rem;
+          line-height: 1.5;
+        }
+
+        &.note-info {
+          color: #5699F0;
+          background-color: #F0F6FF;
+        }
       }
 
-      .note-body {
-        font-size: 0.875rem;
-        line-height: 1.5;
+      .color-swatch {
+        display: inline-block;
+        border: 1px solid black;
+        width: 0.875rem;
+        height: 0.875rem;
+        margin-left: 7px;
+        margin-bottom: -2px;
+        border-radius: 2px;
       }
-
-      &.note-info {
-        color: #5699F0;
-        background-color: #F0F6FF;
-      }
-    }
-
-    .color-swatch {
-      display: inline-block;
-      border: 1px solid black;
-      width: 0.875rem;
-      height: 0.875rem;
-      margin-left: 7px;
-      margin-bottom: -2px;
-      border-radius: 2px;
     }
   }
-}
 
-.settings-column {
-  padding: 0 1.875rem;
-  width: 16rem;
+  .settings-column {
+    padding: 0 1.875rem;
+    width: 16rem;
 
-  ngd-page-tabs {
-    margin-bottom: 1.5rem;
+    ngd-page-tabs {
+      margin-bottom: 1.5rem;
+    }
   }
-}
 
-.fixed-panel {
-  position: fixed;
-  width: inherit;
+  .fixed-panel {
+    position: fixed;
+    width: inherit;
+  }
 }

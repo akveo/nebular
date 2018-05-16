@@ -1,6 +1,7 @@
 @import '../../../@theme/styles/themes';
 
-:host {
+@include nb-install-component() {
+
   border-radius: 7px;
   background-color: #FFFFFF;
   box-shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
@@ -16,31 +17,28 @@
   &:hover {
     box-shadow: 0 16px 40px 0 rgba(230, 234, 240, 0.97);
   }
-}
 
-h2 {
-  color: #546D8D;
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 1.8125rem;
-  text-align: center;
-}
+  h2 {
+    color: #546D8D;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.8125rem;
+    text-align: center;
+  }
 
-p {
-  color: #919FB1;
-  font-size: 0.95rem;
-  line-height: 1.5rem;
-  text-align: center;
-}
+  p {
+    color: #919FB1;
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+    text-align: center;
+  }
 
-@include media-breakpoint-down(md) {
-  :host {
+  @include media-breakpoint-down(md) {
     width: calc(50% - 2.5rem);
   }
-}
 
-@include media-breakpoint-down(sm) {
-  :host {
+  @include media-breakpoint-down(sm) {
     width: 100%;
   }
 }
+
