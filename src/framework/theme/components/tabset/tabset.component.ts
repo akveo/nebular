@@ -13,7 +13,6 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -56,7 +55,7 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
-   * TODO: rename, as lazy is by default, and this is more `instance load`
+   * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
    */
   @Input()
@@ -178,7 +177,7 @@ export class NbTabsetComponent implements AfterContentInit {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private route: ActivatedRoute, private cd: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngAfterContentInit() {
@@ -192,7 +191,6 @@ export class NbTabsetComponent implements AfterContentInit {
   // TODO: navigate to routeParam
   selectTab(selectedTab: NbTabComponent) {
     this.tabs.forEach(tab => tab.active = tab === selectedTab);
-    this.cd.markForCheck();
     this.changeTab.emit(selectedTab);
   }
 }

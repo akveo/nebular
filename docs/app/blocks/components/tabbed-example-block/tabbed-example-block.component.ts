@@ -18,17 +18,9 @@ import { NgdExampleView } from '../../enum.example-view';
   selector: 'ngd-tabbed-example-block',
   styleUrls: ['./tabbed-example-block.component.scss'],
   template: `
-    <nb-tabset *ngIf="examples">
-      <nb-tab tabTitle="ts" *ngIf="examples.ts">
-        <ngd-code-block [path]="examples.ts.path" [code]="examples.ts.code"></ngd-code-block>
-      </nb-tab>
-
-      <nb-tab tabTitle="html" *ngIf="examples.html">
-        <ngd-code-block [path]="examples.html.path" [code]="examples.html.code"></ngd-code-block>
-      </nb-tab>
-
-      <nb-tab tabTitle="scss" *ngIf="examples.scss">
-        <ngd-code-block [path]="examples.scss.path" [code]="examples.scss.code"></ngd-code-block>
+    <nb-tabset>
+      <nb-tab *ngFor="let example of examples" tabTitle="{{ example.extension }}" [active]="example.active">
+        <ngd-code-block [path]="example.path" [code]="example.code"></ngd-code-block>
       </nb-tab>
     </nb-tabset>
   `,
@@ -39,13 +31,14 @@ export class NgdTabbedExampleBlockComponent {
 
   @Input() showLiveViewButton = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
-  examples;
+  examples = [];
 
   @Input()
   set content(value) {
     forkJoin(Object.entries(value).map(file => this.load(file)))
       .subscribe(files => {
-        this.examples = files.reduce((acc, file) => Object.assign(acc, file), {});
+        files[0].active = true;
+        this.examples = files;
         this.cd.detectChanges();
       });
   }
@@ -60,7 +53,7 @@ export class NgdTabbedExampleBlockComponent {
   private load([extension, path]): Observable<any> {
     return this.codeLoader.load(path)
       .pipe(
-        map(code => ({ [extension]: { code, path } })),
+        map(code => ({ code, path, extension })),
         catchError(e => observableOf('')),
       );
   }
