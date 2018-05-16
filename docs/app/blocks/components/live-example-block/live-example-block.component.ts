@@ -8,12 +8,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostBinding,
+  AfterViewInit,
   Output,
   EventEmitter,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {takeWhile} from 'rxjs/operators/takeWhile';
-
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
@@ -23,7 +23,7 @@ import { NgdExampleView } from '../../enum.example-view';
   templateUrl: './live-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
+export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('iframe') iframe: ElementRef;
   @Input() id: string;
@@ -49,6 +49,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   ];
 
   currentTheme: string = 'default';
+  loading = true;
 
   get url(): SafeUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.id}`);
@@ -71,6 +72,10 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
         this.iframeHeight = it.height;
         this.changeDetection.detectChanges();
       });
+  }
+
+  ngAfterViewInit() {
+    this.iframe.nativeElement.onload = () => this.loading = false;
   }
 
   ngOnDestroy(): void {
