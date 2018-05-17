@@ -1,7 +1,7 @@
 // TODO: move some variables in Nebular themes
 // colors
 $color-white-default: #ffffff;
-$color-gray-background: #f1f2f3;
+$color-default-background: #ebeff5;
 $color-cosmic-background: #2f296b;
 $color-gray-text: #a4abb3;
 $color-cosmic-text: #7d838b;
@@ -39,11 +39,13 @@ $border-radius-action-item: 6px;
   .action-item {
     background-color: $color-white-default;
     border-radius: $border-radius-action-item;
+    height: 100%;
     line-height: 1;
     border: none;
     color: $color-gray-text;
     padding: 0.75rem;
     margin-left: 0.625rem;
+    cursor: pointer;
 
     &:first-child {
       margin-left: 0;
@@ -69,13 +71,12 @@ $border-radius-action-item: 6px;
       font-size: 0.875rem;
       padding-left: 2.5rem;
       padding-right: 4.375rem;
-      line-height: normal;
       appearance: none;
     }
   }
 
   &.theme-default {
-    background-color: $color-gray-background;
+    background-color: $color-default-background;
   }
 
   &.theme-cosmic {

@@ -8,10 +8,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostBinding,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {takeWhile} from 'rxjs/operators/takeWhile';
+
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
+import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
   selector: 'ngd-live-example-block',
@@ -24,6 +28,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   @ViewChild('iframe') iframe: ElementRef;
   @Input() id: string;
   @Input() title: string;
+  @Output() changeView = new EventEmitter<NgdExampleView>();
 
   @HostBinding('class.theme-default')
   private get isDefault() {
@@ -43,8 +48,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
     { label: 'Cosmic', value: 'cosmic' },
   ];
 
-  defaultTheme: string = 'default';
-  currentTheme: string = this.defaultTheme;
+  currentTheme: string = 'default';
 
   get url(): SafeUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.id}`);
@@ -74,7 +78,10 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   }
 
   switchTheme(theme: string) {
-    this.currentTheme = theme;
     this.communicator.send({ id: this.id, theme }, this.iframeWindow);
+  }
+
+  switchToInlineVew() {
+    this.changeView.emit(NgdExampleView.INLINE);
   }
 }

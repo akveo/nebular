@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { NgdCodeLoaderService } from '../../../@theme/services';
 
 @Component({
@@ -18,12 +18,16 @@ export class NgdExampleBlockComponent implements OnInit {
   @Input() content;
   code: string;
 
-  constructor(private codeLoader: NgdCodeLoaderService) {
+  constructor(private codeLoader: NgdCodeLoaderService,
+              private changeDetection: ChangeDetectorRef) {
   }
 
   // TODO: refactor
   ngOnInit() {
     this.codeLoader.load(this.content.path)
-      .subscribe((code: string) => this.code = code);
+      .subscribe((code: string) => {
+        this.code = code;
+        this.changeDetection.detectChanges();
+      });
   }
 }
