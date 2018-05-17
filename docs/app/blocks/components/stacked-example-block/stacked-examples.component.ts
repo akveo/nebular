@@ -1,12 +1,22 @@
 import { Component, Input } from '@angular/core';
 
+import { NgdExampleView } from '../../enum.example-view';
+
 @Component({
   selector: 'ngd-stacked-example-block',
   template: `
     <div>
-      <nb-checkbox [(ngModel)]="isLive">Toggle view</nb-checkbox>
-      <ngd-live-example-block [hidden]="!isLive" [id]="content.id" [title]="'example'"></ngd-live-example-block>
-      <ngd-inline-example-block [hidden]="isLive" [content]="content.tabs"></ngd-inline-example-block>
+      <ngd-live-example-block [hidden]="!isLive"
+                              [id]="content.id"
+                              [title]="'example'"
+                              (changeView)="changeView($event)">
+      </ngd-live-example-block>
+
+      <ngd-tabbed-example-block [hidden]="isLive"
+                                [content]="content.tabs"
+                                [showLiveViewButton]="true"
+                                (changeView)="changeView($event)">
+      </ngd-tabbed-example-block>
     </div>
   `,
 })
@@ -14,4 +24,8 @@ export class NgdStackedExampleComponent {
 
   @Input() content: any;
   isLive = true;
+
+  changeView(view: NgdExampleView) {
+    this.isLive = view === NgdExampleView.LIVE;
+  }
 }

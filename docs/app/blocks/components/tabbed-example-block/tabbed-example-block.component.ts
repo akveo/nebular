@@ -1,37 +1,36 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of as observableOf } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
+
 import { NgdCodeLoaderService } from '../../../@theme/services';
+import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
   selector: 'ngd-tabbed-example-block',
   styleUrls: ['./tabbed-example-block.component.scss'],
-  template: `
-    <nb-tabset *ngIf="examples">
-      <nb-tab tabTitle="ts" *ngIf="examples.ts">
-        <ngd-code-block [path]="content.ts" [code]="examples.ts"></ngd-code-block>
-      </nb-tab>
-
-      <nb-tab tabTitle="html" *ngIf="examples.html">
-        <ngd-code-block [path]="content.html" [code]="examples.html"></ngd-code-block>
-      </nb-tab>
-
-      <nb-tab tabTitle="scss" *ngIf="examples.scss">
-        <ngd-code-block [path]="content.scss" [code]="examples.scss"></ngd-code-block>
-      </nb-tab>
-    </nb-tabset>
-  `,
+  templateUrl: './tabbed-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdTabbedExampleBlockComponent implements OnInit {
 
   @Input() content;
+  @Input() showLiveViewButton = false;
+  @Output() changeView = new EventEmitter<NgdExampleView>();
   examples;
 
-  constructor(private codeLoader: NgdCodeLoaderService) {
+  constructor(private codeLoader: NgdCodeLoaderService,
+              private changeDetection: ChangeDetectorRef) {
   }
 
   // TODO: refactor
@@ -39,7 +38,12 @@ export class NgdTabbedExampleBlockComponent implements OnInit {
     forkJoin(Object.entries(this.content).map(file => this.load(file)))
       .subscribe(files => {
         this.examples = files.reduce((acc, file) => Object.assign(acc, file), {});
+        this.changeDetection.detectChanges();
       });
+  }
+
+  switchToLiveView() {
+    this.changeView.emit(NgdExampleView.LIVE);
   }
 
   private load([extension, path]): Observable<any> {

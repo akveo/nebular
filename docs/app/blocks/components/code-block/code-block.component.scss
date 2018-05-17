@@ -1,4 +1,7 @@
-@import '../../../styles/themes';
+@import '../../../@theme/styles/themes';
+
+$code-snippets-fg: #f8f8f2;
+$color-lines: #515877;
 
 @include nb-install-component() {
 
@@ -6,21 +9,30 @@
     display: flex;
     padding: 0;
     font-size: 1rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
+    overflow-x: auto;
 
     .lines {
       display: flex;
       flex-direction: column;
       text-align: end;
-      padding: 0.5rem;
-      background: nb-theme(code-snippets-bg);
-      color: nb-theme(code-snippets-fg);
+      font-size: 0.875rem;
+      padding: 2rem 0.5rem 0.5rem;
+      border-radius: 0.5rem 0 0 0.5rem;
+      color: $color-lines;
+      user-select: none;
     }
 
     pre {
-      margin: 0;
-      padding: 0;
-      font-size: 1rem;
-      width: 100%;
+      margin-bottom: 0;
+      background: transparent;
+      overflow: visible;
+
+      code.hljs {
+        background: transparent;
+        padding-left: 0.5rem;
+      }
     }
   }
 }

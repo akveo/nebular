@@ -6,7 +6,6 @@ import { NgdHighlightService } from '../../../@theme/services';
   selector: 'ngd-code-block',
   styleUrls: ['./code-block.component.scss'],
   template: `
-    <p>{{ path }}</p>
     <div class="container">
       <div class="lines">
         <span *ngFor="let line of lines">{{ line }}</span>
