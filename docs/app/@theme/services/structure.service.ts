@@ -116,8 +116,9 @@ export class NgdStructureService {
         return acc.concat(this.getTocForMd(child));
       } else if (child.block === 'tabbed') {
         return acc.concat(this.getTocForTabbed(child));
+      } else if (child.block === 'component') {
+        acc.push(this.getTocForComponent(child));
       }
-      acc.push(child.source.name);
       return acc;
     }, []);
   }
@@ -128,6 +129,13 @@ export class NgdStructureService {
         fragment: section.fragment,
       }
     ));
+  }
+
+  protected getTocForComponent(block: any) {
+    return {
+      title: block.source.name,
+      fragment: block.source.slag,
+    }
   }
 
   protected getTocForTabbed(block: any) {
