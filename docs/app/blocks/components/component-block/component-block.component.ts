@@ -4,25 +4,43 @@ import { NgdTabbedService } from '../../../@theme/services';
 @Component({
   selector: 'ngd-component-block',
   template: `
-    <ngd-overview-block *ngIf="hasOverview(source)" [source]="source"></ngd-overview-block>
-    <ngd-api-block *ngIf="hasAPI(source)" [source]="source"></ngd-api-block>
-    <ngd-styles-block *ngIf="hasTheme(source)" [source]="source"></ngd-styles-block>
+    <nb-card>
+      <a [name]="source.slag"></a>
+      <nb-card-body>
+        <ng-container class="description" *ngFor="let node of overview">
+          <ng-container *ngIf="node.type === 'text'">
+            <div *ngFor="let section of node.content" [innerHtml]="section.html"></div>
+          </ng-container>
+          <ngd-live-example-block *ngIf="node.type === 'live-example'" [id]="node.content" [title]="'example'">
+          </ngd-live-example-block>
+          <ngd-inline-example-block *ngIf="node.type === 'inline-example'" [content]="node.content">
+          </ngd-inline-example-block>
+          <ngd-stacked-example-block *ngIf="node.type === 'example'" [content]="node.content">
+          </ngd-stacked-example-block>
+        </ng-container>
+        <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
+        <ngd-methods-block [source]="source" *ngIf="hasMethods(source)"></ngd-methods-block>
+        <ng-container *ngIf="hasTheme(source)">
+          <h3>Theme</h3>
+          <ngd-styles-table-block [source]="source"></ngd-styles-table-block>
+        </ng-container>
+      </nb-card-body>
+    </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdComponentBlockComponent {
 
-  @Input() source: any;
+  source: any;
+  overview: any[] = [];
+
+  @Input('source')
+  set setSource(source: any) {
+    this.source = source;
+    this.overview = source.overview;
+  }
 
   constructor(private tabbedService: NgdTabbedService) {
-  }
-
-  hasOverview(component) {
-    return this.tabbedService.componentHasOverview(component);
-  }
-
-  hasExamples(component) {
-    return this.tabbedService.componentHasExamples(component);
   }
 
   hasTheme(component) {
@@ -35,9 +53,5 @@ export class NgdComponentBlockComponent {
 
   hasProps(component) {
     return this.tabbedService.componentHasProps(component);
-  }
-
-  hasAPI(component) {
-    return this.hasMethods(component) || this.hasProps(component);
   }
 }
