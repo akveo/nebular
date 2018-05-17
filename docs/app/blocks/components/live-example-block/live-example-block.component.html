@@ -1,7 +1,9 @@
 <section class="header">
   <strong class="title">{{title}}</strong>
   <div class="actions">
-    <button type="button" class="btn action-item action-button">
+    <button type="button"
+            class="btn action-item action-button"
+            (click)="switchToInlineVew()">
       <i class="icon feather-code"></i>
     </button>
     <button type="button" class="btn action-item action-button">
@@ -9,7 +11,7 @@
     </button>
     <div class="action-selector">
       <i class="icon feather-aperture"></i>
-      <select class="action-item" [(ngModel)]="defaultTheme"  (change)="switchTheme($event.target.value)">
+      <select class="action-item" [(ngModel)]="currentTheme"  (change)="switchTheme($event.target.value)">
         <option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</option>
       </select>
     </div>
