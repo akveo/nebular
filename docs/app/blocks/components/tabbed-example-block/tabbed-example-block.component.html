@@ -1,22 +1,13 @@
 <button type="button"
         *ngIf="showLiveViewButton"
         class="btn action-item action-button"
-        (click)="switchToLiveView()"
->
+        (click)="switchToLiveView()">
   <i class="icon feather-image"></i>
   Live view
 </button>
 
-<nb-tabset *ngIf="examples" class="tabs-container">
-  <nb-tab tabTitle=".ts" *ngIf="examples.ts">
-    <ngd-code-block [path]="content.ts" [code]="examples.ts"></ngd-code-block>
-  </nb-tab>
-
-  <nb-tab tabTitle=".html" *ngIf="examples.html">
-    <ngd-code-block [path]="content.html" [code]="examples.html"></ngd-code-block>
-  </nb-tab>
-
-  <nb-tab tabTitle=".scss" *ngIf="examples.scss">
-    <ngd-code-block [path]="content.scss" [code]="examples.scss"></ngd-code-block>
+<nb-tabset class="tabs-container">
+  <nb-tab *ngFor="let example of examples" tabTitle="{{ example.extension }}" [active]="example.active">
+    <ngd-code-block [path]="example.path" [code]="example.code"></ngd-code-block>
   </nb-tab>
 </nb-tabset>

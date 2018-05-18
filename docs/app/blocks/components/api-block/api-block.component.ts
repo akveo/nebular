@@ -10,7 +10,7 @@ import { NgdTabbedService } from '../../../@theme/services';
 @Component({
   selector: 'ngd-api-block',
   template: `
-    <nb-card [id]="source.slag">
+    <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
         <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
