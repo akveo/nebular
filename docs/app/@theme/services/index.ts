@@ -6,3 +6,4 @@ export * from './code-loader.service';
 export * from './iframe-communicator.service';
 export * from './styles.service';
 export * from './version.service';
+export * from './toc-state.service';

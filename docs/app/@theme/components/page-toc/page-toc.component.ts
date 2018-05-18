@@ -4,10 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { of as observableOf } from 'rxjs/observable/of';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { map, filter } from 'rxjs/operators';
@@ -17,8 +16,8 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./page-toc.component.scss'],
   template: `
     <h4>Overview</h4>
-    <ul *ngIf="(items$ | async)?.length > 0">
-      <li *ngFor="let item of items$ | async" [class.selected]="item.selected">
+    <ul *ngIf="items?.length > 0">
+      <li *ngFor="let item of items" [class.selected]="item.selected">
         <a [routerLink]="item.link" [fragment]="item.fragment">{{ item.title }}</a>
       </li>
     </ul>
@@ -27,11 +26,11 @@ import { map, filter } from 'rxjs/operators';
 })
 export class NgdPageTocComponent implements OnDestroy {
 
-  items$: Observable<any[]> = observableOf([]);
+  items: any[];
 
   @Input()
   set toc(value) {
-    this.items$ = combineLatest(
+    combineLatest(
       observableOf(value || []),
       this.activatedRoute.fragment,
     )
@@ -45,12 +44,16 @@ export class NgdPageTocComponent implements OnDestroy {
           }
           return toc;
         }),
-      );
+      )
+      .subscribe((toc) => {
+        this.items = toc;
+        this.cd.detectChanges();
+      })
   }
 
   private alive = true;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {
   }
 
   ngOnDestroy() {
