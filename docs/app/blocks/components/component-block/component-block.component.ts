@@ -4,8 +4,7 @@ import { NgdTabbedService } from '../../../@theme/services';
 @Component({
   selector: 'ngd-component-block',
   template: `
-    <nb-card>
-      <a [name]="source.slag"></a>
+    <nb-card [id]="source.slag">
       <nb-card-body>
         <ng-container class="description" *ngFor="let node of overview">
           <ng-container *ngIf="node.type === 'text'">
