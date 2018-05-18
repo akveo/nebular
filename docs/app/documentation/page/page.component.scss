@@ -33,10 +33,19 @@
       }
 
       code.hljs {
+        color: #f8f8f2;
         padding: 2rem 2.5rem;
         border-radius: 8px;
         background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
         font-size: 0.875rem;
+        margin-bottom: 3rem;
+      }
+
+      /deep/ {
+        ngd-live-example-block, ngd-inline-example-block, ngd-stacked-example-block {
+          display: block;
+          margin-bottom: 3rem;
+        }
       }
 
       table {
@@ -80,7 +89,7 @@
       }
 
       ul {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
         ul {
           padding-left: 2.5rem;
           list-style-type: none;
@@ -106,6 +115,7 @@
       .note {
         padding: 1.25rem 3rem 1.5rem 1.25rem;
         border-radius: 0.25rem;
+        margin-bottom: 3rem;
 
         .note-title {
           font-weight: 500;
