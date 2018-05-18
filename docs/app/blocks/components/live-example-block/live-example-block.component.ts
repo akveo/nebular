@@ -28,6 +28,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterVie
   @ViewChild('iframe') iframe: ElementRef;
   @Input() id: string;
   @Input() title: string;
+  @Input() hasViewSwitch: boolean = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
 
   @HostBinding('class.theme-default')

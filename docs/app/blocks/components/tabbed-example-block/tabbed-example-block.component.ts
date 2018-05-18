@@ -20,7 +20,7 @@ import { NgdExampleView } from '../../enum.example-view';
 export class NgdTabbedExampleBlockComponent {
 
 
-  @Input() showLiveViewButton = false;
+  @Input() hasViewSwitch = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
   examples = [];
 

@@ -9,12 +9,13 @@ import { NgdExampleView } from '../../enum.example-view';
       <ngd-live-example-block [hidden]="!isLive"
                               [id]="content.id"
                               [title]="'example'"
+                              hasViewSwitch="true"
                               (changeView)="changeView($event)">
       </ngd-live-example-block>
 
       <ngd-tabbed-example-block [hidden]="isLive"
                                 [content]="content.tabs"
-                                [showLiveViewButton]="true"
+                                hasViewSwitch="true"
                                 (changeView)="changeView($event)">
       </ngd-tabbed-example-block>
     </div>
