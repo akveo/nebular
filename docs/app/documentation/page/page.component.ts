@@ -8,17 +8,16 @@ import { AfterViewInit, Component, Inject, NgZone, OnDestroy, OnInit } from '@an
 import { ActivatedRoute, Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {
-  delay,
   distinctUntilChanged,
   filter,
   map,
   publishBehavior,
   publishReplay,
   refCount,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
-import { NgdStructureService, NgdTocElement, NgdTocStateService } from '../../@theme/services';
+import { NgdStructureService, NgdTocStateService } from '../../@theme/services';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { combineLatest } from 'rxjs/observable/combineLatest';

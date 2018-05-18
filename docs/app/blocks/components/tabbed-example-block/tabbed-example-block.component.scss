@@ -3,7 +3,9 @@
 $color-white-default: #ffffff;
 $background-tab-header: #ebeff5;
 
-:host {
+
+@include nb-install-component() {
+
   display: block;
   position: relative;
 
@@ -29,15 +31,13 @@ $background-tab-header: #ebeff5;
       outline: 0;
     }
   }
-}
 
-@include nb-install-component() {
-  /deep/ nb-tabset {
+  /deep/ nb-tabset.tabs-container {
     border-radius: 0.5rem 0.5rem 0 0;
 
     > ul {
       padding: 0;
-      margin-bottom: 0;
+      margin-bottom: 0!important; // TODO: check selectors
       border-radius: 0.5rem 0.5rem 0 0;
       background-color: $background-tab-header;
       overflow: hidden;
@@ -45,7 +45,7 @@ $background-tab-header: #ebeff5;
       li {
         padding: 0.4rem;
         width: 20%;
-        margin-bottom: 0;
+        margin-bottom: 0!important; // TODO: check selectors
 
         &:first-child {
           margin-left: 0;
@@ -64,8 +64,7 @@ $background-tab-header: #ebeff5;
         }
       }
     }
-
-    &.tabs-container .container {
+    .container {
       border-radius: 0 0 0.5rem 0.5rem;
     }
   }
