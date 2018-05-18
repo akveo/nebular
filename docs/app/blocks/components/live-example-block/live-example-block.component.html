@@ -1,7 +1,8 @@
 <section class="header" *ngIf="!loading">
-  <strong class="title">{{title}}</strong>
+  <strong class="title">{{ title }}</strong>
   <div class="actions">
     <button type="button"
+            *ngIf="hasViewSwitch"
             class="btn action-item action-button"
             (click)="switchToInlineVew()">
       <i class="icon feather-code"></i>
