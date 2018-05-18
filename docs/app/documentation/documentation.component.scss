@@ -11,6 +11,13 @@
     flex-wrap: wrap;
   }
 
+  .contact-us {
+    padding: 5rem 0;
+    h2 {
+      color: black;
+    }
+  }
+
   /deep/ nb-layout .main-container {
     padding-top: 3rem;
 
@@ -34,6 +41,13 @@
         font-size: 0.875rem;
         font-weight: normal;
       }
+    }
+  }
+
+  /deep/ nb-layout-footer {
+    margin-right: nb-theme(settings-col-width);
+    ngd-footer .contact {
+      display: none;
     }
   }
 }

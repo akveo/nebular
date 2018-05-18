@@ -148,7 +148,7 @@
 
   .settings-column {
     padding: 0 1.875rem;
-    width: 16rem;
+    width: nb-theme(settings-col-width);
 
     ngd-page-tabs {
       margin-bottom: 1.5rem;
