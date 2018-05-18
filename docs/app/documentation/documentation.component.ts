@@ -6,7 +6,7 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 import { NbThemeService, NbMenuItem } from '@nebular/theme';
 
 import { NgdMenuService } from './menu.service';

@@ -1,8 +1,7 @@
 import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators/takeWhile';
-import { filter, publish, refCount } from 'rxjs/operators';
+import { takeWhile, filter, publish, refCount } from 'rxjs/operators';
 import { NgdTocElement, NgdTocStateService } from '../../services';
 
 @Directive({

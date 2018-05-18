@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { publishReplay } from 'rxjs/operators/publishReplay';
-import { refCount } from 'rxjs/operators/refCount';
+import { Observable } from 'rxjs';
+import { publishReplay ,  refCount } from 'rxjs/operators';
 
 @Injectable()
 export class NgdCodeLoaderService {

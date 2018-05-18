@@ -1,8 +1,8 @@
-@import '../../../framework/theme/styles/theming';
-@import '../../../framework/theme/styles/themes/default';
+@import '../../../../src/framework/theme/styles/theming';
+@import '../../../../src/framework/theme/styles/themes/default';
 
 @import '~bootstrap/scss/mixins/breakpoints';
-@import '../../../framework/theme/styles/global/bootstrap/breakpoints';
+@import '../../../../src/framework/theme/styles/global/bootstrap/breakpoints';
 
 $nb-enabled-themes: (docs-home, docs-page);
 
