@@ -2,7 +2,8 @@
 @import 'small-social';
 @import 'feather';
 
-@import '../../../framework/theme/styles/globals';
+// TODO check this path
+@import '../../../../src/framework/theme/styles/globals';
 
 @include nb-install() {
   @include nb-layout-theme();

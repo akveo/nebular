@@ -131,12 +131,11 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-unused-variable": true
+    "no-unused-variable": [true, {"ignore-pattern": "^set"}]
   },
   "linterOptions": {
     "exclude": [
       "docs/assets/examples/**/*"
     ]
-    "no-unused-variable": [true, {"ignore-pattern": "^set"}]
   }
 }

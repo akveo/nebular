@@ -15,13 +15,11 @@ import {
   publishReplay,
   refCount,
   tap,
+  takeWhile,
 } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 import { NgdStructureService, NgdTocStateService } from '../../@theme/services';
-import { takeWhile } from 'rxjs/operators/takeWhile';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { Subject } from 'rxjs/Subject';
+import { fromEvent,  combineLatest,  Subject } from 'rxjs';
 
 @Component({
   selector: 'ngd-page',

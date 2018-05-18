@@ -13,7 +13,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import {takeWhile} from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
