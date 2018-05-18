@@ -15,3 +15,4 @@ export * from './theme-block/theme-block.component';
 export * from './component-block/component-block.component';
 export * from './api-block/api-block.component';
 export * from './styles-table-block/styles-table-block.component';
+export * from './examples-block/examples-block.component';

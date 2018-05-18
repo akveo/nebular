@@ -1,5 +1,4 @@
 <ng-container [ngSwitch]="currentTab?.tab">
-
   <ng-container *ngFor="let component of source">
 
     <ng-container *ngSwitchCase="'overview'">
@@ -15,14 +14,8 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'examples'">
-      <ng-container *ngIf="hasExamples(component)">
-        <h2 class="class-name">
-          {{ component.name }}
-        </h2>
-        <ngd-live-example-block *ngFor="let example of component.liveExamples" [id]="example" [title]="'example'"></ngd-live-example-block>
-      </ng-container>
+      <ngd-examples-block *ngIf="hasExamples(component)" [source]="component" ></ngd-examples-block>
     </ng-container>
 
   </ng-container>
-
 </ng-container>

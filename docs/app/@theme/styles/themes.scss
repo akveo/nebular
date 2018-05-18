@@ -32,6 +32,7 @@ $nb-themes: nb-register-theme((
 $nb-themes: nb-register-theme((
   // custom
   content-width: 1440px,
+  settings-col-width: 16rem,
 
   radius: 0.25rem,
   separator: transparent,
@@ -64,5 +65,5 @@ $nb-themes: nb-register-theme((
   card-header-fg-heading: black,
   card-margin: 2.5rem,
   card-padding: 2rem 3rem 3.25rem 2rem,
-  footer-height: 600px,
+  footer-shadow: none,
 ), docs-page, docs-home);
