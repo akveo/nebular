@@ -9,8 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'ngd-styles-block',
   template: `
-    <nb-card>
-      <a [name]="source.slag"></a>
+    <nb-card [id]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
         <ngd-styles-table-block [source]="source"></ngd-styles-table-block>

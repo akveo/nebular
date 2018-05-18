@@ -4,30 +4,59 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, Inject} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {filter, map, publishReplay, refCount, tap} from 'rxjs/operators';
+import {
+  delay,
+  distinctUntilChanged,
+  filter,
+  map,
+  publishBehavior,
+  publishReplay,
+  refCount,
+  tap
+} from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
-import { NgdStructureService } from '../../@theme/services';
+import { NgdStructureService, NgdTocElement, NgdTocStateService } from '../../@theme/services';
+import { takeWhile } from 'rxjs/operators/takeWhile';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'ngd-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class NgdPageComponent {
+export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
 
   currentItem;
+  private alive = true;
+  private handleTocScroll$ = new Subject();
 
   constructor(@Inject(NB_WINDOW) private window,
+              private ngZone: NgZone,
+              private router: Router,
               private activatedRoute: ActivatedRoute,
               private structureService: NgdStructureService,
+              private tocState: NgdTocStateService,
               private titleService: Title) {
+  }
 
-    // TODO: set title
+  ngOnInit() {
+    this.handlePageNavigation();
+    this.handleTocScroll();
+  }
+
+  ngAfterViewInit() {
+    this.handleTocScroll$.next(null);
+  }
+
+  handlePageNavigation() {
     this.activatedRoute.params
       .pipe(
+        takeWhile(() => this.alive),
         filter((params: any) => params.subPage),
         map((params: any) => {
           this.window.scrollTo(0, 0);
@@ -39,6 +68,38 @@ export class NgdPageComponent {
         publishReplay(),
         refCount(),
       )
-      .subscribe((item) => this.currentItem = item);
+      .subscribe((item) => {
+        this.currentItem = item;
+        this.handleTocScroll$.next(null);
+      });
+  }
+
+  handleTocScroll() {
+    this.ngZone.runOutsideAngular(() => {
+      combineLatest([
+        this.handleTocScroll$,
+        fromEvent(this.window, 'scroll').pipe(distinctUntilChanged(), publishBehavior(null), refCount()),
+      ])
+        .pipe(
+          takeWhile(() => this.alive),
+        )
+        .subscribe(() => {
+
+          this.tocState.list().map(item => item.setInView(false));
+
+          const current: any = this.tocState.list().reduce((acc, item) => {
+            return item.y > 0 && item.y < acc.y ? item : acc;
+          }, { y: Number.POSITIVE_INFINITY, fake: true });
+
+          if (current && !current.fake) {
+            current.setInView(true);
+            this.router.navigate([], { fragment: current.fragment });
+          }
+        });
+    });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 }
