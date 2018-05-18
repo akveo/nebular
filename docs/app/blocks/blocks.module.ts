@@ -27,6 +27,7 @@ import {
   NgdComponentBlockComponent,
   NgdApiBlockComponent,
   NgdStylesTableBlockComponent,
+  NgdExamplesBlockComponent,
 } from './components/';
 
 const blocks = [
@@ -47,6 +48,7 @@ const blocks = [
   NgdComponentBlockComponent,
   NgdApiBlockComponent,
   NgdStylesTableBlockComponent,
+  NgdExamplesBlockComponent,
 ];
 
 @NgModule({
