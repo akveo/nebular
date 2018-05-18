@@ -17,13 +17,7 @@ import { NgdExampleView } from '../../enum.example-view';
 @Component({
   selector: 'ngd-tabbed-example-block',
   styleUrls: ['./tabbed-example-block.component.scss'],
-  template: `
-    <nb-tabset>
-      <nb-tab *ngFor="let example of examples" tabTitle="{{ example.extension }}" [active]="example.active">
-        <ngd-code-block [path]="example.path" [code]="example.code"></ngd-code-block>
-      </nb-tab>
-    </nb-tabset>
-  `,
+  templateUrl: './tabbed-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdTabbedExampleBlockComponent {
