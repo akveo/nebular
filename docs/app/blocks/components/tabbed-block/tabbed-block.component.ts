@@ -6,8 +6,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { BehaviorSubject,  combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NgdTabbedService } from '../../../@theme/services';
 

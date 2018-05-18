@@ -1,8 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { fromEvent as observableFromEvent } from 'rxjs/observable/fromEvent';
-import { filter } from 'rxjs/operators/filter';
-import { map } from 'rxjs/operators/map';
+import { Observable,  fromEvent as observableFromEvent } from 'rxjs';
+import { filter,  map } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 @Injectable()

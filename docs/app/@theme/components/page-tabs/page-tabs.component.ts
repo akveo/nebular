@@ -5,12 +5,9 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile,  map, publishReplay, refCount } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { map, publishReplay, refCount } from 'rxjs/operators';
+import { Observable,  of as observableOf,  combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngd-page-tabs',

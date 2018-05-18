@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
 import { NgdIframeCommunicatorService } from '../@theme/services';
 

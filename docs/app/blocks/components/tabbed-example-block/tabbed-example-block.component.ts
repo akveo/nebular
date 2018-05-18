@@ -6,11 +6,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { of as observableOf } from 'rxjs/observable/of';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { forkJoin,  of as observableOf,  Observable } from 'rxjs';
+import { map,  catchError } from 'rxjs/operators';
 import { NgdCodeLoaderService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
