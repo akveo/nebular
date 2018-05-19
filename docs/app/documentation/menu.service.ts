@@ -7,7 +7,15 @@
 import { Injectable } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
-import { NgdStructureService, NgdTextService } from '../@theme/services';
+import { NgdStructureService } from '../@theme/services/structure.service';
+import { NgdTextService } from '../@theme/services/text.service';
+
+interface IItemLink {
+  title: string;
+  parent?: {
+    link?: string;
+  };
+}
 
 @Injectable()
 export class NgdMenuService {
@@ -30,7 +38,7 @@ export class NgdMenuService {
           parent: parent,
           data: item,
         };
-        menuItem.link = this.createItemLink(menuItem);
+        menuItem.link = this.createItemLink<NbMenuItem>(menuItem);
 
         if (item.children && item.children.some(child => child.type === 'page' || child.type === 'tabs')) {
           menuItem.children = this.prepareMenu(item.children, menuItem);
@@ -68,8 +76,9 @@ export class NgdMenuService {
     ));
   }
 
-  protected createItemLink(item: any) {
+  createItemLink<T extends IItemLink>(item: T): string {
     const url = this.textService.createSlag(item.title);
+
     return item.parent ? `${item.parent.link}/${url}` : url;
   }
 }

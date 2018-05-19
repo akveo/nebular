@@ -41,6 +41,7 @@ import {
   NgdStylesService,
   NgdVersionService,
   NgdTocStateService,
+  NgdPaginationService,
 } from './services';
 
 
@@ -98,6 +99,7 @@ import {
     NgdStylesService,
     NgdVersionService,
     NgdTocStateService,
+    NgdPaginationService,
   ],
 })
 export class NgdThemeModule {
