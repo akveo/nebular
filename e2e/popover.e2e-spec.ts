@@ -164,4 +164,13 @@ describe('nb-popover', () => {
     const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
     expect(text).toEqual('hello from dynamically inserted component: Example context');
   });
+
+  it('have to hide popover when host removed', done => {
+    element(contentTemplate).click();
+    expect(element(popover).isPresent()).toBeTruthy();
+    browser.get('#/').then(() => {
+      expect(element(popover).isPresent()).toBeFalsy();
+      done();
+    })
+  });
 });
