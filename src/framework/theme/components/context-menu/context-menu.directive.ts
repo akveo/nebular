@@ -8,8 +8,9 @@ import {
   ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
   OnInit, PLATFORM_ID,
 } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { NbPopoverDirective } from '../popover/popover.directive';
-import { NbMenuItem } from '../menu/menu.service';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
 import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
 import { NbContextMenuComponent } from './context-menu.component';
@@ -66,6 +67,8 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
 @Directive({ selector: '[nbContextMenu]' })
 export class NbContextMenuDirective implements OnInit, OnDestroy {
 
+  private menuTag: string;
+
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
@@ -99,6 +102,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * */
   @Input('nbContextMenuTag')
   set tag(tag: string) {
+    this.menuTag = tag;
     this.popover.context = Object.assign(this.context, { tag });
   }
 
@@ -112,7 +116,8 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
               adjustmentHelper: NbAdjustmentHelper,
               triggerHelper: NbTriggerHelper,
               @Inject(PLATFORM_ID) platformId,
-              placementHelper: NbPlacementHelper) {
+              placementHelper: NbPlacementHelper,
+              private menuService: NbMenuService) {
     /**
      * Initialize popover with all the important inputs.
      * */
@@ -131,6 +136,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.popover.ngOnInit();
+    this.subscribeOnItemClick();
   }
 
   ngOnDestroy() {
@@ -171,5 +177,11 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
     if (!items || !items.length) {
       throw Error(`List of menu items expected, but given: ${items}`)
     }
+  }
+
+  private subscribeOnItemClick() {
+    this.menuService.onItemClick()
+      .pipe(filter(({tag}) => tag === this.menuTag))
+      .subscribe(() => this.hide());
   }
 }
