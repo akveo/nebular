@@ -183,6 +183,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
   }
 
   /**
