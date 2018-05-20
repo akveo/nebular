@@ -14,6 +14,9 @@ import { NbPopoverTemplateRefComponent } from './popover-template-ref/popover-te
 import { NbPopoverCustomComponentComponent } from './popover-custom-component/popover-custom-component.component';
 import { NbPopoverPlacementsComponent } from './popover-placements/popover-placements.component';
 import { NbPopoverModesComponent } from './popover-modes/popover-modes.component';
+import { NbCheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
+import { NbCheckboxStatusComponent } from './checkbox-status/checkbox-status.component';
+import { NbCheckboxDisabledComponent } from './checkbox-disabled/checkbox-disabled.component';
 
 
 export const routes: Routes = [
@@ -40,6 +43,18 @@ export const routes: Routes = [
       {
         path: 'popover-modes/popover-modes.component',
         component: NbPopoverModesComponent,
+      },
+      {
+        path: 'checkbox-showcase/checkbox-showcase.component',
+        component: NbCheckboxShowcaseComponent,
+      },
+      {
+        path: 'checkbox-status/checkbox-status.component',
+        component: NbCheckboxStatusComponent,
+      },
+      {
+        path: 'checkbox-disabled/checkbox-disabled.component',
+        component: NbCheckboxDisabledComponent,
       },
     ],
   },

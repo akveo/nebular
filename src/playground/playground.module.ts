@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
+import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundComponent } from './playground.component';
@@ -18,12 +18,16 @@ import { NbPopoverTemplateRefComponent } from './popover-template-ref/popover-te
 import { NbPopoverCustomComponentComponent } from './popover-custom-component/popover-custom-component.component';
 import { NbPopoverPlacementsComponent } from './popover-placements/popover-placements.component';
 import { NbPopoverModesComponent } from './popover-modes/popover-modes.component';
+import { NbCheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
+import { NbCheckboxStatusComponent } from './checkbox-status/checkbox-status.component';
+import { NbCheckboxDisabledComponent } from './checkbox-disabled/checkbox-disabled.component';
 
 
 export const NB_MODULES = [
   NbCardModule,
   NbLayoutModule,
   NbPopoverModule,
+  NbCheckboxModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -32,6 +36,9 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbPopoverCustomComponentComponent,
   NbPopoverPlacementsComponent,
   NbPopoverModesComponent,
+  NbCheckboxShowcaseComponent,
+  NbCheckboxStatusComponent,
+  NbCheckboxDisabledComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
