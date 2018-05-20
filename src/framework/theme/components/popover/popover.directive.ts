@@ -46,6 +46,9 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * <button [nbPopover]="MyPopoverComponent"></button>
  * ```
  *
+ * Both custom components and templateRef popovers can receive *context* property
+ * that will be passed to the content props.
+ *
  * Primitive types
  *
  * ```html
@@ -75,6 +78,11 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * the container element popover will not be hidden.
  *
  * @example(popover-modes/popover-modes.component)
+ *
+ * @more-live-examples
+ *
+ * popover-template-ref/popover-template-ref.component
+ * popover-custom-component/popover-custom-component.component
  * */
 /*
 *
