@@ -8,7 +8,7 @@ import {
   ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
   OnInit, PLATFORM_ID,
 } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
@@ -67,8 +67,6 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
 @Directive({ selector: '[nbContextMenu]' })
 export class NbContextMenuDirective implements OnInit, OnDestroy {
 
-  private menuTag: string;
-
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
@@ -109,6 +107,9 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   protected popover: NbPopoverDirective;
   protected context = {};
 
+  private menuTag: string;
+  private alive: boolean = true;
+
   constructor(hostRef: ElementRef,
               themeService: NbThemeService,
               componentFactoryResolver: ComponentFactoryResolver,
@@ -141,6 +142,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.popover.ngOnDestroy();
+    this.alive = false;
   }
 
   /**
@@ -181,7 +183,10 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   private subscribeOnItemClick() {
     this.menuService.onItemClick()
-      .pipe(filter(({tag}) => tag === this.menuTag))
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(({tag}) => tag === this.menuTag),
+      )
       .subscribe(() => this.hide());
   }
 }
