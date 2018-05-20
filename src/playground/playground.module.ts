@@ -6,12 +6,19 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { NbCardModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundComponent } from './playground.component';
-import { NbPopoverExampleComponent } from './popover';
+
 import { NbDynamicToAddComponent } from '../app/dynamic.component';
+import { NbPopoverShowcaseComponent } from './popover-showcase/popover-showcase.component';
+import { NbPopoverTemplateRefComponent } from './popover-template-ref/popover-template-ref.component';
+import { NbPopoverCustomComponentComponent } from './popover-custom-component/popover-custom-component.component';
+import { NbPopoverPlacementsComponent } from './popover-placements/popover-placements.component';
+import { NbPopoverModesComponent } from './popover-modes/popover-modes.component';
+
 
 export const NB_MODULES = [
   NbCardModule,
@@ -20,7 +27,11 @@ export const NB_MODULES = [
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
-  NbPopoverExampleComponent,
+  NbPopoverShowcaseComponent,
+  NbPopoverTemplateRefComponent,
+  NbPopoverCustomComponentComponent,
+  NbPopoverPlacementsComponent,
+  NbPopoverModesComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

@@ -1,0 +1,13 @@
+<button class="btn btn-outline-primary"
+        [nbPopover]="template"
+        nbPopoverPlacement="right">
+  Template Ref Test
+</button>
+
+<ng-template #template let-text="text">
+  <nb-card class="popover-card">
+    <nb-card-body>
+      <span class="form-control-feedback">Template here</span>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
