@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbDynamicToAddComponent } from '../../app/dynamic.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Component } from '@angular/core';
 })
 export class NbPopoverCustomComponentComponent {
 
-  customComponent;
+  customComponent = NbDynamicToAddComponent;
 }
 
 
