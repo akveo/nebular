@@ -1,6 +1,6 @@
 # Nebular Components
 
-Nebular Components is a list of essential pure Angular components allowing you to quickly create a new page filled with essential structure.
+Nebular Components is a list of pure Angular components allowing you to quickly create a new page filled with essential structure.
 
 Here's a list of Nebular components:
 
