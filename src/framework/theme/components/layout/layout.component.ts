@@ -26,13 +26,8 @@ import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
  * By default the columns are ordered from the left to the right,
  * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
  * moving it to the very first position:
- * ```html
- * <nb-layout>
- *   <nb-layout-column>Second</nb-layout-column>
- *   <nb-layout-column>Third</nb-layout-column>
- *   <nb-layout-column left>First</nb-layout-column>
- * </nb-layout>
- * ```
+ *
+ * @example(n/layout-column-left/layout-column-left.component)
  */
 @Component({
   selector: 'nb-layout-column',
@@ -70,7 +65,9 @@ export class NbLayoutColumnComponent {
  * Page header component.
  * Located on top of the page above the layout columns and sidebars.
  * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
- * sticky to the top of the nb-layout (to of the page).
+ * sticky to the top of the nb-layout (to of the page). Here's an example:
+ *
+ * @example(n/layout-fixed-header/layout-fixed-header.component)
  *
  * @styles
  *
@@ -142,23 +139,29 @@ export class NbLayoutFooterComponent {
 }
 
 /**
- * The general Nebular component-container.
- * It is required that all children component of the framework are located inside of the nb-layout.
+ * Layout container component.
+ * When using with Nebular Theme System it is required that all child components should be placed inside.
+ *
+ * Basic example of two column layout with header:
+ *
+ * @example(n/layout-showcase/layout-showcase.component)
  *
  * Can contain the following components inside:
  *
  * ```html
- * nb-layout-header
- * nb-layout-column
- * nb-sidebar
- * nb-layout-footer
+ * <nb-layout>
+ *  <nb-layout-header></nb-layout-header>
+ *  <nb-layout-footer></nb-layout-column>
+ *  <nb-layout-column></nb-layout-column>
+ *  <nb-sidebar></nb-sidebar>
+ * </nb-layout>
  * ```
  *
- * By default the layout fills up the full view-port.
+ * By default the layout fills up the whole view-port.
  * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
  * won't mess with the fixed nb-header.
  *
- * The children components are projected into the flexible layout structure allowing to adjust the layout behavior
+ * The child components are projected into a flexible layout structure allowing to adjust the layout behavior
  * based on the settings provided.
  *
  * The layout content (columns) becomes centered when the window width is more than
@@ -167,33 +170,23 @@ export class NbLayoutFooterComponent {
  * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
  * to dynamically append some components like modals or spinners/loaders
  * so that they are located on top of the elements hierarchy.
- * More details are below under the `ThemeService` section.
+ * More details are under the `ThemeService` section.
  *
- * The layout component is also responsible for changing of the application themes.
- * It listens to the `themeChange` event and change the theme CSS class appended to body.
+ * The layout component is also responsible for changing application themes.
+ * It listens to the `themeChange` event and change a theme CSS class appended to body.
  * Based on the class appended a specific CSS-theme is applied to the application.
  * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
- * A simple layout example:
+ * A simple layout with footer:
  *
- * ```html
- * <nb-layout>
- *   <nb-layout-header>Great Company</nb-layout-header>
+ * @example(n/layout-w-footer/layout-w-footer.component)
  *
- *   <nb-layout-column>
- *     Hello World!
- *   </nb-layout-column>
- *
- *   <nb-layout-footer>Contact us</nb-layout-footer>
- * </nb-layout>
- * ```
- *
- * For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
+ * It is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
  *
  * ```html
  * <nb-layout center>
- *   <nb-layout-header>Great Company</nb-layout-header>
+ *   <nb-layout-header>Awesome Company</nb-layout-header>
  *
  *   <nb-layout-column>
  *     Hello World!

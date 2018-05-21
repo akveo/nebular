@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
-import { NbPlaygroundComponent } from './playground.component';
+import { NbPlaygroundBaseComponent } from './playground-base.component';
+import { NbPlaygroundLayoutComponent } from './playground-layout.component';
 
 import { NbDynamicToAddComponent } from '../app/dynamic.component';
 import { NbPopoverShowcaseComponent } from './popover/popover-showcase.component';
@@ -21,6 +22,10 @@ import { NbPopoverModesComponent } from './popover/popover-modes.component';
 import { NbCheckboxShowcaseComponent } from './checkbox/checkbox-showcase.component';
 import { NbCheckboxStatusComponent } from './checkbox/checkbox-status.component';
 import { NbCheckboxDisabledComponent } from './checkbox/checkbox-disabled.component';
+import { NbLayoutShowcaseComponent } from './layout/layout-showcase.component';
+import { NbLayoutWFooterComponent } from './layout/layout-w-footer.component';
+import { NbLayoutFixedHeaderComponent } from './layout/layout-fixed-header.component';
+import { NbLayoutColumnLeftComponent } from './layout/layout-column-left.component';
 
 
 export const NB_MODULES = [
@@ -39,6 +44,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCheckboxShowcaseComponent,
   NbCheckboxStatusComponent,
   NbCheckboxDisabledComponent,
+  NbLayoutShowcaseComponent,
+  NbLayoutWFooterComponent,
+  NbLayoutFixedHeaderComponent,
+  NbLayoutColumnLeftComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
@@ -56,7 +65,8 @@ export const NB_ENTRY_COMPONENTS = [
     ...NB_EXAMPLE_COMPONENTS,
   ],
   declarations: [
-    NbPlaygroundComponent,
+    NbPlaygroundLayoutComponent,
+    NbPlaygroundBaseComponent,
     ...NB_ENTRY_COMPONENTS,
     ...NB_EXAMPLE_COMPONENTS,
   ],
