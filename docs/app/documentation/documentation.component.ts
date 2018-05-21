@@ -10,6 +10,7 @@ import { takeWhile } from 'rxjs/operators';
 import { NbThemeService, NbMenuItem } from '@nebular/theme';
 
 import { NgdMenuService } from './menu.service';
+import { NgdPaginationService } from '../@theme/services';
 
 @Component({
   selector: 'ngd-documentation',
@@ -23,8 +24,10 @@ export class NgdDocumentationComponent implements OnDestroy {
 
   constructor(private service: NgdMenuService,
               private router: Router,
-              private  themeService: NbThemeService) {
+              private  themeService: NbThemeService,
+              private paginationService: NgdPaginationService) {
     this.themeService.changeTheme('docs-page');
+    this.paginationService.setPaginationItems('/docs');
 
     this.menuItems = this.service.getPreparedMenu('/docs');
 

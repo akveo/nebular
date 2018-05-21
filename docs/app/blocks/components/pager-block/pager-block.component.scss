@@ -1,0 +1,48 @@
+@import '../../../@theme/styles/themes';
+
+$color-black: #000000;
+$pagination-text-color: #666f80;
+$color-pagination-arrow: #457ae6;
+
+@include nb-install-component() {
+  display: flex;
+
+  /deep/ nb-card {
+    font-weight: 300;
+    flex: 1;
+    margin-left: 1rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &.invisible {
+      visibility: hidden;
+    }
+
+    a {
+      padding: 2rem 3rem 2rem 2rem;
+      text-decoration: none;
+      color: $pagination-text-color;
+      height: 100%;
+    }
+
+    .page-title {
+      display: flex;
+      justify-content: space-between;
+      color: $color-black;
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+
+      i {
+        color: $color-pagination-arrow;
+        margin-top: 0.3rem;
+      }
+    }
+
+    &.left-block {
+      text-align: right;
+    }
+  }
+}
