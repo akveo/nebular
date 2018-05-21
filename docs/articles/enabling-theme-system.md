@@ -1,11 +1,14 @@
+# Enable Theme System
+
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+    If you use our [ngx-admin starter kit](#/docs/guides/install-based-on-starter-kit) then you already have the Advanced setup in place.
   </div>
 </div>
+<hr>
 
-## Very basic setup
+## Basic setup
 **When**: You just need the default styles provided by Nebular (cosmic or default theme) and don't plan to use variables or hot-reload support.
 
 1) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
@@ -18,7 +21,7 @@
 ```
 
 And that's it. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.
-<hr class="section-end">
+<hr>
 
 ## Normal setup
 **When**: You need to be able to change theme-variables and want to use them in your code.
@@ -32,7 +35,8 @@ And that's it. In the future, if you need any of the advanced features - you can
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
 
-// and change the variables you need, or simply leave the map empty to use the default values
+// and change the variables you need, 
+// or simply leave the map empty to use the default values
 // let's make it blue-ish instead of the default white color
 $nb-themes: nb-register-theme((
   color-bg: #4ca6ff,
@@ -73,13 +77,14 @@ $nb-themes: nb-register-theme((
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    Variables are accessible simply using a call of nb-theme(variable-name) function.
+    Variables are accessible simply using a call of `nb-theme(variable-name)` function.
   </div>
 </div>
 
 At this step you will have something similar to the image below:
 
 ![image](assets/images/articles/blue-theme.png)
+<hr>
 
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
@@ -99,8 +104,9 @@ $nb-enabled-themes: (default, dark);
 
 ...
 
-// and change the variables you need, or simply leave the map empty to use the default values
-// let's make it blue-ish instead of the default white color
+// and change the variables you need, 
+// or simply leave the map empty to use the default values
+// let's make it dark instead of the default cosmic colors
 $nb-themes: nb-register-theme((
 
   color-bg: #222222,
@@ -178,10 +184,10 @@ enableDarkTheme() {
   this.themeService.changeTheme('dark');
 }
 ```
-<hr class="section-end">
+<hr>
 
-## Next
+## Related Articles
 
-- [Theme System Concepts](#/docs/concepts/theme-system).
+- [Theme System Concepts](#/docs/guides/theme-system).
 - [Default Theme variables table](#/docs/themes/default).
 - [Cosmic Theme variables table](#/docs/themes/cosmic).
