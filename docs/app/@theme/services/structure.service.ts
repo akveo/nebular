@@ -40,8 +40,10 @@ export class NgdStructureService {
     }
   }
 
-  protected prepareStructure(structure: any, preparedDocs: any): any {
+  protected prepareStructure(structure: any, preparedDocs: any, parentSlag?: string): any {
     return structure.map((item: any) => {
+      const slag = item.name ? this.textService.createSlag(item.name) : null;
+
       if (item.type === 'block' && typeof item.source === 'string') {
 
         if (item.block === 'theme') {
@@ -58,7 +60,7 @@ export class NgdStructureService {
       }
 
       if (item.children) {
-        item.children = this.prepareStructure(item.children, preparedDocs);
+        item.children = this.prepareStructure(item.children, preparedDocs, slag);
       }
 
       if (item.type === 'tabs') {
@@ -77,7 +79,7 @@ export class NgdStructureService {
 
       if (item.type === 'page' || item.type === 'tabs') {
         item.toc = this.prepareToc(item);
-        item.slag = this.textService.createSlag(item.name);
+        item.slag = parentSlag ? `${parentSlag}_${slag}` : slag;
       }
 
       return item;
