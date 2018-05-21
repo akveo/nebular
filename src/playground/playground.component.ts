@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import 'style-loader!./styles/styles.scss';
 
+
 @Component({
   selector: 'nb-playground',
   template: `
@@ -18,7 +19,6 @@ import 'style-loader!./styles/styles.scss';
     </nb-layout>
   `,
 })
-
 export class NbPlaygroundComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }

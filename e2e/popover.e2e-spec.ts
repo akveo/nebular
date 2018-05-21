@@ -1,167 +1,220 @@
 import { browser, by, element } from 'protractor';
 
-const contentTemplate = by.css('nb-card:nth-child(1) button:nth-child(1)');
-const contentComponentWithContext = by.css('nb-card:nth-child(1) button:nth-child(2)');
-const contentTemplateWithContext = by.css('nb-card:nth-child(1) button:nth-child(3)');
-const contentString = by.css('nb-card:nth-child(1) button:nth-child(4)');
-const placementRight = by.css('nb-card:nth-child(2) button:nth-child(1)');
-const placementBottom = by.css('nb-card:nth-child(2) button:nth-child(2)');
-const placementTop = by.css('nb-card:nth-child(2) button:nth-child(3)');
-const placementLeft = by.css('nb-card:nth-child(2) button:nth-child(4)');
-const modeClick = by.css('nb-card:nth-child(4) button:nth-child(1)');
-const modeHover = by.css('nb-card:nth-child(4) button:nth-child(2)');
-const modeHint = by.css('nb-card:nth-child(4) button:nth-child(3)');
-const popover = by.css('nb-layout > nb-popover');
+const routes = {
+  showcase: '#/popover-showcase/popover-showcase.component',
+  templateRef: '#/popover-template-ref/popover-template-ref.component',
+  customComponent: '#/popover-custom-component/popover-custom-component.component',
+  placements: '#/popover-placements/popover-placements.component',
+  modes: '#/popover-modes/popover-modes.component',
+};
+
+const popover = by.css('nb-popover');
+const button = by.css('button');
 
 describe('nb-popover', () => {
 
-  beforeEach((done) => {
-    browser.get('#/popover').then(done);
+  it('render template ref', done => {
+    browser.get(routes.templateRef)
+      .then(() => {
+        element(button).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+      })
+      .then(done);
   });
 
-  it('render template ref', () => {
-    element(contentTemplate).click();
-    const containerContent = element(popover).element(by.css('nb-card'));
-    expect(containerContent.isPresent()).toBeTruthy();
+  it('render component ref', done => {
+    browser.get(routes.customComponent)
+      .then(() => {
+        element(button).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+      })
+      .then(done);
   });
 
-  it('render component ref', () => {
-    element(contentComponentWithContext).click();
-    const containerContent = element(popover).element(by.css('nb-dynamic-to-add'));
-    expect(containerContent.isPresent()).toBeTruthy();
+  it('render container with arrow', done => {
+    browser.get(routes.showcase)
+      .then(() => {
+        element(button).click();
+        const arrow = element(popover).element(by.css('span'));
+        expect(arrow.getAttribute('class')).toEqual('arrow');
+      })
+      .then(done);
   });
 
-  it('render primitive', () => {
-    element(contentString).click();
-    const containerContent = element(popover).element(by.css('div'));
-    expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
-    expect(containerContent.getText()).toEqual('Hi, I\'m popover!');
+  it('render container in the right', done => {
+    browser.get(routes.placements)
+      .then(() => {
+        element(by.css('button:nth-child(1)')).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+        expect(element(popover).getAttribute('class')).toEqual('right');
+      })
+      .then(done);
   });
 
-  it('render container with arrow', () => {
-    element(contentTemplate).click();
-    const arrow = element(popover).element(by.css('span'));
-    expect(arrow.getAttribute('class')).toEqual('arrow');
+  it('render container in the bottom', done => {
+    browser.get(routes.placements)
+      .then(() => {
+        element(by.css('button:nth-child(2)')).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+        expect(element(popover).getAttribute('class')).toEqual('bottom');
+      })
+      .then(done);
   });
 
-  it('render container in the right', () => {
-    element(placementRight).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('right');
+  it('render container in the top', done => {
+    browser.get(routes.placements)
+      .then(() => {
+        element(by.css('button:nth-child(3)')).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+        expect(element(popover).getAttribute('class')).toEqual('top');
+      })
+      .then(done);
   });
 
-  it('render container in the bottom', () => {
-    element(placementBottom).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('bottom');
+  it('render container in the left', done => {
+    browser.get(routes.placements)
+      .then(() => {
+        element(by.css('button:nth-child(4)')).click();
+        expect(element(popover).isPresent()).toBeTruthy();
+        expect(element(popover).getAttribute('class')).toEqual('left');
+      })
+      .then(done);
   });
 
-  it('render container in the top', () => {
-    element(placementTop).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('top');
+  it('have to render component with context', done => {
+    browser.get(routes.customComponent)
+      .then(() => {
+        element(button).click();
+        const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
+        expect(text).toEqual('hello from dynamically inserted component: Example context');
+      })
+      .then(done);
   });
 
-  it('render container in the left', () => {
-    element(placementLeft).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('left');
+  it('have to render template with context', done => {
+    browser.get(routes.templateRef)
+      .then(() => {
+        element(button).click();
+        const text = element(popover).element(by.css('nb-card-body > span')).getText();
+        expect(text).toEqual('Template Ref with context: Example context');
+      })
+      .then(done);
   });
 
-  it('open popover by host click', () => {
-    element(modeClick).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
+  describe('click mode', () => {
+    const button = by.css('button:nth-child(1)');
+
+    it('open popover by host click', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          element(button).click();
+          expect(element(popover).isPresent()).toBeTruthy();
+        })
+        .then(done);
+    });
+
+    it('close popover by host click', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          element(button).click();
+          expect(element(popover).isPresent()).toBeTruthy();
+          element(button).click();
+          expect(element(popover).isPresent()).toBeFalsy();
+        })
+        .then(done);
+    });
+
+    it('doesn\'t close popover by container click', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          element(button).click();
+          expect(element(popover).isPresent()).toBeTruthy();
+          element(popover).click();
+          expect(element(popover).isPresent()).toBeTruthy();
+        })
+        .then(done);
+    });
+
+    it('close popover by click outside the host and container', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          element(button).click();
+          expect(element(popover).isPresent()).toBeTruthy();
+          browser.actions()
+            .mouseMove(element(popover), { x: -10, y: -10 })
+            .click()
+            .perform();
+          expect(element(popover).isPresent()).toBeFalsy();
+        })
+        .then(done);
+    });
   });
 
-  it('close popover by host click', () => {
-    element(modeClick).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    element(modeClick).click();
-    expect(container.isPresent()).toBeFalsy();
+  describe('hover mode', () => {
+    const button = by.css('button:nth-child(3)');
+
+    it('open popover by hover on host', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          browser.actions()
+            .mouseMove(element(button))
+            .perform();
+
+          expect(element(popover).isPresent()).toBeTruthy();
+        })
+        .then(done);
+    });
+
+    it('close popover by hover out host', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          browser.actions()
+            .mouseMove(element(button))
+            .perform();
+
+          expect(element(popover).isPresent()).toBeTruthy();
+
+          browser.actions()
+            .mouseMove(element(by.css('button:nth-child(1)')))
+            .perform();
+
+          expect(element(popover).isPresent()).toBeFalsy();
+        })
+        .then(done);
+    });
+
+    it('doesn\'t close popover by hover on container', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          browser.actions()
+            .mouseMove(element(button))
+            .perform();
+
+          expect(element(popover).isPresent()).toBeTruthy();
+
+          browser.actions()
+            .mouseMove(element(popover))
+            .perform();
+
+          expect(element(popover).isPresent()).toBeTruthy();
+        })
+        .then(done);
+    });
   });
 
-  it('doesn\'t close popover by container click', () => {
-    element(modeClick).click();
-    const container = element(popover);
-    container.click();
-    expect(container.isPresent()).toBeTruthy();
-  });
+  describe('hint mode', () => {
+    const button = by.css('button:nth-child(2)');
 
-  it('close popover by click outside the host and container', () => {
-    element(modeClick).click();
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-    browser.actions()
-      .mouseMove(container, { x: -10, y: -10 })
-      .click()
-      .perform();
-    expect(container.isPresent()).toBeFalsy();
-  });
+    it('open popover by hover on host with hint', done => {
+      browser.get(routes.modes)
+        .then(() => {
+          browser.actions()
+            .mouseMove(element(button))
+            .perform();
 
-  it('open popover by hover on host', () => {
-    browser.actions()
-      .mouseMove(element(modeHover))
-      .perform();
-
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-  });
-
-  it('close popover by hover out host', () => {
-    browser.actions()
-      .mouseMove(element(modeHover))
-      .perform();
-
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-
-    browser.actions()
-      .mouseMove(element(modeClick))
-      .perform();
-
-    expect(container.isPresent()).toBeFalsy();
-  });
-
-  it('doesn\'t close popover by hover on container', () => {
-    browser.actions()
-      .mouseMove(element(modeHover))
-      .perform();
-
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-
-    browser.actions()
-      .mouseMove(container)
-      .perform();
-
-    expect(container.isPresent()).toBeTruthy();
-  });
-
-  it('open popover by hover on host with hint', () => {
-    browser.actions()
-      .mouseMove(element(modeHint))
-      .perform();
-
-    const container = element(popover);
-    expect(container.isPresent()).toBeTruthy();
-  });
-
-  it('have to render component with context', () => {
-    element(contentComponentWithContext).click();
-    const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
-    expect(text).toEqual('hello from dynamically inserted component: Example context');
-  });
-
-  it('have to render template with context', () => {
-    element(contentTemplateWithContext).click();
-    const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
-    expect(text).toEqual('hello from dynamically inserted component: Example context');
+          expect(element(popover).isPresent()).toBeTruthy();
+        })
+        .then(done);
+    });
   });
 });

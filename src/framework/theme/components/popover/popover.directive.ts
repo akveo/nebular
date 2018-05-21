@@ -28,7 +28,7 @@ import { NbPlacementHelper } from './helpers/placement.helper';
 /**
  * Powerful popover directive, which provides the best UX for your users.
  *
- * ![image](assets/images/components/popover.gif)
+ * @example(popover-showcase/popover-showcase.component)
  *
  * Popover can accept different content such as:
  * TemplateRef
@@ -43,8 +43,11 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * Custom components
  *
  * ```html
- * <button [nbPopover]="NbCardComponent"></button>
+ * <button [nbPopover]="MyPopoverComponent"></button>
  * ```
+ *
+ * Both custom components and templateRef popovers can receive *context* property
+ * that will be passed to the content props.
  *
  * Primitive types
  *
@@ -52,12 +55,10 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * <button nbPopover="Hello, Popover!"></button>
  * ```
  *
- * Popover has different placements, such as: top, bottom, left and right
+ * Popover has different placements, such as: top, bottom, left, right, start and end
  * which can be used as following:
  *
- * ```html
- * <button nbPopover="Hello, Popover!" nbPopoverPlacement="left"></button>
- * ```
+ * @example(popover-placements/popover-placements.component)
  *
  * By default popover will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the popover container.
@@ -67,6 +68,21 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  *
+ * Also popover has some different modes which provides capability show and hide popover in different ways:
+ *
+ * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
+ * somewhere on the document except popover.
+ * - Hint mode provides capability show popover when the user hovers on the host element
+ * and hide popover when user hovers out of the host.
+ * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element popover will not be hidden.
+ *
+ * @example(popover-modes/popover-modes.component)
+ *
+ * @more-live-examples
+ *
+ * popover-template-ref/popover-template-ref.component
+ * popover-custom-component/popover-custom-component.component
  * */
 /*
 *
