@@ -1,7 +1,7 @@
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit-ngxadmin-ngxadmin) then you already have the Auth module in place.
+    If you use our [ngx-admin starter kit](#/docs/guides/install-based-on-starter-kit) then you already have the Auth module in place.
   </div>
 </div>
 
@@ -92,7 +92,7 @@ export const routes: Routes = [
 ];
 ```
 
-5) Last but not least - install the component styles into your themes.scss ([more details](/#/docs/guides/enabling-theme-system)):
+5) Last but not least - install the component styles into your themes.scss ([more details](/#/docs/guides/enable-theme-system)):
 
 ```scss
 @import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/{theme-name}';

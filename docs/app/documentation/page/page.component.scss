@@ -25,6 +25,10 @@
         line-height: 1.5;
       }
 
+      img {
+        max-width: 100%;
+      }
+
       code {
         background: #F1F2F3;
         color: #5699F0;
@@ -89,7 +93,7 @@
       }
 
       ul {
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         ul {
           padding-left: 2.5rem;
           list-style-type: none;
@@ -108,7 +112,7 @@
         li {
           font-size: 0.9375rem;
           line-height: 1.5;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
       }
 
@@ -131,6 +135,11 @@
         &.note-info {
           color: #5699F0;
           background-color: #F0F6FF;
+        }
+
+        &.note-warning {
+          color: #f09301;
+          background-color: #fffae4;
         }
       }
 

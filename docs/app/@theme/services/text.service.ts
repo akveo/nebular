@@ -7,7 +7,7 @@ import { NgdHighlightService } from './highlight.service';
 export class NgdTextService {
 
   private readonly SECTION_SPLIT = '<hr>';
-  private readonly TITLE_MASK = '^#{1,6}[^#]s?(.+)\n';
+  private readonly TITLE_MASK = '^#{1,6}[^#]?(.+)\n';
   private readonly STRIP_HTML = '<\\/?[^>]+(>|$)';
 
   constructor(private highlight: NgdHighlightService) {
