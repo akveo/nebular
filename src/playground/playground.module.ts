@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule } from '@nebular/theme';
+import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule, NbSidebarModule } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -26,6 +26,11 @@ import { NbLayoutShowcaseComponent } from './layout/layout-showcase.component';
 import { NbLayoutWFooterComponent } from './layout/layout-w-footer.component';
 import { NbLayoutFixedHeaderComponent } from './layout/layout-fixed-header.component';
 import { NbLayoutColumnLeftComponent } from './layout/layout-column-left.component';
+import { NbSidebarShowcaseComponent } from './sidebar/sidebar-showcase.component';
+import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.component';
+import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
+import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
+import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
 
 
 export const NB_MODULES = [
@@ -33,6 +38,7 @@ export const NB_MODULES = [
   NbLayoutModule,
   NbPopoverModule,
   NbCheckboxModule,
+  NbSidebarModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -48,6 +54,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
   NbLayoutColumnLeftComponent,
+  NbSidebarShowcaseComponent,
+  NbSidebarCompactedComponent,
+  NbSidebarRightComponent,
+  NbSidebarToggleComponent,
+  NbSidebarFixedComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

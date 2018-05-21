@@ -22,6 +22,11 @@ import { NbLayoutShowcaseComponent } from './layout/layout-showcase.component';
 import { NbLayoutWFooterComponent } from './layout/layout-w-footer.component';
 import { NbLayoutFixedHeaderComponent } from './layout/layout-fixed-header.component';
 import { NbLayoutColumnLeftComponent } from './layout/layout-column-left.component';
+import { NbSidebarShowcaseComponent } from './sidebar/sidebar-showcase.component';
+import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.component';
+import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
+import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
+import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
 
 export const routes: Routes = [
   {
@@ -29,31 +34,31 @@ export const routes: Routes = [
     component: NbPlaygroundLayoutComponent,
     children: [
       {
-        path: 'popover-showcase/popover-showcase.component',
+        path: 'popover/popover-showcase.component',
         component: NbPopoverShowcaseComponent,
       },
       {
-        path: 'popover-template-ref/popover-template-ref.component',
+        path: 'popover/popover-template-ref.component',
         component: NbPopoverTemplateRefComponent,
       },
       {
-        path: 'popover-custom-component/popover-custom-component.component',
+        path: 'popover/popover-custom-component.component',
         component: NbPopoverCustomComponentComponent,
       },
       {
-        path: 'popover-placements/popover-placements.component',
+        path: 'popover/popover-placements.component',
         component: NbPopoverPlacementsComponent,
       },
       {
-        path: 'popover-modes/popover-modes.component',
+        path: 'popover/popover-modes.component',
         component: NbPopoverModesComponent,
       },
       {
-        path: 'checkbox-showcase/checkbox-showcase.component',
+        path: 'checkbox/checkbox-showcase.component',
         component: NbCheckboxShowcaseComponent,
       },
       {
-        path: 'checkbox-status/checkbox-status.component',
+        path: 'checkbox/checkbox-status.component',
         component: NbCheckboxStatusComponent,
       },
       {
@@ -63,24 +68,55 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'n',
-    component: NbPlaygroundBaseComponent,
+    path: '',
     children: [
       {
-        path: 'layout-showcase/layout-showcase.component',
-        component: NbLayoutShowcaseComponent,
+        path: 'layout',
+        component: NbPlaygroundBaseComponent,
+        children: [
+          {
+            path: 'layout-showcase',
+            component: NbLayoutShowcaseComponent,
+          },
+          {
+            path: 'layout-w-footer.component',
+            component: NbLayoutWFooterComponent,
+          },
+          {
+            path: 'layout-fixed-header.component',
+            component: NbLayoutFixedHeaderComponent,
+          },
+          {
+            path: 'layout-column-left.component',
+            component: NbLayoutColumnLeftComponent,
+          },
+        ],
       },
       {
-        path: 'layout-w-footer/layout-w-footer.component',
-        component: NbLayoutWFooterComponent,
-      },
-      {
-        path: 'layout-fixed-header/layout-fixed-header.component',
-        component: NbLayoutFixedHeaderComponent,
-      },
-      {
-        path: 'layout-column-left/layout-column-left.component',
-        component: NbLayoutColumnLeftComponent,
+        path: 'sidebar',
+        component: NbPlaygroundBaseComponent,
+        children: [
+          {
+            path: 'sidebar-showcase.component',
+            component: NbSidebarShowcaseComponent,
+          },
+          {
+            path: 'sidebar-compacted.component',
+            component: NbSidebarCompactedComponent,
+          },
+          {
+            path: 'sidebar-right.component',
+            component: NbSidebarRightComponent,
+          },
+          {
+            path: 'sidebar-toggle.component',
+            component: NbSidebarToggleComponent,
+          },
+          {
+            path: 'sidebar-fixed.component',
+            component: NbSidebarFixedComponent,
+          },
+        ],
       },
     ],
   },
