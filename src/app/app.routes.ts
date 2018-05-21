@@ -54,6 +54,7 @@ import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component
 import { NbAclTestComponent } from './acl-test/acl-test.component';
 import { NbContextMenuTestComponent } from './context-menu-test/context-menu-test.component';
 import { routes as playgroundRoutes } from '../playground/playground-routing.module';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 
 export const routes: Routes = [
   ...playgroundRoutes,
@@ -259,6 +260,10 @@ export const routes: Routes = [
   {
     path: 'acl',
     component: NbAclTestComponent,
+  },
+  {
+    path: 'popover',
+    component: NbPopoverTestComponent,
   },
   {
     path: 'context-menu',
