@@ -28,7 +28,7 @@ import { NbPlacementHelper } from './helpers/placement.helper';
 /**
  * Powerful popover directive, which provides the best UX for your users.
  *
- * @example(popover-showcase/popover-showcase.component)
+ * @example(popover/popover-showcase.component)
  *
  * Popover can accept different content such as:
  * TemplateRef
@@ -58,7 +58,7 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * Popover has different placements, such as: top, bottom, left, right, start and end
  * which can be used as following:
  *
- * @example(popover-placements/popover-placements.component)
+ * @example(popover/popover-placements.component)
  *
  * By default popover will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the popover container.
@@ -77,7 +77,7 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
  * the container element popover will not be hidden.
  *
- * @example(popover-modes/popover-modes.component)
+ * @example(popover/popover-modes.component)
  *
  * @more-live-examples
  *
