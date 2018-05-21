@@ -9,14 +9,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NbPlaygroundComponent } from './playground.component';
 
-import { NbPopoverShowcaseComponent } from './popover-showcase/popover-showcase.component';
-import { NbPopoverTemplateRefComponent } from './popover-template-ref/popover-template-ref.component';
-import { NbPopoverCustomComponentComponent } from './popover-custom-component/popover-custom-component.component';
-import { NbPopoverPlacementsComponent } from './popover-placements/popover-placements.component';
-import { NbPopoverModesComponent } from './popover-modes/popover-modes.component';
-import { NbCheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
-import { NbCheckboxStatusComponent } from './checkbox-status/checkbox-status.component';
-import { NbCheckboxDisabledComponent } from './checkbox-disabled/checkbox-disabled.component';
+import { NbPopoverShowcaseComponent } from './popover/popover-showcase.component';
+import { NbPopoverTemplateRefComponent } from './popover/popover-template-ref.component';
+import { NbPopoverCustomComponentComponent } from './popover/popover-custom-component.component';
+import { NbPopoverPlacementsComponent } from './popover/popover-placements.component';
+import { NbPopoverModesComponent } from './popover/popover-modes.component';
+import { NbCheckboxShowcaseComponent } from './checkbox/checkbox-showcase.component';
+import { NbCheckboxStatusComponent } from './checkbox/checkbox-status.component';
+import { NbCheckboxDisabledComponent } from './checkbox/checkbox-disabled.component';
 
 
 export const routes: Routes = [
