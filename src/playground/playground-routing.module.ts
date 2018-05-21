@@ -75,7 +75,7 @@ export const routes: Routes = [
         component: NbPlaygroundBaseComponent,
         children: [
           {
-            path: 'layout-showcase',
+            path: 'layout-showcase.component',
             component: NbLayoutShowcaseComponent,
           },
           {
