@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <div class="block">
       <h1>Nebular</h1>
-      <p>A set of essential modules for your next Angular app</p>
+      <p>Components, Auth & Security for your next Angular app</p>
       <a class="btn get-started" routerLink="docs">Get Started</a>
       <a class="btn" href="http://akveo.com/ngx-admin">Demo</a>
     </div>
