@@ -1,4 +1,5 @@
 import { dest, src, task } from 'gulp';
+import * as del from 'del';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { DOCS_OUTPUT, EXTENSIONS, PLAYGROUND_ROOT } from '../config';
 import { join } from 'path';
