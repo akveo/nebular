@@ -85,6 +85,7 @@ import { RoleProvider } from './role.provider';
 import { NbDynamicToAddComponent } from './dynamic.component';
 import { NbPlaygroundModule } from '../playground/playground.module';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
+import { NbPopoverTestComponent } from './popover-test/popover-test.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -121,6 +122,7 @@ const NB_TEST_COMPONENTS = [
   NbFormsTestComponent,
   NbCheckboxTestComponent,
   NbAclTestComponent,
+  NbPopoverTestComponent,
   NbContextMenuTestComponent,
 ];
 
