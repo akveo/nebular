@@ -56,8 +56,11 @@ export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
         takeWhile(() => this.alive),
         filter((params: any) => params.subPage),
         map((params: any) => {
+          const slag = `${params.page}_${params.subPage}`;
+
           this.window.scrollTo(0, 0);
-          return this.structureService.findPageBySlag(this.structureService.getPreparedStructure(), params.subPage);
+
+          return this.structureService.findPageBySlag(this.structureService.getPreparedStructure(), slag);
         }),
         tap((item: any) => {
           this.titleService.setTitle(`Nebular - ${item.name}`);
