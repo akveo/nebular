@@ -124,6 +124,8 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  * <nb-menu [items]="menuItems"></nb-menu>
  * ```
  *
+ * @example(not-found)
+ *
  * @styles
  *
  * menu-font-family:
