@@ -10,7 +10,9 @@ export class NgdIframeCommunicatorService {
   }
 
   public send(payload: any, target: Window = this.window.parent) {
-    target.postMessage(payload, '*');
+    if (target !== this.window) {
+      target.postMessage(payload, '*');
+    }
   }
 
   public receive(id: string): Observable<any> {

@@ -10,16 +10,12 @@ import 'style-loader!./styles/styles.scss';
 
 
 @Component({
-  selector: 'nb-playground',
+  selector: 'nb-playground-base',
   template: `
-    <nb-layout>
-      <nb-layout-column>
-        <router-outlet></router-outlet>
-      </nb-layout-column>
-    </nb-layout>
+    <router-outlet></router-outlet>
   `,
 })
-export class NbPlaygroundComponent implements OnInit {
+export class NbPlaygroundBaseComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }
 
