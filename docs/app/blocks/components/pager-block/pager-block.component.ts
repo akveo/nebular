@@ -13,7 +13,7 @@ import { NgdPaginationService } from '../../../@theme/services';
           <i class="icon feather-arrow-left"></i>
           {{paginationItem.prev.title}}
         </div>
-        <div>Move back</div>
+        <div>Previous page</div>
       </a>
     </nb-card>
     <nb-card [class.invisible]="!paginationItem.next" class="right-block">
