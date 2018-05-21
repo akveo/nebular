@@ -31,7 +31,11 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
-
+import { NbCardShowcaseComponent } from './card/card-showcase.component';
+import { NbCardFullComponent } from './card/card-full.component';
+import { NbCardColorsComponent } from './card/card-colors.component';
+import { NbCardAccentsComponent } from './card/card-accents.component';
+import { NbCardSizesComponent } from './card/card-sizes.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -59,6 +63,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSidebarRightComponent,
   NbSidebarToggleComponent,
   NbSidebarFixedComponent,
+  NbCardShowcaseComponent,
+  NbCardFullComponent,
+  NbCardColorsComponent,
+  NbCardAccentsComponent,
+  NbCardSizesComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

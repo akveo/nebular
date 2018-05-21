@@ -27,6 +27,11 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
+import { NbCardShowcaseComponent } from './card/card-showcase.component';
+import { NbCardFullComponent } from './card/card-full.component';
+import { NbCardColorsComponent } from './card/card-colors.component';
+import { NbCardAccentsComponent } from './card/card-accents.component';
+import { NbCardSizesComponent } from './card/card-sizes.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +69,26 @@ export const routes: Routes = [
       {
         path: 'checkbox-disabled/checkbox-disabled.component',
         component: NbCheckboxDisabledComponent,
+      },
+      {
+        path: 'card/card-showcase.component',
+        component: NbCardShowcaseComponent,
+      },
+      {
+        path: 'card/card-full.component',
+        component: NbCardFullComponent,
+      },
+      {
+        path: 'card/card-colors.component',
+        component: NbCardColorsComponent,
+      },
+      {
+        path: 'card/card-accents.component',
+        component: NbCardAccentsComponent,
+      },
+      {
+        path: 'card/card-sizes.component',
+        component: NbCardSizesComponent,
       },
     ],
   },
