@@ -62,6 +62,7 @@ export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
 
           return this.structureService.findPageBySlag(this.structureService.getPreparedStructure(), slag);
         }),
+        filter(item => item),
         tap((item: any) => {
           this.titleService.setTitle(`Nebular - ${item.name}`);
         }),
