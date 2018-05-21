@@ -1,15 +1,19 @@
 import { dest, src, task } from 'gulp';
-import * as del from 'del';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { DOCS_OUTPUT, EXTENSIONS, PLAYGROUND_ROOT } from '../config';
 import { join } from 'path';
+
+const del = require('del');
+const replace = require('gulp-replace');
 
 const EXAMPLES_SRC = './src/playground/**/*.*';
 const EXAMPLES_DEST = './docs/assets/examples';
 
 task('copy-examples', () => {
-  del(EXAMPLES_DEST);
-  src(EXAMPLES_SRC).pipe(dest(EXAMPLES_DEST))
+  del.sync(EXAMPLES_DEST);
+  src(EXAMPLES_SRC)
+    .pipe(replace(/(\s|\S)*?import/, 'import'))
+    .pipe(dest(EXAMPLES_DEST))
 });
 
 task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
