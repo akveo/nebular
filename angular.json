@@ -27,8 +27,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -81,8 +79,6 @@
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -152,8 +148,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -206,8 +200,6 @@
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
