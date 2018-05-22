@@ -42,6 +42,8 @@ import { NbRevealCardColorsComponent } from './reveal-card/reveal-card-colors.co
 import { NbRevealCardAccentsComponent } from './reveal-card/reveal-card-accents.component';
 import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.component';
 import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
+import { NbMenuShowcaseComponent } from './menu/menu-showcase.component';
+import { NbMenuChildrenComponent } from './menu/menu-children.component';
 
 export const routes: Routes = [
   {
@@ -49,100 +51,138 @@ export const routes: Routes = [
     component: NbPlaygroundLayoutComponent,
     children: [
       {
-        path: 'popover/popover-showcase.component',
-        component: NbPopoverShowcaseComponent,
+        path: 'popover',
+        children: [
+          {
+            path: 'popover-showcase.component',
+            component: NbPopoverShowcaseComponent,
+          },
+          {
+            path: 'popover-template-ref.component',
+            component: NbPopoverTemplateRefComponent,
+          },
+          {
+            path: 'popover-custom-component.component',
+            component: NbPopoverCustomComponentComponent,
+          },
+          {
+            path: 'popover-placements.component',
+            component: NbPopoverPlacementsComponent,
+          },
+          {
+            path: 'popover-modes.component',
+            component: NbPopoverModesComponent,
+          },
+        ],
       },
       {
-        path: 'popover/popover-template-ref.component',
-        component: NbPopoverTemplateRefComponent,
+        path: 'checkbox',
+        children: [
+          {
+            path: 'checkbox-showcase.component',
+            component: NbCheckboxShowcaseComponent,
+          },
+          {
+            path: 'checkbox-status.component',
+            component: NbCheckboxStatusComponent,
+          },
+          {
+            path: 'checkbox-disabled.component',
+            component: NbCheckboxDisabledComponent,
+          },
+        ],
       },
       {
-        path: 'popover/popover-custom-component.component',
-        component: NbPopoverCustomComponentComponent,
+        path: 'card',
+        children: [
+          {
+            path: 'card-showcase.component',
+            component: NbCardShowcaseComponent,
+          },
+          {
+            path: 'card-full.component',
+            component: NbCardFullComponent,
+          },
+          {
+            path: 'card-colors.component',
+            component: NbCardColorsComponent,
+          },
+          {
+            path: 'card-accents.component',
+            component: NbCardAccentsComponent,
+          },
+          {
+            path: 'card-sizes.component',
+            component: NbCardSizesComponent,
+          },
+        ],
       },
       {
-        path: 'popover/popover-placements.component',
-        component: NbPopoverPlacementsComponent,
+        path: 'flip-card',
+        children: [
+          {
+            path: 'flip-card-showcase.component',
+            component: NbFlipCardShowcaseComponent,
+          },
+          {
+            path: 'flip-card-full.component',
+            component: NbFlipCardFullComponent,
+          },
+          {
+            path: 'flip-card-colors.component',
+            component: NbFlipCardColorsComponent,
+          },
+          {
+            path: 'flip-card-accents.component',
+            component: NbFlipCardAccentsComponent,
+          },
+          {
+            path: 'flip-card-sizes.component',
+            component: NbFlipCardSizesComponent,
+          },
+        ],
       },
       {
-        path: 'popover/popover-modes.component',
-        component: NbPopoverModesComponent,
+        path: 'reveal-card',
+        children: [
+          {
+            path: 'reveal-card-full.component',
+            component: NbRevealCardFullComponent,
+          },
+          {
+            path: 'reveal-card-showcase.component',
+            component: NbRevealCardShowcaseComponent,
+          },
+          {
+            path: 'reveal-card-colors.component',
+            component: NbRevealCardColorsComponent,
+          },
+          {
+            path: 'reveal-card-accents.component',
+            component: NbRevealCardAccentsComponent,
+          },
+          {
+            path: 'reveal-card-sizes.component',
+            component: NbRevealCardSizesComponent,
+          },
+          {
+            path: 'reveal-card-full.component',
+            component: NbRevealCardFullComponent,
+          },
+        ],
       },
       {
-        path: 'checkbox/checkbox-showcase.component',
-        component: NbCheckboxShowcaseComponent,
-      },
-      {
-        path: 'checkbox/checkbox-status.component',
-        component: NbCheckboxStatusComponent,
-      },
-      {
-        path: 'checkbox/checkbox-disabled.component',
-        component: NbCheckboxDisabledComponent,
-      },
-      {
-        path: 'card/card-showcase.component',
-        component: NbCardShowcaseComponent,
-      },
-      {
-        path: 'card/card-full.component',
-        component: NbCardFullComponent,
-      },
-      {
-        path: 'card/card-colors.component',
-        component: NbCardColorsComponent,
-      },
-      {
-        path: 'card/card-accents.component',
-        component: NbCardAccentsComponent,
-      },
-      {
-        path: 'card/card-sizes.component',
-        component: NbCardSizesComponent,
-      },
-      {
-        path: 'flip-card/flip-card-showcase.component',
-        component: NbFlipCardShowcaseComponent,
-      },
-      {
-        path: 'flip-card/flip-card-full.component',
-        component: NbFlipCardFullComponent,
-      },
-      {
-        path: 'flip-card/flip-card-colors.component',
-        component: NbFlipCardColorsComponent,
-      },
-      {
-        path: 'flip-card/flip-card-accents.component',
-        component: NbFlipCardAccentsComponent,
-      },
-      {
-        path: 'flip-card/flip-card-sizes.component',
-        component: NbFlipCardSizesComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-full.component',
-        component: NbRevealCardFullComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-showcase.component',
-        component: NbRevealCardShowcaseComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-colors.component',
-        component: NbRevealCardColorsComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-accents.component',
-        component: NbRevealCardAccentsComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-sizes.component',
-        component: NbRevealCardSizesComponent,
-      },
-      {
-        path: 'reveal-card/reveal-card-full.component',
-        component: NbRevealCardFullComponent,
+        path: 'menu',
+        children: [
+          {
+            path: 'menu-showcase.component',
+            component: NbMenuShowcaseComponent,
+          },
+          {
+            path: 'menu-children.component',
+            component: NbMenuChildrenComponent,
+          },
+        ],
       },
     ],
   },

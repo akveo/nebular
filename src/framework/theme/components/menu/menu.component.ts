@@ -115,16 +115,27 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  *
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
  *
- * @example Basic usage
+ * Basic example
+ * @example(menu/menu-showcase.component)
  *
- * ```
+ * ```ts
  * // ...
- * menuItems: NbMenuItem[] = [{ title: home, link: '/' }, { title: dashboard, link: 'dashboard' }];
+ * items: NbMenuItem[] = [
+ *  {
+ *    title: home,
+ *    link: '/'
+ *  },
+ *  {
+ *    title: dashboard,
+ *    link: 'dashboard'
+ *  }
+ * ];
  * // ...
- * <nb-menu [items]="menuItems"></nb-menu>
+ * <nb-menu [items]="items"></nb-menu>
  * ```
  *
- * @example(not-found)
+ * Two-level menu example
+ * @example(menu/menu-children.component)
  *
  * @styles
  *
