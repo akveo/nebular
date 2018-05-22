@@ -18,66 +18,58 @@ export class NgdHomeComponent {
   features = [
     {
       title: 'Introduction',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'Install from scratch or based on ngx-admin',
       icon: 'assets/img/intro.svg',
       link: 'docs',
     },
     {
       title: 'Guides',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'Theme System configuration, customisation and other articles',
       icon: 'assets/img/guides.svg',
-      link: 'docs',
+      link: 'docs/guides/install-based-on-starter-kit',
     },
     {
       title: 'Themes',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'Default & Cosmic visual themes',
       icon: 'assets/img/themes.svg',
-      link: 'docs',
+      link: 'docs/guides/components-overview',
     },
     {
       title: 'Components',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'Native Angular components with configurable styles',
       icon: 'assets/img/components.svg',
-      link: 'docs',
+      link: 'docs/guides/components-overview#nebular-components',
     },
     {
       title: 'Auth',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'Authentication layer with configurable Strategies',
       icon: 'assets/img/auth.svg',
-      link: 'docs',
+      link: 'docs/auth/introduction',
     },
     {
       title: 'Security',
-      description: 'A set of essential modules for your next Angular App',
+      description: 'ACL list with helpful directives',
       icon: 'assets/img/security.svg',
-      link: 'docs',
+      link: 'docs/security/introduction',
     },
   ];
 
   advantages = [
     {
       title: 'Modular',
-      description: `Far far away, behind the word mountains,
-      far from the countries Vokalia and Consonantia,
-      there live the blind texts.`,
+      description: `Each feature is a separate npm module. Use only what you need.`,
     },
     {
-      title: 'Modular',
-      description: `Far far away, behind the word mountains,
-      far from the countries Vokalia and Consonantia,
-      there live the blind texts.`,
+      title: 'Native',
+      description: `Components are written in pure Angular with no 3rd-party dependencies.`,
     },
     {
-      title: 'Modular',
-      description: `Far far away, behind the word mountains,
-      far from the countries Vokalia and Consonantia,
-      there live the blind texts.`,
+      title: 'Open',
+      description: `Modules source code is free and available under MIT licence.`,
     },
     {
-      title: 'Modular',
-      description: `Far far away, behind the word mountains,
-      far from the countries Vokalia and Consonantia,
-      there live the blind texts.`,
+      title: 'Extendable',
+      description: `Can be used in a mix with any UI library.`,
     },
   ];
 
