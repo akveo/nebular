@@ -32,6 +32,16 @@ import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
 import { NbCardAccentsComponent } from './card/card-accents.component';
 import { NbCardSizesComponent } from './card/card-sizes.component';
+import { NbFlipCardShowcaseComponent } from './flip-card/flip-card-showcase.component';
+import { NbFlipCardColorsComponent } from './flip-card/flip-card-colors.component';
+import { NbFlipCardAccentsComponent } from './flip-card/flip-card-accents.component';
+import { NbFlipCardSizesComponent } from './flip-card/filp-card-sizes.component';
+import { NbFlipCardFullComponent } from './flip-card/filp-card-full.component';
+import { NbRevealCardShowcaseComponent } from './reveal-card/reveal-card-showcase.component';
+import { NbRevealCardColorsComponent } from './reveal-card/reveal-card-colors.component';
+import { NbRevealCardAccentsComponent } from './reveal-card/reveal-card-accents.component';
+import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.component';
+import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
 
 export const routes: Routes = [
   {
@@ -89,6 +99,50 @@ export const routes: Routes = [
       {
         path: 'card/card-sizes.component',
         component: NbCardSizesComponent,
+      },
+      {
+        path: 'flip-card/flip-card-showcase.component',
+        component: NbFlipCardShowcaseComponent,
+      },
+      {
+        path: 'flip-card/flip-card-full.component',
+        component: NbFlipCardFullComponent,
+      },
+      {
+        path: 'flip-card/flip-card-colors.component',
+        component: NbFlipCardColorsComponent,
+      },
+      {
+        path: 'flip-card/flip-card-accents.component',
+        component: NbFlipCardAccentsComponent,
+      },
+      {
+        path: 'flip-card/flip-card-sizes.component',
+        component: NbFlipCardSizesComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-full.component',
+        component: NbRevealCardFullComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-showcase.component',
+        component: NbRevealCardShowcaseComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-colors.component',
+        component: NbRevealCardColorsComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-accents.component',
+        component: NbRevealCardAccentsComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-sizes.component',
+        component: NbRevealCardSizesComponent,
+      },
+      {
+        path: 'reveal-card/reveal-card-full.component',
+        component: NbRevealCardFullComponent,
       },
     ],
   },

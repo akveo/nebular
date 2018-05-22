@@ -266,6 +266,7 @@
             "styles": [
               "node_modules/bootstrap/scss/bootstrap-reboot.scss",
               "node_modules/highlight.js/styles/dracula.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": [
@@ -320,6 +321,7 @@
             "styles": [
               "node_modules/bootstrap/scss/bootstrap-reboot.scss",
               "node_modules/highlight.js/styles/dracula.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "docs/app/@theme/styles/styles.scss"
             ],
             "assets": [
