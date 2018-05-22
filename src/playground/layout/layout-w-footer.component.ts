@@ -4,8 +4,11 @@ import { Component } from '@angular/core';
   selector: 'nb-w-footer-showcase',
   templateUrl: './layout-w-footer.component.html',
   styles: [`
-    ::ng-deep nb-layout-column {
+    :host ::ng-deep nb-layout-column {
       height: 50vw;
+    }
+    :host ::ng-deep nb-layout-column:first-child {
+      background: #e3e6f9;
     }
   `],
 })

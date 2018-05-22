@@ -5,8 +5,9 @@ import { NbSidebarService } from '@nebular/theme';
   selector: 'nb-sidebar-fixed',
   templateUrl: './sidebar-fixed.component.html',
   styles: [`
-    ::ng-deep nb-layout-column {
+    :host ::ng-deep nb-layout-column {
       height: 50vw;
+      background: #f4f4f7;
     }
   `],
 })
