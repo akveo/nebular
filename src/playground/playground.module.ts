@@ -7,7 +7,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule, NbSidebarModule } from '@nebular/theme';
+import {
+  NbCardModule,
+  NbCheckboxModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbPopoverModule,
+  NbSidebarModule,
+} from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -46,6 +53,8 @@ import { NbRevealCardColorsComponent } from './reveal-card/reveal-card-colors.co
 import { NbRevealCardAccentsComponent } from './reveal-card/reveal-card-accents.component';
 import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.component';
 import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
+import { NbMenuShowcaseComponent } from './menu/menu-showcase.component';
+import { NbMenuChildrenComponent } from './menu/menu-children.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -53,6 +62,7 @@ export const NB_MODULES = [
   NbPopoverModule,
   NbCheckboxModule,
   NbSidebarModule,
+  NbMenuModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -88,6 +98,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbRevealCardAccentsComponent,
   NbRevealCardSizesComponent,
   NbRevealCardFullComponent,
+  NbMenuShowcaseComponent,
+  NbMenuChildrenComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
