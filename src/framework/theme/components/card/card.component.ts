@@ -61,6 +61,15 @@ export class NbCardFooterComponent {
  * Basic card example:
  * @example(card/card-showcase.component)
  *
+ * Basic card configuration:
+ *
+ * ```html
+ * <nb-card>
+ *   <nb-card-body>
+ *     Card
+ *   </nb-card-body>
+ * </nb-card>
+ * ```
  * Card with header and footer:
  * @example(card/card-full.component)
  *
