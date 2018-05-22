@@ -12,11 +12,10 @@ import { NbAuthStrategyClass } from '../../auth.options';
 /**
  * Dummy auth strategy. Could be useful for auth setup when backend is not available yet.
  *
- * @example
  *
  * Strategy settings.
  *
- * ```
+ * ```ts
  * export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
  *   name = 'dummy';
  *   token = {
