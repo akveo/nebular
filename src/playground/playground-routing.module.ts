@@ -44,6 +44,10 @@ import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.comp
 import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
 import { NbMenuShowcaseComponent } from './menu/menu-showcase.component';
 import { NbMenuChildrenComponent } from './menu/menu-children.component';
+import { NbActionShowcaseComponent } from './action/action-showcase.component';
+import { NbActionSizesComponent } from './action/action-sizes.component';
+import { NbActionBadgeComponent } from './action/action-badge.component';
+import { NbActionWidthComponent } from './action/action-width.component';
 
 export const routes: Routes = [
   {
@@ -181,6 +185,27 @@ export const routes: Routes = [
           {
             path: 'menu-children.component',
             component: NbMenuChildrenComponent,
+          },
+        ],
+      },
+      {
+        path: 'action',
+        children: [
+          {
+            path: 'action-showcase.component',
+            component: NbActionShowcaseComponent,
+          },
+          {
+            path: 'action-sizes.component',
+            component: NbActionSizesComponent,
+          },
+          {
+            path: 'action-badge.component',
+            component: NbActionBadgeComponent,
+          },
+          {
+            path: 'action-width.component',
+            component: NbActionWidthComponent,
           },
         ],
       },

@@ -14,6 +14,7 @@ import {
   NbMenuModule,
   NbPopoverModule,
   NbSidebarModule,
+  NbActionsModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -55,6 +56,10 @@ import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.comp
 import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
 import { NbMenuShowcaseComponent } from './menu/menu-showcase.component';
 import { NbMenuChildrenComponent } from './menu/menu-children.component';
+import { NbActionShowcaseComponent } from './action/action-showcase.component';
+import { NbActionSizesComponent } from './action/action-sizes.component';
+import { NbActionBadgeComponent } from './action/action-badge.component';
+import { NbActionWidthComponent } from './action/action-width.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -63,6 +68,7 @@ export const NB_MODULES = [
   NbCheckboxModule,
   NbSidebarModule,
   NbMenuModule,
+  NbActionsModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -100,6 +106,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbRevealCardFullComponent,
   NbMenuShowcaseComponent,
   NbMenuChildrenComponent,
+  NbActionShowcaseComponent,
+  NbActionSizesComponent,
+  NbActionBadgeComponent,
+  NbActionWidthComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
