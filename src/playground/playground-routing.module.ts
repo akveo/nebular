@@ -49,6 +49,7 @@ import { NbActionSizesComponent } from './action/action-sizes.component';
 import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
 import { NbSearchShowcaseComponent } from './search/search-showcase.component';
+import { NbSearchEventComponent } from './search/search-event.component';
 
 export const routes: Routes = [
   {
@@ -209,7 +210,7 @@ export const routes: Routes = [
             component: NbActionWidthComponent,
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -270,6 +271,10 @@ export const routes: Routes = [
           {
             path: 'search-showcase.component',
             component: NbSearchShowcaseComponent,
+          },
+          {
+            path: 'search-event.component',
+            component: NbSearchEventComponent,
           },
         ],
       },

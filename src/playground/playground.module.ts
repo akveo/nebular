@@ -63,6 +63,7 @@ import { NbActionSizesComponent } from './action/action-sizes.component';
 import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
 import { NbSearchShowcaseComponent } from './search/search-showcase.component';
+import { NbSearchEventComponent } from './search/search-event.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -116,6 +117,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbActionBadgeComponent,
   NbActionWidthComponent,
   NbSearchShowcaseComponent,
+  NbSearchEventComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
