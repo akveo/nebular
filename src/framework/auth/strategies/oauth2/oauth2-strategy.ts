@@ -6,11 +6,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { Observable, of as observableOf } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
@@ -294,7 +291,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const endpoint = this.getActionEndpoint('authorize');
     const query = Object.entries(params)
       .filter(([key, val]) => !!val)
-      .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+      .map(([key, val]: [string, string]) => `${key}=${encodeURIComponent(val)}`)
       .join('&');
 
     return `${endpoint}?${query}`;

@@ -9,7 +9,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
-import { of as observableOf } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs';
 
 import { NbOAuth2AuthStrategy } from './oauth2-strategy';
 import { NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
