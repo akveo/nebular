@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
+  NbThemeModule,
   NbCardModule,
   NbCheckboxModule,
   NbLayoutModule,
@@ -15,6 +16,7 @@ import {
   NbPopoverModule,
   NbSidebarModule,
   NbActionsModule,
+  NbSearchModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -60,6 +62,7 @@ import { NbActionShowcaseComponent } from './action/action-showcase.component';
 import { NbActionSizesComponent } from './action/action-sizes.component';
 import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
+import { NbSearchShowcaseComponent } from './search/search-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -69,6 +72,8 @@ export const NB_MODULES = [
   NbSidebarModule,
   NbMenuModule,
   NbActionsModule,
+  NbSearchModule,
+  NbThemeModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -110,6 +115,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbActionSizesComponent,
   NbActionBadgeComponent,
   NbActionWidthComponent,
+  NbSearchShowcaseComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

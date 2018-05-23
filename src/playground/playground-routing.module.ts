@@ -48,6 +48,7 @@ import { NbActionShowcaseComponent } from './action/action-showcase.component';
 import { NbActionSizesComponent } from './action/action-sizes.component';
 import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
+import { NbSearchShowcaseComponent } from './search/search-showcase.component';
 
 export const routes: Routes = [
   {
@@ -208,7 +209,7 @@ export const routes: Routes = [
             component: NbActionWidthComponent,
           },
         ],
-      },
+      }
     ],
   },
   {
@@ -259,6 +260,16 @@ export const routes: Routes = [
           {
             path: 'sidebar-fixed.component',
             component: NbSidebarFixedComponent,
+          },
+        ],
+      },
+      {
+        path: 'search',
+        component: NbPlaygroundBaseComponent,
+        children: [
+          {
+            path: 'search-showcase.component',
+            component: NbSearchShowcaseComponent,
           },
         ],
       },
