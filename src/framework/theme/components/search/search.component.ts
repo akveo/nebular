@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -196,6 +197,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchType: string = 'rotate-layout';
 
   constructor(private searchService: NbSearchService,
+              private componentFactoryResolver: ComponentFactoryResolver,
               private themeService: NbThemeService,
               private router: Router) {
   }
@@ -264,7 +266,8 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeService.appendToLayoutTop(NbSearchFieldComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbSearchFieldComponent);
+    this.themeService.appendToLayoutTop(factory)
       .subscribe((componentRef: ComponentRef<any>) => {
         this.connectToSearchField(componentRef);
       });
