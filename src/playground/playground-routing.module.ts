@@ -55,6 +55,7 @@ import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
+import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 
 export const routes: Routes = [
   {
@@ -243,6 +244,15 @@ export const routes: Routes = [
           {
             path: 'user-sizes.component',
             component: NbUserSizesComponent,
+          },
+        ],
+      },
+      {
+        path: 'badge',
+        children: [
+          {
+            path: 'badge-showcase.component',
+            component: NbBadgeShowcaseComponent,
           },
         ],
       },
