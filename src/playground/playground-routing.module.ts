@@ -50,6 +50,9 @@ import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
 import { NbSearchShowcaseComponent } from './search/search-showcase.component';
 import { NbSearchEventComponent } from './search/search-event.component';
+import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
+import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
+import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
 
 export const routes: Routes = [
   {
@@ -208,6 +211,23 @@ export const routes: Routes = [
           {
             path: 'action-width.component',
             component: NbActionWidthComponent,
+          },
+        ],
+      },
+      {
+        path: 'tabset',
+        children: [
+          {
+            path: 'tabset-showcase.component',
+            component: NbTabsetShowcaseComponent,
+          },
+          {
+            path: 'tabset-badge.component',
+            component: NbTabsetBadgeComponent,
+          },
+          {
+            path: 'tabset-width.component',
+            component: NbTabsetWidthComponent,
           },
         ],
       },

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'nb-sidebar-right',
   templateUrl: './sidebar-right.component.html',
   styles: [`
-    :host ::ng-deep nb-layout-column {
+    :host nb-layout-column {
       height: 50vw;
       background: #f4f4f7;
     }
