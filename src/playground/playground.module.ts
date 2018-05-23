@@ -16,7 +16,7 @@ import {
   NbPopoverModule,
   NbSidebarModule,
   NbActionsModule,
-  NbSearchModule,
+  NbSearchModule, NbTabsetModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -64,6 +64,9 @@ import { NbActionBadgeComponent } from './action/action-badge.component';
 import { NbActionWidthComponent } from './action/action-width.component';
 import { NbSearchShowcaseComponent } from './search/search-showcase.component';
 import { NbSearchEventComponent } from './search/search-event.component';
+import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
+import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
+import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -75,6 +78,7 @@ export const NB_MODULES = [
   NbActionsModule,
   NbSearchModule,
   NbThemeModule,
+  NbTabsetModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -118,6 +122,9 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbActionWidthComponent,
   NbSearchShowcaseComponent,
   NbSearchEventComponent,
+  NbTabsetShowcaseComponent,
+  NbTabsetBadgeComponent,
+  NbTabsetWidthComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

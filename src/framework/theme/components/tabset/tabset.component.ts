@@ -20,6 +20,14 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Specific tab container.
+ *
+ * ```ts
+ * <nb-tab tabTitle="Users"
+ *   badgeText="99+"
+ *   badgeStatus="danger">
+ *   <p>List of <strong>users</strong>.</p>
+ * </nb-tab>
+ ```
  */
 @Component({
   selector: 'nb-tab',
@@ -95,7 +103,7 @@ export class NbTabComponent {
 /**
  *
  * Dynamic tabset component.
- * Renders `<nb-tab></ng-tab> containers inside.
+ * @example(tabset/tabset-showcase.component)
  *
  * Basic tabset example
  *
@@ -109,6 +117,11 @@ export class NbTabComponent {
  *  </nb-tab>
  * </nb-tabset>
  * ```
+ * It is also possible to set a badge to a particular tab:
+ * @example(tabset/tabset-badge.component)
+ *
+ * and we can set it to full a width of a parent component
+ * @example(tabset/tabset-width.component)
  *
  * @styles
  *
