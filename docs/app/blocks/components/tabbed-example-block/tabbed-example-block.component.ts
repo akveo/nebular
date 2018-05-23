@@ -25,10 +25,10 @@ export class NgdTabbedExampleBlockComponent {
   examples = [];
 
   @Input()
-  set content(value) {
-    forkJoin(Object.entries(value).map(file => this.load(file)))
+  set content({ files }) {
+    forkJoin(files.map(file => this.load(file)))
       .subscribe(files => {
-        files[0].active = true;
+        (files[0] as any).active = true;
         this.examples = files;
         this.cd.detectChanges();
       });
@@ -41,7 +41,8 @@ export class NgdTabbedExampleBlockComponent {
     this.changeView.emit(NgdExampleView.LIVE);
   }
 
-  private load([extension, path]): Observable<any> {
+  private load(path): Observable<any> {
+    const extension = path.split('.').pop();
     return this.codeLoader.load(path)
       .pipe(
         map(code => ({ code, path, extension })),

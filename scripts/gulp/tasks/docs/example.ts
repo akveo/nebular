@@ -12,84 +12,80 @@ task('copy-examples', () => {
 
 task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => {
-    cls.overview = cls.overview.map(tag => {
-      if (isTabbed(tag)) {
-        return unfoldTabbed(tag);
-      }
-
-      if (isStacked(tag)) {
-        return unfoldStacked(tag);
-      }
-
-      return tag;
-    });
-  });
-
+  docs.classes.forEach(cls => cls.overview = cls.overview.map(unfold));
   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
 });
 
 task('validate-examples', ['parse-themes'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls =>  validateInlineExamples(cls));
+  docs.classes.forEach(cls => validate(cls));
 });
 
-function isTabbed(tag) {
-  return tag.type === 'inline-example'
-    && !EXTENSIONS.some(extension => tag.content.path.endsWith(extension))
+function unfold(tag) {
+  if (tag.type === 'text') {
+    return tag;
+  }
+
+  return unfoldWithFiles(tag);
 }
 
-function isStacked(tag) {
-  return tag.type === 'example'
-    && !EXTENSIONS.some(extension => tag.content.endsWith(extension))
+function unfoldWithFiles(tag) {
+  if (isFile(tag.content.id)) {
+    return unfoldFile(tag);
+  }
+
+  return unfoldComponent(tag);
 }
 
-function unfoldTabbed(tag) {
-  const content: any = EXTENSIONS.reduce((acc: any, extension) => {
-    const file = `${tag.content.path}.${extension}`;
-
-    if (isFileExists(file)) {
-      acc[extension] = file;
-    }
-
-    return acc;
-  }, {});
-
-  return { ...tag, content }
+function unfoldFile(tag) {
+  const id = withoutExtension(tag.content.id);
+  const files = [tag.content.id];
+  return createNode(tag, files, id);
 }
 
-function unfoldStacked(tag) {
-  const tabs = EXTENSIONS.reduce((acc: any, extension) => {
-    const file = `${tag.content}.${extension}`;
+function unfoldComponent(tag) {
+  const files = EXTENSIONS
+    .map(extension => `${tag.content.id}.${extension}`)
+    .filter(isFileExists);
 
-    if (isFileExists(file)) {
-      acc[extension] = file;
-    }
-
-    return acc;
-  }, {});
-
-  return {...tag, content: { tabs, id: tag.content }}
+  return createNode(tag, files);
 }
 
-function validateInlineExamples(cls) {
+function createNode(tag, files, id = tag.content.id) {
+  return {
+    ...tag,
+    content: {
+      ...tag.content,
+      files,
+      id,
+    },
+  };
+}
+
+function validate(cls) {
   const examples = cls.overview
-    .filter(tag => tag.type === 'inline-example' && tag.content.path)
-    .map(example => example.content.path);
+    .filter(({ type }) => type !== 'text')
+    .map(({ content }) => content);
 
-  const missing = examples.filter(file => !isFileExists(file) && !isComponentExists(file));
+  const missing = examples.filter(({ id }) => !isFileExists(id) && !isComponentExists(id));
 
   if (missing.length) {
-    throw new Error(`Can't resolve:\n${missing.join('\n')}`);
+    throw new Error(createMissingMsg(missing));
   }
 }
 
-export function isComponentExists(path): boolean {
-  return EXTENSIONS.map(extension => `${path}.${extension}`)
+function createMissingMsg(examples): string {
+  const missing = examples.map(({ id }) => id);
+  return `Can't resolve:\n${missing.join('\n')}`;
+}
+
+function isComponentExists(path): boolean {
+  return EXTENSIONS
+    .map(extension => `${path}.${extension}`)
     .some(isFileExists);
 }
 
-export function isFileExists(file): boolean {
+function isFileExists(file): boolean {
   try {
     const path = join(PLAYGROUND_ROOT, file);
     accessSync(path);
@@ -97,4 +93,12 @@ export function isFileExists(file): boolean {
   } catch (e) {
     return false;
   }
+}
+
+function isFile(id) {
+  return EXTENSIONS.some(extension => id.endsWith(extension));
+}
+
+function withoutExtension(file) {
+  return file.replace(/\.(ts|html|scss)/, '');
 }
