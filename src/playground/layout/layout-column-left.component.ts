@@ -4,16 +4,16 @@ import { Component } from '@angular/core';
   selector: 'nb-layout-column-left',
   templateUrl: './layout-column-left.component.html',
   styles: [`
-    :host ::ng-deep nb-layout-column {
+    :host nb-layout-column {
       height: 50vw;
     }
-    :host ::ng-deep nb-layout-column:first-child {
+    :host nb-layout-column:first-child {
       background: #e3e6f9;
     }
-    :host ::ng-deep nb-layout-column:nth-child(2) {
+    :host nb-layout-column:nth-child(2) {
       background: #edeef7;
     }
-    :host ::ng-deep nb-layout-column:last-child {
+    :host nb-layout-column:last-child {
       background: #f4f4f7;
     }
   `],
