@@ -53,6 +53,8 @@ import { NbSearchEventComponent } from './search/search-event.component';
 import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
 import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbUserShowcaseComponent } from './user/user-showcase.component';
+import { NbUserSizesComponent } from './user/user-sizes.component';
 
 export const routes: Routes = [
   {
@@ -228,6 +230,19 @@ export const routes: Routes = [
           {
             path: 'tabset-width.component',
             component: NbTabsetWidthComponent,
+          },
+        ],
+      },
+      {
+        path: 'user',
+        children: [
+          {
+            path: 'user-showcase.component',
+            component: NbUserShowcaseComponent,
+          },
+          {
+            path: 'user-sizes.component',
+            component: NbUserSizesComponent,
           },
         ],
       },
