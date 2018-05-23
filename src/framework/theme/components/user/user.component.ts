@@ -10,8 +10,15 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
+ * @example(user/user-showcase.component)
  *
+ * ```ts
+ *   <nb-user name="Jonh Doe" title="Engineer"></nb-user>
+ * ```
  * Can be used as a user profile link.
+ *
+ * Available in multiple sizes:
+ * @example(user/user-sizes.component)
  *
  * @styles
  *
