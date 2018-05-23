@@ -8,7 +8,8 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Inject } from 
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'style-loader!./styles/styles.scss';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
+import { delay, merge } from 'rxjs/operators';
 import { DocsService } from './docs/docs.service';
 import { Analytics } from './docs/utils/analytics.service';
 import { NB_WINDOW } from '@nebular/theme';
@@ -39,8 +40,10 @@ export class NgdAppComponent implements AfterViewInit, OnDestroy, OnInit {
   // TODO: refactor this
   ngAfterViewInit() {
     this.fragmentSubscription = this.route.fragment
-      .merge(this.docsService.onFragmentClick())
-      .delay(1)
+      .pipe(
+        merge(this.docsService.onFragmentClick()),
+        delay(1),
+      )
       .subscribe(fr => this.processFragment(fr));
   }
 

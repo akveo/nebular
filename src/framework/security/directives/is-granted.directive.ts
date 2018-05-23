@@ -1,5 +1,5 @@
 import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbAccessChecker } from '../services/access-checker.service';
 

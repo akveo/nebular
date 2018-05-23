@@ -66,7 +66,7 @@
 
 @mixin nb-b-button-group-theme() {
 
-  .btn-group:not(.btn-toggle-group):not(.btn-divided-group) > .btn + .btn {
+  .btn-group:not(.btn-divided-group) > .btn + .btn {
     &.btn-primary {
       @include dropdown-primary-separator();
     }
@@ -92,12 +92,88 @@
     }
   }
 
+  .btn-group:not(.btn-divided-group) > .btn:not(.dropdown-toggle) {
+    &:first-child {
+      @include nb-ltr() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+    }
+    &:last-child {
+      @include nb-ltr() {
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+      };
+    }
+  }
+
+  .btn-group.dropdown {
+    & > .btn:first-of-type.dropdown-toggle {
+      @include nb-ltr(border-top-left-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-top-right-radius, nb-theme(btn-border-radius));
+    }
+    & > .btn:last-of-type.dropdown-toggle {
+      @include nb-ltr(border-top-right-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-top-left-radius, nb-theme(btn-border-radius));
+    }
+
+    &:not(.show) {
+      & > .btn:first-of-type.dropdown-toggle {
+        @include nb-ltr(border-bottom-left-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-bottom-right-radius, nb-theme(btn-border-radius));
+      }
+      & > .btn:last-of-type.dropdown-toggle {
+        @include nb-ltr(border-bottom-right-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-bottom-left-radius, nb-theme(btn-border-radius));
+      }
+    }
+
+    &.show > .btn.dropdown-toggle {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .btn-group.dropup {
+    & > .btn:first-of-type.dropdown-toggle {
+      @include nb-ltr(border-bottom-left-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-bottom-right-radius, nb-theme(btn-border-radius));
+    }
+    & > .btn:last-of-type.dropdown-toggle {
+      @include nb-ltr(border-bottom-right-radius, nb-theme(btn-border-radius));
+      @include nb-rtl(border-bottom-left-radius, nb-theme(btn-border-radius));
+    }
+
+    &:not(.show) {
+      & > .btn:first-of-type.dropdown-toggle {
+        @include nb-ltr(border-top-left-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-top-right-radius, nb-theme(btn-border-radius));
+      }
+      & > .btn:last-of-type.dropdown-toggle {
+        @include nb-ltr(border-top-right-radius, nb-theme(btn-border-radius));
+        @include nb-rtl(border-top-left-radius, nb-theme(btn-border-radius));
+      }
+    }
+
+    &.show > .btn.dropdown-toggle {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
   .btn-group-icon {
     font-size: 1.5rem;
     padding: 0 1rem;
   }
 
-  .btn-toggle-group,
   .btn-divided-group {
     .btn {
       background-color: nb-theme(btn-group-bg);
@@ -171,38 +247,6 @@
     }
   }
 
-  .btn-toggle-group {
-    .btn {
-      position: relative;
-    }
-
-    .btn:first-child {
-      border-right: none;
-    }
-
-    .btn:last-child {
-      border-left: none;
-      margin-left: 0;
-    }
-
-    .btn:not(:first-child):not(:last-child) {
-      border-left: none;
-      border-right: none;
-    }
-
-    .btn:not(.active):not(:hover) + .btn:not(.active):not(:hover) {
-      &::before {
-        content: '';
-        position: absolute;
-        background-color: nb-theme(btn-group-separator);
-        width: 1px;
-        height: 100%;
-        top: 0;
-        left: 0;
-      }
-    }
-  }
-
   .btn-outline-toggle-group {
     .btn {
       background-color: transparent;
@@ -217,7 +261,8 @@
 
   .btn-divided-group {
     .btn:not(:first-child) {
-      margin-left: 0.5rem;
+      @include nb-ltr(margin-left, 0.5rem);
+      @include nb-rtl(margin-right, 0.5rem);
       border-radius: nb-theme(btn-border-radius);
     }
 

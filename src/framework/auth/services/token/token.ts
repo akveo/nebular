@@ -28,7 +28,7 @@ export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: any) {
  * Wrapper for simple (text) token
  */
 export class NbAuthSimpleToken extends NbAuthToken {
-
+  
   static NAME = 'nb:auth:simple:token';
 
   constructor(protected readonly token: any) {

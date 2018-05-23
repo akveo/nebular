@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 /**
  * Describes placement of the UI element on the screen.
@@ -27,6 +27,11 @@ export enum NbPopoverPlacement {
   BOTTOM = 'bottom',
   LEFT = 'left',
   RIGHT = 'right',
+}
+
+export enum NbPopoverLogicalPlacement {
+  START = 'start',
+  END = 'end',
 }
 
 /**

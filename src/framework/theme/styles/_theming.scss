@@ -112,7 +112,27 @@ $nb-themes-export: () !global;
   $themes-to-install: get-enabled-themes();
 
   @each $theme-name, $theme in $themes-to-install {
-    :host-context(.nb-theme-#{$theme-name}) {
+    /*
+      :host can be prefixed
+      https://github.com/angular/angular/blob/8d0ee34939f14c07876d222c25b405ed458a34d3/packages/compiler/src/shadow_css.ts#L441
+
+      We have to use :host insted of :host-context($theme), to be able to prefix theme class
+      with something defined inside of @content, by prefixing &.
+      For example this scss code:
+        .nb-theme-default {
+          .some-selector & {
+            ...
+          }
+        }
+      Will result in next css:
+        .some-selector .nb-theme-default {
+          ...
+        }
+
+      It doesn't work with :host-context because angular splitting it in two selectors and removes
+      prefix in one of the selectors.
+    */
+    .nb-theme-#{$theme-name} :host {
       $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }

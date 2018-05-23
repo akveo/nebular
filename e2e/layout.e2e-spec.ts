@@ -45,7 +45,7 @@ describe('nb-layout', () => {
       });
   });
 
-  it('should render left with order: 1', () => {
+  it('should render left with order: 0', () => {
     element
       .all(
         by.css(`#layout-fluid >
@@ -54,7 +54,7 @@ describe('nb-layout', () => {
       .get(0)
       .getCssValue('order')
       .then(value => {
-        expect(value).toMatch('1');
+        expect(value).toMatch('0');
       });
   });
 
@@ -71,7 +71,7 @@ describe('nb-layout', () => {
       });
   });
 
-  it('should render center with order: 2', () => {
+  it('should render center with order: 1', () => {
     element
       .all(
         by.css(`#layout-fluid >
@@ -80,7 +80,7 @@ describe('nb-layout', () => {
       .get(1)
       .getCssValue('order')
       .then(value => {
-        expect(value).toMatch('2');
+        expect(value).toMatch('1');
       });
   });
 
@@ -97,7 +97,7 @@ describe('nb-layout', () => {
       });
   });
 
-  it('should render right with order: 2', () => {
+  it('should render right with order: 1', () => {
     element
       .all(
         by.css(`#layout-fluid >
@@ -106,7 +106,7 @@ describe('nb-layout', () => {
       .get(2)
       .getCssValue('order')
       .then(value => {
-        expect(value).toMatch('2');
+        expect(value).toMatch('1');
       });
   });
 
@@ -154,5 +154,11 @@ describe('nb-layout', () => {
           expect(size.width).toEqual(Math.ceil(contentSize.width / 3));
         })
       });
+  });
+
+  it('should set default document direction', () => {
+    browser.executeScript('return document.dir').then(function (direction) {
+      expect(direction).toBe('ltr');
+    });
   });
 });

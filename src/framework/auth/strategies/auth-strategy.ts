@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';

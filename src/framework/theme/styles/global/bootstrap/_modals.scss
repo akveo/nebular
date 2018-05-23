@@ -32,6 +32,8 @@
 
     @include nb-headings();
 
+    @include nb-rtl(flex-flow, row-reverse);
+
     .close {
       text-shadow: none;
       color: nb-theme(modal-fg-heading);

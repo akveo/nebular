@@ -659,4 +659,26 @@ export const STRUCTURE = [
       },
     ],
   },
+  {
+    type: 'section',
+    name: 'Usability',
+    children: [
+      {
+        type: 'page',
+        name: 'Right-to-left (RTL)',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'rtl.md',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDirectionService',
+          },
+        ],
+      },
+    ],
+  },
 ];

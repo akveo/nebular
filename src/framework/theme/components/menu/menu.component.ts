@@ -22,9 +22,8 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { takeWhile } from 'rxjs/operators/takeWhile';
-import { filter } from 'rxjs/operators/filter';
+import { BehaviorSubject } from 'rxjs';
+import { takeWhile, filter } from 'rxjs/operators';
 
 import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';

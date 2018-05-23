@@ -20,6 +20,7 @@
 - for the override styles - registered in a list of overrides
 - component *.theme registered in a list of component themes
 - looks great on all default themes
+- supports bidirectionality
 - requires approval from several core team contributors
 
 # Objectives

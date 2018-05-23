@@ -12,8 +12,8 @@ describe('auth token', () => {
     // tslint:disable
     const simpleToken = new NbAuthSimpleToken('token');
     const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-      const emptyJWTToken = new NbAuthJWTToken('..');
-      const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
+    const emptyJWTToken = new NbAuthJWTToken('..');
+    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
 
     const invalidJWTToken = new NbAuthJWTToken('.');
 
@@ -75,6 +75,26 @@ describe('auth token', () => {
 
       // expired date
       expect(expiredJWTToken.isValid()).toBeFalsy();
+    });
+
+    it('NbAuthJWTToken name', () => {
+      // without token
+      expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
+    });
+
+    it('NbAuthSimpleToken name', () => {
+      // without token
+      expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
+    });
+
+    it('NbAuthSimpleToken has payload', () => {
+      // without token
+      expect(simpleToken.getPayload()).toEqual(null);
+    });
+
+    it('getPayload success', () => {
+      expect(validJWTToken.getPayload())
+        .toEqual(JSON.parse('{"iss":"scotch.io","exp":2517314066175,"name":"Chris Sevilleja","admin":true}'));
     });
 
     it('NbAuthJWTToken name', () => {

@@ -15,6 +15,11 @@
       height: nb-theme(actions-size-small);
       padding: 0 nb-theme(actions-padding);
 
+      &:first-child {
+        @include nb-ltr(border-left, none!important);
+        @include nb-rtl(border-right, none!important);
+      }
+
       a.icon-container {
         &:hover, &:focus {
           text-decoration: none;
@@ -25,7 +30,10 @@
         color: nb-theme(actions-fg);
         font-size: nb-theme(actions-size-small);
       }
-      border-left: 1px solid nb-theme(actions-separator);
+
+      @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
+      @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
+
       background: transparent;
     }
 
@@ -34,7 +42,9 @@
         i.control-icon {
           color: nb-theme(actions-bg);
         }
-        border-left: 1px solid nb-theme(actions-separator);
+
+        @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
+        @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
       }
     }
 

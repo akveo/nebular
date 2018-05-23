@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { DocsService } from '../../docs/docs.service';
 

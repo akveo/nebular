@@ -7,7 +7,7 @@ It's time to get a user token after successful authentication to be able to comm
 Let's assume that your backend returns a JWT token so that we can use the token payload to extract a user info out of it.
 
 Each `Strategy` specifies which token class it's going to use by default. For example, `NbPasswordAuthStrategy` uses `NbAuthSimpleToken`,
-and `NbOAuth2AuthStrategy` uses `NbAuthOAuth2Token`. It is also possible to specify another token class if it is required, like in the example below.
+and `NbOAuth2AuthProvider` uses `NbAuthOAuth2Token`. It is also possible to specify another token class if it is required, like in the example below.
 
 1) Let's tell Nebular that we are waiting for a JWT token instead of simple string token, 
 to do that we just need to provide a respective class. Open your `app.module.ts` and adjust the `Strategy` configuration:

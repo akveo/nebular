@@ -6,11 +6,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { Observable, of as observableOf } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';

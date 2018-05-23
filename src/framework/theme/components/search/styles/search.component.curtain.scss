@@ -4,6 +4,8 @@
 * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
+@import '../../../styles/core/mixins';
+
 :host.curtain {
 
   .search {
@@ -35,7 +37,8 @@
       font-size: 2.5rem;
       position: absolute;
       top: 3rem;
-      right: 3rem;
+      @include nb-ltr(right, 3rem);
+      @include nb-rtl(left, 3rem);
       transition: opacity 0.1s;
       transition-delay: 0.3s;
     }
