@@ -1,7 +1,7 @@
 :host {
   display: block;
   position: relative;
-
+  overflow: hidden;
   &.revealed {
     .second-card-container {
       top: 0;
