@@ -20,6 +20,7 @@ import {
   NbTabsetModule,
   NbUserModule,
   NbBadgeModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -73,6 +74,8 @@ import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
+import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
+import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -87,6 +90,7 @@ export const NB_MODULES = [
   NbTabsetModule,
   NbUserModule,
   NbBadgeModule,
+  NbContextMenuModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -136,6 +140,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbUserShowcaseComponent,
   NbUserSizesComponent,
   NbBadgeShowcaseComponent,
+  NbContextMenuShowcaseComponent,
+  NbContextMenuClickComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [
