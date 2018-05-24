@@ -7,9 +7,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-flip-card-full',
+  selector: 'nb-flip-card-sizes',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filp-card-full.component.html',
+  templateUrl: './flip-card-sizes.component.html',
 })
-export class NbFlipCardFullComponent {
+export class NbFlipCardSizesComponent {
 }

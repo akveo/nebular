@@ -59,7 +59,7 @@ export class NbCardFooterComponent {
  * Basic content container component.
  *
  * Basic card example:
- * @example(card/card-showcase.component)
+ * @stacked-example(My example, card/card-showcase.component)
  *
  * Basic card configuration:
  *
@@ -71,14 +71,14 @@ export class NbCardFooterComponent {
  * </nb-card>
  * ```
  * Card with header and footer:
- * @example(card/card-full.component)
+ * @stacked-example(My example, card/card-full.component)
  *
  * Colored cards could be simply configured by providing a `status` property:
- * @example(card/card-colors.component)
+ * @stacked-example(My example, card/card-colors.component)
  *
  * It is also possible to assign an `accent` property for a slight card highlight
  * as well as combine it with `status`:
- * @example(card/card-accents.component)
+ * @stacked-example(My example, card/card-accents.component)
  *
  * @more-live-examples
  *
