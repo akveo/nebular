@@ -62,7 +62,7 @@ export const routes: Routes = [
         component: NbCheckboxStatusComponent,
       },
       {
-        path: 'checkbox-disabled/checkbox-disabled.component',
+        path: 'checkbox/checkbox-disabled.component',
         component: NbCheckboxDisabledComponent,
       },
     ],

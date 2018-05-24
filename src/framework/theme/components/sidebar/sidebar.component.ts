@@ -61,10 +61,8 @@ export class NbSidebarFooterComponent {
  *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
- * @more-live-examples
- *
- * sidebar/sidebar-right.component
- * sidebar/sidebar-fixed.component
+ * @additional-example(My example, sidebar/sidebar-right.component)
+ * @additional-example(My example, sidebar/sidebar-fixed.component)
  *
  * @styles
  *

@@ -12,7 +12,10 @@ task('copy-examples', () => {
 
 task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => cls.overview = cls.overview.map(unfold));
+  docs.classes.forEach(cls => {
+    cls.overview = cls.overview.map(unfold);
+    cls.liveExamples = cls.liveExamples.map(unfold);
+  });
   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
 });
 

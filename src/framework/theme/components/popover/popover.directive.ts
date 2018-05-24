@@ -79,10 +79,8 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  *
  * @stacked-example(Available modes, popover/popover-modes.component.html)
  *
- * @more-live-examples
- *
- * popover-template-ref/popover-template-ref.component
- * popover-custom-component/popover-custom-component.component
+ * @additional-example(Template ref, popover/popover-template-ref.component)
+ * @additional-example(Custom component, popover/popover-custom-component.component)
  * */
 /*
 *
