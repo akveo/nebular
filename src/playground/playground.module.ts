@@ -7,7 +7,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbCardModule, NbCheckboxModule, NbLayoutModule, NbPopoverModule, NbSidebarModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbPopoverModule,
+  NbSidebarModule,
+  NbActionsModule,
+  NbSearchModule,
+  NbTabsetModule,
+  NbUserModule,
+  NbBadgeModule,
+} from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -31,7 +44,35 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
-
+import { NbCardShowcaseComponent } from './card/card-showcase.component';
+import { NbCardFullComponent } from './card/card-full.component';
+import { NbCardColorsComponent } from './card/card-colors.component';
+import { NbCardAccentsComponent } from './card/card-accents.component';
+import { NbCardSizesComponent } from './card/card-sizes.component';
+import { NbFlipCardShowcaseComponent } from './flip-card/flip-card-showcase.component';
+import { NbFlipCardColorsComponent } from './flip-card/flip-card-colors.component';
+import { NbFlipCardAccentsComponent } from './flip-card/flip-card-accents.component';
+import { NbFlipCardSizesComponent } from './flip-card/flip-card-sizes.component';
+import { NbFlipCardFullComponent } from './flip-card/flip-card-full.component';
+import { NbRevealCardShowcaseComponent } from './reveal-card/reveal-card-showcase.component';
+import { NbRevealCardColorsComponent } from './reveal-card/reveal-card-colors.component';
+import { NbRevealCardAccentsComponent } from './reveal-card/reveal-card-accents.component';
+import { NbRevealCardSizesComponent } from './reveal-card/reveal-card-sizes.component';
+import { NbRevealCardFullComponent } from './reveal-card/reveal-card-full.component';
+import { NbMenuShowcaseComponent } from './menu/menu-showcase.component';
+import { NbMenuChildrenComponent } from './menu/menu-children.component';
+import { NbActionShowcaseComponent } from './action/action-showcase.component';
+import { NbActionSizesComponent } from './action/action-sizes.component';
+import { NbActionBadgeComponent } from './action/action-badge.component';
+import { NbActionWidthComponent } from './action/action-width.component';
+import { NbSearchShowcaseComponent } from './search/search-showcase.component';
+import { NbSearchEventComponent } from './search/search-event.component';
+import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
+import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
+import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbUserShowcaseComponent } from './user/user-showcase.component';
+import { NbUserSizesComponent } from './user/user-sizes.component';
+import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -39,6 +80,13 @@ export const NB_MODULES = [
   NbPopoverModule,
   NbCheckboxModule,
   NbSidebarModule,
+  NbMenuModule,
+  NbActionsModule,
+  NbSearchModule,
+  NbThemeModule,
+  NbTabsetModule,
+  NbUserModule,
+  NbBadgeModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -59,6 +107,35 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSidebarRightComponent,
   NbSidebarToggleComponent,
   NbSidebarFixedComponent,
+  NbCardShowcaseComponent,
+  NbCardFullComponent,
+  NbCardColorsComponent,
+  NbCardAccentsComponent,
+  NbCardSizesComponent,
+  NbFlipCardShowcaseComponent,
+  NbFlipCardColorsComponent,
+  NbFlipCardAccentsComponent,
+  NbFlipCardSizesComponent,
+  NbFlipCardFullComponent,
+  NbRevealCardShowcaseComponent,
+  NbRevealCardColorsComponent,
+  NbRevealCardAccentsComponent,
+  NbRevealCardSizesComponent,
+  NbRevealCardFullComponent,
+  NbMenuShowcaseComponent,
+  NbMenuChildrenComponent,
+  NbActionShowcaseComponent,
+  NbActionSizesComponent,
+  NbActionBadgeComponent,
+  NbActionWidthComponent,
+  NbSearchShowcaseComponent,
+  NbSearchEventComponent,
+  NbTabsetShowcaseComponent,
+  NbTabsetBadgeComponent,
+  NbTabsetWidthComponent,
+  NbUserShowcaseComponent,
+  NbUserSizesComponent,
+  NbBadgeShowcaseComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

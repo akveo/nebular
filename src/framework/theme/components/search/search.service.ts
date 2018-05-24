@@ -9,7 +9,7 @@ import { Subject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 
 /**
- * Search component service, connects you code to a page-level search component.
+ * Search component service, connects your code to a page-level search component.
  */
 @Injectable()
 export class NbSearchService {

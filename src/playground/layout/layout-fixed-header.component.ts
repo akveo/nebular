@@ -4,8 +4,11 @@ import { Component } from '@angular/core';
   selector: 'nb-layout-fixed-header',
   templateUrl: './layout-fixed-header.component.html',
   styles: [`
-    ::ng-deep nb-layout-column {
+    :host nb-layout-column {
       height: 120vh;
+    }
+    :host nb-layout-column:first-child {
+      background: #f4f4f7;
     }
   `],
 })

@@ -1,26 +1,28 @@
+# Installation
+
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit-ngxadmin-ngxadmin) then you already have the Security module in place.
+    If you use our [ngx-admin starter kit](#/docs/guides/install-based-on-starter-kit) then you already have Security module in place.
   </div>
 </div>
 
-## Installation steps
-
-1) First, let's install the module as it's distributed as an npm package. Security module doesn't have a dependency on Auth or Theme modules, but it is recommended to use them in conjunction.
+First, let's install the module as it's distributed as an npm package. Security module doesn't have a dependency on Auth or Theme modules, but it is recommended to use them in conjunction.
 
 
 ```bash
 npm i @nebular/security
 ```
-    
-2) Import the module:
+<hr>   
+## Import the module:
 
 ```ts
 import { NbSecurityModule } from '@nebular/security
 ```
+<hr>
+## Register it
 
-3) Now, let's register the module in the root module:
+Now, let's register the module in the root module:
 
 ```ts
 @NgModule({
@@ -32,8 +34,8 @@ import { NbSecurityModule } from '@nebular/security
 
 Great, at this stage we have installed Nebular Security and ready to configure it.
 
-<hr class="section-end">
+<hr>
 
-## Where to next
+## Related Articles
 
 - Roles & Permissions [Configuration & Usage](#/docs/security/acl-configuration--usage)

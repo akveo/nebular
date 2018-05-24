@@ -5,11 +5,12 @@ import { NbSidebarService } from '@nebular/theme';
   selector: 'nb-sidebar-toggle',
   templateUrl: './sidebar-toggle.component.html',
   styles: [`
-    ::ng-deep nb-layout-header button:last-child {
+    :host nb-layout-header button:last-child {
       margin-left: auto;
     }
-    ::ng-deep nb-layout-column {
+    :host nb-layout-column {
       height: 50vw;
+      background: #f4f4f7;
     }
   `],
 })

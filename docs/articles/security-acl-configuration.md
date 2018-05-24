@@ -1,10 +1,11 @@
-## Abstract
+# ACL
 
 Permissions control is a general task when it comes to development of more or less complex web application. Your application may have various roles and resources you need to protect.
 ACL (access control list) provides a flexible way of configuring "who can do what against what resource".
 
 In this article we configure a common setup when the app has three roles (`guest`, `user` and `moderator`), the roles have different permissions (`view`, `create`, `remove`) 
 and the application contains two type of resources that needs to be protected (`news`, `comments`).
+<hr>
 
 ## ACL Configuration
 
@@ -41,7 +42,7 @@ Now, let's convert this into an ACL configuration object which Nebular can under
 
 As you can see the configuration is pretty much straightforward, each role can have a list of permissions (view, create, remove) and resources that are allowed for those permissions. We can also specify a `*` resource,
 which means that we have a permission againts any resource (like moderators can remove both news and comments).    
-<hr class="section-end">
+<hr>
 
 ## Role Configuration
 
@@ -80,6 +81,10 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 ``` 
 That's easy we have just provided a role, so that Nebular can determine which user is currently accessing the app.
 The good thing about this configuration is that it's not tightly coupled with the rest of your authentication flow, which gives you a lot of flexibility over it.
+
+<hr>
+
+## Role Provider
 
 But, in our example the role is "hardcoded", which in the real world app would be dynamic and depend on the current user. 
 
@@ -166,6 +171,7 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
   ],
 ``` 
 
+<hr>
 
 ## Usage
 

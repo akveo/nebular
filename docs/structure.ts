@@ -29,11 +29,11 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Installation',
+    name: 'Guides',
     children: [
       {
         type: 'page',
-        name: 'Based on starter kit (ngx-admin)',
+        name: 'Install based on starter kit',
         children: [
           {
             type: 'block',
@@ -53,12 +53,6 @@ export const structure = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Concepts',
-    children: [
       {
         type: 'page',
         name: 'Theme System',
@@ -72,7 +66,18 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'UI Kit',
+        name: 'Enable Theme System',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'enabling-theme-system.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Components overview',
         children: [
           {
             type: 'block',
@@ -92,62 +97,6 @@ export const structure = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'ngx-admin tutorials',
-    children: [
-      {
-        type: 'page',
-        name: 'Updating ngx-admin to the latest version',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'ngx-admin-update.md',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Guides',
-    children: [
-      {
-        type: 'page',
-        name: 'Enabling Theme System',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'enabling-theme-system.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Component Theme Variables',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'component-theme-variables.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Server Deployment',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'server-deployment.md',
-          },
-        ],
-      },
       {
         type: 'page',
         name: 'Backend integration',
@@ -156,6 +105,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'backend-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Server deployment',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'server-deployment.md',
           },
         ],
       },

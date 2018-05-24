@@ -1,3 +1,5 @@
+# Getting user token
+
 ## Receiving user token after login/registration
 
 At this step, we assume that Nebular Auth module is up and running, 
@@ -8,9 +10,12 @@ Let's assume that your backend returns a JWT token so that we can use the token 
 
 Each `Strategy` specifies which token class it's going to use by default. For example, `NbPasswordAuthStrategy` uses `NbAuthSimpleToken`,
 and `NbOAuth2AuthProvider` uses `NbAuthOAuth2Token`. It is also possible to specify another token class if it is required, like in the example below.
+<hr>
 
-1) Let's tell Nebular that we are waiting for a JWT token instead of simple string token, 
-to do that we just need to provide a respective class. Open your `app.module.ts` and adjust the `Strategy` configuration:
+## Configure token type
+
+Let's tell Nebular that we are waiting for a JWT token instead of simple string token, 
+to do that we just need to provide a respective class. Open your `app.module.ts` and adjust your `Strategy` configuration:
 
 ```typescript
 
@@ -35,9 +40,11 @@ to do that we just need to provide a respective class. Open your `app.module.ts`
 
 ```
 This line tells Angular to inject `NbAuthJWTToken` (instead of the default `NbAuthSimpleToken`) which is a wrapper class around a value your API service returns.
+<hr>
 
+## Configure token extraction
 
-2) Then, let's configure where `NbPasswordAuthStrategy` should look for a token in the login/register response data. 
+Then, let's configure where `NbPasswordAuthStrategy` should look for a token in the login/register response data. 
 By default `NbPasswordAuthStrategy` expects that your token is located under the `data.token` key of the JSON response:
 
 ```typescript
@@ -73,16 +80,18 @@ We'll assume that our API returns a token as just `{ token: 'some-jwt-token' }` 
   ],
 });
 
-``` 
+```
+<hr>
 
+## Use token
 
-3) Okay, let's use the token to extract a payload and show a username in the header. Open your `header.component.ts` and import the following services:
+Okay, let's use the token to extract a payload and show a username in the header. Open your `header.component.ts` and import the following services:
 
 ```typescript
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 ```
 
-4) Then, let's create a `user` variable, which will store the token payload inside of the component: 
+Then, let's create a `user` variable, which will store the token payload inside of the component: 
 
 ```typescript
 
@@ -97,7 +106,7 @@ export class HeaderComponent {
 }
 ```
 
-5) Then, let's inject the `NbAuthService` and subscribe to an `onTokenChange` method, which will push an event on each token update so that the header component 
+Then, let's inject the `NbAuthService` and subscribe to an `onTokenChange` method, which will push an event on each token update so that the header component 
 is up-to-date with the information received from the backend and there is no need to additionally refresh/request the data:
 
 ```typescript
@@ -144,9 +153,9 @@ export class HeaderComponent implements OnInit {
 *We assume that the extracted payload contains name and picture properties*.
 
 And done! Relatively you can inject `NbAuthService` in the other components to manage your authentication state in the application.
-<hr class="section-end">
+<hr>
 
-## Where to next
+## Related Articles
 
 - [NbAuthService](#/docs/auth/nbauthservice)
 - [NbTokenService](#/docs/auth/nbtokenservice)
