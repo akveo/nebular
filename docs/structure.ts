@@ -233,7 +233,6 @@ export const structure = [
         name: 'Popover',
         source: [
           'NbPopoverDirective',
-          'NbPopoverComponent',
         ],
       },
       {
@@ -241,7 +240,6 @@ export const structure = [
         name: 'Context Menu',
         source: [
           'NbContextMenuDirective',
-          'NbContextMenuComponent',
         ],
       },
     ],

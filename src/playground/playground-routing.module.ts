@@ -56,6 +56,8 @@ import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
+import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
+import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
 
 export const routes: Routes = [
   {
@@ -260,10 +262,23 @@ export const routes: Routes = [
   },
   {
     path: '',
+    component: NbPlaygroundBaseComponent,
     children: [
       {
+        path: 'context-menu',
+        children: [
+          {
+            path: 'context-menu-showcase.component',
+            component: NbContextMenuShowcaseComponent,
+          },
+          {
+            path: 'context-menu-click.component',
+            component: NbContextMenuClickComponent,
+          },
+        ],
+      },
+      {
         path: 'layout',
-        component: NbPlaygroundBaseComponent,
         children: [
           {
             path: 'layout-showcase.component',
@@ -285,7 +300,6 @@ export const routes: Routes = [
       },
       {
         path: 'sidebar',
-        component: NbPlaygroundBaseComponent,
         children: [
           {
             path: 'sidebar-showcase.component',
@@ -311,7 +325,6 @@ export const routes: Routes = [
       },
       {
         path: 'search',
-        component: NbPlaygroundBaseComponent,
         children: [
           {
             path: 'search-showcase.component',
