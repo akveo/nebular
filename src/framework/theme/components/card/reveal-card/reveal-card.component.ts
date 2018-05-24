@@ -38,8 +38,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  * as well as combine it with `status`:
  * @stacked-example(My example, reveal-card/reveal-card-accents.component)
  *
- * reveal-card/reveal-card-sizes.component
- *
+ * @additional-example(My example, reveal-card/reveal-card-sizes.component)
  */
 @Component({
   selector: 'nb-reveal-card',

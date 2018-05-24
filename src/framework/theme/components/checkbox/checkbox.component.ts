@@ -17,9 +17,7 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(My example, checkbox/checkbox-status.component)
  *
- * @more-live-examples
- *
- * checkbox/checkbox-disabled.component
+ * @additional-example(My example, checkbox/checkbox-disabled.component)
  *
  * @styles
  *
