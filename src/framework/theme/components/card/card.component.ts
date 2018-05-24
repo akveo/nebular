@@ -80,9 +80,7 @@ export class NbCardFooterComponent {
  * as well as combine it with `status`:
  * @stacked-example(My example, card/card-accents.component)
  *
- * @more-live-examples
- *
- * card/card-sizes.component
+ * @additional-example(My example, card/card-sizes.component)
  *
  * @styles
  *

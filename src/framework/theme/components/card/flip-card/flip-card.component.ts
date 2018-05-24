@@ -38,7 +38,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  * as well as combine it with `status`:
  * @stacked-example(My example, flip-card/flip-card-accents.component)
  *
- * flip-card/flip-card-sizes.component
+ * @additional-example(My example, flip-card/flip-card-sizes.component)
  *
  */
 @Component({
