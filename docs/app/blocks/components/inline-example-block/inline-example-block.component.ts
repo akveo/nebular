@@ -17,6 +17,6 @@ export class NgdInlineExampleBlockComponent {
   }
 
   get isTabbed(): boolean {
-    return !this.content.path;
+    return this.content.files.length > 1;
   }
 }

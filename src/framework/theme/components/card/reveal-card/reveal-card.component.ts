@@ -3,7 +3,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 /**
  *
  * Reveal card example:
- * @example(reveal-card/reveal-card-showcase.component)
+ * @stacked-example(My example, reveal-card/reveal-card-showcase.component)
  *
  * As a content Reveal card accepts two instances of `nb-card` - for front and back sides.
  *
@@ -29,16 +29,14 @@ import { Component, Input, HostBinding } from '@angular/core';
  * ```
  *
  * Reveal Card with header and footer:
- * @example(reveal-card/reveal-card-full.component)
+ * @stacked-example(My example, reveal-card/reveal-card-full.component)
  *
  * Colored reveal-cards could be simply configured by providing a `status` property:
- * @example(reveal-card/reveal-card-colors.component)
+ * @stacked-example(My example, reveal-card/reveal-card-colors.component)
  *
  * It is also possible to assign an `accent` property for a slight card highlight
  * as well as combine it with `status`:
- * @example(reveal-card/reveal-card-accents.component)
- *
- * @more-live-examples
+ * @stacked-example(My example, reveal-card/reveal-card-accents.component)
  *
  * reveal-card/reveal-card-sizes.component
  *

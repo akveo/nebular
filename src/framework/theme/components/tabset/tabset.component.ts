@@ -103,7 +103,7 @@ export class NbTabComponent {
 /**
  *
  * Dynamic tabset component.
- * @example(tabset/tabset-showcase.component)
+ * @stacked-example(My example, tabset/tabset-showcase.component)
  *
  * Basic tabset example
  *
@@ -118,10 +118,10 @@ export class NbTabComponent {
  * </nb-tabset>
  * ```
  * It is also possible to set a badge to a particular tab:
- * @example(tabset/tabset-badge.component)
+ * @stacked-example(My example, tabset/tabset-badge.component)
  *
  * and we can set it to full a width of a parent component
- * @example(tabset/tabset-width.component)
+ * @stacked-example(My example, tabset/tabset-width.component)
  *
  * @styles
  *

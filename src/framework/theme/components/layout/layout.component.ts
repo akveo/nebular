@@ -27,7 +27,7 @@ import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
  * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
  * moving it to the very first position:
  *
- * @example(layout/layout-column-left.component)
+ * @stacked-example(My example, layout/layout-column-left.component)
  */
 @Component({
   selector: 'nb-layout-column',
@@ -67,7 +67,7 @@ export class NbLayoutColumnComponent {
  * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
  * sticky to the top of the nb-layout (to of the page). Here's an example:
  *
- * @example(layout/layout-fixed-header.component)
+ * @stacked-example(My example, layout/layout-fixed-header.component)
  *
  * @styles
  *
@@ -144,7 +144,7 @@ export class NbLayoutFooterComponent {
  *
  * Basic example of two column layout with header:
  *
- * @example(layout/layout-showcase.component)
+ * @stacked-example(My example, layout/layout-showcase.component)
  *
  * Can contain the following components inside:
  *
@@ -179,7 +179,7 @@ export class NbLayoutFooterComponent {
  *
  * A simple layout with footer:
  *
- * @example(layout/layout-w-footer.component)
+ * @stacked-example(My example, layout/layout-w-footer.component)
  *
  * It is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
