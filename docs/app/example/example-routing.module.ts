@@ -7,6 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgdExampleComponent } from './example.component';
+import { NgdExample404Component } from './example-404.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: '../../../src/playground/playground.module#NbPlaygroundModule',
+      },
+      {
+        path: '**',
+        component: NgdExample404Component,
       },
     ],
   },

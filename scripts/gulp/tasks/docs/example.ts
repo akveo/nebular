@@ -3,11 +3,17 @@ import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { DOCS_OUTPUT, EXTENSIONS, PLAYGROUND_ROOT } from '../config';
 import { join } from 'path';
 
+const del = require('del');
+const replace = require('gulp-replace');
+
 const EXAMPLES_SRC = './src/playground/**/*.*';
 const EXAMPLES_DEST = './docs/assets/examples';
 
 task('copy-examples', () => {
-  src(EXAMPLES_SRC).pipe(dest(EXAMPLES_DEST))
+  del.sync(EXAMPLES_DEST);
+  src(EXAMPLES_SRC)
+    .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
+    .pipe(dest(EXAMPLES_DEST));
 });
 
 task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
@@ -75,7 +81,7 @@ function validate(cls) {
 }
 
 function createMissingMsg(examples): string {
-  const missing = examples.map(({ id }) => id);
+  const missing = examples.map(({ id, name }) => `${name}, ${id}`);
   return `Can't resolve:\n${missing.join('\n')}`;
 }
 

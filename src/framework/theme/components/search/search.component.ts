@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -141,6 +142,21 @@ export class NbSearchFieldComponent {
 /**
  * Beautiful full-page search control.
  *
+ * @stacked-example(My example, search/search-showcase.component)
+ *
+ * Basic setup:
+ *
+ * ```ts
+ *  <nb-search type="rotate-layout"></nb-search>
+ * ```
+ *
+ * Several animation types are available:
+ * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
+ *
+ * It is also possible to handle search event using `NbSearchService`:
+ *
+ * @stacked-example(My example, search/search-event.component)
+ *
  * @styles
  *
  * search-btn-open-fg:
@@ -196,6 +212,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchType: string = 'rotate-layout';
 
   constructor(private searchService: NbSearchService,
+              private componentFactoryResolver: ComponentFactoryResolver,
               private themeService: NbThemeService,
               private router: Router) {
   }
@@ -264,7 +281,8 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeService.appendToLayoutTop(NbSearchFieldComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbSearchFieldComponent);
+    this.themeService.appendToLayoutTop(factory)
       .subscribe((componentRef: ComponentRef<any>) => {
         this.connectToSearchField(componentRef);
       });

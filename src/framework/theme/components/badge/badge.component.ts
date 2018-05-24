@@ -23,6 +23,9 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  * <nb-badge text="badgeText"></nb-badge>
  * ```
  *
+ * For example, badge can be placed into nb-card header:
+ * @stacked-example(My example, badge/badge-showcase.component)
+ *
  * Badge located on the bottom right with warning status:
  *
  * ```html

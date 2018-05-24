@@ -1,4 +1,4 @@
-## UI Components
+# UI Components
 
 Auth module comes with a list of authentication components:
 
@@ -8,7 +8,7 @@ Auth module comes with a list of authentication components:
 - `<nb-logout></nb-logout>` - logout page - shows "logging out..." message while sending logout request;
 - `<nb-request-password></nb-request-password>` - request password page;
 - `<nb-reset-password></nb-reset-password>` - reset password page.
-<hr class="section-end">
+<hr>
 
 ## UI Settings
 
@@ -109,6 +109,9 @@ export const defaultSettings: any = {
   },
 };
 ```
+<hr>
+
+## Remove redirect delay
 
 So, for instance, to remove the redirectDelay setting and disable the success message, we can do the following:
 
@@ -195,7 +198,7 @@ const formSetting: any = {
 
 ```
 The settings will be merged with the default values so no need to specify all of the keys here.
-<hr class="section-end">
+<hr>
 
 ## Custom UI Components
 
@@ -203,7 +206,9 @@ In a case when the look & feel of the Nebular auth components doesn't satisfy yo
 
 All you need to do is:
 
-1) Copy [source code](https://github.com/akveo/nebular/tree/master/src/framework/auth/components) of the components you want to change under your project. If you use `ngx-admin`, you may place them under `src/app/@theme/components/auth`.
+### Copy component sources
+
+Copy [source code](https://github.com/akveo/nebular/tree/master/src/framework/auth/components) of the components you want to change under your project. If you use `ngx-admin`, you may place them under `src/app/@theme/components/auth`.
 Rename components to conform your app prefix, for instance using `ngx-` prefix.
 
 <div class="note note-warning">
@@ -219,12 +224,12 @@ Rename components to conform your app prefix, for instance using `ngx-` prefix.
     Make sure to rename component classes and selectors to follow your application prefix. You may use `Refactor` feature of your Editor.
   </div>
 </div>
-<hr class="section-end">
 
-2) Register them in your `*.module.ts` (i.e. `theme.module.ts`):
+### Register components
 
-```
+Register them in your `*.module.ts` (i.e. `theme.module.ts`):
 
+```typescript
 // make sure the path is correct for your setup
 import { NgxAuthComponent } from './components/auth/auth.component';
 import { NgxAuthBlockComponent } from './components/auth/auth-block/auth-block.component';
@@ -254,7 +259,9 @@ export class ThemeModule {
 ```
 *In this example we decided to copy all auth components to re-do the UI completely.*
 
-3) Update your routes to import the new components:
+### Update routes
+
+Update your routes to import the new components:
 
 
 ```typescript

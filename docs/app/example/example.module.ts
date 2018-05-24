@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { NgdExampleRoutingModule } from './example-routing.module';
 import { NgdExampleComponent } from './example.component';
 import { NgdThemeModule } from '../@theme/theme.module';
+import { NgdExample404Component } from './example-404.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { NgdThemeModule } from '../@theme/theme.module';
   ],
   declarations: [
     NgdExampleComponent,
+    NgdExample404Component,
   ],
 })
 export class NgdExampleModule {

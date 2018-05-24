@@ -71,8 +71,29 @@ export class NbActionComponent {
 }
 
 /**
- * Shows a horizontal list of actions, available in multiple sizes
+ * Shows a horizontal list of actions, available in multiple sizes.
  * Aligns items vertically.
+ *
+ * @stacked-example(My example, action/action-showcase.component)
+ *
+ * Basic actions setup:
+ * ```html
+ * <nb-actions size="small">
+ *   <nb-action icon="nb-search"></nb-action>
+ *   <nb-action icon="nb-power-circled"></nb-action>
+ *   <nb-action icon="nb-person"></nb-action>
+ * </nb-actions>
+ * ```
+ *
+ * Multiple sizes example:
+ * @stacked-example(My example, action/action-sizes.component)
+ *
+ * It is also possible to specify a `badge` value:
+ *
+ * @stacked-example(My example, action/action-badge.component)
+ *
+ * and we can set it to full a width of a parent component
+ * @stacked-example(My example, action/action-width.component)
  *
  * @styles
  *

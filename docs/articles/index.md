@@ -1,9 +1,8 @@
 # What is Nebular?
 
 Nebular is a set of essential modules for your next Angular application.
-Its primary goal is to assemble together and connect the most awesome features and libraries creating an efficient ecosystem to speed up and simplify the development.
 
-In simpler words, Nebular is a set of modules (components, services & styles) helping you to solve generic tasks easier so that you can focus on business logic.
+The purpose of the modules is to solve generic tasks faster and more efficient so that you can focus on a business logic and leave routine behind.
 
 <div class="note note-info">
   <div class="note-title">Current state</div>
@@ -17,22 +16,23 @@ In simpler words, Nebular is a set of modules (components, services & styles) he
 
 Nebular modules are distributed as separated `npm` packages, here's a list of currently available:
 
-- **@nebular/theme**
-  - Theme System - set of SCSS rules, which allow you to modify application looks & feel by changing style-variables, with fewer custom styles.
+- Nebular Theme `@nebular/theme`
+  - Theme System - set of SCSS rules, which allows you to modify application look & feel by changing variables, with fewer custom styles.
   - UI Kit - pure Angular components with two style themes and no 3rd party dependencies.
-  - Style overriding for Bootstrap, so that the application has a consistent look & feel.
+  - Style overriding for Bootstrap, so that the application has a consistent look & feel across libraries.
   - Server-side rendering compatibility!
   - Right-to-left writing system support for all components.
-- **@nebular/auth**
+- Nebular Auth `@nebular/auth`
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable authentication Strategies (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
-- **@nebular/security** - module for roles and permissions management.
+- Nebular Security `@nebular/security` 
+  - module for roles and permissions management.
+- Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a> - Angular application based on Nebular modules with beautiful IOT components.
 
-
-- *@nebular/dashboard* - module for draggable/resizable dashboards creation. Coming soon.
-- *@nebular/data* - application data & state management. Coming soon.
-- **Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a>** - application based on Nebular modules with beautiful IOT components.
+Other ideas
+- *@nebular/dashboard* - module for draggable/resizable dashboards creation.
+- *@nebular/data* - application data & state management.
 <hr>
 
 ## The purpose

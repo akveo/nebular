@@ -81,8 +81,8 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  *
  * @more-live-examples
  *
- * popover-template-ref/popover-template-ref.component
- * popover-custom-component/popover-custom-component.component
+ * popover/popover-template-ref.component
+ * popover/popover-custom-component.component
  * */
 /*
 *
@@ -183,6 +183,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
   }
 
   /**

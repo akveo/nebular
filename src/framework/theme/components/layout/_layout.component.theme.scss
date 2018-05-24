@@ -138,8 +138,13 @@
         }
       }
 
+      & ~ .layout-container {
+        min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
+      }
+
       &.fixed ~ .layout-container {
         padding-top: nb-theme(header-height);
+        min-height: nb-theme(layout-min-height);
       }
 
       &.fixed ~ .layout-container > nb-sidebar > .main-container {
@@ -148,7 +153,6 @@
     }
 
     .layout-container {
-      min-height: nb-theme(layout-min-height);
 
       nb-sidebar.fixed {
         top: nb-theme(header-height);
