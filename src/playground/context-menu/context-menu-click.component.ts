@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
 import { NB_WINDOW, NbMenuService } from '@nebular/theme';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-context-menu-click',
@@ -30,7 +30,10 @@ export class NbContextMenuClickComponent implements OnInit {
 
   ngOnInit() {
     this.nbMenuService.onItemClick()
-      .pipe(filter(({ tag }) => tag === 'my-context-menu'))
-      .subscribe(({ item: { title } }) => this.window.alert(`${title} was clicked!`));
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title => this.window.alert(`${title} was clicked!`));
   }
 }
