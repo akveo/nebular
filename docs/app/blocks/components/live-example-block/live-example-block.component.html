@@ -1,5 +1,5 @@
 <section class="header" *ngIf="!loading">
-  <strong class="title">{{ title }}</strong>
+  <strong class="title">{{ content.name }}</strong>
   <div class="actions">
     <button type="button"
             *ngIf="hasViewSwitch"
@@ -18,5 +18,5 @@
     </div>
   </div>
 </section>
-<iframe #iframe *ngIf="id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+<iframe #iframe *ngIf="content.id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
 <span class="icon-loading feather-more-vertical" *ngIf="loading"></span>

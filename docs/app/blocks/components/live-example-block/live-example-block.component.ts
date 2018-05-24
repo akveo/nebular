@@ -26,8 +26,7 @@ import { NgdExampleView } from '../../enum.example-view';
 export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('iframe') iframe: ElementRef;
-  @Input() id: string;
-  @Input() title: string;
+  @Input() content: any;
   @Input() hasViewSwitch: boolean = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
 
@@ -53,7 +52,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterVie
   loading = true;
 
   get url(): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.id}`);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.content.id}`);
   }
 
   get iframeWindow(): Window {
@@ -67,7 +66,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterVie
   }
 
   ngOnInit(): void {
-    this.communicator.receive(this.id)
+    this.communicator.receive(this.content.id)
       .pipe(takeWhile(() => this.alive))
       .subscribe(it => {
         this.iframeHeight = it.height;
@@ -84,7 +83,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterVie
   }
 
   switchTheme(theme: string) {
-    this.communicator.send({ id: this.id, theme }, this.iframeWindow);
+    this.communicator.send({ id: this.content.id, theme }, this.iframeWindow);
   }
 
   switchToInlineVew() {

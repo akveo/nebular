@@ -3,7 +3,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 /**
  *
  * Flip card example:
- * @example(flip-card/flip-card-showcase.component)
+ * @stacked-example(My example, flip-card/flip-card-showcase.component)
  *
  * As a content Flip card accepts two instances of `nb-card` - for front and back sides.
  *
@@ -29,16 +29,14 @@ import { Component, Input, HostBinding } from '@angular/core';
  * ```
  *
  * Flip Card with header and footer:
- * @example(flip-card/flip-card-full.component)
+ * @stacked-example(My example, flip-card/flip-card-full.component.ts)
  *
  * Colored flip-cards could be simply configured by providing a `status` property:
- * @example(flip-card/flip-card-colors.component)
+ * @stacked-example(My example, flip-card/flip-card-colors.component)
  *
  * It is also possible to assign an `accent` property for a slight card highlight
  * as well as combine it with `status`:
- * @example(flip-card/flip-card-accents.component)
- *
- * @more-live-examples
+ * @stacked-example(My example, flip-card/flip-card-accents.component)
  *
  * flip-card/flip-card-sizes.component
  *
