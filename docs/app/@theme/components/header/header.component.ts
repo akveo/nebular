@@ -7,7 +7,7 @@ import { NgdVersionService } from '../../services';
   styleUrls: ['./header.component.scss'],
   template: `
     <div class="logo">
-      <a href="#">Nebular</a>
+      <a routerLink="/">Nebular</a>
       <span class="version">v{{ currentVersion }}</span>
     </div>
     <nb-menu [items]="mainMenu"></nb-menu>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
 import { takeWhile, filter, publish, refCount } from 'rxjs/operators';
 import { NgdTocElement, NgdTocStateService } from '../../services';
+import { delay } from 'rxjs/internal/operators';
 
 @Directive({
   // tslint:disable-next-line
@@ -10,7 +11,8 @@ import { NgdTocElement, NgdTocStateService } from '../../services';
 })
 export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElement {
   @Input() ngdFragment: string;
-  @Input() activeClass: string;
+  @Input() ngdFragmentClass: string;
+  @Input() ngdFragmentSync: boolean = true;
 
   private inView = false;
   private alive = true;
@@ -37,19 +39,27 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElem
   ) {}
 
   ngOnInit() {
-    this.tocState.add(this);
+    this.ngdFragmentSync && this.tocState.add(this);
 
     this.activatedRoute.fragment
-      .pipe(publish(null), refCount(), takeWhile(() => this.alive), filter(() => !this.inView))
+      .pipe(publish(null), refCount(), takeWhile(() => this.alive), delay(10))
       .subscribe((fragment: string) => {
         if (fragment && this.fragment === fragment) {
-          this.renderer.addClass(this.el.nativeElement, this.activeClass);
-          this.setInView(true);
-          this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
+          this.selectFragment();
         } else {
-          this.renderer.removeClass(this.el.nativeElement, this.activeClass);
+          this.deselectFragment();
         }
       });
+  }
+
+  selectFragment() {
+    this.ngdFragmentClass && this.renderer.addClass(this.el.nativeElement, this.ngdFragmentClass);
+    this.setInView(true);
+    this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
+  }
+
+  deselectFragment() {
+    this.renderer.removeClass(this.el.nativeElement, this.ngdFragmentClass);
   }
 
   setInView(val: boolean) {
@@ -58,6 +68,6 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElem
 
   ngOnDestroy() {
     this.alive = false;
-    this.tocState.remove(this);
+    this.ngdFragmentSync && this.tocState.remove(this);
   }
 }

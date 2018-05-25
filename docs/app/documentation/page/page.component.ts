@@ -19,18 +19,17 @@ import {
 } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 import { NgdStructureService, NgdTocStateService } from '../../@theme/services';
-import { fromEvent,  combineLatest,  Subject } from 'rxjs';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'ngd-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
+export class NgdPageComponent implements OnDestroy, OnInit {
 
   currentItem;
   private alive = true;
-  private handleTocScroll$ = new Subject();
 
   constructor(@Inject(NB_WINDOW) private window,
               private ngZone: NgZone,
@@ -44,10 +43,7 @@ export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
   ngOnInit() {
     this.handlePageNavigation();
     this.handleTocScroll();
-  }
-
-  ngAfterViewInit() {
-    this.handleTocScroll$.next(null);
+    this.window.history.scrollRestoration = 'manual';
   }
 
   handlePageNavigation() {
@@ -71,21 +67,19 @@ export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
       )
       .subscribe((item) => {
         this.currentItem = item;
-        this.handleTocScroll$.next(null);
       });
   }
 
   handleTocScroll() {
     this.ngZone.runOutsideAngular(() => {
-      combineLatest([
-        this.handleTocScroll$,
-        fromEvent(this.window, 'scroll').pipe(distinctUntilChanged(), publishBehavior(null), refCount()),
-      ])
+      fromEvent(this.window, 'scroll')
         .pipe(
+          publishBehavior(null),
+          refCount(),
           takeWhile(() => this.alive),
+          filter(() => this.tocState.list().length > 0),
         )
         .subscribe(() => {
-
           this.tocState.list().map(item => item.setInView(false));
 
           const current: any = this.tocState.list().reduce((acc, item) => {
@@ -94,7 +88,7 @@ export class NgdPageComponent implements OnDestroy, AfterViewInit, OnInit {
 
           if (current && !current.fake) {
             current.setInView(true);
-            this.router.navigate([], { fragment: current.fragment });
+            this.router.navigate([], { fragment: current.fragment, replaceUrl: true });
           }
         });
     });
