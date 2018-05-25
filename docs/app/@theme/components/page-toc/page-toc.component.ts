@@ -13,12 +13,14 @@ import { of as observableOf,  combineLatest } from 'rxjs';
   selector: 'ngd-page-toc',
   styleUrls: ['./page-toc.component.scss'],
   template: `
-    <h4>Overview</h4>
-    <ul *ngIf="items?.length > 0">
-      <li *ngFor="let item of items" [class.selected]="item.selected">
-        <a [routerLink]="item.link" [fragment]="item.fragment">{{ item.title }}</a>
-      </li>
-    </ul>
+    <ng-container *ngIf="items?.length > 0">
+      <h4>Overview</h4>
+      <ul>
+        <li *ngFor="let item of items" [class.selected]="item.selected">
+          <a [routerLink]="item.link" [fragment]="item.fragment">{{ item.title }}</a>
+        </li>
+      </ul>
+    </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -34,10 +36,9 @@ export class NgdPageTocComponent implements OnDestroy {
     )
       .pipe(
         takeWhile(() => this.alive),
-        filter(([toc, fragment]) => toc && toc.length),
         map(([toc, fragment]) => {
           toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
-          if (!toc.find(item => item.selected)) {
+          if (toc.length && !toc.find(item => item.selected)) {
             toc[0].selected = true;
           }
           return toc;

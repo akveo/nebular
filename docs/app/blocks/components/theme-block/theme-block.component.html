@@ -18,7 +18,9 @@
 
       <tbody>
         <tr *ngFor="let prop of vm.filteredThemeProperties | async"
-          [ngdFragment]="prop.name" activeClass="highlighted-row">
+            [ngdFragment]="prop.name"
+            [ngdFragmentSync]="false"
+            ngdFragmentClass="highlighted-row">
           <td>
             <a [routerLink]="" fragment="{{ prop.name }}">{{ prop.name }}</a>
           </td>
