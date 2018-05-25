@@ -24,6 +24,7 @@ import {
   NbUserModule,
   NbPopoverModule,
   NbContextMenuModule,
+  NbProgressBarModule,
 } from '@nebular/theme';
 
 import {
@@ -74,6 +75,7 @@ import { NbContextMenuTestComponent } from './context-menu-test/context-menu-tes
 import { routes } from './app.routes';
 
 import { NbCheckboxTestComponent } from './checkbox-test/checkbox-test.component';
+import { NbProgressBarTestComponent } from './progress-bar-test/progress-bar-test.component';
 import { NbSearchTestComponent } from './search-test/search-test.component';
 import { NbSearchTestCustomizedComponent } from './search-test/search-test-customized.component';
 import { NbFormsTestComponent } from './forms-test/forms-test.component';
@@ -121,6 +123,7 @@ const NB_TEST_COMPONENTS = [
   NbActionsTestComponent,
   NbFormsTestComponent,
   NbCheckboxTestComponent,
+  NbProgressBarTestComponent,
   NbAclTestComponent,
   NbPopoverTestComponent,
   NbContextMenuTestComponent,
@@ -145,6 +148,7 @@ const NB_TEST_COMPONENTS = [
     NbPopoverModule,
     NbContextMenuModule,
     NbCheckboxModule,
+    NbProgressBarModule,
     NbPlaygroundModule,
     NbAuthModule.forRoot({
       forms: {
