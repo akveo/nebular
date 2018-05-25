@@ -29,16 +29,16 @@ import { Component, Input, HostBinding } from '@angular/core';
  * ```
  *
  * Reveal Card with header and footer:
- * @stacked-example(My example, reveal-card/reveal-card-full.component)
+ * @stacked-example(With Header & Footer, reveal-card/reveal-card-full.component)
  *
  * Colored reveal-cards could be simply configured by providing a `status` property:
- * @stacked-example(My example, reveal-card/reveal-card-colors.component)
+ * @stacked-example(Colored Card, reveal-card/reveal-card-colors.component)
  *
  * It is also possible to assign an `accent` property for a slight card highlight
  * as well as combine it with `status`:
- * @stacked-example(My example, reveal-card/reveal-card-accents.component)
+ * @stacked-example(Accent Card, reveal-card/reveal-card-accents.component)
  *
- * @additional-example(My example, reveal-card/reveal-card-sizes.component)
+ * @additional-example(Multiple Sizes, reveal-card/reveal-card-sizes.component)
  */
 @Component({
   selector: 'nb-reveal-card',

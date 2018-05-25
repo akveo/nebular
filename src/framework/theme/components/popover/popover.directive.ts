@@ -28,7 +28,7 @@ import { NbPlacementHelper } from './helpers/placement.helper';
 /**
  * Powerful popover directive, which provides the best UX for your users.
  *
- * @stacked-example(Plain usage, popover/popover-showcase.component)
+ * @stacked-example(Showcase, popover/popover-showcase.component)
  *
  * Popover can accept different content such as:
  * TemplateRef
@@ -77,10 +77,10 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
  * the container element popover will not be hidden.
  *
- * @stacked-example(Available modes, popover/popover-modes.component.html)
+ * @stacked-example(Available Modes, popover/popover-modes.component.html)
  *
- * @additional-example(Template ref, popover/popover-template-ref.component)
- * @additional-example(Custom component, popover/popover-custom-component.component)
+ * @additional-example(Template Ref, popover/popover-template-ref.component)
+ * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
 /*
 *

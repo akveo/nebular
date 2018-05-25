@@ -142,7 +142,7 @@ export class NbSearchFieldComponent {
 /**
  * Beautiful full-page search control.
  *
- * @stacked-example(My example, search/search-showcase.component)
+ * @stacked-example(Showcase, search/search-showcase.component)
  *
  * Basic setup:
  *
@@ -155,7 +155,7 @@ export class NbSearchFieldComponent {
  *
  * It is also possible to handle search event using `NbSearchService`:
  *
- * @stacked-example(My example, search/search-event.component)
+ * @stacked-example(Search Event, search/search-event.component)
  *
  * @styles
  *
