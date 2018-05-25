@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
 import { takeWhile, filter, publish, refCount } from 'rxjs/operators';
@@ -9,8 +9,8 @@ import { NgdTocElement, NgdTocStateService } from '../../services';
   selector: '[ngdFragment]',
 })
 export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElement {
-
   @Input() ngdFragment: string;
+  @Input() activeClass: string;
 
   private inView = false;
   private alive = true;
@@ -21,7 +21,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElem
   }
 
   get element(): any {
-    return this.elementRef.nativeElement;
+    return this.el.nativeElement;
   }
 
   get y(): number {
@@ -32,23 +32,22 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElem
     private activatedRoute: ActivatedRoute,
     @Inject(NB_WINDOW) private window,
     private tocState: NgdTocStateService,
-    private elementRef: ElementRef) {
-  }
+    private el: ElementRef,
+    private renderer: Renderer2,
+  ) {}
 
   ngOnInit() {
     this.tocState.add(this);
 
     this.activatedRoute.fragment
-      .pipe(
-        publish(null),
-        refCount(),
-        takeWhile(() => this.alive),
-        filter(() => !this.inView),
-      )
+      .pipe(publish(null), refCount(), takeWhile(() => this.alive), filter(() => !this.inView))
       .subscribe((fragment: string) => {
         if (fragment && this.fragment === fragment) {
+          this.renderer.addClass(this.el.nativeElement, this.activeClass);
           this.setInView(true);
-          this.window.scrollTo(0, this.elementRef.nativeElement.offsetTop - this.marginFromTop);
+          this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
+        } else {
+          this.renderer.removeClass(this.el.nativeElement, this.activeClass);
         }
       });
   }
