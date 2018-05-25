@@ -36,7 +36,7 @@
     display: flex;
 
     .icon {
-      font-size: 1.25rem;
+      font-size: 0.95rem;
     }
   }
 
@@ -47,9 +47,10 @@
     line-height: 1;
     border: none;
     color: $color-gray-text;
-    padding: 0.75rem;
+    padding: 0.5rem 1rem;
     margin-left: 0.625rem;
     cursor: pointer;
+    outline: none;
 
     &:first-child {
       margin-left: 0;
@@ -62,7 +63,8 @@
     .icon {
       color: $color-gray-text;
       position: absolute;
-      top: 0.75rem;
+      top: 50%;
+      transform: translate(0, -50%);
       left: 1.25rem;
     }
 
@@ -73,8 +75,7 @@
 
     select {
       font-size: 0.875rem;
-      padding-left: 2.5rem;
-      padding-right: 4.375rem;
+      padding: 0 2.5rem;
       appearance: none;
     }
   }
