@@ -47,7 +47,7 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
- * @stacked-example(My example, sidebar/sidebar-showcase.component)
+ * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
  *
  * Sidebar can be placed on the left or the right side of the layout,
  * or on start/end position of layout (depends on document direction, left to right or right to left)
@@ -57,12 +57,12 @@ export class NbSidebarFooterComponent {
  * By default sidebar content is fixed and saves its position while the page is being scrolled.
  *
  * Compacted sidebar example:
- * @stacked-example(My example, sidebar/sidebar-compacted.component)
+ * @stacked-example(Compacted Sidebar, sidebar/sidebar-compacted.component)
  *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
- * @additional-example(My example, sidebar/sidebar-right.component)
- * @additional-example(My example, sidebar/sidebar-fixed.component)
+ * @additional-example(Right Sidebar, sidebar/sidebar-right.component)
+ * @additional-example(Fixed Sidebar, sidebar/sidebar-fixed.component)
  *
  * @styles
  *
