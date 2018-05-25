@@ -116,7 +116,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
  *
  * Basic example
- * @stacked-example(My example, menu/menu-showcase.component)
+ * @stacked-example(Showcase, menu/menu-showcase.component)
  *
  * ```ts
  * // ...
@@ -135,7 +135,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  * ```
  *
  * Two-level menu example
- * @stacked-example(My example, menu/menu-children.component)
+ * @stacked-example(Two Levels, menu/menu-children.component)
  *
  * @styles
  *

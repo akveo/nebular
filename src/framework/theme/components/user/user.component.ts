@@ -10,7 +10,7 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
- * @stacked-example(My example, user/user-showcase.component)
+ * @stacked-example(Showcase, user/user-showcase.component)
  *
  * ```ts
  *   <nb-user name="Jonh Doe" title="Engineer"></nb-user>
@@ -18,7 +18,7 @@ import { convertToBoolProperty } from '../helpers';
  * Can be used as a user profile link.
  *
  * Available in multiple sizes:
- * @stacked-example(My example, user/user-sizes.component)
+ * @stacked-example(Multiple Sizes, user/user-sizes.component)
  *
  * @styles
  *

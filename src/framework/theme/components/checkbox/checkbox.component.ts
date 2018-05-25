@@ -11,13 +11,13 @@ import { convertToBoolProperty } from '../helpers';
 /**
  * Styled checkbox component
  *
- * @stacked-example(My example, checkbox/checkbox-showcase.component)
+ * @stacked-example(Showcase, checkbox/checkbox-showcase.component)
  *
  * Can have one of the following statuses: danger, success or warning
  *
- * @stacked-example(My example, checkbox/checkbox-status.component)
+ * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
- * @additional-example(My example, checkbox/checkbox-disabled.component)
+ * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
  *
  * @styles
  *

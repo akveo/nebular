@@ -13,11 +13,11 @@ $background-tab-header: #ebeff5;
     background: transparent;
     color: nb-theme(color-fg-heading);
     text-transform: inherit;
-    padding: 0;
+    padding: 0.45rem 1.5rem;
     position: absolute;
-    right: 1.5rem;
+    right: 0;
+    top: 0;
     cursor: pointer;
-    top: 0.45rem;
     font-weight: normal;
     font-size: 0.9rem;
 
