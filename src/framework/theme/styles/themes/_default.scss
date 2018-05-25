@@ -421,6 +421,15 @@ $theme: (
   badge-info-bg-color: color-info,
   badge-warning-bg-color: color-warning,
   badge-danger-bg-color: color-danger,
+
+  progress-bar-bg-color: layout-bg,
+  progress-bar-default-bg-color: color-disabled,
+  progress-bar-primary-bg-color: color-primary,
+  progress-bar-success-bg-color: color-success,
+  progress-bar-info-bg-color: color-info,
+  progress-bar-warning-bg-color: color-warning,
+  progress-bar-danger-bg-color: color-danger,
+
 );
 
 // register the theme

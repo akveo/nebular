@@ -13,7 +13,9 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 @Component({
   selector: 'nb-progress-bar',
   template: `
-    <h1>test</h1>
+    <div class="progress-container">
+      <div class="progress-value {{type ? '' + type : ''}}" [style.width.%]="getWidth()"></div>
+    </div>
   `,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -23,13 +25,11 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class NbProgressBarComponent {
 
-  status: string;
+  @Input('value') value: number = 0;
+  @Input() type: string;
 
-  /**
-   * Checkbox value
-   * @type {number}
-   * @private
-   */
-  @Input('value') _value: number = 0;
+  getWidth() {
+    return this.value;
+  }
 
 }
