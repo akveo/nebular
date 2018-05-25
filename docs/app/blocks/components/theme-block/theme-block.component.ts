@@ -1,133 +1,45 @@
-import { Component, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import { Component, ElementRef, Input, Renderer2, OnInit, OnDestroy } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+
+import { ThemeBlockModel } from './theme-block.model';
+import { ThemeBlockViewModel } from './theme-block.viewmodel';
 
 @Component({
   selector: 'ngd-theme-block',
-  template: `
-    <div class="theme-header">
-      <div class="theme-title">{{ themeTitle }} Theme
-        <span *ngIf="parentTheme">inherited from {{parentTheme}} theme</span>
-      </div>
-      <div class="input-group">
-        <input #searchInput
-               type="text"
-               class="form-control"
-               [ngModel]="searchTermModel"
-               [class.form-control-warning]="isWarning && searchInput.value"
-               placeholder="Search for..."
-               (keyup.enter)="filterThemeContent(searchInput.value)">
-        <span class="input-group-btn">
-        <button
-          class="btn btn-success"
-          (click)="filterThemeContent(searchInput.value)">
-          Search
-        </button>
-      </span>
-      </div>
-      <div *ngIf="isWarning && searchInput.value" class="filter-warning">Nothing found</div>
-    </div>
-    <div class="table-container">
-      <table class="table-striped table theme-table">
-        <thead>
-        <tr>
-          <td>Name</td>
-          <td>Value</td>
-          <td>Parent</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let prop of filteredContent;" tableCell>
-          <td>
-            <a [routerLink]="" fragment="{{prop.name}}" class="fragment"></a>
-            <a [routerLink]="" fragment="{{prop.name}}">{{ prop.name }}</a>
-          </td>
-          <td ngdSassValue>{{ prop.value }}</td>
-          <td class="theme-parents-cell">
-            <a routerLink="/docs/themes/{{prop.parents[0]?.theme}}"
-               fragment="{{prop.parents[0]?.prop}}" tableCell>
-              {{ prop.parents[0]?.prop }}
-              <span *ngIf="prop.parents[0] && prop.parents[0].theme !== themeName">({{prop.parents[0]?.theme}})</span>
-            </a>
-            <div *ngIf="prop.parents.length > 1" class="theme-prop-parents">
-              <span *ngFor="let parent of prop.parents | slice:1">
-                <i class="inheritance-icon ion-arrow-left-c"></i>
-                <a routerLink="/docs/themes/{{parent.theme}}" fragment="{{parent.prop}}" remoteLink>
-                  {{ parent.prop }}
-                  <span *ngIf="parent.theme !== themeName">({{parent.theme}})</span>
-                  </a>
-               </span>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  `,
+  styleUrls: ['./theme-block.component.scss'],
+  templateUrl: './theme-block.component.html',
+  providers: [ThemeBlockModel, ThemeBlockViewModel],
 })
-export class NgdThemeComponent implements OnDestroy {
-  themeTitle: string;
-  filteredContent: any;
-  themeContent: any;
-  themeName: string;
-  parentTheme: string;
+export class NgdThemeComponent implements OnInit, OnDestroy {
+  searchControl = new FormControl();
 
-  isWarning: boolean = false;
-  searchTermModel: string = '';
-
-  private fragmentSubscription: Subscription;
+  private alive: boolean = true;
 
   @Input('block')
   set setBlock(block: any) {
-    this.themeTitle = block.name;
-    this.themeContent = Object.keys(block.source.data).map(key => {
-      const property = block.source.data[key];
-      property.value = Array.isArray(property.value)
-        ? property.value.join(' ')
-        : property.value;
-      return property;
-    });
-    this.filteredContent = this.themeContent;
-    this.themeName = block.source.name;
-    this.parentTheme = block.source.parent;
+    this.vm.themeTitle = block.name;
+    this.vm.themeName = block.source.name;
+    this.vm.parentTheme = block.source.parent;
+    this.vm.themeProperties = block.source.data;
   }
 
-  constructor(private renderer: Renderer2,
-              private route: ActivatedRoute,
-              private elementRef: ElementRef,
-              private router: Router) {
-  }
+  constructor(public vm: ThemeBlockViewModel) {}
 
-  filterThemeContent(term) {
-    if (term !== this.searchTermModel) {
-      this.searchTermModel = term;
-      const filterResult = this.themeContent.filter(item => {
-        return new RegExp(`${term}`, 'gi').test(`${item.name} ${item.value}`);
-      });
-      this.filteredContent = filterResult;
-      this.isWarning = !(filterResult.length > 0);
-      this.renderer.setProperty(document.body, 'scrollTop', 0);
-      this.router.navigate([], { relativeTo: this.route });
-    }
-  }
-
-  processFragment(fr) {
-    this.filterThemeContent('');
-    this.searchTermModel = '';
-    const el = this.elementRef.nativeElement.querySelector(`#${fr}`);
-    if (el) {
-      this.renderer.addClass(el, 'highlighted-row');
-    }
-  }
-
-  removeRowHighlighting() {
-    const highlightedRowElement = this.elementRef.nativeElement.querySelector('.highlighted-row');
-    if (highlightedRowElement) {
-      this.renderer.removeClass(highlightedRowElement, 'highlighted-row');
-    }
+  ngOnInit() {
+    this.searchControl.valueChanges
+      .pipe(skip(1), distinctUntilChanged(), debounceTime(300), takeWhile(() => this.alive))
+      .subscribe(value => this.vm.changeSearch(value));
   }
 
   ngOnDestroy() {
-    this.fragmentSubscription.unsubscribe();
+    this.alive = false;
   }
 }
