@@ -80,6 +80,7 @@ import { NbContextMenuClickComponent } from './context-menu/context-menu-click.c
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarTypeComponent } from './progress-bar/progress-bar-type.component';
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
+import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -110,6 +111,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbProgressBarShowcaseComponent,
   NbProgressBarTypeComponent,
   NbProgressBarValueComponent,
+  NbProgressBarSizeComponent,
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
