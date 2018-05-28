@@ -37,7 +37,7 @@
     "test:watch": "ng test playground-wp --watch",
     "test:coverage": "rimraf coverage && ng test -sr -cc",
     "lint": "ng lint playground --type-check",
-    "lint:styles": "stylelint ./src/framework/**/*.scss",
+    "lint:styles": "stylelint ./src/framework/**/*.scss && stylelint ./docs/**/*.scss",
     "lint:fix": "npm run lint -- --fix",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "ng e2e playground-e2e",

@@ -1,17 +1,18 @@
 @import '../../../@theme/styles/themes';
 
-$color-white-default: #ffffff;
-$background-tab-header: #ebeff5;
-
-
 @include nb-install-component() {
+
+  $tab-fg: nb-theme(color-fg-heading-light);
+  $tab-active-fg: #ffffff;
+  $tab-active-bg: linear-gradient(225deg, #333c66 0%, #1d2447 100%);
+  $tabs-bb: #ebeff5;
 
   display: block;
   position: relative;
 
   button {
     background: transparent;
-    color: nb-theme(color-fg-heading);
+    color: $tab-fg;
     text-transform: inherit;
     padding: 0.45rem 1.5rem;
     position: absolute;
@@ -27,7 +28,7 @@ $background-tab-header: #ebeff5;
 
     &:focus, &:active, &:hover {
       cursor: pointer;
-      color: nb-theme(color-fg-heading);
+      color: $tab-fg;
       outline: 0;
     }
   }
@@ -39,7 +40,7 @@ $background-tab-header: #ebeff5;
       padding: 0;
       margin-bottom: 0!important; // TODO: check selectors
       border-radius: 0.5rem 0.5rem 0 0;
-      background-color: $background-tab-header;
+      background-color: $tabs-bb;
       overflow: hidden;
 
       li {
@@ -52,14 +53,14 @@ $background-tab-header: #ebeff5;
         }
 
         a {
-          color: nb-theme(color-fg-heading);
+          color: $tab-fg;
         }
 
         &.active {
-          background: linear-gradient(225deg, #333c66 0%, #1d2447 100%);
+          background: $tab-active-bg;
 
           a {
-            color: $color-white-default;
+            color: $tab-active-fg;
           }
         }
       }

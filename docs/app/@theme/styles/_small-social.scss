@@ -24,12 +24,12 @@ $small-social-font-path: '/assets/fonts/small-social' !default;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.small-social-facebook:before {
+.small-social-facebook::before {
   content: '\e900';
 }
-.small-social-github:before {
+.small-social-github::before {
   content: '\e901';
 }
-.small-social-twitter:before {
+.small-social-twitter::before {
   content: '\e902';
 }

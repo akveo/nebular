@@ -4,6 +4,12 @@
   display: flex;
   flex-wrap: wrap;
 
+  $tabs-fg: nb-theme(color-fg-heading-light);
+  $tabs-fg-active: nb-theme(color-fg-heading);
+  $tabs-bg-active: nb-theme(color-white);
+  $tabs-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+  $tabs-accent-line: nb-theme(color-fg-highlight);
+
   a {
     display: flex;
     flex-direction: column;
@@ -14,7 +20,7 @@
     height: 7.5rem;
     font-size: 0.875rem;
     text-decoration: none;
-    color: #8994A3;
+    color: $tabs-fg;
     margin-bottom: 1rem;
 
     strong {
@@ -29,13 +35,13 @@
 
     &.selected {
       background: white;
-      color: black;
-      box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+      color: $tabs-fg-active;
+      box-shadow: $tabs-shadow;
 
       .line {
         height: 0.1875rem;
         width: 60%;
-        background: #457AE6;
+        background: $tabs-accent-line;
         border-radius: 1.5px;
       }
     }

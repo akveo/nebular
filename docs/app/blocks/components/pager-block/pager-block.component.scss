@@ -1,10 +1,12 @@
 @import '../../../@theme/styles/themes';
 
-$color-black: #000000;
-$pagination-text-color: #666f80;
-$color-pagination-arrow: #457ae6;
 
 @include nb-install-component() {
+
+  $title-fg: nb-theme(color-fg-heading);
+  $text-fg: nb-theme(color-fg-text);
+  $arrow-fg: nb-theme(color-fg-highlight);
+
   display: flex;
 
   /deep/ nb-card {
@@ -23,20 +25,20 @@ $color-pagination-arrow: #457ae6;
     a {
       padding: 2rem 3rem 2rem 2rem;
       text-decoration: none;
-      color: $pagination-text-color;
+      color: $text-fg;
       height: 100%;
     }
 
     .page-title {
       display: flex;
       justify-content: space-between;
-      color: $color-black;
+      color: $title-fg;
       font-weight: 500;
       font-size: 1.5rem;
       margin-bottom: 0.6rem;
 
       i {
-        color: $color-pagination-arrow;
+        color: $arrow-fg;
         margin-top: 0.3rem;
       }
     }
