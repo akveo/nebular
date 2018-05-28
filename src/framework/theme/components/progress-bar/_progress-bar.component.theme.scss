@@ -11,6 +11,9 @@
   }
   .progress-value {
     background-color: nb-theme(progress-bar-default-bg-color);
+    color: nb-theme(progress-bar-font-color);
+    font-size: nb-theme(progress-bar-font-size);
+    font-weight: nb-theme(progress-bar-font-weight);
     &.primary {
       background-color: nb-theme(progress-bar-primary-bg-color);
     }
