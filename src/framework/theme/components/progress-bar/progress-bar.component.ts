@@ -17,6 +17,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
       <div class="progress-value {{type ? '' + type : ''}}" [style.width.%]="getWidth()"></div>
     </div>
   `,
+  styleUrls: ['./progress-bar.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbProgressBarComponent),

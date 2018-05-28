@@ -6,32 +6,26 @@
 
 @mixin nb-progress-bar-theme() {
 
-  nb-progress-bar {
-    display: block;
-
-    .progress-container {
-      height: 1rem;
-      background-color: nb-theme(layout-bg);
+  .progress-container {
+    background-color: nb-theme(progress-bar-bg-color);
+  }
+  .progress-value {
+    background-color: nb-theme(progress-bar-default-bg-color);
+    &.primary {
+      background-color: nb-theme(progress-bar-primary-bg-color);
     }
-    .progress-value {
-      height: 100%;
-      background-color: shade(nb-theme(layout-bg), 20%);
-      &.primary {
-        background-color: nb-theme(color-primary);
-      }
-      &.info {
-        background-color: nb-theme(color-info);
-      }
-      &.success {
-        background-color: nb-theme(color-success);
-      }
-      &.warning {
-        background-color: nb-theme(color-warning);
-      }
-      &.danger {
-        background-color: nb-theme(color-danger);
-      }
+    &.info {
+      background-color: nb-theme(progress-bar-info-bg-color);
+    }
+    &.success {
+      background-color: nb-theme(progress-bar-success-bg-color);
+    }
+    &.warning {
+      background-color: nb-theme(progress-bar-warning-bg-color);
+    }
+    &.danger {
+      background-color: nb-theme(progress-bar-danger-bg-color);
     }
   }
-
 }
+
