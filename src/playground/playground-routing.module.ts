@@ -58,6 +58,9 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
+import { NbProgressBarTypeComponent } from './progress-bar/progress-bar-type.component';
+import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
 
 export const routes: Routes = [
   {
@@ -103,6 +106,23 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'progress-bar',
+        children: [
+          {
+            path: 'progress-bar-showcase.component',
+            component: NbProgressBarShowcaseComponent,
+          },
+          {
+            path: 'progress-bar-type.component',
+            component: NbProgressBarTypeComponent,
+          },
+          {
+            path: 'progress-bar-value.component',
+            component: NbProgressBarValueComponent,
           },
         ],
       },
