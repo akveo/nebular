@@ -171,10 +171,10 @@
             border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nb-theme(header-fg);
+              color: nb-theme(footer-fg);
 
               @include hover-focus-active {
-                color: nb-theme(header-fg);
+                color: nb-theme(footer-fg);
               }
             }
           }
