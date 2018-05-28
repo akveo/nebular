@@ -21,6 +21,10 @@ import {Component} from '@angular/core';
             <nb-progress-bar type='info' [value]="100" [displayValue]="true"></nb-progress-bar>
             <nb-progress-bar type='primary' [value]="50">5 of 10</nb-progress-bar>
             <nb-progress-bar type='success' [value]="100">READY!</nb-progress-bar>
+            <nb-progress-bar type='danger' size='xlg' [value]="10">xlg</nb-progress-bar>
+            <nb-progress-bar type='warning' size='lg' [value]="90">lg</nb-progress-bar>
+            <nb-progress-bar type='info' size='sm' [value]="100">sm</nb-progress-bar>
+            <nb-progress-bar type='primary' size='xs' [value]="50">xs</nb-progress-bar>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>

@@ -7,7 +7,21 @@
 @mixin nb-progress-bar-theme() {
 
   .progress-container {
+    height: nb-theme(progress-bar-height);
+    border-radius: nb-theme(progress-bar-radius);
     background-color: nb-theme(progress-bar-bg-color);
+    &.xlg {
+      height: nb-theme(progress-bar-height-xlg);
+    }
+    &.lg {
+      height: nb-theme(progress-bar-height-lg);
+    }
+    &.sm {
+      height: nb-theme(progress-bar-height-sm);
+    }
+    &.xs {
+      height: nb-theme(progress-bar-height-xs);
+    }
   }
   .progress-value {
     background-color: nb-theme(progress-bar-default-bg-color);
