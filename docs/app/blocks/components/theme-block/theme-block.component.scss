@@ -1,12 +1,19 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
+
+  $inherited-fg: nb-theme(color-fg);
+  $search-fg: nb-theme(color-fg);
+  $search-bg: nb-theme(color-white);
+  $search-border: 1px solid nb-theme(color-gray-light);
+  $selected-row-bg: nb-theme(color-gray-light);
+
   .inheritance-icon {
     margin: 0 0.25rem;
   }
 
   .inheritance-property {
-    color: nb-theme(color-fg);
+    color: $inherited-fg;
   }
 
   .parent-theme-name {
@@ -14,7 +21,7 @@
   }
 
   .highlighted-row {
-    background-color: nb-theme(theme-table-selected) !important;
+    background-color: $selected-row-bg !important;
   }
 
   .search-control {
@@ -23,10 +30,10 @@
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: nb-theme(color-fg);
-    background-color: nb-theme(color-white);
+    color: $search-fg;
+    background-color: $search-bg;
     background-clip: padding-box;
-    border: 1px solid nb-theme(color-gray);
+    border: $search-border;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }

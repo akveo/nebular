@@ -1,16 +1,16 @@
 @import '../../../@theme/styles/themes';
 
-$code-snippets-fg: #f8f8f2;
-$color-lines: #515877;
-
 @include nb-install-component() {
+
+  $code-lines-fg: #515877;
+  $code-block-bg: nb-theme(code-block-bg);
 
   .container {
     display: flex;
     padding: 0;
     font-size: 1rem;
     border-radius: 0.5rem;
-    background: linear-gradient(225deg, #333C66 0%, #1D2447 100%);
+    background: $code-block-bg;
     overflow-x: auto;
 
     .lines {
@@ -20,7 +20,7 @@ $color-lines: #515877;
       font-size: 0.875rem;
       padding: 2rem 0.5rem 0.5rem;
       border-radius: 0.5rem 0 0 0.5rem;
-      color: $color-lines;
+      color: $code-lines-fg;
       user-select: none;
     }
 

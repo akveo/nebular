@@ -1,6 +1,11 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
+
+  $text-fg: nb-theme(color-fg-text);
+  $social-fg: nb-theme(color-fg-icon);
+  $title-fg: nb-theme(color-fg-heading);
+
   display: flex;
   flex: 1;
   padding-top: 1.25rem;
@@ -15,7 +20,7 @@
     }
 
     a {
-      color: #8F9DB3;
+      color: $text-fg;
     }
 
     ul {
@@ -37,14 +42,14 @@
     }
 
     .title {
-      color: rgba(0, 0, 0, 0.74);
+      color: $title-fg;
       font-size: 1.125rem;
       font-weight: bold;
       line-height: 1.375rem;
     }
 
     .copy {
-      color: #8F9DB3;
+      color: $text-fg;
       display: list-item;
       font-size: 0.75rem;
     }
@@ -55,7 +60,7 @@
       a {
         font-size: 3rem;
         text-decoration: none;
-        color: #CDD6E3;
+        color: $social-fg;
         margin-right: 1rem;
       }
     }

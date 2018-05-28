@@ -2,8 +2,11 @@
 
 @include nb-install-component() {
 
+  $content-width: nb-theme(content-width);
+  $settings-width: nb-theme(settings-col-width);
+
   .content-center {
-    max-width: nb-theme(content-width);
+    max-width: $content-width;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -27,7 +30,7 @@
   }
 
   /deep/ nb-layout .layout-container {
-    max-width: nb-theme(content-width);
+    max-width: $content-width;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -45,7 +48,7 @@
   }
 
   /deep/ nb-layout-footer {
-    margin-right: nb-theme(settings-col-width);
+    margin-right: $settings-width;
     ngd-footer .contact {
       display: none;
     }

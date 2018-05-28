@@ -2,9 +2,14 @@
 
 @include nb-install-component() {
 
+  $shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
+  $shadow-hover: 0 16px 40px 0 rgba(230, 234, 240, 0.97);
+  $text-fg: nb-theme(color-fg-text);
+  $title-fg: nb-theme(color-fg-heading);
+
   border-radius: 7px;
-  background-color: #FFFFFF;
-  box-shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
+  background-color: #ffffff;
+  box-shadow: $shadow;
   display: flex;
   padding: 3rem 1rem 3.625rem;
   flex-grow: 1;
@@ -15,11 +20,11 @@
   max-width: 30rem;
 
   &:hover {
-    box-shadow: 0 16px 40px 0 rgba(230, 234, 240, 0.97);
+    box-shadow: $shadow-hover;
   }
 
   h2 {
-    color: #546D8D;
+    color: #546d8d;
     font-size: 1.5rem;
     font-weight: bold;
     line-height: 1.8125rem;
@@ -27,7 +32,7 @@
   }
 
   p {
-    color: #919FB1;
+    color: $text-fg;
     font-size: 0.95rem;
     line-height: 1.5rem;
     text-align: center;

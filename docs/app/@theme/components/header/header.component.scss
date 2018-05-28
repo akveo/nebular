@@ -1,6 +1,13 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
+
+  $logo-width: nb-theme(sidebar-width);
+  $logo-fg: nb-theme(header-fg);
+  $version-fg: nb-theme(color-fg-heading-light);
+  $menu-item-fg: nb-theme(color-fg-heading-light);
+  $menu-item-fg-active: nb-theme(color-fg-highlight);
+
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -18,6 +25,14 @@
         &:first-child a {
           padding-left: 0;
         }
+
+        a {
+          color: $menu-item-fg;
+
+          &:hover, &.active {
+            color: $menu-item-fg-active;
+          }
+        }
       }
     }
   }
@@ -25,12 +40,12 @@
   .logo {
     display: flex;
     flex: 1;
-    max-width: nb-theme(sidebar-width);
+    max-width: $logo-width;
     flex-direction: column;
 
     a {
       font-size: 1.275rem;
-      color: nb-theme(header-fg);
+      color: $logo-fg;
       text-decoration: none !important;
       font-weight: bold;
     }
@@ -38,7 +53,7 @@
     .version {
       font-size: 0.75rem;
       font-weight: bold;
-      color: nb-theme(color-fg-heading);
+      color: $version-fg;
     }
   }
 

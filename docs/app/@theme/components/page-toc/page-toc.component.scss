@@ -1,6 +1,12 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
+
+  $title-fg: nb-theme(color-fg-heading-light);
+  $item-fg: rgba(102, 110, 128, 0.87);
+  $item-fg-active: #202020;
+  $accent-line-bg: nb-theme(color-fg-highlight);
+
   padding-left: 1rem;
   display: block;
 
@@ -8,7 +14,7 @@
     font-size: 1.25rem;
     font-weight: normal;
     margin-bottom: 2.5rem;
-    color: rgba(137, 148, 163, 0.57);
+    color: $title-fg;
   }
 
   ul {
@@ -20,12 +26,12 @@
       margin-bottom: 0.9375rem;
     }
     a {
-      color: rgba(102, 110, 128, 0.87);
+      color: $item-fg;
     }
 
     li.selected a {
       font-weight: 500;
-      color: #202020;
+      color: $item-fg-active;
       position: relative;
 
       &::after {
@@ -36,7 +42,7 @@
         transform: translateY(-50%);
         height: 0.1875rem;
         width: 2rem;
-        background: #457AE6;
+        background: $accent-line-bg;
         border-radius: 1.5px;
       }
     }

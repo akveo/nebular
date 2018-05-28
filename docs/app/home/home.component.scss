@@ -2,8 +2,11 @@
 
 @include nb-install-component() {
 
+  $convex-bg: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+  $content-width: nb-theme(content-width);
+
   .content-center {
-    max-width: nb-theme(content-width);
+    max-width: $content-width;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -53,7 +56,7 @@
       bottom: 0;
       right: -30%;
       left: -30%;
-      background: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+      background: $convex-bg;
       z-index: -1;
       border-radius: 50%;
     }
