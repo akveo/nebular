@@ -14,8 +14,8 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
   selector: 'nb-progress-bar',
   template: `
     <div class="progress-container {{size ? '' + size : ''}}">
-      <div class="progress-value {{type ? '' + type : ''}}" [style.width.%]="getWidth()">
-        <span *ngIf="displayValue">{{getDisplayValue()}}%</span>
+      <div class="progress-value {{type ? '' + type : ''}}" [style.width.%]="value">
+        <span *ngIf="displayValue">{{value}}%</span>
         <ng-content></ng-content>
       </div>
     </div>
@@ -33,13 +33,5 @@ export class NbProgressBarComponent {
   @Input() type: string;
   @Input() size: string;
   @Input() displayValue: boolean = false;
-
-  getWidth() {
-    return this.value;
-  }
-
-  getDisplayValue() {
-    return this.value;
-  }
 
 }

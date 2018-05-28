@@ -11,15 +11,27 @@
     border-radius: nb-theme(progress-bar-radius);
     background-color: nb-theme(progress-bar-bg-color);
     &.xlg {
+      .progress-value {
+        font-size: nb-theme(progress-bar-font-size-xlg);
+      }
       height: nb-theme(progress-bar-height-xlg);
     }
     &.lg {
+      .progress-value {
+        font-size: nb-theme(progress-bar-font-size-lg);
+      }
       height: nb-theme(progress-bar-height-lg);
     }
     &.sm {
+      .progress-value {
+        font-size: nb-theme(progress-bar-font-size-sm);
+      }
       height: nb-theme(progress-bar-height-sm);
     }
     &.xs {
+      .progress-value {
+        font-size: nb-theme(progress-bar-font-size-xs);
+      }
       height: nb-theme(progress-bar-height-xs);
     }
   }
