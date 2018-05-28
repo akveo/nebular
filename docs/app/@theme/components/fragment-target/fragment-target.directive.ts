@@ -44,7 +44,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElem
     this.activatedRoute.fragment
       .pipe(publish(null), refCount(), takeWhile(() => this.alive), delay(10))
       .subscribe((fragment: string) => {
-        if (fragment && this.fragment === fragment) {
+        if (fragment && this.fragment === fragment && !this.inView) {
           this.selectFragment();
         } else {
           this.deselectFragment();
