@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, Input, forwardRef} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, Input} from '@angular/core';
 
 /**
  * <nb-progress-bar> is a component for indicating progress.
@@ -56,11 +55,6 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
     </div>
   `,
   styleUrls: ['./progress-bar.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbProgressBarComponent),
-    multi: true,
-  }],
 })
 export class NbProgressBarComponent {
 
