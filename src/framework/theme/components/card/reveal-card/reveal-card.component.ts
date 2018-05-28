@@ -26,7 +26,7 @@ import { Component, Input, HostBinding } from '@angular/core';
     <div class="second-card-container">
       <ng-content select="nb-card-back"></ng-content>
     </div>
-    <a class="reveal-button" (click)="toggleReveal()">
+    <a *ngIf="showToggleButton" class="reveal-button" (click)="toggle()">
       <i class="nb-arrow-dropdown" aria-hidden="true"></i>
     </a>
   `,
@@ -40,7 +40,13 @@ export class NbRevealCardComponent {
   @HostBinding('class.revealed')
   revealed: boolean = false;
 
-  toggleReveal() {
+  /**
+   * Show/hide toggle button to be able to control toggle from your code
+   * @type {boolean}
+   */
+  @Input() showToggleButton = true;
+
+  toggle() {
     this.revealed = !this.revealed;
   }
 }

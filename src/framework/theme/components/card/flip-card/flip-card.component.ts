@@ -25,13 +25,13 @@ import { Component, Input, HostBinding } from '@angular/core';
     <div class="flipcard-body">
       <div class="front-container">
         <ng-content select="nb-card-front"></ng-content>
-        <a class="flip-button" (click)="toggleFlip()">
+        <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
           <i class="nb-arrow-dropleft" aria-hidden="true"></i>
         </a>
       </div>
       <div class="back-container">
         <ng-content select="nb-card-back"></ng-content>
-        <a class="flip-button" (click)="toggleFlip()">
+        <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
           <i class="nb-arrow-dropleft" aria-hidden="true"></i>
         </a>
       </div>
@@ -47,7 +47,13 @@ export class NbFlipCardComponent {
   @HostBinding('class.flipped')
   flipped: boolean = false;
 
-  toggleFlip() {
+  /**
+   * Show/hide toggle button to be able to control toggle from your code
+   * @type {boolean}
+   */
+  @Input() showToggleButton = true;
+
+  toggle() {
     this.flipped = !this.flipped;
   }
 }
