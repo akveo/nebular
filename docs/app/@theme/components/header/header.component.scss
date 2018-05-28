@@ -6,7 +6,7 @@
   $logo-fg: nb-theme(header-fg);
   $version-fg: nb-theme(color-fg-heading-light);
   $menu-item-fg: nb-theme(color-fg-heading-light);
-  $menu-item-fg-active: nb-theme(color-fg-highlight);
+  $menu-item-fg-active: nb-theme(header-menu-fg-active);
 
   display: flex;
   flex: 1;
