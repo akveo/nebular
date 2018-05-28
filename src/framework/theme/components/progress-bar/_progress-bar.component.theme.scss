@@ -40,6 +40,7 @@
     color: nb-theme(progress-bar-font-color);
     font-size: nb-theme(progress-bar-font-size);
     font-weight: nb-theme(progress-bar-font-weight);
+    line-height: nb-theme(progress-bar-line-height);
     &.primary {
       background-color: nb-theme(progress-bar-primary-bg-color);
     }
