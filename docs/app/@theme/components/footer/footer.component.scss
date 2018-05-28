@@ -2,7 +2,7 @@
 
 @include nb-install-component() {
 
-  $text-fg: nb-theme(color-fg-text);
+  $text-fg: nb-theme(footer-fg);
   $social-fg: nb-theme(color-fg-icon);
   $title-fg: nb-theme(color-fg-heading);
 
