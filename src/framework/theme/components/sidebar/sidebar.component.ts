@@ -302,7 +302,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       const linkChildren = ['span', 'i'];
 
       // if we clicked on span - get the link
-      if (linkChildren.indexOf(link.tagName.toLowerCase()) !== -1 && link.parentNode) {
+      if (linkChildren.includes(link.tagName.toLowerCase()) && link.parentNode) {
         link = event.target.parentNode;
       }
 
@@ -354,10 +354,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
     const closedStates = [NbSidebarComponent.STATE_COMPACTED, NbSidebarComponent.STATE_COLLAPSED];
     if (compact) {
-      this.state = closedStates.indexOf(this.stateValue) >= 0 ?
+      this.state = closedStates.includes(this.stateValue) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COMPACTED;
     } else {
-      this.state = closedStates.indexOf(this.stateValue) >= 0 ?
+      this.state = closedStates.includes(this.stateValue) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COLLAPSED;
     }
   }
@@ -366,17 +366,17 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this.themeService.onMediaQueryChange()
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
-        if (this.compactedBreakpoints.indexOf(current.name) !== -1) {
+        if (this.compactedBreakpoints.includes(current.name)) {
           this.fixed = true;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
-        if (this.collapsedBreakpoints.indexOf(current.name) !== -1) {
+        if (this.collapsedBreakpoints.includes(current.name)) {
           this.fixed = true;
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (this.compactedBreakpoints.indexOf(current.name) === -1 && prev.width < current.width) {
+        if (!this.compactedBreakpoints.includes(current.name) && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
