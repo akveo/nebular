@@ -248,8 +248,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
   constructor(private sidebarService: NbSidebarService,
-              private themeService: NbThemeService,
-              private element: ElementRef) {
+    private themeService: NbThemeService,
+    private element: ElementRef) {
   }
 
   toggleResponsive(enabled: boolean) {
@@ -372,10 +372,11 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
         if (this.collapsedBreakpoints.indexOf(current.name) !== -1) {
+          this.fixed = true;
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (this.compactedBreakpoints.indexOf(current.name) === -1  && prev.width < current.width) {
+        if (this.compactedBreakpoints.indexOf(current.name) === -1 && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
