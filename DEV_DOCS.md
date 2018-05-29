@@ -211,7 +211,7 @@ For example, if you wanna add getting started article you have to do the followi
 
 ### Component block
 
-If you have to render all the information about componend parsed with typedoc
+If you have to render all the information about component parsed with typedoc
 you have to use component blocks:
 
 ```
@@ -329,6 +329,44 @@ To start a new release (publish the framework packages on NPM) you need:
 7. create github release
 8. build demo with npm run build:prod
 9. upload demo using `scp -r dist/ server_details`
+
+
+# create a new component guide
+- create directory in `src/framework/theme/components/your-component` with following files:
+````
+your-component.component.ts (component file)
+your-component.module.ts (module file)
+your-component.component.html (optional, html file)
+your-component.component.scss (optional, common styles for your component)
+_your-component.component.theme.scss (optional, styles that depends on theme vars)
+
+````
+
+- register your component in framework
+````
+src/framework/theme/index.ts (add exports of your component and module)
+src/framework/theme/styles/global/_components.scss (if you create _your-component.component.theme.scss you have to register mixin) 
+
+````
+
+- tests
+````
+src/framework/theme/components/your-component/your-component.spec.ts if you want basic rendering
+e2e/your-component.e2e-spec.ts if you need to test complex actions such as user interaction
+````
+
+- register your component in docs
+````
+src/playground/your-component/your-component-showcase.component.ts (create example usage of your component)
+src/playground/your-component/your-component-showcase.component.html (most probably looks like <nb-your-component></nb-your-component>)
+
+src/playground/playground.module.ts (register your component in module)
+src/playground/playground-routing.module.ts (routing)
+
+your-component.component.ts  (add line in docs section-  * @example(Your component, your-component/your-component-showcase.component)
+````
+- after `npm run docs:serve` you can see your component at `http://localhost:4100/#/docs/components/your-component` 
+
 
 # TODO
  - steps to start the development

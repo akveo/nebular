@@ -6,7 +6,6 @@ describe('Component: NbProgressBar', () => {
 
   let progressBar: NbProgressBarComponent;
   let fixture: ComponentFixture<NbProgressBarComponent>;
-  let testContainerEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -15,7 +14,6 @@ describe('Component: NbProgressBar', () => {
 
     fixture = TestBed.createComponent(NbProgressBarComponent);
     progressBar = fixture.componentInstance;
-    testContainerEl = fixture.elementRef.nativeElement;
   });
 
   it('Setting value 50 should set width to 50%', () => {

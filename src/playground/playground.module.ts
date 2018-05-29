@@ -81,6 +81,7 @@ import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-show
 import { NbProgressBarTypeComponent } from './progress-bar/progress-bar-type.component';
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
 import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
+import { NbProgressBarAnimatedComponent } from './progress-bar/progress-bar-animated.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -112,6 +113,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbProgressBarTypeComponent,
   NbProgressBarValueComponent,
   NbProgressBarSizeComponent,
+  NbProgressBarAnimatedComponent,
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,

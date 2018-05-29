@@ -41,6 +41,8 @@
     font-size: nb-theme(progress-bar-font-size);
     font-weight: nb-theme(progress-bar-font-weight);
     line-height: nb-theme(progress-bar-line-height);
+    transition-duration: nb-theme(progress-bar-animation-duration);
+    transition-property: width, background-color;
     &.primary {
       background-color: nb-theme(progress-bar-primary-bg-color);
     }

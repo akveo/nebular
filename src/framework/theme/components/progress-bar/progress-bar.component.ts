@@ -23,6 +23,8 @@ import {Component, Input} from '@angular/core';
  *
  * @stacked-example(Progress bar values, progress-bar/progress-bar-value.component)
  *
+ * @stacked-example(Progress bar interactive, progress-bar/progress-bar-animated.component)
+ *
  * @styles
  *
  * progress-bar-height-xlg:

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'nb-progress-bar-type',
   templateUrl: './progress-bar-type.component.html',
   styles: [`
-    nb-progress-bar {
+    nb-progress-bar ~ nb-progress-bar {
       margin-top: 1rem;
     }
   `],
