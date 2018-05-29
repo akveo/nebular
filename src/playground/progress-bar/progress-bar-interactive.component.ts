@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'nb-progress-bar-animated',
-  templateUrl: './progress-bar-animated.component.html',
+  selector: 'nb-progress-bar-interactive',
+  templateUrl: './progress-bar-interactive.component.html',
   styles: [`
     .container {
       display: flex;
@@ -15,7 +15,7 @@ import {Component} from '@angular/core';
   `],
 })
 
-export class NbProgressBarAnimatedComponent {
+export class NbProgressBarInteractiveComponent {
 
   value = 25;
 
@@ -23,7 +23,7 @@ export class NbProgressBarAnimatedComponent {
     this.value = Math.min(Math.max(newValue, 0), 100)
   }
 
-  get type(){
+  get status(){
     if (this.value <= 25) {
       return 'danger';
     } else if (this.value <= 50) {

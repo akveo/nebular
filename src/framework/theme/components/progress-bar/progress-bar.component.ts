@@ -17,13 +17,13 @@ import {Component, Input} from '@angular/core';
  *
  * @stacked-example(Progress bar, progress-bar/progress-bar-showcase.component)
  *
- * @stacked-example(Progress bar types, progress-bar/progress-bar-type.component)
+ * @stacked-example(Progress bar status, progress-bar/progress-bar-status.component)
  *
- * @stacked-example(Progress bar sizes, progress-bar/progress-bar-size.component)
+ * @stacked-example(Progress bar size, progress-bar/progress-bar-size.component)
  *
- * @stacked-example(Progress bar values, progress-bar/progress-bar-value.component)
+ * @stacked-example(Progress bar value, progress-bar/progress-bar-value.component)
  *
- * @stacked-example(Progress bar interactive, progress-bar/progress-bar-animated.component)
+ * @stacked-example(Progress bar interactive, progress-bar/progress-bar-interactive.component)
  *
  * @styles
  *
@@ -52,7 +52,7 @@ import {Component, Input} from '@angular/core';
   selector: 'nb-progress-bar',
   template: `
     <div class="progress-container {{size ? '' + size : ''}}">
-      <div class="progress-value {{type ? '' + type : ''}}" [style.width.%]="value">
+      <div class="progress-value {{status ? '' + status : ''}}" [style.width.%]="value">
         <span *ngIf="displayValue">{{value}}%</span>
         <ng-content></ng-content>
       </div>
@@ -73,7 +73,7 @@ export class NbProgressBarComponent {
    * Progress bar background (primary, info success, warning, danger)
    * @param {string} val
    */
-  @Input() type: string;
+  @Input() status: string;
 
   /**
    * Progress bar size (xs, sm, lg, xlg)

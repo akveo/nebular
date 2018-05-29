@@ -26,8 +26,8 @@ describe('Component: NbProgressBar', () => {
       .toBe('50%');
   });
 
-  it('Setting type danger should set class danger', () => {
-    progressBar.type = 'danger';
+  it('Setting status danger should set class danger', () => {
+    progressBar.status = 'danger';
     fixture.detectChanges();
     expect(
       fixture

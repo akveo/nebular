@@ -59,10 +59,10 @@ import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
-import { NbProgressBarTypeComponent } from './progress-bar/progress-bar-type.component';
+import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
 import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
-import { NbProgressBarAnimatedComponent } from './progress-bar/progress-bar-animated.component';
+import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
 
 export const routes: Routes = [
   {
@@ -119,8 +119,8 @@ export const routes: Routes = [
             component: NbProgressBarShowcaseComponent,
           },
           {
-            path: 'progress-bar-type.component',
-            component: NbProgressBarTypeComponent,
+            path: 'progress-bar-status.component',
+            component: NbProgressBarStatusComponent,
           },
           {
             path: 'progress-bar-size.component',
@@ -131,8 +131,8 @@ export const routes: Routes = [
             component: NbProgressBarValueComponent,
           },
           {
-            path: 'progress-bar-animated.component',
-            component: NbProgressBarAnimatedComponent,
+            path: 'progress-bar-interactive.component',
+            component: NbProgressBarInteractiveComponent,
           },
         ],
       },
