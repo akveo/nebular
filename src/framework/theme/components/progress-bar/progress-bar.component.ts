@@ -15,14 +15,19 @@ import {Component, Input} from '@angular/core';
  * <nb-progress-bar [value]="50"></nb-progress-bar>
  * ```
  *
+ * Progress bar accepts property `value` in range 0-100
  * @stacked-example(Progress bar, progress-bar/progress-bar-showcase.component)
  *
+ * Progress bar background configured by providing a `status` property:
  * @stacked-example(Progress bar status, progress-bar/progress-bar-status.component)
  *
+ * Progress bar size (height and font-size) configured by providing a `size` property:
  * @stacked-example(Progress bar size, progress-bar/progress-bar-size.component)
  *
+ * `displayValue` property shows current value inside progress bar. It's also possible to add custom text inside tag:
  * @stacked-example(Progress bar value, progress-bar/progress-bar-value.component)
  *
+ * Progress bar supports `width` and `background-color` transition:
  * @stacked-example(Progress bar interactive, progress-bar/progress-bar-interactive.component)
  *
  * @styles
