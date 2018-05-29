@@ -225,6 +225,25 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Input() tag: string;
 
+  // TODO: get width by the key and define only max width for the tablets and mobiles
+  /**
+   * Controls on which screen sizes sidebar should be switched to compacted state.
+   * Works only when responsive mode is on.
+   * Default values are `['xs', 'is', 'sm', 'md', 'lg']`.
+   *
+   * @type string[]
+   */
+  @Input() compactedBreakpoints: string[] = ['xs', 'is', 'sm', 'md', 'lg'];
+
+  /**
+   * Controls on which screen sizes sidebar should be switched to collapsed state.
+   * Works only when responsive mode is on.
+   * Default values are `['xs', 'is']`.
+   *
+   * @type string[]
+   */
+  @Input() collapsedBreakpoints: string[] = ['xs', 'is'];
+
   private mediaQuerySubscription: Subscription;
   private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
@@ -347,20 +366,16 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this.themeService.onMediaQueryChange()
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
-        // TODO: get width by the key and define only max width for the tablets and mobiles
-        const tablet = ['xs', 'is', 'sm', 'md', 'lg'];
-        const mobile = ['xs', 'is'];
-
-        if (tablet.indexOf(current.name) !== -1) {
+        if (this.compactedBreakpoints.indexOf(current.name) !== -1) {
           this.fixed = true;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
-        if (mobile.indexOf(current.name) !== -1) {
+        if (this.collapsedBreakpoints.indexOf(current.name) !== -1) {
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (tablet.indexOf(current.name) === -1  && prev.width < current.width) {
+        if (this.compactedBreakpoints.indexOf(current.name) === -1  && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
