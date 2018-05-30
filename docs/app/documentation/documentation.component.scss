@@ -8,6 +8,10 @@
 
   .toc-sidebar {
     background-color: $layout-bg;
+
+    &.fixed {
+      box-shadow: 8px 0 20px 0 rgba(218, 224, 235, 0.6);
+    }
   }
 
   .content-center {
@@ -52,10 +56,10 @@
     }
   }
 
-  /deep/ nb-layout-footer {
-    margin-right: $settings-width;
-    ngd-footer .contact {
-      display: none;
+    /deep/ nb-layout-footer {
+      margin-right: $settings-width;
+      ngd-footer .contact {
+        display: none;
+      }
     }
   }
-}
