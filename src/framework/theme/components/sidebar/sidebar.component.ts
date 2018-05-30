@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -106,7 +106,7 @@ export class NbSidebarFooterComponent {
     </div>
   `,
 })
-export class NbSidebarComponent implements OnInit, OnDestroy {
+export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 
   static readonly STATE_EXPANDED: string = 'expanded';
   static readonly STATE_COLLAPSED: string = 'collapsed';
@@ -214,7 +214,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   @Input()
   set responsive(val: boolean) {
     this.responsiveValue = convertToBoolProperty(val);
-    this.toggleResponsive(this.responsiveValue);
   }
 
   /**
@@ -257,6 +256,12 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       this.mediaQuerySubscription = this.onMediaQueryChanges();
     } else if (this.mediaQuerySubscription) {
       this.mediaQuerySubscription.unsubscribe();
+    }
+  }
+
+  ngOnChanges(changes) {
+    if (changes.responsive) {
+      this.toggleResponsive(this.responsiveValue);
     }
   }
 
