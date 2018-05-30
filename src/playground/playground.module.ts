@@ -21,6 +21,7 @@ import {
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbChipsModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -76,6 +77,10 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbChipsShowcaseComponent } from './chips/chips-showcase.component';
+import { NbChipsTabbableComponent } from './chips/chips-tabbable.component';
+import { NbChipsRemovableComponent } from './chips/chips-removable.component';
+import { NbChipsColorsComponent } from './chips/chips-colors.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -91,6 +96,7 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbChipsModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -142,6 +148,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbBadgeShowcaseComponent,
   NbContextMenuShowcaseComponent,
   NbContextMenuClickComponent,
+  NbChipsShowcaseComponent,
+  NbChipsTabbableComponent,
+  NbChipsRemovableComponent,
+  NbChipsColorsComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

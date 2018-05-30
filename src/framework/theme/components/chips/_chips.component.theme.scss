@@ -1,0 +1,58 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-chips-theme() {
+  nb-chip {
+    color: nb-theme(chip-fg);
+    background-color: nb-theme(chip-bg);
+    font-weight: nb-theme(chip-font-weight);
+
+    &.removable-chip .remove-icon {
+      background-color: nb-theme(chip-icon-bg);
+      color: nb-theme(chip-icon-fg);
+      opacity: 0.5;
+    }
+
+    &.removable-chip .remove-icon:hover {
+      opacity: 0.8;
+    }
+  }
+
+  nb-chip.active-chip {
+    @include chip-status(chip-active-bg, chip-active-fg);
+  }
+
+  nb-chip.disabled-chip {
+    border: 0.125rem solid nb-theme(chip-disabled-border);
+
+    @include chip-status(chip-disable-bg, chip-disable-fg);
+  }
+
+  nb-chip.primary-chip {
+    @include chip-status(chip-primary-bg, chip-primary-fg);
+  }
+
+  nb-chip.info-chip {
+    @include chip-status(chip-info-bg, chip-info-fg);
+  }
+
+  nb-chip.success-chip {
+    @include chip-status(chip-success-bg, chip-success-fg);
+  }
+
+  nb-chip.warning-chip {
+    @include chip-status(chip-warning-bg, chip-warning-fg);
+  }
+
+  nb-chip.danger-chip {
+    @include chip-status(chip-danger-bg, chip-danger-fg);
+  }
+}
+
+@mixin chip-status($color-bg, $color-fg) {
+  background-color: nb-theme($color-bg);
+  color: nb-theme($color-fg);
+}
