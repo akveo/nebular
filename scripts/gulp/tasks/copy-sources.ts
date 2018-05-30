@@ -11,6 +11,15 @@ task('copy-sources', () => {
     .on('end', replaceScssWithCss);
 });
 
+task('copy-schematics', () => {
+  src([
+    './schematics/**/*.json',
+    './schematics/**/files/**/*',
+    '!./schematics/dist/**/*',
+  ])
+    .pipe(dest('./schematics/dist/'));
+});
+
 function replaceScssWithCss() {
   src(`${BUILD_DIR}/**/*.ts`)
     .pipe(replace('.scss', '.css'))
