@@ -366,19 +366,20 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this.themeService.onMediaQueryChange()
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
-        if (this.compactedBreakpoints.includes(current.name)) {
+        const isCollapsed = this.collapsedBreakpoints.includes(current.name);
+        const isCompacted = this.compactedBreakpoints.includes(current.name);
+
+        if (isCompacted) {
           this.fixed = true;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
-        if (this.collapsedBreakpoints.includes(current.name)) {
+        if (isCollapsed) {
           this.fixed = true;
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (!this.compactedBreakpoints.includes(current.name)
-            && !this.collapsedBreakpoints.includes(current.name)
-            && prev.width < current.width) {
+        if (!isCollapsed && !isCollapsed && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
