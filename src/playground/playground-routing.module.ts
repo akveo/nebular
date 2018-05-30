@@ -58,6 +58,10 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbChipsShowcaseComponent } from './chips/chips-showcase.component';
+import { NbChipsTabbableComponent } from './chips/chips-tabbable.component';
+import { NbChipsRemovableComponent } from './chips/chips-removable.component';
+import { NbChipsColorsComponent } from './chips/chips-colors.component';
 
 export const routes: Routes = [
   {
@@ -255,6 +259,27 @@ export const routes: Routes = [
           {
             path: 'badge-showcase.component',
             component: NbBadgeShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'chips',
+        children: [
+          {
+            path: 'chips-showcase.component',
+            component: NbChipsShowcaseComponent,
+          },
+          {
+            path: 'chips-tabbable.component',
+            component: NbChipsTabbableComponent,
+          },
+          {
+            path: 'chips-removable.component',
+            component: NbChipsRemovableComponent,
+          },
+          {
+            path: 'chips-colors.component',
+            component: NbChipsColorsComponent,
           },
         ],
       },

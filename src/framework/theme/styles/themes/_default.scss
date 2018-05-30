@@ -421,6 +421,35 @@ $theme: (
   badge-info-bg-color: color-info,
   badge-warning-bg-color: color-warning,
   badge-danger-bg-color: color-danger,
+
+  chip-bg: #f2f2f2,
+  chip-fg: color-fg-text,
+  chip-font-weight: font-weight-bolder,
+
+  chip-active-bg: color-fg,
+  chip-active-fg: color-bg,
+
+  chip-disabled-bg: color-disabled,
+  chip-disabled-fg: color-fg,
+  chip-disabled-border: color-fg,
+
+  chip-primary-bg: color-primary,
+  chip-primary-fg: color-bg,
+
+  chip-info-bg: color-info,
+  chip-info-fg: color-bg,
+
+  chip-success-bg: color-success,
+  chip-success-fg: color-bg,
+
+  chip-warning-bg: color-warning,
+  chip-warning-fg: color-bg,
+
+  chip-danger-bg: color-danger,
+  chip-danger-fg: color-bg,
+
+  chip-icon-bg: #e2e2e2,
+  chip-icon-fg: color-fg-heading
 );
 
 // register the theme

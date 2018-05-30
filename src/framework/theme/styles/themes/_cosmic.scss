@@ -139,6 +139,20 @@ $theme: (
   badge-info-bg-color: color-info,
   badge-warning-bg-color: color-warning,
   badge-danger-bg-color: color-danger,
+
+  chip-fg: color-bg,
+
+  chip-active-bg: color-fg,
+  chip-active-fg: color-fg-heading,
+
+  chip-disabled-fg: color-fg-heading,
+  chip-primary-fg: color-fg-heading,
+  chip-info-fg: color-fg-heading,
+  chip-success-fg: color-fg-heading,
+  chip-warning-fg: color-fg-heading,
+  chip-danger-fg: color-fg-heading,
+
+  chip-icon-bg: color-bg
 );
 
 // register the theme
