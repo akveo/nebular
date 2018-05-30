@@ -4,6 +4,8 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '../../../../src/framework/theme/styles/global/bootstrap/breakpoints';
 
+$grid-breakpoints: map-merge($grid-breakpoints, (vertical-settings-column: 1280px));
+
 $nb-enabled-themes: (docs-home, docs-page);
 
 $nb-themes: nb-register-theme((

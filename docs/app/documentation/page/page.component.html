@@ -1,5 +1,7 @@
 <div class="middle-column">
 
+  <ngd-page-tabs class="horizontal-nav" [tabs]="currentItem?.tabs" horizontal></ngd-page-tabs>
+
   <ng-container *ngFor="let block of currentItem?.children">
     <ng-container [ngSwitch]="block.block">
       <ngd-md-block *ngSwitchCase="'markdown'" [source]="block.children"></ngd-md-block>
@@ -18,4 +20,3 @@
     <ngd-page-toc [toc]="currentItem?.toc"></ngd-page-toc>
   </div>
 </div>
-

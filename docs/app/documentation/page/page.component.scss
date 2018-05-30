@@ -166,17 +166,37 @@
     }
   }
 
+  .horizontal-nav {
+    margin: 1rem 0 2rem;
+  }
   .settings-column {
-    padding: 0 1.875rem;
-    width: $settings-width;
+    display: none;
+  }
 
-    ngd-page-tabs {
-      margin-bottom: 1.5rem;
+  @include media-breakpoint-up(lg) {
+    .horizontal-nav {
+      margin-top: 0;
     }
   }
 
-  .fixed-panel {
-    position: fixed;
-    width: inherit;
+  @include media-breakpoint-up(vertical-settings-column) {
+    .horizontal-nav {
+      display: none;
+    }
+
+    .settings-column {
+      display: block;
+      margin-left: 1.875rem;
+      width: $settings-width;
+
+      ngd-page-tabs {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .fixed-panel {
+      position: fixed;
+      width: inherit;
+    }
   }
 }
