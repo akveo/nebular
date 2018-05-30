@@ -1,10 +1,10 @@
 <nb-layout>
   <nb-layout-header fixed>
     <div class="content-center">
-      <ngd-header></ngd-header>
+      <ngd-header sidebarTag="toc-sidebar"></ngd-header>
     </div>
   </nb-layout-header>
-  <nb-sidebar>
+  <nb-sidebar class="toc-sidebar" tag="toc-sidebar" [responsive]="true" [compactedBreakpoints]="[]" [collapsedBreakpoints]="['xs', 'is', 'sm', 'md', 'lg']">
     <nb-menu [items]="menuItems" tag="leftMenu"></nb-menu>
   </nb-sidebar>
   <nb-layout-column>

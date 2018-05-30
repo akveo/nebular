@@ -4,6 +4,11 @@
 
   $content-width: nb-theme(content-width);
   $settings-width: nb-theme(settings-col-width);
+  $layout-bg: nb-theme(layout-bg);
+
+  .toc-sidebar {
+    background-color: $layout-bg;
+  }
 
   .content-center {
     max-width: $content-width;

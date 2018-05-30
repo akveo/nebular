@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NbMenuItem, NbSidebarService } from '@nebular/theme';
 import { NgdVersionService } from '../../services';
 
 @Component({
   selector: 'ngd-header',
   styleUrls: ['./header.component.scss'],
   template: `
+    <button *ngIf="sidebarTag" class="sidebar-toggle" (click)="toggleSidebar()">
+      <i class="nb-menu"></i>
+    </button>
     <div class="logo">
       <a routerLink="/">Nebular</a>
       <span class="version">v{{ currentVersion }}</span>
@@ -22,7 +25,10 @@ import { NgdVersionService } from '../../services';
 export class NgdHeaderComponent {
   currentVersion: string;
 
-  constructor(versionService: NgdVersionService) {
+  constructor(
+    versionService: NgdVersionService,
+    private sidebarService: NbSidebarService,
+  ) {
     this.currentVersion = versionService.getNebularVersion();
   }
 
@@ -48,4 +54,10 @@ export class NgdHeaderComponent {
       link: '/docs/security',
     },
   ];
+
+  @Input() sidebarTag: string;
+
+  toggleSidebar() {
+    this.sidebarService.toggle(false, this.sidebarTag);
+  }
 }
