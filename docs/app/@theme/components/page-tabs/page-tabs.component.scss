@@ -23,7 +23,7 @@
     color: $tabs-fg;
     margin-bottom: 1rem;
 
-    strong {
+    .title {
       padding-bottom: 0.75rem;
       font-weight: 500;
     }
@@ -43,6 +43,62 @@
         width: 60%;
         background: $tabs-accent-line;
         border-radius: 1.5px;
+      }
+    }
+  }
+
+  .icon,
+  .title {
+    display: block;
+    text-align: center;
+  }
+}
+
+:host(.horizontal) {
+  a {
+    padding: 0 1rem;
+    flex: 1 1 50%;
+    height: auto;
+    margin-bottom: 0;
+    position: relative;
+
+    .title,
+    .icon {
+      display: inline;
+      padding-bottom: 0;
+      vertical-align: middle;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .text-container {
+    padding-bottom: 1.3rem;
+  }
+
+  .line {
+    order: -1;
+    margin-bottom: 1.3rem;
+  }
+
+  @media screen and (min-width: 40em) {
+    flex: 1 1 0;
+
+    a {
+      background-color: #f6f6f7;
+      box-shadow: 0 8px 20px -8px rgba(218, 224, 235, 0.6);
+      margin-bottom: 1rem;
+      flex: 1 1 0;
+
+      &.selected::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
+        border-top: 1rem solid #fff;
       }
     }
   }
