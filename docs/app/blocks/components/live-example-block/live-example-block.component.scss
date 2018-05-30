@@ -18,12 +18,14 @@
 
   .header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.875rem;
   }
 
   .title {
+    margin-right: 1rem;
     font-weight: bold;
     text-transform: capitalize;
   }
@@ -117,6 +119,24 @@
     }
     to {
       -webkit-transform: rotate(359deg);
+    }
+  }
+
+  @media screen and (max-width: 23em) {
+    .action-selector {
+      .action-item {
+        padding: 0;
+        color: transparent;
+      }
+
+      .icon {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .actions {
+      width: 100%;
     }
   }
 }
