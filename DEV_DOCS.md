@@ -23,6 +23,11 @@
 - supports bidirectionality
 - requires approval from several core team contributors
 
+# New Nebular Components
+We created a couple of schematics to bootstrap our development:
+- `ng g .:component --name=DialogModal`  - will generate `NbDialogModuleComponent` with corresponding files in `src/framework/theme/components`
+- `ng g .:playground-example --component=DialogModal --name=Showcase`  - will generate `NbDialogModuleShowcaseComponent` with corresponding files in `src/playground`
+
 # Objectives
 The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 

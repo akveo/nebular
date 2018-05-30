@@ -1,0 +1,7 @@
+<% if (componentSelector) { %><nb-card>
+<nb-card-body>
+  <<%= componentSelector %>></<%= componentSelector %>>
+</nb-card-body>
+</nb-card><% } else { %>
+<strong>Hello <%= classify(className) %>Component Example</strong>
+<% } %>
