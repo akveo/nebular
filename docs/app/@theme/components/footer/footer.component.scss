@@ -8,6 +8,7 @@
 
   display: flex;
   flex: 1;
+  flex-wrap: wrap;
   padding-top: 1.25rem;
   justify-content: space-around;
 
@@ -25,6 +26,7 @@
 
     ul {
       list-style: none;
+      padding-left: 0;
     }
 
     li {
@@ -74,7 +76,6 @@
 
   @include media-breakpoint-down(sm) {
     > div {
-      width: 100%;
       justify-content: center;
       margin-right: 0;
 
