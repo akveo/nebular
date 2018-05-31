@@ -6,19 +6,26 @@ import { NgdVersionService } from '../../services';
   selector: 'ngd-header',
   styleUrls: ['./header.component.scss'],
   template: `
-    <button *ngIf="sidebarTag" class="sidebar-toggle" (click)="toggleSidebar()">
-      <i class="nb-menu"></i>
-    </button>
-    <div class="logo">
-      <a routerLink="/">Nebular</a>
-      <span class="version">v{{ currentVersion }}</span>
+    <div class="section left">
+      <button *ngIf="sidebarTag" class="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="nb-menu"></i>
+      </button>
+      <div class="logo">
+        <a routerLink="/">Nebular</a>
+        <span class="version">v{{ currentVersion }}</span>
+      </div>
     </div>
-    <nb-menu [items]="mainMenu"></nb-menu>
-    <iframe class="stars"
-            src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
-            frameborder="0"
-            scrolling="0">
-    </iframe>
+    <div class="section middle">
+      <nb-menu [items]="mainMenu"></nb-menu>
+      <ngd-search></ngd-search>
+    </div>
+    <div class="section right">
+      <iframe class="stars"
+              src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
+              frameborder="0"
+              scrolling="0">
+      </iframe>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

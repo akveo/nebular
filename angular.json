@@ -265,11 +265,13 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap-reboot.scss",
+              "node_modules/docsearch.js/dist/cdn/docsearch.min.css",
               "node_modules/highlight.js/styles/dracula.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": [
+              "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
             ]
           },
           "configurations": {

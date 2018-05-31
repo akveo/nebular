@@ -29,6 +29,7 @@ import {
   NgdPageTabsComponent,
   NgdColorSwatchDirective,
   NgdDescriptionDirective,
+  NgdSearchComponent,
 } from './components/';
 
 import {
@@ -66,6 +67,7 @@ import {
     NgdPageTabsComponent,
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
+    NgdSearchComponent,
   ],
   exports: [
     CommonModule,

@@ -2,7 +2,8 @@
 
 @include nb-install-component() {
 
-  $logo-width: nb-theme(sidebar-width);
+  $left-section-width: nb-theme(sidebar-width);
+  $right-section-width: nb-theme(settings-col-width);
   $logo-fg: nb-theme(header-fg);
   $version-fg: nb-theme(color-fg-heading-light);
   $menu-item-fg: nb-theme(color-fg-heading-light);
@@ -12,7 +13,6 @@
   flex: 1;
   flex-direction: row;
   align-items: center;
-  padding: 0.875rem 1.125rem;
 
   .sidebar-toggle {
     border: none;
@@ -25,8 +25,25 @@
     }
   }
 
+  .section {
+    display: flex;
+    padding: 0.875rem 1.125rem;
+
+    &.left {
+      width: $left-section-width;
+    }
+
+    &.middle {
+      flex: 1;
+    }
+
+    &.right {
+      width: $right-section-width;
+    }
+  }
+
   /deep/ nb-menu {
-    flex: 3;
+    flex: 1;
     .menu-items {
       display: flex;
 
@@ -49,7 +66,9 @@
   }
 
   .logo {
-    max-width: $logo-width;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 
     a {
       font-size: 1.275rem;
