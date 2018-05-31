@@ -18,7 +18,7 @@
     border: none;
     background-color: transparent;
     font-size: 2.5rem;
-    margin-top: -0.25rem;
+    line-height: 1rem;
 
     .nb-menu {
       vertical-align: middle;
@@ -49,10 +49,7 @@
   }
 
   .logo {
-    display: flex;
-    flex: 1;
     max-width: $logo-width;
-    flex-direction: column;
 
     a {
       font-size: 1.275rem;
@@ -62,6 +59,7 @@
     }
 
     .version {
+      display: none;
       font-size: 0.75rem;
       font-weight: bold;
       color: $version-fg;
@@ -97,6 +95,30 @@
   @include media-breakpoint-up(xl) {
     .sidebar-toggle {
       display: none;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .logo {
+      align-items: baseline;
+      flex: 1 0 auto;
+
+      .version {
+        display: inline;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .logo {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      .version {
+        margin-left: 0;
+      }
     }
   }
 }
