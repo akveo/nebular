@@ -77,17 +77,6 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Components Overview',
-        children: [
-          {
-            type: 'block',
-            block: 'components-overview',
-            name: 'Components',
-          },
-        ],
-      },
-      {
-        type: 'page',
         name: '3rd-party components',
         children: [
           {
@@ -125,6 +114,16 @@ export const structure = [
     type: 'section',
     name: 'Components',
     children: [
+      {
+        type: 'page',
+        name: 'Components Overview',
+        children: [
+          {
+            type: 'block',
+            block: 'components-overview',
+          },
+        ],
+      },
       {
         type: 'tabs',
         name: 'Layout',
@@ -256,30 +255,30 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
-      {
-        type: 'tabs',
-        name: 'Chips',
-        icon: 'chips.svg',
-        source: [],
-      },
-      {
-        type: 'tabs',
-        name: 'Progress Bar',
-        icon: 'progress-bar.svg',
-        source: [],
-      },
-      {
-        type: 'tabs',
-        name: 'Button',
-        icon: 'button.svg',
-        source: [],
-      },
-      {
-        type: 'tabs',
-        name: 'Modal',
-        icon: 'modal.svg',
-        source: [],
-      },
+      // {
+      //   type: 'tabs',
+      //   name: 'Chips',
+      //   icon: 'chips.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Progress Bar',
+      //   icon: 'progress-bar.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Button',
+      //   icon: 'button.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Modal',
+      //   icon: 'modal.svg',
+      //   source: [],
+      // },
     ],
   },
   {

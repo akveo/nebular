@@ -189,7 +189,7 @@
   }
 
   @include media-breakpoint-up(vertical-settings-column) {
-    .horizontal-nav {
+    .horizontal-nav nb-card-body {
       display: none;
     }
 

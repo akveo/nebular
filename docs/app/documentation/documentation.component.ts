@@ -4,21 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile, filter } from 'rxjs/operators';
-import { NbThemeService, NbMenuItem } from '@nebular/theme';
+import { takeWhile, withLatestFrom, map } from 'rxjs/operators';
+import { NbThemeService, NbMenuItem, NbSidebarService } from '@nebular/theme';
 
 import { NgdMenuService } from './menu.service';
 import { NgdPaginationService } from '../@theme/services';
+
+import { NbMediaBreakpoint } from '@nebular/theme';
 
 @Component({
   selector: 'ngd-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
 })
-export class NgdDocumentationComponent implements OnInit, OnDestroy {
+export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];
+  collapsedBreakpoints = ['xs', 'is', 'sm', 'md', 'lg'];
+  sidebarTag = 'menuSidebar';
 
   private alive = true;
 
@@ -26,21 +30,29 @@ export class NgdDocumentationComponent implements OnInit, OnDestroy {
     private service: NgdMenuService,
     private router: Router,
     private themeService: NbThemeService,
-    private paginationService: NgdPaginationService,
-  ) {}
+    private sidebarService: NbSidebarService,
+    private paginationService: NgdPaginationService) {
 
-  ngOnInit() {
     this.themeService.changeTheme('docs-page');
     this.paginationService.setPaginationItems('/docs');
     this.menuItems = this.service.getPreparedMenu('/docs');
 
     // TODO: can we do any better?
     this.router.events
-      .pipe(filter((event: any) => event.url === '/docs'), takeWhile(() => this.alive))
-      .subscribe((event: any) => {
-        const firstMenuItem = this.menuItems[0].children[0];
-        // angular bug with replaceUrl, temp fix with setTimeout
-        setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true }));
+      .pipe(
+        withLatestFrom(this.themeService.onMediaQueryChange().pipe(map((changes: any[]) => changes[1]))),
+        takeWhile(() => this.alive),
+      )
+      .subscribe(([event, mediaQuery]: [any, NbMediaBreakpoint]) => {
+        if (event.url === '/docs') {
+          const firstMenuItem = this.menuItems[0].children[0];
+          // angular bug with replaceUrl, temp fix with setTimeout
+          setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true }));
+        }
+
+        if (this.collapsedBreakpoints.includes(mediaQuery.name)) {
+          this.sidebarService.collapse(this.sidebarTag);
+        }
       });
   }
 

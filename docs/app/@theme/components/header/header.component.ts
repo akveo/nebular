@@ -17,7 +17,7 @@ import { NgdVersionService } from '../../services';
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
-      <ngd-search></ngd-search>
+      <ngd-search *ngIf="showSearch"></ngd-search>
     </div>
     <div class="section right">
       <iframe class="stars"
@@ -30,6 +30,9 @@ import { NgdVersionService } from '../../services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdHeaderComponent {
+
+  @Input() showSearch = true;
+
   currentVersion: string;
 
   constructor(
@@ -46,19 +49,19 @@ export class NgdHeaderComponent {
     },
     {
       title: 'Components',
-      link: '/docs/components',
+      link: '/docs/components/components-overview',
     },
     {
-      title: 'Theme',
-      link: '/docs/theme',
+      title: 'Theme System',
+      link: '/docs/guides/theme-system',
     },
     {
       title: 'Auth',
-      link: '/docs/auth',
+      link: '/docs/auth/introduction',
     },
     {
       title: 'Security',
-      link: '/docs/security',
+      link: '/docs/security/introduction',
     },
   ];
 

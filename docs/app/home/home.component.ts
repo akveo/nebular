@@ -29,16 +29,17 @@ export class NgdHomeComponent {
       link: 'docs/guides/install-based-on-starter-kit',
     },
     {
-      title: 'Themes',
-      description: 'Default & Cosmic visual themes',
+      title: 'Theme System',
+      description: `Two built-in themes & hundreds of variables to create your own.
+                    Multiple themes with hot reload out of the box.`,
       icon: 'assets/img/themes.svg',
-      link: 'docs/guides/components-overview',
+      link: 'docs/guides/theme-system',
     },
     {
       title: 'Components',
       description: 'Native Angular components with configurable styles',
       icon: 'assets/img/components.svg',
-      link: 'docs/guides/components-overview#nebular-components',
+      link: 'docs/components/components-overview',
     },
     {
       title: 'Auth',

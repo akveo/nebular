@@ -40,6 +40,11 @@ export class NgdPageComponent implements OnDestroy, OnInit {
               private titleService: Title) {
   }
 
+  get showSettings() {
+    return this.currentItem && this.currentItem.children
+      .some((item) => ['markdown', 'component', 'tabbed'].includes(item.block));
+  }
+
   ngOnInit() {
     this.handlePageNavigation();
     this.handleTocScroll();
