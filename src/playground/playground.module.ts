@@ -21,6 +21,8 @@ import {
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbAccordionModule,
+  NbAccordionGroupModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -76,6 +78,8 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionGroupShowcaseComponent } from './accordion-group/accordion-group-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -91,6 +95,8 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbAccordionModule,
+  NbAccordionGroupModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -142,6 +148,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbBadgeShowcaseComponent,
   NbContextMenuShowcaseComponent,
   NbContextMenuClickComponent,
+  NbAccordionShowcaseComponent,
+  NbAccordionGroupShowcaseComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

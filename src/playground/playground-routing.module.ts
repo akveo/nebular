@@ -58,6 +58,8 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionGroupShowcaseComponent } from './accordion-group/accordion-group-showcase.component';
 
 export const routes: Routes = [
   {
@@ -255,6 +257,24 @@ export const routes: Routes = [
           {
             path: 'badge-showcase.component',
             component: NbBadgeShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'accordion',
+        children: [
+          {
+            path: '',
+            component: NbAccordionShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'accordion-group',
+        children: [
+          {
+            path: '',
+            component: NbAccordionGroupShowcaseComponent,
           },
         ],
       },
