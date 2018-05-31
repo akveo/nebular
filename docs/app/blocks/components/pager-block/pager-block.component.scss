@@ -8,22 +8,18 @@
   $arrow-fg: nb-theme(color-fg-highlight);
 
   display: flex;
+  flex-direction: column;
 
   /deep/ nb-card {
     font-weight: 300;
     flex: 1;
-    margin-left: 1rem;
-
-    &:first-child {
-      margin-left: 0;
-    }
 
     &.invisible {
       visibility: hidden;
     }
 
     a {
-      padding: 2rem 3rem 2rem 2rem;
+      padding: 2rem;
       text-decoration: none;
       color: $text-fg;
       height: 100%;
@@ -34,17 +30,47 @@
       justify-content: space-between;
       color: $title-fg;
       font-weight: 500;
-      font-size: 1.5rem;
-      margin-bottom: 0.6rem;
+      font-size: 1.2rem;
 
       i {
         color: $arrow-fg;
         margin-top: 0.3rem;
       }
+      span {
+        word-wrap: normal;
+      }
+    }
+
+    .description {
+      display: none;
     }
 
     &.left-block {
       text-align: right;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /deep/ nb-card {
+      margin-left: 1rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      a {
+        padding: 2rem 3rem 2rem 2rem;
+      }
+      .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.6rem;
+      }
+      .description {
+        display: block;
+      }
     }
   }
 }

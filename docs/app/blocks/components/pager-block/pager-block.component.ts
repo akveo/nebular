@@ -12,9 +12,9 @@ import { NgdPaginationService } from '../../../@theme/services';
           [attr.title]="paginationItem.prev.title">
           <div class="page-title">
             <i class="icon feather-arrow-left"></i>
-            {{ paginationItem.prev.title }}
+            <span>{{ paginationItem.prev.title }}</span>
           </div>
-          <div>Previous page</div>
+          <div class="description">Previous page</div>
         </a>
       </nb-card>
 
@@ -22,10 +22,10 @@ import { NgdPaginationService } from '../../../@theme/services';
         <a *ngIf="paginationItem.next" [routerLink]="paginationItem.next.link"
           [attr.title]="paginationItem.next.title">
           <div class="page-title">
-            {{ paginationItem.next.title }}
+            <span>{{ paginationItem.next.title }}</span>
             <i class="icon feather-arrow-right"></i>
           </div>
-          <div>Next page</div>
+          <div class="description">Next page</div>
         </a>
       </nb-card>
     </ng-container>
