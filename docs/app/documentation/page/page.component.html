@@ -6,6 +6,7 @@
       <ngd-component-block *ngSwitchCase="'component'" [source]="block.source"></ngd-component-block>
       <ngd-tabbed-block *ngSwitchCase="'tabbed'" [source]="block.children" [tabs]="currentItem.tabs"></ngd-tabbed-block>
       <ngd-theme-block *ngSwitchCase="'theme'" [block]="block"></ngd-theme-block>
+      <ngd-components-overview-block *ngSwitchCase="'components-overview'"></ngd-components-overview-block>
     </ng-container>
   </ng-container>
 

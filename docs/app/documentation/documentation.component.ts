@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, filter } from 'rxjs/operators';
 import { NbThemeService, NbMenuItem } from '@nebular/theme';
 
 import { NgdMenuService } from './menu.service';
@@ -17,29 +17,30 @@ import { NgdPaginationService } from '../@theme/services';
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
 })
-export class NgdDocumentationComponent implements OnDestroy {
-
+export class NgdDocumentationComponent implements OnInit, OnDestroy {
   menuItems: NbMenuItem[] = [];
+
   private alive = true;
 
-  constructor(private service: NgdMenuService,
-              private router: Router,
-              private  themeService: NbThemeService,
-              private paginationService: NgdPaginationService) {
+  constructor(
+    private service: NgdMenuService,
+    private router: Router,
+    private themeService: NbThemeService,
+    private paginationService: NgdPaginationService,
+  ) {}
+
+  ngOnInit() {
     this.themeService.changeTheme('docs-page');
     this.paginationService.setPaginationItems('/docs');
-
     this.menuItems = this.service.getPreparedMenu('/docs');
 
     // TODO: can we do any better?
     this.router.events
-      .pipe(takeWhile(() => this.alive))
+      .pipe(filter((event: any) => event.url === '/docs'), takeWhile(() => this.alive))
       .subscribe((event: any) => {
-        if (event.url === '/docs') {
-          const firstMenuItem = this.menuItems[0].children[0];
-          // angular bug with replaceUrl, temp fix with setTimeout
-          setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, {replaceUrl: true}));
-        }
+        const firstMenuItem = this.menuItems[0].children[0];
+        // angular bug with replaceUrl, temp fix with setTimeout
+        setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true }));
       });
   }
 

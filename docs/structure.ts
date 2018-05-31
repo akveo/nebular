@@ -77,12 +77,12 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Components overview',
+        name: 'Components Overview',
         children: [
           {
             type: 'block',
-            block: 'markdown',
-            source: 'concept-ui-kit.md',
+            block: 'components-overview',
+            name: 'Components',
           },
         ],
       },
@@ -128,6 +128,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Layout',
+        icon: 'layout.svg',
         source: [
           'NbLayoutComponent',
           'NbLayoutHeaderComponent',
@@ -138,6 +139,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Sidebar',
+        icon: 'sidebar.svg',
         source: [
           'NbSidebarComponent',
           'NbSidebarHeaderComponent',
@@ -148,6 +150,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Menu',
+        icon: 'menu.svg',
         source: [
           'NbMenuComponent',
           'NbMenuItem',
@@ -157,6 +160,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Card',
+        icon: 'card.svg',
         source: [
           'NbCardComponent',
           'NbCardHeaderComponent',
@@ -167,6 +171,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Flip Card',
+        icon: 'flip.svg',
         source: [
           'NbFlipCardComponent',
           'NbCardFrontComponent',
@@ -176,6 +181,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Reveal Card',
+        icon: 'reveal.svg',
         source: [
           'NbRevealCardComponent',
           'NbCardFrontComponent',
@@ -185,6 +191,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Search',
+        icon: 'search.svg',
         source: [
           'NbSearchComponent',
           'NbSearchService',
@@ -193,6 +200,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Tabs',
+        icon: 'tab.svg',
         source: [
           'NbTabsetComponent',
           'NbTabComponent',
@@ -202,6 +210,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Actions',
+        icon: 'actions.svg',
         source: [
           'NbActionsComponent',
           'NbActionComponent',
@@ -210,6 +219,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'User (Avatar)',
+        icon: 'user.svg',
         source: [
           'NbUserComponent',
         ],
@@ -217,6 +227,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Checkbox',
+        icon: 'checkbox.svg',
         source: [
           'NbCheckboxComponent',
         ],
@@ -224,6 +235,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Badge',
+        icon: 'badge.svg',
         source: [
           'NbBadgeComponent',
         ],
@@ -231,6 +243,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Popover',
+        icon: 'popover.svg',
         source: [
           'NbPopoverDirective',
         ],
@@ -238,9 +251,34 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Context Menu',
+        icon: 'context-menu.svg',
         source: [
           'NbContextMenuDirective',
         ],
+      },
+      {
+        type: 'tabs',
+        name: 'Chips',
+        icon: 'chips.svg',
+        source: [],
+      },
+      {
+        type: 'tabs',
+        name: 'Progress Bar',
+        icon: 'progress-bar.svg',
+        source: [],
+      },
+      {
+        type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
+        source: [],
+      },
+      {
+        type: 'tabs',
+        name: 'Modal',
+        icon: 'modal.svg',
+        source: [],
       },
     ],
   },
