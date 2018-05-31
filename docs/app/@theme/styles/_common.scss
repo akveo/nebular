@@ -1,0 +1,5 @@
+@mixin nbd-common() {
+  :focus {
+    outline: 1px dashed nb-theme(color-fg-heading-light) !important;
+  }
+}
