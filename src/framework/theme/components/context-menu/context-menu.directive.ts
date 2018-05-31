@@ -8,8 +8,9 @@ import {
   ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
   OnInit, PLATFORM_ID,
 } from '@angular/core';
+import { filter, takeWhile } from 'rxjs/operators';
 import { NbPopoverDirective } from '../popover/popover.directive';
-import { NbMenuItem } from '../menu/menu.service';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
 import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
 import { NbContextMenuComponent } from './context-menu.component';
@@ -99,11 +100,15 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * */
   @Input('nbContextMenuTag')
   set tag(tag: string) {
+    this.menuTag = tag;
     this.popover.context = Object.assign(this.context, { tag });
   }
 
   protected popover: NbPopoverDirective;
   protected context = {};
+
+  private menuTag: string;
+  private alive: boolean = true;
 
   constructor(hostRef: ElementRef,
               themeService: NbThemeService,
@@ -112,7 +117,8 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
               adjustmentHelper: NbAdjustmentHelper,
               triggerHelper: NbTriggerHelper,
               @Inject(PLATFORM_ID) platformId,
-              placementHelper: NbPlacementHelper) {
+              placementHelper: NbPlacementHelper,
+              private menuService: NbMenuService) {
     /**
      * Initialize popover with all the important inputs.
      * */
@@ -131,10 +137,12 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.popover.ngOnInit();
+    this.subscribeOnItemClick();
   }
 
   ngOnDestroy() {
     this.popover.ngOnDestroy();
+    this.alive = false;
   }
 
   /**
@@ -171,5 +179,14 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
     if (!items || !items.length) {
       throw Error(`List of menu items expected, but given: ${items}`)
     }
+  }
+
+  private subscribeOnItemClick() {
+    this.menuService.onItemClick()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(({tag}) => tag === this.menuTag),
+      )
+      .subscribe(() => this.hide());
   }
 }

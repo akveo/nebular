@@ -29,6 +29,7 @@ export class NbContextMenuTestComponent {
   items = [
     { title: 'Profile', link: '/user' },
     { title: 'Logout', link: '/popover' },
+    { title: 'Another action' },
   ];
 
   itemsWithIcons = [

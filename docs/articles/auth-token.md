@@ -1,30 +1,44 @@
 ## Receiving user token after login/registration
 
 At this step, we assume that Nebular Auth module is up and running, 
-you have successfully configured an auth provider and adjusted auth look & fell accordingly with your requirements.
+you have successfully configured an auth strategy and adjusted auth look & fell accordingly with your requirements.
 
 It's time to get a user token after successful authentication to be able to communicate with the server and, for instance, show a username in the header of the application.
 Let's assume that your backend returns a JWT token so that we can use the token payload to extract a user info out of it.
 
-1) Firstly, let's tell Nebular that we are waiting for JWT token, to do that we just need to provide a respective class. Open your `app.module.ts` and add the following:
+Each `Strategy` specifies which token class it's going to use by default. For example, `NbPasswordAuthStrategy` uses `NbAuthSimpleToken`,
+and `NbOAuth2AuthProvider` uses `NbAuthOAuth2Token`. It is also possible to specify another token class if it is required, like in the example below.
+
+1) Let's tell Nebular that we are waiting for a JWT token instead of simple string token, 
+to do that we just need to provide a respective class. Open your `app.module.ts` and adjust the `Strategy` configuration:
 
 ```typescript
 
-import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
-
 @NgModule({
-  imports: [ ... ].
-  
-  providers: [
-    ...
-    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
+  imports: [
+   // ...
+    
+   NbAuthModule.forRoot({
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+             
+             token: {
+               class: NbAuthJWTToken,
+             }
+           }),
+         ],
+         forms: {},
+       }), 
   ],
 });
 
 ```
 This line tells Angular to inject `NbAuthJWTToken` (instead of the default `NbAuthSimpleToken`) which is a wrapper class around a value your API service returns.
 
-2) Then, let's configure where Nebular should look for the token in the login/register response data. By default Nebular expects that your token is located under the `data.token` keys of the JSON response:
+
+2) Then, let's configure where `NbPasswordAuthStrategy` should look for a token in the login/register response data. 
+By default `NbPasswordAuthStrategy` expects that your token is located under the `data.token` key of the JSON response:
 
 ```typescript
 {
@@ -34,30 +48,32 @@ This line tells Angular to inject `NbAuthJWTToken` (instead of the default `NbAu
 }
 ```
 
-We'll assume that our API returns a token as just `{token: 'some-jwt-token'}` not wrapping your response in the `data` property, let's tell that to Nebular:
+We'll assume that our API returns a token as just `{ token: 'some-jwt-token' }` not wrapping your response in a `data` property, let's tell that to Nebular:
 
 ```typescript
+
 @NgModule({
   imports: [
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-               ...
-                
-               token: {
-                 key: 'token', // this parameter tells Nebular where to look for the token
-               },
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+             
+             token: {
+               class: NbAuthJWTToken,
+              
+               key: 'token', // this parameter tells where to look for the token
+             }
+           }),
+         ],
+         forms: {},
        }), 
   ],
 });
-```  
+
+``` 
 
 
 3) Okay, let's use the token to extract a payload and show a username in the header. Open your `header.component.ts` and import the following services:
@@ -108,7 +124,7 @@ export class HeaderComponent {
 }
 ```
 
-6) Lastly, let's grad a `user` variable and put it in the template to show the user info. The `nb-user` component is a great fit for this:
+Lastly, let's grab a `user` variable and put it in the template to show the user info. The `nb-user` component is a great fit for this:
 
 
 ```typescript

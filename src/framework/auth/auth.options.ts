@@ -1,13 +1,14 @@
 import { InjectionToken } from '@angular/core';
-import { NbAuthToken } from './services';
+import { NbAuthStrategy, NbAuthStrategyOptions } from './strategies';
+import { NbAuthTokenClass } from './services';
+
+export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;
+
+export type NbAuthStrategies  = [NbAuthStrategyClass, NbAuthStrategyOptions][];
 
 export interface NbAuthOptions {
   forms?: any;
-  providers?: any;
-}
-
-export interface NbAuthProviders {
-  [key: string]: any;
+  strategies?: NbAuthStrategies;
 }
 
 export interface NbAuthSocialLink {
@@ -20,11 +21,12 @@ export interface NbAuthSocialLink {
 
 const socialLinks: NbAuthSocialLink[] = [];
 
-export const defaultSettings: any = {
+export const defaultAuthOptions: any = {
+  strategies: [],
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
-      provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
+      strategy: 'email',  // provider id key. If you have multiple strategies, or what to use your own
       rememberMe: true,   // whether to show or not the `rememberMe` checkbox
       showMessages: {     // show/not show success/error messages
         success: true,
@@ -34,7 +36,7 @@ export const defaultSettings: any = {
     },
     register: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -44,7 +46,7 @@ export const defaultSettings: any = {
     },
     requestPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -53,7 +55,7 @@ export const defaultSettings: any = {
     },
     resetPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -62,7 +64,7 @@ export const defaultSettings: any = {
     },
     logout: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
     },
     validation: {
       password: {
@@ -84,6 +86,6 @@ export const defaultSettings: any = {
 
 export const NB_AUTH_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular Auth Options');
 export const NB_AUTH_USER_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular User Auth Options');
-export const NB_AUTH_PROVIDERS = new InjectionToken<NbAuthProviders>('Nebular Auth Providers');
-export const NB_AUTH_TOKEN_CLASS = new InjectionToken<NbAuthToken>('Nebular Token Class');
-export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<NbAuthProviders>('Nebular Simple Interceptor Header');
+export const NB_AUTH_STRATEGIES = new InjectionToken<NbAuthStrategies>('Nebular Auth Strategies');
+export const NB_AUTH_TOKENS = new InjectionToken<NbAuthTokenClass[]>('Nebular Auth Tokens');
+export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<NbAuthStrategies>('Nebular Simple Interceptor Header');

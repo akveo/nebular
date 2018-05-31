@@ -8,11 +8,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 import {
-  nbBuiltInJSThemesToken,
-  nbMediaBreakpointsToken,
+  NB_BUILT_IN_JS_THEMES,
+  NB_MEDIA_BREAKPOINTS,
   NbThemeOptions,
-  nbThemeOptionsToken,
-  nbJSThemesToken,
+  NB_THEME_OPTIONS,
+  NB_JS_THEMES,
   NB_DOCUMENT,
   NB_WINDOW,
 } from './theme.options';
@@ -58,10 +58,10 @@ export class NbThemeModule {
     return <ModuleWithProviders> {
       ngModule: NbThemeModule,
       providers: [
-        { provide: nbThemeOptionsToken, useValue: nbThemeOptions || {} },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
-        { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
-        { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
+        { provide: NB_THEME_OPTIONS, useValue: nbThemeOptions || {} },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: nbJSThemes || [] },
+        { provide: NB_MEDIA_BREAKPOINTS, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
         { provide: NB_WINDOW, useFactory: nbWindowFactory },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
         NbJSThemesRegistry,

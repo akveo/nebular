@@ -12,13 +12,13 @@ export interface NbThemeOptions {
   name: string;
 }
 
-export const nbThemeOptionsToken = new InjectionToken<NbThemeOptions>('NB_THEME_OPTIONS');
-export const nbMediaBreakpointsToken = new InjectionToken<NbMediaBreakpoint[]>('NB_MEDIA_BREAKPOINTS');
-export const nbBuiltInJSThemesToken = new InjectionToken<NbJSThemeOptions[]>('NB_BUILT_IN_THEMES');
-export const nbJSThemesToken = new InjectionToken<NbJSThemeOptions[]>('NB_THEMES');
+export const NB_THEME_OPTIONS = new InjectionToken<NbThemeOptions>('Nebular Theme Options');
+export const NB_MEDIA_BREAKPOINTS = new InjectionToken<NbMediaBreakpoint[]>('Nebular Media Breakpoints');
+export const NB_BUILT_IN_JS_THEMES = new InjectionToken<NbJSThemeOptions[]>('Nebular Built-in JS Themes');
+export const NB_JS_THEMES = new InjectionToken<NbJSThemeOptions[]>('Nebular JS Themes');
 
 /**
  * We're providing browser apis with tokens to improve testing capabilities.
  * */
-export const NB_WINDOW = new InjectionToken<Window>('NB_WINDOW');
-export const NB_DOCUMENT = new InjectionToken<Document>('NB_DOCUMENT');
+export const NB_WINDOW = new InjectionToken<Window>('Window');
+export const NB_DOCUMENT = new InjectionToken<Document>('Document');
