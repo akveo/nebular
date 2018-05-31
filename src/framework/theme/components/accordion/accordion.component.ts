@@ -29,6 +29,7 @@ export class NbAccordionDescriptionComponent {}
   template: `
     <ng-content select="nb-accordion-title"></ng-content>
     <ng-content select="nb-accordion-description"></ng-content>
+    <ng-content></ng-content>
     <i class="nb-arrow-up"></i>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -7,10 +7,12 @@
  :host {
    display: flex;
    flex-direction: column;
-   padding: 1.5rem;
 
    ::ng-deep nb-accordion-header {
      display: flex;
+     align-items: center;
+     height: 3rem;
+     padding: 0 1.5rem;
 
      nb-accordion-title {
        flex-grow: 1;
@@ -19,5 +21,9 @@
      nb-accordion-description {
        flex-grow: 2;
      }
+   }
+
+   ::ng-deep nb-accordion-body {
+     padding: 0 1.5rem 1rem;
    }
  }
