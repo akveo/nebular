@@ -10,8 +10,8 @@ import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoi
 import { NbThemeService } from './theme.service';
 import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
 import {
-  nbBuiltInJSThemesToken, nbJSThemesToken, nbMediaBreakpointsToken,
-  nbThemeOptionsToken,
+  NB_BUILT_IN_JS_THEMES, NB_JS_THEMES, NB_MEDIA_BREAKPOINTS,
+  NB_THEME_OPTIONS,
 } from '../theme.options';
 
 describe('theme-service', () => {
@@ -22,12 +22,12 @@ describe('theme-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: nbMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
+        { provide: NB_MEDIA_BREAKPOINTS, useValue: DEFAULT_MEDIA_BREAKPOINTS },
         NbMediaBreakpointsService,
-        { provide: nbJSThemesToken, useValue: [] },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: [] },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         NbJSThemesRegistry,
-        { provide: nbThemeOptionsToken, useValue: { name: 'default' } },
+        { provide: NB_THEME_OPTIONS, useValue: { name: 'default' } },
         NbThemeService,
       ],
     });
