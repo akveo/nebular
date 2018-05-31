@@ -29,6 +29,7 @@ import {
   NgdStylesTableBlockComponent,
   NgdExamplesBlockComponent,
   NgdPagerBlockComponent,
+  NgdComponentsOverviewBlockComponent,
 } from './components/';
 
 const blocks = [
@@ -51,6 +52,7 @@ const blocks = [
   NgdStylesTableBlockComponent,
   NgdExamplesBlockComponent,
   NgdPagerBlockComponent,
+  NgdComponentsOverviewBlockComponent,
 ];
 
 @NgModule({

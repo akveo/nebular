@@ -1,0 +1,59 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card.header-card > nb-card-body {
+    padding: 2rem;
+
+    .page-header {
+      margin: 0;
+    }
+  }
+
+  .components-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+
+    .component-card-wrapper {
+      flex: 0 0 calc(100% / 3);
+      max-width: calc(100% / 3);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .component-icon {
+      margin-bottom: 1rem;
+    }
+
+    .component-name {
+      color: #8994a3;
+      font-weight: nb-theme(font-weight-bolder);
+    }
+
+    .component-navigate-link {
+      text-decoration: none;
+    }
+
+    nb-card > nb-card-body {
+      height: 200px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nb-card {
+      box-shadow: 0 4px 27px 0 rgba(230, 234, 240, 0.2);
+    }
+
+    nb-card:hover {
+      box-shadow: 0 15px 37px 0 #dbe2eb;
+
+      .component-name {
+        color: nb-theme(color-fg);
+      }
+    }
+  }
+}
