@@ -167,7 +167,16 @@
   }
 
   .horizontal-nav {
-    margin: 1rem 0 2rem;
+    margin-top: 1rem;
+
+    nb-card-header {
+      padding-bottom: 2rem;
+    }
+    nb-card-body {
+      background-color: nb-theme(layout-bg);
+      padding: 0;
+      overflow: visible;
+    }
   }
   .settings-column {
     display: none;

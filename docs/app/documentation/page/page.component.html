@@ -1,6 +1,13 @@
 <div class="middle-column">
 
-  <ngd-page-tabs class="horizontal-nav" [tabs]="currentItem?.tabs" horizontal></ngd-page-tabs>
+  <nb-card *ngIf="currentItem?.tabs" class="horizontal-nav">
+    <nb-card-header>
+      {{currentItem?.name}}
+    </nb-card-header>
+    <nb-card-body>
+      <ngd-page-tabs [tabs]="currentItem?.tabs" horizontal></ngd-page-tabs>
+    </nb-card-body>
+  </nb-card>
 
   <ng-container *ngFor="let block of currentItem?.children">
     <ng-container [ngSwitch]="block.block">

@@ -56,11 +56,10 @@
 
 :host(.horizontal) {
   a {
-    padding: 0 1rem;
-    flex: 1 1 50%;
+    flex: 0 0 50%;
     height: auto;
     margin-bottom: 0;
-    position: relative;
+    padding: 0 1rem;
 
     .title,
     .icon {
@@ -87,9 +86,6 @@
     flex: 1 1 0;
 
     a {
-      background-color: #f6f6f7;
-      box-shadow: 0 8px 20px -8px rgba(218, 224, 235, 0.6);
-      margin-bottom: 1rem;
       flex: 1 1 0;
 
       &.selected::after {
