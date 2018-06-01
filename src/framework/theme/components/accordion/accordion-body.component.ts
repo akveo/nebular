@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Host } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Host, ElementRef } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -14,10 +15,11 @@ import { NbAccordionComponent } from './accordion.component';
   template: `
     <ng-content></ng-content>
   `,
+  animations: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent {
-  constructor(@Host() private accordion: NbAccordionComponent) {}
+  constructor(@Host() private accordion: NbAccordionComponent, private el: ElementRef) {}
 
   get isCollapsed(): boolean {
     return !!this.accordion.collapsed;
@@ -25,5 +27,9 @@ export class NbAccordionBodyComponent {
 
   get isExpanded(): boolean {
     return !this.accordion.collapsed;
+  }
+
+  get contentHeight(): number {
+    return this.el.nativeElement.clientHeight;
   }
 }
