@@ -422,7 +422,8 @@ $theme: (
   badge-warning-bg-color: color-warning,
   badge-danger-bg-color: color-danger,
 
-  accordion-shadow: shadow
+  accordion-shadow: shadow,
+  accordion-header-hover-bg: rgba(0, 0, 0, 0.04)
 );
 
 // register the theme

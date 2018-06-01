@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
- :host {
-   display: flex;
-   flex-direction: column;
-   border-top-left-radius: 0.25rem;
-   border-top-right-radius: 0.25rem;
- }
+@mixin nb-accordion-header-theme() {
+  nb-accordion-header {
+    &:hover {
+      background-color: nb-theme(accordion-header-hover-bg);
+    }
+  }
+}

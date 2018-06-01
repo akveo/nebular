@@ -20,6 +20,7 @@
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/accordion/accordion.component.theme';
+@import '../../components/accordion/accordion-header.component.theme';
 @import '../../components/accordion-group/accordion-group.component.theme';
 
 @mixin nb-theme-components() {
@@ -40,5 +41,6 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-accordion-theme();
+  @include nb-accordion-header-theme();
   @include nb-accordion-group-theme();
 }
