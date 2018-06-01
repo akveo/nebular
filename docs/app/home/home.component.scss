@@ -41,30 +41,33 @@
   }
 
   .advantages {
-    padding-bottom: 5.5rem;
     position: relative;
     overflow: hidden;
 
     > .content-center {
       padding: 0 2rem;
     }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 300px;
-      bottom: 0;
-      right: -30%;
-      left: -30%;
-      background: $convex-bg;
-      z-index: -1;
-      border-radius: 50%;
-    }
   }
 
   @include media-breakpoint-up(md) {
     ngd-hero {
       margin-top: 6rem;
+    }
+
+    .advantages {
+      padding-bottom: 5.5rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 300px;
+        bottom: 0;
+        right: -30%;
+        left: -30%;
+        background: $convex-bg;
+        z-index: -1;
+        border-radius: 50%;
+      }
     }
   }
 
