@@ -7,6 +7,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Input,
   Output,
   EventEmitter,
@@ -26,12 +27,33 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionComponent implements OnChanges, OnDestroy {
-  @Input() collapsed: boolean = true;
+  @Input('collapsed')
+  get collapsed() {
+    return this._collapsed;
+  }
+  set collapsed(value: boolean) {
+    this._collapsed = value;
+    this.collapsedChange.emit(value);
 
-  @Output() opened = new EventEmitter<boolean>();
-  @Output() closed = new EventEmitter<boolean>();
+    if (value) {
+      this.closed.emit();
+    } else {
+      this.opened.emit();
+    }
+
+    this.cdr.markForCheck();
+  }
+
+  @Output() opened = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
+
+  @Output() collapsedChange = new EventEmitter<boolean>();
 
   readonly inputChanges = new Subject<SimpleChanges>();
+
+  private _collapsed: boolean = true;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   toggle() {
     this.collapsed = !this.collapsed;

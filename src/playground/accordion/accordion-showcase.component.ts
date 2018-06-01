@@ -5,6 +5,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './accordion-showcase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionShowcaseComponent {
-  collapsed = true;
-}
+export class NbAccordionShowcaseComponent {}
