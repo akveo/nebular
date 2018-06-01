@@ -33,19 +33,20 @@ const accordionBodyTrigger = trigger('accordion-body', [
     style({
       overflow: 'hidden',
       visibility: 'visible',
-      height: '100px',
+      height: '{{ contentHeight }}',
     }),
+    { params: { contentHeight: '1rem' } },
   ),
-  transition('collapsed => expanded', animate('500ms ease-in')),
-  transition('expanded => collapsed', animate('500ms ease-out')),
+  transition('collapsed => expanded', animate('200ms ease-in')),
+  transition('expanded => collapsed', animate('200ms ease-out')),
 ]);
 
 @Component({
   selector: 'nb-accordion-body',
   styleUrls: ['./accordion-body.component.scss'],
   template: `
-    <div [@accordion-body]="state">
-      <div class="ttt">
+    <div [@accordion-body]="{ value: state, params: { contentHeight: contentHeight } }">
+      <div class="accordion-body">
         <ng-content></ng-content>
       </div>
     </div>
@@ -54,6 +55,8 @@ const accordionBodyTrigger = trigger('accordion-body', [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent implements OnInit, OnDestroy {
+  contentHeight: string;
+
   private alive: boolean = true;
 
   constructor(
@@ -70,10 +73,6 @@ export class NbAccordionBodyComponent implements OnInit, OnDestroy {
     return !this.accordion.collapsed;
   }
 
-  get contentHeight(): number {
-    return this.el.nativeElement.clientHeight;
-  }
-
   get state(): string {
     if (this.isCollapsed) {
       return 'collapsed';
@@ -84,6 +83,8 @@ export class NbAccordionBodyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
+
     merge(this.accordion.opened, this.accordion.closed, this.accordion.inputChanges)
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());

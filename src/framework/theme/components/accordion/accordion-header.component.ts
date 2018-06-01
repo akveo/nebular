@@ -26,8 +26,8 @@ const expansionIndicatorTrigger = trigger('expansion-indicator', [
       transform: 'rotate(180deg)',
     }),
   ),
-  transition('collapsed => expanded', animate('500ms ease-in')),
-  transition('expanded => collapsed', animate('500ms ease-out')),
+  transition('collapsed => expanded', animate('200ms ease-in')),
+  transition('expanded => collapsed', animate('200ms ease-out')),
 ]);
 
 @Component({
