@@ -7,13 +7,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {
-  NbAccordionTitleComponent,
-  NbAccordionDescriptionComponent,
-  NbAccordionHeaderComponent,
-  NbAccordionBodyComponent,
-  NbAccordionComponent,
-} from './accordion.component';
+import { NbAccordionComponent } from './accordion.component';
+import { NbAccordionTitleComponent } from './accordion-title.component';
+import { NbAccordionDescriptionComponent } from './accordion-description.component';
+import { NbAccordionHeaderComponent } from './accordion-header.component';
+import { NbAccordionBodyComponent } from './accordion-body.component';
 
 const NB_ACCORDION_COMPONENTS = [
   NbAccordionTitleComponent,

@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
- :host {
-   display: flex;
-   flex-direction: column;
- }
+:host {
+  flex-grow: 1;
+}
