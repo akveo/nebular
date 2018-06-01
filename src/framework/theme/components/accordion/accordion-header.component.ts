@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Host } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Host, HostListener } from '@angular/core';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -29,5 +29,10 @@ export class NbAccordionHeaderComponent {
 
   get isExpanded(): boolean {
     return !this.accordion.collapsed;
+  }
+
+  @HostListener('click')
+  toggle() {
+    this.accordion.collapsed = !this.accordion.collapsed;
   }
 }
