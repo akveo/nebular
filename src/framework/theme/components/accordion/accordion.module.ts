@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NbAccordionComponent } from './accordion.component';
 import { NbAccordionTitleComponent } from './accordion-title.component';
@@ -22,7 +23,7 @@ const NB_ACCORDION_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, BrowserAnimationsModule],
   exports: [...NB_ACCORDION_COMPONENTS],
   declarations: [...NB_ACCORDION_COMPONENTS],
   providers: [],

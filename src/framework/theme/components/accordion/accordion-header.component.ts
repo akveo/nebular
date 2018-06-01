@@ -33,6 +33,6 @@ export class NbAccordionHeaderComponent {
 
   @HostListener('click')
   toggle() {
-    this.accordion.collapsed = !this.accordion.collapsed;
+    this.accordion.toggle();
   }
 }

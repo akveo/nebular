@@ -5,7 +5,7 @@
  */
 
 import { Component, ChangeDetectionStrategy, Host, ElementRef } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -13,9 +13,26 @@ import { NbAccordionComponent } from './accordion.component';
   selector: 'nb-accordion-body',
   styleUrls: ['./accordion-body.component.scss'],
   template: `
-    <ng-content></ng-content>
+    <div [@accordion]="state">
+      <ng-content></ng-content>
+    </div>
   `,
-  animations: [],
+  animations: [
+    trigger('accordion', [
+      state(
+        'collapsed',
+        style({
+          height: '0px',
+        }),
+      ),
+      state(
+        'expanded',
+        style({
+          height: '500px',
+        }),
+      ),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent {
@@ -31,5 +48,14 @@ export class NbAccordionBodyComponent {
 
   get contentHeight(): number {
     return this.el.nativeElement.clientHeight;
+  }
+
+  get state(): string {
+    if (this.isCollapsed) {
+      return 'collapsed';
+    }
+    if (this.isExpanded) {
+      return 'expanded';
+    }
   }
 }
