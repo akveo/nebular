@@ -13,6 +13,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { merge } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -25,9 +26,20 @@ import { NbAccordionComponent } from './accordion.component';
     <ng-content select="nb-accordion-title"></ng-content>
     <ng-content select="nb-accordion-description"></ng-content>
     <ng-content></ng-content>
-    <i *ngIf="isExpanded" class="nb-arrow-up"></i>
-    <i *ngIf="isCollapsed" class="nb-arrow-down"></i>
+    <i [@expansion-indicator]="state" class="nb-arrow-down"></i>
   `,
+  animations: [
+    trigger('expansion-indicator', [
+      state(
+        'expanded',
+        style({
+          transform: 'rotate(180deg)',
+        }),
+      ),
+      transition('collapsed => expanded', animate('500ms ease-in')),
+      transition('expanded => collapsed', animate('500ms ease-out')),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
@@ -41,6 +53,15 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
 
   get isExpanded(): boolean {
     return !this.accordion.collapsed;
+  }
+
+  get state(): string {
+    if (this.isCollapsed) {
+      return 'collapsed';
+    }
+    if (this.isExpanded) {
+      return 'expanded';
+    }
   }
 
   @HostListener('click')

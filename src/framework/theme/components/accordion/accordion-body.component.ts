@@ -23,14 +23,14 @@ import { NbAccordionComponent } from './accordion.component';
   selector: 'nb-accordion-body',
   styleUrls: ['./accordion-body.component.scss'],
   template: `
-    <div [@accordionBody]="state">
+    <div [@accordion-body]="state">
       <div class="ttt">
         <ng-content></ng-content>
       </div>
     </div>
   `,
   animations: [
-    trigger('accordionBody', [
+    trigger('accordion-body', [
       state(
         'collapsed',
         style({
