@@ -19,6 +19,17 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
+const expansionIndicatorTrigger = trigger('expansion-indicator', [
+  state(
+    'expanded',
+    style({
+      transform: 'rotate(180deg)',
+    }),
+  ),
+  transition('collapsed => expanded', animate('500ms ease-in')),
+  transition('expanded => collapsed', animate('500ms ease-out')),
+]);
+
 @Component({
   selector: 'nb-accordion-header',
   styleUrls: ['./accordion-header.component.scss'],
@@ -28,18 +39,7 @@ import { NbAccordionComponent } from './accordion.component';
     <ng-content></ng-content>
     <i [@expansion-indicator]="state" class="nb-arrow-down"></i>
   `,
-  animations: [
-    trigger('expansion-indicator', [
-      state(
-        'expanded',
-        style({
-          transform: 'rotate(180deg)',
-        }),
-      ),
-      transition('collapsed => expanded', animate('500ms ease-in')),
-      transition('expanded => collapsed', animate('500ms ease-out')),
-    ]),
-  ],
+  animations: [expansionIndicatorTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionHeaderComponent implements OnInit, OnDestroy {

@@ -19,6 +19,27 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
+const accordionBodyTrigger = trigger('accordion-body', [
+  state(
+    'collapsed',
+    style({
+      overflow: 'hidden',
+      visibility: 'hidden',
+      height: 0,
+    }),
+  ),
+  state(
+    'expanded',
+    style({
+      overflow: 'hidden',
+      visibility: 'visible',
+      height: '100px',
+    }),
+  ),
+  transition('collapsed => expanded', animate('500ms ease-in')),
+  transition('expanded => collapsed', animate('500ms ease-out')),
+]);
+
 @Component({
   selector: 'nb-accordion-body',
   styleUrls: ['./accordion-body.component.scss'],
@@ -29,28 +50,7 @@ import { NbAccordionComponent } from './accordion.component';
       </div>
     </div>
   `,
-  animations: [
-    trigger('accordion-body', [
-      state(
-        'collapsed',
-        style({
-          overflow: 'hidden',
-          visibility: 'hidden',
-          height: 0,
-        }),
-      ),
-      state(
-        'expanded',
-        style({
-          overflow: 'hidden',
-          visibility: 'visible',
-          height: '100px',
-        }),
-      ),
-      transition('collapsed => expanded', animate('500ms ease-in')),
-      transition('expanded => collapsed', animate('500ms ease-out')),
-    ]),
-  ],
+  animations: [accordionBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent implements OnInit, OnDestroy {
