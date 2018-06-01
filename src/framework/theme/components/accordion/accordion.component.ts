@@ -15,6 +15,7 @@ import {
   OnChanges,
   OnDestroy,
 } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -22,8 +23,30 @@ import { Subject } from 'rxjs';
   styleUrls: ['./accordion.component.scss'],
   template: `
     <ng-content select="nb-accordion-header"></ng-content>
-    <ng-content select="nb-accordion-body"></ng-content>
+    <div [@accordionBody]="state">
+      <ng-content select="nb-accordion-body"></ng-content>
+    </div>
   `,
+  animations: [
+    trigger('accordionBody', [
+      state(
+        'collapsed',
+        style({
+          overflow: 'hidden',
+          visibility: 'hidden',
+        }),
+      ),
+      state(
+        'expanded',
+        style({
+          overflow: 'auto',
+          visibility: 'visible',
+        }),
+      ),
+      transition('collapsed => expanded', animate('1000ms ease-in')),
+      transition('expanded => collapsed', animate('1000ms ease-out')),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionComponent implements OnChanges, OnDestroy {
@@ -46,6 +69,7 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
 
   @Output() opened = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
+  @Output() destroyed = new EventEmitter<void>();
 
   @Output() collapsedChange = new EventEmitter<boolean>();
 
@@ -54,6 +78,23 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
   private _collapsed: boolean = true;
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  get isCollapsed(): boolean {
+    return !!this.collapsed;
+  }
+
+  get isExpanded(): boolean {
+    return !this.collapsed;
+  }
+
+  get state(): string {
+    if (this.isCollapsed) {
+      return 'collapsed';
+    }
+    if (this.isExpanded) {
+      return 'expanded';
+    }
+  }
 
   toggle() {
     this.collapsed = !this.collapsed;
@@ -65,5 +106,9 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.inputChanges.complete();
+    this.opened.complete();
+    this.closed.complete();
+    this.destroyed.emit();
+    this.destroyed.complete();
   }
 }
