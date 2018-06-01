@@ -17,5 +17,13 @@ import { NbAccordionComponent } from './accordion.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent {
-  constructor(@Host() public accordion: NbAccordionComponent) {}
+  constructor(@Host() private accordion: NbAccordionComponent) {}
+
+  get isCollapsed(): boolean {
+    return !!this.accordion.collapsed;
+  }
+
+  get isExpanded(): boolean {
+    return !this.accordion.collapsed;
+  }
 }
