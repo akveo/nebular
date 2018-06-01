@@ -5,17 +5,7 @@
  */
 
 :host {
-  .test-class.collapsed {
-    transition: 1000ms height ease-in;
-    height: 0;
-  }
-
-  .test-class.expanded {
-    transition: 1000ms height ease-out;
-    height: 100px;
-  }
-
   .ttt {
-    padding: 1rem;
+    padding: 0 1.5rem 1rem;
   }
 }

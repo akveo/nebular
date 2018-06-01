@@ -24,10 +24,8 @@ import { NbAccordionComponent } from './accordion.component';
   styleUrls: ['./accordion-body.component.scss'],
   template: `
     <div [@accordionBody]="state">
-      <div class="test-class" [class.collapsed]="isCollapsed" [class.expanded]="isExpanded">
-        <div class="ttt">
-          <ng-content></ng-content>
-        </div>
+      <div class="ttt">
+        <ng-content></ng-content>
       </div>
     </div>
   `,
@@ -38,17 +36,19 @@ import { NbAccordionComponent } from './accordion.component';
         style({
           overflow: 'hidden',
           visibility: 'hidden',
+          height: 0,
         }),
       ),
       state(
         'expanded',
         style({
-          overflow: 'auto',
+          overflow: 'hidden',
           visibility: 'visible',
+          height: '100px',
         }),
       ),
-      transition('collapsed => expanded', animate('1000ms ease-in')),
-      transition('expanded => collapsed', animate('1000ms ease-out')),
+      transition('collapsed => expanded', animate('500ms ease-in')),
+      transition('expanded => collapsed', animate('500ms ease-out')),
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
