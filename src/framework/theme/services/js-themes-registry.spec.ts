@@ -8,7 +8,7 @@ import { TestBed, inject, async } from '@angular/core/testing';
 
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
-import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
+import { NB_BUILT_IN_JS_THEMES, NB_JS_THEMES } from '../theme.options';
 
 describe('js-themes-registry-service', () => {
   let jsThemesRegistry: NbJSThemesRegistry;
@@ -39,8 +39,8 @@ describe('js-themes-registry-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: nbJSThemesToken, useValue: customThemes },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: customThemes },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         NbJSThemesRegistry,
       ],
     });

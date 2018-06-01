@@ -9,7 +9,7 @@ import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } 
 import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
 import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
 
-import { nbThemeOptionsToken } from '../theme.options';
+import { NB_THEME_OPTIONS } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
@@ -30,7 +30,7 @@ export class NbThemeService {
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
   constructor(
-    @Inject(nbThemeOptionsToken) protected options: any,
+    @Inject(NB_THEME_OPTIONS) protected options: any,
     private breakpointService: NbMediaBreakpointsService,
     private jsThemesRegistry: NbJSThemesRegistry,
     private componentFactoryResolver: ComponentFactoryResolver,
