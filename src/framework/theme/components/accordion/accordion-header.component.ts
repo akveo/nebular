@@ -4,7 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Host, HostListener } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Host,
+  HostListener,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { merge } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -20,8 +30,10 @@ import { NbAccordionComponent } from './accordion.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionHeaderComponent {
-  constructor(@Host() private accordion: NbAccordionComponent) {}
+export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
+  private alive: boolean = true;
+
+  constructor(@Host() private accordion: NbAccordionComponent, private cdr: ChangeDetectorRef) {}
 
   get isCollapsed(): boolean {
     return !!this.accordion.collapsed;
@@ -34,5 +46,15 @@ export class NbAccordionHeaderComponent {
   @HostListener('click')
   toggle() {
     this.accordion.toggle();
+  }
+
+  ngOnInit() {
+    merge(this.accordion.closed, this.accordion.opened, this.accordion.inputChanges)
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.cdr.markForCheck());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 }

@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+  OnDestroy,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -16,21 +25,23 @@ import { Subject } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionComponent {
-  @Input('collapsed')
-  get collapsed(): boolean {
-    return this._collapsed;
-  }
-  set collapsed(value: boolean) {
-    this._collapsed = value;
-  }
+export class NbAccordionComponent implements OnChanges, OnDestroy {
+  @Input() collapsed: boolean = true;
 
   @Output() opened = new EventEmitter<boolean>();
   @Output() closed = new EventEmitter<boolean>();
 
-  private _collapsed: boolean = true;
+  readonly inputChanges = new Subject<SimpleChanges>();
 
   toggle() {
     this.collapsed = !this.collapsed;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.inputChanges.next(changes);
+  }
+
+  ngOnDestroy() {
+    this.inputChanges.complete();
   }
 }

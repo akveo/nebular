@@ -4,8 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Host, ElementRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Host,
+  ElementRef,
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { merge } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -28,15 +38,21 @@ import { NbAccordionComponent } from './accordion.component';
       state(
         'expanded',
         style({
-          height: '500px',
+          height: '300px',
         }),
       ),
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionBodyComponent {
-  constructor(@Host() private accordion: NbAccordionComponent, private el: ElementRef) {}
+export class NbAccordionBodyComponent implements OnInit, OnDestroy {
+  private alive: boolean = true;
+
+  constructor(
+    @Host() private accordion: NbAccordionComponent,
+    private el: ElementRef,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   get isCollapsed(): boolean {
     return !!this.accordion.collapsed;
@@ -57,5 +73,15 @@ export class NbAccordionBodyComponent {
     if (this.isExpanded) {
       return 'expanded';
     }
+  }
+
+  ngOnInit() {
+    merge(this.accordion.opened, this.accordion.closed, this.accordion.inputChanges)
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.cdr.markForCheck());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 }
