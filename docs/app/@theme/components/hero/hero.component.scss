@@ -11,7 +11,7 @@
 
   display: flex;
   flex: 1;
-  padding: 0 3rem;
+  padding: 0 3rem 10rem;
 
   .block, .shield {
     padding: 0 1.125rem;
@@ -20,7 +20,8 @@
   .block {
     flex: 1;
     padding-top: 4rem;
-    font-size: 1rem;
+    font-size: 0.75rem;
+    margin-right: 2rem;
   }
 
   .right-block {
@@ -30,31 +31,11 @@
   }
 
   .shield {
-    background: url('/assets/img/shield@2x.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 32.5rem;
-    width: 32rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    h3 {
-      font-size: 32px;
-    }
-    h3:nth-child(2) {
-      font-size: 94px;
-    }
-  }
-
-  .block {
-    margin-right: 2rem;
+    display: none;
   }
 
   h1 {
-    font-size: 6.875em;
+    font-size: 4em;
     font-weight: bold;
     margin-bottom: 0;
     text-shadow: $shadow;
@@ -77,7 +58,7 @@
     border-radius: 3px;
     border: none;
     background: $btn-bg;
-    padding: 0.85em 3em;
+    padding: 0.8em 1.5em;
     margin-bottom: 1em;
     box-shadow: $shadow;
     text-decoration: none !important;
@@ -98,40 +79,53 @@
     }
   }
 
-  @include media-breakpoint-down(macpro, (macpro: 1280px)) {
-    .shield {
-      height: 26rem;
-      width: 26rem;
-    }
-  }
-
-  @include media-breakpoint-down(md) {
-
+  @include media-breakpoint-up(md) {
     padding-bottom: 13rem;
-
-    .shield {
-      display: none;
-    }
 
     .block {
       font-size: 0.875rem;
     }
-  }
-
-  @include media-breakpoint-down(sm) {
-
-    padding-bottom: 10rem;
-
-    .block {
-      font-size: 0.75rem;
-    }
 
     h1 {
-      font-size: 4em;
+      font-size: 6.875em;
     }
 
     .btn {
-      padding: 0.8em 1.5em;
+      padding: 0.85em 3em;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 0;
+
+    .shield {
+      background: url('/assets/img/shield@2x.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 26rem;
+      width: 26rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      h3 {
+        font-size: 32px;
+      }
+      h3:nth-child(2) {
+        font-size: 94px;
+      }
+    }
+    .block {
+      font-size: 1rem;
+    }
+  }
+
+  @include media-breakpoint-up(xxl) {
+    .shield {
+      height: 32.5rem;
+      width: 32rem;
     }
   }
 }

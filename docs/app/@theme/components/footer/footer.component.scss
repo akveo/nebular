@@ -14,7 +14,8 @@
 
   > div {
     display: flex;
-    margin-right: 2rem;
+    margin-right: 0;
+    justify-content: center;
 
     &:last-child {
       margin-right: 0;
@@ -32,15 +33,13 @@
     li {
       display: flex;
       margin-bottom: 1.375rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     &.logo {
-      flex-direction: column;
-      margin-top: -1.2rem;
-      text-align: center;
-      img {
-        max-width: 9rem;
-      }
+      display: none;
     }
 
     .title {
@@ -68,24 +67,31 @@
     }
   }
 
-  @include media-breakpoint-down(md) {
-    > div.logo {
-      display: none;
+  > div.logo {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    > div {
+      justify-content: normal;
+      margin-right: 2rem;
+
+      li {
+        justify-content: normal;
+        align-items: normal;
+        text-align: left;
+      }
     }
   }
 
-  @include media-breakpoint-down(sm) {
-    > div {
-      justify-content: center;
-      margin-right: 0;
-
-      li {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
-      .logo {
-        display: none;
+  @include media-breakpoint-up(lg) {
+    > div.logo {
+      display: block;
+      flex-direction: column;
+      margin-top: -1.2rem;
+      text-align: center;
+      img {
+        max-width: 9rem;
       }
     }
   }

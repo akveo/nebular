@@ -13,7 +13,7 @@
   display: flex;
   padding: 3rem 1rem 3.625rem;
   flex-grow: 1;
-  width: calc(33% - 2.5rem);
+  width: 100%;
   margin: 1.25rem;
   flex-direction: column;
   cursor: pointer;
@@ -38,12 +38,12 @@
     text-align: center;
   }
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-up(md) {
     width: calc(50% - 2.5rem);
   }
 
-  @include media-breakpoint-down(sm) {
-    width: 100%;
+  @include media-breakpoint-up(lg) {
+    width: calc(33% - 2.5rem);
   }
 }
 

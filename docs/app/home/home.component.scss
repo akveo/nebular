@@ -28,11 +28,11 @@
   }
 
   ngd-hero {
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 
   .features {
-    margin-top: -12.5rem;
+    margin-top: -8rem;
     justify-content: center;
   }
 
@@ -62,27 +62,27 @@
     }
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-up(md) {
     ngd-hero {
-      margin-top: 4rem;
+      margin-top: 6rem;
     }
   }
 
-  @include media-breakpoint-down(xxl) {
-    .features {
-      margin-top: -10rem;
-    }
-  }
-
-  @include media-breakpoint-down(xl) {
+  @include media-breakpoint-up(xl) {
     .features {
       margin-top: -9rem;
     }
   }
 
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-up(xxl) {
     .features {
-      margin-top: -8rem;
+      margin-top: -10rem;
+    }
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    .features {
+      margin-top: -12.5rem;
     }
   }
 }

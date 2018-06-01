@@ -188,7 +188,7 @@
     }
   }
 
-  @include media-breakpoint-up(vertical-settings-column) {
+  @include media-breakpoint-up(macpro) {
     .horizontal-nav nb-card-body {
       display: none;
     }

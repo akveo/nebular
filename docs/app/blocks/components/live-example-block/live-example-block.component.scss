@@ -32,6 +32,7 @@
 
   .actions {
     display: flex;
+    width: 100%;
 
     .icon {
       font-size: 0.95rem;
@@ -57,12 +58,17 @@
   .action-selector {
     position: relative;
 
+    .action-item {
+      padding: 0;
+      color: transparent;
+    }
+
     .icon {
       color: $action-fg;
       position: absolute;
       top: 50%;
-      transform: translate(0, -50%);
-      left: 1.25rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     /* Target IE9 - IE11 */
@@ -121,21 +127,21 @@
     }
   }
 
-  @media screen and (max-width: 23em) {
+  @media screen and (min-width: 23em) {
     .action-selector {
       .action-item {
-        padding: 0;
-        color: transparent;
+        padding: 0.5rem 1rem;
+        color: $action-fg;
       }
 
       .icon {
-        left: 50%;
-        transform: translate(-50%, -50%);
+        left: 1.25rem;
+        transform: translate(0, -50%);
       }
     }
 
     .actions {
-      width: 100%;
+      width: auto;
     }
   }
 }

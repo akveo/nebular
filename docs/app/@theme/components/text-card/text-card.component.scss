@@ -8,10 +8,10 @@
 
   display: flex;
   flex-grow: 1;
-  width: calc(50% - 10rem);
-  margin: 2rem 3rem 2.5rem 5rem;
+  width: 100%;
+  margin: 2rem 0;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.75rem;
 
   h2 {
     color: $title-fg;
@@ -51,9 +51,9 @@
     line-height: 1.75rem;
   }
 
-  @include media-breakpoint-down(sm) {
-    width: 100%;
-    font-size: 0.75rem;
-    margin: 2rem 0;
+  @include media-breakpoint-up(md) {
+    width: calc(50% - 10rem);
+    font-size: 1rem;
+    margin: 2rem 3rem 2.5rem 5rem;
   }
 }
