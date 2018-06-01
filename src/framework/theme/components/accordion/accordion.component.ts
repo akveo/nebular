@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, HostBinding, Host } from '@angular/core';
 
 @Component({
   selector: 'nb-accordion-title',
@@ -34,7 +34,9 @@ export class NbAccordionDescriptionComponent {}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionHeaderComponent {}
+export class NbAccordionHeaderComponent {
+  constructor(@Host() private accordion: NbAccordionComponent) {}
+}
 
 @Component({
   selector: 'nb-accordion-body',
@@ -44,6 +46,8 @@ export class NbAccordionHeaderComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionBodyComponent {}
+
+export type AccordionStats = 'collapsed' | 'expanded';
 
 @Component({
   selector: 'nb-accordion',
@@ -55,6 +59,8 @@ export class NbAccordionBodyComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionComponent {
+  @Input() collapsed: boolean = true;
+
   @Output() opened = new EventEmitter<boolean>();
   @Output() closed = new EventEmitter<boolean>();
 }
