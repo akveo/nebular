@@ -4,7 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Host } from '@angular/core';
+
+import { NbAccordionComponent } from './accordion.component';
 
 @Component({
   selector: 'nb-accordion-header',
@@ -13,8 +15,19 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     <ng-content select="nb-accordion-title"></ng-content>
     <ng-content select="nb-accordion-description"></ng-content>
     <ng-content></ng-content>
-    <i class="nb-arrow-up"></i>
+    <i *ngIf="isExpanded" class="nb-arrow-up"></i>
+    <i *ngIf="isCollapsed" class="nb-arrow-down"></i>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionHeaderComponent {}
+export class NbAccordionHeaderComponent {
+  constructor(@Host() private accordion: NbAccordionComponent) {}
+
+  get isCollapsed(): boolean {
+    return !!this.accordion.collapsed;
+  }
+
+  get isExpanded(): boolean {
+    return !this.accordion.collapsed;
+  }
+}
