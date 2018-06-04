@@ -8,8 +8,14 @@
     border-radius: nb-theme(radius);
   }
 
-  .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
-    border: none;
+  .algolia-autocomplete {
+    > input {
+      width: 100%;
+    }
+
+    .ds-dropdown-menu [class^=ds-dataset-] {
+      border: none;
+    }
   }
 
   .algolia-docsearch-suggestion--highlight {
