@@ -54,6 +54,7 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
   }
 
   @HostBinding('class.accordion-header-expanded')
+  @HostBinding('attr.aria-expanded')
   get isExpanded(): boolean {
     return !this.accordion.collapsed;
   }
@@ -61,6 +62,11 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
   @HostBinding('attr.tabindex')
   get isTabbable(): string {
     return this.accordion.disabled ? '-1' : '0';
+  }
+
+  @HostBinding('attr.aria-disabled')
+  get isDisabled(): boolean {
+    return !!this.accordion.disabled;
   }
 
   get state(): string {
