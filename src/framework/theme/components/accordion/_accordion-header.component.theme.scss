@@ -5,7 +5,7 @@
  */
 
 @mixin nb-accordion-header-theme() {
-  nb-accordion-header {
+  nb-accordion-header.accordion-header-collapsed {
     &:hover {
       background-color: nb-theme(accordion-header-hover-bg);
     }

@@ -8,6 +8,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   Host,
+  HostBinding,
   HostListener,
   OnInit,
   OnDestroy,
@@ -47,10 +48,12 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Host() private accordion: NbAccordionComponent, private cdr: ChangeDetectorRef) {}
 
+  @HostBinding('class.accordion-header-collapsed')
   get isCollapsed(): boolean {
     return !!this.accordion.collapsed;
   }
 
+  @HostBinding('class.accordion-header-expanded')
   get isExpanded(): boolean {
     return !this.accordion.collapsed;
   }
