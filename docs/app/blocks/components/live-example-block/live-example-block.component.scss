@@ -24,6 +24,11 @@
     margin-bottom: 1.875rem;
   }
 
+  .title,
+  .actions {
+    margin-top: 0.5rem;
+  }
+
   .title {
     margin-right: 1rem;
     font-weight: bold;
@@ -78,7 +83,6 @@
 
     select {
       font-size: 0.875rem;
-      padding: 0 2.5rem;
       appearance: none;
     }
   }
@@ -132,6 +136,9 @@
       .action-item {
         padding: 0.5rem 1rem;
         color: $action-fg;
+      }
+      select.action-item {
+        padding: 0 2.5rem;
       }
 
       .icon {
