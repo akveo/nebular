@@ -12,6 +12,7 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
+  HostBinding,
   OnChanges,
   OnDestroy,
 } from '@angular/core';
@@ -49,6 +50,16 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
   @Output() destroyed = new EventEmitter<void>();
 
   @Output() collapsedChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.accordion-collapsed')
+  get isCollapsed(): boolean {
+    return !!this.collapsed;
+  }
+
+  @HostBinding('class.accordion-expanded')
+  get isExpanded(): boolean {
+    return !this.collapsed;
+  }
 
   readonly inputChanges = new Subject<SimpleChanges>();
 

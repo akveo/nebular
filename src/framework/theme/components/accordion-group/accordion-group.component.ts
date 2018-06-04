@@ -9,7 +9,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'nb-accordion-group',
   styleUrls: ['./accordion-group.component.scss'],
-  template: ``,
+  template: `
+    <ng-content select="nb-accordion"></ng-content>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionGroupComponent {}
