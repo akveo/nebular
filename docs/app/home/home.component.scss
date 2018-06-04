@@ -27,10 +27,6 @@
     margin-bottom: -5px;
   }
 
-  ngd-hero {
-    margin-top: 4rem;
-  }
-
   .features {
     margin-top: -8rem;
     justify-content: center;
@@ -46,6 +42,12 @@
 
     > .content-center {
       padding: 0 2rem;
+    }
+  }
+
+  @include media-breakpoint-up(is) {
+    ngd-hero {
+      margin-top: 4rem;
     }
   }
 
