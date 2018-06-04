@@ -78,7 +78,6 @@ import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
 import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
-import { NbAccordionGroupShowcaseComponent } from './accordion-group/accordion-group-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -147,7 +146,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbContextMenuShowcaseComponent,
   NbContextMenuClickComponent,
   NbAccordionShowcaseComponent,
-  NbAccordionGroupShowcaseComponent,
 ];
 
 export const NB_ENTRY_COMPONENTS = [

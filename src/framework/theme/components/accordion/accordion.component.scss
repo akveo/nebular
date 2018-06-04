@@ -4,24 +4,4 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host {
-  display: flex;
-  flex-direction: column;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  &.accordion-collapsed + ::ng-deep nb-accordion.accordion-collapsed {
-    border-radius: 0;
-  }
-}
-
-:host(.accordion-expanded) {
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-
-  &:not(:first-child) {
-    margin-top: 1rem;
-  }
-}
+:host {}

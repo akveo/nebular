@@ -7,11 +7,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'nb-accordion-description',
-  styleUrls: ['./accordion-description.component.scss'],
+  selector: 'nb-expansion-panel-title',
+  styleUrls: ['./expansion-panel-title.component.scss'],
   template: `
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionDescriptionComponent {}
+export class NbExpansionPanelTitleComponent {}

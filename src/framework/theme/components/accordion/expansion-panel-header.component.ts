@@ -18,7 +18,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { merge } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
-import { NbAccordionComponent } from './accordion.component';
+import { NbExpansionPanelComponent } from './expansion-panel.component';
 
 const expansionIndicatorTrigger = trigger('expansionIndicator', [
   state(
@@ -32,46 +32,46 @@ const expansionIndicatorTrigger = trigger('expansionIndicator', [
 ]);
 
 @Component({
-  selector: 'nb-accordion-header',
-  styleUrls: ['./accordion-header.component.scss'],
+  selector: 'nb-expansion-panel-header',
+  styleUrls: ['./expansion-panel-header.component.scss'],
   template: `
-    <ng-content select="nb-accordion-title"></ng-content>
-    <ng-content select="nb-accordion-description"></ng-content>
+    <ng-content select="nb-expansion-panel-title"></ng-content>
+    <ng-content select="nb-expansion-panel-description"></ng-content>
     <ng-content></ng-content>
     <i [@expansionIndicator]="state" *ngIf="showToggle" class="nb-arrow-down"></i>
   `,
   animations: [expansionIndicatorTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
+export class NbExpansionPanelHeaderComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
-  constructor(@Host() private accordion: NbAccordionComponent, private cdr: ChangeDetectorRef) {}
+  constructor(@Host() private panel: NbExpansionPanelComponent, private cdr: ChangeDetectorRef) {}
 
-  @HostBinding('class.accordion-header-collapsed')
+  @HostBinding('class.panel-header-collapsed')
   get isCollapsed(): boolean {
-    return !!this.accordion.collapsed;
+    return !!this.panel.collapsed;
   }
 
-  @HostBinding('class.accordion-header-expanded')
+  @HostBinding('class.panel-header-expanded')
   @HostBinding('attr.aria-expanded')
   get isExpanded(): boolean {
-    return !this.accordion.collapsed;
+    return !this.panel.collapsed;
   }
 
   @HostBinding('attr.tabindex')
   get isTabbable(): string {
-    return this.accordion.disabled ? '-1' : '0';
+    return this.panel.disabled ? '-1' : '0';
   }
 
   @HostBinding('attr.aria-disabled')
   get isDisabled(): boolean {
-    return !!this.accordion.disabled;
+    return !!this.panel.disabled;
   }
 
   @HostListener('click')
   toggle() {
-    this.accordion.toggle();
+    this.panel.toggle();
   }
 
   get state(): string {
@@ -84,15 +84,11 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
   }
 
   get showToggle(): boolean {
-    return !this.accordion.hideToggle;
+    return !this.panel.hideToggle;
   }
 
   ngOnInit() {
-    merge(
-      this.accordion.closed,
-      this.accordion.opened,
-      this.accordion.inputChanges.pipe(filter(changes => !!changes['disabled'])),
-    )
+    merge(this.panel.closed, this.panel.opened, this.panel.inputChanges.pipe(filter(changes => !!changes['disabled'])))
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());
   }

@@ -17,9 +17,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { merge } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 
-import { NbAccordionComponent } from './accordion.component';
+import { NbExpansionPanelComponent } from './expansion-panel.component';
 
-const accordionBodyTrigger = trigger('accordionBody', [
+const expansionPanelBodyTrigger = trigger('expansionPanelBody', [
   state(
     'collapsed',
     style({
@@ -42,35 +42,35 @@ const accordionBodyTrigger = trigger('accordionBody', [
 ]);
 
 @Component({
-  selector: 'nb-accordion-body',
-  styleUrls: ['./accordion-body.component.scss'],
+  selector: 'nb-expansion-panel-body',
+  styleUrls: ['./expansion-panel-body.component.scss'],
   template: `
-    <div [@accordionBody]="{ value: state, params: { contentHeight: contentHeight } }">
-      <div class="accordion-body">
+    <div [@expansionPanelBody]="{ value: state, params: { contentHeight: contentHeight } }">
+      <div class="panel-body">
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  animations: [accordionBodyTrigger],
+  animations: [expansionPanelBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionBodyComponent implements OnInit, OnDestroy {
+export class NbExpansionPanelBodyComponent implements OnInit, OnDestroy {
   contentHeight: string;
 
   private alive: boolean = true;
 
   constructor(
-    @Host() private accordion: NbAccordionComponent,
+    @Host() private panel: NbExpansionPanelComponent,
     private el: ElementRef,
     private cdr: ChangeDetectorRef,
   ) {}
 
   get isCollapsed(): boolean {
-    return !!this.accordion.collapsed;
+    return !!this.panel.collapsed;
   }
 
   get isExpanded(): boolean {
-    return !this.accordion.collapsed;
+    return !this.panel.collapsed;
   }
 
   get state(): string {
@@ -85,11 +85,7 @@ export class NbAccordionBodyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
 
-    merge(
-      this.accordion.opened,
-      this.accordion.closed,
-      this.accordion.inputChanges.pipe(filter(changes => !!changes['disabled'])),
-    )
+    merge(this.panel.opened, this.panel.closed, this.panel.inputChanges.pipe(filter(changes => !!changes['disabled'])))
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());
   }

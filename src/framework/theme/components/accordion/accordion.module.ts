@@ -9,19 +9,19 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NbAccordionComponent } from './accordion.component';
-import { NbAccordionTitleComponent } from './accordion-title.component';
-import { NbAccordionDescriptionComponent } from './accordion-description.component';
-import { NbAccordionHeaderComponent } from './accordion-header.component';
-import { NbAccordionBodyComponent } from './accordion-body.component';
-import { NbAccordionGroupComponent } from './accordion-group.component';
+import { NbExpansionPanelComponent } from './expansion-panel.component';
+import { NbExpansionPanelHeaderComponent } from './expansion-panel-header.component';
+import { NbExpansionPanelTitleComponent } from './expansion-panel-title.component';
+import { NbExpansionPanelDescriptionComponent } from './expansion-panel-description.component';
+import { NbExpansionPanelBodyComponent } from './expansion-panel-body.component';
 
 const NB_ACCORDION_COMPONENTS = [
-  NbAccordionTitleComponent,
-  NbAccordionDescriptionComponent,
-  NbAccordionHeaderComponent,
-  NbAccordionBodyComponent,
   NbAccordionComponent,
-  NbAccordionGroupComponent,
+  NbExpansionPanelComponent,
+  NbExpansionPanelHeaderComponent,
+  NbExpansionPanelTitleComponent,
+  NbExpansionPanelDescriptionComponent,
+  NbExpansionPanelBodyComponent,
 ];
 
 @NgModule({

@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-accordion-description-theme() {
-  nb-accordion-description {
-    color: nb-theme(accordion-description-color-fg);
+:host {
+  .panel-body {
+    padding: 1rem 1.5rem 1rem;
   }
 }
