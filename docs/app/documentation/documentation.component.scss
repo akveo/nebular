@@ -24,7 +24,7 @@
   }
 
   .contact-us {
-    padding: 5rem 0;
+    padding: 5rem 1rem;
     h2 {
       color: black;
     }
@@ -53,6 +53,12 @@
         font-size: 0.875rem;
         font-weight: normal;
       }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .contact-us {
+      padding: 5rem 0;
     }
   }
 
