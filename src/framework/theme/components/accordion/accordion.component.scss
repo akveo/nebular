@@ -10,6 +10,10 @@
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
   transition: margin 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  & + ::ng-deep nb-accordion {
+    border-radius: 0;
+  }
 }
 
 :host(.accordion-expanded) {
