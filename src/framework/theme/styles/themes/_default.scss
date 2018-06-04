@@ -423,6 +423,9 @@ $theme: (
   badge-danger-bg-color: color-danger,
 
   accordion-shadow: shadow,
+  accordion-horizontal-shadow: rgba(0, 0 , 0, 0.2),
+  accordion-vertical-shadow: rgba(0, 0, 0, 0.14),
+  accordion-blur: rgba(0, 0, 0, 0.12),
   accordion-header-hover-bg: rgba(0, 0, 0, 0.04),
   accordion-description-color-fg: color-fg
 );
