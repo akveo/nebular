@@ -6,8 +6,8 @@
 
 @mixin nb-accordion-theme() {
   nb-accordion {
-    box-shadow: 0 3px 1px -2px nb-theme(accordion-horizontal-shadow),
-                0 2px 2px 0 nb-theme(accordion-vertical-shadow),
-                0 1px 5px 0 nb-theme(accordion-blur);
+    box-shadow: 0 3px 1px -2px nb-theme(accordion-horizontal-offset-color),
+                0 2px 2px 0 nb-theme(accordion-vertical-offset-color),
+                0 1px 5px 0 nb-theme(accordion-blur-color);
   }
 }

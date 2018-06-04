@@ -10,7 +10,7 @@
       margin-bottom: 1rem;
     }
 
-    &.accordion-expanded:last-child {
+    &.accordion-expanded:not(:first-child) {
       margin-top: 1rem;
     }
   }
