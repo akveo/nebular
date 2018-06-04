@@ -11,7 +11,7 @@
   border-top-right-radius: 0.25rem;
   transition: margin 1000ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  & + ::ng-deep nb-accordion {
+  &.accordion-collapsed + ::ng-deep nb-accordion.accordion-collapsed {
     border-radius: 0;
   }
 }
