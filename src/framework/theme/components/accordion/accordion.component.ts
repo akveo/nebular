@@ -46,6 +46,7 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
   }
 
   @Input() disabled: boolean = false;
+  @Input() hideToggle: boolean = false;
 
   @Output() opened = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
