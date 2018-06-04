@@ -4,14 +4,4 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host {
-  ::ng-deep nb-accordion {
-    &.accordion-expanded:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-
-    &.accordion-expanded:not(:first-child) {
-      margin-top: 1rem;
-    }
-  }
-}
+:host {}
