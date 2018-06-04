@@ -351,19 +351,21 @@ src/framework/theme/styles/global/_components.scss (if you create _your-componen
 
 - tests
 ````
-src/framework/theme/components/your-component/your-component.spec.ts if you want basic rendering
+src/framework/theme/components/your-component/your-component.spec.ts if you want to test basic rendering
 e2e/your-component.e2e-spec.ts if you need to test complex actions such as user interaction
 ````
 
 - register your component in docs
 ````
+add it to docs/structure.ts
+
 src/playground/your-component/your-component-showcase.component.ts (create example usage of your component)
 src/playground/your-component/your-component-showcase.component.html (most probably looks like <nb-your-component></nb-your-component>)
 
 src/playground/playground.module.ts (register your component in module)
 src/playground/playground-routing.module.ts (routing)
 
-your-component.component.ts  (add line in docs section-  * @example(Your component, your-component/your-component-showcase.component)
+your-component.component.ts  (add line in docs section-  * @stacked-example(Your component, your-component/your-component-showcase.component)
 ````
 - after `npm run docs:serve` you can see your component at `http://localhost:4100/#/docs/components/your-component` 
 

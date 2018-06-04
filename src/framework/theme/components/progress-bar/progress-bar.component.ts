@@ -18,13 +18,13 @@ import { Component, Input } from '@angular/core';
  * Progress bar accepts property `value` in range 0-100
  * @stacked-example(Progress bar, progress-bar/progress-bar-showcase.component)
  *
- * Progress bar background configured by providing a `status` property:
+ * Progress bar background could be configured by providing a `status` property:
  * @stacked-example(Progress bar status, progress-bar/progress-bar-status.component)
  *
- * Progress bar size (height and font-size) configured by providing a `size` property:
+ * Progress bar size (height and font-size) could be configured by providing a `size` property:
  * @stacked-example(Progress bar size, progress-bar/progress-bar-size.component)
  *
- * `displayValue` property shows current value inside progress bar. It's also possible to add custom text inside tag:
+ * `displayValue` property shows current value inside progress bar. It's also possible to add custom text inside:
  * @stacked-example(Progress bar value, progress-bar/progress-bar-value.component)
  *
  * Progress bar supports `width` and `background-color` transition:
@@ -55,15 +55,15 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
   selector: 'nb-progress-bar',
+  styleUrls: ['./progress-bar.component.scss'],
   template: `
-    <div class="progress-container {{size ? '' + size : ''}}">
-      <div class="progress-value {{status ? '' + status : ''}}" [style.width.%]="value">
-        <span *ngIf="displayValue">{{value}}%</span>
+    <div class="progress-container {{ size ? '' + size : '' }}">
+      <div class="progress-value {{ status ? '' + status : '' }}" [style.width.%]="value">
+        <span *ngIf="displayValue">{{ value }}%</span>
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  styleUrls: ['./progress-bar.component.scss'],
 })
 export class NbProgressBarComponent {
 
