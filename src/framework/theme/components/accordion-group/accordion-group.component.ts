@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'nb-accordion-group',
@@ -14,4 +14,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionGroupComponent {}
+export class NbAccordionGroupComponent {
+  @Input() multi: boolean = false;
+  @Input() hideToggle: boolean = false;
+
+  @Output() closeAll = new EventEmitter<void>();
+  @Output() openAll = new EventEmitter<void>();
+}
