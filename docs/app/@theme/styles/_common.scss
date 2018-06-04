@@ -11,6 +11,10 @@
   .algolia-autocomplete {
     > input {
       width: 100%;
+
+      &.ds-input {
+        padding-right: 1rem !important;
+      }
     }
 
     .ds-dropdown-menu [class^=ds-dataset-] {
