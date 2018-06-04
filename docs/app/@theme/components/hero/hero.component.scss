@@ -21,16 +21,10 @@
     flex: 1;
     padding-top: 4rem;
     font-size: 0.75rem;
-    margin-right: 2rem;
+    max-width: 30em;
   }
 
   .right-block {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-
-  .shield {
     display: none;
   }
 
@@ -98,6 +92,16 @@
   @include media-breakpoint-up(lg) {
     padding-bottom: 0;
 
+    .block {
+      font-size: 1rem;
+      margin-right: 2rem;
+      max-width: none;
+    }
+    .right-block {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
     .shield {
       background: url('/assets/img/shield@2x.png');
       background-repeat: no-repeat;
@@ -116,9 +120,6 @@
       h3:nth-child(2) {
         font-size: 94px;
       }
-    }
-    .block {
-      font-size: 1rem;
     }
   }
 
