@@ -422,12 +422,12 @@ $theme: (
   badge-warning-bg-color: color-warning,
   badge-danger-bg-color: color-danger,
 
-  accordion-bg: color-bg,
-  accordion-horizontal-offset-color: rgba(0, 0 , 0, 0.2),
-  accordion-vertical-offset-color: rgba(0, 0, 0, 0.14),
-  accordion-blur-color: rgba(0, 0, 0, 0.12),
-  accordion-header-hover-bg: rgba(0, 0, 0, 0.04),
-  accordion-description-color-fg: color-fg
+  expansion-panel-bg: color-bg,
+  expansion-panel-horizontal-offset-color: rgba(0, 0 , 0, 0.2),
+  expansion-panel-vertical-offset-color: rgba(0, 0, 0, 0.14),
+  expansion-panel-blur-color: rgba(0, 0, 0, 0.12),
+  expansion-panel-header-hover-bg: rgba(0, 0, 0, 0.04),
+  expansion-panel-description-color-fg: color-fg
 );
 
 // register the theme

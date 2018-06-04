@@ -7,7 +7,7 @@
 @mixin nb-expansion-panel-header-theme() {
   nb-expansion-panel-header.panel-header-collapsed {
     &:hover {
-      background-color: nb-theme(accordion-header-hover-bg);
+      background-color: nb-theme(expansion-panel-header-hover-bg);
     }
   }
 }

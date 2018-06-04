@@ -6,6 +6,6 @@
 
 @mixin nb-expansion-panel-description-theme() {
   nb-expansion-panel-description {
-    color: nb-theme(accordion-description-color-fg);
+    color: nb-theme(expansion-panel-description-color-fg);
   }
 }
