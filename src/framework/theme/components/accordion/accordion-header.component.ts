@@ -38,7 +38,7 @@ const expansionIndicatorTrigger = trigger('expansionIndicator', [
     <ng-content select="nb-accordion-title"></ng-content>
     <ng-content select="nb-accordion-description"></ng-content>
     <ng-content></ng-content>
-    <i [@expansionIndicator]="state" *ngIf="!hideToggle" class="nb-arrow-down"></i>
+    <i [@expansionIndicator]="state" *ngIf="showToggle" class="nb-arrow-down"></i>
   `,
   animations: [expansionIndicatorTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,8 +83,8 @@ export class NbAccordionHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  get hideToggle(): boolean {
-    return this.accordion.hideToggle;
+  get showToggle(): boolean {
+    return !this.accordion.hideToggle;
   }
 
   ngOnInit() {
