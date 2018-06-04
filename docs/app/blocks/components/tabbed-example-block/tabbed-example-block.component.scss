@@ -31,6 +31,10 @@
       color: $tab-fg;
       outline: 0;
     }
+
+    .text {
+      display: none;
+    }
   }
 
   /deep/ nb-tabset.tabs-container {
@@ -67,6 +71,12 @@
     }
     .container {
       border-radius: 0 0 0.5rem 0.5rem;
+    }
+  }
+
+  @include media-breakpoint-up(is) {
+    button .text {
+      display: inline;
     }
   }
 }
