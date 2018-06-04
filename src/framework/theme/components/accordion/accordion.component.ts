@@ -45,6 +45,8 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
     this.cdr.markForCheck();
   }
 
+  @Input() disabled: boolean = false;
+
   @Output() opened = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
   @Output() destroyed = new EventEmitter<void>();
