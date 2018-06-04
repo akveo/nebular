@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import {NbProgressBarComponent} from './progress-bar.component';
+import { NbProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
   imports: [
