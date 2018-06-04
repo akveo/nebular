@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-layout-footer', () => {
 
   beforeEach((done) => {
-    browser.get('#/layout/footer').then(() => done());
+    browser.get('#/layout/layout-footer-test.component').then(() => done());
   });
 
   it('should render default footer', () => {
@@ -26,7 +26,7 @@ describe('nb-layout-footer', () => {
 
   it('should have height', () => {
     element(by.css('nb-layout-footer nav')).getCssValue('height').then(value => {
-      expect(value).toEqual('75.5938px');
+      expect(value).toEqual('61px');
     });
   });
 

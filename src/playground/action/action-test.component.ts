@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { NbBadgeComponent } from 'framework/theme/components/badge/badge.component';
 
 @Component({
-  selector: 'nb-actions-test',
+  selector: 'nb-action-test',
   template: `
     <nb-layout>
       <nb-layout-header>
@@ -130,7 +130,7 @@ import { NbBadgeComponent } from 'framework/theme/components/badge/badge.compone
     </nb-layout>
   `,
 })
-export class NbActionsTestComponent {
+export class NbActionTestComponent {
 
   badge = NbBadgeComponent;
 
