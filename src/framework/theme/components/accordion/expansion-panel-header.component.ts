@@ -88,7 +88,11 @@ export class NbExpansionPanelHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    merge(this.panel.closed, this.panel.opened, this.panel.inputChanges.pipe(filter(changes => !!changes['disabled'])))
+    merge(
+      this.panel.closed,
+      this.panel.opened,
+      this.panel.panelInputChanges.pipe(filter(changes => !!(changes['disabled'] || changes['hideToggle']))),
+    )
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());
   }

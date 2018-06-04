@@ -85,7 +85,11 @@ export class NbExpansionPanelBodyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
 
-    merge(this.panel.opened, this.panel.closed, this.panel.inputChanges.pipe(filter(changes => !!changes['disabled'])))
+    merge(
+      this.panel.opened,
+      this.panel.closed,
+      this.panel.panelInputChanges.pipe(filter(changes => !!(changes['disabled'] || changes['hideToggle']))),
+    )
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());
   }

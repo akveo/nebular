@@ -67,7 +67,11 @@ export class NbExpansionPanelComponent implements OnChanges, OnDestroy {
     return !this.collapsed;
   }
 
-  readonly inputChanges = new Subject<SimpleChanges>();
+  get multi(): boolean {
+    return this.accordion.multi;
+  }
+
+  readonly panelInputChanges = new Subject<SimpleChanges>();
 
   private _collapsed: boolean = true;
 
@@ -80,11 +84,11 @@ export class NbExpansionPanelComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.inputChanges.next(changes);
+    this.panelInputChanges.next(changes);
   }
 
   ngOnDestroy() {
-    this.inputChanges.complete();
+    this.panelInputChanges.complete();
     this.opened.complete();
     this.closed.complete();
     this.destroyed.emit();
