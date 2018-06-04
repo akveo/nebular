@@ -9,7 +9,7 @@
   .progress-container {
     height: nb-theme(progress-bar-height);
     border-radius: nb-theme(progress-bar-radius);
-    background-color: nb-theme(progress-bar-bg-color);
+    background-color: nb-theme(progress-bar-bg);
     &.xlg {
       .progress-value {
         font-size: nb-theme(progress-bar-font-size-xlg);
@@ -36,7 +36,7 @@
     }
   }
   .progress-value {
-    background-color: nb-theme(progress-bar-default-bg-color);
+    background-color: nb-theme(progress-bar-default-bg);
     color: nb-theme(progress-bar-font-color);
     font-size: nb-theme(progress-bar-font-size);
     font-weight: nb-theme(progress-bar-font-weight);
@@ -44,19 +44,19 @@
     transition-duration: nb-theme(progress-bar-animation-duration);
     transition-property: width, background-color;
     &.primary {
-      background-color: nb-theme(progress-bar-primary-bg-color);
+      background-color: nb-theme(progress-bar-primary-bg);
     }
     &.info {
-      background-color: nb-theme(progress-bar-info-bg-color);
+      background-color: nb-theme(progress-bar-info-bg);
     }
     &.success {
-      background-color: nb-theme(progress-bar-success-bg-color);
+      background-color: nb-theme(progress-bar-success-bg);
     }
     &.warning {
-      background-color: nb-theme(progress-bar-warning-bg-color);
+      background-color: nb-theme(progress-bar-warning-bg);
     }
     &.danger {
-      background-color: nb-theme(progress-bar-danger-bg-color);
+      background-color: nb-theme(progress-bar-danger-bg);
     }
   }
 }
