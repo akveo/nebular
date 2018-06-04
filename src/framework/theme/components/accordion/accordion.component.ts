@@ -70,7 +70,9 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
 
   toggle() {
-    this.collapsed = !this.collapsed;
+    if (!this.disabled) {
+      this.collapsed = !this.collapsed;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

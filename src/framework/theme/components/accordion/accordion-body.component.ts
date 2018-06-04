@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { merge } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, filter } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
@@ -85,7 +85,11 @@ export class NbAccordionBodyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
 
-    merge(this.accordion.opened, this.accordion.closed, this.accordion.inputChanges)
+    merge(
+      this.accordion.opened,
+      this.accordion.closed,
+      this.accordion.inputChanges.pipe(filter(changes => !!changes['disabled'])),
+    )
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());
   }
