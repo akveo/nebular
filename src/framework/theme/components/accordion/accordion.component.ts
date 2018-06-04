@@ -71,7 +71,7 @@ export class NbAccordionComponent implements OnChanges, OnDestroy {
 
   private _collapsed: boolean = true;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(@Host() private group: NbAccordionGroupComponent, private cdr: ChangeDetectorRef) {}
 
   toggle() {
     if (!this.disabled) {
