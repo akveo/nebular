@@ -19,7 +19,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
-const accordionBodyTrigger = trigger('accordion-body', [
+const accordionBodyTrigger = trigger('accordionBody', [
   state(
     'collapsed',
     style({
@@ -45,7 +45,7 @@ const accordionBodyTrigger = trigger('accordion-body', [
   selector: 'nb-accordion-body',
   styleUrls: ['./accordion-body.component.scss'],
   template: `
-    <div [@accordion-body]="{ value: state, params: { contentHeight: contentHeight } }">
+    <div [@accordionBody]="{ value: state, params: { contentHeight: contentHeight } }">
       <div class="accordion-body">
         <ng-content></ng-content>
       </div>

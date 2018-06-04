@@ -20,7 +20,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
 
-const expansionIndicatorTrigger = trigger('expansion-indicator', [
+const expansionIndicatorTrigger = trigger('expansionIndicator', [
   state(
     'expanded',
     style({
@@ -38,7 +38,7 @@ const expansionIndicatorTrigger = trigger('expansion-indicator', [
     <ng-content select="nb-accordion-title"></ng-content>
     <ng-content select="nb-accordion-description"></ng-content>
     <ng-content></ng-content>
-    <i [@expansion-indicator]="state" class="nb-arrow-down"></i>
+    <i [@expansionIndicator]="state" class="nb-arrow-down"></i>
   `,
   animations: [expansionIndicatorTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
