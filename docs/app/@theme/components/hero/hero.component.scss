@@ -11,7 +11,7 @@
 
   display: flex;
   flex: 1;
-  padding: 0 3rem 10rem;
+  padding: 0 1rem 10rem;
 
   .block, .shield {
     padding: 0 1.125rem;
@@ -71,6 +71,11 @@
     &:active {
       box-shadow: $btn-shadow-active;
     }
+  }
+
+  @include media-breakpoint-up(is) {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   @include media-breakpoint-up(md) {
