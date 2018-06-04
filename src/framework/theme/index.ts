@@ -32,4 +32,3 @@ export * from './components/popover/popover.module';
 export * from './components/context-menu/context-menu.directive';
 export * from './components/context-menu/context-menu.module';
 export * from './components/accordion';
-export * from './components/accordion-group';

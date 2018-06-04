@@ -22,7 +22,6 @@ import {
   NbBadgeModule,
   NbContextMenuModule,
   NbAccordionModule,
-  NbAccordionGroupModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -96,7 +95,6 @@ export const NB_MODULES = [
   NbBadgeModule,
   NbContextMenuModule,
   NbAccordionModule,
-  NbAccordionGroupModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [

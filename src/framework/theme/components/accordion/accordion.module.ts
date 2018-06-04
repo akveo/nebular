@@ -13,6 +13,7 @@ import { NbAccordionTitleComponent } from './accordion-title.component';
 import { NbAccordionDescriptionComponent } from './accordion-description.component';
 import { NbAccordionHeaderComponent } from './accordion-header.component';
 import { NbAccordionBodyComponent } from './accordion-body.component';
+import { NbAccordionGroupComponent } from './accordion-group.component';
 
 const NB_ACCORDION_COMPONENTS = [
   NbAccordionTitleComponent,
@@ -20,6 +21,7 @@ const NB_ACCORDION_COMPONENTS = [
   NbAccordionHeaderComponent,
   NbAccordionBodyComponent,
   NbAccordionComponent,
+  NbAccordionGroupComponent,
 ];
 
 @NgModule({

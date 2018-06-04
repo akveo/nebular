@@ -13,10 +13,13 @@ import {
   EventEmitter,
   SimpleChanges,
   HostBinding,
+  Host,
   OnChanges,
   OnDestroy,
 } from '@angular/core';
 import { Subject } from 'rxjs';
+
+import { NbAccordionGroupComponent } from './accordion-group.component';
 
 @Component({
   selector: 'nb-accordion',
