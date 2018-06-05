@@ -19,6 +19,7 @@
     background-color: transparent;
     font-size: 2.5rem;
     line-height: 1rem;
+    padding: 0;
 
     .nb-menu {
       vertical-align: middle;
@@ -27,7 +28,7 @@
 
   .section {
     display: flex;
-    padding: 0.875rem 1.125rem;
+    padding: 0.875rem 0.5rem;
 
     &.left {
       width: $left-section-width;
@@ -39,7 +40,6 @@
 
     &.right {
       width: $right-section-width;
-      margin-left: 1.875rem;
     }
   }
 
@@ -74,7 +74,7 @@
   .logo {
     display: flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
 
     a {
       font-size: 1.275rem;
@@ -97,14 +97,26 @@
     margin-left: auto;
   }
 
+  @include media-breakpoint-up(is) {
+    .section {
+      padding: 0.875rem 1.125rem;
+
+      &.right {
+        margin-left: 1.875rem;
+      }
+    }
+  }
+
   @include media-breakpoint-up(sm) {
     .logo {
       align-items: baseline;
       flex: 1 0 auto;
 
+      a {
+        margin-right: 0.5rem;
+      }
       .version {
         display: inline;
-        margin-left: 0.5rem;
       }
     }
   }
@@ -137,6 +149,85 @@
   @include media-breakpoint-up(xl) {
     .sidebar-toggle {
       display: none;
+    }
+  }
+}
+
+:host(.docs-header) {
+  .section {
+    &.left {
+      align-items: center;
+      padding-left: 0;
+      width: auto;
+    }
+    &.middle {
+      justify-content: space-between;
+    }
+    &.right {
+      display: none;
+      margin-left: 0;
+      width: auto;
+    }
+  }
+  /deep/ nb-menu {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+
+    .menu-items {
+      li {
+        margin-top: 0.4rem;
+        display: none;
+      }
+    }
+  }
+  ngd-search {
+    display: none;
+  }
+
+  @include media-breakpoint-up(is) {
+    /deep/ nb-menu .menu-items li:first-child {
+      display: list-item;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    ngd-search {
+      display: block;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .section.right {
+      display: block;
+    }
+    .stars {
+      width: 95px;
+      height: 20px;
+      margin-left: auto;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .section.middle {
+      justify-content: space-around;
+    }
+    /deep/ nb-menu {
+      min-width: 28rem;
+
+      .menu-items li {
+        display: list-item;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .section.left {
+      padding-left: 1.125rem;
+      width: nb-theme(sidebar-width);;
+    }
+    /deep/ nb-menu {
+      flex: 1;
     }
   }
 }

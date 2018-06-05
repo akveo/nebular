@@ -13,7 +13,7 @@ const EC = protractor.ExpectedConditions;
 describe('nb-search', () => {
 
   beforeEach((done) => {
-    browser.get('#/search').then(() => done());
+    browser.get('#/search/search-test.component').then(() => done());
   });
 
   it('should be able to show search-field', () => {
@@ -94,7 +94,7 @@ describe('nb-search', () => {
 describe('nb-search-customized', () => {
 
   beforeEach((done) => {
-    browser.get('#/search-2').then(() => done());
+    browser.get('#/search-customized-test.component').then(() => done());
   });
 
   it('should display customised hint', () => {

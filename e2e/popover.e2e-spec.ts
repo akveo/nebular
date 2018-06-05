@@ -16,7 +16,7 @@ const popover = by.css('nb-layout > nb-popover');
 describe('nb-popover', () => {
 
   beforeEach((done) => {
-    browser.get('#/popover').then(done);
+    browser.get('#/popover/popover-test.component').then(done);
   });
 
   it('render template ref', () => {

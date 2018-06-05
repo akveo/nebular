@@ -7,7 +7,7 @@
 import { Component, ComponentFactoryResolver } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
-import { NbDynamicToAddComponent } from '../dynamic.component';
+import { NbDynamicToAddComponent } from '../shared/dynamic.component';
 
 @Component({
   selector: 'nb-dynamic-test',

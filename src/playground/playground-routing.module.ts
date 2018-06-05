@@ -58,6 +58,41 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbCardTestComponent } from './card/card-test.component';
+import { NbActionTestComponent } from './action/action-test.component';
+import { NbCheckboxTestComponent } from './checkbox/checkbox-test.component';
+import { NbContextMenuTestComponent } from './context-menu/context-menu-test.component';
+import { NbLayoutHeaderTestComponent } from './layout/layout-header-test.component';
+import { NbLayoutFooterTestComponent } from './layout/layout-footer-test.component';
+import { NbThemeChangeTestComponent } from './layout/theme-change-test.component';
+import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
+import { NbThemeBreakpointTestComponent } from './layout/theme-breakpoint-test.component';
+import { NbLayoutTestComponent } from './layout/layout-test.component';
+import {
+  NbMenuItem1Component,
+  NbMenuItem2Component,
+  NbMenuItem31Component,
+  NbMenuItem32Component,
+  NbMenuItem331Component,
+  NbMenuItem332Component,
+  NbMenuItem33Component,
+  NbMenuItem3Component, NbMenuItem4Component,
+  NbMenuTestComponent,
+} from './menu/menu-test.component';
+import { NbPopoverTestComponent } from './popover/popover-test.component';
+import {
+  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestComponent,
+} from './tabset/route-tabset-test.component';
+import { NbSearchTestComponent } from './search/search-test.component';
+import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
+import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
+import { NbSidebarOneTestComponent } from './sidebar/sidebar-one-test.component';
+import { NbSidebarTwoTestComponent } from './sidebar/sidebar-two-test.component';
+import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.component';
+import { NbTabsetTestComponent } from './tabset/tabset-test.component';
+import { NbUserTestComponent } from './user/user-test.component';
+import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
@@ -72,6 +107,10 @@ export const routes: Routes = [
       {
         path: 'popover',
         children: [
+          {
+            path: 'popover-test.component',
+            component: NbPopoverTestComponent,
+          },
           {
             path: 'popover-showcase.component',
             component: NbPopoverShowcaseComponent,
@@ -97,6 +136,10 @@ export const routes: Routes = [
       {
         path: 'checkbox',
         children: [
+          {
+            path: 'checkbox-test.component',
+            component: NbCheckboxTestComponent,
+          },
           {
             path: 'checkbox-showcase.component',
             component: NbCheckboxShowcaseComponent,
@@ -139,6 +182,10 @@ export const routes: Routes = [
       {
         path: 'card',
         children: [
+          {
+            path: 'card-test.component',
+            component: NbCardTestComponent,
+          },
           {
             path: 'card-showcase.component',
             component: NbCardShowcaseComponent,
@@ -232,6 +279,10 @@ export const routes: Routes = [
         path: 'action',
         children: [
           {
+            path: 'action-test.component',
+            component: NbActionTestComponent,
+          },
+          {
             path: 'action-showcase.component',
             component: NbActionShowcaseComponent,
           },
@@ -253,6 +304,14 @@ export const routes: Routes = [
         path: 'tabset',
         children: [
           {
+            path: 'tabset-test.component',
+            component: NbTabsetTestComponent,
+          },
+          {
+            path: 'tabset-test.component/:tab',
+            component: NbTabsetTestComponent,
+          },
+          {
             path: 'tabset-showcase.component',
             component: NbTabsetShowcaseComponent,
           },
@@ -263,6 +322,25 @@ export const routes: Routes = [
           {
             path: 'tabset-width.component',
             component: NbTabsetWidthComponent,
+          },
+          {
+            path: 'route-tabset-test.component',
+            component: NbRouteTabsetTestComponent,
+            children: [
+              {
+                path: '',
+                redirectTo: 'tab1',
+                pathMatch: 'full',
+              },
+              {
+                path: 'tab1',
+                component: NbRouteTabsetTestChild1Component,
+              },
+              {
+                path: 'tab2',
+                component: NbRouteTabsetTestChild2Component,
+              },
+            ],
           },
         ],
       },
@@ -298,6 +376,10 @@ export const routes: Routes = [
         path: 'context-menu',
         children: [
           {
+            path: 'context-menu-test.component',
+            component: NbContextMenuTestComponent,
+          },
+          {
             path: 'context-menu-showcase.component',
             component: NbContextMenuShowcaseComponent,
           },
@@ -310,6 +392,30 @@ export const routes: Routes = [
       {
         path: 'layout',
         children: [
+          {
+            path: 'layout-test.component',
+            component: NbLayoutTestComponent,
+          },
+          {
+            path: 'layout-header-test.component',
+            component: NbLayoutHeaderTestComponent,
+          },
+          {
+            path: 'layout-footer-test.component',
+            component: NbLayoutFooterTestComponent,
+          },
+          {
+            path: 'theme-change-test.component',
+            component: NbThemeChangeTestComponent,
+          },
+          {
+            path: 'theme-dynamic-test.component',
+            component: NbThemeDynamicTestComponent,
+          },
+          {
+            path: 'theme-breakpoint-test.component',
+            component: NbThemeBreakpointTestComponent,
+          },
           {
             path: 'layout-showcase.component',
             component: NbLayoutShowcaseComponent,
@@ -331,6 +437,22 @@ export const routes: Routes = [
       {
         path: 'sidebar',
         children: [
+          {
+            path: 'sidebar-test.component',
+            component: NbSidebarTestComponent,
+          },
+          {
+            path: 'sidebar-one-test.component',
+            component: NbSidebarOneTestComponent,
+          },
+          {
+            path: 'sidebar-two-test.component',
+            component: NbSidebarTwoTestComponent,
+          },
+          {
+            path: 'sidebar-three-test.component',
+            component: NbSidebarThreeTestComponent,
+          },
           {
             path: 'sidebar-showcase.component',
             component: NbSidebarShowcaseComponent,
@@ -357,6 +479,14 @@ export const routes: Routes = [
         path: 'search',
         children: [
           {
+            path: 'search-test.component',
+            component: NbSearchTestComponent,
+          },
+          {
+            path: 'search-customized-test.component',
+            component: NbSearchCustomizedTestComponent,
+          },
+          {
             path: 'search-showcase.component',
             component: NbSearchShowcaseComponent,
           },
@@ -366,7 +496,99 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'user',
+        children: [
+          {
+            path: 'user-test.component',
+            component: NbUserTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'menu',
+        children: [
+          {
+            path: 'menu-test.component',
+            component: NbMenuTestComponent,
+            children: [
+              {
+                path: '',
+                redirectTo: '1',
+                pathMatch: 'full',
+              },
+              {
+                path: '1',
+                component: NbMenuItem1Component,
+              },
+              {
+                path: '2',
+                component: NbMenuItem2Component,
+              },
+              {
+                path: '12',
+                component: NbMenuItem1Component,
+              },
+              {
+                path: '3',
+                component: NbMenuItem3Component,
+                children: [
+                  {
+                    path: '',
+                    redirectTo: '1',
+                    pathMatch: 'full',
+                  },
+                  {
+                    path: '1',
+                    component: NbMenuItem31Component,
+                  },
+                  {
+                    path: '2',
+                    component: NbMenuItem32Component,
+                  },
+                  {
+                    path: '3',
+                    component: NbMenuItem33Component,
+                    children: [
+                      {
+                        path: '',
+                        redirectTo: '1',
+                        pathMatch: 'full',
+                      },
+                      {
+                        path: '1',
+                        component: NbMenuItem331Component,
+                      },
+                      {
+                        path: '2',
+                        component: NbMenuItem332Component,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                path: '4',
+                component: NbMenuItem4Component,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'bootstrap',
+        children: [
+          {
+            path: 'bootstrap-test.component',
+            component: NbBootstrapTestComponent,
+          },
+        ],
+      },
     ],
+  },
+  {
+    path: '',
+    loadChildren: './auth/auth.module#NbAuthPlaygroundModule',
   },
 ];
 

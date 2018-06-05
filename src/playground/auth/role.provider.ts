@@ -6,7 +6,7 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
 
 @Injectable()
-export class RoleProvider implements NbRoleProvider {
+export class NbCustomRoleProvider implements NbRoleProvider {
 
   constructor(private authService: NbAuthService) {
   }
@@ -15,7 +15,10 @@ export class RoleProvider implements NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          return token.isValid() ? token.getPayload()['role'] : 'guest';
+          if (token instanceof NbAuthJWTToken && token.isValid()) {
+            return token.getPayload()['role'];
+          }
+          return 'guest';
         }),
       );
   }

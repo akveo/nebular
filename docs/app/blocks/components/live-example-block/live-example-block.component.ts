@@ -8,7 +8,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostBinding,
-  AfterViewInit,
   Output,
   EventEmitter,
 } from '@angular/core';
@@ -23,7 +22,7 @@ import { NgdExampleView } from '../../enum.example-view';
   templateUrl: './live-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterViewInit {
+export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
 
   @ViewChild('iframe') iframe: ElementRef;
   @Input() content: any;
@@ -70,12 +69,9 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy, AfterVie
       .pipe(takeWhile(() => this.alive))
       .subscribe(it => {
         this.iframeHeight = it.height;
+        this.loading = false;
         this.changeDetection.detectChanges();
       });
-  }
-
-  ngAfterViewInit() {
-    this.iframe.nativeElement.onload = () => this.loading = false;
   }
 
   ngOnDestroy(): void {

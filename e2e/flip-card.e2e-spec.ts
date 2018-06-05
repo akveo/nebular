@@ -13,7 +13,7 @@ const cards = sizes.map((size, i) => ({ size, i }));
 
 describe('nb-flip-card', () => {
   beforeEach((done) => {
-    browser.get('#/card-status').then(() => done());
+    browser.get('#/card/card-test.component').then(() => done());
   });
 
   cards.forEach(c => {
