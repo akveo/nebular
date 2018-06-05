@@ -6,7 +6,7 @@ const popover = by.css('nb-layout > nb-popover');
 describe('nb-context-menu', () => {
 
   beforeEach((done) => {
-    browser.get('#/context-menu').then(done);
+    browser.get('#/context-menu/context-menu-test.component').then(done);
   });
 
   it('have to hide when click on item', () => {

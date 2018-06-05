@@ -23,23 +23,19 @@ export class NbRouteTabsetTestChild2Component {
 @Component({
   selector: 'nb-route-tabset-test',
   template: `
-    <nb-layout>
-      <nb-layout-column>
-        <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
-        <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
-      </nb-layout-column>
-    </nb-layout>
+    <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
+    <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
   `,
 })
 export class NbRouteTabsetTestComponent {
   tabs: any[] = [
     {
       title: 'Tab #1',
-      route: '/route-tabset/tab1',
+      route: '/tabset/route-tabset-test.component/tab1',
     },
     {
       title: 'Tab #2',
-      route: '/route-tabset/tab2',
+      route: '/tabset/route-tabset-test.component/tab2',
     },
   ];
 }

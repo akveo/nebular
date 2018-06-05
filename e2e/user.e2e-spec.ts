@@ -11,14 +11,8 @@ import badgeTests from './badge.e2e-spec';
 describe('nb-user', () => {
 
   beforeEach((done) => {
-    browser.get('#/user').then(() => done());
+    browser.get('#/user/user-test.component').then(() => done());
   });
-
-  // fit('should render main-container', () => {
-  //   element(by.css('nb-user:nth-child(0) > .user-container > .background')).getText().then(value => {
-  //     expect(value).toMatch('D N');
-  //   });
-  // });
 
   describe('badge', () => {
     const elementsOffset = 10;

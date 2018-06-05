@@ -21,13 +21,13 @@ import {
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbRouteTabsetModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
 import { NbPlaygroundLayoutComponent } from './playground-layout.component';
 
-import { NbDynamicToAddComponent } from '../app/dynamic.component';
 import { NbPopoverShowcaseComponent } from './popover/popover-showcase.component';
 import { NbPopoverTemplateRefComponent } from './popover/popover-template-ref.component';
 import { NbPopoverCustomComponentComponent } from './popover/popover-custom-component.component';
@@ -76,6 +76,44 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbCardTestComponent } from './card/card-test.component';
+import { NbActionTestComponent } from './action/action-test.component';
+import { NbCheckboxTestComponent } from './checkbox/checkbox-test.component';
+import { NbContextMenuTestComponent } from './context-menu/context-menu-test.component';
+import { NbLayoutTestComponent } from './layout/layout-test.component';
+import { NbLayoutHeaderTestComponent } from './layout/layout-header-test.component';
+import { NbLayoutFooterTestComponent } from './layout/layout-footer-test.component';
+import { NbThemeChangeTestComponent } from './layout/theme-change-test.component';
+import { NbThemeBreakpointTestComponent } from './layout/theme-breakpoint-test.component';
+import {
+  NbMenuItem1Component,
+  NbMenuItem2Component,
+  NbMenuItem31Component,
+  NbMenuItem32Component,
+  NbMenuItem331Component,
+  NbMenuItem332Component,
+  NbMenuItem33Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
+  NbMenuTestComponent,
+} from './menu/menu-test.component';
+import { NbPopoverTestComponent } from './popover/popover-test.component';
+import {
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestComponent,
+} from './tabset/route-tabset-test.component';
+import { NbSearchTestComponent } from './search/search-test.component';
+import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
+import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
+import { NbSidebarOneTestComponent } from './sidebar/sidebar-one-test.component';
+import { NbSidebarTwoTestComponent } from './sidebar/sidebar-two-test.component';
+import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.component';
+import { NbTabsetTestComponent } from './tabset/tabset-test.component';
+import { NbUserTestComponent } from './user/user-test.component';
+import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
+import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
+import { NbPlaygroundSharedModule } from './shared/shared.module';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -83,17 +121,22 @@ export const NB_MODULES = [
   NbPopoverModule,
   NbCheckboxModule,
   NbSidebarModule,
+  NbSidebarModule.forRoot(),
   NbMenuModule,
+  NbMenuModule.forRoot(),
   NbActionsModule,
   NbSearchModule,
   NbThemeModule,
   NbTabsetModule,
+  NbRouteTabsetModule,
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbPlaygroundSharedModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
+  NbPopoverTestComponent,
   NbPopoverShowcaseComponent,
   NbPopoverTemplateRefComponent,
   NbPopoverCustomComponentComponent,
@@ -102,10 +145,21 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCheckboxShowcaseComponent,
   NbCheckboxStatusComponent,
   NbCheckboxDisabledComponent,
+  NbCheckboxTestComponent,
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
   NbLayoutColumnLeftComponent,
+  NbLayoutTestComponent,
+  NbLayoutHeaderTestComponent,
+  NbLayoutFooterTestComponent,
+  NbThemeDynamicTestComponent,
+  NbThemeChangeTestComponent,
+  NbThemeBreakpointTestComponent,
+  NbSidebarTestComponent,
+  NbSidebarOneTestComponent,
+  NbSidebarTwoTestComponent,
+  NbSidebarThreeTestComponent,
   NbSidebarShowcaseComponent,
   NbSidebarCompactedComponent,
   NbSidebarRightComponent,
@@ -116,6 +170,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCardColorsComponent,
   NbCardAccentsComponent,
   NbCardSizesComponent,
+  NbCardTestComponent,
   NbFlipCardShowcaseComponent,
   NbFlipCardColorsComponent,
   NbFlipCardAccentsComponent,
@@ -126,27 +181,44 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbRevealCardAccentsComponent,
   NbRevealCardSizesComponent,
   NbRevealCardFullComponent,
+  NbMenuItem1Component,
+  NbMenuItem2Component,
+  NbMenuItem31Component,
+  NbMenuItem32Component,
+  NbMenuItem331Component,
+  NbMenuItem332Component,
+  NbMenuItem33Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
+  NbMenuTestComponent,
   NbMenuShowcaseComponent,
   NbMenuChildrenComponent,
   NbActionShowcaseComponent,
   NbActionSizesComponent,
   NbActionBadgeComponent,
   NbActionWidthComponent,
+  NbActionTestComponent,
+  NbSearchTestComponent,
+  NbSearchCustomizedTestComponent,
   NbSearchShowcaseComponent,
   NbSearchEventComponent,
+  NbTabsetTestComponent,
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestComponent,
   NbTabsetShowcaseComponent,
   NbTabsetBadgeComponent,
   NbTabsetWidthComponent,
+  NbUserTestComponent,
   NbUserShowcaseComponent,
   NbUserSizesComponent,
   NbBadgeShowcaseComponent,
   NbContextMenuShowcaseComponent,
   NbContextMenuClickComponent,
+  NbContextMenuTestComponent,
+  NbBootstrapTestComponent,
 ];
 
-export const NB_ENTRY_COMPONENTS = [
-  NbDynamicToAddComponent,
-];
 
 @NgModule({
   imports: [
@@ -154,18 +226,10 @@ export const NB_ENTRY_COMPONENTS = [
     NbPlaygroundRoutingModule,
     ...NB_MODULES,
   ],
-  exports: [
-    ...NB_ENTRY_COMPONENTS,
-    ...NB_EXAMPLE_COMPONENTS,
-  ],
   declarations: [
     NbPlaygroundLayoutComponent,
     NbPlaygroundBaseComponent,
-    ...NB_ENTRY_COMPONENTS,
     ...NB_EXAMPLE_COMPONENTS,
-  ],
-  entryComponents: [
-    ...NB_ENTRY_COMPONENTS,
   ],
 })
 export class NbPlaygroundModule {

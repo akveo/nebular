@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbDynamicToAddComponent } from '../../app/dynamic.component';
+import { NbDynamicToAddComponent } from '../shared/dynamic.component';
 
 
 @Component({

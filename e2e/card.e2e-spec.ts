@@ -52,7 +52,7 @@ describe('nb-card', () => {
   cards = prepareCards();
 
   beforeEach((done) => {
-    browser.get('#/card-status').then(() => done());
+    browser.get('#/card/card-test.component').then(() => done());
   });
 
   cards.forEach(c => {

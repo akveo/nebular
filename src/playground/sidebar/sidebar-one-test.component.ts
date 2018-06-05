@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-sidebar-test-one',
+  selector: 'nb-sidebar-one-test',
   styles: [
     `
     :host /deep/ nb-layout-column {
@@ -27,5 +27,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbSidebarTestOneComponent {
+export class NbSidebarOneTestComponent {
 }

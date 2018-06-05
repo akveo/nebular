@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-sidebar-test-one',
+  selector: 'nb-sidebar-three-test',
   styles: [
     `
     :host /deep/ nb-layout-column {
@@ -20,11 +20,11 @@ import { Component } from '@angular/core';
 
       <nb-layout-header></nb-layout-header>
 
-      <nb-sidebar>
+      <nb-sidebar state="collapsed">
         Left
       </nb-sidebar>
 
-      <nb-sidebar right fixed>
+      <nb-sidebar state="compacted" fixed right>
         Right
       </nb-sidebar>
 
@@ -33,5 +33,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbSidebarTestTwoComponent {
+export class NbSidebarThreeTestComponent {
 }
