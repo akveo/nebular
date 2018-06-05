@@ -49,7 +49,7 @@ export class NbExpansionPanelComponent implements OnChanges, OnDestroy {
   }
 
   @Input() disabled: boolean = false;
-  @Input() hideToggle: boolean = false;
+  @Input() hideToggle: boolean = this.accordion.hideToggle;
 
   @Output() opened = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
