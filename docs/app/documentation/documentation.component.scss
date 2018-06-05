@@ -4,6 +4,7 @@
 
   $content-width: nb-theme(content-width);
   $settings-width: nb-theme(settings-col-width);
+  $settings-margin: nb-theme(settings-col-margin);
   $layout-bg: nb-theme(layout-bg);
 
   .menu-sidebar {
@@ -68,7 +69,7 @@
 
   @include media-breakpoint-up(macpro) {
     /deep/ nb-layout-footer {
-      margin-right: $settings-width;
+      margin-right: $settings-width + $settings-margin;
 
       ngd-footer .contact {
         display: flex;
