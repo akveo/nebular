@@ -180,10 +180,19 @@
       }
     }
   }
+  ngd-search {
+    display: none;
+  }
 
   @include media-breakpoint-up(is) {
     /deep/ nb-menu .menu-items li:first-child {
       display: list-item;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    ngd-search {
+      display: block;
     }
   }
 
