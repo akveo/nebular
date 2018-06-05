@@ -28,7 +28,7 @@
 
   .section {
     display: flex;
-    padding: 0.875rem 1.125rem;
+    padding: 0.875rem 0.5rem;
 
     &.left {
       width: $left-section-width;
@@ -40,7 +40,6 @@
 
     &.right {
       width: $right-section-width;
-      margin-left: 1.875rem;
     }
   }
 
@@ -96,6 +95,16 @@
     width: 95px;
     height: 20px;
     margin-left: auto;
+  }
+
+  @include media-breakpoint-up(is) {
+    .section {
+      padding: 0.875rem 1.125rem;
+
+      &.right {
+        margin-left: 1.875rem;
+      }
+    }
   }
 
   @include media-breakpoint-up(sm) {
