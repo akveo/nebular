@@ -3,6 +3,11 @@
   "version": "2.0.0-rc.8",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "IE 11"
+  ],
   "bugs": {
     "url": "https://github.com/akveo/nebular/issues"
   },
