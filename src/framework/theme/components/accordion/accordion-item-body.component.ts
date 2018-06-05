@@ -17,9 +17,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { merge } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 
-import { NbExpansionPanelComponent } from './expansion-panel.component';
+import { NbAccordionItemComponent } from './accordion-item.component';
 
-const expansionPanelBodyTrigger = trigger('expansionPanelBody', [
+const accordionItemBodyTrigger = trigger('accordionItemBody', [
   state(
     'collapsed',
     style({
@@ -41,39 +41,42 @@ const expansionPanelBodyTrigger = trigger('expansionPanelBody', [
   transition('expanded => collapsed', animate('100ms ease-out')),
 ]);
 
+/**
+ * Component intended to be used within `<nb-accordion-item>` component
+ */
 @Component({
-  selector: 'nb-expansion-panel-body',
-  styleUrls: ['./expansion-panel-body.component.scss'],
+  selector: 'nb-accordion-item-body',
+  styleUrls: ['./accordion-item-body.component.scss'],
   template: `
-    <div [@expansionPanelBody]="{ value: state, params: { contentHeight: contentHeight } }">
-      <div class="panel-body">
+    <div [@accordionItemBody]="{ value: state, params: { contentHeight: contentHeight } }">
+      <div class="accordion-item-body">
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  animations: [expansionPanelBodyTrigger],
+  animations: [accordionItemBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbExpansionPanelBodyComponent implements OnInit, OnDestroy {
-  contentHeight: string;
+export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
+  protected contentHeight: string;
 
   private alive: boolean = true;
 
   constructor(
-    @Host() private panel: NbExpansionPanelComponent,
+    @Host() private accordionItem: NbAccordionItemComponent,
     private el: ElementRef,
     private cdr: ChangeDetectorRef,
   ) {}
 
-  get isCollapsed(): boolean {
-    return !!this.panel.collapsed;
+  protected get isCollapsed(): boolean {
+    return !!this.accordionItem.collapsed;
   }
 
-  get isExpanded(): boolean {
-    return !this.panel.collapsed;
+  protected get isExpanded(): boolean {
+    return !this.accordionItem.collapsed;
   }
 
-  get state(): string {
+  protected get state(): string {
     if (this.isCollapsed) {
       return 'collapsed';
     }
@@ -85,10 +88,14 @@ export class NbExpansionPanelBodyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
 
+    // Since the toggle state depends on an @Input on the panel, we
+    // need to  subscribe and trigger change detection manually.
     merge(
-      this.panel.opened,
-      this.panel.closed,
-      this.panel.panelInputChanges.pipe(filter(changes => !!(changes['disabled'] || changes['hideToggle']))),
+      this.accordionItem.opened,
+      this.accordionItem.closed,
+      this.accordionItem.accordionItemInputChanges.pipe(
+        filter(changes => !!(changes['disabled'] || changes['hideToggle'])),
+      ),
     )
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cdr.markForCheck());

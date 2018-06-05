@@ -86,6 +86,7 @@ import { NbDynamicToAddComponent } from './dynamic.component';
 import { NbPlaygroundModule } from '../playground/playground.module';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
 import { NbPopoverTestComponent } from './popover-test/popover-test.component';
+import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 
 const NB_TEST_COMPONENTS = [
   NbAppComponent,
@@ -226,6 +227,7 @@ const NB_TEST_COMPONENTS = [
   declarations: [
     ...NB_TEST_COMPONENTS,
     NbLayoutDirectionToggleComponent,
+    NbLayoutThemeToggleComponent,
   ],
   entryComponents: [
     NbDynamicToAddComponent,

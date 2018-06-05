@@ -6,12 +6,15 @@
 
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+/**
+ * Component intended to be used within `<nb-accordion-item-header>` component
+ */
 @Component({
-  selector: 'nb-expansion-panel-description',
-  styleUrls: ['./expansion-panel-description.component.scss'],
+  selector: 'nb-accordion-item-title',
+  styleUrls: ['./accordion-item-title.component.scss'],
   template: `
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbExpansionPanelDescriptionComponent {}
+export class NbAccordionItemTitleComponent {}

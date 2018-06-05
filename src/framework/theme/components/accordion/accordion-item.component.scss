@@ -11,12 +11,12 @@
   border-top-right-radius: 0.25rem;
   transition: margin 200ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &.panel-collapsed + ::ng-deep nb-expansion-panel.panel-collapsed {
+  &.accordion-item-collapsed + ::ng-deep nb-accordion-item.accordion-item-collapsed {
     border-radius: 0;
   }
 }
 
-:host(.panel-expanded) {
+:host(.accordion-item-expanded) {
   &:not(:last-child) {
     margin-bottom: 1rem;
   }

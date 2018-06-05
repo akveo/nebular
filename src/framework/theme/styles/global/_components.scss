@@ -19,10 +19,9 @@
 @import '../../components/badge/badge.component.theme';
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
-@import '../../components/accordion/accordion.component.theme';
-@import '../../components/accordion/expansion-panel.component.theme';
-@import '../../components/accordion/expansion-panel-header.component.theme';
-@import '../../components/accordion/expansion-panel-description.component.theme';
+@import '../../components/accordion/accordion-item.component.theme';
+@import '../../components/accordion/accordion-item-header.component.theme';
+@import '../../components/accordion/accordion-item-description.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -41,8 +40,7 @@
   @include nb-badge-theme();
   @include nb-popover-theme();
   @include nb-context-menu-theme();
-  @include nb-accordion-theme();
-  @include nb-expansion-panel-theme();
-  @include nb-expansion-panel-header-theme();
-  @include nb-expansion-panel-description-theme();
+  @include nb-accordion-item-theme();
+  @include nb-accordion-item-header-theme();
+  @include nb-accordion-item-description-theme();
 }

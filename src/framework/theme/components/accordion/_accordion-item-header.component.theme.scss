@@ -4,10 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-expansion-panel-header-theme() {
-  nb-expansion-panel-header.panel-header-collapsed {
+@mixin nb-accordion-item-header-theme() {
+  nb-accordion-item-header.accordion-item-header-collapsed {
     &:hover {
-      background-color: nb-theme(expansion-panel-header-hover-bg);
+      background-color: nb-theme(accordion-item-header-hover-bg);
     }
   }
 }
