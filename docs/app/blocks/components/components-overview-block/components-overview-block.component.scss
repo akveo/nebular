@@ -62,8 +62,8 @@
 
   @include media-breakpoint-up(md) {
     .components-list .component-card-wrapper {
-      flex: 0 0 calc(100% / 3);
-      max-width: calc(100% / 3);
+      flex: 1 0 auto;
+      max-width: 33.3%;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
