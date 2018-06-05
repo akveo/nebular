@@ -6,7 +6,7 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbBadgeComponent } from 'framework/theme/components/badge/badge.component';
+import { NbBadgeComponent } from '@nebular/theme';
 
 @Component({
   selector: 'nb-tabset-test',
