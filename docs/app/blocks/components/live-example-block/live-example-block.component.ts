@@ -15,6 +15,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { takeWhile } from 'rxjs/operators';
 import { NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ngd-live-example-block',
@@ -51,7 +52,8 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
   loading = true;
 
   get url(): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`#/example/${this.content.id}`);
+    return this.sanitizer
+      .bypassSecurityTrustResourceUrl(`${environment.examplesUrl}#/example/${this.content.id}`);
   }
 
   get iframeWindow(): Window {

@@ -38,9 +38,10 @@ We have to:
   - [x] use Angular CLI
 
 # Framework Structure
+- docs - Documentation and framework website built on top on the framework
 - src
-    - app - Components playground, used for components development showcase, also covered with UI tests
-    - docs - Documentation and framework website built on top on the framework
+    - app - runner app for components playground
+    - playground - independent module with runnable examples for each feature
     - backend - Small backend example
     - framework - Framework itself, divided into npm packages
         - theme - `@nebular/theme` npm package, main framework package
@@ -48,6 +49,17 @@ We have to:
         - icons - `nebular-icons` npm package, cool icons font
         - security - `@nebular/security` npm package, security framework package
         
+
+# Docs
+
+Docs is a separate Angular application located right in this project in `docs/` folder.
+The pages structure is taken from `structure.ts` file.
+The components documentation is take from the component comment sections.
+Runnable examples - an iframe to the same Angular application to a different route (/#/examples) where `playground module` is connected.
+In the build mode documentation and runnable examples are built in TWO separate apps and placed to `docs/dist` for the docs website
+and `docs/dist/run` for the examples. This is done so that we can reference an example in an iframe avoiding "same page iframe policy" which won't allow
+us to load the same page in the iframe on that page (and different pages starting only differentiated by `#something` are considered as one page in some
+browsers. 
       
       
 ## Auth // TODO      
