@@ -193,7 +193,8 @@
 
   @include media-breakpoint-up(sm) {
     ngd-search {
-      display: block;
+      display: flex;
+      align-items: center;
     }
   }
 
