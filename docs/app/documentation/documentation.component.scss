@@ -56,6 +56,10 @@
     }
   }
 
+  /deep/ nb-layout-footer ngd-footer .contact {
+    display: none;
+  }
+
   @include media-breakpoint-up(xl) {
     .contact-us {
       padding: 5rem 0;
@@ -67,7 +71,7 @@
       margin-right: $settings-width;
 
       ngd-footer .contact {
-        display: none;
+        display: flex;
       }
     }
   }
