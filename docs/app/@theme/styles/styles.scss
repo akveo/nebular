@@ -3,10 +3,15 @@
 @import 'small-social';
 @import 'feather';
 
-// TODO check this path
-@import '../../../../src/framework/theme/styles/globals';
+// TODO refactor after bootstrap removal
+@import '../../../../src/framework/theme/styles/global/components';
+@import '../../../../src/framework/theme/styles/global/typography/typography';
+@import '../../../../src/framework/theme/styles/global/bootstrap/buttons';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
-@include nb-install() {
+@include nb-install-global() {
   @include nb-layout-theme();
   @include nb-sidebar-theme();
   @include nb-card-theme();
