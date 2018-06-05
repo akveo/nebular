@@ -19,6 +19,7 @@
     background-color: transparent;
     font-size: 2.5rem;
     line-height: 1rem;
+    flex: 1 0 auto;
     padding: 0;
 
     .nb-menu {
@@ -74,7 +75,7 @@
 
   .logo {
     display: flex;
-    flex: 1;
+    flex: 1 0 auto;
     flex-direction: row;
 
     a {
@@ -124,9 +125,9 @@
 
   @include media-breakpoint-up(md) {
     .logo {
-      display: flex;
-      flex: 1;
+      flex: 1 0 auto;
       flex-direction: column;
+      align-items: flex-start;
 
       .version {
         margin-left: 0;
