@@ -58,6 +58,7 @@
 
         a {
           color: $menu-item-fg;
+          display: block;
 
           &:hover, &.active {
             color: $menu-item-fg-active;
