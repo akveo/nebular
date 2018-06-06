@@ -10,8 +10,6 @@
   .components-list {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
 
     .component-card-wrapper {
       width: 100%;
@@ -53,19 +51,29 @@
   }
 
   @include media-breakpoint-up(is) {
-    .components-list .component-card-wrapper {
-      width: 50%;
-      padding-left: 1rem;
-      padding-right: 1rem;
+    .components-list {
+      margin-left: -1rem;
+      margin-right: -1rem;
+
+      .components-list .component-card-wrapper {
+        width: 50%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
     }
   }
 
   @include media-breakpoint-up(md) {
-    .components-list .component-card-wrapper {
-      flex: 1 0 auto;
-      max-width: 33.3%;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+    .components-list {
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+
+      .component-card-wrapper {
+        flex: 1 0 auto;
+        max-width: 33.3%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
     }
   }
 }
