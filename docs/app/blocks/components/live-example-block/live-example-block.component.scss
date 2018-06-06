@@ -82,7 +82,6 @@
     }
 
     select {
-      font-size: 0.875rem;
       appearance: none;
     }
   }
@@ -102,9 +101,15 @@
     }
   }
 
+  .iframe-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   iframe {
     width: 100%;
     border: none;
+    transform: translateZ(0);
 
     &.loading {
       visibility: hidden;
