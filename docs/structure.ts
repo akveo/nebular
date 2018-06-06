@@ -279,6 +279,19 @@ export const structure = [
       //   icon: 'modal.svg',
       //   source: [],
       // },
+      {
+        type: 'tabs',
+        name: 'Accordion',
+        icon: 'context-menu.svg',
+        source: [
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemTitleComponent',
+          'NbAccordionItemDescriptionComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
     ],
   },
   {

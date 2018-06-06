@@ -22,6 +22,7 @@ import {
   NbBadgeModule,
   NbContextMenuModule,
   NbRouteTabsetModule,
+  NbAccordionModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -114,6 +115,7 @@ import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -133,6 +135,7 @@ export const NB_MODULES = [
   NbBadgeModule,
   NbContextMenuModule,
   NbPlaygroundSharedModule,
+  NbAccordionModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -217,6 +220,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbContextMenuClickComponent,
   NbContextMenuTestComponent,
   NbBootstrapTestComponent,
+  NbAccordionShowcaseComponent,
 ];
 
 

@@ -58,6 +58,7 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 import { NbCardTestComponent } from './card/card-test.component';
 import { NbActionTestComponent } from './action/action-test.component';
 import { NbCheckboxTestComponent } from './checkbox/checkbox-test.component';
@@ -337,6 +338,15 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'accordion',
+        children: [
+          {
+            path: 'accordion-showcase.component',
+            component: NbAccordionShowcaseComponent,
+          },
+        ],
+      },
     ],
   },
   {
@@ -567,5 +577,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NbPlaygroundRoutingModule {
-}
+export class NbPlaygroundRoutingModule {}
