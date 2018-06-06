@@ -19,5 +19,7 @@
     </button>
   </div>
 </section>
-<iframe #iframe *ngIf="content.id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+<div class="iframe-container">
+  <iframe #iframe *ngIf="content.id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+</div>
 <span class="icon-loading feather-more-vertical" *ngIf="loading"></span>
