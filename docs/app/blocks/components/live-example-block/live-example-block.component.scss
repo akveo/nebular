@@ -58,6 +58,10 @@
     &:first-child {
       margin-left: 0;
     }
+
+    &:hover, &:focus {
+      text-decoration: none;
+    }
   }
 
   .action-selector {
