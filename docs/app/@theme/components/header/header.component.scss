@@ -38,10 +38,6 @@
     &.middle {
       flex: 1;
     }
-
-    &.right {
-      width: $right-section-width;
-    }
   }
 
   /deep/ nb-menu {
@@ -153,84 +149,91 @@
       display: none;
     }
   }
-}
 
-:host(.docs-header) {
-  .section {
-    &.left {
-      align-items: center;
-      padding-left: 0;
-      width: auto;
-    }
-    &.middle {
-      justify-content: space-between;
-    }
-    &.right {
-      display: none;
-      margin-left: 0;
-      width: auto;
-    }
-  }
-  /deep/ nb-menu {
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-
-    .menu-items {
-      li {
-        margin-top: 0.4rem;
+  &.docs-page {
+    .section {
+      &.left {
+        align-items: center;
+        padding-left: 0;
+        width: auto;
+      }
+      &.middle {
+        justify-content: space-between;
+      }
+      &.right {
         display: none;
+        margin-left: 0;
+        width: auto;
       }
     }
-  }
-  ngd-search {
-    display: none;
-  }
-
-  @include media-breakpoint-up(is) {
-    /deep/ nb-menu .menu-items li:first-child {
-      display: list-item;
-    }
-  }
-
-  @include media-breakpoint-up(sm) {
-    ngd-search {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  @include media-breakpoint-up(md) {
-    .section.right {
-      display: block;
-    }
-    .stars {
-      width: 95px;
-      height: 20px;
-      margin-left: auto;
-    }
-  }
-
-  @include media-breakpoint-up(lg) {
-    .section.middle {
-      justify-content: space-around;
-    }
     /deep/ nb-menu {
-      min-width: 28rem;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
 
-      .menu-items li {
+      .menu-items {
+        li {
+          margin-top: 0.4rem;
+          display: none;
+        }
+      }
+    }
+    ngd-search {
+      display: none;
+    }
+
+    @include media-breakpoint-up(is) {
+      /deep/ nb-menu .menu-items li:first-child {
         display: list-item;
       }
     }
-  }
 
-  @include media-breakpoint-up(xl) {
-    .section.left {
-      padding-left: 1.125rem;
-      width: nb-theme(sidebar-width);;
+    @include media-breakpoint-up(sm) {
+      ngd-search {
+        display: flex;
+        align-items: center;
+      }
     }
-    /deep/ nb-menu {
-      flex: 1;
+
+    @include media-breakpoint-up(md) {
+      .section.right {
+        display: block;
+      }
+      .stars {
+        width: 95px;
+        height: 20px;
+        margin-left: auto;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      .section.middle {
+        justify-content: space-around;
+      }
+      /deep/ nb-menu {
+        min-width: 28rem;
+
+        .menu-items li {
+          display: list-item;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      .section.left {
+        padding-left: 1.125rem;
+        width: nb-theme(sidebar-width);
+      }
+      /deep/ nb-menu {
+        flex: 1;
+      }
+    }
+
+    @include media-breakpoint-up(macpro) {
+      .section.right {
+        margin-left: 1.875rem;
+        width: $right-section-width;
+      }
     }
   }
 }
