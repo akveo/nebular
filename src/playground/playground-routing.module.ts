@@ -93,6 +93,11 @@ import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.compon
 import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
+import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
+import { NbAlertColorsComponent } from './alert/alert-colors.component';
+import { NbAlertAccentsComponent } from './alert/alert-accents.component';
+import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 
 
 export const routes: Routes = [
@@ -230,6 +235,31 @@ export const routes: Routes = [
           {
             path: 'reveal-card-full.component',
             component: NbRevealCardFullComponent,
+          },
+        ],
+      },
+      {
+        path: 'alert',
+        children: [
+          {
+            path: 'alert-test.component',
+            component: NbAlertTestComponent,
+          },
+          {
+            path: 'alert-showcase.component',
+            component: NbAlertShowcaseComponent,
+          },
+          {
+            path: 'alert-colors.component',
+            component: NbAlertColorsComponent,
+          },
+          {
+            path: 'alert-accents.component',
+            component: NbAlertAccentsComponent,
+          },
+          {
+            path: 'alert-sizes.component',
+            component: NbAlertSizesComponent,
           },
         ],
       },

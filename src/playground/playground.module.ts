@@ -22,6 +22,7 @@ import {
   NbBadgeModule,
   NbContextMenuModule,
   NbRouteTabsetModule,
+  NbAlertModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -114,6 +115,11 @@ import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
+import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
+import { NbAlertColorsComponent } from './alert/alert-colors.component';
+import { NbAlertAccentsComponent } from './alert/alert-accents.component';
+import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbAlertTestComponent } from './alert/alert-test.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -132,6 +138,7 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbAlertModule,
   NbPlaygroundSharedModule,
 ];
 
@@ -217,6 +224,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbContextMenuClickComponent,
   NbContextMenuTestComponent,
   NbBootstrapTestComponent,
+  NbAlertShowcaseComponent,
+  NbAlertColorsComponent,
+  NbAlertAccentsComponent,
+  NbAlertSizesComponent,
+  NbAlertTestComponent,
 ];
 
 
