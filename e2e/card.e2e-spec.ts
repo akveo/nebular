@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { colors, sizes } from './cards-shared';
+import { colors, cardSizes as sizes } from './component-shared';
 import { waitFor } from './e2e-helper';
 
 let cards: any[] = [];

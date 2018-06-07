@@ -20,6 +20,7 @@
 @import '../../components/badge/badge.component.theme';
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
+@import '../../components/alert/alert.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -39,4 +40,5 @@
   @include nb-badge-theme();
   @include nb-popover-theme();
   @include nb-context-menu-theme();
+  @include nb-alert-theme();
 }
