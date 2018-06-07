@@ -8,9 +8,9 @@
       </select>
       <i class="icon feather-aperture"></i>
     </div>
-    <button type="button" class="btn action-item action-button">
+    <a class="btn action-item action-button" target="_blank" [href]="url">
       <i class="icon feather-external-link"></i>
-    </button>
+    </a>
     <button type="button"
             *ngIf="hasViewSwitch"
             class="btn action-item action-button"
@@ -19,5 +19,7 @@
     </button>
   </div>
 </section>
-<iframe #iframe *ngIf="content.id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+<div class="iframe-container">
+  <iframe #iframe *ngIf="content.id" [src]="url" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+</div>
 <span class="icon-loading feather-more-vertical" *ngIf="loading"></span>

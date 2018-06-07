@@ -94,7 +94,7 @@ describe('nb-search', () => {
 describe('nb-search-customized', () => {
 
   beforeEach((done) => {
-    browser.get('#/search-customized-test.component').then(() => done());
+    browser.get('#/search/search-customized-test.component').then(() => done());
   });
 
   it('should display customised hint', () => {
