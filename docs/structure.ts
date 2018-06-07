@@ -190,7 +190,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Alert',
-        icon: 'reveal.svg',
+        icon: 'alert.svg',
         source: [
           'NbAlertComponent',
         ],
