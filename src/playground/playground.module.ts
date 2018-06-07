@@ -22,6 +22,7 @@ import {
   NbBadgeModule,
   NbContextMenuModule,
   NbRouteTabsetModule,
+  NbProgressBarModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -114,6 +115,11 @@ import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
+import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
+import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
+import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
+import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
+import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -133,6 +139,7 @@ export const NB_MODULES = [
   NbBadgeModule,
   NbContextMenuModule,
   NbPlaygroundSharedModule,
+  NbProgressBarModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -146,6 +153,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCheckboxStatusComponent,
   NbCheckboxDisabledComponent,
   NbCheckboxTestComponent,
+  NbProgressBarShowcaseComponent,
+  NbProgressBarStatusComponent,
+  NbProgressBarValueComponent,
+  NbProgressBarSizeComponent,
+  NbProgressBarInteractiveComponent,
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,

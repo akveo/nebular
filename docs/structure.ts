@@ -233,6 +233,13 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Progress Bar',
+        source: [
+          'NbProgressBarComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Badge',
         icon: 'badge.svg',
         source: [

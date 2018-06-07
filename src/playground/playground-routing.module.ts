@@ -93,7 +93,11 @@ import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.compon
 import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
-
+import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
+import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
+import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
+import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
+import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
 
 export const routes: Routes = [
   {
@@ -334,6 +338,31 @@ export const routes: Routes = [
           {
             path: 'badge-showcase.component',
             component: NbBadgeShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'progress-bar',
+        children: [
+          {
+            path: 'progress-bar-showcase.component',
+            component: NbProgressBarShowcaseComponent,
+          },
+          {
+            path: 'progress-bar-status.component',
+            component: NbProgressBarStatusComponent,
+          },
+          {
+            path: 'progress-bar-size.component',
+            component: NbProgressBarSizeComponent,
+          },
+          {
+            path: 'progress-bar-value.component',
+            component: NbProgressBarValueComponent,
+          },
+          {
+            path: 'progress-bar-interactive.component',
+            component: NbProgressBarInteractiveComponent,
           },
         ],
       },
