@@ -77,7 +77,7 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     this.accordionItem.toggle();
   }
 
-  protected get state(): string {
+  get state(): string {
     if (this.isCollapsed) {
       return 'collapsed';
     }
@@ -86,7 +86,7 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected get showToggle(): boolean {
+  get showToggle(): boolean {
     return !this.accordionItem.hideToggle;
   }
 
