@@ -17,5 +17,5 @@ export function isUrlPathContain(path, link) {
 }
 
 function getPathPartOfUrl(url): string {
-  return url.match(/.*?(?=[?#]|$)/)[0];
+  return url.match(/.*?(?=[?;#]|$)/)[0];
 }
