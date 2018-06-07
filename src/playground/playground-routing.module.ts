@@ -58,7 +58,6 @@ import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
 import { NbContextMenuShowcaseComponent } from './context-menu/context-menu-showcase.component';
 import { NbContextMenuClickComponent } from './context-menu/context-menu-click.component';
-import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 import { NbCardTestComponent } from './card/card-test.component';
 import { NbActionTestComponent } from './action/action-test.component';
 import { NbCheckboxTestComponent } from './checkbox/checkbox-test.component';
@@ -94,7 +93,12 @@ import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.compon
 import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
-
+import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
+import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
+import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
+import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
+import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 
 export const routes: Routes = [
   {
@@ -339,6 +343,31 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'progress-bar',
+        children: [
+          {
+            path: 'progress-bar-showcase.component',
+            component: NbProgressBarShowcaseComponent,
+          },
+          {
+            path: 'progress-bar-status.component',
+            component: NbProgressBarStatusComponent,
+          },
+          {
+            path: 'progress-bar-size.component',
+            component: NbProgressBarSizeComponent,
+          },
+          {
+            path: 'progress-bar-value.component',
+            component: NbProgressBarValueComponent,
+          },
+          {
+            path: 'progress-bar-interactive.component',
+            component: NbProgressBarInteractiveComponent,
+          },
+        ],
+      },
+      {
         path: 'accordion',
         children: [
           {
@@ -577,4 +606,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NbPlaygroundRoutingModule {}
+export class NbPlaygroundRoutingModule {
+}

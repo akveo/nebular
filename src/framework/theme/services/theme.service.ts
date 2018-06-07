@@ -40,6 +40,10 @@ export class NbThemeService {
     }
   }
 
+  /**
+   * Change current application theme
+   * @param {string} name
+   */
   changeTheme(name: string): void {
     this.themeChanges$.next({ name, previous: this.currentTheme });
     this.currentTheme = name;
@@ -49,6 +53,13 @@ export class NbThemeService {
     this.changeWindowWidth$.next(width);
   }
 
+  /**
+   * Append a component to top of the layout
+   * (useful for showing modal that should be placed heigher in the document tree)
+   *
+   * @param {Type<T> | ComponentFactory<T>} entity
+   * @returns {Observable<any>}
+   */
   appendToLayoutTop<T>(entity: Type<T> | ComponentFactory<T>): Observable<any> {
     let factory = entity;
 
@@ -75,6 +86,10 @@ export class NbThemeService {
     );
   }
 
+  /**
+   * Clears layout top
+   * @returns {Observable<any>}
+   */
   clearLayoutTop(): Observable<any> {
     const observable = new BehaviorSubject(null);
     this.createLayoutTop$.next({ listener: observable });
@@ -109,6 +124,10 @@ export class NbThemeService {
       );
   }
 
+  /**
+   * Triggered when current theme is changed
+   * @returns {Observable<any>}
+   */
   onThemeChange(): Observable<any> {
     return this.themeChanges$.pipe(share());
   }
@@ -121,18 +140,34 @@ export class NbThemeService {
     return this.createLayoutTop$.pipe(share());
   }
 
+  /**
+   * Append a class to nb-layout
+   * @param {string} className
+   */
   appendLayoutClass(className: string) {
     this.appendLayoutClass$.next(className);
   }
 
+  /**
+   * Triggered when a new class is added to nb-layout through `appendLayoutClass` method
+   * @returns {Observable<any>}
+   */
   onAppendLayoutClass(): Observable<any> {
     return this.appendLayoutClass$.pipe(share());
   }
 
+  /**
+   * Removes a class from nb-layout
+   * @param {string} className
+   */
   removeLayoutClass(className: string) {
     this.removeLayoutClass$.next(className);
   }
 
+  /**
+   * Triggered when a class is removed from nb-layout through `removeLayoutClass` method
+   * @returns {Observable<any>}
+   */
   onRemoveLayoutClass(): Observable<any> {
     return this.removeLayoutClass$.pipe(share());
   }

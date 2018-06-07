@@ -233,6 +233,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Progress Bar',
+        icon: 'progress-bar.svg',
+        source: [
+          'NbProgressBarComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Badge',
         icon: 'badge.svg',
         source: [
@@ -255,16 +263,23 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Accordion',
+        icon: 'context-menu.svg',
+        source: [
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemTitleComponent',
+          'NbAccordionItemDescriptionComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
       // {
       //   type: 'tabs',
       //   name: 'Chips',
       //   icon: 'chips.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Progress Bar',
-      //   icon: 'progress-bar.svg',
       //   source: [],
       // },
       // {
@@ -279,19 +294,6 @@ export const structure = [
       //   icon: 'modal.svg',
       //   source: [],
       // },
-      {
-        type: 'tabs',
-        name: 'Accordion',
-        icon: 'context-menu.svg',
-        source: [
-          'NbAccordionComponent',
-          'NbAccordionItemComponent',
-          'NbAccordionItemHeaderComponent',
-          'NbAccordionItemTitleComponent',
-          'NbAccordionItemDescriptionComponent',
-          'NbAccordionItemBodyComponent',
-        ],
-      },
     ],
   },
   {

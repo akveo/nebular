@@ -16,6 +16,7 @@
 @import '../../components/actions/actions.component.theme';
 @import '../../components/search/search.component.theme';
 @import '../../components/checkbox/checkbox.component.theme';
+@import '../../components/progress-bar/progress-bar.component.theme';
 @import '../../components/badge/badge.component.theme';
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
@@ -37,6 +38,7 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-checkbox-theme();
+  @include nb-progress-bar-theme();
   @include nb-badge-theme();
   @include nb-popover-theme();
   @include nb-context-menu-theme();

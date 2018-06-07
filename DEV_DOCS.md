@@ -38,9 +38,10 @@ We have to:
   - [x] use Angular CLI
 
 # Framework Structure
+- docs - Documentation and framework website built on top on the framework
 - src
-    - app - Components playground, used for components development showcase, also covered with UI tests
-    - docs - Documentation and framework website built on top on the framework
+    - app - runner app for components playground
+    - playground - independent module with runnable examples for each feature
     - backend - Small backend example
     - framework - Framework itself, divided into npm packages
         - theme - `@nebular/theme` npm package, main framework package
@@ -48,6 +49,17 @@ We have to:
         - icons - `nebular-icons` npm package, cool icons font
         - security - `@nebular/security` npm package, security framework package
         
+
+# Docs
+
+Docs is a separate Angular application located right in this project in `docs/` folder.
+The pages structure is taken from `structure.ts` file.
+The components documentation is take from the component comment sections.
+Runnable examples - an iframe to the same Angular application to a different route (/#/examples) where `playground module` is connected.
+In the build mode documentation and runnable examples are built in TWO separate apps and placed to `docs/dist` for the docs website
+and `docs/dist/run` for the examples. This is done so that we can reference an example in an iframe avoiding "same page iframe policy" which won't allow
+us to load the same page in the iframe on that page (and different pages starting only differentiated by `#something` are considered as one page in some
+browsers. 
       
       
 ## Auth // TODO      
@@ -329,6 +341,46 @@ To start a new release (publish the framework packages on NPM) you need:
 7. create github release
 8. build demo with npm run build:prod
 9. upload demo using `scp -r dist/ server_details`
+
+
+# create a new component guide
+- create directory in `src/framework/theme/components/your-component` with following files:
+````
+your-component.component.ts (component file)
+your-component.module.ts (module file)
+your-component.component.html (optional, html file)
+your-component.component.scss (optional, common styles for your component)
+_your-component.component.theme.scss (optional, styles that depends on theme vars)
+
+````
+
+- register your component in framework
+````
+src/framework/theme/index.ts (add exports of your component and module)
+src/framework/theme/styles/global/_components.scss (if you create _your-component.component.theme.scss you have to register mixin) 
+
+````
+
+- tests
+````
+src/framework/theme/components/your-component/your-component.spec.ts if you want to test basic rendering
+e2e/your-component.e2e-spec.ts if you need to test complex actions such as user interaction
+````
+
+- register your component in docs
+````
+add it to docs/structure.ts
+
+src/playground/your-component/your-component-showcase.component.ts (create example usage of your component)
+src/playground/your-component/your-component-showcase.component.html (most probably looks like <nb-your-component></nb-your-component>)
+
+src/playground/playground.module.ts (register your component in module)
+src/playground/playground-routing.module.ts (routing)
+
+your-component.component.ts  (add line in docs section-  * @stacked-example(Your component, your-component/your-component-showcase.component)
+````
+- after `npm run docs:serve` you can see your component at `http://localhost:4100/#/docs/components/your-component` 
+
 
 # TODO
  - steps to start the development

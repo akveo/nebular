@@ -31,4 +31,6 @@ export * from './components/popover/popover.directive';
 export * from './components/popover/popover.module';
 export * from './components/context-menu/context-menu.directive';
 export * from './components/context-menu/context-menu.module';
+export * from './components/progress-bar/progress-bar.component';
+export * from './components/progress-bar/progress-bar.module';
 export * from './components/accordion';

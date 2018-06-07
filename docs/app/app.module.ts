@@ -16,7 +16,11 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
-  NbCheckboxModule, NbSearchModule,
+  NbCheckboxModule, 
+  NbSearchModule,
+  NbProgressBarModule,
+  NbCheckboxModule, 
+  NbSearchModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -39,6 +43,7 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
     NbLayoutModule,
     NbTabsetModule,
     NbCheckboxModule,
+    NbProgressBarModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: '' }),
     NbSidebarModule.forRoot(),

@@ -1,0 +1,19 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host {
+  display: block;
+}
+
+.progress-container {
+  overflow: hidden;
+}
+
+.progress-value {
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+}
