@@ -241,6 +241,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Progress Bar',
+        icon: 'progress-bar.svg',
+        source: [
+          'NbProgressBarComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Badge',
         icon: 'badge.svg',
         source: [
@@ -267,12 +275,6 @@ export const structure = [
       //   type: 'tabs',
       //   name: 'Chips',
       //   icon: 'chips.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Progress Bar',
-      //   icon: 'progress-bar.svg',
       //   source: [],
       // },
       // {

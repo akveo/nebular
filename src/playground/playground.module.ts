@@ -22,6 +22,7 @@ import {
   NbBadgeModule,
   NbContextMenuModule,
   NbRouteTabsetModule,
+  NbProgressBarModule,
   NbAlertModule,
 } from '@nebular/theme';
 
@@ -115,6 +116,11 @@ import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
+import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
+import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
+import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
+import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
+import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
 import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
@@ -140,6 +146,7 @@ export const NB_MODULES = [
   NbContextMenuModule,
   NbAlertModule,
   NbPlaygroundSharedModule,
+  NbProgressBarModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -153,6 +160,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCheckboxStatusComponent,
   NbCheckboxDisabledComponent,
   NbCheckboxTestComponent,
+  NbProgressBarShowcaseComponent,
+  NbProgressBarStatusComponent,
+  NbProgressBarValueComponent,
+  NbProgressBarSizeComponent,
+  NbProgressBarInteractiveComponent,
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
