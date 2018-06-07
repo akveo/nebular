@@ -60,7 +60,7 @@ describe('nb-alert', () => {
     it(`should display ${c.colorKey} alert with ${c.size} size`, () => {
       waitFor(`nb-alert:nth-child(${c.elementNumber})`);
       expect(element(by.css(`nb-alert:nth-child(${c.elementNumber})`))
-        .getText()).toEqual('Success message!');
+        .getText()).toContain('Success message!');
 
       element(by.css(`nb-alert:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
         expect(height).toEqual(c.height);
