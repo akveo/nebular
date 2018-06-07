@@ -1,5 +1,7 @@
+# Add Into Existing Project
+
 If you don't have any code yet, please consider checking <a href="https://cli.angular.io" target="_blank">Angular CLI</a> documentation for help creating your app.
-In case you want to start based on our ngx-admin starter kit, please check out [Based on Starter Kit (ngx-admin)](#/docs/installation/based-on-starter-kit-ngxadmin) article.
+In case you want to start based on our ngx-admin starter kit, please check out [Based on Starter Kit (ngx-admin)](#/docs/guides/install-based-on-starter-kit) article.
 
 <div class="note note-info">
   <div class="note-title">ngx-admin custom components</div>
@@ -9,27 +11,29 @@ In case you want to start based on our ngx-admin starter kit, please check out [
     please follow this guide and in the end just copy any of ngx-admin custom components you need into your project, register them in your modules and that's it.
   </div>
 </div>
-<hr class="section-end">
+<hr>
 
 ## Installing dependencies
-1) At this step, we assume you already have Angular modules installed. Now let's install Angular Bootstrap which is the only peer dependency left:
+At this step, we assume you already have Angular modules installed. Now let's install Angular Bootstrap which is the only peer dependency left:
 
 ```bash
 npm i -S bootstrap
 ```
-<hr class="section-end">
+<hr>
 
-2) Then install Nebular modules:
+## Install Nebular modules
 
 ```bash
-npm i -S @nebular/theme @nebular/auth
+npm i -S @nebular/theme @nebular/auth @nebular/security
 ```
-You can remove `@nebular/auth` from the command if you don't need authentication part in your project.
-<hr class="section-end">
+You can remove `@nebular/auth` and `@nebular/security` from the command if you don't need authentication/security parts in your project.
+<hr>
 
-3) At this stage you have everything in place, let's configure Nebular in the app module.
+## Configure Nebular
 
-```typescript
+At this stage you have everything in place, let's configure Nebular in the app module.
+
+```ts
 
 import { NbThemeModule } from '@nebular/theme';
 
@@ -45,13 +49,14 @@ export class AppModule {
 
 ```
 Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](#/docs/auth/conceptsinstall) article).
-<hr class="section-end">
+<hr>
 
-4) Now, let's import Nebular styles:
+## Install Styles
+Now, let's import Nebular styles
 
 Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.json` file:
 
-```
+```scss
 "styles": [
   "../node_modules/bootstrap/dist/css/bootstrap.css",
   "../node_modules/@nebular/theme/styles/prebuilt/default.css", // or cosmic.css
@@ -62,15 +67,16 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
   <div class="note-title">Advanced Theme System configuration</div>
   <div class="note-body">
     In this article we describe the very basic styles installation. If you need more advanced features, like theme variables management, 
-    or even multiple themes switching - check out <a href="#/docs/guides/enabling-theme-system">Enabling Theme System</a> article.
+    or even multiple themes switching - check out <a href="#/docs/guides/enable-theme-system">Enabling Theme System</a> article.
   </div>
 </div>
-<hr class="section-end">
+<hr>
 
+## Create a page
 
-5) Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
+Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
-```typescript
+```ts
 import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
 import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
 
@@ -91,8 +97,7 @@ export class SomePageModule {
 ```
 
 Then let's add layout components with a sticky header into your `some-page.component.ts`:
-```typescript
-
+```ts
 @Component({
   ...
   template: `
@@ -114,7 +119,7 @@ And done! At this step, you should have a page with a simple layout on it lookin
 
 ![image](assets/images/articles/sample-page.png)
 
-<hr class="section-end">
+<hr>
 
 <div class="note note-info">
   <div class="note-title">Adding into existing page</div>
@@ -123,12 +128,12 @@ And done! At this step, you should have a page with a simple layout on it lookin
     For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
   </div>
 </div>
-<hr class="section-end"> 
+<hr> 
 
 
-## Next
+## Related Articles
 
-- [Advanced Theme System configuration](#/docs/guides/enabling-theme-system).
-- [Nebular UI Kit](#/docs/concepts/ui-kit).
-- [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](#/docs/components/layout).
-- [Deploying to production server](#/docs/guides/server-deployment).
+- [Advanced Theme System configuration](#/docs/guides/enable-theme-system)
+- [Nebular UI Kit](#/docs/guides/components-overview#advanced-setup)
+- [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](#/docs/components/layout)
+- [Deploying to production server](#/docs/guides/server-deployment)

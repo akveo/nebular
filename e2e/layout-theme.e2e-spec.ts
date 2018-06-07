@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-layout theme', () => {
 
   beforeEach((done) => {
-    browser.get('#/layout/change-theme').then(() => done());
+    browser.get('#/layout/theme-change-test.component').then(() => done());
   });
 
   it('should render default theme', () => {

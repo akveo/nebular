@@ -1,3 +1,5 @@
+# 3rd Party Components
+
 Currently Nebular Theme system is integrated with the following 3rd party modules:
 
 - Bootstrap 4;
@@ -27,8 +29,9 @@ Or that's how we described variables for the `angular2-toaster` module:
   ...
 
 ```
+ <hr>
  
-## Next
+## Related Articles
 
-- [Enable Theme System](#/docs/guides/enabling-theme-system).
-- [Theme System Concepts](#/docs/concepts/theme-system).
+- [Enable Theme System](#/docs/guides/enable-theme-system)
+- [Theme System Concepts](#/docs/guides/theme-system)

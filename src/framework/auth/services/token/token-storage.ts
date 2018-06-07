@@ -14,13 +14,13 @@ export abstract class NbTokenStorage {
  * Service that uses browser localStorage as a storage.
  *
  * The token storage is provided into auth module the following way:
- * ```
+ * ```ts
  * { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
  * ```
  *
  * If you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`
  * or `NbTokenLocalStorage` and provide in your `app.module`:
- * ```
+ * ```ts
  * { provide: NbTokenStorage, useClass: NbTokenCustomStorage },
  * ```
  *

@@ -1,4 +1,4 @@
-export const STRUCTURE = [
+export const structure = [
   {
     type: 'section',
     name: 'Getting Started',
@@ -29,11 +29,11 @@ export const STRUCTURE = [
   },
   {
     type: 'section',
-    name: 'Installation',
+    name: 'Guides',
     children: [
       {
         type: 'page',
-        name: 'Based on starter kit (ngx-admin)',
+        name: 'Install based on starter kit',
         children: [
           {
             type: 'block',
@@ -53,12 +53,6 @@ export const STRUCTURE = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Concepts',
-    children: [
       {
         type: 'page',
         name: 'Theme System',
@@ -72,12 +66,12 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'UI Kit',
+        name: 'Enable Theme System',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'concept-ui-kit.md',
+            source: 'enabling-theme-system.md',
           },
         ],
       },
@@ -92,62 +86,6 @@ export const STRUCTURE = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'ngx-admin tutorials',
-    children: [
-      {
-        type: 'page',
-        name: 'Updating ngx-admin to the latest version',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'ngx-admin-update.md',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Guides',
-    children: [
-      {
-        type: 'page',
-        name: 'Enabling Theme System',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'enabling-theme-system.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Component Theme Variables',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'component-theme-variables.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Server Deployment',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'server-deployment.md',
-          },
-        ],
-      },
       {
         type: 'page',
         name: 'Backend integration',
@@ -159,6 +97,17 @@ export const STRUCTURE = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Server deployment',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'server-deployment.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -167,207 +116,169 @@ export const STRUCTURE = [
     children: [
       {
         type: 'page',
+        name: 'Components Overview',
+        children: [
+          {
+            type: 'block',
+            block: 'components-overview',
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Layout',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbLayoutComponent',
-              'NbLayoutHeaderComponent',
-              'NbLayoutColumnComponent',
-              'NbLayoutFooterComponent',
-            ],
-          },
+        icon: 'layout.svg',
+        source: [
+          'NbLayoutComponent',
+          'NbLayoutHeaderComponent',
+          'NbLayoutColumnComponent',
+          'NbLayoutFooterComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Sidebar',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbSidebarComponent',
-              'NbSidebarHeaderComponent',
-              'NbSidebarFooterComponent',
-              'NbSidebarService',
-            ],
-          },
+        icon: 'sidebar.svg',
+        source: [
+          'NbSidebarComponent',
+          'NbSidebarHeaderComponent',
+          'NbSidebarFooterComponent',
+          'NbSidebarService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Menu',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbMenuComponent',
-              'NbMenuItem',
-              'NbMenuService',
-            ],
-          },
+        icon: 'menu.svg',
+        source: [
+          'NbMenuComponent',
+          'NbMenuItem',
+          'NbMenuService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbCardComponent',
-              'NbCardHeaderComponent',
-              'NbCardBodyComponent',
-              'NbCardFooterComponent',
-            ],
-          },
+        icon: 'card.svg',
+        source: [
+          'NbCardComponent',
+          'NbCardHeaderComponent',
+          'NbCardBodyComponent',
+          'NbCardFooterComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Flip Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbFlipCardComponent',
-              'NbCardFrontComponent',
-              'NbCardBackComponent',
-            ],
-          },
+        icon: 'flip.svg',
+        source: [
+          'NbFlipCardComponent',
+          'NbCardFrontComponent',
+          'NbCardBackComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Reveal Card',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbRevealCardComponent',
-              'NbCardFrontComponent',
-              'NbCardBackComponent',
-            ],
-          },
+        icon: 'reveal.svg',
+        source: [
+          'NbRevealCardComponent',
+          'NbCardFrontComponent',
+          'NbCardBackComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Search',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbSearchComponent',
-              'NbSearchService',
-            ],
-          },
+        icon: 'search.svg',
+        source: [
+          'NbSearchComponent',
+          'NbSearchService',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Tabs',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbTabsetComponent',
-              'NbTabComponent',
-              'NbRouteTabsetComponent',
-            ],
-          },
+        icon: 'tab.svg',
+        source: [
+          'NbTabsetComponent',
+          'NbTabComponent',
+          'NbRouteTabsetComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Actions',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbActionsComponent',
-              'NbActionComponent',
-            ],
-          },
+        icon: 'actions.svg',
+        source: [
+          'NbActionsComponent',
+          'NbActionComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'User (Avatar)',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbUserComponent',
-            ],
-          },
+        icon: 'user.svg',
+        source: [
+          'NbUserComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Checkbox',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbCheckboxComponent',
-            ],
-          },
+        icon: 'checkbox.svg',
+        source: [
+          'NbCheckboxComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Badge',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbBadgeComponent',
-            ],
-          },
+        icon: 'badge.svg',
+        source: [
+          'NbBadgeComponent',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Popover',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbPopoverDirective',
-              'NbPopoverComponent',
-            ],
-          },
+        icon: 'popover.svg',
+        source: [
+          'NbPopoverDirective',
         ],
       },
       {
-        type: 'page',
+        type: 'tabs',
         name: 'Context Menu',
-        children: [
-          {
-            type: 'block',
-            block: 'tabbed',
-            source: [
-              'NbContextMenuDirective',
-              'NbContextMenuComponent',
-            ],
-          },
+        icon: 'context-menu.svg',
+        source: [
+          'NbContextMenuDirective',
         ],
       },
+      // {
+      //   type: 'tabs',
+      //   name: 'Chips',
+      //   icon: 'chips.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Progress Bar',
+      //   icon: 'progress-bar.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Button',
+      //   icon: 'button.svg',
+      //   source: [],
+      // },
+      // {
+      //   type: 'tabs',
+      //   name: 'Modal',
+      //   icon: 'modal.svg',
+      //   source: [],
+      // },
     ],
   },
   {

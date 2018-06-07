@@ -1,22 +1,45 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 /**
- * Flip card component.
  *
- * ![image](assets/images/components/flip-card.gif)
+ * Flip card example:
+ * @stacked-example(Showcase, flip-card/flip-card-showcase.component)
  *
- * @example
+ * As a content Flip card accepts two instances of `nb-card` - for front and back sides.
  *
- * ```
+ * Basic flip card configuration:
+ *
+ * ```html
  * <nb-flip-card>
  *   <nb-card-front>
- *     <nb-card><nb-card-body>Front Card</nb-card-body></nb-card>
+ *     <nb-card>
+ *       <nb-card-body>
+ *         Front
+ *       </nb-card-body>
+ *     </nb-card>
  *   </nb-card-front>
  *   <nb-card-back>
- *     <nb-card><nb-card-body>Back Card</nb-card-body></nb-card>
+ *     <nb-card>
+ *       <nb-card-body>
+ *         Back
+ *       </nb-card-body>
+ *     </nb-card>
  *   </nb-card-back>
  * </nb-flip-card>
  * ```
+ *
+ * Flip Card with header and footer:
+ * @stacked-example(With Header & Footer, flip-card/flip-card-full.component.ts)
+ *
+ * Colored flip-cards could be simply configured by providing a `status` property:
+ * @stacked-example(Colored Card, flip-card/flip-card-colors.component)
+ *
+ * It is also possible to assign an `accent` property for a slight card highlight
+ * as well as combine it with `status`:
+ * @stacked-example(Accent Card, flip-card/flip-card-accents.component)
+ *
+ * @additional-example(Multiple Sizes, flip-card/flip-card-sizes.component)
+ *
  */
 @Component({
   selector: 'nb-flip-card',

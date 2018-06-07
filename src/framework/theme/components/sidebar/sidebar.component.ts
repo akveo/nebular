@@ -47,36 +47,22 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
+ * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
+ *
  * Sidebar can be placed on the left or the right side of the layout,
- * or on start or end position of layout (depends on document direction, left to right or right to left)
+ * or on start/end position of layout (depends on document direction, left to right or right to left)
  * It can be fixed (shown above the content) or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
  * By default sidebar content is fixed and saves its position while the page is being scrolled.
  *
+ * Compacted sidebar example:
+ * @stacked-example(Compacted Sidebar, sidebar/sidebar-compacted.component)
+ *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
- * @example Minimal sidebar example
- *
- * ```
- * <nb-sidebar>
- *   Sidebar content.
- * </nb-sidebar>
- * ```
- *
- * @example Example of fixed sidebar located on the left side, initially collapsed.
- *
- * ```
- * <nb-sidebar left fixed state="collapsed">
- *  <nb-sidebar-header>Header</nb-sidebar-header>
- *
- *    Sidebar content, menu or another component here.
- *
- *  <nb-sidebar-footer>
- *    Footer components here
- *  </nb-sidebar-footer>
- * </nb-sidebar>
- * ```
+ * @additional-example(Right Sidebar, sidebar/sidebar-right.component)
+ * @additional-example(Fixed Sidebar, sidebar/sidebar-fixed.component)
  *
  * @styles
  *
@@ -344,9 +330,9 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
    * @param {boolean} compact If true, then sidebar state will be changed between expanded & compacted,
    * otherwise - between expanded & collapsed. False by default.
    *
-   * @example Toggle sidebar state
+   * Toggle sidebar state
    *
-   * ```
+   * ```ts
    * this.sidebar.toggle(true);
    * ```
    */
