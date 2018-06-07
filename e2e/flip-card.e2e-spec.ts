@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { sizes } from './cards-shared';
+import { cardSizes as sizes } from './component-shared';
 
 const waitTime = 500;
 

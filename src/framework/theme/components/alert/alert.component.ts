@@ -71,7 +71,7 @@ import { convertToBoolProperty } from '../helpers';
   selector: 'nb-alert',
   styleUrls: ['./alert.component.scss'],
   template: `
-    <button *ngIf="closableValue" type="button" class="close" aria-label="Close" (click)="close()">
+    <button *ngIf="closableValue" type="button" class="close" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
     <ng-content></ng-content>
@@ -262,12 +262,12 @@ export class NbAlertComponent {
    * Emits when chip is removed
    * @type EventEmitter<any>
    */
-  @Output() closed = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   /**
    * Emits the removed chip event
    */
-  close() {
-    this.closed.emit();
+  onClose() {
+    this.close.emit();
   }
 }

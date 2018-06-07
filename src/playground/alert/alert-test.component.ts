@@ -7,100 +7,24 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-card-test',
+  selector: 'nb-alert-test',
   template: `
-    <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
-      <nb-card-header>
-        <span>Header</span>
-      </nb-card-header>
-      <nb-card-body *ngIf="card.size !== 'xxsmall'">
-        <span>Body</span>
-      </nb-card-body>
-      <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-        <span>Footer</span>
-      </nb-card-footer>
-    </nb-card>
+    <nb-alert
+      *ngFor="let alert of alerts"
+      [size]="alert.size"
+      [status]="alert.status"
+      closable
+      (close)="onClose(alert)">
+      Success message!
+    </nb-alert>
 
-    <h3>Accent Cards</h3>
-
-    <nb-card
-      *ngFor="let card of enhancedCards.accentCards"
-      [size]="card.size"
-      [status]="card.status"
-      [accent]="card.accent"
-    >
-      <nb-card-header>
-        <span>Header</span>
-      </nb-card-header>
-      <nb-card-body>
-        <span>Body</span>
-      </nb-card-body>
-      <nb-card-footer>
-        <span>Footer</span>
-      </nb-card-footer>
-    </nb-card>
-
-    <h3>Reveal Cards</h3>
-
-    <nb-reveal-card *ngFor="let card of enhancedCards.revealCards">
-      <nb-card-front>
-        <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
-            <span>Front Header</span>
-          </nb-card-header>
-          <nb-card-body>
-            <span>Front Reveal Card Body</span>
-          </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-            <span>Front Footer</span>
-          </nb-card-footer>
-        </nb-card>
-      </nb-card-front>
-      <nb-card-back>
-        <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
-            <span>Back Header</span>
-          </nb-card-header>
-          <nb-card-body>
-            <span>Back Reveal Card Body</span>
-          </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-            <span>Back Footer</span>
-          </nb-card-footer>
-        </nb-card>
-      </nb-card-back>
-    </nb-reveal-card>
-
-    <h3>Flip Cards</h3>
-
-    <nb-flip-card *ngFor="let card of enhancedCards.flipCards">
-      <nb-card-front>
-        <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
-            <span>Front Header</span>
-          </nb-card-header>
-          <nb-card-body>
-            <span>Front Flip Card Body</span>
-          </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-            <span>Front Footer</span>
-          </nb-card-footer>
-        </nb-card>
-      </nb-card-front>
-      <nb-card-back>
-        <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
-            <span>Back Header</span>
-          </nb-card-header>
-          <nb-card-body>
-            <span>Back Flip Card Body</span>
-          </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
-            <span>Back Footer</span>
-          </nb-card-footer>
-        </nb-card>
-      </nb-card-back>
-    </nb-flip-card>
+    <nb-alert
+      *ngFor="let alert of accentAlerts"
+      [size]="alert.size"
+      [status]="alert.status"
+      [accent]="alert.accent">
+      Success message!
+    </nb-alert>
   `,
 })
 export class NbAlertTestComponent {
@@ -109,15 +33,22 @@ export class NbAlertTestComponent {
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
   accents = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
 
-  cards: any[];
-  enhancedCards: any;
+  alerts: any[];
+  accentAlerts: any;
 
   constructor() {
-    this.cards = this.prepareCards();
-    this.enhancedCards = this.prepareEnhancedCards();
+    this.alerts = this.prepareAlerts();
+    this.accentAlerts = this.prepareAccentAlerts();
   }
 
-  private prepareCards(): any[] {
+  onClose(alert: any) {
+    const index = this.alerts.indexOf(alert);
+    if (index >= 0) {
+      this.alerts.splice(index, 1);
+    }
+  }
+
+  private prepareAlerts(): any[] {
     const result = [];
 
     this.statuses.forEach(status => {
@@ -132,15 +63,13 @@ export class NbAlertTestComponent {
     return result;
   }
 
-  private prepareEnhancedCards() {
-    const { sizes, statuses, accents } = this;
-    const accentCards = [];
-    const revealCards = [];
-    const flipCards = [];
+  private prepareAccentAlerts() {
+    const { statuses, accents } = this;
+    const accentAlerts = [];
 
     statuses.forEach(status => {
       accents.forEach(accent => {
-        accentCards.push({
+        accentAlerts.push({
           size: 'small',
           status,
           accent,
@@ -148,16 +77,6 @@ export class NbAlertTestComponent {
       });
     });
 
-    sizes.forEach(size => {
-      const card = { size, accent: '', status: '' };
-      revealCards.push(card);
-      flipCards.push(card);
-    });
-
-    return {
-      accentCards,
-      revealCards,
-      flipCards,
-    };
+    return accentAlerts;
   }
 }

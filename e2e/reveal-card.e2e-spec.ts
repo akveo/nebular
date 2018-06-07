@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { sizes } from './cards-shared';
+import { cardSizes as sizes } from './component-shared';
 import { protractor } from 'protractor/built/ptor';
 
 function toInt(cssValue) {
