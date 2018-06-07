@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { NbMenuItem, NbSidebarService } from '@nebular/theme';
 import { NgdVersionService } from '../../services';
 
@@ -32,6 +32,7 @@ import { NgdVersionService } from '../../services';
 export class NgdHeaderComponent {
 
   @Input() showSearch = true;
+  @HostBinding('class.docs-page') @Input() isDocs = false;
 
   currentVersion: string;
 

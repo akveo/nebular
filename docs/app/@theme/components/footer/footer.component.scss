@@ -73,12 +73,12 @@
 
   @include media-breakpoint-up(md) {
     > div {
-      justify-content: normal;
+      justify-content: flex-start;
       margin-right: 2rem;
 
       li {
-        justify-content: normal;
-        align-items: normal;
+        justify-content: flex-start;
+        align-items: flex-start;
         text-align: left;
       }
     }

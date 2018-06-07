@@ -8,6 +8,7 @@
   $note-fg-warning: nb-theme(color-warning);
   $note-bg-warning: #fffae4;
   $settings-width: nb-theme(settings-col-width);
+  $settings-margin: nb-theme(settings-col-margin);
   $heading-light: nb-theme(color-fg-heading-light);
   $code-bg: #f1f2f3;
   $code-fg: nb-theme(color-info);
@@ -195,7 +196,7 @@
 
     .settings-column {
       display: block;
-      margin-left: 1.875rem;
+      margin-left: $settings-margin;
       width: $settings-width;
 
       ngd-page-tabs {

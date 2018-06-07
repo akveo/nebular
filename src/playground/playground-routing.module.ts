@@ -155,31 +155,6 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'progress-bar',
-        children: [
-          {
-            path: 'progress-bar-showcase.component',
-            component: NbProgressBarShowcaseComponent,
-          },
-          {
-            path: 'progress-bar-status.component',
-            component: NbProgressBarStatusComponent,
-          },
-          {
-            path: 'progress-bar-size.component',
-            component: NbProgressBarSizeComponent,
-          },
-          {
-            path: 'progress-bar-value.component',
-            component: NbProgressBarValueComponent,
-          },
-          {
-            path: 'progress-bar-interactive.component',
-            component: NbProgressBarInteractiveComponent,
-          },
-        ],
-      },
-      {
         path: 'card',
         children: [
           {
@@ -363,6 +338,31 @@ export const routes: Routes = [
           {
             path: 'badge-showcase.component',
             component: NbBadgeShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'progress-bar',
+        children: [
+          {
+            path: 'progress-bar-showcase.component',
+            component: NbProgressBarShowcaseComponent,
+          },
+          {
+            path: 'progress-bar-status.component',
+            component: NbProgressBarStatusComponent,
+          },
+          {
+            path: 'progress-bar-size.component',
+            component: NbProgressBarSizeComponent,
+          },
+          {
+            path: 'progress-bar-value.component',
+            component: NbProgressBarValueComponent,
+          },
+          {
+            path: 'progress-bar-interactive.component',
+            component: NbProgressBarInteractiveComponent,
           },
         ],
       },

@@ -10,7 +10,7 @@
   $title-fg: nb-theme(color-fg-heading-light);
 
   display: flex;
-  flex: 1;
+  flex: 1 0 auto;
   padding: 0 1rem 10rem;
 
   .block, .shield {
