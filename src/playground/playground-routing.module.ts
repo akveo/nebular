@@ -98,6 +98,11 @@ import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
 import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
 import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
+import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
+import { NbAlertColorsComponent } from './alert/alert-colors.component';
+import { NbAlertAccentsComponent } from './alert/alert-accents.component';
+import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 
 export const routes: Routes = [
@@ -235,6 +240,31 @@ export const routes: Routes = [
           {
             path: 'reveal-card-full.component',
             component: NbRevealCardFullComponent,
+          },
+        ],
+      },
+      {
+        path: 'alert',
+        children: [
+          {
+            path: 'alert-test.component',
+            component: NbAlertTestComponent,
+          },
+          {
+            path: 'alert-showcase.component',
+            component: NbAlertShowcaseComponent,
+          },
+          {
+            path: 'alert-colors.component',
+            component: NbAlertColorsComponent,
+          },
+          {
+            path: 'alert-accents.component',
+            component: NbAlertAccentsComponent,
+          },
+          {
+            path: 'alert-sizes.component',
+            component: NbAlertSizesComponent,
           },
         ],
       },

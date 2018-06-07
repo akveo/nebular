@@ -33,4 +33,6 @@ export * from './components/context-menu/context-menu.directive';
 export * from './components/context-menu/context-menu.module';
 export * from './components/progress-bar/progress-bar.component';
 export * from './components/progress-bar/progress-bar.module';
+export * from './components/alert/alert.component';
+export * from './components/alert/alert.module';
 export * from './components/accordion';

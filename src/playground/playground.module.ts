@@ -23,6 +23,7 @@ import {
   NbContextMenuModule,
   NbRouteTabsetModule,
   NbProgressBarModule,
+  NbAlertModule,
   NbAccordionModule,
 } from '@nebular/theme';
 
@@ -121,6 +122,11 @@ import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status
 import { NbProgressBarValueComponent } from './progress-bar/progress-bar-value.component';
 import { NbProgressBarSizeComponent } from './progress-bar/progress-bar-size.component';
 import { NbProgressBarInteractiveComponent } from './progress-bar/progress-bar-interactive.component';
+import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
+import { NbAlertColorsComponent } from './alert/alert-colors.component';
+import { NbAlertAccentsComponent } from './alert/alert-accents.component';
+import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 
 export const NB_MODULES = [
@@ -140,6 +146,7 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
   NbAccordionModule,  
@@ -232,6 +239,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbContextMenuClickComponent,
   NbContextMenuTestComponent,
   NbBootstrapTestComponent,
+  NbAlertShowcaseComponent,
+  NbAlertColorsComponent,
+  NbAlertAccentsComponent,
+  NbAlertSizesComponent,
+  NbAlertTestComponent,
   NbAccordionShowcaseComponent,
 ];
 

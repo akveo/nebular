@@ -1,6 +1,6 @@
 import { hexToRgbA } from './e2e-helper';
 
-export const sizes = [
+export const cardSizes = [
   { sizeKey: 'xxsmall', height: '96px' },
   { sizeKey: 'xsmall', height: '216px' },
   { sizeKey: 'small', height: '336px' },
@@ -8,6 +8,16 @@ export const sizes = [
   { sizeKey: 'large', height: '576px' },
   { sizeKey: 'xlarge', height: '696px' },
   { sizeKey: 'xxlarge', height: '816px' },
+];
+
+export const alertSizes = [
+  { sizeKey: 'xxsmall', height: '52px' },
+  { sizeKey: 'xsmall', height: '72px' },
+  { sizeKey: 'small', height: '92px' },
+  { sizeKey: 'medium', height: '112px' },
+  { sizeKey: 'large', height: '132px' },
+  { sizeKey: 'xlarge', height: '152px' },
+  { sizeKey: 'xxlarge', height: '172px' },
 ];
 
 export const colors = [
