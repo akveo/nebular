@@ -38,6 +38,7 @@
     "build:inline-resources": "gulp inline-resources",
     "build:bundle": "gulp bundle",
     "build:rename:dev": "gulp bundle:rename-dev",
+    "build:schematics": "rimraf ./schematics/dist && tsc -p ./schematics/tsconfig.json && gulp copy-schematics",
     "test": "ng test",
     "test:wp": "npm run test -- playground-wp",
     "test:watch": "ng test playground-wp --watch",
@@ -150,6 +151,9 @@
     "tslint": "5.7.0",
     "tslint-language-service": "0.9.6",
     "typedoc": "0.7.1",
-    "typescript": "2.7.2"
-  }
+    "typescript": "2.7.2",
+    "@angular-devkit/core": "^0.6.5",
+    "@angular-devkit/schematics": "^0.6.5"
+  },
+  "schematics": "./schematics/dist/collection.json"
 }
