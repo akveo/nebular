@@ -28,34 +28,35 @@
       text-decoration: none;
     }
 
-    nb-card > nb-card-body {
-      height: 200px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
 
     nb-card {
       box-shadow: 0 4px 27px 0 rgba(230, 234, 240, 0.2);
-    }
+      transition: transform 0.25s ease;
 
-    nb-card:hover {
-      box-shadow: 0 15px 37px 0 #dbe2eb;
+      > nb-card-body {
+        height: 200px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-      .component-name {
-        color: nb-theme(color-fg);
+      &:hover {
+        box-shadow: 0 15px 37px 0 #dbe2eb;
+        transform: translateY(-1rem);
+        .component-name {
+          color: nb-theme(color-fg);
+        }
       }
     }
   }
 
   @include media-breakpoint-up(is) {
     .components-list {
-      margin-left: -1rem;
-      margin-right: -1rem;
 
-      .components-list .component-card-wrapper {
+      .component-card-wrapper {
+        flex: 1 0 auto;
         width: 50%;
         padding-left: 1rem;
         padding-right: 1rem;
@@ -65,8 +66,6 @@
 
   @include media-breakpoint-up(md) {
     .components-list {
-      margin-left: -1.5rem;
-      margin-right: -1.5rem;
 
       .component-card-wrapper {
         flex: 1 0 auto;

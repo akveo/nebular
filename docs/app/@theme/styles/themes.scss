@@ -8,7 +8,9 @@ $grid-breakpoints: map-merge($grid-breakpoints, (macpro: 1280px));
 
 $nb-enabled-themes: (docs-home, docs-page);
 
+/* stylelint-disable */
 $nb-themes: nb-register-theme((
+  font-main: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
   // custom
   content-width: 1144px,
   settings-col-width: 0,
@@ -31,6 +33,7 @@ $nb-themes: nb-register-theme((
   header-padding: 0 0,
   header-height: 4.25rem,
   header-fg: color-fg-heading-light,
+  menu-item-padding: 0.675rem 1rem,
   menu-fg: color-fg-heading-light,
   menu-active-fg: menu-fg,
   footer-height: 18.75rem,
@@ -40,7 +43,7 @@ $nb-themes: nb-register-theme((
   menu-font-weight: font-weight-normal,
   footer-fg: color-fg-text,
 ), docs-home, default);
-
+/* stylelint-enable foo */
 $nb-themes: nb-register-theme((
   // custom
   content-width: 1440px,
@@ -71,19 +74,20 @@ $nb-themes: nb-register-theme((
   link-color-visited: color-fg-highlight,
   header-padding: 0,
   header-fg: black,
-  menu-fg: color-fg,
+  menu-fg: black,
+  menu-submenu-fg: color-fg-heading-light,
   menu-active-fg: menu-fg,
   menu-submenu-padding: 0,
-  menu-submenu-item-padding: 0.5rem 0,
+  menu-submenu-item-padding: 0.375rem 0,
   menu-submenu-item-container-padding: 0 1rem,
   menu-submenu-active-border-color: transparent,
   menu-submenu-active-fg: color-fg-highlight,
+  menu-active-font-weight: bold,
   card-bg: white,
   card-header-font-size: 2rem,
   card-header-font-weight: bold,
   card-header-fg-heading: black,
   card-margin: 2.5rem,
-  card-padding: 2rem 3rem 2rem 2rem,
   footer-shadow: none,
   footer-fg: color-fg-heading-light,
 ), docs-page, docs-home);
