@@ -261,6 +261,16 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
       });
 
+    this.menuInternalService
+      .onCollapseAll()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string }) => this.compareTag(data.tag)),
+      )
+      .subscribe((data: { tag: string }) => {
+        this.collapseAll();
+      });
+
     this.router.events
       .pipe(
         takeWhile(() => this.alive),
@@ -325,6 +335,10 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         this.window.location.href = homeItem.url;
       }
     }
+  }
+
+  private collapseAll() {
+    this.menuInternalService.collapseAll(this.items, this.tag);
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {

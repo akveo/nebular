@@ -20,6 +20,7 @@ const getSelectedItem$
 const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
+const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
 
 // TODO: check if we need both URL and LINK
 /**
@@ -114,6 +115,14 @@ export class NbMenuService {
   }
 
   /**
+   * Collapses all menu items
+   * @param {string} tag
+   */
+  collapseAll(tag?: string) {
+    collapseAll$.next({ tag });
+  }
+
+  /**
    * Navigate to the home menu item
    * @param {string} tag
    */
@@ -192,6 +201,10 @@ export class NbMenuInternalService {
 
   onNavigateHome(): Observable<{ tag: string }> {
     return navigateHome$.pipe(share());
+  }
+
+  onCollapseAll(): Observable<{ tag: string }> {
+    return collapseAll$.pipe(share());
   }
 
   onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<NbMenuBag> }> {
