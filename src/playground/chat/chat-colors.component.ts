@@ -10,7 +10,6 @@ import { Component } from '@angular/core';
       justify-content: center;
       align-items: center;
     }
-    
     nb-chat {
       width: 500px;
       margin: 0.5rem 0 2rem 2rem;
@@ -30,7 +29,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -45,7 +44,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -60,7 +59,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -75,7 +74,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -90,7 +89,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -105,7 +104,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],
@@ -120,7 +119,7 @@ export class NbChatColorsComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/'
+            avatar: 'http://lorempixel.com/400/200/animals/',
           },
         },
       ],

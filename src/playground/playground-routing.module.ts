@@ -413,7 +413,7 @@ export const routes: Routes = [
           {
             path: 'chat-sizes.component',
             component: NbChatSizesComponent,
-          }
+          },
         ],
       },
     ],

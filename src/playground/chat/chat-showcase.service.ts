@@ -80,16 +80,16 @@ export class NbChatShowcaseService {
           name: 'Bot',
           avatar: this.botAvatar,
         },
-      }
-    }
+      },
+    },
   ];
 
   public reply(message: string) {
-    const reply =  this.replyArray.find((reply) => {
+    const botReply =  this.replyArray.find((reply) => {
       if (message.search(reply.regExp) !== -1) { return true; }
     });
-    if (reply.reply.type === 'quote') { reply.quote = message; }
-    reply.reply.text = reply.answerArray[Math.floor(Math.random() * reply.answerArray.length)];
-    return { ...reply.reply };
+    if (botReply.reply.type === 'quote') { botReply.quote = message; }
+    botReply.reply.text = botReply.answerArray[Math.floor(Math.random() * botReply.answerArray.length)];
+    return { ...botReply.reply };
   }
 }
