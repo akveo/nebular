@@ -5,11 +5,15 @@ export class NbChatShowcaseService {
 
   protected botAvatar: string = 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg';
   protected imageLink: string = 'https://picsum.photos/320/240/?random';
+  protected gifsLinks: string[] = ['https://media.tenor.com/images/ac287fd06319e47b1533737662d5bfe8/tenor.gif',
+    'https://i.gifer.com/no.gif', 'https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif',
+    'http://www.reactiongifs.com/r/wnd1.gif'];
   protected fileLink: string = 'http://google.com';
   protected replyArray: any[] = [
     {
       regExp: /([S,s]ay)|(SAY)/g,
       answerArray: ['Hello!', 'Yes?', 'Yes, milord?', 'More work?'],
+      type: 'text',
       reply: {
         text: '',
         reply: false,
@@ -23,6 +27,7 @@ export class NbChatShowcaseService {
     {
       regExp: /([I,i]mage)|(IMAGE)|([P,p]ic)|(Picture)/g,
       answerArray: ['Hey looks at this!', 'Ready to work', 'Yes, master.'],
+      type: 'pic',
       reply: {
         text: '',
         reply: false,
@@ -36,7 +41,24 @@ export class NbChatShowcaseService {
       },
     },
     {
+      regExp: /([G,g]if)|(GIF)/g,
+      type: 'gif',
+      answerArray: ['No problem', 'Well done', 'You got it man'],
+      reply: {
+        text: '',
+        reply: false,
+        date: new Date(),
+        type: 'image',
+        file: '',
+        user: {
+          name: 'Bot',
+          avatar: this.botAvatar,
+        },
+      },
+    },
+    {
       regExp: /([F,f]ile)|(FILE)/g,
+      type: 'file',
       answerArray: ['Take it!', 'Job Done.', 'As you wish'],
       reply: {
         text: '',
@@ -53,6 +75,7 @@ export class NbChatShowcaseService {
     },
     {
       regExp: /([M,m]ap)|(MAP)/g,
+      type: 'map',
       answerArray: ['Done.', 'My sight is yours.', 'I shall be your eyes.'],
       reply: {
         text: '',
@@ -69,6 +92,7 @@ export class NbChatShowcaseService {
     },
     {
       regExp: /([Q,q]uote)|(QUOTE)/g,
+      type: 'quote',
       answerArray: ['Quoted!', 'Say no more.', 'I gladly obey.'],
       reply: {
         text: '',
@@ -89,6 +113,8 @@ export class NbChatShowcaseService {
       if (message.search(reply.regExp) !== -1) { return true; }
     });
     if (botReply.reply.type === 'quote') { botReply.quote = message; }
+    if (botReply.type === 'gif') { botReply.reply.file = this.gifsLinks[Math
+      .floor(Math.random() * this.gifsLinks.length)] }
     botReply.reply.text = botReply.answerArray[Math.floor(Math.random() * botReply.answerArray.length)];
     return { ...botReply.reply };
   }
