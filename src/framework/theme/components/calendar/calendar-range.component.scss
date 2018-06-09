@@ -1,0 +1,26 @@
+$width: 600px;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: $width;
+
+  i {
+    font-size: 1.5rem;
+    padding: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+.body {
+  width: $width;
+}
+
+.week {
+  display: flex;
+}
+
+.day {
+  flex: 1;
+}

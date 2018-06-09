@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
   months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
-  
+
   getNumberOfDaysInMonth(date: Date): number {
     return this.getDate(
       this.createDateSafe(this.getYear(date), this.getMonth(date) + 1, 0),
@@ -87,6 +87,10 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
   isSameDay(date1: Date, date2: Date): boolean {
     return this.isSameMonth(date1, date2) &&
       this.getDate(date1) === this.getDate(date2);
+  }
+
+  compareDates(date1: Date, date2: Date): number {
+    return date1.getTime() - date2.getTime();
   }
 
   // Rewrite

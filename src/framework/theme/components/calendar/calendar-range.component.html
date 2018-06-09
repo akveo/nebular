@@ -1,0 +1,60 @@
+<ng-container *ngIf="viewMode === ViewMode.date">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
+      {{ newValue | nbCalendarDate }}
+    </button>
+    <div>
+      <i class="nb-arrow-left" (click)="prevMonth()"></i>
+      <i class="nb-arrow-right" (click)="nextMonth()"></i>
+      <nb-checkbox [(ngModel)]="boundingMonths">Include bounding months</nb-checkbox>
+    </div>
+  </div>
+
+  <div class="body">
+    <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
+                            [activeMonth]="newValue"
+                            [currentDate]="currentDate"
+                            [selectedValue]="value"
+                            [includeBoundingMonths]="boundingMonths"
+                            (change)="onChange($event)">
+    </nb-calendar-month-view>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="viewMode === ViewMode.year">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
+      {{ newValue | nbCalendarDate }}
+    </button>
+    <div>
+      <i class="nb-arrow-left" (click)="prevYears()"></i>
+      <i class="nb-arrow-right" (click)="nextYears()"></i>
+    </div>
+  </div>
+
+  <div class="body">
+    <nb-calendar-year-picker
+      [value]="newValue"
+      [currentDate]="currentDate"
+      [startYear]="startYear"
+      [yearCount]="yearCount"
+      (change)="newValue = $event; viewMode = ViewMode.month">
+    </nb-calendar-year-picker>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="viewMode === ViewMode.month">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
+      {{ newValue | nbCalendarDate }}
+    </button>
+  </div>
+
+  <div class="body">
+    <nb-calendar-month-picker
+      [value]="newValue"
+      [currentDate]="currentDate"
+      (change)="newValue = $event; viewMode = ViewMode.date">
+    </nb-calendar-month-picker>
+  </div>
+</ng-container>

@@ -22,5 +22,6 @@ export abstract class NbDateTimeUtil<D> {
   abstract isSameYear(date1: D, date2: D): boolean;
   abstract isSameMonth(date1: D, date2: D): boolean;
   abstract isSameDay(date1: D, date2: D): boolean;
+  abstract compareDates(date1: D, date2: D): number;
 
 }

@@ -13,4 +13,8 @@
   &.cell-selected {
     border: 1px solid black;
   }
+
+  &.cell-range-inbetween {
+    color: yellow;
+  }
 }

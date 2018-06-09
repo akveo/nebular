@@ -7,7 +7,9 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util.interface';
+import { CalendarRangeSelectionModel } from './models/calendar-range-selection.model';
 import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
+import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';
 
 const ViewMode = {
   year: 'year',
@@ -21,25 +23,25 @@ const defaultYearCount = 20;
 /**
  */
 @Component({
-  selector: 'nb-calendar',
+  selector: 'nb-calendar-range',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [ NbCalendarModelFactoryService ]
+  providers: [{ provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService }]
 })
-export class NbCalendarComponent<D> implements OnInit {
+export class NbCalendarRangeComponent<D> implements OnInit {
 
   @Input()
-  value: D;
+  value: CalendarRangeSelectionModel;
 
   @Input()
   boundingMonths: boolean = false;
 
   @Output()
-  change = new EventEmitter();
-
-  newValue: D;
+  change = new EventEmitter<CalendarRangeSelectionModel>();
 
   currentDate: D;
+
+  newValue: D;
 
   ViewMode = ViewMode;
   viewMode = ViewMode.date;
@@ -52,7 +54,7 @@ export class NbCalendarComponent<D> implements OnInit {
 
   ngOnInit() {
     this.currentDate = this.dateTimeUtil.createNowDate();
-    this.newValue = this.value || this.currentDate;
+    this.newValue = (this.value && (this.value.endDate || this.value.startDate)) || this.currentDate;
   }
 
   prevMonth() {
@@ -71,7 +73,14 @@ export class NbCalendarComponent<D> implements OnInit {
     this.startYear += defaultYearCount;
   }
 
-  onChange(value) {
-    this.change.emit(value);
+  onChange(value: D) {
+    if (!this.value ||
+      !this.value.startDate ||
+      this.dateTimeUtil.compareDates(this.value.startDate, value) > 0
+    ) {
+      this.change.emit(new CalendarRangeSelectionModel(value, null));
+    } else {
+      this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+    }
   }
 }

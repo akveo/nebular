@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output,
 } from '@angular/core';
 
-import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
+import { NbCalendarModelFactoryService } from '../../models/factory/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
@@ -21,15 +21,15 @@ import { NbArrayHelper } from '../../helpers/array.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
-  
+
   @Input()
   value: D;
-  
+
   @Input()
   public currentDate: D;
-  
+
   months: any[];
-  
+
   @Output()
   change = new EventEmitter<any>();
 
@@ -41,26 +41,26 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
     this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
     this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
   }
-  
+
   ngOnChanges(): void {
     if (this.value) {
       this.initMonths();
     }
   }
-  
+
   initMonths() {
     const selectedMonth = this.dateTimeUtil.getMonth(this.value);
-    
+
     const months = Array.from(Array(12).keys())
       .map(index => ({
         value: index,
         label: this.dateTimeUtil.getMonthNameByIndex(index),
         selected: selectedMonth === index,
       }));
-    
+
     this.months = this.arrayHelper.splitToChunks(months, 4);
   }
-  
+
   onMonthSelect(month) {
     this.value = this.dateTimeUtil.createDate(
       this.dateTimeUtil.getYear(this.value),

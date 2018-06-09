@@ -1,9 +1,9 @@
 import { Injectable, Optional } from '@angular/core';
-import { NbDateTimeUtil } from '../service/date-time-util.interface';
-import { NbCalendarCellModel } from './calendar-cell.model';
-import { NbCalendarWeekModel } from './calendar-week.model';
-import { NbCalendarMonthModel } from './calendar-month.model';
-import { NbCalendarMonthBuilderContext } from './calendar-month-builder-context';
+import { NbDateTimeUtil } from '../../service/date-time-util.interface';
+import { NbCalendarCellModel } from '../calendar-cell.model';
+import { NbCalendarWeekModel } from '../calendar-week.model';
+import { NbCalendarMonthModel } from '../calendar-month.model';
+import { NbCalendarMonthBuilderContext } from '../calendar-month-builder-context';
 
 @Injectable()
 export class NbCalendarModelFactoryService<D> {
@@ -171,7 +171,7 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel };
   }
 
-  private _getStatesForCell({ context }, year, month, date) {
+  protected _getBasicStatesForCell({ context }, year, month, date) {
     const states = [];
 
     if (
@@ -188,6 +188,13 @@ export class NbCalendarModelFactoryService<D> {
     ) {
       states.push('cell-bounding-month');
     }
+
+    return states;
+  }
+
+  protected _getStatesForCell(monthSettings, year, month, date) {
+    const states = this._getBasicStatesForCell(monthSettings, year, month, date);
+    const { context } = monthSettings;
 
     if (
       context.selectedValue &&
