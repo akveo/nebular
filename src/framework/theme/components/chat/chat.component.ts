@@ -50,7 +50,7 @@ import { NbChatMessageComponent } from './chat-message.component';
     <div class="header">{{ title }}</div>
     <div class="scrollable" #scrollable>
       <div class="messages">
-        <ng-content select="nb-chat-message"></ng-content>
+        <ng-content [@fadeIn]="''" select="nb-chat-message"></ng-content>
         <p class="no-messages" *ngIf="!messages?.length">No messages yet.</p>
       </div>
     </div>

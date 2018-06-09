@@ -7,6 +7,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 /**
  * Chat message component.
@@ -38,9 +39,27 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
       </ng-container>
     </div>
   `,
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(80),
+      ]),
+      transition('* => void', [
+        animate(80, style({ transform: 'translateX(100%)' })),
+      ]),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageComponent {
+
+
+  @HostBinding('@flyInOut')
+  get flyInOut() {
+    return true;
+  }
 
   @HostBinding('class.reply')
   replyValue: boolean = false;

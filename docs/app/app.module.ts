@@ -8,6 +8,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
   NbSidebarModule,
@@ -16,8 +17,7 @@ import {
   NbMenuModule,
   NbTabsetModule,
   NbProgressBarModule,
-  NbCheckboxModule, 
-  NbSearchModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -32,6 +32,7 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NbSidebarModule,
