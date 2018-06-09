@@ -104,6 +104,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
 
 
 export const routes: Routes = [
@@ -357,6 +358,10 @@ export const routes: Routes = [
           {
             path: 'stepper-showcase.component',
             component: NbStepperShowcaseComponent,
+          },
+          {
+            path: 'stepper-validation.component',
+            component: NbStepperValidationComponent,
           },
         ],
       },

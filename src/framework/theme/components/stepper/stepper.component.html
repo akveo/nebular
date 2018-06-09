@@ -1,6 +1,7 @@
 <div class="nb-stepper-header">
   <ng-container *ngFor="let step of _steps; let i = index; let isLast = last">
-    <nb-step-header [label]="i">
+    <nb-step-header [label]="i"
+                    (click)="step.select()">
     </nb-step-header>
     <div *ngIf="!isLast" class="horizontal-step-connector"></div>
   </ng-container>
@@ -8,6 +9,6 @@
 
 <div>
   <div>
-    <ng-container [ngTemplateOutlet]="selectedStep.content"></ng-container>
+    <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
   </div>
 </div>

@@ -10,6 +10,8 @@ import {
   QueryList,
   TemplateRef,
   ViewChild,
+  Inject,
+  forwardRef,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
@@ -48,10 +50,10 @@ export class NbStepComponent {
   }
   private _optional = false;
 
-  // Inject stepper
-  constructor() { }
+  constructor(@Inject(forwardRef(() => NbStepperComponent)) private _stepper: NbStepperComponent) { }
 
   select(): void {
+    this._stepper.selected = this;
   }
 
   reset(): void {
@@ -64,6 +66,8 @@ export class NbStepComponent {
  *
  * @stacked-example(Showcase, stepper/stepper-showcase.component)
  *
+ * @stacked-example(Validation, stepper/stepper-validation.component)
+ *
  */
 @Component({
   selector: 'nb-stepper',
@@ -72,12 +76,31 @@ export class NbStepComponent {
 })
 export class NbStepperComponent {
 
-  selectedIndex = 0;
 
   @ContentChildren(NbStepComponent) _steps: QueryList<NbStepComponent>;
 
-  get selectedStep() {
-    return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined;
+  @Input()
+  get selectedIndex() { return this._selectedIndex; }
+  set selectedIndex(index: number) {
+    if (this._steps) {
+      if (index < 0 || index > this._steps.length - 1) {
+        throw Error('nbStepperComponent: Cannot assign out-of-bounds value to `selectedIndex`.');
+      }
+      if (this._selectedIndex != index) {
+        this._selectedIndex = index;
+      }
+    } else {
+      this._selectedIndex = index;
+    }
+  }
+  private _selectedIndex = 0;
+
+  @Input()
+  get selected(): NbStepComponent {
+    return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined!;
+  }
+  set selected(step: NbStepComponent) {
+    this.selectedIndex = this._steps ? this._steps.toArray().indexOf(step) : -1;
   }
 
   next() {
