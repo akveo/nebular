@@ -1,5 +1,13 @@
+$width: 600px;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: $width;
+}
+
 .body {
-  width: 400px;
+  width: $width;
 }
 
 .week {

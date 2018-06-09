@@ -30,13 +30,16 @@ const ViewMode = {
 export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
 
   @Input('value') _value: D = null;
+  
+  @Input()
+  boundingMonths: boolean = false;
 
   newValue: D;
 
   currentDate: D;
-
-  @Input()
-  boundingMonths: boolean = false;
+  
+  ViewMode = ViewMode;
+  viewMode = ViewMode.date;
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }

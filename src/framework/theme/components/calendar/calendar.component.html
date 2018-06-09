@@ -1,6 +1,6 @@
 
 <div class="header">
-  <div>{{ value }}</div>
+  <div>{{ newValue }}</div>
   <div>
     <button class="btn btn-sm btn-secondary" (click)="prevMonth()">Prev</button>
     <button class="btn btn-sm btn-secondary" (click)="nextMonth()">Next</button>
@@ -9,7 +9,7 @@
 </div>
 
 <div class="body">
-  <nb-calendar-month-view
+  <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
     [(ngModel)]="newValue"
     [currentDate]="currentDate"
     [selectedValue]="value"
@@ -19,7 +19,7 @@
   >
   </nb-calendar-month-view>
 
-  <nb-calendar-year-picker
+  <nb-calendar-year-picker *ngIf="viewMode === ViewMode.year"
     [(ngModel)]="newValue"
     [currentDate]="currentDate"
     [minYear]=""
