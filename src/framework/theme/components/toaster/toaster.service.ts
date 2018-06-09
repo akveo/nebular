@@ -30,14 +30,15 @@ export class NbToasterService {
       });
   }
 
-  private buildPortal({ content, context, duration, position, status, margin }: NbToast): NbToastPortal {
+  private buildPortal({ content, context, duration, position, status, margin, title }: NbToast): NbToastPortal {
     return {
       content: NbToastComponent,
       position: position || NbToastPosition.TOP_RIGHT,
       duration: duration || DEFAULT_DURATION,
-      status: status || NbToastStatus.INFO,
       margin: margin || 16,
       context: {
+        status: status || NbToastStatus.DEFAULT,
+        title,
         content,
         context,
         onClick: instance => this.onClick(instance),

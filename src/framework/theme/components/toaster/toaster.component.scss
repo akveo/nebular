@@ -1,5 +1,31 @@
 :host {
-  display: block;
-  background-color: red;
-  padding: 32px;
+  display: flex;
+  align-items: center;
+  width: 25rem;
+
+  .title {
+    font-weight: 800;
+    margin-right: 0.25rem;
+  }
+
+  .icon {
+    margin-right: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  > .content-container {
+    line-height: 1.25;
+
+    > .content {
+      font-weight: 300;
+    }
+  }
+
+  &.default {
+    .content-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
 }

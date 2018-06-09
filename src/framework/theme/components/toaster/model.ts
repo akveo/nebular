@@ -13,13 +13,16 @@ export enum NbToastPosition {
 }
 
 export enum NbToastStatus {
-  WARNING = 'warning',
-  DANGER = 'danger',
-  INFO = 'info',
   SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  PRIMARY = 'primary',
+  DANGER = 'danger',
+  DEFAULT = 'default',
 }
 
 export class NbToast {
+  title: string;
   content: NbPortalContent;
   context?: Object;
   position?: NbToastPosition;
@@ -31,7 +34,6 @@ export class NbToast {
 export class NbToastPortal extends NbPortal {
   position: string;
   duration: number;
-  status: NbToastStatus;
   margin: number;
 }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
 import { NbPortalComponent } from '@nebular/theme/components/portal/portal.component';
@@ -7,13 +7,19 @@ import { NbPortalComponent } from '@nebular/theme/components/portal/portal.compo
   selector: 'nb-toast',
   styleUrls: ['./toaster.component.scss'],
   template: `
-    <ng-container *ngIf="isTemplate">
-      <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
-    <ng-container *ngIf="isPrimitive">
-      <div class="primitive-popover">{{content}}</div>
-    </ng-container>
+    <div class="icon" *ngIf="status !== 'default'"></div>
+    <div class="content-container">
+      <span class="title">{{ title }}</span>
+      <div class="content">
+        <ng-container *ngIf="isTemplate">
+          <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
+        <ng-container *ngIf="isPrimitive">
+          <div class="primitive-popover">{{content}}</div>
+        </ng-container>
+      </div>
+    </div>
   `,
   host: { '(click)': 'onClick(parent)' },
 })
@@ -30,6 +36,13 @@ export class NbToastComponent {
    * */
   @Input()
   context: Object;
+
+  @Input()
+  title: string;
+
+  @Input()
+  @HostBinding('class')
+  status: string;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               public parent: NbPortalComponent) {
