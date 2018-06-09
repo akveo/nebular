@@ -26,7 +26,6 @@ import { NbStepComponent } from './/step.component';
 })
 export class NbStepperComponent {
 
-
   @ContentChildren(NbStepComponent) _steps: QueryList<NbStepComponent>;
 
   @Input()
@@ -69,6 +68,8 @@ export class NbStepperComponent {
   private isStepValid(index: number): boolean {
     const steps = this._steps.toArray();
 
+    steps[this._selectedIndex].interacted = true;
+
     if (index >= this._selectedIndex && this._linear && index > 0) {
       const currentStep = steps[index - 1];
       return currentStep.completed;
@@ -77,5 +78,8 @@ export class NbStepperComponent {
     return true;
   }
 
+  private markStepCompleted(step: NbStepComponent): void {
+    step.markAsCompleted();
+  }
 
 }

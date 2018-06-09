@@ -43,8 +43,7 @@ export class NbStepComponent {
 
   @Input()
   get completed(): boolean {
-    // TODO add control validation
-    return this._completed;
+    return this._completed == null ? this.isControlValid : this._completed;
   }
 
   set completed(value: boolean) {
@@ -53,16 +52,11 @@ export class NbStepComponent {
 
   private _completed: boolean | null = null;
 
-  @Input()
-  get optional(): boolean {
-    return this._optional;
+  private get isControlValid() {
+    return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;
   }
 
-  set optional(value: boolean) {
-    this._optional = value;
-  }
-
-  private _optional = false;
+  interacted = false;
 
   constructor(@Inject(forwardRef(() => NbStepperComponent)) private _stepper: NbStepperComponent) {
   }

@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
@@ -254,6 +255,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   imports: [
     CommonModule,
     NbPlaygroundRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     ...NB_MODULES,
   ],
   declarations: [

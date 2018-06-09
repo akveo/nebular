@@ -1,23 +1,33 @@
 <nb-card>
   <nb-card-body>
     <nb-stepper [linear]="true">
-      <nb-step [completed]="true">
-        <span>1</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
+      <nb-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <div class="custom-form-content">
+            <input placeholder="TEST" formControlName="firstCtrl"/>
+          </div>
+          <div>
+            <button class="btn btn-primary" nbStepperPrevious>prev</button>
+            <button class="btn btn-primary" nbStepperNext>next</button>
+          </div>
+        </form>
       </nb-step>
-      <nb-step [completed]="true">
-        <span>2</span>
+      <nb-step>
+        <form [formGroup]="secondFormGroup">
+          <div class="form-fields">
+            <input placeholder="Enter text" formControlName="secondCtrl"/>
+          </div>
+          <div>
+            <button class="btn btn-primary" nbStepperPrevious>prev</button>
+            <button class="btn btn-primary" nbStepperNext>next</button>
+          </div>
+        </form>
+      </nb-step>
+      <nb-step>
         <button class="btn btn-primary" nbStepperPrevious>prev</button>
         <button class="btn btn-primary" nbStepperNext>next</button>
       </nb-step>
       <nb-step>
-        <span>3</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
-      </nb-step>
-      <nb-step>
-        <span>4</span>
         <button class="btn btn-primary" nbStepperPrevious>prev</button>
         <button class="btn btn-primary" nbStepperNext>next</button>
       </nb-step>
