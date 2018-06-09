@@ -13,6 +13,7 @@ import { NbChatMessageComponent } from './chat-message.component';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageTextComponent } from './chat-message-text.component';
 import { NbChatMessageImageComponent } from './chat-message-image.component';
+import { NbChatMessageFileComponent } from './chat-message-file.component';
 
 const NB_CHAT_COMPONENTS = [
   NbChatComponent,
@@ -20,6 +21,7 @@ const NB_CHAT_COMPONENTS = [
   NbChatFormComponent,
   NbChatMessageTextComponent,
   NbChatMessageImageComponent,
+  NbChatMessageFileComponent,
 ];
 
 @NgModule({

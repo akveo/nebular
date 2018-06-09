@@ -63,6 +63,18 @@ export class NbChatShowcaseComponent {
         avatar: '',
       },
     },
+    {
+      text: 'Attached is an archive I mentioned',
+      reply: true,
+      date: new Date(),
+      type: 'file',
+      file: 'http://google.com',
+      icon: 'nb-compose',
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: '',
+      },
+    },
     // {
     //   text: 'Hello, how are you?',
     //   reply: false,

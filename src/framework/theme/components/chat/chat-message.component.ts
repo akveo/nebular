@@ -24,11 +24,15 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
     </div>
     <div class="message">
       <ng-container [ngSwitch]="type">
-        <nb-chat-message-image *ngSwitchCase="'image'" 
+        <nb-chat-message-image *ngSwitchCase="'image'"
                                [sender]="sender" [date]="date" [message]="message" [file]="file">
         </nb-chat-message-image>
 
-        <nb-chat-message-text *ngSwitchDefault 
+        <nb-chat-message-file *ngSwitchCase="'file'"
+                              [sender]="sender" [date]="date" [message]="message" [file]="file" [icon]="icon">
+        </nb-chat-message-file>
+
+        <nb-chat-message-text *ngSwitchDefault
                               [sender]="sender" [date]="date" [message]="message">
         </nb-chat-message-text>
       </ng-container>
@@ -79,6 +83,12 @@ export class NbChatMessageComponent {
    * @type {string}
    */
   @Input() file: string;
+
+  /**
+   * File icon class
+   * @type {string}
+   */
+  @Input() icon: string;
 
   /**
    * Message send avatar

@@ -13,16 +13,16 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
  *
  */
 @Component({
-  selector: 'nb-chat-message-image',
+  selector: 'nb-chat-message-file',
   template: `
     <nb-chat-message-text [sender]="sender" [date]="date" [message]="message">
       {{ message }}
     </nb-chat-message-text>
-    <a [href]="file" target="_blank"><img [src]="file"></a>
+    <a [href]="file" target="_blank" [class]="icon"></a>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbChatMessageImageComponent {
+export class NbChatMessageFileComponent {
 
   /**
    * Message sender
@@ -47,5 +47,11 @@ export class NbChatMessageImageComponent {
    * @type {Date}
    */
   @Input() file: string;
+
+  /**
+   * Message file path
+   * @type {Date}
+   */
+  @Input() icon: string;
 
 }

@@ -81,7 +81,29 @@
         img {
           border-radius: 0.5rem;
           margin-bottom: 1rem;
-          width: 100%;
+          width: 50%;
+        }
+
+        nb-chat-message-text {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      nb-chat-message-file {
+        a {
+          width: 50%;
+          display: block;
+          font-size: 4rem;
+          padding: 2rem;
+          text-align: center;
+          border: 1px solid nb-theme(chat-separator);
+          border-radius: 0.5rem;
+          &:hover, &:focus {
+            text-decoration: none;
+          }
+          @include nb-ltr(margin-left, auto);
+          @include nb-rtl(margin-right, auto);
         }
 
         nb-chat-message-text {
