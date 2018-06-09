@@ -1,0 +1,44 @@
+/deep/ nb-layout {
+  & > .scrollable-container > .layout {
+    filter: blur(0);
+  }
+
+  &.blurred {
+    > .scrollable-container > .layout {
+      filter: blur(16px);
+    }
+
+    nb-collapsable:not(.expanded) {
+      filter: blur(5px);
+    }
+  }
+
+}
+
+:host  {
+  display: block;
+
+  .collapsable-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  };
+  .header-right {
+    display: flex;
+
+  }
+
+  &.collapsed {
+    nb-card-body {
+      display: none;
+    }
+  }
+
+  &.expanded {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
