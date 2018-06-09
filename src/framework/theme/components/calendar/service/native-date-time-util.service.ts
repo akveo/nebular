@@ -64,6 +64,20 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
     return (7 - this.getStartOfWeekDay() + this.getDayOfWeek(date)) % 7;
   }
 
+  isSameYear(date1: Date, date2: Date): boolean {
+    return this.getYear(date1) === this.getYear(date2);
+  }
+
+  isSameMonth(date1: Date, date2: Date): boolean {
+    return this.isSameYear(date1, date2) &&
+      this.getMonth(date1) === this.getMonth(date2);
+  }
+
+  isSameDay(date1: Date, date2: Date): boolean {
+    return this.isSameMonth(date1, date2) &&
+      this.getDate(date1) === this.getDate(date2);
+  }
+
   // Rewrite
   private createDateSafe(year: number, month: number, date: number) {
     const result = new Date(year, month, date);

@@ -7,6 +7,7 @@ export class NbCalendarCellModel {
     public day: number,
 
     public activeMonthDiff: number = 0,
+    public cellStates: Array<string> = [],
     public extraData: any = null,
   ) {}
 

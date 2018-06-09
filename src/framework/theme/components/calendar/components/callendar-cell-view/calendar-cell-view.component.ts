@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { NbCalendarCellModel } from '../../models/calendar-cell.model';
 
 /**
@@ -20,10 +20,21 @@ export class NbCalendarCellViewComponent<D> {
   @Input()
   public dayModel: NbCalendarCellModel = null;
 
+  @Input()
+  public isToday: boolean = false;
+
+  @Input()
+  public cellStates: Array<string> = [];
+
   @Output()
   public onCellSelect = new EventEmitter<D>();
 
   public onCellHover = new EventEmitter<D>();
+
+  @HostBinding('class')
+  get cellClasses() {
+    return this.cellStates.join(' ');
+  }
 
   selectDate() {
     this.onCellHover.emit()

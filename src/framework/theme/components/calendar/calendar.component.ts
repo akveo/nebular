@@ -32,7 +32,7 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
   @Input('value') _value: D = null;
 
   newValue: D;
-  
+
   currentDate: D;
 
   @Input()
@@ -47,11 +47,11 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
   }
 
   prevMonth() {
-    this.newValue = this.dateTimeUtil.add(this.value, -1, 'm');
+    this.newValue = this.dateTimeUtil.add(this.newValue, -1, 'm');
   }
 
   nextMonth() {
-    this.newValue = this.dateTimeUtil.add(this.value, 1, 'm');
+    this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
   }
 
   onChange: any = () => { };

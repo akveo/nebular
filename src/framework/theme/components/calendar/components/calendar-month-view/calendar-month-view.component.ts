@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
+import { NbCalendarMonthModel } from '../../models/calendar-month.model';
 
 /**
  */
@@ -22,8 +23,8 @@ import { NbCalendarModelFactoryService } from '../../models/calendar-model-facto
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, OnInit {
-  
+export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, OnInit, OnChanges {
+
   @Input('value') _value: D = null;
 
   @Input()
@@ -32,7 +33,7 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
   @Input()
   public currentDate: D = null;
 
-  months = [];
+  month: NbCalendarMonthModel = null;
 
   constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>) {}
 
@@ -41,30 +42,38 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
 
   onChange: any = () => { };
   onTouched: any = () => { };
-  
+
   get value() {
     return this._value;
   }
-  
+
   set value(val: D) {
     if (val) {
-      this.months = this.calendarModelFactory.createMonthModel(val, this.includeBoundingMonths);
+      this.month = this.calendarModelFactory.createMonthModel(val, this.includeBoundingMonths, this.currentDate);
     }
-  
+
     this._value = val;
     this.onChange(val);
     this.onTouched();
   }
-  
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentDate'] || changes['includeBoundingMonths']) {
+      this.month = this.calendarModelFactory.createMonthModel(this.value, this.includeBoundingMonths, this.currentDate);
+    }
+  }
+
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  
+
   registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
-  
+
   writeValue(val: D) {
     this.value = val;
   }
+
+
 }
