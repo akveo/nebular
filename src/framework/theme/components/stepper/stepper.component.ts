@@ -6,11 +6,12 @@
 
 import {
   Component,
-  ContentChildren,
+  ContentChildren, Input,
   QueryList,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 /**
  * Component intended to be used within  the `<nb-stepper>` component.
@@ -26,8 +27,35 @@ import {
 })
 export class NbStepComponent {
 
-  /** Template for step content. */
   @ViewChild(TemplateRef) content: TemplateRef<any>;
+
+  @Input() stepControl: AbstractControl;
+
+  @Input()
+  get completed(): boolean {
+    // TODO add control validation
+    return this._completed;
+  }
+  set completed(value: boolean) {
+    this._completed = value;
+  }
+  private _completed: boolean | null = null;
+
+  @Input()
+  get optional(): boolean { return this._optional; }
+  set optional(value: boolean) {
+    this._optional = value;
+  }
+  private _optional = false;
+
+  // Inject stepper
+  constructor() { }
+
+  select(): void {
+  }
+
+  reset(): void {
+  }
 
 }
 
