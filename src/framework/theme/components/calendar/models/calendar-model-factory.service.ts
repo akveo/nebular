@@ -190,6 +190,7 @@ export class NbCalendarModelFactoryService<D> {
     }
 
     if (
+      context.selectedValue &&
       year === this.dateTimeUtil.getYear(context.selectedValue) &&
       month === this.dateTimeUtil.getMonth(context.selectedValue) &&
       date === this.dateTimeUtil.getDate(context.selectedValue)
