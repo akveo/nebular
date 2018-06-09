@@ -22,8 +22,6 @@ export class NbStepHeaderComponent {
 
   @Input() completed: boolean;
 
-  @Input() optional: boolean;
-
   _isTemplateInside() {
     return this.label instanceof NbStepLabelDirective;
   }

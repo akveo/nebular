@@ -1,26 +1,30 @@
 <nb-card>
   <nb-card-body>
     <nb-stepper>
-      <nb-step [completed]="true">
+      <nb-step>
         <ng-template nbStepLabel>First step</ng-template>
-        <span>1</span>
-        <button class="btn btn-primary" nbStepperNext>next</button>
+        <div class="btn-panel">
+          <button class="btn btn-primary" nbStepperPrevious>next</button>
+        </div>
       </nb-step>
       <nb-step [completed]="true">
         <ng-template nbStepLabel>Second step</ng-template>
-        <span>2</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
+        <div class="btn-panel">
+          <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          <button class="btn btn-primary" nbStepperNext>next</button>
+        </div>
       </nb-step>
       <nb-step label="Third step">
-        <span>3</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
+        <div class="btn-panel">
+          <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          <button class="btn btn-primary" nbStepperNext>next</button>
+        </div>
       </nb-step>
       <nb-step>
         <ng-template nbStepLabel>Fourth step</ng-template>
-        <span>4</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
+        <div class="btn-panel">
+          <button class="btn btn-primary" nbStepperPrevious>prev</button>
+        </div>
       </nb-step>
     </nb-stepper>
   </nb-card-body>

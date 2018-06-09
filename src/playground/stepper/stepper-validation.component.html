@@ -2,34 +2,44 @@
   <nb-card-body>
     <nb-stepper [linear]="true">
       <nb-step [stepControl]="firstFormGroup">
+        <ng-template nbStepLabel>First step</ng-template>
         <form [formGroup]="firstFormGroup">
-          <div class="custom-form-content">
-            <input placeholder="TEST" formControlName="firstCtrl"/>
+          <div class="input-group">
+            <input type="text" placeholder="Type anything" class="form-control"
+                   formControlName="firstCtrl"
+                   [ngClass]="{'form-control-danger': firstFormGroup.invalid && firstFormGroup.touched}">
           </div>
-          <div>
-            <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          <div class="btn-panel">
             <button class="btn btn-primary" nbStepperNext>next</button>
           </div>
         </form>
       </nb-step>
       <nb-step>
+        <ng-template nbStepLabel>Second step</ng-template>
         <form [formGroup]="secondFormGroup">
-          <div class="form-fields">
-            <input placeholder="Enter text" formControlName="secondCtrl"/>
+          <div class="input-group">
+            <input type="text" placeholder="Type anything" class="form-control"
+                   formControlName="secondCtrl"
+                   [ngClass]="{'form-control-danger': secondFormGroup.invalid && secondFormGroup.touched}">
           </div>
-          <div>
+          <div class="btn-panel">
             <button class="btn btn-primary" nbStepperPrevious>prev</button>
             <button class="btn btn-primary" nbStepperNext>next</button>
           </div>
         </form>
       </nb-step>
       <nb-step>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
-      </nb-step>
-      <nb-step>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
+        <ng-template nbStepLabel>Third step</ng-template>
+        <form [formGroup]="thirdFormGroup">
+          <div class="input-group">
+            <input type="text" placeholder="Type anything" class="form-control"
+                   formControlName="thirdCtrl"
+                   [ngClass]="{'form-control-danger': thirdFormGroup.invalid && thirdFormGroup.touched}">
+          </div>
+          <div class="btn-panel">
+            <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          </div>
+        </form>
       </nb-step>
     </nb-stepper>
   </nb-card-body>

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'nb-stepper-validation',
-  styleUrls: ['stepper-validation.component.scss'],
+  styleUrls: ['stepper-playground.component.scss'],
   templateUrl: './stepper-validation.component.html',
 })
 
@@ -11,6 +11,7 @@ export class NbStepperValidationComponent {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
@@ -21,6 +22,10 @@ export class NbStepperValidationComponent {
 
     this.secondFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
+    });
+
+    this.thirdFormGroup = this.fb.group({
+      thirdCtrl: ['', Validators.required]
     });
   }
 
