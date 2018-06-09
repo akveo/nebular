@@ -86,6 +86,7 @@
           border-radius: 0.5rem;
           margin-bottom: 1rem;
           width: 50%;
+          border: 1px solid nb-theme(chat-separator);
         }
 
         nb-chat-message-text {
@@ -188,15 +189,24 @@
 
     nb-chat-form {
       display: flex;
+      flex-direction: column;
       padding: 0.5rem;
+      border-top: 1px solid nb-theme(chat-separator);
+
+      .message-row {
+        flex-direction: row;
+        display: flex;
+      }
 
       input {
         flex: 1;
         padding: 1.5rem;
         border-radius: 2rem;
         background: nb-theme(chat-form-bg);
+        color: nb-theme(chat-form-fg);
         border: none;
         outline: none;
+        box-sizing: border-box;
       }
 
       button.btn {
@@ -204,6 +214,42 @@
         @include nb-ltr(margin-left, 1rem);
         @include nb-rtl(margin-right, 1rem);
         padding: 0 1rem;
+      }
+
+      &.file-over input {
+        border: 1px dashed nb-theme(chat-form-active-border);
+        box-shadow: 0 0 0 4px nb-theme(chat-form-bg);
+      }
+
+      .dropped-files {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+        div {
+          background-size: cover;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 0.5rem;
+          @include nb-ltr(margin-right, 0.5rem);
+          @include nb-rtl(margin-left, 0.5rem);
+          margin-bottom: 0.5rem;
+          border: 1px solid nb-theme(chat-form-fg);
+          text-align: center;
+          line-height: 3rem;
+          font-size: 2rem;
+          color: nb-theme(chat-form-fg);
+          position: relative;
+
+          .remove {
+            position: absolute;
+            right: -0.5rem;
+            top: -0.875rem;
+            font-size: 0.875rem;
+            line-height: 1;
+            cursor: pointer;
+          }
+        }
       }
     }
 

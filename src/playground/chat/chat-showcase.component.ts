@@ -167,6 +167,7 @@ export class NbChatShowcaseComponent {
   ];
 
   sendMessage(event: any) {
+    console.log(event);
     this.messages.push({
       text: event.message,
       date: new Date(),
