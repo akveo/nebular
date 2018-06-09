@@ -11,8 +11,10 @@ export class NbModalDirective {
   @Input('nbModalContext')
   context: Object;
 
+  @Input('nbModalBackdropClose')
+  backdropClose: boolean;
+
   private ref: ComponentRef<any>;
-  private alive = true;
 
   constructor(private portalOutlet: NbPortalOutlet,
               private themeService: NbThemeService) {
@@ -49,9 +51,13 @@ export class NbModalDirective {
   }
 
   private onClick(event) {
-    if (event.target === this.ref.location.nativeElement.firstElementChild) {
+    if (this.isBackdropClick(event) && this.backdropClose) {
       this.destroy();
     }
+  }
+
+  private isBackdropClick(event) {
+    return event.target === this.ref.location.nativeElement.firstElementChild;
   }
 
   private place() {
