@@ -70,7 +70,7 @@ export class NbStepperComponent {
     const steps = this._steps.toArray();
 
     if (index >= this._selectedIndex && this._linear && index >= 0) {
-      const previousStep = steps[index-1];
+      const previousStep = steps[index - 1];
       return previousStep.completed;
     }
 
