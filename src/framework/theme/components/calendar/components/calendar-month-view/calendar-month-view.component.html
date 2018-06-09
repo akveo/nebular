@@ -6,6 +6,7 @@
       [dayModel]="day"
       [cellStates]="day.cellStates"
 
+      (cellSelect)="onCellSelect($event)"
     ></nb-calendar-cell-view>
     <div *ngIf="week.padRight" class="placeholder-after" [ngStyle]="{ flex: week.padRight }"></div>
   </div>

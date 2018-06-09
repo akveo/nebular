@@ -12,7 +12,11 @@
   <nb-calendar-month-view
     [(ngModel)]="newValue"
     [currentDate]="currentDate"
-    [includeBoundingMonths]="boundingMonths">
+    [selectedValue]="value"
+    [includeBoundingMonths]="boundingMonths"
+
+    (change)="value = $event"
+  >
   </nb-calendar-month-view>
 
   <nb-calendar-year-picker

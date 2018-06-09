@@ -4,11 +4,23 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
 import { NbCalendarMonthModel } from '../../models/calendar-month.model';
+import { NbDateTimeUtil } from '@nebular/theme/components/calendar/service/date-time-util.interface';
+import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
 
 /**
  */
@@ -33,9 +45,18 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
   @Input()
   public currentDate: D = null;
 
-  month: NbCalendarMonthModel = null;
+  @Input()
+  public selectedValue: D = null;
 
-  constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>) {}
+  @Output()
+  public change = new EventEmitter<D>();
+
+  month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
+
+  constructor(
+    private calendarModelFactory: NbCalendarModelFactoryService<D>,
+    private dateTimeUtil: NbDateTimeUtil<D>,
+  ) {}
 
   ngOnInit() {
   }
@@ -43,23 +64,24 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  get value() {
+  get value(): D {
     return this._value;
   }
 
   set value(val: D) {
+    this._value = val;
     if (val) {
-      this.month = this.calendarModelFactory.createMonthModel(val, this.includeBoundingMonths, this.currentDate);
+      this._invalidateModel();
     }
 
-    this._value = val;
     this.onChange(val);
     this.onTouched();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentDate'] || changes['includeBoundingMonths']) {
-      this.month = this.calendarModelFactory.createMonthModel(this.value, this.includeBoundingMonths, this.currentDate);
+    // Fixme: optimization
+    if (this.value) {
+      this._invalidateModel()
     }
   }
 
@@ -73,6 +95,27 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
 
   writeValue(val: D) {
     this.value = val;
+  }
+
+  private _invalidateModel() {
+    const context = new NbCalendarMonthBuilderContext<D>(
+      this.value,
+      this.selectedValue,
+      this.currentDate,
+      this.includeBoundingMonths,
+    );
+
+    this.month = this.calendarModelFactory.createMonthModel(context);
+  }
+
+  onCellSelect(event) {
+    this.change.emit(
+      this.dateTimeUtil.createDate(
+        this.dateTimeUtil.getYear(this.value),
+        this.dateTimeUtil.getMonth(this.value) + event.activeMonthDiff,
+        event.date,
+      ),
+    );
   }
 
 

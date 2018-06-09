@@ -27,9 +27,9 @@ export class NbCalendarCellViewComponent<D> {
   public cellStates: Array<string> = [];
 
   @Output()
-  public onCellSelect = new EventEmitter<D>();
+  public cellSelect = new EventEmitter<any>();
 
-  public onCellHover = new EventEmitter<D>();
+  public onCellHover = new EventEmitter<any>();
 
   @HostBinding('class')
   get cellClasses() {
@@ -37,7 +37,10 @@ export class NbCalendarCellViewComponent<D> {
   }
 
   selectDate() {
-    this.onCellHover.emit()
+    this.cellSelect.emit({
+      date: this.dayModel.date,
+      activeMonthDiff: this.dayModel.activeMonthDiff,
+    });
   }
 
 }

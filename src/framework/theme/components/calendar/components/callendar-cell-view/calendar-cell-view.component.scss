@@ -5,4 +5,12 @@
   &.cell-today {
     color: red;
   }
+
+  &.cell-bounding-month {
+    opacity: 0.5;
+  }
+
+  &.cell-selected {
+    border: 1px solid black;
+  }
 }

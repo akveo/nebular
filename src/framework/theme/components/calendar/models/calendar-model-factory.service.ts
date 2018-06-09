@@ -3,6 +3,7 @@ import { NbDateTimeUtil } from '../service/date-time-util.interface';
 import { NbCalendarCellModel } from './calendar-cell.model';
 import { NbCalendarWeekModel } from './calendar-week.model';
 import { NbCalendarMonthModel } from './calendar-month.model';
+import { NbCalendarMonthBuilderContext } from './calendar-month-builder-context';
 
 @Injectable()
 export class NbCalendarModelFactoryService<D> {
@@ -11,44 +12,40 @@ export class NbCalendarModelFactoryService<D> {
     @Optional() public dateTimeUtil: NbDateTimeUtil<D>,
   ) {}
 
-  createMonthModel(
-    date: D,
-    includeBoundingMonths: boolean = false,
-    todayDate: D,
-  ): NbCalendarMonthModel {
-    const monthSettings = this._getMonthSettings(date, todayDate);
+  createMonthModel(context: NbCalendarMonthBuilderContext<D>): NbCalendarMonthModel {
+    const monthSettings = this._getMonthSettings(context);
 
-    const firstWeekData = this._createFirstWeekMonthModel(monthSettings, includeBoundingMonths);
+    const firstWeekData = this._createFirstWeekMonthModel(monthSettings);
     const fullWeeksData = this._createFullWeekModels(monthSettings, firstWeekData.currentDate);
-    const lastWeekData = this._createLastWeekModel(monthSettings, fullWeeksData.currentDate, includeBoundingMonths);
+    const lastWeekData = this._createLastWeekModel(monthSettings, fullWeeksData.currentDate);
 
     return new NbCalendarMonthModel(
       [ ...firstWeekData.monthModel, ...fullWeeksData.monthModel, ...lastWeekData.monthModel ],
-      this._getMonthStates(date, monthSettings),
+      this._getMonthStates(monthSettings),
     );
   }
 
-  private _getMonthStates(date, monthSettings) {
+  private _getMonthStates({ context }) {
     const states = [];
 
-    if (this.dateTimeUtil.isSameMonth(date, monthSettings.todayDate)) {
+    if (this.dateTimeUtil.isSameMonth(context.activeMonth, context.currentValue)) {
       states.push('current-month');
     }
     return states;
   }
 
-  private _getMonthSettings(date: D, todayDate: D) {
-    const startOfMonth = this.dateTimeUtil.getMonthStart(date);
-    const daysInMonth = this.dateTimeUtil.getNumberOfDaysInMonth(date);
+  private _getMonthSettings(context) {
+    const startOfMonth = this.dateTimeUtil.getMonthStart(context.activeMonth);
+    const daysInMonth = this.dateTimeUtil.getNumberOfDaysInMonth(context.activeMonth);
     const startOfWeekDayDiff = this.dateTimeUtil.getWeekStartDiff(startOfMonth);
     const numberOfDaysInFirstWeekOfMonth = 7 - startOfWeekDayDiff;
 
-    return { startOfMonth, daysInMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, todayDate };
+    return { startOfMonth, daysInMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, context };
   }
 
-  private _createFirstWeekMonthModel(monthSettings, includeBoundingMonths) {
+  private _createFirstWeekMonthModel(monthSettings) {
     const monthModel = [];
-    const { startOfMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth } = monthSettings;
+    const { startOfMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, context } = monthSettings;
 
     const firstWeek = [];
     let currentDate = this.dateTimeUtil.getDate(startOfMonth);
@@ -68,7 +65,7 @@ export class NbCalendarModelFactoryService<D> {
       currentDate = firstWeekDate;
     }
 
-    if (includeBoundingMonths) {
+    if (context.includeBoundingMonths) {
       const startOfWeek = this.dateTimeUtil.getWeekStart(startOfMonth);
       const year = this.dateTimeUtil.getYear(startOfWeek);
       const month = this.dateTimeUtil.getMonth(startOfWeek);
@@ -130,9 +127,9 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel, currentDate };
   }
 
-  private _createLastWeekModel(monthSettings, currentDate, includeBoundingMonths) {
+  private _createLastWeekModel(monthSettings, currentDate) {
     const monthModel = [];
-    const { startOfMonth, daysInMonth } = monthSettings;
+    const { startOfMonth, daysInMonth, context } = monthSettings;
 
     if (currentDate < daysInMonth) {
       const lastWeek = [];
@@ -150,16 +147,18 @@ export class NbCalendarModelFactoryService<D> {
           ),
         );
       }
-      if (includeBoundingMonths) {
+      if (context.includeBoundingMonths) {
         const nextMonthStart = this.dateTimeUtil.add(startOfMonth, 1, 'm');
+        const nextMonthYear = this.dateTimeUtil.getYear(nextMonthStart);
+        const nextMonthMonth = this.dateTimeUtil.getMonth(nextMonthStart);
         for (let nextMonthDay = 1; nextMonthDay <= additionalDaysInNewMonth; nextMonthDay++) {
           lastWeek.push(
             new NbCalendarCellModel(
-              year,
-              month,
+              nextMonthYear,
+              nextMonthMonth,
               nextMonthDay,
               1,
-              this._getStatesForCell(monthSettings, year, month, nextMonthDay),
+              this._getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
             ),
           );
         }
@@ -172,15 +171,30 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel };
   }
 
-  private _getStatesForCell(monthSettings, year, month, date) {
+  private _getStatesForCell({ context }, year, month, date) {
     const states = [];
 
     if (
-      year === this.dateTimeUtil.getYear(monthSettings.todayDate) &&
-      month === this.dateTimeUtil.getMonth(monthSettings.todayDate) &&
-      date === this.dateTimeUtil.getDate(monthSettings.todayDate)
+      year === this.dateTimeUtil.getYear(context.currentValue) &&
+      month === this.dateTimeUtil.getMonth(context.currentValue) &&
+      date === this.dateTimeUtil.getDate(context.currentValue)
     ) {
       states.push('cell-today');
+    }
+
+    if (
+      year === this.dateTimeUtil.getYear(context.activeMonth) &&
+      month !== this.dateTimeUtil.getMonth(context.activeMonth)
+    ) {
+      states.push('cell-bounding-month');
+    }
+
+    if (
+      year === this.dateTimeUtil.getYear(context.selectedValue) &&
+      month === this.dateTimeUtil.getMonth(context.selectedValue) &&
+      date === this.dateTimeUtil.getDate(context.selectedValue)
+    ) {
+      states.push('cell-selected');
     }
 
     return states;
