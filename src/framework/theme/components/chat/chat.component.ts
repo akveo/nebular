@@ -12,7 +12,7 @@ import {
   ElementRef,
   AfterViewChecked,
   ContentChildren,
-  QueryList, AfterViewInit
+  QueryList, AfterViewInit,
 } from '@angular/core';
 import {NbChatMessageComponent} from './chat-message.component';
 
