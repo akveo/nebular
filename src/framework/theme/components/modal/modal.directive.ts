@@ -1,11 +1,11 @@
-import { ComponentRef, Directive, Input, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { ComponentRef, Directive, Input } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
 import { NbModalComponent } from '@nebular/theme/components/modal/modal.component';
 import { NbThemeService } from '@nebular/theme';
 
 @Directive({ selector: '[nbModal]' })
-export class NbModalDirective implements OnDestroy {
+export class NbModalDirective {
   @Input('nbModal')
   content: NbPortalContent;
 
@@ -17,10 +17,6 @@ export class NbModalDirective implements OnDestroy {
 
   constructor(private portalOutlet: NbPortalOutlet,
               private themeService: NbThemeService) {
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
   }
 
   show() {
@@ -36,8 +32,10 @@ export class NbModalDirective implements OnDestroy {
 
   private create(portal: NbPortal) {
     this.portalOutlet.create(portal)
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(ref => this.ref = ref);
+      .pipe(
+        tap((ref: ComponentRef<any>) => this.ref = ref),
+        tap(() => this.place()),
+      ).subscribe();
   }
 
   private buildPortal(): NbPortal {
@@ -55,5 +53,9 @@ export class NbModalDirective implements OnDestroy {
     if (event.target === this.ref.location.nativeElement.firstElementChild) {
       this.destroy();
     }
+  }
+
+  private place() {
+    Object.assign(this.ref.instance, { top: 0, right: 0, left: 0, bottom: 0 });
   }
 }
