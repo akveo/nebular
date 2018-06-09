@@ -471,6 +471,21 @@ $theme: (
   alert-closable-padding: 3rem,
   alert-button-padding: 3rem,
   alert-margin: margin,
+
+  calendar-width: 350px,
+  calendar-height: 350px,
+  calendar-padding: padding,
+  calendar-fg: card-fg-heading,
+  calendar-bg: card-bg,
+  calendar-selected-item: color-bg-active,
+  calendar-active-item: color-success,
+  calendar-hovered-item: #00e488,
+  calendar-inactive-opacity: 0.5,
+  calendar-year-padding: 1rem 1rem,
+  calendar-month-padding: 1rem 1rem,
+  calendar-day-size: 2.5rem,
+  calendar-border-radius: radius,
+  calendar-row-padding: 0.125rem 0,
 );
 
 // register the theme

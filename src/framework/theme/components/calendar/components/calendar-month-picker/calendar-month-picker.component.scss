@@ -2,15 +2,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-.month {
-  padding: 0.5rem 2rem;
-
-  &.selected {
-    background: #00f9a6;
-  }
-
-  &:hover {
-    background: lightgray;
-  }
-}

@@ -1,20 +1,15 @@
-$width: 600px;
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: $width;
+  padding-bottom: 1rem;
 
   i {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     padding: 0.25rem;
     cursor: pointer;
   }
-}
-
-.body {
-  width: $width;
 }
 
 .week {

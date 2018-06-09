@@ -13,7 +13,7 @@ import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
 const defaultStartYear = 2016;
-const defaultYearCount = 20;
+const defaultYearCount = 16;
 
 /**
  */

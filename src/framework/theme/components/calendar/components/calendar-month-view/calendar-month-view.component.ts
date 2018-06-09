@@ -59,7 +59,7 @@ export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.activeMonth) {
-      this._invalidateModel()
+      this._invalidateModel();
     }
   }
 

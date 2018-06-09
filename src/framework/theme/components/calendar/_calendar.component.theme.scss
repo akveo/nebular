@@ -5,7 +5,108 @@
  */
 
 @mixin nb-calendar-theme() {
+
   nb-calendar {
-    color: nb-theme(color-fg);
+    display: flex;
+    flex-direction: column;
+    width: nb-theme(calendar-width);
+    height: nb-theme(calendar-height);
+    padding: nb-theme(calendar-padding);
+    background: nb-theme(calendar-bg);
+    color: nb-theme(calendar-fg);
+    border-radius: nb-theme(calendar-border-radius);
+  }
+
+  nb-calendar-year-picker {
+    .chunk-row {
+      padding: nb-theme(calendar-row-padding);
+    }
+
+    .year {
+      padding: nb-theme(calendar-year-padding);
+      border-radius: nb-theme(calendar-border-radius);
+
+      &.selected {
+        background: nb-theme(calendar-selected-item);
+      }
+
+      &:hover, &:hover:active {
+        background: nb-theme(calendar-hovered-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
+
+      &:active {
+        background: nb-theme(calendar-active-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
+    }
+  }
+
+  nb-calendar-month-picker {
+    .chunk-row {
+      padding: nb-theme(calendar-row-padding);
+    }
+
+    .month {
+      padding: nb-theme(calendar-month-padding);
+      border-radius: nb-theme(calendar-border-radius);
+
+      &.selected {
+        background: nb-theme(calendar-selected-item);
+      }
+
+      &:hover, &:hover:active {
+        background: nb-theme(calendar-hovered-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
+
+      &:active {
+        background: nb-theme(calendar-active-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
+    }
+  }
+
+  nb-calendar-month-view {
+    .week {
+      padding: nb-theme(calendar-row-padding);
+    }
+  }
+
+  nb-calendar-cell-view {
+    cursor: pointer;
+
+    .calendar-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: nb-theme(calendar-day-size);
+      height: nb-theme(calendar-day-size);
+      border-radius: nb-theme(calendar-border-radius);
+    }
+
+    &.cell-today .calendar-cell {
+      background: nb-theme(calendar-selected-item);
+    }
+
+    &.cell-bounding-month .calendar-cell {
+      opacity: nb-theme(calendar-inactive-opacity);
+    }
+
+    .calendar-cell:hover {
+      background: nb-theme(calendar-hovered-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    &.cell-selected .calendar-cell {
+      background: nb-theme(calendar-active-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
+    }
   }
 }

@@ -16,7 +16,7 @@ const ViewMode = {
 };
 
 const defaultStartYear = 2016;
-const defaultYearCount = 20;
+const defaultYearCount = 16;
 
 /**
  */
@@ -32,8 +32,8 @@ export class NbCalendarComponent<D> implements OnInit {
   value: D;
 
   @Input()
-  boundingMonths: boolean = false;
-
+  boundingMonths: boolean = true;
+  
   @Output()
   change = new EventEmitter();
 
@@ -62,15 +62,15 @@ export class NbCalendarComponent<D> implements OnInit {
   nextMonth() {
     this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
   }
-
+  
   prevYears() {
     this.startYear -= defaultYearCount;
   }
-
+  
   nextYears() {
     this.startYear += defaultYearCount;
   }
-
+  
   onChange(value) {
     this.change.emit(value);
   }
