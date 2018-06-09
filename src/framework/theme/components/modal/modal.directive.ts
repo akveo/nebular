@@ -1,5 +1,4 @@
 import { ComponentRef, Directive, Input } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
 import { NbModalComponent } from '@nebular/theme/components/modal/modal.component';
 import { NbThemeService } from '@nebular/theme';
@@ -32,10 +31,10 @@ export class NbModalDirective {
 
   private create(portal: NbPortal) {
     this.portalOutlet.create(portal)
-      .pipe(
-        tap((ref: ComponentRef<any>) => this.ref = ref),
-        tap(() => this.place()),
-      ).subscribe();
+      .subscribe((ref: ComponentRef<any>) => {
+        this.ref = ref;
+        this.place();
+      });
   }
 
   private buildPortal(): NbPortal {

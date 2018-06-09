@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbToasterService } from '@nebular/theme/components/toaster/toaster.service';
+import { NbToasterService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-toaster-showcase',
@@ -19,6 +19,6 @@ export class NbToasterShowcaseComponent {
   }
 
   showToast(placement) {
-    this.toasterService.show({ content: `I'm super toaster ${this.index++}`, position: placement });
+    this.toasterService.show({ content: `My super toast ${this.index++}`, position: placement });
   }
 }

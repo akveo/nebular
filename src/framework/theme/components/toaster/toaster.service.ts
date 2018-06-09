@@ -1,7 +1,6 @@
 import { ComponentRef, Injectable } from '@angular/core';
 import { NbPortalOutlet } from '../portal/portal-outlet';
 import { NbToastComponent } from './toaster.component';
-import { tap } from 'rxjs/operators';
 import { NbPositioningHelper } from './positioning.helper';
 import { NbToast, NbToastPortal, NbToastPosition, NbToastRegistryBag, NbToastStatus } from './model';
 
@@ -22,32 +21,40 @@ export class NbToasterService {
     this.create(portal);
   }
 
-  destroy(ref: ComponentRef<any>) {
+  private create(portal: NbToastPortal) {
+    this.portalOutlet.create(portal)
+      .subscribe((ref: ComponentRef<any>) => {
+        this.save(ref, portal);
+        this.place(ref);
+        this.setupDestroyTimer(ref, portal);
+      });
+  }
+
+  private buildPortal({ content, context, duration, position, status, margin }: NbToast): NbToastPortal {
+    return {
+      content: NbToastComponent,
+      position: position || NbToastPosition.TOP_RIGHT,
+      duration: duration || DEFAULT_DURATION,
+      status: status || NbToastStatus.INFO,
+      margin: margin || 16,
+      context: {
+        content,
+        context,
+        onClick: instance => this.onClick(instance),
+      },
+    };
+  }
+
+  private destroy(ref: ComponentRef<any>) {
     ref.destroy();
     const deleted = this.getBagIndex(ref);
     this.registry.splice(deleted, 1);
     this.recalculateRest(deleted);
   }
 
-  private create(portal: NbToastPortal) {
-    this.portalOutlet.create(portal)
-      .pipe(
-        tap((ref: ComponentRef<any>) => this.save(ref, portal)),
-        tap((ref: ComponentRef<any>) => this.place(ref)),
-        tap((ref: ComponentRef<any>) => this.setupDestroyTimer(ref, portal)),
-      ).subscribe(() => {
-    });
-  }
-
-  private buildPortal({ content, context, duration, position, status, margin }: NbToast): NbToastPortal {
-    return {
-      content: NbToastComponent,
-      context: { content, context },
-      position: position || NbToastPosition.TOP_RIGHT,
-      duration: duration || DEFAULT_DURATION,
-      status: status || NbToastStatus.INFO,
-      margin: margin || 16,
-    };
+  private onClick(instance) {
+    const ref = this.registry.find(bag => bag.ref.instance === instance).ref;
+    this.destroy(ref);
   }
 
   private place(ref: ComponentRef<any>) {

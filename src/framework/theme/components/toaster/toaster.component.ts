@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Host, Inject, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
+import { NbPortalComponent } from '@nebular/theme/components/portal/portal.component';
 
 @Component({
-  selector: 'nb-modal',
+  selector: 'nb-toast',
   styleUrls: ['./toaster.component.scss'],
   template: `
     <ng-container *ngIf="isTemplate">
@@ -14,6 +15,7 @@ import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet'
       <div class="primitive-popover">{{content}}</div>
     </ng-container>
   `,
+  host: { '(click)': 'onClick(parent)' },
 })
 export class NbToastComponent {
 
@@ -29,7 +31,8 @@ export class NbToastComponent {
   @Input()
   context: Object;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              public parent: NbPortalComponent) {
   }
 
   /**

@@ -37,3 +37,4 @@ export * from './components/alert/alert.component';
 export * from './components/alert/alert.module';
 export * from './components/modal/modal.module';
 export * from './components/toaster/toaster.module';
+export * from './components/toaster/toaster.service';
