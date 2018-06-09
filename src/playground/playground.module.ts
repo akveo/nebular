@@ -23,7 +23,7 @@ import {
   NbContextMenuModule,
   NbRouteTabsetModule,
   NbProgressBarModule,
-  NbAlertModule,
+  NbAlertModule, NbModalModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -126,6 +126,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -147,6 +148,7 @@ export const NB_MODULES = [
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
+  NbModalModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -241,6 +243,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbModalShowcaseComponent,
 ];
 
 

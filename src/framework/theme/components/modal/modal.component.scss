@@ -1,0 +1,17 @@
+/deep/ nb-layout {
+  & > .scrollable-container > .layout {
+    filter: blur(0);
+  }
+
+  &.blurred > .scrollable-container > .layout {
+    filter: blur(16px);
+  }
+}
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -76,12 +76,14 @@ import {
   NbMenuItem331Component,
   NbMenuItem332Component,
   NbMenuItem33Component,
-  NbMenuItem3Component, NbMenuItem4Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
   NbMenuTestComponent,
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
   NbRouteTabsetTestComponent,
 } from './tabset/route-tabset-test.component';
 import { NbSearchTestComponent } from './search/search-test.component';
@@ -103,12 +105,22 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: NbPlaygroundLayoutComponent,
     children: [
+      {
+        path: 'modal',
+        children: [
+          {
+            path: 'modal-showcase.component',
+            component: NbModalShowcaseComponent,
+          },
+        ],
+      },
       {
         path: 'popover',
         children: [
