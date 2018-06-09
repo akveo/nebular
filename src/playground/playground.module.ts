@@ -131,6 +131,7 @@ import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
 import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypeShowcaseComponent } from './chat/chat-message-type-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -251,6 +252,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbChatColorsComponent,
   NbChatSizesComponent,
   NbChatDropComponent,
+  NbChatMessageTypeShowcaseComponent,
 ];
 
 
