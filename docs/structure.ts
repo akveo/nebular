@@ -189,6 +189,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Chat UI',
+        icon: 'layout.svg',
+        source: [
+          'NbChatComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Alert',
         icon: 'alert.svg',
         source: [

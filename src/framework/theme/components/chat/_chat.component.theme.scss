@@ -14,7 +14,7 @@
 
     .header {
       border-bottom: 1px solid nb-theme(chat-separator);
-      color: nb-theme(chat-fg);
+      color: nb-theme(chat-fg-text);
       padding: nb-theme(chat-padding);
     }
 
@@ -66,6 +66,9 @@
       }
 
       nb-chat-message-text {
+
+        display: flex;
+        flex-direction: column;
 
         .sender {
           font-size: 0.875rem;
@@ -168,6 +171,7 @@
         }
 
         nb-chat-message-text {
+          align-items: flex-start;
           .text {
             @include nb-ltr(border-top-left-radius, 0);
             @include nb-rtl(border-top-right-radius, 0);
@@ -195,6 +199,7 @@
         }
 
         nb-chat-message-text {
+          align-items: flex-end;
           p {
             @include nb-ltr(text-align, right);
             @include nb-rtl(text-align, left);
@@ -305,6 +310,7 @@
     &.active-chat {
       .header {
         background-color: nb-theme(chat-active-bg);
+        color: nb-theme(chat-fg);
       }
     }
     &.disabled-chat {
@@ -316,26 +322,31 @@
     &.primary-chat {
       .header {
         background-color: nb-theme(chat-primary-bg);
+        color: nb-theme(chat-fg);
       }
     }
     &.info-chat {
       .header {
         background-color: nb-theme(chat-info-bg);
+        color: nb-theme(chat-fg);
       }
     }
     &.success-chat {
       .header {
         background-color: nb-theme(chat-success-bg);
+        color: nb-theme(chat-fg);
       }
     }
     &.warning-chat {
       .header {
         background-color: nb-theme(chat-warning-bg);
+        color: nb-theme(chat-fg);
       }
     }
     &.danger-chat {
       .header {
         background-color: nb-theme(chat-danger-bg);
+        color: nb-theme(chat-fg);
       }
     }
   }

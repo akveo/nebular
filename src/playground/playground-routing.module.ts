@@ -106,6 +106,7 @@ import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
 
 export const routes: Routes = [
   {
@@ -413,6 +414,10 @@ export const routes: Routes = [
           {
             path: 'chat-sizes.component',
             component: NbChatSizesComponent,
+          },
+          {
+            path: 'chat-drop.component',
+            component: NbChatDropComponent,
           },
         ],
       },

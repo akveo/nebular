@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 export class NbChatSizesComponent {
   chats: any[] = [
     {
-      title: 'Nebular Convertional UI Small',
+      title: 'Nebular Conversational UI Small',
       messages: [
         {
           text: 'Small!',
@@ -27,14 +27,14 @@ export class NbChatSizesComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.gifer.com/no.gif',
           },
         },
       ],
       size: 'small',
     },
     {
-      title: 'Nebular Convertional UI Medium',
+      title: 'Nebular Conversational UI Medium',
       messages: [
         {
           text: 'Medium!',
@@ -42,7 +42,7 @@ export class NbChatSizesComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -57,7 +57,7 @@ export class NbChatSizesComponent {
       reply: true,
       user: {
         name: 'Jonh Doe',
-        avatar: 'http://lorempixel.com/400/200/animals/',
+        avatar: 'https://i.gifer.com/no.gif',
       },
     });
   }

@@ -20,25 +20,57 @@ import { NbChatMessageComponent } from './chat-message.component';
 /**
  * Chat component.
  *
- * Chat UI components collection:
+ * Conversational UI components collection - a group of components created for chat-like UI construction.
+ * There are three main components:
+ * ```ts
+ * <nb-chat>
+ * </nb-chat> // chat container
+ *
+ * <nb-chat-form>
+ * </nb-chat-form> // chat form with drag&drop files feature
+ *
+ * <nb-chat-message>
+ * </nb-chat-message> // chat message, available multiple types
+ * ```
+ *
+ * Here's a complete example build in a bot-like app. Type `help` to be able to receive different message types.
+ * Enjoy the conversation and the beautiful UI.
  * @stacked-example(Showcase, chat/chat-showcase.component)
  *
- * Simple chat configuration:
- *
- * ```html
- * <nb-chat>
- *   <nb-chat-message *ngFor="let msg of messages"
- *     [type]="msg.type"
- *     [reply]="msg.reply"
- *     [sender]="msg.user.name"
- *     [date]="msg.date"
- *     [avatar]="msg.user.avatar">
- *     {{ msg.text }}
+ * ```ts
+ * Basic chat configuration and usage:
+ * <nb-chat title="Nebular Conversational UI">
+ *       <nb-chat-message *ngFor="let msg of messages"
+ *                        [type]="msg.type"
+ *                        [message]="msg.text"
+ *                        [reply]="msg.reply"
+ *                        [sender]="msg.user.name"
+ *                        [date]="msg.date"
+ *                        [files]="msg.files"
+ *                        [quote]="msg.quote"
+ *                        [latitude]="msg.latitude"
+ *                        [longitude]="msg.longitude"
+ *                        [avatar]="msg.user.avatar">
  *   </nb-chat-message>
+ *
+ *   <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+ *   </nb-chat-form>
+ * </nb-chat>
  *
  *   <nb-chat-form (send)="onSend($event)"></nb-chat-form>
  * </nb-chat>
  * ```
+ *
+ * Drag & drop available for files and images:
+ * @stacked-example(Drag & Drop Chat, chat/chat-drop.component)
+ *
+ * Chat is also available in different ui colors:
+ *
+ * @stacked-example(Colored Chat, chat/chat-colors.component)
+ *
+ * Also it is possible to configure sizes:
+ *
+ * @stacked-example(Colored Chat, chat/chat-sizes.component)
  *
  * @styles
  *
@@ -79,7 +111,7 @@ export class NbChatComponent implements AfterViewChecked, AfterViewInit {
   static readonly STATUS_DANGER = 'danger';
 
   size: string;
-  status: string = NbChatComponent.STATUS_SUCCESS;
+  status: string;
   accent: string;
 
   @Input() title: string;

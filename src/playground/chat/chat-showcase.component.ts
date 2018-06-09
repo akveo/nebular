@@ -12,12 +12,10 @@ import { NbChatShowcaseService } from './chat-showcase.service';
   templateUrl: './chat-showcase.component.html',
   providers: [ NbChatShowcaseService ],
   styles: [`
-    nb-card-body {
-      display: flex;
+    ::ng-deep nb-layout-column {
       justify-content: center;
-      align-items: center;
+      display: flex;
     }
-
     nb-chat {
       width: 500px;
     }

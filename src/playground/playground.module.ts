@@ -130,6 +130,7 @@ import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -249,6 +250,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbChatShowcaseComponent,
   NbChatColorsComponent,
   NbChatSizesComponent,
+  NbChatDropComponent,
 ];
 
 
