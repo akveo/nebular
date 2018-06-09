@@ -25,93 +25,11 @@ import { NbChatShowcaseService } from './chat-showcase.service';
 })
 export class NbChatShowcaseComponent {
 
-  constructor(protected chatShowcaseService: NbChatShowcaseService) { }
+  messages: any[];
 
-  messages: any[] = [
-    {
-      text: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
-      reply: false,
-      date: new Date(),
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: 'http://lorempixel.com/400/200/animals/',
-      },
-    },
-    {
-      text: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
-      reply: true,
-      date: new Date(),
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: 'http://lorempixel.com/400/200/animals/',
-      },
-    },
-    {
-      text: 'Hello, how are you?',
-      reply: false,
-      date: new Date(),
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: '',
-      },
-    },
-    {
-      text: 'Hey looks at that pic I just found!',
-      reply: false,
-      date: new Date(),
-      type: 'file',
-      files: [
-        {
-          url: 'http://lorempixel.com/600/400/animals/',
-          type: 'image/jpeg',
-          icon: false,
-        },
-      ],
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: '',
-      },
-    },
-    {
-      text: 'What do you mean by that?',
-      reply: false,
-      date: new Date(),
-      type: 'quote',
-      quote: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: '',
-      },
-    },
-    {
-      text: 'Attached is an archive I mentioned',
-      reply: true,
-      date: new Date(),
-      type: 'file',
-      files: [
-        {
-          url: 'http://lorempixel.com/600/400/animals/',
-          icon: 'nb-compose',
-        },
-      ],
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: '',
-      },
-    },
-    {
-      text: 'Meet me there',
-      reply: false,
-      date: new Date(),
-      type: 'map',
-      latitude: 40.714728,
-      longitude: -73.998672,
-      user: {
-        name: 'Dmitry Nehaychik',
-        avatar: '',
-      },
-    },
-  ];
+  constructor(protected chatShowcaseService: NbChatShowcaseService) {
+    this.messages = this.chatShowcaseService.loadMessages();
+  }
 
   sendMessage(event: any) {
     const files = !event.files ? [] : event.files.map((file) => {
@@ -130,7 +48,7 @@ export class NbChatShowcaseComponent {
       files: files,
       user: {
         name: 'Jonh Doe',
-        avatar: 'http://lorempixel.com/400/200/animals/',
+        avatar: 'https://i.gifer.com/no.gif',
       },
     });
     const botReply = this.chatShowcaseService.reply(event.message);
