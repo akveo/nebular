@@ -36,7 +36,7 @@ export class NbStepperComponent {
       if (index < 0 || index > this._steps.length - 1) {
         throw Error('nbStepperComponent: Cannot assign out-of-bounds value to `selectedIndex`.');
       }
-      if (this._selectedIndex !== index) {
+      if (this._selectedIndex !== index && this.isStepValid(index)) {
         this._selectedIndex = index;
       }
     } else {
@@ -53,12 +53,28 @@ export class NbStepperComponent {
     this.selectedIndex = this._steps ? this._steps.toArray().indexOf(step) : -1;
   }
 
+  @Input()
+  get linear(): boolean { return this._linear; }
+  set linear(value: boolean) { this._linear = value; }
+  private _linear = false;
+
   next() {
     this.selectedIndex += 1;
   }
 
   previous() {
     this.selectedIndex -= 1;
+  }
+
+  private isStepValid(index: number): boolean {
+    const steps = this._steps.toArray();
+
+    if (index >= this._selectedIndex && this._linear && index >= 0) {
+      const previousStep = steps[index-1];
+      return previousStep.completed;
+    }
+
+    return true;
   }
 
 
