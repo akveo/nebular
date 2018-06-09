@@ -9,6 +9,6 @@ export class NbCalendarDatePipe<D> implements PipeTransform {
   }
 
   transform(date: any): string {
-    return `${this.dateTimeUtil.getMonthName(date)}, ${this.dateTimeUtil.getYear(date)}`;
+    return date ? `${this.dateTimeUtil.getMonthName(date)}, ${this.dateTimeUtil.getYear(date)}` : '';
   }
 }

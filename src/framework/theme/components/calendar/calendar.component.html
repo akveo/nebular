@@ -1,7 +1,7 @@
 <ng-container *ngIf="viewMode === ViewMode.date">
   <div class="header">
     <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
-      {{ value | nbCalendarDate }}
+      {{ newValue | nbCalendarDate }}
     </button>
     <div>
       <i class="nb-arrow-left" (click)="prevMonth()"></i>
@@ -24,7 +24,7 @@
 <ng-container *ngIf="viewMode === ViewMode.year">
   <div class="header">
     <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
-      {{ value | nbCalendarDate }}
+      {{ newValue | nbCalendarDate }}
     </button>
     <div>
       <i class="nb-arrow-left" (click)="prevYears()"></i>
