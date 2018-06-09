@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Host, Inject, Input, TemplateRef, Type, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
 import { NbPortalComponent } from '@nebular/theme/components/portal/portal.component';

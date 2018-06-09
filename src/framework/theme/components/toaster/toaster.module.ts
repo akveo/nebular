@@ -15,7 +15,7 @@ import { NbPositioningHelper } from './positioning.helper';
   imports: [NbSharedModule, NbPortalModule],
   declarations: [NbToastComponent],
   entryComponents: [NbToastComponent],
-  providers: [NbToasterService, NbPositioningHelper]
+  providers: [NbToasterService, NbPositioningHelper],
 })
 export class NbToasterModule {
 }

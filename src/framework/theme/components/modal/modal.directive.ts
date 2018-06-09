@@ -1,7 +1,7 @@
 import { ComponentRef, Directive, Input } from '@angular/core';
+import { NbThemeService } from '../../services/theme.service';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
-import { NbModalComponent } from '@nebular/theme/components/modal/modal.component';
-import { NbThemeService } from '@nebular/theme';
+import { NbModalComponent } from './modal.component';
 
 @Directive({ selector: '[nbModal]' })
 export class NbModalDirective {

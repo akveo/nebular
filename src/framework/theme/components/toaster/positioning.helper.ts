@@ -10,22 +10,26 @@ import { NbToastPosition, NbToastRegistryBag } from './model';
 export class NbPositioningHelper {
 
   private static positionCalculator = {
-    [NbToastPosition.TOP_RIGHT](ref: ComponentRef<any>, registry: NbToastRegistryBag[]): { top: number, right: number } {
+    [NbToastPosition.TOP_RIGHT](ref: ComponentRef<any>, registry: NbToastRegistryBag[])
+      : { top: number, right: number } {
       const [top, right] = this.calcDimens(ref, registry, NbToastPosition.TOP_RIGHT);
       return { top, right };
     },
 
-    [NbToastPosition.BOTTOM_RIGHT](ref: ComponentRef<any>, registry: NbToastRegistryBag[]): { bottom: number, right: number } {
+    [NbToastPosition.BOTTOM_RIGHT](ref: ComponentRef<any>, registry: NbToastRegistryBag[])
+      : { bottom: number, right: number } {
       const [bottom, right] = this.calcDimens(ref, registry, NbToastPosition.BOTTOM_RIGHT);
       return { bottom, right };
     },
 
-    [NbToastPosition.TOP_LEFT](ref: ComponentRef<any>, registry: NbToastRegistryBag[]): { top: number, left: number } {
+    [NbToastPosition.TOP_LEFT](ref: ComponentRef<any>, registry: NbToastRegistryBag[])
+      : { top: number, left: number } {
       const [top, left] = this.calcDimens(ref, registry, NbToastPosition.TOP_LEFT);
       return { top, left };
     },
 
-    [NbToastPosition.BOTTOM_LEFT](ref: ComponentRef<any>, registry: NbToastRegistryBag[]): { bottom: number, left: number } {
+    [NbToastPosition.BOTTOM_LEFT](ref: ComponentRef<any>, registry: NbToastRegistryBag[])
+      : { bottom: number, left: number } {
       const [bottom, left] = this.calcDimens(ref, registry, NbToastPosition.BOTTOM_LEFT);
       return { bottom, left };
     },
@@ -48,7 +52,7 @@ export class NbPositioningHelper {
   };
 
   calcPosition(ref: ComponentRef<any>, registry: NbToastRegistryBag[]): ClientRect {
-    const bag = registry.find(bag => bag.ref === ref);
+    const bag = registry.find(item => item.ref === ref);
     const positionCalculator: Function = NbPositioningHelper.positionCalculator[bag.portal.position];
     return positionCalculator.call(NbPositioningHelper.positionCalculator, ref, registry);
   }

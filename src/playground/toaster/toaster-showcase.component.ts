@@ -19,6 +19,6 @@ export class NbToasterShowcaseComponent {
   }
 
   showToast(placement) {
-    this.toasterService.show({ content: `My super toast ${this.index++}`, position: placement });
+    this.toasterService.show({ content: `My super toast ${this.index++}`, position: placement, duration: 100000 });
   }
 }
