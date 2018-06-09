@@ -473,7 +473,16 @@ $theme: (
   alert-margin: margin,
 
   chat-font-size: font-size,
-  chat-fg: color-fg,
+  chat-fg: color-white,
+  chat-bg: color-bg,
+  chat-fg-text: color-fg-text,
+  chat-height-xxsmall: 96px,
+  chat-height-xsmall: 216px,
+  chat-height-small: 336px,
+  chat-height-medium: 456px,
+  chat-height-large: 576px,
+  chat-height-xlarge: 696px,
+  chat-height-xxlarge: 816px,
   chat-border: border,
   chat-padding: padding,
   chat-shadow: shadow,
@@ -489,6 +498,15 @@ $theme: (
   chat-message-file-fg: color-fg,
   chat-message-file-bg: transparent,
   chat-form-bg: color-bg-active,
+  chat-active-bg: color-fg,
+  chat-disabled-bg: color-bg,
+  chat-disabled-fg: color-fg,
+  chat-primary-bg: color-primary,
+  chat-info-bg: color-info,
+  chat-success-bg: color-success,
+  chat-warning-bg: color-warning,
+  chat-danger-bg: color-danger,
+
 );
 
 // register the theme

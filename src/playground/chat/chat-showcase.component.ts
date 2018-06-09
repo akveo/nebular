@@ -4,12 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { NbChatShowcaseService } from './chat-showcase.service';
 
 @Component({
   selector: 'nb-chat-showcase',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chat-showcase.component.html',
+  providers: [ NbChatShowcaseService ],
   styles: [`
     nb-card-body {
       display: flex;
@@ -23,6 +24,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `],
 })
 export class NbChatShowcaseComponent {
+
+  constructor(protected chatShowcaseService: NbChatShowcaseService) { }
 
   messages: any[] = [
     {
@@ -173,5 +176,9 @@ export class NbChatShowcaseComponent {
         avatar: 'http://lorempixel.com/400/200/animals/',
       },
     });
+    const botReply = this.chatShowcaseService.reply(event.message);
+    if (botReply) {
+      setTimeout(() => { this.messages.push(botReply) }, 500);
+    }
   }
 }

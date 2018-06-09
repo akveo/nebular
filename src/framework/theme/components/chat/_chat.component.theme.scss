@@ -14,6 +14,7 @@
 
     .header {
       border-bottom: 1px solid nb-theme(chat-separator);
+      color: nb-theme(chat-fg);
       padding: nb-theme(chat-padding);
     }
 
@@ -49,6 +50,9 @@
         border-radius: 50%;
         flex-shrink: 0;
         background: nb-theme(chat-message-avatar-bg);
+        background-position: center;
+        background-size: 3.4rem 2.6rem;
+        background-repeat: no-repeat;
         width: 2.5rem;
         height: 2.5rem;
         text-align: center;
@@ -226,26 +230,40 @@
     }
 
     &.active-chat {
-      background-color: nb-theme(chat-active-bg);
+      .header {
+        background-color: nb-theme(chat-active-bg);
+      }
     }
     &.disabled-chat {
-      background-color: nb-theme(chat-disabled-bg);
-      color: nb-theme(chat-disabled-fg);
+      .header {
+        background-color: nb-theme(chat-disabled-bg);
+        color: nb-theme(chat-disabled-fg);
+      }
     }
     &.primary-chat {
-      background-color: nb-theme(chat-primary-bg);
+      .header {
+        background-color: nb-theme(chat-primary-bg);
+      }
     }
     &.info-chat {
-      background-color: nb-theme(chat-info-bg);
+      .header {
+        background-color: nb-theme(chat-info-bg);
+      }
     }
     &.success-chat {
-      background-color: nb-theme(chat-success-bg);
+      .header {
+        background-color: nb-theme(chat-success-bg);
+      }
     }
     &.warning-chat {
-      background-color: nb-theme(chat-warning-bg);
+      .header {
+        background-color: nb-theme(chat-warning-bg);
+      }
     }
     &.danger-chat {
-      background-color: nb-theme(chat-danger-bg);
+      .header {
+        background-color: nb-theme(chat-danger-bg);
+      }
     }
   }
 }
