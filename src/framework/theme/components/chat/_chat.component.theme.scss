@@ -92,6 +92,8 @@
 
       nb-chat-message-file {
         a {
+          color: nb-theme(chat-message-file-fg);
+          background: nb-theme(chat-message-file-bg);
           width: 50%;
           display: block;
           font-size: 4rem;
@@ -101,6 +103,7 @@
           border-radius: 0.5rem;
           &:hover, &:focus {
             text-decoration: none;
+            color: nb-theme(chat-message-file-fg);
           }
           @include nb-ltr(margin-left, auto);
           @include nb-rtl(margin-right, auto);

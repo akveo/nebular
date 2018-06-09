@@ -86,6 +86,18 @@ export class NbChatShowcaseComponent {
         avatar: '',
       },
     },
+    {
+      text: 'Meet me there',
+      reply: false,
+      date: new Date(),
+      type: 'map',
+      latitude: 40.714728,
+      longitude: -73.998672,
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: '',
+      },
+    },
     // {
     //   text: 'Hello, how are you?',
     //   reply: false,
