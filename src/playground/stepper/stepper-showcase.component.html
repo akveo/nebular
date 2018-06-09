@@ -1,20 +1,18 @@
 <nb-card>
   <nb-card-body>
     <nb-stepper>
-      <nb-step>
+      <nb-step [completed]="true">
         <ng-template nbStepLabel>First step</ng-template>
         <span>1</span>
-        <button class="btn btn-primary" nbStepperPrevious>prev</button>
         <button class="btn btn-primary" nbStepperNext>next</button>
       </nb-step>
-      <nb-step>
+      <nb-step [completed]="true">
         <ng-template nbStepLabel>Second step</ng-template>
         <span>2</span>
         <button class="btn btn-primary" nbStepperPrevious>prev</button>
         <button class="btn btn-primary" nbStepperNext>next</button>
       </nb-step>
-      <nb-step>
-        <ng-template nbStepLabel>Third step</ng-template>
+      <nb-step label="Third step">
         <span>3</span>
         <button class="btn btn-primary" nbStepperPrevious>prev</button>
         <button class="btn btn-primary" nbStepperNext>next</button>
@@ -23,7 +21,6 @@
         <ng-template nbStepLabel>Fourth step</ng-template>
         <span>4</span>
         <button class="btn btn-primary" nbStepperPrevious>prev</button>
-        <button class="btn btn-primary" nbStepperNext>next</button>
       </nb-step>
     </nb-stepper>
   </nb-card-body>

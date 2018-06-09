@@ -1,12 +1,13 @@
 .step-header-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .step-index-label-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }

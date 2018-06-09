@@ -1,11 +1,11 @@
 <div class="step-header-container"
-     [class.step-header-container-selected]="selected">
+     [class.step-header-container-selected]="selected"
+     [class.step-header-container-completed]="!selected && completed">
   <div class="step-index-label-container">
     <span>{{ index + 1 }}</span>
   </div>
-  <ng-container *ngIf="_isTemplateInside()"
-                class="step-label"
-                [ngTemplateOutlet]="label.template"></ng-container>
-  <div *ngIf="!_isTemplateInside()"
-       class="step-label">{{ label }}</div>
+  <div class="step-label">
+    <span *ngIf="!_isTemplateInside()">{{ label }}</span>
+    <ng-container *ngIf="_isTemplateInside()" [ngTemplateOutlet]="label.template"></ng-container>
+  </div>
 </div>

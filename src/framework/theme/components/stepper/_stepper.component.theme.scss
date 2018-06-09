@@ -5,7 +5,14 @@
  */
 
 @mixin nb-stepper-theme {
-  .step-label {
-    margin-bottom: 5px;
+
+  .horizontal-step-connector {
+    margin-top: nb-theme(stepper-icon-size) / 2;
+    background-color: nb-theme(stepper-fg);
   }
+
+  .horizontal-step-connector-past {
+    background-color: nb-theme(stepper-accent-color);
+  }
+
 }

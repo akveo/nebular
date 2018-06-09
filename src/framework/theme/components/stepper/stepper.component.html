@@ -3,9 +3,13 @@
     <nb-step-header [label]="step.stepLabel || step.label"
                     [selected]="selectedIndex === i"
                     [index]="i"
+                    [completed]="step.completed"
                     (click)="step.select()">
     </nb-step-header>
-    <div *ngIf="!isLast" class="horizontal-step-connector"></div>
+    <div *ngIf="!isLast"
+         [class.horizontal-step-connector-past]="i < selectedIndex"
+         class="horizontal-step-connector"></div>
+
   </ng-container>
 </div>
 

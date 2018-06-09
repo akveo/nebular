@@ -1,11 +1,11 @@
 .nb-stepper-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 10px;
 }
 
 .horizontal-step-connector {
   flex: auto;
-  height: 1px;
-  background-color: gray;
+  height: 2px;
 }

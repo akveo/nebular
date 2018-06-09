@@ -20,7 +20,7 @@ export class NbStepHeaderComponent {
 
   @Input() selected: boolean;
 
-  @Input() active: boolean;
+  @Input() completed: boolean;
 
   @Input() optional: boolean;
 
