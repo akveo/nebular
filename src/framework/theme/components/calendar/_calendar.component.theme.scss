@@ -6,7 +6,7 @@
 
 @mixin nb-calendar-theme() {
 
-  nb-calendar {
+  nb-calendar, nb-calendar-range {
     display: flex;
     flex-direction: column;
     width: nb-theme(calendar-width);
@@ -95,6 +95,13 @@
 
     &.cell-bounding-month .calendar-cell {
       opacity: nb-theme(calendar-inactive-opacity);
+    }
+
+    &.cell-range-inbetween {
+      background: nb-theme(calendar-between-item);
+      .calendar-cell {
+        background: none;
+      }
     }
 
     .calendar-cell:hover {
