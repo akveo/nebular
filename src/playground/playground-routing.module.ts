@@ -428,7 +428,7 @@ export const routes: Routes = [
           {
             path: 'chat-conversation-showcase.component',
             component: NbChatConversationShowcaseComponent,
-          }
+          },
         ],
       },
     ],
