@@ -471,6 +471,12 @@ $theme: (
   alert-closable-padding: 3rem,
   alert-button-padding: 3rem,
   alert-margin: margin,
+
+  stepper-icon-size: 2rem,
+  stepper-label-font-size: font-size-sm,
+  stepper-label-font-weight: font-weight-bolder,
+  stepper-accent-color: color-primary,
+  stepper-completed-fg: color-white,
 );
 
 // register the theme

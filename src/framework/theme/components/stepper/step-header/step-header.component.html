@@ -3,6 +3,9 @@
   <div class="step-index-label-container">
     <span>{{ index + 1 }}</span>
   </div>
-  <ng-container *ngIf="_isTemplateInside()" [ngTemplateOutlet]="label.template"></ng-container>
-  <div *ngIf="!_isTemplateInside()" class="step-label">{{ label }}</div>
+  <ng-container *ngIf="_isTemplateInside()"
+                class="step-label"
+                [ngTemplateOutlet]="label.template"></ng-container>
+  <div *ngIf="!_isTemplateInside()"
+       class="step-label">{{ label }}</div>
 </div>

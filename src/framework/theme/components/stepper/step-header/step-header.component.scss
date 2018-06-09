@@ -5,21 +5,8 @@
   align-items: center;
 }
 
-.step-header-container-selected {
-
-  .step-index-label-container {
-    background-color: red;
-    color: white;
-  }
-}
-
 .step-index-label-container {
-  width: 32px;
-  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 20px;
-  color: red;
 }
