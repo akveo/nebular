@@ -15,7 +15,9 @@ import { NbDateTimeUtil } from './service/date-time-util.interface';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarCellViewComponent } from './components/callendar-cell-view/calendar-cell-view.component';
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
-import { NbCalendarDatePipe } from './pipes/calendar-date.pipe';
+import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
+import { NbCalendarDatePipe } from './helpers/calendar-date.pipe';
+import { NbArrayHelper } from './helpers/array.helper';
 
 const NB_CALENDAR_PROVIDERS = [
   NbCalendarModelFactoryService,
@@ -26,18 +28,15 @@ const NB_CALENDAR_PROVIDERS = [
 const COMPONENTS = [
   NbCalendarComponent,
   NbCalendarYearPickerComponent,
+  NbCalendarMonthPickerComponent,
   NbCalendarMonthViewComponent,
   NbCalendarCellViewComponent,
 ];
 
-const PIPES = [
-  NbCalendarDatePipe,
-];
-
 @NgModule({
   imports: [ NbSharedModule, NbCheckboxModule ],
-  exports: [ ...COMPONENTS, ...PIPES ],
-  declarations: [ ...COMPONENTS, ...PIPES ],
+  exports: [ ...COMPONENTS ],
+  declarations: [ ...COMPONENTS, NbCalendarDatePipe ],
 })
 export class NbCalendarModule {
   static forRoot(): ModuleWithProviders {
@@ -45,6 +44,7 @@ export class NbCalendarModule {
       ngModule: NbCalendarModule,
       providers: [
         ...NB_CALENDAR_PROVIDERS,
+        NbArrayHelper,
       ],
     };
   }

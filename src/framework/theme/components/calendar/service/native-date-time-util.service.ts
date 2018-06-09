@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
-  months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
+  months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
   
   getNumberOfDaysInMonth(date: Date): number {
     return this.getDate(
@@ -25,8 +25,12 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
   }
 
   getMonthName(date: Date): string {
-    const monthIndex: number = this.getMonth(date);
-    return this.months[monthIndex];
+    const index: number = this.getMonth(date);
+    return this.getMonthNameByIndex(index);
+  }
+
+  getMonthNameByIndex(index: number): string {
+    return this.months[index];
   }
 
   getYear(date: Date): number {

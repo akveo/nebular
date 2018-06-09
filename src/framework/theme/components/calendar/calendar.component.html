@@ -23,7 +23,7 @@
 
 <ng-container *ngIf="viewMode === ViewMode.year">
   <div class="header">
-    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
       {{ newValue | nbCalendarDate }}
     </button>
     <div>
@@ -34,12 +34,27 @@
 
   <div class="body">
     <nb-calendar-year-picker
-      [(ngModel)]="newValue"
-      [selectedValue]="value"
+      [selectedValue]="newValue"
       [currentDate]="currentDate"
       [startYear]="startYear"
       [yearCount]="yearCount"
-      (change)="value = $event; viewMode = ViewMode.date">
+      (change)="viewMode = ViewMode.month">
     </nb-calendar-year-picker>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="viewMode === ViewMode.month">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
+      {{ newValue | nbCalendarDate }}
+    </button>
+  </div>
+
+  <div class="body">
+    <nb-calendar-month-picker
+      [selectedValue]="newValue"
+      [currentDate]="currentDate"
+      (change)="viewMode = ViewMode.date">
+    </nb-calendar-month-picker>
   </div>
 </ng-container>

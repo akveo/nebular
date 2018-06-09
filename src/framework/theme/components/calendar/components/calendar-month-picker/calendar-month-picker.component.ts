@@ -4,33 +4,27 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output,
-  SimpleChanges
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
-const defaultStartYear = 2016;
-const defaultYearCount = 20;
-
 /**
  */
 @Component({
-  selector: 'nb-calendar-year-picker',
-  styleUrls: ['./calendar-year-picker.component.scss'],
-  templateUrl: './calendar-year-picker.component.html',
+  selector: 'nb-calendar-month-picker',
+  styleUrls: ['./calendar-month-picker.component.scss'],
+  templateUrl: './calendar-month-picker.component.html',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCalendarYearPickerComponent),
+    useExisting: forwardRef(() => NbCalendarMonthPickerComponent),
     multi: true,
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, OnInit, OnChanges {
+export class NbCalendarMonthPickerComponent<D> implements ControlValueAccessor, OnInit {
   
   @Input('value')
   _value: D;
@@ -39,18 +33,12 @@ export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, O
   selectedValue: D;
   
   @Input()
-  public startYear: number = defaultStartYear;
-  
-  @Input()
-  public yearCount: number = defaultYearCount;
-
-  @Input()
   public currentDate: D;
+  
+  months: any[];
   
   @Output()
   change = new EventEmitter<any>();
-  
-  years: any[];
 
   constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
               private dateTimeUtil: NbDateTimeUtil<D>,
@@ -59,31 +47,26 @@ export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, O
   ngOnInit() {
     this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
     this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
+    this.initMonths();
   }
   
-  
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['startYear'] || changes['yearCount']) {
-      this.initYears();
-    }
-  }
-  
-  initYears() {
-    const selectedYear = this.dateTimeUtil.getYear(this.selectedValue);
+  initMonths() {
+    const selectedMonth = this.dateTimeUtil.getMonth(this.selectedValue);
     
-    const years = Array.from(Array(this.yearCount).keys())
+    const months = Array.from(Array(12).keys())
       .map(index => ({
-        value: this.startYear + index,
-        selected: selectedYear === this.startYear + index,
+        value: index,
+        label: this.dateTimeUtil.getMonthNameByIndex(index),
+        selected: selectedMonth === index,
       }));
     
-    this.years = this.arrayHelper.splitToChunks(years, 4);
+    this.months = this.arrayHelper.splitToChunks(months, 4);
   }
   
-  onYearSelect(year) {
+  onMonthSelect(month) {
     this.value = this.dateTimeUtil.createDate(
-      year,
-      this.dateTimeUtil.getMonth(this.selectedValue),
+      this.dateTimeUtil.getYear(this.selectedValue),
+      month,
       this.dateTimeUtil.getDate(this.selectedValue),
     );
     this.change.emit(this.value);
