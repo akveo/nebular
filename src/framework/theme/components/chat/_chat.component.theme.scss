@@ -122,10 +122,22 @@
 
     nb-chat-form {
       display: flex;
+      padding: 0.5rem;
 
       input {
         flex: 1;
-        padding: nb-theme(chat-padding);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        background: nb-theme(chat-form-bg);
+        border: none;
+        outline: none;
+      }
+
+      button.btn {
+        border-radius: 3rem;
+        @include nb-ltr(margin-left, 1rem);
+        @include nb-rtl(margin-right, 1rem);
+        padding: 0 1rem;
       }
     }
 

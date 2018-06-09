@@ -19,7 +19,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
             type="text"
             placeholder="Type a message"
             (keyup.enter)="sendMessage()">
-    <button (click)="sendMessage()">{{ buttonTitle }}</button>
+    <button *ngIf="showButton" class="btn btn-success" (click)="sendMessage()">{{ buttonTitle }}</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,6 +36,12 @@ export class NbChatFormComponent {
    * @type {string}
    */
   @Input() buttonTitle: string = 'Send';
+
+  /**
+   * Show send button
+   * @type {boolean}
+   */
+  @Input() showButton: boolean = true;
 
   @Output() send = new EventEmitter();
 
