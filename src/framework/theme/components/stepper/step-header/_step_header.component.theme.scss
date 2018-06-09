@@ -6,6 +6,11 @@
 
 @mixin nb-step-header-theme {
 
+  .step-header-container {
+    width: nb-theme(stepper-index-size);
+    margin: 0 nb-theme(stepper-index-size) / 2;
+  }
+
   .step-label {
     font-size: nb-theme(stepper-label-font-size);
     font-weight: nb-theme(stepper-label-font-weight);
@@ -36,12 +41,17 @@
   }
 
   .step-index-label-container {
-    width: nb-theme(stepper-icon-size);
-    height: nb-theme(stepper-icon-size);
-    border-radius: nb-theme(stepper-icon-size) / 2;
+    width: nb-theme(stepper-index-size);
+    height: nb-theme(stepper-index-size);
+    border-radius: nb-theme(stepper-index-size) / 2;
     border: 2px solid nb-theme(stepper-fg);
     color: nb-theme(stepper-fg);
     font-weight: nb-theme(stepper-label-font-weight);
+
+    .stepper-icon {
+      font-size: nb-theme(stepper-completed-icon-size);
+      font-weight: nb-theme(stepper-completed-icon-weight);
+    }
   }
 
 }

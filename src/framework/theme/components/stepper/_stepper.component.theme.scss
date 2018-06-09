@@ -7,7 +7,7 @@
 @mixin nb-stepper-theme {
 
   .horizontal-step-connector {
-    margin-top: nb-theme(stepper-icon-size) / 2;
+    margin-top: nb-theme(stepper-index-size) / 2;
     background-color: nb-theme(stepper-fg);
   }
 
