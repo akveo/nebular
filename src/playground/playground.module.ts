@@ -24,6 +24,7 @@ import {
   NbRouteTabsetModule,
   NbProgressBarModule,
   NbAlertModule,
+  NbStepperModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -115,6 +116,7 @@ import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
+import { NbStepperShowcaseComponent } from "./stepper/stepper-showcase.component";
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -144,6 +146,7 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbStepperModule,
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
@@ -241,6 +244,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbStepperShowcaseComponent,
 ];
 
 

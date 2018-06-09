@@ -1,0 +1,11 @@
+<div class="nb-stepper-header">
+  <ng-container *ngFor="let step of _steps; let i = index;">
+      <span>{{i}}</span>
+  </ng-container>
+</div>
+
+<div>
+  <div>
+    <ng-container [ngTemplateOutlet]="selectedStep.content"></ng-container>
+  </div>
+</div>
