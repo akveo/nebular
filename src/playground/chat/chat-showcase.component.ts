@@ -52,15 +52,17 @@ export class NbChatShowcaseComponent {
         avatar: '',
       },
     },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
+    {
+      text: 'Hey looks at that pic I just found!',
+      reply: false,
+      date: new Date(),
+      type: 'image',
+      file: 'http://lorempixel.com/600/400/animals/',
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: '',
+      },
+    },
     // {
     //   text: 'Hello, how are you?',
     //   reply: false,

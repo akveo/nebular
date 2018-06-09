@@ -10,12 +10,16 @@ import { NbSharedModule } from '../shared/shared.module';
 
 import { NbChatComponent } from './chat.component';
 import { NbChatMessageComponent } from './chat-message.component';
-import {NbChatFormComponent} from './chat-form.component';
+import { NbChatFormComponent } from './chat-form.component';
+import { NbChatMessageTextComponent } from './chat-message-text.component';
+import { NbChatMessageImageComponent } from './chat-message-image.component';
 
 const NB_CHAT_COMPONENTS = [
   NbChatComponent,
   NbChatMessageComponent,
   NbChatFormComponent,
+  NbChatMessageTextComponent,
+  NbChatMessageImageComponent,
 ];
 
 @NgModule({

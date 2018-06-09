@@ -23,8 +23,15 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
       </ng-container>
     </div>
     <div class="message">
-      <p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date  | date:'shortTime' }}</time></p>
-      <p class="text"><ng-content></ng-content></p>
+      <ng-container [ngSwitch]="type">
+        <nb-chat-message-image *ngSwitchCase="'image'" 
+                               [sender]="sender" [date]="date" [message]="message" [file]="file">
+        </nb-chat-message-image>
+
+        <nb-chat-message-text *ngSwitchDefault 
+                              [sender]="sender" [date]="date" [message]="message">
+        </nb-chat-message-text>
+      </ng-container>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,14 +60,25 @@ export class NbChatMessageComponent {
    * Message sender
    * @type {string}
    */
-  @Input() sender: string;
+  @Input() message: string;
 
+  /**
+   * Message sender
+   * @type {string}
+   */
+  @Input() sender: string;
 
   /**
    * Message send date
    * @type {Date}
    */
   @Input() date: Date;
+
+  /**
+   * Message file (image if type is `image` and file if type is `attachment`)
+   * @type {string}
+   */
+  @Input() file: string;
 
   /**
    * Message send avatar
