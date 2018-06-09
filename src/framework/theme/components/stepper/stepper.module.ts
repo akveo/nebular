@@ -7,7 +7,8 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbStepperComponent, NbStepComponent } from './stepper.component';
+import { NbStepperComponent } from './stepper.component';
+import { NbStepComponent } from './step.component';
 import { NbStepperNextDirective, NbStepperPreviousDirective } from './stepper-button.directive';
 import { NbStepHeaderComponent} from './step-header/step-header.component';
 
