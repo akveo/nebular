@@ -79,6 +79,7 @@ export class NbCollapsableDirective implements OnDestroy {
     portal.top = 0;
     portal.bottom = 0;
     this.themeService.appendLayoutClass('blurred');
+    document.body.style.overflow = 'hidden';
     const registry = this.collapsableService.get();
     const index = registry.findIndex(item => item.instance === portal);
     const registryRest = registry.slice(0, index).concat(registry.slice(index + 1));
@@ -89,6 +90,7 @@ export class NbCollapsableDirective implements OnDestroy {
     portal.left = null;
     portal.top = null;
     this.themeService.removeLayoutClass('blurred');
+    document.body.style.overflow = 'auto';
     const registry = this.collapsableService.get();
     const index = registry.findIndex(item => item.instance === portal);
     registry[index].changeDetectorRef.detectChanges();
