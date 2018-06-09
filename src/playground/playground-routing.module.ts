@@ -27,6 +27,7 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
+import { NbCalendarTestComponent } from './calendar/calendar-test.component';
 import { NbCardShowcaseComponent } from './card/card-showcase.component';
 import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
@@ -158,6 +159,10 @@ export const routes: Routes = [
             component: NbCheckboxDisabledComponent,
           },
         ],
+      },
+      {
+        path: 'calendar',
+        component: NbCalendarTestComponent,
       },
       {
         path: 'card',

@@ -1,0 +1,11 @@
+<div>{{activeMonth}}</div>
+<div>
+  <button (click)="prevMonth()">Prev</button>
+  <button (click)="nextMonth()">Next</button>
+  <nb-checkbox [(ngModel)]="boundingMonths">Include bounding months</nb-checkbox>
+</div>
+<nb-calendar-month-view
+  [selectedValue]="value"
+  [currentDate]="currentDate"
+  [activeMonth]="activeMonth"
+  [includeBoundingMonths]="boundingMonths"></nb-calendar-month-view>
