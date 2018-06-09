@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { NbCalendarCellModel } from '../models/calendar-cell.model';
+import { NbCalendarCellModel } from '../../models/calendar-cell.model';
 
 /**
  */

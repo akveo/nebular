@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
-import { NbCalendarModelFactoryService } from '../models/calendar-model-factory.service';
+import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
 
 /**
  */
