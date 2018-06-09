@@ -1,0 +1,101 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-chat-theme() {
+
+  nb-chat {
+    font-size: nb-theme(chat-font-size);
+    background: nb-theme(chat-bg);
+    border-radius: nb-theme(chat-border-radius);
+    box-shadow: nb-theme(chat-shadow);
+
+    .header {
+      border-bottom: 1px solid nb-theme(chat-separator);
+      padding: nb-theme(chat-padding);
+    }
+
+    .scrollable {
+      overflow: auto;
+      flex: 1;
+      @include nb-scrollbars(
+          nb-theme(scrollbar-fg),
+          nb-theme(scrollbar-bg),
+          nb-theme(scrollbar-width));
+    }
+
+    .messages {
+      padding: nb-theme(chat-padding);
+      overflow: auto;
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+    }
+
+    .no-messages {
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    nb-chat-message {
+      padding: nb-theme(chat-padding);
+    }
+
+    nb-chat-form {
+      display: flex;
+
+      input {
+        flex: 1;
+        padding: nb-theme(chat-padding);
+      }
+    }
+
+    &.xxsmall-chat {
+      height: nb-theme(chat-height-xxsmall);
+    }
+    &.xsmall-chat {
+      height: nb-theme(chat-height-xsmall);
+    }
+    &.small-chat {
+      height: nb-theme(chat-height-small);
+    }
+    &.medium-chat {
+      height: nb-theme(chat-height-medium);
+    }
+    &.large-chat {
+      height: nb-theme(chat-height-large);
+    }
+    &.xlarge-chat {
+      height: nb-theme(chat-height-xlarge);
+    }
+    &.xxlarge-chat {
+      height: nb-theme(chat-height-xxlarge);
+    }
+
+    &.active-chat {
+      background-color: nb-theme(chat-active-bg);
+    }
+    &.disabled-chat {
+      background-color: nb-theme(chat-disabled-bg);
+      color: nb-theme(chat-disabled-fg);
+    }
+    &.primary-chat {
+      background-color: nb-theme(chat-primary-bg);
+    }
+    &.info-chat {
+      background-color: nb-theme(chat-info-bg);
+    }
+    &.success-chat {
+      background-color: nb-theme(chat-success-bg);
+    }
+    &.warning-chat {
+      background-color: nb-theme(chat-warning-bg);
+    }
+    &.danger-chat {
+      background-color: nb-theme(chat-danger-bg);
+    }
+  }
+}
+

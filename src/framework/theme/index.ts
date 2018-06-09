@@ -35,3 +35,6 @@ export * from './components/progress-bar/progress-bar.component';
 export * from './components/progress-bar/progress-bar.module';
 export * from './components/alert/alert.component';
 export * from './components/alert/alert.module';
+export * from './components/chat/chat.component';
+export * from './components/chat/chat-message.component';
+export * from './components/chat/chat.module';
