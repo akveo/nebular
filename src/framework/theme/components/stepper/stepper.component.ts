@@ -59,19 +59,19 @@ export class NbStepperComponent {
   private _linear = false;
 
   next() {
-    this.selectedIndex += 1;
+    this.selectedIndex = Math.min(this._selectedIndex + 1, this._steps.length - 1);
   }
 
   previous() {
-    this.selectedIndex -= 1;
+    this.selectedIndex = Math.max(this._selectedIndex - 1, 0);
   }
 
   private isStepValid(index: number): boolean {
     const steps = this._steps.toArray();
 
-    if (index >= this._selectedIndex && this._linear && index >= 0) {
-      const previousStep = steps[index - 1];
-      return previousStep.completed;
+    if (index >= this._selectedIndex && this._linear && index > 0) {
+      const currentStep = steps[index - 1];
+      return currentStep.completed;
     }
 
     return true;
