@@ -20,7 +20,7 @@ export class NbChatShowcaseService {
       .find((reply: any) => message.search(reply.regExp) !== -1);
 
     if (botReply.reply.type === 'quote') {
-      botReply.quote = message;
+      botReply.reply.quote = message;
     }
 
     if (botReply.type === 'gif') {
