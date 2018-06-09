@@ -3,24 +3,24 @@
     <nb-stepper [linear]="true">
       <nb-step [stepControl]="firstFormGroup">
         <ng-template nbStepLabel>First step</ng-template>
-        <form [formGroup]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onFirstSubmit()">
           <div class="input-group">
             <input type="text" placeholder="Type anything" class="form-control"
                    formControlName="firstCtrl"
-                   [ngClass]="{'form-control-danger': firstFormGroup.invalid && firstFormGroup.touched}">
+                   [ngClass]="{'form-control-danger': firstFormGroup.invalid && (firstFormGroup.dirty || firstFormGroup.touched)}" required>
           </div>
           <div class="btn-panel">
             <button class="btn btn-primary" nbStepperNext>next</button>
           </div>
         </form>
       </nb-step>
-      <nb-step>
+      <nb-step [stepControl]="secondFormGroup">
         <ng-template nbStepLabel>Second step</ng-template>
-        <form [formGroup]="secondFormGroup">
+        <form [formGroup]="secondFormGroup" (ngSubmit)="onSecondSubmit()">
           <div class="input-group">
             <input type="text" placeholder="Type anything" class="form-control"
                    formControlName="secondCtrl"
-                   [ngClass]="{'form-control-danger': secondFormGroup.invalid && secondFormGroup.touched}">
+                   [ngClass]="{'form-control-danger': secondFormGroup.invalid && (secondFormGroup.dirty || secondFormGroup.touched)}">
           </div>
           <div class="btn-panel">
             <button class="btn btn-primary" nbStepperPrevious>prev</button>
@@ -28,16 +28,17 @@
           </div>
         </form>
       </nb-step>
-      <nb-step>
+      <nb-step [stepControl]="thirdFormGroup">
         <ng-template nbStepLabel>Third step</ng-template>
-        <form [formGroup]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup" (ngSubmit)="onThirdSubmit()">
           <div class="input-group">
             <input type="text" placeholder="Type anything" class="form-control"
                    formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': thirdFormGroup.invalid && thirdFormGroup.touched}">
+                   [ngClass]="{'form-control-danger': thirdFormGroup.invalid && (thirdFormGroup.dirty || thirdFormGroup.touched)}">
           </div>
           <div class="btn-panel">
             <button class="btn btn-primary" nbStepperPrevious>prev</button>
+            <button class="btn btn-primary" nbStepperNext>next</button>
           </div>
         </form>
       </nb-step>

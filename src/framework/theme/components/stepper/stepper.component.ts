@@ -70,8 +70,8 @@ export class NbStepperComponent {
 
     steps[this._selectedIndex].interacted = true;
 
-    if (index >= this._selectedIndex && this._linear && index > 0) {
-      const currentStep = steps[index - 1];
+    if (index >= this._selectedIndex && index > 0) {
+      const currentStep = steps[this._selectedIndex];
       return currentStep.completed;
     }
 

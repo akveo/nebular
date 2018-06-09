@@ -29,4 +29,16 @@ export class NbStepperValidationComponent {
     });
   }
 
+  onFirstSubmit() {
+    this.firstFormGroup.markAsDirty();
+  }
+
+  onSecondSubmit() {
+    this.secondFormGroup.markAsDirty();
+  }
+
+  onThirdSubmit() {
+    this.thirdFormGroup.markAsDirty();
+  }
+
 }

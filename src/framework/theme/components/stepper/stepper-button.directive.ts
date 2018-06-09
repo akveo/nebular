@@ -1,5 +1,5 @@
 import { NbStepperComponent } from './stepper.component';
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
   selector: 'button[nbStepperNext]',
@@ -9,6 +9,7 @@ import { Directive } from '@angular/core';
   },
 })
 export class NbStepperNextDirective {
+  @Input() type: string = 'submit';
   constructor(public _stepper: NbStepperComponent) {
   }
 }
@@ -22,6 +23,7 @@ export class NbStepperNextDirective {
   },
 })
 export class NbStepperPreviousDirective {
+  @Input() type: string = 'button';
   constructor(public _stepper: NbStepperComponent) {
   }
 }
