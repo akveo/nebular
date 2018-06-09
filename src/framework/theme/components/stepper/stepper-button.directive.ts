@@ -1,5 +1,5 @@
-import { NbStepperComponent } from "./stepper.component";
-import { Directive } from "@angular/core";
+import { NbStepperComponent } from './stepper.component';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: 'button[nbStepperNext]',
@@ -7,9 +7,8 @@ import { Directive } from "@angular/core";
     '(click)': '_stepper.next()',
     '[type]': 'type',
   },
-  inputs: ['type'],
 })
-export class NbStepperNext {
+export class NbStepperNextDirective {
   constructor(public _stepper: NbStepperComponent) {
   }
 }
@@ -21,9 +20,8 @@ export class NbStepperNext {
     '(click)': '_stepper.previous()',
     '[type]': 'type',
   },
-  inputs: ['type'],
 })
-export class NbStepperPrevious {
+export class NbStepperPreviousDirective {
   constructor(public _stepper: NbStepperComponent) {
   }
 }

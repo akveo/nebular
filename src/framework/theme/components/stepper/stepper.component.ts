@@ -9,7 +9,7 @@ import {
   ContentChildren,
   QueryList,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 /**
@@ -40,7 +40,7 @@ export class NbStepComponent {
 @Component({
   selector: 'nb-stepper',
   templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.scss']
+  styleUrls: ['./stepper.component.scss'],
 })
 export class NbStepperComponent {
 
@@ -49,14 +49,14 @@ export class NbStepperComponent {
   @ContentChildren(NbStepComponent) _steps: QueryList<NbStepComponent>;
 
   get selectedStep() {
-    return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined!;
+    return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined;
   }
 
-  next(){
+  next() {
     this.selectedIndex += 1;
   }
 
-  previous(){
+  previous() {
     this.selectedIndex -= 1;
   }
 

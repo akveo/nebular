@@ -8,14 +8,14 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbStepperComponent, NbStepComponent } from './stepper.component';
-import { NbStepperNext, NbStepperPrevious } from './stepper-button.directive';
+import { NbStepperNextDirective, NbStepperPreviousDirective } from './stepper-button.directive';
 
 @NgModule({
   imports: [
     NbSharedModule,
   ],
-  declarations: [NbStepperComponent, NbStepComponent, NbStepperNext, NbStepperPrevious],
-  exports: [NbStepperComponent, NbStepComponent, NbStepperNext, NbStepperPrevious],
+  declarations: [NbStepperComponent, NbStepComponent, NbStepperNextDirective, NbStepperPreviousDirective],
+  exports: [NbStepperComponent, NbStepComponent, NbStepperNextDirective, NbStepperPreviousDirective],
 })
 export class NbStepperModule {
 }
