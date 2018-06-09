@@ -2,3 +2,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.horizontal-step-connector {
+  flex: auto;
+  height: 1px;
+  background-color: gray;
+}

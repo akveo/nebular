@@ -1,6 +1,8 @@
 <div class="nb-stepper-header">
-  <ng-container *ngFor="let step of _steps; let i = index;">
-      <span>{{i}}</span>
+  <ng-container *ngFor="let step of _steps; let i = index; let isLast = last">
+    <nb-step-header [label]="i">
+    </nb-step-header>
+    <div *ngIf="!isLast" class="horizontal-step-connector"></div>
   </ng-container>
 </div>
 
