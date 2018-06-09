@@ -2,6 +2,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
+import { NbStepLabelDirective } from '../step.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class NbStepHeaderComponent {
 
   @Input() state: string;
 
-  @Input() label: string;
+  @Input() label: NbStepLabelDirective | string;
 
   @Input() index: number;
 
@@ -24,7 +25,7 @@ export class NbStepHeaderComponent {
   @Input() optional: boolean;
 
   _isTemplateInside() {
-    return false;
+    return this.label instanceof NbStepLabelDirective;
   }
 
 }

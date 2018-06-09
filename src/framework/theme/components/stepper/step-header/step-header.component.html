@@ -1,4 +1,8 @@
-<div class="step-label-container">
-  <ng-container *ngIf="_isTemplateInside()"></ng-container>
-  <div class="step-label">{{ label }}</div>
+<div class="step-header-container"
+     [class.step-header-container-selected]="selected">
+  <div class="step-index-label-container">
+    <span>{{ index + 1 }}</span>
+  </div>
+  <ng-container *ngIf="_isTemplateInside()" [ngTemplateOutlet]="label.template"></ng-container>
+  <div *ngIf="!_isTemplateInside()" class="step-label">{{ label }}</div>
 </div>

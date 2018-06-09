@@ -1,9 +1,25 @@
-.step-label-container {
-  padding: 5px 11px;
-  border: 1px solid black;
-  border-radius: 20px;
+.step-header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.step-label {
+.step-header-container-selected {
+
+  .step-index-label-container {
+    background-color: red;
+    color: white;
+  }
+}
+
+.step-index-label-container {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
   color: red;
 }
