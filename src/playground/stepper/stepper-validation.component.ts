@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './stepper-validation.component.html',
 })
 
-export class NbStepperValidationComponent {
+export class NbStepperValidationComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -17,15 +17,15 @@ export class NbStepperValidationComponent {
 
   ngOnInit() {
     this.firstFormGroup = this.fb.group({
-      firstCtrl: ['', Validators.required]
+      firstCtrl: ['', Validators.required],
     });
 
     this.secondFormGroup = this.fb.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['', Validators.required],
     });
 
     this.thirdFormGroup = this.fb.group({
-      thirdCtrl: ['', Validators.required]
+      thirdCtrl: ['', Validators.required],
     });
   }
 

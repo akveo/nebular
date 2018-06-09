@@ -78,8 +78,4 @@ export class NbStepperComponent {
     return true;
   }
 
-  private markStepCompleted(step: NbStepComponent): void {
-    step.markAsCompleted();
-  }
-
 }
