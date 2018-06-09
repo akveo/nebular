@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 /**
  * Chat form component.
@@ -21,6 +21,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
             (keyup.enter)="sendMessage()">
     <button (click)="sendMessage()">{{ buttonTitle }}</button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatFormComponent {
 

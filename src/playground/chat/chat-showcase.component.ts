@@ -25,24 +25,33 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class NbChatShowcaseComponent {
 
   messages: any[] = [
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
+    {
+      text: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
+      reply: false,
+      date: new Date(),
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: 'http://lorempixel.com/400/200/animals/',
+      },
+    },
+    {
+      text: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
+      reply: true,
+      date: new Date(),
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: 'http://lorempixel.com/400/200/animals/',
+      },
+    },
+    {
+      text: 'Hello, how are you?',
+      reply: false,
+      date: new Date(),
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: '',
+      },
+    },
     // {
     //   text: 'Hello, how are you?',
     //   reply: false,
@@ -120,7 +129,12 @@ export class NbChatShowcaseComponent {
   sendMessage(event: any) {
     this.messages.push({
       text: event.message,
-      user: {},
+      date: new Date(),
+      reply: true,
+      user: {
+        name: 'Jonh Doe',
+        avatar: 'http://lorempixel.com/400/200/animals/',
+      },
     });
   }
 }

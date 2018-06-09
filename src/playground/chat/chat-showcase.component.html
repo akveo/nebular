@@ -1,5 +1,6 @@
 <nb-card size="large">
   <nb-card-body>
+
     <nb-chat title="Nebular Conversational UI">
       <nb-chat-message *ngFor="let msg of messages"
                        [type]="msg.type"
@@ -12,5 +13,6 @@
 
       <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
     </nb-chat>
+
   </nb-card-body>
 </nb-card>

@@ -478,6 +478,12 @@ $theme: (
   chat-padding: padding,
   chat-shadow: shadow,
   chat-separator: separator,
+  chat-message-fg: color-white,
+  chat-message-bg: linear-gradient(to right, #4ca6ff, #59bfff),
+  chat-message-reply-bg: color-bg-active,
+  chat-message-reply-fg: color-fg-text,
+  chat-message-avatar-bg: color-fg,
+  chat-message-sender-fg: color-fg,
 );
 
 // register the theme

@@ -28,7 +28,8 @@
 
     .messages {
       padding: nb-theme(chat-padding);
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       flex-shrink: 0;
       flex-direction: column;
@@ -40,7 +41,83 @@
     }
 
     nb-chat-message {
-      padding: nb-theme(chat-padding);
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: row;
+
+      .avatar {
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: nb-theme(chat-message-avatar-bg);
+        width: 2.5rem;
+        height: 2.5rem;
+        text-align: center;
+        line-height: 2.5rem;
+        font-size: 0.875rem;
+        color: white;
+      }
+
+      .message {
+
+        .sender {
+          font-size: 0.875rem;
+          color: nb-theme(chat-message-sender-fg);
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          word-wrap: break-word;
+          word-break: break-all;
+          margin-bottom: 0;
+        }
+
+        .text {
+          padding: 1rem;
+          border-radius: 0.5rem;
+        }
+      }
+
+      &.not-reply {
+        .message {
+          @include nb-ltr(margin-left, 0.5rem);
+          @include nb-rtl(margin-right, 0.5rem);
+
+          @include nb-ltr(margin-right, 3rem);
+          @include nb-rtl(margin-left, 3rem);
+        }
+
+        .text {
+          @include nb-ltr(border-top-left-radius, 0);
+          @include nb-rtl(border-top-right-radius, 0);
+          background: nb-theme(chat-message-bg);
+          color: nb-theme(chat-message-fg);
+        }
+      }
+
+      &.reply {
+        flex-direction: row-reverse;
+
+        p {
+          @include nb-ltr(text-align, right);
+          @include nb-rtl(text-align, left);
+        }
+
+        .message {
+          margin-left: 0;
+
+          @include nb-ltr(margin-right, 0.5rem);
+          @include nb-rtl(margin-left, 0.5rem);
+
+          @include nb-ltr(margin-left, 3rem);
+          @include nb-rtl(margin-right, 3rem);
+        }
+        .text {
+          @include nb-ltr(border-top-right-radius, 0);
+          @include nb-rtl(border-top-left-radius, 0);
+          background: nb-theme(chat-message-reply-bg);
+          color: nb-theme(chat-message-reply-fg);
+        }
+      }
     }
 
     nb-chat-form {
