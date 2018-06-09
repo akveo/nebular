@@ -33,6 +33,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
                               [sender]="sender" [date]="date" [message]="message" [file]="file" [icon]="icon">
         </nb-chat-message-file>
 
+        <nb-chat-message-quote *ngSwitchCase="'quote'"
+                              [sender]="sender" [date]="date" [message]="message" [quote]="quote">
+        </nb-chat-message-quote>
+
         <nb-chat-message-text *ngSwitchDefault
                               [sender]="sender" [date]="date" [message]="message">
         </nb-chat-message-text>
@@ -98,16 +102,22 @@ export class NbChatMessageComponent {
   @Input() date: Date;
 
   /**
-   * Message file (image if type is `image` and file if type is `attachment`)
+   * Message file (image if type is `image` and file url if type is `file`)
    * @type {string}
    */
   @Input() file: string;
 
   /**
-   * File icon class
+   * File icon class (work only when type = `file`)
    * @type {string}
    */
   @Input() icon: string;
+
+  /**
+   * Quoted message text
+   * @type {string}
+   */
+  @Input() quote: string;
 
   /**
    * Message send avatar

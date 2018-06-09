@@ -64,6 +64,17 @@ export class NbChatShowcaseComponent {
       },
     },
     {
+      text: 'What do you mean by that?',
+      reply: false,
+      date: new Date(),
+      type: 'quote',
+      quote: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
+      user: {
+        name: 'Dmitry Nehaychik',
+        avatar: '',
+      },
+    },
+    {
       text: 'Attached is an archive I mentioned',
       reply: true,
       date: new Date(),

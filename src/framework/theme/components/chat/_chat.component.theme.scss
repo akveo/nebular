@@ -112,6 +112,25 @@
         }
       }
 
+      nb-chat-message-quote {
+
+        p.quote {
+          font-style: italic;
+          font-size: 0.875rem;
+          background: nb-theme(chat-message-quote-bg);
+          color: nb-theme(chat-message-quote-fg);
+          padding: 1rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .sender {
+          font-size: 0.875rem;
+          color: nb-theme(chat-message-sender-fg);
+          margin-bottom: 0.5rem;
+        }
+      }
+
       &.not-reply {
         .message {
           @include nb-ltr(margin-left, 0.5rem);
