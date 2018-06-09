@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'nb-chat-message-map',
   template: `
-    <nb-chat-message-image [file]="file" [message]="message" [sender]="sender" [date]="date"></nb-chat-message-image>
+    <nb-chat-message-file [files]="[file]" [message]="message" [sender]="sender" [date]="date"></nb-chat-message-file>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,10 +51,12 @@ export class NbChatMessageMapComponent {
    */
   @Input() longitude: number;
 
-
   get file() {
-    // tslint:disable-next-line
-    return `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400`;
+    return {
+      // tslint:disable-next-line
+      url: `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400`,
+      type: 'image/png',
+      icon: 'nb-location',
+    };
   }
-
 }

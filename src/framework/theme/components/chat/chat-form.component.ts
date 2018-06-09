@@ -27,10 +27,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <div class="dropped-files" *ngIf="droppedFiles?.length">
       <ng-container *ngFor="let file of droppedFiles">
-        <div *ngIf="file.bgStyle" [style.background-image]="file.bgStyle">
+        <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle">
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
-        <div *ngIf="!file.bgStyle" class="nb-compose">
+        <div *ngIf="!file.urlStyle" class="nb-compose">
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
       </ng-container>
@@ -97,7 +97,8 @@ export class NbChatFormComponent {
           if (this.imgDropTypes.includes(file.type)) {
             const fr = new FileReader();
             fr.onload = (e: any) => {
-              res.bgStyle = this.domSanitizer.bypassSecurityTrustStyle(`url(${e.target.result})`);
+              res.src = e.target.result;
+              res.urlStyle = this.domSanitizer.bypassSecurityTrustStyle(`url(${res.src})`);
               this.cd.detectChanges();
             };
 

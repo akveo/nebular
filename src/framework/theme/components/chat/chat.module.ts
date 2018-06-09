@@ -12,7 +12,6 @@ import { NbChatComponent } from './chat.component';
 import { NbChatMessageComponent } from './chat-message.component';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageTextComponent } from './chat-message-text.component';
-import { NbChatMessageImageComponent } from './chat-message-image.component';
 import { NbChatMessageFileComponent } from './chat-message-file.component';
 import { NbChatMessageQuoteComponent } from './chat-message-quote.component';
 import { NbChatMessageMapComponent } from './chat-message-map.component';
@@ -22,7 +21,6 @@ const NB_CHAT_COMPONENTS = [
   NbChatMessageComponent,
   NbChatFormComponent,
   NbChatMessageTextComponent,
-  NbChatMessageImageComponent,
   NbChatMessageFileComponent,
   NbChatMessageQuoteComponent,
   NbChatMessageMapComponent,

@@ -59,8 +59,14 @@ export class NbChatShowcaseComponent {
       text: 'Hey looks at that pic I just found!',
       reply: false,
       date: new Date(),
-      type: 'image',
-      file: 'http://lorempixel.com/600/400/animals/',
+      type: 'file',
+      files: [
+        {
+          url: 'http://lorempixel.com/600/400/animals/',
+          type: 'image/jpeg',
+          icon: false,
+        },
+      ],
       user: {
         name: 'Dmitry Nehaychik',
         avatar: '',
@@ -82,8 +88,12 @@ export class NbChatShowcaseComponent {
       reply: true,
       date: new Date(),
       type: 'file',
-      file: 'http://google.com',
-      icon: 'nb-compose',
+      files: [
+        {
+          url: 'http://lorempixel.com/600/400/animals/',
+          icon: 'nb-compose',
+        },
+      ],
       user: {
         name: 'Dmitry Nehaychik',
         avatar: '',
@@ -167,11 +177,20 @@ export class NbChatShowcaseComponent {
   ];
 
   sendMessage(event: any) {
-    console.log(event);
+    const files = !event.files ? [] : event.files.map((file) => {
+      return {
+        url: file.src,
+        type: file.type,
+        icon: 'nb-compose',
+      };
+    });
+
     this.messages.push({
       text: event.message,
       date: new Date(),
       reply: true,
+      type: files.length ? 'file' : 'text',
+      files: files,
       user: {
         name: 'Jonh Doe',
         avatar: 'http://lorempixel.com/400/200/animals/',

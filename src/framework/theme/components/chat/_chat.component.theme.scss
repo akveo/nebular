@@ -46,6 +46,10 @@
       display: flex;
       flex-direction: row;
 
+      .message {
+        flex: 1;
+      }
+
       .avatar {
         border-radius: 50%;
         flex-shrink: 0;
@@ -81,42 +85,57 @@
         }
       }
 
-      nb-chat-message-image {
-        img {
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          width: 50%;
-          border: 1px solid nb-theme(chat-separator);
-        }
-
-        nb-chat-message-text {
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-      }
-
       nb-chat-message-file {
+        display: flex;
+        flex-direction: column;
+
         a {
           color: nb-theme(chat-message-file-fg);
           background: nb-theme(chat-message-file-bg);
-          width: 50%;
-          display: block;
           font-size: 4rem;
-          padding: 2rem;
           text-align: center;
-          border: 1px solid nb-theme(chat-separator);
+          border: 1px solid nb-theme(chat-message-file-fg);
+          width: 10rem;
+          height: 10rem;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0;
           border-radius: 0.5rem;
           &:hover, &:focus {
             text-decoration: none;
             color: nb-theme(chat-message-file-fg);
           }
-          @include nb-ltr(margin-left, auto);
-          @include nb-rtl(margin-right, auto);
+          div {
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+          }
+
+          span {
+
+          }
         }
 
         nb-chat-message-text {
           display: block;
           margin-bottom: 0.5rem;
+        }
+
+        .message-content-group {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+
+          a {
+            @include nb-ltr(margin-right, 1rem);
+            @include nb-rtl(margin-left, 1rem);
+            margin-bottom: 1rem;
+            width: 5rem;
+            height: 5rem;
+          }
         }
       }
 
@@ -156,6 +175,10 @@
             color: nb-theme(chat-message-fg);
           }
         }
+
+        nb-chat-message-file {
+          align-items: flex-start;
+        }
       }
 
       &.reply {
@@ -183,6 +206,10 @@
             background: nb-theme(chat-message-reply-bg);
             color: nb-theme(chat-message-reply-fg);
           }
+        }
+
+        nb-chat-message-file {
+          align-items: flex-end;
         }
       }
     }

@@ -25,12 +25,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     </div>
     <div class="message">
       <ng-container [ngSwitch]="type">
-        <nb-chat-message-image *ngSwitchCase="'image'"
-                               [sender]="sender" [date]="date" [message]="message" [file]="file">
-        </nb-chat-message-image>
 
         <nb-chat-message-file *ngSwitchCase="'file'"
-                              [sender]="sender" [date]="date" [message]="message" [file]="file" [icon]="icon">
+                              [sender]="sender" [date]="date" [message]="message" [files]="files">
         </nb-chat-message-file>
 
         <nb-chat-message-quote *ngSwitchCase="'quote'"
@@ -107,16 +104,10 @@ export class NbChatMessageComponent {
   @Input() date: Date;
 
   /**
-   * Message file (image if type is `image` and file url if type is `file`)
+   * Array of files `{ url: 'file url', icon: 'file icon class' }`
    * @type {string}
    */
-  @Input() file: string;
-
-  /**
-   * File icon class (work only when type = `file`)
-   * @type {string}
-   */
-  @Input() icon: string;
+  @Input() files: any[];
 
   /**
    * Quoted message text
