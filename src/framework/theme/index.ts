@@ -36,3 +36,4 @@ export * from './components/progress-bar/progress-bar.module';
 export * from './components/alert/alert.component';
 export * from './components/alert/alert.module';
 export * from './components/modal/modal.module';
+export * from './components/collapsable/collapsable.module';

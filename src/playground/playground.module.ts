@@ -127,6 +127,8 @@ import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbCollapsableModule } from '../framework/theme/components/collapsable/collapsable.module';
+import { NbCollapsableShowcaseComponent } from './collapsable/collapsable-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -149,6 +151,7 @@ export const NB_MODULES = [
   NbPlaygroundSharedModule,
   NbProgressBarModule,
   NbModalModule,
+  NbCollapsableModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -244,6 +247,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertSizesComponent,
   NbAlertTestComponent,
   NbModalShowcaseComponent,
+  NbCollapsableShowcaseComponent
 ];
 
 

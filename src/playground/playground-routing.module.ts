@@ -106,6 +106,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbCollapsableShowcaseComponent } from './collapsable/collapsable-showcase.component';
 
 export const routes: Routes = [
   {
@@ -118,6 +119,15 @@ export const routes: Routes = [
           {
             path: 'modal-showcase.component',
             component: NbModalShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'collapsable',
+        children: [
+          {
+            path: 'collapsable-showcase.component',
+            component: NbCollapsableShowcaseComponent,
           },
         ],
       },

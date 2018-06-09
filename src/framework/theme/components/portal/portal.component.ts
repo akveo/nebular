@@ -31,19 +31,19 @@ export class NbPortalComponent {
 
   @Input()
   @HostBinding('style.top.px')
-  positionTop: number = 0;
+  positionTop: number = null;
 
   @Input()
   @HostBinding('style.left.px')
-  positionLeft: number = 0;
+  positionLeft: number = null;
 
   @Input()
   @HostBinding('style.right.px')
-  positionRight: number = 0;
+  positionRight: number = null;
 
   @Input()
   @HostBinding('style.bottom.px')
-  positionBottom: number = 0;
+  positionBottom: number = null;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
