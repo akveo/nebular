@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output,
+} from '@angular/core';
 
 import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
@@ -17,20 +18,12 @@ import { NbArrayHelper } from '../../helpers/array.helper';
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   templateUrl: './calendar-month-picker.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCalendarMonthPickerComponent),
-    multi: true,
-  }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent<D> implements ControlValueAccessor, OnInit {
-  
-  @Input('value')
-  _value: D;
+export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
   
   @Input()
-  selectedValue: D;
+  value: D;
   
   @Input()
   public currentDate: D;
@@ -47,11 +40,16 @@ export class NbCalendarMonthPickerComponent<D> implements ControlValueAccessor, 
   ngOnInit() {
     this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
     this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
-    this.initMonths();
+  }
+  
+  ngOnChanges(): void {
+    if (this.value) {
+      this.initMonths();
+    }
   }
   
   initMonths() {
-    const selectedMonth = this.dateTimeUtil.getMonth(this.selectedValue);
+    const selectedMonth = this.dateTimeUtil.getMonth(this.value);
     
     const months = Array.from(Array(12).keys())
       .map(index => ({
@@ -65,35 +63,10 @@ export class NbCalendarMonthPickerComponent<D> implements ControlValueAccessor, 
   
   onMonthSelect(month) {
     this.value = this.dateTimeUtil.createDate(
-      this.dateTimeUtil.getYear(this.selectedValue),
+      this.dateTimeUtil.getYear(this.value),
       month,
-      this.dateTimeUtil.getDate(this.selectedValue),
+      this.dateTimeUtil.getDate(this.value),
     );
     this.change.emit(this.value);
-  }
-  
-  onChange: any = () => { };
-  onTouched: any = () => { };
-  
-  get value() {
-    return this._value;
-  }
-  
-  set value(val: D) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-  }
-  
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-  
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-  
-  writeValue(val: D) {
-    this.value = val;
   }
 }

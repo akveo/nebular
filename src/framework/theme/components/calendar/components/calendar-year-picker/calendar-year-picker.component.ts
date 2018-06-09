@@ -5,10 +5,8 @@
  */
 
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output,
-  SimpleChanges
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
@@ -23,20 +21,12 @@ const defaultYearCount = 20;
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
   templateUrl: './calendar-year-picker.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCalendarYearPickerComponent),
-    multi: true,
-  }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, OnInit, OnChanges {
-  
-  @Input('value')
-  _value: D;
+export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
   
   @Input()
-  selectedValue: D;
+  value: D;
   
   @Input()
   public startYear: number = defaultStartYear;
@@ -63,13 +53,13 @@ export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, O
   
   
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['startYear'] || changes['yearCount']) {
+    if (this.value && this.startYear && this.yearCount) {
       this.initYears();
     }
   }
   
   initYears() {
-    const selectedYear = this.dateTimeUtil.getYear(this.selectedValue);
+    const selectedYear = this.dateTimeUtil.getYear(this.value);
     
     const years = Array.from(Array(this.yearCount).keys())
       .map(index => ({
@@ -83,34 +73,9 @@ export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, O
   onYearSelect(year) {
     this.value = this.dateTimeUtil.createDate(
       year,
-      this.dateTimeUtil.getMonth(this.selectedValue),
-      this.dateTimeUtil.getDate(this.selectedValue),
+      this.dateTimeUtil.getMonth(this.value),
+      this.dateTimeUtil.getDate(this.value),
     );
     this.change.emit(this.value);
-  }
-  
-  onChange: any = () => { };
-  onTouched: any = () => { };
-  
-  get value() {
-    return this._value;
-  }
-  
-  set value(val: D) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-  }
-  
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-  
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-  
-  writeValue(val: D) {
-    this.value = val;
   }
 }

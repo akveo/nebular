@@ -12,11 +12,11 @@
 
   <div class="body">
     <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
-      [(ngModel)]="newValue"
+      [activeMonth]="newValue"
       [currentDate]="currentDate"
       [selectedValue]="value"
       [includeBoundingMonths]="boundingMonths"
-      (change)="value = $event">
+      (change)="onChange($event)">
     </nb-calendar-month-view>
   </div>
 </ng-container>
@@ -34,11 +34,11 @@
 
   <div class="body">
     <nb-calendar-year-picker
-      [selectedValue]="newValue"
+      [value]="newValue"
       [currentDate]="currentDate"
       [startYear]="startYear"
       [yearCount]="yearCount"
-      (change)="viewMode = ViewMode.month">
+      (change)="newValue = $event; viewMode = ViewMode.month">
     </nb-calendar-year-picker>
   </div>
 </ng-container>
@@ -52,9 +52,9 @@
 
   <div class="body">
     <nb-calendar-month-picker
-      [selectedValue]="newValue"
+      [value]="newValue"
       [currentDate]="currentDate"
-      (change)="viewMode = ViewMode.date">
+      (change)="newValue = $event; viewMode = ViewMode.date">
     </nb-calendar-month-picker>
   </div>
 </ng-container>

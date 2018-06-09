@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbDateTimeUtil } from './service/date-time-util.interface';
@@ -24,18 +24,17 @@ const defaultYearCount = 20;
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCalendarComponent),
-    multi: true,
-  }],
 })
-export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
+export class NbCalendarComponent<D> implements OnInit {
 
-  @Input('value') _value: D = null;
+  @Input()
+  value: D;
   
   @Input()
   boundingMonths: boolean = false;
+  
+  @Output()
+  change = new EventEmitter();
 
   newValue: D;
 
@@ -70,29 +69,8 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
   nextYears() {
     this.startYear += defaultYearCount;
   }
-
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val: D) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  writeValue(val: D) {
-    this.value = val;
+  
+  onChange(value) {
+    this.change.emit(value);
   }
 }

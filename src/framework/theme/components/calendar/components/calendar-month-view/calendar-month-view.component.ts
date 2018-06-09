@@ -28,16 +28,12 @@ import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-build
   selector: 'nb-calendar-month-view',
   styleUrls: ['./calendar-month-view.component.scss'],
   templateUrl: './calendar-month-view.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCalendarMonthViewComponent),
-    multi: true,
-  }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, OnInit, OnChanges {
+export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
 
-  @Input('value') _value: D = null;
+  @Input()
+  activeMonth: D;
 
   @Input()
   public includeBoundingMonths: boolean = true;
@@ -60,46 +56,16 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
 
   ngOnInit() {
   }
-
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get value(): D {
-    return this._value;
-  }
-
-  set value(val: D) {
-    this._value = val;
-    if (val) {
-      this._invalidateModel();
-    }
-
-    this.onChange(val);
-    this.onTouched();
-  }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
-    // Fixme: optimization
-    if (this.value) {
+    if (this.activeMonth) {
       this._invalidateModel()
     }
   }
 
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  writeValue(val: D) {
-    this.value = val;
-  }
-
   private _invalidateModel() {
     const context = new NbCalendarMonthBuilderContext<D>(
-      this.value,
+      this.activeMonth,
       this.selectedValue,
       this.currentDate,
       this.includeBoundingMonths,
@@ -111,12 +77,10 @@ export class NbCalendarMonthViewComponent<D> implements ControlValueAccessor, On
   onCellSelect(event) {
     this.change.emit(
       this.dateTimeUtil.createDate(
-        this.dateTimeUtil.getYear(this.value),
-        this.dateTimeUtil.getMonth(this.value) + event.activeMonthDiff,
+        this.dateTimeUtil.getYear(this.activeMonth),
+        this.dateTimeUtil.getMonth(this.activeMonth) + event.activeMonthDiff,
         event.date,
       ),
     );
   }
-
-
 }
