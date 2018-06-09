@@ -1,26 +1,23 @@
-import { ComponentRef, Directive, Input, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { ComponentRef, Directive, Input } from '@angular/core';
+import { NbThemeService } from '../../services/theme.service';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
-import { NbModalComponent } from '@nebular/theme/components/modal/modal.component';
-import { NbThemeService } from '@nebular/theme';
+import { NbModalComponent } from './modal.component';
 
 @Directive({ selector: '[nbModal]' })
-export class NbModalDirective implements OnDestroy {
+export class NbModalDirective {
   @Input('nbModal')
   content: NbPortalContent;
 
   @Input('nbModalContext')
   context: Object;
 
+  @Input('nbModalBackdropClose')
+  backdropClose: boolean;
+
   private ref: ComponentRef<any>;
-  private alive = true;
 
   constructor(private portalOutlet: NbPortalOutlet,
               private themeService: NbThemeService) {
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
   }
 
   show() {
@@ -36,8 +33,10 @@ export class NbModalDirective implements OnDestroy {
 
   private create(portal: NbPortal) {
     this.portalOutlet.create(portal)
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(ref => this.ref = ref);
+      .subscribe((ref: ComponentRef<any>) => {
+        this.ref = ref;
+        this.place();
+      });
   }
 
   private buildPortal(): NbPortal {
@@ -52,8 +51,16 @@ export class NbModalDirective implements OnDestroy {
   }
 
   private onClick(event) {
-    if (event.target === this.ref.location.nativeElement.firstElementChild) {
+    if (this.isBackdropClick(event) && this.backdropClose) {
       this.destroy();
     }
+  }
+
+  private isBackdropClick(event) {
+    return event.target === this.ref.location.nativeElement.firstElementChild;
+  }
+
+  private place() {
+    Object.assign(this.ref.instance, { top: 0, right: 0, left: 0, bottom: 0 });
   }
 }

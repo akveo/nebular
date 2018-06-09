@@ -35,5 +35,8 @@ export * from './components/progress-bar/progress-bar.component';
 export * from './components/progress-bar/progress-bar.module';
 export * from './components/alert/alert.component';
 export * from './components/alert/alert.module';
+export * from './components/modal/modal.directive';
 export * from './components/modal/modal.module';
+export * from './components/toaster/toaster.module';
+export * from './components/toaster/toaster.service';
 export * from './components/collapsable/collapsable.module';

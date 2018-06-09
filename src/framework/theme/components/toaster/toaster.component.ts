@@ -1,21 +1,29 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, TemplateRef, Type, ViewChild } from '@angular/core';
-import { NbPortalContent } from './portal-outlet';
 import { NgComponentOutlet } from '@angular/common';
+import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
+import { NbPortalComponent } from '@nebular/theme/components/portal/portal.component';
 
 @Component({
-  selector: 'nb-portal',
-  styleUrls: ['./portal.component.scss'],
+  selector: 'nb-toast',
+  styleUrls: ['./toaster.component.scss'],
   template: `
-    <ng-container *ngIf="isTemplate">
-      <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
-    <ng-container *ngIf="isPrimitive">
-      <div class="primitive-popover">{{content}}</div>
-    </ng-container>
+    <div class="icon" *ngIf="status !== 'default'"></div>
+    <div class="content-container">
+      <span class="title">{{ title }}</span>
+      <div class="content">
+        <ng-container *ngIf="isTemplate">
+          <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
+        <ng-container *ngIf="isPrimitive">
+          <div class="primitive-popover">{{content}}</div>
+        </ng-container>
+      </div>
+    </div>
   `,
+  host: { '(click)': 'onClick(parent)' },
 })
-export class NbPortalComponent {
+export class NbToastComponent {
 
   /**
    * Content which will be rendered.
@@ -30,22 +38,14 @@ export class NbPortalComponent {
   context: Object;
 
   @Input()
-  @HostBinding('style.top.px')
-  top: number;
+  title: string;
 
   @Input()
-  @HostBinding('style.left.px')
-  left: number;
+  @HostBinding('class')
+  status: string;
 
-  @Input()
-  @HostBinding('style.right.px')
-  right: number;
-
-  @Input()
-  @HostBinding('style.bottom.px')
-  bottom: number;
-
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              public parent: NbPortalComponent) {
   }
 
   /**
@@ -91,4 +91,3 @@ export class NbPortalComponent {
     return !this.isTemplate && !this.isComponent;
   }
 }
-

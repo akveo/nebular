@@ -12,7 +12,7 @@ import { NbCardModule } from '../card/card.module';
   exports: [NbCollapsableDirective],
   declarations: [NbCollapsableComponent, NbCollapsableDirective],
   providers: [NbCollapsableService],
-  entryComponents: [NbCollapsableComponent]
+  entryComponents: [NbCollapsableComponent],
 })
 export class NbCollapsableModule {
 }

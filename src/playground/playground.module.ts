@@ -23,7 +23,9 @@ import {
   NbContextMenuModule,
   NbRouteTabsetModule,
   NbProgressBarModule,
-  NbAlertModule, NbModalModule,
+  NbAlertModule,
+  NbModalModule,
+  NbToasterModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -129,6 +131,7 @@ import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
 import { NbCollapsableModule } from '../framework/theme/components/collapsable/collapsable.module';
 import { NbCollapsableShowcaseComponent } from './collapsable/collapsable-showcase.component';
+import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -152,6 +155,7 @@ export const NB_MODULES = [
   NbProgressBarModule,
   NbModalModule,
   NbCollapsableModule,
+  NbToasterModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -247,7 +251,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertSizesComponent,
   NbAlertTestComponent,
   NbModalShowcaseComponent,
-  NbCollapsableShowcaseComponent
+  NbToasterShowcaseComponent,
+  NbCollapsableShowcaseComponent,
 ];
 
 

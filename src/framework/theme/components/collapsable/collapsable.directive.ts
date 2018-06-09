@@ -1,7 +1,6 @@
-import { ComponentRef, Directive, Input, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { Directive, Input, OnDestroy } from '@angular/core';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
-import { NbThemeService } from '../../../theme';
+import { NbThemeService } from '../../services/theme.service';
 import { NbCollapsableService } from './collapsable.service';
 import { NbCollapsableComponent } from './collapsable.component';
 import { NbPortalComponent } from '../portal/portal.component';
@@ -23,10 +22,6 @@ export class NbCollapsableDirective implements OnDestroy {
   @Input('nbCollapsableTitle')
   title: string;
 
-  private ref: ComponentRef<any>;
-
-  private alive = true;
-
   constructor(private portalOutlet: NbPortalOutlet,
               private themeService: NbThemeService,
               private collapsableService: NbCollapsableService,
@@ -45,13 +40,11 @@ export class NbCollapsableDirective implements OnDestroy {
 
   ngOnDestroy() {
     this.themeService.removeLayoutClass('blurred');
-    this.alive = false;
   }
 
   private create(portal: NbPortal) {
     this.portalOutlet.create(portal)
       .subscribe(ref => {
-        this.ref = ref;
         this.place(ref, this.collapsableService.get());
         this.collapsableService.add(ref);
       });
@@ -81,10 +74,10 @@ export class NbCollapsableDirective implements OnDestroy {
   }
 
   private expand(portal: NbPortalComponent) {
-    portal.positionRight = 0;
-    portal.positionLeft = 0;
-    portal.positionTop = 0;
-    portal.positionBottom = 0;
+    portal.right = 0;
+    portal.left = 0;
+    portal.top = 0;
+    portal.bottom = 0;
     this.themeService.appendLayoutClass('blurred');
     const registry = this.collapsableService.get();
     const index = registry.findIndex(item => item.instance === portal);
@@ -93,8 +86,8 @@ export class NbCollapsableDirective implements OnDestroy {
   }
 
   private unExpand(portal: NbPortalComponent) {
-    portal.positionLeft = null;
-    portal.positionTop = null;
+    portal.left = null;
+    portal.top = null;
     this.themeService.removeLayoutClass('blurred');
     const registry = this.collapsableService.get();
     const index = registry.findIndex(item => item.instance === portal);
@@ -125,13 +118,13 @@ export class NbCollapsableDirective implements OnDestroy {
 
   private place(ref, refs) {
     const rightOffset = refs.reduce((acc, item) => acc + this.getWidth(item), DEFAULT_OFFSET);
-    ref.instance.positionRight = refs.reduce((acc, item) => acc + this.getWidth(item), DEFAULT_OFFSET);
+
     const elWidth = this.getWidth(ref);
     if (this.window.innerWidth > rightOffset + elWidth) {
-      ref.instance.positionRight
-      ref.instance.positionBottom = DEFAULT_OFFSET;
+      ref.instance.right = rightOffset;
+      ref.instance.bottom = DEFAULT_OFFSET;
     } else {
-      ref.instance.positionRight = this.window.innerWidth;
+      ref.instance.right = this.window.innerWidth;
     }
   }
 

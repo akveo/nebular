@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output, TemplateRef, Type } from '@angular/core';
+import { Component, HostBinding, Input, TemplateRef, Type } from '@angular/core';
 import { NbPortalContent } from '../portal/portal-outlet';
 import { NbPortalComponent } from '../portal/portal.component';
 
@@ -9,10 +9,11 @@ import { NbPortalComponent } from '../portal/portal.component';
       <nb-card-header>
         <div class="collapsable-header">
           <div>{{ title }}</div>
-          <div class="header-left">
-            <i class="collapse-button nb-arrow-dropdown" (click)="toggleCollapse(portal)"></i>
-            <i class="minimize-button nb-arrow-dropup" (click)="toggleExpand(portal)"></i>
-            <i class="close-button nb-close" (click)="close(portal)"></i>
+          <div class="header-right">
+            <div class="icon icon-collapse" (click)="toggleCollapse(portal)"></div>
+            <div class="icon"
+                 [ngClass]="expanded ? 'icon-unexpand' : 'icon-expand'" (click)="toggleExpand(portal)"></div>
+            <i class="nb-close" (click)="close(portal)"></i>
           </div>
         </div>
       </nb-card-header>
