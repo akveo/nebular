@@ -15,6 +15,7 @@ import { NbDateTimeUtil } from './service/date-time-util.interface';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarCellViewComponent } from './components/callendar-cell-view/calendar-cell-view.component';
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
+import { NbCalendarDatePipe } from './pipes/calendar-date.pipe';
 
 const NB_CALENDAR_PROVIDERS = [
   NbCalendarModelFactoryService,
@@ -29,10 +30,14 @@ const COMPONENTS = [
   NbCalendarCellViewComponent,
 ];
 
+const PIPES = [
+  NbCalendarDatePipe,
+];
+
 @NgModule({
   imports: [ NbSharedModule, NbCheckboxModule ],
-  exports: [ ...COMPONENTS ],
-  declarations: [ ...COMPONENTS ],
+  exports: [ ...COMPONENTS, ...PIPES ],
+  declarations: [ ...COMPONENTS, ...PIPES ],
 })
 export class NbCalendarModule {
   static forRoot(): ModuleWithProviders {

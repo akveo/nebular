@@ -1,13 +1,20 @@
-:host {
+.chunk-row {
   display: flex;
+  justify-content: space-between;
 }
 
 .year {
+  padding: 0.5rem 2rem;
+
   &.current {
     background: #2f96e8;
   }
 
   &.selected {
     background: #00f9a6;
+  }
+
+  &:hover {
+    background: lightgray;
   }
 }

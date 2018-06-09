@@ -15,6 +15,9 @@ const ViewMode = {
   date: 'date',
 };
 
+const defaultStartYear = 2016;
+const defaultYearCount = 20;
+
 /**
  */
 @Component({
@@ -40,6 +43,9 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
   
   ViewMode = ViewMode;
   viewMode = ViewMode.date;
+  
+  startYear = defaultStartYear;
+  yearCount = defaultYearCount;
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
@@ -55,6 +61,14 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
 
   nextMonth() {
     this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
+  }
+  
+  prevYears() {
+    this.startYear -= defaultYearCount;
+  }
+  
+  nextYears() {
+    this.startYear += defaultYearCount;
   }
 
   onChange: any = () => { };
@@ -81,5 +95,4 @@ export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
   writeValue(val: D) {
     this.value = val;
   }
-
 }

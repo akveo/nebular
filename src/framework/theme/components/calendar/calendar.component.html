@@ -1,28 +1,45 @@
-
-<div class="header">
-  <div>{{ newValue }}</div>
-  <div>
-    <button class="btn btn-sm btn-secondary" (click)="prevMonth()">Prev</button>
-    <button class="btn btn-sm btn-secondary" (click)="nextMonth()">Next</button>
-    <nb-checkbox [(ngModel)]="boundingMonths">Include bounding months</nb-checkbox>
+<ng-container *ngIf="viewMode === ViewMode.date">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
+      {{ value | nbCalendarDate }}
+    </button>
+    <div>
+      <i class="nb-arrow-left" (click)="prevMonth()"></i>
+      <i class="nb-arrow-right" (click)="nextMonth()"></i>
+      <nb-checkbox [(ngModel)]="boundingMonths">Include bounding months</nb-checkbox>
+    </div>
   </div>
-</div>
 
-<div class="body">
-  <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
-    [(ngModel)]="newValue"
-    [currentDate]="currentDate"
-    [selectedValue]="value"
-    [includeBoundingMonths]="boundingMonths"
+  <div class="body">
+    <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
+      [(ngModel)]="newValue"
+      [currentDate]="currentDate"
+      [selectedValue]="value"
+      [includeBoundingMonths]="boundingMonths"
+      (change)="value = $event">
+    </nb-calendar-month-view>
+  </div>
+</ng-container>
 
-    (change)="value = $event"
-  >
-  </nb-calendar-month-view>
+<ng-container *ngIf="viewMode === ViewMode.year">
+  <div class="header">
+    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
+      {{ value | nbCalendarDate }}
+    </button>
+    <div>
+      <i class="nb-arrow-left" (click)="prevYears()"></i>
+      <i class="nb-arrow-right" (click)="nextYears()"></i>
+    </div>
+  </div>
 
-  <nb-calendar-year-picker *ngIf="viewMode === ViewMode.year"
-    [(ngModel)]="newValue"
-    [currentDate]="currentDate"
-    [minYear]=""
-    [maxYear]="">
-  </nb-calendar-year-picker>
-</div>
+  <div class="body">
+    <nb-calendar-year-picker
+      [(ngModel)]="newValue"
+      [selectedValue]="value"
+      [currentDate]="currentDate"
+      [startYear]="startYear"
+      [yearCount]="yearCount"
+      (change)="value = $event; viewMode = ViewMode.date">
+    </nb-calendar-year-picker>
+  </div>
+</ng-container>

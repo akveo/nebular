@@ -4,13 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
-import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
-import { NbDateTimeUtil } from '../../service/date-time-util.interface';
+import {
+  ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output,
+  SimpleChanges
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-const defaultMinYear = 1900;
-const defaultMaxYearOffset = 20;
+import { NbCalendarModelFactoryService } from '../../models/calendar-model-factory.service';
+import { NbDateTimeUtil } from '../../service/date-time-util.interface';
+
+const defaultStartYear = 2016;
+const defaultYearCount = 20;
 
 /**
  */
@@ -31,49 +35,67 @@ export class NbCalendarYearPickerComponent<D> implements ControlValueAccessor, O
   _value: D;
   
   @Input()
-  public minYear: D;
+  selectedValue: D;
   
   @Input()
-  public maxYear: D;
+  public startYear: number = defaultStartYear;
+  
+  @Input()
+  public yearCount: number = defaultYearCount;
 
   @Input()
   public currentDate: D;
   
-  private years = [];
+  @Output()
+  change = new EventEmitter<any>();
+  
+  private years: any[];
 
   constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
               private dateTimeUtil: NbDateTimeUtil<D>) {}
 
   ngOnInit() {
     this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
-
-    this.minYear = this.minYear || this.dateTimeUtil.createDate(
-      defaultMinYear,
-      this.dateTimeUtil.getMonth(this.currentDate),
-      this.dateTimeUtil.getDate(this.currentDate));
-    
-    this.maxYear = this.minYear || this.dateTimeUtil.createDate(
-      this.dateTimeUtil.getYear(this.currentDate) + defaultMaxYearOffset,
-      this.dateTimeUtil.getMonth(this.currentDate),
-      this.dateTimeUtil.getDate(this.currentDate));
-    
     this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
   }
   
-  ngOnChanges() {
-    if (this.minYear && this.maxYear) {
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['startYear'] || changes['yearCount']) {
       this.initYears();
-      if (this.dateTimeUtil.getYear(this.minYear) > this.dateTimeUtil.getYear(this.maxYear)) {
-        throw new Error('minYear could not be larger than maxYear');
-      }
     }
   }
   
   initYears() {
-    const minYear: number = this.dateTimeUtil.getYear(this.minYear);
-    const maxYear: number = this.dateTimeUtil.getYear(this.maxYear);
+    const selectedYear = this.dateTimeUtil.getYear(this.selectedValue);
     
-    this.years = [...Array(maxYear - minYear).map(year => minYear + year)];
+    const years = Array.from(Array(this.yearCount).keys())
+      .map(index => ({
+        value: this.startYear + index,
+        selected: selectedYear === this.startYear + index,
+      }));
+    
+    this.years = this.splitToChunks(years, 4);
+  }
+  
+  splitToChunks(years, chunkSize) {
+    return years.reduce((res, item, index) => {
+      const chunkIndex = Math.floor(index/chunkSize);
+      if (!res[chunkIndex]) {
+        res[chunkIndex] = [];
+      }
+      res[chunkIndex].push(item);
+      return res;
+    }, [])
+  }
+  
+  onYearSelect(year) {
+    this.value = this.dateTimeUtil.createDate(
+      year,
+      this.dateTimeUtil.getMonth(this.selectedValue),
+      this.dateTimeUtil.getDate(this.selectedValue),
+    );
+    this.change.emit(this.value);
   }
   
   onChange: any = () => { };
