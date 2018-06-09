@@ -7,8 +7,7 @@
                        [reply]="msg.reply"
                        [sender]="msg.user.name"
                        [date]="msg.date"
-                       [file]="msg.file"
-                       [icon]="msg.icon"
+                       [files]="msg.files"
                        [avatar]="msg.user.avatar">
       </nb-chat-message>
       <nb-chat-form (send)="sendMessage(chat.messages, $event)"></nb-chat-form>

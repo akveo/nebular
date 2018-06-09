@@ -32,8 +32,11 @@ export class NbChatShowcaseService {
         text: '',
         reply: false,
         date: new Date(),
-        type: 'image',
-        file: this.imageLink,
+        type: 'file',
+        file: {
+          url: this.imageLink,
+          type: 'image/jpeg',
+        },
         user: {
           name: 'Bot',
           avatar: this.botAvatar,
@@ -48,8 +51,11 @@ export class NbChatShowcaseService {
         text: '',
         reply: false,
         date: new Date(),
-        type: 'image',
-        file: '',
+        type: 'file',
+        file: {
+          url: '',
+          type: 'image/gif',
+        },
         user: {
           name: 'Bot',
           avatar: this.botAvatar,
@@ -65,7 +71,9 @@ export class NbChatShowcaseService {
         reply: false,
         date: new Date(),
         type: 'file',
-        file: this.fileLink,
+        file: {
+          url: this.fileLink,
+        },
         icon: 'nb-compose',
         user: {
           name: 'Bot',
@@ -109,13 +117,18 @@ export class NbChatShowcaseService {
   ];
 
   public reply(message: string) {
-    const botReply =  this.replyArray.find((reply) => {
-      if (message.search(reply.regExp) !== -1) { return true; }
-    });
-    if (botReply.reply.type === 'quote') { botReply.quote = message; }
-    if (botReply.type === 'gif') { botReply.reply.file = this.gifsLinks[Math
-      .floor(Math.random() * this.gifsLinks.length)] }
-    botReply.reply.text = botReply.answerArray[Math.floor(Math.random() * botReply.answerArray.length)];
-    return { ...botReply.reply };
+    const botReply =  this.replyArray.find((reply: any) => message.search(reply.regExp) !== -1);
+    if (botReply) {
+      if (botReply.reply.type === 'quote') {
+        botReply.quote = message;
+      }
+
+      if (botReply.type === 'gif') {
+        botReply.reply.file.url = this.gifsLinks[Math.floor(Math.random() * this.gifsLinks.length)];
+      }
+
+      botReply.reply.text = botReply.answerArray[Math.floor(Math.random() * botReply.answerArray.length)];
+      return { ...botReply.reply };
+    }
   }
 }

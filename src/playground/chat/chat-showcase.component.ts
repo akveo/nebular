@@ -111,69 +111,6 @@ export class NbChatShowcaseComponent {
         avatar: '',
       },
     },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
-    // {
-    //   text: 'Hello, how are you?',
-    //   reply: false,
-    //   date: new Date(),
-    //   user: {
-    //     name: 'Dmitry Nehaychik',
-    //     avatar: '',
-    //   },
-    // },
   ];
 
   sendMessage(event: any) {
