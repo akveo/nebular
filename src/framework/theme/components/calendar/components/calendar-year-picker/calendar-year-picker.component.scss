@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+}
+
+.year {
+  &.current {
+    background: #2f96e8;
+  }
+
+  &.selected {
+    background: #00f9a6;
+  }
+}

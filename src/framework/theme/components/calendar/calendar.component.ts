@@ -4,9 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { NbDateTimeUtil } from './service/date-time-util.interface';
-import { ControlValueAccessor } from '@angular/forms';
+
+const ViewMode = {
+  year: 'year',
+  month: 'month',
+  date: 'date',
+};
 
 /**
  */
@@ -14,34 +21,37 @@ import { ControlValueAccessor } from '@angular/forms';
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NbCalendarComponent),
+    multi: true,
+  }],
 })
 export class NbCalendarComponent<D> implements ControlValueAccessor, OnInit {
 
   @Input('value') _value: D = null;
 
-  activeMonth: D;
-
+  newValue: D;
+  
   currentDate: D;
 
+  @Input()
   boundingMonths: boolean = false;
 
-  constructor(
-    private dateTimeUtil: NbDateTimeUtil<D>,
-  ) {
-    this.value = this.dateTimeUtil.createDate(2018, 5, 1);
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
   ngOnInit() {
     this.currentDate = this.dateTimeUtil.createNowDate();
-    this.activeMonth = this.dateTimeUtil.getMonthStart(this.value || this.currentDate);
+    this.newValue = this.value || this.currentDate;
   }
 
   prevMonth() {
-    this.activeMonth = this.dateTimeUtil.add(this.activeMonth, -1, 'm');
+    this.newValue = this.dateTimeUtil.add(this.value, -1, 'm');
   }
 
   nextMonth() {
-    this.activeMonth = this.dateTimeUtil.add(this.activeMonth, 1, 'm');
+    this.newValue = this.dateTimeUtil.add(this.value, 1, 'm');
   }
 
   onChange: any = () => { };

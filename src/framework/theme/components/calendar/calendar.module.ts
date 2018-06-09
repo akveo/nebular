@@ -14,6 +14,7 @@ import { NbNativeDateTimeUtilService } from './service/native-date-time-util.ser
 import { NbDateTimeUtil } from './service/date-time-util.interface';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarCellViewComponent } from './components/callendar-cell-view/calendar-cell-view.component';
+import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
 
 const NB_CALENDAR_PROVIDERS = [
   NbCalendarModelFactoryService,
@@ -21,10 +22,17 @@ const NB_CALENDAR_PROVIDERS = [
   { provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService },
 ];
 
+const COMPONENTS = [
+  NbCalendarComponent,
+  NbCalendarYearPickerComponent,
+  NbCalendarMonthViewComponent,
+  NbCalendarCellViewComponent,
+];
+
 @NgModule({
   imports: [ NbSharedModule, NbCheckboxModule ],
-  exports: [ NbCalendarComponent, NbCalendarMonthViewComponent, NbCalendarCellViewComponent ],
-  declarations: [ NbCalendarComponent, NbCalendarMonthViewComponent, NbCalendarCellViewComponent ],
+  exports: [ ...COMPONENTS ],
+  declarations: [ ...COMPONENTS ],
 })
 export class NbCalendarModule {
   static forRoot(): ModuleWithProviders {

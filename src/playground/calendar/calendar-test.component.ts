@@ -9,8 +9,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-calendar-test',
   template: `
-    <nb-calendar></nb-calendar>
+    <nb-calendar [(ngModel)]="date"></nb-calendar>
   `,
 })
 export class NbCalendarTestComponent {
+  date = new Date();
 }

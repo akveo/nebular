@@ -1,5 +1,5 @@
 <div>
-  <div class="week" *ngFor="let week of month; let i = index">
+  <div class="week" *ngFor="let week of months; let i = index">
     <div *ngIf="week.padLeft" class="placeholder-before" [ngStyle]="{ flex: week.padLeft }"></div>
     <nb-calendar-cell-view
       *ngFor="let day of week.cells"
