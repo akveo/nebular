@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, HostBinding, Input, TemplateRef, Type, ViewChild } from '@angular/core';
-import { NbPortalContent } from './portal-outlet';
+import { ChangeDetectorRef, Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
+import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
 
 @Component({
-  selector: 'nb-portal',
-  styleUrls: ['./portal.component.scss'],
+  selector: 'nb-modal',
+  styleUrls: ['./toaster.component.scss'],
   template: `
     <ng-container *ngIf="isTemplate">
       <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
@@ -15,7 +15,7 @@ import { NgComponentOutlet } from '@angular/common';
     </ng-container>
   `,
 })
-export class NbPortalComponent {
+export class NbToastComponent {
 
   /**
    * Content which will be rendered.
@@ -28,22 +28,6 @@ export class NbPortalComponent {
    * */
   @Input()
   context: Object;
-
-  @Input()
-  @HostBinding('style.top.px')
-  top: number;
-
-  @Input()
-  @HostBinding('style.left.px')
-  left: number;
-
-  @Input()
-  @HostBinding('style.right.px')
-  right: number;
-
-  @Input()
-  @HostBinding('style.bottom.px')
-  bottom: number;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
@@ -91,4 +75,3 @@ export class NbPortalComponent {
     return !this.isTemplate && !this.isComponent;
   }
 }
-

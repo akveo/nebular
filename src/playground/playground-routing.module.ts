@@ -106,12 +106,22 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: NbPlaygroundLayoutComponent,
     children: [
+      {
+        path: 'toaster',
+        children: [
+          {
+            path: 'toaster-showcase.component',
+            component: NbToasterShowcaseComponent,
+          },
+        ],
+      },
       {
         path: 'modal',
         children: [
