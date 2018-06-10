@@ -18,11 +18,12 @@ import { NbStepComponent } from './/step.component';
  *
  * @stacked-example(Validation, stepper/stepper-validation.component)
  *
+ * @stacked-example(Vertical, stepper/stepper-vertical.component)
+ *
  */
 @Component({
   selector: 'nb-stepper',
-  templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.scss'],
+  template: '<ng-template><ng-content></ng-content></ng-template>',
 })
 export class NbStepperComponent {
 
@@ -77,5 +78,23 @@ export class NbStepperComponent {
 
     return true;
   }
+
+}
+
+@Component({
+  selector: 'nb-vertical-stepper',
+  templateUrl: './stepper-vertical.component.html',
+  styleUrls: ['./stepper.component.scss'],
+})
+export class NbVerticalStepperComponent extends NbStepperComponent {
+
+}
+
+@Component({
+  selector: 'nb-horizontal-stepper',
+  templateUrl: './stepper-horizontal.component.html',
+  styleUrls: ['./stepper.component.scss'],
+})
+export class NbHorizontalStepperComponent extends NbStepperComponent {
 
 }

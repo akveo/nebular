@@ -119,6 +119,7 @@ import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.compone
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -248,6 +249,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertTestComponent,
   NbStepperShowcaseComponent,
   NbStepperValidationComponent,
+  NbStepperVerticalComponent,
 ];
 
 
