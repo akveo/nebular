@@ -1,6 +1,22 @@
+:host {
+  &.horizontal {
+    .step-header-container {
+      flex-direction: column;
+    }
+    .step-index-label-container {
+      margin-bottom: 10px;
+    }
+  }
+
+  &.vertical {
+    .step-label {
+      margin: 0 10px;
+    }
+  }
+}
+
 .step-header-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   cursor: pointer;
 }
@@ -9,7 +25,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .step-label {

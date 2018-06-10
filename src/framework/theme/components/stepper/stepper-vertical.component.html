@@ -1,19 +1,23 @@
-<div class="nb-stepper-header">
-  <ng-container *ngFor="let step of _steps; let i = index; let isLast = last">
-    <nb-step-header [label]="step.stepLabel || step.label"
-                    [selected]="selectedIndex === i"
-                    [index]="i"
-                    [completed]="step.completed"
-                    (click)="step.select()">
-    </nb-step-header>
-    <div *ngIf="!isLast"
-         [class.horizontal-step-connector-past]="i < selectedIndex"
-         class="horizontal-step-connector"></div>
-  </ng-container>
-</div>
+<div class="vertical-stepper-container">
+  <div class="nb-stepper-header vertical">
+    <ng-container *ngFor="let step of _steps; let i = index; let isFirst = first">
+      <div *ngIf="!isFirst && !step.hidden"
+           [class.step-connector-past]="i < selectedIndex"
+           class="step-connector vertical"></div>
+      <nb-step-header *ngIf="!step.hidden"
+                      [label]="step.stepLabel || step.label"
+                      [selected]="selectedIndex === i"
+                      [index]="i"
+                      [completed]="step.completed"
+                      (click)="step.select()"
+                      class="vertical">
+      </nb-step-header>
+    </ng-container>
+  </div>
 
-<div>
   <div>
-    <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+    <div>
+      <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+    </div>
   </div>
 </div>

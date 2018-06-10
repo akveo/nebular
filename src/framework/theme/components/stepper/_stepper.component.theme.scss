@@ -6,12 +6,19 @@
 
 @mixin nb-stepper-theme {
 
-  .horizontal-step-connector {
-    margin-top: nb-theme(stepper-index-size) / 2;
+  .step-connector {
     background-color: nb-theme(stepper-fg);
+
+    &.horizontal {
+      margin-top: nb-theme(stepper-index-size) / 2;
+    }
+
+    &.vertical {
+      margin: nb-theme(stepper-index-size) / 2;
+    }
   }
 
-  .horizontal-step-connector-past {
+  .step-connector-past {
     background-color: nb-theme(stepper-accent-color);
   }
 

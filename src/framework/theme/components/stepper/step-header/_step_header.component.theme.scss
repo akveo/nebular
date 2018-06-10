@@ -6,9 +6,13 @@
 
 @mixin nb-step-header-theme {
 
-  .step-header-container {
-    width: nb-theme(stepper-index-size);
-    margin: 0 nb-theme(stepper-index-size) / 2;
+  :host {
+    &.horizontal {
+      .step-header-container {
+        width: nb-theme(stepper-index-size);
+        margin: 0 nb-theme(stepper-index-size) / 2;
+      }
+    }
   }
 
   .step-label {

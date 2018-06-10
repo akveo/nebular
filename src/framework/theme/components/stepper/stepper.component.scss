@@ -1,11 +1,27 @@
+.vertical-stepper-container {
+  display: flex;
+  height: 100%;
+}
+
 .nb-stepper-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 10px;
+
+  &.vertical {
+    flex-direction:  column;
+  }
 }
 
-.horizontal-step-connector {
+.step-connector {
   flex: auto;
-  height: 2px;
+
+  &.horizontal {
+    height: 2px;
+  }
+
+  &.vertical {
+    width: 2px;
+  }
 }
