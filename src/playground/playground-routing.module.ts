@@ -106,6 +106,7 @@ import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
 import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
 
 
 export const routes: Routes = [
@@ -356,6 +357,10 @@ export const routes: Routes = [
       {
         path: 'stepper',
         children: [
+          {
+            path: 'stepper-test.component',
+            component: NbStepperTestComponent,
+          },
           {
             path: 'stepper-showcase.component',
             component: NbStepperShowcaseComponent,

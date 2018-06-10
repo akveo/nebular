@@ -120,6 +120,7 @@ import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
 import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -250,6 +251,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbStepperShowcaseComponent,
   NbStepperValidationComponent,
   NbStepperVerticalComponent,
+  NbStepperTestComponent,
 ];
 
 
