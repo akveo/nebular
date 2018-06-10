@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-body>
-    <nb-horizontal-stepper [linear]="true" #stepper>
+    <nb-horizontal-stepper #stepper [linear]="true">
       <nb-step [stepControl]="firstForm">
         <ng-template nbStepLabel>First step</ng-template>
         <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
@@ -49,26 +49,7 @@
         <ng-template nbStepLabel>Third step</ng-template>
         <div class="step-container">
           <h3>Wizard completed!</h3>
-          <button class="btn btn-primary" (click)="stepper.reset()()">Try again</button>
-        </div>
-          <button class="btn btn-primary" nbStepperPrevious>prev</button>
-          <button class="btn btn-primary" nbStepperNext>next</button>
-      <nb-step [stepControl]="thirdForm">
-        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-          <p class="lorem">
-            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-          </p>
-            <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
-          <button class="btn btn-primary" nbStepperPrevious>prev</button>
-          <button class="btn btn-primary" nbStepperNext>Confirm</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" [hidden]="true">
-        <ng-template nbStepLabel>Third step</ng-template>
-        <div class="step-container">
-          <h3>Wizard completed!</h3>
-          <button class="btn btn-primary" (click)="stepper.reset()()">Try again</button>
+          <button class="btn btn-primary" (click)="stepper.reset()">Try again</button>
         </div>
       </nb-step>
     </nb-horizontal-stepper>
