@@ -66,6 +66,11 @@ export class NbStepperComponent {
     this.selectedIndex = Math.max(this._selectedIndex - 1, 0);
   }
 
+  reset() {
+    this.selectedIndex = 0;
+    this._steps.forEach(step => step.reset());
+  }
+
   private isStepValid(index: number): boolean {
     const steps = this._steps.toArray();
 

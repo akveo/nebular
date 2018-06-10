@@ -1,16 +1,20 @@
-.btn-panel {
-  display: flex;
-  justify-content: center;
-  padding-top: 1rem;
-
+.step-container {
+  max-width: 80%;
+  margin: 1rem auto 0 auto;
+  text-align: center;
   .btn {
     cursor: pointer;
-    margin: 0 0.5rem;
+    margin: 0.5rem;
   }
 }
 
+.lorem {
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
 .input-group {
-  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 input:focus {

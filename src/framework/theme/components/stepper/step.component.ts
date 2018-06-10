@@ -41,6 +41,8 @@ export class NbStepComponent {
 
   @Input() label: string;
 
+  @Input() hidden: false;
+
   @Input()
   get completed(): boolean {
     return this._completed == null ? this.isControlValid : this._completed;
@@ -66,6 +68,10 @@ export class NbStepComponent {
   }
 
   reset(): void {
+    this.interacted = false;
+    if (this.stepControl) {
+      this.stepControl.reset();
+    }
   }
 
 }

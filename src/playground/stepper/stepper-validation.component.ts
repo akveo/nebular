@@ -9,36 +9,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class NbStepperValidationComponent implements OnInit {
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
+  firstForm: FormGroup;
+  secondForm: FormGroup;
+  thirdForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
-    this.firstFormGroup = this.fb.group({
+    this.firstForm = this.fb.group({
       firstCtrl: ['', Validators.required],
     });
 
-    this.secondFormGroup = this.fb.group({
+    this.secondForm = this.fb.group({
       secondCtrl: ['', Validators.required],
     });
 
-    this.thirdFormGroup = this.fb.group({
+    this.thirdForm = this.fb.group({
       thirdCtrl: ['', Validators.required],
     });
   }
 
   onFirstSubmit() {
-    this.firstFormGroup.markAsDirty();
+    this.firstForm.markAsDirty();
   }
 
   onSecondSubmit() {
-    this.secondFormGroup.markAsDirty();
+    this.secondForm.markAsDirty();
   }
 
   onThirdSubmit() {
-    this.thirdFormGroup.markAsDirty();
+    this.thirdForm.markAsDirty();
   }
 
 }
