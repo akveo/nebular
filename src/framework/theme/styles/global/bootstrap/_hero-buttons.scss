@@ -123,27 +123,27 @@
 
 // Left colors
 @function btn-hero-primary-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-primary-bg));
+  @return btn-hero-gradient-left(nb-theme(btn-primary-bg), nb-theme(btn-hero-primary-degree));
 }
 
 @function btn-hero-success-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-success-bg));
+  @return btn-hero-gradient-left(nb-theme(btn-success-bg), nb-theme(btn-hero-success-degree));
 }
 
 @function btn-hero-warning-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-warning-bg), 10deg);
+  @return btn-hero-gradient-left(nb-theme(btn-warning-bg), nb-theme(btn-hero-warning-degree));
 }
 
 @function btn-hero-info-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-info-bg), -10deg);
+  @return btn-hero-gradient-left(nb-theme(btn-info-bg), nb-theme(btn-hero-info-degree));
 }
 
 @function btn-hero-danger-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-danger-bg), -20deg);
+  @return btn-hero-gradient-left(nb-theme(btn-danger-bg), nb-theme(btn-hero-danger-degree));
 }
 
 @function btn-hero-secondary-left-color() {
-  @return btn-hero-gradient-left(nb-theme(btn-secondary-border));
+  @return btn-hero-gradient-left(nb-theme(btn-secondary-border), nb-theme(btn-hero-secondary-degree));
 }
 
 // Middle colors
@@ -211,6 +211,13 @@
 @function btn-hero-danger-light-gradient() {
   $color-right: nb-theme(btn-danger-bg);
   $color-left: btn-hero-danger-left-color();
+
+  @return btn-hero-light-gradient($color-left, $color-right);
+}
+
+@function btn-hero-secondary-light-gradient() {
+  $color-right: nb-theme(btn-secondary-bg);
+  $color-left: btn-hero-secondary-left-color();
 
   @return btn-hero-light-gradient($color-left, $color-right);
 }
@@ -379,7 +386,7 @@
 }
 
 @function btn-hero-secondary-glow() {
-  @return btn-hero-glow(btn-hero-secondary-middle-color());
+  @return nb-theme(btn-hero-secondary-glow-size) btn-hero-secondary-middle-color();
 }
 
 
@@ -464,6 +471,10 @@
 
 @mixin btn-hero-secondary-border() {
   border: 2px solid nb-theme(btn-secondary-border);
+
+  @include nb-for-theme(corporate) {
+    border: none;
+  }
 }
 
 
