@@ -9,17 +9,46 @@ import {
   ContentChildren, Input,
   QueryList,
 } from '@angular/core';
-import { NbStepComponent } from './/step.component';
+import {NbStepComponent} from './/step.component';
 
 /**
  * Stepper component
  *
  * @stacked-example(Showcase, stepper/stepper-showcase.component)
  *
+ * If step label is string you can pass it as `label` attribute. Otherwise `nbStepLabel` directive should be used:
+ * ```html
+ * // ...
+ * <nb-horizontal-stepper>
+ *   <nb-step label="step number one">
+ *       // ... step content here
+ *   <nb-step>
+ *   <nb-step>
+ *       <ng-template nbStepLabel>
+ *           <div>
+ *               step number tree
+ *           </div>
+ *       </ng-template>
+ *       // ... step content here
+ *   <nb-step>
+ * </nb-horizontal-stepper>
+ * ```
+ *
  * @stacked-example(Validation, stepper/stepper-validation.component)
  *
+ * `NbStepperComponent` has two layout options. Both `nb-horizontal-stepper` and `nb-vertical-stepper` has the same API.
  * @stacked-example(Vertical, stepper/stepper-vertical.component)
  *
+ * @styles
+ *
+ * stepper-index-size:
+ * stepper-label-font-size:
+ * stepper-label-font-weight:
+ * stepper-accent-color:
+ * stepper-completed-fg:
+ * stepper-fg:
+ * stepper-completed-icon-size:
+ * stepper-completed-icon-weight:
  */
 @Component({
   selector: 'nb-stepper',
@@ -29,8 +58,16 @@ export class NbStepperComponent {
 
   @ContentChildren(NbStepComponent) _steps: QueryList<NbStepComponent>;
 
+  /**
+   * Selected step index
+   *
+   * @type {boolean}
+   */
   @Input()
-  get selectedIndex() { return this._selectedIndex; }
+  get selectedIndex() {
+    return this._selectedIndex;
+  }
+
   set selectedIndex(index: number) {
     if (this._steps) {
       if (index < 0 || index > this._steps.length - 1) {
@@ -43,29 +80,56 @@ export class NbStepperComponent {
       this._selectedIndex = index;
     }
   }
+
   private _selectedIndex = 0;
 
+  /**
+   * Selected step component
+   *
+   * @type {boolean}
+   */
   @Input()
   get selected(): NbStepComponent {
     return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined;
   }
+
   set selected(step: NbStepComponent) {
     this.selectedIndex = this._steps ? this._steps.toArray().indexOf(step) : -1;
   }
 
+  /**
+   * If true then stepper requires the user to complete previous step before navigate to following steps.
+   *
+   * @type {boolean}
+   */
   @Input()
-  get linear(): boolean { return this._linear; }
-  set linear(value: boolean) { this._linear = value; }
+  get linear(): boolean {
+    return this._linear;
+  }
+
+  set linear(value: boolean) {
+    this._linear = value;
+  }
+
   private _linear = false;
 
+  /**
+   * Navigate to next step
+   * */
   next() {
     this.selectedIndex = Math.min(this._selectedIndex + 1, this._steps.length - 1);
   }
 
+  /**
+   * Navigate to previous step
+   * */
   previous() {
     this.selectedIndex = Math.max(this._selectedIndex - 1, 0);
   }
 
+  /**
+   * Reset stepper and stepControls to initial state
+   * */
   reset() {
     this.selectedIndex = 0;
     this._steps.forEach(step => step.reset());

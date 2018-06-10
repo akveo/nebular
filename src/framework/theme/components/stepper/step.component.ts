@@ -33,16 +33,46 @@ export class NbStepLabelDirective {
 })
 export class NbStepComponent {
 
+  /**
+   * Step label directive content
+   *
+   * @type {NbStepLabelDirective}
+   */
   @ContentChild(NbStepLabelDirective) stepLabel: NbStepLabelDirective;
 
+  /**
+   * Step content
+   *
+   * @type {TemplateRef}
+   */
   @ViewChild(TemplateRef) content: TemplateRef<any>;
 
+  /**
+   * Top level abstract control of the step
+   *
+   * @type {AbstractControl}
+   */
   @Input() stepControl: AbstractControl;
 
+  /**
+   * Step label
+   *
+   * @type {string}
+   */
   @Input() label: string;
 
+  /**
+   * Whether step will be displayed in wizard
+   *
+   * @type {false}
+   */
   @Input() hidden: false;
 
+  /**
+   * Whether step is marked as completed.
+   *
+   * @type {boolean}
+   */
   @Input()
   get completed(): boolean {
     return this._completed == null ? this.isControlValid : this._completed;
@@ -63,10 +93,17 @@ export class NbStepComponent {
   constructor(@Inject(forwardRef(() => NbStepperComponent)) private _stepper: NbStepperComponent) {
   }
 
+
+  /**
+   * Mark step as selected
+   * */
   select(): void {
     this._stepper.selected = this;
   }
 
+  /**
+   * Reset step and stepControl state
+   * */
   reset(): void {
     this.interacted = false;
     if (this.stepControl) {
