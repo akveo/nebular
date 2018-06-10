@@ -12,8 +12,44 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 /**
  * Chat message component.
  *
+ * Multiple message types are available through a `type` property, such as
+ * - text - simple text message
+ * - file - could be a file preview or a file icon
+ * if multiple files are provided grouped files are shown
+ * - quote - quotes a message with specific quote styles
+ * - map - shows a google map picture by provided [latitude] and [longitude] properties
+ *
+ * Message with attached files:
+ * ```html
+ * <nb-chat-message
+ *   type="file"
+ *   [files]="[ { url: '...' } ]"
+ *   message="Hello world!">
+ * </nb-chat-message>
+ * ```
+ *
+ * Map message:
+ * ```html
+ * <nb-chat-message
+ *   type="map"
+ *   [latitude]="53.914"
+ *   [longitude]="27.59"
+ *   message="Here I am">
+ * </nb-chat-message>
+ * ```
+ *
  * @styles
  *
+ * chat-message-fg:
+ * chat-message-bg:
+ * chat-message-reply-bg:
+ * chat-message-reply-fg:
+ * chat-message-avatar-bg:
+ * chat-message-sender-fg:
+ * chat-message-quote-fg:
+ * chat-message-quote-bg:
+ * chat-message-file-fg:
+ * chat-message-file-bg:
  */
 @Component({
   selector: 'nb-chat-message',
@@ -107,7 +143,7 @@ export class NbChatMessageComponent {
    * Array of files `{ url: 'file url', icon: 'file icon class' }`
    * @type {string}
    */
-  @Input() files: any[];
+  @Input() files: { url: string, icon: string }[];
 
   /**
    * Quoted message text
@@ -137,7 +173,7 @@ export class NbChatMessageComponent {
   }
 
   /**
-   * Message type, available options `text|image|attachment|map`
+   * Message type, available options `text|file|map|quote`
    * @type {string}
    */
   @Input() type: string;

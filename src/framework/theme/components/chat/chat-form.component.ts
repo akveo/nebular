@@ -19,7 +19,34 @@ import { DomSanitizer } from '@angular/platform-browser';
 /**
  * Chat form component.
  *
+ * Show a message form with a send message button.
+ *
+ * ```ts
+ * <nb-chat-form showButton="true" buttonIcon="nb-send">
+ * </nb-chat-form>
+ * ```
+ *
+ * When `[dropFiles]="true"` handles files drag&drop with a file preview.
+ *
+ * New message could be tracked outside by using `(send)` output.
+ *
+ * ```ts
+ * <nb-chat-form (send)="onNewMessage($event)">
+ * </nb-chat-form>
+ *
+ * // ...
+ *
+ * onNewMessage({ message: string, files: any[] }) {
+ *   this.service.sendToServer(message, files);
+ * }
+ * ```
+ *
  * @styles
+ *
+ * chat-form-bg:
+ * chat-form-fg:
+ * chat-form-border:
+ * chat-form-active-border:
  *
  */
 @Component({
@@ -37,10 +64,13 @@ import { DomSanitizer } from '@angular/platform-browser';
     </div>
     <div class="message-row">
       <input [(ngModel)]="message"
+             [class.with-button]="showButton"
              type="text"
              placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
              (keyup.enter)="sendMessage()">
-      <button *ngIf="showButton" class="btn btn-success" (click)="sendMessage()">{{ buttonTitle }}</button>
+      <button *ngIf="showButton" class="btn" [class.with-icon]="!buttonTitle" (click)="sendMessage()">
+        {{ buttonTitle }}<span *ngIf="!buttonTitle" [class]="buttonIcon"></span>
+      </button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,13 +84,19 @@ export class NbChatFormComponent {
    * Predefined message text
    * @type {string}
    */
-  @Input() message: string;
+  @Input() message: string = '';
 
   /**
    * Send button title
    * @type {string}
    */
-  @Input() buttonTitle: string = 'Send';
+  @Input() buttonTitle: string = '';
+
+  /**
+   * Send button icon, shown if `buttonTitle` is empty
+   * @type {string}
+   */
+  @Input() buttonIcon: string = 'nb-paper-plane';
 
   /**
    * Show send button
@@ -74,7 +110,11 @@ export class NbChatFormComponent {
    */
   @Input() dropFiles: boolean = false;
 
-  @Output() send = new EventEmitter();
+  /**
+   *
+   * @type {EventEmitter<{ message: string, files: File[] }>}
+   */
+  @Output() send = new EventEmitter<{ message: string, files: File[] }>();
 
   @HostBinding('class.file-over') fileOver = false;
 
@@ -132,8 +172,10 @@ export class NbChatFormComponent {
   }
 
   sendMessage() {
-    this.send.emit({message: this.message, files: this.droppedFiles});
-    this.message = '';
-    this.droppedFiles = [];
+    if (this.droppedFiles.length || String(this.message).trim().length) {
+      this.send.emit({ message: this.message, files: this.droppedFiles });
+      this.message = '';
+      this.droppedFiles = [];
+    }
   }
 }

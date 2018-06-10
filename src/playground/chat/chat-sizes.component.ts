@@ -3,11 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-chat-sizes',
   styles: [`
-    nb-card-body {
-      display: flex;
-      flex-wrap: wrap;
+    ::ng-deep nb-layout-column {
       justify-content: center;
-      align-items: center;
+      display: flex;
     }
     nb-chat {
       width: 500px;
@@ -57,7 +55,7 @@ export class NbChatSizesComponent {
       reply: true,
       user: {
         name: 'Jonh Doe',
-        avatar: 'https://i.gifer.com/no.gif',
+        avatar: 'https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif',
       },
     });
   }

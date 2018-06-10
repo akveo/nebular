@@ -48,7 +48,7 @@ export const botReplies = [
   },
   {
     regExp: /([I,i]mage)|(IMAGE)|([P,p]ic)|(Picture)/g,
-    answerArray: ['Hey looks at this!', 'Ready to work', 'Yes, master.'],
+    answerArray: ['Hey look at this!', 'Ready to work', 'Yes, master.'],
     type: 'pic',
     reply: {
       text: '',

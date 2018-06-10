@@ -193,6 +193,8 @@ export const structure = [
         icon: 'layout.svg',
         source: [
           'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
         ],
       },
       {

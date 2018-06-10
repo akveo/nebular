@@ -4,11 +4,9 @@ import { Component } from '@angular/core';
   selector: 'nb-chat-colors',
   templateUrl: './chat-colors.component.html',
   styles: [`
-    nb-card-body {
-      display: flex;
-      flex-wrap: wrap;
+    ::ng-deep nb-layout-column {
       justify-content: center;
-      align-items: center;
+      display: flex;
     }
     nb-chat {
       width: 500px;
@@ -26,10 +24,10 @@ export class NbChatColorsComponent {
         {
           text: 'Success!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -41,10 +39,10 @@ export class NbChatColorsComponent {
         {
           text: 'Danger!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -56,10 +54,10 @@ export class NbChatColorsComponent {
         {
           text: 'Primary!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -71,10 +69,10 @@ export class NbChatColorsComponent {
         {
           text: 'Info!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -86,10 +84,10 @@ export class NbChatColorsComponent {
         {
           text: 'Warning!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -101,10 +99,10 @@ export class NbChatColorsComponent {
         {
           text: 'Active!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -116,10 +114,10 @@ export class NbChatColorsComponent {
         {
           text: 'Disabled!',
           date: new Date(),
-          reply: true,
+          reply: false,
           user: {
             name: 'Bot',
-            avatar: 'http://lorempixel.com/400/200/animals/',
+            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
           },
         },
       ],
@@ -133,9 +131,8 @@ export class NbChatColorsComponent {
       reply: true,
       user: {
         name: 'Jonh Doe',
-        avatar: 'http://lorempixel.com/400/200/animals/',
+        avatar: 'https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif',
       },
     });
-
   }
 }
