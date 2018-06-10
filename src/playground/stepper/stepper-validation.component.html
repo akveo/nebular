@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-body>
-    <nb-stepper [linear]="true">
+    <nb-horizontal-stepper [linear]="true">
       <nb-step [stepControl]="firstFormGroup">
         <ng-template nbStepLabel>First step</ng-template>
         <form [formGroup]="firstFormGroup" (ngSubmit)="onFirstSubmit()">
@@ -42,6 +42,6 @@
           </div>
         </form>
       </nb-step>
-    </nb-stepper>
+    </nb-horizontal-stepper>
   </nb-card-body>
 </nb-card>

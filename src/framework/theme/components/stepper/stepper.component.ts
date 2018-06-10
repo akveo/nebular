@@ -85,6 +85,7 @@ export class NbStepperComponent {
   selector: 'nb-vertical-stepper',
   templateUrl: './stepper-vertical.component.html',
   styleUrls: ['./stepper.component.scss'],
+  providers: [{provide: NbStepperComponent, useExisting: NbVerticalStepperComponent}],
 })
 export class NbVerticalStepperComponent extends NbStepperComponent {
 
@@ -94,6 +95,7 @@ export class NbVerticalStepperComponent extends NbStepperComponent {
   selector: 'nb-horizontal-stepper',
   templateUrl: './stepper-horizontal.component.html',
   styleUrls: ['./stepper.component.scss'],
+  providers: [{provide: NbStepperComponent, useExisting: NbHorizontalStepperComponent}],
 })
 export class NbHorizontalStepperComponent extends NbStepperComponent {
 
