@@ -8,14 +8,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  forwardRef,
   Input,
   OnChanges,
   OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbCalendarModelFactoryService } from '../../models/factory/calendar-model-factory.service';
 import { NbCalendarMonthModel } from '../../models/calendar-month.model';
@@ -48,7 +46,7 @@ export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
   public change = new EventEmitter<D>();
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
-  
+
   days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   constructor(

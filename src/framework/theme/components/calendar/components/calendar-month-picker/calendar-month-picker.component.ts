@@ -8,7 +8,6 @@ import {
   ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output,
 } from '@angular/core';
 
-import { NbCalendarModelFactoryService } from '../../models/factory/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
@@ -33,8 +32,7 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
   @Output()
   change = new EventEmitter<any>();
 
-  constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
-              private dateTimeUtil: NbDateTimeUtil<D>,
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>,
               private arrayHelper: NbArrayHelper) {}
 
   ngOnInit() {

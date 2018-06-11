@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util.interface';
 import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
@@ -24,7 +24,7 @@ const defaultYearCount = 20;
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [ NbCalendarModelFactoryService ]
+  providers: [ NbCalendarModelFactoryService ],
 })
 export class NbCalendarComponent<D> implements OnInit {
 
@@ -33,7 +33,7 @@ export class NbCalendarComponent<D> implements OnInit {
 
   @Input()
   boundingMonths: boolean = true;
-  
+
   @Output()
   change = new EventEmitter();
 
@@ -62,15 +62,15 @@ export class NbCalendarComponent<D> implements OnInit {
   nextMonth() {
     this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
   }
-  
+
   prevYears() {
     this.startYear -= defaultYearCount;
   }
-  
+
   nextYears() {
     this.startYear += defaultYearCount;
   }
-  
+
   onChange(value) {
     this.change.emit(value);
   }

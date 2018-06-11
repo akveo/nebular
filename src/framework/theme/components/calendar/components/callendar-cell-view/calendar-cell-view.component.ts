@@ -15,7 +15,7 @@ import { NbCalendarCellModel } from '../../models/calendar-cell.model';
   templateUrl: './calendar-cell-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarCellViewComponent<D> {
+export class NbCalendarCellViewComponent {
 
   @Input()
   public dayModel: NbCalendarCellModel = null;

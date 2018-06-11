@@ -5,10 +5,9 @@
  */
 
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 
-import { NbCalendarModelFactoryService } from '../../../../../../../src/framework/theme/components/calendar/models/factory/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
@@ -42,8 +41,7 @@ export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
 
   years: any[];
 
-  constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
-              private dateTimeUtil: NbDateTimeUtil<D>,
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>,
               private arrayHelper: NbArrayHelper) {}
 
   ngOnInit() {

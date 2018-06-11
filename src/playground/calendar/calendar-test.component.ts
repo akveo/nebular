@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
     nb-calendar {
       margin-right: 2rem;
     }
-  `]
+  `],
 })
 export class NbCalendarTestComponent {
   date = null;
