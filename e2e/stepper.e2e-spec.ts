@@ -13,12 +13,10 @@ describe('nb-stepper', () => {
   });
 
   it('should go to next step on nbStepperNext click', () => {
-    console.log(element(by.css('nbStepperNext')));
     expect(1).toEqual(1);
   });
 
   it('should go to prev step on nbStepperPrev click', () => {
-    console.log(element(by.css('nbStepperNext')));
     expect(3).toEqual(3);
   });
 

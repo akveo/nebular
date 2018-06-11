@@ -7,8 +7,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbHorizontalStepperComponent } from './stepper.component';
-import { NbVerticalStepperComponent } from './stepper.component';
+import { NbHorizontalStepperComponent, NbVerticalStepperComponent, NbStepperComponent } from './stepper.component';
 import { NbStepComponent, NbStepLabelDirective } from './step.component';
 import { NbStepperNextDirective, NbStepperPreviousDirective } from './stepper-button.directive';
 import { NbStepHeaderComponent} from './step-header/step-header.component';
@@ -25,6 +24,7 @@ import { NbStepHeaderComponent} from './step-header/step-header.component';
     NbStepperPreviousDirective,
     NbStepHeaderComponent,
     NbStepLabelDirective,
+    NbStepperComponent,
   ],
   exports: [
     NbHorizontalStepperComponent,
@@ -34,6 +34,7 @@ import { NbStepHeaderComponent} from './step-header/step-header.component';
     NbStepperPreviousDirective,
     NbStepHeaderComponent,
     NbStepLabelDirective,
+    NbStepperComponent,
   ],
 })
 export class NbStepperModule {
