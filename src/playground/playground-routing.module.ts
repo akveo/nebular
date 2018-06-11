@@ -109,6 +109,7 @@ import { NbChatSizesComponent } from './chat/chat-sizes.component';
 import { NbChatDropComponent } from './chat/chat-drop.component';
 import { NbChatMessageTypeShowcaseComponent } from './chat/chat-message-type-showcase.component';
 import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
 
 export const routes: Routes = [
   {
@@ -428,6 +429,10 @@ export const routes: Routes = [
           {
             path: 'chat-conversation-showcase.component',
             component: NbChatConversationShowcaseComponent,
+          },
+          {
+            path: 'chat-test.component',
+            component: NbChatTestComponent,
           },
         ],
       },
