@@ -10,10 +10,10 @@ import { NbPortalComponent } from '../portal/portal.component';
         <div class="collapsable-header">
           <div>{{ title }}</div>
           <div class="header-right">
-            <div class="icon icon-collapse" (click)="toggleCollapse(portal)"></div>
+            <div class="icon icon-collapse" (click)="toggleCollapse()"></div>
             <div class="icon"
-                 [ngClass]="expanded ? 'icon-unexpand' : 'icon-expand'" (click)="toggleExpand(portal)"></div>
-            <i class="nb-close" (click)="close(portal)"></i>
+                 [ngClass]="expanded ? 'icon-unexpand' : 'icon-expand'" (click)="toggleExpand()"></div>
+            <i class="nb-close" (click)="close()"></i>
           </div>
         </div>
       </nb-card-header>
@@ -47,8 +47,6 @@ export class NbCollapsableComponent {
 
   title: string;
 
-  id: string;
-
   @HostBinding('class.collapsed')
   collapsed = false;
 
@@ -65,10 +63,6 @@ export class NbCollapsableComponent {
     this.onCollapseToggle(this.portal, this.collapsed);
   }
 
-  onExpandToggle(a, b) { };
-  onCollapseToggle(a, b) {};
-  onClose(a) {};
-
   toggleExpand() {
     if (this.collapsed) {
       this.collapsed = !this.collapsed;
@@ -83,6 +77,14 @@ export class NbCollapsableComponent {
     }
     this.onClose(this.portal);
   }
+
+  /**
+   * Methods implemented in collapsable directive and assigned through context
+   */
+  onExpandToggle(a, b) { };
+  onCollapseToggle(a, b) { };
+  onClose(a) { };
+
   /**
    * Check that content is a TemplateRef.
    *
