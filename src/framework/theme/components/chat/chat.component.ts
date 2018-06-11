@@ -12,7 +12,7 @@ import {
   ElementRef,
   AfterViewChecked,
   ContentChildren,
-  QueryList, AfterViewInit, ChangeDetectionStrategy,
+  QueryList, AfterViewInit,
 } from '@angular/core';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -115,7 +115,6 @@ import { NbChatMessageComponent } from './chat-message.component';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatComponent implements AfterViewChecked, AfterViewInit {
 
