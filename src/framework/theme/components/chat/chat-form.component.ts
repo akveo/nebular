@@ -28,6 +28,9 @@ import { DomSanitizer } from '@angular/platform-browser';
  *
  * When `[dropFiles]="true"` handles files drag&drop with a file preview.
  *
+ * Drag & drop available for files and images:
+ * @stacked-example(Drag & Drop Chat, chat/chat-drop.component)
+ *
  * New message could be tracked outside by using `(send)` output.
  *
  * ```ts

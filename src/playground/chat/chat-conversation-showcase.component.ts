@@ -3,18 +3,16 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-chat-conversation-showcase',
   styles: [`
-    nb-card-body {
+    :host {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
+      flex-direction: row;
     }
     nb-chat {
-      width: 500px;
-      margin: 0.5rem 0 2rem 2rem;
+      width: 300px;
+      margin: 1rem;
     }
   `],
-  templateUrl: 'chat-conversation-showcase.component.html',
+  templateUrl: './chat-conversation-showcase.component.html',
 })
 
 export class NbChatConversationShowcaseComponent {

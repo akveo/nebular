@@ -62,8 +62,8 @@ import { NbChatMessageComponent } from './chat-message.component';
  * </nb-chat-message> // chat message, available multiple types
  * ```
  *
- * Drag & drop available for files and images:
- * @stacked-example(Drag & Drop Chat, chat/chat-drop.component)
+ * Two users conversation showcase:
+ * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
  *
  * Chat UI is also available in different colors by specifying a `[status]` input:
  *
