@@ -23,8 +23,13 @@
     }
 
     .year {
-      padding: nb-theme(calendar-year-padding);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: nb-theme(calendar-year-cell-width);
+      height: nb-theme(calendar-year-cell-height);
       border-radius: nb-theme(calendar-border-radius);
+      cursor: pointer;
 
       &.selected {
         background: nb-theme(calendar-selected-item);
@@ -50,8 +55,13 @@
     }
 
     .month {
-      padding: nb-theme(calendar-month-padding);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: nb-theme(calendar-month-cell-width);
+      height: nb-theme(calendar-month-cell-height);
       border-radius: nb-theme(calendar-border-radius);
+      cursor: pointer;
 
       &.selected {
         background: nb-theme(calendar-selected-item);
@@ -75,6 +85,21 @@
     .week {
       padding: nb-theme(calendar-row-padding);
     }
+
+    .day {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: nb-theme(calendar-weekday-width);
+      height: nb-theme(calendar-weekday-height);
+      font-size: nb-theme(calendar-weekday-font-size);
+      font-weight: nb-theme(calendar-weekday-font-weight);
+      color: nb-theme(calendar-weekday-fg);
+
+      &:first-child, &:last-child {
+        color: nb-theme(calendar-holiday-fg);
+      }
+    }
   }
 
   nb-calendar-cell-view {
@@ -84,8 +109,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: nb-theme(calendar-day-size);
-      height: nb-theme(calendar-day-size);
+      width: nb-theme(calendar-cell-width);
+      height: nb-theme(calendar-cell-height);
       border-radius: nb-theme(calendar-border-radius);
     }
 
@@ -114,6 +139,14 @@
       background: nb-theme(calendar-active-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);
+    }
+
+    &.cell-selected-range-start {
+      border-radius: nb-theme(calendar-border-radius) 0 0 nb-theme(calendar-border-radius);
+    }
+
+    &.cell-selected-range-end {
+      border-radius: 0 nb-theme(calendar-border-radius) nb-theme(calendar-border-radius) 0;
     }
   }
 }

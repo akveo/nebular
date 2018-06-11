@@ -16,7 +16,7 @@ const ViewMode = {
 };
 
 const defaultStartYear = 2016;
-const defaultYearCount = 16;
+const defaultYearCount = 20;
 
 /**
  */

@@ -39,7 +39,7 @@
 </ng-container>
 
 <ng-container *ngIf="viewMode === ViewMode.month">
-  <div class="header">
+  <div class="header month-picker-header">
     <button class="btn btn-success" (click)="viewMode=ViewMode.date">
       {{ newValue | nbCalendarDate }}
     </button>

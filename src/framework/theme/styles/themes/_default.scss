@@ -473,7 +473,7 @@ $theme: (
   alert-margin: margin,
 
   calendar-width: 350px,
-  calendar-height: 350px,
+  calendar-height: 400px,
   calendar-padding: padding,
   calendar-fg: card-fg-heading,
   calendar-bg: card-bg,
@@ -482,11 +482,20 @@ $theme: (
   calendar-between-item: rgba(64, 220, 126, 0.15),
   calendar-hovered-item: #00e488,
   calendar-inactive-opacity: 0.5,
-  calendar-year-padding: 1rem 1rem,
-  calendar-month-padding: 1rem 1rem,
-  calendar-day-size: 2.5rem,
+  calendar-cell-width: 2.5rem,
+  calendar-cell-height: 2.5rem,
+  calendar-month-cell-width: 4.5rem,
+  calendar-month-cell-height: 3rem,
+  calendar-year-cell-width: calendar-month-cell-width,
+  calendar-year-cell-height: calendar-month-cell-height,
   calendar-border-radius: radius,
   calendar-row-padding: 0.125rem 0,
+  calendar-weekday-width: calendar-cell-width,
+  calendar-weekday-height: 1.75rem,
+  calendar-weekday-font-size: font-size-xs,
+  calendar-weekday-font-weight: font-weight-normal,
+  calendar-weekday-fg: color-fg,
+  calendar-holiday-fg: color-danger,
 );
 
 // register the theme

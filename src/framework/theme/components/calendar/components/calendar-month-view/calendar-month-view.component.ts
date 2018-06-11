@@ -48,6 +48,8 @@ export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
   public change = new EventEmitter<D>();
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
+  
+  days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,

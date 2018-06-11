@@ -10,12 +10,13 @@
     padding: 0.25rem;
     cursor: pointer;
   }
+
+  &.month-picker-header {
+    justify-content: center;
+  }
 }
 
-.week {
+.body {
   display: flex;
-}
-
-.day {
-  flex: 1;
+  align-items: center;
 }

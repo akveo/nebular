@@ -11,19 +11,18 @@ import { Component } from '@angular/core';
   template: `
     <nb-layout>
       <nb-layout-column>
-        <!--<nb-card>-->
-          <!--<nb-card-header>-->
-            <!--Calendar Demo-->
-          <!--</nb-card-header>-->
-          <!--<nb-card-body>-->
-            <nb-calendar [value]="date" (change)="onChange($event)"></nb-calendar>
-            <br/><br/><br/>
-            <nb-calendar-range [value]="range" (change)="onChangeRange($event)"></nb-calendar-range>
-          <!--</nb-card-body>-->
-        <!--</nb-card>-->
+        <div style="display: flex">
+          <nb-calendar [value]="date" (change)="onChange($event)"></nb-calendar>
+          <nb-calendar-range [value]="range" (change)="onChangeRange($event)"></nb-calendar-range>
+        </div>
       </nb-layout-column>
     </nb-layout>
   `,
+  styles: [`
+    nb-calendar {
+      margin-right: 2rem;
+    }
+  `]
 })
 export class NbCalendarTestComponent {
   date = null;
