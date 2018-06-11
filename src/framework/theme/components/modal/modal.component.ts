@@ -30,6 +30,9 @@ export class NbModalComponent {
   @Input()
   context: Object;
 
+  @Input()
+  onClick: (any) => void;
+
   constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
 
@@ -75,6 +78,4 @@ export class NbModalComponent {
   get isPrimitive(): boolean {
     return !this.isTemplate && !this.isComponent;
   }
-
-  onClick() { };
 }
