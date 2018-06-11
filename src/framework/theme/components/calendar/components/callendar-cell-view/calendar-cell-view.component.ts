@@ -29,8 +29,6 @@ export class NbCalendarCellViewComponent {
   @Output()
   public cellSelect = new EventEmitter<any>();
 
-  public onCellHover = new EventEmitter<any>();
-
   @HostBinding('class')
   get cellClasses() {
     return this.cellStates.join(' ');
