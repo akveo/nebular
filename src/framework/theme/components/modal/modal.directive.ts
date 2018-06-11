@@ -24,11 +24,13 @@ export class NbModalDirective {
     const portal = this.buildPortal();
     this.themeService.appendLayoutClass('blurred');
     this.create(portal);
+    document.body.style.overflow = 'hidden';
   }
 
   destroy() {
     this.themeService.removeLayoutClass('blurred');
     this.ref.destroy();
+    document.body.style.overflow = 'auto';
   }
 
   private create(portal: NbPortal) {
