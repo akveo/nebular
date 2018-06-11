@@ -33,10 +33,22 @@ import {NbStepComponent} from './/step.component';
  *   <nb-step>
  * </nb-horizontal-stepper>
  * ```
+ * Enable `[linear]="true"` and specify `[stepControl]="form"` and user can navigates only if submit previous step.
+ * ```html
+ * // ...
+ * <nb-horizontal-stepper [linear]="true">
+ *   <nb-step label="step number one" [stepControl]="form">
+ *     <form [formGroup]="form">
+ *       // ...
+ *     </form>
+ *   <nb-step>
+ *    // ...
+ * </nb-horizontal-stepper>
+ * ```
  *
  * @stacked-example(Validation, stepper/stepper-validation.component)
  *
- * `NbStepperComponent` has two layout options. Both `nb-horizontal-stepper` and `nb-vertical-stepper` has the same API.
+ * Stepper component has two layout options. Both `nb-horizontal-stepper` and `nb-vertical-stepper` have the same API.
  * @stacked-example(Vertical, stepper/stepper-vertical.component)
  *
  * @styles
