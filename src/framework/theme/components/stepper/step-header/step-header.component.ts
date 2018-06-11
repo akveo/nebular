@@ -26,4 +26,8 @@ export class NbStepHeaderComponent {
     return this.label instanceof NbStepLabelDirective;
   }
 
+  get labelTemplate(){
+    return this.label['template'];
+  }
+
 }

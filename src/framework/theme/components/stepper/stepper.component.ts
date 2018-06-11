@@ -6,7 +6,8 @@
 
 import {
   Component,
-  ContentChildren, Input,
+  ContentChildren,
+  Input,
   QueryList,
 } from '@angular/core';
 import {NbStepComponent} from './/step.component';
@@ -26,7 +27,7 @@ import {NbStepComponent} from './/step.component';
  *   <nb-step>
  *       <ng-template nbStepLabel>
  *           <div>
- *               step number tree
+ *               step number two
  *           </div>
  *       </ng-template>
  *       // ... step content here

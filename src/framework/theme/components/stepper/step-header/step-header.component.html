@@ -7,6 +7,6 @@
   </div>
   <div class="step-label">
     <span *ngIf="!_isTemplateInside()">{{ label }}</span>
-    <ng-container *ngIf="_isTemplateInside()" [ngTemplateOutlet]="label.template"></ng-container>
+    <ng-container *ngIf="_isTemplateInside()" [ngTemplateOutlet]="labelTemplate"></ng-container>
   </div>
 </div>
