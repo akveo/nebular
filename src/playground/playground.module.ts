@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 
 import {
   NbThemeModule,
+  NbCalendarModule,
   NbCardModule,
   NbCheckboxModule,
   NbLayoutModule,
@@ -47,6 +48,7 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
+import { NbCalendarTestComponent } from './calendar/calendar-test.component';
 import { NbCardShowcaseComponent } from './card/card-showcase.component';
 import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
@@ -128,6 +130,7 @@ import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
 
 export const NB_MODULES = [
+  NbCalendarModule,
   NbCardModule,
   NbLayoutModule,
   NbPopoverModule,
@@ -184,6 +187,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSidebarRightComponent,
   NbSidebarToggleComponent,
   NbSidebarFixedComponent,
+  NbCalendarTestComponent,
   NbCardShowcaseComponent,
   NbCardFullComponent,
   NbCardColorsComponent,
