@@ -1,4 +1,4 @@
-import { NbCalendarCellModel } from '@nebular/theme/components/calendar/models/calendar-cell.model';
+import { NbCalendarCellModel } from './calendar-cell.model';
 
 export class NbCalendarWeekModel {
   constructor(

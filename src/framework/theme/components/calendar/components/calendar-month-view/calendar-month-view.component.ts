@@ -17,7 +17,7 @@ import {
 
 import { NbCalendarModelFactoryService } from '../../models/factory/calendar-model-factory.service';
 import { NbCalendarMonthModel } from '../../models/calendar-month.model';
-import { NbDateTimeUtil } from '@nebular/theme/components/calendar/service/date-time-util.interface';
+import { NbDateTimeUtil } from '../../service/date-time-util.interface';
 import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
 
 /**
