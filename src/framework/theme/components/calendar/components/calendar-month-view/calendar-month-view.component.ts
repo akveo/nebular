@@ -47,7 +47,15 @@ export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
 
-  days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  days = [
+    { name: 'M' },
+    { name: 'T' },
+    { name: 'W' },
+    { name: 'T' },
+    { name: 'F' },
+    { name: 'S', holiday: true },
+    { name: 'S', holiday: true },
+  ];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
