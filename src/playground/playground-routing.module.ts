@@ -103,6 +103,7 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbSpinnerTestComponent } from './spinner/spinner-test.component';
 
 export const routes: Routes = [
   {
@@ -156,6 +157,15 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'spinner',
+        children: [
+          {
+            path: 'spinner-test.component',
+            component: NbSpinnerTestComponent,
           },
         ],
       },

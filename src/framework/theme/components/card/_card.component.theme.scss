@@ -20,6 +20,7 @@
 
 @mixin nb-card-theme() {
   nb-card {
+    position: relative;
     font-size: nb-theme(card-font-size);
     line-height: nb-theme(card-line-height);
 

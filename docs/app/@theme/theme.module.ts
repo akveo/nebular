@@ -16,6 +16,7 @@ import {
   NbSidebarModule,
   NbCardModule,
   NbCheckboxModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 
 import {
@@ -80,6 +81,7 @@ import {
     NbMenuModule,
     NbTabsetModule,
     NbCheckboxModule,
+    NbSpinnerModule,
     NgdHeaderComponent,
     NgdHeroComponent,
     NgdIconCardComponent,
