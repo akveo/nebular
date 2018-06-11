@@ -15,16 +15,8 @@ export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactor
         sv.startDate &&
         sv.endDate &&
         (
-          !(
-            year < this.dateTimeUtil.getYear(sv.startDate) ||
-            month < this.dateTimeUtil.getMonth(sv.startDate) ||
-            date <= this.dateTimeUtil.getDate(sv.startDate)
-          ) &&
-          !(
-            year > this.dateTimeUtil.getYear(sv.endDate) ||
-            month > this.dateTimeUtil.getMonth(sv.endDate) ||
-            date >= this.dateTimeUtil.getDate(sv.endDate)
-          )
+          this.compareDateAndNumberRepresentation(sv.startDate, year, month, date) <= 0 &&
+          this.compareDateAndNumberRepresentation(sv.endDate, year, month, date) >= 0
         )
       ) {
         states.push('cell-range-inbetween');
@@ -48,6 +40,13 @@ export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactor
     }
 
     return states;
+  }
+
+  private compareDateAndNumberRepresentation(date: D, year2, month2, date2) {
+    const year1 = this.dateTimeUtil.getYear(date);
+    const month1 = this.dateTimeUtil.getMonth(date);
+    const date1 = this.dateTimeUtil.getDate(date);
+    return (year1 - year2) || (month1 - month2) || (date1 - date2);
   }
 
 }

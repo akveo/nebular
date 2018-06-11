@@ -49,6 +49,8 @@ export class NbCalendarRangeComponent<D> implements OnInit {
   startYear = defaultStartYear;
   yearCount = defaultYearCount;
 
+  lastValueEmitted = null;
+
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
@@ -74,13 +76,37 @@ export class NbCalendarRangeComponent<D> implements OnInit {
   }
 
   onChange(value: D) {
-    if (!this.value ||
-      !this.value.startDate ||
-      this.dateTimeUtil.compareDates(this.value.startDate, value) > 0
-    ) {
+    if (!this.value || !this.value.startDate) {
       this.change.emit(new CalendarRangeSelectionModel(value, null));
-    } else {
-      this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+      this.lastValueEmitted = 's';
+    } else  {
+      if (!this.value.endDate) {
+        if (this.dateTimeUtil.compareDates(this.value.startDate, value) > 0) {
+          this.change.emit(new CalendarRangeSelectionModel(value, null));
+          this.lastValueEmitted = 's';
+        } else {
+          this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+          this.lastValueEmitted = 'e';
+        }
+      } else {
+        if (this.lastValueEmitted === 'e') {
+          if (this.dateTimeUtil.compareDates(this.value.endDate, value) >= 0) {
+            this.change.emit(new CalendarRangeSelectionModel(value, this.value.endDate));
+            this.lastValueEmitted = 's';
+          } else {
+            this.change.emit(new CalendarRangeSelectionModel(value, null));
+            this.lastValueEmitted = 's';
+          }
+        } else {
+          if (this.dateTimeUtil.compareDates(this.value.startDate, value) <= 0) {
+            this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+            this.lastValueEmitted = 'e';
+          } else {
+            this.change.emit(new CalendarRangeSelectionModel(value, null));
+            this.lastValueEmitted = 's';
+          }
+        }
+      }
     }
   }
 }
