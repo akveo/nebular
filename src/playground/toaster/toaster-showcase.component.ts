@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbToasterService } from '@nebular/theme';
+import { NbThemeService } from '../../framework/theme/services/theme.service';
 
 @Component({
   selector: 'nb-toaster-showcase',
@@ -23,11 +24,20 @@ import { NbToasterService } from '@nebular/theme';
   ],
 })
 
-export class NbToasterShowcaseComponent {
+export class NbToasterShowcaseComponent implements OnInit, OnDestroy {
 
   private index: number = 1;
 
-  constructor(private toasterService: NbToasterService) {
+  constructor(private toasterService: NbToasterService,
+              private themeService: NbThemeService) {
+  }
+
+  ngOnInit() {
+    this.themeService.changeTheme('cosmic');
+  }
+
+  ngOnDestroy() {
+    this.themeService.changeTheme('default');
   }
 
   showToast(placement, status) {
