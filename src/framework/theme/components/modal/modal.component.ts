@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
-import { NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
+import { NbPortalContent } from '../portal/portal-outlet';
 
 @Component({
   selector: 'nb-modal',

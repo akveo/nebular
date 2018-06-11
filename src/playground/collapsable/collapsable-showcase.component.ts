@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NbCollapsableDirective } from '@nebular/theme/components/collapsable/collapsable.directive';
+import { NbCollapsableDirective } from '@nebular/theme';
 
 @Component({
   selector: 'nb-collapsable-showcase',
@@ -25,10 +25,12 @@ import { NbCollapsableDirective } from '@nebular/theme/components/collapsable/co
       /deep/ nb-collapsable.expanded nb-user {
         width: 500px;
       }
-    `
-  ]
+      /deep/ nb-layout-column {
+        height: 80vw;
+      }
+    `,
+  ],
 })
-
 export class NbCollapsableShowcaseComponent {
   @ViewChild(NbCollapsableDirective) userWindow: NbCollapsableDirective;
 

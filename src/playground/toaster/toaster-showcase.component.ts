@@ -14,6 +14,13 @@ import { NbToasterService } from '@nebular/theme';
     <button class="btn btn-primary" (click)="showToast('top-right', 'primary')">Primary</button>
     <button class="btn btn-primary" (click)="showToast('top-right', 'danger')">Danger</button>
   `,
+  styles: [
+    `
+      /deep/ nb-layout-column {
+        height: 80vw;
+      }
+    `,
+  ],
 })
 
 export class NbToasterShowcaseComponent {

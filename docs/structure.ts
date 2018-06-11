@@ -271,6 +271,27 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Modal Windows',
+        source: [
+          'NbModalDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Collapsable Windows',
+        source: [
+          'NbCollapsableDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toaster',
+        source: [
+          'NbToasterService',
+        ],
+      }
       // {
       //   type: 'tabs',
       //   name: 'Chips',

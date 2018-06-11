@@ -10,6 +10,17 @@ import { NB_WINDOW } from '../../theme.options';
 const DEFAULT_OFFSET = 10;
 const DEFAULT_GAP = 10;
 
+/**
+* Collapsable windows.
+*
+* @stacked-example(Plain usage, collapsable/collapsable-showcase.component)
+ *
+ * Collapsable windows can be collapsed
+ *
+ * Minimized
+ *
+ * And maximized
+* */
 @Directive({ selector: '[nbCollapsable]' })
 export class NbCollapsableDirective implements OnDestroy {
 

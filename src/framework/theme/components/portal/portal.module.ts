@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbPortalComponent } from './portal.component';
-import { NbPortalOutlet } from '@nebular/theme/components/portal/portal-outlet';
+import { NbPortalOutlet } from './portal-outlet';
 
 @NgModule({
   imports: [NbSharedModule],

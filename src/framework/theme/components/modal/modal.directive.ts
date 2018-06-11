@@ -3,6 +3,13 @@ import { NbThemeService } from '../../services/theme.service';
 import { NbPortal, NbPortalContent, NbPortalOutlet } from '../portal/portal-outlet';
 import { NbModalComponent } from './modal.component';
 
+/**
+* Blur modal directive.
+*
+* @stacked-example(Plain modal usage, modal/modal-showcase.component)
+ *
+ * Modal have beautiful blur
+* */
 @Directive({ selector: '[nbModal]' })
 export class NbModalDirective {
   @Input('nbModal')

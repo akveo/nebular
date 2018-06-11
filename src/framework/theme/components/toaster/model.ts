@@ -1,5 +1,5 @@
-import { NbPortal, NbPortalContent } from '@nebular/theme/components/portal/portal-outlet';
 import { ComponentRef } from '@angular/core';
+import { NbPortal, NbPortalContent } from '../portal/portal-outlet';
 
 export enum NbToastPosition {
   TOP_RIGHT = 'top-right',

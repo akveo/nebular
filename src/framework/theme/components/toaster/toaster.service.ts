@@ -7,6 +7,11 @@ import { NbToast, NbToastPortal, NbToastPosition, NbToastRegistryBag, NbToastSta
 
 const DEFAULT_DURATION = 3000;
 
+/**
+ * Toaster, the best with cosmic
+ *
+ * @stacked-example(Super toaster, toaster/toaster-showcase.component)
+ * */
 @Injectable()
 export class NbToasterService {
 
