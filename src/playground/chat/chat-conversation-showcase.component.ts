@@ -20,7 +20,7 @@ import { Component } from '@angular/core';
 export class NbChatConversationShowcaseComponent {
   protected messages: any[] = [];
 
-  sendMessage(event: any, userName: string, reply: boolean) {
+  sendMessage(event: any, userName: string, avatar: string, reply: boolean) {
     const files = !event.files ? [] : event.files.map((file) => {
       return {
         url: file.src,
@@ -37,7 +37,7 @@ export class NbChatConversationShowcaseComponent {
       files: files,
       user: {
         name: userName,
-        avatar: 'https://i.gifer.com/no.gif',
+        avatar: avatar,
       },
     });
   }

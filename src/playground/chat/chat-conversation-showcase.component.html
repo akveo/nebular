@@ -1,6 +1,6 @@
 <nb-card size="large">
   <nb-card-body>
-    <nb-chat title="Conversational UI Conversation Showcase Jake" size="medium" status="success">
+    <nb-chat title="Conversational UI Conversation Showcase Jake" size="medium" status="warning">
       <nb-chat-message *ngFor="let message of messages"
                        [type]="message.type"
                        [message]="message.text"
@@ -12,7 +12,7 @@
                        [latitude]="message.latitude"
                        [longitude]="message.longitude"
                        [avatar]="message.user.avatar"></nb-chat-message>
-      <nb-chat-form (send)="sendMessage($event, 'Jake', true)" [dropFiles]="true">
+      <nb-chat-form (send)="sendMessage($event, 'Jake', 'http://www.reactiongifs.com/r/wnd1.gif', true)" [dropFiles]="true">
       </nb-chat-form>
     </nb-chat>
     <nb-chat title="Conversational UI Conversation Showcase John" size="medium" status="success">
@@ -27,7 +27,7 @@
                        [latitude]="message.latitude"
                        [longitude]="message.longitude"
                        [avatar]="message.user.avatar"></nb-chat-message>
-      <nb-chat-form (send)="sendMessage($event, 'John', false)" [dropFiles]="true">
+      <nb-chat-form (send)="sendMessage($event, 'John', 'https://i.gifer.com/no.gif', false)" [dropFiles]="true">
       </nb-chat-form>
     </nb-chat>
   </nb-card-body>
