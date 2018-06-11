@@ -1,0 +1,127 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-alert-header() {
+  padding: nb-theme(alert-padding);
+  border-bottom: 1px solid nb-theme(alert-separator);
+  border-top-left-radius: nb-theme(alert-border-radius);
+  border-top-right-radius: nb-theme(alert-border-radius);
+  color: nb-theme(alert-fg-heading);
+
+
+
+  @include nb-headings();
+}
+
+@mixin nb-alert-theme() {
+  nb-alert {
+    font-size: nb-theme(alert-font-size);
+    line-height: nb-theme(alert-line-height);
+    font-weight: nb-theme(alert-font-weight);
+
+    background: nb-theme(alert-bg);
+    color: nb-theme(alert-fg);
+    // TODO: move alert margin style to layout
+    margin-bottom: nb-theme(alert-margin);
+    border-radius: nb-theme(alert-border-radius);
+    box-shadow: nb-theme(alert-shadow);
+    padding: nb-theme(alert-padding);
+
+    @include nb-scrollbars(
+        nb-theme(scrollbar-fg),
+        nb-theme(scrollbar-bg),
+        nb-theme(scrollbar-width));
+
+    &.xxsmall-alert {
+      height: nb-theme(alert-height-xxsmall);
+    }
+    &.xsmall-alert {
+      height: nb-theme(alert-height-xsmall);
+    }
+    &.small-alert {
+      height: nb-theme(alert-height-small);
+    }
+    &.medium-alert {
+      height: nb-theme(alert-height-medium);
+    }
+    &.large-alert {
+      height: nb-theme(alert-height-large);
+    }
+    &.xlarge-alert {
+      height: nb-theme(alert-height-xlarge);
+    }
+    &.xxlarge-alert {
+      height: nb-theme(alert-height-xxlarge);
+    }
+
+    &.active-alert {
+      background-color: nb-theme(alert-active-bg);
+    }
+    &.disabled-alert {
+      background-color: nb-theme(alert-disabled-bg);
+      color: nb-theme(alert-disabled-fg);
+    }
+    &.primary-alert {
+      background-color: nb-theme(alert-primary-bg);
+    }
+    &.info-alert {
+      background-color: nb-theme(alert-info-bg);
+    }
+    &.success-alert {
+      background-color: nb-theme(alert-success-bg);
+    }
+    &.warning-alert {
+      background-color: nb-theme(alert-warning-bg);
+    }
+    &.danger-alert {
+      background-color: nb-theme(alert-danger-bg);
+    }
+
+    &.accent {
+      border-top-style: solid;
+      border-top-width: nb-theme(alert-border-radius);
+
+      & nb-alert-header {
+        border-radius: 0;
+      }
+    }
+
+    &.accent-active {
+      border-top-color: nb-theme(alert-active-bg);
+    }
+    &.accent-disabled {
+      border-top-color: nb-theme(alert-disabled-bg);
+    }
+    &.accent-primary {
+      border-top-color: nb-theme(alert-primary-bg);
+    }
+    &.accent-success {
+      border-top-color: nb-theme(alert-success-bg);
+    }
+    &.accent-info {
+      border-top-color: nb-theme(alert-info-bg);
+    }
+    &.accent-warning {
+      border-top-color: nb-theme(alert-warning-bg);
+    }
+    &.accent-danger {
+      border-top-color: nb-theme(alert-danger-bg);
+    }
+
+    .close {
+      padding: nb-theme(alert-padding);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      font-family: monospace;
+    }
+
+    &.closable {
+      padding-right: nb-theme(alert-closable-padding);
+    }
+  }
+}
+

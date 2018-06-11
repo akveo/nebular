@@ -17,18 +17,20 @@
     "types": [],
     "paths": {
       "@nebular/theme": ["../src/framework/theme"],
-      "@nebular/theme/*": ["../src/framework/theme/*"]
+      "@nebular/auth": ["../src/framework/auth"],
+      "@nebular/security": ["../src/framework/security"]
     }
   },
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
     "../src/framework/**/*.spec.ts",
-    "assets/**/*.ts"
+    "assets/**/*.ts",
+    "dist/**/*"
   ],
   "include": [
     "../docs/**/*",
-    "../src/playground/playground.module.ts",
+    "../src/playground/**/*",
     "../src/framework/**/*",
     "../src/app/dynamic.component.ts"
   ]

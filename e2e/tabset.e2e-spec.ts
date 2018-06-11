@@ -11,7 +11,7 @@ import badgeTests from './badge.e2e-spec';
 
 describe('nb-tabset', () => {
   beforeEach((done) => {
-    browser.get('#/tabset').then(() => done());
+    browser.get('#/tabset/tabset-test.component').then(() => done());
   });
 
   it('should display default tabset', () => {
@@ -62,7 +62,7 @@ describe('nb-tabset', () => {
     element(tab2).click()
       .then(() => {
         expect(hasClass(element(tab2), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/tab2');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/tabset-test.component/tab2');
       });
 
     const tab3 = by.css('nb-tabset:nth-child(4) > ul > li:nth-child(3)');
@@ -70,7 +70,7 @@ describe('nb-tabset', () => {
     element(tab3).click()
       .then(() => {
         expect(hasClass(element(tab3), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/tab3');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/tabset-test.component/tab3');
       });
 
     const tab1 = by.css('nb-tabset:nth-child(4) > ul > li:nth-child(1)');
@@ -78,7 +78,7 @@ describe('nb-tabset', () => {
     element(tab1).click()
       .then(() => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/tab1');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/tabset-test.component/tab1');
       });
   });
 

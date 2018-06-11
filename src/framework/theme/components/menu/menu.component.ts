@@ -115,14 +115,27 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  *
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
  *
- * @example Basic usage
+ * Basic example
+ * @stacked-example(Showcase, menu/menu-showcase.component)
  *
- * ```
+ * ```ts
  * // ...
- * menuItems: NbMenuItem[] = [{ title: home, link: '/' }, { title: dashboard, link: 'dashboard' }];
+ * items: NbMenuItem[] = [
+ *  {
+ *    title: home,
+ *    link: '/'
+ *  },
+ *  {
+ *    title: dashboard,
+ *    link: 'dashboard'
+ *  }
+ * ];
  * // ...
- * <nb-menu [items]="menuItems"></nb-menu>
+ * <nb-menu [items]="items"></nb-menu>
  * ```
+ *
+ * Two-level menu example
+ * @stacked-example(Two Levels, menu/menu-children.component)
  *
  * @styles
  *
@@ -248,6 +261,16 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
       });
 
+    this.menuInternalService
+      .onCollapseAll()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string }) => this.compareTag(data.tag)),
+      )
+      .subscribe((data: { tag: string }) => {
+        this.collapseAll();
+      });
+
     this.router.events
       .pipe(
         takeWhile(() => this.alive),
@@ -312,6 +335,10 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         this.window.location.href = homeItem.url;
       }
     }
+  }
+
+  private collapseAll() {
+    this.menuInternalService.collapseAll(this.items, this.tag);
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {

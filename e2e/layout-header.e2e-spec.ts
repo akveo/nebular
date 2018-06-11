@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-layout-header', () => {
 
   beforeEach((done) => {
-    browser.get('#/layout/header').then(() => done());
+    browser.get('#/layout/layout-header-test.component').then(() => done());
   });
 
   it('should render default header', () => {

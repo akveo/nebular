@@ -4,6 +4,7 @@
 /.ng_compiled
 /.ng_build
 .lib
+docs/assets/examples/*
 
 # dependencies
 node_modules
@@ -34,6 +35,7 @@ testem.log
 /docs/framework
 /docs/docs.json
 /docs/output.json
+/docs/assets/examples
 
 # e2e
 /e2e/*.js
@@ -44,3 +46,5 @@ testem.log
 Thumbs.db
 debug.log
 local.log
+
+/schematics/dist
