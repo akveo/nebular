@@ -18,6 +18,7 @@ import {
   NbRouteTabsetModule,
   NbProgressBarModule,
   NbAlertModule,
+  NbChatModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -120,6 +121,12 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypeShowcaseComponent } from './chat/chat-message-type-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -141,6 +148,7 @@ export const NB_MODULES = [
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
+  NbChatModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -235,6 +243,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbChatShowcaseComponent,
+  NbChatColorsComponent,
+  NbChatSizesComponent,
+  NbChatDropComponent,
+  NbChatMessageTypeShowcaseComponent,
+  NbChatConversationShowcaseComponent,
 ];
 
 

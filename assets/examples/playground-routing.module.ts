@@ -97,6 +97,13 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypeShowcaseComponent } from './chat/chat-message-type-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
 
 export const routes: Routes = [
   {
@@ -387,6 +394,39 @@ export const routes: Routes = [
           {
             path: 'progress-bar-interactive.component',
             component: NbProgressBarInteractiveComponent,
+          },
+        ],
+      },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: 'chat-showcase.component',
+            component: NbChatShowcaseComponent,
+          },
+          {
+            path: 'chat-colors.component',
+            component: NbChatColorsComponent,
+          },
+          {
+            path: 'chat-sizes.component',
+            component: NbChatSizesComponent,
+          },
+          {
+            path: 'chat-drop.component',
+            component: NbChatDropComponent,
+          },
+          {
+            path: 'chat-message-file-showcase.component',
+            component: NbChatMessageTypeShowcaseComponent,
+          },
+          {
+            path: 'chat-conversation-showcase.component',
+            component: NbChatConversationShowcaseComponent,
+          },
+          {
+            path: 'chat-test.component',
+            component: NbChatTestComponent,
           },
         ],
       },
