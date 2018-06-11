@@ -75,4 +75,6 @@ export class NbModalComponent {
   get isPrimitive(): boolean {
     return !this.isTemplate && !this.isComponent;
   }
+
+  onClick() { };
 }

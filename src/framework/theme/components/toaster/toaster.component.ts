@@ -24,29 +24,26 @@ import { NbPortalContent } from '../portal/portal-outlet';
   host: { '(click)': 'onClick(parent)' },
 })
 export class NbToastComponent {
-
   /**
    * Content which will be rendered.
    * */
-  @Input()
-  content: NbPortalContent;
+  @Input() content: NbPortalContent;
 
   /**
    * Context which will be passed to rendered component instance.
    * */
-  @Input()
-  context: Object;
+  @Input() context: Object;
 
-  @Input()
-  title: string;
+  @Input() title: string;
 
   @Input()
   @HostBinding('class')
   status: string;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef,
-              public parent: NbPortalComponent) {
-  }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    public parent: NbPortalComponent,
+  ) {}
 
   /**
    * If content position is TemplateRef we're passing context as template outlet param.
@@ -90,4 +87,6 @@ export class NbToastComponent {
   get isPrimitive(): boolean {
     return !this.isTemplate && !this.isComponent;
   }
+
+  onClick() { }
 }

@@ -7,12 +7,14 @@ import { NbCollapsableDirective } from '@nebular/theme';
     <ng-template
       #collapsable
       [nbCollapsable]="collapsable"
-      nbCollapsableTitle="User Window"
+      [nbCollapsableContext]="{ name: fakeNames[index] }"
+      nbCollapsableTitle="User"
+      let-name="name"
     >
       <nb-user
         size="large"
-        name="Jonh Doe"
-        title="Engineer"
+        name="{{ name }}"
+        title="Reservior Dog"
         badgeText="99+"
         badgeStatus="success"
         badgePosition="bottom right">
@@ -34,7 +36,28 @@ import { NbCollapsableDirective } from '@nebular/theme';
 export class NbCollapsableShowcaseComponent {
   @ViewChild(NbCollapsableDirective) userWindow: NbCollapsableDirective;
 
+  fakeNames = [
+    'Mr.White',
+    'Mr. Orange',
+    'Mr. Blonde',
+    'Mr. Pink',
+    'Mr. Blue',
+    'Mr. Brown',
+    'Nice Guy',
+    'Joe Cabot',
+  ];
+
+  index = 0;
+
+  changeIndex() {
+    this.index++;
+    if (this.index >= this.fakeNames.length) {
+      this.index = this.index - this.fakeNames.length;
+    }
+  }
+
   onClick() {
+    this.changeIndex();
     this.userWindow.show();
   }
 }

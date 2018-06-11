@@ -119,7 +119,7 @@ export class NbCollapsableDirective implements OnDestroy {
     const registry = this.collapsableService.get();
     const index = registry.findIndex(item => item.instance === portal);
     registry[index].changeDetectorRef.detectChanges();
-    this.recalculateRest(index );
+    this.recalculateRest(index);
   }
 
   private recalculateRest(index, registryRest?) {
