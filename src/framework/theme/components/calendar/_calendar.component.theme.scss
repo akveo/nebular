@@ -15,6 +15,10 @@
     background: nb-theme(calendar-bg);
     color: nb-theme(calendar-fg);
     border-radius: nb-theme(calendar-border-radius);
+
+    .header button {
+      width: nb-theme(calendar-header-date-width);
+    }
   }
 
   nb-calendar-year-picker {

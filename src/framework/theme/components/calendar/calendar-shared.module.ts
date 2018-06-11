@@ -14,6 +14,7 @@ import { NbCalendarCellViewComponent } from './components/callendar-cell-view/ca
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
 import { NbCalendarDatePipe } from './helpers/calendar-date.pipe';
+import { NbCalendarYearPipe } from './helpers/calendar-year.pipe';
 import { NbArrayHelper } from './helpers/array.helper';
 
 const NB_CALENDAR_PROVIDERS = [
@@ -28,10 +29,15 @@ const COMPONENTS = [
   NbCalendarCellViewComponent,
 ];
 
+const PIPES = [
+  NbCalendarDatePipe,
+  NbCalendarYearPipe,
+];
+
 @NgModule({
   imports: [ NbSharedModule ],
-  exports: [ ...COMPONENTS, NbCalendarDatePipe ],
-  declarations: [ ...COMPONENTS, NbCalendarDatePipe ],
+  exports: [ ...COMPONENTS, ...PIPES ],
+  declarations: [ ...COMPONENTS, ...PIPES ],
   providers: [ ...NB_CALENDAR_PROVIDERS, NbArrayHelper ],
 })
 export class NbCalendarSharedModule {

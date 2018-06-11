@@ -24,8 +24,8 @@ const defaultYearCount = 20;
  */
 @Component({
   selector: 'nb-calendar-range',
-  styleUrls: ['./calendar.component.scss'],
-  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar-range.component.scss'],
+  templateUrl: './calendar-range.component.html',
   providers: [{ provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService }],
 })
 export class NbCalendarRangeComponent<D> implements OnInit {

@@ -1,13 +1,10 @@
 <ng-container *ngIf="viewMode === ViewMode.date">
   <div class="header">
-    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.year">
+    <i class="nb-arrow-left" (click)="prevMonth()"></i>
+    <button class="btn btn-success" (click)="viewMode=ViewMode.year">
       {{ newValue | nbCalendarDate }}
     </button>
-    <div>
-      <i class="nb-arrow-left" (click)="prevMonth()"></i>
-      <i class="nb-arrow-right" (click)="nextMonth()"></i>
-      <nb-checkbox [(ngModel)]="boundingMonths">Include bounding months</nb-checkbox>
-    </div>
+    <i class="nb-arrow-right" (click)="nextMonth()"></i>
   </div>
 
   <div class="body">
@@ -23,13 +20,11 @@
 
 <ng-container *ngIf="viewMode === ViewMode.year">
   <div class="header">
-    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
-      {{ newValue | nbCalendarDate }}
+    <i class="nb-arrow-left" (click)="prevYears()"></i>
+    <button class="btn btn-success" (click)="viewMode=ViewMode.date">
+      {{ startYear + ' - ' + (startYear + yearCount) }}
     </button>
-    <div>
-      <i class="nb-arrow-left" (click)="prevYears()"></i>
-      <i class="nb-arrow-right" (click)="nextYears()"></i>
-    </div>
+    <i class="nb-arrow-right" (click)="nextYears()"></i>
   </div>
 
   <div class="body">
@@ -44,9 +39,9 @@
 </ng-container>
 
 <ng-container *ngIf="viewMode === ViewMode.month">
-  <div class="header">
-    <button class="btn btn-sm btn-secondary" (click)="viewMode=ViewMode.date">
-      {{ newValue | nbCalendarDate }}
+  <div class="header month-picker-header">
+    <button class="btn btn-success" (click)="viewMode=ViewMode.date">
+      {{ newValue | nbCalendarYear }}
     </button>
   </div>
 
