@@ -160,14 +160,14 @@ export class NbChatFormComponent {
     }
   }
 
-  @HostListener('dragover', ['$event'])
+  @HostListener('dragover')
   onDragOver() {
     if (this.dropFiles) {
       this.fileOver = true;
     }
   }
 
-  @HostListener('dragleave', ['$event'])
+  @HostListener('dragleave')
   onDragLeave() {
     if (this.dropFiles) {
       this.fileOver = false;

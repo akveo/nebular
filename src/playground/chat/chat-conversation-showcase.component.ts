@@ -16,7 +16,8 @@ import { Component } from '@angular/core';
 })
 
 export class NbChatConversationShowcaseComponent {
-  protected messages: any[] = [];
+
+  messages: any[] = [];
 
   sendMessage(event: any, userName: string, avatar: string, reply: boolean) {
     const files = !event.files ? [] : event.files.map((file) => {
