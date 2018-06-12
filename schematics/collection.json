@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "new-component": {
+      "description": "A new Nebular component schematic.",
+      "factory": "./new-component/index#newComponent",
+      "schema": "./new-component/schema.json"
+    }
+  }
+}
