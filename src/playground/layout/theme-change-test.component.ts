@@ -42,7 +42,7 @@ export class NbThemeChangeTestComponent {
   constructor(private themeService: NbThemeService) {}
 
   changeTheme() {
-    this.currentTheme = this.currentTheme === 'default' ? 'blue' : 'default';
+    this.currentTheme = this.currentTheme === 'default' ? 'cosmic' : 'default';
     this.themeService.changeTheme(this.currentTheme);
   }
 }
