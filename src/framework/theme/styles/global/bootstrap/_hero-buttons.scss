@@ -117,8 +117,8 @@
   @return nb-theme(btn-hero-bevel-size) shade($color, 14%);
 }
 
-@function btn-hero-glow($color) {
-  @return nb-theme(btn-hero-glow-size) $color;
+@function btn-hero-glow($hero-glow-size, $color) {
+  @return nb-theme($hero-glow-size) $color;
 }
 
 // Left colors
@@ -366,27 +366,27 @@
 
 // Glow
 @function btn-hero-primary-glow() {
-  @return btn-hero-glow(btn-hero-primary-middle-color());
+  @return btn-hero-glow(btn-hero-primary-glow-size, btn-hero-primary-middle-color());
 }
 
 @function btn-hero-success-glow() {
-  @return btn-hero-glow(btn-hero-success-middle-color());
+  @return btn-hero-glow(btn-hero-success-glow-size, btn-hero-success-middle-color());
 }
 
 @function btn-hero-warning-glow() {
-  @return btn-hero-glow(btn-hero-warning-middle-color());
+  @return btn-hero-glow(btn-hero-warning-glow-size, btn-hero-warning-middle-color());
 }
 
 @function btn-hero-info-glow() {
-  @return btn-hero-glow(btn-hero-info-middle-color());
+  @return btn-hero-glow(btn-hero-info-glow-size, btn-hero-info-middle-color());
 }
 
 @function btn-hero-danger-glow() {
-  @return btn-hero-glow(btn-hero-danger-middle-color());
+  @return btn-hero-glow(btn-hero-danger-glow-size, btn-hero-danger-middle-color());
 }
 
 @function btn-hero-secondary-glow() {
-  @return nb-theme(btn-hero-secondary-glow-size) btn-hero-secondary-middle-color();
+  @return btn-hero-glow(btn-hero-secondary-glow-size, btn-hero-secondary-middle-color());
 }
 
 
