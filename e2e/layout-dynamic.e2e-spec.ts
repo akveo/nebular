@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-layout theme', () => {
 
   beforeEach((done) => {
-    browser.get('#/layout/dynamic').then(() => done());
+    browser.get('#/layout/theme-dynamic-test.component').then(() => done());
   });
 
   it('shown have layout first', () => {

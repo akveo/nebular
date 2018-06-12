@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-sidebar-one', () => {
 
   beforeEach((done) => {
-    browser.get('#/sidebar/one').then(() => done());
+    browser.get('#/sidebar/sidebar-one-test.component').then(() => done());
   });
 
   it('should render sidebar full pages', () => {

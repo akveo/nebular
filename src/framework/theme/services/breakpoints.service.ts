@@ -5,7 +5,7 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { nbMediaBreakpointsToken } from '../theme.options';
+import { NB_MEDIA_BREAKPOINTS } from '../theme.options';
 
 /**
  * Media breakpoint type
@@ -63,7 +63,7 @@ export class NbMediaBreakpointsService {
 
   private breakpointsMap: { [breakpoint: string]: number };
 
-  constructor(@Inject(nbMediaBreakpointsToken) private breakpoints) {
+  constructor(@Inject(NB_MEDIA_BREAKPOINTS) private breakpoints) {
     this.breakpointsMap = this.breakpoints.reduce((res, b: NbMediaBreakpoint) => {
       res[b.name] = b.width;
       return res;

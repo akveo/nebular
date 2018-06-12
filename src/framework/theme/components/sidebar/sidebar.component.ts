@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -47,36 +47,22 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
+ * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
+ *
  * Sidebar can be placed on the left or the right side of the layout,
- * or on start or end position of layout (depends on document direction, left to right or right to left)
+ * or on start/end position of layout (depends on document direction, left to right or right to left)
  * It can be fixed (shown above the content) or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
  * By default sidebar content is fixed and saves its position while the page is being scrolled.
  *
+ * Compacted sidebar example:
+ * @stacked-example(Compacted Sidebar, sidebar/sidebar-compacted.component)
+ *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
- * @example Minimal sidebar example
- *
- * ```
- * <nb-sidebar>
- *   Sidebar content.
- * </nb-sidebar>
- * ```
- *
- * @example Example of fixed sidebar located on the left side, initially collapsed.
- *
- * ```
- * <nb-sidebar left fixed state="collapsed">
- *  <nb-sidebar-header>Header</nb-sidebar-header>
- *
- *    Sidebar content, menu or another component here.
- *
- *  <nb-sidebar-footer>
- *    Footer components here
- *  </nb-sidebar-footer>
- * </nb-sidebar>
- * ```
+ * @additional-example(Right Sidebar, sidebar/sidebar-right.component)
+ * @additional-example(Fixed Sidebar, sidebar/sidebar-fixed.component)
  *
  * @styles
  *
@@ -106,7 +92,7 @@ export class NbSidebarFooterComponent {
     </div>
   `,
 })
-export class NbSidebarComponent implements OnInit, OnDestroy {
+export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 
   static readonly STATE_EXPANDED: string = 'expanded';
   static readonly STATE_COLLAPSED: string = 'collapsed';
@@ -214,7 +200,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   @Input()
   set responsive(val: boolean) {
     this.responsiveValue = convertToBoolProperty(val);
-    this.toggleResponsive(this.responsiveValue);
   }
 
   /**
@@ -225,12 +210,31 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Input() tag: string;
 
+  // TODO: get width by the key and define only max width for the tablets and mobiles
+  /**
+   * Controls on which screen sizes sidebar should be switched to compacted state.
+   * Works only when responsive mode is on.
+   * Default values are `['xs', 'is', 'sm', 'md', 'lg']`.
+   *
+   * @type string[]
+   */
+  @Input() compactedBreakpoints: string[] = ['xs', 'is', 'sm', 'md', 'lg'];
+
+  /**
+   * Controls on which screen sizes sidebar should be switched to collapsed state.
+   * Works only when responsive mode is on.
+   * Default values are `['xs', 'is']`.
+   *
+   * @type string[]
+   */
+  @Input() collapsedBreakpoints: string[] = ['xs', 'is'];
+
   private mediaQuerySubscription: Subscription;
   private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
   constructor(private sidebarService: NbSidebarService,
-              private themeService: NbThemeService,
-              private element: ElementRef) {
+    private themeService: NbThemeService,
+    private element: ElementRef) {
   }
 
   toggleResponsive(enabled: boolean) {
@@ -238,6 +242,12 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       this.mediaQuerySubscription = this.onMediaQueryChanges();
     } else if (this.mediaQuerySubscription) {
       this.mediaQuerySubscription.unsubscribe();
+    }
+  }
+
+  ngOnChanges(changes) {
+    if (changes.responsive) {
+      this.toggleResponsive(this.responsiveValue);
     }
   }
 
@@ -283,7 +293,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       const linkChildren = ['span', 'i'];
 
       // if we clicked on span - get the link
-      if (linkChildren.indexOf(link.tagName.toLowerCase()) !== -1 && link.parentNode) {
+      if (linkChildren.includes(link.tagName.toLowerCase()) && link.parentNode) {
         link = event.target.parentNode;
       }
 
@@ -320,9 +330,9 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * @param {boolean} compact If true, then sidebar state will be changed between expanded & compacted,
    * otherwise - between expanded & collapsed. False by default.
    *
-   * @example Toggle sidebar state
+   * Toggle sidebar state
    *
-   * ```
+   * ```ts
    * this.sidebar.toggle(true);
    * ```
    */
@@ -335,10 +345,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
     const closedStates = [NbSidebarComponent.STATE_COMPACTED, NbSidebarComponent.STATE_COLLAPSED];
     if (compact) {
-      this.state = closedStates.indexOf(this.stateValue) >= 0 ?
+      this.state = closedStates.includes(this.stateValue) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COMPACTED;
     } else {
-      this.state = closedStates.indexOf(this.stateValue) >= 0 ?
+      this.state = closedStates.includes(this.stateValue) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COLLAPSED;
     }
   }
@@ -347,20 +357,20 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this.themeService.onMediaQueryChange()
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
-        // TODO: get width by the key and define only max width for the tablets and mobiles
-        const tablet = ['xs', 'is', 'sm', 'md', 'lg'];
-        const mobile = ['xs', 'is'];
+        const isCollapsed = this.collapsedBreakpoints.includes(current.name);
+        const isCompacted = this.compactedBreakpoints.includes(current.name);
 
-        if (tablet.indexOf(current.name) !== -1) {
+        if (isCompacted) {
           this.fixed = true;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
-        if (mobile.indexOf(current.name) !== -1) {
+        if (isCollapsed) {
+          this.fixed = true;
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (tablet.indexOf(current.name) === -1  && prev.width < current.width) {
+        if (!isCollapsed && !isCollapsed && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;

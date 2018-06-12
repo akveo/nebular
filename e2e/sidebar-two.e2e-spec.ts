@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-sidebar-two', () => {
 
   beforeEach((done) => {
-    browser.get('#/sidebar/two').then(() => done());
+    browser.get('#/sidebar/sidebar-two-test.component').then(() => done());
   });
 
   // it('should render right fixed sidebar height equal layout height', () => {

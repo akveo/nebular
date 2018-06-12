@@ -164,17 +164,16 @@
           box-shadow: nb-theme(footer-shadow);
 
           nav {
-            height: nb-theme(footer-height);
             padding: nb-theme(footer-padding);
             background: nb-theme(footer-bg);
             color: nb-theme(footer-fg);
             border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nb-theme(header-fg);
+              color: nb-theme(footer-fg);
 
               @include hover-focus-active {
-                color: nb-theme(header-fg);
+                color: nb-theme(footer-fg);
               }
             }
           }

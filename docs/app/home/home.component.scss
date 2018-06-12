@@ -1,0 +1,94 @@
+@import '../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $convex-bg: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+  $content-width: nb-theme(content-width);
+
+  .content-center {
+    max-width: $content-width;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    background: url('/assets/img/bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .content-center {
+      flex-direction: column;
+    }
+  }
+
+  .concave {
+    margin-bottom: -5px;
+  }
+
+  .features {
+    margin-top: -8rem;
+    justify-content: center;
+  }
+
+  .features, .advantages {
+    margin-bottom: 5rem;
+  }
+
+  .advantages {
+    position: relative;
+    overflow: hidden;
+
+    > .content-center {
+      padding: 0 2rem;
+    }
+  }
+
+  @include media-breakpoint-up(is) {
+    ngd-hero {
+      margin-top: 4rem;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    ngd-hero {
+      margin-top: 6rem;
+    }
+
+    .advantages {
+      padding-bottom: 5.5rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 300px;
+        bottom: 0;
+        right: -30%;
+        left: -30%;
+        background: $convex-bg;
+        z-index: -1;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .features {
+      margin-top: -9rem;
+    }
+  }
+
+  @include media-breakpoint-up(xxl) {
+    .features {
+      margin-top: -10rem;
+    }
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    .features {
+      margin-top: -12.5rem;
+    }
+  }
+}
+

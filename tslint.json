@@ -132,5 +132,10 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "no-unused-variable": [true, {"ignore-pattern": "^set"}]
+  },
+  "linterOptions": {
+    "exclude": [
+      "docs/assets/examples/**/*"
+    ]
   }
 }

@@ -5,7 +5,7 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { sizes } from './cards-shared';
+import { cardSizes as sizes } from './component-shared';
 import { protractor } from 'protractor/built/ptor';
 
 function toInt(cssValue) {
@@ -21,7 +21,7 @@ const cards = sizes.map((size, i) => ({
 
 describe('nb-reveal-card', () => {
   beforeEach((done) => {
-    browser.get('#/card-status').then(() => done());
+    browser.get('#/card/card-test.component').then(() => done());
   });
 
   cards.forEach(c => {

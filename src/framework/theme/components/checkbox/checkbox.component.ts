@@ -11,17 +11,13 @@ import { convertToBoolProperty } from '../helpers';
 /**
  * Styled checkbox component
  *
- * @example Basic example
+ * @stacked-example(Showcase, checkbox/checkbox-showcase.component)
  *
- * ```
- *  <nb-checkbox [(ngModel)]="enabled">Enabled?</nb-checkbox>
- * ```
+ * Can have one of the following statuses: danger, success or warning
  *
- * @example Example with status
+ * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
- * ```
- *  <nb-checkbox [(ngModel)]="enabled" status="danger">Enabled?</nb-checkbox>
- * ```
+ * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
  *
  * @styles
  *

@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-sidebar', () => {
 
   beforeEach((done) => {
-    browser.get('#/sidebar').then(() => done());
+    browser.get('#/sidebar/sidebar-test.component').then(() => done());
   });
 
   it('should render sidebar hidden', () => {

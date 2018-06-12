@@ -1,3 +1,5 @@
+# RTL
+
 All Nebular components support RTL out of the box.
 
 The components that accept a position as a setting now also support logical start and end values, similar to flexbox. Value of start and end depends on current layout direction. For LTR it's left and for RTL - right.
@@ -28,16 +30,16 @@ Default value is `ltr`.
 To help you add RTL support to your custom components, Nebular provides you with two scss mixins: `nb-lrt` and `nb-rtl`. You can use them to alter values of css properties, which don't support logical values, like paddings, margins, etc. You can pass single property and value as arguments, pass multiple statements as a content of mixin or both. For example:
 ```scss
 :host {
-  nb-ltr(padding-left, 1em);
-  nb-rtl(padding-right, 1em);
+  @include nb-ltr(padding-left, 1em);
+  @include nb-rtl(padding-right, 1em);
 }
 ```
 ```scss
 :host {
-  nb-ltr() {
+  @include nb-ltr() {
     padding-left: 1em;
   };
-  nb-rtl() {
+  @include nb-rtl() {
     padding-right: 1em;
   };
 }
