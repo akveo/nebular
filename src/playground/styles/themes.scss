@@ -4,7 +4,7 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '../../framework/theme/styles/global/bootstrap/breakpoints';
 
-$nb-enabled-themes: (default, cosmic);
+$nb-enabled-themes: (default, cosmic, corporate);
 
 $nb-themes: nb-register-theme((
 ), default, default);
