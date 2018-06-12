@@ -11,7 +11,7 @@ import badgeTests from './badge.e2e-spec';
 describe('nb-action', () => {
 
   beforeEach(() => {
-    browser.get('#/actions');
+    browser.get('#/action/action-test.component');
   });
 
   describe('badge', () => {

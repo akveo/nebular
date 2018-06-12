@@ -1,3 +1,5 @@
+# Security 
+
 Security is an important part of any adult web application. It is a common task to manage a user access to particular resources.
 Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebular Security` helps you to `authorize` a user to access some of the application resources.
 
@@ -8,7 +10,7 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
     It is essential to duplicate security rules on the back-end side.
   </div>
 </div>
-<hr class="section-end">
+<hr>
 
 ## What's included
 
@@ -20,8 +22,8 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
 
 - *Security Decorator* - decorator that manages access to a particular method, coming soon.
 
-<hr class="section-end">
+<hr>
 
-## Where to next
+## Related Articles
 
 - Security Module [Installation](#/docs/security/installation) 

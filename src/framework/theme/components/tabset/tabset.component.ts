@@ -20,6 +20,14 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Specific tab container.
+ *
+ * ```ts
+ * <nb-tab tabTitle="Users"
+ *   badgeText="99+"
+ *   badgeStatus="danger">
+ *   <p>List of <strong>users</strong>.</p>
+ * </nb-tab>
+ ```
  */
 @Component({
   selector: 'nb-tab',
@@ -55,6 +63,7 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
+   * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
    */
   @Input()
@@ -94,11 +103,11 @@ export class NbTabComponent {
 /**
  *
  * Dynamic tabset component.
- * Renders `<nb-tab></ng-tab> containers inside.
+ * @stacked-example(Showcase, tabset/tabset-showcase.component)
  *
- * @example Basic tabset example
+ * Basic tabset example
  *
- * ```
+ * ```html
  * <nb-tabset>
  *  <nb-tab tabTitle="Simple Tab #1">
  *    Tab content 1
@@ -107,6 +116,12 @@ export class NbTabComponent {
  *    Tab content 2
  *  </nb-tab>
  * </nb-tabset>
+ * ```
+ * It is also possible to set a badge to a particular tab:
+ * @stacked-example(Tab With Badge, tabset/tabset-badge.component)
+ *
+ * and we can set it to full a width of a parent component
+ * @stacked-example(Full Width, tabset/tabset-width.component)
  *
  * @styles
  *

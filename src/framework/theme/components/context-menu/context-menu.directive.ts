@@ -22,45 +22,43 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
 /**
  * Full featured context menu directive.
  *
- * ![image](assets/images/components/context-menu.gif)
+ * @stacked-example(Showcase, context-menu/context-menu-showcase.component)
  *
- * @example Just pass menu items array:
+ * Just pass menu items array:
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items"></button>
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example If you want to handle context menu clicks you have to pass `nbContextMenuTag`
+ * If you want to handle context menu clicks you have to pass `nbContextMenuTag`
  * param and subscribe to events using NbMenuService.
  * `NbContextMenu` renders plain `NbMenu` inside, so
  * you have to work with it just like with `NbMenu` component:
  *
- * ```
- * <button [nbContextMenu]="items" nbContextMenuTag="my-context-menu"></button>
- * ...
- * nbMenuService.onItemClick()
- *   .pipe(filter(({ tag }) => tag === 'my-context-menu'))
- *   .subscribe(...handle it somehow)
- * ```
+ * @stacked-example(Menu item click, context-menu/context-menu-click.component)
  *
- * @example Context menu has different placements, such as: top, bottom, left and right
+ * Context menu has different placements, such as: top, bottom, left and right
  * which can be used as following:
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items" nbContextMenuPlacement="right"></button>
- * ...
+ * ```
+ *
+ * ```ts
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  *
- * @example By default context menu will try to adjust itself to maximally fit viewport
+ * By default context menu will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the context menu.
  * If you wanna disable this behaviour just set it falsy value.
  *
- * ```
+ * ```html
  * <button [nbContextMenu]="items" nbContextMenuAdjustment="counterclockwise"></button>
- * ...
+ * ```
+ *
+ * ```ts
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
  * */

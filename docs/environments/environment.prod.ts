@@ -11,4 +11,5 @@
 
 export const environment = {
   production: true,
+  examplesUrl: 'run/',
 };

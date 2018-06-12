@@ -12,6 +12,9 @@ import { share } from 'rxjs/operators';
  * Sidebar service.
  *
  * Root module service to control the sidebar from any part of the app.
+ *
+ * Allows you to change sidebar state dynamically from any part of the app:
+ * @stacked-example(Sidebar State, sidebar/sidebar-toggle.component)
  */
 @Injectable()
 export class NbSidebarService {
