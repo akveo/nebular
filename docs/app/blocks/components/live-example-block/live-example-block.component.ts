@@ -40,12 +40,18 @@ export class NgdLiveExampleBlockComponent implements OnInit, OnDestroy {
     return this.currentTheme === 'cosmic';
   }
 
+  @HostBinding('class.theme-corporate')
+  private get isCorporate() {
+    return this.currentTheme === 'corporate';
+  }
+
   iframeHeight: number;
   alive: boolean = true;
 
   themes: {label: string; value: string}[] = [
     { label: 'Default', value: 'default' },
     { label: 'Cosmic', value: 'cosmic' },
+    { label: 'Corporate', value: 'corporate' },
   ];
 
   currentTheme: string = 'default';
