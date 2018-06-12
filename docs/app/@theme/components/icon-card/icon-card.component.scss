@@ -18,9 +18,11 @@
   flex-direction: column;
   cursor: pointer;
   max-width: 30rem;
+  transition: transform 0.25s ease;
 
   &:hover {
     box-shadow: $shadow-hover;
+    transform: translateY(-1rem);
   }
 
   h2 {

@@ -2,7 +2,7 @@
 
 @include nb-install-component() {
 
-  $shadow: 0 12px 34px 0 rgba(0, 60, 183, 0.25);
+  $shadow: 0 12px 34px rgba(0, 60, 183, 0.25);
   $btn-bg: linear-gradient(90deg, #18f297 0%, #00e6e6 100%);
   $btn-shadow-hover: 0 18px 34px 0 rgba(0, 60, 183, 0.35);
   $btn-shadow-active: inset 0 1px 3px 0 rgba(0, 60, 183, 0.5);
@@ -121,9 +121,11 @@
 
       h3 {
         font-size: 32px;
+        line-height: 1;
       }
       h3:nth-child(2) {
-        font-size: 94px;
+        font-size: 98px;
+        font-weight: bold;
       }
     }
   }
