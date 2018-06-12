@@ -17,6 +17,7 @@
     "types": [],
     "paths": {
       "@nebular/theme": ["../src/framework/theme"],
+      "@nebular/theme/*": ["../src/framework/theme/*"],
       "@nebular/auth": ["../src/framework/auth"],
       "@nebular/security": ["../src/framework/security"]
     }

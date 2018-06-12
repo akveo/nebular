@@ -57,8 +57,11 @@
           color: $menu-item-fg;
           display: block;
 
-          &:hover, &.active {
+          &:hover, &.active, &:focus {
             color: $menu-item-fg-active;
+            text-shadow: 0.5px 0 0 currentColor;
+            font-weight: normal;
+            outline: none!important;
           }
         }
       }
@@ -173,7 +176,7 @@
 
       .menu-items {
         li {
-          margin-top: 0.4rem;
+          margin-top: 0.25rem;
           display: none;
         }
       }
