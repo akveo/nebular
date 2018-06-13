@@ -5,6 +5,7 @@
     </div>
   </nb-layout-header>
   <nb-sidebar class="menu-sidebar" [tag]="sidebarTag" [responsive]="true" [compactedBreakpoints]="[]" [collapsedBreakpoints]="collapsedBreakpoints">
+    <button (click)="collapseMenu()" class="collapse-all">Collapse all</button>
     <nb-menu [items]="menuItems" tag="leftMenu"></nb-menu>
   </nb-sidebar>
   <nb-layout-column>
