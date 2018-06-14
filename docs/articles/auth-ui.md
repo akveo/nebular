@@ -315,4 +315,4 @@ That's it. Now you can adjust the components the way you need. Though please mak
 
 ## Where to next
 
-- Receiving [user token after authentication](#/docs/auth/getting-user-token)
+- Receiving [user token after authentication](docs/auth/getting-user-token)
