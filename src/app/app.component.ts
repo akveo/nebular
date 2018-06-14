@@ -6,8 +6,6 @@
 
 import { Component } from '@angular/core';
 
-import 'style-loader!./app.themes.scss';
-
 @Component({
   selector: 'nb-app-root',
   styleUrls: ['./app.component.scss'],

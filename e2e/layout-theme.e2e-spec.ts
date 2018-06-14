@@ -25,7 +25,7 @@ describe('nb-layout theme', () => {
     const cardHeader = element(by.css('nb-card-header'));
 
     const themeDefault = 'nb-theme-default';
-    const themeBlue = 'nb-theme-blue';
+    const themeBlue = 'nb-theme-cosmic';
 
     button.click().then(() => {
       return browser.driver.wait(() => {
