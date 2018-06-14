@@ -157,5 +157,5 @@ And done! Relatively you can inject `NbAuthService` in the other components to m
 
 ## Related Articles
 
-- [NbAuthService](#/docs/auth/nbauthservice)
-- [NbTokenService](#/docs/auth/nbtokenservice)
+- [NbAuthService](docs/auth/nbauthservice)
+- [NbTokenService](docs/auth/nbtokenservice)
