@@ -19,6 +19,8 @@
     </ng-container>
   </ng-container>
 
+  <p class="not-found" *ngIf="!currentItem">Page does not exist.</p>
+
   <ngd-pager-block [currentItemSlag]="currentItem?.slag"></ngd-pager-block>
 </div>
 

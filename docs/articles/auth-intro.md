@@ -36,4 +36,4 @@ You can use the built-in components or create your custom ones.
 
 ## Related Articles
 
-- Auth Module [Installation](#/docs/auth/installation) 
+- Auth Module [Installation](docs/auth/installation) 
