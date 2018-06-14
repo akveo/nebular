@@ -1,5 +1,5 @@
 import { NbJSThemeOptions } from './theme.options';
-import { NbColorHelper } from '@nebular/theme/services/color.helper';
+import { NbColorHelper } from '../color.helper';
 
 const palette = {
   primary: '#73a1ff',

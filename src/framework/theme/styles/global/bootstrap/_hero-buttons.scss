@@ -33,6 +33,7 @@
 @mixin btn-hero-primary() {
   @include btn-hero-primary-gradient();
   @include btn-hero-primary-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-primary-focus();
   @include btn-hero-primary-hover();
@@ -46,6 +47,7 @@
 @mixin btn-hero-success() {
   @include btn-hero-success-gradient();
   @include btn-hero-success-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-success-focus();
   @include btn-hero-success-hover();
@@ -59,6 +61,7 @@
 @mixin btn-hero-warning() {
   @include btn-hero-warning-gradient();
   @include btn-hero-warning-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-warning-focus();
   @include btn-hero-warning-hover();
@@ -72,6 +75,7 @@
 @mixin btn-hero-info() {
   @include btn-hero-info-gradient();
   @include btn-hero-info-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-info-focus();
   @include btn-hero-info-hover();
@@ -85,6 +89,7 @@
 @mixin btn-hero-danger() {
   @include btn-hero-danger-gradient();
   @include btn-hero-danger-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-danger-focus();
   @include btn-hero-danger-hover();
@@ -99,6 +104,7 @@
   color: nb-theme(btn-outline-fg);
   @include btn-hero-secondary-bg();
   @include btn-hero-secondary-bevel-glow-shadow();
+  @include btn-hero-border-radius();
   @include btn-hero-text();
   @include btn-hero-secondary-focus();
   @include btn-hero-secondary-hover();
@@ -293,6 +299,10 @@
     box-shadow: none;
     border-color: transparent;
   }
+}
+
+@mixin btn-hero-border-radius() {
+  border-radius: nb-theme(btn-hero-border-radius);
 }
 // End help mixins
 

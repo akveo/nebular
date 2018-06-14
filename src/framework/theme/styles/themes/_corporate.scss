@@ -21,6 +21,10 @@ $theme: (
 
   separator: #cdd5dc,
 
+  radius: 0.17rem,
+
+  scrollbar-bg: #e3e9ee,
+
   color-primary: #73a1ff,
   color-success: #5dcfe3,
   color-info: #ba7fec,
@@ -30,10 +34,12 @@ $theme: (
   btn-secondary-bg: #edf2f5,
   btn-secondary-border: #edf2f5,
 
-  actions-fg: color-fg,
+  actions-fg: #d3dbe5,
   actions-bg: color-bg,
 
   sidebar-bg: #e3e9ee,
+
+  layout-padding: 2.5rem 2.5rem 0.75rem 1.5rem,
 
   menu-font-weight: font-weight-bolder,
   menu-fg: color-fg-text,
@@ -55,6 +61,8 @@ $theme: (
   menu-submenu-item-container-padding: 0 1.25rem,
   menu-submenu-padding: 0.5rem,
 
+  btn-border-radius: btn-semi-round-border-radius,
+
   btn-hero-degree: 0deg,
   btn-hero-primary-degree: btn-hero-degree,
   btn-hero-success-degree: btn-hero-degree,
@@ -69,16 +77,26 @@ $theme: (
   btn-hero-info-glow-size: btn-hero-glow-size,
   btn-hero-danger-glow-size: btn-hero-glow-size,
   btn-hero-secondary-glow-size: 0 0 0 0,
+  btn-hero-border-radius: btn-border-radius,
+
+  card-shadow: none,
+  card-border-width: 1px,
+  card-border-color: #e7ecef,
+  card-header-border-width: 0,
 
   menu-item-separator: separator,
 
-  actions-separator: color-fg,
+  actions-separator: #f1f4f5,
 
   tabs-selected: color-primary,
+  tabs-separator: #ebecee,
 
   smart-table-paging-bg-active: color-primary,
 
   route-tabs-selected: color-primary,
+
+  footer-shadow: none,
+  footer-separator: #e7ecef,
 );
 
 // register the theme
