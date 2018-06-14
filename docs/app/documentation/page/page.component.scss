@@ -22,6 +22,11 @@
     min-width: 0;
 
     /deep/ nb-card {
+
+      nb-card-body {
+        padding: 2rem 1rem;
+      }
+
       h1, h2, h3, h4, h5, h6 {
         line-height: 1.25;
         margin-bottom: 1.25rem;
@@ -170,9 +175,6 @@
   .horizontal-nav {
     margin-top: 1rem;
 
-    nb-card-header {
-      padding-bottom: 2rem;
-    }
     nb-card-body {
       background-color: nb-theme(layout-bg);
       padding: 0;
@@ -181,6 +183,12 @@
   }
   .settings-column {
     display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    .middle-column /deep/ nb-card nb-card-body {
+      padding: 2rem 3rem 2rem 2rem;
+    }
   }
 
   @include media-breakpoint-up(lg) {
