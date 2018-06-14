@@ -465,6 +465,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'NbOAuth2AuthStrategy',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbOAuth2AuthStrategy',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbDummyAuthStrategy',
         children: [
           {
