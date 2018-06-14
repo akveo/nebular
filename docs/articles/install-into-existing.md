@@ -67,7 +67,7 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
   <div class="note-title">Advanced Theme System configuration</div>
   <div class="note-body">
     In this article we describe the very basic styles installation. If you need more advanced features, like theme variables management, 
-    or even multiple themes switching - check out <a href="docs/guides/enable-theme-system">Enabling Theme System</a> article.
+    or even multiple themes switching - check out [Enabling Theme System](docs/guides/enable-theme-system) article.
   </div>
 </div>
 <hr>
