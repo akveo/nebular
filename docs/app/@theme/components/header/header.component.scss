@@ -101,10 +101,6 @@
   @include media-breakpoint-up(is) {
     .section {
       padding: 0.875rem 1.125rem;
-
-      &.right {
-        margin-left: 1.875rem;
-      }
     }
   }
 
