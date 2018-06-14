@@ -12,4 +12,4 @@ More details on how to setup your web-server to better serve the application can
 
 ## Related Articles
 
-- [Backend configuration](#/docs/guides/backend-integration)
+- [Backend configuration](docs/guides/backend-integration)

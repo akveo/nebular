@@ -132,5 +132,5 @@ Easy as that! Hope you found it useful.
 
 ## Related Articles
 
-- [NbAuthService](#/docs/auth/nbauthservice)
-- [NbTokenService](#/docs/auth/nbtokenservice)
+- [NbAuthService](docs/auth/nbauthservice)
+- [NbTokenService](docs/auth/nbtokenservice)

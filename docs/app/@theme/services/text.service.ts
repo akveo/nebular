@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import * as marked from 'marked';
 
 import { NgdHighlightService } from './highlight.service';
@@ -10,7 +11,7 @@ export class NgdTextService {
   private readonly TITLE_MASK = '^#{1,6}[^#]?(.+)\n';
   private readonly STRIP_HTML = '<\\/?[^>]+(>|$)';
 
-  constructor(private highlight: NgdHighlightService) {
+  constructor(private highlight: NgdHighlightService, private location: Location) {
   }
 
   mdToSectionsHTML(markdown: string) {
@@ -31,9 +32,10 @@ export class NgdTextService {
   mdToHTML(markdown: string) {
     return marked
       .setOptions({
+        baseUrl: this.location.prepareExternalUrl(''),
         langPrefix: 'hljs ',
         highlight: (code) => this.highlight.highlight(code),
-      })
+      } as any)
       .parse(markdown.trim());
   }
 

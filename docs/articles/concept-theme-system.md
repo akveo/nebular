@@ -71,12 +71,12 @@ As you can see, you have 8 variables for a pretty simple component and from the 
 That means that if you want to create a new theme with a united look & feel of the components - in most cased you would need to change around 10 generic variables, such as `color-bg`, `shadow`, etc 
 to change the UI completely.
 
-List of component style variables is specified in the component documentation, for example [styles for header component](#/docs/components/layout/theme#nblayoutheadercomponent).
+List of component style variables is specified in the component documentation, for example [styles for header component](docs/components/layout/theme#nblayoutheadercomponent).
 <hr>
 
 ## Variables Usage
 
-Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](#/docs/guides/enabling-theme-system) is call `nb-theme(var-name)` function:
+Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](docs/guides/enabling-theme-system) is call `nb-theme(var-name)` function:
 
 ```scss
 @import '../../../@theme/styles/themes';
@@ -120,6 +120,6 @@ The only requirement for the feature to work is to wrap all of your component st
 
 ## Related Articles
 
-- [Enable Theme System](#/docs/guides/enable-theme-system)
-- [Default Theme variables table](#/docs/themes/default)
-- [Cosmic Theme variables table](#/docs/themes/cosmic)
+- [Enable Theme System](docs/guides/enable-theme-system)
+- [Default Theme variables table](docs/themes/default)
+- [Cosmic Theme variables table](docs/themes/cosmic)

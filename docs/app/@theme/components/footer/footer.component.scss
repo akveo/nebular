@@ -16,7 +16,7 @@
     display: flex;
     margin-right: 0;
     justify-content: center;
-
+    width: 100%;
     &:last-child {
       margin-right: 0;
     }
@@ -75,6 +75,7 @@
     > div {
       justify-content: flex-start;
       margin-right: 2rem;
+      width: auto;
 
       li {
         justify-content: flex-start;
