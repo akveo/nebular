@@ -443,6 +443,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Configuring Google OAuth2',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-oauth2.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
