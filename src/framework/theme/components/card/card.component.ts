@@ -58,14 +58,29 @@ export class NbCardFooterComponent {
 /**
  * Basic content container component.
  *
- * @example While this component can be used alone, it also provides a number
- * of child components for common card sections:
+ * Basic card example:
+ * @stacked-example(Showcase, card/card-showcase.component)
  *
+ * Basic card configuration:
+ *
+ * ```html
+ * <nb-card>
+ *   <nb-card-body>
+ *     Card
+ *   </nb-card-body>
+ * </nb-card>
  * ```
- * <nb-card-header></nb-card-header>
- * <nb-card-body></nb-card-body>
- * <nb-card-footer></nb-card-footer>
- * ```
+ * Card with header and footer:
+ * @stacked-example(With Header & Footer, card/card-full.component)
+ *
+ * Colored cards could be simply configured by providing a `status` property:
+ * @stacked-example(Colored Card, card/card-colors.component)
+ *
+ * It is also possible to assign an `accent` property for a slight card highlight
+ * as well as combine it with `status`:
+ * @stacked-example(Accent Card, card/card-accents.component)
+ *
+ * @additional-example(Multiple Sizes, card/card-sizes.component)
  *
  * @styles
  *

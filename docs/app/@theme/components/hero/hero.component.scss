@@ -1,0 +1,135 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $shadow: 0 12px 34px rgba(0, 60, 183, 0.25);
+  $btn-bg: linear-gradient(90deg, #18f297 0%, #00e6e6 100%);
+  $btn-shadow-hover: 0 18px 34px 0 rgba(0, 60, 183, 0.35);
+  $btn-shadow-active: inset 0 1px 3px 0 rgba(0, 60, 183, 0.5);
+  $get-started-fg: #3381ff;
+  $title-fg: nb-theme(color-fg-heading-light);
+
+  display: flex;
+  flex: 1 0 auto;
+  padding: 0 1rem 10rem;
+
+  .block {
+    flex: 1;
+    padding-top: 4rem;
+    font-size: 0.75rem;
+    max-width: 30em;
+  }
+
+  .right-block {
+    display: none;
+  }
+
+  h1 {
+    font-size: 4em;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-shadow: $shadow;
+  }
+
+  h1,h2,h3 {
+    color: $title-fg;
+  }
+
+  p {
+    font-size: 1.25em;
+    line-height: 2em;
+    padding-right: 2em;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 1.125em;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    background: $btn-bg;
+    padding: 0.8em 1.5em;
+    margin-bottom: 1em;
+    box-shadow: $shadow;
+    text-decoration: none !important;
+    cursor: pointer;
+
+    &.get-started {
+      margin-right: 1em;
+      background: white;
+      color: $get-started-fg;
+    }
+
+    &:hover {
+      box-shadow: $btn-shadow-hover;
+    }
+
+    &:active {
+      box-shadow: $btn-shadow-active;
+    }
+  }
+
+  @include media-breakpoint-up(is) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: 13rem;
+
+    .block {
+      font-size: 0.875rem;
+    }
+
+    h1 {
+      font-size: 6.875em;
+    }
+
+    .btn {
+      padding: 0.85em 3em;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 0;
+
+    .block {
+      font-size: 1rem;
+      margin-right: 2rem;
+      max-width: none;
+    }
+    .right-block {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .shield {
+      background: url('/assets/img/shield@2x.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 26rem;
+      width: 26rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      h3 {
+        font-size: 32px;
+        line-height: 1;
+      }
+      h3:nth-child(2) {
+        font-size: 98px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xxl) {
+    .shield {
+      height: 32.5rem;
+      width: 32rem;
+    }
+  }
+}

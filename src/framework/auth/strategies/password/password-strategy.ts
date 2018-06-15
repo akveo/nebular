@@ -17,15 +17,12 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
 /**
  * The most common authentication provider for email/password strategy.
  *
- *
- * @example
- *
  * Strategy settings. Note, there is no need to copy over the whole object to change the settings you need.
  * Also, this.getOption call won't work outside of the default options declaration
  * (which is inside of the `NbPasswordAuthStrategy` class), so you have to replace it with a custom helper function
  * if you need it.
  *
- * ```
+ * ```ts
  *export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
  *  name: string;
  *  baseEndpoint? = '/api/auth/';
@@ -421,11 +418,5 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       }
       return res;
     });
-  }
-
-  protected getActionEndpoint(action: string): string {
-    const actionEndpoint: string = this.getOption(`${action}.endpoint`);
-    const baseEndpoint: string = this.getOption('baseEndpoint');
-    return baseEndpoint + actionEndpoint;
   }
 }

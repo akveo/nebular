@@ -1,4 +1,4 @@
-## Protecting application based on user authentication
+# Protecting application based on user authentication
 
 Let's imaging we have the following application structure:
 - `/pages/*` - protected area available only for authenticated users
@@ -6,10 +6,12 @@ Let's imaging we have the following application structure:
 
 Angular provides a simple way to protect your routes called [Router Guard](https://angular.io/guide/router#guard-the-admin-feature).
 Here's how we combine it with Nebular Auth to protect `/pages/*` from anonymous users:
+<hr>
 
-1) Create `auth-guard.service.ts` somewhere near your `app-routing.module.ts` like this:
+## Create a guard
+Create `auth-guard.service.ts` somewhere near your `app-routing.module.ts` like this:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
@@ -21,10 +23,12 @@ export class AuthGuard implements CanActivate {
   }
 }
 ```
+<hr>
 
-2) Then, let's import `NbAuthService` and complete the `canActivate` method:
+## Complete canActivate
+Then, let's import `NbAuthService` and complete the `canActivate` method:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
@@ -41,10 +45,12 @@ export class AuthGuard implements CanActivate {
 }
 ```
 *So we just return the isAuthenticated value, so that when it's true - route can be activated, and vise versa when it's not.*
+<hr>
 
-3) Now we need to register the service inside of the `app.module.ts`:
+## Register the service
+Now we need to register the service inside of the `app.module.ts`:
 
-```typescript
+```ts
 import { AuthGuard } from '../auth-guard.service';
 
 @NgModule({
@@ -59,10 +65,12 @@ import { AuthGuard } from '../auth-guard.service';
 
 ```
 
+<hr>
 
-4) Last step - reference the AuthGuard in the `app-routing.module.ts`:
+## Add guard to routes 
+Last step - reference the AuthGuard in the `app-routing.module.ts`:
 
-```typescript
+```ts
 import { AuthGuard } from '../auth-guard.service';
 
 // ...
@@ -86,14 +94,14 @@ const routes: Routes = [
 ```
 
 As the result, it is not possible to access any of the `pages/*` if you are not an authenticated user.
-<hr class="section-end">
+<hr>
 
 ## Redirect non-authenticated to the login page
 
 Additionally, you may want to redirect directly to `auth/login` when the user is accessing a restricted page.
 Let's modify our guard a bit to reflect this logic:
 
-```typescript
+```ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
@@ -120,9 +128,9 @@ export class AuthGuard implements CanActivate {
 *So we just check the the value returened by isAuthenticated and simply redirect to the login page.*
 
 Easy as that! Hope you found it useful.
-<hr class="section-end">
+<hr>
 
-## Where to next
+## Related Articles
 
-- [NbAuthService](#/docs/auth/nbauthservice)
-- [NbTokenService](#/docs/auth/nbtokenservice)
+- [NbAuthService](docs/auth/nbauthservice)
+- [NbTokenService](docs/auth/nbtokenservice)

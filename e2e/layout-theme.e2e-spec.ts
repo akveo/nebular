@@ -9,7 +9,7 @@ import { browser, element, by } from 'protractor';
 describe('nb-layout theme', () => {
 
   beforeEach((done) => {
-    browser.get('#/layout/change-theme').then(() => done());
+    browser.get('#/layout/theme-change-test.component').then(() => done());
   });
 
   it('should render default theme', () => {
@@ -25,7 +25,7 @@ describe('nb-layout theme', () => {
     const cardHeader = element(by.css('nb-card-header'));
 
     const themeDefault = 'nb-theme-default';
-    const themeBlue = 'nb-theme-blue';
+    const themeBlue = 'nb-theme-cosmic';
 
     button.click().then(() => {
       return browser.driver.wait(() => {

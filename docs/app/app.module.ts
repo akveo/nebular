@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {
   NbThemeModule,
@@ -14,76 +15,42 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
+  NbProgressBarModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
-import { NgdHomepageComponent } from './homepage/homepage.component';
-import { DocsService } from './docs/docs.service';
-import { NgdDocsComponent } from './docs/docs.component';
-import { NgdPageComponent } from './docs/page/page.component';
-import { NgdMarkdownComponent } from './docs/page/blocks/ngd-markdown-block.component';
-import { NgdDescriptionBlockComponent } from './docs/page/blocks/basic-blocks/ngd-description-block.component';
-import { NgdExamplesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-examples-block.component';
-import { NgdPropsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-props-block.component';
-import { NgdMethodsBlockComponent } from './docs/page/blocks/basic-blocks/ngd-methods-block.component';
-import { NgdDescriptionDirective } from './docs/utils/ngd-description.directive';
-import { NgdBlockComponent } from './docs/page/blocks/ngd-block.component';
-import { NgdTabbedBlockComponent } from './docs/page/blocks/tabbed-block/ngd-tabbed-block.component';
 
-import { NgdHighlighterComponent } from './docs/utils/code-highlighter.component';
-import { NgdHeaderComponent } from './components/header/ngd-header.component';
-import { NgdFooterComponent } from './components/footer/ngd-footer.component';
-import { NgdStylesBlockComponent } from './docs/page/blocks/basic-blocks/ngd-styles-block.component';
-import { NgdComponentBlockComponent } from './docs/page/blocks/ngd-component-block.component';
-import { NgdFragmentDirective } from './docs/utils/ngd-fragment.directive';
-import { NgdThemeComponent } from './docs/page/blocks/ngd-theme-block.component';
-import { NgdSassPropValueDirective } from './docs/utils/ngd-color-swatch.directive';
-import { SwiperModule } from 'angular2-useful-swiper';
-import { Analytics } from './docs/utils/analytics.service';
-import { BlockHelperService } from './docs/utils/block-helper.service';
+
+import { structure  } from '../structure';
+const docs = require('../output.json');
+
+export const STRUCTURE = new InjectionToken<any>('Docs Structure');
+export const DOCS = new InjectionToken<any>('Docs Structure');
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    NbThemeModule,
+    HttpClientModule,
     NbSidebarModule,
     NbCardModule,
-    SwiperModule,
     NbLayoutModule,
     NbTabsetModule,
+    NbCheckboxModule,
+    NbProgressBarModule,
     NbMenuModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'docs' }),
+    NbThemeModule.forRoot({ name: '' }),
     NbSidebarModule.forRoot(),
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: false }),
   ],
   declarations: [
     NgdAppComponent,
-    NgdHomepageComponent,
-    NgdDocsComponent,
-    NgdPageComponent,
-    NgdMarkdownComponent,
-    NgdDescriptionBlockComponent,
-    NgdExamplesBlockComponent,
-    NgdPropsBlockComponent,
-    NgdMethodsBlockComponent,
-    NgdDescriptionDirective,
-    NgdHighlighterComponent,
-    NgdHeaderComponent,
-    NgdFooterComponent,
-    NgdStylesBlockComponent,
-    NgdComponentBlockComponent,
-    NgdFragmentDirective,
-    NgdThemeComponent,
-    NgdBlockComponent,
-    NgdTabbedBlockComponent,
-    NgdSassPropValueDirective,
   ],
   providers: [
-    BlockHelperService,
-    DocsService,
-    Analytics,
     Title,
+    { provide: STRUCTURE, useValue: structure },
+    { provide: DOCS, useValue: docs },
   ],
   entryComponents: [
   ],

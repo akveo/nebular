@@ -21,7 +21,7 @@ describe('nb-search', () => {
 
 
   beforeEach((done) => {
-    browser.get('#/checkbox').then(() => done());
+    browser.get('#/checkbox/checkbox-test.component').then(() => done());
   });
 
   it('should apply check on click', () => {

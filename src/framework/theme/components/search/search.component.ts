@@ -142,6 +142,21 @@ export class NbSearchFieldComponent {
 /**
  * Beautiful full-page search control.
  *
+ * @stacked-example(Showcase, search/search-showcase.component)
+ *
+ * Basic setup:
+ *
+ * ```ts
+ *  <nb-search type="rotate-layout"></nb-search>
+ * ```
+ *
+ * Several animation types are available:
+ * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
+ *
+ * It is also possible to handle search event using `NbSearchService`:
+ *
+ * @stacked-example(Search Event, search/search-event.component)
+ *
  * @styles
  *
  * search-btn-open-fg:

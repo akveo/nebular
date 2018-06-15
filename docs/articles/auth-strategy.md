@@ -1,4 +1,4 @@
-## A Strategy
+# Strategy
 
 In Nebular terms `Auth Strategy` is a class containing authentication logic specific for some authentication flow (email/password, OAuth2, etc). 
 It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
@@ -8,11 +8,11 @@ Currently, there are two Auth Strategies available out of the box:
   - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
   
 Each Strategy has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
-<hr class="section-end">
+<hr>
   
-## Configuration
+## Configure a strategy
 
-As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](#/docs/auth/NbPasswordAuthStrategy) if you need any custom behaviour.
+As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/NbPasswordAuthStrategy) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -35,8 +35,11 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ```
 `email` here is an alias we assign to the strategy, so that we can mention it later on dynamically. This also allows us to configure multiple strategies with various configurations in one app.
+<hr>
 
-Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](#/docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+## Setup API configuration
+
+Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 
@@ -135,9 +138,9 @@ Finally, let's presume that unlike in the default strategy settings, our API acc
 </div>
 
 Great! With these simple steps, you should have the authentication layer correctly configured against your API back-end.
-<hr class="section-end">
+<hr>
 
-## Where to next
+## Related Articles
 
-- Adjusting [Auth Components UI](#/docs/auth/configuring-ui)
-- Receiving [user token after authentication](#/docs/auth/getting-user-token)
+- Adjusting [Auth Components UI](docs/auth/configuring-ui)
+- Receiving [user token after authentication](docs/auth/getting-user-token)

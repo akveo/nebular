@@ -1,0 +1,51 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $shadow: 0 6px 34px 0 rgba(230, 234, 240, 0.6);
+  $shadow-hover: 0 16px 40px 0 rgba(230, 234, 240, 0.97);
+  $text-fg: nb-theme(color-fg-text);
+  $title-fg: nb-theme(color-fg-heading);
+
+  border-radius: 7px;
+  background-color: #ffffff;
+  box-shadow: $shadow;
+  display: flex;
+  padding: 3rem 1rem 3.625rem;
+  flex-grow: 1;
+  width: 100%;
+  margin: 1.25rem;
+  flex-direction: column;
+  cursor: pointer;
+  max-width: 30rem;
+  transition: transform 0.25s ease;
+
+  &:hover {
+    box-shadow: $shadow-hover;
+    transform: translateY(-1rem);
+  }
+
+  h2 {
+    color: #546d8d;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.8125rem;
+    text-align: center;
+  }
+
+  p {
+    color: $text-fg;
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+    text-align: center;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: calc(50% - 2.5rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: calc(33% - 2.5rem);
+  }
+}
+

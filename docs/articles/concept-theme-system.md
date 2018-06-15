@@ -1,11 +1,13 @@
+# Nebular Theme System
+
 Nebular Theme System - is a set of rules we put into how SCSS files and variables are organized to achieve the following goals:
 
 - ability to flexibly change looks & feel of the application by managing variables, without changing SCSS itself;
 - ability to switch between visual themes in a runtime without reloading the page;
 - support of CSS-variables (implemented partially).
-<hr class="section-end">
+<hr>
 
-### Theme Map
+## Theme Map
 
 Each theme is represented as an SCSS map with a list of key-value pairs:
 
@@ -44,12 +46,11 @@ $theme: (
   font-secondary: font-main,
 ```
 Here `font-secondary` inherits its value from `font-main`.
+<hr>
 
-<hr class="section-end">
+## Component Variables
 
-### Component Variables
-
-Then, for each component of the Nebular UI Kit, there is a list of variables you can change.
+Then, for each component of the Nebular Components, there is a list of variables you can change.
 For example - header component variables:
 
 ```scss
@@ -70,12 +71,12 @@ As you can see, you have 8 variables for a pretty simple component and from the 
 That means that if you want to create a new theme with a united look & feel of the components - in most cased you would need to change around 10 generic variables, such as `color-bg`, `shadow`, etc 
 to change the UI completely.
 
-List of component style variables is specified in the component documentation, for example [styles for header component](#/docs/components/layout#NbLayoutHeaderComponentStyles).
-<hr class="section-end">
+List of component style variables is specified in the component documentation, for example [styles for header component](docs/components/layout/theme#nblayoutheadercomponent).
+<hr>
 
-### Variables Usage
+## Variables Usage
 
-Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](#/docs/guides/enabling-theme-system) is call `nb-theme(var-name)` function:
+Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](docs/guides/enabling-theme-system) is call `nb-theme(var-name)` function:
 
 ```scss
 @import '../../../@theme/styles/themes';
@@ -86,18 +87,18 @@ Now, if you want to use the variables in your custom style files, all you need t
 }
 ```
 Depending of the currently enabled theme and the way `card-bg` inherited in your theme - you will get the right color.
-<hr class="section-end">
+<hr>
 
-### Built-in themes
+## Built-in themes
 
 Currently, there are 2 built-in themes: 
 - `default` - clean white business theme.
 - `cosmic` - dark theme.
 
 Themes can also be inherited from each other, `cosmic`, for instance, is inherited from the `default` theme.
-<hr class="section-end">
+<hr>
 
-### Magic of multiple themes with hot-reload
+## Magic of multiple themes with hot-reload
 
 As you can see from the [ngx-admin demo](http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=doc_page), you can switch themes in the runtime without reloading the page.
 That is useful when you have multiple visual themes per user role or want to provide your user with such configuration so that the user can decide which theme works best for him.
@@ -115,9 +116,10 @@ The only requirement for the feature to work is to wrap all of your component st
   }
 }
 ```
+<hr>
 
-## Next
+## Related Articles
 
-- [Enable Theme System](#/docs/guides/enabling-theme-system).
-- [Default Theme variables table](#/docs/themes/default).
-- [Cosmic Theme variables table](#/docs/themes/cosmic).
+- [Enable Theme System](docs/guides/enable-theme-system)
+- [Default Theme variables table](docs/themes/default)
+- [Cosmic Theme variables table](docs/themes/cosmic)

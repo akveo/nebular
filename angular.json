@@ -27,8 +27,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -81,8 +79,6 @@
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -113,8 +109,7 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "playground:serve"
+            "protractorConfig": "./protractor.conf.js"
           }
         },
         "lint": {
@@ -152,8 +147,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -206,8 +199,6 @@
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
@@ -267,29 +258,20 @@
             "polyfills": "docs/polyfills.ts",
             "assets": [
               "docs/assets",
+              "docs/404.html",
               "docs/favicon.ico",
               "docs/favicon.png",
               "docs/google46533d2e7a851062.html"
             ],
             "styles": [
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
-              "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/ionicons/scss/ionicons.scss",
-              "node_modules/socicon/css/socicon.css",
-              "node_modules/swiper/dist/css/swiper.css",
-              "node_modules/prismjs/themes/prism.css",
-              "docs/styles.scss"
+              "node_modules/bootstrap/scss/bootstrap-reboot.scss",
+              "node_modules/docsearch.js/dist/cdn/docsearch.min.css",
+              "node_modules/highlight.js/styles/dracula.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-jsx.js",
-              "node_modules/prismjs/components/prism-bash.js",
-              "node_modules/prismjs/components/prism-json.js",
-              "node_modules/prismjs/components/prism-scss.js",
-              "node_modules/prismjs/components/prism-typescript.js",
-              "node_modules/swiper/dist/js/swiper.js"
+              "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
             ]
           },
           "configurations": {
@@ -337,24 +319,12 @@
             "polyfills": "docs/polyfills.ts",
             "tsConfig": "docs/tsconfig.spec.json",
             "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-jsx.js",
-              "node_modules/prismjs/components/prism-bash.js",
-              "node_modules/prismjs/components/prism-json.js",
-              "node_modules/prismjs/components/prism-scss.js",
-              "node_modules/prismjs/components/prism-typescript.js",
-              "node_modules/swiper/dist/js/swiper.js"
             ],
             "styles": [
-              "node_modules/typeface-exo/index.css",
-              "node_modules/open-sans-fontface/open-sans.css",
-              "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/ionicons/scss/ionicons.scss",
-              "node_modules/socicon/css/socicon.css",
-              "node_modules/swiper/dist/css/swiper.css",
-              "node_modules/prismjs/themes/prism.css",
-              "docs/styles.scss"
+              "node_modules/bootstrap/scss/bootstrap-reboot.scss",
+              "node_modules/highlight.js/styles/dracula.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "docs/app/@theme/styles/styles.scss"
             ],
             "assets": [
               "docs/assets",
