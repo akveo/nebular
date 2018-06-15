@@ -4,7 +4,7 @@ export const messages = [
     reply: false,
     date: new Date(),
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: 'https://i.gifer.com/no.gif',
     },
   },
@@ -13,7 +13,7 @@ export const messages = [
     reply: true,
     date: new Date(),
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: 'https://i.gifer.com/no.gif',
     },
   },
@@ -22,7 +22,7 @@ export const messages = [
     reply: false,
     date: new Date(),
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: '',
     },
   },
@@ -39,7 +39,7 @@ export const messages = [
       },
     ],
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: '',
     },
   },
@@ -50,7 +50,7 @@ export const messages = [
     type: 'quote',
     quote: 'Hello, how are you? This should be a very long message so that we can test how it fit into the screen.',
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: '',
     },
   },
@@ -66,7 +66,7 @@ export const messages = [
       },
     ],
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: '',
     },
   },
@@ -78,7 +78,7 @@ export const messages = [
     latitude: 40.714728,
     longitude: -73.998672,
     user: {
-      name: 'Dmitry Nehaychik',
+      name: 'John Doe',
       avatar: '',
     },
   },

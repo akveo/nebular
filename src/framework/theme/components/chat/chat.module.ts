@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
@@ -15,6 +15,7 @@ import { NbChatMessageTextComponent } from './chat-message-text.component';
 import { NbChatMessageFileComponent } from './chat-message-file.component';
 import { NbChatMessageQuoteComponent } from './chat-message-quote.component';
 import { NbChatMessageMapComponent } from './chat-message-map.component';
+import { NbChatOptions } from './chat.options';
 
 const NB_CHAT_COMPONENTS = [
   NbChatComponent,
@@ -38,4 +39,22 @@ const NB_CHAT_COMPONENTS = [
   ],
 })
 export class NbChatModule {
+
+  static forRoot(options?: NbChatOptions) {
+    return <ModuleWithProviders> {
+      ngModule: NbChatModule,
+      providers: [
+        { provide: NbChatOptions, useValue: options },
+      ],
+    };
+  }
+
+  static forChild(options?: NbChatOptions) {
+    return <ModuleWithProviders> {
+      ngModule: NbChatModule,
+      providers: [
+        { provide: NbChatOptions, useValue: options },
+      ],
+    };
+  }
 }

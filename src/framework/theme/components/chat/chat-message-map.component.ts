@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NbChatOptions } from './chat.options';
 
 /**
  * Chat message component.
@@ -54,9 +55,15 @@ export class NbChatMessageMapComponent {
   get file() {
     return {
       // tslint:disable-next-line
-      url: `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400`,
+      url: `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400&key=${this.mapKey}`,
       type: 'image/png',
       icon: 'nb-location',
     };
+  }
+
+  mapKey: string;
+
+  constructor(options: NbChatOptions) {
+    this.mapKey = options.messageGoogleMapKey;
   }
 }

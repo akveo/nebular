@@ -82,6 +82,7 @@
         p {
           word-wrap: break-word;
           word-break: break-all;
+          max-width: 100%;
           margin-bottom: 0;
         }
 
@@ -199,7 +200,7 @@
 
         nb-chat-message-text {
           align-items: flex-end;
-          p {
+          .sender {
             @include nb-ltr(text-align, right);
             @include nb-rtl(text-align, left);
           }
@@ -247,6 +248,10 @@
           @include nb-rtl(border-bottom-left-radius, 0);
           @include nb-rtl(border-top-left-radius, 0);
         }
+
+        &::placeholder {
+          color: nb-theme(chat-form-placeholder-fg);
+        }
       }
 
       button.btn {
@@ -268,6 +273,9 @@
       &.file-over input {
         border: 1px dashed nb-theme(chat-form-active-border);
         box-shadow: 0 0 0 4px nb-theme(chat-form-bg);
+        &::placeholder {
+          color: nb-theme(chat-form-fg);
+        }
       }
 
       .dropped-files {

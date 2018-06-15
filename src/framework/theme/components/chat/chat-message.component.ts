@@ -19,6 +19,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
  * - quote - quotes a message with specific quote styles
  * - map - shows a google map picture by provided [latitude] and [longitude] properties
  *
+ * @stacked-example('Available Types', chat/chat-message-types-showcase.component)
+ *
  * Message with attached files:
  * ```html
  * <nb-chat-message
@@ -54,7 +56,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <div class="avatar" [style.background-image]="avatarStyle">
+    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!replyValue">
       <ng-container *ngIf="!avatarStyle">
         {{ getInitials() }}
       </ng-container>

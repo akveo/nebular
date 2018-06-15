@@ -3,9 +3,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-chat-conversation-showcase',
   styles: [`
+    ::ng-deep nb-layout-column {
+      display: flex;
+      justify-content: center;
+    }
     :host {
       display: flex;
-      flex-direction: row;
     }
     nb-chat {
       width: 300px;
