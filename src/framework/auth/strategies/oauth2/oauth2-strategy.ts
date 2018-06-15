@@ -13,23 +13,20 @@ import { NB_WINDOW } from '@nebular/theme';
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthRefreshableToken, NbAuthResult } from '../../services/';
 import { NbOAuth2AuthStrategyOptions, NbOAuth2ResponseType, auth2StrategyOptions } from './oauth2-strategy.options';
+import { NbAuthStrategyClass } from '../../auth.options';
 
 
 /**
  * OAuth2 authentication strategy.
  *
- * @example
- *
  * Strategy settings:
  *
- * ```
- *
+ * ```ts
  * export enum NbOAuth2ResponseType {
  *   CODE = 'code',
  *   TOKEN = 'token',
  * }
  *
- * // TODO: password, client_credentials
  * export enum NbOAuth2GrantType {
  *   AUTHORIZATION_CODE = 'authorization_code',
  *   REFRESH_TOKEN = 'refresh_token',
@@ -82,13 +79,17 @@ import { NbOAuth2AuthStrategyOptions, NbOAuth2ResponseType, auth2StrategyOptions
 @Injectable()
 export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
+  static setup(options: NbOAuth2AuthStrategyOptions): [NbAuthStrategyClass, NbOAuth2AuthStrategyOptions] {
+    return [NbOAuth2AuthStrategy, options];
+  }
+
   get responseType() {
     return this.getOption('authorize.responseType');
   }
 
   protected redirectResultHandlers = {
     [NbOAuth2ResponseType.CODE]: () => {
-      return this.route.queryParams.pipe(
+      return observableOf(this.route.snapshot.queryParams).pipe(
         switchMap((params: any) => {
           if (params.code) {
             return this.requestToken(params.code)
@@ -106,7 +107,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       );
     },
     [NbOAuth2ResponseType.TOKEN]: () => {
-      return this.route.params.pipe(
+      return observableOf(this.route.snapshot.fragment).pipe(
+        map(fragment => this.parseHashAsQueryParams(fragment)),
         map((params: any) => {
           if (!params.error) {
             return new NbAuthResult(
@@ -132,12 +134,13 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
   protected redirectResults = {
     [NbOAuth2ResponseType.CODE]: () => {
-      return this.route.queryParams.pipe(
+      return observableOf(this.route.snapshot.queryParams).pipe(
         map((params: any) => !!(params && (params.code || params.error))),
       );
     },
     [NbOAuth2ResponseType.TOKEN]: () => {
-      return this.route.params.pipe(
+      return observableOf(this.route.snapshot.fragment).pipe(
+        map(fragment => this.parseHashAsQueryParams(fragment)),
         map((params: any) => !!(params && (params.access_token || params.error))),
       );
     },
@@ -157,7 +160,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
         switchMap((result: boolean) => {
           if (!result) {
             this.authorizeRedirect();
-            return observableOf(null);
+            return observableOf(new NbAuthResult(true));
           }
           return this.getAuthorizationResult();
         }),
@@ -297,6 +300,14 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return `${endpoint}?${query}`;
   }
 
+  protected parseHashAsQueryParams(hash: string): { [key: string]: string } {
+    return hash ? hash.split('&').reduce((acc: any, part: string) => {
+      const item = part.split('=');
+      acc[item[0]] = decodeURIComponent(item[1]);
+      return acc;
+    }, {}) : {};
+  }
+
   register(data?: any): Observable<NbAuthResult> {
     throw new Error('`register` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
   }
@@ -310,6 +321,6 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   logout(): Observable<NbAuthResult> {
-    throw new Error('`logout` is not supported by `NbOAuth2AuthStrategy`, use `authenticate`.');
+    return observableOf(new NbAuthResult(true));
   }
 }

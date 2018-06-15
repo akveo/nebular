@@ -9,12 +9,16 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
-import { of as observableOf } from 'rxjs';
 
 import { NbOAuth2AuthStrategy } from './oauth2-strategy';
 import { NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
 import { NbAuthResult, nbAuthCreateToken, NbAuthOAuth2Token } from '../../services';
 
+function createURL(params: any) {
+  return Object.keys(params).map((k) => {
+    return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
+  }).join('&');
+}
 
 describe('oauth2-auth-strategy', () => {
 
@@ -44,7 +48,7 @@ describe('oauth2-auth-strategy', () => {
 
   beforeEach(() => {
     windowMock = { location: { href: '' } };
-    routeMock = { params: observableOf({}), queryParams: observableOf({}) };
+    routeMock = { snapshot: { params: {}, queryParams: {}, fragment: '' } };
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
@@ -93,7 +97,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle success redirect and sends correct token request', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
+      routeMock.snapshot.queryParams = { code: 'code' };
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -117,7 +121,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle error redirect back', (done: DoneFn) => {
-      routeMock.queryParams = observableOf(tokenErrorResponse);
+      routeMock.snapshot.queryParams = tokenErrorResponse;
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -134,7 +138,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle error token response', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
+      routeMock.snapshot.queryParams = {code: 'code'};
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -226,7 +230,7 @@ describe('oauth2-auth-strategy', () => {
     it('handle success redirect back with token', (done: DoneFn) => {
       const token = { access_token: 'token', token_type: 'bearer' };
 
-      routeMock.params = observableOf(token);
+      routeMock.snapshot.fragment = createURL(token);
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -242,7 +246,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle error redirect back', (done: DoneFn) => {
-      routeMock.params = observableOf(tokenErrorResponse);
+      routeMock.snapshot.fragment = createURL(tokenErrorResponse);
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -307,7 +311,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle success redirect and sends correct token request', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
+      routeMock.snapshot.queryParams = { code: 'code' };
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -331,7 +335,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle success redirect back with token request', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
+      routeMock.snapshot.queryParams = { code: 'code' };
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -350,7 +354,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle error redirect back', (done: DoneFn) => {
-      routeMock.queryParams = observableOf(tokenErrorResponse);
+      routeMock.snapshot.queryParams = tokenErrorResponse;
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -389,7 +393,7 @@ describe('oauth2-auth-strategy', () => {
     });
 
     it('handle error token response', (done: DoneFn) => {
-      routeMock.queryParams = observableOf({code: 'code'});
+      routeMock.snapshot.queryParams = { code: 'code' };
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
