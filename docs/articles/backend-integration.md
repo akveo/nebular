@@ -12,7 +12,7 @@ The solution we suggest is to use proxy for your API server. In this case you ca
 
 ## angular-cli/webpack-dev-server setup
 
-There's not so much needs to be done to proxy your api using angular-cli. You can read detailed documentation in <a href="https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md" target="_blank">their docs</a>.
+There's not so much needs to be done to proxy your api using angular-cli. You can read detailed documentation in <a href="https://github.com/angular/angular-cli/blob/masterdocs/documentation/stories/proxy.md" target="_blank">their docs</a>.
 But the most important topics are:
 
 You should create `proxy.conf.json` file in your application root. The file should contain something like below:

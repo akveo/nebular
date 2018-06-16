@@ -17,6 +17,11 @@
   $table-border: 1px solid #f1f2f3;
   $table-stripe-bg: #f5f6f7;
 
+  .not-found {
+    color: $heading-light;
+    font-size: 1.25rem;
+  }
+
   .middle-column {
     flex: 3;
     min-width: 0;
@@ -175,9 +180,6 @@
   .horizontal-nav {
     margin-top: 1rem;
 
-    nb-card-header {
-      padding-bottom: 2rem;
-    }
     nb-card-body {
       background-color: nb-theme(layout-bg);
       padding: 0;

@@ -24,6 +24,7 @@ You can use the built-in components or create your custom ones.
 ## Auth Strategies
   - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
   - `NbPasswordAuthStrategy` - the most common email/login/password authentication strategy.
+  - `NbOAuth2AuthStrategy` - the most popular authentication framework that enables applications to obtain limited access to user accounts on an HTTP service.
 <hr>
     
 ## Other helper services
@@ -36,4 +37,4 @@ You can use the built-in components or create your custom ones.
 
 ## Related Articles
 
-- Auth Module [Installation](#/docs/auth/installation) 
+- Auth Module [Installation](docs/auth/installation) 

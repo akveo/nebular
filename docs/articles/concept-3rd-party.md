@@ -33,5 +33,5 @@ Or that's how we described variables for the `angular2-toaster` module:
  
 ## Related Articles
 
-- [Enable Theme System](#/docs/guides/enable-theme-system)
-- [Theme System Concepts](#/docs/guides/theme-system)
+- [Enable Theme System](docs/guides/enable-theme-system)
+- [Theme System Concepts](docs/guides/theme-system)

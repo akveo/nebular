@@ -3,7 +3,7 @@
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/guides/install-based-on-starter-kit) then you already have Security module in place.
+    If you use our [ngx-admin starter kit](docs/guides/install-based-on-starter-kit) then you already have Security module in place.
   </div>
 </div>
 
@@ -38,4 +38,4 @@ Great, at this stage we have installed Nebular Security and ready to configure i
 
 ## Related Articles
 
-- Roles & Permissions [Configuration & Usage](#/docs/security/acl-configuration--usage)
+- Roles & Permissions [Configuration & Usage](docs/security/acl-configuration--usage)

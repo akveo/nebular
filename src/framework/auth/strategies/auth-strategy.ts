@@ -20,7 +20,7 @@ export abstract class NbAuthStrategy {
     return getDeepFromObject(this.options, key, null);
   }
 
-  createToken(value: string): NbAuthToken {
+  createToken(value: any): NbAuthToken {
     return nbAuthCreateToken(this.getOption('token.class'), value);
   }
 
@@ -38,7 +38,7 @@ export abstract class NbAuthStrategy {
 
   abstract logout(): Observable<NbAuthResult>;
 
-  abstract refreshToken(): Observable<NbAuthResult>;
+  abstract refreshToken(data?: any): Observable<NbAuthResult>;
 
   protected createFailResponse(data?: any): HttpResponse<Object> {
     return new HttpResponse<Object>({ body: {}, status: 401 });
@@ -46,5 +46,11 @@ export abstract class NbAuthStrategy {
 
   protected createSuccessResponse(data?: any): HttpResponse<Object> {
     return new HttpResponse<Object>({ body: {}, status: 200 });
+  }
+
+  protected getActionEndpoint(action: string): string {
+    const actionEndpoint: string = this.getOption(`${action}.endpoint`);
+    const baseEndpoint: string = this.getOption('baseEndpoint');
+    return baseEndpoint + actionEndpoint;
   }
 }
