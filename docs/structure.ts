@@ -271,6 +271,15 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Stepper',
+        icon: 'context-menu.svg',
+        source: [
+          'NbStepperComponent',
+          'NbStepComponent',
+        ],
+      },
       // {
       //   type: 'tabs',
       //   name: 'Chips',

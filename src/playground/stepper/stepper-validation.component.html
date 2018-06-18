@@ -1,0 +1,57 @@
+<nb-card>
+  <nb-card-body>
+    <nb-horizontal-stepper #stepper [linear]="true">
+      <nb-step [stepControl]="firstForm">
+        <ng-template nbStepLabel>First step</ng-template>
+        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+          <p class="lorem">
+            Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle,
+            my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up, gravida vizzle, dang.
+          </p>
+          <div class="input-group">
+            <input type="text" placeholder="Enter your name" class="form-control" formControlName="firstCtrl"
+                   [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+          </div>
+          <button class="btn btn-primary" nbStepperNext>next</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="secondForm">
+        <ng-template nbStepLabel>Second step</ng-template>
+        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+          <p class="lorem">
+            Pellentesque we gonna chung tortor.
+            Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
+            Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
+          </p>
+          <div class="input-group">
+            <input type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
+                   [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+          </div>
+          <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          <button class="btn btn-primary" nbStepperNext>next</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm">
+        <ng-template nbStepLabel>Third step</ng-template>
+        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+          <p class="lorem">
+            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+          </p>
+          <div class="input-group">
+            <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                   [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+          </div>
+          <button class="btn btn-primary" nbStepperPrevious>prev</button>
+          <button class="btn btn-primary" nbStepperNext>Confirm</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm" [hidden]="true">
+        <ng-template nbStepLabel>Third step</ng-template>
+        <div class="step-container">
+          <h3>Wizard completed!</h3>
+          <button class="btn btn-primary" (click)="stepper.reset()">Try again</button>
+        </div>
+      </nb-step>
+    </nb-horizontal-stepper>
+  </nb-card-body>
+</nb-card>
