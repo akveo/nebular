@@ -44,7 +44,7 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: '' }),
     NbSidebarModule.forRoot(),
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: false }),
   ],
   declarations: [
     NgdAppComponent,

@@ -26,4 +26,4 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
 
 ## Related Articles
 
-- Security Module [Installation](#/docs/security/installation) 
+- Security Module [Installation](docs/security/installation) 

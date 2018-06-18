@@ -453,6 +453,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Configuring Google OAuth2',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-oauth2.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
@@ -470,6 +481,17 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbPasswordAuthStrategy',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbOAuth2AuthStrategy',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbOAuth2AuthStrategy',
           },
         ],
       },
