@@ -643,6 +643,10 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'oauth2',
+    loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
+  },
+  {
     path: '',
     loadChildren: './auth/auth.module#NbAuthPlaygroundModule',
   },

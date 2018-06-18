@@ -49,8 +49,5 @@ That's why we are on a mission to assemble together the most useful modules and 
 
 This documentation assumes that you are already familiar with JavaScript/TypeScript, Angular, CSS and Bootstrap.
 
-## Looking for ng2-admin?
-It's not gone and still supported! The ng2-admin is still available at <a href="https://github.com/akveo/ng2-admin/tree/ng2-admin" target="_blank">GitHub branch</a>.
-
 ## Have questions?
 Didn't find something here? Look through the <a href="https://github.com/akveo/nebular/issues" target="_blank">issues</a> or simply drop us a line at <a href="mailto:contact@akveo.com">contact@akveo.com</a>.

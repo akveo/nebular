@@ -10,19 +10,26 @@ import {
   NB_AUTH_FALLBACK_TOKEN,
   NbAuthService,
   NbAuthSimpleToken,
+  NbAuthTokenClass,
+  NbAuthTokenParceler,
   NbTokenLocalStorage,
   NbTokenService,
   NbTokenStorage,
-  NbAuthTokenClass,
-  NbAuthTokenParceler,
 } from './services';
-import { NbAuthStrategy, NbAuthStrategyOptions, NbDummyAuthStrategy, NbPasswordAuthStrategy } from './strategies';
+import {
+  NbAuthStrategy,
+  NbAuthStrategyOptions,
+  NbDummyAuthStrategy,
+  NbOAuth2AuthStrategy,
+  NbPasswordAuthStrategy,
+} from './strategies';
 
 import {
   defaultAuthOptions,
   NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
-  NB_AUTH_STRATEGIES, NB_AUTH_TOKENS,
+  NB_AUTH_STRATEGIES,
+  NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
   NbAuthOptions,
   NbAuthStrategyClass,
@@ -111,6 +118,7 @@ export class NbAuthModule {
         NbTokenService,
         NbDummyAuthStrategy,
         NbPasswordAuthStrategy,
+        NbOAuth2AuthStrategy,
       ],
     };
   }
