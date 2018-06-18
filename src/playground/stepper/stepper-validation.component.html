@@ -1,8 +1,7 @@
 <nb-card>
   <nb-card-body>
-    <nb-horizontal-stepper #stepper [linear]="true">
-      <nb-step [stepControl]="firstForm">
-        <ng-template nbStepLabel>First step</ng-template>
+    <nb-stepper #stepper>
+      <nb-step [stepControl]="firstForm" label="First step">
         <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
           <p class="lorem">
             Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle,
@@ -15,8 +14,7 @@
           <button class="btn btn-primary" nbStepperNext>next</button>
         </form>
       </nb-step>
-      <nb-step [stepControl]="secondForm">
-        <ng-template nbStepLabel>Second step</ng-template>
+      <nb-step [stepControl]="secondForm" label="Second step">
         <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
           <p class="lorem">
             Pellentesque we gonna chung tortor.
@@ -31,8 +29,7 @@
           <button class="btn btn-primary" nbStepperNext>next</button>
         </form>
       </nb-step>
-      <nb-step [stepControl]="thirdForm">
-        <ng-template nbStepLabel>Third step</ng-template>
+      <nb-step [stepControl]="thirdForm" label="Third step">
         <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
           <p class="lorem">
             Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
@@ -45,13 +42,12 @@
           <button class="btn btn-primary" nbStepperNext>Confirm</button>
         </form>
       </nb-step>
-      <nb-step [stepControl]="thirdForm" [hidden]="true">
-        <ng-template nbStepLabel>Third step</ng-template>
+      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
         <div class="step-container">
           <h3>Wizard completed!</h3>
           <button class="btn btn-primary" (click)="stepper.reset()">Try again</button>
         </div>
       </nb-step>
-    </nb-horizontal-stepper>
+    </nb-stepper>
   </nb-card-body>
 </nb-card>

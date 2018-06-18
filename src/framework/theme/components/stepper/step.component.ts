@@ -5,23 +5,14 @@ import {
   Input,
   TemplateRef,
   ViewChild,
-  Directive,
-  ContentChild,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
-
-@Directive({
-  selector: '[nbStepLabel]',
-})
-export class NbStepLabelDirective {
-  constructor(public template: TemplateRef<any>) {
-  }
-}
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * Component intended to be used within  the `<nb-stepper>` component.
- * Container for steps
+ * Container for a step
  */
 @Component({
   selector: 'nb-step',
@@ -32,13 +23,6 @@ export class NbStepLabelDirective {
   `,
 })
 export class NbStepComponent {
-
-  /**
-   * Step label directive content
-   *
-   * @type {NbStepLabelDirective}
-   */
-  @ContentChild(NbStepLabelDirective) stepLabel: NbStepLabelDirective;
 
   /**
    * Step content
@@ -57,16 +41,25 @@ export class NbStepComponent {
   /**
    * Step label
    *
-   * @type {string}
+   * @type {string|TemplateRef<any>}
    */
-  @Input() label: string;
+  @Input() label: string|TemplateRef<any>;
 
   /**
    * Whether step will be displayed in wizard
    *
-   * @type {false}
+   * @type {boolean}
    */
   @Input() hidden: false;
+
+  /**
+   * Check that label is a TemplateRef.
+   *
+   * @return boolean
+   * */
+  get isLabelTemplate(): boolean {
+    return this.label instanceof TemplateRef;
+  }
 
   /**
    * Whether step is marked as completed.
@@ -75,30 +68,29 @@ export class NbStepComponent {
    */
   @Input()
   get completed(): boolean {
-    return this._completed == null ? this.isControlValid : this._completed;
+    return this.completedValue || this.isCompleted;
   }
 
   set completed(value: boolean) {
-    this._completed = value;
+    this.completedValue = convertToBoolProperty(value);
   }
 
-  private _completed: boolean | null = null;
+  private completedValue: boolean = false;
 
-  private get isControlValid() {
+  private get isCompleted() {
     return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;
   }
 
   interacted = false;
 
-  constructor(@Inject(forwardRef(() => NbStepperComponent)) private _stepper: NbStepperComponent) {
+  constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
   }
-
 
   /**
    * Mark step as selected
    * */
   select(): void {
-    this._stepper.selected = this;
+    this.stepper.selected = this;
   }
 
   /**
@@ -110,5 +102,4 @@ export class NbStepComponent {
       this.stepControl.reset();
     }
   }
-
 }

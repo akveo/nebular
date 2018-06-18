@@ -22,7 +22,6 @@
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/alert/alert.component.theme';
 @import '../../components/stepper/stepper.component.theme';
-@import '../../components/stepper/step-header/step_header.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -41,7 +40,6 @@
   @include nb-progress-bar-theme();
   @include nb-badge-theme();
   @include nb-popover-theme();
-  @include nb-step-header-theme();
   @include nb-stepper-theme();
   @include nb-context-menu-theme();
   @include nb-alert-theme();

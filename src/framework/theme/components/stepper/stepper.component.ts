@@ -6,50 +6,56 @@
 
 import {
   Component,
-  ContentChildren,
+  ContentChildren, HostBinding,
   Input,
   QueryList,
 } from '@angular/core';
-import {NbStepComponent} from './/step.component';
+import { NbStepComponent } from './step.component';
+import { convertToBoolProperty } from '../helpers';
+
+export enum NbStepperOrientation {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
+}
 
 /**
  * Stepper component
  *
  * @stacked-example(Showcase, stepper/stepper-showcase.component)
  *
- * If step label is string you can pass it as `label` attribute. Otherwise `nbStepLabel` directive should be used:
+ * If step label is string you can pass it as `label` attribute. Otherwise ng-template should be used:
  * ```html
  * // ...
- * <nb-horizontal-stepper>
+ * <nb-stepper orientation="horizontal">
  *   <nb-step label="step number one">
  *       // ... step content here
  *   <nb-step>
- *   <nb-step>
- *       <ng-template nbStepLabel>
+ *   <nb-step label="stepLabel">
+ *       <ng-template #stepLabel>
  *           <div>
  *               step number two
  *           </div>
  *       </ng-template>
  *       // ... step content here
  *   <nb-step>
- * </nb-horizontal-stepper>
+ * </nb-stepper>
  * ```
- * Enable `[linear]="true"` and specify `[stepControl]="form"` and user can navigates only if submit previous step.
+ * Specify `[stepControl]="form"` and user can navigates only if submit previous step's form.
  * ```html
  * // ...
- * <nb-horizontal-stepper [linear]="true">
+ * <nb-stepper  orientation="horizontal">
  *   <nb-step label="step number one" [stepControl]="form">
  *     <form [formGroup]="form">
  *       // ...
  *     </form>
  *   <nb-step>
  *    // ...
- * </nb-horizontal-stepper>
+ * </nb-stepper>
  * ```
  *
  * @stacked-example(Validation, stepper/stepper-validation.component)
  *
- * Stepper component has two layout options. Both `nb-horizontal-stepper` and `nb-vertical-stepper` have the same API.
+ * Stepper component has two layout options - `vertical` & `horizontal`
  * @stacked-example(Vertical, stepper/stepper-vertical.component)
  *
  * @styles
@@ -65,11 +71,22 @@ import {NbStepComponent} from './/step.component';
  */
 @Component({
   selector: 'nb-stepper',
-  template: '<ng-template><ng-content></ng-content></ng-template>',
+  styleUrls: ['./stepper.component.scss'],
+  templateUrl: './stepper.component.html',
 })
 export class NbStepperComponent {
 
-  @ContentChildren(NbStepComponent) _steps: QueryList<NbStepComponent>;
+  @ContentChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
+
+  @HostBinding('class.vertical')
+  get vertical() {
+    return this.orientation === NbStepperOrientation.VERTICAL;
+  }
+
+  @HostBinding('class.horizontal')
+  get horizontal() {
+    return this.orientation === NbStepperOrientation.HORIZONTAL;
+  }
 
   /**
    * Selected step index
@@ -78,23 +95,18 @@ export class NbStepperComponent {
    */
   @Input()
   get selectedIndex() {
-    return this._selectedIndex;
+    return this.index;
   }
 
   set selectedIndex(index: number) {
-    if (this._steps) {
-      if (index < 0 || index > this._steps.length - 1) {
-        throw Error('nbStepperComponent: Cannot assign out-of-bounds value to `selectedIndex`.');
-      }
-      if (this._selectedIndex !== index && this.isStepValid(index)) {
-        this._selectedIndex = index;
+    if (this.steps) {
+      if (this.index !== index && this.isStepValid(index)) {
+        this.index = index;
       }
     } else {
-      this._selectedIndex = index;
+      this.index = index;
     }
   }
-
-  private _selectedIndex = 0;
 
   /**
    * Selected step component
@@ -102,13 +114,19 @@ export class NbStepperComponent {
    * @type {boolean}
    */
   @Input()
-  get selected(): NbStepComponent {
-    return this._steps ? this._steps.toArray()[this.selectedIndex] : undefined;
+  get selected(): NbStepComponent | undefined {
+    return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
 
   set selected(step: NbStepComponent) {
-    this.selectedIndex = this._steps ? this._steps.toArray().indexOf(step) : -1;
+    this.selectedIndex = this.steps ? this.steps.toArray().indexOf(step) : -1;
   }
+
+  /**
+   * Stepper orientation - `horizontal`|`vertical`
+   * @type {string}
+   */
+  @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
 
   /**
    * If true then stepper requires the user to complete previous step before navigate to following steps.
@@ -117,27 +135,28 @@ export class NbStepperComponent {
    */
   @Input()
   get linear(): boolean {
-    return this._linear;
+    return this.linearValue;
   }
 
   set linear(value: boolean) {
-    this._linear = value;
+    this.linearValue = convertToBoolProperty(value);
   }
 
-  private _linear = false;
+  private linearValue = false;
+  private index = 0;
 
   /**
    * Navigate to next step
    * */
   next() {
-    this.selectedIndex = Math.min(this._selectedIndex + 1, this._steps.length - 1);
+    this.selectedIndex = Math.min(this.index + 1, this.steps.length - 1);
   }
 
   /**
    * Navigate to previous step
    * */
   previous() {
-    this.selectedIndex = Math.max(this._selectedIndex - 1, 0);
+    this.selectedIndex = Math.max(this.index - 1, 0);
   }
 
   /**
@@ -145,40 +164,23 @@ export class NbStepperComponent {
    * */
   reset() {
     this.selectedIndex = 0;
-    this._steps.forEach(step => step.reset());
+    this.steps.forEach(step => step.reset());
+  }
+
+  isStepSelected(step: NbStepComponent) {
+    return this.index === this.steps.toArray().indexOf(step);
   }
 
   private isStepValid(index: number): boolean {
-    const steps = this._steps.toArray();
+    const steps = this.steps.toArray();
 
-    steps[this._selectedIndex].interacted = true;
+    steps[this.index].interacted = true;
 
-    if (index >= this._selectedIndex && index > 0) {
-      const currentStep = steps[this._selectedIndex];
+    if (index >= this.index && index > 0) {
+      const currentStep = steps[this.index];
       return currentStep.completed;
     }
 
     return true;
   }
-
-}
-
-@Component({
-  selector: 'nb-vertical-stepper',
-  templateUrl: './stepper-vertical.component.html',
-  styleUrls: ['./stepper.component.scss'],
-  providers: [{provide: NbStepperComponent, useExisting: NbVerticalStepperComponent}],
-})
-export class NbVerticalStepperComponent extends NbStepperComponent {
-
-}
-
-@Component({
-  selector: 'nb-horizontal-stepper',
-  templateUrl: './stepper-horizontal.component.html',
-  styleUrls: ['./stepper.component.scss'],
-  providers: [{provide: NbStepperComponent, useExisting: NbHorizontalStepperComponent}],
-})
-export class NbHorizontalStepperComponent extends NbStepperComponent {
-
 }

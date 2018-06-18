@@ -1,6 +1,4 @@
-.step-container {
-  max-width: 80%;
-  margin: 1rem auto 0;
+:host ::ng-deep nb-stepper .step-content {
   text-align: center;
   .btn {
     cursor: pointer;
@@ -15,8 +13,4 @@
 
 .input-group {
   padding-bottom: 1rem;
-}
-
-input:focus {
-  outline: none;
 }
