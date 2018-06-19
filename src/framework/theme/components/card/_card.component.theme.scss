@@ -6,7 +6,9 @@
 
 @mixin nb-card-header() {
   padding: nb-theme(card-padding);
-  border-bottom: 1px solid nb-theme(card-separator);
+  border-bottom-width: nb-theme(card-header-border-width);
+  border-bottom-style: nb-theme(card-header-border-type);
+  border-bottom-color: nb-theme(card-header-border-color);
   border-top-left-radius: nb-theme(card-border-radius);
   border-top-right-radius: nb-theme(card-border-radius);
   color: nb-theme(card-header-fg-heading);
@@ -30,6 +32,7 @@
     border-radius: nb-theme(card-border-radius);
     box-shadow: nb-theme(card-shadow);
     font-weight: nb-theme(card-font-weight);
+    border: nb-theme(card-border-width) nb-theme(card-border-type) nb-theme(card-border-color);
 
     @include nb-scrollbars(
         nb-theme(scrollbar-fg),
