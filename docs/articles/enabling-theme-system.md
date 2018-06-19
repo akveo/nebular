@@ -3,7 +3,7 @@
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/guides/install-based-on-starter-kit) then you already have the Advanced setup in place.
+    If you use our [ngx-admin starter kit](docs/guides/install-based-on-starter-kit) then you already have the Advanced setup in place.
   </div>
 </div>
 <hr>
@@ -188,6 +188,6 @@ enableDarkTheme() {
 
 ## Related Articles
 
-- [Theme System Concepts](#/docs/guides/theme-system).
-- [Default Theme variables table](#/docs/themes/default).
-- [Cosmic Theme variables table](#/docs/themes/cosmic).
+- [Theme System Concepts](docs/guides/theme-system).
+- [Default Theme variables table](docs/themes/default).
+- [Cosmic Theme variables table](docs/themes/cosmic).

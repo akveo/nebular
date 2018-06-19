@@ -6,6 +6,7 @@
   $settings-width: nb-theme(settings-col-width);
   $settings-margin: nb-theme(settings-col-margin);
   $layout-bg: nb-theme(layout-bg);
+  $color-heading: nb-theme(color-fg-heading-light);
 
   .menu-sidebar {
     background-color: $layout-bg;
@@ -31,6 +32,17 @@
     }
   }
 
+  .collapse-all {
+    position: absolute;
+    right: 1px;
+    top: 0.75rem;
+    font-size: 0.75rem;
+    color: $color-heading;
+    appearance: none;
+    background: none;
+    border: none;
+  }
+
   /deep/ nb-layout .main-container {
     padding-top: 3rem;
 
@@ -48,11 +60,22 @@
 
   /deep/ nb-sidebar nb-menu {
     > ul > li {
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
+      a:hover {
+        font-weight: bold;
+      }
       li {
         font-size: 0.875rem;
         font-weight: normal;
+      }
+    }
+
+    .menu-items .menu-item .menu-item a {
+      &:hover, &.active, &:focus {
+        text-shadow: 0.5px 0 0 currentColor;
+        font-weight: normal;
+        outline: none!important;
       }
     }
   }
@@ -70,10 +93,6 @@
   @include media-breakpoint-up(macpro) {
     /deep/ nb-layout-footer {
       margin-right: $settings-width + $settings-margin;
-
-      ngd-footer .contact {
-        display: flex;
-      }
     }
   }
 }
