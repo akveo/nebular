@@ -11,7 +11,7 @@ import { NgdDocumentationRoutingModule } from './documentation-routing.module';
 import { NgdThemeModule } from '../@theme/theme.module';
 import { NgdPageComponent } from './page/page.component';
 import { NgdDocumentationComponent } from './documentation.component';
-import { NgdMenuService } from './menu.service';
+import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdBlocksModule } from '../blocks/blocks.module';
 
 

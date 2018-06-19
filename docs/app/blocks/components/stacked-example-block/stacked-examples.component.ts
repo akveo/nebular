@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { NgdExampleView } from '../../enum.example-view';
+import { NgdAnalytics } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-stacked-example-block',
@@ -25,7 +26,11 @@ export class NgdStackedExampleComponent {
   @Input() content: any;
   isLive = true;
 
+  constructor(private analytics: NgdAnalytics) {
+  }
+
   changeView(view: NgdExampleView) {
+    this.analytics.trackEvent('change-example-view', view);
     this.isLive = view === NgdExampleView.LIVE;
   }
 }

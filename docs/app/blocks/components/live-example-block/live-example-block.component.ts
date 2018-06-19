@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { Location } from '@angular/common';
 import { takeWhile } from 'rxjs/operators';
-import { NgdIframeCommunicatorService } from '../../../@theme/services';
+import { NgdAnalytics, NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
@@ -67,6 +67,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
 
   constructor(private changeDetection: ChangeDetectorRef,
               private location: Location,
+              private analytics: NgdAnalytics,
               private communicator: NgdIframeCommunicatorService) {
   }
 
@@ -94,6 +95,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   switchTheme(theme: string) {
+    this.analytics.trackEvent('change-theme', theme);
     this.communicator.send({ id: this.content.id, theme }, this.iframeWindow);
   }
 
