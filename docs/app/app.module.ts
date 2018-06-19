@@ -17,14 +17,12 @@ import {
   NbTabsetModule,
   NbProgressBarModule,
   NbCheckboxModule,
-  NbSpinnerModule,
 } from '@nebular/theme';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
 
 import { structure  } from '../structure';
-import { NbSpinnerModule } from '../../src/framework/theme';
 const docs = require('../output.json');
 
 export const STRUCTURE = new InjectionToken<any>('Docs Structure');
@@ -40,7 +38,6 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
     NbLayoutModule,
     NbTabsetModule,
     NbCheckboxModule,
-    NbSpinnerModule,
     NbProgressBarModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: '' }),

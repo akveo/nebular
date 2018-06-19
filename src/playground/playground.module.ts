@@ -127,7 +127,9 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
-import { NbSpinnerTestComponent } from './spinner/spinner-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -244,7 +246,9 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
-  NbSpinnerTestComponent,
+  NbSpinnerCardComponent,
+  NbSpinnerTabsComponent,
+  NbSpinnerButtonComponent,
 ];
 
 

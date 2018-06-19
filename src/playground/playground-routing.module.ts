@@ -103,7 +103,9 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
-import { NbSpinnerTestComponent } from './spinner/spinner-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
 
 export const routes: Routes = [
   {
@@ -164,8 +166,16 @@ export const routes: Routes = [
         path: 'spinner',
         children: [
           {
-            path: 'spinner-test.component',
-            component: NbSpinnerTestComponent,
+            path: 'spinner-card.component',
+            component: NbSpinnerCardComponent,
+          },
+          {
+            path: 'spinner-tabs.component',
+            component: NbSpinnerTabsComponent,
+          },
+          {
+            path: 'spinner-button.component',
+            component: NbSpinnerButtonComponent,
           },
         ],
       },

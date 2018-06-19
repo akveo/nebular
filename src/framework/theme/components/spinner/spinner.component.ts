@@ -1,6 +1,19 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { NbCardComponent } from '../card/card.component';
 
+/**
+ * Styled spinner component
+ *
+ * @stacked-example(Spinner in card, spinner/spinner-card.component)
+ *
+ * Can have one of the following statuses: danger, success or warning
+ *
+ * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
+ *
+ * @stacked-example(Buttons with spinner, spinner/spinner-button.component)
+ *
+ */
+
 @Component({
   selector: 'nb-spinner',
   template: `
@@ -25,10 +38,18 @@ export class NbSpinnerComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-
+  /**
+   * Spinner visibility
+   * @type boolean
+   */
   @Input() visible: boolean;
+
   spinnerSize: string;
 
+  /**
+   * Spinner icon size, (small, medium, large)
+   * @type string
+   */
   @Input('size') set size(val: string) {
     if (val === NbSpinnerComponent.SIZE_SMALL || NbSpinnerComponent.SIZE_MEDIUM ||
       NbSpinnerComponent.SIZE_LARGE) {
@@ -38,9 +59,30 @@ export class NbSpinnerComponent {
     }
   };
 
+  /**
+   * Spinner background visibility
+   * @type boolean
+   */
   @Input() disableBackground: boolean;
+
+
+  /**
+   * Makes spinner as an inline element
+   * @type boolean
+   */
   @Input() inline: boolean;
+
+
+  /**
+   * Text which shows to the right of the icon
+   * @type string
+   */
   @Input() text: string = '';
+
+  /**
+   * Spinner color (success, warning, danger, danger, primary)
+   * @param {string} val
+   */
   @Input() status: string = NbCardComponent.STATUS_PRIMARY;
 
 
