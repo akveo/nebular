@@ -103,15 +103,18 @@
         }
 
         tr {
-          border-bottom: 1px solid $table-border;
+          border-bottom: $table-border;
 
           &:last-child {
             border: none;
           }
+          p {
+            margin-bottom: 0;
+          }
         }
 
         td {
-          padding: 0.5rem;
+          padding: 1rem 0.5rem;
 
           &:first-child {
             font-weight: 500;
