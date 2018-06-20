@@ -18,15 +18,13 @@ import {
   NbProgressBarModule,
   NbCheckboxModule,
 } from '@nebular/theme';
+import { NgdThemeModule } from './@theme/theme.module';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
-
 import { structure  } from '../structure';
+import { DOCS, STRUCTURE } from './app.options';
 const docs = require('../output.json');
-
-export const STRUCTURE = new InjectionToken<any>('Docs Structure');
-export const DOCS = new InjectionToken<any>('Docs Structure');
 
 @NgModule({
   imports: [
@@ -41,6 +39,7 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
     NbProgressBarModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: '' }),
+    NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false }),
   ],

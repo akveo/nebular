@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgdAnalytics } from './@theme/services/analytics.service';
 
 @Component({
   selector: 'ngd-app-root',
@@ -12,5 +13,12 @@ import { Component } from '@angular/core';
     <router-outlet></router-outlet>
   `,
 })
-export class NgdAppComponent {
+export class NgdAppComponent implements OnInit {
+
+  constructor(private analytics: NgdAnalytics) {
+  }
+
+  ngOnInit(): void {
+    this.analytics.trackPageViews();
+  }
 }

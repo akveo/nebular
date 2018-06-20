@@ -8,7 +8,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { NgdTabbedService } from './tabbed.service';
 import { NgdTextService } from './text.service';
-import { DOCS, STRUCTURE } from '../../app.module';
+import { DOCS, STRUCTURE } from '../../app.options';
 
 @Injectable()
 export class NgdStructureService {

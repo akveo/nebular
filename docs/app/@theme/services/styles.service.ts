@@ -5,7 +5,7 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { DOCS } from '../../app.module';
+import { DOCS } from '../../app.options';
 
 @Injectable()
 export class NgdStylesService {

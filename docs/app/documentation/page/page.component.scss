@@ -30,6 +30,14 @@
 
       nb-card-body {
         padding: 2rem 1rem;
+
+        > *:last-child {
+          margin-bottom: 0!important;
+
+          *:last-child {
+            margin-bottom: 0 !important;
+          }
+        }
       }
 
       h1, h2, h3, h4, h5, h6 {
@@ -51,6 +59,10 @@
         max-width: 100%;
       }
 
+      pre {
+        margin-bottom: 2rem;
+      }
+
       code {
         background: $code-bg;
         color: $code-fg;
@@ -64,13 +76,16 @@
         border-radius: 8px;
         background: $code-block-bg;
         font-size: 0.875rem;
-        margin-bottom: 3rem;
       }
 
       /deep/ {
-        ngd-live-example-block, ngd-inline-example-block, ngd-stacked-example-block {
+        .widget-block {
           display: block;
-          margin-bottom: 3rem;
+          margin-bottom: 2rem;
+        }
+
+        ngd-styles-table-block table {
+          margin-bottom: 0;
         }
       }
 
@@ -88,15 +103,18 @@
         }
 
         tr {
-          border-bottom: 1px solid $table-border;
+          border-bottom: $table-border;
 
           &:last-child {
             border: none;
           }
+          p {
+            margin-bottom: 0;
+          }
         }
 
         td {
-          padding: 0.5rem;
+          padding: 1rem 0.5rem;
 
           &:first-child {
             font-weight: 500;

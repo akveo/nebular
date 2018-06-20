@@ -44,6 +44,7 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private changeTheme(payload) {
     this.themeService.changeTheme(payload.theme);
+    this.sendHeight(); // theme change may cause change of height
   }
 
   private getId(): string {

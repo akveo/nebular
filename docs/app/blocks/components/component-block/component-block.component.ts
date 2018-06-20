@@ -10,11 +10,14 @@ import { NgdTabbedService } from '../../../@theme/services';
           <ng-container *ngIf="node.type === 'text'">
             <div *ngFor="let section of node.content" [innerHtml]="section.html"></div>
           </ng-container>
-          <ngd-live-example-block *ngIf="node.type === 'live-example'" [id]="node.content" [title]="'example'">
+          <ngd-live-example-block *ngIf="node.type === 'live-example'" [id]="node.content" [title]="'example'"
+                                  class="widget-block">
           </ngd-live-example-block>
-          <ngd-inline-example-block *ngIf="node.type === 'inline-example'" [content]="node.content">
+          <ngd-inline-example-block *ngIf="node.type === 'inline-example'" [content]="node.content"
+                                    class="widget-block">
           </ngd-inline-example-block>
-          <ngd-stacked-example-block *ngIf="node.type === 'example'" [content]="node.content">
+          <ngd-stacked-example-block *ngIf="node.type === 'example'" [content]="node.content"
+                                     class="widget-block">
           </ngd-stacked-example-block>
         </ng-container>
         <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
