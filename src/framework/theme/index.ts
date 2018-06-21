@@ -54,3 +54,4 @@ export * from './components/accordion/accordion-item-header.component';
 export * from './components/accordion/accordion.module';
 export * from './components/button/button.component';
 export * from './components/button/button.module';
+export * from './components/list/list.module';
