@@ -189,16 +189,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Chat UI',
-        icon: 'layout.svg',
-        source: [
-          'NbChatComponent',
-          'NbChatMessageComponent',
-          'NbChatFormComponent',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Alert',
         icon: 'alert.svg',
         source: [
@@ -222,6 +212,16 @@ export const structure = [
           'NbTabsetComponent',
           'NbTabComponent',
           'NbRouteTabsetComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
+        source: [
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
         ],
       },
       {

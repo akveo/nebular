@@ -19,7 +19,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
  * - quote - quotes a message with specific quote styles
  * - map - shows a google map picture by provided [latitude] and [longitude] properties
  *
- * @stacked-example('Available Types', chat/chat-message-types-showcase.component)
+ * @stacked-example(Available Types, chat/chat-message-types-showcase.component)
  *
  * Message with attached files:
  * ```html
