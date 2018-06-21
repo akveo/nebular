@@ -11,14 +11,15 @@ import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/co
       <ng-content></ng-content>
     </nb-list>
   `,
+  styleUrls: [ './infintie-list.component.scss' ],
 })
 export class NbInfiniteListComponent {
 
-  private screensCountBeforeTrigger = 3;
-
   @Input() role = 'feed';
 
-  @Input() listenWindowScroll = false;
+  @Input()
+  @HostBinding('class.window-scroll')
+  listenWindowScroll = false;
 
   @Input() loadMoreThreshold;
 
