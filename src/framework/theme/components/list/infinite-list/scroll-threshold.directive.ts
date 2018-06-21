@@ -48,9 +48,7 @@ export class NbScrollThresholdDirective {
   ) {}
 
   checkPosition(element) {
-    const height = getElementHeight(element);
-
-    if (height - element.scrollTop <= this.threshold) {
+    if (element.scrollHeight - element.scrollTop <= this.threshold) {
       this.thresholdReached.emit();
     }
   }
