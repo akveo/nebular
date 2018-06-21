@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject, ElementRef } from '@angular/core';
-import { NB_DOCUMENT } from '../../../theme.options';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'nb-infinite-list',
@@ -13,7 +12,7 @@ import { NB_DOCUMENT } from '../../../theme.options';
     </nb-list>
   `,
 })
-export class NbInfiniteListComponent implements OnInit {
+export class NbInfiniteListComponent {
 
   private screensCountBeforeTrigger = 3;
 
@@ -25,21 +24,7 @@ export class NbInfiniteListComponent implements OnInit {
 
   @Output() loadNext = new EventEmitter();
 
-  constructor(
-    @Inject(NB_DOCUMENT) private document,
-    private elemntRef: ElementRef,
-  ) {}
-
   emitLoadNext() {
     this.loadNext.emit();
-  }
-
-  ngOnInit() {
-    if (!this.loadMoreThreshold) {
-      const element = this.listenWindowScroll
-        ? this.document.body
-        : this.elemntRef;
-      this.loadMoreThreshold = element.clientHeight * this.screensCountBeforeTrigger;
-    }
   }
 }
