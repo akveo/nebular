@@ -378,6 +378,18 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Corporate',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Corporate',
+            source: 'corporate',
+          },
+        ],
+      },
     ],
   },
   {
