@@ -8,3 +8,5 @@ export * from './styles.service';
 export * from './version.service';
 export * from './toc-state.service';
 export * from './pagination.service';
+export * from './analytics.service';
+export * from './menu.service';
