@@ -216,6 +216,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Stepper',
+        icon: 'stepper.svg',
+        source: [
+          'NbStepperComponent',
+          'NbStepComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
         source: [
@@ -269,15 +278,6 @@ export const structure = [
         icon: 'context-menu.svg',
         source: [
           'NbContextMenuDirective',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Stepper',
-        icon: 'context-menu.svg',
-        source: [
-          'NbStepperComponent',
-          'NbStepComponent',
         ],
       },
       // {
