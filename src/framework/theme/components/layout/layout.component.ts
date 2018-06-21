@@ -420,6 +420,15 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.themeService.changeWindowWidth(event.target.innerWidth);
   }
 
+  @HostListener('scroll', ['$event'])
+  onELementScroll($event) {
+    const event = new CustomEvent(
+      'nbscroll',
+      { detail: { originalEvent: $event } },
+    );
+    this.document.dispatchEvent(event);
+  }
+
   private initScrollTop() {
     this.router.events
       .pipe(

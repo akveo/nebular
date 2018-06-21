@@ -55,3 +55,4 @@ export * from './components/accordion/accordion.module';
 export * from './components/button/button.component';
 export * from './components/button/button.module';
 export * from './components/list/list.module';
+export * from './components/list/infinite-list/infinite-list.module';
