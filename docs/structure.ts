@@ -169,6 +169,17 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Calendar',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarComponent',
+          'NbCalendarRangeComponent',
+          'NbCalendarYearPickerComponent',
+          'NbCalendarMonthPickerComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Flip Card',
         icon: 'flip.svg',
         source: [

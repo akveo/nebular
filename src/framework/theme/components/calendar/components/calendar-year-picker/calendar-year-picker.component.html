@@ -1,0 +1,9 @@
+<div class="chunk-row" *ngFor="let chunk of years">
+  <div class="year"
+       *ngFor="let year of chunk"
+       [class.selected]="year.selected"
+       (click)="onYearSelect(year.value)">
+    {{ year.value }}
+  </div>
+</div>
+

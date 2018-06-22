@@ -1,0 +1,18 @@
+<div>
+  <div class="week">
+    <div class="day" [class.holiday]="day.holiday" *ngFor="let day of days">
+      {{ day.name }}
+    </div>
+  </div>
+  <div class="week" *ngFor="let week of month.weeks">
+    <div *ngIf="week.padLeft" class="placeholder-before" [ngStyle]="{ flex: week.padLeft }"></div>
+    <nb-calendar-cell-view
+      *ngFor="let day of week.cells"
+      [dayModel]="day"
+      [cellStates]="day.cellStates"
+
+      (cellSelect)="onCellSelect($event)"
+    ></nb-calendar-cell-view>
+    <div *ngIf="week.padRight" class="placeholder-after" [ngStyle]="{ flex: week.padRight }"></div>
+  </div>
+</div>
