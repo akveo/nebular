@@ -28,7 +28,7 @@ export class NbScrollThresholdDirective {
   }
 
   @HostListener('document:nbscroll', ['$event'])
-  onLayoutScroll($event) {
+  layoutScroll($event) {
     if (this.listenWindowScroll) {
       this.checkPosition($event.target);
     }
