@@ -30,6 +30,7 @@ import {
   NbStepperModule,
   NbAccordionModule,
   NbListModule,
+  NbInifiniteListModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -163,6 +164,8 @@ import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbListShowcaseComponent } from './list/list-showcase.component';
+import { NbInfiniteListShowcaseComponent } from './list/infinite-list/infinite-list-showcase.component';
+import { NbInfiniteListWindowShowcaseComponent } from './list/infinite-list/infinite-list-window-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -192,6 +195,7 @@ export const NB_MODULES = [
   NbAccordionModule,
   NbButtonModule,
   NbListModule,
+  NbInifiniteListModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -316,6 +320,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonSizesComponent,
   NbButtonTypesComponent,
   NbListShowcaseComponent,
+  NbInfiniteListShowcaseComponent,
+  NbInfiniteListWindowShowcaseComponent,
 ];
 
 

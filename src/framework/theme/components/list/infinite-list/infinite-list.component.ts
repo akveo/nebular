@@ -1,5 +1,10 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
+/**
+ * Infinite list component.
+ *
+ * @stacked-example(Basic example:, list/infinite-list/infinite-list-showcase.component)
+ */
 @Component({
   selector: 'nb-infinite-list',
   template: `
