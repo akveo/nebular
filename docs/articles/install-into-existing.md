@@ -74,7 +74,7 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
 
 ## Create a page
 
-Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
+Now, let's create a simple Nebular page (header + sidebar) in your project. We suppose that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
 ```ts
 import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
@@ -125,7 +125,7 @@ And done! At this step, you should have a page with a simple layout on it lookin
   <div class="note-title">Adding into existing page</div>
   <div class="note-body">
     In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
+    For Nebular to work it is important to have the `<nb-layout></nb-layout>` component at the top.
   </div>
 </div>
 <hr> 
