@@ -24,6 +24,7 @@ import {
   NbRouteTabsetModule,
   NbProgressBarModule,
   NbAlertModule,
+  NbChatModule,
   NbSpinnerModule,
 } from '@nebular/theme';
 
@@ -127,6 +128,13 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
 import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
 import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
 import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
@@ -151,6 +159,9 @@ export const NB_MODULES = [
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
+  NbChatModule.forChild({
+    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+  }),
   NbSpinnerModule,
 ];
 
@@ -246,6 +257,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbChatShowcaseComponent,
+  NbChatColorsComponent,
+  NbChatSizesComponent,
+  NbChatDropComponent,
+  NbChatMessageTypesShowcaseComponent,
+  NbChatConversationShowcaseComponent,
+  NbChatTestComponent,
   NbSpinnerCardComponent,
   NbSpinnerTabsComponent,
   NbSpinnerButtonComponent,

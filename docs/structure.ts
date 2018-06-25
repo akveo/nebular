@@ -216,6 +216,16 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
+        source: [
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
         source: [
@@ -362,6 +372,18 @@ export const structure = [
             block: 'theme',
             name: 'Cosmic',
             source: 'cosmic',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Corporate',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Corporate',
+            source: 'corporate',
           },
         ],
       },

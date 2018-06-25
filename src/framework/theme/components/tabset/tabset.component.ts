@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { map, delay } from 'rxjs/operators';
 import {
   Component,
   Input,
@@ -13,6 +14,7 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -190,15 +192,24 @@ export class NbTabsetComponent implements AfterContentInit {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
+  // TODO: refactoring this component, avoid change detection loop
   ngAfterContentInit() {
     this.route.params
-      .subscribe((params: any) => {
-        const activeTab = this.tabs.find(tab => this.routeParam ? tab.route === params[this.routeParam] : tab.active);
+      .pipe(
+        map(
+          (params: any) =>
+            this.tabs.find((tab) => this.routeParam ? tab.route === params[this.routeParam] : tab.active),
+        ),
+        delay(0),
+      )
+      .subscribe((activeTab) => {
         this.selectTab(activeTab || this.tabs.first);
-      });
+        this.changeDetectorRef.markForCheck();
+    });
   }
 
   // TODO: navigate to routeParam

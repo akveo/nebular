@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "2.0.0-rc.8",
+  "version": "2.0.0-rc.9",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -63,7 +63,9 @@
     "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp",
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
-    "publish": "npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security"
+    "publish": "npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security",
+    "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
+    "postinstall": "npm run cli:firefox-fix"
   },
   "keywords": [
     "angular",
@@ -151,7 +153,9 @@
     "tslint": "5.7.0",
     "tslint-language-service": "0.9.6",
     "typedoc": "0.7.1",
-    "typescript": "2.7.2"
+    "typescript": "2.7.2",
+    "uglify-es": "3.2.2",
+    "uglifyjs-webpack-plugin": "1.1.5"
   },
   "schematics": "./schematics/dist/collection.json"
 }

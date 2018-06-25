@@ -21,6 +21,7 @@
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/alert/alert.component.theme';
+@import '../../components/chat/chat.component.theme';
 @import '../../components/spinner/spinner.component.theme';
 
 @mixin nb-theme-components() {
@@ -43,4 +44,5 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-alert-theme();
+  @include nb-chat-theme();
 }
