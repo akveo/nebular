@@ -22,6 +22,7 @@
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/alert/alert.component.theme';
 @import '../../components/chat/chat.component.theme';
+@import '../../components/spinner/spinner.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -36,6 +37,7 @@
   @include nb-user-theme();
   @include nb-actions-theme();
   @include nb-search-theme();
+  @include nb-spinner-theme();
   @include nb-checkbox-theme();
   @include nb-progress-bar-theme();
   @include nb-badge-theme();

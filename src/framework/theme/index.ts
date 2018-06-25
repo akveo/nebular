@@ -43,3 +43,5 @@ export * from './components/chat/chat-message-quote.component';
 export * from './components/chat/chat-message-text.component';
 export * from './components/chat/chat-form.component';
 export * from './components/chat/chat.module';
+export * from './components/spinner/spinner.component';
+export * from './components/spinner/spinner.module';
