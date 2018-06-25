@@ -125,7 +125,7 @@ And done! At this step, you should have a page with a simple layout on it lookin
   <div class="note-title">Adding into existing page</div>
   <div class="note-body">
     In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    For Nebular to work it is important to have the `<nb-layout></nb-layout>` component at the top.
+    `<nb-layout></nb-layout>` is a required root component for Nebular to work.
   </div>
 </div>
 <hr> 
