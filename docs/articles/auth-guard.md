@@ -1,6 +1,6 @@
 # Protecting application based on user authentication
 
-Let's imaging we have the following application structure:
+Let's imagine we have the following application structure:
 - `/pages/*` - protected area available only for authenticated users
 - `/auth/*` - authentication area (login/register/etc) available for non-authenticated users
 
@@ -93,12 +93,12 @@ const routes: Routes = [
 
 ```
 
-As the result, it is not possible to access any of the `pages/*` if you are not an authenticated user.
+As a result, it is not possible to access any of the `pages/*` if you are not an authenticated user.
 <hr>
 
 ## Redirect non-authenticated to the login page
 
-Additionally, you may want to redirect directly to `auth/login` when the user is accessing a restricted page.
+Additionally, you may want to redirect straight to `auth/login` when the user is accessing a restricted page.
 Let's modify our guard a bit to reflect this logic:
 
 ```ts
