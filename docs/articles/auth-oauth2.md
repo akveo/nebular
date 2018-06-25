@@ -37,7 +37,7 @@ export class YourModule {
 }
 ``` 
 
-So we imported `NbAuthModule` and provided a strategy we want to use. If you already have some strategy configurated - don't worry, you can just open a new one to the `strategies` array.
+So we imported `NbAuthModule` and provided a strategy we want to use. If you already have some strategy configurated - don't worry, you can just add a new one to the `strategies` array.
 We also assigned a `name` - `google`. Later on we will use this alias to call the strategy.
 <hr>
 
