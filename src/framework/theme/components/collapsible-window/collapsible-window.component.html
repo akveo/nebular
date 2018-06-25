@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    <div class="header">
+      <div>{{ title }}</div>
+      <div class="header-right">
+        <div class="icon icon-collapse" (click)="toggleCollapse()"></div>
+        <div class="icon" [ngClass]="expanded ? 'icon-unexpand' : 'icon-expand'" (click)="toggleExpand()"></div>
+        <i class="nb-close" (click)="close()"></i>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ng-container *ngIf="isTemplate">
+      <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="isComponent" [ngComponentOutlet]="content"></ng-container>
+    <ng-container *ngIf="isPrimitive">
+      <div class="primitive-collapsable">{{content}}</div>
+    </ng-container>
+  </nb-card-body>
+</nb-card>

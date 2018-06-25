@@ -1,17 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { NbCollapsableDirective } from '@nebular/theme';
+import { NbCollapsibleWindowDirective } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-collapsable-showcase',
+  selector: 'nb-collapsible-window-showcase',
   template: `
     <ng-template
-      #collapsable
-      [nbCollapsable]="collapsable"
-      [nbCollapsableContext]="{ name: fakeNames[index] }"
-      nbCollapsableTitle="User"
+      #collapsible
+      [nbCollapsibleWindow]="collapsible"
+      [nbCollapsibleWindowContext]="{ name: fakeNames[index] }"
+      nbCollapsibleWindowTitle="User"
       let-name="name"
-    >
-      <nb-user
+    ><nb-user
         size="large"
         name="{{ name }}"
         title="Reservior Dog"
@@ -24,7 +23,7 @@ import { NbCollapsableDirective } from '@nebular/theme';
   `,
   styles: [
     `
-      /deep/ nb-collapsable.expanded nb-user {
+      /deep/ nb-collapsable-component.expanded nb-user {
         width: 500px;
       }
       /deep/ nb-layout-column {
@@ -33,16 +32,16 @@ import { NbCollapsableDirective } from '@nebular/theme';
     `,
   ],
 })
-export class NbCollapsableShowcaseComponent {
-  @ViewChild(NbCollapsableDirective) userWindow: NbCollapsableDirective;
+export class NbCollapsibleWindowShowcaseComponent {
+  @ViewChild(NbCollapsibleWindowDirective) userWindow: NbCollapsibleWindowDirective;
 
   fakeNames = [
-    'Mr.White',
-    'Mr. Orange',
-    'Mr. Blonde',
-    'Mr. Pink',
-    'Mr. Blue',
-    'Mr. Brown',
+    'Mr.White1111111111111111111111111111111111',
+    'Mr. Orange11111111111111111',
+    'Mr. Blonde1111111111111111',
+    'Mr. Pink1111111111111111111111',
+    'Mr. Blue11111111111111111',
+    'Mr. Brown1111111111111',
     'Nice Guy',
     'Joe Cabot',
   ];

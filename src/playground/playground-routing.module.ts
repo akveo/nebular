@@ -106,8 +106,8 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
-import { NbCollapsableShowcaseComponent } from './collapsable/collapsable-showcase.component';
 import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
+import { NbCollapsibleWindowShowcaseComponent } from './collapsible-window/collapsible-window-showcase.component';
 
 export const routes: Routes = [
   {
@@ -133,11 +133,11 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'collapsable',
+        path: 'collapsible-window',
         children: [
           {
-            path: 'collapsable-showcase.component',
-            component: NbCollapsableShowcaseComponent,
+            path: 'collapsible-window-showcase.component',
+            component: NbCollapsibleWindowShowcaseComponent,
           },
         ],
       },

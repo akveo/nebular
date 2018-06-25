@@ -8,7 +8,7 @@
       filter: blur(16px);
     }
 
-    nb-collapsable:not(.expanded) {
+    nb-collapsible-window:not(.expanded) {
       filter: blur(5px);
     }
   }
@@ -22,7 +22,7 @@
     padding: 5px;
   }
 
-  .collapsable-header {
+  .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
