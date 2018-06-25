@@ -24,7 +24,7 @@ To install ngx-admin on your machine you need to have the following tools instal
 <hr>
 
 ## Download the code
-After you completed tools setup, you need to download the code of ngx-admin application. The easiest way to do that is to clone GitHub repository:
+When you completed tools setup, you need to download the code of ngx-admin application. The easiest way to do that is to clone GitHub repository:
 ```bash
 git clone https://github.com/akveo/ngx-admin.git
 ```
