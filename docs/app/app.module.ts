@@ -8,6 +8,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
   NbSidebarModule,
@@ -29,6 +30,7 @@ const docs = require('../output.json');
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NbSidebarModule,
