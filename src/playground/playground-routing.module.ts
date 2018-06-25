@@ -132,6 +132,7 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbListShowcaseComponent } from './list/list-showcase.component';
 
 export const routes: Routes = [
   {
@@ -555,6 +556,15 @@ export const routes: Routes = [
           {
             path: 'accordion-test.component',
             component: NbAccordionTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'list',
+        children: [
+          {
+            path: 'list-showcase.component',
+            component: NbListShowcaseComponent,
           },
         ],
       },

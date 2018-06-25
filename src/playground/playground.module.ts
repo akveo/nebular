@@ -29,6 +29,7 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbAccordionModule,
+  NbListModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -161,6 +162,7 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbListShowcaseComponent } from './list/list-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -189,6 +191,7 @@ export const NB_MODULES = [
   NbSpinnerModule,
   NbAccordionModule,
   NbButtonModule,
+  NbListModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -312,6 +315,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
+  NbListShowcaseComponent,
 ];
 
 

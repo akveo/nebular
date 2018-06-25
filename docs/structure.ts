@@ -327,6 +327,12 @@ export const structure = [
           'NbAccordionItemBodyComponent',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: '',
+        source: [ 'NbListComponent', 'NbListItemComponent', 'NbListItemsGroupComponent' ],
+      },
     ],
   },
   {
