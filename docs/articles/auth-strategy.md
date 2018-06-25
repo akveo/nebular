@@ -34,7 +34,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 });
 
 ```
-`email` here is an alias we're assigned to the strategy, so that we can dynamically mention it later. This also allows us to configure multiple strategies with various configurations in one app.
+`email` here is an alias we've assigned to the strategy, so that we can dynamically mention it later. This also allows us to configure multiple strategies with various configurations in one app.
 <hr>
 
 ## Setup API configuration
