@@ -10,7 +10,6 @@ import { Component } from '@angular/core';
   selector: 'nb-app-spinner-button',
   template: `
      <nb-card accent="primary" size="small">
-      <nb-card-header>Inline Spinners</nb-card-header>
       <nb-card-body>
         <div class="d-flex align-items-start">
           <button class="button-container btn btn-success btn-lg" (click)="toggleLoadingAnimation()"
