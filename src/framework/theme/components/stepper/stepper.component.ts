@@ -11,7 +11,6 @@ import {
   QueryList,
 } from '@angular/core';
 import { NbStepComponent } from './step.component';
-import { convertToBoolProperty } from '../helpers';
 
 export enum NbStepperOrientation {
   VERTICAL = 'vertical',
@@ -128,21 +127,6 @@ export class NbStepperComponent {
    */
   @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
 
-  /**
-   * If true then stepper requires the user to complete previous step before navigate to following steps.
-   *
-   * @type {boolean}
-   */
-  @Input()
-  get linear(): boolean {
-    return this.linearValue;
-  }
-
-  set linear(value: boolean) {
-    this.linearValue = convertToBoolProperty(value);
-  }
-
-  private linearValue = false;
   private index = 0;
 
   /**
