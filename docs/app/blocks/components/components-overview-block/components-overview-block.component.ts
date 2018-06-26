@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgdMenuService } from '../../../documentation/menu.service';
+import { NgdMenuService } from '../../../@theme/services/menu.service';
 
 @Component({
   selector: 'ngd-components-overview-block',

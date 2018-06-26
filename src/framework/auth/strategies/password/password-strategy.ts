@@ -419,10 +419,4 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       return res;
     });
   }
-
-  protected getActionEndpoint(action: string): string {
-    const actionEndpoint: string = this.getOption(`${action}.endpoint`);
-    const baseEndpoint: string = this.getOption('baseEndpoint');
-    return baseEndpoint + actionEndpoint;
-  }
 }

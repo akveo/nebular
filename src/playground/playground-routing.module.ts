@@ -103,6 +103,13 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
 
 export const routes: Routes = [
   {
@@ -396,6 +403,39 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: 'chat-showcase.component',
+            component: NbChatShowcaseComponent,
+          },
+          {
+            path: 'chat-colors.component',
+            component: NbChatColorsComponent,
+          },
+          {
+            path: 'chat-sizes.component',
+            component: NbChatSizesComponent,
+          },
+          {
+            path: 'chat-drop.component',
+            component: NbChatDropComponent,
+          },
+          {
+            path: 'chat-message-types-showcase.component',
+            component: NbChatMessageTypesShowcaseComponent,
+          },
+          {
+            path: 'chat-conversation-showcase.component',
+            component: NbChatConversationShowcaseComponent,
+          },
+          {
+            path: 'chat-test.component',
+            component: NbChatTestComponent,
+          },
+        ],
+      },
     ],
   },
   {
@@ -615,6 +655,10 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'oauth2',
+    loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
   },
   {
     path: '',

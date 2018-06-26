@@ -7,8 +7,8 @@
 import { Injectable } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
-import { NgdStructureService } from '../@theme/services/structure.service';
-import { NgdTextService } from '../@theme/services/text.service';
+import { NgdStructureService } from './structure.service';
+import { NgdTextService } from './text.service';
 
 interface IItemLink {
   title: string;

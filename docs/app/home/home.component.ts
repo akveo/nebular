@@ -36,8 +36,8 @@ export class NgdHomeComponent {
     },
     {
       title: 'Theme System',
-      description: `Two built-in themes & hundreds of variables to create your own.
-                    Multiple themes with hot reload out of the box.`,
+      description: `Three built-in themes & hundreds of variables to create your own.
+                    With hot-reload out of the box`,
       icon: 'assets/img/themes.svg',
       link: 'docs/guides/theme-system',
     },
