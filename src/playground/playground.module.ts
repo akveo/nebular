@@ -28,6 +28,7 @@ import {
   NbChatModule,
   NbSpinnerModule,
   NbStepperModule,
+  NbAccordionModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -146,6 +147,7 @@ import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
 import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
 import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
 import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -172,6 +174,7 @@ export const NB_MODULES = [
     messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
   }),
   NbSpinnerModule,
+  NbAccordionModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -282,6 +285,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbStepperValidationComponent,
   NbStepperVerticalComponent,
   NbStepperTestComponent,
+  NbAccordionShowcaseComponent,
 ];
 
 

@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InjectionToken, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,6 +17,8 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbTabsetModule,
+  NbCheckboxModule, 
+  NbSearchModule,
   NbProgressBarModule,
   NbCheckboxModule,
 } from '@nebular/theme';

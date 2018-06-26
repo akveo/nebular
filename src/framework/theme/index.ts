@@ -47,3 +47,4 @@ export * from './components/spinner/spinner.component';
 export * from './components/spinner/spinner.module';
 export * from './components/stepper/stepper.component';
 export * from './components/stepper/stepper.module';
+export * from './components/accordion';

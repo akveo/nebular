@@ -561,6 +561,13 @@ $theme: (
   stepper-completed-icon-size: 1.5rem,
   stepper-completed-icon-weight: font-weight-ultra-bold,
   stepper-step-padding: padding,
+  
+  accordion-item-bg: color-bg,
+  accordion-item-horizontal-offset-color: rgba(0, 0, 0, 0.2),
+  accordion-item-vertical-offset-color: rgba(0, 0, 0, 0.14),
+  accordion-item-blur-color: rgba(0, 0, 0, 0.12),
+  accordion-item-header-hover-bg: rgba(0, 0, 0, 0.04),
+  accordion-item-description-fg: color-fg,
 );
 
 // register the theme

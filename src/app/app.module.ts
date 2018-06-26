@@ -5,6 +5,7 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -16,7 +17,7 @@ import { NbAppComponent } from './app.component';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
 import { NbDynamicToAddComponent } from '../playground/shared/dynamic.component';
 import { NbPlaygroundSharedModule } from '../playground/shared/shared.module';
-
+import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { NbPlaygroundSharedModule } from '../playground/shared/shared.module';
   declarations: [
     NbAppComponent,
     NbLayoutDirectionToggleComponent,
+    NbLayoutThemeToggleComponent,
   ],
   entryComponents: [
     NbDynamicToAddComponent,
