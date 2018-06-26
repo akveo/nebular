@@ -23,6 +23,7 @@
 @import '../../components/alert/alert.component.theme';
 @import '../../components/chat/chat.component.theme';
 @import '../../components/spinner/spinner.component.theme';
+@import '../../components/stepper/stepper.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -42,6 +43,7 @@
   @include nb-progress-bar-theme();
   @include nb-badge-theme();
   @include nb-popover-theme();
+  @include nb-stepper-theme();
   @include nb-context-menu-theme();
   @include nb-alert-theme();
   @include nb-chat-theme();

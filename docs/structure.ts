@@ -216,6 +216,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Stepper',
+        icon: 'stepper.svg',
+        source: [
+          'NbStepperComponent',
+          'NbStepComponent',
+        ]
+      },
+      {
+        type: 'tabs',
         name: 'Chat UI',
         icon: 'chat-ui.svg',
         source: [

@@ -115,6 +115,10 @@ import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
 import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
 import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
 import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
+import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
 
 export const routes: Routes = [
   {
@@ -383,6 +387,27 @@ export const routes: Routes = [
                 component: NbRouteTabsetTestChild2Component,
               },
             ],
+          },
+        ],
+      },
+      {
+        path: 'stepper',
+        children: [
+          {
+            path: 'stepper-test.component',
+            component: NbStepperTestComponent,
+          },
+          {
+            path: 'stepper-showcase.component',
+            component: NbStepperShowcaseComponent,
+          },
+          {
+            path: 'stepper-validation.component',
+            component: NbStepperValidationComponent,
+          },
+          {
+            path: 'stepper-vertical.component',
+            component: NbStepperVerticalComponent,
           },
         ],
       },

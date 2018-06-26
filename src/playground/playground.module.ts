@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
@@ -26,6 +27,7 @@ import {
   NbAlertModule,
   NbChatModule,
   NbSpinnerModule,
+  NbStepperModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -117,6 +119,10 @@ import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
+import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -158,6 +164,7 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbStepperModule,
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
@@ -271,6 +278,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSpinnerButtonComponent,
   NbSpinnerSizesComponent,
   NbSpinnerColorsComponent,
+  NbStepperShowcaseComponent,
+  NbStepperValidationComponent,
+  NbStepperVerticalComponent,
+  NbStepperTestComponent,
 ];
 
 
@@ -278,6 +289,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   imports: [
     CommonModule,
     NbPlaygroundRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     ...NB_MODULES,
   ],
   declarations: [

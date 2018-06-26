@@ -551,6 +551,16 @@ $theme: (
   spinner-large: 2.25rem,
   spinner-xlarge: 2.5rem,
   spinner-xxlarge: 3rem,
+  
+  stepper-index-size: 2rem,
+  stepper-label-font-size: font-size-sm,
+  stepper-label-font-weight: font-weight-bolder,
+  stepper-accent-color: color-primary,
+  stepper-completed-fg: color-white,
+  stepper-fg: color-fg,
+  stepper-completed-icon-size: 1.5rem,
+  stepper-completed-icon-weight: font-weight-ultra-bold,
+  stepper-step-padding: padding,
 );
 
 // register the theme
