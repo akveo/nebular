@@ -113,6 +113,8 @@ import { NbChatTestComponent } from './chat/chat-test.component';
 import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
 import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
 import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
 
 export const routes: Routes = [
   {
@@ -183,6 +185,14 @@ export const routes: Routes = [
           {
             path: 'spinner-button.component',
             component: NbSpinnerButtonComponent,
+          },
+          {
+            path: 'spinner-sizes.component',
+            component: NbSpinnerSizesComponent,
+          },
+          {
+            path: 'spinner-colors.component',
+            component: NbSpinnerColorsComponent,
           },
         ],
       },

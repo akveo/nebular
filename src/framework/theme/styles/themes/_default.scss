@@ -533,7 +533,24 @@ $theme: (
   chat-warning-bg: color-warning,
   chat-danger-bg: color-danger,
 
-  spinner-bg: rgba(255, 255, 255, 0.8),
+  spinner-bg: rgba(255, 255, 255, 0.83),
+  spinner-circle-bg: color-bg-active,
+  spinner-fg: color-fg-text,
+  spinner-active-bg: color-fg,
+  spinner-disabled-bg: color-disabled,
+  spinner-disabled-fg: color-fg,
+  spinner-primary-bg: color-primary,
+  spinner-info-bg: color-info,
+  spinner-success-bg: color-success,
+  spinner-warning-bg: color-warning,
+  spinner-danger-bg: color-danger,
+  spinner-xxsmall: 1.25rem,
+  spinner-xsmall: 1.5rem,
+  spinner-small: 1.75rem,
+  spinner-medium: 2rem,
+  spinner-large: 2.25rem,
+  spinner-xlarge: 2.5rem,
+  spinner-xxlarge: 3rem,
 );
 
 // register the theme

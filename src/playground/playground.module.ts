@@ -138,6 +138,8 @@ import { NbChatTestComponent } from './chat/chat-test.component';
 import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
 import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
 import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -267,6 +269,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSpinnerCardComponent,
   NbSpinnerTabsComponent,
   NbSpinnerButtonComponent,
+  NbSpinnerSizesComponent,
+  NbSpinnerColorsComponent,
 ];
 
 

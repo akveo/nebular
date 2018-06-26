@@ -1,130 +1,70 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 @mixin nb-spinner-theme() {
+
+  .nb-spinner-container {
+    position: relative;
+  }
+
   nb-spinner {
-    opacity: 1;
-    position: absolute;
     background-color: nb-theme(spinner-bg);
-    border-radius: inherit;
-    width: 100%;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    z-index: 6000;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    visibility: visible;
-    transition: 0.3s ease-in-out;
 
     &.active-spinner .spin-circle {
-      border-right-color: nb-theme(color-active);
+      border-right-color: nb-theme(spinner-active-bg);
+    }
+    &.disabled-spinner .spin-circle {
+      border-right-color: nb-theme(spinner-disabled-bg);
     }
     &.primary-spinner .spin-circle {
-      border-right-color: nb-theme(color-primary);
+      border-right-color: nb-theme(spinner-primary-bg);
     }
     &.info-spinner .spin-circle {
-      border-right-color: nb-theme(color-info);
+      border-right-color: nb-theme(spinner-info-bg);
     }
     &.success-spinner .spin-circle {
-      border-right-color: nb-theme(color-success);
+      border-right-color: nb-theme(spinner-success-bg);
     }
     &.warning-spinner .spin-circle {
-      border-right-color: nb-theme(color-warning);
+      border-right-color: nb-theme(spinner-warning-bg);
     }
     &.danger-spinner .spin-circle {
-      border-right-color: nb-theme(color-danger);
+      border-right-color: nb-theme(spinner-danger-bg);
     }
 
-    &.hidden {
-      opacity: 0;
-      visibility: hidden;
-      transition: none;
-    }
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .set-height {
-        opacity: 0;
-        width: 0;
-      }
-
-      .spin-circle {
-        animation: spin 0.8s infinite linear;
-        border-radius: 50%;
-        border-style: solid;
-        border-left-color: nb-theme(color-bg-active);
-        border-top-color: nb-theme(color-bg-active);
-        border-bottom-color: nb-theme(color-bg-active);
-      }
-
-      &.loading-small .spin-circle {
-        width: 1rem;
-        height: 1rem;
-        border-width: 0.125rem;
-      }
-
-      &.loading-medium .spin-circle {
-        width: 1.5rem;
-        height: 1.5rem;
-        border-width: 0.125rem;
-      }
-
-      &.loading-large .spin-circle {
-        width: 2.25rem;
-        height: 2.25rem;
-        border-width: 0.175rem;
-      }
-
-      .loading-text {
-        margin-left: 0.5rem;
-        font-size: 1rem;
-        line-height: 1rem;
-      }
+    .spin-circle {
+      border-left-color: nb-theme(spinner-circle-bg);
+      border-top-color: nb-theme(spinner-circle-bg);
+      border-bottom-color: nb-theme(spinner-circle-bg);
     }
 
-    &.inline-spinner {
-      position: relative;
-      background: none;
-      float: left;
-      height: 1px;
-      width: auto;
-      display: block;
-
-      &.hidden .loading {
-        transition: none;
-        margin-right: 0;
-        &.loading-small, &.loading-medium, &.loading-large {
-          width: 0;
-        }
-      }
-
-      .loading {
-        transition: 0.3s ease-in-out;
-        margin-right: 0.5rem;
-
-        .spin-circle {
-          position: absolute;
-          border-color: nb-theme(color-disabled) nb-theme(color-disabled) nb-theme(color-white);
-        }
-
-        &.loading-small {
-          width: 1rem;
-        }
-
-        &.loading-medium {
-          width: 1.5rem;
-        }
-
-        &.loading-large {
-          width: 2.25rem;
-        }
-      }
+    .message {
+      color: nb-theme(spinner-fg);
     }
-    &.background-disabled {
-      background: none;
+
+    &.xxsmall-spinner {
+      font-size: nb-theme(spinner-xxsmall);
+    }
+    &.xsmall-spinner {
+      font-size: nb-theme(spinner-xsmall);
+    }
+    &.small-spinner {
+      font-size: nb-theme(spinner-small);
+    }
+    &.medium-spinner {
+      font-size: nb-theme(spinner-medium);
+    }
+    &.large-spinner {
+      font-size: nb-theme(spinner-large);
+    }
+    &.xlarge-spinner {
+      font-size: nb-theme(spinner-xlarge);
+    }
+    &.xxlarge-spinner {
+      font-size: nb-theme(spinner-xxlarge);
     }
   }
 

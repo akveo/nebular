@@ -1,130 +1,136 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Component, HostBinding, Input } from '@angular/core';
-import { NbCardComponent } from '../card/card.component';
 
 /**
  * Styled spinner component
- *
- * @stacked-example(Spinner in card, spinner/spinner-card.component)
- *
- * Can have one of the following statuses: danger, success or warning
- *
- * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
- *
- * @stacked-example(Buttons with spinner, spinner/spinner-button.component)
- *
  */
-
 @Component({
   selector: 'nb-spinner',
   template: `
-    <span class="loading  loading-{{spinnerSize}}">
-      <span class="set-height">d</span>
-      <span class="spin-circle"></span>
-      <span class="loading-text">{{text}}</span>
-    </span>
+    <span class="spin-circle"></span>
+    <span class="message" *ngIf="message">{{ message }}</span>
   `,
+  styleUrls: ['./spinner.component.scss'],
 })
-
 export class NbSpinnerComponent {
 
+  static readonly SIZE_XXSMALL = 'xxsmall';
+  static readonly SIZE_XSMALL = 'xsmall';
   static readonly SIZE_SMALL = 'small';
   static readonly SIZE_MEDIUM = 'medium';
   static readonly SIZE_LARGE = 'large';
+  static readonly SIZE_XLARGE = 'xlarge';
+  static readonly SIZE_XXLARGE = 'xxlarge';
 
-
+  static readonly STATUS_ACTIVE = 'active';
+  static readonly STATUS_DISABLED = 'disabled';
   static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
   static readonly STATUS_SUCCESS = 'success';
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  /**
-   * Spinner visibility
-   * @type boolean
-   */
-  @Input() visible: boolean;
-
-  spinnerSize: string;
+  size: string = NbSpinnerComponent.SIZE_MEDIUM;
+  status: string = NbSpinnerComponent.STATUS_ACTIVE;
 
   /**
-   * Spinner icon size, (small, medium, large)
+   * Loading text that is shown near the icon
    * @type string
    */
-  @Input('size') set size(val: string) {
-    if (val === NbSpinnerComponent.SIZE_SMALL || NbSpinnerComponent.SIZE_MEDIUM ||
-      NbSpinnerComponent.SIZE_LARGE) {
-      this.spinnerSize = val
-    } else {
-      this.spinnerSize = NbSpinnerComponent.SIZE_MEDIUM
-    }
-  };
+  @Input() message: string = 'Loading...';
 
   /**
-   * Spinner background visibility
-   * @type boolean
-   */
-  @Input() disableBackground: boolean;
-
-
-  /**
-   * Makes spinner as an inline element
-   * @type boolean
-   */
-  @Input() inline: boolean;
-
-
-  /**
-   * Text which shows to the right of the icon
-   * @type string
-   */
-  @Input() text: string = '';
-
-  /**
-   * Spinner color (success, warning, danger, danger, primary)
+   * Spiiner size, available sizes:
+   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
    * @param {string} val
    */
-  @Input() status: string = NbCardComponent.STATUS_PRIMARY;
-
-
-  @HostBinding('class.hidden')
-  get visibility() {
-    return !this.visible;
+  @Input('size')
+  private set setSize(val: string) {
+    this.size = val;
   }
 
-  @HostBinding('class.inline-spinner')
-  get display() {
-    return this.inline;
+  /**
+   * Spiiner status (adds specific styles):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} val
+   */
+  @Input('status')
+  private set setStatus(val: string) {
+    this.status = val;
   }
 
-  @HostBinding('class.background-disabled')
-  get background() {
-    return this.disableBackground;
+  @HostBinding('class.xxsmall-spinner')
+  get xxsmall() {
+    return this.size === NbSpinnerComponent.SIZE_XXSMALL;
+  }
+
+  @HostBinding('class.xsmall-spinner')
+  get xsmall() {
+    return this.size === NbSpinnerComponent.SIZE_XSMALL;
+  }
+
+  @HostBinding('class.small-spinner')
+  get small() {
+    return this.size === NbSpinnerComponent.SIZE_SMALL;
+  }
+
+  @HostBinding('class.medium-spinner')
+  get medium() {
+    return this.size === NbSpinnerComponent.SIZE_MEDIUM;
+  }
+
+  @HostBinding('class.large-spinner')
+  get large() {
+    return this.size === NbSpinnerComponent.SIZE_LARGE;
+  }
+
+  @HostBinding('class.xlarge-spinner')
+  get xlarge() {
+    return this.size === NbSpinnerComponent.SIZE_XLARGE;
+  }
+
+  @HostBinding('class.xxlarge-spinner')
+  get xxlarge() {
+    return this.size === NbSpinnerComponent.SIZE_XXLARGE;
+  }
+
+  @HostBinding('class.active-spinner')
+  get active() {
+    return this.status === NbSpinnerComponent.STATUS_ACTIVE;
+  }
+
+  @HostBinding('class.disabled-spinner')
+  get disabled() {
+    return this.status === NbSpinnerComponent.STATUS_DISABLED;
   }
 
   @HostBinding('class.primary-spinner')
   get primary() {
-    return this.status === NbCardComponent.STATUS_PRIMARY;
+    return this.status === NbSpinnerComponent.STATUS_PRIMARY;
   }
 
   @HostBinding('class.info-spinner')
   get info() {
-    return this.status === NbCardComponent.STATUS_INFO;
+    return this.status === NbSpinnerComponent.STATUS_INFO;
   }
 
   @HostBinding('class.success-spinner')
   get success() {
-    return this.status === NbCardComponent.STATUS_SUCCESS;
+    return this.status === NbSpinnerComponent.STATUS_SUCCESS;
   }
 
   @HostBinding('class.warning-spinner')
   get warning() {
-    return this.status === NbCardComponent.STATUS_WARNING;
+    return this.status === NbSpinnerComponent.STATUS_WARNING;
   }
 
   @HostBinding('class.danger-spinner')
   get danger() {
-    return this.status === NbCardComponent.STATUS_DANGER;
+    return this.status === NbSpinnerComponent.STATUS_DANGER;
   }
-
-
 }

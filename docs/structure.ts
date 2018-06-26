@@ -252,8 +252,9 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Spinner',
+        icon: 'spinner.svg',
         source: [
-          'NbSpinnerComponent',
+          'NbSpinnerDirective',
         ],
       },
       {
