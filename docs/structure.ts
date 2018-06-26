@@ -251,6 +251,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'NbSpinnerDirective',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Progress Bar',
         icon: 'progress-bar.svg',
         source: [
@@ -313,17 +321,6 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbThemeService',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'SpinnerService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbSpinnerService',
           },
         ],
       },

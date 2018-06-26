@@ -110,6 +110,11 @@ import { NbChatDropComponent } from './chat/chat-drop.component';
 import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
 import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
 import { NbChatTestComponent } from './chat/chat-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
 
 export const routes: Routes = [
   {
@@ -163,6 +168,31 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'spinner',
+        children: [
+          {
+            path: 'spinner-card.component',
+            component: NbSpinnerCardComponent,
+          },
+          {
+            path: 'spinner-tabs.component',
+            component: NbSpinnerTabsComponent,
+          },
+          {
+            path: 'spinner-button.component',
+            component: NbSpinnerButtonComponent,
+          },
+          {
+            path: 'spinner-sizes.component',
+            component: NbSpinnerSizesComponent,
+          },
+          {
+            path: 'spinner-colors.component',
+            component: NbSpinnerColorsComponent,
           },
         ],
       },
