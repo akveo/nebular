@@ -48,7 +48,7 @@ export class NgdTabbedBlockComponent implements OnDestroy {
       this.tabs$.pipe(filter((tabs) => tabs && tabs.length)),
     ])
       .subscribe(([params, tabs]) => {
-        this.router.navigate([tabs[0].tab], { relativeTo: activatedRoute });
+        this.router.navigate([tabs[0].tab], { relativeTo: activatedRoute, replaceUrl: true });
       });
 
     combineLatest([

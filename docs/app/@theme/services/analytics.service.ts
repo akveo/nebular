@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { filter } from 'rxjs/operators';
+import { filter, delay, map } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 declare const ga: any;
 
@@ -20,9 +20,12 @@ export class NgdAnalytics {
     if (this.enabled) {
       this.router.events.pipe(
         filter((event) => event instanceof NavigationEnd),
+        map(() => this.location.path()),
+        filter((location: string) => this.trackLocation(location)),
+        delay(50),
       )
-        .subscribe(() => {
-          ga('send', {hitType: 'pageview', page: this.location.path()});
+        .subscribe((location: string) => {
+          ga('send', { hitType: 'pageview', page: location });
         });
     }
   }
@@ -31,5 +34,15 @@ export class NgdAnalytics {
     if (this.enabled) {
       ga('send', 'event', eventName, eventVal);
     }
+  }
+
+  private trackLocation(path: string) {
+    if (path.match(/\/components\/[a-zA-Z-]+\/?$/)
+      || path.match(/\/docs\/?$/)
+      || path.match(/\/example\//)) {
+
+      return !!path.match(/\/components\/components-overview\/?$/);
+    }
+    return true;
   }
 }

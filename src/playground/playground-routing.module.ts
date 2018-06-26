@@ -103,11 +103,22 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
 import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
 import { NbStepperTestComponent } from './stepper/stepper-test.component';
-
 
 export const routes: Routes = [
   {
@@ -161,6 +172,31 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'spinner',
+        children: [
+          {
+            path: 'spinner-card.component',
+            component: NbSpinnerCardComponent,
+          },
+          {
+            path: 'spinner-tabs.component',
+            component: NbSpinnerTabsComponent,
+          },
+          {
+            path: 'spinner-button.component',
+            component: NbSpinnerButtonComponent,
+          },
+          {
+            path: 'spinner-sizes.component',
+            component: NbSpinnerSizesComponent,
+          },
+          {
+            path: 'spinner-colors.component',
+            component: NbSpinnerColorsComponent,
           },
         ],
       },
@@ -419,6 +455,39 @@ export const routes: Routes = [
           {
             path: 'progress-bar-interactive.component',
             component: NbProgressBarInteractiveComponent,
+          },
+        ],
+      },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: 'chat-showcase.component',
+            component: NbChatShowcaseComponent,
+          },
+          {
+            path: 'chat-colors.component',
+            component: NbChatColorsComponent,
+          },
+          {
+            path: 'chat-sizes.component',
+            component: NbChatSizesComponent,
+          },
+          {
+            path: 'chat-drop.component',
+            component: NbChatDropComponent,
+          },
+          {
+            path: 'chat-message-types-showcase.component',
+            component: NbChatMessageTypesShowcaseComponent,
+          },
+          {
+            path: 'chat-conversation-showcase.component',
+            component: NbChatConversationShowcaseComponent,
+          },
+          {
+            path: 'chat-test.component',
+            component: NbChatTestComponent,
           },
         ],
       },

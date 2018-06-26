@@ -6,7 +6,7 @@ Currently Nebular Theme system is integrated with the following 3rd party module
 - ng2-smart-table;
 - angular2-toaster.
 
-That mean that we created style overriding for these modules, so that you can change component's look & feel using Nebular theme variables.
+It means that we've created style overriding for these modules, so that you can change component's look & feel using Nebular theme variables.
 For example, if you change the `color-primary` variable, bootstrap components using this color will be changed accordingly.
 
 

@@ -9,7 +9,7 @@
 
 ## Install the module
 
-First, let's install the module as it's distributed as an npm package, but make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebulardocs/installation/add-into-existing-project).
+First, let's install the module as it's distributed as npm package. Make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebulardocs/installation/add-into-existing-project).
 Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.  
 
 ```bash
@@ -50,7 +50,7 @@ To add a strategy we need to call static `setup` method to pass a list of option
 
 ```
 
-We also specified a `forms` key, which configures available options for the Auth Components.
+We also specified `forms` key, that configures available options for the Auth Components.
 We leave it empty for now and get back to it in the [Configuring UI](docs/auth/configuring-ui) article.
 <hr>
 

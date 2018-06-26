@@ -221,6 +221,16 @@ export const structure = [
         source: [
           'NbStepperComponent',
           'NbStepComponent',
+        ]
+      },
+      {
+        type: 'tabs',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
+        source: [
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
         ],
       },
       {
@@ -246,6 +256,14 @@ export const structure = [
         icon: 'checkbox.svg',
         source: [
           'NbCheckboxComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'NbSpinnerDirective',
         ],
       },
       {
@@ -312,17 +330,6 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbThemeService',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'SpinnerService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbSpinnerService',
           },
         ],
       },
