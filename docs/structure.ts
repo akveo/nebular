@@ -216,6 +216,25 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Stepper',
+        icon: 'stepper.svg',
+        source: [
+          'NbStepperComponent',
+          'NbStepComponent',
+        ]
+      },
+      {
+        type: 'tabs',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
+        source: [
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
         source: [
@@ -237,6 +256,14 @@ export const structure = [
         icon: 'checkbox.svg',
         source: [
           'NbCheckboxComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'NbSpinnerDirective',
         ],
       },
       {
@@ -321,17 +348,6 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'SpinnerService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbSpinnerService',
-          },
-        ],
-      },
-      {
-        type: 'page',
         name: 'MediaBreakpoints',
         children: [
           {
@@ -379,6 +395,18 @@ export const structure = [
             block: 'theme',
             name: 'Cosmic',
             source: 'cosmic',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Corporate',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Corporate',
+            source: 'corporate',
           },
         ],
       },
@@ -456,6 +484,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Configuring Google OAuth2',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-oauth2.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
@@ -473,6 +512,17 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbPasswordAuthStrategy',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'NbOAuth2AuthStrategy',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbOAuth2AuthStrategy',
           },
         ],
       },

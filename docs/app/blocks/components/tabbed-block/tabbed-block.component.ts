@@ -6,6 +6,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { BehaviorSubject,  combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NgdTabbedService } from '../../../@theme/services';
@@ -39,6 +40,7 @@ export class NgdTabbedBlockComponent implements OnDestroy {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private cd: ChangeDetectorRef,
+              private titleService: Title,
               private tabbedService: NgdTabbedService) {
 
     combineLatest([
@@ -46,7 +48,7 @@ export class NgdTabbedBlockComponent implements OnDestroy {
       this.tabs$.pipe(filter((tabs) => tabs && tabs.length)),
     ])
       .subscribe(([params, tabs]) => {
-        this.router.navigate([tabs[0].tab], { relativeTo: activatedRoute });
+        this.router.navigate([tabs[0].tab], { relativeTo: activatedRoute, replaceUrl: true });
       });
 
     combineLatest([
@@ -55,6 +57,9 @@ export class NgdTabbedBlockComponent implements OnDestroy {
     ])
       .subscribe(([params, tabs]) => {
         this.currentTab = tabs.find(tab => tab.tab === params.tab);
+        if (this.currentTab) {
+          this.titleService.setTitle(`${this.titleService.getTitle()} - component ${this.currentTab.tab}`);
+        }
         this.cd.detectChanges();
       });
   }

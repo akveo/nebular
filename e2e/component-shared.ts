@@ -29,3 +29,5 @@ export const colors = [
   { colorKey: 'default', color: hexToRgbA('#a4abb3') },
   { colorKey: 'disabled', color: 'rgba(255, 255, 255, 0.4)' },
 ];
+
+export const chatSizes = cardSizes;

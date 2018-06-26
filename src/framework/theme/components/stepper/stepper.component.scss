@@ -1,0 +1,56 @@
+:host {
+  &.horizontal .header {
+    .step {
+      flex-direction: column;
+    }
+
+    .connector {
+      height: 2px;
+    }
+  }
+
+  &.vertical {
+    display: flex;
+    height: 100%;
+
+    .header {
+      flex-direction: column;
+
+      .label {
+        margin: 0 10px;
+      }
+
+      .connector {
+        width: 2px;
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+
+  .connector {
+    flex: auto;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .label-index {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .label {
+    width: max-content;
+  }
+}

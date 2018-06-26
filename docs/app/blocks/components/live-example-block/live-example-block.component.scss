@@ -9,6 +9,7 @@
   $block-bg-default: #ebeff5;
   $block-bg-cosmic: #2f296b;
   $block-fg-cosmic: #7d838b;
+  $block-bg-corporate: #f1f5f8;
 
   display: flex;
   flex-direction: column;
@@ -104,6 +105,10 @@
     .action-item {
       color: $block-fg-cosmic;
     }
+  }
+
+  &.theme-corporate {
+    background-color: $block-bg-corporate;
   }
 
   .iframe-container {
