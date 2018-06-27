@@ -417,6 +417,10 @@ MIT
 MIT
 MIT
 
+@angular/animations@6.0.0
+MIT
+MIT
+
 marked@0.3.9
 MIT
 Copyright (c) 2011-2014, Christopher Jeffrey (https://github.com/chjj/)
