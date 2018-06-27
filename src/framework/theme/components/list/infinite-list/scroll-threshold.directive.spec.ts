@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { NbScrollThresholdDirective } from './scroll-threshold.directive';
 import { NbThemeModule } from '../../../theme.module';
 import { NbInifiniteListModule } from './infinite-list.module';
@@ -11,6 +11,43 @@ let fixture: ComponentFixture<ScrollTestComponent>;
 let componentInstance: ScrollTestComponent;
 let scrollingElement: ElementRef;
 let scrollDirective: NbScrollThresholdDirective;
+
+@Component({
+  template: `
+    <div
+      #scrollingElement
+      class="scroller"
+      [class.element-scroll]="!listenWindowScroll"
+      [nbScrollThreshold]="threshold"
+      [listenWindowScroll]="listenWindowScroll"
+      (thresholdReached)="thresholdReached()">
+      <div class="inner"></div>
+    </div>
+  `,
+  styles: [`
+    .scroller {
+      background: lightgray;
+      padding: 10px;
+    }
+    .element-scroll {
+      height: 500px;
+      overflow-y: auto;
+    }
+    .inner {
+      background: lightgoldenrodyellow;
+      height: ${CONTENT_HEIGHT}px;
+    }
+  `],
+})
+class ScrollTestComponent {
+  @ViewChild(NbScrollThresholdDirective) scrollDirective: NbScrollThresholdDirective;
+  @ViewChild('scrollingElement') scrollingElement: ElementRef;
+
+  listenWindowScroll = false;
+  threshold = THRESHOLD;
+
+  thresholdReached() { }
+}
 
 describe('Directive: NbScrollDirective', () => {
 
@@ -137,40 +174,3 @@ describe('Directive: NbScrollDirective', () => {
   // TODO
   // it('should trigger event only when treshold reached (layout scroll)', () => {});
 });
-
-@Component({
-  template: `
-    <div
-      #scrollingElement
-      class="scroller"
-      [class.element-scroll]="!listenWindowScroll"
-      [nbScrollThreshold]="threshold"
-      [listenWindowScroll]="listenWindowScroll"
-      (thresholdReached)="thresholdReached()">
-      <div class="inner"></div>
-    </div>
-  `,
-  styles: [`
-    .scroller {
-      background: lightgray;
-      padding: 10px;
-    }
-    .element-scroll {
-      height: 500px;
-      overflow-y: auto;
-    }
-    .inner {
-      background: lightgoldenrodyellow;
-      height: ${CONTENT_HEIGHT}px;
-    }
-  `],
-})
-class ScrollTestComponent {
-  @ViewChild(NbScrollThresholdDirective) scrollDirective: NbScrollThresholdDirective;
-  @ViewChild('scrollingElement') scrollingElement: ElementRef;
-
-  listenWindowScroll = false;
-  threshold = THRESHOLD;
-
-  thresholdReached() {}
-}
