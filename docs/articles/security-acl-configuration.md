@@ -11,7 +11,7 @@ and the application contains two type of resources that needs to be protected (`
 
 Nebular ACL has a simple way of setting it up. When registering a module you can specify a set of ACL rules by simply providing it as a module configuration.
 
-Let's assume that our guest users can only `view` `news` and `comments`, users can do everything as guests, but also can `create` `comments`, and moderators can also `create` and `remove` `news` and `comments`.
+Let's consider that our guest users can only `view` `news` and `comments`, users can do the same as guests, but also can `create` `comments`, and moderators can also `create` and `remove` `news` and `comments`.
 Now, let's convert this into an ACL configuration object which Nebular can understand. Open your `app.module.ts` and change the `NbSecurityModule.forRoot()` call as follows:
 
 ```ts
@@ -47,7 +47,7 @@ which means that we have a permission againts any resource (like moderators can 
 ## Role Configuration
 
 So far we told Nebular Security what roles-permissions-resources our application has. Now we need to specify how Nebular can determine a role of currently authenticated user.
-To do so we need to create a `RoleProvider` with one simple method `getRole`, which returns an `Observable<string>` of a role.
+To do so we need to create `RoleProvider` with one simple method `getRole`, which returns `Observable<string>` of a role.
 In a simplest form we can provide this service directly in the main module:
 
 
