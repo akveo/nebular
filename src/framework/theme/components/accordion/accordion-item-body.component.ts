@@ -56,7 +56,8 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
-  protected contentHeight: string;
+
+  contentHeight: string;
 
   private alive: boolean = true;
 
@@ -66,7 +67,7 @@ export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef) {
   }
 
-  protected get state(): string {
+  get state(): string {
     return this.accordionItem.collapsed ? 'collapsed' : 'expanded';
   }
 
