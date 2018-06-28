@@ -28,10 +28,16 @@ export class NbScrollThresholdDirective {
   listenWindowScroll = false;
 
   /**
-   * Emits when threshold reached.
+   * Emits when bottom threshold reached.
    */
   @Output()
-  thresholdReached = new EventEmitter();
+  bottomThresholdReached = new EventEmitter();
+
+  /**
+   * Emits when top threshold reached.
+   */
+  @Output()
+  topThresholdReached = new EventEmitter();
 
   @HostListener('window:resize')
   windowResize() {
@@ -64,9 +70,13 @@ export class NbScrollThresholdDirective {
     private elementRef: ElementRef,
   ) {}
 
-  checkPosition(element) {
+  checkPosition(element: Element) {
     if (element.scrollHeight - element.scrollTop <= this.threshold) {
-      this.thresholdReached.emit();
+      this.bottomThresholdReached.emit();
+    }
+
+    if (element.scrollTop <= this.threshold) {
+      this.topThresholdReached.emit();
     }
   }
 

@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
     <nb-infinite-list
       [listenWindowScroll]="true"
       [loadMoreThreshold]="2000"
-      (loadNext)="loadNext()"
+      (loadNext)="loadNext($event)"
+      (loadPrev)="loadPrev($event)"
       tag="fullPageScroll">
 
       <nb-list-item
@@ -35,18 +36,36 @@ import { Component } from '@angular/core';
 })
 export class NbInfiniteListWindowShowcaseComponent {
 
-  private pageSize = 20;
+  private timeout = 1000;
+
+  private pageSize = 10;
   private maxLength = 100000;
   items = [];
 
-  constructor() {
-    for (let i = 0; i < this.pageSize; i++) {
-      this.items.push({ index: i, humanNumber: i + 1 });
-    }
-  }
-
   getIndex(_, { index }) {
     return index;
+  }
+
+  createNewPage(page: number): any[] {
+    const pageIndex = page - 1;
+    const firstItemIndex = pageIndex * this.pageSize;
+    const lastItemIndex = firstItemIndex + this.pageSize;
+    const newItems = [];
+
+    for (let i = firstItemIndex; i < lastItemIndex; i++) {
+      newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true })
+    }
+
+    setTimeout(
+      () => newItems.forEach(i => i.isPlaceholder = false),
+      this.timeout,
+    );
+
+    return newItems;
+  }
+
+  loadPrev(page) {
+    this.items.unshift(...this.createNewPage(page));
   }
 
   loadNext(page) {
@@ -54,19 +73,6 @@ export class NbInfiniteListWindowShowcaseComponent {
       return;
     }
 
-    const placeholders = [];
-    const nextItem = this.items[this.items.length - 1].index + 1;
-    const maxItem = nextItem + this.pageSize;
-    for (let i = nextItem; i < maxItem; i++) {
-      placeholders.push({ index: i, humanNumber: i + 1, isPlaceholder: true });
-    }
-
-    this.items = this.items.concat(placeholders);
-
-    setTimeout(() => {
-      for (let i = nextItem; i < maxItem; i++) {
-        this.items[i].isPlaceholder = false;
-      }
-    }, 1000);
+    this.items.push(...this.createNewPage(page));
   }
 }

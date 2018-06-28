@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { take, takeWhile } from 'rxjs/operators';
 import { NbListComponent, NbListItemComponent } from '../list.component';
 
 @Directive({
@@ -55,7 +55,8 @@ export class NbDisableAutoLoadButtonDirective {
       [role]="role"
       [nbScrollThreshold]="loadMoreThreshold"
       [listenWindowScroll]="listenWindowScroll"
-      (thresholdReached)="onThresholdReached()">
+      (bottomThresholdReached)="onBottomThresholdReached()"
+      (topThresholdReached)="onTopThresholdReached()">
       <ng-content select="nb-list-item"></ng-content>
     </nb-list>
 
@@ -80,19 +81,22 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() loadMoreThreshold;
 
   @Output() loadNext = new EventEmitter<number>();
+  @Output() loadPrev = new EventEmitter<number>();
 
   @ViewChild(NbListComponent, { read: ElementRef }) listElement: ElementRef;
 
   @ContentChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
 
-  @ContentChild(NbDisableAutoLoadButtonDirective) disableButton: NbDisableAutoLoadButtonDirective;
+  @ContentChild(NbDisableAutoLoadButtonDirective) disableAutoLoadButton: NbDisableAutoLoadButtonDirective;
 
   @ContentChild('loadMoreButton') loadMoreButton: ElementRef;
 
   private elementPageMap = new Map<Element, number>();
 
-  private lastReqestedPage: number;
-  private lastLength: number = 0;
+  private firstItem: Element;
+  private lastItem: Element;
+  private lastRequestedStartPage: number;
+  private lastRequestedEndPage: number;
   private intersectionObserver;
 
   constructor(
@@ -101,30 +105,54 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
   ) {}
 
   ngOnInit() {
-    this.disableButton.isPressed = !this.autoLoading;
+    this.disableAutoLoadButton.isPressed = !this.autoLoading;
 
     const rootElement = this.listenWindowScroll
       ? null
       : this.listElement.nativeElement;
     this.intersectionObserver = new IntersectionObserver(
       this.updatePage.bind(this),
-      { root: rootElement },
+      { root: rootElement, threshold: 1 },
     );
   }
 
   ngAfterViewInit() {
-    this.disableButton.click
+    this.disableAutoLoadButton.click
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.autoLoading = !this.autoLoading);
 
-    this.route.params.subscribe(params => {
-      this.lastReqestedPage = params[this.tag] || 1;
-      this.addNewItems();
-    });
+    let hasInitialData = this.listItems.length !== 0;
+
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe(params => {
+        const currentPage = params[this.tag]
+          ? parseInt(params[this.tag], 10)
+          : 1;
+        this.lastRequestedStartPage = currentPage;
+        this.lastRequestedEndPage = currentPage;
+
+        if (hasInitialData) {
+          this.initializeFirstPage(currentPage);
+        } else {
+          // should I emit 'loadPrev' if it's not a first page?
+          if (this.lastRequestedStartPage > 1) {
+            this.emitLoadPrev(--this.lastRequestedStartPage);
+          }
+          this.emitLoadNext(this.lastRequestedEndPage);
+        }
+      });
 
     this.listItems.changes
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.addNewItems());
+      .subscribe(() => {
+        if (hasInitialData) {
+          this.processNewItems();
+        } else {
+          hasInitialData = true;
+          this.initializeFirstPage(this.lastRequestedEndPage);
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -133,40 +161,76 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
     this.elementPageMap.clear();
   }
 
-  onThresholdReached() {
-    if (this.autoLoading) {
-      this.emitLoadNext();
+  onTopThresholdReached() {
+    if (this.autoLoading && this.lastRequestedStartPage > 1) {
+      this.emitLoadPrev(--this.lastRequestedStartPage);
     }
   }
 
-  emitLoadNext() {
-    this.lastReqestedPage++;
-    this.loadNext.emit(this.lastReqestedPage);
+  onBottomThresholdReached() {
+    if (this.autoLoading) {
+      this.emitLoadNext(++this.lastRequestedEndPage);
+    }
+  }
+
+  emitLoadPrev(page: number) {
+    this.loadPrev.emit(this.lastRequestedStartPage);
+  }
+
+  emitLoadNext(page: number) {
+    this.loadNext.emit(this.lastRequestedEndPage);
   }
 
   disableAutoLoading() {
     this.autoLoading = false;
   }
 
-  addNewItems() {
-    const firstNewItemElement = this.listItems.toArray()[this.lastLength].nativeElement;
-    const lastNewItemElement = this.listItems.last.nativeElement;
+  private initializeFirstPage(page) {
+    this.firstItem = this.listItems.first.nativeElement;
+    this.lastItem = this.listItems.last.nativeElement;
 
-    if (this.elementPageMap.has(firstNewItemElement) || this.elementPageMap.has(lastNewItemElement)) {
-      return;
+    this.assignItemsToPage(page, this.firstItem, this.lastItem);
+  }
+
+  private processNewItems() {
+    const hasNewItemsAtStart = this.listItems.first.nativeElement !== this.firstItem;
+    const hasNewItemsAtEnd = this.listItems.last.nativeElement !== this.lastItem;
+
+    const itemsArray: ElementRef[] = this.listItems.toArray();
+
+    if (hasNewItemsAtStart) {
+      const lastStartNewItemIndex = itemsArray.findIndex(i => i.nativeElement === this.firstItem) - 1;
+      this.assignItemsToPage(
+        this.lastRequestedStartPage,
+        this.listItems.first.nativeElement,
+        itemsArray[lastStartNewItemIndex].nativeElement,
+      );
+      // change scrollTop to height of all new items to preserve scroll position
     }
 
-    this.lastLength = this.listItems.length;
+    if (hasNewItemsAtEnd) {
+      const firstNewItemAtEndIndex = itemsArray.findIndex(i => i.nativeElement === this.lastItem) + 1;
+      this.assignItemsToPage(
+        this.lastRequestedEndPage,
+        itemsArray[firstNewItemAtEndIndex].nativeElement,
+        this.listItems.last.nativeElement,
+      );
+    }
 
-    this.elementPageMap.set(firstNewItemElement, this.lastReqestedPage);
-    this.elementPageMap.set(lastNewItemElement, this.lastReqestedPage);
+    this.firstItem = this.listItems.first.nativeElement;
+    this.lastItem = this.listItems.last.nativeElement;
+  }
 
-    for (const element of [ firstNewItemElement, lastNewItemElement ]) {
-      this.intersectionObserver.observe(element);
+  private assignItemsToPage(page: number, ...items: Element[]) {
+    for (const item of items) {
+      if (!this.elementPageMap.has(item)) {
+        this.elementPageMap.set(item, page);
+        this.intersectionObserver.observe(item);
+      }
     }
   }
 
-  updatePage(entries) {
+  private updatePage(entries) {
     const lastEntry = entries[entries.length - 1];
 
     if (!lastEntry.isIntersecting) {

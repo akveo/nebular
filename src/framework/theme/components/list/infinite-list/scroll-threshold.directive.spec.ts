@@ -20,7 +20,7 @@ let scrollDirective: NbScrollThresholdDirective;
       [class.element-scroll]="!listenWindowScroll"
       [nbScrollThreshold]="threshold"
       [listenWindowScroll]="listenWindowScroll"
-      (thresholdReached)="thresholdReached()">
+      (bottomThresholdReached)="bottomThresholdReached()">
       <div class="inner"></div>
     </div>
   `,
@@ -46,7 +46,7 @@ class ScrollTestComponent {
   listenWindowScroll = false;
   threshold = THRESHOLD;
 
-  thresholdReached() { }
+  bottomThresholdReached() { }
 }
 
 describe('Directive: NbScrollDirective', () => {
@@ -139,7 +139,7 @@ describe('Directive: NbScrollDirective', () => {
 
   it('should trigger event only when treshold reached (element scroll)', () => {
     const scrollingNativeElement = scrollingElement.nativeElement;
-    const tresholdReachedSpy = spyOn(componentInstance, 'thresholdReached');
+    const tresholdReachedSpy = spyOn(componentInstance, 'bottomThresholdReached');
 
     const reporterHeight = 1000;
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - reporterHeight;
@@ -157,7 +157,7 @@ describe('Directive: NbScrollDirective', () => {
     componentInstance.listenWindowScroll = true;
     fixture.detectChanges();
 
-    const tresholdReachedSpy = spyOn(componentInstance, 'thresholdReached');
+    const tresholdReachedSpy = spyOn(componentInstance, 'bottomThresholdReached');
 
     const reporterHeight = 1000;
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - reporterHeight;
