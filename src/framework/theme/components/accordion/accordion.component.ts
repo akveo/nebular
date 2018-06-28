@@ -6,7 +6,7 @@
 
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { convertToBoolProperty } from '@nebular/theme/components/helpers';
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * An accordion allows to toggle the display of sections of content
