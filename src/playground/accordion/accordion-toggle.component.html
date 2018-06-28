@@ -1,5 +1,11 @@
+<nb-card>
+  <nb-card-body>
+    <button class="btn btn-primary" (click)="toggle()">Toggle First Item</button>
+  </nb-card-body>
+</nb-card>
+
 <nb-accordion>
-  <nb-accordion-item>
+  <nb-accordion-item #item>
     <nb-accordion-item-header>
       Product Details
     </nb-accordion-item-header>
@@ -21,7 +27,7 @@
     </nb-accordion-item-body>
   </nb-accordion-item>
 
-  <nb-accordion-item disabled="true">
+  <nb-accordion-item>
     <nb-accordion-item-header>
       Edit
     </nb-accordion-item-header>

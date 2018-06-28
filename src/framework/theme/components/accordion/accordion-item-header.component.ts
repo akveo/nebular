@@ -15,21 +15,9 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { merge } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionItemComponent } from './accordion-item.component';
-
-const expansionIndicatorTrigger = trigger('expansionIndicator', [
-  state(
-    'expanded',
-    style({
-      transform: 'rotate(180deg)',
-    }),
-  ),
-  transition('collapsed => expanded', animate('100ms ease-in')),
-  transition('expanded => collapsed', animate('100ms ease-out')),
-]);
 
 /**
  * Component intended to be used within `<nb-accordion-item>` component
@@ -41,35 +29,43 @@ const expansionIndicatorTrigger = trigger('expansionIndicator', [
     <ng-content select="nb-accordion-item-title"></ng-content>
     <ng-content select="nb-accordion-item-description"></ng-content>
     <ng-content></ng-content>
-    <i [@expansionIndicator]="state" *ngIf="showToggle" class="nb-arrow-down"></i>
+    <i [@expansionIndicator]="state" *ngIf="!disabled" class="nb-arrow-down"></i>
   `,
-  animations: [expansionIndicatorTrigger],
+  animations: [
+    trigger('expansionIndicator', [
+      state(
+        'expanded',
+        style({
+          transform: 'rotate(180deg)',
+        }),
+      ),
+      transition('collapsed => expanded', animate('100ms ease-in')),
+      transition('expanded => collapsed', animate('100ms ease-out')),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
-  private alive: boolean = true;
-
-  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cdr: ChangeDetectorRef) {}
 
   @HostBinding('class.accordion-item-header-collapsed')
   get isCollapsed(): boolean {
-    return !!this.accordionItem.collapsed;
+    return this.accordionItem.collapsed;
   }
 
   @HostBinding('class.accordion-item-header-expanded')
   @HostBinding('attr.aria-expanded')
-  get isExpanded(): boolean {
+  get expanded(): boolean {
     return !this.accordionItem.collapsed;
   }
 
   @HostBinding('attr.tabindex')
-  get isTabbable(): string {
+  get tabbable(): string {
     return this.accordionItem.disabled ? '-1' : '0';
   }
 
   @HostBinding('attr.aria-disabled')
-  get isDisabled(): boolean {
-    return !!this.accordionItem.disabled;
+  get disabled(): boolean {
+    return this.accordionItem.disabled;
   }
 
   @HostListener('click')
@@ -81,27 +77,19 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     if (this.isCollapsed) {
       return 'collapsed';
     }
-    if (this.isExpanded) {
+    if (this.expanded) {
       return 'expanded';
     }
   }
 
-  get showToggle(): boolean {
-    return !this.accordionItem.hideToggle;
+  private alive: boolean = true;
+  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    // Since the toggle state depends on an @Input on the panel, we
-    // need to  subscribe and trigger change detection manually.
-    merge(
-      this.accordionItem.closed,
-      this.accordionItem.opened,
-      this.accordionItem.accordionItemInputChanges.pipe(
-        filter(changes => !!(changes['disabled'] || changes['hideToggle'])),
-      ),
-    )
+    this.accordionItem.accordionItemInvalidate
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.cdr.markForCheck());
+      .subscribe(() => this.cd.markForCheck());
   }
 
   ngOnDestroy() {

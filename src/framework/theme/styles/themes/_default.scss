@@ -551,7 +551,7 @@ $theme: (
   spinner-large: 2.25rem,
   spinner-xlarge: 2.5rem,
   spinner-xxlarge: 3rem,
-  
+
   stepper-index-size: 2rem,
   stepper-label-font-size: font-size-sm,
   stepper-label-font-weight: font-weight-bolder,
@@ -561,13 +561,24 @@ $theme: (
   stepper-completed-icon-size: 1.5rem,
   stepper-completed-icon-weight: font-weight-ultra-bold,
   stepper-step-padding: padding,
-  
+
+  accordion-padding: padding,
+  accordion-separator: separator,
+  accordion-header-font-family: font-secondary,
+  accordion-header-font-size: font-size-lg,
+  accordion-header-font-weight: font-weight-normal,
+  accordion-header-fg-heading: color-fg-heading,
+  accordion-header-disabled-fg: color-fg,
+  accordion-header-border-width: 1px,
+  accordion-header-border-type: solid,
+  accordion-header-border-color: accordion-separator,
   accordion-item-bg: color-bg,
-  accordion-item-horizontal-offset-color: rgba(0, 0, 0, 0.2),
-  accordion-item-vertical-offset-color: rgba(0, 0, 0, 0.14),
-  accordion-item-blur-color: rgba(0, 0, 0, 0.12),
-  accordion-item-header-hover-bg: rgba(0, 0, 0, 0.04),
-  accordion-item-description-fg: color-fg,
+  accordion-item-font-size: font-size,
+  accordion-item-font-weight: font-weight-normal,
+  accordion-item-font-family: font-main,
+  accordion-item-fg-text: color-fg-text,
+  accordion-item-shadow: shadow,
+
 );
 
 // register the theme

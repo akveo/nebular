@@ -10,16 +10,12 @@ import { CommonModule } from '@angular/common';
 import { NbAccordionComponent } from './accordion.component';
 import { NbAccordionItemComponent } from './accordion-item.component';
 import { NbAccordionItemHeaderComponent } from './accordion-item-header.component';
-import { NbAccordionItemTitleComponent } from './accordion-item-title.component';
-import { NbAccordionItemDescriptionComponent } from './accordion-item-description.component';
 import { NbAccordionItemBodyComponent } from './accordion-item-body.component';
 
 const NB_ACCORDION_COMPONENTS = [
   NbAccordionComponent,
   NbAccordionItemComponent,
   NbAccordionItemHeaderComponent,
-  NbAccordionItemTitleComponent,
-  NbAccordionItemDescriptionComponent,
   NbAccordionItemBodyComponent,
 ];
 

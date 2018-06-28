@@ -10,73 +10,48 @@ import { hasClass } from './e2e-helper';
 
 describe('accordion', () => {
   beforeEach(done => {
-    browser.get('#/accordion').then(() => done());
+    browser.get('#/accordion/accordion-test.component').then(() => done());
   });
 
-  it('should display the 3 accordion items', () => {
-    expect(element.all(by.css('nb-accordion > nb-accordion-item')).count()).toEqual(3);
+  it('should display the 4 accordion items', () => {
+    expect(element.all(by.css('nb-accordion > nb-accordion-item')).count()).toEqual(4);
 
     expect(
       element(
-        by.css('nb-accordion > nb-accordion-item:nth-child(1) > nb-accordion-item-header > nb-accordion-item-title'),
+        by.css('nb-accordion > nb-accordion-item:nth-child(1) > nb-accordion-item-header'),
       ).getText(),
-    ).toEqual('Accordion #1');
-    expect(
-      element(
-        by.css(
-          'nb-accordion > nb-accordion-item:nth-child(1) > nb-accordion-item-header > nb-accordion-item-description',
-        ),
-      ).getText(),
-    ).toEqual('Description #1');
-    expect(
-      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(1)')), 'accordion-item-collapsed'),
-    ).toBeTruthy();
+    ).toEqual('Accordion #1', 'fist item title');
 
     expect(
       element(
-        by.css('nb-accordion > nb-accordion-item:nth-child(2) > nb-accordion-item-header > nb-accordion-item-title'),
+        by.css('nb-accordion > nb-accordion-item:nth-child(2) > nb-accordion-item-header'),
       ).getText(),
-    ).toEqual('Accordion #2');
+    ).toEqual('Accordion #2', 'second item title');
+
     expect(
-      element(
-        by.css(
-          'nb-accordion > nb-accordion-item:nth-child(2) > nb-accordion-item-header > nb-accordion-item-description',
-        ),
-      ).getText(),
-    ).toEqual('Description #2');
-    expect(
-      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(2)')), 'accordion-item-collapsed'),
-    ).toBeTruthy();
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(2)')), 'collapsed'),
+    ).toBeTruthy('second is collapsed');
 
     expect(
       element(
-        by.css('nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header > nb-accordion-item-title'),
+        by.css('nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header'),
       ).getText(),
-    ).toEqual('Accordion #3');
+    ).toEqual('Accordion #3', 'third item title');
+
     expect(
-      element(
-        by.css(
-          'nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header > nb-accordion-item-description',
-        ),
-      ).getText(),
-    ).toEqual('Description #3');
-    expect(
-      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'accordion-item-collapsed'),
-    ).toBeTruthy();
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'expanded'),
+    ).toBeTruthy('second is expanded');
   });
 
-  it('should expande a first accordion-item', () => {
+  it('should expand a first accordion-item', () => {
     element(by.css('nb-accordion > nb-accordion-item:nth-child(1)')).click();
 
     expect(
-      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(1)')), 'accordion-item-expanded'),
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(1)')), 'expanded'),
     ).toBeTruthy();
 
     expect(
-      hasClass(
-        element(by.css('nb-accordion > nb-accordion-item:nth-child(1) > nb-accordion-item-header')),
-        'accordion-item-header-expanded',
-      ),
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'collapsed'),
     ).toBeTruthy();
 
     expect(
@@ -100,7 +75,7 @@ describe('accordion', () => {
     ).toEqual('0');
 
     expect(
-      element(by.css('nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header')).getAttribute(
+      element(by.css('nb-accordion > nb-accordion-item:nth-child(4) > nb-accordion-item-header')).getAttribute(
         'tabindex',
       ),
     ).toEqual('-1');
@@ -108,17 +83,21 @@ describe('accordion', () => {
 
   it('should display a disabled accordion item', () => {
     expect(
-      element(by.css('nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header')).getAttribute(
+      element(by.css('nb-accordion > nb-accordion-item:nth-child(4) > nb-accordion-item-header')).getAttribute(
         'aria-disabled',
       ),
     ).toEqual('true');
+
+    expect(
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(4)')), 'disabled'),
+    ).toBeTruthy();
   });
 
   it('should display a disabled accordion with collapsed state after click', () => {
-    element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')).click();
+    element(by.css('nb-accordion > nb-accordion-item:nth-child(4)')).click();
 
     expect(
-      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'accordion-item-collapsed'),
+      hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(4)')), 'collapsed'),
     ).toBeTruthy();
   });
 });

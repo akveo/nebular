@@ -6,19 +6,18 @@ import { NbThemeService } from '@nebular/theme';
   styleUrls: ['./layout-theme-toggle.component.scss'],
   template: `
     <label dir="ltr">
-      <input type="checkbox" value="isCosmic" (click)="toggle()">
-      <span>Cosmic</span>
+      <button (click)="enable('cosmic')">Cosmic</button>
+      &nbsp;
+      <button (click)="enable('default')">Default</button>
+      &nbsp;
+      <button (click)="enable('corporate')">Corporate</button>
     </label>
   `,
 })
 export class NbLayoutThemeToggleComponent {
   constructor(private themeService: NbThemeService) {}
 
-  get isCosmic(): boolean {
-    return this.themeService.currentTheme === 'cosmic';
-  }
-
-  toggle() {
-    this.isCosmic ? this.themeService.changeTheme('default') : this.themeService.changeTheme('cosmic');
+  enable(theme: string) {
+    this.themeService.changeTheme(theme);
   }
 }

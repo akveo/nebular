@@ -22,11 +22,7 @@ import { Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
-
-/**
- * Used to generate unique ID for each accordion item.
- */
-let nextId = 0;
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * Component intended to be used within `<nb-accordion>` component
@@ -41,53 +37,48 @@ let nextId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
+
   /**
-   * Whether the AccordionItem is collapsed.
+   * Item is collapse (`true` by default)
    * @type {boolean}
    */
   @Input('collapsed')
+  @HostBinding('class.collapsed')
   get collapsed(): boolean {
-    return this._collapsed;
+    return this.collapsedValue;
   }
-  set collapsed(value: boolean) {
-    this._collapsed = value;
-    this.collapsedChange.emit(value);
-
-    if (value) {
-      this.closed.emit();
-    } else {
-      this.opened.emit();
-    }
-
-    this.cdr.markForCheck();
+  set collapsed(val: boolean) {
+    this.collapsedValue = convertToBoolProperty(val);
+    this.collapsedChange.emit(this.collapsedValue);
+    this.invalidate();
   }
 
   /**
-   * Whether the AccordionItem is disabled.
+   * Item is expanded (`false` by default)
    * @type {boolean}
    */
-  @Input() disabled: boolean = false;
+  @Input('expanded')
+  @HostBinding('class.expanded')
+  get expanded(): boolean {
+    return !this.collapsed;
+  }
+  set expanded(val: boolean) {
+    this.collapsedValue = !convertToBoolProperty(val);
+  }
 
   /**
-   * Whether the toggle indicator should be hidden.
+   * Item is disabled and cannot be opened.
    * @type {boolean}
    */
-  @Input() hideToggle: boolean = false;
-
-  /**
-   * Event emitted every time the AccordionItem is opened.
-   */
-  @Output() opened = new EventEmitter<void>();
-
-  /**
-   * Event emitted every time the AccordionItem is closed.
-   */
-  @Output() closed = new EventEmitter<void>();
-
-  /**
-   * Event emitted when the AccordionItem is destroyed.
-   */
-  @Output() destroyed = new EventEmitter<void>();
+  @Input('disabled')
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this.disabledValue;
+  }
+  set disabled(val: boolean) {
+    this.disabledValue = convertToBoolProperty(val);
+    this.invalidate();
+  }
 
   /**
    * Emits whenever the expanded state of the accordion changes.
@@ -95,90 +86,63 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
    */
   @Output() collapsedChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.accordion-item-collapsed')
-  get isCollapsed(): boolean {
-    return !!this.collapsed;
-  }
+  accordionItemInvalidate = new Subject<boolean>();
 
-  @HostBinding('class.accordion-item-expanded')
-  get isExpanded(): boolean {
-    return !this.collapsed;
-  }
+  private collapsedValue = true;
+  private disabledValue = false;
+  private alive = true;
 
-  @HostBinding('attr.id')
-  get componentId(): string {
-    return this.id;
+  constructor(@Host() private accordion: NbAccordionComponent, private cd: ChangeDetectorRef) {
   }
 
   /**
-   * Stream that emits for changes in `@Input` changes
-   */
-  readonly accordionItemInputChanges = new Subject<SimpleChanges>();
-
-  /**
-   * A readonly id value to use for unique selection coordination.
-   */
-  private readonly id = `nb-accordion-item-${nextId++}`;
-  private _collapsed: boolean = true;
-  private alive: boolean = true;
-
-  constructor(@Host() private accordion: NbAccordionComponent, private cdr: ChangeDetectorRef) {}
-
-  /**
-   * Toggles the expanded state of the panel.
+   * Open/close the item
    */
   toggle() {
     if (!this.disabled) {
-      if (!this.accordion.multi) {
-        this.accordion.closeAllAccordionItemsInMultiMode.next(this.id);
-      }
+      // we need this temporary variable as `openCloseItems.next` will change current value we need to save
+      const willSet = !this.collapsed;
 
-      this.collapsed = !this.collapsed;
+      if (!this.accordion.multi) {
+        this.accordion.openCloseItems.next(true);
+      }
+      this.collapsed = willSet;
     }
   }
 
   /**
-   * Sets the collapsed state of the accordion item to false.
+   * Open the item.
    */
   open() {
-    if (!this.disabled) {
-      this.collapsed = false;
-    }
+    !this.disabled && (this.collapsed = false);
   }
 
   /**
-   * Sets the collapsed state of the accordion item to true.
+   * Collapse the item.
    */
   close() {
-    if (!this.disabled) {
-      this.collapsed = true;
-    }
+    !this.disabled && (this.collapsed = true);
   }
 
   ngOnInit() {
-    this.accordion.openCloseAllAccordionItems.pipe(takeWhile(() => this.alive)).subscribe(collapsed => {
-      if (!this.disabled) {
-        this.collapsed = collapsed;
-      }
-    });
-
-    this.accordion.closeAllAccordionItemsInMultiMode.pipe(takeWhile(() => this.alive)).subscribe(accordionId => {
-      if (accordionId !== this.id) {
-        this.collapsed = true;
-      }
+    this.accordion.openCloseItems
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(collapsed => {
+        !this.disabled && (this.collapsed = collapsed);
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.accordionItemInputChanges.next(changes);
+    this.accordionItemInvalidate.next(true);
   }
 
   ngOnDestroy() {
     this.alive = false;
-    this.accordionItemInputChanges.complete();
-    this.opened.complete();
-    this.closed.complete();
-    this.destroyed.emit();
-    this.destroyed.complete();
+    this.accordionItemInvalidate.complete();
+  }
+
+  private invalidate() {
+    this.accordionItemInvalidate.next(true);
+    this.cd.markForCheck();
   }
 }

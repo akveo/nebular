@@ -24,9 +24,7 @@
 @import '../../components/chat/chat.component.theme';
 @import '../../components/spinner/spinner.component.theme';
 @import '../../components/stepper/stepper.component.theme';
-@import '../../components/accordion/accordion-item.component.theme';
-@import '../../components/accordion/accordion-item-header.component.theme';
-@import '../../components/accordion/accordion-item-description.component.theme';
+@import '../../components/accordion/accordion.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -50,7 +48,5 @@
   @include nb-context-menu-theme();
   @include nb-alert-theme();
   @include nb-chat-theme();
-  @include nb-accordion-item-theme();
-  @include nb-accordion-item-header-theme();
-  @include nb-accordion-item-description-theme();
+  @include nb-accordion-theme();
 }

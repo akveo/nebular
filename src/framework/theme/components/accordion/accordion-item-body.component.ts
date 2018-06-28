@@ -14,8 +14,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { merge } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbAccordionItemComponent } from './accordion-item.component';
 
@@ -46,10 +45,9 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
  */
 @Component({
   selector: 'nb-accordion-item-body',
-  styleUrls: ['./accordion-item-body.component.scss'],
   template: `
     <div [@accordionItemBody]="{ value: state, params: { contentHeight: contentHeight } }">
-      <div class="accordion-item-body">
+      <div class="item-body">
         <ng-content></ng-content>
       </div>
     </div>
@@ -65,40 +63,18 @@ export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
   constructor(
     @Host() private accordionItem: NbAccordionItemComponent,
     private el: ElementRef,
-    private cdr: ChangeDetectorRef,
-  ) {}
-
-  protected get isCollapsed(): boolean {
-    return !!this.accordionItem.collapsed;
-  }
-
-  protected get isExpanded(): boolean {
-    return !this.accordionItem.collapsed;
+    private cd: ChangeDetectorRef) {
   }
 
   protected get state(): string {
-    if (this.isCollapsed) {
-      return 'collapsed';
-    }
-    if (this.isExpanded) {
-      return 'expanded';
-    }
+    return this.accordionItem.collapsed ? 'collapsed' : 'expanded';
   }
 
   ngOnInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
-
-    // Since the toggle state depends on an @Input on the panel, we
-    // need to  subscribe and trigger change detection manually.
-    merge(
-      this.accordionItem.opened,
-      this.accordionItem.closed,
-      this.accordionItem.accordionItemInputChanges.pipe(
-        filter(changes => !!(changes['disabled'] || changes['hideToggle'])),
-      ),
-    )
+    this.accordionItem.accordionItemInvalidate
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.cdr.markForCheck());
+      .subscribe(() => this.cd.markForCheck());
   }
 
   ngOnDestroy() {

@@ -301,13 +301,11 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Accordion',
-        icon: 'context-menu.svg',
+        icon: 'accordion.svg',
         source: [
           'NbAccordionComponent',
           'NbAccordionItemComponent',
           'NbAccordionItemHeaderComponent',
-          'NbAccordionItemTitleComponent',
-          'NbAccordionItemDescriptionComponent',
           'NbAccordionItemBodyComponent',
         ],
       },
