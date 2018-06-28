@@ -7,9 +7,7 @@ import { NbThemeService } from '@nebular/theme';
   template: `
     <label dir="ltr">
       <button (click)="enable('cosmic')">Cosmic</button>
-      &nbsp;
       <button (click)="enable('default')">Default</button>
-      &nbsp;
       <button (click)="enable('corporate')">Corporate</button>
     </label>
   `,

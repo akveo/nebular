@@ -38,10 +38,6 @@
     &.middle {
       flex: 1;
     }
-
-    &.right {
-      width: $right-section-width;
-    }
   }
 
   /deep/ nb-menu {
