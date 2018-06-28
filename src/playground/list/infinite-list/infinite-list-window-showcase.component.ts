@@ -5,15 +5,33 @@ import { Component } from '@angular/core';
     <nb-infinite-list
       [listenWindowScroll]="true"
       [loadMoreThreshold]="2000"
-      (loadNext)="loadNext()">
+      (loadNext)="loadNext()"
+      tag="fullPageScroll">
+
       <nb-list-item
         *ngFor="let item of items; trackBy: getIndex"
         [class.placeholder]="item.isPlaceholder">
         {{ item.isPlaceholder ? 'placeholder' : 'item' }} {{ item.humanNumber }}
       </nb-list-item>
+
+      <button
+        nbDisableAutoLoadButton
+        class="visually-hidden"
+        (click)="disableAutoLoading()">
+        Disable auto loading of items in list below
+      </button>
+
+      <button
+        #loadMoreButton
+        (click)="loadNext()">
+        Load more
+      </button>
     </nb-infinite-list>
   `,
-  styleUrls: [ '../list-showcase.component.scss' ],
+  styleUrls: [
+    '../list-showcase.component.scss',
+    './infinite-window.scss',
+  ],
 })
 export class NbInfiniteListWindowShowcaseComponent {
 
@@ -31,7 +49,7 @@ export class NbInfiniteListWindowShowcaseComponent {
     return index;
   }
 
-  loadNext() {
+  loadNext(page) {
     if (this.items.length >= this.maxLength) {
       return;
     }
@@ -49,7 +67,6 @@ export class NbInfiniteListWindowShowcaseComponent {
       for (let i = nextItem; i < maxItem; i++) {
         this.items[i].isPlaceholder = false;
       }
-      // this.chageDetection.detectChanges();
     }, 1000);
   }
 }
