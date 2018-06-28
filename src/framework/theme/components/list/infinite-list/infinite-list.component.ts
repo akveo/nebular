@@ -230,10 +230,10 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
     }
   }
 
-  private updatePage(entries) {
+  private updatePage(entries: IntersectionObserverEntry[]) {
     const lastEntry = entries[entries.length - 1];
 
-    if (!lastEntry.isIntersecting) {
+    if (lastEntry.intersectionRatio < 1) {
       return;
     }
 
