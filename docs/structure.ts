@@ -298,6 +298,17 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Accordion',
+        icon: 'accordion.svg',
+        source: [
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
       // {
       //   type: 'tabs',
       //   name: 'Chips',

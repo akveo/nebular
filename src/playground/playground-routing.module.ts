@@ -119,6 +119,10 @@ import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
 import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
 import { NbStepperTestComponent } from './stepper/stepper-test.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionTestComponent } from './accordion/accordion-test.component';
+import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
+import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
 
 export const routes: Routes = [
   {
@@ -488,6 +492,27 @@ export const routes: Routes = [
           {
             path: 'chat-test.component',
             component: NbChatTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'accordion',
+        children: [
+          {
+            path: 'accordion-showcase.component',
+            component: NbAccordionShowcaseComponent,
+          },
+          {
+            path: 'accordion-multi.component',
+            component: NbAccordionMultiComponent,
+          },
+          {
+            path: 'accordion-toggle.component',
+            component: NbAccordionToggleComponent,
+          },
+          {
+            path: 'accordion-test.component',
+            component: NbAccordionTestComponent,
           },
         ],
       },
