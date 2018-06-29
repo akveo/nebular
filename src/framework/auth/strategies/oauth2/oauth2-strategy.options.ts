@@ -11,9 +11,10 @@ export enum NbOAuth2ResponseType {
   TOKEN = 'token',
 }
 
-// TODO: password, client_credentials
+// TODO: client_credentials
 export enum NbOAuth2GrantType {
   AUTHORIZATION_CODE = 'authorization_code',
+  PASSWORD = 'password',
   REFRESH_TOKEN = 'refresh_token',
 }
 
@@ -38,6 +39,15 @@ export class NbOAuth2AuthStrategyOptions {
   } = {
     endpoint: 'authorize',
     responseType: NbOAuth2ResponseType.CODE,
+  };
+  password?: {
+    endpoint?: string;
+    grantType?: string;
+    class: NbAuthTokenClass,
+  } = {
+    endpoint: 'token',
+    grantType: NbOAuth2GrantType.PASSWORD,
+    class: NbAuthOAuth2Token,
   };
   token?: {
     endpoint?: string;
