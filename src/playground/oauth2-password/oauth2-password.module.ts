@@ -16,12 +16,12 @@ import {
 } from '@nebular/theme';
 
 import {
-  NbAuthModule, NbLoginComponent,
+  NbAuthModule,
   NbOAuth2AuthStrategy, NbOAuth2GrantType,
 } from '@nebular/auth';
 
 import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
-import { NbAuthOAuth2Token } from '@nebular/auth/services';
+import { NbAuthOAuth2Token } from '@nebular/auth';
 
 
 

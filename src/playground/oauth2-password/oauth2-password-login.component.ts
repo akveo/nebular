@@ -5,10 +5,9 @@
  */
 
 import {Component, Inject, OnDestroy} from '@angular/core';
-import { NbAuthOAuth2Token, NbAuthResult, NbAuthService } from '@nebular/auth';
-import {NB_AUTH_OPTIONS, NbAuthSocialLink} from '@nebular/auth/auth.options';
-import {Router} from '@angular/router';
-import {getDeepFromObject} from '@nebular/auth/helpers';
+import { NbAuthOAuth2Token, NbAuthResult, NbAuthService, NB_AUTH_OPTIONS } from '@nebular/auth';
+import { Router } from '@angular/router';
+import {getDeepFromObject} from '../../framework/auth/helpers';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -90,14 +89,12 @@ export class NbOAuth2PasswordLoginComponent implements OnDestroy {
   messages: string[] = [];
   user: any = {};
   submitted: boolean = false;
-  socialLinks: NbAuthSocialLink[] = [];
 
   constructor(private authService: NbAuthService, @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected router: Router) {
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
-    this.socialLinks = this.getConfigValue('forms.login.socialLinks');
     this.authService.onTokenChange()
       .subscribe((token: NbAuthOAuth2Token) => {
         this.token = null;
