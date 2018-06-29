@@ -154,9 +154,9 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     super();
   }
 
-  authenticate(data?: {email: string, password: string}): Observable<NbAuthResult> {
+  authenticate(data?: any): Observable<NbAuthResult> {
 
-    if (this.getOption('password')) {
+    if (this.getOption('password') && data) {
       return this.passwordToken(data.email, data.password)
     } else {
       return this.isRedirectResult()
