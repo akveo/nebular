@@ -84,7 +84,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   get responseType() {
-    return this.getOption('authorize.responseType');
+      return this.getOption('authorize.responseType');
   }
 
   protected redirectResultHandlers = {
@@ -154,17 +154,22 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     super();
   }
 
-  authenticate(): Observable<NbAuthResult> {
-    return this.isRedirectResult()
-      .pipe(
-        switchMap((result: boolean) => {
-          if (!result) {
-            this.authorizeRedirect();
-            return observableOf(new NbAuthResult(true));
-          }
-          return this.getAuthorizationResult();
-        }),
-      );
+  authenticate(data?: any): Observable<NbAuthResult> {
+
+    if (this.getOption('password')) {
+      return this.passwordToken(data.email, data.password)
+    } else {
+      return this.isRedirectResult()
+        .pipe(
+          switchMap((result: boolean) => {
+            if (!result) {
+              this.authorizeRedirect();
+              return observableOf(new NbAuthResult(true));
+            }
+            return this.getAuthorizationResult();
+          }),
+        );
+    }
   }
 
   getAuthorizationResult(): Observable<any> {
@@ -199,6 +204,39 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             errors.push('Something went wrong.');
           }
 
+          return observableOf(
+            new NbAuthResult(
+              false,
+              res,
+              this.getOption('redirect.failure'),
+              errors,
+              [],
+            ));
+        }),
+      );
+  }
+
+  passwordToken(email: string, password: string): Observable<NbAuthResult> {
+    const url = this.getActionEndpoint('password');
+
+    return this.http.post(url, this.buildPasswordRequestData(email, password))
+      .pipe(
+        map((res) => {
+          return new NbAuthResult(
+            true,
+            res,
+            this.getOption('redirect.success'),
+            [],
+            this.getOption('defaultMessages'),
+            this.createToken(res));
+        }),
+        catchError((res) => {
+          const errors = [];
+          if (res instanceof HttpErrorResponse) {
+            errors.push(res.error.error_description);
+          } else {
+            this.getOption('defaultErrors')
+          }
           return observableOf(
             new NbAuthResult(
               false,
@@ -272,6 +310,19 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       grant_type: this.getOption('refresh.grantType'),
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
+    };
+
+    Object.entries(params)
+      .forEach(([key, val]) => !val && delete params[key]);
+
+    return params;
+  }
+
+  protected buildPasswordRequestData(email: string, password: string ): any {
+    const params = {
+      grant_type: this.getOption('password.grantType'),
+      email: email,
+      password: password,
     };
 
     Object.entries(params)
