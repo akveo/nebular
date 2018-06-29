@@ -5,9 +5,7 @@ import { Component } from '@angular/core';
     <nb-infinite-list
       [listenWindowScroll]="true"
       [loadMoreThreshold]="2000"
-      (loadNext)="loadNext($event)"
-      (loadPrev)="loadPrev($event)"
-      tag="fullPageScroll">
+      (loadNext)="loadNext($event)">
 
       <nb-list-item
         *ngFor="let item of items; trackBy: getIndex"
@@ -38,6 +36,7 @@ export class NbInfiniteListWindowShowcaseComponent {
 
   private timeout = 1000;
 
+  private page = 1;
   private pageSize = 10;
   private maxLength = 100000;
   items = [];
@@ -64,15 +63,13 @@ export class NbInfiniteListWindowShowcaseComponent {
     return newItems;
   }
 
-  loadPrev(page) {
-    this.items.unshift(...this.createNewPage(page));
-  }
+  loadPrev() {}
 
-  loadNext(page) {
+  loadNext() {
     if (this.items.length >= this.maxLength) {
       return;
     }
 
-    this.items.push(...this.createNewPage(page));
+    this.items.push(...this.createNewPage(this.page++));
   }
 }
