@@ -1,0 +1,14 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  &.collapsed + ::ng-deep nb-accordion-item.collapsed {
+    border-radius: 0;
+  }
+}

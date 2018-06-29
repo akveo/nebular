@@ -245,7 +245,6 @@ For example, if you wanna add getting started article you have to do the followi
 
 ### Component block
 
-
 If you have to render all the information about componend parsed with typedoc
 you have to use component blocks:
 
