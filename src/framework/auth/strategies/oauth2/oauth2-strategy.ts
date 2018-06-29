@@ -206,21 +206,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.createToken(res));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('defaultErrors');
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('redirect.failure'),
-              errors,
-              [],
-            ));
+          return this.handleResponseError(res);
         }),
       );
   }
@@ -240,24 +226,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.createToken(res));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            if (res.error.error_description) {
-              errors.push(res.error.error_description);
-            } else {
-              errors = this.getOption('defaultErrors');
-            }
-          } else {
-            errors.push('Something went wrong.');
-          }
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('redirect.failure'),
-              errors,
-              [],
-            ));
+          return this.handleResponseError(res);
         }),
       );
   }
@@ -285,21 +254,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.createToken(res));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('defaultErrors');
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('redirect.failure'),
-              errors,
-              [],
-            ));
+          return this.handleResponseError(res);
         }),
       );
   }
@@ -333,6 +288,27 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     };
     this.cleanParams(params);
     return params;
+  }
+
+  protected handleResponseError(res: any): Observable<NbAuthResult> {
+    let errors = [];
+    if (res instanceof HttpErrorResponse) {
+      if (res.error.error_description) {
+        errors.push(res.error.error_description);
+      } else {
+        errors = this.getOption('defaultErrors');
+      }
+    } else {
+      errors.push('Something went wrong.');
+    }
+    return observableOf(
+      new NbAuthResult(
+        false,
+        res,
+        this.getOption('redirect.failure'),
+        errors,
+        [],
+      ));
   }
 
   protected buildRedirectUrl() {

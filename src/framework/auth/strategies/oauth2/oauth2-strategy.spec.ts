@@ -149,7 +149,7 @@ describe('oauth2-auth-strategy', () => {
           expect(result.getToken()).toBeNull();
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()).toEqual(errorMessages);
+          expect(result.getErrors()).toEqual([ tokenErrorResponse.error_description] );
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -192,7 +192,7 @@ describe('oauth2-auth-strategy', () => {
           expect(result.getToken()).toBeNull(); // we don't have a token at this stage yet
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()).toEqual(errorMessages);
+          expect(result.getErrors()).toEqual([ tokenErrorResponse.error_description] );
           expect(result.getRedirect()).toEqual(null);
           done();
         });
@@ -404,7 +404,7 @@ describe('oauth2-auth-strategy', () => {
           expect(result.getToken()).toBeNull();
           expect(result.getResponse().error).toEqual(tokenErrorResponse);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()).toEqual(errorMessages);
+          expect(result.getErrors()).toEqual([ tokenErrorResponse.error_description] );
           expect(result.getRedirect()).toEqual('/failure');
           done();
         });
