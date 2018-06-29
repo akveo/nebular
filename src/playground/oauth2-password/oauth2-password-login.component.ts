@@ -4,11 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, Inject, OnDestroy} from '@angular/core';
-import { NbAuthOAuth2Token, NbAuthResult, NbAuthService, NB_AUTH_OPTIONS } from '@nebular/auth';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import {
+  NbAuthOAuth2Token,
+  NbAuthResult,
+  NbAuthService,
+  NB_AUTH_OPTIONS,
+  nbAuthCreateToken,
+  NbAuthJWTToken
+} from '@nebular/auth';
 import { Router } from '@angular/router';
-import {getDeepFromObject} from '../../framework/auth/helpers';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { getDeepFromObject } from '../../framework/auth/helpers';
 
 @Component({
   selector: 'nb-playground-auth',
@@ -21,7 +27,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
             <p>Current User Access Token: {{ token.getValue() | json }}</p>
             <p>Current User Access Token Payload : {{getClaims(token.getValue()) | json}}</p>
             <p>Current User Refresh Token: {{ token.getRefreshToken() | json }}</p>
-            <p>Current User Refresh Token Payload : {{getClaims(token.getRefreshToken()) | json}}</p>
             <button class="btn btn-warning" *ngIf="token" (click)="logout()">Sign Out</button>
           </nb-card-body>
           <nb-card-body *ngIf="! token"><p>No User Authenticated</p></nb-card-body>
@@ -79,8 +84,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class NbOAuth2PasswordLoginComponent implements OnDestroy {
 
   token: NbAuthOAuth2Token;
-  jwtHelper = new JwtHelperService();
-
   redirectDelay: number = 0;
   showMessages: any = {};
   strategy: string = '';
@@ -141,6 +144,6 @@ export class NbOAuth2PasswordLoginComponent implements OnDestroy {
   }
 
   getClaims(rawToken: string): string {
-    return this.jwtHelper.decodeToken(rawToken);
+    return nbAuthCreateToken(NbAuthJWTToken, rawToken).getPayload();
   }
 }

@@ -40,15 +40,6 @@ export class NbOAuth2AuthStrategyOptions {
     endpoint: 'authorize',
     responseType: NbOAuth2ResponseType.CODE,
   };
-  password?: {
-    endpoint?: string;
-    grantType?: string;
-    class: NbAuthTokenClass,
-  } = {
-    endpoint: 'token',
-    grantType: NbOAuth2GrantType.PASSWORD,
-    class: NbAuthOAuth2Token,
-  };
   token?: {
     endpoint?: string;
     grantType?: string;

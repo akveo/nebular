@@ -12,7 +12,10 @@ import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthRefreshableToken, NbAuthResult } from '../../services/';
-import { NbOAuth2AuthStrategyOptions, NbOAuth2ResponseType, auth2StrategyOptions } from './oauth2-strategy.options';
+import { NbOAuth2AuthStrategyOptions,
+         NbOAuth2ResponseType,
+         auth2StrategyOptions,
+         NbOAuth2GrantType } from './oauth2-strategy.options';
 import { NbAuthStrategyClass } from '../../auth.options';
 
 
@@ -84,7 +87,13 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   get responseType() {
-      return this.getOption('authorize.responseType');
+    return this.getOption('authorize.responseType');
+  }
+
+  protected cleanParams(params: any): void {
+    Object.entries(params)
+      .forEach(([key, val]) => !val && delete params[key]);
+    return params;
   }
 
   protected redirectResultHandlers = {
@@ -156,7 +165,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
   authenticate(data?: any): Observable<NbAuthResult> {
 
-    if (this.getOption('password') && data) {
+    if (this.getOption('token.grantType') === NbOAuth2GrantType.PASSWORD) {
       return this.passwordToken(data.email, data.password)
     } else {
       return this.isRedirectResult()
@@ -217,7 +226,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   passwordToken(email: string, password: string): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('password');
+    const url = this.getActionEndpoint('token');
 
     return this.http.post(url, this.buildPasswordRequestData(email, password))
       .pipe(
@@ -231,11 +240,15 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.createToken(res));
         }),
         catchError((res) => {
-          const errors = [];
+          let errors = [];
           if (res instanceof HttpErrorResponse) {
-            errors.push(res.error.error_description);
+            if (res.error.error_description) {
+              errors.push(res.error.error_description);
+            } else {
+              errors = this.getOption('defaultErrors');
+            }
           } else {
-            this.getOption('defaultErrors')
+            errors.push('Something went wrong.');
           }
           return observableOf(
             new NbAuthResult(
@@ -298,10 +311,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       redirect_uri: this.getOption('token.redirectUri'),
       client_id: this.getOption('clientId'),
     };
-
-    Object.entries(params)
-      .forEach(([key, val]) => !val && delete params[key]);
-
+    this.cleanParams(params);
     return params;
   }
 
@@ -311,23 +321,17 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
     };
-
-    Object.entries(params)
-      .forEach(([key, val]) => !val && delete params[key]);
-
+    this.cleanParams(params);
     return params;
   }
 
   protected buildPasswordRequestData(email: string, password: string ): any {
     const params = {
-      grant_type: this.getOption('password.grantType'),
+      grant_type: this.getOption('token.grantType'),
       email: email,
       password: password,
     };
-
-    Object.entries(params)
-      .forEach(([key, val]) => !val && delete params[key]);
-
+    this.cleanParams(params);
     return params;
   }
 

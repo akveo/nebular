@@ -55,7 +55,7 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
           clientId: 'test',
           clientSecret: 'secret',
           baseEndpoint: 'http://localhost:4400/api/auth/',
-          password: {
+          token: {
             endpoint: 'token',
             grantType: NbOAuth2GrantType.PASSWORD,
             class: NbAuthOAuth2Token,

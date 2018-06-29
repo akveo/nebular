@@ -78,20 +78,12 @@ app.post('/api/auth/token', function (req, res) {
         email: user.email,
         role: 'user',
       };
-      var refreshPayload = {
-        sub: user.email,
-        scopes: [
-          "ROLE_REFRESH_TOKEN",
-        ],
-        jti: "eb4e1584-0117-437c-bfd7-343f257c4aae",
-      }
       var token = jwt.encode(payload, cfg.jwtSecret);
-      var refreshToken = jwt.encode(refreshPayload, cfg.jwtSecret);
       return res.json({
             token_type: 'Bearer',
             access_token: token,
             expires_in: 3600,
-            refresh_token: refreshToken,
+            refresh_token: 'eb4e1584-0117-437c-bfd7-343f257c4aae',
       });
     }
   }
