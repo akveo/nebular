@@ -109,6 +109,7 @@ export class NbCardFooterComponent {
     <ng-content></ng-content>
     <ng-content select="nb-card-header"></ng-content>
     <ng-content select="nb-card-body"></ng-content>
+    <ng-content></ng-content>
     <ng-content select="nb-card-footer"></ng-content>
   `,
 })
