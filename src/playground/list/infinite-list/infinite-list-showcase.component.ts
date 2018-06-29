@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
     </div>
   `,
   styleUrls: [
-    '../list-showcase.component.scss',
+    './infinite-window.scss',
     './infinite-list-showcase.component.scss',
   ],
 })

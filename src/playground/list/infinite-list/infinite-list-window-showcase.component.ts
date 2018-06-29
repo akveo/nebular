@@ -27,10 +27,7 @@ import { Component } from '@angular/core';
       </button>
     </nb-infinite-list>
   `,
-  styleUrls: [
-    '../list-showcase.component.scss',
-    './infinite-window.scss',
-  ],
+  styleUrls: [ './infinite-window.scss' ],
 })
 export class NbInfiniteListWindowShowcaseComponent {
 

@@ -133,6 +133,7 @@ import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbListShowcaseComponent } from './list/list-showcase.component';
+import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbInfiniteListShowcaseComponent } from './list/infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListWindowShowcaseComponent } from './list/infinite-list/infinite-list-window-showcase.component';
 
@@ -566,7 +567,7 @@ export const routes: Routes = [
         children: [
           {
             path: 'list-showcase.component',
-            component: NbListShowcaseComponent,
+            component: NbSimpleListShowcaseComponent,
           },
           {
             path: 'infinite-list/infinite-list-showcase.component',

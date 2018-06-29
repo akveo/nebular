@@ -1,5 +1,14 @@
 :host {
-  /deep/ nb-list nb-list-item {
-    height: 10rem !important;
+  nb-list-item {
+    background-color: lightblue;
+    padding: 1rem;
+    height: 10rem;
+    width: 50%;
+    min-width: 6rem;
+    margin: 1rem auto;
+
+    &.placeholder {
+      background-color: lightgray;
+    }
   }
 }

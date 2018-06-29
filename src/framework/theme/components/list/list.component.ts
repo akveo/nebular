@@ -4,7 +4,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  * List component is a container component that wraps `nb-list-item` or `nb-list-items-group` components.
  *
  * Basic example:
- * @stacked-example(Showcase, list/list-showcase.component)
+ * @stacked-example(Showcase, list/simple-list-showcase.component)
  */
 @Component({
   selector: 'nb-list',

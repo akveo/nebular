@@ -1,0 +1,10 @@
+@mixin nb-list-theme() {
+  nb-list-item {
+    border-bottom: 1px solid nb-theme(list-item-border-color);
+    padding: nb-theme(list-item-padding);
+
+    &:first-child {
+      border-top: 1px solid nb-theme(list-item-border-color);
+    }
+  }
+}
