@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
@@ -19,10 +18,6 @@ import {
   NbRouteTabsetModule,
   NbProgressBarModule,
   NbAlertModule,
-  NbChatModule,
-  NbSpinnerModule,
-  NbStepperModule,
-  NbAccordionModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -114,10 +109,6 @@ import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
-import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
-import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
-import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
-import { NbStepperTestComponent } from './stepper/stepper-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -129,22 +120,6 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
-import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
-import { NbChatColorsComponent } from './chat/chat-colors.component';
-import { NbChatSizesComponent } from './chat/chat-sizes.component';
-import { NbChatDropComponent } from './chat/chat-drop.component';
-import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
-import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
-import { NbChatTestComponent } from './chat/chat-test.component';
-import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
-import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
-import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
-import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
-import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
-import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
-import { NbAccordionTestComponent } from './accordion/accordion-test.component';
-import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
-import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -163,15 +138,9 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
-  NbStepperModule,
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
-  NbChatModule.forChild({
-    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-  }),
-  NbSpinnerModule,
-  NbAccordionModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -266,26 +235,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
-  NbChatShowcaseComponent,
-  NbChatColorsComponent,
-  NbChatSizesComponent,
-  NbChatDropComponent,
-  NbChatMessageTypesShowcaseComponent,
-  NbChatConversationShowcaseComponent,
-  NbChatTestComponent,
-  NbSpinnerCardComponent,
-  NbSpinnerTabsComponent,
-  NbSpinnerButtonComponent,
-  NbSpinnerSizesComponent,
-  NbSpinnerColorsComponent,
-  NbStepperShowcaseComponent,
-  NbStepperValidationComponent,
-  NbStepperVerticalComponent,
-  NbStepperTestComponent,
-  NbAccordionShowcaseComponent,
-  NbAccordionTestComponent,
-  NbAccordionToggleComponent,
-  NbAccordionMultiComponent,
 ];
 
 
@@ -293,8 +242,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   imports: [
     CommonModule,
     NbPlaygroundRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     ...NB_MODULES,
   ],
   declarations: [

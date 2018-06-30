@@ -413,10 +413,6 @@ END OF TERMS AND CONDITIONS
 MIT
 MIT
 
-@angular/animations@6.0.0
-MIT
-MIT
-
 @angular/forms@6.0.0
 MIT
 MIT
