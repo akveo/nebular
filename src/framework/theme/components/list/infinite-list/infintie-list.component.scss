@@ -2,7 +2,7 @@
   display: block;
 }
 
-:host(:not(.window-scroll)) {
+:host(.element-scroll) {
   height: 100%;
   overflow: hidden;
 

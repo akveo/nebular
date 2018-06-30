@@ -68,6 +68,11 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
   @HostBinding('class.window-scroll')
   listenWindowScroll = false;
 
+  @HostBinding('class.element-scroll')
+  get elementScroll() {
+    return !this.listenWindowScroll;
+  }
+
   @Input() loadMoreThreshold;
 
   @Output() loadNext = new EventEmitter();
