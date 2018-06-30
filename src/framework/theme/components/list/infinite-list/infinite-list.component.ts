@@ -39,7 +39,7 @@ export class NbDisableAutoLoadButtonDirective {
 /**
  * Infinite list component.
  *
- * @stacked-example(Basic example:, /infinite-list/infinite-list-showcase.component)
+ * @stacked-example(Basic example:, infinite-list/infinite-list-showcase.component)
  */
 @Component({
   selector: 'nb-infinite-list',
@@ -83,13 +83,17 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
   @ContentChild('loadMoreButton') loadMoreButton: ElementRef;
 
   ngOnInit() {
-    this.disableAutoLoadButton.isPressed = !this.autoLoading;
+    if (this.disableAutoLoadButton) {
+      this.disableAutoLoadButton.isPressed = !this.autoLoading;
+    }
   }
 
   ngAfterViewInit() {
-    this.disableAutoLoadButton.click
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.autoLoading = !this.autoLoading);
+    if (this.disableAutoLoadButton) {
+      this.disableAutoLoadButton.click
+        .pipe(takeWhile(() => this.alive))
+        .subscribe(() => this.autoLoading = !this.autoLoading);
+    }
   }
 
   ngOnDestroy() {
