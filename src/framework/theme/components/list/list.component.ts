@@ -1,10 +1,15 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 /**
- * List component is a container component that wraps `nb-list-item` or `nb-list-items-group` components.
+ * List is a container component that wraps `nb-list-item` or `nb-list-items-group` components.
  *
  * Basic example:
  * @stacked-example(Simple list, list/simple-list-showcase.component)
+ *
+ * `nb-list-item` accepts arbitrary content, so you can create list of any components.
+ *
+ * List of users:
+ * @stacked-example(Users list, list/users-list-showcase.component)
  */
 @Component({
   selector: 'nb-list',

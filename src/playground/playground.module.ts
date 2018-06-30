@@ -166,6 +166,7 @@ import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbInfiniteListShowcaseComponent } from './list/infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListWindowShowcaseComponent } from './list/infinite-list/infinite-list-window-showcase.component';
+import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -321,6 +322,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonTypesComponent,
   NbListShowcaseComponent,
   NbSimpleListShowcaseComponent,
+  NbUsersListShowcaseComponent,
   NbInfiniteListShowcaseComponent,
   NbInfiniteListWindowShowcaseComponent,
 ];
