@@ -566,7 +566,7 @@ export const routes: Routes = [
         path: 'list',
         children: [
           {
-            path: 'list-showcase.component',
+            path: 'simple-list-showcase.component',
             component: NbSimpleListShowcaseComponent,
           },
           {
