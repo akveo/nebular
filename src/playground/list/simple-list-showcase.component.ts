@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card size="medium">
       <nb-card-header>
-        Simple list of some fruits
+        Some fruits
       </nb-card-header>
       <nb-list>
         <nb-list-item *ngFor="let fruit of fruits">
