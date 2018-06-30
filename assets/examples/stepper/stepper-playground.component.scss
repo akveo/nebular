@@ -1,0 +1,16 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+  .btn {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+.lorem {
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  padding-bottom: 1rem;
+}
