@@ -185,7 +185,6 @@ describe('oauth2-auth-strategy', () => {
 
       strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
-
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(false);
           expect(result.isFailure()).toBe(true);
@@ -411,6 +410,69 @@ describe('oauth2-auth-strategy', () => {
 
       httpMock.expectOne('http://example.com/custom')
         .flush(tokenErrorResponse, { status: 400, statusText: 'Bad Request' });
+    });
+  });
+
+  describe('configured: additionnal param: token, grant_type:password', () => {
+
+    beforeEach(() => {
+      strategy.setOptions({
+        baseEndpoint: 'http://example.com/',
+        clientId: 'clientId',
+        clientSecret: 'clientSecret',
+        token: {
+          grantType: NbOAuth2GrantType.PASSWORD,
+          endpoint: 'token',
+        },
+      });
+    });
+
+    it('handle success login', (done: DoneFn) => {
+      const credentials = { email: 'example@akveo.com', password: '123456' };
+
+
+      strategy.authenticate(credentials)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken()).toEqual(successToken);
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
+          && req.body['email'] === credentials.email
+          && req.body['password'] === credentials.password,
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle error login', (done: DoneFn) => {
+      const credentials = { email: 'example@akveo.com', password: '123456' };
+
+      strategy.authenticate(credentials)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(false);
+          expect(result.isFailure()).toBe(true);
+          expect(result.getToken()).toBeNull(); // we don't have a token at this stage yet
+          expect(result.getResponse().error).toEqual(tokenErrorResponse);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()).toEqual([tokenErrorResponse.error_description]);
+          expect(result.getRedirect()).toEqual(null);
+          done();
+        });
+
+       httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
+          && req.body['email'] === credentials.email
+          && req.body['password'] === credentials.password,
+      ).flush(tokenErrorResponse, {status: 401, statusText: 'unauthorized'});
     });
   });
 });
