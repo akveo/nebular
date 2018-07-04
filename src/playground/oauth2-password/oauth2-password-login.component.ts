@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   NbAuthOAuth2Token,
   NbAuthResult,
@@ -81,7 +81,7 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
       </nb-layout-column>
     </nb-layout>    `,
 })
-export class NbOAuth2PasswordLoginComponent implements OnDestroy {
+export class NbOAuth2PasswordLoginComponent {
 
   token: NbAuthOAuth2Token;
   redirectDelay: number = 0;
@@ -134,9 +134,6 @@ export class NbOAuth2PasswordLoginComponent implements OnDestroy {
     this.authService.logout('password')
       .subscribe((authResult: NbAuthResult) => {
       });
-  }
-
-  ngOnDestroy(): void {
   }
 
   getConfigValue(key: string): any {

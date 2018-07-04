@@ -90,7 +90,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.getOption('authorize.responseType');
   }
 
-  protected cleanParams(params: any): void {
+  protected cleanParams(params: any): any {
     Object.entries(params)
       .forEach(([key, val]) => !val && delete params[key]);
     return params;
@@ -205,9 +205,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('defaultMessages'),
             this.createToken(res));
         }),
-        catchError((res) => {
-          return this.handleResponseError(res);
-        }),
+        catchError((res) => this.handleResponseError(res)),
       );
   }
 
@@ -225,9 +223,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('defaultMessages'),
             this.createToken(res));
         }),
-        catchError((res) => {
-          return this.handleResponseError(res);
-        }),
+        catchError((res) => this.handleResponseError(res)),
       );
   }
 
@@ -253,9 +249,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('defaultMessages'),
             this.createToken(res));
         }),
-        catchError((res) => {
-          return this.handleResponseError(res);
-        }),
+        catchError((res) => this.handleResponseError(res)),
       );
   }
 
@@ -266,8 +260,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       redirect_uri: this.getOption('token.redirectUri'),
       client_id: this.getOption('clientId'),
     };
-    this.cleanParams(params);
-    return params;
+    return this.cleanParams(params);
   }
 
   protected buildRefreshRequestData(token: NbAuthRefreshableToken): any {
@@ -276,8 +269,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
     };
-    this.cleanParams(params);
-    return params;
+    return this.cleanParams(params);
   }
 
   protected buildPasswordRequestData(email: string, password: string ): any {
@@ -286,8 +278,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       email: email,
       password: password,
     };
-    this.cleanParams(params);
-    return params;
+    return this.cleanParams(params);
   }
 
   protected handleResponseError(res: any): Observable<NbAuthResult> {
