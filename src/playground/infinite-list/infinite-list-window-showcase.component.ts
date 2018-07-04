@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { ListBase } from './list-base';
 
 @Component({
   template: `
     <nb-infinite-list
       [listenWindowScroll]="true"
       [loadMoreThreshold]="2000"
-      (loadNext)="loadNext($event)">
+      (loadNext)="loadNext()">
 
       <nb-list-item
         *ngFor="let item of items; trackBy: getIndex"
@@ -13,60 +14,26 @@ import { Component } from '@angular/core';
         {{ item.isPlaceholder ? 'placeholder' : 'item' }} {{ item.humanNumber }}
       </nb-list-item>
 
-      <button
-        nbDisableAutoLoadButton
-        class="visually-hidden"
-        (click)="disableAutoLoading()">
+      <button nbDisableAutoLoadButton class="visually-hidden">
         Disable auto loading of items in list below
       </button>
 
-      <button
-        #loadMoreButton
-        (click)="loadNext()">
+      <button nbLoadMoreButtonDirective (click)="loadNext()">
         Load more
       </button>
     </nb-infinite-list>
   `,
   styleUrls: [ './infinite-window.scss' ],
 })
-export class NbInfiniteListWindowShowcaseComponent {
-
-  private timeout = 1000;
-
-  private page = 1;
-  private pageSize = 10;
-  private maxLength = 100000;
-  items = [];
+export class NbInfiniteListWindowShowcaseComponent extends ListBase {
 
   getIndex(_, { index }) {
     return index;
   }
 
-  createNewPage(page: number): any[] {
-    const pageIndex = page - 1;
-    const firstItemIndex = pageIndex * this.pageSize;
-    const lastItemIndex = firstItemIndex + this.pageSize;
-    const newItems = [];
-
-    for (let i = firstItemIndex; i < lastItemIndex; i++) {
-      newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true })
-    }
-
-    setTimeout(
-      () => newItems.forEach(i => i.isPlaceholder = false),
-      this.timeout,
-    );
-
-    return newItems;
-  }
-
   loadPrev() {}
 
   loadNext() {
-    if (this.items.length >= this.maxLength) {
-      return;
-    }
-
-    this.items.push(...this.createNewPage(this.page++));
+    this.addPage();
   }
 }
