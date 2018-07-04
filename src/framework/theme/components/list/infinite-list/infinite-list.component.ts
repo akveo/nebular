@@ -35,6 +35,11 @@ export class NbDisableAutoLoadButtonDirective {
   }
 }
 
+@Directive({
+  selector: 'button[nbLoadMoreButtonDirective]',
+})
+export class NbLoadMoreButtonDirective {}
+
 /**
  * Infinite list component.
  *
@@ -53,11 +58,11 @@ export class NbDisableAutoLoadButtonDirective {
       <ng-content select="nb-list-item"></ng-content>
     </nb-list>
 
-    <ng-content select="loadMoreButton"></ng-content>
+    <ng-content select="[nbLoadMoreButtonDirective]"></ng-content>
   `,
   styleUrls: [ './infintie-list.component.scss' ],
 })
-export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbInfiniteListComponent implements AfterViewInit, OnDestroy {
 
   private alive = true;
 
@@ -78,8 +83,7 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
   @Output() loadPrev = new EventEmitter();
 
   @ContentChild(NbDisableAutoLoadButtonDirective) disableAutoLoadButton: NbDisableAutoLoadButtonDirective;
-
-  @ContentChild('loadMoreButton') loadMoreButton: ElementRef;
+  @ContentChild(NbLoadMoreButtonDirective) loadMoreButton: NbLoadMoreButtonDirective;
 
   ngAfterViewInit() {
     if (this.disableAutoLoadButton) {
