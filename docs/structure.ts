@@ -330,13 +330,13 @@ export const structure = [
       {
         type: 'tabs',
         name: 'List',
-        icon: '',
+        icon: 'list.svg',
         source: [ 'NbListComponent', 'NbListItemComponent', 'NbListItemsGroupComponent' ],
       },
       {
         type: 'tabs',
         name: 'Infinite List',
-        icon: '',
+        icon: 'infinite-scroll.svg',
         source: [ 'NbInfiniteListComponent', 'NbScrollThresholdDirective' ],
       },
     ],
