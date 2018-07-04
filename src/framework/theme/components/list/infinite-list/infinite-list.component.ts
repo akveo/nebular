@@ -26,11 +26,11 @@ export class NbDisableAutoLoadButtonDirective {
 
   @Input()
   @HostBinding('attr.aria-pressed')
-  isPressed = false;
+  pressed = false;
 
   @HostListener('click')
   emitClick() {
-    this.isPressed = !this.isPressed;
+    this.pressed = !this.pressed;
     this.clicked.next();
   }
 }
@@ -81,14 +81,9 @@ export class NbInfiniteListComponent implements OnInit, AfterViewInit, OnDestroy
 
   @ContentChild('loadMoreButton') loadMoreButton: ElementRef;
 
-  ngOnInit() {
-    if (this.disableAutoLoadButton) {
-      this.disableAutoLoadButton.isPressed = !this.autoLoading;
-    }
-  }
-
   ngAfterViewInit() {
     if (this.disableAutoLoadButton) {
+      this.disableAutoLoadButton.pressed = !this.autoLoading;
       this.disableAutoLoadButton.click
         .pipe(takeWhile(() => this.alive))
         .subscribe(() => this.autoLoading = !this.autoLoading);
