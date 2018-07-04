@@ -28,9 +28,9 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *  baseEndpoint? = '/api/auth/';
  *  login?: boolean | NbPasswordStrategyModule = {
  *    alwaysFail: false,
- *    rememberMe: true, // TODO: what does that mean?
  *    endpoint: 'login',
  *    method: 'post',
+ *    failWhenNoToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -43,6 +43,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    rememberMe: true,
  *    endpoint: 'register',
  *    method: 'post',
+ *    failWhenNoToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -85,6 +86,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *  refreshToken?: boolean | NbPasswordStrategyModule = {
  *    endpoint: 'refresh-token',
  *    method: 'post',
+ *    failWhenNoToken: true,
  *    redirect: {
  *      success: null,
  *      failure: null,
@@ -403,14 +405,12 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       );
   }
 
-  // TODO: this should be optional
-  // TODO: we can add token.noTokenFailure = true|false
-  protected validateToken (module: string): any {
+  protected validateToken(module: string): any {
     return map((res) => {
       const token = this.getOption('token.getter')(module, res, this.options);
-      if (!token) {
+      if (!token && this.getOption(`${module}.failWhenNoToken`)) {
         const key = this.getOption('token.key');
-        console.warn(`NbEmailPassAuthProvider:
+        console.warn(`NbPasswordAuthStrategy:
                           Token is not provided under '${key}' key
                           with getter '${this.getOption('token.getter')}', check your auth configuration.`);
 
