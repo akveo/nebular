@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { fruits } from './fruits-list';
 
 @Component({
   template: `
@@ -16,17 +17,5 @@ import { Component } from '@angular/core';
   styleUrls: [ './simple-list-showcase.component.scss' ],
 })
 export class NbSimpleListShowcaseComponent {
-  fruits = [
-    'Lemons',
-    'Raspberries',
-    'Strawberries',
-    'Blackberries',
-    'Kiwis',
-    'Grapefruit',
-    'Avocado',
-    'Watermelon',
-    'Cantaloupe',
-    'Oranges',
-    'Peaches',
-  ];
+  fruits = fruits;
 }

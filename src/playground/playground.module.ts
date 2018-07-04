@@ -167,6 +167,7 @@ import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.compo
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-list-window-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
+import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -240,6 +241,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCardFullComponent,
   NbCardColorsComponent,
   NbCardAccentsComponent,
+  NbCardWithoutBodyComponent,
   NbCardSizesComponent,
   NbCardTestComponent,
   NbFlipCardShowcaseComponent,

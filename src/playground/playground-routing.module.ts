@@ -136,6 +136,7 @@ import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.compo
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-list-window-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
+import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 
 export const routes: Routes = [
   {
@@ -276,6 +277,10 @@ export const routes: Routes = [
           {
             path: 'card-sizes.component',
             component: NbCardSizesComponent,
+          },
+          {
+            path: 'card-without-body.component',
+            component: NbCardWithoutBodyComponent,
           },
         ],
       },
