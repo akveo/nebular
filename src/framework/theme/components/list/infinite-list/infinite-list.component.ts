@@ -38,7 +38,7 @@ export class NbDisableAutoLoadButtonDirective {
 /**
  * Infinite list component.
  *
- * @stacked-example(Basic example:, infinite-list/infinite-list-showcase.component)
+ * @stacked-example(Basic example, infinite-list/infinite-list-showcase.component)
  */
 @Component({
   selector: 'nb-infinite-list',
