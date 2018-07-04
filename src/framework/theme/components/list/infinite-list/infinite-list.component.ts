@@ -4,7 +4,6 @@ import {
   Output,
   EventEmitter,
   HostBinding,
-  ElementRef,
   AfterViewInit,
   OnDestroy,
   ContentChild,

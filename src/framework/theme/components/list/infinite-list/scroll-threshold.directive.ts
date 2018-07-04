@@ -1,5 +1,4 @@
-import { Directive, Input, HostListener, Inject, ElementRef, EventEmitter, Output } from '@angular/core';
-import { NB_DOCUMENT } from '../../../theme.options';
+import { Directive, Input, HostListener, ElementRef, EventEmitter, Output } from '@angular/core';
 
 /**
  * Scroll Threshold Directive
