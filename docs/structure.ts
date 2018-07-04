@@ -221,7 +221,7 @@ export const structure = [
         source: [
           'NbStepperComponent',
           'NbStepComponent',
-        ]
+        ],
       },
       {
         type: 'tabs',
