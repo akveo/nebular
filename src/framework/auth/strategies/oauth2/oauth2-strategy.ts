@@ -32,6 +32,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *
  * export enum NbOAuth2GrantType {
  *   AUTHORIZATION_CODE = 'authorization_code',
+ *   PASSWORD = 'password',
  *   REFRESH_TOKEN = 'refresh_token',
  * }
  *
