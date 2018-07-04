@@ -420,11 +420,12 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.themeService.changeWindowWidth(event.target.innerWidth);
   }
 
+  @HostListener('window:scroll', ['$event'])
   @HostListener('scroll', ['$event'])
-  onELementScroll($event) {
+  onScroll($event) {
     const event = new CustomEvent(
       'nbscroll',
-      { detail: { originalEvent: $event } },
+      { detail: { originalEvent: $event, ...this.getScrollInfo() } },
     );
     this.document.dispatchEvent(event);
   }
@@ -438,5 +439,22 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(() => {
         this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
       });
+  }
+
+  private getScrollInfo(): { scrollTop: number, scrollHeight: number } {
+    let scrollHeight;
+    let scrollTop;
+
+    if (this.withScroll) {
+      scrollHeight = this.elementRef.nativeElement.scrollHeight;
+      scrollTop = this.elementRef.nativeElement.scrollTop;
+    } else {
+      const { body, documentElement } = this.document;
+      const { pageYOffset } = this.window;
+      scrollHeight = Math.max(body.scrollHeight, documentElement.scrollHeight);
+      scrollTop = pageYOffset || documentElement.scrollTop || body.scrollTop || 0;
+    }
+
+    return { scrollHeight, scrollTop };
   }
 }

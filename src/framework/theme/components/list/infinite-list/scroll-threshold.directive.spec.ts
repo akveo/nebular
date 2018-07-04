@@ -7,6 +7,13 @@ import { NbInifiniteListModule } from './infinite-list.module';
 const CONTENT_HEIGHT = 10000;
 const THRESHOLD = 2000;
 
+function nbscrollEvent({ scrollHeight, scrollTop } = { scrollHeight: 0, scrollTop: 0 }) {
+  return new CustomEvent(
+    'nbscroll',
+    { detail: { scrollHeight, scrollTop } },
+  );
+}
+
 let fixture: ComponentFixture<ScrollTestComponent>;
 let componentInstance: ScrollTestComponent;
 let scrollingElement: ElementRef;
@@ -71,21 +78,9 @@ describe('Directive: NbScrollDirective', () => {
     fixture.nativeElement.remove();
   }));
 
-  it('should listen to window scroll', () => {
-    const windowScrollHandlerSpy = spyOn(scrollDirective, 'windowScroll');
-    window.dispatchEvent(new Event('scroll'));
-    expect(windowScrollHandlerSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it('should listen to window resize', () => {
-    const windowResizeHandlerSpy = spyOn(scrollDirective, 'windowResize');
-    window.dispatchEvent(new Event('resize'));
-    expect(windowResizeHandlerSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it('should listen to layout scroll', () => {
+  it('should listen to nbscroll event', () => {
     const layoutScrollHandlerSpy = spyOn(scrollDirective, 'layoutScroll');
-    document.dispatchEvent(new Event('nbscroll'));
+    document.dispatchEvent(nbscrollEvent());
     expect(layoutScrollHandlerSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -95,46 +90,27 @@ describe('Directive: NbScrollDirective', () => {
     expect(elementScrollHandlerSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should ignore window and layout scroll events when listen to element scroll', () => {
+  it('should ignore nbscroll event when listen to element scroll', () => {
     const checkPositionSpy = spyOn(scrollDirective, 'checkPosition');
 
-    window.dispatchEvent(new Event('scroll'));
-    expect(checkPositionSpy).toHaveBeenCalledTimes(0);
-
-    document.dispatchEvent(new Event('nbscroll'));
+    document.dispatchEvent(nbscrollEvent());
     expect(checkPositionSpy).toHaveBeenCalledTimes(0);
 
     scrollingElement.nativeElement.dispatchEvent(new Event('scroll'));
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should listen window or layout scroll when not listening to element scroll', () => {
+  it('should listen nbscroll when not listening to element scroll', () => {
     const checkPositionSpy = spyOn(scrollDirective, 'checkPosition');
 
     componentInstance.listenWindowScroll = true;
     fixture.detectChanges();
 
-    window.dispatchEvent(new Event('scroll'));
+    document.dispatchEvent(nbscrollEvent());
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
 
-    document.dispatchEvent(new Event('nbscroll'));
-    expect(checkPositionSpy).toHaveBeenCalledTimes(2);
-
     scrollingElement.nativeElement.dispatchEvent(new Event('scroll'));
-    expect(checkPositionSpy).toHaveBeenCalledTimes(2);
-  });
-
-  it('should listen window resize regardless of window or element scroll mode', () => {
-    const resizeHandlerSpy = spyOn(scrollDirective, 'windowResize');
-
-    window.dispatchEvent(new Event('resize'));
-    expect(resizeHandlerSpy).toHaveBeenCalledTimes(1);
-
-    scrollDirective.listenWindowScroll = true;
-    fixture.detectChanges();
-
-    window.dispatchEvent(new Event('resize'));
-    expect(resizeHandlerSpy).toHaveBeenCalledTimes(2);
+    expect(checkPositionSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should trigger event only when treshold reached (element scroll)', () => {
@@ -153,7 +129,9 @@ describe('Directive: NbScrollDirective', () => {
     expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger event only when treshold reached (window scroll)', () => {
+  it('should trigger event only when treshold reached (nbscroll)', () => {
+    const { documentElement } = document;
+
     componentInstance.listenWindowScroll = true;
     fixture.detectChanges();
 
@@ -161,16 +139,17 @@ describe('Directive: NbScrollDirective', () => {
 
     const reporterHeight = 1000;
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - reporterHeight;
-    document.documentElement.scrollTop = positionUnderThreshold;
-    window.dispatchEvent(new Event('scroll'));
+    documentElement.scrollTop = positionUnderThreshold;
+    document.dispatchEvent(nbscrollEvent(documentElement));
     expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - (THRESHOLD / 2);
-    document.documentElement.scrollTop = positionBelowThreshold;
-    window.dispatchEvent(new Event('scroll'));
+    documentElement.scrollTop = positionBelowThreshold;
+    document.dispatchEvent(nbscrollEvent(documentElement));
     expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
   });
 
   // TODO
   // it('should trigger event only when treshold reached (layout scroll)', () => {});
+  // it('should trigger topThresholdReached when treshold reached (elment, window, layout scroll)', () => {});
 });

@@ -39,49 +39,31 @@ export class NbScrollThresholdDirective {
   @Output()
   topThresholdReached = new EventEmitter();
 
-  @HostListener('window:resize')
-  windowResize() {
-    this.checkPosition(this.getDocumentElement());
-  }
-
-  @HostListener('window:scroll')
-  windowScroll() {
-    if (this.listenWindowScroll) {
-      this.checkPosition(this.getDocumentElement());
-    }
-  }
-
   @HostListener('document:nbscroll', ['$event'])
   layoutScroll($event) {
     if (this.listenWindowScroll) {
-      this.checkPosition($event.target);
+      const { scrollHeight, scrollTop } = $event.detail;
+      this.checkPosition(scrollHeight, scrollTop);
     }
   }
 
   @HostListener('scroll')
   elementScroll() {
     if (!this.listenWindowScroll) {
-      this.checkPosition(this.elementRef.nativeElement);
+      const { scrollTop, scrollHeight } = this.elementRef.nativeElement;
+      this.checkPosition(scrollHeight, scrollTop);
     }
   }
 
-  constructor(
-    @Inject(NB_DOCUMENT) private document,
-    private elementRef: ElementRef,
-  ) {}
+  constructor(private elementRef: ElementRef) {}
 
-  checkPosition(element: Element) {
-    if (element.scrollHeight - element.scrollTop <= this.threshold) {
+  checkPosition(scrollHeight: number, scrollTop: number) {
+    if (scrollHeight - scrollTop <= this.threshold) {
       this.bottomThresholdReached.emit();
     }
 
-    if (element.scrollTop <= this.threshold) {
+    if (scrollTop <= this.threshold) {
       this.topThresholdReached.emit();
     }
-  }
-
-  private getDocumentElement() {
-    const { body, documentElement } = this.document;
-    return documentElement.scrollTop ? documentElement : body;
   }
 }
