@@ -47,7 +47,7 @@ export class NbSidebarFooterComponent {
 /**
  * Layout sidebar component.
  *
- * Sidebar can be place on the left or the right side of the layout, can be fixed (shown above the content)
+ * Sidebar can be placed on the left or right side of the layout, can be fixed (shown above the content)
  * or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
