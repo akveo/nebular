@@ -30,8 +30,9 @@ export class NbAccessChecker {
   isGranted(permission: string, resource: string): Observable<boolean> {
     return this.roleProvider.getRole()
       .pipe(
-        map((role: string) => {
-          return this.acl.can(role, permission, resource);
+        map((role: string|string[]) => Array.isArray(role) ? role : [role]),
+        map((roles: string[]) => {
+          return roles.some(role => this.acl.can(role, permission, resource));
         }),
       );
   }

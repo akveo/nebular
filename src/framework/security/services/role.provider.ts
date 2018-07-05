@@ -6,5 +6,10 @@
 import { Observable } from 'rxjs';
 
 export abstract class NbRoleProvider {
-  abstract getRole(): Observable<string>;
+
+  /**
+   * Returns current user role
+   * @returns {Observable<string | string[]>}
+   */
+  abstract getRole(): Observable<string|string[]>;
 }
