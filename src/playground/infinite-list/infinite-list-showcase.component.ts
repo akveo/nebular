@@ -14,6 +14,9 @@ import { ListBase } from './list-base';
           {{ item.isPlaceholder ? 'placeholder' : 'item' }} {{ item.humanNumber }}
         </nb-list-item>
 
+        <button nbDisableAutoLoadButton>Disable auto loading</button>
+        <button nbLoadMoreButtonDirective>Load more</button>
+
       </nb-infinite-list>
     </div>
   `,

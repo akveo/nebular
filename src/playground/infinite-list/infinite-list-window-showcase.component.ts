@@ -15,8 +15,8 @@ import { ListBase } from './list-base';
       </nb-list-item>
 
       <button nbDisableAutoLoadButton>Disable auto loading</button>
-
       <button nbLoadMoreButtonDirective>Load more</button>
+
     </nb-infinite-list>
   `,
   styleUrls: [ './infinite-window.scss' ],
