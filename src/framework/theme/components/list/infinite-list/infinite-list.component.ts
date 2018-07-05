@@ -9,7 +9,7 @@ import {
   ContentChild,
   Directive,
   HostListener,
-  OnInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -85,6 +85,8 @@ export class NbInfiniteListComponent implements AfterViewInit, OnDestroy {
   @ContentChild(NbDisableAutoLoadButtonDirective) disableAutoLoadButton: NbDisableAutoLoadButtonDirective;
   @ContentChild(NbLoadMoreButtonDirective) loadMoreButton: NbLoadMoreButtonDirective;
 
+  constructor(private changeDetection: ChangeDetectorRef) {}
+
   ngAfterViewInit() {
     if (this.disableAutoLoadButton) {
       this.disableAutoLoadButton.pressed = !this.autoLoading;
@@ -92,6 +94,7 @@ export class NbInfiniteListComponent implements AfterViewInit, OnDestroy {
         .pipe(takeWhile(() => this.alive))
         .subscribe(() => this.autoLoading = !this.autoLoading);
     }
+    this.changeDetection.detectChanges();
   }
 
   ngOnDestroy() {
