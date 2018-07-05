@@ -49,8 +49,8 @@ export class NbSidebarFooterComponent {
  *
  * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
  *
- * Sidebar can be placed on the left or the right side of the layout,
- * or on start/end position of layout (depends on document direction, left to right or right to left)
+ * Sidebar can be placed on the left or right side of the layout,
+ * or on the start/end position of the layout (depends on document direction, left to right or right to left)
  * It can be fixed (shown above the content) or can push the layout when opened.
  *
  * There are three states - `expanded`, `collapsed`, `compacted`.
