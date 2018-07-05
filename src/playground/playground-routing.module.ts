@@ -741,6 +741,10 @@ export const routes: Routes = [
     loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
   },
   {
+    path: 'oauth2-password',
+    loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
+  },
+  {
     path: '',
     loadChildren: './auth/auth.module#NbAuthPlaygroundModule',
   },
