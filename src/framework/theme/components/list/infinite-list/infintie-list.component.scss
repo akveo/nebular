@@ -1,13 +1,19 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 :host(.element-scroll) {
   height: 100%;
-  overflow: hidden;
 
   nb-list {
-    height: 100%;
     overflow-y: scroll;
+  }
+
+  /deep/ {
+    [nbDisableAutoLoadButton],
+    [nbLoadMoreButtonDirective] {
+      flex-shrink: 0;
+    }
   }
 }
