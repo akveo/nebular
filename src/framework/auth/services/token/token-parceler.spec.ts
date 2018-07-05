@@ -22,54 +22,85 @@ describe('token-parceler', () => {
   const wrappedNonExisting = `{"name":"non-existing","value":"${simpleToken.getValue()}"}`;
   const wrappedInvalid = `{"name":"non-existing"`;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
-        { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken] },
-        NbAuthTokenParceler,
-      ],
+  describe('default configuration', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        providers: [
+          { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
+          { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken] },
+          NbAuthTokenParceler,
+        ],
+      });
+    });
+
+    beforeEach(async(inject(
+      [NbAuthTokenParceler],
+      (_tokenParceler) => {
+        tokenParceler = _tokenParceler;
+      },
+    )));
+
+    it('wraps simple', () => {
+      expect(tokenParceler.wrap(simpleToken))
+        .toEqual(wrappedSimple);
+    });
+
+    it('wraps jwt', () => {
+      expect(tokenParceler.wrap(jwtToken))
+        .toEqual(wrappedJWT);
+    });
+
+    it('unwraps simple', () => {
+      expect(tokenParceler.unwrap(wrappedSimple))
+        .toEqual(simpleToken);
+    });
+
+    it('unwraps jwt', () => {
+      expect(tokenParceler.unwrap(wrappedJWT))
+        .toEqual(jwtToken);
+    });
+
+    it('unwraps non existing', () => {
+      expect(tokenParceler.unwrap(wrappedNonExisting))
+        .toEqual(simpleToken);
+    });
+
+    it('unwraps invalid', () => {
+      const token = tokenParceler.unwrap(wrappedInvalid);
+      expect(token.getName())
+        .toEqual(simpleToken.getName());
+      expect(token.getValue())
+        .toEqual('');
     });
   });
 
+  describe('fail configuration', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        providers: [
+          { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
+          { provide: NB_AUTH_TOKENS, useValue: [] },
+          NbAuthTokenParceler,
+        ],
+      });
+    });
+
     beforeEach(async(inject(
-    [NbAuthTokenParceler],
-    (_tokenParceler) => {
-      tokenParceler = _tokenParceler;
-    },
-  )));
+      [NbAuthTokenParceler],
+      (_tokenParceler) => {
+        tokenParceler = _tokenParceler;
+      },
+    )));
 
-  it('wraps simple', () => {
-    expect(tokenParceler.wrap(simpleToken))
-      .toEqual(wrappedSimple);
+    it('unwraps jwt to fallback simple as none provided', () => {
+
+      const token = tokenParceler.unwrap(wrappedJWT);
+      expect(token.getName())
+        .toEqual(simpleToken.getName());
+
+      expect(token.getValue())
+        .toEqual(jwtToken.getValue());
+    });
+
   });
-
-  it('wraps jwt', () => {
-    expect(tokenParceler.wrap(jwtToken))
-      .toEqual(wrappedJWT);
-  });
-
-  it('unwraps simple', () => {
-    expect(tokenParceler.unwrap(wrappedSimple))
-      .toEqual(simpleToken);
-  });
-
-  it('unwraps jwt', () => {
-    expect(tokenParceler.unwrap(wrappedJWT))
-      .toEqual(jwtToken);
-  });
-
-  it('unwraps non existing', () => {
-    expect(tokenParceler.unwrap(wrappedNonExisting))
-      .toEqual(simpleToken);
-  });
-
-  it('unwraps invalid', () => {
-    const token = tokenParceler.unwrap(wrappedInvalid);
-    expect(token.getName())
-      .toEqual(simpleToken.getName());
-    expect(token.getValue())
-      .toEqual('');
-  });
-
 });

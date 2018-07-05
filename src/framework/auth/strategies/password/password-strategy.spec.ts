@@ -1416,4 +1416,127 @@ describe('password-auth-strategy', () => {
 
   });
 
+  describe('custom failWhenNoToken', () => {
+
+    it('authenticate fail as no token', (done: DoneFn) => {
+      strategy.authenticate(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/login')
+        .flush({});
+    });
+
+    it('authenticate does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        login: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.authenticate(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('You have been successfully logged in.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/login')
+        .flush({});
+    });
+
+    it('register fail as no token', (done: DoneFn) => {
+      strategy.register(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/register')
+        .flush({});
+    });
+
+    it('register does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        register: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.register(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('You have been successfully registered.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/register')
+        .flush({});
+    });
+
+    it('refreshToken fail as no token', (done: DoneFn) => {
+      strategy.refreshToken(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush({});
+    });
+
+    it('refreshToken does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        refreshToken: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.refreshToken(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('Your token has been successfully refreshed.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush({});
+    });
+  });
+
 });
