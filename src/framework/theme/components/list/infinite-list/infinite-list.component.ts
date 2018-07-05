@@ -76,8 +76,16 @@ export class NbInfiniteListComponent implements AfterViewChecked, OnDestroy {
 
   private alive = true;
 
+  /**
+   * Enables emiting of load more event when treshold reached.
+   * When disabled load more event will be fired only after clicking on load more button.
+   */
   @Input() autoLoading = true;
 
+  /**
+   * By default component observes self scroll position.
+   * If set to `true`, component will observe position of window scroll.
+   */
   @Input()
   @HostBinding('class.window-scroll')
   listenWindowScroll = false;
@@ -87,9 +95,19 @@ export class NbInfiniteListComponent implements AfterViewChecked, OnDestroy {
     return !this.listenWindowScroll;
   }
 
-  @Input() loadMoreThreshold;
+  /**
+   * Threshold after which event load more event will be emited.
+   * In pixels.
+   */
+  @Input() loadMoreThreshold: number;
 
+  /**
+   * Emits when distance between bottom of the observed element and current scroll position is less than threshold.
+   */
   @Output() loadNext = new EventEmitter();
+  /**
+   * Emits when distance between top of the observed element and current scroll position is less than threshold.
+   */
   @Output() loadPrev = new EventEmitter();
 
   @ContentChild(NbDisableAutoLoadButtonDirective) disableAutoLoadButton: NbDisableAutoLoadButtonDirective;
