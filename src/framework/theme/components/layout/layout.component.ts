@@ -159,7 +159,7 @@ export class NbLayoutFooterComponent {
  *
  * The layout component is also responsible for changing of the application themes.
  * It listens to the `themeChange` event and change the theme CSS class appended to body.
- * Based on the class appended a specific CSS-theme is applied to the application.
+ * Based on the class appended, specific CSS-theme is applied to the application.
  * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
  * @example A simple layout example:
@@ -201,7 +201,7 @@ export class NbLayoutFooterComponent {
  * layout-min-height
  * layout-content-width
  * layout-window-mode-min-width
- * layout-window-mode-max-width: window mode only, after this value layout turns into floating window
+ * layout-window-mode-max-width: window mode only, after this value layout turns into a floating window
  * layout-window-mode-bg: window mode only, background
  * layout-window-mode-padding-top: window mode only, max padding from top
  * layout-window-shadow: window mode shadow
