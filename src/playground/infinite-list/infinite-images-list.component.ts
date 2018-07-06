@@ -17,9 +17,4 @@ import { ListBase } from './list-base';
 
   `],
 })
-export class NbInfiniteImagesListComponent extends ListBase {
-
-  newItem(index: number) {
-    return this.simpleNewItem(index);
-  }
-}
+export class NbInfiniteImagesListComponent extends ListBase {}
