@@ -168,6 +168,8 @@ import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-s
 import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-list-window-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
+import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
+import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -327,6 +329,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbUsersListShowcaseComponent,
   NbInfiniteListShowcaseComponent,
   NbInfiniteListWindowShowcaseComponent,
+  NbInfiniteImagesListComponent,
+  NbRandomSvgComponent,
 ];
 
 

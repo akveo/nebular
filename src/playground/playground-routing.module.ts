@@ -137,6 +137,7 @@ import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-s
 import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-list-window-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
+import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 
 export const routes: Routes = [
   {
@@ -590,6 +591,10 @@ export const routes: Routes = [
           {
             path: 'infinite-list-window-showcase.component',
             component: NbInfiniteListWindowShowcaseComponent,
+          },
+          {
+            path: 'infinite-images-list.component',
+            component: NbInfiniteImagesListComponent,
           },
         ],
       },

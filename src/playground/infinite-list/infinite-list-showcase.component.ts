@@ -8,7 +8,7 @@ import { NbInfiniteListComponent } from '@nebular/theme';
       <nb-infinite-list
         #infiniteList
         [loadMoreThreshold]="1000"
-        (loadNext)="loadNext()">
+        (loadNext)="addPage()">
 
         <nb-list-item
           *ngFor="let item of items; trackBy: getIndex"
@@ -34,9 +34,5 @@ export class NbInfiniteListShowcaseComponent extends ListBase {
 
   getIndex(_, { index }) {
     return index;
-  }
-
-  loadNext() {
-    this.addPage();
   }
 }
