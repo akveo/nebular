@@ -123,6 +123,8 @@ import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.com
 import { NbAccordionTestComponent } from './accordion/accordion-test.component';
 import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
 import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
+import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
+import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
 
 export const routes: Routes = [
   {
@@ -577,6 +579,14 @@ export const routes: Routes = [
           {
             path: 'layout-fixed-header.component',
             component: NbLayoutFixedHeaderComponent,
+          },
+          {
+            path: 'layout-sidebar-subheader.component',
+            component: NbLayoutSidebarSubheaderComponent,
+          },
+          {
+            path: 'layout-subheader.component',
+            component: NbLayoutSubheaderComponent,
           },
           {
             path: 'layout-column-left.component',

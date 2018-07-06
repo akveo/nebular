@@ -198,4 +198,10 @@
       }
     }
   }
+
+  nb-layout.with-subheader {
+    nb-sidebar .main-container {
+      box-shadow: none; // so that we don't have a shadow over the header in this mode
+    }
+  }
 }

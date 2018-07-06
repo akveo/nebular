@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
+  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
@@ -69,6 +69,18 @@ export class NbLayoutColumnComponent {
  *
  * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
  *
+ * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
+ * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
+ *
+ * @stacked-example(Subheader, layout/layout-subheader.component)
+ *
  * @styles
  *
  * header-font-family
@@ -90,6 +102,11 @@ export class NbLayoutColumnComponent {
 export class NbLayoutHeaderComponent {
 
   @HostBinding('class.fixed') fixedValue: boolean;
+  @HostBinding('class.subheader') subheaderValue: boolean;
+
+  // tslint:disable-next-line
+  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
+  }
 
   /**
    * Makes the header sticky to the top of the nb-layout.
@@ -98,6 +115,18 @@ export class NbLayoutHeaderComponent {
   @Input()
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Places header on a side of the sidebar, and not above.
+   * Disables fixed mode for this header and remove a shadow from the sidebar.
+   * @param {boolean} val
+   */
+  @Input()
+  set subheader(val: boolean) {
+    this.subheaderValue = convertToBoolProperty(val);
+    this.fixedValue = false;
+    this.layout.withSubheader = this.subheaderValue;
   }
 }
 
@@ -221,10 +250,11 @@ export class NbLayoutFooterComponent {
     <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container" #scrollableContainer>
       <div class="layout">
-        <ng-content select="nb-layout-header"></ng-content>
+        <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
           <ng-content select="nb-sidebar"></ng-content>
           <div class="content" [class.center]="centerValue">
+            <ng-content select="nb-layout-header[subheader]"></ng-content>
             <div class="columns">
               <ng-content select="nb-layout-column"></ng-content>
             </div>
@@ -241,6 +271,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
+  @HostBinding('class.with-subheader') withSubheader: boolean = false;
 
   /**
    * Defines whether the layout columns will be centered after some width
