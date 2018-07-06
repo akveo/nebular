@@ -8,39 +8,40 @@
   display: block;
   perspective: 1200px;
   position: relative;
+}
 
-  &.flipped {
-    .flipcard-body {
-      transform: rotateY(180deg);
+:host-context(.flipped) {
+  .flipcard-body {
+    transform: rotateY(-180deg);
 
-      .front-container .flip-button {
-        opacity: 0;
-      }
+    .front-container .flip-button {
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+}
+
+.flipcard-body {
+  display: flex;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+
+  .front-container,
+  .back-container {
+    backface-visibility: hidden;
+    flex: 1;
+
+    .flip-button {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      opacity: 1;
+      transition: opacity 0s 0.15s;
     }
   }
 
-  .flipcard-body {
-    display: flex;
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-
-    .front-container,
-    .back-container {
-      backface-visibility: hidden;
-      flex: 1;
-
-      .flip-button {
-        cursor: pointer;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        opacity: 1;
-        transition: opacity 0s 0.15s;
-      }
-    }
-
-    .back-container {
-      transform: rotateY(180deg);
-    }
+  .back-container {
+    transform: rotateY(180deg);
   }
 }
