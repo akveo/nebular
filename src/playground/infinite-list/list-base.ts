@@ -1,4 +1,4 @@
-export abstract class ListBase {
+export class ListBase {
   protected timeout = 1000
 
   private page = 1;
@@ -17,11 +17,7 @@ export abstract class ListBase {
     const newItems = [];
 
     for (let i = firstItemIndex; i < lastItemIndex; i++) {
-      if (this.newItem) {
-        newItems.push({ isPlaceholder: true, ...this.newItem(i) });
-      } else {
-        newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true });
-      }
+      newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true });
     }
 
     setTimeout(
@@ -43,6 +39,4 @@ export abstract class ListBase {
 
     return { page, items };
   }
-
-  abstract newItem(index: number);
 }

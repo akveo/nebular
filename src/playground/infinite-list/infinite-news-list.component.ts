@@ -1,47 +1,125 @@
-import { Component, AfterViewInit, OnDestroy, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NbListItemComponent } from '@nebular/theme';
 import { takeWhile, take } from 'rxjs/operators';
-import { ListBase } from './list-base';
+
+class TrackingIdWithPost {
+  id: number;
+  isLoading: boolean;
+  post: Post;
+}
+
+export class Post {
+  id: number;
+  title: string;
+  text: string;
+  link: string;
+}
+
+@Component({
+  selector: 'nb-news-post-placeholder',
+  template: `
+    <article>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </article>
+  `,
+  styles: [`
+    :host {
+      background: rgba(216, 216, 216, 0.8705882352941177);
+      display: block;
+      height: 30rem;
+    }
+  `],
+})
+export class NbNewsPostPlaceholderComponent {}
+
+@Component({
+  selector: 'nb-news-post',
+  template: `
+    <article [attr.aria-labelledby]="post.id">
+      <h2 [attr.id]="post.id">{{post.title}}</h2>
+      <nb-random-svg></nb-random-svg>
+      <p>{{post.text}}</p>
+      <a [routerLink]="post.link">Read full article</a>
+    </article>
+  `,
+})
+export class NbNewsPostComponent {
+  @Input()
+  post: Post;
+}
 
 @Component({
   selector: 'nb-infinite-news-list',
   template: `
     <nb-infinite-list
-      [loadMoreThreshold]="2000"
+      [loadMoreThreshold]="threshold"
       [listenWindowScroll]="listenWindowScroll"
+      (loadPrev)="loadPrev()"
       (loadNext)="loadNext()">
-      <nb-list-item *ngFor="let post of items" [attr.data-post-id]="post.id">
-        <article [attr.aria-labelledby]="post.id">
-          <h2 [attr.id]="post.id">{{post.title}}</h2>
-          <nb-random-svg [isLoading]="post.isPlaceholder"></nb-random-svg>
-          <p>{{post.text}}</p>
-          <a [routerLink]="post.link">Read full article</a>
-        </article>
+      <nb-list-item
+        *ngFor="let idWithPost of news; trackBy: postUniqueId"
+        [attr.data-post-id]="idWithPost.id">
+        <nb-news-post-placeholder *ngIf="idWithPost.isLoading; else post"></nb-news-post-placeholder>
+        <ng-template #post>
+          <nb-news-post [post]="idWithPost.post"></nb-news-post>
+        </ng-template>
       </nb-list-item>
     </nb-infinite-list>
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
 })
-export class NbInfiniteNewsListComponent extends ListBase implements AfterViewInit, OnDestroy {
+export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   alive = true;
   listenWindowScroll = true;
+  threshold = 2000;
+
+  pageSize = 10;
+  maxPage = 100;
+  pageLoadingDelay = 1000;
+  previousPageToLoad: number;
+  nextPageToLoad: number;
+  visiblePage: number;
 
   intersectionObserver: IntersectionObserver;
   postIdsToObserve: number[] = [];
   pageByPostId = new Map<number, number>();
   visibleItems = new Map<number, number>();
 
+  news: TrackingIdWithPost[] = [];
+
   @ViewChildren(NbListItemComponent, { read: ElementRef }) postsList: QueryList<ElementRef>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-  ) {
-    super();
+  ) {}
 
-    this.timeout = 3000;
+  ngOnInit() {
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe((params => {
+        const paramsPage = Number.parseInt(params.page, 10);
+        const pageToLoad = paramsPage || 1;
+        this.previousPageToLoad = pageToLoad > 1 ? pageToLoad - 1 : 0 ;
+        this.nextPageToLoad = pageToLoad;
+        // if not 1st load prev?
+        // if this.news not empty do not call load?
+        this.loadNext();
+      }));
   }
 
   ngAfterViewInit() {
@@ -53,20 +131,6 @@ export class NbInfiniteNewsListComponent extends ListBase implements AfterViewIn
     this.postsList.changes
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.observeNewItems());
-
-    this.route.queryParams
-      .pipe(take(1))
-      .subscribe((params => {
-        const currentPage = Number.parseInt(params.page, 10) || 1;
-        const firstItemId = this.items[0].id;
-        const lastItemId = this.items[this.items.length - 1].id;
-
-        this.pageByPostId.set(firstItemId, currentPage);
-        this.pageByPostId.set(lastItemId, currentPage);
-
-        this.postIdsToObserve.push(firstItemId, lastItemId);
-        this.observeNewItems();
-      }));
   }
 
   ngOnDestroy() {
@@ -74,22 +138,24 @@ export class NbInfiniteNewsListComponent extends ListBase implements AfterViewIn
     this.intersectionObserver.disconnect();
   }
 
-  loadNext() {
-    const { page, items } = this.addPage();
-    const firstAndLastItemsIds = [items[0].id, items[items.length - 1].id];
-    for (const id of firstAndLastItemsIds) {
-      this.pageByPostId.set(id, page);
+  loadPrev() {
+    if (this.previousPageToLoad < 1) {
+      return;
     }
-    this.postIdsToObserve.push(...firstAndLastItemsIds);
+
+    const postsPlaceholders = this.emulateLoading(this.previousPageToLoad);
+    this.news.unshift(...postsPlaceholders);
+    this.previousPageToLoad--;
   }
 
-  newItem(index: number) {
-    return {
-      index,
-      id: index,
-      title: `Post ${index + 1}`,
-      text: `Post placeholder text.`,
-    };
+  loadNext() {
+    if (this.nextPageToLoad > this.maxPage) {
+      return;
+    }
+
+    const postsPlaceholders = this.emulateLoading(this.nextPageToLoad);
+    this.news.push(...postsPlaceholders);
+    this.nextPageToLoad++;
   }
 
   private updateUrl(entries: IntersectionObserverEntry[]) {
@@ -116,12 +182,15 @@ export class NbInfiniteNewsListComponent extends ListBase implements AfterViewIn
       }
     });
 
-    // TODO
-    // navigate only if not already on current page
+    const currentPage = this.pageByPostId.get(mostVisibleItemId);
+    if (currentPage === this.visiblePage) {
+      return;
+    }
+
     this.router.navigate(
       ['.'],
       {
-        queryParams: { page: this.pageByPostId.get(mostVisibleItemId) },
+        queryParams: { page: currentPage },
         replaceUrl: true,
         relativeTo: this.route,
       },
@@ -150,5 +219,47 @@ export class NbInfiniteNewsListComponent extends ListBase implements AfterViewIn
 
   private getPostId(element: Element): number {
     return Number.parseInt(element.getAttribute('data-post-id'), 10);
+  }
+
+  private emulateLoading(page: number): TrackingIdWithPost[] {
+    const pageIndex = page - 1;
+    const firstItemIndex = pageIndex * this.pageSize;
+    const lastItemIndex = firstItemIndex + this.pageSize - 1;
+    const idsWithPosts: TrackingIdWithPost[] = [];
+
+    for (let i = firstItemIndex; i <= lastItemIndex; i++) {
+      const idWithPost = new TrackingIdWithPost();
+      idWithPost.id = i;
+      idWithPost.isLoading = true;
+      idsWithPosts.push(idWithPost);
+    }
+
+    const firstAndLastPostsIds = [idsWithPosts[0].id, idsWithPosts[idsWithPosts.length - 1].id];
+    for (const id of firstAndLastPostsIds) {
+      this.pageByPostId.set(id, page);
+    }
+    this.postIdsToObserve.push(...firstAndLastPostsIds);
+
+    setTimeout(
+      () => idsWithPosts.forEach(p => {
+        p.post = this.newPost(p.id + 1);
+        p.isLoading = false;
+      }),
+      this.pageLoadingDelay,
+    );
+
+    return idsWithPosts;
+  }
+
+  private newPost(id: number): Post {
+    const post = new Post();
+    post.id = id;
+    post.title = `Post ${id}`;
+    post.text = 'Post placeholder text.';
+    return post;
+  }
+
+  postUniqueId(_, { id }: TrackingIdWithPost) {
+    return id;
   }
 }
