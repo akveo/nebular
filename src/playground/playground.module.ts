@@ -151,6 +151,8 @@ import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.com
 import { NbAccordionTestComponent } from './accordion/accordion-test.component';
 import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
 import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
+import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
+import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -199,6 +201,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
+  NbLayoutSidebarSubheaderComponent,
+  NbLayoutSubheaderComponent,
   NbLayoutColumnLeftComponent,
   NbLayoutTestComponent,
   NbLayoutHeaderTestComponent,

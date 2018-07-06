@@ -61,6 +61,14 @@ export class NbSidebarFooterComponent {
  *
  * Sidebar also supports a `responsive` behavior, listening to window size change and changing its size respectably.
  *
+ * In a pair with header it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
  * @additional-example(Right Sidebar, sidebar/sidebar-right.component)
  * @additional-example(Fixed Sidebar, sidebar/sidebar-fixed.component)
  *
