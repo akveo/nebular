@@ -1,5 +1,5 @@
-export class ListBase {
-  private timeout = 1000;
+export abstract class ListBase {
+  protected timeout = 1000
 
   private page = 1;
   private pageSize = 10;
@@ -17,7 +17,11 @@ export class ListBase {
     const newItems = [];
 
     for (let i = firstItemIndex; i < lastItemIndex; i++) {
-      newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true })
+      if (this.newItem) {
+        newItems.push({ isPlaceholder: true, ...this.newItem(i) });
+      } else {
+        newItems.push({ index: i, humanNumber: i + 1, isPlaceholder: true });
+      }
     }
 
     setTimeout(
@@ -28,11 +32,17 @@ export class ListBase {
     return newItems;
   }
 
-  addPage() {
+  addPage(): { page: number, items: any[] } {
     if (this.items.length >= this.maxLength) {
       return;
     }
 
-    this.items.push(...this.createNewPage(this.page++));
+    const page = this.page;
+    const items = this.createNewPage(this.page++);
+    this.items.push(...items);
+
+    return { page, items };
   }
+
+  abstract newItem(index: number);
 }

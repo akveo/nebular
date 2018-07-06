@@ -170,6 +170,7 @@ import { NbUsersListShowcaseComponent } from './list/users-list-showcase.compone
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -331,6 +332,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInfiniteListWindowShowcaseComponent,
   NbInfiniteImagesListComponent,
   NbRandomSvgComponent,
+  NbInfiniteNewsListComponent,
 ];
 
 
