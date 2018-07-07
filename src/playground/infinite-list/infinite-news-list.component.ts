@@ -14,8 +14,11 @@ import { takeWhile, take } from 'rxjs/operators';
 
 class TrackingIdWithPost {
   id: number;
-  isLoading: boolean;
   post: Post;
+
+  get isLoading(): boolean {
+    return !!this.post;
+  };
 }
 
 export class Post {
@@ -230,7 +233,6 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     for (let i = firstItemIndex; i <= lastItemIndex; i++) {
       const idWithPost = new TrackingIdWithPost();
       idWithPost.id = i;
-      idWithPost.isLoading = true;
       idsWithPosts.push(idWithPost);
     }
 
@@ -243,7 +245,6 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     setTimeout(
       () => idsWithPosts.forEach(p => {
         p.post = this.newPost(p.id + 1);
-        p.isLoading = false;
       }),
       this.pageLoadingDelay,
     );
