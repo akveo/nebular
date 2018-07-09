@@ -38,7 +38,7 @@ export class NbScrollThresholdDirective {
   @Output()
   topThresholdReached = new EventEmitter();
 
-  @HostListener('document:nbscroll', ['$event'])
+  @HostListener('window:nbscroll', ['$event'])
   layoutScroll($event) {
     if (this.listenWindowScroll) {
       const { scrollHeight, scrollTop } = $event.detail;

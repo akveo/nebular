@@ -427,7 +427,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       'nbscroll',
       { detail: { originalEvent: $event, ...this.getScrollInfo() } },
     );
-    this.document.dispatchEvent(event);
+    this.window.dispatchEvent(event);
   }
 
   private initScrollTop() {
