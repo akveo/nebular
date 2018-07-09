@@ -73,8 +73,8 @@ export class NbCardFooterComponent {
  * Card with header and footer:
  * @stacked-example(With Header & Footer, card/card-full.component)
  *
- * Most of the time main card content goes to `nb-card-body`, so it styled and aligned according to header and footer.
- * But in case you need a higher level of control, you can pass contend directly to `nb-card`,
+ * Most of the time main card content goes to `nb-card-body`, so it styled and aligned accordingly to header and footer.
+ * In case you need a higher level of control, you can pass contend directly to `nb-card`,
  * so `nb-card-body` stylings will not be applied.
  *
  * Consider an example with `nb-list` component:
