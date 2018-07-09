@@ -10,6 +10,11 @@ import { Component, Input, HostBinding } from '@angular/core';
  *
  * List of users:
  * @stacked-example(Users list, list/users-list-showcase.component)
+ *
+ * @styles
+ *
+ * list-item-border-color:
+ * list-item-padding:
  */
 @Component({
   selector: 'nb-list',
