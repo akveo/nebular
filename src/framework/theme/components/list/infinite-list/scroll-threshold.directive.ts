@@ -1,5 +1,10 @@
 import { Directive, Input, HostListener, ElementRef, EventEmitter, Output } from '@angular/core';
 
+export enum NbScrollDirection {
+  UP,
+  DOWN,
+}
+
 /**
  * Scroll Threshold Directive
  *
@@ -10,6 +15,8 @@ import { Directive, Input, HostListener, ElementRef, EventEmitter, Output } from
   selector: '[nbScrollThreshold]',
 })
 export class NbScrollThresholdDirective {
+
+  private lastScrollPosition = 0;
 
   /**
    * Threshold value.
@@ -43,6 +50,7 @@ export class NbScrollThresholdDirective {
     if (this.listenWindowScroll) {
       const { scrollHeight, scrollTop } = $event.detail;
       this.checkPosition(scrollHeight, scrollTop);
+      this.lastScrollPosition = scrollTop;
     }
   }
 
@@ -51,17 +59,23 @@ export class NbScrollThresholdDirective {
     if (!this.listenWindowScroll) {
       const { scrollTop, scrollHeight } = this.elementRef.nativeElement;
       this.checkPosition(scrollHeight, scrollTop);
+      this.lastScrollPosition = scrollTop;
     }
   }
 
   constructor(private elementRef: ElementRef) {}
 
   checkPosition(scrollHeight: number, scrollTop: number) {
-    if (scrollHeight - scrollTop <= this.threshold) {
+    const scrollDelta = scrollTop - this.lastScrollPosition;
+    const scrollDirection = scrollDelta > 0
+      ? NbScrollDirection.DOWN
+      : NbScrollDirection.UP;
+
+    if (scrollDirection === NbScrollDirection.DOWN && scrollHeight - scrollTop <= this.threshold) {
       this.bottomThresholdReached.emit();
     }
 
-    if (scrollTop <= this.threshold) {
+    if (scrollDirection === NbScrollDirection.UP && scrollTop <= this.threshold) {
       this.topThresholdReached.emit();
     }
   }
