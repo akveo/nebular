@@ -74,6 +74,16 @@ export const structure = [
             source: 'enabling-theme-system.md',
           },
         ],
+      },      {
+        type: 'page',
+        name: 'Change Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-change.md',
+          },
+        ],
       },
       {
         type: 'page',
@@ -603,6 +613,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'security-acl-configuration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Multiple User Roles',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-multiple-roles.md',
           },
         ],
       },
