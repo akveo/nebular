@@ -174,6 +174,7 @@ import {
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
+  NbPostPageComponent,
 } from './infinite-list/infinite-news-list.component';
 
 export const NB_MODULES = [
@@ -339,6 +340,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
+  NbPostPageComponent,
 ];
 
 

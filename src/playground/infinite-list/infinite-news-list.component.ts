@@ -25,7 +25,32 @@ export class Post {
   id: number;
   title: string;
   text: string;
-  link: string;
+}
+
+function newPost(id: number): Post {
+  const post = new Post();
+  post.id = id;
+  post.title = `Post ${id}`;
+  post.text = 'Post placeholder text.';
+  return post;
+}
+
+@Component({
+  selector: 'nb-post-page',
+  template: `<nb-news-post [post]="post"></nb-news-post>`,
+})
+export class NbPostPageComponent implements OnInit {
+  post: Post;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.params
+      .pipe(take(1))
+      .subscribe(params => {
+        this.post = newPost(params.id);
+      });
+  }
 }
 
 @Component({
@@ -55,7 +80,7 @@ export class NbNewsPostPlaceholderComponent {}
       <h2 [attr.id]="post.id">{{post.title}}</h2>
       <nb-random-svg></nb-random-svg>
       <p>{{post.text}}</p>
-      <a [routerLink]="post.link">Read full article</a>
+      <a [routerLink]="['../post', post.id]">Read full article</a>
     </article>
   `,
 })
@@ -75,10 +100,8 @@ export class NbNewsPostComponent {
       <nb-list-item
         *ngFor="let idWithPost of news; trackBy: postUniqueId"
         [attr.data-post-id]="idWithPost.id">
-        <nb-news-post-placeholder *ngIf="idWithPost.isLoading; else post"></nb-news-post-placeholder>
-        <ng-template #post>
-          <nb-news-post [post]="idWithPost.post"></nb-news-post>
-        </ng-template>
+        <nb-news-post-placeholder *ngIf="!idWithPost.post"></nb-news-post-placeholder>
+        <nb-news-post *ngIf="idWithPost.post" [post]="idWithPost.post"></nb-news-post>
       </nb-list-item>
     </nb-infinite-list>
   `,
@@ -243,21 +266,11 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     this.postIdsToObserve.push(...firstAndLastPostsIds);
 
     setTimeout(
-      () => idsWithPosts.forEach(p => {
-        p.post = this.newPost(p.id + 1);
-      }),
+      () => idsWithPosts.forEach(p => p.post = newPost(p.id + 1)),
       this.pageLoadingDelay,
     );
 
     return idsWithPosts;
-  }
-
-  private newPost(id: number): Post {
-    const post = new Post();
-    post.id = id;
-    post.title = `Post ${id}`;
-    post.text = 'Post placeholder text.';
-    return post;
   }
 
   postUniqueId(_, { id }: TrackingIdWithPost) {
