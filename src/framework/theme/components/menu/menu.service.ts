@@ -6,12 +6,10 @@
 
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { share } from 'rxjs/operators/share';
 import { Params } from '@angular/router';
-
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { share } from 'rxjs/operators';
+import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
 const itemClick$ = new ReplaySubject<NbMenuBag>(1);
@@ -22,12 +20,13 @@ const getSelectedItem$
 const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
+const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
 
+// TODO: check if we need both URL and LINK
 /**
  * Menu Item options
- * TODO: check if we need both URL and LINK
  */
-export abstract class NbMenuItem {
+export class NbMenuItem {
   /**
    * Item Title
    * @type {string}
@@ -77,7 +76,7 @@ export abstract class NbMenuItem {
    * Item is selected when partly or fully equal to the current url
    * @type {string}
    */
-  pathMatch?: string = 'full'; // TODO: is not set if item is initialized by default, should be set anyway
+  pathMatch?: string = 'full';
   /**
    * Where this is a home item
    * @type {boolean}
@@ -113,6 +112,14 @@ export class NbMenuService {
    */
   addItems(items: NbMenuItem[], tag?: string) {
     addItems$.next({ tag, items });
+  }
+
+  /**
+   * Collapses all menu items
+   * @param {string} tag
+   */
+  collapseAll(tag?: string) {
+    collapseAll$.next({ tag });
   }
 
   /**
@@ -166,7 +173,11 @@ export class NbMenuInternalService {
   }
 
   prepareItems(items: NbMenuItem[]) {
-    items.forEach(i => this.setParent(i));
+    const defaultItem = new NbMenuItem();
+    items.forEach(i => {
+      this.applyDefaults(i, defaultItem);
+      this.setParent(i);
+    });
   }
 
   updateSelection(items: NbMenuItem[], tag: string, collapseOther: boolean = false) {
@@ -190,6 +201,10 @@ export class NbMenuInternalService {
 
   onNavigateHome(): Observable<{ tag: string }> {
     return navigateHome$.pipe(share());
+  }
+
+  onCollapseAll(): Observable<{ tag: string }> {
+    return collapseAll$.pipe(share());
   }
 
   onGetSelectedItem(): Observable<{ tag: string; listener: BehaviorSubject<NbMenuBag> }> {
@@ -240,6 +255,14 @@ export class NbMenuInternalService {
     item.children && item.children.forEach(child => this.collapseItem(child, tag));
   }
 
+  private applyDefaults(item, defaultItem) {
+    const menuItem = {...item};
+    Object.assign(item, defaultItem, menuItem);
+    item.children && item.children.forEach(child => {
+      this.applyDefaults(child, defaultItem);
+    })
+  }
+
   private setParent(item: NbMenuItem) {
     item.children && item.children.forEach(child => {
       child.parent = item;
@@ -280,12 +303,8 @@ export class NbMenuInternalService {
 
   private selectedInUrl(item: NbMenuItem): boolean {
     const exact: boolean = item.pathMatch === 'full';
-    const location: string = this.location.path();
-
-    return (
-      (exact && location === item.link) ||
-      (!exact && location.includes(item.link)) ||
-      (exact && item.fragment && location.substr(location.indexOf('#') + 1).includes(item.fragment))
-    );
+    return exact
+      ? isUrlPathEqual(this.location.path(), item.link)
+      : isUrlPathContain(this.location.path(), item.link);
   }
 }

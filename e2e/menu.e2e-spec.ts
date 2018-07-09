@@ -23,18 +23,23 @@ const menu333 = by.css('#menu-first ul li:nth-child(4) ul li:nth-child(3) ul li:
 const newMenu = by.css('#menu-first ul li:nth-child(5) a');
 const addButton = by.css('#addBtn');
 const homeButton = by.css('#homeBtn');
-const hiddenMenuItem = by.css('#menu-second ul li:nth-child(3)');
-const hiddenSubmenuItem = by.css('#menu-second ul li:nth-child(2) ul li:nth-child(2)');
+const hiddenMenuItem = by.css('#menu-third ul li:nth-child(3)');
+const hiddenSubmenuItem = by.css('#menu-third ul li:nth-child(2) ul li:nth-child(2)');
 const waitTime = 20 * 1000;
 
 const sidebarMenu31 = by.css('#menu-sidebar ul li:nth-child(4) ul li:nth-child(1) > a > span');
+
 const sidebarMenu1 = by.css('#menu-sidebar ul li:nth-child(2) a');
 const sidebarMenu3 = by.css('#menu-sidebar ul li:nth-child(4) a');
+
+const secondMenu1 = by.css('#menu-second ul li:nth-child(2) a');
+const secondMenu2 = by.css('#menu-second ul li:nth-child(3) a');
+const secondMenu4 = by.css('#menu-second ul li:nth-child(4) a');
 
 describe('nb-menu', () => {
 
   beforeEach((done) => {
-    browser.get('#/menu').then(() => done());
+    browser.get('#/menu/menu-test.component').then(() => done());
   });
 
   it('should display group title', () => {
@@ -46,7 +51,7 @@ describe('nb-menu', () => {
 
   it('should display menu', () => {
     expect(element(by.css('#menu-first')).isDisplayed()).toBeTruthy();
-    expect(browser.getCurrentUrl()).toContain('#/menu/1');
+    expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
   });
 
   it('should be selected - Menu #1', () => {
@@ -58,7 +63,7 @@ describe('nb-menu', () => {
     element.all(menu1).first().click()
       .then(() => {
         expect(hasClass(element.all(menu1).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/1');
+        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
       });
   });
 
@@ -71,7 +76,7 @@ describe('nb-menu', () => {
     element.all(menu2).first().click()
       .then(() => {
         expect(hasClass(element.all(menu2).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/2');
+        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/2');
       });
   });
 
@@ -86,7 +91,7 @@ describe('nb-menu', () => {
     element.all(menu3).first().click()
       .then(() => {
         expect(hasClass(element.all(menu3SubMenu).first(), 'expanded')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/1');
+        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
 
         element.all(menu3).first().getText()
           .then(val => {
@@ -96,7 +101,7 @@ describe('nb-menu', () => {
         element.all(menu3).first().click()
           .then(() => {
             expect(hasClass(element.all(menu3SubMenu).first(), 'collapsed')).toBeTruthy();
-            expect(browser.getCurrentUrl()).toContain('#/menu/1');
+            expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
           });
       });
   });
@@ -135,7 +140,7 @@ describe('nb-menu', () => {
 
         menu31el.click()
           .then(() => {
-            expect(browser.getCurrentUrl()).toContain('#/menu/3/1');
+            expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/3/1');
           });
       });
   });
@@ -153,7 +158,7 @@ describe('nb-menu', () => {
 
         menu32el.click()
           .then(() => {
-            expect(browser.getCurrentUrl()).toContain('#/menu/3/2');
+            expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/3/2');
           });
       });
   });
@@ -172,12 +177,12 @@ describe('nb-menu', () => {
         menu33el.click()
           .then(() => {
             expect(hasClass(element.all(menu33SubMenu).first(), 'expanded')).toBeTruthy();
-            expect(browser.getCurrentUrl()).toContain('#/menu/1');
+            expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
 
             menu33el.click()
               .then(() => {
                 expect(hasClass(element.all(menu33SubMenu).first(), 'collapsed')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/1');
+                expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
               });
           });
       });
@@ -202,7 +207,7 @@ describe('nb-menu', () => {
             menu331el.click()
               .then(() => {
                 expect(hasClass(menu331el, 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/1');
+                expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/3/3/1');
               });
           });
       });
@@ -227,7 +232,7 @@ describe('nb-menu', () => {
             menu332el.click()
               .then(() => {
                 expect(hasClass(menu332el, 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+                expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/3/3/2');
               });
           });
       });
@@ -252,7 +257,7 @@ describe('nb-menu', () => {
             menu333el.click()
               .then(() => {
                 expect(hasClass(menu333el, 'active')).toBeTruthy();
-                expect(browser.getCurrentUrl()).toContain('#/menu/1');
+                expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
               });
           });
       });
@@ -262,7 +267,7 @@ describe('nb-menu', () => {
     element(homeButton).click()
       .then(() => {
         expect(hasClass(element.all(menu332).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/3/3/2');
+        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/3/3/2');
       });
   });
 
@@ -274,7 +279,7 @@ describe('nb-menu', () => {
             expect(val).toEqual('New Menu Item');
           });
 
-        expect(browser.getCurrentUrl()).toContain('#/menu/1');
+        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
       });
   });
 
@@ -299,4 +304,39 @@ describe('nb-menu', () => {
         expect(browser.getCurrentUrl()).toContain('param=2');
       })
   });
+
+  it('pathMatch: "full" should be applied by default', () => {
+    browser.get('#/menu/menu-test.component/3/3').then(() => {
+      expect(hasClass(element.all(secondMenu4).first(), 'active')).toBeFalsy();
+    })
+  });
+
+  it('pathMatch: "partial" should work by url segments', () => {
+    const menu1Element = element.all(secondMenu1).first();
+    const menu2Element = element.all(secondMenu2).first();
+    menu1Element.click()
+      .then(() => {
+        expect(hasClass(menu1Element, 'active')).toBeTruthy();
+      });
+    menu2Element.click()
+      .then(() => {
+        expect(hasClass(menu2Element, 'active')).toBeTruthy();
+        expect(hasClass(menu1Element, 'active')).toBeFalsy();
+      })
+  });
+
+  it('should add fragment to url', () => {
+    element.all(menu1).first().click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('#fragment');
+      })
+  });
+
+  it('should add fragment to url (navigate home)', () => {
+    element(homeButton).click()
+      .then(() => {
+        expect(browser.getCurrentUrl()).toContain('#fragment');
+      })
+  });
+
 });

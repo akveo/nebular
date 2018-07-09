@@ -5,16 +5,16 @@
  */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 import {
-  nbBuiltInJSThemesToken,
-  nbMediaBreakpointsToken,
+  NB_BUILT_IN_JS_THEMES,
+  NB_MEDIA_BREAKPOINTS,
   NbThemeOptions,
-  nbThemeOptionsToken,
-  nbJSThemesToken,
-  NbDocument,
-  NbWindow,
+  NB_THEME_OPTIONS,
+  NB_JS_THEMES,
+  NB_DOCUMENT,
+  NB_WINDOW,
 } from './theme.options';
 import { NbThemeService } from './services/theme.service';
 import { NbSpinnerService } from './services/spinner.service';
@@ -25,7 +25,11 @@ import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
 } from './services/breakpoints.service';
+import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from './services/direction.service';
 
+export function nbWindowFactory() {
+  return window;
+}
 
 @NgModule({
   imports: [
@@ -48,21 +52,24 @@ export class NbThemeModule {
    */
   static forRoot(nbThemeOptions: NbThemeOptions,
                  nbJSThemes?: NbJSThemeOptions[],
-                 nbMediaBreakpoints?: NbMediaBreakpoint[]): ModuleWithProviders {
+                 nbMediaBreakpoints?: NbMediaBreakpoint[],
+                 layoutDirection?: NbLayoutDirection): ModuleWithProviders {
 
     return <ModuleWithProviders> {
       ngModule: NbThemeModule,
       providers: [
-        { provide: nbThemeOptionsToken, useValue: nbThemeOptions || {} },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
-        { provide: nbJSThemesToken, useValue: nbJSThemes || [] },
-        { provide: nbMediaBreakpointsToken, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        { provide: NbWindow, useValue: window },
-        { provide: NbDocument, useValue: document },
+        { provide: NB_THEME_OPTIONS, useValue: nbThemeOptions || {} },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: nbJSThemes || [] },
+        { provide: NB_MEDIA_BREAKPOINTS, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
+        { provide: NB_WINDOW, useFactory: nbWindowFactory },
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,
         NbSpinnerService,
+        { provide: NB_LAYOUT_DIRECTION, useValue: layoutDirection || NbLayoutDirection.LTR },
+        NbLayoutDirectionService,
       ],
     };
   }

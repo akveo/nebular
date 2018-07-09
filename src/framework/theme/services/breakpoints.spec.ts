@@ -7,7 +7,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 
 import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoints.service';
-import { nbMediaBreakpointsToken } from '../theme.options';
+import { NB_MEDIA_BREAKPOINTS } from '../theme.options';
 
 describe('breakpoint-service', () => {
   let breakpointService: NbMediaBreakpointsService;
@@ -16,7 +16,7 @@ describe('breakpoint-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: nbMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
+        { provide: NB_MEDIA_BREAKPOINTS, useValue: DEFAULT_MEDIA_BREAKPOINTS },
         NbMediaBreakpointsService,
       ],
     });

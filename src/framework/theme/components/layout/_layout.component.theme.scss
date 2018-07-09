@@ -138,8 +138,13 @@
         }
       }
 
+      & ~ .layout-container {
+        min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
+      }
+
       &.fixed ~ .layout-container {
         padding-top: nb-theme(header-height);
+        min-height: nb-theme(layout-min-height);
       }
 
       &.fixed ~ .layout-container > nb-sidebar > .main-container {
@@ -148,7 +153,6 @@
     }
 
     .layout-container {
-      min-height: nb-theme(layout-min-height);
 
       nb-sidebar.fixed {
         top: nb-theme(header-height);
@@ -160,17 +164,16 @@
           box-shadow: nb-theme(footer-shadow);
 
           nav {
-            height: nb-theme(footer-height);
             padding: nb-theme(footer-padding);
             background: nb-theme(footer-bg);
             color: nb-theme(footer-fg);
             border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nb-theme(header-fg);
+              color: nb-theme(footer-fg-highlight);
 
               @include hover-focus-active {
-                color: nb-theme(header-fg);
+                color: nb-theme(footer-fg-highlight);
               }
             }
           }
@@ -193,6 +196,12 @@
           }
         }
       }
+    }
+  }
+
+  nb-layout.with-subheader {
+    nb-sidebar .main-container {
+      box-shadow: none; // so that we don't have a shadow over the header in this mode
     }
   }
 }

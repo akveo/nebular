@@ -9,6 +9,16 @@
     height: calc(100vh - 2 * #{$auth-layout-padding});
   }
 
+  nb-card-header {
+    a {
+      text-decoration: none;
+      i {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  }
+
   nb-card {
     margin: 0;
   }

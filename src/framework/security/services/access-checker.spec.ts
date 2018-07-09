@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { async, TestBed, inject } from '@angular/core/testing';
-import { of as observableOf } from 'rxjs/observable/of';
+import { of as observableOf } from 'rxjs';
 
 import { NbRoleProvider } from './role.provider';
 import { NbAclService } from './acl.service';
@@ -12,7 +12,7 @@ import { NbAccessChecker } from './access-checker.service';
 
 let accessChecker: NbAccessChecker;
 
-function setupAcl(can) {
+function setupAcl(can, roles: string|string[]) {
   beforeEach(() => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ function setupAcl(can) {
           provide: NbRoleProvider,
           useValue: {
             getRole: () => {
-              return observableOf('admin');
+              return observableOf(roles);
             },
           },
         },
@@ -29,7 +29,7 @@ function setupAcl(can) {
           provide: NbAclService,
           useValue: {
             can: (role, permission, resource) => {
-              return can; // this is a simple mocked ACL implementation
+              return can[role]; // this is a simple mocked ACL implementation
             },
           },
         },
@@ -50,7 +50,7 @@ function setupAcl(can) {
 describe('authorization checker', () => {
 
   describe('acl returns true', () => {
-    setupAcl(true);
+    setupAcl({ admin: true }, 'admin');
 
     it(`checks against provided role`, (done) => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
@@ -61,11 +61,44 @@ describe('authorization checker', () => {
   });
 
   describe('acl returns false', () => {
-    setupAcl(false);
+    setupAcl({ admin: false }, 'admin');
 
     it(`checks against provided role`, (done) => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(false);
+        done();
+      })
+    });
+  });
+
+  describe('acl returns false (both roles return false)', () => {
+    setupAcl({ admin: false, user: false }, ['user', 'admin']);
+
+    it(`checks against provided roles`, (done) => {
+      accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
+        expect(result).toBe(false);
+        done();
+      })
+    });
+  });
+
+  describe('acl returns true (both roles return true)', () => {
+    setupAcl({ admin: true, user: true }, ['user', 'admin']);
+
+    it(`checks against provided roles`, (done) => {
+      accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
+        expect(result).toBe(true);
+        done();
+      })
+    });
+  });
+
+  describe('acl returns true (one of the roles return true)', () => {
+    setupAcl({ admin: true, user: false }, ['user', 'admin']);
+
+    it(`checks against provided roles`, (done) => {
+      accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
+        expect(result).toBe(true);
         done();
       })
     });

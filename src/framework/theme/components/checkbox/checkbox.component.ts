@@ -11,17 +11,13 @@ import { convertToBoolProperty } from '../helpers';
 /**
  * Styled checkbox component
  *
- * @example Basic example
+ * @stacked-example(Showcase, checkbox/checkbox-showcase.component)
  *
- * ```
- *  <nb-checkbox [(ngModel)]="enabled">Enabled?</nb-checkbox>
- * ```
+ * Can have one of the following statuses: danger, success or warning
  *
- * @example Example with status
+ * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
- * ```
- *  <nb-checkbox [(ngModel)]="enabled" status="danger">Enabled?</nb-checkbox>
- * ```
+ * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
  *
  * @styles
  *
@@ -83,22 +79,22 @@ export class NbCheckboxComponent implements ControlValueAccessor {
    * @param {string} val
    */
   @Input('status')
-  private set setStatus(val: string) {
+  set setStatus(val: string) {
     this.status = val;
   }
 
   @HostBinding('class.success')
-  private get success() {
+  get success() {
     return this.status === 'success';
   }
 
   @HostBinding('class.warning')
-  private get warning() {
+  get warning() {
     return this.status === 'warning';
   }
 
   @HostBinding('class.danger')
-  private get danger() {
+  get danger() {
     return this.status === 'danger';
   }
 

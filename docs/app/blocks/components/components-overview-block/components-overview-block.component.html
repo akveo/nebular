@@ -1,0 +1,17 @@
+<nb-card class="header-card">
+  <nb-card-header>Components Overview</nb-card-header>
+</nb-card>
+
+<div class="components-list">
+  <div class="component-card-wrapper" *ngFor="let component of components">
+    <a class="component-navigate-link" [routerLink]="component.link">
+      <nb-card [attr.title]="component.name">
+        <nb-card-body>
+          <img class="component-icon" src="assets/images/components/{{ component.icon }}"
+            [attr.alt]="component.name">
+          <label class="component-name">{{ component.name }}</label>
+        </nb-card-body>
+      </nb-card>
+    </a>
+  </div>
+</div>

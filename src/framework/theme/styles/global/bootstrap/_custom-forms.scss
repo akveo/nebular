@@ -23,12 +23,14 @@
 
     .custom-control-indicator {
       background-color: nb-theme(checkbox-bg);
+      border-radius: 50%;
       width: nb-theme(checkbox-size);
       height: nb-theme(checkbox-size);
       border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);
       flex-shrink: 0;
       position: absolute;
-      left: 0;
+      @include nb-ltr(left, 0);
+      @include nb-rtl(right, 0);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -108,6 +110,7 @@
 
     .custom-control-description {
       padding-left: 0.25rem;
+      padding-right: 0.25rem;
       color: nb-theme(color-fg-heading);
     }
   }

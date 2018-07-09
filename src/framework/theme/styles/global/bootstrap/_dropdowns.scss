@@ -103,7 +103,8 @@
 
     .btn:first-child {
       width: 90%;
-      text-align: left;
+      @include nb-ltr(text-align, left);
+      @include nb-rtl(text-align, right);
     }
 
     .dropdown-toggle {
@@ -126,14 +127,16 @@
 
   .dropdown.btn-group.show, .dropup.btn-group.show {
     .btn:first-child {
-      border-bottom-left-radius: 0;
+      @include nb-ltr(border-bottom-left-radius, 0);
+      @include nb-rtl(border-bottom-right-radius, 0);
     }
   }
 
   .dropdown, .dropup {
     .dropdown-toggle {
       width: 100%;
-      text-align: left;
+      @include nb-ltr(text-align, left);
+      @include nb-rtl(text-align, right);
       position: relative;
     }
 
@@ -294,13 +297,20 @@
     .dropdown-toggle::after {
       top: 50%;
       transform: translate(0, -50%);
-      right: 0.75rem;
+      @include nb-ltr(right, 0.75rem);
+      @include nb-rtl(left, 0.75rem);
     }
   }
 
   .dropdown.show, .dropup.show {
     .dropdown-toggle {
       box-shadow: none;
+    }
+
+    .dropdown-menu.show {
+      // automatically set direction based on layout direction
+      // have to use important, since ngbDropdownToggle inlines styles to element
+      left: auto !important;
     }
   }
 

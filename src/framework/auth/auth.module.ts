@@ -4,20 +4,35 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NbLayoutModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
+import { NbCardModule, NbCheckboxModule, NbLayoutModule } from '@nebular/theme';
 
-import { NbAuthService } from './services/auth.service';
-import { NbDummyAuthProvider } from './providers/dummy-auth.provider';
-import { NbEmailPassAuthProvider } from './providers/email-pass-auth.provider';
-import { NbTokenService } from './services/token/token.service';
-import { NbAuthSimpleToken } from './services/token/token';
-import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
 import {
-  defaultSettings,
-  NB_AUTH_USER_OPTIONS,
+  NB_AUTH_FALLBACK_TOKEN,
+  NbAuthService,
+  NbAuthSimpleToken,
+  NbAuthTokenClass,
+  NbAuthTokenParceler,
+  NbTokenLocalStorage,
+  NbTokenService,
+  NbTokenStorage,
+} from './services';
+import {
+  NbAuthStrategy,
+  NbAuthStrategyOptions,
+  NbDummyAuthStrategy,
+  NbOAuth2AuthStrategy,
+  NbPasswordAuthStrategy,
+} from './strategies';
+
+import {
+  defaultAuthOptions,
+  NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
-  NB_AUTH_PROVIDERS,
-  NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER, NB_AUTH_TOKEN_CLASS,
+  NB_AUTH_STRATEGIES,
+  NB_AUTH_TOKENS,
+  NB_AUTH_USER_OPTIONS,
+  NbAuthOptions,
+  NbAuthStrategyClass,
 } from './auth.options';
 
 import { NbAuthComponent } from './components/auth.component';
@@ -32,22 +47,29 @@ import { NbResetPasswordComponent } from './components/reset-password/reset-pass
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
-export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
-  const providers = config.providers || {};
+export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
+  const strategies = [];
+  options.strategies
+    .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
+      const strategy: NbAuthStrategy = injector.get(strategyClass);
+      strategy.setOptions(strategyOptions);
 
-  for (const key in providers) {
-    if (providers.hasOwnProperty(key)) {
-      const provider = providers[key];
-      const object = injector.get(provider.service);
-      object.setConfig(provider.config || {});
-    }
-  }
+      strategies.push(strategy);
+    });
+  return strategies;
+}
 
-  return new NbAuthService(tokenService, injector, providers);
+export function nbTokensFactory(strategies: NbAuthStrategy[]): NbAuthTokenClass[] {
+  const tokens = [];
+  strategies
+    .forEach((strategy: NbAuthStrategy) => {
+      tokens.push(strategy.getOption('token.class'));
+    });
+  return tokens;
 }
 
 export function nbOptionsFactory(options) {
-  return deepExtend(defaultSettings, options);
+  return deepExtend(defaultAuthOptions, options);
 }
 
 @NgModule({
@@ -86,18 +108,17 @@ export class NbAuthModule {
       providers: [
         { provide: NB_AUTH_USER_OPTIONS, useValue: nbAuthOptions },
         { provide: NB_AUTH_OPTIONS, useFactory: nbOptionsFactory, deps: [NB_AUTH_USER_OPTIONS] },
-        { provide: NB_AUTH_PROVIDERS, useValue: {} },
-        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_STRATEGIES, useFactory: nbStrategiesFactory, deps: [NB_AUTH_OPTIONS, Injector] },
+        { provide: NB_AUTH_TOKENS, useFactory: nbTokensFactory, deps: [NB_AUTH_STRATEGIES] },
+        { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
-        {
-          provide: NbAuthService,
-          useFactory: nbAuthServiceFactory,
-          deps: [NB_AUTH_OPTIONS, NbTokenService, Injector],
-        },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
+        NbAuthTokenParceler,
+        NbAuthService,
         NbTokenService,
-        NbDummyAuthProvider,
-        NbEmailPassAuthProvider,
+        NbDummyAuthStrategy,
+        NbPasswordAuthStrategy,
+        NbOAuth2AuthStrategy,
       ],
     };
   }

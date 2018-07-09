@@ -28,6 +28,11 @@
       color: nb-theme(btn-fg);
       cursor: nb-theme(btn-cursor);
     }
+
+    &:not(:disabled):not(.disabled) {
+      cursor: nb-theme(btn-cursor);
+    }
+
     @include btn-md();
   }
 

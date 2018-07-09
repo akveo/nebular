@@ -1,4 +1,4 @@
-## UI Components
+# UI Components
 
 Auth module comes with a list of authentication components:
 
@@ -8,11 +8,11 @@ Auth module comes with a list of authentication components:
 - `<nb-logout></nb-logout>` - logout page - shows "logging out..." message while sending logout request;
 - `<nb-request-password></nb-request-password>` - request password page;
 - `<nb-reset-password></nb-reset-password>` - reset password page.
-<hr class="section-end">
+<hr>
 
 ## UI Settings
 
-Alongside with the provider's configuration `AuthModule` also accepts a list of settings for UI side under the `forms` key:
+Alongside with the strategies' configuration `AuthModule` also accepts a list of settings for UI side under the `forms` key:
 
 ```typescript
 
@@ -21,14 +21,11 @@ Alongside with the provider's configuration `AuthModule` also accepts a list of 
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
-           },
-         },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
          forms: {},
        }), 
   ],
@@ -54,7 +51,7 @@ export const defaultSettings: any = {
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
-      provider: 'email',  // provider id key. If you have multiple providers, or what to use your own
+      strategy: 'email',  // strategy id key.
       rememberMe: true,   // whether to show or not the `rememberMe` checkbox
       showMessages: {     // show/not show success/error messages
         success: true,
@@ -64,7 +61,7 @@ export const defaultSettings: any = {
     },
     register: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -74,7 +71,7 @@ export const defaultSettings: any = {
     },
     requestPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -83,7 +80,7 @@ export const defaultSettings: any = {
     },
     resetPassword: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
       showMessages: {
         success: true,
         error: true,
@@ -92,7 +89,7 @@ export const defaultSettings: any = {
     },
     logout: {
       redirectDelay: 500,
-      provider: 'email',
+      strategy: 'email',
     },
     validation: {
       password: {
@@ -112,6 +109,9 @@ export const defaultSettings: any = {
   },
 };
 ```
+<hr>
+
+## Remove redirect delay
 
 So, for instance, to remove the redirectDelay setting and disable the success message, we can do the following:
 
@@ -122,44 +122,41 @@ So, for instance, to remove the redirectDelay setting and disable the success me
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {
+           login: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
              },
            },
+           register: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           requestPassword: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           resetPassword: {
+             redirectDelay: 0,
+             showMessages: {
+               success: true,
+             },
+           },
+           logout: {
+             redirectDelay: 0,
+           },
          },
-         forms: {
-          login: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          register: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          requestPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          resetPassword: {
-            redirectDelay: 0,
-            showMessages: {
-              success: true,
-            },
-          },
-          logout: {
-            redirectDelay: 0,
-          },
-        },
-     }), 
+       }), 
   ],
 });
 
@@ -181,30 +178,27 @@ const formSetting: any = {
    // ...
     
    NbAuthModule.forRoot({
-         providers: {
-           email: {
-             service: NbEmailPassAuthProvider,
-             config: {
-              ...
-             },
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {
+           login: formSetting,
+           register: formSetting,
+           requestPassword: formSetting,
+           resetPassword: formSetting,
+           logout: {
+             redirectDelay: 0,
            },
          },
-         forms: {
-          login: formSetting,
-          register: formSetting,
-          requestPassword: formSetting,
-          resetPassword: formSetting,
-          logout: {
-            redirectDelay: 0,
-          },
-        },
-     }), 
+       }), 
   ],
 });
 
 ```
 The settings will be merged with the default values so no need to specify all of the keys here.
-<hr class="section-end">
+<hr>
 
 ## Custom UI Components
 
@@ -212,7 +206,9 @@ In a case when the look & feel of the Nebular auth components doesn't satisfy yo
 
 All you need to do is:
 
-1) Copy [source code](https://github.com/akveo/nebular/tree/master/src/framework/auth/components) of the components you want to change under your project. If you use `ngx-admin`, you may place them under `src/app/@theme/components/auth`.
+### Copy component sources
+
+Copy [source code](https://github.com/akveo/nebular/tree/master/src/framework/auth/components) of the components you want to change under your project. If you use `ngx-admin`, you may place them under `src/app/@theme/components/auth`.
 Rename components to conform your app prefix, for instance using `ngx-` prefix.
 
 <div class="note note-warning">
@@ -228,12 +224,12 @@ Rename components to conform your app prefix, for instance using `ngx-` prefix.
     Make sure to rename component classes and selectors to follow your application prefix. You may use `Refactor` feature of your Editor.
   </div>
 </div>
-<hr class="section-end">
 
-2) Register them in your `*.module.ts` (i.e. `theme.module.ts`):
+### Register components
 
-```
+Register them in your `*.module.ts` (i.e. `theme.module.ts`):
 
+```typescript
 // make sure the path is correct for your setup
 import { NgxAuthComponent } from './components/auth/auth.component';
 import { NgxAuthBlockComponent } from './components/auth/auth-block/auth-block.component';
@@ -263,7 +259,9 @@ export class ThemeModule {
 ```
 *In this example we decided to copy all auth components to re-do the UI completely.*
 
-3) Update your routes to import the new components:
+### Update routes
+
+Update your routes to import the new components:
 
 
 ```typescript
@@ -288,7 +286,7 @@ export const routes: Routes = [
       },
       {
         path: 'login',
-        component: NgxRegisterComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'register',
@@ -312,9 +310,9 @@ export const routes: Routes = [
 ];
 ```
 
-That's it. Now you can adjust the components the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth providers.
-<hr class="section-end">
+That's it. Now you can adjust the components in the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth strategies.
+<hr>
 
 ## Where to next
 
-- Receiving [user token after authentication](#/docs/auth/getting-user-token)
+- Receiving [user token after authentication](docs/auth/getting-user-token)

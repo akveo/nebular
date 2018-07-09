@@ -10,8 +10,8 @@ import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoi
 import { NbThemeService } from './theme.service';
 import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
 import {
-  nbBuiltInJSThemesToken, nbJSThemesToken, nbMediaBreakpointsToken,
-  nbThemeOptionsToken,
+  NB_BUILT_IN_JS_THEMES, NB_JS_THEMES, NB_MEDIA_BREAKPOINTS,
+  NB_THEME_OPTIONS,
 } from '../theme.options';
 
 describe('theme-service', () => {
@@ -22,12 +22,12 @@ describe('theme-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: nbMediaBreakpointsToken, useValue: DEFAULT_MEDIA_BREAKPOINTS },
+        { provide: NB_MEDIA_BREAKPOINTS, useValue: DEFAULT_MEDIA_BREAKPOINTS },
         NbMediaBreakpointsService,
-        { provide: nbJSThemesToken, useValue: [] },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: [] },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         NbJSThemesRegistry,
-        { provide: nbThemeOptionsToken, useValue: { name: 'default' } },
+        { provide: NB_THEME_OPTIONS, useValue: { name: 'default' } },
         NbThemeService,
       ],
     });
@@ -42,7 +42,7 @@ describe('theme-service', () => {
     },
   )));
 
-  it('returns default theme specified in config', () => {
+  it('returns default theme specified in options', () => {
     let current: any;
 
     const subscription = themeService.onThemeChange()
@@ -120,8 +120,10 @@ describe('theme-service', () => {
       expect(current.bg).toEqual('#ffffff');
 
       themeService.changeTheme('cosmic');
-
       expect(current.bg).toEqual('#3d3780');
+
+      themeService.changeTheme('corporate');
+      expect(current.bg).toEqual('#ffffff');
 
     } finally {
       subscription.unsubscribe();

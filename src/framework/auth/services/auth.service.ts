@@ -3,29 +3,26 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { of as observableOf } from 'rxjs/observable/of';
+import { Observable, of as observableOf } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
-import { NbAbstractAuthProvider } from '../providers/abstract-auth.provider';
-import { NB_AUTH_PROVIDERS } from '../auth.options';
+import { NbAuthStrategy } from '../strategies/auth-strategy';
+import { NB_AUTH_STRATEGIES } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 import { NbTokenService } from './token/token.service';
 import { NbAuthToken } from './token/token';
 
 /**
  * Common authentication service.
- * Should be used to as an interlayer between UI Components and Auth Providers.
+ * Should be used to as an interlayer between UI Components and Auth Strategy.
  */
 @Injectable()
 export class NbAuthService {
 
   constructor(protected tokenService: NbTokenService,
-              protected injector: Injector,
-              @Optional() @Inject(NB_AUTH_PROVIDERS) protected providers = {}) {
+              @Inject(NB_AUTH_STRATEGIES) protected strategies) {
   }
 
   /**
@@ -63,18 +60,18 @@ export class NbAuthService {
   }
 
   /**
-   * Authenticates with the selected provider
+   * Authenticates with the selected strategy
    * Stores received token in the token storage
    *
    * Example:
    * authenticate('email', {email: 'email@example.com', password: 'test'})
    *
-   * @param provider
+   * @param strategyName
    * @param data
    * @returns {Observable<NbAuthResult>}
    */
-  authenticate(provider: string, data?: any): Observable<NbAuthResult> {
-    return this.getProvider(provider).authenticate(data)
+  authenticate(strategyName: string, data?: any): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).authenticate(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
           return this.processResultToken(result);
@@ -83,18 +80,18 @@ export class NbAuthService {
   }
 
   /**
-   * Registers with the selected provider
+   * Registers with the selected strategy
    * Stores received token in the token storage
    *
    * Example:
    * register('email', {email: 'email@example.com', name: 'Some Name', password: 'test'})
    *
-   * @param provider
+   * @param strategyName
    * @param data
    * @returns {Observable<NbAuthResult>}
    */
-  register(provider: string, data?: any): Observable<NbAuthResult> {
-    return this.getProvider(provider).register(data)
+  register(strategyName: string, data?: any): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).register(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
           return this.processResultToken(result);
@@ -103,17 +100,17 @@ export class NbAuthService {
   }
 
   /**
-   * Sign outs with the selected provider
+   * Sign outs with the selected strategy
    * Removes token from the token storage
    *
    * Example:
    * logout('email')
    *
-   * @param provider
+   * @param strategyName
    * @returns {Observable<NbAuthResult>}
    */
-  logout(provider: string): Observable<NbAuthResult> {
-    return this.getProvider(provider).logout()
+  logout(strategyName: string): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).logout()
       .pipe(
         switchMap((result: NbAuthResult) => {
           if (result.isSuccess()) {
@@ -126,53 +123,82 @@ export class NbAuthService {
   }
 
   /**
-   * Sends forgot password request to the selected provider
+   * Sends forgot password request to the selected strategy
    *
    * Example:
    * requestPassword('email', {email: 'email@example.com'})
    *
-   * @param provider
+   * @param strategyName
    * @param data
    * @returns {Observable<NbAuthResult>}
    */
-  requestPassword(provider: string, data?: any): Observable<NbAuthResult> {
-    return this.getProvider(provider).requestPassword(data);
+  requestPassword(strategyName: string, data?: any): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).requestPassword(data);
   }
 
   /**
-   * Tries to reset password with the selected provider
+   * Tries to reset password with the selected strategy
    *
    * Example:
    * resetPassword('email', {newPassword: 'test'})
    *
-   * @param provider
+   * @param strategyName
    * @param data
    * @returns {Observable<NbAuthResult>}
    */
-  resetPassword(provider: string, data?: any): Observable<NbAuthResult> {
-    return this.getProvider(provider).resetPassword(data);
+  resetPassword(strategyName: string, data?: any): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).resetPassword(data);
+  }
+
+  /**
+   * Sends a refresh token request
+   * Stores received token in the token storage
+   *
+   * Example:
+   * refreshToken('email', {token: token})
+   *
+   * @param {string} strategyName
+   * @param data
+   * @returns {Observable<NbAuthResult>}
+   */
+  refreshToken(strategyName: string, data?: any): Observable<NbAuthResult> {
+    return this.getStrategy(strategyName).refreshToken()
+      .pipe(
+        switchMap((result: NbAuthResult) => {
+          return this.processResultToken(result);
+        }),
+      );
+  }
+
+  /**
+   * Get registered strategy by name
+   *
+   * Example:
+   * getStrategy('email')
+   *
+   * @param {string} provider
+   * @returns {NbAbstractAuthProvider}
+   */
+  protected getStrategy(strategyName: string): NbAuthStrategy {
+    const found = this.strategies.find((strategy: NbAuthStrategy) => strategy.getName() === strategyName);
+
+    if (!found) {
+      throw new TypeError(`There is no Auth Strategy registered under '${strategyName}' name`);
+    }
+
+    return found;
   }
 
   private processResultToken(result: NbAuthResult) {
-    if (result.isSuccess() && result.getRawToken()) {
-      return this.tokenService.setRaw(result.getRawToken())
+    if (result.isSuccess() && result.getToken()) {
+      return this.tokenService.set(result.getToken())
         .pipe(
-          switchMap(() => this.tokenService.get()),
           map((token: NbAuthToken) => {
-            result.setToken(token);
             return result;
           }),
         );
     }
 
     return observableOf(result);
-  }
-
-  private getProvider(provider: string): NbAbstractAuthProvider {
-    if (!this.providers[provider]) {
-      throw new TypeError(`Nb auth provider '${provider}' is not registered`);
-    }
-
-    return this.injector.get(this.providers[provider].service);
   }
 }

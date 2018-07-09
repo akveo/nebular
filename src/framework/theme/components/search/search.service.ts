@@ -5,12 +5,11 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { share } from 'rxjs/operators/share';
+import { Subject, Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 /**
- * Search component service, connects you code to a page-level search component.
+ * Search component service, connects your code to a page-level search component.
  */
 @Injectable()
 export class NbSearchService {

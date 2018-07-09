@@ -9,65 +9,86 @@ import {
   OnInit, PLATFORM_ID, Inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { takeWhile } from 'rxjs/operators';
 
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import { NbThemeService } from '../../services/theme.service';
 import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
-import { NbPopoverAdjustment, NbPopoverMode, NbPopoverPlacement, NbPopoverPosition } from './helpers/model';
+import {
+  NbPopoverAdjustment,
+  NbPopoverMode,
+  NbPopoverPlacement,
+  NbPopoverPosition,
+  NbPopoverLogicalPlacement,
+} from './helpers/model';
+import { NbPlacementHelper } from './helpers/placement.helper';
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
  *
- * ![image](assets/images/components/popover.gif)
+ * @stacked-example(Showcase, popover/popover-showcase.component)
  *
- * @example Popover can accept different content such as:
+ * Popover can accept different content such as:
  * TemplateRef
  *
- * ```
+ * ```html
  * <button [nbPopover]="templateRef"></button>
  * <ng-template #templateRef>
  *   <span>Hello, Popover!</span>
  * </ng-template>
  * ```
  *
- * @example Custom components
+ * Custom components
  *
- * ```
- * <button [nbPopover]="NbCardComponent"></button>
+ * ```html
+ * <button [nbPopover]="MyPopoverComponent"></button>
  * ```
  *
- * @example Primitive types
+ * Both custom components and templateRef popovers can receive *context* property
+ * that will be passed to the content props.
  *
- * ```
+ * Primitive types
+ *
+ * ```html
  * <button nbPopover="Hello, Popover!"></button>
  * ```
  *
- * @example Popover has different placements, such as: top, bottom, left and right
+ * Popover has different placements, such as: top, bottom, left, right, start and end
  * which can be used as following:
  *
- * ```
- * <button nbPopover="Hello, Popover!" nbPopoverPlacement="left"></button>
- * ```
+ * @stacked-example(Placements, popover/popover-placements.component)
  *
- * @example By default popover will try to adjust itself to maximally fit viewport
+ * By default popover will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change placement of the popover container.
  * If you wanna disable this behaviour just set it falsy value.
  *
- * ```
+ * ```html
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  *
- * */
- /*
+ * Also popover has some different modes which provides capability show and hide popover in different ways:
  *
- * TODO
- * Rendering strategy have to be refactored.
- * For now directive creates and deletes popover container each time.
- * I think we can handle this slightly smarter and show/hide in any situations.
- */
+ * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
+ * somewhere on the document except popover.
+ * - Hint mode provides capability show popover when the user hovers on the host element
+ * and hide popover when user hovers out of the host.
+ * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element popover will not be hidden.
+ *
+ * @stacked-example(Available Modes, popover/popover-modes.component.html)
+ *
+ * @additional-example(Template Ref, popover/popover-template-ref.component)
+ * @additional-example(Custom Component, popover/popover-custom-component.component)
+ * */
+/*
+*
+* TODO
+* Rendering strategy have to be refactored.
+* For now directive creates and deletes popover container each time.
+* I think we can handle this slightly smarter and show/hide in any situations.
+*/
 @Directive({ selector: '[nbPopover]' })
 export class NbPopoverDirective implements OnInit, OnDestroy {
 
@@ -86,10 +107,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   /**
    * Position will be calculated relatively host element based on the placement.
-   * Can be top, right, bottom and left.
+   * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  placement: NbPopoverPlacement = NbPopoverPlacement.TOP;
+  placement: NbPopoverPlacement | NbPopoverLogicalPlacement = NbPopoverPlacement.TOP;
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
@@ -149,6 +170,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
     private adjustmentHelper: NbAdjustmentHelper,
     private triggerHelper: NbTriggerHelper,
     @Inject(PLATFORM_ID) private platformId,
+    private placementHelper: NbPlacementHelper,
   ) {}
 
   ngOnInit() {
@@ -159,6 +181,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
   }
 
   /**
@@ -287,7 +310,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
   /*
    * Set container position.
    * */
-  private patchPopoverPosition({ top: top, left: left }) {
+  private patchPopoverPosition({ top, left }) {
     this.container.positionTop = top;
     this.container.positionLeft = left;
   }
@@ -319,7 +342,8 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbAdjustmentHelper}.
    * */
   private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    return this.adjustmentHelper.adjust(placed, host, this.placement, this.adjustment)
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
+    return this.adjustmentHelper.adjust(placed, host, placement, this.adjustment);
   }
 
   /*
@@ -327,9 +351,10 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * see {@link NbPositioningHelper}
    * */
   private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
+    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
     return {
-      position: this.positioningHelper.calcPosition(placed, host, this.placement),
-      placement: this.placement,
-    }
+      position: this.positioningHelper.calcPosition(placed, host, placement),
+      placement,
+    };
   }
 }

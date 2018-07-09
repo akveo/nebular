@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
-import { NbWindow } from '../../../theme.options';
+import { NB_WINDOW } from '../../../theme.options';
 import { NbPositioningHelper } from './positioning.helper';
 import { NbPopoverAdjustment, NbPopoverPlacement, NbPopoverPosition } from './model';
 
@@ -26,8 +26,13 @@ const NB_ORDERED_PLACEMENTS = {
 @Injectable()
 export class NbAdjustmentHelper {
 
-  constructor(private positioningHelper: NbPositioningHelper, private window: NbWindow) {
-  }
+  private window: Window;
+
+  constructor(
+    private positioningHelper: NbPositioningHelper,
+    @Inject(NB_WINDOW) window) {
+      this.window = window as Window;
+    }
 
   /**
    * Calculated {@link NbPopoverPosition} based on placed element, host element,
@@ -89,8 +94,8 @@ export class NbAdjustmentHelper {
    *
    * @return {NbPopoverPlacement[]} correctly ordered placements list.
    *
-   * @example order placements for {@link NbPopoverPlacement#RIGHT} and {@link NbPopoverAdjustment#CLOCKWISE}
-   * ```
+   * order placements for {@link NbPopoverPlacement#RIGHT} and {@link NbPopoverAdjustment#CLOCKWISE}
+   * ```ts
    * const placements = NB_ORDERED_PLACEMENTS[NbPopoverAdjustment.CLOCKWISE];
    * const ordered = orderPlacement(NbPopoverPlacement.RIGHT, placements);
    *

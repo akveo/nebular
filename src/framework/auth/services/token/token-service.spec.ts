@@ -5,36 +5,42 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
+import { take } from 'rxjs/operators';
 
 import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
-import { NB_AUTH_TOKEN_CLASS } from '../../auth.options';
-import { NbAuthSimpleToken, NbAuthToken, nbCreateToken, NbTokenClass } from './token';
+import { NbAuthSimpleToken, NbAuthToken, nbAuthCreateToken } from './token';
 import { NbTokenService } from './token.service';
+import { NbAuthJWTToken } from '@nebular/auth/services/token/token';
+import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
+import { NB_AUTH_TOKENS } from '../../auth.options';
 
 const noop = () => {};
 
 describe('token-service', () => {
 
   let tokenService: NbTokenService;
-  let tokenClass: NbTokenClass;
+  let tokenStorage: NbTokenLocalStorage;
+  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value');
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '');
   const testTokenKey = 'auth_app_token';
-  const testTokenValue = 'test-token';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
-        { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
+        { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken] },
+        NbAuthTokenParceler,
         NbTokenService,
       ],
     });
   });
 
     beforeEach(async(inject(
-    [NbTokenService, NB_AUTH_TOKEN_CLASS],
-    (_tokenService, _tokenClass) => {
+    [NbTokenService, NbTokenStorage],
+    (_tokenService, _tokenStorage) => {
       tokenService = _tokenService;
-      tokenClass = _tokenClass;
+      tokenStorage = _tokenStorage;
     },
   )));
 
@@ -42,97 +48,84 @@ describe('token-service', () => {
     localStorage.removeItem(testTokenKey);
   });
 
-  it('set test raw token', () => {
-      tokenService.setRaw(testTokenValue).subscribe(noop);
-      expect(localStorage.getItem(testTokenKey)).toEqual(testTokenValue);
-  });
+  it('set calls storage set', () => {
 
-  it('setter set raw invalid token to localStorage as raw value', () => {
-      tokenService.setRaw(null).subscribe(noop);
-      expect(localStorage.getItem(testTokenKey)).toEqual('null');
-      tokenService.setRaw(undefined).subscribe(noop);
-      expect(localStorage.getItem(testTokenKey)).toEqual('undefined');
-  });
+    const spy = spyOn(tokenStorage, 'set')
+      .and
+      .returnValue(null);
 
-  it('set test token', () => {
-    const token = nbCreateToken(tokenClass, testTokenValue);
-
-    tokenService.set(token).subscribe(noop);
-    expect(localStorage.getItem(testTokenKey)).toEqual(testTokenValue);
-  });
-
-  it('setter set invalid token to localStorage as empty string', () => {
-    let token;
-
-    token = nbCreateToken(tokenClass, null);
-    tokenService.set(token).subscribe(noop);
-    expect(localStorage.getItem(testTokenKey)).toEqual('');
-
-    token = nbCreateToken(tokenClass, undefined);
-    tokenService.set(token).subscribe(noop);
-    expect(localStorage.getItem(testTokenKey)).toEqual('');
+    tokenService.set(simpleToken).subscribe(() => {
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   it('get return null in case token was not set', () => {
+
+    const spy = spyOn(tokenStorage, 'get')
+      .and
+      .returnValue(emptyToken);
+
     tokenService.get()
       .subscribe((token: NbAuthToken) => {
-        expect(token.getValue()).toBeNull();
+        expect(spy).toHaveBeenCalled();
+        expect(token.getValue()).toEqual('');
         expect(token.isValid()).toBe(false);
       })
   });
 
   it('should return correct value', () => {
-    localStorage.setItem(testTokenKey, testTokenValue);
+    tokenService.set(simpleToken).subscribe(noop);
 
     tokenService.get()
       .subscribe((token: NbAuthToken) => {
-        expect(token.getValue()).toEqual(testTokenValue);
+        expect(token.getValue()).toEqual(simpleToken.getValue());
       });
   });
 
   it('clear remove token', () => {
-    localStorage.setItem(testTokenKey, testTokenValue);
 
-    tokenService.clear().subscribe(noop);
+    const spy = spyOn(tokenStorage, 'clear')
+      .and
+      .returnValue(null);
 
-    expect(localStorage.getItem(testTokenKey)).toBeNull();
-  });
+    tokenService.set(simpleToken).subscribe(noop);
 
-  it('clear remove token only', () => {
-    localStorage.setItem(testTokenKey, testTokenValue);
-    localStorage.setItem(testTokenKey + '2', testTokenValue);
-
-    tokenService.clear().subscribe(noop);
-
-    expect(localStorage.getItem(testTokenKey + '2')).toEqual(testTokenValue);
-    expect(localStorage.getItem(testTokenKey)).toBeNull();
+    tokenService.clear().subscribe(() => {
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   it('token should be published', (done) => {
-    tokenService.set(nbCreateToken(tokenClass, testTokenValue)).subscribe(noop);
     tokenService.tokenChange()
+      .pipe(take(1))
       .subscribe((token: NbAuthToken) => {
-        expect(token.getValue()).toEqual(testTokenValue);
-        done();
+        expect(token.getValue()).toEqual('');
       });
-  });
-
-  it('raw token should be published as token object', (done) => {
-    tokenService.setRaw(testTokenValue).subscribe(noop);
+    tokenService.set(simpleToken).subscribe(noop);
     tokenService.tokenChange()
       .subscribe((token: NbAuthToken) => {
-        expect(token.getValue()).toEqual(testTokenValue);
+        expect(token.getValue()).toEqual(simpleToken.getValue());
         done();
       });
   });
 
   it('clear should be published', (done) => {
-    tokenService.set(nbCreateToken(tokenClass, testTokenValue)).subscribe(noop);
+    tokenService.tokenChange()
+      .pipe(take(1))
+      .subscribe((token: NbAuthToken) => {
+        expect(token.getValue()).toEqual('');
+      });
+    tokenService.set(simpleToken).subscribe(noop);
+    tokenService.tokenChange()
+      .pipe(take(1))
+      .subscribe((token: NbAuthToken) => {
+        expect(token.getValue()).toEqual(simpleToken.getValue());
+      });
     tokenService.clear().subscribe(noop);
     tokenService.tokenChange()
-      .subscribe((token: NbAuthSimpleToken) => {
-        expect(token.getValue()).toBeNull();
+      .subscribe((token: NbAuthToken) => {
+        expect(token.getValue()).toEqual('');
         done();
       });
-  });
+  })
 });

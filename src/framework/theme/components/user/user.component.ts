@@ -10,8 +10,15 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
+ * @stacked-example(Showcase, user/user-showcase.component)
  *
+ * ```ts
+ *   <nb-user name="Jonh Doe" title="Engineer"></nb-user>
+ * ```
  * Can be used as a user profile link.
+ *
+ * Available in multiple sizes:
+ * @stacked-example(Multiple Sizes, user/user-sizes.component)
  *
  * @styles
  *
@@ -167,7 +174,8 @@ export class NbUserComponent {
   /**
    * Badge position.
    * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * 'top left', 'top right', 'bottom left', 'bottom right',
+   * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
   @Input() badgePosition: string;

@@ -5,6 +5,7 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 
 /**
  * Badge is a simple labeling component.
@@ -16,15 +17,18 @@ import { Component, Input } from '@angular/core';
  * `absolute`, `fixed`, or `sticky`.
  *
  *
- * @example Badge with default position and status(color):
+ * Badge with default position and status(color):
  *
- * ```
+ * ```html
  * <nb-badge text="badgeText"></nb-badge>
  * ```
  *
- * @example Badge located on the bottom right with warning status:
+ * For example, badge can be placed into nb-card header:
+ * @stacked-example(Showcase, badge/badge-showcase.component)
  *
- * ```
+ * Badge located on the bottom right with warning status:
+ *
+ * ```html
  * <nb-badge text="badgeText" status="warning" position="bottom right">
  * </nb-badge>
  * ```
@@ -51,13 +55,17 @@ export class NbBadgeComponent {
   static readonly BOTTOM_LEFT = 'bottom left';
   static readonly BOTTOM_RIGHT = 'bottom right';
 
+  static readonly TOP_START = 'top start';
+  static readonly TOP_END = 'top end';
+  static readonly BOTTOM_START = 'bottom start';
+  static readonly BOTTOM_END = 'bottom end';
+
   static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
   static readonly STATUS_SUCCESS = 'success';
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  positionClass: string = NbBadgeComponent.TOP_RIGHT;
   colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
@@ -70,14 +78,11 @@ export class NbBadgeComponent {
    * Badge position
    *
    * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * 'top left', 'top right', 'bottom left', 'bottom right',
+   * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() set position(value) {
-    if (value) {
-      this.positionClass = value;
-    }
-  }
+  @Input() position: string;
 
   /**
    * Badge status (adds specific styles):
@@ -90,4 +95,19 @@ export class NbBadgeComponent {
       this.colorClass = value;
     }
   }
+
+  get positionClass() {
+    if (!this.position) {
+      return NbBadgeComponent.TOP_RIGHT;
+    }
+
+    const isLtr = this.layoutDirectionService.isLtr();
+    const startValue = isLtr ? 'left' : 'right';
+    const endValue = isLtr ? 'right' : 'left';
+    return this.position
+      .replace(/\bstart\b/, startValue)
+      .replace(/\bend\b/, endValue);
+  }
+
+  constructor(private layoutDirectionService: NbLayoutDirectionService) {}
 }

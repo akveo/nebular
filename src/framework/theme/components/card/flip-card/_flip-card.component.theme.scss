@@ -4,4 +4,9 @@
     margin-bottom: nb-theme(card-margin);
     padding: nb-theme(card-padding);
   }
+
+  .flipcard-body .front-container {
+    @include nb-ltr(margin-right, -100%);
+    @include nb-rtl(margin-left, -100%);
+  }
 }

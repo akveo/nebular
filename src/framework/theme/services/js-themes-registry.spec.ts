@@ -8,7 +8,7 @@ import { TestBed, inject, async } from '@angular/core/testing';
 
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
-import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
+import { NB_BUILT_IN_JS_THEMES, NB_JS_THEMES } from '../theme.options';
 
 describe('js-themes-registry-service', () => {
   let jsThemesRegistry: NbJSThemesRegistry;
@@ -29,6 +29,13 @@ describe('js-themes-registry-service', () => {
       },
     },
     {
+      name: 'corporate',
+      base: 'default',
+      variables: {
+        someNewValueForCorporate: 'green',
+      },
+    },
+    {
       name: 'super-new-theme',
       variables: {
         someNewValueForCosmic: 'blue',
@@ -39,8 +46,8 @@ describe('js-themes-registry-service', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: nbJSThemesToken, useValue: customThemes },
-        { provide: nbBuiltInJSThemesToken, useValue: BUILT_IN_THEMES },
+        { provide: NB_JS_THEMES, useValue: customThemes },
+        { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         NbJSThemesRegistry,
       ],
     });
@@ -57,15 +64,19 @@ describe('js-themes-registry-service', () => {
   it('has built in themes', () => {
     expect(jsThemesRegistry.get('default')).not.toBeUndefined();
     expect(jsThemesRegistry.get('cosmic')).not.toBeUndefined();
+    expect(jsThemesRegistry.get('corporate')).not.toBeUndefined();
 
     expect(jsThemesRegistry.has('default')).toBeTruthy();
     expect(jsThemesRegistry.has('cosmic')).toBeTruthy();
+    expect(jsThemesRegistry.has('corporate')).toBeTruthy();
   });
 
   it('has built in themes with inherited font', () => {
     expect(jsThemesRegistry.get('default').variables.fontMain)
       .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
     expect(jsThemesRegistry.get('cosmic').variables.fontMain)
+      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+    expect(jsThemesRegistry.get('corporate').variables.fontMain)
       .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
   });
 
@@ -82,5 +93,6 @@ describe('js-themes-registry-service', () => {
   it('has new values from custom settings', () => {
     expect(jsThemesRegistry.get('cosmic').variables.someNewValueForCosmic).toEqual('red');
     expect(jsThemesRegistry.get('default').variables.someNewValue).toEqual('black');
+    expect(jsThemesRegistry.get('corporate').variables.someNewValueForCorporate).toEqual('green');
   });
 });

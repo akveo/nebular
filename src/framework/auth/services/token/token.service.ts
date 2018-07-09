@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { of as observableOf } from 'rxjs/observable/of';
-import { filter } from 'rxjs/operators/filter';
-import { share } from 'rxjs/operators/share';
+import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
+import { filter, share } from 'rxjs/operators';
 
 import { NbTokenStorage } from './token-storage';
 import { NbAuthToken } from './token';
@@ -40,18 +37,6 @@ export class NbTokenService {
    */
   set(token: NbAuthToken): Observable<null> {
     this.tokenStorage.set(token);
-    this.publishStoredToken();
-    return observableOf(null);
-  }
-
-  /**
-   * Sets a raw token into the storage. This method is used by the NbAuthService automatically.
-   *
-   * @param {string} token
-   * @returns {Observable<any>}
-   */
-  setRaw(token: string): Observable<null> {
-    this.tokenStorage.setRaw(token);
     this.publishStoredToken();
     return observableOf(null);
   }

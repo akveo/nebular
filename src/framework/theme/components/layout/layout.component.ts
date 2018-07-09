@@ -6,34 +6,28 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
+  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { filter } from 'rxjs/operators/filter';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { filter, takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
-import { NbWindow, NbDocument } from '../../theme.options';
+import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
  * A container component which determines a content position inside of the layout.
  * The layout could contain unlimited columns (not including the sidebars).
  *
- * @example By default the columns are ordered from the left to the right,
+ * By default the columns are ordered from the left to the right,
  * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
  * moving it to the very first position:
- * ```
- * <nb-layout>
- *   <nb-layout-column>Second</nb-layout-column>
- *   <nb-layout-column>Third</nb-layout-column>
- *   <nb-layout-column left>First</nb-layout-column>
- * </nb-layout>
- * ```
+ *
+ * @stacked-example(Column Left, layout/layout-column-left.component)
  */
 @Component({
   selector: 'nb-layout-column',
@@ -44,6 +38,7 @@ import { NbWindow, NbDocument } from '../../theme.options';
 export class NbLayoutColumnComponent {
 
   @HostBinding('class.left') leftValue: boolean;
+  @HostBinding('class.start') startValue: boolean;
 
   /**
    * Move the column to the very left position in the layout.
@@ -52,6 +47,17 @@ export class NbLayoutColumnComponent {
   @Input()
   set left(val: boolean) {
     this.leftValue = convertToBoolProperty(val);
+    this.startValue = false;
+  }
+
+  /**
+   * Make columnt first in the layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
+    this.leftValue = false;
   }
 }
 
@@ -59,7 +65,21 @@ export class NbLayoutColumnComponent {
  * Page header component.
  * Located on top of the page above the layout columns and sidebars.
  * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
- * sticky to the top of the nb-layout (to of the page).
+ * sticky to the top of the nb-layout (to of the page). Here's an example:
+ *
+ * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
+ *
+ * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
+ * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
+ *
+ * @stacked-example(Subheader, layout/layout-subheader.component)
  *
  * @styles
  *
@@ -82,6 +102,11 @@ export class NbLayoutColumnComponent {
 export class NbLayoutHeaderComponent {
 
   @HostBinding('class.fixed') fixedValue: boolean;
+  @HostBinding('class.subheader') subheaderValue: boolean;
+
+  // tslint:disable-next-line
+  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
+  }
 
   /**
    * Makes the header sticky to the top of the nb-layout.
@@ -90,6 +115,18 @@ export class NbLayoutHeaderComponent {
   @Input()
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Places header on a side of the sidebar, and not above.
+   * Disables fixed mode for this header and remove a shadow from the sidebar.
+   * @param {boolean} val
+   */
+  @Input()
+  set subheader(val: boolean) {
+    this.subheaderValue = convertToBoolProperty(val);
+    this.fixedValue = false;
+    this.layout.withSubheader = this.subheaderValue;
   }
 }
 
@@ -131,23 +168,29 @@ export class NbLayoutFooterComponent {
 }
 
 /**
- * The general Nebular component-container.
- * It is required that all children component of the framework are located inside of the nb-layout.
+ * Layout container component.
+ * When using with Nebular Theme System it is required that all child components should be placed inside.
+ *
+ * Basic example of two column layout with header:
+ *
+ * @stacked-example(Showcase, layout/layout-showcase.component)
  *
  * Can contain the following components inside:
  *
- * ```
- * nb-layout-header
- * nb-layout-column
- * nb-sidebar
- * nb-layout-footer
+ * ```html
+ * <nb-layout>
+ *  <nb-layout-header></nb-layout-header>
+ *  <nb-layout-footer></nb-layout-column>
+ *  <nb-layout-column></nb-layout-column>
+ *  <nb-sidebar></nb-sidebar>
+ * </nb-layout>
  * ```
  *
- * By default the layout fills up the full view-port.
+ * By default the layout fills up the whole view-port.
  * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
  * won't mess with the fixed nb-header.
  *
- * The children components are projected into the flexible layout structure allowing to adjust the layout behavior
+ * The child components are projected into a flexible layout structure allowing to adjust the layout behavior
  * based on the settings provided.
  *
  * The layout content (columns) becomes centered when the window width is more than
@@ -156,33 +199,23 @@ export class NbLayoutFooterComponent {
  * The layout also contains the area on the very top (the first child of the nb-layout), which could be used
  * to dynamically append some components like modals or spinners/loaders
  * so that they are located on top of the elements hierarchy.
- * More details are below under the `ThemeService` section.
+ * More details are under the `ThemeService` section.
  *
- * The layout component is also responsible for changing of the application themes.
- * It listens to the `themeChange` event and change the theme CSS class appended to body.
+ * The layout component is also responsible for changing application themes.
+ * It listens to the `themeChange` event and change a theme CSS class appended to body.
  * Based on the class appended a specific CSS-theme is applied to the application.
  * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
- * @example A simple layout example:
+ * A simple layout with footer:
  *
- * ```
- * <nb-layout>
- *   <nb-layout-header>Great Company</nb-layout-header>
+ * @stacked-example(Layout With Footer, layout/layout-w-footer.component)
  *
- *   <nb-layout-column>
- *     Hello World!
- *   </nb-layout-column>
- *
- *   <nb-layout-footer>Contact us</nb-layout-footer>
- * </nb-layout>
- * ```
- *
- * @example For example, it is possible to ask the layout to center the columns (notice: we added a `center` attribute
+ * It is possible to ask the layout to center the columns (notice: we added a `center` attribute
  * to the layout:
  *
- * ```
+ * ```html
  * <nb-layout center>
- *   <nb-layout-header>Great Company</nb-layout-header>
+ *   <nb-layout-header>Awesome Company</nb-layout-header>
  *
  *   <nb-layout-column>
  *     Hello World!
@@ -217,10 +250,11 @@ export class NbLayoutFooterComponent {
     <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container" #scrollableContainer>
       <div class="layout">
-        <ng-content select="nb-layout-header"></ng-content>
+        <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
           <ng-content select="nb-sidebar"></ng-content>
           <div class="content" [class.center]="centerValue">
+            <ng-content select="nb-layout-header[subheader]"></ng-content>
             <div class="columns">
               <ng-content select="nb-layout-column"></ng-content>
             </div>
@@ -237,6 +271,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
+  @HostBinding('class.with-subheader') withSubheader: boolean = false;
 
   /**
    * Defines whether the layout columns will be centered after some width
@@ -293,9 +328,10 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected router: Router,
-    protected window: NbWindow,
-    protected document: NbDocument,
+    @Inject(NB_WINDOW) protected window,
+    @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
+    protected layoutDirectionService: NbLayoutDirectionService,
   ) {
 
     this.themeService.onThemeChange()
@@ -359,6 +395,12 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe((data: { listener: Subject<any> }) => {
         this.veryTopRef.clear();
         data.listener.next(true);
+      });
+
+    this.layoutDirectionService.onDirectionChange()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(direction => {
+        this.renderer.setProperty(this.document, 'dir', direction);
       });
 
     this.afterViewInit$.next(true);

@@ -1,0 +1,110 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../core/functions';
+@import '../core/mixins';
+@import 'default';
+
+// default the base theme
+$theme: (
+  header-fg: #f7fafb,
+  header-bg: #111218,
+
+  layout-bg: #f1f5f8,
+
+  color-fg-heading: #181818,
+  color-fg-text: #4b4b4b,
+  color-fg-highlight: color-fg,
+
+  separator: #cdd5dc,
+
+  radius: 0.17rem,
+
+  scrollbar-bg: #e3e9ee,
+
+  color-primary: #73a1ff,
+  color-success: #5dcfe3,
+  color-info: #ba7fec,
+  color-warning: #ffa36b,
+  color-danger: #ff6b83,
+
+  btn-secondary-bg: #edf2f5,
+  btn-secondary-border: #edf2f5,
+
+  actions-fg: #d3dbe5,
+  actions-bg: color-bg,
+
+  sidebar-bg: #e3e9ee,
+
+  border-color: #e7ecef,
+
+  menu-font-weight: font-weight-bolder,
+  menu-fg: color-fg-text,
+  menu-bg: #e3e9ee,
+  menu-active-fg: color-fg-heading,
+  menu-active-bg: menu-bg,
+
+  menu-submenu-bg: menu-bg,
+  menu-submenu-fg: color-fg-text,
+  menu-submenu-active-fg: color-fg-heading,
+  menu-submenu-active-bg: #cdd5dc,
+  menu-submenu-active-border-color: menu-submenu-active-bg,
+  menu-submenu-active-shadow: none,
+  menu-submenu-hover-fg: menu-submenu-active-fg,
+  menu-submenu-hover-bg: menu-bg,
+  menu-submenu-item-border-width: 0.125rem,
+  menu-submenu-item-border-radius: radius,
+  menu-submenu-item-padding: 0.5rem 1rem,
+  menu-submenu-item-container-padding: 0 1.25rem,
+  menu-submenu-padding: 0.5rem,
+
+  btn-border-radius: btn-semi-round-border-radius,
+
+  btn-hero-degree: 0deg,
+  btn-hero-primary-degree: btn-hero-degree,
+  btn-hero-success-degree: btn-hero-degree,
+  btn-hero-warning-degree: btn-hero-degree,
+  btn-hero-info-degree: btn-hero-degree,
+  btn-hero-danger-degree: btn-hero-degree,
+  btn-hero-secondary-degree: btn-hero-degree,
+  btn-hero-glow-size: 0 0 20px 0,
+  btn-hero-primary-glow-size: btn-hero-glow-size,
+  btn-hero-success-glow-size: btn-hero-glow-size,
+  btn-hero-warning-glow-size: btn-hero-glow-size,
+  btn-hero-info-glow-size: btn-hero-glow-size,
+  btn-hero-danger-glow-size: btn-hero-glow-size,
+  btn-hero-secondary-glow-size: 0 0 0 0,
+  btn-hero-border-radius: btn-border-radius,
+
+  card-shadow: none,
+  card-border-width: 1px,
+  card-border-color: border-color,
+  card-header-border-width: 0,
+
+  link-color: #5dcfe3,
+  link-color-hover: #7dcfe3,
+  link-color-visited: link-color,
+
+  actions-separator: #f1f4f5,
+
+  modal-separator: border-color,
+
+  tabs-selected: color-primary,
+  tabs-separator: #ebecee,
+
+  smart-table-paging-bg-active: color-primary,
+
+  route-tabs-selected: color-primary,
+
+  popover-border: color-primary,
+
+  footer-shadow: none,
+  footer-separator: border-color,
+  footer-fg-highlight: #2a2a2a,
+);
+
+// register the theme
+$nb-themes: nb-register-theme($theme, corporate, default);

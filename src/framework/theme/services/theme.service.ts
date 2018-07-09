@@ -6,18 +6,10 @@
 
 import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { map } from 'rxjs/operators/map';
-import { filter } from 'rxjs/operators/filter';
-import { pairwise } from 'rxjs/operators/pairwise';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { startWith } from 'rxjs/operators/startWith';
-import { share } from 'rxjs/operators/share';
+import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
+import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
 
-import { nbThemeOptionsToken } from '../theme.options';
+import { NB_THEME_OPTIONS } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
@@ -38,7 +30,7 @@ export class NbThemeService {
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
   constructor(
-    @Inject(nbThemeOptionsToken) protected options: any,
+    @Inject(NB_THEME_OPTIONS) protected options: any,
     private breakpointService: NbMediaBreakpointsService,
     private jsThemesRegistry: NbJSThemesRegistry,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -48,6 +40,10 @@ export class NbThemeService {
     }
   }
 
+  /**
+   * Change current application theme
+   * @param {string} name
+   */
   changeTheme(name: string): void {
     this.themeChanges$.next({ name, previous: this.currentTheme });
     this.currentTheme = name;
@@ -57,6 +53,13 @@ export class NbThemeService {
     this.changeWindowWidth$.next(width);
   }
 
+  /**
+   * Append a component to top of the layout
+   * (useful for showing modal that should be placed heigher in the document tree)
+   *
+   * @param {Type<T> | ComponentFactory<T>} entity
+   * @returns {Observable<any>}
+   */
   appendToLayoutTop<T>(entity: Type<T> | ComponentFactory<T>): Observable<any> {
     let factory = entity;
 
@@ -83,6 +86,10 @@ export class NbThemeService {
     );
   }
 
+  /**
+   * Clears layout top
+   * @returns {Observable<any>}
+   */
   clearLayoutTop(): Observable<any> {
     const observable = new BehaviorSubject(null);
     this.createLayoutTop$.next({ listener: observable });
@@ -93,7 +100,7 @@ export class NbThemeService {
   /**
    * Triggers media query breakpoint change
    * Returns a pair where the first item is previous media breakpoint and the second item is current breakpoit.
-   * ```
+   * ```ts
    *  [{ name: 'xs', width: 0 }, { name: 'md', width: 768 }] // change from `xs` to `md`
    * ```
    * @returns {Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>}
@@ -117,6 +124,10 @@ export class NbThemeService {
       );
   }
 
+  /**
+   * Triggered when current theme is changed
+   * @returns {Observable<any>}
+   */
   onThemeChange(): Observable<any> {
     return this.themeChanges$.pipe(share());
   }
@@ -129,18 +140,34 @@ export class NbThemeService {
     return this.createLayoutTop$.pipe(share());
   }
 
+  /**
+   * Append a class to nb-layout
+   * @param {string} className
+   */
   appendLayoutClass(className: string) {
     this.appendLayoutClass$.next(className);
   }
 
+  /**
+   * Triggered when a new class is added to nb-layout through `appendLayoutClass` method
+   * @returns {Observable<any>}
+   */
   onAppendLayoutClass(): Observable<any> {
     return this.appendLayoutClass$.pipe(share());
   }
 
+  /**
+   * Removes a class from nb-layout
+   * @param {string} className
+   */
   removeLayoutClass(className: string) {
     this.removeLayoutClass$.next(className);
   }
 
+  /**
+   * Triggered when a class is removed from nb-layout through `removeLayoutClass` method
+   * @returns {Observable<any>}
+   */
   onRemoveLayoutClass(): Observable<any> {
     return this.removeLayoutClass$.pipe(share());
   }

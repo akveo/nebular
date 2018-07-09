@@ -1,0 +1,43 @@
+<nb-layout>
+  <nb-layout-column>
+    <div class="hero-image">
+      <div class="content-center">
+        <ngd-header [showSearch]="false"></ngd-header>
+        <ngd-hero></ngd-hero>
+      </div>
+      <svg class="concave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 222" preserveAspectRatio="xMidYMin slice">
+        <defs>
+          <style>.cls-1{fill:#fff;}</style>
+        </defs>
+        <title>concave</title>
+        <g id="Layer_2" data-name="Layer 2">
+          <g id="Layer_4" data-name="Layer 4">
+            <path class="cls-1" d="M1920,0c-248.44,93.45-587.33,151.09-960.52,151.09S248.44,93.45,0,0V222H1920Z"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="features content-center">
+      <ngd-icon-card *ngFor="let feature of features"
+                     [routerLink]="feature.link"
+                     [title]="feature.title"
+                     [icon]="feature.icon"
+                     [description]="feature.description">
+      </ngd-icon-card>
+    </div>
+
+    <div class="advantages">
+      <div class="content-center">
+        <ngd-text-card *ngFor="let advantage of advantages; let index = index"
+                       [title]="advantage.title"
+                       [index]="index"
+                       [description]="advantage.description">
+        </ngd-text-card>
+      </div>
+    </div>
+
+    <ngd-footer class="content-center"></ngd-footer>
+
+  </nb-layout-column>
+</nb-layout>

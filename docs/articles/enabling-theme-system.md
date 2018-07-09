@@ -1,25 +1,27 @@
+# Enable Theme System
+
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    If you use our [ngx-admin starter kit](#/docs/installation/based-on-starter-kit) then you already have the Advanced setup in place.
+    If you use our [ngx-admin starter kit](docs/guides/install-based-on-starter-kit) then you already have the Advanced setup in place.
   </div>
 </div>
+<hr>
 
-## Very basic setup
+## Basic setup
 **When**: You just need the default styles provided by Nebular (cosmic or default theme) and don't plan to use variables or hot-reload support.
 
 1) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
 
-```
-
+```scss
 "styles": [
         "../node_modules/@nebular/theme/styles/prebuilt/cosmic.css", // or default.css
       ],
 
 ```
 
-And that's it. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.
-<hr class="section-end">
+And that is all. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.
+<hr>
 
 ## Normal setup
 **When**: You need to be able to change theme-variables and want to use them in your code.
@@ -33,7 +35,8 @@ And that's it. In the future, if you need any of the advanced features - you can
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
 
-// and change the variables you need, or simply leave the map empty to use the default values
+// and change the variables you need, 
+// or simply leave the map empty to use the default values
 // let's make it blue-ish instead of the default white color
 $nb-themes: nb-register-theme((
   color-bg: #4ca6ff,
@@ -60,7 +63,7 @@ $nb-themes: nb-register-theme((
 
 ```
 
-3) At this step you already can customize the variables to change components look and behavior. To be able to use these (or new) variables into your custom components, just add an import line into any `*.component.scss` file:
+3) At this step you already can customize the variables to change components' look and behavior. To be able to use these (or new) variables into your custom components, just add an import line into any `*.component.scss` file:
 
 ```scss
 @import '../../../@theme/styles/themes';
@@ -74,20 +77,21 @@ $nb-themes: nb-register-theme((
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    Variables are accessible simply using a call of nb-theme(variable-name) function.
+    Variables are accessible simply using a call of `nb-theme(variable-name)` function.
   </div>
 </div>
 
 At this step you will have something similar to the image below:
 
 ![image](assets/images/articles/blue-theme.png)
+<hr>
 
 ## Advanced setup
 **When**: You need to have multiple themes and change them in the run-time.
 
 This setup assumes that you have gone through the *Normal Setup* steps.
 
-1) Assuming you already have the `themes.scss` file with `default` theme from the previous step, let's add there a new theme, which will be based on the `cosmic` Nebular theme and named `dark`:
+1) Assuming you already have the `themes.scss` file with `default` theme from the previous step, let's add a new theme there, that will be based on the `cosmic` Nebular theme and named `dark`:
 
 ```scss
 ...
@@ -100,8 +104,9 @@ $nb-enabled-themes: (default, dark);
 
 ...
 
-// and change the variables you need, or simply leave the map empty to use the default values
-// let's make it blue-ish instead of the default white color
+// and change the variables you need, 
+// or simply leave the map empty to use the default values
+// let's make it dark instead of the default cosmic colors
 $nb-themes: nb-register-theme((
 
   color-bg: #222222,
@@ -148,7 +153,6 @@ At this point when you enable your `dark` theme your page should look like this:
 2) Now, to enable the magic of the `hot reload`, wrap all of your `*.component.scss` styles with the `nb-install-component` mixin like this:
 
 ```scss
-
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
@@ -168,7 +172,7 @@ At this point when you enable your `dark` theme your page should look like this:
   </div>
 </div>
 
-Done, now you can change a theme in the runtime. Here's how you can do this from a component:
+Done, now you can change a theme in the runtime. Here's how you can do it from a component:
 
 ```scss
 // include the theme service
@@ -180,10 +184,10 @@ enableDarkTheme() {
   this.themeService.changeTheme('dark');
 }
 ```
-<hr class="section-end">
+<hr>
 
-## Next
+## Related Articles
 
-- [Theme System Concepts](#/docs/concepts/theme-system).
-- [Default Theme variables table](#/docs/themes/default).
-- [Cosmic Theme variables table](#/docs/themes/cosmic).
+- [Theme System Concepts](docs/guides/theme-system).
+- [Default Theme variables table](docs/themes/default).
+- [Cosmic Theme variables table](docs/themes/cosmic).

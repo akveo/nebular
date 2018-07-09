@@ -64,6 +64,35 @@ app.post('/api/auth/login', function (req, res) {
   });
 });
 
+app.post('/api/auth/token', function (req, res) {
+
+  if (req.body.email && req.body.password) {
+    var email = req.body.email;
+    var password = req.body.password;
+    var user = users.find(function (u) {
+      return u.email === email && u.password === password;
+    });
+    if (user) {
+      var payload = {
+        id: user.id,
+        email: user.email,
+        role: 'user',
+      };
+      var token = jwt.encode(payload, cfg.jwtSecret);
+      return res.json({
+            token_type: 'Bearer',
+            access_token: token,
+            expires_in: 3600,
+            refresh_token: 'eb4e1584-0117-437c-bfd7-343f257c4aae',
+      });
+    }
+  }
+  return res.status(401).json({
+    error: 'invalid_client',
+    error_description: 'Invalid Login/Password combination.'
+  });
+});
+
 app.post('/api/auth/register', function (req, res) {
 
   if (req.body.email && req.body.password && req.body.password === req.body.confirmPassword) {
@@ -123,6 +152,21 @@ app.delete('/api/auth/logout', function (req, res) {
       message: 'Successfully logged out!'
     }
   });
+});
+
+app.post('/api/auth/refresh-token', function (req, res) {
+    var payload = {
+        id: users[0].id,
+        email: users[0].email,
+        role: 'user',
+    };
+    var token = jwt.encode(payload, cfg.jwtSecret);
+    return res.json({
+        data: {
+            message: 'Successfully refreshed token.',
+            token: token
+        }
+    });
 });
 
 app.listen(4400, function () {

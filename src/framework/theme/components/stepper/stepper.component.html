@@ -1,0 +1,28 @@
+<ng-template><ng-content select="nb-step"></ng-content></ng-template>
+<div class="header">
+  <ng-container *ngFor="let step of steps; let index = index; let first = first">
+
+    <div *ngIf="!first && !step.hidden"
+         [class.connector-past]="index < selectedIndex"
+         class="connector"></div>
+
+    <div *ngIf="!step.hidden" class="step"
+         [class.selected]="isStepSelected(step)"
+         [class.completed]="!isStepSelected(step) && step.completed"
+         (click)="step.select()">
+      <div class="label-index">
+        <span *ngIf="!step.completed || isStepSelected(step)">{{ index + 1 }}</span>
+        <i *ngIf="!isStepSelected(step) && step.completed" class="icon nb-checkmark"></i>
+      </div>
+      <div class="label">
+        <ng-container *ngIf="step.isLabelTemplate">
+          <ng-container *ngTemplateOutlet="step.label"></ng-container>
+        </ng-container>
+        <span *ngIf="!step.isLabelTemplate">{{ step.label }}</span>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="step-content">
+  <ng-container [ngTemplateOutlet]="selected?.content"></ng-container>
+</div>

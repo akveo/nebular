@@ -7,7 +7,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 
 import { NbAdjustmentHelper } from './adjustment.helper';
 import { NbPopoverAdjustment, NbPopoverPlacement } from './model';
-import { NbDocument, NbWindow } from '../../../theme.options';
+import { NB_DOCUMENT, NB_WINDOW } from '../../../theme.options';
 import { NbPositioningHelper } from './positioning.helper';
 
 describe('adjustment-helper', () => {
@@ -61,8 +61,8 @@ describe('adjustment-helper', () => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
       providers: [
-        { provide: NbWindow, useValue: window },
-        { provide: NbDocument, useValue: document },
+        { provide: NB_WINDOW, useValue: window },
+        { provide: NB_DOCUMENT, useValue: document },
         NbPositioningHelper,
         NbAdjustmentHelper,
       ],

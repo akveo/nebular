@@ -62,7 +62,8 @@ export class NbActionComponent {
   /**
    * Badge position.
    * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * 'top left', 'top right', 'bottom left', 'bottom right',
+   * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
   @Input() badgePosition: string;
@@ -70,8 +71,29 @@ export class NbActionComponent {
 }
 
 /**
- * Shows a horizontal list of actions, available in multiple sizes
+ * Shows a horizontal list of actions, available in multiple sizes.
  * Aligns items vertically.
+ *
+ * @stacked-example(Showcase, action/action-showcase.component)
+ *
+ * Basic actions setup:
+ * ```html
+ * <nb-actions size="small">
+ *   <nb-action icon="nb-search"></nb-action>
+ *   <nb-action icon="nb-power-circled"></nb-action>
+ *   <nb-action icon="nb-person"></nb-action>
+ * </nb-actions>
+ * ```
+ *
+ * Multiple sizes example:
+ * @stacked-example(Multiple Sizes, action/action-sizes.component)
+ *
+ * It is also possible to specify a `badge` value:
+ *
+ * @stacked-example(Action Badge, action/action-badge.component)
+ *
+ * and we can set it to full a width of a parent component
+ * @stacked-example(Full Width, action/action-width.component)
  *
  * @styles
  *
@@ -119,7 +141,7 @@ export class NbActionsComponent {
   }
 
   @HostBinding('class.full-width')
-  private fullWidthValue: boolean = false;
+  fullWidthValue: boolean = false;
 
   /**
    * Size of the component, small|medium|large

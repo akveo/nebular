@@ -1,6 +1,6 @@
 {
   "name": "@nebular/security",
-  "version": "2.0.0-rc.6",
+  "version": "2.0.0-rc.9",
   "description": "@nebular/security",
   "main": "./bundles/security.umd.js",
   "module": "./index.js",
@@ -29,9 +29,9 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^5.1.0",
-    "@angular/core": "^5.1.0",
-    "@angular/router": "^5.1.0",
-    "rxjs": "~5.5.5"
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/router": "^6.0.0",
+    "rxjs": "^6.1.0"
   }
 }

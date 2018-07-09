@@ -18,16 +18,16 @@ import {
   AfterViewInit,
   PLATFORM_ID,
   Inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { takeWhile } from 'rxjs/operators/takeWhile';
-import { filter } from 'rxjs/operators/filter';
+import { BehaviorSubject } from 'rxjs';
+import { takeWhile, filter } from 'rxjs/operators';
 
 import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
 import { convertToBoolProperty, getElementHeight } from '../helpers';
-import { NbWindow } from '../../theme.options';
+import { NB_WINDOW } from '../../theme.options';
 
 function sumSubmenuHeight(item: NbMenuItem) {
   return item.expanded
@@ -56,6 +56,7 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   constructor(
     private menuService: NbMenuService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private changeDetection: ChangeDetectorRef,
   ) { }
 
   ngAfterViewInit() {
@@ -70,10 +71,9 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.updateMaxHeight());
 
-    setTimeout(() => {
-      this.updateSubmenuHeight();
-      this.updateMaxHeight();
-    });
+    this.updateSubmenuHeight();
+    this.updateMaxHeight();
+    this.changeDetection.detectChanges();
   }
 
   ngOnDestroy() {
@@ -114,6 +114,28 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
  * Vertical menu component.
  *
  * Accepts a list of menu items and renders them accordingly. Supports multi-level menus.
+ *
+ * Basic example
+ * @stacked-example(Showcase, menu/menu-showcase.component)
+ *
+ * ```ts
+ * // ...
+ * items: NbMenuItem[] = [
+ *  {
+ *    title: home,
+ *    link: '/'
+ *  },
+ *  {
+ *    title: dashboard,
+ *    link: 'dashboard'
+ *  }
+ * ];
+ * // ...
+ * <nb-menu [items]="items"></nb-menu>
+ * ```
+ *
+ * Two-level menu example
+ * @stacked-example(Two Levels, menu/menu-children.component)
  *
  * @styles
  *
@@ -207,7 +229,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   private alive: boolean = true;
   private autoCollapseValue: boolean = false;
 
-  constructor(private window: NbWindow,
+  constructor(@Inject(NB_WINDOW) private window,
               private menuInternalService: NbMenuInternalService,
               private router: Router) {
   }
@@ -237,6 +259,16 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe((data: { tag: string; listener: BehaviorSubject<NbMenuBag> }) => {
         data.listener.next({ tag: this.tag, item: this.getSelectedItem(this.items) });
+      });
+
+    this.menuInternalService
+      .onCollapseAll()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter((data: { tag: string }) => this.compareTag(data.tag)),
+      )
+      .subscribe((data: { tag: string }) => {
+        this.collapseAll();
       });
 
     this.router.events
@@ -296,13 +328,17 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (homeItem) {
       if (homeItem.link) {
-        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams });
+        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams, fragment: homeItem.fragment });
       }
 
       if (homeItem.url) {
         this.window.location.href = homeItem.url;
       }
     }
+  }
+
+  private collapseAll() {
+    this.menuInternalService.collapseAll(this.items, this.tag);
   }
 
   private getHomeItem(items: NbMenuItem[]): NbMenuItem {

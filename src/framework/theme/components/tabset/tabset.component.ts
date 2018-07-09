@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { map, delay } from 'rxjs/operators';
 import {
   Component,
   Input,
@@ -13,6 +14,7 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -20,6 +22,14 @@ import { convertToBoolProperty } from '../helpers';
 
 /**
  * Specific tab container.
+ *
+ * ```ts
+ * <nb-tab tabTitle="Users"
+ *   badgeText="99+"
+ *   badgeStatus="danger">
+ *   <p>List of <strong>users</strong>.</p>
+ * </nb-tab>
+ ```
  */
 @Component({
   selector: 'nb-tab',
@@ -55,6 +65,7 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
+   * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
    */
   @Input()
@@ -78,7 +89,8 @@ export class NbTabComponent {
   /**
    * Badge position.
    * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right'
+   * 'top left', 'top right', 'bottom left', 'bottom right',
+   * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
   @Input() badgePosition: string;
@@ -93,11 +105,11 @@ export class NbTabComponent {
 /**
  *
  * Dynamic tabset component.
- * Renders `<nb-tab></ng-tab> containers inside.
+ * @stacked-example(Showcase, tabset/tabset-showcase.component)
  *
- * @example Basic tabset example
+ * Basic tabset example
  *
- * ```
+ * ```html
  * <nb-tabset>
  *  <nb-tab tabTitle="Simple Tab #1">
  *    Tab content 1
@@ -106,6 +118,12 @@ export class NbTabComponent {
  *    Tab content 2
  *  </nb-tab>
  * </nb-tabset>
+ * ```
+ * It is also possible to set a badge to a particular tab:
+ * @stacked-example(Tab With Badge, tabset/tabset-badge.component)
+ *
+ * and we can set it to full a width of a parent component
+ * @stacked-example(Full Width, tabset/tabset-width.component)
  *
  * @styles
  *
@@ -151,7 +169,7 @@ export class NbTabsetComponent implements AfterContentInit {
   @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;
 
   @HostBinding('class.full-width')
-  private fullWidthValue: boolean = false;
+  fullWidthValue: boolean = false;
 
   /**
    * Take full width of a parent
@@ -174,15 +192,24 @@ export class NbTabsetComponent implements AfterContentInit {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
+  // TODO: refactoring this component, avoid change detection loop
   ngAfterContentInit() {
     this.route.params
-      .subscribe((params: any) => {
-        const activeTab = this.tabs.find(tab => this.routeParam ? tab.route === params[this.routeParam] : tab.active);
+      .pipe(
+        map(
+          (params: any) =>
+            this.tabs.find((tab) => this.routeParam ? tab.route === params[this.routeParam] : tab.active),
+        ),
+        delay(0),
+      )
+      .subscribe((activeTab) => {
         this.selectTab(activeTab || this.tabs.first);
-      });
+        this.changeDetectorRef.markForCheck();
+    });
   }
 
   // TODO: navigate to routeParam

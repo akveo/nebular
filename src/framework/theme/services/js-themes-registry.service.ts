@@ -10,11 +10,13 @@ import { Inject, Injectable } from '@angular/core';
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { DEFAULT_THEME } from './js-themes/default.theme';
 import { COSMIC_THEME } from './js-themes/cosmic.theme';
-import { nbBuiltInJSThemesToken, nbJSThemesToken } from '../theme.options';
+import { CORPORATE_THEME } from './js-themes/corporate.theme';
+import { NB_BUILT_IN_JS_THEMES, NB_JS_THEMES } from '../theme.options';
 
 export const BUILT_IN_THEMES: NbJSThemeOptions[] = [
   DEFAULT_THEME,
   COSMIC_THEME,
+  CORPORATE_THEME,
 ];
 
 /**
@@ -26,8 +28,8 @@ export class NbJSThemesRegistry {
 
   private themes: any = {};
 
-  constructor(@Inject(nbBuiltInJSThemesToken) builtInThemes: NbJSThemeOptions[],
-              @Inject(nbJSThemesToken) newThemes: NbJSThemeOptions[] = []) {
+  constructor(@Inject(NB_BUILT_IN_JS_THEMES) builtInThemes: NbJSThemeOptions[],
+              @Inject(NB_JS_THEMES) newThemes: NbJSThemeOptions[] = []) {
 
     const themes = this.combineByNames(newThemes, builtInThemes);
 

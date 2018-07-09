@@ -64,11 +64,11 @@ export class NbPopoverComponent {
 
   @Input()
   @HostBinding('style.top.px')
-  positionTop: number;
+  positionTop: number = 0;
 
   @Input()
   @HostBinding('style.left.px')
-  positionLeft: number;
+  positionLeft: number = 0;
 
   /**
    * If content type is TemplateRef we're passing context as template outlet param.

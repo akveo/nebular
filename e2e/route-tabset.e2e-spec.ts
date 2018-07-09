@@ -10,7 +10,7 @@ import { hasClass } from './e2e-helper';
 
 describe('nb-route-tabset', () => {
   beforeEach((done) => {
-    browser.get('#/route-tabset').then(() => done());
+    browser.get('#/tabset/route-tabset-test.component').then(() => done());
   });
 
   it('should display default route-tabset', () => {
@@ -27,7 +27,7 @@ describe('nb-route-tabset', () => {
     element(tab2).click()
       .then(() => {
         expect(hasClass(element(tab2), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/route-tabset/tab2');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab2');
       });
 
     const tab1 = by.css('nb-route-tabset:nth-child(1) > ul > li:nth-child(1)');
@@ -35,7 +35,7 @@ describe('nb-route-tabset', () => {
     element(tab1).click()
       .then(() => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/route-tabset/tab1');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab1');
       });
   });
 
@@ -57,7 +57,7 @@ describe('nb-route-tabset', () => {
     element(tab2).click()
       .then(() => {
         expect(hasClass(element(tab2), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/route-tabset/tab2');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab2');
       });
 
     const tab1 = by.css('nb-route-tabset:nth-child(2) > ul > li:nth-child(1)');
@@ -65,7 +65,7 @@ describe('nb-route-tabset', () => {
     element(tab1).click()
       .then(() => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/route-tabset/tab1');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab1');
       });
   });
 });

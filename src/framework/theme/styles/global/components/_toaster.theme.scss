@@ -8,7 +8,8 @@
 
   .toast-close-button {
     position: absolute;
-    right: 0.15rem;
+    @include nb-ltr(right, 0.15rem);
+    @include nb-rtl(left, 0.15rem);
     top: 0.2rem;
     opacity: 1;
     background-color: nb-theme(toaster-btn-close-bg);
@@ -34,6 +35,16 @@
       box-shadow: nb-theme(toaster-shadow);
       opacity: 1 !important;
     }
+  }
+  // have to use id selector for specifity
+  /* stylelint-disable-next-line selector-max-id */
+  #toast-container > div.toast {
+    @include nb-rtl(padding-left, 15px);
+    @include nb-rtl(padding-right, 50px);
+  }
+  .toaster-icon {
+    @include nb-rtl(right, 0);
+    @include nb-rtl(background-position-x, 0);
   }
   .toast-success {
     background-color: nb-theme(toaster-success);

@@ -1,13 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { NB_AUTH_TOKEN_CLASS } from '../../auth.options';
-import { NbAuthToken, nbCreateToken, NbTokenClass } from './token';
+import { NbAuthToken } from './token';
+import { NbAuthTokenParceler } from './token-parceler';
 
 export abstract class NbTokenStorage {
 
   abstract get(): NbAuthToken;
   abstract set(token: NbAuthToken);
-  abstract setRaw(token: string);
   abstract clear();
 }
 
@@ -15,23 +14,24 @@ export abstract class NbTokenStorage {
  * Service that uses browser localStorage as a storage.
  *
  * The token storage is provided into auth module the following way:
- * ```
+ * ```ts
  * { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
  * ```
  *
  * If you need to change the storage behaviour or provide your own - just extend your class from basic `NbTokenStorage`
  * or `NbTokenLocalStorage` and provide in your `app.module`:
- * ```
+ * ```ts
  * { provide: NbTokenStorage, useClass: NbTokenCustomStorage },
  * ```
  *
  */
 @Injectable()
-export class NbTokenLocalStorage implements NbTokenStorage {
+export class NbTokenLocalStorage extends NbTokenStorage {
 
   protected key = 'auth_app_token';
 
-  constructor(@Inject(NB_AUTH_TOKEN_CLASS) protected tokenClass: NbTokenClass) {
+  constructor(private parceler: NbAuthTokenParceler) {
+    super();
   }
 
   /**
@@ -39,7 +39,8 @@ export class NbTokenLocalStorage implements NbTokenStorage {
    * @returns {NbAuthToken}
    */
   get(): NbAuthToken {
-    return nbCreateToken(this.tokenClass, localStorage.getItem(this.key));
+    const raw = localStorage.getItem(this.key);
+    return this.parceler.unwrap(raw);
   }
 
   /**
@@ -47,15 +48,8 @@ export class NbTokenLocalStorage implements NbTokenStorage {
    * @param {NbAuthToken} token
    */
   set(token: NbAuthToken) {
-    localStorage.setItem(this.key, token.toString());
-  }
-
-  /**
-   * Sets raw (string) token to localStorage
-   * @param {string} token
-   */
-  setRaw(token: string) {
-    localStorage.setItem(this.key, token);
+    const raw = this.parceler.wrap(token);
+    localStorage.setItem(this.key, raw);
   }
 
   /**

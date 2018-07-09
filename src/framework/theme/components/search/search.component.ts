@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -21,16 +22,11 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subscription } from 'rxjs/Subscription';
-import { filter } from 'rxjs/operators/filter';
-import { of as observableOf } from 'rxjs/observable/of';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { delay } from 'rxjs/operators/delay';
+import { BehaviorSubject, of as observableOf, combineLatest } from 'rxjs';
+import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { takeWhile } from 'rxjs/operators/takeWhile';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -146,6 +142,21 @@ export class NbSearchFieldComponent {
 /**
  * Beautiful full-page search control.
  *
+ * @stacked-example(Showcase, search/search-showcase.component)
+ *
+ * Basic setup:
+ *
+ * ```ts
+ *  <nb-search type="rotate-layout"></nb-search>
+ * ```
+ *
+ * Several animation types are available:
+ * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
+ *
+ * It is also possible to handle search event using `NbSearchService`:
+ *
+ * @stacked-example(Search Event, search/search-event.component)
+ *
  * @styles
  *
  * search-btn-open-fg:
@@ -199,11 +210,9 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private searchFieldComponentRef$ = new BehaviorSubject<ComponentRef<any>>(null);
   private searchType: string = 'rotate-layout';
-  private activateSearchSubscription: Subscription;
-  private deactivateSearchSubscription: Subscription;
-  private routerSubscription: Subscription;
 
   constructor(private searchService: NbSearchService,
+              private componentFactoryResolver: ComponentFactoryResolver,
               private themeService: NbThemeService,
               private router: Router) {
   }
@@ -219,14 +228,14 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routerSubscription = this.router.events
+    this.router.events
       .pipe(
         takeWhile(() => this.alive),
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
 
-    this.activateSearchSubscription = combineLatest([
+    combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchActivate(),
     ])
@@ -235,7 +244,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef]: [ComponentRef<any>]) => {
+      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
         this.showSearch = true;
 
         this.themeService.appendLayoutClass(this.searchType);
@@ -247,7 +256,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         componentRef.changeDetectorRef.detectChanges();
       });
 
-    this.deactivateSearchSubscription = combineLatest([
+    combineLatest([
       this.searchFieldComponentRef$,
       this.searchService.onSearchDeactivate(),
     ])
@@ -256,7 +265,7 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
         filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef]: [ComponentRef<any>]) => {
+      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
         this.showSearch = false;
 
         componentRef.instance.showSearch = false;
@@ -272,7 +281,8 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeService.appendToLayoutTop(NbSearchFieldComponent)
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NbSearchFieldComponent);
+    this.themeService.appendToLayoutTop(factory)
       .subscribe((componentRef: ComponentRef<any>) => {
         this.connectToSearchField(componentRef);
       });
