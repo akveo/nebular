@@ -112,7 +112,6 @@ export class NbInfiniteListComponent implements AfterViewChecked, OnDestroy {
 
   @ContentChild(NbDisableAutoLoadButtonDirective) disableAutoLoadButton: NbDisableAutoLoadButtonDirective;
   @ContentChild(NbLoadMoreButtonDirective) loadMoreButton: NbLoadMoreButtonDirective;
-
   private disableClickSubscription: Subscription;
   private loadMoreClickSubscription: Subscription;
 
@@ -135,7 +134,7 @@ export class NbInfiniteListComponent implements AfterViewChecked, OnDestroy {
     if (this.loadMoreButton) {
       this.loadMoreClickSubscription = this.loadMoreButton.click
         .pipe(takeWhile(() => this.alive))
-        .subscribe(() => this.emitLoadNext())
+        .subscribe(() => this.emitLoadNext());
     }
 
     this.changeDetection.detectChanges();
