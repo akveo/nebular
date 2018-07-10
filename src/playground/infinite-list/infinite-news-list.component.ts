@@ -1,27 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewsService, NewsPost } from './news.service';
-
-@Component({
-  selector: 'nb-news-post',
-  template: `
-    <article>
-      <h2>{{post.title}}</h2>
-      <!-- <nb-random-svg></nb-random-svg> -->
-      <p>{{post.text}}</p>
-      <a [attr.href]="post.link">Read full article</a>
-    </article>
-  `,
-  styles: [`
-    p {
-      height: 30rem;
-      overflow: hidden;
-    }
-  `],
-})
-export class NbNewsPostComponent {
-  @Input()
-  post: NewsPost;
-}
 
 @Component({
   selector: 'nb-infinite-news-list',
@@ -34,12 +12,15 @@ export class NbNewsPostComponent {
         [listenWindowScroll]="listenWindowScroll"
         (loadPrev)="loadPrev()"
         (loadNext)="loadNext()">
+
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
         </nb-list-item>
-      </nb-infinite-list>
+        <nb-list-item *ngFor="let _ of placeholders">
+          <nb-news-post-placeholder></nb-news-post-placeholder>
+        </nb-list-item>
 
-      <div [nbSpinner]="loadingNext"></div>
+      </nb-infinite-list>
     </nb-card>
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
@@ -49,9 +30,13 @@ export class NbInfiniteNewsListComponent implements OnInit {
   listenWindowScroll = true;
   threshold = 2000;
 
+  pageSize = 10;
+
   loadingPrev = false;
   loadingNext = false;
   news: NewsPost[] = [];
+
+  placeholders: any[] = [];
 
   constructor(private newsService: NewsService) {}
 
@@ -78,6 +63,9 @@ export class NbInfiniteNewsListComponent implements OnInit {
       .subscribe(news => {
         this.news.push(...news);
         this.loadingNext = false;
+        this.placeholders = [];
       });
+
+    this.placeholders = new Array(this.pageSize);
   }
 }

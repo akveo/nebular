@@ -55,7 +55,7 @@ export class NbLoadMoreButtonDirective {
  *
  * @stacked-example(Basic example, infinite-list/infinite-list-showcase.component)
  *
- * @stacked-example(Loading indicator, infinite-list/infinite-news-list.component)
+ * @stacked-example(News list, infinite-list/infinite-news-list.component)
  */
 @Component({
   selector: 'nb-infinite-list',
