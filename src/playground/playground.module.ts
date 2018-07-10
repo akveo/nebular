@@ -170,12 +170,8 @@ import { NbUsersListShowcaseComponent } from './list/users-list-showcase.compone
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
-import {
-  NbInfiniteNewsListComponent,
-  NbNewsPostComponent,
-  NbNewsPostPlaceholderComponent,
-  NbPostPageComponent,
-} from './infinite-list/infinite-news-list.component';
+import { NbInfiniteNewsListComponent, NbNewsPostComponent } from './infinite-list/infinite-news-list.component';
+import { NewsService } from './infinite-list/news.service';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -339,10 +335,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbRandomSvgComponent,
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
-  NbNewsPostPlaceholderComponent,
-  NbPostPageComponent,
 ];
-
 
 @NgModule({
   imports: [
@@ -357,6 +350,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbPlaygroundBaseComponent,
     ...NB_EXAMPLE_COMPONENTS,
   ],
+  providers: [ NewsService ],
 })
 export class NbPlaygroundModule {
 }

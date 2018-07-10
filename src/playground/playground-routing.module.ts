@@ -138,7 +138,7 @@ import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
-import { NbInfiniteNewsListComponent, NbPostPageComponent } from './infinite-list/infinite-news-list.component';
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 
 export const routes: Routes = [
   {
@@ -599,16 +599,7 @@ export const routes: Routes = [
           },
           {
             path: 'infinite-news-list.component',
-            children: [
-              {
-                path: 'news',
-                component: NbInfiniteNewsListComponent,
-              },
-              {
-                path: 'post/:id',
-                component: NbPostPageComponent,
-              },
-            ],
+            component: NbInfiniteNewsListComponent,
           },
         ],
       },

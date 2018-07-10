@@ -1,4 +1,9 @@
-nb-infinite-list {
-  max-width: 50rem;
+:host() {
+  display: block;
   margin: 0 auto;
+  max-width: 50rem;
+}
+
+.nb-spinner-container {
+  height: 4rem;
 }
