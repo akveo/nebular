@@ -57,7 +57,7 @@ describe('Component: NbButton', () => {
       .toBeTruthy()
   });
 
-  it('should set hero class', () => {
+  it('should set shape class', () => {
     button.shape = 'semi-round';
     fixture.detectChanges();
     expect(
