@@ -5,7 +5,6 @@
  */
 
 @mixin btn-colors() {
-
   &.btn-primary {
     @include btn-primary();
   }
@@ -174,7 +173,6 @@
   @include btn-outline-focus(btn-focus-color(btn-secondary-border, 20%));
 }
 
-
 // Hover
 @mixin btn-primary-hover() {
   @include btn-hover(btn-hover-color(btn-primary-bg));
@@ -199,7 +197,6 @@
 @mixin btn-secondary-hover() {
   @include btn-hover(btn-hover-color(btn-secondary-border));
 }
-
 
 // Active
 @mixin btn-primary-active() {
@@ -226,14 +223,13 @@
   @include btn-active(btn-active-color(btn-secondary-border));
 }
 
-
 // Disabled
 @mixin btn-disabled() {
-  &:disabled {
+  &:disabled, &.btn-disabled {
     opacity: nb-theme(btn-disabled-opacity);
+    cursor: default;
   }
 }
-
 
 @mixin btn-secondary-border() {
   border: 2px solid nb-theme(btn-secondary-border);

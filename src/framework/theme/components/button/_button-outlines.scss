@@ -154,7 +154,6 @@
   @include btn-outline-focus(btn-focus-color(btn-secondary-border, 20%));
 }
 
-
 // Active
 @mixin btn-outline-primary-active() {
   @include btn-primary-active();
@@ -179,7 +178,6 @@
 @mixin btn-outline-secondary-active() {
   @include btn-secondary-active();
 }
-
 
 // Border
 @mixin btn-outline-primary-border() {

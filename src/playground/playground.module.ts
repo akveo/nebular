@@ -153,6 +153,14 @@ import { NbAccordionToggleComponent } from './accordion/accordion-toggle.compone
 import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
 import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
 import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonModule } from '@nebular/theme/components/button/button.module';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -180,6 +188,7 @@ export const NB_MODULES = [
   }),
   NbSpinnerModule,
   NbAccordionModule,
+  NbButtonModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -296,6 +305,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAccordionTestComponent,
   NbAccordionToggleComponent,
   NbAccordionMultiComponent,
+  NbButtonShowcaseComponent,
+  NbButtonColorsComponent,
+  NbButtonShapesComponent,
+  NbButtonHeroComponent,
+  NbButtonOutlineComponent,
+  NbButtonSizesComponent,
+  NbButtonTypesComponent,
 ];
 
 

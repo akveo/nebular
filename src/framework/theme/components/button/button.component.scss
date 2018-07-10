@@ -9,5 +9,18 @@
   letter-spacing: 0.4px;
   border: 2px solid transparent;
   transition: none;
-  cursor: default;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
 }

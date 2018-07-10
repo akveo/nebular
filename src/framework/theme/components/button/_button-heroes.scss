@@ -22,7 +22,7 @@
   }
 
   &.btn-hero.btn-danger {
-    @include btn-danger();
+    @include btn-hero-danger();
   }
 
   &.btn-hero.btn-secondary {
@@ -172,7 +172,6 @@
 }
 
 // light gradients
-
 @function btn-hero-light-gradient($color-left, $color-right) {
   $color-left: tint($color-left, 14%);
   $color-right: tint($color-right, 14%);
@@ -216,7 +215,6 @@
 }
 
 // dark gradients
-
 @function btn-hero-dark-gradient($color-left, $color-right) {
   $color-left: shade($color-left, 14%);
   $color-right: shade($color-right, 14%);
@@ -289,7 +287,6 @@
 }
 // End help mixins
 
-
 // Gradient
 @mixin btn-hero-primary-gradient() {
   $color-right: nb-theme(btn-primary-bg);
@@ -356,7 +353,6 @@
   @return btn-hero-bevel(btn-hero-secondary-middle-color());
 }
 
-
 // Glow
 @function btn-hero-primary-glow() {
   @return btn-hero-glow(btn-hero-primary-middle-color());
@@ -381,7 +377,6 @@
 @function btn-hero-secondary-glow() {
   @return btn-hero-glow(btn-hero-secondary-middle-color());
 }
-
 
 // Bevel-glow-shadow
 @mixin btn-hero-bevel-glow-shadow($bevel, $glow, $shadow) {
@@ -440,7 +435,6 @@
   @include btn-hero-bevel-glow-shadow($bevel, $glow, $shadow);
 }
 
-
 // Border
 @mixin btn-hero-primary-border() {
   border: none;
@@ -465,7 +459,6 @@
 @mixin btn-hero-secondary-border() {
   border: 2px solid nb-theme(btn-secondary-border);
 }
-
 
 // Hover
 @mixin btn-hero-primary-hover() {
@@ -557,10 +550,9 @@
   }
 }
 
-
 // Disabled
 @mixin btn-hero-disabled() {
-  &:disabled {
+  &:disabled, &.btn-disabled {
     opacity: nb-theme(btn-disabled-opacity);
     box-shadow: none;
   }

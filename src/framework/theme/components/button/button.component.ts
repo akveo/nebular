@@ -4,17 +4,96 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, HostListener } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 
 /**
  * Basic button component.
  *
+ * Default button size is `medium` and status color is `primary`:
+ * @stacked-example(Button Showcase, button/button-showcase.component)
+ *
+ * ```html
+ * <button nbButton></button>
+ * ```
+ *
+ * Buttons are available in multiple colors using `status` property:
+ * @stacked-example(Button Colors, button/button-colors.component.html)
+ *
+ * There are three button sizes:
+ *
+ * @stacked-example(Button Sizes, button/button-sizes.component.html)
+ *
+ * And two additional style types - `outline`:
+ *
+ * @stacked-example(Outline Buttons, button/button-outline.component.html)
+ *
+ * and `hero`:
+ *
+ * @stacked-example(Button Colors, button/button-hero.component.html)
+ *
+ * Buttons available in different shapes, which could be combined with the other properties:
+ * @stacked-example(Button Shapes, button/button-shapes.component)
+ *
+ * `nbButton` could be applied to the following selectors - `button`, `input[type="button"]`, `input[type="submit"]`
+ * and `a`:
+ * @stacked-example(Button Elements, button/button-types.component.html)
+ *
  * @styles
- * TODO: styles
+ *
+ * btn-fg:
+ * btn-font-family:
+ * btn-line-height:
+ * btn-disabled-opacity:
+ * btn-cursor:
+ * btn-primary-bg:
+ * btn-secondary-bg:
+ * btn-info-bg:
+ * btn-success-bg:
+ * btn-warning-bg:
+ * btn-danger-bg:
+ * btn-secondary-border:
+ * btn-secondary-border-width:
+ * btn-padding-y-lg:
+ * btn-padding-x-lg:
+ * btn-font-size-lg:
+ * btn-padding-y-md:
+ * btn-padding-x-md:
+ * btn-font-size-md:
+ * btn-padding-y-sm:
+ * btn-padding-x-sm:
+ * btn-font-size-sm:
+ * btn-padding-y-xs:
+ * btn-padding-x-xs:
+ * btn-font-size-xs:
+ * btn-border-radius:
+ * btn-rectangle-border-radius:
+ * btn-semi-round-border-radius:
+ * btn-round-border-radius:
+ * btn-hero-shadow:
+ * btn-hero-text-shadow:
+ * btn-hero-bevel-size:
+ * btn-hero-glow-size:
+ * btn-hero-primary-glow-size:
+ * btn-hero-success-glow-size:
+ * btn-hero-warning-glow-size:
+ * btn-hero-info-glow-size:
+ * btn-hero-danger-glow-size:
+ * btn-hero-secondary-glow-size:
+ * btn-hero-degree:
+ * btn-hero-primary-degree:
+ * btn-hero-success-degree:
+ * btn-hero-warning-degree:
+ * btn-hero-info-degree:
+ * btn-hero-danger-degree:
+ * btn-hero-secondary-degree:
+ * btn-hero-border-radius:
+ * btn-outline-fg:
+ * btn-outline-hover-fg:
+ * btn-outline-focus-fg:
  */
 @Component({
-  selector: 'button[nbButton],a[nbButton]',
+  selector: 'button[nbButton],a[nbButton],input[type="button"][nbButton],input[type="submit"][nbButton]',
   styleUrls: ['./button.component.scss'],
   template: `
     <ng-content></ng-content>
@@ -102,12 +181,20 @@ export class NbButtonComponent {
     return this.shape === NbButtonComponent.SHAPE_SEMI_ROUND;
   }
 
-  @HostBinding('class.btn-hero') heroValue: boolean;
-  @HostBinding('class.btn-outline') outlineValue: boolean;
+  @HostBinding('class.btn-hero') hero: boolean;
+  @HostBinding('class.btn-outline') outline: boolean;
+
+  @HostBinding('attr.aria-disabled')
+  @HostBinding('class.btn-disabled') disabled: boolean;
+
+  @HostBinding('attr.tabindex')
+  get tabbable(): string {
+    return this.disabled ? '-1' : '0';
+  }
 
   /**
-   * Card size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * Button size, available sizes:
+   * `xxsmall`, `xsmall`, `small`, `medium`, `large`
    * @param {string} val
    */
   @Input('size')
@@ -116,8 +203,8 @@ export class NbButtonComponent {
   }
 
   /**
-   * Card status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
+   * Button status (adds specific styles):
+   * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
   @Input('status')
@@ -126,8 +213,7 @@ export class NbButtonComponent {
   }
 
   /**
-   * Card status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
+   * Button shapes: `rectangle`, `round`, `semi-round`
    * @param {string} val
    */
   @Input('shape')
@@ -136,20 +222,37 @@ export class NbButtonComponent {
   }
 
   /**
-   * Move the column to the very left position in the layout.
+   * Adds `hero` styles
    * @param {boolean} val
    */
-  @Input()
-  set hero(val: boolean) {
-    this.heroValue = convertToBoolProperty(val);
+  @Input('hero')
+  set setHero(val: boolean) {
+    this.hero = convertToBoolProperty(val);
   }
 
   /**
-   * Move the column to the very left position in the layout.
+   * Disables the button
+   * @param {boolean} val
+   */
+  @Input('disabled')
+  set setDisabled(val: boolean) {
+    this.disabled = convertToBoolProperty(val);
+  }
+
+  /**
+   * Adds `outline` styles
    * @param {boolean} val
    */
   @Input()
-  set outline(val: boolean) {
-    this.outlineValue = convertToBoolProperty(val);
+  set setOutline(val: boolean) {
+    this.outline = convertToBoolProperty(val);
+  }
+
+  @HostListener('click', ['$event'])
+  onClick(event: Event) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
   }
 }

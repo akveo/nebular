@@ -125,6 +125,13 @@ import { NbAccordionMultiComponent } from './accordion/accordion-multi.component
 import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
 import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
 import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
 
 export const routes: Routes = [
   {
@@ -157,6 +164,39 @@ export const routes: Routes = [
           {
             path: 'popover-modes.component',
             component: NbPopoverModesComponent,
+          },
+        ],
+      },
+      {
+        path: 'button',
+        children: [
+          {
+            path: 'button-showcase.component',
+            component: NbButtonShowcaseComponent,
+          },
+          {
+            path: 'button-colors.component',
+            component: NbButtonColorsComponent,
+          },
+          {
+            path: 'button-shapes.component',
+            component: NbButtonShapesComponent,
+          },
+          {
+            path: 'button-hero.component',
+            component: NbButtonHeroComponent,
+          },
+          {
+            path: 'button-outline.component',
+            component: NbButtonOutlineComponent,
+          },
+          {
+            path: 'button-sizes.component',
+            component: NbButtonSizesComponent,
+          },
+          {
+            path: 'button-types.component',
+            component: NbButtonTypesComponent,
           },
         ],
       },
