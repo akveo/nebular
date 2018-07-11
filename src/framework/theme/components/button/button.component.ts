@@ -122,62 +122,62 @@ export class NbButtonComponent {
   shape: string;
 
   @HostBinding('class.btn-xsmall')
-  private get xsmall() {
+  get xsmall() {
     return this.size === NbButtonComponent.SIZE_XSMALL;
   }
 
   @HostBinding('class.btn-small')
-  private get small() {
+  get small() {
     return this.size === NbButtonComponent.SIZE_SMALL;
   }
 
   @HostBinding('class.btn-medium')
-  private get medium() {
+  get medium() {
     return this.size === NbButtonComponent.SIZE_MEDIUM;
   }
 
   @HostBinding('class.btn-large')
-  private get large() {
+  get large() {
     return this.size === NbButtonComponent.SIZE_LARGE;
   }
 
   @HostBinding('class.btn-primary')
-  private get primary() {
+  get primary() {
     return this.status === NbButtonComponent.STATUS_PRIMARY;
   }
 
   @HostBinding('class.btn-info')
-  private get info() {
+  get info() {
     return this.status === NbButtonComponent.STATUS_INFO;
   }
 
   @HostBinding('class.btn-success')
-  private get success() {
+  get success() {
     return this.status === NbButtonComponent.STATUS_SUCCESS;
   }
 
   @HostBinding('class.btn-warning')
-  private get warning() {
+  get warning() {
     return this.status === NbButtonComponent.STATUS_WARNING;
   }
 
   @HostBinding('class.btn-danger')
-  private get danger() {
+  get danger() {
     return this.status === NbButtonComponent.STATUS_DANGER;
   }
 
   @HostBinding('class.btn-rectangle')
-  private get rectangle() {
+  get rectangle() {
     return this.shape === NbButtonComponent.SHAPE_RECTANGLE;
   }
 
   @HostBinding('class.btn-round')
-  private get round() {
+  get round() {
     return this.shape === NbButtonComponent.SHAPE_ROUND;
   }
 
   @HostBinding('class.btn-semi-round')
-  private get semiRound() {
+  get semiRound() {
     return this.shape === NbButtonComponent.SHAPE_SEMI_ROUND;
   }
 
