@@ -17,8 +17,8 @@
     @include btn-sm();
   }
 
-  .btn.btn-tn {
-    @include btn-tn();
+  .btn.btn-xs {
+    @include btn-xs();
   }
 }
 
@@ -46,10 +46,10 @@
                        nb-theme(btn-border-radius));
 }
 
-@mixin btn-tn() {
-  @include button-size(nb-theme(btn-padding-y-tn),
-                       nb-theme(btn-padding-x-tn),
-                       nb-theme(btn-font-size-tn),
+@mixin btn-xs() {
+  @include button-size(nb-theme(btn-padding-y-xs),
+                       nb-theme(btn-padding-x-xs),
+                       nb-theme(btn-font-size-xs),
                        nb-theme(btn-line-height),
                        nb-theme(btn-border-radius));
 }
