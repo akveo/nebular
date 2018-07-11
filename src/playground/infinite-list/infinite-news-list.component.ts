@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { NewsService, NewsPost } from './news.service';
 
 @Component({
@@ -8,6 +10,8 @@ import { NewsService, NewsPost } from './news.service';
       <div [nbSpinner]="loadingPrev"></div>
 
       <nb-infinite-list
+        [nbListPager]="pageSize"
+        (nbListPagerChange)="updateUrl($event)"
         [loadMoreThreshold]="threshold"
         [listenWindowScroll]="listenWindowScroll"
         (loadPrev)="loadPrev()"
@@ -31,6 +35,7 @@ export class NbInfiniteNewsListComponent implements OnInit {
   threshold = 2000;
 
   pageSize = 10;
+  skippedPages: number;
 
   loadingPrev = false;
   loadingNext = false;
@@ -38,19 +43,32 @@ export class NbInfiniteNewsListComponent implements OnInit {
 
   placeholders: any[] = [];
 
-  constructor(private newsService: NewsService) {}
+  constructor(
+    private newsService: NewsService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe(({ page }) => {
+        this.skippedPages = page
+          ? Number.parseInt(page, 10) - 1
+          : 0;
+      });
+
     this.loadNext();
   }
 
   loadPrev() {
-    if (this.loadingPrev) { return; }
+    if (this.skippedPages === 0 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
     this.newsService.load()
       .subscribe(news => {
         this.news.unshift(...news);
+        this.skippedPages--;
         this.loadingPrev = false;
       });
   }
@@ -67,5 +85,18 @@ export class NbInfiniteNewsListComponent implements OnInit {
       });
 
     this.placeholders = new Array(this.pageSize);
+  }
+
+  updateUrl(page) {
+    const actualPage = this.skippedPages + page;
+
+    this.router.navigate(
+      ['.'],
+      {
+        queryParams: { page: actualPage },
+        replaceUrl: true,
+        relativeTo: this.route,
+      },
+    );
   }
 }
