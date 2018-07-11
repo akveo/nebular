@@ -248,7 +248,7 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div class="scrollable-container" #scrollableContainer>
+    <div (scroll)="onScroll($event)" class="scrollable-container" #scrollableContainer>
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
@@ -421,7 +421,6 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   @HostListener('window:scroll', ['$event'])
-  @HostListener('scroll', ['$event'])
   onScroll($event) {
     const event = new CustomEvent(
       'nbscroll',
