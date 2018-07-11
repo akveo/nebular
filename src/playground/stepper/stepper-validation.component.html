@@ -11,7 +11,7 @@
             <input type="text" placeholder="Enter your name" class="form-control" formControlName="firstCtrl"
                    [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
           </div>
-          <button class="btn btn-primary" nbStepperNext>next</button>
+          <button nbButton nbStepperNext>next</button>
         </form>
       </nb-step>
       <nb-step [stepControl]="secondForm" label="Second step">
@@ -25,8 +25,8 @@
             <input type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
                    [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
           </div>
-          <button class="btn btn-primary" nbStepperPrevious>prev</button>
-          <button class="btn btn-primary" nbStepperNext>next</button>
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
         </form>
       </nb-step>
       <nb-step [stepControl]="thirdForm" label="Third step">
@@ -38,14 +38,14 @@
             <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
                    [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
           </div>
-          <button class="btn btn-primary" nbStepperPrevious>prev</button>
-          <button class="btn btn-primary" nbStepperNext>Confirm</button>
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>Confirm</button>
         </form>
       </nb-step>
       <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
         <div class="step-container">
           <h3>Wizard completed!</h3>
-          <button class="btn btn-primary" (click)="stepper.reset()">Try again</button>
+          <button nbButton (click)="stepper.reset()">Try again</button>
         </div>
       </nb-step>
     </nb-stepper>
