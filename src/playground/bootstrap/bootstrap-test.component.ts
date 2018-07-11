@@ -23,6 +23,12 @@ import { Component } from '@angular/core';
           <button class="btn btn-success">Success</button>
           <button class="btn btn-warning">Warning</button>
         </div>
+        <div>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary btn-md">Medium</button>
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary btn-xs">X-Small</button>
+        </div>
         <h2>Tables</h2>
         <table class="table table-striped">
           <thead>

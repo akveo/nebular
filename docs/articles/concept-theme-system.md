@@ -124,3 +124,4 @@ The only requirement for the feature to work is to wrap all of your component st
 - [Enable Theme System](docs/guides/enable-theme-system)
 - [Default Theme variables table](docs/themes/default)
 - [Cosmic Theme variables table](docs/themes/cosmic)
+- [Corporate Theme variables table](docs/themes/corporate)

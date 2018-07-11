@@ -1,11 +1,11 @@
 # Assign multiple roles to a user
 
-In a case when you have a slightly more complicated requirements, when the user have more than one role, you can configure the `NbRoleProvider` service to return an array of user roles.
+In a case when you have slightly more complicated requirements, when a user has more than one role, you can configure the `NbRoleProvider` service to return an array of user roles.
 <hr>
 
 ## Roles configuration
 
-In a simplest form you just need to modify the `getRole` method to return an array of roles:
+In the simplest form you just need to modify the `getRole` method to return an array of roles:
 ```ts
 // ...
 
