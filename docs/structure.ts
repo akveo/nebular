@@ -270,6 +270,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
+        source: [
+          'NbButtonComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
         source: [
@@ -319,24 +327,6 @@ export const structure = [
           'NbAccordionItemBodyComponent',
         ],
       },
-      // {
-      //   type: 'tabs',
-      //   name: 'Chips',
-      //   icon: 'chips.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Button',
-      //   icon: 'button.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Modal',
-      //   icon: 'modal.svg',
-      //   source: [],
-      // },
     ],
   },
   {
