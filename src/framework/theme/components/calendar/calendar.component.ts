@@ -61,4 +61,8 @@ export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
     return this.selectedValue;
   }
 
+  onChange(event) {
+    this.change.emit(event);
+  }
+
 }

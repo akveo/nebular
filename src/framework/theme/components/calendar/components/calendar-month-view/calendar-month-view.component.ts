@@ -46,7 +46,7 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
 
-  days: string[];
+  days: any[];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
@@ -62,7 +62,8 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
   }
 
   private invalidateShortDayNames() {
-    const days = this.dateTimeUtil.getDayOfWeekNames('narrow');
+    const days = this.dateTimeUtil.getDayOfWeekNames('narrow')
+      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }) );
     for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
       days.push(days.shift());
     }

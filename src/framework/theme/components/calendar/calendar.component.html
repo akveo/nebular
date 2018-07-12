@@ -8,11 +8,13 @@
   </div>
 
   <div class="body">
-    <nb-calendar-month-view *ngIf="activeViewMode === ViewModes.date"
-      [activeMonth]="activeMonth"
+    <nb-calendar-month-view
+      *ngFor="let visibleMonth of visibleMonths"
+
+      [activeMonth]="visibleMonth"
       [currentDate]="dateToday"
       [selectedValue]="selectedValue"
-      [includeBoundingMonths]="boundingMonths"
+      [includeBoundingMonths]="calendarConfig.displayBoundingMonths"
       (change)="onChange($event)">
     </nb-calendar-month-view>
   </div>
