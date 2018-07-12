@@ -440,20 +440,24 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       });
   }
 
-  private getScrollInfo(): { scrollTop: number, scrollHeight: number } {
+  private getScrollInfo(): { scrollTop: number, scrollHeight: number, clientHeight: number } {
     let scrollHeight;
     let scrollTop;
+    let clientHeight;
 
     if (this.withScrollValue) {
-      scrollHeight = this.scrollableContainerRef.nativeElement.scrollHeight;
-      scrollTop = this.scrollableContainerRef.nativeElement.scrollTop;
+      const container = this.scrollableContainerRef.nativeElement;
+      scrollHeight = container.scrollHeight;
+      scrollTop = container.scrollTop;
+      clientHeight = container.clientHeight;
     } else {
       const { body, documentElement } = this.document;
-      const { pageYOffset } = this.window;
+      const { innerHeight, pageYOffset } = this.window;
       scrollHeight = Math.max(body.scrollHeight, documentElement.scrollHeight);
       scrollTop = pageYOffset || documentElement.scrollTop || body.scrollTop || 0;
+      clientHeight = Math.max(documentElement.clientHeight, innerHeight) || 0;
     }
 
-    return { scrollHeight, scrollTop };
+    return { scrollHeight, scrollTop, clientHeight };
   }
 }

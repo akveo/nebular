@@ -47,9 +47,9 @@ export class NbScrollThresholdDirective {
 
   @HostListener('window:nbscroll', ['$event'])
   layoutScroll($event) {
-    if (this.listenWindowScroll) {
-      const { scrollHeight, scrollTop } = $event.detail;
-      this.checkPosition(scrollHeight, scrollTop);
+  if (this.listenWindowScroll) {
+      const { scrollHeight, scrollTop, clientHeight } = $event.detail;
+      this.checkPosition(scrollHeight, scrollTop, clientHeight);
       this.lastScrollPosition = scrollTop;
     }
   }
@@ -57,21 +57,21 @@ export class NbScrollThresholdDirective {
   @HostListener('scroll')
   elementScroll() {
     if (!this.listenWindowScroll) {
-      const { scrollTop, scrollHeight } = this.elementRef.nativeElement;
-      this.checkPosition(scrollHeight, scrollTop);
+      const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
+      this.checkPosition(scrollHeight, scrollTop, clientHeight );
       this.lastScrollPosition = scrollTop;
     }
   }
 
   constructor(private elementRef: ElementRef) {}
 
-  checkPosition(scrollHeight: number, scrollTop: number) {
+  checkPosition(scrollHeight: number, scrollTop: number, clientHeight: number) {
     const scrollDelta = scrollTop - this.lastScrollPosition;
     const scrollDirection = scrollDelta > 0
       ? NbScrollDirection.DOWN
       : NbScrollDirection.UP;
 
-    if (scrollDirection === NbScrollDirection.DOWN && scrollHeight - scrollTop <= this.threshold) {
+    if (scrollDirection === NbScrollDirection.DOWN && scrollHeight - scrollTop - clientHeight <= this.threshold) {
       this.bottomThresholdReached.emit();
     }
 
