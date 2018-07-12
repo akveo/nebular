@@ -11,6 +11,7 @@ import { NewsService, NewsPost } from './news.service';
 
       <nb-infinite-list
         [nbListPager]="pageSize"
+        [startPage]="startPage"
         (nbListPagerChange)="updateUrl($event)"
         [loadMoreThreshold]="threshold"
         [listenWindowScroll]="listenWindowScroll"
@@ -32,10 +33,10 @@ import { NewsService, NewsPost } from './news.service';
 export class NbInfiniteNewsListComponent implements OnInit {
 
   listenWindowScroll = true;
-  threshold = 2000;
+  threshold = 10;
 
   pageSize = 10;
-  skippedPages: number;
+  startPage: number;
 
   loadingPrev = false;
   loadingNext = false;
@@ -53,32 +54,30 @@ export class NbInfiniteNewsListComponent implements OnInit {
     this.route.queryParams
       .pipe(take(1))
       .subscribe(({ page }) => {
-        this.skippedPages = page
-          ? Number.parseInt(page, 10) - 1
-          : 0;
+        this.startPage = page
+          ? Number.parseInt(page, 10)
+          : 1;
       });
 
     this.loadNext();
   }
 
   loadPrev() {
-    if (this.skippedPages === 0 || this.loadingPrev) { return; }
+    if (this.startPage === 1 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
     this.newsService.load()
       .subscribe(news => {
+        this.startPage--;
         this.news.unshift(...news);
-        this.skippedPages--;
         this.loadingPrev = false;
-
-        const pageNumber = this.skippedPages + 1;
-        this.updateUrl(pageNumber);
       });
   }
 
   loadNext() {
     if (this.loadingNext) { return; }
 
+    this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
     this.newsService.load()
       .subscribe(news => {
@@ -91,12 +90,10 @@ export class NbInfiniteNewsListComponent implements OnInit {
   }
 
   updateUrl(page) {
-    const actualPage = this.skippedPages + page;
-
     this.router.navigate(
       ['.'],
       {
-        queryParams: { page: actualPage },
+        queryParams: { page },
         replaceUrl: true,
         relativeTo: this.route,
       },

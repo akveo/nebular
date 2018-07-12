@@ -25,6 +25,9 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
   @Input('nbListPager')
   pageSize: number;
 
+  @Input()
+  startPage: number = 1;
+
   @Output()
   nbListPagerChange = new EventEmitter<number>();
 
@@ -74,7 +77,7 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
       }
 
       const elementIndex = this.elementIndex(entry.target);
-      const page = Math.floor(elementIndex / this.pageSize) + 1;
+      const page = this.startPage + Math.floor(elementIndex / this.pageSize);
 
       let ratio = entry.intersectionRatio;
       if (intersectionRatioByPage.has(page)) {
