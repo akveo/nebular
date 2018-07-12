@@ -70,6 +70,9 @@ export class NbInfiniteNewsListComponent implements OnInit {
         this.news.unshift(...news);
         this.skippedPages--;
         this.loadingPrev = false;
+
+        const pageNumber = this.skippedPages + 1;
+        this.updateUrl(pageNumber);
       });
   }
 
