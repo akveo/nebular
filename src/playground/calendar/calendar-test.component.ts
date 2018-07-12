@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
     Selected date: {{ date | date }}
     <br/>
     <br/>
-    <nb-calendar [value]="date" (change)="onChange($event)"></nb-calendar>
+    <nb-calendar [selectedValue]="date" (change)="onChange($event)"></nb-calendar>
   `,
 })
 export class NbCalendarTestComponent {

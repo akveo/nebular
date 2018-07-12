@@ -1,10 +1,35 @@
 import { NbDateTimeUtil } from './date-time-util.interface';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, LOCALE_ID } from '@angular/core';
+
+const DEFAULT_DAY_OF_WEEK_NAMES = {
+  'long': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  'short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  'narrow': ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+};
+
+/** The default month names to use if Intl API is not available. */
+const DEFAULT_MONTH_NAMES = {
+  'long': [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+    'October', 'November', 'December',
+  ],
+  'short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  'narrow': ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+};
+
+const SUPPORTS_INTL = typeof Intl !== 'undefined';
 
 @Injectable()
 export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
+  locale: string;
+
   months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
+  constructor(@Inject(LOCALE_ID) matDateLocale: string) {
+    super();
+    this.locale = matDateLocale;
+  }
 
   getNumberOfDaysInMonth(date: Date): number {
     return this.getDate(
@@ -93,6 +118,39 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
     return date1.getTime() - date2.getTime();
   }
 
+  getMonthNames(type: 'long' | 'short' | 'narrow' = 'short'): string[] {
+    if (SUPPORTS_INTL) {
+      const formatter = new Intl.DateTimeFormat(this.locale, {month: type, timeZone: 'utc'});
+
+      const res = [];
+      for (let i = 0; i < 12; i++) {
+        res.push(
+          this._stripDirectionalityCharacters(this._format(formatter, new Date(2017, i, 1))),
+        );
+      }
+
+      return res;
+    }
+    return DEFAULT_MONTH_NAMES[type];
+  }
+
+  getDayOfWeekNames(type: 'long' | 'short' | 'narrow' = 'short'): string[] {
+    if (SUPPORTS_INTL) {
+      const formatter = new Intl.DateTimeFormat(this.locale, {weekday: type, timeZone: 'utc'});
+
+      const res = [];
+      for (let i = 1; i <= 7; i++) {
+        res.push(
+          this._stripDirectionalityCharacters(this._format(formatter, new Date(2017, 0, i))),
+        );
+      }
+
+      return res;
+    } else {
+      return DEFAULT_DAY_OF_WEEK_NAMES[type];
+    }
+  }
+
   // Rewrite
   private createDateSafe(year: number, month: number, date: number) {
     const result = new Date(year, month, date);
@@ -103,6 +161,35 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
       result.setFullYear(this.getYear(result) - 1900);
     }
     return result;
+  }
+
+  /**
+   * Strip out unicode LTR and RTL characters. Edge and IE insert these into formatted dates while
+   * other browsers do not. We remove them to make output consistent and because they interfere with
+   * date parsing.
+   * @param str The string to strip direction characters from.
+   * @returns The stripped string.
+   */
+  private _stripDirectionalityCharacters(str: string) {
+    return str.replace(/[\u200e\u200f]/g, '');
+  }
+
+  /**
+   * When converting Date object to string, javascript built-in functions may return wrong
+   * results because it applies its internal DST rules. The DST rules around the world change
+   * very frequently, and the current valid rule is not always valid in previous years though.
+   * We work around this problem building a new Date object which has its internal UTC
+   * representation with the local date and time.
+   * @param dtf Intl.DateTimeFormat object, containg the desired string format. It must have
+   *    timeZone set to 'utc' to work fine.
+   * @param date Date from which we want to get the string representation according to dtf
+   * @returns A Date object with its UTC representation based on the passed in date info
+   */
+  private _format(dtf: Intl.DateTimeFormat, date: Date) {
+    const d = new Date(Date.UTC(
+      date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(),
+      date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+    return dtf.format(d);
   }
 
 }

@@ -1,55 +1,55 @@
-<ng-container *ngIf="viewMode === ViewMode.date">
+<ng-container *ngIf="activeViewMode === ViewModes.date">
   <div class="header">
     <i class="nb-arrow-left" (click)="prevMonth()"></i>
-    <button class="btn btn-success" (click)="viewMode=ViewMode.year">
-      {{ newValue | nbCalendarDate }}
+    <button class="btn btn-success" (click)="activeViewMode=ViewModes.year">
+      {{ activeMonth | nbCalendarDate }}
     </button>
     <i class="nb-arrow-right" (click)="nextMonth()"></i>
   </div>
 
   <div class="body">
-    <nb-calendar-month-view *ngIf="viewMode === ViewMode.date"
-      [activeMonth]="newValue"
-      [currentDate]="currentDate"
-      [selectedValue]="value"
+    <nb-calendar-month-view *ngIf="activeViewMode === ViewModes.date"
+      [activeMonth]="activeMonth"
+      [currentDate]="dateToday"
+      [selectedValue]="selectedValue"
       [includeBoundingMonths]="boundingMonths"
       (change)="onChange($event)">
     </nb-calendar-month-view>
   </div>
 </ng-container>
 
-<ng-container *ngIf="viewMode === ViewMode.year">
+<ng-container *ngIf="activeViewMode === ViewModes.year">
   <div class="header">
     <i class="nb-arrow-left" (click)="prevYears()"></i>
-    <button class="btn btn-success" (click)="viewMode=ViewMode.date">
-      {{ startYear + ' - ' + (startYear + yearCount) }}
+    <button class="btn btn-success" (click)="activeViewMode=ViewModes.date">
+      {{ activeMonth | nbCalendarDate }}
     </button>
     <i class="nb-arrow-right" (click)="nextYears()"></i>
   </div>
 
   <div class="body">
     <nb-calendar-year-picker
-      [value]="newValue"
-      [currentDate]="currentDate"
-      [startYear]="startYear"
-      [yearCount]="yearCount"
-      (change)="newValue = $event; viewMode = ViewMode.month">
+      [value]="activeMonth"
+      [currentDate]="dateToday"
+      [startYear]="yearViewActiveYear"
+      [yearCount]="calendarConfig.yearsToDisplayNumber"
+      (change)="activeMonth = $event; activeViewMode = ViewModes.month">
     </nb-calendar-year-picker>
   </div>
 </ng-container>
 
-<ng-container *ngIf="viewMode === ViewMode.month">
+<ng-container *ngIf="activeViewMode === ViewModes.month">
   <div class="header month-picker-header">
-    <button class="btn btn-success" (click)="viewMode=ViewMode.date">
-      {{ newValue | nbCalendarYear }}
+    <button class="btn btn-success" (click)="activeViewMode=ViewModes.date">
+      {{ activeMonth | nbCalendarDate }}
     </button>
   </div>
 
   <div class="body">
     <nb-calendar-month-picker
-      [value]="newValue"
-      [currentDate]="currentDate"
-      (change)="newValue = $event; viewMode = ViewMode.date">
+      [value]="activeMonth"
+      [currentDate]="dateToday"
+      (change)="activeMonth = $event; activeViewMode = ViewModes.date">
     </nb-calendar-month-picker>
   </div>
 </ng-container>

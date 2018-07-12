@@ -24,4 +24,8 @@ export abstract class NbDateTimeUtil<D> {
   abstract isSameDay(date1: D, date2: D): boolean;
   abstract compareDates(date1: D, date2: D): number;
 
+  // Formatting methods
+  abstract getMonthNames(type: 'long' | 'short' | 'narrow'): string[];
+  abstract getDayOfWeekNames(type: 'long' | 'short' | 'narrow'): string[];
+
 }
