@@ -10,12 +10,6 @@ import { NewsPost } from './news.service';
       <a [attr.href]="post.link">Read full article</a>
     </article>
   `,
-  styles: [`
-    p {
-      height: 30rem;
-      overflow: hidden;
-    }
-  `],
 })
 export class NbNewsPostComponent {
   @Input()
@@ -44,7 +38,7 @@ export class NbNewsPostComponent {
       width: 80%;
     }
     .text-placeholder {
-      height: 30rem;
+      height: 7rem;
       margin-bottom: 1rem;
     }
     .link-placeholder {
