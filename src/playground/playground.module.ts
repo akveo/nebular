@@ -327,7 +327,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
-  NbListShowcaseComponent,
   NbSimpleListShowcaseComponent,
   NbUsersListShowcaseComponent,
   NbInfiniteListShowcaseComponent,
