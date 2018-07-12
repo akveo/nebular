@@ -29,6 +29,7 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbAccordionModule,
+  NbButtonModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -154,7 +155,6 @@ import { NbAccordionMultiComponent } from './accordion/accordion-multi.component
 import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
 import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
 import { NbButtonShowcaseComponent } from './button/button-showcase.component';
-import { NbButtonModule } from '@nebular/theme/components/button/button.module';
 import { NbButtonColorsComponent } from './button/button-colors.component';
 import { NbButtonShapesComponent } from './button/button-shapes.component';
 import { NbButtonHeroComponent } from './button/button-hero.component';
