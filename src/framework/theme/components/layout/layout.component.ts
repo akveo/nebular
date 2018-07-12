@@ -444,9 +444,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     let scrollHeight;
     let scrollTop;
 
-    if (this.withScroll) {
-      scrollHeight = this.elementRef.nativeElement.scrollHeight;
-      scrollTop = this.elementRef.nativeElement.scrollTop;
+    if (this.withScrollValue) {
+      scrollHeight = this.scrollableContainerRef.nativeElement.scrollHeight;
+      scrollTop = this.scrollableContainerRef.nativeElement.scrollTop;
     } else {
       const { body, documentElement } = this.document;
       const { pageYOffset } = this.window;
