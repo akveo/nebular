@@ -61,7 +61,7 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
             class: NbAuthOAuth2Token,
           },
           redirect: {
-            success: '/oauth2-password',
+            success: '/auth/auth-guard.service',
           },
         }),
       ],

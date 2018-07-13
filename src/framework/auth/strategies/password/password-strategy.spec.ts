@@ -26,7 +26,7 @@ describe('password-auth-strategy', () => {
     },
   };
 
-  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token');
+  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token', 'strategy');
 
   const noMessageResponse: any = {
     data: {
@@ -77,7 +77,7 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -113,7 +113,7 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -250,7 +250,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual(null);
@@ -1102,7 +1102,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });
@@ -1117,7 +1117,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });
@@ -1132,7 +1132,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });
@@ -1159,7 +1159,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });
@@ -1174,7 +1174,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });
@@ -1189,7 +1189,7 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
 
           done();
         });

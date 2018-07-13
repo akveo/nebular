@@ -28,8 +28,8 @@ describe('auth-service', () => {
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue);
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null);
+  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, 'strategy');
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -112,7 +112,7 @@ describe('auth-service', () => {
 
       authService.getToken().subscribe((val: NbAuthSimpleToken) => {
         expect(spy).toHaveBeenCalled();
-        expect(val.getValue()).toEqual(testTokenValue);
+        expect(val.getAccessToken()).toEqual(testTokenValue);
       });
     },
   );
@@ -150,7 +150,7 @@ describe('auth-service', () => {
         .pipe(first())
         .subscribe((token: NbAuthSimpleToken) => {
           expect(spy).toHaveBeenCalled();
-          expect(token.getValue()).toEqual(testTokenValue);
+          expect(token.getAccessToken()).toEqual(testTokenValue);
           done();
         });
     },

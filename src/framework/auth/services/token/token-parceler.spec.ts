@@ -13,13 +13,16 @@ import { NB_AUTH_TOKENS } from '../../auth.options';
 describe('token-parceler', () => {
 
   let tokenParceler: NbAuthTokenParceler;
-  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value');
-  const wrappedSimple = `{"name":"${NbAuthSimpleToken.NAME}","value":"${simpleToken.getValue()}"}`;
+  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value', 'strategy');
   // tslint:disable-next-line
-  const jwtToken = nbAuthCreateToken(NbAuthJWTToken, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-  const wrappedJWT = `{"name":"${NbAuthJWTToken.NAME}","value":"${jwtToken.getValue()}"}`;
-
-  const wrappedNonExisting = `{"name":"non-existing","value":"${simpleToken.getValue()}"}`;
+  const wrappedSimple = `{"name":"${NbAuthSimpleToken.NAME}","strategyName":"${simpleToken.getStrategyName()}","value":"${simpleToken.getValue()}"}`;
+  // tslint:disable-next-line
+  const jwtToken = nbAuthCreateToken(NbAuthJWTToken, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773', 'strategy');
+  jwtToken['expDate'] = '+081740-07-04T11:16:15.000Z';
+  // tslint:disable-next-line
+  const wrappedJWT = `{"name":"${NbAuthJWTToken.NAME}","strategyName":"${jwtToken.getStrategyName()}","value":"${jwtToken.getValue()}","expDate":"${jwtToken.getExpDate().toISOString()}"}`;
+  // tslint:disable-next-line
+  const wrappedNonExisting = `{"name":"non-existing","value":"${simpleToken.getValue()}","strategyName":"${simpleToken.getStrategyName()}"}`;
   const wrappedInvalid = `{"name":"non-existing"`;
 
   describe('default configuration', () => {

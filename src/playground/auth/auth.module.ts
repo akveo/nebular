@@ -5,7 +5,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -19,7 +19,7 @@ import {
   NbAuthJWTToken,
   NbAuthModule,
   NbPasswordAuthStrategy,
-  NbDummyAuthStrategy, NbAuthJWTInterceptor,
+  NbDummyAuthStrategy, NbAuthJWTInterceptor, NbOAuth2GrantType, NbOAuth2AuthStrategy, NbAuthOAuth2Token,
 } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
@@ -28,6 +28,7 @@ import { NbAuthPlaygroundRoutingModule } from './auth-routing.module';
 import { NbCustomRoleProvider } from './role.provider';
 import { NbAclTestComponent } from './acl/acl-test.component';
 import { NbAuthGuard } from './auth-guard.service';
+import { NbPlaygroundCallApiComponent } from './call-api.component';
 
 
 @NgModule({
@@ -44,7 +45,11 @@ import { NbAuthGuard } from './auth-guard.service';
     NbAuthModule.forRoot({
       forms: {
         login: {
-          redirectDelay: 3000,
+          redirectDelay: 1000,
+          // redirect: {
+          //   success: '/auth/auth-guard.service',
+          // },
+          strategy: 'password',
           socialLinks: [
             {
               url: 'https://github.com/akveo',
@@ -63,6 +68,10 @@ import { NbAuthGuard } from './auth-guard.service';
             },
           ],
         },
+        logout: {
+          redirectDelay: 500,
+          strategy: 'password',
+        },
       },
       strategies: [
         NbDummyAuthStrategy.setup({
@@ -75,9 +84,17 @@ import { NbAuthGuard } from './auth-guard.service';
         NbPasswordAuthStrategy.setup({
           name: 'email',
 
+          login: {
+            // redirect: {
+            //   success: '/auth/auth-guard.service',
+            // },
+          },
+
           token: {
             class: NbAuthJWTToken,
+            key: 'access_token',
           },
+
           baseEndpoint: 'http://localhost:4400/api/auth/',
           logout: {
             redirect: {
@@ -98,6 +115,24 @@ import { NbAuthGuard } from './auth-guard.service';
           errors: {
             key: 'data.errors',
           },
+        }),
+        NbOAuth2AuthStrategy.setup({
+          name: 'password',
+          clientId: 'test',
+          clientSecret: 'secret',
+          baseEndpoint: 'http://localhost:4400/api/auth/',
+          token: {
+            endpoint: 'token',
+            grantType: NbOAuth2GrantType.PASSWORD,
+            class: NbAuthOAuth2Token,
+          },
+          refresh: {
+            endpoint: 'refresh-token',
+            grantType: NbOAuth2GrantType.REFRESH_TOKEN,
+          },
+          // redirect: {
+          //   success: '/auth/auth-guard.service',
+          // },
         }),
       ],
     }),
@@ -121,6 +156,7 @@ import { NbAuthGuard } from './auth-guard.service';
   declarations: [
     NbAuthPlaygroundComponent,
     NbAclTestComponent,
+    NbPlaygroundCallApiComponent,
   ],
   providers: [
     NbAuthGuard,
@@ -128,5 +164,6 @@ import { NbAuthGuard } from './auth-guard.service';
     { provide: NbRoleProvider, useClass: NbCustomRoleProvider },
   ],
 })
+
 export class NbAuthPlaygroundModule {
 }

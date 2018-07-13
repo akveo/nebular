@@ -22,10 +22,11 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
     <nb-layout>
       <nb-layout-column>
         <nb-card *ngIf="token">
-          <nb-card-body><h2 class="title">{{getClaims(token.getValue()).email | json}} is currently authenticated</h2>
+          <nb-card-body>
+            <h2 class="title">{{getClaims(token.getAccessToken()).email | json}} is currently authenticated</h2>
             <p></p>
-            <p>Current User Access Token: {{ token.getValue() | json }}</p>
-            <p>Current User Access Token Payload : {{getClaims(token.getValue()) | json}}</p>
+            <p>Current User Access Token: {{ token.getAccessToken() | json }}</p>
+            <p>Current User Access Token Payload : {{getClaims(token.getAccessToken()) | json}}</p>
             <p>Current User Refresh Token: {{ token.getRefreshToken() | json }}</p>
             <button class="btn btn-warning" *ngIf="token" (click)="logout()">Sign Out</button>
           </nb-card-body>
@@ -141,6 +142,6 @@ export class NbOAuth2PasswordLoginComponent {
   }
 
   getClaims(rawToken: string): string {
-    return nbAuthCreateToken(NbAuthJWTToken, rawToken).getPayload();
+    return nbAuthCreateToken(NbAuthJWTToken, rawToken, this.strategy).getPayload();
   }
 }

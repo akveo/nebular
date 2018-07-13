@@ -15,7 +15,9 @@ export class NbAuthGuard implements CanActivate {
         tap(authenticated => {
           if (!authenticated) {
             this.router.navigate(['auth/login']);
+            return false;
           }
+          return true;
         }),
       );
   }
