@@ -51,8 +51,8 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
   ngOnInit() {
     this.dateToday = this.dateTimeUtil.createNowDate();
-    this.activeMonth = this._getInitialActiveMonthFromValue() || this.dateToday;
-    this._invalidateVisibleMonths();
+    this.activeMonth = this.getInitialActiveMonthFromValue() || this.dateToday;
+    this.invalidateVisibleMonths();
     this.yearViewActiveYear =
       Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.calendarConfig.yearsToDisplayNumber / 2);
   }
@@ -61,19 +61,19 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
     this.activeViewMode = viewMode;
   }
 
-  protected abstract _getInitialActiveMonthFromValue(): D;
+  protected abstract getInitialActiveMonthFromValue(): D;
 
-  private _changeActiveMonth(direction) {
+  private changeActiveMonth(direction) {
     this.activeMonth = this.dateTimeUtil.add(
       this.activeMonth,
       direction * this.calendarConfig.numberOfMonthsToIncrement,
       'm',
     );
-    this._invalidateVisibleMonths();
+    this.invalidateVisibleMonths();
     this.activeMonthChange.emit(this.activeMonth);
   }
 
-  private _invalidateVisibleMonths() {
+  private invalidateVisibleMonths() {
     this.visibleMonths = [this.activeMonth];
     for (let i = 1; i < this.calendarConfig.numberOfMonthsToDisplay; i++) {
       this.visibleMonths.push(
@@ -87,11 +87,11 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
   }
 
   prevMonth() {
-    this._changeActiveMonth(-1);
+    this.changeActiveMonth(-1);
   }
 
   nextMonth() {
-    this._changeActiveMonth(1);
+    this.changeActiveMonth(1);
   }
 
   prevYears() {

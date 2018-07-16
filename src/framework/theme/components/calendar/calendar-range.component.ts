@@ -28,7 +28,7 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, Cale
     super(dateTimeUtil);
   }
 
-  protected _getInitialActiveMonthFromValue(): D {
+  protected getInitialActiveMonthFromValue(): D {
     return (this.selectedValue && (this.selectedValue.endDate || this.selectedValue.startDate)) || this.dateToday;
   }
 

@@ -57,12 +57,11 @@ export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
     super(dateTimeUtil);
   }
 
-  protected _getInitialActiveMonthFromValue(): D {
+  protected getInitialActiveMonthFromValue(): D {
     return this.selectedValue;
   }
 
   onChange(event) {
     this.change.emit(event);
   }
-
 }

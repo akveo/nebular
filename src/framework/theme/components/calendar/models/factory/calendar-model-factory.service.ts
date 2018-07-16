@@ -13,19 +13,19 @@ export class NbCalendarModelFactoryService<D> {
   ) {}
 
   createMonthModel(context: NbCalendarMonthBuilderContext<D>): NbCalendarMonthModel {
-    const monthSettings = this._getMonthSettings(context);
+    const monthSettings = this.getMonthSettings(context);
 
-    const firstWeekData = this._createFirstWeekMonthModel(monthSettings);
-    const fullWeeksData = this._createFullWeekModels(monthSettings, firstWeekData.currentDate);
-    const lastWeekData = this._createLastWeekModel(monthSettings, fullWeeksData.currentDate);
+    const firstWeekData = this.createFirstWeekMonthModel(monthSettings);
+    const fullWeeksData = this.createFullWeekModels(monthSettings, firstWeekData.currentDate);
+    const lastWeekData = this.createLastWeekModel(monthSettings, fullWeeksData.currentDate);
 
     return new NbCalendarMonthModel(
       [ ...firstWeekData.monthModel, ...fullWeeksData.monthModel, ...lastWeekData.monthModel ],
-      this._getMonthStates(monthSettings),
+      this.getMonthStates(monthSettings),
     );
   }
 
-  private _getMonthStates({ context }) {
+  private getMonthStates({ context }) {
     const states = [];
 
     if (this.dateTimeUtil.isSameMonth(context.activeMonth, context.currentValue)) {
@@ -34,7 +34,7 @@ export class NbCalendarModelFactoryService<D> {
     return states;
   }
 
-  private _getMonthSettings(context) {
+  private getMonthSettings(context) {
     const startOfMonth = this.dateTimeUtil.getMonthStart(context.activeMonth);
     const daysInMonth = this.dateTimeUtil.getNumberOfDaysInMonth(context.activeMonth);
     const startOfWeekDayDiff = this.dateTimeUtil.getWeekStartDiff(startOfMonth);
@@ -43,7 +43,7 @@ export class NbCalendarModelFactoryService<D> {
     return { startOfMonth, daysInMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, context };
   }
 
-  private _createFirstWeekMonthModel(monthSettings) {
+  private createFirstWeekMonthModel(monthSettings) {
     const monthModel = [];
     const { startOfMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, context } = monthSettings;
 
@@ -59,7 +59,7 @@ export class NbCalendarModelFactoryService<D> {
           this.dateTimeUtil.getMonth(startOfMonth),
           firstWeekDate,
           0,
-          this._getStatesForCell(monthSettings, year, month, firstWeekDate),
+          this.getStatesForCell(monthSettings, year, month, firstWeekDate),
         ),
       );
       currentDate = firstWeekDate;
@@ -77,7 +77,7 @@ export class NbCalendarModelFactoryService<D> {
             month,
             date,
             -1,
-            this._getStatesForCell(monthSettings, year, month, date),
+            this.getStatesForCell(monthSettings, year, month, date),
           ),
         );
       }
@@ -89,7 +89,7 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel, currentDate };
   }
 
-  private _createFullWeekModels(monthSettings, currentDate) {
+  private createFullWeekModels(monthSettings, currentDate) {
     const monthModel = [];
     const { startOfMonth, daysInMonth, numberOfDaysInFirstWeekOfMonth } = monthSettings;
     const year = this.dateTimeUtil.getYear(startOfMonth);
@@ -104,7 +104,7 @@ export class NbCalendarModelFactoryService<D> {
           month,
           currentDate,
           0,
-          this._getStatesForCell(monthSettings, year, month, currentDate),
+          this.getStatesForCell(monthSettings, year, month, currentDate),
         ),
       );
 
@@ -116,7 +116,7 @@ export class NbCalendarModelFactoryService<D> {
             month,
             fullWeekDate,
             0,
-            this._getStatesForCell(monthSettings, year, month, fullWeekDate),
+            this.getStatesForCell(monthSettings, year, month, fullWeekDate),
           ),
         );
         currentDate = fullWeekDate;
@@ -127,7 +127,7 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel, currentDate };
   }
 
-  private _createLastWeekModel(monthSettings, currentDate) {
+  private createLastWeekModel(monthSettings, currentDate) {
     const monthModel = [];
     const { startOfMonth, daysInMonth, context } = monthSettings;
 
@@ -143,7 +143,7 @@ export class NbCalendarModelFactoryService<D> {
             month,
             lastWeekDate,
             0,
-            this._getStatesForCell(monthSettings, year, month, lastWeekDate),
+            this.getStatesForCell(monthSettings, year, month, lastWeekDate),
           ),
         );
       }
@@ -158,7 +158,7 @@ export class NbCalendarModelFactoryService<D> {
               nextMonthMonth,
               nextMonthDay,
               1,
-              this._getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
+              this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
             ),
           );
         }
@@ -171,7 +171,7 @@ export class NbCalendarModelFactoryService<D> {
     return { monthModel };
   }
 
-  protected _getBasicStatesForCell({ context }, year, month, date) {
+  protected getBasicStatesForCell({ context }, year, month, date) {
     const states = [];
 
     if (
@@ -192,8 +192,8 @@ export class NbCalendarModelFactoryService<D> {
     return states;
   }
 
-  protected _getStatesForCell(monthSettings, year, month, date) {
-    const states = this._getBasicStatesForCell(monthSettings, year, month, date);
+  protected getStatesForCell(monthSettings, year, month, date) {
+    const states = this.getBasicStatesForCell(monthSettings, year, month, date);
     const { context } = monthSettings;
 
     if (

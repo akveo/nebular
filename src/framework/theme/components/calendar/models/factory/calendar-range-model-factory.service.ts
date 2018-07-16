@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactoryService<D> {
 
-  protected _getStatesForCell(monthSettings, year, month, date) {
-    const states = this._getBasicStatesForCell(monthSettings, year, month, date);
+  protected getStatesForCell(monthSettings, year, month, date) {
+    const states = this.getBasicStatesForCell(monthSettings, year, month, date);
     const { context } = monthSettings;
 
     if (context.selectedValue) {

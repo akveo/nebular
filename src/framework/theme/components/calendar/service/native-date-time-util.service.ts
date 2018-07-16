@@ -125,7 +125,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
       const res = [];
       for (let i = 0; i < 12; i++) {
         res.push(
-          this._stripDirectionalityCharacters(this._format(formatter, new Date(2017, i, 1))),
+          this.stripDirectionalityCharacters(this.format(formatter, new Date(2017, i, 1))),
         );
       }
 
@@ -141,7 +141,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
       const res = [];
       for (let i = 1; i <= 7; i++) {
         res.push(
-          this._stripDirectionalityCharacters(this._format(formatter, new Date(2017, 0, i))),
+          this.stripDirectionalityCharacters(this.format(formatter, new Date(2017, 0, i))),
         );
       }
 
@@ -170,7 +170,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
    * @param str The string to strip direction characters from.
    * @returns The stripped string.
    */
-  private _stripDirectionalityCharacters(str: string) {
+  private stripDirectionalityCharacters(str: string) {
     return str.replace(/[\u200e\u200f]/g, '');
   }
 
@@ -185,7 +185,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
    * @param date Date from which we want to get the string representation according to dtf
    * @returns A Date object with its UTC representation based on the passed in date info
    */
-  private _format(dtf: Intl.DateTimeFormat, date: Date) {
+  private format(dtf: Intl.DateTimeFormat, date: Date) {
     const d = new Date(Date.UTC(
       date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(),
       date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
