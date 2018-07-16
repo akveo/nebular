@@ -18,8 +18,8 @@ import { takeWhile } from 'rxjs/operators';
             <p>Current User Authenticated: {{ !!token }}</p>
             <p>Current User Token: {{ token|json }}</p>
 
-            <button class="btn btn-success" *ngIf="!token" (click)="login()">Sign In with Google</button>
-            <button class="btn btn-warning" *ngIf="token" (click)="logout()">Sign Out</button>
+            <button nbButton status="success" *ngIf="!token" (click)="login()">Sign In with Google</button>
+            <button nbButton status="warning" *ngIf="token" (click)="logout()">Sign Out</button>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>
