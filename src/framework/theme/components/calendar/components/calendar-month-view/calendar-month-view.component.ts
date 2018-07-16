@@ -20,12 +20,17 @@ import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
 import { Day } from '../../models/day';
 
-/**
- */
 @Component({
   selector: 'nb-calendar-month-view',
   styleUrls: ['./calendar-month-view.component.scss'],
-  templateUrl: './calendar-month-view.component.html',
+  template: `
+    <nb-days-names [days]="days"></nb-days-names>
+    <nb-week
+      *ngFor="let week of month.weeks"
+      [week]="week"
+      (cellSelect)="onCellSelect($event)"
+    ></nb-week>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarMonthViewComponent<D> implements OnChanges {

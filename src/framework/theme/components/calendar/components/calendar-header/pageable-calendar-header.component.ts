@@ -16,6 +16,6 @@ import { NbCalendarHeaderComponent } from './calendar-header.component';
 })
 
 export class NbPageableCalendarHeaderComponent extends NbCalendarHeaderComponent {
-  @Output() forward: EventEmitter = new EventEmitter<any>();
-  @Output() backward: EventEmitter = new EventEmitter<any>();
+  @Output() forward = new EventEmitter<any>();
+  @Output() backward = new EventEmitter<any>();
 }

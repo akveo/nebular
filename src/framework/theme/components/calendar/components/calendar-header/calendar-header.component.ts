@@ -13,5 +13,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class NbCalendarHeaderComponent {
-  @Output() select: EventEmitter = new EventEmitter<any>();
+  @Output() select = new EventEmitter<any>();
 }
