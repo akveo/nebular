@@ -17,12 +17,16 @@
     .front-container {
       opacity: 0;
       transition: opacity 0s 0.25s;
+      backface-visibility: hidden;
 
       .flip-button {
         opacity: 0;
         z-index: -1;
       }
+    }
 
+    .back-container {
+      backface-visibility: visible;
     }
   }
 }
@@ -34,7 +38,6 @@
 
   .front-container,
   .back-container {
-    backface-visibility: hidden;
     flex: 1;
 
     .flip-button {
@@ -48,10 +51,12 @@
   }
 
   .front-container {
+    backface-visibility: visible;
     transition: opacity 0s 0.2s;
   }
 
   .back-container {
+    backface-visibility: hidden;
     transform: rotateY(180deg);
   }
 }
