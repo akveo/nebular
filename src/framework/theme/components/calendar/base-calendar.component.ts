@@ -8,12 +8,7 @@ import { EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarConfig } from './calendar-config';
-
-const ViewModes = {
-  year: 'year',
-  month: 'month',
-  date: 'date',
-};
+import { ViewMode } from './models/view-mode';
 
 export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
@@ -32,19 +27,15 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
   @Output()
   activeMonthChange = new EventEmitter<D>();
 
-  // ----------------- Calendar state starts here -------------------------
-
   visibleMonths: Array<D> = [];
 
   dateToday: D;
 
-  activeViewMode: string = ViewModes.date;
+  activeViewMode: ViewMode = ViewMode.DATE;
 
-  ViewModes = ViewModes;
+  ViewMode = ViewMode;
 
   yearViewActiveYear: number;
-
-  // ----------------- Calendar state ends here -------------------------
 
   protected constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
   }
@@ -57,7 +48,7 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
       Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.calendarConfig.yearsToDisplayNumber / 2);
   }
 
-  selectViewMode(viewMode: string) {
+  selectViewMode(viewMode: ViewMode) {
     this.activeViewMode = viewMode;
   }
 

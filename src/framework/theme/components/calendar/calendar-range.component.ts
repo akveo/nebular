@@ -12,8 +12,6 @@ import { NbCalendarModelFactoryService } from './models/factory/calendar-model-f
 import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
 
-/**
- */
 @Component({
   selector: 'nb-calendar-range',
   styleUrls: ['./calendar.component.scss'],
