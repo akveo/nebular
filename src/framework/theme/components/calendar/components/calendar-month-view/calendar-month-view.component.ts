@@ -10,7 +10,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -28,7 +27,7 @@ import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-build
   templateUrl: './calendar-month-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
+export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   @Input()
   activeMonth: D;
@@ -47,28 +46,28 @@ export class NbCalendarMonthViewComponent<D> implements OnInit, OnChanges {
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
 
-  days = [
-    { name: 'M' },
-    { name: 'T' },
-    { name: 'W' },
-    { name: 'T' },
-    { name: 'F' },
-    { name: 'S', holiday: true },
-    { name: 'S', holiday: true },
-  ];
+  days: any[];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
     private dateTimeUtil: NbDateTimeUtil<D>,
-  ) {}
-
-  ngOnInit() {
+  ) {
+    this.invalidateShortDayNames();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.activeMonth) {
       this._invalidateModel();
     }
+  }
+
+  private invalidateShortDayNames() {
+    const days = this.dateTimeUtil.getDayOfWeekNames('narrow')
+      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }) );
+    for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
+      days.push(days.shift());
+    }
+    this.days = days;
   }
 
   private _invalidateModel() {

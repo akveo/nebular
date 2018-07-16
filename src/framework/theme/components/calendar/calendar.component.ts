@@ -4,19 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
-
-const ViewMode = {
-  year: 'year',
-  month: 'month',
-  date: 'date',
-};
-
-const defaultStartYear = 2016;
-const defaultYearCount = 20;
+import { NbBaseCalendarComponent } from './base-calendar.component';
 
 /**
  * Basic example with including bounding dates
@@ -59,52 +51,18 @@ const defaultYearCount = 20;
   templateUrl: './calendar.component.html',
   providers: [ NbCalendarModelFactoryService ],
 })
-export class NbCalendarComponent<D> implements OnInit {
+export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
 
-  @Input()
-  value: D;
-
-  @Input()
-  boundingMonths: boolean = true;
-
-  @Output()
-  change = new EventEmitter();
-
-  newValue: D;
-
-  currentDate: D;
-
-  ViewMode = ViewMode;
-  viewMode = ViewMode.date;
-
-  startYear = defaultStartYear;
-  yearCount = defaultYearCount;
-
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(dateTimeUtil: NbDateTimeUtil<D>) {
+    super(dateTimeUtil);
   }
 
-  ngOnInit() {
-    this.currentDate = this.dateTimeUtil.createNowDate();
-    this.newValue = this.value || this.currentDate;
+  protected _getInitialActiveMonthFromValue(): D {
+    return this.selectedValue;
   }
 
-  prevMonth() {
-    this.newValue = this.dateTimeUtil.add(this.newValue, -1, 'm');
+  onChange(event) {
+    this.change.emit(event);
   }
 
-  nextMonth() {
-    this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
-  }
-
-  prevYears() {
-    this.startYear -= defaultYearCount;
-  }
-
-  nextYears() {
-    this.startYear += defaultYearCount;
-  }
-
-  onChange(value) {
-    this.change.emit(value);
-  }
 }

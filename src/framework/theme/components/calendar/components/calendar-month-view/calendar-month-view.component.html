@@ -1,6 +1,6 @@
 <div>
   <div class="week">
-    <div class="day" [class.holiday]="day.holiday" *ngFor="let day of days">
+    <div class="day" [class.holiday]="day.isHoliday" *ngFor="let day of days">
       {{ day.name }}
     </div>
   </div>

@@ -4,102 +4,59 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
 import { CalendarRangeSelectionModel } from './models/calendar-range-selection.model';
 import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
 import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';
-
-const ViewMode = {
-  year: 'year',
-  month: 'month',
-  date: 'date',
-};
-
-const defaultStartYear = 2016;
-const defaultYearCount = 20;
+import { NbBaseCalendarComponent } from './base-calendar.component';
 
 /**
  */
 @Component({
   selector: 'nb-calendar-range',
-  styleUrls: ['./calendar-range.component.scss'],
-  templateUrl: './calendar-range.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  templateUrl: './calendar.component.html',
   providers: [{ provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService }],
 })
-export class NbCalendarRangeComponent<D> implements OnInit {
+export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, CalendarRangeSelectionModel> {
 
-  @Input()
-  value: CalendarRangeSelectionModel;
+  lastValueEmitted: string = null;
 
-  @Input()
-  boundingMonths: boolean = false;
-
-  @Output()
-  change = new EventEmitter<CalendarRangeSelectionModel>();
-
-  currentDate: D;
-
-  newValue: D;
-
-  ViewMode = ViewMode;
-  viewMode = ViewMode.date;
-
-  startYear = defaultStartYear;
-  yearCount = defaultYearCount;
-
-  lastValueEmitted = null;
-
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(dateTimeUtil: NbDateTimeUtil<D>) {
+    super(dateTimeUtil);
   }
 
-  ngOnInit() {
-    this.currentDate = this.dateTimeUtil.createNowDate();
-    this.newValue = (this.value && (this.value.endDate || this.value.startDate)) || this.currentDate;
-  }
-
-  prevMonth() {
-    this.newValue = this.dateTimeUtil.add(this.newValue, -1, 'm');
-  }
-
-  nextMonth() {
-    this.newValue = this.dateTimeUtil.add(this.newValue, 1, 'm');
-  }
-
-  prevYears() {
-    this.startYear -= defaultYearCount;
-  }
-
-  nextYears() {
-    this.startYear += defaultYearCount;
+  protected _getInitialActiveMonthFromValue(): D {
+    return (this.selectedValue && (this.selectedValue.endDate || this.selectedValue.startDate)) || this.dateToday;
   }
 
   onChange(value: D) {
-    if (!this.value || !this.value.startDate) {
+    if (!this.selectedValue || !this.selectedValue.startDate) {
       this.change.emit(new CalendarRangeSelectionModel(value, null));
       this.lastValueEmitted = 's';
     } else  {
-      if (!this.value.endDate) {
-        if (this.dateTimeUtil.compareDates(this.value.startDate, value) > 0) {
+      if (!this.selectedValue.endDate) {
+        if (this.dateTimeUtil.compareDates(this.selectedValue.startDate, value) > 0) {
           this.change.emit(new CalendarRangeSelectionModel(value, null));
           this.lastValueEmitted = 's';
         } else {
-          this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+          this.change.emit(new CalendarRangeSelectionModel(this.selectedValue.startDate, value));
           this.lastValueEmitted = 'e';
         }
       } else {
         if (this.lastValueEmitted === 'e') {
-          if (this.dateTimeUtil.compareDates(this.value.endDate, value) >= 0) {
-            this.change.emit(new CalendarRangeSelectionModel(value, this.value.endDate));
+          if (this.dateTimeUtil.compareDates(this.selectedValue.endDate, value) >= 0) {
+            this.change.emit(new CalendarRangeSelectionModel(value, this.selectedValue.endDate));
             this.lastValueEmitted = 's';
           } else {
             this.change.emit(new CalendarRangeSelectionModel(value, null));
             this.lastValueEmitted = 's';
           }
         } else {
-          if (this.dateTimeUtil.compareDates(this.value.startDate, value) <= 0) {
-            this.change.emit(new CalendarRangeSelectionModel(this.value.startDate, value));
+          if (this.dateTimeUtil.compareDates(this.selectedValue.startDate, value) <= 0) {
+            this.change.emit(new CalendarRangeSelectionModel(this.selectedValue.startDate, value));
             this.lastValueEmitted = 'e';
           } else {
             this.change.emit(new CalendarRangeSelectionModel(value, null));
