@@ -1,11 +1,11 @@
 <ng-container *ngIf="activeViewMode === ViewModes.date">
-  <div class="header">
-    <i class="nb-arrow-left" (click)="prevMonth()"></i>
-    <button class="btn btn-success" (click)="activeViewMode=ViewModes.year">
-      {{ activeMonth | nbCalendarDate }}
-    </button>
-    <i class="nb-arrow-right" (click)="nextMonth()"></i>
-  </div>
+  <nb-pageable-calendar-header
+    (forward)="prevMonth()"
+    (backward)="nextMonth()"
+    (select)="selectViewMode(ViewModes.year)"
+  >
+    {{ activeMonth | nbCalendarDate }}
+  </nb-pageable-calendar-header>
 
   <div class="body">
     <nb-calendar-month-view
@@ -21,13 +21,13 @@
 </ng-container>
 
 <ng-container *ngIf="activeViewMode === ViewModes.year">
-  <div class="header">
-    <i class="nb-arrow-left" (click)="prevYears()"></i>
-    <button class="btn btn-success" (click)="activeViewMode=ViewModes.date">
-      {{ activeMonth | nbCalendarDate }}
-    </button>
-    <i class="nb-arrow-right" (click)="nextYears()"></i>
-  </div>
+  <nb-pageable-calendar-header
+    (forward)="prevYears()"
+    (backward)="nextYears()"
+    (select)="selectViewMode(ViewModes.date)"
+  >
+    {{ activeMonth | nbCalendarDate }}
+  </nb-pageable-calendar-header>
 
   <div class="body">
     <nb-calendar-year-picker
@@ -41,11 +41,9 @@
 </ng-container>
 
 <ng-container *ngIf="activeViewMode === ViewModes.month">
-  <div class="header month-picker-header">
-    <button class="btn btn-success" (click)="activeViewMode=ViewModes.date">
-      {{ activeMonth | nbCalendarDate }}
-    </button>
-  </div>
+  <nb-calendar-header (select)="selectViewMode(ViewModes.date)">
+    {{ activeMonth | nbCalendarDate }}
+  </nb-calendar-header>
 
   <div class="body">
     <nb-calendar-month-picker

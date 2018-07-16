@@ -16,6 +16,8 @@ import { NbCalendarMonthPickerComponent } from './components/calendar-month-pick
 import { NbCalendarDatePipe } from './helpers/calendar-date.pipe';
 import { NbCalendarYearPipe } from './helpers/calendar-year.pipe';
 import { NbArrayHelper } from './helpers/array.helper';
+import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
 
 const NB_CALENDAR_PROVIDERS = [
   NbNativeDateTimeUtilService,
@@ -23,6 +25,8 @@ const NB_CALENDAR_PROVIDERS = [
 ];
 
 const COMPONENTS = [
+  NbCalendarHeaderComponent,
+  NbPageableCalendarHeaderComponent,
   NbCalendarYearPickerComponent,
   NbCalendarMonthPickerComponent,
   NbCalendarMonthViewComponent,

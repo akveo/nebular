@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+
+  i {
+    font-size: 1.75rem;
+    padding: 0.25rem;
+    cursor: pointer;
+  }
+
+  &.single-page {
+    justify-content: center;
+  }
+}

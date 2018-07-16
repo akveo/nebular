@@ -7,7 +7,7 @@
 import { EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarConfig } from '@nebular/theme/components/calendar/calendar-config';
+import { NbCalendarConfig } from './calendar-config';
 
 const ViewModes = {
   year: 'year',
@@ -55,6 +55,10 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
     this._invalidateVisibleMonths();
     this.yearViewActiveYear =
       Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.calendarConfig.yearsToDisplayNumber / 2);
+  }
+
+  selectViewMode(viewMode: string) {
+    this.activeViewMode = viewMode;
   }
 
   protected abstract _getInitialActiveMonthFromValue(): D;
