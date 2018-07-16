@@ -18,6 +18,7 @@ import { NbCalendarModelFactoryService } from '../../models/factory/calendar-mod
 import { NbCalendarMonthModel } from '../../models/calendar-month.model';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
+import { Day } from '../../models/day';
 
 /**
  */
@@ -46,7 +47,7 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
 
-  days: any[];
+  days: Day[];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
