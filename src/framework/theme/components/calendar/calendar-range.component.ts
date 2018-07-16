@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { NbDateTimeUtil } from './service/date-time-util.interface';
+import { NbDateTimeUtil } from './service/date-time-util';
 import { CalendarRangeSelectionModel } from './models/calendar-range-selection.model';
 import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
 import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';

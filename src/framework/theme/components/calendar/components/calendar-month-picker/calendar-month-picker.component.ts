@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output,
 } from '@angular/core';
 
-import { NbDateTimeUtil } from '../../service/date-time-util.interface';
+import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbArrayHelper } from '../../helpers/array.helper';
 
 /**

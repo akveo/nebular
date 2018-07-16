@@ -1,5 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
-import { NbDateTimeUtil } from '../../service/date-time-util.interface';
+import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarCellModel } from '../calendar-cell.model';
 import { NbCalendarWeekModel } from '../calendar-week.model';
 import { NbCalendarMonthModel } from '../calendar-month.model';

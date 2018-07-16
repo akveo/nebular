@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbCalendarMonthViewComponent } from './components/calendar-month-view/calendar-month-view.component';
 import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
-import { NbDateTimeUtil } from './service/date-time-util.interface';
+import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarCellViewComponent } from './components/callendar-cell-view/calendar-cell-view.component';
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';

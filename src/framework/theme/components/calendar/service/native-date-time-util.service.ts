@@ -1,4 +1,4 @@
-import { NbDateTimeUtil } from './date-time-util.interface';
+import { NbDateTimeUtil } from './date-time-util';
 import { Injectable } from '@angular/core';
 
 @Injectable()
