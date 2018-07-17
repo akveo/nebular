@@ -454,7 +454,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
   getScrollContainerSize(): NbLayoutContainerSize {
     let container = this.document.documentElement;
     if (this.withScrollValue) {
-      container = this.scrollableContainerRef.nativeElement;
+      container = this.scrollableContainerRef.nativeElement.firstChild;
     }
 
     const rect = container.getBoundingClientRect();
