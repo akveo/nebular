@@ -17,6 +17,8 @@ import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
+import { NbLayoutContainerSize, NbRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
@@ -248,7 +250,7 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div class="scrollable-container" #scrollableContainer>
+    <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
@@ -332,6 +334,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
+    protected scrollService: NbLayoutScrollService,
+    protected rulerService: NbRulerService,
   ) {
 
     this.themeService.onThemeChange()
@@ -371,6 +375,24 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }));
     this.spinnerService.load();
 
+    this.rulerService.scrollContainerSizeReq$
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollContainerSize());
+        listener.complete();
+      });
+
+    this.rulerService.containerScrollPositionReq$
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getContainerScrollPosition());
+        listener.complete();
+      });
+
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
@@ -403,6 +425,10 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         this.renderer.setProperty(this.document, 'dir', direction);
       });
 
+    this.scrollService.onManualScroll()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
+
     this.afterViewInit$.next(true);
   }
 
@@ -415,9 +441,43 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.alive = false;
   }
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll($event) {
+    this.scrollService.fireScrollChange($event);
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.themeService.changeWindowWidth(event.target.innerWidth);
+  }
+
+  getScrollContainerSize(): NbLayoutContainerSize {
+    let container = this.document.documentElement;
+    if (this.withScrollValue) {
+      container = this.scrollableContainerRef.nativeElement;
+    }
+
+    const rect = container.getBoundingClientRect();
+    return { width: rect.width, height: rect.height };
+  }
+
+  getContainerScrollPosition(): NbScrollPosition {
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      const rect = container.getBoundingClientRect();
+      return { x: -rect.left || container.scrollLeft, y: rect.top || container.scrollTop };
+    }
+
+    const documentRect = this.document.documentElement.getBoundingClientRect();
+
+    const x = -documentRect.left || this.document.body.scrollLeft || this.window.scrollX ||
+      this.document.documentElement.scrollLeft || 0;
+
+    const y = -documentRect.top || this.document.body.scrollTop || this.window.scrollY ||
+      this.document.documentElement.scrollTop || 0;
+
+
+    return { x, y };
   }
 
   private initScrollTop() {
@@ -427,7 +487,24 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(() => {
-        this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
+        this.scroll(0, 0);
       });
+  }
+
+  private scroll(x: number, y: number) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    if (this.withScrollValue) {
+      const scrollable = this.scrollableContainerRef.nativeElement;
+      if (scrollable.scrollTo) {
+        scrollable.scrollTo(x, y);
+      } else {
+        scrollable.scrollLeft = x;
+        scrollable.scrollTop = y;
+      }
+    } else {
+      this.window.scrollTo(x, y);
+    }
   }
 }

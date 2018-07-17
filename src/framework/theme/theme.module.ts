@@ -26,6 +26,8 @@ import {
   NbMediaBreakpointsService,
 } from './services/breakpoints.service';
 import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from './services/direction.service';
+import { NbLayoutScrollService } from './services/scroll.service';
+import { NbRulerService } from './services/ruler.service';
 
 export function nbWindowFactory() {
   return window;
@@ -47,6 +49,7 @@ export class NbThemeModule {
    * @param nbThemeOptions {NbThemeOptions} Main theme options
    * @param nbJSThemes {NbJSThemeOptions[]} List of JS Themes, will be merged with default themes
    * @param nbMediaBreakpoints {NbMediaBreakpoint} Available media breakpoints
+   * @param layoutDirection {NbLayoutDirection} Layout direction
    *
    * @returns {ModuleWithProviders}
    */
@@ -70,6 +73,8 @@ export class NbThemeModule {
         NbSpinnerService,
         { provide: NB_LAYOUT_DIRECTION, useValue: layoutDirection || NbLayoutDirection.LTR },
         NbLayoutDirectionService,
+        NbLayoutScrollService,
+        NbRulerService,
       ],
     };
   }
