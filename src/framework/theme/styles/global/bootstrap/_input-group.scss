@@ -117,7 +117,7 @@
   }
 
   .input-group-rounded > .form-control {
-    border-radius: 1.5rem;
+    border-radius: nb-theme(form-control-round-border-radius);
   }
 
   .input-group-border-only > .form-control {
