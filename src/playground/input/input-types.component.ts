@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <input type="text" nbInput nbInputSize="small">
-    <textarea nbInput nbInputShape="round"></textarea>
+    <input type="text" nbInput size="small">
+    <textarea nbInput shape="round"></textarea>
   `,
   styleUrls: ['./input-component.scss'],
 })

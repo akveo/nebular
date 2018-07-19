@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <input type="text" nbInput nbInputStatus="info">
-    <input type="text" nbInput nbInputStatus="success">
-    <input type="text" nbInput nbInputStatus="warning">
-    <input type="text" nbInput nbInputStatus="danger">
+    <input type="text" nbInput status="info">
+    <input type="text" nbInput status="success">
+    <input type="text" nbInput status="warning">
+    <input type="text" nbInput status="danger">
   `,
   styleUrls: ['./input-component.scss'],
 })

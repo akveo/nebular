@@ -79,7 +79,7 @@ export class NbInputDirective {
    * `small`, `medium`, `large`
    * @param {string} val
    */
-  @Input('nbInputSize')
+  @Input('size')
   set setSize(value: string) {
     this.size = value;
   }
@@ -89,14 +89,14 @@ export class NbInputDirective {
    * `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input('nbInputStatus')
+  @Input('status')
   status: string;
 
   /**
    * Input shapes: `rectangle`, `round`, `semi-round`
    * @param {string} val
    */
-  @Input('nbInputShape')
+  @Input('shape')
   shape: string = NbInputDirective.SHAPE_RECTANGLE;
 
   @HostBinding('class.input-sm')

@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <input type="text" nbInput nbInputShape="rectangle">
-    <input type="text" nbInput nbInputShape="semi-round">
-    <input type="text" nbInput nbInputShape="round">
+    <input type="text" nbInput shape="rectangle">
+    <input type="text" nbInput shape="semi-round">
+    <input type="text" nbInput shape="round">
   `,
   styleUrls: ['./input-component.scss'],
 })
