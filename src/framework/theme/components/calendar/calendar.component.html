@@ -1,58 +1,34 @@
 <ng-container [ngSwitch]="activeViewMode">
-  <ng-container *ngSwitchCase="ViewMode.DATE">
-    <nb-pageable-calendar-header
-      (forward)="prevMonth()"
-      (backward)="nextMonth()"
-      (select)="selectViewMode(ViewMode.YEAR)"
-    >
-      {{ activeMonth | nbCalendarDate }}
-    </nb-pageable-calendar-header>
+  <nb-calendar-month-view
+    *ngSwitchCase="ViewMode.DATE"
+    [activeMonth]="visibleMonths[0]"
+    [today]="today"
+    [selectedValue]="selectedValue"
+    [config]="config"
+    (change)="onChange($event)"
+    (changeMode)="selectViewMode(ViewMode.YEAR)"
+    (next)="nextMonth()"
+    (prev)="prevMonth()">
+  </nb-calendar-month-view>
 
-    <div class="body">
-      <nb-calendar-month-view
-        *ngFor="let visibleMonth of visibleMonths"
+  <nb-calendar-year-picker
+    *ngSwitchCase="ViewMode.YEAR"
+    [activeMonth]="activeMonth"
+    [today]="today"
+    [startYear]="activeYear"
+    [config]="config"
+    (change)="activeMonth = $event; selectViewMode(ViewMode.MONTH)"
+    (changeMode)="selectViewMode(ViewMode.DATE)"
+    (next)="nextYears()"
+    (prev)="prevYears()">
+  </nb-calendar-year-picker>
 
-        [activeMonth]="visibleMonth"
-        [currentDate]="dateToday"
-        [selectedValue]="selectedValue"
-        [includeBoundingMonths]="calendarConfig.displayBoundingMonths"
-        (change)="onChange($event)">
-      </nb-calendar-month-view>
-    </div>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="ViewMode.YEAR">
-    <nb-pageable-calendar-header
-      (forward)="prevYears()"
-      (backward)="nextYears()"
-      (select)="selectViewMode(ViewMode.DATE)"
-    >
-      {{ activeMonth | nbCalendarDate }}
-    </nb-pageable-calendar-header>
-
-    <div class="body">
-      <nb-calendar-year-picker
-        [value]="activeMonth"
-        [currentDate]="dateToday"
-        [startYear]="yearViewActiveYear"
-        [yearCount]="calendarConfig.yearsToDisplayNumber"
-        (change)="activeMonth = $event; activeViewMode = ViewMode.MONTH">
-      </nb-calendar-year-picker>
-    </div>
-  </ng-container>
-
-  <ng-container *ngSwitchCase="ViewMode.MONTH">
-    <nb-calendar-header (select)="selectViewMode(ViewMode.DATE)">
-      {{ activeMonth | nbCalendarDate }}
-    </nb-calendar-header>
-
-    <div class="body">
-      <nb-calendar-month-picker
-        [value]="activeMonth"
-        [currentDate]="dateToday"
-        (change)="activeMonth = $event; activeViewMode = ViewMode.DATE">
-      </nb-calendar-month-picker>
-    </div>
-  </ng-container>
+  <nb-calendar-month-picker
+    *ngSwitchCase="ViewMode.MONTH"
+    [activeMonth]="activeMonth"
+    [today]="today"
+    (change)="activeMonth = $event; selectViewMode(ViewMode.DATE)"
+    (changeMode)="selectViewMode(ViewMode.DATE)">
+  </nb-calendar-month-picker>
 </ng-container>
 

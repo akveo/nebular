@@ -5,11 +5,19 @@
  */
 
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbArrayHelper } from '../../helpers/array.helper';
+import { NbCalendarConfig } from '../../calendar-config';
 
 const defaultStartYear = 2016;
 const defaultYearCount = 16;
@@ -19,47 +27,65 @@ const defaultYearCount = 16;
 @Component({
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
-  templateUrl: './calendar-year-picker.component.html',
+  template: `
+    <nb-pageable-calendar-header
+      [activeMonth]="activeMonth"
+      (next)="next.emit()"
+      (prev)="prev.emit()"
+      (select)="changeMode.emit()">
+    </nb-pageable-calendar-header>
+
+    <div class="body">
+      <div class="chunk-row" *ngFor="let chunk of years">
+        <div class="year"
+             *ngFor="let year of chunk"
+             [class.selected]="year.selected"
+             (click)="onYearSelect(year.value)">
+          {{ year.value }}
+        </div>
+      </div>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
 
-  @Input()
-  value: D;
+  @Input() activeMonth: D;
+  @Input() startYear: number = defaultStartYear;
+  @Input() config: NbCalendarConfig;
+  @Input() today: D;
 
-  @Input()
-  public startYear: number = defaultStartYear;
-
-  @Input()
-  public yearCount: number = defaultYearCount;
-
-  @Input()
-  public currentDate: D;
-
-  @Output()
-  change = new EventEmitter<any>();
+  @Output() next = new EventEmitter<any>();
+  @Output() prev = new EventEmitter<any>();
+  @Output() changeMode = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
 
   years: any[];
 
+  get yearsToDisplay(): number {
+    return this.config.yearsToDisplayNumber || defaultYearCount;
+  }
+
   constructor(private dateTimeUtil: NbDateTimeUtil<D>,
-              private arrayHelper: NbArrayHelper) {}
+              private arrayHelper: NbArrayHelper) {
+  }
 
   ngOnInit() {
-    this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
-    this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
+    this.today = this.today || this.dateTimeUtil.createNowDate();
+    this.activeMonth = this.activeMonth || this.dateTimeUtil.clone(this.today);
   }
 
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.value && this.startYear && this.yearCount) {
+    if (this.activeMonth && this.startYear && this.yearsToDisplay) {
       this.initYears();
     }
   }
 
   initYears() {
-    const selectedYear = this.dateTimeUtil.getYear(this.value);
+    const selectedYear = this.dateTimeUtil.getYear(this.activeMonth);
 
-    const years = Array.from(Array(this.yearCount).keys())
+    const years = Array.from(Array(this.yearsToDisplay).keys())
       .map(index => ({
         value: this.startYear + index,
         selected: selectedYear === this.startYear + index,
@@ -69,11 +95,11 @@ export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
   }
 
   onYearSelect(year) {
-    this.value = this.dateTimeUtil.createDate(
+    this.activeMonth = this.dateTimeUtil.createDate(
       year,
-      this.dateTimeUtil.getMonth(this.value),
-      this.dateTimeUtil.getDate(this.value),
+      this.dateTimeUtil.getMonth(this.activeMonth),
+      this.dateTimeUtil.getDate(this.activeMonth),
     );
-    this.change.emit(this.value);
+    this.change.emit(this.activeMonth);
   }
 }

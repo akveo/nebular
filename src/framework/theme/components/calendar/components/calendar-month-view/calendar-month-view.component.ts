@@ -19,36 +19,42 @@ import { NbCalendarMonthModel } from '../../models/calendar-month.model';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
 import { Day } from '../../models/day';
+import { NbCalendarConfig } from '../../calendar-config';
 
 @Component({
   selector: 'nb-calendar-month-view',
   styleUrls: ['./calendar-month-view.component.scss'],
   template: `
-    <nb-days-names [days]="days"></nb-days-names>
-    <nb-week
-      *ngFor="let week of month.weeks"
-      [week]="week"
-      (cellSelect)="onCellSelect($event)"
-    ></nb-week>
+    <nb-pageable-calendar-header
+      [activeMonth]="activeMonth"
+      (next)="next.emit()"
+      (prev)="prev.emit()"
+      (select)="changeMode.emit()">
+    </nb-pageable-calendar-header>
+
+    <div class="body">
+      <nb-days-names [days]="days"></nb-days-names>
+      <nb-week
+        *ngFor="let week of month.weeks"
+        [week]="week"
+        (cellSelect)="onCellSelect($event)">
+      </nb-week>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
-  @Input()
-  activeMonth: D;
+  @Input() activeMonth: D;
+  @Input() today: D;
+  @Input() selectedValue: D;
+  @Input() config: NbCalendarConfig;
 
-  @Input()
-  public includeBoundingMonths: boolean = true;
+  @Output() next = new EventEmitter<any>();
+  @Output() prev = new EventEmitter<any>();
+  @Output() changeMode = new EventEmitter<any>();
 
-  @Input()
-  public currentDate: D = null;
-
-  @Input()
-  public selectedValue: D = null;
-
-  @Output()
-  public change = new EventEmitter<D>();
+  @Output() change = new EventEmitter<D>();
 
   month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
 
@@ -67,9 +73,19 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
     }
   }
 
+  onCellSelect(event) {
+    this.change.emit(
+      this.dateTimeUtil.createDate(
+        this.dateTimeUtil.getYear(this.activeMonth),
+        this.dateTimeUtil.getMonth(this.activeMonth) + event.activeMonthDiff,
+        event.date,
+      ),
+    );
+  }
+
   private invalidateShortDayNames() {
     const days = this.dateTimeUtil.getDayOfWeekNames('narrow')
-      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }) );
+      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }));
     for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
       days.push(days.shift());
     }
@@ -80,20 +96,10 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
     const context = new NbCalendarMonthBuilderContext<D>(
       this.activeMonth,
       this.selectedValue,
-      this.currentDate,
-      this.includeBoundingMonths,
+      this.today,
+      this.config.displayBoundingMonths,
     );
 
     this.month = this.calendarModelFactory.createMonthModel(context);
-  }
-
-  onCellSelect(event) {
-    this.change.emit(
-      this.dateTimeUtil.createDate(
-        this.dateTimeUtil.getYear(this.activeMonth),
-        this.dateTimeUtil.getMonth(this.activeMonth) + event.activeMonthDiff,
-        event.date,
-      ),
-    );
   }
 }

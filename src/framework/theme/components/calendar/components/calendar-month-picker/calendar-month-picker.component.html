@@ -1,9 +1,0 @@
-<div class="chunk-row" *ngFor="let chunk of months">
-  <div class="month"
-       *ngFor="let month of chunk"
-       [class.selected]="month.selected"
-       (click)="onMonthSelect(month.value)">
-    {{ month.label }}
-  </div>
-</div>
-

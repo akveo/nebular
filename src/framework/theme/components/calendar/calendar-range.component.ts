@@ -27,7 +27,7 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, Cale
   }
 
   protected getInitialActiveMonthFromValue(): D {
-    return (this.selectedValue && (this.selectedValue.endDate || this.selectedValue.startDate)) || this.dateToday;
+    return (this.selectedValue && (this.selectedValue.endDate || this.selectedValue.startDate)) || this.today;
   }
 
   onChange(value: D) {

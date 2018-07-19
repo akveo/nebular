@@ -6,16 +6,16 @@ import { NbCalendarHeaderComponent } from './calendar-header.component';
   styleUrls: ['./calendar-header.component.scss'],
   template: `
     <div class="header">
-      <i class="nb-arrow-left" (click)="forward.emit()"></i>
+      <i class="nb-arrow-left" (click)="prev.emit()"></i>
       <button class="btn btn-success" (click)="select.emit()">
-        <ng-content></ng-content>
+        {{ activeMonth | nbCalendarDate }}
       </button>
-      <i class="nb-arrow-right" (click)="backward.emit()"></i>
+      <i class="nb-arrow-right" (click)="next.emit()"></i>
     </div>
   `,
 })
 
-export class NbPageableCalendarHeaderComponent extends NbCalendarHeaderComponent {
-  @Output() forward = new EventEmitter<any>();
-  @Output() backward = new EventEmitter<any>();
+export class NbPageableCalendarHeaderComponent<D> extends NbCalendarHeaderComponent<D> {
+  @Output() next = new EventEmitter<any>();
+  @Output() prev = new EventEmitter<any>();
 }

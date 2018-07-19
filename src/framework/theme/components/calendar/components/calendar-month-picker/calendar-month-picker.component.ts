@@ -4,50 +4,66 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbArrayHelper } from '../../helpers/array.helper';
+import { ViewMode } from '../../models/view-mode';
 
 /**
  */
 @Component({
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
-  templateUrl: './calendar-month-picker.component.html',
+  template: `
+    <nb-calendar-header
+      [activeMonth]="activeMonth"
+      (select)="changeMode.emit()">
+    </nb-calendar-header>
+
+    <div class="body">
+      <div class="chunk-row" *ngFor="let chunk of months">
+        <div class="month"
+             *ngFor="let month of chunk"
+             [class.selected]="month.selected"
+             (click)="onMonthSelect(month.value)">
+          {{ month.label }}
+        </div>
+      </div>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
 
-  @Input()
-  value: D;
+  @Input() activeMonth: D;
 
-  @Input()
-  public currentDate: D;
+  @Input() today: D;
+
+  @Output() changeMode = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
 
   months: any[];
 
-  @Output()
-  change = new EventEmitter<any>();
+  ViewMode = ViewMode;
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>,
-              private arrayHelper: NbArrayHelper) {}
+              private arrayHelper: NbArrayHelper) {
+  }
 
   ngOnInit() {
-    this.currentDate = this.currentDate || this.dateTimeUtil.createNowDate();
-    this.value = this.value || this.dateTimeUtil.clone(this.currentDate);
+    this.today = this.today || this.dateTimeUtil.createNowDate();
+    this.activeMonth = this.activeMonth || this.dateTimeUtil.clone(this.today);
   }
 
   ngOnChanges(): void {
-    if (this.value) {
+    if (this.activeMonth) {
       this.initMonths();
     }
   }
 
   initMonths() {
-    const selectedMonth = this.dateTimeUtil.getMonth(this.value);
+    const selectedMonth = this.dateTimeUtil.getMonth(this.activeMonth);
 
     const months = Array.from(Array(12).keys())
       .map(index => ({
@@ -60,11 +76,11 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
   }
 
   onMonthSelect(month) {
-    this.value = this.dateTimeUtil.createDate(
-      this.dateTimeUtil.getYear(this.value),
+    this.activeMonth = this.dateTimeUtil.createDate(
+      this.dateTimeUtil.getYear(this.activeMonth),
       month,
-      this.dateTimeUtil.getDate(this.value),
+      this.dateTimeUtil.getDate(this.activeMonth),
     );
-    this.change.emit(this.value);
+    this.change.emit(this.activeMonth);
   }
 }

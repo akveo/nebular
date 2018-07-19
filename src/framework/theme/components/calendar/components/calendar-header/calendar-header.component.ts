@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'nb-calendar-header',
@@ -6,12 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   template: `
     <div class="header single-page">
       <button class="btn btn-success" (click)="select.emit()">
-        <ng-content></ng-content>
+        {{ activeMonth | nbCalendarDate }}
       </button>
     </div>
   `,
 })
 
-export class NbCalendarHeaderComponent {
+export class NbCalendarHeaderComponent<D> {
+  @Input() activeMonth: D;
   @Output() select = new EventEmitter<any>();
 }

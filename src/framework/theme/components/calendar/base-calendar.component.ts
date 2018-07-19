@@ -12,40 +12,33 @@ import { ViewMode } from './models/view-mode';
 
 export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
-  @Input()
-  selectedValue: V;
+  @Input() selectedValue: V;
 
-  @Input()
-  activeMonth: D;
+  @Input() config: NbCalendarConfig = new NbCalendarConfig();
 
-  @Input()
-  calendarConfig: NbCalendarConfig = new NbCalendarConfig();
+  @Output() change = new EventEmitter<V>();
 
-  @Output()
-  change = new EventEmitter<V>();
-
-  @Output()
-  activeMonthChange = new EventEmitter<D>();
+  @Output() activeMonthChange = new EventEmitter<D>();
 
   visibleMonths: Array<D> = [];
 
-  dateToday: D;
-
-  activeViewMode: ViewMode = ViewMode.DATE;
+  today: D;
 
   ViewMode = ViewMode;
 
-  yearViewActiveYear: number;
+  activeMonth: D;
+  activeViewMode: ViewMode = ViewMode.DATE;
+  activeYear: number;
 
   protected constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
   ngOnInit() {
-    this.dateToday = this.dateTimeUtil.createNowDate();
-    this.activeMonth = this.getInitialActiveMonthFromValue() || this.dateToday;
+    this.today = this.dateTimeUtil.createNowDate();
+    this.activeMonth = this.getInitialActiveMonthFromValue() || this.today;
     this.invalidateVisibleMonths();
-    this.yearViewActiveYear =
-      Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.calendarConfig.yearsToDisplayNumber / 2);
+    this.activeYear =
+      Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.config.yearsToDisplayNumber / 2);
   }
 
   selectViewMode(viewMode: ViewMode) {
@@ -57,7 +50,7 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
   private changeActiveMonth(direction) {
     this.activeMonth = this.dateTimeUtil.add(
       this.activeMonth,
-      direction * this.calendarConfig.numberOfMonthsToIncrement,
+      direction * this.config.numberOfMonthsToIncrement,
       'm',
     );
     this.invalidateVisibleMonths();
@@ -66,7 +59,7 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
   private invalidateVisibleMonths() {
     this.visibleMonths = [this.activeMonth];
-    for (let i = 1; i < this.calendarConfig.numberOfMonthsToDisplay; i++) {
+    for (let i = 1; i < this.config.numberOfMonthsToDisplay; i++) {
       this.visibleMonths.push(
         this.dateTimeUtil.add(
           this.activeMonth,
@@ -86,11 +79,10 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
   }
 
   prevYears() {
-    this.yearViewActiveYear -= this.calendarConfig.yearsToDisplayNumber;
+    this.activeYear -= this.config.yearsToDisplayNumber;
   }
 
   nextYears() {
-    this.yearViewActiveYear += this.calendarConfig.yearsToDisplayNumber;
+    this.activeYear += this.config.yearsToDisplayNumber;
   }
-
 }
