@@ -18,7 +18,7 @@ import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
-import { NbLayoutContainerSize, NbRulerService } from '../../services/ruler.service';
+import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
@@ -335,7 +335,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
     protected scrollService: NbLayoutScrollService,
-    protected rulerService: NbRulerService,
+    protected rulerService: NbLayoutRulerService,
   ) {
 
     this.themeService.onThemeChange()
@@ -375,21 +375,21 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }));
     this.spinnerService.load();
 
-    this.rulerService.scrollContainerSizeReq$
+    this.rulerService.onGetDimensions()
       .pipe(
         takeWhile(() => this.alive),
       )
       .subscribe(({ listener }) => {
-        listener.next(this.getScrollContainerSize());
+        listener.next(this.getDimensions());
         listener.complete();
       });
 
-    this.rulerService.containerScrollPositionReq$
+    this.scrollService.onGetPosition()
       .pipe(
         takeWhile(() => this.alive),
       )
       .subscribe(({ listener }) => {
-        listener.next(this.getContainerScrollPosition());
+        listener.next(this.getScrollPosition());
         listener.complete();
       });
 
@@ -451,21 +451,49 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.themeService.changeWindowWidth(event.target.innerWidth);
   }
 
-  getScrollContainerSize(): NbLayoutContainerSize {
-    let container = this.document.documentElement;
-    if (this.withScrollValue) {
-      container = this.scrollableContainerRef.nativeElement.firstChild;
-    }
-
-    const rect = container.getBoundingClientRect();
-    return { width: rect.width, height: rect.height };
-  }
-
-  getContainerScrollPosition(): NbScrollPosition {
+  /**
+   * Returns scroll and client height/width
+   *
+   * Depending on the current scroll mode (`withScroll=true`) returns sizes from the body element
+   * or from the `.scrollable-container`
+   * @returns {NbLayoutDimensions}
+   */
+  getDimensions(): NbLayoutDimensions {
+    let clientWidth, clientHeight, scrollWidth, scrollHeight = 0;
     if (this.withScrollValue) {
       const container = this.scrollableContainerRef.nativeElement;
-      const rect = container.getBoundingClientRect();
-      return { x: -rect.left || container.scrollLeft, y: rect.top || container.scrollTop };
+      clientWidth = container.clientWidth;
+      clientHeight = container.clientHeight;
+      scrollWidth = container.scrollWidth;
+      scrollHeight = container.scrollHeight;
+    } else {
+      const { documentElement, body } = this.document;
+      clientWidth = documentElement.clientWidth || body.clientWidth;
+      clientHeight = documentElement.clientHeight || body.clientHeight;
+      scrollWidth = documentElement.scrollWidth || body.scrollWidth;
+      scrollHeight = documentElement.scrollHeight || body.scrollHeight;
+    }
+
+    return {
+      clientWidth,
+      clientHeight,
+      scrollWidth,
+      scrollHeight,
+    };
+  }
+
+  /**
+   * Returns scroll position of current scroll container.
+   *
+   * If `withScroll` = true, returns scroll position of the `.scrollable-container` element,
+   * otherwise - of the scrollable element of the window (which may be different depending of a browser)
+   *
+   * @returns {NbScrollPosition}
+   */
+  getScrollPosition(): NbScrollPosition {
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      return { x: container.scrollLeft, y: container.scrollTop };
     }
 
     const documentRect = this.document.documentElement.getBoundingClientRect();

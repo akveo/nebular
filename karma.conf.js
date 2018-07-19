@@ -27,11 +27,14 @@ module.exports = function (config) {
       environment: 'dev'
     },
     reporters: ['spec', 'kjhtml'],
+    specReporter: {
+      suppressSkipped: true,
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadlessLocal'],
+    browsers: ['Chrome'],
     customLaunchers: {
       ChromeHeadlessLocal: {
         base: 'ChromeHeadless',

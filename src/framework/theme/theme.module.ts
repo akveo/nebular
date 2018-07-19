@@ -27,7 +27,7 @@ import {
 } from './services/breakpoints.service';
 import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from './services/direction.service';
 import { NbLayoutScrollService } from './services/scroll.service';
-import { NbRulerService } from './services/ruler.service';
+import { NbLayoutRulerService } from './services/ruler.service';
 
 export function nbWindowFactory() {
   return window;
@@ -74,7 +74,7 @@ export class NbThemeModule {
         { provide: NB_LAYOUT_DIRECTION, useValue: layoutDirection || NbLayoutDirection.LTR },
         NbLayoutDirectionService,
         NbLayoutScrollService,
-        NbRulerService,
+        NbLayoutRulerService,
       ],
     };
   }

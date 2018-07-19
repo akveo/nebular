@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs/index';
 
 export interface NbScrollPosition {
   x: number;
@@ -10,8 +11,21 @@ export interface NbScrollPosition {
 @Injectable()
 export class NbLayoutScrollService {
 
+  private scrollPositionReq$ = new Subject<any>();
   private manualScroll$ = new Subject<NbScrollPosition>();
   private scroll$ = new Subject<any>();
+
+  /**
+   * Scroll position
+   *
+   * @returns {Observable<NbScrollPosition>}
+   */
+  getPosition(): Observable<NbScrollPosition> {
+    const listener = new ReplaySubject<NbScrollPosition>();
+    this.scrollPositionReq$.next({ listener: listener });
+
+    return listener.asObservable();
+  }
 
   /**
    * Sets scroll position
@@ -23,13 +37,9 @@ export class NbLayoutScrollService {
   }
 
   /**
-   * Will fire scroll change
-   * @param {any} event
+   * Scroll events
+   * @returns {Observable<any>}
    */
-  fireScrollChange(event: any) {
-    this.scroll$.next(event);
-  }
-
   onScroll() {
     return this.scroll$.pipe(share<any>());
   }
@@ -42,5 +52,21 @@ export class NbLayoutScrollService {
    */
   onManualScroll(): Observable<NbScrollPosition> {
     return this.manualScroll$.pipe(share<NbScrollPosition>());
+  }
+
+  /**
+   * @private
+   * @returns {Subject<any>}
+   */
+  onGetPosition(): Subject<any> {
+    return this.scrollPositionReq$;
+  }
+
+  /**
+   * @private
+   * @param {any} event
+   */
+  fireScrollChange(event: any) {
+    this.scroll$.next(event);
   }
 }

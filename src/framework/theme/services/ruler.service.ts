@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { NbScrollPosition } from './scroll.service';
 
-export interface NbLayoutContainerSize {
-  width: number;
-  height: number;
+export interface NbLayoutDimensions {
+  clientWidth: number;
+  clientHeight: number;
+  scrollWidth: number;
+  scrollHeight: number;
 }
 
 @Injectable()
-export class NbRulerService {
+export class NbLayoutRulerService {
 
-  containerScrollPositionReq$ = new Subject();
-  scrollContainerSizeReq$ = new Subject();
+  private contentDimensionsReq$ = new Subject();
 
-  getContainerScrollPosition(): Observable<NbScrollPosition> {
-    const listener = new ReplaySubject<NbScrollPosition>();
-    this.containerScrollPositionReq$.next({ listener: listener });
+  /**
+   * Content dimensions
+   * @returns {Observable<NbLayoutDimensions>}
+   */
+  getDimensions(): Observable<NbLayoutDimensions> {
+    const listener = new ReplaySubject<NbLayoutDimensions>();
+    this.contentDimensionsReq$.next({ listener: listener });
 
     return listener.asObservable();
   }
 
-  getScrollContainerSize(): Observable<NbLayoutContainerSize> {
-    const listener = new ReplaySubject<NbLayoutContainerSize>();
-    this.scrollContainerSizeReq$.next({ listener: listener });
-
-    return listener.asObservable();
+  /**
+   * @private
+   * @returns {Subject<any>}
+   */
+  onGetDimensions(): Subject<any> {
+    return this.contentDimensionsReq$;
   }
 }
