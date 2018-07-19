@@ -26,6 +26,7 @@ describe('auth-service', () => {
   const testTokenValue = 'test-token';
   const ownerStrategyName = 'strategy';
 
+
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
