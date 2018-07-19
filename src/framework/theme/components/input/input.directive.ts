@@ -5,7 +5,6 @@
  */
 
 import { Directive, Input, HostBinding } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
 
 /**
  * Basic input directive.
