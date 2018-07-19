@@ -44,7 +44,7 @@ describe('token-storage', () => {
 
 
   it('set test token', () => {
-    const token = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue);
+    const token = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, 'strategy');
 
     tokenStorage.set(token);
     expect(localStorage.getItem(testTokenKey)).toEqual(tokenParceler.wrap(token));
@@ -53,11 +53,11 @@ describe('token-storage', () => {
   it('setter set invalid token to localStorage as empty string', () => {
     let token;
 
-    token = nbAuthCreateToken(NbAuthSimpleToken, null);
+    token = nbAuthCreateToken(NbAuthSimpleToken, null, 'strategy');
     tokenStorage.set(token);
     expect(localStorage.getItem(testTokenKey)).toEqual(tokenParceler.wrap(token));
 
-    token = nbAuthCreateToken(NbAuthSimpleToken, undefined);
+    token = nbAuthCreateToken(NbAuthSimpleToken, undefined, 'strategy');
     tokenStorage.set(token);
     expect(localStorage.getItem(testTokenKey)).toEqual(tokenParceler.wrap(token));
   });
@@ -69,14 +69,14 @@ describe('token-storage', () => {
   });
 
   it('should return correct value', () => {
-    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test');
+    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test', 'strategy');
     localStorage.setItem(testTokenKey, tokenParceler.wrap(token));
 
     expect(tokenStorage.get().getValue()).toEqual(token.getValue());
   });
 
   it('clear remove token', () => {
-    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test');
+    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test', 'strategy');
     localStorage.setItem(testTokenKey, tokenParceler.wrap(token));
 
     tokenStorage.clear();
@@ -85,7 +85,7 @@ describe('token-storage', () => {
   });
 
   it('clear remove token only', () => {
-    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test');
+    const token = nbAuthCreateToken(NbAuthSimpleToken, 'test', 'strategy');
     localStorage.setItem(testTokenKey, tokenParceler.wrap(token));
     localStorage.setItem(testTokenKey + '2', tokenParceler.wrap(token));
 

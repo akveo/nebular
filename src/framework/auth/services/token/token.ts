@@ -2,9 +2,14 @@ import { urlBase64Decode } from '../../helpers';
 
 export abstract class NbAuthToken {
   abstract getValue(): string;
+  abstract getAccessToken(): string;
   abstract isValid(): boolean;
   abstract getPayload(): string;
+  // the strategy name used to acquire this token (needed for refreshing)
+  abstract getStrategyName(): string;
   abstract toString(): string;
+  // the token exp date (has to be stored in case of expires_in response)
+  abstract getExpDate(): Date
 
   getName(): string {
     return (this.constructor as NbAuthTokenClass).NAME;
@@ -13,15 +18,25 @@ export abstract class NbAuthToken {
 
 export interface NbAuthRefreshableToken {
   getRefreshToken(): string;
+  // Needed when refresh-token response does not repeat refresh_token value
+  setRefreshToken(string): void;
 }
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any): NbAuthToken;
+  new (raw: any, strategyName: string, expDate?: Date): NbAuthToken;
 }
 
-export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: any) {
-  return new tokenClass(token);
+// All types of token are not refreshables
+export function isNbAuthRefreshableToken(token: any): token is NbAuthRefreshableToken {
+  return (<NbAuthRefreshableToken>token).getRefreshToken !== undefined ;
+}
+
+export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
+                                  token: any,
+                                  strategyName: string,
+                                  expDate?: Date) {
+  return new tokenClass(token, strategyName, expDate);
 }
 
 /**
@@ -31,7 +46,9 @@ export class NbAuthSimpleToken extends NbAuthToken {
 
   static NAME = 'nb:auth:simple:token';
 
-  constructor(protected readonly token: any) {
+  constructor(protected readonly token: any,
+              protected readonly strategyName: string,
+              protected expDate?: Date) {
     super();
   }
 
@@ -43,7 +60,19 @@ export class NbAuthSimpleToken extends NbAuthToken {
     return this.token;
   }
 
+  getStrategyName(): string {
+    return this.strategyName;
+  }
+
+  getAccessToken(): string {
+    return this.token;
+  }
+
   getPayload(): string {
+    return null;
+  }
+
+  getExpDate(): Date {
     return null;
   }
 
@@ -105,7 +134,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * Returns expiration date
    * @returns Date
    */
-  getTokenExpDate(): Date {
+  getExpDate(): Date {
     const decoded = this.getPayload();
     if (!decoded.hasOwnProperty('exp')) {
       return null;
@@ -122,7 +151,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * @returns {boolean}
    */
   isValid(): boolean {
-    return super.isValid() && (!this.getTokenExpDate() || new Date() < this.getTokenExpDate());
+    return super.isValid() && (!this.getExpDate() || new Date() < this.getExpDate());
   }
 }
 
@@ -142,16 +171,35 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   static NAME = 'nb:auth:oauth2:token';
 
-  constructor(protected data: { [key: string]: string|number }|string = {}) {
+  constructor(protected data: { [key: string]: string|number }|string = {},
+              protected strategyName: string,
+              protected expDate?: Date) {
     // we may get it as string when retrieving from a storage
-    super(prepareOAuth2Token(data));
+    super(prepareOAuth2Token(data), strategyName, expDate);
+    this.strategyName = strategyName;
+    /** Since only expires_in is given, we have to calculate and store the expiration date
+    but only if not already defined (i.e we must not update exp if restoring from storage) **/
+    if (!this.expDate) {
+      if (this.token && Object.keys(this.token).length > 0) {
+        const decoded = this.getPayload();
+        if (decoded.hasOwnProperty('exp')) {
+          this.expDate = new Date(decoded.exp);
+        }
+      }
+      if (!this.expDate) {
+        if (this.token.expires_in) {
+        this.expDate = new Date();
+        this.expDate.setTime(this.expDate.getTime() + Number(this.token.expires_in) * 1000);
+        }
+      }
+    }
   }
 
   /**
    * Returns the token value
    * @returns string
    */
-  getValue(): string {
+  getAccessToken(): string {
     return this.token.access_token;
   }
 
@@ -161,6 +209,14 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    */
   getRefreshToken(): string {
     return this.token.refresh_token;
+  }
+
+  /**
+   * Sets the refreshToken
+   * @param {string} token
+   */
+  setRefreshToken(token: string): void {
+    this.token.refresh_token = token;
   }
 
   /**
@@ -188,22 +244,15 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    * @returns {boolean}
    */
   isValid(): boolean {
-    return super.isValid() && (!this.getTokenExpDate() || new Date() < this.getTokenExpDate());
+    return super.isValid() && (!this.getExpDate() || new Date() < new Date(this.getExpDate().toString()));
   }
 
   /**
    * Returns expiration date
    * @returns Date
    */
-  getTokenExpDate(): Date {
-    if (!this.token.hasOwnProperty('expires_in')) {
-      return null;
-    }
-
-    const date = new Date();
-    date.setUTCSeconds(new Date().getUTCSeconds() + Number(this.token.expires_in));
-
-    return date;
+  getExpDate(): Date {
+    return (this.expDate ? this.expDate : null);
   }
 
   /**

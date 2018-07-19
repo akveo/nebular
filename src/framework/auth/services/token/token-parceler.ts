@@ -5,6 +5,8 @@ import { NB_AUTH_TOKENS } from '../../auth.options';
 
 export interface NbTokenPack {
   name: string,
+  strategyName: string,
+  expDate: Date;
   value: string,
 }
 
@@ -21,23 +23,32 @@ export class NbAuthTokenParceler {
   }
 
   wrap(token: NbAuthToken): string {
-    return JSON.stringify({
+    const theToken = {
       name: token.getName(),
-      value: token.toString(),
-    });
+      strategyName: token.getStrategyName(),
+      value: token.getValue(),
+    }
+    if (token.getExpDate()) {
+      theToken['expDate'] = token.getExpDate();
+    }
+    return JSON.stringify(theToken);
   }
 
   unwrap(value: string): NbAuthToken {
     let tokenClass: NbAuthTokenClass = this.fallbackClass;
     let tokenValue = '';
+    let tokenStrategyName = '';
+    let tokenExpDate: Date;
 
     const tokenPack: NbTokenPack = this.parseTokenPack(value);
     if (tokenPack) {
       tokenClass = this.getClassByName(tokenPack.name) || this.fallbackClass;
       tokenValue = tokenPack.value;
+      tokenExpDate = tokenPack.expDate;
+      tokenStrategyName = tokenPack.strategyName;
     }
 
-    return nbAuthCreateToken(tokenClass, tokenValue);
+    return nbAuthCreateToken(tokenClass, tokenValue, tokenStrategyName, tokenExpDate);
   }
 
   // TODO: this could be moved to a separate token registry

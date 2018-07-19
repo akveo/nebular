@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
 import { filter, share } from 'rxjs/operators';
 
 import { NbTokenStorage } from './token-storage';
-import { NbAuthToken } from './token';
+import { isNbAuthRefreshableToken, NbAuthRefreshableToken, NbAuthToken } from './token';
 
 /**
  * Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.
@@ -31,14 +31,24 @@ export class NbTokenService {
 
   /**
    * Sets a token into the storage. This method is used by the NbAuthService automatically.
+   * Before storing, in case of refreshable token, and if no refresh token value is found,
+   * adds the refresh_token value of the existing token (if any)
    *
    * @param {NbAuthToken} token
    * @returns {Observable<any>}
    */
   set(token: NbAuthToken): Observable<null> {
-    this.tokenStorage.set(token);
-    this.publishStoredToken();
-    return observableOf(null);
+    if (isNbAuthRefreshableToken(token) && token.getRefreshToken() === undefined) {
+      this.get().subscribe(existingToken => {
+        if (isNbAuthRefreshableToken(existingToken)) {
+          const existingRefreshTokenValue = ((<NbAuthRefreshableToken>existingToken).getRefreshToken());
+          token.setRefreshToken(existingRefreshTokenValue);
+        }
+      })
+    }
+      this.tokenStorage.set(token);
+      this.publishStoredToken();
+      return observableOf(null);
   }
 
   /**

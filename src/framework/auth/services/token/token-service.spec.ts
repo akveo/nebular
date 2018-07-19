@@ -20,8 +20,8 @@ describe('token-service', () => {
 
   let tokenService: NbTokenService;
   let tokenStorage: NbTokenLocalStorage;
-  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value');
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '');
+  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value', 'strategy');
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '', 'strategy');
   const testTokenKey = 'auth_app_token';
 
   beforeEach(() => {

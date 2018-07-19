@@ -10,16 +10,16 @@ import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken } from './token';
 describe('auth token', () => {
   describe('NbAuthJWTToken', () => {
     // tslint:disable
-    const simpleToken = new NbAuthSimpleToken('token');
-    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-    const emptyJWTToken = new NbAuthJWTToken('..');
-    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
+    const simpleToken = new NbAuthSimpleToken('token','strategy');
+    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773', 'strategy');
+    const emptyJWTToken = new NbAuthJWTToken('..', 'strategy');
+    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY','strategy');
 
-    const invalidJWTToken = new NbAuthJWTToken('.');
+    const invalidJWTToken = new NbAuthJWTToken('.','strategy');
 
-    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
 
-    const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+    const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
     // tslint:enable
 
     it('getPayload success', () => {
@@ -51,14 +51,14 @@ describe('auth token', () => {
           `The token ${invalidBase64JWTToken.getValue()} is not valid JWT token and cannot be parsed.`));
     });
 
-    it('getTokenExpDate success', () => {
+    it('getExpDate success', () => {
       const date = new Date(0);
       date.setUTCSeconds(2517314066175);
-      expect(validJWTToken.getTokenExpDate()).toEqual(date);
+      expect(validJWTToken.getExpDate()).toEqual(date);
     });
 
-    it('getTokenExpDate is empty', () => {
-      expect(noExpJWTToken.getTokenExpDate()).toBeNull();
+    it('getExpDate is empty', () => {
+      expect(noExpJWTToken.getExpDate()).toBeNull();
     });
 
     it('no exp date token is valid', () => {
@@ -71,7 +71,7 @@ describe('auth token', () => {
 
     it('isValid fail', () => {
       // without token
-      expect(new NbAuthJWTToken('').isValid()).toBeFalsy();
+      expect(new NbAuthJWTToken('', 'strategy').isValid()).toBeFalsy();
 
       // expired date
       expect(expiredJWTToken.isValid()).toBeFalsy();
@@ -123,14 +123,14 @@ describe('auth token', () => {
       example_parameter: 'example_value',
     };
 
-    const validToken = new NbAuthOAuth2Token(token);
-    const emptyToken = new NbAuthOAuth2Token({});
+    let validToken = new NbAuthOAuth2Token(token, 'strategy');
+    const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
 
     const noExpToken = new NbAuthOAuth2Token({
       access_token: '2YotnFZFEjr1zCsicMWpAA',
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
       example_parameter: 'example_value',
-    });
+    }, 'strategy');
 
     it('getPayload success', () => {
       expect(validToken.getPayload()).toEqual(token);
@@ -144,29 +144,31 @@ describe('auth token', () => {
           `Cannot extract payload from an empty token.`));
     });
 
-    it('getTokenExpDate success', () => {
+    it('getExpDate success', () => {
+      // recreate it here if we want to be in the same second
+      validToken = new NbAuthOAuth2Token(token, 'strategy');
       const date = new Date();
-      date.setUTCSeconds(date.getUTCSeconds() + 3600);
-      expect(validToken.getTokenExpDate().getFullYear()).toEqual(date.getFullYear());
-      expect(validToken.getTokenExpDate().getDate()).toEqual(date.getDate());
-      expect(validToken.getTokenExpDate().getMonth()).toEqual(date.getMonth());
-      expect(validToken.getTokenExpDate().getMinutes()).toEqual(date.getMinutes());
-      expect(validToken.getTokenExpDate().getSeconds()).toEqual(date.getSeconds());
+      date.setTime(date.getTime() + 3600000);
+      expect(validToken.getExpDate().getFullYear()).toEqual(date.getFullYear());
+      expect(validToken.getExpDate().getDate()).toEqual(date.getDate());
+      expect(validToken.getExpDate().getMonth()).toEqual(date.getMonth());
+      expect(validToken.getExpDate().getMinutes()).toEqual(date.getMinutes());
+      expect(validToken.getExpDate().getSeconds()).toEqual(date.getSeconds());
     });
 
-    it('getTokenExpDate is empty', () => {
-      expect(noExpToken.getTokenExpDate()).toBeNull();
+    it('getExpDate is empty', () => {
+      expect(noExpToken.getExpDate()).toBeNull();
     });
 
     it('toString is json', () => {
       expect(String(validToken)).toEqual(JSON.stringify(token));
     });
 
-    it('getTokenExpDate is empty', () => {
+    it('getExpDate is empty', () => {
       expect(validToken.getType()).toEqual(token.token_type);
     });
 
-    it('getTokenExpDate is empty', () => {
+    it('getExpDate is empty', () => {
       expect(noExpToken.getRefreshToken()).toEqual(token.refresh_token);
     });
 
