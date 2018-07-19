@@ -26,7 +26,7 @@ describe('password-auth-strategy', () => {
     },
   };
 
-  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token');
+  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token', 'strategy');
 
   const noMessageResponse: any = {
     data: {
@@ -55,7 +55,7 @@ describe('password-auth-strategy', () => {
       strategy = _strategy;
       httpMock = _httpMock;
 
-      strategy.setOptions({});
+      strategy.setOptions({name: 'strategy'});
     },
   )));
 
@@ -66,7 +66,7 @@ describe('password-auth-strategy', () => {
   describe('out of the box', () => {
 
     beforeEach(() => {
-      strategy.setOptions({});
+      strategy.setOptions({name: 'strategy'});
     });
 
     it('authenticate success', (done: DoneFn) => {
@@ -77,7 +77,8 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -113,7 +114,8 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -250,7 +252,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual(null);
@@ -285,6 +288,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         login: {
           alwaysFail: true,
         },
@@ -396,6 +400,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         login: {
           endpoint: 'new',
         },
@@ -507,6 +512,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         baseEndpoint: '/api/auth/custom/',
       });
     });
@@ -601,6 +607,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         login: {
           method: 'get',
         },
@@ -718,6 +725,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
+        name: 'strategy',
         login: {
           redirect,
         },
@@ -907,6 +915,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
+        name: 'strategy',
         login: {
           ...messages,
         },
@@ -1090,6 +1099,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         token: {
           key: 'token',
         },
@@ -1102,8 +1112,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1117,8 +1127,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1132,8 +1142,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1147,6 +1157,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         token: {
           getter: (module: string, res: HttpResponse<Object>) => res.body['token'],
         },
@@ -1159,8 +1170,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1174,8 +1185,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1189,8 +1200,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1204,6 +1215,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         token: {
           key: 'token',
         },
@@ -1312,6 +1324,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         token: {
           key: 'token',
         },
@@ -1438,6 +1451,7 @@ describe('password-auth-strategy', () => {
     it('authenticate does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
+        name: 'strategy',
         login: {
           failWhenNoToken: false,
         },
@@ -1478,6 +1492,7 @@ describe('password-auth-strategy', () => {
     it('register does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
+        name: 'strategy',
         register: {
           failWhenNoToken: false,
         },
@@ -1518,6 +1533,7 @@ describe('password-auth-strategy', () => {
     it('refreshToken does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
+        name: 'strategy',
         refreshToken: {
           failWhenNoToken: false,
         },

@@ -4,6 +4,8 @@ export abstract class NbAuthToken {
   abstract getValue(): string;
   abstract isValid(): boolean;
   abstract getPayload(): string;
+  // the strategy name used to acquire this token (needed for refreshing token)
+  abstract getOwnerStrategyName(): string;
   abstract toString(): string;
 
   getName(): string {
@@ -17,11 +19,18 @@ export interface NbAuthRefreshableToken {
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any): NbAuthToken;
+  new (raw: any, ownerStrategyName: string): NbAuthToken;
 }
 
-export function nbAuthCreateToken(tokenClass: NbAuthTokenClass, token: any) {
-  return new tokenClass(token);
+// All types of token are not refreshables
+export function isNbAuthRefreshableToken(token: any): token is NbAuthRefreshableToken {
+  return (<NbAuthRefreshableToken>token).getRefreshToken !== undefined ;
+}
+
+export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
+                                  token: any,
+                                  ownerStrategyName: string) {
+  return new tokenClass(token, ownerStrategyName);
 }
 
 /**
@@ -31,7 +40,8 @@ export class NbAuthSimpleToken extends NbAuthToken {
 
   static NAME = 'nb:auth:simple:token';
 
-  constructor(protected readonly token: any) {
+  constructor(protected readonly token: any,
+              protected readonly ownerStrategyName: string) {
     super();
   }
 
@@ -41,6 +51,10 @@ export class NbAuthSimpleToken extends NbAuthToken {
    */
   getValue(): string {
     return this.token;
+  }
+
+  getOwnerStrategyName(): string {
+    return this.ownerStrategyName;
   }
 
   getPayload(): string {
@@ -142,9 +156,11 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   static NAME = 'nb:auth:oauth2:token';
 
-  constructor(protected data: { [key: string]: string|number }|string = {}) {
+  constructor(protected data: { [key: string]: string|number }|string = {},
+              protected ownerStrategyName: string) {
     // we may get it as string when retrieving from a storage
-    super(prepareOAuth2Token(data));
+    super(prepareOAuth2Token(data), ownerStrategyName);
+    this.ownerStrategyName = ownerStrategyName;
   }
 
   /**

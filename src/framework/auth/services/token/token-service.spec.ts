@@ -15,13 +15,14 @@ import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
 import { NB_AUTH_TOKENS } from '../../auth.options';
 
 const noop = () => {};
+const ownerStrategyName = 'strategy';
 
 describe('token-service', () => {
 
   let tokenService: NbTokenService;
   let tokenStorage: NbTokenLocalStorage;
-  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value');
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '');
+  const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value', ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '', ownerStrategyName);
   const testTokenKey = 'auth_app_token';
 
   beforeEach(() => {
