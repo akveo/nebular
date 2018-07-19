@@ -30,9 +30,6 @@ import { convertToBoolProperty } from '../helpers';
  * `nbInput` could be applied to the following selectors - `input`, `textarea`:
  * @stacked-example(Input Elements, input/input-types.component)
  *
- * You can disable `nbInput` by adding `disabled` attribute:
- * @stacked-example(Disabled input, input/input-disabled.component)
- *
  * @styles
  *
  * form-control-bg:
@@ -102,25 +99,6 @@ export class NbInputDirective {
    */
   @Input('nbInputShape')
   shape: string = NbInputDirective.SHAPE_RECTANGLE;
-
-  /**
-   * Disables the input
-   * @param {boolean} val
-   */
-  @Input('disabled')
-  set setDisabled(value: boolean) {
-    this.disabled = convertToBoolProperty(value)
-      ? 'disabled'
-      : null;
-  }
-
-  @HostBinding('attr.disabled')
-  disabled: 'disabled' | null = null;
-
-  @HostBinding('attr.tabindex')
-  get tabbable() {
-    return this.disabled ? -1 : 0;
-  }
 
   @HostBinding('class.input-sm')
   get small() {

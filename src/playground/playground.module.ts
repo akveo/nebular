@@ -167,7 +167,6 @@ import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
 import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
-import { NbInputDisabledComponent } from './input/input-disabled.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -325,7 +324,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputSizesComponent,
   NbInputShapesComponent,
   NbInputTypesComponent,
-  NbInputDisabledComponent,
 ];
 
 
