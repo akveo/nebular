@@ -21,7 +21,7 @@ export abstract class NbAuthStrategy {
   }
 
   createToken(value: any): NbAuthToken {
-    return nbAuthCreateToken(this.getOption('token.class'), value);
+    return nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
   }
 
   getName(): string {
