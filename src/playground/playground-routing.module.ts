@@ -132,6 +132,12 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputDisabledComponent } from './input/input-disabled.component';
 
 export const routes: Routes = [
   {
@@ -555,6 +561,35 @@ export const routes: Routes = [
           {
             path: 'accordion-test.component',
             component: NbAccordionTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'input',
+        children: [
+          {
+            path: 'input-showcase.component',
+            component: NbInputsShowcaseComponent,
+          },
+          {
+            path: 'input-colors.component',
+            component: NbInputColorsComponent,
+          },
+          {
+            path: 'input-sizes.component',
+            component: NbInputSizesComponent,
+          },
+          {
+            path: 'input-shapes.component',
+            component: NbInputShapesComponent,
+          },
+          {
+            path: 'input-types.component',
+            component: NbInputTypesComponent,
+          },
+          {
+            path: 'input-disabled.component',
+            component: NbInputDisabledComponent,
           },
         ],
       },

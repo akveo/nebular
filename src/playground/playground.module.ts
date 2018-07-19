@@ -30,6 +30,7 @@ import {
   NbStepperModule,
   NbAccordionModule,
   NbButtonModule,
+  NbInputModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -161,6 +162,12 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputDisabledComponent } from './input/input-disabled.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -189,6 +196,7 @@ export const NB_MODULES = [
   NbSpinnerModule,
   NbAccordionModule,
   NbButtonModule,
+  NbInputModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -312,6 +320,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
+  NbInputsShowcaseComponent,
+  NbInputColorsComponent,
+  NbInputSizesComponent,
+  NbInputShapesComponent,
+  NbInputTypesComponent,
+  NbInputDisabledComponent,
 ];
 
 

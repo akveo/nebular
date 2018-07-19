@@ -10,7 +10,53 @@ import { convertToBoolProperty } from '../helpers';
 /**
  * Basic input directive.
  *
+ * ```html
+ * <input nbInput></input>
+ * ```
+ *
+ * Default input size is `medium`:
  * @stacked-example(Showcase, input/input-showcase.component)
+ *
+ * Inputs are available in multiple colors using `status` property:
+ * @stacked-example(Input Colors, input/input-colors.component)
+ *
+ * There are three input sizes:
+ *
+ * @stacked-example(Input Sizes, input/input-sizes.component)
+ *
+ * Inputs available in different shapes, which could be combined with the other properties:
+ * @stacked-example(Input Shapes, input/input-shapes.component)
+ *
+ * `nbInput` could be applied to the following selectors - `input`, `textarea`:
+ * @stacked-example(Input Elements, input/input-types.component)
+ *
+ * You can disable `nbInput` by adding `disabled` attribute:
+ * @stacked-example(Disabled input, input/input-disabled.component)
+ *
+ * @styles
+ *
+ * form-control-bg:
+ * form-control-border-width:
+ * form-control-border-type:
+ * form-control-border-color:
+ * form-control-text-primary-color:
+ * form-control-focus-bg:
+ * form-control-selected-border-color:
+ * form-control-placeholder-font-size:
+ * form-control-placeholder-color:
+ * form-control-font-size:
+ * form-control-padding:
+ * form-control-font-size-sm:
+ * form-control-padding-sm:
+ * form-control-font-size-lg:
+ * form-control-padding-lg:
+ * form-control-border-radius:
+ * form-control-semi-round-border-radius:
+ * form-control-round-border-radius:
+ * form-control-info-border-color:
+ * form-control-success-border-color:
+ * form-control-warning-border-color:
+ * form-control-danger-border-color:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
@@ -32,17 +78,35 @@ export class NbInputDirective {
 
   size: string = NbInputDirective.SIZE_MEDIUM;
 
+  /**
+   * Input size, available sizes:
+   * `small`, `medium`, `large`
+   * @param {string} val
+   */
   @Input('nbInputSize')
   set setSize(value: string) {
     this.size = value;
   }
 
+  /**
+   * Input status (adds specific styles):
+   * `info`, `success`, `warning`, `danger`
+   * @param {string} val
+   */
   @Input('nbInputStatus')
   status: string;
 
+  /**
+   * Input shapes: `rectangle`, `round`, `semi-round`
+   * @param {string} val
+   */
   @Input('nbInputShape')
   shape: string = NbInputDirective.SHAPE_RECTANGLE;
 
+  /**
+   * Disables the input
+   * @param {boolean} val
+   */
   @Input('disabled')
   set setDisabled(value: boolean) {
     this.disabled = convertToBoolProperty(value)
@@ -51,7 +115,7 @@ export class NbInputDirective {
   }
 
   @HostBinding('attr.disabled')
-  disabled: 'disabled' | null;
+  disabled: 'disabled' | null = null;
 
   @HostBinding('attr.tabindex')
   get tabbable() {
