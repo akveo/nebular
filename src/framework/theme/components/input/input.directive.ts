@@ -79,17 +79,17 @@ export class NbInputDirective {
   size: string = NbInputDirective.SIZE_MEDIUM;
 
   /**
-   * Input size, available sizes:
+   * Field size, available sizes:
    * `small`, `medium`, `large`
    * @param {string} val
    */
-  @Input('size')
+  @Input('fieldSize')
   set setSize(value: string) {
     this.size = value;
   }
 
   /**
-   * Input status (adds specific styles):
+   * Field status (adds specific styles):
    * `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
@@ -97,7 +97,7 @@ export class NbInputDirective {
   status: string;
 
   /**
-   * Input shapes: `rectangle`, `round`, `semi-round`
+   * Field shapes: `rectangle`, `round`, `semi-round`
    * @param {string} val
    */
   @Input('shape')
