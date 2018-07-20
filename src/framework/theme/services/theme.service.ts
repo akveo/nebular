@@ -53,13 +53,6 @@ export class NbThemeService {
     this.changeWindowWidth$.next(width);
   }
 
-  test() {
-    if (this.options) {
-      return false;
-    }
-    return true;
-  }
-
   /**
    * Append a component to top of the layout
    * (useful for showing modal that should be placed heigher in the document tree)
