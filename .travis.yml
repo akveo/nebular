@@ -28,7 +28,6 @@ env:
 branches:
   only:
   - master
-  - feat/code-cov
 
 matrix:
   fast_finish: true
