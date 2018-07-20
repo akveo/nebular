@@ -10,10 +10,10 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <input type="text" nbInput fullWidth status="info">
-        <input type="text" nbInput fullWidth status="success">
-        <input type="text" nbInput fullWidth status="warning">
-        <input type="text" nbInput fullWidth status="danger">
+        <input type="text" nbInput fullWidth status="info" placeholder="Info">
+        <input type="text" nbInput fullWidth status="success" placeholder="Success">
+        <input type="text" nbInput fullWidth status="warning" placeholder="Warning">
+        <input type="text" nbInput fullWidth status="danger" placeholder="Danger">
       </nb-card-body>
     </nb-card>
   `,

@@ -10,9 +10,9 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <input type="text" nbInput fullWidth size="small">
-        <input type="text" nbInput fullWidth size="medium">
-        <input type="text" nbInput fullWidth size="large">
+        <input type="text" nbInput fullWidth size="small" placeholder="Small">
+        <input type="text" nbInput fullWidth size="medium" placeholder="Medium">
+        <input type="text" nbInput fullWidth size="large" placeholder="Large">
       </nb-card-body>
     </nb-card>
   `,
