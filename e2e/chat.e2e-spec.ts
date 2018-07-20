@@ -34,7 +34,7 @@ describe('nb-chat', () => {
 
   chats = prepareChats();
 
-  beforeEach((done) => {
+  beforeAll((done) => {
     browser.get('#/chat/chat-test.component').then(() => done());
   });
 
