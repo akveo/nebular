@@ -13,6 +13,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { nbAuthCreateToken, NbAuthSimpleToken } from '../../services';
 
+const ownerStrategyName = 'strategy';
+
 describe('password-auth-strategy', () => {
 
   let strategy: NbPasswordAuthStrategy;
@@ -26,7 +28,7 @@ describe('password-auth-strategy', () => {
     },
   };
 
-  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token', 'strategy');
+  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token', ownerStrategyName);
 
   const noMessageResponse: any = {
     data: {
@@ -55,7 +57,7 @@ describe('password-auth-strategy', () => {
       strategy = _strategy;
       httpMock = _httpMock;
 
-      strategy.setOptions({name: 'strategy'});
+      strategy.setOptions({name: ownerStrategyName});
     },
   )));
 
@@ -66,7 +68,7 @@ describe('password-auth-strategy', () => {
   describe('out of the box', () => {
 
     beforeEach(() => {
-      strategy.setOptions({name: 'strategy'});
+      strategy.setOptions({name: ownerStrategyName});
     });
 
     it('authenticate success', (done: DoneFn) => {
@@ -288,7 +290,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           alwaysFail: true,
         },
@@ -400,7 +402,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           endpoint: 'new',
         },
@@ -512,7 +514,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         baseEndpoint: '/api/auth/custom/',
       });
     });
@@ -607,7 +609,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           method: 'get',
         },
@@ -725,7 +727,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           redirect,
         },
@@ -915,7 +917,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           ...messages,
         },
@@ -1099,7 +1101,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1157,7 +1159,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         token: {
           getter: (module: string, res: HttpResponse<Object>) => res.body['token'],
         },
@@ -1215,7 +1217,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1324,7 +1326,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1451,7 +1453,7 @@ describe('password-auth-strategy', () => {
     it('authenticate does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         login: {
           failWhenNoToken: false,
         },
@@ -1492,7 +1494,7 @@ describe('password-auth-strategy', () => {
     it('register does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         register: {
           failWhenNoToken: false,
         },
@@ -1533,7 +1535,7 @@ describe('password-auth-strategy', () => {
     it('refreshToken does not fail even when no token', (done: DoneFn) => {
 
       strategy.setOptions({
-        name: 'strategy',
+        name: ownerStrategyName,
         refreshToken: {
           failWhenNoToken: false,
         },

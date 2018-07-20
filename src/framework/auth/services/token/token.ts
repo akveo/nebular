@@ -22,11 +22,6 @@ export interface NbAuthTokenClass {
   new (raw: any, ownerStrategyName: string): NbAuthToken;
 }
 
-// All types of token are not refreshables
-export function isNbAuthRefreshableToken(token: any): token is NbAuthRefreshableToken {
-  return (<NbAuthRefreshableToken>token).getRefreshToken !== undefined ;
-}
-
 export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
                                   token: any,
                                   ownerStrategyName: string) {
@@ -160,7 +155,6 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
               protected ownerStrategyName: string) {
     // we may get it as string when retrieving from a storage
     super(prepareOAuth2Token(data), ownerStrategyName);
-    this.ownerStrategyName = ownerStrategyName;
   }
 
   /**
