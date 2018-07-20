@@ -378,6 +378,38 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'LayoutScrollService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutScrollService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbScrollPosition',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'LayoutRulerService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutRulerService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDimensions',
+          },
+        ],
+      },
     ],
   },
   {

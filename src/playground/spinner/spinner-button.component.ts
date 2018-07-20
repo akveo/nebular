@@ -12,32 +12,32 @@ import { Component } from '@angular/core';
      <nb-card accent="primary" size="small">
       <nb-card-body>
         <div class="d-flex align-items-start">
-          <button class="button-container btn btn-success btn-lg" (click)="toggleLoadingAnimation()"
+          <button nbButton status="success" size="large" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button class="button-container btn btn-primary btn-lg" (click)="toggleLoadingAnimation()"
+          <button nbButton status="primary" size="large" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button class="button-container btn btn-warning btn-lg" (click)="toggleLoadingAnimation()"
+          <button nbButton status="warning" size="large" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button class="button-container btn btn-danger btn-md" (click)="toggleLoadingAnimation()"
+          <button nbButton status="danger" size="medium" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerMessage="">
             Download
           </button>
 
-          <button class="button-container btn btn-info btn-md" (click)="toggleLoadingAnimation()"
+          <button nbButton status="info" size="medium" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="small" nbSpinnerMessage="">
             Download
           </button>
 
-          <button class="button-container btn btn-info btn-sm" (click)="toggleLoadingAnimation()"
+          <button nbButton status="info" size="medium" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xsmall" nbSpinnerMessage="">
             Download
           </button>
@@ -46,7 +46,7 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
   styles: [`
-    :host .button-container {
+    button {
       margin: 1rem;
     }
   `],

@@ -17,6 +17,8 @@ import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
+import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
@@ -248,7 +250,7 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div (scroll)="onScroll($event)" class="scrollable-container" #scrollableContainer>
+    <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
@@ -332,6 +334,8 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
+    protected scrollService: NbLayoutScrollService,
+    protected rulerService: NbLayoutRulerService,
   ) {
 
     this.themeService.onThemeChange()
@@ -371,6 +375,24 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }));
     this.spinnerService.load();
 
+    this.rulerService.onGetDimensions()
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getDimensions());
+        listener.complete();
+      });
+
+    this.scrollService.onGetPosition()
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollPosition());
+        listener.complete();
+      });
+
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
@@ -403,6 +425,10 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         this.renderer.setProperty(this.document, 'dir', direction);
       });
 
+    this.scrollService.onManualScroll()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
+
     this.afterViewInit$.next(true);
   }
 
@@ -415,18 +441,71 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.alive = false;
   }
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll($event) {
+    this.scrollService.fireScrollChange($event);
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.themeService.changeWindowWidth(event.target.innerWidth);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll($event) {
-    const event = new CustomEvent(
-      'nbscroll',
-      { detail: { originalEvent: $event, ...this.getScrollInfo() } },
-    );
-    this.window.dispatchEvent(event);
+  /**
+   * Returns scroll and client height/width
+   *
+   * Depending on the current scroll mode (`withScroll=true`) returns sizes from the body element
+   * or from the `.scrollable-container`
+   * @returns {NbLayoutDimensions}
+   */
+  getDimensions(): NbLayoutDimensions {
+    let clientWidth, clientHeight, scrollWidth, scrollHeight = 0;
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      clientWidth = container.clientWidth;
+      clientHeight = container.clientHeight;
+      scrollWidth = container.scrollWidth;
+      scrollHeight = container.scrollHeight;
+    } else {
+      const { documentElement, body } = this.document;
+      clientWidth = documentElement.clientWidth || body.clientWidth;
+      clientHeight = documentElement.clientHeight || body.clientHeight;
+      scrollWidth = documentElement.scrollWidth || body.scrollWidth;
+      scrollHeight = documentElement.scrollHeight || body.scrollHeight;
+    }
+
+    return {
+      clientWidth,
+      clientHeight,
+      scrollWidth,
+      scrollHeight,
+    };
+  }
+
+  /**
+   * Returns scroll position of current scroll container.
+   *
+   * If `withScroll` = true, returns scroll position of the `.scrollable-container` element,
+   * otherwise - of the scrollable element of the window (which may be different depending of a browser)
+   *
+   * @returns {NbScrollPosition}
+   */
+  getScrollPosition(): NbScrollPosition {
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      return { x: container.scrollLeft, y: container.scrollTop };
+    }
+
+    const documentRect = this.document.documentElement.getBoundingClientRect();
+
+    const x = -documentRect.left || this.document.body.scrollLeft || this.window.scrollX ||
+      this.document.documentElement.scrollLeft || 0;
+
+    const y = -documentRect.top || this.document.body.scrollTop || this.window.scrollY ||
+      this.document.documentElement.scrollTop || 0;
+
+
+    return { x, y };
   }
 
   private initScrollTop() {
@@ -436,28 +515,24 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(() => {
-        this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
+        this.scroll(0, 0);
       });
   }
 
-  private getScrollInfo(): { scrollTop: number, scrollHeight: number, clientHeight: number } {
-    let scrollHeight;
-    let scrollTop;
-    let clientHeight;
-
-    if (this.withScrollValue) {
-      const container = this.scrollableContainerRef.nativeElement;
-      scrollHeight = container.scrollHeight;
-      scrollTop = container.scrollTop;
-      clientHeight = container.clientHeight;
-    } else {
-      const { body, documentElement } = this.document;
-      const { innerHeight, pageYOffset } = this.window;
-      scrollHeight = Math.max(body.scrollHeight, documentElement.scrollHeight);
-      scrollTop = pageYOffset || documentElement.scrollTop || body.scrollTop || 0;
-      clientHeight = Math.max(documentElement.clientHeight, innerHeight) || 0;
+  private scroll(x: number, y: number) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
-
-    return { scrollHeight, scrollTop, clientHeight };
+    if (this.withScrollValue) {
+      const scrollable = this.scrollableContainerRef.nativeElement;
+      if (scrollable.scrollTo) {
+        scrollable.scrollTo(x, y);
+      } else {
+        scrollable.scrollLeft = x;
+        scrollable.scrollTop = y;
+      }
+    } else {
+      this.window.scrollTo(x, y);
+    }
   }
 }

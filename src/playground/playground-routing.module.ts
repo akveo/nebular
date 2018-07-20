@@ -139,6 +139,7 @@ import { NbUsersListShowcaseComponent } from './list/users-list-showcase.compone
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const routes: Routes = [
   {
@@ -826,6 +827,15 @@ export const routes: Routes = [
           {
             path: 'bootstrap-test.component',
             component: NbBootstrapTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'scroll',
+        children: [
+          {
+            path: 'scroll-window.component',
+            component: NbScrollWindowComponent,
           },
         ],
       },
