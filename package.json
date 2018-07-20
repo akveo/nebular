@@ -41,7 +41,7 @@
     "test": "ng test",
     "test:wp": "npm run test -- playground-wp",
     "test:watch": "ng test playground-wp --watch",
-    "test:coverage": "rimraf coverage && ng test playground --code-coverage",
+    "test:coverage": "rimraf coverage && ng test playground --code-coverage --watch=false",
     "lint": "ng lint playground --type-check",
     "lint:styles": "stylelint ./src/framework/**/*.scss && stylelint ./docs/**/*.scss",
     "lint:fix": "npm run lint -- --fix",
