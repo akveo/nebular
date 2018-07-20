@@ -10,7 +10,7 @@ import badgeTests from './badge.e2e-spec';
 
 describe('nb-action', () => {
 
-  beforeEach(() => {
+  beforeAll(() => {
     browser.get('#/action/action-test.component');
   });
 
