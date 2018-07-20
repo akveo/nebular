@@ -11,8 +11,9 @@ import { NbInputModule } from '@nebular/theme';
 
 @Component({
   template: `
-    <input #inputEl nbInput [size]="size" [status]="status" [shape]="shape">
-    <textarea #textareaEl nbInput [size]="size" [status]="status" [shape]="shape"></textarea>
+    <input #inputEl nbInput [size]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
+    <textarea #textareaEl nbInput [size]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
+    </textarea>
   `,
 })
 class InputTestComponent {
@@ -33,6 +34,7 @@ class InputTestComponent {
   @Input() size = NbInputDirective.SIZE_MEDIUM;
   @Input() status;
   @Input() shape = NbInputDirective.SHAPE_RECTANGLE;
+  @Input() fullWidth = false;
 }
 
 describe('Directive: NbInput', () => {
@@ -77,5 +79,13 @@ describe('Directive: NbInput', () => {
 
     expect(inputElement.classList).toContain('input-semi-round');
     expect(textareaElement.classList).toContain('input-semi-round');
+  });
+
+  it('should set full width', () => {
+    inputTestComponent.fullWidth = true;
+    fixture.detectChanges();
+
+    expect(inputElement.classList).toContain('input-full-width');
+    expect(textareaElement.classList).toContain('input-full-width');
   });
 });
