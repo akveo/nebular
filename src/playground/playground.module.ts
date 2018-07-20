@@ -31,6 +31,7 @@ import {
   NbAccordionModule,
   NbListModule,
   NbInifiniteListModule,
+  NbButtonModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -156,7 +157,6 @@ import { NbAccordionMultiComponent } from './accordion/accordion-multi.component
 import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
 import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
 import { NbButtonShowcaseComponent } from './button/button-showcase.component';
-import { NbButtonModule } from '@nebular/theme/components/button/button.module';
 import { NbButtonColorsComponent } from './button/button-colors.component';
 import { NbButtonShapesComponent } from './button/button-shapes.component';
 import { NbButtonHeroComponent } from './button/button-hero.component';
@@ -173,6 +173,7 @@ import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -337,6 +338,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
+  NbScrollWindowComponent,
 ];
 
 @NgModule({

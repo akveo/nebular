@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
           A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
           Originally, nebula was a name for any diffuse astronomical object.
         </p>
-        <button class="btn btn-info btn-sm" (click)="toggleLoadingAnimation()">Reload</button>
+        <button nbButton status="info" size="small" (click)="toggleLoadingAnimation()">Reload</button>
 
       </nb-card-body>
     </nb-card>

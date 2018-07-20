@@ -27,7 +27,7 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
             <p>Current User Access Token: {{ token.getValue() | json }}</p>
             <p>Current User Access Token Payload : {{getClaims(token.getValue()) | json}}</p>
             <p>Current User Refresh Token: {{ token.getRefreshToken() | json }}</p>
-            <button class="btn btn-warning" *ngIf="token" (click)="logout()">Sign Out</button>
+            <button nbButton status="warning" *ngIf="token" (click)="logout()">Sign Out</button>
           </nb-card-body>
           <nb-card-body *ngIf="! token"><p>No User Authenticated</p></nb-card-body>
         </nb-card>
@@ -71,8 +71,8 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
                     {{ getConfigValue('forms.validation.password.maxLength') }} characters
                   </small>
                 </div>
-                <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
-                        [class.btn-pulse]="submitted"> Sign In
+                <button nbButton status="success" hero
+                        [disabled]="submitted || !form.valid" [class.btn-pulse]="submitted"> Sign In
                 </button>
               </form>
             </nb-auth-block>

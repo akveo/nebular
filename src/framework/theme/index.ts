@@ -11,6 +11,8 @@ export * from './services/spinner.service';
 export * from './services/breakpoints.service';
 export * from './services/color.helper';
 export * from './services/direction.service';
+export * from './services/scroll.service';
+export * from './services/ruler.service';
 export * from './components/card/card.module';
 export * from './components/layout/layout.module';
 export * from './components/menu/menu.module';
