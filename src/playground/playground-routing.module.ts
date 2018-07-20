@@ -138,6 +138,7 @@ import { NbInputSizesComponent } from './input/input-sizes.component';
 import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
 import { NbInputFullWidthComponent } from './input/input-full-width.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const routes: Routes = [
   {
@@ -816,6 +817,15 @@ export const routes: Routes = [
           {
             path: 'bootstrap-test.component',
             component: NbBootstrapTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'scroll',
+        children: [
+          {
+            path: 'scroll-window.component',
+            component: NbScrollWindowComponent,
           },
         ],
       },

@@ -168,6 +168,7 @@ import { NbInputSizesComponent } from './input/input-sizes.component';
 import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
 import { NbInputFullWidthComponent } from './input/input-full-width.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -326,6 +327,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputShapesComponent,
   NbInputTypesComponent,
   NbInputFullWidthComponent,
+  NbScrollWindowComponent,
 ];
 
 
