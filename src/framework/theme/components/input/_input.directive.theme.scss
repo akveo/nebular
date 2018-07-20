@@ -31,6 +31,10 @@
       );
     }
 
+    &.input-full-width {
+      width: 100%;
+    }
+
     @include input-colors();
     @include input-sizes();
     @include input-shapes();

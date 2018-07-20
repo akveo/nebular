@@ -137,6 +137,7 @@ import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
 import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
 
 export const routes: Routes = [
   {
@@ -585,6 +586,10 @@ export const routes: Routes = [
           {
             path: 'input-types.component',
             component: NbInputTypesComponent,
+          },
+          {
+            path: 'input-full-width.component',
+            component: NbInputFullWidthComponent,
           },
         ],
       },

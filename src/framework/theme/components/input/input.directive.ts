@@ -5,6 +5,7 @@
  */
 
 import { Directive, Input, HostBinding } from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * Basic input directive.
@@ -28,6 +29,9 @@ import { Directive, Input, HostBinding } from '@angular/core';
  *
  * `nbInput` could be applied to the following selectors - `input`, `textarea`:
  * @stacked-example(Input Elements, input/input-types.component)
+ *
+ * You can add `fullWidth` attribute to make element fill container:
+ * @stacked-example(Full width inputs, input/input-full-width.component)
  *
  * @styles
  *
@@ -98,6 +102,18 @@ export class NbInputDirective {
    */
   @Input('shape')
   shape: string = NbInputDirective.SHAPE_RECTANGLE;
+
+  /**
+   * If set element will fill container
+   * @param {string}
+   */
+  @Input('fullWidth')
+  set setFullWidth(value) {
+    this.fullWidth = convertToBoolProperty(value);
+  }
+
+  @HostBinding('class.input-full-width')
+  fullWidth = false;
 
   @HostBinding('class.input-sm')
   get small() {
