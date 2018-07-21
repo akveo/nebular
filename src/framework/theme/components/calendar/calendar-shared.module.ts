@@ -20,7 +20,6 @@ import { NbCalendarWeekComponent } from './components/calendar-week/calendar-wee
 import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarDatePipe } from './components/calendar-date.pipe';
-import { NbCalendarYearPipe } from './components/calendar-year.pipe';
 
 
 const NB_CALENDAR_PROVIDERS = [
@@ -41,7 +40,6 @@ const COMPONENTS = [
 
 const PIPES = [
   NbCalendarDatePipe,
-  NbCalendarYearPipe,
 ];
 
 @NgModule({
