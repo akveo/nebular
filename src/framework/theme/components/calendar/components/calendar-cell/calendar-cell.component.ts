@@ -5,17 +5,18 @@
  */
 
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+
 import { NbCalendarCellModel } from '../../models/calendar-cell.model';
 
-/**
- */
 @Component({
-  selector: 'nb-calendar-cell-view',
-  styleUrls: ['./calendar-cell-view.component.scss'],
-  templateUrl: './calendar-cell-view.component.html',
+  selector: 'nb-calendar-cell',
+  styleUrls: ['./calendar-cell.component.scss'],
+  template: `
+    <div class="calendar-cell" (click)="selectDate()">{{dayModel.date}}</div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarCellViewComponent {
+export class NbCalendarCellComponent {
 
   @Input()
   public dayModel: NbCalendarCellModel = null;
@@ -40,5 +41,4 @@ export class NbCalendarCellViewComponent {
       activeMonthDiff: this.dayModel.activeMonthDiff,
     });
   }
-
 }
