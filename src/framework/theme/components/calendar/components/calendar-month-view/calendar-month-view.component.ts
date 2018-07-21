@@ -4,20 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarConfig } from '../../calendar-config';
-import { NbCalendarCell, NbCalendarDay, NbCalendarMonth, NbCalendarNameStyle } from '../../model';
+import { NbCalendarCell, NbCalendarMonth } from '../../model';
 
 @Component({
   selector: 'nb-calendar-month-view',
@@ -31,7 +23,7 @@ import { NbCalendarCell, NbCalendarDay, NbCalendarMonth, NbCalendarNameStyle } f
     </nb-pageable-calendar-header>
 
     <div class="body">
-      <nb-calendar-days-names [days]="days"></nb-calendar-days-names>
+      <nb-calendar-days-names></nb-calendar-days-names>
       <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
@@ -56,13 +48,8 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   month: NbCalendarMonth;
 
-  days: NbCalendarDay[];
-
-  constructor(
-    private calendarModelFactory: NbCalendarModelFactoryService<D>,
-    private dateTimeUtil: NbDateTimeUtil<D>,
-  ) {
-    this.invalidateNarrowDayNames();
+  constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
+              private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
   ngOnChanges() {
@@ -74,18 +61,6 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
   onSelect(cell: NbCalendarCell) {
     const date = this.dateFromCell(cell);
     this.change.emit(date);
-  }
-
-  // TODO REFACTOR
-  private invalidateNarrowDayNames() {
-    const days = this.dateTimeUtil.getDayOfWeekNames(NbCalendarNameStyle.NARROW)
-      // TODO maybe we need one more util for cases like that?
-      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }));
-
-    for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
-      days.push(days.shift());
-    }
-    this.days = days;
   }
 
   private invalidateModel() {
