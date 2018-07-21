@@ -34,11 +34,11 @@ import { NbCalendarConfig } from '../../calendar-config';
 
     <div class="body">
       <nb-days-names [days]="days"></nb-days-names>
-      <nb-week
+      <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
         (cellSelect)="onCellSelect($event)">
-      </nb-week>
+      </nb-calendar-week>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

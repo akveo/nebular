@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { NbCalendarWeekModel } from '../../models/calendar-week.model';
 
 @Component({
-  selector: 'nb-week',
-  styleUrls: ['./week.component.scss'],
+  selector: 'nb-calendar-week',
+  styleUrls: ['./calendar-week.component.scss'],
   template: `
     <div *ngIf="week.padLeft" class="placeholder-before" [ngStyle]="{ flex: week.padLeft }"></div>
     <nb-calendar-cell

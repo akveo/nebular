@@ -19,7 +19,7 @@ import { NbArrayHelper } from './helpers/array.helper';
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
 import { NbDaysNamesComponent } from './components/days-names/days-names.component';
-import { NbWeekComponent } from './components/week/week.component';
+import { NbWeekComponent } from './components/calendar-week/calendar-week.component';
 
 const NB_CALENDAR_PROVIDERS = [
   NbNativeDateTimeUtilService,
