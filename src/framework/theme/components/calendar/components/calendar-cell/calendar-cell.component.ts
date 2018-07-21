@@ -12,13 +12,13 @@ import { NbCalendarCell } from '../../model';
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],
   template: `
-    <div class="calendar-cell" (click)="click.emit()">{{ cell.date }}</div>
+    <div class="calendar-cell" (click)="select.emit()">{{ cell.date }}</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarCellComponent {
   @Input() cell: NbCalendarCell;
-  @Output() click = new EventEmitter<void>();
+  @Output() select = new EventEmitter<void>();
 
   @HostBinding('class')
   get cellStates() {

@@ -7,7 +7,7 @@ import { NbCalendarCell, NbCalendarWeek } from '../../model';
   template: `
     <nb-calendar-cell
       *ngFor="let cell of week.cells"
-      (click)="click.emit(cell)"
+      (select)="select.emit(cell)"
       [cell]="cell">
     </nb-calendar-cell>
   `,
@@ -15,5 +15,5 @@ import { NbCalendarCell, NbCalendarWeek } from '../../model';
 
 export class NbCalendarWeekComponent {
   @Input() week: NbCalendarWeek;
-  @Output() click = new EventEmitter<NbCalendarCell>();
+  @Output() select = new EventEmitter<NbCalendarCell>();
 }

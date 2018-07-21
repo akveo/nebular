@@ -1,3 +1,4 @@
+import { NbCalendarNameStyle } from '@nebular/theme/components/calendar/model';
 
 export abstract class NbDateTimeUtil<D> {
   abstract getNumberOfDaysInMonth(date: D): number;
@@ -26,6 +27,6 @@ export abstract class NbDateTimeUtil<D> {
 
   // Formatting methods
   abstract getMonthNames(type: 'long' | 'short' | 'narrow'): string[];
-  abstract getDayOfWeekNames(type: 'long' | 'short' | 'narrow'): string[];
+  abstract getDayOfWeekNames(style: NbCalendarNameStyle): string[];
 
 }

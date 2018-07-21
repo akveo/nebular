@@ -47,3 +47,9 @@ export enum NbCalendarCellState {
   SELECTED = 'cell-selected',
   IN_RANGE = 'cell-range-inbetween',
 }
+
+export enum NbCalendarNameStyle {
+  LONG = 'long',
+  SHORT = 'short',
+  NARROW = 'narrow',
+}

@@ -1,5 +1,6 @@
 import { NbDateTimeUtil } from './date-time-util';
-import { Injectable, Inject, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { NbCalendarNameStyle } from '@nebular/theme/components/calendar/model';
 
 const DEFAULT_DAY_OF_WEEK_NAMES = {
   'long': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -24,7 +25,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
   locale: string;
 
-  private months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+  private months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   constructor(@Inject(LOCALE_ID) matDateLocale: string) {
     super();
@@ -68,10 +69,14 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
   add(date: Date, num: number = 0, type: string = 'd'): Date {
     switch (type.toLowerCase()) {
-      case 'd': return this.createDateSafe(this.getYear(date), this.getMonth(date), this.getDate(date) + num);
-      case 'm': return this.createDateSafe(this.getYear(date), this.getMonth(date) + num, this.getDate(date));
-      case 'y': return this.createDateSafe(this.getYear(date) + num, this.getMonth(date), this.getDate(date));
-      default: throw new Error('Unsupported operation: not implemented');
+      case 'd':
+        return this.createDateSafe(this.getYear(date), this.getMonth(date), this.getDate(date) + num);
+      case 'm':
+        return this.createDateSafe(this.getYear(date), this.getMonth(date) + num, this.getDate(date));
+      case 'y':
+        return this.createDateSafe(this.getYear(date) + num, this.getMonth(date), this.getDate(date));
+      default:
+        throw new Error('Unsupported operation: not implemented');
     }
   }
 
@@ -120,7 +125,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
   getMonthNames(type: 'long' | 'short' | 'narrow' = 'short'): string[] {
     if (SUPPORTS_INTL) {
-      const formatter = new Intl.DateTimeFormat(this.locale, {month: type, timeZone: 'utc'});
+      const formatter = new Intl.DateTimeFormat(this.locale, { month: type, timeZone: 'utc' });
 
       const res = [];
       for (let i = 0; i < 12; i++) {
@@ -134,9 +139,9 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
     return DEFAULT_MONTH_NAMES[type];
   }
 
-  getDayOfWeekNames(type: 'long' | 'short' | 'narrow' = 'short'): string[] {
+  getDayOfWeekNames(style: NbCalendarNameStyle): string[] {
     if (SUPPORTS_INTL) {
-      const formatter = new Intl.DateTimeFormat(this.locale, {weekday: type, timeZone: 'utc'});
+      const formatter = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
 
       const res = [];
       for (let i = 1; i <= 7; i++) {
@@ -147,7 +152,7 @@ export class NbNativeDateTimeUtilService extends NbDateTimeUtil<Date> {
 
       return res;
     } else {
-      return DEFAULT_DAY_OF_WEEK_NAMES[type];
+      return DEFAULT_DAY_OF_WEEK_NAMES[style];
     }
   }
 

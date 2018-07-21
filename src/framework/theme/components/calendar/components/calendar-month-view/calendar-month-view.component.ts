@@ -17,7 +17,7 @@ import {
 import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarConfig } from '../../calendar-config';
-import { NbCalendarDay, NbCalendarMonth } from '../../model';
+import { NbCalendarCell, NbCalendarDay, NbCalendarMonth, NbCalendarNameStyle } from '../../model';
 
 @Component({
   selector: 'nb-calendar-month-view',
@@ -35,7 +35,7 @@ import { NbCalendarDay, NbCalendarMonth } from '../../model';
       <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
-        (click)="onCellSelect($event)">
+        (select)="onSelect($event)">
       </nb-calendar-week>
     </div>
   `,
@@ -62,28 +62,26 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
     private dateTimeUtil: NbDateTimeUtil<D>,
   ) {
-    this.invalidateShortDayNames();
+    this.invalidateNarrowDayNames();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges() {
     if (this.activeMonth) {
       this.invalidateModel();
     }
   }
 
-  onCellSelect(event) {
-    this.change.emit(
-      this.dateTimeUtil.createDate(
-        this.dateTimeUtil.getYear(this.activeMonth),
-        this.dateTimeUtil.getMonth(this.activeMonth) + event.activeMonthDiff,
-        event.date,
-      ),
-    );
+  onSelect(cell: NbCalendarCell) {
+    const date = this.dateFromCell(cell);
+    this.change.emit(date);
   }
 
-  private invalidateShortDayNames() {
-    const days = this.dateTimeUtil.getDayOfWeekNames('narrow')
+  // TODO REFACTOR
+  private invalidateNarrowDayNames() {
+    const days = this.dateTimeUtil.getDayOfWeekNames(NbCalendarNameStyle.NARROW)
+      // TODO maybe we need one more util for cases like that?
       .map((name, i) => ({ name, isHoliday: i % 6 === 0 }));
+
     for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
       days.push(days.shift());
     }
@@ -97,6 +95,13 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
       currentValue: this.today,
       includeBoundingMonths: this.config.displayBoundingMonths,
     });
-    console.log(this.month);
+  }
+
+  private dateFromCell(cell: NbCalendarCell) {
+    const year = this.dateTimeUtil.getYear(this.activeMonth);
+    const month = this.dateTimeUtil.getMonth(this.activeMonth) + cell.activeMonthDiff;
+    const day = cell.date;
+
+    return this.dateTimeUtil.createDate(year, month, day);
   }
 }
