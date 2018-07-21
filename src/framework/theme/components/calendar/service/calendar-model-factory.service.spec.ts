@@ -1,8 +1,8 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 import { NbCalendarModelFactoryServiceDeprecated } from './calendar-model-factory.service-deprecated';
 import { NbCalendarModelFactoryService } from './calendar-model-factory.service';
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
+import { NbDateTimeUtil } from './date-time-util';
+import { NbNativeDateTimeUtilService } from './native-date-time-util.service';
 
 const providers = [
   NbCalendarModelFactoryService,

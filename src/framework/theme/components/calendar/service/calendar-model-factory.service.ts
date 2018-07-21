@@ -1,32 +1,24 @@
-import { Injectable, Optional } from '@angular/core';
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbCalendarCellModel } from '../calendar-cell.model';
-import { NbCalendarWeekModel } from '../calendar-week.model';
-import { NbCalendarMonthModel } from '../calendar-month.model';
-import { NbCalendarMonthBuilderContext } from '../calendar-month-builder-context';
+import { Injectable } from '@angular/core';
+import { NbDateTimeUtil } from './date-time-util';
+import { NbCalendarCell, NbCalendarMonth, NbCalendarMonthBuilderContext, NbCalendarWeek } from '../helpers/model';
 
-/**
- * @deprecated
- * */
 @Injectable()
-export class NbCalendarModelFactoryServiceDeprecated<D> {
+export class NbCalendarModelFactoryService<D> {
 
-  constructor(
-    @Optional() public dateTimeUtil: NbDateTimeUtil<D>,
-  ) {
+  constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
-  createMonthModel(context: NbCalendarMonthBuilderContext<D>): NbCalendarMonthModel {
+  createMonthModel(context: NbCalendarMonthBuilderContext<D>): NbCalendarMonth {
     const monthSettings = this.getMonthSettings(context);
 
     const firstWeekData = this.createFirstWeekMonthModel(monthSettings);
     const fullWeeksData = this.createFullWeekModels(monthSettings, firstWeekData.currentDate);
     const lastWeekData = this.createLastWeekModel(monthSettings, fullWeeksData.currentDate);
 
-    return new NbCalendarMonthModel(
-      [...firstWeekData.monthModel, ...fullWeeksData.monthModel, ...lastWeekData.monthModel],
-      this.getMonthStates(monthSettings),
-    );
+    return {
+      weeks: [...firstWeekData.monthModel, ...fullWeeksData.monthModel, ...lastWeekData.monthModel],
+      monthStates: this.getMonthStates(monthSettings),
+    };
   }
 
   protected getBasicStatesForCell({ context }, year, month, date) {
@@ -85,24 +77,22 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
   }
 
   private createFirstWeekMonthModel(monthSettings) {
-    const monthModel = [];
+    const monthModel: NbCalendarWeek[] = [];
     const { startOfMonth, startOfWeekDayDiff, numberOfDaysInFirstWeekOfMonth, context } = monthSettings;
 
-    const firstWeek = [];
+    const firstWeek: NbCalendarCell[] = [];
     let currentDate = this.dateTimeUtil.getDate(startOfMonth);
     for (let firstWeekDate = currentDate; firstWeekDate <= numberOfDaysInFirstWeekOfMonth; firstWeekDate++) {
       const year = this.dateTimeUtil.getYear(startOfMonth);
       const month = this.dateTimeUtil.getMonth(startOfMonth);
 
-      firstWeek.push(
-        new NbCalendarCellModel(
-          this.dateTimeUtil.getYear(startOfMonth),
-          this.dateTimeUtil.getMonth(startOfMonth),
-          firstWeekDate,
-          0,
-          this.getStatesForCell(monthSettings, year, month, firstWeekDate),
-        ),
-      );
+      firstWeek.push({
+        year: this.dateTimeUtil.getYear(startOfMonth),
+        month: this.dateTimeUtil.getMonth(startOfMonth),
+        date: firstWeekDate,
+        activeMonthDiff: 0,
+        cellStates: this.getStatesForCell(monthSettings, year, month, firstWeekDate),
+      });
       currentDate = firstWeekDate;
     }
 
@@ -112,100 +102,93 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
       const month = this.dateTimeUtil.getMonth(startOfWeek);
       for (let leftBoundingMonthDay = startOfWeekDayDiff - 1; leftBoundingMonthDay >= 0; leftBoundingMonthDay--) {
         const date = this.dateTimeUtil.getDate(startOfWeek) + leftBoundingMonthDay;
-        firstWeek.unshift(
-          new NbCalendarCellModel(
-            year,
-            month,
-            date,
-            -1,
-            this.getStatesForCell(monthSettings, year, month, date),
-          ),
-        );
+        firstWeek.unshift({
+          year,
+          month,
+          date,
+          activeMonthDiff: -1,
+          cellStates: this.getStatesForCell(monthSettings, year, month, date),
+        });
       }
-      monthModel.push(new NbCalendarWeekModel(firstWeek));
+      monthModel.push({ cells: firstWeek });
     } else {
-      monthModel.push(new NbCalendarWeekModel(firstWeek, startOfWeekDayDiff));
+      monthModel.push({
+        cells: firstWeek,
+        padLeft: startOfWeekDayDiff,
+      });
     }
 
     return { monthModel, currentDate };
   }
 
   private createFullWeekModels(monthSettings, currentDate) {
-    const monthModel = [];
+    const monthModel: NbCalendarWeek[] = [];
     const { startOfMonth, daysInMonth, numberOfDaysInFirstWeekOfMonth } = monthSettings;
     const year = this.dateTimeUtil.getYear(startOfMonth);
     const month = this.dateTimeUtil.getMonth(startOfMonth);
 
     for (let fullWeek = 0; fullWeek < Math.floor((daysInMonth - numberOfDaysInFirstWeekOfMonth) / 7); fullWeek++) {
-      const currentWeekCells = [];
+      const currentWeekCells: NbCalendarCell[] = [];
       currentDate = currentDate + 1;
-      currentWeekCells.push(
-        new NbCalendarCellModel(
-          year,
-          month,
-          currentDate,
-          0,
-          this.getStatesForCell(monthSettings, year, month, currentDate),
-        ),
-      );
+      currentWeekCells.push({
+        year,
+        month,
+        date: currentDate,
+        activeMonthDiff: 0,
+        cellStates: this.getStatesForCell(monthSettings, year, month, currentDate),
+      });
 
       for (let fullWeekDate = currentDate + 1;
            (currentDate - numberOfDaysInFirstWeekOfMonth) % 7; fullWeekDate++) {
-        currentWeekCells.push(
-          new NbCalendarCellModel(
-            year,
-            month,
-            fullWeekDate,
-            0,
-            this.getStatesForCell(monthSettings, year, month, fullWeekDate),
-          ),
-        );
+        currentWeekCells.push({
+          year,
+          month,
+          date: fullWeekDate,
+          activeMonthDiff: 0,
+          cellStates: this.getStatesForCell(monthSettings, year, month, fullWeekDate),
+        });
         currentDate = fullWeekDate;
       }
-      monthModel.push(new NbCalendarWeekModel(currentWeekCells));
+      monthModel.push({ cells: currentWeekCells });
     }
 
     return { monthModel, currentDate };
   }
 
   private createLastWeekModel(monthSettings, currentDate) {
-    const monthModel = [];
+    const monthModel: NbCalendarWeek[] = [];
     const { startOfMonth, daysInMonth, context } = monthSettings;
 
     if (currentDate < daysInMonth) {
-      const lastWeek = [];
+      const lastWeek: NbCalendarCell[] = [];
       const additionalDaysInNewMonth = 7 - (daysInMonth - currentDate);
       const year = this.dateTimeUtil.getYear(startOfMonth);
       const month = this.dateTimeUtil.getMonth(startOfMonth);
       for (let lastWeekDate = currentDate + 1; lastWeekDate <= daysInMonth; lastWeekDate++) {
-        lastWeek.push(
-          new NbCalendarCellModel(
-            year,
-            month,
-            lastWeekDate,
-            0,
-            this.getStatesForCell(monthSettings, year, month, lastWeekDate),
-          ),
-        );
+        lastWeek.push({
+          year,
+          month,
+          date: lastWeekDate,
+          activeMonthDiff: 0,
+          cellStates: this.getStatesForCell(monthSettings, year, month, lastWeekDate),
+        });
       }
       if (context.includeBoundingMonths) {
         const nextMonthStart = this.dateTimeUtil.add(startOfMonth, 1, 'm');
         const nextMonthYear = this.dateTimeUtil.getYear(nextMonthStart);
         const nextMonthMonth = this.dateTimeUtil.getMonth(nextMonthStart);
         for (let nextMonthDay = 1; nextMonthDay <= additionalDaysInNewMonth; nextMonthDay++) {
-          lastWeek.push(
-            new NbCalendarCellModel(
-              nextMonthYear,
-              nextMonthMonth,
-              nextMonthDay,
-              1,
-              this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
-            ),
-          );
+          lastWeek.push({
+            year: nextMonthYear,
+            month: nextMonthMonth,
+            date: nextMonthDay,
+            activeMonthDiff: 1,
+            cellStates: this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
+          });
         }
-        monthModel.push(new NbCalendarWeekModel(lastWeek));
+        monthModel.push({ cells: lastWeek });
       } else {
-        monthModel.push(new NbCalendarWeekModel(lastWeek, 0, additionalDaysInNewMonth));
+        monthModel.push({ cells: lastWeek, padLeft: 0, padRight: additionalDaysInNewMonth });
       }
     }
 

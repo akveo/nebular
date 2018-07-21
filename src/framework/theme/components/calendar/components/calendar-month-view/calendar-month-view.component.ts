@@ -14,12 +14,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { NbCalendarModelFactoryService } from '../../models/factory/calendar-model-factory.service';
-import { NbCalendarMonthModel } from '../../models/calendar-month.model';
+import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbCalendarMonthBuilderContext } from '../../models/calendar-month-builder-context';
-import { Day } from '../../models/day';
 import { NbCalendarConfig } from '../../calendar-config';
+import { NbCalendarDay, NbCalendarMonth } from '../../helpers/model';
 
 @Component({
   selector: 'nb-calendar-month-view',
@@ -56,9 +54,9 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   @Output() change = new EventEmitter<D>();
 
-  month: NbCalendarMonthModel = new NbCalendarMonthModel([], []);
+  month: NbCalendarMonth;
 
-  days: Day[];
+  days: NbCalendarDay[];
 
   constructor(
     private calendarModelFactory: NbCalendarModelFactoryService<D>,
@@ -93,13 +91,11 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
   }
 
   private invalidateModel() {
-    const context = new NbCalendarMonthBuilderContext<D>(
-      this.activeMonth,
-      this.selectedValue,
-      this.today,
-      this.config.displayBoundingMonths,
-    );
-
-    this.month = this.calendarModelFactory.createMonthModel(context);
+    this.month = this.calendarModelFactory.createMonthModel({
+      activeMonth: this.activeMonth,
+      selectedValue: this.selectedValue,
+      currentValue: this.today,
+      includeBoundingMonths: this.config.displayBoundingMonths,
+    });
   }
 }

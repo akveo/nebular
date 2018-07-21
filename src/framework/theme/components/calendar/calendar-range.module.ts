@@ -10,8 +10,8 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarRangeComponent } from './calendar-range.component';
 import { NbCalendarSharedModule } from './calendar-shared.module';
-import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
-import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';
+import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
+import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 
 const COMPONENTS = [
   NbCalendarRangeComponent,

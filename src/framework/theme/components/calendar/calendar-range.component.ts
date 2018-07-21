@@ -7,10 +7,10 @@
 import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { CalendarRangeSelectionModel } from './models/calendar-range-selection.model';
-import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
-import { NbCalendarRangeModelFactoryService } from './models/factory/calendar-range-model-factory.service';
+import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
+import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
+import { NbCalendarRange } from './helpers/model';
 
 @Component({
   selector: 'nb-calendar-range',
@@ -18,7 +18,7 @@ import { NbBaseCalendarComponent } from './base-calendar.component';
   templateUrl: './calendar.component.html',
   providers: [{ provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService }],
 })
-export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, CalendarRangeSelectionModel> {
+export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCalendarRange<D>> {
 
   lastValueEmitted: string = null;
 
@@ -26,42 +26,42 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, Cale
     super(dateTimeUtil);
   }
 
-  protected getInitialActiveMonthFromValue(): D {
-    return (this.selectedValue && (this.selectedValue.endDate || this.selectedValue.startDate)) || this.today;
-  }
-
   onChange(value: D) {
-    if (!this.selectedValue || !this.selectedValue.startDate) {
-      this.change.emit(new CalendarRangeSelectionModel(value, null));
+    if (!this.selectedValue || !this.selectedValue.start) {
+      this.change.emit({ start: value });
       this.lastValueEmitted = 's';
-    } else  {
-      if (!this.selectedValue.endDate) {
-        if (this.dateTimeUtil.compareDates(this.selectedValue.startDate, value) > 0) {
-          this.change.emit(new CalendarRangeSelectionModel(value, null));
+    } else {
+      if (!this.selectedValue.end) {
+        if (this.dateTimeUtil.compareDates(this.selectedValue.start, value) > 0) {
+          this.change.emit({ start: value });
           this.lastValueEmitted = 's';
         } else {
-          this.change.emit(new CalendarRangeSelectionModel(this.selectedValue.startDate, value));
+          this.change.emit({ start: this.selectedValue.start, end: value });
           this.lastValueEmitted = 'e';
         }
       } else {
         if (this.lastValueEmitted === 'e') {
-          if (this.dateTimeUtil.compareDates(this.selectedValue.endDate, value) >= 0) {
-            this.change.emit(new CalendarRangeSelectionModel(value, this.selectedValue.endDate));
+          if (this.dateTimeUtil.compareDates(this.selectedValue.end, value) >= 0) {
+            this.change.emit({ start: value, end: this.selectedValue.end });
             this.lastValueEmitted = 's';
           } else {
-            this.change.emit(new CalendarRangeSelectionModel(value, null));
+            this.change.emit({ start: value });
             this.lastValueEmitted = 's';
           }
         } else {
-          if (this.dateTimeUtil.compareDates(this.selectedValue.startDate, value) <= 0) {
-            this.change.emit(new CalendarRangeSelectionModel(this.selectedValue.startDate, value));
+          if (this.dateTimeUtil.compareDates(this.selectedValue.start, value) <= 0) {
+            this.change.emit({ start: this.selectedValue.start, end: value });
             this.lastValueEmitted = 'e';
           } else {
-            this.change.emit(new CalendarRangeSelectionModel(value, null));
+            this.change.emit({ start: value });
             this.lastValueEmitted = 's';
           }
         }
       }
     }
+  }
+
+  protected getInitialActiveMonthFromValue(): D {
+    return (this.selectedValue && (this.selectedValue.end || this.selectedValue.start)) || this.today;
   }
 }

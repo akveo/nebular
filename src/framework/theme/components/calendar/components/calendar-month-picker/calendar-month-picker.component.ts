@@ -8,10 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnI
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbArrayHelper } from '../../helpers/array.helper';
-import { ViewMode } from '../../models/view-mode';
 
-/**
- */
 @Component({
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
@@ -44,8 +41,6 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
   @Output() change = new EventEmitter<any>();
 
   months: any[];
-
-  ViewMode = ViewMode;
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>,
               private arrayHelper: NbArrayHelper) {

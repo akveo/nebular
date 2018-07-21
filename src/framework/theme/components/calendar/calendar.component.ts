@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarModelFactoryService } from './models/factory/calendar-model-factory.service';
+import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
 
 /**

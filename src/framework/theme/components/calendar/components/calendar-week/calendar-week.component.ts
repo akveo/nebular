@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { NbCalendarWeekModel } from '../../models/calendar-week.model';
+import { NbCalendarWeek } from '../../helpers/model';
 
 @Component({
   selector: 'nb-calendar-week',
@@ -19,6 +18,6 @@ import { NbCalendarWeekModel } from '../../models/calendar-week.model';
 })
 
 export class NbWeekComponent {
-  @Input() week: NbCalendarWeekModel;
+  @Input() week: NbCalendarWeek;
   @Output() cellSelect = new EventEmitter<any>();
 }

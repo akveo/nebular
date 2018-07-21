@@ -8,7 +8,7 @@ import { EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarConfig } from './calendar-config';
-import { ViewMode } from './models/view-mode';
+import { NbCalendarViewMode } from './helpers/model';
 
 export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
@@ -24,10 +24,10 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
   today: D;
 
-  ViewMode = ViewMode;
+  ViewMode = NbCalendarViewMode;
 
   activeMonth: D;
-  activeViewMode: ViewMode = ViewMode.DATE;
+  activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
   activeYear: number;
 
   protected constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
@@ -41,8 +41,24 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
       Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - this.config.yearsToDisplayNumber / 2);
   }
 
-  selectViewMode(viewMode: ViewMode) {
+  selectViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;
+  }
+
+  prevMonth() {
+    this.changeActiveMonth(-1);
+  }
+
+  nextMonth() {
+    this.changeActiveMonth(1);
+  }
+
+  prevYears() {
+    this.activeYear -= this.config.yearsToDisplayNumber;
+  }
+
+  nextYears() {
+    this.activeYear += this.config.yearsToDisplayNumber;
   }
 
   protected abstract getInitialActiveMonthFromValue(): D;
@@ -68,21 +84,5 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
         ),
       );
     }
-  }
-
-  prevMonth() {
-    this.changeActiveMonth(-1);
-  }
-
-  nextMonth() {
-    this.changeActiveMonth(1);
-  }
-
-  prevYears() {
-    this.activeYear -= this.config.yearsToDisplayNumber;
-  }
-
-  nextYears() {
-    this.activeYear += this.config.yearsToDisplayNumber;
   }
 }

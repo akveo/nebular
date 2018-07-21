@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Day } from '../../models/day';
+import { NbCalendarDay } from '../../helpers/model';
 
 @Component({
   selector: 'nb-calendar-month-view-header',
@@ -11,5 +11,5 @@ import { Day } from '../../models/day';
   `,
 })
 export class NbCalendarMonthViewHeaderComponent {
-  @Input() days: Day[] = [];
+  @Input() days: NbCalendarDay[] = [];
 }

@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { NbCalendarCellModel } from '../../models/calendar-cell.model';
+import { NbCalendarCell } from '../../helpers/model';
 
 @Component({
   selector: 'nb-calendar-cell',
@@ -19,7 +19,7 @@ import { NbCalendarCellModel } from '../../models/calendar-cell.model';
 export class NbCalendarCellComponent {
 
   @Input()
-  public dayModel: NbCalendarCellModel = null;
+  public dayModel: NbCalendarCell = null;
 
   @Input()
   public isToday: boolean = false;
