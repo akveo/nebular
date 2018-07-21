@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NbCalendarDay } from '../../helpers/model';
+import { NbCalendarDay } from '../../model';
 
 @Component({
   selector: 'nb-calendar-month-view-header',

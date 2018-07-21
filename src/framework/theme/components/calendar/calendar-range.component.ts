@@ -10,7 +10,7 @@ import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
 import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
-import { NbCalendarRange } from './helpers/model';
+import { NbCalendarRange } from './model';
 
 @Component({
   selector: 'nb-calendar-range',

@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { NbCalendarCell } from '../../helpers/model';
+import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-cell',

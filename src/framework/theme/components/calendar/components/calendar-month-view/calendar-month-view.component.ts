@@ -17,7 +17,7 @@ import {
 import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarConfig } from '../../calendar-config';
-import { NbCalendarDay, NbCalendarMonth } from '../../helpers/model';
+import { NbCalendarDay, NbCalendarMonth } from '../../model';
 
 @Component({
   selector: 'nb-calendar-month-view',

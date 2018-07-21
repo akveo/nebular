@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbArrayHelper } from '../../helpers/array.helper';
+import { batch } from '../../helpers';
 
 @Component({
   selector: 'nb-calendar-month-picker',
@@ -42,8 +42,7 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
 
   months: any[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>,
-              private arrayHelper: NbArrayHelper) {
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
   ngOnInit() {
@@ -67,7 +66,7 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
         selected: selectedMonth === index,
       }));
 
-    this.months = this.arrayHelper.splitToChunks(months, 4);
+    this.months = batch(months, 4);
   }
 
   onMonthSelect(month) {

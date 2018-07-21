@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NbDateTimeUtil } from './date-time-util';
-import { NbCalendarCell, NbCalendarMonth, NbCalendarMonthBuilderContext, NbCalendarWeek } from '../helpers/model';
+import { NbCalendarCell, NbCalendarMonth, NbCalendarMonthBuilderContext, NbCalendarWeek } from '../model';
 
 @Injectable()
 export class NbCalendarModelFactoryService<D> {

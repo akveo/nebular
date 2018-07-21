@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbArrayHelper } from '../../helpers/array.helper';
+import { batch } from '../../helpers';
 import { NbCalendarConfig } from '../../calendar-config';
 
 const defaultStartYear = 2016;
@@ -62,12 +62,11 @@ export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
 
   years: any[];
 
-  get yearsToDisplay(): number {
-    return this.config.yearsToDisplayNumber || defaultYearCount;
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>,
-              private arrayHelper: NbArrayHelper) {
+  get yearsToDisplay(): number {
+    return this.config.yearsToDisplayNumber || defaultYearCount;
   }
 
   ngOnInit() {
@@ -91,7 +90,7 @@ export class NbCalendarYearPickerComponent<D> implements OnInit, OnChanges {
         selected: selectedYear === this.startYear + index,
       }));
 
-    this.years = this.arrayHelper.splitToChunks(years, 4);
+    this.years = batch(years, 4);
   }
 
   onYearSelect(year) {

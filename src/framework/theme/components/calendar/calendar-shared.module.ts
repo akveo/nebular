@@ -15,7 +15,6 @@ import { NbCalendarYearPickerComponent } from './components/calendar-year-picker
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
 import { NbCalendarDatePipe } from './components/calendar-date.pipe';
 import { NbCalendarYearPipe } from './components/calendar-year.pipe';
-import { NbArrayHelper } from './helpers/array.helper';
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
 import { NbCalendarMonthViewHeaderComponent } from './components/calendar-month-view-header/calendar-month-view-header.component';
@@ -46,7 +45,7 @@ const PIPES = [
   imports: [ NbSharedModule ],
   exports: [ ...COMPONENTS, ...PIPES ],
   declarations: [ ...COMPONENTS, ...PIPES ],
-  providers: [ ...NB_CALENDAR_PROVIDERS, NbArrayHelper ],
+  providers: [ ...NB_CALENDAR_PROVIDERS ],
 })
 export class NbCalendarSharedModule {
 

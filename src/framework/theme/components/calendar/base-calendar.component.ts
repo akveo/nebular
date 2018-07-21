@@ -8,7 +8,7 @@ import { EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarConfig } from './calendar-config';
-import { NbCalendarViewMode } from './helpers/model';
+import { NbCalendarViewMode } from './model';
 
 export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 

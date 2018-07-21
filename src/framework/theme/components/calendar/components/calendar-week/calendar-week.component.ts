@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NbCalendarWeek } from '../../helpers/model';
+import { NbCalendarWeek } from '../../model';
 
 @Component({
   selector: 'nb-calendar-week',
