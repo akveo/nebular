@@ -5,9 +5,7 @@ import { NbCalendarDay } from '../../model';
   selector: 'nb-calendar-days-names',
   styleUrls: ['./calendar-days-names.component.scss'],
   template: `
-    <div class="day" [class.holiday]="day.isHoliday" *ngFor="let day of days">
-      {{ day.name }}
-    </div>
+    <div class="day" *ngFor="let day of days" [class.holiday]="day.isHoliday">{{ day.name }}</div>
   `,
 })
 export class NbCalendarDaysNamesComponent {
