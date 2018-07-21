@@ -1,5 +1,6 @@
 import { NbCalendarModelFactoryService } from './calendar-model-factory.service';
 import { Injectable } from '@angular/core';
+import { NbCalendarCellState } from '@nebular/theme/components/calendar/model';
 
 @Injectable()
 export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactoryService<D> {
@@ -19,7 +20,7 @@ export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactor
           this.compareDateAndNumberRepresentation(sv.endDate, year, month, date) >= 0
         )
       ) {
-        states.push('cell-range-inbetween');
+        states.push(NbCalendarCellState.IN_RANGE);
       }
 
       if (sv.startDate &&

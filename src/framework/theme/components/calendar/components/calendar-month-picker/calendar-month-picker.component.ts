@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { batch } from '../../helpers';
+import { batch, range } from '../../helpers';
 
+// TODO refactor template with styles refactoring
 @Component({
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
@@ -20,7 +21,7 @@ import { batch } from '../../helpers';
         <div class="month"
              *ngFor="let month of chunk"
              [class.selected]="month.selected"
-             (click)="onMonthSelect(month.value)">
+             (click)="onSelect(month.value)">
           {{ month.label }}
         </div>
       </div>
@@ -28,7 +29,7 @@ import { batch } from '../../helpers';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
+export class NbCalendarMonthPickerComponent<D> implements OnInit {
 
   @Input() activeMonth: D;
 
@@ -43,20 +44,14 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.today = this.today || this.dateTimeUtil.createNowDate();
-    this.activeMonth = this.activeMonth || this.dateTimeUtil.clone(this.today);
-  }
-
-  ngOnChanges(): void {
-    if (this.activeMonth) {
-      this.initMonths();
-    }
+    this.initMonths();
   }
 
   initMonths() {
     const selectedMonth = this.dateTimeUtil.getMonth(this.activeMonth);
 
-    const months = Array.from(Array(12).keys())
+    // TODO maybe we need one more util for cases like that?
+    const months = range(12)
       .map(index => ({
         value: index,
         label: this.dateTimeUtil.getMonthNameByIndex(index),
@@ -66,12 +61,10 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit, OnChanges {
     this.months = batch(months, 4);
   }
 
-  onMonthSelect(month) {
-    this.activeMonth = this.dateTimeUtil.createDate(
-      this.dateTimeUtil.getYear(this.activeMonth),
-      month,
-      this.dateTimeUtil.getDate(this.activeMonth),
-    );
-    this.change.emit(this.activeMonth);
+  onSelect(month) {
+    const year = this.dateTimeUtil.getYear(this.activeMonth);
+    const day = this.dateTimeUtil.getDate(this.activeMonth);
+    const event = this.dateTimeUtil.createDate(year, month, day);
+    this.change.emit(event);
   }
 }

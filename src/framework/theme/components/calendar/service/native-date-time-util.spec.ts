@@ -1,5 +1,7 @@
 import { async, inject, TestBed } from '@angular/core/testing';
+
 import { NbNativeDateTimeUtilService } from './native-date-time-util.service';
+import { range } from '@nebular/theme/components/calendar/helpers';
 
 let dateTimeUtil: NbNativeDateTimeUtilService;
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -42,13 +44,13 @@ describe('native-date-time-util-service', () => {
   });
 
   it('should get month name', () => {
-    Array.from(Array(12).keys()).forEach(i => {
+    range(12).forEach(i => {
       expect(dateTimeUtil.getMonthName(new Date(2018, i, 1))).toBe(MONTH_NAMES[i]);
     });
   });
 
   it('should get month name by index', () => {
-    Array.from(Array(12).keys()).forEach(i => {
+    range(12).forEach(i => {
       expect(dateTimeUtil.getMonthName(new Date(2018, i, 1))).toBe(MONTH_NAMES[i]);
     });
   });

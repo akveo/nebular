@@ -8,3 +8,8 @@ export const batch = (target: any[], batchSize: number) => {
     return res;
   }, [])
 };
+
+/**
+ * returns array with numbers from zero to bound.
+ * */
+export const range = (bound: number) => Array.from(Array(bound).keys());
