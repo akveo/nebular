@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { NbDateTimeUtil } from './date-time-util';
-import { NbCalendarCell, NbCalendarMonth, NbCalendarMonthBuilderContext, NbCalendarWeek } from '../model';
+import {
+  NbCalendarCell,
+  NbCalendarCellState,
+  NbCalendarMonth,
+  NbCalendarMonthBuilderContext,
+  NbCalendarWeek,
+} from '../model';
 
 @Injectable()
 export class NbCalendarModelFactoryService<D> {
@@ -22,21 +28,21 @@ export class NbCalendarModelFactoryService<D> {
   }
 
   protected getBasicStatesForCell({ context }, year, month, date) {
-    const states = [];
+    const states: NbCalendarCellState[] = [];
 
     if (
       year === this.dateTimeUtil.getYear(context.currentValue) &&
       month === this.dateTimeUtil.getMonth(context.currentValue) &&
       date === this.dateTimeUtil.getDate(context.currentValue)
     ) {
-      states.push('cell-today');
+      states.push(NbCalendarCellState.TODAY);
     }
 
     if (
       year === this.dateTimeUtil.getYear(context.activeMonth) &&
       month !== this.dateTimeUtil.getMonth(context.activeMonth)
     ) {
-      states.push('cell-bounding-month');
+      states.push(NbCalendarCellState.BOUNDING_MONTH);
     }
 
     return states;
@@ -52,7 +58,7 @@ export class NbCalendarModelFactoryService<D> {
       month === this.dateTimeUtil.getMonth(context.selectedValue) &&
       date === this.dateTimeUtil.getDate(context.selectedValue)
     ) {
-      states.push('cell-selected');
+      states.push(NbCalendarCellState.SELECTED);
     }
 
     return states;
@@ -91,7 +97,7 @@ export class NbCalendarModelFactoryService<D> {
         month: this.dateTimeUtil.getMonth(startOfMonth),
         date: firstWeekDate,
         activeMonthDiff: 0,
-        cellStates: this.getStatesForCell(monthSettings, year, month, firstWeekDate),
+        states: this.getStatesForCell(monthSettings, year, month, firstWeekDate),
       });
       currentDate = firstWeekDate;
     }
@@ -107,7 +113,7 @@ export class NbCalendarModelFactoryService<D> {
           month,
           date,
           activeMonthDiff: -1,
-          cellStates: this.getStatesForCell(monthSettings, year, month, date),
+          states: this.getStatesForCell(monthSettings, year, month, date),
         });
       }
       monthModel.push({ cells: firstWeek });
@@ -135,7 +141,7 @@ export class NbCalendarModelFactoryService<D> {
         month,
         date: currentDate,
         activeMonthDiff: 0,
-        cellStates: this.getStatesForCell(monthSettings, year, month, currentDate),
+        states: this.getStatesForCell(monthSettings, year, month, currentDate),
       });
 
       for (let fullWeekDate = currentDate + 1;
@@ -145,7 +151,7 @@ export class NbCalendarModelFactoryService<D> {
           month,
           date: fullWeekDate,
           activeMonthDiff: 0,
-          cellStates: this.getStatesForCell(monthSettings, year, month, fullWeekDate),
+          states: this.getStatesForCell(monthSettings, year, month, fullWeekDate),
         });
         currentDate = fullWeekDate;
       }
@@ -170,7 +176,7 @@ export class NbCalendarModelFactoryService<D> {
           month,
           date: lastWeekDate,
           activeMonthDiff: 0,
-          cellStates: this.getStatesForCell(monthSettings, year, month, lastWeekDate),
+          states: this.getStatesForCell(monthSettings, year, month, lastWeekDate),
         });
       }
       if (context.includeBoundingMonths) {
@@ -183,7 +189,7 @@ export class NbCalendarModelFactoryService<D> {
             month: nextMonthMonth,
             date: nextMonthDay,
             activeMonthDiff: 1,
-            cellStates: this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
+            states: this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
           });
         }
         monthModel.push({ cells: lastWeek });

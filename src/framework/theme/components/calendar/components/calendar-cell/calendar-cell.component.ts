@@ -12,33 +12,16 @@ import { NbCalendarCell } from '../../model';
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],
   template: `
-    <div class="calendar-cell" (click)="selectDate()">{{dayModel.date}}</div>
+    <div class="calendar-cell" (click)="click.emit()">{{ cell.date }}</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarCellComponent {
-
-  @Input()
-  public dayModel: NbCalendarCell = null;
-
-  @Input()
-  public isToday: boolean = false;
-
-  @Input()
-  public cellStates: Array<string> = [];
-
-  @Output()
-  public cellSelect = new EventEmitter<any>();
+  @Input() cell: NbCalendarCell;
+  @Output() click = new EventEmitter<void>();
 
   @HostBinding('class')
-  get cellClasses() {
-    return this.cellStates.join(' ');
-  }
-
-  selectDate() {
-    this.cellSelect.emit({
-      date: this.dayModel.date,
-      activeMonthDiff: this.dayModel.activeMonthDiff,
-    });
+  get cellStates() {
+    return this.cell.states.join(' ');
   }
 }

@@ -35,7 +35,7 @@ import { NbCalendarDay, NbCalendarMonth } from '../../model';
       <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
-        (cellSelect)="onCellSelect($event)">
+        (click)="onCellSelect($event)">
       </nb-calendar-week>
     </div>
   `,
@@ -97,5 +97,6 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
       currentValue: this.today,
       includeBoundingMonths: this.config.displayBoundingMonths,
     });
+    console.log(this.month);
   }
 }

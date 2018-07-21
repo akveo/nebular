@@ -91,7 +91,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
         month: this.dateTimeUtil.getMonth(startOfMonth),
         date: firstWeekDate,
         activeMonthDiff: 0,
-        cellStates: this.getStatesForCell(monthSettings, year, month, firstWeekDate),
+        states: this.getStatesForCell(monthSettings, year, month, firstWeekDate),
       });
       currentDate = firstWeekDate;
     }
@@ -107,7 +107,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
           month,
           date,
           activeMonthDiff: -1,
-          cellStates: this.getStatesForCell(monthSettings, year, month, date),
+          states: this.getStatesForCell(monthSettings, year, month, date),
         });
       }
       monthModel.push({ cells: firstWeek });
@@ -135,7 +135,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
         month,
         date: currentDate,
         activeMonthDiff: 0,
-        cellStates: this.getStatesForCell(monthSettings, year, month, currentDate),
+        states: this.getStatesForCell(monthSettings, year, month, currentDate),
       });
 
       for (let fullWeekDate = currentDate + 1;
@@ -145,7 +145,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
           month,
           date: fullWeekDate,
           activeMonthDiff: 0,
-          cellStates: this.getStatesForCell(monthSettings, year, month, fullWeekDate),
+          states: this.getStatesForCell(monthSettings, year, month, fullWeekDate),
         });
         currentDate = fullWeekDate;
       }
@@ -170,7 +170,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
           month,
           date: lastWeekDate,
           activeMonthDiff: 0,
-          cellStates: this.getStatesForCell(monthSettings, year, month, lastWeekDate),
+          states: this.getStatesForCell(monthSettings, year, month, lastWeekDate),
         });
       }
       if (context.includeBoundingMonths) {
@@ -183,7 +183,7 @@ export class NbCalendarModelFactoryServiceDeprecated<D> {
             month: nextMonthMonth,
             date: nextMonthDay,
             activeMonthDiff: 1,
-            cellStates: this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
+            states: this.getStatesForCell(monthSettings, nextMonthYear, nextMonthMonth, nextMonthDay),
           });
         }
         monthModel.push({ cells: lastWeek });

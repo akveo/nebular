@@ -33,7 +33,13 @@ describe('calendar-model-factory-service', () => {
     },
   )));
 
-  const expectEqualResultForBothServices = context => {
+  const expectEqualResultForBothServices = date => {
+    const context = {
+      activeMonth: date,
+      selectedValue: date,
+      currentValue: date,
+      includeBoundingMonths: true,
+    };
     expect(JSON.stringify(calendarModelFactoryOld.createMonthModel(context)))
       .toBe(JSON.stringify(calendarModelFactory.createMonthModel(context)));
   };

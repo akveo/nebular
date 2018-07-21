@@ -15,7 +15,7 @@ import { NbCalendarMonthViewComponent } from './components/calendar-month-view/c
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
 import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/calendar-days-names.component';
-import { NbWeekComponent } from './components/calendar-week/calendar-week.component';
+import { NbCalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 
 import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
 import { NbDateTimeUtil } from './service/date-time-util';
@@ -32,7 +32,7 @@ const COMPONENTS = [
   NbCalendarHeaderComponent,
   NbPageableCalendarHeaderComponent,
   NbCalendarDaysNamesComponent,
-  NbWeekComponent,
+  NbCalendarWeekComponent,
   NbCalendarYearPickerComponent,
   NbCalendarMonthPickerComponent,
   NbCalendarMonthViewComponent,

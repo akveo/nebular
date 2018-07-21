@@ -19,8 +19,7 @@ export class NbCalendarCell {
   month: number;
   date: number;
   activeMonthDiff: number = 0;
-  cellStates: Array<string> = [];
-  extraData?: any = null;
+  states: NbCalendarCellState[] = [];
 }
 
 export class NbCalendarMonthBuilderContext<D> {
@@ -39,4 +38,12 @@ export enum NbCalendarViewMode {
   YEAR = 'year',
   MONTH = 'month',
   DATE = 'date',
+}
+
+// TODO normalize naming
+export enum NbCalendarCellState {
+  TODAY = 'cell-today',
+  BOUNDING_MONTH = 'cell-bounding-month',
+  SELECTED = 'cell-selected',
+  IN_RANGE = 'cell-range-inbetween',
 }
