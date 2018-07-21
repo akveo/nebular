@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarCellModel } from '../calendar-cell.model';
 import { NbCalendarWeekModel } from '../calendar-week.model';
 import { NbCalendarMonthModel } from '../calendar-month.model';
 import { NbCalendarMonthBuilderContext } from '../calendar-month-builder-context';
 
+/**
+ * @deprecated
+ * */
 @Injectable()
-export class NbCalendarModelFactoryService<D> {
+export class NbCalendarModelFactoryServiceDeprecated<D> {
 
-  constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(
+    @Optional() public dateTimeUtil: NbDateTimeUtil<D>,
+  ) {
   }
 
   createMonthModel(context: NbCalendarMonthBuilderContext<D>): NbCalendarMonthModel {
