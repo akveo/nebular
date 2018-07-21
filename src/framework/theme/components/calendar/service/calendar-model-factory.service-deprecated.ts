@@ -3,7 +3,7 @@ import { NbDateTimeUtil } from './date-time-util';
 import { NbCalendarCell, NbCalendarMonth, NbCalendarMonthBuilderContext, NbCalendarWeek } from '../model';
 
 @Injectable()
-export class NbCalendarModelFactoryService<D> {
+export class NbCalendarModelFactoryServiceDeprecated<D> {
 
   constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
   }

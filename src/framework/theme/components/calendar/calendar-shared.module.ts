@@ -7,18 +7,21 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbCalendarMonthViewComponent } from './components/calendar-month-view/calendar-month-view.component';
-import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
-import { NbDateTimeUtil } from './service/date-time-util';
+
 import { NbCalendarCellComponent } from './components/calendar-cell/calendar-cell.component';
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
-import { NbCalendarDatePipe } from './components/calendar-date.pipe';
-import { NbCalendarYearPipe } from './components/calendar-year.pipe';
+import { NbCalendarMonthViewComponent } from './components/calendar-month-view/calendar-month-view.component';
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
-import { NbCalendarMonthViewHeaderComponent } from './components/calendar-month-view-header/calendar-month-view-header.component';
+import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/calendar-days-names.component';
 import { NbWeekComponent } from './components/calendar-week/calendar-week.component';
+
+import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
+import { NbDateTimeUtil } from './service/date-time-util';
+import { NbCalendarDatePipe } from './components/calendar-date.pipe';
+import { NbCalendarYearPipe } from './components/calendar-year.pipe';
+
 
 const NB_CALENDAR_PROVIDERS = [
   NbNativeDateTimeUtilService,
@@ -28,7 +31,7 @@ const NB_CALENDAR_PROVIDERS = [
 const COMPONENTS = [
   NbCalendarHeaderComponent,
   NbPageableCalendarHeaderComponent,
-  NbCalendarMonthViewHeaderComponent,
+  NbCalendarDaysNamesComponent,
   NbWeekComponent,
   NbCalendarYearPickerComponent,
   NbCalendarMonthPickerComponent,
@@ -42,10 +45,10 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [ NbSharedModule ],
-  exports: [ ...COMPONENTS, ...PIPES ],
-  declarations: [ ...COMPONENTS, ...PIPES ],
-  providers: [ ...NB_CALENDAR_PROVIDERS ],
+  imports: [NbSharedModule],
+  exports: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES],
+  providers: [...NB_CALENDAR_PROVIDERS],
 })
 export class NbCalendarSharedModule {
 

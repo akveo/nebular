@@ -31,7 +31,7 @@ import { NbCalendarDay, NbCalendarMonth } from '../../model';
     </nb-pageable-calendar-header>
 
     <div class="body">
-      <nb-calendar-month-view-header [days]="days"></nb-calendar-month-view-header>
+      <nb-calendar-days-names [days]="days"></nb-calendar-days-names>
       <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
