@@ -18,7 +18,7 @@ import { NbCalendarYearPipe } from './helpers/calendar-year.pipe';
 import { NbArrayHelper } from './helpers/array.helper';
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
-import { NbDaysNamesComponent } from './components/days-names/days-names.component';
+import { NbCalendarMonthViewHeaderComponent } from './components/calendar-month-view-header/calendar-month-view-header.component';
 import { NbWeekComponent } from './components/calendar-week/calendar-week.component';
 
 const NB_CALENDAR_PROVIDERS = [
@@ -29,7 +29,7 @@ const NB_CALENDAR_PROVIDERS = [
 const COMPONENTS = [
   NbCalendarHeaderComponent,
   NbPageableCalendarHeaderComponent,
-  NbDaysNamesComponent,
+  NbCalendarMonthViewHeaderComponent,
   NbWeekComponent,
   NbCalendarYearPickerComponent,
   NbCalendarMonthPickerComponent,
