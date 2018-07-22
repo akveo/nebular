@@ -27,33 +27,33 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
   }
 
   onChange(value: D) {
-    if (!this.selectedValue || !this.selectedValue.start) {
-      this.change.emit({ start: value });
+    if (!this.date || !this.date.start) {
+      this.dateChange.emit({ start: value });
       this.lastValueEmitted = 's';
     } else {
-      if (!this.selectedValue.end) {
-        if (this.dateTimeUtil.compareDates(this.selectedValue.start, value) > 0) {
-          this.change.emit({ start: value });
+      if (!this.date.end) {
+        if (this.dateTimeUtil.compareDates(this.date.start, value) > 0) {
+          this.dateChange.emit({ start: value });
           this.lastValueEmitted = 's';
         } else {
-          this.change.emit({ start: this.selectedValue.start, end: value });
+          this.dateChange.emit({ start: this.date.start, end: value });
           this.lastValueEmitted = 'e';
         }
       } else {
         if (this.lastValueEmitted === 'e') {
-          if (this.dateTimeUtil.compareDates(this.selectedValue.end, value) >= 0) {
-            this.change.emit({ start: value, end: this.selectedValue.end });
+          if (this.dateTimeUtil.compareDates(this.date.end, value) >= 0) {
+            this.dateChange.emit({ start: value, end: this.date.end });
             this.lastValueEmitted = 's';
           } else {
-            this.change.emit({ start: value });
+            this.dateChange.emit({ start: value });
             this.lastValueEmitted = 's';
           }
         } else {
-          if (this.dateTimeUtil.compareDates(this.selectedValue.start, value) <= 0) {
-            this.change.emit({ start: this.selectedValue.start, end: value });
+          if (this.dateTimeUtil.compareDates(this.date.start, value) <= 0) {
+            this.dateChange.emit({ start: this.date.start, end: value });
             this.lastValueEmitted = 'e';
           } else {
-            this.change.emit({ start: value });
+            this.dateChange.emit({ start: value });
             this.lastValueEmitted = 's';
           }
         }
@@ -62,6 +62,6 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
   }
 
   protected getInitialActiveMonthFromValue(): D {
-    return (this.selectedValue && (this.selectedValue.end || this.selectedValue.start)) || this.today;
+    return (this.date && (this.date.end || this.date.start)) || this.today;
   }
 }

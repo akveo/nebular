@@ -12,11 +12,11 @@ import { NbCalendarViewMode } from './model';
 
 export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
 
-  @Input() selectedValue: V;
+  @Input() date: V;
 
   @Input() config: NbCalendarConfig = new NbCalendarConfig();
 
-  @Output() change = new EventEmitter<V>();
+  @Output() dateChange = new EventEmitter<V>();
 
   @Output() activeMonthChange = new EventEmitter<D>();
 

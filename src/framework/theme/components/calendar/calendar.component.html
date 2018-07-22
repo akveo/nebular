@@ -3,7 +3,7 @@
     *ngSwitchCase="ViewMode.DATE"
     [activeMonth]="visibleMonths[0]"
     [today]="today"
-    [selectedValue]="selectedValue"
+    [selectedValue]="date"
     [config]="config"
     (change)="onChange($event)"
     (changeMode)="selectViewMode(ViewMode.YEAR)"
