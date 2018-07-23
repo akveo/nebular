@@ -6,7 +6,7 @@ export abstract class NbDateTimeUtil<D> {
 
   abstract getDate(date: D): number;
   abstract getMonth(date: D): number;
-  abstract getMonthName(date: Date): string;
+  abstract getMonthName(date: D): string;
   abstract getMonthNameByIndex(index: number): string;
   abstract getYear(date: D): number;
   abstract getDayOfWeek(date: D): number;

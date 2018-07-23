@@ -8,7 +8,7 @@ export class NbCalendarDatePipe<D> implements PipeTransform {
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
-  transform(date: any): string {
+  transform(date: D): string {
     return date ? `${this.dateTimeUtil.getMonthName(date)} ${this.dateTimeUtil.getYear(date)}` : '';
   }
 }
