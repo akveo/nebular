@@ -13,30 +13,38 @@ export class NbCalendarRangeModelFactoryService<D> extends NbCalendarModelFactor
       const sv = context.selectedValue;
 
       if (
-        sv.startDate &&
-        sv.endDate &&
+        sv.start &&
+        sv.end &&
         (
-          this.compareDateAndNumberRepresentation(sv.startDate, year, month, date) <= 0 &&
-          this.compareDateAndNumberRepresentation(sv.endDate, year, month, date) >= 0
+          this.compareDateAndNumberRepresentation(sv.start, year, month, date) <= 0 &&
+          this.compareDateAndNumberRepresentation(sv.end, year, month, date) >= 0
         )
       ) {
         states.push(NbCalendarCellState.IN_RANGE);
       }
 
-      if (sv.startDate &&
-        year === this.dateTimeUtil.getYear(sv.startDate) &&
-        month === this.dateTimeUtil.getMonth(sv.startDate) &&
-        date === this.dateTimeUtil.getDate(sv.startDate)
+      if (sv.start &&
+        year === this.dateTimeUtil.getYear(sv.start) &&
+        month === this.dateTimeUtil.getMonth(sv.start) &&
+        date === this.dateTimeUtil.getDate(sv.start)
       ) {
-        states.push.apply(states, ['cell-selected', 'cell-selected-range', 'cell-selected-range-start']);
+        states.push(
+          NbCalendarCellState.SELECTED,
+          NbCalendarCellState.SELECTED_RANGE,
+          NbCalendarCellState.SELECTED_RANGE_START,
+        );
       }
 
-      if (sv.endDate &&
-        year === this.dateTimeUtil.getYear(sv.endDate) &&
-        month === this.dateTimeUtil.getMonth(sv.endDate) &&
-        date === this.dateTimeUtil.getDate(sv.endDate)
+      if (sv.end &&
+        year === this.dateTimeUtil.getYear(sv.end) &&
+        month === this.dateTimeUtil.getMonth(sv.end) &&
+        date === this.dateTimeUtil.getDate(sv.end)
       ) {
-        states.push.apply(states, ['cell-selected', 'cell-selected-range', 'cell-selected-range-end']);
+        states.push(
+          NbCalendarCellState.SELECTED,
+          NbCalendarCellState.SELECTED_RANGE,
+          NbCalendarCellState.SELECTED_RANGE_END,
+        );
       }
     }
 

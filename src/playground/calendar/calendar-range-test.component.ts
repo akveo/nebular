@@ -9,10 +9,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-calendar-range-test',
   template: `
-    Selected date range: {{ (range?.startDate | date) + " - " + (range?.endDate | date) }}
+    Selected date range: {{ (range?.start | date) + " - " + (range?.end | date) }}
     <br/>
     <br/>
-    <nb-calendar-range [(date)]="range"></nb-calendar-range>
+    <nb-calendar-range [(range)]="range"></nb-calendar-range>
   `,
 })
 export class NbCalendarRangeTestComponent {

@@ -5,7 +5,7 @@
     [today]="today"
     [selectedValue]="date"
     [config]="config"
-    (change)="onChange($event)"
+    (change)="onDateChange($event)"
     (changeMode)="setViewMode(ViewMode.YEAR)"
     (next)="nextMonth()"
     (prev)="prevMonth()">
