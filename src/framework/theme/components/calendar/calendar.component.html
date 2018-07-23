@@ -1,12 +1,12 @@
 <ng-container [ngSwitch]="activeViewMode">
   <nb-calendar-month-view
     *ngSwitchCase="ViewMode.DATE"
-    [activeMonth]="visibleMonths[0]"
+    [activeMonth]="activeMonth"
     [today]="today"
     [selectedValue]="date"
     [config]="config"
     (change)="onChange($event)"
-    (changeMode)="selectViewMode(ViewMode.YEAR)"
+    (changeMode)="setViewMode(ViewMode.YEAR)"
     (next)="nextMonth()"
     (prev)="prevMonth()">
   </nb-calendar-month-view>
@@ -17,8 +17,8 @@
     [today]="today"
     [startYear]="activeYear"
     [config]="config"
-    (change)="activeMonth = $event; selectViewMode(ViewMode.MONTH)"
-    (changeMode)="selectViewMode(ViewMode.DATE)"
+    (change)="setActiveMonth($event); setViewMode(ViewMode.MONTH)"
+    (changeMode)="setViewMode(ViewMode.DATE)"
     (next)="nextYears()"
     (prev)="prevYears()">
   </nb-calendar-year-picker>
@@ -27,8 +27,8 @@
     *ngSwitchCase="ViewMode.MONTH"
     [activeMonth]="activeMonth"
     [today]="today"
-    (change)="activeMonth = $event; selectViewMode(ViewMode.DATE)"
-    (changeMode)="selectViewMode(ViewMode.DATE)">
+    (change)="setActiveMonth($event); setViewMode(ViewMode.DATE)"
+    (changeMode)="setViewMode(ViewMode.DATE)">
   </nb-calendar-month-picker>
 </ng-container>
 
