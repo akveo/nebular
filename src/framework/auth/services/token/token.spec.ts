@@ -10,16 +10,16 @@ import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken } from './token';
 describe('auth token', () => {
   describe('NbAuthJWTToken', () => {
     // tslint:disable
-    const simpleToken = new NbAuthSimpleToken('token');
-    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-    const emptyJWTToken = new NbAuthJWTToken('..');
-    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
+    const simpleToken = new NbAuthSimpleToken('token','strategy');
+    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773', 'strategy');
+    const emptyJWTToken = new NbAuthJWTToken('..', 'strategy');
+    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY','strategy');
 
-    const invalidJWTToken = new NbAuthJWTToken('.');
+    const invalidJWTToken = new NbAuthJWTToken('.','strategy');
 
-    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
 
-    const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+    const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
     // tslint:enable
 
     it('getPayload success', () => {
@@ -71,7 +71,7 @@ describe('auth token', () => {
 
     it('isValid fail', () => {
       // without token
-      expect(new NbAuthJWTToken('').isValid()).toBeFalsy();
+      expect(new NbAuthJWTToken('', 'strategy').isValid()).toBeFalsy();
 
       // expired date
       expect(expiredJWTToken.isValid()).toBeFalsy();
@@ -123,14 +123,14 @@ describe('auth token', () => {
       example_parameter: 'example_value',
     };
 
-    const validToken = new NbAuthOAuth2Token(token);
-    const emptyToken = new NbAuthOAuth2Token({});
+    const validToken = new NbAuthOAuth2Token(token, 'strategy');
+    const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
 
     const noExpToken = new NbAuthOAuth2Token({
       access_token: '2YotnFZFEjr1zCsicMWpAA',
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
       example_parameter: 'example_value',
-    });
+    }, 'strategy');
 
     it('getPayload success', () => {
       expect(validToken.getPayload()).toEqual(token);
