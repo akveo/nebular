@@ -13,7 +13,7 @@ import { NbCalendarYearPickerComponent } from './components/calendar-year-picker
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
 import { NbCalendarMonthViewComponent } from './components/calendar-month-view/calendar-month-view.component';
 import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
-import { NbPageableCalendarHeaderComponent } from './components/calendar-header/pageable-calendar-header.component';
+import { NbCalendarPageableHeaderComponent } from './components/calendar-header/calendar-pageable-header.component';
 import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/calendar-days-names.component';
 import { NbCalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 
@@ -29,7 +29,7 @@ const NB_CALENDAR_PROVIDERS = [
 
 const COMPONENTS = [
   NbCalendarHeaderComponent,
-  NbPageableCalendarHeaderComponent,
+  NbCalendarPageableHeaderComponent,
   NbCalendarDaysNamesComponent,
   NbCalendarWeekComponent,
   NbCalendarYearPickerComponent,

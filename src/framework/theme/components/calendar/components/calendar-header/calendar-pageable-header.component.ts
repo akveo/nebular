@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { NbCalendarHeaderComponent } from './calendar-header.component';
 
 @Component({
-  selector: 'nb-pageable-calendar-header',
+  selector: 'nb-calendar-pageable-header',
   styleUrls: ['./calendar-header.component.scss'],
   template: `
     <div class="header">
@@ -15,7 +15,7 @@ import { NbCalendarHeaderComponent } from './calendar-header.component';
   `,
 })
 
-export class NbPageableCalendarHeaderComponent<D> extends NbCalendarHeaderComponent<D> {
+export class NbCalendarPageableHeaderComponent<D> extends NbCalendarHeaderComponent<D> {
   @Output() next = new EventEmitter<any>();
   @Output() prev = new EventEmitter<any>();
 }
