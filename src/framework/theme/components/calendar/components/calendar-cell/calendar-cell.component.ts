@@ -6,22 +6,24 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCellState } from '../../model';
 
 @Component({
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],
   template: `
-    <div class="calendar-cell" (click)="select.emit()">{{ cell.date }}</div>
+    <div class="calendar-cell" (click)="select.emit()">{{ date }}</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarCellComponent {
-  @Input() cell: NbCalendarCell;
+  @Input() date: number;
+  @Input() states: NbCalendarCellState[];
+
   @Output() select = new EventEmitter<void>();
 
   @HostBinding('class')
   get cellStates() {
-    return this.cell.states.join(' ');
+    return this.states.join(' ');
   }
 }

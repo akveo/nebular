@@ -19,7 +19,7 @@ export class NbCalendarCell {
   month: number;
   date: number;
   activeMonthDiff: number = 0;
-  states: NbCalendarCellState[] = [];
+  state: NbCalendarCellState[] = [];
 }
 
 export class NbCalendarMonthBuilderContext<D> {
