@@ -11,8 +11,8 @@ import { NbInputModule } from '@nebular/theme';
 
 @Component({
   template: `
-    <input #inputEl nbInput [size]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
-    <textarea #textareaEl nbInput [size]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
+    <input #inputEl nbInput [fieldSize]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
+    <textarea #textareaEl nbInput [fieldSize]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
     </textarea>
   `,
 })
