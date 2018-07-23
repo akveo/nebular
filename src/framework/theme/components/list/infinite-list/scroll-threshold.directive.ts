@@ -1,4 +1,17 @@
-import { Directive, Input, HostListener, ElementRef, EventEmitter, Output } from '@angular/core';
+import {
+  Directive,
+  Input,
+  HostListener,
+  ElementRef,
+  EventEmitter,
+  Output,
+  OnDestroy,
+  AfterViewInit,
+} from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { takeWhile, filter, switchMap } from 'rxjs/operators';
+import { NbLayoutScrollService } from '../../../services/scroll.service';
+import { NbLayoutRulerService } from '../../../services/ruler.service';
 
 export enum NbScrollDirection {
   UP,
@@ -14,8 +27,9 @@ export enum NbScrollDirection {
 @Directive({
   selector: '[nbScrollThreshold]',
 })
-export class NbScrollThresholdDirective {
+export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
 
+  private alive = true;
   private lastScrollPosition = 0;
 
   /**
@@ -45,15 +59,6 @@ export class NbScrollThresholdDirective {
   @Output()
   topThresholdReached = new EventEmitter();
 
-  @HostListener('window:nbscroll', ['$event'])
-  layoutScroll($event) {
-  if (this.listenWindowScroll) {
-      const { scrollHeight, scrollTop, clientHeight } = $event.detail;
-      this.checkPosition(scrollHeight, scrollTop, clientHeight);
-      this.lastScrollPosition = scrollTop;
-    }
-  }
-
   @HostListener('scroll')
   elementScroll() {
     if (!this.listenWindowScroll) {
@@ -63,15 +68,36 @@ export class NbScrollThresholdDirective {
     }
   }
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private scrollService: NbLayoutScrollService,
+    private dimensionsService: NbLayoutRulerService,
+  ) {}
+
+  ngAfterViewInit() {
+    this.scrollService.onScroll()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.listenWindowScroll),
+        switchMap(() => forkJoin(this.scrollService.getPosition(), this.dimensionsService.getDimensions())),
+      )
+      .subscribe(([scrollPosition, dimensions]) => {
+        this.checkPosition(dimensions.scrollHeight, scrollPosition.y, dimensions.clientHeight);
+      });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
+  }
 
   checkPosition(scrollHeight: number, scrollTop: number, clientHeight: number) {
     const scrollDelta = scrollTop - this.lastScrollPosition;
     const scrollDirection = scrollDelta > 0
       ? NbScrollDirection.DOWN
       : NbScrollDirection.UP;
+    const distanceToBottom = scrollHeight - scrollTop - clientHeight;
 
-    if (scrollDirection === NbScrollDirection.DOWN && scrollHeight - scrollTop - clientHeight <= this.threshold) {
+    if (scrollDirection === NbScrollDirection.DOWN && distanceToBottom <= this.threshold) {
       this.bottomThresholdReached.emit();
     }
 
