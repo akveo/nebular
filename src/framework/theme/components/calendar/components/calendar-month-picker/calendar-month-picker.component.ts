@@ -21,7 +21,7 @@ import { batch, range } from '../../helpers';
         <div class="month"
              *ngFor="let month of chunk"
              [class.selected]="month.selected"
-             (click)="onSelect(month.value)">
+             (click)="onClick(month.value)">
           {{ month.label }}
         </div>
       </div>
@@ -35,9 +35,11 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit {
 
   @Input() today: D;
 
-  @Output() changeMode = new EventEmitter<any>();
-  @Output() change = new EventEmitter<any>();
+  @Output() changeMode = new EventEmitter<void>();
+  // TODO think about name, maybe it would be better to call this select or just click?
+  @Output() change = new EventEmitter<D>();
 
+  // TODO define type for month
   months: any[];
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
@@ -61,7 +63,7 @@ export class NbCalendarMonthPickerComponent<D> implements OnInit {
     this.months = batch(months, 4);
   }
 
-  onSelect(month) {
+  onClick(month) {
     const year = this.dateTimeUtil.getYear(this.activeMonth);
     const day = this.dateTimeUtil.getDate(this.activeMonth);
     const event = this.dateTimeUtil.createDate(year, month, day);
