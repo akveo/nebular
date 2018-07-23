@@ -1,9 +1,9 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
 describe('Component: NbCalendarMonthPicker', () => {

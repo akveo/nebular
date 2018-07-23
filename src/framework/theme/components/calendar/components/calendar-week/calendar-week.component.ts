@@ -7,14 +7,14 @@ import { NbCalendarCell, NbCalendarWeek } from '../../model';
   template: `
     <nb-calendar-cell
       *ngFor="let cell of week.cells"
-      (select)="select.emit(cell)"
+      (click)="click.emit(cell)"
       [date]="cell.date"
       [state]="cell.state">
     </nb-calendar-cell>
   `,
 })
-
 export class NbCalendarWeekComponent {
+  // TODO accept only cells, not week
   @Input() week: NbCalendarWeek;
-  @Output() select = new EventEmitter<NbCalendarCell>();
+  @Output() click = new EventEmitter<NbCalendarCell>();
 }

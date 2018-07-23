@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbCalendarDay, NbCalendarNameStyle } from '../../model';
 
@@ -8,6 +8,7 @@ import { NbCalendarDay, NbCalendarNameStyle } from '../../model';
   template: `
     <div class="day" *ngFor="let day of days" [class.holiday]="day.isHoliday">{{ day.name }}</div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDaysNamesComponent<D> implements OnInit {
 

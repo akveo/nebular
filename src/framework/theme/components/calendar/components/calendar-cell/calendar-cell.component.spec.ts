@@ -27,8 +27,8 @@ describe('Component: NbCalendarCell', () => {
     expect(div.textContent).toContain('12');
   });
 
-  it('should fire on click when interior div was clicked', () => {
-    component.select.subscribe(e => expect(e).toBeUndefined());
+  it('should fire click when interior div was clicked', () => {
+    component.click.subscribe(e => expect(e).toBeUndefined());
     div.dispatchEvent(new Event('click'));
   });
 

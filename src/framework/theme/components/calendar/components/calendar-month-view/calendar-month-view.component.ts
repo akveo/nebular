@@ -15,19 +15,19 @@ import { NbCalendarCell, NbCalendarMonth } from '../../model';
   selector: 'nb-calendar-month-view',
   styleUrls: ['./calendar-month-view.component.scss'],
   template: `
-    <nb-pageable-calendar-header
+    <nb-calendar-pageable-header
       [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
       (click)="changeMode.emit()">
-    </nb-pageable-calendar-header>
+    </nb-calendar-pageable-header>
 
     <div class="body">
       <nb-calendar-days-names></nb-calendar-days-names>
       <nb-calendar-week
         *ngFor="let week of month.weeks"
         [week]="week"
-        (select)="onSelect($event)">
+        (click)="onSelect($event)">
       </nb-calendar-week>
     </div>
   `,
@@ -40,9 +40,9 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
   @Input() selectedValue: D;
   @Input() config: NbCalendarConfig;
 
-  @Output() next = new EventEmitter<any>();
-  @Output() prev = new EventEmitter<any>();
-  @Output() changeMode = new EventEmitter<any>();
+  @Output() next = new EventEmitter<void>();
+  @Output() prev = new EventEmitter<void>();
+  @Output() changeMode = new EventEmitter<void>();
 
   @Output() change = new EventEmitter<D>();
 

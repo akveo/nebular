@@ -19,7 +19,6 @@ import { batch, range } from '../../helpers';
 import { NbCalendarConfig } from '../../calendar-config';
 
 // TODO i don't think we need defaults
-const defaultStartYear = 2016;
 const defaultYearCount = 16;
 
 // TODO refactor template with styles refactoring
@@ -27,12 +26,12 @@ const defaultYearCount = 16;
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
   template: `
-    <nb-pageable-calendar-header
+    <nb-calendar-pageable-header
       [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
       (click)="changeMode.emit()">
-    </nb-pageable-calendar-header>
+    </nb-calendar-pageable-header>
 
     <div class="body">
       <div class="chunk-row" *ngFor="let chunk of years">
@@ -50,7 +49,7 @@ const defaultYearCount = 16;
 export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
   @Input() activeMonth: D;
-  @Input() startYear: number = defaultStartYear;
+  @Input() startYear: number;
   @Input() config: NbCalendarConfig;
   @Input() today: D;
 

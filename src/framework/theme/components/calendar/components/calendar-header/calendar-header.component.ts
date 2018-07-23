@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'nb-calendar-header',
@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       </button>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class NbCalendarHeaderComponent<D> {
