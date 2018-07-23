@@ -61,10 +61,7 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
     this.activeYear += this.config.yearsToDisplayNumber;
   }
 
-  onDateChange(date: D) {
-    this.date = date;
-    this.dateChange.emit(date);
-  }
+  abstract onDateChange(date: D);
 
   protected abstract getInitialActiveMonthFromValue(): D;
 

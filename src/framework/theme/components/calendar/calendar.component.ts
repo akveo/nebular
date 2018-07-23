@@ -57,6 +57,11 @@ export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
     super(dateTimeUtil);
   }
 
+  onDateChange(date: D) {
+    this.date = date;
+    this.dateChange.emit(date);
+  }
+
   protected getInitialActiveMonthFromValue(): D {
     return this.date;
   }

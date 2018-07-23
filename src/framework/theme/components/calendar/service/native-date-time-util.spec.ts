@@ -101,7 +101,7 @@ describe('native-date-time-util-service', () => {
 
   it('should create now date', () => {
     const now = new Date();
-    spyOn(window, 'Date').and.callFake(() => now);
+    spyOn(global, 'Date').and.callFake(() => now);
     expect(dateTimeUtil.createNowDate().getTime()).toBe(now.getTime());
   });
 

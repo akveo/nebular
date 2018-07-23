@@ -56,16 +56,21 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
   }
 
   private selectStart(start: D) {
-    super.onDateChange({ start });
+    this.selectRange({ start });
   }
 
   private selectEnd(date: D) {
     const { start } = this.date;
 
     if (this.dateTimeUtil.compareDates(date, start) > 0) {
-      super.onDateChange({ start, end: date });
+      this.selectRange({ start, end: date });
     } else {
-      super.onDateChange({ start: date, end: start });
+      this.selectRange({ start: date, end: start });
     }
+  }
+
+  private selectRange(range: NbCalendarRange<D>) {
+    this.date = range;
+    this.dateChange.emit(range);
   }
 }
