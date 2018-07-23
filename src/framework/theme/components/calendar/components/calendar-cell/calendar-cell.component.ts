@@ -18,12 +18,12 @@ import { NbCalendarCellState } from '../../model';
 })
 export class NbCalendarCellComponent {
   @Input() date: number;
-  @Input() states: NbCalendarCellState[];
+  @Input() state: NbCalendarCellState[];
 
   @Output() select = new EventEmitter<void>();
 
   @HostBinding('class')
   get cellStates() {
-    return this.states.join(' ');
+    return this.state.join(' ');
   }
 }

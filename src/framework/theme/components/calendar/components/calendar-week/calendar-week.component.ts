@@ -9,7 +9,7 @@ import { NbCalendarCell, NbCalendarWeek } from '../../model';
       *ngFor="let cell of week.cells"
       (select)="select.emit(cell)"
       [date]="cell.date"
-      [states]="cell.state">
+      [state]="cell.state">
     </nb-calendar-cell>
   `,
 })
