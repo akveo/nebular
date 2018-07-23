@@ -8,7 +8,7 @@ import { NbCalendarHeaderComponent } from './calendar-header.component';
     <div class="header">
       <i class="nb-arrow-left" (click)="prev.emit()"></i>
       <button class="btn btn-success" (click)="select.emit()">
-        {{ activeMonth | nbCalendarDate }}
+        {{ date | nbCalendarDate }}
       </button>
       <i class="nb-arrow-right" (click)="next.emit()"></i>
     </div>

@@ -16,10 +16,10 @@ import { NbCalendarCell, NbCalendarMonth } from '../../model';
   styleUrls: ['./calendar-month-view.component.scss'],
   template: `
     <nb-pageable-calendar-header
-      [activeMonth]="activeMonth"
+      [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
-      (select)="changeMode.emit()">
+      (click)="changeMode.emit()">
     </nb-pageable-calendar-header>
 
     <div class="body">

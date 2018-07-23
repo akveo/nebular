@@ -5,14 +5,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./calendar-header.component.scss'],
   template: `
     <div class="header single-page">
-      <button class="btn btn-success" (click)="select.emit()">
-        {{ activeMonth | nbCalendarDate }}
+      <button class="btn btn-success" (click)="click.emit()">
+        {{ date | nbCalendarDate }}
       </button>
     </div>
   `,
 })
 
 export class NbCalendarHeaderComponent<D> {
-  @Input() activeMonth: D;
-  @Output() select = new EventEmitter<any>();
+  @Input() date: D;
+  @Output() click = new EventEmitter<void>();
 }
