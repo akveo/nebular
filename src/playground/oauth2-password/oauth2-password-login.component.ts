@@ -141,6 +141,6 @@ export class NbOAuth2PasswordLoginComponent {
   }
 
   getClaims(rawToken: string): string {
-    return nbAuthCreateToken(NbAuthJWTToken, rawToken).getPayload();
+    return nbAuthCreateToken(NbAuthJWTToken, rawToken, this.strategy).getPayload();
   }
 }
