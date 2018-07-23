@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TestBed, ComponentFixture, fakeAsync, tick, async, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { NbThemeModule } from '../../../theme.module';
 import { NbLayoutModule } from '../../layout/layout.module';
 import { NbLayoutComponent } from '../../layout/layout.component';
@@ -68,7 +68,7 @@ class ScrollTestComponent {
   topThresholdReached() {}
 }
 
-fdescribe('Directive: NbScrollDirective', () => {
+describe('Directive: NbScrollDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
@@ -122,14 +122,41 @@ fdescribe('Directive: NbScrollDirective', () => {
     expect(elementScrollHandlerSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should ignore window scroll when listening to element scroll', () => {
+  it('should ignore window and layout scroll when listening to element scroll', () => {
     const checkPositionSpy = spyOn(scrollDirective, 'checkPosition');
 
     window.dispatchEvent(new Event('scroll'));
     expect(checkPositionSpy).toHaveBeenCalledTimes(0);
 
+    const layoutScrollContainer = testComponent.layoutComponent.scrollableContainerRef.nativeElement;
+    layoutScrollContainer.dispatchEvent(new Event('scroll'));
+    expect(checkPositionSpy).toHaveBeenCalledTimes(0);
+
     scrollingElementRef.nativeElement.dispatchEvent(new Event('scroll'));
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should ignore element scroll when listening to window or layout scroll', () => {
+    testComponent.listenWindowScroll = true;
+    fixture.detectChanges();
+
+    const checkPositionSpy = spyOn(scrollDirective, 'checkPosition');
+
+    scrollingElementRef.nativeElement.dispatchEvent(new Event('scroll'));
+    expect(checkPositionSpy).toHaveBeenCalledTimes(0);
+
+    window.dispatchEvent(new Event('scroll'));
+    expect(checkPositionSpy).toHaveBeenCalledTimes(1);
+
+    testComponent.withScroll = true;
+    fixture.detectChanges();
+
+    scrollingElementRef.nativeElement.dispatchEvent(new Event('scroll'));
+    expect(checkPositionSpy).toHaveBeenCalledTimes(1);
+
+    const layoutScrollContainer = testComponent.layoutComponent.scrollableContainerRef.nativeElement;
+    layoutScrollContainer.dispatchEvent(new Event('scroll'));
+    expect(checkPositionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should trigger bottomThresholdReached only when treshold reached (element scroll)', () => {
