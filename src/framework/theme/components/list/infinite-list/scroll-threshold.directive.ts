@@ -64,7 +64,6 @@ export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
     if (!this.listenWindowScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       this.checkPosition(scrollHeight, scrollTop, clientHeight );
-      this.lastScrollPosition = scrollTop;
     }
   }
 
@@ -91,11 +90,16 @@ export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
   }
 
   checkPosition(scrollHeight: number, scrollTop: number, clientHeight: number) {
-    const scrollDelta = scrollTop - this.lastScrollPosition;
-    const scrollDirection = scrollDelta > 0
+    if (this.lastScrollPosition === scrollTop) {
+      return;
+    }
+
+    const scrollDirection = scrollTop > this.lastScrollPosition
       ? NbScrollDirection.DOWN
       : NbScrollDirection.UP;
     const distanceToBottom = scrollHeight - scrollTop - clientHeight;
+
+    this.lastScrollPosition = scrollTop;
 
     if (scrollDirection === NbScrollDirection.DOWN && distanceToBottom <= this.threshold) {
       this.bottomThresholdReached.emit();
