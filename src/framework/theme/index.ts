@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+// TODO: export all components
 export * from './theme.options';
 export * from './theme.module';
 export * from './services/theme.service';
@@ -15,6 +16,7 @@ export * from './services/scroll.service';
 export * from './services/ruler.service';
 export * from './components/card/card.module';
 export * from './components/layout/layout.module';
+export * from './components/layout/restore-scroll-top.service';
 export * from './components/menu/menu.module';
 export { NbMenuService, NbMenuItem } from './components/menu/menu.service';
 export * from './components/route-tabset/route-tabset.module';

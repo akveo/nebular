@@ -14,6 +14,8 @@ import {
   NbLayoutHeaderComponent,
 } from './layout.component';
 
+import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
+
 const NB_LAYOUT_COMPONENTS = [
   NbLayoutComponent,
   NbLayoutColumnComponent,
@@ -27,6 +29,9 @@ const NB_LAYOUT_COMPONENTS = [
   ],
   declarations: [
     ...NB_LAYOUT_COMPONENTS,
+  ],
+  providers: [
+    NbRestoreScrollTopHelper,
   ],
   exports: [
     ...NB_LAYOUT_COMPONENTS,
