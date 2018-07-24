@@ -46,7 +46,7 @@ export class NbAuthTokenParceler {
     }
 
     return nbAuthCreateToken(tokenClass, tokenValue, tokenOwnerStrategyName, tokenCreatedAt);
-    }
+
   }
 
   // TODO: this could be moved to a separate token registry
