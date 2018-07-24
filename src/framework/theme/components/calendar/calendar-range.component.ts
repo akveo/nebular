@@ -7,16 +7,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
 import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
 import { NbCalendarRange } from './model';
+import { NbCalendarCellStateService } from '@nebular/theme/components/calendar/service/calendar-cell-state.service';
+import { NbCalendarRangeCellStateService } from '@nebular/theme/components/calendar/service/calendar-range-cell-state.service';
+import { NbCalendarWeeksFactoryService } from '@nebular/theme/components/calendar/service/calendar-model-factory.service';
 
 @Component({
   selector: 'nb-calendar-range',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [{ provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService }],
+  providers: [
+    NbCalendarWeeksFactoryService,
+    { provide: NbCalendarCellStateService, useClass: NbCalendarRangeCellStateService },
+  ],
 })
 export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCalendarRange<D>> {
 

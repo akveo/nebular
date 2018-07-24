@@ -1,6 +1,6 @@
-export const batch = (target: any[], batchSize: number) => {
+export const batch = (target: any[], batchSize: number, offset: number = 0) => {
   return target.reduce((res, item, index) => {
-    const chunkIndex = Math.floor(index / batchSize);
+    const chunkIndex = Math.floor((index + offset) / batchSize);
     if (!res[chunkIndex]) {
       res[chunkIndex] = [];
     }

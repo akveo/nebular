@@ -6,9 +6,8 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbCalendarCell, NbCalendarMonth } from '../../model';
+import { NbCalendarWeeksFactoryService } from '../../service/calendar-model-factory.service';
+import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-month-view',
@@ -24,7 +23,7 @@ import { NbCalendarCell, NbCalendarMonth } from '../../model';
     <div class="body">
       <nb-calendar-days-names></nb-calendar-days-names>
       <nb-calendar-week
-        *ngFor="let week of month.weeks"
+        *ngFor="let week of weeks"
         [week]="week"
         (click)="onSelect($event)">
       </nb-calendar-week>
@@ -45,10 +44,9 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
 
   @Output() change = new EventEmitter<D>();
 
-  month: NbCalendarMonth;
+  weeks: NbCalendarCell<D>[][];
 
-  constructor(private calendarModelFactory: NbCalendarModelFactoryService<D>,
-              private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(private calendarModelFactory: NbCalendarWeeksFactoryService<D>) {
   }
 
   ngOnChanges() {
@@ -57,25 +55,16 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
     }
   }
 
-  onSelect(cell: NbCalendarCell) {
-    const date = this.dateFromCell(cell);
-    this.change.emit(date);
+  onSelect(cell: NbCalendarCell<D>) {
+    this.change.emit(cell.date);
   }
 
   private invalidateModel() {
-    this.month = this.calendarModelFactory.createMonthModel({
+    this.weeks = this.calendarModelFactory.createWeeks({
       activeMonth: this.activeMonth,
       selectedValue: this.selectedValue,
-      currentValue: this.today,
+      today: this.today,
       includeBoundingMonths: this.displayBoundingMonths,
     });
-  }
-
-  private dateFromCell(cell: NbCalendarCell) {
-    const year = this.dateTimeUtil.getYear(this.activeMonth);
-    const month = this.dateTimeUtil.getMonth(this.activeMonth) + cell.activeMonthDiff;
-    const day = cell.date;
-
-    return this.dateTimeUtil.createDate(year, month, day);
   }
 }

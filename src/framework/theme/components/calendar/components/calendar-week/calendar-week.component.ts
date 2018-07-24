@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NbCalendarCell, NbCalendarWeek } from '../../model';
+import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-week',
   styleUrls: ['./calendar-week.component.scss'],
   template: `
     <nb-calendar-cell
-      *ngFor="let cell of week.cells"
+      *ngFor="let cell of week"
       (click)="click.emit(cell)"
       [date]="cell.date"
       [state]="cell.state">
     </nb-calendar-cell>
   `,
 })
-export class NbCalendarWeekComponent {
+export class NbCalendarWeekComponent<D> {
   // TODO accept only cells, not week
-  @Input() week: NbCalendarWeek;
-  @Output() click = new EventEmitter<NbCalendarCell>();
+  @Input() week: NbCalendarCell<D>[];
+  @Output() click = new EventEmitter<NbCalendarCell<D>>();
 }

@@ -7,6 +7,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { NbCalendarCellState } from '../../model';
+import { NbDateTimeUtil } from '../../service/date-time-util';
 
 @Component({
   selector: 'nb-calendar-cell',
@@ -16,8 +17,12 @@ import { NbCalendarCellState } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarCellComponent {
-  @Input() date: number;
+export class NbCalendarCellComponent<D> {
+  @Input('date')
+  set _date(date: D) {
+    this.date = this.dateTimeUtil.getDate(date);
+  }
+
   @Input() state: NbCalendarCellState[];
 
   @Output() click = new EventEmitter<void>();
@@ -25,5 +30,10 @@ export class NbCalendarCellComponent {
   @HostBinding('class')
   get cellStates() {
     return this.state.join(' ');
+  }
+
+  date: number;
+
+  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 }

@@ -13,16 +13,16 @@ import { NbNativeDateTimeUtilService } from './service/native-date-time-util.ser
 import { NbDateTimeUtil } from './service/date-time-util';
 
 import {
-  NbCalendarHeaderComponent,
-  NbCalendarNavigationComponent,
-  NbCalendarPageableNavigationComponent,
-  NbCalendarDaysNamesComponent,
-  NbCalendarWeekComponent,
-  NbCalendarYearPickerComponent,
-  NbCalendarMonthPickerComponent,
-  NbCalendarMonthViewComponent,
   NbCalendarCellComponent,
   NbCalendarDatePipe,
+  NbCalendarDaysNamesComponent,
+  NbCalendarHeaderComponent,
+  NbCalendarMonthPickerComponent,
+  NbCalendarMonthViewComponent,
+  NbCalendarNavigationComponent,
+  NbCalendarPageableNavigationComponent,
+  NbCalendarWeekComponent,
+  NbCalendarYearPickerComponent,
 } from './components';
 
 

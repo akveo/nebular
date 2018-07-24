@@ -1,4 +1,4 @@
-import { NbCalendarNameStyle } from '@nebular/theme/components/calendar/model';
+import { NbCalendarNameStyle } from '../model';
 
 export abstract class NbDateTimeUtil<D> {
   abstract getNumberOfDaysInMonth(date: D): number;

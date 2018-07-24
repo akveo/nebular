@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
+import { NbCalendarWeeksFactoryService } from './service/calendar-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
+import { NbCalendarCellStateService } from '@nebular/theme/components/calendar/service/calendar-cell-state.service';
 
 /**
  * Basic example with including bounding dates
@@ -49,7 +50,7 @@ import { NbBaseCalendarComponent } from './base-calendar.component';
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [ NbCalendarModelFactoryService ],
+  providers: [ NbCalendarCellStateService, NbCalendarWeeksFactoryService ],
 })
 export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
 

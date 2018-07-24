@@ -10,22 +10,15 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarRangeComponent } from './calendar-range.component';
 import { NbCalendarSharedModule } from './calendar-shared.module';
-import { NbCalendarModelFactoryService } from './service/calendar-model-factory.service';
-import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 
 const COMPONENTS = [
   NbCalendarRangeComponent,
 ];
 
-const NB_CALENDAR_PROVIDERS = [
-  { provide: NbCalendarModelFactoryService, useClass: NbCalendarRangeModelFactoryService },
-];
-
 @NgModule({
-  imports: [ NbSharedModule, NbCheckboxModule, NbCalendarSharedModule ],
-  exports: [ ...COMPONENTS ],
-  declarations: [ ...COMPONENTS ],
-  providers: [ ...NB_CALENDAR_PROVIDERS ],
+  imports: [NbSharedModule, NbCheckboxModule, NbCalendarSharedModule],
+  exports: [...COMPONENTS],
+  declarations: [...COMPONENTS],
 })
 export class NbCalendarRangeModule {
 
