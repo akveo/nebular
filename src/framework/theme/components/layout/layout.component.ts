@@ -251,7 +251,7 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div class="scrollable-container" #scrollableContainer>
+    <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
@@ -414,7 +414,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.scroll(0, 0);
       });
-
 
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
