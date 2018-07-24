@@ -161,6 +161,7 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -312,6 +313,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
+  NbScrollWindowComponent,
 ];
 
 
