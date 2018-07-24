@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
-import { NbCalendarDatePipe } from '../calendar-date.pipe';
+import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 
 
 describe('Component: NbCalendarNavigation', () => {

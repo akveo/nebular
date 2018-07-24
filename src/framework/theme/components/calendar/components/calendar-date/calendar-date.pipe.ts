@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { NbDateTimeUtil } from '../service/date-time-util';
+import { NbDateTimeUtil } from '../../service/date-time-util';
 
 @Pipe({ name: 'nbCalendarDate' })
 export class NbCalendarDatePipe<D> implements PipeTransform {
