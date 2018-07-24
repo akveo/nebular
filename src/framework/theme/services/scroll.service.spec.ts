@@ -155,6 +155,101 @@ describe('NbScrollService', () => {
       });
   });
 
+  it('should scroll using service (with default x)', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(null, 10);
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(0);
+        expect(pos.y).toEqual(10);
+        done();
+      });
+  });
+
+  it('should scroll using service (with default y)', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(10, null);
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(10);
+        expect(pos.y).toEqual(0);
+        done();
+      });
+  });
+
+  it('should scroll using service (with default x)', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(10, 10);
+    fixture.detectChanges();
+
+    scrollService.scrollTo(null, 20);
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(10);
+        expect(pos.y).toEqual(20);
+        done();
+      });
+  });
+
+  it('should scroll using service (with default y)', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(10, 10);
+    fixture.detectChanges();
+
+    scrollService.scrollTo(20, null);
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(20);
+        expect(pos.y).toEqual(10);
+        done();
+      });
+  });
+
+  it('should scroll using service back to 0,0', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(10, 10);
+    fixture.detectChanges();
+
+    scrollService.scrollTo(0, 0);
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(0);
+        expect(pos.y).toEqual(0);
+        done();
+      });
+  });
+
+  it('should scroll using service back (with default x,y)', (done) => {
+    componentInstance.useLocalScroll();
+    componentInstance.setSize('10000px', '10000px');
+    fixture.detectChanges();
+    scrollService.scrollTo(10, 10);
+    fixture.detectChanges();
+
+    scrollService.scrollTo();
+    fixture.detectChanges();
+    scrollService.getPosition()
+      .subscribe((pos: NbScrollPosition) => {
+        expect(pos.x).toEqual(10);
+        expect(pos.y).toEqual(10);
+        done();
+      });
+  });
 
   it('should listen to scroll', (done) => {
     scrollService.onScroll()

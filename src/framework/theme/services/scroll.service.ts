@@ -55,7 +55,7 @@ export class NbLayoutScrollService {
    * @param {number} x
    * @param {number} y
    */
-  scrollTo(x: number, y: number) {
+  scrollTo(x: number = null, y: number = null) {
     this.manualScroll$.next({ x, y });
   }
 
