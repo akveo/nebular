@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'nb-calendar-header',
-  template: ``,
+  template: `
+    <h5>{{ date | nbCalendarDate }}</h5>
+    <span class="header-today">Today</span>
+  `,
 })
-export class NbCalendarHeaderComponent {
+export class NbCalendarHeaderComponent<D> {
+  @Input() date: D;
 }

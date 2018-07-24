@@ -21,6 +21,13 @@
     }
   }
 
+  nb-calendar-header {
+    span {
+      color: nb-theme(calendar-weekday-fg);
+      font-weight: nb-theme(font-weight-thin);
+    }
+  }
+
   nb-calendar-year-picker {
     .chunk-row {
       padding: nb-theme(calendar-row-padding);
