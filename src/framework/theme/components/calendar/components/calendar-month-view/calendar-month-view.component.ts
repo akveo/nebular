@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Out
 
 import { NbCalendarModelFactoryService } from '../../service/calendar-model-factory.service';
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbCalendarConfig } from '../../calendar-config';
 import { NbCalendarCell, NbCalendarMonth } from '../../model';
 
 @Component({
@@ -38,7 +37,7 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
   @Input() activeMonth: D;
   @Input() today: D;
   @Input() selectedValue: D;
-  @Input() config: NbCalendarConfig;
+  @Input() displayBoundingMonths: boolean = true;
 
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
@@ -68,7 +67,7 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
       activeMonth: this.activeMonth,
       selectedValue: this.selectedValue,
       currentValue: this.today,
-      includeBoundingMonths: this.config.displayBoundingMonths,
+      includeBoundingMonths: this.displayBoundingMonths,
     });
   }
 

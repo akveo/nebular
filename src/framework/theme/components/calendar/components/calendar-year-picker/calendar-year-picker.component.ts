@@ -9,17 +9,16 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { batch, range } from '../../helpers';
-import { NbCalendarConfig } from '../../calendar-config';
 
 // TODO i don't think we need defaults
-const defaultYearCount = 16;
+const defaultYearCount = 20;
 
 // TODO refactor template with styles refactoring
 @Component({
@@ -38,7 +37,7 @@ const defaultYearCount = 16;
         <div class="year"
              *ngFor="let year of chunk"
              [class.selected]="year.selected"
-             (click)="onSelect(year.value)">
+             (click)="onClick(year.value)">
           {{ year.value }}
         </div>
       </div>
@@ -46,39 +45,31 @@ const defaultYearCount = 16;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent<D> implements OnChanges {
+export class NbCalendarYearPickerComponent<D> implements OnInit {
 
   @Input() activeMonth: D;
   @Input() startYear: number;
-  @Input() config: NbCalendarConfig;
-  @Input() today: D;
 
   @Output() next = new EventEmitter<any>();
   @Output() prev = new EventEmitter<any>();
   @Output() changeMode = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();
 
+  // TODO define type
   years: any[];
 
   constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
   }
 
-  get yearsToDisplay(): number {
-    return this.config.yearsToDisplayNumber || defaultYearCount;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    // TODO I'm not sure we need this
-    if (this.activeMonth && this.startYear && this.yearsToDisplay) {
-      this.initYears();
-    }
+  ngOnInit() {
+    this.initYears();
   }
 
   initYears() {
     const selectedYear = this.dateTimeUtil.getYear(this.activeMonth);
 
     // TODO maybe we need one more util for cases like that?
-    const years = range(this.yearsToDisplay)
+    const years = range(defaultYearCount)
       .map(index => ({
         value: this.startYear + index,
         selected: selectedYear === this.startYear + index,
@@ -87,7 +78,7 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
     this.years = batch(years, 4);
   }
 
-  onSelect(year) {
+  onClick(year) {
     const month = this.dateTimeUtil.getMonth(this.activeMonth);
     const day = this.dateTimeUtil.getDate(this.activeMonth);
     const event = this.dateTimeUtil.createDate(year, month, day);
