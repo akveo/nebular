@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostBinding, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 /**
  * Infinite list component.
