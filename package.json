@@ -55,7 +55,7 @@
     "ci:docs": "npm-run-all docs:prepare docs:build ",
     "ci:dev-deploy": "npm run firebase use dev && npm run firebase deploy",
     "ci:build": "npm-run-all build:prod build:package build:wp",
-    "ci:test": "npm-run-all build:package test:wp -- --code-coverage --watch=false",
+    "ci:test": "rimraf coverage && npm run build:package && npm run test:wp -- --code-coverage --watch=false",
     "ci:e2e": "npm-run-all build:package e2e:wp",
     "version:bump": "gulp version",
     "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
