@@ -36,6 +36,7 @@ export class NbAuthTokenParceler {
     let tokenValue = '';
     let tokenOwnerStrategyName = '';
     let tokenCreatedAt: Date = null;
+
     const tokenPack: NbTokenPack = this.parseTokenPack(value);
     if (tokenPack) {
       tokenClass = this.getClassByName(tokenPack.name) || this.fallbackClass;
@@ -45,6 +46,7 @@ export class NbAuthTokenParceler {
     }
 
     return nbAuthCreateToken(tokenClass, tokenValue, tokenOwnerStrategyName, tokenCreatedAt);
+    }
   }
 
   // TODO: this could be moved to a separate token registry

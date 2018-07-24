@@ -95,6 +95,7 @@ describe('auth token', () => {
       // without token
       expect(new NbAuthJWTToken('', 'strategy', new Date()).isValid()).toBeFalsy();
 
+
       // expired date
       expect(expiredJWTToken.isValid()).toBeFalsy();
     });
@@ -146,7 +147,9 @@ describe('auth token', () => {
       example_parameter: 'example_value',
     };
 
+
     let validToken = new NbAuthOAuth2Token(token, 'strategy');
+
     const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
 
     const noExpToken = new NbAuthOAuth2Token({

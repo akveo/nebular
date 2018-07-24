@@ -38,10 +38,10 @@ export class NbAuthSimpleToken extends NbAuthToken {
   static NAME = 'nb:auth:simple:token';
 
   constructor(protected readonly token: any,
+
               protected readonly ownerStrategyName: string,
               protected createdAt?: Date) {
     super();
-    // If not coming back from local storage, simple token get 'now' for createdAt
     if (!this.createdAt) {
       this.buildCreatedAt();
     }
@@ -184,6 +184,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
   constructor(protected data: { [key: string]: string|number }|string = {},
               protected ownerStrategyName: string,
               protected createdAd?: Date) {
+
     // we may get it as string when retrieving from a storage
     super(prepareOAuth2Token(data), ownerStrategyName);
   }

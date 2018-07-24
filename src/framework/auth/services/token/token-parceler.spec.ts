@@ -13,6 +13,7 @@ import { NB_AUTH_TOKENS } from '../../auth.options';
 describe('token-parceler', () => {
 
   let tokenParceler: NbAuthTokenParceler;
+
   const createdAt = new Date(1532350800000);
   const simpleToken = nbAuthCreateToken(NbAuthSimpleToken, 'test value', 'strategy', createdAt);
   // tslint:disable-next-line
