@@ -6,6 +6,7 @@ export abstract class NbAuthToken {
   abstract getPayload(): string;
   // the strategy name used to acquire this token (needed for refreshing token)
   abstract getOwnerStrategyName(): string;
+  abstract getCreatedAt(): Date;
   abstract toString(): string;
 
   getName(): string {
@@ -19,13 +20,14 @@ export interface NbAuthRefreshableToken {
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any, ownerStrategyName: string): NbAuthToken;
+  new (raw: any, ownerStrategyName: string, createdAt?: Date): NbAuthToken;
 }
 
 export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
                                   token: any,
-                                  ownerStrategyName: string) {
-  return new tokenClass(token, ownerStrategyName);
+                                  ownerStrategyName: string,
+                                  createdAt?: Date) {
+  return new tokenClass(token, ownerStrategyName, createdAt);
 }
 
 /**
@@ -36,8 +38,26 @@ export class NbAuthSimpleToken extends NbAuthToken {
   static NAME = 'nb:auth:simple:token';
 
   constructor(protected readonly token: any,
-              protected readonly ownerStrategyName: string) {
+              protected readonly ownerStrategyName: string,
+              protected createdAt?: Date) {
     super();
+    // If not coming back from local storage, simple token get 'now' for createdAt
+    if (!this.createdAt) {
+      this.buildCreatedAt();
+    }
+  }
+
+  protected buildCreatedAt() {
+    // For simple tokens, the creation date is 'now'
+    this.createdAt = new Date();
+  }
+
+  /**
+   * Returns the token's creation date
+   * @returns {Date}
+   */
+  getCreatedAt(): Date {
+    return this.createdAt;
   }
 
   /**
@@ -81,6 +101,18 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
   static NAME = 'nb:auth:jwt:token';
 
   /**
+   * for JWT token, the iat (issued at) field of the token payload contains the creation Date
+   */
+  protected buildCreatedAt() {
+    const decoded = this.getPayload();
+    if (decoded.hasOwnProperty('iat')) {
+      this.createdAt = new Date(Number(decoded.iat) * 1000); // (JWT tokens set in seconds
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+
+  /**
    * Returns payload object
    * @returns any
    */
@@ -119,10 +151,8 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
     if (!decoded.hasOwnProperty('exp')) {
       return null;
     }
-
     const date = new Date(0);
-    date.setUTCSeconds(decoded.exp);
-
+    date.setTime(Number(decoded.exp) * 1000); // 'cause jwt token are set in seconds
     return date;
   }
 
@@ -152,7 +182,8 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
   static NAME = 'nb:auth:oauth2:token';
 
   constructor(protected data: { [key: string]: string|number }|string = {},
-              protected ownerStrategyName: string) {
+              protected ownerStrategyName: string,
+              protected createdAd?: Date) {
     // we may get it as string when retrieving from a storage
     super(prepareOAuth2Token(data), ownerStrategyName);
   }
@@ -209,12 +240,8 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
     if (!this.token.hasOwnProperty('expires_in')) {
       return null;
     }
-
-    const date = new Date();
-    date.setUTCSeconds(new Date().getUTCSeconds() + Number(this.token.expires_in));
-
-    return date;
-  }
+    return new Date(this.createdAt.getTime() + Number(this.token.expires_in) * 1000);
+}
 
   /**
    * Convert to string

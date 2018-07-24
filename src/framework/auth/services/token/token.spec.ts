@@ -9,22 +9,28 @@ import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken } from './token';
 
 describe('auth token', () => {
   describe('NbAuthJWTToken', () => {
+    const now = new Date();
+
     // tslint:disable
     const simpleToken = new NbAuthSimpleToken('token','strategy');
-    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773', 'strategy');
-    const emptyJWTToken = new NbAuthJWTToken('..', 'strategy');
-    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY','strategy');
+    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c', 'strategy');
+    const emptyJWTToken = new NbAuthJWTToken('..', 'strategy', now);
+    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY','strategy', now);
 
-    const invalidJWTToken = new NbAuthJWTToken('.','strategy');
+    const invalidJWTToken = new NbAuthJWTToken('.','strategy', now);
 
-    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
+    const noIatJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJleHAiOjE1MzI0MzcyMDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.cfwQlKo6xomXkE-U-SOqse2GjdxncOuhdd1VWIOiYzA', 'strategy');
+
+    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.heHVXkHexwqbPCPUAvkJlXO6tvxzxTKf4iP0OWBbp7Y','strategy');
 
     const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
+
     // tslint:enable
 
     it('getPayload success', () => {
       expect(validJWTToken.getPayload())
-        .toEqual(JSON.parse('{"iss":"scotch.io","exp":2517314066175,"name":"Chris Sevilleja","admin":true}'));
+      // tslint:disable-next-line
+        .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
     });
 
     it('getPayload, not valid JWT token, must consist of three parts', () => {
@@ -51,9 +57,25 @@ describe('auth token', () => {
           `The token ${invalidBase64JWTToken.getValue()} is not valid JWT token and cannot be parsed.`));
     });
 
+    it('getCreatedAt success : now for simpleToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(simpleToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getCreatedAt success : exp for validJWTToken', () => {
+      const date = new Date();
+      date.setTime(1532350800000)
+      expect(validJWTToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success : now for noIatJWTToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(noIatJWTToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
     it('getTokenExpDate success', () => {
       const date = new Date(0);
-      date.setUTCSeconds(2517314066175);
+      date.setTime(2532350800000);
       expect(validJWTToken.getTokenExpDate()).toEqual(date);
     });
 
@@ -71,7 +93,7 @@ describe('auth token', () => {
 
     it('isValid fail', () => {
       // without token
-      expect(new NbAuthJWTToken('', 'strategy').isValid()).toBeFalsy();
+      expect(new NbAuthJWTToken('', 'strategy', new Date()).isValid()).toBeFalsy();
 
       // expired date
       expect(expiredJWTToken.isValid()).toBeFalsy();
@@ -94,7 +116,8 @@ describe('auth token', () => {
 
     it('getPayload success', () => {
       expect(validJWTToken.getPayload())
-        .toEqual(JSON.parse('{"iss":"scotch.io","exp":2517314066175,"name":"Chris Sevilleja","admin":true}'));
+      // tslint:disable-next-line
+        .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
     });
 
     it('NbAuthJWTToken name', () => {
@@ -123,7 +146,7 @@ describe('auth token', () => {
       example_parameter: 'example_value',
     };
 
-    const validToken = new NbAuthOAuth2Token(token, 'strategy');
+    let validToken = new NbAuthOAuth2Token(token, 'strategy');
     const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
 
     const noExpToken = new NbAuthOAuth2Token({
@@ -144,14 +167,12 @@ describe('auth token', () => {
           `Cannot extract payload from an empty token.`));
     });
 
-    it('getTokenExpDate success', () => {
+    it('getExpDate success', () => {
+      // recreate it here if we want to be in the same second
+      validToken = new NbAuthOAuth2Token(token, 'strategy');
       const date = new Date();
-      date.setUTCSeconds(date.getUTCSeconds() + 3600);
-      expect(validToken.getTokenExpDate().getFullYear()).toEqual(date.getFullYear());
-      expect(validToken.getTokenExpDate().getDate()).toEqual(date.getDate());
-      expect(validToken.getTokenExpDate().getMonth()).toEqual(date.getMonth());
-      expect(validToken.getTokenExpDate().getMinutes()).toEqual(date.getMinutes());
-      expect(validToken.getTokenExpDate().getSeconds()).toEqual(date.getSeconds());
+      date.setTime(date.getTime() + 3600 * 1000);
+      expect(validToken.getTokenExpDate().getTime() - date.getTime() < 10);
     });
 
     it('getTokenExpDate is empty', () => {
