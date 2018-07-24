@@ -3,20 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
 import { NbCalendarDatePipe } from '../calendar-date.pipe';
-import { NbCalendarPageableHeaderComponent } from './calendar-pageable-header.component';
+import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
 
 
-describe('Component: NbCalendarPageableHeader', () => {
-  let fixture: ComponentFixture<NbCalendarPageableHeaderComponent<Date>>;
-  let component: NbCalendarPageableHeaderComponent<Date>;
+describe('Component: NbCalendarPageableNavigation', () => {
+  let fixture: ComponentFixture<NbCalendarPageableNavigationComponent<Date>>;
+  let component: NbCalendarPageableNavigationComponent<Date>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbCalendarDatePipe, NbCalendarPageableHeaderComponent],
+      declarations: [NbCalendarDatePipe, NbCalendarPageableNavigationComponent],
       providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
     });
-    fixture = TestBed.createComponent<NbCalendarPageableHeaderComponent<Date>>(NbCalendarPageableHeaderComponent);
+    fixture = TestBed.createComponent<NbCalendarPageableNavigationComponent<Date>>(NbCalendarPageableNavigationComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

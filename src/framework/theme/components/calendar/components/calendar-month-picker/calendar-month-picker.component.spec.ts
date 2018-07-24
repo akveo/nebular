@@ -24,13 +24,13 @@ describe('Component: NbCalendarMonthPicker', () => {
   });
 
   it('should contain header and body', () => {
-    expect(componentEl.querySelector('nb-calendar-header')).toBeDefined();
+    expect(componentEl.querySelector('nb-calendar-navigation')).toBeDefined();
     expect(componentEl.querySelector('.body')).toBeDefined();
   });
 
   it('should fire changeMode event when click on header', () => {
     component.changeMode.subscribe(e => expect(e).toBeUndefined());
-    componentEl.querySelector('nb-calendar-header').dispatchEvent(new Event('click'));
+    componentEl.querySelector('nb-calendar-navigation').dispatchEvent(new Event('click'));
   });
 
   it('should render twelve month', async(() => {

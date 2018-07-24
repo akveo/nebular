@@ -12,8 +12,8 @@ import { NbCalendarCellComponent } from './components/calendar-cell/calendar-cel
 import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
 import { NbCalendarMonthViewComponent } from './components/calendar-month-view/calendar-month-view.component';
-import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
-import { NbCalendarPageableHeaderComponent } from './components/calendar-header/calendar-pageable-header.component';
+import { NbCalendarNavigationComponent } from './components/calendar-navigation/calendar-navigation.component';
+import { NbCalendarPageableNavigationComponent } from './components/calendar-navigation/calendar-pageable-navigation.component';
 import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/calendar-days-names.component';
 import { NbCalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 
@@ -28,8 +28,8 @@ const NB_CALENDAR_PROVIDERS = [
 ];
 
 const COMPONENTS = [
-  NbCalendarHeaderComponent,
-  NbCalendarPageableHeaderComponent,
+  NbCalendarNavigationComponent,
+  NbCalendarPageableNavigationComponent,
   NbCalendarDaysNamesComponent,
   NbCalendarWeekComponent,
   NbCalendarYearPickerComponent,

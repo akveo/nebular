@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-header',
-  styleUrls: ['./calendar-header.component.scss'],
+  selector: 'nb-calendar-navigation',
+  styleUrls: ['./calendar-navigation.component.scss'],
   template: `
     <div class="header single-page">
       <button class="btn btn-success" (click)="click.emit()">
@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class NbCalendarHeaderComponent<D> {
+export class NbCalendarNavigationComponent<D> {
   @Input() date: D;
   @Output() click = new EventEmitter<void>();
 }

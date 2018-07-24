@@ -2,21 +2,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
-import { NbCalendarHeaderComponent } from './calendar-header.component';
+import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarDatePipe } from '../calendar-date.pipe';
 
 
-describe('Component: NbCalendarHeader', () => {
-  let fixture: ComponentFixture<NbCalendarHeaderComponent<Date>>;
-  let component: NbCalendarHeaderComponent<Date>;
+describe('Component: NbCalendarNavigation', () => {
+  let fixture: ComponentFixture<NbCalendarNavigationComponent<Date>>;
+  let component: NbCalendarNavigationComponent<Date>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbCalendarDatePipe, NbCalendarHeaderComponent],
+      declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent],
       providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
     });
-    fixture = TestBed.createComponent<NbCalendarHeaderComponent<Date>>(NbCalendarHeaderComponent);
+    fixture = TestBed.createComponent<NbCalendarNavigationComponent<Date>>(NbCalendarNavigationComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

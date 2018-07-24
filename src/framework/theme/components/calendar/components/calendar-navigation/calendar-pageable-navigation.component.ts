@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { NbCalendarHeaderComponent } from './calendar-header.component';
+import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 
 @Component({
-  selector: 'nb-calendar-pageable-header',
-  styleUrls: ['./calendar-header.component.scss'],
+  selector: 'nb-calendar-pageable-navigation',
+  styleUrls: ['./calendar-navigation.component.scss'],
   template: `
     <div class="header">
       <i class="nb-arrow-left" (click)="prev.emit()"></i>
@@ -16,7 +16,7 @@ import { NbCalendarHeaderComponent } from './calendar-header.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class NbCalendarPageableHeaderComponent<D> extends NbCalendarHeaderComponent<D> {
+export class NbCalendarPageableNavigationComponent<D> extends NbCalendarNavigationComponent<D> {
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
 }

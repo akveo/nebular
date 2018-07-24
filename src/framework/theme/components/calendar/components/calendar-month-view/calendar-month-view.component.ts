@@ -14,12 +14,12 @@ import { NbCalendarCell, NbCalendarMonth } from '../../model';
   selector: 'nb-calendar-month-view',
   styleUrls: ['./calendar-month-view.component.scss'],
   template: `
-    <nb-calendar-pageable-header
+    <nb-calendar-pageable-navigation
       [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
       (click)="changeMode.emit()">
-    </nb-calendar-pageable-header>
+    </nb-calendar-pageable-navigation>
 
     <div class="body">
       <nb-calendar-days-names></nb-calendar-days-names>

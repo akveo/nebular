@@ -14,7 +14,7 @@ import { batch, range } from '../../helpers';
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-    <nb-calendar-header [date]="activeMonth" (click)="changeMode.emit()"></nb-calendar-header>
+    <nb-calendar-navigation [date]="activeMonth" (click)="changeMode.emit()"></nb-calendar-navigation>
 
     <div class="body">
       <div class="chunk-row" *ngFor="let chunk of months">

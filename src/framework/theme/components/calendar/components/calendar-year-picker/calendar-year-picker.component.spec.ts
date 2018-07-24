@@ -29,13 +29,13 @@ describe('Component: NbCalendarYearPicker', () => {
   });
 
   it('should contain header and body', () => {
-    expect(componentEl.querySelector('nb-calendar-pageable-header')).toBeDefined();
+    expect(componentEl.querySelector('nb-calendar-pageable-navigation')).toBeDefined();
     expect(componentEl.querySelector('.body')).toBeDefined();
   });
 
   it('should fire changeMode event when click on header', () => {
     component.changeMode.subscribe(e => expect(e).toBeUndefined());
-    componentEl.querySelector('nb-calendar-pageable-header').dispatchEvent(new Event('click'));
+    componentEl.querySelector('nb-calendar-pageable-navigation').dispatchEvent(new Event('click'));
   });
 
   it('should render 20 years', () => {

@@ -25,12 +25,12 @@ const defaultYearCount = 20;
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
   template: `
-    <nb-calendar-pageable-header
+    <nb-calendar-pageable-navigation
       [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
       (click)="changeMode.emit()">
-    </nb-calendar-pageable-header>
+    </nb-calendar-pageable-navigation>
 
     <div class="body">
       <div class="chunk-row" *ngFor="let chunk of years">
