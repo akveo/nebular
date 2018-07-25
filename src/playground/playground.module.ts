@@ -171,6 +171,7 @@ import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
+import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
@@ -333,6 +334,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
+  NbCardWithInfiniteNewsListComponent,
   NbScrollWindowComponent,
 ];
 

@@ -1,9 +1,12 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { NbListComponent } from '@nebular/theme/components/list/list.component';
 
 /**
  * Infinite list component.
  *
- * @stacked-example(Basic example, infinite-list/infinite-news-list.component)
+ * @stacked-example(Showcase, infinite-list/infinite-news-list.component)
+ *
+ * @stacked-example(Showcase, infinite-list/card-with-infinite-news-list.component)
  *
  */
 @Component({
@@ -49,6 +52,8 @@ export class NbInfiniteListComponent {
    * Emits when distance between top of the observed element and current scroll position is less than threshold.
    */
   @Output() loadPrev = new EventEmitter();
+
+  @ViewChild(NbListComponent, { read: ElementRef }) scrollable: ElementRef<Element>;
 
   emitLoadPrev() {
     this.loadPrev.emit();

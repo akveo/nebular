@@ -6,26 +6,26 @@ import {
   AfterViewInit,
   QueryList,
   ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, takeWhile } from 'rxjs/operators';
-import { NbListItemComponent, NbLayoutScrollService } from '@nebular/theme';
+import { NbListItemComponent, NbInfiniteListComponent } from '@nebular/theme';
 import { getElementHeight } from '@nebular/theme/components/helpers';
 import { NewsService, NewsPost } from './news.service';
 
 @Component({
   selector: 'nb-infinite-news-list',
   template: `
-    <nb-card>
+    <nb-card size="large">
       <div [nbSpinner]="loadingPrev"></div>
       <nb-infinite-list
+        [loadMoreThreshold]="threshold"
+        (loadNext)="loadNext()"
+        (loadPrev)="loadPrev()"
         [nbListPager]="pageSize"
         [startPage]="startPage"
-        (pageChange)="updateUrl($event)"
-        [loadMoreThreshold]="threshold"
-        [listenWindowScroll]="listenWindowScroll"
-        (loadNext)="loadNext()"
-        (loadPrev)="loadPrev()">
+        (pageChange)="updateUrl($event)">
 
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
@@ -39,11 +39,10 @@ import { NewsService, NewsPost } from './news.service';
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
 })
-export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   alive = true;
 
-  listenWindowScroll = true;
   threshold = 100;
 
   pageSize = 10;
@@ -57,12 +56,12 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
   private firstItem: Element;
 
   @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
+  @ViewChild(NbInfiniteListComponent) infiniteListComponent: NbInfiniteListComponent;
 
   constructor(
     private newsService: NewsService,
     private router: Router,
     private route: ActivatedRoute,
-    private scrollService: NbLayoutScrollService,
   ) {}
 
   ngOnInit() {
@@ -138,7 +137,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
       newItemsHeight += getElementHeight(nativeElement);
     });
 
-    this.scrollService.scrollTo(0, newItemsHeight);
+    this.infiniteListComponent.scrollable.nativeElement.scrollTo(0, newItemsHeight);
     this.firstItem = this.listItems.first.nativeElement;
   }
 

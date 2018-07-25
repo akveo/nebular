@@ -138,6 +138,7 @@ import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
+import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
 
 export const routes: Routes = [
   {
@@ -591,6 +592,10 @@ export const routes: Routes = [
           {
             path: 'infinite-news-list.component',
             component: NbInfiniteNewsListComponent,
+          },
+          {
+            path: 'card-with-infinite-news-list.component',
+            component: NbCardWithInfiniteNewsListComponent,
           },
         ],
       },
