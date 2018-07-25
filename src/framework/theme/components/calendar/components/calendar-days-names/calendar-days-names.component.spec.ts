@@ -5,7 +5,6 @@ import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 
 describe('Component: NbCalendarDaysNames', () => {
-  let component: NbCalendarDaysNamesComponent;
   let fixture: ComponentFixture<NbCalendarDaysNamesComponent>;
   let componentEl: HTMLElement;
 
@@ -15,7 +14,6 @@ describe('Component: NbCalendarDaysNames', () => {
       providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
     });
     fixture = TestBed.createComponent(NbCalendarDaysNamesComponent);
-    component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   });
