@@ -13,8 +13,8 @@ import { NbCalendarCell } from '../../model';
     </nb-calendar-cell>
   `,
 })
-export class NbCalendarWeekComponent<D> {
+export class NbCalendarWeekComponent {
   // TODO accept only cells, not week
-  @Input() week: NbCalendarCell<D>[];
-  @Output() click = new EventEmitter<NbCalendarCell<D>>();
+  @Input() week: NbCalendarCell[];
+  @Output() click = new EventEmitter<NbCalendarCell>();
 }

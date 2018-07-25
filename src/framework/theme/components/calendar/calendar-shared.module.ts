@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 
 
-import { NbNativeDateTimeUtilService } from './service/native-date-time-util.service';
+import { NbLocaleAdapter } from './service/locale-adapter';
+import { NbNativeLocaleAdapter } from './service/native-locale-adapter';
 import { NbDateTimeUtil } from './service/date-time-util';
 
 import {
@@ -27,8 +28,8 @@ import {
 
 
 const NB_CALENDAR_PROVIDERS = [
-  NbNativeDateTimeUtilService,
-  { provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService },
+  NbDateTimeUtil,
+  { provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter },
 ];
 
 const COMPONENTS = [

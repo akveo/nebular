@@ -5,15 +5,15 @@ import { batch, range } from '../helpers';
 import { NbCalendarCellStateService } from './calendar-cell-state.service';
 
 @Injectable()
-export class NbCalendarWeeksFactoryService<D> {
+export class NbCalendarWeeksFactoryService<T> {
 
   private static DAYS_IN_WEEK: number = 7;
 
-  constructor(protected dateTimeUtil: NbDateTimeUtil<D>,
-              protected cellStateService: NbCalendarCellStateService<D>) {
+  constructor(protected dateTimeUtil: NbDateTimeUtil,
+              protected cellStateService: NbCalendarCellStateService<T>) {
   }
 
-  createWeeks(context: NbCalendarMonthBuilderContext<D>): NbCalendarCell<D>[][] {
+  createWeeks(context: NbCalendarMonthBuilderContext<T>): NbCalendarCell[][] {
     const days = this.createDaysRange(context.activeMonth);
     const startOfMonth = this.dateTimeUtil.getMonthStart(context.activeMonth);
     const startOfWeekDayDiff = this.dateTimeUtil.getWeekStartDiff(startOfMonth);
@@ -28,29 +28,29 @@ export class NbCalendarWeeksFactoryService<D> {
       }
     }
 
-    return weeks.map(week => week.map((date: D) => this.createCellWithState(date, context)));
+    return weeks.map(week => week.map((date: Date) => this.createCellWithState(date, context)));
   }
 
-  protected createCellWithState(date: D, context: NbCalendarMonthBuilderContext<D>): NbCalendarCell<D> {
+  protected createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
     const cell = { date, state: [] };
     this.cellStateService.assignStates(cell, context);
     return cell;
   }
 
-  private createDaysRange(activeMonth: D): D[] {
+  private createDaysRange(activeMonth: Date): Date[] {
     const year = this.dateTimeUtil.getYear(activeMonth);
     const month = this.dateTimeUtil.getMonth(activeMonth);
     const daysInMonth: number = this.dateTimeUtil.getNumberOfDaysInMonth(activeMonth);
     return range(daysInMonth).map(i => this.dateTimeUtil.createDate(year, month, i + 1));
   }
 
-  private createPrevBoundingDays(activeMonth: D, startOffset: number): D[] {
+  private createPrevBoundingDays(activeMonth: Date, startOffset: number): Date[] {
     const month = this.dateTimeUtil.add(activeMonth, -1, 'm');
     const daysInMonth = this.dateTimeUtil.getNumberOfDaysInMonth(month);
     return this.createDaysRange(month).slice(daysInMonth - startOffset);
   }
 
-  private createNextBoundingDays(activeMonth: D): D[] {
+  private createNextBoundingDays(activeMonth: Date): Date[] {
     const month = this.dateTimeUtil.add(activeMonth, 1, 'm');
     const firstDay = this.dateTimeUtil.getMonthStart(month);
     const weekStartOffset = 7 - this.dateTimeUtil.getWeekStartDiff(firstDay);

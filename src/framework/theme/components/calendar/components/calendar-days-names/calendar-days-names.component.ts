@@ -10,11 +10,11 @@ import { NbCalendarDay, NbCalendarNameStyle } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarDaysNamesComponent<D> implements OnInit {
+export class NbCalendarDaysNamesComponent implements OnInit {
 
   days: NbCalendarDay[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(private dateTimeUtil: NbDateTimeUtil) {
   }
 
   ngOnInit() {

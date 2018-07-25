@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     <span class="header-today">Today</span>
   `,
 })
-export class NbCalendarHeaderComponent<D> {
-  @Input() date: D;
+export class NbCalendarHeaderComponent {
+  @Input() date: Date;
 }

@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
+import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 import { NbCalendarYearPickerComponent } from './calendar-year-picker.component';
 
 

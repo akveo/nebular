@@ -7,9 +7,9 @@
 import { Component } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarWeeksFactoryService } from './service/calendar-model-factory.service';
+import { NbCalendarWeeksFactoryService } from './service/calendar-week-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
-import { NbCalendarCellStateService } from '@nebular/theme/components/calendar/service/calendar-cell-state.service';
+import { NbCalendarCellStateService, NbCalendarBaseCellStateService  } from './service';
 
 /**
  * Basic example with including bounding dates
@@ -50,20 +50,23 @@ import { NbCalendarCellStateService } from '@nebular/theme/components/calendar/s
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [ NbCalendarCellStateService, NbCalendarWeeksFactoryService ],
+  providers: [
+    NbCalendarWeeksFactoryService,
+    { provide: NbCalendarCellStateService, useClass: NbCalendarBaseCellStateService },
+  ],
 })
-export class NbCalendarComponent<D> extends NbBaseCalendarComponent<D, D> {
+export class NbCalendarComponent extends NbBaseCalendarComponent<Date> {
 
-  constructor(dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(dateTimeUtil: NbDateTimeUtil) {
     super(dateTimeUtil);
   }
 
-  onDateChange(date: D) {
+  onDateChange(date: Date) {
     this.date = date;
     this.dateChange.emit(date);
   }
 
-  protected getInitialActiveMonthFromValue(): D {
+  protected getInitialActiveMonthFromValue(): Date {
     return this.date;
   }
 }

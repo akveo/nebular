@@ -29,20 +29,20 @@ import { batch, range } from '../../helpers';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent<D> implements OnInit {
+export class NbCalendarMonthPickerComponent implements OnInit {
 
-  @Input() activeMonth: D;
+  @Input() activeMonth: Date;
 
-  @Input() today: D;
+  @Input() today: Date;
 
   @Output() changeMode = new EventEmitter<void>();
   // TODO think about name, maybe it would be better to call this select or just click?
-  @Output() change = new EventEmitter<D>();
+  @Output() change = new EventEmitter<Date>();
 
   // TODO define type for month
   months: any[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(private dateTimeUtil: NbDateTimeUtil) {
   }
 
   ngOnInit() {

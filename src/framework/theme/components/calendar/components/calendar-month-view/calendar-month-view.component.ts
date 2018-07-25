@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarWeeksFactoryService } from '../../service/calendar-model-factory.service';
+import { NbCalendarWeeksFactoryService } from '../../service/calendar-week-factory.service';
 import { NbCalendarCell } from '../../model';
 
 @Component({
@@ -31,22 +31,22 @@ import { NbCalendarCell } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthViewComponent<D> implements OnChanges {
+export class NbCalendarMonthViewComponent<T> implements OnChanges {
 
-  @Input() activeMonth: D;
-  @Input() today: D;
-  @Input() selectedValue: D;
+  @Input() activeMonth: Date;
+  @Input() today: Date;
+  @Input() selectedValue: T;
   @Input() displayBoundingMonths: boolean = true;
 
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
   @Output() changeMode = new EventEmitter<void>();
 
-  @Output() change = new EventEmitter<D>();
+  @Output() change = new EventEmitter<Date>();
 
-  weeks: NbCalendarCell<D>[][];
+  weeks: NbCalendarCell[][];
 
-  constructor(private calendarModelFactory: NbCalendarWeeksFactoryService<D>) {
+  constructor(private calendarModelFactory: NbCalendarWeeksFactoryService<T>) {
   }
 
   ngOnChanges() {
@@ -55,7 +55,7 @@ export class NbCalendarMonthViewComponent<D> implements OnChanges {
     }
   }
 
-  onSelect(cell: NbCalendarCell<D>) {
+  onSelect(cell: NbCalendarCell) {
     this.change.emit(cell.date);
   }
 

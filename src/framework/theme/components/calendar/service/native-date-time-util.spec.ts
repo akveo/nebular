@@ -1,6 +1,6 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 
-import { NbNativeDateTimeUtilService } from './native-date-time-util.service';
+import { NbNativeDateTimeUtilService } from './date-time-util';
 import { range } from '@nebular/theme/components/calendar/helpers';
 
 let dateTimeUtil: NbNativeDateTimeUtilService;

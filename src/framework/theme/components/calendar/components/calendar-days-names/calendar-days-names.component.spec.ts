@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarDaysNamesComponent } from './calendar-days-names.component';
 import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/native-date-time-util.service';
+import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 
 
 describe('Component: NbCalendarDaysNames', () => {

@@ -17,9 +17,9 @@ import { NbDateTimeUtil } from '../../service/date-time-util';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarCellComponent<D> {
+export class NbCalendarCellComponent {
   @Input('date')
-  set _date(date: D) {
+  set _date(date: Date) {
     this.date = this.dateTimeUtil.getDate(date);
   }
 
@@ -34,6 +34,6 @@ export class NbCalendarCellComponent<D> {
 
   date: number;
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(private dateTimeUtil: NbDateTimeUtil) {
   }
 }

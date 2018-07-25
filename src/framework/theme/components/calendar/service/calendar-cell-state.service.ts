@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { NbCalendarCell, NbCalendarCellState, NbCalendarMonthBuilderContext } from '../model';
+
+import { NbCalendarCell, NbCalendarCellState, NbCalendarMonthBuilderContext, NbCalendarRange } from '../model';
 import { NbDateTimeUtil } from './date-time-util';
 
-@Injectable()
-export class NbCalendarCellStateService<D> {
-  constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
+export abstract class NbCalendarCellStateService<T> {
+  protected constructor(protected dateTimeUtil: NbDateTimeUtil) {
   }
 
-  assignStates(cell: NbCalendarCell<D>, context: NbCalendarMonthBuilderContext<D>) {
+  assignStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<T>) {
     this.assignCommonStates(cell, context);
 
     if (!context.selectedValue) {
       return;
     }
 
-    this.assignSelectionTypeSpecificStates(cell, context);
+    this.assignTypeSpecificStates(cell, context);
   }
 
-  protected assignCommonStates(cell: NbCalendarCell<D>, context: NbCalendarMonthBuilderContext<D>) {
+  protected assignCommonStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<T>) {
     if (this.dateTimeUtil.isSameDay(cell.date, context.today)) {
       cell.state.push(NbCalendarCellState.TODAY);
     }
@@ -27,9 +27,48 @@ export class NbCalendarCellStateService<D> {
     }
   }
 
-  protected assignSelectionTypeSpecificStates(cell: NbCalendarCell<D>, context: NbCalendarMonthBuilderContext<D>) {
+  protected abstract assignTypeSpecificStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<T>);
+}
+
+@Injectable()
+export class NbCalendarBaseCellStateService extends NbCalendarCellStateService<Date> {
+  constructor(protected dateTimeUtil: NbDateTimeUtil) {
+    super(dateTimeUtil);
+  }
+
+  protected assignTypeSpecificStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<Date>) {
     if (this.dateTimeUtil.isSameDay(cell.date, context.selectedValue)) {
       cell.state.push(NbCalendarCellState.SELECTED);
     }
+  }
+}
+
+@Injectable()
+export class NbCalendarRangeCellStateService extends NbCalendarCellStateService<NbCalendarRange> {
+
+  constructor(protected dateTimeUtil: NbDateTimeUtil) {
+    super(dateTimeUtil);
+  }
+
+  protected assignTypeSpecificStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<NbCalendarRange>) {
+    const { start, end } = context.selectedValue;
+    const { date } = cell;
+
+    if (start && end && this.isInRange(date, start, end)) {
+      cell.state.push(NbCalendarCellState.SELECTED_RANGE);
+    }
+
+    if (start && this.dateTimeUtil.isSameDay(date, start)) {
+      cell.state.push(NbCalendarCellState.SELECTED_RANGE_START);
+    }
+
+    if (start && end && this.dateTimeUtil.isSameDay(date, end)) {
+      cell.state.push(NbCalendarCellState.SELECTED_RANGE_END);
+    }
+  }
+
+  private isInRange(date: Date, start: Date, end: Date): boolean {
+    return this.dateTimeUtil.compareDates(date, start) > 0
+      && this.dateTimeUtil.compareDates(date, end) < 0;
   }
 }

@@ -7,12 +7,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbCalendarRangeModelFactoryService } from './service/calendar-range-model-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
 import { NbCalendarRange } from './model';
-import { NbCalendarCellStateService } from '@nebular/theme/components/calendar/service/calendar-cell-state.service';
-import { NbCalendarRangeCellStateService } from '@nebular/theme/components/calendar/service/calendar-range-cell-state.service';
-import { NbCalendarWeeksFactoryService } from '@nebular/theme/components/calendar/service/calendar-model-factory.service';
+import { NbCalendarCellStateService, NbCalendarRangeCellStateService, NbCalendarWeeksFactoryService } from './service';
 
 @Component({
   selector: 'nb-calendar-range',
@@ -23,21 +20,21 @@ import { NbCalendarWeeksFactoryService } from '@nebular/theme/components/calenda
     { provide: NbCalendarCellStateService, useClass: NbCalendarRangeCellStateService },
   ],
 })
-export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCalendarRange<D>> {
+export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendarRange> {
 
-  @Input('range') date: NbCalendarRange<D>;
+  @Input('range') date: NbCalendarRange;
   @Output('rangeChange') dateChange = new EventEmitter<any>();
 
-  constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(protected dateTimeUtil: NbDateTimeUtil) {
     super(dateTimeUtil);
   }
 
-  onDateChange(date: D) {
+  onDateChange(date: Date) {
     this.initDateIfNull();
     this.handleSelected(date);
   }
 
-  protected getInitialActiveMonthFromValue(): D {
+  protected getInitialActiveMonthFromValue(): Date {
     return (this.date && (this.date.end || this.date.start)) || this.today;
   }
 
@@ -47,7 +44,7 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
     }
   }
 
-  private handleSelected(date: D) {
+  private handleSelected(date: Date) {
     if (this.selectionStarted()) {
       this.selectEnd(date);
     } else {
@@ -60,11 +57,11 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
     return start && !end;
   }
 
-  private selectStart(start: D) {
+  private selectStart(start: Date) {
     this.selectRange({ start });
   }
 
-  private selectEnd(date: D) {
+  private selectEnd(date: Date) {
     const { start } = this.date;
 
     if (this.dateTimeUtil.compareDates(date, start) > 0) {
@@ -74,7 +71,7 @@ export class NbCalendarRangeComponent<D> extends NbBaseCalendarComponent<D, NbCa
     }
   }
 
-  private selectRange(range: NbCalendarRange<D>) {
+  private selectRange(range: NbCalendarRange) {
     this.date = range;
     this.dateChange.emit(range);
   }

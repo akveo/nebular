@@ -9,23 +9,23 @@ import { EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarViewMode } from './model';
 
-export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
+export abstract class NbBaseCalendarComponent<T> implements OnInit {
 
-  @Input() date: V;
+  @Input() date: T;
 
-  @Output() dateChange = new EventEmitter<V>();
+  @Output() dateChange = new EventEmitter<T>();
 
-  @Output() activeMonthChange = new EventEmitter<D>();
+  @Output() activeMonthChange = new EventEmitter();
 
-  today: D;
+  today: Date;
 
   ViewMode = NbCalendarViewMode;
 
-  activeMonth: D;
+  activeMonth: Date;
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
   activeYear: number;
 
-  protected constructor(protected dateTimeUtil: NbDateTimeUtil<D>) {
+  protected constructor(protected dateTimeUtil: NbDateTimeUtil) {
   }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
     this.activeViewMode = viewMode;
   }
 
-  setActiveMonth(activeMonth: D) {
+  setActiveMonth(activeMonth: Date) {
     this.activeMonth = activeMonth;
   }
 
@@ -58,9 +58,9 @@ export abstract class NbBaseCalendarComponent<D, V> implements OnInit {
     this.activeYear += 1;
   }
 
-  abstract onDateChange(date: D);
+  abstract onDateChange(date: Date);
 
-  protected abstract getInitialActiveMonthFromValue(): D;
+  protected abstract getInitialActiveMonthFromValue(): Date;
 
   private changeActiveMonth(direction) {
     this.activeMonth = this.dateTimeUtil.add(this.activeMonth, direction, 'm');

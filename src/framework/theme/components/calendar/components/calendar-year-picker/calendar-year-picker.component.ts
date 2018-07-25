@@ -45,9 +45,9 @@ const defaultYearCount = 20;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent<D> implements OnInit {
+export class NbCalendarYearPickerComponent implements OnInit {
 
-  @Input() activeMonth: D;
+  @Input() activeMonth: Date;
   @Input() startYear: number;
 
   @Output() next = new EventEmitter<any>();
@@ -58,7 +58,7 @@ export class NbCalendarYearPickerComponent<D> implements OnInit {
   // TODO define type
   years: any[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil<D>) {
+  constructor(private dateTimeUtil: NbDateTimeUtil) {
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@ export interface NbCalendarMonth {
 }
 
 export class NbCalendarWeek {
-  cells: Array<NbCalendarCell<Date>>;
+  cells: Array<NbCalendarCell>;
 }
 
 export interface NbCalendarDay {
@@ -12,21 +12,21 @@ export interface NbCalendarDay {
   isHoliday: boolean;
 }
 
-export class NbCalendarCell<D> {
-  date: D;
+export class NbCalendarCell {
+  date: Date;
   state: NbCalendarCellState[] = [];
 }
 
-export class NbCalendarMonthBuilderContext<D> {
-  activeMonth: D;
-  selectedValue: any;
-  today: D;
+export class NbCalendarMonthBuilderContext<T> {
+  activeMonth: Date;
+  selectedValue: T;
+  today: Date;
   includeBoundingMonths: boolean;
 }
 
-export class NbCalendarRange<D> {
-  start: D;
-  end?: D;
+export class NbCalendarRange {
+  start: Date;
+  end?: Date;
 }
 
 export enum NbCalendarViewMode {
