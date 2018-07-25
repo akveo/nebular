@@ -10,6 +10,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
+import 'intersection-observer';
 import { NbListItemComponent } from './list.component';
 
 @Directive({
