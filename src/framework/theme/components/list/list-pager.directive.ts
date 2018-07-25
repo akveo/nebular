@@ -30,7 +30,7 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
   startPage: number = 1;
 
   @Output()
-  nbListPagerChange = new EventEmitter<number>();
+  pageChange = new EventEmitter<number>();
 
   @ContentChildren(NbListItemComponent, { read: ElementRef })
   listItems: QueryList<ElementRef>;
@@ -65,7 +65,7 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
 
     if (mostVisiblePage && this.currentPage !== mostVisiblePage) {
       this.currentPage = mostVisiblePage;
-      this.nbListPagerChange.emit(this.currentPage);
+      this.pageChange.emit(this.currentPage);
     }
   }
 

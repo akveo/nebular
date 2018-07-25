@@ -14,7 +14,7 @@ import { NewsService, NewsPost } from './news.service';
       <nb-infinite-list
         [nbListPager]="pageSize"
         [startPage]="startPage"
-        (nbListPagerChange)="updateUrl($event)"
+        (pageChange)="updateUrl($event)"
         [loadMoreThreshold]="threshold"
         [listenWindowScroll]="listenWindowScroll"
         (loadNext)="loadNext()"
