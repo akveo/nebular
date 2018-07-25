@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+
 import { NbDateTimeUtil } from './date-time-util';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../model';
 import { batch, range } from '../helpers';
 import { NbCalendarCellStateService } from './calendar-cell-state.service';
+import { NbLocaleAdapter } from './locale-adapter';
 
 @Injectable()
 export class NbCalendarWeeksFactoryService<T> {
 
-  private static DAYS_IN_WEEK: number = 7;
 
-  constructor(protected dateTimeUtil: NbDateTimeUtil,
+  constructor(protected localeAdapter: NbLocaleAdapter,
               protected cellStateService: NbCalendarCellStateService<T>) {
   }
 
@@ -26,15 +27,15 @@ export class NbCalendarWeeksFactoryService<T> {
   private createDates(context: NbCalendarMonthBuilderContext<T>): Date[][] {
     const days = this.createDaysRange(context.activeMonth);
     const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
-    return batch(days, NbCalendarWeeksFactoryService.DAYS_IN_WEEK, startOfWeekDayDiff);
+    return batch(days, NbDateTimeUtil.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
   private addBoundingMonths(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>) {
-    if (weeks[0].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
+    if (weeks[0].length < NbDateTimeUtil.DAYS_IN_WEEK) {
       const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
       weeks[0].unshift(...this.createPrevBoundingDays(context.activeMonth, startOfWeekDayDiff));
     }
-    if (weeks[weeks.length - 1].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
+    if (weeks[weeks.length - 1].length < NbDateTimeUtil.DAYS_IN_WEEK) {
       weeks[weeks.length - 1].push(...this.createNextBoundingDays(context.activeMonth));
     }
   }
@@ -46,27 +47,27 @@ export class NbCalendarWeeksFactoryService<T> {
   }
 
   private createDaysRange(activeMonth: Date): Date[] {
-    const year = this.dateTimeUtil.getYear(activeMonth);
-    const month = this.dateTimeUtil.getMonth(activeMonth);
-    const daysInMonth: number = this.dateTimeUtil.getNumberOfDaysInMonth(activeMonth);
-    return range(daysInMonth).map(i => this.dateTimeUtil.createDate(year, month, i + 1));
+    const year = activeMonth.getFullYear();
+    const month = activeMonth.getMonth();
+    const daysInMonth: number = NbDateTimeUtil.getNumberOfDaysInMonth(activeMonth);
+    return range(daysInMonth).map(i => NbDateTimeUtil.createDate(year, month, i + 1));
   }
 
   private createPrevBoundingDays(activeMonth: Date, startOffset: number): Date[] {
-    const month = this.dateTimeUtil.add(activeMonth, -1, 'm');
-    const daysInMonth = this.dateTimeUtil.getNumberOfDaysInMonth(month);
+    const month = NbDateTimeUtil.addMonth(activeMonth, -1);
+    const daysInMonth = NbDateTimeUtil.getNumberOfDaysInMonth(month);
     return this.createDaysRange(month).slice(daysInMonth - startOffset);
   }
 
   private createNextBoundingDays(activeMonth: Date): Date[] {
-    const month = this.dateTimeUtil.add(activeMonth, 1, 'm');
-    const firstDay = this.dateTimeUtil.getMonthStart(month);
-    const weekStartOffset = 7 - this.dateTimeUtil.getWeekStartDiff(firstDay);
+    const month = NbDateTimeUtil.addMonth(activeMonth, 1);
+    const firstDay = NbDateTimeUtil.getMonthStart(month);
+    const weekStartOffset = 7 - this.localeAdapter.getWeekStartDiff(firstDay);
     return this.createDaysRange(month).slice(0, weekStartOffset);
   }
 
   private getStartOfWeekDayDiff(date: Date): number {
-    const startOfMonth = this.dateTimeUtil.getMonthStart(date);
-    return this.dateTimeUtil.getWeekStartDiff(startOfMonth);
+    const startOfMonth = NbDateTimeUtil.getMonthStart(date);
+    return this.localeAdapter.getWeekStartDiff(startOfMonth);
   }
 }

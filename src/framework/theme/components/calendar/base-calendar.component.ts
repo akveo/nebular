@@ -17,7 +17,7 @@ export abstract class NbBaseCalendarComponent<T> implements OnInit {
 
   @Output() activeMonthChange = new EventEmitter();
 
-  today: Date;
+  today: Date = new Date();
 
   ViewMode = NbCalendarViewMode;
 
@@ -25,13 +25,9 @@ export abstract class NbBaseCalendarComponent<T> implements OnInit {
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
   activeYear: number;
 
-  protected constructor(protected dateTimeUtil: NbDateTimeUtil) {
-  }
-
   ngOnInit() {
-    this.today = this.dateTimeUtil.createNowDate();
     this.activeMonth = this.getInitialActiveMonthFromValue() || this.today;
-    this.activeYear = Math.ceil(this.dateTimeUtil.getYear(this.activeMonth) - 10);
+    this.activeYear = Math.ceil(this.activeMonth.getFullYear() - 10);
   }
 
   setViewMode(viewMode: NbCalendarViewMode) {
@@ -63,7 +59,7 @@ export abstract class NbBaseCalendarComponent<T> implements OnInit {
   protected abstract getInitialActiveMonthFromValue(): Date;
 
   private changeActiveMonth(direction) {
-    this.activeMonth = this.dateTimeUtil.add(this.activeMonth, direction, 'm');
+    this.activeMonth = NbDateTimeUtil.addMonth(this.activeMonth, direction);
     this.activeMonthChange.emit(this.activeMonth);
   }
 }

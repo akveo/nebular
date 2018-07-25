@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarWeeksFactoryService } from '../../service/calendar-week-factory.service';
+import { NbCalendarWeeksFactoryService } from '../../service';
 import { NbCalendarCell } from '../../model';
 
 @Component({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbCalendarDay, NbCalendarNameStyle } from '../../model';
+import { NbCalendarDay } from '../../model';
+import { NbDateTimeUtil, NbLocaleAdapter } from '../../service';
 
 @Component({
   selector: 'nb-calendar-days-names',
@@ -14,7 +14,7 @@ export class NbCalendarDaysNamesComponent implements OnInit {
 
   days: NbCalendarDay[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil) {
+  constructor(private localeAdapter: NbLocaleAdapter) {
   }
 
   ngOnInit() {
@@ -23,14 +23,12 @@ export class NbCalendarDaysNamesComponent implements OnInit {
   }
 
   private createDaysNames(): NbCalendarDay[] {
-    return this.dateTimeUtil.getDayOfWeekNames(NbCalendarNameStyle.NARROW)
-    // TODO maybe we need one more util for cases like that?
-      .map((name, i) => ({ name, isHoliday: i % 6 === 0 }));
+    return this.localeAdapter.getDayOfWeekNames()
+      .map(NbDateTimeUtil.markIfHoliday);
   }
 
   private shiftStartOfWeek(days: NbCalendarDay[]): NbCalendarDay[] {
-    // TODO maybe we need one more util for cases like that?
-    for (let i = 0; i < this.dateTimeUtil.getStartOfWeekDay(); i++) {
+    for (let i = 0; i < this.localeAdapter.getStartOfWeek(); i++) {
       days.push(days.shift());
     }
 

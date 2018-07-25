@@ -5,11 +5,9 @@
  */
 
 import { Component } from '@angular/core';
-
-import { NbDateTimeUtil } from './service/date-time-util';
 import { NbCalendarWeeksFactoryService } from './service/calendar-week-factory.service';
 import { NbBaseCalendarComponent } from './base-calendar.component';
-import { NbCalendarCellStateService, NbCalendarBaseCellStateService  } from './service';
+import { NbCalendarBaseCellStateService, NbCalendarCellStateService } from './service';
 
 /**
  * Basic example with including bounding dates
@@ -56,10 +54,6 @@ import { NbCalendarCellStateService, NbCalendarBaseCellStateService  } from './s
   ],
 })
 export class NbCalendarComponent extends NbBaseCalendarComponent<Date> {
-
-  constructor(dateTimeUtil: NbDateTimeUtil) {
-    super(dateTimeUtil);
-  }
 
   onDateChange(date: Date) {
     this.date = date;

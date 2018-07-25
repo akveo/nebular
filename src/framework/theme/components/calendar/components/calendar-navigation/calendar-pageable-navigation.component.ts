@@ -15,7 +15,6 @@ import { NbCalendarNavigationComponent } from './calendar-navigation.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class NbCalendarPageableNavigationComponent extends NbCalendarNavigationComponent {
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();

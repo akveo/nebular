@@ -25,10 +25,6 @@ export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendar
   @Input('range') date: NbCalendarRange;
   @Output('rangeChange') dateChange = new EventEmitter<any>();
 
-  constructor(protected dateTimeUtil: NbDateTimeUtil) {
-    super(dateTimeUtil);
-  }
-
   onDateChange(date: Date) {
     this.initDateIfNull();
     this.handleSelected(date);
@@ -64,7 +60,7 @@ export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendar
   private selectEnd(date: Date) {
     const { start } = this.date;
 
-    if (this.dateTimeUtil.compareDates(date, start) > 0) {
+    if (NbDateTimeUtil.compareDates(date, start) > 0) {
       this.selectRange({ start, end: date });
     } else {
       this.selectRange({ start: date, end: start });

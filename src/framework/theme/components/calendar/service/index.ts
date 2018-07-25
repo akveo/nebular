@@ -1,5 +1,9 @@
 export {
-  NbCalendarCellStateService, NbCalendarRangeCellStateService, NbCalendarBaseCellStateService,
-}from './calendar-cell-state.service';
+  NbCalendarCellStateService,
+  NbCalendarRangeCellStateService,
+  NbCalendarBaseCellStateService,
+} from './calendar-cell-state.service';
 export { NbCalendarWeeksFactoryService } from './calendar-week-factory.service';
 export { NbDateTimeUtil } from './date-time-util';
+export { NbLocaleAdapter } from './locale-adapter';
+export { NbNativeLocaleAdapter } from './native-locale-adapter';

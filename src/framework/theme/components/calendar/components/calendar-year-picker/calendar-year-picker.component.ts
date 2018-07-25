@@ -4,15 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges, OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { batch, range } from '../../helpers';
@@ -58,15 +50,12 @@ export class NbCalendarYearPickerComponent implements OnInit {
   // TODO define type
   years: any[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil) {
-  }
-
   ngOnInit() {
     this.initYears();
   }
 
   initYears() {
-    const selectedYear = this.dateTimeUtil.getYear(this.activeMonth);
+    const selectedYear = this.activeMonth.getFullYear();
 
     // TODO maybe we need one more util for cases like that?
     const years = range(defaultYearCount)
@@ -79,9 +68,9 @@ export class NbCalendarYearPickerComponent implements OnInit {
   }
 
   onClick(year) {
-    const month = this.dateTimeUtil.getMonth(this.activeMonth);
-    const day = this.dateTimeUtil.getDate(this.activeMonth);
-    const event = this.dateTimeUtil.createDate(year, month, day);
+    const month = this.activeMonth.getMonth();
+    const day = this.activeMonth.getDate();
+    const event = NbDateTimeUtil.createDate(year, month, day);
     this.change.emit(event);
   }
 }

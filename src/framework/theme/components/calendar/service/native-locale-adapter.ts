@@ -21,10 +21,10 @@ const DEFAULT_MONTH_NAMES = {
 };
 
 @Injectable()
-export class NbNativeLocaleAdapter extends NbLocaleAdapter<Date> {
+export class NbNativeLocaleAdapter extends NbLocaleAdapter {
   protected locale: string;
 
-  constructor(@Inject(LOCALE_ID) locale: string, protected dateUtil: NbDateTimeUtil) {
+  constructor(@Inject(LOCALE_ID) locale: string) {
     super();
     this.locale = locale;
   }
@@ -39,7 +39,7 @@ export class NbNativeLocaleAdapter extends NbLocaleAdapter<Date> {
 
   /* returns month name */
   getMonthName(date: Date): string {
-    const index: number = this.dateUtil.getMonth(date);
+    const index: number = date.getMonth();
     return this.getMonthNameByIndex(index);
   }
 

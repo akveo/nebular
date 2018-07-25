@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { batch, range } from '../../helpers';
+import { NbLocaleAdapter } from '@nebular/theme/components/calendar/service';
 
 // TODO refactor template with styles refactoring
 @Component({
@@ -42,7 +43,7 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   // TODO define type for month
   months: any[];
 
-  constructor(private dateTimeUtil: NbDateTimeUtil) {
+  constructor(private localeAdapter: NbLocaleAdapter) {
   }
 
   ngOnInit() {
@@ -50,13 +51,13 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
 
   initMonths() {
-    const selectedMonth = this.dateTimeUtil.getMonth(this.activeMonth);
+    const selectedMonth = this.activeMonth.getMonth();
 
     // TODO maybe we need one more util for cases like that?
     const months = range(12)
       .map(index => ({
         value: index,
-        label: this.dateTimeUtil.getMonthNameByIndex(index),
+        label: this.localeAdapter.getMonthNameByIndex(index),
         selected: selectedMonth === index,
       }));
 
@@ -64,9 +65,9 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
 
   onClick(month) {
-    const year = this.dateTimeUtil.getYear(this.activeMonth);
-    const day = this.dateTimeUtil.getDate(this.activeMonth);
-    const event = this.dateTimeUtil.createDate(year, month, day);
+    const year = this.activeMonth.getFullYear();
+    const day = this.activeMonth.getDate();
+    const event = NbDateTimeUtil.createDate(year, month, day);
     this.change.emit(event);
   }
 }

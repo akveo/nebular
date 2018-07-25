@@ -7,7 +7,6 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbCheckboxModule } from '../checkbox/checkbox.module';
 import { NbCalendarRangeComponent } from './calendar-range.component';
 import { NbCalendarSharedModule } from './calendar-shared.module';
 
@@ -16,7 +15,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [NbSharedModule, NbCheckboxModule, NbCalendarSharedModule],
+  imports: [NbSharedModule, NbCalendarSharedModule],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
 })

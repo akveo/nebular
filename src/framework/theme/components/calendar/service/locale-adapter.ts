@@ -1,4 +1,4 @@
-export abstract class NbLocaleAdapter<D> {
+export abstract class NbLocaleAdapter {
   protected locale: string;
 
   /**
@@ -8,9 +8,13 @@ export abstract class NbLocaleAdapter<D> {
   abstract getStartOfWeek(): number;
 
   /* returns month name */
-  abstract getMonthName(date: D): string;
+  abstract getMonthName(date: Date): string;
   abstract getMonthNameByIndex(index: number): string;
   abstract getMonthNames(): string[];
 
   abstract getDayOfWeekNames(): string[];
+
+  getWeekStartDiff(date: Date): number {
+    return (7 - this.getStartOfWeek() + date.getDay()) % 7;
+  }
 }

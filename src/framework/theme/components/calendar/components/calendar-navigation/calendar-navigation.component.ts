@@ -12,7 +12,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class NbCalendarNavigationComponent {
   @Input() date: Date;
   @Output() click = new EventEmitter<void>();

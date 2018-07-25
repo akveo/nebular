@@ -1,14 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { NbDateTimeUtil } from '../../service/date-time-util';
+import { NbLocaleAdapter } from '../../service';
 
 @Pipe({ name: 'nbCalendarDate' })
 export class NbCalendarDatePipe implements PipeTransform {
 
-  constructor(private dateTimeUtil: NbDateTimeUtil) {
+  constructor(private localeAdapter: NbLocaleAdapter) {
   }
 
   transform(date: Date): string {
-    return date ? `${this.dateTimeUtil.getMonthName(date)} ${this.dateTimeUtil.getYear(date)}` : '';
+    return date ? `${this.localeAdapter.getMonthName(date)} ${date.getFullYear()}` : '';
   }
 }

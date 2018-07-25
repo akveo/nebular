@@ -7,7 +7,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { NbCalendarCellState } from '../../model';
-import { NbDateTimeUtil } from '../../service/date-time-util';
 
 @Component({
   selector: 'nb-calendar-cell',
@@ -20,7 +19,7 @@ import { NbDateTimeUtil } from '../../service/date-time-util';
 export class NbCalendarCellComponent {
   @Input('date')
   set _date(date: Date) {
-    this.date = this.dateTimeUtil.getDate(date);
+    this.date = date.getDate();
   }
 
   @Input() state: NbCalendarCellState[];
@@ -33,7 +32,4 @@ export class NbCalendarCellComponent {
   }
 
   date: number;
-
-  constructor(private dateTimeUtil: NbDateTimeUtil) {
-  }
 }
