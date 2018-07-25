@@ -57,9 +57,6 @@ export class NgdPageComponent implements OnDestroy, OnInit {
         filter((params: any) => params.subPage),
         map((params: any) => {
           const slag = `${params.page}_${params.subPage}`;
-
-          this.window.scrollTo(0, 0);
-
           return this.structureService.findPageBySlag(this.structureService.getPreparedStructure(), slag);
         }),
         filter(item => item),

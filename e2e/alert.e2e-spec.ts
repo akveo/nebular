@@ -51,7 +51,7 @@ describe('nb-alert', () => {
 
   alerts = prepareAlerts();
 
-  beforeEach((done) => {
+  beforeAll((done) => {
     browser.get('#/alert/alert-test.component').then(() => done());
   });
 
