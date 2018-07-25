@@ -6,10 +6,10 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID,
+  Renderer2, ViewChild, ViewContainerRef, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
@@ -17,6 +17,9 @@ import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
+import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
+import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 
 /**
@@ -69,6 +72,18 @@ export class NbLayoutColumnComponent {
  *
  * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
  *
+ * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
+ * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
+ *
+ * @stacked-example(Subheader, layout/layout-subheader.component)
+ *
  * @styles
  *
  * header-font-family
@@ -90,6 +105,11 @@ export class NbLayoutColumnComponent {
 export class NbLayoutHeaderComponent {
 
   @HostBinding('class.fixed') fixedValue: boolean;
+  @HostBinding('class.subheader') subheaderValue: boolean;
+
+  // tslint:disable-next-line
+  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
+  }
 
   /**
    * Makes the header sticky to the top of the nb-layout.
@@ -98,6 +118,18 @@ export class NbLayoutHeaderComponent {
   @Input()
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Places header on a side of the sidebar, and not above.
+   * Disables fixed mode for this header and remove a shadow from the sidebar.
+   * @param {boolean} val
+   */
+  @Input()
+  set subheader(val: boolean) {
+    this.subheaderValue = convertToBoolProperty(val);
+    this.fixedValue = false;
+    this.layout.withSubheader = this.subheaderValue;
   }
 }
 
@@ -219,12 +251,13 @@ export class NbLayoutFooterComponent {
   styleUrls: ['./layout.component.scss'],
   template: `
     <ng-template #layoutTopDynamicArea></ng-template>
-    <div class="scrollable-container" #scrollableContainer>
+    <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
-        <ng-content select="nb-layout-header"></ng-content>
+        <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
           <ng-content select="nb-sidebar"></ng-content>
           <div class="content" [class.center]="centerValue">
+            <ng-content select="nb-layout-header[subheader]"></ng-content>
             <div class="columns">
               <ng-content select="nb-layout-column"></ng-content>
             </div>
@@ -235,12 +268,14 @@ export class NbLayoutFooterComponent {
     </div>
   `,
 })
-export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
+export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   centerValue: boolean = false;
+  restoreScrollTopValue: boolean = true;
 
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
+  @HostBinding('class.with-subheader') withSubheader: boolean = false;
 
   /**
    * Defines whether the layout columns will be centered after some width
@@ -283,6 +318,15 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Restores scroll to the top of the page after navigation
+   * @param {boolean} val
+   */
+  @Input()
+  set restoreScrollTop(val: boolean) {
+    this.restoreScrollTopValue = convertToBoolProperty(val);
+  }
+
   @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
   @ViewChild('scrollableContainer', { read: ElementRef }) scrollableContainerRef: ElementRef;
 
@@ -301,6 +345,9 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
+    protected scrollService: NbLayoutScrollService,
+    protected rulerService: NbLayoutRulerService,
+    protected scrollTop: NbRestoreScrollTopHelper,
   ) {
 
     this.themeService.onThemeChange()
@@ -340,6 +387,34 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }));
     this.spinnerService.load();
 
+    this.rulerService.onGetDimensions()
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getDimensions());
+        listener.complete();
+      });
+
+    this.scrollService.onGetPosition()
+      .pipe(
+        takeWhile(() => this.alive),
+      )
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollPosition());
+        listener.complete();
+      });
+
+    this.scrollTop
+      .shouldRestore()
+      .pipe(
+        filter(() => this.restoreScrollTopValue),
+        takeWhile(() => this.alive),
+      )
+      .subscribe(() => {
+        this.scroll(0, 0);
+      });
+
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
@@ -372,11 +447,11 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         this.renderer.setProperty(this.document, 'dir', direction);
       });
 
-    this.afterViewInit$.next(true);
-  }
+    this.scrollService.onManualScroll()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
 
-  ngOnInit() {
-    this.initScrollTop();
+    this.afterViewInit$.next(true);
   }
 
   ngOnDestroy() {
@@ -384,19 +459,87 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     this.alive = false;
   }
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll($event) {
+    this.scrollService.fireScrollChange($event);
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.themeService.changeWindowWidth(event.target.innerWidth);
   }
 
-  private initScrollTop() {
-    this.router.events
-      .pipe(
-        takeWhile(() => this.alive),
-        filter(event => event instanceof NavigationEnd),
-      )
-      .subscribe(() => {
-        this.scrollableContainerRef.nativeElement.scrollTo && this.scrollableContainerRef.nativeElement.scrollTo(0, 0);
-      });
+  /**
+   * Returns scroll and client height/width
+   *
+   * Depending on the current scroll mode (`withScroll=true`) returns sizes from the body element
+   * or from the `.scrollable-container`
+   * @returns {NbLayoutDimensions}
+   */
+  getDimensions(): NbLayoutDimensions {
+    let clientWidth, clientHeight, scrollWidth, scrollHeight = 0;
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      clientWidth = container.clientWidth;
+      clientHeight = container.clientHeight;
+      scrollWidth = container.scrollWidth;
+      scrollHeight = container.scrollHeight;
+    } else {
+      const { documentElement, body } = this.document;
+      clientWidth = documentElement.clientWidth || body.clientWidth;
+      clientHeight = documentElement.clientHeight || body.clientHeight;
+      scrollWidth = documentElement.scrollWidth || body.scrollWidth;
+      scrollHeight = documentElement.scrollHeight || body.scrollHeight;
+    }
+
+    return {
+      clientWidth,
+      clientHeight,
+      scrollWidth,
+      scrollHeight,
+    };
+  }
+
+  /**
+   * Returns scroll position of current scroll container.
+   *
+   * If `withScroll` = true, returns scroll position of the `.scrollable-container` element,
+   * otherwise - of the scrollable element of the window (which may be different depending of a browser)
+   *
+   * @returns {NbScrollPosition}
+   */
+  getScrollPosition(): NbScrollPosition {
+    if (this.withScrollValue) {
+      const container = this.scrollableContainerRef.nativeElement;
+      return { x: container.scrollLeft, y: container.scrollTop };
+    }
+
+    const documentRect = this.document.documentElement.getBoundingClientRect();
+
+    const x = -documentRect.left || this.document.body.scrollLeft || this.window.scrollX ||
+      this.document.documentElement.scrollLeft || 0;
+
+    const y = -documentRect.top || this.document.body.scrollTop || this.window.scrollY ||
+      this.document.documentElement.scrollTop || 0;
+
+
+    return { x, y };
+  }
+
+  private scroll(x: number, y: number) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    if (this.withScrollValue) {
+      const scrollable = this.scrollableContainerRef.nativeElement;
+      if (scrollable.scrollTo) {
+        scrollable.scrollTo(x, y);
+      } else {
+        scrollable.scrollLeft = x;
+        scrollable.scrollTop = y;
+      }
+    } else {
+      this.window.scrollTo(x, y);
+    }
   }
 }

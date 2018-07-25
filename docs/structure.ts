@@ -74,6 +74,16 @@ export const structure = [
             source: 'enabling-theme-system.md',
           },
         ],
+      },      {
+        type: 'page',
+        name: 'Change Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-change.md',
+          },
+        ],
       },
       {
         type: 'page',
@@ -216,6 +226,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Stepper',
+        icon: 'stepper.svg',
+        source: [
+          'NbStepperComponent',
+          'NbStepComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Chat UI',
         icon: 'chat-ui.svg',
         source: [
@@ -251,6 +270,22 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
+        source: [
+          'NbButtonComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'NbSpinnerDirective',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Progress Bar',
         icon: 'progress-bar.svg',
         source: [
@@ -281,24 +316,17 @@ export const structure = [
           'NbContextMenuDirective',
         ],
       },
-      // {
-      //   type: 'tabs',
-      //   name: 'Chips',
-      //   icon: 'chips.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Button',
-      //   icon: 'button.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Modal',
-      //   icon: 'modal.svg',
-      //   source: [],
-      // },
+      {
+        type: 'tabs',
+        name: 'Accordion',
+        icon: 'accordion.svg',
+        source: [
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
     ],
   },
   {
@@ -313,17 +341,6 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbThemeService',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'SpinnerService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbSpinnerService',
           },
         ],
       },
@@ -346,6 +363,38 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbJSThemesRegistry',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'LayoutScrollService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutScrollService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbScrollPosition',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'LayoutRulerService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutRulerService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDimensions',
           },
         ],
       },
@@ -586,6 +635,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'security-acl-configuration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Multiple User Roles',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'security-multiple-roles.md',
           },
         ],
       },

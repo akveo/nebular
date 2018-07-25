@@ -110,6 +110,29 @@ import { NbChatDropComponent } from './chat/chat-drop.component';
 import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
 import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
 import { NbChatTestComponent } from './chat/chat-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
+import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionTestComponent } from './accordion/accordion-test.component';
+import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
+import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
+import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
+import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const routes: Routes = [
   {
@@ -146,6 +169,39 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'button',
+        children: [
+          {
+            path: 'button-showcase.component',
+            component: NbButtonShowcaseComponent,
+          },
+          {
+            path: 'button-colors.component',
+            component: NbButtonColorsComponent,
+          },
+          {
+            path: 'button-shapes.component',
+            component: NbButtonShapesComponent,
+          },
+          {
+            path: 'button-hero.component',
+            component: NbButtonHeroComponent,
+          },
+          {
+            path: 'button-outline.component',
+            component: NbButtonOutlineComponent,
+          },
+          {
+            path: 'button-sizes.component',
+            component: NbButtonSizesComponent,
+          },
+          {
+            path: 'button-types.component',
+            component: NbButtonTypesComponent,
+          },
+        ],
+      },
+      {
         path: 'checkbox',
         children: [
           {
@@ -163,6 +219,31 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'spinner',
+        children: [
+          {
+            path: 'spinner-card.component',
+            component: NbSpinnerCardComponent,
+          },
+          {
+            path: 'spinner-tabs.component',
+            component: NbSpinnerTabsComponent,
+          },
+          {
+            path: 'spinner-button.component',
+            component: NbSpinnerButtonComponent,
+          },
+          {
+            path: 'spinner-sizes.component',
+            component: NbSpinnerSizesComponent,
+          },
+          {
+            path: 'spinner-colors.component',
+            component: NbSpinnerColorsComponent,
           },
         ],
       },
@@ -357,6 +438,27 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'stepper',
+        children: [
+          {
+            path: 'stepper-test.component',
+            component: NbStepperTestComponent,
+          },
+          {
+            path: 'stepper-showcase.component',
+            component: NbStepperShowcaseComponent,
+          },
+          {
+            path: 'stepper-validation.component',
+            component: NbStepperValidationComponent,
+          },
+          {
+            path: 'stepper-vertical.component',
+            component: NbStepperVerticalComponent,
+          },
+        ],
+      },
+      {
         path: 'user',
         children: [
           {
@@ -436,6 +538,27 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'accordion',
+        children: [
+          {
+            path: 'accordion-showcase.component',
+            component: NbAccordionShowcaseComponent,
+          },
+          {
+            path: 'accordion-multi.component',
+            component: NbAccordionMultiComponent,
+          },
+          {
+            path: 'accordion-toggle.component',
+            component: NbAccordionToggleComponent,
+          },
+          {
+            path: 'accordion-test.component',
+            component: NbAccordionTestComponent,
+          },
+        ],
+      },
     ],
   },
   {
@@ -497,6 +620,14 @@ export const routes: Routes = [
           {
             path: 'layout-fixed-header.component',
             component: NbLayoutFixedHeaderComponent,
+          },
+          {
+            path: 'layout-sidebar-subheader.component',
+            component: NbLayoutSidebarSubheaderComponent,
+          },
+          {
+            path: 'layout-subheader.component',
+            component: NbLayoutSubheaderComponent,
           },
           {
             path: 'layout-column-left.component',
@@ -654,11 +785,24 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'scroll',
+        children: [
+          {
+            path: 'scroll-window.component',
+            component: NbScrollWindowComponent,
+          },
+        ],
+      },
     ],
   },
   {
     path: 'oauth2',
     loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
+  },
+  {
+    path: 'oauth2-password',
+    loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
   },
   {
     path: '',

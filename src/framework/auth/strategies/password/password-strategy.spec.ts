@@ -13,6 +13,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { nbAuthCreateToken, NbAuthSimpleToken } from '../../services';
 
+const ownerStrategyName = 'strategy';
+
 describe('password-auth-strategy', () => {
 
   let strategy: NbPasswordAuthStrategy;
@@ -26,7 +28,7 @@ describe('password-auth-strategy', () => {
     },
   };
 
-  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token');
+  const successToken = nbAuthCreateToken(NbAuthSimpleToken, 'token', ownerStrategyName);
 
   const noMessageResponse: any = {
     data: {
@@ -55,7 +57,7 @@ describe('password-auth-strategy', () => {
       strategy = _strategy;
       httpMock = _httpMock;
 
-      strategy.setOptions({});
+      strategy.setOptions({name: ownerStrategyName});
     },
   )));
 
@@ -66,7 +68,7 @@ describe('password-auth-strategy', () => {
   describe('out of the box', () => {
 
     beforeEach(() => {
-      strategy.setOptions({});
+      strategy.setOptions({name: ownerStrategyName});
     });
 
     it('authenticate success', (done: DoneFn) => {
@@ -77,7 +79,8 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -113,7 +116,8 @@ describe('password-auth-strategy', () => {
           expect(result.isFailure()).toBe(false);
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getRedirect()).toEqual('/');
 
           done();
@@ -250,7 +254,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successResponse.data.messages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual(null);
@@ -285,6 +290,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         login: {
           alwaysFail: true,
         },
@@ -396,6 +402,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         login: {
           endpoint: 'new',
         },
@@ -507,6 +514,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         baseEndpoint: '/api/auth/custom/',
       });
     });
@@ -601,6 +609,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         login: {
           method: 'get',
         },
@@ -718,6 +727,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
+        name: ownerStrategyName,
         login: {
           redirect,
         },
@@ -907,6 +917,7 @@ describe('password-auth-strategy', () => {
     beforeEach(() => {
 
       strategy.setOptions({
+        name: ownerStrategyName,
         login: {
           ...messages,
         },
@@ -1090,6 +1101,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1102,8 +1114,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1117,8 +1129,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1132,8 +1144,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1147,6 +1159,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         token: {
           getter: (module: string, res: HttpResponse<Object>) => res.body['token'],
         },
@@ -1159,8 +1172,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1174,8 +1187,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1189,8 +1202,8 @@ describe('password-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(false);
           expect(result.isSuccess()).toBe(true);
-          expect(result.getToken()).toEqual(successToken);
-
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           done();
         });
 
@@ -1204,6 +1217,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1312,6 +1326,7 @@ describe('password-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: ownerStrategyName,
         token: {
           key: 'token',
         },
@@ -1414,6 +1429,132 @@ describe('password-auth-strategy', () => {
         .flush(customResponse, { status: 401, statusText: 'Unauthorized' });
     });
 
+  });
+
+  describe('custom failWhenNoToken', () => {
+
+    it('authenticate fail as no token', (done: DoneFn) => {
+      strategy.authenticate(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/login')
+        .flush({});
+    });
+
+    it('authenticate does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        name: ownerStrategyName,
+        login: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.authenticate(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('You have been successfully logged in.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/login')
+        .flush({});
+    });
+
+    it('register fail as no token', (done: DoneFn) => {
+      strategy.register(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/register')
+        .flush({});
+    });
+
+    it('register does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        name: ownerStrategyName,
+        register: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.register(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('You have been successfully registered.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/register')
+        .flush({});
+    });
+
+    it('refreshToken fail as no token', (done: DoneFn) => {
+      strategy.refreshToken(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(true);
+          expect(result.isSuccess()).toBe(false);
+          expect(result.getMessages()).toEqual([]);
+          expect(result.getErrors()[0]).toEqual('Something went wrong.');
+          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush({});
+    });
+
+    it('refreshToken does not fail even when no token', (done: DoneFn) => {
+
+      strategy.setOptions({
+        name: ownerStrategyName,
+        refreshToken: {
+          failWhenNoToken: false,
+        },
+      });
+
+      strategy.refreshToken(loginData)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+          expect(result.getMessages()[0]).toEqual('Your token has been successfully refreshed.');
+          expect(result.getErrors()).toEqual([]);
+
+          done();
+        });
+
+      httpMock.expectOne('/api/auth/refresh-token')
+        .flush({});
+    });
   });
 
 });

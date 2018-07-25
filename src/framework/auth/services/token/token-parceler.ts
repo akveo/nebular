@@ -5,6 +5,7 @@ import { NB_AUTH_TOKENS } from '../../auth.options';
 
 export interface NbTokenPack {
   name: string,
+  ownerStrategyName: string,
   value: string,
 }
 
@@ -23,27 +24,34 @@ export class NbAuthTokenParceler {
   wrap(token: NbAuthToken): string {
     return JSON.stringify({
       name: token.getName(),
+      ownerStrategyName: token.getOwnerStrategyName(),
       value: token.toString(),
     });
   }
 
   unwrap(value: string): NbAuthToken {
-    let tokenClass: NbAuthTokenClass;
+    let tokenClass: NbAuthTokenClass = this.fallbackClass;
     let tokenValue = '';
-
-    try {
-      const tokenPack: NbTokenPack = JSON.parse(value);
+    let tokenOwnerStrategyName = '';
+    const tokenPack: NbTokenPack = this.parseTokenPack(value);
+    if (tokenPack) {
       tokenClass = this.getClassByName(tokenPack.name) || this.fallbackClass;
       tokenValue = tokenPack.value;
-    } catch (e) {
-      tokenClass = this.fallbackClass
+      tokenOwnerStrategyName = tokenPack.ownerStrategyName;
     }
 
-    return nbAuthCreateToken(tokenClass, tokenValue);
+    return nbAuthCreateToken(tokenClass, tokenValue, tokenOwnerStrategyName);
   }
 
   // TODO: this could be moved to a separate token registry
   protected getClassByName(name): NbAuthTokenClass {
     return this.tokenClasses.find((tokenClass: NbAuthTokenClass) => tokenClass.NAME === name);
+  }
+
+  protected parseTokenPack(value): NbTokenPack {
+    try {
+      return JSON.parse(value);
+    } catch (e) { }
+    return null;
   }
 }

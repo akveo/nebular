@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
@@ -25,6 +26,10 @@ import {
   NbProgressBarModule,
   NbAlertModule,
   NbChatModule,
+  NbSpinnerModule,
+  NbStepperModule,
+  NbAccordionModule,
+  NbButtonModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -116,6 +121,10 @@ import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
 import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
+import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
 import { NbPlaygroundSharedModule } from './shared/shared.module';
 import { NbProgressBarShowcaseComponent } from './progress-bar/progress-bar-showcase.component';
 import { NbProgressBarStatusComponent } from './progress-bar/progress-bar-status.component';
@@ -134,6 +143,25 @@ import { NbChatDropComponent } from './chat/chat-drop.component';
 import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
 import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
 import { NbChatTestComponent } from './chat/chat-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionTestComponent } from './accordion/accordion-test.component';
+import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
+import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
+import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
+import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -152,12 +180,16 @@ export const NB_MODULES = [
   NbUserModule,
   NbBadgeModule,
   NbContextMenuModule,
+  NbStepperModule,
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
   NbChatModule.forChild({
     messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
   }),
+  NbSpinnerModule,
+  NbAccordionModule,
+  NbButtonModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -179,6 +211,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbLayoutShowcaseComponent,
   NbLayoutWFooterComponent,
   NbLayoutFixedHeaderComponent,
+  NbLayoutSidebarSubheaderComponent,
+  NbLayoutSubheaderComponent,
   NbLayoutColumnLeftComponent,
   NbLayoutTestComponent,
   NbLayoutHeaderTestComponent,
@@ -259,6 +293,27 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbChatMessageTypesShowcaseComponent,
   NbChatConversationShowcaseComponent,
   NbChatTestComponent,
+  NbSpinnerCardComponent,
+  NbSpinnerTabsComponent,
+  NbSpinnerButtonComponent,
+  NbSpinnerSizesComponent,
+  NbSpinnerColorsComponent,
+  NbStepperShowcaseComponent,
+  NbStepperValidationComponent,
+  NbStepperVerticalComponent,
+  NbStepperTestComponent,
+  NbAccordionShowcaseComponent,
+  NbAccordionTestComponent,
+  NbAccordionToggleComponent,
+  NbAccordionMultiComponent,
+  NbButtonShowcaseComponent,
+  NbButtonColorsComponent,
+  NbButtonShapesComponent,
+  NbButtonHeroComponent,
+  NbButtonOutlineComponent,
+  NbButtonSizesComponent,
+  NbButtonTypesComponent,
+  NbScrollWindowComponent,
 ];
 
 
@@ -266,6 +321,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   imports: [
     CommonModule,
     NbPlaygroundRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     ...NB_MODULES,
   ],
   declarations: [

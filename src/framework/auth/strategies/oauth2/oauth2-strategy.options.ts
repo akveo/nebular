@@ -11,9 +11,10 @@ export enum NbOAuth2ResponseType {
   TOKEN = 'token',
 }
 
-// TODO: password, client_credentials
+// TODO: client_credentials
 export enum NbOAuth2GrantType {
   AUTHORIZATION_CODE = 'authorization_code',
+  PASSWORD = 'password',
   REFRESH_TOKEN = 'refresh_token',
 }
 

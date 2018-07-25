@@ -22,6 +22,10 @@
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/alert/alert.component.theme';
 @import '../../components/chat/chat.component.theme';
+@import '../../components/spinner/spinner.component.theme';
+@import '../../components/stepper/stepper.component.theme';
+@import '../../components/accordion/accordion.component.theme';
+@import '../../components/button/button.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -36,11 +40,15 @@
   @include nb-user-theme();
   @include nb-actions-theme();
   @include nb-search-theme();
+  @include nb-spinner-theme();
   @include nb-checkbox-theme();
   @include nb-progress-bar-theme();
   @include nb-badge-theme();
   @include nb-popover-theme();
+  @include nb-stepper-theme();
   @include nb-context-menu-theme();
   @include nb-alert-theme();
   @include nb-chat-theme();
+  @include nb-accordion-theme();
+  @include nb-buttons-theme();
 }
