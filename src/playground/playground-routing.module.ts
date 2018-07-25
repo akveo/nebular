@@ -133,8 +133,6 @@ import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
-import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
-import { NbInfiniteListWindowShowcaseComponent } from './infinite-list/infinite-list-window-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
@@ -586,14 +584,6 @@ export const routes: Routes = [
       {
         path: 'infinite-list',
         children: [
-          {
-            path: 'infinite-list-showcase.component',
-            component: NbInfiniteListShowcaseComponent,
-          },
-          {
-            path: 'infinite-list-window-showcase.component',
-            component: NbInfiniteListWindowShowcaseComponent,
-          },
           {
             path: 'infinite-images-list.component',
             component: NbInfiniteImagesListComponent,

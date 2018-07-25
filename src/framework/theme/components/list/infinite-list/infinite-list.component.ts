@@ -3,9 +3,8 @@ import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/co
 /**
  * Infinite list component.
  *
- * @stacked-example(Basic example, infinite-list/infinite-list-showcase.component)
+ * @stacked-example(Basic example, infinite-list/infinite-news-list.component)
  *
- * @stacked-example(News list, infinite-list/infinite-news-list.component)
  */
 @Component({
   selector: 'nb-infinite-list',

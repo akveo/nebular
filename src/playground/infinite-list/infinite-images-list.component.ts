@@ -13,8 +13,5 @@ import { ListBase } from './list-base';
       </nb-list-item>
     </nb-infinite-list>
   `,
-  styles: [`
-
-  `],
 })
 export class NbInfiniteImagesListComponent extends ListBase {}
