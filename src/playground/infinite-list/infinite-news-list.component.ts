@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { take, takeWhile } from 'rxjs/operators';
+import { NbListItemComponent, NbLayoutScrollService } from '@nebular/theme';
+import { getElementHeight } from '@nebular/theme/components/helpers';
 import { NewsService, NewsPost } from './news.service';
 
 @Component({
@@ -15,8 +17,8 @@ import { NewsService, NewsPost } from './news.service';
         (nbListPagerChange)="updateUrl($event)"
         [loadMoreThreshold]="threshold"
         [listenWindowScroll]="listenWindowScroll"
-        (loadPrev)="loadPrev()"
-        (loadNext)="loadNext()">
+        (loadNext)="loadNext()"
+        (loadPrev)="loadPrev()">
 
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
@@ -30,10 +32,12 @@ import { NewsService, NewsPost } from './news.service';
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
 })
-export class NbInfiniteNewsListComponent implements OnInit {
+export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  alive = true;
 
   listenWindowScroll = true;
-  threshold = 10;
+  threshold = 100;
 
   pageSize = 10;
   startPage: number;
@@ -44,10 +48,15 @@ export class NbInfiniteNewsListComponent implements OnInit {
 
   placeholders: any[] = [];
 
+  private firstItem: Element;
+
+  @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
+
   constructor(
     private newsService: NewsService,
     private router: Router,
     private route: ActivatedRoute,
+    private scrollService: NbLayoutScrollService,
   ) {}
 
   ngOnInit() {
@@ -60,6 +69,25 @@ export class NbInfiniteNewsListComponent implements OnInit {
       });
 
     this.loadNext();
+  }
+
+  ngAfterViewInit() {
+    let firstLoad = this.news.length === 0;
+    this.listItems.changes
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => {
+        if (firstLoad && this.news.length > 0) {
+          firstLoad = false;
+          this.firstItem = this.listItems.first.nativeElement;
+        } else {
+          this.restoreScrollPosition();
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.firstItem = null;
+    this.alive = false;
   }
 
   loadPrev() {
@@ -85,8 +113,23 @@ export class NbInfiniteNewsListComponent implements OnInit {
         this.loadingNext = false;
         this.placeholders = [];
       });
+  }
 
-    this.placeholders = new Array(this.pageSize);
+  private restoreScrollPosition() {
+    if (this.firstItem === this.listItems.first.nativeElement) {
+      return;
+    }
+
+    let newItemsHeight = 0;
+    this.listItems.some(({ nativeElement }) => {
+      if (nativeElement === this.firstItem) {
+        return true;
+      }
+      newItemsHeight += getElementHeight(nativeElement);
+    });
+
+    this.scrollService.scrollTo(0, newItemsHeight);
+    this.firstItem = this.listItems.first.nativeElement;
   }
 
   updateUrl(page) {
