@@ -6,10 +6,10 @@
 
 import {
   AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, OnInit, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
+  Renderer2, ViewChild, ViewContainerRef, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
@@ -17,6 +17,7 @@ import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
 import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
@@ -267,9 +268,10 @@ export class NbLayoutFooterComponent {
     </div>
   `,
 })
-export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
+export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   centerValue: boolean = false;
+  restoreScrollTopValue: boolean = true;
 
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
@@ -316,6 +318,15 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Restores scroll to the top of the page after navigation
+   * @param {boolean} val
+   */
+  @Input()
+  set restoreScrollTop(val: boolean) {
+    this.restoreScrollTopValue = convertToBoolProperty(val);
+  }
+
   @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
   @ViewChild('scrollableContainer', { read: ElementRef }) scrollableContainerRef: ElementRef;
 
@@ -336,6 +347,7 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
     protected layoutDirectionService: NbLayoutDirectionService,
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
+    protected scrollTop: NbRestoreScrollTopHelper,
   ) {
 
     this.themeService.onThemeChange()
@@ -393,6 +405,16 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
         listener.complete();
       });
 
+    this.scrollTop
+      .shouldRestore()
+      .pipe(
+        filter(() => this.restoreScrollTopValue),
+        takeWhile(() => this.alive),
+      )
+      .subscribe(() => {
+        this.scroll(0, 0);
+      });
+
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
@@ -430,10 +452,6 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
 
     this.afterViewInit$.next(true);
-  }
-
-  ngOnInit() {
-    this.initScrollTop();
   }
 
   ngOnDestroy() {
@@ -506,17 +524,6 @@ export class NbLayoutComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
     return { x, y };
-  }
-
-  private initScrollTop() {
-    this.router.events
-      .pipe(
-        takeWhile(() => this.alive),
-        filter(event => event instanceof NavigationEnd),
-      )
-      .subscribe(() => {
-        this.scroll(0, 0);
-      });
   }
 
   private scroll(x: number, y: number) {
