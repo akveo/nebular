@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarCellComponent } from './calendar-cell.component';
 import { NbCalendarCellState } from '../../model';
+import { NbDateTimeUtil } from '@nebular/theme/components/calendar/service';
 
 describe('Component: NbCalendarCell', () => {
   let component: NbCalendarCellComponent;
@@ -15,7 +16,7 @@ describe('Component: NbCalendarCell', () => {
     });
     fixture = TestBed.createComponent(NbCalendarCellComponent);
     component = fixture.componentInstance;
-    component.value = 0;
+    component._date = NbDateTimeUtil.createDate(2018, 6, 25);
     component.state = [];
     componentEl = fixture.debugElement.nativeElement;
     div = componentEl.querySelector('div');

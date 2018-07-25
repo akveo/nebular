@@ -1,22 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
+import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 
 describe('Component: NbCalendarNavigation', () => {
-  let fixture: ComponentFixture<NbCalendarNavigationComponent<Date>>;
-  let component: NbCalendarNavigationComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarNavigationComponent>;
+  let component: NbCalendarNavigationComponent;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent],
-      providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
     });
-    fixture = TestBed.createComponent<NbCalendarNavigationComponent<Date>>(NbCalendarNavigationComponent);
+    fixture = TestBed.createComponent(NbCalendarNavigationComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });
@@ -33,7 +32,7 @@ describe('Component: NbCalendarNavigation', () => {
   });
 
   it('should fire click when interior button clicked', () => {
-    component.click.subscribe(e => expect(e).toBeUndefined());
+    component.select.subscribe(e => expect(e).toBeUndefined());
     componentEl.querySelector('button').dispatchEvent(new Event('click'));
   });
 });

@@ -10,7 +10,6 @@ export abstract class NbLocaleAdapter {
   /* returns month name */
   abstract getMonthName(date: Date): string;
   abstract getMonthNameByIndex(index: number): string;
-  abstract getMonthNames(): string[];
 
   abstract getDayOfWeekNames(): string[];
 

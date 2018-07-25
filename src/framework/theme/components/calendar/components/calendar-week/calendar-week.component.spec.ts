@@ -2,8 +2,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarWeekComponent } from './calendar-week.component';
-import { range } from '@nebular/theme/components/calendar/helpers';
-import { NbCalendarCellState } from '@nebular/theme/components/calendar/model';
+import { range } from '../../helpers';
+import { NbCalendarCellState } from '../../model';
+import { NbDateTimeUtil } from '../../service';
 
 
 describe('Component: NbCalendarWeek', () => {
@@ -22,15 +23,10 @@ describe('Component: NbCalendarWeek', () => {
   });
 
   beforeEach(() => {
-    component.week = {
-      cells: range(7).map(i => ({
-        year: 2018,
-        month: 6,
-        date: i,
-        activeMonthDiff: 0,
-        state: [NbCalendarCellState.SELECTED],
-      })),
-    };
+    component.week = range(7).map(i => ({
+      date: NbDateTimeUtil.createDate(2018, 6, i),
+      state: [NbCalendarCellState.SELECTED],
+    }));
     fixture.detectChanges();
   });
 

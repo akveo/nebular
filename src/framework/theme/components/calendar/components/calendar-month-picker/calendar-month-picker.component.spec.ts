@@ -1,24 +1,22 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
+import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 
 describe('Component: NbCalendarMonthPicker', () => {
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  let fixture: ComponentFixture<NbCalendarMonthPickerComponent<Date>>;
-  let component: NbCalendarMonthPickerComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarMonthPickerComponent>;
+  let component: NbCalendarMonthPickerComponent;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarMonthPickerComponent],
-      providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent<NbCalendarMonthPickerComponent<Date>>(NbCalendarMonthPickerComponent);
+    fixture = TestBed.createComponent(NbCalendarMonthPickerComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

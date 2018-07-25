@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
+import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
+import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 
 describe('Component: NbCalendarPageableNavigation', () => {
-  let fixture: ComponentFixture<NbCalendarPageableNavigationComponent<Date>>;
-  let component: NbCalendarPageableNavigationComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarPageableNavigationComponent>;
+  let component: NbCalendarPageableNavigationComponent;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbCalendarDatePipe, NbCalendarPageableNavigationComponent],
-      providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
+      declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
     });
-    fixture = TestBed.createComponent<NbCalendarPageableNavigationComponent<Date>>(NbCalendarPageableNavigationComponent);
+    fixture = TestBed.createComponent(NbCalendarPageableNavigationComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });
@@ -33,7 +33,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
   });
 
   it('should fire click when interior button clicked', () => {
-    component.click.subscribe(e => expect(e).toBeUndefined());
+    component.select.subscribe(e => expect(e).toBeUndefined());
     componentEl.querySelector('button').dispatchEvent(new Event('click'));
   });
 

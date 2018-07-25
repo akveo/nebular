@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarDaysNamesComponent } from './calendar-days-names.component';
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
+import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 
 describe('Component: NbCalendarDaysNames', () => {
-  let component: NbCalendarDaysNamesComponent<Date>;
-  let fixture: ComponentFixture<NbCalendarDaysNamesComponent<Date>>;
+  let component: NbCalendarDaysNamesComponent;
+  let fixture: ComponentFixture<NbCalendarDaysNamesComponent>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDaysNamesComponent],
-      providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
     });
-    fixture = TestBed.createComponent<NbCalendarDaysNamesComponent<Date>>(NbCalendarDaysNamesComponent);
+    fixture = TestBed.createComponent(NbCalendarDaysNamesComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
     fixture.detectChanges();

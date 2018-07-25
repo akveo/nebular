@@ -14,7 +14,6 @@ import { NbCalendarCell } from '../../model';
   `,
 })
 export class NbCalendarWeekComponent {
-  // TODO accept only cells, not week
   @Input() week: NbCalendarCell[];
   @Output() click = new EventEmitter<NbCalendarCell>();
 }

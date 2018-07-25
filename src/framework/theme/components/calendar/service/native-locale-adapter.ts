@@ -1,7 +1,6 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 
 import { NbLocaleAdapter } from './locale-adapter';
-import { NbDateTimeUtil } from './date-time-util';
 
 /** The default day of the week names to use if Intl API is not available. */
 const DEFAULT_DAY_OF_WEEK_NAMES = {
@@ -44,11 +43,7 @@ export class NbNativeLocaleAdapter extends NbLocaleAdapter {
   }
 
   getMonthNameByIndex(index: number): string {
-    return DEFAULT_MONTH_NAMES['narrow'][index];
-  }
-
-  getMonthNames(): string[] {
-    return DEFAULT_MONTH_NAMES['narrow'];
+    return DEFAULT_MONTH_NAMES['short'][index];
   }
 
   getDayOfWeekNames(): string[] {

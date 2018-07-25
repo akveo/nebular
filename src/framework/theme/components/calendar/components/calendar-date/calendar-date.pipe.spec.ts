@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-
-import { NbDateTimeUtil } from '../../service/date-time-util';
-import { NbNativeDateTimeUtilService } from '../../service/date-time-util';
 import { NbCalendarDatePipe } from './calendar-date.pipe';
+import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
 
 describe('Pipe: NbCalendarDate', () => {
-  let pipe: NbCalendarDatePipe<Date>;
+  let pipe: NbCalendarDatePipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: NbDateTimeUtil, useClass: NbNativeDateTimeUtilService }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
     });
-    const dateTimeUtil = TestBed.get(NbDateTimeUtil);
-    pipe = new NbCalendarDatePipe(dateTimeUtil);
+    const localeAdapter = TestBed.get(NbLocaleAdapter);
+    pipe = new NbCalendarDatePipe(localeAdapter);
   });
 
   it('should render month-year when date is correct object', () => {
