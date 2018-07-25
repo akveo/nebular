@@ -5,8 +5,8 @@
     *ngSwitchCase="ViewMode.DATE"
     [activeMonth]="activeMonth"
     [today]="today"
-    [selectedValue]="date"
-    (change)="onDateChange($event)"
+    [selectedValue]="value"
+    (change)="valueChange.emit($event)"
     (changeMode)="setViewMode(ViewMode.YEAR)"
     (next)="nextMonth()"
     (prev)="prevMonth()">

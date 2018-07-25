@@ -7,36 +7,40 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from './service/date-time-util';
-import { NbBaseCalendarComponent } from './base-calendar.component';
 import { NbCalendarRange } from './model';
 import { NbCalendarCellStateService, NbCalendarRangeCellStateService, NbCalendarWeeksFactoryService } from './service';
 
 @Component({
   selector: 'nb-calendar-range',
-  styleUrls: ['./calendar.component.scss'],
-  templateUrl: './calendar.component.html',
+  template: `
+    <nb-base-calendar
+      [value]="range"
+      (valueChange)="onChange($event)"
+      [activeMonth]="activeMonth"
+    ></nb-base-calendar>
+  `,
   providers: [
     NbCalendarWeeksFactoryService,
     { provide: NbCalendarCellStateService, useClass: NbCalendarRangeCellStateService },
   ],
 })
-export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendarRange> {
+export class NbCalendarRangeComponent {
 
-  @Input('range') date: NbCalendarRange;
-  @Output('rangeChange') dateChange = new EventEmitter<any>();
+  @Input() range: NbCalendarRange;
+  @Output() rangeChange = new EventEmitter<NbCalendarRange>();
 
-  onDateChange(date: Date) {
+  onChange(date: Date) {
     this.initDateIfNull();
     this.handleSelected(date);
   }
 
-  protected getInitialActiveMonthFromValue(): Date {
-    return (this.date && (this.date.end || this.date.start)) || this.today;
+  get activeMonth(): Date {
+    return (this.range && (this.range.end || this.range.start));
   }
 
   private initDateIfNull() {
-    if (!this.date) {
-      this.date = { start: null, end: null };
+    if (!this.range) {
+      this.range = { start: null, end: null };
     }
   }
 
@@ -49,7 +53,7 @@ export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendar
   }
 
   private selectionStarted(): boolean {
-    const { start, end } = this.date;
+    const { start, end } = this.range;
     return start && !end;
   }
 
@@ -58,7 +62,7 @@ export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendar
   }
 
   private selectEnd(date: Date) {
-    const { start } = this.date;
+    const { start } = this.range;
 
     if (NbDateTimeUtil.compareDates(date, start) > 0) {
       this.selectRange({ start, end: date });
@@ -68,7 +72,7 @@ export class NbCalendarRangeComponent extends NbBaseCalendarComponent<NbCalendar
   }
 
   private selectRange(range: NbCalendarRange) {
-    this.date = range;
-    this.dateChange.emit(range);
+    this.range = range;
+    this.rangeChange.emit(range);
   }
 }

@@ -4,10 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
-import { NbCalendarWeeksFactoryService } from './service/calendar-week-factory.service';
-import { NbBaseCalendarComponent } from './base-calendar.component';
-import { NbCalendarBaseCellStateService, NbCalendarCellStateService } from './service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NbCalendarBaseCellStateService, NbCalendarCellStateService, NbCalendarWeeksFactoryService } from './service';
 
 /**
  * Basic example with including bounding dates
@@ -46,21 +44,24 @@ import { NbCalendarBaseCellStateService, NbCalendarCellStateService } from './se
  */
 @Component({
   selector: 'nb-calendar',
-  styleUrls: ['./calendar.component.scss'],
-  templateUrl: './calendar.component.html',
+  template: `
+    <nb-base-calendar
+      [value]="date"
+      (valueChange)="onChange($event)"
+      [activeMonth]="date">
+    </nb-base-calendar>
+  `,
   providers: [
     NbCalendarWeeksFactoryService,
     { provide: NbCalendarCellStateService, useClass: NbCalendarBaseCellStateService },
   ],
 })
-export class NbCalendarComponent extends NbBaseCalendarComponent<Date> {
+export class NbCalendarComponent {
+  @Input() date: Date;
+  @Output() dateChange = new EventEmitter<Date>();
 
-  onDateChange(date: Date) {
+  onChange(date: Date) {
     this.date = date;
     this.dateChange.emit(date);
-  }
-
-  protected getInitialActiveMonthFromValue(): Date {
-    return this.date;
   }
 }

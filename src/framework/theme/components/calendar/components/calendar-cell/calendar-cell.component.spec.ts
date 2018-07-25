@@ -15,7 +15,7 @@ describe('Component: NbCalendarCell', () => {
     });
     fixture = TestBed.createComponent(NbCalendarCellComponent);
     component = fixture.componentInstance;
-    component.date = 0;
+    component.value = 0;
     component.state = [];
     componentEl = fixture.debugElement.nativeElement;
     div = componentEl.querySelector('div');

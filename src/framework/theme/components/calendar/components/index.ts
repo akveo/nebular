@@ -1,3 +1,4 @@
+export { NbBaseCalendarComponent } from './base-calendar/base-calendar.component';
 export { NbCalendarHeaderComponent } from './calendar-header/calendar-header.component';
 export { NbCalendarCellComponent } from './calendar-cell/calendar-cell.component';
 export { NbCalendarYearPickerComponent } from './calendar-year-picker/calendar-year-picker.component';

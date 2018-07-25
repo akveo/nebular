@@ -8,10 +8,10 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-
 import { NbLocaleAdapter, NbNativeLocaleAdapter  } from './service';
 
 import {
+  NbBaseCalendarComponent ,
   NbCalendarCellComponent,
   NbCalendarDatePipe,
   NbCalendarDaysNamesComponent,
@@ -30,6 +30,7 @@ const NB_CALENDAR_PROVIDERS = [
 ];
 
 const COMPONENTS = [
+  NbBaseCalendarComponent,
   NbCalendarHeaderComponent,
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
