@@ -9,11 +9,4 @@
   nb-list {
     overflow-y: scroll;
   }
-
-  /deep/ {
-    [nbDisableAutoLoadButton],
-    [nbLoadMoreButtonDirective] {
-      flex-shrink: 0;
-    }
-  }
 }
