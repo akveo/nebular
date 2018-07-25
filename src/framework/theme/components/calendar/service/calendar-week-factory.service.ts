@@ -14,24 +14,32 @@ export class NbCalendarWeeksFactoryService<T> {
   }
 
   createWeeks(context: NbCalendarMonthBuilderContext<T>): NbCalendarCell[][] {
-    const days = this.createDaysRange(context.activeMonth);
-    const startOfMonth = this.dateTimeUtil.getMonthStart(context.activeMonth);
-    const startOfWeekDayDiff = this.dateTimeUtil.getWeekStartDiff(startOfMonth);
-    const weeks = batch(days, NbCalendarWeeksFactoryService.DAYS_IN_WEEK, startOfWeekDayDiff);
+    const weeks = this.createDates(context);
 
     if (context.includeBoundingMonths) {
-      if (weeks[0].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
-        weeks[0].unshift(...this.createPrevBoundingDays(context.activeMonth, startOfWeekDayDiff));
-      }
-      if (weeks[weeks.length - 1].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
-        weeks[weeks.length - 1].push(...this.createNextBoundingDays(context.activeMonth));
-      }
+      this.addBoundingMonths(weeks, context);
     }
 
     return weeks.map(week => week.map((date: Date) => this.createCellWithState(date, context)));
   }
 
-  protected createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
+  private createDates(context: NbCalendarMonthBuilderContext<T>): Date[][] {
+    const days = this.createDaysRange(context.activeMonth);
+    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
+    return batch(days, NbCalendarWeeksFactoryService.DAYS_IN_WEEK, startOfWeekDayDiff);
+  }
+
+  private addBoundingMonths(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>) {
+    if (weeks[0].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
+      const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
+      weeks[0].unshift(...this.createPrevBoundingDays(context.activeMonth, startOfWeekDayDiff));
+    }
+    if (weeks[weeks.length - 1].length < NbCalendarWeeksFactoryService.DAYS_IN_WEEK) {
+      weeks[weeks.length - 1].push(...this.createNextBoundingDays(context.activeMonth));
+    }
+  }
+
+  private createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
     const cell = { date, state: [] };
     this.cellStateService.assignStates(cell, context);
     return cell;
@@ -55,5 +63,10 @@ export class NbCalendarWeeksFactoryService<T> {
     const firstDay = this.dateTimeUtil.getMonthStart(month);
     const weekStartOffset = 7 - this.dateTimeUtil.getWeekStartDiff(firstDay);
     return this.createDaysRange(month).slice(0, weekStartOffset);
+  }
+
+  private getStartOfWeekDayDiff(date: Date): number {
+    const startOfMonth = this.dateTimeUtil.getMonthStart(date);
+    return this.dateTimeUtil.getWeekStartDiff(startOfMonth);
   }
 }
