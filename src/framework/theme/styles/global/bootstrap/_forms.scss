@@ -58,7 +58,7 @@
 
   .input-group-addon,
   .form-control {
-    padding: 0.75rem 1.125rem;
+    padding: nb-theme(form-control-padding);
     color: nb-theme(form-control-text-primary-color);
     background-color: nb-theme(form-control-bg);
     border: nb-theme(form-control-border-width) nb-theme(form-control-border-type) nb-theme(form-control-border-color);
