@@ -101,13 +101,13 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * for JWT token, the iat (issued at) field of the token payload contains the creation Date
    */
   protected prepareCreatedAt(date: Date) {
+    date = super.prepareCreatedAt(date);
     let decoded = null;
     try { // needed as getPayload() throws error and we want the token to be created in any case
       decoded = this.getPayload();
     }
     finally {
-      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : (date ? date : new Date());
-
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : date;
     }
   }
 
@@ -182,7 +182,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   constructor(protected data: { [key: string]: string|number }|string = {},
               protected ownerStrategyName: string,
-              protected createdAd?: Date) {
+              protected createdAt?: Date) {
 
     // we may get it as string when retrieving from a storage
     super(prepareOAuth2Token(data), ownerStrategyName);
