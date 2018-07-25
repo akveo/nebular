@@ -331,7 +331,7 @@ export const structure = [
         type: 'tabs',
         name: 'List',
         icon: 'list.svg',
-        source: [ 'NbListComponent', 'NbListItemComponent', 'NbListItemsGroupComponent' ],
+        source: [ 'NbListComponent', 'NbListItemComponent' ],
       },
       {
         type: 'tabs',
