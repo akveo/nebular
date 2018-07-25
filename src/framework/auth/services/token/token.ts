@@ -107,7 +107,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
       decoded = this.getPayload();
     }
     finally {
-      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : date;
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : (date ? date : new Date());
     }
   }
 
@@ -180,12 +180,12 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   static NAME = 'nb:auth:oauth2:token';
 
-  constructor(protected data: { [key: string]: string|number }|string = {},
-              protected ownerStrategyName: string,
-              protected createdAt?: Date) {
+  constructor( data: { [key: string]: string|number }|string = {},
+               ownerStrategyName: string,
+               createdAt?: Date) {
 
     // we may get it as string when retrieving from a storage
-    super(prepareOAuth2Token(data), ownerStrategyName);
+    super(prepareOAuth2Token(data), ownerStrategyName, createdAt);
   }
 
   /**
