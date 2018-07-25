@@ -20,7 +20,7 @@ export interface NbAuthRefreshableToken {
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any, ownerStrategyName: string, createdAt?: Date): NbAuthToken;
+  new (raw: any, ownerStrategyName: string, createdAt: Date): NbAuthToken;
 }
 
 export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
@@ -38,18 +38,15 @@ export class NbAuthSimpleToken extends NbAuthToken {
   static NAME = 'nb:auth:simple:token';
 
   constructor(protected readonly token: any,
-
               protected readonly ownerStrategyName: string,
               protected createdAt?: Date) {
     super();
-    if (!this.createdAt) {
-      this.buildCreatedAt();
-    }
+    this.createdAt = this.prepareCreatedAt(createdAt);
   }
 
-  protected buildCreatedAt() {
-    // For simple tokens, the creation date is 'now'
-    this.createdAt = new Date();
+  protected prepareCreatedAt(date: Date) {
+    // For simple tokens, if not set the creation date is 'now'
+    return date ? date : new Date();
   }
 
   /**
@@ -103,12 +100,14 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
   /**
    * for JWT token, the iat (issued at) field of the token payload contains the creation Date
    */
-  protected buildCreatedAt() {
-    const decoded = this.getPayload();
-    if (decoded.hasOwnProperty('iat')) {
-      this.createdAt = new Date(Number(decoded.iat) * 1000); // (JWT tokens set in seconds
-    } else {
-      this.createdAt = new Date();
+  protected prepareCreatedAt(date: Date) {
+    let decoded = null;
+    try { // needed as getPayload() throws error and we want the token to be created in any case
+      decoded = this.getPayload();
+    }
+    finally {
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : (date ? date : new Date());
+
     }
   }
 
@@ -152,7 +151,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
       return null;
     }
     const date = new Date(0);
-    date.setTime(Number(decoded.exp) * 1000); // 'cause jwt token are set in seconds
+    date.setUTCSeconds(decoded.exp); // 'cause jwt token are set in seconds
     return date;
   }
 

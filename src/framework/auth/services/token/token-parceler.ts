@@ -6,7 +6,7 @@ import { NB_AUTH_TOKENS } from '../../auth.options';
 export interface NbTokenPack {
   name: string,
   ownerStrategyName: string,
-  createdAt: Date,
+  createdAt: Number,
   value: string,
 }
 
