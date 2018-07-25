@@ -2,12 +2,12 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { NbThemeModule } from '../../../theme.module';
-import { NbLayoutModule } from '../../layout/layout.module';
-import { NbLayoutComponent } from '../../layout/layout.component';
-import { NbLayoutScrollService } from '../../../services/scroll.service';
+import { NbThemeModule } from '../../theme.module';
+import { NbLayoutModule } from '../layout/layout.module';
+import { NbLayoutComponent } from '../layout/layout.component';
+import { NbLayoutScrollService } from '../../services/scroll.service';
+import { NbListModule } from './list.module';
 import { NbInfiniteListDirective } from './infinite-list.directive';
-import { NbInifiniteListModule } from './infinite-list.module';
 
 const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
@@ -23,7 +23,8 @@ let scrollDirective: NbInfiniteListDirective;
   template: `
     <nb-layout #layout [withScroll]="withScroll">
       <nb-layout-column>
-        <div
+        <nb-list
+          nbInfiniteList
           #scrollingElement
           class="scroller"
           [class.element-scroll]="!listenWindowScroll"
@@ -31,8 +32,8 @@ let scrollDirective: NbInfiniteListDirective;
           [listenWindowScroll]="listenWindowScroll"
           (bottomThreshold)="bottomThreshold()"
           (topThreshold)="topThreshold()">
-          <div class="inner"></div>
-        </div>
+          <nb-list-item class="inner"></nb-list-item>
+        </nb-list>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -76,7 +77,7 @@ describe('Directive: NbScrollDirective', () => {
           RouterModule.forRoot([]),
           NbThemeModule.forRoot({ name: 'default' }),
           NbLayoutModule,
-          NbInifiniteListModule,
+          NbListModule,
         ],
         providers: [ NbLayoutScrollService, { provide: APP_BASE_HREF, useValue: '/' } ],
         declarations: [ ScrollTestComponent ],

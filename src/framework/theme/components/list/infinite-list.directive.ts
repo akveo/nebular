@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { takeWhile, filter, switchMap } from 'rxjs/operators';
-import { convertToBoolProperty } from '../../helpers';
-import { NbLayoutScrollService } from '../../../services/scroll.service';
-import { NbLayoutRulerService } from '../../../services/ruler.service';
+import { convertToBoolProperty } from '../helpers';
+import { NbLayoutScrollService } from '../../services/scroll.service';
+import { NbLayoutRulerService } from '../../services/ruler.service';
 
 export enum NbScrollDirection {
   UP,

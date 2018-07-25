@@ -30,7 +30,6 @@ import {
   NbStepperModule,
   NbAccordionModule,
   NbListModule,
-  NbInifiniteListModule,
   NbButtonModule,
 } from '@nebular/theme';
 
@@ -202,7 +201,6 @@ export const NB_MODULES = [
   NbAccordionModule,
   NbButtonModule,
   NbListModule,
-  NbInifiniteListModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
