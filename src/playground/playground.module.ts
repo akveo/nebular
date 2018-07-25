@@ -31,6 +31,7 @@ import {
   NbAccordionModule,
   NbListModule,
   NbButtonModule,
+  NbInputModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -171,6 +172,12 @@ import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
 import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
@@ -201,6 +208,7 @@ export const NB_MODULES = [
   NbAccordionModule,
   NbButtonModule,
   NbListModule,
+  NbInputModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -333,6 +341,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
   NbCardWithInfiniteNewsListComponent,
+  NbInputsShowcaseComponent,
+  NbInputColorsComponent,
+  NbInputSizesComponent,
+  NbInputShapesComponent,
+  NbInputTypesComponent,
+  NbInputFullWidthComponent,
   NbScrollWindowComponent,
 ];
 

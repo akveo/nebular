@@ -339,6 +339,12 @@ export const structure = [
         icon: 'infinite-scroll.svg',
         source: [ 'NbInfiniteListDirective', 'NbListPagerDirective' ],
       },
+      {
+        type: 'tabs',
+        name: 'Input',
+        icon: 'input.svg',
+        source: [ 'NbInputDirective' ],
+      },
     ],
   },
   {

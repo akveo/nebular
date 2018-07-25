@@ -27,6 +27,7 @@
 @import '../../components/accordion/accordion.component.theme';
 @import '../../components/button/button.component.theme';
 @import '../../components/list/list.component.theme';
+@import '../../components/input/input.directive.theme';
 
 @mixin nb-theme-components() {
 
@@ -53,4 +54,5 @@
   @include nb-accordion-theme();
   @include nb-buttons-theme();
   @include nb-list-theme();
+  @include nb-input-theme();
 }

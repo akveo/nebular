@@ -61,3 +61,5 @@ export * from './components/button/button.module';
 export * from './components/list/list.component';
 export * from './components/list/list.module';
 export * from './components/list/list-pager.directive';
+export * from './components/input/input.directive';
+export * from './components/input/input.module';

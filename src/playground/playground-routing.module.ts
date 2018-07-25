@@ -137,6 +137,12 @@ import { NbUsersListShowcaseComponent } from './list/users-list-showcase.compone
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
 
@@ -596,6 +602,35 @@ export const routes: Routes = [
           {
             path: 'card-with-infinite-news-list.component',
             component: NbCardWithInfiniteNewsListComponent,
+          },
+        ],
+      },
+      {
+        path: 'input',
+        children: [
+          {
+            path: 'input-showcase.component',
+            component: NbInputsShowcaseComponent,
+          },
+          {
+            path: 'input-colors.component',
+            component: NbInputColorsComponent,
+          },
+          {
+            path: 'input-sizes.component',
+            component: NbInputSizesComponent,
+          },
+          {
+            path: 'input-shapes.component',
+            component: NbInputShapesComponent,
+          },
+          {
+            path: 'input-types.component',
+            component: NbInputTypesComponent,
+          },
+          {
+            path: 'input-full-width.component',
+            component: NbInputFullWidthComponent,
           },
         ],
       },
