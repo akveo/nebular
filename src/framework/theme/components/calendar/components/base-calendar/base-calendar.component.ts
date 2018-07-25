@@ -17,11 +17,6 @@ import { NbCalendarViewMode } from '../../model';
 export class NbBaseCalendarComponent<T> {
 
   @Input() value: T;
-  @Input('activeMonth')
-  set initialActiveMonth(activeMonth: Date) {
-    this.activeMonth = activeMonth || this.today;
-    this.activeYear = Math.ceil(this.activeMonth.getFullYear() - 10);
-  }
 
   @Output() valueChange = new EventEmitter<T>();
 
@@ -29,7 +24,7 @@ export class NbBaseCalendarComponent<T> {
 
   ViewMode = NbCalendarViewMode;
 
-  activeMonth: Date;
+  activeMonth: Date = this.today;
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
   activeYear: number;
 

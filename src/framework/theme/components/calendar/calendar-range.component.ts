@@ -13,11 +13,7 @@ import { NbCalendarCellStateService, NbCalendarRangeCellStateService, NbCalendar
 @Component({
   selector: 'nb-calendar-range',
   template: `
-    <nb-base-calendar
-      [value]="range"
-      (valueChange)="onChange($event)"
-      [activeMonth]="activeMonth"
-    ></nb-base-calendar>
+    <nb-base-calendar [value]="range" (valueChange)="onChange($event)"></nb-base-calendar>
   `,
   providers: [
     NbCalendarWeeksFactoryService,

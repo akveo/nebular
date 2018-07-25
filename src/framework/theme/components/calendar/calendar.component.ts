@@ -45,11 +45,7 @@ import { NbCalendarBaseCellStateService, NbCalendarCellStateService, NbCalendarW
 @Component({
   selector: 'nb-calendar',
   template: `
-    <nb-base-calendar
-      [value]="date"
-      (valueChange)="onChange($event)"
-      [activeMonth]="date">
-    </nb-base-calendar>
+    <nb-base-calendar [value]="date" (valueChange)="onChange($event)"></nb-base-calendar>
   `,
   providers: [
     NbCalendarWeeksFactoryService,

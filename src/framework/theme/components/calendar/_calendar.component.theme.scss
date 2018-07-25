@@ -151,13 +151,5 @@
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);
     }
-
-    &.cell-selected-range-start {
-      border-radius: nb-theme(calendar-border-radius) 0 0 nb-theme(calendar-border-radius);
-    }
-
-    &.cell-selected-range-end {
-      border-radius: 0 nb-theme(calendar-border-radius) nb-theme(calendar-border-radius) 0;
-    }
   }
 }

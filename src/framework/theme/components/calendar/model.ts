@@ -35,16 +35,12 @@ export enum NbCalendarViewMode {
   DATE = 'date',
 }
 
-// TODO normalize naming
 export enum NbCalendarCellState {
   TODAY = 'cell-today',
   BOUNDING_MONTH = 'cell-bounding-month',
   SELECTED = 'cell-selected',
 
   IN_RANGE = 'cell-range-inbetween',
-  SELECTED_RANGE = 'cell-selected-range',
-  SELECTED_RANGE_START = 'cell-selected-range-start',
-  SELECTED_RANGE_END = 'cell-selected-range-end',
 }
 
 export enum NbCalendarNameStyle {

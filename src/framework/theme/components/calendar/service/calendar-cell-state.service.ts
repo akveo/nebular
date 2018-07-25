@@ -44,15 +44,15 @@ export class NbCalendarRangeCellStateService extends NbCalendarCellStateService<
     const { date } = cell;
 
     if (start && end && NbDateTimeUtil.isBetween(date, start, end)) {
-      cell.state.push(NbCalendarCellState.SELECTED_RANGE);
+      cell.state.push(NbCalendarCellState.IN_RANGE);
     }
 
     if (start && NbDateTimeUtil.isSameDay(date, start)) {
-      cell.state.push(NbCalendarCellState.SELECTED_RANGE_START);
+      cell.state.push(NbCalendarCellState.SELECTED);
     }
 
     if (start && end && NbDateTimeUtil.isSameDay(date, end)) {
-      cell.state.push(NbCalendarCellState.SELECTED_RANGE_END);
+      cell.state.push(NbCalendarCellState.SELECTED);
     }
   }
 }
