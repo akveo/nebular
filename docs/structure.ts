@@ -337,7 +337,7 @@ export const structure = [
         type: 'tabs',
         name: 'Infinite List',
         icon: 'infinite-scroll.svg',
-        source: [ 'NbInfiniteListComponent', 'NbScrollThresholdDirective' ],
+        source: [ 'NbInfiniteListDirective', 'NbListPagerDirective' ],
       },
     ],
   },

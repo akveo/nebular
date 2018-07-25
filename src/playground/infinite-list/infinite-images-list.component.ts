@@ -4,14 +4,15 @@ import { ListBase } from './list-base';
 @Component({
   selector: 'nb-infinite-images-list',
   template: `
-    <nb-infinite-list
+    <nb-list
+      nbInfiniteList
+      [threshold]="500"
       [listenWindowScroll]="true"
-      [loadMoreThreshold]="20000"
       (loadNext)="addPage()">
       <nb-list-item *ngFor="let item of items">
         <nb-random-svg [isLoading]="item.isPlaceholder"></nb-random-svg>
       </nb-list-item>
-    </nb-infinite-list>
+    </nb-list>
   `,
 })
 export class NbInfiniteImagesListComponent extends ListBase {}

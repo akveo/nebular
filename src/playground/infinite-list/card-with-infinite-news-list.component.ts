@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, takeWhile } from 'rxjs/operators';
-import { NbListItemComponent, NbInfiniteListComponent } from '@nebular/theme';
+import { NbListItemComponent, NbListComponent } from '@nebular/theme';
 import { getElementHeight } from '@nebular/theme/components/helpers';
 import { NewsService, NewsPost } from './news.service';
 
@@ -19,10 +19,11 @@ import { NewsService, NewsPost } from './news.service';
   template: `
     <nb-card size="large">
       <div [nbSpinner]="loadingPrev"></div>
-      <nb-infinite-list
-        [loadMoreThreshold]="threshold"
-        (loadNext)="loadNext()"
-        (loadPrev)="loadPrev()"
+      <nb-list
+        nbInfiniteList
+        [threshold]="100"
+        (bottomThreshold)="loadNext()"
+        (topThreshold)="loadPrev()"
         [nbListPager]="pageSize"
         [startPage]="startPage"
         (pageChange)="updateUrl($event)">
@@ -34,7 +35,7 @@ import { NewsService, NewsPost } from './news.service';
           <nb-news-post-placeholder></nb-news-post-placeholder>
         </nb-list-item>
 
-      </nb-infinite-list>
+      </nb-list>
     </nb-card>
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
@@ -42,8 +43,6 @@ import { NewsService, NewsPost } from './news.service';
 export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   alive = true;
-
-  threshold = 100;
 
   pageSize = 10;
   startPage: number;
@@ -56,7 +55,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
   private firstItem: Element;
 
   @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
-  @ViewChild(NbInfiniteListComponent) infiniteListComponent: NbInfiniteListComponent;
+  @ViewChild(NbListComponent, { read: ElementRef }) infiniteListElementRef: ElementRef;
 
   constructor(
     private newsService: NewsService,
@@ -137,7 +136,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
       newItemsHeight += getElementHeight(nativeElement);
     });
 
-    this.infiniteListComponent.scrollable.nativeElement.scrollTo(0, newItemsHeight);
+    this.infiniteListElementRef.nativeElement.scrollTo(0, newItemsHeight);
     this.firstItem = this.listItems.first.nativeElement;
   }
 

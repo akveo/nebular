@@ -13,6 +13,9 @@ import { takeWhile } from 'rxjs/operators';
 import 'intersection-observer';
 import { NbListItemComponent } from './list.component';
 
+/**
+ * List pager directive
+ */
 @Directive({
   selector: '[nbListPager]',
 })

@@ -18,14 +18,16 @@ import { NewsService, NewsPost } from './news.service';
   template: `
     <nb-card>
       <div [nbSpinner]="loadingPrev"></div>
-      <nb-infinite-list
+
+      <nb-list
+        nbInfiniteList
+        [threshold]="100"
+        listenWindowScroll
+        (bottomThreshold)="loadNext()"
+        (topThreshold)="loadPrev()"
         [nbListPager]="pageSize"
         [startPage]="startPage"
-        (pageChange)="updateUrl($event)"
-        [loadMoreThreshold]="threshold"
-        [listenWindowScroll]="listenWindowScroll"
-        (loadNext)="loadNext()"
-        (loadPrev)="loadPrev()">
+        (pageChange)="updateUrl($event)">
 
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
@@ -34,7 +36,7 @@ import { NewsService, NewsPost } from './news.service';
           <nb-news-post-placeholder></nb-news-post-placeholder>
         </nb-list-item>
 
-      </nb-infinite-list>
+      </nb-list>
     </nb-card>
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
@@ -42,9 +44,6 @@ import { NewsService, NewsPost } from './news.service';
 export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   alive = true;
-
-  listenWindowScroll = true;
-  threshold = 100;
 
   pageSize = 10;
   startPage: number;
@@ -63,7 +62,9 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     private router: Router,
     private route: ActivatedRoute,
     private scrollService: NbLayoutScrollService,
-  ) {}
+  ) {
+    history.scrollRestoration = 'manual';
+  }
 
   ngOnInit() {
     this.route.queryParams

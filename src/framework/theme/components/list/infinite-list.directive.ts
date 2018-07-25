@@ -23,7 +23,11 @@ export enum NbScrollDirection {
  * Infinite List Directive
  *
  * Directive will notify when list scrolled down to given a threshold.
- * By default it listen to scroll on list where it applied.
+ * By default it listen to scroll on list where it applied, but also can be set to listen page scroll.
+ *
+ * @stacked-example(Showcase, infinite-list/infinite-news-list.component)
+ *
+ * @stacked-example(Infinite list inside a card, infinite-list/card-with-infinite-news-list.component)
  */
 @Directive({
   selector: '[nbInfiniteList]',
@@ -35,16 +39,15 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   windowScroll = false;
 
   /**
-   * Threshold value.
-   * Please ensure that its height is greater than element height, otherwise threshold will never be reached.
+   * Threshold after which event load more event will be emited.
+   * In pixels.
    */
   @Input()
   threshold: number;
 
   /**
-   * Listen window scroll.
-   * Also enables listening to layout scroll, for those who has `nb-layout` set to `withScroll` mode,
-   * which remove scroll on body.
+   * By default component observes list scroll position.
+   * If set to `true`, component will observe position of page scroll instead.
    */
   @Input()
   set listenWindowScroll(value) {
@@ -52,13 +55,13 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Emits when bottom threshold reached.
+   * Emits when distance between list bottom and current scroll position is less than threshold.
    */
   @Output()
   bottomThreshold = new EventEmitter();
 
   /**
-   * Emits when top threshold reached.
+   * Emits when distance between list top and current scroll position is less than threshold.
    */
   @Output()
   topThreshold = new EventEmitter();

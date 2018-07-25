@@ -70,7 +70,7 @@ class ScrollTestComponent {
   topThreshold() {}
 }
 
-fdescribe('Directive: NbScrollDirective', () => {
+describe('Directive: NbScrollDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
