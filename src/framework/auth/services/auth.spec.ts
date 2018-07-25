@@ -24,12 +24,14 @@ describe('auth-service', () => {
   let tokenService: NbTokenService;
   let dummyAuthStrategy: NbDummyAuthStrategy;
   const testTokenValue = 'test-token';
+  const ownerStrategyName = 'strategy';
+
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue);
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null);
+  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, ownerStrategyName);
 
   const failResult = new NbAuthResult(false,
     resp401,

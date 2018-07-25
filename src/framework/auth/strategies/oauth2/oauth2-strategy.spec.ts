@@ -43,7 +43,7 @@ describe('oauth2-auth-strategy', () => {
     error_uri: 'some',
   };
 
-  const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse) as NbAuthOAuth2Token;
+  const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse, 'strategy') as NbAuthOAuth2Token;
 
 
   beforeEach(() => {
@@ -78,6 +78,7 @@ describe('oauth2-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -104,7 +105,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/');
@@ -166,7 +168,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/');
@@ -205,6 +208,7 @@ describe('oauth2-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -236,7 +240,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(nbAuthCreateToken(NbAuthOAuth2Token, token));
+          // tslint:disable-next-line
+          expect(result.getToken().getValue()).toEqual(nbAuthCreateToken(NbAuthOAuth2Token, token, 'strategy').getValue());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/');
@@ -266,6 +271,7 @@ describe('oauth2-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -317,7 +323,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/success');
@@ -341,7 +348,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/success');
@@ -376,7 +384,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/success');
@@ -417,6 +426,7 @@ describe('oauth2-auth-strategy', () => {
 
     beforeEach(() => {
       strategy.setOptions({
+        name: 'strategy',
         baseEndpoint: 'http://example.com/',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -436,7 +446,8 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          expect(result.getToken()).toEqual(successToken);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/');

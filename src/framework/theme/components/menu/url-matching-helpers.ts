@@ -16,6 +16,6 @@ export function isUrlPathContain(path, link) {
     locationPath.slice(link.length).charAt(0).search(endOfUrlSegmentRegExp) !== -1;
 }
 
-function getPathPartOfUrl(url): string {
+export function getPathPartOfUrl(url): string {
   return url.match(/.*?(?=[?#]|$)/)[0];
 }
