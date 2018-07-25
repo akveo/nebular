@@ -8,6 +8,7 @@ import { NbLayoutComponent } from '../layout/layout.component';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbListModule } from './list.module';
 import { NbInfiniteListDirective } from './infinite-list.directive';
+import { NbListComponent } from '@nebular/theme/components/list/list.component';
 
 const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
@@ -21,14 +22,14 @@ let scrollDirective: NbInfiniteListDirective;
 
 @Component({
   template: `
-    <nb-layout #layout [withScroll]="withScroll">
+    <nb-layout [withScroll]="withScroll">
       <nb-layout-column>
         <nb-list
-          nbInfiniteList
           #scrollingElement
           class="scroller"
           [class.element-scroll]="!listenWindowScroll"
-          [nbScrollThreshold]="threshold"
+          nbInfiniteList
+          [threshold]="threshold"
           [listenWindowScroll]="listenWindowScroll"
           (bottomThreshold)="bottomThreshold()"
           (topThreshold)="topThreshold()">
@@ -57,9 +58,9 @@ let scrollDirective: NbInfiniteListDirective;
   `],
 })
 class ScrollTestComponent {
-  @ViewChild(NbInfiniteListDirective) scrollDirective: NbInfiniteListDirective;
-  @ViewChild('scrollingElement') scrollingElement: ElementRef;
-  @ViewChild('layout') layoutComponent: NbLayoutComponent;
+  @ViewChild(NbListComponent, { read: ElementRef }) listElementRef: ElementRef;
+  @ViewChild(NbInfiniteListDirective) infiniteListDirective: NbInfiniteListDirective;
+  @ViewChild(NbLayoutComponent) layoutComponent: NbLayoutComponent;
 
   listenWindowScroll = false;
   threshold = THRESHOLD;
@@ -69,7 +70,7 @@ class ScrollTestComponent {
   topThreshold() {}
 }
 
-describe('Directive: NbScrollDirective', () => {
+fdescribe('Directive: NbScrollDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
@@ -85,8 +86,8 @@ describe('Directive: NbScrollDirective', () => {
       .createComponent(ScrollTestComponent);
 
     testComponent = fixture.componentInstance;
-    scrollingElementRef = testComponent.scrollingElement;
-    scrollDirective = testComponent.scrollDirective;
+    scrollingElementRef = testComponent.listElementRef;
+    scrollDirective = testComponent.infiniteListDirective;
 
     fixture.detectChanges();
   });
