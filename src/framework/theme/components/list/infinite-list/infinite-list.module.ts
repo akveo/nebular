@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbListModule } from '../list.module';
-import { NbInfiniteListComponent } from './infinite-list.component';
-import { NbScrollThresholdDirective } from './scroll-threshold.directive';
+import { NbInfiniteListDirective } from './infinite-list.directive';
 
 const componets = [
-  NbInfiniteListComponent,
-  NbScrollThresholdDirective,
+  NbInfiniteListDirective,
 ];
 
 @NgModule({
-  imports: [ CommonModule, NbListModule ],
+  imports: [ NbListModule ],
   declarations: componets,
   exports: componets,
 })

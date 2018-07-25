@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { takeWhile, filter, switchMap } from 'rxjs/operators';
+import { convertToBoolProperty } from '../../helpers';
 import { NbLayoutScrollService } from '../../../services/scroll.service';
 import { NbLayoutRulerService } from '../../../services/ruler.service';
 
@@ -19,24 +20,25 @@ export enum NbScrollDirection {
 }
 
 /**
- * Scroll Threshold Directive
+ * Infinite List Directive
  *
- * Directive will notify when element scrolled down to given a threshold.
- * By default listen to scroll on element to which it applied.
+ * Directive will notify when list scrolled down to given a threshold.
+ * By default it listen to scroll on list where it applied.
  */
 @Directive({
-  selector: '[nbScrollThreshold]',
+  selector: '[nbInfiniteList]',
 })
-export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
+export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
 
   private alive = true;
   private lastScrollPosition = 0;
+  windowScroll = false;
 
   /**
    * Threshold value.
    * Please ensure that its height is greater than element height, otherwise threshold will never be reached.
    */
-  @Input('nbScrollThreshold')
+  @Input()
   threshold: number;
 
   /**
@@ -45,23 +47,25 @@ export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
    * which remove scroll on body.
    */
   @Input()
-  listenWindowScroll = false;
+  set listenWindowScroll(value) {
+    this.windowScroll = convertToBoolProperty(value);
+  }
 
   /**
    * Emits when bottom threshold reached.
    */
   @Output()
-  bottomThresholdReached = new EventEmitter();
+  bottomThreshold = new EventEmitter();
 
   /**
    * Emits when top threshold reached.
    */
   @Output()
-  topThresholdReached = new EventEmitter();
+  topThreshold = new EventEmitter();
 
   @HostListener('scroll')
   elementScroll() {
-    if (!this.listenWindowScroll) {
+    if (!this.windowScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       this.checkPosition(scrollHeight, scrollTop, clientHeight );
     }
@@ -77,7 +81,7 @@ export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
     this.scrollService.onScroll()
       .pipe(
         takeWhile(() => this.alive),
-        filter(() => this.listenWindowScroll),
+        filter(() => this.windowScroll),
         switchMap(() => forkJoin(this.scrollService.getPosition(), this.dimensionsService.getDimensions())),
       )
       .subscribe(([scrollPosition, dimensions]) => {
@@ -102,11 +106,11 @@ export class NbScrollThresholdDirective implements AfterViewInit, OnDestroy {
     this.lastScrollPosition = scrollTop;
 
     if (scrollDirection === NbScrollDirection.DOWN && distanceToBottom <= this.threshold) {
-      this.bottomThresholdReached.emit();
+      this.bottomThreshold.emit();
     }
 
     if (scrollDirection === NbScrollDirection.UP && scrollTop <= this.threshold) {
-      this.topThresholdReached.emit();
+      this.topThreshold.emit();
     }
   }
 }

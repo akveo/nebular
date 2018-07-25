@@ -6,7 +6,7 @@ import { NbThemeModule } from '../../../theme.module';
 import { NbLayoutModule } from '../../layout/layout.module';
 import { NbLayoutComponent } from '../../layout/layout.component';
 import { NbLayoutScrollService } from '../../../services/scroll.service';
-import { NbScrollThresholdDirective } from './scroll-threshold.directive';
+import { NbInfiniteListDirective } from './infinite-list.directive';
 import { NbInifiniteListModule } from './infinite-list.module';
 
 const CONTENT_PADDING = 20;
@@ -17,7 +17,7 @@ const THRESHOLD = 200;
 let fixture: ComponentFixture<ScrollTestComponent>;
 let testComponent: ScrollTestComponent;
 let scrollingElementRef: ElementRef;
-let scrollDirective: NbScrollThresholdDirective;
+let scrollDirective: NbInfiniteListDirective;
 
 @Component({
   template: `
@@ -29,8 +29,8 @@ let scrollDirective: NbScrollThresholdDirective;
           [class.element-scroll]="!listenWindowScroll"
           [nbScrollThreshold]="threshold"
           [listenWindowScroll]="listenWindowScroll"
-          (bottomThresholdReached)="bottomThresholdReached()"
-          (topThresholdReached)="topThresholdReached()">
+          (bottomThreshold)="bottomThreshold()"
+          (topThreshold)="topThreshold()">
           <div class="inner"></div>
         </div>
       </nb-layout-column>
@@ -56,7 +56,7 @@ let scrollDirective: NbScrollThresholdDirective;
   `],
 })
 class ScrollTestComponent {
-  @ViewChild(NbScrollThresholdDirective) scrollDirective: NbScrollThresholdDirective;
+  @ViewChild(NbInfiniteListDirective) scrollDirective: NbInfiniteListDirective;
   @ViewChild('scrollingElement') scrollingElement: ElementRef;
   @ViewChild('layout') layoutComponent: NbLayoutComponent;
 
@@ -64,8 +64,8 @@ class ScrollTestComponent {
   threshold = THRESHOLD;
   withScroll = false;
 
-  bottomThresholdReached() {}
-  topThresholdReached() {}
+  bottomThreshold() {}
+  topThreshold() {}
 }
 
 describe('Directive: NbScrollDirective', () => {
@@ -159,104 +159,104 @@ describe('Directive: NbScrollDirective', () => {
     expect(checkPositionSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('should trigger bottomThresholdReached only when treshold reached (element scroll)', () => {
+  it('should trigger bottomThreshold only when treshold reached (element scroll)', () => {
     const scrollingNativeElement = scrollingElementRef.nativeElement;
-    const tresholdReachedSpy = spyOn(testComponent, 'bottomThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'bottomThreshold');
 
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - ELEMENT_HEIGHT - 1;
     scrollingNativeElement.scrollTop = positionUnderThreshold;
     scrollingNativeElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - (THRESHOLD / 2);
     scrollingNativeElement.scrollTop = positionBelowThreshold;
     scrollingNativeElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger bottomThresholdReached only when treshold reached (window scroll)', () => {
+  it('should trigger bottomThreshold only when treshold reached (window scroll)', () => {
     const { documentElement } = document;
 
     testComponent.listenWindowScroll = true;
     fixture.detectChanges();
 
-    const tresholdReachedSpy = spyOn(testComponent, 'bottomThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'bottomThreshold');
 
     const reporterHeight = 1000;
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - reporterHeight;
     documentElement.scrollTop = positionUnderThreshold;
     window.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - (THRESHOLD / 2);
     documentElement.scrollTop = positionBelowThreshold;
     window.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger bottomThresholdReached only when treshold reached (layout scroll)', () => {
+  it('should trigger bottomThreshold only when treshold reached (layout scroll)', () => {
     const scroller: Element = testComponent.layoutComponent.scrollableContainerRef.nativeElement;
 
     testComponent.listenWindowScroll = true;
     testComponent.withScroll = true;
     fixture.detectChanges();
 
-    const tresholdReachedSpy = spyOn(testComponent, 'bottomThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'bottomThreshold');
 
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - scroller.clientHeight - 1;
     scroller.scrollTop = positionUnderThreshold;
     scroller.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     scroller.scrollTop = positionBelowThreshold;
     scroller.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger topThresholdReached when treshold reached (element)', () => {
+  it('should trigger topThreshold when treshold reached (element)', () => {
     const scrollingElement = scrollingElementRef.nativeElement;
-    const tresholdReachedSpy = spyOn(testComponent, 'topThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'topThreshold');
 
     scrollingElement.scrollTop = THRESHOLD + 1;
     scrollingElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     scrollingElement.scrollTop = THRESHOLD - 1;
     scrollingElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger topThresholdReached when treshold reached (window)', () => {
+  it('should trigger topThreshold when treshold reached (window)', () => {
     testComponent.listenWindowScroll = true;
     fixture.detectChanges();
 
     const { documentElement } = document;
-    const tresholdReachedSpy = spyOn(testComponent, 'topThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'topThreshold');
 
     documentElement.scrollTop = THRESHOLD + 1;
     window.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     documentElement.scrollTop = THRESHOLD - 1;
     window.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should trigger topThresholdReached when treshold reached (layout scroll)', () => {
+  it('should trigger topThreshold when treshold reached (layout scroll)', () => {
     testComponent.listenWindowScroll = true;
     testComponent.withScroll = true;
     fixture.detectChanges();
 
     const layoutElement = testComponent.layoutComponent.scrollableContainerRef.nativeElement;
-    const tresholdReachedSpy = spyOn(testComponent, 'topThresholdReached');
+    const tresholdSpy = spyOn(testComponent, 'topThreshold');
 
     layoutElement.scrollTop = THRESHOLD + 1;
     layoutElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(0);
+    expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     layoutElement.scrollTop = THRESHOLD - 1;
     layoutElement.dispatchEvent(new Event('scroll'));
-    expect(tresholdReachedSpy).toHaveBeenCalledTimes(1);
+    expect(tresholdSpy).toHaveBeenCalledTimes(1);
   });
 });
