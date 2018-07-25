@@ -15,7 +15,7 @@ import { NbLocaleAdapter } from '@nebular/theme/components/calendar/service';
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-    <nb-calendar-navigation [date]="activeMonth" (click)="changeMode.emit()"></nb-calendar-navigation>
+    <nb-calendar-navigation [date]="activeMonth" (select)="changeMode.emit()"></nb-calendar-navigation>
 
     <div class="body">
       <div class="chunk-row" *ngFor="let chunk of months">

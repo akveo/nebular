@@ -17,7 +17,7 @@ import { NbCalendarCell } from '../../model';
       [date]="activeMonth"
       (next)="next.emit()"
       (prev)="prev.emit()"
-      (click)="changeMode.emit()">
+      (select)="changeMode.emit()">
     </nb-calendar-pageable-navigation>
 
     <div class="body">

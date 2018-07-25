@@ -2,17 +2,20 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 @Component({
   selector: 'nb-calendar-navigation',
-  styleUrls: ['./calendar-navigation.component.scss'],
+  styles: [`
+    :host {
+      display: flex;
+      justify-content: center;
+    }
+  `],
   template: `
-    <div class="header single-page">
-      <button class="btn btn-success" (click)="click.emit()">
-        {{ date | nbCalendarDate }}
-      </button>
-    </div>
+    <button class="btn btn-success" (click)="select.emit()">
+      {{ date | nbCalendarDate }}
+    </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarNavigationComponent {
   @Input() date: Date;
-  @Output() click = new EventEmitter<void>();
+  @Output() select = new EventEmitter<void>();
 }
