@@ -330,7 +330,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Input',
-        icon: '',
+        icon: 'input.svg',
         source: ['NbInputDirective'],
       },
     ],
