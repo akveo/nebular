@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Out
 import { NbCalendarCellStatusService, NbCalendarDaysService } from '../../services';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
 
+
 @Component({
   selector: 'nb-calendar-day-picker',
   styleUrls: ['./calendar-day-picker.component.scss'],

@@ -1,8 +1,15 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarCellComponent } from './calendar-cell.component';
 import { NbCalendarCellStatus } from '../../model';
 import { NbDateTimeUtil } from '../../services';
+
 
 describe('Component: NbCalendarCell', () => {
   let component: NbCalendarCellComponent;

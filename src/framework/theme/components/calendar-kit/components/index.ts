@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 export { NbCalendarHeaderComponent } from './calendar-header/calendar-header.component';
 export { NbCalendarCellComponent } from './calendar-cell/calendar-cell.component';
 export { NbCalendarYearPickerComponent } from './calendar-year-picker/calendar-year-picker.component';

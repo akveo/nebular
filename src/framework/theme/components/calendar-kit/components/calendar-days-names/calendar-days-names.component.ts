@@ -1,6 +1,13 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbCalendarDay } from '../../model';
 import { NbDateTimeUtil, NbLocaleService } from '../../services';
+
 
 @Component({
   selector: 'nb-calendar-days-names',

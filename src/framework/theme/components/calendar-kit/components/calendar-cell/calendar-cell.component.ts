@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 
 import { NbCalendarCell, NbCalendarCellStatus } from '../../model';
 
+
 @Component({
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],

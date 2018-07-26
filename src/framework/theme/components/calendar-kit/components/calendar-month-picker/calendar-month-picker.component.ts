@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { NbDateTimeUtil, NbLocaleService } from '../../services';
 import { batch, range } from '../../helpers';
 
+
 // TODO refactor template with styles refactoring
 @Component({
   selector: 'nb-calendar-month-picker',
