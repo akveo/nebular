@@ -146,13 +146,17 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
   }
 
   updateUrl(page) {
-    this.router.navigate(
-      ['.'],
-      {
-        queryParams: { page },
-        replaceUrl: true,
-        relativeTo: this.route,
-      },
-    );
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe(params => {
+        this.router.navigate(
+          ['.'],
+          {
+            queryParams: { ...params, page },
+            replaceUrl: true,
+            relativeTo: this.route,
+          },
+        );
+      });
   }
 }
