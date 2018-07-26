@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -195,7 +195,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   refreshToken(token: NbAuthRefreshableToken): Observable<NbAuthResult> {
     const url = this.getActionEndpoint('refresh');
 
-    return this.http.post(url, this.buildRefreshRequestData(token))
+    return this.http.post(url, this.buildRefreshRequestData(token), this.buildRequestsHttpOptions())
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -213,7 +213,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   passwordToken(email: string, password: string): Observable<NbAuthResult> {
     const url = this.getActionEndpoint('token');
 
-    return this.http.post(url, this.buildPasswordRequestData(email, password))
+    return this.http.post(url, this.buildPasswordRequestData(email, password), this.buildRequestsHttpOptions() )
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -239,7 +239,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   protected requestToken(code: string) {
     const url = this.getActionEndpoint('token');
 
-    return this.http.post(url, this.buildCodeRequestData(code))
+    return this.http.post(url, this.buildCodeRequestData(code), this.buildRequestsHttpOptions())
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -280,6 +280,20 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       password: password,
     };
     return this.cleanParams(params);
+  }
+
+  protected buildRequestsHttpOptions(): any {
+    let httpOptions: any = {};
+    if (this.getOption('clientId') && this.getOption('clientSecret')) {
+       httpOptions = {
+        headers: new HttpHeaders (
+          {
+            'Authorization' : 'Basic ' + btoa(
+              this.getOption('clientId') + ':' + this.getOption('clientSecret')),
+          },
+        )};
+    }
+    return httpOptions;
   }
 
   protected handleResponseError(res: any): Observable<NbAuthResult> {

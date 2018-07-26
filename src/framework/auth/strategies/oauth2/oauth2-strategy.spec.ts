@@ -29,6 +29,7 @@ describe('oauth2-auth-strategy', () => {
 
   const successMessages = ['You have been successfully authenticated.'];
   const errorMessages = ['Something went wrong, please try again.'];
+  const authHeader = 'Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0';
 
   const tokenSuccessResponse = {
     access_token: '2YotnFZFEjr1zCsicMWpAA',
@@ -178,6 +179,7 @@ describe('oauth2-auth-strategy', () => {
 
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
+          && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
           && req.body['refresh_token'] === successToken.getRefreshToken()
           && !req.body['scope'],
@@ -394,6 +396,7 @@ describe('oauth2-auth-strategy', () => {
 
       httpMock.expectOne(
         req => req.url === 'http://example.com/custom'
+          && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
           && req.body['refresh_token'] === successToken.getRefreshToken()
           && req.body['scope'] === 'read',
@@ -456,6 +459,7 @@ describe('oauth2-auth-strategy', () => {
 
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
+          && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['email'] === credentials.email
           && req.body['password'] === credentials.password,
@@ -480,6 +484,7 @@ describe('oauth2-auth-strategy', () => {
 
        httpMock.expectOne(
         req => req.url === 'http://example.com/token'
+          && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['email'] === credentials.email
           && req.body['password'] === credentials.password,

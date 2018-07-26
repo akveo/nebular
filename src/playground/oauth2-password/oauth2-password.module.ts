@@ -52,8 +52,8 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
       strategies: [
          NbOAuth2AuthStrategy.setup({
           name: 'password',
-          clientId: 'test',
-          clientSecret: 'secret',
+          clientId: 'Aladdin',
+          clientSecret: 'open sesame',
           baseEndpoint: 'http://localhost:4400/api/auth/',
           token: {
             endpoint: 'token',
