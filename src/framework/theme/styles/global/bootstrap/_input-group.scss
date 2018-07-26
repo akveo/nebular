@@ -103,21 +103,21 @@
   }
 
   .input-group-sm > .form-control {
-    font-size: nb-theme(form-control-sm-font-size);
-    padding: nb-theme(form-control-sm-padding);
+    font-size: nb-theme(form-control-font-size-sm);
+    padding: nb-theme(form-control-padding-sm);
     @include install-placeholder(nb-theme(form-control-placeholder-color),
-      nb-theme(form-control-sm-font-size));
+      nb-theme(form-control-font-size-sm));
   }
 
   .input-group-lg > .form-control {
-    font-size: nb-theme(form-control-lg-font-size);
-    padding: nb-theme(form-control-lg-padding);
+    font-size: nb-theme(form-control-font-size-lg);
+    padding: nb-theme(form-control-padding-lg);
     @include install-placeholder(nb-theme(form-control-placeholder-color),
-      nb-theme(form-control-lg-font-size));
+      nb-theme(form-control-font-size-lg));
   }
 
   .input-group-rounded > .form-control {
-    border-radius: 1.5rem;
+    border-radius: nb-theme(form-control-round-border-radius);
   }
 
   .input-group-border-only > .form-control {
