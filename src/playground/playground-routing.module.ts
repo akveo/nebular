@@ -28,7 +28,6 @@ import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
 import { NbCalendarTestComponent } from './calendar/calendar-test.component';
-import { NbCalendarRangeTestComponent } from './calendar/calendar-range-test.component';
 import { NbCardShowcaseComponent } from './card/card-showcase.component';
 import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
@@ -167,10 +166,6 @@ export const routes: Routes = [
           {
             path: 'calendar-test.component',
             component: NbCalendarTestComponent,
-          },
-          {
-            path: 'calendar-range-test.component',
-            component: NbCalendarRangeTestComponent,
           },
         ],
       },

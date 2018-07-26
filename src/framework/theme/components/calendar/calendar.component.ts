@@ -5,59 +5,57 @@
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NbCalendarBaseCellStateService, NbCalendarCellStateService, NbCalendarWeeksFactoryService } from './service';
 
-/**
- * Basic example with including bounding dates
- * @stacked-example(Calendar Date Picker, calendar/calendar-test.component)
- *
- * Example with range selection
- * @stacked-example(Calendar Date Range Picker, calendar/calendar-range-test.component)
- *
- * @styles
- *
- * calendar-width:
- * calendar-height:
- * calendar-padding:
- * calendar-fg:
- * calendar-bg:
- * calendar-selected-item:
- * calendar-active-item:
- * calendar-between-item:
- * calendar-hovered-item:
- * calendar-inactive-opacity:
- * calendar-cell-width:
- * calendar-cell-height:
- * calendar-month-cell-width:
- * calendar-month-cell-height:
- * calendar-year-cell-width:
- * calendar-year-cell-height:
- * calendar-border-radius:
- * calendar-row-padding:
- * calendar-weekday-width:
- * calendar-weekday-height:
- * calendar-weekday-font-size:
- * calendar-weekday-font-weight:
- * calendar-weekday-fg:
- * calendar-holiday-fg:
- *
- */
+import { NbCalendarViewMode, NbCalendarWeeksFactoryService, NbCellStateService, NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarCellStateService } from './calendar-cell-state.service';
+
 @Component({
   selector: 'nb-calendar',
-  template: `
-    <nb-base-calendar [value]="date" (valueChange)="onChange($event)"></nb-base-calendar>
-  `,
+  styleUrls: ['./calendar.component.scss'],
+  templateUrl: './calendar.component.html',
   providers: [
     NbCalendarWeeksFactoryService,
-    { provide: NbCalendarCellStateService, useClass: NbCalendarBaseCellStateService },
+    { provide: NbCellStateService, useClass: NbCalendarCellStateService },
   ],
 })
-export class NbCalendarComponent {
-  @Input() date: Date;
-  @Output() dateChange = new EventEmitter<Date>();
+export class NbCalendarComponent<T> {
 
-  onChange(date: Date) {
-    this.date = date;
-    this.dateChange.emit(date);
+  @Input() date: T;
+
+  @Output() dateChange = new EventEmitter<T>();
+
+  today: Date = new Date();
+
+  ViewMode = NbCalendarViewMode;
+
+  activeMonth: Date = this.today;
+  activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+
+  setViewMode(viewMode: NbCalendarViewMode) {
+    this.activeViewMode = viewMode;
+  }
+
+  setActiveMonth(activeMonth: Date) {
+    this.activeMonth = activeMonth;
+  }
+
+  prevMonth() {
+    this.changeActiveMonth(-1);
+  }
+
+  nextMonth() {
+    this.changeActiveMonth(1);
+  }
+
+  prevYears() {
+    // this.activeYear -= 1;
+  }
+
+  nextYears() {
+    // this.activeYear += 1;
+  }
+
+  private changeActiveMonth(direction) {
+    this.activeMonth = NbDateTimeUtil.addMonth(this.activeMonth, direction);
   }
 }
