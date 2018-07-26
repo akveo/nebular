@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import {
+  NbCellStateService,
   NbCalendarCell,
   NbCalendarCellState,
   NbCalendarMonthBuilderContext,
-  NbCellStateService,
   NbDateTimeUtil,
 } from '../calendar-kit';
 

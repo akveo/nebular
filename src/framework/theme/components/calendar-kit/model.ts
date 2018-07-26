@@ -20,7 +20,6 @@ export class NbCalendarCell {
 export class NbCalendarMonthBuilderContext<T> {
   activeMonth: Date;
   selectedValue: T;
-  today: Date;
   includeBoundingMonths: boolean;
 }
 

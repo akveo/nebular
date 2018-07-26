@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 
 import { NbDateTimeUtil } from './date-time-util';
-import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../model';
+import { NbCalendarMonthBuilderContext } from '../model';
 import { batch, range } from '../helpers';
-import { NbCellStateService } from './cell-state.service';
 import { NbLocaleService } from './locale';
 
 @Injectable()
-export class NbCalendarWeeksFactoryService<T> {
+export class NbCalendarDaysService<T> {
 
-  constructor(protected locale: NbLocaleService,
-              protected cellStateService: NbCellStateService<T>) {
+  constructor(protected locale: NbLocaleService) {
   }
 
-  createWeeks(context: NbCalendarMonthBuilderContext<T>): NbCalendarCell[][] {
+  createWeeks(context: NbCalendarMonthBuilderContext<T>): Date[][] {
     const weeks = this.createDates(context);
 
     if (context.includeBoundingMonths) {
       this.addBoundingMonths(weeks, context);
     }
 
-    return weeks.map(week => week.map((date: Date) => this.createCellWithState(date, context)));
+    return weeks;
   }
 
   private createDates(context: NbCalendarMonthBuilderContext<T>): Date[][] {
@@ -37,12 +35,6 @@ export class NbCalendarWeeksFactoryService<T> {
     if (weeks[weeks.length - 1].length < NbDateTimeUtil.DAYS_IN_WEEK) {
       weeks[weeks.length - 1].push(...this.createNextBoundingDays(context.activeMonth));
     }
-  }
-
-  private createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
-    const cell = { date, state: [] };
-    this.cellStateService.assignStates(cell, context);
-    return cell;
   }
 
   private createDaysRange(activeMonth: Date): Date[] {

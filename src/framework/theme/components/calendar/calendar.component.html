@@ -14,9 +14,8 @@
 
     <nb-calendar-day-picker
       [activeMonth]="activeMonth"
-      [today]="today"
-      [selectedValue]="date"
-      (change)="dateChange.emit($event)">
+      [value]="date"
+      (valueChange)="dateChange.emit($event)">
     </nb-calendar-day-picker>
 
   </ng-container>

@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { NbCalendarViewMode, NbCalendarWeeksFactoryService, NbCellStateService, NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarViewMode, NbCellStateService, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarCellStateService } from './calendar-cell-state.service';
 
 @Component({
@@ -14,7 +14,6 @@ import { NbCalendarCellStateService } from './calendar-cell-state.service';
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
   providers: [
-    NbCalendarWeeksFactoryService,
     { provide: NbCellStateService, useClass: NbCalendarCellStateService },
   ],
 })

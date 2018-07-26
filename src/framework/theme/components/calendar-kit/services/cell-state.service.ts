@@ -5,8 +5,10 @@ import { NbDateTimeUtil } from './date-time-util';
 
 @Injectable()
 export class NbCellStateService<T> {
+  today = new Date();
+
   assignStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<T>) {
-    if (NbDateTimeUtil.isSameDay(cell.date, context.today)) {
+    if (NbDateTimeUtil.isSameDay(cell.date, this.today)) {
       cell.state.push(NbCalendarCellState.TODAY);
     }
 

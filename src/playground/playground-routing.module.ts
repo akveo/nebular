@@ -104,6 +104,7 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbCalendarKitTestComponent } from './calendar/calendar-kit-day-picker-test.component';
 
 export const routes: Routes = [
   {
@@ -166,6 +167,10 @@ export const routes: Routes = [
           {
             path: 'calendar-test.component',
             component: NbCalendarTestComponent,
+          },
+          {
+            path: 'calendar-kit-day-picker-test.component',
+            component: NbCalendarKitTestComponent,
           },
         ],
       },

@@ -8,15 +8,15 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbLocaleService } from './services';
+import { NbCalendarDaysService, NbLocaleService } from './services';
 
 import {
   NbCalendarCellComponent,
   NbCalendarDatePipe,
+  NbCalendarDayPickerComponent,
   NbCalendarDaysNamesComponent,
   NbCalendarHeaderComponent,
   NbCalendarMonthPickerComponent,
-  NbCalendarDayPickerComponent,
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
   NbCalendarYearPickerComponent,
@@ -25,6 +25,7 @@ import {
 
 const SERVICES = [
   NbLocaleService,
+  NbCalendarDaysService,
 ];
 
 const COMPONENTS = [

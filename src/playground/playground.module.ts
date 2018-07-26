@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 
 import {
   NbThemeModule,
+  NbCalendarKitModule,
   NbCalendarModule,
   NbCardModule,
   NbCheckboxModule,
@@ -128,9 +129,11 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbCalendarKitTestComponent } from './calendar/calendar-kit-day-picker-test.component';
 
 export const NB_MODULES = [
   NbCalendarModule,
+  NbCalendarKitModule,
   NbCardModule,
   NbLayoutModule,
   NbPopoverModule,
@@ -245,6 +248,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbCalendarKitTestComponent,
 ];
 
 

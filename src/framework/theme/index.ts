@@ -12,8 +12,12 @@ export * from './services/breakpoints.service';
 export * from './services/color.helper';
 export * from './services/direction.service';
 export * from './components/card/card.module';
+
 export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
+export * from './components/calendar/calendar-cell-state.service';
+export * from './components/calendar-kit';
+
 export * from './components/layout/layout.module';
 export * from './components/menu/menu.module';
 export { NbMenuService, NbMenuItem } from './components/menu/menu.service';

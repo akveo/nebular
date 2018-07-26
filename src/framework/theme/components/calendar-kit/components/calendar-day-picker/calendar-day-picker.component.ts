@@ -6,8 +6,8 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarWeeksFactoryService } from '../../services';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarDaysService, NbCellStateService } from '../../services';
+import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
 
 @Component({
   selector: 'nb-calendar-day-picker',
@@ -29,15 +29,17 @@ import { NbCalendarCell } from '../../model';
 export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Input() activeMonth: Date;
-  @Input() today: Date;
-  @Input() selectedValue: T;
+
+  @Input() value: T;
+
   @Input() displayBoundingMonths: boolean = true;
 
-  @Output() change = new EventEmitter<Date>();
+  @Output() valueChange = new EventEmitter<Date>();
 
   weeks: NbCalendarCell[][];
 
-  constructor(private calendarModelFactory: NbCalendarWeeksFactoryService<T>) {
+  constructor(private daysService: NbCalendarDaysService<T>,
+              private cellStateService: NbCellStateService<T>) {
   }
 
   ngOnChanges() {
@@ -47,15 +49,26 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
 
   onSelect(cell: NbCalendarCell) {
-    this.change.emit(cell.date);
+    this.valueChange.emit(cell.date);
   }
 
   private invalidateModel() {
-    this.weeks = this.calendarModelFactory.createWeeks({
+    const context = this.createContext();
+    const days: Date[][] = this.daysService.createWeeks(context);
+    this.weeks = days.map(week => week.map((date: Date) => this.createCellWithState(date, context)));
+  }
+
+  private createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
+    const cell = { date, state: [] };
+    this.cellStateService.assignStates(cell, context);
+    return cell;
+  }
+
+  private createContext(): NbCalendarMonthBuilderContext<T> {
+    return {
       activeMonth: this.activeMonth,
-      selectedValue: this.selectedValue,
-      today: this.today,
+      selectedValue: this.value,
       includeBoundingMonths: this.displayBoundingMonths,
-    });
+    }
   }
 }
