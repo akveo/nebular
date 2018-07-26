@@ -12,12 +12,12 @@
       (changeMode)="setViewMode(ViewMode.YEAR)">
     </nb-calendar-pageable-navigation>
 
-    <nb-calendar-month-view
+    <nb-calendar-day-picker
       [activeMonth]="activeMonth"
       [today]="today"
       [selectedValue]="date"
       (change)="dateChange.emit($event)">
-    </nb-calendar-month-view>
+    </nb-calendar-day-picker>
 
   </ng-container>
 

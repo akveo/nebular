@@ -10,8 +10,8 @@ import { NbCalendarWeeksFactoryService } from '../../services';
 import { NbCalendarCell } from '../../model';
 
 @Component({
-  selector: 'nb-calendar-month-view',
-  styleUrls: ['./calendar-month-view.component.scss'],
+  selector: 'nb-calendar-day-picker',
+  styleUrls: ['./calendar-day-picker.component.scss'],
   template: `
     <div class="body">
       <nb-calendar-days-names></nb-calendar-days-names>
@@ -26,7 +26,7 @@ import { NbCalendarCell } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthViewComponent<T> implements OnChanges {
+export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Input() activeMonth: Date;
   @Input() today: Date;
