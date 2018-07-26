@@ -24,7 +24,7 @@ export class NewsService {
       .get<NewsPost[]>('/assets/data/news.json')
       .pipe(
         map(news => news.splice(startIndex, this.pageSize)),
-        delay(2000),
+        delay(1000),
       );
   }
 }
