@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class NbCalendarHeaderComponent {
-  @Input() date: Date;
+  date: Date = new Date();
 }
