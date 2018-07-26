@@ -7,16 +7,20 @@ import {
   Output,
   OnDestroy,
   AfterViewInit,
+  ContentChildren,
+  QueryList,
 } from '@angular/core';
-import { forkJoin } from 'rxjs';
-import { takeWhile, filter, switchMap } from 'rxjs/operators';
+import { Observable, forkJoin, of, interval, timer } from 'rxjs';
+import { takeWhile, filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
+import { NbListItemComponent } from './list.component';
 
-export enum NbScrollDirection {
-  UP,
-  DOWN,
+class ScrollableContainerDimentions {
+  scrollTop: number;
+  scrollHeight: number;
+  clientHeight: number;
 }
 
 /**
@@ -35,8 +39,11 @@ export enum NbScrollDirection {
 export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
 
   private alive = true;
-  private lastScrollPosition = 0;
+  private lastScrollPosition;
   windowScroll = false;
+  private get elementScroll() {
+    return !this.windowScroll;
+  }
 
   /**
    * Threshold after which event load more event will be emited.
@@ -58,21 +65,22 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
    * Emits when distance between list bottom and current scroll position is less than threshold.
    */
   @Output()
-  bottomThreshold = new EventEmitter();
+  bottomThreshold = new EventEmitter(true);
 
   /**
    * Emits when distance between list top and current scroll position is less than threshold.
    */
   @Output()
-  topThreshold = new EventEmitter();
+  topThreshold = new EventEmitter(true);
 
   @HostListener('scroll')
-  elementScroll() {
-    if (!this.windowScroll) {
-      const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
-      this.checkPosition(scrollHeight, scrollTop, clientHeight );
+  onElementScroll() {
+    if (this.elementScroll) {
+      this.checkPosition(this.elementRef.nativeElement);
     }
   }
+
+  @ContentChildren(NbListItemComponent) listItems: QueryList<NbListItemComponent>;
 
   constructor(
     private elementRef: ElementRef,
@@ -85,35 +93,67 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         filter(() => this.windowScroll),
-        switchMap(() => forkJoin(this.scrollService.getPosition(), this.dimensionsService.getDimensions())),
+        switchMap(() => this.getContainerDimentions()),
       )
-      .subscribe(([scrollPosition, dimensions]) => {
-        this.checkPosition(dimensions.scrollHeight, scrollPosition.y, dimensions.clientHeight);
-      });
+      .subscribe(dimentions => this.checkPosition(dimentions));
+
+    this.listItems.changes
+      .pipe(
+        takeWhile(() => this.alive),
+        // For some reason, changes are emitted before list item removed from dom,
+        // so dimensions will be incorrect.
+        // Check every 50ms for a second if dom and query are in sync.
+        // Once they synchronized, we can get proper dimensions.
+        switchMap(() => interval(50).pipe(
+          takeUntil(timer(1000)),
+          filter(() => this.inSyncWithDom()),
+          take(1),
+        )),
+        switchMap(() => this.getContainerDimentions()),
+      )
+      .subscribe(dimentions => this.checkPosition(dimentions));
+
+      this.getContainerDimentions().subscribe(dimentions => this.checkPosition(dimentions));
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  checkPosition(scrollHeight: number, scrollTop: number, clientHeight: number) {
-    if (this.lastScrollPosition === scrollTop) {
-      return;
-    }
-
-    const scrollDirection = scrollTop > this.lastScrollPosition
-      ? NbScrollDirection.DOWN
-      : NbScrollDirection.UP;
+  checkPosition({ scrollHeight, scrollTop, clientHeight }: ScrollableContainerDimentions) {
+    const initialCheck = this.lastScrollPosition == null;
+    const manualCheck = this.lastScrollPosition === scrollTop;
+    const scrollUp = scrollTop < this.lastScrollPosition;
+    const scrollDown = scrollTop > this.lastScrollPosition;
     const distanceToBottom = scrollHeight - scrollTop - clientHeight;
 
-    this.lastScrollPosition = scrollTop;
-
-    if (scrollDirection === NbScrollDirection.DOWN && distanceToBottom <= this.threshold) {
+    if ((initialCheck ||  manualCheck || scrollDown) && distanceToBottom <= this.threshold) {
       this.bottomThreshold.emit();
     }
-
-    if (scrollDirection === NbScrollDirection.UP && scrollTop <= this.threshold) {
+    if ((initialCheck || scrollUp) && scrollTop <= this.threshold) {
       this.topThreshold.emit();
     }
+
+    this.lastScrollPosition = scrollTop;
+  }
+
+  private getContainerDimentions(): Observable<ScrollableContainerDimentions> {
+    if (this.elementScroll) {
+      const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
+      return of({ scrollTop, scrollHeight, clientHeight });
+    }
+
+    return forkJoin(this.scrollService.getPosition(), this.dimensionsService.getDimensions())
+      .pipe(
+          map(([scrollPosition, dimensions]) => ({
+            scrollTop: scrollPosition.y,
+            scrollHeight: dimensions.scrollHeight,
+            clientHeight: dimensions.clientHeight,
+          })),
+      );
+  }
+
+  private inSyncWithDom(): boolean {
+    return this.elementRef.nativeElement.children.length === this.listItems.length;
   }
 }

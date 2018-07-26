@@ -78,23 +78,18 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
           : 1;
         this.pageToLoad = this.startPage;
       });
-
-    this.loadNext();
   }
 
   ngAfterViewInit() {
-    let firstLoad = this.news.length === 0;
-    if (!firstLoad) {
-      this.firstItem = this.listItems.first.nativeElement;
-    }
-
+    let firstLoad = true;
     this.listItems.changes
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => {
-        if (firstLoad && this.news.length > 0) {
+        const newsLoaded = this.news.length > 0;
+        if (firstLoad && newsLoaded) {
           firstLoad = false;
           this.firstItem = this.listItems.first.nativeElement;
-        } else {
+        } else if (newsLoaded) {
           this.restoreScrollPosition();
         }
       });

@@ -19,6 +19,7 @@ import { NewsService, NewsPost } from './news.service';
   template: `
     <nb-card size="large">
       <div [nbSpinner]="loadingPrev"></div>
+
       <nb-list
         nbInfiniteList
         [threshold]="100"
@@ -73,23 +74,18 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
           : 1;
         this.pageToLoad = this.startPage;
       });
-
-    this.loadNext();
   }
 
   ngAfterViewInit() {
-    let firstLoad = this.news.length === 0;
-    if (!firstLoad) {
-      this.firstItem = this.listItems.first.nativeElement;
-    }
-
+    let firstLoad = true;
     this.listItems.changes
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => {
-        if (firstLoad && this.news.length > 0) {
+        const newsLoaded = this.news.length > 0;
+        if (firstLoad && newsLoaded) {
           firstLoad = false;
           this.firstItem = this.listItems.first.nativeElement;
-        } else {
+        } else if (newsLoaded) {
           this.restoreScrollPosition();
         }
       });
@@ -104,6 +100,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
     if (this.startPage === 1 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
+
     this.newsService.load(this.startPage - 1, this.pageSize)
       .subscribe(news => {
         this.startPage--;
@@ -117,12 +114,13 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
 
     this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
+
     this.newsService.load(this.pageToLoad, this.pageSize)
       .subscribe(news => {
         this.news.push(...news);
         this.placeholders = [];
-        this.pageToLoad++;
         this.loadingNext = false;
+        this.pageToLoad++;
       });
   }
 

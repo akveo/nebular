@@ -119,7 +119,7 @@ describe('Directive: NbScrollDirective', () => {
   });
 
   it('should listen to element scroll', () => {
-    const elementScrollHandlerSpy = spyOn(scrollDirective, 'elementScroll');
+    const elementScrollHandlerSpy = spyOn(scrollDirective, 'onElementScroll');
     scrollingElementRef.nativeElement.dispatchEvent(new Event('scroll'));
     expect(elementScrollHandlerSpy).toHaveBeenCalledTimes(1);
   });
