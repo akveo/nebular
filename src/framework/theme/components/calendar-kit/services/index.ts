@@ -1,4 +1,4 @@
-export { NbCellStateService } from './cell-state.service';
-export { NbCalendarDaysService } from './calendar-week-factory.service';
+export { NbCalendarCellStatusService } from './calendar-cell-status.service';
+export { NbCalendarDaysService } from './calendar-days.service';
 export { NbDateTimeUtil } from './date-time-util';
-export { NbLocaleService } from './locale';
+export { NbLocaleService } from './locale.service';

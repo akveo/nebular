@@ -15,7 +15,6 @@ export * from './components/card/card.module';
 
 export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
-export * from './components/calendar/calendar-cell-state.service';
 export * from './components/calendar-kit';
 
 export * from './components/layout/layout.module';

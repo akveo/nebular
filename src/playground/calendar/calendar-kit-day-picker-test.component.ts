@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbCalendarCellStateService, NbCellStateService } from '@nebular/theme';
+import { NbCalendarBaseCellStateService, NbCalendarCellStatusService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-calendar-test',
@@ -17,7 +17,7 @@ import { NbCalendarCellStateService, NbCellStateService } from '@nebular/theme';
       </nb-card-body>
     </nb-card>
   `,
-  providers: [{ provide: NbCellStateService, useClass: NbCalendarCellStateService }],
+  providers: [{ provide: NbCalendarCellStatusService, useClass: NbCalendarBaseCellStateService }],
 })
 export class NbCalendarKitTestComponent {
   activeMonth = new Date();

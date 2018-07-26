@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarCellState } from '../../model';
+import { NbCalendarCell, NbCalendarCellStatus } from '../../model';
 
 @Component({
   selector: 'nb-calendar-cell',
@@ -18,12 +18,12 @@ import { NbCalendarCell, NbCalendarCellState } from '../../model';
 })
 export class NbCalendarCellComponent {
   date: number;
-  state: NbCalendarCellState[];
+  state: NbCalendarCellStatus[];
 
   @Input()
   set cell(cell: NbCalendarCell) {
     this.date = cell.date.getDate();
-    this.state = cell.state;
+    this.state = cell.status;
   }
 
   @HostBinding('class')

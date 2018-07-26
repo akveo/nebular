@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarCellComponent } from './calendar-cell.component';
-import { NbCalendarCellState } from '../../model';
+import { NbCalendarCellStatus } from '../../model';
 import { NbDateTimeUtil } from '../../../service/index';
 
 describe('Component: NbCalendarCell', () => {
@@ -17,7 +17,7 @@ describe('Component: NbCalendarCell', () => {
     fixture = TestBed.createComponent(NbCalendarCellComponent);
     component = fixture.componentInstance;
     component._date = NbDateTimeUtil.createDate(2018, 6, 25);
-    component.state = [];
+    component.status = [];
     componentEl = fixture.debugElement.nativeElement;
     div = componentEl.querySelector('div');
   });
@@ -33,10 +33,10 @@ describe('Component: NbCalendarCell', () => {
     div.dispatchEvent(new Event('click'));
   });
 
-  it('should contain classes depends on state', () => {
-    component.state = <NbCalendarCellState[]> [...Object.values(NbCalendarCellState)];
+  it('should contain classes depends on status', () => {
+    component.state = <NbCalendarCellStatus[]> [...Object.values(NbCalendarCellStatus)];
     fixture.detectChanges();
-    Object.values(NbCalendarCellState).forEach(state => {
+    Object.values(NbCalendarCellStatus).forEach(state => {
       expect(componentEl.classList).toContain(state);
     });
   });

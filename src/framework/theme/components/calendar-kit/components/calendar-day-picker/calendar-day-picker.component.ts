@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarDaysService, NbCellStateService } from '../../services';
+import { NbCalendarDaysService, NbCalendarCellStatusService } from '../../services';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
 
 @Component({
@@ -39,7 +39,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   weeks: NbCalendarCell[][];
 
   constructor(private daysService: NbCalendarDaysService<T>,
-              private cellStateService: NbCellStateService<T>) {
+              private cellStateService: NbCalendarCellStatusService<T>) {
   }
 
   ngOnChanges() {

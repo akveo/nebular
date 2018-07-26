@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NbDateTimeUtil } from './date-time-util';
 import { NbCalendarMonthBuilderContext } from '../model';
 import { batch, range } from '../helpers';
-import { NbLocaleService } from './locale';
+import { NbLocaleService } from './locale.service';
 
 @Injectable()
 export class NbCalendarDaysService<T> {

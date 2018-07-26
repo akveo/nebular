@@ -14,7 +14,7 @@ export interface NbCalendarDay {
 
 export class NbCalendarCell {
   date: Date;
-  state: NbCalendarCellState[] = [];
+  status: NbCalendarCellStatus[] = [];
 }
 
 export class NbCalendarMonthBuilderContext<T> {
@@ -34,16 +34,10 @@ export enum NbCalendarViewMode {
   DATE = 'date',
 }
 
-export enum NbCalendarCellState {
+export enum NbCalendarCellStatus {
   TODAY = 'cell-today',
   BOUNDING_MONTH = 'cell-bounding-month',
   SELECTED = 'cell-selected',
 
   IN_RANGE = 'cell-range-inbetween',
-}
-
-export enum NbCalendarNameStyle {
-  LONG = 'long',
-  SHORT = 'short',
-  NARROW = 'narrow',
 }

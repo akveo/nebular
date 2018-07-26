@@ -4,18 +4,34 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Injectable, Input, Output } from '@angular/core';
 
-import { NbCalendarViewMode, NbCellStateService, NbDateTimeUtil } from '../calendar-kit';
-import { NbCalendarCellStateService } from './calendar-cell-state.service';
+import {
+  NbCalendarCell,
+  NbCalendarCellStatus,
+  NbCalendarCellStatusService,
+  NbCalendarMonthBuilderContext,
+  NbCalendarViewMode,
+  NbDateTimeUtil,
+} from '../calendar-kit';
+
+
+@Injectable()
+export class NbCalendarBaseCellStateService extends NbCalendarCellStatusService<Date> {
+  assignStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<Date>) {
+    super.assignStates(cell, context);
+
+    if (context.selectedValue && NbDateTimeUtil.isSameDay(cell.date, context.selectedValue)) {
+      cell.status.push(NbCalendarCellStatus.SELECTED);
+    }
+  }
+}
 
 @Component({
   selector: 'nb-calendar',
   styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
-  providers: [
-    { provide: NbCellStateService, useClass: NbCalendarCellStateService },
-  ],
+  providers: [{ provide: NbCalendarCellStatusService, useClass: NbCalendarBaseCellStateService }],
 })
 export class NbCalendarComponent<T> {
 
