@@ -107,7 +107,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
       decoded = this.getPayload();
     }
     finally {
-      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : (date ? date : new Date());
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : date;
     }
   }
 
