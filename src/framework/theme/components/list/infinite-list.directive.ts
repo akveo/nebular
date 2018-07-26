@@ -17,7 +17,7 @@ import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
 import { NbListItemComponent } from './list.component';
 
-export class ScrollableContainerDimentions {
+export class NbScrollableContainerDimentions {
   scrollTop: number;
   scrollHeight: number;
   clientHeight: number;
@@ -120,7 +120,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.alive = false;
   }
 
-  checkPosition({ scrollHeight, scrollTop, clientHeight }: ScrollableContainerDimentions) {
+  checkPosition({ scrollHeight, scrollTop, clientHeight }: NbScrollableContainerDimentions) {
     const initialCheck = this.lastScrollPosition == null;
     const manualCheck = this.lastScrollPosition === scrollTop;
     const scrollUp = scrollTop < this.lastScrollPosition;
@@ -137,7 +137,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.lastScrollPosition = scrollTop;
   }
 
-  private getContainerDimentions(): Observable<ScrollableContainerDimentions> {
+  private getContainerDimentions(): Observable<NbScrollableContainerDimentions> {
     if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       return of({ scrollTop, scrollHeight, clientHeight });
