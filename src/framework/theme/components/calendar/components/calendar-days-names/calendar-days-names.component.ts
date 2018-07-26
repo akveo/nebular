@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbCalendarDay } from '../../model';
-import { NbDateTimeUtil, NbLocaleAdapter } from '../../service';
+import { NbDateTimeUtil, NbLocaleService } from '../../service';
 
 @Component({
   selector: 'nb-calendar-days-names',
@@ -14,7 +14,7 @@ export class NbCalendarDaysNamesComponent implements OnInit {
 
   days: NbCalendarDay[];
 
-  constructor(private localeAdapter: NbLocaleAdapter) {
+  constructor(private locale: NbLocaleService) {
   }
 
   ngOnInit() {
@@ -23,12 +23,12 @@ export class NbCalendarDaysNamesComponent implements OnInit {
   }
 
   private createDaysNames(): NbCalendarDay[] {
-    return this.localeAdapter.getDayOfWeekNames()
+    return this.locale.getDayOfWeekNames()
       .map(NbDateTimeUtil.markIfHoliday);
   }
 
   private shiftStartOfWeek(days: NbCalendarDay[]): NbCalendarDay[] {
-    for (let i = 0; i < this.localeAdapter.getStartOfWeek(); i++) {
+    for (let i = 0; i < this.locale.getFirstDayOfWeek(); i++) {
       days.push(days.shift());
     }
 

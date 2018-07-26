@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbLocaleAdapter, NbNativeLocaleAdapter  } from './service';
+import { NbLocaleService  } from './service';
 
 import {
   NbBaseCalendarComponent ,
@@ -26,7 +26,7 @@ import {
 
 
 const NB_CALENDAR_PROVIDERS = [
-  { provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter },
+  NbLocaleService,
 ];
 
 const COMPONENTS = [

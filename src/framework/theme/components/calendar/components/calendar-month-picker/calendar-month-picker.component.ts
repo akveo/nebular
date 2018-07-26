@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 
 import { NbDateTimeUtil } from '../../service/date-time-util';
 import { batch, range } from '../../helpers';
-import { NbLocaleAdapter } from '@nebular/theme/components/calendar/service';
+import { NbLocaleService } from '../../service';
 
 // TODO refactor template with styles refactoring
 @Component({
@@ -43,7 +43,7 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   // TODO define type for month
   months: any[];
 
-  constructor(private localeAdapter: NbLocaleAdapter) {
+  constructor(private locale: NbLocaleService) {
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class NbCalendarMonthPickerComponent implements OnInit {
     const months = range(12)
       .map(index => ({
         value: index,
-        label: this.localeAdapter.getMonthNameByIndex(index),
+        label: this.locale.getMonthNameByIndex(index),
         selected: selectedMonth === index,
       }));
 

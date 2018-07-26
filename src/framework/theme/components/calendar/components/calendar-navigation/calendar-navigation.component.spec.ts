@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
-import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
+import { NbLocaleAdapter, NbLocaleService } from '../../service';
 
 
 describe('Component: NbCalendarNavigation', () => {
@@ -13,7 +13,7 @@ describe('Component: NbCalendarNavigation', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
     });
     fixture = TestBed.createComponent(NbCalendarNavigationComponent);
     component = fixture.componentInstance;

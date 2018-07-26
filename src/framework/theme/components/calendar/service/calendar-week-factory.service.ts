@@ -4,13 +4,13 @@ import { NbDateTimeUtil } from './date-time-util';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../model';
 import { batch, range } from '../helpers';
 import { NbCalendarCellStateService } from './calendar-cell-state.service';
-import { NbLocaleAdapter } from './locale-adapter';
+import { NbLocaleService } from './locale';
 
 @Injectable()
 export class NbCalendarWeeksFactoryService<T> {
 
 
-  constructor(protected localeAdapter: NbLocaleAdapter,
+  constructor(protected locale: NbLocaleService,
               protected cellStateService: NbCalendarCellStateService<T>) {
   }
 
@@ -62,12 +62,12 @@ export class NbCalendarWeeksFactoryService<T> {
   private createNextBoundingDays(activeMonth: Date): Date[] {
     const month = NbDateTimeUtil.addMonth(activeMonth, 1);
     const firstDay = NbDateTimeUtil.getMonthStart(month);
-    const weekStartOffset = 7 - this.localeAdapter.getWeekStartDiff(firstDay);
+    const weekStartOffset = 7 - this.locale.getWeekStartDiff(firstDay);
     return this.createDaysRange(month).slice(0, weekStartOffset);
   }
 
   private getStartOfWeekDayDiff(date: Date): number {
     const startOfMonth = NbDateTimeUtil.getMonthStart(date);
-    return this.localeAdapter.getWeekStartDiff(startOfMonth);
+    return this.locale.getWeekStartDiff(startOfMonth);
   }
 }

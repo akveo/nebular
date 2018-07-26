@@ -1,27 +1,27 @@
 import { async, inject, TestBed } from '@angular/core/testing';
-import { NbNativeLocaleAdapter } from './native-locale-adapter';
+import { NbLocaleService } from './locale';
 import { range } from '../helpers';
 
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 describe('native-locale-adapter', () => {
-  let localeAdapter: NbNativeLocaleAdapter;
+  let localeAdapter: NbLocaleService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NbNativeLocaleAdapter],
+      providers: [NbLocaleService],
     })
   });
 
   beforeEach(async(inject(
-    [NbNativeLocaleAdapter],
+    [NbLocaleService],
     (_localeAdapter) => {
       localeAdapter = _localeAdapter
     },
   )));
 
   it('should get start of week day', () => {
-    expect(localeAdapter.getStartOfWeek()).toBe(1);
+    expect(localeAdapter.getFirstDayOfWeek()).toBe(1);
   });
 
   it('should get month name', () => {

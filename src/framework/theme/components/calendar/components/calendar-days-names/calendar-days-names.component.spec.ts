@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarDaysNamesComponent } from './calendar-days-names.component';
-import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
+import { NbLocaleAdapter, NbLocaleService } from '../../service';
 
 
 describe('Component: NbCalendarDaysNames', () => {
@@ -11,7 +11,7 @@ describe('Component: NbCalendarDaysNames', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDaysNamesComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
     });
     fixture = TestBed.createComponent(NbCalendarDaysNamesComponent);
     componentEl = fixture.debugElement.nativeElement;

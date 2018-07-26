@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
-import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
+import { NbLocaleAdapter, NbLocaleService } from '../../service';
 
 
 describe('Component: NbCalendarPageableNavigation', () => {
@@ -14,7 +14,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
     });
     fixture = TestBed.createComponent(NbCalendarPageableNavigationComponent);
     component = fixture.componentInstance;

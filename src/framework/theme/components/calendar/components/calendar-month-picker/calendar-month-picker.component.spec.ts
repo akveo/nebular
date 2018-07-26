@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
-import { NbLocaleAdapter, NbNativeLocaleAdapter } from '../../service';
+import { NbLocaleAdapter, NbLocaleService } from '../../service';
 
 
 describe('Component: NbCalendarMonthPicker', () => {
@@ -13,7 +13,7 @@ describe('Component: NbCalendarMonthPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarMonthPickerComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbNativeLocaleAdapter }],
+      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
       schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(NbCalendarMonthPickerComponent);
