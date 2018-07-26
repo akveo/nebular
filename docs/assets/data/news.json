@@ -72,7 +72,7 @@
   {
     "title": "A curious case of the @Host decorator and Element Injectors in Angular",
     "link": "https://blog.angularindepth.com/a-curios-case-of-the-host-decorator-and-element-injectors-in-angular-582562abcf0a",
-    "text": "As you know, Angular’s dependency injection mechanism includes a bunch of decorators like @Optional and @Self which impact the way dependencies are resolved. And while most of them are pretty straightforward and self-explanatory, the @Host decorator has puzzled me for a long time. I haven’t found the docs that explain it, except for a comment in the sources."
+    "text": "As you know, Angular’s dependency injection mechanism includes a bunch of decorators like @Optional and @Self which impact the way dependencies are resolved. And while most of them are pretty straightforward and self-explanatory, the @Host decorator has puzzled me for a long time."
   },
   {
     "title": "Simple state mutations in NGXS with Immer",
@@ -122,7 +122,7 @@
   {
     "title": "Ivy engine in Angular: first in-depth look at compilation, runtime and change detection",
     "link": "https://blog.angularindepth.com/ivy-engine-in-angular-first-in-depth-look-at-compilation-runtime-and-change-detection-876751edd9fd",
-    "text": "I usually finish my talks with the philosophical phrase that nothing stays the same. And as you probably know it’s more then true with Angular. The current rendering engine is being rewritten with the new much enhanced version called Ivy. The current status of Ivy can be tracked here. Today, we’re going to take a look under the hood of this marvel of complex framework engineering."
+    "text": "I usually finish my talks with the philosophical phrase that nothing stays the same. And as you probably know it’s more then true with Angular. The current rendering engine is being rewritten with the new much enhanced version called Ivy. The current status of Ivy can be tracked here."
   },
   {
     "title": "RxJS: Combining Operators",
@@ -132,12 +132,12 @@
   {
     "title": "A modern solution to lazy loading images using Intersection Observer",
     "link": "https://blog.angularindepth.com/a-modern-solution-to-lazy-loading-using-intersection-observer-9280c149bbc",
-    "text": "Performance of a web application has become a key factor in deciding conversion rates for e-commerce websites. The faster a page loads, the better the conversion rate. According to the recent mobile page speed benchmarks released by Google, the bounce probability increases as page load time increases. The bounce probability increase varies from 32% for a 1 to 3 second load time to 123% for a 1 to 10 second load time."
+    "text": "Performance of a web application has become a key factor in deciding conversion rates for e-commerce websites. The faster a page loads, the better the conversion rate. According to the recent mobile page speed benchmarks released by Google, the bounce probability increases as page load time increases."
   },
   {
     "title": "Working with DOM in Angular: unexpected consequences and optimization techniques",
     "link": "https://blog.angularindepth.com/working-with-dom-in-angular-unexpected-consequences-and-optimization-techniques-682ac09f6866",
-    "text": "I recently gave a talk on advanced DOM manipulations in Angular in a form of a workshop at NgConf. I went from the basics like using template references and DOM queries to access DOM elements to using a view container to render templates and components dynamically. If you haven’t seen the talk already, I encourage you to do so. By going through a bunch of practical exercises you’ll be able to learn and reinforce new knowledge much quicker. There’s also a shorter talk on that subject I gave at NgViking."
+    "text": "I recently gave a talk on advanced DOM manipulations in Angular in a form of a workshop at NgConf. I went from the basics like using template references and DOM queries to access DOM elements to using a view container to render templates and components dynamically."
   },
   {
     "title": "The benefits of application state normalization in Angular",
@@ -242,7 +242,7 @@
   {
     "title": "Practical RxJS In The Wild 🦁— Requests with concatMap() vs mergeMap() vs forkJoin() 🥊",
     "link": "https://blog.angularindepth.com/practical-rxjs-in-the-wild-requests-with-concatmap-vs-mergemap-vs-forkjoin-11e5b2efe293",
-    "text": "I would like to share with you experience acquired by working on a yet another Hacker News client (code name HAKAFAKA 😂 still in alpha). I have been on the road for couple months now and realized that a small coding project wouldn’t hurt. And sure it didn’t, on the contrary it provided inspiration for this new post so let’s get straight to it!"
+    "text": "I would like to share with you experience acquired by working on a yet another Hacker News client (code name HAKAFAKA 😂 still in alpha). I have been on the road for couple months now and realized that a small coding project wouldn’t hurt."
   },
   {
     "title": "He who thinks change detection is depth-first and he who thinks it’s breadth-first are both usually right",
@@ -252,7 +252,7 @@
   {
     "title": "Learn to combine RxJs sequences with super intuitive interactive diagrams",
     "link": "https://blog.angularindepth.com/learn-to-combine-rxjs-sequences-with-super-intuitive-interactive-diagrams-20fce8e6511",
-    "text": "When working on a sufficiently complex application you usually have data coming from more than one data source. It can be some multiple external data points like Firebase or several UI widgets interacting with a user. Sequence composition is a technique that enables you to create complex queries across multiple data sources by combing relevant streams into one."
+    "text": "When working on a sufficiently complex application you usually have data coming from more than one data source. It can be some multiple external data points like Firebase or several UI widgets interacting with a user. Sequence composition is a technique that enables you to create complex queries."
   },
   {
     "title": "React Call Return in Angular",
