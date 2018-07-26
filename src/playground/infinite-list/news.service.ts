@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 
 export class NewsPost {
   title: string;
@@ -16,15 +16,7 @@ export class NewsService {
 
   load(): Observable<NewsPost[]> {
     return this.http
-      .get('/assets/data/news.json')
-      .pipe(
-        map(({ news }: { news: any[] }) => {
-          return news.map(n => <NewsPost>{
-            ...n,
-            text: n.encoded,
-          });
-        }),
-        delay(2000),
-      );
+      .get<NewsPost[]>('/assets/data/news.json')
+      .pipe(delay(2000));
   }
 }
