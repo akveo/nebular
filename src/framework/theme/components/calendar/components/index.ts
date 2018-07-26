@@ -7,6 +7,5 @@ export { NbCalendarMonthViewComponent } from './calendar-month-view/calendar-mon
 export { NbCalendarNavigationComponent } from './calendar-navigation/calendar-navigation.component';
 export { NbCalendarPageableNavigationComponent } from './calendar-navigation/calendar-pageable-navigation.component';
 export { NbCalendarDaysNamesComponent } from './calendar-days-names/calendar-days-names.component';
-export { NbCalendarWeekComponent } from './calendar-week/calendar-week.component';
 
 export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';

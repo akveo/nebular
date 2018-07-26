@@ -22,11 +22,13 @@ import { NbCalendarCell } from '../../model';
 
     <div class="body">
       <nb-calendar-days-names></nb-calendar-days-names>
-      <nb-calendar-week
-        *ngFor="let week of weeks"
-        [week]="week"
-        (click)="onSelect($event)">
-      </nb-calendar-week>
+      <div class="week" *ngFor="let week of weeks">
+        <nb-calendar-cell
+          *ngFor="let cell of week"
+          (click)="onSelect(cell)"
+          [cell]="cell">
+        </nb-calendar-cell>
+      </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

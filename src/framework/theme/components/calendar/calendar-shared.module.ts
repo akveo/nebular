@@ -20,7 +20,6 @@ import {
   NbCalendarMonthViewComponent,
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
-  NbCalendarWeekComponent,
   NbCalendarYearPickerComponent,
 } from './components';
 
@@ -35,7 +34,6 @@ const COMPONENTS = [
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
   NbCalendarDaysNamesComponent,
-  NbCalendarWeekComponent,
   NbCalendarYearPickerComponent,
   NbCalendarMonthPickerComponent,
   NbCalendarMonthViewComponent,
