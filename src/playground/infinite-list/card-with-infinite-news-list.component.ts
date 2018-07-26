@@ -46,6 +46,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
 
   pageSize = 10;
   startPage: number;
+  pageToLoad: number;
 
   loadingPrev = false;
   loadingNext = false;
@@ -70,6 +71,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
         this.startPage = page
           ? Number.parseInt(page, 10)
           : 1;
+        this.pageToLoad = this.startPage;
       });
 
     this.loadNext();
@@ -102,7 +104,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
     if (this.startPage === 1 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
-    this.newsService.load()
+    this.newsService.load(this.startPage - 1)
       .subscribe(news => {
         this.startPage--;
         this.news.unshift(...news);
@@ -115,11 +117,12 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
 
     this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
-    this.newsService.load()
+    this.newsService.load(this.pageToLoad)
       .subscribe(news => {
         this.news.push(...news);
-        this.loadingNext = false;
         this.placeholders = [];
+        this.pageToLoad++;
+        this.loadingNext = false;
       });
   }
 

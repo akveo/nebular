@@ -47,6 +47,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
 
   pageSize = 10;
   startPage: number;
+  pageToLoad: number;
 
   loadingPrev = false;
   loadingNext = false;
@@ -63,6 +64,8 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     private route: ActivatedRoute,
     private scrollService: NbLayoutScrollService,
   ) {
+    // TODO S
+    // remove
     history.scrollRestoration = 'manual';
   }
 
@@ -73,6 +76,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
         this.startPage = page
           ? Number.parseInt(page, 10)
           : 1;
+        this.pageToLoad = this.startPage;
       });
 
     this.loadNext();
@@ -105,7 +109,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     if (this.startPage === 1 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
-    this.newsService.load()
+    this.newsService.load(this.startPage - 1)
       .subscribe(news => {
         this.startPage--;
         this.news.unshift(...news);
@@ -118,11 +122,12 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
 
     this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
-    this.newsService.load()
+    this.newsService.load(this.pageToLoad)
       .subscribe(news => {
         this.news.push(...news);
-        this.loadingNext = false;
         this.placeholders = [];
+        this.loadingNext = false;
+        this.pageToLoad++;
       });
   }
 

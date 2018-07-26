@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 export class NewsPost {
   title: string;
@@ -12,11 +12,19 @@ export class NewsPost {
 
 @Injectable()
 export class NewsService {
+  totalPages = 7;
+  pageSize = 10;
+
   constructor(private http: HttpClient) {}
 
-  load(): Observable<NewsPost[]> {
+  load(page: number): Observable<NewsPost[]> {
+    const startIndex = ((page - 1) % this.totalPages) * this.pageSize;
+
     return this.http
       .get<NewsPost[]>('/assets/data/news.json')
-      .pipe(delay(2000));
+      .pipe(
+        map(news => news.splice(startIndex, this.pageSize)),
+        delay(2000),
+      );
   }
 }
