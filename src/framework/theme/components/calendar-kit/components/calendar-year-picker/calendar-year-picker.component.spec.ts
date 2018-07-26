@@ -21,18 +21,12 @@ describe('Component: NbCalendarYearPicker', () => {
 
   beforeEach(() => {
     component.value = new Date(2018, 6, 23);
-    component.startYear = 2010;
     fixture.detectChanges();
   });
 
   it('should contain header and body', () => {
     expect(componentEl.querySelector('nb-calendar-pageable-navigation')).toBeDefined();
     expect(componentEl.querySelector('.body')).toBeDefined();
-  });
-
-  it('should fire changeMode event when click on header', () => {
-    component.changeMode.subscribe(e => expect(e).toBeUndefined());
-    componentEl.querySelector('nb-calendar-pageable-navigation').dispatchEvent(new Event('click'));
   });
 
   it('should render 20 years', () => {

@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
-import { NbLocaleAdapter, NbLocaleService } from '../../../service/index';
+import { NbLocaleService } from '../../services';
 
 
 describe('Component: NbCalendarMonthPicker', () => {
@@ -13,7 +13,7 @@ describe('Component: NbCalendarMonthPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarMonthPickerComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
+      providers: [NbLocaleService],
       schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(NbCalendarMonthPickerComponent);
@@ -26,21 +26,14 @@ describe('Component: NbCalendarMonthPicker', () => {
     expect(componentEl.querySelector('.body')).toBeDefined();
   });
 
-  it('should fire changeMode event when click on header', () => {
-    component.changeMode.subscribe(e => expect(e).toBeUndefined());
-    componentEl.querySelector('nb-calendar-navigation').dispatchEvent(new Event('click'));
-  });
-
   it('should render twelve month', async(() => {
     component.value = new Date(2018, 6, 23);
-    component.today = new Date(2018, 6, 23);
     fixture.detectChanges();
     expect(componentEl.querySelectorAll('.month').length).toBe(12);
   }));
 
   it('should render three rows', async(() => {
     component.value = new Date(2018, 6, 23);
-    component.today = new Date(2018, 6, 23);
     // TODO rename chunk-row class to something more meaningful
     fixture.detectChanges();
     expect(componentEl.querySelectorAll('.chunk-row').length).toBe(3);

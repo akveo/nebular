@@ -6,23 +6,20 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { NbDateTimeUtil } from '../../services';
+import { NbDateTimeUtil, NbLocaleService } from '../../services';
 import { batch, range } from '../../helpers';
-import { NbLocaleService } from '../../services';
 
 // TODO refactor template with styles refactoring
 @Component({
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-    <div class="body">
-      <div class="chunk-row" *ngFor="let chunk of months">
-        <div class="month"
-             *ngFor="let month of chunk"
-             [class.selected]="month.selected"
-             (click)="onClick(month.value)">
-          {{ month.label }}
-        </div>
+    <div class="chunk-row" *ngFor="let chunk of months">
+      <div class="month"
+           *ngFor="let month of chunk"
+           [class.selected]="month.selected"
+           (click)="onClick(month.value)">
+        {{ month.label }}
       </div>
     </div>
   `,

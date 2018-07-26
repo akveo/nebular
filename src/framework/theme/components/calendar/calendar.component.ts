@@ -29,7 +29,6 @@ export class NbCalendarBaseCellStateService extends NbCalendarCellStatusService<
 
 @Component({
   selector: 'nb-calendar',
-  styleUrls: ['./calendar.component.scss'],
   templateUrl: './calendar.component.html',
   providers: [{ provide: NbCalendarCellStatusService, useClass: NbCalendarBaseCellStateService }],
 })

@@ -114,22 +114,19 @@
   }
 
   nb-calendar-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    width: nb-theme(calendar-cell-width);
+    height: nb-theme(calendar-cell-height);
+    border-radius: nb-theme(calendar-border-radius);
 
-    .calendar-cell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: nb-theme(calendar-cell-width);
-      height: nb-theme(calendar-cell-height);
-      border-radius: nb-theme(calendar-border-radius);
-    }
-
-    &.cell-today .calendar-cell {
+    &.cell-today {
       background: nb-theme(calendar-selected-item);
     }
 
-    &.cell-bounding-month .calendar-cell {
+    &.cell-bounding-month {
       opacity: nb-theme(calendar-inactive-opacity);
     }
 
@@ -140,13 +137,13 @@
       }
     }
 
-    .calendar-cell:hover {
+    &:hover {
       background: nb-theme(calendar-hovered-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);
     }
 
-    &.cell-selected .calendar-cell {
+    &.cell-selected {
       background: nb-theme(calendar-active-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);

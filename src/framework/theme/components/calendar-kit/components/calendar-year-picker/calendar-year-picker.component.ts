@@ -17,14 +17,12 @@ const defaultYearCount = 20;
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
   template: `
-    <div class="body">
-      <div class="chunk-row" *ngFor="let chunk of years">
-        <div class="year"
-             *ngFor="let year of chunk"
-             [class.selected]="year.selected"
-             (click)="onClick(year.value)">
-          {{ year.value }}
-        </div>
+    <div class="chunk-row" *ngFor="let chunk of years">
+      <div class="year"
+           *ngFor="let year of chunk"
+           [class.selected]="year.selected"
+           (click)="onClick(year.value)">
+        {{ year.value }}
       </div>
     </div>
   `,

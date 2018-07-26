@@ -6,22 +6,20 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { NbCalendarDaysService, NbCalendarCellStatusService } from '../../services';
+import { NbCalendarCellStatusService, NbCalendarDaysService } from '../../services';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
 
 @Component({
   selector: 'nb-calendar-day-picker',
   styleUrls: ['./calendar-day-picker.component.scss'],
   template: `
-    <div class="body">
-      <nb-calendar-days-names></nb-calendar-days-names>
-      <div class="week" *ngFor="let week of weeks">
-        <nb-calendar-cell
-          *ngFor="let cell of week"
-          (click)="onSelect(cell)"
-          [cell]="cell">
-        </nb-calendar-cell>
-      </div>
+    <nb-calendar-days-names></nb-calendar-days-names>
+    <div class="week" *ngFor="let week of weeks">
+      <nb-calendar-cell
+        *ngFor="let cell of week"
+        (click)="onSelect(cell)"
+        [cell]="cell">
+      </nb-calendar-cell>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

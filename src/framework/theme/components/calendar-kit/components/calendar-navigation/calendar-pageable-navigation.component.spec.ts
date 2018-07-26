@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
-import { NbLocaleAdapter, NbLocaleService } from '../../../service/index';
+import { NbLocaleService } from '../../services';
 
 
 describe('Component: NbCalendarPageableNavigation', () => {
@@ -14,7 +14,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
-      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
+      providers: [NbLocaleService],
     });
     fixture = TestBed.createComponent(NbCalendarPageableNavigationComponent);
     component = fixture.componentInstance;
@@ -33,7 +33,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
   });
 
   it('should fire click when interior button clicked', () => {
-    component.select.subscribe(e => expect(e).toBeUndefined());
+    component.changeMode.subscribe(e => expect(e).toBeUndefined());
     componentEl.querySelector('button').dispatchEvent(new Event('click'));
   });
 

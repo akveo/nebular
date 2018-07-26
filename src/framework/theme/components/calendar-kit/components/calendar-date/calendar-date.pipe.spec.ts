@@ -1,15 +1,16 @@
 import { TestBed } from '@angular/core/testing';
+
 import { NbCalendarDatePipe } from './calendar-date.pipe';
-import { NbLocaleAdapter, NbLocaleService } from '../../../service/index';
+import { NbLocaleService } from '../../services';
 
 describe('Pipe: NbCalendarDate', () => {
   let pipe: NbCalendarDatePipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: NbLocaleAdapter, useClass: NbLocaleService }],
+      providers: [NbLocaleService],
     });
-    const localeAdapter = TestBed.get(NbLocaleAdapter);
+    const localeAdapter = TestBed.get(NbLocaleService);
     pipe = new NbCalendarDatePipe(localeAdapter);
   });
 

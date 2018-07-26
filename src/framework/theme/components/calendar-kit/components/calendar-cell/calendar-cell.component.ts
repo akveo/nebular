@@ -11,9 +11,7 @@ import { NbCalendarCell, NbCalendarCellStatus } from '../../model';
 @Component({
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],
-  template: `
-    <div class="calendar-cell">{{ date }}</div>
-  `,
+  template: `{{ date }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarCellComponent {
