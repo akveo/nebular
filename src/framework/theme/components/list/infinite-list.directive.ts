@@ -17,7 +17,7 @@ import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
 import { NbListItemComponent } from './list.component';
 
-class ScrollableContainerDimentions {
+export class ScrollableContainerDimentions {
   scrollTop: number;
   scrollHeight: number;
   clientHeight: number;
