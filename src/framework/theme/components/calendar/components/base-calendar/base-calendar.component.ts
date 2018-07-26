@@ -26,7 +26,6 @@ export class NbBaseCalendarComponent<T> {
 
   activeMonth: Date = this.today;
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
-  activeYear: number;
 
   setViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;
@@ -45,11 +44,11 @@ export class NbBaseCalendarComponent<T> {
   }
 
   prevYears() {
-    this.activeYear -= 1;
+    // this.activeYear -= 1;
   }
 
   nextYears() {
-    this.activeYear += 1;
+    // this.activeYear += 1;
   }
 
   private changeActiveMonth(direction) {

@@ -15,7 +15,6 @@
   <nb-calendar-year-picker
     *ngSwitchCase="ViewMode.YEAR"
     [activeMonth]="activeMonth"
-    [startYear]="activeYear"
     (change)="setActiveMonth($event); setViewMode(ViewMode.MONTH)"
     (changeMode)="setViewMode(ViewMode.DATE)"
     (next)="nextYears()"

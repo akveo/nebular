@@ -40,7 +40,6 @@ const defaultYearCount = 20;
 export class NbCalendarYearPickerComponent implements OnInit {
 
   @Input() activeMonth: Date;
-  @Input() startYear: number;
 
   @Output() next = new EventEmitter<any>();
   @Output() prev = new EventEmitter<any>();
@@ -56,12 +55,13 @@ export class NbCalendarYearPickerComponent implements OnInit {
 
   initYears() {
     const selectedYear = this.activeMonth.getFullYear();
+    const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
 
     // TODO maybe we need one more util for cases like that?
     const years = range(defaultYearCount)
       .map(index => ({
-        value: this.startYear + index,
-        selected: selectedYear === this.startYear + index,
+        value: startYear + index,
+        selected: selectedYear === startYear + index,
       }));
 
     this.years = batch(years, 4);
