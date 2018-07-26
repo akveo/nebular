@@ -81,6 +81,9 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
       }
 
       const elementIndex = this.elementIndex(entry.target);
+      if (elementIndex === -1) {
+        continue;
+      }
       const page = this.startPage + Math.floor(elementIndex / this.pageSize);
 
       let ratio = entry.intersectionRatio;
@@ -103,6 +106,8 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
   }
 
   private elementIndex(element: Element): number {
-    return Array.from(element.parentElement.children).indexOf(element);
+    return element.parentElement && element.parentElement.children
+      ? Array.from(element.parentElement.children).indexOf(element)
+      : -1;
   }
 }
