@@ -104,7 +104,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
     if (this.startPage === 1 || this.loadingPrev) { return; }
 
     this.loadingPrev = true;
-    this.newsService.load(this.startPage - 1)
+    this.newsService.load(this.startPage - 1, this.pageSize)
       .subscribe(news => {
         this.startPage--;
         this.news.unshift(...news);
@@ -117,7 +117,7 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
 
     this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
-    this.newsService.load(this.pageToLoad)
+    this.newsService.load(this.pageToLoad, this.pageSize)
       .subscribe(news => {
         this.news.push(...news);
         this.placeholders = [];
