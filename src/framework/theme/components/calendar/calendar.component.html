@@ -30,8 +30,8 @@
     </nb-calendar-pageable-navigation>
 
     <nb-calendar-year-picker
-      [activeMonth]="activeMonth"
-      (change)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
+      [value]="activeMonth"
+      (valueChange)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
     </nb-calendar-year-picker>
 
   </ng-container>
@@ -41,9 +41,8 @@
     <nb-calendar-navigation [date]="activeMonth" (changeMode)="setViewMode(ViewMode.DATE)"></nb-calendar-navigation>
 
     <nb-calendar-month-picker
-      [activeMonth]="activeMonth"
-      [today]="today"
-      (change)="setActiveMonth($event); setViewMode(ViewMode.DATE)">
+      [value]="activeMonth"
+      (valueChange)="setActiveMonth($event); setViewMode(ViewMode.DATE)">
     </nb-calendar-month-picker>
 
   </ng-container>

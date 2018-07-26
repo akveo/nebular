@@ -39,11 +39,9 @@ export class NbCalendarComponent<T> {
 
   @Output() dateChange = new EventEmitter<T>();
 
-  today: Date = new Date();
-
   ViewMode = NbCalendarViewMode;
 
-  activeMonth: Date = this.today;
+  activeMonth: Date = new Date();
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   setViewMode(viewMode: NbCalendarViewMode) {

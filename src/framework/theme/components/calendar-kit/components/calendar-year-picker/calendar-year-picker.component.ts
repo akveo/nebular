@@ -32,9 +32,9 @@ const defaultYearCount = 20;
 })
 export class NbCalendarYearPickerComponent implements OnInit {
 
-  @Input() activeMonth: Date;
+  @Input() value: Date;
 
-  @Output() change = new EventEmitter<any>();
+  @Output() valueChange = new EventEmitter<any>();
 
   // TODO define type
   years: any[];
@@ -44,7 +44,7 @@ export class NbCalendarYearPickerComponent implements OnInit {
   }
 
   initYears() {
-    const selectedYear = this.activeMonth.getFullYear();
+    const selectedYear = this.value.getFullYear();
     const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
 
     // TODO maybe we need one more util for cases like that?
@@ -58,9 +58,9 @@ export class NbCalendarYearPickerComponent implements OnInit {
   }
 
   onClick(year) {
-    const month = this.activeMonth.getMonth();
-    const day = this.activeMonth.getDate();
+    const month = this.value.getMonth();
+    const day = this.value.getDate();
     const event = NbDateTimeUtil.createDate(year, month, day);
-    this.change.emit(event);
+    this.valueChange.emit(event);
   }
 }

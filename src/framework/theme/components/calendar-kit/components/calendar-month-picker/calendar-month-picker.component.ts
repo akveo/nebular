@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { NbDateTimeUtil } from '../../services/date-time-util';
+import { NbDateTimeUtil } from '../../services';
 import { batch, range } from '../../helpers';
 import { NbLocaleService } from '../../services';
 
@@ -15,7 +15,6 @@ import { NbLocaleService } from '../../services';
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-
     <div class="body">
       <div class="chunk-row" *ngFor="let chunk of months">
         <div class="month"
@@ -31,13 +30,8 @@ import { NbLocaleService } from '../../services';
 })
 export class NbCalendarMonthPickerComponent implements OnInit {
 
-  @Input() activeMonth: Date;
-
-  @Input() today: Date;
-
-  @Output() changeMode = new EventEmitter<void>();
-  // TODO think about name, maybe it would be better to call this select or just click?
-  @Output() change = new EventEmitter<Date>();
+  @Input() value: Date;
+  @Output() valueChange = new EventEmitter<Date>();
 
   // TODO define type for month
   months: any[];
@@ -50,7 +44,7 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
 
   initMonths() {
-    const selectedMonth = this.activeMonth.getMonth();
+    const selectedMonth = this.value.getMonth();
 
     // TODO maybe we need one more util for cases like that?
     const months = range(12)
@@ -64,9 +58,9 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
 
   onClick(month) {
-    const year = this.activeMonth.getFullYear();
-    const day = this.activeMonth.getDate();
-    const event = NbDateTimeUtil.createDate(year, month, day);
-    this.change.emit(event);
+    const year = this.value.getFullYear();
+    const day = this.value.getDate();
+    this.value = NbDateTimeUtil.createDate(year, month, day);
+    this.valueChange.emit(this.value);
   }
 }

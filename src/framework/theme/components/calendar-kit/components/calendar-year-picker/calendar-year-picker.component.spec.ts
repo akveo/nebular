@@ -20,7 +20,7 @@ describe('Component: NbCalendarYearPicker', () => {
   });
 
   beforeEach(() => {
-    component.activeMonth = new Date(2018, 6, 23);
+    component.value = new Date(2018, 6, 23);
     component.startYear = 2010;
     fixture.detectChanges();
   });
@@ -44,11 +44,11 @@ describe('Component: NbCalendarYearPicker', () => {
     expect(componentEl.querySelector('.selected').textContent).toContain('2018');
   });
 
-  it('should fire change when click on a year', () => {
+  it('should fire valueChange when click on a year', () => {
     const yearEls = componentEl.querySelectorAll('.year');
     yearEls[6].dispatchEvent(new Event('click'));
 
-    component.change.subscribe(date => {
+    component.valueChange.subscribe(date => {
       expect(date.getFullYear()).toBe(2014);
       expect(date.getMonth()).toBe(6);
       expect(date.getDate()).toBe(23);

@@ -59,7 +59,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
 
   private createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
-    const cell = { date, state: [] };
+    const cell = { date, status: [] };
     this.cellStateService.assignStates(cell, context);
     return cell;
   }
