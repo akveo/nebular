@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 import { NbDateTimeUtil } from '../../services';
 import { batch, range } from '../../helpers';
@@ -29,7 +29,7 @@ const defaultYearCount = 20;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent implements OnInit {
+export class NbCalendarYearPickerComponent implements OnChanges {
 
   @Input() value: Date;
 
@@ -38,7 +38,7 @@ export class NbCalendarYearPickerComponent implements OnInit {
   // TODO define type
   years: any[];
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initYears();
   }
 

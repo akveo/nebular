@@ -9,5 +9,9 @@
 
   .week {
     display: flex;
+
+    &:first-of-type {
+      justify-content: flex-end;
+    }
   }
 }

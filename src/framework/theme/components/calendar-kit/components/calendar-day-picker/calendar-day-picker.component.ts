@@ -31,7 +31,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Input() value: T;
 
-  @Input() displayBoundingMonths: boolean = true;
+  @Input() boundingMonths: boolean = true;
 
   @Output() valueChange = new EventEmitter<Date>();
 
@@ -67,7 +67,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
     return {
       activeMonth: this.activeMonth,
       selectedValue: this.value,
-      includeBoundingMonths: this.displayBoundingMonths,
+      includeBoundingMonths: this.boundingMonths,
     }
   }
 }

@@ -17,6 +17,7 @@
 
       <nb-calendar-day-picker
         [activeMonth]="activeMonth"
+        [boundingMonths]="boundingMonth"
         [value]="date"
         (valueChange)="dateChange.emit($event)">
       </nb-calendar-day-picker>
@@ -33,7 +34,7 @@
       </nb-calendar-pageable-navigation>
 
       <nb-calendar-year-picker
-        [value]="activeMonth"
+        [value]="activeYear"
         (valueChange)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
       </nb-calendar-year-picker>
 

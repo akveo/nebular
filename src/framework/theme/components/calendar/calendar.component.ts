@@ -36,11 +36,15 @@ export class NbCalendarComponent<T> {
 
   @Input() date: T;
 
+  @Input() boundingMonth: boolean = false;
+
   @Output() dateChange = new EventEmitter<T>();
 
   ViewMode = NbCalendarViewMode;
 
   activeMonth: Date = new Date();
+  activeYear: Date = new Date();
+
   activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   setViewMode(viewMode: NbCalendarViewMode) {
@@ -49,6 +53,7 @@ export class NbCalendarComponent<T> {
 
   setActiveMonth(activeMonth: Date) {
     this.activeMonth = activeMonth;
+    this.activeYear = activeMonth;
   }
 
   prevMonth() {
@@ -60,14 +65,19 @@ export class NbCalendarComponent<T> {
   }
 
   prevYears() {
-    // this.activeYear -= 1;
+    this.changeActiveYear(-1);
   }
 
   nextYears() {
-    // this.activeYear += 1;
+    this.changeActiveYear(1);
   }
 
-  private changeActiveMonth(direction) {
-    this.activeMonth = NbDateTimeUtil.addMonth(this.activeMonth, direction);
+  private changeActiveMonth(direction: number) {
+    const activeMonth = NbDateTimeUtil.addMonth(this.activeMonth, direction);
+    this.setActiveMonth(activeMonth);
+  }
+
+  private changeActiveYear(direction: number) {
+    this.activeYear = NbDateTimeUtil.addYear(this.activeYear, direction * 20);
   }
 }
