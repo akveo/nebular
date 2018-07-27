@@ -12,9 +12,7 @@ import { NbCalendarBaseCellStateService, NbCalendarCellStatusService } from '@ne
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-calendar-day-picker
-          [activeMonth]="dayPickerActiveMonth"
-          [(value)]="dayPickerDate">
+        <nb-calendar-day-picker [activeMonth]="dayPickerActiveMonth" [(value)]="dayPickerDate">
         </nb-calendar-day-picker>
       </nb-card-body>
     </nb-card>

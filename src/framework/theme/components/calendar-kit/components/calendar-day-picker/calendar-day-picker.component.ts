@@ -4,10 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewContainerRef,
+} from '@angular/core';
 
 import { NbCalendarCellStatusService, NbCalendarDaysService } from '../../services';
 import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
+import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
 
 
 @Component({
@@ -16,11 +28,14 @@ import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
     <div class="week" *ngFor="let week of weeks">
-      <nb-calendar-cell
-        *ngFor="let cell of week"
-        (click)="onSelect(cell)"
-        [cell]="cell">
-      </nb-calendar-cell>
+      <span *ngFor="let cell of week" (click)="onSelect(cell)">
+        <ng-container *ngIf="cellDef; else defaultCell">
+          <ng-container *ngTemplateOutlet="cellDef.template; context: {$implicit: cell}"></ng-container>
+        </ng-container>
+        <ng-template #defaultCell>
+          <nb-calendar-cell [cell]="cell"></nb-calendar-cell>
+        </ng-template>
+      </span>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,6 +50,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Output() valueChange = new EventEmitter<Date>();
 
+  @ContentChild(NbCalendarCellDirective) cellDef: NbCalendarCellDirective;
   weeks: NbCalendarCell[][];
 
   constructor(private daysService: NbCalendarDaysService<T>,

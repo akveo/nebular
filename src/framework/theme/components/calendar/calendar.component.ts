@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Injectable, Input, Output } from '@angular/core';
 
 import {
   NbCalendarCell,
@@ -14,6 +14,7 @@ import {
   NbCalendarViewMode,
   NbDateTimeUtil,
 } from '../calendar-kit';
+import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
 
 
 @Injectable()
@@ -39,6 +40,7 @@ export class NbCalendarComponent<T> {
   @Input() boundingMonth: boolean = false;
 
   @Output() dateChange = new EventEmitter<T>();
+  @ContentChild(NbCalendarCellDirective) cell: NbCalendarCellDirective;
 
   ViewMode = NbCalendarViewMode;
 

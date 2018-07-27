@@ -21,6 +21,7 @@ import {
   NbCalendarPageableNavigationComponent,
   NbCalendarYearPickerComponent,
 } from './components';
+import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
 
 
 const SERVICES = [
@@ -37,6 +38,7 @@ const COMPONENTS = [
   NbCalendarMonthPickerComponent,
   NbCalendarDayPickerComponent,
   NbCalendarCellComponent,
+  NbCalendarCellDirective,
 ];
 
 const PIPES = [

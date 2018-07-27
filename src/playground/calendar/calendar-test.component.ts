@@ -12,7 +12,8 @@ import { Component } from '@angular/core';
     Selected date: {{ date | date }}
     <br/>
     <br/>
-    <nb-calendar [(date)]="date"></nb-calendar>
+    <nb-calendar [(date)]="date">
+    </nb-calendar>
   `,
 })
 export class NbCalendarTestComponent {

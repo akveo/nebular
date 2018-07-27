@@ -20,6 +20,13 @@
         [boundingMonths]="boundingMonth"
         [value]="date"
         (valueChange)="dateChange.emit($event)">
+
+        <ng-container *ngIf="cell">
+          <ng-container *nbCalendarCell="let context">
+            <ng-container *ngTemplateOutlet="cell.template, context: {$implicit: context}"></ng-container>
+          </ng-container>
+        </ng-container>
+
       </nb-calendar-day-picker>
 
     </ng-container>
