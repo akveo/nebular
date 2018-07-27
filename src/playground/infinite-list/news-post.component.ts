@@ -38,7 +38,7 @@ export class NbNewsPostComponent {
       width: 80%;
     }
     .text-placeholder {
-      height: 8.95rem;
+      height: 4rem;
       margin-bottom: 1rem;
     }
     .link-placeholder {

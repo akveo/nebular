@@ -22,7 +22,7 @@ import { NewsService, NewsPost } from './news.service';
 
       <nb-list
         nbInfiniteList
-        [threshold]="100"
+        [threshold]="400"
         (bottomThreshold)="loadNext()"
         (topThreshold)="loadPrev()"
         [nbListPager]="pageSize"
