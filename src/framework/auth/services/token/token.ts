@@ -28,6 +28,9 @@ export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
                                   ownerStrategyName: string,
                                   createdAt?: Date) {
   return new tokenClass(token, ownerStrategyName, createdAt);
+                                  ownerStrategyName: string,
+                                  createdAt?: Date) {
+  return new tokenClass(token, ownerStrategyName, createdAt);
 }
 
 export function decodeJwtPayload(payload: string): string {

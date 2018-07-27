@@ -73,6 +73,22 @@ describe('auth token', () => {
       expect(noIatJWTToken.getCreatedAt().getTime() - now.getTime() < 10);
     });
 
+    it('getCreatedAt success : now for simpleToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(simpleToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getCreatedAt success : exp for validJWTToken', () => {
+      const date = new Date();
+      date.setTime(1532350800000)
+      expect(validJWTToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success : now for noIatJWTToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(noIatJWTToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
     it('getTokenExpDate success', () => {
       const date = new Date(0);
       date.setTime(2532350800000);
