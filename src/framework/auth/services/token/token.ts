@@ -28,9 +28,6 @@ export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
                                   ownerStrategyName: string,
                                   createdAt?: Date) {
   return new tokenClass(token, ownerStrategyName, createdAt);
-                                  ownerStrategyName: string,
-                                  createdAt?: Date) {
-  return new tokenClass(token, ownerStrategyName, createdAt);
 }
 
 export function decodeJwtPayload(payload: string): string {
@@ -74,7 +71,6 @@ export class NbAuthSimpleToken extends NbAuthToken {
   }
 
   protected prepareCreatedAt(date: Date) {
-    // For simple tokens, if not set the creation date is 'now'
     return date ? date : new Date();
   }
 
@@ -130,13 +126,12 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * for JWT token, the iat (issued at) field of the token payload contains the creation Date
    */
   protected prepareCreatedAt(date: Date) {
-    date = super.prepareCreatedAt(date);
-    let decoded = null;
-    try { // needed as getPayload() throws error and we want the token to be created in any case
+    let decoded
+    try {
       decoded = this.getPayload();
     }
     finally {
-      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : date;
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
     }
   }
 
@@ -267,32 +262,39 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
   static NAME = 'nb:auth:oauth2:jwt:token';
 
   /**
-   * Returns token payload
+   * Returns access token payload
    * @returns any
    */
   getAccessTokenPayload(): any {
-    return decodeJwtPayload(this.getValue());
+    return decodeJwtPayload(this.getValue())
+  }
+
+  /**
+   * for Oauth2 JWT token, the iat (issued at) field of the access_token payload
+   */
+  protected prepareCreatedAt(date: Date) {
+    let decoded;
+    try {
+       decoded = this.getAccessTokenPayload();
+    }
+    finally {
+      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
+    }
   }
 
   /**
    * Returns expiration date :
    * - exp if set,
-   * - iat + expires_in if exp is not set and iat is set
    * - super.getExpDate() otherwise
    * @returns Date
    */
   getTokenExpDate(): Date {
-    let date: Date = null;
-    if (this.getAccessTokenPayload()) {
-      date = new Date(0);
-      if (this.getAccessTokenPayload().exp) {
-        date.setUTCSeconds(this.getAccessTokenPayload().exp);
-      } else if (this.getAccessTokenPayload().iat && this.token.expires_in) {
-        date.setUTCSeconds(this.getAccessTokenPayload().iat + this.token.expires_in)
-      } else {
-        date = super.getTokenExpDate();
-      }
+    if (this.getAccessTokenPayload() && this.getAccessTokenPayload().exp) {
+      const date = new Date(0);
+      date.setUTCSeconds(this.getAccessTokenPayload().exp);
+      return date;
+    } else {
+      return super.getTokenExpDate();
     }
-    return date;
   }
 }

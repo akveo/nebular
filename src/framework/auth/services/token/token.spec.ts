@@ -272,7 +272,7 @@ describe('auth token', () => {
     };
 
     const validToken = new NbAuthOAuth2JWTToken(validPayload, 'strategy');
-    const noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
+    let noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
     const emptyToken = new NbAuthOAuth2JWTToken({}, 'strategy');
     const permanentToken = new NbAuthOAuth2JWTToken(permanentPayload, 'strategy');
 
@@ -290,6 +290,18 @@ describe('auth token', () => {
       })
         .toThrow(new Error(
           `Cannot extract payload from an empty token.`));
+    });
+
+    it('getCreatedAt success for valid token', () => {
+      const date = new Date(0);
+      date.setUTCSeconds(iat);
+      expect(validToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success for no iat token', () => {
+      noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
+      const date = new Date();
+      expect(noExpButIatToken.getTokenExpDate().getTime() - date.getTime() < 10);
     });
 
     it('getExpDate success when exp is set', () => {
