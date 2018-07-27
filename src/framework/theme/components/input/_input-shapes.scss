@@ -1,0 +1,17 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin input-shapes() {
+  &.input-rectangle {
+    border-radius: nb-theme(form-control-border-radius);
+  }
+  &.input-semi-round {
+    border-radius: nb-theme(form-control-semi-round-border-radius);
+  }
+  &.input-round {
+    border-radius: nb-theme(form-control-round-border-radius);
+  }
+}
