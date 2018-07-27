@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -282,10 +282,9 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.cleanParams(params);
   }
 
-  protected buildRequestsHttpOptions(): any {
-    let httpOptions: any = {};
+  protected buildRequestsHttpOptions?(): any {
     if (this.getOption('clientId') && this.getOption('clientSecret')) {
-       httpOptions = {
+      return {
         headers: new HttpHeaders (
           {
             'Authorization' : 'Basic ' + btoa(
@@ -293,7 +292,6 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
           },
         )};
     }
-    return httpOptions;
   }
 
   protected handleResponseError(res: any): Observable<NbAuthResult> {
