@@ -7,7 +7,7 @@
 import { Component, ViewChild, ElementRef, Input } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbInputDirective } from './input.directive';
-import { NbInputModule } from '@nebular/theme';
+import { NbInputModule } from './input.module';
 
 @Component({
   template: `

@@ -7,8 +7,8 @@ import { NbLayoutModule } from '../layout/layout.module';
 import { NbLayoutComponent } from '../layout/layout.component';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbListModule } from './list.module';
+import { NbListComponent } from './list.component';
 import { NbInfiniteListDirective } from './infinite-list.directive';
-import { NbListComponent } from '@nebular/theme/components/list/list.component';
 
 const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
