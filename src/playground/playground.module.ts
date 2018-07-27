@@ -166,8 +166,6 @@ import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
-import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
-import { NbRandomSvgComponent } from './infinite-list/random-svg.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
@@ -335,8 +333,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonTypesComponent,
   NbSimpleListShowcaseComponent,
   NbUsersListShowcaseComponent,
-  NbInfiniteImagesListComponent,
-  NbRandomSvgComponent,
   NbInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,

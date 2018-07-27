@@ -135,7 +135,6 @@ import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
-import { NbInfiniteImagesListComponent } from './infinite-list/infinite-images-list.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
@@ -591,10 +590,6 @@ export const routes: Routes = [
       {
         path: 'infinite-list',
         children: [
-          {
-            path: 'infinite-images-list.component',
-            component: NbInfiniteImagesListComponent,
-          },
           {
             path: 'infinite-news-list.component',
             component: NbInfiniteNewsListComponent,
