@@ -11,11 +11,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   selector: 'nb-calendar-pageable-navigation',
   styleUrls: ['./calendar-pageable-navigation.component.scss'],
   template: `
-    <div class="header">
-      <i class="nb-arrow-left" (click)="prev.emit()"></i>
-      <nb-calendar-navigation [date]="date" (changeMode)="changeMode.emit()"></nb-calendar-navigation>
-      <i class="nb-arrow-right" (click)="next.emit()"></i>
-    </div>
+    <i class="nb-arrow-left" (click)="prev.emit()"></i>
+    <nb-calendar-navigation [date]="date" (changeMode)="changeMode.emit()"></nb-calendar-navigation>
+    <i class="nb-arrow-right" (click)="next.emit()"></i>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

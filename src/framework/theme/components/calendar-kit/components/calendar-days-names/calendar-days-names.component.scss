@@ -6,11 +6,11 @@
 
 :host {
   display: flex;
-}
 
-.day {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
+  .day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+  }
 }

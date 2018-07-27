@@ -4,15 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-.header {
+:host {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1rem;
 
   i {
-    font-size: 1.75rem;
-    padding: 0.25rem;
+    font-size: 1.5rem;
     cursor: pointer;
   }
 }

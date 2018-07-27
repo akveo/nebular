@@ -9,7 +9,14 @@
   nb-calendar-header {
     span {
       color: nb-theme(calendar-weekday-fg);
-      font-weight: nb-theme(font-weight-thin);
+      font-weight: nb-theme(calendar-header-sub-title-font-weight);
+      font-size: nb-theme(calendar-header-sub-title-font-size);
+    }
+  }
+
+  nb-calendar-navigation {
+    button {
+      width: nb-theme(calendar-navigation-button-width);
     }
   }
 
@@ -78,14 +85,7 @@
   }
 
   nb-calendar-day-picker {
-    .week {
-      padding: nb-theme(calendar-row-padding);
-    }
-
     .day {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: nb-theme(calendar-weekday-width);
       height: nb-theme(calendar-weekday-height);
       font-size: nb-theme(calendar-weekday-font-size);
@@ -99,16 +99,13 @@
   }
 
   nb-calendar-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     width: nb-theme(calendar-cell-width);
     height: nb-theme(calendar-cell-height);
     border-radius: nb-theme(calendar-border-radius);
 
     &.cell-today {
       background: nb-theme(calendar-selected-item);
+      font-weight: nb-theme(font-weight-bold);
     }
 
     &.cell-bounding-month {

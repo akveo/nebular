@@ -14,6 +14,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       display: flex;
       justify-content: center;
     }
+
+    :host button {
+      height: 3.125rem;
+    }
   `],
   template: `
     <button class="btn btn-success" (click)="changeMode.emit()">

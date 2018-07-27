@@ -6,18 +6,14 @@
 
 @mixin nb-calendar-theme() {
 
-  nb-calendar {
-    display: flex;
-    flex-direction: column;
+  nb-calendar nb-card {
     width: nb-theme(calendar-width);
     height: nb-theme(calendar-height);
-    padding: nb-theme(calendar-padding);
-    background: nb-theme(calendar-bg);
-    color: nb-theme(calendar-fg);
-    border-radius: nb-theme(calendar-border-radius);
 
-    .header button {
-      width: nb-theme(calendar-header-date-width);
+    nb-card-body {
+      & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {
+        padding: 0 1rem 1.5rem;
+      }
     }
   }
 }

@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
   selector: 'nb-calendar-header',
   template: `
     <h5>{{ date | nbCalendarDate }}</h5>
-    <span class="header-today">Today</span>
+    <span>Today</span>
   `,
 })
 export class NbCalendarHeaderComponent {
