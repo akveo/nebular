@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { of as observableOf } from 'rxjs';
+import { takeWhile, delay } from 'rxjs/operators';
 import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
 import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
 
@@ -27,7 +28,9 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.sendHeight();
+    observableOf(null)
+      .pipe(delay(500))
+      .subscribe(() => this.sendHeight());
   }
 
   ngOnDestroy() {
