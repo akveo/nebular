@@ -40,7 +40,7 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
 
   constructor() {
     this.observer = new IntersectionObserver(
-      this.checkForPageChange.bind(this),
+      entries => this.checkForPageChange(entries),
       { threshold: 0.5 },
     );
   }
