@@ -1,6 +1,5 @@
-
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { NbListModule } from './list.module';
 import { NbListComponent } from './list.component';
 
@@ -82,6 +81,7 @@ describe('Directive: NbListPagerDirective', () => {
     fixture = TestBed.configureTestingModule({
         imports: [ NbListModule ],
         declarations: [ PagerTestComponent ],
+        providers: [ { provide: ComponentFixtureAutoDetect, useValue: true } ],
       })
       .createComponent(PagerTestComponent);
 
