@@ -6,12 +6,15 @@ import {
   AfterViewInit,
   QueryList,
   ElementRef,
+  Inject,
+  PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, takeWhile } from 'rxjs/operators';
-import { NbListItemComponent, NbLayoutScrollService } from '@nebular/theme';
+import { NbListItemComponent, NbLayoutScrollService, NB_WINDOW } from '@nebular/theme';
 import { getElementHeight } from '@nebular/theme/components/helpers';
 import { NewsService, NewsPost } from './news.service';
+import { isPlatformBrowser } from '../../../node_modules/@angular/common';
 
 @Component({
   selector: 'nb-infinite-news-list',
@@ -56,6 +59,8 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
 
   private firstItem: Element;
 
+  private intialScrollRestoration: ScrollRestoration;
+
   @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
 
   constructor(
@@ -63,10 +68,13 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     private router: Router,
     private route: ActivatedRoute,
     private scrollService: NbLayoutScrollService,
+    @Inject(PLATFORM_ID) private platformId,
+    @Inject(NB_WINDOW) private window,
   ) {
-    // TODO S
-    // remove
-    history.scrollRestoration = 'manual';
+    if (isPlatformBrowser(this.platformId)) {
+      this.intialScrollRestoration = window.history.scrollRestoration;
+      history.scrollRestoration = 'manual';
+    }
   }
 
   ngOnInit() {
@@ -98,6 +106,9 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
   ngOnDestroy() {
     this.firstItem = null;
     this.alive = false;
+    if (isPlatformBrowser(this.platformId)) {
+      this.window.history.scrollRestoration = this.intialScrollRestoration;
+    }
   }
 
   loadPrev() {
