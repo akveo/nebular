@@ -126,7 +126,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    * for JWT token, the iat (issued at) field of the token payload contains the creation Date
    */
   protected prepareCreatedAt(date: Date) {
-    let decoded
+    let decoded;
     try {
       decoded = this.getPayload();
     }
