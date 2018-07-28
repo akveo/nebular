@@ -262,14 +262,6 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
   static NAME = 'nb:auth:oauth2:jwt:token';
 
   /**
-   * Returns access token payload
-   * @returns any
-   */
-  getAccessTokenPayload(): any {
-    return decodeJwtPayload(this.getValue())
-  }
-
-  /**
    * for Oauth2 JWT token, the iat (issued at) field of the access_token payload
    */
   protected prepareCreatedAt(date: Date) {
@@ -282,6 +274,15 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
     }
   }
 
+
+  /**
+   * Returns access token payload
+   * @returns any
+   */
+  getAccessTokenPayload(): any {
+    return decodeJwtPayload(this.getValue())
+  }
+
   /**
    * Returns expiration date :
    * - exp if set,
@@ -289,9 +290,10 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
    * @returns Date
    */
   getTokenExpDate(): Date {
-    if (this.getAccessTokenPayload() && this.getAccessTokenPayload().exp) {
+    const accessTokenPayload = this.getAccessTokenPayload();
+    if (accessTokenPayload.hasOwnProperty('exp')) {
       const date = new Date(0);
-      date.setUTCSeconds(this.getAccessTokenPayload().exp);
+      date.setUTCSeconds(accessTokenPayload.exp);
       return date;
     } else {
       return super.getTokenExpDate();
