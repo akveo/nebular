@@ -51,7 +51,7 @@ describe('nb-card', () => {
 
   cards = prepareCards();
 
-  beforeEach((done) => {
+  beforeAll((done) => {
     browser.get('#/card/card-test.component').then(() => done());
   });
 

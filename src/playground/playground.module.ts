@@ -29,6 +29,8 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbAccordionModule,
+  NbButtonModule,
+  NbInputModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -153,6 +155,20 @@ import { NbAccordionToggleComponent } from './accordion/accordion-toggle.compone
 import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
 import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
 import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -180,6 +196,8 @@ export const NB_MODULES = [
   }),
   NbSpinnerModule,
   NbAccordionModule,
+  NbButtonModule,
+  NbInputModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -296,6 +314,20 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAccordionTestComponent,
   NbAccordionToggleComponent,
   NbAccordionMultiComponent,
+  NbButtonShowcaseComponent,
+  NbButtonColorsComponent,
+  NbButtonShapesComponent,
+  NbButtonHeroComponent,
+  NbButtonOutlineComponent,
+  NbButtonSizesComponent,
+  NbButtonTypesComponent,
+  NbInputsShowcaseComponent,
+  NbInputColorsComponent,
+  NbInputSizesComponent,
+  NbInputShapesComponent,
+  NbInputTypesComponent,
+  NbInputFullWidthComponent,
+  NbScrollWindowComponent,
 ];
 
 

@@ -270,6 +270,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
+        source: [
+          'NbButtonComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
         source: [
@@ -319,24 +327,12 @@ export const structure = [
           'NbAccordionItemBodyComponent',
         ],
       },
-      // {
-      //   type: 'tabs',
-      //   name: 'Chips',
-      //   icon: 'chips.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Button',
-      //   icon: 'button.svg',
-      //   source: [],
-      // },
-      // {
-      //   type: 'tabs',
-      //   name: 'Modal',
-      //   icon: 'modal.svg',
-      //   source: [],
-      // },
+      {
+        type: 'tabs',
+        name: 'Input',
+        icon: 'input.svg',
+        source: ['NbInputDirective'],
+      },
     ],
   },
   {
@@ -373,6 +369,38 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbJSThemesRegistry',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'LayoutScrollService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutScrollService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbScrollPosition',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'LayoutRulerService',
+        children: [
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutRulerService',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbLayoutDimensions',
           },
         ],
       },
