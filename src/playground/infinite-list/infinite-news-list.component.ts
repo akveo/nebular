@@ -43,6 +43,7 @@ import { isPlatformBrowser } from '../../../node_modules/@angular/common';
     </nb-card>
   `,
   styleUrls: [ `infinite-news-list.component.scss` ],
+  styles: [ `/deep/ body { height: 30rem; }` ],
 })
 export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
