@@ -9,9 +9,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
-
 import { NbOAuth2AuthStrategy } from './oauth2-strategy';
-import { NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
+import {NbOAuth2ClientAuthMethod, NbOAuth2GrantType, NbOAuth2ResponseType} from './oauth2-strategy.options';
 import { NbAuthResult, nbAuthCreateToken, NbAuthOAuth2Token } from '../../services';
 
 function createURL(params: any) {
@@ -77,13 +76,14 @@ describe('oauth2-auth-strategy', () => {
 
   describe('out of the box: type CODE', () => {
 
+    const basicOptions = {
+      name: 'strategy',
+      baseEndpoint: 'http://example.com/',
+      clientId: 'clientId',
+    }
+
     beforeEach(() => {
-      strategy.setOptions({
-        name: 'strategy',
-        baseEndpoint: 'http://example.com/',
-        clientId: 'clientId',
-        clientSecret: 'clientSecret',
-      });
+      strategy.setOptions(basicOptions);
     });
 
      it('redirect to auth server', (done: DoneFn) => {
@@ -161,9 +161,12 @@ describe('oauth2-auth-strategy', () => {
         .flush(tokenErrorResponse, { status: 400, statusText: 'Bad Request' });
     });
 
-    it('handle refresh token', (done: DoneFn) => {
-
-
+    it('handle refresh token with basic client auth', (done: DoneFn) => {
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
+      });
       strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
@@ -180,6 +183,58 @@ describe('oauth2-auth-strategy', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.headers.get('Authorization') === authHeader
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && !req.body['scope'],
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle refresh token with requestBody client auth', (done: DoneFn) => {
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.REQUEST_BODY,
+      });
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && req.body['client_id'] === strategy.getOption('clientId')
+          && req.body['client_secret'] === strategy.getOption('clientSecret')
+          && !req.body['scope'],
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle refresh token with NO client auth', (done: DoneFn) => {
+      strategy.setOptions(basicOptions);
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
           && req.body['refresh_token'] === successToken.getRefreshToken()
           && !req.body['scope'],
@@ -208,16 +263,17 @@ describe('oauth2-auth-strategy', () => {
 
   describe('configured: type TOKEN', () => {
 
+    const basicOptions = {
+      name: 'strategy',
+      baseEndpoint: 'http://example.com/',
+      clientId: 'clientId',
+      authorize: {
+        responseType: NbOAuth2ResponseType.TOKEN,
+      },
+    }
+
     beforeEach(() => {
-      strategy.setOptions({
-        name: 'strategy',
-        baseEndpoint: 'http://example.com/',
-        clientId: 'clientId',
-        clientSecret: 'clientSecret',
-        authorize: {
-          responseType: NbOAuth2ResponseType.TOKEN,
-        },
-      });
+      strategy.setOptions(basicOptions);
     });
 
     it('redirect to auth server', (done: DoneFn) => {
@@ -271,34 +327,35 @@ describe('oauth2-auth-strategy', () => {
 
   describe('configured redirect, redirectUri, scope and additional params: type TOKEN', () => {
 
+    const basicOptions = {
+      name: 'strategy',
+      baseEndpoint: 'http://example.com/',
+      clientId: 'clientId',
+      redirect: {
+        success: '/success',
+        failure: '/failure',
+      },
+      authorize: {
+        endpoint: 'custom',
+        redirectUri: 'http://localhost:4200/callback',
+        scope: 'read',
+        params: {
+          display: 'popup',
+          foo: 'bar',
+        },
+      },
+      token: {
+        endpoint: 'custom',
+        redirectUri: 'http://localhost:4200/callback',
+      },
+      refresh: {
+        endpoint: 'custom',
+        scope: 'read',
+      },
+    }
+
     beforeEach(() => {
-      strategy.setOptions({
-        name: 'strategy',
-        baseEndpoint: 'http://example.com/',
-        clientId: 'clientId',
-        clientSecret: 'clientSecret',
-        redirect: {
-          success: '/success',
-          failure: '/failure',
-        },
-        authorize: {
-          endpoint: 'custom',
-          redirectUri: 'http://localhost:4200/callback',
-          scope: 'read',
-          params: {
-            display: 'popup',
-            foo: 'bar',
-          },
-        },
-        token: {
-          endpoint: 'custom',
-          redirectUri: 'http://localhost:4200/callback',
-        },
-        refresh: {
-          endpoint: 'custom',
-          scope: 'read',
-        },
-      });
+      strategy.setOptions(basicOptions);
     });
 
     it('redirect to auth server', (done: DoneFn) => {
@@ -317,7 +374,7 @@ describe('oauth2-auth-strategy', () => {
         .subscribe(() => {});
     });
 
-    it('handle success redirect and sends correct token request', (done: DoneFn) => {
+    it('handle success redirect and sends correct token request with NO client Auth', (done: DoneFn) => {
       routeMock.snapshot.queryParams = { code: 'code' };
 
       strategy.authenticate()
@@ -342,8 +399,13 @@ describe('oauth2-auth-strategy', () => {
       ).flush(tokenSuccessResponse);
     });
 
-    it('handle success redirect back with token request', (done: DoneFn) => {
+    it('handle success redirect and sends correct token request with BASIC client Auth', (done: DoneFn) => {
       routeMock.snapshot.queryParams = { code: 'code' };
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
+      })
 
       strategy.authenticate()
         .subscribe((result: NbAuthResult) => {
@@ -358,8 +420,45 @@ describe('oauth2-auth-strategy', () => {
           done();
         });
 
-      httpMock.expectOne('http://example.com/custom')
-        .flush(tokenSuccessResponse);
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/custom'
+          && req.headers.get('Authorization') === authHeader
+          && req.body['grant_type'] === NbOAuth2GrantType.AUTHORIZATION_CODE
+          && req.body['code'] === 'code'
+          && req.body['client_id'] === 'clientId'
+          && req.body['redirect_uri'] === 'http://localhost:4200/callback',
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle success redirect and sends correct token request with REQUEST_BODY client Auth', (done: DoneFn) => {
+      routeMock.snapshot.queryParams = { code: 'code' };
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.REQUEST_BODY,
+      })
+
+      strategy.authenticate()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/success');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/custom'
+          && req.body['grant_type'] === NbOAuth2GrantType.AUTHORIZATION_CODE
+          && req.body['code'] === 'code'
+          && req.body['client_id'] === strategy.getOption('clientId')
+          && req.body['client_secret'] === strategy.getOption('clientSecret')
+          && req.body['redirect_uri'] === 'http://localhost:4200/callback',
+      ).flush(tokenSuccessResponse);
     });
 
     it('handle error redirect back', (done: DoneFn) => {
@@ -378,8 +477,36 @@ describe('oauth2-auth-strategy', () => {
           done();
         });
     });
+    it('handle refresh token with NO client auth', (done: DoneFn) => {
+      strategy.setOptions(basicOptions);
 
-    it('handle refresh token', (done: DoneFn) => {
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/success');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/custom'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && req.body['scope'] === 'read',
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle refresh token with BASIC client auth', (done: DoneFn) => {
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
+      });
 
       strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
@@ -399,6 +526,36 @@ describe('oauth2-auth-strategy', () => {
           && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
           && req.body['refresh_token'] === successToken.getRefreshToken()
+          && req.body['scope'] === 'read',
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle refresh token with REQUEST_BODY client auth', (done: DoneFn) => {
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.REQUEST_BODY,
+      });
+
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/success');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/custom'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && req.body['client_id'] === strategy.getOption('clientId')
+          && req.body['client_secret'] === strategy.getOption('clientSecret')
           && req.body['scope'] === 'read',
       ).flush(tokenSuccessResponse);
     });
@@ -427,22 +584,51 @@ describe('oauth2-auth-strategy', () => {
 
   describe('configured: additionnal param: token, grant_type:password', () => {
 
+    const basicOptions = {
+      name: 'strategy',
+      baseEndpoint: 'http://example.com/',
+      clientId: 'clientId',
+      token: {
+        grantType: NbOAuth2GrantType.PASSWORD,
+        endpoint: 'token',
+      },
+    }
+
     beforeEach(() => {
-      strategy.setOptions({
-        name: 'strategy',
-        baseEndpoint: 'http://example.com/',
-        clientId: 'clientId',
-        clientSecret: 'clientSecret',
-        token: {
-          grantType: NbOAuth2GrantType.PASSWORD,
-          endpoint: 'token',
-        },
-      });
+      strategy.setOptions(basicOptions);
     });
 
-    it('handle success login', (done: DoneFn) => {
+    it('handle success login with NO client auth', (done: DoneFn) => {
       const credentials = { email: 'example@akveo.com', password: '123456' };
 
+      strategy.authenticate(credentials)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
+          && req.body['email'] === credentials.email
+          && req.body['password'] === credentials.password,
+      ).flush(tokenSuccessResponse);
+    });
+
+    it('handle success login with BASIC client auth', (done: DoneFn) => {
+      const credentials = { email: 'example@akveo.com', password: '123456' };
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
+      })
 
       strategy.authenticate(credentials)
         .subscribe((result: NbAuthResult) => {
@@ -466,7 +652,39 @@ describe('oauth2-auth-strategy', () => {
       ).flush(tokenSuccessResponse);
     });
 
+    it('handle success login with REQUEST_BODY client auth', (done: DoneFn) => {
+      const credentials = { email: 'example@akveo.com', password: '123456' };
+      strategy.setOptions({
+        ... basicOptions,
+        clientSecret: 'clientSecret',
+        clientAuthMethod: NbOAuth2ClientAuthMethod.REQUEST_BODY,
+      })
+
+      strategy.authenticate(credentials)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(successToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
+          && req.body['email'] === credentials.email
+          && req.body['password'] === credentials.password
+          && req.body['client_id'] === strategy.getOption('clientId')
+          && req.body['client_secret'] === strategy.getOption('clientSecret'),
+      ).flush(tokenSuccessResponse);
+    });
+
     it('handle error login', (done: DoneFn) => {
+      strategy.setOptions(basicOptions);
       const credentials = { email: 'example@akveo.com', password: '123456' };
 
       strategy.authenticate(credentials)
@@ -484,7 +702,6 @@ describe('oauth2-auth-strategy', () => {
 
        httpMock.expectOne(
         req => req.url === 'http://example.com/token'
-          && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['email'] === credentials.email
           && req.body['password'] === credentials.password,

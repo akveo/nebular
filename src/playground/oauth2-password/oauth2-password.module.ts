@@ -17,7 +17,7 @@ import {
 
 import {
   NbAuthModule,
-  NbOAuth2AuthStrategy, NbOAuth2GrantType,
+  NbOAuth2AuthStrategy, NbOAuth2ClientAuthMethod, NbOAuth2GrantType,
 } from '@nebular/auth';
 
 import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
@@ -54,6 +54,7 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
           name: 'password',
           clientId: 'Aladdin',
           clientSecret: 'open sesame',
+          clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
           baseEndpoint: 'http://localhost:4400/api/auth/',
           token: {
             endpoint: 'token',
