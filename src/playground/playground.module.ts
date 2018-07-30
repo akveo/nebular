@@ -166,10 +166,12 @@ import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
-import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component'
+import { NbInfiniteListWithPagerComponent } from './infinite-list/infinite-list-with-pager.component'
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
+import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component'
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
-import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -334,9 +336,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSimpleListShowcaseComponent,
   NbUsersListShowcaseComponent,
   NbInfiniteNewsListComponent,
+  NbInfiniteListShowcaseComponent,
+  NbInfiniteListWithPagerComponent,
+  NbCardWithInfiniteNewsListComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
-  NbCardWithInfiniteNewsListComponent,
   NbInputsShowcaseComponent,
   NbInputColorsComponent,
   NbInputSizesComponent,

@@ -1,63 +1,47 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChildren,
-  AfterViewInit,
-  QueryList,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, takeWhile } from 'rxjs/operators';
-import { NbListItemComponent, NbListComponent } from '@nebular/theme';
+import { take, map, filter } from 'rxjs/operators';
+import { NbListItemComponent, NbListComponent, NbSpinnerDirective } from '@nebular/theme';
 import { getElementHeight } from '@nebular/theme/components/helpers';
-import { NewsService, NewsPost } from './news.service';
+import { NewsService } from './news.service';
 
 @Component({
   selector: 'nb-infinite-news-list',
   template: `
     <nb-card size="large">
-      <div [nbSpinner]="loadingPrev"></div>
-
+      <div [nbSpinner]="loadingPrevious"></div>
       <nb-list
         nbInfiniteList
-        [threshold]="400"
+        [threshold]="500"
+        (topThreshold)="loadPrevious()"
         (bottomThreshold)="loadNext()"
-        (topThreshold)="loadPrev()"
         [nbListPager]="pageSize"
         [startPage]="startPage"
         (pageChange)="updateUrl($event)">
-
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
         </nb-list-item>
         <nb-list-item *ngFor="let _ of placeholders">
           <nb-news-post-placeholder></nb-news-post-placeholder>
         </nb-list-item>
-
       </nb-list>
     </nb-card>
   `,
   styleUrls: [ 'infinite-news-list.component.scss', 'card-with-infinite-news-list.component.scss' ],
 })
-export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbCardWithInfiniteNewsListComponent implements OnInit {
 
-  alive = true;
-
+  news = [];
+  placeholders = [];
   pageSize = 10;
   startPage: number;
-  pageToLoad: number;
-
-  loadingPrev = false;
+  pageToLoadNext: number;
   loadingNext = false;
-  news: NewsPost[] = [];
-  placeholders: any[] = [];
+  loadingPrevious = false;
 
-  private firstItem: Element;
-
-  @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
-  @ViewChild(NbListComponent, { read: ElementRef }) infiniteListElementRef: ElementRef;
+  @ViewChild(NbSpinnerDirective, { read: ElementRef }) spinner: ElementRef<Element>;
+  @ViewChild(NbListComponent, { read: ElementRef }) listElementRef: ElementRef<Element>;
+  @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef<Element>>;
 
   constructor(
     private newsService: NewsService,
@@ -66,93 +50,62 @@ export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewIni
   ) {}
 
   ngOnInit() {
-    this.route.queryParams
-      .pipe(take(1))
-      .subscribe(({ page }) => {
-        this.startPage = page
-          ? Number.parseInt(page, 10)
-          : 1;
-        this.pageToLoad = this.startPage;
-      });
+    const { page } = this.route.snapshot.queryParams;
+    this.startPage = page ? Number.parseInt(page, 10) : 1;
+    this.pageToLoadNext = this.startPage;
   }
 
-  ngAfterViewInit() {
-    let firstLoad = true;
-    this.listItems.changes
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => {
-        const newsLoaded = this.news.length > 0;
-        if (firstLoad && newsLoaded) {
-          firstLoad = false;
-          this.firstItem = this.listItems.first.nativeElement;
-        } else if (newsLoaded) {
-          this.restoreScrollPosition();
-        }
-      });
+  updateUrl(page) {
+    const queryParams = { ...this.route.snapshot.queryParams, page };
+    this.router.navigate(['.'], { queryParams, replaceUrl: true, relativeTo: this.route });
   }
 
-  ngOnDestroy() {
-    this.firstItem = null;
-    this.alive = false;
-  }
+  loadPrevious() {
+    if (this.loadingPrevious || this.startPage === 1) {
+      return;
+    }
 
-  loadPrev() {
-    if (this.startPage === 1 || this.loadingPrev) { return; }
-
-    this.loadingPrev = true;
-
+    this.loadingPrevious = true;
     this.newsService.load(this.startPage - 1, this.pageSize)
       .subscribe(news => {
-        this.startPage--;
         this.news.unshift(...news);
-        this.loadingPrev = false;
+        this.loadingPrevious = false;
+        this.restoreScrollPosition();
+        this.startPage--;
       });
   }
 
   loadNext() {
-    if (this.loadingNext) { return; }
+    if (this.loadingNext) { return }
 
-    this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
-
-    this.newsService.load(this.pageToLoad, this.pageSize)
+    this.placeholders = new Array(this.pageSize);
+    this.newsService.load(this.pageToLoadNext, this.pageSize)
       .subscribe(news => {
-        this.news.push(...news);
         this.placeholders = [];
+        this.news.push(...news);
         this.loadingNext = false;
-        this.pageToLoad++;
+        this.pageToLoadNext++;
       });
   }
 
   private restoreScrollPosition() {
-    if (this.firstItem === this.listItems.first.nativeElement) {
-      return;
-    }
+    const spinnerHeight = getElementHeight(this.spinner.nativeElement);
+    const previousFirstItem = this.listItems.length > 0 ? this.listItems.first.nativeElement : null;
 
-    let newItemsHeight = 0;
-    this.listItems.some(({ nativeElement }) => {
-      if (nativeElement === this.firstItem) {
-        return true;
-      }
-      newItemsHeight += getElementHeight(nativeElement);
-    });
-
-    this.infiniteListElementRef.nativeElement.scrollTo(0, newItemsHeight);
-    this.firstItem = this.listItems.first.nativeElement;
-  }
-
-  updateUrl(page) {
-    this.route.queryParams
-      .pipe(take(1))
-      .subscribe(params => {
-        this.router.navigate(
-          ['.'],
-          {
-            queryParams: { ...params, page },
-            replaceUrl: true,
-            relativeTo: this.route,
-          },
-        );
+    this.listItems.changes
+      .pipe(
+        map(() => this.listItems.first.nativeElement),
+        filter(newFirstItem => newFirstItem !== previousFirstItem),
+        take(1),
+      )
+      .subscribe(() => {
+        let heightOfAddedItems = 0;
+        for (const { nativeElement } of this.listItems.toArray()) {
+          if (nativeElement === previousFirstItem) { break }
+          heightOfAddedItems += getElementHeight(nativeElement);
+        }
+        this.listElementRef.nativeElement.scrollTop = heightOfAddedItems - spinnerHeight;
       });
   }
 }

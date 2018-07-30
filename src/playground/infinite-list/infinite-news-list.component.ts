@@ -1,67 +1,56 @@
 import {
   Component,
-  OnInit,
-  OnDestroy,
   ViewChildren,
-  AfterViewInit,
-  QueryList,
   ElementRef,
+  QueryList,
+  OnInit,
   Inject,
   PLATFORM_ID,
+  OnDestroy,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, takeWhile } from 'rxjs/operators';
+import { take, filter, map } from 'rxjs/operators';
 import { NbListItemComponent, NbLayoutScrollService, NB_WINDOW } from '@nebular/theme';
 import { getElementHeight } from '@nebular/theme/components/helpers';
-import { NewsService, NewsPost } from './news.service';
-import { isPlatformBrowser } from '../../../node_modules/@angular/common';
+import { NewsService } from './news.service';
 
 @Component({
-  selector: 'nb-infinite-news-list',
   template: `
     <nb-card>
-      <div [nbSpinner]="loadingPrev"></div>
-
+      <div [nbSpinner]="loadingPrevious"></div>
       <nb-list
         nbInfiniteList
-        [threshold]="400"
         listenWindowScroll
+        [threshold]="500"
+        (topThreshold)="loadPrevious()"
         (bottomThreshold)="loadNext()"
-        (topThreshold)="loadPrev()"
         [nbListPager]="pageSize"
         [startPage]="startPage"
         (pageChange)="updateUrl($event)">
-
         <nb-list-item *ngFor="let newsPost of news">
           <nb-news-post [post]="newsPost"></nb-news-post>
         </nb-list-item>
         <nb-list-item *ngFor="let _ of placeholders">
           <nb-news-post-placeholder></nb-news-post-placeholder>
         </nb-list-item>
-
       </nb-list>
     </nb-card>
   `,
-  styleUrls: [ `infinite-news-list.component.scss` ],
+  styleUrls: [ 'infinite-news-list.component.scss' ],
 })
-export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbInfiniteNewsListComponent implements OnInit, OnDestroy {
 
-  alive = true;
-
+  news = [];
+  placeholders = [];
   pageSize = 10;
   startPage: number;
-  pageToLoad: number;
-
-  loadingPrev = false;
+  pageToLoadNext: number;
   loadingNext = false;
-  news: NewsPost[] = [];
-  placeholders: any[] = [];
+  loadingPrevious = false;
+  initialScrollRestoration: ScrollRestoration;
 
-  private firstItem: Element;
-
-  private intialScrollRestoration: ScrollRestoration;
-
-  @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
+  @ViewChildren(NbListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef<Element>>;
 
   constructor(
     private newsService: NewsService,
@@ -71,103 +60,74 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     @Inject(PLATFORM_ID) private platformId,
     @Inject(NB_WINDOW) private window,
   ) {
-    if (isPlatformBrowser(this.platformId) && window && window.history) {
-      this.intialScrollRestoration = window.history.scrollRestoration;
+    if (isPlatformBrowser(this.platformId) && this.window.history.scrollRestoration) {
+      this.initialScrollRestoration = window.history.scrollRestoration;
       history.scrollRestoration = 'manual';
     }
   }
 
   ngOnInit() {
-    this.route.queryParams
-      .pipe(take(1))
-      .subscribe(({ page }) => {
-        this.startPage = page
-          ? Number.parseInt(page, 10)
-          : 1;
-        this.pageToLoad = this.startPage;
-      });
-  }
-
-  ngAfterViewInit() {
-    let firstLoad = true;
-    this.listItems.changes
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => {
-        const newsLoaded = this.news.length > 0;
-        if (firstLoad && newsLoaded) {
-          firstLoad = false;
-          this.firstItem = this.listItems.first.nativeElement;
-        } else if (newsLoaded) {
-          this.restoreScrollPosition();
-        }
-      });
+    const { page } = this.route.snapshot.queryParams;
+    this.startPage = page ? Number.parseInt(page, 10) : 1;
+    this.pageToLoadNext = this.startPage;
   }
 
   ngOnDestroy() {
-    this.firstItem = null;
-    this.alive = false;
-    if (isPlatformBrowser(this.platformId) && this.intialScrollRestoration) {
-      this.window.history.scrollRestoration = this.intialScrollRestoration;
+    if (this.initialScrollRestoration) {
+      this.window.history.scrollRestoration = this.initialScrollRestoration;
     }
   }
 
-  loadPrev() {
-    if (this.startPage === 1 || this.loadingPrev) { return; }
+  updateUrl(page) {
+    const queryParams = { ...this.route.snapshot.queryParams, page };
+    this.router.navigate(['.'], { queryParams, replaceUrl: true, relativeTo: this.route });
+  }
 
-    this.loadingPrev = true;
+  loadPrevious() {
+    if (this.loadingPrevious || this.startPage === 1) {
+      return;
+    }
 
+    this.loadingPrevious = true;
     this.newsService.load(this.startPage - 1, this.pageSize)
       .subscribe(news => {
-        this.startPage--;
         this.news.unshift(...news);
-        this.loadingPrev = false;
+        this.loadingPrevious = false;
+        this.restoreScrollPosition();
+        this.startPage--;
       });
   }
 
   loadNext() {
-    if (this.loadingNext) { return; }
+    if (this.loadingNext) { return }
 
-    this.placeholders = new Array(this.pageSize);
     this.loadingNext = true;
-
-    this.newsService.load(this.pageToLoad, this.pageSize)
+    this.placeholders = new Array(this.pageSize);
+    this.newsService.load(this.pageToLoadNext, this.pageSize)
       .subscribe(news => {
-        this.news.push(...news);
         this.placeholders = [];
+        this.news.push(...news);
         this.loadingNext = false;
-        this.pageToLoad++;
+        this.pageToLoadNext++;
       });
   }
 
   private restoreScrollPosition() {
-    if (this.firstItem === this.listItems.first.nativeElement) {
-      return;
-    }
+    const previousFirstItem = this.listItems.length > 0 ? this.listItems.first.nativeElement : null;
 
-    let newItemsHeight = 0;
-    this.listItems.some(({ nativeElement }) => {
-      if (nativeElement === this.firstItem) {
-        return true;
-      }
-      newItemsHeight += getElementHeight(nativeElement);
-    });
-
-    this.scrollService.scrollTo(0, newItemsHeight);
-    this.firstItem = this.listItems.first.nativeElement;
-  }
-
-  updateUrl(page) {
-    this.route.queryParams
-      .pipe(take(1))
-      .subscribe(params => {
-        this.router.navigate(
-          ['.'],
-          {
-            queryParams: { ...params, page },
-            replaceUrl: true,
-            relativeTo: this.route,
-          },
-        );
+    this.listItems.changes
+      .pipe(
+        map(() => this.listItems.first.nativeElement),
+        filter(newFirstItem => newFirstItem !== previousFirstItem),
+        take(1),
+      )
+      .subscribe(() => {
+        let heightOfAddedItems = 0;
+        for (const { nativeElement } of this.listItems.toArray()) {
+          if (nativeElement === previousFirstItem) { break }
+          heightOfAddedItems += getElementHeight(nativeElement);
+        }
+        this.scrollService.scrollTo(null, heightOfAddedItems);
       });
   }
 }
