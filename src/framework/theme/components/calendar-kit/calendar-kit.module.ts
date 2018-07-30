@@ -21,6 +21,7 @@ import {
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
   NbCalendarYearPickerComponent,
+  NbCalendarMonthCellComponent,
 } from './components';
 import {
   NbCalendarMonthCellDirective,
@@ -45,6 +46,7 @@ const COMPONENTS = [
   NbCalendarDayCellDirective,
   NbCalendarMonthCellDirective,
   NbCalendarYearCellDirective,
+  NbCalendarMonthCellComponent,
 ];
 
 const PIPES = [

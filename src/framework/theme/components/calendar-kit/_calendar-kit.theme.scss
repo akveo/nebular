@@ -57,7 +57,7 @@
       padding: nb-theme(calendar-row-padding);
     }
 
-    .month {
+    nb-calendar-month-cell {
       display: flex;
       align-items: center;
       justify-content: center;

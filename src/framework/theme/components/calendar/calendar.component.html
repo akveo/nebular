@@ -21,9 +21,9 @@
         [value]="date"
         (valueChange)="dateChange.emit($event)">
 
-        <ng-container *ngIf="cell">
-          <ng-container *nbCalendarCell="let context">
-            <ng-container *ngTemplateOutlet="cell.template, context: {$implicit: context}"></ng-container>
+        <ng-container *ngIf="dayCell">
+          <ng-container *nbCalendarDay="let context">
+            <ng-container *ngTemplateOutlet="dayCell.template, context: {$implicit: context}"></ng-container>
           </ng-container>
         </ng-container>
 
@@ -54,6 +54,13 @@
       <nb-calendar-month-picker
         [value]="activeMonth"
         (valueChange)="setActiveMonth($event); setViewMode(ViewMode.DATE)">
+
+        <ng-container *ngIf="monthCell">
+          <ng-container *nbCalendarMonth="let context">
+            <ng-container *ngTemplateOutlet="monthCell.template, context: {$implicit: context}"></ng-container>
+          </ng-container>
+        </ng-container>
+
       </nb-calendar-month-picker>
 
     </ng-container>

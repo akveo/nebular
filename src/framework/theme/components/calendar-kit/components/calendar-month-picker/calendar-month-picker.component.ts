@@ -4,23 +4,29 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { NbDateTimeUtil, NbLocaleService } from '../../services';
+import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { batch, range } from '../../helpers';
+import { NbCalendarMonthCellDirective } from '../calendar-cell';
 
 
-// TODO refactor template with styles refactoring
 @Component({
   selector: 'nb-calendar-month-picker',
   styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-    <div class="chunk-row" *ngFor="let chunk of months">
-      <div class="month"
-           *ngFor="let month of chunk"
-           [class.selected]="month.selected"
-           (click)="onClick(month.value)">
-        {{ month.label }}
+    <div class="chunk-row" *ngFor="let monthRow of months">
+      <div *ngFor="let month of monthRow" (click)="onClick(month)">
+        <ng-container *ngIf="cell; else defaultCell">
+          <ng-container
+            [ngTemplateOutlet]="cell.template"
+            [ngTemplateOutletContext]="createTemplateContext(month)">
+          </ng-container>
+        </ng-container>
+        <ng-template #defaultCell>
+          <nb-calendar-month-cell
+            [date]="month"
+            [selectedValue]="value">
+          </nb-calendar-month-cell>
+        </ng-template>
       </div>
     </div>
   `,
@@ -32,34 +38,32 @@ export class NbCalendarMonthPickerComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter<Date>();
 
-  // TODO define type for month
-  months: any[];
+  months: Date[][];
 
-  constructor(private locale: NbLocaleService) {
-  }
+  @ContentChild(NbCalendarMonthCellDirective) cell: NbCalendarMonthCellDirective;
 
   ngOnInit() {
     this.initMonths();
   }
 
   initMonths() {
-    const selectedMonth = this.value.getMonth();
-
-    // TODO maybe we need one more util for cases like that?
-    const months = range(12)
-      .map(index => ({
-        value: index,
-        label: this.locale.getMonthNameByIndex(index),
-        selected: selectedMonth === index,
-      }));
-
+    const months: Date[] = range(12).map(i => this.createMonthDateByIndex(i));
     this.months = batch(months, 4);
   }
 
   onClick(month) {
-    const year = this.value.getFullYear();
-    const day = this.value.getDate();
-    this.value = NbDateTimeUtil.createDate(year, month, day);
+    this.value = month;
     this.valueChange.emit(this.value);
+  }
+
+  createTemplateContext(day: Date) {
+    return {
+      $implicit: day,
+      selectedValue: this.value,
+    }
+  }
+
+  private createMonthDateByIndex(i: number): Date {
+    return new Date(this.value.getFullYear(), i, this.value.getDate());
   }
 }

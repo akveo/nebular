@@ -18,7 +18,8 @@ import { Component } from '@angular/core';
 
     <nb-card>
       <nb-card-body>
-        <nb-calendar-month-picker [(value)]="monthPickerActiveMonth"></nb-calendar-month-picker>
+        <nb-calendar-month-picker [(value)]="monthPickerActiveMonth">
+        </nb-calendar-month-picker>
       </nb-card-body>
     </nb-card>
 
