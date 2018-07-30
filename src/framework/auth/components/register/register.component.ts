@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
@@ -20,12 +20,12 @@ import { NbAuthResult } from '../../services/auth-result';
       <h2 class="title">Sign Up</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
-        <nb-alert *ngIf="showMessages.error && errors && errors.length > 0 && !submitted" outline="danger">
+        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
         </nb-alert>
 
-        <nb-alert *ngIf="showMessages.success && messages && messages.length > 0 && !submitted" outline="success">
+        <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
         </nb-alert>
@@ -170,6 +170,7 @@ import { NbAuthResult } from '../../services/auth-result';
       </div>
     </nb-auth-block>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRegisterComponent {
 
@@ -185,6 +186,7 @@ export class NbRegisterComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
+              protected cd: ChangeDetectorRef,
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
@@ -211,6 +213,7 @@ export class NbRegisterComponent {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
+      this.cd.detectChanges();
     });
   }
 

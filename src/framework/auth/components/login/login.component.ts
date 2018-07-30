@@ -20,12 +20,12 @@ import { NbAuthResult } from '../../services/auth-result';
 
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
-        <nb-alert *ngIf="showMessages.error && errors && errors.length > 0 && !submitted" outline="danger">
+        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
         </nb-alert>
 
-        <nb-alert *ngIf="showMessages.success && messages && messages.length > 0 && !submitted" outline="success">
+        <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
         </nb-alert>
@@ -149,24 +149,23 @@ export class NbLoginComponent {
     this.errors = this.messages = [];
     this.submitted = true;
 
-    this.service.authenticate(this.strategy, this.user)
-      .subscribe((result: NbAuthResult) => {
-        this.submitted = false;
+    this.service.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {
+      this.submitted = false;
 
-        if (result.isSuccess()) {
-          this.messages = result.getMessages();
-        } else {
-          this.errors = result.getErrors();
-        }
+      if (result.isSuccess()) {
+        this.messages = result.getMessages();
+      } else {
+        this.errors = result.getErrors();
+      }
 
-        const redirect = result.getRedirect();
-        if (redirect) {
-          setTimeout(() => {
-            return this.router.navigateByUrl(redirect);
-          }, this.redirectDelay);
-        }
-        this.cd.detectChanges();
-      });
+      const redirect = result.getRedirect();
+      if (redirect) {
+        setTimeout(() => {
+          return this.router.navigateByUrl(redirect);
+        }, this.redirectDelay);
+      }
+      this.cd.detectChanges();
+    });
   }
 
   getConfigValue(key: string): any {
