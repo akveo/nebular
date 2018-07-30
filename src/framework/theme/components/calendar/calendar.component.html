@@ -18,8 +18,8 @@
       <nb-calendar-day-picker
         [activeMonth]="activeMonth"
         [boundingMonths]="boundingMonth"
-        [value]="date"
-        (valueChange)="dateChange.emit($event)">
+        [value]="value"
+        (valueChange)="onChange($event)">
 
         <ng-container *ngIf="dayCell">
           <ng-container *nbCalendarDay="let context">
