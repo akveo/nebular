@@ -18,11 +18,18 @@ export enum NbOAuth2GrantType {
   REFRESH_TOKEN = 'refresh_token',
 }
 
+export enum NbOAuth2ClientAuthMethod {
+  NONE = 'none',
+  BASIC = 'basic',
+  REQUEST_BODY = 'request-body',
+}
+
 export class NbOAuth2AuthStrategyOptions {
   name: string;
   baseEndpoint?: string = '';
   clientId: string = '';
-  clientSecret: string = '';
+  clientSecret?: string = '';
+  clientAuthMethod?: string = NbOAuth2ClientAuthMethod.NONE;
   redirect?: { success?: string; failure?: string } = {
     success: '/',
     failure: null,

@@ -65,4 +65,13 @@ describe('Component: NbButton', () => {
         .debugElement.nativeElement.classList.contains('btn-semi-round'))
       .toBeTruthy()
   });
+
+  it('should set full-width class', () => {
+    button.fullWidth = true;
+    fixture.detectChanges();
+    expect(
+      fixture
+        .debugElement.nativeElement.classList.contains('btn-full-width'))
+      .toBeTruthy()
+  });
 });

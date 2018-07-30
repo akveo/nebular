@@ -164,6 +164,7 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbButtonFullWidthComponent } from './button/button-full-width.component';
 import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
@@ -334,6 +335,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
+  NbButtonFullWidthComponent,
   NbSimpleListShowcaseComponent,
   NbUsersListShowcaseComponent,
   NbInfiniteNewsListComponent,
