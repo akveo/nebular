@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
@@ -15,5 +15,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class NbCalendarHeaderComponent {
-  date: Date = new Date();
+  @Input() date: Date = new Date();
 }
