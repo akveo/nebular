@@ -13,22 +13,6 @@ import { Component } from '@angular/core';
     <br/>
     <br/>
     <nb-calendar [(date)]="date" [boundingMonth]="false"></nb-calendar>
-    
-    <nb-calendar [(date)]="date" [boundingMonth]="false">
-      
-      <span [style.min-width.px]="42" *nbCalendarDay="let date">
-        {{ date.getDay() }}
-      </span>
-
-      <span [style.min-width.px]="42" *nbCalendarMonth="let date"> 
-        {{ date.getMonth() }}
-      </span>
-
-      <span [style.min-width.px]="42" *nbCalendarYear="let date">
-        {{ date.getFullYear()}}
-      </span>
-
-    </nb-calendar>
   `,
 })
 export class NbCalendarTestComponent {

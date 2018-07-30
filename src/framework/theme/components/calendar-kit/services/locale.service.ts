@@ -43,7 +43,4 @@ export class NbLocaleService {
     return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Narrow);
   }
 
-  getWeekStartDiff(date: Date): number {
-    return (7 - this.getFirstDayOfWeek() + date.getDay()) % 7;
-  }
 }

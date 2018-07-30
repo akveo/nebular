@@ -20,18 +20,18 @@ export class NbCalendarDayCellComponent {
   @Input() activeMonth: Date;
 
   @HostBinding('class.today') get isToday(): boolean {
-    return NbDateTimeUtil.isSameDay(this.date, new Date());
+    return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
   }
 
   @HostBinding('class.bounding-month') get isBoundingMonth(): boolean {
-    return !NbDateTimeUtil.isSameMonth(this.date, this.activeMonth);
+    return this.date && !NbDateTimeUtil.isSameMonth(this.date, this.activeMonth);
   }
 
   @HostBinding('class.selected') get isSelected(): boolean {
-    return this.selectedValue && NbDateTimeUtil.isSameDay(this.date, this.selectedValue);
+    return this.date && this.selectedValue && NbDateTimeUtil.isSameDay(this.date, this.selectedValue);
   }
 
   get day(): number {
-    return this.date.getDate();
+    return this.date && this.date.getDate();
   }
 }

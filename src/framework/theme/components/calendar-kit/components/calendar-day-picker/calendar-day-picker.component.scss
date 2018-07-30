@@ -9,9 +9,6 @@
 
   .week {
     display: flex;
-
-    &:first-of-type {
-      justify-content: flex-end;
-    }
+    justify-content: space-between;
   }
 }

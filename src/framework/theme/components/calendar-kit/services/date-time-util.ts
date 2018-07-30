@@ -3,6 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { range } from '@nebular/theme/components/calendar-kit/helpers';
 
 export namespace NbDateTimeUtil {
   export const DAYS_IN_WEEK: number = 7;
@@ -65,4 +66,13 @@ export namespace NbDateTimeUtil {
   export const addYear = (date: Date, num: number) => {
     return createDate(date.getFullYear() + num, date.getMonth(), date.getDate());
   };
+
+  export const createDateRangeForMonth = (date: Date): Date[] => {
+    const daysInMonth: number = getNumberOfDaysInMonth(date);
+    return range(daysInMonth, i => {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      return NbDateTimeUtil.createDate(year, month, i + 1)
+    });
+  }
 }

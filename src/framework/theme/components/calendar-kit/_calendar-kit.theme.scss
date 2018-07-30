@@ -86,8 +86,8 @@
 
   nb-calendar-day-picker {
     .day {
-      width: nb-theme(calendar-weekday-width);
-      height: nb-theme(calendar-weekday-height);
+      min-width: nb-theme(calendar-weekday-width);
+      min-height: nb-theme(calendar-weekday-height);
       font-size: nb-theme(calendar-weekday-font-size);
       font-weight: nb-theme(calendar-weekday-font-weight);
       color: nb-theme(calendar-weekday-fg);
@@ -99,8 +99,8 @@
   }
 
   nb-calendar-day-cell {
-    width: nb-theme(calendar-cell-width);
-    height: nb-theme(calendar-cell-height);
+    min-width: nb-theme(calendar-cell-width);
+    min-height: nb-theme(calendar-cell-height);
     border-radius: nb-theme(calendar-border-radius);
 
     &.today {
