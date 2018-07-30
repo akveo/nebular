@@ -32,9 +32,12 @@ import { convertToBoolProperty } from '../helpers';
  * Colored alerts could be simply configured by providing a `status` property:
  * @stacked-example(Colored Alert, alert/alert-colors.component)
  *
- * It is also possible to assign an `accent` property for a slight card highlight
+ * It is also possible to assign an `accent` property for a slight alert highlight
  * as well as combine it with `status`:
  * @stacked-example(Accent Alert, alert/alert-accents.component)
+ *
+ * And `outline` property:
+ * @stacked-example(Outline Alert, alert/alert-outline.component)
  *
  * @additional-example(Multiple Sizes, alert/alert-sizes.component)
  *
@@ -44,6 +47,7 @@ import { convertToBoolProperty } from '../helpers';
  * alert-line-height:
  * alert-font-weight:
  * alert-fg:
+ * alert-outline-fg:
  * alert-bg:
  * alert-active-bg:
  * alert-disabled-bg:
@@ -103,9 +107,18 @@ export class NbAlertComponent {
   static readonly ACCENT_WARNING = 'warning';
   static readonly ACCENT_DANGER = 'danger';
 
+  static readonly OUTLINE_ACTIVE = 'active';
+  static readonly OUTLINE_DISABLED = 'disabled';
+  static readonly OUTLINE_PRIMARY = 'primary';
+  static readonly OUTLINE_INFO = 'info';
+  static readonly OUTLINE_SUCCESS = 'success';
+  static readonly OUTLINE_WARNING = 'warning';
+  static readonly OUTLINE_DANGER = 'danger';
+
   size: string;
-  status: string = NbAlertComponent.STATUS_SUCCESS;
+  status: string;
   accent: string;
+  outline: string;
 
   @HostBinding('class.closable')
   closableValue: boolean = false;
@@ -193,6 +206,11 @@ export class NbAlertComponent {
     return this.accent;
   }
 
+  @HostBinding('class.status')
+  get hasStatus() {
+    return this.status;
+  }
+
   @HostBinding('class.accent-primary')
   get primaryAccent() {
     return this.accent === NbAlertComponent.ACCENT_PRIMARY;
@@ -228,6 +246,46 @@ export class NbAlertComponent {
     return this.accent === NbAlertComponent.ACCENT_DISABLED;
   }
 
+  @HostBinding('class.outline')
+  get hasOutline() {
+    return this.outline;
+  }
+
+  @HostBinding('class.outline-primary')
+  get primaryOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_PRIMARY;
+  }
+
+  @HostBinding('class.outline-info')
+  get infoOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_INFO;
+  }
+
+  @HostBinding('class.outline-success')
+  get successOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_SUCCESS;
+  }
+
+  @HostBinding('class.outline-warning')
+  get warningOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_WARNING;
+  }
+
+  @HostBinding('class.outline-danger')
+  get dangerOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_DANGER;
+  }
+
+  @HostBinding('class.outline-active')
+  get activeOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_ACTIVE;
+  }
+
+  @HostBinding('class.outline-disabled')
+  get disabledOutline() {
+    return this.outline === NbAlertComponent.OUTLINE_DISABLED;
+  }
+
   /**
    * Alert size, available sizes:
    * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
@@ -256,6 +314,16 @@ export class NbAlertComponent {
   @Input('accent')
   private set setAccent(val: string) {
     this.accent = val;
+  }
+
+  /**
+   * Alert outline (color of the border):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} val
+   */
+  @Input('outline')
+  private set setOutline(val: string) {
+    this.outline = val;
   }
 
   /**
