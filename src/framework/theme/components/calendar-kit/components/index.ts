@@ -12,5 +12,6 @@ export { NbCalendarDayPickerComponent } from './calendar-day-picker/calendar-day
 export { NbCalendarNavigationComponent } from './calendar-navigation/calendar-navigation.component';
 export { NbCalendarPageableNavigationComponent } from './calendar-navigation/calendar-pageable-navigation.component';
 export { NbCalendarDaysNamesComponent } from './calendar-days-names/calendar-days-names.component';
+export { NbCalendarCellDirective } from './calendar-cell-def';
 
 export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';

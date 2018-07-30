@@ -5,28 +5,33 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-
-import { NbCalendarCell, NbCalendarCellStatus } from '../../model';
+import { NbDateTimeUtil } from '../../services/date-time-util';
 
 
 @Component({
   selector: 'nb-calendar-cell',
   styleUrls: ['./calendar-cell.component.scss'],
-  template: `{{ date }}`,
+  template: `{{ day }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarCellComponent {
-  date: number;
-  state: NbCalendarCellStatus[];
+  @Input() date: Date;
+  @Input() selectedValue: Date;
+  @Input() activeMonth: Date;
 
-  @Input()
-  set cell(cell: NbCalendarCell) {
-    this.date = cell.date.getDate();
-    this.state = cell.status;
+  @HostBinding('class.today') get isToday(): boolean {
+    return NbDateTimeUtil.isSameDay(this.date, new Date());
   }
 
-  @HostBinding('class')
-  get cellStates() {
-    return this.state.join(' ');
+  @HostBinding('class.bounding-month') get isBoundingMonth(): boolean {
+    return !NbDateTimeUtil.isSameMonth(this.date, this.activeMonth);
+  }
+
+  @HostBinding('class.selected') get isSelected(): boolean {
+    return this.selectedValue && NbDateTimeUtil.isSameDay(this.date, this.selectedValue);
+  }
+
+  get day(): number {
+    return this.date.getDate();
   }
 }

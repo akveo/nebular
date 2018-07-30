@@ -5,21 +5,18 @@
  */
 
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   EventEmitter,
   Input,
   OnChanges,
   Output,
-  ViewContainerRef,
 } from '@angular/core';
 
-import { NbCalendarCellStatusService, NbCalendarDaysService } from '../../services';
-import { NbCalendarCell, NbCalendarMonthBuilderContext } from '../../model';
-import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
+import { NbCalendarDaysService } from '../../services';
+import { NbCalendarMonthBuilderContext } from '../../model';
+import { NbCalendarCellDirective } from '../calendar-cell-def';
 
 
 @Component({
@@ -28,12 +25,19 @@ import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
     <div class="week" *ngFor="let week of weeks">
-      <span *ngFor="let cell of week" (click)="onSelect(cell)">
+      <span *ngFor="let day of week" (click)="onSelect(day)">
         <ng-container *ngIf="cellDef; else defaultCell">
-          <ng-container *ngTemplateOutlet="cellDef.template; context: {$implicit: cell}"></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="cellDef.template"
+            [ngTemplateOutletContext]="createTemplateContext(day)">
+          </ng-container>
         </ng-container>
         <ng-template #defaultCell>
-          <nb-calendar-cell [cell]="cell"></nb-calendar-cell>
+          <nb-calendar-cell
+            [date]="day"
+            [activeMonth]="activeMonth"
+            [selectedValue]="value">
+          </nb-calendar-cell>
         </ng-template>
       </span>
     </div>
@@ -51,10 +55,10 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   @Output() valueChange = new EventEmitter<Date>();
 
   @ContentChild(NbCalendarCellDirective) cellDef: NbCalendarCellDirective;
-  weeks: NbCalendarCell[][];
 
-  constructor(private daysService: NbCalendarDaysService<T>,
-              private cellStateService: NbCalendarCellStatusService<T>) {
+  weeks: Date[][];
+
+  constructor(private daysService: NbCalendarDaysService<T>) {
   }
 
   ngOnChanges() {
@@ -63,20 +67,21 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
     }
   }
 
-  onSelect(cell: NbCalendarCell) {
-    this.valueChange.emit(cell.date);
+  onSelect(day: Date) {
+    this.valueChange.emit(day);
+  }
+
+  createTemplateContext(day: Date) {
+    return {
+      $implicit: day,
+      selectedValue: this.value,
+      activeMonth: this.activeMonth,
+    }
   }
 
   private invalidateModel() {
     const context = this.createContext();
-    const days: Date[][] = this.daysService.createWeeks(context);
-    this.weeks = days.map(week => week.map((date: Date) => this.createCellWithState(date, context)));
-  }
-
-  private createCellWithState(date: Date, context: NbCalendarMonthBuilderContext<T>): NbCalendarCell {
-    const cell = { date, status: [] };
-    this.cellStateService.assignStates(cell, context);
-    return cell;
+    this.weeks = this.daysService.createWeeks(context);
   }
 
   private createContext(): NbCalendarMonthBuilderContext<T> {

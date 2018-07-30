@@ -103,12 +103,12 @@
     height: nb-theme(calendar-cell-height);
     border-radius: nb-theme(calendar-border-radius);
 
-    &.cell-today {
+    &.today {
       background: nb-theme(calendar-selected-item);
       font-weight: nb-theme(font-weight-bold);
     }
 
-    &.cell-bounding-month {
+    &.bounding-month {
       opacity: nb-theme(calendar-inactive-opacity);
     }
 
@@ -125,7 +125,7 @@
       font-weight: nb-theme(font-weight-bold);
     }
 
-    &.cell-selected {
+    &.selected {
       background: nb-theme(calendar-active-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);

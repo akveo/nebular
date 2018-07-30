@@ -4,42 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ContentChild, EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
 
-import {
-  NbCalendarCell,
-  NbCalendarCellStatus,
-  NbCalendarCellStatusService,
-  NbCalendarMonthBuilderContext,
-  NbCalendarViewMode,
-  NbDateTimeUtil,
-} from '../calendar-kit';
+import { NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
 
-
-@Injectable()
-export class NbCalendarBaseCellStateService extends NbCalendarCellStatusService<Date> {
-  assignStates(cell: NbCalendarCell, context: NbCalendarMonthBuilderContext<Date>) {
-    super.assignStates(cell, context);
-
-    if (context.selectedValue && NbDateTimeUtil.isSameDay(cell.date, context.selectedValue)) {
-      cell.status.push(NbCalendarCellStatus.SELECTED);
-    }
-  }
-}
 
 @Component({
   selector: 'nb-calendar',
   templateUrl: './calendar.component.html',
-  providers: [{ provide: NbCalendarCellStatusService, useClass: NbCalendarBaseCellStateService }],
 })
 export class NbCalendarComponent<T> {
 
   @Input() date: T;
 
-  @Input() boundingMonth: boolean = false;
+  @Input() boundingMonth: boolean = true;
 
   @Output() dateChange = new EventEmitter<T>();
+
   @ContentChild(NbCalendarCellDirective) cell: NbCalendarCellDirective;
 
   ViewMode = NbCalendarViewMode;

@@ -12,6 +12,7 @@ import { NbCalendarDaysService, NbLocaleService } from './services';
 
 import {
   NbCalendarCellComponent,
+  NbCalendarCellDirective,
   NbCalendarDatePipe,
   NbCalendarDayPickerComponent,
   NbCalendarDaysNamesComponent,
@@ -21,7 +22,6 @@ import {
   NbCalendarPageableNavigationComponent,
   NbCalendarYearPickerComponent,
 } from './components';
-import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
 
 
 const SERVICES = [

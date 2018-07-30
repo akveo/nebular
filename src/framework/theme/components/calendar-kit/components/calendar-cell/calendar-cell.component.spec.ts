@@ -7,8 +7,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarCellComponent } from './calendar-cell.component';
-import { NbCalendarCellStatus } from '../../model';
-import { NbDateTimeUtil } from '../../services';
 
 
 describe('Component: NbCalendarCell', () => {
@@ -22,21 +20,38 @@ describe('Component: NbCalendarCell', () => {
     });
     fixture = TestBed.createComponent(NbCalendarCellComponent);
     component = fixture.componentInstance;
-    component.cell = { date: NbDateTimeUtil.createDate(2018, 6, 25), status: [] };
     componentEl = fixture.debugElement.nativeElement;
   });
 
   it('should render date', () => {
-    component.date = 12;
+    component.date = new Date(2018, 6, 12);
+    component.selectedValue = new Date();
+    component.activeMonth = new Date();
     fixture.detectChanges();
     expect(componentEl.textContent).toContain('12');
   });
 
-  it('should contain classes depends on status', () => {
-    component.state = <NbCalendarCellStatus[]> [...Object.values(NbCalendarCellStatus)];
+  it('should contain today class if today', () => {
+    component.date = new Date();
+    component.selectedValue = new Date();
+    component.activeMonth = new Date();
     fixture.detectChanges();
-    Object.values(NbCalendarCellStatus).forEach(state => {
-      expect(componentEl.classList).toContain(state);
-    });
+    expect(componentEl.classList).toContain('today');
+  });
+
+  it('should contain selected class if selected', () => {
+    component.date = new Date();
+    component.selectedValue = new Date();
+    component.activeMonth = new Date();
+    fixture.detectChanges();
+    expect(componentEl.classList).toContain('selected');
+  });
+
+  it('should contain bounding-month class if it adjoin to the activeMonth', () => {
+    component.date = new Date(2018, 7, 1);
+    component.activeMonth = new Date(2018, 6, 30);
+    component.selectedValue = new Date();
+    fixture.detectChanges();
+    expect(componentEl.classList).toContain('bounding-month');
   });
 });
