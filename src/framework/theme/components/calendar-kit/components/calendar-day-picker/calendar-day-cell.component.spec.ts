@@ -9,7 +9,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 
 
-describe('Component: NbCalendarCell', () => {
+describe('Component: NbCalendarDayCell', () => {
   let component: NbCalendarDayCellComponent;
   let fixture: ComponentFixture<NbCalendarDayCellComponent>;
   let componentEl: HTMLElement;
