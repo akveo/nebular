@@ -39,7 +39,6 @@ export class NbListComponent {
 @Component({
   selector: 'nb-list-item',
   template: `<ng-content></ng-content>`,
-  styleUrls: [ './list-item.component.scss' ],
 })
 export class NbListItemComponent {
   /**
