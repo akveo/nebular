@@ -133,6 +133,7 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbButtonFullWidthComponent } from './button/button-full-width.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -205,6 +206,10 @@ export const routes: Routes = [
           {
             path: 'button-types.component',
             component: NbButtonTypesComponent,
+          },
+          {
+            path: 'button-full-width.component',
+            component: NbButtonFullWidthComponent,
           },
         ],
       },

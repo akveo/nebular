@@ -22,4 +22,8 @@
   &:hover, &:focus {
     text-decoration: none;
   }
+
+  &.btn-full-width {
+    width: 100%;
+  }
 }

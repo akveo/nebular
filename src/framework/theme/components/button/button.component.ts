@@ -39,6 +39,9 @@ import { convertToBoolProperty } from '../helpers';
  * and `a`:
  * @stacked-example(Button Elements, button/button-types.component.html)
  *
+ * Button can be made `fullWidth`:
+ * @stacked-example(Full Width Button, button/button-full-width.component.html)
+ *
  * @styles
  *
  * btn-fg:
@@ -192,6 +195,9 @@ export class NbButtonComponent {
     return this.disabled ? '-1' : '0';
   }
 
+  @HostBinding('class.btn-full-width')
+  fullWidth = false;
+
   /**
    * Button size, available sizes:
    * `xxsmall`, `xsmall`, `small`, `medium`, `large`
@@ -237,6 +243,15 @@ export class NbButtonComponent {
   @Input('disabled')
   set setDisabled(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+  }
+
+  /**
+   * If set element will fill its container
+   * @param {boolean}
+   */
+  @Input('fullWidth')
+  set setFullWidth(value) {
+    this.fullWidth = convertToBoolProperty(value);
   }
 
   /**
