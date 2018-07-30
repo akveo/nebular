@@ -4,12 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbCalendarDayPickerComponent } from './calendar-day-picker.component';
-
 import { Component, DebugElement, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-import { NbCalendarDaysService, NbCalendarKitModule } from '@nebular/theme';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { NbCalendarDayPickerComponent } from './calendar-day-picker.component';
+import { NbCalendarDaysService } from '../../services';
+import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 @Component({
   selector: 'nb-calendar-day-picker-test',

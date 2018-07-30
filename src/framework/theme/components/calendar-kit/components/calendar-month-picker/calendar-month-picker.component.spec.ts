@@ -4,11 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
 import { NbLocaleService } from '../../services';
 
+@Component({
+  selector: 'nb-calendar-month-picker-test',
+  template: `
+    <nb-calendar-year-picker [value]="value">
+     <span *nbCalendarMonth calendar-month-cell></span>
+    </nb-calendar-year-picker>
+  `,
+})
+export class NbCalendarMonthPickerTestComponent {
+  value = new Date();
+}
 
 describe('Component: NbCalendarMonthPicker', () => {
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
