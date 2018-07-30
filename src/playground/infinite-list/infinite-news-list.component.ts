@@ -71,7 +71,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
     @Inject(PLATFORM_ID) private platformId,
     @Inject(NB_WINDOW) private window,
   ) {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId) && window && window.history) {
       this.intialScrollRestoration = window.history.scrollRestoration;
       history.scrollRestoration = 'manual';
     }
@@ -106,7 +106,7 @@ export class NbInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDes
   ngOnDestroy() {
     this.firstItem = null;
     this.alive = false;
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId) && this.intialScrollRestoration) {
       this.window.history.scrollRestoration = this.intialScrollRestoration;
     }
   }
