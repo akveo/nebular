@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
 import { NbOAuth2AuthStrategy } from './oauth2-strategy';
-import {NbOAuth2ClientAuthMethod, NbOAuth2GrantType, NbOAuth2ResponseType} from './oauth2-strategy.options';
+import { NbOAuth2ClientAuthMethod, NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
 import { NbAuthResult, nbAuthCreateToken, NbAuthOAuth2Token } from '../../services';
 
 function createURL(params: any) {
