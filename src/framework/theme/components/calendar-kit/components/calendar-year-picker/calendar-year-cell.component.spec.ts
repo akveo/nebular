@@ -28,7 +28,6 @@ describe('Component: NbCalendarYearCell', () => {
   it('should render year', () => {
     component.date = new Date(2018, 6, 12);
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
     fixture.detectChanges();
     expect(componentEl.textContent).toContain('2018');
   });
@@ -36,7 +35,6 @@ describe('Component: NbCalendarYearCell', () => {
   it('should contain selected class if selected', () => {
     component.date = new Date();
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
     fixture.detectChanges();
     expect(componentEl.classList).toContain('selected');
   });
