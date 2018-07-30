@@ -3,10 +3,15 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { NbCalendarDatePipe, NbCalendarHeaderComponent, NbLocaleService } from '@nebular/theme';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { NbLocaleService } from '../../services';
+import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
+import { NbCalendarHeaderComponent } from '../calendar-header/calendar-header.component';
+
 
 describe('Component: NbCalendarHeader', () => {
 
