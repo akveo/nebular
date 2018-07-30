@@ -7,7 +7,7 @@
 import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
-import { NbCalendarCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell-def';
+import { NbCalendarDayCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class NbCalendarComponent<T> {
 
   @Output() dateChange = new EventEmitter<T>();
 
-  @ContentChild(NbCalendarCellDirective) cell: NbCalendarCellDirective;
+  @ContentChild(NbCalendarDayCellDirective) cell: NbCalendarDayCellDirective;
 
   ViewMode = NbCalendarViewMode;
 

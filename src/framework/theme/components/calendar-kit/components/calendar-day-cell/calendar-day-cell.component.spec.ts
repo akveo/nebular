@@ -6,19 +6,19 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbCalendarCellComponent } from './calendar-cell.component';
+import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 
 
 describe('Component: NbCalendarCell', () => {
-  let component: NbCalendarCellComponent;
-  let fixture: ComponentFixture<NbCalendarCellComponent>;
+  let component: NbCalendarDayCellComponent;
+  let fixture: ComponentFixture<NbCalendarDayCellComponent>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbCalendarCellComponent],
+      declarations: [NbCalendarDayCellComponent],
     });
-    fixture = TestBed.createComponent(NbCalendarCellComponent);
+    fixture = TestBed.createComponent(NbCalendarDayCellComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

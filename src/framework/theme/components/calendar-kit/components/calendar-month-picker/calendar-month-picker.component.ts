@@ -29,6 +29,7 @@ import { batch, range } from '../../helpers';
 export class NbCalendarMonthPickerComponent implements OnInit {
 
   @Input() value: Date;
+
   @Output() valueChange = new EventEmitter<Date>();
 
   // TODO define type for month

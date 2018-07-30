@@ -16,7 +16,7 @@ import {
 
 import { NbCalendarDaysService } from '../../services';
 import { NbCalendarMonthBuilderContext } from '../../model';
-import { NbCalendarCellDirective } from '../calendar-cell-def';
+import { NbCalendarDayCellDirective } from '../calendar-cell';
 
 
 @Component({
@@ -26,18 +26,18 @@ import { NbCalendarCellDirective } from '../calendar-cell-def';
     <nb-calendar-days-names></nb-calendar-days-names>
     <div class="week" *ngFor="let week of weeks">
       <span *ngFor="let day of week" (click)="onSelect(day)">
-        <ng-container *ngIf="cellDef; else defaultCell">
+        <ng-container *ngIf="cell; else defaultCell">
           <ng-container
-            [ngTemplateOutlet]="cellDef.template"
+            [ngTemplateOutlet]="cell.template"
             [ngTemplateOutletContext]="createTemplateContext(day)">
           </ng-container>
         </ng-container>
         <ng-template #defaultCell>
-          <nb-calendar-cell
+          <nb-calendar-day-cell
             [date]="day"
             [activeMonth]="activeMonth"
             [selectedValue]="value">
-          </nb-calendar-cell>
+          </nb-calendar-day-cell>
         </ng-template>
       </span>
     </div>
@@ -54,7 +54,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Output() valueChange = new EventEmitter<Date>();
 
-  @ContentChild(NbCalendarCellDirective) cellDef: NbCalendarCellDirective;
+  @ContentChild(NbCalendarDayCellDirective) cell: NbCalendarDayCellDirective;
 
   weeks: Date[][];
 

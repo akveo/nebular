@@ -9,12 +9,12 @@ import { NbDateTimeUtil } from '../../services/date-time-util';
 
 
 @Component({
-  selector: 'nb-calendar-cell',
-  styleUrls: ['./calendar-cell.component.scss'],
+  selector: 'nb-calendar-day-cell',
+  styleUrls: ['./calendar-day-cell.component.scss'],
   template: `{{ day }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarCellComponent {
+export class NbCalendarDayCellComponent {
   @Input() date: Date;
   @Input() selectedValue: Date;
   @Input() activeMonth: Date;
