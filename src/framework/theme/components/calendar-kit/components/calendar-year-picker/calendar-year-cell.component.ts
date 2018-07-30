@@ -5,26 +5,23 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { NbDateTimeUtil, NbLocaleService } from '../../services';
+import { NbDateTimeUtil } from '../../services';
 
 
 @Component({
-  selector: 'nb-calendar-month-cell',
-  template: `{{ month }}`,
+  selector: 'nb-calendar-year-cell',
+  template: `{{ year }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthCellComponent {
+export class NbCalendarYearCellComponent {
   @Input() date: Date;
   @Input() selectedValue: Date;
 
-  constructor(private localeService: NbLocaleService) {
-  }
-
   @HostBinding('class.selected') get isSelected(): boolean {
-    return this.selectedValue && NbDateTimeUtil.isSameMonth(this.date, this.selectedValue);
+    return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue);
   }
 
-  get month(): string {
-    return this.localeService.getMonthNameByIndex(this.date.getMonth());
+  get year(): number {
+    return this.date.getFullYear();
   }
 }

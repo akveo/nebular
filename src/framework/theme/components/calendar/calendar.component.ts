@@ -6,7 +6,12 @@
 
 import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
 
-import { NbCalendarMonthCellDirective, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
+import {
+  NbCalendarMonthCellDirective,
+  NbCalendarViewMode,
+  NbCalendarYearCellDirective,
+  NbDateTimeUtil,
+} from '../calendar-kit';
 import { NbCalendarDayCellDirective } from '@nebular/theme/components/calendar-kit/components/calendar-cell';
 
 
@@ -24,6 +29,7 @@ export class NbCalendarComponent<T> {
 
   @ContentChild(NbCalendarDayCellDirective) dayCell: NbCalendarDayCellDirective;
   @ContentChild(NbCalendarMonthCellDirective) monthCell: NbCalendarMonthCellDirective;
+  @ContentChild(NbCalendarYearCellDirective) yearCell: NbCalendarYearCellDirective;
 
   ViewMode = NbCalendarViewMode;
 

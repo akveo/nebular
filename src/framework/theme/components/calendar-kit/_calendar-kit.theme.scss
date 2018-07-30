@@ -25,7 +25,7 @@
       padding: nb-theme(calendar-row-padding);
     }
 
-    .year {
+    nb-calendar-year-cell {
       display: flex;
       align-items: center;
       justify-content: center;

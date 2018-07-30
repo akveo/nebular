@@ -13,6 +13,7 @@ export { NbCalendarNavigationComponent } from './calendar-navigation/calendar-na
 export { NbCalendarPageableNavigationComponent } from './calendar-navigation/calendar-pageable-navigation.component';
 export { NbCalendarDaysNamesComponent } from './calendar-days-names/calendar-days-names.component';
 export { NbCalendarMonthCellComponent } from './calendar-month-picker/calendar-month-cell.component';
+export { NbCalendarYearCellComponent } from './calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarDayCellDirective, NbCalendarMonthCellDirective, NbCalendarYearCellDirective } from './calendar-cell';
 
 export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';

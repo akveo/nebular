@@ -4,26 +4,40 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-
-import { NbDateTimeUtil } from '../../services';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { batch, range } from '../../helpers';
+import { NbCalendarYearCellDirective } from '../calendar-cell';
 
 
 // TODO i don't think we need defaults
 const defaultYearCount = 20;
 
-// TODO refactor template with styles refactoring
 @Component({
   selector: 'nb-calendar-year-picker',
   styleUrls: ['./calendar-year-picker.component.scss'],
   template: `
-    <div class="chunk-row" *ngFor="let chunk of years">
-      <div class="year"
-           *ngFor="let year of chunk"
-           [class.selected]="year.selected"
-           (click)="onClick(year.value)">
-        {{ year.value }}
+    <div class="chunk-row" *ngFor="let yearRow of years">
+      <div *ngFor="let year of yearRow" (click)="onClick(year)">
+        <ng-container *ngIf="cell; else defaultCell">
+          <ng-container
+            [ngTemplateOutlet]="cell.template"
+            [ngTemplateOutletContext]="createTemplateContext(year)">
+          </ng-container>
+        </ng-container>
+        <ng-template #defaultCell>
+          <nb-calendar-year-cell
+            [date]="year"
+            [selectedValue]="value">
+          </nb-calendar-year-cell>
+        </ng-template>
       </div>
     </div>
   `,
@@ -35,8 +49,9 @@ export class NbCalendarYearPickerComponent implements OnChanges {
 
   @Output() valueChange = new EventEmitter<any>();
 
-  // TODO define type
-  years: any[];
+  @ContentChild(NbCalendarYearCellDirective) cell: NbCalendarYearCellDirective;
+
+  years: Date[][];
 
   ngOnChanges() {
     this.initYears();
@@ -45,21 +60,23 @@ export class NbCalendarYearPickerComponent implements OnChanges {
   initYears() {
     const selectedYear = this.value.getFullYear();
     const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
-
-    // TODO maybe we need one more util for cases like that?
-    const years = range(defaultYearCount)
-      .map(index => ({
-        value: startYear + index,
-        selected: selectedYear === startYear + index,
-      }));
-
+    const years = range(defaultYearCount).map(i => this.createYearDateByIndex(i + startYear));
     this.years = batch(years, 4);
   }
 
   onClick(year) {
-    const month = this.value.getMonth();
-    const day = this.value.getDate();
-    const event = NbDateTimeUtil.createDate(year, month, day);
-    this.valueChange.emit(event);
+    this.value = year;
+    this.valueChange.emit(year);
+  }
+
+  createTemplateContext(year: Date) {
+    return {
+      $implicit: year,
+      selectedValue: this.value,
+    }
+  }
+
+  private createYearDateByIndex(i: number): Date {
+    return new Date(i, this.value.getMonth(), this.value.getDate());
   }
 }

@@ -11,22 +11,21 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbCalendarDaysService, NbLocaleService } from './services';
 
 import {
+  NbCalendarDatePipe,
   NbCalendarDayCellComponent,
   NbCalendarDayCellDirective,
-  NbCalendarDatePipe,
   NbCalendarDayPickerComponent,
   NbCalendarDaysNamesComponent,
   NbCalendarHeaderComponent,
+  NbCalendarMonthCellComponent,
+  NbCalendarMonthCellDirective,
   NbCalendarMonthPickerComponent,
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
-  NbCalendarYearPickerComponent,
-  NbCalendarMonthCellComponent,
-} from './components';
-import {
-  NbCalendarMonthCellDirective,
+  NbCalendarYearCellComponent,
   NbCalendarYearCellDirective,
-} from '@nebular/theme/components/calendar-kit/components/calendar-cell';
+  NbCalendarYearPickerComponent,
+} from './components';
 
 
 const SERVICES = [
@@ -47,6 +46,7 @@ const COMPONENTS = [
   NbCalendarMonthCellDirective,
   NbCalendarYearCellDirective,
   NbCalendarMonthCellComponent,
+  NbCalendarYearCellComponent,
 ];
 
 const PIPES = [

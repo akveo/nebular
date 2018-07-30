@@ -43,6 +43,13 @@
       <nb-calendar-year-picker
         [value]="activeYear"
         (valueChange)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
+
+        <ng-container *ngIf="yearCell">
+          <ng-container *nbCalendarYear="let context">
+            <ng-container *ngTemplateOutlet="yearCell.template, context: {$implicit: context}"></ng-container>
+          </ng-container>
+        </ng-container>
+
       </nb-calendar-year-picker>
 
     </ng-container>
