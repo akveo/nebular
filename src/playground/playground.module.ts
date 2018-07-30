@@ -129,7 +129,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
-import { NbCalendarKitTestComponent } from './calendar/calendar-kit-day-picker-test.component';
+import { NbCalendarKitTestComponent } from './calendar/calendar-kit-test.component';
 
 export const NB_MODULES = [
   NbCalendarModule,
