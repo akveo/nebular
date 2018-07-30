@@ -48,6 +48,7 @@ export * from './components/chat/chat-message-text.component';
 export * from './components/chat/chat-form.component';
 export * from './components/chat/chat.module';
 export * from './components/spinner/spinner.component';
+export * from './components/spinner/spinner.directive';
 export * from './components/spinner/spinner.module';
 export * from './components/stepper/stepper.component';
 export * from './components/stepper/stepper.module';
