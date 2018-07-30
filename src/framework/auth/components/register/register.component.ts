@@ -20,26 +20,30 @@ import { NbAuthResult } from '../../services/auth-result';
       <h2 class="title">Sign Up</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
-        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
-             class="alert alert-danger" role="alert">
+        <nb-alert *ngIf="showMessages.error && errors && errors.length > 0 && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
-        </div>
-        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
-             class="alert alert-success" role="alert">
+        </nb-alert>
+
+        <nb-alert *ngIf="showMessages.success && messages && messages.length > 0 && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
-        </div>
+        </nb-alert>
 
         <div class="form-group">
           <label for="input-name" class="sr-only">Full name</label>
-          <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel"
-                 class="form-control" placeholder="Full name"
-                 [class.form-control-danger]="fullName.invalid && fullName.touched"
+          <input nbInput
+                 [(ngModel)]="user.fullName"
+                 #fullName="ngModel"
+                 id="input-name"
+                 name="fullName"
+                 placeholder="Full name"
+                 autofocus
+                 fullWidth
+                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.fullName.required')"
                  [minlength]="getConfigValue('forms.validation.fullName.minLength')"
-                 [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
-                 autofocus>
+                 [maxlength]="getConfigValue('forms.validation.fullName.maxLength')">
           <small class="form-text error" *ngIf="fullName.invalid && fullName.touched && fullName.errors?.required">
             Full name is required!
           </small>
@@ -55,9 +59,15 @@ import { NbAuthResult } from '../../services/auth-result';
 
         <div class="form-group">
           <label for="input-email" class="sr-only">Email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
-                 class="form-control" placeholder="Email address" pattern=".+@.+\..+"
-                 [class.form-control-danger]="email.invalid && email.touched"
+          <input nbInput
+                 [(ngModel)]="user.email"
+                 #email="ngModel"
+                 id="input-email"
+                 name="email"
+                 pattern=".+@.+..+"
+                 placeholder="Email address"
+                 fullWidth
+                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.email.required')">
           <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
             Email is required!
@@ -70,9 +80,15 @@ import { NbAuthResult } from '../../services/auth-result';
 
         <div class="form-group">
           <label for="input-password" class="sr-only">Password</label>
-          <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-                 class="form-control" placeholder="Password" #password="ngModel"
-                 [class.form-control-danger]="password.invalid && password.touched"
+          <input nbInput
+                 [(ngModel)]="user.password"
+                 #password="ngModel"
+                 type="password"
+                 id="input-password"
+                 name="password"
+                 placeholder="Password"
+                 fullWidth
+                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
@@ -91,11 +107,16 @@ import { NbAuthResult } from '../../services/auth-result';
 
         <div class="form-group">
           <label for="input-re-password" class="sr-only">Repeat password</label>
-          <input
-            name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
-            class="form-control" placeholder="Confirm Password" #rePass="ngModel"
-            [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
-            [required]="getConfigValue('forms.validation.password.required')">
+          <input nbInput
+                 [(ngModel)]="user.confirmPassword"
+                 #rePass="ngModel"
+                 type="password"
+                 id="input-re-password"
+                 name="rePass"
+                 placeholder="Confirm Password"
+                 fullWidth
+                 [status]="email.dirty ? (email.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
+                 [required]="getConfigValue('forms.validation.password.required')">
           <small class="form-text error"
                  *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
             Password confirmation is required!
@@ -113,7 +134,10 @@ import { NbAuthResult } from '../../services/auth-result';
           </nb-checkbox>
         </div>
 
-        <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
+        <button nbButton
+                status="success"
+                fullWidth
+                [disabled]="submitted || !form.valid"
                 [class.btn-pulse]="submitted">
           Register
         </button>
