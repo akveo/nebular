@@ -39,7 +39,7 @@ import { NewsService, NewsPost } from './news.service';
       </nb-list>
     </nb-card>
   `,
-  styleUrls: [ `infinite-news-list.component.scss` ],
+  styleUrls: [ 'infinite-news-list.component.scss', 'card-with-infinite-news-list.component.scss' ],
 })
 export class NbCardWithInfiniteNewsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
