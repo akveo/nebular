@@ -12,6 +12,7 @@ import {
   Input,
   OnChanges,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 
 import { NbCalendarDaysService } from '../../services';
@@ -61,14 +62,16 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   constructor(private daysService: NbCalendarDaysService<T>) {
   }
 
-  ngOnChanges() {
-    if (this.activeMonth) {
+  ngOnChanges({ activeMonth }: SimpleChanges) {
+    if (activeMonth) {
       this.invalidateModel();
     }
   }
 
   onSelect(day: Date) {
-    this.valueChange.emit(day);
+    if (day) {
+      this.valueChange.emit(day);
+    }
   }
 
   createTemplateContext(day: Date) {

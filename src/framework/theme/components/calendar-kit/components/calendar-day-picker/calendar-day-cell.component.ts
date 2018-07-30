@@ -31,6 +31,10 @@ export class NbCalendarDayCellComponent {
     return this.date && this.selectedValue && NbDateTimeUtil.isSameDay(this.date, this.selectedValue);
   }
 
+  @HostBinding('class.empty') get isEmpty(): boolean {
+    return !this.date;
+  }
+
   get day(): number {
     return this.date && this.date.getDate();
   }

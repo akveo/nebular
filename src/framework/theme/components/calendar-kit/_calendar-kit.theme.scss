@@ -119,7 +119,7 @@
       }
     }
 
-    &:hover {
+    &:hover:not(.empty) {
       background: nb-theme(calendar-hovered-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);
