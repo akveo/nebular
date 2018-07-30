@@ -113,7 +113,6 @@ export class NbCardFooterComponent {
   selector: 'nb-card',
   styleUrls: ['./card.component.scss'],
   template: `
-    <ng-content></ng-content>
     <ng-content select="nb-card-header"></ng-content>
     <ng-content select="nb-card-body"></ng-content>
     <ng-content></ng-content>
