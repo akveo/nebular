@@ -103,6 +103,7 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbAlertOutlineComponent } from './alert/alert-outline.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
@@ -369,6 +370,10 @@ export const routes: Routes = [
           {
             path: 'alert-sizes.component',
             component: NbAlertSizesComponent,
+          },
+          {
+            path: 'alert-outline.component',
+            component: NbAlertOutlineComponent,
           },
         ],
       },

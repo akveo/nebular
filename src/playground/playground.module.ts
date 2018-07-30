@@ -138,6 +138,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbAlertOutlineComponent } from './alert/alert-outline.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
@@ -306,6 +307,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbAlertOutlineComponent,
   NbChatShowcaseComponent,
   NbChatColorsComponent,
   NbChatSizesComponent,

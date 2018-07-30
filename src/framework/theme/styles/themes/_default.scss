@@ -469,8 +469,9 @@ $theme: (
 
   alert-font-size: font-size,
   alert-line-height: line-height,
-  alert-font-weight: font-weight-bold,
+  alert-font-weight: font-weight-normal,
   alert-fg: color-white,
+  alert-outline-fg: color-fg,
   alert-bg: color-bg,
   alert-active-bg: color-fg,
   alert-disabled-bg: color-disabled,
