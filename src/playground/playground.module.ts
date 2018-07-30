@@ -168,9 +168,8 @@ import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.compo
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component'
-import { NbInfiniteListWithPagerComponent } from './infinite-list/infinite-list-with-pager.component'
+import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
-import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component'
 import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
@@ -339,8 +338,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbUsersListShowcaseComponent,
   NbInfiniteNewsListComponent,
   NbInfiniteListShowcaseComponent,
-  NbInfiniteListWithPagerComponent,
-  NbCardWithInfiniteNewsListComponent,
+  NbInfiniteListScrollModesComponent,
   NbNewsPostComponent,
   NbNewsPostPlaceholderComponent,
   NbInputsShowcaseComponent,

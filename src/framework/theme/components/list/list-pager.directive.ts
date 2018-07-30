@@ -15,6 +15,9 @@ import { NbListItemComponent } from './list.component';
 
 /**
  * List pager directive
+ *
+ * Directive allows you to determine page of currently viewing items.
+ *
  */
 @Directive({
   selector: '[nbListPager]',
@@ -26,12 +29,21 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
   private observer: IntersectionObserver;
   private currentPage: number;
 
+  /**
+   * Items per page.
+   */
   @Input('nbListPager')
   pageSize: number;
 
+  /**
+   * Page to start counting with.
+   */
   @Input()
   startPage: number = 1;
 
+  /**
+   * Emits when another page become visible.
+   */
   @Output()
   pageChange = new EventEmitter<number>();
 

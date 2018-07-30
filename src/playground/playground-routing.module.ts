@@ -137,9 +137,8 @@ import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.compo
 import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
 import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
-import { NbInfiniteListWithPagerComponent } from './infinite-list/infinite-list-with-pager.component';
+import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
-import { NbCardWithInfiniteNewsListComponent } from './infinite-list/card-with-infinite-news-list.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -602,16 +601,12 @@ export const routes: Routes = [
             component: NbInfiniteListShowcaseComponent,
           },
           {
-            path: 'infinite-list-with-pager.component',
-            component: NbInfiniteListWithPagerComponent,
+            path: 'infinite-list-scroll-modes.component',
+            component: NbInfiniteListScrollModesComponent,
           },
           {
             path: 'infinite-news-list.component',
             component: NbInfiniteNewsListComponent,
-          },
-          {
-            path: 'card-with-infinite-news-list.component',
-            component: NbCardWithInfiniteNewsListComponent,
           },
         ],
       },
