@@ -28,6 +28,7 @@ module.exports = function (config) {
     },
     reporters: ['spec', 'kjhtml'],
     port: 9876,
+    browserNoActivityTimeout : 60000,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
