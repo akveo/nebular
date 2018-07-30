@@ -10,7 +10,7 @@
   justify-content: center;
   margin: 1px;
 
-  :not(.empty) {
+  &:not(.empty) {
     cursor: pointer;
   }
 }
