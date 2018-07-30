@@ -5,7 +5,7 @@
  */
 
 export { NbCalendarHeaderComponent } from './calendar-header/calendar-header.component';
-export { NbCalendarDayCellComponent } from './calendar-day-cell/calendar-day-cell.component';
+export { NbCalendarDayCellComponent } from './calendar-day-picker/calendar-day-cell.component';
 export { NbCalendarYearPickerComponent } from './calendar-year-picker/calendar-year-picker.component';
 export { NbCalendarMonthPickerComponent } from './calendar-month-picker/calendar-month-picker.component';
 export { NbCalendarDayPickerComponent } from './calendar-day-picker/calendar-day-picker.component';
