@@ -35,12 +35,11 @@ describe('Component: NbCalendarMonthPicker', () => {
   it('should render twelve month', async(() => {
     component.value = new Date(2018, 6, 23);
     fixture.detectChanges();
-    expect(componentEl.querySelectorAll('.month').length).toBe(12);
+    expect(componentEl.querySelectorAll('nb-calendar-month-cell').length).toBe(12);
   }));
 
   it('should render three rows', async(() => {
     component.value = new Date(2018, 6, 23);
-    // TODO rename chunk-row class to something more meaningful
     fixture.detectChanges();
     expect(componentEl.querySelectorAll('.chunk-row').length).toBe(3);
   }));
@@ -51,15 +50,8 @@ describe('Component: NbCalendarMonthPicker', () => {
     });
   });
 
-  it('should add selected class on value', () => {
-    component.value = new Date(2018, 6, 23);
-    fixture.detectChanges();
-    expect(componentEl.querySelectorAll('.selected').length).toBe(1);
-    expect(componentEl.querySelector('.selected').textContent).toContain('Jul');
-  });
-
   it('should render months with correct labels', () => {
-    const monthEls = componentEl.querySelectorAll('.month');
+    const monthEls = componentEl.querySelectorAll('nb-calendar-month-cell');
     const months = [].map.call(monthEls, month => month.textContent);
     months.forEach((month, i) => {
       expect(month).toContain(monthNames[i]);
@@ -69,7 +61,7 @@ describe('Component: NbCalendarMonthPicker', () => {
   it('should fire valueChange when click on a month', () => {
     component.value = new Date(2018, 6, 23);
     fixture.detectChanges();
-    const monthEls = componentEl.querySelectorAll('.month');
+    const monthEls = componentEl.querySelectorAll('nb-calendar-month-cell');
     monthEls[6].dispatchEvent(new Event('click'));
 
     component.valueChange.subscribe(date => {
