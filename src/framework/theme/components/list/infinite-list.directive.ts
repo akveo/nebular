@@ -10,7 +10,7 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import { Observable, forkJoin, of, interval, timer } from 'rxjs';
+import { Observable, forkJoin, of as observableOf, interval, timer } from 'rxjs';
 import { takeWhile, filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
@@ -148,7 +148,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   private getContainerDimentions(): Observable<NbScrollableContainerDimentions> {
     if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
-      return of({ scrollTop, scrollHeight, clientHeight });
+      return observableOf({ scrollTop, scrollHeight, clientHeight });
     }
 
     return forkJoin(this.scrollService.getPosition(), this.dimensionsService.getDimensions())
