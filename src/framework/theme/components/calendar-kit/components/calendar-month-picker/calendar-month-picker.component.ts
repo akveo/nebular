@@ -58,8 +58,10 @@ export class NbCalendarMonthPickerComponent implements OnInit {
 
   createTemplateContext(day: Date) {
     return {
-      $implicit: day,
-      selectedValue: this.value,
+      $implicit: {
+        date: day,
+        selectedValue: this.value,
+      },
     }
   }
 

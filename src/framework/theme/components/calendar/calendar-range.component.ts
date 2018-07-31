@@ -9,6 +9,7 @@ import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/c
 import {
   NbCalendarDayCellDirective,
   NbCalendarMonthCellDirective,
+  NbCalendarViewMode,
   NbCalendarYearCellDirective,
   NbDateTimeUtil,
 } from '../calendar-kit';
@@ -25,6 +26,7 @@ export interface NbCalendarRange {
     <nb-calendar
       [date]="range"
       (dateChange)="onChange($event)"
+      [startView]="startView"
       [boundingMonth]="boundingMonth">
 
       <ng-container *ngIf="dayCell; else defaultDayCell">
@@ -59,7 +61,11 @@ export interface NbCalendarRange {
 })
 export class NbCalendarRangeComponent {
   @Input() boundingMonth: boolean = true;
+
+  @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+
   @Input() range: NbCalendarRange;
+
   @Output() rangeChange: EventEmitter<NbCalendarRange> = new EventEmitter();
 
   @ContentChild(NbCalendarDayCellDirective) dayCell: NbCalendarDayCellDirective;

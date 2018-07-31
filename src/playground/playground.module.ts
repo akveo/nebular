@@ -132,8 +132,11 @@ import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
 import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
-import { NbCalendarKitTestComponent } from './calendar/calendar-kit-test.component';
 import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
+import { NbCalendarDayCellProjectionComponent } from './calendar/calendar-day-cell-projection.component';
+import { NbCalendarMonthCellProjectionComponent } from './calendar/calendar-month-cell-projection.component';
+import { NbCalendarYearCellProjectionComponent } from './calendar/calendar-year-cell-projection.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -256,7 +259,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarRangeShowcaseComponent,
   NbCalendarBoundingMonthComponent,
   NbCalendarRangeBoundingMonthComponent,
-  NbCalendarKitTestComponent,
+  NbCalendarDayCellProjectionComponent,
+  NbCalendarMonthCellProjectionComponent,
+  NbCalendarYearCellProjectionComponent,
+  NbCalendarStartViewComponent,
 ];
 
 

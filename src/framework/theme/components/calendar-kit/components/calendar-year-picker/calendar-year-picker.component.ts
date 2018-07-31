@@ -71,8 +71,10 @@ export class NbCalendarYearPickerComponent implements OnChanges {
 
   createTemplateContext(year: Date) {
     return {
-      $implicit: year,
-      selectedValue: this.value,
+      $implicit: {
+        date: year,
+        selectedValue: this.value,
+      },
     }
   }
 

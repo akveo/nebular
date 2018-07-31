@@ -21,9 +21,11 @@ import {
 })
 export class NbCalendarComponent<T> {
 
-  @Input() date: T;
-
   @Input() boundingMonth: boolean = true;
+
+  @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+
+  @Input() date: T;
 
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
@@ -35,8 +37,6 @@ export class NbCalendarComponent<T> {
 
   activeMonth: Date = new Date();
   activeYear: Date = new Date();
-
-  activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   setViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;
