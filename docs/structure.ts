@@ -327,6 +327,12 @@ export const structure = [
           'NbAccordionItemBodyComponent',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Input',
+        icon: 'input.svg',
+        source: ['NbInputDirective'],
+      },
     ],
   },
   {

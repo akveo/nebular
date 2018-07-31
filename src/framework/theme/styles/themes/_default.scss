@@ -370,14 +370,14 @@ $theme: (
   btn-group-separator: #dadfe6,
 
   form-control-text-primary-color: color-fg-heading,
-  form-control-text-secondary-color: color-fg,
-  form-control-font-family: font-secondary,
   form-control-bg: color-bg,
   form-control-focus-bg: color-bg,
 
   form-control-border-width: 2px,
   form-control-border-type: solid,
   form-control-border-radius: radius,
+  form-control-semi-round-border-radius: 0.75rem,
+  form-control-round-border-radius: 1.5rem,
   form-control-border-color: #dadfe6,
   form-control-selected-border-color: color-success,
 
@@ -390,10 +390,11 @@ $theme: (
   form-control-placeholder-font-size: 1rem,
 
   form-control-font-size: 1rem,
-  form-control-sm-font-size: font-size-sm,
-  form-control-sm-padding: 0.375rem 1.125rem,
-  form-control-lg-font-size: font-size-lg,
-  form-control-lg-padding: 1.125rem,
+  form-control-padding: 0.75rem 1.125rem,
+  form-control-font-size-sm: font-size-sm,
+  form-control-padding-sm: 0.375rem 1.125rem,
+  form-control-font-size-lg: font-size-lg,
+  form-control-padding-lg: 1.125rem,
 
   form-control-label-font-weight: 400,
 
@@ -468,8 +469,9 @@ $theme: (
 
   alert-font-size: font-size,
   alert-line-height: line-height,
-  alert-font-weight: font-weight-bold,
+  alert-font-weight: font-weight-normal,
   alert-fg: color-white,
+  alert-outline-fg: color-fg,
   alert-bg: color-bg,
   alert-active-bg: color-fg,
   alert-disabled-bg: color-disabled,
@@ -572,6 +574,7 @@ $theme: (
   accordion-header-border-width: 1px,
   accordion-header-border-type: solid,
   accordion-header-border-color: accordion-separator,
+  accordion-border-radius: radius,
   accordion-item-bg: color-bg,
   accordion-item-font-size: font-size,
   accordion-item-font-weight: font-weight-normal,

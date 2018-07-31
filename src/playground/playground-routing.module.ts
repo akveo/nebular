@@ -103,6 +103,7 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbAlertOutlineComponent } from './alert/alert-outline.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
@@ -132,6 +133,13 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbButtonFullWidthComponent } from './button/button-full-width.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const routes: Routes = [
@@ -198,6 +206,10 @@ export const routes: Routes = [
           {
             path: 'button-types.component',
             component: NbButtonTypesComponent,
+          },
+          {
+            path: 'button-full-width.component',
+            component: NbButtonFullWidthComponent,
           },
         ],
       },
@@ -352,6 +364,10 @@ export const routes: Routes = [
           {
             path: 'alert-sizes.component',
             component: NbAlertSizesComponent,
+          },
+          {
+            path: 'alert-outline.component',
+            component: NbAlertOutlineComponent,
           },
         ],
       },
@@ -556,6 +572,35 @@ export const routes: Routes = [
           {
             path: 'accordion-test.component',
             component: NbAccordionTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'input',
+        children: [
+          {
+            path: 'input-showcase.component',
+            component: NbInputsShowcaseComponent,
+          },
+          {
+            path: 'input-colors.component',
+            component: NbInputColorsComponent,
+          },
+          {
+            path: 'input-sizes.component',
+            component: NbInputSizesComponent,
+          },
+          {
+            path: 'input-shapes.component',
+            component: NbInputShapesComponent,
+          },
+          {
+            path: 'input-types.component',
+            component: NbInputTypesComponent,
+          },
+          {
+            path: 'input-full-width.component',
+            component: NbInputFullWidthComponent,
           },
         ],
       },

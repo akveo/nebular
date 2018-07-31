@@ -206,7 +206,7 @@ export class NbLayoutFooterComponent {
  *
  * The layout component is also responsible for changing application themes.
  * It listens to the `themeChange` event and change a theme CSS class appended to body.
- * Based on the class appended a specific CSS-theme is applied to the application.
+ * Based on the class appended, specific CSS-theme is applied to the application.
  * More details of the Theme System could be found here [Enabling Theme System](#/docs/concepts/theme-system)
  *
  * A simple layout with footer:
@@ -238,7 +238,7 @@ export class NbLayoutFooterComponent {
  * layout-min-height
  * layout-content-width
  * layout-window-mode-min-width
- * layout-window-mode-max-width: window mode only, after this value layout turns into floating window
+ * layout-window-mode-max-width: window mode only, after this value layout turns into a floating window
  * layout-window-mode-bg: window mode only, background
  * layout-window-mode-padding-top: window mode only, max padding from top
  * layout-window-shadow: window mode shadow
@@ -526,7 +526,11 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     return { x, y };
   }
 
-  private scroll(x: number, y: number) {
+  private scroll(x: number = null, y: number = null) {
+    const { x: currentX, y: currentY } = this.getScrollPosition();
+    x = x == null ? currentX : x;
+    y = y == null ? currentY : y;
+
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }

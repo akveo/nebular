@@ -1,0 +1,47 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import './input-colors';
+@import './input-sizes';
+@import './input-shapes';
+
+@mixin nb-input-theme() {
+  $border-width: nb-theme(form-control-border-width);
+  $border-type: nb-theme(form-control-border-type);
+  $border-color: nb-theme(form-control-border-color);
+
+  [nbInput] {
+    background-color: nb-theme(form-control-bg);
+    border: $border-width $border-type $border-color;
+    color: nb-theme(form-control-text-primary-color);
+
+    &:focus {
+      outline: none;
+      background-color: nb-theme(form-control-focus-bg);
+      border-color: nb-theme(form-control-selected-border-color);
+    }
+
+    &[disabled] {
+      @include install-placeholder(
+        rgba(nb-theme(form-control-placeholder-color), 0.5),
+        nb-theme(form-control-placeholder-font-size)
+      );
+    }
+
+    &.input-full-width {
+      width: 100%;
+    }
+
+    @include input-colors();
+    @include input-sizes();
+    @include input-shapes();
+
+    @include install-placeholder(
+      nb-theme(form-control-placeholder-color),
+      nb-theme(form-control-placeholder-font-size)
+    );
+  }
+}

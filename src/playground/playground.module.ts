@@ -30,6 +30,7 @@ import {
   NbStepperModule,
   NbAccordionModule,
   NbButtonModule,
+  NbInputModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -136,6 +137,7 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbAlertOutlineComponent } from './alert/alert-outline.component';
 import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
 import { NbChatColorsComponent } from './chat/chat-colors.component';
 import { NbChatSizesComponent } from './chat/chat-sizes.component';
@@ -161,6 +163,13 @@ import { NbButtonHeroComponent } from './button/button-hero.component';
 import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbButtonFullWidthComponent } from './button/button-full-width.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 
 export const NB_MODULES = [
@@ -190,6 +199,7 @@ export const NB_MODULES = [
   NbSpinnerModule,
   NbAccordionModule,
   NbButtonModule,
+  NbInputModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -286,6 +296,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbAlertOutlineComponent,
   NbChatShowcaseComponent,
   NbChatColorsComponent,
   NbChatSizesComponent,
@@ -313,6 +324,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonOutlineComponent,
   NbButtonSizesComponent,
   NbButtonTypesComponent,
+  NbButtonFullWidthComponent,
+  NbInputsShowcaseComponent,
+  NbInputColorsComponent,
+  NbInputSizesComponent,
+  NbInputShapesComponent,
+  NbInputTypesComponent,
+  NbInputFullWidthComponent,
   NbScrollWindowComponent,
 ];
 
