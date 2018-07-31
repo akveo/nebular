@@ -16,19 +16,11 @@ export abstract class NbAuthToken {
 
 export interface NbAuthRefreshableToken {
   getRefreshToken(): string;
-  // Needed when refresh-token response does not repeat refresh_token value
-  setRefreshToken(string): void;
 }
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any, strategyName: string, expDate?: Date): NbAuthToken;
-}
-
-// All types of token are not refreshable
-// Token is refreshable when it implements getRefreshToken method
-export function isNbAuthRefreshableToken(token: any): token is NbAuthRefreshableToken {
-  return (<NbAuthRefreshableToken>token).getRefreshToken !== undefined ;
+  new (raw: any, ownerStrategyName: string, createdAt: Date): NbAuthToken;
 }
 
 export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
@@ -212,14 +204,6 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    */
   getRefreshToken(): string {
     return this.token.refresh_token;
-  }
-
-  /**
-   * Sets the refreshToken in the token payload
-   * @param refreshToken
-   */
-  setRefreshToken(refreshToken: string) {
-    this.token.refresh_token = refreshToken;
   }
 
   /**

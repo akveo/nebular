@@ -11,7 +11,7 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
-import { NbAuthRefreshableToken, NbAuthResult } from '../../services/';
+import { NbAuthOAuth2Token, NbAuthRefreshableToken, NbAuthResult } from '../../services/';
 import {
   NbOAuth2AuthStrategyOptions,
   NbOAuth2ResponseType,
@@ -199,13 +199,17 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
       .pipe(
         map((res) => {
+          const refreshedToken = <NbAuthOAuth2Token>this.createToken(res);
+          if (!refreshedToken.getRefreshToken() && token.getRefreshToken()) {
+            refreshedToken.setRefreshToken(token.getRefreshToken());
+          }
           return new NbAuthResult(
             true,
             res,
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            refreshedToken);
         }),
         catchError((res) => this.handleResponseError(res)),
       );

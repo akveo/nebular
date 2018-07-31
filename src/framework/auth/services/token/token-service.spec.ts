@@ -8,7 +8,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { take } from 'rxjs/operators';
 
 import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
-import {NbAuthSimpleToken, NbAuthToken, nbAuthCreateToken, NbAuthOAuth2JWTToken} from './token';
+import { NbAuthSimpleToken, NbAuthToken, nbAuthCreateToken } from './token';
 import { NbTokenService } from './token.service';
 import { NbAuthJWTToken } from '@nebular/auth/services/token/token';
 import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
@@ -25,36 +25,12 @@ describe('token-service', () => {
   const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, '', ownerStrategyName);
   const testTokenKey = 'auth_app_token';
 
-  const expiredTokenPayload = {
-    // tslint:disable-next-line
-    access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MTUzMjQ1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.sGgt_HzYoA8o859xSNmCh5ubHrh1qpxeLhubZ1Fyfy8',
-    expires_in: 100000,
-    refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
-    token_type: 'bearer',
-  };
-
-  const refreshedTokenPayload = {
-    // tslint:disable-next-line
-    access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzI1NTA4MDAsImV4cCI6MjUzMjU1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Sfkh1qqAVHG5Pqx_XA9i1qEhNa9Qw1wOplrym0Dq91s',
-    expires_in: 1000000000,
-    token_type: 'bearer',
-  };
-
-  const refreshedTokenStoredPayload = {
-    ... refreshedTokenPayload,
-    refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
-  }
-
-  const expiredToken = nbAuthCreateToken(NbAuthOAuth2JWTToken, expiredTokenPayload, ownerStrategyName);
-  const refreshedToken = nbAuthCreateToken(NbAuthOAuth2JWTToken, refreshedTokenPayload, ownerStrategyName);
-  const refreshedTokenStored = nbAuthCreateToken(NbAuthOAuth2JWTToken, refreshedTokenStoredPayload, ownerStrategyName);
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
-        { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken, NbAuthOAuth2JWTToken] },
+        { provide: NB_AUTH_TOKENS, useValue: [NbAuthSimpleToken, NbAuthJWTToken] },
         NbAuthTokenParceler,
         NbTokenService,
       ],
@@ -153,13 +129,4 @@ describe('token-service', () => {
         done();
       });
   })
-
-  it('Stored refreshed token must have the refresh token value', () => {
-    tokenService.set(expiredToken).subscribe(noop);
-    tokenService.set(refreshedToken).subscribe(noop);
-    tokenService.get().subscribe((token: NbAuthToken) => {
-      expect(token).toEqual(refreshedTokenStored);
-    })
-  });
-
 });
