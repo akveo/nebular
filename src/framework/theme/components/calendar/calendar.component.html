@@ -18,12 +18,12 @@
       <nb-calendar-day-picker
         [activeMonth]="activeMonth"
         [boundingMonths]="boundingMonth"
-        [value]="value"
-        (valueChange)="onChange($event)">
+        [value]="date"
+        (valueChange)="dateChange.emit($event)">
 
         <ng-container *ngIf="dayCell">
           <ng-container *nbCalendarDay="let context">
-            <ng-container *ngTemplateOutlet="dayCell.template, context: {$implicit: context}"></ng-container>
+            <ng-container *ngTemplateOutlet="dayCell.template; context: {$implicit: context}"></ng-container>
           </ng-container>
         </ng-container>
 
@@ -46,7 +46,7 @@
 
         <ng-container *ngIf="yearCell">
           <ng-container *nbCalendarYear="let context">
-            <ng-container *ngTemplateOutlet="yearCell.template, context: {$implicit: context}"></ng-container>
+            <ng-container *ngTemplateOutlet="yearCell.template; context: {$implicit: context}"></ng-container>
           </ng-container>
         </ng-container>
 
@@ -64,7 +64,7 @@
 
         <ng-container *ngIf="monthCell">
           <ng-container *nbCalendarMonth="let context">
-            <ng-container *ngTemplateOutlet="monthCell.template, context: {$implicit: context}"></ng-container>
+            <ng-container *ngTemplateOutlet="monthCell.template; context: {$implicit: context}"></ng-container>
           </ng-container>
         </ng-container>
 

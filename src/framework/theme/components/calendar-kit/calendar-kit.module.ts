@@ -60,5 +60,4 @@ const PIPES = [
   providers: [...SERVICES],
 })
 export class NbCalendarKitModule {
-
 }

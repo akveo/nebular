@@ -15,6 +15,8 @@ export * from './components/card/card.module';
 
 export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
+export * from './components/calendar/calendar-range.module';
+export * from './components/calendar/calendar-range.component';
 export * from './components/calendar-kit';
 
 export * from './components/layout/layout.module';

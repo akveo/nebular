@@ -15,11 +15,6 @@ export class NbCalendarMonthBuilderContext<T> {
   includeBoundingMonths: boolean;
 }
 
-export class NbCalendarRange {
-  start: Date;
-  end?: Date;
-}
-
 export enum NbCalendarViewMode {
   YEAR = 'year',
   MONTH = 'month',

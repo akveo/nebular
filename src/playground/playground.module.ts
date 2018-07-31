@@ -8,24 +8,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  NbThemeModule,
+  NbActionsModule,
+  NbAlertModule,
+  NbBadgeModule,
   NbCalendarKitModule,
   NbCalendarModule,
+  NbCalendarRangeModule,
   NbCardModule,
   NbCheckboxModule,
+  NbContextMenuModule,
   NbLayoutModule,
   NbMenuModule,
   NbPopoverModule,
-  NbSidebarModule,
-  NbActionsModule,
-  NbSearchModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbBadgeModule,
-  NbContextMenuModule,
-  NbRouteTabsetModule,
   NbProgressBarModule,
-  NbAlertModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
+  NbSidebarModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbUserModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -130,9 +131,11 @@ import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbCalendarKitTestComponent } from './calendar/calendar-kit-test.component';
+import { NbCalendarRangeTestComponent } from './calendar/calendar-range-test.component';
 
 export const NB_MODULES = [
   NbCalendarModule,
+  NbCalendarRangeModule,
   NbCalendarKitModule,
   NbCardModule,
   NbLayoutModule,
@@ -191,6 +194,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSidebarToggleComponent,
   NbSidebarFixedComponent,
   NbCalendarTestComponent,
+  NbCalendarRangeTestComponent,
   NbCardShowcaseComponent,
   NbCardFullComponent,
   NbCardColorsComponent,

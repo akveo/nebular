@@ -98,7 +98,7 @@
     }
   }
 
-  nb-calendar-day-cell {
+  nb-calendar-day-cell, nb-calendar-range-day-cell {
     min-width: nb-theme(calendar-cell-width);
     min-height: nb-theme(calendar-cell-height);
     border-radius: nb-theme(calendar-border-radius);
@@ -112,11 +112,8 @@
       opacity: nb-theme(calendar-inactive-opacity);
     }
 
-    &.cell-range-inbetween {
-      background: nb-theme(calendar-between-item);
-      .calendar-cell {
-        background: none;
-      }
+    &.in-range {
+      background: nb-theme(calendar-selected-item);
     }
 
     &:hover:not(.empty) {

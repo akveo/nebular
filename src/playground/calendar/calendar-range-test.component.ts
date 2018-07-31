@@ -5,17 +5,17 @@
  */
 
 import { Component } from '@angular/core';
+import { NbCalendarRange } from '@nebular/theme';
 
 @Component({
   selector: 'nb-calendar-test',
   template: `
-    Selected date: {{ date | date }}
+    Selected range: {{ range.start | date }} - {{ range.end | date }}
     <br/>
     <br/>
-    <nb-calendar [(date)]="date" [boundingMonth]="false">
-    </nb-calendar>
+    <nb-calendar-range [(range)]="range"></nb-calendar-range>
   `,
 })
-export class NbCalendarTestComponent {
-  date;
+export class NbCalendarRangeTestComponent {
+  range: NbCalendarRange = { start: null, end: null };
 }

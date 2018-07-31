@@ -76,9 +76,11 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   createTemplateContext(day: Date) {
     return {
-      $implicit: day,
-      selectedValue: this.value,
-      activeMonth: this.activeMonth,
+      $implicit: {
+        date: day,
+        selectedValue: this.value,
+        activeMonth: this.activeMonth,
+      },
     }
   }
 
