@@ -30,6 +30,7 @@ import { NewsService } from './news.service';
     </nb-card>
   `,
   styleUrls: [ 'infinite-news-list.component.scss' ],
+  providers: [ NewsService ],
 })
 export class NbInfiniteNewsListComponent implements OnInit, OnDestroy {
 

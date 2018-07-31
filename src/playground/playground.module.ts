@@ -365,7 +365,6 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbPlaygroundBaseComponent,
     ...NB_EXAMPLE_COMPONENTS,
   ],
-  providers: [ NewsService ],
-})
+  })
 export class NbPlaygroundModule {
 }

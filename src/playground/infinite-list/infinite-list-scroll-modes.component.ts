@@ -39,6 +39,7 @@ import { NewsService } from './news.service';
     </nb-card>
   `,
   styleUrls: [ 'infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss' ],
+  providers: [ NewsService ],
 })
 export class NbInfiniteListScrollModesComponent {
 
