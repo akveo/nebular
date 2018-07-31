@@ -27,7 +27,6 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
-import { NbCalendarTestComponent } from './calendar/calendar-test.component';
 import { NbCardShowcaseComponent } from './card/card-showcase.component';
 import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
@@ -77,12 +76,14 @@ import {
   NbMenuItem331Component,
   NbMenuItem332Component,
   NbMenuItem33Component,
-  NbMenuItem3Component, NbMenuItem4Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
   NbMenuTestComponent,
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
   NbRouteTabsetTestComponent,
 } from './tabset/route-tabset-test.component';
 import { NbSearchTestComponent } from './search/search-test.component';
@@ -104,8 +105,12 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
 import { NbCalendarKitTestComponent } from './calendar/calendar-kit-test.component';
-import { NbCalendarRangeTestComponent } from './calendar/calendar-range-test.component';
+
 
 export const routes: Routes = [
   {
@@ -166,12 +171,20 @@ export const routes: Routes = [
         path: 'calendar',
         children: [
           {
-            path: 'calendar-test.component',
-            component: NbCalendarTestComponent,
+            path: 'calendar-showcase.component',
+            component: NbCalendarShowcaseComponent,
           },
           {
-            path: 'calendar-range-test.component',
-            component: NbCalendarRangeTestComponent,
+            path: 'calendar-bounding-month.component',
+            component: NbCalendarBoundingMonthComponent,
+          },
+          {
+            path: 'calendar-range-showcase.component',
+            component: NbCalendarRangeShowcaseComponent,
+          },
+          {
+            path: 'calendar-range-bounding-month.component',
+            component: NbCalendarRangeBoundingMonthComponent,
           },
           {
             path: 'calendar-kit-test.component',

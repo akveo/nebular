@@ -50,7 +50,6 @@ import { NbSidebarCompactedComponent } from './sidebar/sidebar-compacted.compone
 import { NbSidebarRightComponent } from './sidebar/sidebar-right.component';
 import { NbSidebarToggleComponent } from './sidebar/sidebar-toggle.component';
 import { NbSidebarFixedComponent } from './sidebar/sidebar-fixed.component';
-import { NbCalendarTestComponent } from './calendar/calendar-test.component';
 import { NbCardShowcaseComponent } from './card/card-showcase.component';
 import { NbCardFullComponent } from './card/card-full.component';
 import { NbCardColorsComponent } from './card/card-colors.component';
@@ -130,13 +129,13 @@ import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
 import { NbCalendarKitTestComponent } from './calendar/calendar-kit-test.component';
-import { NbCalendarRangeTestComponent } from './calendar/calendar-range-test.component';
+import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
 
 export const NB_MODULES = [
-  NbCalendarModule,
-  NbCalendarRangeModule,
-  NbCalendarKitModule,
   NbCardModule,
   NbLayoutModule,
   NbPopoverModule,
@@ -156,6 +155,9 @@ export const NB_MODULES = [
   NbAlertModule,
   NbPlaygroundSharedModule,
   NbProgressBarModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbCalendarKitModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -193,8 +195,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSidebarRightComponent,
   NbSidebarToggleComponent,
   NbSidebarFixedComponent,
-  NbCalendarTestComponent,
-  NbCalendarRangeTestComponent,
   NbCardShowcaseComponent,
   NbCardFullComponent,
   NbCardColorsComponent,
@@ -252,6 +252,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertAccentsComponent,
   NbAlertSizesComponent,
   NbAlertTestComponent,
+  NbCalendarShowcaseComponent,
+  NbCalendarRangeShowcaseComponent,
+  NbCalendarBoundingMonthComponent,
+  NbCalendarRangeBoundingMonthComponent,
   NbCalendarKitTestComponent,
 ];
 

@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-test',
+  selector: 'nb-calendar-showcase',
   template: `
     <nb-card>
       <nb-card-body>
