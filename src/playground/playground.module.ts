@@ -171,7 +171,6 @@ import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component'
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
-import { NewsService } from './infinite-list/news.service';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
