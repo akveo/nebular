@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { NbListComponent, NbListItemComponent } from './list.component';
-import { NbListPagerDirective } from './list-pager.directive';
+import { NbListPageTrackerDirective } from './list-page-tracker.directive';
 import { NbInfiniteListDirective } from './infinite-list.directive';
 
 const components = [
   NbListComponent,
   NbListItemComponent,
-  NbListPagerDirective,
+  NbListPageTrackerDirective,
   NbInfiniteListDirective,
 ];
 

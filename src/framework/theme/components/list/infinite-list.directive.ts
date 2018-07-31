@@ -35,7 +35,7 @@ export class NbScrollableContainerDimentions {
  *
  * To improve UX of infinite lists, it's better to keep current page in url,
  * so user able to return to the last viewed page or to share a link to this page.
- * `nbListPager` directive will help you to know, what page user currently viewing.
+ * `nbListPageTracker` directive will help you to know, what page user currently viewing.
  * Just put it on a list, set page size and it will calculate page that currently in viewport.
  *
  * @stacked-example(Infinite list with pager, infinite-list/infinite-news-list.component)

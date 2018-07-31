@@ -16,7 +16,8 @@ import { NewsService } from './news.service';
         [threshold]="500"
         (topThreshold)="loadPrevious()"
         (bottomThreshold)="loadNext()"
-        [nbListPager]="pageSize"
+        nbListPageTracker
+        [pageSize]="pageSize"
         [startPage]="startPage"
         (pageChange)="updateUrl($event)">
         <nb-list-item *ngFor="let newsPost of news">

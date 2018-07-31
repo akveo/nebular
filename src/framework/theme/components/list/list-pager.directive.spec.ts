@@ -32,7 +32,8 @@ let initialItemsCount: number = 100;
 @Component({
   template: `
     <nb-list
-      [nbListPager]="pageSize"
+      nbListPageTracker
+      [pageSize]="pageSize"
       [startPage]="startPage"
       (pageChange)="pageChanged($event)"
       class="list">
@@ -71,7 +72,7 @@ let fixture: ComponentFixture<PagerTestComponent>;
 let testComponent: PagerTestComponent;
 let pageChangedSpy: jasmine.Spy;
 
-describe('Directive: NbListPagerDirective', () => {
+describe('Directive: NbListPageTrackerDirective', () => {
 
   let initialTimeoutInterval;
   beforeAll(() => {

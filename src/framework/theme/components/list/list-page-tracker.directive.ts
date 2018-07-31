@@ -20,9 +20,9 @@ import { NbListItemComponent } from './list.component';
  *
  */
 @Directive({
-  selector: '[nbListPager]',
+  selector: '[nbListPageTracker]',
 })
-export class NbListPagerDirective implements AfterViewInit, OnDestroy {
+export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
 
   private alive = true;
 
@@ -32,7 +32,7 @@ export class NbListPagerDirective implements AfterViewInit, OnDestroy {
   /**
    * Items per page.
    */
-  @Input('nbListPager')
+  @Input()
   pageSize: number;
 
   /**
