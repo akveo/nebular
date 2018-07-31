@@ -44,31 +44,30 @@ export class NbCalendarDaysService<T> {
 
   private addPrevBoundingMonth(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>): Date[][] {
     const firstWeek = weeks.shift();
-    firstWeek.unshift(...this.createPrevBoundingDays(context));
+    const requiredItems: number = NbDateTimeUtil.DAYS_IN_WEEK - firstWeek.length;
+    firstWeek.unshift(...this.createPrevBoundingDays(context, requiredItems));
     return [firstWeek, ...weeks];
   }
 
   private addNextBoundingMonth(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>): Date[][] {
     const lastWeek = weeks.pop();
-    lastWeek.push(...this.createNextBoundingDays(context));
+    const requiredItems: number = NbDateTimeUtil.DAYS_IN_WEEK - lastWeek.length;
+    lastWeek.push(...this.createNextBoundingDays(context, requiredItems));
     return [...weeks, lastWeek];
   }
 
-  private createPrevBoundingDays(context: NbCalendarMonthBuilderContext<T>): Date[] {
-    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
+  private createPrevBoundingDays(context: NbCalendarMonthBuilderContext<T>, requiredItems: number): Date[] {
     const month = NbDateTimeUtil.addMonth(context.activeMonth, -1);
     const daysInMonth = NbDateTimeUtil.getNumberOfDaysInMonth(month);
     return NbDateTimeUtil.createDateRangeForMonth(month)
-      .slice(daysInMonth - startOfWeekDayDiff)
+      .slice(daysInMonth - requiredItems)
       .map(date => context.includeBoundingMonths ? date : null);
   }
 
-  private createNextBoundingDays(context: NbCalendarMonthBuilderContext<T>): Date[] {
+  private createNextBoundingDays(context: NbCalendarMonthBuilderContext<T>, requiredItems: number): Date[] {
     const month = NbDateTimeUtil.addMonth(context.activeMonth, 1);
-    const firstDay = NbDateTimeUtil.getMonthStart(month);
-    const weekStartOffset = 7 - this.getWeekStartDiff(firstDay);
     return NbDateTimeUtil.createDateRangeForMonth(month)
-      .slice(0, weekStartOffset)
+      .slice(0, requiredItems)
       .map(date => context.includeBoundingMonths ? date : null);
   }
 
