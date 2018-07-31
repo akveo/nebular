@@ -26,6 +26,12 @@ export class NbScrollableContainerDimentions {
 /**
  * Infinite List Directive
  *
+ * ```html
+ *  <nb-list nbInfiniteList [threshold]="500" (bottomThreshold)="loadNext()">
+ *    <nb-list-item *ngFor="let item of items"></nb-list-item>
+ *  </nb-list>
+ * ```
+ *
  * @stacked-example(Simple infinite list, infinite-list/infinite-list-showcase.component)
  *
  * Directive will notify when list scrolled up or down to given a threshold.

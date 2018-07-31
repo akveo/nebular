@@ -75,7 +75,7 @@ export class NbCardFooterComponent {
  *
  * Most of the time main card content goes to `nb-card-body`, so it styled and aligned accordingly to header and footer.
  * In case you need a higher level of control, you can pass contend directly to `nb-card`,
- * so `nb-card-body` stylings will not be applied.
+ * so it is styled and aligned in accordance with the header and footer.
  *
  * Consider an example with `nb-list` component:
  * @stacked-example(Showcase, card/card-without-body.component)

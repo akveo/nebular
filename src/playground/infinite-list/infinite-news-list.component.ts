@@ -54,6 +54,11 @@ export class NbInfiniteNewsListComponent implements OnInit, OnDestroy {
     @Inject(NB_WINDOW) private window,
   ) {
     if (isPlatformBrowser(this.platformId) && this.window.history.scrollRestoration) {
+      // Prevent browsers from scrolling down to last scroll position, when navigating back to this page.
+      // It doesn't make sense here, since list is dynamic and we handle last user position ourselves,
+      // by storing page number in URL. So for this component, we disable scroll restoration.
+      // Don't forget to re-enable it in 'OnDestroy', since this configuration preserved for the whole session
+      // and it will not be reset after page reload.
       this.initialScrollRestoration = window.history.scrollRestoration;
       history.scrollRestoration = 'manual';
     }
@@ -72,8 +77,12 @@ export class NbInfiniteNewsListComponent implements OnInit, OnDestroy {
   }
 
   updateUrl(page) {
-    const queryParams = { ...this.route.snapshot.queryParams, page };
-    this.router.navigate(['.'], { queryParams, replaceUrl: true, relativeTo: this.route });
+    this.router.navigate(['.'], {
+      queryParams: { page },
+      replaceUrl: true,
+      relativeTo: this.route,
+      queryParamsHandling: 'merge',
+    });
   }
 
   loadPrevious() {
