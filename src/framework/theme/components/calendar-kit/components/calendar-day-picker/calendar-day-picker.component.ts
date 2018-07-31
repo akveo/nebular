@@ -26,7 +26,7 @@ import { NbCalendarDayCellDirective } from '../calendar-cell';
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
     <div class="week" *ngFor="let week of weeks">
-      <span *ngFor="let day of week" (click)="onSelect(day)">
+      <div [style.flex]="1" *ngFor="let day of week" (click)="onSelect(day)">
         <ng-container *ngIf="cell; else defaultCell">
           <ng-container
             [ngTemplateOutlet]="cell.template"
@@ -40,7 +40,7 @@ import { NbCalendarDayCellDirective } from '../calendar-cell';
             [selectedValue]="value">
           </nb-calendar-day-cell>
         </ng-template>
-      </span>
+      </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

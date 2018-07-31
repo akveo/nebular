@@ -5,10 +5,14 @@
  */
 
 :host {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1px;
+  display: block;
+  padding: 1px;
+
+  .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &:not(.empty) {
     cursor: pointer;

@@ -16,4 +16,51 @@
       }
     }
   }
+
+  .week > div {
+    &:first-of-type nb-calendar-range-day-cell {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    &:last-of-type nb-calendar-range-day-cell {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+
+  nb-calendar-range-day-cell {
+    @extend nb-calendar-day-cell;
+
+    &.in-range {
+      padding: 0 1px;
+      margin: 1px 0;
+      background: nb-theme(calendar-range-bg-in-range);
+
+      &:not(.today) .cell:not(:hover) {
+        border-radius: 0;
+      }
+    }
+
+    &.start, &.end {
+      @extend nb-calendar-day-cell.selected;
+      padding: 0 1px;
+      margin: 1px 0;
+      background: nb-theme(calendar-range-bg-in-range);
+    }
+
+    &.start {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      margin-left: 1px;
+      padding-left: 0;
+    }
+
+    &.end {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      margin-right: 1px;
+      padding-right: 0;
+    }
+  }
 }

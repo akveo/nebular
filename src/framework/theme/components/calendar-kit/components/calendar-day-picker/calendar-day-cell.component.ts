@@ -11,7 +11,7 @@ import { NbDateTimeUtil } from '../../services/date-time-util';
 @Component({
   selector: 'nb-calendar-day-cell',
   styleUrls: ['./calendar-day-cell.component.scss'],
-  template: `{{ day }}`,
+  template: `<div class="cell">{{ day }}</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDayCellComponent {

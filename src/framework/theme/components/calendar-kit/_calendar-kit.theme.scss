@@ -98,34 +98,40 @@
     }
   }
 
-  nb-calendar-day-cell, nb-calendar-range-day-cell {
-    min-width: nb-theme(calendar-cell-width);
-    min-height: nb-theme(calendar-cell-height);
-    border-radius: nb-theme(calendar-border-radius);
+  nb-calendar-day-cell {
+    .cell {
+      border-radius: nb-theme(calendar-border-radius);
+      min-width: nb-theme(calendar-cell-width);
+      min-height: nb-theme(calendar-cell-height);
+    }
 
     &.today {
-      background: nb-theme(calendar-selected-item);
-      font-weight: nb-theme(font-weight-bold);
+      .cell {
+        background: nb-theme(calendar-selected-item);
+        font-weight: nb-theme(font-weight-bold);
+      }
     }
 
     &.bounding-month {
-      opacity: nb-theme(calendar-inactive-opacity);
-    }
-
-    &.in-range {
-      background: nb-theme(calendar-selected-item);
+      .cell {
+        opacity: nb-theme(calendar-inactive-opacity);
+      }
     }
 
     &:hover:not(.empty) {
-      background: nb-theme(calendar-hovered-item);
-      color: nb-theme(color-white);
-      font-weight: nb-theme(font-weight-bold);
+      .cell {
+        background: nb-theme(calendar-hovered-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
     }
 
     &.selected {
-      background: nb-theme(calendar-active-item);
-      color: nb-theme(color-white);
-      font-weight: nb-theme(font-weight-bold);
+      .cell {
+        background: nb-theme(calendar-active-item);
+        color: nb-theme(color-white);
+        font-weight: nb-theme(font-weight-bold);
+      }
     }
   }
 }

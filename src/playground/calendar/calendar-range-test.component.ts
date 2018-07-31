@@ -17,5 +17,5 @@ import { NbCalendarRange } from '@nebular/theme';
   `,
 })
 export class NbCalendarRangeTestComponent {
-  range: NbCalendarRange = { start: null, end: null };
+  range: NbCalendarRange = { start: new Date(2018, 6, 10), end: new Date(2018, 6, 23) };
 }
