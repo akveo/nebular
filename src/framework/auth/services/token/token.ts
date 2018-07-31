@@ -16,6 +16,7 @@ export abstract class NbAuthToken {
 
 export interface NbAuthRefreshableToken {
   getRefreshToken(): string;
+  setRefreshToken(refreshToken: string);
 }
 
 export interface NbAuthTokenClass {
@@ -204,6 +205,14 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    */
   getRefreshToken(): string {
     return this.token.refresh_token;
+  }
+
+  /**
+   *  put refreshToken in the token payload
+    * @param refreshToken
+   */
+  setRefreshToken(refreshToken: string) {
+    this.token.refresh_token = refreshToken;
   }
 
   /**
