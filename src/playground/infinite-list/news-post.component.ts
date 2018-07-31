@@ -23,29 +23,7 @@ export class NbNewsPostComponent {
     <div class="text-placeholder"></div>
     <div class="link-placeholder"></div>
   `,
-  styles: [`
-    :host {
-      display: block;
-    }
-
-    [class$="placeholder"] {
-      background: #f1f2f3;
-    }
-
-    .title-placeholder {
-      height: 1.8rem;
-      margin-bottom: 0.5rem;
-      width: 80%;
-    }
-    .text-placeholder {
-      height: 4rem;
-      margin-bottom: 1rem;
-    }
-    .link-placeholder {
-      height: 1.25rem;
-      width: 5rem;
-    }
-  `],
+  styleUrls: [ './news-post-placeholder.component.scss' ],
 })
 export class NbNewsPostPlaceholderComponent {
   @HostBinding('attr.aria-label')
