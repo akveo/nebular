@@ -13,17 +13,16 @@ import { NbCalendarDaysService, NbLocaleService } from './services';
 import {
   NbCalendarDatePipe,
   NbCalendarDayCellComponent,
-  NbCalendarDayCellDirective,
   NbCalendarDayPickerComponent,
   NbCalendarDaysNamesComponent,
   NbCalendarHeaderComponent,
   NbCalendarMonthCellComponent,
-  NbCalendarMonthCellDirective,
   NbCalendarMonthPickerComponent,
   NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
+  NbCalendarPickerComponent,
+  NbCalendarPickerRowComponent,
   NbCalendarYearCellComponent,
-  NbCalendarYearCellDirective,
   NbCalendarYearPickerComponent,
 } from './components';
 
@@ -42,11 +41,10 @@ const COMPONENTS = [
   NbCalendarMonthPickerComponent,
   NbCalendarDayPickerComponent,
   NbCalendarDayCellComponent,
-  NbCalendarDayCellDirective,
-  NbCalendarMonthCellDirective,
-  NbCalendarYearCellDirective,
   NbCalendarMonthCellComponent,
   NbCalendarYearCellComponent,
+  NbCalendarPickerRowComponent,
+  NbCalendarPickerComponent,
 ];
 
 const PIPES = [
@@ -58,6 +56,11 @@ const PIPES = [
   exports: [...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   providers: [...SERVICES],
+  entryComponents: [
+    NbCalendarDayCellComponent,
+    NbCalendarMonthCellComponent,
+    NbCalendarYearCellComponent,
+  ],
 })
 export class NbCalendarKitModule {
 }

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarCell, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarRange } from './calendar-range.component';
 
 
@@ -24,14 +24,15 @@ import { NbCalendarRange } from './calendar-range.component';
       cursor: pointer;
     }
   `],
-  template: `
-    <div class="cell">{{ day }}</div>`,
+  template: `<div class="cell" (click)="select.emit(date)">{{ day }}</div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarRangeDayCellComponent {
+export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
   @Input() date: Date;
   @Input() selectedValue: NbCalendarRange;
   @Input() activeMonth: Date;
+
+  @Output() select: EventEmitter<Date> = new EventEmitter();
 
   @HostBinding('class.today') get isToday(): boolean {
     return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
@@ -42,8 +43,7 @@ export class NbCalendarRangeDayCellComponent {
   }
 
   @HostBinding('class.selected') get isSelected(): boolean {
-    return this.date && this.selectedValue
-      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.isEnd;
+    return this.isStart || this.isEnd;
   }
 
   @HostBinding('class.start') get isStart(): boolean {

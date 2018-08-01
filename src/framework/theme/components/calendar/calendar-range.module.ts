@@ -17,6 +17,7 @@ import { NbCalendarModule } from './calendar.module';
   imports: [NbCalendarModule, NbCalendarKitModule, NbSharedModule],
   exports: [NbCalendarRangeComponent],
   declarations: [NbCalendarRangeComponent, NbCalendarRangeDayCellComponent, NbCalendarRangeDayCellComponent],
+  entryComponents: [NbCalendarRangeDayCellComponent],
 })
 export class NbCalendarRangeModule {
 }

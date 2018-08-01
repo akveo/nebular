@@ -7,41 +7,37 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   EventEmitter,
   Input,
   OnChanges,
   Output,
   SimpleChanges,
+  Type,
 } from '@angular/core';
 
 import { NbCalendarDaysService } from '../../services';
 import { NbCalendarMonthBuilderContext } from '../../model';
-import { NbCalendarDayCellDirective } from '../calendar-cell';
+import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
+import { NbCalendarCell } from '../calendar-cell';
 
 
 @Component({
   selector: 'nb-calendar-day-picker',
-  styleUrls: ['./calendar-day-picker.component.scss'],
+  styles: [`
+    :host {
+      display: block;
+    }
+  `],
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
-    <div class="week" *ngFor="let week of weeks">
-      <div [style.flex]="1" *ngFor="let day of week" (click)="onSelect(day)">
-        <ng-container *ngIf="cell; else defaultCell">
-          <ng-container
-            [ngTemplateOutlet]="cell.template"
-            [ngTemplateOutletContext]="createTemplateContext(day)">
-          </ng-container>
-        </ng-container>
-        <ng-template #defaultCell>
-          <nb-calendar-day-cell
-            [date]="day"
-            [activeMonth]="activeMonth"
-            [selectedValue]="value">
-          </nb-calendar-day-cell>
-        </ng-template>
-      </div>
-    </div>
+    <nb-calendar-picker
+      class="day-cell"
+      [data]="weeks"
+      [activeMonth]="activeMonth"
+      [selectedValue]="value"
+      [cellComponent]="cellComponent"
+      (select)="onSelect($event)">
+    </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,9 +49,15 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   @Input() boundingMonths: boolean = true;
 
-  @Output() valueChange = new EventEmitter<Date>();
+  @Input('cellComponent')
+  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+    if (cellComponent) {
+      this.cellComponent = cellComponent;
+    }
+  }
+  cellComponent: Type<NbCalendarCell<any>> = NbCalendarDayCellComponent;
 
-  @ContentChild(NbCalendarDayCellDirective) cell: NbCalendarDayCellDirective;
+  @Output() valueChange = new EventEmitter<Date>();
 
   weeks: Date[][];
 
@@ -71,16 +73,6 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   onSelect(day: Date) {
     if (day) {
       this.valueChange.emit(day);
-    }
-  }
-
-  createTemplateContext(day: Date) {
-    return {
-      $implicit: {
-        date: day,
-        selectedValue: this.value,
-        activeMonth: this.activeMonth,
-      },
     }
   }
 

@@ -4,43 +4,40 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
 import { batch, range } from '../../helpers';
-import { NbCalendarMonthCellDirective } from '../calendar-cell';
+import { NbCalendarCell } from '../calendar-cell';
+import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 
 
 @Component({
   selector: 'nb-calendar-month-picker',
-  styleUrls: ['./calendar-month-picker.component.scss'],
   template: `
-    <div class="chunk-row" *ngFor="let monthRow of months">
-      <div *ngFor="let month of monthRow" (click)="onClick(month)">
-        <ng-container *ngIf="cell; else defaultCell">
-          <ng-container
-            [ngTemplateOutlet]="cell.template"
-            [ngTemplateOutletContext]="createTemplateContext(month)">
-          </ng-container>
-        </ng-container>
-        <ng-template #defaultCell>
-          <nb-calendar-month-cell
-            [date]="month"
-            [selectedValue]="value">
-          </nb-calendar-month-cell>
-        </ng-template>
-      </div>
-    </div>
+    <nb-calendar-picker
+      class="month-cell"
+      [data]="months"
+      [selectedValue]="value"
+      [cellComponent]="cellComponent"
+      (select)="onSelect($event)">
+    </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent implements OnInit {
+export class NbCalendarMonthPickerComponent<T> implements OnInit {
 
   @Input() value: Date;
 
-  @Output() valueChange = new EventEmitter<Date>();
+  @Output() valueChange: EventEmitter<Date> = new EventEmitter();
+
+  @Input('cellComponent')
+  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+    if (cellComponent) {
+      this.cellComponent = cellComponent;
+    }
+  }
+  cellComponent: Type<NbCalendarCell<any>> = NbCalendarMonthCellComponent;
 
   months: Date[][];
-
-  @ContentChild(NbCalendarMonthCellDirective) cell: NbCalendarMonthCellDirective;
 
   ngOnInit() {
     this.initMonths();
@@ -51,7 +48,7 @@ export class NbCalendarMonthPickerComponent implements OnInit {
     this.months = batch(months, 4);
   }
 
-  onClick(month) {
+  onSelect(month) {
     this.value = month;
     this.valueChange.emit(this.value);
   }

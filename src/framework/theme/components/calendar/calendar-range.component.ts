@@ -4,15 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import {
-  NbCalendarDayCellDirective,
-  NbCalendarMonthCellDirective,
   NbCalendarViewMode,
-  NbCalendarYearCellDirective,
   NbDateTimeUtil,
+  NbCalendarCell,
 } from '../calendar-kit';
+import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 
 
 export interface NbCalendarRange {
@@ -27,35 +26,10 @@ export interface NbCalendarRange {
       [date]="range"
       (dateChange)="onChange($event)"
       [startView]="startView"
-      [boundingMonth]="boundingMonth">
-
-      <ng-container *ngIf="dayCell; else defaultDayCell">
-        <ng-container *nbCalendarDay="let context">
-          <ng-container *ngTemplateOutlet="dayCell.template; context: {$implicit: context}"></ng-container>
-        </ng-container>
-      </ng-container>
-
-      <ng-template #defaultDayCell>
-        <nb-calendar-range-day-cell
-          *nbCalendarDay="let context"
-          [selectedValue]="context.selectedValue"
-          [date]="context.date"
-          [activeMonth]="context.activeMonth">
-        </nb-calendar-range-day-cell>
-      </ng-template>
-
-      <ng-container *ngIf="yearCell">
-        <ng-container *nbCalendarYear="let context">
-          <ng-container *ngTemplateOutlet="yearCell.template; context: {$implicit: context}"></ng-container>
-        </ng-container>
-      </ng-container>
-
-      <ng-container *ngIf="monthCell">
-        <ng-container *nbCalendarMonth="let context">
-          <ng-container *ngTemplateOutlet="monthCell.template; context: {$implicit: context}"></ng-container>
-        </ng-container>
-      </ng-container>
-
+      [boundingMonth]="boundingMonth"
+      [dayCellComponent]="dayCellComponent"
+      [monthCellComponent]="monthCellComponent"
+      [yearCellComponent]="yearCellComponent">
     </nb-calendar>
   `,
 })
@@ -64,13 +38,19 @@ export class NbCalendarRangeComponent {
 
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
+  @Input('dayCellComponent')
+  set _cellComponent(cellComponent: Type<NbCalendarCell<NbCalendarRange>>) {
+    if (cellComponent) {
+      this.dayCellComponent = cellComponent;
+    }
+  }
+  dayCellComponent: Type<NbCalendarCell<NbCalendarRange>> = NbCalendarRangeDayCellComponent;
+  @Input() monthCellComponent: Type<NbCalendarCell<NbCalendarRange>>;
+  @Input() yearCellComponent: Type<NbCalendarCell<NbCalendarRange>>;
+
   @Input() range: NbCalendarRange;
 
   @Output() rangeChange: EventEmitter<NbCalendarRange> = new EventEmitter();
-
-  @ContentChild(NbCalendarDayCellDirective) dayCell: NbCalendarDayCellDirective;
-  @ContentChild(NbCalendarMonthCellDirective) monthCell: NbCalendarMonthCellDirective;
-  @ContentChild(NbCalendarYearCellDirective) yearCell: NbCalendarYearCellDirective;
 
   protected onChange(date: Date) {
     this.initDateIfNull();

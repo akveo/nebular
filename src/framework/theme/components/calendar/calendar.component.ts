@@ -4,15 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import {
-  NbCalendarDayCellDirective,
-  NbCalendarMonthCellDirective,
-  NbCalendarViewMode,
-  NbCalendarYearCellDirective,
-  NbDateTimeUtil,
-} from '../calendar-kit';
+import { NbCalendarCell, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
 
 
 @Component({
@@ -27,11 +21,11 @@ export class NbCalendarComponent<T> {
 
   @Input() date: T;
 
-  @Output() dateChange: EventEmitter<T> = new EventEmitter();
+  @Input() dayCellComponent: Type<NbCalendarCell<T>>;
+  @Input() monthCellComponent: Type<NbCalendarCell<T>>;
+  @Input() yearCellComponent: Type<NbCalendarCell<T>>;
 
-  @ContentChild(NbCalendarDayCellDirective) dayCell: NbCalendarDayCellDirective;
-  @ContentChild(NbCalendarMonthCellDirective) monthCell: NbCalendarMonthCellDirective;
-  @ContentChild(NbCalendarYearCellDirective) yearCell: NbCalendarYearCellDirective;
+  @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
   ViewMode = NbCalendarViewMode;
 

@@ -18,8 +18,8 @@ import { NbCalendarRange, NbDateTimeUtil } from '@nebular/theme';
 })
 export class NbCalendarRangeShowcaseComponent {
   range: NbCalendarRange = {
-    start: NbDateTimeUtil.addDay(this.monthStart, 5),
-    end: NbDateTimeUtil.addDay(new Date(), 2),
+    start: NbDateTimeUtil.addDay(this.monthStart, 3),
+    end: NbDateTimeUtil.addDay(this.monthStart, NbDateTimeUtil.getNumberOfDaysInMonth(this.monthStart) - 3),
   };
 
   get monthStart(): Date {

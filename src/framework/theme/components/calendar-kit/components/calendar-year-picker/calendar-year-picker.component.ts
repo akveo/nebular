@@ -4,52 +4,40 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, Type } from '@angular/core';
 import { batch, range } from '../../helpers';
-import { NbCalendarYearCellDirective } from '../calendar-cell';
+import { NbCalendarCell } from '../calendar-cell';
+import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
 
 
-// TODO i don't think we need defaults
 const defaultYearCount = 20;
 
 @Component({
   selector: 'nb-calendar-year-picker',
-  styleUrls: ['./calendar-year-picker.component.scss'],
   template: `
-    <div class="chunk-row" *ngFor="let yearRow of years">
-      <div *ngFor="let year of yearRow" (click)="onClick(year)">
-        <ng-container *ngIf="cell; else defaultCell">
-          <ng-container
-            [ngTemplateOutlet]="cell.template"
-            [ngTemplateOutletContext]="createTemplateContext(year)">
-          </ng-container>
-        </ng-container>
-        <ng-template #defaultCell>
-          <nb-calendar-year-cell
-            [date]="year"
-            [selectedValue]="value">
-          </nb-calendar-year-cell>
-        </ng-template>
-      </div>
-    </div>
+    <nb-calendar-picker
+      class="year-cell"
+      [data]="years"
+      [selectedValue]="value"
+      [cellComponent]="cellComponent"
+      (select)="onSelect($event)">
+    </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent implements OnChanges {
+export class NbCalendarYearPickerComponent<T> implements OnChanges {
 
   @Input() value: Date;
 
-  @Output() valueChange = new EventEmitter<any>();
+  @Input('cellComponent')
+  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+    if (cellComponent) {
+      this.cellComponent = cellComponent;
+    }
+  }
+  cellComponent: Type<NbCalendarCell<any>> = NbCalendarYearCellComponent;
 
-  @ContentChild(NbCalendarYearCellDirective) cell: NbCalendarYearCellDirective;
+  @Output() valueChange = new EventEmitter<Date>();
 
   years: Date[][];
 
@@ -64,18 +52,9 @@ export class NbCalendarYearPickerComponent implements OnChanges {
     this.years = batch(years, 4);
   }
 
-  onClick(year) {
+  onSelect(year) {
     this.value = year;
     this.valueChange.emit(year);
-  }
-
-  createTemplateContext(year: Date) {
-    return {
-      $implicit: {
-        date: year,
-        selectedValue: this.value,
-      },
-    }
   }
 
   private createYearDateByIndex(i: number): Date {

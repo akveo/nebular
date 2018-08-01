@@ -109,9 +109,6 @@ import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.compon
 import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
 import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
-import { NbCalendarDayCellProjectionComponent } from './calendar/calendar-day-cell-projection.component';
-import { NbCalendarMonthCellProjectionComponent } from './calendar/calendar-month-cell-projection.component';
-import { NbCalendarYearCellProjectionComponent } from './calendar/calendar-year-cell-projection.component';
 import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
 
 
@@ -180,18 +177,6 @@ export const routes: Routes = [
           {
             path: 'calendar-bounding-month.component',
             component: NbCalendarBoundingMonthComponent,
-          },
-          {
-            path: 'calendar-day-cell-projection.component',
-            component: NbCalendarDayCellProjectionComponent,
-          },
-          {
-            path: 'calendar-month-cell-projection.component',
-            component: NbCalendarMonthCellProjectionComponent,
-          },
-          {
-            path: 'calendar-year-cell-projection.component',
-            component: NbCalendarYearCellProjectionComponent,
           },
           {
             path: 'calendar-start-view.component',

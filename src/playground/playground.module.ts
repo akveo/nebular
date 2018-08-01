@@ -133,9 +133,6 @@ import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.compon
 import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
 import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
-import { NbCalendarDayCellProjectionComponent } from './calendar/calendar-day-cell-projection.component';
-import { NbCalendarMonthCellProjectionComponent } from './calendar/calendar-month-cell-projection.component';
-import { NbCalendarYearCellProjectionComponent } from './calendar/calendar-year-cell-projection.component';
 import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
 
 export const NB_MODULES = [
@@ -259,9 +256,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarRangeShowcaseComponent,
   NbCalendarBoundingMonthComponent,
   NbCalendarRangeBoundingMonthComponent,
-  NbCalendarDayCellProjectionComponent,
-  NbCalendarMonthCellProjectionComponent,
-  NbCalendarYearCellProjectionComponent,
   NbCalendarStartViewComponent,
 ];
 
