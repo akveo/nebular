@@ -23,7 +23,7 @@
       color: nb-theme(btn-fg);
       cursor: nb-theme(btn-cursor);
     }
-    @include btn-meduim();
+    @include btn-medium();
     @include btn-primary();
 
     @include btn-sizes();
