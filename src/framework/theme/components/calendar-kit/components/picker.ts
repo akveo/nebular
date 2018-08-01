@@ -4,12 +4,13 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  Output, TemplateRef,
+  Output, Renderer2, TemplateRef,
   Type,
   ViewChild, ViewContainerRef,
 } from '@angular/core';
 
 import { NbCalendarCell } from './calendar-cell';
+import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
 
 @Component({
   selector: 'nb-calendar-picker-row',
@@ -32,7 +33,7 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
 
   @ViewChild(TemplateRef, { read: ViewContainerRef }) containerRef: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver) {
+  constructor(private cfr: ComponentFactoryResolver, private renderer: Renderer2) {
   }
 
   ngOnChanges() {
@@ -47,6 +48,7 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
       component.instance.date = cell;
       component.instance.select.subscribe(this.select.emit.bind(this.select));
       component.changeDetectorRef.detectChanges();
+      this.renderer.addClass(component.location.nativeElement, 'cell');
     });
   }
 }

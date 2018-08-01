@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+
 import { NbDateTimeUtil } from '../../services/date-time-util';
 import { NbCalendarCell } from '../calendar-cell';
 
@@ -12,8 +13,9 @@ import { NbCalendarCell } from '../calendar-cell';
 @Component({
   selector: 'nb-calendar-day-cell',
   styleUrls: ['./calendar-day-cell.component.scss'],
-  template: `<div class="cell" (click)="select.emit(date)">{{ day }}</div>`,
+  template: '{{ day }}',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(click)': 'select.emit(date)', 'class': 'cell' },
 })
 export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
   @Input() date: Date;

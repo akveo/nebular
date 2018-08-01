@@ -17,33 +17,33 @@
     }
   }
 
-  .week > div {
-    &:first-of-type nb-calendar-range-day-cell {
+  nb-calendar-day-picker > nb-calendar-picker > nb-calendar-picker-row > .cell {
+    &:first-of-type {
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
     }
 
-    &:last-of-type nb-calendar-range-day-cell {
+    &:last-of-type {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
     }
   }
 
-  nb-calendar-range-day-cell {
-    @extend nb-calendar-day-cell;
+  nb-calendar-day-picker .cell {
+    flex: 1;
 
     &.in-range {
       padding: 0 1px;
       margin: 1px 0;
       background: nb-theme(calendar-range-bg-in-range);
 
-      &:not(.today) .cell:not(:hover) {
+      &:not(.today, :hover) {
         border-radius: 0;
       }
     }
 
     &.start, &.end {
-      @extend nb-calendar-day-cell.selected;
+      @extend .selected;
       padding: 0 1px;
       margin: 1px 0;
       background: nb-theme(calendar-range-bg-in-range);

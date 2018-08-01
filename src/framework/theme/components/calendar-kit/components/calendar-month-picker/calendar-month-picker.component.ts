@@ -14,7 +14,6 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
   selector: 'nb-calendar-month-picker',
   template: `
     <nb-calendar-picker
-      class="month-cell"
       [data]="months"
       [selectedValue]="value"
       [cellComponent]="cellComponent"
@@ -48,18 +47,8 @@ export class NbCalendarMonthPickerComponent<T> implements OnInit {
     this.months = batch(months, 4);
   }
 
-  onSelect(month) {
-    this.value = month;
-    this.valueChange.emit(this.value);
-  }
-
-  createTemplateContext(day: Date) {
-    return {
-      $implicit: {
-        date: day,
-        selectedValue: this.value,
-      },
-    }
+  onSelect(month: Date) {
+    this.valueChange.emit(month);
   }
 
   private createMonthDateByIndex(i: number): Date {

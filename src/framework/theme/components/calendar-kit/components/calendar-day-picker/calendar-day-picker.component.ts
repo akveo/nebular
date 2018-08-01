@@ -31,7 +31,6 @@ import { NbCalendarCell } from '../calendar-cell';
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
     <nb-calendar-picker
-      class="day-cell"
       [data]="weeks"
       [activeMonth]="activeMonth"
       [selectedValue]="value"
@@ -71,9 +70,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
 
   onSelect(day: Date) {
-    if (day) {
-      this.valueChange.emit(day);
-    }
+    this.valueChange.emit(day);
   }
 
   private invalidateModel() {

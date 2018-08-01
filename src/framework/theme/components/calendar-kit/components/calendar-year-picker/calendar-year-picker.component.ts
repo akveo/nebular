@@ -16,7 +16,6 @@ const defaultYearCount = 20;
   selector: 'nb-calendar-year-picker',
   template: `
     <nb-calendar-picker
-      class="year-cell"
       [data]="years"
       [selectedValue]="value"
       [cellComponent]="cellComponent"
@@ -53,7 +52,6 @@ export class NbCalendarYearPickerComponent<T> implements OnChanges {
   }
 
   onSelect(year) {
-    this.value = year;
     this.valueChange.emit(year);
   }
 

@@ -84,54 +84,42 @@
     }
   }
 
-  nb-calendar-day-picker {
-    .day {
-      min-width: nb-theme(calendar-weekday-width);
-      min-height: nb-theme(calendar-weekday-height);
-      font-size: nb-theme(calendar-weekday-font-size);
-      font-weight: nb-theme(calendar-weekday-font-weight);
-      color: nb-theme(calendar-weekday-fg);
-
-      &.holiday {
-        color: nb-theme(calendar-holiday-fg);
-      }
-    }
-  }
-
-  nb-calendar-day-cell {
-    .cell {
-      border-radius: nb-theme(calendar-border-radius);
-      min-width: nb-theme(calendar-cell-width);
-      min-height: nb-theme(calendar-cell-height);
-    }
+  nb-calendar-day-picker .cell {
+    border-radius: nb-theme(calendar-border-radius);
+    min-width: nb-theme(calendar-cell-width);
+    min-height: nb-theme(calendar-cell-height);
 
     &.today {
-      .cell {
-        background: nb-theme(calendar-selected-item);
-        font-weight: nb-theme(font-weight-bold);
-      }
+      background: nb-theme(calendar-selected-item);
+      font-weight: nb-theme(font-weight-bold);
     }
 
     &.bounding-month {
-      .cell {
-        opacity: nb-theme(calendar-inactive-opacity);
-      }
+      opacity: nb-theme(calendar-inactive-opacity);
     }
 
     &:hover:not(.empty) {
-      .cell {
-        background: nb-theme(calendar-hovered-item);
-        color: nb-theme(color-white);
-        font-weight: nb-theme(font-weight-bold);
-      }
+      background: nb-theme(calendar-hovered-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
     }
 
     &.selected {
-      .cell {
-        background: nb-theme(calendar-active-item);
-        color: nb-theme(color-white);
-        font-weight: nb-theme(font-weight-bold);
-      }
+      background: nb-theme(calendar-active-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
+    }
+  }
+
+  nb-calendar-days-names .day {
+    min-width: nb-theme(calendar-weekday-width);
+    min-height: nb-theme(calendar-weekday-height);
+    font-size: nb-theme(calendar-weekday-font-size);
+    font-weight: nb-theme(calendar-weekday-font-weight);
+    color: nb-theme(calendar-weekday-fg);
+
+    &.holiday {
+      color: nb-theme(calendar-holiday-fg);
     }
   }
 }

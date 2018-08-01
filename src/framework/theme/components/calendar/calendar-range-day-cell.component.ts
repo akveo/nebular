@@ -10,22 +10,19 @@ import { NbCalendarRange } from './calendar-range.component';
   selector: 'nb-calendar-range-day-cell',
   styles: [`
     :host {
-      display: block;
-      padding: 1px;
-    }
-
-    :host .cell {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 1px;
     }
 
     :host:not(.empty) {
       cursor: pointer;
     }
   `],
-  template: `<div class="cell" (click)="select.emit(date)">{{ day }}</div>`,
+  template: '{{ day }}',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(click)': 'select.emit(date)' },
 })
 export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
   @Input() date: Date;
@@ -43,7 +40,8 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
   }
 
   @HostBinding('class.selected') get isSelected(): boolean {
-    return this.isStart || this.isEnd;
+    return this.date && this.selectedValue
+      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.isEnd;
   }
 
   @HostBinding('class.start') get isStart(): boolean {
