@@ -21,7 +21,12 @@ export interface NbAuthRefreshableToken {
 
 export interface NbAuthTokenClass {
   NAME: string;
-  new (raw: any, ownerStrategyName: string, createdAt: Date): NbAuthToken;
+  new (raw: any, strategyName: string, expDate?: Date): NbAuthToken;
+}
+
+// All types of token are not refreshables
+export function isNbAuthRefreshableToken(token: any): token is NbAuthRefreshableToken {
+  return (<NbAuthRefreshableToken>token).getRefreshToken !== undefined ;
 }
 
 export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,

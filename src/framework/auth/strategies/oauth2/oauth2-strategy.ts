@@ -11,7 +11,12 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
-import { NbAuthOAuth2Token, NbAuthRefreshableToken, NbAuthResult } from '../../services/';
+import {
+  isNbAuthRefreshableToken,
+  NbAuthRefreshableToken,
+  NbAuthResult,
+  NbAuthToken,
+} from '../../services/';
 import {
   NbOAuth2AuthStrategyOptions,
   NbOAuth2ResponseType,
@@ -199,17 +204,13 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
       .pipe(
         map((res) => {
-          const refreshedToken = <NbAuthOAuth2Token>this.createToken(res);
-          if (!refreshedToken.getRefreshToken() && token.getRefreshToken()) {
-            refreshedToken.setRefreshToken(token.getRefreshToken());
-          }
           return new NbAuthResult(
             true,
             res,
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            refreshedToken);
+            this.createRefreshedToken(res, token));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
@@ -374,6 +375,16 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       acc[item[0]] = decodeURIComponent(item[1]);
       return acc;
     }, {}) : {};
+  }
+
+  protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken): NbAuthToken {
+    const refreshedToken = this.createToken(res);
+    if (isNbAuthRefreshableToken(refreshedToken)
+        && !refreshedToken.getRefreshToken()
+        && existingToken.getRefreshToken()) {
+      refreshedToken.setRefreshToken(existingToken.getRefreshToken());
+    }
+    return refreshedToken;
   }
 
   register(data?: any): Observable<NbAuthResult> {
