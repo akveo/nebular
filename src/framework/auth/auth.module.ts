@@ -4,7 +4,14 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NbCardModule, NbCheckboxModule, NbLayoutModule } from '@nebular/theme';
+import {
+  NbAlertModule,
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbInputModule,
+  NbLayoutModule,
+} from '@nebular/theme';
 
 import {
   NB_AUTH_FALLBACK_TOKEN,
@@ -78,6 +85,9 @@ export function nbOptionsFactory(options) {
     NbLayoutModule,
     NbCardModule,
     NbCheckboxModule,
+    NbAlertModule,
+    NbInputModule,
+    NbButtonModule,
     RouterModule.forChild(routes),
     FormsModule,
     HttpClientModule,
