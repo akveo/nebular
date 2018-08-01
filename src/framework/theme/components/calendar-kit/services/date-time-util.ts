@@ -25,14 +25,26 @@ export namespace NbDateTimeUtil {
     return date1.getFullYear() === date2.getFullYear();
   };
 
+  export const isSameYearSafe = (date1: Date, date2: Date): boolean => {
+    return date1 && date2 && isSameYear(date1, date2);
+  };
+
   export const isSameMonth = (date1: Date, date2: Date): boolean => {
     return isSameYear(date1, date2) &&
       date1.getMonth() === date2.getMonth();
   };
 
+  export const isSameMonthSafe = (date1: Date, date2: Date): boolean => {
+    return date1 && date2 && isSameMonth(date1, date2);
+  };
+
   export const isSameDay = (date1: Date, date2: Date): boolean => {
     return isSameMonth(date1, date2) &&
       date1.getDate() === date2.getDate();
+  };
+
+  export const isSameDaySafe = (date1: Date, date2: Date): boolean => {
+    return date1 && date2 && isSameDay(date1, date2);
   };
 
   export const compareDates = (date1: Date, date2: Date): number => {
@@ -51,8 +63,20 @@ export namespace NbDateTimeUtil {
     return createDate(date.getFullYear(), date.getMonth(), 1);
   };
 
+  export const getMonthEnd = (date: Date): Date => {
+    return createDate(date.getFullYear(), date.getMonth() + 1, 0);
+  };
+
+  export const getYearStart = (date: Date): Date => {
+    return createDate(date.getFullYear(), 0, 1);
+  };
+
+  export const getYearEnd = (date: Date): Date => {
+    return createDate(date.getFullYear(), 11, 31);
+  };
+
   export const getNumberOfDaysInMonth = (date: Date): number => {
-    return createDate(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    return getMonthEnd(date).getDate();
   };
 
   export const addDay = (date: Date, num: number) => {

@@ -17,6 +17,9 @@ const defaultYearCount = 20;
   template: `
     <nb-calendar-picker
       [data]="years"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
       [selectedValue]="value"
       [cellComponent]="cellComponent"
       (select)="onSelect($event)">
@@ -24,12 +27,18 @@ const defaultYearCount = 20;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent<T> implements OnChanges {
+export class NbCalendarYearPickerComponent implements OnChanges {
 
   @Input() value: Date;
 
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
+
   @Input('cellComponent')
-  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+  set _cellComponent(cellComponent: Type<NbCalendarCell<any>>) {
     if (cellComponent) {
       this.cellComponent = cellComponent;
     }

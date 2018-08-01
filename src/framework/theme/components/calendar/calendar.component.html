@@ -19,6 +19,9 @@
         [activeMonth]="activeMonth"
         [boundingMonths]="boundingMonth"
         [cellComponent]="dayCellComponent"
+        [min]="min"
+        [max]="max"
+        [filter]="filter"
         [value]="date"
         (valueChange)="dateChange.emit($event)">
       </nb-calendar-day-picker>
@@ -37,6 +40,9 @@
       <nb-calendar-year-picker
         [cellComponent]="yearCellComponent"
         [value]="activeYear"
+        [min]="min"
+        [max]="max"
+        [filter]="filter"
         (valueChange)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
       </nb-calendar-year-picker>
 
@@ -49,6 +55,9 @@
       <nb-calendar-month-picker
         [cellComponent]="monthCellComponent"
         [value]="activeMonth"
+        [min]="min"
+        [max]="max"
+        [filter]="filter"
         (valueChange)="setActiveMonth($event); setViewMode(ViewMode.DATE)">
       </nb-calendar-month-picker>
 

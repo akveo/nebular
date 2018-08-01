@@ -22,49 +22,81 @@ import { NbCalendarRange } from './calendar-range.component';
   `],
   template: '{{ day }}',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(click)': 'select.emit(date)' },
+  host: { '(click)': 'onClick()', 'class': 'cell' },
 })
 export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
   @Input() date: Date;
+
   @Input() selectedValue: NbCalendarRange;
+
   @Input() activeMonth: Date;
+
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
 
   @Output() select: EventEmitter<Date> = new EventEmitter();
 
-  @HostBinding('class.today') get isToday(): boolean {
+  @HostBinding('class.today') get today(): boolean {
     return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
   }
 
-  @HostBinding('class.bounding-month') get isBoundingMonth(): boolean {
+  @HostBinding('class.bounding-month') get boundingMonth(): boolean {
     return this.date && this.activeMonth && !NbDateTimeUtil.isSameMonth(this.date, this.activeMonth);
   }
 
-  @HostBinding('class.selected') get isSelected(): boolean {
+  @HostBinding('class.selected') get selected(): boolean {
     return this.date && this.selectedValue
-      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.isEnd;
+      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.end;
   }
 
-  @HostBinding('class.start') get isStart(): boolean {
+  @HostBinding('class.start') get start(): boolean {
     return this.date && this.selectedValue && this.selectedValue.end
       && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start));
   }
 
-  @HostBinding('class.end') get isEnd(): boolean {
+  @HostBinding('class.end') get end(): boolean {
     return this.date && this.selectedValue &&
       (this.selectedValue.end && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.end));
   }
 
-  @HostBinding('class.empty') get isEmpty(): boolean {
+  @HostBinding('class.empty') get empty(): boolean {
     return !this.date;
   }
 
-  @HostBinding('class.in-range') get isInRange(): boolean {
+  @HostBinding('class.in-range') get inRange(): boolean {
     return this.date && this.selectedValue
       && (this.selectedValue.start && NbDateTimeUtil.compareDates(this.date, this.selectedValue.start) > 0)
       && (this.selectedValue.end && NbDateTimeUtil.compareDates(this.date, this.selectedValue.end) < 0);
   }
 
+  @HostBinding('class.disabled') get disabled(): boolean {
+    return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
+  }
+
   get day(): number {
     return this.date && this.date.getDate();
+  }
+
+  onClick() {
+    if (this.disabled || this.empty) {
+      return;
+    }
+
+    this.select.emit(this.date);
+  }
+
+  private smallerThanMin(): boolean {
+    return this.date && this.min && NbDateTimeUtil.compareDates(this.date, this.min) < 0;
+  }
+
+  private greaterThanMax(): boolean {
+    return this.date && this.max && NbDateTimeUtil.compareDates(this.date, this.max) > 0;
+  }
+
+  private dontFitFilter(): boolean {
+    return this.date && this.filter && !this.filter(this.date);
   }
 }

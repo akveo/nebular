@@ -34,6 +34,15 @@
       border-radius: nb-theme(calendar-border-radius);
       cursor: pointer;
 
+      &.empty, &.disabled {
+        cursor: auto;
+      }
+
+      &.disabled {
+        background: nb-theme(calendar-selected-item);
+        opacity: 0.3;
+      }
+
       &.selected {
         background: nb-theme(calendar-selected-item);
       }
@@ -65,6 +74,15 @@
       height: nb-theme(calendar-month-cell-height);
       border-radius: nb-theme(calendar-border-radius);
       cursor: pointer;
+
+      &.empty, &.disabled {
+        cursor: auto;
+      }
+
+      &.disabled {
+        background: nb-theme(calendar-selected-item);
+        opacity: 0.3;
+      }
 
       &.selected {
         background: nb-theme(calendar-selected-item);
@@ -98,7 +116,16 @@
       opacity: nb-theme(calendar-inactive-opacity);
     }
 
-    &:hover:not(.empty) {
+    &.empty, &.disabled {
+      cursor: auto;
+    }
+
+    &.disabled {
+      background: nb-theme(calendar-selected-item);
+      opacity: 0.3;
+    }
+
+    &:not(.empty, .disabled):hover {
       background: nb-theme(calendar-hovered-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);

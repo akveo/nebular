@@ -28,6 +28,11 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
   @Input() selectedValue: T;
   @Input() activeMonth: Date;
   @Input() component: Type<NbCalendarCell<T>>;
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
 
   @Output() select: EventEmitter<Date> = new EventEmitter();
 
@@ -47,6 +52,9 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
       component.instance.selectedValue = this.selectedValue;
       component.instance.date = cell;
       component.instance.select.subscribe(this.select.emit.bind(this.select));
+      component.instance.min = this.min;
+      component.instance.max = this.max;
+      component.instance.filter = this.filter;
       component.changeDetectorRef.detectChanges();
       this.renderer.addClass(component.location.nativeElement, 'cell');
     });
@@ -62,6 +70,9 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
       [activeMonth]="activeMonth"
       [selectedValue]="selectedValue"
       [component]="cellComponent"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
       (select)="select.emit($event)">
     </nb-calendar-picker-row>
   `,
@@ -73,6 +84,9 @@ export class NbCalendarPickerComponent<T> {
   @Input() selectedValue: T;
   @Input() boundingMonths: boolean;
   @Input() cellComponent: Type<NbCalendarCell<T>>;
+  @Input() min: Date;
+  @Input() max: Date;
+  @Input() filter: (Date) => boolean;
   @Output() select: EventEmitter<Date> = new EventEmitter();
 }
 

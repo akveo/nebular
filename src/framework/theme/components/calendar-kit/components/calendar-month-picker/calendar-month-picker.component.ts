@@ -15,6 +15,9 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
   template: `
     <nb-calendar-picker
       [data]="months"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
       [selectedValue]="value"
       [cellComponent]="cellComponent"
       (select)="onSelect($event)">
@@ -22,14 +25,20 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent<T> implements OnInit {
+export class NbCalendarMonthPickerComponent implements OnInit {
 
   @Input() value: Date;
+
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
 
   @Output() valueChange: EventEmitter<Date> = new EventEmitter();
 
   @Input('cellComponent')
-  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+  set _cellComponent(cellComponent: Type<NbCalendarCell<any>>) {
     if (cellComponent) {
       this.cellComponent = cellComponent;
     }

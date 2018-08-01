@@ -35,6 +35,9 @@ import { NbCalendarCell } from '../calendar-cell';
       [activeMonth]="activeMonth"
       [selectedValue]="value"
       [cellComponent]="cellComponent"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
       (select)="onSelect($event)">
     </nb-calendar-picker>
   `,
@@ -47,6 +50,12 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   @Input() value: T;
 
   @Input() boundingMonths: boolean = true;
+
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
 
   @Input('cellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {

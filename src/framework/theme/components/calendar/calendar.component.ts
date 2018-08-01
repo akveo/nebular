@@ -21,8 +21,16 @@ export class NbCalendarComponent<T> {
 
   @Input() date: T;
 
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
+
   @Input() dayCellComponent: Type<NbCalendarCell<T>>;
+
   @Input() monthCellComponent: Type<NbCalendarCell<T>>;
+
   @Input() yearCellComponent: Type<NbCalendarCell<T>>;
 
   @Output() dateChange: EventEmitter<T> = new EventEmitter();

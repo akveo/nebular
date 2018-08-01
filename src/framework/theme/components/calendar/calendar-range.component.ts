@@ -25,6 +25,9 @@ export interface NbCalendarRange {
     <nb-calendar
       [date]="range"
       (dateChange)="onChange($event)"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
       [startView]="startView"
       [boundingMonth]="boundingMonth"
       [dayCellComponent]="dayCellComponent"
@@ -45,8 +48,16 @@ export class NbCalendarRangeComponent {
     }
   }
   dayCellComponent: Type<NbCalendarCell<NbCalendarRange>> = NbCalendarRangeDayCellComponent;
+
   @Input() monthCellComponent: Type<NbCalendarCell<NbCalendarRange>>;
+
   @Input() yearCellComponent: Type<NbCalendarCell<NbCalendarRange>>;
+
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() filter: (Date) => boolean;
 
   @Input() range: NbCalendarRange;
 
