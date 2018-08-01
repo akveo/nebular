@@ -12,7 +12,7 @@
     nb-theme(btn-border-radius));
 }
 
-@mixin btn-meduim() {
+@mixin btn-medium() {
   @include button-size(nb-theme(btn-padding-y-md),
     nb-theme(btn-padding-x-md),
     nb-theme(btn-font-size-md),
@@ -42,7 +42,7 @@
   }
 
   &.btn-medium {
-    @include btn-meduim();
+    @include btn-medium();
   }
 
   &.btn-small {

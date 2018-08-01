@@ -229,7 +229,7 @@
 
 // Disabled
 @mixin btn-disabled() {
-  &:disabled {
+  &:disabled, &.btn-disabled {
     opacity: nb-theme(btn-disabled-opacity);
   }
 }
