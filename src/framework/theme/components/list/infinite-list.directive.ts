@@ -43,6 +43,8 @@ export class NbScrollableContainerDimentions {
  * so user able to return to the last viewed page or to share a link to this page.
  * `nbListPageTracker` directive will help you to know, what page user currently viewing.
  * Just put it on a list, set page size and it will calculate page that currently in viewport.
+ * You can [open the example](example/infinite-list/infinite-news-list.component)
+ * in a new tab to check out this feature.
  *
  * @stacked-example(Infinite list with pager, infinite-list/infinite-news-list.component)
  *
