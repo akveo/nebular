@@ -15,8 +15,7 @@ import {
   Type,
 } from '@angular/core';
 
-import { NbCalendarDaysService } from '../../services';
-import { NbCalendarMonthBuilderContext } from '../../model';
+import { NbCalendarMonthModelService } from '../../services';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell } from '../../model';
 
@@ -69,7 +68,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   weeks: Date[][];
 
-  constructor(private daysService: NbCalendarDaysService<T>) {
+  constructor(private monthModel: NbCalendarMonthModelService<T>) {
   }
 
   ngOnChanges({ activeMonth }: SimpleChanges) {
@@ -83,15 +82,6 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
 
   private invalidateModel() {
-    const context = this.createContext();
-    this.weeks = this.daysService.createWeeks(context);
-  }
-
-  private createContext(): NbCalendarMonthBuilderContext<T> {
-    return {
-      activeMonth: this.activeMonth,
-      selectedValue: this.value,
-      includeBoundingMonths: this.boundingMonths,
-    }
+    this.weeks = this.monthModel.createDaysGrid(this.activeMonth, this.boundingMonths);
   }
 }

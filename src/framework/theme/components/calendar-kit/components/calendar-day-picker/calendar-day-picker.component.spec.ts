@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 
 import { NbCalendarDayPickerComponent } from './calendar-day-picker.component';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarDaysService } from '../../services';
+import { NbCalendarMonthModelService } from '../../services';
 import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 
@@ -22,7 +22,7 @@ describe('Component: NbCalendarDayPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NbCalendarKitModule],
-      providers: [NbCalendarDaysService],
+      providers: [NbCalendarMonthModelService],
       schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent<NbCalendarDayPickerComponent<Date>>(NbCalendarDayPickerComponent);

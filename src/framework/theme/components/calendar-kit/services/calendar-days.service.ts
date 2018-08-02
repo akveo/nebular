@@ -7,68 +7,67 @@
 import { Injectable } from '@angular/core';
 
 import { NbDateTimeUtil } from './date-time-util';
-import { NbCalendarMonthBuilderContext } from '../model';
 import { batch } from '../helpers';
 import { NbLocaleService } from './locale.service';
 
 @Injectable()
-export class NbCalendarDaysService<T> {
+export class NbCalendarMonthModelService<T> {
 
   constructor(protected locale: NbLocaleService) {
   }
 
-  createWeeks(context: NbCalendarMonthBuilderContext<T>): Date[][] {
-    const weeks = this.createDates(context);
-    return this.withBoundingMonths(weeks, context);
+  createDaysGrid(activeMonth: Date, boundingMonth: boolean): Date[][] {
+    const weeks = this.createDates(activeMonth);
+    return this.withBoundingMonths(weeks, activeMonth, boundingMonth);
   }
 
-  private createDates(context: NbCalendarMonthBuilderContext<T>): Date[][] {
-    const days = NbDateTimeUtil.createDateRangeForMonth(context.activeMonth);
-    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(context.activeMonth);
+  private createDates(activeMonth: Date): Date[][] {
+    const days = NbDateTimeUtil.createDateRangeForMonth(activeMonth);
+    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(activeMonth);
     return batch(days, NbDateTimeUtil.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
-  private withBoundingMonths(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>): Date[][] {
+  private withBoundingMonths(weeks: Date[][], activeMonth: Date, boundingMonth: boolean): Date[][] {
     let withBoundingMonths = weeks;
 
     if (this.isShouldAddPrevBoundingMonth(withBoundingMonths)) {
-      withBoundingMonths = this.addPrevBoundingMonth(withBoundingMonths, context);
+      withBoundingMonths = this.addPrevBoundingMonth(withBoundingMonths, activeMonth, boundingMonth);
     }
 
     if (this.isShouldAddNextBoundingMonth(withBoundingMonths)) {
-      withBoundingMonths = this.addNextBoundingMonth(withBoundingMonths, context);
+      withBoundingMonths = this.addNextBoundingMonth(withBoundingMonths, activeMonth, boundingMonth);
     }
 
     return withBoundingMonths;
   }
 
-  private addPrevBoundingMonth(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>): Date[][] {
+  private addPrevBoundingMonth(weeks: Date[][], activeMonth: Date, boundingMonth: boolean): Date[][] {
     const firstWeek = weeks.shift();
     const requiredItems: number = NbDateTimeUtil.DAYS_IN_WEEK - firstWeek.length;
-    firstWeek.unshift(...this.createPrevBoundingDays(context, requiredItems));
+    firstWeek.unshift(...this.createPrevBoundingDays(activeMonth, boundingMonth, requiredItems));
     return [firstWeek, ...weeks];
   }
 
-  private addNextBoundingMonth(weeks: Date[][], context: NbCalendarMonthBuilderContext<T>): Date[][] {
+  private addNextBoundingMonth(weeks: Date[][], activeMonth: Date, boundingMonth: boolean): Date[][] {
     const lastWeek = weeks.pop();
     const requiredItems: number = NbDateTimeUtil.DAYS_IN_WEEK - lastWeek.length;
-    lastWeek.push(...this.createNextBoundingDays(context, requiredItems));
+    lastWeek.push(...this.createNextBoundingDays(activeMonth, boundingMonth, requiredItems));
     return [...weeks, lastWeek];
   }
 
-  private createPrevBoundingDays(context: NbCalendarMonthBuilderContext<T>, requiredItems: number): Date[] {
-    const month = NbDateTimeUtil.addMonth(context.activeMonth, -1);
+  private createPrevBoundingDays(activeMonth: Date, boundingMonth: boolean, requiredItems: number): Date[] {
+    const month = NbDateTimeUtil.addMonth(activeMonth, -1);
     const daysInMonth = NbDateTimeUtil.getNumberOfDaysInMonth(month);
     return NbDateTimeUtil.createDateRangeForMonth(month)
       .slice(daysInMonth - requiredItems)
-      .map(date => context.includeBoundingMonths ? date : null);
+      .map(date => boundingMonth ? date : null);
   }
 
-  private createNextBoundingDays(context: NbCalendarMonthBuilderContext<T>, requiredItems: number): Date[] {
-    const month = NbDateTimeUtil.addMonth(context.activeMonth, 1);
+  private createNextBoundingDays(activeMonth: Date, boundingMonth: boolean, requiredItems: number): Date[] {
+    const month = NbDateTimeUtil.addMonth(activeMonth, 1);
     return NbDateTimeUtil.createDateRangeForMonth(month)
       .slice(0, requiredItems)
-      .map(date => context.includeBoundingMonths ? date : null);
+      .map(date => boundingMonth ? date : null);
   }
 
   private getStartOfWeekDayDiff(date: Date): number {

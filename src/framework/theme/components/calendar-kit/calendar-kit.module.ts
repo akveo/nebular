@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbCalendarDaysService, NbLocaleService } from './services';
+import { NbCalendarMonthModelService, NbLocaleService } from './services';
 
 import {
   NbCalendarDatePipe,
@@ -29,7 +29,7 @@ import {
 
 const SERVICES = [
   NbLocaleService,
-  NbCalendarDaysService,
+  NbCalendarMonthModelService,
 ];
 
 const COMPONENTS = [

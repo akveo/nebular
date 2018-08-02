@@ -11,12 +11,6 @@ export interface NbCalendarDay {
   isHoliday: boolean;
 }
 
-export class NbCalendarMonthBuilderContext<T> {
-  activeMonth: Date;
-  selectedValue: T;
-  includeBoundingMonths: boolean;
-}
-
 export enum NbCalendarViewMode {
   YEAR = 'year',
   MONTH = 'month',
