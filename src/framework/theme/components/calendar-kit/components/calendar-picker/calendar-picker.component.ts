@@ -30,7 +30,6 @@ export class NbCalendarPickerComponent<T> {
   @Input() data: Date[][];
   @Input() activeMonth: Date;
   @Input() selectedValue: T;
-  @Input() boundingMonths: boolean;
   @Input() cellComponent: Type<NbCalendarCell<T>>;
   @Input() min: Date;
   @Input() max: Date;
