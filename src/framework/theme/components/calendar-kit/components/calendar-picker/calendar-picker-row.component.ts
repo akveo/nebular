@@ -1,16 +1,26 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ComponentFactoryResolver,
+  ChangeDetectionStrategy,
+  Component,
+  ComponentFactoryResolver,
   EventEmitter,
   Input,
   OnChanges,
-  Output, Renderer2, TemplateRef,
+  Output,
+  Renderer2,
+  TemplateRef,
   Type,
-  ViewChild, ViewContainerRef,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../model';
-import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
+import { NbCalendarCell } from '../../model';
+
 
 @Component({
   selector: 'nb-calendar-picker-row',
@@ -60,33 +70,3 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
     });
   }
 }
-
-@Component({
-  selector: 'nb-calendar-picker',
-  template: `
-    <nb-calendar-picker-row
-      *ngFor="let row of data"
-      [row]="row"
-      [activeMonth]="activeMonth"
-      [selectedValue]="selectedValue"
-      [component]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="select.emit($event)">
-    </nb-calendar-picker-row>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class NbCalendarPickerComponent<T> {
-  @Input() data: Date[][];
-  @Input() activeMonth: Date;
-  @Input() selectedValue: T;
-  @Input() boundingMonths: boolean;
-  @Input() cellComponent: Type<NbCalendarCell<T>>;
-  @Input() min: Date;
-  @Input() max: Date;
-  @Input() filter: (Date) => boolean;
-  @Output() select: EventEmitter<Date> = new EventEmitter();
-}
-

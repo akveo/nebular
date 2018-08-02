@@ -14,7 +14,6 @@ export { NbCalendarPageableNavigationComponent } from './calendar-navigation/cal
 export { NbCalendarDaysNamesComponent } from './calendar-days-names/calendar-days-names.component';
 export { NbCalendarMonthCellComponent } from './calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './calendar-year-picker/calendar-year-cell.component';
-export { NbCalendarPickerRowComponent, NbCalendarPickerComponent } from './picker';
-export { NbCalendarCell } from '../model';
-
+export { NbCalendarPickerRowComponent } from './calendar-picker/calendar-picker-row.component';
+export { NbCalendarPickerComponent }from './calendar-picker/calendar-picker.component';
 export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';
