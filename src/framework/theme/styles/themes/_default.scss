@@ -473,31 +473,46 @@ $theme: (
   alert-margin: margin,
 
 
-  calendar-header-sub-title-font-size: font-size,
-  calendar-header-sub-title-font-weight: font-weight-thin,
-  calendar-navigation-button-width: 10rem,
+
+
+
   calendar-width: 21.875rem,
   calendar-height: 31rem,
-  calendar-fg: card-fg-heading,
-  calendar-bg: card-bg,
-  calendar-selected-item: color-bg-active,
-  calendar-active-item: color-success,
-  calendar-hovered-item: #00e488,
-  calendar-inactive-opacity: 0.5,
+
+  calendar-header-title-font-size: font-size,
+  calendar-header-title-font-weight: font-weight-thin,
+  calendar-header-sub-title-font-size: font-size,
+  calendar-header-sub-title-font-weight: font-weight-thin,
+
+  calendar-navigation-button-width: 10rem,
+
+  // TODO i think hovered and selected have to be the same
+  calendar-selected-item-bg: #00e488,
+  calendar-hover-item-bg: calendar-selected-item-bg,
+  calendar-today-item-bg: color-bg-active,
+  calendar-active-item-bg: color-success,
+  calendar-fg: color-fg-text,
+  calendar-selected-fg: color-white,
+
   calendar-cell-width: 2.625rem,
   calendar-cell-height: 2.625rem,
   calendar-month-cell-width: 4.25rem,
   calendar-month-cell-height: 2.375rem,
   calendar-year-cell-width: calendar-month-cell-width,
   calendar-year-cell-height: calendar-month-cell-height,
+
+  calendar-inactive-opacity: 0.5,
+  calendar-disabled-opacity: 0.3,
+
   calendar-border-radius: radius,
+
   calendar-weekday-width: calendar-cell-width,
   calendar-weekday-height: 1.75rem,
   calendar-weekday-font-size: font-size-xs,
   calendar-weekday-font-weight: font-weight-normal,
   calendar-weekday-fg: color-fg,
-  calendar-holiday-fg: color-danger,
-  calendar-header-date-width: 9rem,
+  calendar-weekday-holiday-fg: color-danger,
+
   calendar-range-bg-in-range: #ebfbf2,
 );
 

@@ -12,7 +12,6 @@ import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-day-cell',
-  styleUrls: ['./calendar-day-cell.component.scss'],
   template: '{{ day }}',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(click)': 'onClick()', 'class': 'cell' },
