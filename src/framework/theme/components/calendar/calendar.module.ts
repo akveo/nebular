@@ -7,13 +7,11 @@
 import { NgModule } from '@angular/core';
 
 import { NbCalendarComponent } from './calendar.component';
-import { NbSharedModule } from '../shared/shared.module';
-import { NbCalendarKitModule } from '../calendar-kit';
-import { NbCardModule } from '../card/card.module';
+import { NbBaseCalendarModule } from './base-calendar.module';
 
 
 @NgModule({
-  imports: [NbCalendarKitModule, NbSharedModule, NbCardModule],
+  imports: [NbBaseCalendarModule],
   exports: [NbCalendarComponent],
   declarations: [NbCalendarComponent],
 })

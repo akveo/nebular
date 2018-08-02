@@ -8,15 +8,16 @@ import { NgModule } from '@angular/core';
 
 import { NbCalendarRangeComponent } from './calendar-range.component';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
-import { NbSharedModule } from '../shared/shared.module';
-import { NbCalendarKitModule } from '../calendar-kit';
-import { NbCalendarModule } from './calendar.module';
+import { NbBaseCalendarModule } from './base-calendar.module';
 
 
 @NgModule({
-  imports: [NbCalendarModule, NbCalendarKitModule, NbSharedModule],
+  imports: [NbBaseCalendarModule],
   exports: [NbCalendarRangeComponent],
-  declarations: [NbCalendarRangeComponent, NbCalendarRangeDayCellComponent, NbCalendarRangeDayCellComponent],
+  declarations: [
+    NbCalendarRangeComponent,
+    NbCalendarRangeDayCellComponent,
+  ],
   entryComponents: [NbCalendarRangeDayCellComponent],
 })
 export class NbCalendarRangeModule {

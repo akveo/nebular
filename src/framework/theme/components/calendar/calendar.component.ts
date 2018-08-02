@@ -6,18 +6,31 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarCell, NbCalendarViewMode } from '../calendar-kit';
 
 
 @Component({
   selector: 'nb-calendar',
-  templateUrl: './calendar.component.html',
+  template: `
+    <nb-base-calendar
+      [boundingMonth]="boundingMonth"
+      [startView]="startView"
+      [date]="date"
+      [min]="min"
+      [max]="max"
+      [filter]="filter"
+      [dayCellComponent]="dayCellComponent"
+      [monthCellComponent]="monthCellComponent"
+      [yearCellComponent]="yearCellComponent"
+      (dateChange)="dateChange.emit($event)"
+    ></nb-base-calendar>
+  `,
 })
 export class NbCalendarComponent<T> {
 
   @Input() boundingMonth: boolean = true;
 
-  @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   @Input() date: T;
 
@@ -34,40 +47,4 @@ export class NbCalendarComponent<T> {
   @Input() yearCellComponent: Type<NbCalendarCell<T>>;
 
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
-
-  ViewMode = NbCalendarViewMode;
-
-  visibleDate: Date = new Date();
-
-  setViewMode(viewMode: NbCalendarViewMode) {
-    this.activeViewMode = viewMode;
-  }
-
-  setVisibleDate(visibleDate: Date) {
-    this.visibleDate = visibleDate;
-  }
-
-  prevMonth() {
-    this.changeVisibleMonth(-1);
-  }
-
-  nextMonth() {
-    this.changeVisibleMonth(1);
-  }
-
-  prevYears() {
-    this.changeVisibleYear(-1);
-  }
-
-  nextYears() {
-    this.changeVisibleYear(1);
-  }
-
-  private changeVisibleMonth(direction: number) {
-    this.visibleDate = NbDateTimeUtil.addMonth(this.visibleDate, direction);
-  }
-
-  private changeVisibleYear(direction: number) {
-    this.visibleDate = NbDateTimeUtil.addYear(this.visibleDate, direction * 20);
-  }
 }

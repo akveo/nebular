@@ -22,7 +22,7 @@ export interface NbCalendarRange {
 @Component({
   selector: 'nb-calendar-range',
   template: `
-    <nb-calendar
+    <nb-base-calendar
       [date]="range"
       (dateChange)="onChange($event)"
       [min]="min"
@@ -33,7 +33,7 @@ export interface NbCalendarRange {
       [dayCellComponent]="dayCellComponent"
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent">
-    </nb-calendar>
+    </nb-base-calendar>
   `,
 })
 export class NbCalendarRangeComponent {

@@ -6,7 +6,7 @@
 
 @mixin nb-calendar-theme() {
 
-  nb-calendar nb-card {
+  nb-base-calendar nb-card {
     width: nb-theme(calendar-width);
     height: nb-theme(calendar-height);
 
