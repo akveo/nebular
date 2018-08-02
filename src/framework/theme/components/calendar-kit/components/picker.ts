@@ -9,7 +9,7 @@ import {
   ViewChild, ViewContainerRef,
 } from '@angular/core';
 
-import { NbCalendarCell } from './calendar-cell';
+import { NbCalendarCell } from '../model';
 import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
 
 @Component({

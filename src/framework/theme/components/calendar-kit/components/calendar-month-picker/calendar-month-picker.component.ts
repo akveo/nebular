@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
 import { batch, range } from '../../helpers';
-import { NbCalendarCell } from '../calendar-cell';
+import { NbCalendarCell } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 
 

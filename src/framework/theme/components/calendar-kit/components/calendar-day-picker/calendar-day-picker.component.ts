@@ -18,7 +18,7 @@ import {
 import { NbCalendarDaysService } from '../../services';
 import { NbCalendarMonthBuilderContext } from '../../model';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarCell } from '../calendar-cell';
+import { NbCalendarCell } from '../../model';
 
 
 @Component({

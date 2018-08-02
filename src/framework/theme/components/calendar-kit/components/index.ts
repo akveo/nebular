@@ -15,6 +15,6 @@ export { NbCalendarDaysNamesComponent } from './calendar-days-names/calendar-day
 export { NbCalendarMonthCellComponent } from './calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent, NbCalendarPickerComponent } from './picker';
-export { NbCalendarCell } from './calendar-cell';
+export { NbCalendarCell } from '../model';
 
 export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';
