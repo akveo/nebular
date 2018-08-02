@@ -12,7 +12,6 @@ import {
   Input,
   OnChanges,
   Output,
-  Renderer2,
   TemplateRef,
   Type,
   ViewChild,
