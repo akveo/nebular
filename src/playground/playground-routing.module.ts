@@ -134,6 +134,12 @@ import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbButtonFullWidthComponent } from './button/button-full-width.component';
+import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
+import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
+import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
+import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
+import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component';
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -285,6 +291,10 @@ export const routes: Routes = [
           {
             path: 'card-sizes.component',
             component: NbCardSizesComponent,
+          },
+          {
+            path: 'card-without-body.component',
+            component: NbCardWithoutBodyComponent,
           },
         ],
       },
@@ -572,6 +582,36 @@ export const routes: Routes = [
           {
             path: 'accordion-test.component',
             component: NbAccordionTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'list',
+        children: [
+          {
+            path: 'simple-list-showcase.component',
+            component: NbSimpleListShowcaseComponent,
+          },
+          {
+            path: 'users-list-showcase.component',
+            component: NbUsersListShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'infinite-list',
+        children: [
+          {
+            path: 'infinite-list-showcase.component',
+            component: NbInfiniteListShowcaseComponent,
+          },
+          {
+            path: 'infinite-list-scroll-modes.component',
+            component: NbInfiniteListScrollModesComponent,
+          },
+          {
+            path: 'infinite-news-list.component',
+            component: NbInfiniteNewsListComponent,
           },
         ],
       },
