@@ -16,13 +16,11 @@ import {
 } from '@nebular/theme';
 
 import {
-  NbAuthModule,
+  NbAuthModule, NbAuthOAuth2JWTToken,
   NbOAuth2AuthStrategy, NbOAuth2ClientAuthMethod, NbOAuth2GrantType,
 } from '@nebular/auth';
 
 import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
-import { NbAuthOAuth2Token } from '@nebular/auth';
-
 
 
 @NgModule({
@@ -52,6 +50,7 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
       strategies: [
          NbOAuth2AuthStrategy.setup({
           name: 'password',
+          requireValidToken: true,
           clientId: 'Aladdin',
           clientSecret: 'open sesame',
           clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
@@ -59,7 +58,7 @@ import { NbAuthOAuth2Token } from '@nebular/auth';
           token: {
             endpoint: 'token',
             grantType: NbOAuth2GrantType.PASSWORD,
-            class: NbAuthOAuth2Token,
+            class: NbAuthOAuth2JWTToken,
           },
           redirect: {
             success: '/oauth2-password',

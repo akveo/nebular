@@ -74,7 +74,7 @@ import { NbAuthGuard } from './auth-guard.service';
 
         NbPasswordAuthStrategy.setup({
           name: 'email',
-
+          requireValidToken: false,
           token: {
             class: NbAuthJWTToken,
           },

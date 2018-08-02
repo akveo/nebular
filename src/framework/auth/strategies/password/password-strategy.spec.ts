@@ -1454,6 +1454,7 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
+        requireValidToken: false,
         login: {
           failWhenNoToken: false,
         },
@@ -1495,6 +1496,7 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
+        requireValidToken: false,
         register: {
           failWhenNoToken: false,
         },
@@ -1536,6 +1538,7 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
+        requireValidToken: false,
         refreshToken: {
           failWhenNoToken: false,
         },

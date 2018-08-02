@@ -5,6 +5,7 @@
  */
 
 import { NbAuthOAuth2Token, NbAuthTokenClass } from '../../services';
+import { NbAuthStrategyOptions } from '@nebular/auth/strategies/auth-strategy-options';
 
 export enum NbOAuth2ResponseType {
   CODE = 'code',
@@ -24,8 +25,7 @@ export enum NbOAuth2ClientAuthMethod {
   REQUEST_BODY = 'request-body',
 }
 
-export class NbOAuth2AuthStrategyOptions {
-  name: string;
+export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
   baseEndpoint?: string = '';
   clientId: string = '';
   clientSecret?: string = '';

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
-import { NbAuthToken, nbAuthCreateToken } from '../services/token/token';
+import { NbAuthToken, nbAuthCreateToken, InvalidJWTTokenError } from '../services/token/token';
 
 export abstract class NbAuthStrategy {
 
@@ -21,7 +21,12 @@ export abstract class NbAuthStrategy {
   }
 
   createToken(value: any): NbAuthToken {
-    return nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
+    const requireValidToken: boolean = this.getOption('requireValidToken');
+      const token = nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
+      if (requireValidToken && !token.isValid()) {
+        throw new InvalidJWTTokenError('Token is empty or invalid', token.getPayload());
+      }
+      return token;
   }
 
   getName(): string {

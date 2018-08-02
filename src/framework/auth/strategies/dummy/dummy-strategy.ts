@@ -78,12 +78,24 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
   }
 
   protected createDummyResult(data?: any): NbAuthResult {
+
     if (this.getOption('alwaysFail')) {
       return new NbAuthResult(
         false,
         this.createFailResponse(data),
         null,
         ['Something went wrong.'],
+      );
+    }
+
+    try {
+      this.createToken('test token')
+    } catch (err) {
+      return new NbAuthResult(
+        false,
+        this.createFailResponse(data),
+        null,
+        [err.message],
       );
     }
 

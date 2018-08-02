@@ -13,6 +13,7 @@ import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
+import { InvalidJWTTokenError } from '@nebular/auth';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -161,7 +162,6 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           if (this.getOption('login.alwaysFail')) {
             throw this.createFailResponse(data);
           }
-
           return res;
         }),
         this.validateToken('login'),
@@ -178,6 +178,8 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
             errors = this.getOption('errors.getter')('login', res, this.options);
+          } else if (res instanceof InvalidJWTTokenError) {
+            errors.push(res.message)
           } else {
             errors.push('Something went wrong.');
           }
@@ -219,6 +221,8 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
             errors = this.getOption('errors.getter')('register', res, this.options);
+          } else if (res instanceof InvalidJWTTokenError) {
+            errors.push(res.message)
           } else {
             errors.push('Something went wrong.');
           }
@@ -390,6 +394,8 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           let errors = [];
           if (res instanceof HttpErrorResponse) {
             errors = this.getOption('errors.getter')('refreshToken', res, this.options);
+          } else if (res instanceof InvalidJWTTokenError) {
+            errors.push(res.message)
           } else {
             errors.push('Something went wrong.');
           }

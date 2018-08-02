@@ -7,6 +7,7 @@ import { NbAuthTokenClass } from '../services/';
 
 export class NbAuthStrategyOptions {
   name: string;
+  requireValidToken?: boolean = false;
   token?: {
     class?: NbAuthTokenClass;
     [key: string]: any;

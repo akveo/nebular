@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -19,6 +19,7 @@ import {
   NbOAuth2GrantType, NbOAuth2ClientAuthMethod,
 } from './oauth2-strategy.options';
 import { NbAuthStrategyClass } from '../../auth.options';
+import { InvalidJWTTokenError } from '@nebular/auth';
 
 
 /**
@@ -130,7 +131,6 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
               this.getOption('defaultMessages'),
               this.createToken(params));
           }
-
           return new NbAuthResult(
             false,
             params,
@@ -138,6 +138,21 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('defaultErrors'),
             [],
           );
+        }),
+        catchError(err => { //  createToken sent an MalformedJWTTokenError
+          const errors = [];
+          if (err instanceof InvalidJWTTokenError) {
+            errors.push(err.message)
+          } else {
+            errors.push('Something went wrong.');
+          }
+          return observableOf(
+            new NbAuthResult(
+              false,
+              err,
+              this.getOption('redirect.failure'),
+              errors,
+            ));
         }),
       );
     },
@@ -335,9 +350,12 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       } else {
         errors = this.getOption('defaultErrors');
       }
+    }  else if (res instanceof InvalidJWTTokenError ) {
+      errors.push(res.message)
     } else {
-      errors.push('Something went wrong.');
-    }
+        errors.push('Something went wrong.')
+    };
+
     return observableOf(
       new NbAuthResult(
         false,
