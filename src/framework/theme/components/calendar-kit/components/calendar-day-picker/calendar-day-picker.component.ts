@@ -31,8 +31,8 @@ import { NbCalendarCell } from '../../model';
     <nb-calendar-days-names></nb-calendar-days-names>
     <nb-calendar-picker
       [data]="weeks"
-      [activeMonth]="activeMonth"
-      [selectedValue]="value"
+      [visibleDate]="visibleDate"
+      [selectedValue]="date"
       [cellComponent]="cellComponent"
       [min]="min"
       [max]="max"
@@ -44,9 +44,7 @@ import { NbCalendarCell } from '../../model';
 })
 export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
-  @Input() activeMonth: Date;
-
-  @Input() value: T;
+  @Input() visibleDate: Date;
 
   @Input() boundingMonths: boolean = true;
 
@@ -64,24 +62,26 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarDayCellComponent;
 
-  @Output() valueChange = new EventEmitter<Date>();
+  @Input() date: T;
+
+  @Output() dateChange = new EventEmitter<Date>();
 
   weeks: Date[][];
 
   constructor(private monthModel: NbCalendarMonthModelService) {
   }
 
-  ngOnChanges({ activeMonth }: SimpleChanges) {
-    if (activeMonth) {
+  ngOnChanges({ visibleDate }: SimpleChanges) {
+    if (visibleDate) {
       this.invalidateModel();
     }
   }
 
   onSelect(day: Date) {
-    this.valueChange.emit(day);
+    this.dateChange.emit(day);
   }
 
   private invalidateModel() {
-    this.weeks = this.monthModel.createDaysGrid(this.activeMonth, this.boundingMonths);
+    this.weeks = this.monthModel.createDaysGrid(this.visibleDate, this.boundingMonths);
   }
 }

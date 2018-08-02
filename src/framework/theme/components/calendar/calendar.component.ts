@@ -37,40 +37,37 @@ export class NbCalendarComponent<T> {
 
   ViewMode = NbCalendarViewMode;
 
-  activeMonth: Date = new Date();
-  activeYear: Date = new Date();
+  visibleDate: Date = new Date();
 
   setViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;
   }
 
-  setActiveMonth(activeMonth: Date) {
-    this.activeMonth = activeMonth;
-    this.activeYear = activeMonth;
+  setVisibleDate(visibleDate: Date) {
+    this.visibleDate = visibleDate;
   }
 
   prevMonth() {
-    this.changeActiveMonth(-1);
+    this.changeVisibleMonth(-1);
   }
 
   nextMonth() {
-    this.changeActiveMonth(1);
+    this.changeVisibleMonth(1);
   }
 
   prevYears() {
-    this.changeActiveYear(-1);
+    this.changeVisibleYear(-1);
   }
 
   nextYears() {
-    this.changeActiveYear(1);
+    this.changeVisibleYear(1);
   }
 
-  private changeActiveMonth(direction: number) {
-    const activeMonth = NbDateTimeUtil.addMonth(this.activeMonth, direction);
-    this.setActiveMonth(activeMonth);
+  private changeVisibleMonth(direction: number) {
+    this.visibleDate = NbDateTimeUtil.addMonth(this.visibleDate, direction);
   }
 
-  private changeActiveYear(direction: number) {
-    this.activeYear = NbDateTimeUtil.addYear(this.activeYear, direction * 20);
+  private changeVisibleYear(direction: number) {
+    this.visibleDate = NbDateTimeUtil.addYear(this.visibleDate, direction * 20);
   }
 }

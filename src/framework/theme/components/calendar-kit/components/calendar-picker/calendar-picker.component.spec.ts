@@ -51,12 +51,12 @@ describe('Component: NbCalendarPicker', () => {
     expect(componentEl.querySelectorAll('nb-calendar-day-cell').length).toBe(4);
   });
 
-  it('should provide activeMonth for cell', () => {
+  it('should provide year for cell', () => {
     const activeMonth = new Date();
-    component.activeMonth = activeMonth;
+    component.visibleDate = activeMonth;
     fixture.detectChanges();
     const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
-    expect(row.activeMonth).toBe(activeMonth);
+    expect(row.visibleDate).toBe(activeMonth);
   });
 
   it('should provide selectedValue for cell', () => {

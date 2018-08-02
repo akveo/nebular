@@ -29,11 +29,11 @@ describe('Component: NbCalendarDayPicker', () => {
     component = fixture.componentInstance;
     componentEl = fixture.debugElement;
 
-    component.activeMonth = new Date();
-    component.value = new Date();
+    component.year = new Date();
+    component.month = new Date();
     component.ngOnChanges({
-      activeMonth: new SimpleChange(null, component.activeMonth, true),
-      value: new SimpleChange(null, component.value, true),
+      activeMonth: new SimpleChange(null, component.visibleDate, true),
+      value: new SimpleChange(null, component.date, true),
     });
     fixture.detectChanges();
   });
@@ -50,8 +50,8 @@ describe('Component: NbCalendarDayPicker', () => {
     expect(component.cellComponent).toBe(NbCalendarDayCellComponent);
   });
 
-  it('should fire valueChange when cell selected', done => {
-    component.valueChange.subscribe(done);
+  it('should fire monthChange when cell selected', done => {
+    component.dateChange.subscribe(done);
     componentEl.query(By.css('nb-calendar-picker'))
       .nativeElement
       .dispatchEvent(new CustomEvent('select'));

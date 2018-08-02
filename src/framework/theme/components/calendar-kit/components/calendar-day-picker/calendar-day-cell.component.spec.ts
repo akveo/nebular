@@ -31,7 +31,7 @@ describe('Component: NbCalendarDayCell', () => {
   it('should render date', () => {
     component.date = new Date(2018, 6, 12);
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
+    component.visibleDate = new Date();
     fixture.detectChanges();
     expect(componentEl.textContent).toContain('12');
   });
@@ -40,7 +40,7 @@ describe('Component: NbCalendarDayCell', () => {
     const date = new Date();
     component.date = date;
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
+    component.visibleDate = new Date();
     fixture.detectChanges();
     component.select.subscribe(e => expect(e).toBe(date));
     componentEl.dispatchEvent(new Event('click'));
@@ -49,7 +49,7 @@ describe('Component: NbCalendarDayCell', () => {
   it('should contain today class if today', () => {
     component.date = new Date();
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
+    component.visibleDate = new Date();
     fixture.detectChanges();
     expect(componentEl.classList).toContain('today');
   });
@@ -57,14 +57,14 @@ describe('Component: NbCalendarDayCell', () => {
   it('should contain selected class if selected', () => {
     component.date = new Date();
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
+    component.visibleDate = new Date();
     fixture.detectChanges();
     expect(componentEl.classList).toContain('selected');
   });
 
-  it('should contain bounding-month class if it adjoin to the activeMonth', () => {
+  it('should contain bounding-month class if it adjoin to the year', () => {
     component.date = new Date(2018, 7, 1);
-    component.activeMonth = new Date(2018, 6, 30);
+    component.visibleDate = new Date(2018, 6, 30);
     component.selectedValue = new Date();
     fixture.detectChanges();
     expect(componentEl.classList).toContain('bounding-month');
@@ -73,7 +73,7 @@ describe('Component: NbCalendarDayCell', () => {
   it('should contain empty if no date provided', () => {
     component.date = null;
     component.selectedValue = new Date();
-    component.activeMonth = new Date();
+    component.visibleDate = new Date();
     fixture.detectChanges();
     expect(componentEl.classList).toContain('empty');
   });

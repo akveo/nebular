@@ -22,7 +22,7 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
 
   @Input() selectedValue: Date;
 
-  @Input() activeMonth: Date;
+  @Input() visibleDate: Date;
 
   @Input() min: Date;
 
@@ -37,7 +37,7 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
   }
 
   @HostBinding('class.bounding-month') get boundingMonth(): boolean {
-    return !NbDateTimeUtil.isSameMonthSafe(this.date, this.activeMonth);
+    return !NbDateTimeUtil.isSameMonthSafe(this.date, this.visibleDate);
   }
 
   @HostBinding('class.selected') get selected(): boolean {

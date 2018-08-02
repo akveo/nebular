@@ -21,7 +21,7 @@ export interface NbCalendarCell<T> {
   date: Date;
   select: EventEmitter<Date>;
   selectedValue?: T;
-  activeMonth?: Date;
+  visibleDate?: Date;
   min?: Date;
   max?: Date;
   filter?: (Date) => boolean;

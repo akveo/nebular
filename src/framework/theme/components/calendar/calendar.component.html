@@ -9,21 +9,21 @@
 
       <nb-calendar-pageable-navigation
         *ngSwitchCase="ViewMode.DATE"
-        [date]="activeMonth"
+        [date]="visibleDate"
         (next)="nextMonth()"
         (prev)="prevMonth()"
         (changeMode)="setViewMode(ViewMode.YEAR)">
       </nb-calendar-pageable-navigation>
 
       <nb-calendar-day-picker
-        [activeMonth]="activeMonth"
         [boundingMonths]="boundingMonth"
         [cellComponent]="dayCellComponent"
         [min]="min"
         [max]="max"
         [filter]="filter"
-        [value]="date"
-        (valueChange)="dateChange.emit($event)">
+        [visibleDate]="visibleDate"
+        [date]="date"
+        (dateChange)="dateChange.emit($event)">
       </nb-calendar-day-picker>
 
     </ng-container>
@@ -31,7 +31,7 @@
     <ng-container *ngSwitchCase="ViewMode.YEAR">
 
       <nb-calendar-pageable-navigation
-        [date]="activeMonth"
+        [date]="visibleDate"
         (next)="nextYears()"
         (prev)="prevYears()"
         (changeMode)="setViewMode(ViewMode.DATE)">
@@ -39,27 +39,30 @@
 
       <nb-calendar-year-picker
         [cellComponent]="yearCellComponent"
-        [activeYear]="activeYear"
-        [value]="date"
+        [date]="date"
         [min]="min"
         [max]="max"
         [filter]="filter"
-        (valueChange)="setActiveMonth($event); setViewMode(ViewMode.MONTH)">
+        [year]="visibleDate"
+        (yearChange)="setVisibleDate($event); setViewMode(ViewMode.MONTH)">
       </nb-calendar-year-picker>
 
     </ng-container>
 
     <ng-container *ngSwitchCase="ViewMode.MONTH">
 
-      <nb-calendar-navigation [date]="activeMonth" (changeMode)="setViewMode(ViewMode.DATE)"></nb-calendar-navigation>
+      <nb-calendar-navigation
+        [date]="visibleDate"
+        (changeMode)="setViewMode(ViewMode.DATE)">
+      </nb-calendar-navigation>
 
       <nb-calendar-month-picker
         [cellComponent]="monthCellComponent"
-        [value]="activeMonth"
+        [month]="visibleDate"
         [min]="min"
         [max]="max"
         [filter]="filter"
-        (valueChange)="setActiveMonth($event); setViewMode(ViewMode.DATE)">
+        (monthChange)="setVisibleDate($event); setViewMode(ViewMode.DATE)">
       </nb-calendar-month-picker>
 
     </ng-container>

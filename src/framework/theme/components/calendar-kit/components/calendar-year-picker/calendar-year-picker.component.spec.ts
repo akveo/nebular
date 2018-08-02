@@ -26,7 +26,7 @@ describe('Component: NbCalendarYearPicker', () => {
   });
 
   beforeEach(() => {
-    component.value = new Date(2018, 6, 23);
+    component.date = new Date(2018, 6, 23);
     component.ngOnChanges();
     fixture.detectChanges();
   });
@@ -35,8 +35,8 @@ describe('Component: NbCalendarYearPicker', () => {
     expect(componentEl.querySelector('nb-calendar-picker')).toBeDefined();
   });
 
-  it('should fire valueChange when click on a year', done => {
-    component.valueChange.subscribe(done);
+  it('should fire monthChange when click on a year', done => {
+    component.yearChange.subscribe(done);
     componentEl.querySelector('nb-calendar-picker')
       .dispatchEvent(new CustomEvent('select'));
   });

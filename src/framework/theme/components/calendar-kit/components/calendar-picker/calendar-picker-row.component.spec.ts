@@ -60,13 +60,13 @@ describe('Component: NbCalendarPickerRow', () => {
     expect(cell.date).toBe(date);
   });
 
-  it('should provide activeMonth for cell', () => {
+  it('should provide year for cell', () => {
     const activeMonth = new Date();
-    component.activeMonth = activeMonth;
+    component.visibleDate = activeMonth;
     component.ngOnChanges();
     fixture.detectChanges();
     const cell: NbCalendarDayCellComponent = queryTestCell();
-    expect(cell.activeMonth).toBe(activeMonth);
+    expect(cell.visibleDate).toBe(activeMonth);
   });
 
   it('should provide selectedValue for cell', () => {

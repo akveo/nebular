@@ -37,8 +37,8 @@ describe('Component: NbCalendarMonthPicker', () => {
     expect(component.cellComponent).toBe(NbCalendarMonthCellComponent);
   });
 
-  it('should fire valueChange when cell selected', done => {
-    component.valueChange.subscribe(done);
+  it('should fire monthChange when cell selected', done => {
+    component.monthChange.subscribe(done);
     componentEl.query(By.css('nb-calendar-picker'))
       .nativeElement
       .dispatchEvent(new CustomEvent('select'));

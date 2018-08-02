@@ -15,7 +15,7 @@ import { NbCalendarCell } from '../../model';
     <nb-calendar-picker-row
       *ngFor="let row of data"
       [row]="row"
-      [activeMonth]="activeMonth"
+      [visibleDate]="visibleDate"
       [selectedValue]="selectedValue"
       [component]="cellComponent"
       [min]="min"
@@ -28,7 +28,7 @@ import { NbCalendarCell } from '../../model';
 })
 export class NbCalendarPickerComponent<T> {
   @Input() data: Date[][];
-  @Input() activeMonth: Date;
+  @Input() visibleDate: Date;
   @Input() selectedValue: T;
   @Input() cellComponent: Type<NbCalendarCell<T>>;
   @Input() min: Date;

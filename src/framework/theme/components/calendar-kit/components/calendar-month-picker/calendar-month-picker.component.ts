@@ -18,7 +18,7 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
       [min]="min"
       [max]="max"
       [filter]="filter"
-      [selectedValue]="value"
+      [selectedValue]="month"
       [cellComponent]="cellComponent"
       (select)="onSelect($event)">
     </nb-calendar-picker>
@@ -27,15 +27,11 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 })
 export class NbCalendarMonthPickerComponent implements OnInit {
 
-  @Input() value: Date;
-
   @Input() min: Date;
 
   @Input() max: Date;
 
   @Input() filter: (Date) => boolean;
-
-  @Output() valueChange: EventEmitter<Date> = new EventEmitter();
 
   @Input('cellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<any>>) {
@@ -44,6 +40,10 @@ export class NbCalendarMonthPickerComponent implements OnInit {
     }
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarMonthCellComponent;
+
+  @Input() month: Date;
+
+  @Output() monthChange: EventEmitter<Date> = new EventEmitter();
 
   months: Date[][];
 
@@ -57,10 +57,10 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
 
   onSelect(month: Date) {
-    this.valueChange.emit(month);
+    this.monthChange.emit(month);
   }
 
   private createMonthDateByIndex(i: number): Date {
-    return new Date(this.value.getFullYear(), i, this.value.getDate());
+    return new Date(this.month.getFullYear(), i, this.month.getDate());
   }
 }

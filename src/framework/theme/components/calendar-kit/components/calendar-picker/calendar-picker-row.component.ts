@@ -35,7 +35,7 @@ import { NbCalendarCell } from '../../model';
 export class NbCalendarPickerRowComponent<T> implements OnChanges {
   @Input() row: Date[];
   @Input() selectedValue: T;
-  @Input() activeMonth: Date;
+  @Input() visibleDate: Date;
   @Input() component: Type<NbCalendarCell<T>>;
   @Input() min: Date;
   @Input() max: Date;
@@ -60,7 +60,7 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
   }
 
   private patchWithContext(component: NbCalendarCell<T>, date: Date) {
-    component.activeMonth = this.activeMonth;
+    component.visibleDate = this.visibleDate;
     component.selectedValue = this.selectedValue;
     component.date = date;
     component.min = this.min;

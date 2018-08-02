@@ -20,7 +20,8 @@ const defaultYearCount = 20;
       [min]="min"
       [max]="max"
       [filter]="filter"
-      [selectedValue]="activeYear"
+      [selectedValue]="date"
+      [visibleDate]="year"
       [cellComponent]="cellComponent"
       (select)="onSelect($event)">
     </nb-calendar-picker>
@@ -29,9 +30,7 @@ const defaultYearCount = 20;
 })
 export class NbCalendarYearPickerComponent implements OnChanges {
 
-  @Input() activeYear: Date;
-
-  @Input() value: Date;
+  @Input() date: Date;
 
   @Input() min: Date;
 
@@ -47,7 +46,9 @@ export class NbCalendarYearPickerComponent implements OnChanges {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarYearCellComponent;
 
-  @Output() valueChange = new EventEmitter<Date>();
+  @Input() year: Date;
+
+  @Output() yearChange = new EventEmitter<Date>();
 
   years: Date[][];
 
@@ -56,17 +57,17 @@ export class NbCalendarYearPickerComponent implements OnChanges {
   }
 
   initYears() {
-    const selectedYear = this.value.getFullYear();
+    const selectedYear = this.year.getFullYear();
     const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
     const years = range(defaultYearCount).map(i => this.createYearDateByIndex(i + startYear));
     this.years = batch(years, 4);
   }
 
   onSelect(year) {
-    this.valueChange.emit(year);
+    this.yearChange.emit(year);
   }
 
   private createYearDateByIndex(i: number): Date {
-    return new Date(i, this.activeYear.getMonth(), this.activeYear.getDate());
+    return new Date(i, this.year.getMonth(), this.year.getDate());
   }
 }
