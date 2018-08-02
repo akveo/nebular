@@ -113,7 +113,7 @@
       opacity: 0.3;
     }
 
-    &:not(.empty, .disabled):hover {
+    &:not(.disabled):not(.empty):hover {
       background: nb-theme(calendar-hovered-item);
       color: nb-theme(color-white);
       font-weight: nb-theme(font-weight-bold);
