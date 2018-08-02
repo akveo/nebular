@@ -105,11 +105,15 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
-import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
 import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
 import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
-import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
 import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import { NbCalendarCustomDayCellComponent } from './calendar/calendar-custom-day-cell.component';
+import { NbCalendarCustomMonthCellComponent } from './calendar/calendar-custom-month-cell.component';
+import { NbCalendarCustomYearCellComponent } from './calendar/calendar-custom-year-cell.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 
 
 export const routes: Routes = [
@@ -187,8 +191,24 @@ export const routes: Routes = [
             component: NbCalendarRangeShowcaseComponent,
           },
           {
-            path: 'calendar-range-bounding-month.component',
-            component: NbCalendarRangeBoundingMonthComponent,
+            path: 'calendar-custom-day-cell.component',
+            component: NbCalendarCustomDayCellComponent,
+          },
+          {
+            path: 'calendar-custom-month-cell.component',
+            component: NbCalendarCustomMonthCellComponent,
+          },
+          {
+            path: 'calendar-custom-year-cell.component',
+            component: NbCalendarCustomYearCellComponent,
+          },
+          {
+            path: 'calendar-filter.component',
+            component: NbCalendarFilterComponent,
+          },
+          {
+            path: 'calendar-min-max.component',
+            component: NbCalendarMinMaxComponent,
           },
         ],
       },

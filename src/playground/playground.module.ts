@@ -130,10 +130,14 @@ import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
 import { NbAlertTestComponent } from './alert/alert-test.component';
 import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
-import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
-import { NbCalendarRangeBoundingMonthComponent } from './calendar/calendar-range-without-bounding-month.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import { NbCalendarCustomDayCellComponent } from './calendar/calendar-custom-day-cell.component';
+import { NbCalendarCustomMonthCellComponent } from './calendar/calendar-custom-month-cell.component';
+import { NbCalendarCustomYearCellComponent } from './calendar/calendar-custom-year-cell.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -253,10 +257,14 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbAlertSizesComponent,
   NbAlertTestComponent,
   NbCalendarShowcaseComponent,
-  NbCalendarRangeShowcaseComponent,
   NbCalendarBoundingMonthComponent,
-  NbCalendarRangeBoundingMonthComponent,
+  NbCalendarRangeShowcaseComponent,
   NbCalendarStartViewComponent,
+  NbCalendarCustomDayCellComponent,
+  NbCalendarCustomMonthCellComponent,
+  NbCalendarCustomYearCellComponent,
+  NbCalendarFilterComponent,
+  NbCalendarMinMaxComponent,
 ];
 
 

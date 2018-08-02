@@ -7,16 +7,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-showcase',
+  selector: 'nb-calendar-custom-year-cell',
   template: `
     <h1>Selected date: {{ date | date }}</h1>
-    <nb-calendar [(date)]="date">
+    <nb-calendar [(date)]="date" startView="year">
     </nb-calendar>
   `,
 })
-export class NbCalendarShowcaseComponent {
+export class NbCalendarCustomYearCellComponent {
   date = new Date();
-  min = new Date(2018, 6, 15);
-  max = new Date(2018, 8, 15);
-  filter = date => date.getDay() !== 0 && date.getDay() !== 6;
 }
