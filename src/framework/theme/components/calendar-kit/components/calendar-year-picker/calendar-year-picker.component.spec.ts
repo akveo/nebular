@@ -6,6 +6,7 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { NbCalendarYearPickerComponent } from './calendar-year-picker.component';
 
@@ -31,23 +32,13 @@ describe('Component: NbCalendarYearPicker', () => {
     fixture.detectChanges();
   });
 
-  it('should contain header and body', () => {
-    expect(componentEl.querySelector('nb-calendar-pageable-navigation')).toBeDefined();
-    expect(componentEl.querySelector('.body')).toBeDefined();
+  it('should contain calendar picker', () => {
+    expect(componentEl.querySelector('nb-calendar-picker')).toBeDefined();
   });
 
-  it('should render 20 years', () => {
-    expect(componentEl.querySelectorAll('nb-calendar-year-cell').length).toBe(20);
-  });
-
-  it('should fire valueChange when click on a year', () => {
-    const yearEls = componentEl.querySelectorAll('nb-calendar-year-cell');
-    yearEls[6].dispatchEvent(new Event('click'));
-
-    component.valueChange.subscribe(date => {
-      expect(date.getFullYear()).toBe(2014);
-      expect(date.getMonth()).toBe(6);
-      expect(date.getDate()).toBe(23);
-    });
+  it('should fire valueChange when click on a year', done => {
+    component.valueChange.subscribe(done);
+    componentEl.querySelector('nb-calendar-picker')
+      .dispatchEvent(new CustomEvent('select'));
   });
 });

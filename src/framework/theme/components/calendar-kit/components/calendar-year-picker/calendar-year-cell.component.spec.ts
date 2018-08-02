@@ -38,4 +38,45 @@ describe('Component: NbCalendarYearCell', () => {
     fixture.detectChanges();
     expect(componentEl.classList).toContain('selected');
   });
+
+  it('should contain cell class', () => {
+    expect(componentEl.classList).toContain('cell');
+  });
+
+  it('should fire select on click', () => {
+    const date = new Date();
+    component.date = date;
+    component.selectedValue = new Date();
+    fixture.detectChanges();
+    component.select.subscribe(e => expect(e).toBe(date));
+    componentEl.dispatchEvent(new Event('click'));
+    expect(componentEl.classList).toContain('selected');
+  });
+
+  it('should contain disabled class if fully out of min-max range', () => {
+    component.date = new Date(2017, 7, 1);
+    component.selectedValue = new Date();
+    component.min = new Date(2018, 5, 1);
+    component.max = new Date(2018, 10, 1);
+    fixture.detectChanges();
+    expect(componentEl.classList).toContain('disabled');
+  });
+
+  it('should not contain disabled class if partially out of min-max range', () => {
+    component.date = new Date(2018, 1, 1);
+    component.selectedValue = new Date();
+    component.min = new Date(2018, 1, 15);
+    component.max = new Date(2018, 10, 1);
+    fixture.detectChanges();
+    expect(componentEl.classList).not.toContain('disabled');
+  });
+
+  it('should not contain disabled class if fully in min-max range', () => {
+    component.date = new Date(2018, 5, 1);
+    component.selectedValue = new Date();
+    component.min = new Date(2018, 1, 15);
+    component.max = new Date(2018, 10, 1);
+    fixture.detectChanges();
+    expect(componentEl.classList).not.toContain('disabled');
+  });
 });

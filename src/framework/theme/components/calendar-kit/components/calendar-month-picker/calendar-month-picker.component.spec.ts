@@ -4,28 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
 import { NbLocaleService } from '../../services';
+import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 
-@Component({
-  selector: 'nb-calendar-month-picker-test',
-  template: `
-    <nb-calendar-year-picker [value]="value">
-     <span *nbCalendarMonth calendar-month-cell></span>
-    </nb-calendar-year-picker>
-  `,
-})
-export class NbCalendarMonthPickerTestComponent {
-  value = new Date();
-}
 
 describe('Component: NbCalendarMonthPicker', () => {
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   let fixture: ComponentFixture<NbCalendarMonthPickerComponent>;
   let component: NbCalendarMonthPickerComponent;
-  let componentEl: HTMLElement;
+  let componentEl: DebugElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -35,50 +27,21 @@ describe('Component: NbCalendarMonthPicker', () => {
     });
     fixture = TestBed.createComponent(NbCalendarMonthPickerComponent);
     component = fixture.componentInstance;
-    componentEl = fixture.debugElement.nativeElement;
+    componentEl = fixture.debugElement;
   });
 
-  it('should contain header and body', () => {
-    expect(componentEl.querySelector('nb-calendar-navigation')).toBeDefined();
-    expect(componentEl.querySelector('.body')).toBeDefined();
+  it('should contain calendar picker', () => {
+    expect(componentEl.query(By.css('nb-calendar-picker'))).toBeDefined();
   });
 
-  it('should render twelve month', async(() => {
-    component.value = new Date(2018, 6, 23);
-    fixture.detectChanges();
-    expect(componentEl.querySelectorAll('nb-calendar-month-cell').length).toBe(12);
-  }));
-
-  it('should render three rows', async(() => {
-    component.value = new Date(2018, 6, 23);
-    fixture.detectChanges();
-    expect(componentEl.querySelectorAll('.chunk-row').length).toBe(3);
-  }));
-
-  it('should render four month for each row', () => {
-    [].forEach.call(componentEl.querySelectorAll('.chunk-row'), row => {
-      expect(row.length).toBe(4);
-    });
+  it('should provide default cell component', () => {
+    expect(component.cellComponent).toBe(NbCalendarMonthCellComponent);
   });
 
-  it('should render months with correct labels', () => {
-    const monthEls = componentEl.querySelectorAll('nb-calendar-month-cell');
-    const months = [].map.call(monthEls, month => month.textContent);
-    months.forEach((month, i) => {
-      expect(month).toContain(monthNames[i]);
-    });
-  });
-
-  it('should fire valueChange when click on a month', () => {
-    component.value = new Date(2018, 6, 23);
-    fixture.detectChanges();
-    const monthEls = componentEl.querySelectorAll('nb-calendar-month-cell');
-    monthEls[6].dispatchEvent(new Event('click'));
-
-    component.valueChange.subscribe(date => {
-      expect(date.getFullYear()).toBe(2018);
-      expect(date.getMonth()).toBe(6);
-      expect(date.getDate()).toBe(23);
-    });
-  });
+  it('should fire valueChange when cell selected', done => {
+    component.valueChange.subscribe(done);
+    componentEl.query(By.css('nb-calendar-picker'))
+      .nativeElement
+      .dispatchEvent(new CustomEvent('select'));
+  })
 });
