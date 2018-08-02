@@ -33,6 +33,10 @@ export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
     return this.selectedValue && NbDateTimeUtil.isSameMonth(this.date, this.selectedValue);
   }
 
+  @HostBinding('class.today') get today(): boolean {
+    return this.date && NbDateTimeUtil.isSameMonth(this.date, new Date());
+  }
+
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
   }

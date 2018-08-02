@@ -27,6 +27,7 @@
     width: nb-theme(calendar-year-cell-width);
     height: nb-theme(calendar-year-cell-height);
     border-radius: nb-theme(calendar-border-radius);
+    margin: 1px;
     cursor: pointer;
 
     &.empty, &.disabled {
@@ -38,8 +39,15 @@
       opacity: 0.3;
     }
 
-    &.selected {
+    &.today {
       background: nb-theme(calendar-selected-item);
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    &.selected {
+      background: nb-theme(calendar-active-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
     }
 
     &:hover, &:hover:active {
@@ -62,6 +70,7 @@
     width: nb-theme(calendar-month-cell-width);
     height: nb-theme(calendar-month-cell-height);
     border-radius: nb-theme(calendar-border-radius);
+    margin: 1px;
     cursor: pointer;
 
     &.empty, &.disabled {
@@ -73,8 +82,15 @@
       opacity: 0.3;
     }
 
-    &.selected {
+    &.today {
       background: nb-theme(calendar-selected-item);
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    &.selected {
+      background: nb-theme(calendar-active-item);
+      color: nb-theme(color-white);
+      font-weight: nb-theme(font-weight-bold);
     }
 
     &:hover, &:hover:active {

@@ -30,6 +30,10 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
     return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue);
   }
 
+  @HostBinding('class.today') get today(): boolean {
+    return this.date && NbDateTimeUtil.isSameYear(this.date, new Date());
+  }
+
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
   }
