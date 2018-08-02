@@ -68,7 +68,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   weeks: Date[][];
 
-  constructor(private monthModel: NbCalendarMonthModelService<T>) {
+  constructor(private monthModel: NbCalendarMonthModelService) {
   }
 
   ngOnChanges({ activeMonth }: SimpleChanges) {

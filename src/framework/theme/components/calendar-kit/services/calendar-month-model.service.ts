@@ -7,16 +7,17 @@
 import { Injectable } from '@angular/core';
 
 import { NbDateTimeUtil } from './date-time-util';
-import { batch } from '../helpers';
 import { NbLocaleService } from './locale.service';
+import { batch } from '../helpers';
+
 
 @Injectable()
-export class NbCalendarMonthModelService<T> {
+export class NbCalendarMonthModelService {
 
   constructor(protected locale: NbLocaleService) {
   }
 
-  createDaysGrid(activeMonth: Date, boundingMonth: boolean): Date[][] {
+  createDaysGrid(activeMonth: Date, boundingMonth: boolean = true): Date[][] {
     const weeks = this.createDates(activeMonth);
     return this.withBoundingMonths(weeks, activeMonth, boundingMonth);
   }
