@@ -39,16 +39,13 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
   @Input() activeMonth: Date;
   @Input() component: Type<NbCalendarCell<T>>;
   @Input() min: Date;
-
   @Input() max: Date;
-
   @Input() filter: (Date) => boolean;
-
   @Output() select: EventEmitter<Date> = new EventEmitter();
 
   @ViewChild(TemplateRef, { read: ViewContainerRef }) containerRef: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver, private renderer: Renderer2) {
+  constructor(private cfr: ComponentFactoryResolver) {
   }
 
   ngOnChanges() {
@@ -56,17 +53,20 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
 
     this.containerRef.clear();
 
-    this.row.forEach(cell => {
+    this.row.forEach((date: Date) => {
       const component = this.containerRef.createComponent(factory);
-      component.instance.activeMonth = this.activeMonth;
-      component.instance.selectedValue = this.selectedValue;
-      component.instance.date = cell;
-      component.instance.select.subscribe(this.select.emit.bind(this.select));
-      component.instance.min = this.min;
-      component.instance.max = this.max;
-      component.instance.filter = this.filter;
+      this.patchWithContext(component.instance, date);
       component.changeDetectorRef.detectChanges();
-      this.renderer.addClass(component.location.nativeElement, 'cell');
     });
+  }
+
+  private patchWithContext(component: NbCalendarCell<T>, date: Date) {
+    component.activeMonth = this.activeMonth;
+    component.selectedValue = this.selectedValue;
+    component.date = date;
+    component.min = this.min;
+    component.max = this.max;
+    component.filter = this.filter;
+    component.select.subscribe(this.select.emit.bind(this.select));
   }
 }
