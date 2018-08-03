@@ -22,6 +22,7 @@
         [max]="max"
         [filter]="filter"
         [visibleDate]="visibleDate"
+        [size]="size"
         [date]="date"
         (dateChange)="dateChange.emit($event)">
       </nb-calendar-day-picker>
@@ -43,6 +44,7 @@
         [min]="min"
         [max]="max"
         [filter]="filter"
+        [size]="size"
         [year]="visibleDate"
         (yearChange)="setVisibleDate($event); setViewMode(ViewMode.MONTH)">
       </nb-calendar-year-picker>
@@ -58,10 +60,11 @@
 
       <nb-calendar-month-picker
         [cellComponent]="monthCellComponent"
-        [month]="visibleDate"
         [min]="min"
         [max]="max"
         [filter]="filter"
+        [size]="size"
+        [month]="visibleDate"
         (monthChange)="setVisibleDate($event); setViewMode(ViewMode.DATE)">
       </nb-calendar-month-picker>
 

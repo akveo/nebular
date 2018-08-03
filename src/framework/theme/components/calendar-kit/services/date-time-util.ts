@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { range } from '@nebular/theme/components/calendar-kit/helpers';
+import { range } from '../helpers';
 
 export namespace NbDateTimeUtil {
   export const DAYS_IN_WEEK: number = 7;

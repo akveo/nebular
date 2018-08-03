@@ -4,9 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, Type } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  Output,
+  Type,
+} from '@angular/core';
 import { batch, range } from '../../helpers';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
 
 
@@ -46,9 +55,21 @@ export class NbCalendarYearPickerComponent implements OnChanges {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarYearCellComponent;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Input() year: Date;
 
   @Output() yearChange = new EventEmitter<Date>();
+
+  @HostBinding('class.medium')
+  get medium() {
+    return this.size === NbCalendarSize.MEDIUM;
+  }
+
+  @HostBinding('class.large')
+  get large() {
+    return this.size === NbCalendarSize.LARGE;
+  }
 
   years: Date[][];
 

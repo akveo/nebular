@@ -6,11 +6,7 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import {
-  NbCalendarViewMode,
-  NbDateTimeUtil,
-  NbCalendarCell,
-} from '../calendar-kit';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 
 
@@ -32,8 +28,9 @@ export interface NbCalendarRange {
       [boundingMonth]="boundingMonth"
       [dayCellComponent]="dayCellComponent"
       [monthCellComponent]="monthCellComponent"
-      [yearCellComponent]="yearCellComponent">
-    </nb-base-calendar>
+      [yearCellComponent]="yearCellComponent"
+      [size]="size"
+    ></nb-base-calendar>
   `,
 })
 export class NbCalendarRangeComponent {
@@ -58,6 +55,8 @@ export class NbCalendarRangeComponent {
   @Input() max: Date;
 
   @Input() filter: (Date) => boolean;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Input() range: NbCalendarRange;
 

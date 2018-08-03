@@ -6,9 +6,16 @@
 
 @mixin nb-calendar-theme() {
 
-  nb-base-calendar nb-card {
-    width: nb-theme(calendar-width);
-    height: nb-theme(calendar-height);
+  nb-base-calendar {
+    &.medium nb-card {
+      width: nb-theme(calendar-width);
+      height: nb-theme(calendar-height);
+    }
+
+    &.large nb-card {
+      width: nb-theme(calendar-large-width);
+      height: nb-theme(calendar-large-height);
+    }
 
     nb-card-body {
       & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {

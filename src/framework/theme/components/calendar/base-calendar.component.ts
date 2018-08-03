@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
 
 
 @Component({
@@ -33,7 +33,19 @@ export class NbBaseCalendarComponent<T> {
 
   @Input() yearCellComponent: Type<NbCalendarCell<T>>;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
+
+  @HostBinding('class.medium')
+  get medium() {
+    return this.size === NbCalendarSize.MEDIUM;
+  }
+
+  @HostBinding('class.large')
+    get large() {
+    return this.size === NbCalendarSize.LARGE;
+  }
 
   ViewMode = NbCalendarViewMode;
 

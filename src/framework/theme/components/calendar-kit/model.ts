@@ -17,6 +17,11 @@ export enum NbCalendarViewMode {
   DATE = 'date',
 }
 
+export enum NbCalendarSize {
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+
 export interface NbCalendarCell<T> {
   date: Date;
   select: EventEmitter<Date>;

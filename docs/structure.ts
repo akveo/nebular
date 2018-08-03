@@ -174,8 +174,6 @@ export const structure = [
         source: [
           'NbCalendarComponent',
           'NbCalendarRangeComponent',
-          'NbCalendarYearPickerComponent',
-          'NbCalendarMonthPickerComponent',
         ],
       },
       {

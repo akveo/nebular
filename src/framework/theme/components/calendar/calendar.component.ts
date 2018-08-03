@@ -6,9 +6,15 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarViewMode } from '../calendar-kit';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
 
 
+/**
+ * Calendar component provides capability to choose date.
+ *
+ * Basic usage example:
+ * @stacked-example(Showcase, calendar/calendar-showcase.component)
+ * */
 @Component({
   selector: 'nb-calendar',
   template: `
@@ -22,6 +28,7 @@ import { NbCalendarCell, NbCalendarViewMode } from '../calendar-kit';
       [dayCellComponent]="dayCellComponent"
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
+      [size]="size"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -45,6 +52,8 @@ export class NbCalendarComponent<T> {
   @Input() monthCellComponent: Type<NbCalendarCell<T>>;
 
   @Input() yearCellComponent: Type<NbCalendarCell<T>>;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 }

@@ -4,9 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+  Type,
+} from '@angular/core';
 import { batch, range } from '../../helpers';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 
 
@@ -41,9 +50,21 @@ export class NbCalendarMonthPickerComponent implements OnInit {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarMonthCellComponent;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Input() month: Date;
 
   @Output() monthChange: EventEmitter<Date> = new EventEmitter();
+
+  @HostBinding('class.medium')
+  get medium() {
+    return this.size === NbCalendarSize.MEDIUM;
+  }
+
+  @HostBinding('class.large')
+  get large() {
+    return this.size === NbCalendarSize.LARGE;
+  }
 
   months: Date[][];
 

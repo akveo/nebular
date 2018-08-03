@@ -8,6 +8,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   Output,
@@ -17,7 +18,7 @@ import {
 
 import { NbCalendarMonthModelService } from '../../services';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 
 
 @Component({
@@ -62,9 +63,21 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarDayCellComponent;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Input() date: T;
 
   @Output() dateChange = new EventEmitter<Date>();
+
+  @HostBinding('class.medium')
+  get medium() {
+    return this.size === NbCalendarSize.MEDIUM;
+  }
+
+  @HostBinding('class.large')
+  get large() {
+    return this.size === NbCalendarSize.LARGE;
+  }
 
   weeks: Date[][];
 

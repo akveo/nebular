@@ -138,6 +138,7 @@ import { NbCalendarCustomMonthCellComponent } from './calendar/calendar-custom-m
 import { NbCalendarCustomYearCellComponent } from './calendar/calendar-custom-year-cell.component';
 import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -265,6 +266,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarCustomYearCellComponent,
   NbCalendarFilterComponent,
   NbCalendarMinMaxComponent,
+  NbCalendarSizeComponent,
 ];
 
 
