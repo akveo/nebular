@@ -14,7 +14,7 @@ import { NbCalendarCell } from '../../model';
   selector: 'nb-calendar-day-cell',
   template: '{{ day }}',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(click)': 'onClick()', 'class': 'cell' },
+  host: { '(click)': 'onClick()', 'class': 'day-cell' },
 })
 export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
 

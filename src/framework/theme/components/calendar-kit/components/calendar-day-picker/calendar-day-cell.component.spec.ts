@@ -25,7 +25,7 @@ describe('Component: NbCalendarDayCell', () => {
   });
 
   it('should contain cell class', () => {
-    expect(componentEl.classList).toContain('cell');
+    expect(componentEl.classList).toContain('day-cell');
   });
 
   it('should render date', () => {

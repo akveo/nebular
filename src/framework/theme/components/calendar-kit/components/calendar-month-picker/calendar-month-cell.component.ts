@@ -13,7 +13,7 @@ import { NbCalendarCell } from '../../model';
   selector: 'nb-calendar-month-cell',
   template: `{{ month }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(click)': 'onClick()', 'class': 'cell' },
+  host: { '(click)': 'onClick()', 'class': 'month-cell' },
 })
 export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
   @Input() date: Date;

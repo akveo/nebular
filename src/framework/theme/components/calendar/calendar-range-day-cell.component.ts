@@ -8,7 +8,7 @@ import { NbCalendarRange } from './calendar-range.component';
   selector: 'nb-calendar-range-day-cell',
   template: `
     <div
-      class="cell"
+      class="day-cell"
       [class.today]="today"
       [class.selected]="selected"
       [class.bounding-month]="boundingMonth"

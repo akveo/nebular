@@ -24,7 +24,7 @@
     }
   }
 
-  nb-calendar-day-picker .cell {
+  nb-calendar-day-picker .day-cell {
     margin: 0 1px;
   }
 
@@ -50,7 +50,7 @@
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
 
-      .cell {
+      .day-cell {
         margin-left: 0;
       }
     }
@@ -60,7 +60,7 @@
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
 
-      .cell {
+      .day-cell {
         margin-right: 0;
       }
     }

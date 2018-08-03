@@ -40,7 +40,7 @@ describe('Component: NbCalendarMonthCell', () => {
   });
 
   it('should contain cell class', () => {
-    expect(componentEl.classList).toContain('cell');
+    expect(componentEl.classList).toContain('month-cell');
   });
 
   it('should fire select on click', () => {

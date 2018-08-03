@@ -40,7 +40,7 @@ describe('Component: NbCalendarYearCell', () => {
   });
 
   it('should contain cell class', () => {
-    expect(componentEl.classList).toContain('cell');
+    expect(componentEl.classList).toContain('year-cell');
   });
 
   it('should fire select on click', () => {
