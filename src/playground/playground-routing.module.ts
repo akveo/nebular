@@ -157,6 +157,7 @@ import { NbCalendarCustomDayCellShowcaseComponent } from './calendar/calendar-cu
 import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 
 
 export const routes: Routes = [
@@ -310,6 +311,15 @@ export const routes: Routes = [
           {
             path: 'calendar-size.component',
             component: NbCalendarSizeComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar-kit',
+        children: [
+          {
+            path: 'calendar-kit-full-calendar.component',
+            component: NbCalendarKitFullCalendarShowcaseComponent,
           },
         ],
       },

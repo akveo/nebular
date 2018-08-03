@@ -30,13 +30,13 @@ export class NbLocaleService {
     return getLocaleFirstDayOfWeek(this.locale);
   }
 
-  getMonthName(date: Date): string {
+  getMonthName(date: Date, style: TranslationWidth = TranslationWidth.Abbreviated): string {
     const index: number = date.getMonth();
-    return this.getMonthNameByIndex(index);
+    return this.getMonthNameByIndex(index, style);
   }
 
-  getMonthNameByIndex(index: number): string {
-    return getLocaleMonthNames(this.locale, FormStyle.Format, TranslationWidth.Abbreviated)[index];
+  getMonthNameByIndex(index: number, style: TranslationWidth = TranslationWidth.Abbreviated): string {
+    return getLocaleMonthNames(this.locale, FormStyle.Format, style)[index];
   }
 
   getDayOfWeekNames(): string[] {

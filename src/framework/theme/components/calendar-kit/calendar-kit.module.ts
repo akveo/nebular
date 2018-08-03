@@ -51,6 +51,13 @@ const PIPES = [
   NbCalendarDatePipe,
 ];
 
+/**
+ * `NbCalendarKitModule` is a module that contains multiple useful components for building custom calendars.
+ * So if you think our calendars is not enough powerful for you just use calendar-kit and build your own calendar!
+ *
+ * For example you can easily build full calendar:
+ * @stacked-example(Full calendar, calendar-kit/calendar-kit-full-calendar.component)
+ * */
 @NgModule({
   imports: [NbSharedModule],
   exports: [...COMPONENTS, ...PIPES],

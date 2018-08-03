@@ -193,6 +193,10 @@ import {
 import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import {
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
+} from './calendar-kit/calendar-kit-full-calendar.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -375,6 +379,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarFilterComponent,
   NbCalendarMinMaxComponent,
   NbCalendarSizeComponent,
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
 ];
 
 @NgModule({

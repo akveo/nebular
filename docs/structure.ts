@@ -351,6 +351,7 @@ export const structure = [
         icon: 'calendar.svg',
         source: [
           'NbCalendarComponent',
+          'NbCalendarKitModule',
         ],
       },
     ],
