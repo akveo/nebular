@@ -104,8 +104,8 @@
 
   nb-calendar-day-picker .cell {
     border-radius: nb-theme(calendar-border-radius);
-    min-width: nb-theme(calendar-cell-width);
-    min-height: nb-theme(calendar-cell-height);
+    width: nb-theme(calendar-cell-width);
+    height: nb-theme(calendar-cell-height);
 
     &.today {
       background: nb-theme(calendar-today-item-bg);

@@ -28,8 +28,8 @@
 
   @include nb-layout-theme();
   @include nb-sidebar-theme();
-  @include nb-calendar-theme();
   @include nb-calendar-kit-theme();
+  @include nb-calendar-theme();
   @include nb-card-theme();
   @include nd-reveal-card-theme();
   @include nd-flip-card-theme();

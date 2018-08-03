@@ -4,25 +4,23 @@ import { NbCalendarCell, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarRange } from './calendar-range.component';
 
 
-// TODO refactor bindings
-// TODO refactor styles
 @Component({
   selector: 'nb-calendar-range-day-cell',
-  styles: [`
-    :host {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1px;
-    }
-
-    :host:not(.empty) {
-      cursor: pointer;
-    }
-  `],
-  template: '{{ day }}',
+  template: `
+    <div
+      class="cell"
+      [class.today]="today"
+      [class.selected]="selected"
+      [class.bounding-month]="boundingMonth"
+      [class.start]="start"
+      [class.end]="end"
+      [class.in-range]="inRange"
+      [class.disabled]="disabled">
+      {{ day }}
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(click)': 'onClick()', 'class': 'cell' },
+  host: { '(click)': 'onClick()', 'class': 'range-cell' },
 })
 export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
   @Input() date: Date;
@@ -39,15 +37,15 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
 
   @Output() select: EventEmitter<Date> = new EventEmitter();
 
-  @HostBinding('class.today') get today(): boolean {
+  get today(): boolean {
     return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
   }
 
-  @HostBinding('class.bounding-month') get boundingMonth(): boolean {
+  get boundingMonth(): boolean {
     return this.date && this.visibleDate && !NbDateTimeUtil.isSameMonth(this.date, this.visibleDate);
   }
 
-  @HostBinding('class.selected') get selected(): boolean {
+  get selected(): boolean {
     return this.date && this.selectedValue
       && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.end;
   }
