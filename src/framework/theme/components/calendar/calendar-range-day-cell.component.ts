@@ -37,6 +37,22 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
 
   @Output() select: EventEmitter<Date> = new EventEmitter();
 
+  @HostBinding('class.in-range') get inRange(): boolean {
+    return this.date && this.selectedValue
+      && (this.selectedValue.start && NbDateTimeUtil.compareDates(this.date, this.selectedValue.start) >= 0)
+      && (this.selectedValue.end && NbDateTimeUtil.compareDates(this.date, this.selectedValue.end) <= 0);
+  }
+
+  @HostBinding('class.start') get start(): boolean {
+    return this.date && this.selectedValue && this.selectedValue.end
+      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start));
+  }
+
+  @HostBinding('class.end') get end(): boolean {
+    return this.date && this.selectedValue &&
+      (this.selectedValue.end && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.end));
+  }
+
   get today(): boolean {
     return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
   }
@@ -50,27 +66,11 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
       && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.end;
   }
 
-  @HostBinding('class.start') get start(): boolean {
-    return this.date && this.selectedValue && this.selectedValue.end
-      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start));
-  }
-
-  @HostBinding('class.end') get end(): boolean {
-    return this.date && this.selectedValue &&
-      (this.selectedValue.end && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.end));
-  }
-
-  @HostBinding('class.empty') get empty(): boolean {
+  get empty(): boolean {
     return !this.date;
   }
 
-  @HostBinding('class.in-range') get inRange(): boolean {
-    return this.date && this.selectedValue
-      && (this.selectedValue.start && NbDateTimeUtil.compareDates(this.date, this.selectedValue.start) > 0)
-      && (this.selectedValue.end && NbDateTimeUtil.compareDates(this.date, this.selectedValue.end) < 0);
-  }
-
-  @HostBinding('class.disabled') get disabled(): boolean {
+  get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
   }
 

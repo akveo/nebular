@@ -21,7 +21,7 @@ import { NbCalendarDayCellComponent } from '@nebular/theme';
       <span>{{ (day + 100) * day }}$</span>
     </div>
   `,
-  host: { '(click)': 'onClick()', 'class': 'cell' },
+  host: { '(click)': 'onClick()', 'class': 'day-cell' },
 })
 export class NbCalendarCustomDayCellComponent extends NbCalendarDayCellComponent {
 }
