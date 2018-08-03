@@ -4,11 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {
-  distinctUntilChanged,
   filter,
   map,
   publishBehavior,
@@ -58,9 +57,6 @@ export class NgdPageComponent implements OnDestroy, OnInit {
         filter((params: any) => params.subPage),
         map((params: any) => {
           const slag = `${params.page}_${params.subPage}`;
-
-          this.window.scrollTo(0, 0);
-
           return this.structureService.findPageBySlag(this.structureService.getPreparedStructure(), slag);
         }),
         filter(item => item),

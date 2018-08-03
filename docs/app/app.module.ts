@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { InjectionToken, NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -16,22 +17,20 @@ import {
   NbMenuModule,
   NbTabsetModule,
   NbProgressBarModule,
-  NbCheckboxModule, 
-  NbSearchModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
+import { NgdThemeModule } from './@theme/theme.module';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
-
 import { structure  } from '../structure';
+import { DOCS, STRUCTURE } from './app.options';
 const docs = require('../output.json');
-
-export const STRUCTURE = new InjectionToken<any>('Docs Structure');
-export const DOCS = new InjectionToken<any>('Docs Structure');
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NbSidebarModule,
@@ -41,9 +40,10 @@ export const DOCS = new InjectionToken<any>('Docs Structure');
     NbCheckboxModule,
     NbProgressBarModule,
     NbMenuModule.forRoot(),
-    NbThemeModule.forRoot({ name: '' }),
+    NbThemeModule.forRoot({ name: 'default' }),
+    NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: false }),
   ],
   declarations: [
     NgdAppComponent,

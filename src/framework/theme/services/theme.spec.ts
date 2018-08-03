@@ -120,8 +120,10 @@ describe('theme-service', () => {
       expect(current.bg).toEqual('#ffffff');
 
       themeService.changeTheme('cosmic');
-
       expect(current.bg).toEqual('#3d3780');
+
+      themeService.changeTheme('corporate');
+      expect(current.bg).toEqual('#ffffff');
 
     } finally {
       subscription.unsubscribe();

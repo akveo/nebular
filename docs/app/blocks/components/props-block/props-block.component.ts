@@ -13,19 +13,22 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     <ngd-prop-block *ngIf="inputs.length > 0"
                     [properties]="inputs"
                     name="Inputs"
-                    [slag]="slag">
+                    [slag]="slag"
+                    class="widget-block">
     </ngd-prop-block>
 
     <ngd-prop-block *ngIf="outputs.length > 0"
                     [properties]="outputs"
                     name="Outputs"
-                    [slag]="slag">
+                    [slag]="slag"
+                    class="widget-block">
     </ngd-prop-block>
 
     <ngd-prop-block *ngIf="props.length > 0"
                     [properties]="props"
                     name="Properties"
-                    [slag]="slag">
+                    [slag]="slag"
+                    class="widget-block">
     </ngd-prop-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

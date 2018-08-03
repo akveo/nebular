@@ -1,0 +1,402 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-chat-theme() {
+
+  nb-chat {
+    font-size: nb-theme(chat-font-size);
+    background: nb-theme(chat-bg);
+    border-radius: nb-theme(chat-border-radius);
+    box-shadow: nb-theme(chat-shadow);
+
+    .header {
+      color: nb-theme(chat-fg-text);
+      padding: nb-theme(chat-padding);
+      border-bottom: 1px solid nb-theme(chat-separator);
+      border-top-left-radius: nb-theme(chat-border-radius);
+      border-top-right-radius: nb-theme(chat-border-radius);
+      font-weight: nb-theme(font-weight-bolder);
+    }
+
+    .scrollable {
+      overflow: auto;
+      flex: 1;
+      @include nb-scrollbars(
+          nb-theme(scrollbar-fg),
+          nb-theme(scrollbar-bg),
+          nb-theme(scrollbar-width));
+    }
+
+    .messages {
+      padding: nb-theme(chat-padding);
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+    }
+
+    .no-messages {
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    nb-chat-message {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: row;
+
+      .message {
+        flex: 1;
+      }
+
+      .avatar {
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: nb-theme(chat-message-avatar-bg);
+        background-position: center;
+        background-size: 3.4rem 2.6rem;
+        background-repeat: no-repeat;
+        width: 2.5rem;
+        height: 2.5rem;
+        text-align: center;
+        line-height: 2.5rem;
+        font-size: 0.875rem;
+        color: white;
+      }
+
+      nb-chat-message-text {
+
+        display: flex;
+        flex-direction: column;
+
+        .sender {
+          font-size: 0.875rem;
+          color: nb-theme(chat-message-sender-fg);
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          word-wrap: break-word;
+          word-break: break-all;
+          max-width: 100%;
+          margin-bottom: 0;
+        }
+
+        .text {
+          padding: 1rem;
+          border-radius: 0.5rem;
+        }
+      }
+
+      nb-chat-message-file {
+        display: flex;
+        flex-direction: column;
+
+        a {
+          color: nb-theme(chat-message-file-fg);
+          background: nb-theme(chat-message-file-bg);
+          font-size: 4rem;
+          text-align: center;
+          border: 1px solid nb-theme(chat-message-file-fg);
+          width: 10rem;
+          height: 10rem;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0;
+          border-radius: 0.5rem;
+          &:hover, &:focus {
+            text-decoration: none;
+            color: nb-theme(chat-message-file-fg);
+          }
+          div {
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        nb-chat-message-text {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .message-content-group {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+
+          a {
+            @include nb-ltr(margin-right, 1rem);
+            @include nb-rtl(margin-left, 1rem);
+            margin-bottom: 1rem;
+            width: 5rem;
+            height: 5rem;
+          }
+        }
+      }
+
+      nb-chat-message-quote {
+
+        p.quote {
+          font-style: italic;
+          font-size: 0.875rem;
+          background: nb-theme(chat-message-quote-bg);
+          color: nb-theme(chat-message-quote-fg);
+          padding: 1rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .sender {
+          font-size: 0.875rem;
+          color: nb-theme(chat-message-sender-fg);
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      &.not-reply {
+        .message {
+          @include nb-ltr(margin-left, 0.5rem);
+          @include nb-rtl(margin-right, 0.5rem);
+
+          @include nb-ltr(margin-right, 3rem);
+          @include nb-rtl(margin-left, 3rem);
+        }
+
+        nb-chat-message-text {
+          align-items: flex-start;
+          .text {
+            @include nb-ltr(border-top-left-radius, 0);
+            @include nb-rtl(border-top-right-radius, 0);
+            background: nb-theme(chat-message-bg);
+            color: nb-theme(chat-message-fg);
+          }
+        }
+
+        nb-chat-message-file {
+          align-items: flex-start;
+        }
+      }
+
+      &.reply {
+        flex-direction: row-reverse;
+
+        .message {
+          margin-left: 0;
+
+          @include nb-ltr(margin-right, 0.5rem);
+          @include nb-rtl(margin-left, 0.5rem);
+
+          @include nb-ltr(margin-left, 3rem);
+          @include nb-rtl(margin-right, 3rem);
+        }
+
+        nb-chat-message-text {
+          align-items: flex-end;
+          .sender {
+            @include nb-ltr(text-align, right);
+            @include nb-rtl(text-align, left);
+          }
+
+          .text {
+            @include nb-ltr(border-top-right-radius, 0);
+            @include nb-rtl(border-top-left-radius, 0);
+            background: nb-theme(chat-message-reply-bg);
+            color: nb-theme(chat-message-reply-fg);
+          }
+        }
+
+        nb-chat-message-file {
+          align-items: flex-end;
+        }
+      }
+    }
+
+    nb-chat-form {
+      display: flex;
+      flex-direction: column;
+      padding: nb-theme(chat-padding);
+      border-top: 1px solid nb-theme(chat-separator);
+
+      .message-row {
+        flex-direction: row;
+        display: flex;
+      }
+
+      input {
+        flex: 1;
+        padding: 1.25rem 1.5rem;
+        border-radius: 2rem;
+        border: 1px solid nb-theme(chat-form-border);
+        background: nb-theme(chat-form-bg);
+        color: nb-theme(chat-form-fg);
+        outline: none;
+        box-sizing: border-box;
+
+        &.with-button {
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          @include nb-ltr(border-bottom-right-radius, 0);
+          @include nb-ltr(border-top-right-radius, 0);
+          @include nb-rtl(border-bottom-left-radius, 0);
+          @include nb-rtl(border-top-left-radius, 0);
+        }
+
+        &::placeholder {
+          color: nb-theme(chat-form-placeholder-fg);
+        }
+      }
+
+      button.btn {
+        border-radius: 3rem;
+        @include nb-ltr(border-bottom-left-radius, 0);
+        @include nb-ltr(border-top-left-radius, 0);
+        @include nb-rtl(border-bottom-right-radius, 0);
+        @include nb-rtl(border-top-right-radius, 0);
+        padding: 0 1.5rem;
+
+        &.with-icon {
+          font-size: 3rem;
+          line-height: 1;
+          padding: 0 1.25rem 0 0.875rem;
+          text-align: center;
+        }
+      }
+
+      &.file-over input {
+        border: 1px dashed nb-theme(chat-form-active-border);
+        box-shadow: 0 0 0 4px nb-theme(chat-form-bg);
+        &::placeholder {
+          color: nb-theme(chat-form-fg);
+        }
+      }
+
+      .dropped-files {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+        div {
+          background-size: cover;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 0.5rem;
+          @include nb-ltr(margin-right, 0.5rem);
+          @include nb-rtl(margin-left, 0.5rem);
+          margin-bottom: 0.5rem;
+          border: 1px solid nb-theme(chat-form-fg);
+          text-align: center;
+          line-height: 3rem;
+          font-size: 2rem;
+          color: nb-theme(chat-form-fg);
+          position: relative;
+
+          .remove {
+            position: absolute;
+            right: -0.5rem;
+            top: -0.875rem;
+            font-size: 0.875rem;
+            line-height: 1;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &.xxsmall-chat {
+      height: nb-theme(chat-height-xxsmall);
+    }
+    &.xsmall-chat {
+      height: nb-theme(chat-height-xsmall);
+    }
+    &.small-chat {
+      height: nb-theme(chat-height-small);
+    }
+    &.medium-chat {
+      height: nb-theme(chat-height-medium);
+    }
+    &.large-chat {
+      height: nb-theme(chat-height-large);
+    }
+    &.xlarge-chat {
+      height: nb-theme(chat-height-xlarge);
+    }
+    &.xxlarge-chat {
+      height: nb-theme(chat-height-xxlarge);
+    }
+
+    &.active-chat {
+      .header {
+        background-color: nb-theme(chat-active-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-active-bg);
+      }
+    }
+    &.disabled-chat {
+      .header {
+        background-color: nb-theme(chat-disabled-bg);
+        color: nb-theme(chat-disabled-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-disabled-bg);
+        border: 1px solid nb-theme(chat-form-border);
+        color: nb-theme(chat-disabled-fg);
+      }
+    }
+    &.primary-chat {
+      .header {
+        background-color: nb-theme(chat-primary-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-primary-bg);
+      }
+    }
+    &.info-chat {
+      .header {
+        background-color: nb-theme(chat-info-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-info-bg);
+      }
+    }
+    &.success-chat {
+      .header {
+        background-color: nb-theme(chat-success-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-success-bg);
+      }
+    }
+    &.warning-chat {
+      .header {
+        background-color: nb-theme(chat-warning-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-warning-bg);
+      }
+    }
+    &.danger-chat {
+      .header {
+        background-color: nb-theme(chat-danger-bg);
+        color: nb-theme(chat-fg);
+      }
+      nb-chat-form button.btn {
+        background-color: nb-theme(chat-danger-bg);
+      }
+    }
+  }
+}
+

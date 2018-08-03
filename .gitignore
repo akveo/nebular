@@ -36,6 +36,7 @@ testem.log
 /docs/docs.json
 /docs/output.json
 /docs/assets/examples
+/docs/dist
 
 # e2e
 /e2e/*.js

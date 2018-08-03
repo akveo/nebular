@@ -27,8 +27,11 @@ module.exports = function (config) {
       environment: 'dev'
     },
     reporters: ['spec', 'kjhtml'],
-    specReporter: { suppressSkipped: true },
+    specReporter: {
+      suppressSkipped: true,
+    },
     port: 9876,
+    browserNoActivityTimeout : 60000,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,

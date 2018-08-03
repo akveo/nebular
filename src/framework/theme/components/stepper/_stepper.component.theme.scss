@@ -1,0 +1,86 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-stepper-theme {
+
+  nb-stepper {
+
+    &.horizontal {
+      .header .step {
+        width: nb-theme(stepper-index-size);
+        margin: 0 nb-theme(stepper-index-size) / 2;
+      }
+
+      .header .connector {
+        margin-top: nb-theme(stepper-index-size) / 2;
+      }
+    }
+
+    &.vertical {
+      .header .connector {
+        margin: nb-theme(stepper-index-size) / 2;
+      }
+    }
+
+    .header {
+      .connector {
+        background-color: nb-theme(stepper-fg);
+      }
+
+      .connector-past {
+        background-color: nb-theme(stepper-accent-color);
+      }
+
+      .label {
+        font-size: nb-theme(stepper-label-font-size);
+        font-weight: nb-theme(stepper-label-font-weight);
+        color: nb-theme(stepper-fg);
+      }
+
+      .label-index {
+        width: nb-theme(stepper-index-size);
+        height: nb-theme(stepper-index-size);
+        border-radius: nb-theme(stepper-index-size) / 2;
+        border: 2px solid nb-theme(stepper-fg);
+        color: nb-theme(stepper-fg);
+        font-weight: nb-theme(stepper-label-font-weight);
+
+        .icon {
+          font-size: nb-theme(stepper-completed-icon-size);
+          font-weight: nb-theme(stepper-completed-icon-weight);
+        }
+      }
+
+      .step {
+
+        &.selected {
+          .label-index {
+            border: 2px solid nb-theme(stepper-accent-color);
+            color: nb-theme(stepper-accent-color);
+          }
+          .label {
+            color: nb-theme(stepper-accent-color);
+          }
+        }
+
+        &.completed {
+          .label-index {
+            background-color: nb-theme(stepper-accent-color);
+            border: 2px solid nb-theme(stepper-accent-color);
+            color: nb-theme(stepper-completed-fg);
+          }
+          .label {
+            color: nb-theme(stepper-accent-color);
+          }
+        }
+      }
+    }
+
+    .step-content {
+      padding: nb-theme(stepper-step-padding);
+    }
+  }
+}

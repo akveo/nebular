@@ -24,6 +24,7 @@ const ROLLUP_GLOBALS = {
   'rxjs/operators': 'Rx.operators',
 
   // 3rd party dependencies
+  'intersection-observer': 'intersection-observer',
 
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',

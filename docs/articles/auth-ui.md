@@ -310,9 +310,9 @@ export const routes: Routes = [
 ];
 ```
 
-That's it. Now you can adjust the components the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth strategies.
-<hr class="section-end">
+That's it. Now you can adjust the components in the way you need. Though please make sure to keep the NbAuthService related logic untouched, so that the components may still communicate with the auth strategies.
+<hr>
 
 ## Where to next
 
-- Receiving [user token after authentication](#/docs/auth/getting-user-token)
+- Receiving [user token after authentication](docs/auth/getting-user-token)

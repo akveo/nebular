@@ -7,9 +7,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeWhile, withLatestFrom, map } from 'rxjs/operators';
-import { NbThemeService, NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { NbThemeService, NbMenuItem, NbSidebarService, NbMenuService } from '@nebular/theme';
 
-import { NgdMenuService } from './menu.service';
+import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdPaginationService } from '../@theme/services';
 
 import { NbMediaBreakpoint } from '@nebular/theme';
@@ -31,6 +31,7 @@ export class NgdDocumentationComponent implements OnDestroy {
     private router: Router,
     private themeService: NbThemeService,
     private sidebarService: NbSidebarService,
+    private menuService: NbMenuService,
     private paginationService: NgdPaginationService) {
 
     this.themeService.changeTheme('docs-page');
@@ -54,6 +55,10 @@ export class NgdDocumentationComponent implements OnDestroy {
           this.sidebarService.collapse(this.sidebarTag);
         }
       });
+  }
+
+  collapseMenu() {
+    this.menuService.collapseAll('leftMenu');
   }
 
   ngOnDestroy() {

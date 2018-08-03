@@ -1,7 +1,7 @@
 # Add Into Existing Project
 
 If you don't have any code yet, please consider checking <a href="https://cli.angular.io" target="_blank">Angular CLI</a> documentation for help creating your app.
-In case you want to start based on our ngx-admin starter kit, please check out [Based on Starter Kit (ngx-admin)](#/docs/guides/install-based-on-starter-kit) article.
+In case you want to start based on our ngx-admin starter kit, please check out [Based on Starter Kit (ngx-admin)](docs/guides/install-based-on-starter-kit) article.
 
 <div class="note note-info">
   <div class="note-title">ngx-admin custom components</div>
@@ -48,7 +48,7 @@ import { NbThemeModule } from '@nebular/theme';
 export class AppModule {
 
 ```
-Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](#/docs/auth/conceptsinstall) article).
+Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](docs/auth/conceptsinstall) article).
 <hr>
 
 ## Install Styles
@@ -67,14 +67,14 @@ Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.js
   <div class="note-title">Advanced Theme System configuration</div>
   <div class="note-body">
     In this article we describe the very basic styles installation. If you need more advanced features, like theme variables management, 
-    or even multiple themes switching - check out <a href="#/docs/guides/enable-theme-system">Enabling Theme System</a> article.
+    or even multiple themes switching - check out [Enabling Theme System](docs/guides/enable-theme-system) article.
   </div>
 </div>
 <hr>
 
 ## Create a page
 
-Now, let's create a simple Nebular page (header + sidebar) in your project. We assume that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
+Now, let's create a simple Nebular page (header + sidebar) in your project. We suppose that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
 ```ts
 import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
@@ -125,7 +125,7 @@ And done! At this step, you should have a page with a simple layout on it lookin
   <div class="note-title">Adding into existing page</div>
   <div class="note-body">
     In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    For Nebular to work it is required to have the `<nb-layout></nb-layout>` component at the top.
+    `<nb-layout></nb-layout>` is a required root component for Nebular to work.
   </div>
 </div>
 <hr> 
@@ -133,7 +133,7 @@ And done! At this step, you should have a page with a simple layout on it lookin
 
 ## Related Articles
 
-- [Advanced Theme System configuration](#/docs/guides/enable-theme-system)
-- [Nebular UI Kit](#/docs/guides/components-overview#advanced-setup)
-- [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](#/docs/components/layout)
-- [Deploying to production server](#/docs/guides/server-deployment)
+- [Advanced Theme System configuration](docs/guides/enable-theme-system)
+- [Nebular UI Kit](docs/guides/components-overview#advanced-setup)
+- [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](docs/components/layout)
+- [Deploying to production server](docs/guides/server-deployment)

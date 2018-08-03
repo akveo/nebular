@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS, NbAuthSocialLink } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
@@ -20,23 +20,28 @@ import { NbAuthResult } from '../../services/auth-result';
 
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
-        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
-             class="alert alert-danger" role="alert">
+        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
-        </div>
+        </nb-alert>
 
-        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
-             class="alert alert-success" role="alert">
+        <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
-        </div>
+        </nb-alert>
 
         <div class="form-group">
           <label for="input-email" class="sr-only">Email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+@.+\..+"
-                 class="form-control" placeholder="Email address" #email="ngModel"
-                 [class.form-control-danger]="email.invalid && email.touched" autofocus
+          <input nbInput
+                 [(ngModel)]="user.email"
+                 #email="ngModel"
+                 name="email"
+                 id="input-email"
+                 pattern=".+@.+\..+"
+                 placeholder="Email address"
+                 autofocus
+                 fullWidth
+                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.email.required')">
           <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
             Email is required!
@@ -49,9 +54,15 @@ import { NbAuthResult } from '../../services/auth-result';
 
         <div class="form-group">
           <label for="input-password" class="sr-only">Password</label>
-          <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-                 class="form-control" placeholder="Password" #password="ngModel"
-                 [class.form-control-danger]="password.invalid && password.touched"
+          <input nbInput
+                 [(ngModel)]="user.password"
+                 #password="ngModel"
+                 name="password"
+                 type="password"
+                 id="input-password"
+                 placeholder="Password"
+                 fullWidth
+                 [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
@@ -73,7 +84,10 @@ import { NbAuthResult } from '../../services/auth-result';
           <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
         </div>
 
-        <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
+        <button nbButton
+                status="success"
+                fullWidth
+                [disabled]="submitted || !form.valid"
                 [class.btn-pulse]="submitted">
           Sign In
         </button>
@@ -106,6 +120,7 @@ import { NbAuthResult } from '../../services/auth-result';
       </div>
     </nb-auth-block>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbLoginComponent {
 
@@ -121,6 +136,7 @@ export class NbLoginComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
+              protected cd: ChangeDetectorRef,
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
@@ -148,6 +164,7 @@ export class NbLoginComponent {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
+      this.cd.detectChanges();
     });
   }
 

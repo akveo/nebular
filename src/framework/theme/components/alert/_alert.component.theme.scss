@@ -11,8 +11,6 @@
   border-top-right-radius: nb-theme(alert-border-radius);
   color: nb-theme(alert-fg-heading);
 
-
-
   @include nb-headings();
 }
 
@@ -23,7 +21,7 @@
     font-weight: nb-theme(alert-font-weight);
 
     background: nb-theme(alert-bg);
-    color: nb-theme(alert-fg);
+    color: nb-theme(alert-outline-fg);
     // TODO: move alert margin style to layout
     margin-bottom: nb-theme(alert-margin);
     border-radius: nb-theme(alert-border-radius);
@@ -34,6 +32,10 @@
         nb-theme(scrollbar-fg),
         nb-theme(scrollbar-bg),
         nb-theme(scrollbar-width));
+
+    &.status {
+      color: nb-theme(alert-fg);
+    }
 
     &.xxsmall-alert {
       height: nb-theme(alert-height-xxsmall);
@@ -109,6 +111,28 @@
     }
     &.accent-danger {
       border-top-color: nb-theme(alert-danger-bg);
+    }
+
+    &.outline-active {
+      border: 2px solid nb-theme(alert-active-bg);
+    }
+    &.outline-disabled {
+      border: 2px solid nb-theme(alert-disabled-bg);
+    }
+    &.outline-primary {
+      border: 2px solid nb-theme(alert-primary-bg);
+    }
+    &.outline-success {
+      border: 2px solid nb-theme(alert-success-bg);
+    }
+    &.outline-info {
+      border: 2px solid nb-theme(alert-info-bg);
+    }
+    &.outline-warning {
+      border: 2px solid nb-theme(alert-warning-bg);
+    }
+    &.outline-danger {
+      border: 2px solid nb-theme(alert-danger-bg);
     }
 
     .close {

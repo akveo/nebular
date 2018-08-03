@@ -18,6 +18,7 @@ export interface NbPasswordStrategyModule {
     success?: string | null;
     failure?: string | null;
   };
+  failWhenNoToken?: boolean,
   defaultErrors?: string[];
   defaultMessages?: string[];
 }
@@ -42,9 +43,9 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   baseEndpoint? = '/api/auth/';
   login?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
-    rememberMe: true, // TODO: what does that mean?
     endpoint: 'login',
     method: 'post',
+    failWhenNoToken: true,
     redirect: {
       success: '/',
       failure: null,
@@ -57,6 +58,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     rememberMe: true,
     endpoint: 'register',
     method: 'post',
+    failWhenNoToken: true,
     redirect: {
       success: '/',
       failure: null,
@@ -99,6 +101,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   refreshToken?: boolean | NbPasswordStrategyModule = {
     endpoint: 'refresh-token',
     method: 'post',
+    failWhenNoToken: true,
     redirect: {
       success: null,
       failure: null,

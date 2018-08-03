@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
@@ -20,24 +20,32 @@ import { NbAuthResult } from '../../services/auth-result';
       <small class="form-text sub-title">Please enter a new password</small>
       <form (ngSubmit)="resetPass()" #resetPassForm="ngForm">
 
-        <div *ngIf="errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
+        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
-        </div>
-        <div *ngIf="messages && messages.length > 0 && !submitted" class="alert alert-success" role="alert">
+        </nb-alert>
+
+        <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
-        </div>
+        </nb-alert>
 
         <div class="form-group">
           <label for="input-password" class="sr-only">New Password</label>
-          <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-                 class="form-control form-control-lg first" placeholder="New Password" #password="ngModel"
-                 [class.form-control-danger]="password.invalid && password.touched"
+          <input nbInput
+                 [(ngModel)]="user.password"
+                 #password="ngModel"
+                 type="password"
+                 id="input-password"
+                 name="password"
+                 class="first"
+                 placeholder="New Password"
+                 autofocus
+                 fullWidth
+                 [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
-                 [maxlength]="getConfigValue('forms.validation.password.maxLength')"
-                 autofocus>
+                 [maxlength]="getConfigValue('forms.validation.password.maxLength')">
           <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
             Password is required!
           </small>
@@ -53,11 +61,19 @@ import { NbAuthResult } from '../../services/auth-result';
 
         <div class="form-group">
           <label for="input-re-password" class="sr-only">Confirm Password</label>
-          <input
-            name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
-            class="form-control form-control-lg last" placeholder="Confirm Password" #rePass="ngModel"
-            [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
-            [required]="getConfigValue('forms.validation.password.required')">
+          <input nbInput
+                 [(ngModel)]="user.confirmPassword"
+                 #rePass="ngModel"
+                 id="input-re-password"
+                 name="rePass"
+                 type="password"
+                 class="last"
+                 placeholder="Confirm Password"
+                 fullWidth
+                 [status]="rePass.touched
+                 ? (rePass.invalid || password.value != rePass.value ? 'danger' : 'success')
+                 : ''"
+                 [required]="getConfigValue('forms.validation.password.required')">
           <small class="form-text error"
                  *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
             Password confirmation is required!
@@ -69,7 +85,10 @@ import { NbAuthResult } from '../../services/auth-result';
           </small>
         </div>
 
-        <button [disabled]="submitted || !resetPassForm.form.valid" class="btn btn-hero-success btn-block"
+        <button nbButton
+                status="success"
+                fullWidth
+                [disabled]="submitted || !resetPassForm.valid"
                 [class.btn-pulse]="submitted">
           Change password
         </button>
@@ -85,6 +104,7 @@ import { NbAuthResult } from '../../services/auth-result';
       </div>
     </nb-auth-block>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbResetPasswordComponent {
 
@@ -99,6 +119,7 @@ export class NbResetPasswordComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
+              protected cd: ChangeDetectorRef,
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
@@ -124,6 +145,7 @@ export class NbResetPasswordComponent {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
+      this.cd.detectChanges();
     });
   }
 
