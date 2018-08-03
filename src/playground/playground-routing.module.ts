@@ -153,9 +153,7 @@ import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-m
 import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
 import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
 import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
-import { NbCalendarCustomDayCellComponent } from './calendar/calendar-custom-day-cell.component';
-import { NbCalendarCustomMonthCellComponent } from './calendar/calendar-custom-month-cell.component';
-import { NbCalendarCustomYearCellComponent } from './calendar/calendar-custom-year-cell.component';
+import { NbCalendarCustomDayCellShowcaseComponent } from './calendar/calendar-custom-day-cell-showcase.component';
 import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
@@ -298,16 +296,8 @@ export const routes: Routes = [
             component: NbCalendarRangeShowcaseComponent,
           },
           {
-            path: 'calendar-custom-day-cell.component',
-            component: NbCalendarCustomDayCellComponent,
-          },
-          {
-            path: 'calendar-custom-month-cell.component',
-            component: NbCalendarCustomMonthCellComponent,
-          },
-          {
-            path: 'calendar-custom-year-cell.component',
-            component: NbCalendarCustomYearCellComponent,
+            path: 'calendar-custom-day-cell-showcase.component',
+            component: NbCalendarCustomDayCellShowcaseComponent,
           },
           {
             path: 'calendar-filter.component',

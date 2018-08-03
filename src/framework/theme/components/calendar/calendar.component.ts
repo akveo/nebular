@@ -12,8 +12,37 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
 /**
  * Calendar component provides capability to choose date.
  *
- * Basic usage example:
+ * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
+ *
+ * If you wanna select ranges you can use `NbCalendarRangeComponent`
+ * @stacked-example(Range, calendar/calendar-range-showcase.component)
+ *
+ * As you can see in the basic usage example calendar contains previous and next month days
+ * which can be disabled using `boundingMonth` property.
+ * @stacked-example(Bounding months, calendar/calendar-bounding-month.component)
+ *
+ * You can define starting view of the calendar by setting `startView` property.
+ * Available values: year, month and date.
+ * @stacked-example(Start view, calendar/calendar-start-view.component)
+ *
+ * You can use larger version of the calendar by defining size property.
+ * Available values: medium(which is default) and large.
+ * @stacked-example(Size, calendar/calendar-size.component)
+ *
+ * Calendar supports min and max dates which disables values out of min-max range.
+ * @stacked-example(Borders, calendar/calendar-min-max.component)
+ *
+ * Also you can define custom filter property that should be predicate which receives
+ * date and returns false if this date have to be disables. In this example we provide filter
+ * which disables weekdays.
+ * @stacked-example(Filter, calendar/calendar-filter.component)
+ *
+ * If you need create custom cells you can easily provide custom components for
+ * calendar. For examples if you wanna show any average price under each date you can
+ * just provide custom `dayCellComponent`. Custom cells for month and year can be provided
+ * same way, check api reference.
+ * @stacked-example(Custom day cell, calendar/calendar-custom-day-cell-showcase.component)
  * */
 @Component({
   selector: 'nb-calendar',
@@ -33,27 +62,61 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
     ></nb-base-calendar>
   `,
 })
-export class NbCalendarComponent<T> {
+export class NbCalendarComponent {
 
+  /**
+   * Defines if we should render previous and next months
+   * in the current month view.
+   * */
   @Input() boundingMonth: boolean = true;
 
+  /**
+   * Defines starting view for calendar.
+   * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
-  @Input() date: T;
+  /**
+   * Value which will be rendered as selected.
+   * */
+  @Input() date: Date;
 
+  /**
+   * Minimum available date for selection.
+   * */
   @Input() min: Date;
 
+  /**
+   * Maximum available date for selection.
+   * */
   @Input() max: Date;
 
+  /**
+   * Predicate that decides which cells will be disabled.
+   * */
   @Input() filter: (Date) => boolean;
 
-  @Input() dayCellComponent: Type<NbCalendarCell<T>>;
+  /**
+   * Custom day cell component.
+   * */
+  @Input() dayCellComponent: Type<NbCalendarCell<Date>>;
 
-  @Input() monthCellComponent: Type<NbCalendarCell<T>>;
+  /**
+   * Custom month cell component.
+   * */
+  @Input() monthCellComponent: Type<NbCalendarCell<Date>>;
 
-  @Input() yearCellComponent: Type<NbCalendarCell<T>>;
+  /**
+   * Custom year cell component.
+   * */
+  @Input() yearCellComponent: Type<NbCalendarCell<Date>>;
 
+  /**
+   * Size of the calendar and entire components.
+   * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
-  @Output() dateChange: EventEmitter<T> = new EventEmitter();
+  /**
+   * EventEmitter of the selected date.
+   * */
+  @Output() dateChange: EventEmitter<Date> = new EventEmitter();
 }

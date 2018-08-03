@@ -179,15 +179,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Calendar',
-        icon: 'calendar.svg',
-        source: [
-          'NbCalendarComponent',
-          'NbCalendarRangeComponent',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Flip Card',
         icon: 'flip.svg',
         source: [
@@ -353,6 +344,14 @@ export const structure = [
         name: 'Input',
         icon: 'input.svg',
         source: [ 'NbInputDirective' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarComponent',
+        ],
       },
     ],
   },
