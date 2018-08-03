@@ -4,7 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { NbDateTimeUtil } from '../../services';
 import { NbCalendarCell } from '../../model';
 
@@ -13,7 +21,7 @@ import { NbCalendarCell } from '../../model';
   selector: 'nb-calendar-year-cell',
   template: `{{ year }}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(click)': 'onClick()', 'class': 'year-cell' },
+  host: { 'class': 'year-cell' },
 })
 export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
   @Input() date: Date;
@@ -42,6 +50,7 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
     return this.date.getFullYear();
   }
 
+  @HostListener('click')
   onClick() {
     if (this.disabled) {
       return;
