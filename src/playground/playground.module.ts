@@ -29,6 +29,7 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbAccordionModule,
+  NbListModule,
   NbButtonModule,
   NbInputModule,
 } from '@nebular/theme';
@@ -164,6 +165,13 @@ import { NbButtonOutlineComponent } from './button/button-outline.component';
 import { NbButtonSizesComponent } from './button/button-sizes.component';
 import { NbButtonTypesComponent } from './button/button-types.component';
 import { NbButtonFullWidthComponent } from './button/button-full-width.component';
+import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
+import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
+import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
+import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component'
+import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
+import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -199,6 +207,7 @@ export const NB_MODULES = [
   NbSpinnerModule,
   NbAccordionModule,
   NbButtonModule,
+  NbListModule,
   NbInputModule,
 ];
 
@@ -243,6 +252,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCardFullComponent,
   NbCardColorsComponent,
   NbCardAccentsComponent,
+  NbCardWithoutBodyComponent,
   NbCardSizesComponent,
   NbCardTestComponent,
   NbFlipCardShowcaseComponent,
@@ -325,6 +335,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbButtonSizesComponent,
   NbButtonTypesComponent,
   NbButtonFullWidthComponent,
+  NbSimpleListShowcaseComponent,
+  NbUsersListShowcaseComponent,
+  NbInfiniteNewsListComponent,
+  NbInfiniteListShowcaseComponent,
+  NbInfiniteListScrollModesComponent,
+  NbNewsPostComponent,
+  NbNewsPostPlaceholderComponent,
   NbInputsShowcaseComponent,
   NbInputColorsComponent,
   NbInputSizesComponent,
@@ -333,7 +350,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputFullWidthComponent,
   NbScrollWindowComponent,
 ];
-
 
 @NgModule({
   imports: [

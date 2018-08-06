@@ -30,5 +30,8 @@
     "@angular/router": "^6.0.0",
     "rxjs": "^6.1.0",
     "bootstrap": "^4.0.0"
+  },
+  "dependencies": {
+    "intersection-observer": "0.5.0"
   }
 }
