@@ -12,6 +12,10 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
 /**
  * Calendar component provides capability to choose date.
  *
+ * ```html
+ * <nb-calendar [(date)]="date"></nb-calendar>
+ * ```
+ *
  * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
  *
@@ -43,6 +47,46 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * just provide custom `dayCellComponent`. Custom cells for month and year can be provided
  * same way, check api reference.
  * @stacked-example(Custom day cell, calendar/calendar-custom-day-cell-showcase.component)
+ *
+ * @styles
+ *
+ * calendar-width
+ * calendar-height
+ * calendar-header-title-font-size
+ * calendar-header-title-font-weight
+ * calendar-header-sub-title-font-size
+ * calendar-header-sub-title-font-weight
+ * calendar-navigation-button-width
+ * calendar-selected-item-bg
+ * calendar-hover-item-bg
+ * calendar-today-item-bg
+ * calendar-active-item-bg
+ * calendar-fg
+ * calendar-selected-fg
+ * calendar-day-cell-width
+ * calendar-day-cell-height
+ * calendar-month-cell-width
+ * calendar-month-cell-height
+ * calendar-year-cell-width
+ * calendar-year-cell-height
+ * calendar-inactive-opacity
+ * calendar-disabled-opacity
+ * calendar-border-radius
+ * calendar-weekday-width
+ * calendar-weekday-height
+ * calendar-weekday-font-size
+ * calendar-weekday-font-weight
+ * calendar-weekday-fg
+ * calendar-weekday-holiday-fg
+ * calendar-range-bg-in-range
+ * calendar-large-width
+ * calendar-large-height
+ * calendar-day-cell-large-width
+ * calendar-day-cell-large-height
+ * calendar-month-cell-large-width
+ * calendar-month-cell-large-height
+ * calendar-year-cell-large-width
+ * calendar-year-cell-large-height
  * */
 @Component({
   selector: 'nb-calendar',

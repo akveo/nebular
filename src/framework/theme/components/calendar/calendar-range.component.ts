@@ -18,6 +18,10 @@ export interface NbCalendarRange {
 /**
  * Calendar component provides capability to choose ranges.
  * For additional info check `NbBaseCalendarComponent`.
+ *
+ * ```html
+ * <nb-calendar-range [(range)]="range"></nb-calendar-range>
+ * ```
  */
 @Component({
   selector: 'nb-calendar-range',
