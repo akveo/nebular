@@ -122,4 +122,8 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   writeValue(val: any) {
     this.value = val;
   }
+
+  setDisabledState(val: boolean) {
+    this.disabled = convertToBoolProperty(val);
+  }
 }
