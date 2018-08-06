@@ -21,13 +21,12 @@ import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 
 
+/**
+ * Provides capability pick days.
+ * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [`
-    :host {
-      display: block;
-    }
-  `],
+  styles: [` :host { display: block; } `],
   template: `
     <nb-calendar-days-names></nb-calendar-days-names>
     <nb-calendar-picker
@@ -45,16 +44,35 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
 })
 export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
+  /**
+   * Describes which month picker have to render.
+   * */
   @Input() visibleDate: Date;
 
+  /**
+   * Defines if we should render previous and next months
+   * in the current month view.
+   * */
   @Input() boundingMonths: boolean = true;
 
+  /**
+   * Minimum available date for selection.
+   * */
   @Input() min: Date;
 
+  /**
+   * Maximum available date for selection.
+   * */
   @Input() max: Date;
 
+  /**
+   * Predicate that decides which cells will be disabled.
+   * */
   @Input() filter: (Date) => boolean;
 
+  /**
+   * Custom day cell component. Have to implement `NbCalendarCell` interface.
+   * */
   @Input('cellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
     if (cellComponent) {
@@ -63,10 +81,20 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   }
   cellComponent: Type<NbCalendarCell<any>> = NbCalendarDayCellComponent;
 
+  /**
+   * Size of the component.
+   * Can be 'medium' which is default or 'large'.
+   * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
+  /**
+   * Already selected date.
+   * */
   @Input() date: T;
 
+  /**
+   * Fires newly selected date.
+   * */
   @Output() dateChange = new EventEmitter<Date>();
 
   @HostBinding('class.medium')
@@ -79,6 +107,11 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
     return this.size === NbCalendarSize.LARGE;
   }
 
+  /**
+   * Day picker model.
+   * Provides all days in current month and if boundingMonth is true some days
+   * from previous and next one.
+   * */
   weeks: Date[][];
 
   constructor(private monthModel: NbCalendarMonthModelService) {
@@ -86,15 +119,11 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
 
   ngOnChanges({ visibleDate }: SimpleChanges) {
     if (visibleDate) {
-      this.invalidateModel();
+      this.weeks = this.monthModel.createDaysGrid(this.visibleDate, this.boundingMonths);
     }
   }
 
   onSelect(day: Date) {
     this.dateChange.emit(day);
-  }
-
-  private invalidateModel() {
-    this.weeks = this.monthModel.createDaysGrid(this.visibleDate, this.boundingMonths);
   }
 }

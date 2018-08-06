@@ -96,22 +96,23 @@ export class NbCalendarComponent {
   @Input() filter: (Date) => boolean;
 
   /**
-   * Custom day cell component.
+   * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
   @Input() dayCellComponent: Type<NbCalendarCell<Date>>;
 
   /**
-   * Custom month cell component.
+   * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
   @Input() monthCellComponent: Type<NbCalendarCell<Date>>;
 
   /**
-   * Custom year cell component.
+   * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
   @Input() yearCellComponent: Type<NbCalendarCell<Date>>;
 
   /**
    * Size of the calendar and entire components.
+   * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
