@@ -27,6 +27,7 @@ describe('Component: NbCalendarYearPicker', () => {
 
   beforeEach(() => {
     component.date = new Date(2018, 6, 23);
+    component.year = new Date(2018, 6, 23);
     component.ngOnChanges();
     fixture.detectChanges();
   });
