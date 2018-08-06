@@ -76,11 +76,6 @@ export class NbCalendarComponent {
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   /**
-   * Value which will be rendered as selected.
-   * */
-  @Input() date: Date;
-
-  /**
    * Minimum available date for selection.
    * */
   @Input() min: Date;
@@ -117,7 +112,12 @@ export class NbCalendarComponent {
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   /**
-   * EventEmitter of the selected date.
+   * Date which will be rendered as selected.
+   * */
+  @Input() date: Date;
+
+  /**
+   * Emits date when selected.
    * */
   @Output() dateChange: EventEmitter<Date> = new EventEmitter();
 }

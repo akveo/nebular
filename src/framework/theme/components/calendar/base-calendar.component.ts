@@ -9,32 +9,72 @@ import { Component, EventEmitter, HostBinding, Input, Output, Type } from '@angu
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
 
 
+/**
+ * Basis for calendar and range calendar components.
+ * Encapsulates common behaviour - store calendar state and perform navigation
+ * between pickers.
+ * */
 @Component({
   selector: 'nb-base-calendar',
   templateUrl: './base-calendar.component.html',
 })
 export class NbBaseCalendarComponent<T> {
 
+  /**
+   * Defines if we should render previous and next months
+   * in the current month view.
+   * */
   @Input() boundingMonth: boolean = true;
 
+  /**
+   * Defines active view for calendar.
+   * */
   @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
-  @Input() date: T;
-
+  /**
+   * Minimum available date for selection.
+   * */
   @Input() min: Date;
 
+  /**
+   * Maximum available date for selection.
+   * */
   @Input() max: Date;
 
+  /**
+   * Predicate that decides which cells will be disabled.
+   * */
   @Input() filter: (Date) => boolean;
 
+  /**
+   * Custom day cell component. Have to implement `NbCalendarCell` interface.
+   * */
   @Input() dayCellComponent: Type<NbCalendarCell<T>>;
 
+  /**
+   * Custom month cell component. Have to implement `NbCalendarCell` interface.
+   * */
   @Input() monthCellComponent: Type<NbCalendarCell<T>>;
 
+  /**
+   * Custom year cell component. Have to implement `NbCalendarCell` interface.
+   * */
   @Input() yearCellComponent: Type<NbCalendarCell<T>>;
 
+  /**
+   * Size of the calendar and entire components.
+   * Can be 'medium' which is default or 'large'.
+   * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
+  /**
+   * Value which will be rendered as selected.
+   * */
+  @Input() date: T;
+
+  /**
+   * Emits date when selected.
+   * */
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
   @HostBinding('class.medium')
