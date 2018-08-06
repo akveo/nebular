@@ -75,6 +75,11 @@ export class NbBaseCalendarComponent<T> {
     this.changeVisibleYear(1);
   }
 
+  navigateToday() {
+    this.setViewMode(NbCalendarViewMode.DATE);
+    this.visibleDate = new Date();
+  }
+
   private changeVisibleMonth(direction: number) {
     this.visibleDate = NbDateTimeUtil.addMonth(this.visibleDate, direction);
   }

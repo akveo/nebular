@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-header>
-    <nb-calendar-header></nb-calendar-header>
+    <nb-calendar-header (navigateToday)="navigateToday()"></nb-calendar-header>
   </nb-card-header>
 
   <nb-card-body [ngSwitch]="activeViewMode">

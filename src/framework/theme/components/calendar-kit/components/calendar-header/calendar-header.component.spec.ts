@@ -32,12 +32,17 @@ describe('Component: NbCalendarHeader', () => {
   });
 
   it('should render today', () => {
-    expect(componentEl.query(By.css('span')).nativeElement.textContent).toBe('Today');
+    expect(componentEl.query(By.css('.sub-title')).nativeElement.textContent).toContain('Today');
   });
 
   it('should render today date', () => {
     component.date = new Date(2018, 6, 30);
     fixture.detectChanges();
-    expect(componentEl.query(By.css('h5')).nativeElement.textContent).toBe('Jul 2018');
+    expect(componentEl.query(By.css('.title')).nativeElement.textContent).toContain('Jul 2018');
+  });
+
+  it('should fire navigateToday when click on title', () => {
+    component.navigateToday.subscribe(e => expect(e).toBeUndefined());
+    componentEl.query(By.css('span.title')).nativeElement.dispatchEvent(new Event('click'));
   });
 });

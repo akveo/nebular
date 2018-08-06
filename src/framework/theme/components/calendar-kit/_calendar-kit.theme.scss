@@ -7,7 +7,33 @@
 @mixin nb-calendar-kit-theme() {
 
   nb-calendar-header {
-    span {
+    .header {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      color: nb-theme(calendar-fg);
+      font-weight: nb-theme(calendar-header-title-font-weight);
+      font-size: nb-theme(calendar-header-title-font-size);
+
+      .nb-arrow-dropright {
+        margin-left: 0.5rem;
+      }
+
+      &:hover {
+        color: nb-theme(calendar-hover-item-bg);
+        cursor: pointer;
+      }
+
+      &:active {
+        color: nb-theme(calendar-active-item-bg);
+      }
+    }
+
+    .sub-title {
       color: nb-theme(calendar-weekday-fg);
       font-weight: nb-theme(calendar-header-sub-title-font-weight);
       font-size: nb-theme(calendar-header-sub-title-font-size);

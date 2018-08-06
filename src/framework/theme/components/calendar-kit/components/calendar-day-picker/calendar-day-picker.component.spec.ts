@@ -29,8 +29,8 @@ describe('Component: NbCalendarDayPicker', () => {
     component = fixture.componentInstance;
     componentEl = fixture.debugElement;
 
-    component.year = new Date();
-    component.month = new Date();
+    component.visibleDate = new Date();
+    component.date = new Date();
     component.ngOnChanges({
       activeMonth: new SimpleChange(null, component.visibleDate, true),
       value: new SimpleChange(null, component.date, true),
