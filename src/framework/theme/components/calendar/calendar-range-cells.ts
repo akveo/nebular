@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { NbCalendarCell, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarRange } from './calendar-range.component';
@@ -96,5 +104,64 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
 
   private dontFitFilter(): boolean {
     return this.date && this.filter && !this.filter(this.date);
+  }
+}
+
+@Component({
+  selector: 'nb-calendar-range-year-cell',
+  template: `{{ year }}`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { 'class': 'year-cell' },
+})
+export class NbCalendarRangeYearCellComponent implements NbCalendarCell<NbCalendarRange> {
+  @Input() date: Date;
+
+  @Input() min: Date;
+
+  @Input() max: Date;
+
+  @Input() selectedValue: NbCalendarRange;
+
+  @Output() select: EventEmitter<Date> = new EventEmitter();
+
+  @HostBinding('class.selected') get selected(): boolean {
+    return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue.start);
+  }
+
+  @HostBinding('class.today') get today(): boolean {
+    return this.date && NbDateTimeUtil.isSameYear(this.date, new Date());
+  }
+
+  @HostBinding('class.disabled') get disabled(): boolean {
+    return this.smallerThanMin() || this.greaterThanMax();
+  }
+
+  get year(): number {
+    return this.date.getFullYear();
+  }
+
+  @HostListener('click')
+  onClick() {
+    if (this.disabled) {
+      return;
+    }
+
+    this.select.emit(this.date);
+  }
+
+  private smallerThanMin(): boolean {
+    return this.date && this.min && NbDateTimeUtil.compareDates(this.yearEnd(), this.min) < 0;
+  }
+
+  private greaterThanMax(): boolean {
+    return this.date && this.max && NbDateTimeUtil.compareDates(this.yearStart(), this.max) > 0;
+  }
+
+  private yearStart(): Date {
+    return NbDateTimeUtil.getYearStart(this.date);
+  }
+
+  private yearEnd(): Date {
+    return NbDateTimeUtil.getYearEnd(this.date);
   }
 }

@@ -7,7 +7,7 @@
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
-import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
+import { NbCalendarRangeDayCellComponent, NbCalendarRangeYearCellComponent } from './calendar-range-cells';
 
 
 export interface NbCalendarRange {
@@ -87,7 +87,13 @@ export class NbCalendarRangeComponent {
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() yearCellComponent: Type<NbCalendarCell<NbCalendarRange>>;
+  @Input('yearCellComponent')
+  set _yearCellComponent(cellComponent: Type<NbCalendarCell<NbCalendarRange>>) {
+    if (cellComponent) {
+      this.yearCellComponent = cellComponent;
+    }
+  }
+  yearCellComponent: Type<NbCalendarCell<NbCalendarRange>> = NbCalendarRangeYearCellComponent;
 
   /**
    * Size of the calendar and entire components.
