@@ -11,6 +11,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbLocaleService } from '../../services';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarHeaderComponent } from '../calendar-header/calendar-header.component';
+import { NbThemeModule } from '../../../../theme.module';
 
 
 describe('Component: NbCalendarHeader', () => {
@@ -21,6 +22,7 @@ describe('Component: NbCalendarHeader', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [NbThemeModule.forRoot({ name: 'default' })],
       providers: [NbLocaleService],
       declarations: [NbCalendarHeaderComponent, NbCalendarDatePipe],
     });
