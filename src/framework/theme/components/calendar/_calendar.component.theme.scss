@@ -28,6 +28,10 @@
     flex: 1;
     margin: 1px 0;
 
+    .day-cell {
+      margin: 0;
+    }
+
     &.in-range {
       background: nb-theme(calendar-range-bg-in-range);
 
@@ -42,9 +46,8 @@
     }
 
     &.start {
-      margin-left: 1px;
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
+      border-top-left-radius: nb-theme(calendar-border-radius);
+      border-bottom-left-radius: nb-theme(calendar-border-radius);
 
       .day-cell {
         margin-left: 0;
@@ -52,9 +55,8 @@
     }
 
     &.end {
-      margin-right: 1px;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
+      border-top-right-radius: nb-theme(calendar-border-radius);
+      border-bottom-right-radius: nb-theme(calendar-border-radius);
 
       .day-cell {
         margin-right: 0;
@@ -62,13 +64,13 @@
     }
 
     &:first-of-type {
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
+      border-top-left-radius: nb-theme(calendar-border-radius);
+      border-bottom-left-radius: nb-theme(calendar-border-radius);
     }
 
     &:last-of-type {
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
+      border-top-right-radius: nb-theme(calendar-border-radius);
+      border-bottom-right-radius: nb-theme(calendar-border-radius);
     }
   }
 }
