@@ -91,7 +91,7 @@ Depending on the currently enabled theme and the way `card-bg` inherited in your
 
 ## Built-in themes
 
-Currently, there are 2 built-in themes: 
+Currently, there are 3 built-in themes: 
 - `default` - clean white theme
 - `cosmic` - dark theme
 - `corporate` - firm business theme
