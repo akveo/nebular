@@ -22,11 +22,11 @@ export abstract class NbAuthStrategy {
 
   createToken(value: any): NbAuthToken {
     const requireValidToken: boolean = this.getOption('requireValidToken');
-      const token = nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
-      if (requireValidToken && !token.isValid()) {
-        throw new InvalidJWTTokenError('Token is empty or invalid', token.getPayload());
-      }
-      return token;
+    const token = nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
+    if (requireValidToken && !token.isValid()) {
+      throw new InvalidJWTTokenError('Token is empty or invalid.');
+    }
+    return token;
   }
 
   getName(): string {

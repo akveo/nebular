@@ -15,14 +15,6 @@ export abstract class NbAuthToken {
 }
 
 export class InvalidJWTTokenError extends Error {
-  constructor(message: string, invalidPayload: string) {
-    super(message);
-    const actualPrototype = new.target.prototype;
-    Object.setPrototypeOf(this, actualPrototype);
-  }
-}
-
-export class EmptyTokenError extends Error {
   constructor(message: string) {
     super(message);
     const actualPrototype = new.target.prototype;
@@ -49,14 +41,14 @@ export function nbAuthCreateToken(tokenClass: NbAuthTokenClass,
 export function decodeJwtPayload(payload: string): string {
 
   if (!payload) {
-    throw new EmptyTokenError('Cannot extract from an empty payload.');
+    throw new InvalidJWTTokenError('Cannot extract from an empty payload.');
   }
 
   const parts = payload.split('.');
 
   if (parts.length !== 3) {
     throw new InvalidJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and must consist of three parts.`, payload);
+      `The payload ${payload} is not valid JWT payload and must consist of three parts.`);
   }
 
   let decoded;
@@ -64,12 +56,12 @@ export function decodeJwtPayload(payload: string): string {
     decoded = urlBase64Decode(parts[1]);
   } catch (e) {
     throw new InvalidJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and cannot be parsed.`, payload);
+      `The payload ${payload} is not valid JWT payload and cannot be parsed.`);
   }
 
   if (!decoded) {
     throw new InvalidJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and cannot be decoded.`, payload);
+      `The payload ${payload} is not valid JWT payload and cannot be decoded.`);
   }
 
   return JSON.parse(decoded);
@@ -146,13 +138,13 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    */
   protected prepareCreatedAt(date: Date) {
     // We do not want prepareCreatedAt to fail if token is empty because we have to accept it
-    // if failWhenNoToken is set to false
+    // if requireValidToken is set to false
     // We want it to fail only if payload is present but malformed.
     try {
       const decoded = this.getPayload();
       return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
     } catch (err) {
-      if (err instanceof EmptyTokenError) {
+      if (err instanceof InvalidJWTTokenError) {
         return super.prepareCreatedAt(date);
       }
       throw err;
@@ -236,7 +228,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    */
   getPayload(): any {
     if (!this.token || !Object.keys(this.token).length) {
-      throw new EmptyTokenError('Cannot extract payload from an empty token.');
+      throw new InvalidJWTTokenError('Cannot extract payload from an empty token.');
     }
 
     return this.token;
@@ -290,13 +282,13 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
    */
   protected prepareCreatedAt(date: Date) {
     // We do not want prepareCreatedAt to fail if token is empty because we have to accept it
-    // if failWhenNoToken is set to false
+    // if requireValidToken is set to false
     // We want it to fail is payload is present but malformed.
     try {
       const decoded = this.getAccessTokenPayload();
       return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
     } catch (err) {
-      if (err instanceof EmptyTokenError) {
+      if (err instanceof InvalidJWTTokenError) {
         return super.prepareCreatedAt(date);
       }
       throw err;

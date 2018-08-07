@@ -31,7 +31,6 @@ import { InvalidJWTTokenError } from '@nebular/auth';
  *    alwaysFail: false,
  *    endpoint: 'login',
  *    method: 'post',
- *    failWhenNoToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -44,7 +43,6 @@ import { InvalidJWTTokenError } from '@nebular/auth';
  *    rememberMe: true,
  *    endpoint: 'register',
  *    method: 'post',
- *    failWhenNoToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -87,7 +85,6 @@ import { InvalidJWTTokenError } from '@nebular/auth';
  *  refreshToken?: boolean | NbPasswordStrategyModule = {
  *    endpoint: 'refresh-token',
  *    method: 'post',
- *    failWhenNoToken: true,
  *    redirect: {
  *      success: null,
  *      failure: null,
@@ -164,7 +161,6 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           }
           return res;
         }),
-        this.validateToken('login'),
         map((res) => {
           return new NbAuthResult(
             true,
@@ -175,22 +171,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('login', res, this.options);
-          } else if (res instanceof InvalidJWTTokenError) {
-            errors.push(res.message)
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('login.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, 'login');
         }),
       );
   }
@@ -207,7 +188,6 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
           return res;
         }),
-        this.validateToken('register'),
         map((res) => {
           return new NbAuthResult(
             true,
@@ -218,22 +198,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('register', res, this.options);
-          } else if (res instanceof InvalidJWTTokenError) {
-            errors.push(res.message)
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('register.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, 'register');
         }),
       );
   }
@@ -259,20 +224,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('messages.getter')('requestPass', res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('requestPass', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('requestPass.redirect.failure'),
-              errors,
-            ));
+        return this.handleResponseError(res, 'requestPass');
         }),
       );
   }
@@ -301,20 +253,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('messages.getter')('resetPass', res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('resetPass', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('resetPass.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, 'resetPass');
         }),
       );
   }
@@ -348,20 +287,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.getOption('messages.getter')('logout', res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('logout', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('logout.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, 'logout');
         }),
       );
   }
@@ -380,7 +306,6 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
 
           return res;
         }),
-        this.validateToken('refreshToken'),
         map((res) => {
           return new NbAuthResult(
             true,
@@ -391,38 +316,26 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
             this.createToken(this.getOption('token.getter')('login', res, this.options)));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('refreshToken', res, this.options);
-          } else if (res instanceof InvalidJWTTokenError) {
-            errors.push(res.message)
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('refreshToken.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, 'refreshToken');
         }),
       );
   }
 
-  protected validateToken(module: string): any {
-    return map((res) => {
-      const token = this.getOption('token.getter')(module, res, this.options);
-      if (!token && this.getOption(`${module}.failWhenNoToken`)) {
-        const key = this.getOption('token.key');
-        console.warn(`NbPasswordAuthStrategy:
-                          Token is not provided under '${key}' key
-                          with getter '${this.getOption('token.getter')}', check your auth configuration.`);
-
-        throw new Error('Could not extract token from the response.');
-      }
-      return res;
-    });
+  protected handleResponseError(res: any, phase: string): Observable<NbAuthResult> {
+    let errors = [];
+    if (res instanceof HttpErrorResponse) {
+      errors = this.getOption('errors.getter')(phase, res, this.options);
+    } else if (res instanceof InvalidJWTTokenError) {
+      errors.push(res.message)
+    } else {
+      errors.push('Something went wrong.');
+    }
+    return observableOf(
+      new NbAuthResult(
+        false,
+        res,
+        this.getOption(`${phase}.redirect.failure`),
+        errors,
+      ));
   }
 }

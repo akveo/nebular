@@ -1431,23 +1431,27 @@ describe('password-auth-strategy', () => {
 
   });
 
-  describe('custom failWhenNoToken', () => {
+  describe('custom requireValidToken', () => {
 
-    it('authenticate fail as no token', (done: DoneFn) => {
+    it('authenticate fail as no token when requireValidToken is set', (done: DoneFn) => {
+      strategy.setOptions({
+        name: ownerStrategyName,
+        requireValidToken: true,
+      });
       strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
           expect(result.isSuccess()).toBe(false);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()[0]).toEqual('Something went wrong.');
-          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
-
+          expect(result.getErrors()[0]).toEqual('Token is empty or invalid.');
           done();
         });
 
       httpMock.expectOne('/api/auth/login')
-        .flush({});
+        .flush({data: {
+          message: 'Successfully logged in!',
+        }});
     });
 
     it('authenticate does not fail even when no token', (done: DoneFn) => {
@@ -1455,9 +1459,6 @@ describe('password-auth-strategy', () => {
       strategy.setOptions({
         name: ownerStrategyName,
         requireValidToken: false,
-        login: {
-          failWhenNoToken: false,
-        },
       });
 
       strategy.authenticate(loginData)
@@ -1475,15 +1476,18 @@ describe('password-auth-strategy', () => {
         .flush({});
     });
 
-    it('register fail as no token', (done: DoneFn) => {
+    it('register fail as no token and requireValidtoken is set', (done: DoneFn) => {
+      strategy.setOptions({
+        name: ownerStrategyName,
+        requireValidToken: true,
+      });
       strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
           expect(result.isSuccess()).toBe(false);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()[0]).toEqual('Something went wrong.');
-          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+          expect(result.getErrors()[0]).toEqual('Token is empty or invalid.');
 
           done();
         });
@@ -1497,9 +1501,6 @@ describe('password-auth-strategy', () => {
       strategy.setOptions({
         name: ownerStrategyName,
         requireValidToken: false,
-        register: {
-          failWhenNoToken: false,
-        },
       });
 
       strategy.register(loginData)
@@ -1517,15 +1518,18 @@ describe('password-auth-strategy', () => {
         .flush({});
     });
 
-    it('refreshToken fail as no token', (done: DoneFn) => {
+    it('refreshToken fail as no token and requireValidToken is set', (done: DoneFn) => {
+      strategy.setOptions({
+        name: ownerStrategyName,
+        requireValidToken: true,
+      });
       strategy.refreshToken(loginData)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
           expect(result.isFailure()).toBe(true);
           expect(result.isSuccess()).toBe(false);
           expect(result.getMessages()).toEqual([]);
-          expect(result.getErrors()[0]).toEqual('Something went wrong.');
-          expect(result.getResponse()).toEqual(new Error('Could not extract token from the response.'));
+          expect(result.getErrors()[0]).toEqual('Token is empty or invalid.');
 
           done();
         });
@@ -1539,9 +1543,6 @@ describe('password-auth-strategy', () => {
       strategy.setOptions({
         name: ownerStrategyName,
         requireValidToken: false,
-        refreshToken: {
-          failWhenNoToken: false,
-        },
       });
 
       strategy.refreshToken(loginData)

@@ -23,25 +23,28 @@ describe('auth token', () => {
 
     // tslint:enable
 
-    it('JWT Token constructor, not valid JWT token, must consist of three parts', () => {
+    it('JWT Token getPayload(), not valid JWT token, must consist of three parts', () => {
+      const token = new NbAuthJWTToken('.', 'strategy');
       expect(() => {
-        new NbAuthJWTToken('.', 'strategy');
+        token.getPayload()
       })
         .toThrow(new Error(
           `The payload . is not valid JWT payload and must consist of three parts.`));
     });
 
-    it('JWT token constructor, not valid JWT token, cannot be decoded', () => {
+    it('JWT Token getPayload(),, not valid JWT token, cannot be decoded', () => {
+      const token = new NbAuthJWTToken('..', 'strategy');
       expect(() => {
-        new NbAuthJWTToken('..', 'strategy');
+        token.getPayload()
       })
         .toThrow(new Error(
           `The payload .. is not valid JWT payload and cannot be decoded.`));
     });
 
     it('getPayload, not valid base64 in JWT token, cannot be decoded', () => {
+      const token = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY', 'strategy');
       expect(() => {
-        new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY', 'strategy');
+        token.getPayload()
       })
         .toThrow(new Error(
           `The payload h%2BHY.h%2BHY.h%2BHY is not valid JWT payload and cannot be parsed.`));
