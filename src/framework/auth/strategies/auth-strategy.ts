@@ -20,8 +20,8 @@ export abstract class NbAuthStrategy {
     return getDeepFromObject(this.options, key, null);
   }
 
-  createToken(value: any): NbAuthToken {
-    return nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
+  createToken<T extends NbAuthToken>(value: any): T {
+    return nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
   }
 
   getName(): string {
