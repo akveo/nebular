@@ -100,20 +100,21 @@ export class NbMenuItem {
   /**
    * @returns item parents in top-down order
    */
-  getParents(): NbMenuItem[] {
+  static getParents(item: NbMenuItem): NbMenuItem[] {
     const parents = [];
 
-    let parent;
-    while (parent = this.parent) {
+    let parent = item.parent;
+    while (parent) {
       parents.unshift(parent);
+      parent = parent.parent;
     }
 
     return parents;
   }
 
-  isParentOf(possibleChild: NbMenuItem): boolean {
+  static isParent(item, possibleChild: NbMenuItem): boolean {
     return possibleChild.parent
-      ? possibleChild.parent === this || this.isParentOf(possibleChild.parent)
+      ? possibleChild.parent === item || this.isParent(item, possibleChild.parent)
       : false;
   }
 }
@@ -205,17 +206,17 @@ export class NbMenuInternalService {
     const unselectedItems = this.resetSelection(items);
     const collapsedItems = collapseOther ? this.collapseItems(items) : [];
 
-    for (const parent of item.getParents()) {
+    for (const parent of NbMenuItem.getParents(item)) {
       parent.selected = true;
       // emit event only for items that weren't selected before ('unselectedItems' contains items that were selected)
       if (!unselectedItems.includes(parent)) {
-        this.itemSelect(item, tag);
+        this.itemSelect(parent, tag);
       }
 
       parent.expanded = true;
       // emit event only for items that weren't expanded before ('collapsedItems' contains items that were expanded)
       if (!collapsedItems.includes(parent)) {
-        this.submenuToggle(item, tag);
+        this.submenuToggle(parent, tag);
       }
     }
 
@@ -298,7 +299,7 @@ export class NbMenuInternalService {
     const collapsedItems = [];
 
     for (const item of items) {
-      if (except && (item === except || item.isParentOf(except))) {
+      if (except && (item === except || NbMenuItem.isParent(item, except))) {
         continue;
       }
 
