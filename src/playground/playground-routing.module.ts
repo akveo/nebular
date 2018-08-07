@@ -76,12 +76,14 @@ import {
   NbMenuItem331Component,
   NbMenuItem332Component,
   NbMenuItem33Component,
-  NbMenuItem3Component, NbMenuItem4Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
   NbMenuTestComponent,
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
+  NbRouteTabsetTestChild1Component,
+  NbRouteTabsetTestChild2Component,
   NbRouteTabsetTestComponent,
 } from './tabset/route-tabset-test.component';
 import { NbSearchTestComponent } from './search/search-test.component';
@@ -147,6 +149,16 @@ import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
 import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import { NbCalendarCustomDayCellShowcaseComponent } from './calendar/calendar-custom-day-cell-showcase.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
+
 
 export const routes: Routes = [
   {
@@ -262,6 +274,52 @@ export const routes: Routes = [
           {
             path: 'spinner-colors.component',
             component: NbSpinnerColorsComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar',
+        children: [
+          {
+            path: 'calendar-showcase.component',
+            component: NbCalendarShowcaseComponent,
+          },
+          {
+            path: 'calendar-bounding-month.component',
+            component: NbCalendarBoundingMonthComponent,
+          },
+          {
+            path: 'calendar-start-view.component',
+            component: NbCalendarStartViewComponent,
+          },
+          {
+            path: 'calendar-range-showcase.component',
+            component: NbCalendarRangeShowcaseComponent,
+          },
+          {
+            path: 'calendar-custom-day-cell-showcase.component',
+            component: NbCalendarCustomDayCellShowcaseComponent,
+          },
+          {
+            path: 'calendar-filter.component',
+            component: NbCalendarFilterComponent,
+          },
+          {
+            path: 'calendar-min-max.component',
+            component: NbCalendarMinMaxComponent,
+          },
+          {
+            path: 'calendar-size.component',
+            component: NbCalendarSizeComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar-kit',
+        children: [
+          {
+            path: 'calendar-kit-full-calendar.component',
+            component: NbCalendarKitFullCalendarShowcaseComponent,
           },
         ],
       },

@@ -1,0 +1,17 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host {
+  display: flex;
+  justify-content: space-between;
+
+  .day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+  }
+}

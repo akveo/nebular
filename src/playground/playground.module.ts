@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
   NbCardModule,
   NbCheckboxModule,
   NbLayoutModule,
@@ -179,6 +182,21 @@ import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
 import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import {
+  NbCalendarCustomDayCellComponent,
+  NbCalendarCustomDayCellShowcaseComponent,
+} from './calendar/calendar-custom-day-cell-showcase.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import {
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
+} from './calendar-kit/calendar-kit-full-calendar.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -209,6 +227,9 @@ export const NB_MODULES = [
   NbButtonModule,
   NbListModule,
   NbInputModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbCalendarKitModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -349,6 +370,17 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputTypesComponent,
   NbInputFullWidthComponent,
   NbScrollWindowComponent,
+  NbCalendarShowcaseComponent,
+  NbCalendarBoundingMonthComponent,
+  NbCalendarRangeShowcaseComponent,
+  NbCalendarStartViewComponent,
+  NbCalendarCustomDayCellShowcaseComponent,
+  NbCalendarCustomDayCellComponent,
+  NbCalendarFilterComponent,
+  NbCalendarMinMaxComponent,
+  NbCalendarSizeComponent,
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
 ];
 
 @NgModule({
