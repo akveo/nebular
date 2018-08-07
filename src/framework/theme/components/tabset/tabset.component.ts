@@ -41,12 +41,37 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbTabComponent {
 
+  /**
+   * Tab title
+   * @type {string}
+   */
   @Input() tabTitle: string;
+
+  /**
+   * Tab icon
+   * @type {string}
+   */
+  @Input() tabIcon: string;
+
+  /**
+   * Show only icons when width is smaller than `tabs-icon-only-max-width`
+   * @type {boolean}
+   */
+  @Input()
+  set responsive(val: boolean) {
+    this.responsiveValue = convertToBoolProperty(val);
+  }
+
+  get responsive() {
+    return this.responsiveValue;
+  }
 
   @Input() route: string;
 
   @HostBinding('class.content-active')
   activeValue: boolean = false;
+
+  responsiveValue: boolean = false;
 
   /**
    * Specifies active tab
@@ -125,6 +150,13 @@ export class NbTabComponent {
  * and we can set it to full a width of a parent component
  * @stacked-example(Full Width, tabset/tabset-width.component)
  *
+ * `tabIcon` should be used to add an icon to the tab. Icon can also be combined with title.
+ * `responsive` tab property if set allows you to hide the title on smaller screens
+ * (`tabs-icon-only-max-width` property) for better responsive behaviour. You can open the following example and make
+ * your screen smaller - titles will be hidden in the last tabset in the list:
+ *
+ * @stacked-example(Icon, tabset/tabset-icon.component)
+ *
  * @styles
  *
  * tabs-font-family:
@@ -142,8 +174,8 @@ export class NbTabComponent {
  * tabs-fg-heading:
  * tabs-bg:
  * tabs-selected:
+ * tabs-icon-only-max-width
  *
- ```
  */
 @Component({
   selector: 'nb-tabset',
@@ -152,8 +184,12 @@ export class NbTabComponent {
     <ul>
       <li *ngFor="let tab of tabs"
           (click)="selectTab(tab)"
+          [class.responsive]="tab.responsive"
           [class.active]="tab.active">
-        <a href (click)="$event.preventDefault()">{{ tab.tabTitle }}</a>
+        <a href (click)="$event.preventDefault()">
+          <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
+          <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
+        </a>
         <nb-badge *ngIf="tab.badgeText"
           [text]="tab.badgeText"
           [status]="tab.badgeStatus"
