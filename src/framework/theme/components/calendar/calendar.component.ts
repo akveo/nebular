@@ -10,7 +10,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
 
 
 /**
- * Calendar component provides capability to choose date.
+ * Calendar component provides a capability to choose a date.
  *
  * ```html
  * <nb-calendar [(date)]="date"></nb-calendar>
@@ -19,7 +19,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
  *
- * If you wanna select ranges you can use `NbCalendarRangeComponent`
+ * If you want to select ranges you can use `NbCalendarRangeComponent`
  * @stacked-example(Range, calendar/calendar-range-showcase.component)
  *
  * As you can see in the basic usage example calendar contains previous and next month days
@@ -30,22 +30,22 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * Available values: year, month and date.
  * @stacked-example(Start view, calendar/calendar-start-view.component)
  *
- * You can use larger version of the calendar by defining size property.
+ * You can use a larger version of the calendar by defining size property.
  * Available values: medium(which is default) and large.
  * @stacked-example(Size, calendar/calendar-size.component)
  *
  * Calendar supports min and max dates which disables values out of min-max range.
  * @stacked-example(Borders, calendar/calendar-min-max.component)
  *
- * Also you can define custom filter property that should be predicate which receives
- * date and returns false if this date have to be disables. In this example we provide filter
+ * Also, you can define custom filter property that should be predicate which receives
+ * date and returns false if this date has to be disabled. In this example, we provide the filter
  * which disables weekdays.
  * @stacked-example(Filter, calendar/calendar-filter.component)
  *
  * If you need create custom cells you can easily provide custom components for
- * calendar. For examples if you wanna show any average price under each date you can
+ * calendar. For examples if you want to show any average price under each date you can
  * just provide custom `dayCellComponent`. Custom cells for month and year can be provided
- * same way, check api reference.
+ * the same way, check API reference.
  * @stacked-example(Custom day cell, calendar/calendar-custom-day-cell-showcase.component)
  *
  * @styles

@@ -16,7 +16,7 @@ export interface NbCalendarRange {
 }
 
 /**
- * Calendar component provides capability to choose ranges.
+ * Calendar component provides a capability to choose ranges.
  * For additional info check `NbBaseCalendarComponent`.
  *
  * ```html
@@ -49,22 +49,22 @@ export class NbCalendarRangeComponent {
   @Input() boundingMonth: boolean = true;
 
   /**
-   * Defines starting view for calendar.
+   * Defines starting view for the calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
 
   /**
-   * Minimum available date for selection.
+   * A minimum available date for selection.
    * */
   @Input() min: Date;
 
   /**
-   * Maximum available date for selection.
+   * A maximum available date for selection.
    * */
   @Input() max: Date;
 
   /**
-   * Predicate that decides which cells will be disabled.
+   * A predicate that decides which cells will be disabled.
    * */
   @Input() filter: (Date) => boolean;
 

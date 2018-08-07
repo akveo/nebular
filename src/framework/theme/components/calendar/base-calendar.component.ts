@@ -10,8 +10,8 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } fr
 
 
 /**
- * Basis for calendar and range calendar components.
- * Encapsulates common behaviour - store calendar state and perform navigation
+ * The basis for calendar and range calendar components.
+ * Encapsulates common behavior - store calendar state and perform navigation
  * between pickers.
  * */
 @Component({
