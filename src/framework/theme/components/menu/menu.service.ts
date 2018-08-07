@@ -162,15 +162,8 @@ export class NbMenuService {
 
 @Injectable()
 export class NbMenuInternalService {
-  private items: NbMenuItem[] = [];
 
-  constructor(private location: Location) {
-    this.items = [];
-  }
-
-  getItems(): NbMenuItem[] {
-    return this.items;
-  }
+  constructor(private location: Location) {}
 
   prepareItems(items: NbMenuItem[]) {
     const defaultItem = new NbMenuItem();

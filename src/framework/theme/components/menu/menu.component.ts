@@ -36,7 +36,6 @@ function sumSubmenuHeight(item: NbMenuItem) {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: '[nbMenuItem]',
   templateUrl: './menu-item.component.html',
 })
@@ -283,7 +282,6 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // TODO: this probably won't work if you pass items dynamically into items input
     this.menuInternalService.prepareItems(this.items);
-    this.items.push(...this.menuInternalService.getItems());
   }
 
   ngAfterViewInit() {
