@@ -11,7 +11,7 @@ import {
 
 @Component({
   selector: 'nb-calendar-kit-month-cell',
-  styles: [` :host { padding-bottom: 2rem; } `],
+  styles: [` :host { padding: 1rem; } `],
   template: `
     <h4>{{ title }}</h4>
     <nb-calendar-day-picker
