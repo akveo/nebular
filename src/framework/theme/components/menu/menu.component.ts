@@ -234,6 +234,8 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.menuInternalService.prepareItems(this.items);
+
     this.menuInternalService
       .onAddItem()
       .pipe(
@@ -276,9 +278,6 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
       });
-
-    // TODO: this probably won't work if you pass items dynamically into items input
-    this.menuInternalService.prepareItems(this.items);
   }
 
   ngAfterViewInit() {
