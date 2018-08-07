@@ -95,6 +95,12 @@ export class NbMenuItem {
   selected?: boolean;
   data?: any;
   fragment?: string;
+
+  isParentOf(possibleChild: NbMenuItem) {
+    return possibleChild.parent
+      ? possibleChild.parent === this || this.isParentOf(possibleChild.parent)
+      : false;
+  }
 }
 
 // TODO: map select events to router change events
@@ -228,14 +234,8 @@ export class NbMenuInternalService {
     });
   }
 
-  private isParent(parent, child) {
-    return child.parent
-      ? child.parent === parent || this.isParent(parent, child.parent)
-      : false;
-  }
-
   private collapseItem(item: NbMenuItem, tag: string, except?: NbMenuItem) {
-    if (except && (item === except || this.isParent(item, except))) {
+    if (except && (item === except || item.isParentOf(except))) {
       return;
     }
 
