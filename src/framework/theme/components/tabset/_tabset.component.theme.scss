@@ -52,6 +52,14 @@
             color: nb-theme(tabs-fg-heading);
           }
         }
+
+        &.responsive {
+          @media screen and (max-width: nb-theme(tabs-icon-only-max-width)) {
+            a span {
+              display: none;
+            }
+          }
+        }
       }
     }
 
