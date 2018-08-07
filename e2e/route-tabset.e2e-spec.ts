@@ -8,7 +8,7 @@ import { browser, element, by } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
-fdescribe('nb-route-tabset', () => {
+describe('nb-route-tabset', () => {
   beforeEach((done) => {
     browser.get('#/tabset/route-tabset-showcase.component').then(() => done());
   });

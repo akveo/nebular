@@ -188,7 +188,7 @@ export class NbTabComponent {
           [class.active]="tab.active">
         <a href (click)="$event.preventDefault()">
           <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
-          <span>{{ tab.tabTitle }}</span>
+          <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
         </a>
         <nb-badge *ngIf="tab.badgeText"
           [text]="tab.badgeText"

@@ -62,7 +62,7 @@ import { convertToBoolProperty } from '../helpers';
           [class.responsive]="tab.responsive">
         <a href>
           <i *ngIf="tab.icon" [class]="tab.icon"></i>
-          <span>{{ tab.title }}</span>
+          <span *ngIf="tab.title">{{ tab.title }}</span>
         </a>
       </li>
     </ul>
