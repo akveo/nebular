@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core';
 import { NgdStructureService } from './structure.service';
 import { NgdTextService } from './text.service';
-import { NgdMenuService } from '../../documentation/menu.service';
+import { NgdMenuService } from './menu.service';
 
 /**
  * Pagination Item options

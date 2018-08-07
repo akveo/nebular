@@ -26,12 +26,14 @@ Main Nebular module which includes UI Kit and Theme System.
 | Sidebar      | Layout sidebar with multiple states.                                 |
 | Menu         | Multi-depth menu component.                                          |
 | Card         | Basic card with arbitrary header and footer.                         |
+| Alert        | Alert component showing message and statuses with close button.      |
 | Flip Card    | A card with back and front sides and "flip" switching effect.        |
 | Reveal Card  | A card with back and front sides and "reveal" switching effect.      |
 | Search       | Global search with amazing showing animations.                       |
 | Tabs         | Basic and route-based tab components.                                |
 | Actions      | Horizontal actions bar.                                              |
 | User         | User avatar with a context menu.                                     |
+| Progress Bar | Component for progress indication.                                   |
 | Badge        | Simple helper components for showing a badge.                        |
 | Popover      | Pop-up box that appears when a user clicks on an element.            |
 | Context Menu | A directive to attach a menu to any element.                         |

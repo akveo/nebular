@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
@@ -17,27 +17,32 @@ import { NbAuthResult } from '../../services/auth-result';
   template: `
     <nb-auth-block>
       <h2 class="title">Forgot Password</h2>
-      <small class="form-text sub-title">Enter your email adress and we’ll send a link to reset your password</small>
+      <small class="form-text sub-title">Enter your email address and we’ll send a link to reset your password</small>
       <form (ngSubmit)="requestPass()" #requestPassForm="ngForm">
 
-        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
-             class="alert alert-danger" role="alert">
+        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
           <div><strong>Oh snap!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
-        </div>
-        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
-             class="alert alert-success" role="alert">
+        </nb-alert>
+
+        <nb-alert *ngIf="showMessages.success && messages.length && !submitted" outline="success">
           <div><strong>Hooray!</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
-        </div>
+        </nb-alert>
 
         <div class="form-group">
           <label for="input-email" class="sr-only">Enter your email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
-                 class="form-control" placeholder="Email address" pattern=".+@.+\..+"
-                 [class.form-control-danger]="email.invalid && email.touched"
-                 [required]="getConfigValue('forms.validation.email.required')"
-                 autofocus>
+          <input nbInput
+                 #email="ngModel"
+                 [(ngModel)]="user.email"
+                 id="input-email"
+                 name="email"
+                 placeholder="Email address"
+                 autofocus
+                 fullWidth
+                 pattern=".+@.+\..+"
+                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+                 [required]="getConfigValue('forms.validation.email.required')">
           <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
             Email is required!
           </small>
@@ -47,7 +52,10 @@ import { NbAuthResult } from '../../services/auth-result';
           </small>
         </div>
 
-        <button [disabled]="submitted || !requestPassForm.form.valid" class="btn btn-hero-success btn-block"
+        <button nbButton
+                status="success"
+                fullWidth
+                [disabled]="submitted || !requestPassForm.valid"
                 [class.btn-pulse]="submitted">
           Request password
         </button>
@@ -63,6 +71,7 @@ import { NbAuthResult } from '../../services/auth-result';
       </div>
     </nb-auth-block>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRequestPasswordComponent {
 
@@ -77,6 +86,7 @@ export class NbRequestPasswordComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
+              protected cd: ChangeDetectorRef,
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.requestPassword.redirectDelay');
@@ -102,6 +112,7 @@ export class NbRequestPasswordComponent {
           return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
+      this.cd.detectChanges();
     });
   }
 

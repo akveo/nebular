@@ -4,25 +4,39 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NbCardModule, NbCheckboxModule, NbLayoutModule } from '@nebular/theme';
+import {
+  NbAlertModule,
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbInputModule,
+  NbLayoutModule,
+} from '@nebular/theme';
 
 import {
   NB_AUTH_FALLBACK_TOKEN,
   NbAuthService,
   NbAuthSimpleToken,
+  NbAuthTokenClass,
+  NbAuthTokenParceler,
   NbTokenLocalStorage,
   NbTokenService,
   NbTokenStorage,
-  NbAuthTokenClass,
-  NbAuthTokenParceler,
 } from './services';
-import { NbAuthStrategy, NbAuthStrategyOptions, NbDummyAuthStrategy, NbPasswordAuthStrategy } from './strategies';
+import {
+  NbAuthStrategy,
+  NbAuthStrategyOptions,
+  NbDummyAuthStrategy,
+  NbOAuth2AuthStrategy,
+  NbPasswordAuthStrategy,
+} from './strategies';
 
 import {
   defaultAuthOptions,
   NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
-  NB_AUTH_STRATEGIES, NB_AUTH_TOKENS,
+  NB_AUTH_STRATEGIES,
+  NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
   NbAuthOptions,
   NbAuthStrategyClass,
@@ -71,6 +85,9 @@ export function nbOptionsFactory(options) {
     NbLayoutModule,
     NbCardModule,
     NbCheckboxModule,
+    NbAlertModule,
+    NbInputModule,
+    NbButtonModule,
     RouterModule.forChild(routes),
     FormsModule,
     HttpClientModule,
@@ -111,6 +128,7 @@ export class NbAuthModule {
         NbTokenService,
         NbDummyAuthStrategy,
         NbPasswordAuthStrategy,
+        NbOAuth2AuthStrategy,
       ],
     };
   }

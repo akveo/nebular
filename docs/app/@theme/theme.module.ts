@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,6 +43,8 @@ import {
   NgdVersionService,
   NgdTocStateService,
   NgdPaginationService,
+  NgdAnalytics,
+  NgdMenuService,
 } from './services';
 
 
@@ -91,18 +93,25 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
   ],
-  providers: [
-    NgdHighlightService,
-    NgdTextService,
-    NgdTabbedService,
-    NgdStructureService,
-    NgdCodeLoaderService,
-    NgdIframeCommunicatorService,
-    NgdStylesService,
-    NgdVersionService,
-    NgdTocStateService,
-    NgdPaginationService,
-  ],
 })
 export class NgdThemeModule {
+  static forRoot(): ModuleWithProviders {
+    return <ModuleWithProviders>{
+      ngModule: NgdThemeModule,
+      providers: [
+        NgdHighlightService,
+        NgdTextService,
+        NgdTabbedService,
+        NgdStructureService,
+        NgdCodeLoaderService,
+        NgdIframeCommunicatorService,
+        NgdStylesService,
+        NgdVersionService,
+        NgdTocStateService,
+        NgdPaginationService,
+        NgdAnalytics,
+        NgdMenuService,
+      ],
+    };
+  }
 }

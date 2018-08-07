@@ -7,7 +7,7 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 /**
- * Component intended to be used within  the `<nb-card>` component.
+ * Component intended to be used within the `<nb-card>` component.
  * It adds styles for a preset header section.
  *
  * @styles
@@ -73,6 +73,14 @@ export class NbCardFooterComponent {
  * Card with header and footer:
  * @stacked-example(With Header & Footer, card/card-full.component)
  *
+ * Most of the time main card content goes to `nb-card-body`,
+ * so it is styled and aligned in accordance with the header and footer.
+ * In case you need a higher level of control, you can pass contend directly to `nb-card`,
+ * so `nb-card-body` styling will not be applied.
+ *
+ * Consider an example with `nb-list` component:
+ * @stacked-example(Showcase, card/card-without-body.component)
+ *
  * Colored cards could be simply configured by providing a `status` property:
  * @stacked-example(Colored Card, card/card-colors.component)
  *
@@ -106,9 +114,9 @@ export class NbCardFooterComponent {
   selector: 'nb-card',
   styleUrls: ['./card.component.scss'],
   template: `
-    <ng-content></ng-content>
     <ng-content select="nb-card-header"></ng-content>
     <ng-content select="nb-card-body"></ng-content>
+    <ng-content></ng-content>
     <ng-content select="nb-card-footer"></ng-content>
   `,
 })

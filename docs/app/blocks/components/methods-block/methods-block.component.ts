@@ -18,8 +18,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let method of methods">
-        <ng-container *ngIf="method.shortDescription || method.description">
+      <ng-container *ngFor="let method of methods">
+        <tr *ngIf="method.shortDescription || method.description">
           <td>{{ method.name }}() <br><i *ngIf="method.isStatic">static method</i></td>
           <td>
             <div class="method-signature">
@@ -36,8 +36,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
               {{ method.shortDescription }} <br> {{ method.description }}
             </div>
           </td>
-        </ng-container>
-      </tr>
+        </tr>
+      </ng-container>
       </tbody>
     </table>
   `,

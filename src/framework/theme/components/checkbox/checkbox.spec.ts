@@ -1,7 +1,8 @@
 import { NbCheckboxComponent } from './checkbox.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 describe('Component: NbCheckbox', () => {
 
@@ -65,5 +66,57 @@ describe('Component: NbCheckbox', () => {
     checkbox.status = 'danger';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('danger')).toBeTruthy();
+  });
+});
+
+/** Test component with reactive forms */
+@Component({
+  template: `<nb-checkbox [formControl]="formControl"></nb-checkbox>`,
+})
+class CheckboxWithFormControlComponent {
+  formControl = new FormControl();
+}
+
+describe('Component: NbCheckbox with form control', () => {
+
+  let fixture: ComponentFixture<CheckboxWithFormControlComponent>;
+  let checkboxComponent: DebugElement;
+  let checkboxInstance: NbCheckboxComponent;
+  let testComponent: CheckboxWithFormControlComponent;
+  let inputElement: HTMLInputElement;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
+      declarations: [NbCheckboxComponent, CheckboxWithFormControlComponent],
+    });
+
+      fixture = TestBed.createComponent(CheckboxWithFormControlComponent);
+      fixture.detectChanges();
+
+      checkboxComponent = fixture.debugElement.query(
+        By.directive(NbCheckboxComponent),
+      );
+      checkboxInstance = checkboxComponent.componentInstance;
+      testComponent = fixture.debugElement.componentInstance;
+      inputElement = <HTMLInputElement>(
+        checkboxComponent.nativeElement.querySelector('input')
+      );
+  });
+
+  it('Toggling form control disabled state properly toggles checkbox input', () => {
+      expect(checkboxInstance.disabled).toBeFalsy();
+
+      testComponent.formControl.disable();
+      fixture.detectChanges();
+
+      expect(checkboxInstance.disabled).toBeTruthy();
+      expect(inputElement.disabled).toBeTruthy();
+
+      testComponent.formControl.enable();
+      fixture.detectChanges();
+
+      expect(checkboxInstance.disabled).toBeFalsy();
+      expect(inputElement.disabled).toBeFalsy();
   });
 });

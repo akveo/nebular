@@ -170,10 +170,10 @@
             border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nb-theme(footer-fg);
+              color: nb-theme(footer-fg-highlight);
 
               @include hover-focus-active {
-                color: nb-theme(footer-fg);
+                color: nb-theme(footer-fg-highlight);
               }
             }
           }
@@ -196,6 +196,12 @@
           }
         }
       }
+    }
+  }
+
+  nb-layout.with-subheader {
+    nb-sidebar .main-container {
+      box-shadow: none; // so that we don't have a shadow over the header in this mode
     }
   }
 }

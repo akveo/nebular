@@ -24,7 +24,7 @@ To install ngx-admin on your machine you need to have the following tools instal
 <hr>
 
 ## Download the code
-After you completed tools setup, you need to download the code of ngx-admin application. The easiest way to do that is to clone GitHub repository:
+When you completed tools setup, you need to download the code of ngx-admin application. The easiest way to do that is to clone GitHub repository:
 ```bash
 git clone https://github.com/akveo/ngx-admin.git
 ```
@@ -61,10 +61,9 @@ npm run build:prod
 ```
 
 This will clear up your `dist` folder (where release files are located) and generate a release build.
-Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](#/docs/guides/server-deployment).
+Now you can copy the sources from the `dist` folder and use it with any backend framework or simply [put it under a web server](docs/guides/server-deployment).
 <hr>
 
 ## Related Articles
 
-- [Deploying to production server](#/docs/guides/server-deployment)
-- [Updating ngx-admin to the latest verion](#/docs/guides/ngx-admin-update)
+- [Deploying to production server](docs/guides/server-deployment)

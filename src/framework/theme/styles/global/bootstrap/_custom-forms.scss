@@ -23,6 +23,7 @@
 
     .custom-control-indicator {
       background-color: nb-theme(checkbox-bg);
+      border-radius: 50%;
       width: nb-theme(checkbox-size);
       height: nb-theme(checkbox-size);
       border: nb-theme(checkbox-border-size) solid nb-theme(checkbox-border-color);

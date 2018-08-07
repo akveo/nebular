@@ -29,17 +29,17 @@ export class NgdHomeComponent {
       link: 'docs/guides/install-based-on-starter-kit',
     },
     {
-      title: 'Theme System',
-      description: `Two built-in themes & hundreds of variables to create your own.
-                    Multiple themes with hot reload out of the box.`,
-      icon: 'assets/img/themes.svg',
-      link: 'docs/guides/theme-system',
-    },
-    {
       title: 'Components',
       description: 'Native Angular components with configurable styles',
       icon: 'assets/img/components.svg',
       link: 'docs/components/components-overview',
+    },
+    {
+      title: 'Theme System',
+      description: `Three built-in themes & hundreds of variables to create your own.
+                    With hot-reload out of the box`,
+      icon: 'assets/img/themes.svg',
+      link: 'docs/guides/theme-system',
     },
     {
       title: 'Auth',

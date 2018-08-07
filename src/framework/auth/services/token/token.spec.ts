@@ -4,90 +4,332 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthJWTToken, NbAuthSimpleToken } from './token';
+import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken, NbAuthOAuth2JWTToken } from './token';
 
 
-describe('auth JWT token', () => {
-  // tslint:disable
-  const simpleToken = new NbAuthSimpleToken('token');
-  const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjI1MTczMTQwNjYxNzUsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-  const emptyJWTToken = new NbAuthJWTToken('..');
-  const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY');
+describe('auth token', () => {
+  describe('NbAuthJWTToken', () => {
+    const now = new Date();
 
-  const invalidJWTToken = new NbAuthJWTToken('.');
+    // tslint:disable
+    const simpleToken = new NbAuthSimpleToken('token','strategy');
+    const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c', 'strategy');
+    const emptyJWTToken = new NbAuthJWTToken('..', 'strategy');
+    const invalidBase64JWTToken = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY','strategy');
 
-  const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJuYW1lIjoiQ2hyaXMgU2V2aWxsZWphIiwiYWRtaW4iOnRydWV9.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
+    const invalidJWTToken = new NbAuthJWTToken('.','strategy');
 
-  const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773');
-  // tslint:enable
+    const noIatJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJleHAiOjE1MzI0MzcyMDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.cfwQlKo6xomXkE-U-SOqse2GjdxncOuhdd1VWIOiYzA', 'strategy');
 
-  it('getPayload success', () => {
-    expect(validJWTToken.getPayload())
-      .toEqual(JSON.parse('{"iss":"scotch.io","exp":2517314066175,"name":"Chris Sevilleja","admin":true}'));
+    const noExpJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.heHVXkHexwqbPCPUAvkJlXO6tvxzxTKf4iP0OWBbp7Y','strategy');
+
+    const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
+
+    // tslint:enable
+
+    it('getPayload success', () => {
+      expect(validJWTToken.getPayload())
+      // tslint:disable-next-line
+        .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
+    });
+
+    it('getPayload, not valid JWT token, must consist of three parts', () => {
+      expect(() => {
+        invalidJWTToken.getPayload();
+      })
+        .toThrow(new Error(
+          `The payload ${invalidJWTToken.getValue()} is not valid JWT payload and must consist of three parts.`));
+    });
+
+    it('getPayload, not valid JWT token, cannot be decoded', () => {
+      expect(() => {
+        emptyJWTToken.getPayload();
+      })
+        .toThrow(new Error(
+          `The payload ${emptyJWTToken.getValue()} is not valid JWT payload and cannot be decoded.`));
+    });
+
+    it('getPayload, not valid base64 in JWT token, cannot be decoded', () => {
+      expect(() => {
+        invalidBase64JWTToken.getPayload();
+      })
+        .toThrow(new Error(
+          `The payload ${invalidBase64JWTToken.getValue()} is not valid JWT payload and cannot be parsed.`));
+    });
+
+    it('getCreatedAt success : now for simpleToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(simpleToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getCreatedAt success : exp for validJWTToken', () => {
+      const date = new Date();
+      date.setTime(1532350800000)
+      expect(validJWTToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success : now for noIatJWTToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(noIatJWTToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getCreatedAt success : now for simpleToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(simpleToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getCreatedAt success : exp for validJWTToken', () => {
+      const date = new Date();
+      date.setTime(1532350800000)
+      expect(validJWTToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success : now for noIatJWTToken', () => {
+      // we consider dates are the same if differing from minus than 10 ms
+      expect(noIatJWTToken.getCreatedAt().getTime() - now.getTime() < 10);
+    });
+
+    it('getTokenExpDate success', () => {
+      const date = new Date(0);
+      date.setTime(2532350800000);
+      expect(validJWTToken.getTokenExpDate()).toEqual(date);
+    });
+
+    it('getTokenExpDate is empty', () => {
+      expect(noExpJWTToken.getTokenExpDate()).toBeNull();
+    });
+
+    it('no exp date token is valid', () => {
+      expect(noExpJWTToken.isValid()).toEqual(true);
+    });
+
+    it('isValid success', () => {
+      expect(validJWTToken.isValid()).toEqual(true);
+    });
+
+    it('isValid fail', () => {
+      // without token
+      expect(new NbAuthJWTToken('', 'strategy', new Date()).isValid()).toBeFalsy();
+
+
+      // expired date
+      expect(expiredJWTToken.isValid()).toBeFalsy();
+    });
+
+    it('NbAuthJWTToken name', () => {
+      // without token
+      expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
+    });
+
+    it('NbAuthSimpleToken name', () => {
+      // without token
+      expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
+    });
+
+    it('NbAuthSimpleToken has payload', () => {
+      // without token
+      expect(simpleToken.getPayload()).toEqual(null);
+    });
+
+    it('getPayload success', () => {
+      expect(validJWTToken.getPayload())
+      // tslint:disable-next-line
+        .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
+    });
+
+    it('NbAuthJWTToken name', () => {
+      // without token
+      expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
+    });
+
+    it('NbAuthSimpleToken name', () => {
+      // without token
+      expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
+    });
+
+    it('NbAuthSimpleToken has payload', () => {
+      // without token
+      expect(simpleToken.getPayload()).toEqual(null);
+    });
   });
 
-  it('getPayload, not valid JWT token, must consist of three parts', () => {
-    expect(() => {
-      invalidJWTToken.getPayload();
-    })
-      .toThrow(new Error(
-        `The token ${invalidJWTToken.getValue()} is not valid JWT token and must consist of three parts.`));
+  describe('NbAuthOAuth2Token', () => {
+
+    const token = {
+      access_token: '2YotnFZFEjr1zCsicMWpAA',
+      expires_in: 3600,
+      refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+      token_type: 'bearer',
+      example_parameter: 'example_value',
+    };
+
+
+    let validToken = new NbAuthOAuth2Token(token, 'strategy');
+
+    const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
+
+    const noExpToken = new NbAuthOAuth2Token({
+      access_token: '2YotnFZFEjr1zCsicMWpAA',
+      refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+      example_parameter: 'example_value',
+    }, 'strategy');
+
+    it('getPayload success', () => {
+      expect(validToken.getPayload()).toEqual(token);
+    });
+
+    it('getPayload, not valid token, cannot be decoded', () => {
+      expect(() => {
+        emptyToken.getPayload();
+      })
+        .toThrow(new Error(
+          `Cannot extract payload from an empty token.`));
+    });
+
+    it('getExpDate success', () => {
+      // recreate it here if we want to be in the same second
+      validToken = new NbAuthOAuth2Token(token, 'strategy');
+      const date = new Date();
+      date.setTime(date.getTime() + 3600 * 1000);
+      expect(validToken.getTokenExpDate().getTime() - date.getTime() < 10);
+    });
+
+    it('getTokenExpDate is empty', () => {
+      expect(noExpToken.getTokenExpDate()).toBeNull();
+    });
+
+    it('toString is json', () => {
+      expect(String(validToken)).toEqual(JSON.stringify(token));
+    });
+
+    it('getTokenExpDate is empty', () => {
+      expect(validToken.getType()).toEqual(token.token_type);
+    });
+
+    it('getTokenExpDate is empty', () => {
+      expect(noExpToken.getRefreshToken()).toEqual(token.refresh_token);
+    });
+
+    it('no exp date token is valid', () => {
+      expect(noExpToken.isValid()).toEqual(true);
+    });
+
+    it('isValid success', () => {
+      expect(validToken.isValid()).toEqual(true);
+    });
+
+    it('name', () => {
+      expect(NbAuthOAuth2Token.NAME).toEqual(validToken.getName());
+    });
   });
 
-  it('getPayload, not valid JWT token, cannot be decoded', () => {
-    expect(() => {
-      emptyJWTToken.getPayload();
-    })
-      .toThrow(new Error(
-        `The token ${emptyJWTToken.getValue()} is not valid JWT token and cannot be decoded.`));
+  describe('NbAuthOAuth2JWTToken', () => {
+
+    const exp = 2532350800;
+    const iat = 1532350800;
+    const expires_in = 1000000000;
+
+    const accessTokenPayload = {
+      'iss': 'cerema.fr',
+      'iat': 1532350800,
+      'exp': 2532350800,
+      'sub': 'Alain CHARLES',
+      'admin': true,
+    };
+
+    const validPayload = {
+      // tslint:disable-next-line
+      access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c',
+      expires_in: 1000000000,
+      refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+      token_type: 'bearer',
+      example_parameter: 'example_value',
+    };
+
+    const noExpButIatPayload = {
+      // tslint:disable-next-line
+      access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.heHVXkHexwqbPCPUAvkJlXO6tvxzxTKf4iP0OWBbp7Y',
+      expires_in: expires_in,
+      refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+      token_type: 'bearer',
+      example_parameter: 'example_value',
+    };
+
+    const noExpNoIatPayload = {
+      // tslint:disable-next-line
+      access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJzdWIiOiJBbGFpbiBDSEFSTEVTIiwiYWRtaW4iOnRydWV9.LKZggkN-r_5hnEcCg5GzbSqZz5_SUHEB1Bf9Sy1qJd4',
+      expires_in: expires_in,
+      refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+      token_type: 'bearer',
+      example_parameter: 'example_value',
+    };
+
+    const permanentPayload = {
+      // tslint:disable-next-line
+      access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJzdWIiOiJBbGFpbiBDSEFSTEVTIiwiYWRtaW4iOnRydWV9.LKZggkN-r_5hnEcCg5GzbSqZz5_SUHEB1Bf9Sy1qJd4',
+      token_type: 'bearer',
+      example_parameter: 'example_value',
+    };
+
+    const validToken = new NbAuthOAuth2JWTToken(validPayload, 'strategy');
+    let noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
+    const emptyToken = new NbAuthOAuth2JWTToken({}, 'strategy');
+    const permanentToken = new NbAuthOAuth2JWTToken(permanentPayload, 'strategy');
+
+    it('getPayload success', () => {
+      expect(validToken.getPayload()).toEqual(validPayload);
+    });
+
+    it('getAccessTokenPayload success', () => {
+      expect(validToken.getAccessTokenPayload()).toEqual(accessTokenPayload);
+    });
+
+    it('getPayload, not valid token, cannot be decoded', () => {
+      expect(() => {
+        emptyToken.getPayload();
+      })
+        .toThrow(new Error(
+          `Cannot extract payload from an empty token.`));
+    });
+
+    it('getCreatedAt success for valid token', () => {
+      const date = new Date(0);
+      date.setUTCSeconds(iat);
+      expect(validToken.getCreatedAt()).toEqual(date);
+    });
+
+    it('getCreatedAt success for no iat token', () => {
+      noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
+      const date = new Date();
+      expect(noExpButIatToken.getTokenExpDate().getTime() - date.getTime() < 10);
+    });
+
+    it('getExpDate success when exp is set', () => {
+      const date = new Date(0);
+      date.setUTCSeconds(exp);
+      expect(validToken.getTokenExpDate()).toEqual(date);
+    });
+
+    it('getExpDate success when exp is not set but iat and expires_in are set', () => {
+      const date = new Date(0);
+      date.setUTCSeconds(iat + expires_in);
+      expect(noExpButIatToken.getTokenExpDate()).toEqual(date);
+    });
+
+    it('getExpDate success when only expires_in is set', () => {
+      const NoExpNoIatToken = new NbAuthOAuth2JWTToken(noExpNoIatPayload, 'strategy');
+      const date = new Date();
+      date.setTime(date.getTime() + expires_in * 1000);
+      expect(NoExpNoIatToken.getTokenExpDate().getTime() - date.getTime() < 10);
+    });
+
+    it('getTokenExpDate is empty', () => {
+      expect(permanentToken.getTokenExpDate()).toBeNull();
+    });
+
+    it('name', () => {
+      expect(NbAuthOAuth2JWTToken.NAME).toEqual(validToken.getName());
+    });
   });
 
-  it('getPayload, not valid base64 in JWT token, cannot be decoded', () => {
-    expect(() => {
-      invalidBase64JWTToken.getPayload();
-    })
-      .toThrow(new Error(
-        `The token ${invalidBase64JWTToken.getValue()} is not valid JWT token and cannot be parsed.`));
-  });
-
-  it('getTokenExpDate success', () => {
-    const date = new Date(0);
-    date.setUTCSeconds(2517314066175);
-    expect(validJWTToken.getTokenExpDate()).toEqual(date);
-  });
-
-  it('getTokenExpDate is empty', () => {
-    expect(noExpJWTToken.getTokenExpDate()).toBeNull();
-  });
-
-  it('no exp date token is valid', () => {
-    expect(noExpJWTToken.isValid()).toEqual(true);
-  });
-
-  it('isValid success', () => {
-    expect(validJWTToken.isValid()).toEqual(true);
-  });
-
-  it('isValid fail', () => {
-    // without token
-    expect(new NbAuthJWTToken('').isValid()).toBeFalsy();
-
-    // expired date
-    expect(expiredJWTToken.isValid()).toBeFalsy();
-  });
-
-  it('NbAuthJWTToken name', () => {
-    // without token
-    expect(NbAuthJWTToken.NAME).toEqual(validJWTToken.getName());
-  });
-
-  it('NbAuthSimpleToken name', () => {
-    // without token
-    expect(NbAuthSimpleToken.NAME).toEqual(simpleToken.getName());
-  });
-
-  it('NbAuthSimpleToken has payload', () => {
-    // without token
-    expect(simpleToken.getPayload()).toEqual(null);
-  });
 });

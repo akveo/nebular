@@ -2,7 +2,7 @@
 
 All Nebular components support RTL out of the box.
 
-The components that accept a position as a setting now also support logical start and end values, similar to flexbox. Value of start and end depends on current layout direction. For LTR it's left and for RTL - right.
+The components that accept a position as a setting now also support logical start and end values, similar to flexbox. The value of start and end depends on current layout direction. For LTR it's left and for RTL - right.
 For instance, if we need the sidebar to be positioned logically depending on a language direction, then instead of setting it to left we can set its position to start:
 
 ```html

@@ -1,0 +1,77 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-accordion-item-header() {
+  padding: nb-theme(accordion-padding);
+  border-bottom-width: nb-theme(accordion-header-border-width);
+  border-bottom-style: nb-theme(accordion-header-border-type);
+  border-bottom-color: nb-theme(accordion-header-border-color);
+  color: nb-theme(accordion-header-fg-heading);
+
+  font-family: nb-theme(accordion-header-font-family);
+  font-size: nb-theme(accordion-header-font-size);
+  font-weight: nb-theme(accordion-header-font-weight);
+
+  @include nb-headings();
+}
+
+@mixin nb-accordion-theme() {
+
+  nb-accordion {
+    display: block;
+    box-shadow: nb-theme(accordion-item-shadow);
+    border-radius: nb-theme(accordion-border-radius);
+
+    nb-accordion-item-header {
+      position: relative;
+      @include nb-accordion-item-header();
+
+      i {
+        position: absolute;
+        @include nb-ltr(right, 1rem);
+        @include nb-rtl(left, 1rem);
+      }
+    }
+
+    nb-accordion-item {
+      font-family: nb-theme(accordion-item-font-family);
+      font-weight: nb-theme(accordion-item-font-weight);
+      background: nb-theme(accordion-item-bg);
+      color: nb-theme(accordion-item-fg-text);
+
+      &.disabled nb-accordion-item-header {
+        color: nb-theme(accordion-header-disabled-fg);
+        cursor: default;
+      }
+
+      &:first-child {
+        border-top-left-radius: nb-theme(accordion-border-radius);
+        border-top-right-radius: nb-theme(accordion-border-radius);
+      }
+      &:last-child {
+        border-bottom-left-radius: nb-theme(accordion-border-radius);
+        border-bottom-right-radius: nb-theme(accordion-border-radius);
+
+        &.collapsed nb-accordion-item-header {
+          border-bottom: none;
+        }
+      }
+    }
+    nb-accordion-item:not(.collapsed) + nb-accordion-item nb-accordion-item-header {
+      border-top-width: nb-theme(accordion-header-border-width);
+      border-top-style: nb-theme(accordion-header-border-type);
+      border-top-color: nb-theme(accordion-header-border-color);
+    }
+
+    nb-accordion-item-body .item-body {
+      flex: 1;
+      -ms-flex: 1 1 auto;
+      overflow: auto;
+      padding: nb-theme(card-padding);
+      position: relative;
+    }
+  }
+}

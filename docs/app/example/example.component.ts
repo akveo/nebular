@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { of as observableOf } from 'rxjs';
+import { takeWhile, delay } from 'rxjs/operators';
 import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
-import { NgdIframeCommunicatorService } from '../@theme/services';
+import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
 
 @Component({
   selector: 'ngd-example',
@@ -16,16 +17,20 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private communicator: NgdIframeCommunicatorService,
               private themeService: NbThemeService,
               private router: Router,
+              private analytics: NgdAnalytics,
               @Inject(NB_DOCUMENT) private document) {
   }
 
   ngOnInit() {
     this.setupId();
     this.subscribeOnThemeSwitch();
+    this.analytics.trackEvent('example-view', this.id);
   }
 
   ngAfterViewInit() {
-    this.sendHeight();
+    observableOf(null)
+      .pipe(delay(500))
+      .subscribe(() => this.sendHeight());
   }
 
   ngOnDestroy() {
@@ -44,6 +49,7 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private changeTheme(payload) {
     this.themeService.changeTheme(payload.theme);
+    this.sendHeight(); // theme change may cause change of height
   }
 
   private getId(): string {
