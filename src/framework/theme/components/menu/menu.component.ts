@@ -281,7 +281,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag));
+    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue));
   }
 
   onAddItem(data: { tag: string; items: NbMenuItem[] }) {
