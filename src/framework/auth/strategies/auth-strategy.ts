@@ -20,9 +20,9 @@ export abstract class NbAuthStrategy {
     return getDeepFromObject(this.options, key, null);
   }
 
-  createToken(value: any): NbAuthToken {
+  createToken<T extends NbAuthToken>(value: any): T {
     const requireValidToken: boolean = this.getOption('requireValidToken');
-    const token = nbAuthCreateToken(this.getOption('token.class'), value, this.getName());
+    const token = nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
     if (requireValidToken && !token.isValid()) {
       throw new InvalidJWTTokenError('Token is empty or invalid.');
     }

@@ -345,6 +345,15 @@ export const structure = [
         icon: 'input.svg',
         source: [ 'NbInputDirective' ],
       },
+      {
+        type: 'tabs',
+        name: 'Calendar',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarComponent',
+          'NbCalendarKitModule',
+        ],
+      },
     ],
   },
   {
