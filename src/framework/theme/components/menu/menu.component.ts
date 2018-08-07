@@ -266,9 +266,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         takeWhile(() => this.alive),
         filter((data: { tag: string }) => this.compareTag(data.tag)),
       )
-      .subscribe((data: { tag: string }) => {
-        this.collapseAll();
-      });
+      .subscribe(() => this.collapseAll());
 
     this.router.events
       .pipe(
@@ -276,8 +274,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(() => {
-        this.menuInternalService.resetItems(this.items);
-        this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue)
+        this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
       });
 
     // TODO: this probably won't work if you pass items dynamically into items input
@@ -285,14 +282,14 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.menuInternalService.updateSelection(this.items, this.tag));
+    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag));
   }
 
   onAddItem(data: { tag: string; items: NbMenuItem[] }) {
     this.items.push(...data.items);
 
     this.menuInternalService.prepareItems(this.items);
-    this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue);
+    this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
   }
 
   onHoverItem(item: NbMenuItem) {
@@ -309,8 +306,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO: is not fired on page reload
   onSelectItem(item: NbMenuItem) {
-    this.menuInternalService.resetItems(this.items);
-    this.menuInternalService.selectItem(item, this.tag);
+    this.menuInternalService.selectItem(item, this.items, this.autoCollapseValue, this.tag);
   }
 
   onItemClick(item: NbMenuItem) {

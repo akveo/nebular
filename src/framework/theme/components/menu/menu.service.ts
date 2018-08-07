@@ -10,6 +10,7 @@ import { Params } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
 const itemClick$ = new ReplaySubject<NbMenuBag>(1);
@@ -96,7 +97,21 @@ export class NbMenuItem {
   data?: any;
   fragment?: string;
 
-  isParentOf(possibleChild: NbMenuItem) {
+  /**
+   * @returns item parents in top-down order
+   */
+  getParents(): NbMenuItem[] {
+    const parents = [];
+
+    let parent;
+    while (parent = this.parent) {
+      parents.unshift(parent);
+    }
+
+    return parents;
+  }
+
+  isParentOf(possibleChild: NbMenuItem): boolean {
     return possibleChild.parent
       ? possibleChild.parent === this || this.isParentOf(possibleChild.parent)
       : false;
@@ -179,19 +194,44 @@ export class NbMenuInternalService {
     });
   }
 
-  updateSelection(items: NbMenuItem[], tag: string, collapseOther: boolean = false) {
-    if (collapseOther) {
-      this.collapseAll(items, tag);
+  selectFromUrl(items: NbMenuItem[], tag: string, collapseOther: boolean = false) {
+    const selectedItem = this.findItemByUrl(items);
+    if (selectedItem) {
+      this.selectItem(selectedItem, items, collapseOther, tag);
     }
-    items.forEach(item => this.selectItemByUrl(item, tag));
   }
 
-  resetItems(items: NbMenuItem[]) {
-    items.forEach(i => this.resetItem(i));
+  selectItem(item: NbMenuItem, items: NbMenuItem[], collapseOther: boolean = false, tag: string) {
+    const unselectedItems = this.resetSelection(items);
+    const collapsedItems = collapseOther ? this.collapseItems(items) : [];
+
+    for (const parent of item.getParents()) {
+      parent.selected = true;
+      // emit event only for items that weren't selected before ('unselectedItems' contains items that were selected)
+      if (!unselectedItems.includes(parent)) {
+        this.itemSelect(item, tag);
+      }
+
+      parent.expanded = true;
+      // emit event only for items that weren't expanded before ('collapsedItems' contains items that were expanded)
+      if (!collapsedItems.includes(parent)) {
+        this.submenuToggle(item, tag);
+      }
+    }
+
+    item.selected = true;
+    // emit event only for items that weren't selected before ('unselectedItems' contains items that were selected)
+    if (!unselectedItems.includes(item)) {
+      this.itemSelect(item, tag);
+    }
   }
 
   collapseAll(items: NbMenuItem[], tag: string, except?: NbMenuItem) {
-    items.forEach(i => this.collapseItem(i, tag, except));
+    const collapsedItems = this.collapseItems(items, except);
+
+    for (const item of collapsedItems) {
+      this.submenuToggle(item, tag);
+    }
   }
 
   onAddItem(): Observable<{ tag: string; items: NbMenuItem[] }> {
@@ -226,26 +266,53 @@ export class NbMenuInternalService {
     itemClick$.next({tag, item});
   }
 
-  private resetItem(item: NbMenuItem) {
-    item.selected = false;
+  /**
+   * Unselect all given items deeply.
+   * @param items array of items to unselect.
+   * @returns items which selected value was changed.
+   */
+  private resetSelection(items: NbMenuItem[]): NbMenuItem[] {
+    const unselectedItems = [];
 
-    item.children && item.children.forEach(child => {
-      this.resetItem(child);
-    });
+    for (const item of items) {
+      if (item.selected) {
+        unselectedItems.push(item);
+      }
+      item.selected = false;
+
+      if (item.children) {
+        unselectedItems.push(...this.resetSelection(item.children));
+      }
+    }
+
+    return unselectedItems;
   }
 
-  private collapseItem(item: NbMenuItem, tag: string, except?: NbMenuItem) {
-    if (except && (item === except || item.isParentOf(except))) {
-      return;
+  /**
+   * Collapse all given items deeply.
+   * @param items array of items to collapse.
+   * @param except menu item which shouldn't be collapsed, also disables collapsing for parents of this item.
+   * @returns items which expanded value was changed.
+   */
+  private collapseItems(items: NbMenuItem[], except?: NbMenuItem): NbMenuItem[] {
+    const collapsedItems = [];
+
+    for (const item of items) {
+      if (except && (item === except || item.isParentOf(except))) {
+        continue;
+      }
+
+      if (item.expanded) {
+        collapsedItems.push(item)
+      }
+      item.expanded = false;
+
+      if (item.children) {
+        collapsedItems.push(...this.collapseItems(item.children));
+      }
     }
 
-    const wasExpanded = item.expanded;
-    item.expanded = false;
-    if (wasExpanded) {
-      this.submenuToggle(item);
-    }
-
-    item.children && item.children.forEach(child => this.collapseItem(child, tag));
+    return collapsedItems;
   }
 
   private applyDefaults(item, defaultItem) {
@@ -253,7 +320,7 @@ export class NbMenuInternalService {
     Object.assign(item, defaultItem, menuItem);
     item.children && item.children.forEach(child => {
       this.applyDefaults(child, defaultItem);
-    })
+    });
   }
 
   private setParent(item: NbMenuItem) {
@@ -263,38 +330,29 @@ export class NbMenuInternalService {
     });
   }
 
-  selectItem(item: NbMenuItem, tag: string) {
-    item.selected = true;
-    this.itemSelect(item, tag);
-    this.selectParent(item, tag);
+  /**
+   * Find deepest item which link matches current URL path.
+   * @param items array of items to search in.
+   * @returns found item of undefined.
+   */
+  private findItemByUrl(items: NbMenuItem[]): NbMenuItem | undefined {
+    let selectedItem;
+
+    items.some(item => {
+      if (item.children) {
+        selectedItem = this.findItemByUrl(item.children);
+      }
+      if (!selectedItem && this.isSelectedInUrl(item)) {
+        selectedItem = item;
+      }
+
+      return selectedItem;
+    });
+
+    return selectedItem;
   }
 
-  private selectParent({ parent: item }: NbMenuItem, tag: string) {
-    if (!item) {
-      return;
-    }
-
-    if (!item.expanded) {
-      item.expanded = true;
-      this.submenuToggle(item, tag);
-    }
-
-    item.selected = true;
-    this.selectParent(item, tag);
-  }
-
-  private selectItemByUrl(item: NbMenuItem, tag: string) {
-    const wasSelected = item.selected;
-    const isSelected = this.selectedInUrl(item);
-    if (!wasSelected && isSelected) {
-      this.selectItem(item, tag);
-    }
-    if (item.children) {
-      this.updateSelection(item.children, tag);
-    }
-  }
-
-  private selectedInUrl(item: NbMenuItem): boolean {
+  private isSelectedInUrl(item: NbMenuItem): boolean {
     const exact: boolean = item.pathMatch === 'full';
     return exact
       ? isUrlPathEqual(this.location.path(), item.link)
