@@ -12,7 +12,6 @@ import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
 import {
-  isNbAuthRefreshableToken,
   NbAuthRefreshableToken,
   NbAuthResult,
   NbAuthToken,
@@ -378,10 +377,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken): NbAuthToken {
-    const refreshedToken = this.createToken(res);
-    if (isNbAuthRefreshableToken(refreshedToken)
-        && !refreshedToken.getRefreshToken()
-        && existingToken.getRefreshToken()) {
+    type AuthRefreshToken = NbAuthRefreshableToken & NbAuthToken;
+
+    const refreshedToken: AuthRefreshToken = this.createToken<AuthRefreshToken>(res);
+    if (!refreshedToken.getRefreshToken() && existingToken.getRefreshToken()) {
       refreshedToken.setRefreshToken(existingToken.getRefreshToken());
     }
     return refreshedToken;
