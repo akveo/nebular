@@ -162,7 +162,7 @@ export class NbAuthService {
    * @returns {Observable<NbAuthResult>}
    */
   refreshToken(strategyName: string, data?: any): Observable<NbAuthResult> {
-    return this.getStrategy(strategyName).refreshToken()
+    return this.getStrategy(strategyName).refreshToken(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
           return this.processResultToken(result);
