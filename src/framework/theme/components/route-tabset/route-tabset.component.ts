@@ -20,6 +20,8 @@ import { convertToBoolProperty } from '../helpers';
  *  {
  *    title: 'Route tab #1',
  *    route: '/pages/description',
+ *    icon: 'nb-home',
+ *    responsive: true, // hide title before `route-tabs-icon-only-max-width` value
  *  },
  *  {
  *    title: 'Route tab #2',
@@ -29,6 +31,8 @@ import { convertToBoolProperty } from '../helpers';
  *
  *  <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
  * ```
+ *
+ * @stacked-example(Route Tabset, tabset/route-tabset-showcase.component)
  *
  * @styles
  *
@@ -43,6 +47,7 @@ import { convertToBoolProperty } from '../helpers';
  * route-tabs-fg-heading:
  * route-tabs-bg:
  * route-tabs-selected:
+ * route-tabs-icon-only-max-width:
  */
 @Component({
   selector: 'nb-route-tabset',
@@ -53,8 +58,12 @@ import { convertToBoolProperty } from '../helpers';
           (click)="$event.preventDefault(); selectTab(tab)"
           routerLink="{{tab.route}}"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
-        <a href>{{tab.title}}</a>
+          [routerLinkActiveOptions]="{ exact: true }"
+          [class.responsive]="tab.responsive">
+        <a href>
+          <i *ngIf="tab.icon" [class]="tab.icon"></i>
+          <span *ngIf="tab.title">{{ tab.title }}</span>
+        </a>
       </li>
     </ul>
     <router-outlet></router-outlet>
