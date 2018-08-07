@@ -8,64 +8,64 @@ import { browser, element, by } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
-describe('nb-route-tabset', () => {
+fdescribe('nb-route-tabset', () => {
   beforeEach((done) => {
-    browser.get('#/tabset/route-tabset-test.component').then(() => done());
+    browser.get('#/tabset/route-tabset-showcase.component').then(() => done());
   });
 
   it('should display default route-tabset', () => {
-    expect(element(by.css('nb-route-tabset:nth-child(1) > ul > li:nth-child(1)'))
-      .getText()).toEqual('Tab #1');
+    expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(1)'))
+      .getText()).toEqual('Users');
 
-    expect(element(by.css('nb-route-tabset:nth-child(1) > ul > li:nth-child(2)'))
-      .getText()).toEqual('Tab #2');
+    expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(2)'))
+      .getText()).toEqual('Orders');
   });
 
   it('should change tabs of a route-tabset"', () => {
-    const tab2 = by.css('nb-route-tabset:nth-child(1) > ul > li:nth-child(2)');
+    const tab2 = by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(2)');
 
     element(tab2).click()
       .then(() => {
         expect(hasClass(element(tab2), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab2');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-showcase.component/tab2');
       });
 
-    const tab1 = by.css('nb-route-tabset:nth-child(1) > ul > li:nth-child(1)');
+    const tab1 = by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(1)');
 
     element(tab1).click()
       .then(() => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab1');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-showcase.component/tab1');
       });
   });
 
   it('should display a full-width route-tabset', () => {
-    const tab1 = by.css('nb-route-tabset:nth-child(2) > ul > li:nth-child(1)');
+    const tab1 = by.css('nb-card:nth-child(2) nb-route-tabset > ul > li:nth-child(1)');
 
     expect(element(tab1)
-      .getText()).toEqual('Tab #1');
+      .getText()).toEqual('Users');
 
-    const tab2 = by.css('nb-route-tabset:nth-child(2) > ul > li:nth-child(2)');
+    const tab2 = by.css('nb-card:nth-child(2) nb-route-tabset > ul > li:nth-child(2)');
 
     expect(element(tab2)
-      .getText()).toEqual('Tab #2');
+      .getText()).toEqual('Orders');
   });
 
   it('should change tabs of a full-width route-tabset', () => {
-    const tab2 = by.css('nb-route-tabset:nth-child(2) > ul > li:nth-child(2)');
+    const tab2 = by.css('nb-card:nth-child(2) nb-route-tabset > ul > li:nth-child(2)');
 
     element(tab2).click()
       .then(() => {
         expect(hasClass(element(tab2), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab2');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-showcase.component/tab2');
       });
 
-    const tab1 = by.css('nb-route-tabset:nth-child(2) > ul > li:nth-child(1)');
+    const tab1 = by.css('nb-card:nth-child(2) nb-route-tabset > ul > li:nth-child(1)');
 
     element(tab1).click()
       .then(() => {
         expect(hasClass(element(tab1), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-test.component/tab1');
+        expect(browser.getCurrentUrl()).toContain('/#/tabset/route-tabset-showcase.component/tab1');
       });
   });
 });

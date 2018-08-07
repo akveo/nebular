@@ -53,6 +53,7 @@ import { NbSearchEventComponent } from './search/search-event.component';
 import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
 import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbTabsetIconComponent } from './tabset/tabset-icon.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
@@ -81,9 +82,9 @@ import {
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
-  NbRouteTabsetTestComponent,
-} from './tabset/route-tabset-test.component';
+  NbRouteTabsetShowcaseChild1Component, NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseComponent,
+} from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
 import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
 import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
@@ -443,8 +444,12 @@ export const routes: Routes = [
             component: NbTabsetWidthComponent,
           },
           {
-            path: 'route-tabset-test.component',
-            component: NbRouteTabsetTestComponent,
+            path: 'tabset-icon.component',
+            component: NbTabsetIconComponent,
+          },
+          {
+            path: 'route-tabset-showcase.component',
+            component: NbRouteTabsetShowcaseComponent,
             children: [
               {
                 path: '',
@@ -453,11 +458,11 @@ export const routes: Routes = [
               },
               {
                 path: 'tab1',
-                component: NbRouteTabsetTestChild1Component,
+                component: NbRouteTabsetShowcaseChild1Component,
               },
               {
                 path: 'tab2',
-                component: NbRouteTabsetTestChild2Component,
+                component: NbRouteTabsetShowcaseChild2Component,
               },
             ],
           },
