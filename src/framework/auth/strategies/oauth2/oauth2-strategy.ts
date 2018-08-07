@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import {
   NbOAuth2GrantType, NbOAuth2ClientAuthMethod,
 } from './oauth2-strategy.options';
 import { NbAuthStrategyClass } from '../../auth.options';
-import { InvalidJWTTokenError } from '@nebular/auth';
+import { InvalidJWTTokenError } from '../../services/';
 
 
 /**

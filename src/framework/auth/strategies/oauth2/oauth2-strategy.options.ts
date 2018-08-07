@@ -5,7 +5,7 @@
  */
 
 import { NbAuthOAuth2Token, NbAuthTokenClass } from '../../services';
-import { NbAuthStrategyOptions } from '@nebular/auth/strategies/auth-strategy-options';
+import { NbAuthStrategyOptions } from '../auth-strategy-options';
 
 export enum NbOAuth2ResponseType {
   CODE = 'code',
