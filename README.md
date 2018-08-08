@@ -10,7 +10,7 @@ It provides you with a list of native Angular components, unified approach for m
 At the same time, Nebular allows you to use it together with any other UI library you choose.
 
 #### Getting started
-[Documentation](https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_readme#/docs/getting-started/what-is-nebular) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
+[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
 
 ### :art: Theme
 @nebular/theme
@@ -19,25 +19,34 @@ Main Nebular module which includes UI Kit and Theme System.
 
 #### Native Angular Components
 
-| Component    | Description                                                          |
-|--------------|----------------------------------------------------------------------|
-|              |                                                                      |
-| Layout       | Page layout component, with configurable columns, header and footer. |
-| Sidebar      | Layout sidebar with multiple states.                                 |
-| Menu         | Multi-depth menu component.                                          |
-| Card         | Basic card with arbitrary header and footer.                         |
-| Alert        | Alert component showing message and statuses with close button.      |
-| Flip Card    | A card with back and front sides and "flip" switching effect.        |
-| Reveal Card  | A card with back and front sides and "reveal" switching effect.      |
-| Search       | Global search with amazing showing animations.                       |
-| Tabs         | Basic and route-based tab components.                                |
-| Actions      | Horizontal actions bar.                                              |
-| User         | User avatar with a context menu.                                     |
-| Progress Bar | Component for progress indication.                                   |
-| Badge        | Simple helper components for showing a badge.                        |
-| Popover      | Pop-up box that appears when a user clicks on an element.            |
-| Context Menu | A directive to attach a menu to any element.                         |
-| Checkbox     | Simple checkbox with two-way data binding support.                   |
+| Component    | Description                                                           |
+|--------------|---------------------------------------------------------------------- |
+|              |                                                                       |
+| Layout       | <a href="https://akveo.github.io/nebular/docs/components/layout/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/layout/overview</a>        |
+| Sidebar      | <a href="https://akveo.github.io/nebular/docs/components/sidebar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/sidebar/overview</a>      |
+| Menu         | <a href="https://akveo.github.io/nebular/docs/components/menu/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/menu/overview</a>         |
+| Card         | <a href="https://akveo.github.io/nebular/docs/components/card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/card/overview</a>         |
+| Alert        | <a href="https://akveo.github.io/nebular/docs/components/alert/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/alert/overview</a>        |
+| Flip Card    | <a href="https://akveo.github.io/nebular/docs/components/flip-card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/flip-card/overview</a>    |
+| Reveal Card  | <a href="https://akveo.github.io/nebular/docs/components/reveal-card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/reveal-card/overview</a>  |
+| Search       | <a href="https://akveo.github.io/nebular/docs/components/search/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/search/overview</a>       |
+| Tabs         | <a href="https://akveo.github.io/nebular/docs/components/tabs/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/tabs/overview</a>         |
+| Actions      | <a href="https://akveo.github.io/nebular/docs/components/actions/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/actions/overview</a>      |
+| User         | <a href="https://akveo.github.io/nebular/docs/components/user-avatar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/user-avatar/overview</a>  |
+| Progress Bar | <a href="https://akveo.github.io/nebular/docs/components/progress-bar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/progress-bar/overview</a> |
+| Badge        | <a href="https://akveo.github.io/nebular/docs/components/badge/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/badge/overview</a>        |
+| Popover      | <a href="https://akveo.github.io/nebular/docs/components/popover/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/popover/overview</a>      |
+| Context Menu | <a href="https://akveo.github.io/nebular/docs/components/context-menu/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/context-menu/overview</a> |
+| Stepper      | <a href="https://akveo.github.io/nebular/docs/components/stepper/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/stepper/overview</a>      |
+| Chat UI      | <a href="https://akveo.github.io/nebular/docs/components/chat-ui/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/chat-ui/overview</a>      |
+| Checkbox     | <a href="https://akveo.github.io/nebular/docs/components/checkbox/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/checkbox/overview</a>     |
+| Button       | <a href="https://akveo.github.io/nebular/docs/components/button/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/button/overview</a>       |
+| Input        | <a href="https://akveo.github.io/nebular/docs/components/input/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/input/overview</a>        |
+| List         | <a href="https://akveo.github.io/nebular/docs/components/list/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/list/overview</a>         |
+| Infinite List| <a href="https://akveo.github.io/nebular/docs/components/infinite-list/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/infinite-list/overview</a>|
+| Calendar     | <a href="https://akveo.github.io/nebular/docs/components/calendar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/calendar/overview</a>     |
+| Accordion    | <a href="https://akveo.github.io/nebular/docs/components/accordion/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/accordion/overview</a>    |
+| Spinner      | <a href="https://akveo.github.io/nebular/docs/components/spinner/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/spinner/overview</a>      |
 
 #### Theme System
 A set of beautiful styles with handy mixins and guidelines to create and support multiple themes in one project. With themes **hot reload** without a page refresh.
