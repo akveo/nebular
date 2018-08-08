@@ -202,6 +202,10 @@ Apache License
  See the License for the specific language governing permissions and
  limitations under the License.
 
+intersection-observer@0.5.0
+W3C-20150513
+W3C-20150513
+
 style-loader@0.21.0
 MIT
 Copyright JS Foundation and other contributors
@@ -410,6 +414,10 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 END OF TERMS AND CONDITIONS
 
 @angular/common@6.0.0
+MIT
+MIT
+
+@angular/animations@6.0.0
 MIT
 MIT
 

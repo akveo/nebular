@@ -86,16 +86,16 @@ export class NbMenuItem4Component { }
           <nb-card-body>
             <nb-menu id="menu-first" tag="firstMenu" [items]="menuItems" [autoCollapse]="true"></nb-menu>
             <router-outlet></router-outlet>
-            <button class="btn btn-primary" id="addBtn" (click)="addMenuItem()">Add</button>
-            <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
+            <button nbButton id="addBtn" (click)="addMenuItem()">Add</button>
+            <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
         <nb-card size="xxlarge">
           <nb-card-body>
             <nb-menu id="menu-second" tag="SecondMenu" [items]="menuItems1"></nb-menu>
             <router-outlet></router-outlet>
-            <button class="btn btn-primary" id="addBtn" (click)="addMenuItem()">Add</button>
-            <button class="btn btn-primary" id="homeBtn" (click)="navigateHome()">Home</button>
+            <button nbButton id="addBtn" (click)="addMenuItem()">Add</button>
+            <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
         <nb-card size="xxlarge">

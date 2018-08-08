@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
       margin: 2rem 0;
       display: block;
     }
-    .btn {
+    button {
       margin: 1rem;
     }
   `],

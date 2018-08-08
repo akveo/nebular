@@ -47,6 +47,7 @@ import { NbSearchEventComponent } from './search/search-event.component';
 import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
 import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbTabsetIconComponent } from './tabset/tabset-icon.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
@@ -70,14 +71,15 @@ import {
   NbMenuItem331Component,
   NbMenuItem332Component,
   NbMenuItem33Component,
-  NbMenuItem3Component, NbMenuItem4Component,
+  NbMenuItem3Component,
+  NbMenuItem4Component,
   NbMenuTestComponent,
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component, NbRouteTabsetTestChild2Component,
-  NbRouteTabsetTestComponent,
-} from './tabset/route-tabset-test.component';
+  NbRouteTabsetShowcaseChild1Component, NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseComponent,
+} from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
 import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
 import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
@@ -97,6 +99,60 @@ import { NbAlertShowcaseComponent } from './alert/alert-showcase.component';
 import { NbAlertColorsComponent } from './alert/alert-colors.component';
 import { NbAlertAccentsComponent } from './alert/alert-accents.component';
 import { NbAlertSizesComponent } from './alert/alert-sizes.component';
+import { NbAlertOutlineComponent } from './alert/alert-outline.component';
+import { NbChatShowcaseComponent } from './chat/chat-showcase.component';
+import { NbChatColorsComponent } from './chat/chat-colors.component';
+import { NbChatSizesComponent } from './chat/chat-sizes.component';
+import { NbChatDropComponent } from './chat/chat-drop.component';
+import { NbChatMessageTypesShowcaseComponent } from './chat/chat-message-types-showcase.component';
+import { NbChatConversationShowcaseComponent } from './chat/chat-conversation-showcase.component';
+import { NbChatTestComponent } from './chat/chat-test.component';
+import { NbSpinnerCardComponent } from './spinner/spinner-card.component';
+import { NbSpinnerButtonComponent } from './spinner/spinner-button.component';
+import { NbSpinnerTabsComponent } from './spinner/spinner-tabs.component';
+import { NbSpinnerSizesComponent } from './spinner/spinner-sizes.component';
+import { NbSpinnerColorsComponent } from './spinner/spinner-colors.component';
+import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
+import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
+import { NbStepperVerticalComponent } from './stepper/stepper-vertical.component';
+import { NbStepperTestComponent } from './stepper/stepper-test.component';
+import { NbAccordionShowcaseComponent } from './accordion/accordion-showcase.component';
+import { NbAccordionTestComponent } from './accordion/accordion-test.component';
+import { NbAccordionMultiComponent } from './accordion/accordion-multi.component';
+import { NbAccordionToggleComponent } from './accordion/accordion-toggle.component';
+import { NbLayoutSidebarSubheaderComponent } from './layout/layout-sidebar-subheader.component';
+import { NbLayoutSubheaderComponent } from './layout/layout-subheader.component';
+import { NbButtonShowcaseComponent } from './button/button-showcase.component';
+import { NbButtonColorsComponent } from './button/button-colors.component';
+import { NbButtonShapesComponent } from './button/button-shapes.component';
+import { NbButtonHeroComponent } from './button/button-hero.component';
+import { NbButtonOutlineComponent } from './button/button-outline.component';
+import { NbButtonSizesComponent } from './button/button-sizes.component';
+import { NbButtonTypesComponent } from './button/button-types.component';
+import { NbButtonFullWidthComponent } from './button/button-full-width.component';
+import { NbSimpleListShowcaseComponent } from './list/simple-list-showcase.component';
+import { NbUsersListShowcaseComponent } from './list/users-list-showcase.component';
+import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
+import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
+import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component';
+import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbInputsShowcaseComponent } from './input/input-showcase.component';
+import { NbInputColorsComponent } from './input/input-colors.component';
+import { NbInputSizesComponent } from './input/input-sizes.component';
+import { NbInputShapesComponent } from './input/input-shapes.component';
+import { NbInputTypesComponent } from './input/input-types.component';
+import { NbInputFullWidthComponent } from './input/input-full-width.component';
+import { NbScrollWindowComponent } from './scroll/scroll-window.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import { NbCalendarCustomDayCellShowcaseComponent } from './calendar/calendar-custom-day-cell-showcase.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
+
 
 export const routes: Routes = [
   {
@@ -133,6 +189,43 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'button',
+        children: [
+          {
+            path: 'button-showcase.component',
+            component: NbButtonShowcaseComponent,
+          },
+          {
+            path: 'button-colors.component',
+            component: NbButtonColorsComponent,
+          },
+          {
+            path: 'button-shapes.component',
+            component: NbButtonShapesComponent,
+          },
+          {
+            path: 'button-hero.component',
+            component: NbButtonHeroComponent,
+          },
+          {
+            path: 'button-outline.component',
+            component: NbButtonOutlineComponent,
+          },
+          {
+            path: 'button-sizes.component',
+            component: NbButtonSizesComponent,
+          },
+          {
+            path: 'button-types.component',
+            component: NbButtonTypesComponent,
+          },
+          {
+            path: 'button-full-width.component',
+            component: NbButtonFullWidthComponent,
+          },
+        ],
+      },
+      {
         path: 'checkbox',
         children: [
           {
@@ -150,6 +243,77 @@ export const routes: Routes = [
           {
             path: 'checkbox-disabled.component',
             component: NbCheckboxDisabledComponent,
+          },
+        ],
+      },
+      {
+        path: 'spinner',
+        children: [
+          {
+            path: 'spinner-card.component',
+            component: NbSpinnerCardComponent,
+          },
+          {
+            path: 'spinner-tabs.component',
+            component: NbSpinnerTabsComponent,
+          },
+          {
+            path: 'spinner-button.component',
+            component: NbSpinnerButtonComponent,
+          },
+          {
+            path: 'spinner-sizes.component',
+            component: NbSpinnerSizesComponent,
+          },
+          {
+            path: 'spinner-colors.component',
+            component: NbSpinnerColorsComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar',
+        children: [
+          {
+            path: 'calendar-showcase.component',
+            component: NbCalendarShowcaseComponent,
+          },
+          {
+            path: 'calendar-bounding-month.component',
+            component: NbCalendarBoundingMonthComponent,
+          },
+          {
+            path: 'calendar-start-view.component',
+            component: NbCalendarStartViewComponent,
+          },
+          {
+            path: 'calendar-range-showcase.component',
+            component: NbCalendarRangeShowcaseComponent,
+          },
+          {
+            path: 'calendar-custom-day-cell-showcase.component',
+            component: NbCalendarCustomDayCellShowcaseComponent,
+          },
+          {
+            path: 'calendar-filter.component',
+            component: NbCalendarFilterComponent,
+          },
+          {
+            path: 'calendar-min-max.component',
+            component: NbCalendarMinMaxComponent,
+          },
+          {
+            path: 'calendar-size.component',
+            component: NbCalendarSizeComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar-kit',
+        children: [
+          {
+            path: 'calendar-kit-full-calendar.component',
+            component: NbCalendarKitFullCalendarShowcaseComponent,
           },
         ],
       },
@@ -179,6 +343,10 @@ export const routes: Routes = [
           {
             path: 'card-sizes.component',
             component: NbCardSizesComponent,
+          },
+          {
+            path: 'card-without-body.component',
+            component: NbCardWithoutBodyComponent,
           },
         ],
       },
@@ -259,6 +427,10 @@ export const routes: Routes = [
             path: 'alert-sizes.component',
             component: NbAlertSizesComponent,
           },
+          {
+            path: 'alert-outline.component',
+            component: NbAlertOutlineComponent,
+          },
         ],
       },
       {
@@ -323,8 +495,12 @@ export const routes: Routes = [
             component: NbTabsetWidthComponent,
           },
           {
-            path: 'route-tabset-test.component',
-            component: NbRouteTabsetTestComponent,
+            path: 'tabset-icon.component',
+            component: NbTabsetIconComponent,
+          },
+          {
+            path: 'route-tabset-showcase.component',
+            component: NbRouteTabsetShowcaseComponent,
             children: [
               {
                 path: '',
@@ -333,13 +509,34 @@ export const routes: Routes = [
               },
               {
                 path: 'tab1',
-                component: NbRouteTabsetTestChild1Component,
+                component: NbRouteTabsetShowcaseChild1Component,
               },
               {
                 path: 'tab2',
-                component: NbRouteTabsetTestChild2Component,
+                component: NbRouteTabsetShowcaseChild2Component,
               },
             ],
+          },
+        ],
+      },
+      {
+        path: 'stepper',
+        children: [
+          {
+            path: 'stepper-test.component',
+            component: NbStepperTestComponent,
+          },
+          {
+            path: 'stepper-showcase.component',
+            component: NbStepperShowcaseComponent,
+          },
+          {
+            path: 'stepper-validation.component',
+            component: NbStepperValidationComponent,
+          },
+          {
+            path: 'stepper-vertical.component',
+            component: NbStepperVerticalComponent,
           },
         ],
       },
@@ -387,6 +584,119 @@ export const routes: Routes = [
           {
             path: 'progress-bar-interactive.component',
             component: NbProgressBarInteractiveComponent,
+          },
+        ],
+      },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: 'chat-showcase.component',
+            component: NbChatShowcaseComponent,
+          },
+          {
+            path: 'chat-colors.component',
+            component: NbChatColorsComponent,
+          },
+          {
+            path: 'chat-sizes.component',
+            component: NbChatSizesComponent,
+          },
+          {
+            path: 'chat-drop.component',
+            component: NbChatDropComponent,
+          },
+          {
+            path: 'chat-message-types-showcase.component',
+            component: NbChatMessageTypesShowcaseComponent,
+          },
+          {
+            path: 'chat-conversation-showcase.component',
+            component: NbChatConversationShowcaseComponent,
+          },
+          {
+            path: 'chat-test.component',
+            component: NbChatTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'accordion',
+        children: [
+          {
+            path: 'accordion-showcase.component',
+            component: NbAccordionShowcaseComponent,
+          },
+          {
+            path: 'accordion-multi.component',
+            component: NbAccordionMultiComponent,
+          },
+          {
+            path: 'accordion-toggle.component',
+            component: NbAccordionToggleComponent,
+          },
+          {
+            path: 'accordion-test.component',
+            component: NbAccordionTestComponent,
+          },
+        ],
+      },
+      {
+        path: 'list',
+        children: [
+          {
+            path: 'simple-list-showcase.component',
+            component: NbSimpleListShowcaseComponent,
+          },
+          {
+            path: 'users-list-showcase.component',
+            component: NbUsersListShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'infinite-list',
+        children: [
+          {
+            path: 'infinite-list-showcase.component',
+            component: NbInfiniteListShowcaseComponent,
+          },
+          {
+            path: 'infinite-list-scroll-modes.component',
+            component: NbInfiniteListScrollModesComponent,
+          },
+          {
+            path: 'infinite-news-list.component',
+            component: NbInfiniteNewsListComponent,
+          },
+        ],
+      },
+      {
+        path: 'input',
+        children: [
+          {
+            path: 'input-showcase.component',
+            component: NbInputsShowcaseComponent,
+          },
+          {
+            path: 'input-colors.component',
+            component: NbInputColorsComponent,
+          },
+          {
+            path: 'input-sizes.component',
+            component: NbInputSizesComponent,
+          },
+          {
+            path: 'input-shapes.component',
+            component: NbInputShapesComponent,
+          },
+          {
+            path: 'input-types.component',
+            component: NbInputTypesComponent,
+          },
+          {
+            path: 'input-full-width.component',
+            component: NbInputFullWidthComponent,
           },
         ],
       },
@@ -451,6 +761,14 @@ export const routes: Routes = [
           {
             path: 'layout-fixed-header.component',
             component: NbLayoutFixedHeaderComponent,
+          },
+          {
+            path: 'layout-sidebar-subheader.component',
+            component: NbLayoutSidebarSubheaderComponent,
+          },
+          {
+            path: 'layout-subheader.component',
+            component: NbLayoutSubheaderComponent,
           },
           {
             path: 'layout-column-left.component',
@@ -608,11 +926,24 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'scroll',
+        children: [
+          {
+            path: 'scroll-window.component',
+            component: NbScrollWindowComponent,
+          },
+        ],
+      },
     ],
   },
   {
     path: 'oauth2',
     loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
+  },
+  {
+    path: 'oauth2-password',
+    loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
   },
   {
     path: '',
