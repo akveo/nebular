@@ -258,7 +258,7 @@ export class NbButtonComponent {
    * Adds `outline` styles
    * @param {boolean} val
    */
-  @Input()
+  @Input('outline')
   set setOutline(val: boolean) {
     this.outline = convertToBoolProperty(val);
   }
