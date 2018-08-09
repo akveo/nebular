@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 ul {
   display: flex;
   flex-direction: row;
@@ -33,6 +35,16 @@ ul {
         border-radius: 3px;
         bottom: -2px;
         left: 0;
+      }
+
+      i {
+        font-size: 1.5rem;
+        vertical-align: middle;
+      }
+
+      i + span {
+        @include nb-ltr(margin-left, 0.5rem);
+        @include nb-rtl(margin-right, 0.5rem);
       }
     }
   }
