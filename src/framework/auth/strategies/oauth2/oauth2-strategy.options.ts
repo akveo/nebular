@@ -40,6 +40,7 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
     endpoint?: string;
     redirectUri?: string;
     responseType?: string;
+    requireValidToken?: boolean; // used only with NbOAuth2ResponseType.TOKEN
     scope?: string;
     state?: string;
     params?: { [key: string]: string };
@@ -51,16 +52,19 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
     endpoint?: string;
     grantType?: string;
     redirectUri?: string;
+    requireValidToken?: boolean;
     class: NbAuthTokenClass,
   } = {
     endpoint: 'token',
     grantType: NbOAuth2GrantType.AUTHORIZATION_CODE,
+    requireValidToken: false,
     class: NbAuthOAuth2Token,
   };
   refresh?: {
     endpoint?: string;
     grantType?: string;
     scope?: string;
+    requireValidToken?: boolean;
   } = {
     endpoint: 'token',
     grantType: NbOAuth2GrantType.REFRESH_TOKEN,

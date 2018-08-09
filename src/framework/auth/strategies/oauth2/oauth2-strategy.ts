@@ -12,6 +12,7 @@ import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
 import {
+  NbAuthIllegalTokenError,
   NbAuthRefreshableToken,
   NbAuthResult,
   NbAuthToken,
@@ -23,7 +24,6 @@ import {
   NbOAuth2GrantType, NbOAuth2ClientAuthMethod,
 } from './oauth2-strategy.options';
 import { NbAuthStrategyClass } from '../../auth.options';
-import { InvalidJWTTokenError } from '../../services/';
 
 
 /**
@@ -59,6 +59,7 @@ import { InvalidJWTTokenError } from '../../services/';
  *     endpoint?: string;
  *     redirectUri?: string;
  *     responseType?: string;
+ *     requireValidToken: false,
  *     scope?: string;
  *     state?: string;
  *     params?: { [key: string]: string };
@@ -69,6 +70,7 @@ import { InvalidJWTTokenError } from '../../services/';
  *   token?: {
  *     endpoint?: string;
  *     grantType?: string;
+ *     requireValidToken: false,
  *     redirectUri?: string;
  *     class: NbAuthTokenClass,
  *   } = {
@@ -80,6 +82,7 @@ import { InvalidJWTTokenError } from '../../services/';
  *     endpoint?: string;
  *     grantType?: string;
  *     scope?: string;
+ *     requireValidToken: false,
  *   } = {
  *     endpoint: 'token',
  *     grantType: NbOAuth2GrantType.REFRESH_TOKEN,
@@ -123,6 +126,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       );
     },
     [NbOAuth2ResponseType.TOKEN]: () => {
+      const module = 'authorize';
+      const requireValidToken = this.getOption(`${module}.requireValidToken`);
       return observableOf(this.route.snapshot.fragment).pipe(
         map(fragment => this.parseHashAsQueryParams(fragment)),
         map((params: any) => {
@@ -133,7 +138,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
               this.getOption('redirect.success'),
               [],
               this.getOption('defaultMessages'),
-              this.createToken(params));
+              this.createToken(params, requireValidToken));
           }
           return new NbAuthResult(
             false,
@@ -143,9 +148,9 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             [],
           );
         }),
-        catchError(err => { //  createToken sent an MalformedJWTTokenError
+        catchError(err => {
           const errors = [];
-          if (err instanceof InvalidJWTTokenError) {
+          if (err instanceof NbAuthIllegalTokenError) {
             errors.push(err.message)
           } else {
             errors.push('Something went wrong.');
@@ -213,7 +218,9 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   refreshToken(token: NbAuthRefreshableToken): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('refresh');
+    const module = 'refresh';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
       .pipe(
@@ -224,14 +231,16 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createRefreshedToken(res, token));
+            this.createRefreshedToken(res, token, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
   }
 
   passwordToken(email: string, password: string): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('token');
+    const module = 'token';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     return this.http.post(url, this.buildPasswordRequestData(email, password), this.buildAuthHeader() )
       .pipe(
@@ -242,7 +251,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            this.createToken(res, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
@@ -257,7 +266,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   protected requestToken(code: string) {
-    const url = this.getActionEndpoint('token');
+
+    const module = 'token';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     return this.http.post(url, this.buildCodeRequestData(code),
                          this.buildAuthHeader())
@@ -269,7 +281,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            this.createToken(res, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
@@ -350,7 +362,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       } else {
         errors = this.getOption('defaultErrors');
       }
-    }  else if (res instanceof InvalidJWTTokenError ) {
+    }  else if (res instanceof NbAuthIllegalTokenError ) {
       errors.push(res.message)
     } else {
         errors.push('Something went wrong.')
@@ -394,10 +406,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     }, {}) : {};
   }
 
-  protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken): NbAuthToken {
+  protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken, requireValidToken: boolean): NbAuthToken {
     type AuthRefreshToken = NbAuthRefreshableToken & NbAuthToken;
 
-    const refreshedToken: AuthRefreshToken = this.createToken<AuthRefreshToken>(res);
+    const refreshedToken: AuthRefreshToken = this.createToken<AuthRefreshToken>(res, requireValidToken);
     if (!refreshedToken.getRefreshToken() && existingToken.getRefreshToken()) {
       refreshedToken.setRefreshToken(existingToken.getRefreshToken());
     }

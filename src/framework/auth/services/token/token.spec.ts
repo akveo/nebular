@@ -23,28 +23,25 @@ describe('auth token', () => {
 
     // tslint:enable
 
-    it('JWT Token getPayload(), not valid JWT token, must consist of three parts', () => {
-      const token = new NbAuthJWTToken('.', 'strategy');
+    it('JWT Token constructor, not valid JWT token, must consist of three parts', () => {
       expect(() => {
-        token.getPayload()
+        new NbAuthJWTToken('.', 'strategy');
       })
         .toThrow(new Error(
           `The payload . is not valid JWT payload and must consist of three parts.`));
     });
 
-    it('JWT Token getPayload(),, not valid JWT token, cannot be decoded', () => {
-      const token = new NbAuthJWTToken('..', 'strategy');
+    it('JWT Token constructor,, not valid JWT token, cannot be decoded', () => {
       expect(() => {
-        token.getPayload()
+        new NbAuthJWTToken('..', 'strategy');
       })
         .toThrow(new Error(
           `The payload .. is not valid JWT payload and cannot be decoded.`));
     });
 
     it('getPayload, not valid base64 in JWT token, cannot be decoded', () => {
-      const token = new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY', 'strategy');
       expect(() => {
-        token.getPayload()
+        new NbAuthJWTToken('h%2BHY.h%2BHY.h%2BHY', 'strategy');
       })
         .toThrow(new Error(
           `The payload h%2BHY.h%2BHY.h%2BHY is not valid JWT payload and cannot be parsed.`));
@@ -166,8 +163,6 @@ describe('auth token', () => {
 
     let validToken = new NbAuthOAuth2Token(token, 'strategy');
 
-    const emptyToken = new NbAuthOAuth2Token({}, 'strategy');
-
     const noExpToken = new NbAuthOAuth2Token({
       access_token: '2YotnFZFEjr1zCsicMWpAA',
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
@@ -178,9 +173,9 @@ describe('auth token', () => {
       expect(validToken.getPayload()).toEqual(token);
     });
 
-    it('getPayload, not valid token, cannot be decoded', () => {
+    it('empty token constructor, not valid token, cannot be decoded', () => {
       expect(() => {
-        emptyToken.getPayload();
+        new NbAuthOAuth2Token({}, 'strategy');
       })
         .toThrow(new Error(
           `Cannot extract payload from an empty token.`));
@@ -273,7 +268,6 @@ describe('auth token', () => {
 
     const validToken = new NbAuthOAuth2JWTToken(validPayload, 'strategy');
     let noExpButIatToken = new NbAuthOAuth2JWTToken(noExpButIatPayload, 'strategy');
-    const emptyToken = new NbAuthOAuth2JWTToken({}, 'strategy');
     const permanentToken = new NbAuthOAuth2JWTToken(permanentPayload, 'strategy');
 
     it('getPayload success', () => {
@@ -284,9 +278,9 @@ describe('auth token', () => {
       expect(validToken.getAccessTokenPayload()).toEqual(accessTokenPayload);
     });
 
-    it('getPayload, not valid token, cannot be decoded', () => {
+    it('empty token constructor, not valid token, cannot be decoded', () => {
       expect(() => {
-        emptyToken.getPayload();
+        new NbAuthOAuth2JWTToken({}, 'strategy');
       })
         .toThrow(new Error(
           `Cannot extract payload from an empty token.`));

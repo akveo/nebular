@@ -3,7 +3,11 @@ import { Observable } from 'rxjs';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
-import { NbAuthToken, nbAuthCreateToken, InvalidJWTTokenError } from '../services/token/token';
+import {
+  NbAuthToken,
+  nbAuthCreateToken,
+  NbAuthIllegalTokenError,
+} from '../services/token/token';
 
 export abstract class NbAuthStrategy {
 
@@ -20,11 +24,14 @@ export abstract class NbAuthStrategy {
     return getDeepFromObject(this.options, key, null);
   }
 
-  createToken<T extends NbAuthToken>(value: any): T {
-    const requireValidToken: boolean = this.getOption('requireValidToken');
-    const token = nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
-    if (requireValidToken && !token.isValid()) {
-      throw new InvalidJWTTokenError('Token is empty or invalid.');
+  createToken<T extends NbAuthToken>(value: any, failWhenInvalidToken?: boolean): T {
+    const token =  nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
+    // At this point, nbAuthCreateToken failed with NbAuthIllegalTokenError which MUST be intercepted by strategies
+    // Or token is created. It MAY be created even if backend did not return any token, in this case it is !Valid
+    if (failWhenInvalidToken && !token.isValid()) {
+      // If we require a valid token (i.e. isValid), then we MUST throw NbAuthIllegalTokenError so that the strategies
+      // intercept it
+      throw new NbAuthIllegalTokenError('Token is empty or invalid.');
     }
     return token;
   }

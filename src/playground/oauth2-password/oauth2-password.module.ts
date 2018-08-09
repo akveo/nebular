@@ -50,7 +50,6 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
       strategies: [
          NbOAuth2AuthStrategy.setup({
           name: 'password',
-          requireValidToken: true,
           clientId: 'Aladdin',
           clientSecret: 'open sesame',
           clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
@@ -59,6 +58,7 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
             endpoint: 'token',
             grantType: NbOAuth2GrantType.PASSWORD,
             class: NbAuthOAuth2JWTToken,
+            requireValidToken: true,
           },
           redirect: {
             success: '/oauth2-password',

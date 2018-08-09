@@ -1436,7 +1436,9 @@ describe('password-auth-strategy', () => {
     it('authenticate fail as no token when requireValidToken is set', (done: DoneFn) => {
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: true,
+        login: {
+          requireValidToken: true,
+        },
       });
       strategy.authenticate(loginData)
         .subscribe((result: NbAuthResult) => {
@@ -1458,7 +1460,9 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: false,
+        login: {
+          requireValidToken: false,
+        },
       });
 
       strategy.authenticate(loginData)
@@ -1479,7 +1483,9 @@ describe('password-auth-strategy', () => {
     it('register fail as no token and requireValidtoken is set', (done: DoneFn) => {
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: true,
+        register: {
+          requireValidToken: true,
+        },
       });
       strategy.register(loginData)
         .subscribe((result: NbAuthResult) => {
@@ -1500,7 +1506,9 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: false,
+        register: {
+          requireValidToken: false,
+        },
       });
 
       strategy.register(loginData)
@@ -1521,7 +1529,9 @@ describe('password-auth-strategy', () => {
     it('refreshToken fail as no token and requireValidToken is set', (done: DoneFn) => {
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: true,
+        refreshToken: {
+          requireValidToken: true,
+        },
       });
       strategy.refreshToken(loginData)
         .subscribe((result: NbAuthResult) => {
@@ -1542,7 +1552,9 @@ describe('password-auth-strategy', () => {
 
       strategy.setOptions({
         name: ownerStrategyName,
-        requireValidToken: false,
+        refreshToken: {
+          requireValidToken: false,
+        },
       });
 
       strategy.refreshToken(loginData)
