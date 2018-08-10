@@ -213,10 +213,14 @@ export class NbMenuInternalService {
         this.itemSelect(parent, tag);
       }
 
+      const wasNotExpanded = !parent.expanded;
       parent.expanded = true;
       const i = collapsedItems.indexOf(parent);
-      // emit event only for items that weren't expanded before ('collapsedItems' contains items that were expanded)
-      if (i === -1) {
+      // emit event only for items that weren't expanded before.
+      // 'collapsedItems' contains items that were expanded, so no need to emit event.
+      // in case 'collapseOther' is false, 'collapsedItems' will be empty,
+      // so also check if item isn't expanded already ('wasNotExpanded').
+      if (i === -1 && wasNotExpanded) {
         this.submenuToggle(parent, tag);
       } else {
         collapsedItems.splice(i, 1);
