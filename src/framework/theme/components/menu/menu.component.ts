@@ -14,6 +14,7 @@ import {
   HostBinding,
   AfterViewInit,
   Inject,
+  DoCheck,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -39,7 +40,7 @@ export enum NbToggleStates {
     ]),
   ],
 })
-export class NbMenuItemComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
 
   @Output() hoverItem = new EventEmitter<any>();
@@ -52,7 +53,7 @@ export class NbMenuItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private menuService: NbMenuService) {}
 
-  ngOnInit() {
+  ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
   }
 
