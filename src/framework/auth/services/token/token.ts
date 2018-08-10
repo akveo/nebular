@@ -107,7 +107,8 @@ export class NbAuthSimpleToken extends NbAuthToken {
     try {
       this.parsePayload();
     } catch (err) {
-      if (err instanceof NbAuthIllegalTokenError) { // token is present but illegal (empty or malformed), we reject it
+      if (!(err instanceof NbAuthTokenNotFoundError)) {
+        // token is present but has got a problem, including illegal
         throw err;
       }
     }
