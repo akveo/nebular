@@ -23,7 +23,7 @@ import { convertToBoolProperty } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-enum ToggleStates {
+export enum NbToggleStates {
   Expanded = 'expanded',
   Collapsed = 'collapsed',
 }
@@ -33,9 +33,9 @@ enum ToggleStates {
   templateUrl: './menu-item.component.html',
   animations: [
     trigger('toggle', [
-      state(ToggleStates.Collapsed, style({ height: '0' })),
-      state(ToggleStates.Expanded, style({ height: '*' })),
-      transition(`${ToggleStates.Collapsed} <=> ${ToggleStates.Expanded}`, animate(300)),
+      state(NbToggleStates.Collapsed, style({ height: '0' })),
+      state(NbToggleStates.Expanded, style({ height: '*' })),
+      transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
     ]),
   ],
 })
@@ -48,12 +48,12 @@ export class NbMenuItemComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() itemClick = new EventEmitter<any>();
 
   private alive = true;
-  toggleState: ToggleStates;
+  toggleState: NbToggleStates;
 
   constructor(private menuService: NbMenuService) {}
 
   ngOnInit() {
-    this.toggleState = this.menuItem.expanded ? ToggleStates.Expanded : ToggleStates.Collapsed;
+    this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
   }
 
   ngAfterViewInit() {
@@ -63,7 +63,7 @@ export class NbMenuItemComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(({ item }) => item === this.menuItem),
         map(({ item }: NbMenuBag) => item.expanded),
       )
-      .subscribe(isExpanded => this.toggleState = isExpanded ? ToggleStates.Expanded : ToggleStates.Collapsed);
+      .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
   }
 
   ngOnDestroy() {
