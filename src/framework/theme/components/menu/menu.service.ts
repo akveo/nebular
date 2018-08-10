@@ -112,7 +112,7 @@ export class NbMenuItem {
     return parents;
   }
 
-  static isParent(item, possibleChild: NbMenuItem): boolean {
+  static isParent(item: NbMenuItem, possibleChild: NbMenuItem): boolean {
     return possibleChild.parent
       ? possibleChild.parent === item || this.isParent(item, possibleChild.parent)
       : false;
@@ -214,9 +214,12 @@ export class NbMenuInternalService {
       }
 
       parent.expanded = true;
+      const i = collapsedItems.indexOf(parent);
       // emit event only for items that weren't expanded before ('collapsedItems' contains items that were expanded)
-      if (!collapsedItems.includes(parent)) {
+      if (i === -1) {
         this.submenuToggle(parent, tag);
+      } else {
+        collapsedItems.splice(i, 1);
       }
     }
 
@@ -224,6 +227,11 @@ export class NbMenuInternalService {
     // emit event only for items that weren't selected before ('unselectedItems' contains items that were selected)
     if (!unselectedItems.includes(item)) {
       this.itemSelect(item, tag);
+    }
+
+    // remaining items which wasn't expanded back after expanding all currently selected items
+    for (const collapsedItem of collapsedItems) {
+      this.submenuToggle(collapsedItem, tag);
     }
   }
 
