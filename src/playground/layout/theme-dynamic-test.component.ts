@@ -8,6 +8,7 @@ import { Component, ComponentFactoryResolver } from '@angular/core';
 
 import { NbThemeService } from '@nebular/theme';
 import { NbDynamicToAddComponent } from '../shared/dynamic.component';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'nb-dynamic-test',
@@ -45,15 +46,11 @@ export class NbThemeDynamicTestComponent {
   }
 
   addDynamicComponent() {
-    this.themeService.appendToLayoutTop(NbDynamicToAddComponent).subscribe(cRef => console.info(cRef));
   }
 
   addDynamicByFactory() {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(NbDynamicToAddComponent);
-    this.themeService.appendToLayoutTop(factory).subscribe(cRef => console.info(cRef));
   }
 
   clearDynamicComponents() {
-    this.themeService.clearLayoutTop().subscribe(res => console.info(res));
   }
 }

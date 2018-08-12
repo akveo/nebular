@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map, tap } from 'rxjs/operators';
 import { NbPortalComponent } from '../portal/portal.component';
 import { NbThemeService } from '../../services/theme.service';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 export type NbPortalContent = string | TemplateRef<any> | Type<any>;
 
@@ -19,12 +20,7 @@ export class NbPortalOutlet {
   }
 
   create(portal: NbPortal): Observable<any> {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(NbPortalComponent);
-    return this.themeService.appendToLayoutTop(factory)
-      .pipe(
-        map((ref: ComponentRef<NbPortalComponent>) => this.patchContainer(ref, portal)),
-        tap((ref: ComponentRef<NbPortalComponent>) => this.performChangeDetection(ref)),
-      )
+    return null;
   }
 
   private patchContainer(ref: ComponentRef<any>, { content, context }: NbPortal): ComponentRef<any> {

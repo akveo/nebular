@@ -5,12 +5,23 @@
  */
 
 import {
-  AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
+  AfterViewInit,
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Inject,
+  Input,
+  OnDestroy,
+  PLATFORM_ID,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
@@ -18,9 +29,11 @@ import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
-import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
+import { NbLayoutScrollService, NbScrollPosition } from '../../services/scroll.service';
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
-import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
+import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
+import { NbOverlayContainer } from '@nebular/theme/components/overlay/overlay-container.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -250,7 +263,6 @@ export class NbLayoutFooterComponent {
   selector: 'nb-layout',
   styleUrls: ['./layout.component.scss'],
   template: `
-    <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
@@ -276,62 +288,8 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
   @HostBinding('class.with-subheader') withSubheader: boolean = false;
-
-  /**
-   * Defines whether the layout columns will be centered after some width
-   * @param {boolean} val
-   */
-  @Input()
-  set center(val: boolean) {
-    this.centerValue = convertToBoolProperty(val);
-  }
-
-  /**
-   * Defines whether the layout enters a 'window' mode, when the layout content (including sidebars and fixed header)
-   * becomes centered by width with a margin from the top of the screen, like a floating window.
-   * Automatically enables `withScroll` mode, as in the window mode scroll must be inside the layout and cannot be on
-   * window. (TODO: check this)
-   * @param {boolean} val
-   */
-  @Input()
-  set windowMode(val: boolean) {
-    this.windowModeValue = convertToBoolProperty(val);
-    this.withScroll = this.windowModeValue;
-  }
-
-  /**
-   * Defines whether to move the scrollbars to layout or leave it at the body level.
-   * Automatically set to true when `windowMode` is enabled.
-   * @param {boolean} val
-   */
-  @Input()
-  set withScroll(val: boolean) {
-    this.withScrollValue = convertToBoolProperty(val);
-
-    // TODO: is this the best way of doing it? as we don't have access to body from theme styles
-    // TODO: add e2e test
-    const body = this.document.getElementsByTagName('body')[0];
-    if (this.withScrollValue) {
-      this.renderer.setStyle(body, 'overflow', 'hidden');
-    } else {
-      this.renderer.setStyle(body, 'overflow', 'initial');
-    }
-  }
-
-  /**
-   * Restores scroll to the top of the page after navigation
-   * @param {boolean} val
-   */
-  @Input()
-  set restoreScrollTop(val: boolean) {
-    this.restoreScrollTopValue = convertToBoolProperty(val);
-  }
-
-  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
   @ViewChild('scrollableContainer', { read: ElementRef }) scrollableContainerRef: ElementRef;
-
   protected afterViewInit$ = new BehaviorSubject(null);
-
   private alive: boolean = true;
 
   constructor(
@@ -348,7 +306,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
+    protected overlayContainer: OverlayContainer,
   ) {
+    (<NbOverlayContainer> this.overlayContainer).setContainer(this.elementRef.nativeElement);
 
     this.themeService.onThemeChange()
       .pipe(
@@ -421,26 +381,57 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * Defines whether the layout columns will be centered after some width
+   * @param {boolean} val
+   */
+  @Input()
+  set center(val: boolean) {
+    this.centerValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Defines whether the layout enters a 'window' mode, when the layout content (including sidebars and fixed header)
+   * becomes centered by width with a margin from the top of the screen, like a floating window.
+   * Automatically enables `withScroll` mode, as in the window mode scroll must be inside the layout and cannot be on
+   * window. (TODO: check this)
+   * @param {boolean} val
+   */
+  @Input()
+  set windowMode(val: boolean) {
+    this.windowModeValue = convertToBoolProperty(val);
+    this.withScroll = this.windowModeValue;
+  }
+
+  /**
+   * Defines whether to move the scrollbars to layout or leave it at the body level.
+   * Automatically set to true when `windowMode` is enabled.
+   * @param {boolean} val
+   */
+  @Input()
+  set withScroll(val: boolean) {
+    this.withScrollValue = convertToBoolProperty(val);
+
+    // TODO: is this the best way of doing it? as we don't have access to body from theme styles
+    // TODO: add e2e test
+    const body = this.document.getElementsByTagName('body')[0];
+    if (this.withScrollValue) {
+      this.renderer.setStyle(body, 'overflow', 'hidden');
+    } else {
+      this.renderer.setStyle(body, 'overflow', 'initial');
+    }
+  }
+
+  /**
+   * Restores scroll to the top of the page after navigation
+   * @param {boolean} val
+   */
+  @Input()
+  set restoreScrollTop(val: boolean) {
+    this.restoreScrollTopValue = convertToBoolProperty(val);
+  }
+
   ngAfterViewInit() {
-    this.themeService.onAppendToTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { factory: ComponentFactory<any>, listener: Subject<any> }) => {
-        const componentRef = this.veryTopRef.createComponent(data.factory);
-        data.listener.next(componentRef);
-        data.listener.complete();
-      });
-
-    this.themeService.onClearLayoutTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { listener: Subject<any> }) => {
-        this.veryTopRef.clear();
-        data.listener.next(true);
-      });
-
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe(direction => {
@@ -455,7 +446,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.themeService.clearLayoutTop();
     this.alive = false;
   }
 

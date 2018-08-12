@@ -8,16 +8,19 @@ import {
   ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
   OnInit, PLATFORM_ID,
 } from '@angular/core';
+import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
+
 import { filter, takeWhile } from 'rxjs/operators';
+
 import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import { NbThemeService } from '../../services/theme.service';
-import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbPositioningHelper } from '../popover/helpers/positioning.helper';
 import { NbAdjustmentHelper } from '../popover/helpers/adjustment.helper';
 import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
 import { NbPlacementHelper } from '../popover/helpers/placement.helper';
+import { NbAdjustment, NbPosition } from '../overlay/overlay-position';
 
 /**
  * Full featured context menu directive.
@@ -79,7 +82,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  set placement(placement: NbPopoverPlacement) {
+  set placement(placement: NbPosition) {
     this.popover.placement = placement;
   };
 
@@ -89,7 +92,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbContextMenuAdjustment')
-  set adjustment(adjustment: NbPopoverAdjustment) {
+  set adjustment(adjustment: NbAdjustment) {
     this.popover.adjustment = adjustment;
   }
 
@@ -116,21 +119,25 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
               triggerHelper: NbTriggerHelper,
               @Inject(PLATFORM_ID) platformId,
               placementHelper: NbPlacementHelper,
+              overlay: Overlay,
+              positionBuilder: OverlayPositionBuilder,
               private menuService: NbMenuService) {
     /**
      * Initialize popover with all the important inputs.
      * */
-    this.popover = new NbPopoverDirective(hostRef,
-      themeService,
-      componentFactoryResolver,
-      positioningHelper,
-      adjustmentHelper,
-      triggerHelper,
-      platformId,
-      placementHelper,
-    );
-    this.popover.content = NbContextMenuComponent;
-    this.popover.placement = NbPopoverPlacement.BOTTOM;
+    // this.popover = new NbPopoverDirective(hostRef,
+    //   themeService,
+    //   componentFactoryResolver,
+    //   positioningHelper,
+    //   adjustmentHelper,
+    //   triggerHelper,
+    //   platformId,
+    //   overlay,
+    //   positionBuilder,
+    // );
+    this.popover = null;
+    // this.popover.content = NbContextMenuComponent;
+    // this.popover.placement = NbPopoverPlacement.BOTTOM;
   }
 
   ngOnInit() {
@@ -166,7 +173,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.popover.onResize();
+    // this.popover.onResize();
   }
 
   /*

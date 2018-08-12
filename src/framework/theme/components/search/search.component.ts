@@ -27,6 +27,7 @@ import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -281,11 +282,11 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(NbSearchFieldComponent);
-    this.themeService.appendToLayoutTop(factory)
-      .subscribe((componentRef: ComponentRef<any>) => {
-        this.connectToSearchField(componentRef);
-      });
+    // const portal = new ComponentPortal(NbSearchFieldComponent);
+    // this.themeService.appendToLayoutTop(portal)
+    //   .subscribe((componentRef: ComponentRef<any>) => {
+    //     this.connectToSearchField(componentRef);
+    //   });
   }
 
   openSearch() {

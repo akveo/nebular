@@ -86,6 +86,7 @@
     "@angular/platform-browser": "6.0.0",
     "@angular/platform-browser-dynamic": "6.0.0",
     "@angular/router": "6.0.0",
+    "@angular/cdk": "6.0.0",
     "bootstrap": "4.0.0",
     "colors.js": "1.2.4",
     "core-js": "2.5.1",

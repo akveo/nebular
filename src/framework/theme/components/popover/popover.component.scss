@@ -9,10 +9,10 @@
   $arrow-content-size: 9px;
   $arrow-offset: -($arrow-size * 2);
 
-  position: absolute;
+  //position: absolute;
   z-index: 10000;
   border-radius: 5px;
-  top: 200px;
+  //top: 200px;
 
   .primitive-popover {
     padding: 0.75rem 1rem;

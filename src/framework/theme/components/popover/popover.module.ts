@@ -12,13 +12,20 @@ import { NbAdjustmentHelper } from './helpers/adjustment.helper';
 import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbTriggerHelper } from './helpers/trigger.helper';
 import { NbPlacementHelper } from './helpers/placement.helper';
+import { NbOverlayModule } from '../overlay/overlay.module';
+
 
 @NgModule({
-  imports: [NbSharedModule],
+  imports: [NbSharedModule, NbOverlayModule],
   declarations: [NbPopoverComponent, NbPopoverDirective],
   exports: [NbPopoverDirective],
   entryComponents: [NbPopoverComponent],
-  providers: [NbAdjustmentHelper, NbPositioningHelper, NbTriggerHelper, NbPlacementHelper],
+  providers: [
+    NbAdjustmentHelper,
+    NbPositioningHelper,
+    NbTriggerHelper,
+    NbPlacementHelper,
+  ],
 })
 export class NbPopoverModule {
 }

@@ -4,26 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ComponentFactoryResolver, ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy,
-  OnInit, PLATFORM_ID, Inject,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { takeWhile } from 'rxjs/operators';
+import { Directive, ElementRef, Input } from '@angular/core';
+import { ComponentType, Overlay } from '@angular/cdk/overlay';
 
-import { NbPositioningHelper } from './helpers/positioning.helper';
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
-import { NbThemeService } from '../../services/theme.service';
-import { NbAdjustmentHelper } from './helpers/adjustment.helper';
-import { NbTriggerHelper } from './helpers/trigger.helper';
 import {
-  NbPopoverAdjustment,
-  NbPopoverMode,
-  NbPopoverPlacement,
-  NbPopoverPosition,
-  NbPopoverLogicalPlacement,
-} from './helpers/model';
-import { NbPlacementHelper } from './helpers/placement.helper';
+  NbAdjustment,
+  NbOverlay,
+  NbOverlayBuilderService,
+  NbOverlayController,
+  NbPosition,
+  NbPositionBuilderService,
+  NbPositionStrategy,
+  NbTrigger,
+  NbTriggerBuilderService,
+  NbTriggerStrategy,
+} from '../overlay';
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
@@ -82,15 +78,14 @@ import { NbPlacementHelper } from './helpers/placement.helper';
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
+
 /*
-*
 * TODO
-* Rendering strategy have to be refactored.
-* For now directive creates and deletes popover container each time.
-* I think we can handle this slightly smarter and show/hide in any situations.
+* We're keeping inputs names for compatibility reasons.
+* Rename them before release for breaking changes.
 */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements OnInit, OnDestroy {
+export class NbPopoverDirective extends NbOverlayController {
 
   /**
    * Popover content which will be rendered in NbPopoverComponent.
@@ -110,7 +105,7 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  placement: NbPopoverPlacement | NbPopoverLogicalPlacement = NbPopoverPlacement.TOP;
+  placement: NbPosition = NbPosition.TOP;
 
   /**
    * Container placement will be changes automatically based on this strategy if container can't fit view port.
@@ -118,243 +113,52 @@ export class NbPopoverDirective implements OnInit, OnDestroy {
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbPopoverAdjustment')
-  adjustment: NbPopoverAdjustment = NbPopoverAdjustment.CLOCKWISE;
+  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Describes when the container will be shown.
    * Available options: click, hover and hint
    * */
   @Input('nbPopoverMode')
-  mode: NbPopoverMode = NbPopoverMode.CLICK;
+  mode: NbTrigger = NbTrigger.CLICK;
 
-  /**
-   * Returns true if popover already shown.
-   * @return boolean
-   * */
-  get isShown(): boolean {
-    return !!this.containerRef;
+  protected container: ComponentType<any> = NbPopoverComponent;
+
+  protected overlay: NbOverlay;
+
+  constructor(private hostRef: ElementRef,
+              private triggerFactory: NbTriggerBuilderService,
+              private positionBuilder: NbPositionBuilderService,
+              overlayBuilder: NbOverlayBuilderService,
+              cdkOverlay: Overlay) {
+    super(cdkOverlay, overlayBuilder);
   }
 
-  /**
-   * Returns true if popover hidden.
-   * @return boolean
-   * */
-  get isHidden(): boolean {
-    return !this.containerRef;
-  }
-
-  /*
-   * Is used for unsubscribe all subscriptions after component destructuring.
-   * */
-  private alive: boolean = true;
-
-  private containerRef: ComponentRef<NbPopoverComponent>;
-
-  private get container(): NbPopoverComponent {
-    return this.containerRef.instance;
-  }
-
-  private get containerElement(): HTMLElement {
-    return this.containerRef.location.nativeElement;
-  }
-
-  private get hostElement(): HTMLElement {
-    return this.hostRef.nativeElement;
-  }
-
-  constructor(
-    private hostRef: ElementRef,
-    private themeService: NbThemeService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private positioningHelper: NbPositioningHelper,
-    private adjustmentHelper: NbAdjustmentHelper,
-    private triggerHelper: NbTriggerHelper,
-    @Inject(PLATFORM_ID) private platformId,
-    private placementHelper: NbPlacementHelper,
-  ) {}
-
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.registerTriggers();
-    }
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-  }
-
-  /**
-   * Show popover.
-   * */
   show() {
-    if (this.isHidden) {
-      this.renderPopover();
-    }
+    this.overlay.show();
   }
 
-  /**
-   * Hide popover.
-   * */
   hide() {
-    if (this.isShown) {
-      this.destroyPopover();
-    }
+    this.overlay.hide();
   }
 
-  /**
-   * Toggle popover state.
-   * */
   toggle() {
-    if (this.isShown) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.overlay.toggle();
   }
 
-  /*
-   * Adjust popover position on window resize.
-   * Window resize may change host element position, so popover relocation required.
-   *
-   * TODO
-   * Fix tslint to add capability make HostListener private.
-   * */
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (this.isShown) {
-      this.place();
-    }
+  protected createPositionStrategy(): NbPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .adjustment(this.adjustment)
+      .position(this.placement)
+      .build();
   }
 
-  /*
-   * Subscribe to the popover triggers created from the {@link NbPopoverDirective#mode}.
-   * see {@link NbTriggerHelper}
-   * */
-  private registerTriggers() {
-    const { open, close, toggle } = this.triggerHelper
-      .createTrigger(this.hostElement, () => this.containerRef, this.mode);
-
-    open.pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
-
-    close.pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
-
-    toggle.pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.toggle());
-  }
-
-  /*
-   * Renders popover putting {@link NbPopoverComponent} in the top of {@link NbLayoutComponent}
-   * and positioning container based on {@link NbPopoverDirective#placement}
-   * and {@link NbPopoverDirective#adjustment}.
-   * */
-  private renderPopover() {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(NbPopoverComponent);
-    this.themeService.appendToLayoutTop(factory)
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((containerRef: ComponentRef<NbPopoverComponent>) => {
-        this.containerRef = containerRef;
-        this.patchPopover(this.content, this.context);
-        /*
-         * Have to call detectChanges because on this phase {@link NbPopoverComponent} isn't inserted in the DOM
-         * and haven't got calculated size.
-         * But we should have size on this step to calculate popover position correctly.
-         *
-         * TODO
-         * I don't think we have to call detectChanges each time we're using {@link NbThemeService#appendToLayoutTop}.
-         * Investigate, maybe we can create method in the {@link NbThemeService}
-         * which will call {@link NbThemeService#appendToLayoutTop} and 'do' detectChanges,
-         * instead of performing this call by service client.
-         * */
-        this.containerRef.changeDetectorRef.markForCheck();
-        this.containerRef.changeDetectorRef.detectChanges();
-        this.place();
-      });
-  }
-
-  /*
-   * Destroys the {@link NbPopoverComponent} and nullify its reference;
-   * */
-  private destroyPopover() {
-    this.containerRef.destroy();
-    this.containerRef = null;
-  }
-
-  /*
-   * Moves {@link NbPopoverComponent} relatively host component based on the {@link NbPopoverDirective#placement}.
-   * */
-  private place() {
-    const hostRect = this.hostElement.getBoundingClientRect();
-    const containerRect = this.containerElement.getBoundingClientRect();
-
-    this.adjust(containerRect, hostRect);
-  }
-
-  /*
-   * Set container content and context.
-   * */
-  private patchPopover(content: NbPopoverContent, context: Object) {
-    this.container.content = content;
-    this.container.context = context;
-  }
-
-  /*
-   * Set container placement.
-   * */
-  private patchPopoverPlacement(placement: NbPopoverPlacement) {
-    this.container.placement = placement;
-  }
-
-  /*
-   * Set container position.
-   * */
-  private patchPopoverPosition({ top, left }) {
-    this.container.positionTop = top;
-    this.container.positionLeft = left;
-  }
-
-  /*
-   * Calculates container adjustment and sets container position and placement.
-   * */
-  private adjust(containerRect: ClientRect, hostRect: ClientRect) {
-    const { placement, position } = this.performAdjustment(containerRect, hostRect);
-
-    this.patchPopoverPlacement(placement);
-    this.patchPopoverPosition(position);
-  }
-
-  /*
-   * Checks if {@link NbPopoverDirective#adjustment} can be performed and runs it.
-   * If not, just calculates element position.
-   * */
-  private performAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    if (this.adjustment) {
-      return this.calcAdjustment(placed, host);
-    }
-
-    return this.calcPosition(placed, host);
-  }
-
-  /*
-   * Calculate adjustment.
-   * see {@link NbAdjustmentHelper}.
-   * */
-  private calcAdjustment(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
-    return this.adjustmentHelper.adjust(placed, host, placement, this.adjustment);
-  }
-
-  /*
-   * Calculate position.
-   * see {@link NbPositioningHelper}
-   * */
-  private calcPosition(placed: ClientRect, host: ClientRect): NbPopoverPosition {
-    const placement = this.placementHelper.toPhysicalPlacement(this.placement);
-    return {
-      position: this.positioningHelper.calcPosition(placed, host, placement),
-      placement,
-    };
+  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
+    return this.triggerFactory
+      .trigger(this.mode)
+      .host(this.hostRef.nativeElement)
+      .container(overlayElement)
+      .build();
   }
 }

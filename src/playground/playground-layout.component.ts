@@ -12,7 +12,7 @@ import 'style-loader!./styles/styles.scss';
 @Component({
   selector: 'nb-playground-layout',
   template: `
-    <nb-layout>
+    <nb-layout windowMode>
       <nb-layout-column>
         <router-outlet></router-outlet>
       </nb-layout-column>
