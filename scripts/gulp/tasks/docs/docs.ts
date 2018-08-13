@@ -19,7 +19,7 @@ task('create-docs-dirs', () => {
 });
 
 function generateDocJson() {
-  return src(['src/framework/**/*.ts', '!src/framework/theme/**/node_modules{,/**}'])
+  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}'])
     .pipe(typedoc({
       module: 'commonjs',
       target: 'ES6',
