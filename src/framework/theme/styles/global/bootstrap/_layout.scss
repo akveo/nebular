@@ -1,0 +1,14 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-b-layout-theme() {
+  @include media-breakpoint-down(is) {
+    .row {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}
