@@ -4,18 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
-import { NbAuthRefreshableToken, NbAuthResult } from '../../services/';
-import { NbOAuth2AuthStrategyOptions,
-         NbOAuth2ResponseType,
-         auth2StrategyOptions,
-         NbOAuth2GrantType } from './oauth2-strategy.options';
+import {
+  NbAuthIllegalTokenError,
+  NbAuthRefreshableToken,
+  NbAuthResult,
+  NbAuthToken,
+} from '../../services/';
+import {
+  NbOAuth2AuthStrategyOptions,
+  NbOAuth2ResponseType,
+  auth2StrategyOptions,
+  NbOAuth2GrantType, NbOAuth2ClientAuthMethod,
+} from './oauth2-strategy.options';
 import { NbAuthStrategyClass } from '../../auth.options';
 
 
@@ -41,6 +48,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *   baseEndpoint?: string = '';
  *   clientId: string = '';
  *   clientSecret: string = '';
+ *   clientAuthMethod: string = NbOAuth2ClientAuthMethod.NONE;
  *   redirect?: { success?: string; failure?: string } = {
  *     success: '/',
  *     failure: null,
@@ -51,6 +59,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *     endpoint?: string;
  *     redirectUri?: string;
  *     responseType?: string;
+ *     requireValidToken: false,
  *     scope?: string;
  *     state?: string;
  *     params?: { [key: string]: string };
@@ -61,6 +70,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *   token?: {
  *     endpoint?: string;
  *     grantType?: string;
+ *     requireValidToken: false,
  *     redirectUri?: string;
  *     class: NbAuthTokenClass,
  *   } = {
@@ -72,6 +82,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *     endpoint?: string;
  *     grantType?: string;
  *     scope?: string;
+ *     requireValidToken: false,
  *   } = {
  *     endpoint: 'token',
  *     grantType: NbOAuth2GrantType.REFRESH_TOKEN,
@@ -91,10 +102,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.getOption('authorize.responseType');
   }
 
-  protected cleanParams(params: any): any {
-    Object.entries(params)
-      .forEach(([key, val]) => !val && delete params[key]);
-    return params;
+  get clientAuthMethod() {
+    return this.getOption('clientAuthMethod');
   }
 
   protected redirectResultHandlers = {
@@ -117,6 +126,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       );
     },
     [NbOAuth2ResponseType.TOKEN]: () => {
+      const module = 'authorize';
+      const requireValidToken = this.getOption(`${module}.requireValidToken`);
       return observableOf(this.route.snapshot.fragment).pipe(
         map(fragment => this.parseHashAsQueryParams(fragment)),
         map((params: any) => {
@@ -127,9 +138,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
               this.getOption('redirect.success'),
               [],
               this.getOption('defaultMessages'),
-              this.createToken(params));
+              this.createToken(params, requireValidToken));
           }
-
           return new NbAuthResult(
             false,
             params,
@@ -137,6 +147,21 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('defaultErrors'),
             [],
           );
+        }),
+        catchError(err => {
+          const errors = [];
+          if (err instanceof NbAuthIllegalTokenError) {
+            errors.push(err.message)
+          } else {
+            errors.push('Something went wrong.');
+          }
+          return observableOf(
+            new NbAuthResult(
+              false,
+              err,
+              this.getOption('redirect.failure'),
+              errors,
+            ));
         }),
       );
     },
@@ -193,9 +218,11 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   refreshToken(token: NbAuthRefreshableToken): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('refresh');
+    const module = 'refresh';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildRefreshRequestData(token))
+    return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -204,16 +231,18 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            this.createRefreshedToken(res, token, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
   }
 
   passwordToken(email: string, password: string): Observable<NbAuthResult> {
-    const url = this.getActionEndpoint('token');
+    const module = 'token';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildPasswordRequestData(email, password))
+    return this.http.post(url, this.buildPasswordRequestData(email, password), this.buildAuthHeader() )
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -222,7 +251,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            this.createToken(res, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
@@ -237,9 +266,13 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   protected requestToken(code: string) {
-    const url = this.getActionEndpoint('token');
 
-    return this.http.post(url, this.buildCodeRequestData(code))
+    const module = 'token';
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
+
+    return this.http.post(url, this.buildCodeRequestData(code),
+                         this.buildAuthHeader())
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -248,7 +281,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
             this.getOption('redirect.success'),
             [],
             this.getOption('defaultMessages'),
-            this.createToken(res));
+            this.createToken(res, requireValidToken));
         }),
         catchError((res) => this.handleResponseError(res)),
       );
@@ -261,7 +294,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       redirect_uri: this.getOption('token.redirectUri'),
       client_id: this.getOption('clientId'),
     };
-    return this.cleanParams(params);
+    return this.cleanParams(this.addCredentialsToParams(params));
   }
 
   protected buildRefreshRequestData(token: NbAuthRefreshableToken): any {
@@ -270,7 +303,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
     };
-    return this.cleanParams(params);
+    return this.cleanParams(this.addCredentialsToParams(params));
   }
 
   protected buildPasswordRequestData(email: string, password: string ): any {
@@ -279,8 +312,47 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       email: email,
       password: password,
     };
-    return this.cleanParams(params);
+    return this.cleanParams(this.addCredentialsToParams(params));
   }
+
+  protected buildAuthHeader(): any {
+    if (this.clientAuthMethod === NbOAuth2ClientAuthMethod.BASIC) {
+      if (this.getOption('clientId') && this.getOption('clientSecret')) {
+        return {
+          headers: new HttpHeaders(
+            {
+              'Authorization': 'Basic ' + btoa(
+                this.getOption('clientId') + ':' + this.getOption('clientSecret')),
+            },
+          ),
+        };
+      } else {
+        throw Error('For basic client authentication method, please provide both clientId & clientSecret.');
+      }
+    }
+  }
+
+  protected cleanParams(params: any): any {
+    Object.entries(params)
+      .forEach(([key, val]) => !val && delete params[key]);
+    return params;
+  }
+
+  protected addCredentialsToParams(params: any): any {
+    if (this.clientAuthMethod === NbOAuth2ClientAuthMethod.REQUEST_BODY) {
+      if (this.getOption('clientId') && this.getOption('clientSecret')) {
+        return {
+          ... params,
+          client_id: this.getOption('clientId'),
+          client_secret: this.getOption('clientSecret'),
+        }
+      } else {
+        throw Error('For request body client authentication method, please provide both clientId & clientSecret.')
+      }
+    }
+    return params;
+  }
+
 
   protected handleResponseError(res: any): Observable<NbAuthResult> {
     let errors = [];
@@ -290,9 +362,12 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       } else {
         errors = this.getOption('defaultErrors');
       }
+    }  else if (res instanceof NbAuthIllegalTokenError ) {
+      errors.push(res.message)
     } else {
-      errors.push('Something went wrong.');
-    }
+        errors.push('Something went wrong.')
+    };
+
     return observableOf(
       new NbAuthResult(
         false,
@@ -329,6 +404,16 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       acc[item[0]] = decodeURIComponent(item[1]);
       return acc;
     }, {}) : {};
+  }
+
+  protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken, requireValidToken: boolean): NbAuthToken {
+    type AuthRefreshToken = NbAuthRefreshableToken & NbAuthToken;
+
+    const refreshedToken: AuthRefreshToken = this.createToken<AuthRefreshToken>(res, requireValidToken);
+    if (!refreshedToken.getRefreshToken() && existingToken.getRefreshToken()) {
+      refreshedToken.setRefreshToken(existingToken.getRefreshToken());
+    }
+    return refreshedToken;
   }
 
   register(data?: any): Observable<NbAuthResult> {

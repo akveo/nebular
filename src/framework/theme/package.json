@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.10",
   "description": "@nebular/theme",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -30,5 +30,8 @@
     "@angular/router": "^6.0.0",
     "rxjs": "^6.1.0",
     "bootstrap": "^4.0.0"
+  },
+  "dependencies": {
+    "intersection-observer": "0.5.0"
   }
 }

@@ -6,12 +6,11 @@
 
 import { Component, Inject } from '@angular/core';
 import {
-  NbAuthOAuth2Token,
   NbAuthResult,
   NbAuthService,
   NB_AUTH_OPTIONS,
   nbAuthCreateToken,
-  NbAuthJWTToken,
+  NbAuthJWTToken, NbAuthToken,
 } from '@nebular/auth';
 import { Router } from '@angular/router';
 import { getDeepFromObject } from '../../framework/auth/helpers';
@@ -22,7 +21,7 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
     <nb-layout>
       <nb-layout-column>
         <nb-card *ngIf="token">
-          <nb-card-body><h2 class="title">{{getClaims(token.getValue()).email | json}} is currently authenticated</h2>
+          <nb-card-body><h2 class="title">You are currently authenticated</h2>
             <p></p>
             <p>Current User Access Token: {{ token.getValue() | json }}</p>
             <p>Current User Access Token Payload : {{getClaims(token.getValue()) | json}}</p>
@@ -83,7 +82,7 @@ import { getDeepFromObject } from '../../framework/auth/helpers';
 })
 export class NbOAuth2PasswordLoginComponent {
 
-  token: NbAuthOAuth2Token;
+  token: NbAuthToken;
   redirectDelay: number = 0;
   showMessages: any = {};
   strategy: string = '';
@@ -98,22 +97,23 @@ export class NbOAuth2PasswordLoginComponent {
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
-    this.authService.onTokenChange()
+    /**this.authService.onTokenChange()
       .subscribe((token: NbAuthOAuth2Token) => {
         this.token = null;
         if (token && token.isValid()) {
           this.token = token;
         }
-      });
+      }); **/
   }
 
-  login(): void  {
+  login(): void {
 
     this.errors = this.messages = [];
     this.submitted = true;
 
     this.authService.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
+      this.token = result.getToken();
       if (result.isSuccess()) {
         this.messages = result.getMessages();
       } else {
@@ -133,6 +133,7 @@ export class NbOAuth2PasswordLoginComponent {
   logout() {
     this.authService.logout('password')
       .subscribe((authResult: NbAuthResult) => {
+        this.token = null;
       });
   }
 
@@ -141,6 +142,9 @@ export class NbOAuth2PasswordLoginComponent {
   }
 
   getClaims(rawToken: string): string {
+    if (!rawToken) {
+      return null;
+    }
     return nbAuthCreateToken(NbAuthJWTToken, rawToken, this.strategy).getPayload();
   }
 }

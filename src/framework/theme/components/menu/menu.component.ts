@@ -12,35 +12,35 @@ import {
   OnInit,
   OnDestroy,
   HostBinding,
-  ViewChildren,
-  QueryList,
-  ElementRef,
   AfterViewInit,
-  PLATFORM_ID,
   Inject,
-  ChangeDetectorRef,
+  DoCheck,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
-
-import { NbMenuInternalService, NbMenuItem, NbMenuService, NbMenuBag } from './menu.service';
-import { convertToBoolProperty, getElementHeight } from '../helpers';
+import { takeWhile, filter, map } from 'rxjs/operators';
+import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
+import { convertToBoolProperty } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-function sumSubmenuHeight(item: NbMenuItem) {
-  return item.expanded
-    ? (item.subMenuHeight || 0) + item.children.filter(c => c.children).reduce((acc, c) => acc + sumSubmenuHeight(c), 0)
-    : 0;
+export enum NbToggleStates {
+  Expanded = 'expanded',
+  Collapsed = 'collapsed',
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: '[nbMenuItem]',
   templateUrl: './menu-item.component.html',
+  animations: [
+    trigger('toggle', [
+      state(NbToggleStates.Collapsed, style({ height: '0' })),
+      state(NbToggleStates.Expanded, style({ height: '*' })),
+      transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
+    ]),
+  ],
 })
-export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
+export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
 
   @Output() hoverItem = new EventEmitter<any>();
@@ -48,49 +48,27 @@ export class NbMenuItemComponent implements AfterViewInit, OnDestroy {
   @Output() selectItem = new EventEmitter<any>();
   @Output() itemClick = new EventEmitter<any>();
 
-  private alive: boolean = true;
+  private alive = true;
+  toggleState: NbToggleStates;
 
-  @ViewChildren(NbMenuItemComponent, { read: ElementRef }) subMenu: QueryList<ElementRef>;
-  maxHeight: number = 0;
+  constructor(private menuService: NbMenuService) {}
 
-  constructor(
-    private menuService: NbMenuService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private changeDetection: ChangeDetectorRef,
-  ) { }
+  ngDoCheck() {
+    this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
+  }
 
   ngAfterViewInit() {
-    this.subMenu.changes
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => {
-        this.updateSubmenuHeight();
-        this.updateMaxHeight();
-      });
-
     this.menuService.onSubmenuToggle()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.updateMaxHeight());
-
-    this.updateSubmenuHeight();
-    this.updateMaxHeight();
-    this.changeDetection.detectChanges();
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(({ item }) => item === this.menuItem),
+        map(({ item }: NbMenuBag) => item.expanded),
+      )
+      .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
   }
 
   ngOnDestroy() {
     this.alive = false;
-  }
-
-  updateSubmenuHeight() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.menuItem.subMenuHeight = this.subMenu.reduce(
-        (acc, c) => acc + getElementHeight(c.nativeElement),
-        0,
-      );
-    }
-  }
-
-  updateMaxHeight() {
-    this.maxHeight = sumSubmenuHeight(this.menuItem);
   }
 
   onToggleSubMenu(item: NbMenuItem) {
@@ -235,6 +213,8 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.menuInternalService.prepareItems(this.items);
+
     this.menuInternalService
       .onAddItem()
       .pipe(
@@ -267,9 +247,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         takeWhile(() => this.alive),
         filter((data: { tag: string }) => this.compareTag(data.tag)),
       )
-      .subscribe((data: { tag: string }) => {
-        this.collapseAll();
-      });
+      .subscribe(() => this.collapseAll());
 
     this.router.events
       .pipe(
@@ -277,24 +255,19 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(() => {
-        this.menuInternalService.resetItems(this.items);
-        this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue)
+        this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
       });
-
-    // TODO: this probably won't work if you pass items dynamically into items input
-    this.menuInternalService.prepareItems(this.items);
-    this.items.push(...this.menuInternalService.getItems());
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.menuInternalService.updateSelection(this.items, this.tag));
+    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue));
   }
 
   onAddItem(data: { tag: string; items: NbMenuItem[] }) {
     this.items.push(...data.items);
 
     this.menuInternalService.prepareItems(this.items);
-    this.menuInternalService.updateSelection(this.items, this.tag, this.autoCollapseValue);
+    this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
   }
 
   onHoverItem(item: NbMenuItem) {
@@ -311,8 +284,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO: is not fired on page reload
   onSelectItem(item: NbMenuItem) {
-    this.menuInternalService.resetItems(this.items);
-    this.menuInternalService.selectItem(item, this.tag);
+    this.menuInternalService.selectItem(item, this.items, this.autoCollapseValue, this.tag);
   }
 
   onItemClick(item: NbMenuItem) {
