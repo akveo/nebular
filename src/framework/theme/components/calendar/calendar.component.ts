@@ -19,7 +19,8 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
  *
- * If you want to select ranges you can use `NbCalendarRangeComponent`
+ * If you want to select ranges you can use `NbCalendarRangeComponent`.
+ * In order to use it, you have to import `NbCalendarRangeModule`.
  * @stacked-example(Range, calendar/calendar-range-showcase.component)
  *
  * As you can see in the basic usage example calendar contains previous and next month days
