@@ -13,6 +13,7 @@ import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
+import { NbAuthIllegalTokenError } from '../../services/token/token';
 
 /**
  * The most common authentication provider for email/password strategy.
@@ -30,7 +31,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    alwaysFail: false,
  *    endpoint: 'login',
  *    method: 'post',
- *    failWhenNoToken: true,
+ *    requireValidToken: false,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -43,7 +44,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *    rememberMe: true,
  *    endpoint: 'register',
  *    method: 'post',
- *    failWhenNoToken: true,
+ *    requireValidToken: false,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -86,7 +87,7 @@ import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './passwo
  *  refreshToken?: boolean | NbPasswordStrategyModule = {
  *    endpoint: 'refresh-token',
  *    method: 'post',
- *    failWhenNoToken: true,
+ *    requireValidToken: false,
  *    redirect: {
  *      success: null,
  *      failure: null,
@@ -153,94 +154,70 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
-    const method = this.getOption('login.method');
-    const url = this.getActionEndpoint('login');
+    const module = 'login';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
-          if (this.getOption('login.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse(data);
           }
-
           return res;
         }),
-        this.validateToken('login'),
         map((res) => {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('login.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('login', res, this.options),
-            this.createToken(this.getOption('token.getter')('login', res, this.options)));
+            this.getOption('messages.getter')(module, res, this.options),
+            this.createToken(this.getOption('token.getter')(module, res, this.options), requireValidToken));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('login', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('login.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, module);
         }),
       );
   }
 
   register(data?: any): Observable<NbAuthResult> {
-    const method = this.getOption('register.method');
-    const url = this.getActionEndpoint('register');
+    const module = 'register';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
-          if (this.getOption('register.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse(data);
           }
 
           return res;
         }),
-        this.validateToken('register'),
         map((res) => {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('register.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('register', res, this.options),
-            this.createToken(this.getOption('token.getter')('login', res, this.options)));
+            this.getOption('messages.getter')(module, res, this.options),
+            this.createToken(this.getOption('token.getter')('login', res, this.options), requireValidToken));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('register', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('register.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, module);
         }),
       );
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
-    const method = this.getOption('requestPass.method');
-    const url = this.getActionEndpoint('requestPass');
+    const module = 'requestPass';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
-          if (this.getOption('requestPass.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse();
           }
 
@@ -250,39 +227,27 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('requestPass.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('requestPass', res, this.options));
+            this.getOption('messages.getter')(module, res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('requestPass', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('requestPass.redirect.failure'),
-              errors,
-            ));
+        return this.handleResponseError(res, module);
         }),
       );
   }
 
   resetPassword(data: any = {}): Observable<NbAuthResult> {
-    const tokenKey = this.getOption('resetPass.resetPasswordTokenKey');
-    data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
 
-    const method = this.getOption('resetPass.method');
-    const url = this.getActionEndpoint('resetPass');
+    const module = 'resetPass';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
+    const tokenKey = this.getOption(`${module}.resetPasswordTokenKey`);
+    data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
-          if (this.getOption('resetPass.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse();
           }
 
@@ -292,33 +257,21 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('resetPass.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('resetPass', res, this.options));
+            this.getOption('messages.getter')(module, res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('resetPass', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('resetPass.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, module);
         }),
       );
   }
 
   logout(): Observable<NbAuthResult> {
 
-    const method = this.getOption('logout.method');
-    const url = this.getActionEndpoint('logout');
+    const module = 'logout';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
 
     return observableOf({})
       .pipe(
@@ -329,7 +282,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           return this.http.request(method, url, {observe: 'response'});
         }),
         map((res) => {
-          if (this.getOption('logout.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse();
           }
 
@@ -339,84 +292,63 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('logout.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('logout', res, this.options));
+            this.getOption('messages.getter')(module, res, this.options));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('logout', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('logout.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, module);
         }),
       );
   }
 
   refreshToken(data?: any): Observable<NbAuthResult> {
 
-    const method = this.getOption('refreshToken.method');
-    const url = this.getActionEndpoint('refreshToken');
+    const module = 'refreshToken';
+    const method = this.getOption(`${module}.method`);
+    const url = this.getActionEndpoint(module);
+    const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     return this.http.request(method, url, {body: data, observe: 'response'})
       .pipe(
         map((res) => {
-          if (this.getOption('refreshToken.alwaysFail')) {
+          if (this.getOption(`${module}.alwaysFail`)) {
             throw this.createFailResponse(data);
           }
 
           return res;
         }),
-        this.validateToken('refreshToken'),
         map((res) => {
           return new NbAuthResult(
             true,
             res,
-            this.getOption('refreshToken.redirect.success'),
+            this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('messages.getter')('refreshToken', res, this.options),
-            this.createToken(this.getOption('token.getter')('login', res, this.options)));
+            this.getOption('messages.getter')(module, res, this.options),
+            this.createToken(this.getOption('token.getter')(module, res, this.options), requireValidToken));
         }),
         catchError((res) => {
-          let errors = [];
-          if (res instanceof HttpErrorResponse) {
-            errors = this.getOption('errors.getter')('refreshToken', res, this.options);
-          } else {
-            errors.push('Something went wrong.');
-          }
-
-          return observableOf(
-            new NbAuthResult(
-              false,
-              res,
-              this.getOption('refreshToken.redirect.failure'),
-              errors,
-            ));
+          return this.handleResponseError(res, module);
         }),
       );
   }
 
-  protected validateToken(module: string): any {
-    return map((res) => {
-      const token = this.getOption('token.getter')(module, res, this.options);
-      if (!token && this.getOption(`${module}.failWhenNoToken`)) {
-        const key = this.getOption('token.key');
-        console.warn(`NbPasswordAuthStrategy:
-                          Token is not provided under '${key}' key
-                          with getter '${this.getOption('token.getter')}', check your auth configuration.`);
-
-        throw new Error('Could not extract token from the response.');
-      }
-      return res;
-    });
+  protected handleResponseError(res: any, module: string): Observable<NbAuthResult> {
+    let errors = [];
+    if (res instanceof HttpErrorResponse) {
+      errors = this.getOption('errors.getter')(module, res, this.options);
+    } else if (res instanceof NbAuthIllegalTokenError) {
+      errors.push(res.message)
+    } else {
+      errors.push('Something went wrong.');
+    }
+    return observableOf(
+      new NbAuthResult(
+        false,
+        res,
+        this.getOption(`${module}.redirect.failure`),
+        errors,
+      ));
   }
+
 }
