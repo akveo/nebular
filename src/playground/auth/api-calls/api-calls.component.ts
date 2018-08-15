@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 import { Wine } from './wine';
 import { Router } from '@angular/router';
 import { getDeepFromObject } from '@nebular/auth/helpers';
-import { NB_AUTH_OPTIONS } from '@nebular/auth/auth.options';
+import { NB_AUTH_OPTIONS } from '@nebular/auth';
 
 @Component({
   selector: 'nb-playground-api-calls',
