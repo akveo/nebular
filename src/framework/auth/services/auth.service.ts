@@ -12,7 +12,7 @@ import { NbAuthStrategy } from '../strategies/auth-strategy';
 import { NB_AUTH_STRATEGIES } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 import { NbTokenService } from './token/token.service';
-import { NbAuthToken } from './token/token';
+import { NbAuthToken} from './token/token';
 
 /**
  * Common authentication service.
@@ -21,8 +21,21 @@ import { NbAuthToken } from './token/token';
 @Injectable()
 export class NbAuthService {
 
+  private authEndPoints: string[] = ['login', 'register', 'request-pass', 'logout', 'token', 'refresh'];
+
+  // Authorization server urls - a way to make them available in http_interceptor or anywhere else
+  authUrls: string[] = [];
+
   constructor(protected tokenService: NbTokenService,
               @Inject(NB_AUTH_STRATEGIES) protected strategies) {
+    for (const strategy of this.strategies) {
+      for (const authEndPoint of this.authEndPoints) {
+        const endPointUrl = strategy.getActionEndpoint(authEndPoint);
+        if (endPointUrl) {
+          this.authUrls.push(endPointUrl);
+        }
+      }
+    }
   }
 
   /**
@@ -34,12 +47,29 @@ export class NbAuthService {
   }
 
   /**
-   * Returns true if auth token is presented in the token storage
+   * Returns true if valid auth token is present in the token storage.
+   * If not, calls the strategy refreshToken, and returns true if it get a new valid access token, false otherwise
    * @returns {Observable<any>}
    */
   isAuthenticated(): Observable<boolean> {
     return this.getToken()
-      .pipe(map((token: NbAuthToken) => token.isValid()));
+      .pipe(
+        switchMap(token => {
+        if (!token.isValid() && (token.getOwnerStrategyName())) {
+          return this.refreshToken(token.getOwnerStrategyName(), token)
+            .pipe(
+              switchMap(res => {
+                if (res.isSuccess()) {
+                  return observableOf(res.getToken().isValid());
+                } else {
+                  return observableOf(false);
+                }
+              }),
+            )
+        } else {
+          return observableOf(token.isValid());
+          }
+      }));
   }
 
   /**
@@ -169,6 +199,11 @@ export class NbAuthService {
         }),
       );
   }
+
+  getAuthUrls(): string[] {
+    return this.authUrls;
+  }
+
 
   /**
    * Get registered strategy by name
