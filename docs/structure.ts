@@ -519,6 +519,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Custom Auth Components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-custom-ui.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Getting User Token',
         children: [
           {
