@@ -6,6 +6,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbTriggerStrategy } from './overlay-trigger';
 import { NbPosition, NbPositionStrategy } from './overlay-position';
+import { Subscription } from 'rxjs';
 
 
 type Component = ComponentType<any>;
@@ -36,10 +37,11 @@ export class NbOverlay {
     containerRef.instance.context = this.context;
 
     // TODO reset position of the container after position application from positionStrategy using
-    this.positionStrategy.positionChange.subscribe(p => {
+    const subscription: Subscription = this.positionStrategy.positionChange.subscribe(p => {
       containerRef.instance.position = p;
       containerRef.changeDetectorRef.detectChanges();
     });
+    containerRef.onDestroy(() => subscription.unsubscribe());
   }
 
   hide() {
