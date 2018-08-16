@@ -142,6 +142,7 @@ import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -674,6 +675,10 @@ export const routes: Routes = [
           {
             path: 'infinite-news-list.component',
             component: NbInfiniteNewsListComponent,
+          },
+          {
+            path: 'infinite-list-placeholders.component',
+            component: NbInfiniteListPlaceholdersComponent,
           },
         ],
       },
