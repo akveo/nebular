@@ -109,7 +109,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         filter(() => this.windowScroll),
-        switchMap(() => this.getContainerDimentions()),
+        switchMap(() => this.getContainerDimensions()),
       )
       .subscribe(dimentions => this.checkPosition(dimentions));
 
@@ -125,11 +125,11 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
           filter(() => this.inSyncWithDom()),
           take(1),
         )),
-        switchMap(() => this.getContainerDimentions()),
+        switchMap(() => this.getContainerDimensions()),
       )
       .subscribe(dimentions => this.checkPosition(dimentions));
 
-      this.getContainerDimentions().subscribe(dimentions => this.checkPosition(dimentions));
+      this.getContainerDimensions().subscribe(dimentions => this.checkPosition(dimentions));
   }
 
   ngOnDestroy() {
@@ -153,7 +153,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.lastScrollPosition = scrollTop;
   }
 
-  private getContainerDimentions(): Observable<NbScrollableContainerDimentions> {
+  private getContainerDimensions(): Observable<NbScrollableContainerDimentions> {
     if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       return observableOf({ scrollTop, scrollHeight, clientHeight });
