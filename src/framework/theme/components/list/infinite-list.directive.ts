@@ -48,6 +48,8 @@ export class NbScrollableContainerDimentions {
  *
  * @stacked-example(Infinite list with pager, infinite-list/infinite-news-list.component)
  *
+ * @stacked-example(Infinite list with placeholders at the top, infinite-list/infinite-list-placeholders.component)
+ *
  */
 @Directive({
   selector: '[nbInfiniteList]',
