@@ -8,10 +8,6 @@ import { NgModule } from '@angular/core';
 import { NbPopoverComponent } from './popover.component';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbPopoverDirective } from './popover.directive';
-import { NbAdjustmentHelper } from './helpers/adjustment.helper';
-import { NbPositioningHelper } from './helpers/positioning.helper';
-import { NbTriggerHelper } from './helpers/trigger.helper';
-import { NbPlacementHelper } from './helpers/placement.helper';
 import { NbOverlayModule } from '../overlay/overlay.module';
 
 
@@ -20,12 +16,6 @@ import { NbOverlayModule } from '../overlay/overlay.module';
   declarations: [NbPopoverComponent, NbPopoverDirective],
   exports: [NbPopoverDirective],
   entryComponents: [NbPopoverComponent],
-  providers: [
-    NbAdjustmentHelper,
-    NbPositioningHelper,
-    NbTriggerHelper,
-    NbPlacementHelper,
-  ],
 })
 export class NbPopoverModule {
 }

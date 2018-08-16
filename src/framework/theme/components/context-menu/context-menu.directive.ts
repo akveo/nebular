@@ -4,23 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
-  OnInit, PLATFORM_ID,
-} from '@angular/core';
-import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { ComponentType, Overlay } from '@angular/cdk/overlay';
 
 import { filter, takeWhile } from 'rxjs/operators';
-
-import { NbPopoverDirective } from '../popover/popover.directive';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
-import { NbThemeService } from '../../services/theme.service';
+import {
+  NbOverlayBuilder,
+  NbOverlayController,
+  NbTrigger,
+  NbTriggerBuilderService,
+  NbTriggerStrategy,
+  NbAdjustment,
+  NbPosition,
+  NbPositionBuilderService,
+  NbPositionStrategy,
+} from '../overlay';
+import { NbPopoverComponent } from '../popover/popover.component';
 import { NbContextMenuComponent } from './context-menu.component';
-import { NbPositioningHelper } from '../popover/helpers/positioning.helper';
-import { NbAdjustmentHelper } from '../popover/helpers/adjustment.helper';
-import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
-import { NbPlacementHelper } from '../popover/helpers/placement.helper';
-import { NbAdjustment, NbPosition } from '../overlay/overlay-position';
 
 /**
  * Full featured context menu directive.
@@ -54,7 +55,7 @@ import { NbAdjustment, NbPosition } from '../overlay/overlay-position';
  * ```
  *
  * By default context menu will try to adjust itself to maximally fit viewport
- * and provide the best user experience. It will try to change placement of the context menu.
+ * and provide the best user experience. It will try to change position of the context menu.
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
@@ -66,7 +67,7 @@ import { NbAdjustment, NbPosition } from '../overlay/overlay-position';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective implements OnInit, OnDestroy {
+export class NbContextMenuDirective extends NbOverlayController implements OnInit, OnDestroy {
 
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.
@@ -74,27 +75,23 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   @Input('nbContextMenu')
   set items(items: NbMenuItem[]) {
     this.validateItems(items);
-    this.popover.context = Object.assign(this.context, { items });
+    this.context = Object.assign(this.context, { items });
   };
 
   /**
-   * Position will be calculated relatively host element based on the placement.
+   * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  set placement(placement: NbPosition) {
-    this.popover.placement = placement;
-  };
+  position: NbPosition = NbPosition.BOTTOM;
 
   /**
-   * Container placement will be changes automatically based on this strategy if container can't fit view port.
+   * Container position will be changes automatically based on this strategy if container can't fit view port.
    * Set this property to any falsy value if you want to disable automatically adjustment.
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbContextMenuAdjustment')
-  set adjustment(adjustment: NbAdjustment) {
-    this.popover.adjustment = adjustment;
-  }
+  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Set NbMenu tag, which helps identify menu when working with NbMenuService.
@@ -102,78 +99,43 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
   @Input('nbContextMenuTag')
   set tag(tag: string) {
     this.menuTag = tag;
-    this.popover.context = Object.assign(this.context, { tag });
+    this.context = Object.assign(this.context, { tag });
   }
 
-  protected popover: NbPopoverDirective;
   protected context = {};
+  protected container: ComponentType<any> = NbPopoverComponent;
+  protected content = NbContextMenuComponent;
 
   private menuTag: string;
   private alive: boolean = true;
 
-  constructor(hostRef: ElementRef,
-              themeService: NbThemeService,
-              componentFactoryResolver: ComponentFactoryResolver,
-              positioningHelper: NbPositioningHelper,
-              adjustmentHelper: NbAdjustmentHelper,
-              triggerHelper: NbTriggerHelper,
-              @Inject(PLATFORM_ID) platformId,
-              placementHelper: NbPlacementHelper,
-              overlay: Overlay,
-              positionBuilder: OverlayPositionBuilder,
-              private menuService: NbMenuService) {
-    /**
-     * Initialize popover with all the important inputs.
-     * */
-    // this.popover = new NbPopoverDirective(hostRef,
-    //   themeService,
-    //   componentFactoryResolver,
-    //   positioningHelper,
-    //   adjustmentHelper,
-    //   triggerHelper,
-    //   platformId,
-    //   overlay,
-    //   positionBuilder,
-    // );
-    this.popover = null;
-    // this.popover.content = NbContextMenuComponent;
-    // this.popover.placement = NbPopoverPlacement.BOTTOM;
+  constructor(private menuService: NbMenuService,
+              private hostRef: ElementRef,
+              private triggerFactory: NbTriggerBuilderService,
+              private positionBuilder: NbPositionBuilderService,
+              cdkOverlay: Overlay) {
+    super(cdkOverlay);
   }
 
   ngOnInit() {
-    this.popover.ngOnInit();
     this.subscribeOnItemClick();
   }
 
   ngOnDestroy() {
-    this.popover.ngOnDestroy();
+    super.ngOnDestroy();
     this.alive = false;
   }
 
-  /**
-   * Show context menu.
-   * */
   show() {
-    this.popover.show();
+    this.overlay.show();
   }
 
-  /**
-   * Hide context menu.
-   * */
   hide() {
-    this.popover.hide();
+    this.overlay.hide();
   }
 
-  /**
-   * Toggle context menu state.
-   * */
   toggle() {
-    this.popover.toggle();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    // this.popover.onResize();
+    this.overlay.toggle();
   }
 
   /*
@@ -193,5 +155,20 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
         filter(({tag}) => tag === this.menuTag),
       )
       .subscribe(() => this.hide());
+  }
+
+  protected createPositionStrategy(): NbPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .adjustment(this.adjustment)
+      .position(this.position)
+      .offset(15)
+  }
+
+  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
+    return this.triggerFactory
+      .trigger(NbTrigger.CLICK)
+      .host(this.hostRef.nativeElement)
+      .container(overlayElement)
   }
 }

@@ -1,21 +1,23 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, OnDestroy } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
-import { NbPositionStrategy } from './overlay-position';
+import { NbPosition, NbPositionStrategy } from './overlay-position';
 import { NbTriggerStrategy } from './overlay-trigger';
-import { NbOverlay, NbOverlayBuilderService } from './overlay-builder';
+import { NbOverlay, NbOverlayBuilder } from './overlay-builder';
 
-export abstract class NbOverlayController implements OnInit, OnDestroy {
-  protected abstract container?: ComponentType<any>;
+export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
+  protected abstract container: ComponentType<any>;
   protected abstract content;
+  protected abstract context: Object;
+  protected abstract position: NbPosition;
 
   protected overlay: NbOverlay;
 
-  constructor(protected cdkOverlay: Overlay, protected overlayBuilder: NbOverlayBuilderService) {
+  constructor(protected cdkOverlay: Overlay) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.overlay = this.createOverlay();
   }
 
@@ -36,12 +38,14 @@ export abstract class NbOverlayController implements OnInit, OnDestroy {
     const overlayRef: OverlayRef = this.createCdkOverlay(positionStrategy);
     const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy(overlayRef.overlayElement);
 
-    return this.overlayBuilder
+    return new NbOverlayBuilder()
       .overlayRef(overlayRef)
       .container(this.container)
       .content(this.content as any)
-      .positionStrategy(positionStrategy)
+      .context(this.context)
+      .position(this.position)
       .triggerStrategy(triggerStrategy)
+      .positionStrategy(positionStrategy)
       .build();
   }
 }

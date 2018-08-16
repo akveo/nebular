@@ -1,30 +1,44 @@
-import { Injectable } from '@angular/core';
-import { ComponentType, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplateRef } from '@angular/core';
+import { ComponentType, FlexibleConnectedPositionStrategy, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 import { takeWhile } from 'rxjs/operators';
 
 import { NbTriggerStrategy } from './overlay-trigger';
-import { NbPositionStrategy } from './overlay-position';
+import { NbPosition, NbPositionStrategy } from './overlay-position';
 
 
 type Component = ComponentType<any>;
+
+export interface NbContainer {
+  content: ComponentType<any> | TemplateRef<any> | string;
+  position: NbPosition;
+  context: Object;
+}
 
 export class NbOverlay {
   protected alive: boolean = true;
 
   constructor(protected overlayRef: OverlayRef,
-              protected container: Component,
+              protected container: ComponentType<NbContainer>,
               protected content: Component,
-              protected triggerStrategy: NbTriggerStrategy) {
+              protected context: Object,
+              protected position: NbPosition,
+              protected triggerStrategy: NbTriggerStrategy,
+              protected positionStrategy: NbPositionStrategy) {
     this.registerTriggerStrategy();
   }
 
   show() {
     const portal = new ComponentPortal(this.container);
     const containerRef = this.overlayRef.attach(portal);
-    containerRef.instance.portal = new ComponentPortal(this.content);
-    containerRef.instance.placement = 'right';
+    containerRef.instance.content = this.content;
+    containerRef.instance.position = this.position;
+    containerRef.instance.context = this.context;
+    (<FlexibleConnectedPositionStrategy> this.overlayRef.getConfig().positionStrategy).positionChanges
+      .subscribe(console.log.bind(console))
+
+    // TODO reset position of the container after position application from positionStrategy
   }
 
   hide() {
@@ -69,14 +83,18 @@ export class NbOverlay {
   }
 }
 
-@Injectable()
-export class NbOverlayBuilderService {
-  private _content: Component;
-  private _container: Component;
-  private _positionStrategy: NbPositionStrategy;
-  private _triggerStrategy: NbTriggerStrategy;
+export class NbOverlayBuilder {
+  protected _overlayRef: OverlayRef;
+  protected _container: Component;
+  protected _content: Component;
+  protected _context: Object;
+  protected _position: NbPosition;
+  protected _triggerStrategy: NbTriggerStrategy;
+  protected _positionStrategy: NbPositionStrategy;
 
-  constructor(private overlay: Overlay) {
+  overlayRef(overlayRef: OverlayRef): this {
+    this._overlayRef = overlayRef;
+    return this;
   }
 
   container(container: Component): this {
@@ -89,8 +107,13 @@ export class NbOverlayBuilderService {
     return this;
   }
 
-  positionStrategy(positionStrategy: NbPositionStrategy): this {
-    this._positionStrategy = positionStrategy;
+  context(context: Object): this {
+    this._context = context;
+    return this;
+  }
+
+  position(position: NbPosition): this {
+    this._position = position;
     return this;
   }
 
@@ -99,15 +122,13 @@ export class NbOverlayBuilderService {
     return this;
   }
 
-  protected _overlayRef: OverlayRef;
-
-  overlayRef(overlayRef: OverlayRef): this {
-    this._overlayRef = overlayRef;
+  positionStrategy(positionStrategy: NbPositionStrategy): this {
+    this._positionStrategy = positionStrategy;
     return this;
   }
 
   build(): NbOverlay {
-    // const overlayRef = this.overlay.create({ positionStrategy: this._positionStrategy });
-    return new NbOverlay(this._overlayRef, this._container, this._content, this._triggerStrategy);
+    return new NbOverlay(this._overlayRef, this._container, this._content,
+      this._context, this._position, this._triggerStrategy, this._positionStrategy);
   }
 }

@@ -2,6 +2,7 @@ import { ElementRef, Inject, Injectable } from '@angular/core';
 import {
   ConnectedPosition,
   FlexibleConnectedPositionStrategy,
+  GlobalPositionStrategy,
   OverlayPositionBuilder,
   PositionStrategy,
   ViewportRuler,
@@ -40,7 +41,7 @@ const bottom: ConnectedPosition = {
   originY: 'bottom',
   overlayX: 'center',
   overlayY: 'top',
-  offsetX: -15,
+  offsetY: 15,
 };
 
 const left: ConnectedPosition = {
@@ -56,18 +57,20 @@ const top: ConnectedPosition = {
   originY: 'top',
   overlayX: 'center',
   overlayY: 'bottom',
-  offsetX: 15,
+  offsetY: -15,
 };
 
 const FLEXIBLE_CONNECTED_POSITIONS = [
+  left,
   right,
   bottom,
-  left,
   top,
 ];
 
 class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {
   private _position: NbPosition;
+  private _adjustment: NbAdjustment;
+  private _offset: number;
 
   position(position: NbPosition): this {
     this._position = position;
@@ -76,75 +79,29 @@ class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStr
 
   adjustment(adjustment: NbAdjustment): this {
     // TODO reorder and apply adjustment
+    this._adjustment = adjustment;
     return this;
   }
 
-  // clockwise(): this {
-  //   this.withPositions([top, right, bottom, left]);
-  //   return this;
-  // }
-  //
-  // counterClockwise(): this {
-  //   this.withPositions([top, left, bottom, right]);
-  //   return this;
-  // }
+  offset(offset: number): this {
+    this._offset = offset;
+    return this;
+  }
 }
 
 @Injectable()
-export class NbPositionFactoryService {
+export class NbPositionBuilderService {
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected viewportRuler: ViewportRuler,
               protected platform: Platform,
               protected positionBuilder: OverlayPositionBuilder) {
   }
 
-  createPosition(position: NbPosition, adjustment: NbAdjustment,
-                 connectedTo: ElementRef, offset: number): NbPositionStrategy {
-    switch (adjustment) {
-      case NbAdjustment.CLOCKWISE:
-        return new NbAdjustableConnectedPositionStrategy(connectedTo, this.viewportRuler, this.document, this.platform)
-          .withPositions(FLEXIBLE_CONNECTED_POSITIONS);
-      case NbAdjustment.COUNTERCLOCKWISE:
-        return new NbAdjustableConnectedPositionStrategy(connectedTo, this.viewportRuler, this.document, this.platform)
-          .withPositions(FLEXIBLE_CONNECTED_POSITIONS);
-      default:
-        return this.positionBuilder.flexibleConnectedTo(connectedTo);
-    }
-  }
-}
-
-// TODO track scroll
-@Injectable()
-export class NbPositionBuilderService {
-  private _position: NbPosition;
-  private _adjustment: NbAdjustment;
-  private _connectedTo: ElementRef;
-  private _offset: number;
-
-  constructor(protected positionFactory: NbPositionFactoryService) {
+  global(): GlobalPositionStrategy {
+    return this.positionBuilder.global();
   }
 
-  position(position: NbPosition): this {
-    this._position = position;
-    return this;
-  }
-
-  adjustment(adjustment: NbAdjustment): this {
-    this._adjustment = adjustment;
-    return this;
-  }
-
-  connectedTo(elementRef: ElementRef): this {
-    this._connectedTo = elementRef;
-    return this;
-  }
-
-  hostOffset(offset: number): this {
-    this._offset = offset;
-    return this;
-  }
-
-  build(): NbPositionStrategy {
-    return this.positionFactory.createPosition(this._position, this._adjustment, this._connectedTo, this._offset);
+  connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {
+    return new NbAdjustableConnectedPositionStrategy(elementRef, this.viewportRuler, this.document, this.platform)
   }
 }

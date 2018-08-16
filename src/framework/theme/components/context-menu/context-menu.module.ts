@@ -11,9 +11,10 @@ import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuModule } from '../menu/menu.module';
 import { NbPopoverComponent } from '../popover/popover.component';
 import { NbPopoverModule } from '../popover/popover.module';
+import { NbOverlayModule } from '@nebular/theme/components/overlay';
 
 @NgModule({
-  imports: [CommonModule, NbPopoverModule, NbMenuModule],
+  imports: [CommonModule, NbOverlayModule, NbMenuModule],
   exports: [NbContextMenuDirective],
   declarations: [NbContextMenuDirective, NbContextMenuComponent],
   entryComponents: [NbPopoverComponent, NbContextMenuComponent],

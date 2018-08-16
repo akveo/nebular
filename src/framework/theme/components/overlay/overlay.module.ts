@@ -3,9 +3,9 @@ import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
 import { NbOverlayContainer } from './overlay-container';
-import { NbOverlayBuilderService } from './overlay-builder';
-import { NbPositionBuilderService, NbPositionFactoryService } from './overlay-position';
-import { NbTriggerBuilderService, NbTriggerFactoryService } from './overlay-trigger';
+import { NbOverlayBuilder } from './overlay-builder';
+import { NbPositionBuilderService } from './overlay-position';
+import { NbTriggerBuilderService } from './overlay-trigger';
 
 
 const CDK_MODULES = [OverlayModule, PortalModule];
@@ -20,10 +20,8 @@ export class NbOverlayModule {
       ngModule: NbOverlayModule,
       providers: [
         NbPositionBuilderService,
-        NbPositionFactoryService,
         NbTriggerBuilderService,
-        NbTriggerFactoryService,
-        NbOverlayBuilderService,
+        NbOverlayBuilder,
         { provide: OverlayContainer, useClass: NbOverlayContainer },
       ],
     };

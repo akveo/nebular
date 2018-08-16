@@ -11,7 +11,7 @@ import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import {
   NbAdjustment,
   NbOverlay,
-  NbOverlayBuilderService,
+  NbOverlayBuilder,
   NbOverlayController,
   NbPosition,
   NbPositionBuilderService,
@@ -57,7 +57,7 @@ import {
  * @stacked-example(Placements, popover/popover-placements.component)
  *
  * By default popover will try to adjust itself to maximally fit viewport
- * and provide the best user experience. It will try to change placement of the popover container.
+ * and provide the best user experience. It will try to change position of the popover container.
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
@@ -101,14 +101,14 @@ export class NbPopoverDirective extends NbOverlayController {
   context: Object;
 
   /**
-   * Position will be calculated relatively host element based on the placement.
+   * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  placement: NbPosition = NbPosition.TOP;
+  position: NbPosition = NbPosition.TOP;
 
   /**
-   * Container placement will be changes automatically based on this strategy if container can't fit view port.
+   * Container position will be changes automatically based on this strategy if container can't fit view port.
    * Set this property to any falsy value if you want to disable automatically adjustment.
    * Available values: clockwise, counterclockwise.
    * */
@@ -127,11 +127,10 @@ export class NbPopoverDirective extends NbOverlayController {
   protected overlay: NbOverlay;
 
   constructor(private hostRef: ElementRef,
-              private triggerFactory: NbTriggerBuilderService,
+              private triggerBuilder: NbTriggerBuilderService,
               private positionBuilder: NbPositionBuilderService,
-              overlayBuilder: NbOverlayBuilderService,
               cdkOverlay: Overlay) {
-    super(cdkOverlay, overlayBuilder);
+    super(cdkOverlay);
   }
 
   show() {
@@ -150,15 +149,13 @@ export class NbPopoverDirective extends NbOverlayController {
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .adjustment(this.adjustment)
-      .position(this.placement)
-      .build();
+      .position(this.position);
   }
 
   protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
-    return this.triggerFactory
+    return this.triggerBuilder
       .trigger(this.mode)
       .host(this.hostRef.nativeElement)
-      .container(overlayElement)
-      .build();
+      .container(overlayElement);
   }
 }
