@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { ComponentType, FlexibleConnectedPositionStrategy, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentType, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 import { takeWhile } from 'rxjs/operators';
@@ -33,12 +33,13 @@ export class NbOverlay {
     const portal = new ComponentPortal(this.container);
     const containerRef = this.overlayRef.attach(portal);
     containerRef.instance.content = this.content;
-    containerRef.instance.position = this.position;
     containerRef.instance.context = this.context;
-    (<FlexibleConnectedPositionStrategy> this.overlayRef.getConfig().positionStrategy).positionChanges
-      .subscribe(console.log.bind(console))
 
-    // TODO reset position of the container after position application from positionStrategy
+    // TODO reset position of the container after position application from positionStrategy using
+    this.positionStrategy.positionChange.subscribe(p => {
+      containerRef.instance.position = p;
+      containerRef.changeDetectorRef.detectChanges();
+    });
   }
 
   hide() {

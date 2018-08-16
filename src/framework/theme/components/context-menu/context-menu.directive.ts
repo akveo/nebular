@@ -10,7 +10,6 @@ import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { filter, takeWhile } from 'rxjs/operators';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import {
-  NbOverlayBuilder,
   NbOverlayController,
   NbTrigger,
   NbTriggerBuilderService,

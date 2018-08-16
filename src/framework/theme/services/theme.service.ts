@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Inject, Injectable, Type } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
-import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
 
 import { NB_THEME_OPTIONS } from '../theme.options';

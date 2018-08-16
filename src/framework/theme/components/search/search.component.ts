@@ -8,7 +8,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -27,7 +26,6 @@ import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { ComponentPortal } from '@angular/cdk/portal';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -213,7 +211,6 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchType: string = 'rotate-layout';
 
   constructor(private searchService: NbSearchService,
-              private componentFactoryResolver: ComponentFactoryResolver,
               private themeService: NbThemeService,
               private router: Router) {
   }

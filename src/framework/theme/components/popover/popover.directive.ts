@@ -11,7 +11,6 @@ import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import {
   NbAdjustment,
   NbOverlay,
-  NbOverlayBuilder,
   NbOverlayController,
   NbPosition,
   NbPositionBuilderService,

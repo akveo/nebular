@@ -1,6 +1,8 @@
 import { ElementRef, Inject, Injectable } from '@angular/core';
 import {
+  ConnectedOverlayPositionChange,
   ConnectedPosition,
+  ConnectionPositionPair,
   FlexibleConnectedPositionStrategy,
   GlobalPositionStrategy,
   OverlayPositionBuilder,
@@ -9,10 +11,14 @@ import {
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 import { NB_DOCUMENT } from '../../theme.options';
 
 
 export enum NbAdjustment {
+  NOOP = 'noop',
   CLOCKWISE = 'clockwise',
   COUNTERCLOCKWISE = 'counterclockwise',
 }
@@ -26,7 +32,10 @@ export enum NbPosition {
   END = 'end',
 }
 
-export type NbPositionStrategy = PositionStrategy;
+export type NbPositionStrategy = PositionStrategy & {
+  positionChange: Observable<NbPosition>;
+};
+
 
 const right: ConnectedPosition = {
   originX: 'end',
@@ -60,17 +69,29 @@ const top: ConnectedPosition = {
   offsetY: -15,
 };
 
-const FLEXIBLE_CONNECTED_POSITIONS = [
-  left,
-  right,
-  bottom,
-  top,
-];
+const POSITIONS = {
+  [NbPosition.TOP]: top,
+  [NbPosition.BOTTOM]: bottom,
+  [NbPosition.LEFT]: left,
+  [NbPosition.RIGHT]: right,
+};
 
-class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {
+const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
+const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPosition.RIGHT];
+const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
+
+
+class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStrategy implements NbPositionStrategy {
+  readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
+    map((positionChange: ConnectedOverlayPositionChange) => positionChange.connectionPair),
+    map((connectionPair: ConnectionPositionPair) => {
+      return Object.entries(POSITIONS)
+        .filter(([name, position]) => position === connectionPair)
+        .map(([name]) => name as NbPosition)[0];
+    }),
+  );
+
   private _position: NbPosition;
-  private _adjustment: NbAdjustment;
-  private _offset: number;
 
   position(position: NbPosition): this {
     this._position = position;
@@ -78,14 +99,31 @@ class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStr
   }
 
   adjustment(adjustment: NbAdjustment): this {
-    // TODO reorder and apply adjustment
-    this._adjustment = adjustment;
+    let positions: NbPosition[];
+    switch (adjustment) {
+      case NbAdjustment.NOOP:
+        positions = NOOP_POSITIONS.filter(position => this._position === position);
+        break;
+      case NbAdjustment.CLOCKWISE:
+        positions = this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
+        break;
+      case NbAdjustment.COUNTERCLOCKWISE:
+        positions = this.reorderPreferredPositions(COUNTER_CLOCKWISE_POSITIONS);
+        break
+    }
+    this.withPositions(positions.map(position => POSITIONS[position]));
     return this;
   }
 
+  // TODO APPLY
   offset(offset: number): this {
-    this._offset = offset;
     return this;
+  }
+
+  protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
+    const startIndex = positions.indexOf(this._position);
+    const start = positions.slice().splice(startIndex);
+    return start.concat(...positions);
   }
 }
 
