@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscriber } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
 
 /**
  * Scroll position type
@@ -43,10 +42,13 @@ export class NbLayoutScrollService {
    * @returns {Observable<NbScrollPosition>}
    */
   getPosition(): Observable<NbScrollPosition> {
-    const listener = new ReplaySubject<NbScrollPosition>();
-    this.scrollPositionReq$.next({ listener });
+    return Observable.create((observer: Subscriber<NbScrollPosition>) => {
+      const listener = new Subject<NbScrollPosition>();
+      listener.subscribe(observer);
+      this.scrollPositionReq$.next({ listener });
 
-    return listener.asObservable();
+      return () => listener.complete();
+    });
   }
 
   /**
