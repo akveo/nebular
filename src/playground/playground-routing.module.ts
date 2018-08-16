@@ -957,6 +957,10 @@ export const routes: Routes = [
     loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
   },
   {
+    path: 'smart-home',
+    loadChildren: './smart-home/app.module#NgxAppModule',
+  },
+  {
     path: '',
     loadChildren: './auth/auth.module#NbAuthPlaygroundModule',
   },

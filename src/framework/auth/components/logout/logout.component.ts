@@ -13,9 +13,7 @@ import { NbAuthResult } from '../../services/auth-result';
 
 @Component({
   selector: 'nb-logout',
-  template: `
-    <div>Logging out, please wait...</div>
-  `,
+  templateUrl: './logout.component.html',
 })
 export class NbLogoutComponent implements OnInit {
 
