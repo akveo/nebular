@@ -41,7 +41,6 @@ import { NbAuthIllegalTokenError } from '../../services/token/token';
  *  };
  *  register?: boolean | NbPasswordStrategyModule = {
  *    alwaysFail: false,
- *    rememberMe: true,
  *    endpoint: 'register',
  *    method: 'post',
  *    requireValidToken: false,

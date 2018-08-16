@@ -45,7 +45,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     return this.currentTheme === 'corporate';
   }
 
-  iframeHeight: number;
+  iframeHeight = 0;
   alive: boolean = true;
 
   themes: {label: string; value: string}[] = [

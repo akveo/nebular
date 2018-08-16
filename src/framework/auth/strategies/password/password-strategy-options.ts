@@ -11,7 +11,6 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 export interface NbPasswordStrategyModule {
   alwaysFail?: boolean;
-  rememberMe?: boolean;
   endpoint?: string;
   method?: string;
   redirect?: {
@@ -54,7 +53,6 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   };
   register?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
-    rememberMe: true,
     endpoint: 'register',
     method: 'post',
     requireValidToken: false,
