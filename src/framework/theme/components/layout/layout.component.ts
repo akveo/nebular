@@ -32,7 +32,7 @@ import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
 import { NbLayoutScrollService, NbScrollPosition } from '../../services/scroll.service';
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
-import { NbOverlayContainer } from '@nebular/theme/components/overlay/overlay-container';
+import { NbOverlayContainer } from '../overlay/overlay-container';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 /**
