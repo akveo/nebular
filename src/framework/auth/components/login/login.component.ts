@@ -27,6 +27,7 @@ export class NbLoginComponent {
   user: any = {};
   submitted: boolean = false;
   socialLinks: NbAuthSocialLink[] = [];
+  rememberMe = false;
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
@@ -37,6 +38,7 @@ export class NbLoginComponent {
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+    this.rememberMe = this.getConfigValue('forms.login.rememberMe');
   }
 
   login(): void {
