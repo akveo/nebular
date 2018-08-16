@@ -53,39 +53,47 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
 
 export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
-  show: Observable<Event> = observableFromEvent<Event>(this._host, 'mouseenter')
-    .pipe(
-      delay(100),
-      takeUntil(observableFromEvent(this._host, 'mouseleave')),
-      repeat(),
-    );
+  get show(): Observable<Event> {
+    return observableFromEvent<Event>(this._host, 'mouseenter')
+      .pipe(
+        delay(100),
+        takeUntil(observableFromEvent(this._host, 'mouseleave')),
+        repeat(),
+      );
+  }
 
-  hide: Observable<Event> = observableFromEvent<Event>(this._host, 'mouseleave')
-    .pipe(
-      switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
-        .pipe(
-          debounceTime(100),
-          // TODO unsubscribe after hide
-          filter(event => !this._host.contains(event.target as Node)
-            && !this._container.contains(event.target as Node),
+  get hide(): Observable<Event> {
+    return observableFromEvent<Event>(this._host, 'mouseleave')
+      .pipe(
+        switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
+          .pipe(
+            debounceTime(100),
+            // TODO unsubscribe after hide
+            filter(event => !this._host.contains(event.target as Node)
+              && !this._container.contains(event.target as Node),
+            ),
           ),
         ),
-      ),
-    );
+      );
+  }
 
   toggle: Observable<Event> = EMPTY$;
 }
 
 export class NbHintTriggerStrategy extends NbTriggerStrategy {
 
-  show: Observable<Event> = observableFromEvent<Event>(this._host, 'mouseenter')
-    .pipe(
-      delay(100),
-      takeUntil(observableFromEvent(this._host, 'mouseleave')),
-      repeat(),
-    );
+  get show(): Observable<Event> {
+    return observableFromEvent<Event>(this._host, 'mouseenter')
+      .pipe(
+        delay(100),
+        takeUntil(observableFromEvent(this._host, 'mouseleave')),
+        repeat(),
+      );
+  }
 
-  hide: Observable<Event> = observableFromEvent(this._host, 'mouseleave');
+  get hide(): Observable<Event> {
+    return observableFromEvent(this._host, 'mouseleave');
+  }
 
   toggle: Observable<Event> = EMPTY$;
 }
