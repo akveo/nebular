@@ -70,7 +70,7 @@ export class NbInfiniteListPlaceholdersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const { page } = this.route.snapshot.queryParams;
-    this.startPage = page ? Number.parseInt(page, 10) : 1;
+    this.startPage = page ? Number.parseInt(page, 10) : 100;
     this.pageToLoadNext = this.startPage;
   }
 
@@ -97,13 +97,16 @@ export class NbInfiniteListPlaceholdersComponent implements OnInit, OnDestroy {
     this.loadingPrevious = true;
     this.topPlaceholders = new Array(this.pageSize);
     this.restoreScrollPosition();
-    this.newsService.load(this.startPage - 1, this.pageSize)
-      .subscribe(news => {
-        this.topPlaceholders = [];
-        this.news.unshift(...news);
-        this.loadingPrevious = false;
-        this.startPage--;
-      });
+    this.startPage--;
+    this.newsService.load(this.startPage, this.pageSize)
+      .subscribe(
+        news => {
+          this.topPlaceholders = [];
+          this.news.unshift(...news);
+          this.loadingPrevious = false;
+        },
+        error => this.startPage++,
+      );
   }
 
   loadNext() {
