@@ -91,7 +91,8 @@ export class NbSidebarFooterComponent {
   selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
   template: `
-    <div class="main-container">
+    <div class="main-container"
+         [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
       <div class="scrollable" (click)="onClick($event)">
         <ng-content></ng-content>
@@ -114,6 +115,8 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   protected responsiveValue: boolean = false;
 
   private alive = true;
+
+  containerFixedValue: boolean = true;
 
   @HostBinding('class.fixed') fixedValue: boolean = false;
   @HostBinding('class.right') rightValue: boolean = false;
@@ -190,6 +193,15 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Makes sidebar container fixed
+   * @type {boolean}
+   */
+  @Input()
+  set containerFixed(val: boolean) {
+    this.containerFixedValue = convertToBoolProperty(val);
   }
 
   /**
