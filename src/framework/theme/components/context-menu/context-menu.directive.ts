@@ -137,6 +137,21 @@ export class NbContextMenuDirective extends NbOverlayController implements OnIni
     this.overlay.toggle();
   }
 
+  protected createPositionStrategy(): NbPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .adjustment(this.adjustment)
+      .position(this.position)
+      .offset(15)
+  }
+
+  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
+    return this.triggerFactory
+      .trigger(NbTrigger.CLICK)
+      .host(this.hostRef.nativeElement)
+      .container(overlayElement)
+  }
+
   /*
    * NbMenuComponent will crash if don't pass menu items to it.
    * So, we just validating them and throw custom obvious error.
@@ -154,20 +169,5 @@ export class NbContextMenuDirective extends NbOverlayController implements OnIni
         filter(({tag}) => tag === this.menuTag),
       )
       .subscribe(() => this.hide());
-  }
-
-  protected createPositionStrategy(): NbPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .adjustment(this.adjustment)
-      .position(this.position)
-      .offset(15)
-  }
-
-  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
-    return this.triggerFactory
-      .trigger(NbTrigger.CLICK)
-      .host(this.hostRef.nativeElement)
-      .container(overlayElement)
   }
 }
