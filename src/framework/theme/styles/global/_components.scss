@@ -29,6 +29,7 @@
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 @import '../../components/toaster/toaster.component.theme';
+@import '../../components/overlay/overlay.theme';
 
 @mixin nb-theme-components() {
 
@@ -57,4 +58,5 @@
   @include nb-list-theme();
   @include nb-input-theme();
   @include nb-toaster-theme();
+  @include nb-overlay-theme();
 }

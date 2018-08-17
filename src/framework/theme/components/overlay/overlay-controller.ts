@@ -4,11 +4,12 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import { NbPosition, NbPositionStrategy } from './overlay-position';
 import { NbTriggerStrategy } from './overlay-trigger';
-import { NbOverlay, NbOverlayBuilder } from './overlay';
+import { NbContainer, NbContentComponent, NbOverlay, NbOverlayBuilder } from './overlay';
+
 
 export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
-  protected abstract container: ComponentType<any>;
-  protected abstract content;
+  protected abstract container: ComponentType<NbContainer>;
+  protected abstract content: NbContentComponent;
   protected abstract context: Object;
   protected abstract position: NbPosition;
 

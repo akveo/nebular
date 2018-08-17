@@ -14,7 +14,7 @@ export class NbOverlayContainer extends OverlayContainer {
     const container = this._document.createElement('div');
 
     container.classList.add('cdk-overlay-container');
-    this.container.appendChild(container);
+    this._document.querySelector('nb-layout').appendChild(container);
     this._containerElement = container;
   }
 }

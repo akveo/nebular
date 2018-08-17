@@ -8,11 +8,10 @@ import { NbTriggerStrategy } from './overlay-trigger';
 import { NbPosition, NbPositionStrategy } from './overlay-position';
 import { Subscription } from 'rxjs';
 
-
-type Component = ComponentType<any>;
+export type NbContentComponent = ComponentType<any> | TemplateRef<any> | string;
 
 export interface NbContainer {
-  content: ComponentType<any> | TemplateRef<any> | string;
+  content: NbContentComponent;
   position: NbPosition;
   context: Object;
 }
@@ -22,7 +21,7 @@ export class NbOverlay {
 
   constructor(protected overlayRef: OverlayRef,
               protected container: ComponentType<NbContainer>,
-              protected content: Component,
+              protected content: NbContentComponent,
               protected context: Object,
               protected position: NbPosition,
               protected triggerStrategy: NbTriggerStrategy,
@@ -88,8 +87,8 @@ export class NbOverlay {
 
 export class NbOverlayBuilder {
   protected _overlayRef: OverlayRef;
-  protected _container: Component;
-  protected _content: Component;
+  protected _container: ComponentType<NbContainer>;
+  protected _content: NbContentComponent;
   protected _context: Object;
   protected _position: NbPosition;
   protected _triggerStrategy: NbTriggerStrategy;
@@ -100,12 +99,12 @@ export class NbOverlayBuilder {
     return this;
   }
 
-  container(container: Component): this {
+  container(container: ComponentType<NbContainer>): this {
     this._container = container;
     return this;
   }
 
-  content(content: Component): this {
+  content(content: NbContentComponent): this {
     this._content = content;
     return this;
   }
