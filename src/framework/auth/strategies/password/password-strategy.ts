@@ -11,10 +11,10 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 
 import { NbAuthResult } from '../../services/auth-result';
 import { NbAuthStrategy } from '../auth-strategy';
+import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
 import { NbAuthIllegalTokenError } from '../../services/token/token';
 // import { NbAuthUrls } from '@nebular/auth/auth.urls';
-import { NbAuthStrategyClass } from '@nebular/auth';
 
 /**
  * The most common authentication provider for email/password strategy.

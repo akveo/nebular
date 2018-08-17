@@ -4,10 +4,9 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NbAuthToken} from '../token/token';
 // import { NbAuthUrls } from '@nebular/auth/auth.urls';
-import {
-  // NB_AUTH_AUTHURLS,
-  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
-  NbAuthService } from '@nebular/auth';
+import { NbAuthService } from '../auth.service';
+import { NB_AUTH_TOKEN_INTERCEPTOR_FILTER} from '../../auth.options';
+// import { NB_AUTH_AUTHURLS} from "@nebular/auth";
 
 @Injectable()
 export class NbAuthJWTInterceptor implements HttpInterceptor {
