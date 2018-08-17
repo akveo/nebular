@@ -6,8 +6,8 @@
 
 import {Component, Inject} from '@angular/core';
 import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, map} from 'rxjs/operators';
 import { Wine } from './wine';
 import { Router } from '@angular/router';
 import { getDeepFromObject } from '@nebular/auth/helpers';
@@ -134,6 +134,11 @@ export class NbPlaygroundApiCallsComponent {
             this.wines = wines;
           },
         ),
+        catchError(err => {
+          if (err instanceof HttpErrorResponse && err.status === 401) {
+             return this.router.navigate(['/auth/login']);
+          }
+        }),
       ).subscribe();
   }
 

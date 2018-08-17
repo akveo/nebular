@@ -46,21 +46,31 @@ export class NbAuthService {
     return this.tokenService.get();
   }
 
+
   /**
-   * Returns true if valid auth token is present in the token storage.
-   * If not, calls the strategy refreshToken, and returns true if it get a new valid access token, false otherwise
-   * @returns {Observable<any>}
+   * Returns true if auth token is presented in the token storage
+   * @returns {Observable<boolean>}
    */
   isAuthenticated(): Observable<boolean> {
     return this.getToken()
+      .pipe(map((token: NbAuthToken) => token.isValid()));
+  }
+
+  /**
+   * Returns true if valid auth token is present in the token storage.
+   * If not, calls the strategy refreshToken, and returns true if it gets a new valid access token, false otherwise
+   * @returns {Observable<boolean>}
+   */
+  isAuthenticatedOrRefresh(): Observable<boolean> {
+    return this.getToken()
       .pipe(
         switchMap(token => {
-        if (!token.isValid() && (token.getOwnerStrategyName())) {
+        if (!token.isValid()) {
           return this.refreshToken(token.getOwnerStrategyName(), token)
             .pipe(
               switchMap(res => {
                 if (res.isSuccess()) {
-                  return observableOf(res.getToken().isValid());
+                  return this.isAuthenticated();
                 } else {
                   return observableOf(false);
                 }

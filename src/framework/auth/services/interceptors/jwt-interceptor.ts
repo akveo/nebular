@@ -1,11 +1,13 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector} from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { NbAuthService } from '../auth.service';
 import { NbAuthToken} from '../token/token';
-import { Router } from '@angular/router';
-
+// import { NbAuthUrls } from '@nebular/auth/auth.urls';
+import {
+  // NB_AUTH_AUTHURLS,
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
+  NbAuthService } from '@nebular/auth';
 
 @Injectable()
 export class NbAuthJWTInterceptor implements HttpInterceptor {
@@ -14,9 +16,10 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // do not intercept request whose urls are public (here auth-urls)
-    if (! this.authService.getAuthUrls().includes(req.url)) {
-      return this.authService.isAuthenticated()
+    // do not intercept request whose urls are filtered by the injected function
+     // if(! this.authUrls.getUrls().includes(req.url))
+      if (!this.filter(req)) {
+      return this.authService.isAuthenticatedOrRefresh()
         .pipe(
           switchMap(authenticated => {
             if (authenticated) {
@@ -31,10 +34,10 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
                     return next.handle(req);
                   }),
                 )
-            } else {
-               this.router.navigate(['auth/login']);
-               return next.handle(req);
-            }
+            }  else {
+               // this.router.navigate(['auth/login']);
+                return next.handle(req);
+             }
           }),
         )
   } else {
@@ -46,9 +49,15 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
     return this.injector.get(NbAuthService);
   }
 
-  protected get router(): Router {
-    return this.injector.get(Router);
-  }
+  /** protected get authUrls(): NbAuthUrls{
+    return this.injector.get(NB_AUTH_AUTHURLS);
+  } **/
 
+  protected get filter(): (req: any) => boolean {
+    return this.injector.get(NB_AUTH_TOKEN_INTERCEPTOR_FILTER);
+}
 
 }
+
+
+

@@ -23,7 +23,7 @@ import {
   NbAuthJWTInterceptor,
   NbOAuth2GrantType,
   NbOAuth2AuthStrategy,
-  NbAuthOAuth2Token,
+  NbAuthOAuth2Token, NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
 } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
@@ -34,6 +34,12 @@ import { NbAclTestComponent } from './acl/acl-test.component';
 import { NbAuthGuard } from './auth-guard.service';
 import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
+function filterInterceptorRequest(req) {
+  return ['http://localhost:4400/api/auth/',
+          'http://other.url.not.to.be.injected/a/token',
+         ]
+    .some(url => req.url.includes(url));
+}
 
 @NgModule({
   imports: [
@@ -149,6 +155,7 @@ import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
   providers: [
     NbAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
+    { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest},
     { provide: NbRoleProvider, useClass: NbCustomRoleProvider },
   ],
 })
