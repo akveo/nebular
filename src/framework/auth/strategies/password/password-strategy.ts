@@ -14,6 +14,7 @@ import { NbAuthStrategy } from '../auth-strategy';
 import { NbAuthStrategyClass } from '../../auth.options';
 import { NbPasswordAuthStrategyOptions, passwordStrategyOptions } from './password-strategy-options';
 import { NbAuthIllegalTokenError } from '../../services/token/token';
+// import { NbAuthUrls } from '@nebular/auth/auth.urls';
 
 /**
  * The most common authentication provider for email/password strategy.

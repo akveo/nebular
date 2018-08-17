@@ -24,7 +24,7 @@ describe('auth-service', () => {
   let tokenService: NbTokenService;
   let dummyAuthStrategy: NbDummyAuthStrategy;
   const testTokenValue = 'test-token';
-  const ownerStrategyName = 'strategy';
+  const ownerStrategyName = 'dummy';
 
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
@@ -140,6 +140,42 @@ describe('auth-service', () => {
         expect(spy).toHaveBeenCalled();
         expect(isAuth).toBeFalsy();
       });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, strategy refreshToken  called when token is invalid', (done) => {
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(failResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(emptyToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          done();
+        });
+    },
+  );
+
+  it('isAuthentcatedOrRefresh, strategy refreshToken Not called if token is valid ', (done) => {
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(failResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(testToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).not.toHaveBeenCalled();
+          done();
+        });
     },
   );
 

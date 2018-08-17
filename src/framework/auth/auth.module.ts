@@ -33,11 +33,13 @@ import {
 
 import {
   defaultAuthOptions,
+  // NB_AUTH_AUTHURLS,
   NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
   NB_AUTH_STRATEGIES,
   NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
+  // NB_AUTHURLS,
   NbAuthOptions,
   NbAuthStrategyClass,
 } from './auth.options';
@@ -53,14 +55,19 @@ import { NbResetPasswordComponent } from './components/reset-password/reset-pass
 
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
+// import { NbAuthUrls } from '@nebular/auth/auth.urls';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
   const strategies = [];
+  // const authUrls = injector.get(NB_AUTH_AUTHURLS);
   options.strategies
     .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
       const strategy: NbAuthStrategy = injector.get(strategyClass);
       strategy.setOptions(strategyOptions);
-
+      /** const authBaseUrl = strategy.getOption('baseEndpoint');
+      if (authBaseUrl && !authUrls.getUrls().includes(authBaseUrl)) {
+        authUrls.add(authBaseUrl);
+      } **/
       strategies.push(strategy);
     });
   return strategies;
@@ -122,6 +129,7 @@ export class NbAuthModule {
         { provide: NB_AUTH_TOKENS, useFactory: nbTokensFactory, deps: [NB_AUTH_STRATEGIES] },
         { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
+        // { provide: NB_AUTH_AUTHURLS, useValue: NB_AUTHURLS},
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbAuthTokenParceler,
         NbAuthService,
