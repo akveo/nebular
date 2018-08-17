@@ -34,7 +34,7 @@ import { NbAclTestComponent } from './acl/acl-test.component';
 import { NbAuthGuard } from './auth-guard.service';
 import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
-function filterInterceptorRequest(req) {
+export function filterInterceptorRequest(req) {
   return ['http://localhost:4400/api/auth/',
           'http://other.url.not.to.be.injected/a/token',
          ]
