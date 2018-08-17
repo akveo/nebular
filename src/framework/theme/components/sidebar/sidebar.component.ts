@@ -381,7 +381,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
         if (isCompacted) {
-          this.fixed = true;
+          this.fixed = this.containerFixedValue;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }
