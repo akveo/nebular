@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable, Subject, Subscriber } from 'rxjs';
 
 /**
  * Layout dimensions type
@@ -47,10 +47,13 @@ export class NbLayoutRulerService {
    * @returns {Observable<NbLayoutDimensions>}
    */
   getDimensions(): Observable<NbLayoutDimensions> {
-    const listener = new ReplaySubject<NbLayoutDimensions>();
-    this.contentDimensionsReq$.next({ listener });
+    return Observable.create((observer: Subscriber<NbLayoutDimensions>) => {
+      const listener = new Subject<NbLayoutDimensions>();
+      listener.subscribe(observer);
+      this.contentDimensionsReq$.next({ listener });
 
-    return listener.asObservable();
+      return () => listener.complete();
+    });
   }
 
   /**
