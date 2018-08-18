@@ -74,9 +74,11 @@ import { NbAuthGuard } from './auth-guard.service';
 
         NbPasswordAuthStrategy.setup({
           name: 'email',
-
           token: {
             class: NbAuthJWTToken,
+          },
+          login: {
+            requireValidToken: false,
           },
           baseEndpoint: 'http://localhost:4400/api/auth/',
           logout: {

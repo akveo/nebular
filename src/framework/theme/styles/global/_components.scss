@@ -6,6 +6,8 @@
 
 @import '../../components/layout/layout.component.theme';
 @import '../../components/sidebar/sidebar.component.theme';
+@import '../../components/calendar-kit/calendar-kit.theme';
+@import '../../components/calendar/calendar.component.theme';
 @import '../../components/card/card.component.theme';
 @import '../../components/card/flip-card/flip-card.component.theme';
 @import '../../components/card/reveal-card/reveal-card.component.theme';
@@ -26,12 +28,15 @@
 @import '../../components/stepper/stepper.component.theme';
 @import '../../components/accordion/accordion.component.theme';
 @import '../../components/button/button.component.theme';
+@import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 
 @mixin nb-theme-components() {
 
   @include nb-layout-theme();
   @include nb-sidebar-theme();
+  @include nb-calendar-kit-theme();
+  @include nb-calendar-theme();
   @include nb-card-theme();
   @include nd-reveal-card-theme();
   @include nd-flip-card-theme();
@@ -52,5 +57,6 @@
   @include nb-chat-theme();
   @include nb-accordion-theme();
   @include nb-buttons-theme();
+  @include nb-list-theme();
   @include nb-input-theme();
 }

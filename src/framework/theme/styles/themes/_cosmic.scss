@@ -149,6 +149,14 @@ $theme: (
 
   spinner-bg: rgba(61, 55, 128, 0.9),
   stepper-accent-color: color-success,
+
+  tabs-selected-second-color: color-success,
+  tabs-selected-degrees: 20deg,
+
+  calendar-active-item-bg: color-primary,
+  calendar-selected-item-bg: color-primary,
+  calendar-range-bg-in-range: #4e4095,
+  calendar-today-item-bg: #352f6e,
 );
 
 // register the theme

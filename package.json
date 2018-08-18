@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.10",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -61,7 +61,7 @@
     "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:prepare": "npm run build:package",
     "release:prepare:dev": "npm-run-all version:bump release:prepare build:rename:dev ",
-    "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp",
+    "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp --watch=false",
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
     "publish": "npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security",
@@ -92,6 +92,7 @@
     "docsearch.js": "^2.5.2",
     "gulp-bump": "2.7.0",
     "highlight.js": "9.12.0",
+    "intersection-observer": "0.5.0",
     "ionicons": "2.0.1",
     "jasmine-fail-fast": "2.0.0",
     "leaflet": "1.0.3",

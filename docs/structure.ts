@@ -329,9 +329,30 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'List',
+        icon: 'list.svg',
+        source: [ 'NbListComponent', 'NbListItemComponent' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Infinite List',
+        icon: 'infinite-scroll.svg',
+        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
+      },
+      {
+        type: 'tabs',
         name: 'Input',
         icon: 'input.svg',
-        source: ['NbInputDirective'],
+        source: [ 'NbInputDirective' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarComponent',
+          'NbCalendarKitModule',
+        ],
       },
     ],
   },
@@ -493,6 +514,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth-ui.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Custom Auth Components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-custom-ui.md',
           },
         ],
       },

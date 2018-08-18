@@ -1,0 +1,76 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-calendar-theme() {
+
+  nb-base-calendar {
+    &.medium nb-card {
+      width: nb-theme(calendar-width);
+      height: nb-theme(calendar-height);
+    }
+
+    &.large nb-card {
+      width: nb-theme(calendar-large-width);
+      height: nb-theme(calendar-large-height);
+    }
+
+    nb-card-body {
+      & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {
+        padding: 0 1rem 1.5rem;
+      }
+    }
+  }
+
+  nb-calendar-day-picker .range-cell {
+    flex: 1;
+    margin: 1px 0;
+
+    .day-cell {
+      margin: 0;
+    }
+
+    &.in-range {
+      background: nb-theme(calendar-range-bg-in-range);
+
+      &:not(.today, :hover) {
+        border-radius: 0;
+      }
+    }
+
+    &.start, &.end {
+      @extend .selected;
+      background: nb-theme(calendar-range-bg-in-range);
+    }
+
+    &.start {
+      border-top-left-radius: nb-theme(calendar-border-radius);
+      border-bottom-left-radius: nb-theme(calendar-border-radius);
+
+      .day-cell {
+        margin-left: 0;
+      }
+    }
+
+    &.end {
+      border-top-right-radius: nb-theme(calendar-border-radius);
+      border-bottom-right-radius: nb-theme(calendar-border-radius);
+
+      .day-cell {
+        margin-right: 0;
+      }
+    }
+
+    &:first-of-type {
+      border-top-left-radius: nb-theme(calendar-border-radius);
+      border-bottom-left-radius: nb-theme(calendar-border-radius);
+    }
+
+    &:last-of-type {
+      border-top-right-radius: nb-theme(calendar-border-radius);
+      border-bottom-right-radius: nb-theme(calendar-border-radius);
+    }
+  }
+}

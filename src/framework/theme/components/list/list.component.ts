@@ -1,0 +1,53 @@
+import { Component, Input, HostBinding } from '@angular/core';
+
+/**
+ * List is a container component that wraps `nb-list-item` component.
+ *
+ * Basic example:
+ * @stacked-example(Simple list, list/simple-list-showcase.component)
+ *
+ * `nb-list-item` accepts arbitrary content, so you can create list of any components.
+ *
+ * List of users:
+ * @stacked-example(Users list, list/users-list-showcase.component)
+ *
+ * @styles
+ *
+ * list-item-border-color:
+ * list-item-padding:
+ */
+@Component({
+  selector: 'nb-list',
+  template: `<ng-content select="nb-list-item"></ng-content>`,
+  styleUrls: [ './list.component.scss' ],
+})
+export class NbListComponent {
+  /**
+   * Role attribute value
+   *
+   * @type {string}
+   */
+  @Input()
+  @HostBinding('attr.role')
+  role = 'list';
+}
+
+/**
+ * List item component is a grouping component that accepts arbitrary content.
+ * It should be direct child of `nb-list` componet.
+ */
+@Component({
+  selector: 'nb-list-item',
+  template: `<ng-content></ng-content>`,
+  styleUrls: [ 'list-item.component.scss' ],
+})
+export class NbListItemComponent {
+  /**
+   * Role attribute value
+   *
+   * @type {string}
+   */
+  @Input()
+  @HostBinding('attr.role')
+  role = 'listitem';
+}
