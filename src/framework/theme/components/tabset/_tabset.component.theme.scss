@@ -29,6 +29,17 @@
           padding: nb-theme(tabs-padding);
           color: nb-theme(tabs-fg);
 
+          span {
+            &::before {
+              content: attr(data-title);
+              display: block;
+              height: 1px;
+              visibility: hidden;
+
+              font-weight: nb-theme(tabs-active-font-weight);
+            }
+          }
+
           &:hover {
             color: nb-theme(tabs-fg-heading);
             font-weight: nb-theme(tabs-active-font-weight);
