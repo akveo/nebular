@@ -8,13 +8,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpRequest } from '@angular/common/http';
 
 import {
   NbCardModule,
   NbLayoutModule,
 } from '@nebular/theme';
-
 import {
   NbAuthJWTToken,
   NbAuthModule,
@@ -23,8 +22,8 @@ import {
   NbAuthJWTInterceptor,
   NbOAuth2GrantType,
   NbOAuth2AuthStrategy,
-  NbAuthOAuth2Token, NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
-} from '@nebular/auth';
+  NbAuthOAuth2Token,
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 import { NbAuthPlaygroundComponent } from './auth.component';
@@ -34,9 +33,9 @@ import { NbAclTestComponent } from './acl/acl-test.component';
 import { NbAuthGuard } from './auth-guard.service';
 import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
-export function filterInterceptorRequest(req) {
+export function filterInterceptorRequest(req: HttpRequest<any>) {
   return ['http://localhost:4400/api/auth/',
-          'http://other.url.not.to.be.injected/a/token',
+          'http://other.url/with/no/token/injected/',
          ]
     .some(url => req.url.includes(url));
 }

@@ -10,5 +10,5 @@ module.exports = {
     session: false
   },
   accessTokenExpiresIn : 60,
-  refreshTokenExpiresIn: 120,
+  refreshTokenExpiresIn: 120
 };

@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
+import { HttpRequest } from '@angular/common/http';
 import { NbAuthStrategy, NbAuthStrategyOptions } from './strategies';
 import { NbAuthToken, NbAuthTokenClass } from './services/token/token';
-// import { NbAuthUrls } from '@nebular/auth/auth.urls';
 
 export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;
 
@@ -21,7 +21,6 @@ export interface NbAuthSocialLink {
 }
 
 const socialLinks: NbAuthSocialLink[] = [];
-// export const NB_AUTHURLS = new NbAuthUrls();
 
 export const defaultAuthOptions: any = {
   strategies: [],
@@ -91,6 +90,6 @@ export const NB_AUTH_USER_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular U
 export const NB_AUTH_STRATEGIES = new InjectionToken<NbAuthStrategies>('Nebular Auth Strategies');
 export const NB_AUTH_TOKENS = new InjectionToken<NbAuthTokenClass<NbAuthToken>[]>('Nebular Auth Tokens');
 export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<string>('Nebular Simple Interceptor Header');
-// export const NB_AUTH_AUTHURLS = new InjectionToken<NbAuthUrls>('Nebular Auth Urls');
-export const NB_AUTH_TOKEN_INTERCEPTOR_FILTER = new InjectionToken<(any) => boolean>('Nebular Interceptor Filter');
+export const NB_AUTH_TOKEN_INTERCEPTOR_FILTER =
+       new InjectionToken<(req: HttpRequest<any>) => boolean>('Nebular Interceptor Filter');
 

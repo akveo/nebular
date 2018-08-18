@@ -21,21 +21,8 @@ import { NbAuthToken} from './token/token';
 @Injectable()
 export class NbAuthService {
 
-  private authEndPoints: string[] = ['login', 'register', 'request-pass', 'logout', 'token', 'refresh'];
-
-  // Authorization server urls - a way to make them available in http_interceptor or anywhere else
-  authUrls: string[] = [];
-
   constructor(protected tokenService: NbTokenService,
               @Inject(NB_AUTH_STRATEGIES) protected strategies) {
-    for (const strategy of this.strategies) {
-      for (const authEndPoint of this.authEndPoints) {
-        const endPointUrl = strategy.getActionEndpoint(authEndPoint);
-        if (endPointUrl) {
-          this.authUrls.push(endPointUrl);
-        }
-      }
-    }
   }
 
   /**
@@ -46,9 +33,8 @@ export class NbAuthService {
     return this.tokenService.get();
   }
 
-
   /**
-   * Returns true if auth token is presented in the token storage
+   * Returns true if auth token is present in the token storage
    * @returns {Observable<boolean>}
    */
   isAuthenticated(): Observable<boolean> {
@@ -58,7 +44,7 @@ export class NbAuthService {
 
   /**
    * Returns true if valid auth token is present in the token storage.
-   * If not, calls the strategy refreshToken, and returns true if it gets a new valid access token, false otherwise
+   * If not, calls the strategy refreshToken, and returns isAuthenticated() if success, false otherwise
    * @returns {Observable<boolean>}
    */
   isAuthenticatedOrRefresh(): Observable<boolean> {
@@ -209,11 +195,6 @@ export class NbAuthService {
         }),
       );
   }
-
-  getAuthUrls(): string[] {
-    return this.authUrls;
-  }
-
 
   /**
    * Get registered strategy by name
