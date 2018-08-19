@@ -143,7 +143,7 @@ describe('auth-service', () => {
     },
   );
 
-  it('isAuthenticatedOrRefresh, strategy refreshToken  called when token is invalid', (done) => {
+  it('isAuthenticatedOrRefresh, token valid, strategy refreshToken Not called, returns false', (done) => {
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(failResult));
@@ -156,15 +156,16 @@ describe('auth-service', () => {
         .pipe(first())
         .subscribe((isAuth: boolean) => {
           expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
           done();
         });
     },
   );
 
-  it('isAuthentcatedOrRefresh, strategy refreshToken Not called if token is valid ', (done) => {
+  it('isAuthenticatedOrRefresh, token valid, strategy refreshToken Not called, returns true', (done) => {
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
-        .returnValue(observableOf(failResult));
+        .returnValue(observableOf(successResult));
 
       spyOn(tokenService, 'get')
         .and
@@ -174,6 +175,46 @@ describe('auth-service', () => {
         .pipe(first())
         .subscribe((isAuth: boolean) => {
           expect(spy).not.toHaveBeenCalled();
+          expect(isAuth).toBeTruthy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns true', (done) => {
+
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(successResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValues(observableOf(emptyToken), observableOf(testToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeTruthy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns false', (done) => {
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(failResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValues(observableOf(emptyToken), observableOf(emptyToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
           done();
         });
     },
