@@ -75,7 +75,7 @@ describe('jwt-interceptor', () => {
   });
 
     beforeEach(async(
-      inject([HttpClient, HttpTestingController, NB_AUTH_TOKEN_INTERCEPTOR_FILTER], (_httpClient, _httpMock) => {
+      inject([HttpClient, HttpTestingController], (_httpClient, _httpMock) => {
         http = _httpClient;
         httpMock = _httpMock;
       }),
