@@ -29,12 +29,18 @@ export enum NbToastStatus {
 export class NbToast {
   title: string;
   message: string;
-  status: NbToastStatus;
+  config: NbToastConfig;
 }
 
 export class NbToastConfig {
   position: NbToastPosition = NbToastPosition.TOP_END;
-  status?: NbToastStatus = NbToastStatus.DEFAULT;
+  status: NbToastStatus = NbToastStatus.DEFAULT;
+  duration: number = 3000;
+  destroyByClick: boolean = true;
+
+  constructor(config: Partial<NbToastConfig>) {
+    Object.assign(this, config);
+  }
 }
 
 export class NbModalController {
@@ -112,6 +118,11 @@ export class NbToasterController extends NbOverlayController {
   prepend(toast: NbToast) {
     this.toasts.push(toast);
     this.overlay.updateContainer({ content: this.toasts });
+
+    setTimeout(() => {
+      this.toasts = this.toasts.filter(t => t !== toast);
+      this.overlay.updateContainer({ content: this.toasts });
+    }, toast.config.duration);
   }
 
   protected createPositionStrategy(): NbPositionStrategy {
@@ -156,12 +167,12 @@ export class NbToasterService {
   constructor(protected toasterRegistry: NbToasterRegistry) {
   }
 
-  show(content: NbToastContent, config: NbToastConfig) {
+  show(message, title?, config?: Partial<NbToastConfig>) {
     const container = this.toasterRegistry.get(config.position);
     container.prepend({
-      title: content,
-      status: config.status,
-      message: 'my super toast message',
+      title,
+      message,
+      config: new NbToastConfig(config),
     });
   }
 

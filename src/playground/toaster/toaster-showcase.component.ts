@@ -27,7 +27,13 @@ export class NbToasterShowcaseComponent {
   constructor(private toasterService: NbToasterService) {
   }
 
+  private index: number = 0;
+
   showToast(position, status) {
-    this.toasterService.show(status || 'Success', { position, status });
+    this.index += 1;
+    this.toasterService.show(
+      status || 'Success',
+      `Toast ${this.index}`,
+      { position, status });
   }
 }
