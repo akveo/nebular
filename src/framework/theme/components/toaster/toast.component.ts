@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { NbToast } from './toaster.service';
 
@@ -14,6 +15,17 @@ import { NbToast } from './toaster.service';
       </div>
     </div>
   `,
+  animations: [
+    trigger('toaster', [
+      state('void', style({
+        'transform': '{{ transformation }}',
+        'height': 0,
+        'margin': 0,
+      }), { params: { transformation: 'translateX(100vw)' } }),
+      transition(':enter', animate(300)),
+      transition(':leave', animate(300)),
+    ]),
+  ],
 })
 export class NbToastComponent {
   @Input()
@@ -22,5 +34,10 @@ export class NbToastComponent {
   @HostBinding('class')
   get status(): string {
     return this.toast.config.status;
+  }
+
+  @HostBinding('@toaster')
+  get toaster(): any {
+    return { value: 'in', params: { transformation: 'translateY(-100vh)' } };
   }
 }
