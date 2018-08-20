@@ -7,8 +7,6 @@ import { Disposable } from './disposable';
 
 
 export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
-  protected abstract config: NbOverlayConfig;
-
   protected overlay: NbOverlay;
   protected cdkOverlayRef: OverlayRef;
 
@@ -25,14 +23,17 @@ export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
   }
 
   protected abstract createPositionStrategy(): NbPositionStrategy;
+  protected abstract getConfig(): NbOverlayConfig;
 
   private createCdkOverlay(): OverlayRef {
+    const config = this.getConfig();
     const positionStrategy = this.createPositionStrategy();
-    return this.cdkOverlay.create({ positionStrategy });
+    return this.cdkOverlay.create({ ...config.cdkOverlayConfig, positionStrategy });
   }
 
   private createOverlay(): NbOverlay {
-    return new NbOverlay(this.cdkOverlayRef, this.config);
+    const config = this.getConfig();
+    return new NbOverlay(this.cdkOverlayRef, config);
   }
 }
 

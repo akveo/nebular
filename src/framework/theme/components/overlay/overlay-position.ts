@@ -32,9 +32,7 @@ export enum NbPosition {
   END = 'end',
 }
 
-export type NbPositionStrategy = PositionStrategy & {
-  positionChange: Observable<NbPosition>;
-};
+export type NbPositionStrategy = PositionStrategy;
 
 
 const right: ConnectedPosition = {

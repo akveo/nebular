@@ -9,8 +9,9 @@ import { Overlay } from '@angular/cdk/overlay';
 
 import {
   NbAdjustment,
-  NbConnectedOverlayController, NbOverlayContent,
+  NbConnectedOverlayController,
   NbOverlayConfig,
+  NbOverlayContent,
   NbPosition,
   NbPositionBuilderService,
   NbPositionStrategy,
@@ -90,26 +91,20 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
    * Available content: template ref, component and any primitive.
    * */
   @Input('nbPopover')
-  set content(content: NbOverlayContent) {
-    this.config.content = content;
-  }
+  content: NbOverlayContent;
 
   /**
    * Container content context. Will be applied to the rendered component.
    * */
   @Input('nbPopoverContext')
-  set context(context: Object) {
-    this.config.contentContext = context;
-  }
+  context: Object = {};
 
   /**
    * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  set position(position: NbPosition) {
-    Object.assign(this.config.containerContext, { position });
-  }
+  position: NbPosition = NbPosition.TOP;
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
@@ -125,8 +120,6 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
    * */
   @Input('nbPopoverMode')
   mode: NbTrigger = NbTrigger.CLICK;
-
-  protected config: NbOverlayConfig = new NbOverlayConfig();
 
   constructor(private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,
@@ -145,6 +138,14 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
 
   toggle() {
     this.overlay.toggle();
+  }
+
+  protected getConfig(): NbOverlayConfig {
+    return new NbOverlayConfig({
+      content: this.content,
+      contentContext: this.context,
+      position: this.position,
+    });
   }
 
   protected createPositionStrategy(): NbPositionStrategy {

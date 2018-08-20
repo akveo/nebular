@@ -1,5 +1,5 @@
 import { ComponentRef, TemplateRef } from '@angular/core';
-import { ComponentType, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentType, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 
 import { takeWhile } from 'rxjs/operators';
 import { patch, render } from './overlay-renderer';
@@ -78,6 +78,7 @@ export class NbOverlayConfig {
   container?: ComponentType<NbContainer> = NbArrowedOverlayContainerComponent;
   containerContext?: Object = {};
   position?: NbPosition = NbPosition.TOP;
+  cdkOverlayConfig?: OverlayConfig = {};
 
   constructor(config?: NbOverlayConfig) {
     Object.assign(this, config);

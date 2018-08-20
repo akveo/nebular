@@ -5,7 +5,7 @@
  */
 
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ComponentType, Overlay } from '@angular/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 
 import { filter, takeWhile } from 'rxjs/operators';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
@@ -72,19 +72,18 @@ export class NbContextMenuDirective extends NbConnectedOverlayController impleme
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
-  set items(items: NbMenuItem[]) {
+  set _items(items: NbMenuItem[]) {
     this.validateItems(items);
-    Object.assign(this.config.contentContext, { items });
+    this.items = items;
   };
+  private items: NbMenuItem[] = [];
 
   /**
    * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  set position(position: NbPosition) {
-    this.config.containerContext = position || NbPosition.BOTTOM;
-  }
+  position: NbPosition = NbPosition.BOTTOM;
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
@@ -98,16 +97,8 @@ export class NbContextMenuDirective extends NbConnectedOverlayController impleme
    * Set NbMenu tag, which helps identify menu when working with NbMenuService.
    * */
   @Input('nbContextMenuTag')
-  set tag(tag: string) {
-    this.menuTag = tag;
-    Object.assign(this.config.contentContext, { tag });
-  }
+  tag: string;
 
-  protected config: NbOverlayConfig = new NbOverlayConfig({
-    content: NbContextMenuComponent,
-  });
-
-  private menuTag: string;
   private alive: boolean = true;
 
   constructor(private menuService: NbMenuService,
@@ -139,6 +130,14 @@ export class NbContextMenuDirective extends NbConnectedOverlayController impleme
     this.overlay.toggle();
   }
 
+  protected getConfig(): NbOverlayConfig {
+    return new NbOverlayConfig({
+      content: NbContextMenuComponent,
+      contentContext: { items: this.items, tag: this.tag },
+      position: this.position,
+    });
+  }
+
   protected createPositionStrategy(): NbPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
@@ -168,7 +167,7 @@ export class NbContextMenuDirective extends NbConnectedOverlayController impleme
     this.menuService.onItemClick()
       .pipe(
         takeWhile(() => this.alive),
-        filter(({tag}) => tag === this.menuTag),
+        filter(({tag}) => tag === this.tag),
       )
       .subscribe(() => this.hide());
   }
