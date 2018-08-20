@@ -4,11 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ComponentFactoryResolver } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { NbThemeService } from '@nebular/theme';
-import { NbDynamicToAddComponent } from '../shared/dynamic.component';
-import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'nb-dynamic-test',
@@ -42,9 +39,6 @@ import { ComponentPortal } from '@angular/cdk/portal';
   `,
 })
 export class NbThemeDynamicTestComponent {
-  constructor(private themeService: NbThemeService, private componentFactoryResolver: ComponentFactoryResolver) {
-  }
-
   addDynamicComponent() {
   }
 
