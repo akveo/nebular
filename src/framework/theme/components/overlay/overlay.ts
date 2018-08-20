@@ -5,6 +5,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { takeWhile } from 'rxjs/operators';
 import { NbPosition } from './overlay-position';
 import { Disposable } from './disposable';
+import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
 
 
 export type NbContentComponent = ComponentType<any> | TemplateRef<any> | string;
@@ -71,7 +72,6 @@ export class NbOverlayTriggerSubscriber implements Disposable {
   }
 }
 
-// TODO change name
 function renderAllTheThings(overlayRef: OverlayRef, config: NbOverlayConfig): ComponentRef<NbContainer> {
   const portal = new ComponentPortal(config.container);
   const containerRef = overlayRef.attach(portal);
@@ -88,11 +88,11 @@ function patch<T>(container: ComponentRef<T>, containerContext: Object) {
 export class NbOverlayConfig {
   content?: NbContentComponent;
   contentContext?: Object = {};
-  container?: ComponentType<NbContainer>;
+  container?: ComponentType<NbContainer> = NbArrowedOverlayContainerComponent;
   containerContext?: Object = {};
   position?: NbPosition = NbPosition.TOP;
 
-  constructor(config: NbOverlayConfig) {
+  constructor(config?: NbOverlayConfig) {
     Object.assign(this, config);
   }
 }

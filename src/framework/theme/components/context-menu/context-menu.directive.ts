@@ -20,7 +20,7 @@ import {
   NbOverlayConfig,
   NbConnectedOverlayController,
 } from '../overlay';
-import { NbPopoverComponent } from '../popover/popover.component';
+import { NbArrowedOverlayContainerComponent } from '../overlay/arrowed-overlay-container/arrowed-overlay-container.component';
 import { NbContextMenuComponent } from './context-menu.component';
 
 /**
@@ -105,7 +105,7 @@ export class NbContextMenuDirective extends NbConnectedOverlayController impleme
   }
 
   protected config: NbOverlayConfig = new NbOverlayConfig({
-    container: NbPopoverComponent,
+    container: NbArrowedOverlayContainerComponent,
   });
 
   private menuTag: string;

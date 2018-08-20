@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuModule } from '../menu/menu.module';
-import { NbPopoverComponent } from '../popover/popover.component';
+import { NbArrowedOverlayContainerComponent } from '../overlay/arrowed-overlay-container/arrowed-overlay-container.component';
 import { NbPopoverModule } from '../popover/popover.module';
 import { NbOverlayModule } from '@nebular/theme/components/overlay';
 
@@ -17,7 +17,7 @@ import { NbOverlayModule } from '@nebular/theme/components/overlay';
   imports: [CommonModule, NbOverlayModule, NbMenuModule],
   exports: [NbContextMenuDirective],
   declarations: [NbContextMenuDirective, NbContextMenuComponent],
-  entryComponents: [NbPopoverComponent, NbContextMenuComponent],
+  entryComponents: [NbArrowedOverlayContainerComponent, NbContextMenuComponent],
 })
 export class NbContextMenuModule {
 }

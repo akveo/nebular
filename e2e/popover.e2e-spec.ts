@@ -11,9 +11,9 @@ const placementLeft = by.css('nb-card:nth-child(2) button:nth-child(4)');
 const modeClick = by.css('nb-card:nth-child(4) button:nth-child(1)');
 const modeHover = by.css('nb-card:nth-child(4) button:nth-child(2)');
 const modeHint = by.css('nb-card:nth-child(4) button:nth-child(3)');
-const popover = by.css('nb-layout > nb-popover');
+const popover = by.css('nb-layout > nb-arrowed-overlay-container');
 
-describe('nb-popover', () => {
+describe('nb-arrowed-overlay-container', () => {
 
   beforeEach((done) => {
     browser.get('#/popover/popover-test.component').then(done);

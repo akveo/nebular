@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-popover-theme {
-  nb-popover {
+@mixin nb-arrowed-overlay-container-theme {
+  nb-arrowed-overlay-container {
     $arrow-size: 11px;
     $arrow-content-size: 9px;
     border: 2px solid nb-theme(popover-border);

@@ -5,17 +5,14 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbPopoverComponent } from './popover.component';
-import { NbSharedModule } from '../shared/shared.module';
 import { NbPopoverDirective } from './popover.directive';
 import { NbOverlayModule } from '../overlay/overlay.module';
 
 
 @NgModule({
-  imports: [NbSharedModule, NbOverlayModule],
-  declarations: [NbPopoverComponent, NbPopoverDirective],
+  imports: [NbOverlayModule],
+  declarations: [NbPopoverDirective],
   exports: [NbPopoverDirective],
-  entryComponents: [NbPopoverComponent],
 })
 export class NbPopoverModule {
 }

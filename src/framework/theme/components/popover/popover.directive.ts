@@ -7,7 +7,7 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 
-import { NbPopoverComponent, NbPopoverContent } from './popover.component';
+import { NbArrowedOverlayContainerComponent, NbPopoverContent } from '../overlay/arrowed-overlay-container/arrowed-overlay-container.component';
 import {
   NbAdjustment, NbConnectedOverlayController,
   NbOverlay, NbOverlayConfig,
@@ -87,7 +87,7 @@ import {
 export class NbPopoverDirective extends NbConnectedOverlayController {
 
   /**
-   * Popover content which will be rendered in NbPopoverComponent.
+   * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
    * Available content: template ref, component and any primitive.
    * */
   @Input('nbPopover')
@@ -127,9 +127,7 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
   @Input('nbPopoverMode')
   mode: NbTrigger = NbTrigger.CLICK;
 
-  protected config: NbOverlayConfig = new NbOverlayConfig({
-    container: NbPopoverComponent,
-  });
+  protected config: NbOverlayConfig = new NbOverlayConfig();
 
   constructor(private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,
