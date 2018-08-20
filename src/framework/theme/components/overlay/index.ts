@@ -5,3 +5,5 @@ export * from './overlay-controller';
 export * from './overlay-position';
 export * from './overlay-trigger';
 export * from './disposable';
+
+export * from './arrowed-overlay-container/arrowed-overlay-container.component';
