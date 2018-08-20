@@ -1,20 +1,14 @@
 import { ComponentRef, TemplateRef } from '@angular/core';
 import { ComponentType, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-
 import { takeWhile } from 'rxjs/operators';
-import { patch, render } from './overlay-renderer';
+
+import { NbContainer, patch, render } from './overlay-renderer';
 import { NbPosition } from './overlay-position';
 import { Disposable } from './disposable';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
 
 
 export type NbOverlayContent = ComponentType<any> | TemplateRef<any> | string;
-
-export interface NbContainer {
-  content: NbOverlayContent;
-  position: NbPosition;
-  context: Object;
-}
 
 // TODO change name
 export class NbOverlayPositionSubscriber implements Disposable {
@@ -31,7 +25,7 @@ export class NbOverlayPositionSubscriber implements Disposable {
   protected registerPositionStrategy() {
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => this.overlay.updatePosition(position));
+      .subscribe((position: NbPosition) => this.overlay.updateContainer({ position }));
   }
 }
 
@@ -73,7 +67,7 @@ export class NbOverlayTriggerSubscriber implements Disposable {
 }
 
 export class NbOverlayConfig {
-  content?: NbOverlayContent;
+  content?: any;
   contentContext?: Object = {};
   container?: ComponentType<NbContainer> = NbArrowedOverlayContainerComponent;
   containerContext?: Object = {};
@@ -112,7 +106,7 @@ export class NbOverlay implements Disposable {
     }
   }
 
-  updatePosition(position: NbPosition) {
-    patch(this.container, { position });
+  updateContainer(context: Object) {
+    patch(this.container, context);
   }
 }

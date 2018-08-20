@@ -5,17 +5,23 @@
  */
 
 import { NgModule } from '@angular/core';
+
 import { NbSharedModule } from '../shared/shared.module';
-import { NbPortalModule } from '../portal/portal.module';
-import { NbToasterService } from './toaster.service';
-import { NbToastComponent } from './toaster.component';
-import { NbPositioningHelper } from './positioning.helper';
+import { NbToasterRegistry, NbToasterService, NbToastPositionFactory } from './toaster.service';
+import { NbToastComponent } from './toast.component';
+import { NbOverlayModule } from '../overlay';
+import { NbToasterContainerComponent } from './toaster-container.component';
+
 
 @NgModule({
-  imports: [NbSharedModule, NbPortalModule],
-  declarations: [NbToastComponent],
-  entryComponents: [NbToastComponent],
-  providers: [NbToasterService, NbPositioningHelper],
+  imports: [NbSharedModule, NbOverlayModule],
+  declarations: [NbToasterContainerComponent, NbToastComponent],
+  entryComponents: [NbToasterContainerComponent, NbToastComponent],
+  providers: [
+    NbToasterService,
+    NbToasterRegistry,
+    NbToastPositionFactory,
+  ],
 })
 export class NbToasterModule {
 }

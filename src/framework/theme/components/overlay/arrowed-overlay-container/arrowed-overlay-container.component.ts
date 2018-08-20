@@ -8,7 +8,7 @@ import { ChangeDetectorRef, Component, HostBinding, Input, TemplateRef, Type, Vi
 import { NgComponentOutlet } from '@angular/common';
 
 import { NbPosition } from '../overlay-position';
-import { NbContainer } from '../overlay';
+import { NbContainer } from '../overlay-renderer';
 
 
 /**

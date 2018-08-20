@@ -2,13 +2,12 @@ import { ComponentRef } from '@angular/core';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
-import { NbPosition } from './overlay-position';
-import { NbOverlayConfig, NbOverlayContent } from './overlay';
+import { NbOverlayConfig } from './overlay';
 
 
 export interface NbContainer {
-  content: NbOverlayContent;
-  position: NbPosition;
+  // TODO content should have compatible type with container
+  content: any;
   context: Object;
 }
 

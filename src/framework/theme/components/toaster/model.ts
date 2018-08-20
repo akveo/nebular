@@ -21,16 +21,6 @@ export enum NbToastStatus {
   DEFAULT = 'default',
 }
 
-export class NbToast {
-  title: string;
-  content: NbPortalContent;
-  context?: Object;
-  position?: NbToastPosition;
-  duration?: number;
-  status?: NbToastStatus;
-  margin?: number;
-}
-
 export class NbToastPortal extends NbPortal {
   position: string;
   duration: number;
