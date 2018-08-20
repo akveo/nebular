@@ -21,7 +21,7 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
             switchMap(authenticated => {
               if (authenticated) {
                   return this.authService.getToken().pipe(
-                    switchMap( (token: NbAuthToken) => {
+                    switchMap((token: NbAuthToken) => {
                       const JWT = `Bearer ${token.getValue()}`;
                       req = req.clone({
                         setHeaders: {
