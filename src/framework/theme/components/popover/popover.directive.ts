@@ -9,8 +9,8 @@ import { ComponentType, Overlay } from '@angular/cdk/overlay';
 
 import { NbPopoverComponent, NbPopoverContent } from './popover.component';
 import {
-  NbAdjustment,
-  NbOverlay,
+  NbAdjustment, NbConnectedOverlayController,
+  NbOverlay, NbOverlayConfig,
   NbOverlayController,
   NbPosition,
   NbPositionBuilderService,
@@ -41,7 +41,7 @@ import {
  * <button [nbPopover]="MyPopoverComponent"></button>
  * ```
  *
- * Both custom components and templateRef popovers can receive *context* property
+ * Both custom components and templateRef popovers can receive *contentContext* property
  * that will be passed to the content props.
  *
  * Primitive types
@@ -84,27 +84,33 @@ import {
 * Rename them before release for breaking changes.
 */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective extends NbOverlayController {
+export class NbPopoverDirective extends NbConnectedOverlayController {
 
   /**
    * Popover content which will be rendered in NbPopoverComponent.
    * Available content: template ref, component and any primitive.
    * */
   @Input('nbPopover')
-  content: NbPopoverContent;
+  set content(content: NbPopoverContent) {
+    this.config.content = content;
+  }
 
   /**
    * Container content context. Will be applied to the rendered component.
    * */
   @Input('nbPopoverContext')
-  context: Object;
+  set context(context: Object) {
+    this.config.contentContext = context;
+  }
 
   /**
    * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom, left, start or end.
    * */
   @Input('nbPopoverPlacement')
-  position: NbPosition = NbPosition.TOP;
+  set position(position: NbPosition) {
+    this.config.containerContext = position;
+  }
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
@@ -121,9 +127,9 @@ export class NbPopoverDirective extends NbOverlayController {
   @Input('nbPopoverMode')
   mode: NbTrigger = NbTrigger.CLICK;
 
-  protected container: ComponentType<any> = NbPopoverComponent;
-
-  protected overlay: NbOverlay;
+  protected config: NbOverlayConfig = new NbOverlayConfig({
+    container: NbPopoverComponent,
+  });
 
   constructor(private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,

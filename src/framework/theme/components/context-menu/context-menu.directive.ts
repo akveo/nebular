@@ -10,7 +10,6 @@ import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { filter, takeWhile } from 'rxjs/operators';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import {
-  NbOverlayController,
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
@@ -18,6 +17,8 @@ import {
   NbPosition,
   NbPositionBuilderService,
   NbPositionStrategy,
+  NbOverlayConfig,
+  NbConnectedOverlayController,
 } from '../overlay';
 import { NbPopoverComponent } from '../popover/popover.component';
 import { NbContextMenuComponent } from './context-menu.component';
@@ -66,7 +67,7 @@ import { NbContextMenuComponent } from './context-menu.component';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective extends NbOverlayController implements OnInit, OnDestroy {
+export class NbContextMenuDirective extends NbConnectedOverlayController implements OnInit, OnDestroy {
 
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.
@@ -74,7 +75,7 @@ export class NbContextMenuDirective extends NbOverlayController implements OnIni
   @Input('nbContextMenu')
   set items(items: NbMenuItem[]) {
     this.validateItems(items);
-    this.context = Object.assign(this.context, { items });
+    Object.assign(this.config.contentContext, { items });
   };
 
   /**
@@ -82,7 +83,9 @@ export class NbContextMenuDirective extends NbOverlayController implements OnIni
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  position: NbPosition = NbPosition.BOTTOM;
+  set position(position: NbPosition) {
+    this.config.containerContext = position || NbPosition.BOTTOM;
+  }
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
@@ -98,12 +101,12 @@ export class NbContextMenuDirective extends NbOverlayController implements OnIni
   @Input('nbContextMenuTag')
   set tag(tag: string) {
     this.menuTag = tag;
-    this.context = Object.assign(this.context, { tag });
+    Object.assign(this.config.contentContext, { tag });
   }
 
-  protected context = {};
-  protected container: ComponentType<any> = NbPopoverComponent;
-  protected content = NbContextMenuComponent;
+  protected config: NbOverlayConfig = new NbOverlayConfig({
+    container: NbPopoverComponent,
+  });
 
   private menuTag: string;
   private alive: boolean = true;

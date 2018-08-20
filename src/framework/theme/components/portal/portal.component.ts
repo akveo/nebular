@@ -49,18 +49,18 @@ export class NbPortalComponent {
   }
 
   /**
-   * If content position is TemplateRef we're passing context as template outlet param.
-   * But if we have custom component content we're just assigning passed context to the component instance.
+   * If content position is TemplateRef we're passing contentContext as template outlet param.
+   * But if we have custom component content we're just assigning passed contentContext to the component instance.
    * */
   @ViewChild(NgComponentOutlet)
   set componentOutlet(el) {
     if (this.isComponent) {
       Object.assign(el._componentRef.instance, this.context);
       /**
-       * Change detection have to performed here, because another way applied context
+       * Change detection have to performed here, because another way applied contentContext
        * will be rendered on the next change detection loop and
        * we'll have incorrect positioning. Because rendered component may change its size
-       * based on the context.
+       * based on the contentContext.
        * */
       this.changeDetectorRef.detectChanges();
     }

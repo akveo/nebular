@@ -6,11 +6,11 @@
 
 import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
-import { NbModalService } from '@nebular/theme/components/modal/modal.service';
+import { NbModalService } from './modal.service';
 
 @NgModule({
   imports: [NbSharedModule],
-  providers: [NbModalService]
+  providers: [NbModalService],
 })
 export class NbModalModule {
 }

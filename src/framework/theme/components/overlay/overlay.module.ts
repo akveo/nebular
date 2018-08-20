@@ -3,7 +3,6 @@ import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
 import { NbOverlayContainer } from './overlay-container';
-import { NbOverlayBuilder } from './overlay';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbTriggerBuilderService } from './overlay-trigger';
 
@@ -21,7 +20,6 @@ export class NbOverlayModule {
       providers: [
         NbPositionBuilderService,
         NbTriggerBuilderService,
-        NbOverlayBuilder,
         { provide: OverlayContainer, useClass: NbOverlayContainer },
       ],
     };

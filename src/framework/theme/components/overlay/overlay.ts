@@ -1,12 +1,11 @@
-import { TemplateRef } from '@angular/core';
+import { ComponentRef, TemplateRef } from '@angular/core';
 import { ComponentType, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 import { takeWhile } from 'rxjs/operators';
+import { NbPosition } from './overlay-position';
+import { Disposable } from './disposable';
 
-import { NbTriggerStrategy } from './overlay-trigger';
-import { NbPosition, NbPositionStrategy } from './overlay-position';
-import { Subscription } from 'rxjs';
 
 export type NbContentComponent = ComponentType<any> | TemplateRef<any> | string;
 
@@ -16,31 +15,102 @@ export interface NbContainer {
   context: Object;
 }
 
-export class NbOverlay {
+// TODO change name
+export class NbOverlayPositionSubscriber implements Disposable {
   protected alive: boolean = true;
 
-  constructor(protected overlayRef: OverlayRef,
-              protected container: ComponentType<NbContainer>,
-              protected content: NbContentComponent,
-              protected context: Object,
-              protected position: NbPosition,
-              protected triggerStrategy: NbTriggerStrategy,
-              protected positionStrategy: NbPositionStrategy) {
+  constructor(protected positionStrategy, protected overlay: NbOverlay) {
+    this.registerPositionStrategy();
+  }
+
+  dispose(): void {
+    this.alive = false;
+  }
+
+  protected registerPositionStrategy() {
+    this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((position: NbPosition) => this.overlay.updatePosition(position));
+  }
+}
+
+// TODO change name
+export class NbOverlayTriggerSubscriber implements Disposable {
+  protected alive: boolean = true;
+
+  constructor(protected triggerStrategy, protected overlay: NbOverlay) {
     this.registerTriggerStrategy();
   }
 
-  show() {
-    const portal = new ComponentPortal(this.container);
-    const containerRef = this.overlayRef.attach(portal);
-    containerRef.instance.content = this.content;
-    containerRef.instance.context = this.context;
+  dispose() {
+    this.alive = false;
+  }
 
-    // TODO reset position of the container after position application from positionStrategy using
-    const subscription: Subscription = this.positionStrategy.positionChange.subscribe(p => {
-      containerRef.instance.position = p;
-      containerRef.changeDetectorRef.detectChanges();
-    });
-    containerRef.onDestroy(() => subscription.unsubscribe());
+  protected registerTriggerStrategy() {
+    this.registerShowTrigger();
+    this.registerHideTrigger();
+    this.registerToggleTrigger();
+  }
+
+  private registerShowTrigger() {
+    this.triggerStrategy.show
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.overlay.show());
+  }
+
+  private registerHideTrigger() {
+    this.triggerStrategy.hide
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.overlay.hide());
+  }
+
+  private registerToggleTrigger() {
+    this.triggerStrategy.toggle
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.overlay.toggle());
+  }
+}
+
+// TODO change name
+function renderAllTheThings(overlayRef: OverlayRef, config: NbOverlayConfig): ComponentRef<NbContainer> {
+  const portal = new ComponentPortal(config.container);
+  const containerRef = overlayRef.attach(portal);
+  containerRef.instance.content = config.content;
+  containerRef.instance.context = config.contentContext;
+  return containerRef;
+}
+
+function patch<T>(container: ComponentRef<T>, containerContext: Object) {
+  Object.assign(container, containerContext);
+  container.changeDetectorRef.detectChanges();
+}
+
+export class NbOverlayConfig {
+  content?: NbContentComponent;
+  contentContext?: Object = {};
+  container?: ComponentType<NbContainer>;
+  containerContext?: Object = {};
+  position?: NbPosition = NbPosition.TOP;
+
+  constructor(config: NbOverlayConfig) {
+    Object.assign(this, config);
+  }
+}
+
+export class NbOverlay implements Disposable {
+
+  constructor(protected overlayRef: OverlayRef,
+              protected config: NbOverlayConfig) {
+  }
+
+  dispose() {
+    this.overlayRef.dispose();
+  }
+
+  protected container: ComponentRef<NbContainer>;
+
+  show() {
+    this.container = renderAllTheThings(this.overlayRef, this.config);
   }
 
   hide() {
@@ -55,82 +125,7 @@ export class NbOverlay {
     }
   }
 
-  destroy() {
-    this.alive = false;
-    this.overlayRef.dispose();
-  }
-
-  protected registerTriggerStrategy() {
-    this.registerShowTrigger();
-    this.registerHideTrigger();
-    this.registerToggleTrigger();
-  }
-
-  private registerShowTrigger() {
-    this.triggerStrategy.show
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
-  }
-
-  private registerHideTrigger() {
-    this.triggerStrategy.hide
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
-  }
-
-  private registerToggleTrigger() {
-    this.triggerStrategy.toggle
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.overlayRef.hasAttached() ? this.hide() : this.show());
-  }
-}
-
-export class NbOverlayBuilder {
-  protected _overlayRef: OverlayRef;
-  protected _container: ComponentType<NbContainer>;
-  protected _content: NbContentComponent;
-  protected _context: Object;
-  protected _position: NbPosition;
-  protected _triggerStrategy: NbTriggerStrategy;
-  protected _positionStrategy: NbPositionStrategy;
-
-  overlayRef(overlayRef: OverlayRef): this {
-    this._overlayRef = overlayRef;
-    return this;
-  }
-
-  container(container: ComponentType<NbContainer>): this {
-    this._container = container;
-    return this;
-  }
-
-  content(content: NbContentComponent): this {
-    this._content = content;
-    return this;
-  }
-
-  context(context: Object): this {
-    this._context = context;
-    return this;
-  }
-
-  position(position: NbPosition): this {
-    this._position = position;
-    return this;
-  }
-
-  triggerStrategy(triggerStrategy: NbTriggerStrategy): this {
-    this._triggerStrategy = triggerStrategy;
-    return this;
-  }
-
-  positionStrategy(positionStrategy: NbPositionStrategy): this {
-    this._positionStrategy = positionStrategy;
-    return this;
-  }
-
-  build(): NbOverlay {
-    return new NbOverlay(this._overlayRef, this._container, this._content,
-      this._context, this._position, this._triggerStrategy, this._positionStrategy);
+  updatePosition(position: NbPosition) {
+    patch(this.container, { position });
   }
 }

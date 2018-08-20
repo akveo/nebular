@@ -1,52 +1,66 @@
 import { AfterViewInit, OnDestroy } from '@angular/core';
-import { ComponentType } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
-import { NbPosition, NbPositionStrategy } from './overlay-position';
-import { NbTriggerStrategy } from './overlay-trigger';
-import { NbContainer, NbContentComponent, NbOverlay, NbOverlayBuilder } from './overlay';
+import { NbPositionStrategy } from './overlay-position';
+import { NbOverlay, NbOverlayConfig, NbOverlayPositionSubscriber, NbOverlayTriggerSubscriber } from './overlay';
+import { Disposable } from './disposable';
 
 
 export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
-  protected abstract container: ComponentType<NbContainer>;
-  protected abstract content: NbContentComponent;
-  protected abstract context: Object;
-  protected abstract position: NbPosition;
+  protected abstract config: NbOverlayConfig;
 
   protected overlay: NbOverlay;
+  protected cdkOverlayRef: OverlayRef;
 
   constructor(protected cdkOverlay: Overlay) {
   }
 
   ngAfterViewInit(): void {
+    this.cdkOverlayRef = this.createCdkOverlay();
     this.overlay = this.createOverlay();
   }
 
   ngOnDestroy(): void {
-    this.overlay.destroy();
+    this.overlay.dispose();
   }
 
   protected abstract createPositionStrategy(): NbPositionStrategy;
 
-  protected abstract createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy;
-
-  protected createCdkOverlay(positionStrategy: NbPositionStrategy): OverlayRef {
+  private createCdkOverlay(): OverlayRef {
+    const positionStrategy = this.createPositionStrategy();
     return this.cdkOverlay.create({ positionStrategy });
   }
 
-  protected createOverlay(): NbOverlay {
-    const positionStrategy: NbPositionStrategy = this.createPositionStrategy();
-    const overlayRef: OverlayRef = this.createCdkOverlay(positionStrategy);
-    const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy(overlayRef.overlayElement);
+  private createOverlay(): NbOverlay {
+    return new NbOverlay(this.cdkOverlayRef, this.config);
+  }
+}
 
-    return new NbOverlayBuilder()
-      .overlayRef(overlayRef)
-      .container(this.container)
-      .content(this.content as any)
-      .context(this.context)
-      .position(this.position)
-      .triggerStrategy(triggerStrategy)
-      .positionStrategy(positionStrategy)
-      .build();
+export abstract class NbConnectedOverlayController extends NbOverlayController implements AfterViewInit, OnDestroy {
+  private triggerSubscriber: Disposable;
+  private positionSubscriber: Disposable;
+
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+    this.subscribeOnTriggers();
+    this.subscribeOnPosition();
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.triggerSubscriber.dispose();
+    this.positionSubscriber.dispose();
+  }
+
+  protected abstract createTriggerStrategy(overlayElement: HTMLElement);
+
+  private subscribeOnTriggers() {
+    const triggerStrategy = this.createTriggerStrategy(this.cdkOverlayRef.overlayElement);
+    this.triggerSubscriber = new NbOverlayTriggerSubscriber(triggerStrategy, this.overlay);
+  }
+
+  private subscribeOnPosition() {
+    const positionStrategy = this.cdkOverlayRef.getConfig().positionStrategy;
+    this.positionSubscriber = new NbOverlayPositionSubscriber(positionStrategy, this.overlay);
   }
 }
