@@ -9,7 +9,7 @@ import { Overlay } from '@angular/cdk/overlay';
 
 import {
   NbAdjustment,
-  NbConnectedOverlayController,
+  NbConnectedController,
   NbOverlayConfig,
   NbOverlayContent,
   NbPosition,
@@ -84,7 +84,7 @@ import {
 * Rename them before release for breaking changes.
 */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective extends NbConnectedOverlayController {
+export class NbPopoverDirective extends NbConnectedController {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.

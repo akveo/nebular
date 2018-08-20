@@ -18,7 +18,7 @@ import {
   NbPositionBuilderService,
   NbPositionStrategy,
   NbOverlayConfig,
-  NbConnectedOverlayController,
+  NbConnectedController,
 } from '../overlay';
 import { NbContextMenuComponent } from './context-menu.component';
 
@@ -66,7 +66,7 @@ import { NbContextMenuComponent } from './context-menu.component';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective extends NbConnectedOverlayController implements OnInit, OnDestroy {
+export class NbContextMenuDirective extends NbConnectedController implements OnInit, OnDestroy {
 
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.

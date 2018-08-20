@@ -14,8 +14,7 @@ export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.cdkOverlayRef = this.createCdkOverlay();
-    this.overlay = this.createOverlay();
+    this.initOverlay();
   }
 
   ngOnDestroy(): void {
@@ -24,6 +23,11 @@ export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
 
   protected abstract createPositionStrategy(): NbPositionStrategy;
   protected abstract getConfig(): NbOverlayConfig;
+
+  protected initOverlay() {
+    this.cdkOverlayRef = this.createCdkOverlay();
+    this.overlay = this.createOverlay();
+  }
 
   private createCdkOverlay(): OverlayRef {
     const config = this.getConfig();
@@ -37,7 +41,7 @@ export abstract class NbOverlayController implements AfterViewInit, OnDestroy {
   }
 }
 
-export abstract class NbConnectedOverlayController extends NbOverlayController implements AfterViewInit, OnDestroy {
+export abstract class NbConnectedController extends NbOverlayController implements AfterViewInit, OnDestroy {
   private triggerSubscriber: Disposable;
   private positionSubscriber: Disposable;
 
