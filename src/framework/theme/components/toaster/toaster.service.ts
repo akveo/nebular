@@ -4,7 +4,6 @@ import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { NbOverlayConfig, NbOverlayController, NbPositionBuilderService, NbPositionStrategy } from '../overlay';
 import { NbToasterContainerComponent } from './toaster-container.component';
 
-type NbToastContent = string;
 
 export enum NbToastPosition {
   TOP_RIGHT = 'top-right',
@@ -41,14 +40,6 @@ export class NbToastConfig {
   constructor(config: Partial<NbToastConfig>) {
     Object.assign(this, config);
   }
-}
-
-export class NbModalController {
-}
-
-type ToasterContainerInstance = any;
-
-export class NbToastRef {
 }
 
 @Injectable()
@@ -118,11 +109,7 @@ export class NbToasterController extends NbOverlayController {
   prepend(toast: NbToast) {
     this.toasts.push(toast);
     this.overlay.updateContainer({ content: this.toasts });
-
-    setTimeout(() => {
-      this.toasts = this.toasts.filter(t => t !== toast);
-      this.overlay.updateContainer({ content: this.toasts });
-    }, toast.config.duration);
+    this.setTimeout(toast);
   }
 
   protected createPositionStrategy(): NbPositionStrategy {
@@ -134,6 +121,13 @@ export class NbToasterController extends NbOverlayController {
       content: this.toasts,
       container: NbToasterContainerComponent,
     });
+  }
+
+  protected setTimeout(toast: NbToast) {
+    setTimeout(() => {
+      this.toasts = this.toasts.filter(t => t !== toast);
+      this.overlay.updateContainer({ content: this.toasts });
+    }, toast.config.duration);
   }
 }
 
@@ -176,27 +170,27 @@ export class NbToasterService {
     });
   }
 
-  success(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.SUCCESS });
+  success(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
   }
 
-  info(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.INFO });
+  info(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.INFO });
   }
 
-  warning(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.WARNING });
+  warning(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
   }
 
-  primary(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.PRIMARY });
+  primary(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
   }
 
-  danger(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.DANGER });
+  danger(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
   }
 
-  default(content: NbToastContent, config: NbToastConfig) {
-    return this.show(content, { ...config, status: NbToastStatus.DEFAULT });
+  default(message, title?, config?: Partial<NbToastConfig>) {
+    return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
   }
 }
