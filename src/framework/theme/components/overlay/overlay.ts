@@ -1,17 +1,17 @@
 import { ComponentRef, TemplateRef } from '@angular/core';
 import { ComponentType, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 
 import { takeWhile } from 'rxjs/operators';
+import { patch, render } from './overlay-renderer';
 import { NbPosition } from './overlay-position';
 import { Disposable } from './disposable';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
 
 
-export type NbContentComponent = ComponentType<any> | TemplateRef<any> | string;
+export type NbOverlayContent = ComponentType<any> | TemplateRef<any> | string;
 
 export interface NbContainer {
-  content: NbContentComponent;
+  content: NbOverlayContent;
   position: NbPosition;
   context: Object;
 }
@@ -72,21 +72,8 @@ export class NbOverlayTriggerSubscriber implements Disposable {
   }
 }
 
-function renderAllTheThings(overlayRef: OverlayRef, config: NbOverlayConfig): ComponentRef<NbContainer> {
-  const portal = new ComponentPortal(config.container);
-  const containerRef = overlayRef.attach(portal);
-  containerRef.instance.content = config.content;
-  containerRef.instance.context = config.contentContext;
-  return containerRef;
-}
-
-function patch<T>(container: ComponentRef<T>, containerContext: Object) {
-  Object.assign(container, containerContext);
-  container.changeDetectorRef.detectChanges();
-}
-
 export class NbOverlayConfig {
-  content?: NbContentComponent;
+  content?: NbOverlayContent;
   contentContext?: Object = {};
   container?: ComponentType<NbContainer> = NbArrowedOverlayContainerComponent;
   containerContext?: Object = {};
@@ -98,6 +85,7 @@ export class NbOverlayConfig {
 }
 
 export class NbOverlay implements Disposable {
+  protected container: ComponentRef<NbContainer>;
 
   constructor(protected overlayRef: OverlayRef,
               protected config: NbOverlayConfig) {
@@ -107,10 +95,8 @@ export class NbOverlay implements Disposable {
     this.overlayRef.dispose();
   }
 
-  protected container: ComponentRef<NbContainer>;
-
   show() {
-    this.container = renderAllTheThings(this.overlayRef, this.config);
+    this.container = render(this.overlayRef, this.config);
   }
 
   hide() {

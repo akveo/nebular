@@ -12,14 +12,7 @@ import { NbContainer } from '../overlay';
 
 
 /**
- * Popover can be one of the following types:
- * template, component or plain js string.
- * So NbPopoverContent provides types alias for this purposes.
- * */
-export type NbPopoverContent = string | TemplateRef<any> | Type<any>;
-
-/**
- * Popover container.
+ * Overlay container.
  * Renders provided content inside.
  *
  * @styles
@@ -48,15 +41,15 @@ export class NbArrowedOverlayContainerComponent implements NbContainer {
   @Input()
   content: any;
 
+  @Input()
+  context: Object;
+
   /**
-   * Popover position relatively host element.
+   * Container position relatively host element.
    * */
   @Input()
   @HostBinding('class')
   position: NbPosition = NbPosition.TOP;
-
-  @Input()
-  context: Object;
 
   constructor(private cd: ChangeDetectorRef) {
   }

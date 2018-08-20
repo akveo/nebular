@@ -5,13 +5,12 @@
  */
 
 import { Directive, ElementRef, Input } from '@angular/core';
-import { ComponentType, Overlay } from '@angular/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 
-import { NbArrowedOverlayContainerComponent, NbPopoverContent } from '../overlay/arrowed-overlay-container/arrowed-overlay-container.component';
 import {
-  NbAdjustment, NbConnectedOverlayController,
-  NbOverlay, NbOverlayConfig,
-  NbOverlayController,
+  NbAdjustment,
+  NbConnectedOverlayController, NbOverlayContent,
+  NbOverlayConfig,
   NbPosition,
   NbPositionBuilderService,
   NbPositionStrategy,
@@ -91,7 +90,7 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
    * Available content: template ref, component and any primitive.
    * */
   @Input('nbPopover')
-  set content(content: NbPopoverContent) {
+  set content(content: NbOverlayContent) {
     this.config.content = content;
   }
 
@@ -109,7 +108,7 @@ export class NbPopoverDirective extends NbConnectedOverlayController {
    * */
   @Input('nbPopoverPlacement')
   set position(position: NbPosition) {
-    this.config.containerContext = position;
+    Object.assign(this.config.containerContext, { position });
   }
 
   /**
