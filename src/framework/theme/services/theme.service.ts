@@ -13,7 +13,6 @@ import { NB_THEME_OPTIONS } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
-import { CdkPortalOutletAttachedRef, ComponentType, Portal } from '@angular/cdk/portal';
 
 /**
  * Main Nebular service. Includes various helper methods.
