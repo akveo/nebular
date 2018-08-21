@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+
 import { NbPopoverDirective } from './popover.directive';
 import { NbOverlayModule } from '../overlay/overlay.module';
 

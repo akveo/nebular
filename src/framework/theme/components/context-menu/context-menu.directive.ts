@@ -5,10 +5,9 @@
  */
 
 import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import { filter, takeWhile } from 'rxjs/operators';
-import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -19,10 +18,13 @@ import {
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
+  NbComponentPortal,
+  NbOverlayService,
+  NbOverlayRef,
+  patch,
 } from '../overlay';
 import { NbContextMenuComponent } from './context-menu.component';
-import { patch } from '@nebular/theme/components/overlay/overlay-renderer';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 
 /**
  * Full featured context menu directive.
@@ -89,7 +91,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   @Input('nbContextMenuTag')
   tag: string;
 
-  protected ref: OverlayRef;
+  protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected triggerStrategy: NbTriggerStrategy;
@@ -100,7 +102,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
               private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,
               private positionBuilder: NbPositionBuilderService,
-              private cdkOverlay: Overlay) {
+              private overlay: NbOverlayService) {
   }
 
   /**
@@ -114,7 +116,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
 
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.cdkOverlay.create({ positionStrategy: this.positionStrategy });
+    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy });
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
@@ -127,7 +129,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   }
 
   show() {
-    this.container = this.ref.attach(new ComponentPortal(NbArrowedOverlayContainerComponent));
+    this.container = this.ref.attach(new NbComponentPortal(NbArrowedOverlayContainerComponent));
     patch(this.container, {
       position: this.position,
       content: NbContextMenuComponent,

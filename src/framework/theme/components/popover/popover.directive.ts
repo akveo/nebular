@@ -5,7 +5,6 @@
  */
 
 import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -18,10 +17,14 @@ import {
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
+  NbOverlayRef,
+  NbOverlayService,
+  NbComponentPortal,
 } from '../overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+
 import { patch } from '../overlay/overlay-renderer';
 import { takeWhile } from 'rxjs/operators';
+
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
@@ -124,7 +127,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   @Input('nbPopoverMode')
   mode: NbTrigger = NbTrigger.CLICK;
 
-  protected ref: OverlayRef;
+  protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected triggerStrategy: NbTriggerStrategy;
@@ -133,12 +136,12 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   constructor(private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,
               private positionBuilder: NbPositionBuilderService,
-              private cdkOverlay: Overlay) {
+              private overlay: NbOverlayService) {
   }
 
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.cdkOverlay.create({ positionStrategy: this.positionStrategy });
+    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy });
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
@@ -150,7 +153,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   }
 
   show() {
-    this.container = this.ref.attach(new ComponentPortal(NbArrowedOverlayContainerComponent));
+    this.container = this.ref.attach(new NbComponentPortal(NbArrowedOverlayContainerComponent));
     patch(this.container, { position: this.position, content: this.content, context: this.context });
   }
 

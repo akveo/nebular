@@ -1,24 +1,23 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
-import { PortalModule } from '@angular/cdk/portal';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
-import { NbOverlayContainer } from './overlay-container';
+import { NbSharedModule } from '../shared/shared.module';
+import { NbOverlayCdkModule } from './overlay-cdk.module';
+
+import { NbOverlayLayoutContainer } from './overlay-container';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbTriggerBuilderService } from './overlay-trigger';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
-import { NbSharedModule } from '../shared/shared.module';
-import { NbOverlayService } from './overlay.service';
 
-const CDK_MODULES = [OverlayModule, PortalModule];
 
 @NgModule({
   imports: [
-    ...CDK_MODULES,
+    NbOverlayCdkModule,
     NbSharedModule,
   ],
   declarations: [NbArrowedOverlayContainerComponent],
   exports: [
-    ...CDK_MODULES,
+    NbOverlayCdkModule,
     NbArrowedOverlayContainerComponent,
   ],
   entryComponents: [NbArrowedOverlayContainerComponent],
@@ -30,8 +29,7 @@ export class NbOverlayModule {
       providers: [
         NbPositionBuilderService,
         NbTriggerBuilderService,
-        { provide: OverlayContainer, useClass: NbOverlayContainer },
-        NbOverlayService,
+        { provide: OverlayContainer, useClass: NbOverlayLayoutContainer },
       ],
     };
   }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
-import { NbPositionBuilderService } from '../overlay';
+import { NbPositionBuilderService, NbGlobalPositionStrategy } from '../overlay';
 import { NbToastPosition } from './model';
 
 
@@ -25,7 +24,7 @@ export class NbToastPositionFactory {
   constructor(protected positionBuilder: NbPositionBuilderService) {
   }
 
-  create(position: NbToastPosition): GlobalPositionStrategy {
+  create(position: NbToastPosition): NbGlobalPositionStrategy {
     const positionStrategy = this.positionBuilder.global();
 
     switch (position) {

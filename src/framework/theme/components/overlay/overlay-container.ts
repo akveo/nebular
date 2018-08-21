@@ -1,9 +1,10 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
+
+import { NbOverlayContainer } from './overlay-cdk.module';
 
 
 @Injectable()
-export class NbOverlayContainer extends OverlayContainer {
+export class NbOverlayLayoutContainer extends NbOverlayContainer {
   protected _createContainer(): void {
     const container = this._document.createElement('div');
 

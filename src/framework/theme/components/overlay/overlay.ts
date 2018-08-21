@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
-import { ComponentType } from '@angular/cdk/overlay';
+
+import { NbComponentType } from './overlay-cdk.module';
 
 
 export interface NbDisplayable {
@@ -12,4 +13,4 @@ export interface NbToggleable extends NbDisplayable {
   toggle();
 }
 
-export type NbOverlayContent = ComponentType<any> | TemplateRef<any> | string;
+export type NbOverlayContent = NbComponentType<any> | TemplateRef<any> | string;

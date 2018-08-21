@@ -1,8 +1,6 @@
 import { ComponentRef, Injectable } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 
-import { patch } from '../overlay';
+import { NbComponentPortal, NbOverlayService, patch } from '../overlay';
 import { NbToasterContainerComponent } from './toaster-container.component';
 import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toaster-position.service';
 import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';
@@ -62,7 +60,7 @@ class NbToastContainer {
 export class NbToasterRegistry {
   protected overlays: Map<NbToastPosition, NbToastContainer> = new Map();
 
-  constructor(protected cdkOverlay: Overlay, protected positionFactory: NbToastPositionFactory) {
+  constructor(protected overlay: NbOverlayService, protected positionFactory: NbToastPositionFactory) {
   }
 
   get(position: NbToastPosition): NbToastContainer {
@@ -80,8 +78,8 @@ export class NbToasterRegistry {
 
   protected createContainer(position: NbToastPosition): NbToastContainer {
     const positionStrategy = this.positionFactory.create(position);
-    const ref = this.cdkOverlay.create({ positionStrategy });
-    const containerRef = ref.attach(new ComponentPortal(NbToasterContainerComponent));
+    const ref = this.overlay.create({ positionStrategy });
+    const containerRef = ref.attach(new NbComponentPortal(NbToasterContainerComponent));
     return new NbToastContainer(position, containerRef);
   }
 }

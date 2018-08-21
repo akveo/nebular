@@ -72,7 +72,4 @@ export * from './components/collapsible-window/collapsible-window.directive';
 export * from './components/collapsible-window/collapsible-window.module';
 export * from './components/portal/portal.module';
 export * from './components/portal/portal.component';
-export * from './components/portal/portal.directive';
 export * from './components/overlay/overlay.module';
-export * from './components/overlay/overlay.service';
-export * from './components/overlay/overlay-ref';

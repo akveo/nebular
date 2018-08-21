@@ -20,13 +20,13 @@ import {
   OnChanges,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+
 import { of as observableOf } from 'rxjs';
 import { filter, delay, takeWhile } from 'rxjs/operators';
+
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { NbPortalDirective } from '../portal/portal.directive';
-import { NbOverlayService } from '../overlay/overlay.service';
-import { NbOverlayRef } from '../overlay/overlay-ref';
+import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../overlay';
 
 /**
  * search-field-component is used under the hood by nb-search component

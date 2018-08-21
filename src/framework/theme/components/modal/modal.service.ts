@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ComponentType, GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 
-import { NbPositionBuilderService } from '../overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import {
+  NbComponentPortal,
+  NbComponentType,
+  NbGlobalPositionStrategy,
+  NbOverlayService,
+  NbPositionBuilderService,
+} from '../overlay';
 
 
 export class NbModalConfig {
@@ -24,17 +28,17 @@ export interface NbModalRef {
 @Injectable()
 export class NbModalService {
   constructor(private positionBuilder: NbPositionBuilderService,
-              private cdkOverlay: Overlay) {
+              private overlay: NbOverlayService) {
   }
 
-  show<T>(component: ComponentType<T>, config: NbModalConfig): NbModalRef {
+  show<T>(component: NbComponentType<T>, config: NbModalConfig): NbModalRef {
     const positionStrategy = this.createPositionStrategy();
-    const ref = this.cdkOverlay.create({
+    const ref = this.overlay.create({
       positionStrategy,
       hasBackdrop: config.hasBackdrop,
       backdropClass: config.backdropClass,
     });
-    ref.attach(new ComponentPortal(component));
+    ref.attach(new NbComponentPortal(component));
 
     if (config.closeOnBackdropClick) {
       ref.backdropClick().subscribe(() => ref.detach());
@@ -43,7 +47,7 @@ export class NbModalService {
     return { hide: ref.detach.bind(ref) };
   }
 
-  protected createPositionStrategy(): GlobalPositionStrategy {
+  protected createPositionStrategy(): NbGlobalPositionStrategy {
     return this.positionBuilder
       .global()
       .centerVertically()
