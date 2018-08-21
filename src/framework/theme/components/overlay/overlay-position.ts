@@ -95,6 +95,7 @@ export class NbAdjustableConnectedPositionStrategy
     return this;
   }
 
+  // TODO have to be applied after position
   adjustment(adjustment: NbAdjustment): this {
     let positions: NbPosition[];
     switch (adjustment) {
