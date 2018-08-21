@@ -107,7 +107,11 @@ export class NbToasterController extends NbOverlayController {
   }
 
   prepend(toast: NbToast) {
-    this.toasts.push(toast);
+    if (toast.config.position.startsWith('top')) {
+      this.toasts.unshift(toast);
+    } else {
+      this.toasts.push(toast);
+    }
     this.overlay.updateContainer({ content: this.toasts });
     this.setTimeout(toast);
   }
@@ -120,14 +124,19 @@ export class NbToasterController extends NbOverlayController {
     return new NbOverlayConfig({
       content: this.toasts,
       container: NbToasterContainerComponent,
+      containerContext: {
+        position: this.position,
+      },
     });
   }
 
   protected setTimeout(toast: NbToast) {
-    setTimeout(() => {
-      this.toasts = this.toasts.filter(t => t !== toast);
-      this.overlay.updateContainer({ content: this.toasts });
-    }, toast.config.duration);
+    if (toast.config.duration) {
+      setTimeout(() => {
+        this.toasts = this.toasts.filter(t => t !== toast);
+        this.overlay.updateContainer({ content: this.toasts });
+      }, toast.config.duration);
+    }
   }
 }
 
