@@ -1,0 +1,83 @@
+import { Injectable } from '@angular/core';
+import { GlobalPositionStrategy } from '@angular/cdk/overlay';
+
+import { NbPositionBuilderService } from '../overlay';
+
+export enum NbToastPosition {
+  TOP_RIGHT = 'top-right',
+  TOP_LEFT = 'top-left',
+  BOTTOM_RIGHT = 'bottom-right',
+  BOTTOM_LEFT = 'bottom-left',
+  TOP_START = 'top-start',
+  TOP_END = 'top-end',
+  BOTTOM_START = 'bottom-start',
+  BOTTOM_END = 'bottom-end',
+}
+
+export const NB_TOAST_TOP_POSITIONS = [
+  NbToastPosition.TOP_RIGHT,
+  NbToastPosition.TOP_LEFT,
+  NbToastPosition.TOP_END,
+  NbToastPosition.TOP_START,
+];
+
+export const NB_TOAST_RIGHT_POSITIONS = [
+  NbToastPosition.TOP_RIGHT,
+  NbToastPosition.BOTTOM_RIGHT,
+  NbToastPosition.TOP_END,
+  NbToastPosition.BOTTOM_END,
+];
+
+
+@Injectable()
+export class NbToastPositionFactory {
+  constructor(protected positionBuilder: NbPositionBuilderService) {
+  }
+
+  create(position: NbToastPosition): GlobalPositionStrategy {
+    const positionStrategy = this.positionBuilder.global();
+
+    switch (position) {
+      case NbToastPosition.TOP_START:
+        return positionStrategy
+          .top()
+          .left();
+
+      case NbToastPosition.TOP_END:
+        return positionStrategy
+          .top()
+          .right();
+
+      case NbToastPosition.TOP_LEFT:
+        return positionStrategy
+          .top()
+          .left();
+
+      case NbToastPosition.TOP_RIGHT:
+        return positionStrategy
+          .top()
+          .right();
+
+      case NbToastPosition.BOTTOM_START:
+        return positionStrategy
+          .bottom()
+          .left();
+
+      case NbToastPosition.BOTTOM_END:
+        return positionStrategy
+          .bottom()
+          .right();
+
+      case NbToastPosition.BOTTOM_LEFT:
+        return positionStrategy
+          .bottom()
+          .left();
+
+      case NbToastPosition.BOTTOM_RIGHT:
+        return positionStrategy
+          .bottom()
+          .right();
+    }
+  }
+}
+

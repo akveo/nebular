@@ -4,21 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, Input } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import {
+  NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbConnectedController,
-  NbOverlayConfig,
+  NbArrowedOverlayContainerComponent,
   NbOverlayContent,
   NbPosition,
   NbPositionBuilderService,
-  NbPositionStrategy,
+  NbToggleable,
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
 } from '../overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { patch } from '../overlay/overlay-renderer';
+import { takeWhile } from 'rxjs/operators';
 
 /**
  * Powerful popover directive, which provides the best UX for your users.
@@ -84,7 +87,7 @@ import {
 * Rename them before release for breaking changes.
 */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective extends NbConnectedController {
+export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleable {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
@@ -121,44 +124,71 @@ export class NbPopoverDirective extends NbConnectedController {
   @Input('nbPopoverMode')
   mode: NbTrigger = NbTrigger.CLICK;
 
+  protected ref: OverlayRef;
+  protected container: ComponentRef<any>;
+  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected triggerStrategy: NbTriggerStrategy;
+  protected alive: boolean = true;
+
   constructor(private hostRef: ElementRef,
               private triggerBuilder: NbTriggerBuilderService,
               private positionBuilder: NbPositionBuilderService,
-              cdkOverlay: Overlay) {
-    super(cdkOverlay);
+              private cdkOverlay: Overlay) {
+  }
+
+  ngAfterViewInit() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.cdkOverlay.create({ positionStrategy: this.positionStrategy });
+    this.triggerStrategy = this.createTriggerStrategy();
+
+    this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   show() {
-    this.overlay.show();
+    this.container = this.ref.attach(new ComponentPortal(NbArrowedOverlayContainerComponent));
+    patch(this.container, { position: this.position, content: this.content, context: this.context });
   }
 
   hide() {
-    this.overlay.hide();
+    this.ref.detach();
   }
 
   toggle() {
-    this.overlay.toggle();
+    if (this.ref && this.ref.hasAttached()) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 
-  protected getConfig(): NbOverlayConfig {
-    return new NbOverlayConfig({
-      content: this.content,
-      contentContext: this.context,
-      position: this.position,
-    });
-  }
-
-  protected createPositionStrategy(): NbPositionStrategy {
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .adjustment(this.adjustment)
       .position(this.position);
   }
 
-  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
+  protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerBuilder
       .trigger(this.mode)
       .host(this.hostRef.nativeElement)
-      .container(overlayElement);
+      .container(this.ref.overlayElement);
+  }
+
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  }
+
+  protected subscribeOnTriggers() {
+    this.triggerStrategy.show.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    this.triggerStrategy.toggle.pipe(takeWhile(() => this.alive)).subscribe(() => this.toggle());
   }
 }

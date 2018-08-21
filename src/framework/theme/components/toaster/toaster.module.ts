@@ -7,10 +7,12 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbToasterRegistry, NbToasterService, NbToastPositionFactory } from './toaster.service';
-import { NbToastComponent } from './toast.component';
 import { NbOverlayModule } from '../overlay';
+
+import { NbToasterRegistry, NbToasterService } from './toaster.service';
+import { NbToastComponent } from './toast.component';
 import { NbToasterContainerComponent } from './toaster-container.component';
+import { NbToastPositionFactory } from './toaster-position.service';
 
 
 @NgModule({

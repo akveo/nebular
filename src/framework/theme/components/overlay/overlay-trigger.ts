@@ -53,6 +53,8 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
 
 export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
+  toggle: Observable<Event> = EMPTY$;
+
   get show(): Observable<Event> {
     return observableFromEvent<Event>(this._host, 'mouseenter')
       .pipe(
@@ -76,11 +78,11 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
         ),
       );
   }
-
-  toggle: Observable<Event> = EMPTY$;
 }
 
 export class NbHintTriggerStrategy extends NbTriggerStrategy {
+
+  toggle: Observable<Event> = EMPTY$;
 
   get show(): Observable<Event> {
     return observableFromEvent<Event>(this._host, 'mouseenter')
@@ -94,8 +96,6 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
   get hide(): Observable<Event> {
     return observableFromEvent(this._host, 'mouseleave');
   }
-
-  toggle: Observable<Event> = EMPTY$;
 }
 
 @Injectable()

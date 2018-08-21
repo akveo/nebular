@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbContainer } from '../overlay/overlay-renderer';
 import { NB_TOAST_RIGHT_POSITIONS, NbToast, NbToastPosition } from './toaster.service';
+import { NbToastComponent } from '@nebular/theme/components/toaster/toast.component';
 
 
 const voidState = style({
@@ -33,6 +34,8 @@ export class NbToasterContainerComponent implements NbContainer, OnInit {
 
   @Input()
   position: NbToastPosition;
+
+  @ViewChildren(NbToastComponent) toasts: QueryList<NbToastComponent>;
 
   fadeIn;
 

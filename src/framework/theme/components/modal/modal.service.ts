@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ComponentType, Overlay } from '@angular/cdk/overlay';
+import { ComponentType, GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 
-import {
-  NbOverlayConfig,
-  NbOverlayContent,
-  NbOverlayController,
-  NbPositionBuilderService,
-  NbPositionStrategy,
-} from '../overlay';
+import { NbPositionBuilderService } from '../overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 
 export class NbModalConfig {
@@ -16,49 +11,14 @@ export class NbModalConfig {
   closeOnBackdropClick?: boolean = false;
 
   context?: Object;
+
+  constructor(config: NbModalConfig) {
+    Object.assign(this, config);
+  }
 }
 
 export interface NbModalRef {
   hide();
-}
-
-// TODO move in abstraction
-class NbModalController extends NbOverlayController {
-  constructor(protected positionBuilder: NbPositionBuilderService,
-              protected cdkOverlay: Overlay,
-              protected modalConfig: NbModalConfig,
-              protected content: NbOverlayContent) {
-    super(cdkOverlay);
-
-    this.initOverlay();
-    this.overlay.show();
-
-    if (this.modalConfig.closeOnBackdropClick) {
-      this.cdkOverlayRef.backdropClick().subscribe(() => this.cdkOverlayRef.detach());
-    }
-  }
-
-  hide() {
-    this.overlay.hide();
-    this.overlay.dispose();
-  }
-
-  protected getConfig(): NbOverlayConfig {
-    return new NbOverlayConfig({
-      content: this.content,
-      cdkOverlayConfig: {
-        hasBackdrop: this.modalConfig.hasBackdrop,
-        backdropClass: this.modalConfig.backdropClass,
-      },
-    });
-  }
-
-  protected createPositionStrategy(): NbPositionStrategy {
-    return this.positionBuilder
-      .global()
-      .centerVertically()
-      .centerHorizontally();
-  }
 }
 
 @Injectable()
@@ -68,7 +28,25 @@ export class NbModalService {
   }
 
   show<T>(component: ComponentType<T>, config: NbModalConfig): NbModalRef {
-    const controller = new NbModalController(this.positionBuilder, this.cdkOverlay, config, component);
-    return { hide: controller.hide };
+    const positionStrategy = this.createPositionStrategy();
+    const ref = this.cdkOverlay.create({
+      positionStrategy,
+      hasBackdrop: config.hasBackdrop,
+      backdropClass: config.backdropClass,
+    });
+    ref.attach(new ComponentPortal(component));
+
+    if (config.closeOnBackdropClick) {
+      ref.backdropClick().subscribe(() => ref.detach());
+    }
+
+    return { hide: ref.detach.bind(ref) };
+  }
+
+  protected createPositionStrategy(): GlobalPositionStrategy {
+    return this.positionBuilder
+      .global()
+      .centerVertically()
+      .centerHorizontally();
   }
 }

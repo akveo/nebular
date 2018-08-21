@@ -1,10 +1,10 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { NbToast } from './toaster.service';
 
 @Component({
   selector: 'nb-toast',
-  styleUrls: ['./toaster.component.scss'],
+  styleUrls: ['./toast.component.scss'],
   template: `
     <div class="icon" *ngIf="status !== 'default'"></div>
     <div class="content-container">
@@ -19,8 +19,15 @@ export class NbToastComponent {
   @Input()
   toast: NbToast;
 
+  @Output() destroy: EventEmitter<void> = new EventEmitter();
+
   @HostBinding('class')
   get status(): string {
     return this.toast.config.status;
+  }
+
+  @HostListener('click')
+  onClick() {
+    this.destroy.emit();
   }
 }

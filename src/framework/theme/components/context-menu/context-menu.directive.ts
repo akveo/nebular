@@ -4,23 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import { filter, takeWhile } from 'rxjs/operators';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 import {
+  NbAdjustableConnectedPositionStrategy,
+  NbAdjustment,
+  NbArrowedOverlayContainerComponent,
+  NbPosition,
+  NbPositionBuilderService,
+  NbToggleable,
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
-  NbAdjustment,
-  NbPosition,
-  NbPositionBuilderService,
-  NbPositionStrategy,
-  NbOverlayConfig,
-  NbConnectedController,
 } from '../overlay';
 import { NbContextMenuComponent } from './context-menu.component';
+import { patch } from '@nebular/theme/components/overlay/overlay-renderer';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 /**
  * Full featured context menu directive.
@@ -36,7 +38,7 @@ import { NbContextMenuComponent } from './context-menu.component';
  * ```
  *
  * If you want to handle context menu clicks you have to pass `nbContextMenuTag`
- * param and subscribe to events using NbMenuService.
+ * param and register to events using NbMenuService.
  * `NbContextMenu` renders plain `NbMenu` inside, so
  * you have to work with it just like with `NbMenu` component:
  *
@@ -66,7 +68,40 @@ import { NbContextMenuComponent } from './context-menu.component';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective extends NbConnectedController implements OnInit, OnDestroy {
+export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggleable {
+
+  /**
+   * Position will be calculated relatively host element based on the position.
+   * Can be top, right, bottom and left.
+   * */
+  @Input('nbContextMenuPlacement')
+  position: NbPosition = NbPosition.BOTTOM;
+  /**
+   * Container position will be changes automatically based on this strategy if container can't fit view port.
+   * Set this property to any falsy value if you want to disable automatically adjustment.
+   * Available values: clockwise, counterclockwise.
+   * */
+  @Input('nbContextMenuAdjustment')
+  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+  /**
+   * Set NbMenu tag, which helps identify menu when working with NbMenuService.
+   * */
+  @Input('nbContextMenuTag')
+  tag: string;
+
+  protected ref: OverlayRef;
+  protected container: ComponentRef<any>;
+  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected triggerStrategy: NbTriggerStrategy;
+  protected alive: boolean = true;
+  private items: NbMenuItem[] = [];
+
+  constructor(private menuService: NbMenuService,
+              private hostRef: ElementRef,
+              private triggerBuilder: NbTriggerBuilderService,
+              private positionBuilder: NbPositionBuilderService,
+              private cdkOverlay: Overlay) {
+  }
 
   /**
    * Basic menu items, will be passed to the internal NbMenuComponent.
@@ -76,81 +111,66 @@ export class NbContextMenuDirective extends NbConnectedController implements OnI
     this.validateItems(items);
     this.items = items;
   };
-  private items: NbMenuItem[] = [];
 
-  /**
-   * Position will be calculated relatively host element based on the position.
-   * Can be top, right, bottom and left.
-   * */
-  @Input('nbContextMenuPlacement')
-  position: NbPosition = NbPosition.BOTTOM;
+  ngAfterViewInit() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.cdkOverlay.create({ positionStrategy: this.positionStrategy });
+    this.triggerStrategy = this.createTriggerStrategy();
 
-  /**
-   * Container position will be changes automatically based on this strategy if container can't fit view port.
-   * Set this property to any falsy value if you want to disable automatically adjustment.
-   * Available values: clockwise, counterclockwise.
-   * */
-  @Input('nbContextMenuAdjustment')
-  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
-
-  /**
-   * Set NbMenu tag, which helps identify menu when working with NbMenuService.
-   * */
-  @Input('nbContextMenuTag')
-  tag: string;
-
-  private alive: boolean = true;
-
-  constructor(private menuService: NbMenuService,
-              private hostRef: ElementRef,
-              private triggerFactory: NbTriggerBuilderService,
-              private positionBuilder: NbPositionBuilderService,
-              cdkOverlay: Overlay) {
-    super(cdkOverlay);
-  }
-
-  ngOnInit() {
+    this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
     this.subscribeOnItemClick();
   }
 
   ngOnDestroy() {
-    super.ngOnDestroy();
     this.alive = false;
   }
 
   show() {
-    this.overlay.show();
-  }
-
-  hide() {
-    this.overlay.hide();
-  }
-
-  toggle() {
-    this.overlay.toggle();
-  }
-
-  protected getConfig(): NbOverlayConfig {
-    return new NbOverlayConfig({
-      content: NbContextMenuComponent,
-      contentContext: { items: this.items, tag: this.tag },
+    this.container = this.ref.attach(new ComponentPortal(NbArrowedOverlayContainerComponent));
+    patch(this.container, {
       position: this.position,
+      content: NbContextMenuComponent,
+      context: { items: this.items, tag: this.tag },
     });
   }
 
-  protected createPositionStrategy(): NbPositionStrategy {
+  hide() {
+    this.ref.detach();
+  }
+
+  toggle() {
+    if (this.ref && this.ref.hasAttached()) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .adjustment(this.adjustment)
-      .position(this.position)
-      .offset(15)
+      .position(this.position);
   }
 
-  protected createTriggerStrategy(overlayElement: HTMLElement): NbTriggerStrategy {
-    return this.triggerFactory
+  protected createTriggerStrategy(): NbTriggerStrategy {
+    return this.triggerBuilder
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
-      .container(overlayElement)
+      .container(this.ref.overlayElement);
+  }
+
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  }
+
+  protected subscribeOnTriggers() {
+    this.triggerStrategy.show.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    this.triggerStrategy.toggle.pipe(takeWhile(() => this.alive)).subscribe(() => this.toggle());
   }
 
   /*
@@ -167,7 +187,7 @@ export class NbContextMenuDirective extends NbConnectedController implements OnI
     this.menuService.onItemClick()
       .pipe(
         takeWhile(() => this.alive),
-        filter(({tag}) => tag === this.tag),
+        filter(({ tag }) => tag === this.tag),
       )
       .subscribe(() => this.hide());
   }

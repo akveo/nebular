@@ -79,7 +79,9 @@ const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPo
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
 
 
-class NbAdjustableConnectedPositionStrategy extends FlexibleConnectedPositionStrategy implements NbPositionStrategy {
+export class NbAdjustableConnectedPositionStrategy
+  extends FlexibleConnectedPositionStrategy implements NbPositionStrategy {
+
   readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
     map((positionChange: ConnectedOverlayPositionChange) => positionChange.connectionPair),
     map((connectionPair: ConnectionPositionPair) => {

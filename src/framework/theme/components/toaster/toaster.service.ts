@@ -1,34 +1,15 @@
-import { Injectable } from '@angular/core';
-import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
+import { ComponentRef, Injectable } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
-import { NbOverlayConfig, NbOverlayController, NbPositionBuilderService, NbPositionStrategy } from '../overlay';
+import { patch } from '../overlay';
 import { NbToasterContainerComponent } from './toaster-container.component';
+import {
+  NB_TOAST_TOP_POSITIONS,
+  NbToastPosition,
+  NbToastPositionFactory,
+} from './toaster-position.service';
 
-
-export enum NbToastPosition {
-  TOP_RIGHT = 'top-right',
-  TOP_LEFT = 'top-left',
-  BOTTOM_RIGHT = 'bottom-right',
-  BOTTOM_LEFT = 'bottom-left',
-  TOP_START = 'top-start',
-  TOP_END = 'top-end',
-  BOTTOM_START = 'bottom-start',
-  BOTTOM_END = 'bottom-end',
-}
-
-export const NB_TOAST_TOP_POSITIONS = [
-  NbToastPosition.TOP_RIGHT,
-  NbToastPosition.TOP_LEFT,
-  NbToastPosition.TOP_END,
-  NbToastPosition.TOP_START,
-];
-
-export const NB_TOAST_RIGHT_POSITIONS = [
-  NbToastPosition.TOP_RIGHT,
-  NbToastPosition.BOTTOM_RIGHT,
-  NbToastPosition.TOP_END,
-  NbToastPosition.BOTTOM_END,
-];
 
 export enum NbToastStatus {
   SUCCESS = 'success',
@@ -48,7 +29,7 @@ export class NbToast {
 export class NbToastConfig {
   position: NbToastPosition = NbToastPosition.TOP_END;
   status: NbToastStatus = NbToastStatus.DEFAULT;
-  duration: number = 3000;
+  duration: number = 9000;
   destroyByClick: boolean = true;
 
   constructor(config: Partial<NbToastConfig>) {
@@ -56,113 +37,64 @@ export class NbToastConfig {
   }
 }
 
-@Injectable()
-export class NbToastPositionFactory {
-  constructor(protected positionBuilder: NbPositionBuilderService) {
-  }
-
-  create(position: NbToastPosition): GlobalPositionStrategy {
-    const positionStrategy = this.positionBuilder.global();
-
-    switch (position) {
-      case NbToastPosition.TOP_START:
-        return positionStrategy
-          .top()
-          .left();
-
-      case NbToastPosition.TOP_END:
-        return positionStrategy
-          .top()
-          .right();
-
-      case NbToastPosition.TOP_LEFT:
-        return positionStrategy
-          .top()
-          .left();
-
-      case NbToastPosition.TOP_RIGHT:
-        return positionStrategy
-          .top()
-          .right();
-
-      case NbToastPosition.BOTTOM_START:
-        return positionStrategy
-          .bottom()
-          .left();
-
-      case NbToastPosition.BOTTOM_END:
-        return positionStrategy
-          .bottom()
-          .right();
-
-      case NbToastPosition.BOTTOM_LEFT:
-        return positionStrategy
-          .bottom()
-          .left();
-
-      case NbToastPosition.BOTTOM_RIGHT:
-        return positionStrategy
-          .bottom()
-          .right();
-    }
-  }
-}
-
-export class NbToasterController extends NbOverlayController {
+class NbToastContainer {
   protected toasts: NbToast[] = [];
 
-  constructor(protected toastPositionFactory: NbToastPositionFactory,
-              protected position: NbToastPosition,
-              protected cdkOverlay: Overlay) {
-    super(cdkOverlay);
-
-    this.initOverlay();
-    this.overlay.show();
+  constructor(protected position: NbToastPosition, protected containerRef: ComponentRef<NbToasterContainerComponent>) {
   }
 
-  insert(toast: NbToast) {
+  attach(toast: NbToast) {
     if (NB_TOAST_TOP_POSITIONS.includes(toast.config.position)) {
-      this.toasts.unshift(toast);
+      this.attachToTop(toast);
     } else {
-      this.toasts.push(toast);
+      this.attachToBottom(toast);
     }
-    this.overlay.updateContainer({ content: this.toasts });
 
     if (toast.config.duration) {
-      this.setTimeout(toast);
+      this.setDestroyTimeout(toast);
     }
   }
 
-  protected createPositionStrategy(): NbPositionStrategy {
-    return this.toastPositionFactory.create(this.position);
+  protected attachToTop(toast: NbToast) {
+    this.toasts.unshift(toast);
+    this.updateContainer();
+
+    if (toast.config.destroyByClick) {
+      this.containerRef.instance.toasts.first.destroy.subscribe(() => this.destroy(toast));
+    }
   }
 
-  protected getConfig(): NbOverlayConfig {
-    return new NbOverlayConfig({
-      content: this.toasts,
-      container: NbToasterContainerComponent,
-      containerContext: {
-        position: this.position,
-      },
-    });
+  protected attachToBottom(toast: NbToast) {
+    this.toasts.push(toast);
+    this.updateContainer();
+
+    if (toast.config.destroyByClick) {
+      this.containerRef.instance.toasts.last.destroy.subscribe(() => this.destroy(toast));
+    }
   }
 
-  protected setTimeout(toast: NbToast) {
-    setTimeout(() => {
-      this.toasts = this.toasts.filter(t => t !== toast);
-      this.overlay.updateContainer({ content: this.toasts });
-    }, toast.config.duration);
+  protected setDestroyTimeout(toast: NbToast) {
+    setTimeout(() => this.destroy(toast), toast.config.duration);
+  }
+
+  protected destroy(toast: NbToast) {
+    this.toasts = this.toasts.filter(t => t !== toast);
+    this.updateContainer();
+  }
+
+  protected updateContainer() {
+    patch(this.containerRef, { content: this.toasts, position: this.position });
   }
 }
 
 @Injectable()
 export class NbToasterRegistry {
-  protected overlays: Map<NbToastPosition, NbToasterController> = new Map();
+  protected overlays: Map<NbToastPosition, NbToastContainer> = new Map();
 
   constructor(protected cdkOverlay: Overlay, protected positionFactory: NbToastPositionFactory) {
   }
 
-  get(position: NbToastPosition): NbToasterController {
+  get(position: NbToastPosition): NbToastContainer {
     if (!this.overlays.has(position)) {
       this.instantiateController(position);
     }
@@ -171,12 +103,15 @@ export class NbToasterRegistry {
   }
 
   protected instantiateController(position: NbToastPosition) {
-    const controller = this.createController(position);
-    this.overlays.set(position, controller);
+    const container = this.createContainer(position);
+    this.overlays.set(position, container);
   }
 
-  protected createController(position: NbToastPosition): NbToasterController {
-    return new NbToasterController(this.positionFactory, position, this.cdkOverlay);
+  protected createContainer(position: NbToastPosition): NbToastContainer {
+    const positionStrategy = this.positionFactory.create(position);
+    const ref = this.cdkOverlay.create({ positionStrategy });
+    const containerRef = ref.attach(new ComponentPortal(NbToasterContainerComponent));
+    return new NbToastContainer(position, containerRef);
   }
 }
 
@@ -187,11 +122,8 @@ export class NbToasterService {
 
   show(message, title?, config?: Partial<NbToastConfig>) {
     const container = this.toasterRegistry.get(config.position);
-    container.insert({
-      title,
-      message,
-      config: new NbToastConfig(config),
-    });
+    const toast = { message, title, config: new NbToastConfig(config) };
+    container.attach(toast);
   }
 
   success(message, title?, config?: Partial<NbToastConfig>) {
