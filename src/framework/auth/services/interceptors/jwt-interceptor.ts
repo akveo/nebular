@@ -1,8 +1,8 @@
-import {Inject, Injectable, Injector} from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { NbAuthToken} from '../token/token';
+import { NbAuthToken } from '../token/token';
 import { NbAuthService } from '../auth.service';
 import { NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '../../auth.options';
 

@@ -45,7 +45,6 @@ describe('jwt-interceptor', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule, RouterTestingModule],
       providers: [
-         // { provide: NB_AUTH_OPTIONS, useValue: {} },
          { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
          { provide: NB_AUTH_TOKENS, useValue: [NbAuthJWTToken] },
         NbAuthTokenParceler,
@@ -63,7 +62,7 @@ describe('jwt-interceptor', () => {
         { provide: NB_AUTH_STRATEGIES, useFactory: nbStrategiesFactory, deps: [NB_AUTH_OPTIONS, Injector] },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
-        { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest},
+        { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest },
         NbTokenService,
         NbAuthService,
         NbDummyAuthStrategy,
