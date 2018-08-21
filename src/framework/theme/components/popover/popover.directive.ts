@@ -169,8 +169,8 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
-      .adjustment(this.adjustment)
-      .position(this.position);
+      .position(this.position)
+      .adjustment(this.adjustment);
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
