@@ -7,7 +7,7 @@ import { NbPositionBuilderService } from './overlay-position';
 import { NbTriggerBuilderService } from './overlay-trigger';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
 import { NbSharedModule } from '../shared/shared.module';
-
+import { NbOverlayService } from './overlay.service';
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 
@@ -31,6 +31,7 @@ export class NbOverlayModule {
         NbPositionBuilderService,
         NbTriggerBuilderService,
         { provide: OverlayContainer, useClass: NbOverlayContainer },
+        NbOverlayService,
       ],
     };
   }

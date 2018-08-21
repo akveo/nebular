@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 import { filter, takeWhile } from 'rxjs/operators';

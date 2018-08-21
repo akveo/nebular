@@ -2,17 +2,8 @@ import { Injectable } from '@angular/core';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 import { NbPositionBuilderService } from '../overlay';
+import { NbToastPosition } from './model';
 
-export enum NbToastPosition {
-  TOP_RIGHT = 'top-right',
-  TOP_LEFT = 'top-left',
-  BOTTOM_RIGHT = 'bottom-right',
-  BOTTOM_LEFT = 'bottom-left',
-  TOP_START = 'top-start',
-  TOP_END = 'top-end',
-  BOTTOM_START = 'bottom-start',
-  BOTTOM_END = 'bottom-end',
-}
 
 export const NB_TOAST_TOP_POSITIONS = [
   NbToastPosition.TOP_RIGHT,

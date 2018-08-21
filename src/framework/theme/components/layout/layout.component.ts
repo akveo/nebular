@@ -303,7 +303,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
   ) {
-
     this.themeService.onThemeChange()
       .pipe(
         takeWhile(() => this.alive),

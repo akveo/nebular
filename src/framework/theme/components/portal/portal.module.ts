@@ -8,11 +8,18 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbPortalComponent } from './portal.component';
 import { NbPortalOutlet } from './portal-outlet';
+import { NbPortalDirective } from './portal.directive';
+
+const PORTAL_COMPONENTS = [
+  NbPortalComponent,
+  NbPortalDirective,
+];
 
 @NgModule({
   imports: [NbSharedModule],
-  declarations: [NbPortalComponent],
-  entryComponents: [NbPortalComponent],
+  declarations: [ ...PORTAL_COMPONENTS ],
+  exports: [ ...PORTAL_COMPONENTS ],
+  entryComponents: [ NbPortalComponent ],
   providers: [NbPortalOutlet],
 })
 export class NbPortalModule {

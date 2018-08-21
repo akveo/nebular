@@ -4,38 +4,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 
 import { patch } from '../overlay';
 import { NbToasterContainerComponent } from './toaster-container.component';
-import {
-  NB_TOAST_TOP_POSITIONS,
-  NbToastPosition,
-  NbToastPositionFactory,
-} from './toaster-position.service';
+import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toaster-position.service';
+import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';
 
-
-export enum NbToastStatus {
-  SUCCESS = 'success',
-  INFO = 'info',
-  WARNING = 'warning',
-  PRIMARY = 'primary',
-  DANGER = 'danger',
-  DEFAULT = 'default',
-}
-
-export class NbToast {
-  title: string;
-  message: string;
-  config: NbToastConfig;
-}
-
-export class NbToastConfig {
-  position: NbToastPosition = NbToastPosition.TOP_END;
-  status: NbToastStatus = NbToastStatus.DEFAULT;
-  duration: number = 9000;
-  destroyByClick: boolean = true;
-
-  constructor(config: Partial<NbToastConfig>) {
-    Object.assign(this, config);
-  }
-}
 
 class NbToastContainer {
   protected toasts: NbToast[] = [];

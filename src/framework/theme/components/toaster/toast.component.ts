@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
-import { NbToast } from './toaster.service';
+import { NbToast } from './model';
+
 
 @Component({
   selector: 'nb-toast',
