@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbContainer } from '../overlay/overlay-renderer';
-import { NbToast, NbToastPosition } from './toaster.service';
+import { NB_TOAST_RIGHT_POSITIONS, NbToast, NbToastPosition } from './toaster.service';
 
 
 const voidState = style({
@@ -30,12 +30,14 @@ export class NbToasterContainerComponent implements NbContainer, OnInit {
 
   @Input()
   context: Object;
+
+  @Input()
   position: NbToastPosition;
 
   fadeIn;
 
   ngOnInit(): void {
-    const direction = this.position.endsWith('right') ? '' : '-';
+    const direction = NB_TOAST_RIGHT_POSITIONS.includes(this.position) ? '' : '-';
     this.fadeIn = { value: '', params: { direction } };
   }
 }

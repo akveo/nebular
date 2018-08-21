@@ -16,6 +16,20 @@ export enum NbToastPosition {
   BOTTOM_END = 'bottom-end',
 }
 
+export const NB_TOAST_TOP_POSITIONS = [
+  NbToastPosition.TOP_RIGHT,
+  NbToastPosition.TOP_LEFT,
+  NbToastPosition.TOP_END,
+  NbToastPosition.TOP_START,
+];
+
+export const NB_TOAST_RIGHT_POSITIONS = [
+  NbToastPosition.TOP_RIGHT,
+  NbToastPosition.BOTTOM_RIGHT,
+  NbToastPosition.TOP_END,
+  NbToastPosition.BOTTOM_END,
+];
+
 export enum NbToastStatus {
   SUCCESS = 'success',
   INFO = 'info',
@@ -106,14 +120,17 @@ export class NbToasterController extends NbOverlayController {
     this.overlay.show();
   }
 
-  prepend(toast: NbToast) {
-    if (toast.config.position.startsWith('top')) {
+  insert(toast: NbToast) {
+    if (NB_TOAST_TOP_POSITIONS.includes(toast.config.position)) {
       this.toasts.unshift(toast);
     } else {
       this.toasts.push(toast);
     }
     this.overlay.updateContainer({ content: this.toasts });
-    this.setTimeout(toast);
+
+    if (toast.config.duration) {
+      this.setTimeout(toast);
+    }
   }
 
   protected createPositionStrategy(): NbPositionStrategy {
@@ -131,12 +148,10 @@ export class NbToasterController extends NbOverlayController {
   }
 
   protected setTimeout(toast: NbToast) {
-    if (toast.config.duration) {
-      setTimeout(() => {
-        this.toasts = this.toasts.filter(t => t !== toast);
-        this.overlay.updateContainer({ content: this.toasts });
-      }, toast.config.duration);
-    }
+    setTimeout(() => {
+      this.toasts = this.toasts.filter(t => t !== toast);
+      this.overlay.updateContainer({ content: this.toasts });
+    }, toast.config.duration);
   }
 }
 
@@ -172,7 +187,7 @@ export class NbToasterService {
 
   show(message, title?, config?: Partial<NbToastConfig>) {
     const container = this.toasterRegistry.get(config.position);
-    container.prepend({
+    container.insert({
       title,
       message,
       config: new NbToastConfig(config),
