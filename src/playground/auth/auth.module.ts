@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpRequest } from '@angular/commo
 import {
   NbCardModule,
   NbLayoutModule,
+  NbListModule,
 } from '@nebular/theme';
 import {
   NbAuthJWTToken,
@@ -50,6 +51,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
 
     NbCardModule,
     NbLayoutModule,
+    NbListModule,
 
     NbAuthModule.forRoot({
       forms: {

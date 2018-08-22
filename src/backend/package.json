@@ -13,7 +13,8 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "jwt-simple": "^0.5.1",
+    "moment": "^2.22.2",
     "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1"
+    "passport-jwt": "^4.0.0"
   }
 }

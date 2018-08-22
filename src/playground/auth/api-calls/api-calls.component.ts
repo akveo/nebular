@@ -16,35 +16,6 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
 @Component({
   selector: 'nb-playground-api-calls',
   styles: [`
-    .rTable {
-      display: table;
-      width: 100%;
-    }
-    .rTableRow {
-      display: table-row;
-    }
-    .rTableHeading {
-      display: table-header-group;
-      background-color: #ddd;
-    }
-    .rTableCell, .rTableHead {
-      display: table-cell;
-      padding: 3px 10px;
-      border: 1px solid #999999;
-    }
-    .rTableHeading {
-      display: table-header-group;
-      background-color: #ddd;
-      font-weight: bold;
-    }
-    .rTableFoot {
-      display: table-footer-group;
-      font-weight: bold;
-      background-color: #ddd;
-    }
-    .rTableBody {
-      display: table-row-group;
-    }
   `],
   template: `
     <router-outlet></router-outlet>
@@ -62,28 +33,16 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
               </div>
           </nb-card-body>
         </nb-card>
-        <nb-card>
-          <nb-card-body *ngIf="wines" class="col-xl-4 col-lg-6 col-md-8 col-sm-12" style="margin:auto;">
-            <div>
-              <h2 style="text-align: center;">Alain's Wines</h2>
-              <div class="rTable">
-                <div class="rTableRow">
-                  <div class="rTableHead"><strong>Name</strong></div>
-                  <div class="rTableHead"><strong>Region</strong></div>
-                  <div class="rTableHead"><strong>Year</strong></div>
-                </div>
-                <div *ngFor="let wine of wines" class="rTableRow">
-                  <div class="rTableCell">{{wine.name}}</div>
-                  <div class="rTableCell">{{wine.region}}</div>
-                  <div class="rTableCell">{{wine.year}}</div>
-                </div>
-              </div>
-            </div>
-          </nb-card-body>
-          <nb-card-body *ngIf="!wines" class="col-xl-4 col-lg-6 col-md-8 col-sm-12" style="margin:auto;">
-            <div>
-              <h2 style="text-align: center;">Nothing to display</h2>
-            </div>
+        <nb-card *ngIf="wines" size="medium">
+          <nb-card-header>
+            Alain'wines
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list >
+              <nb-list-item *ngFor="let wine of wines">
+                {{wine.region}}, {{ wine.name }} ({{wine.year}})
+              </nb-list-item>
+            </nb-list>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>

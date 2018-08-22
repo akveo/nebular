@@ -61,6 +61,7 @@ export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector):
     .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
       const strategy: NbAuthStrategy = injector.get(strategyClass);
       strategy.setOptions(strategyOptions);
+
       strategies.push(strategy);
     });
   return strategies;
