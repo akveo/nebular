@@ -6,7 +6,7 @@ import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toaster-positi
 import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';
 
 
-class NbToastContainer {
+export class NbToastContainer {
   protected toasts: NbToast[] = [];
 
   constructor(protected position: NbToastPosition, protected containerRef: ComponentRef<NbToasterContainerComponent>) {
