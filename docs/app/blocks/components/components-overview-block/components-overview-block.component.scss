@@ -1,15 +1,17 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
-  nb-card.header-card {
-    nb-card-header {
-      padding-bottom: 2rem;
-    }
-  }
 
   .components-list {
     display: flex;
     flex-wrap: wrap;
+
+    h2 {
+      flex: 1 1 100%;
+      color: nb-theme(color-fg-heading-light);
+      margin: 1rem 0 2rem;
+      text-align: center;
+    }
 
     .component-card-wrapper {
       width: 100%;
@@ -20,7 +22,7 @@
     }
 
     .component-name {
-      color: #8994a3;
+      color: nb-theme(color-fg-heading-light);
       font-weight: nb-theme(font-weight-bolder);
     }
 
