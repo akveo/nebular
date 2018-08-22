@@ -135,6 +135,10 @@ export const structure = [
         ],
       },
       {
+        type: 'group',
+        name: 'Global',
+      },
+      {
         type: 'tabs',
         name: 'Layout',
         icon: 'layout.svg',
@@ -143,27 +147,6 @@ export const structure = [
           'NbLayoutHeaderComponent',
           'NbLayoutColumnComponent',
           'NbLayoutFooterComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Sidebar',
-        icon: 'sidebar.svg',
-        source: [
-          'NbSidebarComponent',
-          'NbSidebarHeaderComponent',
-          'NbSidebarFooterComponent',
-          'NbSidebarService',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'NbMenuComponent',
-          'NbMenuItem',
-          'NbMenuService',
         ],
       },
       {
@@ -199,19 +182,59 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Alert',
-        icon: 'alert.svg',
+        name: 'Stepper',
+        icon: 'stepper.svg',
         source: [
-          'NbAlertComponent',
+          'NbStepperComponent',
+          'NbStepComponent',
         ],
       },
       {
         type: 'tabs',
-        name: 'Search',
-        icon: 'search.svg',
+        name: 'Accordion',
+        icon: 'accordion.svg',
         source: [
-          'NbSearchComponent',
-          'NbSearchService',
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: 'list.svg',
+        source: [ 'NbListComponent', 'NbListItemComponent' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Infinite List',
+        icon: 'infinite-scroll.svg',
+        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
+      },
+      {
+        type: 'group',
+        name: 'Navigation',
+      },
+      {
+        type: 'tabs',
+        name: 'Sidebar',
+        icon: 'sidebar.svg',
+        source: [
+          'NbSidebarComponent',
+          'NbSidebarHeaderComponent',
+          'NbSidebarFooterComponent',
+          'NbSidebarService',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'NbMenuComponent',
+          'NbMenuItem',
+          'NbMenuService',
         ],
       },
       {
@@ -226,30 +249,70 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Stepper',
-        icon: 'stepper.svg',
-        source: [
-          'NbStepperComponent',
-          'NbStepComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Chat UI',
-        icon: 'chat-ui.svg',
-        source: [
-          'NbChatComponent',
-          'NbChatMessageComponent',
-          'NbChatFormComponent',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
         source: [
           'NbActionsComponent',
           'NbActionComponent',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Forms',
+      },
+      {
+        type: 'tabs',
+        name: 'Input',
+        icon: 'input.svg',
+        source: [ 'NbInputDirective' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
+        source: [
+          'NbButtonComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Checkbox',
+        icon: 'checkbox.svg',
+        source: [
+          'NbCheckboxComponent',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Modals & Overlays',
+      },
+      {
+        type: 'tabs',
+        name: 'Popover',
+        icon: 'popover.svg',
+        source: [
+          'NbPopoverDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Context Menu',
+        icon: 'context-menu.svg',
+        source: [
+          'NbContextMenuDirective',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Extra',
+      },
+      {
+        type: 'tabs',
+        name: 'Global Search',
+        icon: 'search.svg',
+        source: [
+          'NbSearchComponent',
+          'NbSearchService',
         ],
       },
       {
@@ -262,18 +325,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Checkbox',
-        icon: 'checkbox.svg',
+        name: 'Alert',
+        icon: 'alert.svg',
         source: [
-          'NbCheckboxComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Button',
-        icon: 'button.svg',
-        source: [
-          'NbButtonComponent',
+          'NbAlertComponent',
         ],
       },
       {
@@ -302,48 +357,13 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Popover',
-        icon: 'popover.svg',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
         source: [
-          'NbPopoverDirective',
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
         ],
-      },
-      {
-        type: 'tabs',
-        name: 'Context Menu',
-        icon: 'context-menu.svg',
-        source: [
-          'NbContextMenuDirective',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Accordion',
-        icon: 'accordion.svg',
-        source: [
-          'NbAccordionComponent',
-          'NbAccordionItemComponent',
-          'NbAccordionItemHeaderComponent',
-          'NbAccordionItemBodyComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'List',
-        icon: 'list.svg',
-        source: [ 'NbListComponent', 'NbListItemComponent' ],
-      },
-      {
-        type: 'tabs',
-        name: 'Infinite List',
-        icon: 'infinite-scroll.svg',
-        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
-      },
-      {
-        type: 'tabs',
-        name: 'Input',
-        icon: 'input.svg',
-        source: [ 'NbInputDirective' ],
       },
       {
         type: 'tabs',

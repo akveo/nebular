@@ -37,6 +37,7 @@ export class NgdMenuService {
           pathMatch: 'prefix',
           parent: parent,
           data: item,
+          group: item.type === 'group',
         };
         menuItem.link = this.createItemLink<NbMenuItem>(menuItem);
 
