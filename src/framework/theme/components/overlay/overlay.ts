@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-import { NbComponentType } from './overlay-cdk.module';
+import { NbComponentType } from './cdk';
 
 
 export interface NbDisplayable {

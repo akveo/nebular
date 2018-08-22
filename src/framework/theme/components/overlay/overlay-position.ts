@@ -13,8 +13,8 @@ import {
   NbOverlayPositionBuilder,
   NbPlatform,
   NbPositionStrategy,
-  NbViewportRuler,
-} from './overlay-cdk.module';
+  NbViewportRulerAdapter,
+} from './cdk';
 
 
 export enum NbAdjustment {
@@ -128,7 +128,7 @@ export class NbAdjustableConnectedPositionStrategy
 @Injectable()
 export class NbPositionBuilderService {
   constructor(@Inject(NB_DOCUMENT) protected document,
-              protected viewportRuler: NbViewportRuler,
+              protected viewportRuler: NbViewportRulerAdapter,
               protected platform: NbPlatform,
               protected positionBuilder: NbOverlayPositionBuilder) {
   }

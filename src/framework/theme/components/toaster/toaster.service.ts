@@ -1,6 +1,7 @@
 import { ComponentRef, Injectable } from '@angular/core';
 
-import { NbComponentPortal, NbOverlayService, patch } from '../overlay';
+import { patch } from '../overlay';
+import { NbComponentPortal, NbOverlayService } from '../overlay/cdk';
 import { NbToasterContainerComponent } from './toaster-container.component';
 import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toaster-position.service';
 import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';

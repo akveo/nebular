@@ -5,15 +5,14 @@
  */
 
 import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
+import { NbComponentPortal, NbOverlayRef, NbOverlayService } from '../overlay/cdk';
 
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbArrowedOverlayContainerComponent,
-  NbComponentPortal,
   NbOverlayContent,
-  NbOverlayRef,
-  NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
   NbToggleable,
@@ -21,9 +20,7 @@ import {
   NbTriggerBuilderService,
   NbTriggerStrategy,
 } from '../overlay';
-
 import { patch } from '../overlay/overlay-renderer';
-import { takeWhile } from 'rxjs/operators';
 
 
 /**

@@ -5,9 +5,13 @@
  */
 
 import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-
 import { filter, takeWhile } from 'rxjs/operators';
 
+import {
+  NbComponentPortal,
+  NbOverlayRef,
+  NbOverlayService,
+} from '../overlay/cdk';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -18,9 +22,6 @@ import {
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
-  NbComponentPortal,
-  NbOverlayService,
-  NbOverlayRef,
   patch,
 } from '../overlay';
 import { NbContextMenuComponent } from './context-menu.component';
@@ -91,6 +92,15 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   @Input('nbContextMenuTag')
   tag: string;
 
+  /**
+   * Basic menu items, will be passed to the internal NbMenuComponent.
+   * */
+  @Input('nbContextMenu')
+  set _items(items: NbMenuItem[]) {
+    this.validateItems(items);
+    this.items = items;
+  };
+
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -105,18 +115,12 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
               private overlay: NbOverlayService) {
   }
 
-  /**
-   * Basic menu items, will be passed to the internal NbMenuComponent.
-   * */
-  @Input('nbContextMenu')
-  set _items(items: NbMenuItem[]) {
-    this.validateItems(items);
-    this.items = items;
-  };
-
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy });
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
@@ -152,8 +156,8 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
-      .adjustment(this.adjustment)
-      .position(this.position);
+      .position(this.position)
+      .adjustment(this.adjustment);
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {

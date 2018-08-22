@@ -26,7 +26,7 @@ import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
-import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../overlay';
+import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../overlay/cdk';
 
 /**
  * search-field-component is used under the hood by nb-search component
