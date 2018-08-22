@@ -2,6 +2,7 @@ const moment = require('moment');
 const jwt = require('jwt-simple');
 const cfg = require('./config.js');
 
+module.exports.permanentRefreshToken = 'eb4e15840117437cbfd7343f257c4aae';
 
 module.exports.createAccessToken = function(user) {
   var payload = {

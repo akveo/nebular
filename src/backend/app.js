@@ -53,10 +53,10 @@ app.post('/api/auth/login', function (req, res) {
     });
     if (user) {
       return res.json({
-        token_type: 'Bearer',
-        access_token: tokens.createAccessToken(user),
-        expires_in: cfg.accessTokenExpiresIn,
-        refresh_token: 'eb4e15840117437cbfd7343f257c4aae',
+        data: {
+          message: 'Successfully logged in!',
+          token: tokens.createAccessToken(user),
+        }
       });
     }
   }
@@ -151,42 +151,45 @@ app.delete('/api/auth/logout', function (req, res) {
 });
 
 app.post('/api/auth/refresh-token', function (req, res) {
-  var token = req.body.refresh_token;
-
-  // token issued via email strategy
-  if (token === 'eb4e15840117437cbfd7343f257c4aae') {
-    return res.json({
-      token_type: 'Bearer',
-      access_token: tokens.createAccessToken(user[0]),
-      expires_in: cfg.accessTokenExpiresIn,
-      refresh_token: 'eb4e15840117437cbfd7343f257c4aae',
-    });
-  }
 
   // token issued by oauth2 strategy
-  var parts = token.split('.');
-  if (parts.length !== 3) {
-    return res.status(401).json({
-      error: 'invalid_token',
-      error_description: 'Invalid refresh token'
-    });
-  }
-  var payload = JSON.parse(auth_helpers.urlBase64Decode(parts[1]));
-  var exp = payload.exp;
-  var userId = payload.sub;
-  var now = moment().unix();
-  if (now > exp) {
-    return res.status(401).json({
+  if (req.body.refresh_token) {
+    var token = req.body.refresh_token;
+    var parts = token.split('.');
+    if (parts.length !== 3) {
+      return res.status(401).json({
+        error: 'invalid_token',
+        error_description: 'Invalid refresh token'
+      });
+    }
+    var payload = JSON.parse(auth_helpers.urlBase64Decode(parts[1]));
+    var exp = payload.exp;
+    var userId = payload.sub;
+    var now = moment().unix();
+    if (now > exp) {
+      return res.status(401).json({
         error: 'unauthorized',
         error_description: 'Refresh Token expired.'
       })
-  } else {
-    return res.json({
-      token_type: 'Bearer',
-      access_token: tokens.createAccessToken(users[userId - 1]),
-      expires_in: cfg.accessTokenExpiresIn,
-    });
+    } else {
+      return res.json({
+        token_type: 'Bearer',
+        access_token: tokens.createAccessToken(users[userId - 1]),
+        expires_in: cfg.accessTokenExpiresIn,
+      });
+    }
   }
+
+  // token issued via email strategy
+  if (req.body.token) {
+    return res.json({
+      data: {
+        message: 'Successfully refreshed token!',
+        token: tokens.createAccessToken(users[0]),
+      }
+      });
+    };
+
 });
 
 app.listen(4400, function () {

@@ -4,10 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, Inject} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 import { Wine } from './wine';
 import { Router } from '@angular/router';
 import { getDeepFromObject } from '@nebular/auth/helpers';
@@ -22,15 +22,11 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
     <nb-layout>
       <nb-layout-column>
         <nb-card>
-          <nb-card-body class="col-xl-4 col-lg-6 col-md-8 col-sm-12" style="margin:auto;">
-            <h2 style="text-align: center;">You are authenticated</h2>
-            <p style="text-align: center">You can call the secured API</p>
-              <div style="margin: 10px auto; width: 100px;">
-                <button class="btn btn-info" (click)="loadWines()">Call API</button>
-              </div>
-              <div style="margin: 10px auto; width: 100px;">
-                <button class="btn btn-warning"(click)="logout()">Sign Out</button>
-              </div>
+          <nb-card-body>
+            <h2>You are authenticated</h2>
+            <p>You can call the secured API</p>
+            <button nbButton status="primary" (click)="loadWines()">Call API</button>
+            <button nbButton status="primary" (click)="logout()">Sign out</button>
           </nb-card-body>
         </nb-card>
         <nb-card *ngIf="wines" size="medium">
@@ -49,8 +45,6 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
     </nb-layout>
   `,
 })
-
-
 
 export class NbPlaygroundApiCallsComponent {
 

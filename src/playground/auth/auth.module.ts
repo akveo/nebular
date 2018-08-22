@@ -24,7 +24,8 @@ import {
   NbOAuth2GrantType,
   NbOAuth2AuthStrategy,
   NbAuthOAuth2Token,
-  NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
+} from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 import { NbAuthPlaygroundComponent } from './auth.component';
@@ -156,7 +157,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
   providers: [
     NbAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
-    { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest},
+    { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest },
     { provide: NbRoleProvider, useClass: NbCustomRoleProvider },
   ],
 })
