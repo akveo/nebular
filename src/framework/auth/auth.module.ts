@@ -2,7 +2,7 @@ import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpRequest } from '@angular/common/http';
 
 import {
   NbAlertModule,
@@ -36,6 +36,7 @@ import {
   NB_AUTH_INTERCEPTOR_HEADER,
   NB_AUTH_OPTIONS,
   NB_AUTH_STRATEGIES,
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
   NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
   NbAuthOptions,
@@ -76,6 +77,10 @@ export function nbTokensFactory(strategies: NbAuthStrategy[]): NbAuthTokenClass[
 
 export function nbOptionsFactory(options) {
   return deepExtend(defaultAuthOptions, options);
+}
+
+export function nbNoOpInterceptorFilter(req: HttpRequest<any>): boolean {
+  return true;
 }
 
 @NgModule({
@@ -121,6 +126,7 @@ export class NbAuthModule {
         { provide: NB_AUTH_TOKENS, useFactory: nbTokensFactory, deps: [NB_AUTH_STRATEGIES] },
         { provide: NB_AUTH_FALLBACK_TOKEN, useValue: NbAuthSimpleToken },
         { provide: NB_AUTH_INTERCEPTOR_HEADER, useValue: 'Authorization' },
+        { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: nbNoOpInterceptorFilter },
         { provide: NbTokenStorage, useClass: NbTokenLocalStorage },
         NbAuthTokenParceler,
         NbAuthService,

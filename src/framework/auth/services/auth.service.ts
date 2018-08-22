@@ -12,7 +12,7 @@ import { NbAuthStrategy } from '../strategies/auth-strategy';
 import { NB_AUTH_STRATEGIES } from '../auth.options';
 import { NbAuthResult } from './auth-result';
 import { NbTokenService } from './token/token.service';
-import { NbAuthToken} from './token/token';
+import { NbAuthToken } from './token/token';
 
 /**
  * Common authentication service.
@@ -64,8 +64,8 @@ export class NbAuthService {
             )
         } else {
           return observableOf(token.isValid());
-          }
-      }));
+        }
+    }));
   }
 
   /**

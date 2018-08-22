@@ -1,15 +1,16 @@
-import { Injectable, Injector} from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { NbAuthToken} from '../token/token';
+import { NbAuthToken } from '../token/token';
 import { NbAuthService } from '../auth.service';
-import { NB_AUTH_TOKEN_INTERCEPTOR_FILTER} from '../../auth.options';
+import { NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '../../auth.options';
 
 @Injectable()
 export class NbAuthJWTInterceptor implements HttpInterceptor {
 
-  constructor(private injector: Injector) {
+  constructor(private injector: Injector,
+              @Inject(NB_AUTH_TOKEN_INTERCEPTOR_FILTER) protected filter) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,7 +21,7 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
             switchMap(authenticated => {
               if (authenticated) {
                   return this.authService.getToken().pipe(
-                    switchMap( (token: NbAuthToken) => {
+                    switchMap((token: NbAuthToken) => {
                       const JWT = `Bearer ${token.getValue()}`;
                       req = req.clone({
                         setHeaders: {
@@ -30,11 +31,11 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
                       return next.handle(req);
                     }),
                   )
-              }  else {
-                  // Request is send to server without authentication so that the client code
-                  // receives the 401/403 error and can act as desired ('session expired', redirect to login, aso)
-                  return next.handle(req);
-               }
+              } else {
+                 // Request is sent to server without authentication so that the client code
+                 // receives the 401/403 error and can act as desired ('session expired', redirect to login, aso)
+                return next.handle(req);
+              }
             }),
           )
       } else {
@@ -46,11 +47,4 @@ export class NbAuthJWTInterceptor implements HttpInterceptor {
     return this.injector.get(NbAuthService);
   }
 
-  protected get filter(): (req: HttpRequest<any>) => boolean {
-    return this.injector.get(NB_AUTH_TOKEN_INTERCEPTOR_FILTER);
-  }
-
 }
-
-
-

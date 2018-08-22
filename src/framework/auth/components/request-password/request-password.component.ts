@@ -14,63 +14,7 @@ import { NbAuthResult } from '../../services/auth-result';
 @Component({
   selector: 'nb-request-password-page',
   styleUrls: ['./request-password.component.scss'],
-  template: `
-    <nb-auth-block>
-      <h2 class="title">Forgot Password</h2>
-      <small class="form-text sub-title">Enter your email address and we’ll send a link to reset your password</small>
-      <form (ngSubmit)="requestPass()" #requestPassForm="ngForm">
-
-        <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger">
-          <div><strong>Oh snap!</strong></div>
-          <div *ngFor="let error of errors">{{ error }}</div>
-        </nb-alert>
-
-        <nb-alert *ngIf="showMessages.success && messages.length && !submitted" outline="success">
-          <div><strong>Hooray!</strong></div>
-          <div *ngFor="let message of messages">{{ message }}</div>
-        </nb-alert>
-
-        <div class="form-group">
-          <label for="input-email" class="sr-only">Enter your email address</label>
-          <input nbInput
-                 #email="ngModel"
-                 [(ngModel)]="user.email"
-                 id="input-email"
-                 name="email"
-                 placeholder="Email address"
-                 autofocus
-                 fullWidth
-                 pattern=".+@.+\..+"
-                 [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
-                 [required]="getConfigValue('forms.validation.email.required')">
-          <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
-            Email is required!
-          </small>
-          <small class="form-text error"
-                 *ngIf="email.invalid && email.touched && email.errors?.pattern">
-            Email should be the real one!
-          </small>
-        </div>
-
-        <button nbButton
-                status="success"
-                fullWidth
-                [disabled]="submitted || !requestPassForm.valid"
-                [class.btn-pulse]="submitted">
-          Request password
-        </button>
-      </form>
-
-      <div class="links col-sm-12">
-        <small class="form-text">
-          Already have an account? <a routerLink="../login"><strong>Sign In</strong></a>
-        </small>
-        <small class="form-text">
-          <a routerLink="../register"><strong>Sign Up</strong></a>
-        </small>
-      </div>
-    </nb-auth-block>
-  `,
+  templateUrl: './request-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRequestPasswordComponent {
