@@ -76,6 +76,10 @@ const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPo
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
 
 
+/**
+ * Angular cdk flexible connected position strategy is not enough for our purposes.
+ * So, we have custom connected position strategy that can adjust overlay over the host element automatically.
+ * */
 export class NbAdjustableConnectedPositionStrategy
   extends NbFlexibleConnectedPositionStrategy implements NbPositionStrategy {
 
