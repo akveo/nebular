@@ -14,7 +14,7 @@ import {
   NbPlatform,
   NbPositionStrategy,
 } from '../mapping';
-import { NbViewportRulerAdapter } from '../adapter/index';
+import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 
 
 export enum NbAdjustment {

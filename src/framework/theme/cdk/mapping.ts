@@ -1,4 +1,5 @@
-import { Directive, Injectable } from '@angular/core';
+import { Directive, Injectable, NgModule } from '@angular/core';
+import { CdkPortal, ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import {
   ComponentType,
   ConnectedOverlayPositionChange,
@@ -8,12 +9,13 @@ import {
   GlobalPositionStrategy,
   Overlay,
   OverlayContainer,
+  OverlayModule,
   OverlayPositionBuilder,
   OverlayRef,
   PositionStrategy,
 } from '@angular/cdk/overlay';
-import { CdkPortal, ComponentPortal } from '@angular/cdk/portal';
 import { Platform } from '@angular/cdk/platform';
+
 
 @Directive({ selector: '[nbPortal]' })
 export class NbPortalDirective extends CdkPortal {
@@ -47,3 +49,23 @@ export type NbPositionStrategy = PositionStrategy;
 export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
+
+const CDK_MODULES = [OverlayModule, PortalModule];
+
+const CDK_PROVIDERS = [
+  NbOverlayService,
+  NbPlatform,
+  NbOverlayPositionBuilder,
+];
+
+@NgModule({
+  imports: [...CDK_MODULES],
+  exports: [
+    ...CDK_MODULES,
+    NbPortalDirective,
+  ],
+  declarations: [NbPortalDirective],
+  providers: [...CDK_PROVIDERS],
+})
+export class NbCdkMappingModule {
+}
