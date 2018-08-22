@@ -72,6 +72,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *     grantType?: string;
  *     requireValidToken: false,
  *     redirectUri?: string;
+ *     scope?: string;
  *     class: NbAuthTokenClass,
  *   } = {
  *     endpoint: 'token',
@@ -311,6 +312,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       grant_type: this.getOption('token.grantType'),
       username: username,
       password: password,
+      scope: this.getOption('token.scope'),
     };
     return this.cleanParams(this.addCredentialsToParams(params));
   }

@@ -654,6 +654,7 @@ describe('oauth2-auth-strategy', () => {
 
   describe('configured: additionnal param: token, grant_type:password', () => {
 
+    const scope = 'theScope';
     const basicOptions = {
       name: 'strategy',
       baseEndpoint: 'http://example.com/',
@@ -661,6 +662,7 @@ describe('oauth2-auth-strategy', () => {
       token: {
         grantType: NbOAuth2GrantType.PASSWORD,
         endpoint: 'token',
+        scope: scope,
       },
     }
 
@@ -688,7 +690,8 @@ describe('oauth2-auth-strategy', () => {
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['username'] === credentials.email
-          && req.body['password'] === credentials.password,
+          && req.body['password'] === credentials.password
+          && req.body['scope'] === scope,
       ).flush(tokenSuccessResponse);
     });
 
@@ -718,6 +721,7 @@ describe('oauth2-auth-strategy', () => {
           && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['username'] === credentials.email
+          && req.body['scope'] === scope
           && req.body['password'] === credentials.password,
       ).flush(tokenSuccessResponse);
     });
@@ -748,6 +752,7 @@ describe('oauth2-auth-strategy', () => {
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['username'] === credentials.email
           && req.body['password'] === credentials.password
+          && req.body['scope'] === scope
           && req.body['client_id'] === strategy.getOption('clientId')
           && req.body['client_secret'] === strategy.getOption('clientSecret'),
       ).flush(tokenSuccessResponse);
@@ -774,7 +779,8 @@ describe('oauth2-auth-strategy', () => {
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
           && req.body['username'] === credentials.email
-          && req.body['password'] === credentials.password,
+          && req.body['password'] === credentials.password
+          && req.body['scope'] === scope,
       ).flush(tokenErrorResponse, {status: 401, statusText: 'unauthorized'});
     });
   });
