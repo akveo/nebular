@@ -237,12 +237,12 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       );
   }
 
-  passwordToken(email: string, password: string): Observable<NbAuthResult> {
+  passwordToken(username: string, password: string): Observable<NbAuthResult> {
     const module = 'token';
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildPasswordRequestData(email, password), this.buildAuthHeader() )
+    return this.http.post(url, this.buildPasswordRequestData(username, password), this.buildAuthHeader() )
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -306,10 +306,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.cleanParams(this.addCredentialsToParams(params));
   }
 
-  protected buildPasswordRequestData(email: string, password: string ): any {
+  protected buildPasswordRequestData(username: string, password: string ): any {
     const params = {
       grant_type: this.getOption('token.grantType'),
-      email: email,
+      username: username,
       password: password,
     };
     return this.cleanParams(this.addCredentialsToParams(params));
