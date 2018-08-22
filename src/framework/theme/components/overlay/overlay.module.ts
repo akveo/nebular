@@ -1,13 +1,14 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { OverlayContainer, ScrollDispatcher, ViewportRuler } from '@angular/cdk/overlay';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbOverlayCdkModule } from './overlay-cdk.module';
+import { NbOverlayCdkModule, NbViewportRuler } from './overlay-cdk.module';
 
 import { NbOverlayLayoutContainer } from './overlay-container';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbTriggerBuilderService } from './overlay-trigger';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
+import { NbNaiveScrollDispatcherService } from './overlay-naive-scroll-dispatcher';
 
 
 @NgModule({
@@ -29,7 +30,10 @@ export class NbOverlayModule {
       providers: [
         NbPositionBuilderService,
         NbTriggerBuilderService,
+        NbViewportRuler,
         { provide: OverlayContainer, useClass: NbOverlayLayoutContainer },
+        { provide: ScrollDispatcher, useClass: NbNaiveScrollDispatcherService },
+        { provide: ViewportRuler, useClass: NbViewportRuler },
       ],
     };
   }

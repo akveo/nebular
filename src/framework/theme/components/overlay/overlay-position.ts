@@ -139,5 +139,7 @@ export class NbPositionBuilderService {
 
   connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {
     return new NbAdjustableConnectedPositionStrategy(elementRef, this.viewportRuler, this.document, this.platform)
+      .withFlexibleDimensions(false)
+      .withPush(false);
   }
 }

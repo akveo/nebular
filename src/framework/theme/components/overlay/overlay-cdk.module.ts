@@ -1,4 +1,4 @@
-import { Directive, Injectable, NgModule } from '@angular/core';
+import { Directive, Injectable, NgModule, NgZone } from '@angular/core';
 import {
   ComponentType,
   ConnectedOverlayPositionChange,
@@ -16,6 +16,9 @@ import {
 } from '@angular/cdk/overlay';
 import { CdkPortal, ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { Platform } from '@angular/cdk/platform';
+import { NbLayoutRulerService } from '../../services/ruler.service';
+import { map } from 'rxjs/operators';
+import { NbLayoutScrollService } from '../../services/scroll.service';
 
 
 @Directive({ selector: '[nbPortal]' })
@@ -36,6 +39,27 @@ export class NbOverlayPositionBuilder extends OverlayPositionBuilder {
 
 @Injectable()
 export class NbViewportRuler extends ViewportRuler {
+  constructor(_platform: NbPlatform, ngZone: NgZone,
+              protected ruler: NbLayoutRulerService,
+              protected scroll: NbLayoutScrollService) {
+    super(_platform, ngZone);
+  }
+
+  getViewportSize(): Readonly<{ width: number; height: number; }> {
+    let res;
+    this.ruler.getDimensions()
+      .pipe(map(rect => ({ width: rect.clientWidth, height: rect.clientHeight })))
+      .subscribe(rect => res = rect);
+    return res;
+  }
+
+  getViewportScrollPosition(): { left: number; top: number } {
+    let res;
+    this.scroll.getPosition()
+      .pipe(map(rect => ({ top: rect.y, left: rect.x })))
+      .subscribe(rect => res = rect);
+    return res;
+  }
 }
 
 export class NbComponentPortal<T = any> extends ComponentPortal<T> {
@@ -62,7 +86,6 @@ const CDK_PROVIDERS = [
   NbOverlayService,
   NbPlatform,
   NbOverlayPositionBuilder,
-  NbViewportRuler,
 ];
 
 @NgModule({

@@ -10,16 +10,16 @@ import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbArrowedOverlayContainerComponent,
+  NbComponentPortal,
   NbOverlayContent,
+  NbOverlayRef,
+  NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
   NbToggleable,
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
-  NbOverlayRef,
-  NbOverlayService,
-  NbComponentPortal,
 } from '../overlay';
 
 import { patch } from '../overlay/overlay-renderer';
@@ -141,7 +141,10 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
 
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy });
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
