@@ -28,7 +28,6 @@ import {
 import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from './services/direction.service';
 import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
-import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 
 export function nbWindowFactory() {
   return window;
@@ -37,7 +36,6 @@ export function nbWindowFactory() {
 @NgModule({
   imports: [
     CommonModule,
-    NbOverlayModule.forRoot(),
   ],
 })
 export class NbThemeModule {
