@@ -13,8 +13,8 @@ import {
   NbOverlayPositionBuilder,
   NbPlatform,
   NbPositionStrategy,
-  NbViewportRulerAdapter,
-} from '../index';
+} from '../mapping';
+import { NbViewportRulerAdapter } from '../adapter';
 
 
 export enum NbAdjustment {

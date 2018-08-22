@@ -3,9 +3,7 @@ import { OverlayContainer, OverlayModule, ScrollDispatcher } from '@angular/cdk/
 import { PortalModule } from '@angular/cdk/portal';
 
 import { NbOverlayPositionBuilder, NbOverlayService, NbPlatform, NbPortalDirective } from './mapping';
-import { NbOverlayContainerAdapter } from './adapter/overlay-container-adapter';
-import { NbScrollDispatcherAdapter } from './adapter/scroll-dispatcher-adapter';
-import { NbViewportRulerAdapter } from './adapter/viewport-ruler-adapter';
+import { NbOverlayContainerAdapter, NbScrollDispatcherAdapter, NbViewportRulerAdapter } from './adapter';
 
 
 const CDK_MODULES = [OverlayModule, PortalModule];
