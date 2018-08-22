@@ -6,7 +6,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbOverlayModule } from '../../../cdk/overlay/overlay.module';
+import { NbOverlayModule } from '../../cdk/overlay/overlay.module';
 
 import { NbSearchComponent, NbSearchFieldComponent } from './search.component';
 import { NbSearchService } from './search.service';

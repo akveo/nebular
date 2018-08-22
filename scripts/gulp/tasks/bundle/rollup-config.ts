@@ -17,6 +17,9 @@ const ROLLUP_GLOBALS = {
   '@angular/core/testing': 'ng.core.testing',
   '@angular/common/testing': 'ng.common.testing',
   '@angular/common/http/testing': 'ng.common.http.testing',
+  '@angular/cdk/overlay': 'ng.cdk.overlay',
+  '@angular/cdk/portal': 'ng.cdk.portal',
+  '@angular/cdk/platform': 'ng.cdk.platform',
 
 
   // RxJS dependencies

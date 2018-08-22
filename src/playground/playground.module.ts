@@ -35,8 +35,8 @@ import {
   NbModalModule,
   NbToasterModule,
   NbCollapsibleWindowModule,
+  NbOverlayModule,
 } from '@nebular/theme';
-import { NbOverlayModule } from '@nebular/cdk';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';

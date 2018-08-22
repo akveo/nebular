@@ -6,7 +6,7 @@ import {
   NbGlobalPositionStrategy,
   NbOverlayService,
   NbPositionBuilderService,
-} from '../../../cdk';
+} from '../../cdk';
 
 
 export class NbModalConfig {

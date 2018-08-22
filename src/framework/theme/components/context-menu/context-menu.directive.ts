@@ -21,7 +21,7 @@ import {
   NbTriggerBuilderService,
   NbTriggerStrategy,
   patch,
-} from '../../../cdk';
+} from '../../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 

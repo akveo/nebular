@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
-import { NbContainer } from '../../../cdk';
+import { NbContainer } from '../../cdk';
 import { NbToastComponent } from './toast.component';
 import { NB_TOAST_RIGHT_POSITIONS } from './toaster-position.service';
 import { NbToast, NbToastPosition } from './model';

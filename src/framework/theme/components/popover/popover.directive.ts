@@ -22,7 +22,7 @@ import {
   NbTriggerBuilderService,
   NbTriggerStrategy,
   patch,
-} from '../../../cdk';
+} from '../../cdk';
 
 
 /**

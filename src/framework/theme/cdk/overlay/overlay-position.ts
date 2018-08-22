@@ -3,7 +3,7 @@ import { ElementRef, Inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { NB_DOCUMENT } from '../../theme/theme.options';
+import { NB_DOCUMENT } from '../../theme.options';
 import {
   NbConnectedOverlayPositionChange,
   NbConnectedPosition,
@@ -14,7 +14,7 @@ import {
   NbPlatform,
   NbPositionStrategy,
 } from '../mapping';
-import { NbViewportRulerAdapter } from '../adapter';
+import { NbViewportRulerAdapter } from '../adapter/index';
 
 
 export enum NbAdjustment {

@@ -3,7 +3,7 @@ import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 
 import { NbPlatform } from '../mapping';
-import { NbLayoutScrollService } from '../../theme/services/scroll.service';
+import { NbLayoutScrollService } from '../../services/scroll.service';
 
 @Injectable()
 export class NbScrollDispatcherAdapter extends ScrollDispatcher {
