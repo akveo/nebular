@@ -22,7 +22,7 @@ import {
   NbTriggerBuilderService,
   NbTriggerStrategy,
   patch,
-} from '@nebular/cdk';
+} from '../../../cdk';
 
 
 /**

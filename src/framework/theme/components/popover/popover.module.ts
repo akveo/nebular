@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 
-import { NbOverlayModule } from '@nebular/cdk';
+import { NbOverlayModule } from '../../../cdk';
 import { NbPopoverDirective } from './popover.directive';
 
 
