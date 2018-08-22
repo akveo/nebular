@@ -6,8 +6,8 @@
 
 import { NgModule } from '@angular/core';
 
+import { NbOverlayModule } from '@nebular/cdk';
 import { NbPopoverDirective } from './popover.directive';
-import { NbOverlayModule } from '../../../cdk/overlay/overlay.module';
 
 
 @NgModule({

@@ -6,21 +6,23 @@
 
 import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { NbComponentPortal, NbOverlayRef, NbOverlayService } from '../../../cdk';
 
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbArrowedOverlayContainerComponent,
+  NbComponentPortal,
   NbOverlayContent,
+  NbOverlayRef,
+  NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
   NbToggleable,
   NbTrigger,
   NbTriggerBuilderService,
   NbTriggerStrategy,
-} from '../../../cdk/overlay';
-import { patch } from '../../../cdk/overlay/overlay-renderer';
+  patch,
+} from '@nebular/cdk';
 
 
 /**

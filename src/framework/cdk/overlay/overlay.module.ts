@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { NbCdkModule } from '../index';
+import { NbCdkModule } from '../cdk.module';
 import { NbSharedModule } from '../../theme/components/shared/shared.module';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbTriggerBuilderService } from './overlay-trigger';

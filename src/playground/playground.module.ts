@@ -36,6 +36,7 @@ import {
   NbToasterModule,
   NbCollapsibleWindowModule,
 } from '@nebular/theme';
+import { NbOverlayModule } from '@nebular/cdk';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -185,7 +186,6 @@ import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 import { NbModalComponent, NbModalShowcaseComponent } from './modal/modal-showcase.component';
 import { NbCollapsibleWindowShowcaseComponent } from './collapsible-window/collapsible-window-showcase.component';
 import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
-import { NbOverlayModule } from '@nebular/cdk/overlay';
 
 export const NB_MODULES = [
   NbCardModule,

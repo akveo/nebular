@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NbPositionBuilderService } from '../../../cdk/overlay';
-import { NbGlobalPositionStrategy } from '../../../cdk';
+import { NbGlobalPositionStrategy, NbPositionBuilderService } from '@nebular/cdk';
 import { NbToastPosition } from './model';
 
 
