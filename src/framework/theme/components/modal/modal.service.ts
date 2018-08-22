@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { NbPositionBuilderService } from '../overlay';
-import { NbComponentPortal, NbComponentType, NbGlobalPositionStrategy, NbOverlayService } from '../overlay/cdk';
+import { NbPositionBuilderService } from '../../../cdk/overlay';
+import { NbComponentPortal, NbComponentType, NbGlobalPositionStrategy, NbOverlayService } from '../../../cdk';
 
 
 export class NbModalConfig {

@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-import { NbComponentType } from './cdk';
+import { NbComponentType } from '../index';
 
 
 export interface NbDisplayable {

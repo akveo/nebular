@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuModule } from '../menu/menu.module';
-import { NbOverlayModule } from '../overlay';
+import { NbOverlayModule } from '../../../cdk/overlay';
 
 
 @NgModule({

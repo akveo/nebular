@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbOverlayModule } from '../overlay';
+import { NbOverlayModule } from '../../../cdk/overlay';
 
 import { NbToasterRegistry, NbToasterService } from './toaster.service';
 import { NbToastComponent } from './toast.component';

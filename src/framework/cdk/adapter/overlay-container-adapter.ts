@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NbOverlayContainer } from './mapping';
+import { NbOverlayContainer } from '../mapping';
 
 
 @Injectable()

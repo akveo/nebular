@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { EMPTY as EMPTY$, fromEvent as observableFromEvent, Observable } from 'rxjs';
 import { debounceTime, delay, filter, repeat, switchMap, takeUntil } from 'rxjs/operators';
 
-import { NB_DOCUMENT } from '../../theme.options';
+import { NB_DOCUMENT } from '../../theme/theme.options';
 
 
 export enum NbTrigger {

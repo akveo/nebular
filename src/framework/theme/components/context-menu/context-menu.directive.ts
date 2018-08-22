@@ -11,7 +11,7 @@ import {
   NbComponentPortal,
   NbOverlayRef,
   NbOverlayService,
-} from '../overlay/cdk';
+} from '../../../cdk';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -23,7 +23,7 @@ import {
   NbTriggerBuilderService,
   NbTriggerStrategy,
   patch,
-} from '../overlay';
+} from '../../../cdk/overlay';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 
