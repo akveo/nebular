@@ -8,9 +8,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jwt-simple');
 const auth = require('./auth.js')();
+const auth_helpers = require('./auth_helpers.js');
 const users = require('./users.js');
+const tokens = require('./token_helpers.js');
+const wines = require('./wines.js');
 const cfg = require('./config.js');
 const app = express();
+const moment = require('moment');
+
 
 app.use(bodyParser.json());
 app.use(auth.initialize());
@@ -34,6 +39,10 @@ app.get('/api/user', auth.authenticate(), function (req, res) {
   });
 });
 
+app.get('/api/wines', auth.authenticate(), function (req,res) {
+  res.json(wines);
+})
+
 app.post('/api/auth/login', function (req, res) {
 
   if (req.body.email && req.body.password) {
@@ -43,16 +52,10 @@ app.post('/api/auth/login', function (req, res) {
       return u.email === email && u.password === password;
     });
     if (user) {
-      var payload = {
-        id: user.id,
-        email: user.email,
-        role: 'user',
-      };
-      var token = jwt.encode(payload, cfg.jwtSecret);
       return res.json({
         data: {
           message: 'Successfully logged in!',
-          token: token
+          token: tokens.createAccessToken(user),
         }
       });
     }
@@ -73,17 +76,11 @@ app.post('/api/auth/token', function (req, res) {
       return u.email === email && u.password === password;
     });
     if (user) {
-      var payload = {
-        id: user.id,
-        email: user.email,
-        role: 'user',
-      };
-      var token = jwt.encode(payload, cfg.jwtSecret);
       return res.json({
             token_type: 'Bearer',
-            access_token: token,
-            expires_in: 3600,
-            refresh_token: 'eb4e1584-0117-437c-bfd7-343f257c4aae',
+            access_token: tokens.createAccessToken(user),
+            expires_in: cfg.accessTokenExpiresIn,
+            refresh_token: tokens.createRefreshToken(user),
       });
     }
   }
@@ -155,18 +152,45 @@ app.delete('/api/auth/logout', function (req, res) {
 });
 
 app.post('/api/auth/refresh-token', function (req, res) {
-    var payload = {
-        id: users[0].id,
-        email: users[0].email,
-        role: 'user',
-    };
-    var token = jwt.encode(payload, cfg.jwtSecret);
+
+  // token issued by oauth2 strategy
+  if (req.body.refresh_token) {
+    var token = req.body.refresh_token;
+    var parts = token.split('.');
+    if (parts.length !== 3) {
+      return res.status(401).json({
+        error: 'invalid_token',
+        error_description: 'Invalid refresh token'
+      });
+    }
+    var payload = JSON.parse(auth_helpers.urlBase64Decode(parts[1]));
+    var exp = payload.exp;
+    var userId = payload.sub;
+    var now = moment().unix();
+    if (now > exp) {
+      return res.status(401).json({
+        error: 'unauthorized',
+        error_description: 'Refresh Token expired.'
+      })
+    } else {
+      return res.json({
+        token_type: 'Bearer',
+        access_token: tokens.createAccessToken(users[userId - 1]),
+        expires_in: cfg.accessTokenExpiresIn,
+      });
+    }
+  }
+
+  // token issued via email strategy
+  if (req.body.token) {
     return res.json({
-        data: {
-            message: 'Successfully refreshed token.',
-            token: token
-        }
-    });
+      data: {
+        message: 'Successfully refreshed token!',
+        token: tokens.createAccessToken(users[0]),
+      }
+      });
+    };
+
 });
 
 app.listen(4400, function () {
