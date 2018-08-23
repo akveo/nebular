@@ -24,7 +24,7 @@ import {
 } from '../../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
-import { NB_DOCUMENT } from '@nebular/theme';
+import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * Full featured context menu directive.

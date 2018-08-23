@@ -23,7 +23,7 @@ import {
   NbTriggerStrategyBuilder,
   patch,
 } from '../../cdk';
-import { NB_DOCUMENT } from '@nebular/theme';
+import { NB_DOCUMENT } from '../../theme.options';
 
 
 /**
