@@ -5,13 +5,13 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
-import { getDeepFromObject } from '@nebular/auth/helpers';
-import { NB_AUTH_OPTIONS } from '@nebular/auth';
+import { NbAuthResult, NbAuthService, NbAuthToken } from '../../../framework/auth/services';
+import { NB_AUTH_OPTIONS } from '../../../framework/auth/auth.options';
+import { getDeepFromObject } from '../../../framework/auth/helpers';
 import { Wine } from './wine';
 
 @Component({
@@ -80,7 +80,7 @@ export class NbPlaygroundApiCallsComponent {
       .pipe(
         catchError(err => {
           if (err instanceof HttpErrorResponse && err.status === 401) {
-             this.router.navigate(['/auth/login']);
+            this.router.navigate(['/auth/login']);
           }
           return observableOf([]);
         }),
