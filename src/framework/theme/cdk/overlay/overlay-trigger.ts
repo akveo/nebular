@@ -1,9 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
-
-import { EMPTY as EMPTY$, fromEvent as observableFromEvent, Observable } from 'rxjs';
-import { debounceTime, delay, filter, repeat, switchMap, takeUntil } from 'rxjs/operators';
-
-import { NB_DOCUMENT } from '../../theme.options';
+import { fromEvent as observableFromEvent, merge as observableMerge, Observable, Subject } from 'rxjs';
+import { debounceTime, delay, filter, repeat, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
+import { ComponentRef } from '@angular/core';
 
 
 export enum NbTrigger {
@@ -18,24 +15,10 @@ export enum NbTrigger {
  * We have three main trigger strategies: click, hint and hover.
  * */
 export abstract class NbTriggerStrategy {
-  abstract show: Observable<Event>;
-  abstract hide: Observable<Event>;
-  abstract toggle: Observable<Event>;
+  abstract show$: Observable<Event>;
+  abstract hide$: Observable<Event>;
 
-  protected _host: HTMLElement;
-  protected _container: HTMLElement;
-
-  constructor(protected document) {
-  }
-
-  host(host: HTMLElement): this {
-    this._host = host;
-    return this;
-  }
-
-  container(container: HTMLElement): this {
-    this._container = container;
-    return this;
+  constructor(protected document: Document, protected host: HTMLElement, protected container: () => ComponentRef<any>) {
   }
 }
 
@@ -46,19 +29,40 @@ export abstract class NbTriggerStrategy {
  * not on the host or container.
  * */
 export class NbClickTriggerStrategy extends NbTriggerStrategy {
+  protected show: Subject<Event> = new Subject();
+  readonly show$: Observable<Event> = this.show.asObservable();
 
-  show: Observable<Event> = EMPTY$;
+  protected hide: Subject<Event> = new Subject();
+  readonly hide$: Observable<Event> = observableMerge(
+    this.hide.asObservable(),
+    observableFromEvent<Event>(this.document, 'click')
+      .pipe(filter((event: Event) => this.isNotHostOrContainer(event))),
+  );
 
-  hide: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
-    .pipe(filter((event: Event) => this.isNotHostOrContainer(event)));
+  constructor(protected document: Document, protected host: HTMLElement, protected container: () => ComponentRef<any>) {
+    super(document, host, container);
+    this.subscribeOnHostClick();
+  }
 
-  get toggle(): Observable<Event> {
-    return observableFromEvent(this._host, 'click');
+  protected subscribeOnHostClick() {
+    observableFromEvent(this.host, 'click')
+      .subscribe((event: Event) => {
+        if (this.isContainerExists()) {
+          this.hide.next(event);
+        } else {
+          this.show.next(event);
+        }
+      })
+  }
+
+  protected isContainerExists(): boolean {
+    return !!this.container();
   }
 
   protected isNotHostOrContainer(event: Event): boolean {
-    return !this._host.contains(event.target as Node)
-      && !this._container.contains(event.target as Node);
+    return !this.host.contains(event.target as Node)
+      && this.isContainerExists()
+      && !this.container().location.nativeElement.contains(event.target as Node);
   }
 }
 
@@ -69,31 +73,25 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
  * */
 export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
-  toggle: Observable<Event> = EMPTY$;
+  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
+    .pipe(
+      delay(100),
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
+      repeat(),
+    );
 
-  get show(): Observable<Event> {
-    return observableFromEvent<Event>(this._host, 'mouseenter')
-      .pipe(
-        delay(100),
-        takeUntil(observableFromEvent(this._host, 'mouseleave')),
-        repeat(),
-      );
-  }
-
-  get hide(): Observable<Event> {
-    return observableFromEvent<Event>(this._host, 'mouseleave')
-      .pipe(
-        switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
-          .pipe(
-            debounceTime(100),
-            // TODO unsubscribe after hide
-            filter(event => !this._host.contains(event.target as Node)
-              && !this._container.contains(event.target as Node),
-            ),
+  hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
+    .pipe(
+      switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
+        .pipe(
+          debounceTime(100),
+          takeWhile(() => !!this.container()),
+          filter(event => !this.host.contains(event.target as Node)
+            && !this.container().location.nativeElement.contains(event.target as Node),
           ),
         ),
-      );
-  }
+      ),
+    );
 }
 
 /**
@@ -102,36 +100,52 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
  * Fires close event when the mouse leaves the host element.
  * */
 export class NbHintTriggerStrategy extends NbTriggerStrategy {
+  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
+    .pipe(
+      delay(100),
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
+      repeat(),
+    );
 
-  toggle: Observable<Event> = EMPTY$;
-
-  get show(): Observable<Event> {
-    return observableFromEvent<Event>(this._host, 'mouseenter')
-      .pipe(
-        delay(100),
-        takeUntil(observableFromEvent(this._host, 'mouseleave')),
-        repeat(),
-      );
-  }
-
-  get hide(): Observable<Event> {
-    return observableFromEvent(this._host, 'mouseleave');
-  }
+  hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave');
 }
 
-@Injectable()
-export class NbTriggerBuilderService {
-  constructor(@Inject(NB_DOCUMENT) protected document) {
+export class NbTriggerStrategyBuilder {
+  protected _host: HTMLElement;
+  protected _container: () => ComponentRef<any>;
+  protected _trigger: NbTrigger;
+  protected _document: Document;
+
+  document(document: Document): this {
+    this._document = document;
+    return this;
   }
 
-  trigger(trigger: NbTrigger): NbTriggerStrategy {
-    switch (trigger) {
+  trigger(trigger: NbTrigger): this {
+    this._trigger = trigger;
+    return this;
+  }
+
+  host(host: HTMLElement): this {
+    this._host = host;
+    return this;
+  }
+
+  container(container: () => ComponentRef<any>): this {
+    this._container = container;
+    return this;
+  }
+
+  build(): NbTriggerStrategy {
+    switch (this._trigger) {
       case NbTrigger.CLICK:
-        return new NbClickTriggerStrategy(this.document);
+        return new NbClickTriggerStrategy(this._document, this._host, this._container);
       case NbTrigger.HINT:
-        return new NbHintTriggerStrategy(this.document);
+        return new NbHintTriggerStrategy(this._document, this._host, this._container);
       case NbTrigger.HOVER:
-        return new NbHoverTriggerStrategy(this.document);
+        return new NbHoverTriggerStrategy(this._document, this._host, this._container);
+      default:
+        throw new Error('Trigger have to be provided');
     }
   }
 }

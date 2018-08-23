@@ -4,7 +4,6 @@ import { NbSharedModule } from '../../components/shared/shared.module';
 import { NbCdkMappingModule } from '../mapping';
 import { NbAdapterModule } from '../adapter/adapter.module';
 import { NbPositionBuilderService } from './overlay-position';
-import { NbTriggerBuilderService } from './overlay-trigger';
 import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
 
 
@@ -27,7 +26,6 @@ export class NbOverlayModule {
       ngModule: NbOverlayModule,
       providers: [
         NbPositionBuilderService,
-        NbTriggerBuilderService,
       ],
     };
   }

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 
 import {
@@ -19,10 +19,11 @@ import {
   NbPositionBuilderService,
   NbToggleable,
   NbTrigger,
-  NbTriggerBuilderService,
   NbTriggerStrategy,
+  NbTriggerStrategyBuilder,
   patch,
 } from '../../cdk';
+import { NB_DOCUMENT } from '@nebular/theme';
 
 
 /**
@@ -68,12 +69,12 @@ import {
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  *
- * Also popover has some different modes which provides capability show and hide popover in different ways:
+ * Also popover has some different modes which provides capability show$ and hide$ popover in different ways:
  *
  * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
  * somewhere on the document except popover.
- * - Hint mode provides capability show popover when the user hovers on the host element
- * and hide popover when user hovers out of the host.
+ * - Hint mode provides capability show$ popover when the user hovers on the host element
+ * and hide$ popover when user hovers out of the host.
  * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
  * the container element popover will not be hidden.
  *
@@ -132,8 +133,8 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   protected triggerStrategy: NbTriggerStrategy;
   protected alive: boolean = true;
 
-  constructor(private hostRef: ElementRef,
-              private triggerBuilder: NbTriggerBuilderService,
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
               private overlay: NbOverlayService) {
   }
@@ -161,6 +162,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
 
   hide() {
     this.ref.detach();
+    this.container = null;
   }
 
   toggle() {
@@ -179,10 +181,12 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return this.triggerBuilder
+    return new NbTriggerStrategyBuilder()
+      .document(this.document)
       .trigger(this.mode)
       .host(this.hostRef.nativeElement)
-      .container(this.ref.overlayElement);
+      .container(() => this.container)
+      .build();
   }
 
   protected subscribeOnPositionChange() {
@@ -192,8 +196,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleabl
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
-    this.triggerStrategy.toggle.pipe(takeWhile(() => this.alive)).subscribe(() => this.toggle());
+    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 }

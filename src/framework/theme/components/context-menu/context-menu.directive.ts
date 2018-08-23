@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
@@ -18,12 +18,13 @@ import {
   NbPositionBuilderService,
   NbToggleable,
   NbTrigger,
-  NbTriggerBuilderService,
   NbTriggerStrategy,
   patch,
+  NbTriggerStrategyBuilder,
 } from '../../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+import { NB_DOCUMENT } from '@nebular/theme';
 
 /**
  * Full featured context menu directive.
@@ -106,9 +107,9 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   protected alive: boolean = true;
   private items: NbMenuItem[] = [];
 
-  constructor(private menuService: NbMenuService,
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              private menuService: NbMenuService,
               private hostRef: ElementRef,
-              private triggerBuilder: NbTriggerBuilderService,
               private positionBuilder: NbPositionBuilderService,
               private overlay: NbOverlayService) {
   }
@@ -159,10 +160,12 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return this.triggerBuilder
+    return new NbTriggerStrategyBuilder()
+      .document(this.document)
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
-      .container(this.ref.overlayElement);
+      .container(() => this.container)
+      .build();
   }
 
   protected subscribeOnPositionChange() {
@@ -172,9 +175,8 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggl
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
-    this.triggerStrategy.toggle.pipe(takeWhile(() => this.alive)).subscribe(() => this.toggle());
+    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 
   /*
