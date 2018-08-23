@@ -7,16 +7,15 @@
 import { Component, Inject } from '@angular/core';
 import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
-import { Wine } from './wine';
 import { Router } from '@angular/router';
+import { Observable, of as observableOf } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
 import { getDeepFromObject } from '@nebular/auth/helpers';
 import { NB_AUTH_OPTIONS } from '@nebular/auth';
+import { Wine } from './wine';
 
 @Component({
   selector: 'nb-playground-api-calls',
-  styles: [`
-  `],
   template: `
     <router-outlet></router-outlet>
     <nb-layout>
@@ -29,17 +28,15 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
             <button nbButton status="primary" (click)="logout()">Sign out</button>
           </nb-card-body>
         </nb-card>
-        <nb-card *ngIf="wines" size="medium">
+        <nb-card *ngIf="(wines$ | async)?.length">
           <nb-card-header>
             Alain'wines
           </nb-card-header>
-          <nb-card-body>
-            <nb-list >
-              <nb-list-item *ngFor="let wine of wines">
-                {{wine.region}}, {{ wine.name }} ({{wine.year}})
-              </nb-list-item>
-            </nb-list>
-          </nb-card-body>
+          <nb-list>
+            <nb-list-item *ngFor="let wine of wines$ | async">
+              {{ wine.region }}, {{ wine.name }} ({{ wine.year }})
+            </nb-list-item>
+          </nb-list>
         </nb-card>
       </nb-layout-column>
     </nb-layout>
@@ -49,7 +46,7 @@ import { NB_AUTH_OPTIONS } from '@nebular/auth';
 export class NbPlaygroundApiCallsComponent {
 
   token: NbAuthToken;
-  wines: Wine[];
+  wines$: Observable<Wine[]>;
   redirectDelay: number = 0;
   strategy: string = '';
 
@@ -71,28 +68,23 @@ export class NbPlaygroundApiCallsComponent {
   }
 
   logout() {
-    this.authService.logout(this.strategy).subscribe((result: NbAuthResult) => {
-      setTimeout(() => {
-        return this.router.navigate(['/auth/login']);
-      }, this.redirectDelay);
-      // }
-    });
+    this.authService.logout(this.strategy)
+      .pipe(
+        delay(this.redirectDelay),
+      )
+      .subscribe((result: NbAuthResult) => this.router.navigate(['/auth/login']));
   }
 
   loadWines() {
-    this.wines = null;
-    this.http.get<Wine[]>('http://localhost:4400/api/wines')
+    this.wines$ = this.http.get<Wine[]>('http://localhost:4400/api/wines')
       .pipe(
-        map( wines => {
-            this.wines = wines;
-          },
-        ),
         catchError(err => {
           if (err instanceof HttpErrorResponse && err.status === 401) {
-             return this.router.navigate(['/auth/login']);
+             this.router.navigate(['/auth/login']);
           }
+          return observableOf([]);
         }),
-      ).subscribe();
+      );
   }
 
   getConfigValue(key: string): any {
