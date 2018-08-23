@@ -12,12 +12,12 @@ var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var params = {
   secretOrKey: cfg.jwtSecret,
-  jwtFromRequest: ExtractJwt.fromAuthHeader()
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
 module.exports = function () {
   var strategy = new Strategy(params, function (payload, done) {
-    var user = users[payload.id] || null;
+    var user = users[payload.sub -1 ] || null;
     if (user) {
       return done(null, {
         id: user.id
