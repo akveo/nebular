@@ -59,7 +59,7 @@
   }
 
   /deep/ nb-sidebar nb-menu {
-    > ul > li {
+    > .menu-items > .menu-item {
       margin-bottom: 0.5rem;
       font-weight: bold;
       a:hover {
@@ -68,6 +68,11 @@
       li {
         font-size: 0.875rem;
         font-weight: normal;
+      }
+      li.menu-group {
+        font-weight: bold;
+        padding-top: 1.25rem;
+        padding-bottom: 1rem;
       }
     }
 
