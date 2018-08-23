@@ -16,7 +16,6 @@ import {
   NbArrowedOverlayContainerComponent,
   NbPosition,
   NbPositionBuilderService,
-  NbToggleable,
   NbTrigger,
   NbTriggerStrategy,
   patch,
@@ -70,7 +69,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective implements AfterViewInit, OnDestroy, NbToggleable {
+export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
 
   /**
    * Position will be calculated relatively host element based on the position.

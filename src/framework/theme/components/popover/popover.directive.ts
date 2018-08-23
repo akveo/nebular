@@ -17,7 +17,6 @@ import {
   NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
-  NbToggleable,
   NbTrigger,
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
@@ -90,7 +89,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 * Rename them before release for breaking changes.
 */
 @Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements AfterViewInit, OnDestroy, NbToggleable {
+export class NbPopoverDirective implements AfterViewInit, OnDestroy {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
