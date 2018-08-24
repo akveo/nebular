@@ -66,6 +66,7 @@ export * from './components/list/infinite-list.directive';
 export * from './components/input/input.directive';
 export * from './components/input/input.module';
 export * from './components/modal/modal.module';
+export * from './components/modal/modal.service';
 export * from './components/toaster/toaster.module';
 export * from './components/toaster/toaster.service';
 export * from './components/collapsible-window/collapsible-window.directive';
