@@ -11,7 +11,6 @@ import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbArrowedOverlayContainerComponent,
-  NbComponentPortal,
   NbOverlayContent,
   NbOverlayRef,
   NbOverlayService,
@@ -21,6 +20,7 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
   patch,
+  createContainer,
 } from '../../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
 
@@ -155,8 +155,11 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbArrowedOverlayContainerComponent));
-    patch(this.container, { position: this.position, content: this.content, context: this.context });
+    this.container = createContainer(this.ref, NbArrowedOverlayContainerComponent, {
+      position: this.position,
+      content: this.content,
+      context: this.context,
+    });
   }
 
   hide() {

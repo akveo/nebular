@@ -11,6 +11,7 @@ import {
   NbFlexibleConnectedPositionStrategy,
   NbGlobalPositionStrategy,
   NbOverlayPositionBuilder,
+  NbOverlayRef,
   NbPlatform,
   NbPositionStrategy,
 } from '../mapping';
@@ -53,45 +54,44 @@ const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM
 
 
 /**
- * Angular cdk flexible connected position strategy is not enough for our purposes.
- * So, we have custom connected position strategy that can adjust overlay over the host element automatically.
+ * The main idea of the adjustable connected strategy is to provide predefined set of positions for your overlay.
+ * You have to provide adjustment and appropriate strategy will be chosen in runtime.
  * */
 export class NbAdjustableConnectedPositionStrategy
   extends NbFlexibleConnectedPositionStrategy implements NbPositionStrategy {
 
+  protected _position: NbPosition;
+  protected _offset: number = 15;
+  protected _adjustment: NbAdjustment;
+
+  protected appliedPositions: { [key: string]: NbConnectedPosition };
+
   readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
     map((positionChange: NbConnectedOverlayPositionChange) => positionChange.connectionPair),
     map((connectionPair: NbConnectionPositionPair) => {
-      return Object.entries(this.connectedPositions)
+      return Object.entries(this.appliedPositions)
         .filter(([name, position]) => position === connectionPair)
         .map(([name]) => name as NbPosition)[0];
     }),
   );
 
-  protected _position: NbPosition;
-  protected _offset: number = 15;
-  protected connectedPositions: { [key: string]: NbConnectedPosition };
+  attach(overlayRef: NbOverlayRef) {
+    this.applyPositions();
+    super.attach(overlayRef);
+  }
+
+  apply() {
+    this.applyPositions();
+    super.apply();
+  }
 
   position(position: NbPosition): this {
     this._position = position;
     return this;
   }
 
-  // TODO have to be applied after position
   adjustment(adjustment: NbAdjustment): this {
-    let positions: NbPosition[];
-    switch (adjustment) {
-      case NbAdjustment.NOOP:
-        positions = NOOP_POSITIONS.filter(position => this._position === position);
-        break;
-      case NbAdjustment.CLOCKWISE:
-        positions = this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
-        break;
-      case NbAdjustment.COUNTERCLOCKWISE:
-        positions = this.reorderPreferredPositions(COUNTER_CLOCKWISE_POSITIONS);
-        break
-    }
-    this.applyPositions(positions);
+    this._adjustment = adjustment;
     return this;
   }
 
@@ -100,12 +100,28 @@ export class NbAdjustableConnectedPositionStrategy
     return this;
   }
 
-  protected applyPositions(positions: NbPosition[]) {
-    this.connectedPositions = positions.reduce<{ [key: string]: NbConnectedPosition }>((acc, position) => {
+  protected createPositions(): NbPosition[] {
+    switch (this._adjustment) {
+      case NbAdjustment.NOOP:
+        return NOOP_POSITIONS.filter(position => this._position === position);
+      case NbAdjustment.CLOCKWISE:
+        return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
+      case NbAdjustment.COUNTERCLOCKWISE:
+        return this.reorderPreferredPositions(COUNTER_CLOCKWISE_POSITIONS);
+    }
+  }
+
+  protected applyPositions() {
+    const positions: NbPosition[] = this.createPositions();
+    this.persistChosenPositions(positions);
+    this.withPositions(positions.map(position => this.appliedPositions[position]));
+  }
+
+  protected persistChosenPositions(positions: NbPosition[]) {
+    this.appliedPositions = positions.reduce<{ [key: string]: NbConnectedPosition }>((acc, position) => {
       acc[position] = POSITIONS[position](this._offset);
       return acc;
     }, {});
-    this.withPositions(positions.map(position => this.connectedPositions[position]));
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
