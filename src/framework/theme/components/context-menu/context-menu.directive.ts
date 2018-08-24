@@ -11,7 +11,6 @@ import {
   createContainer,
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbComponentPortal,
   NbOverlayRef,
   NbOverlayService,
   NbPosition,
