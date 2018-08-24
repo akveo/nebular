@@ -28,7 +28,7 @@
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 @import '../../components/toaster/toast.component.theme';
-@import '../../cdk/overlay/arrowed-overlay-container/arrowed-overlay-container.component.theme';
+@import '../../components/popover/popover.component.theme';
 @import '../../cdk/overlay/overlay.theme';
 
 @mixin nb-theme-components() {
@@ -57,6 +57,6 @@
   @include nb-list-theme();
   @include nb-input-theme();
   @include nb-toaster-theme();
-  @include nb-arrowed-overlay-container-theme();
   @include nb-overlay-theme();
+  @include nb-popover-theme();
 }

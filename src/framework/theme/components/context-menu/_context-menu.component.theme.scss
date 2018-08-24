@@ -3,10 +3,30 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-
 @import '../../styles/core/mixins';
 
 @mixin nb-context-menu-theme() {
+  nb-context-menu {
+    $arrow-size: 11px;
+    $arrow-content-size: 9px;
+    border: 2px solid nb-theme(context-menu-border);
+    border-radius: nb-theme(context-menu-border-radius);
+    background: nb-theme(context-menu-bg);
+    box-shadow: nb-theme(context-menu-shadow);
+
+    .primitive-overlay {
+      color: nb-theme(context-menu-fg);
+    }
+
+    .arrow {
+      border-bottom: $arrow-size solid nb-theme(context-menu-border);
+
+      &::after {
+        border-bottom: $arrow-content-size solid nb-theme(context-menu-bg);
+      }
+    }
+  }
+
   nb-menu.context-menu .menu-items .menu-item a {
     color: nb-theme(context-menu-fg);
     font-weight: nb-theme(font-weight-normal);

@@ -1,14 +1,9 @@
-import { ComponentRef, TemplateRef } from '@angular/core';
+import { ComponentRef, TemplateRef, Type } from '@angular/core';
 
 import { NbComponentPortal, NbComponentType, NbOverlayRef } from '../mapping';
 
 
-export interface NbContainer {
-  content: any;
-  context: Object;
-}
-
-export type NbOverlayContent = NbComponentType<any> | TemplateRef<any> | string;
+export type NbOverlayContent = Type<any> | TemplateRef<any> | string;
 
 export function patch<T>(container: ComponentRef<T>, containerContext: Object): ComponentRef<T> {
   Object.assign(container.instance, containerContext);

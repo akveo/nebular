@@ -8,12 +8,14 @@ import { NgModule } from '@angular/core';
 
 import { NbOverlayModule } from '../../cdk';
 import { NbPopoverDirective } from './popover.directive';
+import { NbPopoverComponent } from './popover.component';
 
 
 @NgModule({
   imports: [NbOverlayModule],
-  declarations: [NbPopoverDirective],
+  declarations: [NbPopoverDirective, NbPopoverComponent],
   exports: [NbPopoverDirective],
+  entryComponents: [NbPopoverComponent],
 })
 export class NbPopoverModule {
 }

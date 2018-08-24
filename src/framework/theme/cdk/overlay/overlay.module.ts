@@ -4,7 +4,7 @@ import { NbSharedModule } from '../../components/shared/shared.module';
 import { NbCdkMappingModule } from '../mapping';
 import { NbAdapterModule } from '../adapter/adapter.module';
 import { NbPositionBuilderService } from './overlay-position';
-import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/arrowed-overlay-container.component';
+import { NbOverlayContainerComponent } from './overlay-container';
 
 
 @NgModule({
@@ -13,12 +13,11 @@ import { NbArrowedOverlayContainerComponent } from './arrowed-overlay-container/
     NbAdapterModule,
     NbSharedModule,
   ],
-  declarations: [NbArrowedOverlayContainerComponent],
+  declarations: [NbOverlayContainerComponent],
   exports: [
     NbCdkMappingModule,
-    NbArrowedOverlayContainerComponent,
+    NbOverlayContainerComponent,
   ],
-  entryComponents: [NbArrowedOverlayContainerComponent],
 })
 export class NbOverlayModule {
   static forRoot(): ModuleWithProviders {

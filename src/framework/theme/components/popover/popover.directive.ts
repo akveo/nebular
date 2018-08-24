@@ -10,7 +10,6 @@ import { takeWhile } from 'rxjs/operators';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbArrowedOverlayContainerComponent,
   NbOverlayContent,
   NbOverlayRef,
   NbOverlayService,
@@ -23,6 +22,7 @@ import {
   createContainer,
 } from '../../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbPopoverComponent } from './popover.component';
 
 
 /**
@@ -152,10 +152,11 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
   }
 
   show() {
-    this.container = createContainer(this.ref, NbArrowedOverlayContainerComponent, {
+    this.container = createContainer(this.ref, NbPopoverComponent, {
       position: this.position,
       content: this.content,
       context: this.context,

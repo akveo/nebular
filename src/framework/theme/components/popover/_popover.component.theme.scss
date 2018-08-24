@@ -4,15 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-arrowed-overlay-container-theme {
-  nb-arrowed-overlay-container {
+@mixin nb-popover-theme {
+  nb-popover {
     $arrow-size: 11px;
     $arrow-content-size: 9px;
     border: 2px solid nb-theme(popover-border);
+    border-radius: nb-theme(popover-border-radius);
     background: nb-theme(popover-bg);
     box-shadow: nb-theme(popover-shadow);
 
-    .primitive-popover {
+    .primitive-overlay {
       color: nb-theme(popover-fg);
     }
 

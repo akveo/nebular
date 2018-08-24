@@ -237,11 +237,16 @@ $theme: (
   popover-fg: color-fg-heading,
   popover-bg: color-bg,
   popover-border: color-success,
+  popover-border-radius: radius,
   popover-shadow: none,
 
   context-menu-fg: color-fg-heading,
+  context-menu-bg: color-bg,
   context-menu-active-fg: color-white,
   context-menu-active-bg: color-success,
+  context-menu-border: color-primary,
+  context-menu-border-radius: radius,
+  context-menu-shadow: none,
 
   actions-font-size: font-size,
   actions-font-family: font-secondary,

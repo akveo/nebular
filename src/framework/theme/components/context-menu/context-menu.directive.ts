@@ -8,18 +8,18 @@ import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDe
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
+  createContainer,
+  NbAdjustableConnectedPositionStrategy,
+  NbAdjustment,
   NbComponentPortal,
   NbOverlayRef,
   NbOverlayService,
-  NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
-  NbArrowedOverlayContainerComponent,
   NbPosition,
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  patch,
   NbTriggerStrategyBuilder,
+  patch,
 } from '../../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
@@ -89,16 +89,6 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
    * */
   @Input('nbContextMenuTag')
   tag: string;
-
-  /**
-   * Basic menu items, will be passed to the internal NbMenuComponent.
-   * */
-  @Input('nbContextMenu')
-  set _items(items: NbMenuItem[]) {
-    this.validateItems(items);
-    this.items = items;
-  };
-
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -112,6 +102,15 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
               private positionBuilder: NbPositionBuilderService,
               private overlay: NbOverlayService) {
   }
+
+  /**
+   * Basic menu items, will be passed to the internal NbMenuComponent.
+   * */
+  @Input('nbContextMenu')
+  set _items(items: NbMenuItem[]) {
+    this.validateItems(items);
+    this.items = items;
+  };
 
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();
@@ -128,19 +127,20 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbArrowedOverlayContainerComponent));
-    patch(this.container, {
+    this.container = createContainer(this.ref, NbContextMenuComponent, {
       position: this.position,
-      content: NbContextMenuComponent,
-      context: { items: this.items, tag: this.tag },
+      items: this.items,
+      tag: this.tag,
     });
   }
 
   hide() {
     this.ref.detach();
+    this.container = null;
   }
 
   toggle() {
