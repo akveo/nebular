@@ -37,6 +37,26 @@ describe('oauth2-auth-strategy', () => {
     example_parameter: 'example_value',
   };
 
+  const tokenWithoutRefreshTokenResponse = {
+    access_token: '8uoloUIg765fHGF9jknjksdn9',
+    expires_in: 3600,
+    example_parameter: 'example_refresh_value',
+  }
+
+  const refreshedTokenPayload =  {
+    access_token: '8uoloUIg765fHGF9jknjksdn9',
+    expires_in: 3600,
+    refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
+    example_parameter: 'example_refresh_value',
+  }
+
+  const refreshedTokenResponse =  {
+    access_token: '8uoloUIg765fHGF9jknjksdn9',
+    expires_in: 3600,
+    refresh_token: 'dfsjkgkdh989JHJHJDSHJns',
+    example_parameter: 'example_refresh_value',
+  }
+
   const tokenErrorResponse = {
     error: 'unauthorized_client',
     error_description: 'unauthorized',
@@ -44,6 +64,9 @@ describe('oauth2-auth-strategy', () => {
   };
 
   const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse, 'strategy') as NbAuthOAuth2Token;
+  // tslint:disable-next-line
+  const refreshedToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenPayload, 'strategy') as NbAuthOAuth2Token;
+  const refreshedTokenWithRefreshToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenResponse, 'strategy') as NbAuthOAuth2Token;
 
 
   beforeEach(() => {
@@ -239,6 +262,53 @@ describe('oauth2-auth-strategy', () => {
           && req.body['refresh_token'] === successToken.getRefreshToken()
           && !req.body['scope'],
       ).flush(tokenSuccessResponse);
+    });
+
+    it('handle refresh token and inserts existing refresh_token if needed', (done: DoneFn) => {
+      strategy.setOptions(basicOptions);
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(refreshedToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).toEqual(refreshedToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && !req.body['scope'],
+      ).flush(tokenWithoutRefreshTokenResponse);
+    });
+
+    it('Handle refresh-token and leaves refresh_token unchanged if present', (done: DoneFn) => {
+      strategy.setOptions(basicOptions);
+      strategy.refreshToken(successToken)
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isSuccess()).toBe(true);
+          expect(result.isFailure()).toBe(false);
+          expect(result.getToken().getValue()).toEqual(refreshedTokenWithRefreshToken.getValue());
+          expect(result.getToken().getOwnerStrategyName()).
+                 toEqual(refreshedTokenWithRefreshToken.getOwnerStrategyName());
+          expect(result.getMessages()).toEqual(successMessages);
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
+          expect(result.getRedirect()).toEqual('/');
+          done();
+        });
+
+      httpMock.expectOne(
+        req => req.url === 'http://example.com/token'
+          && req.body['grant_type'] === NbOAuth2GrantType.REFRESH_TOKEN
+          && req.body['refresh_token'] === successToken.getRefreshToken()
+          && !req.body['scope'],
+      ).flush(refreshedTokenResponse);
     });
 
     it('handle error token refresh response', (done: DoneFn) => {
@@ -584,6 +654,7 @@ describe('oauth2-auth-strategy', () => {
 
   describe('configured: additionnal param: token, grant_type:password', () => {
 
+    const scope = 'theScope';
     const basicOptions = {
       name: 'strategy',
       baseEndpoint: 'http://example.com/',
@@ -591,6 +662,7 @@ describe('oauth2-auth-strategy', () => {
       token: {
         grantType: NbOAuth2GrantType.PASSWORD,
         endpoint: 'token',
+        scope: scope,
       },
     }
 
@@ -617,8 +689,9 @@ describe('oauth2-auth-strategy', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['email'] === credentials.email
-          && req.body['password'] === credentials.password,
+          && req.body['username'] === credentials.email
+          && req.body['password'] === credentials.password
+          && req.body['scope'] === scope,
       ).flush(tokenSuccessResponse);
     });
 
@@ -647,7 +720,8 @@ describe('oauth2-auth-strategy', () => {
         req => req.url === 'http://example.com/token'
           && req.headers.get('Authorization') === authHeader
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['email'] === credentials.email
+          && req.body['username'] === credentials.email
+          && req.body['scope'] === scope
           && req.body['password'] === credentials.password,
       ).flush(tokenSuccessResponse);
     });
@@ -676,8 +750,9 @@ describe('oauth2-auth-strategy', () => {
       httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['email'] === credentials.email
+          && req.body['username'] === credentials.email
           && req.body['password'] === credentials.password
+          && req.body['scope'] === scope
           && req.body['client_id'] === strategy.getOption('clientId')
           && req.body['client_secret'] === strategy.getOption('clientSecret'),
       ).flush(tokenSuccessResponse);
@@ -703,8 +778,9 @@ describe('oauth2-auth-strategy', () => {
        httpMock.expectOne(
         req => req.url === 'http://example.com/token'
           && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['email'] === credentials.email
-          && req.body['password'] === credentials.password,
+          && req.body['username'] === credentials.email
+          && req.body['password'] === credentials.password
+          && req.body['scope'] === scope,
       ).flush(tokenErrorResponse, {status: 401, statusText: 'unauthorized'});
     });
   });

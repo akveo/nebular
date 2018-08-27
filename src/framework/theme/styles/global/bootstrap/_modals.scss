@@ -32,11 +32,15 @@
 
     @include nb-headings();
 
-    @include nb-rtl(flex-flow, row-reverse);
-
     .close {
       text-shadow: none;
       color: nb-theme(modal-fg-heading);
+
+      @include nb-rtl {
+        margin-left: -1rem;
+        margin-right: auto;
+      };
+
       &:hover {
         color: nb-theme(modal-fg-heading);
       }

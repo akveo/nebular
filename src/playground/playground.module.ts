@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NbThemeModule,
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
   NbCardModule,
   NbCheckboxModule,
   NbLayoutModule,
@@ -85,6 +88,7 @@ import { NbSearchEventComponent } from './search/search-event.component';
 import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
 import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbTabsetIconComponent } from './tabset/tabset-icon.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
@@ -113,10 +117,10 @@ import {
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component,
-  NbRouteTabsetTestChild2Component,
-  NbRouteTabsetTestComponent,
-} from './tabset/route-tabset-test.component';
+  NbRouteTabsetShowcaseChild1Component,
+  NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseComponent,
+} from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
 import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
 import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
@@ -175,6 +179,7 @@ import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component'
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
+import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
 import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
@@ -186,6 +191,21 @@ import { NbScrollWindowComponent } from './scroll/scroll-window.component';
 import { NbModalComponent, NbModalShowcaseComponent } from './modal/modal-showcase.component';
 import { NbCollapsibleWindowShowcaseComponent } from './collapsible-window/collapsible-window-showcase.component';
 import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import {
+  NbCalendarCustomDayCellComponent,
+  NbCalendarCustomDayCellShowcaseComponent,
+} from './calendar/calendar-custom-day-cell-showcase.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import {
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
+} from './calendar-kit/calendar-kit-full-calendar.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -216,6 +236,9 @@ export const NB_MODULES = [
   NbButtonModule,
   NbListModule,
   NbInputModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbCalendarKitModule,
   NbModalModule,
   NbCollapsibleWindowModule,
   NbToasterModule,
@@ -297,12 +320,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSearchShowcaseComponent,
   NbSearchEventComponent,
   NbTabsetTestComponent,
-  NbRouteTabsetTestChild1Component,
-  NbRouteTabsetTestChild2Component,
-  NbRouteTabsetTestComponent,
+  NbRouteTabsetShowcaseChild1Component,
+  NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseComponent,
   NbTabsetShowcaseComponent,
   NbTabsetBadgeComponent,
   NbTabsetWidthComponent,
+  NbTabsetIconComponent,
   NbUserTestComponent,
   NbUserShowcaseComponent,
   NbUserSizesComponent,
@@ -348,6 +372,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSimpleListShowcaseComponent,
   NbUsersListShowcaseComponent,
   NbInfiniteNewsListComponent,
+  NbInfiniteListPlaceholdersComponent,
   NbInfiniteListShowcaseComponent,
   NbInfiniteListScrollModesComponent,
   NbNewsPostComponent,
@@ -359,6 +384,17 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputTypesComponent,
   NbInputFullWidthComponent,
   NbScrollWindowComponent,
+  NbCalendarShowcaseComponent,
+  NbCalendarBoundingMonthComponent,
+  NbCalendarRangeShowcaseComponent,
+  NbCalendarStartViewComponent,
+  NbCalendarCustomDayCellShowcaseComponent,
+  NbCalendarCustomDayCellComponent,
+  NbCalendarFilterComponent,
+  NbCalendarMinMaxComponent,
+  NbCalendarSizeComponent,
+  NbCalendarKitFullCalendarShowcaseComponent,
+  NbCalendarKitMonthCellComponent,
   NbModalShowcaseComponent,
   NbToasterShowcaseComponent,
   NbCollapsibleWindowShowcaseComponent,

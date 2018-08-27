@@ -53,6 +53,7 @@ import { NbSearchEventComponent } from './search/search-event.component';
 import { NbTabsetShowcaseComponent } from './tabset/tabset-showcase.component';
 import { NbTabsetBadgeComponent } from './tabset/tabset-badge.component';
 import { NbTabsetWidthComponent } from './tabset/tabset-width.component';
+import { NbTabsetIconComponent } from './tabset/tabset-icon.component';
 import { NbUserShowcaseComponent } from './user/user-showcase.component';
 import { NbUserSizesComponent } from './user/user-sizes.component';
 import { NbBadgeShowcaseComponent } from './badge/badge-showcase.component';
@@ -82,10 +83,9 @@ import {
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetTestChild1Component,
-  NbRouteTabsetTestChild2Component,
-  NbRouteTabsetTestComponent,
-} from './tabset/route-tabset-test.component';
+  NbRouteTabsetShowcaseChild1Component, NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseComponent,
+} from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
 import { NbSearchCustomizedTestComponent } from './search/search-customized-test.component';
 import { NbSidebarTestComponent } from './sidebar/sidebar-test.component';
@@ -142,6 +142,7 @@ import { NbCardWithoutBodyComponent } from './card/card-without-body.component';
 import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-showcase.component';
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component';
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component';
+import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -149,6 +150,16 @@ import { NbInputShapesComponent } from './input/input-shapes.component';
 import { NbInputTypesComponent } from './input/input-types.component';
 import { NbInputFullWidthComponent } from './input/input-full-width.component';
 import { NbScrollWindowComponent } from './scroll/scroll-window.component';
+import { NbCalendarBoundingMonthComponent } from './calendar/calendar-bounding-month.component';
+import { NbCalendarShowcaseComponent } from './calendar/calendar-showcase.component';
+import { NbCalendarRangeShowcaseComponent } from './calendar/calendar-range-showcase.component';
+import { NbCalendarStartViewComponent } from './calendar/calendar-start-view.component';
+import { NbCalendarCustomDayCellShowcaseComponent } from './calendar/calendar-custom-day-cell-showcase.component';
+import { NbCalendarFilterComponent } from './calendar/calendar-filter.component';
+import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
+import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
+import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
+
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
 import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
 import { NbCollapsibleWindowShowcaseComponent } from './collapsible-window/collapsible-window-showcase.component';
@@ -294,6 +305,52 @@ export const routes: Routes = [
           {
             path: 'spinner-colors.component',
             component: NbSpinnerColorsComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar',
+        children: [
+          {
+            path: 'calendar-showcase.component',
+            component: NbCalendarShowcaseComponent,
+          },
+          {
+            path: 'calendar-bounding-month.component',
+            component: NbCalendarBoundingMonthComponent,
+          },
+          {
+            path: 'calendar-start-view.component',
+            component: NbCalendarStartViewComponent,
+          },
+          {
+            path: 'calendar-range-showcase.component',
+            component: NbCalendarRangeShowcaseComponent,
+          },
+          {
+            path: 'calendar-custom-day-cell-showcase.component',
+            component: NbCalendarCustomDayCellShowcaseComponent,
+          },
+          {
+            path: 'calendar-filter.component',
+            component: NbCalendarFilterComponent,
+          },
+          {
+            path: 'calendar-min-max.component',
+            component: NbCalendarMinMaxComponent,
+          },
+          {
+            path: 'calendar-size.component',
+            component: NbCalendarSizeComponent,
+          },
+        ],
+      },
+      {
+        path: 'calendar-kit',
+        children: [
+          {
+            path: 'calendar-kit-full-calendar.component',
+            component: NbCalendarKitFullCalendarShowcaseComponent,
           },
         ],
       },
@@ -475,8 +532,12 @@ export const routes: Routes = [
             component: NbTabsetWidthComponent,
           },
           {
-            path: 'route-tabset-test.component',
-            component: NbRouteTabsetTestComponent,
+            path: 'tabset-icon.component',
+            component: NbTabsetIconComponent,
+          },
+          {
+            path: 'route-tabset-showcase.component',
+            component: NbRouteTabsetShowcaseComponent,
             children: [
               {
                 path: '',
@@ -485,11 +546,11 @@ export const routes: Routes = [
               },
               {
                 path: 'tab1',
-                component: NbRouteTabsetTestChild1Component,
+                component: NbRouteTabsetShowcaseChild1Component,
               },
               {
                 path: 'tab2',
-                component: NbRouteTabsetTestChild2Component,
+                component: NbRouteTabsetShowcaseChild2Component,
               },
             ],
           },
@@ -644,6 +705,10 @@ export const routes: Routes = [
           {
             path: 'infinite-news-list.component',
             component: NbInfiniteNewsListComponent,
+          },
+          {
+            path: 'infinite-list-placeholders.component',
+            component: NbInfiniteListPlaceholdersComponent,
           },
         ],
       },
@@ -920,6 +985,10 @@ export const routes: Routes = [
   {
     path: 'oauth2-password',
     loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
+  },
+  {
+    path: 'smart-home',
+    loadChildren: './smart-home/app.module#NgxAppModule',
   },
   {
     path: '',

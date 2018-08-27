@@ -85,12 +85,12 @@ export class NbMenuItem4Component { }
   template: `
     <nb-layout>
       <nb-sidebar state="compacted">
-        <nb-menu id="menu-sidebar" tag="sidebarMenu" [items]="menuItems"></nb-menu>
+        <nb-menu id="menu-sidebar" tag="sidebarMenu" [items]="sidebarMenuItems"></nb-menu>
       </nb-sidebar>
       <nb-layout-column>
         <nb-card size="xxlarge">
           <nb-card-body>
-            <nb-menu id="menu-first" tag="firstMenu" [items]="menuItems" [autoCollapse]="true"></nb-menu>
+            <nb-menu id="menu-first" tag="firstMenu" [items]="firstMenuItems" [autoCollapse]="true"></nb-menu>
             <router-outlet></router-outlet>
             <button nbButton id="addBtn" (click)="addMenuItem()">Add</button>
             <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
@@ -98,7 +98,7 @@ export class NbMenuItem4Component { }
         </nb-card>
         <nb-card size="xxlarge">
           <nb-card-body>
-            <nb-menu id="menu-second" tag="SecondMenu" [items]="menuItems1"></nb-menu>
+            <nb-menu id="menu-second" tag="SecondMenu" [items]="secondMenuItems"></nb-menu>
             <router-outlet></router-outlet>
             <button nbButton id="addBtn" (click)="addMenuItem()">Add</button>
             <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
@@ -106,7 +106,7 @@ export class NbMenuItem4Component { }
         </nb-card>
         <nb-card size="xxlarge">
           <nb-card-body>
-            <nb-menu id="menu-third" tag="thirdMenu" [items]="menuItems2"></nb-menu>
+            <nb-menu id="menu-third" tag="thirdMenu" [items]="thirdMenuItems"></nb-menu>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>
@@ -114,7 +114,61 @@ export class NbMenuItem4Component { }
   `,
 })
 export class NbMenuTestComponent implements OnInit, OnDestroy {
-  menuItems = [
+  sidebarMenuItems = [
+    {
+      title: 'Menu Items',
+      group: true,
+      icon: 'nb-keypad',
+    },
+    {
+      title: 'Menu #1',
+      link: '/menu/menu-test.component/1',
+      icon: 'nb-keypad',
+      queryParams: { param: 1 },
+      fragment: '#fragment',
+    },
+    {
+      title: 'Menu #2',
+      link: '/menu/menu-test.component/2',
+      icon: 'nb-keypad',
+    },
+    {
+      title: 'Menu #3',
+      icon: 'nb-keypad',
+      children: [
+        {
+          title: 'Menu #3.1',
+          link: '/menu/menu-test.component/3/1',
+        },
+        {
+          title: 'Menu #3.2',
+          link: '/menu/menu-test.component/3/2',
+        },
+        {
+          title: 'Menu #3.3',
+          children: [
+            {
+              title: 'Menu #3.3.1',
+              link: '/menu/menu-test.component/3/3/1',
+            },
+            {
+              title: 'Menu #3.3.2',
+              link: '/menu/menu-test.component/3/3/2',
+              queryParams: { param: 2 },
+              fragment: '#fragment',
+              home: true,
+            },
+            {
+              title: '@nebular/theme',
+              target: '_blank',
+              url: 'https://github.com/akveo/ng2-admin',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+  firstMenuItems = [
     {
       title: 'Menu Items',
       group: true,
@@ -133,7 +187,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       icon: 'nb-keypad',
     },
   ];
-  menuItems1 = [
+  secondMenuItems = [
     {
       title: 'Menu items with fragments ',
       group: true,
@@ -156,7 +210,7 @@ export class NbMenuTestComponent implements OnInit, OnDestroy {
       icon: 'nb-keypad',
     },
   ];
-  menuItems2 = [
+  thirdMenuItems = [
     {
       title: 'Menu #1',
     },
