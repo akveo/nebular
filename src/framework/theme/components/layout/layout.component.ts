@@ -5,12 +5,11 @@
  */
 
 import {
-  AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
+  AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
@@ -250,7 +249,6 @@ export class NbLayoutFooterComponent {
   selector: 'nb-layout',
   styleUrls: ['./layout.component.scss'],
   template: `
-    <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
@@ -337,10 +335,8 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   constructor(
     protected themeService: NbThemeService,
     protected spinnerService: NbSpinnerService,
-    protected componentFactoryResolver: ComponentFactoryResolver,
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
-    protected router: Router,
     @Inject(NB_WINDOW) protected window,
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
@@ -422,25 +418,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeService.onAppendToTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { factory: ComponentFactory<any>, listener: Subject<any> }) => {
-        const componentRef = this.veryTopRef.createComponent(data.factory);
-        data.listener.next(componentRef);
-        data.listener.complete();
-      });
-
-    this.themeService.onClearLayoutTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { listener: Subject<any> }) => {
-        this.veryTopRef.clear();
-        data.listener.next(true);
-      });
-
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe(direction => {
@@ -455,7 +432,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.themeService.clearLayoutTop();
     this.alive = false;
   }
 

@@ -126,7 +126,6 @@ import { NbSidebarTwoTestComponent } from './sidebar/sidebar-two-test.component'
 import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.component';
 import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
-import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
@@ -262,7 +261,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbLayoutTestComponent,
   NbLayoutHeaderTestComponent,
   NbLayoutFooterTestComponent,
-  NbThemeDynamicTestComponent,
   NbThemeChangeTestComponent,
   NbThemeBreakpointTestComponent,
   NbSidebarTestComponent,
