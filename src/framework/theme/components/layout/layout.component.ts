@@ -20,6 +20,7 @@ import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
 import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
+import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -344,7 +345,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
+    protected overlayContainer: NbOverlayContainerAdapter,
   ) {
+    this.overlayContainer.setContainer(this.elementRef.nativeElement);
 
     this.themeService.onThemeChange()
       .pipe(
@@ -433,6 +436,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.overlayContainer.clearContainer();
   }
 
   @HostListener('window:scroll', ['$event'])
