@@ -64,18 +64,22 @@ export class NbAdjustableConnectedPositionStrategy
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
 
-  protected appliedPositions: { [key: string]: NbConnectedPosition };
+  protected appliedPositions: { key: NbPosition, connectedPosition: NbConnectedPosition }[];
 
   readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
     map((positionChange: NbConnectedOverlayPositionChange) => positionChange.connectionPair),
     map((connectionPair: NbConnectionPositionPair) => {
-      return Object.entries(this.appliedPositions)
-        .filter(([name, position]) => position === connectionPair)
-        .map(([name]) => name as NbPosition)[0];
+      return this.appliedPositions.find(({ connectedPosition }) => {
+        return this.comparePositions(connectedPosition, connectionPair);
+      }).key;
     }),
   );
 
   attach(overlayRef: NbOverlayRef) {
+    /**
+     * We have to apply positions before attach because super.attach() validates positions and crashes app
+     * if no positions provided.
+     * */
     this.applyPositions();
     super.attach(overlayRef);
   }
@@ -100,6 +104,12 @@ export class NbAdjustableConnectedPositionStrategy
     return this;
   }
 
+  protected applyPositions() {
+    const positions: NbPosition[] = this.createPositions();
+    this.persistChosenPositions(positions);
+    this.withPositions(this.appliedPositions.map(({ connectedPosition }) => connectedPosition));
+  }
+
   protected createPositions(): NbPosition[] {
     switch (this._adjustment) {
       case NbAdjustment.NOOP:
@@ -111,17 +121,11 @@ export class NbAdjustableConnectedPositionStrategy
     }
   }
 
-  protected applyPositions() {
-    const positions: NbPosition[] = this.createPositions();
-    this.persistChosenPositions(positions);
-    this.withPositions(positions.map(position => this.appliedPositions[position]));
-  }
-
   protected persistChosenPositions(positions: NbPosition[]) {
-    this.appliedPositions = positions.reduce<{ [key: string]: NbConnectedPosition }>((acc, position) => {
-      acc[position] = POSITIONS[position](this._offset);
-      return acc;
-    }, {});
+    this.appliedPositions = positions.map(position => ({
+      key: position,
+      connectedPosition: POSITIONS[position](this._offset),
+    }));
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
@@ -129,6 +133,13 @@ export class NbAdjustableConnectedPositionStrategy
     const startIndex = positions.indexOf(this._position);
     const start = cpy.splice(startIndex);
     return start.concat(...cpy);
+  }
+
+  protected comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
+    return p1.originX === p2.originX
+      && p1.originY === p2.originY
+      && p1.overlayX === p2.overlayX
+      && p1.overlayY === p2.overlayY;
   }
 }
 
