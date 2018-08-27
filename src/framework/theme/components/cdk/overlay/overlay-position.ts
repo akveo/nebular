@@ -14,7 +14,7 @@ import {
   NbOverlayRef,
   NbPlatform,
   NbPositionStrategy,
-} from '../mapping';
+} from './mapping';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 
 

@@ -1,2 +1,2 @@
-export * from './mapping';
+export * from './overlay/mapping';
 export * from './overlay';

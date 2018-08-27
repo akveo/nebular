@@ -1,6 +1,6 @@
 import { ComponentRef, TemplateRef, Type } from '@angular/core';
 
-import { NbComponentPortal, NbComponentType, NbOverlayRef } from '../mapping';
+import { NbComponentPortal, NbComponentType, NbOverlayRef } from './mapping';
 
 
 export type NbOverlayContent = Type<any> | TemplateRef<any> | string;

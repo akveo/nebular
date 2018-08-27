@@ -1,5 +1,5 @@
-import { Directive, Injectable, NgModule } from '@angular/core';
-import { CdkPortal, ComponentPortal, Portal, PortalModule } from '@angular/cdk/portal';
+import { Directive, Injectable, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
+import { CdkPortal, ComponentPortal, Portal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import {
   ComponentType,
   ConnectedOverlayPositionChange,
@@ -34,6 +34,12 @@ export class NbOverlayPositionBuilder extends OverlayPositionBuilder {
 }
 
 export class NbComponentPortal<T = any> extends ComponentPortal<T> {
+}
+
+export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
+  constructor(template: TemplateRef<T>, viewContainerRef?: ViewContainerRef, context?: T) {
+    super(template, viewContainerRef, context);
+  }
 }
 
 export class NbOverlayContainer extends OverlayContainer {

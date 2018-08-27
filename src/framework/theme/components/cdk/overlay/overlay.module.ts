@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../../shared/shared.module';
-import { NbCdkMappingModule } from '../mapping';
+import { NbCdkMappingModule } from './mapping';
 import { NbAdapterModule } from '../adapter/adapter.module';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbOverlayContainerComponent } from './overlay-container';
