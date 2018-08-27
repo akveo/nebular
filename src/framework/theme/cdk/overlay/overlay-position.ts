@@ -53,6 +53,13 @@ const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPo
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
 
 
+function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
+  return p1.originX === p2.originX
+    && p1.originY === p2.originY
+    && p1.overlayX === p2.overlayX
+    && p1.overlayY === p2.overlayY;
+}
+
 /**
  * The main idea of the adjustable connected strategy is to provide predefined set of positions for your overlay.
  * You have to provide adjustment and appropriate strategy will be chosen in runtime.
@@ -70,7 +77,7 @@ export class NbAdjustableConnectedPositionStrategy
     map((positionChange: NbConnectedOverlayPositionChange) => positionChange.connectionPair),
     map((connectionPair: NbConnectionPositionPair) => {
       return this.appliedPositions.find(({ connectedPosition }) => {
-        return this.comparePositions(connectedPosition, connectionPair);
+        return comparePositions(connectedPosition, connectionPair);
       }).key;
     }),
   );
@@ -133,13 +140,6 @@ export class NbAdjustableConnectedPositionStrategy
     const startIndex = positions.indexOf(this._position);
     const start = cpy.splice(startIndex);
     return start.concat(...cpy);
-  }
-
-  protected comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
-    return p1.originX === p2.originX
-      && p1.originY === p2.originY
-      && p1.overlayX === p2.overlayX
-      && p1.overlayY === p2.overlayY;
   }
 }
 
