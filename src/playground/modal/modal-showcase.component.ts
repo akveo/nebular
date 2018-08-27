@@ -68,6 +68,6 @@ export class NbModalShowcaseComponent {
   }
 
   open() {
-    this.modalService.show(NbModalComponent, { hasBackdrop: true, closeOnBackdropClick: true });
+    this.modalService.show(NbModalComponent);
   }
 }
