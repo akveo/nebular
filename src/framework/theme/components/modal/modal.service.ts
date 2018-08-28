@@ -10,6 +10,8 @@ import {
   NbOverlayService,
   NbPositionBuilderService,
   NbScrollStrategy,
+  NbFocusTrap,
+  NbFocusTrapFactoryService,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
 
@@ -21,27 +23,32 @@ export class NbModalConfig {
   /**
    * If true than overlay will render backdrop under a modal.
    * */
-  hasBackdrop?: boolean = true;
+  hasBackdrop: boolean = true;
 
   /**
    * Class that'll be assigned to the backdrop element.
    * */
-  backdropClass?: string = 'overlay-backdrop';
+  backdropClass: string = 'overlay-backdrop';
 
   /**
    * If true then mouse clicks by backdrop will close a modal.
    * */
-  closeOnBackdropClick?: boolean = true;
+  closeOnBackdropClick: boolean = true;
 
   /**
    * If true then escape press will close a modal.
    * */
-  closeOnEsc?: boolean = true;
+  closeOnEsc: boolean = true;
 
   /**
    * Disables scroll on content under modal if true and does nothing otherwise.
    * */
-  hasScroll?: boolean = false;
+  hasScroll: boolean = false;
+
+  /**
+   * Focuses modal automatically after open if true.
+   * */
+  autoFocus: boolean = true;
 
   constructor(config: Partial<NbModalConfig>) {
     Object.assign(this, config);
@@ -53,14 +60,20 @@ export class NbModalRef<T> {
   readonly backdropClick$: Observable<MouseEvent>;
 
   protected alive: boolean = true;
+  protected focusTrap: NbFocusTrap;
 
   constructor(protected overlayRef: NbOverlayRef,
               protected componentRef: ComponentRef<T>,
               protected config: NbModalConfig,
-              protected document: Document) {
+              protected document: Document,
+              protected focusTrapFactory: NbFocusTrapFactoryService) {
     this.content = componentRef.instance;
     this.backdropClick$ = overlayRef.backdropClick();
-    componentRef.location.nativeElement.focus();
+    this.focusTrap = focusTrapFactory.create(componentRef.location.nativeElement);
+
+    if (config.autoFocus) {
+      this.focusTrap.focusInitialElement();
+    }
 
     if (config.closeOnBackdropClick) {
       this.subscribeOnBackdropClick();
@@ -73,6 +86,7 @@ export class NbModalRef<T> {
 
   hide() {
     this.alive = false;
+    this.focusTrap.restoreFocus();
     this.overlayRef.detach();
     this.overlayRef.dispose();
   }
@@ -97,7 +111,8 @@ export class NbModalRef<T> {
 export class NbModalService {
   constructor(protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              @Inject(NB_DOCUMENT) protected document) {
+              @Inject(NB_DOCUMENT) protected document,
+              protected focusTrapFactory: NbFocusTrapFactoryService) {
   }
 
   show<T>(component: NbComponentType<T>, userConfig: Partial<NbModalConfig> = {}): NbModalRef<T> {
@@ -105,7 +120,7 @@ export class NbModalService {
     const overlayRef = this.createOverlay(config);
     const componentRef = overlayRef.attach(new NbComponentPortal(component));
 
-    return new NbModalRef(overlayRef, componentRef, config, this.document);
+    return new NbModalRef(overlayRef, componentRef, config, this.document, this.focusTrapFactory);
   }
 
   protected createOverlay(config: NbModalConfig): NbOverlayRef {

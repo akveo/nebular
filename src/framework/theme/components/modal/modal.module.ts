@@ -7,11 +7,12 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
+import { NbA11yModule } from '../cdk';
 import { NbModalService } from './modal.service';
 
 
 @NgModule({
-  imports: [NbSharedModule],
+  imports: [NbSharedModule, NbA11yModule],
   providers: [NbModalService],
 })
 export class NbModalModule {
