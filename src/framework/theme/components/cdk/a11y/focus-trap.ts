@@ -25,6 +25,10 @@ export class NbFocusTrap extends FocusTrap {
     this.destroy();
   }
 
+  blurPreviouslyFocusedElement() {
+    this.previouslyFocusedElement.blur();
+  }
+
   protected savePreviouslyFocusedElement() {
     this.previouslyFocusedElement = this.document.activeElement as HTMLElement;
   }

@@ -303,6 +303,15 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Modal',
+        icon: 'modal.svg',
+        source: [
+          'NbModalService',
+          'NbModalRef',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

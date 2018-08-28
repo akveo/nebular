@@ -202,7 +202,13 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
-import { NbModalComponent, NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbModalComponent } from './modal/modal.component';
+import { NbModalHasBackdropComponent } from './modal/modal-has-backdrop.component';
+import { NbModalBackdropClickComponent } from './modal/modal-backdrop-click.component';
+import { NbModalEscComponent } from './modal/modal-esc.component';
+import { NbModalScrollComponent } from './modal/modal-scroll.component';
+import { NbModalAutoFocusComponent } from './modal/modal-auto-focus.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -394,6 +400,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbOverlayShowcaseComponent,
   NbModalComponent,
   NbModalShowcaseComponent,
+  NbModalHasBackdropComponent,
+  NbModalBackdropClickComponent,
+  NbModalEscComponent,
+  NbModalScrollComponent,
+  NbModalAutoFocusComponent,
 ];
 
 @NgModule({

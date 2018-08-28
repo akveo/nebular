@@ -161,6 +161,11 @@ import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
+import { NbModalHasBackdropComponent } from './modal/modal-has-backdrop.component';
+import { NbModalBackdropClickComponent } from './modal/modal-backdrop-click.component';
+import { NbModalEscComponent } from './modal/modal-esc.component';
+import { NbModalScrollComponent } from './modal/modal-scroll.component';
+import { NbModalAutoFocusComponent } from './modal/modal-auto-focus.component';
 
 
 export const routes: Routes = [
@@ -728,6 +733,26 @@ export const routes: Routes = [
           {
             path: 'modal-showcase.component',
             component: NbModalShowcaseComponent,
+          },
+          {
+            path: 'modal-has-backdrop.component',
+            component: NbModalHasBackdropComponent,
+          },
+          {
+            path: 'modal-backdrop-click.component',
+            component: NbModalBackdropClickComponent,
+          },
+          {
+            path: 'modal-esc.component',
+            component: NbModalEscComponent,
+          },
+          {
+            path: 'modal-scroll.component',
+            component: NbModalScrollComponent,
+          },
+          {
+            path: 'modal-auto-focus.component',
+            component: NbModalAutoFocusComponent,
           },
         ],
       },
