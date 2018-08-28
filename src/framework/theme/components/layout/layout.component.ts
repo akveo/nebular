@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef, Optional,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -345,9 +345,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
-    protected overlayContainer: NbOverlayContainerAdapter,
+    @Optional() protected overlayContainer: NbOverlayContainerAdapter,
   ) {
-    this.overlayContainer.setContainer(this.elementRef.nativeElement);
+    this.registerAsOverlayContainer();
 
     this.themeService.onThemeChange()
       .pipe(
@@ -436,7 +436,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
-    this.overlayContainer.clearContainer();
+    this.unregisterAsOverlayContainer();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -504,6 +504,18 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
 
     return { x, y };
+  }
+
+  protected registerAsOverlayContainer() {
+    if (this.overlayContainer.setContainer) {
+      this.overlayContainer.setContainer(this.elementRef.nativeElement);
+    }
+  }
+
+  protected unregisterAsOverlayContainer() {
+    if (this.overlayContainer.clearContainer) {
+      this.overlayContainer.clearContainer();
+    }
   }
 
   private scroll(x: number = null, y: number = null) {
