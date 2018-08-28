@@ -160,6 +160,7 @@ import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
 
 
 export const routes: Routes = [
@@ -718,6 +719,15 @@ export const routes: Routes = [
           {
             path: 'overlay-showcase.component',
             component: NbOverlayShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'modal',
+        children: [
+          {
+            path: 'modal-showcase.component',
+            component: NbModalShowcaseComponent,
           },
         ],
       },
