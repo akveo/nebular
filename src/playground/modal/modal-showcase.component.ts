@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NbModalService } from '@nebular/theme/components/modal/modal.service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NbModalRef, NbModalService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-modal',
@@ -44,30 +44,29 @@ import { NbModalService } from '@nebular/theme/components/modal/modal.service';
         est. Vivamus interdum, sapien id maximus porta, leo nibh pretium erat, vitae condimentum dolor magna eget
         nunc.
       </nb-card-body>
+      <nb-card-footer>
+        <button nbButton hero status="primary" (click)="dismiss.emit()">Dismiss Modal</button>
+      </nb-card-footer>
     </nb-card>
   `,
 })
 export class NbModalComponent {
+  @Output() dismiss: EventEmitter<void> = new EventEmitter();
 }
 
 @Component({
   selector: 'nb-modal-showcase',
-  template: `
-    <button class="btn btn-primary" (click)="open()">Open Modal</button>
-  `,
-  styles: [
-      `
-      /deep/ nb-layout-column {
-        height: 80vw;
-      }
-    `,
-  ],
+  template: '<button class="btn btn-primary" (click)="open()">Open Modal</button>',
+  styles: [` /deep/ nb-layout-column {
+    height: 80vw;
+  } `],
 })
 export class NbModalShowcaseComponent {
   constructor(private modalService: NbModalService) {
   }
 
   open() {
-    this.modalService.show(NbModalComponent);
+    const ref: NbModalRef<NbModalComponent> = this.modalService.show(NbModalComponent);
+    ref.content.dismiss.subscribe(() => ref.hide());
   }
 }

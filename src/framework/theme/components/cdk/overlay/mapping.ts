@@ -13,6 +13,7 @@ import {
   OverlayPositionBuilder,
   OverlayRef,
   PositionStrategy,
+  ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
@@ -56,6 +57,7 @@ export type NbPositionStrategy = PositionStrategy;
 export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
+export type NbScrollStrategy = ScrollStrategy;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 

@@ -8,7 +8,7 @@ import {
   NbGlobalPositionStrategy,
   NbOverlayRef,
   NbOverlayService,
-  NbPositionBuilderService,
+  NbPositionBuilderService, NbScrollStrategy,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
 
@@ -18,6 +18,7 @@ export class NbModalConfig {
   backdropClass?: string = 'overlay-backdrop';
   closeOnBackdropClick?: boolean = true;
   closeOnEsc?: boolean = true;
+  hasScroll?: boolean = false;
 
   // TODO do we need it???
   context?: Object;
@@ -88,8 +89,10 @@ export class NbModalService {
 
   protected createOverlay(config: NbModalConfig): NbOverlayRef {
     const positionStrategy = this.createPositionStrategy();
+    const scrollStrategy = this.createScrollStrategy(config.hasScroll);
     return this.overlay.create({
       positionStrategy,
+      scrollStrategy,
       hasBackdrop: config.hasBackdrop,
       backdropClass: config.backdropClass,
     });
@@ -100,5 +103,13 @@ export class NbModalService {
       .global()
       .centerVertically()
       .centerHorizontally();
+  }
+
+  protected createScrollStrategy(hasScroll: boolean): NbScrollStrategy {
+    if (hasScroll) {
+      return this.overlay.scrollStrategies.noop();
+    } else {
+      return this.overlay.scrollStrategies.block();
+    }
   }
 }
