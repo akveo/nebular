@@ -76,6 +76,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
    * */
   @Input('nbContextMenuPlacement')
   position: NbPosition = NbPosition.BOTTOM;
+
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
    * Set this property to any falsy value if you want to disable automatically adjustment.
@@ -83,11 +84,22 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
    * */
   @Input('nbContextMenuAdjustment')
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+
   /**
    * Set NbMenu tag, which helps identify menu when working with NbMenuService.
    * */
   @Input('nbContextMenuTag')
   tag: string;
+
+  /**
+   * Basic menu items, will be passed to the internal NbMenuComponent.
+   * */
+  @Input('nbContextMenu')
+  set _items(items: NbMenuItem[]) {
+    this.validateItems(items);
+    this.items = items;
+  };
+
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -101,15 +113,6 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
               private positionBuilder: NbPositionBuilderService,
               private overlay: NbOverlayService) {
   }
-
-  /**
-   * Basic menu items, will be passed to the internal NbMenuComponent.
-   * */
-  @Input('nbContextMenu')
-  set _items(items: NbMenuItem[]) {
-    this.validateItems(items);
-    this.items = items;
-  };
 
   ngAfterViewInit() {
     this.positionStrategy = this.createPositionStrategy();

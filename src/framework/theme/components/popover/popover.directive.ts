@@ -82,12 +82,6 @@ import { NbPopoverComponent } from './popover.component';
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
-
-/*
-* TODO
-* We're keeping inputs names for compatibility reasons.
-* Rename them before release for breaking changes.
-*/
 @Directive({ selector: '[nbPopover]' })
 export class NbPopoverDirective implements AfterViewInit, OnDestroy {
 
