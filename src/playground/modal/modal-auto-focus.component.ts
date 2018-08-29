@@ -36,7 +36,6 @@ export class NbModalAutoFocusComponent {
   }
 
   protected open(autoFocus: boolean) {
-    const ref = this.modalService.show(NbModalComponent, { autoFocus });
-    ref.content.dismiss.subscribe(() => ref.hide());
+    this.modalService.show(NbModalComponent, { autoFocus });
   }
 }

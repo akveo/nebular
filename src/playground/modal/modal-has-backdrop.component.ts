@@ -36,7 +36,6 @@ export class NbModalHasBackdropComponent {
   }
 
   protected open(hasBackdrop: boolean) {
-    const ref = this.modalService.show(NbModalComponent, { hasBackdrop });
-    ref.content.dismiss.subscribe(() => ref.hide());
+    this.modalService.show(NbModalComponent, { hasBackdrop });
   }
 }

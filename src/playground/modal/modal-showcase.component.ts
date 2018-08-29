@@ -15,7 +15,6 @@ export class NbModalShowcaseComponent {
   }
 
   open() {
-    const ref = this.modalService.show(NbModalComponent);
-    ref.content.dismiss.subscribe(() => ref.hide());
+    this.modalService.show(NbModalComponent);
   }
 }

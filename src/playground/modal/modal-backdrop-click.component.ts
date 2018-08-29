@@ -36,7 +36,6 @@ export class NbModalBackdropClickComponent {
   }
 
   protected open(closeOnBackdropClick: boolean) {
-    const ref = this.modalService.show(NbModalComponent, { closeOnBackdropClick });
-    ref.content.dismiss.subscribe(() => ref.hide());
+    this.modalService.show(NbModalComponent, { closeOnBackdropClick });
   }
 }

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { NbModalRef } from '@nebular/theme';
 
 @Component({
   selector: 'nb-modal',
@@ -44,11 +45,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
         nunc.
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton hero status="primary" (click)="dismiss.emit()">Dismiss Modal</button>
+        <button nbButton hero status="primary" (click)="dismiss()">Dismiss Modal</button>
       </nb-card-footer>
     </nb-card>
   `,
 })
 export class NbModalComponent {
-  @Output() dismiss: EventEmitter<void> = new EventEmitter();
+  constructor(protected ref: NbModalRef<NbModalComponent>) {
+  }
+
+  dismiss() {
+    this.ref.hide();
+  }
 }

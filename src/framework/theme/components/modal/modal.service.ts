@@ -1,15 +1,16 @@
-import { ComponentRef, Inject, Injectable } from '@angular/core';
+import { ComponentRef, Inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { fromEvent as observableFromEvent, Observable } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
-  NbComponentType,
   NbFocusTrap,
   NbFocusTrapFactoryService,
   NbGlobalPositionStrategy,
   NbOverlayRef,
   NbOverlayService,
+  NbPortal,
+  NbPortalInjector,
   NbPositionBuilderService,
   NbScrollStrategy,
 } from '../cdk';
@@ -50,6 +51,8 @@ export class NbModalConfig {
    * */
   autoFocus: boolean = true;
 
+  viewContainerRef: ViewContainerRef;
+
   constructor(config: Partial<NbModalConfig>) {
     Object.assign(this, config);
   }
@@ -62,40 +65,29 @@ export class NbModalConfig {
  * `backdropClick$` streams click events on the backdrop of the modal.
  * */
 export class NbModalRef<T> {
-  /**
-   * Rendered component ref.
-   * */
-  readonly content: T;
 
   /**
    * Stream of backdrop click events.
    * */
   readonly backdropClick$: Observable<MouseEvent>;
-
   protected alive: boolean = true;
   protected focusTrap: NbFocusTrap;
+  protected componentRef: ComponentRef<T>;
 
   constructor(protected overlayRef: NbOverlayRef,
-              protected componentRef: ComponentRef<T>,
               protected config: NbModalConfig,
               protected document: Document,
               protected focusTrapFactory: NbFocusTrapFactoryService) {
-    this.content = componentRef.instance;
-    this.backdropClick$ = overlayRef.backdropClick();
-    this.focusTrap = focusTrapFactory.create(componentRef.location.nativeElement);
+    this.backdropClick$ = this.overlayRef.backdropClick();
+  }
 
-    if (config.autoFocus) {
-      this.focusTrap.blurPreviouslyFocusedElement();
-      this.focusTrap.focusInitialElement();
-    }
+  set content(componentRef: ComponentRef<T>) {
+    this.componentRef = componentRef;
+    this.init();
+  }
 
-    if (config.closeOnBackdropClick) {
-      this.subscribeOnBackdropClick();
-    }
-
-    if (config.closeOnEsc) {
-      this.subscribeOnEscapePress();
-    }
+  get componentInstance(): T {
+    return this.componentRef.instance;
   }
 
   /**
@@ -106,6 +98,23 @@ export class NbModalRef<T> {
     this.focusTrap.restoreFocus();
     this.overlayRef.detach();
     this.overlayRef.dispose();
+  }
+
+  protected init() {
+    this.focusTrap = this.focusTrapFactory.create(this.componentRef.location.nativeElement);
+
+    if (this.config.closeOnBackdropClick) {
+      this.subscribeOnBackdropClick();
+    }
+
+    if (this.config.closeOnEsc) {
+      this.subscribeOnEscapePress();
+    }
+
+    if (this.config.autoFocus) {
+      this.focusTrap.blurPreviouslyFocusedElement();
+      this.focusTrap.focusInitialElement();
+    }
   }
 
   protected subscribeOnBackdropClick() {
@@ -174,10 +183,11 @@ export class NbModalRef<T> {
  * */
 @Injectable()
 export class NbModalService {
-  constructor(protected positionBuilder: NbPositionBuilderService,
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              @Inject(NB_DOCUMENT) protected document,
-              protected focusTrapFactory: NbFocusTrapFactoryService) {
+              protected focusTrapFactory: NbFocusTrapFactoryService,
+              protected injector: Injector) {
   }
 
   // TODO add capability render templateRefs
@@ -185,12 +195,17 @@ export class NbModalService {
   /**
    * Opens new instance of the modal, may receive optional config.
    * */
-  show<T>(component: NbComponentType<T>, userConfig: Partial<NbModalConfig> = {}): NbModalRef<T> {
+  show<T>(component: Type<T>, userConfig: Partial<NbModalConfig> = {}): NbModalRef<T> {
     const config = new NbModalConfig(userConfig);
     const overlayRef = this.createOverlay(config);
-    const componentRef = overlayRef.attach(new NbComponentPortal(component));
 
-    return new NbModalRef(overlayRef, componentRef, config, this.document, this.focusTrapFactory);
+    const modalRef = new NbModalRef<T>(overlayRef, config, this.document, this.focusTrapFactory);
+
+    const portal = this.createPortal(config, modalRef, component);
+
+    modalRef.content = overlayRef.attach(portal);
+
+    return modalRef;
   }
 
   protected createOverlay(config: NbModalConfig): NbOverlayRef {
@@ -218,5 +233,27 @@ export class NbModalService {
     } else {
       return this.overlay.scrollStrategies.block();
     }
+  }
+
+  /**
+   * We're creating portal with custom injector provided through config or using global injector.
+   * This approach provides us capability inject `NbModalRef` in modal component.
+   * */
+  protected createPortal<T>(config: NbModalConfig, modalRef: NbModalRef<T>, component: Type<T>): NbPortal {
+    const injector: Injector = this.createInjector(config);
+    const portalInjector: Injector = this.createPortalInjector(injector, modalRef);
+    return this.createPortalWithInjector(component, portalInjector);
+  }
+
+  protected createInjector(config: NbModalConfig): Injector {
+    return config.viewContainerRef && config.viewContainerRef.injector || this.injector;
+  }
+
+  protected createPortalInjector<T>(injector: Injector, modalRef: NbModalRef<T>): Injector {
+    return new NbPortalInjector(injector, new WeakMap([[NbModalRef, modalRef]]));
+  }
+
+  protected createPortalWithInjector<T>(component: Type<T>, injector: Injector): NbPortal {
+    return new NbComponentPortal(component, null, injector);
   }
 }
