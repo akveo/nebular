@@ -209,6 +209,7 @@ import { NbModalBackdropClickComponent } from './modal/modal-backdrop-click.comp
 import { NbModalEscComponent } from './modal/modal-esc.component';
 import { NbModalScrollComponent } from './modal/modal-scroll.component';
 import { NbModalAutoFocusComponent } from './modal/modal-auto-focus.component';
+import { NbModalNamePromptComponent, NbModalResultComponent } from './modal/modal-result.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -405,6 +406,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbModalEscComponent,
   NbModalScrollComponent,
   NbModalAutoFocusComponent,
+  NbModalResultComponent,
+  NbModalNamePromptComponent,
 ];
 
 @NgModule({
@@ -420,7 +423,10 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbPlaygroundBaseComponent,
     ...NB_EXAMPLE_COMPONENTS,
   ],
-  entryComponents: [NbModalComponent],
+  entryComponents: [
+    NbModalComponent,
+    NbModalNamePromptComponent,
+  ],
 })
 export class NbPlaygroundModule {
 }

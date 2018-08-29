@@ -45,6 +45,11 @@ import { NbModalRef } from './modal-ref';
  * }
  * ```
  *
+ * Modal may return result through `NbModalRef`. Calling component can receive this result with `onClose`
+ * stream of `NbModalRef`.
+ *
+ * @stacked-example(Result, modal/modal-result.component)
+ *
  * ### Configuration
  *
  * As we mentioned above, `open` method of the `NbModalService` may receive optional configuration options.

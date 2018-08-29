@@ -166,6 +166,7 @@ import { NbModalBackdropClickComponent } from './modal/modal-backdrop-click.comp
 import { NbModalEscComponent } from './modal/modal-esc.component';
 import { NbModalScrollComponent } from './modal/modal-scroll.component';
 import { NbModalAutoFocusComponent } from './modal/modal-auto-focus.component';
+import { NbModalResultComponent } from './modal/modal-result.component';
 
 
 export const routes: Routes = [
@@ -754,6 +755,10 @@ export const routes: Routes = [
             path: 'modal-auto-focus.component',
             component: NbModalAutoFocusComponent,
           },
+          {
+            path: 'modal-result.component',
+            component: NbModalResultComponent,
+          }
         ],
       },
     ],
