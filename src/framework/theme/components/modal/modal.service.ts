@@ -21,19 +21,33 @@ import { NbModalRef } from './modal-ref';
  *
  * @stacked-example(Showcase, modal/modal-showcase.component)
  *
- * A new modal is opened by calling the `show` method with a component to be loaded and an optional configuration.
- * `show` method will return `NbModalRef` that can be used for the further manipulations.
+ * A new modal is opened by calling the `open` method with a component to be loaded and an optional configuration.
+ * `open` method will return `NbModalRef` that can be used for the further manipulations.
  *
  * ```ts
- * const modalRef = this.modalService.show(MyModalComponent, { ... });
+ * const modalRef = this.modalService.open(MyModalComponent, { ... });
  * ```
  *
  * `NbModalRef` gives capability access reference to the rendered modal component,
  * destroy modal and some other options described below.
  *
+ * Also you can inject `NbModalRef` in modal component.
+ *
+ * ```ts
+ * this.modalService.open(MyModalComponent, { ... });
+ *
+ * // my-modal.component.ts
+ * constructor(protected modalRef: NbModalRef) {
+ * }
+ *
+ * close() {
+ *   this.modalRef.close();
+ * }
+ * ```
+ *
  * ### Configuration
  *
- * As we mentioned above, `show` method of the `NbModalService` may receive optional configuration options.
+ * As we mentioned above, `open` method of the `NbModalService` may receive optional configuration options.
  * This config may contain the following:
  *
  * `hasBackdrop` - determines is service have to render backdrop under the modal.
@@ -73,12 +87,10 @@ export class NbModalService {
               protected injector: Injector) {
   }
 
-  // TODO add capability render templateRefs
-
   /**
    * Opens new instance of the modal, may receive optional config.
    * */
-  show<T>(component: Type<T>, userConfig: Partial<NbModalConfig> = {}): NbModalRef<T> {
+  open<T>(component: Type<T>, userConfig: Partial<NbModalConfig> = {}): NbModalRef<T> {
     const config = new NbModalConfig(userConfig);
     const overlayRef = this.createOverlay(config);
 
@@ -125,7 +137,7 @@ export class NbModalService {
   protected createPortal<T>(config: NbModalConfig, modalRef: NbModalRef<T>, component: Type<T>): NbPortal {
     const injector: Injector = this.createInjector(config);
     const portalInjector: Injector = this.createPortalInjector(injector, modalRef);
-    return this.createPortalWithInjector(component, portalInjector);
+    return this.createPortalWithInjector(config, component, portalInjector);
   }
 
   protected createInjector(config: NbModalConfig): Injector {
@@ -136,7 +148,7 @@ export class NbModalService {
     return new NbPortalInjector(injector, new WeakMap([[NbModalRef, modalRef]]));
   }
 
-  protected createPortalWithInjector<T>(component: Type<T>, injector: Injector): NbPortal {
-    return new NbComponentPortal(component, null, injector);
+  protected createPortalWithInjector<T>(config: NbModalConfig, component: Type<T>, injector: Injector): NbPortal {
+    return new NbComponentPortal(component, config.viewContainerRef, injector);
   }
 }

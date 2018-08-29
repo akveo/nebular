@@ -44,7 +44,7 @@ describe('modal-service', () => {
   });
 
   it('should render modal', () => {
-    const ref = modalService.show(NbTestModalComponent);
+    const ref = modalService.open(NbTestModalComponent);
     expect(ref.content).toBeTruthy();
   });
 
@@ -71,13 +71,13 @@ describe('modal-ref', () => {
   it('should provide rendered modal component through content property', () => {
   });
 
-  it('should hide modal', () => {
+  it('should close modal', () => {
   });
 
-  it('should fire backdropClick$ if backdrop was clicked', () => {
+  it('should fire onBackdropClick if backdrop was clicked', () => {
   });
 
-  it('should not fire backdropClick$ if backdrop wasn\'t clicked', () => {
+  it('should not fire onBackdropClick if backdrop wasn\'t clicked', () => {
   });
 
   it('should close on backdrop click if closeOnBackdropClick is true', () => {

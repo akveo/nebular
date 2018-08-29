@@ -36,6 +36,6 @@ export class NbModalHasBackdropComponent {
   }
 
   protected open(hasBackdrop: boolean) {
-    this.modalService.show(NbModalComponent, { hasBackdrop });
+    this.modalService.open(NbModalComponent, { hasBackdrop });
   }
 }

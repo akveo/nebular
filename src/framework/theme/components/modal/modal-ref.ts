@@ -1,5 +1,5 @@
 import { ComponentRef } from '@angular/core';
-import { fromEvent as observableFromEvent, Observable } from 'rxjs';
+import { fromEvent as observableFromEvent, Observable, Subject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { NbFocusTrap, NbFocusTrapFactoryService, NbOverlayRef } from '../cdk';
@@ -8,25 +8,27 @@ import { NbModalConfig } from './modal-config';
 
 /**
  * The `NbModalRef` helps to manipulate modal after it was created.
- * The modal can be dismissed by using `hide` method of the modalRef.
+ * The modal can be dismissed by using `close` method of the modalRef.
  * You can access rendered component as `content` property of the modalRef.
- * `backdropClick$` streams click events on the backdrop of the modal.
+ * `onBackdropClick` streams click events on the backdrop of the modal.
  * */
 export class NbModalRef<T> {
 
   /**
    * Stream of backdrop click events.
    * */
-  readonly backdropClick$: Observable<MouseEvent>;
+  readonly onBackdropClick: Observable<MouseEvent>;
   protected alive: boolean = true;
   protected focusTrap: NbFocusTrap;
   protected componentRef: ComponentRef<T>;
+  protected onClose$: Subject<any> = new Subject();
+  readonly onClose: Observable<any> = this.onClose$.asObservable();
 
   constructor(protected overlayRef: NbOverlayRef,
               protected config: NbModalConfig,
               protected document: Document,
               protected focusTrapFactory: NbFocusTrapFactoryService) {
-    this.backdropClick$ = this.overlayRef.backdropClick();
+    this.onBackdropClick = this.overlayRef.backdropClick();
   }
 
   set content(componentRef: ComponentRef<T>) {
@@ -41,11 +43,12 @@ export class NbModalRef<T> {
   /**
    * Hides modal.
    * */
-  hide() {
+  close(res?: any) {
     this.alive = false;
     this.focusTrap.restoreFocus();
     this.overlayRef.detach();
     this.overlayRef.dispose();
+    this.onClose$.next(res);
   }
 
   protected init() {
@@ -68,7 +71,7 @@ export class NbModalRef<T> {
   protected subscribeOnBackdropClick() {
     this.overlayRef.backdropClick()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
+      .subscribe(() => this.close());
   }
 
   protected subscribeOnEscapePress() {
@@ -77,6 +80,6 @@ export class NbModalRef<T> {
         takeWhile(() => this.alive),
         filter((event: KeyboardEvent) => event.keyCode === 27),
       )
-      .subscribe(() => this.hide());
+      .subscribe(() => this.close());
   }
 }

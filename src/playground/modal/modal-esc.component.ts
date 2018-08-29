@@ -36,6 +36,6 @@ export class NbModalEscComponent {
   }
 
   protected open(closeOnEsc: boolean) {
-    this.modalService.show(NbModalComponent, { closeOnEsc });
+    this.modalService.open(NbModalComponent, { closeOnEsc });
   }
 }

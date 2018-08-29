@@ -36,6 +36,6 @@ export class NbModalScrollComponent {
   }
 
   protected open(hasScroll: boolean) {
-    this.modalService.show(NbModalComponent, { hasScroll });
+    this.modalService.open(NbModalComponent, { hasScroll });
   }
 }

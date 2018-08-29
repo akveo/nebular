@@ -55,6 +55,6 @@ export class NbModalComponent {
   }
 
   dismiss() {
-    this.ref.hide();
+    this.ref.close();
   }
 }

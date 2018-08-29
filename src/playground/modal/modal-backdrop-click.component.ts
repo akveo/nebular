@@ -36,6 +36,6 @@ export class NbModalBackdropClickComponent {
   }
 
   protected open(closeOnBackdropClick: boolean) {
-    this.modalService.show(NbModalComponent, { closeOnBackdropClick });
+    this.modalService.open(NbModalComponent, { closeOnBackdropClick });
   }
 }

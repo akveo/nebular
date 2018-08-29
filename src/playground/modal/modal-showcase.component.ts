@@ -15,6 +15,6 @@ export class NbModalShowcaseComponent {
   }
 
   open() {
-    this.modalService.show(NbModalComponent);
+    this.modalService.open(NbModalComponent);
   }
 }
