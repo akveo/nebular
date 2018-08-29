@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef, Optional,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -345,7 +345,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
-    @Optional() protected overlayContainer: NbOverlayContainerAdapter,
+    protected overlayContainer: NbOverlayContainerAdapter,
   ) {
     this.registerAsOverlayContainer();
 
