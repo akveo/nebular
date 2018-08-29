@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NbModalComponent } from './modal.component';
-import { NbModalService } from '@nebular/theme';
+import { NbDialogComponent } from './dialog.component';
+import { NbDialogService } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-modal-backdrop-click',
+  selector: 'nb-dialog-backdrop-click',
   template: `
     <div class="btn-group btn-divided-group btn-outline-divided-group">
       <button nbButton hero (click)="openWithBackdropClick()">Open with backdrop click close</button>
@@ -23,8 +23,8 @@ import { NbModalService } from '@nebular/theme';
   `],
 })
 
-export class NbModalBackdropClickComponent {
-  constructor(private modalService: NbModalService) {
+export class NbDialogBackdropClickComponent {
+  constructor(private dialogService: NbDialogService) {
   }
 
   openWithBackdropClick() {
@@ -36,6 +36,6 @@ export class NbModalBackdropClickComponent {
   }
 
   protected open(closeOnBackdropClick: boolean) {
-    this.modalService.open(NbModalComponent, { closeOnBackdropClick });
+    this.dialogService.open(NbDialogComponent, { closeOnBackdropClick });
   }
 }

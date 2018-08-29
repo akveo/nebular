@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbModalRef, NbModalService } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-name-prompt',
@@ -16,21 +16,21 @@ import { NbModalRef, NbModalService } from '@nebular/theme';
     </nb-card>
   `,
 })
-export class NbModalNamePromptComponent {
-  constructor(protected modalRef: NbModalRef<NbModalNamePromptComponent>) {
+export class NbDialogNamePromptComponent {
+  constructor(protected dialogRef: NbDialogRef<NbDialogNamePromptComponent>) {
   }
 
   cancel() {
-    this.modalRef.close();
+    this.dialogRef.close();
   }
 
   submit(name) {
-    this.modalRef.close(name);
+    this.dialogRef.close(name);
   }
 }
 
 @Component({
-  selector: 'nb-modal-result',
+  selector: 'nb-dialog-result',
   template: `
     <button nbButton hero status="primary" (click)="open()">Enter Name</button>
     <br>
@@ -43,14 +43,14 @@ export class NbModalNamePromptComponent {
     height: 80vw;
   } `],
 })
-export class NbModalResultComponent {
+export class NbDialogResultComponent {
   names: string[] = [];
 
-  constructor(private modalService: NbModalService) {
+  constructor(private dialogService: NbDialogService) {
   }
 
   open() {
-    this.modalService.open(NbModalNamePromptComponent)
+    this.dialogService.open(NbDialogNamePromptComponent)
       .onClose.subscribe(name => name && this.names.push(name));
   }
 }

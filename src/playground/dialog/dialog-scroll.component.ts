@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NbModalComponent } from './modal.component';
-import { NbModalService } from '@nebular/theme';
+import { NbDialogComponent } from './dialog.component';
+import { NbDialogService } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-modal-scroll',
+  selector: 'nb-dialog-scroll',
   template: `
     <div class="btn-group btn-divided-group btn-outline-divided-group">
       <button nbButton hero (click)="openWithScroll()">Open with scroll</button>
@@ -23,8 +23,8 @@ import { NbModalService } from '@nebular/theme';
   `],
 })
 
-export class NbModalScrollComponent {
-  constructor(private modalService: NbModalService) {
+export class NbDialogScrollComponent {
+  constructor(private dialogService: NbDialogService) {
   }
 
   openWithScroll() {
@@ -36,6 +36,6 @@ export class NbModalScrollComponent {
   }
 
   protected open(hasScroll: boolean) {
-    this.modalService.open(NbModalComponent, { hasScroll });
+    this.dialogService.open(NbDialogComponent, { hasScroll });
   }
 }

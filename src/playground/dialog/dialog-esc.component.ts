@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NbModalComponent } from './modal.component';
-import { NbModalService } from '@nebular/theme';
+import { NbDialogComponent } from './dialog.component';
+import { NbDialogService } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-modal-esc',
+  selector: 'nb-dialog-esc',
   template: `
     <div class="btn-group btn-divided-group btn-outline-divided-group">
       <button nbButton hero (click)="openWithEscClose()">Open with escape close</button>
@@ -23,8 +23,8 @@ import { NbModalService } from '@nebular/theme';
   `],
 })
 
-export class NbModalEscComponent {
-  constructor(private modalService: NbModalService) {
+export class NbDialogEscComponent {
+  constructor(private dialogService: NbDialogService) {
   }
 
   openWithEscClose() {
@@ -36,6 +36,6 @@ export class NbModalEscComponent {
   }
 
   protected open(closeOnEsc: boolean) {
-    this.modalService.open(NbModalComponent, { closeOnEsc });
+    this.dialogService.open(NbDialogComponent, { closeOnEsc });
   }
 }

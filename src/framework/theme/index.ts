@@ -71,4 +71,4 @@ export * from './components/list/infinite-list.directive';
 export * from './components/input/input.directive';
 export * from './components/input/input.module';
 export * from './components/cdk/overlay';
-export * from './components/modal';
+export * from './components/dialog';

@@ -304,11 +304,11 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Modal',
-        icon: 'modal.svg',
+        name: 'Dialog',
+        icon: 'dialog.svg',
         source: [
-          'NbModalService',
-          'NbModalRef',
+          'NbDialogService',
+          'NbDialogRef',
         ],
       },
       {

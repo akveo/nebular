@@ -8,12 +8,12 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbA11yModule } from '../cdk';
-import { NbModalService } from './modal.service';
+import { NbDialogService } from './dialog.service';
 
 
 @NgModule({
   imports: [NbSharedModule, NbA11yModule],
-  providers: [NbModalService],
+  providers: [NbDialogService],
 })
-export class NbModalModule {
+export class NbDialogModule {
 }

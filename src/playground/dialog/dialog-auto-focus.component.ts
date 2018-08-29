@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NbModalComponent } from './modal.component';
-import { NbModalService } from '@nebular/theme';
+import { NbDialogComponent } from './dialog.component';
+import { NbDialogService } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-modal-auto-focus',
+  selector: 'nb-dialog-auto-focus',
   template: `
     <div class="btn-group btn-divided-group btn-outline-divided-group">
       <button nbButton hero (click)="openWithAutoFocus()">Open with auto focus</button>
@@ -23,8 +23,8 @@ import { NbModalService } from '@nebular/theme';
   `],
 })
 
-export class NbModalAutoFocusComponent {
-  constructor(private modalService: NbModalService) {
+export class NbDialogAutoFocusComponent {
+  constructor(private dialogService: NbDialogService) {
   }
 
   openWithAutoFocus() {
@@ -36,6 +36,6 @@ export class NbModalAutoFocusComponent {
   }
 
   protected open(autoFocus: boolean) {
-    this.modalService.open(NbModalComponent, { autoFocus });
+    this.dialogService.open(NbDialogComponent, { autoFocus });
   }
 }

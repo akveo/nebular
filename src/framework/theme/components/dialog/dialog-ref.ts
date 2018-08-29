@@ -3,16 +3,16 @@ import { fromEvent as observableFromEvent, Observable, Subject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { NbFocusTrap, NbFocusTrapFactoryService, NbOverlayRef } from '../cdk';
-import { NbModalConfig } from './modal-config';
+import { NbDialogConfig } from './dialog-config';
 
 
 /**
- * The `NbModalRef` helps to manipulate modal after it was created.
- * The modal can be dismissed by using `close` method of the modalRef.
- * You can access rendered component as `content` property of the modalRef.
- * `onBackdropClick` streams click events on the backdrop of the modal.
+ * The `NbDialogRef` helps to manipulate dialog after it was created.
+ * The dialog can be dismissed by using `close` method of the dialogRef.
+ * You can access rendered component as `content` property of the dialogRef.
+ * `onBackdropClick` streams click events on the backdrop of the dialog.
  * */
-export class NbModalRef<T> {
+export class NbDialogRef<T> {
 
   /**
    * Stream of backdrop click events.
@@ -25,7 +25,7 @@ export class NbModalRef<T> {
   readonly onClose: Observable<any> = this.onClose$.asObservable();
 
   constructor(protected overlayRef: NbOverlayRef,
-              protected config: NbModalConfig,
+              protected config: NbDialogConfig,
               protected document: Document,
               protected focusTrapFactory: NbFocusTrapFactoryService) {
     this.onBackdropClick = this.overlayRef.backdropClick();
@@ -41,7 +41,7 @@ export class NbModalRef<T> {
   }
 
   /**
-   * Hides modal.
+   * Hides dialog.
    * */
   close(res?: any) {
     this.alive = false;

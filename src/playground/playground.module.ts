@@ -36,7 +36,7 @@ import {
   NbButtonModule,
   NbInputModule,
   NbOverlayModule,
-  NbModalModule,
+  NbDialogModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -202,14 +202,14 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
-import { NbModalShowcaseComponent } from './modal/modal-showcase.component';
-import { NbModalComponent } from './modal/modal.component';
-import { NbModalHasBackdropComponent } from './modal/modal-has-backdrop.component';
-import { NbModalBackdropClickComponent } from './modal/modal-backdrop-click.component';
-import { NbModalEscComponent } from './modal/modal-esc.component';
-import { NbModalScrollComponent } from './modal/modal-scroll.component';
-import { NbModalAutoFocusComponent } from './modal/modal-auto-focus.component';
-import { NbModalNamePromptComponent, NbModalResultComponent } from './modal/modal-result.component';
+import { NbDialogShowcaseComponent } from './dialog/dialog-showcase.component';
+import { NbDialogComponent } from './dialog/dialog.component';
+import { NbDialogHasBackdropComponent } from './dialog/dialog-has-backdrop.component';
+import { NbDialogBackdropClickComponent } from './dialog/dialog-backdrop-click.component';
+import { NbDialogEscComponent } from './dialog/dialog-esc.component';
+import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
+import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
+import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -244,7 +244,7 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
-  NbModalModule,
+  NbDialogModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -399,15 +399,15 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
-  NbModalComponent,
-  NbModalShowcaseComponent,
-  NbModalHasBackdropComponent,
-  NbModalBackdropClickComponent,
-  NbModalEscComponent,
-  NbModalScrollComponent,
-  NbModalAutoFocusComponent,
-  NbModalResultComponent,
-  NbModalNamePromptComponent,
+  NbDialogComponent,
+  NbDialogShowcaseComponent,
+  NbDialogHasBackdropComponent,
+  NbDialogBackdropClickComponent,
+  NbDialogEscComponent,
+  NbDialogScrollComponent,
+  NbDialogAutoFocusComponent,
+  NbDialogResultComponent,
+  NbDialogNamePromptComponent,
 ];
 
 @NgModule({
@@ -424,8 +424,8 @@ export const NB_EXAMPLE_COMPONENTS = [
     ...NB_EXAMPLE_COMPONENTS,
   ],
   entryComponents: [
-    NbModalComponent,
-    NbModalNamePromptComponent,
+    NbDialogComponent,
+    NbDialogNamePromptComponent,
   ],
 })
 export class NbPlaygroundModule {

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NbModalRef } from '@nebular/theme';
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-modal',
+  selector: 'nb-dialog',
   template: `
     <nb-card [style.width.px]="600" [style.height.px]="500">
-      <nb-card-header>Lorem Ipsum Modal Showcase</nb-card-header>
+      <nb-card-header>Lorem Ipsum Dialog Showcase</nb-card-header>
       <nb-card-body>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis tincidunt tincidunt.
         Vestibulum vulputate maximus massa vel tristique. Suspendisse potenti. Duis aliquet purus sed dictum dictum.
@@ -45,13 +45,13 @@ import { NbModalRef } from '@nebular/theme';
         nunc.
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton hero status="primary" (click)="dismiss()">Dismiss Modal</button>
+        <button nbButton hero status="primary" (click)="dismiss()">Dismiss Dialog</button>
       </nb-card-footer>
     </nb-card>
   `,
 })
-export class NbModalComponent {
-  constructor(protected ref: NbModalRef<NbModalComponent>) {
+export class NbDialogComponent {
+  constructor(protected ref: NbDialogRef<NbDialogComponent>) {
   }
 
   dismiss() {
