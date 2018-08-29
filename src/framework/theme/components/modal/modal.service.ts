@@ -1,10 +1,7 @@
-import { ComponentRef, Inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
-import { fromEvent as observableFromEvent, Observable } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { Inject, Injectable, Injector, Type } from '@angular/core';
 
 import {
   NbComponentPortal,
-  NbFocusTrap,
   NbFocusTrapFactoryService,
   NbGlobalPositionStrategy,
   NbOverlayRef,
@@ -15,123 +12,9 @@ import {
   NbScrollStrategy,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbModalConfig } from './modal-config';
+import { NbModalRef } from './modal-ref';
 
-
-/**
- * Describes all available options that may be passed to the NbModalService.
- * */
-export class NbModalConfig {
-  /**
-   * If true than overlay will render backdrop under a modal.
-   * */
-  hasBackdrop: boolean = true;
-
-  /**
-   * Class that'll be assigned to the backdrop element.
-   * */
-  backdropClass: string = 'overlay-backdrop';
-
-  /**
-   * If true then mouse clicks by backdrop will close a modal.
-   * */
-  closeOnBackdropClick: boolean = true;
-
-  /**
-   * If true then escape press will close a modal.
-   * */
-  closeOnEsc: boolean = true;
-
-  /**
-   * Disables scroll on content under modal if true and does nothing otherwise.
-   * */
-  hasScroll: boolean = false;
-
-  /**
-   * Focuses modal automatically after open if true.
-   * */
-  autoFocus: boolean = true;
-
-  viewContainerRef: ViewContainerRef;
-
-  constructor(config: Partial<NbModalConfig>) {
-    Object.assign(this, config);
-  }
-}
-
-/**
- * The `NbModalRef` helps to manipulate modal after it was created.
- * The modal can be dismissed by using `hide` method of the modalRef.
- * You can access rendered component as `content` property of the modalRef.
- * `backdropClick$` streams click events on the backdrop of the modal.
- * */
-export class NbModalRef<T> {
-
-  /**
-   * Stream of backdrop click events.
-   * */
-  readonly backdropClick$: Observable<MouseEvent>;
-  protected alive: boolean = true;
-  protected focusTrap: NbFocusTrap;
-  protected componentRef: ComponentRef<T>;
-
-  constructor(protected overlayRef: NbOverlayRef,
-              protected config: NbModalConfig,
-              protected document: Document,
-              protected focusTrapFactory: NbFocusTrapFactoryService) {
-    this.backdropClick$ = this.overlayRef.backdropClick();
-  }
-
-  set content(componentRef: ComponentRef<T>) {
-    this.componentRef = componentRef;
-    this.init();
-  }
-
-  get componentInstance(): T {
-    return this.componentRef.instance;
-  }
-
-  /**
-   * Hides modal.
-   * */
-  hide() {
-    this.alive = false;
-    this.focusTrap.restoreFocus();
-    this.overlayRef.detach();
-    this.overlayRef.dispose();
-  }
-
-  protected init() {
-    this.focusTrap = this.focusTrapFactory.create(this.componentRef.location.nativeElement);
-
-    if (this.config.closeOnBackdropClick) {
-      this.subscribeOnBackdropClick();
-    }
-
-    if (this.config.closeOnEsc) {
-      this.subscribeOnEscapePress();
-    }
-
-    if (this.config.autoFocus) {
-      this.focusTrap.blurPreviouslyFocusedElement();
-      this.focusTrap.focusInitialElement();
-    }
-  }
-
-  protected subscribeOnBackdropClick() {
-    this.overlayRef.backdropClick()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
-  }
-
-  protected subscribeOnEscapePress() {
-    observableFromEvent(this.document, 'keyup')
-      .pipe(
-        takeWhile(() => this.alive),
-        filter((event: KeyboardEvent) => event.keyCode === 27),
-      )
-      .subscribe(() => this.hide());
-  }
-}
 
 /**
  * The `NbModalService` helps to open modals.
