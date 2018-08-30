@@ -39,7 +39,7 @@ export class NbAuthService {
    */
   isAuthenticated(): Observable<boolean> {
     return this.getToken()
-      .pipe(map((token: NbAuthToken) => token.isValid()));
+      .pipe(map((token: NbAuthToken) => !token.getValue() ? false : token.isValid()));
   }
 
   /**
@@ -51,7 +51,7 @@ export class NbAuthService {
     return this.getToken()
       .pipe(
         switchMap(token => {
-        if (!token.isValid()) {
+        if (token.getValue() && !token.isValid()) {
           return this.refreshToken(token.getOwnerStrategyName(), token)
             .pipe(
               switchMap(res => {
