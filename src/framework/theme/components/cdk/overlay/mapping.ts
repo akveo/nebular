@@ -1,5 +1,13 @@
 import { Directive, Injectable, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CdkPortal, ComponentPortal, Portal, PortalInjector, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import {
+  CdkPortal,
+  CdkPortalOutlet,
+  ComponentPortal,
+  Portal,
+  PortalInjector,
+  PortalModule,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import {
   ComponentType,
   ConnectedOverlayPositionChange,
@@ -20,6 +28,10 @@ import { Platform } from '@angular/cdk/platform';
 
 @Directive({ selector: '[nbPortal]' })
 export class NbPortalDirective extends CdkPortal {
+}
+
+@Directive({ selector: '[nbPortalOutlet]' })
+export class NbPortalOutletDirective extends CdkPortalOutlet {
 }
 
 @Injectable()
@@ -79,8 +91,9 @@ const CDK_PROVIDERS = [
   exports: [
     ...CDK_MODULES,
     NbPortalDirective,
+    NbPortalOutletDirective,
   ],
-  declarations: [NbPortalDirective],
+  declarations: [NbPortalDirective, NbPortalOutletDirective],
   providers: [...CDK_PROVIDERS],
 })
 export class NbCdkMappingModule {

@@ -1,4 +1,5 @@
-import { Inject, Injectable, Injector, Type } from '@angular/core';
+import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { fromEvent as observableFromEvent } from 'rxjs';
 
 import {
   NbComponentPortal,
@@ -6,14 +7,16 @@ import {
   NbGlobalPositionStrategy,
   NbOverlayRef,
   NbOverlayService,
-  NbPortal,
   NbPortalInjector,
   NbPositionBuilderService,
   NbScrollStrategy,
+  NbTemplatePortal,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';
+import { NbDialogContainerComponent } from './dialog-container';
+import { filter } from 'rxjs/operators';
 
 
 /**
@@ -95,15 +98,14 @@ export class NbDialogService {
   /**
    * Opens new instance of the dialog, may receive optional config.
    * */
-  open<T>(component: Type<T>, userConfig: Partial<NbDialogConfig> = {}): NbDialogRef<T> {
+  open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig> = {}): NbDialogRef<T> {
     const config = new NbDialogConfig(userConfig);
     const overlayRef = this.createOverlay(config);
-
     const dialogRef = new NbDialogRef<T>(overlayRef, config, this.document, this.focusTrapFactory);
+    const container = this.createContainer(config, overlayRef);
+    this.createContent(config, content, container, dialogRef);
 
-    const portal = this.createPortal(config, dialogRef, component);
-
-    dialogRef.content = overlayRef.attach(portal);
+    this.registerCloseListeners(config, overlayRef, dialogRef);
 
     return dialogRef;
   }
@@ -135,25 +137,57 @@ export class NbDialogService {
     }
   }
 
+  protected createContainer(config: NbDialogConfig, overlayRef: NbOverlayRef): NbDialogContainerComponent {
+    const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
+    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
+    const containerRef = overlayRef.attach(containerPortal);
+    return containerRef.instance;
+  }
+
+  protected createContent<T>(config: NbDialogConfig,
+                             content: Type<T> | TemplateRef<T>,
+                             container: NbDialogContainerComponent,
+                             dialogRef: NbDialogRef<T>) {
+    if (content instanceof TemplateRef) {
+      const portal = this.createTemplatePortal(config, content, dialogRef);
+      container.attachTemplatePortal(portal);
+    } else {
+      const portal = this.createComponentPortal(config, content, dialogRef);
+      dialogRef.content = container.attachComponentPortal(portal);
+    }
+  }
+
+  protected createTemplatePortal<T>(config: NbDialogConfig,
+                                    content: TemplateRef<T>,
+                                    dialogRef: NbDialogRef<T>): NbTemplatePortal {
+    return new NbTemplatePortal(content, null, <any>{ $implicit: dialogRef });
+  }
+
   /**
    * We're creating portal with custom injector provided through config or using global injector.
    * This approach provides us capability inject `NbDialogRef` in dialog component.
    * */
-  protected createPortal<T>(config: NbDialogConfig, dialogRef: NbDialogRef<T>, component: Type<T>): NbPortal {
-    const injector: Injector = this.createInjector(config);
-    const portalInjector: Injector = this.createPortalInjector(injector, dialogRef);
-    return this.createPortalWithInjector(config, component, portalInjector);
+  protected createComponentPortal<T>(config: NbDialogConfig,
+                                     content: Type<T>,
+                                     dialogRef: NbDialogRef<T>): NbComponentPortal {
+    const injector = this.createInjector(config);
+    const portalInjector = new NbPortalInjector(injector, new WeakMap([[NbDialogRef, dialogRef]]));
+    return new NbComponentPortal(content, config.viewContainerRef, portalInjector);
   }
 
   protected createInjector(config: NbDialogConfig): Injector {
     return config.viewContainerRef && config.viewContainerRef.injector || this.injector;
   }
 
-  protected createPortalInjector<T>(injector: Injector, dialogRef: NbDialogRef<T>): Injector {
-    return new NbPortalInjector(injector, new WeakMap([[NbDialogRef, dialogRef]]));
-  }
+  protected registerCloseListeners<T>(config: NbDialogConfig, overlayRef: NbOverlayRef, dialogRef: NbDialogRef<T>) {
+    if (config.closeOnBackdropClick) {
+      overlayRef.backdropClick().subscribe(() => dialogRef.close());
+    }
 
-  protected createPortalWithInjector<T>(config: NbDialogConfig, component: Type<T>, injector: Injector): NbPortal {
-    return new NbComponentPortal(component, config.viewContainerRef, injector);
+    if (config.closeOnEsc) {
+      observableFromEvent(this.document, 'keyup')
+        .pipe(filter((event: KeyboardEvent) => event.keyCode === 27))
+        .subscribe(() => dialogRef.close());
+    }
   }
 }

@@ -1,6 +1,5 @@
 import { ComponentRef } from '@angular/core';
-import { fromEvent as observableFromEvent, Observable, Subject } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import { NbFocusTrap, NbFocusTrapFactoryService, NbOverlayRef } from '../cdk';
 import { NbDialogConfig } from './dialog-config';
@@ -33,7 +32,6 @@ export class NbDialogRef<T> {
 
   set content(componentRef: ComponentRef<T>) {
     this.componentRef = componentRef;
-    this.init();
   }
 
   get componentInstance(): T {
@@ -45,41 +43,8 @@ export class NbDialogRef<T> {
    * */
   close(res?: any) {
     this.alive = false;
-    this.focusTrap.restoreFocus();
     this.overlayRef.detach();
     this.overlayRef.dispose();
     this.onClose$.next(res);
-  }
-
-  protected init() {
-    this.focusTrap = this.focusTrapFactory.create(this.componentRef.location.nativeElement);
-
-    if (this.config.closeOnBackdropClick) {
-      this.subscribeOnBackdropClick();
-    }
-
-    if (this.config.closeOnEsc) {
-      this.subscribeOnEscapePress();
-    }
-
-    if (this.config.autoFocus) {
-      this.focusTrap.blurPreviouslyFocusedElement();
-      this.focusTrap.focusInitialElement();
-    }
-  }
-
-  protected subscribeOnBackdropClick() {
-    this.overlayRef.backdropClick()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.close());
-  }
-
-  protected subscribeOnEscapePress() {
-    observableFromEvent(this.document, 'keyup')
-      .pipe(
-        takeWhile(() => this.alive),
-        filter((event: KeyboardEvent) => event.keyCode === 27),
-      )
-      .subscribe(() => this.close());
   }
 }

@@ -4,7 +4,7 @@ import { ViewContainerRef } from '@angular/core';
 /**
  * Describes all available options that may be passed to the NbDialogService.
  * */
-export class NbDialogConfig {
+export class NbDialogConfig<D = any> {
   /**
    * If true than overlay will render backdrop under a dialog.
    * */
@@ -42,6 +42,8 @@ export class NbDialogConfig {
    * content will be rendered.
    */
   viewContainerRef: ViewContainerRef;
+
+  data: D;
 
   constructor(config: Partial<NbDialogConfig>) {
     Object.assign(this, config);

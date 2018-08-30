@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { NbDialogComponent } from './dialog.component';
 
 
 @Component({
   selector: 'nb-dialog-showcase',
-  template: '<button class="btn btn-primary" (click)="open()">Open Dialog</button>',
+  template: `
+    <ng-template #dialog let-ref>
+      <nb-card>
+        <nb-card-body>
+          <button nbButton (click)="ref.close()">Hide me</button>
+        </nb-card-body>
+      </nb-card>
+    </ng-template>
+    <button class="btn btn-primary" (click)="open()">Open Dialog Component</button>
+    <button class="btn btn-primary" (click)="openTemplate(dialog)">Open Dialog Template</button>
+  `,
   styles: [` /deep/ nb-layout-column {
     height: 80vw;
   } `],
@@ -16,5 +26,9 @@ export class NbDialogShowcaseComponent {
 
   open() {
     this.dialogService.open(NbDialogComponent);
+  }
+
+  openTemplate(template: TemplateRef<any>) {
+    this.dialogService.open(template);
   }
 }

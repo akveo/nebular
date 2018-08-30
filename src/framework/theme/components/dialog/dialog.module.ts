@@ -7,13 +7,16 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbA11yModule } from '../cdk';
+import { NbA11yModule, NbOverlayModule } from '../cdk';
 import { NbDialogService } from './dialog.service';
+import { NbDialogContainerComponent } from './dialog-container';
 
 
 @NgModule({
-  imports: [NbSharedModule, NbA11yModule],
+  imports: [NbSharedModule, NbA11yModule, NbOverlayModule],
   providers: [NbDialogService],
+  declarations: [NbDialogContainerComponent],
+  entryComponents: [NbDialogContainerComponent],
 })
 export class NbDialogModule {
 }
