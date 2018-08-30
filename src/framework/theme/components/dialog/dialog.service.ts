@@ -159,6 +159,7 @@ export class NbDialogService {
     const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
     const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
     const containerRef = overlayRef.attach(containerPortal);
+    containerRef.changeDetectorRef.detectChanges();
     return containerRef.instance;
   }
 
@@ -171,10 +172,10 @@ export class NbDialogService {
       container.attachTemplatePortal(portal);
     } else {
       const portal = this.createComponentPortal(config, content, dialogRef);
-      dialogRef.componentInstance = container.attachComponentPortal(portal).instance;
+      dialogRef.componentRef = container.attachComponentPortal(portal);
 
       if (config.context) {
-        Object.assign(dialogRef.componentInstance, { ...config.context })
+        Object.assign(dialogRef.componentRef.instance, { ...config.context })
       }
     }
   }

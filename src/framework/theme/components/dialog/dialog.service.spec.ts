@@ -1,13 +1,14 @@
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayContainerAdapter, NbOverlayModule, NbOverlayService } from '../cdk';
 import { NbDialogService } from './dialog.service';
 import { NbDialogModule } from './dialog.module';
 import { NbThemeModule } from '../../theme.module';
+import { NB_DOCUMENT } from '../../theme.options';
 
 
-@Component({ selector: 'nb-test-dialog', template: '' })
+@Component({ selector: 'nb-test-dialog', template: '<button class="test-focusable-button"></button>' })
 class NbTestDialogComponent {
 }
 
@@ -20,7 +21,13 @@ class NbTestDialogModule {
 
 
 describe('dialog-service', () => {
-  let dialogService: NbDialogService;
+  let dialog: NbDialogService;
+  let overlayContainerService: NbOverlayContainerAdapter;
+  let overlayContainer: HTMLElement;
+  let overlayService: NbOverlayService;
+  let document: Document;
+
+  const queryBackdrop = () => overlayContainer.querySelector('.overlay-backdrop');
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,72 +39,109 @@ describe('dialog-service', () => {
       ],
     });
 
-    dialogService = TestBed.get(NbDialogService);
+    dialog = TestBed.get(NbDialogService);
+    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
+    document = TestBed.get(NB_DOCUMENT);
+    overlayService = TestBed.get(NbOverlayService);
   });
 
   beforeEach(() => {
-    // set container
+    overlayContainer = document.createElement('div');
+    overlayContainerService.setContainer(overlayContainer);
   });
 
   afterAll(() => {
-    // clear container
+    overlayContainerService.clearContainer();
   });
 
   it('should render dialog', () => {
-    const ref = dialogService.open(NbTestDialogComponent);
-    expect(ref.content).toBeTruthy();
+    const ref = dialog.open(NbTestDialogComponent);
+    expect(ref.componentRef).toBeTruthy();
+    expect(ref.componentRef.instance instanceof NbTestDialogComponent).toBeTruthy();
   });
 
-  it('should apply config defaults', () => {
-  });
-
-  it('should render with backdrop if hasBackdrop is true', () => {
-  });
-
-  it('should render without backdrop if hasBackdrop is false', () => {
+  it('should assign default backdropClass', () => {
+    dialog.open(NbTestDialogComponent);
+    expect(queryBackdrop()).toBeTruthy();
   });
 
   it('should assign backdropClass if provided', () => {
+    dialog.open(NbTestDialogComponent, { backdropClass: 'nb-overlay-test-backdrop-class' });
+    expect(overlayContainer.querySelector('.nb-overlay-test-backdrop-class')).toBeTruthy();
+  });
+
+
+  it('should render with backdrop if hasBackdrop is true', () => {
+    dialog.open(NbTestDialogComponent, { hasBackdrop: true });
+    expect(queryBackdrop()).toBeTruthy();
+  });
+
+  it('should render without backdrop if hasBackdrop is false', () => {
+    dialog.open(NbTestDialogComponent, { hasBackdrop: false });
+    expect(queryBackdrop()).toBeFalsy();
   });
 
   it('should leave capability scroll content under dialog if hasScroll is true', () => {
+    const noopSpy = spyOn(overlayService.scrollStrategies, 'noop');
+    const blockSpy = spyOn(overlayService.scrollStrategies, 'block');
+
+    dialog.open(NbTestDialogComponent, { hasScroll: true });
+
+    expect(noopSpy).toHaveBeenCalledTimes(1);
+    expect(blockSpy).toHaveBeenCalledTimes(0);
   });
 
   it('should disable scroll under dialog if hasScroll is false', () => {
-  });
-});
+    const noopSpy = spyOn(overlayService.scrollStrategies, 'noop');
+    const blockSpy = spyOn(overlayService.scrollStrategies, 'block');
 
-describe('dialog-ref', () => {
-  it('should provide rendered dialog component through content property', () => {
+    dialog.open(NbTestDialogComponent, { hasScroll: false });
+
+    expect(noopSpy).toHaveBeenCalledTimes(0);
+    expect(blockSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should close dialog', () => {
-  });
+  it('should fire onBackdropClick if backdrop was clicked', done => {
+    const ref = dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
+    const backdrop = queryBackdrop();
 
-  it('should fire onBackdropClick if backdrop was clicked', () => {
+    ref.onBackdropClick.subscribe(e => {
+      expect(e.target).toBe(backdrop);
+      done();
+    });
+
+    backdrop.dispatchEvent(new Event('click'));
   });
 
   it('should not fire onBackdropClick if backdrop wasn\'t clicked', () => {
+    const ref = dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
+    const spy = jasmine.createSpy();
+    ref.onBackdropClick.subscribe(spy);
+    expect(spy).toHaveBeenCalledTimes(0);
   });
 
   it('should close on backdrop click if closeOnBackdropClick is true', () => {
+    dialog.open(NbTestDialogComponent, { closeOnBackdropClick: true });
+    queryBackdrop().dispatchEvent(new Event('click'));
+    expect(queryBackdrop()).toBeFalsy();
   });
 
   it('should not close on backdrop click if closeOnBackdropClick is false', () => {
+    dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
+    queryBackdrop().dispatchEvent(new Event('click'));
+    expect(queryBackdrop()).toBeTruthy();
   });
 
   it('should close on escape press if closeOnEsc is true', () => {
+    dialog.open(NbTestDialogComponent, { closeOnEsc: true });
+    document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    expect(queryBackdrop()).toBeFalsy();
   });
 
   it('should not close on escape press if closeOnEsc is false', () => {
-  });
-
-  it('should automatically focus first focusable element of the dialog if autoFocus is true', () => {
-  });
-
-  it('should blur focused element if autoFocus is true and no focusable element in the dialog', () => {
-  });
-
-  it('should leave focus on the focused element if autoFocus is false', () => {
+    dialog.open(NbTestDialogComponent, { closeOnEsc: false });
+    document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    expect(queryBackdrop()).toBeTruthy();
   });
 });
+

@@ -12,7 +12,7 @@ import { NbOverlayRef } from '../cdk';
  * */
 export class NbDialogRef<T> {
 
-  componentInstance: ComponentRef<T>;
+  componentRef: ComponentRef<T>;
 
   /**
    * Stream of backdrop click events.
