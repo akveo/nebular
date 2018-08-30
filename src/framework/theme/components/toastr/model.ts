@@ -29,6 +29,7 @@ export class NbToastConfig {
   status: NbToastStatus = NbToastStatus.DEFAULT;
   duration: number = 3000;
   destroyByClick: boolean = true;
+  preventDuplicates: boolean = false;
 
   constructor(config: Partial<NbToastConfig>) {
     Object.assign(this, config);

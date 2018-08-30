@@ -33,7 +33,7 @@ export class NbToastrShowcaseComponent {
     this.index += 1;
     this.toastrService.show(
       status || 'Success',
-      `Toast ${this.index}`,
+      `Toast`,
       { position, status });
   }
 }

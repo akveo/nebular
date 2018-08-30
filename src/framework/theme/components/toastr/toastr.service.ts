@@ -8,11 +8,16 @@ import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model'
 
 export class NbToastContainer {
   protected toasts: NbToast[] = [];
+  protected prevToast: NbToast;
 
   constructor(protected position: NbToastPosition, protected containerRef: ComponentRef<NbToastrContainerComponent>) {
   }
 
   attach(toast: NbToast) {
+    if (toast.config.preventDuplicates && this.isDuplicate(toast)) {
+      return;
+    }
+
     if (NB_TOAST_TOP_POSITIONS.includes(toast.config.position)) {
       this.attachToTop(toast);
     } else {
@@ -22,6 +27,14 @@ export class NbToastContainer {
     if (toast.config.duration) {
       this.setDestroyTimeout(toast);
     }
+
+    this.prevToast = toast;
+  }
+
+  protected isDuplicate(toast: NbToast): boolean {
+    return this.prevToast
+      && this.prevToast.message === toast.message
+      && this.prevToast.title === toast.title;
   }
 
   protected attachToTop(toast: NbToast) {
