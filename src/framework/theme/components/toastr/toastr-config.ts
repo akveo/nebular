@@ -7,7 +7,7 @@ export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toas
 
 export class NbToastrConfig {
   position: NbToastPosition = NbToastPosition.TOP_END;
-  status: NbToastStatus = NbToastStatus.DEFAULT;
+  status: NbToastStatus = NbToastStatus.PRIMARY;
   duration: number = 3000;
   destroyByClick: boolean = true;
   preventDuplicates: boolean = false;

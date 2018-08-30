@@ -160,6 +160,7 @@ import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
 
 
 export const routes: Routes = [
@@ -727,6 +728,10 @@ export const routes: Routes = [
           {
             path: 'toastr-showcase.component',
             component: NbToastrShowcaseComponent,
+          },
+          {
+            path: 'toastr-positions.component',
+            component: NbToastrPositionsComponent,
           },
         ],
       },

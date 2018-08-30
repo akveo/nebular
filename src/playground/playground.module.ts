@@ -202,6 +202,7 @@ import {
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -391,6 +392,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
   NbToastrShowcaseComponent,
+  NbToastrPositionsComponent,
 ];
 
 @NgModule({
