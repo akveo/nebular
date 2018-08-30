@@ -1,3 +1,5 @@
+import { NbToastrConfig } from './toastr-config';
+
 export enum NbToastPosition {
   TOP_RIGHT = 'top-right',
   TOP_LEFT = 'top-left',
@@ -21,18 +23,6 @@ export enum NbToastStatus {
 export class NbToast {
   title: string;
   message: string;
-  config: NbToastConfig;
+  config: NbToastrConfig;
 }
 
-export class NbToastConfig {
-  position: NbToastPosition = NbToastPosition.TOP_END;
-  status: NbToastStatus = NbToastStatus.DEFAULT;
-  duration: number = 3000;
-  destroyByClick: boolean = true;
-  preventDuplicates: boolean = false;
-  hasIcon: boolean = false;
-
-  constructor(config: Partial<NbToastConfig>) {
-    Object.assign(this, config);
-  }
-}

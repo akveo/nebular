@@ -18,7 +18,6 @@ export const NB_TOAST_RIGHT_POSITIONS = [
   NbToastPosition.BOTTOM_END,
 ];
 
-
 @Injectable()
 export class NbToastPositionFactory {
   constructor(protected positionBuilder: NbPositionBuilderService) {

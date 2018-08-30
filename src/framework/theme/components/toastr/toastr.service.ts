@@ -1,9 +1,17 @@
-import { ComponentRef, Injectable } from '@angular/core';
+import { ComponentRef, Inject, Injectable } from '@angular/core';
 
 import { NbComponentPortal, NbOverlayService, patch } from '../cdk';
 import { NbToastrContainerComponent } from './toastr-container.component';
-import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toastr-position.service';
-import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';
+import { NB_TOAST_TOP_POSITIONS, NbToastPosition, NbToastPositionFactory } from './toastr-position.service';
+import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
+import { NbToastStatus } from './model';
+
+
+export class NbToast {
+  title: string;
+  message: string;
+  config: NbToastrConfig;
+}
 
 
 export class NbToastContainer {
@@ -99,36 +107,38 @@ export class NbToastrContainerRegistry {
 
 @Injectable()
 export class NbToastrService {
-  constructor(protected containerRegistry: NbToastrContainerRegistry) {
+  constructor(@Inject(NB_TOASTR_CONFIG) protected globalConfig: NbToastrConfig,
+              protected containerRegistry: NbToastrContainerRegistry) {
   }
 
-  show(message, title?, config?: Partial<NbToastConfig>) {
+  show(message, title?, userConfig?: Partial<NbToastrConfig>) {
+    const config = new NbToastrConfig({ ...this.globalConfig, ...userConfig });
     const container = this.containerRegistry.get(config.position);
-    const toast = { message, title, config: new NbToastConfig(config) };
+    const toast = { message, title, config };
     container.attach(toast);
   }
 
-  success(message, title?, config?: Partial<NbToastConfig>) {
+  success(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
   }
 
-  info(message, title?, config?: Partial<NbToastConfig>) {
+  info(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.INFO });
   }
 
-  warning(message, title?, config?: Partial<NbToastConfig>) {
+  warning(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
   }
 
-  primary(message, title?, config?: Partial<NbToastConfig>) {
+  primary(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
   }
 
-  danger(message, title?, config?: Partial<NbToastConfig>) {
+  danger(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
   }
 
-  default(message, title?, config?: Partial<NbToastConfig>) {
+  default(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
   }
 }

@@ -9,34 +9,34 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  NbThemeModule,
+  NbAccordionModule,
+  NbActionsModule,
+  NbAlertModule,
+  NbBadgeModule,
+  NbButtonModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCardModule,
-  NbCheckboxModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbPopoverModule,
-  NbSidebarModule,
-  NbActionsModule,
-  NbSearchModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbBadgeModule,
-  NbContextMenuModule,
-  NbRouteTabsetModule,
-  NbProgressBarModule,
-  NbAlertModule,
   NbChatModule,
+  NbCheckboxModule,
+  NbContextMenuModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbListModule,
+  NbMenuModule,
+  NbOverlayModule,
+  NbPopoverModule,
+  NbProgressBarModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
+  NbSidebarModule,
   NbSpinnerModule,
   NbStepperModule,
-  NbAccordionModule,
-  NbListModule,
-  NbButtonModule,
-  NbInputModule,
-  NbOverlayModule,
+  NbTabsetModule,
+  NbThemeModule,
   NbToastrModule,
+  NbUserModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -177,7 +177,7 @@ import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-s
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
 import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
-import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
+import { NbNewsPostComponent, NbNewsPostPlaceholderComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -236,7 +236,7 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
-  NbToastrModule,
+  NbToastrModule.forRoot(),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
