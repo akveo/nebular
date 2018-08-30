@@ -1,5 +1,7 @@
-import { ViewContainerRef } from '@angular/core';
+import { InjectionToken, ViewContainerRef } from '@angular/core';
 
+
+export const NB_DIALOG_CONFIG = new InjectionToken<NbDialogConfig>('Default dialog options');
 
 /**
  * Describes all available options that may be passed to the NbDialogService.

@@ -244,7 +244,7 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
-  NbDialogModule,
+  NbDialogModule.forRoot({ autoFocus: false }),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [

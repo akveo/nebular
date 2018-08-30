@@ -4,7 +4,6 @@ import { filter } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
-  NbFocusTrapFactoryService,
   NbGlobalPositionStrategy,
   NbOverlayRef,
   NbOverlayService,
@@ -14,7 +13,7 @@ import {
   NbTemplatePortal,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbDialogConfig } from './dialog-config';
+import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';
 import { NbDialogContainerComponent } from './dialog-container';
 
@@ -60,6 +59,8 @@ import { NbDialogContainerComponent } from './dialog-container';
  * ### Configuration
  *
  * As we mentioned above, `open` method of the `NbDialogService` may receive optional configuration options.
+ * Also, you can provide global dialogs configuration through `NbDialogModule.forRoot({ ... })`.
+ *
  * This config may contain the following:
  *
  * `context` - both, template and component may receive data through `config.context` property.
@@ -107,9 +108,9 @@ import { NbDialogContainerComponent } from './dialog-container';
 @Injectable()
 export class NbDialogService {
   constructor(@Inject(NB_DOCUMENT) protected document,
+              @Inject(NB_DIALOG_CONFIG) protected globalConfig,
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              protected focusTrapFactory: NbFocusTrapFactoryService,
               protected injector: Injector) {
   }
 
@@ -117,7 +118,7 @@ export class NbDialogService {
    * Opens new instance of the dialog, may receive optional config.
    * */
   open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig> = {}): NbDialogRef<T> {
-    const config = new NbDialogConfig(userConfig);
+    const config = new NbDialogConfig({ ...this.globalConfig, ...userConfig });
     const overlayRef = this.createOverlay(config);
     const dialogRef = new NbDialogRef<T>(overlayRef);
     const container = this.createContainer(config, overlayRef);
@@ -159,7 +160,6 @@ export class NbDialogService {
     const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
     const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
     const containerRef = overlayRef.attach(containerPortal);
-    containerRef.changeDetectorRef.detectChanges();
     return containerRef.instance;
   }
 
