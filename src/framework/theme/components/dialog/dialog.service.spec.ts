@@ -34,7 +34,7 @@ describe('dialog-service', () => {
       imports: [
         NbTestDialogModule,
         NbThemeModule.forRoot({ name: 'default' }),
-        NbDialogModule,
+        NbDialogModule.forRoot(),
         NbOverlayModule.forRoot(),
       ],
     });
@@ -121,7 +121,7 @@ describe('dialog-service', () => {
   });
 
   it('should close on backdrop click if closeOnBackdropClick is true', () => {
-    dialog.open(NbTestDialogComponent, { closeOnBackdropClick: true });
+    dialog.open(NbTestDialogComponent, { closeOnBackdropClick: true, autoFocus: false });
     queryBackdrop().dispatchEvent(new Event('click'));
     expect(queryBackdrop()).toBeFalsy();
   });
