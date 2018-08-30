@@ -14,6 +14,10 @@ export enum NbTrigger {
  * Each stream provides different events depends on implementation.
  * We have three main trigger strategies: click, hint and hover.
  * */
+/**
+ * TODO maybe we have to use renderer.listen instead of observableFromEvent?
+ * Renderer provides capability use it in service worker, ssr and so on.
+ * */
 export abstract class NbTriggerStrategy {
   abstract show$: Observable<Event>;
   abstract hide$: Observable<Event>;
