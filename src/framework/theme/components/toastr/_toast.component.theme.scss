@@ -8,7 +8,12 @@
 
     &.default {
       border-color: nb-theme(toastr-border-color);
-      padding: calc(#{nb-theme(toastr-padding)} / 4) nb-theme(toastr-padding);
+      padding: calc(#{nb-theme(toastr-padding)} / 2) nb-theme(toastr-padding);
+
+      @include nb-for-theme(cosmic) {
+        color: nb-theme(toastr-color-fg);
+        background-color: nb-theme(toastr-default-background);
+      }
     }
 
     &.success {

@@ -13,21 +13,26 @@ import { NbToastrService } from '@nebular/theme';
     <button class="btn btn-primary" (click)="showToast('top-right', 'warning')">Warning</button>
     <button class="btn btn-primary" (click)="showToast('top-right', 'primary')">Primary</button>
     <button class="btn btn-primary" (click)="showToast('top-right', 'danger')">Danger</button>
+    <button class="btn btn-primary" (click)="showToast('top-right', 'default')">default</button>
   `,
   styles: [
       `
       /deep/ nb-layout-column {
         height: 80vw;
       }
+
+      button {
+        margin: 1rem;
+      }
     `,
   ],
 })
 
 export class NbToastrShowcaseComponent {
+  private index: number = 0;
+
   constructor(private toastrService: NbToastrService) {
   }
-
-  private index: number = 0;
 
   showToast(position, status) {
     this.index += 1;
