@@ -18,6 +18,7 @@ import {
   ViewChild,
   ChangeDetectorRef,
   OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -83,7 +84,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
 
-  @ViewChild('searchInput') inputElement: ElementRef<HTMLElement>;
+  @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
   @HostBinding('class.show')
   get showClass() {
@@ -125,7 +126,12 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
     return this.type === NbSearchFieldComponent.TYPE_MODAL_HALF;
   }
 
-  ngOnChanges() {
+  ngOnChanges({ show }: SimpleChanges) {
+    const becameHidden = !show.isFirstChange() && show.currentValue === false;
+    if (becameHidden && this.inputElement) {
+      this.inputElement.nativeElement.value = '';
+    }
+
     this.focusInput();
   }
 
