@@ -48,22 +48,33 @@ import { NbDialogContainerComponent } from './dialog-container';
  * }
  * ```
  *
+ * Instead of component you can create dialog from TemplateRef:
+ *
+ * @stacked-example(Template ref, dialog/dialog-template.component)
+ *
  * The dialog may return result through `NbDialogRef`. Calling component can receive this result with `onClose`
  * stream of `NbDialogRef`.
  *
  * @stacked-example(Result, dialog/dialog-result.component)
  *
- * You can render not only components but templates. Just provide template in `open` method instead of
- * component.
- *
- * ```ts
- * const dialogRef = this.dialogService.open(this.templateRef, { .. });
- * ```
- *
  * ### Configuration
  *
  * As we mentioned above, `open` method of the `NbDialogService` may receive optional configuration options.
  * This config may contain the following:
+ *
+ * `context` - both, template and component may receive data through `config.context` property.
+ * For components this data will be assigned through inputs.
+ * For template you can access it inside template as $implicit.
+ *
+ * ```ts
+ * this.dialogService.open(template, { context: 'pass data in template' });
+ * ```
+ *
+ * ```html
+ * <ng-template let-some-additional-data>
+ *   {{ some-additional-data }}
+ * <ng-template/>
+ * ```
  *
  * `hasBackdrop` - determines is service have to render backdrop under the dialog.
  * Default is true.
@@ -160,10 +171,10 @@ export class NbDialogService {
       container.attachTemplatePortal(portal);
     } else {
       const portal = this.createComponentPortal(config, content, dialogRef);
-      dialogRef.content = container.attachComponentPortal(portal);
+      dialogRef.componentInstance = container.attachComponentPortal(portal).instance;
 
       if (config.context) {
-        Object.assign(dialogRef.content, { ...config.context })
+        Object.assign(dialogRef.componentInstance, { ...config.context })
       }
     }
   }

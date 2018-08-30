@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'nb-dialog',
   template: `
     <nb-card [style.width.px]="600" [style.height.px]="500">
-      <nb-card-header>Lorem Ipsum Dialog Showcase</nb-card-header>
+      <nb-card-header>{{ title }}</nb-card-header>
       <nb-card-body>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis tincidunt tincidunt.
         Vestibulum vulputate maximus massa vel tristique. Suspendisse potenti. Duis aliquet purus sed dictum dictum.
@@ -51,6 +51,8 @@ import { NbDialogRef } from '@nebular/theme';
   `,
 })
 export class NbDialogComponent {
+  @Input() title: string;
+
   constructor(protected ref: NbDialogRef<NbDialogComponent>) {
   }
 

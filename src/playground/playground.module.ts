@@ -210,6 +210,7 @@ import { NbDialogEscComponent } from './dialog/dialog-esc.component';
 import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
 import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
+import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -408,6 +409,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDialogAutoFocusComponent,
   NbDialogResultComponent,
   NbDialogNamePromptComponent,
+  NbDialogTemplateComponent,
 ];
 
 @NgModule({

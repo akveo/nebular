@@ -12,24 +12,17 @@ import { NbOverlayRef } from '../cdk';
  * */
 export class NbDialogRef<T> {
 
+  componentInstance: ComponentRef<T>;
+
   /**
    * Stream of backdrop click events.
    * */
   readonly onBackdropClick: Observable<MouseEvent>;
-  protected componentRef: ComponentRef<T>;
   protected onClose$: Subject<any> = new Subject();
   readonly onClose: Observable<any> = this.onClose$.asObservable();
 
   constructor(protected overlayRef: NbOverlayRef) {
     this.onBackdropClick = this.overlayRef.backdropClick();
-  }
-
-  set content(componentRef: ComponentRef<T>) {
-    this.componentRef = componentRef;
-  }
-
-  get componentInstance(): T {
-    return this.componentRef.instance;
   }
 
   /**
