@@ -63,8 +63,8 @@ import { NbDialogContainerComponent } from './dialog-container';
  * This config may contain the following:
  *
  * `context` - both, template and component may receive data through `config.context` property.
- * For components this data will be assigned through inputs.
- * For template you can access it inside template as $implicit.
+ * For components, this data will be assigned through inputs.
+ * For template, you can access it inside template as $implicit.
  *
  * ```ts
  * this.dialogService.open(template, { context: 'pass data in template' });
@@ -99,7 +99,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  *
  * As you can see, if you open dialog with auto focus dialog will focus first focusable element
  * or just blur previously focused automatically.
- * Otherwise, without auto focus, focus will stay on previously focused element.
+ * Otherwise, without auto focus, the focus will stay on the previously focused element.
  * Please, open dialogs in the separate window and try to click on the button without focus
  * and then hit space any times. Multiple same dialogs will be opened.
  * @stacked-example(Auto focus, dialog/dialog-auto-focus.component)
