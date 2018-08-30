@@ -57,6 +57,11 @@ export class NbToastComponent {
     return this.toast.config.destroyByClick;
   }
 
+  @HostBinding('class.has-icon')
+  get hasIcon(): boolean {
+    return this.toast.config.hasIcon;
+  }
+
   @HostListener('click')
   onClick() {
     this.destroy.emit();

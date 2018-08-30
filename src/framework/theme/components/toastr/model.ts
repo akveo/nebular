@@ -30,6 +30,7 @@ export class NbToastConfig {
   duration: number = 3000;
   destroyByClick: boolean = true;
   preventDuplicates: boolean = false;
+  hasIcon: boolean = false;
 
   constructor(config: Partial<NbToastConfig>) {
     Object.assign(this, config);
