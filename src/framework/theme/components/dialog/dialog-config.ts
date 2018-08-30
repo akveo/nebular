@@ -43,7 +43,7 @@ export class NbDialogConfig<D = any> {
    */
   viewContainerRef: ViewContainerRef;
 
-  data: D;
+  context: D;
 
   constructor(config: Partial<NbDialogConfig>) {
     Object.assign(this, config);

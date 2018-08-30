@@ -1,5 +1,6 @@
 import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
@@ -16,7 +17,6 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';
 import { NbDialogContainerComponent } from './dialog-container';
-import { filter } from 'rxjs/operators';
 
 
 /**
@@ -52,6 +52,13 @@ import { filter } from 'rxjs/operators';
  * stream of `NbDialogRef`.
  *
  * @stacked-example(Result, dialog/dialog-result.component)
+ *
+ * You can render not only components but templates. Just provide template in `open` method instead of
+ * component.
+ *
+ * ```ts
+ * const dialogRef = this.dialogService.open(this.templateRef, { .. });
+ * ```
  *
  * ### Configuration
  *
@@ -101,7 +108,7 @@ export class NbDialogService {
   open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig> = {}): NbDialogRef<T> {
     const config = new NbDialogConfig(userConfig);
     const overlayRef = this.createOverlay(config);
-    const dialogRef = new NbDialogRef<T>(overlayRef, config, this.document, this.focusTrapFactory);
+    const dialogRef = new NbDialogRef<T>(overlayRef);
     const container = this.createContainer(config, overlayRef);
     this.createContent(config, content, container, dialogRef);
 
@@ -154,13 +161,17 @@ export class NbDialogService {
     } else {
       const portal = this.createComponentPortal(config, content, dialogRef);
       dialogRef.content = container.attachComponentPortal(portal);
+
+      if (config.context) {
+        Object.assign(dialogRef.content, { ...config.context })
+      }
     }
   }
 
   protected createTemplatePortal<T>(config: NbDialogConfig,
                                     content: TemplateRef<T>,
                                     dialogRef: NbDialogRef<T>): NbTemplatePortal {
-    return new NbTemplatePortal(content, null, <any>{ $implicit: dialogRef });
+    return new NbTemplatePortal(content, null, <any>{ $implicit: config.context, dialogRef });
   }
 
   /**

@@ -6,9 +6,10 @@ import { NbDialogComponent } from './dialog.component';
 @Component({
   selector: 'nb-dialog-showcase',
   template: `
-    <ng-template #dialog let-ref>
+    <ng-template #dialog let-data let-ref="dialogRef">
       <nb-card>
         <nb-card-body>
+          This is some data: {{ data }}
           <button nbButton (click)="ref.close()">Hide me</button>
         </nb-card-body>
       </nb-card>
@@ -29,6 +30,6 @@ export class NbDialogShowcaseComponent {
   }
 
   openTemplate(template: TemplateRef<any>) {
-    this.dialogService.open(template);
+    this.dialogService.open(template, { context: 'any data' });
   }
 }

@@ -1,8 +1,7 @@
 import { ComponentRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { NbFocusTrap, NbFocusTrapFactoryService, NbOverlayRef } from '../cdk';
-import { NbDialogConfig } from './dialog-config';
+import { NbOverlayRef } from '../cdk';
 
 
 /**
@@ -17,16 +16,11 @@ export class NbDialogRef<T> {
    * Stream of backdrop click events.
    * */
   readonly onBackdropClick: Observable<MouseEvent>;
-  protected alive: boolean = true;
-  protected focusTrap: NbFocusTrap;
   protected componentRef: ComponentRef<T>;
   protected onClose$: Subject<any> = new Subject();
   readonly onClose: Observable<any> = this.onClose$.asObservable();
 
-  constructor(protected overlayRef: NbOverlayRef,
-              protected config: NbDialogConfig,
-              protected document: Document,
-              protected focusTrapFactory: NbFocusTrapFactoryService) {
+  constructor(protected overlayRef: NbOverlayRef) {
     this.onBackdropClick = this.overlayRef.backdropClick();
   }
 
@@ -42,7 +36,6 @@ export class NbDialogRef<T> {
    * Hides dialog.
    * */
   close(res?: any) {
-    this.alive = false;
     this.overlayRef.detach();
     this.overlayRef.dispose();
     this.onClose$.next(res);
