@@ -57,7 +57,7 @@ export class NbToastContainer {
 }
 
 @Injectable()
-export class NbToastrRegistry {
+export class NbToastrContainerRegistry {
   protected overlays: Map<NbToastPosition, NbToastContainer> = new Map();
 
   constructor(protected overlay: NbOverlayService, protected positionFactory: NbToastPositionFactory) {
@@ -65,13 +65,13 @@ export class NbToastrRegistry {
 
   get(position: NbToastPosition): NbToastContainer {
     if (!this.overlays.has(position)) {
-      this.instantiateController(position);
+      this.instantiateContainer(position);
     }
 
     return this.overlays.get(position);
   }
 
-  protected instantiateController(position: NbToastPosition) {
+  protected instantiateContainer(position: NbToastPosition) {
     const container = this.createContainer(position);
     this.overlays.set(position, container);
   }
@@ -86,11 +86,11 @@ export class NbToastrRegistry {
 
 @Injectable()
 export class NbToastrService {
-  constructor(protected toastrRegistry: NbToastrRegistry) {
+  constructor(protected containerRegistry: NbToastrContainerRegistry) {
   }
 
   show(message, title?, config?: Partial<NbToastConfig>) {
-    const container = this.toastrRegistry.get(config.position);
+    const container = this.containerRegistry.get(config.position);
     const toast = { message, title, config: new NbToastConfig(config) };
     container.attach(toast);
   }

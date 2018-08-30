@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { NbOverlayModule } from '../cdk';
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbToastrRegistry, NbToastrService } from './toastr.service';
+import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbToastComponent } from './toast.component';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NbToastPositionFactory } from './toastr-position.service';
@@ -21,7 +21,7 @@ import { NbToastPositionFactory } from './toastr-position.service';
   entryComponents: [NbToastrContainerComponent, NbToastComponent],
   providers: [
     NbToastrService,
-    NbToastrRegistry,
+    NbToastrContainerRegistry,
     NbToastPositionFactory,
   ],
 })
