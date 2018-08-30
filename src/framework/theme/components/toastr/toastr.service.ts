@@ -2,9 +2,9 @@ import { ComponentRef, Inject, Injectable } from '@angular/core';
 
 import { NbComponentPortal, NbOverlayService, patch } from '../cdk';
 import { NbToastrContainerComponent } from './toastr-container.component';
-import { NB_TOAST_TOP_POSITIONS, NbToastPosition, NbToastPositionFactory } from './toastr-position.service';
+import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toastr-position.service';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
-import { NbToastStatus } from './model';
+import { NbToastPosition, NbToastStatus } from './model';
 
 
 export class NbToast {
