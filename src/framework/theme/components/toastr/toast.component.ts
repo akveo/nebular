@@ -52,6 +52,11 @@ export class NbToastComponent {
     return this.toast.config.status === NbToastStatus.DEFAULT;
   }
 
+  @HostBinding('class.destroy-by-click')
+  get destroyByClick(): boolean {
+    return this.toast.config.destroyByClick;
+  }
+
   @HostListener('click')
   onClick() {
     this.destroy.emit();

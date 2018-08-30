@@ -5,10 +5,6 @@
   margin: 0.5rem;
   opacity: 0.9;
 
-  &:hover {
-    opacity: 1;
-  }
-
   .title {
     font-weight: 800;
     margin-right: 0.25rem;
@@ -32,6 +28,14 @@
     .content-container {
       display: flex;
       flex-direction: row;
+    }
+  }
+
+  &.destroy-by-click {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
     }
   }
 }
