@@ -8,8 +8,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
-  ComponentRef,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -18,15 +16,18 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef,
+  ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { BehaviorSubject, of as observableOf, combineLatest } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 import { filter, delay, takeWhile } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
+import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -45,8 +46,8 @@ import { NbThemeService } from '../../services/theme.service';
     'styles/search.component.modal-half.scss',
   ],
   template: `
-    <div class="search" (keyup.esc)="closeSearch()">
-      <button (click)="closeSearch()">
+    <div class="search" (keyup.esc)="emitClose()">
+      <button (click)="emitClose()">
         <i class="nb-close-circled"></i>
       </button>
       <div class="form-wrapper">
@@ -57,7 +58,7 @@ import { NbThemeService } from '../../services/theme.service';
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
                    tabindex="-1"
-                   (blur)="tabOut.next($event)"/>
+                   (blur)="focusInput()"/>
           </div>
           <span class="info">{{ hint }}</span>
         </form>
@@ -65,7 +66,7 @@ import { NbThemeService } from '../../services/theme.service';
     </div>
   `,
 })
-export class NbSearchFieldComponent {
+export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
   static readonly TYPE_MODAL_ZOOMIN = 'modal-zoomin';
   static readonly TYPE_ROTATE_LAYOUT = 'rotate-layout';
@@ -75,66 +76,82 @@ export class NbSearchFieldComponent {
   static readonly TYPE_MODAL_DROP = 'modal-drop';
   static readonly TYPE_MODAL_HALF = 'modal-half';
 
-  @Input() searchType: string;
+  @Input() type: string;
   @Input() placeholder: string;
   @Input() hint: string;
+  @Input() show = false;
 
-  @Output() searchClose = new EventEmitter();
+  @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
-  @Output() tabOut = new EventEmitter();
 
+  @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
-  @ViewChild('searchInput') inputElement: ElementRef;
-
-  @Input() @HostBinding('class.show') showSearch: boolean = false;
+  @HostBinding('class.show')
+  get showClass() {
+    return this.show;
+  }
 
   @HostBinding('class.modal-zoomin')
   get modalZoomin() {
-    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_ZOOMIN;
+    return this.type === NbSearchFieldComponent.TYPE_MODAL_ZOOMIN;
   }
 
   @HostBinding('class.rotate-layout')
   get rotateLayout() {
-    return this.searchType === NbSearchFieldComponent.TYPE_ROTATE_LAYOUT;
+    return this.type === NbSearchFieldComponent.TYPE_ROTATE_LAYOUT;
   }
 
   @HostBinding('class.modal-move')
   get modalMove() {
-    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_MOVE;
+    return this.type === NbSearchFieldComponent.TYPE_MODAL_MOVE;
   }
 
   @HostBinding('class.curtain')
   get curtain() {
-    return this.searchType === NbSearchFieldComponent.TYPE_CURTAIN;
+    return this.type === NbSearchFieldComponent.TYPE_CURTAIN;
   }
 
   @HostBinding('class.column-curtain')
   get columnCurtain() {
-    return this.searchType === NbSearchFieldComponent.TYPE_COLUMN_CURTAIN;
+    return this.type === NbSearchFieldComponent.TYPE_COLUMN_CURTAIN;
   }
 
   @HostBinding('class.modal-drop')
   get modalDrop() {
-    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_DROP;
+    return this.type === NbSearchFieldComponent.TYPE_MODAL_DROP;
   }
 
   @HostBinding('class.modal-half')
   get modalHalf() {
-    return this.searchType === NbSearchFieldComponent.TYPE_MODAL_HALF;
+    return this.type === NbSearchFieldComponent.TYPE_MODAL_HALF;
   }
 
-  @Input()
-  set type(val: any) {
-    this.searchType = val;
+  ngOnChanges({ show }: SimpleChanges) {
+    const becameHidden = !show.isFirstChange() && show.currentValue === false;
+    if (becameHidden && this.inputElement) {
+      this.inputElement.nativeElement.value = '';
+    }
+
+    this.focusInput();
   }
 
-  closeSearch() {
-    this.searchClose.emit(true);
+  ngAfterViewInit() {
+    this.focusInput();
+  }
+
+  emitClose() {
+    this.close.emit();
   }
 
   submitSearch(term) {
     if (term) {
       this.search.emit(term);
+    }
+  }
+
+  focusInput() {
+    if (this.show && this.inputElement) {
+      this.inputElement.nativeElement.focus();
     }
   }
 }
@@ -173,15 +190,25 @@ export class NbSearchFieldComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button class="start-search" (click)="openSearch()">
+    <button #searchButton class="start-search" (click)="openSearch()">
       <i class="nb-search"></i>
     </button>
-    <ng-template #attachedSearchContainer></ng-template>
+    <nb-search-field
+      *nbPortal
+      [show]="showSearchField"
+      [type]="type"
+      [placeholder]="placeholder"
+      [hint]="hint"
+      (search)="search($event)"
+      (close)="hideSearch()">
+    </nb-search-field>
   `,
 })
-export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbSearchComponent implements OnInit, OnDestroy {
 
   private alive = true;
+  private overlayRef: NbOverlayRef;
+  showSearchField = false;
 
   /**
    * Tags a search with some ID, can be later used in the search service
@@ -204,28 +231,23 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   @Input() hint: string = 'Hit enter to search';
 
-  @HostBinding('class.show') showSearch: boolean = false;
-
-  @ViewChild('attachedSearchContainer', {read: ViewContainerRef}) attachedSearchContainer: ViewContainerRef;
-
-  private searchFieldComponentRef$ = new BehaviorSubject<ComponentRef<any>>(null);
-  private searchType: string = 'rotate-layout';
-
-  constructor(private searchService: NbSearchService,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private themeService: NbThemeService,
-              private router: Router) {
-  }
-
   /**
    * Search design type, available types are
    * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
    * @type {string}
    */
-  @Input()
-  set type(val: any) {
-    this.searchType = val;
-  }
+  @Input() type: string;
+
+  @ViewChild(NbPortalDirective) searchFieldPortal: NbPortalDirective;
+  @ViewChild('searchButton') searchButton: ElementRef<HTMLElement>;
+
+  constructor(
+    private searchService: NbSearchService,
+    private themeService: NbThemeService,
+    private router: Router,
+    private overlayService: NbOverlayService,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.router.events
@@ -233,90 +255,62 @@ export class NbSearchComponent implements OnInit, AfterViewInit, OnDestroy {
         takeWhile(() => this.alive),
         filter(event => event instanceof NavigationEnd),
       )
-      .subscribe(event => this.searchService.deactivateSearch(this.searchType, this.tag));
+      .subscribe(() => this.hideSearch());
 
-    combineLatest([
-      this.searchFieldComponentRef$,
-      this.searchService.onSearchActivate(),
-    ])
+    this.searchService.onSearchActivate()
       .pipe(
         takeWhile(() => this.alive),
-        filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
-        filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
+        filter(data => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
-        this.showSearch = true;
+      .subscribe(() => this.openSearch());
 
-        this.themeService.appendLayoutClass(this.searchType);
-        observableOf(null).pipe(delay(0)).subscribe(() => {
-          this.themeService.appendLayoutClass('with-search');
-        });
-        componentRef.instance.showSearch = true;
-        componentRef.instance.inputElement.nativeElement.focus();
-        componentRef.changeDetectorRef.detectChanges();
-      });
-
-    combineLatest([
-      this.searchFieldComponentRef$,
-      this.searchService.onSearchDeactivate(),
-    ])
+    this.searchService.onSearchDeactivate()
       .pipe(
         takeWhile(() => this.alive),
-        filter(([componentRef, data]: [ComponentRef<any>, any]) => componentRef != null),
-        filter(([componentRef, data]: [ComponentRef<any>, any]) => !this.tag || data.tag === this.tag),
+        filter(data => !this.tag || data.tag === this.tag),
       )
-      .subscribe(([componentRef, data]: [ComponentRef<any>, any]) => {
-        this.showSearch = false;
-
-        componentRef.instance.showSearch = false;
-        componentRef.instance.inputElement.nativeElement.value = '';
-        componentRef.instance.inputElement.nativeElement.blur();
-        componentRef.changeDetectorRef.detectChanges();
-
-        this.themeService.removeLayoutClass('with-search');
-        observableOf(null).pipe(delay(500)).subscribe(() => {
-          this.themeService.removeLayoutClass(this.searchType);
-        });
-      });
-  }
-
-  ngAfterViewInit() {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(NbSearchFieldComponent);
-    this.themeService.appendToLayoutTop(factory)
-      .subscribe((componentRef: ComponentRef<any>) => {
-        this.connectToSearchField(componentRef);
-      });
-  }
-
-  openSearch() {
-    this.searchService.activateSearch(this.searchType, this.tag);
-  }
-
-  connectToSearchField(componentRef) {
-    componentRef.instance.searchType = this.searchType;
-    componentRef.instance.placeholder = this.placeholder;
-    componentRef.instance.hint = this.hint;
-    componentRef.instance.searchClose.subscribe(() => {
-      this.searchService.deactivateSearch(this.searchType, this.tag);
-    });
-    componentRef.instance.search.subscribe(term => {
-      this.searchService.submitSearch(term, this.tag);
-      this.searchService.deactivateSearch(this.searchType, this.tag);
-    });
-    componentRef.instance.tabOut
-      .subscribe(() => this.showSearch && componentRef.instance.inputElement.nativeElement.focus());
-
-    componentRef.changeDetectorRef.detectChanges();
-
-    this.searchFieldComponentRef$.next(componentRef)
+      .subscribe(() => this.hideSearch());
   }
 
   ngOnDestroy() {
-    this.alive = false;
-
-    const componentRef = this.searchFieldComponentRef$.getValue();
-    if (componentRef) {
-      componentRef.destroy();
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.removeLayoutClasses();
+      this.overlayRef.detach();
     }
+
+    this.alive = false;
+  }
+
+  openSearch() {
+    if (!this.overlayRef) {
+      this.overlayRef = this.overlayService.create();
+      this.overlayRef.attach(this.searchFieldPortal);
+    }
+
+    this.themeService.appendLayoutClass(this.type);
+    observableOf(null).pipe(delay(0)).subscribe(() => {
+      this.themeService.appendLayoutClass('with-search');
+      this.showSearchField = true;
+      this.changeDetector.detectChanges();
+    });
+  }
+
+  hideSearch() {
+    this.removeLayoutClasses();
+    this.showSearchField = false;
+    this.changeDetector.detectChanges();
+    this.searchButton.nativeElement.focus();
+  }
+
+  search(term) {
+    this.searchService.submitSearch(term, this.tag);
+    this.hideSearch();
+  }
+
+  private removeLayoutClasses() {
+    this.themeService.removeLayoutClass('with-search');
+    observableOf(null).pipe(delay(500)).subscribe(() => {
+      this.themeService.removeLayoutClass(this.type);
+    });
   }
 }

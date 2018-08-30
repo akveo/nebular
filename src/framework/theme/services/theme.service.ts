@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFactory, ComponentFactoryResolver, Inject, Injectable, Type } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
-import { Observable, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
 
 import { NB_THEME_OPTIONS } from '../theme.options';
@@ -23,18 +23,13 @@ export class NbThemeService {
   // TODO: behavioral subject here?
   currentTheme: string;
   private themeChanges$ = new ReplaySubject(1);
-  private appendToLayoutTop$ = new ReplaySubject();
-  private createLayoutTop$ = new Subject();
   private appendLayoutClass$ = new Subject();
   private removeLayoutClass$ = new Subject();
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
-  constructor(
-    @Inject(NB_THEME_OPTIONS) protected options: any,
-    private breakpointService: NbMediaBreakpointsService,
-    private jsThemesRegistry: NbJSThemesRegistry,
-    private componentFactoryResolver: ComponentFactoryResolver,
-  ) {
+  constructor(@Inject(NB_THEME_OPTIONS) protected options: any,
+              private breakpointService: NbMediaBreakpointsService,
+              private jsThemesRegistry: NbJSThemesRegistry) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
@@ -54,25 +49,6 @@ export class NbThemeService {
   }
 
   /**
-   * Append a component to top of the layout
-   * (useful for showing modal that should be placed heigher in the document tree)
-   *
-   * @param {Type<T> | ComponentFactory<T>} entity
-   * @returns {Observable<any>}
-   */
-  appendToLayoutTop<T>(entity: Type<T> | ComponentFactory<T>): Observable<any> {
-    let factory = entity;
-
-    if (entity instanceof Type) {
-      factory = this.componentFactoryResolver.resolveComponentFactory(entity);
-    }
-
-    const subject = new ReplaySubject(1);
-    this.appendToLayoutTop$.next({ factory, listener: subject });
-    return subject.asObservable();
-  }
-
-  /**
    * Returns a theme object with variables (color/paddings/etc) on a theme change.
    * Once subscribed - returns current theme.
    *
@@ -84,17 +60,6 @@ export class NbThemeService {
         return this.jsThemesRegistry.get(theme.name);
       }),
     );
-  }
-
-  /**
-   * Clears layout top
-   * @returns {Observable<any>}
-   */
-  clearLayoutTop(): Observable<any> {
-    const observable = new BehaviorSubject(null);
-    this.createLayoutTop$.next({ listener: observable });
-    this.appendToLayoutTop$ = new ReplaySubject();
-    return observable.asObservable();
   }
 
   /**
@@ -130,14 +95,6 @@ export class NbThemeService {
    */
   onThemeChange(): Observable<any> {
     return this.themeChanges$.pipe(share());
-  }
-
-  onAppendToTop(): Observable<any> {
-    return this.appendToLayoutTop$.pipe(share());
-  }
-
-  onClearLayoutTop(): Observable<any> {
-    return this.createLayoutTop$.pipe(share());
   }
 
   /**

@@ -66,7 +66,6 @@ import { NbContextMenuTestComponent } from './context-menu/context-menu-test.com
 import { NbLayoutHeaderTestComponent } from './layout/layout-header-test.component';
 import { NbLayoutFooterTestComponent } from './layout/layout-footer-test.component';
 import { NbThemeChangeTestComponent } from './layout/theme-change-test.component';
-import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbThemeBreakpointTestComponent } from './layout/theme-breakpoint-test.component';
 import { NbLayoutTestComponent } from './layout/layout-test.component';
 import {
@@ -808,10 +807,6 @@ export const routes: Routes = [
           {
             path: 'theme-change-test.component',
             component: NbThemeChangeTestComponent,
-          },
-          {
-            path: 'theme-dynamic-test.component',
-            component: NbThemeDynamicTestComponent,
           },
           {
             path: 'theme-breakpoint-test.component',

@@ -11,7 +11,7 @@ const placementLeft = by.css('nb-card:nth-child(2) button:nth-child(4)');
 const modeClick = by.css('nb-card:nth-child(4) button:nth-child(1)');
 const modeHover = by.css('nb-card:nth-child(4) button:nth-child(2)');
 const modeHint = by.css('nb-card:nth-child(4) button:nth-child(3)');
-const popover = by.css('nb-layout > nb-popover');
+const popover = by.css('nb-layout nb-popover');
 
 describe('nb-popover', () => {
 
@@ -35,7 +35,7 @@ describe('nb-popover', () => {
     element(contentString).click();
     const containerContent = element(popover).element(by.css('div'));
     expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
+    expect(containerContent.getAttribute('class')).toEqual('primitive-overlay');
     expect(containerContent.getText()).toEqual('Hi, I\'m popover!');
   });
 

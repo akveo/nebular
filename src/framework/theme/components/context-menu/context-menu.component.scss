@@ -3,49 +3,57 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-
 @import '../../styles/core/mixins';
 
-:host /deep/ nb-menu {
-  display: inline;
-  font-size: 0.875rem;
-  line-height: 1.5rem;
+:host {
+  .arrow {
+    position: absolute;
 
-  ul.menu-items {
-    margin: 0;
-    padding: 0.5rem 0;
+    width: 0;
+    height: 0;
+  }
 
-    .menu-item {
-      border: none;
-      white-space: nowrap;
+  /deep/ nb-menu {
+    display: inline;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
 
-      &:first-child {
+    ul.menu-items {
+      margin: 0;
+      padding: 0.5rem 0;
+
+      .menu-item {
         border: none;
-      }
+        white-space: nowrap;
 
-      a {
-        cursor: pointer;
-        border-radius: 0;
-        padding: 0;
-
-        .menu-icon {
-          font-size: 1.5rem;
-          width: auto;
+        &:first-child {
+          border: none;
         }
 
-        .menu-title {
-          padding: 0.375rem 3rem;
-          @include nb-rtl(text-align, right);
-        }
+        a {
+          cursor: pointer;
+          border-radius: 0;
+          padding: 0;
 
-        .menu-icon ~ .menu-title {
-          @include nb-ltr(padding-left, 0);
-          @include nb-rtl(padding-right, 0);
-        }
+          .menu-icon {
+            font-size: 1.5rem;
+            width: auto;
+          }
 
-        .menu-icon:first-child {
-          @include nb-ltr(padding-left, 1rem);
-          @include nb-rtl(padding-right, 1rem);
+          .menu-title {
+            padding: 0.375rem 3rem;
+            @include nb-rtl(text-align, right);
+          }
+
+          .menu-icon ~ .menu-title {
+            @include nb-ltr(padding-left, 0);
+            @include nb-rtl(padding-right, 0);
+          }
+
+          .menu-icon:first-child {
+            @include nb-ltr(padding-left, 1rem);
+            @include nb-rtl(padding-right, 1rem);
+          }
         }
       }
     }
