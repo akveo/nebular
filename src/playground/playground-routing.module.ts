@@ -159,6 +159,7 @@ import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
 
 
 export const routes: Routes = [
@@ -717,6 +718,15 @@ export const routes: Routes = [
           {
             path: 'overlay-showcase.component',
             component: NbOverlayShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'toaster',
+        children: [
+          {
+            path: 'toaster-showcase.component',
+            component: NbToasterShowcaseComponent,
           },
         ],
       },
