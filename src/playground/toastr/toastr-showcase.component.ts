@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NbToasterService } from '@nebular/theme';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toaster-showcase',
+  selector: 'nb-toastr-showcase',
   template: `
     <button class="btn btn-primary" (click)="showToast('top-right', 'success')">Top Right</button>
     <button class="btn btn-primary" (click)="showToast('bottom-right', 'success')">Bottom Right</button>
@@ -23,15 +23,15 @@ import { NbToasterService } from '@nebular/theme';
   ],
 })
 
-export class NbToasterShowcaseComponent {
-  constructor(private toasterService: NbToasterService) {
+export class NbToastrShowcaseComponent {
+  constructor(private toastrService: NbToastrService) {
   }
 
   private index: number = 0;
 
   showToast(position, status) {
     this.index += 1;
-    this.toasterService.show(
+    this.toastrService.show(
       status || 'Success',
       `Toast ${this.index}`,
       { position, status });

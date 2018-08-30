@@ -2,7 +2,7 @@ import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbToastComponent } from './toast.component';
-import { NB_TOAST_RIGHT_POSITIONS } from './toaster-position.service';
+import { NB_TOAST_RIGHT_POSITIONS } from './toastr-position.service';
 import { NbToast, NbToastPosition } from './model';
 
 
@@ -15,7 +15,7 @@ const voidState = style({
 const defaultOptions = { params: { direction: '' } };
 
 @Component({
-  selector: 'nb-toaster-container',
+  selector: 'nb-toastr-container',
   template: `
     <nb-toast [@fadeIn]="fadeIn" *ngFor="let toast of content" [toast]="toast"></nb-toast>`,
   animations: [
@@ -25,7 +25,7 @@ const defaultOptions = { params: { direction: '' } };
     ]),
   ],
 })
-export class NbToasterContainerComponent implements OnInit {
+export class NbToastrContainerComponent implements OnInit {
   @Input()
   content: NbToast[] = [];
 

@@ -9,21 +9,21 @@ import { NgModule } from '@angular/core';
 import { NbOverlayModule } from '../cdk';
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbToasterRegistry, NbToasterService } from './toaster.service';
+import { NbToastrRegistry, NbToastrService } from './toastr.service';
 import { NbToastComponent } from './toast.component';
-import { NbToasterContainerComponent } from './toaster-container.component';
-import { NbToastPositionFactory } from './toaster-position.service';
+import { NbToastrContainerComponent } from './toastr-container.component';
+import { NbToastPositionFactory } from './toastr-position.service';
 
 
 @NgModule({
   imports: [NbSharedModule, NbOverlayModule],
-  declarations: [NbToasterContainerComponent, NbToastComponent],
-  entryComponents: [NbToasterContainerComponent, NbToastComponent],
+  declarations: [NbToastrContainerComponent, NbToastComponent],
+  entryComponents: [NbToastrContainerComponent, NbToastComponent],
   providers: [
-    NbToasterService,
-    NbToasterRegistry,
+    NbToastrService,
+    NbToastrRegistry,
     NbToastPositionFactory,
   ],
 })
-export class NbToasterModule {
+export class NbToastrModule {
 }

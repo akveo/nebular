@@ -36,7 +36,7 @@ import {
   NbButtonModule,
   NbInputModule,
   NbOverlayModule,
-  NbToasterModule,
+  NbToastrModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -201,7 +201,7 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
-import { NbToasterShowcaseComponent } from './toaster/toaster-showcase.component';
+import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -236,7 +236,7 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
-  NbToasterModule,
+  NbToastrModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -390,7 +390,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
-  NbToasterShowcaseComponent,
+  NbToastrShowcaseComponent,
 ];
 
 @NgModule({

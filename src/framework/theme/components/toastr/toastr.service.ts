@@ -1,15 +1,15 @@
 import { ComponentRef, Injectable } from '@angular/core';
 
 import { NbComponentPortal, NbOverlayService, patch } from '../cdk';
-import { NbToasterContainerComponent } from './toaster-container.component';
-import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toaster-position.service';
+import { NbToastrContainerComponent } from './toastr-container.component';
+import { NB_TOAST_TOP_POSITIONS, NbToastPositionFactory } from './toastr-position.service';
 import { NbToast, NbToastConfig, NbToastPosition, NbToastStatus } from './model';
 
 
 export class NbToastContainer {
   protected toasts: NbToast[] = [];
 
-  constructor(protected position: NbToastPosition, protected containerRef: ComponentRef<NbToasterContainerComponent>) {
+  constructor(protected position: NbToastPosition, protected containerRef: ComponentRef<NbToastrContainerComponent>) {
   }
 
   attach(toast: NbToast) {
@@ -57,7 +57,7 @@ export class NbToastContainer {
 }
 
 @Injectable()
-export class NbToasterRegistry {
+export class NbToastrRegistry {
   protected overlays: Map<NbToastPosition, NbToastContainer> = new Map();
 
   constructor(protected overlay: NbOverlayService, protected positionFactory: NbToastPositionFactory) {
@@ -79,18 +79,18 @@ export class NbToasterRegistry {
   protected createContainer(position: NbToastPosition): NbToastContainer {
     const positionStrategy = this.positionFactory.create(position);
     const ref = this.overlay.create({ positionStrategy });
-    const containerRef = ref.attach(new NbComponentPortal(NbToasterContainerComponent));
+    const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent));
     return new NbToastContainer(position, containerRef);
   }
 }
 
 @Injectable()
-export class NbToasterService {
-  constructor(protected toasterRegistry: NbToasterRegistry) {
+export class NbToastrService {
+  constructor(protected toastrRegistry: NbToastrRegistry) {
   }
 
   show(message, title?, config?: Partial<NbToastConfig>) {
-    const container = this.toasterRegistry.get(config.position);
+    const container = this.toastrRegistry.get(config.position);
     const toast = { message, title, config: new NbToastConfig(config) };
     container.attach(toast);
   }
