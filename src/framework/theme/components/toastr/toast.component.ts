@@ -1,13 +1,13 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
-import { NbToast } from './model';
+import { NbToast, NbToastStatus } from './model';
 
 
 @Component({
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
   template: `
-    <div class="icon" *ngIf="status !== 'default'"></div>
+    <div class="icon" *ngIf="toast.config.status !== 'default'"></div>
     <div class="content-container">
       <span class="title">{{ toast.title }}</span>
       <div class="content">
@@ -22,9 +22,34 @@ export class NbToastComponent {
 
   @Output() destroy: EventEmitter<void> = new EventEmitter();
 
-  @HostBinding('class')
-  get status(): string {
-    return this.toast.config.status;
+  @HostBinding('class.success')
+  get success(): boolean {
+    return this.toast.config.status === NbToastStatus.SUCCESS;
+  }
+
+  @HostBinding('class.info')
+  get info(): boolean {
+    return this.toast.config.status === NbToastStatus.INFO;
+  }
+
+  @HostBinding('class.warning')
+  get warning(): boolean {
+    return this.toast.config.status === NbToastStatus.WARNING;
+  }
+
+  @HostBinding('class.primary')
+  get primary(): boolean {
+    return this.toast.config.status === NbToastStatus.PRIMARY;
+  }
+
+  @HostBinding('class.danger')
+  get danger(): boolean {
+    return this.toast.config.status === NbToastStatus.DANGER;
+  }
+
+  @HostBinding('class.default')
+  get default(): boolean {
+    return this.toast.config.status === NbToastStatus.DEFAULT;
   }
 
   @HostListener('click')
