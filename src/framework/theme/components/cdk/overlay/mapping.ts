@@ -8,11 +8,12 @@ import {
   FlexibleConnectedPositionStrategy,
   GlobalPositionStrategy,
   Overlay,
+  OverlayConfig,
   OverlayContainer,
   OverlayModule,
   OverlayPositionBuilder,
   OverlayRef,
-  PositionStrategy,
+  PositionStrategy, ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
@@ -22,7 +23,7 @@ export class NbPortalDirective extends CdkPortal {
 }
 
 @Injectable()
-export class NbOverlayService extends Overlay {
+export class NbOverlay extends Overlay {
 }
 
 @Injectable()
@@ -56,11 +57,13 @@ export type NbPositionStrategy = PositionStrategy;
 export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
+export type NbOverlayConfig = OverlayConfig;
+export type NbScrollStrategyOptions = ScrollStrategyOptions;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 
 const CDK_PROVIDERS = [
-  NbOverlayService,
+  NbOverlay,
   NbPlatform,
   NbOverlayPositionBuilder,
 ];

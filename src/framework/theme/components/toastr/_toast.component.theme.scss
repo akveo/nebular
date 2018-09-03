@@ -6,6 +6,13 @@
     border: nb-theme(toastr-border);
     border-radius: nb-theme(toastr-border-radius);
 
+    &.has-icon {
+      .icon {
+        @include nb-ltr(margin-right, 1.25rem);
+        @include nb-rtl(margin-left, 1.25rem);
+      }
+    }
+
     &.default {
       border-color: nb-theme(toastr-border-color);
       padding: calc(#{nb-theme(toastr-padding)} / 2) nb-theme(toastr-padding);

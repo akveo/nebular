@@ -5,6 +5,7 @@ import { NbCdkMappingModule } from './mapping';
 import { NbAdapterModule } from '../adapter/adapter.module';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbOverlayContainerComponent } from './overlay-container';
+import { NbOverlayService } from './overlay';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ export class NbOverlayModule {
       ngModule: NbOverlayModule,
       providers: [
         NbPositionBuilderService,
+        NbOverlayService,
       ],
     };
   }
