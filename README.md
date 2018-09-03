@@ -106,8 +106,8 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 - [Nebular Code Snippets](https://marketplace.visualstudio.com/items?itemName=shalinjames.vscode-nebular-snippets) - a Visual Studio Code snippets extension for Nebular components and directives.
 
 #### Intellij Plugin
-- [Nebular Code Snippets](https://plugins.jetbrains.com/plugin/11065-nebular-code-snippets) - a Intellij Live template plugin for Nebular components and directives. Has support for following of Intellij products 
-IntelliJ IDEA,PhpStorm,WebStorm,PyCharm,RubyMine,AppCode,CLion,GoLand,DataGrip,Rider,MPS,Android Studio. 
+- [Nebular Code Snippets](https://plugins.jetbrains.com/plugin/11065-nebular-code-snippets) - a Intellij Live template plugin for Nebular components and directives. Has support for following of IntelliJ products:  
+IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, RubyMine, AppCode, CLion, GoLand, DataGrip, Rider, MPS, Android Studio. 
 
 
 ### From Developers
