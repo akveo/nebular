@@ -1,12 +1,13 @@
 import { InjectionToken } from '@angular/core';
 
-import { NbToastPosition, NbToastStatus } from './model';
+import { NbToastStatus } from './model';
+import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk';
 
 
 export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toastr options');
 
 export class NbToastrConfig {
-  position: NbToastPosition = NbToastPosition.TOP_END;
+  position: NbGlobalPosition = NbGlobalLogicalPosition.TOP_END;
   status: NbToastStatus = NbToastStatus.PRIMARY;
   duration: number = 3000;
   destroyByClick: boolean = true;

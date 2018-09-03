@@ -12,7 +12,6 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbToastComponent } from './toast.component';
 import { NbToastrContainerComponent } from './toastr-container.component';
-import { NbToastPositionFactory } from './toastr-position.service';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 
 
@@ -28,7 +27,6 @@ export class NbToastrModule {
       providers: [
         NbToastrService,
         NbToastrContainerRegistry,
-        NbToastPositionFactory,
         { provide: NB_TOASTR_CONFIG, useValue: toastrConfig },
       ],
     };

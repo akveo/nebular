@@ -2,8 +2,9 @@ import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbToastComponent } from './toast.component';
-import { NB_TOAST_RIGHT_POSITIONS } from './toastr-position.service';
-import { NbToast, NbToastPosition } from './model';
+import { NbToast } from './model';
+import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbGlobalPosition, NbPositionHelper } from '../cdk';
 
 
 const voidState = style({
@@ -33,15 +34,24 @@ export class NbToastrContainerComponent implements OnInit {
   context: Object;
 
   @Input()
-  position: NbToastPosition;
+  position: NbGlobalPosition;
 
   @ViewChildren(NbToastComponent)
   toasts: QueryList<NbToastComponent>;
 
   fadeIn;
 
-  ngOnInit(): void {
-    const direction = NB_TOAST_RIGHT_POSITIONS.includes(this.position) ? '' : '-';
+  constructor(protected layoutDirection: NbLayoutDirectionService,
+              protected positionHelper: NbPositionHelper) {
+  }
+
+  ngOnInit() {
+    this.layoutDirection.onDirectionChange()
+      .subscribe(() => this.onDirectionChange());
+  }
+
+  protected onDirectionChange() {
+    const direction = this.positionHelper.isRightPosition(this.position) ? '' : '-';
     this.fadeIn = { value: '', params: { direction } };
   }
 }

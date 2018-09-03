@@ -52,7 +52,6 @@ export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositi
 export type NbPortal<T = any> = Portal<T>;
 export type NbOverlayRef = OverlayRef;
 export type NbComponentType<T = any> = ComponentType<T>;
-export type NbGlobalPositionStrategy = GlobalPositionStrategy;
 export type NbPositionStrategy = PositionStrategy;
 export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
