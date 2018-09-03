@@ -162,6 +162,7 @@ import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component
 import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
 import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
 import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
+import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
 
 
 export const routes: Routes = [
@@ -737,6 +738,10 @@ export const routes: Routes = [
           {
             path: 'toastr-statuses.component',
             component: NbToastrStatusesComponent,
+          },
+          {
+            path: 'toastr-duration.component',
+            component: NbToastrDurationComponent,
           },
         ],
       },
