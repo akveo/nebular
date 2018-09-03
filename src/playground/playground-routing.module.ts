@@ -165,6 +165,7 @@ import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
 import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
 import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
 import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
+import { NbToastrIconComponent } from './toastr/toastr-icon.component';
 
 
 export const routes: Routes = [
@@ -752,6 +753,10 @@ export const routes: Routes = [
           {
             path: 'toastr-prevent-duplicates.component',
             component: NbToastrPreventDuplicatesComponent,
+          },
+          {
+            path: 'toastr-icon.component',
+            component: NbToastrIconComponent,
           },
         ],
       },
