@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toastr-showcase',
+  selector: 'nb-toastr-positions',
   template: `
     <button class="btn btn-primary" (click)="showToast('top-right')">Top Right</button>
     <button class="btn btn-primary" (click)="showToast('bottom-right')">Bottom Right</button>

@@ -203,6 +203,7 @@ import {
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
 import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -393,6 +394,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbOverlayShowcaseComponent,
   NbToastrShowcaseComponent,
   NbToastrPositionsComponent,
+  NbToastrStatusesComponent,
 ];
 
 @NgModule({

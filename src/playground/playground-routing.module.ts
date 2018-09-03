@@ -161,6 +161,7 @@ import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calen
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
 import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
 
 
 export const routes: Routes = [
@@ -732,6 +733,10 @@ export const routes: Routes = [
           {
             path: 'toastr-positions.component',
             component: NbToastrPositionsComponent,
+          },
+          {
+            path: 'toastr-statuses.component',
+            component: NbToastrStatusesComponent,
           },
         ],
       },
