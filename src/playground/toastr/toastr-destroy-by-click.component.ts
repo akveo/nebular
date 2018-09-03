@@ -4,8 +4,8 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'nb-toastr-destroy-by-click',
   template: `
-    <button nbButton outline (click)="showToast(true)">Destroy by click</button>
-    <button nbButton outline (click)="showToast(false)">Destroy by timeout only</button>
+    <button nbButton (click)="showToast(true)">Destroy by click</button>
+    <button nbButton (click)="showToast(false)">Destroy by timeout only</button>
   `,
   styles: [
       `

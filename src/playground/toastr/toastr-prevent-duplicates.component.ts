@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toastr-duration',
+  selector: 'nb-toastr-prevent-duplicates',
   template: `
-    <button nbButton (click)="showToast(3000)">Default 3000ms</button>
-    <button nbButton (click)="showToast(1000)">1000ms</button>
-    <button nbButton (click)="showToast(0)">Infinite</button>
+    <button nbButton (click)="showToast(true)">Prevent duplicates</button>
+    <button nbButton (click)="showToast(false)">Without prevent duplicates</button>
   `,
   styles: [
       `
@@ -21,16 +20,16 @@ import { NbToastrService } from '@nebular/theme';
   ],
 })
 
-export class NbToastrDurationComponent {
+export class NbToastrPreventDuplicatesComponent {
   private index: number = 0;
 
   constructor(private toastrService: NbToastrService) {
   }
 
-  showToast(duration) {
+  showToast(preventDuplicates) {
     this.toastrService.show(
       'This is super toast message',
-      `This is toast number: ${++this.index}`,
-      { duration });
+      `This is toast title`,
+      { preventDuplicates });
   }
 }
