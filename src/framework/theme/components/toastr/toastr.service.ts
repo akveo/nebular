@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ComponentRef, Inject, Injectable } from '@angular/core';
 
 import {
@@ -11,14 +17,8 @@ import {
 } from '../cdk';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
-import { NbToastStatus } from './model';
+import { NbToast, NbToastStatus } from './model';
 
-
-export class NbToast {
-  title: string;
-  message: string;
-  config: NbToastrConfig;
-}
 
 export class NbToastContainer {
   protected toasts: NbToast[] = [];

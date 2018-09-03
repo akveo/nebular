@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 

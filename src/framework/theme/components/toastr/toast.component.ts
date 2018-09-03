@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { NbToast, NbToastStatus } from './model';
