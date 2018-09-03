@@ -118,6 +118,55 @@ export class NbToastrContainerRegistry {
   }
 }
 
+/**
+ * The `NbToastrService` provides capability build toast notifications.
+ *
+ * @stacked-example(Showcase, toastr/toastr-showcase.component)
+ *
+ * `NbToastrService.show(message, title, config)` accepts three params, title and config are optionals.
+ *
+ * Global toastr configuration may be provided through `NbToastrModule.forRoot(config)`.
+ *
+ * ```ts
+ * imports: [
+ *   NbToastrModule.forRoot(config),
+ * ]
+ * ```
+ *
+ * ### Configuration
+ *
+ * Config accepts following options:
+ *
+ * `position` - determines where on the screen toast will be rendered.
+ * Default is `top-end`.
+ *
+ * @stacked-example(Position, toastr/toastr-positions.component)
+ *
+ * `status` - coloring and icon of the toast.
+ * Default is `primary`
+ *
+ * @stacked-example(Status, toastr/toastr-statuses.component)
+ *
+ * `duration` - the time after which the toast will be destroyed.
+ * `0` means endless toast, that may be destroyed by click only.
+ * Default is 3000 ms.
+ *
+ * @stacked-example(Duration, toastr/toastr-duration.component)
+ *
+ * `destroyByClick` - provides capability destroy toast by click.
+ * Default is true.
+ *
+ * @stacked-example(Destroy by click, toastr/toastr-destroy-by-click.component)
+ *
+ * `preventDuplicates` - don't create new toast if it has the same title and the same message with previous one.
+ * Default is false.
+ *
+ * @stacked-example(Prevent duplicates, toastr/toastr-prevent-duplicates.component)
+ *
+ * `hasIcon` - if true then render toast icon.
+ *
+ * @stacked-example(Has icon, toastr/toastr-icon.component)
+ * */
 @Injectable()
 export class NbToastrService {
   constructor(@Inject(NB_TOASTR_CONFIG) protected globalConfig: NbToastrConfig,

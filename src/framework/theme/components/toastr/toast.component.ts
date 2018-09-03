@@ -3,6 +3,18 @@ import { Component, EventEmitter, HostBinding, HostListener, Input, Output } fro
 import { NbToast, NbToastStatus } from './model';
 
 
+/**
+ * The `NbToastComponent` is responsible for rendering each toast with appropriate styles.
+ *
+ * @styles
+ *
+ * toastr-bg
+ * toastr-padding
+ * toastr-fg
+ * toastr-border
+ * toastr-border-radius
+ * toastr-border-color
+ * */
 @Component({
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
@@ -59,7 +71,7 @@ export class NbToastComponent {
 
   @HostBinding('class.has-icon')
   get hasIcon(): boolean {
-    return this.toast.config.hasIcon || this.toast.config.status === NbToastStatus.DEFAULT;
+    return this.toast.config.hasIcon && this.toast.config.status !== NbToastStatus.DEFAULT;
   }
 
   @HostListener('click')

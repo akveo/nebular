@@ -6,14 +6,14 @@ import {
   ConnectedPosition,
   ConnectionPositionPair,
   FlexibleConnectedPositionStrategy,
-  GlobalPositionStrategy,
   Overlay,
   OverlayConfig,
   OverlayContainer,
   OverlayModule,
   OverlayPositionBuilder,
   OverlayRef,
-  PositionStrategy, ScrollStrategyOptions,
+  PositionStrategy,
+  ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
