@@ -205,6 +205,7 @@ import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
 import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
 import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
 import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
+import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -397,6 +398,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbToastrPositionsComponent,
   NbToastrStatusesComponent,
   NbToastrDurationComponent,
+  NbToastrDestroyByClickComponent,
 ];
 
 @NgModule({
