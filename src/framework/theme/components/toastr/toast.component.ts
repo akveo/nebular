@@ -28,9 +28,7 @@ import { NbToast, NbToastStatus } from './model';
     <div class="icon" *ngIf="hasIcon"></div>
     <div class="content-container">
       <span class="title">{{ toast.title }}</span>
-      <div class="content">
-        <div class="primitive-popover">{{ toast.message }}</div>
-      </div>
+      <div class="message">{{ toast.message }}</div>
     </div>
   `,
 })

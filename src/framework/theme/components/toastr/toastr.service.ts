@@ -169,7 +169,7 @@ export class NbToastrContainerRegistry {
  * */
 @Injectable()
 export class NbToastrService {
-  constructor(@Inject(NB_TOASTR_CONFIG) protected globalConfig: NbToastrConfig,
+  constructor(@Inject(NB_TOASTR_CONFIG) protected globalConfig: Partial<NbToastrConfig>,
               protected containerRegistry: NbToastrContainerRegistry) {
   }
 
