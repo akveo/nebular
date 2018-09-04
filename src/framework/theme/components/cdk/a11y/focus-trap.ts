@@ -39,7 +39,7 @@ export class NbFocusTrapFactoryService extends FocusTrapFactory {
   constructor(
     protected checker: InteractivityChecker,
     protected ngZone: NgZone,
-    @Inject(NB_DOCUMENT) private document: Document) {
+    @Inject(NB_DOCUMENT) private document) {
     super(checker, ngZone, document);
   }
 
