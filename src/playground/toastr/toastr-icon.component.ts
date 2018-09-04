@@ -4,8 +4,9 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'nb-toastr-icon',
   template: `
-    <button nbButton (click)="showToast(true)">With icon</button>
-    <button nbButton (click)="showToast(false)">Without icon</button>
+    <button nbButton (click)="showToast(true, '')">With icon</button>
+    <button nbButton (click)="showToast(false, '')">Without icon</button>
+    <button nbButton (click)="showToast(true, 'nb-alert')">Custom icon</button>
   `,
   styles: [
       `
@@ -26,10 +27,7 @@ export class NbToastrIconComponent {
   constructor(private toastrService: NbToastrService) {
   }
 
-  showToast(hasIcon) {
-    this.toastrService.show(
-      'Message',
-      `Toast: ${++this.index}`,
-      { hasIcon });
+  showToast(hasIcon, icon) {
+    this.toastrService.show('Message', `Toast: ${++this.index}`, { hasIcon, icon });
   }
 }

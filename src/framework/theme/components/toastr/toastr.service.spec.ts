@@ -63,7 +63,7 @@ describe('toastr-service', () => {
     toastr.success('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.SUCCESS);
   });
 
@@ -73,7 +73,7 @@ describe('toastr-service', () => {
     toastr.info('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.INFO);
   });
 
@@ -83,7 +83,7 @@ describe('toastr-service', () => {
     toastr.warning('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.WARNING);
   });
 
@@ -93,7 +93,7 @@ describe('toastr-service', () => {
     toastr.primary('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.PRIMARY);
   });
 
@@ -103,7 +103,7 @@ describe('toastr-service', () => {
     toastr.danger('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.DANGER);
   });
 
@@ -113,7 +113,7 @@ describe('toastr-service', () => {
     toastr.default('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [message, title, { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe(NbToastStatus.DEFAULT);
   });
 });

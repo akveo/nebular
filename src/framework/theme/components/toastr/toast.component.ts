@@ -25,7 +25,7 @@ import { NbToast, NbToastStatus } from './model';
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
   template: `
-    <div class="icon" *ngIf="hasIcon"></div>
+    <i class="icon {{ icon }}" *ngIf="hasIcon"></i>
     <div class="content-container">
       <span class="title">{{ toast.title }}</span>
       <div class="message">{{ toast.message }}</div>
@@ -76,6 +76,15 @@ export class NbToastComponent {
   @HostBinding('class.has-icon')
   get hasIcon(): boolean {
     return this.toast.config.hasIcon && this.toast.config.status !== NbToastStatus.DEFAULT;
+  }
+
+  @HostBinding('class.custom-icon')
+  get customIcon(): boolean {
+    return !!this.icon;
+  }
+
+  get icon(): string {
+    return this.toast.config.icon;
   }
 
   @HostListener('click')

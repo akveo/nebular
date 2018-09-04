@@ -164,6 +164,7 @@ export class NbToastrContainerRegistry {
  * @stacked-example(Prevent duplicates, toastr/toastr-prevent-duplicates.component)
  *
  * `hasIcon` - if true then render toast icon.
+ * `icon` - you can pass icon class that will be applied into the toast.
  *
  * @stacked-example(Has icon, toastr/toastr-icon.component)
  * */

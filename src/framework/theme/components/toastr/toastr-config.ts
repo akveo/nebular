@@ -19,6 +19,7 @@ export class NbToastrConfig {
   destroyByClick: boolean = true;
   preventDuplicates: boolean = false;
   hasIcon: boolean = true;
+  icon: string = '';
 
   constructor(config: Partial<NbToastrConfig>) {
     Object.assign(this, config);
