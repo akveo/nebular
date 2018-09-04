@@ -75,6 +75,9 @@ export const defaultAuthOptions: any = {
       },
       email: {
         required: true,
+        regex: '.+@.+\..+',
+        label: 'Email',
+        error: 'Email should be the real one!'
       },
       fullName: {
         required: false,

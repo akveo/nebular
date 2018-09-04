@@ -15,24 +15,24 @@
     </nb-alert>
 
     <div class="form-group">
-      <label for="input-email" class="sr-only">Email address</label>
+      <label for="input-email" class="sr-only">{{ getConfigValue('forms.validation.email.label') }}</label>
       <input nbInput
              [(ngModel)]="user.email"
              #email="ngModel"
              name="email"
              id="input-email"
-             pattern=".+@.+\..+"
-             placeholder="Email address"
+             [pattern]="getConfigValue('forms.validation.email.regex')"
+             [placeholder]="getConfigValue('forms.validation.email.label')"
              autofocus
              fullWidth
              [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
              [required]="getConfigValue('forms.validation.email.required')">
       <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
-        Email is required!
+        {{ getConfigValue('forms.validation.email.error') }}
       </small>
       <small class="form-text error"
              *ngIf="email.invalid && email.touched && email.errors?.pattern">
-        Email should be the real one!
+        {{ getConfigValue('forms.validation.email.error')}}
       </small>
     </div>
 

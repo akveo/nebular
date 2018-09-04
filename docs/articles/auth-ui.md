@@ -99,6 +99,9 @@ export const defaultSettings: any = {
       },
       email: {
         required: true,
+        regex: '.+@.+\..+',
+        label: 'Email',
+        error: 'Email should be the real one!'
       },
       fullName: {
         required: false,
@@ -109,6 +112,34 @@ export const defaultSettings: any = {
   },
 };
 ```
+if you want login with **phone number** and password instead **email** and password ,just edit your code like below:
+```typescript
+@NgModule({
+  imports: [
+   // ...
+
+   NbAuthModule.forRoot({
+         strategies: [
+           NbPasswordAuthStrategy.setup({
+             name: 'email',
+           }),
+         ],
+         forms: {
+           ...
+           validation: {
+              email: {
+              label: 'phone number',
+              error: 'phone number should be the real one!',
+              required: true,
+              regex: '(9|09)([0-9]{9})' // <= your regex for input pattern (validation of input)
+            }
+           }
+         },
+       }), 
+  ],
+});
+```
+body of this request is `{email: "your phone number", password: "your password"}`.you must handle this in backend.
 <hr>
 
 ## Remove redirect delay

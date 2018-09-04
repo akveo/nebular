@@ -24,7 +24,7 @@ const config = {
   directConnect: true,
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 120000,
+    defaultTimeoutInterval: 1200000,
     print: function() {}
   },
   onPrepare() {
