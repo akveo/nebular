@@ -1,5 +1,5 @@
-import { NbToastrService } from './toastr.service';
-import { NbGlobalLogicalPosition } from '../cdk';
+import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
+import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk';
 import { NbToastStatus } from './model';
 
 
@@ -13,11 +13,17 @@ describe('toastr-service', () => {
       attach() {
       },
     };
+  });
+
+  beforeEach(() => {
     containerRegistryStub = {
       get() {
         return containerStub;
       },
     };
+  });
+
+  beforeEach(() => {
     toastr = new NbToastrService({}, <any> containerRegistryStub);
   });
 
@@ -112,3 +118,75 @@ describe('toastr-service', () => {
   });
 });
 
+describe('toastr-container-registry', () => {
+  let toastrContainerRegistry: NbToastrContainerRegistry;
+  let overlayStub: any;
+  let positionBuilder: any;
+  let positionHelper: any;
+  let containerStub: any;
+
+  beforeEach(() => {
+    containerStub = {
+      attach() {
+      },
+    }
+  });
+
+  beforeEach(() => {
+    overlayStub = {
+      create() {
+        return containerStub;
+      },
+    };
+  });
+
+  beforeEach(() => {
+    positionBuilder = {
+      global() {
+        return {
+          position() {
+          },
+        }
+      },
+    };
+  });
+
+  beforeEach(() => {
+    positionHelper = {
+      toLogicalPosition(position) {
+        return position;
+      },
+    };
+  });
+
+  beforeEach(() => {
+    toastrContainerRegistry = new NbToastrContainerRegistry(overlayStub, positionBuilder, positionHelper);
+  });
+
+  it('should create new container if not exists for requested position', () => {
+    const overlayCreateSpy = spyOn(overlayStub, 'create').and.returnValue(containerStub);
+
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
+
+    expect(overlayCreateSpy).toHaveBeenCalled();
+  });
+
+  it('should return existing container if same position called twice', () => {
+    const overlayCreateSpy = spyOn(overlayStub, 'create').and.returnValue(containerStub);
+
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
+
+    expect(overlayCreateSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return the same position for top-end and top-right when ltr', () => {
+    spyOn(positionHelper, 'toLogicalPosition')
+      .and.returnValue(NbGlobalLogicalPosition.TOP_END);
+
+    const topEnd = toastrContainerRegistry.get(NbGlobalLogicalPosition.TOP_END);
+    const topRight = toastrContainerRegistry.get(NbGlobalPhysicalPosition.TOP_RIGHT);
+
+    expect(topEnd).toBe(topRight);
+  });
+});
