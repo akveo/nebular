@@ -24,7 +24,7 @@ describe('toastr-service', () => {
   });
 
   beforeEach(() => {
-    toastr = new NbToastrService({}, <any> containerRegistryStub);
+    toastr = new NbToastrService(<any> {}, <any> containerRegistryStub);
   });
 
   it('should attach to toastr container', () => {
