@@ -44,7 +44,7 @@ export class NbDialogContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.config.autoFocus) {
+    if (this.config.autoFocus && this.focusTrap) {
       this.focusTrap.restoreFocus();
     }
   }
