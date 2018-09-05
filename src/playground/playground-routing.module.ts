@@ -159,6 +159,7 @@ import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbSelectShowcaseComponent } from './select/select-showcase.component';
 
 
 export const routes: Routes = [
@@ -192,6 +193,15 @@ export const routes: Routes = [
           {
             path: 'popover-modes.component',
             component: NbPopoverModesComponent,
+          },
+        ],
+      },
+      {
+        path: 'select',
+        children: [
+          {
+            path: 'select-showcase.component',
+            component: NbSelectShowcaseComponent,
           },
         ],
       },
