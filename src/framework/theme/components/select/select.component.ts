@@ -7,9 +7,10 @@
 import {
   AfterViewInit,
   Component,
+  ComponentRef,
   ContentChildren,
   ElementRef,
-  HostListener,
+  Inject,
   Input,
   OnDestroy,
   QueryList,
@@ -24,9 +25,15 @@ import {
   NbPortalDirective,
   NbPosition,
   NbPositionBuilderService,
+  NbPositionStrategy,
+  NbTrigger,
+  NbTriggerStrategy,
+  NbTriggerStrategyBuilder,
 } from '../cdk';
 import { defer, merge, Observable } from 'rxjs';
 import { NbOptionComponent } from './option.component';
+import { NB_DOCUMENT } from '../../theme.options';
+import { convertToBoolProperty } from '../helpers';
 
 
 @Component({
@@ -55,18 +62,23 @@ import { NbOptionComponent } from './option.component';
 })
 
 export class NbSelectComponent implements AfterViewInit, OnDestroy {
-  @Input() multi: boolean = false;
+  multi: boolean = false;
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent>;
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
-
   selected: any;
   select: Observable<any> = defer(() => merge(...this.options.map(it => it.select)));
   ref: NbOverlayRef;
 
-  constructor(protected overlay: NbOverlayService,
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              protected overlay: NbOverlayService,
               protected hostRef: ElementRef,
               protected positionBuilder: NbPositionBuilderService) {
+  }
+
+  @Input('multi')
+  set _multi(multi: boolean) {
+    this.multi = convertToBoolProperty(multi);
   }
 
   get hostWidth(): number {
@@ -74,9 +86,14 @@ export class NbSelectComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.subscribeOnTriggers();
     this.select.subscribe(val => {
-      this.selected = val;
-      this.ref.detach();
+      if (this.multi) {
+        this.selected += `, ${val}`;
+      } else {
+        this.selected = val;
+        this.hide();
+      }
     });
   }
 
@@ -84,21 +101,58 @@ export class NbSelectComponent implements AfterViewInit, OnDestroy {
     this.ref.dispose();
   }
 
-  @HostListener('click')
-  onClick() {
+  show() {
     if (!this.ref) {
-      const positionStrategy = this.positionBuilder
-        .connectedTo(this.hostRef)
-        .position(NbPosition.BOTTOM)
-        .offset(0)
-        .adjustment(NbAdjustment.NOOP);
+      this.createOverlay();
+    }
 
-      this.ref = this.overlay.create({
-        positionStrategy,
-        scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      });
+    if (this.ref.hasAttached()) {
+      return;
     }
 
     this.ref.attach(this.portal);
+  }
+
+  hide() {
+    this.ref.detach();
+  }
+
+  protected createOverlay() {
+    const positionStrategy = this.createPositionStrategy();
+    const scrollStrategy = this.createScrollStrategy();
+
+    this.ref = this.overlay.create({ positionStrategy, scrollStrategy });
+  }
+
+  protected createPositionStrategy(): NbPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .position(NbPosition.BOTTOM)
+      .offset(0)
+      .adjustment(NbAdjustment.NOOP);
+  }
+
+  protected createScrollStrategy() {
+    return this.overlay.scrollStrategies.block();
+  }
+
+  protected subscribeOnTriggers() {
+    const triggerStrategy: NbTriggerStrategy = new NbTriggerStrategyBuilder()
+      .document(this.document)
+      .trigger(NbTrigger.CLICK)
+      .host(this.hostRef.nativeElement)
+      .container(() => this.getContainer())
+      .build();
+
+    triggerStrategy.show$.subscribe(() => this.show());
+    triggerStrategy.hide$.subscribe(() => this.hide());
+  }
+
+  protected getContainer() {
+    return this.ref && this.ref.hasAttached() && <ComponentRef<any>> {
+      location: {
+        nativeElement: this.ref.overlayElement,
+      },
+    };
   }
 }

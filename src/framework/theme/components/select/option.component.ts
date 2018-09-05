@@ -9,7 +9,13 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 
 @Component({
   selector: 'nb-option',
-  template: '<ng-content></ng-content>',
+  template: `
+    <ng-container>
+      <nb-checkbox>
+        <ng-content></ng-content>
+      </nb-checkbox>
+    </ng-container>
+  `,
   styles: [
       `
       :host {
@@ -26,6 +32,9 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 export class NbOptionComponent {
   @Input() value: any;
   @Output() readonly select: EventEmitter<any> = new EventEmitter();
+
+  constructor() {
+  }
 
   @HostListener('click')
   onClick() {

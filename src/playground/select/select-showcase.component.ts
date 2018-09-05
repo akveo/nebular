@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
     <nb-card>
       <nb-card-body>
 
-        <nb-select placeholder="Pick one more option">
+        <nb-select placeholder="Multiple" multi>
           <nb-option>None</nb-option>
           <nb-option-group title="Group 1">
             <nb-option value="Option 1">Option 1</nb-option>
@@ -20,14 +20,33 @@ import { Component } from '@angular/core';
             <nb-option value="Option 3">Option 3</nb-option>
           </nb-option-group>
           <nb-option-group title="Group 2">
-            <nb-option>Option 1</nb-option>
-            <nb-option>Option 2</nb-option>
-            <nb-option>Option 3</nb-option>
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
           </nb-option-group>
           <nb-option-group title="Group 3">
-            <nb-option>Option 1</nb-option>
-            <nb-option>Option 2</nb-option>
-            <nb-option>Option 3</nb-option>
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
+          </nb-option-group>
+        </nb-select>
+
+        <nb-select placeholder="Single">
+          <nb-option>None</nb-option>
+          <nb-option-group title="Group 1">
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
+          </nb-option-group>
+          <nb-option-group title="Group 2">
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
+          </nb-option-group>
+          <nb-option-group title="Group 3">
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
           </nb-option-group>
         </nb-select>
 
