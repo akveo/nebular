@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbOverlayModule } from '../cdk';
+import { NbSharedModule } from '../shared/shared.module';
 import { NbInputModule } from '../input/input.module';
 import { NbCardModule } from '../card/card.module';
 import { NbCheckboxModule } from '../checkbox/checkbox.module';
@@ -16,7 +17,7 @@ const NB_SELECT_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [NbOverlayModule, NbInputModule, NbCardModule, NbCheckboxModule],
+  imports: [NbSharedModule, NbOverlayModule, NbInputModule, NbCardModule, NbCheckboxModule],
   exports: [...NB_SELECT_COMPONENTS],
   declarations: [...NB_SELECT_COMPONENTS],
 })

@@ -4,17 +4,34 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Inject,
+  InjectionToken,
+  Input,
+  Output,
+} from '@angular/core';
 
+export const NB_SELECT = new InjectionToken('select');
 
 @Component({
   selector: 'nb-option',
   template: `
-    <ng-container>
-      <nb-checkbox>
-        <ng-content></ng-content>
-      </nb-checkbox>
+    <nb-checkbox *ngIf="multiple" [(ngModel)]="selected">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </nb-checkbox>
+
+    <ng-container *ngIf="!multiple">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
     </ng-container>
+
+    <ng-template #content>
+      <ng-content></ng-content>
+    </ng-template>
   `,
   styles: [
       `
@@ -26,19 +43,45 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
         background-color: lightgrey;
         cursor: pointer;
       }
+
+      :host nb-checkbox {
+        pointer-events: none;
+      }
     `,
   ],
 })
-export class NbOptionComponent {
-  @Input() value: any;
-  @Output() readonly select: EventEmitter<any> = new EventEmitter();
+export class NbOptionComponent<T> {
+  @Input() value: T;
+  @Output() selectionChange: EventEmitter<NbOptionComponent<T>> = new EventEmitter();
+  selected: boolean = false;
 
-  constructor() {
+  constructor(protected elementRef: ElementRef, @Inject(NB_SELECT) protected parent) {
+  }
+
+  get content() {
+    return this.elementRef.nativeElement.textContent;
+  }
+
+  get multiple() {
+    return this.parent.multi;
+  }
+
+  @HostBinding('class.selected')
+  get selectedClass(): boolean {
+    return this.selected;
   }
 
   @HostListener('click')
   onClick() {
-    this.select.emit(this.value);
+    this.selectionChange.emit(this);
+  }
+
+  select() {
+    this.selected = true;
+  }
+
+  deselect() {
+    this.selected = false;
   }
 }
 

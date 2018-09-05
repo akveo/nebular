@@ -19,14 +19,13 @@ import { Component, Input } from '@angular/core';
         display: block;
       }
 
-      :host /deep/ nb-option {
-        margin-left: 1rem;
-        border-bottom: 1px solid grey;
-        padding: 1rem;
+      :host span {
+        padding: 0.5rem;
+        display: block;
       }
 
-      :host /deep/ nb-option:first-child {
-        border-top: 1px solid grey;
+      :host /deep/ nb-option {
+        padding: 0.75rem 0.75rem 0.75rem 2.5rem;
       }
     `,
   ],

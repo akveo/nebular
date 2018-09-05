@@ -31,15 +31,24 @@ import {
   NbTriggerStrategyBuilder,
 } from '../cdk';
 import { defer, merge, Observable } from 'rxjs';
-import { NbOptionComponent } from './option.component';
+import { NB_SELECT, NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
+
+const voidState = style({ opacity: 0, height: 0 });
+
+const selectAnimations = [
+  trigger('select', [
+    transition(':enter', [voidState, animate(100)]),
+    transition(':leave', [animate(100, voidState)]),
+  ]),
+];
 
 
 @Component({
   selector: 'nb-select',
   template: `
-    <button nbButton status="primary">{{ selected || placeholder }}</button>
+    <button nbButton status="primary" [class.opened]="isOpened">{{ selectionView }}</button>
 
     <nb-card @select *nbPortal [style.width.px]="hostWidth">
       <nb-card-body>
@@ -48,26 +57,24 @@ import { convertToBoolProperty } from '../helpers';
     </nb-card>
   `,
   styleUrls: ['./select.component.scss'],
-  animations: [
-    trigger('select', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10%)' }),
-        animate(100),
-      ]),
-      transition(':leave', [
-        animate(100, style({ opacity: 0, transform: 'translateY(-10%)' })),
-      ]),
-    ]),
+  animations: selectAnimations,
+  providers: [
+    { provide: NB_SELECT, useExisting: NbSelectComponent },
   ],
 })
 
-export class NbSelectComponent implements AfterViewInit, OnDestroy {
+export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
   multi: boolean = false;
   @Input() placeholder: string = '';
-  @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent>;
+  @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
-  selected: any;
-  select: Observable<any> = defer(() => merge(...this.options.map(it => it.select)));
+
+  selectionModel: NbOptionComponent<T>[] = [];
+
+  selectionChange: Observable<NbOptionComponent<T>> = defer(() => {
+    return merge(...this.options.map(it => it.selectionChange));
+  });
+
   ref: NbOverlayRef;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -81,20 +88,30 @@ export class NbSelectComponent implements AfterViewInit, OnDestroy {
     this.multi = convertToBoolProperty(multi);
   }
 
+  get isOpened(): boolean {
+    return this.ref && this.ref.hasAttached();
+  }
+
   get hostWidth(): number {
     return this.hostRef.nativeElement.getBoundingClientRect().width;
   }
 
+  get selectionView() {
+    if (!this.selectionModel.length) {
+      return this.placeholder;
+    }
+
+    if (this.selectionModel.length > 1) {
+      return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
+    }
+
+    return this.selectionModel[0].content;
+  }
+
   ngAfterViewInit() {
     this.subscribeOnTriggers();
-    this.select.subscribe(val => {
-      if (this.multi) {
-        this.selected += `, ${val}`;
-      } else {
-        this.selected = val;
-        this.hide();
-      }
-    });
+
+    this.selectionChange.subscribe((option: NbOptionComponent) => this.handleSelect(option));
   }
 
   ngOnDestroy() {
@@ -115,6 +132,36 @@ export class NbSelectComponent implements AfterViewInit, OnDestroy {
 
   hide() {
     this.ref.detach();
+  }
+
+  protected handleSelect(option: NbOptionComponent) {
+    if (this.multi) {
+      this.handleMultipleSelect(option);
+    } else {
+      this.handleSingleSelect(option);
+    }
+  }
+
+  protected handleSingleSelect(option: NbOptionComponent) {
+    const selected = this.selectionModel.pop();
+
+    if (selected && selected !== option) {
+      selected.deselect();
+    }
+
+    this.selectionModel = [option];
+    option.select();
+    this.hide();
+  }
+
+  protected handleMultipleSelect(option: NbOptionComponent) {
+    if (option.selected) {
+      this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
+      option.deselect();
+    } else {
+      this.selectionModel.push(option);
+      option.select();
+    }
   }
 
   protected createOverlay() {
