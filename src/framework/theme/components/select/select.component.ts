@@ -1,3 +1,9 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
   AfterViewInit,
   Component,
@@ -5,12 +11,20 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
   QueryList,
   ViewChild,
 } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
-import { NbAdjustment, NbOverlayService, NbPortalDirective, NbPosition, NbPositionBuilderService } from '../cdk';
+import {
+  NbAdjustment,
+  NbOverlayRef,
+  NbOverlayService,
+  NbPortalDirective,
+  NbPosition,
+  NbPositionBuilderService,
+} from '../cdk';
 import { defer, merge, Observable } from 'rxjs';
 import { NbOptionComponent } from './option.component';
 
@@ -18,7 +32,7 @@ import { NbOptionComponent } from './option.component';
 @Component({
   selector: 'nb-select',
   template: `
-    <input nbInput size="large" status="warning" shape="semi-round">
+    <button nbButton status="primary">{{ selected || placeholder }}</button>
 
     <nb-card @select *nbPortal [style.width.px]="hostWidth">
       <nb-card-body>
@@ -26,6 +40,7 @@ import { NbOptionComponent } from './option.component';
       </nb-card-body>
     </nb-card>
   `,
+  styleUrls: ['./select.component.scss'],
   animations: [
     trigger('select', [
       transition(':enter', [
@@ -39,12 +54,15 @@ import { NbOptionComponent } from './option.component';
   ],
 })
 
-export class NbSelectComponent implements AfterViewInit {
+export class NbSelectComponent implements AfterViewInit, OnDestroy {
   @Input() multi: boolean = false;
+  @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent>;
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
+  selected: any;
   select: Observable<any> = defer(() => merge(...this.options.map(it => it.select)));
+  ref: NbOverlayRef;
 
   constructor(protected overlay: NbOverlayService,
               protected hostRef: ElementRef,
@@ -56,23 +74,31 @@ export class NbSelectComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.select.subscribe(() => {
-
+    this.select.subscribe(val => {
+      this.selected = val;
+      this.ref.detach();
     });
+  }
+
+  ngOnDestroy() {
+    this.ref.dispose();
   }
 
   @HostListener('click')
   onClick() {
-    const positionStrategy = this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(NbPosition.BOTTOM)
-      .adjustment(NbAdjustment.NOOP);
+    if (!this.ref) {
+      const positionStrategy = this.positionBuilder
+        .connectedTo(this.hostRef)
+        .position(NbPosition.BOTTOM)
+        .offset(0)
+        .adjustment(NbAdjustment.NOOP);
 
-    const ref = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
+      this.ref = this.overlay.create({
+        positionStrategy,
+        scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      });
+    }
 
-    ref.attach(this.portal);
+    this.ref.attach(this.portal);
   }
 }

@@ -5,7 +5,7 @@ import { NbInputModule } from '../input/input.module';
 import { NbCardModule } from '../card/card.module';
 import { NbSelectComponent } from './select.component';
 import { NbOptionComponent } from './option.component';
-import { NbOptionGroupComponent } from './option-group';
+import { NbOptionGroupComponent } from './option-group.component';
 
 
 const NB_SELECT_COMPONENTS = [

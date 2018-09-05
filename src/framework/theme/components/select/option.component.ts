@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 
 @Component({
   selector: 'nb-option',
   template: '<ng-content></ng-content>',
   styles: [
-    `
+      `
       :host {
         display: block;
       }
@@ -24,11 +24,12 @@ import { Component, EventEmitter, HostListener, Output } from '@angular/core';
   ],
 })
 export class NbOptionComponent {
-  @Output() readonly select: EventEmitter<void> = new EventEmitter();
+  @Input() value: any;
+  @Output() readonly select: EventEmitter<any> = new EventEmitter();
 
   @HostListener('click')
   onClick() {
-    this.select.emit();
+    this.select.emit(this.value);
   }
 }
 

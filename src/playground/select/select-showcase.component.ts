@@ -12,11 +12,12 @@ import { Component } from '@angular/core';
     <nb-card>
       <nb-card-body>
 
-        <nb-select>
+        <nb-select placeholder="Pick one more option">
+          <nb-option>None</nb-option>
           <nb-option-group title="Group 1">
-            <nb-option>Option 1</nb-option>
-            <nb-option>Option 2</nb-option>
-            <nb-option>Option 3</nb-option>
+            <nb-option value="Option 1">Option 1</nb-option>
+            <nb-option value="Option 2">Option 2</nb-option>
+            <nb-option value="Option 3">Option 3</nb-option>
           </nb-option-group>
           <nb-option-group title="Group 2">
             <nb-option>Option 1</nb-option>
@@ -33,6 +34,11 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+  styles: [`
+    :host nb-select {
+      width: 15rem;
+    }
+  `],
 })
 
 export class NbSelectShowcaseComponent {
