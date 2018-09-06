@@ -23,11 +23,11 @@ export const NB_SELECT = new InjectionToken('select');
   selector: 'nb-option',
   styleUrls: ['./option.component.scss'],
   template: `
-    <nb-checkbox *ngIf="multiple" [(ngModel)]="selected">
+    <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </nb-checkbox>
 
-    <ng-container *ngIf="!multiple">
+    <ng-container *ngIf="!withCheckbox">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </ng-container>
 
@@ -43,6 +43,10 @@ export class NbOptionComponent<T> {
   disabled: boolean = false;
 
   constructor(protected elementRef: ElementRef, @Inject(NB_SELECT) protected parent) {
+  }
+
+  get withCheckbox(): boolean {
+    return this.multiple && !!this.value;
   }
 
   @Input('disabled')

@@ -160,6 +160,20 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected handleSelect(option: NbOptionComponent<T>) {
+    if (option.value) {
+      this.select(option);
+    } else {
+      this.reset();
+    }
+  }
+
+  protected reset() {
+    this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
+    this.selectionModel = [];
+    this.hide();
+  }
+
+  protected select(option: NbOptionComponent<T>) {
     if (this.multi) {
       this.handleMultipleSelect(option);
     } else {
