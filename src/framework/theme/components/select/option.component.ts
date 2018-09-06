@@ -15,11 +15,13 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 
 export const NB_SELECT = new InjectionToken('select');
 
 @Component({
   selector: 'nb-option',
+  styleUrls: ['./option.component.scss'],
   template: `
     <nb-checkbox *ngIf="multiple" [(ngModel)]="selected">
       <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -33,29 +35,19 @@ export const NB_SELECT = new InjectionToken('select');
       <ng-content></ng-content>
     </ng-template>
   `,
-  styles: [
-      `
-      :host {
-        display: block;
-      }
-
-      :host:hover {
-        background-color: lightgrey;
-        cursor: pointer;
-      }
-
-      :host nb-checkbox {
-        pointer-events: none;
-      }
-    `,
-  ],
 })
 export class NbOptionComponent<T> {
   @Input() value: T;
   @Output() selectionChange: EventEmitter<NbOptionComponent<T>> = new EventEmitter();
   selected: boolean = false;
+  disabled: boolean = false;
 
   constructor(protected elementRef: ElementRef, @Inject(NB_SELECT) protected parent) {
+  }
+
+  @Input('disabled')
+  set _disabled(disabled: boolean) {
+    this.disabled = convertToBoolProperty(disabled);
   }
 
   get content() {
@@ -69,6 +61,11 @@ export class NbOptionComponent<T> {
   @HostBinding('class.selected')
   get selectedClass(): boolean {
     return this.selected;
+  }
+
+  @HostBinding('class.disabled')
+  get disabledClass(): boolean {
+    return this.disabled;
   }
 
   @HostListener('click')

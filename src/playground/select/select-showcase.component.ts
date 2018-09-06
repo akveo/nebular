@@ -13,10 +13,10 @@ import { Component } from '@angular/core';
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
-        <nb-option value="Option 2">Option 2</nb-option>
+        <nb-option value="Option 2" disabled>Option 2</nb-option>
         <nb-option value="Option 3">Option 3</nb-option>
       </nb-option-group>
-      <nb-option-group title="Group 2">
+      <nb-option-group title="Group 2" disabled>
         <nb-option value="Option 21">Option 21</nb-option>
         <nb-option value="Option 22">Option 22</nb-option>
         <nb-option value="Option 23">Option 23</nb-option>
@@ -32,10 +32,10 @@ import { Component } from '@angular/core';
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
-        <nb-option value="Option 2">Option 2</nb-option>
+        <nb-option value="Option 2" disabled>Option 2</nb-option>
         <nb-option value="Option 3">Option 3</nb-option>
       </nb-option-group>
-      <nb-option-group title="Group 2">
+      <nb-option-group title="Group 2" disabled>
         <nb-option value="Option 21">Option 21</nb-option>
         <nb-option value="Option 22">Option 22</nb-option>
         <nb-option value="Option 23">Option 23</nb-option>
