@@ -68,7 +68,7 @@ const selectAnimations = [
       {{ selectionView }}
     </button>
 
-    <nb-card *nbPortal [style.width.px]="hostWidth">
+    <nb-card *nbPortal class="{{ status }}" [style.width.px]="hostWidth">
       <nb-card-body>
         <ng-content select="nb-option, nb-option-group"></ng-content>
       </nb-card-body>

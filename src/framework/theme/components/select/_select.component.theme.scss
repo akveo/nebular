@@ -4,6 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@mixin nb-card-status($status) {
+  border: 2px solid nb-theme(color-#{$status});
+
+  nb-option {
+    &:hover, &.selected {
+      background-color: nb-theme(color-#{$status});
+      color: nb-theme(color-white);
+    }
+  }
+}
+
 @mixin nb-select-theme() {
   button.opened {
     border-bottom-left-radius: 0;
@@ -11,7 +22,6 @@
   }
 
   nb-card {
-    border: 2px solid nb-theme(color-primary);
     background-color: nb-theme(color-bg);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -25,12 +35,26 @@
 
     nb-option {
       padding: 0.75rem 1.5rem;
+    }
 
-      &:hover, &.selected {
-        background-color: nb-theme(color-primary);
-        color: nb-theme(color-white);
+    &.primary {
+      @include nb-card-status(primary);
+    }
 
-      }
+    &.danger {
+      @include nb-card-status(danger);
+    }
+
+    &.warning {
+      @include nb-card-status(warning);
+    }
+
+    &.info {
+      @include nb-card-status(info);
+    }
+
+    &.success {
+      @include nb-card-status(success);
     }
   }
 
