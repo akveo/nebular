@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-showcase',
   template: `
-    <nb-select placeholder="Multiple" multi shape="round">
+    <nb-select placeholder="Multiple" multi shape="round" [(ngModel)]="selectedValues">
       <nb-select-label>
-        This is custom label mother fucker
+        Selected values: <span *ngFor="let s of selectedValues">{{ s + ' ' }}</span>
       </nb-select-label>
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
@@ -103,6 +103,8 @@ import { Component } from '@angular/core';
         <nb-option value="Option 33">Option 33</nb-option>
       </nb-option-group>
     </nb-select>
+
+
     <nb-select placeholder="Single" status="warning">
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
@@ -133,4 +135,5 @@ import { Component } from '@angular/core';
 })
 
 export class NbSelectShowcaseComponent {
+  selectedValues;
 }

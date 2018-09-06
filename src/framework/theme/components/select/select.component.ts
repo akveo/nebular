@@ -11,10 +11,13 @@ import {
   ContentChild,
   ContentChildren,
   ElementRef,
+  EventEmitter,
+  forwardRef,
   Inject,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
@@ -35,6 +38,7 @@ import { defer, merge, Observable } from 'rxjs';
 import { NB_SELECT, NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 @Component({
@@ -48,9 +52,16 @@ export class NbSelectLabelComponent {
   selector: 'nb-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  providers: [{ provide: NB_SELECT, useExisting: NbSelectComponent }],
+  providers: [
+    { provide: NB_SELECT, useExisting: NbSelectComponent },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NbSelectComponent),
+      multi: true,
+    },
+  ],
 })
-export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
+export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   /**
    * Button size, available sizes:
    * `xxsmall`, `xsmall`, `small`, `medium`, `large`
@@ -94,7 +105,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
    * @param {boolean} val
    */
   @Input() outline: boolean;
-
+  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
   multi: boolean = false;
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
@@ -102,18 +113,24 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
   selectionModel: NbOptionComponent<T>[] = [];
   positionStrategy: NbAdjustableConnectedPositionStrategy;
-
   // because of we have to toggle overlayPosition in [ngClass] direction and this directive can use only string.
   overlayPosition: NbPosition = '' as NbPosition;
   selectionChange: Observable<NbOptionComponent<T>> = defer(() => {
     return merge(...this.options.map(it => it.selectionChange));
   });
   ref: NbOverlayRef;
+  onChange: any = () => {
+  };
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef,
               protected positionBuilder: NbPositionBuilderService) {
+  }
+
+  @Input('selected')
+  set _selected(value: T | T[]) {
+    this.writeValue(value);
   }
 
   @Input('multi')
@@ -167,9 +184,29 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     this.ref.detach();
   }
 
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
+
+  writeValue(value: T | T[]): void {
+    if (!value) {
+      return;
+    }
+
+    if (this.options) {
+      this.setSelection(value);
+    }
+  }
+
   protected handleSelect(option: NbOptionComponent<T>) {
     if (option.value) {
-      this.select(option);
+      this.selectOption(option);
     } else {
       this.reset();
     }
@@ -179,9 +216,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
     this.selectionModel = [];
     this.hide();
+    this.emitSelected(null);
   }
 
-  protected select(option: NbOptionComponent<T>) {
+  protected selectOption(option: NbOptionComponent<T>) {
     if (this.multi) {
       this.handleMultipleSelect(option);
     } else {
@@ -199,6 +237,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     this.selectionModel = [option];
     option.select();
     this.hide();
+
+    this.emitSelected(option.value);
   }
 
   protected handleMultipleSelect(option: NbOptionComponent<T>) {
@@ -209,6 +249,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
       this.selectionModel.push(option);
       option.select();
     }
+
+    this.emitSelected(this.selectionModel.map((opt: NbOptionComponent<T>) => opt.value));
   }
 
   protected createOverlay() {
@@ -252,5 +294,33 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
         nativeElement: this.ref.overlayElement,
       },
     };
+  }
+
+  protected emitSelected(selected: T | T[]) {
+    this.onChange(selected);
+    this.selectedChange.emit(selected);
+  }
+
+  protected setSelection(value: T | T[]) {
+    const isArray: boolean = Array.isArray(value);
+
+    if (this.multi && !isArray) {
+      throw new Error('Can\'t assign single value if select is multi');
+    }
+
+    if (!this.multi && isArray) {
+      throw new Error('Can\'t assign array if select is single');
+    }
+
+    if (isArray) {
+      (<T[]> value).forEach((option: T) => this.selectValue(option));
+    } else {
+      this.selectValue(<T> value);
+    }
+  }
+
+  protected selectValue(value: T) {
+    const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
+    corresponding.select();
   }
 }
