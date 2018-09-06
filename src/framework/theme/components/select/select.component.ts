@@ -13,19 +13,19 @@ import {
   Inject,
   Input,
   OnDestroy,
+  OnInit,
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 import {
+  NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbOverlayRef,
   NbOverlayService,
   NbPortalDirective,
   NbPosition,
   NbPositionBuilderService,
-  NbPositionStrategy,
   NbTrigger,
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
@@ -35,52 +35,15 @@ import { NB_SELECT, NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 
-const voidState = style({ opacity: 0, height: 0 });
-
-/**
- * TODO
- * select animations are currently disabled because of overlay positioning.
- * I mean, if we put our host element in the bottom then overlay will be rendered in the bottom.
- * Because we're using height: 0 in our animation.
- * So, we have to add any workaround.
- * */
-const selectAnimations = [
-  trigger('select', [
-    transition(':enter', [voidState, animate(100)]),
-    transition(':leave', [animate(100, voidState)]),
-  ]),
-];
-
 
 @Component({
   selector: 'nb-select',
-  template: `
-    <button
-      nbButton
-      [size]="size"
-      [status]="status"
-      [shape]="shape"
-      [hero]="hero"
-      [disabled]="disabled"
-      [fullWidth]="fullWidth"
-      [outline]="outline"
-      [class.opened]="isOpened">
-      {{ selectionView }}
-    </button>
-
-    <nb-card *nbPortal class="{{ status }}" [style.width.px]="hostWidth">
-      <nb-card-body>
-        <ng-content select="nb-option, nb-option-group"></ng-content>
-      </nb-card-body>
-    </nb-card>
-  `,
+  templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  providers: [
-    { provide: NB_SELECT, useExisting: NbSelectComponent },
-  ],
+  providers: [{ provide: NB_SELECT, useExisting: NbSelectComponent }],
 })
 
-export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
+export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Button size, available sizes:
    * `xxsmall`, `xsmall`, `small`, `medium`, `large`
@@ -93,7 +56,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
    * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() status: string;
+  @Input() status: string = 'primary';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
@@ -129,13 +92,14 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
-
   selectionModel: NbOptionComponent<T>[] = [];
+  positionStrategy: NbAdjustableConnectedPositionStrategy;
 
+  // because of we have to toggle overlayPosition in [ngClass] direction and this directive can use only string.
+  overlayPosition: NbPosition = '' as NbPosition;
   selectionChange: Observable<NbOptionComponent<T>> = defer(() => {
     return merge(...this.options.map(it => it.selectionChange));
   });
-
   ref: NbOverlayRef;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -169,9 +133,13 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
     return this.selectionModel[0].content;
   }
 
+  ngOnInit() {
+    this.createOverlay();
+  }
+
   ngAfterViewInit() {
     this.subscribeOnTriggers();
-
+    this.subscribeOnPositionChange();
     this.selectionChange.subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
   }
 
@@ -180,10 +148,6 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
   }
 
   show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
     if (this.ref.hasAttached()) {
       return;
     }
@@ -226,13 +190,12 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
   }
 
   protected createOverlay() {
-    const positionStrategy = this.createPositionStrategy();
     const scrollStrategy = this.createScrollStrategy();
-
-    this.ref = this.overlay.create({ positionStrategy, scrollStrategy });
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
   }
 
-  protected createPositionStrategy(): NbPositionStrategy {
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
@@ -254,6 +217,11 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
 
     triggerStrategy.show$.subscribe(() => this.show());
     triggerStrategy.hide$.subscribe(() => this.hide());
+  }
+
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .subscribe((position: NbPosition) => this.overlayPosition = position);
   }
 
   protected getContainer() {

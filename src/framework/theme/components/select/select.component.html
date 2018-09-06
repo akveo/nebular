@@ -1,0 +1,19 @@
+<button
+  nbButton
+  [size]="size"
+  [status]="status"
+  [shape]="shape"
+  [hero]="hero"
+  [disabled]="disabled"
+  [fullWidth]="fullWidth"
+  [outline]="outline"
+  [class.opened]="isOpened"
+  [ngClass]="overlayPosition">
+  {{ selectionView }}
+</button>
+
+<nb-card *nbPortal [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
+  <nb-card-body>
+    <ng-content select="nb-option, nb-option-group"></ng-content>
+  </nb-card-body>
+</nb-card>
