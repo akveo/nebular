@@ -10,13 +10,17 @@
   [class.opened]="isOpened"
   [ngClass]="overlayPosition">
 
-  <ng-container *ngIf="customLabel">
-    <ng-content select="nb-select-label"></ng-content>
-  </ng-container>
+    <ng-container *ngIf="selectionModel?.length">
 
-  <ng-container *ngIf="!customLabel">
-    {{ selectionView }}
-  </ng-container>
+      <ng-container *ngIf="customLabel">
+        <ng-content select="nb-select-label"></ng-content>
+      </ng-container>
+
+      <ng-container *ngIf="!customLabel">{{ selectionView }}</ng-container>
+
+    </ng-container>
+
+    <ng-container *ngIf="!selectionModel?.length">{{ placeholder }}</ng-container>
 
 </button>
 

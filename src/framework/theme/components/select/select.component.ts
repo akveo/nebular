@@ -194,10 +194,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
    * Content rendered in the label.
    * */
   get selectionView() {
-    if (!this.selectionModel.length) {
-      return this.placeholder;
-    }
-
     if (this.selectionModel.length > 1) {
       return this.selectionModel.map((option: NbOptionComponent<T>) => option.content).join(', ');
     }

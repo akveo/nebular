@@ -10,12 +10,6 @@ import { Component } from '@angular/core';
   selector: 'nb-select-showcase',
   template: `
     <nb-select placeholder="Multiple" multiple shape="round" [(ngModel)]="selectedValues">
-      <nb-select-label>
-        <span *ngIf="!selectedValues">Nothing selected</span>
-        <ng-container *ngIf="selectedValues">
-          <span *ngFor="let s of selectedValues">{{ s + ' ' }}</span>
-        </ng-container>
-      </nb-select-label>
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
