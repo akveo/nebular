@@ -17,6 +17,10 @@ import {
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 
+
+/**
+ * Token that provides `NbSelectComponent` for child options.
+ * */
 export const NB_SELECT = new InjectionToken('select');
 
 @Component({
@@ -37,21 +41,32 @@ export const NB_SELECT = new InjectionToken('select');
   `,
 })
 export class NbOptionComponent<T> {
+  /**
+   * Option value that will be fired on selection.
+   * */
   @Input() value: T;
+
+  @Input('disabled')
+  set _disabled(disabled: boolean) {
+    this.disabled = convertToBoolProperty(disabled);
+  }
+
+  /**
+   * Fires value on click.
+   * */
   @Output() selectionChange: EventEmitter<NbOptionComponent<T>> = new EventEmitter();
+
   selected: boolean = false;
   disabled: boolean = false;
 
   constructor(protected elementRef: ElementRef, @Inject(NB_SELECT) protected parent) {
   }
 
+  /**
+   * Determines should we render checkbox.
+   * */
   get withCheckbox(): boolean {
     return this.multiple && !!this.value;
-  }
-
-  @Input('disabled')
-  set _disabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
   }
 
   get content() {

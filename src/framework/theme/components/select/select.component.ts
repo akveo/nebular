@@ -63,64 +63,112 @@ export class NbSelectLabelComponent {
 })
 export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   /**
-   * Button size, available sizes:
+   * Select size, available sizes:
    * `xxsmall`, `xsmall`, `small`, `medium`, `large`
-   * @param {string} val
    */
   @Input() size: string;
 
   /**
-   * Button status (adds specific styles):
+   * Select status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
-   * @param {string} val
    */
   @Input() status: string = 'primary';
 
   /**
-   * Button shapes: `rectangle`, `round`, `semi-round`
-   * @param {string} val
+   * Select shapes: `rectangle`, `round`, `semi-round`
    */
   @Input() shape: string;
 
   /**
    * Adds `hero` styles
-   * @param {boolean} val
    */
   @Input() hero: boolean;
 
   /**
-   * Disables the button
-   * @param {boolean} val
+   * Disables the select
    */
   @Input() disabled: boolean;
 
   /**
    * If set element will fill its container
-   * @param {boolean}
    */
   @Input() fullWidth: boolean;
 
   /**
    * Adds `outline` styles
-   * @param {boolean} val
    */
   @Input() outline: boolean;
-  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
-  multiple: boolean = false;
+
+  /**
+   * Renders select placeholder if nothing selected.
+   * */
   @Input() placeholder: string = '';
+
+  /**
+   * Will be emitted when selected value changes.
+   * */
+  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
+
+  /**
+   * Accepts selected item or array of selected items.
+   * */
+  @Input('selected')
+  set _selected(value: T | T[]) {
+    this.writeValue(value);
+  }
+
+  /**
+   * Gives capability just write `multiple` over the element.
+   * */
+  @Input('multiple')
+  set _multiple(multiple: boolean) {
+    this.multiple = convertToBoolProperty(multiple);
+  }
+
+  /**
+   * List of `NbOptionComponent`'s components passed as content.
+   * TODO maybe it would be better provide wrapper
+   * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
+
+  /**
+   * Custom select label, will be rendered instead of default enumeration with coma.
+   * */
   @ContentChild(NbSelectLabelComponent) customLabel;
+
+  /**
+   * NbCard with options content.
+   * */
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
+
+  multiple: boolean = false;
+
+  /**
+   * List of selected options.
+   * */
   selectionModel: NbOptionComponent<T>[] = [];
+
   positionStrategy: NbAdjustableConnectedPositionStrategy;
-  // because of we have to toggle overlayPosition in [ngClass] direction and this directive can use only string.
+
+  /**
+   * Current overlay position because of we have to toggle overlayPosition
+   * in [ngClass] direction and this directive can use only string.
+   */
   overlayPosition: NbPosition = '' as NbPosition;
+
+  /**
+   * Stream of events that will fire when one of the options fire selectionChange event.
+   * */
   selectionChange: Observable<NbOptionComponent<T>> = defer(() => {
     return merge(...this.options.map(it => it.selectionChange));
   });
+
   ref: NbOverlayRef;
-  onChange: any = () => {
-  };
+
+  /**
+   * Function passed through control value accessor to propagate changes.
+   * */
+  protected onChange: Function = () => {};
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
@@ -128,24 +176,23 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
               protected positionBuilder: NbPositionBuilderService) {
   }
 
-  @Input('selected')
-  set _selected(value: T | T[]) {
-    this.writeValue(value);
-  }
-
-  @Input('multiple')
-  set _multiple(multiple: boolean) {
-    this.multiple = convertToBoolProperty(multiple);
-  }
-
+  /**
+   * Determines is select opened.
+   * */
   get isOpened(): boolean {
     return this.ref && this.ref.hasAttached();
   }
 
+  /**
+   * Returns width of the select button.
+   * */
   get hostWidth(): number {
     return this.hostRef.nativeElement.getBoundingClientRect().width;
   }
 
+  /**
+   * Content rendered in the label.
+   * */
   get selectionView() {
     if (!this.selectionModel.length) {
       return this.placeholder;
@@ -165,7 +212,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   ngAfterViewInit() {
     this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
-    this.selectionChange.subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
+    this.subscribeOnSelectionChange();
   }
 
   ngOnDestroy() {
@@ -173,7 +220,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   }
 
   show() {
-    if (this.ref.hasAttached()) {
+    if (this.isOpened) {
       return;
     }
 
@@ -181,7 +228,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   }
 
   hide() {
-    this.ref.detach();
+    if (this.isOpened) {
+      this.ref.detach();
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -204,6 +253,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     }
   }
 
+  /**
+   * Selects option or clear all selected options if value is null.
+   * */
   protected handleSelect(option: NbOptionComponent<T>) {
     if (option.value) {
       this.selectOption(option);
@@ -212,6 +264,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     }
   }
 
+  /**
+   * Deselect all selected options.
+   * */
   protected reset() {
     this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
     this.selectionModel = [];
@@ -219,6 +274,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     this.emitSelected(null);
   }
 
+  /**
+   * Determines how to select option as multiple or single.
+   * */
   protected selectOption(option: NbOptionComponent<T>) {
     if (this.multiple) {
       this.handleMultipleSelect(option);
@@ -227,6 +285,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     }
   }
 
+  /**
+   * Select single option.
+   * */
   protected handleSingleSelect(option: NbOptionComponent<T>) {
     const selected = this.selectionModel.pop();
 
@@ -241,6 +302,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     this.emitSelected(option.value);
   }
 
+  /**
+   * Select for multiple options.
+   * */
   protected handleMultipleSelect(option: NbOptionComponent<T>) {
     if (option.selected) {
       this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
@@ -288,6 +352,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
       .subscribe((position: NbPosition) => this.overlayPosition = position);
   }
 
+  protected subscribeOnSelectionChange() {
+    this.selectionChange.subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
+  }
+
   protected getContainer() {
     return this.ref && this.ref.hasAttached() && <ComponentRef<any>> {
       location: {
@@ -296,11 +364,17 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     };
   }
 
+  /**
+   * Propagate selected value.
+   * */
   protected emitSelected(selected: T | T[]) {
     this.onChange(selected);
     this.selectedChange.emit(selected);
   }
 
+  /**
+   * Set selected value in model.
+   * */
   protected setSelection(value: T | T[]) {
     const isArray: boolean = Array.isArray(value);
 
@@ -319,6 +393,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     }
   }
 
+  /**
+   * Selects value.
+   * */
   protected selectValue(value: T) {
     const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
     corresponding.select();

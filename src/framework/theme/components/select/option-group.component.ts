@@ -18,12 +18,13 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbOptionGroupComponent {
   @Input() title: string;
-  disabled: boolean = false;
 
   @Input('disabled')
   set _disabled(disabled: boolean) {
     this.disabled = convertToBoolProperty(disabled);
   }
+
+  disabled: boolean = false;
 
   @HostBinding('class.disabled')
   get disabledClass(): boolean {

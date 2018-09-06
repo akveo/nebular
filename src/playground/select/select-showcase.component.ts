@@ -11,7 +11,10 @@ import { Component } from '@angular/core';
   template: `
     <nb-select placeholder="Multiple" multiple shape="round" [(ngModel)]="selectedValues">
       <nb-select-label>
-        Selected values: <span *ngFor="let s of selectedValues">{{ s + ' ' }}</span>
+        <span *ngIf="!selectedValues">Nothing selected</span>
+        <ng-container *ngIf="selectedValues">
+          <span *ngFor="let s of selectedValues">{{ s + ' ' }}</span>
+        </ng-container>
       </nb-select-label>
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
@@ -124,12 +127,13 @@ import { Component } from '@angular/core';
       </nb-option-group>
     </nb-select>
   `,
-  styles: [`
+  styles: [`    
     :host {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 15rem;
     }
   `],
 })
