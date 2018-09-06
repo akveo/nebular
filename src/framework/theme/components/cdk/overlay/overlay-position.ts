@@ -22,6 +22,8 @@ export enum NbAdjustment {
   NOOP = 'noop',
   CLOCKWISE = 'clockwise',
   COUNTERCLOCKWISE = 'counterclockwise',
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
 }
 
 export enum NbPosition {
@@ -51,6 +53,8 @@ const POSITIONS = {
 const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
 const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPosition.RIGHT];
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
+const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
+const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
 
 function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
@@ -125,6 +129,10 @@ export class NbAdjustableConnectedPositionStrategy
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
         return this.reorderPreferredPositions(COUNTER_CLOCKWISE_POSITIONS);
+      case NbAdjustment.HORIZONTAL:
+        return this.reorderPreferredPositions(HORIZONTAL_POSITIONS);
+      case NbAdjustment.VERTICAL:
+        return this.reorderPreferredPositions(VERTICAL_POSITIONS);
     }
   }
 

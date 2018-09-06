@@ -15,6 +15,9 @@
     background-color: nb-theme(color-bg);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    height: 20rem;
+    margin-bottom: 0;
+    box-shadow: none;
 
     nb-card-body {
       padding: 0;
@@ -27,9 +30,20 @@
         background-color: nb-theme(color-primary);
         color: nb-theme(color-white);
 
-        nb-checkbox .customised-control-description {
-          color: inherit;
-        }
+      }
+    }
+  }
+
+  nb-checkbox {
+    .customised-control-description {
+      color: inherit;
+    }
+
+    .customised-control-input:checked ~ .customised-control-indicator {
+      border-color: nb-theme(checkbox-border-color);
+
+      &::before {
+        border-color: nb-theme(checkbox-border-color);
       }
     }
   }

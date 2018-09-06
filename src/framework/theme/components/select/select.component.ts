@@ -37,6 +37,13 @@ import { convertToBoolProperty } from '../helpers';
 
 const voidState = style({ opacity: 0, height: 0 });
 
+/**
+ * TODO
+ * select animations are currently disabled because of overlay positioning.
+ * I mean, if we put our host element in the bottom then overlay will be rendered in the bottom.
+ * Because we're using height: 0 in our animation.
+ * So, we have to add any workaround.
+ * */
 const selectAnimations = [
   trigger('select', [
     transition(':enter', [voidState, animate(100)]),
@@ -50,14 +57,13 @@ const selectAnimations = [
   template: `
     <button nbButton status="primary" [class.opened]="isOpened">{{ selectionView }}</button>
 
-    <nb-card @select *nbPortal [style.width.px]="hostWidth">
+    <nb-card *nbPortal [style.width.px]="hostWidth">
       <nb-card-body>
         <ng-content select="nb-option, nb-option-group"></ng-content>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./select.component.scss'],
-  animations: selectAnimations,
   providers: [
     { provide: NB_SELECT, useExisting: NbSelectComponent },
   ],
@@ -102,7 +108,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
     }
 
     if (this.selectionModel.length > 1) {
-      return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
+      return this.selectionModel.map((option: NbOptionComponent<T>) => option.content).join(', ');
     }
 
     return this.selectionModel[0].content;
@@ -111,7 +117,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.subscribeOnTriggers();
 
-    this.selectionChange.subscribe((option: NbOptionComponent) => this.handleSelect(option));
+    this.selectionChange.subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
   }
 
   ngOnDestroy() {
@@ -134,7 +140,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
     this.ref.detach();
   }
 
-  protected handleSelect(option: NbOptionComponent) {
+  protected handleSelect(option: NbOptionComponent<T>) {
     if (this.multi) {
       this.handleMultipleSelect(option);
     } else {
@@ -142,7 +148,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
     }
   }
 
-  protected handleSingleSelect(option: NbOptionComponent) {
+  protected handleSingleSelect(option: NbOptionComponent<T>) {
     const selected = this.selectionModel.pop();
 
     if (selected && selected !== option) {
@@ -154,7 +160,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
     this.hide();
   }
 
-  protected handleMultipleSelect(option: NbOptionComponent) {
+  protected handleMultipleSelect(option: NbOptionComponent<T>) {
     if (option.selected) {
       this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
       option.deselect();
@@ -176,7 +182,7 @@ export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
       .offset(0)
-      .adjustment(NbAdjustment.NOOP);
+      .adjustment(NbAdjustment.VERTICAL);
   }
 
   protected createScrollStrategy() {

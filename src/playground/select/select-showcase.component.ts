@@ -51,6 +51,13 @@ import { Component } from '@angular/core';
     :host nb-select {
       width: 15rem;
     }
+
+    :host {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   `],
 })
 
