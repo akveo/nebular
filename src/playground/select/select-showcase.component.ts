@@ -10,6 +10,9 @@ import { Component } from '@angular/core';
   selector: 'nb-select-showcase',
   template: `
     <nb-select placeholder="Multiple" multi shape="round">
+      <nb-select-label>
+        This is custom label mother fucker
+      </nb-select-label>
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>

@@ -9,7 +9,15 @@
   [outline]="outline"
   [class.opened]="isOpened"
   [ngClass]="overlayPosition">
-  {{ selectionView }}
+
+  <ng-container *ngIf="customLabel">
+    <ng-content select="nb-select-label"></ng-content>
+  </ng-container>
+
+  <ng-container *ngIf="!customLabel">
+    {{ selectionView }}
+  </ng-container>
+
 </button>
 
 <nb-card *nbPortal [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">

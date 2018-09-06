@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   Component,
   ComponentRef,
+  ContentChild,
   ContentChildren,
   ElementRef,
   Inject,
@@ -37,12 +38,18 @@ import { convertToBoolProperty } from '../helpers';
 
 
 @Component({
+  selector: 'nb-select-label',
+  template: '<ng-content></ng-content>',
+})
+export class NbSelectLabelComponent {
+}
+
+@Component({
   selector: 'nb-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   providers: [{ provide: NB_SELECT, useExisting: NbSelectComponent }],
 })
-
 export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Button size, available sizes:
@@ -91,6 +98,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy {
   multi: boolean = false;
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
+  @ContentChild(NbSelectLabelComponent) customLabel;
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
   selectionModel: NbOptionComponent<T>[] = [];
   positionStrategy: NbAdjustableConnectedPositionStrategy;
