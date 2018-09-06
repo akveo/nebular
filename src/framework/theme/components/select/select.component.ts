@@ -55,7 +55,18 @@ const selectAnimations = [
 @Component({
   selector: 'nb-select',
   template: `
-    <button nbButton status="primary" [class.opened]="isOpened">{{ selectionView }}</button>
+    <button
+      nbButton
+      [size]="size"
+      [status]="status"
+      [shape]="shape"
+      [hero]="hero"
+      [disabled]="disabled"
+      [fullWidth]="fullWidth"
+      [outline]="outline"
+      [class.opened]="isOpened">
+      {{ selectionView }}
+    </button>
 
     <nb-card *nbPortal [style.width.px]="hostWidth">
       <nb-card-body>
@@ -70,6 +81,50 @@ const selectAnimations = [
 })
 
 export class NbSelectComponent<T> implements AfterViewInit, OnDestroy {
+  /**
+   * Button size, available sizes:
+   * `xxsmall`, `xsmall`, `small`, `medium`, `large`
+   * @param {string} val
+   */
+  @Input() size: string;
+
+  /**
+   * Button status (adds specific styles):
+   * `primary`, `info`, `success`, `warning`, `danger`
+   * @param {string} val
+   */
+  @Input() status: string;
+
+  /**
+   * Button shapes: `rectangle`, `round`, `semi-round`
+   * @param {string} val
+   */
+  @Input() shape: string;
+
+  /**
+   * Adds `hero` styles
+   * @param {boolean} val
+   */
+  @Input() hero: boolean;
+
+  /**
+   * Disables the button
+   * @param {boolean} val
+   */
+  @Input() disabled: boolean;
+
+  /**
+   * If set element will fill its container
+   * @param {boolean}
+   */
+  @Input() fullWidth: boolean;
+
+  /**
+   * Adds `outline` styles
+   * @param {boolean} val
+   */
+  @Input() outline: boolean;
+
   multi: boolean = false;
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;

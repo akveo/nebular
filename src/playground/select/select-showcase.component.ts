@@ -9,7 +9,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-showcase',
   template: `
-    <nb-select placeholder="Multiple" multi>
+    <nb-select placeholder="Multiple" multi
+               size="large"
+               status="danger"
+               shape="round"
+               hero
+    >
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
@@ -48,10 +53,6 @@ import { Component } from '@angular/core';
     </nb-select>
   `,
   styles: [`
-    :host nb-select {
-      width: 15rem;
-    }
-
     :host {
       height: 100%;
       display: flex;
