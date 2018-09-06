@@ -127,7 +127,7 @@ import { Component } from '@angular/core';
       </nb-option-group>
     </nb-select>
   `,
-  styles: [`    
+  styles: [`
     :host {
       height: 100%;
       display: flex;
