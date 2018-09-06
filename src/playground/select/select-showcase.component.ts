@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-showcase',
   template: `
-    <nb-select placeholder="Multiple" multi shape="round" [(ngModel)]="selectedValues">
+    <nb-select placeholder="Multiple" multiple shape="round" [(ngModel)]="selectedValues">
       <nb-select-label>
         Selected values: <span *ngFor="let s of selectedValues">{{ s + ' ' }}</span>
       </nb-select-label>

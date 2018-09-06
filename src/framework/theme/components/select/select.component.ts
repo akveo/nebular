@@ -106,7 +106,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
    */
   @Input() outline: boolean;
   @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
-  multi: boolean = false;
+  multiple: boolean = false;
   @Input() placeholder: string = '';
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
   @ContentChild(NbSelectLabelComponent) customLabel;
@@ -133,9 +133,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     this.writeValue(value);
   }
 
-  @Input('multi')
-  set _multi(multi: boolean) {
-    this.multi = convertToBoolProperty(multi);
+  @Input('multiple')
+  set _multiple(multiple: boolean) {
+    this.multiple = convertToBoolProperty(multiple);
   }
 
   get isOpened(): boolean {
@@ -220,7 +220,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   }
 
   protected selectOption(option: NbOptionComponent<T>) {
-    if (this.multi) {
+    if (this.multiple) {
       this.handleMultipleSelect(option);
     } else {
       this.handleSingleSelect(option);
@@ -304,12 +304,12 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   protected setSelection(value: T | T[]) {
     const isArray: boolean = Array.isArray(value);
 
-    if (this.multi && !isArray) {
-      throw new Error('Can\'t assign single value if select is multi');
+    if (this.multiple && !isArray) {
+      throw new Error('Can\'t assign single value if select is marked as multiple');
     }
 
-    if (!this.multi && isArray) {
-      throw new Error('Can\'t assign array if select is single');
+    if (!this.multiple && isArray) {
+      throw new Error('Can\'t assign array if select is not marked as multiple');
     }
 
     if (isArray) {

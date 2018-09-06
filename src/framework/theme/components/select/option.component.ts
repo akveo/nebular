@@ -59,7 +59,7 @@ export class NbOptionComponent<T> {
   }
 
   get multiple() {
-    return this.parent.multi;
+    return this.parent.multiple;
   }
 
   @HostBinding('class.selected')
