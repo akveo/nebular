@@ -440,7 +440,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   protected selectValue(value: T) {
     const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
-    corresponding.select();
-    this.selectionModel.push(corresponding);
+
+    if (corresponding) {
+      corresponding.select();
+      this.selectionModel.push(corresponding);
+    }
   }
 }
