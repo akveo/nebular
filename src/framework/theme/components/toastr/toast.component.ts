@@ -21,16 +21,14 @@ import { NbToast, NbToastStatus } from './model';
  * toastr-border-radius
  * toastr-border-color
  * */
+/**
+ * TODO
+ * Remove svg icons, include them in font.
+ * */
 @Component({
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
-  template: `
-    <i class="icon {{ icon }}" *ngIf="hasIcon"></i>
-    <div class="content-container">
-      <span class="title">{{ toast.title }}</span>
-      <div class="message">{{ toast.message }}</div>
-    </div>
-  `,
+  templateUrl: './toast.component.html',
 })
 export class NbToastComponent {
   @Input()
