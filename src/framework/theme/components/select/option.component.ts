@@ -5,6 +5,8 @@
  */
 
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -26,6 +28,7 @@ export const NB_SELECT = new InjectionToken('select');
 @Component({
   selector: 'nb-option',
   styleUrls: ['./option.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
       <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -59,7 +62,9 @@ export class NbOptionComponent<T> {
   selected: boolean = false;
   disabled: boolean = false;
 
-  constructor(protected elementRef: ElementRef, @Inject(NB_SELECT) protected parent) {
+  constructor(protected elementRef: ElementRef,
+              @Inject(NB_SELECT) protected parent,
+              protected cd: ChangeDetectorRef) {
   }
 
   /**
@@ -94,10 +99,14 @@ export class NbOptionComponent<T> {
 
   select() {
     this.selected = true;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
   deselect() {
     this.selected = false;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 }
 

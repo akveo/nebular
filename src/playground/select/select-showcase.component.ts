@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-showcase',
   template: `
-    <nb-select placeholder="Multiple" multiple shape="round" [(ngModel)]="selectedValues">
+    <nb-select placeholder="Multiple" multiple shape="round">
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
       </nb-option-group>
     </nb-select>
 
-    <nb-select placeholder="Single" status="primary">
+    <nb-select placeholder="Single" status="primary" [(selected)]="selectedValues">
       <nb-option>None</nb-option>
       <nb-option-group title="Group 1">
         <nb-option value="Option 1">Option 1</nb-option>
@@ -133,5 +133,5 @@ import { Component } from '@angular/core';
 })
 
 export class NbSelectShowcaseComponent {
-  selectedValues;
+  selectedValues = 'Option 2';
 }

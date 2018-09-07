@@ -5,7 +5,9 @@
  */
 
 import {
+  AfterContentInit,
   AfterViewInit,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ComponentRef,
   ContentChild,
@@ -39,6 +41,7 @@ import { NB_SELECT, NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { take, takeWhile } from 'rxjs/operators';
 
 
 @Component({
@@ -52,6 +55,7 @@ export class NbSelectLabelComponent {
   selector: 'nb-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NB_SELECT, useExisting: NbSelectComponent },
     {
@@ -61,7 +65,7 @@ export class NbSelectLabelComponent {
     },
   ],
 })
-export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
   /**
    * Select size, available sizes:
    * `xxsmall`, `xsmall`, `small`, `medium`, `large`
@@ -163,7 +167,16 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     return merge(...this.options.map(it => it.selectionChange));
   });
 
-  ref: NbOverlayRef;
+  protected ref: NbOverlayRef;
+
+  protected alive: boolean = true;
+
+  /**
+   * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
+   * And then applied after content rendered.
+   * Only the last value will be applied.
+   * */
+  protected queue: T | T[];
 
   /**
    * Function passed through control value accessor to propagate changes.
@@ -173,7 +186,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef,
-              protected positionBuilder: NbPositionBuilderService) {
+              protected positionBuilder: NbPositionBuilderService,
+              protected cd: ChangeDetectorRef) {
   }
 
   /**
@@ -181,6 +195,13 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
    * */
   get isOpened(): boolean {
     return this.ref && this.ref.hasAttached();
+  }
+
+  /**
+   * Determines is select hidden.
+   * */
+  get isHidden(): boolean {
+    return !this.isOpened;
   }
 
   /**
@@ -211,21 +232,27 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
     this.subscribeOnSelectionChange();
   }
 
+  ngAfterContentInit() {
+    if (this.queue) {
+      this.writeValue(this.queue);
+    }
+  }
+
   ngOnDestroy() {
     this.ref.dispose();
   }
 
   show() {
-    if (this.isOpened) {
-      return;
+    if (this.isHidden) {
+      this.ref.attach(this.portal);
+      this.cd.markForCheck();
     }
-
-    this.ref.attach(this.portal);
   }
 
   hide() {
     if (this.isOpened) {
       this.ref.detach();
+      this.cd.markForCheck();
     }
   }
 
@@ -246,6 +273,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
 
     if (this.options) {
       this.setSelection(value);
+    } else {
+      this.queue = value;
     }
   }
 
@@ -339,17 +368,29 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
       .container(() => this.getContainer())
       .build();
 
-    triggerStrategy.show$.subscribe(() => this.show());
-    triggerStrategy.hide$.subscribe(() => this.hide());
+    triggerStrategy.show$
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.show());
+
+    triggerStrategy.hide$
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.hide());
   }
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
       .subscribe((position: NbPosition) => this.overlayPosition = position);
+
+    this.positionStrategy.positionChange
+      .pipe(take(1))
+      .subscribe(() => this.cd.detectChanges());
   }
 
   protected subscribeOnSelectionChange() {
-    this.selectionChange.subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
+    this.selectionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
   }
 
   protected getContainer() {
@@ -382,11 +423,16 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
       throw new Error('Can\'t assign array if select is not marked as multiple');
     }
 
+    this.selectionModel = [];
+
     if (isArray) {
       (<T[]> value).forEach((option: T) => this.selectValue(option));
     } else {
       this.selectValue(<T> value);
     }
+
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
   /**
@@ -395,5 +441,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, OnDestroy, C
   protected selectValue(value: T) {
     const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
     corresponding.select();
+    this.selectionModel.push(corresponding);
   }
 }
