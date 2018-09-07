@@ -16,23 +16,23 @@
 }
 
 @mixin nb-select-theme() {
-  button[nbButton] {
+  nb-select > button[nbButton] {
     transition: all 0.1s;
+
+    &.opened {
+      &.top {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      &.bottom {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
   }
 
-  button[nbButton].opened {
-    &.top {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-
-    &.bottom {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-
-  nb-card {
+  nb-card.select {
     background-color: nb-theme(select-bg);
     height: nb-theme(select-height);
     margin-bottom: 0;
@@ -75,26 +75,26 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-  }
 
-  nb-checkbox {
-    .customised-control-description {
-      color: inherit;
-    }
+    nb-checkbox {
+      .customised-control-description {
+        color: inherit;
+      }
 
-    .customised-control-input:checked ~ .customised-control-indicator {
-      border-color: nb-theme(select-checkbox-color);
+      .customised-control-input:checked ~ .customised-control-indicator {
+        border-color: nb-theme(select-checkbox-color);
 
-      &::before {
-        border-color: nb-theme(select-checkmark-color);
+        &::before {
+          border-color: nb-theme(select-checkmark-color);
+        }
       }
     }
-  }
 
-  nb-option, nb-option-group {
-    &.disabled {
-      background-color: nb-theme(select-option-disabled-bg);
-      opacity: nb-theme(select-option-disabled-opacity);
+    nb-option, nb-option-group {
+      &.disabled {
+        background-color: nb-theme(select-option-disabled-bg);
+        opacity: nb-theme(select-option-disabled-opacity);
+      }
     }
   }
 }

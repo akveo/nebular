@@ -24,7 +24,7 @@
 
 </button>
 
-<nb-card *nbPortal [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
+<nb-card *nbPortal class="select" [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
   <nb-card-body>
     <ng-content select="nb-option, nb-option-group"></ng-content>
   </nb-card-body>
