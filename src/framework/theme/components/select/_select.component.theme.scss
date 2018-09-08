@@ -19,6 +19,11 @@
   nb-select > button[nbButton] {
     transition: all 0.1s;
 
+    &::after {
+      @include nb-rtl(left, 0.75rem);
+      @include nb-rtl(right, auto);
+    }
+
     &.opened {
       &.top {
         border-top-left-radius: 0;
@@ -34,7 +39,7 @@
 
   nb-card.select {
     background-color: nb-theme(select-bg);
-    height: nb-theme(select-height);
+    max-height: nb-theme(select-max-height);
     margin-bottom: 0;
     box-shadow: none;
 

@@ -51,6 +51,30 @@ import { take, takeWhile } from 'rxjs/operators';
 export class NbSelectLabelComponent {
 }
 
+/**
+ * The `NbSelectComponent` provides capability to select on of the passed items.
+ *
+ * @stacked-example(Showcase, select/select-showcase.component)
+ *
+ * If you want to use it as multi select control you have to mark it as `multiple`.
+ * In this case `nb-select` will work only with arrays, I mean, accept arrays and propagate arrays.
+ *
+ * @stacked-example(Multiple, select/select-multiple.component)
+ *
+ * The `nb-select` is the button, so it supports all input that `[nbButton]` has.
+ * `size` -
+ * `status`
+ * `shape`
+ * `hero`
+ * `disabled`
+ * `fullWidth`
+ * `outline`
+ *
+ *
+ * Disabling
+ *
+ * Custom label
+ * */
 @Component({
   selector: 'nb-select',
   templateUrl: './select.component.html',
@@ -287,6 +311,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     } else {
       this.reset();
     }
+
+    this.cd.detectChanges();
   }
 
   /**
@@ -423,7 +449,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       throw new Error('Can\'t assign array if select is not marked as multiple');
     }
 
-    this.selectionModel = [];
+    this.cleanSelection();
 
     if (isArray) {
       (<T[]> value).forEach((option: T) => this.selectValue(option));
@@ -433,6 +459,11 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+
+  protected cleanSelection() {
+    this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
+    this.selectionModel = [];
   }
 
   /**

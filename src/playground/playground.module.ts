@@ -202,6 +202,16 @@ import {
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 import { NbSelectShowcaseComponent } from './select/select-showcase.component';
+import { NbSelectMultipleComponent } from './select/select-multiple.component';
+import { NbSelectStatusComponent } from './select/select-status.component';
+import { NbSelectHeroComponent } from './select/select-hero.component';
+import { NbSelectOutlineComponent } from './select/select-outline.component';
+import { NbSelectShapeComponent } from './select/select-shapes.component';
+import { NbSelectSizesComponent } from './select/select-sizes.component';
+import { NbSelectPlaceholderComponent } from './select/select-placeholder.component';
+import { NbSelectFormComponent } from './select/select-form.component';
+import { NbSelectDisabledComponent } from './select/select-disabled.component';
+import { NbSelectGroupsComponent } from './select/select-groups.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -391,6 +401,16 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
   NbSelectShowcaseComponent,
+  NbSelectMultipleComponent,
+  NbSelectStatusComponent,
+  NbSelectHeroComponent,
+  NbSelectOutlineComponent,
+  NbSelectShapeComponent,
+  NbSelectSizesComponent,
+  NbSelectPlaceholderComponent,
+  NbSelectFormComponent,
+  NbSelectDisabledComponent,
+  NbSelectGroupsComponent,
 ];
 
 @NgModule({
