@@ -212,6 +212,8 @@ import { NbSelectPlaceholderComponent } from './select/select-placeholder.compon
 import { NbSelectFormComponent } from './select/select-form.component';
 import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
+import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
+import { NbSelectCleanComponent } from './select/select-clean.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -411,6 +413,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectFormComponent,
   NbSelectDisabledComponent,
   NbSelectGroupsComponent,
+  NbSelectLabelShowcaseComponent,
+  NbSelectCleanComponent,
 ];
 
 @NgModule({

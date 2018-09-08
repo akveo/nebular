@@ -303,6 +303,14 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

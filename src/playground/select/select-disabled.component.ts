@@ -18,6 +18,7 @@ import { Component } from '@angular/core';
     :host {
       display: block;
       width: 15rem;
+      height: 40rem;
     }
   `],
 })

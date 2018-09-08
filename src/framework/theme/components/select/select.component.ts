@@ -52,28 +52,81 @@ export class NbSelectLabelComponent {
 }
 
 /**
- * The `NbSelectComponent` provides capability to select on of the passed items.
+ * The `NbSelectComponent` provides capability to select one of the passed items.
  *
  * @stacked-example(Showcase, select/select-showcase.component)
  *
  * If you want to use it as multi select control you have to mark it as `multiple`.
- * In this case `nb-select` will work only with arrays, I mean, accept arrays and propagate arrays.
+ * In this case `nb-select` will work only with arrays - accept arrays and propagate arrays.
  *
  * @stacked-example(Multiple, select/select-multiple.component)
  *
- * The `nb-select` is the button, so it supports all input that `[nbButton]` has.
- * `size` -
- * `status`
- * `shape`
- * `hero`
- * `disabled`
- * `fullWidth`
- * `outline`
+ * Items without values will clean selection.
+ *
+ * @stacked-example(Clean selection, select/select-clean.component)
+ *
+ * Select may be bounded using `selected` input:
+ *
+ * ```html
+ * <nb-select [(selected)]="selected"></nb-selected>
+ * ```
+ *
+ * Or you can bind control with form controls or ngModel:
+ *
+ * @stacked-example(Select form binding, select/select-form.component)
+ *
+ * Options in the select may be grouped using `nb-option-group` component.
+ *
+ * @stacked-example(Grouping, select/select-groups.component)
+ *
+ * Select may have placeholder that will be shown when nothing selected:
+ *
+ * @stacked-example(Placeholder, select/select-placeholder.component)
+ *
+ * You can disable select, options and whole groups.
+ *
+ * @stacked-example(Disabled select, select/select-disabled.component)
+ *
+ * Also, custom label may be provide in select.
+ * This custom label will be used for instead placeholder when something selected.
+ *
+ * @stacked-example(Custom label, select/select-label.component)
+ *
+ * Default `nb-select` size is `medium` and status color is `primary`.
+ * Select is available in multiple colors using `status` property:
+ *
+ * @stacked-example(Select statuses, select/select-status.component)
+ *
+ * There are three select sizes:
+ *
+ * @stacked-example(Select sizes, select/select-sizes.component)
+ *
+ * And two additional style types - `outline`:
+ *
+ * @stacked-example(Outline select, select/select-outline.component)
+ *
+ * and `hero`:
+ *
+ * @stacked-example(Select colors, select/select-hero.component)
+ *
+ * Select is available in different shapes, that could be combined with the other properties:
+ *
+ * @stacked-example(Select shapes, select/select-shapes.component)
  *
  *
- * Disabling
+ * @styles
  *
- * Custom label
+ *
+ select-border-width: 2px,
+ select-max-height: 20rem,
+ select-bg: color-bg,
+
+ select-checkbox-color: checkbox-border-color,
+ select-checkmark-color: checkbox-border-color,
+
+ select-option-disabled-bg: #f2f4f7,
+ select-option-disabled-opacity: 0.3,
+ select-option-padding: 0.75rem 1.5rem,
  * */
 @Component({
   selector: 'nb-select',

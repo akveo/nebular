@@ -170,6 +170,8 @@ import { NbSelectPlaceholderComponent } from './select/select-placeholder.compon
 import { NbSelectFormComponent } from './select/select-form.component';
 import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
+import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
+import { NbSelectCleanComponent } from './select/select-clean.component';
 
 
 export const routes: Routes = [
@@ -252,6 +254,14 @@ export const routes: Routes = [
           {
             path: 'select-groups.component',
             component: NbSelectGroupsComponent,
+          },
+          {
+            path: 'select-label.component',
+            component: NbSelectLabelShowcaseComponent,
+          },
+          {
+            path: 'select-clean.component',
+            component: NbSelectCleanComponent,
           },
         ],
       },

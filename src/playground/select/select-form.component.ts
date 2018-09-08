@@ -19,6 +19,7 @@ import { FormControl } from '@angular/forms';
     :host {
       display: block;
       width: 15rem;
+      height: 40rem;
     }
   `],
 })

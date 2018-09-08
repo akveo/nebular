@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-placeholder',
-  templateUrl: './select-placeholder.component.html',
+  selector: 'nb-select-label-showcase',
+  templateUrl: './select-label.component.html',
   styles: [`
     nb-select {
       margin-right: 0.75rem;
@@ -22,5 +22,6 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSelectPlaceholderComponent {
+export class NbSelectLabelShowcaseComponent {
+  selectedItem;
 }
