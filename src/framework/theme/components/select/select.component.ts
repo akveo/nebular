@@ -7,7 +7,8 @@
 import {
   AfterContentInit,
   AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ComponentRef,
   ContentChild,
@@ -23,6 +24,9 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { take, takeWhile } from 'rxjs/operators';
+import { defer, merge, Observable } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -31,17 +35,14 @@ import {
   NbOverlayService,
   NbPortalDirective,
   NbPosition,
-  NbPositionBuilderService,
+  NbPositionBuilderService, NbScrollStrategy,
   NbTrigger,
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
 } from '../cdk';
-import { defer, merge, Observable } from 'rxjs';
 import { NB_SELECT, NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { take, takeWhile } from 'rxjs/operators';
 
 
 @Component({
@@ -435,7 +436,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       .adjustment(NbAdjustment.VERTICAL);
   }
 
-  protected createScrollStrategy() {
+  protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies.block();
   }
 
