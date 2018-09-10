@@ -159,6 +159,7 @@ import { NbCalendarFilterComponent } from './calendar/calendar-filter.component'
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
+import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 
 
 export const routes: Routes = [
@@ -708,6 +709,15 @@ export const routes: Routes = [
           {
             path: 'input-full-width.component',
             component: NbInputFullWidthComponent,
+          },
+        ],
+      },
+      {
+        path: 'overlay',
+        children: [
+          {
+            path: 'overlay-showcase.component',
+            component: NbOverlayShowcaseComponent,
           },
         ],
       },
