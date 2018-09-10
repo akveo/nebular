@@ -117,17 +117,14 @@ export class NbSelectLabelComponent {
  *
  * @styles
  *
- *
- select-border-width: 2px,
- select-max-height: 20rem,
- select-bg: color-bg,
-
- select-checkbox-color: checkbox-border-color,
- select-checkmark-color: checkbox-border-color,
-
- select-option-disabled-bg: #f2f4f7,
- select-option-disabled-opacity: 0.3,
- select-option-padding: 0.75rem 1.5rem,
+ * select-border-width:
+ * select-max-height:
+ * select-bg:
+ * select-checkbox-color:
+ * select-checkmark-color:
+ * select-option-disabled-bg:
+ * select-option-disabled-opacity:
+ * select-option-padding:
  * */
 @Component({
   selector: 'nb-select',
