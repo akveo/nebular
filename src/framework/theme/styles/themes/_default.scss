@@ -635,6 +635,17 @@ $theme: (
   calendar-month-cell-large-height: 2.375rem,
   calendar-year-cell-large-width: calendar-month-cell-width,
   calendar-year-cell-large-height: calendar-month-cell-height,
+
+  tooltip-bg: color-fg-text,
+  tooltip-primary-bg: color-primary,
+  tooltip-info-bg: color-info,
+  tooltip-success-bg: color-success,
+  tooltip-warning-bg: color-warning,
+  tooltip-danger-bg: color-danger,
+  tooltip-fg: color-bg-active,
+  tooltip-status-fg: color-bg-active,
+  tooltip-shadow: shadow,
+  tooltip-font-size: font-size,
 );
 
 // register the theme

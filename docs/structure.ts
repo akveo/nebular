@@ -303,6 +303,15 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

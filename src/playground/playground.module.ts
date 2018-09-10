@@ -35,7 +35,7 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
-  NbOverlayModule,
+  NbOverlayModule, NbTooltipModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -200,6 +200,10 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -234,6 +238,7 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
+  NbTooltipModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -387,6 +392,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
+  NbTooltipShowcaseComponent,
+  NbTooltipWithIconComponent,
+  NbTooltipPlacementsComponent,
+  NbTooltipColorsComponent,
 ];
 
 @NgModule({
