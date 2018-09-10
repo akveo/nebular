@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
       justify-content: center;
       align-items: center;
       display: flex;
-      height: 40rem;
+      height: 10rem;
     }
     button {
       margin: 0.5rem;
