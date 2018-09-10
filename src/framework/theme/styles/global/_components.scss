@@ -31,6 +31,8 @@
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 @import '../../components/cdk/overlay/overlay.theme';
+@import '../../components/popover/popover.component.theme';
+@import '../../components/context-menu/context-menu.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -61,4 +63,6 @@
   @include nb-list-theme();
   @include nb-input-theme();
   @include nb-overlay-theme();
+  @include nb-popover-theme();
+  @include nb-context-menu-theme();
 }

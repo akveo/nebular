@@ -11,7 +11,7 @@ const placementLeft = by.css('nb-card:nth-child(2) button:nth-child(4)');
 const modeClick = by.css('nb-card:nth-child(4) button:nth-child(1)');
 const modeHover = by.css('nb-card:nth-child(4) button:nth-child(2)');
 const modeHint = by.css('nb-card:nth-child(4) button:nth-child(3)');
-const popover = by.css('nb-layout > nb-popover');
+const popover = by.css('nb-layout nb-popover');
 
 describe('nb-popover', () => {
 
@@ -35,7 +35,7 @@ describe('nb-popover', () => {
     element(contentString).click();
     const containerContent = element(popover).element(by.css('div'));
     expect(containerContent.isPresent()).toBeTruthy();
-    expect(containerContent.getAttribute('class')).toEqual('primitive-popover');
+    expect(containerContent.getAttribute('class')).toEqual('primitive-overlay');
     expect(containerContent.getText()).toEqual('Hi, I\'m popover!');
   });
 
@@ -49,28 +49,28 @@ describe('nb-popover', () => {
     element(placementRight).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('right');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-right');
   });
 
   it('render container in the bottom', () => {
     element(placementBottom).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('bottom');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-bottom');
   });
 
   it('render container in the top', () => {
     element(placementTop).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('top');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-top');
   });
 
   it('render container in the left', () => {
     element(placementLeft).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('left');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-left');
   });
 
   it('open popover by host click', () => {

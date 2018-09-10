@@ -9,7 +9,8 @@ import { NbViewportRulerAdapter } from './viewport-ruler-adapter';
 @NgModule({
   providers: [
     NbViewportRulerAdapter,
-    { provide: OverlayContainer, useClass: NbOverlayContainerAdapter },
+    NbOverlayContainerAdapter,
+    { provide: OverlayContainer, useExisting: NbOverlayContainerAdapter },
     { provide: ScrollDispatcher, useClass: NbScrollDispatcherAdapter },
   ],
 })
