@@ -70,3 +70,4 @@ export * from './components/list/list-page-tracker.directive';
 export * from './components/list/infinite-list.directive';
 export * from './components/input/input.directive';
 export * from './components/input/input.module';
+export * from './components/cdk/overlay';

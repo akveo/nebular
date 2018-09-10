@@ -30,6 +30,7 @@
 @import '../../components/button/button.component.theme';
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
+@import '../../components/cdk/overlay/overlay.theme';
 
 @mixin nb-theme-components() {
 
@@ -59,4 +60,5 @@
   @include nb-buttons-theme();
   @include nb-list-theme();
   @include nb-input-theme();
+  @include nb-overlay-theme();
 }
