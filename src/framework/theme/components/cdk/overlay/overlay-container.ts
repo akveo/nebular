@@ -6,22 +6,22 @@ import { NbPosition } from './overlay-position';
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
 
-  @HostBinding('class.top')
+  @HostBinding('class.nb-overlay-top')
   get top(): boolean {
     return this.position === NbPosition.TOP
   }
 
-  @HostBinding('class.right')
+  @HostBinding('class.nb-overlay-right')
   get right(): boolean {
     return this.position === NbPosition.RIGHT
   }
 
-  @HostBinding('class.bottom')
+  @HostBinding('class.nb-overlay-bottom')
   get bottom(): boolean {
     return this.position === NbPosition.BOTTOM
   }
 
-  @HostBinding('class.left')
+  @HostBinding('class.nb-overlay-left')
   get left(): boolean {
     return this.position === NbPosition.LEFT
   }
@@ -54,7 +54,7 @@ export class NbOverlayContainerComponent {
     if (this.isComponent) {
       Object.assign(el._componentRef.instance, this.context);
       /**
-       * Change detection have to performed here, because another way applied context
+       * Change detection has to be performed here, because another way applied context
        * will be rendered on the next change detection loop and
        * we'll have incorrect positioning. Because rendered component may change its size
        * based on the context.
