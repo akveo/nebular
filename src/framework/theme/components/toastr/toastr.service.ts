@@ -119,11 +119,11 @@ export class NbToastrContainerRegistry {
 }
 
 /**
- * The `NbToastrService` provides capability build toast notifications.
+ * The `NbToastrService` provides a capability to build toast notifications.
  *
  * @stacked-example(Showcase, toastr/toastr-showcase.component)
  *
- * `NbToastrService.show(message, title, config)` accepts three params, title and config are optionals.
+ * `NbToastrService.show(message, title, config)` accepts three params, title and config are optional.
  *
  * Global toastr configuration may be provided through `NbToastrModule.forRoot(config)`.
  *
@@ -153,7 +153,7 @@ export class NbToastrContainerRegistry {
  *
  * @stacked-example(Duration, toastr/toastr-duration.component)
  *
- * `destroyByClick` - provides capability destroy toast by click.
+ * `destroyByClick` - provides a capability to destroy toast by click.
  * Default is true.
  *
  * @stacked-example(Destroy by click, toastr/toastr-destroy-by-click.component)
