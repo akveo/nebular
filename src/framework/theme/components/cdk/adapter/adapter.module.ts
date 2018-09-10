@@ -13,5 +13,5 @@ import { NbViewportRulerAdapter } from './viewport-ruler-adapter';
     { provide: ScrollDispatcher, useClass: NbScrollDispatcherAdapter },
   ],
 })
-export class NbAdapterModule {
+export class NbCdkAdapterModule {
 }
