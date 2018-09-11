@@ -18,6 +18,7 @@ import {
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast, NbToastStatus } from './model';
+import { NbToastComponent } from './toast.component';
 
 
 export class NbToastContainer {
@@ -34,10 +35,10 @@ export class NbToastContainer {
       return;
     }
 
-    if (this.positionHelper.isTopPosition(toast.config.position)) {
-      this.attachToTop(toast);
-    } else {
-      this.attachToBottom(toast);
+    const toastComponent: NbToastComponent = this.attachToast(toast);
+
+    if (toast.config.destroyByClick) {
+      this.subscribeOnClick(toastComponent, toast);
     }
 
     if (toast.config.duration) {
@@ -53,26 +54,32 @@ export class NbToastContainer {
       && this.prevToast.title === toast.title;
   }
 
-  protected attachToTop(toast: NbToast) {
-    this.toasts.unshift(toast);
-    this.updateContainer();
-
-    if (toast.config.destroyByClick) {
-      this.containerRef.instance.toasts.first.destroy.subscribe(() => this.destroy(toast));
+  protected attachToast(toast: NbToast): NbToastComponent {
+    if (this.positionHelper.isTopPosition(toast.config.position)) {
+      return this.attachToTop(toast);
+    } else {
+      return this.attachToBottom(toast);
     }
   }
 
-  protected attachToBottom(toast: NbToast) {
+  protected attachToTop(toast: NbToast): NbToastComponent {
+    this.toasts.unshift(toast);
+    this.updateContainer();
+    return this.containerRef.instance.toasts.first;
+  }
+
+  protected attachToBottom(toast: NbToast): NbToastComponent {
     this.toasts.push(toast);
     this.updateContainer();
-
-    if (toast.config.destroyByClick) {
-      this.containerRef.instance.toasts.last.destroy.subscribe(() => this.destroy(toast));
-    }
+    return this.containerRef.instance.toasts.last;
   }
 
   protected setDestroyTimeout(toast: NbToast) {
     setTimeout(() => this.destroy(toast), toast.config.duration);
+  }
+
+  protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
+    toastComponent.destroy.subscribe(() => this.destroy(toast));
   }
 
   protected destroy(toast: NbToast) {
@@ -174,6 +181,9 @@ export class NbToastrService {
               protected containerRegistry: NbToastrContainerRegistry) {
   }
 
+  /**
+   * Shows toast with message, title and user config.
+   * */
   show(message, title?, userConfig?: Partial<NbToastrConfig>) {
     const config = new NbToastrConfig({ ...this.globalConfig, ...userConfig });
     const container = this.containerRegistry.get(config.position);
@@ -181,26 +191,44 @@ export class NbToastrService {
     container.attach(toast);
   }
 
+  /**
+   * Shows success toast with message, title and user config.
+   * */
   success(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
   }
 
+  /**
+   * Shows info toast with message, title and user config.
+   * */
   info(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.INFO });
   }
 
+  /**
+   * Shows warning toast with message, title and user config.
+   * */
   warning(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
   }
 
+  /**
+   * Shows primary toast with message, title and user config.
+   * */
   primary(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
   }
 
+  /**
+   * Shows danger toast with message, title and user config.
+   * */
   danger(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
   }
 
+  /**
+   * Shows default toast with message, title and user config.
+   * */
   default(message, title?, config?: Partial<NbToastrConfig>) {
     return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
   }

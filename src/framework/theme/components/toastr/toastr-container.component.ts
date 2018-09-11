@@ -4,13 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { NbToastComponent } from './toast.component';
 import { NbToast } from './model';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbGlobalPosition, NbPositionHelper } from '../cdk';
+import { takeWhile } from 'rxjs/operators';
 
 
 const voidState = style({
@@ -32,7 +33,7 @@ const defaultOptions = { params: { direction: '' } };
     ]),
   ],
 })
-export class NbToastrContainerComponent implements OnInit {
+export class NbToastrContainerComponent implements OnInit, OnDestroy {
   @Input()
   content: NbToast[] = [];
 
@@ -47,13 +48,20 @@ export class NbToastrContainerComponent implements OnInit {
 
   fadeIn;
 
+  protected alive: boolean = true;
+
   constructor(protected layoutDirection: NbLayoutDirectionService,
               protected positionHelper: NbPositionHelper) {
   }
 
   ngOnInit() {
     this.layoutDirection.onDirectionChange()
+      .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.onDirectionChange());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   protected onDirectionChange() {

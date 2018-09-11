@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="toast.config.status">
+<ng-container *ngIf="hasIcon && !icon" [ngSwitch]="toast.config.status">
 
   <ng-container *ngSwitchCase="'danger'">
     <svg>

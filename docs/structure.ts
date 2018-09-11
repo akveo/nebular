@@ -319,6 +319,7 @@ export const structure = [
         source: [
           'NbToastrService',
           'NbToastComponent',
+          'NbToastrConfig',
         ],
       },
       {
