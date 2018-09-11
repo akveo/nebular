@@ -110,6 +110,7 @@
     "@angular/cli": "^6.0.0",
     "@angular/compiler-cli": "6.0.0",
     "@angular/language-service": "6.0.0",
+    "@angular/cdk": "6.0.0",
     "@types/gulp": "3.8.36",
     "@types/highlight.js": "9.12.2",
     "@types/jasmine": "2.8.3",

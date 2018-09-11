@@ -35,6 +35,7 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
+  NbOverlayModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -125,7 +126,6 @@ import { NbSidebarTwoTestComponent } from './sidebar/sidebar-two-test.component'
 import { NbSidebarThreeTestComponent } from './sidebar/sidebar-three-test.component';
 import { NbTabsetTestComponent } from './tabset/tabset-test.component';
 import { NbUserTestComponent } from './user/user-test.component';
-import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbBootstrapTestComponent } from './bootstrap/bootstrap-test.component';
 import { NbStepperShowcaseComponent } from './stepper/stepper-showcase.component';
 import { NbStepperValidationComponent } from './stepper/stepper-validation.component';
@@ -199,6 +199,7 @@ import {
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
+import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -232,6 +233,7 @@ export const NB_MODULES = [
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCalendarKitModule,
+  NbOverlayModule.forRoot(),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -259,7 +261,6 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbLayoutTestComponent,
   NbLayoutHeaderTestComponent,
   NbLayoutFooterTestComponent,
-  NbThemeDynamicTestComponent,
   NbThemeChangeTestComponent,
   NbThemeBreakpointTestComponent,
   NbSidebarTestComponent,
@@ -385,6 +386,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarSizeComponent,
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
+  NbOverlayShowcaseComponent,
 ];
 
 @NgModule({

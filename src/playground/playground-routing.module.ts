@@ -66,7 +66,6 @@ import { NbContextMenuTestComponent } from './context-menu/context-menu-test.com
 import { NbLayoutHeaderTestComponent } from './layout/layout-header-test.component';
 import { NbLayoutFooterTestComponent } from './layout/layout-footer-test.component';
 import { NbThemeChangeTestComponent } from './layout/theme-change-test.component';
-import { NbThemeDynamicTestComponent } from './layout/theme-dynamic-test.component';
 import { NbThemeBreakpointTestComponent } from './layout/theme-breakpoint-test.component';
 import { NbLayoutTestComponent } from './layout/layout-test.component';
 import {
@@ -159,6 +158,7 @@ import { NbCalendarFilterComponent } from './calendar/calendar-filter.component'
 import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component';
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
+import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
 
 
 export const routes: Routes = [
@@ -711,6 +711,15 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'overlay',
+        children: [
+          {
+            path: 'overlay-showcase.component',
+            component: NbOverlayShowcaseComponent,
+          },
+        ],
+      },
     ],
   },
   {
@@ -752,10 +761,6 @@ export const routes: Routes = [
           {
             path: 'theme-change-test.component',
             component: NbThemeChangeTestComponent,
-          },
-          {
-            path: 'theme-dynamic-test.component',
-            component: NbThemeDynamicTestComponent,
           },
           {
             path: 'theme-breakpoint-test.component',

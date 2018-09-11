@@ -241,11 +241,18 @@ $theme: (
   popover-fg: color-fg-heading,
   popover-bg: color-bg,
   popover-border: color-success,
+  popover-border-radius: radius,
   popover-shadow: none,
+  popover-arrow-size: 11px,
 
   context-menu-fg: color-fg-heading,
+  context-menu-bg: color-bg,
   context-menu-active-fg: color-white,
   context-menu-active-bg: color-success,
+  context-menu-border: color-success,
+  context-menu-border-radius: radius,
+  context-menu-shadow: none,
+  context-menu-arrow-size: 11px,
 
   actions-font-size: font-size,
   actions-font-family: font-secondary,
@@ -628,6 +635,8 @@ $theme: (
   calendar-month-cell-large-height: 2.375rem,
   calendar-year-cell-large-width: calendar-month-cell-width,
   calendar-year-cell-large-height: calendar-month-cell-height,
+
+  overlay-backdrop-bg: rgba(0, 0, 0, 0.288),
 );
 
 // register the theme
