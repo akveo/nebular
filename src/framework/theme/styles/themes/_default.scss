@@ -647,6 +647,17 @@ $theme: (
 
   overlay-backdrop-bg: rgba(0, 0, 0, 0.288),
 
+  tooltip-bg: color-fg-text,
+  tooltip-primary-bg: color-primary,
+  tooltip-info-bg: color-info,
+  tooltip-success-bg: color-success,
+  tooltip-warning-bg: color-warning,
+  tooltip-danger-bg: color-danger,
+  tooltip-fg: color-bg-active,
+  tooltip-status-fg: color-bg-active,
+  tooltip-shadow: shadow,
+  tooltip-font-size: font-size,
+
   select-border-width: 2px,
   select-max-height: 20rem,
   select-bg: color-bg,

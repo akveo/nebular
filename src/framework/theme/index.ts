@@ -74,4 +74,6 @@ export * from './components/cdk/overlay';
 export * from './components/dialog';
 export * from './components/toastr/toastr.module';
 export * from './components/toastr/toastr.service';
+export * from './components/tooltip/tooltip.module';
+export * from './components/tooltip/tooltip.directive';
 export * from './components/select/select.module';

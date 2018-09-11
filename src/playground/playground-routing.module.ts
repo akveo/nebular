@@ -175,6 +175,10 @@ import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
 import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
 import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
 import { NbToastrIconComponent } from './toastr/toastr-icon.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 import { NbSelectShowcaseComponent } from './select/select-showcase.component';
 import { NbSelectMultipleComponent } from './select/select-multiple.component';
 import { NbSelectStatusComponent } from './select/select-status.component';
@@ -221,6 +225,27 @@ export const routes: Routes = [
           {
             path: 'popover-modes.component',
             component: NbPopoverModesComponent,
+          },
+        ],
+      },
+      {
+        path: 'tooltip',
+        children: [
+          {
+            path: 'tooltip-showcase.component',
+            component: NbTooltipShowcaseComponent,
+          },
+          {
+            path: 'tooltip-with-icon.component',
+            component: NbTooltipWithIconComponent,
+          },
+          {
+            path: 'tooltip-placements.component',
+            component: NbTooltipPlacementsComponent,
+          },
+          {
+            path: 'tooltip-colors.component',
+            component: NbTooltipColorsComponent,
           },
         ],
       },

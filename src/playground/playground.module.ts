@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  NbActionsModule,
+  NbThemeModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
@@ -18,13 +18,11 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbPopoverModule,
-  NbSearchModule,
   NbSidebarModule,
+  NbActionsModule,
+  NbSearchModule,
   NbTabsetModule,
-  NbThemeModule,
-  NbToastrModule,
   NbUserModule,
-  NbDialogModule,
   NbBadgeModule,
   NbContextMenuModule,
   NbRouteTabsetModule,
@@ -38,6 +36,9 @@ import {
   NbButtonModule,
   NbInputModule,
   NbOverlayModule,
+  NbToastrModule,
+  NbTooltipModule,
+  NbDialogModule,
   NbSelectModule,
 } from '@nebular/theme';
 
@@ -221,6 +222,10 @@ import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialo
 import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 import { NbSelectShowcaseComponent } from './select/select-showcase.component';
 import { NbSelectMultipleComponent } from './select/select-multiple.component';
 import { NbSelectStatusComponent } from './select/select-status.component';
@@ -270,6 +275,7 @@ export const NB_MODULES = [
   NbOverlayModule.forRoot(),
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbTooltipModule,
   NbSelectModule,
 ];
 
@@ -446,6 +452,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDialogResultComponent,
   NbDialogNamePromptComponent,
   NbDialogTemplateComponent,
+  NbTooltipShowcaseComponent,
+  NbTooltipWithIconComponent,
+  NbTooltipPlacementsComponent,
+  NbTooltipColorsComponent,
   NbSelectShowcaseComponent,
   NbSelectMultipleComponent,
   NbSelectStatusComponent,

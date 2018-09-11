@@ -324,6 +324,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Select',
         icon: 'select.svg',
         source: [
