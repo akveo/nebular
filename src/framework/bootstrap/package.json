@@ -2,9 +2,6 @@
   "name": "@nebular/bootstrap",
   "version": "2.0.0-rc.10",
   "description": "@nebular/bootstrap",
-  "main": "./bundles/bootstrap.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
