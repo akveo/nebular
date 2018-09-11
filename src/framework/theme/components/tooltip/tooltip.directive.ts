@@ -21,7 +21,7 @@ import {
   patch,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbTooltipComponent } from '@nebular/theme/components/tooltip/tooltip.component';
+import { NbTooltipComponent } from './tooltip.component';
 
 /**
  *

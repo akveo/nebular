@@ -95,7 +95,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
-  set _items(items: NbMenuItem[]) {
+  set setItems(items: NbMenuItem[]) {
     this.validateItems(items);
     this.items = items;
   };

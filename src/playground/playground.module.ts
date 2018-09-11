@@ -35,7 +35,9 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
-  NbOverlayModule, NbTooltipModule,
+  NbOverlayModule,
+  NbToastrModule,
+  NbTooltipModule, NbDialogModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -176,7 +178,7 @@ import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-s
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
 import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
-import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
+import { NbNewsPostComponent, NbNewsPostPlaceholderComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -200,6 +202,24 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
+import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
+import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
+import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
+import { NbToastrIconComponent } from './toastr/toastr-icon.component';
+import { NbDialogShowcaseComponent, NbShowcaseDialogComponent } from './dialog/dialog-showcase.component';
+import { NbDialogHasBackdropComponent, NbHasBackdropDialogComponent } from './dialog/dialog-has-backdrop.component';
+import {
+  NbBackdropClickDialogComponent,
+  NbDialogBackdropClickComponent,
+} from './dialog/dialog-backdrop-click.component';
+import { NbDialogEscComponent, NbEscDialogComponent } from './dialog/dialog-esc.component';
+import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialog-scroll.component';
+import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
+import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
+import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
 import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
 import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
 import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
@@ -238,6 +258,8 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
+  NbToastrModule.forRoot(),
+  NbDialogModule.forRoot(),
   NbTooltipModule,
 ];
 
@@ -392,6 +414,28 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
+  NbToastrShowcaseComponent,
+  NbToastrPositionsComponent,
+  NbToastrStatusesComponent,
+  NbToastrDurationComponent,
+  NbToastrDestroyByClickComponent,
+  NbToastrPreventDuplicatesComponent,
+  NbToastrIconComponent,
+  NbAutoFocusDialogComponent,
+  NbBackdropClickDialogComponent,
+  NbEscDialogComponent,
+  NbHasBackdropDialogComponent,
+  NbScrollDialogComponent,
+  NbShowcaseDialogComponent,
+  NbDialogShowcaseComponent,
+  NbDialogHasBackdropComponent,
+  NbDialogBackdropClickComponent,
+  NbDialogEscComponent,
+  NbDialogScrollComponent,
+  NbDialogAutoFocusComponent,
+  NbDialogResultComponent,
+  NbDialogNamePromptComponent,
+  NbDialogTemplateComponent,
   NbTooltipShowcaseComponent,
   NbTooltipWithIconComponent,
   NbTooltipPlacementsComponent,
@@ -410,6 +454,15 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbPlaygroundLayoutComponent,
     NbPlaygroundBaseComponent,
     ...NB_EXAMPLE_COMPONENTS,
+  ],
+  entryComponents: [
+    NbAutoFocusDialogComponent,
+    NbDialogNamePromptComponent,
+    NbEscDialogComponent,
+    NbHasBackdropDialogComponent,
+    NbScrollDialogComponent,
+    NbShowcaseDialogComponent,
+    NbBackdropClickDialogComponent,
   ],
 })
 export class NbPlaygroundModule {
