@@ -1,4 +1,4 @@
-import { Directive, Injectable, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Inject, Injectable, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
 import {
   CdkPortal,
   CdkPortalOutlet,
@@ -21,10 +21,13 @@ import {
   OverlayPositionBuilder,
   OverlayRef,
   PositionStrategy,
+  BlockScrollStrategy,
   ScrollStrategy,
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { NB_DOCUMENT } from '../../../theme.options';
 
 
 @Directive({ selector: '[nbPortal]' })
@@ -45,6 +48,13 @@ export class NbPlatform extends Platform {
 
 @Injectable()
 export class NbOverlayPositionBuilder extends OverlayPositionBuilder {
+}
+
+@Injectable()
+export class NbBlockScrollStrategy extends BlockScrollStrategy {
+  constructor(ruler: ViewportRuler, @Inject(NB_DOCUMENT) document) {
+    super(ruler, document);
+  }
 }
 
 export class NbComponentPortal<T = any> extends ComponentPortal<T> {
@@ -82,6 +92,7 @@ const CDK_PROVIDERS = [
   NbOverlay,
   NbPlatform,
   NbOverlayPositionBuilder,
+  NbBlockScrollStrategy,
 ];
 
 /**
