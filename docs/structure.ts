@@ -303,6 +303,16 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Dialog',
+        icon: 'dialog.svg',
+        source: [
+          'NbDialogService',
+          'NbDialogRef',
+          'NbDialogConfig',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

@@ -82,7 +82,8 @@ import {
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetShowcaseChild1Component, NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseChild1Component,
+  NbRouteTabsetShowcaseChild2Component,
   NbRouteTabsetShowcaseComponent,
 } from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
@@ -159,6 +160,14 @@ import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbDialogShowcaseComponent } from './dialog/dialog-showcase.component';
+import { NbDialogHasBackdropComponent } from './dialog/dialog-has-backdrop.component';
+import { NbDialogBackdropClickComponent } from './dialog/dialog-backdrop-click.component';
+import { NbDialogEscComponent } from './dialog/dialog-esc.component';
+import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
+import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
+import { NbDialogResultComponent } from './dialog/dialog-result.component';
+import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
 
 
 export const routes: Routes = [
@@ -717,6 +726,43 @@ export const routes: Routes = [
           {
             path: 'overlay-showcase.component',
             component: NbOverlayShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'dialog',
+        children: [
+          {
+            path: 'dialog-showcase.component',
+            component: NbDialogShowcaseComponent,
+          },
+          {
+            path: 'dialog-has-backdrop.component',
+            component: NbDialogHasBackdropComponent,
+          },
+          {
+            path: 'dialog-backdrop-click.component',
+            component: NbDialogBackdropClickComponent,
+          },
+          {
+            path: 'dialog-esc.component',
+            component: NbDialogEscComponent,
+          },
+          {
+            path: 'dialog-scroll.component',
+            component: NbDialogScrollComponent,
+          },
+          {
+            path: 'dialog-auto-focus.component',
+            component: NbDialogAutoFocusComponent,
+          },
+          {
+            path: 'dialog-result.component',
+            component: NbDialogResultComponent,
+          },
+          {
+            path: 'dialog-template.component',
+            component: NbDialogTemplateComponent,
           },
         ],
       },
