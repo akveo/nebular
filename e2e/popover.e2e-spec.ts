@@ -49,28 +49,28 @@ describe('nb-popover', () => {
     element(placementRight).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('right');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-right');
   });
 
   it('render container in the bottom', () => {
     element(placementBottom).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('bottom');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-bottom');
   });
 
   it('render container in the top', () => {
     element(placementTop).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('top');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-top');
   });
 
   it('render container in the left', () => {
     element(placementLeft).click();
     const container = element(popover);
     expect(container.isPresent()).toBeTruthy();
-    expect(container.getAttribute('class')).toEqual('left');
+    expect(container.getAttribute('class')).toEqual('nb-overlay-left');
   });
 
   it('open popover by host click', () => {
