@@ -14,7 +14,7 @@ import { NbWindowRef } from './window-ref';
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
-          <button class="button" (click)="minimize()" [attr.disabled]="minimized ? true : null">
+          <button class="button" (click)="minimize()">
             <nb-window-minimize-icon></nb-window-minimize-icon>
           </button>
           <button class="button" *ngIf="isFullScreen" (click)="maximize()">
