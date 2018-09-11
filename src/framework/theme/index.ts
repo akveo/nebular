@@ -72,3 +72,5 @@ export * from './components/input/input.directive';
 export * from './components/input/input.module';
 export * from './components/cdk/overlay';
 export * from './components/dialog';
+export * from './components/datepicker/datepicker.module';
+export * from './components/datepicker/datepicker.directive';

@@ -168,6 +168,7 @@ import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
 import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 
 
 export const routes: Routes = [
@@ -763,6 +764,15 @@ export const routes: Routes = [
           {
             path: 'dialog-template.component',
             component: NbDialogTemplateComponent,
+          },
+        ],
+      },
+      {
+        path: 'datepicker',
+        children: [
+          {
+            path: 'datepicker-showcase.component',
+            component: NbDatepickerShowcaseComponent,
           },
         ],
       },

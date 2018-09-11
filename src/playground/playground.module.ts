@@ -37,6 +37,7 @@ import {
   NbInputModule,
   NbOverlayModule,
   NbDialogModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -212,6 +213,7 @@ import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialo
 import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -247,6 +249,7 @@ export const NB_MODULES = [
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbDatepickerModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -415,6 +418,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDialogResultComponent,
   NbDialogNamePromptComponent,
   NbDialogTemplateComponent,
+  NbDatepickerShowcaseComponent,
 ];
 
 @NgModule({
