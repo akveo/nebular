@@ -1,6 +1,6 @@
 # Bootstrap Integration
 
-Nebular provides additional module to override bootstrap selectors according our themes.
+Nebular provides an additional module to override bootstrap selectors according our themes.
 To enable bootstrap support you have to do the following:
 
 - Install nebular bootstrap and bootstrap itself packages: 
@@ -30,14 +30,18 @@ Then if you just want to use predefined themes you have to import prebuilt style
 Another way, if you need to customize themes you have to do the following steps:
 
 - Import nebular bootstrap into `styles.scss`:
+
 ```scss
 @import '~@nebular/bootstrap/styles/globals';
 ```
 
 - Run `nb-bootstrap-global`:
+
 ```scss
 @include nb-bootstrap-global();
 ```
+
+And that's it. Bootstrap is installed now.
 
 <hr>
  
