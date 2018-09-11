@@ -44,9 +44,11 @@ export class NbDialogNamePromptComponent {
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   `,
-  styles: [` /deep/ nb-layout-column {
-    height: 80vw;
-  } `],
+  styles: [`
+    /deep/ nb-layout-column {
+      height: 80vw;
+    }
+  `],
 })
 export class NbDialogResultComponent {
   names: string[] = [];

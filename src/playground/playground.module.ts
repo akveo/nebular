@@ -201,13 +201,15 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
-import { NbDialogShowcaseComponent } from './dialog/dialog-showcase.component';
-import { NbDialogComponent } from './dialog/dialog.component';
-import { NbDialogHasBackdropComponent } from './dialog/dialog-has-backdrop.component';
-import { NbDialogBackdropClickComponent } from './dialog/dialog-backdrop-click.component';
-import { NbDialogEscComponent } from './dialog/dialog-esc.component';
-import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
-import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
+import { NbDialogShowcaseComponent, NbShowcaseDialogComponent } from './dialog/dialog-showcase.component';
+import { NbDialogHasBackdropComponent, NbHasBackdropDialogComponent } from './dialog/dialog-has-backdrop.component';
+import {
+  NbBackdropClickDialogComponent,
+  NbDialogBackdropClickComponent,
+} from './dialog/dialog-backdrop-click.component';
+import { NbDialogEscComponent, NbEscDialogComponent } from './dialog/dialog-esc.component';
+import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialog-scroll.component';
+import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
 
@@ -398,7 +400,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
-  NbDialogComponent,
+  NbAutoFocusDialogComponent,
+  NbBackdropClickDialogComponent,
+  NbEscDialogComponent,
+  NbHasBackdropDialogComponent,
+  NbScrollDialogComponent,
+  NbShowcaseDialogComponent,
   NbDialogShowcaseComponent,
   NbDialogHasBackdropComponent,
   NbDialogBackdropClickComponent,
@@ -424,8 +431,13 @@ export const NB_EXAMPLE_COMPONENTS = [
     ...NB_EXAMPLE_COMPONENTS,
   ],
   entryComponents: [
-    NbDialogComponent,
+    NbAutoFocusDialogComponent,
     NbDialogNamePromptComponent,
+    NbEscDialogComponent,
+    NbHasBackdropDialogComponent,
+    NbScrollDialogComponent,
+    NbShowcaseDialogComponent,
+    NbBackdropClickDialogComponent,
   ],
 })
 export class NbPlaygroundModule {
