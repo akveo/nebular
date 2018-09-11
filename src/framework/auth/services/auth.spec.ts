@@ -31,7 +31,8 @@ describe('auth-service', () => {
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
   const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, ownerStrategyName);
+  const invalidToken = nbAuthCreateToken(NbAuthSimpleToken, null, ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -168,7 +169,7 @@ describe('auth-service', () => {
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(emptyToken), observableOf(testToken));
+        .returnValues(observableOf(invalidToken), observableOf(testToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
@@ -187,7 +188,22 @@ describe('auth-service', () => {
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(emptyToken), observableOf(emptyToken));
+        .returnValues(observableOf(invalidToken), observableOf(invalidToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token doesn\'t exist, strategy refreshToken called, returns false', (done) => {
+     const spy = spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(emptyToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
