@@ -9,13 +9,14 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
-  NbGlobalPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPlatform,
   NbPositionStrategy,
 } from './mapping';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
+import { NbGlobalLogicalPosition } from './position-helper';
+import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 
 export enum NbAdjustment {
@@ -151,6 +152,25 @@ export class NbAdjustableConnectedPositionStrategy
   }
 }
 
+export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
+
+  position(position: NbGlobalLogicalPosition): this {
+    switch (position) {
+      case NbGlobalLogicalPosition.TOP_START:
+        return this.top().left();
+
+      case NbGlobalLogicalPosition.TOP_END:
+        return this.top().right();
+
+      case NbGlobalLogicalPosition.BOTTOM_START:
+        return this.bottom().left();
+
+      case NbGlobalLogicalPosition.BOTTOM_END:
+        return this.bottom().right();
+    }
+  }
+}
+
 @Injectable()
 export class NbPositionBuilderService {
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -160,7 +180,7 @@ export class NbPositionBuilderService {
   }
 
   global(): NbGlobalPositionStrategy {
-    return this.positionBuilder.global();
+    return new NbGlobalPositionStrategy();
   }
 
   connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {

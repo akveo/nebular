@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '~@angular/cdk/overlay-prebuilt.css';
 @import '../../components/layout/layout.component.theme';
 @import '../../components/sidebar/sidebar.component.theme';
 @import '../../components/calendar-kit/calendar-kit.theme';
@@ -33,6 +32,7 @@
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/select/select.component.theme';
+@import '../../components/toastr/toast.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -53,7 +53,9 @@
   @include nb-checkbox-theme();
   @include nb-progress-bar-theme();
   @include nb-badge-theme();
+  @include nb-popover-theme();
   @include nb-stepper-theme();
+  @include nb-context-menu-theme();
   @include nb-alert-theme();
   @include nb-chat-theme();
   @include nb-accordion-theme();
@@ -64,4 +66,5 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-select-theme();
+  @include nb-toaster-theme();
 }

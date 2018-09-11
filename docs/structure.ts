@@ -304,6 +304,26 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Dialog',
+        icon: 'dialog.svg',
+        source: [
+          'NbDialogService',
+          'NbDialogRef',
+          'NbDialogConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toastr',
+        icon: 'toastr.svg',
+        source: [
+          'NbToastrService',
+          'NbToastComponent',
+          'NbToastrConfig',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Select',
         icon: 'select.svg',
         source: [

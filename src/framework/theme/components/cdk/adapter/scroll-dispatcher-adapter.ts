@@ -7,8 +7,8 @@ import { NbLayoutScrollService } from '../../../services/scroll.service';
 
 @Injectable()
 export class NbScrollDispatcherAdapter extends ScrollDispatcher {
-  constructor(_ngZone: NgZone, _platform: NbPlatform, protected scrollService: NbLayoutScrollService) {
-    super(_ngZone, _platform);
+  constructor(ngZone: NgZone, platform: NbPlatform, protected scrollService: NbLayoutScrollService) {
+    super(ngZone, platform);
   }
 
   scrolled(auditTimeInMs?: number): Observable<CdkScrollable | void> {

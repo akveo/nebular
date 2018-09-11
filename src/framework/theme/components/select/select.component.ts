@@ -53,12 +53,12 @@ export class NbSelectLabelComponent {
 }
 
 /**
- * The `NbSelectComponent` provides capability to select one of the passed items.
+ * The `NbSelectComponent` provides a capability to select one of the passed items.
  *
  * @stacked-example(Showcase, select/select-showcase.component)
  *
- * If you want to use it as multi select control you have to mark it as `multiple`.
- * In this case `nb-select` will work only with arrays - accept arrays and propagate arrays.
+ * If you want to use it as the multi-select control you have to mark it as `multiple`.
+ * In this case, `nb-select` will work only with arrays - accept arrays and propagate arrays.
  *
  * @stacked-example(Multiple, select/select-multiple.component)
  *
@@ -80,7 +80,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Grouping, select/select-groups.component)
  *
- * Select may have placeholder that will be shown when nothing selected:
+ * Select may have a placeholder that will be shown when nothing selected:
  *
  * @stacked-example(Placeholder, select/select-placeholder.component)
  *
@@ -88,7 +88,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Disabled select, select/select-disabled.component)
  *
- * Also, custom label may be provide in select.
+ * Also, the custom label may be provided in select.
  * This custom label will be used for instead placeholder when something selected.
  *
  * @stacked-example(Custom label, select/select-label.component)
