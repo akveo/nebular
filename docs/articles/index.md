@@ -19,7 +19,6 @@ Nebular modules are distributed as separated `npm` packages, here's a list of cu
 - Nebular Theme `@nebular/theme`
   - Theme System - set of SCSS rules, which allows you to modify application look & feel by changing variables, with fewer custom styles.
   - UI Kit - pure Angular components with two style themes and no 3rd party dependencies.
-  - Style overriding for Bootstrap, so that the application has a consistent look & feel across libraries.
   - Server-side rendering compatibility!
   - Right-to-left writing system support for all components.
 - Nebular Auth `@nebular/auth`
@@ -28,6 +27,8 @@ Nebular modules are distributed as separated `npm` packages, here's a list of cu
   - Helpers for token management (storing, passing with HTTP requests, etc).
 - Nebular Security `@nebular/security` 
   - module for roles and permissions management.
+- Nebular Bootstrap `@nebular/bootstrap`
+  - Style overriding for Bootstrap, so that the application has a consistent look & feel across libraries.
 - Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a> - Angular application based on Nebular modules with beautiful IOT components.
 
 Other ideas

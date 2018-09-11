@@ -4,45 +4,27 @@ Nebular provides additional module to override bootstrap selectors according our
 To enable bootstrap support you have to do the following:
 
 - Install nebular bootstrap and bootstrap itself packages: 
+
 ```bash
 npm i @nebular/bootstrap bootstrap
 ```
 
 - Add bootstrap in `angular.json`: 
+
 ```json
-"projects": {
-  "your-project-name": {
-    "architect": {
-      "build": {
-        "options": {
-          "styles": [
-            "node_modules/bootstrap/dist/css/bootstrap.css",
-          ]
-        }
-      }
-    }
-  }
-}
+"styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.css",
+]
 ```
 
 Then if you just want to use predefined themes you have to import prebuilt styles for required theme in `angular.json`:
 
 ```json
-"projects": {
-  "your-project-name": {
-    "architect": {
-      "build": {
-        "options": {
-          "styles": [
-              "node_modules/@nebular/bootstrap/styles/prebuilt/cosmic.css",
-              "node_modules/@nebular/bootstrap/styles/prebuilt/default.css",
-              "node_modules/@nebular/bootstrap/styles/prebuilt/corporate.css",
-          ]
-        }
-      }
-    }
-  }
-}
+"styles": [
+  "node_modules/@nebular/bootstrap/styles/prebuilt/cosmic.css",
+  "node_modules/@nebular/bootstrap/styles/prebuilt/default.css",
+  "node_modules/@nebular/bootstrap/styles/prebuilt/corporate.css",
+]
 ```
 
 Another way, if you need to customize themes you have to do the following steps:
@@ -56,6 +38,8 @@ Another way, if you need to customize themes you have to do the following steps:
 ```scss
 @include nb-bootstrap-global();
 ```
+
+<hr>
  
 ## Related Articles
 
