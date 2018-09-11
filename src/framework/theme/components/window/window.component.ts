@@ -1,6 +1,4 @@
-import {
-  Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef, ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef, } from '@angular/core';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
 import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState } from './window-types';
@@ -77,7 +75,11 @@ export class NbWindowComponent implements OnInit, OnDestroy {
   }
 
   minimize() {
-    this.windowRef.minimize();
+    if (this.windowRef.state === NbWindowState.MINIMIZED) {
+      this.windowRef.toPreviousState();
+    } else {
+      this.windowRef.minimize();
+    }
   }
 
   maximize() {

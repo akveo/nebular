@@ -1,29 +1,27 @@
 import { ComponentRef } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbWindowComponent } from './window.component';
 import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window-types';
 
 export class NbWindowRef {
   componentRef: ComponentRef<NbWindowComponent>;
 
+  private _prevState: NbWindowState;
   private _state: NbWindowState;
   get state() {
     return this._state;
   }
   set state(newState: NbWindowState) {
     if (newState && this._state !== newState) {
-      const change = { oldState: this.state, newState };
+      this._prevState = this.state;
       this._state = newState;
-      this.stateChange$.next(change);
+      this.stateChange$.next({ oldState: this._prevState, newState });
     }
   }
 
-  private stateChange$ = new Subject<NbWindowStateChange>();
+  private stateChange$ = new ReplaySubject<NbWindowStateChange>(1);
   get stateChange(): Observable<NbWindowStateChange> {
-    return this.stateChange$
-      .asObservable()
-      .pipe(startWith({ oldState: null, newState: this.state }));
+    return this.stateChange$.asObservable();
   }
 
   private _closed = false;
@@ -46,6 +44,10 @@ export class NbWindowRef {
 
   fullScreen() {
     this.state = NbWindowState.FULL_SCREEN;
+  }
+
+  toPreviousState() {
+    this.state = this._prevState;
   }
 
   close() {
