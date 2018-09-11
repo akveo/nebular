@@ -1,4 +1,7 @@
-import { Component, HostBinding, Inject, OnDestroy, TemplateRef } from '@angular/core';
+import {
+  Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef, ViewChild,
+} from '@angular/core';
+import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
 import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState } from './window-types';
 import { NbWindowRef } from './window-ref';
@@ -8,7 +11,7 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card [size]="config.size">
       <nb-card-header>
-        <div class="title">{{ config.title }}</div>
+        <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
           <button class="button" (click)="minimize()" [attr.disabled]="minimized ? true : null">
@@ -33,7 +36,7 @@ import { NbWindowRef } from './window-ref';
   `,
   styleUrls: ['./window.component.scss'],
 })
-export class NbWindowComponent implements OnDestroy {
+export class NbWindowComponent implements OnInit, OnDestroy {
   @HostBinding('class.full-screen')
   get isFullScreen() {
     return this.windowRef.state === NbWindowState.FULL_SCREEN;
@@ -49,11 +52,29 @@ export class NbWindowComponent implements OnDestroy {
     return this.windowRef.state === NbWindowState.MINIMIZED;
   }
 
+  protected focusTrap: NbFocusTrap;
+
   constructor(
     @Inject(NB_WINDOW_CONTENT) public content: TemplateRef<any> | NbComponentType,
     public windowRef: NbWindowRef,
     public config: NbWindowConfig,
+    private focusTrapFactory: NbFocusTrapFactoryService,
+    private elementRef: ElementRef,
   ) {}
+
+  ngOnInit() {
+    this.focusTrap = this.focusTrapFactory.create(this.elementRef.nativeElement);
+    this.focusTrap.blurPreviouslyFocusedElement();
+    this.focusTrap.focusInitialElement();
+  }
+
+  ngOnDestroy() {
+    if (this.focusTrap) {
+      this.focusTrap.restoreFocus();
+    }
+
+    this.close();
+  }
 
   minimize() {
     this.windowRef.minimize();
@@ -77,9 +98,5 @@ export class NbWindowComponent implements OnDestroy {
 
   close() {
     this.windowRef.close();
-  }
-
-  ngOnDestroy() {
-    this.close();
   }
 }
