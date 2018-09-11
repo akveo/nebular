@@ -54,7 +54,7 @@ Same way you can enable Auth Module (more details under [Auth Module Concepts & 
 ## Install Styles
 Now, let's import Nebular styles
 
-Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.json` file:
+Include Bootstrap and default Nebular theme CSS files into your `angular.json` file (or `.angular-cli.json` for Angular < 6.0):
 
 ```scss
 "styles": [

@@ -19,7 +19,7 @@ export enum NbGlobalPhysicalPosition {
 
 export type NbGlobalPosition = NbGlobalPhysicalPosition | NbGlobalLogicalPosition;
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class NbPositionHelper {
   constructor(protected layoutDirection: NbLayoutDirectionService) {
   }

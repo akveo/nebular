@@ -2,16 +2,17 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../../shared/shared.module';
 import { NbCdkMappingModule } from './mapping';
-import { NbAdapterModule } from '../adapter/adapter.module';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbOverlayContainerComponent } from './overlay-container';
 import { NbOverlayService } from './overlay';
+import { NbCdkAdapterModule } from '../adapter/adapter.module';
+import { NbPositionHelper } from './position-helper';
 
 
 @NgModule({
   imports: [
     NbCdkMappingModule,
-    NbAdapterModule,
+    NbCdkAdapterModule,
     NbSharedModule,
   ],
   declarations: [NbOverlayContainerComponent],
@@ -27,6 +28,7 @@ export class NbOverlayModule {
       providers: [
         NbPositionBuilderService,
         NbOverlayService,
+        NbPositionHelper,
       ],
     };
   }
