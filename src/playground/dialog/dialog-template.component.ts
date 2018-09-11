@@ -16,9 +16,11 @@ import { NbDialogService } from '@nebular/theme';
     </ng-template>
     <button class="btn btn-primary" (click)="open(dialog)">Open Dialog</button>
   `,
-  styles: [` /deep/ nb-layout-column {
-    height: 80vw;
-  } `],
+  styles: [`
+    /deep/ nb-layout-column {
+      height: 80vw;
+    }
+  `],
 })
 export class NbDialogTemplateComponent {
   constructor(private dialogService: NbDialogService) {

@@ -15,6 +15,11 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
       </nb-card-footer>
     </nb-card>
   `,
+  styles: [`
+    button {
+      margin: 1rem;
+    }
+  `],
 })
 export class NbDialogNamePromptComponent {
   constructor(protected dialogRef: NbDialogRef<NbDialogNamePromptComponent>) {

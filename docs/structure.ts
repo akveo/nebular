@@ -309,6 +309,7 @@ export const structure = [
         source: [
           'NbDialogService',
           'NbDialogRef',
+          'NbDialogConfig',
         ],
       },
       {

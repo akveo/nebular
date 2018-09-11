@@ -71,7 +71,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  *
  * `context` - both, template and component may receive data through `config.context` property.
  * For components, this data will be assigned through inputs.
- * For template, you can access it inside template as $implicit.
+ * For templates, you can access it inside template as $implicit.
  *
  * ```ts
  * this.dialogService.open(template, { context: 'pass data in template' });
@@ -123,7 +123,7 @@ export class NbDialogService {
   /**
    * Opens new instance of the dialog, may receive optional config.
    * */
-  open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig> = {}): NbDialogRef<T> {
+  open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig<T>> = {}): NbDialogRef<T> {
     const config = new NbDialogConfig({ ...this.globalConfig, ...userConfig });
     const overlayRef = this.createOverlay(config);
     const dialogRef = new NbDialogRef<T>(overlayRef);

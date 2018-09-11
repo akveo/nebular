@@ -17,7 +17,7 @@ export class NbDialogShowcaseComponent {
   open() {
     this.dialogService.open(NbDialogComponent, {
       context: {
-        title: 'This is title passed to the dialog component',
+        title: 'This is a title passed to the dialog component',
       },
     });
   }

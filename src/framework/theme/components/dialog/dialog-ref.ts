@@ -38,5 +38,6 @@ export class NbDialogRef<T> {
     this.overlayRef.detach();
     this.overlayRef.dispose();
     this.onClose$.next(res);
+    this.onClose$.complete();
   }
 }
