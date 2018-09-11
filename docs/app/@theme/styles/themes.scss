@@ -1,8 +1,6 @@
 @import '../../../../src/framework/theme/styles/theming';
 @import '../../../../src/framework/theme/styles/themes/default';
-
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '../../../../src/framework/bootstrap/bootstrap/breakpoints';
+@import '../../../../src/framework/theme/styles/global/breakpoints';
 
 $grid-breakpoints: map-merge($grid-breakpoints, (macpro: 1280px));
 

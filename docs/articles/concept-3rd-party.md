@@ -2,7 +2,6 @@
 
 Currently Nebular Theme system is integrated with the following 3rd party modules:
 
-- Bootstrap 4;
 - ng2-smart-table;
 - angular2-toaster.
 

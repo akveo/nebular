@@ -10,5 +10,5 @@
 $nb-enabled-themes: (default);
 
 @include nb-install() {
-  @include nb-theme-global();
+  @include nb-bootstrap-global();
 };

@@ -262,6 +262,7 @@
               "docs/google46533d2e7a851062.html"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/docsearch.js/dist/cdn/docsearch.min.css",
               "node_modules/highlight.js/styles/dracula.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",

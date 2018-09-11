@@ -87,6 +87,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Bootstrap integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'bootstrap-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: '3rd-party components',
         children: [
           {
