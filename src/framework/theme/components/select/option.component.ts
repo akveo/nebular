@@ -10,20 +10,16 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostBinding,
   HostListener,
   Inject,
-  InjectionToken,
   Input,
   Output,
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
+import { NbSelectComponent } from './select.component';
 
-
-/**
- * Token that provides `NbSelectComponent` for child options.
- * */
-export const NB_SELECT = new InjectionToken('select');
 
 @Component({
   selector: 'nb-option',
@@ -50,7 +46,7 @@ export class NbOptionComponent<T> {
   @Input() value: T;
 
   @Input('disabled')
-  set _disabled(disabled: boolean) {
+  set setDisabled(disabled: boolean) {
     this.disabled = convertToBoolProperty(disabled);
   }
 
@@ -62,8 +58,8 @@ export class NbOptionComponent<T> {
   selected: boolean = false;
   disabled: boolean = false;
 
-  constructor(protected elementRef: ElementRef,
-              @Inject(NB_SELECT) protected parent,
+  constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
+              protected elementRef: ElementRef,
               protected cd: ChangeDetectorRef) {
   }
 

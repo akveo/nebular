@@ -40,7 +40,7 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
 } from '../cdk';
-import { NB_SELECT, NbOptionComponent } from './option.component';
+import { NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 
@@ -132,7 +132,6 @@ export class NbSelectLabelComponent {
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NB_SELECT, useExisting: NbSelectComponent },
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NbSelectComponent),
@@ -192,7 +191,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Accepts selected item or array of selected items.
    * */
   @Input('selected')
-  set _selected(value: T | T[]) {
+  set setSelected(value: T | T[]) {
     this.writeValue(value);
   }
 
@@ -200,7 +199,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Gives capability just write `multiple` over the element.
    * */
   @Input('multiple')
-  set _multiple(multiple: boolean) {
+  set setMultiple(multiple: boolean) {
     this.multiple = convertToBoolProperty(multiple);
   }
 

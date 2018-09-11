@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-card-status($status) {
+@mixin nb-select-status($status) {
   border: nb-theme(select-border-width) solid nb-theme(color-#{$status});
 
   nb-option {
@@ -52,23 +52,23 @@
     }
 
     &.primary {
-      @include nb-card-status(primary);
+      @include nb-select-status(primary);
     }
 
     &.danger {
-      @include nb-card-status(danger);
+      @include nb-select-status(danger);
     }
 
     &.warning {
-      @include nb-card-status(warning);
+      @include nb-select-status(warning);
     }
 
     &.info {
-      @include nb-card-status(info);
+      @include nb-select-status(info);
     }
 
     &.success {
-      @include nb-card-status(success);
+      @include nb-select-status(success);
     }
 
     &.bottom {

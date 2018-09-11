@@ -283,6 +283,14 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -329,14 +337,6 @@ export const structure = [
         source: [
           'NbTooltipDirective',
           'NbTooltipComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Select',
-        icon: 'select.svg',
-        source: [
-          'NbSelectComponent',
         ],
       },
       {

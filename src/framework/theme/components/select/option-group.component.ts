@@ -21,7 +21,7 @@ export class NbOptionGroupComponent {
   @Input() title: string;
 
   @Input('disabled')
-  set _disabled(disabled: boolean) {
+  set setDisabled(disabled: boolean) {
     this.disabled = convertToBoolProperty(disabled);
   }
 
