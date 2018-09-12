@@ -20,6 +20,7 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/overlay': 'ng.cdk.overlay',
   '@angular/cdk/platform': 'ng.cdk.platform',
   '@angular/cdk/portal': 'ng.cdk.portal',
+  '@angular/cdk/a11y': 'ng.cdk.a11y',
 
 
   // RxJS dependencies

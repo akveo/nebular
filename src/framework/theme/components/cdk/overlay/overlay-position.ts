@@ -9,19 +9,22 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
-  NbGlobalPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPlatform,
   NbPositionStrategy,
 } from './mapping';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
+import { NbGlobalLogicalPosition } from './position-helper';
+import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 
 export enum NbAdjustment {
   NOOP = 'noop',
   CLOCKWISE = 'clockwise',
   COUNTERCLOCKWISE = 'counterclockwise',
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
 }
 
 export enum NbPosition {
@@ -51,6 +54,8 @@ const POSITIONS = {
 const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
 const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPosition.RIGHT];
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
+const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
+const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
 
 function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
@@ -125,6 +130,10 @@ export class NbAdjustableConnectedPositionStrategy
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
         return this.reorderPreferredPositions(COUNTER_CLOCKWISE_POSITIONS);
+      case NbAdjustment.HORIZONTAL:
+        return this.reorderPreferredPositions(HORIZONTAL_POSITIONS);
+      case NbAdjustment.VERTICAL:
+        return this.reorderPreferredPositions(VERTICAL_POSITIONS);
     }
   }
 
@@ -143,6 +152,25 @@ export class NbAdjustableConnectedPositionStrategy
   }
 }
 
+export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
+
+  position(position: NbGlobalLogicalPosition): this {
+    switch (position) {
+      case NbGlobalLogicalPosition.TOP_START:
+        return this.top().left();
+
+      case NbGlobalLogicalPosition.TOP_END:
+        return this.top().right();
+
+      case NbGlobalLogicalPosition.BOTTOM_START:
+        return this.bottom().left();
+
+      case NbGlobalLogicalPosition.BOTTOM_END:
+        return this.bottom().right();
+    }
+  }
+}
+
 @Injectable()
 export class NbPositionBuilderService {
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -152,7 +180,7 @@ export class NbPositionBuilderService {
   }
 
   global(): NbGlobalPositionStrategy {
-    return this.positionBuilder.global();
+    return new NbGlobalPositionStrategy();
   }
 
   connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {

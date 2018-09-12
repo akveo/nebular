@@ -1,18 +1,28 @@
 import { Directive, Injectable, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CdkPortal, ComponentPortal, Portal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import {
+  CdkPortal,
+  CdkPortalOutlet,
+  ComponentPortal,
+  Portal,
+  PortalInjector,
+  PortalModule,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import {
   ComponentType,
   ConnectedOverlayPositionChange,
   ConnectedPosition,
   ConnectionPositionPair,
   FlexibleConnectedPositionStrategy,
-  GlobalPositionStrategy,
   Overlay,
+  OverlayConfig,
   OverlayContainer,
   OverlayModule,
   OverlayPositionBuilder,
   OverlayRef,
   PositionStrategy,
+  ScrollStrategy,
+  ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
@@ -21,8 +31,12 @@ import { Platform } from '@angular/cdk/platform';
 export class NbPortalDirective extends CdkPortal {
 }
 
+@Directive({ selector: '[nbPortalOutlet]' })
+export class NbPortalOutletDirective extends CdkPortalOutlet {
+}
+
 @Injectable()
-export class NbOverlayService extends Overlay {
+export class NbOverlay extends Overlay {
 }
 
 @Injectable()
@@ -48,19 +62,24 @@ export class NbOverlayContainer extends OverlayContainer {
 export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {
 }
 
+export class NbPortalInjector extends PortalInjector {
+}
+
 export type NbPortal<T = any> = Portal<T>;
 export type NbOverlayRef = OverlayRef;
 export type NbComponentType<T = any> = ComponentType<T>;
-export type NbGlobalPositionStrategy = GlobalPositionStrategy;
 export type NbPositionStrategy = PositionStrategy;
 export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
+export type NbOverlayConfig = OverlayConfig;
+export type NbScrollStrategyOptions = ScrollStrategyOptions;
+export type NbScrollStrategy = ScrollStrategy;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 
 const CDK_PROVIDERS = [
-  NbOverlayService,
+  NbOverlay,
   NbPlatform,
   NbOverlayPositionBuilder,
 ];
@@ -74,8 +93,9 @@ const CDK_PROVIDERS = [
   exports: [
     ...CDK_MODULES,
     NbPortalDirective,
+    NbPortalOutletDirective,
   ],
-  declarations: [NbPortalDirective],
+  declarations: [NbPortalDirective, NbPortalOutletDirective],
   providers: [...CDK_PROVIDERS],
 })
 export class NbCdkMappingModule {

@@ -315,6 +315,15 @@ $theme: (
   toaster-wait: color-primary,
   toaster-error: color-danger,
 
+  toastr-bg: color-bg,
+  toastr-padding: 1.125rem,
+  toastr-fg: color-fg-text,
+  toastr-border: 0.125rem solid,
+  toastr-border-radius: radius,
+  toastr-border-color: #bcc3cc,
+  toastr-icon-radius: 0.25rem,
+  toastr-shadow: shadow,
+
   btn-fg: color-white,
   btn-font-family: font-secondary,
   btn-line-height: line-height,
@@ -637,6 +646,28 @@ $theme: (
   calendar-year-cell-large-height: calendar-month-cell-height,
 
   overlay-backdrop-bg: rgba(0, 0, 0, 0.288),
+
+  tooltip-bg: color-fg-text,
+  tooltip-primary-bg: color-primary,
+  tooltip-info-bg: color-info,
+  tooltip-success-bg: color-success,
+  tooltip-warning-bg: color-warning,
+  tooltip-danger-bg: color-danger,
+  tooltip-fg: color-bg-active,
+  tooltip-status-fg: color-bg-active,
+  tooltip-shadow: shadow,
+  tooltip-font-size: font-size,
+
+  select-border-width: 2px,
+  select-max-height: 20rem,
+  select-bg: color-bg,
+
+  select-checkbox-color: checkbox-border-color,
+  select-checkmark-color: checkbox-border-color,
+
+  select-option-disabled-bg: #f2f4f7,
+  select-option-disabled-opacity: 0.3,
+  select-option-padding: 0.75rem 1.5rem,
 );
 
 // register the theme

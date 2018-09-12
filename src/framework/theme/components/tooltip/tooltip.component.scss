@@ -1,0 +1,71 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host {
+  $arrow-size: 5px;
+
+  z-index: 10000;
+  border-radius: 5px;
+
+  .content {
+    padding: 0.5rem 1.25rem;
+    display: flex;
+  }
+
+  &.right .content {
+    flex-direction: row-reverse;
+  }
+
+  .arrow {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+  }
+
+  .icon {
+    font-size: 1.25rem;
+  }
+
+  span {
+    line-height: 1.25rem;
+  }
+
+  .icon + span {
+    margin-left: 0.5rem;
+  }
+  &.right .icon + span {
+    margin-right: 0.5rem;
+  }
+
+  .arrow {
+    border-left: $arrow-size solid transparent;
+    border-right: $arrow-size solid transparent;
+  }
+
+  &.bottom .arrow {
+    top: -#{$arrow-size};
+    left: calc(50% - #{$arrow-size});
+  }
+
+  &.left .arrow {
+    right: round(-$arrow-size - $arrow-size / 2.5);
+    top: calc(50% - #{$arrow-size / 2.5});
+    transform: rotate(90deg);
+  }
+
+  &.top .arrow {
+    bottom: -#{$arrow-size};
+    left: calc(50% - #{$arrow-size});
+    transform: rotate(180deg);
+  }
+
+  &.right .arrow {
+    left: round(-$arrow-size - $arrow-size / 2.5);
+    top: calc(50% - #{$arrow-size / 2.5});
+    transform: rotate(270deg);
+  }
+}
