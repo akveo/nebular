@@ -3,11 +3,19 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbWindowComponent } from './window.component';
 import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window-types';
 
+/**
+ * The `NbWindowRef` helps to manipulate window after it was created.
+ * The window can be dismissed by using `close` method of the windowRef.
+ * You can access rendered component as `componentRef` property of the windowRef.
+ */
 export class NbWindowRef {
   componentRef: ComponentRef<NbWindowComponent>;
 
   private _prevState: NbWindowState;
   private _state: NbWindowState;
+  /**
+   * Current window state.
+   */
   get state() {
     return this._state;
   }
@@ -20,12 +28,18 @@ export class NbWindowRef {
   }
 
   private stateChange$ = new ReplaySubject<NbWindowStateChange>(1);
+  /**
+   * Emits when window state change.
+   */
   get stateChange(): Observable<NbWindowStateChange> {
     return this.stateChange$.asObservable();
   }
 
   private _closed = false;
   private closed$ = new Subject();
+  /**
+   * Emits when window was closed.
+   */
   get onClose() {
     return this.closed$.asObservable();
   }
@@ -34,14 +48,23 @@ export class NbWindowRef {
     this.state = config.initialState;
   }
 
+  /**
+   * Minimize window.
+   */
   minimize() {
     this.state = NbWindowState.MINIMIZED;
   }
 
+  /**
+   * Maximize window.
+   */
   maximize() {
     this.state = NbWindowState.MAXIMIZED;
   }
 
+  /**
+   * Set window on top.
+   */
   fullScreen() {
     this.state = NbWindowState.FULL_SCREEN;
   }
@@ -50,6 +73,9 @@ export class NbWindowRef {
     this.state = this._prevState;
   }
 
+  /**
+   * Closes window.
+   * */
   close() {
     if (this._closed) {
       return;

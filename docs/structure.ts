@@ -340,6 +340,16 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'window.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

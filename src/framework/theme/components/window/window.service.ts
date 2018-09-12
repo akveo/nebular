@@ -10,6 +10,49 @@ import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
 
+/**
+ * The `NbWindowService` can be used to open windows.
+ *
+ * @stacked-example(Showcase, window/window-showcase.component)
+ *
+ * A new window can be opened by calling the `open` method with a component or template ref to be loaded
+ * and an optional configuration.
+ * `open` method will return `NbWindowRef` that can be used for the further manipulations.
+ *
+ * ```ts
+ * const windowRef = this.windowService.open(MyComponent, { ... });
+ * ```
+ *
+ * `NbWindowRef` gives you ability manipulate opened window.
+ * Also, you can inject `NbWindowRef` inside provided component which rendered in window.
+ *
+ * ```ts
+ * this.windowService.open(MyWindowComponent, { ... });
+ *
+ * // my.component.ts
+ * constructor(protected windowRef: NbWindowRef) {
+ * }
+ *
+ * minimize() {
+ *   this.windowRef.minimize();
+ * }
+ *
+ * close() {
+ *   this.windowRef.close();
+ * }
+ * ```
+ *
+ * Instead of component you can create window from TemplateRef:
+ *
+ * @stacked-example(Template ref, window/template-window.component)
+ *
+ * ### Configuration
+ *
+ * As mentioned above, `open` method of the `NbWindowService` may receive optional configuration options.
+ * Also, you can modify default windows configuration through `NbWindowModule.forRoot({ ... })`.
+ *
+ * @stacked-example(Configuration, window/windows-backdrop.component)
+ */
 @Injectable()
 export class NbWindowService {
 
@@ -25,6 +68,11 @@ export class NbWindowService {
     @Inject(NB_DEFAULT_WINDOWS_CONFIG) private readonly defaultWindowsConfig: NbWindowConfig,
   ) {}
 
+  /**
+   * Opens new window.
+   * @param windowContent
+   * @param windowConfig
+   * */
   open(
     windowContent: TemplateRef<any> | NbComponentType,
     windowConfig: Partial<NbWindowConfig> = {},
