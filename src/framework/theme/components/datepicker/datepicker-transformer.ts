@@ -21,7 +21,7 @@ export class NbDateTransformerService extends NbDateTransformer<Date> {
   }
 
   fromString(value: string): Date {
-    return undefined;
+    return new Date(Date.parse(value));
   }
 
   fromValue(value: Date): string {

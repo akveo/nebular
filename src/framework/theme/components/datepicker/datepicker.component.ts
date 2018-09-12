@@ -36,8 +36,9 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected hostRef: ElementRef;
   protected onChange$: Subject<T> = new Subject();
-  protected picker: P;
+  protected pickerRef: ComponentRef<P>;
   protected alive: boolean = true;
+  protected queue: T;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
@@ -51,6 +52,10 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.alive = false;
     this.hide();
     this.ref.dispose();
+  }
+
+  get picker(): P {
+    return this.pickerRef.instance;
   }
 
   get valueChange(): Observable<T> {
@@ -117,7 +122,7 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   }
 
   protected instantiatePicker() {
-    this.picker = this.container.instance.attach(new NbComponentPortal(this.pickerClass)).instance;
+    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass));
   }
 
   protected subscribeOnValueChange() {

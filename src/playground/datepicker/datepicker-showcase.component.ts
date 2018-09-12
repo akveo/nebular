@@ -10,11 +10,18 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-datepicker-showcase',
   template: `
-    <input class="form-control" placeholder="Datepicker" [nbDatepicker]="datepicker">
-    <nb-datepicker #datepicker></nb-datepicker>
+    <!--<div>-->
+    <!--<input class="form-control" placeholder="Datepicker" [nbDatepicker]="datepicker">-->
+    <!--<nb-datepicker #datepicker></nb-datepicker>-->
 
-    <input class="form-control" placeholder="Rangepicker" [nbDatepicker]="rangepicker">
-    <nb-rangepicker #rangepicker></nb-rangepicker>
+    <!--<input class="form-control" placeholder="Rangepicker" [nbDatepicker]="rangepicker">-->
+    <!--<nb-rangepicker #rangepicker></nb-rangepicker>-->
+    <!--</div>-->
+    <input class="form-control" placeholder="Form Picker" [(ngModel)]="date" [nbDatepicker]="formpicker">
+    <nb-datepicker #formpicker></nb-datepicker>
+
+    <h1>{{ date | date }}</h1>
+
   `,
   styles: [`
     :host {
