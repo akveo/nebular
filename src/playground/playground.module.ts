@@ -41,6 +41,7 @@ import {
   NbDialogModule,
   NbSelectModule,
   NbWindowModule,
+  NbWindowSize,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -281,7 +282,7 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
-  NbWindowModule.forRoot(),
+  NbWindowModule.forRoot({ size: NbWindowSize.SMALL }),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [

@@ -14,7 +14,7 @@ export class NbWindowsBackdropComponent {
   constructor(private windowService: NbWindowService) {}
 
   openWindowWithBackdrop() {
-    this.windowService.open(NbMyWindowComponent, { title: 'Window with backdrop' });
+    this.windowService.open(NbMyWindowComponent, { title: 'Window with backdrop', hasBackdrop: true });
   }
 
   openWindowWithoutBackdrop() {
