@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 
 @Component({
-  template: `My component inside a window`,
+  template: 'My component inside a window',
 })
 export class NbMyWindowComponent {}
 
@@ -15,6 +15,6 @@ export class NbWindowShowcaseComponent {
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(NbMyWindowComponent, { title: `Window with a component` });
+    this.windowService.open(NbMyWindowComponent, { title: `Window` });
   }
 }

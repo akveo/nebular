@@ -63,16 +63,6 @@ export class NbWindowConfig {
    * Both, template and component may receive data through `config.context` property.
    * For components, this data will be set as component properties.
    * For templates, you can access it inside template as $implicit.
-   *
-   * ```ts
-   * this.windowService.open(template, { context: 'pass data in template' });
-   * ```
-   *
-   * ```html
-   * <ng-template let-some-additional-data>
-   *   {{ some-additional-data }}
-   * <ng-template/>
-   * ```
    */
   context?: Object = {};
 

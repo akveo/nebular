@@ -6,11 +6,7 @@ import {
   NbBlockScrollStrategy, NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
 } from '../cdk/overlay';
 import {
-  NB_DEFAULT_WINDOWS_CONFIG,
-  NB_WINDOW_CONTENT,
-  NbWindowConfig,
-  NbWindowState,
-  NB_WINDOW_CONTEXT,
+  NB_DEFAULT_WINDOWS_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
 } from './window-types';
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
@@ -48,7 +44,8 @@ import { NbWindowComponent } from './window.component';
  * }
  * ```
  *
- * Instead of component you can create window from TemplateRef:
+ * Instead of component you can create window from TemplateRef. As usual you can access context provided via config
+ * via `let-` variables. Also you can get reference to the `NbWindowRef` in context's `windowRef` property.
  *
  * @stacked-example(Template ref, window/template-window.component)
  *
@@ -56,6 +53,7 @@ import { NbWindowComponent } from './window.component';
  *
  * As mentioned above, `open` method of the `NbWindowService` may receive optional configuration options.
  * Also, you can modify default windows configuration through `NbWindowModule.forRoot({ ... })`.
+ * You can read about all available options on [API tab](docs/components/window/api#nbwindowconfig).
  *
  * @stacked-example(Configuration, window/windows-backdrop.component)
  */
