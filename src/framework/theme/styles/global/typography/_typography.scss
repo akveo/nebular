@@ -1,3 +1,10 @@
+@mixin hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
 @function main-to-text-color($color, $count: 15%) {
   @return tint($color, $count);
 }
