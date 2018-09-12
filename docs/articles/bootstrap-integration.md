@@ -1,6 +1,14 @@
 # Bootstrap Integration
 
-Nebular provides an additional module to override bootstrap selectors according our themes.
+Nebular provides an additional module to override bootstrap styles according our themes.
+
+<div class="note note-info section-end">
+  <div class="note-title">Note</div>
+  <div class="note-body">
+    If you use our [ngx-admin starter kit](docs/guides/install-based-on-starter-kit) then you already have the bootstrap module in place.
+  </div>
+</div>
+
 To enable bootstrap support you have to do the following:
 
 - Install nebular bootstrap and bootstrap itself packages: 
@@ -35,10 +43,14 @@ Another way, if you need to customize themes you have to do the following steps:
 @import '~@nebular/bootstrap/styles/globals';
 ```
 
-- Run `nb-bootstrap-global`:
+- Include `nb-bootstrap-global` in styles.scss:
 
 ```scss
-@include nb-bootstrap-global();
+@import '~@nebular/bootstrap/styles/globals';
+
+@include nb-install() {
+  @include nb-bootstrap-global();
+}
 ```
 
 And that's it. Bootstrap is installed now.

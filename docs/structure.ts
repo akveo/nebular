@@ -87,7 +87,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Bootstrap integration',
+        name: 'Bootstrap Integration',
         children: [
           {
             type: 'block',
