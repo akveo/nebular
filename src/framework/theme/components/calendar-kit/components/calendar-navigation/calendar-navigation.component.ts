@@ -28,5 +28,5 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class NbCalendarNavigationComponent {
   @Input() date: Date;
-  @Output() changeMode = new EventEmitter<void>();
+  @Output() changeMode = new EventEmitter<void>(true);
 }

@@ -43,7 +43,7 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
 
   @Input() filter: (Date) => boolean;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<Date> = new EventEmitter(true);
 
   @HostBinding('class.in-range') get inRange(): boolean {
     return this.date && this.selectedValue
@@ -122,7 +122,7 @@ export class NbCalendarRangeYearCellComponent implements NbCalendarCell<NbCalend
 
   @Input() selectedValue: NbCalendarRange;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<Date> = new EventEmitter(true);
 
   @HostBinding('class.selected') get selected(): boolean {
     return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue.start);

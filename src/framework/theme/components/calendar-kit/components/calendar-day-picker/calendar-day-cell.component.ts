@@ -38,7 +38,7 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
 
   @Input() filter: (Date) => boolean;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<Date> = new EventEmitter(true);
 
   @HostBinding('class.today') get today(): boolean {
     return NbDateTimeUtil.isSameDaySafe(this.date, new Date());

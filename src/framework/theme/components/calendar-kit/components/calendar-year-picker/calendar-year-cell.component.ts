@@ -32,7 +32,7 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
 
   @Input() selectedValue: Date;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<Date> = new EventEmitter(true);
 
   @HostBinding('class.selected') get selected(): boolean {
     return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue);

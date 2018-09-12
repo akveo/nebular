@@ -32,7 +32,7 @@ export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
 
   @Input() max: Date;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<Date> = new EventEmitter(true);
 
   constructor(private localeService: NbLocaleService) {
   }
