@@ -4,13 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Directive, ElementRef, Inject, InjectionToken, Input } from '@angular/core';
-import { DatePipe } from '@angular/common';
-
-import { NbTriggerStrategy } from '../cdk';
+import { Directive, ElementRef, Inject, InjectionToken, Input } from '@angular/core';
+import { Type } from '@angular/core/src/type';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDatepicker } from './datepicker';
-import { Type } from '@angular/core/src/type';
 
 
 export abstract class NbDateTransformer<T> {
@@ -27,9 +24,7 @@ export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('d
 @Directive({ selector: 'input[nbDatepicker]' })
 export class NbDatepickerDirective<T> {
 
-  protected triggerStrategy: NbTriggerStrategy;
   protected transformer: NbDateTransformer<T>;
-  protected container: ComponentRef<any>;
   protected picker: NbDatepicker<T>;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -54,8 +49,8 @@ export class NbDatepickerDirective<T> {
   protected setupPicker() {
     this.chooseTransformer();
     this.picker.attach(this.hostRef);
-    this.picker.onChange().subscribe((value: T) => {
-      this.picker.setValue(value);
+    this.picker.valueChange.subscribe((value: T) => {
+      this.picker.value = value;
       this.writeValue(value);
     });
   }

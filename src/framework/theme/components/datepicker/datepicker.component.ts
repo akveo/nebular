@@ -26,13 +26,17 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { Observable, Subject } from 'rxjs';
+import { Type } from '@angular/core/src/type';
 
 
-export abstract class NbBasePicker<T> extends NbDatepicker<T> implements OnDestroy {
+export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDestroy {
+  protected abstract pickerClass: Type<P>;
   protected ref: NbOverlayRef;
   protected container: ComponentRef<NbDatepickerContainerComponent>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected hostRef: ElementRef;
+  protected onChange$: Subject<T> = new Subject();
+  protected picker: P;
   protected alive: boolean = true;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -41,10 +45,16 @@ export abstract class NbBasePicker<T> extends NbDatepicker<T> implements OnDestr
     super();
   }
 
+  protected abstract get pickerValueChange(): Observable<T>;
+
   ngOnDestroy() {
     this.alive = false;
     this.hide();
     this.ref.dispose();
+  }
+
+  get valueChange(): Observable<T> {
+    return this.onChange$.asObservable();
   }
 
   attach(hostRef: ElementRef) {
@@ -61,6 +71,8 @@ export abstract class NbBasePicker<T> extends NbDatepicker<T> implements OnDestr
 
   show() {
     this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent));
+    this.instantiatePicker();
+    this.subscribeOnValueChange();
   }
 
   hide() {
@@ -103,6 +115,16 @@ export abstract class NbBasePicker<T> extends NbDatepicker<T> implements OnDestr
     triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
     triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
+
+  protected instantiatePicker() {
+    this.picker = this.container.instance.attach(new NbComponentPortal(this.pickerClass)).instance;
+  }
+
+  protected subscribeOnValueChange() {
+    this.pickerValueChange.subscribe(date => {
+      this.onChange$.next(date);
+    });
+  }
 }
 
 
@@ -110,41 +132,19 @@ export abstract class NbBasePicker<T> extends NbDatepicker<T> implements OnDestr
   selector: 'nb-datepicker',
   template: '',
 })
-export class NbDatepickerComponent extends NbBasePicker<Date> {
-  protected calendar: NbCalendarComponent;
-  protected onChange$: Subject<Date> = new Subject();
+export class NbDatepickerComponent extends NbBasePicker<Date, NbCalendarComponent> {
+  protected pickerClass: Type<NbCalendarComponent> = NbCalendarComponent;
 
-  show() {
-    super.show();
-    this.instantiateCalendar();
-    this.subscribeOnDateChange();
+  get value(): Date {
+    return this.picker.date;
   }
 
-  hide() {
-    super.hide();
-    this.calendar = null;
+  set value(date: Date) {
+    this.picker.date = date;
   }
 
-  getValue(): Date {
-    return this.calendar.date;
-  }
-
-  onChange(): Observable<Date> {
-    return this.onChange$.asObservable();
-  }
-
-  setValue(date: Date): void {
-    this.calendar.date = date;
-  }
-
-  protected instantiateCalendar() {
-    this.calendar = this.container.instance.attach(new NbComponentPortal(NbCalendarComponent)).instance;
-  }
-
-  protected subscribeOnDateChange() {
-    this.calendar.dateChange.subscribe(date => {
-      this.onChange$.next(date);
-    });
+  protected get pickerValueChange(): Observable<Date> {
+    return this.picker.dateChange;
   }
 }
 
@@ -152,40 +152,18 @@ export class NbDatepickerComponent extends NbBasePicker<Date> {
   selector: 'nb-rangepicker',
   template: '',
 })
-export class NbRangepickerComponent extends NbBasePicker<NbCalendarRange> {
-  protected calendar: NbCalendarRangeComponent;
-  protected onChange$: Subject<NbCalendarRange> = new Subject();
+export class NbRangepickerComponent extends NbBasePicker<NbCalendarRange, NbCalendarRangeComponent> {
+  protected pickerClass: Type<NbCalendarRangeComponent> = NbCalendarRangeComponent;
 
-  show() {
-    super.show();
-    this.instantiateCalendar();
-    this.subscribeOnDateChange();
+  get value(): NbCalendarRange {
+    return this.picker.range;
   }
 
-  hide() {
-    super.hide();
-    this.calendar = null;
+  set value(range: NbCalendarRange) {
+    this.picker.range = range;
   }
 
-  getValue(): NbCalendarRange {
-    return this.calendar.range;
-  }
-
-  onChange(): Observable<NbCalendarRange> {
-    return this.onChange$.asObservable();
-  }
-
-  setValue(range: NbCalendarRange): void {
-    this.calendar.range = range;
-  }
-
-  protected instantiateCalendar() {
-    this.calendar = this.container.instance.attach(new NbComponentPortal(NbCalendarRangeComponent)).instance;
-  }
-
-  protected subscribeOnDateChange() {
-    this.calendar.rangeChange.subscribe(date => {
-      this.onChange$.next(date);
-    });
+  protected get pickerValueChange(): Observable<NbCalendarRange> {
+    return this.picker.rangeChange;
   }
 }

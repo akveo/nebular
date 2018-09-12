@@ -7,17 +7,13 @@
 import { ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
+
 export abstract class NbDatepicker<T> {
-  abstract setValue(value: T): void;
+  abstract set value(value: T);
 
-  abstract getValue(): T;
+  abstract get value(): T;
 
-  abstract onChange(): Observable<T>;
+  abstract get valueChange(): Observable<T>;
 
-  abstract show(): void;
-
-  abstract hide(): void;
-
-  abstract attach(hostRef: ElementRef): void;
+  abstract attach(hostRef: ElementRef);
 }
-
