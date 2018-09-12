@@ -9,35 +9,35 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  NbAccordionModule,
-  NbActionsModule,
-  NbAlertModule,
-  NbBadgeModule,
-  NbButtonModule,
+  NbThemeModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCardModule,
-  NbChatModule,
   NbCheckboxModule,
-  NbContextMenuModule,
-  NbInputModule,
   NbLayoutModule,
-  NbListModule,
   NbMenuModule,
   NbPopoverModule,
-  NbProgressBarModule,
-  NbRouteTabsetModule,
-  NbSearchModule,
   NbSidebarModule,
+  NbActionsModule,
+  NbSearchModule,
+  NbTabsetModule,
+  NbUserModule,
+  NbBadgeModule,
+  NbContextMenuModule,
+  NbRouteTabsetModule,
+  NbProgressBarModule,
+  NbAlertModule,
+  NbChatModule,
   NbSpinnerModule,
   NbStepperModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbToastrModule,
-  NbUserModule,
+  NbAccordionModule,
+  NbListModule,
+  NbButtonModule,
+  NbInputModule,
   NbOverlayModule,
-  NbDialogModule,
+  NbToastrModule,
+  NbTooltipModule, NbDialogModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -220,6 +220,10 @@ import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialo
 import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -256,6 +260,7 @@ export const NB_MODULES = [
   NbOverlayModule.forRoot(),
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbTooltipModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -431,6 +436,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDialogResultComponent,
   NbDialogNamePromptComponent,
   NbDialogTemplateComponent,
+  NbTooltipShowcaseComponent,
+  NbTooltipWithIconComponent,
+  NbTooltipPlacementsComponent,
+  NbTooltipColorsComponent,
 ];
 
 @NgModule({
