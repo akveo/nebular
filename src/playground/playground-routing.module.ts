@@ -179,6 +179,19 @@ import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component
 import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
 import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
 import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
+import { NbSelectShowcaseComponent } from './select/select-showcase.component';
+import { NbSelectMultipleComponent } from './select/select-multiple.component';
+import { NbSelectStatusComponent } from './select/select-status.component';
+import { NbSelectHeroComponent } from './select/select-hero.component';
+import { NbSelectOutlineComponent } from './select/select-outline.component';
+import { NbSelectShapeComponent } from './select/select-shapes.component';
+import { NbSelectSizesComponent } from './select/select-sizes.component';
+import { NbSelectPlaceholderComponent } from './select/select-placeholder.component';
+import { NbSelectFormComponent } from './select/select-form.component';
+import { NbSelectDisabledComponent } from './select/select-disabled.component';
+import { NbSelectGroupsComponent } from './select/select-groups.component';
+import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
+import { NbSelectCleanComponent } from './select/select-clean.component';
 
 
 export const routes: Routes = [
@@ -233,6 +246,63 @@ export const routes: Routes = [
           {
             path: 'tooltip-colors.component',
             component: NbTooltipColorsComponent,
+          },
+        ],
+      },
+      {
+        path: 'select',
+        children: [
+          {
+            path: 'select-showcase.component',
+            component: NbSelectShowcaseComponent,
+          },
+          {
+            path: 'select-multiple.component',
+            component: NbSelectMultipleComponent,
+          },
+          {
+            path: 'select-status.component',
+            component: NbSelectStatusComponent,
+          },
+          {
+            path: 'select-hero.component',
+            component: NbSelectHeroComponent,
+          },
+          {
+            path: 'select-outline.component',
+            component: NbSelectOutlineComponent,
+          },
+          {
+            path: 'select-shapes.component',
+            component: NbSelectShapeComponent,
+          },
+          {
+            path: 'select-sizes.component',
+            component: NbSelectSizesComponent,
+          },
+          {
+            path: 'select-placeholder.component',
+            component: NbSelectPlaceholderComponent,
+          },
+          {
+            path: 'select-form.component',
+            component: NbSelectFormComponent,
+          },
+          {
+            path: 'select-disabled.component',
+            component: NbSelectDisabledComponent,
+          },
+          {
+            path: 'select-groups.component',
+            component: NbSelectGroupsComponent,
+          },
+          {
+            path: 'select-label.component',
+            component: NbSelectLabelShowcaseComponent,
+          },
+          {
+            path: 'select-clean.component',
+            component: NbSelectCleanComponent,
           },
         ],
       },

@@ -37,7 +37,9 @@ import {
   NbInputModule,
   NbOverlayModule,
   NbToastrModule,
-  NbTooltipModule, NbDialogModule,
+  NbTooltipModule,
+  NbDialogModule,
+  NbSelectModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -224,6 +226,19 @@ import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component
 import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
 import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
 import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
+import { NbSelectShowcaseComponent } from './select/select-showcase.component';
+import { NbSelectMultipleComponent } from './select/select-multiple.component';
+import { NbSelectStatusComponent } from './select/select-status.component';
+import { NbSelectHeroComponent } from './select/select-hero.component';
+import { NbSelectOutlineComponent } from './select/select-outline.component';
+import { NbSelectShapeComponent } from './select/select-shapes.component';
+import { NbSelectSizesComponent } from './select/select-sizes.component';
+import { NbSelectPlaceholderComponent } from './select/select-placeholder.component';
+import { NbSelectFormComponent } from './select/select-form.component';
+import { NbSelectDisabledComponent } from './select/select-disabled.component';
+import { NbSelectGroupsComponent } from './select/select-groups.component';
+import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
+import { NbSelectCleanComponent } from './select/select-clean.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -261,6 +276,7 @@ export const NB_MODULES = [
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
   NbTooltipModule,
+  NbSelectModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -440,6 +456,19 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbTooltipWithIconComponent,
   NbTooltipPlacementsComponent,
   NbTooltipColorsComponent,
+  NbSelectShowcaseComponent,
+  NbSelectMultipleComponent,
+  NbSelectStatusComponent,
+  NbSelectHeroComponent,
+  NbSelectOutlineComponent,
+  NbSelectShapeComponent,
+  NbSelectSizesComponent,
+  NbSelectPlaceholderComponent,
+  NbSelectFormComponent,
+  NbSelectDisabledComponent,
+  NbSelectGroupsComponent,
+  NbSelectLabelShowcaseComponent,
+  NbSelectCleanComponent,
 ];
 
 @NgModule({

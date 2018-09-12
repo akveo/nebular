@@ -657,6 +657,17 @@ $theme: (
   tooltip-status-fg: color-bg-active,
   tooltip-shadow: shadow,
   tooltip-font-size: font-size,
+
+  select-border-width: 2px,
+  select-max-height: 20rem,
+  select-bg: color-bg,
+
+  select-checkbox-color: checkbox-border-color,
+  select-checkmark-color: checkbox-border-color,
+
+  select-option-disabled-bg: #f2f4f7,
+  select-option-disabled-opacity: 0.3,
+  select-option-padding: 0.75rem 1.5rem,
 );
 
 // register the theme
