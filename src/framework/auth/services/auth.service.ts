@@ -51,7 +51,7 @@ export class NbAuthService {
     return this.getToken()
       .pipe(
         switchMap(token => {
-        if (!token.isValid() && token.getValue()) {
+        if (token.getValue() && !token.isValid()) {
           return this.refreshToken(token.getOwnerStrategyName(), token)
             .pipe(
               switchMap(res => {
