@@ -158,6 +158,16 @@ $theme: (
   calendar-selected-item-bg: color-primary,
   calendar-range-bg-in-range: #4e4095,
   calendar-today-item-bg: #352f6e,
+
+  select-option-disabled-bg: #312e75,
+
+  toastr-color-fg: color-white,
+  toastr-padding: 1.25rem,
+  toastr-border: 0,
+  toastr-default-background: #bcc3cc,
+
+  tooltip-fg: color-bg,
+  tooltip-status-fg: color-white,
 );
 
 // register the theme

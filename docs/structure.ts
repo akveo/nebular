@@ -294,6 +294,14 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -311,6 +319,35 @@ export const structure = [
         icon: 'context-menu.svg',
         source: [
           'NbContextMenuDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Dialog',
+        icon: 'dialog.svg',
+        source: [
+          'NbDialogService',
+          'NbDialogRef',
+          'NbDialogConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toastr',
+        icon: 'toastr.svg',
+        source: [
+          'NbToastrService',
+          'NbToastComponent',
+          'NbToastrConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
         ],
       },
       {

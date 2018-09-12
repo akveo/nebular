@@ -1,6 +1,14 @@
-import { ComponentRef, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
 
-import { NbComponentPortal, NbComponentType, NbOverlayRef } from './mapping';
+import {
+  NbComponentPortal,
+  NbComponentType,
+  NbOverlay,
+  NbOverlayConfig,
+  NbOverlayRef,
+  NbScrollStrategyOptions,
+} from './mapping';
+import { NbLayoutDirectionService } from '../../../services/direction.service';
 
 
 export type NbOverlayContent = Type<any> | TemplateRef<any> | string;
@@ -15,4 +23,21 @@ export function createContainer<T>(ref: NbOverlayRef, container: NbComponentType
   const containerRef = ref.attach(new NbComponentPortal(container));
   patch(containerRef, context);
   return containerRef;
+}
+
+@Injectable()
+export class NbOverlayService {
+  constructor(protected overlay: NbOverlay, protected layoutDirection: NbLayoutDirectionService) {
+  }
+
+  get scrollStrategies(): NbScrollStrategyOptions {
+    return this.overlay.scrollStrategies;
+  }
+
+  create(config?: NbOverlayConfig): NbOverlayRef {
+    const overlayRef = this.overlay.create(config);
+    this.layoutDirection.onDirectionChange()
+      .subscribe(dir => overlayRef.setDirection(dir));
+    return overlayRef;
+  }
 }

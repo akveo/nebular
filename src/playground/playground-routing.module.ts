@@ -82,7 +82,8 @@ import {
 } from './menu/menu-test.component';
 import { NbPopoverTestComponent } from './popover/popover-test.component';
 import {
-  NbRouteTabsetShowcaseChild1Component, NbRouteTabsetShowcaseChild2Component,
+  NbRouteTabsetShowcaseChild1Component,
+  NbRouteTabsetShowcaseChild2Component,
   NbRouteTabsetShowcaseComponent,
 } from './tabset/route-tabset-showcase.component';
 import { NbSearchTestComponent } from './search/search-test.component';
@@ -159,6 +160,38 @@ import { NbCalendarMinMaxComponent } from './calendar/calendar-min-max.component
 import { NbCalendarSizeComponent } from './calendar/calendar-size.component';
 import { NbCalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbDialogShowcaseComponent } from './dialog/dialog-showcase.component';
+import { NbDialogHasBackdropComponent } from './dialog/dialog-has-backdrop.component';
+import { NbDialogBackdropClickComponent } from './dialog/dialog-backdrop-click.component';
+import { NbDialogEscComponent } from './dialog/dialog-esc.component';
+import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
+import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
+import { NbDialogResultComponent } from './dialog/dialog-result.component';
+import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
+import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
+import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
+import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
+import { NbToastrIconComponent } from './toastr/toastr-icon.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
+import { NbSelectShowcaseComponent } from './select/select-showcase.component';
+import { NbSelectMultipleComponent } from './select/select-multiple.component';
+import { NbSelectStatusComponent } from './select/select-status.component';
+import { NbSelectHeroComponent } from './select/select-hero.component';
+import { NbSelectOutlineComponent } from './select/select-outline.component';
+import { NbSelectShapeComponent } from './select/select-shapes.component';
+import { NbSelectSizesComponent } from './select/select-sizes.component';
+import { NbSelectPlaceholderComponent } from './select/select-placeholder.component';
+import { NbSelectFormComponent } from './select/select-form.component';
+import { NbSelectDisabledComponent } from './select/select-disabled.component';
+import { NbSelectGroupsComponent } from './select/select-groups.component';
+import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
+import { NbSelectCleanComponent } from './select/select-clean.component';
 
 
 export const routes: Routes = [
@@ -192,6 +225,84 @@ export const routes: Routes = [
           {
             path: 'popover-modes.component',
             component: NbPopoverModesComponent,
+          },
+        ],
+      },
+      {
+        path: 'tooltip',
+        children: [
+          {
+            path: 'tooltip-showcase.component',
+            component: NbTooltipShowcaseComponent,
+          },
+          {
+            path: 'tooltip-with-icon.component',
+            component: NbTooltipWithIconComponent,
+          },
+          {
+            path: 'tooltip-placements.component',
+            component: NbTooltipPlacementsComponent,
+          },
+          {
+            path: 'tooltip-colors.component',
+            component: NbTooltipColorsComponent,
+          },
+        ],
+      },
+      {
+        path: 'select',
+        children: [
+          {
+            path: 'select-showcase.component',
+            component: NbSelectShowcaseComponent,
+          },
+          {
+            path: 'select-multiple.component',
+            component: NbSelectMultipleComponent,
+          },
+          {
+            path: 'select-status.component',
+            component: NbSelectStatusComponent,
+          },
+          {
+            path: 'select-hero.component',
+            component: NbSelectHeroComponent,
+          },
+          {
+            path: 'select-outline.component',
+            component: NbSelectOutlineComponent,
+          },
+          {
+            path: 'select-shapes.component',
+            component: NbSelectShapeComponent,
+          },
+          {
+            path: 'select-sizes.component',
+            component: NbSelectSizesComponent,
+          },
+          {
+            path: 'select-placeholder.component',
+            component: NbSelectPlaceholderComponent,
+          },
+          {
+            path: 'select-form.component',
+            component: NbSelectFormComponent,
+          },
+          {
+            path: 'select-disabled.component',
+            component: NbSelectDisabledComponent,
+          },
+          {
+            path: 'select-groups.component',
+            component: NbSelectGroupsComponent,
+          },
+          {
+            path: 'select-label.component',
+            component: NbSelectLabelShowcaseComponent,
+          },
+          {
+            path: 'select-clean.component',
+            component: NbSelectCleanComponent,
           },
         ],
       },
@@ -717,6 +828,76 @@ export const routes: Routes = [
           {
             path: 'overlay-showcase.component',
             component: NbOverlayShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'dialog',
+        children: [
+          {
+            path: 'dialog-showcase.component',
+            component: NbDialogShowcaseComponent,
+          },
+          {
+            path: 'dialog-has-backdrop.component',
+            component: NbDialogHasBackdropComponent,
+          },
+          {
+            path: 'dialog-backdrop-click.component',
+            component: NbDialogBackdropClickComponent,
+          },
+          {
+            path: 'dialog-esc.component',
+            component: NbDialogEscComponent,
+          },
+          {
+            path: 'dialog-scroll.component',
+            component: NbDialogScrollComponent,
+          },
+          {
+            path: 'dialog-auto-focus.component',
+            component: NbDialogAutoFocusComponent,
+          },
+          {
+            path: 'dialog-result.component',
+            component: NbDialogResultComponent,
+          },
+          {
+            path: 'dialog-template.component',
+            component: NbDialogTemplateComponent,
+          },
+        ],
+      },
+      {
+        path: 'toastr',
+        children: [
+          {
+            path: 'toastr-showcase.component',
+            component: NbToastrShowcaseComponent,
+          },
+          {
+            path: 'toastr-positions.component',
+            component: NbToastrPositionsComponent,
+          },
+          {
+            path: 'toastr-statuses.component',
+            component: NbToastrStatusesComponent,
+          },
+          {
+            path: 'toastr-duration.component',
+            component: NbToastrDurationComponent,
+          },
+          {
+            path: 'toastr-destroy-by-click.component',
+            component: NbToastrDestroyByClickComponent,
+          },
+          {
+            path: 'toastr-prevent-duplicates.component',
+            component: NbToastrPreventDuplicatesComponent,
+          },
+          {
+            path: 'toastr-icon.component',
+            component: NbToastrIconComponent,
           },
         ],
       },

@@ -1,0 +1,168 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-toaster-theme() {
+  nb-toast {
+    background-color: nb-theme(toastr-bg);
+    padding: nb-theme(toastr-padding);
+    color: nb-theme(toastr-fg);
+    border: nb-theme(toastr-border);
+    border-radius: nb-theme(toastr-border-radius);
+
+    .icon {
+      @include nb-ltr(margin-right, 1.25rem);
+      @include nb-rtl(margin-left, 1.25rem);
+    }
+
+    svg {
+      border-radius: nb-theme(toastr-icon-radius);
+    }
+
+    @include nb-except-theme(cosmic) {
+      box-shadow: nb-theme(toastr-shadow);
+    }
+
+    &.default {
+      border-color: nb-theme(toastr-border-color);
+      padding: calc(#{nb-theme(toastr-padding)} / 2) nb-theme(toastr-padding);
+
+      @include nb-for-theme(cosmic) {
+        color: nb-theme(toastr-color-fg);
+        background-color: nb-theme(toastr-default-background);
+      }
+    }
+
+    &.success {
+      border-color: nb-theme(color-success);
+      color: nb-theme(color-success);
+
+      svg {
+        background-color: nb-theme(color-success);
+
+        path {
+          fill: nb-theme(color-white);
+        }
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-success-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        svg {
+          background-color: nb-theme(color-white);
+
+          path {
+            fill: nb-theme(color-success);
+          }
+        }
+      }
+    }
+
+    &.info {
+      border-color: nb-theme(color-info);
+      color: nb-theme(color-info);
+
+      svg {
+        background-color: nb-theme(color-info);
+
+        path {
+          fill: nb-theme(color-white);
+        }
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-info-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        svg {
+          background-color: nb-theme(color-white);
+
+          path {
+            fill: nb-theme(color-info);
+          }
+        }
+      }
+    }
+
+    &.warning {
+      border-color: nb-theme(color-warning);
+      color: nb-theme(color-warning);
+
+      svg {
+        background-color: nb-theme(color-warning);
+
+        path {
+          fill: nb-theme(color-white);
+        }
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-warning-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        svg {
+          background-color: nb-theme(color-white);
+
+          path {
+            fill: nb-theme(color-warning);
+          }
+        }
+      }
+    }
+
+    &.primary {
+      border-color: nb-theme(color-primary);
+      color: nb-theme(color-primary);
+
+      svg {
+        background-color: nb-theme(color-primary);
+
+        path, .warn-rect {
+          fill: nb-theme(color-white);
+        }
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-primary-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        svg {
+          background-color: nb-theme(color-white);
+
+          path, .warn-rect {
+            fill: nb-theme(color-primary);
+          }
+        }
+      }
+    }
+
+    &.danger {
+      border-color: nb-theme(color-danger);
+      color: nb-theme(color-danger);
+
+      svg {
+        background-color: nb-theme(color-danger);
+
+        path {
+          fill: nb-theme(color-white);
+        }
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-danger-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        svg {
+          background-color: nb-theme(color-white);
+
+          path {
+            fill: nb-theme(color-danger);
+          }
+        }
+      }
+    }
+  }
+}
