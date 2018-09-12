@@ -4,119 +4,68 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, InjectionToken, OnDestroy } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, Inject, InjectionToken, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { takeWhile } from 'rxjs/operators';
 
-import {
-  createContainer,
-  NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
-  NbOverlayRef,
-  NbOverlayService,
-  NbPosition,
-  NbPositionBuilderService,
-  NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
-  patch,
-} from '../cdk';
-import { NbPopoverComponent } from '../popover/popover.component';
+import { NbTriggerStrategy } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbCalendarComponent } from '../calendar/calendar.component';
+import { NbDatepicker } from './datepicker';
+import { Type } from '@angular/core/src/type';
 
 
-const NB_DATE_FORMAT = new InjectionToken('date format');
+export abstract class NbDateTransformer<T> {
+  abstract picker: Type<any>;
 
-@Directive({ selector: 'input[nbDatepicker]', providers: [DatePipe] })
-export class NbDatepickerDirective implements AfterViewInit, OnDestroy {
+  abstract fromValue(value: T): string;
 
-  protected ref: NbOverlayRef;
-  protected container: ComponentRef<NbPopoverComponent>;
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  abstract fromString(value: string): T;
+}
+
+export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('date transformer');
+
+
+@Directive({ selector: 'input[nbDatepicker]' })
+export class NbDatepickerDirective<T> {
+
   protected triggerStrategy: NbTriggerStrategy;
-  protected alive: boolean = true;
-
-  protected selectedDate: Date;
-
-  protected get calendar(): NbCalendarComponent {
-    return this.container.instance.content;
-  }
+  protected transformer: NbDateTransformer<T>;
+  protected container: ComponentRef<any>;
+  protected picker: NbDatepicker<T>;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
-              protected hostRef: ElementRef,
-              protected positionBuilder: NbPositionBuilderService,
-              protected overlay: NbOverlayService,
-              protected datePipe: DatePipe) {
+              @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<T>[],
+              protected hostRef: ElementRef) {
   }
 
-  ngAfterViewInit() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.triggerStrategy = this.createTriggerStrategy();
-
-    this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
+  @Input('nbDatepicker')
+  set setPicker(picker: NbDatepicker<T>) {
+    this.picker = picker;
+    this.setupPicker();
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-  }
+  protected chooseTransformer() {
+    this.transformer = this.transformers.find(({ picker }) => this.picker instanceof picker);
 
-  show() {
-    this.container = createContainer(this.ref, NbPopoverComponent, {
-      position: NbPosition.BOTTOM,
-      content: NbCalendarComponent,
-    });
-    this.calendar.date = new Date();
-    this.selectedDate = this.calendar.date;
-    this.calendar.dateChange.subscribe(date => {
-      this.selectedDate = date;
-      this.hostRef.nativeElement.value = this.datePipe.transform(this.calendar)
-    });
-  }
-
-  hide() {
-    this.ref.detach();
-    this.container = null;
-  }
-
-  toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
+    if (this.noTransformerProvided()) {
+      throw new Error('No transformer provided for picker');
     }
   }
 
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(NbPosition.BOTTOM)
-      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
+  protected setupPicker() {
+    this.chooseTransformer();
+    this.picker.attach(this.hostRef);
+    this.picker.onChange().subscribe((value: T) => {
+      this.picker.setValue(value);
+      this.writeValue(value);
+    });
   }
 
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(NbTrigger.CLICK)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
-      .build();
+  protected writeValue(value: T) {
+    const stringRepresentation = this.transformer.fromValue(value);
+    this.hostRef.nativeElement.value = stringRepresentation;
   }
 
-  protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
-  }
-
-  protected subscribeOnTriggers() {
-    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+  protected noTransformerProvided() {
+    return !this.transformer || !(this.transformer instanceof NbDateTransformer);
   }
 }

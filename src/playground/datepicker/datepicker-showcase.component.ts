@@ -6,9 +6,16 @@
 
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'nb-datepicker-showcase',
-  template: `<input class="form-control" nbDatepicker>`,
+  template: `
+    <input class="form-control" placeholder="Datepicker" [nbDatepicker]="datepicker">
+    <nb-datepicker #datepicker></nb-datepicker>
+
+    <input class="form-control" placeholder="Rangepicker" [nbDatepicker]="rangepicker">
+    <nb-rangepicker #rangepicker></nb-rangepicker>
+  `,
   styles: [`
     :host {
       display: flex;
