@@ -36,6 +36,8 @@ import {
   NbButtonModule,
   NbInputModule,
   NbOverlayModule,
+  NbToastrModule,
+  NbTooltipModule,
   NbDialogModule,
   NbDatepickerModule,
 } from '@nebular/theme';
@@ -178,7 +180,7 @@ import { NbInfiniteListShowcaseComponent } from './infinite-list/infinite-list-s
 import { NbInfiniteListScrollModesComponent } from './infinite-list/infinite-list-scroll-modes.component'
 import { NbInfiniteNewsListComponent } from './infinite-list/infinite-news-list.component'
 import { NbInfiniteListPlaceholdersComponent } from './infinite-list/infinite-list-placeholders.component';
-import { NbNewsPostPlaceholderComponent, NbNewsPostComponent } from './infinite-list/news-post.component';
+import { NbNewsPostComponent, NbNewsPostPlaceholderComponent } from './infinite-list/news-post.component';
 import { NbInputsShowcaseComponent } from './input/input-showcase.component';
 import { NbInputColorsComponent } from './input/input-colors.component';
 import { NbInputSizesComponent } from './input/input-sizes.component';
@@ -202,6 +204,13 @@ import {
   NbCalendarKitMonthCellComponent,
 } from './calendar-kit/calendar-kit-full-calendar.component';
 import { NbOverlayShowcaseComponent } from './overlay/overlay-showcase.component';
+import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
+import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
+import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
+import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
+import { NbToastrIconComponent } from './toastr/toastr-icon.component';
 import { NbDialogShowcaseComponent, NbShowcaseDialogComponent } from './dialog/dialog-showcase.component';
 import { NbDialogHasBackdropComponent, NbHasBackdropDialogComponent } from './dialog/dialog-has-backdrop.component';
 import {
@@ -213,6 +222,10 @@ import { NbDialogScrollComponent, NbScrollDialogComponent } from './dialog/dialo
 import { NbAutoFocusDialogComponent, NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogNamePromptComponent, NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 
 export const NB_MODULES = [
@@ -248,7 +261,9 @@ export const NB_MODULES = [
   NbCalendarRangeModule,
   NbCalendarKitModule,
   NbOverlayModule.forRoot(),
+  NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbTooltipModule,
   NbDatepickerModule,
 ];
 
@@ -403,6 +418,13 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
+  NbToastrShowcaseComponent,
+  NbToastrPositionsComponent,
+  NbToastrStatusesComponent,
+  NbToastrDurationComponent,
+  NbToastrDestroyByClickComponent,
+  NbToastrPreventDuplicatesComponent,
+  NbToastrIconComponent,
   NbAutoFocusDialogComponent,
   NbBackdropClickDialogComponent,
   NbEscDialogComponent,
@@ -419,6 +441,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDialogNamePromptComponent,
   NbDialogTemplateComponent,
   NbDatepickerShowcaseComponent,
+  NbTooltipShowcaseComponent,
+  NbTooltipWithIconComponent,
+  NbTooltipPlacementsComponent,
+  NbTooltipColorsComponent,
 ];
 
 @NgModule({

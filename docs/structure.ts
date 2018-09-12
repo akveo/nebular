@@ -313,6 +313,25 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Toastr',
+        icon: 'toastr.svg',
+        source: [
+          'NbToastrService',
+          'NbToastComponent',
+          'NbToastrConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

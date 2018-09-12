@@ -168,6 +168,17 @@ import { NbDialogScrollComponent } from './dialog/dialog-scroll.component';
 import { NbDialogAutoFocusComponent } from './dialog/dialog-auto-focus.component';
 import { NbDialogResultComponent } from './dialog/dialog-result.component';
 import { NbDialogTemplateComponent } from './dialog/dialog-template.component';
+import { NbToastrShowcaseComponent } from './toastr/toastr-showcase.component';
+import { NbToastrPositionsComponent } from './toastr/toastr-positions.component';
+import { NbToastrStatusesComponent } from './toastr/toastr-statuses.component';
+import { NbToastrDurationComponent } from './toastr/toastr-duration.component';
+import { NbToastrDestroyByClickComponent } from './toastr/toastr-destroy-by-click.component';
+import { NbToastrPreventDuplicatesComponent } from './toastr/toastr-prevent-duplicates.component';
+import { NbToastrIconComponent } from './toastr/toastr-icon.component';
+import { NbTooltipShowcaseComponent } from './tooltip/tooltip-showcase.component';
+import { NbTooltipWithIconComponent } from './tooltip/tooltip-with-icon.component';
+import { NbTooltipPlacementsComponent } from './tooltip/tooltip-placements.component';
+import { NbTooltipColorsComponent } from './tooltip/tooltip-colors.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 
 
@@ -202,6 +213,27 @@ export const routes: Routes = [
           {
             path: 'popover-modes.component',
             component: NbPopoverModesComponent,
+          },
+        ],
+      },
+      {
+        path: 'tooltip',
+        children: [
+          {
+            path: 'tooltip-showcase.component',
+            component: NbTooltipShowcaseComponent,
+          },
+          {
+            path: 'tooltip-with-icon.component',
+            component: NbTooltipWithIconComponent,
+          },
+          {
+            path: 'tooltip-placements.component',
+            component: NbTooltipPlacementsComponent,
+          },
+          {
+            path: 'tooltip-colors.component',
+            component: NbTooltipColorsComponent,
           },
         ],
       },
@@ -764,6 +796,39 @@ export const routes: Routes = [
           {
             path: 'dialog-template.component',
             component: NbDialogTemplateComponent,
+          },
+        ],
+      },
+      {
+        path: 'toastr',
+        children: [
+          {
+            path: 'toastr-showcase.component',
+            component: NbToastrShowcaseComponent,
+          },
+          {
+            path: 'toastr-positions.component',
+            component: NbToastrPositionsComponent,
+          },
+          {
+            path: 'toastr-statuses.component',
+            component: NbToastrStatusesComponent,
+          },
+          {
+            path: 'toastr-duration.component',
+            component: NbToastrDurationComponent,
+          },
+          {
+            path: 'toastr-destroy-by-click.component',
+            component: NbToastrDestroyByClickComponent,
+          },
+          {
+            path: 'toastr-prevent-duplicates.component',
+            component: NbToastrPreventDuplicatesComponent,
+          },
+          {
+            path: 'toastr-icon.component',
+            component: NbToastrIconComponent,
           },
         ],
       },
