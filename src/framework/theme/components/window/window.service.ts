@@ -5,7 +5,13 @@ import { filter } from 'rxjs/operators';
 import {
   NbBlockScrollStrategy, NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
 } from '../cdk/overlay';
-import { NB_DEFAULT_WINDOWS_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState } from './window-types';
+import {
+  NB_DEFAULT_WINDOWS_CONFIG,
+  NB_WINDOW_CONTENT,
+  NbWindowConfig,
+  NbWindowState,
+  NB_WINDOW_CONTEXT,
+} from './window-types';
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
@@ -15,7 +21,7 @@ import { NbWindowComponent } from './window.component';
  *
  * @stacked-example(Showcase, window/window-showcase.component)
  *
- * A new window can be opened by calling the `open` method with a component or template ref to be loaded
+ * A new window can be opened by calling the `open` method with a component or template to be loaded
  * and an optional configuration.
  * `open` method will return `NbWindowRef` that can be used for the further manipulations.
  *
@@ -107,8 +113,13 @@ export class NbWindowService {
     config: NbWindowConfig,
     windowRef: NbWindowRef,
   ): ComponentRef<NbWindowComponent> {
+    const context = content instanceof TemplateRef
+      ? { $implicit: config.context, windowRef }
+      : config.context;
+
     const providers = [
       { provide: NB_WINDOW_CONTENT, useValue: content },
+      { provide: NB_WINDOW_CONTEXT, useValue: context },
       { provide: NbWindowConfig, useValue: config },
       { provide: NbWindowRef, useValue: windowRef },
     ];

@@ -5,8 +5,8 @@ import { NbWindowService } from '@nebular/theme';
   template: `
     <button (click)="openWindow()" nbButton>Open window</button>
 
-    <ng-template #contentTemplate>
-      Window content from template
+    <ng-template #contentTemplate let-data>
+      {{ data.text }}
     </ng-template>
   `,
   styleUrls: [ './window.scss' ],
@@ -18,6 +18,9 @@ export class NbTemplateWindowComponent {
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(this.contentTemplate, { title: 'Window content from template' });
+    this.windowService.open(
+      this.contentTemplate,
+      { title: 'Window content from template', context: { text: 'Window content' } },
+    );
   }
 }

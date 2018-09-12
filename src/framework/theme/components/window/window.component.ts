@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
-import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState } from './window-types';
+import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window-types';
 import { NbWindowRef } from './window-ref';
 
 @Component({
@@ -27,7 +27,7 @@ import { NbWindowRef } from './window-ref';
         </div>
       </nb-card-header>
       <nb-card-body *ngIf="maximized || isFullScreen">
-        <nb-overlay-container [content]="content" [context]="config.context">
+        <nb-overlay-container [content]="content" [context]="context">
         </nb-overlay-container>
       </nb-card-body>
     </nb-card>
@@ -54,6 +54,7 @@ export class NbWindowComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(NB_WINDOW_CONTENT) public content: TemplateRef<any> | NbComponentType,
+    @Inject(NB_WINDOW_CONTEXT) public context: Object,
     public windowRef: NbWindowRef,
     public config: NbWindowConfig,
     private focusTrapFactory: NbFocusTrapFactoryService,
