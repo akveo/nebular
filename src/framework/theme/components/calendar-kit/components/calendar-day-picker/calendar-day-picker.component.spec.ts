@@ -15,8 +15,8 @@ import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 
 describe('Component: NbCalendarDayPicker', () => {
-  let component: NbCalendarDayPickerComponent<Date>;
-  let fixture: ComponentFixture<NbCalendarDayPickerComponent<Date>>;
+  let component: NbCalendarDayPickerComponent<Date, Date>;
+  let fixture: ComponentFixture<NbCalendarDayPickerComponent<Date, Date>>;
   let componentEl: DebugElement;
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('Component: NbCalendarDayPicker', () => {
       providers: [NbCalendarMonthModelService],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent<NbCalendarDayPickerComponent<Date>>(NbCalendarDayPickerComponent);
+    fixture = TestBed.createComponent<NbCalendarDayPickerComponent<Date, Date>>(NbCalendarDayPickerComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement;
 

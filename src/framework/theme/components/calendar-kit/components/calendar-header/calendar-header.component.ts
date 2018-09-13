@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../../services/direction.service';
 import { NbDateService } from '../../services';
@@ -15,7 +15,7 @@ import { NbDateService } from '../../services';
   template: `
     <div class="header">
       <span class="title" (click)="navigateToday.emit()">
-        {{ today | nbCalendarDate }}
+        {{ date | nbCalendarDate }}
         <i [ngClass]="{ 'nb-arrow-dropright': isLtr, 'nb-arrow-dropleft': isRtl }"></i>
       </span>
       <span class="sub-title">Today</span>
@@ -23,11 +23,11 @@ import { NbDateService } from '../../services';
   `,
 })
 export class NbCalendarHeaderComponent<D> {
-  today: D;
+  @Input() date: D;
   @Output() navigateToday: EventEmitter<void> = new EventEmitter();
 
   constructor(protected directionService: NbLayoutDirectionService, protected dateService: NbDateService<D>) {
-    this.today = this.dateService.today();
+    this.date = this.dateService.today();
   }
 
   get isRtl(): boolean {

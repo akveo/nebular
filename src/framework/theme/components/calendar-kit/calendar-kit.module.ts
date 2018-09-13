@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { NbSharedModule } from '../shared/shared.module';
 
@@ -30,6 +31,7 @@ import { NbNativeDateService } from './services/native-date.service';
 
 const SERVICES = [
   { provide: NbDateService, useClass: NbNativeDateService },
+  DatePipe,
   NbCalendarMonthModelService,
 ];
 
