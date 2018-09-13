@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NbA11yModule } from '../cdk';
 import { NbOverlayModule } from '../cdk/overlay';
 import { NbCardModule } from '../card/card.module';
 import { NbWindowService } from './window.service';
@@ -11,7 +12,7 @@ import {
 } from './window-icon.component';
 
 @NgModule({
-  imports: [ CommonModule, NbOverlayModule, NbCardModule ],
+  imports: [ CommonModule, NbOverlayModule, NbCardModule, NbA11yModule ],
   declarations: [
     NbWindowsContainerComponent,
     NbWindowComponent,
