@@ -11,10 +11,9 @@ import { NbLocaleService } from '../../services';
 @Pipe({ name: 'nbCalendarDate' })
 export class NbCalendarDatePipe implements PipeTransform {
 
-  constructor(private locale: NbLocaleService) {
-  }
+  constructor(private locale: NbLocaleService) { }
 
   transform(date: Date): string {
-    return date ? `${this.locale.getMonthName(date)} ${date.getFullYear()}` : '';
+    return date ? `${this.locale.getMonthName(date)} ${this.locale.getNumeric(date.getFullYear())}` : '';
   }
 }

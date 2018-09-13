@@ -62,7 +62,7 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
   }
 
   get day(): string | number {
-    return this.date && this.locale.getDay(this.date.getDate());
+    return this.date && this.locale.getNumeric(this.date.getDate());
   }
 
   @HostListener('click')

@@ -10,6 +10,7 @@ import {
 
 import { NbCalendarCell, NbDateTimeUtil } from '../calendar-kit';
 import { NbCalendarRange } from './calendar-range.component';
+import { NbLocaleService } from '../calendar-kit/services';
 
 
 @Component({
@@ -31,6 +32,9 @@ import { NbCalendarRange } from './calendar-range.component';
   host: { '(click)': 'onClick()', 'class': 'range-cell' },
 })
 export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
+
+  constructor(private locale: NbLocaleService) { }
+
   @Input() date: Date;
 
   @Input() selectedValue: NbCalendarRange;
@@ -82,8 +86,8 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
   }
 
-  get day(): number {
-    return this.date && this.date.getDate();
+  get day(): string | number {
+    return this.date && this.locale.getNumeric(this.date.getDate());
   }
 
   onClick() {
