@@ -11,8 +11,8 @@ import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window-typ
 export class NbWindowRef {
   componentRef: ComponentRef<NbWindowComponent>;
 
-  private _prevState: NbWindowState;
-  private _state: NbWindowState;
+  protected _prevState: NbWindowState;
+  protected _state: NbWindowState;
   /**
    * Current window state.
    */
@@ -27,7 +27,7 @@ export class NbWindowRef {
     }
   }
 
-  private stateChange$ = new ReplaySubject<NbWindowStateChange>(1);
+  protected stateChange$ = new ReplaySubject<NbWindowStateChange>(1);
   /**
    * Emits when window state change.
    */
@@ -35,8 +35,8 @@ export class NbWindowRef {
     return this.stateChange$.asObservable();
   }
 
-  private _closed = false;
-  private closed$ = new Subject();
+  protected _closed = false;
+  protected closed$ = new Subject();
   /**
    * Emits when window was closed.
    */

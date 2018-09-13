@@ -60,16 +60,16 @@ import { NbWindowComponent } from './window.component';
 @Injectable()
 export class NbWindowService {
 
-  private overlayRef: NbOverlayRef;
-  private windowsContainerViewRef: ViewContainerRef;
-  private openWindows: NbWindowRef[] = [];
+  protected overlayRef: NbOverlayRef;
+  protected windowsContainerViewRef: ViewContainerRef;
+  protected openWindows: NbWindowRef[] = [];
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private overlayService: NbOverlayService,
-    private overlayPositionBuilder: NbOverlayPositionBuilder,
-    private blockScrollStrategy: NbBlockScrollStrategy,
-    @Inject(NB_DEFAULT_WINDOWS_CONFIG) private readonly defaultWindowsConfig: NbWindowConfig,
+    protected componentFactoryResolver: ComponentFactoryResolver,
+    protected overlayService: NbOverlayService,
+    protected overlayPositionBuilder: NbOverlayPositionBuilder,
+    protected blockScrollStrategy: NbBlockScrollStrategy,
+    @Inject(NB_DEFAULT_WINDOWS_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
   ) {}
 
   /**
@@ -95,7 +95,7 @@ export class NbWindowService {
     return windowRef;
   }
 
-  private createWindowsContainer() {
+  protected createWindowsContainer() {
     this.overlayRef = this.overlayService.create({
       scrollStrategy: this.overlayService.scrollStrategies.noop(),
       positionStrategy: this.overlayPositionBuilder.global().bottom().right(),
@@ -106,7 +106,7 @@ export class NbWindowService {
     this.windowsContainerViewRef = overlayRef.instance.viewContainerRef;
   }
 
-  private appendWindow(
+  protected appendWindow(
     content: TemplateRef<any> | NbComponentType,
     config: NbWindowConfig,
     windowRef: NbWindowRef,
@@ -130,7 +130,7 @@ export class NbWindowService {
     return this.windowsContainerViewRef.createComponent(windowFactory, null, injector);
   }
 
-  private subscribeToEvents(windowRef: NbWindowRef) {
+  protected subscribeToEvents(windowRef: NbWindowRef) {
     if (windowRef.config.closeOnBackdropClick) {
       this.overlayRef.backdropClick().subscribe(() => windowRef.close());
     }
@@ -149,7 +149,7 @@ export class NbWindowService {
     });
   }
 
-  private checkAndUpdateOverlay() {
+  protected checkAndUpdateOverlay() {
     const fullScreenWindows = this.openWindows.filter(w => w.state === NbWindowState.FULL_SCREEN);
     if (fullScreenWindows.length > 0) {
       this.blockScrollStrategy.enable();

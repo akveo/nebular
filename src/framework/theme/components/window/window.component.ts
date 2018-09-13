@@ -57,8 +57,8 @@ export class NbWindowComponent implements OnInit, OnDestroy {
     @Inject(NB_WINDOW_CONTEXT) public context: Object,
     public windowRef: NbWindowRef,
     public config: NbWindowConfig,
-    private focusTrapFactory: NbFocusTrapFactoryService,
-    private elementRef: ElementRef,
+    protected focusTrapFactory: NbFocusTrapFactoryService,
+    protected elementRef: ElementRef,
   ) {}
 
   ngOnInit() {
