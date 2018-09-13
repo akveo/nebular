@@ -7,9 +7,10 @@
 import { TranslationWidth } from '@angular/common';
 
 
-export abstract class NbLocaleService<D> {
+export abstract class NbDateService<D> {
+  readonly DAYS_IN_WEEK: number = 7;
+
   protected locale: string;
-  protected DAYS_IN_WEEK: number = 7;
 
   /**
    * Checks if the date is between the start date and the end date.
@@ -39,6 +40,27 @@ export abstract class NbLocaleService<D> {
     return date1 && date2 && this.isSameYear(date1, date2);
   }
 
+  abstract today(): D;
+
+  /**
+   * Gets the date of the month component of the given date.
+   */
+  abstract getDate(date: D): number;
+
+  /**
+   * Gets the month component of the given date.
+   * */
+  abstract getMonth(date: D): number;
+
+  /**
+   * Gets the year component of the given date.
+   * */
+  abstract getYear(date: D): number;
+
+  /**
+   * Gets the date of the month component of the given date.
+   */
+  abstract getDayOfWeek(date: D): number;
 
   /**
    * Returns first day of the week, it can be 1 if week starts from monday
@@ -49,12 +71,12 @@ export abstract class NbLocaleService<D> {
   /**
    * Returns localized month name by date and style.
    * */
-  abstract getMonthName(date: D, style: TranslationWidth): string;
+  abstract getMonthName(date: D, style?: TranslationWidth): string;
 
   /**
    * Returns localized month name by month index and style.
    * */
-  abstract getMonthNameByIndex(index: number, style: TranslationWidth): string;
+  abstract getMonthNameByIndex(index: number, style?: TranslationWidth): string;
 
   /**
    * Returns localized days names.

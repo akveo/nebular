@@ -5,44 +5,47 @@
  */
 
 import { Injectable, Type } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 import { NbCalendarRange } from '../calendar/calendar-range.component';
 import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
 import { NbDateTransformer } from './datepicker.directive';
+import { NbDateService } from '../calendar-kit';
 
 
 @Injectable()
-export class NbDateTransformerService extends NbDateTransformer<Date> {
-  picker: Type<NbDatepickerComponent> = NbDatepickerComponent;
+export class NbDateTransformerService<D> extends NbDateTransformer<D> {
+  picker: Type<NbDatepickerComponent<D>> = NbDatepickerComponent;
 
-  constructor(protected datePipe: DatePipe) {
+  constructor(protected dateService: NbDateService<D>) {
     super();
   }
 
-  fromString(value: string): Date {
-    return new Date(Date.parse(value));
+  parse(date: string, format): D {
+    return this.dateService.parse(date, format);
   }
 
-  fromValue(value: Date): string {
-    return this.datePipe.transform(value);
+  format(date: D, format: string): string {
+    return this.dateService.format(date, format);
   }
 }
 
 @Injectable()
-export class NbRangeTransformerService extends NbDateTransformer<NbCalendarRange> {
-  picker: Type<NbRangepickerComponent> = NbRangepickerComponent;
+export class NbRangeTransformerService<D> extends NbDateTransformer<NbCalendarRange<D>> {
+  picker: Type<NbRangepickerComponent<D>> = NbRangepickerComponent;
 
-  constructor(protected datePipe: DatePipe) {
+  constructor(protected dateService: NbDateService<D>) {
     super();
   }
 
-  fromString(value: string): NbCalendarRange {
-    return undefined;
+  parse(date: string, format): NbCalendarRange<D> {
+    const [start, end] = date.split('-').map(subDate => subDate.trim());
+    return {
+      start: this.dateService.parse(start, format),
+      end: this.dateService.parse(end, format),
+    };
   }
 
-  fromValue(range: NbCalendarRange): string {
-    return `${this.datePipe.transform(range.start)} - ${this.datePipe.transform(range.end)}`;
+  format(range: NbCalendarRange<D>, format: string): string {
+    return `${this.dateService.format(range.start, format)} - ${this.dateService.format(range.end, format)}`;
   }
 }
-

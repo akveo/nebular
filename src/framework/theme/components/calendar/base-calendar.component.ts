@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, HostBinding, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } from '../calendar-kit';
+import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
 
 
 /**
@@ -18,7 +18,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateTimeUtil } fr
   selector: 'nb-base-calendar',
   templateUrl: './base-calendar.component.html',
 })
-export class NbBaseCalendarComponent<T> {
+export class NbBaseCalendarComponent<D, T> {
 
   /**
    * Defines if we should render previous and next months
@@ -34,32 +34,32 @@ export class NbBaseCalendarComponent<T> {
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: Date;
+  @Input() min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: Date;
+  @Input() max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() dayCellComponent: Type<NbCalendarCell<T>>;
+  @Input() dayCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() monthCellComponent: Type<NbCalendarCell<T>>;
+  @Input() monthCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() yearCellComponent: Type<NbCalendarCell<T>>;
+  @Input() yearCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Size of the calendar and entire components.
@@ -77,6 +77,10 @@ export class NbBaseCalendarComponent<T> {
    * */
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
+  constructor(protected dateService: NbDateService<D>) {
+    this.visibleDate = this.dateService.today();
+  }
+
   @HostBinding('class.medium')
   get medium() {
     return this.size === NbCalendarSize.MEDIUM;
@@ -89,13 +93,13 @@ export class NbBaseCalendarComponent<T> {
 
   ViewMode = NbCalendarViewMode;
 
-  visibleDate: Date = new Date();
+  visibleDate: D;
 
   setViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;
   }
 
-  setVisibleDate(visibleDate: Date) {
+  setVisibleDate(visibleDate: D) {
     this.visibleDate = visibleDate;
   }
 
@@ -117,14 +121,14 @@ export class NbBaseCalendarComponent<T> {
 
   navigateToday() {
     this.setViewMode(NbCalendarViewMode.DATE);
-    this.visibleDate = new Date();
+    this.visibleDate = this.dateService.today();
   }
 
   private changeVisibleMonth(direction: number) {
-    this.visibleDate = NbDateTimeUtil.addMonth(this.visibleDate, direction);
+    this.visibleDate = this.dateService.addMonth(this.visibleDate, direction);
   }
 
   private changeVisibleYear(direction: number) {
-    this.visibleDate = NbDateTimeUtil.addYear(this.visibleDate, direction * 20);
+    this.visibleDate = this.dateService.addYear(this.visibleDate, direction * 20);
   }
 }

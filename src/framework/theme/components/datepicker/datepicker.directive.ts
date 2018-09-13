@@ -12,12 +12,14 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDatepicker } from './datepicker';
 
 
-export abstract class NbDateTransformer<T> {
+const NB_DEFAULT_FORMAT = 'MM/dd/yyyy';
+
+export abstract class NbDateTransformer<D> {
   abstract picker: Type<any>;
 
-  abstract fromValue(value: T): string;
+  abstract parse(value: string, format: string): D;
 
-  abstract fromString(value: string): T;
+  abstract format(value: D, format: string): string;
 }
 
 export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('date transformer');
@@ -32,25 +34,25 @@ export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('d
     },
   ],
 })
-export class NbDatepickerDirective<T> implements ControlValueAccessor {
+export class NbDatepickerDirective<D> implements ControlValueAccessor {
 
-  protected transformer: NbDateTransformer<T>;
-  protected picker: NbDatepicker<T>;
+  protected transformer: NbDateTransformer<D>;
+  protected picker: NbDatepicker<D>;
   protected onChange: Function = () => {};
 
   constructor(@Inject(NB_DOCUMENT) protected document,
-              @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<T>[],
+              @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<D>[],
               protected hostRef: ElementRef) {
   }
 
   @Input('nbDatepicker')
-  set setPicker(picker: NbDatepicker<T>) {
+  set setPicker(picker: NbDatepicker<D>) {
     this.picker = picker;
     this.setupPicker();
   }
 
-  writeValue(value: T) {
-    const stringRepresentation = this.transformer.fromValue(value);
+  writeValue(value: D) {
+    const stringRepresentation = this.transformer.format(value, NB_DEFAULT_FORMAT);
     this.hostRef.nativeElement.value = stringRepresentation;
   }
 
@@ -77,10 +79,10 @@ export class NbDatepickerDirective<T> implements ControlValueAccessor {
     this.picker.attach(this.hostRef);
 
     if (this.hostRef.nativeElement.value) {
-      this.picker.value = this.transformer.fromString(this.hostRef.nativeElement.value);
+      this.picker.value = this.transformer.parse(this.hostRef.nativeElement.value, NB_DEFAULT_FORMAT);
     }
 
-    this.picker.valueChange.subscribe((value: T) => {
+    this.picker.valueChange.subscribe((value: D) => {
       this.picker.value = value;
       this.writeValue(value);
       this.onChange(value);

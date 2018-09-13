@@ -137,18 +137,18 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   selector: 'nb-datepicker',
   template: '',
 })
-export class NbDatepickerComponent extends NbBasePicker<Date, NbCalendarComponent> {
-  protected pickerClass: Type<NbCalendarComponent> = NbCalendarComponent;
+export class NbDatepickerComponent<D> extends NbBasePicker<D, NbCalendarComponent<D>> {
+  protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
 
-  get value(): Date {
+  get value(): D {
     return this.picker.date;
   }
 
-  set value(date: Date) {
+  set value(date: D) {
     this.picker.date = date;
   }
 
-  protected get pickerValueChange(): Observable<Date> {
+  protected get pickerValueChange(): Observable<D> {
     return this.picker.dateChange;
   }
 }
@@ -157,18 +157,18 @@ export class NbDatepickerComponent extends NbBasePicker<Date, NbCalendarComponen
   selector: 'nb-rangepicker',
   template: '',
 })
-export class NbRangepickerComponent extends NbBasePicker<NbCalendarRange, NbCalendarRangeComponent> {
-  protected pickerClass: Type<NbCalendarRangeComponent> = NbCalendarRangeComponent;
+export class NbRangepickerComponent<D> extends NbBasePicker<NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
+  protected pickerClass: Type<NbCalendarRangeComponent<D>> = NbCalendarRangeComponent;
 
-  get value(): NbCalendarRange {
+  get value(): NbCalendarRange<D> {
     return this.picker.range;
   }
 
-  set value(range: NbCalendarRange) {
+  set value(range: NbCalendarRange<D>) {
     this.picker.range = range;
   }
 
-  protected get pickerValueChange(): Observable<NbCalendarRange> {
+  protected get pickerValueChange(): Observable<NbCalendarRange<D>> {
     return this.picker.rangeChange;
   }
 }

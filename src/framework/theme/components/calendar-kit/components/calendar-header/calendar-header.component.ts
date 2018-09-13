@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../../services/direction.service';
+import { NbDateService } from '../../services';
 
 
 @Component({
@@ -14,18 +15,19 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
   template: `
     <div class="header">
       <span class="title" (click)="navigateToday.emit()">
-        {{ date | nbCalendarDate }}
+        {{ today | nbCalendarDate }}
         <i [ngClass]="{ 'nb-arrow-dropright': isLtr, 'nb-arrow-dropleft': isRtl }"></i>
       </span>
       <span class="sub-title">Today</span>
     </div>
   `,
 })
-export class NbCalendarHeaderComponent {
-  @Input() date: Date = new Date();
+export class NbCalendarHeaderComponent<D> {
+  today: D;
   @Output() navigateToday: EventEmitter<void> = new EventEmitter();
 
-  constructor(private directionService: NbLayoutDirectionService) {
+  constructor(protected directionService: NbLayoutDirectionService, protected dateService: NbDateService<D>) {
+    this.today = this.dateService.today();
   }
 
   get isRtl(): boolean {

@@ -6,7 +6,7 @@
 
 import { Component } from '@angular/core';
 
-import { NbCalendarRange, NbDateTimeUtil } from '@nebular/theme';
+import { NbCalendarRange, NbDateService } from '@nebular/theme';
 
 
 @Component({
@@ -18,16 +18,20 @@ import { NbCalendarRange, NbDateTimeUtil } from '@nebular/theme';
   `,
 })
 export class NbCalendarRangeShowcaseComponent {
-  range: NbCalendarRange = {
-    start: NbDateTimeUtil.addDay(this.monthStart, 3),
-    end: NbDateTimeUtil.addDay(this.monthEnd, -3),
-  };
+  range: NbCalendarRange<Date>;
+
+  constructor(protected dateService: NbDateService<Date>) {
+    this.range = {
+      start: this.dateService.addDay(this.monthStart, 3),
+      end: this.dateService.addDay(this.monthEnd, -3),
+    };
+  }
 
   get monthStart(): Date {
-    return NbDateTimeUtil.getMonthStart(new Date());
+    return this.dateService.getMonthStart(new Date());
   }
 
   get monthEnd(): Date {
-    return NbDateTimeUtil.getMonthEnd(new Date());
+    return this.dateService.getMonthEnd(new Date());
   }
 }
