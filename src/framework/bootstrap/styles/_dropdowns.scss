@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './outline-buttons';
+@import 'outline-buttons';
 
 @mixin dropdown-menu-background($color) {
   background-color: $color;

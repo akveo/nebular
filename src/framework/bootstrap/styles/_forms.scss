@@ -3,10 +3,10 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-@import './size-form-control';
-@import './default-form-control';
-@import '../../core/mixins';
-@import './custom-forms';
+@import 'size-form-control';
+@import 'default-form-control';
+@import '../../theme/styles/core/mixins';
+@import 'custom-forms';
 
 // locally used mixin
 @mixin checkmark($size, $color, $wight, $opacity: 1) {

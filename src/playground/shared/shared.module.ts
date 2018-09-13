@@ -19,6 +19,9 @@ import { NbDynamicToAddComponent } from './dynamic.component';
   declarations: [
     NbDynamicToAddComponent,
   ],
+  entryComponents: [
+    NbDynamicToAddComponent,
+  ],
 })
 export class NbPlaygroundSharedModule {
 }
