@@ -28,6 +28,10 @@ export class NbNativeDateService extends NbDateService<Date> {
     this.locale = locale;
   }
 
+  isValidDateString(date: string): boolean {
+    return !isNaN(this.parse(date).getTime());
+  }
+
   today(): Date {
     return new Date();
   }

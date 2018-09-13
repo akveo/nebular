@@ -40,6 +40,14 @@ export abstract class NbDateService<D> {
     return date1 && date2 && this.isSameYear(date1, date2);
   }
 
+  /**
+   * Returns true if date string is valid date string according to the provided format.
+   * */
+  abstract isValidDateString(date: string, format: string): boolean;
+
+  /**
+   * Returns today date.
+   * */
   abstract today(): D;
 
   /**

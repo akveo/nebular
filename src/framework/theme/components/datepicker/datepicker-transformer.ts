@@ -27,6 +27,10 @@ export class NbDateTransformerService<D> extends NbDateTransformer<D> {
   format(date: D, format: string): string {
     return this.dateService.format(date, format);
   }
+
+  isValid(date: string, format: string): boolean {
+    return this.dateService.isValidDateString(date, format);
+  }
 }
 
 @Injectable()
@@ -37,8 +41,8 @@ export class NbRangeTransformerService<D> extends NbDateTransformer<NbCalendarRa
     super();
   }
 
-  parse(date: string, format): NbCalendarRange<D> {
-    const [start, end] = date.split('-').map(subDate => subDate.trim());
+  parse(range: string, format): NbCalendarRange<D> {
+    const [start, end] = range.split('-').map(subDate => subDate.trim());
     return {
       start: this.dateService.parse(start, format),
       end: this.dateService.parse(end, format),
@@ -46,6 +50,15 @@ export class NbRangeTransformerService<D> extends NbDateTransformer<NbCalendarRa
   }
 
   format(range: NbCalendarRange<D>, format: string): string {
+    if (!range) {
+      return '';
+    }
+
     return `${this.dateService.format(range.start, format)} - ${this.dateService.format(range.end, format)}`;
+  }
+
+  isValid(range: string, format: string): boolean {
+    const [start, end] = range.split('-').map(subDate => subDate.trim());
+    return this.dateService.isValidDateString(start, format) && this.dateService.isValidDateString(end, format);
   }
 }

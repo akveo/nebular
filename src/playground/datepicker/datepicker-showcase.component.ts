@@ -14,9 +14,11 @@ import { Component } from '@angular/core';
     <!--<input class="form-control" placeholder="Datepicker" [nbDatepicker]="datepicker">-->
     <!--<nb-datepicker #datepicker></nb-datepicker>-->
 
-    <!--<input class="form-control" placeholder="Rangepicker" [nbDatepicker]="rangepicker">-->
-    <!--<nb-rangepicker #rangepicker></nb-rangepicker>-->
-    <!--</div>-->
+    <input class="form-control" placeholder="Rangepicker" #rangeInput="ngModel" [(ngModel)]="range"
+           [nbDatepicker]="rangepicker">
+    <nb-rangepicker #rangepicker></nb-rangepicker>
+    {{ rangeInput.valid }}
+
     <input class="form-control" placeholder="Form Picker" [(ngModel)]="date" [nbDatepicker]="formpicker">
     <nb-datepicker #formpicker></nb-datepicker>
 
@@ -32,5 +34,6 @@ import { Component } from '@angular/core';
   `],
 })
 export class NbDatepickerShowcaseComponent {
+  range;
   date = new Date();
 }

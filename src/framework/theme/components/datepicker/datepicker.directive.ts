@@ -5,7 +5,14 @@
  */
 
 import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+} from '@angular/forms';
 import { Type } from '@angular/core/src/type';
 
 import { NB_DOCUMENT } from '../../theme.options';
@@ -20,6 +27,8 @@ export abstract class NbDateTransformer<D> {
   abstract parse(value: string, format: string): D;
 
   abstract format(value: D, format: string): string;
+
+  abstract isValid(value: string, format: string): boolean;
 }
 
 export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('date transformer');
@@ -32,17 +41,27 @@ export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('d
       useExisting: forwardRef(() => NbDatepickerDirective),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => NbDatepickerDirective),
+      multi: true,
+    },
   ],
 })
-export class NbDatepickerDirective<D> implements ControlValueAccessor {
+export class NbDatepickerDirective<D> implements ControlValueAccessor, Validator {
 
   protected transformer: NbDateTransformer<D>;
   protected picker: NbDatepicker<D>;
-  protected onChange: Function = () => {};
+  protected onChange: Function = () => {
+  };
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<D>[],
               protected hostRef: ElementRef) {
+  }
+
+  get inputValue(): string {
+    return this.hostRef.nativeElement.value;
   }
 
   @Input('nbDatepicker')
@@ -64,6 +83,11 @@ export class NbDatepickerDirective<D> implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    const isValid = this.transformer.isValid(this.inputValue, NB_DEFAULT_FORMAT);
+    return isValid ? null : { nbDatepickerInvalid: true };
   }
 
   protected chooseTransformer() {
