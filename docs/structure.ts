@@ -311,6 +311,7 @@ export const structure = [
         icon: 'popover.svg',
         source: [
           'NbPopoverDirective',
+          'NbPopoverComponent',
         ],
       },
       {
