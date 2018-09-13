@@ -12,6 +12,7 @@ task('bump', () => {
     './src/framework/theme/package.json',
     './src/framework/auth/package.json',
     './src/framework/security/package.json',
+    './src/framework/bootstrap/package.json',
   ], { base: './' })
     .pipe(modify({
       key: 'version',
@@ -22,10 +23,23 @@ task('bump', () => {
 
 task('bump-peer', () => {
   src([
+    './src/framework/bootstrap/package.json',
+  ], { base: './' })
+    .pipe(modify({
+      key: 'peerDependencies.@nebular/theme',
+      value: VERSION,
+    }))
+    .pipe(dest('./'));
+
+  src([
     './src/framework/auth/package.json',
   ], { base: './' })
     .pipe(modify({
       key: 'peerDependencies.@nebular/theme',
+      value: VERSION,
+    }))
+    .pipe(modify({
+      key: 'peerDependencies.@nebular/bootstrap',
       value: VERSION,
     }))
     .pipe(dest('./'));

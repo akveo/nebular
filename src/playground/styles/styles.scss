@@ -1,8 +1,10 @@
 @import 'themes';
 @import '../../framework/theme/styles/globals';
+@import '../../framework/bootstrap/styles/globals';
 
 @include nb-install() {
   @include nb-theme-global();
+  @include nb-bootstrap-global();
 };
 
 body {
