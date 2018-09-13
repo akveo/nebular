@@ -6,93 +6,80 @@
 ## Nebular is a set of essential modules for your next Angular application.
 
 Nebular is a great toolkit if you build Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
-It provides you with a list of native Angular components, unified approach for managing styles of various components (3rd party including) and authentication and security layers easily configurable for your API. 
+It provides you with a set of native Angular components, themeable components, authentication and security layers easily configurable for your API. 
 At the same time, Nebular allows you to use it together with any other UI library you choose.
 
-#### Getting started
+### Getting started
 [Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
 
-### :art: Theme
-@nebular/theme
+### Basic Install
 
-Main Nebular module which includes UI Kit and Theme System.
+- install Nebular modules
 
-#### Native Angular Components
+```bash
+npm i -S @nebular/theme @nebular/auth @nebular/security
+```
+You can skip auth/security in case you don't need it.
 
-| Component    | Description                                                           |
-|--------------|---------------------------------------------------------------------- |
-|              |                                                                       |
-| Layout       | <a href="https://akveo.github.io/nebular/docs/components/layout/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/layout/overview</a>        |
-| Sidebar      | <a href="https://akveo.github.io/nebular/docs/components/sidebar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/sidebar/overview</a>      |
-| Menu         | <a href="https://akveo.github.io/nebular/docs/components/menu/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/menu/overview</a>         |
-| Card         | <a href="https://akveo.github.io/nebular/docs/components/card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/card/overview</a>         |
-| Alert        | <a href="https://akveo.github.io/nebular/docs/components/alert/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/alert/overview</a>        |
-| Flip Card    | <a href="https://akveo.github.io/nebular/docs/components/flip-card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/flip-card/overview</a>    |
-| Reveal Card  | <a href="https://akveo.github.io/nebular/docs/components/reveal-card/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/reveal-card/overview</a>  |
-| Search       | <a href="https://akveo.github.io/nebular/docs/components/search/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/search/overview</a>       |
-| Tabs         | <a href="https://akveo.github.io/nebular/docs/components/tabs/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/tabs/overview</a>         |
-| Actions      | <a href="https://akveo.github.io/nebular/docs/components/actions/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/actions/overview</a>      |
-| User         | <a href="https://akveo.github.io/nebular/docs/components/user-avatar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/user-avatar/overview</a>  |
-| Progress Bar | <a href="https://akveo.github.io/nebular/docs/components/progress-bar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/progress-bar/overview</a> |
-| Badge        | <a href="https://akveo.github.io/nebular/docs/components/badge/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/badge/overview</a>        |
-| Popover      | <a href="https://akveo.github.io/nebular/docs/components/popover/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/popover/overview</a>      |
-| Context Menu | <a href="https://akveo.github.io/nebular/docs/components/context-menu/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/context-menu/overview</a> |
-| Stepper      | <a href="https://akveo.github.io/nebular/docs/components/stepper/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/stepper/overview</a>      |
-| Chat UI      | <a href="https://akveo.github.io/nebular/docs/components/chat-ui/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/chat-ui/overview</a>      |
-| Checkbox     | <a href="https://akveo.github.io/nebular/docs/components/checkbox/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/checkbox/overview</a>     |
-| Button       | <a href="https://akveo.github.io/nebular/docs/components/button/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/button/overview</a>       |
-| Input        | <a href="https://akveo.github.io/nebular/docs/components/input/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/input/overview</a>        |
-| List         | <a href="https://akveo.github.io/nebular/docs/components/list/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/list/overview</a>         |
-| Infinite List| <a href="https://akveo.github.io/nebular/docs/components/infinite-list/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/infinite-list/overview</a>|
-| Calendar     | <a href="https://akveo.github.io/nebular/docs/components/calendar/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/calendar/overview</a>     |
-| Accordion    | <a href="https://akveo.github.io/nebular/docs/components/accordion/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/accordion/overview</a>    |
-| Spinner      | <a href="https://akveo.github.io/nebular/docs/components/spinner/overview?utm_source=github&utm_medium=nebular_readme&utm_content=list">akveo.github.io/nebular/docs/components/spinner/overview</a>      |
+- add Nebular theme module into `app.module`:
 
-#### Theme System
-A set of beautiful styles with handy mixins and guidelines to create and support multiple themes in one project. With themes **hot reload** without a page refresh.
+```ts
+import { NbThemeModule } from '@nebular/theme';
 
-#### Bootstrap Styles
-Overridings for bootstrap styles for elements consistency with the rest of your theme.
+// ...
 
-#### Server Side Rendering 
-Components are compatible with SSR, meaning that it is possible to render them on a server.
+@NgModule({
+  imports: [
+    // ...
+    NbThemeModule.forRoot({ name: 'default' }), // enable Default theme
+  ]
+})
+export class AppModule {
+```
 
-#### RTL
-Right-to-left writing system support for all components.
+- add theme styles
+
+```scss
+"styles": [
+  "../node_modules/@nebular/theme/styles/prebuilt/default.css", // or `THEME_NAME`.css
+],
+```
+
+- create a page with Nebular components
 
 
-### :closed_lock_with_key: Auth
-@nebular/auth
+```ts
+import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
+import { NbSidebarModule, NbLayoutModule, NbButtonModule } from '@nebular/theme';
 
-UI and logic for front-end authentication flow.
+// ...
 
-#### Auth UI Components
-| Component        | Description                                                     |
-|------------------|-----------------------------------------------------------------|
-|                  |                                                                 |
-| Login            | Email & password login page.                                    |
-| Register         | Sign up page component.                                         |
-| Reset Password   | A page to request a password reset.                             |
-| Restore Password | A page to set up a new password.                                |
-| Auth Block       | Wrapper to center auth component on a page.                     |
+@NgModule({
+  // ...
+  imports: [
+    RouterModule,
+    NbLayoutModule,
+    NbButtonModule,
+  ],
+})
+export class SomePageModule { }
+```
 
-#### Auth Providers
-Auth UI decoupled from the communication to a particular back-end throughout authentication provider services allowing you to connect to any backend API.
-
-#### Token Management
-Services to retrieve, store and publish authentication token with helpers for JWT.
-
-#### Token Storage
-Configurable token storage service.
-
-#### Auth Interceptors
-HTTP interceptors to pass authentication token with any HTTP-request.
-
-### :cop: Security
-@nebular/security
-
-#### ACL
-Roles and permission management based on access control list. `*nbIsGranted` conditional directive.
+```ts
+@Component({
+  // ...
+  template: `
+    <nb-layout>
+      <nb-layout-header fixed>Awesome Nebular</nb-layout-header>
+      
+      <nb-layout-column>
+        <button nbButton>Hello World!</button>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class SomePageComponent {
+```
 
 
 ### Starter Kits
@@ -102,10 +89,6 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 
 ### VSCode Extension
 - [Nebular Code Snippets](https://marketplace.visualstudio.com/items?itemName=shalinjames.vscode-nebular-snippets) - a Visual Studio Code snippets extension for Nebular components and directives.
-
-
-### From Developers
-There are a lot of awesome front-end frameworks and libraries out there these days. They provide a massive quantity of useful features making our lives more comfortable. Our intention is not to create a new one as we are pretty much aware of the complexity and amount of work developers put on their creations. But as developers, we feel that nowadays front-end development is disjointed. You have to search for libraries, go through the different installation process, everything looks different, and sometimes it's just annoying that you can't just sit and start going. That's why we are on a mission to assemble together the most useful modules and libraries, join them with a unified application and graphical interface creating a great toolkit for easier setup.
 
 ### License
 [MIT](LICENSE.txt) license.
