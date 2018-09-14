@@ -79,6 +79,6 @@ export class NbWindowConfig {
   }
 }
 
-export const NB_WINDOW_CONTENT = new InjectionToken<TemplateRef<any> | NbComponentType>('NB_WINDOW_CONTENT');
-export const NB_WINDOW_CONFIG = new InjectionToken<NbWindowConfig>('NB_WINDOW_CONFIG');
-export const NB_WINDOW_CONTEXT = new InjectionToken<Object>('NB_WINDOW_CONTEXT');
+export const NB_WINDOW_CONTENT = new InjectionToken<TemplateRef<any> | NbComponentType>('Nebular Window Content');
+export const NB_WINDOW_CONFIG = new InjectionToken<NbWindowConfig>('Nebular Window Config');
+export const NB_WINDOW_CONTEXT = new InjectionToken<Object>('Nebular Window Context');
