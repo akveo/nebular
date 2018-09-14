@@ -31,24 +31,61 @@ import { NbCalendarComponent } from '../calendar/calendar.component';
 export abstract class NbDatepicker<T> {
   @Input() format: string;
 
-  abstract set value(value: T);
-
   abstract get value(): T;
+
+  abstract set value(value: T);
 
   abstract get valueChange(): Observable<T>;
 
   abstract attach(hostRef: ElementRef);
 }
 
+/**
+ * The `NbBasePicker` component concentrates overlay manipulation logic.
+ * */
 export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDestroy {
+  /**
+   * Calendar component class that has to be instantiated inside overlay.
+   * */
   protected abstract pickerClass: Type<P>;
+
+  /**
+   * Overlay reference object.
+   * */
   protected ref: NbOverlayRef;
+
+  /**
+   * Datepicker container that contains instantiated picker.
+   * */
   protected container: ComponentRef<NbDatepickerContainerComponent>;
+
+  /**
+   * Positioning strategy used by overlay.
+   * */
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+
+  /**
+   * HTML input reference to which datepicker connected.
+   * */
   protected hostRef: ElementRef;
+
+  /**
+   * Stream of picker changes. Required to be the subject because picker hides and shows and picker
+   * change stream becomes recreated.
+   * */
   protected onChange$: Subject<T> = new Subject();
+
+  /**
+   * Reference to the picker instance itself.
+   * */
   protected pickerRef: ComponentRef<P>;
+
   protected alive: boolean = true;
+
+  /**
+   * Queue contains the last value that was applied to the picker when it was hidden.
+   * This value will be passed to the picker as soon as it shown.
+   * */
   protected queue: T;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -57,15 +94,19 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     super();
   }
 
+  /**
+   * Returns picker instance.
+   * */
   get picker(): P {
     return this.pickerRef && this.pickerRef.instance;
   }
 
+  /**
+   * Stream of picker value changes.
+   * */
   get valueChange(): Observable<T> {
     return this.onChange$.asObservable();
   }
-
-  protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnDestroy() {
     this.alive = false;
@@ -73,6 +114,10 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.ref.dispose();
   }
 
+  /**
+   * Datepicker knows nothing about host html input element.
+   * So, attach method attaches datepicker to the host input element.
+   * */
   attach(hostRef: ElementRef) {
     this.hostRef = hostRef;
 
@@ -100,15 +145,9 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.pickerRef = null;
   }
 
-  toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
   protected abstract writeQueue();
+
+  protected abstract get pickerValueChange(): Observable<T>;
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
@@ -142,6 +181,9 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass));
   }
 
+  /**
+   * Subscribes on picker value changes and emit data through this.onChange$ subject.
+   * */
   protected subscribeOnValueChange() {
     this.pickerValueChange.subscribe(date => {
       this.onChange$.next(date);
@@ -173,12 +215,12 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, NbCalendarComponen
     }
   }
 
-  protected writeQueue() {
-    this.value = this.queue;
-  }
-
   protected get pickerValueChange(): Observable<D> {
     return this.picker.dateChange;
+  }
+
+  protected writeQueue() {
+    this.value = this.queue;
   }
 }
 
@@ -205,11 +247,11 @@ export class NbRangepickerComponent<D> extends NbBasePicker<NbCalendarRange<D>, 
     }
   }
 
-  protected writeQueue() {
-    this.value = this.queue;
-  }
-
   protected get pickerValueChange(): Observable<NbCalendarRange<D>> {
     return this.picker.rangeChange;
+  }
+
+  protected writeQueue() {
+    this.value = this.queue;
   }
 }
