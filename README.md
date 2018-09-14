@@ -3,7 +3,8 @@
 [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme)
 [![Dependency Status](https://david-dm.org/akveo/ngx-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
 
-## Nebular is a set of essential modules for your next Angular application.
+<img src="https://i.imgur.com/sPCAIQi.png">
+
 
 Nebular is a great toolkit if you build Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
 It provides you with a set of native Angular components, themeable components, authentication and security layers easily configurable for your API. 
