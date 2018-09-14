@@ -1,7 +1,7 @@
 import { ComponentRef } from '@angular/core';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbWindowComponent } from './window.component';
-import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window-types';
+import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window.options';
 
 /**
  * The `NbWindowRef` helps to manipulate window after it was created.

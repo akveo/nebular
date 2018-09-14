@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
-import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window-types';
+import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window.options';
 import { NbWindowRef } from './window-ref';
 
 @Component({

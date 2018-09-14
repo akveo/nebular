@@ -7,7 +7,7 @@ import {
 } from '../cdk/overlay';
 import {
   NB_WINDOW_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
-} from './window-types';
+} from './window.options';
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
