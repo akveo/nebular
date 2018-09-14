@@ -21,8 +21,6 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDatepicker } from './datepicker.component';
 
 
-const NB_DEFAULT_FORMAT = 'DD.MM.YYYY';
-
 export abstract class NbDateTransformer<D> {
   abstract picker: Type<any>;
 
@@ -98,7 +96,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    const isValid = this.transformer.isValid(this.inputValue, NB_DEFAULT_FORMAT);
+    const isValid = this.transformer.isValid(this.inputValue, this.picker.format);
     return isValid ? null : { nbDatepickerInvalid: true };
   }
 
@@ -115,7 +113,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     this.picker.attach(this.hostRef);
 
     if (this.hostRef.nativeElement.value) {
-      this.picker.value = this.transformer.parse(this.hostRef.nativeElement.value, NB_DEFAULT_FORMAT);
+      this.picker.value = this.transformer.parse(this.hostRef.nativeElement.value, this.picker.format);
     }
 
     this.picker.valueChange
@@ -132,7 +130,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   protected writeInput(value: D) {
-    const stringRepresentation = this.transformer.format(value, NB_DEFAULT_FORMAT);
+    const stringRepresentation = this.transformer.format(value, this.picker.format);
     this.hostRef.nativeElement.value = stringRepresentation;
   }
 
@@ -159,8 +157,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   protected parseInputValue(value): D | null {
-    if (this.transformer.isValid(value, NB_DEFAULT_FORMAT)) {
-      return this.transformer.parse(value, NB_DEFAULT_FORMAT);
+    if (this.transformer.isValid(value, this.picker.format)) {
+      return this.transformer.parse(value, this.picker.format);
     }
 
     return null;

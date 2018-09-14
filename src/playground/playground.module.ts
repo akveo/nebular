@@ -268,7 +268,7 @@ export const NB_MODULES = [
   NbTooltipModule,
   NbDatepickerModule,
   // NbDateFnsDateModule,
-  // NbMomentDateModule,
+  NbMomentDateModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -451,11 +451,11 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbTooltipColorsComponent,
 ];
 
-// import localeJa from '@angular/common/locales/ja';
-// import localeDe from '@angular/common/locales/de'
-//
-// registerLocaleData(localeDe);
-// registerLocaleData(localeJa);
+import localeJa from '@angular/common/locales/ja';
+import localeDe from '@angular/common/locales/de'
+
+registerLocaleData(localeDe);
+registerLocaleData(localeJa);
 
 @NgModule({
   imports: [
@@ -480,7 +480,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbBackdropClickDialogComponent,
   ],
   providers: [
-    // { provide: LOCALE_ID, useValue: 'ar-BH' },
+    { provide: LOCALE_ID, useValue: 'ja' },
   ],
 })
 export class NbPlaygroundModule {

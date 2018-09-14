@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ComponentRef, ElementRef, Inject, OnDestroy } from '@angular/core';
+import { Component, ComponentRef, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
 import { Type } from '@angular/core/src/type';
 import { takeWhile } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
@@ -29,6 +29,8 @@ import { NbCalendarComponent } from '../calendar/calendar.component';
 
 
 export abstract class NbDatepicker<T> {
+  @Input() format: string;
+
   abstract set value(value: T);
 
   abstract get value(): T;

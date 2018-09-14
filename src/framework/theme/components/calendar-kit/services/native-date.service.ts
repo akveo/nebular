@@ -23,9 +23,16 @@ import { NbDateService } from './date.service';
  * */
 @Injectable()
 export class NbNativeDateService extends NbDateService<Date> {
-  constructor(@Inject(LOCALE_ID) locale: string, protected datePipe: DatePipe) {
+  protected datePipe: DatePipe;
+
+  constructor(@Inject(LOCALE_ID) locale: string) {
     super();
     this.setLocale(locale);
+  }
+
+  setLocale(locale: string) {
+    super.setLocale(locale);
+    this.datePipe = new DatePipe(locale);
   }
 
   isValidDateString(date: string, format: string): boolean {
@@ -73,8 +80,8 @@ export class NbNativeDateService extends NbDateService<Date> {
     return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Short);
   }
 
-  format(date: Date): string {
-    return this.datePipe.transform(date);
+  format(date: Date, format: string): string {
+    return this.datePipe.transform(date, format);
   }
 
   /**

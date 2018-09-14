@@ -18,8 +18,9 @@ type Moment = moment.Moment;
 export class NbMomentDateService extends NbDateService<Moment> {
   protected localeData: {
     firstDayOfWeek: number,
-    months: { [key: string]: string[] };
-    days: { [key: string]: string[] };
+    defaultFormat: string,
+    months: { [key: string]: string[] },
+    days: { [key: string]: string[] },
   };
 
   constructor(@Inject(LOCALE_ID) locale: string) {
@@ -27,9 +28,9 @@ export class NbMomentDateService extends NbDateService<Moment> {
     this.setLocale(locale);
   }
 
-  setLocale(locale: any) {
+  setLocale(locale: string) {
     super.setLocale(locale);
-    this.setMomentLocaleData();
+    this.setMomentLocaleData(locale);
   }
 
   addDay(date: Moment, days: number): Moment {
@@ -57,7 +58,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   format(date: Moment, format: string): string {
-    return date.format(format);
+    return date.format(format || this.localeData.defaultFormat);
   }
 
   getDate(date: Moment): number {
@@ -137,11 +138,12 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return moment();
   }
 
-  protected setMomentLocaleData() {
-    const momentLocaleData = moment.localeData(this.locale);
+  protected setMomentLocaleData(locale: string) {
+    const momentLocaleData = moment.localeData(locale);
 
     this.localeData = {
       firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
+      defaultFormat: momentLocaleData.longDateFormat('L'),
       months: {
         [TranslationWidth.Abbreviated]: momentLocaleData.monthsShort(),
         [TranslationWidth.Wide]: momentLocaleData.months(),
