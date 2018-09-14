@@ -80,5 +80,5 @@ export class NbWindowConfig {
 }
 
 export const NB_WINDOW_CONTENT = new InjectionToken<TemplateRef<any> | NbComponentType>('NB_WINDOW_CONTENT');
-export const NB_DEFAULT_WINDOWS_CONFIG = new InjectionToken<NbWindowConfig>('NB_DEFAULT_WINDOWS_CONFIG');
+export const NB_WINDOW_CONFIG = new InjectionToken<NbWindowConfig>('NB_WINDOW_CONFIG');
 export const NB_WINDOW_CONTEXT = new InjectionToken<Object>('NB_WINDOW_CONTEXT');

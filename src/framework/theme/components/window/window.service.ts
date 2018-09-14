@@ -6,7 +6,7 @@ import {
   NbBlockScrollStrategy, NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
 } from '../cdk/overlay';
 import {
-  NB_DEFAULT_WINDOWS_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
+  NB_WINDOW_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
 } from './window-types';
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
@@ -69,7 +69,7 @@ export class NbWindowService {
     protected overlayService: NbOverlayService,
     protected overlayPositionBuilder: NbOverlayPositionBuilder,
     protected blockScrollStrategy: NbBlockScrollStrategy,
-    @Inject(NB_DEFAULT_WINDOWS_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
+    @Inject(NB_WINDOW_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
   ) {}
 
   /**

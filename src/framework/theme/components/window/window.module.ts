@@ -6,7 +6,7 @@ import { NbCardModule } from '../card/card.module';
 import { NbWindowService } from './window.service';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
-import { NB_DEFAULT_WINDOWS_CONFIG, NbWindowConfig } from './window-types';
+import { NB_WINDOW_CONFIG, NbWindowConfig } from './window-types';
 import {
   NbWindowCloseIconComponent, NbWindowCollapseIconComponent, NbWindowExpandIconComponent, NbWindowMinimizeIconComponent,
 } from './window-icon.component';
@@ -29,7 +29,7 @@ export class NbWindowModule {
       ngModule: NbWindowModule,
       providers: [
         NbWindowService,
-        { provide: NB_DEFAULT_WINDOWS_CONFIG, useValue: new NbWindowConfig(defaultConfig) },
+        { provide: NB_WINDOW_CONFIG, useValue: defaultConfig },
       ],
     };
   }
