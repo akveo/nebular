@@ -7,14 +7,14 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { NB_DATE_TRANSFORMER, NbDatepickerDirective } from './datepicker.directive';
+import { NB_DATE_ADAPTER, NbDatepickerDirective } from './datepicker.directive';
 import { NbOverlayModule } from '../cdk';
 import { NbCalendarModule } from '../calendar/calendar.module';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';
 import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
 import { NbCalendarRangeComponent } from '../calendar/calendar-range.component';
-import { NbDateTransformerService, NbRangeTransformerService } from './datepicker-transformer';
+import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapter';
 
 
 @NgModule({
@@ -25,14 +25,14 @@ import { NbDateTransformerService, NbRangeTransformerService } from './datepicke
   providers: [
     DatePipe,
     {
-      provide: NB_DATE_TRANSFORMER,
+      provide: NB_DATE_ADAPTER,
       multi: true,
-      useClass: NbDateTransformerService,
+      useClass: NbDateAdapterService,
     },
     {
-      provide: NB_DATE_TRANSFORMER,
+      provide: NB_DATE_ADAPTER,
       multi: true,
-      useClass: NbRangeTransformerService,
+      useClass: NbRangeAdapterService,
     },
   ],
 })

@@ -8,12 +8,12 @@ import { Injectable, Type } from '@angular/core';
 
 import { NbCalendarRange } from '../calendar/calendar-range.component';
 import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
-import { NbDateTransformer } from './datepicker.directive';
+import { NbDatepickerAdapter } from './datepicker.directive';
 import { NbDateService } from '../calendar-kit';
 
 
 @Injectable()
-export class NbDateTransformerService<D> extends NbDateTransformer<D> {
+export class NbDateAdapterService<D> extends NbDatepickerAdapter<D> {
   picker: Type<NbDatepickerComponent<D>> = NbDatepickerComponent;
 
   constructor(protected dateService: NbDateService<D>) {
@@ -34,7 +34,7 @@ export class NbDateTransformerService<D> extends NbDateTransformer<D> {
 }
 
 @Injectable()
-export class NbRangeTransformerService<D> extends NbDateTransformer<NbCalendarRange<D>> {
+export class NbRangeAdapterService<D> extends NbDatepickerAdapter<NbCalendarRange<D>> {
   picker: Type<NbRangepickerComponent<D>> = NbRangepickerComponent;
 
   constructor(protected dateService: NbDateService<D>) {

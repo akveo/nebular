@@ -21,7 +21,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDatepicker } from './datepicker.component';
 
 
-export abstract class NbDateTransformer<D> {
+export abstract class NbDatepickerAdapter<D> {
   abstract picker: Type<any>;
 
   abstract parse(value: string, format: string): D;
@@ -31,11 +31,15 @@ export abstract class NbDateTransformer<D> {
   abstract isValid(value: string, format: string): boolean;
 }
 
-export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('date transformer');
+export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('date datepickerAdapter');
 
 
+/**
+ * The `NbDatepickerDirective` binds html input element and `nb-datepicker`/`nb-rangepicker` together.
+ * */
 @Directive({
-  selector: 'input[nbDatepicker]', providers: [
+  selector: 'input[nbDatepicker]',
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NbDatepickerDirective),
@@ -49,37 +53,57 @@ export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('d
   ],
 })
 export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
-
-  protected transformer: NbDateTransformer<D>;
-  protected picker: NbDatepicker<D>;
-  protected alive: boolean = true;
-  protected onChange: (D) => void = () => {
-  };
-
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<D>[],
-              protected hostRef: ElementRef) {
-    this.subscribeOnInputChange();
-  }
-
-  get input(): HTMLInputElement {
-    return this.hostRef.nativeElement;
-  }
-
-  get inputValue(): string {
-    return this.input.value;
-  }
-
+  /**
+   * Provides datepicker component.
+   * */
   @Input('nbDatepicker')
   set setPicker(picker: NbDatepicker<D>) {
     this.picker = picker;
     this.setupPicker();
   }
 
+  /**
+   * Datepicker adapter.
+   * */
+  protected datepickerAdapter: NbDatepickerAdapter<D>;
+
+  /**
+   * Datepicker instance.
+   * */
+  protected picker: NbDatepicker<D>;
+
+  protected alive: boolean = true;
+
+  protected onChange: (D) => void = () => {
+  };
+
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              @Inject(NB_DATE_ADAPTER) protected datepickerAdapters: NbDatepickerAdapter<D>[],
+              protected hostRef: ElementRef) {
+    this.subscribeOnInputChange();
+  }
+
+  /**
+   * Returns html input element.
+   * */
+  get input(): HTMLInputElement {
+    return this.hostRef.nativeElement;
+  }
+
+  /**
+   * Returns host input value.
+   * */
+  get inputValue(): string {
+    return this.input.value;
+  }
+
   ngOnDestroy() {
     this.alive = false;
   }
 
+  /**
+   * Writes value in picker and html input element.
+   * */
   writeValue(value: D) {
     this.writePicker(value);
     this.writeInput(value);
@@ -96,24 +120,30 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    const isValid = this.transformer.isValid(this.inputValue, this.picker.format);
+    const isValid = this.datepickerAdapter.isValid(this.inputValue, this.picker.format);
     return isValid ? null : { nbDatepickerInvalid: true };
   }
 
-  protected chooseTransformer() {
-    this.transformer = this.transformers.find(({ picker }) => this.picker instanceof picker);
+  /**
+   * Chooses datepicker adapter based on passed picker component.
+   * */
+  protected chooseDatepickerAdapter() {
+    this.datepickerAdapter = this.datepickerAdapters.find(({ picker }) => this.picker instanceof picker);
 
-    if (this.noTransformerProvided()) {
-      throw new Error('No transformer provided for picker');
+    if (this.noDatepickerAdapterProvided()) {
+      throw new Error('No datepickerAdapter provided for picker');
     }
   }
 
+  /**
+   * Attaches picker to the host input element and subscribes on value changes.
+   * */
   protected setupPicker() {
-    this.chooseTransformer();
+    this.chooseDatepickerAdapter();
     this.picker.attach(this.hostRef);
 
     if (this.hostRef.nativeElement.value) {
-      this.picker.value = this.transformer.parse(this.hostRef.nativeElement.value, this.picker.format);
+      this.picker.value = this.datepickerAdapter.parse(this.hostRef.nativeElement.value, this.picker.format);
     }
 
     this.picker.valueChange
@@ -130,12 +160,15 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   protected writeInput(value: D) {
-    const stringRepresentation = this.transformer.format(value, this.picker.format);
+    const stringRepresentation = this.datepickerAdapter.format(value, this.picker.format);
     this.hostRef.nativeElement.value = stringRepresentation;
   }
 
-  protected noTransformerProvided() {
-    return !this.transformer || !(this.transformer instanceof NbDateTransformer);
+  /**
+   * Validates if no datepicker adapter provided.
+   * */
+  protected noDatepickerAdapterProvided(): boolean {
+    return !this.datepickerAdapter || !(this.datepickerAdapter instanceof NbDatepickerAdapter);
   }
 
   protected subscribeOnInputChange() {
@@ -147,6 +180,9 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
       .subscribe((value: string) => this.handleInputChange(value));
   }
 
+  /**
+   * Parses input value and write if it isn't null.
+   * */
   protected handleInputChange(value: string) {
     const date = this.parseInputValue(value);
 
@@ -157,8 +193,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   protected parseInputValue(value): D | null {
-    if (this.transformer.isValid(value, this.picker.format)) {
-      return this.transformer.parse(value, this.picker.format);
+    if (this.datepickerAdapter.isValid(value, this.picker.format)) {
+      return this.datepickerAdapter.parse(value, this.picker.format);
     }
 
     return null;
