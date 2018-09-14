@@ -41,6 +41,7 @@ import {
   NbDialogModule,
   NbDatepickerModule,
 } from '@nebular/theme';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -265,6 +266,7 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbDatepickerModule,
+  NbDateFnsDateModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [

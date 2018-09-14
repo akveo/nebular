@@ -88,7 +88,7 @@ export abstract class NbDateService<D> {
   /**
    * Returns localized month name by month index and style.
    * */
-  abstract getMonthNameByIndex(index: number, style?: TranslationWidth): string;
+  abstract getMonthNameByIndex(month: number, style?: TranslationWidth): string;
 
   /**
    * Returns localized days names.
