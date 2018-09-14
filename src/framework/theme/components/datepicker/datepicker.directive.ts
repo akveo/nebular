@@ -21,7 +21,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDatepicker } from './datepicker.component';
 
 
-const NB_DEFAULT_FORMAT = 'MM/dd/yyyy';
+const NB_DEFAULT_FORMAT = 'DD.MM.YYYY';
 
 export abstract class NbDateTransformer<D> {
   abstract picker: Type<any>;
@@ -151,8 +151,11 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
 
   protected handleInputChange(value: string) {
     const date = this.parseInputValue(value);
-    this.onChange(date);
-    this.writePicker(date);
+
+    if (date) {
+      this.onChange(date);
+      this.writePicker(date);
+    }
   }
 
   protected parseInputValue(value): D | null {
