@@ -5,9 +5,9 @@
  */
 
 import {
-  Component,
-  Input,
-  HostBinding,
+	Component,
+	Input,
+	HostBinding,
 } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
@@ -46,41 +46,41 @@ export class NbActionComponent {
    */
 	@Input() routerLink: string = '#';
 
-  /**
-   * Icon class to display
-   * @type string
-   */
+	/**
+	 * Icon class to display
+	 * @type string
+	 */
 	@Input() icon: string;
 
-  /**
-   * Disables the item (changes item opacity and mouse cursor)
-   * @type boolean
-   */
+	/**
+	 * Disables the item (changes item opacity and mouse cursor)
+	 * @type boolean
+	 */
 	@Input()
 	set disabled(val: boolean) {
 		this.disabledValue = convertToBoolProperty(val);
 	}
 
-  /**
-   * Badge text to display
-   * @type string
-   */
+	/**
+	 * Badge text to display
+	 * @type string
+	 */
 	@Input() badgeText: string;
 
-  /**
-   * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
-   * @param {string} val
-   */
+	/**
+	 * Badge status (adds specific styles):
+	 * 'primary', 'info', 'success', 'warning', 'danger'
+	 * @param {string} val
+	 */
 	@Input() badgeStatus: string;
 
-  /**
-   * Badge position.
-   * Can be set to any class or to one of predefined positions:
-   * 'top left', 'top right', 'bottom left', 'bottom right',
-   * 'top start', 'top end', 'bottom start', 'bottom end'
-   * @type string
-   */
+	/**
+	 * Badge position.
+	 * Can be set to any class or to one of predefined positions:
+	 * 'top left', 'top right', 'bottom left', 'bottom right',
+	 * 'top start', 'top end', 'bottom start', 'bottom end'
+	 * @type string
+	 */
 	@Input() badgePosition: string;
 
 }
@@ -158,28 +158,28 @@ export class NbActionsComponent {
 	@HostBinding('class.full-width')
 	fullWidthValue: boolean = false;
 
-  /**
-   * Size of the component, small|medium|large
-   * @type string
-   */
+	/**
+	 * Size of the component, small|medium|large
+	 * @type string
+	 */
 	@Input()
 	set size(val: string) {
 		this.sizeValue = val;
 	}
 
-  /**
-   * Makes colors inverse based on current theme
-   * @type boolean
-   */
+	/**
+	 * Makes colors inverse based on current theme
+	 * @type boolean
+	 */
 	@Input()
 	set inverse(val: boolean) {
 		this.inverseValue = convertToBoolProperty(val);
 	}
 
-  /**
-   * Component will fill full width of the container
-   * @type boolean
-   */
+	/**
+	 * Component will fill full width of the container
+	 * @type boolean
+	 */
 	@Input()
 	set fullWidth(val: boolean) {
 		this.fullWidthValue = convertToBoolProperty(val);
