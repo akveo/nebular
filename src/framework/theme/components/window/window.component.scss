@@ -40,6 +40,11 @@
   transform: translate(-50%, -50%);
 }
 
+:host(.maximized) nb-card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 :host(.minimized) nb-card {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
