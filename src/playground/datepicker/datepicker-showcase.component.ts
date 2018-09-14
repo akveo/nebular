@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbDateService } from '@nebular/theme';
 
 
 @Component({
@@ -24,6 +25,9 @@ import { Component } from '@angular/core';
 
     <h1>{{ date | date }}</h1>
 
+    <button nbButton hero (click)="english()">Use English Locale</button>
+    <button nbButton hero (click)="german()">Use German Locale</button>
+    <button nbButton hero (click)="japanese()">Use Japanese Locale</button>
   `,
   styles: [`
     :host {
@@ -36,4 +40,19 @@ import { Component } from '@angular/core';
 export class NbDatepickerShowcaseComponent {
   range;
   date;
+
+  constructor(protected dateService: NbDateService<Date>) {
+  }
+
+  english() {
+    this.dateService.setLocale('en');
+  }
+
+  german() {
+    this.dateService.setLocale('de');
+  }
+
+  japanese() {
+    this.dateService.setLocale('ja');
+  }
 }

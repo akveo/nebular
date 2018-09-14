@@ -28,8 +28,8 @@ export class NbNativeDateService extends NbDateService<Date> {
     this.setLocale(locale);
   }
 
-  isValidDateString(date: string): boolean {
-    return !isNaN(this.parse(date).getTime());
+  isValidDateString(date: string, format: string): boolean {
+    return !isNaN(this.parse(date, format).getTime());
   }
 
   today(): Date {
@@ -80,7 +80,7 @@ export class NbNativeDateService extends NbDateService<Date> {
   /**
    * We haven't got capability to parse date using formatting without third party libraries.
    * */
-  parse(date: string): Date {
+  parse(date: string, format: string): Date {
     return new Date(Date.parse(date));
   }
 

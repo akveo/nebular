@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
@@ -42,6 +42,7 @@ import {
   NbDatepickerModule,
 } from '@nebular/theme';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { NbMomentDateModule } from '@nebular/moment';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -266,7 +267,8 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbDatepickerModule,
-  NbDateFnsDateModule,
+  // NbDateFnsDateModule,
+  // NbMomentDateModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -449,6 +451,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbTooltipColorsComponent,
 ];
 
+// import localeJa from '@angular/common/locales/ja';
+// import localeDe from '@angular/common/locales/de'
+//
+// registerLocaleData(localeDe);
+// registerLocaleData(localeJa);
+
 @NgModule({
   imports: [
     CommonModule,
@@ -470,6 +478,9 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
+  ],
+  providers: [
+    // { provide: LOCALE_ID, useValue: 'ar-BH' },
   ],
 })
 export class NbPlaygroundModule {
