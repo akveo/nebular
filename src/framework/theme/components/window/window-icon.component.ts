@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'nb-window-collapse-icon',
@@ -12,11 +12,10 @@ import { Component } from '@angular/core';
     </svg>
   `,
   styleUrls: ['./window-icon.component.scss'],
-  host: {
-    'aria-label': 'collapse',
-  },
 })
-export class NbWindowCollapseIconComponent {}
+export class NbWindowCollapseIconComponent {
+  @HostBinding('attr.aria-label') label = 'collapse';
+}
 
 @Component({
   selector: 'nb-window-expand-icon',
@@ -30,11 +29,10 @@ export class NbWindowCollapseIconComponent {}
     </svg>
   `,
   styleUrls: ['./window-icon.component.scss'],
-  host: {
-    'aria-label': 'expand',
-  },
 })
-export class NbWindowExpandIconComponent {}
+export class NbWindowExpandIconComponent {
+  @HostBinding('attr.aria-label') label = 'expand';
+}
 
 @Component({
   selector: 'nb-window-close-icon',
@@ -63,11 +61,10 @@ export class NbWindowExpandIconComponent {}
     </svg>
   `,
   styleUrls: ['./window-icon.component.scss'],
-  host: {
-    'aria-label': 'close',
-  },
 })
-export class NbWindowCloseIconComponent {}
+export class NbWindowCloseIconComponent {
+  @HostBinding('attr.aria-label') label = 'close';
+}
 
 @Component({
   selector: 'nb-window-minimize-icon',
@@ -79,8 +76,7 @@ export class NbWindowCloseIconComponent {}
     </svg>
   `,
   styleUrls: ['./window-icon.component.scss'],
-  host: {
-    'aria-label': 'minimize',
-  },
 })
-export class NbWindowMinimizeIconComponent {}
+export class NbWindowMinimizeIconComponent {
+  @HostBinding('attr.aria-label') label = 'minimize';
+}
