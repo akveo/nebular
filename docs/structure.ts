@@ -342,7 +342,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Window',
-        icon: 'window.svg',
+        icon: 'collapsable.svg',
         source: [
           'NbWindowService',
           'NbWindowRef',
