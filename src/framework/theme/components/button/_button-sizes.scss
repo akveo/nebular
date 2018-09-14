@@ -4,6 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+  border-radius: $border-radius;
+}
+
 @mixin btn-large() {
   @include button-size(nb-theme(btn-padding-y-lg),
     nb-theme(btn-padding-x-lg),
