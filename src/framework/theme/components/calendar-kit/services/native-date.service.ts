@@ -25,7 +25,7 @@ import { NbDateService } from './date.service';
 export class NbNativeDateService extends NbDateService<Date> {
   constructor(@Inject(LOCALE_ID) locale: string, protected datePipe: DatePipe) {
     super();
-    this.locale = locale;
+    this.setLocale(locale);
   }
 
   isValidDateString(date: string): boolean {
@@ -70,7 +70,7 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   getDayOfWeekNames(): string[] {
-    return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Narrow);
+    return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Short);
   }
 
   format(date: Date): string {

@@ -12,6 +12,10 @@ export abstract class NbDateService<D> {
 
   protected locale: string;
 
+  setLocale(locale: any) {
+    this.locale = locale;
+  }
+
   /**
    * Checks if the date is between the start date and the end date.
    * */
@@ -89,7 +93,7 @@ export abstract class NbDateService<D> {
   /**
    * Returns localized days names.
    * */
-  abstract getDayOfWeekNames(): string[];
+  abstract getDayOfWeekNames(style?: TranslationWidth): string[];
 
   /**
    * Parses the date string according to the passed format.
@@ -162,15 +166,15 @@ export abstract class NbDateService<D> {
   /**
    * Returns date with added number of days.
    * */
-  abstract addDay(date: D, num: number): D;
+  abstract addDay(date: D, days: number): D;
 
   /**
    * Returns date with added number of months.
    * */
-  abstract addMonth(date: D, num: number): D;
+  abstract addMonth(date: D, months: number): D;
 
   /**
    * Returns date with added number of years.
    * */
-  abstract addYear(date: D, num: number): D;
+  abstract addYear(date: D, years: number): D;
 }
