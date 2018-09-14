@@ -1,9 +1,10 @@
+# Nebular - Components, Auth, Security.
 [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]()
 [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular)
 [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme)
 [![Dependency Status](https://david-dm.org/akveo/ngx-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
 
-<img src="https://i.imgur.com/sPCAIQi.png">
+<img src="https://i.imgur.com/Fao7qaF.png">
 
 
 Nebular is a great toolkit if you build Rich UI web-application based on Angular, and want to bootstrap your development using essential features out of the box. 
