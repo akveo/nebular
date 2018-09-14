@@ -11,19 +11,19 @@ import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window.opt
 export class NbWindowRef {
   componentRef: ComponentRef<NbWindowComponent>;
 
-  protected _prevState: NbWindowState;
-  protected _state: NbWindowState;
+  protected prevStateValue: NbWindowState;
+  protected stateValue: NbWindowState;
   /**
    * Current window state.
    */
   get state() {
-    return this._state;
+    return this.stateValue;
   }
   set state(newState: NbWindowState) {
-    if (newState && this._state !== newState) {
-      this._prevState = this.state;
-      this._state = newState;
-      this.stateChange$.next({ oldState: this._prevState, newState });
+    if (newState && this.stateValue !== newState) {
+      this.prevStateValue = this.state;
+      this.stateValue = newState;
+      this.stateChange$.next({ oldState: this.prevStateValue, newState });
     }
   }
 
@@ -70,7 +70,7 @@ export class NbWindowRef {
   }
 
   toPreviousState() {
-    this.state = this._prevState;
+    this.state = this.prevStateValue;
   }
 
   /**
