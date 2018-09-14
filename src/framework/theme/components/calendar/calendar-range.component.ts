@@ -37,6 +37,7 @@ export interface NbCalendarRange<D> {
       [dayCellComponent]="dayCellComponent"
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
+      [visibleDate]="visibleDate"
       [size]="size"
     ></nb-base-calendar>
   `,
@@ -100,6 +101,8 @@ export class NbCalendarRangeComponent<D> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
+  @Input() visibleDate: D;
 
   /**
    * Range which will be rendered as selected.

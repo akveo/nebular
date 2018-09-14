@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input } from '@angular/core';
+import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -14,9 +14,11 @@ import {
   Validator,
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
+import { fromEvent } from 'rxjs';
+import { map, takeWhile } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbDatepicker } from './datepicker';
+import { NbDatepicker } from './datepicker.component';
 
 
 const NB_DEFAULT_FORMAT = 'MM/dd/yyyy';
@@ -48,20 +50,26 @@ export const NB_DATE_TRANSFORMER = new InjectionToken<NbDateTransformer<any>>('d
     },
   ],
 })
-export class NbDatepickerDirective<D> implements ControlValueAccessor, Validator {
+export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
 
   protected transformer: NbDateTransformer<D>;
   protected picker: NbDatepicker<D>;
-  protected onChange: Function = () => {
+  protected alive: boolean = true;
+  protected onChange: (D) => void = () => {
   };
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               @Inject(NB_DATE_TRANSFORMER) protected transformers: NbDateTransformer<D>[],
               protected hostRef: ElementRef) {
+    this.subscribeOnInputChange();
+  }
+
+  get input(): HTMLInputElement {
+    return this.hostRef.nativeElement;
   }
 
   get inputValue(): string {
-    return this.hostRef.nativeElement.value;
+    return this.input.value;
   }
 
   @Input('nbDatepicker')
@@ -70,9 +78,13 @@ export class NbDatepickerDirective<D> implements ControlValueAccessor, Validator
     this.setupPicker();
   }
 
+  ngOnDestroy() {
+    this.alive = false;
+  }
+
   writeValue(value: D) {
-    const stringRepresentation = this.transformer.format(value, NB_DEFAULT_FORMAT);
-    this.hostRef.nativeElement.value = stringRepresentation;
+    this.writePicker(value);
+    this.writeInput(value);
   }
 
   registerOnChange(fn: any): void {
@@ -106,14 +118,48 @@ export class NbDatepickerDirective<D> implements ControlValueAccessor, Validator
       this.picker.value = this.transformer.parse(this.hostRef.nativeElement.value, NB_DEFAULT_FORMAT);
     }
 
-    this.picker.valueChange.subscribe((value: D) => {
-      this.picker.value = value;
-      this.writeValue(value);
-      this.onChange(value);
-    });
+    this.picker.valueChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((value: D) => {
+        this.writePicker(value);
+        this.writeInput(value);
+        this.onChange(value);
+      });
+  }
+
+  protected writePicker(value: D) {
+    this.picker.value = value;
+  }
+
+  protected writeInput(value: D) {
+    const stringRepresentation = this.transformer.format(value, NB_DEFAULT_FORMAT);
+    this.hostRef.nativeElement.value = stringRepresentation;
   }
 
   protected noTransformerProvided() {
     return !this.transformer || !(this.transformer instanceof NbDateTransformer);
+  }
+
+  protected subscribeOnInputChange() {
+    fromEvent(this.input, 'input')
+      .pipe(
+        map(() => this.inputValue),
+        takeWhile(() => this.alive),
+      )
+      .subscribe((value: string) => this.handleInputChange(value));
+  }
+
+  protected handleInputChange(value: string) {
+    const date = this.parseInputValue(value);
+    this.onChange(date);
+    this.writePicker(date);
+  }
+
+  protected parseInputValue(value): D | null {
+    if (this.transformer.isValid(value, NB_DEFAULT_FORMAT)) {
+      return this.transformer.parse(value, NB_DEFAULT_FORMAT);
+    }
+
+    return null;
   }
 }

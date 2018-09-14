@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, HostBinding, Input, Output, Type } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
 import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
 
@@ -18,7 +18,7 @@ import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode } fro
   selector: 'nb-base-calendar',
   templateUrl: './base-calendar.component.html',
 })
-export class NbBaseCalendarComponent<D, T> {
+export class NbBaseCalendarComponent<D, T> implements OnInit {
 
   /**
    * Defines if we should render previous and next months
@@ -67,6 +67,8 @@ export class NbBaseCalendarComponent<D, T> {
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
+  @Input() visibleDate: D;
+
   /**
    * Value which will be rendered as selected.
    * */
@@ -78,7 +80,12 @@ export class NbBaseCalendarComponent<D, T> {
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
   constructor(protected dateService: NbDateService<D>) {
-    this.visibleDate = this.dateService.today();
+  }
+
+  ngOnInit() {
+    if (!this.visibleDate) {
+      this.visibleDate = this.dateService.today();
+    }
   }
 
   @HostBinding('class.medium')
@@ -92,8 +99,6 @@ export class NbBaseCalendarComponent<D, T> {
   }
 
   ViewMode = NbCalendarViewMode;
-
-  visibleDate: D;
 
   setViewMode(viewMode: NbCalendarViewMode) {
     this.activeViewMode = viewMode;

@@ -103,6 +103,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
       [size]="size"
+      [visibleDate]="visibleDate"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -155,6 +156,8 @@ export class NbCalendarComponent<D> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
+  @Input() visibleDate: D;
 
   /**
    * Date which will be rendered as selected.

@@ -35,5 +35,5 @@ import { Component } from '@angular/core';
 })
 export class NbDatepickerShowcaseComponent {
   range;
-  date = new Date();
+  date;
 }

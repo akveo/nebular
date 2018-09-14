@@ -5,9 +5,10 @@
  */
 
 import { Component, ComponentRef, ElementRef, Inject, OnDestroy } from '@angular/core';
+import { Type } from '@angular/core/src/type';
 import { takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
-import { NbDatepicker } from './datepicker';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -25,9 +26,17 @@ import { NbDatepickerContainerComponent } from './datepicker-container.component
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
-import { Observable, Subject } from 'rxjs';
-import { Type } from '@angular/core/src/type';
 
+
+export abstract class NbDatepicker<T> {
+  abstract set value(value: T);
+
+  abstract get value(): T;
+
+  abstract get valueChange(): Observable<T>;
+
+  abstract attach(hostRef: ElementRef);
+}
 
 export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDestroy {
   protected abstract pickerClass: Type<P>;
@@ -46,20 +55,20 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     super();
   }
 
+  get picker(): P {
+    return this.pickerRef && this.pickerRef.instance;
+  }
+
+  get valueChange(): Observable<T> {
+    return this.onChange$.asObservable();
+  }
+
   protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnDestroy() {
     this.alive = false;
     this.hide();
     this.ref.dispose();
-  }
-
-  get picker(): P {
-    return this.pickerRef.instance;
-  }
-
-  get valueChange(): Observable<T> {
-    return this.onChange$.asObservable();
   }
 
   attach(hostRef: ElementRef) {
@@ -78,11 +87,15 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent));
     this.instantiatePicker();
     this.subscribeOnValueChange();
+    this.writeQueue();
   }
 
   hide() {
+    this.queue = this.value;
     this.ref.detach();
     this.container = null;
+    this.pickerRef.destroy();
+    this.pickerRef = null;
   }
 
   toggle() {
@@ -92,6 +105,8 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
       this.show();
     }
   }
+
+  protected abstract writeQueue();
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
@@ -145,7 +160,19 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, NbCalendarComponen
   }
 
   set value(date: D) {
-    this.picker.date = date;
+    if (!this.picker) {
+      this.queue = date;
+      return;
+    }
+
+    if (date) {
+      this.picker.visibleDate = date;
+      this.picker.date = date;
+    }
+  }
+
+  protected writeQueue() {
+    this.value = this.queue;
   }
 
   protected get pickerValueChange(): Observable<D> {
@@ -165,7 +192,19 @@ export class NbRangepickerComponent<D> extends NbBasePicker<NbCalendarRange<D>, 
   }
 
   set value(range: NbCalendarRange<D>) {
-    this.picker.range = range;
+    if (!this.picker) {
+      this.queue = range;
+      return;
+    }
+
+    if (range) {
+      this.picker.visibleDate = range && range.start;
+      this.picker.range = range;
+    }
+  }
+
+  protected writeQueue() {
+    this.value = this.queue;
   }
 
   protected get pickerValueChange(): Observable<NbCalendarRange<D>> {
