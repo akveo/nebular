@@ -3,8 +3,9 @@ import {
 } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import {
-  NbBlockScrollStrategy, NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
+  NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
 } from '../cdk/overlay';
+import { NbBlockScrollStrategyAdapter } from '../cdk/adapter/block-scroll-strategy-adapter';
 import {
   NB_WINDOW_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
 } from './window.options';
@@ -68,7 +69,7 @@ export class NbWindowService {
     protected componentFactoryResolver: ComponentFactoryResolver,
     protected overlayService: NbOverlayService,
     protected overlayPositionBuilder: NbOverlayPositionBuilder,
-    protected blockScrollStrategy: NbBlockScrollStrategy,
+    protected blockScrollStrategy: NbBlockScrollStrategyAdapter,
     @Inject(NB_WINDOW_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
   ) {}
 
