@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { NbSharedModule } from '../shared/shared.module';
 
@@ -20,7 +21,8 @@ const NB_ACTIONS_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
-    NbBadgeModule,
+		NbBadgeModule,
+		RouterModule
   ],
   declarations: [
     ...NB_ACTIONS_COMPONENTS,

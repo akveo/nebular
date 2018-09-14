@@ -16,9 +16,12 @@ import { convertToBoolProperty } from '../helpers';
  * Action item, display a link with an icon, or any other content provided instead.
  */
 @Component({
-  selector: 'nb-action',
-  template: `
-    <a class="icon-container" href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
+	selector: 'nb-action',
+	template: `
+		<a class="icon-container" href="{{ href }}" *ngIf="icon && routerLink == '#'; else showContent" (click)="$event.preventDefault()">
+			<i class="control-icon {{ icon }}"></i>
+		</a>
+    <a class="icon-container" routerLink="{{ routerLink }}" *ngIf="icon && routerLink != '#'; else showContent" (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
     <ng-template #showContent>
@@ -29,35 +32,47 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbActionComponent {
 
-  @HostBinding('class.disabled') disabledValue: boolean = false;
+	@HostBinding('class.disabled') disabledValue: boolean = false;
+
+	/**
+   * Html link
+   * @type string
+   */
+	@Input() href: string = '#';
+
+	/**
+   * Angular router link
+   * @type string
+   */
+	@Input() routerLink: string = '#';
 
   /**
    * Icon class to display
    * @type string
    */
-  @Input() icon: string;
+	@Input() icon: string;
 
   /**
    * Disables the item (changes item opacity and mouse cursor)
    * @type boolean
    */
-  @Input()
-  set disabled(val: boolean) {
-    this.disabledValue = convertToBoolProperty(val);
-  }
+	@Input()
+	set disabled(val: boolean) {
+		this.disabledValue = convertToBoolProperty(val);
+	}
 
   /**
    * Badge text to display
    * @type string
    */
-  @Input() badgeText: string;
+	@Input() badgeText: string;
 
   /**
    * Badge status (adds specific styles):
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: string;
+	@Input() badgeStatus: string;
 
   /**
    * Badge position.
@@ -66,7 +81,7 @@ export class NbActionComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() badgePosition: string;
+	@Input() badgePosition: string;
 
 }
 
@@ -109,64 +124,64 @@ export class NbActionComponent {
  * actions-size-large:
  */
 @Component({
-  selector: 'nb-actions',
-  styleUrls: ['./actions.component.scss'],
-  template: `
+	selector: 'nb-actions',
+	styleUrls: ['./actions.component.scss'],
+	template: `
     <ng-content select="nb-action"></ng-content>
   `,
 })
 export class NbActionsComponent {
 
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
+	static readonly SIZE_SMALL = 'small';
+	static readonly SIZE_MEDIUM = 'medium';
+	static readonly SIZE_LARGE = 'large';
 
-  private sizeValue: string;
+	private sizeValue: string;
 
-  @HostBinding('class.inverse') inverseValue: boolean;
+	@HostBinding('class.inverse') inverseValue: boolean;
 
-  @HostBinding('class.small')
-  get small() {
-    return this.sizeValue === NbActionsComponent.SIZE_SMALL;
-  }
+	@HostBinding('class.small')
+	get small() {
+		return this.sizeValue === NbActionsComponent.SIZE_SMALL;
+	}
 
-  @HostBinding('class.medium')
-  get medium() {
-    return this.sizeValue === NbActionsComponent.SIZE_MEDIUM;
-  }
+	@HostBinding('class.medium')
+	get medium() {
+		return this.sizeValue === NbActionsComponent.SIZE_MEDIUM;
+	}
 
-  @HostBinding('class.large')
-  get large() {
-    return this.sizeValue === NbActionsComponent.SIZE_LARGE;
-  }
+	@HostBinding('class.large')
+	get large() {
+		return this.sizeValue === NbActionsComponent.SIZE_LARGE;
+	}
 
-  @HostBinding('class.full-width')
-  fullWidthValue: boolean = false;
+	@HostBinding('class.full-width')
+	fullWidthValue: boolean = false;
 
   /**
    * Size of the component, small|medium|large
    * @type string
    */
-  @Input()
-  set size(val: string) {
-    this.sizeValue = val;
-  }
+	@Input()
+	set size(val: string) {
+		this.sizeValue = val;
+	}
 
   /**
    * Makes colors inverse based on current theme
    * @type boolean
    */
-  @Input()
-  set inverse(val: boolean) {
-    this.inverseValue = convertToBoolProperty(val);
-  }
+	@Input()
+	set inverse(val: boolean) {
+		this.inverseValue = convertToBoolProperty(val);
+	}
 
   /**
    * Component will fill full width of the container
    * @type boolean
    */
-  @Input()
-  set fullWidth(val: boolean) {
-    this.fullWidthValue = convertToBoolProperty(val);
-  }
+	@Input()
+	set fullWidth(val: boolean) {
+		this.fullWidthValue = convertToBoolProperty(val);
+	}
 }
