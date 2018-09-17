@@ -80,12 +80,13 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.querySelector('nb-card').classList).toContain('large-card');
   });
 
-  it('should set size if provided', () => {
-    const windowRef = windowService.open(NbTestWindowComponent, { size: NbWindowSize.SMALL });
+  it('should set class if provided', () => {
+    const windowClass = 'my-window-class';
+    const windowRef = windowService.open(NbTestWindowComponent, { windowClass });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
 
-    expect(windowElement.nativeElement.querySelector('nb-card').classList).toContain('small-card');
+    expect(windowElement.nativeElement.querySelector('nb-card').classList).toContain(windowClass);
   });
 
   it('should render with backdrop if hasBackdrop is true', () => {
