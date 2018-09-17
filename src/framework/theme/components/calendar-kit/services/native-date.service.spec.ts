@@ -7,18 +7,102 @@
 import { NbDateService } from './date.service';
 import { NbNativeDateService } from '@nebular/theme';
 import { TestBed } from '@angular/core/testing';
-import { DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 
 
-describe('native-date-service', () => {
+fdescribe('native-date-service', () => {
   let dateService: NbDateService<Date>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [DatePipe] });
-    const datePipe = TestBed.get(DatePipe);
-    const locale = TestBed.get(LOCALE_ID);
-    dateService = new NbNativeDateService(locale, datePipe);
+    TestBed.configureTestingModule({});
+    dateService = new NbNativeDateService(TestBed.get(LOCALE_ID));
+  });
+
+  it('should set locale to en', () => {
+    dateService.setLocale('en');
+    expect((<any>dateService).locale).toBe('en');
+  });
+
+  it('should set locale to jp', () => {
+    dateService.setLocale('jp');
+    expect((<any>dateService).locale).toBe('jp');
+  });
+
+  it('should validate as correct if date string is valid according to the format', () => {
+    const isValid = dateService.isValidDateString('04.23.2018', 'MM.DD.YYYY');
+    expect(isValid).toBeTruthy();
+  });
+
+  it('should validate as incorrect if date string is invalid according to the format', () => {
+    const isValid = dateService.isValidDateString('23.04.2018', 'MM.DD.YYYY');
+    expect(isValid).toBeFalsy();
+  });
+
+  it('should validate as incorrect if date string is completely incorrect', () => {
+    const isValid = dateService.isValidDateString('hello, it is a date string', 'MM.DD.YYYY');
+    expect(isValid).toBeFalsy();
+  });
+
+  it('should create today date', () => {
+    const today = dateService.today();
+    expect(dateService.isSameDay(today, new Date())).toBeTruthy();
+  });
+
+  it('should get date', () => {
+    const date = new Date(2018, 11, 15);
+    expect(dateService.getDate(date)).toBe(15);
+  });
+
+  it('should get month', () => {
+    const month = new Date(2018, 5, 15);
+    expect(dateService.getMonth(month)).toBe(5);
+  });
+
+  it('should get year', () => {
+    const year = new Date(2018, 5, 15);
+    expect(dateService.getYear(year)).toBe(2018);
+  });
+
+  it('should get day of week', () => {
+    const date = new Date(2018, 8, 17);
+    expect(dateService.getDayOfWeek(date)).toBe(1);
+  });
+
+  it('should get first day of week', () => {
+    expect(dateService.getFirstDayOfWeek()).toBe(0);
+  });
+
+  it('should get month name', () => {
+    const month = new Date(2018, 5, 15);
+    expect(dateService.getMonthName(month)).toBe('Jun');
+  });
+
+  it('should get month name by index', () => {
+    expect(dateService.getMonthNameByIndex(5)).toBe('Jun');
+  });
+
+  it('should get day of week names', () => {
+    expect(dateService.getDayOfWeekNames()).toEqual(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+  });
+
+  it('should format date according to the MM.DD.YYYY format', () => {
+    const date = new Date(2018, 5, 15);
+    expect(dateService.format(date, 'MM.dd.yyyy')).toBe('06.15.2018');
+  });
+
+  it('should parse date according to the format', () => {
+    const date = '06.15.2018';
+    expect(dateService.parse(date, 'MM.DD.YYYY')).toEqual(new Date(2018, 5, 15));
+  });
+
+  it('should get year end', () => {
+    const date = new Date(2018, 5, 15);
+    expect(dateService.getYearEnd(date)).toEqual(new Date(2018, 11, 31));
+  });
+
+  it('should get year start', () => {
+    const date = new Date(2018, 5, 15);
+    expect(dateService.getYearStart(date)).toEqual(new Date(2018, 0, 1));
   });
 
   it('should get number of days in month', () => {
@@ -62,7 +146,14 @@ describe('native-date-service', () => {
 
   it('should create date', () => {
     const date = dateService.createDate(2018, 6, 16);
-    expect(date.getTime()).toBe(new Date(2018, 6, 16).getTime());
+    expect(date).toEqual(new Date(2018, 6, 16));
+  });
+
+  it('should create date for two digit year', () => {
+    const date = dateService.createDate(12, 6, 16);
+    expect(dateService.getYear(date)).toBe(12);
+    expect(dateService.getMonth(date)).toBe(6);
+    expect(dateService.getDate(date)).toBe(16);
   });
 
   it('should clone', () => {

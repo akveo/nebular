@@ -70,7 +70,7 @@ export abstract class NbDateService<D> {
   abstract getYear(date: D): number;
 
   /**
-   * Gets the date of the month component of the given date.
+   * Returns day of the week of the given date.
    */
   abstract getDayOfWeek(date: D): number;
 
