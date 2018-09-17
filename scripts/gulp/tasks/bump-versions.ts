@@ -16,6 +16,8 @@ task('bump', () => {
     './src/framework/auth/package.json',
     './src/framework/security/package.json',
     './src/framework/bootstrap/package.json',
+    './src/framework/moment/package.json',
+    './src/framework/date-fns/package.json',
   ]);
 });
 
@@ -25,6 +27,8 @@ task('bump-theme', () => {
   return bumpPeer([
     './src/framework/auth/package.json',
     './src/framework/bootstrap/package.json',
+    './src/framework/moment/package.json',
+    './src/framework/date-fns/package.json',
   ], 'theme');
 });
 
