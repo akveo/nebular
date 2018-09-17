@@ -4,8 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ComponentRef, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
-import { Type } from '@angular/core/src/type';
+import {
+  Component,
+  ComponentRef,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  Output,
+  Type,
+} from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
@@ -26,24 +35,68 @@ import { NbDatepickerContainerComponent } from './datepicker-container.component
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
+import { NbDatepicker, NbDatepickerValidatorConfig } from './datepicker.directive';
 
-
-export abstract class NbDatepicker<T> {
-  @Input() format: string;
-
-  abstract get value(): T;
-
-  abstract set value(value: T);
-
-  abstract get valueChange(): Observable<T>;
-
-  abstract attach(hostRef: ElementRef);
-}
 
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnDestroy {
+  /**
+   * Datepicker date format.
+   * */
+  @Input() format: string;
+
+  /**
+   * Defines if we should render previous and next months
+   * in the current month view.
+   * */
+  @Input() boundingMonth: boolean = true;
+
+  /**
+   * Defines starting view for calendar.
+   * */
+  @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+
+  /**
+   * Minimum available date for selection.
+   * */
+  @Input() min: T;
+
+  /**
+   * Maximum available date for selection.
+   * */
+  @Input() max: T;
+
+  /**
+   * Predicate that decides which cells will be disabled.
+   * */
+  @Input() filter: (T) => boolean;
+
+  /**
+   * Custom day cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() dayCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Custom month cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() monthCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Custom year cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() yearCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Size of the calendar and entire components.
+   * Can be 'medium' which is default or 'large'.
+   * */
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
+  @Input() visibleDate: D;
+
   /**
    * Calendar component class that has to be instantiated inside overlay.
    * */
@@ -78,7 +131,7 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   /**
    * Reference to the picker instance itself.
    * */
-  protected pickerRef: ComponentRef<P>;
+  protected pickerRef: ComponentRef<any>;
 
   protected alive: boolean = true;
 
@@ -97,7 +150,7 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   /**
    * Returns picker instance.
    * */
-  get picker(): P {
+  get picker(): any {
     return this.pickerRef && this.pickerRef.instance;
   }
 
@@ -107,6 +160,8 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   get valueChange(): Observable<T> {
     return this.onChange$.asObservable();
   }
+
+  protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnDestroy() {
     this.alive = false;
@@ -130,11 +185,16 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
     this.subscribeOnTriggers();
   }
 
+  getValidatorConfig(): NbDatepickerValidatorConfig<T> {
+    return { min: this.min, max: this.max, filter: this.filter };
+  }
+
   show() {
     this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
+    this.patchWithInputs();
   }
 
   hide() {
@@ -146,8 +206,6 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
   }
 
   protected abstract writeQueue();
-
-  protected abstract get pickerValueChange(): Observable<T>;
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
@@ -189,15 +247,45 @@ export abstract class NbBasePicker<T, P> extends NbDatepicker<T> implements OnDe
       this.onChange$.next(date);
     });
   }
+
+  protected patchWithInputs() {
+    this.picker.boundingMonth = this.boundingMonth;
+    this.picker.startView = this.startView;
+    this.picker.min = this.min;
+    this.picker.max = this.max;
+    this.picker.filter = this.filter;
+    this.picker.dayCellComponent = this.dayCellComponent;
+    this.picker.monthCellComponent = this.monthCellComponent;
+    this.picker.yearCellComponent = this.yearCellComponent;
+    this.picker.size = this.size;
+    this.picker.visibleDate = this.visibleDate;
+  }
 }
 
 
+/**
+ * The `NbDatepickerComponent` is basic picker implementation for dates.
+ * */
 @Component({
   selector: 'nb-datepicker',
   template: '',
 })
-export class NbDatepickerComponent<D> extends NbBasePicker<D, NbCalendarComponent<D>> {
+export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
+
+  /**
+   * Date which will be rendered as selected.
+   * */
+  @Input() set date(date: D) {
+    this.value = date;
+  }
+
+  /**
+   * Emits date when selected.
+   * */
+  @Output() get dateChange(): EventEmitter<D> {
+    return this.valueChange as EventEmitter<D>;
+  }
 
   get value(): D {
     return this.picker.date;
@@ -224,12 +312,29 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, NbCalendarComponen
   }
 }
 
+/**
+ * The `NbDatepickerComponent` is basic picker implementation for ranges.
+ * */
 @Component({
   selector: 'nb-rangepicker',
   template: '',
 })
-export class NbRangepickerComponent<D> extends NbBasePicker<NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
+export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
   protected pickerClass: Type<NbCalendarRangeComponent<D>> = NbCalendarRangeComponent;
+
+  /**
+   * Range which will be rendered as selected.
+   * */
+  @Input() set range(range: NbCalendarRange<D>) {
+    this.value = range;
+  }
+
+  /**
+   * Emits range when start selected and emits again when end selected.
+   * */
+  @Output() get rangeChange(): EventEmitter<NbCalendarRange<D>> {
+    return this.valueChange as EventEmitter<NbCalendarRange<D>>;
+  }
 
   get value(): NbCalendarRange<D> {
     return this.picker.range;

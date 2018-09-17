@@ -6,19 +6,19 @@
 
 import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input, OnDestroy } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator,
+  Validator, ValidatorFn,
+  Validators,
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbDatepicker } from './datepicker.component';
+import { NbDateService } from '../calendar-kit';
 
 
 export abstract class NbDatepickerAdapter<D> {
@@ -29,6 +29,26 @@ export abstract class NbDatepickerAdapter<D> {
   abstract format(value: D, format: string): string;
 
   abstract isValid(value: string, format: string): boolean;
+}
+
+export interface NbDatepickerValidatorConfig<D> {
+  min: D;
+  max: D;
+  filter: (D) => boolean;
+}
+
+export abstract class NbDatepicker<T> {
+  abstract format: string;
+
+  abstract get value(): T;
+
+  abstract set value(value: T);
+
+  abstract get valueChange(): Observable<T>;
+
+  abstract attach(hostRef: ElementRef);
+
+  abstract getValidatorConfig(): NbDatepickerValidatorConfig<T>;
 }
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('date datepickerAdapter');
@@ -54,33 +74,40 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('dat
 })
 export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
   /**
+   * Datepicker adapter.
+   * */
+  protected datepickerAdapter: NbDatepickerAdapter<D>;
+  /**
+   * Datepicker instance.
+   * */
+  protected picker: NbDatepicker<D>;
+  protected alive: boolean = true;
+  protected onChange: (D) => void = () => {};
+
+  /**
+   * Form control validators will be called in validators context, so, we need to bind them.
+   * */
+  protected validator: ValidatorFn = Validators.compose([
+    this.parseValidator,
+    this.minValidator,
+    this.maxValidator,
+    this.filterValidator,
+  ].map(fn => fn.bind(this)));
+
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              @Inject(NB_DATE_ADAPTER) protected datepickerAdapters: NbDatepickerAdapter<D>[],
+              protected hostRef: ElementRef,
+              protected dateService: NbDateService<D>) {
+    this.subscribeOnInputChange();
+  }
+
+  /**
    * Provides datepicker component.
    * */
   @Input('nbDatepicker')
   set setPicker(picker: NbDatepicker<D>) {
     this.picker = picker;
     this.setupPicker();
-  }
-
-  /**
-   * Datepicker adapter.
-   * */
-  protected datepickerAdapter: NbDatepickerAdapter<D>;
-
-  /**
-   * Datepicker instance.
-   * */
-  protected picker: NbDatepicker<D>;
-
-  protected alive: boolean = true;
-
-  protected onChange: (D) => void = () => {
-  };
-
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              @Inject(NB_DATE_ADAPTER) protected datepickerAdapters: NbDatepickerAdapter<D>[],
-              protected hostRef: ElementRef) {
-    this.subscribeOnInputChange();
   }
 
   /**
@@ -119,9 +146,49 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   setDisabledState(isDisabled: boolean): void {
   }
 
-  validate(c: AbstractControl): ValidationErrors | null {
+  /**
+   * Form control validation based on picker validator config.
+   * */
+  validate(): ValidationErrors | null {
+    return this.validator(null);
+  }
+
+  /**
+   * Validates that we can parse value correctly.
+   * */
+  protected parseValidator(): ValidationErrors | null {
     const isValid = this.datepickerAdapter.isValid(this.inputValue, this.picker.format);
-    return isValid ? null : { nbDatepickerInvalid: true };
+    return isValid ? null : { nbDatepickerParse: { value: this.inputValue } };
+  }
+
+  /**
+   * Validates passed value is greater than min.
+   * */
+  protected minValidator(): ValidationErrors | null {
+    const config = this.picker.getValidatorConfig();
+    const date = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
+    return (!config.min || !date || this.dateService.compareDates(config.min, date) <= 0) ?
+      null : { nbDatepickerMin: { min: config.min, actual: date } };
+  }
+
+  /**
+   * Validates passed value is smaller than max.
+   * */
+  protected maxValidator(): ValidationErrors | null {
+    const config = this.picker.getValidatorConfig();
+    const date = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
+    return (!config.max || !date || this.dateService.compareDates(config.max, date) >= 0) ?
+      null : { nbDatepickerMax: { max: config.max, actual: date } };
+  }
+
+  /**
+   * Validates passed value satisfy the filter.
+   * */
+  protected filterValidator(): ValidationErrors | null {
+    const config = this.picker.getValidatorConfig();
+    const date = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
+    return (!config.filter || !date || config.filter(date)) ?
+      null : { nbDatepickerFilter: true };
   }
 
   /**

@@ -15,19 +15,24 @@ import { NbDateService } from '@nebular/theme';
     <!--<input class="form-control" placeholder="Datepicker" [nbDatepicker]="datepicker">-->
     <!--<nb-datepicker #datepicker></nb-datepicker>-->
 
-    <input class="form-control" placeholder="Rangepicker" #rangeInput="ngModel" [(ngModel)]="range"
-           [nbDatepicker]="rangepicker">
-    <nb-rangepicker #rangepicker></nb-rangepicker>
-    {{ rangeInput.valid }}
+    <!--<input class="form-control" placeholder="Rangepicker" #rangeInput="ngModel" [(ngModel)]="range"-->
+    <!--[nbDatepicker]="rangepicker">-->
+    <!--<nb-rangepicker #rangepicker></nb-rangepicker>-->
+    <!--{{ rangeInput.valid }}-->
 
-    <input class="form-control" placeholder="Form Picker" [(ngModel)]="date" [nbDatepicker]="formpicker">
-    <nb-datepicker #formpicker></nb-datepicker>
+    <input class="form-control" placeholder="Form Picker" #formInput="ngModel" [(ngModel)]="date"
+           [nbDatepicker]="formpicker">
+    <nb-datepicker [min]="min" [max]="max" #formpicker></nb-datepicker>
 
-    <h1>{{ date | date }}</h1>
+    <h1>{{ formInput.valid }}</h1>
+    <br>
+    <h1>{{ formInput.errors | json }}</h1>
 
-    <button nbButton hero (click)="english()">Use English Locale</button>
-    <button nbButton hero (click)="german()">Use German Locale</button>
-    <button nbButton hero (click)="japanese()">Use Japanese Locale</button>
+    <!--<h1>{{ date | date }}</h1>-->
+
+    <!--<button nbButton hero (click)="english()">Use English Locale</button>-->
+    <!--<button nbButton hero (click)="german()">Use German Locale</button>-->
+    <!--<button nbButton hero (click)="japanese()">Use Japanese Locale</button>-->
   `,
   styles: [`
     :host {
@@ -40,6 +45,9 @@ import { NbDateService } from '@nebular/theme';
 export class NbDatepickerShowcaseComponent {
   range;
   date;
+
+  min = new Date(2018, 9, 15);
+  max = new Date(2018, 10, 15);
 
   constructor(protected dateService: NbDateService<Date>) {
   }
