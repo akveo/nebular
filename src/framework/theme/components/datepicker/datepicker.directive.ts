@@ -352,10 +352,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   protected handleInputChange(value: string) {
     const date = this.parseInputValue(value);
 
-    if (date) {
-      this.onChange(date);
-      this.writePicker(date);
-    }
+    this.onChange(date);
+    this.writePicker(date);
   }
 
   protected parseInputValue(value): D | null {

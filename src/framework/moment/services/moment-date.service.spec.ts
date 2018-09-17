@@ -140,17 +140,23 @@ describe('moment-date-service', () => {
 
   it('should add day', () => {
     const newDate = dateService.addDay(moment().year(2018).month(6).date(16), 1);
-    expect(newDate).toEqual(moment().year(2018).month(6).date(17));
+    expect(newDate.year()).toEqual(2018);
+    expect(newDate.month()).toEqual(6);
+    expect(newDate.date()).toEqual(17);
   });
 
   it('should add day in the end of the year', () => {
     const newDate = dateService.addDay(moment().year(2018).month(11).date(31), 1);
-    expect(newDate).toEqual(moment().year(2019).month(0).date(1));
+    expect(newDate.year()).toEqual(2019);
+    expect(newDate.month()).toEqual(0);
+    expect(newDate.date()).toEqual(1);
   });
 
   it('should add day in the leap year', () => {
     const newDate = dateService.addDay(moment().year(2016).month(1).date(29), 1);
-    expect(newDate).toEqual(moment().year(2016).month(2).date(1));
+    expect(newDate.year()).toEqual(2016);
+    expect(newDate.month()).toEqual(2);
+    expect(newDate.date()).toEqual(1);
   });
 
   it('should add month', () => {

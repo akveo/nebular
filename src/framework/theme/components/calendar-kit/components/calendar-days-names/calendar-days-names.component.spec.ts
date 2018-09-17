@@ -38,7 +38,7 @@ describe('Component: NbCalendarDaysNames', () => {
   it('should contain narrow names', () => {
     const days = componentEl.querySelectorAll('div');
     [].forEach.call(days, day => {
-      expect(day.textContent.length).toBe(1);
+      expect(day.textContent.length).toBe(2);
     });
   });
 });
