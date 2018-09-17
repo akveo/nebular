@@ -87,6 +87,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Bootstrap Integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'bootstrap-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: '3rd-party components',
         children: [
           {
@@ -283,6 +294,14 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -292,6 +311,7 @@ export const structure = [
         icon: 'popover.svg',
         source: [
           'NbPopoverDirective',
+          'NbPopoverComponent',
         ],
       },
       {

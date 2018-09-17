@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'bootstrap/bootstrap.theme';
+@import 'normalize.scss';
 @import 'components/tree.theme';
 @import 'components/toaster.theme';
 @import 'maps/leaflet.theme';
@@ -14,8 +14,6 @@
 
 @mixin nb-theme-overrides() {
   @include nb-typography();
-
-  @include nb-bootstrap-theme();
   @include nb-components-tree-theme();
   @include nb-maps-leaflet-theme();
   @include nb-tables-smart-table-theme();

@@ -31,7 +31,8 @@ describe('auth-service', () => {
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
   const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, ownerStrategyName);
+  const invalidToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -162,13 +163,17 @@ describe('auth-service', () => {
 
   it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns true', (done) => {
 
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(successResult));
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(emptyToken), observableOf(testToken));
+        .returnValues(observableOf(invalidToken), observableOf(testToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
@@ -181,13 +186,33 @@ describe('auth-service', () => {
   );
 
   it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns false', (done) => {
+
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(failResult));
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(emptyToken), observableOf(emptyToken));
+        .returnValues(observableOf(invalidToken), observableOf(invalidToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token doesn\'t exist, strategy refreshToken called, returns false', (done) => {
+      const spy = spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(emptyToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())

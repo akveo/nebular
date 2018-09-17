@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'nb-dynamic-to-add',
   template: `
     <div>
-      <strong>hello from dynamically inserted component: {{text}}</strong>
+      <strong>Hello from custom component: {{ text }}</strong>
     </div>
   `,
 })

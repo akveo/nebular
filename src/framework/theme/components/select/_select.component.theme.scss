@@ -1,0 +1,105 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-select-status($status) {
+  border: nb-theme(select-border-width) solid nb-theme(color-#{$status});
+
+  nb-option {
+    &:hover, &.selected {
+      background-color: nb-theme(color-#{$status});
+      color: nb-theme(color-white);
+    }
+  }
+}
+
+@mixin nb-select-theme() {
+  nb-select > button[nbButton] {
+    transition: all 0.1s;
+
+    &::after {
+      @include nb-rtl(left, 0.75rem);
+      @include nb-rtl(right, auto);
+    }
+
+    &.opened {
+      &.top {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      &.bottom {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  nb-card.select {
+    background-color: nb-theme(select-bg);
+    max-height: nb-theme(select-max-height);
+    margin-bottom: 0;
+    box-shadow: none;
+
+    nb-card-body {
+      padding: 0;
+    }
+
+    nb-option {
+      padding: nb-theme(select-option-padding);
+    }
+
+    &.primary {
+      @include nb-select-status(primary);
+    }
+
+    &.danger {
+      @include nb-select-status(danger);
+    }
+
+    &.warning {
+      @include nb-select-status(warning);
+    }
+
+    &.info {
+      @include nb-select-status(info);
+    }
+
+    &.success {
+      @include nb-select-status(success);
+    }
+
+    &.bottom {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &.top {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    nb-checkbox {
+      .customised-control-description {
+        color: inherit;
+      }
+
+      .customised-control-input:checked ~ .customised-control-indicator {
+        border-color: nb-theme(select-checkbox-color);
+
+        &::before {
+          border-color: nb-theme(select-checkmark-color);
+        }
+      }
+    }
+
+    nb-option, nb-option-group {
+      &.disabled {
+        background-color: nb-theme(select-option-disabled-bg);
+        opacity: nb-theme(select-option-disabled-opacity);
+      }
+    }
+  }
+}

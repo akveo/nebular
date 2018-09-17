@@ -19,13 +19,13 @@
 }
 
 @mixin btn-rectangle() {
-  @include border-radius(nb-theme(btn-rectangle-border-radius));
+  border-radius: nb-theme(btn-rectangle-border-radius);
 }
 
 @mixin btn-semi-round() {
-  @include border-radius(nb-theme(btn-semi-round-border-radius));
+  border-radius: nb-theme(btn-semi-round-border-radius);
 }
 
 @mixin btn-round() {
-  @include border-radius(nb-theme(btn-round-border-radius));
+  border-radius: nb-theme(btn-round-border-radius);
 }
