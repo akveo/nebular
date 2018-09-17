@@ -10,8 +10,7 @@ import { TranslationWidth } from '@angular/common';
 import { NbDateService } from '@nebular/theme';
 
 import * as moment from 'moment';
-
-type Moment = moment.Moment;
+import { Moment } from 'moment';
 
 
 @Injectable()
