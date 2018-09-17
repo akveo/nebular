@@ -6,6 +6,7 @@
 
 @import 'global/components';
 @import 'global/overrides';
+@import 'global/breakpoints';
 
 @mixin nb-theme-global() {
   @include nb-theme-components();

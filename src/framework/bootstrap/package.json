@@ -1,0 +1,27 @@
+{
+  "name": "@nebular/bootstrap",
+  "version": "2.0.0-rc.10",
+  "description": "@nebular/bootstrap",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/nebular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/nebular/issues"
+  },
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "keywords": [
+    "angular",
+    "typescript",
+    "ng2-admin",
+    "ngx-admin",
+    "theme",
+    "nebular"
+  ],
+  "peerDependencies": {
+    "bootstrap": "^4.0.0",
+    "@nebular/theme": "2.0.0-rc.10"
+  }
+}

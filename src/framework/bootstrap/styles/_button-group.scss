@@ -1,0 +1,347 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import 'default-buttons';
+
+@mixin btn-group-separator($color) {
+  background-color: shade($color, 20%);
+}
+
+@mixin btn-group-primary-separator() {
+  @include btn-group-separator(nb-theme(color-primary));
+}
+
+@mixin btn-group-success-separator() {
+  @include btn-group-separator(nb-theme(color-success));
+}
+
+@mixin btn-group-warning-separator() {
+  @include btn-group-separator(nb-theme(color-warning));
+}
+
+@mixin btn-group-info-separator() {
+  @include btn-group-separator(nb-theme(color-info));
+}
+
+@mixin btn-group-danger-separator() {
+  @include btn-group-separator(nb-theme(color-danger));
+}
+
+@mixin btn-group-secondary-separator() {
+  @include btn-group-separator(nb-theme(color-primary));
+}
+
+
+@mixin dropdown-separator($color) {
+  border-left: 1px solid shade($color, 14%);
+}
+
+@mixin dropdown-primary-separator() {
+  @include dropdown-separator(nb-theme(btn-primary-bg));
+}
+
+@mixin dropdown-success-separator() {
+  @include dropdown-separator(nb-theme(btn-success-bg));
+}
+
+@mixin dropdown-warning-separator() {
+  @include dropdown-separator(nb-theme(btn-warning-bg));
+}
+
+@mixin dropdown-info-separator() {
+  @include dropdown-separator(nb-theme(btn-info-bg));
+}
+
+@mixin dropdown-danger-separator() {
+  @include dropdown-separator(nb-theme(btn-danger-bg));
+}
+
+@mixin dropdown-secondary-separator() {
+  @include dropdown-separator(nb-theme(btn-secondary-bg));
+}
+
+
+@mixin nb-b-button-group-theme() {
+
+  .btn-group:not(.btn-divided-group) > .btn + .btn {
+    &.btn-primary {
+      @include dropdown-primary-separator();
+    }
+
+    &.btn-success {
+      @include dropdown-success-separator();
+    }
+
+    &.btn-warning {
+      @include dropdown-warning-separator();
+    }
+
+    &.btn-info {
+      @include dropdown-info-separator();
+    }
+
+    &.btn-danger {
+      @include dropdown-danger-separator();
+    }
+
+    &.btn-secondary {
+      @include dropdown-secondary-separator();
+    }
+  }
+
+  .btn-group:not(.btn-divided-group) > .btn:not(.dropdown-toggle) {
+    &:first-child {
+      @include nb-ltr() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      };
+      @include nb-rtl() {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+    }
+    &:last-child {
+      @include nb-ltr() {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      };
+    }
+  }
+
+  .btn-group.dropdown {
+    & > .btn:first-of-type.dropdown-toggle {
+      @include nb-ltr() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-top-right-radius: 0;
+      };
+      @include nb-rtl() {
+        border-top-left-radius: 0;
+        border-top-right-radius: nb-theme(btn-border-radius);
+      };
+    }
+    & > .btn:last-of-type.dropdown-toggle {
+      @include nb-ltr() {
+        border-top-left-radius: 0;
+        border-top-right-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-top-left-radius: nb-theme(btn-border-radius);
+        border-top-right-radius: 0;
+      };
+    }
+
+    &:not(.show) {
+      & > .btn:first-of-type.dropdown-toggle {
+        @include nb-ltr() {
+          border-bottom-left-radius: nb-theme(btn-border-radius);
+          border-bottom-right-radius: 0;
+        };
+        @include nb-rtl() {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: nb-theme(btn-border-radius);
+        };
+      }
+      & > .btn:last-of-type.dropdown-toggle {
+        @include nb-ltr() {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: nb-theme(btn-border-radius);
+        };
+        @include nb-rtl() {
+          border-bottom-left-radius: nb-theme(btn-border-radius);
+          border-bottom-right-radius: 0;
+        };
+      }
+    }
+
+    &.show > .btn.dropdown-toggle {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .btn-group.dropup {
+    & > .btn:first-of-type.dropdown-toggle {
+      @include nb-ltr() {
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: 0;
+      };
+      @include nb-rtl() {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+    }
+    & > .btn:last-of-type.dropdown-toggle {
+      @include nb-ltr() {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: nb-theme(btn-border-radius);
+      };
+      @include nb-rtl() {
+        border-bottom-left-radius: nb-theme(btn-border-radius);
+        border-bottom-right-radius: 0;
+      };
+    }
+
+    &:not(.show) {
+      & > .btn:first-of-type.dropdown-toggle {
+        @include nb-ltr() {
+          border-top-left-radius: nb-theme(btn-border-radius);
+          border-top-right-radius: 0;
+        };
+        @include nb-rtl() {
+          border-top-left-radius: 0;
+          border-top-right-radius: nb-theme(btn-border-radius);
+        };
+      }
+      & > .btn:last-of-type.dropdown-toggle {
+        @include nb-ltr() {
+          border-top-left-radius: 0;
+          border-top-right-radius: nb-theme(btn-border-radius);
+        };
+        @include nb-rtl() {
+          border-top-left-radius: nb-theme(btn-border-radius);
+          border-top-right-radius: 0;
+        };
+      }
+    }
+
+    &.show > .btn.dropdown-toggle {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .btn-group-icon {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .btn-divided-group {
+    .btn {
+      background-color: nb-theme(btn-group-bg);
+      color: nb-theme(btn-group-fg);
+    }
+
+    .btn:active,
+    .btn.active {
+      &.btn-primary,
+      &.btn-outline-primary {
+        background-color: nb-theme(btn-primary-bg);
+      }
+
+      &.btn-success,
+      &.btn-outline-success {
+        background-color: nb-theme(btn-success-bg);
+      }
+
+      &.btn-warning,
+      &.btn-outline-warning {
+        background-color: nb-theme(btn-warning-bg);
+      }
+
+      &.btn-info,
+      &.btn-outline-info {
+        background-color: nb-theme(btn-info-bg);
+      }
+
+      &.btn-danger,
+      &.btn-outline-danger {
+        background-color: nb-theme(btn-danger-bg);
+      }
+
+      &.btn-secondary,
+      &.btn-outline-secondary {
+        border-color: nb-theme(btn-secondary-border);
+      }
+    }
+
+    .btn:hover,
+    .btn.hover {
+      &.btn-primary,
+      &.btn-outline-primary {
+        @include btn-primary-hover();
+      }
+
+      &.btn-success,
+      &.btn-outline-success {
+        @include btn-success-hover();
+      }
+
+      &.btn-warning,
+      &.btn-outline-warning {
+        @include btn-warning-hover();
+      }
+
+      &.btn-info,
+      &.btn-outline-info {
+        @include btn-info-hover();
+      }
+
+      &.btn-danger,
+      &.btn-outline-danger {
+        @include btn-danger-hover();
+      }
+
+      &.btn-secondary,
+      &.btn-outline-secondary {
+        @include btn-secondary-hover();
+      }
+    }
+  }
+
+  .btn-outline-toggle-group {
+    .btn {
+      background-color: transparent;
+    }
+
+    .btn:not(.active):not(:hover) + .btn:not(.active):not(:hover) {
+      &::before {
+        background-color: nb-theme(separator);
+      }
+    }
+  }
+
+  .btn-divided-group {
+    .btn:not(:first-child) {
+      @include nb-ltr(margin-left, 0.5rem);
+      @include nb-rtl(margin-right, 0.5rem);
+      border-radius: nb-theme(btn-border-radius);
+    }
+
+    .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+      border-radius: nb-theme(btn-border-radius);
+    }
+
+    .btn:not(:last-child):not(.dropdown-toggle) {
+      border-radius: nb-theme(btn-border-radius);
+    }
+  }
+
+  .btn-outline-divided-group {
+    .btn {
+      background-color: transparent;
+    }
+  }
+
+  .btn-group-full-width {
+    width: 100%;
+
+    .btn:not(.btn-fixed) {
+      width: 100%;
+    }
+  }
+}
