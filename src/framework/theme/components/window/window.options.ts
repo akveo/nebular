@@ -4,16 +4,6 @@ import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay';
 
-export enum NbWindowSize {
-  XXSMALL = 'xxsmall',
-  XSMALL = 'xsmall',
-  SMALL = 'small',
-  MEDIUM = 'medium',
-  LARGE = 'large',
-  XLARGE = 'xlarge',
-  XXLARGE = 'xxlarge',
-}
-
 export enum NbWindowState {
   MINIMIZED = 'minimized',
   MAXIMIZED = 'maximized',

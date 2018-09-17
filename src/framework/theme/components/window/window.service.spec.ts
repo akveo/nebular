@@ -4,7 +4,6 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbThemeModule } from '../../theme.module';
 import { NbOverlayContainerAdapter, NbOverlayModule } from '../cdk';
 import { NbWindowModule } from './window.module';
-import { NbWindowSize } from './window.options';
 import { NbWindowService } from './window.service';
 import createSpy = jasmine.createSpy;
 
