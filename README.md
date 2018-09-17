@@ -15,9 +15,9 @@ At the same time, Nebular allows you to use it together with any other UI librar
 1. Install Nebular modules
 
 ```bash
-npm install --save @nebular/theme @nebular/auth @nebular/security
+npm install --save @nebular/theme @angular/cdk @angular/animations
 ```
-You can skip auth/security in case you don't need it.
+Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 
 2. Register Nebular theme module into `app.module`:
 
