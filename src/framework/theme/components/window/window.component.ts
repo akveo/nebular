@@ -7,7 +7,7 @@ import { NbWindowRef } from './window-ref';
 @Component({
   selector: 'nb-window',
   template: `
-    <nb-card [size]="config.size">
+    <nb-card>
       <nb-card-header>
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
