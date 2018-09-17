@@ -1,23 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
-import { NbMyWindowComponent } from './window-showcase.component';
 
 @Component({
   template: `
     <button (click)="openWindowWithBackdrop()" nbButton>Open window with backdrop</button>
     <button (click)="openWindowWithoutBackdrop()" nbButton>Open window without backdrop</button>
+
+    <ng-template #disabledEsc>
+      Disabled close on escape click.
+    </ng-template>
+    <ng-template #escClose>
+      Click escape to close.
+    </ng-template>
   `,
   styleUrls: [ './window.scss' ],
 })
 export class NbWindowsBackdropComponent {
 
+  @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('disabledEsc', { read: TemplateRef }) disabledEscTemplate: TemplateRef<HTMLElement>;
+
   constructor(private windowService: NbWindowService) {}
 
   openWindowWithBackdrop() {
-    this.windowService.open(NbMyWindowComponent, { title: 'Window with backdrop', hasBackdrop: true });
+    this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Window with backdrop', hasBackdrop: true },
+    );
   }
 
   openWindowWithoutBackdrop() {
-    this.windowService.open(NbMyWindowComponent, { title: 'Window without backdrop', hasBackdrop: false });
+    this.windowService.open(
+      this.disabledEscTemplate,
+      { title: 'Window without backdrop', hasBackdrop: false, closeOnEsc: false },
+    );
   }
 }

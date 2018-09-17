@@ -48,7 +48,7 @@ import { NbWindowComponent } from './window.component';
  * Instead of component you can create window from TemplateRef. As usual you can access context provided via config
  * via `let-` variables. Also you can get reference to the `NbWindowRef` in context's `windowRef` property.
  *
- * @stacked-example(Template ref, window/template-window.component)
+ * @stacked-example(Window content from TemplateRef, window/template-window.component)
  *
  * ### Configuration
  *

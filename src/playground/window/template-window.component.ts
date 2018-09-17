@@ -6,7 +6,7 @@ import { NbWindowService } from '@nebular/theme';
     <button (click)="openWindow()" nbButton>Open window</button>
 
     <ng-template #contentTemplate let-data>
-      {{ data.text }}
+      <p>Here is the text provided via config: "{{ data.text }}"</p>
     </ng-template>
   `,
   styleUrls: [ './window.scss' ],
@@ -20,7 +20,7 @@ export class NbTemplateWindowComponent {
   openWindow() {
     this.windowService.open(
       this.contentTemplate,
-      { title: 'Window content from template', context: { text: 'Window content' } },
+      { title: 'Window content from template', context: { text: 'some text to pass into template' } },
     );
   }
 }

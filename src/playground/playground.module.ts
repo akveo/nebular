@@ -41,7 +41,6 @@ import {
   NbDialogModule,
   NbSelectModule,
   NbWindowModule,
-  NbWindowSize,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -241,7 +240,7 @@ import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
-import { NbMyWindowComponent, NbWindowShowcaseComponent } from './window/window-showcase.component';
+import { NbFormComponent, NbWindowShowcaseComponent } from './window/window-showcase.component';
 import { NbTemplateWindowComponent } from './window/template-window.component';
 import { NbWindowsBackdropComponent } from './window/windows-backdrop.component';
 
@@ -282,7 +281,7 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
-  NbWindowModule.forRoot({ size: NbWindowSize.SMALL }),
+  NbWindowModule.forRoot(),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -476,7 +475,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectLabelShowcaseComponent,
   NbSelectCleanComponent,
   NbWindowShowcaseComponent,
-  NbMyWindowComponent,
+  NbFormComponent,
   NbTemplateWindowComponent,
   NbWindowsBackdropComponent,
 ];
@@ -502,7 +501,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
-    NbMyWindowComponent,
+    NbFormComponent,
   ],
 })
 export class NbPlaygroundModule {
