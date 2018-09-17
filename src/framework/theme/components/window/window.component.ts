@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef, Renderer2 } from '@angular/core';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
 import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window.options';
@@ -59,12 +59,17 @@ export class NbWindowComponent implements OnInit, OnDestroy {
     public config: NbWindowConfig,
     protected focusTrapFactory: NbFocusTrapFactoryService,
     protected elementRef: ElementRef,
+    protected renderer: Renderer2,
   ) {}
 
   ngOnInit() {
     this.focusTrap = this.focusTrapFactory.create(this.elementRef.nativeElement);
     this.focusTrap.blurPreviouslyFocusedElement();
     this.focusTrap.focusInitialElement();
+
+    if (this.config.windowClass) {
+      this.renderer.addClass(this.elementRef.nativeElement, this.config.windowClass);
+    }
   }
 
   ngOnDestroy() {

@@ -1,5 +1,6 @@
 import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
+// tslint:disable-next-line
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay';
 
@@ -57,9 +58,9 @@ export class NbWindowConfig {
   closeOnEsc: boolean = true;
 
   /**
-   * Size of window. Large by default.
+   * Class to be applied to the window.
    */
-  size: NbWindowSize = NbWindowSize.LARGE;
+  windowClass: string = '';
 
   /**
    * Both, template and component may receive data through `config.context` property.
