@@ -254,9 +254,9 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.picker.min = this.min;
     this.picker.max = this.max;
     this.picker.filter = this.filter;
-    this.picker.dayCellComponent = this.dayCellComponent;
+    this.picker._cellComponent = this.dayCellComponent;
     this.picker.monthCellComponent = this.monthCellComponent;
-    this.picker.yearCellComponent = this.yearCellComponent;
+    this.picker._yearCellComponent = this.yearCellComponent;
     this.picker.size = this.size;
     this.picker.visibleDate = this.visibleDate;
   }

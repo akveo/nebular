@@ -243,6 +243,7 @@ import { NbSelectCleanComponent } from './select/select-clean.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
+import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -477,6 +478,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDatepickerShowcaseComponent,
   NbDatepickerFormsComponent,
   NbDatepickerValidationComponent,
+  NbRangepickerShowcaseComponent,
 ];
 
 @NgModule({

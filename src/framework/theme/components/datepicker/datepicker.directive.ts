@@ -115,12 +115,17 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
  * <nb-rangepicker #rangepicker></nb-rangepicker>
  * ```
  *
+ * Both range and date pickers support all parameters that calendars, so, check `NbCalendarComponent` for additional
+ * info.
+ *
+ * @stacked-example(Range showcase, datepicker/rangepicker-showcase.component)
+ *
  * Datepicker is the form control so it can be bound with angular forms through ngModel and form controls.
  *
  * @stacked-example(Forms, datepicker/datepicker-forms.component)
  *
  * `NbDatepickerDirective` may be validated using `min` and `max` dates passed to the datepicker.
- * And `filter` predicate that receives date object and has to return boolean value.
+ * And `filter` predicate that receives date object and has to return a boolean value.
  *
  * @stacked-example(Validation, datepicker/datepicker-validation.component)
  *

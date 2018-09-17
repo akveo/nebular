@@ -195,6 +195,7 @@ import { NbSelectCleanComponent } from './select/select-clean.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
+import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
 
 
 export const routes: Routes = [
@@ -918,6 +919,10 @@ export const routes: Routes = [
           {
             path: 'datepicker-validation.component',
             component: NbDatepickerValidationComponent,
+          },
+          {
+            path: 'rangepicker-showcase.component',
+            component: NbRangepickerShowcaseComponent,
           },
         ],
       },
