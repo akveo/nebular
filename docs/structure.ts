@@ -352,6 +352,16 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
+        ],
+      },
+      {
         type: 'group',
         name: 'Extra',
       },

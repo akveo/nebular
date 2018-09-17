@@ -1,0 +1,10 @@
+@mixin nb-window-theme() {
+  nb-window-collapse-icon,
+  nb-window-expand-icon,
+  nb-window-close-icon,
+  nb-window-minimize-icon {
+    svg path {
+      fill: nb-theme(btn-outline-fg);
+    }
+  }
+}
