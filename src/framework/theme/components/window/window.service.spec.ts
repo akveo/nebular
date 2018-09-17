@@ -2,7 +2,7 @@ import { Component, ElementRef, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbThemeModule } from '../../theme.module';
-import { NbOverlayContainerAdapter, NbOverlayModule } from '../cdk';
+import { NbOverlayContainerAdapter, NbOverlayModule, NbViewportRulerAdapter } from '../cdk';
 import { NbWindowModule } from './window.module';
 import { NbWindowService } from './window.service';
 import createSpy = jasmine.createSpy;
@@ -26,6 +26,16 @@ let document: Document;
 const queryBackdrop = () => overlayContainer.querySelector('.cdk-overlay-backdrop');
 let windowService: NbWindowService;
 
+class NbViewportRulerAdapterMock {
+  getViewportSize(): Readonly<{ width: number; height: number; }> {
+    return { width: 1000, height: 1000 };
+  }
+
+  getViewportScrollPosition(): { left: number; top: number } {
+    return { left: 0, top: 0 };
+  }
+}
+
 describe('window-service', () => {
 
   beforeEach(() => {
@@ -35,6 +45,9 @@ describe('window-service', () => {
         NbOverlayModule.forRoot(),
         NbWindowModule.forRoot(),
         NbTestWindowModule,
+      ],
+      providers: [
+        { provide: NbViewportRulerAdapter, useClass: NbViewportRulerAdapterMock },
       ],
     });
     windowService = TestBed.get(NbWindowService);
@@ -71,21 +84,13 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.querySelector('.title').innerHTML).toEqual(title);
   });
 
-  it('should set default size', () => {
-    const windowRef = windowService.open(NbTestWindowComponent);
-    windowRef.componentRef.changeDetectorRef.detectChanges();
-    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
-
-    expect(windowElement.nativeElement.querySelector('nb-card').classList).toContain('large-card');
-  });
-
   it('should set class if provided', () => {
     const windowClass = 'my-window-class';
     const windowRef = windowService.open(NbTestWindowComponent, { windowClass });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
 
-    expect(windowElement.nativeElement.querySelector('nb-card').classList).toContain(windowClass);
+    expect(windowElement.nativeElement.classList).toContain(windowClass);
   });
 
   it('should render with backdrop if hasBackdrop is true', () => {
