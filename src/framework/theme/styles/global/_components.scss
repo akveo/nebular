@@ -33,6 +33,7 @@
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/toastr/toast.component.theme';
 @import '../../components/tooltip/tooltip.component.theme';
+@import '../../components/datepicker/datepicker-container.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -65,4 +66,5 @@
   @include nb-context-menu-theme();
   @include nb-toaster-theme();
   @include nb-tooltip-theme();
+  @include nb-datepicker-theme();
 }

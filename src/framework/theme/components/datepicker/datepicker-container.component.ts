@@ -6,14 +6,18 @@
 
 import { Component, ComponentRef, ViewChild } from '@angular/core';
 
-import { NbComponentPortal, NbPortalOutletDirective } from '../cdk';
+import { NbComponentPortal, NbPortalOutletDirective, NbPositionedContainer } from '../cdk';
 
 
 @Component({
   selector: 'nb-datepicker-container',
-  template: '<ng-template nbPortalOutlet></ng-template>',
+  styleUrls: ['./datepicker-container.component.scss'],
+  template: `
+    <span class="arrow"></span>
+    <ng-template nbPortalOutlet></ng-template>
+  `,
 })
-export class NbDatepickerContainerComponent {
+export class NbDatepickerContainerComponent extends NbPositionedContainer {
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
 
   attach<T>(portal: NbComponentPortal<T>): ComponentRef<T> {

@@ -657,6 +657,13 @@ $theme: (
   tooltip-status-fg: color-bg-active,
   tooltip-shadow: shadow,
   tooltip-font-size: font-size,
+
+  datepicker-fg: color-fg-heading,
+  datepicker-bg: color-bg,
+  datepicker-border: color-success,
+  datepicker-border-radius: radius,
+  datepicker-shadow: none,
+  datepicker-arrow-size: 11px,
 );
 
 // register the theme

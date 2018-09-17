@@ -24,10 +24,6 @@ import { NbDateService } from '@nebular/theme';
            [nbDatepicker]="formpicker">
     <nb-datepicker [min]="min" [max]="max" #formpicker></nb-datepicker>
 
-    <h1>{{ formInput.valid }}</h1>
-    <br>
-    <h1>{{ formInput.errors | json }}</h1>
-
     <!--<h1>{{ date | date }}</h1>-->
 
     <!--<button nbButton hero (click)="english()">Use English Locale</button>-->
