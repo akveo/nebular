@@ -31,7 +31,7 @@ export class NbDatepickerTestComponent {
   @ViewChild(NbDatepickerComponent) datepicker: NbDatepickerComponent<Date>;
 }
 
-describe('nb-datepicker', () => {
+fdescribe('nb-datepicker', () => {
   let fixture: ComponentFixture<NbDatepickerTestComponent>;
   let overlayContainerService: NbOverlayContainerAdapter;
   let overlayContainer: HTMLElement;
@@ -67,12 +67,6 @@ describe('nb-datepicker', () => {
 
   it('should render calendar', () => {
     datepicker().show();
-    const calendar = overlayContainer.querySelector('nb-calendar');
-    expect(calendar).toBeTruthy();
-  });
-
-  it('should render on focus', () => {
-    fixture.nativeElement.querySelector('input').dispatchEvent(new Event('focus'));
     const calendar = overlayContainer.querySelector('nb-calendar');
     expect(calendar).toBeTruthy();
   });

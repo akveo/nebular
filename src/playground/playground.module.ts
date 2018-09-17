@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
@@ -42,8 +42,6 @@ import {
   NbSelectModule,
   NbDatepickerModule,
 } from '@nebular/theme';
-// import { NbDateFnsDateModule } from '@nebular/date-fns';
-// import { NbMomentDateModule } from '@nebular/moment';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
@@ -243,6 +241,8 @@ import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
+import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
+import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -282,8 +282,6 @@ export const NB_MODULES = [
   NbTooltipModule,
   NbSelectModule,
   NbDatepickerModule,
-  // NbDateFnsDateModule,
-  // NbMomentDateModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -477,13 +475,9 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectLabelShowcaseComponent,
   NbSelectCleanComponent,
   NbDatepickerShowcaseComponent,
+  NbDatepickerFormsComponent,
+  NbDatepickerValidationComponent,
 ];
-
-import localeJa from '@angular/common/locales/ja';
-import localeDe from '@angular/common/locales/de'
-
-registerLocaleData(localeDe);
-registerLocaleData(localeJa);
 
 @NgModule({
   imports: [
@@ -506,9 +500,6 @@ registerLocaleData(localeJa);
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
-  ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'ja' },
   ],
 })
 export class NbPlaygroundModule {

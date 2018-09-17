@@ -193,6 +193,8 @@ import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
+import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
+import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
 
 
 export const routes: Routes = [
@@ -908,6 +910,14 @@ export const routes: Routes = [
           {
             path: 'datepicker-showcase.component',
             component: NbDatepickerShowcaseComponent,
+          },
+          {
+            path: 'datepicker-forms.component',
+            component: NbDatepickerFormsComponent,
+          },
+          {
+            path: 'datepicker-validation.component',
+            component: NbDatepickerValidationComponent,
           },
         ],
       },

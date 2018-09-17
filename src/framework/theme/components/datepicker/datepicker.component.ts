@@ -16,7 +16,7 @@ import {
   Type,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -233,10 +233,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     const triggerStrategy = this.createTriggerStrategy();
     triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
     triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
-
-    fromEvent(this.hostRef.nativeElement, 'focus')
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
   }
 
   protected instantiatePicker() {
@@ -267,9 +263,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 }
 
 
-/**
- * The `NbDatepickerComponent` is basic picker implementation for dates.
- * */
 @Component({
   selector: 'nb-datepicker',
   template: '',

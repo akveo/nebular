@@ -99,7 +99,60 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
 
 
 /**
- * The `NbDatepickerDirective` binds html input element and `nb-datepicker`/`nb-rangepicker` together.
+ * The `NbDatepickerDirective` is form control that gives you capability select dates and ranges.
+ *
+ * ```html
+ * <input [nbDatepicker]="datepicker">
+ * <nb-datepicker #datepicker></nb-datepicker>
+ * ```
+ *
+ * @stacked-example(Showcase, datepicker/datepicker-showcase.component)
+ *
+ * If you want to use range selection, you have to use `NbRangepickerComponent` instead:
+ *
+ * ```html
+ * <input [nbDatepicker]="rangepicker">
+ * <nb-rangepicker #rangepicker></nb-rangepicker>
+ * ```
+ *
+ * Datepicker is the form control so it can be bound with angular forms through ngModel and form controls.
+ *
+ * @stacked-example(Forms, datepicker/datepicker-forms.component)
+ *
+ * `NbDatepickerDirective` may be validated using `min` and `max` dates passed to the datepicker.
+ * And `filter` predicate that receives date object and has to return boolean value.
+ *
+ * @stacked-example(Validation, datepicker/datepicker-validation.component)
+ *
+ * The `NbDatepickerComponent` supports date formatting:
+ *
+ * ```html
+ * <input [nbDatepicker]="datepicker">
+ * <nb-datepicker #datepicker format="MM\dd\yyyy"></nb-datepicker>
+ * ```
+ *
+ * ## Formatting Issue
+ *
+ * By default, datepicker uses angulars `LOCALE_ID` token for localization and `DatePipe` for dates formatting.
+ * And native `Date.parse(...)` for dates parsing. But native `Date.parse` function doesn't support formats.
+ * To provide custom formatting you have to use one of the following packages:
+ *
+ * - `@nebular/moment` - provides moment date adapter that uses moment for date objects. This means datepicker than
+ * will operate only moment date objects. If you want to use it you have to install it: `npm i @nebular/moment`, and
+ * import `NbMomentDateModule` from this package.
+ *
+ * - `@nebular/date-fns` - adapter for popular date-fns library. This way is preferred if you need only date formatting.
+ * Because date-fns is treeshakable, tiny and operates native date objects. If you want to use it you have to
+ * install it: `npm i @nebular/date-fns`, and import `NbDateFnsDateModule` from this package.
+ *
+ * @styles
+ *
+ * datepicker-fg
+ * datepicker-bg
+ * datepicker-border
+ * datepicker-border-radius
+ * datepicker-shadow
+ * datepicker-arrow-size
  * */
 @Directive({
   selector: 'input[nbDatepicker]',
