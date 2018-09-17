@@ -85,7 +85,7 @@ describe('native-date-service', () => {
     expect(dateService.getDayOfWeekNames()).toEqual(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
   });
 
-  it('should format date according to the MM.DD.YYYY format', () => {
+  it('should format date according to the MM.dd.yyyy format', () => {
     const date = new Date(2018, 5, 15);
     expect(dateService.format(date, 'MM.dd.yyyy')).toBe('06.15.2018');
   });

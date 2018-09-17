@@ -50,7 +50,9 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   compareDates(date1: Moment, date2: Moment): number {
-    return 0;
+    return this.getYear(date1) - this.getYear(date2) ||
+      this.getMonth(date1) - this.getMonth(date2) ||
+      this.getDate(date1) - this.getDate(date2);
   }
 
   createDate(year: number, month: number, date: number): Moment {
