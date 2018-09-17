@@ -36,7 +36,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
-import { NbDatepicker, NbDatepickerValidatorConfig } from './datepicker.directive';
+import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 
 /**
@@ -185,7 +185,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.subscribeOnTriggers();
   }
 
-  getValidatorConfig(): NbDatepickerValidatorConfig<T> {
+  getValidatorConfig(): NbPickerValidatorConfig<T> {
     return { min: this.min, max: this.max, filter: this.filter };
   }
 

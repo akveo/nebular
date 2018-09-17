@@ -10,7 +10,8 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator, ValidatorFn,
+  Validator,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
@@ -21,23 +22,60 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit';
 
 
+/**
+ * The `NbDatepickerAdapter` instances provide way how to parse, format and validate
+ * different date types.
+ * */
 export abstract class NbDatepickerAdapter<D> {
+  /**
+   * Picker component class.
+   * */
   abstract picker: Type<any>;
 
+  /**
+   * Parse date string according to the format.
+   * */
   abstract parse(value: string, format: string): D;
 
+  /**
+   * Format date according to the format.
+   * */
   abstract format(value: D, format: string): string;
 
+  /**
+   * Validates date string according to the passed format.
+   * */
   abstract isValid(value: string, format: string): boolean;
 }
 
-export interface NbDatepickerValidatorConfig<D> {
+/**
+ * Validators config that will be used by form control to perform proper validation.
+ * */
+export interface NbPickerValidatorConfig<D> {
+  /**
+   * Minimum date available in picker.
+   * */
   min: D;
+
+  /**
+   * Maximum date available in picker.
+   * */
   max: D;
+
+  /**
+   * Predicate that determines is value available for picking.
+   * */
   filter: (D) => boolean;
 }
 
+/**
+ * Datepicker is an control that can pick any values anyway.
+ * It has to be bound to the datepicker directive through nbDatepicker input.
+ * */
 export abstract class NbDatepicker<T> {
+  /**
+   * HTML input element date format.
+   * */
   abstract format: string;
 
   abstract get value(): T;
@@ -46,12 +84,18 @@ export abstract class NbDatepicker<T> {
 
   abstract get valueChange(): Observable<T>;
 
+  /**
+   * Attaches datepicker to the native input element.
+   * */
   abstract attach(hostRef: ElementRef);
 
-  abstract getValidatorConfig(): NbDatepickerValidatorConfig<T>;
+  /**
+   * Returns validator configuration based on the input properties.
+   * */
+  abstract getValidatorConfig(): NbPickerValidatorConfig<T>;
 }
 
-export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('date datepickerAdapter');
+export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
 
 
 /**
@@ -74,15 +118,26 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('dat
 })
 export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
   /**
+   * Provides datepicker component.
+   * */
+  @Input('nbDatepicker')
+  set setPicker(picker: NbDatepicker<D>) {
+    this.picker = picker;
+    this.setupPicker();
+  }
+
+  /**
    * Datepicker adapter.
    * */
   protected datepickerAdapter: NbDatepickerAdapter<D>;
+
   /**
    * Datepicker instance.
    * */
   protected picker: NbDatepicker<D>;
   protected alive: boolean = true;
-  protected onChange: (D) => void = () => {};
+  protected onChange: (D) => void = () => {
+  };
 
   /**
    * Form control validators will be called in validators context, so, we need to bind them.
@@ -99,15 +154,6 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
               protected hostRef: ElementRef,
               protected dateService: NbDateService<D>) {
     this.subscribeOnInputChange();
-  }
-
-  /**
-   * Provides datepicker component.
-   * */
-  @Input('nbDatepicker')
-  set setPicker(picker: NbDatepicker<D>) {
-    this.picker = picker;
-    this.setupPicker();
   }
 
   /**
