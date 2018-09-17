@@ -10,7 +10,7 @@ import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
 
 
-fdescribe('native-date-service', () => {
+describe('native-date-service', () => {
   let dateService: NbDateService<Date>;
 
   beforeEach(() => {
@@ -90,9 +90,9 @@ fdescribe('native-date-service', () => {
     expect(dateService.format(date, 'MM.dd.yyyy')).toBe('06.15.2018');
   });
 
-  it('should parse date according to the format', () => {
+  it('should parse date', () => {
     const date = '06.15.2018';
-    expect(dateService.parse(date, 'MM.DD.YYYY')).toEqual(new Date(2018, 5, 15));
+    expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
   });
 
   it('should get year end', () => {
