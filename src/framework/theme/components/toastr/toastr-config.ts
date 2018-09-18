@@ -56,9 +56,13 @@ export class NbToastrConfig {
   };
 
   constructor(config: Partial<NbToastrConfig>) {
+    this.patchIcon(config);
+    Object.assign(this, config);
+  }
+
+  protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
       config.icon = this.icons[config.status || NbToastStatus.PRIMARY];
     }
-    Object.assign(this, config);
   }
 }
