@@ -15,6 +15,3 @@ import { NbDateFnsDateService } from './services/date-fns-date.service';
 })
 export class NbDateFnsDateModule {
 }
-
-
-

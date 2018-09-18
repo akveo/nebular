@@ -21,16 +21,6 @@ describe('moment-date-service', () => {
     dateService = new NbMomentDateService(TestBed.get(LOCALE_ID));
   });
 
-  it('should set locale to en', () => {
-    dateService.setLocale('en');
-    expect((<any>dateService).locale).toBe('en');
-  });
-
-  it('should set locale to jp', () => {
-    dateService.setLocale('jp');
-    expect((<any>dateService).locale).toBe('jp');
-  });
-
   it('should validate as correct if date string is valid according to the format', () => {
     const isValid = dateService.isValidDateString('04.23.2018', 'MM.DD.YYYY');
     expect(isValid).toBeTruthy();

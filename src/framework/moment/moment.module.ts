@@ -15,6 +15,3 @@ import { NbMomentDateService } from './services/moment-date.service';
 })
 export class NbMomentDateModule {
 }
-
-
-
