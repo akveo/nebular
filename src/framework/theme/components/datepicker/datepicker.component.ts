@@ -198,11 +198,14 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   hide() {
-    this.queue = this.value;
     this.ref.detach();
-    this.container = null;
-    this.pickerRef.destroy();
-    this.pickerRef = null;
+    // save current value if picker was rendered
+    if (this.picker) {
+      this.queue = this.value;
+      this.pickerRef.destroy();
+      this.pickerRef = null;
+      this.container = null;
+    }
   }
 
   protected abstract writeQueue();

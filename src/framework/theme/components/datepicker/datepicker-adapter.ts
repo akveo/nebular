@@ -54,7 +54,14 @@ export class NbRangeAdapterService<D> extends NbDatepickerAdapter<NbCalendarRang
       return '';
     }
 
-    return `${this.dateService.format(range.start, format)} - ${this.dateService.format(range.end, format)}`;
+    const start = this.dateService.format(range.start, format);
+    const end = this.dateService.format(range.end, format);
+
+    if (end) {
+      return `${start} - ${end}`;
+    } else {
+      return start;
+    }
   }
 
   isValid(range: string, format: string): boolean {
