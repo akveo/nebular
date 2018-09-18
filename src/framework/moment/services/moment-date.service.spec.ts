@@ -165,7 +165,9 @@ describe('moment-date-service', () => {
 
   it('should add year', () => {
     const newDate = dateService.addYear(moment().year(2018).month(11).date(16), 1);
-    expect(newDate).toEqual(moment().year(2019).month(11).date(16));
+    expect(newDate.year()).toEqual(2019);
+    expect(newDate.month()).toEqual(11);
+    expect(newDate.date()).toEqual(16);
   });
 
   it('should create date', () => {
