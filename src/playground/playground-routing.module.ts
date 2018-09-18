@@ -192,6 +192,9 @@ import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
+import { NbWindowShowcaseComponent } from './window/window-showcase.component';
+import { NbTemplateWindowComponent } from './window/template-window.component';
+import { NbWindowsBackdropComponent } from './window/windows-backdrop.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
@@ -902,6 +905,23 @@ export const routes: Routes = [
           {
             path: 'toastr-icon.component',
             component: NbToastrIconComponent,
+          },
+        ],
+      },
+      {
+        path: 'window',
+        children: [
+          {
+            path: 'window-showcase.component',
+            component: NbWindowShowcaseComponent,
+          },
+          {
+            path: 'template-window.component',
+            component: NbTemplateWindowComponent,
+          },
+          {
+            path: 'windows-backdrop.component',
+            component: NbWindowsBackdropComponent,
           },
         ],
       },

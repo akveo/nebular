@@ -40,6 +40,7 @@ import {
   NbTooltipModule,
   NbDialogModule,
   NbSelectModule,
+  NbWindowModule,
   NbDatepickerModule,
 } from '@nebular/theme';
 
@@ -240,6 +241,9 @@ import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
+import { NbFormComponent, NbWindowShowcaseComponent } from './window/window-showcase.component';
+import { NbTemplateWindowComponent } from './window/template-window.component';
+import { NbWindowsBackdropComponent } from './window/windows-backdrop.component';
 import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
 import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
@@ -282,6 +286,7 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
+  NbWindowModule.forRoot(),
   NbDatepickerModule,
 ];
 
@@ -475,6 +480,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectGroupsComponent,
   NbSelectLabelShowcaseComponent,
   NbSelectCleanComponent,
+  NbWindowShowcaseComponent,
+  NbFormComponent,
+  NbTemplateWindowComponent,
+  NbWindowsBackdropComponent,
   NbDatepickerShowcaseComponent,
   NbDatepickerFormsComponent,
   NbDatepickerValidationComponent,
@@ -502,6 +511,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
+    NbFormComponent,
   ],
 })
 export class NbPlaygroundModule {
