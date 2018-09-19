@@ -40,6 +40,7 @@ import {
   NbTooltipModule,
   NbDialogModule,
   NbSelectModule,
+  NbWindowModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -239,6 +240,9 @@ import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
+import { NbFormComponent, NbWindowShowcaseComponent } from './window/window-showcase.component';
+import { NbTemplateWindowComponent } from './window/template-window.component';
+import { NbWindowsBackdropComponent } from './window/windows-backdrop.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -277,6 +281,7 @@ export const NB_MODULES = [
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
+  NbWindowModule.forRoot(),
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -469,6 +474,10 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectGroupsComponent,
   NbSelectLabelShowcaseComponent,
   NbSelectCleanComponent,
+  NbWindowShowcaseComponent,
+  NbFormComponent,
+  NbTemplateWindowComponent,
+  NbWindowsBackdropComponent,
 ];
 
 @NgModule({
@@ -492,6 +501,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
+    NbFormComponent,
   ],
 })
 export class NbPlaygroundModule {

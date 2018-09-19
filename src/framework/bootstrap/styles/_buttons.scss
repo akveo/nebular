@@ -4,11 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './shape-buttons';
-@import './size-buttons';
-@import './default-buttons';
-@import './hero-buttons';
-@import './outline-buttons';
+@import 'shape-buttons';
+@import 'size-buttons';
+@import 'default-buttons';
+@import 'hero-buttons';
+@import 'outline-buttons';
 
 @mixin nb-b-buttons-theme() {
 

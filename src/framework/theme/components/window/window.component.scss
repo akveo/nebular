@@ -1,0 +1,56 @@
+:host {
+  flex: 1 0 auto;
+  min-width: 20rem;
+
+  nb-card {
+    margin: 0;
+  }
+  nb-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0;
+    overflow: hidden;
+  }
+  .title {
+    flex: 1 0 auto;
+    margin-right: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .buttons {
+    width: 9.5rem;
+    display: flex;
+    justify-content: space-evenly;
+
+    .button {
+      background: none;
+      border: none;
+      flex: 0 0 3rem;
+      padding: 0 0.8rem;
+    }
+  }
+}
+
+:host(.full-screen) {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host(.maximized) nb-card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+:host(.minimized) nb-card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: auto;
+
+  nb-card-header {
+    border-bottom: none;
+  }
+}
