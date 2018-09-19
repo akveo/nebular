@@ -10,8 +10,7 @@ import {
   Host,
   ElementRef,
   ChangeDetectorRef,
-  OnInit,
-  OnDestroy,
+  OnDestroy, AfterViewInit,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { takeWhile } from 'rxjs/operators';
@@ -55,7 +54,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
   animations: [accordionItemBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
+export class NbAccordionItemBodyComponent implements AfterViewInit, OnDestroy {
 
   contentHeight: string;
 
@@ -71,7 +70,7 @@ export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
     return this.accordionItem.collapsed ? 'collapsed' : 'expanded';
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
     this.accordionItem.accordionItemInvalidate
       .pipe(takeWhile(() => this.alive))
