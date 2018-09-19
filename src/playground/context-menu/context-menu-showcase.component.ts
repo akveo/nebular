@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
 
 export class NbContextMenuShowcaseComponent {
   items = [
-    { title: 'Profile' },
+    { title: 'Profile', link: 'context-menu/context-menu-click.component' },
     { title: 'Logout' },
   ];
 }
