@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-toaster-theme() {
+@mixin nb-toast-theme() {
   nb-toast {
     background-color: nb-theme(toastr-bg);
     padding: nb-theme(toastr-padding);
