@@ -95,7 +95,16 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
+  /**
+   * Depending on this date a particular month is selected in the calendar
+   */
   @Input() visibleDate: D;
+
+  /**
+   * Hide picker when a date or a range is selected, `true` by default
+   * @type {boolean}
+   */
+  @Input() hideOnSelect: boolean = true;
 
   /**
    * Calendar component class that has to be instantiated inside overlay.
@@ -197,6 +206,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.patchWithInputs();
   }
 
+  shouldHide(): boolean {
+    return this.hideOnSelect && !!this.value;
+  }
+
   hide() {
     this.ref.detach();
     // save current value if picker was rendered
@@ -226,7 +239,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   protected createTriggerStrategy(): NbTriggerStrategy {
     return new NbTriggerStrategyBuilder()
       .document(this.document)
-      .trigger(NbTrigger.CLICK)
+      .trigger(NbTrigger.FOCUS)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
       .build();
@@ -265,7 +278,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 }
 
-
+/**
+ * The DatePicker components itself.
+ * Provides a proxy to `NbCalendar` options as well as custom picker options.
+ */
 @Component({
   selector: 'nb-datepicker',
   template: '',
@@ -313,8 +329,9 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
 }
 
 /**
- * The `NbDatepickerComponent` is basic picker implementation for ranges.
- * */
+ * The RangeDatePicker components itself.
+ * Provides a proxy to `NbCalendarRange` options as well as custom picker options.
+ */
 @Component({
   selector: 'nb-rangepicker',
   template: '',
@@ -350,6 +367,10 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
       this.picker.visibleDate = range && range.start;
       this.picker.range = range;
     }
+  }
+
+  shouldHide(): boolean {
+    return super.shouldHide() && !!(this.value.start && this.value.end);
   }
 
   protected get pickerValueChange(): Observable<NbCalendarRange<D>> {

@@ -12,7 +12,7 @@ import { NbDateService } from '@nebular/theme';
   selector: 'nb-datepicker-validation',
   template: `
     <div>
-      <input class="form-control" placeholder="Form Picker" [nbDatepicker]="picker">
+      <input nbInput placeholder="Form Picker" [nbDatepicker]="picker">
       <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
     </div>
   `,

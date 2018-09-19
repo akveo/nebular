@@ -307,6 +307,8 @@ export const structure = [
         icon: 'datepicker.svg',
         source: [
           'NbDatepickerDirective',
+          'NbDatepickerComponent',
+          'NbRangepickerComponent',
         ],
       },
       {

@@ -93,6 +93,12 @@ export abstract class NbDatepicker<T> {
    * Returns validator configuration based on the input properties.
    * */
   abstract getValidatorConfig(): NbPickerValidatorConfig<T>;
+
+  abstract show();
+
+  abstract hide();
+
+  abstract shouldHide(): boolean;
 }
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
@@ -258,6 +264,14 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   /**
+   * Hides picker, focuses the input
+   */
+  protected hidePicker() {
+    this.input.focus();
+    this.picker.hide();
+  }
+
+  /**
    * Validates that we can parse value correctly.
    * */
   protected parseValidator(): ValidationErrors | null {
@@ -323,6 +337,10 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
         this.writePicker(value);
         this.writeInput(value);
         this.onChange(value);
+
+        if (this.picker.shouldHide()) {
+          this.hidePicker();
+        }
       });
   }
 

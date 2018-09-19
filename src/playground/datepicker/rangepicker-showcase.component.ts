@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
   selector: 'nb-rangepicker-showcase',
   template: `
     <div>
-      <input class="form-control" placeholder="Form Picker" [nbDatepicker]="formpicker">
+      <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
       <nb-rangepicker #formpicker></nb-rangepicker>
     </div>
   `,

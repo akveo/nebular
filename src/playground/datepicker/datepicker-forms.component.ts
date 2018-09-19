@@ -12,10 +12,10 @@ import { FormControl } from '@angular/forms';
   selector: 'nb-datepicker-forms',
   template: `
     <div>
-      <input class="form-control" placeholder="Form Picker" [nbDatepicker]="formcontrol" [formControl]="formControl">
+      <input nbInput placeholder="Form Picker" [nbDatepicker]="formcontrol" [formControl]="formControl">
       <nb-datepicker #formcontrol></nb-datepicker>
 
-      <input class="form-control" placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">
+      <input nbInput placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">
       <nb-datepicker #ngmodel></nb-datepicker>
     </div>
   `,
