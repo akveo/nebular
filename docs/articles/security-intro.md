@@ -6,7 +6,7 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
 <div class="note note-warning">
   <div class="note-title">Warning</div>
   <div class="note-body">
-    Front-end ACL won't resolve all of the security issues and just provides a better user expiriece for your application.
+    Front-end ACL won't resolve all of the security issues and just provides a better user experience for your application.
     It is essential to duplicate security rules on the back-end side.
   </div>
 </div>

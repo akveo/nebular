@@ -87,6 +87,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Bootstrap Integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'bootstrap-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: '3rd-party components',
         children: [
           {
@@ -300,6 +311,7 @@ export const structure = [
         icon: 'popover.svg',
         source: [
           'NbPopoverDirective',
+          'NbPopoverComponent',
         ],
       },
       {
@@ -337,6 +349,16 @@ export const structure = [
         source: [
           'NbTooltipDirective',
           'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
         ],
       },
       {

@@ -156,13 +156,13 @@ describe('nb-popover', () => {
   it('have to render component with context', () => {
     element(contentComponentWithContext).click();
     const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
-    expect(text).toEqual('hello from dynamically inserted component: Example context');
+    expect(text).toEqual('Hello from custom component: Example context');
   });
 
   it('have to render template with context', () => {
     element(contentTemplateWithContext).click();
     const text = element(popover).element(by.css('nb-dynamic-to-add > div > strong')).getText();
-    expect(text).toEqual('hello from dynamically inserted component: Example context');
+    expect(text).toEqual('Hello from custom component: Example context');
   });
 
   it('have to hide popover when host removed', done => {
