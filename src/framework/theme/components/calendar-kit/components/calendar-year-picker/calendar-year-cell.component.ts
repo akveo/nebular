@@ -13,7 +13,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbDateTimeUtil } from '../../services';
+import { NbDateTimeUtil, NbLocaleService } from '../../services';
 import { NbCalendarCell } from '../../model';
 
 
@@ -24,6 +24,9 @@ import { NbCalendarCell } from '../../model';
   host: { 'class': 'year-cell' },
 })
 export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
+
+  constructor(private locale: NbLocaleService) { }
+
   @Input() date: Date;
 
   @Input() min: Date;
@@ -46,8 +49,8 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
     return this.smallerThanMin() || this.greaterThanMax();
   }
 
-  get year(): number {
-    return this.date.getFullYear();
+  get year(): number | string {
+    return this.date && this.locale.getNumeric(this.date.getFullYear());
   }
 
   @HostListener('click')

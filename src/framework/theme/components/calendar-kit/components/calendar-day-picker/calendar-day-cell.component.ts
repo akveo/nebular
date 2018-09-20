@@ -14,9 +14,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbDateTimeUtil } from '../../services/date-time-util';
+import { NbDateTimeUtil, NbLocaleService } from '../../services/';
 import { NbCalendarCell } from '../../model';
-
 
 @Component({
   selector: 'nb-calendar-day-cell',
@@ -25,6 +24,8 @@ import { NbCalendarCell } from '../../model';
   host: { 'class': 'day-cell' },
 })
 export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
+
+  constructor(private locale: NbLocaleService) { }
 
   @Input() date: Date;
 
@@ -60,8 +61,8 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
   }
 
-  get day(): number {
-    return this.date && this.date.getDate();
+  get day(): string | number {
+    return this.date && this.locale.getNumeric(this.date.getDate());
   }
 
   @HostListener('click')

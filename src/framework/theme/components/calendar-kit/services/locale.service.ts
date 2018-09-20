@@ -43,4 +43,8 @@ export class NbLocaleService {
     return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Narrow);
   }
 
+  getNumeric(value: number): string | number {
+    return value;
+  }
+
 }
