@@ -17,12 +17,14 @@ import { takeWhile } from 'rxjs/operators';
       <nb-layout-column>
         <nb-card>
           <nb-card-header>
-            <a href="#" (click)="back()"><i class="nb-arrow-thin-left"></i></a>
+            <nav class="navigation">
+              <a href="#" (click)="back()" class="link" aria-label="Back"><i class="icon nb-arrow-thin-left"></i></a>
+            </nav>
           </nb-card-header>
           <nb-card-body>
-            <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+            <main class="auth-component-container">
               <router-outlet></router-outlet>
-            </div>
+            </main>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>

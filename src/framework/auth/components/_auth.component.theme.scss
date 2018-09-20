@@ -4,18 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-auth-block-theme() {
-  nb-auth-block {
-
-    .form-text a {
+@mixin nb-auth-theme() {
+  nb-auth {
+    .text-link {
       color: nb-theme(color-fg);
+      font-weight: bold;
+    }
+
+    .error-message {
+      color: nb-theme(color-danger);
     }
 
     .accept-group {
-      nb-checkbox .custom-control-description {
-        color: nb-theme(color-fg);
-      }
-
       a {
         color: nb-theme(accept-group-link-color);
       }
