@@ -16,6 +16,19 @@ import { convertToBoolProperty } from '../helpers';
  * ```html
  * <button nbButton></button>
  * ```
+ * ### Installation
+ *
+ * Import `NbButtonModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbButtonModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Buttons are available in multiple colors using `status` property:
  * @stacked-example(Button Colors, button/button-colors.component.html)
