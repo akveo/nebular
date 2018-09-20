@@ -7,19 +7,12 @@ import { NbWindowService } from './window.service';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
 import { NB_WINDOW_CONFIG, NbWindowConfig } from './window.options';
-import {
-  NbWindowCloseIconComponent, NbWindowCollapseIconComponent, NbWindowExpandIconComponent, NbWindowMinimizeIconComponent,
-} from './window-icon.component';
 
 @NgModule({
   imports: [ CommonModule, NbOverlayModule, NbCardModule, NbA11yModule ],
   declarations: [
     NbWindowsContainerComponent,
     NbWindowComponent,
-    NbWindowCloseIconComponent,
-    NbWindowCollapseIconComponent,
-    NbWindowExpandIconComponent,
-    NbWindowMinimizeIconComponent,
   ],
   entryComponents: [ NbWindowsContainerComponent, NbWindowComponent ],
 })

@@ -14,12 +14,19 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  *
  * ```html
  * <nb-calendar [(date)]="date"></nb-calendar>
+ * <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>
  * ```
  *
  * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
  *
  * If you want to select ranges you can use `NbCalendarRangeComponent`.
+ *
+ * ```html
+ * <nb-calendar-range [(range)]="range"></nb-calendar-range>
+ * <nb-calendar-range [range]="range" (rangeChange)="handleRangeChange($event)"></nb-calendar-range>
+ * ```
+ *
  * In order to use it, you have to import `NbCalendarRangeModule`.
  * @stacked-example(Range, calendar/calendar-range-showcase.component)
  *
