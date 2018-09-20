@@ -2,7 +2,21 @@
 @import '../../../../src/framework/theme/styles/themes/default';
 @import '../../../../src/framework/theme/styles/global/breakpoints';
 
-$grid-breakpoints: map-merge($grid-breakpoints, (macpro: 1280px));
+/*
+We have to overwrite breakpoints because we need to add *macpro* breakpoint.
+But if we add it using *map-merge* function we'll get the warning and *media-breakpoint-down* will stop working.
+*/
+$grid-breakpoints: (
+  xs: 0,
+  is: 400px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  macpro: 1280px,
+  xxl: 1400px,
+  xxxl: 1600px
+);
 
 $nb-enabled-themes: (docs-home, docs-page);
 
