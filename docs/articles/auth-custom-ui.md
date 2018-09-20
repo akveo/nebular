@@ -81,7 +81,7 @@ export class NgxAuthModule {
 ```
 
 A couple of required modules for the future components. Also, notice how we imported the `NbAuthModule` but without the `forRoot` call.
-This way we imported the declared auth components, such as for example `NbAuthBlock`, so we can use it inside of our components.
+This way we imported the declared auth components, such as for example `NbLoginComponent`, so we can use it inside of our components.
 
 Now, let's fill in the routing file:
 
