@@ -11,8 +11,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
-  NbCardModule,
-  NbLayoutModule,
+  NbAlertModule, NbCardModule, NbInputModule, NbLayoutModule,
 } from '@nebular/theme';
 
 import {
@@ -69,6 +68,8 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
 
     NbCardModule,
     NbLayoutModule,
+    NbAlertModule,
+    NbInputModule,
   ],
   declarations: [
     NbOAuth2PasswordLoginComponent,
