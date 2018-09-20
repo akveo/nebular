@@ -17,6 +17,7 @@ import {
 import { batch, range } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
+import { NbDateService } from '../../services';
 
 
 const defaultYearCount = 20;
@@ -37,29 +38,29 @@ const defaultYearCount = 20;
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarYearPickerComponent implements OnChanges {
+export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
-  @Input() date: Date;
+  @Input() date: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
   @Input('cellComponent')
-  set _cellComponent(cellComponent: Type<NbCalendarCell<any>>) {
+  set _cellComponent(cellComponent: Type<NbCalendarCell<D, D>>) {
     if (cellComponent) {
       this.cellComponent = cellComponent;
     }
   }
-  cellComponent: Type<NbCalendarCell<any>> = NbCalendarYearCellComponent;
+  cellComponent: Type<NbCalendarCell<D, D>> = NbCalendarYearCellComponent;
 
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
-  @Input() year: Date;
+  @Input() year: D;
 
-  @Output() yearChange = new EventEmitter<Date>();
+  @Output() yearChange = new EventEmitter<D>();
 
   @HostBinding('class.medium')
   get medium() {
@@ -71,14 +72,17 @@ export class NbCalendarYearPickerComponent implements OnChanges {
     return this.size === NbCalendarSize.LARGE;
   }
 
-  years: Date[][];
+  years: D[][];
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   ngOnChanges() {
     this.initYears();
   }
 
   initYears() {
-    const selectedYear = this.year.getFullYear();
+    const selectedYear = this.dateService.getYear(this.year);
     const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
     const years = range(defaultYearCount).map(i => this.createYearDateByIndex(i + startYear));
     this.years = batch(years, 4);
@@ -88,7 +92,7 @@ export class NbCalendarYearPickerComponent implements OnChanges {
     this.yearChange.emit(year);
   }
 
-  private createYearDateByIndex(i: number): Date {
-    return new Date(i, this.year.getMonth(), this.year.getDate());
+  private createYearDateByIndex(i: number): D {
+    return this.dateService.createDate(i, this.dateService.getMonth(this.year), this.dateService.getDate(this.year));
   }
 }

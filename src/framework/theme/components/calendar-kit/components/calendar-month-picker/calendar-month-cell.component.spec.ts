@@ -7,20 +7,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarMonthCell', () => {
-  let component: NbCalendarMonthCellComponent;
-  let fixture: ComponentFixture<NbCalendarMonthCellComponent>;
+  let component: NbCalendarMonthCellComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarMonthCellComponent<Date>>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarMonthCellComponent],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    fixture = TestBed.createComponent(NbCalendarMonthCellComponent);
+    fixture = TestBed.createComponent<NbCalendarMonthCellComponent<Date>>(NbCalendarMonthCellComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

@@ -5,5 +5,5 @@
  */
 
 export { NbCalendarMonthModelService } from './calendar-month-model.service';
-export { NbDateTimeUtil } from './date-time-util';
-export { NbLocaleService } from './locale.service';
+export { NbNativeDateService } from './native-date.service';
+export { NbDateService } from './date.service';

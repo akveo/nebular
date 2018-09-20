@@ -9,22 +9,23 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarMonthPicker', () => {
-  let fixture: ComponentFixture<NbCalendarMonthPickerComponent>;
-  let component: NbCalendarMonthPickerComponent;
+  let fixture: ComponentFixture<NbCalendarMonthPickerComponent<Date, Date>>;
+  let component: NbCalendarMonthPickerComponent<Date, Date>;
   let componentEl: DebugElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarMonthPickerComponent],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent(NbCalendarMonthPickerComponent);
+    fixture = TestBed.createComponent<NbCalendarMonthPickerComponent<Date, Date>>(NbCalendarMonthPickerComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement;
   });

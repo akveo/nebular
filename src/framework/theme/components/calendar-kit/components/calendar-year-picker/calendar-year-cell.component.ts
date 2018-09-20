@@ -13,7 +13,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbDateTimeUtil } from '../../services';
+import { NbDateService } from '../../services';
 import { NbCalendarCell } from '../../model';
 
 
@@ -23,23 +23,26 @@ import { NbCalendarCell } from '../../model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'year-cell' },
 })
-export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
-  @Input() date: Date;
+export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
+  @Input() date: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() selectedValue: Date;
+  @Input() selectedValue: D;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<D> = new EventEmitter(true);
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   @HostBinding('class.selected') get selected(): boolean {
-    return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue);
+    return this.dateService.isSameYearSafe(this.date, this.selectedValue);
   }
 
   @HostBinding('class.today') get today(): boolean {
-    return this.date && NbDateTimeUtil.isSameYear(this.date, new Date());
+    return this.dateService.isSameYearSafe(this.date, this.dateService.today());
   }
 
   @HostBinding('class.disabled') get disabled(): boolean {
@@ -47,7 +50,7 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
   }
 
   get year(): number {
-    return this.date.getFullYear();
+    return this.dateService.getYear(this.date);
   }
 
   @HostListener('click')
@@ -60,18 +63,18 @@ export class NbCalendarYearCellComponent implements NbCalendarCell<Date> {
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && NbDateTimeUtil.compareDates(this.yearEnd(), this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.yearEnd(), this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && NbDateTimeUtil.compareDates(this.yearStart(), this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.yearStart(), this.max) > 0;
   }
 
-  private yearStart(): Date {
-    return NbDateTimeUtil.getYearStart(this.date);
+  private yearStart(): D {
+    return this.dateService.getYearStart(this.date);
   }
 
-  private yearEnd(): Date {
-    return NbDateTimeUtil.getYearEnd(this.date);
+  private yearEnd(): D {
+    return this.dateService.getYearEnd(this.date);
   }
 }

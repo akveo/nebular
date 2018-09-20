@@ -110,11 +110,12 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
       [size]="size"
+      [visibleDate]="visibleDate"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
 })
-export class NbCalendarComponent {
+export class NbCalendarComponent<D> {
 
   /**
    * Defines if we should render previous and next months
@@ -130,32 +131,32 @@ export class NbCalendarComponent {
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: Date;
+  @Input() min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: Date;
+  @Input() max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() dayCellComponent: Type<NbCalendarCell<Date>>;
+  @Input() dayCellComponent: Type<NbCalendarCell<D, D>>;
 
   /**
    * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() monthCellComponent: Type<NbCalendarCell<Date>>;
+  @Input() monthCellComponent: Type<NbCalendarCell<D, D>>;
 
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() yearCellComponent: Type<NbCalendarCell<Date>>;
+  @Input() yearCellComponent: Type<NbCalendarCell<D, D>>;
 
   /**
    * Size of the calendar and entire components.
@@ -163,13 +164,15 @@ export class NbCalendarComponent {
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
+  @Input() visibleDate: D;
+
   /**
    * Date which will be rendered as selected.
    * */
-  @Input() date: Date;
+  @Input() date: D;
 
   /**
    * Emits date when selected.
    * */
-  @Output() dateChange: EventEmitter<Date> = new EventEmitter();
+  @Output() dateChange: EventEmitter<D> = new EventEmitter();
 }
