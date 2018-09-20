@@ -10,7 +10,7 @@
    [attr.title]="menuItem.title"
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
-   (click)="$event.preventDefault(); onItemClick(menuItem);">
+   (click)="onItemClick(menuItem);">
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
