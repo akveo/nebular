@@ -12,7 +12,6 @@ import { NbPositionHelper } from './position-helper';
 @NgModule({
   imports: [
     NbCdkMappingModule,
-    NbCdkAdapterModule,
     NbSharedModule,
   ],
   declarations: [NbOverlayContainerComponent],
@@ -29,6 +28,7 @@ export class NbOverlayModule {
         NbPositionBuilderService,
         NbOverlayService,
         NbPositionHelper,
+        ...NbCdkAdapterModule.forRoot().providers,
       ],
     };
   }

@@ -17,7 +17,7 @@
       @include nb-rtl(margin-left, 1.25rem);
     }
 
-    svg {
+    i {
       border-radius: nb-theme(toastr-icon-radius);
     }
 
@@ -39,24 +39,20 @@
       border-color: nb-theme(color-success);
       color: nb-theme(color-success);
 
-      svg {
+      i {
         background-color: nb-theme(color-success);
 
-        path {
-          fill: nb-theme(color-white);
-        }
+        color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
         @include btn-hero-success-gradient();
         color: nb-theme(toastr-color-fg);
 
-        svg {
+        i {
           background-color: nb-theme(color-white);
 
-          path {
-            fill: nb-theme(color-success);
-          }
+          color: nb-theme(color-success);
         }
       }
     }
@@ -65,24 +61,20 @@
       border-color: nb-theme(color-info);
       color: nb-theme(color-info);
 
-      svg {
+      i {
         background-color: nb-theme(color-info);
 
-        path {
-          fill: nb-theme(color-white);
-        }
+        color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
         @include btn-hero-info-gradient();
         color: nb-theme(toastr-color-fg);
 
-        svg {
+        i {
           background-color: nb-theme(color-white);
 
-          path {
-            fill: nb-theme(color-info);
-          }
+          color: nb-theme(color-info);
         }
       }
     }
@@ -91,24 +83,20 @@
       border-color: nb-theme(color-warning);
       color: nb-theme(color-warning);
 
-      svg {
+      i {
         background-color: nb-theme(color-warning);
 
-        path {
-          fill: nb-theme(color-white);
-        }
+        color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
         @include btn-hero-warning-gradient();
         color: nb-theme(toastr-color-fg);
 
-        svg {
+        i {
           background-color: nb-theme(color-white);
 
-          path {
-            fill: nb-theme(color-warning);
-          }
+          color: nb-theme(color-warning);
         }
       }
     }
@@ -117,24 +105,20 @@
       border-color: nb-theme(color-primary);
       color: nb-theme(color-primary);
 
-      svg {
+      i {
         background-color: nb-theme(color-primary);
 
-        path, .warn-rect {
-          fill: nb-theme(color-white);
-        }
+        color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
         @include btn-hero-primary-gradient();
         color: nb-theme(toastr-color-fg);
 
-        svg {
+        i {
           background-color: nb-theme(color-white);
 
-          path, .warn-rect {
-            fill: nb-theme(color-primary);
-          }
+          color: nb-theme(color-primary);
         }
       }
     }
@@ -143,24 +127,20 @@
       border-color: nb-theme(color-danger);
       color: nb-theme(color-danger);
 
-      svg {
+      i {
         background-color: nb-theme(color-danger);
 
-        path {
-          fill: nb-theme(color-white);
-        }
+        color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
         @include btn-hero-danger-gradient();
         color: nb-theme(toastr-color-fg);
 
-        svg {
+        i {
           background-color: nb-theme(color-white);
 
-          path {
-            fill: nb-theme(color-danger);
-          }
+          color: nb-theme(color-danger);
         }
       }
     }
