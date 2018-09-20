@@ -105,7 +105,8 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
 
 
 /**
- * The `NbDatepickerDirective` is form control that gives you capability select dates and ranges.
+ * The `NbDatepickerDirective` is form control that gives you ability to select dates and ranges. The datepicker
+ * is shown when input receives a `focus` event.
  *
  * ```html
  * <input [nbDatepicker]="datepicker">
@@ -121,7 +122,7 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
  * <nb-rangepicker #rangepicker></nb-rangepicker>
  * ```
  *
- * Both range and date pickers support all parameters that calendars, so, check `NbCalendarComponent` for additional
+ * Both range and date pickers support all parameters as calendar, so, check `NbCalendarComponent` for additional
  * info.
  *
  * @stacked-example(Range showcase, datepicker/rangepicker-showcase.component)

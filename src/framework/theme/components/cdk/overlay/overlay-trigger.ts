@@ -11,7 +11,7 @@ export enum NbTrigger {
 }
 
 /**
- * Provides entity with three event stream: show, hide and toggle.
+ * Provides entity with two event stream: show and hide.
  * Each stream provides different events depends on implementation.
  * We have three main trigger strategies: click, hint and hover.
  * */
@@ -28,7 +28,7 @@ export abstract class NbTriggerStrategy {
 }
 
 /**
- * Creates toggle and close events streams, show stream is empty.
+ * Creates show and hide event streams.
  * Fires toggle event when the click was performed on the host element.
  * Fires close event when the click was performed on the document but
  * not on the host or container.
@@ -72,7 +72,7 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
 }
 
 /**
- * Creates open and close events streams, the toggle is empty.
+ * Creates show and hide event streams.
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element and stops out of the host and popover container.
  * */
@@ -100,7 +100,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 }
 
 /**
- * Creates open and close events streams, the toggle is empty.
+ * Creates show and hide event streams.
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element.
  * */
@@ -117,7 +117,7 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
 
 
 /**
- * Creates open and close events streams, the toggle is empty.
+ * Creates show and hide event streams.
  * Fires open event when a focus is on the host element and stay over at least 100 milliseconds.
  * Fires close event when the focus leaves the host element.
  * */
