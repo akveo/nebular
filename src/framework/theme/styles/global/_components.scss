@@ -66,7 +66,7 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-select-theme();
-  @include nb-toaster-theme();
+  @include nb-toast-theme();
   @include nb-tooltip-theme();
   @include nb-window-theme();
 }
