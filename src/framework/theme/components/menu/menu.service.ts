@@ -7,13 +7,13 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Params } from '@angular/router';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
-const itemClick$ = new ReplaySubject<NbMenuBag>(1);
+const itemClick$ = new Subject<NbMenuBag>();
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
 const navigateHome$ = new ReplaySubject<{ tag: string }>(1);
 const getSelectedItem$
