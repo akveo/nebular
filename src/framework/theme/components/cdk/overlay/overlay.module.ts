@@ -18,6 +18,7 @@ import { NbPositionHelper } from './position-helper';
   declarations: [NbOverlayContainerComponent],
   exports: [
     NbCdkMappingModule,
+    NbCdkAdapterModule,
     NbOverlayContainerComponent,
   ],
 })

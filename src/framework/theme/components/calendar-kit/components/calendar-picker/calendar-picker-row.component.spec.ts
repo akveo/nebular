@@ -10,6 +10,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NbCalendarPickerRowComponent } from './calendar-picker-row.component';
 import { NbCalendarDayCellComponent } from '../calendar-day-picker/calendar-day-cell.component';
+import { DatePipe } from '@angular/common';
+import { NbDateService, NbNativeDateService } from '../../services';
 
 
 @NgModule({
@@ -20,11 +22,11 @@ export class NbCalendarPickerRowTestModule {
 }
 
 describe('Component: NbCalendarPickerRow', () => {
-  let fixture: ComponentFixture<NbCalendarPickerRowComponent<Date>>;
-  let component: NbCalendarPickerRowComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarPickerRowComponent<Date, Date>>;
+  let component: NbCalendarPickerRowComponent<Date, Date>;
   let componentEl: HTMLElement;
 
-  const queryTestCell = (): NbCalendarDayCellComponent => {
+  const queryTestCell = (): NbCalendarDayCellComponent<Date> => {
     return fixture.debugElement
       .query(By.directive(NbCalendarDayCellComponent))
       .componentInstance;
@@ -35,9 +37,10 @@ describe('Component: NbCalendarPickerRow', () => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarPickerRowComponent],
       imports: [NbCalendarPickerRowTestModule],
+      providers: [DatePipe, { provide: NbDateService, useClass: NbNativeDateService }],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent<NbCalendarPickerRowComponent<Date>>(NbCalendarPickerRowComponent);
+    fixture = TestBed.createComponent<NbCalendarPickerRowComponent<Date, Date>>(NbCalendarPickerRowComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
     component.component = NbCalendarDayCellComponent;
@@ -56,7 +59,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.row = [date];
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.date).toBe(date);
   });
 
@@ -65,7 +68,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.visibleDate = activeMonth;
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.visibleDate).toBe(activeMonth);
   });
 
@@ -74,7 +77,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.selectedValue = selectedValue;
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.selectedValue).toBe(selectedValue);
   });
 
@@ -83,7 +86,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.min = min;
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.min).toBe(min);
   });
 
@@ -92,7 +95,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.max = max;
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.max).toBe(max);
   });
 
@@ -101,7 +104,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.filter = filter;
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     expect(cell.filter).toBe(filter);
   });
 
@@ -110,7 +113,7 @@ describe('Component: NbCalendarPickerRow', () => {
     component.row = [date];
     component.ngOnChanges();
     fixture.detectChanges();
-    const cell: NbCalendarDayCellComponent = queryTestCell();
+    const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
     component.select.subscribe(e => expect(e).toBe(date));
     cell.select.emit(cell.date);
   });

@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell, NbDateTimeUtil } from '../calendar-kit';
+import { NbCalendarCell, NbDateService } from '../calendar-kit';
 import { NbCalendarRange } from './calendar-range.component';
 
 
@@ -30,48 +30,51 @@ import { NbCalendarRange } from './calendar-range.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(click)': 'onClick()', 'class': 'range-cell' },
 })
-export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalendarRange> {
-  @Input() date: Date;
+export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbCalendarRange<D>> {
+  @Input() date: D;
 
-  @Input() selectedValue: NbCalendarRange;
+  @Input() selectedValue: NbCalendarRange<D>;
 
-  @Input() visibleDate: Date;
+  @Input() visibleDate: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<D> = new EventEmitter(true);
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   @HostBinding('class.in-range') get inRange(): boolean {
     return this.date && this.selectedValue
-      && (this.selectedValue.start && NbDateTimeUtil.compareDates(this.date, this.selectedValue.start) >= 0)
-      && (this.selectedValue.end && NbDateTimeUtil.compareDates(this.date, this.selectedValue.end) <= 0);
+      && (this.selectedValue.start && this.dateService.compareDates(this.date, this.selectedValue.start) >= 0)
+      && (this.selectedValue.end && this.dateService.compareDates(this.date, this.selectedValue.end) <= 0);
   }
 
   @HostBinding('class.start') get start(): boolean {
     return this.date && this.selectedValue && this.selectedValue.end
-      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start));
+      && (this.selectedValue.start && this.dateService.isSameDay(this.date, this.selectedValue.start));
   }
 
   @HostBinding('class.end') get end(): boolean {
     return this.date && this.selectedValue &&
-      (this.selectedValue.end && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.end));
+      (this.selectedValue.end && this.dateService.isSameDay(this.date, this.selectedValue.end));
   }
 
   get today(): boolean {
-    return this.date && NbDateTimeUtil.isSameDay(this.date, new Date());
+    return this.date && this.dateService.isSameDay(this.date, this.dateService.today());
   }
 
   get boundingMonth(): boolean {
-    return this.date && this.visibleDate && !NbDateTimeUtil.isSameMonth(this.date, this.visibleDate);
+    return !this.dateService.isSameMonthSafe(this.date, this.visibleDate);
   }
 
   get selected(): boolean {
     return this.date && this.selectedValue
-      && (this.selectedValue.start && NbDateTimeUtil.isSameDay(this.date, this.selectedValue.start)) || this.end;
+      && (this.selectedValue.start && this.dateService.isSameDay(this.date, this.selectedValue.start)) || this.end;
   }
 
   get empty(): boolean {
@@ -83,7 +86,7 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
   }
 
   get day(): number {
-    return this.date && this.date.getDate();
+    return this.date && this.dateService.getDate(this.date);
   }
 
   onClick() {
@@ -95,11 +98,11 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && NbDateTimeUtil.compareDates(this.date, this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.date, this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && NbDateTimeUtil.compareDates(this.date, this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.date, this.max) > 0;
   }
 
   private dontFitFilter(): boolean {
@@ -113,23 +116,26 @@ export class NbCalendarRangeDayCellComponent implements NbCalendarCell<NbCalenda
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'year-cell' },
 })
-export class NbCalendarRangeYearCellComponent implements NbCalendarCell<NbCalendarRange> {
-  @Input() date: Date;
+export class NbCalendarRangeYearCellComponent<D> implements NbCalendarCell<D, NbCalendarRange<D>> {
+  @Input() date: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() selectedValue: NbCalendarRange;
+  @Input() selectedValue: NbCalendarRange<D>;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<D> = new EventEmitter(true);
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   @HostBinding('class.selected') get selected(): boolean {
-    return this.selectedValue && NbDateTimeUtil.isSameYear(this.date, this.selectedValue.start);
+    return this.selectedValue && this.dateService.isSameYear(this.date, this.selectedValue.start);
   }
 
   @HostBinding('class.today') get today(): boolean {
-    return this.date && NbDateTimeUtil.isSameYear(this.date, new Date());
+    return this.date && this.dateService.isSameYear(this.date, this.dateService.today());
   }
 
   @HostBinding('class.disabled') get disabled(): boolean {
@@ -137,7 +143,7 @@ export class NbCalendarRangeYearCellComponent implements NbCalendarCell<NbCalend
   }
 
   get year(): number {
-    return this.date.getFullYear();
+    return this.dateService.getYear(this.date);
   }
 
   @HostListener('click')
@@ -150,18 +156,18 @@ export class NbCalendarRangeYearCellComponent implements NbCalendarCell<NbCalend
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && NbDateTimeUtil.compareDates(this.yearEnd(), this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.yearEnd(), this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && NbDateTimeUtil.compareDates(this.yearStart(), this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.yearStart(), this.max) > 0;
   }
 
-  private yearStart(): Date {
-    return NbDateTimeUtil.getYearStart(this.date);
+  private yearStart(): D {
+    return this.dateService.getYearStart(this.date);
   }
 
-  private yearEnd(): Date {
-    return NbDateTimeUtil.getYearEnd(this.date);
+  private yearEnd(): D {
+    return this.dateService.getYearEnd(this.date);
   }
 }

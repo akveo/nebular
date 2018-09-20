@@ -302,6 +302,14 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'NbDatepickerDirective',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
