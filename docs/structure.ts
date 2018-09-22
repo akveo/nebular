@@ -302,6 +302,16 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'NbDatepickerDirective',
+          'NbDatepickerComponent',
+          'NbRangepickerComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -349,6 +359,16 @@ export const structure = [
         source: [
           'NbTooltipDirective',
           'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
         ],
       },
       {

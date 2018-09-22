@@ -42,12 +42,12 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarDayPickerComponent<T> implements OnChanges {
+export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
 
   /**
    * Describes which month picker have to render.
    * */
-  @Input() visibleDate: Date;
+  @Input() visibleDate: D;
 
   /**
    * Defines if we should render previous and next months
@@ -58,28 +58,28 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: Date;
+  @Input() min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: Date;
+  @Input() max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
   @Input('cellComponent')
-  set _cellComponent(cellComponent: Type<NbCalendarCell<T>>) {
+  set setCellComponent(cellComponent: Type<NbCalendarCell<D, T>>) {
     if (cellComponent) {
       this.cellComponent = cellComponent;
     }
   }
-  cellComponent: Type<NbCalendarCell<any>> = NbCalendarDayCellComponent;
+  cellComponent: Type<NbCalendarCell<any, any>> = NbCalendarDayCellComponent;
 
   /**
    * Size of the component.
@@ -95,7 +95,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
   /**
    * Fires newly selected date.
    * */
-  @Output() dateChange = new EventEmitter<Date>();
+  @Output() dateChange = new EventEmitter<D>();
 
   @HostBinding('class.medium')
   get medium() {
@@ -112,9 +112,9 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
    * Provides all days in current month and if boundingMonth is true some days
    * from previous and next one.
    * */
-  weeks: Date[][];
+  weeks: D[][];
 
-  constructor(private monthModel: NbCalendarMonthModelService) {
+  constructor(private monthModel: NbCalendarMonthModelService<D>) {
   }
 
   ngOnChanges({ visibleDate }: SimpleChanges) {
@@ -123,7 +123,7 @@ export class NbCalendarDayPickerComponent<T> implements OnChanges {
     }
   }
 
-  onSelect(day: Date) {
+  onSelect(day: D) {
     this.dateChange.emit(day);
   }
 }

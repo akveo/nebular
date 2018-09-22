@@ -6,7 +6,6 @@
 
 @import 'normalize.scss';
 @import 'components/tree.theme';
-@import 'components/toaster.theme';
 @import 'maps/leaflet.theme';
 @import 'tables/smart-table.theme';
 
@@ -17,5 +16,4 @@
   @include nb-components-tree-theme();
   @include nb-maps-leaflet-theme();
   @include nb-tables-smart-table-theme();
-  @include nb-components-toaster-theme();
 }

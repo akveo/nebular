@@ -5,20 +5,21 @@
  */
 
 import { TestBed } from '@angular/core/testing';
+import { DatePipe } from '@angular/common';
 
 import { NbCalendarDatePipe } from './calendar-date.pipe';
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
 
 
 describe('Pipe: NbCalendarDate', () => {
-  let pipe: NbCalendarDatePipe;
+  let pipe: NbCalendarDatePipe<Date>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    const localeAdapter = TestBed.get(NbLocaleService);
-    pipe = new NbCalendarDatePipe(localeAdapter);
+    const dateService = TestBed.get(NbDateService);
+    pipe = new NbCalendarDatePipe(dateService);
   });
 
   it('should render month-year when date is correct object', () => {

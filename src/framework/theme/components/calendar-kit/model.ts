@@ -22,12 +22,12 @@ export enum NbCalendarSize {
   LARGE = 'large',
 }
 
-export interface NbCalendarCell<T> {
-  date: Date;
-  select: EventEmitter<Date>;
+export interface NbCalendarCell<D, T> {
+  date: D;
+  select: EventEmitter<D>;
   selectedValue?: T;
-  visibleDate?: Date;
-  min?: Date;
-  max?: Date;
-  filter?: (Date) => boolean;
+  visibleDate?: D;
+  min?: D;
+  max?: D;
+  filter?: (D) => boolean;
 }

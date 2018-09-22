@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbCalendarDay } from '../../model';
-import { NbDateTimeUtil, NbLocaleService } from '../../services';
+import { NbDateService } from '../../services';
 
 
 @Component({
@@ -17,11 +17,11 @@ import { NbDateTimeUtil, NbLocaleService } from '../../services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarDaysNamesComponent implements OnInit {
+export class NbCalendarDaysNamesComponent<D> implements OnInit {
 
   days: NbCalendarDay[];
 
-  constructor(private locale: NbLocaleService) {
+  constructor(private dateService: NbDateService<D>) {
   }
 
   ngOnInit() {
@@ -30,15 +30,19 @@ export class NbCalendarDaysNamesComponent implements OnInit {
   }
 
   private createDaysNames(): NbCalendarDay[] {
-    return this.locale.getDayOfWeekNames()
-      .map(NbDateTimeUtil.markIfHoliday);
+    return this.dateService.getDayOfWeekNames()
+      .map(this.markIfHoliday);
   }
 
   private shiftStartOfWeek(days: NbCalendarDay[]): NbCalendarDay[] {
-    for (let i = 0; i < this.locale.getFirstDayOfWeek(); i++) {
+    for (let i = 0; i < this.dateService.getFirstDayOfWeek(); i++) {
       days.push(days.shift());
     }
 
     return days;
+  }
+
+  private markIfHoliday(name, i) {
+    return { name, isHoliday: i % 6 === 0 };
   }
 }

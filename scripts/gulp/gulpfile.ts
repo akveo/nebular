@@ -7,5 +7,3 @@ import './tasks/copy-sources';
 import './tasks/bump-versions';
 
 task('default', ['copy-sources']);
-task('version', ['bump', 'bump-peer']);
-

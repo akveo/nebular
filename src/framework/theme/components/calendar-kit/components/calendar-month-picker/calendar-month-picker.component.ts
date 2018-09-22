@@ -17,6 +17,7 @@ import {
 import { batch, range } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
+import { NbDateService } from '../../services';
 
 
 @Component({
@@ -34,27 +35,28 @@ import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarMonthPickerComponent implements OnInit {
+export class NbCalendarMonthPickerComponent<D, T> implements OnInit {
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  @Input() month: D;
+  @Output() monthChange: EventEmitter<D> = new EventEmitter();
+  months: D[][];
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   @Input('cellComponent')
-  set _cellComponent(cellComponent: Type<NbCalendarCell<any>>) {
+  set _cellComponent(cellComponent: Type<NbCalendarCell<D, T>>) {
     if (cellComponent) {
       this.cellComponent = cellComponent;
     }
   }
-  cellComponent: Type<NbCalendarCell<any>> = NbCalendarMonthCellComponent;
-
-  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
-
-  @Input() month: Date;
-
-  @Output() monthChange: EventEmitter<Date> = new EventEmitter();
+  cellComponent: Type<NbCalendarCell<any, any>> = NbCalendarMonthCellComponent;
 
   @HostBinding('class.medium')
   get medium() {
@@ -66,22 +68,20 @@ export class NbCalendarMonthPickerComponent implements OnInit {
     return this.size === NbCalendarSize.LARGE;
   }
 
-  months: Date[][];
-
   ngOnInit() {
     this.initMonths();
   }
 
   initMonths() {
-    const months: Date[] = range(12).map(i => this.createMonthDateByIndex(i));
+    const months: D[] = range(12).map(i => this.createMonthDateByIndex(i));
     this.months = batch(months, 4);
   }
 
-  onSelect(month: Date) {
+  onSelect(month: D) {
     this.monthChange.emit(month);
   }
 
-  private createMonthDateByIndex(i: number): Date {
-    return new Date(this.month.getFullYear(), i, this.month.getDate());
+  private createMonthDateByIndex(i: number): D {
+    return this.dateService.createDate(this.dateService.getYear(this.month), i, this.dateService.getDate(this.month));
   }
 }

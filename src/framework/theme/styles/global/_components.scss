@@ -34,6 +34,8 @@
 @import '../../components/select/select.component.theme';
 @import '../../components/toastr/toast.component.theme';
 @import '../../components/tooltip/tooltip.component.theme';
+@import '../../components/window/window.component.theme';
+@import '../../components/datepicker/datepicker-container.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -65,6 +67,8 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-select-theme();
-  @include nb-toaster-theme();
+  @include nb-toast-theme();
   @include nb-tooltip-theme();
+  @include nb-window-theme();
+  @include nb-datepicker-theme();
 }

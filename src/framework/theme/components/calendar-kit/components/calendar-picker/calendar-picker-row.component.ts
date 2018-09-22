@@ -32,15 +32,15 @@ import { NbCalendarCell } from '../../model';
   template: '<ng-template></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarPickerRowComponent<T> implements OnChanges {
-  @Input() row: Date[];
+export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
+  @Input() row: D[];
   @Input() selectedValue: T;
-  @Input() visibleDate: Date;
-  @Input() component: Type<NbCalendarCell<T>>;
-  @Input() min: Date;
-  @Input() max: Date;
-  @Input() filter: (Date) => boolean;
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Input() visibleDate: D;
+  @Input() component: Type<NbCalendarCell<D, T>>;
+  @Input() min: D;
+  @Input() max: D;
+  @Input() filter: (D) => boolean;
+  @Output() select: EventEmitter<D> = new EventEmitter();
 
   @ViewChild(TemplateRef, { read: ViewContainerRef }) containerRef: ViewContainerRef;
 
@@ -52,14 +52,14 @@ export class NbCalendarPickerRowComponent<T> implements OnChanges {
 
     this.containerRef.clear();
 
-    this.row.forEach((date: Date) => {
+    this.row.forEach((date: D) => {
       const component = this.containerRef.createComponent(factory);
       this.patchWithContext(component.instance, date);
       component.changeDetectorRef.detectChanges();
     });
   }
 
-  private patchWithContext(component: NbCalendarCell<T>, date: Date) {
+  private patchWithContext(component: NbCalendarCell<D, T>, date: D) {
     component.visibleDate = this.visibleDate;
     component.selectedValue = this.selectedValue;
     component.date = date;
