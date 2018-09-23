@@ -20,6 +20,20 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * Basic usage example
  * @stacked-example(Showcase, calendar/calendar-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbCalendarRangeModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCalendarRangeModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * If you want to select ranges you can use `NbCalendarRangeComponent`.
  *
  * ```html

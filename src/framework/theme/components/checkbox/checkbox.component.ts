@@ -13,6 +13,20 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Showcase, checkbox/checkbox-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbCheckboxComponent` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCheckboxComponent,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Can have one of the following statuses: danger, success or warning
  *
  * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)

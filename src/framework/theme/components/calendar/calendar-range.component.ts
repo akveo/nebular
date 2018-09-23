@@ -22,6 +22,18 @@ export interface NbCalendarRange<D> {
  * ```html
  * <nb-calendar-range [(range)]="range"></nb-calendar-range>
  * ```
+ * ### Installation
+ *
+ * Import `NbCalendarModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCalendarModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
  */
 @Component({
   selector: 'nb-calendar-range',
