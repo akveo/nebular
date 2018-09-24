@@ -15,7 +15,20 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  *   <nb-user name="Jonh Doe" title="Engineer"></nb-user>
  * ```
- * Can be used as a user profile link.
+ *
+ * ### Installation
+ *
+ * Import `NbUserModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbUserModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Available in multiple sizes:
  * @stacked-example(Multiple Sizes, user/user-sizes.component)

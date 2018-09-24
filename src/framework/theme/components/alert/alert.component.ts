@@ -21,6 +21,19 @@ import { convertToBoolProperty } from '../helpers';
  *   You have been successfully authenticated!
  * </nb-alert>
  * ```
+ * ### Installation
+ *
+ * Import `NbButtonModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbAlertModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Alert could additionally have a `close` button when `closable` property is set:
  * ```html

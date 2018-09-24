@@ -39,6 +39,19 @@ import { NbPopoverComponent } from './popover.component';
  *   <span>Hello, Popover!</span>
  * </ng-template>
  * ```
+ * ### Installation
+ *
+ * Import `NbPopoverModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbPopoverModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Custom components
  *

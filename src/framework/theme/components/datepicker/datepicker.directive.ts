@@ -115,6 +115,20 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
  *
  * @stacked-example(Showcase, datepicker/datepicker-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbDatepickerModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbDatepickerModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * If you want to use range selection, you have to use `NbRangepickerComponent` instead:
  *
  * ```html

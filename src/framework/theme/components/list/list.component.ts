@@ -6,7 +6,21 @@ import { Component, Input, HostBinding } from '@angular/core';
  * Basic example:
  * @stacked-example(Simple list, list/simple-list-showcase.component)
  *
- * `nb-list-item` accepts arbitrary content, so you can create list of any components.
+ * `nb-list-item` accepts arbitrary content, so you can create a list of any components.
+ *
+ * ### Installation
+ *
+ * Import `NbListModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbListModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * List of users:
  * @stacked-example(Users list, list/users-list-showcase.component)
