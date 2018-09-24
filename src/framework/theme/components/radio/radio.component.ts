@@ -8,10 +8,14 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'nb-radio',
+  styleUrls: ['./_radio.component.theme.scss'],
   template: `
     <label [attr.for]="id">
       <input type="radio" [name]="name" [attr.id]="id">
-      <ng-content></ng-content>
+      <span class="radio-indicator"></span>
+      <span class="radio-description">
+        <ng-content></ng-content>
+      </span>
     </label>
   `,
 })
