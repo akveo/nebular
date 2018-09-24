@@ -18,8 +18,8 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
     <i [ngClass]="{'nb-arrow-right': isLtr, 'nb-arrow-left': isRtl }" (click)="next.emit()"></i>
   `,
 })
-export class NbCalendarPageableNavigationComponent {
-  @Input() date: Date;
+export class NbCalendarPageableNavigationComponent<D> {
+  @Input() date: D;
   @Output() changeMode = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();

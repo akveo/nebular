@@ -7,10 +7,11 @@ export enum NbTrigger {
   CLICK = 'click',
   HOVER = 'hover',
   HINT = 'hint',
+  FOCUS = 'focus',
 }
 
 /**
- * Provides entity with three event stream: show, hide and toggle.
+ * Provides entity with two event stream: show and hide.
  * Each stream provides different events depends on implementation.
  * We have three main trigger strategies: click, hint and hover.
  * */
@@ -27,7 +28,7 @@ export abstract class NbTriggerStrategy {
 }
 
 /**
- * Creates toggle and close events streams, show stream is empty.
+ * Creates show and hide event streams.
  * Fires toggle event when the click was performed on the host element.
  * Fires close event when the click was performed on the document but
  * not on the host or container.
@@ -71,7 +72,7 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
 }
 
 /**
- * Creates open and close events streams, the toggle is empty.
+ * Creates show and hide event streams.
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element and stops out of the host and popover container.
  * */
@@ -99,7 +100,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 }
 
 /**
- * Creates open and close events streams, the toggle is empty.
+ * Creates show and hide event streams.
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element.
  * */
@@ -112,6 +113,64 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
     );
 
   hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave');
+}
+
+
+/**
+ * Creates show and hide event streams.
+ * Fires open event when a focus is on the host element and stay over at least 100 milliseconds.
+ * Fires close event when the focus leaves the host element.
+ * */
+export class NbFocusTriggerStrategy extends NbTriggerStrategy {
+
+  protected isNotOnHostOrContainer(event: Event): boolean {
+    return !this.isOnHost(event) && !this.isOnContainer(event);
+  }
+
+  protected isOnHost({ target }: Event): boolean {
+    return this.host.contains(target as Node);
+  }
+
+  protected isOnContainer({ target }: Event): boolean {
+    return this.container() && this.container().location.nativeElement.contains(target);
+  }
+
+  protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
+    .pipe(
+      switchMap(() => observableFromEvent<Event>(this.document, 'focusin')
+        .pipe(
+          takeWhile(() => !!this.container()),
+          filter(event => this.isNotOnHostOrContainer(event)),
+        ),
+      ),
+    );
+
+  protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click')
+    .pipe(
+      filter(() => !this.container()),
+    );
+
+  protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
+    .pipe(
+      filter(() => !!this.container()),
+      filter(event => this.isNotOnHostOrContainer(event)),
+    );
+
+  protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
+    .pipe(
+      filter((event: KeyboardEvent) => event.keyCode === 9),
+      filter(() => !!this.container()),
+    );
+
+  show$: Observable<Event> = observableMerge(observableFromEvent<Event>(this.host, 'focusin'), this.clickIn$)
+    .pipe(
+      filter(() => !this.container()),
+      debounceTime(100),
+      takeUntil(observableFromEvent(this.host, 'focusout')),
+      repeat(),
+    );
+
+  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$);
 }
 
 export class NbTriggerStrategyBuilder {
@@ -148,6 +207,8 @@ export class NbTriggerStrategyBuilder {
         return new NbHintTriggerStrategy(this._document, this._host, this._container);
       case NbTrigger.HOVER:
         return new NbHoverTriggerStrategy(this._document, this._host, this._container);
+      case NbTrigger.FOCUS:
+        return new NbFocusTriggerStrategy(this._document, this._host, this._container);
       default:
         throw new Error('Trigger have to be provided');
     }

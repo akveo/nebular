@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ComponentRef } from '@angular/core';
 
 import { NbTrigger, NbTriggerStrategyBuilder } from './overlay-trigger';
 import { NB_DOCUMENT } from '../../../theme.options';
+import createSpy = jasmine.createSpy;
 
 
 describe('click-trigger-strategy', () => {
@@ -164,4 +165,89 @@ describe('hint-trigger-strategy', () => {
     triggerStrategy.hide$.subscribe(done);
     mouseLeave(host);
   });
+});
+
+describe('focus-trigger-strategy', () => {
+  let triggerStrategyBuilder: NbTriggerStrategyBuilder;
+  let document: Document;
+  let host: HTMLElement;
+  let container: HTMLElement;
+
+  const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
+
+  const focus = el => el.dispatchEvent(new Event('focusin', { bubbles: true }));
+
+  const blur = el => el.dispatchEvent(new Event('focusout', { bubbles: true }));
+
+  const click = el => el.dispatchEvent(new Event('click', { bubbles: true }));
+
+  const tab = (el, target) => el.dispatchEvent(new KeyboardEvent('keydown', <any> {
+    target: target,
+    keyCode: 9,
+  }));
+
+  const createElement = () => document.createElement('div');
+
+  beforeEach(() => {
+    const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
+    document = bed.get(NB_DOCUMENT);
+  });
+
+  beforeEach(() => {
+    host = createElement();
+    container = createElement();
+    triggerStrategyBuilder = new NbTriggerStrategyBuilder()
+      .document(document)
+      .trigger(NbTrigger.FOCUS)
+      .host(host)
+      .container(withContainer(container));
+  });
+
+  it('should fire show$ when focused into host', done => {
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+    triggerStrategy.show$.subscribe(done);
+    focus(host);
+  });
+
+  it('should fire show$ when clicked into host', done => {
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+    triggerStrategy.show$.subscribe(done);
+    click(host);
+  });
+
+  it('should fire hide$ when clicked on document', done => {
+    const triggerStrategy = triggerStrategyBuilder.build();
+    triggerStrategy.hide$.subscribe(done);
+    click(document);
+  });
+
+  it('should fire hide$ when tab pressed', done => {
+    const triggerStrategy = triggerStrategyBuilder.build();
+    triggerStrategy.hide$.subscribe(done);
+    tab(document, host);
+  });
+
+  it('should fire hide$ when focusout', done => {
+    const triggerStrategy = triggerStrategyBuilder.build();
+    triggerStrategy.hide$.subscribe(done);
+    blur(host);
+    focus(document);
+  });
+
+  it('should fire show$ once when focused and clicked into host', fakeAsync(() => {
+    const showSpy = createSpy('showSpy');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+    triggerStrategy.show$.subscribe(showSpy);
+    focus(host);
+    click(host);
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(1);
+  }));
 });

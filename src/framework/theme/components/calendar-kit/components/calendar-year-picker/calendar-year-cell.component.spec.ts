@@ -6,21 +6,22 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarYearCell', () => {
-  let component: NbCalendarYearCellComponent;
-  let fixture: ComponentFixture<NbCalendarYearCellComponent>;
+  let component: NbCalendarYearCellComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarYearCellComponent<Date>>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarYearCellComponent],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    fixture = TestBed.createComponent(NbCalendarYearCellComponent);
+    fixture = TestBed.createComponent<NbCalendarYearCellComponent<Date>>(NbCalendarYearCellComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

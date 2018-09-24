@@ -655,6 +655,13 @@ $theme: (
   select-option-disabled-bg: #f2f4f7,
   select-option-disabled-opacity: 0.3,
   select-option-padding: 0.75rem 1.5rem,
+
+  datepicker-fg: color-fg-heading,
+  datepicker-bg: color-bg,
+  datepicker-border: color-success,
+  datepicker-border-radius: radius,
+  datepicker-shadow: none,
+  datepicker-arrow-size: 11px,
 );
 
 // register the theme

@@ -6,21 +6,24 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DatePipe } from '@angular/common';
 
 import { NbCalendarYearPickerComponent } from './calendar-year-picker.component';
+import { NbDateService, NbNativeDateService } from '../../services';
 
 
 describe('Component: NbCalendarYearPicker', () => {
-  let fixture: ComponentFixture<NbCalendarYearPickerComponent>;
-  let component: NbCalendarYearPickerComponent;
+  let fixture: ComponentFixture<NbCalendarYearPickerComponent<Date>>;
+  let component: NbCalendarYearPickerComponent<Date>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [DatePipe, { provide: NbDateService, useClass: NbNativeDateService }],
       declarations: [NbCalendarYearPickerComponent],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent(NbCalendarYearPickerComponent);
+    fixture = TestBed.createComponent<NbCalendarYearPickerComponent<Date>>(NbCalendarYearPickerComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

@@ -5,17 +5,19 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
+import { DatePipe } from '@angular/common';
 
 import { NbCalendarMonthModelService } from './calendar-month-model.service';
-import { NbLocaleService } from '@nebular/theme';
+import { NbDateService } from './date.service';
+import { NbNativeDateService } from './native-date.service';
 
 
 describe('month-model-service', () => {
-  let monthModel: NbCalendarMonthModelService;
+  let monthModel: NbCalendarMonthModelService<Date>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NbLocaleService, NbCalendarMonthModelService],
+      providers: [DatePipe, { provide: NbDateService, useClass: NbNativeDateService }, NbCalendarMonthModelService],
     });
   });
 

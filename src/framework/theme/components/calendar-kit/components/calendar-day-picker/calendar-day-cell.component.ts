@@ -14,8 +14,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbDateTimeUtil } from '../../services/date-time-util';
 import { NbCalendarCell } from '../../model';
+import { NbDateService } from '../../services';
 
 
 @Component({
@@ -24,32 +24,35 @@ import { NbCalendarCell } from '../../model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'day-cell' },
 })
-export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
+export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
 
-  @Input() date: Date;
+  @Input() date: D;
 
-  @Input() selectedValue: Date;
+  @Input() selectedValue: D;
 
-  @Input() visibleDate: Date;
+  @Input() visibleDate: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Input() filter: (Date) => boolean;
+  @Input() filter: (D) => boolean;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<D> = new EventEmitter(true);
+
+  constructor(protected dateService: NbDateService<D>) {
+  }
 
   @HostBinding('class.today') get today(): boolean {
-    return NbDateTimeUtil.isSameDaySafe(this.date, new Date());
+    return this.dateService.isSameDaySafe(this.date, this.dateService.today());
   }
 
   @HostBinding('class.bounding-month') get boundingMonth(): boolean {
-    return !NbDateTimeUtil.isSameMonthSafe(this.date, this.visibleDate);
+    return !this.dateService.isSameMonthSafe(this.date, this.visibleDate);
   }
 
   @HostBinding('class.selected') get selected(): boolean {
-    return NbDateTimeUtil.isSameDaySafe(this.date, this.selectedValue);
+    return this.dateService.isSameDaySafe(this.date, this.selectedValue);
   }
 
   @HostBinding('class.empty') get empty(): boolean {
@@ -61,7 +64,7 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
   }
 
   get day(): number {
-    return this.date && this.date.getDate();
+    return this.date && this.dateService.getDate(this.date);
   }
 
   @HostListener('click')
@@ -74,11 +77,11 @@ export class NbCalendarDayCellComponent implements NbCalendarCell<Date> {
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && NbDateTimeUtil.compareDates(this.date, this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.date, this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && NbDateTimeUtil.compareDates(this.date, this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.date, this.max) > 0;
   }
 
   private dontFitFilter(): boolean {

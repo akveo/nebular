@@ -8,20 +8,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarNavigation', () => {
-  let fixture: ComponentFixture<NbCalendarNavigationComponent>;
-  let component: NbCalendarNavigationComponent;
+  let fixture: ComponentFixture<NbCalendarNavigationComponent<Date>>;
+  let component: NbCalendarNavigationComponent<Date>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    fixture = TestBed.createComponent(NbCalendarNavigationComponent);
+    fixture = TestBed.createComponent<NbCalendarNavigationComponent<Date>>(NbCalendarNavigationComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });

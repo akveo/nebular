@@ -17,6 +17,10 @@
       height: nb-theme(calendar-large-height);
     }
 
+    nb-card {
+      margin: 0;
+    }
+
     nb-card-body {
       & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {
         padding: 0 1rem 1.5rem;
