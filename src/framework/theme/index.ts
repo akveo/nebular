@@ -80,3 +80,4 @@ export * from './components/select/select.module';
 export * from './components/window';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
+export * from './components/radio/radio.module';

@@ -41,7 +41,7 @@ import {
   NbDialogModule,
   NbSelectModule,
   NbWindowModule,
-  NbDatepickerModule,
+  NbDatepickerModule, NbRadioModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -248,6 +248,7 @@ import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.
 import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
 import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
+import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -288,6 +289,7 @@ export const NB_MODULES = [
   NbSelectModule,
   NbWindowModule.forRoot(),
   NbDatepickerModule,
+  NbRadioModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -488,6 +490,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbDatepickerFormsComponent,
   NbDatepickerValidationComponent,
   NbRangepickerShowcaseComponent,
+  NbRadioShowcaseComponent,
 ];
 
 @NgModule({
