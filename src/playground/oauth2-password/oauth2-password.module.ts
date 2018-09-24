@@ -15,7 +15,6 @@ import {
 } from '@nebular/theme';
 
 import {
-  NbAuthComponent,
   NbAuthModule,
   NbAuthOAuth2JWTToken,
   NbOAuth2AuthStrategy,
@@ -34,14 +33,8 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
     RouterModule,
     RouterModule.forChild([
       {
-        path: 'auth',
-        component: NbAuthComponent,
-        children: [
-          {
-            path: 'login',
-            component: NbOAuth2PasswordLoginComponent,
-          },
-        ],
+        path: '',
+        component: NbOAuth2PasswordLoginComponent,
       },
     ]),
 
@@ -70,7 +63,7 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
             requireValidToken: true,
           },
           redirect: {
-            success: '/oauth2-password/auth/login',
+            success: '/oauth2-password',
           },
         }),
       ],

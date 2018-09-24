@@ -2,6 +2,7 @@
 
 Auth module comes with a list of authentication components:
 
+- `<nb-auth-block></nb-auth-block>` - component-wrapper, provides basic styles for the forms, already included inside of the page-components;
 - `<nb-register></nb-register>` - registration page;
 - `<nb-login></nb-login>` - login page;
 - `<nb-logout></nb-logout>` - logout page - shows "logging out..." message while sending logout request;

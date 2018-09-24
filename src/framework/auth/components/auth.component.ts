@@ -22,9 +22,9 @@ import { takeWhile } from 'rxjs/operators';
             </nav>
           </nb-card-header>
           <nb-card-body>
-            <main class="auth-component-container">
+            <nb-auth-block>
               <router-outlet></router-outlet>
-            </main>
+            </nb-auth-block>
           </nb-card-body>
         </nb-card>
       </nb-layout-column>
