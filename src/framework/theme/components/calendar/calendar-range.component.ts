@@ -24,12 +24,12 @@ export interface NbCalendarRange<D> {
  * ```
  * ### Installation
  *
- * Import `NbCalendarModule` to your feature module.
+ * Import `NbCalendarRangeModule` to your feature module.
  * ```ts
  * @NgModule({
  *   imports: [
  *   	// ...
- *     NbCalendarModule,
+ *     NbCalendarRangeModule,
  *   ],
  * })
  * export class PageModule { }

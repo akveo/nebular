@@ -18,12 +18,12 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  *
  * ### Installation
  *
- * Import `NbCalendarModule` to your feature module.
+ * Import `NbBadgeModule` to your feature module.
  * ```ts
  * @NgModule({
  *   imports: [
  *   	// ...
- *     NbCalendarModule,
+ *     NbBadgeModule,
  *   ],
  * })
  * export class PageModule { }

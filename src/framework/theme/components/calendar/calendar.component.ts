@@ -22,12 +22,12 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  *
  * ### Installation
  *
- * Import `NbCalendarRangeModule` to your feature module.
+ * Import `NbCalendarModule` to your feature module.
  * ```ts
  * @NgModule({
  *   imports: [
  *   	// ...
- *     NbCalendarRangeModule,
+ *     NbCalendarModule,
  *   ],
  * })
  * export class PageModule { }
