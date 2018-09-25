@@ -4,7 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 
 @Component({
   selector: 'nb-radio',
@@ -16,6 +23,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
         [attr.id]="id"
         [value]="value"
         [checked]="checked"
+        [disabled]="disabled"
         (change)="onChange($event)"
         (click)="onClick($event)">
       <span class="radio-indicator"></span>
@@ -24,7 +32,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       </span>
     </label>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRadioComponent {
   protected static NEXT_UNIQUE_ID: number = 0;
@@ -37,15 +44,29 @@ export class NbRadioComponent {
 
   @Input() value: any;
 
+  @Input('disabled')
+  set setDisabled(disabled: boolean) {
+    this.disabled = convertToBoolProperty(disabled);
+  }
+
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
+
+  disabled: boolean;
+
+  constructor(protected cd: ChangeDetectorRef) {}
+
+  markForCheck() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
 
   onChange(event: Event) {
     event.stopPropagation();
+    this.checked = true;
+    this.valueChange.emit(this.value);
   }
 
   onClick(event: Event) {
     event.stopPropagation();
-    this.checked = true;
-    this.valueChange.emit(this.value);
   }
 }

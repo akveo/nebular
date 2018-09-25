@@ -54,6 +54,10 @@
 @mixin nb-radio-theme() {
   nb-radio {
 
+    &.disabled {
+      pointer-events: none;
+    }
+
     label {
       position: relative;
       display: inline-flex;

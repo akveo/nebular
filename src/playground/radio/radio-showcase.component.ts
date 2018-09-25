@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
         <nb-radio-group>
           <nb-radio
             *ngFor="let option of options"
+            [disabled]="option.value === 'This is value 2'"
             [value]="option.value">
             {{ option.label }}
           </nb-radio>

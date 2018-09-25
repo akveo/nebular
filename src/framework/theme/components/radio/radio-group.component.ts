@@ -7,6 +7,7 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   EventEmitter,
@@ -20,13 +21,13 @@ import { NbRadioComponent } from './radio.component';
 import { merge } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 
 
 @Component({
   selector: 'nb-radio-group',
   template: `
     <ng-content></ng-content>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -39,19 +40,39 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 
-  @Input() value: any;
+  @Input('value')
+  set setValue(value: any) {
+    this.value = value;
+    this.updateValues();
+  }
 
-  @Input() name: string;
+  @Input('name')
+  set setName(name: string){
+    this.name = name;
+    this.updateNames();
+  }
+
+  @Input('disabled')
+  set setDisabled(disabled: boolean) {
+    this.disabled = convertToBoolProperty(disabled);
+    this.updateDisabled();
+  }
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
+  protected disabled: boolean;
+  protected value: any;
+  protected name: string;
   protected alive: boolean = true;
   protected onChange: Function = () => {
   };
 
+  constructor(protected cd: ChangeDetectorRef) {}
+
   ngAfterContentInit() {
-    this.updateRadiosNames();
+    this.updateNames();
     this.updateValues();
+    this.updateDisabled();
     this.subscribeOnRadiosValueChange();
   }
 
@@ -70,14 +91,29 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.value = value;
   }
 
-  protected updateRadiosNames() {
-    this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
+  protected updateNames() {
+    if (this.radios) {
+      this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
+      this.markRadiosForCheck();
+    }
   }
 
   protected updateValues() {
-    this.radios.forEach((radio: NbRadioComponent) => {
-      radio.checked = radio.value === this.value;
-    });
+    if (this.radios) {
+      this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
+      this.markRadiosForCheck();
+    }
+  }
+
+  protected updateDisabled() {
+    if (this.radios) {
+      this.radios.forEach((radio: NbRadioComponent) => {
+        if (!radio.hasOwnProperty('disabled')) {
+          radio.setDisabled = this.disabled
+        }
+      });
+      this.markRadiosForCheck();
+    }
   }
 
   protected subscribeOnRadiosValueChange() {
@@ -92,5 +128,9 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected propagateValue(value: any) {
     this.valueChange.emit(value);
     this.onChange(value);
+  }
+
+  protected markRadiosForCheck() {
+    this.radios.forEach((radio: NbRadioComponent) => radio.markForCheck());
   }
 }
