@@ -5,7 +5,7 @@
  */
 
 @mixin input-border-color($color) {
-  input:checked ~ .radio-indicator, input:hover ~ .radio-indicator {
+  input:checked ~ .radio-indicator, input:hover:not(:disabled) ~ .radio-indicator {
     border-color: $color;
   }
 }

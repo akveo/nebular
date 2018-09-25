@@ -200,6 +200,7 @@ import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.compon
 import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
 import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
+import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 
 
 export const routes: Routes = [
@@ -320,6 +321,10 @@ export const routes: Routes = [
           {
             path: 'radio-showcase.component',
             component: NbRadioShowcaseComponent,
+          },
+          {
+            path: 'radio-disabled.component',
+            component: NbRadioDisabledComponent,
           },
         ],
       },
