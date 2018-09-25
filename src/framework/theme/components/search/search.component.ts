@@ -166,6 +166,19 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
  * ```ts
  *  <nb-search type="rotate-layout"></nb-search>
  * ```
+ * ### Installation
+ *
+ * Import `NbSearchModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSearchModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Several animation types are available:
  * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half

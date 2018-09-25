@@ -57,6 +57,20 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Showcase, select/select-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbSelectModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSelectModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * If you want to use it as the multi-select control you have to mark it as `multiple`.
  * In this case, `nb-select` will work only with arrays - accept arrays and propagate arrays.
  *

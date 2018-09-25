@@ -84,6 +84,19 @@ export class NbActionComponent {
  *   <nb-action icon="nb-person"></nb-action>
  * </nb-actions>
  * ```
+ * ### Installation
+ *
+ * Import `NbActionsModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbActionsModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Multiple sizes example:
  * @stacked-example(Multiple Sizes, action/action-sizes.component)

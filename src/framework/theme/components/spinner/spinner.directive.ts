@@ -29,6 +29,20 @@ import { NbSpinnerComponent } from './spinner.component';
  * </nb-card>
  * ```
  *
+ * ### Installation
+ *
+ * Import `NbSpinnerModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSpinnerModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Could be colored using `status` property
  *
  * @stacked-example(Spinner Colors, spinner/spinner-colors.component)

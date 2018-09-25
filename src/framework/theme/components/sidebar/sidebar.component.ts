@@ -49,6 +49,30 @@ export class NbSidebarFooterComponent {
  *
  * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbSidebarModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSidebarModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * and `NbSidebarModule` to your feature module where the component should be shown:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSidebarModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Sidebar can be placed on the left or the right side of the layout,
  * or on start/end position of layout (depends on document direction, left to right or right to left)
  * It can be fixed (shown above the content) or can push the layout when opened.

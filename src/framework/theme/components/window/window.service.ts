@@ -18,6 +18,21 @@ import { NbWindowComponent } from './window.component';
  *
  * @stacked-example(Showcase, window/window-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbWindowModule` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbWindowModule.forRoot(config),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ *
+ * ### Usage
+ *
  * A new window can be opened by calling the `open` method with a component or template to be loaded
  * and an optional configuration.
  * `open` method will return `NbWindowRef` that can be used for the further manipulations.

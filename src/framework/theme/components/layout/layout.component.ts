@@ -188,7 +188,29 @@ export class NbLayoutFooterComponent {
  *  <nb-sidebar></nb-sidebar>
  * </nb-layout>
  * ```
+ * ### Installation
  *
+ * Import `NbLayoutModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbLayoutModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * and `NbLayoutModule` to your feature module where the component should be shown:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbLayoutModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  * By default the layout fills up the whole view-port.
  * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
  * won't mess with the fixed nb-header.
