@@ -26,7 +26,7 @@
   }
 }
 
-@mixin radio($size, $color, $border-size) {
+@mixin nb-radio($size, $color) {
   &::before {
     content: '';
     position: absolute;
@@ -53,6 +53,7 @@
 
 @mixin nb-radio-theme() {
   nb-radio {
+
     label {
       position: relative;
       display: inline-flex;
@@ -60,6 +61,7 @@
       min-height: inherit;
       padding: 0.375rem 1.5rem;
     }
+
     .radio-indicator {
       @include set-style(
           nb-theme(radio-bg),
@@ -76,18 +78,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      @include radio(
-          nb-theme(radio-size),
-          nb-theme(radio-checkmark),
-          nb-theme(radio-border-size)
-      );
+
+      @include nb-radio(nb-theme(radio-size), nb-theme(radio-checkmark));
     }
+
     input {
       position: absolute;
       opacity: 0;
       z-index: -1;
-    }
-    input {
+
       &:checked ~ .radio-indicator {
         @include set-style(
             nb-theme(radio-checked-bg),
@@ -98,12 +97,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        @include radio(
+        @include nb-radio(
             nb-theme(radio-checked-size),
-            nb-theme(radio-checked-checkmark),
-            nb-theme(radio-checked-border-size)
+            nb-theme(radio-checked-checkmark)
         );
       }
+
       &:disabled ~ {
         .radio-indicator {
           @include set-style(
@@ -116,16 +115,16 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          @include radio(
+          @include nb-radio(
               nb-theme(radio-disabled-size),
-              nb-theme(radio-checkmark),
-              nb-theme(radio-disabled-border-size)
+              nb-theme(radio-checkmark)
           );
         }
         .radio-description {
           @include description-style;
         }
       }
+
       &:disabled:checked ~ {
         .radio-indicator {
           @include set-style(
@@ -138,10 +137,9 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          @include radio(
+          @include nb-radio(
               nb-theme(radio-disabled-size),
-              nb-theme(radio-disabled-checkmark),
-              nb-theme(radio-disabled-border-size)
+              nb-theme(radio-disabled-checkmark)
           );
         }
         .radio-description {
@@ -149,6 +147,7 @@
         }
       }
     }
+
     @include nb-input-status-color(nb-theme(radio-checked-border-color));
     .radio-description {
       @include description-style;

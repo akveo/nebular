@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 @Component({
   selector: 'nb-radio',
-  styleUrls: ['./_radio.component.theme.scss'],
   template: `
     <label [attr.for]="id">
       <input
@@ -43,11 +42,11 @@ export class NbRadioComponent<T> {
 
   onChange(event: Event) {
     event.stopPropagation();
-    this.checked = true;
-    this.valueChange.emit(this.value);
   }
 
   onClick(event: Event) {
     event.stopPropagation();
+    this.checked = true;
+    this.valueChange.emit(this.value);
   }
 }
