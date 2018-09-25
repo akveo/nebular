@@ -49,6 +49,7 @@
 
 @mixin nb-radio-theme() {
   nb-radio {
+    display: block;
 
     &.disabled {
       pointer-events: none;
@@ -80,6 +81,12 @@
       align-items: center;
 
       @include nb-radio(nb-theme(radio-size), nb-theme(radio-checkmark));
+
+      &::before {
+        width: 0;
+        height: 0;
+        transition: all 0.1s;
+      }
     }
 
     input {
