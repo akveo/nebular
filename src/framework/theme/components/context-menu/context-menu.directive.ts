@@ -4,20 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ComponentFactoryResolver, Directive, ElementRef, HostListener, Inject, Input, OnDestroy,
-  OnInit, PLATFORM_ID,
-} from '@angular/core';
+import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
-import { NbPopoverDirective } from '../popover/popover.directive';
-import { NbMenuItem, NbMenuService } from '../menu/menu.service';
-import { NbThemeService } from '../../services/theme.service';
-import { NbPopoverAdjustment, NbPopoverPlacement } from '../popover/helpers/model';
+
+import {
+  createContainer,
+  NbAdjustableConnectedPositionStrategy,
+  NbAdjustment,
+  NbOverlayRef,
+  NbOverlayService,
+  NbPosition,
+  NbPositionBuilderService,
+  NbTrigger,
+  NbTriggerStrategy,
+  NbTriggerStrategyBuilder,
+  patch,
+} from '../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
-import { NbPositioningHelper } from '../popover/helpers/positioning.helper';
-import { NbAdjustmentHelper } from '../popover/helpers/adjustment.helper';
-import { NbTriggerHelper } from '../popover/helpers/trigger.helper';
-import { NbPlacementHelper } from '../popover/helpers/placement.helper';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * Full featured context menu directive.
@@ -31,9 +36,22 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
+ * ### Installation
+ *
+ * Import `NbContextMenuModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbContextMenuModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * If you want to handle context menu clicks you have to pass `nbContextMenuTag`
- * param and subscribe to events using NbMenuService.
+ * param and register to events using NbMenuService.
  * `NbContextMenu` renders plain `NbMenu` inside, so
  * you have to work with it just like with `NbMenu` component:
  *
@@ -51,7 +69,7 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
  * ```
  *
  * By default context menu will try to adjust itself to maximally fit viewport
- * and provide the best user experience. It will try to change placement of the context menu.
+ * and provide the best user experience. It will try to change position of the context menu.
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
@@ -63,110 +81,116 @@ import { NbPlacementHelper } from '../popover/helpers/placement.helper';
  * ```
  * */
 @Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective implements OnInit, OnDestroy {
+export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
 
   /**
-   * Basic menu items, will be passed to the internal NbMenuComponent.
-   * */
-  @Input('nbContextMenu')
-  set items(items: NbMenuItem[]) {
-    this.validateItems(items);
-    this.popover.context = Object.assign(this.context, { items });
-  };
-
-  /**
-   * Position will be calculated relatively host element based on the placement.
+   * Position will be calculated relatively host element based on the position.
    * Can be top, right, bottom and left.
    * */
   @Input('nbContextMenuPlacement')
-  set placement(placement: NbPopoverPlacement) {
-    this.popover.placement = placement;
-  };
+  position: NbPosition = NbPosition.BOTTOM;
 
   /**
-   * Container placement will be changes automatically based on this strategy if container can't fit view port.
+   * Container position will be changes automatically based on this strategy if container can't fit view port.
    * Set this property to any falsy value if you want to disable automatically adjustment.
    * Available values: clockwise, counterclockwise.
    * */
   @Input('nbContextMenuAdjustment')
-  set adjustment(adjustment: NbPopoverAdjustment) {
-    this.popover.adjustment = adjustment;
-  }
+  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Set NbMenu tag, which helps identify menu when working with NbMenuService.
    * */
   @Input('nbContextMenuTag')
-  set tag(tag: string) {
-    this.menuTag = tag;
-    this.popover.context = Object.assign(this.context, { tag });
+  tag: string;
+
+  /**
+   * Basic menu items, will be passed to the internal NbMenuComponent.
+   * */
+  @Input('nbContextMenu')
+  set setItems(items: NbMenuItem[]) {
+    this.validateItems(items);
+    this.items = items;
+  };
+
+  protected ref: NbOverlayRef;
+  protected container: ComponentRef<any>;
+  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected triggerStrategy: NbTriggerStrategy;
+  protected alive: boolean = true;
+  private items: NbMenuItem[] = [];
+
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              private menuService: NbMenuService,
+              private hostRef: ElementRef,
+              private positionBuilder: NbPositionBuilderService,
+              private overlay: NbOverlayService) {
   }
 
-  protected popover: NbPopoverDirective;
-  protected context = {};
+  ngAfterViewInit() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+    this.triggerStrategy = this.createTriggerStrategy();
 
-  private menuTag: string;
-  private alive: boolean = true;
-
-  constructor(hostRef: ElementRef,
-              themeService: NbThemeService,
-              componentFactoryResolver: ComponentFactoryResolver,
-              positioningHelper: NbPositioningHelper,
-              adjustmentHelper: NbAdjustmentHelper,
-              triggerHelper: NbTriggerHelper,
-              @Inject(PLATFORM_ID) platformId,
-              placementHelper: NbPlacementHelper,
-              private menuService: NbMenuService) {
-    /**
-     * Initialize popover with all the important inputs.
-     * */
-    this.popover = new NbPopoverDirective(hostRef,
-      themeService,
-      componentFactoryResolver,
-      positioningHelper,
-      adjustmentHelper,
-      triggerHelper,
-      platformId,
-      placementHelper,
-    );
-    this.popover.content = NbContextMenuComponent;
-    this.popover.placement = NbPopoverPlacement.BOTTOM;
-  }
-
-  ngOnInit() {
-    this.popover.ngOnInit();
+    this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
     this.subscribeOnItemClick();
   }
 
   ngOnDestroy() {
-    this.popover.ngOnDestroy();
     this.alive = false;
+    this.hide();
   }
 
-  /**
-   * Show context menu.
-   * */
   show() {
-    this.popover.show();
+    this.container = createContainer(this.ref, NbContextMenuComponent, {
+      position: this.position,
+      items: this.items,
+      tag: this.tag,
+    });
   }
 
-  /**
-   * Hide context menu.
-   * */
   hide() {
-    this.popover.hide();
+    this.ref.detach();
+    this.container = null;
   }
 
-  /**
-   * Toggle context menu state.
-   * */
   toggle() {
-    this.popover.toggle();
+    if (this.ref && this.ref.hasAttached()) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.popover.onResize();
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .position(this.position)
+      .adjustment(this.adjustment);
+  }
+
+  protected createTriggerStrategy(): NbTriggerStrategy {
+    return new NbTriggerStrategyBuilder()
+      .document(this.document)
+      .trigger(NbTrigger.CLICK)
+      .host(this.hostRef.nativeElement)
+      .container(() => this.container)
+      .build();
+  }
+
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  }
+
+  protected subscribeOnTriggers() {
+    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 
   /*
@@ -183,7 +207,7 @@ export class NbContextMenuDirective implements OnInit, OnDestroy {
     this.menuService.onItemClick()
       .pipe(
         takeWhile(() => this.alive),
-        filter(({tag}) => tag === this.menuTag),
+        filter(({ tag }) => tag === this.tag),
       )
       .subscribe(() => this.hide());
   }

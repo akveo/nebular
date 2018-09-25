@@ -5,20 +5,17 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbPopoverComponent } from './popover.component';
-import { NbSharedModule } from '../shared/shared.module';
+
+import { NbOverlayModule } from '../cdk';
 import { NbPopoverDirective } from './popover.directive';
-import { NbAdjustmentHelper } from './helpers/adjustment.helper';
-import { NbPositioningHelper } from './helpers/positioning.helper';
-import { NbTriggerHelper } from './helpers/trigger.helper';
-import { NbPlacementHelper } from './helpers/placement.helper';
+import { NbPopoverComponent } from './popover.component';
+
 
 @NgModule({
-  imports: [NbSharedModule],
-  declarations: [NbPopoverComponent, NbPopoverDirective],
+  imports: [NbOverlayModule],
+  declarations: [NbPopoverDirective, NbPopoverComponent],
   exports: [NbPopoverDirective],
   entryComponents: [NbPopoverComponent],
-  providers: [NbAdjustmentHelper, NbPositioningHelper, NbTriggerHelper, NbPlacementHelper],
 })
 export class NbPopoverModule {
 }

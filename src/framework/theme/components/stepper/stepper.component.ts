@@ -22,6 +22,20 @@ export enum NbStepperOrientation {
  *
  * @stacked-example(Showcase, stepper/stepper-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbStepperModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbStepperModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * If step label is string you can pass it as `label` attribute. Otherwise ng-template should be used:
  * ```html
  * // ...

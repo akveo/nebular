@@ -13,8 +13,6 @@ import { convertToBoolProperty } from '../helpers';
  * Route tabset components.
  * Renders tabs inside of a router-outlet.
  *
- * basic usage example
- *
  * ```ts
  *  tabs = [
  *  {
@@ -30,6 +28,18 @@ import { convertToBoolProperty } from '../helpers';
  *  ];
  *
  *  <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
+ * ```
+ * ### Installation
+ *
+ * Import `NbRouteTabsetModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbRouteTabsetModule,
+ *   ],
+ * })
+ * export class PageModule { }
  * ```
  *
  * @stacked-example(Route Tabset, tabset/route-tabset-showcase.component)

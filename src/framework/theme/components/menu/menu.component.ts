@@ -111,6 +111,29 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * // ...
  * <nb-menu [items]="items"></nb-menu>
  * ```
+ * ### Installation
+ *
+ * Import `NbMenuModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbMenuModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * and `NbMenuModule` to your feature module where the component should be shown:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbMenuModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Two-level menu example
  * @stacked-example(Two Levels, menu/menu-children.component)

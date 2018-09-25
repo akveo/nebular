@@ -241,11 +241,18 @@ $theme: (
   popover-fg: color-fg-heading,
   popover-bg: color-bg,
   popover-border: color-success,
+  popover-border-radius: radius,
   popover-shadow: none,
+  popover-arrow-size: 11px,
 
   context-menu-fg: color-fg-heading,
+  context-menu-bg: color-bg,
   context-menu-active-fg: color-white,
   context-menu-active-bg: color-success,
+  context-menu-border: color-success,
+  context-menu-border-radius: radius,
+  context-menu-shadow: none,
+  context-menu-arrow-size: 11px,
 
   actions-font-size: font-size,
   actions-font-family: font-secondary,
@@ -295,18 +302,14 @@ $theme: (
   smart-table-paging-bg-active: color-success,
   smart-table-paging-hover: rgba(0, 0, 0, 0.05),
 
-  toaster-bg: color-primary,
-  toaster-fg-default: color-inverse,
-  toaster-btn-close-bg: transparent,
-  toaster-btn-close-fg: toaster-fg-default,
-  toaster-shadow: shadow,
-
-  toaster-fg: color-white,
-  toaster-success: color-success,
-  toaster-info: color-info,
-  toaster-warning: color-warning,
-  toaster-wait: color-primary,
-  toaster-error: color-danger,
+  toastr-bg: color-bg,
+  toastr-padding: 1.125rem,
+  toastr-fg: color-fg-text,
+  toastr-border: 0.125rem solid,
+  toastr-border-radius: radius,
+  toastr-border-color: #bcc3cc,
+  toastr-icon-radius: 0.25rem,
+  toastr-shadow: shadow,
 
   btn-fg: color-white,
   btn-font-family: font-secondary,
@@ -628,6 +631,37 @@ $theme: (
   calendar-month-cell-large-height: 2.375rem,
   calendar-year-cell-large-width: calendar-month-cell-width,
   calendar-year-cell-large-height: calendar-month-cell-height,
+
+  overlay-backdrop-bg: rgba(0, 0, 0, 0.288),
+
+  tooltip-bg: color-fg-text,
+  tooltip-primary-bg: color-primary,
+  tooltip-info-bg: color-info,
+  tooltip-success-bg: color-success,
+  tooltip-warning-bg: color-warning,
+  tooltip-danger-bg: color-danger,
+  tooltip-fg: color-bg-active,
+  tooltip-status-fg: color-bg-active,
+  tooltip-shadow: shadow,
+  tooltip-font-size: font-size,
+
+  select-border-width: 2px,
+  select-max-height: 20rem,
+  select-bg: color-bg,
+
+  select-checkbox-color: checkbox-border-color,
+  select-checkmark-color: checkbox-border-color,
+
+  select-option-disabled-bg: #f2f4f7,
+  select-option-disabled-opacity: 0.3,
+  select-option-padding: 0.75rem 1.5rem,
+
+  datepicker-fg: color-fg-heading,
+  datepicker-bg: color-bg,
+  datepicker-border: color-success,
+  datepicker-border-radius: radius,
+  datepicker-shadow: none,
+  datepicker-arrow-size: 11px,
 );
 
 // register the theme

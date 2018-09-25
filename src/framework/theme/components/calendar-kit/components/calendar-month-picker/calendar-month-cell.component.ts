@@ -13,8 +13,8 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbDateTimeUtil, NbLocaleService } from '../../services';
 import { NbCalendarCell } from '../../model';
+import { NbDateService } from '../../services';
 
 
 @Component({
@@ -23,26 +23,26 @@ import { NbCalendarCell } from '../../model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'month-cell' },
 })
-export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
-  @Input() date: Date;
+export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
+  @Input() date: D;
 
-  @Input() selectedValue: Date;
+  @Input() selectedValue: D;
 
-  @Input() min: Date;
+  @Input() min: D;
 
-  @Input() max: Date;
+  @Input() max: D;
 
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Output() select: EventEmitter<D> = new EventEmitter(true);
 
-  constructor(private localeService: NbLocaleService) {
+  constructor(private dateService: NbDateService<D>) {
   }
 
   @HostBinding('class.selected') get selected(): boolean {
-    return this.selectedValue && NbDateTimeUtil.isSameMonth(this.date, this.selectedValue);
+    return this.dateService.isSameMonthSafe(this.date, this.selectedValue);
   }
 
   @HostBinding('class.today') get today(): boolean {
-    return this.date && NbDateTimeUtil.isSameMonth(this.date, new Date());
+    return this.dateService.isSameMonthSafe(this.date, this.dateService.today());
   }
 
   @HostBinding('class.disabled') get disabled(): boolean {
@@ -50,7 +50,7 @@ export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
   }
 
   get month(): string {
-    return this.localeService.getMonthNameByIndex(this.date.getMonth());
+    return this.dateService.getMonthName(this.date);
   }
 
   @HostListener('click')
@@ -63,18 +63,18 @@ export class NbCalendarMonthCellComponent implements NbCalendarCell<Date> {
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && NbDateTimeUtil.compareDates(this.monthEnd(), this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.monthEnd(), this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && NbDateTimeUtil.compareDates(this.monthStart(), this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.monthStart(), this.max) > 0;
   }
 
-  private monthStart(): Date {
-    return NbDateTimeUtil.getMonthStart(this.date);
+  private monthStart(): D {
+    return this.dateService.getMonthStart(this.date);
   }
 
-  private monthEnd(): Date {
-    return NbDateTimeUtil.getMonthEnd(this.date);
+  private monthEnd(): D {
+    return this.dateService.getMonthEnd(this.date);
   }
 }

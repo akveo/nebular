@@ -87,6 +87,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Bootstrap Integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'bootstrap-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: '3rd-party components',
         children: [
           {
@@ -283,6 +294,24 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'NbDatepickerDirective',
+          'NbDatepickerComponent',
+          'NbRangepickerComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -292,6 +321,7 @@ export const structure = [
         icon: 'popover.svg',
         source: [
           'NbPopoverDirective',
+          'NbPopoverComponent',
         ],
       },
       {
@@ -300,6 +330,45 @@ export const structure = [
         icon: 'context-menu.svg',
         source: [
           'NbContextMenuDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Dialog',
+        icon: 'dialog.svg',
+        source: [
+          'NbDialogService',
+          'NbDialogRef',
+          'NbDialogConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toastr',
+        icon: 'toastr.svg',
+        source: [
+          'NbToastrService',
+          'NbToastComponent',
+          'NbToastrConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
         ],
       },
       {

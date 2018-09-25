@@ -49,6 +49,33 @@ import { NbChatMessageComponent } from './chat-message.component';
  *   </nb-chat-form>
  * </nb-chat>
  * ```
+ * ### Installation
+ *
+ * Import `NbChatModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbChatModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ *
+ * If you need to provide an API key for a `map` message type (which is required by Google Maps)
+ * you may use `NbChatModule.forRoot({ ... })` call if this is a global app configuration
+ * or `NbChatModule.forChild({ ... })` for a feature module configuration:
+ *
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
+ *   ],
+ * })
+ * export class AppModule { }
+ *
+ * ### Usage
  *
  * There are three main components:
  * ```ts

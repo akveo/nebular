@@ -28,6 +28,20 @@ import { Component, Input, HostBinding } from '@angular/core';
  * </nb-flip-card>
  * ```
  *
+ * ### Installation
+ *
+ * Import `NbCardModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCardModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Flip Card with header and footer:
  * @stacked-example(With Header & Footer, flip-card/flip-card-full.component.ts)
  *

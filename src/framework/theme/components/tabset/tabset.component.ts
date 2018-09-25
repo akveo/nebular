@@ -144,6 +144,21 @@ export class NbTabComponent {
  *  </nb-tab>
  * </nb-tabset>
  * ```
+ *
+ * ### Installation
+ *
+ * Import `NbTabsetModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbTabsetModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * It is also possible to set a badge to a particular tab:
  * @stacked-example(Tab With Badge, tabset/tabset-badge.component)
  *

@@ -70,6 +70,21 @@ export class NbCardFooterComponent {
  *   </nb-card-body>
  * </nb-card>
  * ```
+ *
+ * ### Installation
+ *
+ * Import `NbCardModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCardModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Card with header and footer:
  * @stacked-example(With Header & Footer, card/card-full.component)
  *

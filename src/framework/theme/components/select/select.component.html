@@ -1,0 +1,31 @@
+<button
+  nbButton
+  [size]="size"
+  [status]="status"
+  [shape]="shape"
+  [hero]="hero"
+  [disabled]="disabled"
+  [fullWidth]="fullWidth"
+  [outline]="outline"
+  [class.opened]="isOpened"
+  [ngClass]="overlayPosition">
+
+    <ng-container *ngIf="selectionModel?.length">
+
+      <ng-container *ngIf="customLabel">
+        <ng-content select="nb-select-label"></ng-content>
+      </ng-container>
+
+      <ng-container *ngIf="!customLabel">{{ selectionView }}</ng-container>
+
+    </ng-container>
+
+    <ng-container *ngIf="!selectionModel?.length">{{ placeholder }}</ng-container>
+
+</button>
+
+<nb-card *nbPortal class="select" [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
+  <nb-card-body>
+    <ng-content select="nb-option, nb-option-group"></ng-content>
+  </nb-card-body>
+</nb-card>

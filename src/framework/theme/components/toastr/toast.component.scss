@@ -1,0 +1,50 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+:host {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  margin: 0.5rem;
+  opacity: 0.9;
+
+  .title {
+    font-weight: 800;
+    margin-right: 0.25rem;
+  }
+
+  > .content-container {
+    line-height: 1.25;
+
+    > .message {
+      font-weight: 300;
+    }
+  }
+
+  &.default, &:not(.has-icon) {
+    .content-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  &.destroy-by-click {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .icon {
+    font-size: 2.5rem;
+  }
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

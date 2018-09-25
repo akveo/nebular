@@ -5,12 +5,16 @@
  */
 
 // locally used mixin
-@mixin hover-border($color) {
+@mixin outline-border($color) {
   .customised-control-input:checked ~ .customised-control-indicator {
     border-color: $color;
   }
-  .customised-control-input:hover:enabled ~ .customised-control-indicator {
-    border-color: lighten($color, 10%);
+
+  &.focus .customised-control-input:enabled,
+  .customised-control-input:hover:enabled {
+    & ~ .customised-control-indicator {
+      border-color: lighten($color, 10%);
+    }
   }
 }
 // locally used mixin
@@ -150,15 +154,15 @@
       }
     }
 
-    @include hover-border(nb-theme(checkbox-checked-border-color));
+    @include outline-border(nb-theme(checkbox-checked-border-color));
     &.success {
-      @include hover-border(nb-theme(color-success));
+      @include outline-border(nb-theme(color-success));
     }
     &.warning {
-      @include hover-border(nb-theme(color-warning));
+      @include outline-border(nb-theme(color-warning));
     }
     &.danger {
-      @include hover-border(nb-theme(color-danger));
+      @include outline-border(nb-theme(color-danger));
     }
 
     .customised-control-description {

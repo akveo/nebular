@@ -6,17 +6,18 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { NbOverlayModule } from '../cdk';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuModule } from '../menu/menu.module';
-import { NbPopoverComponent } from '../popover/popover.component';
-import { NbPopoverModule } from '../popover/popover.module';
+
 
 @NgModule({
-  imports: [CommonModule, NbPopoverModule, NbMenuModule],
+  imports: [CommonModule, NbOverlayModule, NbMenuModule],
   exports: [NbContextMenuDirective],
   declarations: [NbContextMenuDirective, NbContextMenuComponent],
-  entryComponents: [NbPopoverComponent, NbContextMenuComponent],
+  entryComponents: [NbContextMenuComponent],
 })
 export class NbContextMenuModule {
 }

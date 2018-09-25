@@ -11,6 +11,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NbCalendarPickerComponent } from './calendar-picker.component';
 import { NbCalendarPickerRowComponent } from './calendar-picker-row.component';
 import { NbCalendarDayCellComponent } from '../calendar-day-picker/calendar-day-cell.component';
+import { DatePipe } from '@angular/common';
+import { NbDateService, NbNativeDateService } from '../../services';
 
 
 @NgModule({
@@ -21,11 +23,11 @@ export class NbCalendarPickerTestModule {
 }
 
 describe('Component: NbCalendarPicker', () => {
-  let fixture: ComponentFixture<NbCalendarPickerComponent<Date>>;
-  let component: NbCalendarPickerComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarPickerComponent<Date, Date>>;
+  let component: NbCalendarPickerComponent<Date, Date>;
   let componentEl: HTMLElement;
 
-  const queryTestRow = (): NbCalendarPickerRowComponent<Date> => {
+  const queryTestRow = (): NbCalendarPickerRowComponent<Date, Date> => {
     return fixture.debugElement
       .query(By.directive(NbCalendarPickerRowComponent))
       .componentInstance;
@@ -35,10 +37,11 @@ describe('Component: NbCalendarPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarPickerRowComponent, NbCalendarPickerComponent],
+      providers: [DatePipe, { provide: NbDateService, useClass: NbNativeDateService }],
       imports: [NbCalendarPickerTestModule],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    fixture = TestBed.createComponent<NbCalendarPickerComponent<Date>>(NbCalendarPickerComponent);
+    fixture = TestBed.createComponent<NbCalendarPickerComponent<Date, Date>>(NbCalendarPickerComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
     component.cellComponent = NbCalendarDayCellComponent;
@@ -55,7 +58,7 @@ describe('Component: NbCalendarPicker', () => {
     const activeMonth = new Date();
     component.visibleDate = activeMonth;
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     expect(row.visibleDate).toBe(activeMonth);
   });
 
@@ -63,7 +66,7 @@ describe('Component: NbCalendarPicker', () => {
     const selectedValue = new Date();
     component.selectedValue = selectedValue;
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     expect(row.selectedValue).toBe(selectedValue);
   });
 
@@ -71,7 +74,7 @@ describe('Component: NbCalendarPicker', () => {
     const min = new Date();
     component.min = min;
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     expect(row.min).toBe(min);
   });
 
@@ -79,7 +82,7 @@ describe('Component: NbCalendarPicker', () => {
     const max = new Date();
     component.max = max;
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     expect(row.max).toBe(max);
   });
 
@@ -87,7 +90,7 @@ describe('Component: NbCalendarPicker', () => {
     const filter = () => true;
     component.filter = filter;
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     expect(row.filter).toBe(filter);
   });
 
@@ -95,9 +98,8 @@ describe('Component: NbCalendarPicker', () => {
     const date = new Date();
     component.data = [[date]];
     fixture.detectChanges();
-    const row: NbCalendarPickerRowComponent<Date> = queryTestRow();
+    const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
     component.select.subscribe(e => expect(e).toBe(date));
     row.select.emit(date);
   });
 });
-

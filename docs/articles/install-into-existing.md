@@ -14,12 +14,8 @@ In case you want to start based on our ngx-admin starter kit, please check out [
 <hr>
 
 ## Installing dependencies
-At this step, we assume you already have Angular modules installed. Now let's install Angular Bootstrap which is the only peer dependency left:
 
-```bash
-npm i -S bootstrap
-```
-<hr>
+At this step, we assume you already have Angular modules installed.
 
 ## Install Nebular modules
 
@@ -54,11 +50,10 @@ Same way you can enable Auth Module (more details under [Auth Module Concepts & 
 ## Install Styles
 Now, let's import Nebular styles
 
-Include Bootstrap and default Nebular theme CSS files into your `.angular-cli.json` file:
+Include default Nebular theme CSS files into your `angular.json` file:
 
 ```scss
 "styles": [
-  "../node_modules/bootstrap/dist/css/bootstrap.css",
   "../node_modules/@nebular/theme/styles/prebuilt/default.css", // or cosmic.css
 ],
 ```

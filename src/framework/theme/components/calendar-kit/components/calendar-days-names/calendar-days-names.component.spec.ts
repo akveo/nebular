@@ -7,19 +7,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarDaysNamesComponent } from './calendar-days-names.component';
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarDaysNames', () => {
-  let fixture: ComponentFixture<NbCalendarDaysNamesComponent>;
+  let fixture: ComponentFixture<NbCalendarDaysNamesComponent<Date>>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NbCalendarDaysNamesComponent],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    fixture = TestBed.createComponent(NbCalendarDaysNamesComponent);
+    fixture = TestBed.createComponent<NbCalendarDaysNamesComponent<Date>>(NbCalendarDaysNamesComponent);
     componentEl = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   });
@@ -37,7 +38,7 @@ describe('Component: NbCalendarDaysNames', () => {
   it('should contain narrow names', () => {
     const days = componentEl.querySelectorAll('div');
     [].forEach.call(days, day => {
-      expect(day.textContent.length).toBe(1);
+      expect(day.textContent.length).toBe(2);
     });
   });
 });
