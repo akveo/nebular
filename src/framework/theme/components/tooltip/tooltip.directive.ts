@@ -27,6 +27,20 @@ import { NbTooltipComponent } from './tooltip.component';
  *
  * Tooltip directive for small text/icon hints.
  *
+ * ### Installation
+ *
+ * Import `NbTooltipModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbTooltipModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * @stacked-example(Showcase, tooltip/tooltip-showcase.component)
  *
  * Tooltip can accept a hint text and/or an icon:

@@ -33,7 +33,6 @@
     "@angular/forms": "^6.0.0",
     "@angular/http": "^6.0.0",
     "@nebular/theme": "2.0.0-rc.10",
-    "@nebular/bootstrap": "2.0.0-rc.10",
     "rxjs": "^6.1.0"
   }
 }

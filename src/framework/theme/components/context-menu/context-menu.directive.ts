@@ -36,6 +36,19 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ...
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
+ * ### Installation
+ *
+ * Import `NbContextMenuModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbContextMenuModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * If you want to handle context menu clicks you have to pass `nbContextMenuTag`
  * param and register to events using NbMenuService.

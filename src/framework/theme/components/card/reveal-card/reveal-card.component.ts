@@ -28,6 +28,20 @@ import { Component, Input, HostBinding } from '@angular/core';
  * </nb-reveal-card>
  * ```
  *
+ * ### Installation
+ *
+ * Import `NbCardModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbCardModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Reveal Card with header and footer:
  * @stacked-example(With Header & Footer, reveal-card/reveal-card-full.component)
  *
