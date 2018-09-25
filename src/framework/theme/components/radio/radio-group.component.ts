@@ -65,7 +65,7 @@ import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 @Component({
   selector: 'nb-radio-group',
   template: `
-    <ng-content></ng-content>`,
+    <ng-content select="nb-radio"></ng-content>`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
