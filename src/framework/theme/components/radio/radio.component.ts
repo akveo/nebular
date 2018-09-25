@@ -17,8 +17,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
         [value]="value"
         [checked]="checked"
         (change)="onChange($event)"
-        (click)="onClick($event)"
-      >
+        (click)="onClick($event)">
       <span class="radio-indicator"></span>
       <span class="radio-description">
         <ng-content></ng-content>
@@ -27,7 +26,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbRadioComponent<T> {
+export class NbRadioComponent {
   protected static NEXT_UNIQUE_ID: number = 0;
 
   @Input() name: string;
@@ -36,9 +35,9 @@ export class NbRadioComponent<T> {
 
   @Input() checked: boolean;
 
-  @Input() value: T;
+  @Input() value: any;
 
-  @Output() valueChange: EventEmitter<T> = new EventEmitter();
+  @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
   onChange(event: Event) {
     event.stopPropagation();

@@ -12,9 +12,17 @@ import { Component } from '@angular/core';
     <nb-card>
       <nb-card-body>
 
+        <nb-radio-group>
+          <nb-radio
+            *ngFor="let option of options"
+            [value]="option.value">
+            {{ option.label }}
+          </nb-radio>
+        </nb-radio-group>
+
         {{ value }}
 
-        <nb-radio-group name="group 1" [(value)]="value">
+        <nb-radio-group [(ngModel)]="value">
           <nb-radio
             *ngFor="let option of options"
             [value]="option.value">
