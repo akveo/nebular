@@ -4,13 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
 
@@ -34,6 +28,7 @@ import { convertToBoolProperty } from '../helpers';
       </span>
     </label>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRadioComponent {
   protected static NEXT_UNIQUE_ID: number = 0;

@@ -35,6 +35,7 @@ import { convertToBoolProperty } from '@nebular/theme/components/helpers';
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
