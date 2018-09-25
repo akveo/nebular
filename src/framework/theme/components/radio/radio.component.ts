@@ -18,6 +18,7 @@ import { convertToBoolProperty } from '../helpers';
  * ### Installation
  *
  * Import `NbRadioModule` to your feature module.
+ *
  * ```ts
  * @NgModule({
  *   imports: [

@@ -21,7 +21,7 @@ import { NbRadioComponent } from './radio.component';
 import { merge } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { convertToBoolProperty } from '@nebular/theme/components/helpers';
+import { convertToBoolProperty } from '../helpers';
 
 
 /**
