@@ -36,6 +36,7 @@
 @import '../../components/tooltip/tooltip.component.theme';
 @import '../../components/window/window.component.theme';
 @import '../../components/datepicker/datepicker-container.component.theme';
+@import '../../components/radio/radio.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -71,4 +72,5 @@
   @include nb-tooltip-theme();
   @include nb-window-theme();
   @include nb-datepicker-theme();
+  @include nb-radio-theme();
 }
