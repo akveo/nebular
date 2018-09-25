@@ -8,32 +8,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'nb-radio-showcase',
-  template: `
-    <nb-card>
-      <nb-card-body>
-
-        <nb-radio-group>
-          <nb-radio
-            *ngFor="let option of options"
-            [disabled]="option.value === 'This is value 2'"
-            [value]="option.value">
-            {{ option.label }}
-          </nb-radio>
-        </nb-radio-group>
-
-        {{ value }}
-
-        <nb-radio-group [(ngModel)]="value">
-          <nb-radio
-            *ngFor="let option of options"
-            [value]="option.value">
-            {{ option.label }}
-          </nb-radio>
-        </nb-radio-group>
-
-      </nb-card-body>
-    </nb-card>
-  `,
+  templateUrl: './radio-showcase.component.html',
 })
 export class NbRadioShowcaseComponent {
   options = [
@@ -42,5 +17,5 @@ export class NbRadioShowcaseComponent {
     { value: 'This is value 3', label: 'Option 3' },
     { value: 'This is value 4', label: 'Option 4' },
   ];
-  value;
+  option;
 }
