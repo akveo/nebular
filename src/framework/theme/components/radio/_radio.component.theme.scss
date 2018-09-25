@@ -5,11 +5,8 @@
  */
 
 @mixin input-border-color($color) {
-  input:checked ~ .radio-indicator {
+  input:checked ~ .radio-indicator, input:hover ~ .radio-indicator {
     border-color: $color;
-  }
-  input:hover:enabled ~ .radio-indicator {
-    border-color: lighten($color, 10%);
   }
 }
 
@@ -46,8 +43,7 @@
 }
 
 @mixin description-style {
-  color: nb-theme(color-fg-heading);
-  opacity: 0.5;
+  color: nb-theme(radio-fg);
   padding-left: 0.25rem;
 }
 
@@ -124,7 +120,9 @@
               nb-theme(radio-checkmark)
           );
         }
+
         .radio-description {
+          opacity: 0.5;
           @include description-style;
         }
       }
@@ -147,12 +145,14 @@
           );
         }
         .radio-description {
+          opacity: 0.5;
           @include description-style;
         }
       }
     }
 
     @include nb-input-status-color(nb-theme(radio-checked-border-color));
+
     .radio-description {
       @include description-style;
     }
