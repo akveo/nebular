@@ -1,5 +1,5 @@
-<h1 id="title" class="title">Sign In</h1>
-<p class="sub-title">Hello! Sign in with your username or email.</p>
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Hello! Log in with your email.</p>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oh snap!</b></p>
@@ -79,12 +79,12 @@
           status="success"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
-    Sign In
+    Log In
   </button>
 </form>
 
 <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
-  Or connect with:
+  or enter with:
   <div class="socials">
     <ng-container *ngFor="let socialLink of socialLinks">
       <a *ngIf="socialLink.link"
@@ -102,5 +102,5 @@
 </section>
 
 <section class="another-action" aria-label="Register">
-  Don't have an account? <a class="text-link" routerLink="../register">Sign Up</a>
+  Don't have an account? <a class="text-link" routerLink="../register">Register</a>
 </section>

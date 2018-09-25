@@ -1,4 +1,4 @@
-<h1 id="title" class="title">Sign Up</h1>
+<h1 id="title" class="title">Register</h1>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oh snap!</b></p>
@@ -134,7 +134,7 @@
 </form>
 
 <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
-  Or connect with:
+  or enter with:
   <div class="socials">
     <ng-container *ngFor="let socialLink of socialLinks">
       <a *ngIf="socialLink.link"
@@ -152,5 +152,5 @@
 </section>
 
 <section class="another-action" aria-label="Sign in">
-  Already have an account? <a class="text-link" routerLink="../login">Sign in</a>
+  Already have an account? <a class="text-link" routerLink="../login">Log in</a>
 </section>
