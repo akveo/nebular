@@ -51,10 +51,6 @@
   nb-radio {
     display: block;
 
-    &.disabled {
-      pointer-events: none;
-    }
-
     label {
       position: relative;
       display: inline-flex;

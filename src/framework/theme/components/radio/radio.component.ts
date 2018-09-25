@@ -41,7 +41,7 @@ import { convertToBoolProperty } from '../helpers';
  * </nb-radio-group>
  * ```
  *
- * You can disable some radios in the group using `disabled` attribute.
+ * You can disable some radios in the group using a `disabled` attribute.
  *
  * @stacked-example(Disabled, radio/radio-disabled.component)
  *
@@ -68,11 +68,10 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-radio',
   template: `
-    <label [attr.for]="id">
+    <label>
       <input
         type="radio"
         [name]="name"
-        [attr.id]="id"
         [value]="value"
         [checked]="checked"
         [disabled]="disabled"
@@ -87,11 +86,7 @@ import { convertToBoolProperty } from '../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRadioComponent {
-  protected static NEXT_UNIQUE_ID: number = 0;
-
   @Input() name: string;
-
-  @Input() id: string = `nb-radio-${++NbRadioComponent.NEXT_UNIQUE_ID}`;
 
   @Input() checked: boolean;
 

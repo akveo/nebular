@@ -46,15 +46,15 @@ import { convertToBoolProperty } from '../helpers';
  * </nb-radio-group>
  * ```
  *
- * Radio group name has to be provided through `name` input property of the radio group.
+ * Radio items name has to be provided through `name` input property of the radio group.
  *
  * ```html
- * <nb-radio-group name="my radio group">
+ * <nb-radio-group name="my-radio-group">
  *   ...
  * </nb-radio-group>
  * ```
  *
- * Also, you can disable whole the group using `disabled` attribute.
+ * Also, you can disable the whole group using `disabled` attribute.
  *
  * ```html
  * <nb-radio-group disabled>
@@ -103,8 +103,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected value: any;
   protected name: string;
   protected alive: boolean = true;
-  protected onChange: Function = () => {
-  };
+  protected onChange = (value: any) => {};
 
   constructor(protected cd: ChangeDetectorRef) {}
 

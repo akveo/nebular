@@ -17,6 +17,3 @@ import { NbRadioGroupComponent } from './radio-group.component';
 })
 export class NbRadioModule {
 }
-
-
-
