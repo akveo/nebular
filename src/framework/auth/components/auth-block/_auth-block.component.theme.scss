@@ -8,7 +8,7 @@
   nb-auth-block {
     .text-link {
       color: nb-theme(color-fg);
-      font-weight: bold;
+      font-weight: nb-theme(font-weight-bold);
     }
 
     .error-message {
