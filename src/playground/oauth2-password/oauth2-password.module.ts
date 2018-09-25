@@ -11,13 +11,15 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
-  NbCardModule,
-  NbLayoutModule,
+  NbAlertModule, NbCardModule, NbInputModule, NbLayoutModule,
 } from '@nebular/theme';
 
 import {
-  NbAuthModule, NbAuthOAuth2JWTToken,
-  NbOAuth2AuthStrategy, NbOAuth2ClientAuthMethod, NbOAuth2GrantType,
+  NbAuthModule,
+  NbAuthOAuth2JWTToken,
+  NbOAuth2AuthStrategy,
+  NbOAuth2ClientAuthMethod,
+  NbOAuth2GrantType,
 } from '@nebular/auth';
 
 import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
@@ -69,6 +71,8 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
 
     NbCardModule,
     NbLayoutModule,
+    NbAlertModule,
+    NbInputModule,
   ],
   declarations: [
     NbOAuth2PasswordLoginComponent,
