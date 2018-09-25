@@ -15,6 +15,21 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Showcase, radio/radio-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbRadioModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbRadioModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ *
+ * ### Usage
+ *
  * Radio buttons should be wrapped in `nb-radio-group` to provide form bindings.
  *
  * ```html
