@@ -9,6 +9,46 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { convertToBoolProperty } from '../helpers';
 
 
+/**
+ * The `NbRadioComponent` provides the same functionality as native `<input type="radio">`
+ * with Nebular styles and animations.
+ *
+ * @stacked-example(Showcase, radio/radio-showcase.component)
+ *
+ * Radio buttons should be wrapped in `nb-radio-group` to provide form bindings.
+ *
+ * ```html
+ * <nb-radio-group [(ngModule)]="selectedOption">
+ *   <nb-radio>Option 1</nb-radio>
+ *   <nb-radio>Option 2</nb-radio>
+ *   <nb-radio>Option 3</nb-radio>
+ * </nb-radio-group>
+ * ```
+ *
+ * You can disable some radios in the group using `disabled` attribute.
+ *
+ * @stacked-example(Disabled, radio/radio-disabled.component)
+ *
+ *
+ * @styles
+ *
+ * radio-bg
+ * radio-fg
+ * radio-size
+ * radio-border-size
+ * radio-border-color
+ * radio-checkmark
+ * radio-checked-bg
+ * radio-checked-size
+ * radio-checked-border-size
+ * radio-checked-border-color
+ * radio-checked-checkmark
+ * radio-disabled-bg
+ * radio-disabled-size
+ * radio-disabled-border-size
+ * radio-disabled-border-color
+ * radio-disabled-checkmark
+ * */
 @Component({
   selector: 'nb-radio',
   template: `

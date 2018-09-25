@@ -24,6 +24,44 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 
 
+/**
+ * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
+ * It provides form bindings:
+ *
+ * ```html
+ * <nb-radio-group [(ngModule)]="selectedOption">
+ *   <nb-radio>Option 1</nb-radio>
+ *   <nb-radio>Option 2</nb-radio>
+ *   <nb-radio>Option 3</nb-radio>
+ * </nb-radio-group>
+ * ```
+ *
+ * Also, you can use `value` and `valueChange` for binding without forms.
+ *
+ * ```html
+ * <nb-radio-group [(value)]="selectedOption">
+ *   <nb-radio>Option 1</nb-radio>
+ *   <nb-radio>Option 2</nb-radio>
+ *   <nb-radio>Option 3</nb-radio>
+ * </nb-radio-group>
+ * ```
+ *
+ * Radio group name has to be provided through `name` input property of the radio group.
+ *
+ * ```html
+ * <nb-radio-group name="my radio group">
+ *   ...
+ * </nb-radio-group>
+ * ```
+ *
+ * Also, you can disable whole the group using `disabled` attribute.
+ *
+ * ```html
+ * <nb-radio-group disabled>
+ *   ...
+ * </nb-radio-group>
+ * ```
+ * */
 @Component({
   selector: 'nb-radio-group',
   template: `
