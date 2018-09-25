@@ -23,18 +23,16 @@ describe('auth-service', () => {
   let authService: NbAuthService;
   let tokenService: NbTokenService;
   let dummyAuthStrategy: NbDummyAuthStrategy;
+  const testTokenValue = 'test-token';
   const ownerStrategyName = 'dummy';
 
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
-  // tslint:disable
-  const emptyToken = new NbAuthJWTToken('', 'dummy');
-  const validTokenValue = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c';
-  const validJWTToken = new NbAuthJWTToken(validTokenValue, 'dummy');
-  const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','dummy');
-  // tslint:enable
+  const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
+  const invalidToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -46,7 +44,7 @@ describe('auth-service', () => {
     '/',
     [],
     ['Successfully logged in.'],
-    validJWTToken);
+    testToken);
 
   const successLogoutResult = new NbAuthResult(true,
     resp200,
@@ -71,7 +69,7 @@ describe('auth-service', () => {
     null,
     [],
     ['Successfully refreshed token.'],
-    validJWTToken);
+    testToken);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -93,9 +91,6 @@ describe('auth-service', () => {
 
                 alwaysFail: true,
                 delay: 1000,
-                token: {
-                  class: NbAuthJWTToken,
-                },
               }),
             ],
           },
@@ -116,11 +111,11 @@ describe('auth-service', () => {
   it('get test token before set', () => {
       const spy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(validJWTToken));
+        .returnValue(observableOf(testToken));
 
       authService.getToken().subscribe((val: NbAuthSimpleToken) => {
         expect(spy).toHaveBeenCalled();
-        expect(val.getValue()).toEqual(validTokenValue);
+        expect(val.getValue()).toEqual(testTokenValue);
       });
     },
   );
@@ -128,7 +123,7 @@ describe('auth-service', () => {
   it('is authenticated true if token exists', () => {
       const spy = spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(validJWTToken));
+        .returnValue(observableOf(testToken));
 
       authService.isAuthenticated().subscribe((isAuth: boolean) => {
         expect(spy).toHaveBeenCalled();
@@ -150,11 +145,11 @@ describe('auth-service', () => {
   );
 
   it('isAuthenticatedOrRefresh, token valid, strategy refreshToken not called, returns true', (done) => {
-      const spy = spyOn(dummyAuthStrategy, 'refreshToken');
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
 
       spyOn(tokenService, 'get')
         .and
-        .returnValue(observableOf(validJWTToken));
+        .returnValue(observableOf(testToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
@@ -168,13 +163,17 @@ describe('auth-service', () => {
 
   it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns true', (done) => {
 
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(successResult));
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(expiredJWTToken), observableOf(validJWTToken));
+        .returnValues(observableOf(invalidToken), observableOf(testToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
@@ -187,13 +186,33 @@ describe('auth-service', () => {
   );
 
   it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns false', (done) => {
+
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
       const spy = spyOn(dummyAuthStrategy, 'refreshToken')
         .and
         .returnValue(observableOf(failResult));
 
       spyOn(tokenService, 'get')
         .and
-        .returnValues(observableOf(expiredJWTToken), observableOf(expiredJWTToken));
+        .returnValues(observableOf(invalidToken), observableOf(invalidToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token doesn\'t exist, strategy refreshToken called, returns false', (done) => {
+      const spy = spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(emptyToken));
 
       authService.isAuthenticatedOrRefresh()
         .pipe(first())
@@ -208,13 +227,13 @@ describe('auth-service', () => {
   it('onTokenChange return correct stream and gets test token', (done) => {
       const spy = spyOn(tokenService, 'tokenChange')
         .and
-        .returnValue(observableOf(validJWTToken));
+        .returnValue(observableOf(testToken));
 
       authService.onTokenChange()
         .pipe(first())
         .subscribe((token: NbAuthSimpleToken) => {
           expect(spy).toHaveBeenCalled();
-          expect(token.getValue()).toEqual(validTokenValue);
+          expect(token.getValue()).toEqual(testTokenValue);
           done();
         });
     },
@@ -265,7 +284,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getToken()).toEqual(validJWTToken);
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -315,7 +334,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully logged in.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toEqual('/');
-        expect(authRes.getToken()).toEqual(validJWTToken);
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
@@ -505,7 +524,7 @@ describe('auth-service', () => {
         expect(authRes.getMessages()).toEqual(['Successfully refreshed token.']);
         expect(authRes.getErrors()).toEqual([]);
         expect(authRes.getRedirect()).toBeNull();
-        expect(authRes.getToken()).toEqual(validJWTToken);
+        expect(authRes.getToken()).toEqual(testToken);
         expect(authRes.getResponse()).toEqual(resp200);
         done();
       })
