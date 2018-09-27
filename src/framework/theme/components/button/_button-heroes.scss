@@ -575,8 +575,8 @@
   @return btn-hero-line-height(nb-theme(btn-font-size-sm));
 }
 
-@function btn-hero-line-height-tn() {
-  @return btn-hero-line-height(nb-theme(btn-font-size-tn));
+@function btn-hero-line-height-xs() {
+  @return btn-hero-line-height(nb-theme(btn-font-size-xs));
 }
 
 
@@ -597,7 +597,7 @@
   }
 
   &.btn.btn-tn {
-    line-height: btn-hero-line-height-tn();
+    line-height: btn-hero-line-height-xs();
   }
 }
 
