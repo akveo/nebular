@@ -29,7 +29,8 @@
     "@angular/core": "^6.0.0",
     "@angular/router": "^6.0.0",
     "@angular/cdk": "^6.0.0",
-    "rxjs": "^6.1.0"
+    "rxjs": "^6.1.0",
+    "nebular-icons": "^1.1.0"
   },
   "dependencies": {
     "intersection-observer": "0.5.0",
