@@ -23,6 +23,11 @@
 - supports bidirectionality
 - requires approval from several core team contributors
 
+# New Package Checklist
+- add the package into bump-version.ts which bumps package version and its dependencies
+- add the package external dependencies into rollup-config.ts which gives rollup capability build package correctly
+- add the package into bundle.ts which build umd modules for our packages
+
 # Objectives
 The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 

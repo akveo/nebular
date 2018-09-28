@@ -9,8 +9,11 @@ import { TranslationWidth } from '@angular/common';
 
 import { NbDateService } from '@nebular/theme';
 
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import * as _moment from 'moment';
+// @ts-ignore
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 
 @Injectable()
