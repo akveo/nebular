@@ -41,6 +41,19 @@
     padding-right: 2em;
   }
 
+  .badges {
+    display: flex;
+    margin-bottom: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+
+    .stars {
+      width: 95px;
+      height: 20px;
+      margin-right: 1rem;
+    }
+  }
+
   .btn {
     display: inline-block;
     font-size: 1.125em;
