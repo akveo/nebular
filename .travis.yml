@@ -25,6 +25,7 @@ env:
     - MODE=lint
     - MODE=deploy_dev
     - MODE=publish_dev
+    - MODE=packages_smoke
 branches:
   only:
   - master
