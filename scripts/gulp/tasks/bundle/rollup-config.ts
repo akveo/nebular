@@ -30,10 +30,16 @@ const ROLLUP_GLOBALS = {
   // 3rd party dependencies
   'intersection-observer': 'intersection-observer',
 
+  // date libs for date service
+  'moment': 'moment',
+  'date-fns/parse': 'date-fns.parse',
+
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',
   '@nebular/auth': 'nb.auth',
   '@nebular/security': 'nb.security',
+  '@nebular/moment': 'nb.moment',
+  '@nebular/date-fns': 'nb.date-fns',
 };
 
 export const ROLLUP_COMMON_CONFIG = {
