@@ -87,6 +87,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Bootstrap Integration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'bootstrap-integration.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: '3rd-party components',
         children: [
           {
@@ -135,6 +146,10 @@ export const structure = [
         ],
       },
       {
+        type: 'group',
+        name: 'Global',
+      },
+      {
         type: 'tabs',
         name: 'Layout',
         icon: 'layout.svg',
@@ -143,27 +158,6 @@ export const structure = [
           'NbLayoutHeaderComponent',
           'NbLayoutColumnComponent',
           'NbLayoutFooterComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Sidebar',
-        icon: 'sidebar.svg',
-        source: [
-          'NbSidebarComponent',
-          'NbSidebarHeaderComponent',
-          'NbSidebarFooterComponent',
-          'NbSidebarService',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'NbMenuComponent',
-          'NbMenuItem',
-          'NbMenuService',
         ],
       },
       {
@@ -199,19 +193,59 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Alert',
-        icon: 'alert.svg',
+        name: 'Stepper',
+        icon: 'stepper.svg',
         source: [
-          'NbAlertComponent',
+          'NbStepperComponent',
+          'NbStepComponent',
         ],
       },
       {
         type: 'tabs',
-        name: 'Search',
-        icon: 'search.svg',
+        name: 'Accordion',
+        icon: 'accordion.svg',
         source: [
-          'NbSearchComponent',
-          'NbSearchService',
+          'NbAccordionComponent',
+          'NbAccordionItemComponent',
+          'NbAccordionItemHeaderComponent',
+          'NbAccordionItemBodyComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: 'list.svg',
+        source: [ 'NbListComponent', 'NbListItemComponent' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Infinite List',
+        icon: 'infinite-scroll.svg',
+        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
+      },
+      {
+        type: 'group',
+        name: 'Navigation',
+      },
+      {
+        type: 'tabs',
+        name: 'Sidebar',
+        icon: 'sidebar.svg',
+        source: [
+          'NbSidebarComponent',
+          'NbSidebarHeaderComponent',
+          'NbSidebarFooterComponent',
+          'NbSidebarService',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'NbMenuComponent',
+          'NbMenuItem',
+          'NbMenuService',
         ],
       },
       {
@@ -226,25 +260,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Stepper',
-        icon: 'stepper.svg',
-        source: [
-          'NbStepperComponent',
-          'NbStepComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Chat UI',
-        icon: 'chat-ui.svg',
-        source: [
-          'NbChatComponent',
-          'NbChatMessageComponent',
-          'NbChatFormComponent',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
         source: [
@@ -253,11 +268,21 @@ export const structure = [
         ],
       },
       {
+        type: 'group',
+        name: 'Forms',
+      },
+      {
         type: 'tabs',
-        name: 'User (Avatar)',
-        icon: 'user.svg',
+        name: 'Input',
+        icon: 'input.svg',
+        source: [ 'NbInputDirective' ],
+      },
+      {
+        type: 'tabs',
+        name: 'Button',
+        icon: 'button.svg',
         source: [
-          'NbUserComponent',
+          'NbButtonComponent',
         ],
       },
       {
@@ -270,10 +295,118 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Button',
-        icon: 'button.svg',
+        name: 'Radio',
+        icon: 'radio.svg',
         source: [
-          'NbButtonComponent',
+          'NbRadioComponent',
+          'NbRadioGroupComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Select',
+        icon: 'select.svg',
+        source: [
+          'NbSelectComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'NbDatepickerDirective',
+          'NbDatepickerComponent',
+          'NbRangepickerComponent',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Modals & Overlays',
+      },
+      {
+        type: 'tabs',
+        name: 'Popover',
+        icon: 'popover.svg',
+        source: [
+          'NbPopoverDirective',
+          'NbPopoverComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Context Menu',
+        icon: 'context-menu.svg',
+        source: [
+          'NbContextMenuDirective',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Dialog',
+        icon: 'dialog.svg',
+        source: [
+          'NbDialogService',
+          'NbDialogRef',
+          'NbDialogConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toastr',
+        icon: 'toastr.svg',
+        source: [
+          'NbToastrService',
+          'NbToastComponent',
+          'NbToastrConfig',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'NbTooltipDirective',
+          'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Extra',
+      },
+      {
+        type: 'tabs',
+        name: 'Global Search',
+        icon: 'search.svg',
+        source: [
+          'NbSearchComponent',
+          'NbSearchService',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'User (Avatar)',
+        icon: 'user.svg',
+        source: [
+          'NbUserComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Alert',
+        icon: 'alert.svg',
+        source: [
+          'NbAlertComponent',
         ],
       },
       {
@@ -302,48 +435,13 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Popover',
-        icon: 'popover.svg',
+        name: 'Chat UI',
+        icon: 'chat-ui.svg',
         source: [
-          'NbPopoverDirective',
+          'NbChatComponent',
+          'NbChatMessageComponent',
+          'NbChatFormComponent',
         ],
-      },
-      {
-        type: 'tabs',
-        name: 'Context Menu',
-        icon: 'context-menu.svg',
-        source: [
-          'NbContextMenuDirective',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Accordion',
-        icon: 'accordion.svg',
-        source: [
-          'NbAccordionComponent',
-          'NbAccordionItemComponent',
-          'NbAccordionItemHeaderComponent',
-          'NbAccordionItemBodyComponent',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'List',
-        icon: 'list.svg',
-        source: [ 'NbListComponent', 'NbListItemComponent' ],
-      },
-      {
-        type: 'tabs',
-        name: 'Infinite List',
-        icon: 'infinite-scroll.svg',
-        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
-      },
-      {
-        type: 'tabs',
-        name: 'Input',
-        icon: 'input.svg',
-        source: [ 'NbInputDirective' ],
       },
       {
         type: 'tabs',
@@ -514,6 +612,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth-ui.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Custom Auth Components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-custom-ui.md',
           },
         ],
       },

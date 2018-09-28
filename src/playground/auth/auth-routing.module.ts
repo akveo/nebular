@@ -18,6 +18,7 @@ import {
 } from '@nebular/auth';
 import { NbAclTestComponent } from './acl/acl-test.component';
 import { NbAuthGuard } from './auth-guard.service';
+import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
 
 export const routes: Routes = [
@@ -31,7 +32,8 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            component: NbLoginComponent,
+            redirectTo: 'login',
+            pathMatch: 'full',
           },
           {
             path: 'login',
@@ -65,6 +67,11 @@ export const routes: Routes = [
     path: 'auth/auth-guard.service',
     canActivate: [NbAuthGuard],
     component: NbAuthPlaygroundComponent,
+  },
+  {
+    path: 'auth/api-calls.component',
+    canActivate: [NbAuthGuard],
+    component: NbPlaygroundApiCallsComponent,
   },
 ];
 

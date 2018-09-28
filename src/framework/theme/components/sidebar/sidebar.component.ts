@@ -49,6 +49,30 @@ export class NbSidebarFooterComponent {
  *
  * @stacked-example(Showcase, sidebar/sidebar-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbSidebarModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSidebarModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * and `NbSidebarModule` to your feature module where the component should be shown:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbSidebarModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Sidebar can be placed on the left or the right side of the layout,
  * or on start/end position of layout (depends on document direction, left to right or right to left)
  * It can be fixed (shown above the content) or can push the layout when opened.
@@ -91,7 +115,8 @@ export class NbSidebarFooterComponent {
   selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
   template: `
-    <div class="main-container">
+    <div class="main-container"
+         [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
       <div class="scrollable" (click)="onClick($event)">
         <ng-content></ng-content>
@@ -114,6 +139,8 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   protected responsiveValue: boolean = false;
 
   private alive = true;
+
+  containerFixedValue: boolean = true;
 
   @HostBinding('class.fixed') fixedValue: boolean = false;
   @HostBinding('class.right') rightValue: boolean = false;
@@ -190,6 +217,15 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Makes sidebar container fixed
+   * @type {boolean}
+   */
+  @Input()
+  set containerFixed(val: boolean) {
+    this.containerFixedValue = convertToBoolProperty(val);
   }
 
   /**
@@ -369,7 +405,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
         if (isCompacted) {
-          this.fixed = true;
+          this.fixed = this.containerFixedValue;
           this.compact();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
         }

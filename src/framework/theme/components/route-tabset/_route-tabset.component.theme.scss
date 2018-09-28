@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/global/bootstrap/hero-buttons';
-
 @mixin nb-route-tabset-theme() {
 
   nb-route-tabset {
@@ -31,7 +29,6 @@
 
           &:hover {
             color: nb-theme(route-tabs-fg-heading);
-            font-weight: nb-theme(route-tabs-active-font-weight);
           }
 
           &::before {

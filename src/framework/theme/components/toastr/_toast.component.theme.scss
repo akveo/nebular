@@ -1,0 +1,148 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-toast-theme() {
+  nb-toast {
+    background-color: nb-theme(toastr-bg);
+    padding: nb-theme(toastr-padding);
+    color: nb-theme(toastr-fg);
+    border: nb-theme(toastr-border);
+    border-radius: nb-theme(toastr-border-radius);
+
+    .icon {
+      @include nb-ltr(margin-right, 1.25rem);
+      @include nb-rtl(margin-left, 1.25rem);
+    }
+
+    i {
+      border-radius: nb-theme(toastr-icon-radius);
+    }
+
+    @include nb-except-theme(cosmic) {
+      box-shadow: nb-theme(toastr-shadow);
+    }
+
+    &.default {
+      border-color: nb-theme(toastr-border-color);
+      padding: calc(#{nb-theme(toastr-padding)} / 2) nb-theme(toastr-padding);
+
+      @include nb-for-theme(cosmic) {
+        color: nb-theme(toastr-color-fg);
+        background-color: nb-theme(toastr-default-background);
+      }
+    }
+
+    &.success {
+      border-color: nb-theme(color-success);
+      color: nb-theme(color-success);
+
+      i {
+        background-color: nb-theme(color-success);
+
+        color: nb-theme(color-white);
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-success-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        i {
+          background-color: nb-theme(color-white);
+
+          color: nb-theme(color-success);
+        }
+      }
+    }
+
+    &.info {
+      border-color: nb-theme(color-info);
+      color: nb-theme(color-info);
+
+      i {
+        background-color: nb-theme(color-info);
+
+        color: nb-theme(color-white);
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-info-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        i {
+          background-color: nb-theme(color-white);
+
+          color: nb-theme(color-info);
+        }
+      }
+    }
+
+    &.warning {
+      border-color: nb-theme(color-warning);
+      color: nb-theme(color-warning);
+
+      i {
+        background-color: nb-theme(color-warning);
+
+        color: nb-theme(color-white);
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-warning-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        i {
+          background-color: nb-theme(color-white);
+
+          color: nb-theme(color-warning);
+        }
+      }
+    }
+
+    &.primary {
+      border-color: nb-theme(color-primary);
+      color: nb-theme(color-primary);
+
+      i {
+        background-color: nb-theme(color-primary);
+
+        color: nb-theme(color-white);
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-primary-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        i {
+          background-color: nb-theme(color-white);
+
+          color: nb-theme(color-primary);
+        }
+      }
+    }
+
+    &.danger {
+      border-color: nb-theme(color-danger);
+      color: nb-theme(color-danger);
+
+      i {
+        background-color: nb-theme(color-danger);
+
+        color: nb-theme(color-white);
+      }
+
+      @include nb-for-theme(cosmic) {
+        @include btn-hero-danger-gradient();
+        color: nb-theme(toastr-color-fg);
+
+        i {
+          background-color: nb-theme(color-white);
+
+          color: nb-theme(color-danger);
+        }
+      }
+    }
+  }
+}

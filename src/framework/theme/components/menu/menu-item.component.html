@@ -9,7 +9,8 @@
    [attr.target]="menuItem.target"
    [attr.title]="menuItem.title"
    [class.active]="menuItem.selected"
-   (mouseenter)="onHoverItem(menuItem)">
+   (mouseenter)="onHoverItem(menuItem)"
+   (click)="onItemClick(menuItem);">
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
@@ -47,8 +48,8 @@
 <ul *ngIf="menuItem.children"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"
     [class.expanded]="menuItem.expanded"
-    class="menu-items"
-    [style.max-height.px]="maxHeight">
+    [@toggle]="toggleState"
+    class="menu-items">
   <ng-container *ngFor="let item of menuItem.children">
     <li nbMenuItem *ngIf="!item.hidden"
         [menuItem]="item"

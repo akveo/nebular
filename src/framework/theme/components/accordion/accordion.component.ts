@@ -24,6 +24,20 @@ import { convertToBoolProperty } from '../helpers';
  *  </nb-accordion-item>
  * </nb-accordion>
  * ```
+ * ### Installation
+ *
+ * Import `NbAccordionModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbAccordionModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * With `multi` mode acordion can have multiple items expanded:
  * @stacked-example(Showcase, accordion/accordion-multi.component)
  *

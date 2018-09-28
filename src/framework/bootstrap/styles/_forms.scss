@@ -1,0 +1,245 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+@import 'size-form-control';
+@import 'default-form-control';
+@import '../../theme/styles/core/mixins';
+@import 'custom-forms';
+
+// locally used mixin
+@mixin checkmark($size, $color, $wight, $opacity: 1) {
+  ~ .custom-control-label::after {
+    background-image: none;
+    content: '';
+    position: absolute;
+    height: calc(#{$size} * 0.6);
+    width: calc(#{$size} * 0.4);
+    top: calc(#{$size} * 0.4);
+    left: calc(#{$size} * 0.3);
+    border: solid $color;
+    border-width: 0 $wight $wight 0;
+    transform: rotate(45deg);
+    opacity: $opacity;
+  }
+}
+// locally used mixin
+@mixin radio($size, $color, $opacity) {
+  ~ .custom-control-label::after {
+    content: '';
+    position: absolute;
+    background-color: $color;
+    height: calc(#{$size} * 0.5);
+    width: calc(#{$size} * 0.5);
+    border: solid $color 0.35rem;
+    border-radius: 50%;
+    opacity: $opacity;
+    top: calc(#{$size} * 0.5);
+    left: calc(#{$size} * 0.21);
+  }
+}
+// locally used mixin
+@mixin label($color, $opacity) {
+  ~ .custom-control-label {
+    opacity: $opacity;
+    &::before {
+      color: transparent;
+      background-color: transparent;
+      border: 2px solid $color;
+      height: 1.25rem;
+      width: 1.25rem;
+      opacity: $opacity;
+    }
+  }
+}
+
+@mixin nb-b-forms-theme() {
+
+  .input-group-addon,
+  .form-control {
+    padding: nb-theme(form-control-padding);
+    color: nb-theme(form-control-text-primary-color);
+    background-color: nb-theme(form-control-bg);
+    border: nb-theme(form-control-border-width) nb-theme(form-control-border-type) nb-theme(form-control-border-color);
+    font-family: nb-theme(font-main);
+    border-radius: nb-theme(form-control-border-radius);
+
+    $border-w: nb-theme(form-control-border-width);
+    $border-t: nb-theme(form-control-border-type);
+    $border-s: nb-theme(form-control-selected-border-color);
+
+    &:focus {
+      border: $border-w $border-t $border-s;
+      background-color: nb-theme(form-control-focus-bg);
+      box-shadow: none;
+    }
+
+    &:disabled {
+      border-color: nb-theme(form-control-border-color);
+
+      @include install-placeholder(rgba(nb-theme(form-control-placeholder-color), 0.5),
+        nb-theme(form-control-placeholder-font-size));
+    }
+    @include install-placeholder(nb-theme(form-control-placeholder-color),
+      nb-theme(form-control-placeholder-font-size));
+  }
+
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2rem + 20px);
+  }
+
+  .form-control-label {
+    color: nb-theme(form-control-text-primary-color);
+    font-weight: nb-theme(form-control-label-font-weight);
+  }
+
+  .form-control-feedback {
+    font-size: nb-theme(form-control-feedback-font-size);
+    font-weight: nb-theme(form-control-feedback-font-weight);
+  }
+
+  .form-text {
+    color: nb-theme(color-fg);
+    font-family: nb-theme(font-main);
+
+    &.hint,
+    &.error {
+      @include nb-ltr(margin-left, 1rem);
+      @include nb-rtl(margin-right, 1rem);
+    }
+
+    &.error {
+      color: nb-theme(color-danger);
+    }
+  }
+
+  .custom-control {
+    position: relative;
+    display: block;
+    min-height: (1.5rem);
+    padding-left: 1.5rem;
+
+    .custom-control-label {
+      padding-left: 0.25rem;
+      color: nb-theme(color-fg-heading);
+    }
+  }
+
+  input.custom-control-input[type='checkbox'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:active ~ .custom-control-label::before {
+      background-color: transparent !important;
+    }
+
+    &:focus ~ .custom-control-label::before {
+      box-shadow: none !important;
+    }
+
+    & {
+      @include label(nb-theme(checkbox-border-color), 1);
+      @include checkmark(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checkmark),
+          nb-theme(checkbox-checked-border-size),
+          1
+      );
+    }
+
+    &:checked {
+      @include label(nb-theme(checkbox-checked-border-color), 1);
+      @include checkmark(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checked-checkmark),
+          nb-theme(checkbox-checked-border-size),
+          1
+      );
+    }
+
+    &:hover {
+      @include label(lighten(nb-theme(checkbox-checked-border-color), 10%), 1);
+    }
+
+    &:disabled {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include checkmark(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-checkmark),
+          nb-theme(checkbox-disabled-border-size),
+          0.5
+      );
+    }
+
+    &:disabled:checked {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include checkmark(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-disabled-checkmark),
+          nb-theme(checkbox-disabled-border-size),
+          0.5
+      );
+    }
+  }
+
+  input.custom-control-input[type='radio'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:active ~ .custom-control-label::before {
+      background-color: transparent !important;
+    }
+
+    &:focus ~ .custom-control-label::before {
+      box-shadow: none !important;
+    }
+
+    & {
+      @include label(nb-theme(checkbox-border-color), 1);
+      @include radio(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checkmark),
+          1
+      );
+    }
+
+    &:checked {
+      @include label(nb-theme(checkbox-checked-border-color), 1);
+      @include radio(
+          nb-theme(checkbox-checked-size),
+          nb-theme(checkbox-checked-checkmark),
+          1
+      );
+    }
+
+    &:hover {
+      @include label(lighten(nb-theme(checkbox-checked-border-color), 10%), 1);
+    }
+
+    &:disabled {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include radio(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-checkmark),
+          0.5
+      );
+    }
+
+    &:disabled:checked {
+      @include label(nb-theme(checkbox-disabled-border-color), 0.5);
+      @include radio(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-disabled-checkmark),
+          0.5
+      );
+    }
+  }
+
+  @include form-control-size();
+  @include form-control-default();
+
+  @include custom-forms();
+}

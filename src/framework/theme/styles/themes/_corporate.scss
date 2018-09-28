@@ -93,6 +93,7 @@ $theme: (
   modal-separator: border-color,
 
   tabs-selected: color-primary,
+  tabs-selected-second-color: color-primary,
   tabs-separator: #ebecee,
 
   smart-table-paging-bg-active: color-primary,
@@ -109,6 +110,10 @@ $theme: (
   calendar-active-item-bg: color-primary,
   calendar-range-bg-in-range: #e3ecfe,
   calendar-today-fg: color-white,
+
+  toastr-icon-radius: radius,
+
+  datepicker-border: color-primary,
 );
 
 // register the theme

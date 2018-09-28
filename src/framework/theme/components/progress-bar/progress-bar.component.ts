@@ -14,6 +14,19 @@ import { Component, Input } from '@angular/core';
  * ```html
  * <nb-progress-bar [value]="50"></nb-progress-bar>
  * ```
+ * ### Installation
+ *
+ * Import `NbProgressBarModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbProgressBarModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Progress bar accepts property `value` in range 0-100
  * @stacked-example(Progress bar, progress-bar/progress-bar-showcase.component)

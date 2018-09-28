@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/global/bootstrap/hero-buttons';
-
 @mixin nb-tabset-theme() {
 
   nb-tabset {
@@ -31,16 +29,17 @@
 
           &:hover {
             color: nb-theme(tabs-fg-heading);
-            font-weight: nb-theme(tabs-active-font-weight);
           }
 
           &::before {
+            $color-right: nb-theme(tabs-selected);
+            $color-left: adjust-hue(
+                nb-theme(tabs-selected-second-color),
+                nb-theme(tabs-selected-degrees));
+
             background: nb-theme(tabs-selected);
 
-            @include nb-for-theme(cosmic) {
-              @include btn-hero-success-gradient();
-              box-shadow: 0 0 16px -2px btn-hero-success-middle-color();
-            }
+            @include nb-right-gradient($color-left, $color-right);
           }
         }
 

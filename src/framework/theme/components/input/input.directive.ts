@@ -14,6 +14,20 @@ import { convertToBoolProperty } from '../helpers';
  * <input nbInput></input>
  * ```
  *
+ * ### Installation
+ *
+ * Import `NbInputModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbInputModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
  * Default input size is `medium`:
  * @stacked-example(Showcase, input/input-showcase.component)
  *

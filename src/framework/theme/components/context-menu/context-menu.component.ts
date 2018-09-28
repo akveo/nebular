@@ -5,7 +5,9 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { NbMenuItem } from '../../';
+
+import { NbMenuItem } from '../../components/menu/menu.service';
+import { NbPositionedContainer } from '../cdk';
 
 /**
  * Context menu component used as content within NbContextMenuDirective.
@@ -19,13 +21,12 @@ import { NbMenuItem } from '../../';
 @Component({
   selector: 'nb-context-menu',
   styleUrls: ['./context-menu.component.scss'],
-  template: '<nb-menu class="context-menu" [items]="items" [tag]="tag"></nb-menu>',
+  template: `
+    <span class="arrow"></span>
+    <nb-menu class="context-menu" [items]="items" [tag]="tag"></nb-menu>
+  `,
 })
-export class NbContextMenuComponent {
-
-  @Input()
-  items: NbMenuItem[] = [];
-
-  @Input()
-  tag: string;
+export class NbContextMenuComponent extends NbPositionedContainer {
+  @Input() items: NbMenuItem[] = [];
+  @Input() tag: string;
 }

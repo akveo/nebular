@@ -1,0 +1,11 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+@mixin nb-overlay-theme {
+  .overlay-backdrop {
+    background: nb-theme(overlay-backdrop-bg);
+  }
+
+  .cdk-overlay-container {
+    z-index: 1040;
+  }
+}

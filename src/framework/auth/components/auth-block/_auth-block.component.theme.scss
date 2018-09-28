@@ -6,16 +6,16 @@
 
 @mixin nb-auth-block-theme() {
   nb-auth-block {
-
-    .form-text a {
+    .text-link {
       color: nb-theme(color-fg);
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    .error-message {
+      color: nb-theme(color-danger);
     }
 
     .accept-group {
-      nb-checkbox .custom-control-description {
-        color: nb-theme(color-fg);
-      }
-
       a {
         color: nb-theme(accept-group-link-color);
       }
@@ -32,3 +32,4 @@
     }
   }
 }
+

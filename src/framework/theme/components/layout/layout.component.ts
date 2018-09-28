@@ -5,12 +5,11 @@
  */
 
 import {
-  AfterViewInit, Component, ComponentFactoryResolver, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, ComponentFactory, Inject, PLATFORM_ID, forwardRef,
+  AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
@@ -21,6 +20,7 @@ import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
 import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
+import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
 
 /**
  * A container component which determines a content position inside of the layout.
@@ -188,7 +188,29 @@ export class NbLayoutFooterComponent {
  *  <nb-sidebar></nb-sidebar>
  * </nb-layout>
  * ```
+ * ### Installation
  *
+ * Import `NbLayoutModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbLayoutModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * and `NbLayoutModule` to your feature module where the component should be shown:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbLayoutModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  * By default the layout fills up the whole view-port.
  * The window scrollbars are disabled on the body and moved inside of the nb-layout, so that the scrollbars
  * won't mess with the fixed nb-header.
@@ -250,7 +272,6 @@ export class NbLayoutFooterComponent {
   selector: 'nb-layout',
   styleUrls: ['./layout.component.scss'],
   template: `
-    <ng-template #layoutTopDynamicArea></ng-template>
     <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout">
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
@@ -337,10 +358,8 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   constructor(
     protected themeService: NbThemeService,
     protected spinnerService: NbSpinnerService,
-    protected componentFactoryResolver: ComponentFactoryResolver,
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
-    protected router: Router,
     @Inject(NB_WINDOW) protected window,
     @Inject(NB_DOCUMENT) protected document,
     @Inject(PLATFORM_ID) protected platformId: Object,
@@ -348,7 +367,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
     protected scrollTop: NbRestoreScrollTopHelper,
+    protected overlayContainer: NbOverlayContainerAdapter,
   ) {
+    this.registerAsOverlayContainer();
 
     this.themeService.onThemeChange()
       .pipe(
@@ -422,25 +443,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeService.onAppendToTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { factory: ComponentFactory<any>, listener: Subject<any> }) => {
-        const componentRef = this.veryTopRef.createComponent(data.factory);
-        data.listener.next(componentRef);
-        data.listener.complete();
-      });
-
-    this.themeService.onClearLayoutTop()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe((data: { listener: Subject<any> }) => {
-        this.veryTopRef.clear();
-        data.listener.next(true);
-      });
-
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe(direction => {
@@ -455,8 +457,8 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.themeService.clearLayoutTop();
     this.alive = false;
+    this.unregisterAsOverlayContainer();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -524,6 +526,18 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
 
     return { x, y };
+  }
+
+  protected registerAsOverlayContainer() {
+    if (this.overlayContainer.setContainer) {
+      this.overlayContainer.setContainer(this.elementRef.nativeElement);
+    }
+  }
+
+  protected unregisterAsOverlayContainer() {
+    if (this.overlayContainer.clearContainer) {
+      this.overlayContainer.clearContainer();
+    }
   }
 
   private scroll(x: number = null, y: number = null) {

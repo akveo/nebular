@@ -131,3 +131,4 @@ At this point, if you navigate to http://localhost:4200/#/auth/login the login f
 
 - [Configuring a Strategy](docs/auth/configuring-a-strategy)
 - Adjusting [Auth Components UI](docs/auth/configuring-ui)
+- [Custom Auth Components](docs/auth/custom-auth-components)

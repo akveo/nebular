@@ -18,6 +18,6 @@ export class NgdComponentsOverviewBlockComponent implements OnInit {
       .find(({ title }) => title === 'Components')
       .children
       .slice(1)
-      .map(({ data: { name, icon }, link }) => ({ name, icon, link }));
+      .map(({ data: { name, icon, type }, link }) => ({ name, icon, link, group: type === 'group' }));
   }
 }

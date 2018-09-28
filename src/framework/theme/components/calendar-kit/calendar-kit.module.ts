@@ -5,10 +5,11 @@
  */
 
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbCalendarMonthModelService, NbLocaleService } from './services';
+import { NbCalendarMonthModelService, NbDateService  } from './services';
 
 import {
   NbCalendarDatePipe,
@@ -25,10 +26,12 @@ import {
   NbCalendarYearCellComponent,
   NbCalendarYearPickerComponent,
 } from './components';
+import { NbNativeDateService } from './services/native-date.service';
 
 
 const SERVICES = [
-  NbLocaleService,
+  { provide: NbDateService, useClass: NbNativeDateService },
+  DatePipe,
   NbCalendarMonthModelService,
 ];
 

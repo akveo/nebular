@@ -26,13 +26,13 @@ import { NbCalendarCell } from '../../model';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarPickerComponent<T> {
-  @Input() data: Date[][];
-  @Input() visibleDate: Date;
+export class NbCalendarPickerComponent<D, T> {
+  @Input() data: D[][];
+  @Input() visibleDate: D;
   @Input() selectedValue: T;
-  @Input() cellComponent: Type<NbCalendarCell<T>>;
-  @Input() min: Date;
-  @Input() max: Date;
-  @Input() filter: (Date) => boolean;
-  @Output() select: EventEmitter<Date> = new EventEmitter();
+  @Input() cellComponent: Type<NbCalendarCell<D, T>>;
+  @Input() min: D;
+  @Input() max: D;
+  @Input() filter: (D) => boolean;
+  @Output() select: EventEmitter<D> = new EventEmitter();
 }

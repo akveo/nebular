@@ -66,6 +66,7 @@ $theme: (
   popover-shadow: shadow,
 
   context-menu-active-bg: color-primary,
+  context-menu-border: color-primary,
 
   footer-height: header-height,
 
@@ -150,10 +151,29 @@ $theme: (
   spinner-bg: rgba(61, 55, 128, 0.9),
   stepper-accent-color: color-success,
 
+  tabs-selected-second-color: color-success,
+  tabs-selected-degrees: 20deg,
+
   calendar-active-item-bg: color-primary,
   calendar-selected-item-bg: color-primary,
   calendar-range-bg-in-range: #4e4095,
   calendar-today-item-bg: #352f6e,
+
+  select-option-disabled-bg: #312e75,
+
+  toastr-color-fg: color-white,
+  toastr-padding: 1.25rem,
+  toastr-border: 0,
+  toastr-default-background: #bcc3cc,
+
+  tooltip-fg: color-bg,
+  tooltip-status-fg: color-white,
+
+  datepicker-border: color-primary,
+  datepicker-shadow: shadow,
+
+  radio-checked-border-color: color-primary,
+  radio-checked-checkmark: color-primary,
 );
 
 // register the theme

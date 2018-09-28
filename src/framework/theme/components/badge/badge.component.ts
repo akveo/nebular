@@ -16,6 +16,19 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  * It means parent `position` should be set to anything except `static`, e.g. `relative`,
  * `absolute`, `fixed`, or `sticky`.
  *
+ * ### Installation
+ *
+ * Import `NbBadgeModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbBadgeModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Badge with default position and status(color):
  *

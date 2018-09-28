@@ -8,25 +8,26 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbLocaleService } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
 import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { NbThemeModule } from '../../../../theme.module';
+import { DatePipe } from '@angular/common';
 
 
 describe('Component: NbCalendarHeader', () => {
 
-  let component: NbCalendarHeaderComponent;
-  let fixture: ComponentFixture<NbCalendarHeaderComponent>;
+  let component: NbCalendarHeaderComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarHeaderComponent<Date>>;
   let componentEl: DebugElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NbThemeModule.forRoot({ name: 'default' })],
-      providers: [NbLocaleService],
+      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
       declarations: [NbCalendarHeaderComponent, NbCalendarDatePipe],
     });
-    fixture = TestBed.createComponent(NbCalendarHeaderComponent);
+    fixture = TestBed.createComponent<NbCalendarHeaderComponent<Date>>(NbCalendarHeaderComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement;
 

@@ -78,6 +78,7 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
   }
 
   protected createDummyResult(data?: any): NbAuthResult {
+
     if (this.getOption('alwaysFail')) {
       return new NbAuthResult(
         false,
@@ -87,13 +88,25 @@ export class NbDummyAuthStrategy extends NbAuthStrategy {
       );
     }
 
-    return new NbAuthResult(
-      true,
-      this.createSuccessResponse(data),
-      '/',
-      [],
-      ['Successfully logged in.'],
-      this.createToken('test token'),
-    );
+    try {
+      const token = this.createToken('test token', true);
+      return new NbAuthResult(
+        true,
+        this.createSuccessResponse(data),
+        '/',
+        [],
+        ['Successfully logged in.'],
+        token,
+      );
+    } catch (err) {
+      return new NbAuthResult(
+        false,
+        this.createFailResponse(data),
+        null,
+        [err.message],
+      );
+    }
+
+
   }
 }

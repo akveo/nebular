@@ -11,6 +11,13 @@
   overflow: hidden;
   width: 100%;
 
+  .scrollable-container {
+    position: relative;
+    z-index: 10001;
+
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
   &.with-search .scrollable-container {
     transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
     transform-origin: 50vw 50vh;
@@ -23,7 +30,7 @@
 
   position: absolute;
   display: block;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   pointer-events: none;
   opacity: 0;

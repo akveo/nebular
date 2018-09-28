@@ -24,14 +24,15 @@ describe('auth-service', () => {
   let tokenService: NbTokenService;
   let dummyAuthStrategy: NbDummyAuthStrategy;
   const testTokenValue = 'test-token';
-  const ownerStrategyName = 'strategy';
+  const ownerStrategyName = 'dummy';
 
 
   const resp401 = new HttpResponse<Object>({body: {}, status: 401});
   const resp200 = new HttpResponse<Object>({body: {}, status: 200});
 
   const testToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
-  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, ownerStrategyName);
+  const invalidToken = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);
+  const emptyToken = nbAuthCreateToken(NbAuthSimpleToken, null, null);
 
   const failResult = new NbAuthResult(false,
     resp401,
@@ -143,6 +144,86 @@ describe('auth-service', () => {
     },
   );
 
+  it('isAuthenticatedOrRefresh, token valid, strategy refreshToken not called, returns true', (done) => {
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(testToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).not.toHaveBeenCalled();
+          expect(isAuth).toBeTruthy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns true', (done) => {
+
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(successResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValues(observableOf(invalidToken), observableOf(testToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeTruthy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token invalid, strategy refreshToken called, returns false', (done) => {
+
+      spyOn(invalidToken, 'isValid')
+        .and
+        .returnValue(false);
+
+      const spy = spyOn(dummyAuthStrategy, 'refreshToken')
+        .and
+        .returnValue(observableOf(failResult));
+
+      spyOn(tokenService, 'get')
+        .and
+        .returnValues(observableOf(invalidToken), observableOf(invalidToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
+          done();
+        });
+    },
+  );
+
+  it('isAuthenticatedOrRefresh, token doesn\'t exist, strategy refreshToken called, returns false', (done) => {
+      const spy = spyOn(tokenService, 'get')
+        .and
+        .returnValue(observableOf(emptyToken));
+
+      authService.isAuthenticatedOrRefresh()
+        .pipe(first())
+        .subscribe((isAuth: boolean) => {
+          expect(spy).toHaveBeenCalled();
+          expect(isAuth).toBeFalsy();
+          done();
+        });
+    },
+  );
+
   it('onTokenChange return correct stream and gets test token', (done) => {
       const spy = spyOn(tokenService, 'tokenChange')
         .and
@@ -166,7 +247,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.authenticate(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
         expect(authRes.isFailure()).toBeTruthy();
         expect(authRes.isSuccess()).toBeFalsy();
@@ -193,7 +274,7 @@ describe('auth-service', () => {
         .returnValue(observableOf(null));
 
 
-      authService.authenticate('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.authenticate(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
 
@@ -218,7 +299,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.register('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.register(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
         expect(authRes.isFailure()).toBeTruthy();
         expect(authRes.isSuccess()).toBeFalsy();
@@ -244,7 +325,7 @@ describe('auth-service', () => {
         .and
         .returnValue(observableOf(null));
 
-      authService.register('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.register(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
 
@@ -268,7 +349,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.logout('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.logout(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeTruthy();
@@ -292,7 +373,7 @@ describe('auth-service', () => {
           ));
       const tokenServiceClearSpy = spyOn(tokenService, 'clear').and.returnValue(observableOf('STUB'));
 
-      authService.logout('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.logout(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategyLogoutSpy).toHaveBeenCalled();
         expect(tokenServiceClearSpy).toHaveBeenCalled();
 
@@ -316,7 +397,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.requestPassword('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.requestPassword(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeTruthy();
@@ -339,7 +420,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.requestPassword('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.requestPassword(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategyLogoutSpy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeFalsy();
@@ -362,7 +443,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.resetPassword('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.resetPassword(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeTruthy();
@@ -385,7 +466,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.resetPassword('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.resetPassword(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategyLogoutSpy).toHaveBeenCalled();
 
         expect(authRes.isFailure()).toBeFalsy();
@@ -408,7 +489,7 @@ describe('auth-service', () => {
             delay(1000),
           ));
 
-      authService.refreshToken('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.refreshToken(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(spy).toHaveBeenCalled();
         expect(authRes.isFailure()).toBeTruthy();
         expect(authRes.isSuccess()).toBeFalsy();
@@ -434,7 +515,7 @@ describe('auth-service', () => {
         .and
         .returnValue(observableOf(null));
 
-      authService.refreshToken('dummy').subscribe((authRes: NbAuthResult) => {
+      authService.refreshToken(ownerStrategyName).subscribe((authRes: NbAuthResult) => {
         expect(strategySpy).toHaveBeenCalled();
         expect(tokenServiceSetSpy).toHaveBeenCalled();
 
