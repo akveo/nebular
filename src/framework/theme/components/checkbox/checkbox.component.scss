@@ -24,14 +24,12 @@
   .customised-control-indicator {
     border-radius: 0.25rem;
     flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    position: relative;
 
     &::before {
       content: '';
-      position: absolute;
       border-style: solid;
+      display: block;
+      margin: 0 auto;
       transform: rotate(45deg);
     }
   }
