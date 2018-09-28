@@ -30,6 +30,7 @@ const ROLLUP_GLOBALS = {
   // 3rd party dependencies
   'intersection-observer': 'intersection-observer',
 
+  // date libs for date service
   'moment': 'moment',
   'date-fns/parse': 'date-fns.parse',
 
