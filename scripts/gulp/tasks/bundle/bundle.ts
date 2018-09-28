@@ -6,10 +6,19 @@ const rollup = require('gulp-rollup');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 
-task('bundle', ['bundle:umd:theme', 'bundle:umd:auth', 'bundle:umd:security']);
+task('bundle', [
+  'bundle:umd:theme',
+  'bundle:umd:auth',
+  'bundle:umd:security',
+  'bundle:umd:moment',
+  'bundle:umd:date-fns',
+]);
+
 task('bundle:umd:theme', () => bundleUmdModule('theme'));
 task('bundle:umd:auth', () => bundleUmdModule('auth'));
 task('bundle:umd:security', () => bundleUmdModule('security'));
+task('bundle:umd:moment', () => bundleUmdModule('moment'));
+task('bundle:umd:date-fns', () => bundleUmdModule('date-fns'));
 task('bundle:rename-dev', bundleRenameDev);
 
 function bundleUmdModule(name: string) {
