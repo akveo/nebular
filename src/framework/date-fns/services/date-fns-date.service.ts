@@ -8,7 +8,11 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 
 import { NbNativeDateService } from '@nebular/theme';
 
-import * as parse from 'date-fns/parse';
+import * as dateFnsParse from 'date-fns/parse';
+// @ts-ignore
+import { default as rollupParse} from 'moment';
+
+const parse = rollupParse || dateFnsParse;
 
 
 @Injectable()
