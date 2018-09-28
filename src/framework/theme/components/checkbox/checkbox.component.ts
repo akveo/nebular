@@ -54,7 +54,7 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="customised-control customised-checkbox">
+    <label class="customised-control">
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
@@ -67,6 +67,7 @@ import { convertToBoolProperty } from '../helpers';
       </span>
     </label>
   `,
+  styleUrls: [ `./checkbox.component.scss` ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbCheckboxComponent),
