@@ -223,7 +223,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
+    return this.http.post(url, this.buildRefreshRequestData(token), {headers: this.buildAuthHeader()})
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -243,7 +243,14 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildPasswordRequestData(username, password), this.buildAuthHeader() )
+    let headers = this.buildAuthHeader();
+    if (!headers) {
+      headers = new HttpHeaders();
+    }
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.post(url, this.buildPasswordRequestData(username, password),
+                  {headers: headers})
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -273,7 +280,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     return this.http.post(url, this.buildCodeRequestData(code),
-                         this.buildAuthHeader())
+      {headers: this.buildAuthHeader()})
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -307,27 +314,25 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.cleanParams(this.addCredentialsToParams(params));
   }
 
-  protected buildPasswordRequestData(username: string, password: string ): any {
+  protected buildPasswordRequestData(username: string, password: string ): string {
     const params = {
       grant_type: this.getOption('token.grantType'),
       username: username,
       password: password,
       scope: this.getOption('token.scope'),
     };
-    return this.cleanParams(this.addCredentialsToParams(params));
+    return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }
 
   protected buildAuthHeader(): any {
     if (this.clientAuthMethod === NbOAuth2ClientAuthMethod.BASIC) {
       if (this.getOption('clientId') && this.getOption('clientSecret')) {
-        return {
-          headers: new HttpHeaders(
+        return new HttpHeaders(
             {
               'Authorization': 'Basic ' + btoa(
                 this.getOption('clientId') + ':' + this.getOption('clientSecret')),
             },
-          ),
-        };
+          );
       } else {
         throw Error('For basic client authentication method, please provide both clientId & clientSecret.');
       }
@@ -406,6 +411,12 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       acc[item[0]] = decodeURIComponent(item[1]);
       return acc;
     }, {}) : {};
+  }
+
+  protected urlEncodeParameters(params: any): string {
+    return Object.keys(params).map((k) => {
+      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
+    }).join('&');
   }
 
   protected createRefreshedToken(res, existingToken: NbAuthRefreshableToken, requireValidToken: boolean): NbAuthToken {
