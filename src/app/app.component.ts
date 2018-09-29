@@ -22,20 +22,6 @@ import { Component } from '@angular/core';
     </div>
     <router-outlet></router-outlet>
   `,
-  styles: [`
-    .options-bar {
-      display: flex;
-      align-items: center;
-    }
-    .options-show {
-      margin-left: auto;
-    }
-    .options-show.fixed {
-      position: fixed;
-      right: 0;
-      top: 0;
-    }
-  `],
 })
 export class NbAppComponent {
 

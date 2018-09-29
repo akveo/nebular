@@ -42,7 +42,8 @@ export class NbLoginComponent {
   }
 
   login(): void {
-    this.errors = this.messages = [];
+    this.errors = [];
+    this.messages = [];
     this.submitted = true;
 
     this.service.authenticate(this.strategy, this.user).subscribe((result: NbAuthResult) => {

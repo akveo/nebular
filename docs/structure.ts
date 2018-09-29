@@ -295,6 +295,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Radio',
+        icon: 'radio.svg',
+        source: [
+          'NbRadioComponent',
+          'NbRadioGroupComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Select',
         icon: 'select.svg',
         source: [
