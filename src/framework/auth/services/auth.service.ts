@@ -51,21 +51,21 @@ export class NbAuthService {
     return this.getToken()
       .pipe(
         switchMap(token => {
-          if (token.getValue() && !token.isValid()) {
-            return this.refreshToken(token.getOwnerStrategyName(), token)
-              .pipe(
-                switchMap(res => {
-                  if (res.isSuccess()) {
-                    return this.isAuthenticated();
-                  } else {
-                    return observableOf(false);
-                  }
-                }),
-              )
-          } else {
-            return observableOf(token.isValid());
-          }
-        }));
+        if (token.getValue() && !token.isValid()) {
+          return this.refreshToken(token.getOwnerStrategyName(), token)
+            .pipe(
+              switchMap(res => {
+                if (res.isSuccess()) {
+                  return this.isAuthenticated();
+                } else {
+                  return observableOf(false);
+                }
+              }),
+            )
+        } else {
+          return observableOf(token.isValid());
+        }
+    }));
   }
 
   /**
