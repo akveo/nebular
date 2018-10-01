@@ -17,6 +17,7 @@ echo ""
 source ./scripts/ci/tunnel.sh
 source ./scripts/ci/publish.sh
 source ./scripts/ci/deploy.sh
+source ./scripts/ci/packages-smoke.sh
 
 if [[ -z "$TRAVIS" ]]; then
   echo "This script can only run inside of Travis build jobs."
@@ -56,6 +57,8 @@ elif [[ "${MODE}" = deploy_dev ]]; then
   deploy_dev
 elif [[ "${MODE}" = publish_dev ]]; then
   publish_dev
+elif [[ "${MODE}" = packages_smoke ]]; then
+  packages_smoke
 fi
 
 teardown_tunnel

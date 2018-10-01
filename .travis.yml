@@ -1,7 +1,14 @@
 sudo: false
 language: node_js
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 node_js:
   - '8'
+
 
 env:
   global:
@@ -25,6 +32,7 @@ env:
     - MODE=lint
     - MODE=deploy_dev
     - MODE=publish_dev
+    - MODE=packages_smoke
 branches:
   only:
   - master
