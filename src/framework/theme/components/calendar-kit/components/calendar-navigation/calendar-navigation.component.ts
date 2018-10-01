@@ -20,7 +20,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     }
   `],
   template: `
-    <button class="btn btn-primary" (click)="changeMode.emit()">
+    <button nbButton (click)="changeMode.emit()">
       {{ date | nbCalendarDate }}
     </button>
   `,

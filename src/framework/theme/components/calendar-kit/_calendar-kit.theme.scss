@@ -44,7 +44,7 @@
     }
   }
 
-  nb-calendar-navigation button.btn.btn-primary {
+  nb-calendar-navigation button[nbButton] {
     width: nb-theme(calendar-navigation-button-width);
 
     @include nb-for-theme(default) {
