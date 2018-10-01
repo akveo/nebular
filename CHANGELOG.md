@@ -3,7 +3,7 @@
 
 ### Highlights
 
-Nebular 2.0 is stable now! After 10 release candidates and a year of work we finally made it with a great help of Nebular community and we cannot be more grateful for all of your contribution! :tada: 
+Nebular 2.0 is stable now! After 10 release candidates and a year of work we finally made it with a great help of Nebular community and we cannot be more grateful for all of your contributions! :tada: 
 
 
 ### Bug Fixes
