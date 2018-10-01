@@ -16,12 +16,16 @@ export interface NbCalendarRange<D> {
 }
 
 /**
- * Calendar component provides a capability to choose ranges.
- * For additional info check `NbBaseCalendarComponent`.
+ * CalendarRange component provides a capability to choose a date range.
  *
  * ```html
- * <nb-calendar-range [(range)]="range"></nb-calendar-range>
+ * <nb-calendar [(date)]="date"></nb-calendar>
+ * <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>
  * ```
+ *
+ * Basic usage example
+ * @stacked-example(Range, calendar/calendar-range-showcase.component)
+ *
  * ### Installation
  *
  * Import `NbCalendarRangeModule` to your feature module.
@@ -34,7 +38,52 @@ export interface NbCalendarRange<D> {
  * })
  * export class PageModule { }
  * ```
- */
+ *
+ * ### Usage
+ *
+ * CalendarRange component supports all of the Calendar component customization properties. More defails can be found
+ * in the [Calendar component docs](docs/components/calendar).
+ *
+ * @styles
+ *
+ * calendar-width
+ * calendar-body-height
+ * calendar-header-title-font-size
+ * calendar-header-title-font-weight
+ * calendar-header-sub-title-font-size
+ * calendar-header-sub-title-font-weight
+ * calendar-navigation-button-width
+ * calendar-selected-item-bg
+ * calendar-hover-item-bg
+ * calendar-today-item-bg
+ * calendar-active-item-bg
+ * calendar-fg
+ * calendar-selected-fg
+ * calendar-day-cell-width
+ * calendar-day-cell-height
+ * calendar-month-cell-width
+ * calendar-month-cell-height
+ * calendar-year-cell-width
+ * calendar-year-cell-height
+ * calendar-inactive-opacity
+ * calendar-disabled-opacity
+ * calendar-border-radius
+ * calendar-weekday-width
+ * calendar-weekday-height
+ * calendar-weekday-font-size
+ * calendar-weekday-font-weight
+ * calendar-weekday-fg
+ * calendar-weekday-holiday-fg
+ * calendar-range-bg-in-range
+ * calendar-large-width
+ * calendar-large-body-height
+ * calendar-day-cell-large-width
+ * calendar-day-cell-large-height
+ * calendar-month-cell-large-width
+ * calendar-month-cell-large-height
+ * calendar-year-cell-large-width
+ * calendar-year-cell-large-height
+ * */
 @Component({
   selector: 'nb-calendar-range',
   template: `
