@@ -1,6 +1,6 @@
 {
   "name": "@nebular/moment",
-  "version": "2.0.0-rc.10",
+  "version": "2.0.0",
   "description": "@nebular/moment",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -24,8 +24,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "2.0.0-rc.10",
+    "@nebular/theme": "2.0.0",
     "moment": "^2.22.2"
   }
 }
-
