@@ -127,6 +127,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
+
+    if (typeof value !== 'undefined') {
+      this.updateValues();
+    }
   }
 
   protected updateNames() {
