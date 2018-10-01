@@ -1,5 +1,6 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
+// TODO this config is redundant but we'll keep it for the future purposes
 
 const browserstack = require('browserstack-local');
 const { SpecReporter } = require('jasmine-spec-reporter');
