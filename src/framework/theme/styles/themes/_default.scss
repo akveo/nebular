@@ -675,8 +675,8 @@ $theme: (
   radio-disabled-bg: transparent,
   radio-disabled-size: 1.25rem,
   radio-disabled-border-size: 2px,
-  radio-disabled-border-color: color-fg-heading,
-  radio-disabled-checkmark: color-fg-heading,
+  radio-disabled-border-color: radio-border-color,
+  radio-disabled-checkmark: radio-checkmark,
 );
 
 // register the theme

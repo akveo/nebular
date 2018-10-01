@@ -29,7 +29,7 @@ import { convertToBoolProperty } from '../helpers';
  * It provides form bindings:
  *
  * ```html
- * <nb-radio-group [(ngModule)]="selectedOption">
+ * <nb-radio-group [(ngModel)]="selectedOption">
  *   <nb-radio>Option 1</nb-radio>
  *   <nb-radio>Option 2</nb-radio>
  *   <nb-radio>Option 3</nb-radio>

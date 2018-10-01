@@ -54,19 +54,18 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="customised-control customised-checkbox">
+    <label class="customised-control">
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
-             (change)="value = !value"
-             (focus)="setFocus()"
-             (blur)="removeFocus()">
+             (change)="value = !value">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
         <ng-content></ng-content>
       </span>
     </label>
   `,
+  styleUrls: [ `./checkbox.component.scss` ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbCheckboxComponent),
@@ -114,9 +113,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     return this.status === 'danger';
   }
 
-  @HostBinding('class.focus')
-  focus: boolean = false;
-
   onChange: any = () => { };
   onTouched: any = () => { };
 
@@ -144,13 +140,5 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
-  }
-
-  setFocus() {
-    this.focus = true;
-  }
-
-  removeFocus() {
-    this.focus = false;
   }
 }

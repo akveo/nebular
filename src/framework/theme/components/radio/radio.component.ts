@@ -84,6 +84,7 @@ import { convertToBoolProperty } from '../helpers';
     </label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./radio.component.scss'],
 })
 export class NbRadioComponent {
   @Input() name: string;
