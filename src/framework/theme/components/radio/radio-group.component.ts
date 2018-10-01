@@ -127,6 +127,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
+
+    if (typeof value !== 'undefined') {
+      this.updateValues();
+    }
   }
 
   protected updateNames() {
@@ -137,19 +141,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateValues() {
-    if (this.radios) {
+    if (this.radios && typeof this.value !== 'undefined') {
       this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
       this.markRadiosForCheck();
     }
   }
 
   protected updateDisabled() {
-    if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => {
-        if (!radio.hasOwnProperty('disabled')) {
-          radio.setDisabled = this.disabled;
-        }
-      });
+    if (this.radios && typeof this.disabled !== 'undefined') {
+      this.radios.forEach((radio: NbRadioComponent) => radio.setDisabled = this.disabled);
       this.markRadiosForCheck();
     }
   }

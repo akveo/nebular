@@ -50,6 +50,7 @@ export interface NbCalendarRange<D> {
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
       [visibleDate]="visibleDate"
+      [showHeader]="showHeader"
       [size]="size"
     ></nb-base-calendar>
   `,
@@ -115,6 +116,11 @@ export class NbCalendarRangeComponent<D> {
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Input() visibleDate: D;
+
+  /**
+   * Determines should we show calendars header or not.
+   * */
+  @Input() showHeader: boolean = true;
 
   /**
    * Range which will be rendered as selected.

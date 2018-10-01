@@ -36,6 +36,26 @@ task('bump-bootstrap', () => {
   return bumpPeer(['./src/framework/auth/package.json'], 'bootstrap');
 });
 
+task('bump-smoke-test-app-deps', () => {
+  const nbPackages = [
+    'theme',
+    'auth',
+    'security',
+    'bootstrap',
+    'moment',
+    'date-fns',
+  ];
+
+  /**
+   * Iterates over all nbPackages and modifies according dependency.
+   * Then just save results.
+   * */
+  return nbPackages.reduce((acc, pkg) => {
+    return acc.pipe(modify({ key: `dependencies.@nebular/${pkg}`, value: VERSION }));
+  }, src(['./packages-smoke/package.json'], { base: './' }))
+    .pipe(dest('./'));
+});
+
 function bumpPeer(packages: string[], peer: string) {
   return bump(packages, `peerDependencies.@nebular/${peer}`);
 }
