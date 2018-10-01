@@ -3,7 +3,7 @@
 
 ### Highlights
 
-Nebular 2.0 is now stable! After 10 release candidates and a year of work we finally made it with a great help of Nebular community and we cannot be more grateful for all of your contribution! :tada: 
+Nebular 2.0 is stable now! After 10 release candidates and a year of work we finally made it with a great help of Nebular community and we cannot be more grateful for all of your contribution! :tada: 
 
 
 ### Bug Fixes
@@ -69,71 +69,61 @@ Nebular 2.0 is now stable! After 10 release candidates and a year of work we fin
 
 ### HOW TO UPGRADE/BREAKING CHANGES
 
+#### Steps
+
 This release has introduced a number of changes which may required some manual update steps, depending on your setup:
 
 1. In case if you use Nebular overrides of bootstrap styles - you need to manually install new `@nebular/bootstrap` package. To do that:
-- install Nebular Bootstrap
-`npm i @nebular/bootstrap`
-- then add it into your `styles.scss`
-```scss
-@import '~@nebular/bootstrap/styles/globals';
-// ...
-
-@include nb-install() {
+  - install Nebular Bootstrap `npm i @nebular/bootstrap`
+  - then add it into your `styles.scss`
+  ```
+  @import '~@nebular/bootstrap/styles/globals';
   // ...
-  @include nb-bootstrap-global();
-}
-```
-- if you import `~@nebular/theme/styles/global/bootstrap/breakpoints` in your code, replace it with `~@nebular/theme/styles/global/breakpoints`
-- if you import `~@nebular/theme/styles/global/bootstrap/*.scss` somewhere in your code, replace it with `~@nebular/bootstrap/styles/*.scss`
+  
+  @include nb-install() {
+    // ...
+    @include nb-bootstrap-global();
+  }
+  ```
+  - if you import `~@nebular/theme/styles/global/bootstrap/breakpoints` in your code, replace it with `~@nebular/theme/styles/global/breakpoints`
+  - if you import `~@nebular/theme/styles/global/bootstrap/*.scss` somewhere in your code, replace it with `~@nebular/bootstrap/styles/*.scss`
 
 2. Nebular 2.0 introduced a new peer dependency - @angular/cdk. A lot of out of the box functionality provided by @angular team gives our components a solid foundation. To do that:
 - install @angular/cdk
 `npm i @angular/cdk`
 
-These are two required steps to update, also, here's a list of other possibly breaking changes that you may need to take into account:
+#### Breaking Changes
+Here's a list of other possibly breaking changes that you may need to take into account:
 
 * **menu:** `NbMenuComponent` and `NbContextMenuDirective` now fire itemClick even if item with `routerLink` was clicked.
-* **menu:** The `NbMenuService` not reply the last click event.
-
-To Update:
-if you use the knowledge that the last click event is replied you can wrap `onItemClick` stream in the custom stream based on `ReplaySubject`.
+* **menu:** The `NbMenuService` not reply the last click event. To update: if you use the knowledge that the last click event is replied you can wrap `onItemClick` stream in the custom stream based on `ReplaySubject`.
 * **theme:** angular2-toaster styles were removed from Nebular.
-Instead, we suggest using our new `NbToastrService`.
-
-To Update:
-Add `NbToastrModule` into imports of your `app.module`.
+Instead, we suggest using our new `NbToastrService`. To update:  add `NbToastrModule` into imports of your `app.module`.
 Inject `NbToastrService` into the required component.
 call `NbToastrService.show(...)` to render toasts.
 For more information check [toastr documentation](https://akveo.github.io/nebular/docs/components/toastr).
 * **theme:** All bootstrap override styles were moved from the @nebular/theme package to the new @nebular/bootstrap package. If you don't need bootstrap support you can simply no use this package.
-@nebular/theme package introduced a dependency of normalize.css.
-
-To Update:
-- install Nebular Bootstrap
-`npm i @nebular/bootstrap`
-- then add it into your `styles.scss`
-```scss
-@import '~@nebular/bootstrap/styles/globals';
-// ...
-
-@include nb-install() {
-  // ...
-  @include nb-bootstrap-global();
-}
-```
-* **theme:** `appendToLayoutTop` and `clearLayoutTop` methods was removed from `NbThemeService`. Instead of this methods, you have to use `NbOverlayService`. It's the extension of @angular/cdk overlays, so, check [documentation](https://material.angular.io/cdk/overlay/overview) first of all. 
-
-Basic usage of overlays may look like this:
-
-```ts
-constructor(protected overlay: NbOverlayService) {
-}
-
-const overlayRef = overlay.create();
-const overlayComponentPortal = new ComponentPortal(MyOverlayComponent);
-overlayRef.attach(overlayComponentPortal);
-```
+@nebular/theme package introduced a dependency of normalize.css. To update:
+  - install Nebular Bootstrap `npm i @nebular/bootstrap`
+  - then add it into your `styles.scss`
+   ```scss
+   @import '~@nebular/bootstrap/styles/globals';
+   // ...
+   
+   @include nb-install() {
+     // ...
+     @include nb-bootstrap-global();
+   }
+   ```
+* **theme:** `appendToLayoutTop` and `clearLayoutTop` methods was removed from `NbThemeService`. Instead of this methods, you have to use `NbOverlayService`. It's the extension of @angular/cdk overlays, so, check [documentation](https://material.angular.io/cdk/overlay/overview) first of all.  Basic usage of overlays may look like this:
+  ```ts
+  constructor(protected overlay: NbOverlayService) {
+  }
+  
+  const overlayRef = overlay.create();
+  const overlayComponentPortal = new ComponentPortal(MyOverlayComponent);
+  overlayRef.attach(overlayComponentPortal);
+  ```
 * **tabset:** Possibly a breaking change since tabs won't be bold in hover state.
 * **auth:** According to RFC6749 section 4.3.2, the OAuth2 token request body with grant-type='password' must provide `username` to the auth server and not `email`.
 * **auth:** `NbAuthJWTInterceptor` now always tries to refresh the token.
