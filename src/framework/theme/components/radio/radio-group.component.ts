@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { NbRadioComponent } from './radio.component';
 import { merge } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { filter, take, takeWhile, delay } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
@@ -104,6 +104,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected name: string;
   protected alive: boolean = true;
   protected onChange = (value: any) => {};
+  protected onTouched = () => {};
 
   constructor(protected cd: ChangeDetectorRef) {}
 
@@ -112,6 +113,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.updateValues();
     this.updateDisabled();
     this.subscribeOnRadiosValueChange();
+    this.subscribeOnRadiosBlur();
   }
 
   ngOnDestroy() {
@@ -123,6 +125,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   writeValue(value: any): void {
@@ -170,5 +173,17 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected markRadiosForCheck() {
     this.radios.forEach((radio: NbRadioComponent) => radio.markForCheck());
+  }
+
+  protected subscribeOnRadiosBlur() {
+    merge(...this.radios.map(radio => radio.blur))
+      .pipe(
+        takeWhile(() => this.alive),
+        // wait for focus to be applied to another radio in case it moved within radio group.
+        delay(100),
+        filter(() => !this.radios.some(radio => radio.hasFocus)),
+        take(1),
+      )
+      .subscribe(() => this.onTouched());
   }
 }

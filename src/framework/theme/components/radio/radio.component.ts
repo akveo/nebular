@@ -76,7 +76,9 @@ import { convertToBoolProperty } from '../helpers';
         [checked]="checked"
         [disabled]="disabled"
         (change)="onChange($event)"
-        (click)="onClick($event)">
+        (click)="onClick($event)"
+        (focus)="setFocus()"
+        (blur)="removeFocus()">
       <span class="radio-indicator"></span>
       <span class="radio-description">
         <ng-content></ng-content>
@@ -87,6 +89,12 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./radio.component.scss'],
 })
 export class NbRadioComponent {
+
+  private focus: boolean = false;
+  get hasFocus(): boolean {
+    return this.focus;
+  }
+
   @Input() name: string;
 
   @Input() checked: boolean;
@@ -99,6 +107,8 @@ export class NbRadioComponent {
   }
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
+
+  @Output() blur: EventEmitter<void> = new EventEmitter();
 
   disabled: boolean;
 
@@ -117,5 +127,14 @@ export class NbRadioComponent {
 
   onClick(event: Event) {
     event.stopPropagation();
+  }
+
+  setFocus() {
+    this.focus = true;
+  }
+
+  removeFocus() {
+    this.focus = false;
+    this.blur.emit();
   }
 }
