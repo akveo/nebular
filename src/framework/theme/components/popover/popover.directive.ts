@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 
 import {
@@ -39,6 +48,19 @@ import { NbPopoverComponent } from './popover.component';
  *   <span>Hello, Popover!</span>
  * </ng-template>
  * ```
+ * ### Installation
+ *
+ * Import `NbPopoverModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbPopoverModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
  *
  * Custom components
  *
@@ -129,7 +151,8 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   constructor(@Inject(NB_DOCUMENT) protected document,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
-              private overlay: NbOverlayService) {
+              private overlay: NbOverlayService,
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngAfterViewInit() {
@@ -154,7 +177,8 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
       position: this.position,
       content: this.content,
       context: this.context,
-    });
+      cfr: this.componentFactoryResolver,
+    }, this.componentFactoryResolver);
   }
 
   hide() {

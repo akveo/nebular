@@ -1,0 +1,83 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin input-border-color($color) {
+  input:checked + .radio-indicator,
+  input:hover:not(:disabled) + .radio-indicator {
+    border-color: $color;
+  }
+}
+
+@mixin nb-input-status-color($origin-border-color) {
+  @include input-border-color($origin-border-color);
+  &.success {
+    @include input-border-color(nb-theme(color-success));
+  }
+  &.warning {
+    @include input-border-color(nb-theme(color-warning));
+  }
+  &.danger {
+    @include input-border-color(nb-theme(color-danger));
+  }
+}
+
+@mixin nb-radio-check-mark($size, $color) {
+  &::before {
+    background-color: $color;
+    height: calc(#{$size} * 0.6);
+    width: calc(#{$size} * 0.6);
+    border: solid $color;
+  }
+}
+
+@mixin set-box-style($bg, $size, $border-size, $border-color) {
+  background-color: $bg;
+  width: $size;
+  height: $size;
+  border: $border-size solid $border-color;
+}
+
+@mixin nb-radio-theme() {
+  nb-radio {
+    .radio-indicator {
+      @include set-box-style(
+          nb-theme(radio-bg),
+          nb-theme(radio-size),
+          nb-theme(radio-border-size),
+          nb-theme(radio-border-color)
+      );
+
+      @include nb-radio-check-mark(nb-theme(radio-size), nb-theme(radio-checkmark));
+    }
+
+    input:checked + .radio-indicator,
+    input:disabled:checked + .radio-indicator {
+      @include set-box-style(
+          nb-theme(radio-checked-bg),
+          nb-theme(radio-checked-size),
+          nb-theme(radio-checked-border-size),
+          nb-theme(radio-checked-border-color)
+      );
+      @include nb-radio-check-mark(nb-theme(radio-checked-size), nb-theme(radio-checked-checkmark));
+    }
+
+    input:disabled + .radio-indicator {
+      @include set-box-style(
+          nb-theme(radio-disabled-bg),
+          nb-theme(radio-disabled-size),
+          nb-theme(radio-disabled-border-size),
+          nb-theme(radio-disabled-border-color)
+      );
+      @include nb-radio-check-mark(nb-theme(radio-disabled-size), nb-theme(radio-disabled-checkmark));
+    }
+
+    @include nb-input-status-color(nb-theme(radio-checked-border-color));
+
+    .radio-description {
+      color: nb-theme(radio-fg);
+    }
+  }
+}

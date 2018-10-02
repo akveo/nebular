@@ -32,6 +32,32 @@ import { NbDialogContainerComponent } from './dialog-container';
  * A new dialog is opened by calling the `open` method with a component to be loaded and an optional configuration.
  * `open` method will return `NbDialogRef` that can be used for the further manipulations.
  *
+ * ### Installation
+ *
+ * Import `NbDialogModule.forRoot()` to your app module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbDialogModule.forRoot(config),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ *
+ * If you are using it in a lazy loaded module than you have to install it with `NbDialogModule.forChild()`:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbDialogModule.forChild(config),
+ *   ],
+ * })
+ * export class LazyLoadedModule { }
+ * ```
+ *
+ * ### Usage
+ *
  * ```ts
  * const dialogRef = this.dialogService.open(MyDialogComponent, { ... });
  * ```

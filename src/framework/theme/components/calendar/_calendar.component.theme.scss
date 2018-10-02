@@ -9,12 +9,22 @@
   nb-base-calendar {
     &.medium nb-card {
       width: nb-theme(calendar-width);
-      height: nb-theme(calendar-height);
+
+      nb-card-body {
+        height: nb-theme(calendar-body-height);
+      }
     }
 
     &.large nb-card {
       width: nb-theme(calendar-large-width);
-      height: nb-theme(calendar-large-height);
+
+      nb-card-body {
+        height: nb-theme(calendar-large-body-height);
+      }
+    }
+
+    nb-card {
+      margin: 0;
     }
 
     nb-card-body {

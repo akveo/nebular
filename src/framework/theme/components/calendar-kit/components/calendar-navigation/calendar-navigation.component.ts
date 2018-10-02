@@ -20,13 +20,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     }
   `],
   template: `
-    <button class="btn btn-primary" (click)="changeMode.emit()">
+    <button nbButton (click)="changeMode.emit()">
       {{ date | nbCalendarDate }}
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarNavigationComponent {
-  @Input() date: Date;
-  @Output() changeMode = new EventEmitter<void>();
+export class NbCalendarNavigationComponent<D> {
+  @Input() date: D;
+  @Output() changeMode = new EventEmitter<void>(true);
 }

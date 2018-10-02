@@ -295,10 +295,29 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Radio',
+        icon: 'radio.svg',
+        source: [
+          'NbRadioComponent',
+          'NbRadioGroupComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Select',
         icon: 'select.svg',
         source: [
           'NbSelectComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'datepicker.svg',
+        source: [
+          'NbDatepickerDirective',
+          'NbDatepickerComponent',
+          'NbRangepickerComponent',
         ],
       },
       {
@@ -349,6 +368,16 @@ export const structure = [
         source: [
           'NbTooltipDirective',
           'NbTooltipComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Window',
+        icon: 'collapsable.svg',
+        source: [
+          'NbWindowService',
+          'NbWindowRef',
+          'NbWindowConfig',
         ],
       },
       {
@@ -420,6 +449,25 @@ export const structure = [
         icon: 'calendar.svg',
         source: [
           'NbCalendarComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar Range',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarRangeComponent',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'CDK',
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar Kit',
+        icon: 'calendar.svg',
+        source: [
           'NbCalendarKitModule',
         ],
       },

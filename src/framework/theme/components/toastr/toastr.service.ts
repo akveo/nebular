@@ -132,15 +132,20 @@ export class NbToastrContainerRegistry {
  *
  * `NbToastrService.show(message, title, config)` accepts three params, title and config are optional.
  *
- * Global toastr configuration may be provided through `NbToastrModule.forRoot(config)`.
+ * ### Installation
  *
+ * Import `NbToastrModule.forRoot()` to your app module.
  * ```ts
- * imports: [
- *   NbToastrModule.forRoot(config),
- * ]
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbToastrModule.forRoot(config),
+ *   ],
+ * })
+ * export class AppModule { }
  * ```
  *
- * ### Configuration
+ * ### Usage
  *
  * Config accepts following options:
  *

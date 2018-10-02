@@ -35,11 +35,12 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
-  NbOverlayModule,
   NbToastrModule,
   NbTooltipModule,
   NbDialogModule,
   NbSelectModule,
+  NbWindowModule,
+  NbDatepickerModule, NbRadioModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -239,6 +240,16 @@ import { NbSelectDisabledComponent } from './select/select-disabled.component';
 import { NbSelectGroupsComponent } from './select/select-groups.component';
 import { NbSelectLabelShowcaseComponent } from './select/select-label.component';
 import { NbSelectCleanComponent } from './select/select-clean.component';
+import { NbFormComponent, NbWindowShowcaseComponent } from './window/window-showcase.component';
+import { NbTemplateWindowComponent } from './window/template-window.component';
+import { NbWindowsBackdropComponent } from './window/windows-backdrop.component';
+import { NbDatepickerShowcaseComponent } from './datepicker/datepicker-showcase.component';
+import { NbDatepickerFormsComponent } from './datepicker/datepicker-forms.component';
+import { NbDatepickerValidationComponent } from './datepicker/datepicker-validation.component';
+import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
+import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
+import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
+import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -251,7 +262,7 @@ export const NB_MODULES = [
   NbMenuModule.forRoot(),
   NbActionsModule,
   NbSearchModule,
-  NbThemeModule,
+  NbThemeModule.forRoot({ name: 'default' }),
   NbTabsetModule,
   NbRouteTabsetModule,
   NbUserModule,
@@ -272,11 +283,13 @@ export const NB_MODULES = [
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCalendarKitModule,
-  NbOverlayModule.forRoot(),
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
+  NbWindowModule.forRoot(),
+  NbDatepickerModule.forRoot(),
+  NbRadioModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -427,6 +440,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarFilterComponent,
   NbCalendarMinMaxComponent,
   NbCalendarSizeComponent,
+  NbCalendarWithoutHeaderComponent,
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,
@@ -469,6 +483,16 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbSelectGroupsComponent,
   NbSelectLabelShowcaseComponent,
   NbSelectCleanComponent,
+  NbWindowShowcaseComponent,
+  NbFormComponent,
+  NbTemplateWindowComponent,
+  NbWindowsBackdropComponent,
+  NbDatepickerShowcaseComponent,
+  NbDatepickerFormsComponent,
+  NbDatepickerValidationComponent,
+  NbRangepickerShowcaseComponent,
+  NbRadioShowcaseComponent,
+  NbRadioDisabledComponent,
 ];
 
 @NgModule({
@@ -492,6 +516,7 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbScrollDialogComponent,
     NbShowcaseDialogComponent,
     NbBackdropClickDialogComponent,
+    NbFormComponent,
   ],
 })
 export class NbPlaygroundModule {

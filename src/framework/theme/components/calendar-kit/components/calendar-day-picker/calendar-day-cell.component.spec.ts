@@ -4,24 +4,28 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFixture,  TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DatePipe } from '@angular/common';
 
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbDateTimeUtil } from '../../services';
+import { NbDateService, NbNativeDateService } from '../../services';
 
 
 describe('Component: NbCalendarDayCell', () => {
-  let component: NbCalendarDayCellComponent;
-  let fixture: ComponentFixture<NbCalendarDayCellComponent>;
+  let component: NbCalendarDayCellComponent<Date>;
+  let fixture: ComponentFixture<NbCalendarDayCellComponent<Date>>;
   let componentEl: HTMLElement;
+  let dateService: NbDateService<Date>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [DatePipe, NbNativeDateService, { provide: NbDateService, useExisting: NbNativeDateService }],
       declarations: [NbCalendarDayCellComponent],
     });
-    fixture = TestBed.createComponent(NbCalendarDayCellComponent);
+    fixture = TestBed.createComponent<NbCalendarDayCellComponent<Date>>(NbCalendarDayCellComponent);
     component = fixture.componentInstance;
     componentEl = fixture.nativeElement;
+    dateService = TestBed.get(NbNativeDateService);
   });
 
   it('should contain cell class', () => {
@@ -80,44 +84,44 @@ describe('Component: NbCalendarDayCell', () => {
 
   it('should not contain disabled if greater than min', () => {
     component.date = new Date();
-    component.min = NbDateTimeUtil.addDay(new Date(), -1);
+    component.min = dateService.addDay(new Date(), -1);
     fixture.detectChanges();
     expect(componentEl.classList).not.toContain('disabled');
   });
 
   it('should not contain disabled if smaller than max', () => {
     component.date = new Date();
-    component.max = NbDateTimeUtil.addDay(new Date(), 1);
+    component.max = dateService.addDay(new Date(), 1);
     fixture.detectChanges();
     expect(componentEl.classList).not.toContain('disabled');
   });
 
   it('should not contain disabled if in min-max range', () => {
     component.date = new Date();
-    component.min = NbDateTimeUtil.addDay(new Date(), -1);
-    component.max = NbDateTimeUtil.addDay(new Date(), 1);
+    component.min = dateService.addDay(new Date(), -1);
+    component.max = dateService.addDay(new Date(), 1);
     fixture.detectChanges();
     expect(componentEl.classList).not.toContain('disabled');
   });
 
   it('should contain disabled if out of min-max range', () => {
     component.date = new Date();
-    component.min = NbDateTimeUtil.addDay(new Date(), 1);
-    component.max = NbDateTimeUtil.addDay(new Date(), 10);
+    component.min = dateService.addDay(new Date(), 1);
+    component.max = dateService.addDay(new Date(), 10);
     fixture.detectChanges();
     expect(componentEl.classList).toContain('disabled');
   });
 
   it('should contain disabled if smaller than min', () => {
     component.date = new Date();
-    component.min = NbDateTimeUtil.addDay(new Date(), 1);
+    component.min = dateService.addDay(new Date(), 1);
     fixture.detectChanges();
     expect(componentEl.classList).toContain('disabled');
   });
 
   it('should contain disabled if greater than max', () => {
     component.date = new Date();
-    component.max = NbDateTimeUtil.addDay(new Date(), -1);
+    component.max = dateService.addDay(new Date(), -1);
     fixture.detectChanges();
     expect(componentEl.classList).toContain('disabled');
   });

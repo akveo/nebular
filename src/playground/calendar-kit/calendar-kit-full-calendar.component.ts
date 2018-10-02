@@ -5,7 +5,7 @@ import {
   NbCalendarCell,
   NbCalendarDayPickerComponent,
   NbCalendarMonthModelService,
-  NbLocaleService,
+  NbDateService,
 } from '@nebular/theme';
 
 
@@ -22,17 +22,17 @@ import {
     </nb-calendar-day-picker>
   `,
 })
-export class NbCalendarKitMonthCellComponent extends NbCalendarDayPickerComponent<Date>
-  implements NbCalendarCell<Date> {
+export class NbCalendarKitMonthCellComponent extends NbCalendarDayPickerComponent<Date, Date>
+  implements NbCalendarCell<Date, Date> {
   select: EventEmitter<Date> = new EventEmitter();
   selectedValue: Date;
 
-  constructor(private locale: NbLocaleService, monthModel: NbCalendarMonthModelService) {
+  constructor(private dateService: NbDateService<Date>, monthModel: NbCalendarMonthModelService<Date>) {
     super(monthModel);
   }
 
   get title() {
-    return this.locale.getMonthName(this.date, TranslationWidth.Wide);
+    return this.dateService.getMonthName(this.date, TranslationWidth.Wide);
   }
 }
 

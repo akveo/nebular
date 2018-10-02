@@ -6,12 +6,23 @@
 
 import { browser, by, element } from 'protractor';
 
-describe('nb-search', () => {
+function getComputedProperty(property: string, selector: string) {
+  const script = `
+    return window.getComputedStyle(
+      document.querySelector('${selector}'),
+      ':before'
+    ).${property};
+  `;
+
+  return browser.executeScript(script);
+}
+
+describe('nb-checkbox', () => {
   const transparent = 'rgba(0, 0, 0, 0)';
 
   const border_color = 'rgb(218, 223, 230)';
   const checked_color = 'rgb(64, 220, 126)';
-  const hover_color = 'rgb(107, 228, 155)';
+  const outline_color = 'rgb(107, 228, 155)';
 
   const warning_color = 'rgb(255, 161, 0)';
   const warning_hover = 'rgb(255, 180, 51)';
@@ -49,7 +60,7 @@ describe('nb-search', () => {
   it('should apply style if checked/unchecked', () => {
     const input = element(by.css('#first input'));
     const indicator = element(by.css('#first .customised-control-indicator'));
-    const otherElement = element(by.css('#danger'));
+    const otherElement = element(by.css('#danger .customised-control-indicator'));
 
     // unchecked
     expect(input.getAttribute('checked')).toBeFalsy();
@@ -57,22 +68,15 @@ describe('nb-search', () => {
     expect(indicator.getCssValue('border')).toEqual('2px solid ' + border_color);
 
     // check ::before styles
-    browser.executeScript(
-      'return ' +
-      'window.getComputedStyle(document.querySelector(' +
-      '"#first .customised-control-indicator"' +
-      '), ":before").content')
+    getComputedProperty('content', '#first .customised-control-indicator')
       .then(data => expect(data).toBe('""'));
 
-    browser.executeScript(
-      'return ' +
-      'window.getComputedStyle(document.querySelector(' +
-      '"#first .customised-control-indicator"' +
-      '), ":before").borderTopColor')
+    getComputedProperty('borderTopColor', '#first .customised-control-indicator')
       .then(data => expect(data).toBe(transparent));
 
     indicator.click();
-    browser.actions().mouseMove(otherElement).perform();
+    // change focus to another input, so .focus styles removed.
+    otherElement.click();
 
     // checked
     expect(input.getAttribute('checked')).toBeTruthy();
@@ -80,21 +84,11 @@ describe('nb-search', () => {
     expect(indicator.getCssValue('border')).toEqual('2px solid ' + checked_color);
 
     // check ::before styles
-    browser.executeScript(
-      'return ' +
-      'window.getComputedStyle(document.querySelector(' +
-      '"#first .customised-control-indicator"' +
-      '), ":before").content')
+    getComputedProperty('content', '#first .customised-control-indicator')
       .then(data => expect(data).toBe('""'));
 
-    browser.executeScript(
-      'return ' +
-      'window.getComputedStyle(document.querySelector(' +
-      '"#first .customised-control-indicator"' +
-      '), ":before").borderTopColor')
-      .then(data => {
-        expect(data).toBe('rgb(42, 42, 42)');
-      });
+    getComputedProperty('borderTopColor', '#first .customised-control-indicator')
+      .then(data => expect(data).toBe('rgb(42, 42, 42)'));
   });
 
   it('should apply style if hover', () => {
@@ -106,23 +100,22 @@ describe('nb-search', () => {
     browser.actions().mouseMove(indicator).perform();
 
     // hover
-    expect(indicator.getCssValue('border')).toEqual('2px solid ' + hover_color);
+    expect(indicator.getCssValue('border')).toEqual('2px solid ' + outline_color);
   });
 
-  it('should apply style if status success', () => {
+  it('should apply status style', () => {
     const success = element(by.css('#success .customised-control-indicator'));
     const other = element(by.css('#first .customised-control-indicator'));
 
     // without hover
     expect(success.getCssValue('border-color')).toEqual(border_color);
 
+    // checked & focus
     success.click();
+    expect(success.getCssValue('border-color')).toEqual(outline_color);
 
-    // hover
-    expect(success.getCssValue('border-color')).toEqual(hover_color);
-
-    // checked
-    browser.actions().mouseMove(other).perform();
+    // checked w/o focus
+    other.click();
     expect(success.getCssValue('border-color')).toEqual(checked_color);
 
   });
@@ -134,13 +127,12 @@ describe('nb-search', () => {
     // without hover
     expect(warning.getCssValue('border-color')).toEqual(border_color);
 
+    // checked & focus
     warning.click();
-
-    // hover
     expect(warning.getCssValue('border-color')).toEqual(warning_hover);
 
-    // checked
-    browser.actions().mouseMove(other).perform();
+    // checked w/o focus
+    other.click();
     expect(warning.getCssValue('border-color')).toEqual(warning_color);
   });
 
@@ -151,14 +143,12 @@ describe('nb-search', () => {
     // without hover
     expect(danger.getCssValue('border-color')).toEqual(border_color);
 
+    // checked & focus
     danger.click();
-
-    // hover
     expect(danger.getCssValue('border-color')).toEqual(danger_hover);
 
-    // checked
-    browser.actions().mouseMove(other).perform();
-
+    // checked w/o focus
+    other.click();
     expect(danger.getCssValue('border-color')).toEqual(danger_color);
 
   });

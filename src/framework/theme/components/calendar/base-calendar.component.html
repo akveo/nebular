@@ -1,5 +1,5 @@
 <nb-card>
-  <nb-card-header>
+  <nb-card-header *ngIf="showHeader">
     <nb-calendar-header (navigateToday)="navigateToday()"></nb-calendar-header>
   </nb-card-header>
 

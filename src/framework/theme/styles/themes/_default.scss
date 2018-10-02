@@ -302,19 +302,6 @@ $theme: (
   smart-table-paging-bg-active: color-success,
   smart-table-paging-hover: rgba(0, 0, 0, 0.05),
 
-  toaster-bg: color-primary,
-  toaster-fg-default: color-inverse,
-  toaster-btn-close-bg: transparent,
-  toaster-btn-close-fg: toaster-fg-default,
-  toaster-shadow: shadow,
-
-  toaster-fg: color-white,
-  toaster-success: color-success,
-  toaster-info: color-info,
-  toaster-warning: color-warning,
-  toaster-wait: color-primary,
-  toaster-error: color-danger,
-
   toastr-bg: color-bg,
   toastr-padding: 1.125rem,
   toastr-fg: color-fg-text,
@@ -438,8 +425,6 @@ $theme: (
   checkbox-disabled-border-size: 2px,
   checkbox-disabled-border-color: color-fg-heading,
   checkbox-disabled-checkmark: color-fg-heading,
-
-  radio-fg: color-success,
 
   modal-font-size: font-size,
   modal-line-height: line-height,
@@ -606,7 +591,7 @@ $theme: (
   list-item-padding: 1rem,
 
   calendar-width: 21.875rem,
-  calendar-height: 31rem,
+  calendar-body-height: 25.625rem,
   calendar-header-title-font-size: font-size-xlg,
   calendar-header-title-font-weight: font-weight-bold,
   calendar-header-sub-title-font-size: font-size,
@@ -637,7 +622,7 @@ $theme: (
   calendar-range-bg-in-range: #ebfbf2,
 
   calendar-large-width: 24.375rem,
-  calendar-large-height: 33.125rem,
+  calendar-large-body-height: 27.75rem,
   calendar-day-cell-large-width: 3rem,
   calendar-day-cell-large-height: 3rem,
   calendar-month-cell-large-width: 4.25rem,
@@ -668,6 +653,30 @@ $theme: (
   select-option-disabled-bg: #f2f4f7,
   select-option-disabled-opacity: 0.3,
   select-option-padding: 0.75rem 1.5rem,
+
+  datepicker-fg: color-fg-heading,
+  datepicker-bg: color-bg,
+  datepicker-border: color-success,
+  datepicker-border-radius: radius,
+  datepicker-shadow: none,
+  datepicker-arrow-size: 11px,
+
+  radio-bg: transparent,
+  radio-fg: color-fg-text,
+  radio-size: 1.25rem,
+  radio-border-size: 2px,
+  radio-border-color: form-control-border-color,
+  radio-checkmark: transparent,
+  radio-checked-bg: transparent,
+  radio-checked-size: 1.25rem,
+  radio-checked-border-size: 2px,
+  radio-checked-border-color: color-success,
+  radio-checked-checkmark: color-success,
+  radio-disabled-bg: transparent,
+  radio-disabled-size: 1.25rem,
+  radio-disabled-border-size: 2px,
+  radio-disabled-border-color: radio-border-color,
+  radio-disabled-checkmark: radio-checkmark,
 );
 
 // register the theme

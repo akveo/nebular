@@ -1,0 +1,41 @@
+@import '../../styles/core/mixins';
+
+:host {
+  .customised-control {
+    position: relative;
+    display: inline-flex;
+    margin: 0;
+    min-height: inherit;
+    padding: 0.375rem 1.5rem 0.375rem 0;
+  }
+
+  .customised-control-input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .customised-control-input:disabled {
+    & ~ .customised-control-indicator,
+    & ~ .customised-control-description {
+      opacity: 0.5;
+    }
+  }
+
+  .customised-control-indicator {
+    border-radius: 0.25rem;
+    flex-shrink: 0;
+
+    &::before {
+      content: '';
+      border-style: solid;
+      display: block;
+      margin: 0 auto;
+      transform: rotate(45deg);
+    }
+  }
+
+  .customised-control-description {
+    @include nb-ltr(padding-left, 0.5rem);
+    @include nb-rtl(padding-right, 0.5rem);
+  }
+}
