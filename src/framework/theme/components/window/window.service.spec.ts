@@ -2,7 +2,7 @@ import { Component, ElementRef, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbThemeModule } from '../../theme.module';
-import { NbOverlayContainerAdapter, NbOverlayModule, NbViewportRulerAdapter } from '../cdk';
+import { NbOverlayContainerAdapter, NbViewportRulerAdapter } from '../cdk';
 import { NbWindowModule } from './window.module';
 import { NbWindowService } from './window.service';
 import createSpy = jasmine.createSpy;
@@ -42,7 +42,6 @@ describe('window-service', () => {
     TestBed.configureTestingModule({
       imports: [
         NbThemeModule.forRoot({ name: 'default' }),
-        NbOverlayModule.forRoot(),
         NbWindowModule.forRoot(),
         NbTestWindowModule,
       ],

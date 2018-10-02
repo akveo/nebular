@@ -1,5 +1,21 @@
-import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, TemplateRef, Renderer2 } from '@angular/core';
-import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  Inject,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  Renderer2,
+  ViewChild, AfterViewInit, Type, ComponentFactoryResolver, Input,
+} from '@angular/core';
+import {
+  NbComponentPortal,
+  NbFocusTrap,
+  NbFocusTrapFactoryService,
+  NbOverlayContainerComponent,
+  NbTemplatePortal,
+} from '../cdk';
 import { NbComponentType } from '../cdk/overlay';
 import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window.options';
 import { NbWindowRef } from './window-ref';
@@ -27,14 +43,15 @@ import { NbWindowRef } from './window-ref';
         </div>
       </nb-card-header>
       <nb-card-body *ngIf="maximized || isFullScreen">
-        <nb-overlay-container [content]="content" [context]="context">
-        </nb-overlay-container>
+        <nb-overlay-container></nb-overlay-container>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./window.component.scss'],
 })
-export class NbWindowComponent implements OnInit, OnDestroy {
+export class NbWindowComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() cfr: ComponentFactoryResolver;
+
   @HostBinding('class.full-screen')
   get isFullScreen() {
     return this.windowRef.state === NbWindowState.FULL_SCREEN;
@@ -49,6 +66,8 @@ export class NbWindowComponent implements OnInit, OnDestroy {
   get minimized() {
     return this.windowRef.state === NbWindowState.MINIMIZED;
   }
+
+  @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   protected focusTrap: NbFocusTrap;
 
@@ -69,6 +88,14 @@ export class NbWindowComponent implements OnInit, OnDestroy {
 
     if (this.config.windowClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.config.windowClass);
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.content instanceof TemplateRef) {
+      this.attachTemplate();
+    } else {
+      this.attachComponent();
     }
   }
 
@@ -106,5 +133,18 @@ export class NbWindowComponent implements OnInit, OnDestroy {
 
   close() {
     this.windowRef.close();
+  }
+
+  protected attachTemplate() {
+    this.overlayContainer.attachTemplatePortal(new NbTemplatePortal(this.content as TemplateRef<any>, null, {
+      $implicit: this.context,
+    }));
+  }
+
+  protected attachComponent() {
+    const portal = new NbComponentPortal(this.content as Type<any>, null, null, this.cfr);
+    const ref = this.overlayContainer.attachComponentPortal(portal);
+    Object.assign(ref.instance, this.context);
+    ref.changeDetectorRef.detectChanges();
   }
 }

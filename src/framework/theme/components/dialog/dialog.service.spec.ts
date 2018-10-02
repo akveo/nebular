@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { NbOverlayContainerAdapter, NbOverlayModule, NbOverlayService } from '../cdk';
+import { NbOverlayContainerAdapter, NbOverlayService } from '../cdk';
 import { NbDialogService } from './dialog.service';
 import { NbDialogModule } from './dialog.module';
 import { NbThemeModule } from '../../theme.module';
@@ -35,7 +35,6 @@ describe('dialog-service', () => {
         NbTestDialogModule,
         NbThemeModule.forRoot({ name: 'default' }),
         NbDialogModule.forRoot(),
-        NbOverlayModule.forRoot(),
       ],
     });
 
