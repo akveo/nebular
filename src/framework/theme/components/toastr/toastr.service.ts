@@ -134,7 +134,7 @@ export class NbToastrContainerRegistry {
  *
  * ### Installation
  *
- * Import `NbToastrModule` to your app module.
+ * Import `NbToastrModule.forRoot()` to your app module.
  * ```ts
  * @NgModule({
  *   imports: [
