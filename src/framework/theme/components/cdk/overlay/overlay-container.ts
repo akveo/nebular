@@ -10,7 +10,6 @@ import {
 
 import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbTemplatePortal } from './mapping';
-import { NbCalendarDayCellComponent } from '@nebular/theme';
 
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;

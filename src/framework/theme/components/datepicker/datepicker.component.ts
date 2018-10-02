@@ -24,7 +24,7 @@ import {
   NbAdjustment,
   NbComponentPortal,
   NbOverlayRef,
-  NbOverlayService, NbPortalInjector,
+  NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
   NbTrigger,
@@ -371,12 +371,12 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     }
   }
 
-  shouldHide(): boolean {
-    return super.shouldHide() && !!(this.value.start && this.value.end);
-  }
-
   protected get pickerValueChange(): Observable<NbCalendarRange<D>> {
     return this.picker.rangeChange;
+  }
+
+  shouldHide(): boolean {
+    return super.shouldHide() && !!(this.value.start && this.value.end);
   }
 
   protected writeQueue() {
