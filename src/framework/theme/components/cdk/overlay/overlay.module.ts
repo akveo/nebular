@@ -29,6 +29,7 @@ export class NbOverlayModule {
         NbPositionBuilderService,
         NbOverlayService,
         NbPositionHelper,
+        ...NbCdkMappingModule.forRoot().providers,
         ...NbCdkAdapterModule.forRoot().providers,
       ],
     };
