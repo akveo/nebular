@@ -100,8 +100,14 @@ Roles and permission management based on access control list. `*nbIsGranted` con
 - [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components. [Live Demo](http://akveo.com/ngx-admin?utm_source=github&utm_medium=nebular_readme).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
 
-### VSCode Extension
+### Developer Utils
+
+#### VSCode Extension
 - [Nebular Code Snippets](https://marketplace.visualstudio.com/items?itemName=shalinjames.vscode-nebular-snippets) - a Visual Studio Code snippets extension for Nebular components and directives.
+
+#### Intellij Plugin
+- [Nebular Code Snippets](https://plugins.jetbrains.com/plugin/11065-nebular-code-snippets) - a Intellij Live template plugin for Nebular components and directives. Has support for following of IntelliJ products:  
+IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, RubyMine, AppCode, CLion, GoLand, DataGrip, Rider, MPS, Android Studio. 
 
 
 ### From Developers
