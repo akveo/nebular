@@ -1,5 +1,5 @@
 <a name="2.0.0"></a>
-# [2.0.0](https://github.com/akveo/nebular/compare/2.0.0-rc.10...2.0.0) (2018-10-01)
+# [2.0.0](https://github.com/akveo/nebular/compare/2.0.0-rc.10...2.0.0) (2018-10-02)
 
 ### Highlights
 
