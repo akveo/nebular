@@ -26,4 +26,14 @@ export class NbWindowModule {
       ],
     };
   }
+
+  static forChild(defaultConfig?: Partial<NbWindowConfig>) {
+    return <ModuleWithProviders>{
+      ngModule: NbWindowModule,
+      providers: [
+        NbWindowService,
+        { provide: NB_WINDOW_CONFIG, useValue: defaultConfig },
+      ],
+    };
+  }
 }

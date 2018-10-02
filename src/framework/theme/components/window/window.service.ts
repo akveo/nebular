@@ -1,13 +1,27 @@
 import {
-  ComponentFactoryResolver, ComponentRef, Inject, Injectable, Injector, TemplateRef, ViewContainerRef,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Inject,
+  Injectable,
+  Injector,
+  TemplateRef,
+  ViewContainerRef,
 } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import {
-  NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef, NbOverlayService,
+  NbComponentPortal,
+  NbComponentType,
+  NbOverlayPositionBuilder,
+  NbOverlayRef,
+  NbOverlayService,
 } from '../cdk/overlay';
 import { NbBlockScrollStrategyAdapter } from '../cdk/adapter/block-scroll-strategy-adapter';
 import {
-  NB_WINDOW_CONFIG, NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT,
+  NB_WINDOW_CONFIG,
+  NB_WINDOW_CONTENT,
+  NB_WINDOW_CONTEXT,
+  NbWindowConfig,
+  NbWindowState,
 } from './window.options';
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
@@ -86,7 +100,9 @@ export class NbWindowService {
     protected overlayPositionBuilder: NbOverlayPositionBuilder,
     protected blockScrollStrategy: NbBlockScrollStrategyAdapter,
     @Inject(NB_WINDOW_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
-  ) {}
+    protected cfr: ComponentFactoryResolver,
+  ) {
+  }
 
   /**
    * Opens new window.
@@ -143,7 +159,10 @@ export class NbWindowService {
     const injector = Injector.create({ parent: parentInjector, providers });
     const windowFactory = this.componentFactoryResolver.resolveComponentFactory(NbWindowComponent);
 
-    return this.windowsContainerViewRef.createComponent(windowFactory, null, injector);
+    const ref = this.windowsContainerViewRef.createComponent(windowFactory, null, injector);
+    ref.instance.cfr = this.cfr;
+    ref.changeDetectorRef.detectChanges();
+    return ref
   }
 
   protected subscribeToEvents(windowRef: NbWindowRef) {
