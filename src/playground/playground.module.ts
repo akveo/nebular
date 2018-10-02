@@ -262,7 +262,7 @@ export const NB_MODULES = [
   NbMenuModule.forRoot(),
   NbActionsModule,
   NbSearchModule,
-  NbThemeModule.forRoot({ name: 'default' }),
+  NbThemeModule,
   NbTabsetModule,
   NbRouteTabsetModule,
   NbUserModule,
@@ -288,7 +288,7 @@ export const NB_MODULES = [
   NbTooltipModule,
   NbSelectModule,
   NbWindowModule.forRoot(),
-  NbDatepickerModule,
+  NbDatepickerModule.forRoot(),
   NbRadioModule,
 ];
 
