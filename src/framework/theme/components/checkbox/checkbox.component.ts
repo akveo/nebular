@@ -58,7 +58,8 @@ import { convertToBoolProperty } from '../helpers';
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
-             (change)="value = !value">
+             (change)="value = !value"
+             (blur)="setTouched()">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
         <ng-content></ng-content>
@@ -123,7 +124,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   set value(val) {
     this._value = val;
     this.onChange(val);
-    this.onTouched();
   }
 
   registerOnChange(fn: any) {
@@ -140,5 +140,9 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+  }
+
+  setTouched() {
+    this.onTouched();
   }
 }
