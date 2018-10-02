@@ -28,6 +28,7 @@ import {
 import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from './services/direction.service';
 import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
+import { NbOverlayModule } from './components/cdk';
 
 export function nbWindowFactory() {
   return window;
@@ -75,6 +76,7 @@ export class NbThemeModule {
         NbLayoutDirectionService,
         NbLayoutScrollService,
         NbLayoutRulerService,
+        ...NbOverlayModule.forRoot().providers,
       ],
     };
   }

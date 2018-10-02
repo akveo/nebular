@@ -117,7 +117,17 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
  *
  * ### Installation
  *
- * Import `NbDatepickerModule` to your feature module.
+ * Import `NbDatepickerModule.forRoot()` to your root module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbDatepickerModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ * And `NbDatepickerModule` to your feature module.
  * ```ts
  * @NgModule({
  *   imports: [

@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, ComponentRef, Directive, ElementRef, Inject, Input, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
@@ -124,7 +133,8 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
               private menuService: NbMenuService,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
-              private overlay: NbOverlayService) {
+              private overlay: NbOverlayService,
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngAfterViewInit() {
@@ -150,7 +160,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
       position: this.position,
       items: this.items,
       tag: this.tag,
-    });
+    }, this.componentFactoryResolver);
   }
 
   hide() {
