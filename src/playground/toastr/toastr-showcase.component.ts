@@ -4,8 +4,8 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'nb-toastr-showcase',
   template: `
-    <button class="btn btn-primary" (click)="showToast('top-right', 'success')">Top Right</button>
-    <button class="btn btn-primary" (click)="showToast('bottom-left', 'info')">Bottom left</button>
+    <button nbButton (click)="showToast('top-right', 'success')">Top Right</button>
+    <button nbButton (click)="showToast('bottom-left', 'info')">Bottom left</button>
   `,
   styles: [
       `
