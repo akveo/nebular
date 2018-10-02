@@ -47,7 +47,7 @@ describe('nb-datepicker', () => {
         RouterTestingModule.withRoutes([]),
         NbThemeModule.forRoot({ name: 'default' }),
         NbLayoutModule,
-        NbDatepickerModule,
+        NbDatepickerModule.forRoot(),
       ],
       declarations: [NbDatepickerTestComponent],
     });
