@@ -34,7 +34,9 @@ import {
   NbDialogModule,
   NbSelectModule,
   NbWindowModule,
-  NbDatepickerModule, NbRadioModule,
+  NbDatepickerModule,
+  NbRadioModule,
+  NbOverlayModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -256,7 +258,8 @@ export const NB_MODULES = [
   NbMenuModule.forRoot(),
   NbActionsModule,
   NbSearchModule,
-  NbThemeModule.forRoot({ name: 'default' }),
+  NbThemeModule,
+  NbOverlayModule.forRoot(),
   NbTabsetModule,
   NbRouteTabsetModule,
   NbUserModule,
