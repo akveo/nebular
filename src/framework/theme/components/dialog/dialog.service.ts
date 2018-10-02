@@ -44,6 +44,18 @@ import { NbDialogContainerComponent } from './dialog-container';
  * })
  * export class AppModule { }
  * ```
+ *
+ * If you are using it in a lazy loaded module than you have to install `NbDialogModule.forChild`:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbDialogModule.forChild(config),
+ *   ],
+ * })
+ * export class LazyLoadedModule { }
+ * ```
+ *
  * ### Usage
  *
  * ```ts

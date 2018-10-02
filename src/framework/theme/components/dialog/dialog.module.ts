@@ -28,4 +28,14 @@ export class NbDialogModule {
       ],
     }
   }
+
+  static forChild(dialogConfig: Partial<NbDialogConfig> = {}): ModuleWithProviders {
+    return {
+      ngModule: NbDialogModule,
+      providers: [
+        NbDialogService,
+        { provide: NB_DIALOG_CONFIG, useValue: dialogConfig },
+      ],
+    }
+  }
 }

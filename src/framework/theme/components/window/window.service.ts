@@ -45,6 +45,17 @@ import { NbWindowComponent } from './window.component';
  * export class AppModule { }
  * ```
  *
+ * If you are using it in a lazy loaded module than you have to install `NbWindowModule.forChild`:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbWindowModule.forChild(config),
+ *   ],
+ * })
+ * export class LazyLoadedModule { }
+ * ```
+ *
  * ### Usage
  *
  * A new window can be opened by calling the `open` method with a component or template to be loaded
