@@ -144,7 +144,7 @@ export class NbWindowService {
       positionStrategy: this.overlayPositionBuilder.global().bottom().right(),
       hasBackdrop: true,
     });
-    const windowsContainerPortal = new NbComponentPortal(NbWindowsContainerComponent);
+    const windowsContainerPortal = new NbComponentPortal(NbWindowsContainerComponent, null, null, this.cfr);
     const overlayRef = this.overlayRef.attach(windowsContainerPortal);
     this.windowsContainerViewRef = overlayRef.instance.viewContainerRef;
   }

@@ -14,7 +14,7 @@ import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
 
 
 @NgModule({
-  imports: [NbSharedModule, NbA11yModule, NbOverlayModule],
+  imports: [NbSharedModule, NbOverlayModule],
   declarations: [NbDialogContainerComponent],
   entryComponents: [NbDialogContainerComponent],
 })

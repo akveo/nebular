@@ -9,7 +9,7 @@ import { NbWindowComponent } from './window.component';
 import { NB_WINDOW_CONFIG, NbWindowConfig } from './window.options';
 
 @NgModule({
-  imports: [ CommonModule, NbOverlayModule, NbCardModule, NbA11yModule ],
+  imports: [ CommonModule, NbOverlayModule, NbCardModule ],
   declarations: [
     NbWindowsContainerComponent,
     NbWindowComponent,

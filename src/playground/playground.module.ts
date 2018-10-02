@@ -262,7 +262,7 @@ export const NB_MODULES = [
   NbMenuModule.forRoot(),
   NbActionsModule,
   NbSearchModule,
-  NbThemeModule,
+  NbThemeModule.forRoot({ name: 'default' }),
   NbTabsetModule,
   NbRouteTabsetModule,
   NbUserModule,

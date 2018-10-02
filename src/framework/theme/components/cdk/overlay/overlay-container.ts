@@ -1,7 +1,16 @@
-import { Component, ComponentRef, EmbeddedViewRef, HostBinding, Input, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  EmbeddedViewRef,
+  HostBinding,
+  Injector,
+  Input,
+  ViewContainerRef,
+} from '@angular/core';
 
 import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbTemplatePortal } from './mapping';
+import { NbCalendarDayCellComponent } from '@nebular/theme';
 
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
@@ -37,7 +46,7 @@ export abstract class NbPositionedContainer {
 export class NbOverlayContainerComponent {
   content: string;
 
-  constructor(protected vcr: ViewContainerRef) {
+  constructor(protected vcr: ViewContainerRef, protected injector: Injector) {
   }
 
   get isStringContent(): boolean {

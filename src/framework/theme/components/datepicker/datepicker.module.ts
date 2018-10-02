@@ -23,19 +23,6 @@ import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapte
   exports: [NbDatepickerDirective, NbDatepickerComponent, NbRangepickerComponent],
   declarations: [NbDatepickerDirective, NbDatepickerContainerComponent, NbDatepickerComponent, NbRangepickerComponent],
   entryComponents: [NbCalendarComponent, NbCalendarRangeComponent, NbDatepickerContainerComponent],
-  providers: [
-    DatePipe,
-    {
-      provide: NB_DATE_ADAPTER,
-      multi: true,
-      useClass: NbDateAdapterService,
-    },
-    {
-      provide: NB_DATE_ADAPTER,
-      multi: true,
-      useClass: NbRangeAdapterService,
-    },
-  ],
 })
 export class NbDatepickerModule {
   static forRoot(): ModuleWithProviders {

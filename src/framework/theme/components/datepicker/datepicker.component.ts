@@ -6,6 +6,7 @@
 
 import {
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -23,7 +24,7 @@ import {
   NbAdjustment,
   NbComponentPortal,
   NbOverlayRef,
-  NbOverlayService,
+  NbOverlayService, NbPortalInjector,
   NbPosition,
   NbPositionBuilderService,
   NbTrigger,
@@ -152,7 +153,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
-              protected overlay: NbOverlayService) {
+              protected overlay: NbOverlayService,
+              protected cfr: ComponentFactoryResolver) {
     super();
   }
 
@@ -199,7 +201,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent));
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
@@ -252,7 +254,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected instantiatePicker() {
-    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass));
+    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null, this.cfr));
   }
 
   /**
