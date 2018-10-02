@@ -17,7 +17,7 @@ import { NbCalendarDayCellComponent } from '@nebular/theme';
   `,
   host: { '(click)': 'onClick()', 'class': 'day-cell' },
 })
-export class NbCalendarCustomDayCellComponent extends NbCalendarDayCellComponent {
+export class NbCalendarCustomDayCellComponent extends NbCalendarDayCellComponent<Date> {
 }
 
 @Component({
