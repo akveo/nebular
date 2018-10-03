@@ -1,71 +1,44 @@
 import { dest, src, task } from 'gulp';
 
-const modify = require('gulp-json-modify');
-const seq = require('gulp-sequence');
+const fs = require('fs');
+const through = require('through2');
 
 const VERSION_APPENDIX = process.env.NEBULAR_VERSION_APPENDIX;
 const VERSION = process.env.NEBULAR_VERSION || require('../../../package.json').version +
   (VERSION_APPENDIX ? '-' + VERSION_APPENDIX : '');
+const FRAMEWORK_ROOT = './src/framework';
 
-task('version', seq('bump', 'bump-peer'));
 
-task('bump', () => {
-  return bumpVersion([
-    './package.json',
-    './src/framework/theme/package.json',
-    './src/framework/auth/package.json',
-    './src/framework/security/package.json',
-    './src/framework/bootstrap/package.json',
-    './src/framework/moment/package.json',
-    './src/framework/date-fns/package.json',
-  ]);
+task('version', () => {
+  return fs.readdirSync(FRAMEWORK_ROOT)
+    .map(createFullPathToPackageJson)
+    .filter(keepNebularPackages)
+    .concat('./package.json')
+    .map(bumpVersionAndNebularPeers);
 });
 
-task('bump-peer', seq('bump-theme', 'bump-bootstrap'));
-
-task('bump-theme', () => {
-  return bumpPeer([
-    './src/framework/auth/package.json',
-    './src/framework/bootstrap/package.json',
-    './src/framework/moment/package.json',
-    './src/framework/date-fns/package.json',
-  ], 'theme');
-});
-
-task('bump-bootstrap', () => {
-  return bumpPeer(['./src/framework/auth/package.json'], 'bootstrap');
-});
-
-task('bump-smoke-test-app-deps', () => {
-  const nbPackages = [
-    'theme',
-    'auth',
-    'security',
-    'bootstrap',
-    'moment',
-    'date-fns',
-  ];
-
-  /**
-   * Iterates over all nbPackages and modifies according dependency.
-   * Then just save results.
-   * */
-  return nbPackages.reduce((acc, pkg) => {
-    return acc.pipe(modify({ key: `dependencies.@nebular/${pkg}`, value: VERSION }));
-  }, src(['./packages-smoke/package.json'], { base: './' }))
-    .pipe(dest('./'));
-});
-
-function bumpPeer(packages: string[], peer: string) {
-  return bump(packages, `peerDependencies.@nebular/${peer}`);
+function createFullPathToPackageJson(pkgName: string): string {
+  return `${FRAMEWORK_ROOT}/${pkgName}/package.json`;
 }
 
-function bumpVersion(packages: string[]) {
-  return bump(packages, 'version');
+function keepNebularPackages(pkgPath: string): boolean {
+  return !pkgPath.includes('icons');
 }
 
-function bump(packages: string[], key: string) {
-  return src(packages, { base: './' })
-    .pipe(modify({ key, value: VERSION }))
+function bumpVersionAndNebularPeers(pkgPath: string) {
+  return src(pkgPath, { base: './' })
+    .pipe(through.obj(function (file, encoding, callback) {
+      const pkgJson = JSON.parse(file.contents.toString(encoding));
+
+      pkgJson.version = VERSION;
+      if (pkgJson.peerDependencies) {
+        Object.keys(pkgJson.peerDependencies)
+          .filter(peer => peer.includes('@nebular'))
+          .forEach(peer => pkgJson.peerDependencies[peer] = VERSION);
+      }
+
+      file.contents = Buffer.from(JSON.stringify(pkgJson, null, 2));
+      callback(null, file);
+    }))
     .pipe(dest('./'));
 }
