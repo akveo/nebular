@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
@@ -126,6 +126,8 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     this.onChange(val);
   }
 
+  constructor(private changeDetector: ChangeDetectorRef) {}
+
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
@@ -136,6 +138,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   writeValue(val: any) {
     this._value = val;
+    this.changeDetector.detectChanges();
   }
 
   setDisabledState(val: boolean) {
