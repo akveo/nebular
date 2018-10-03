@@ -1,5 +1,6 @@
 import {
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   EmbeddedViewRef,
   HostBinding,
@@ -9,7 +10,7 @@ import {
 } from '@angular/core';
 
 import { NbPosition } from './overlay-position';
-import { NbComponentPortal, NbTemplatePortal } from './mapping';
+import { NbComponentPortal, NbPortalInjector, NbTemplatePortal } from './mapping';
 
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
@@ -54,7 +55,8 @@ export class NbOverlayContainerComponent {
 
   attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
     const factory = portal.cfr.resolveComponentFactory(portal.component);
-    return this.vcr.createComponent(factory);
+    const injector = this.createChildInjector(portal.cfr);
+    return this.vcr.createComponent(factory, null, injector);
   }
 
   attachTemplatePortal<C>(portal: NbTemplatePortal<C>): EmbeddedViewRef<C> {
@@ -63,5 +65,11 @@ export class NbOverlayContainerComponent {
 
   attachStringContent(content: string) {
     this.content = content;
+  }
+
+  protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
+    return new NbPortalInjector(this.injector, new WeakMap([
+      [ComponentFactoryResolver, cfr],
+    ]));
   }
 }
