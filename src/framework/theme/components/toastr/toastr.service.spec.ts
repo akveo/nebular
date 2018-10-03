@@ -1,6 +1,9 @@
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk';
 import { NbToastStatus } from './model';
+import { TestBed } from '@angular/core/testing';
+import { ComponentFactoryResolver } from '@angular/core';
+import { NbToastrModule } from '@nebular/theme';
 
 
 describe('toastr-service', () => {
@@ -160,7 +163,10 @@ describe('toastr-container-registry', () => {
   });
 
   beforeEach(() => {
-    toastrContainerRegistry = new NbToastrContainerRegistry(overlayStub, positionBuilder, positionHelper);
+    const cfr = TestBed.configureTestingModule({
+      imports: [NbToastrModule.forRoot()],
+    }).get(ComponentFactoryResolver);
+    toastrContainerRegistry = new NbToastrContainerRegistry(overlayStub, positionBuilder, positionHelper, cfr);
   });
 
   it('should create new container if not exists for requested position', () => {
