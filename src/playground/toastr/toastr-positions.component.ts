@@ -4,14 +4,14 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'nb-toastr-positions',
   template: `
-    <button class="btn btn-primary" (click)="showToast('top-right')">Top Right</button>
-    <button class="btn btn-primary" (click)="showToast('bottom-right')">Bottom Right</button>
-    <button class="btn btn-primary" (click)="showToast('top-left')">Top Left</button>
-    <button class="btn btn-primary" (click)="showToast('bottom-left')">Bottom Left</button>
-    <button class="btn btn-primary" (click)="showToast('top-end')">Top End</button>
-    <button class="btn btn-primary" (click)="showToast('bottom-end')">Bottom End</button>
-    <button class="btn btn-primary" (click)="showToast('top-start')">Top Start</button>
-    <button class="btn btn-primary" (click)="showToast('bottom-start')">Bottom Start</button>
+    <button nbButton (click)="showToast('top-right')">Top Right</button>
+    <button nbButton (click)="showToast('bottom-right')">Bottom Right</button>
+    <button nbButton (click)="showToast('top-left')">Top Left</button>
+    <button nbButton (click)="showToast('bottom-left')">Bottom Left</button>
+    <button nbButton (click)="showToast('top-end')">Top End</button>
+    <button nbButton (click)="showToast('bottom-end')">Bottom End</button>
+    <button nbButton (click)="showToast('top-start')">Top Start</button>
+    <button nbButton (click)="showToast('bottom-start')">Bottom Start</button>
   `,
   styles: [
       `
