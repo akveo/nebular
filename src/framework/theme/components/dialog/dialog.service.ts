@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { ComponentFactoryResolver, Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -143,7 +143,8 @@ export class NbDialogService {
               @Inject(NB_DIALOG_CONFIG) protected globalConfig,
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              protected injector: Injector) {
+              protected injector: Injector,
+              protected cfr: ComponentFactoryResolver) {
   }
 
   /**
@@ -190,7 +191,7 @@ export class NbDialogService {
 
   protected createContainer(config: NbDialogConfig, overlayRef: NbOverlayRef): NbDialogContainerComponent {
     const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
-    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
+    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector, this.cfr);
     const containerRef = overlayRef.attach(containerPortal);
     return containerRef.instance;
   }

@@ -283,6 +283,7 @@ export const NB_MODULES = [
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCalendarKitModule,
+  NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,

@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbToastrModule } from '@nebular/theme';
+import { NbThemeModule } from '@nebular/theme';
 
 import { NbAppComponent } from './app.component';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
@@ -24,7 +24,6 @@ import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NbToastrModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',
