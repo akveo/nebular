@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentRef, Inject, Injectable } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
 
 import {
   NbComponentPortal,
@@ -99,7 +99,8 @@ export class NbToastrContainerRegistry {
 
   constructor(protected overlay: NbOverlayService,
               protected positionBuilder: NbPositionBuilderService,
-              protected positionHelper: NbPositionHelper) {
+              protected positionHelper: NbPositionHelper,
+              protected cfr: ComponentFactoryResolver) {
   }
 
   get(position: NbGlobalPosition): NbToastContainer {
@@ -120,7 +121,7 @@ export class NbToastrContainerRegistry {
   protected createContainer(position: NbGlobalLogicalPosition): NbToastContainer {
     const positionStrategy = this.positionBuilder.global().position(position);
     const ref = this.overlay.create({ positionStrategy });
-    const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent));
+    const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
     return new NbToastContainer(position, containerRef, this.positionHelper);
   }
 }
