@@ -35,7 +35,6 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
-  NbOverlayModule,
   NbToastrModule,
   NbTooltipModule,
   NbDialogModule,
@@ -284,13 +283,12 @@ export const NB_MODULES = [
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCalendarKitModule,
-  NbOverlayModule.forRoot(),
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
   NbWindowModule.forRoot(),
-  NbDatepickerModule,
+  NbDatepickerModule.forRoot(),
   NbRadioModule,
 ];
 

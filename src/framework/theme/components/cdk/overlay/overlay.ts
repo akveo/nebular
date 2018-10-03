@@ -1,4 +1,4 @@
-import { ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
 
 import {
   NbComponentPortal,
@@ -19,8 +19,13 @@ export function patch<T>(container: ComponentRef<T>, containerContext: Object): 
   return container;
 }
 
-export function createContainer<T>(ref: NbOverlayRef, container: NbComponentType<T>, context: Object): ComponentRef<T> {
-  const containerRef = ref.attach(new NbComponentPortal(container));
+export function createContainer<T>(
+  ref: NbOverlayRef,
+  container: NbComponentType<T>,
+  context: Object,
+  componentFactoryResolver?: ComponentFactoryResolver,
+  ): ComponentRef<T> {
+  const containerRef = ref.attach(new NbComponentPortal(container, null, null, componentFactoryResolver));
   patch(containerRef, context);
   return containerRef;
 }
