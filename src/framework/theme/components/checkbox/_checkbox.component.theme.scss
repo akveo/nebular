@@ -60,13 +60,19 @@
 
       @include check-mark-style(
         nb-theme(checkbox-disabled-size),
-        nb-theme(checkbox-disabled-checkmark),
+        nb-theme(checkbox-checkmark),
         nb-theme(checkbox-disabled-border-size)
       );
     }
 
     .customised-control-input:disabled:checked + .customised-control-indicator {
       border-color: nb-theme(checkbox-checked-border-color);
+
+      @include check-mark-style(
+          nb-theme(checkbox-disabled-size),
+          nb-theme(checkbox-disabled-checkmark),
+          nb-theme(checkbox-disabled-border-size)
+      );
     }
 
     @include checkbox-border(nb-theme(checkbox-checked-border-color));
