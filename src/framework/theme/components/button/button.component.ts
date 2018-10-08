@@ -203,6 +203,7 @@ export class NbButtonComponent {
   @HostBinding('attr.aria-disabled')
   @HostBinding('class.btn-disabled') disabled: boolean;
 
+  // issue #794
   @HostBinding('attr.tabindex')
   get tabbable(): string {
     return this.disabled ? '-1' : '0';
