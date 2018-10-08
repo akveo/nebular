@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, HostListener } from '@angular/core';
+import { Component, Input, HostBinding, HostListener, Renderer2, ElementRef } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -255,7 +255,9 @@ export class NbButtonComponent {
    */
   @Input('disabled')
   set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
+    const isDisabled = convertToBoolProperty(val);
+    this.disabled = isDisabled;
+    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', isDisabled);
   }
 
   /**
@@ -276,6 +278,16 @@ export class NbButtonComponent {
     this.outline = convertToBoolProperty(val);
   }
 
+  /**
+   * @private
+   * Keep this handler to partially support anchor disabling.
+   * Unlike button, anchor doesn't have 'disabled' DOM property,
+   * so handler will be called anyway. We preventing navigation and bubbling.
+   * Disabling is partial due to click handlers precedence. Consider example:
+   * <a nbButton [disabled]="true" (click)="clickHandler()">...</a>
+   * 'clickHandler' will be called before our host listener below. We can't prevent
+   * such handlers call.
+   */
   @HostListener('click', ['$event'])
   onClick(event: Event) {
     if (this.disabled) {
@@ -283,4 +295,9 @@ export class NbButtonComponent {
       event.stopImmediatePropagation();
     }
   }
+
+  constructor(
+    protected renderer: Renderer2,
+    protected hostElement: ElementRef<HTMLElement>,
+  ) {}
 }
