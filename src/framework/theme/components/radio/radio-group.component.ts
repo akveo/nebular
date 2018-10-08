@@ -16,12 +16,17 @@ import {
   OnDestroy,
   Output,
   QueryList,
+  PLATFORM_ID,
+  Inject,
+  ElementRef,
 } from '@angular/core';
-import { NbRadioComponent } from './radio.component';
-import { merge } from 'rxjs';
-import { filter, take, takeWhile, delay } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, merge } from 'rxjs';
+import { filter, switchMap, take, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
+import { NB_DOCUMENT } from '../../theme.options';
+import { NbRadioComponent } from './radio.component';
 
 
 /**
@@ -106,7 +111,12 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected onChange = (value: any) => {};
   protected onTouched = () => {};
 
-  constructor(protected cd: ChangeDetectorRef) {}
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected hostElement: ElementRef<HTMLElement>,
+    @Inject(PLATFORM_ID) protected platformId,
+    @Inject(NB_DOCUMENT) protected document,
+  ) {}
 
   ngAfterContentInit() {
     this.updateNames();
@@ -176,12 +186,19 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected subscribeOnRadiosBlur() {
-    merge(...this.radios.map(radio => radio.blur))
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const hostElement = this.hostElement.nativeElement;
+    fromEvent<Event>(hostElement, 'focusin')
       .pipe(
-        takeWhile(() => this.alive),
-        // wait for focus to be applied to another radio in case it moved within radio group.
-        delay(100),
-        filter(() => !this.radios.some(radio => radio.hasFocus)),
+        filter(event => hostElement.contains(event.target as Node)),
+        switchMap(() => merge(
+          fromEvent<Event>(this.document, 'focusin'),
+          fromEvent<Event>(this.document, 'click'),
+        )),
+        filter(event => !hostElement.contains(event.target as Node)),
         take(1),
       )
       .subscribe(() => this.onTouched());
