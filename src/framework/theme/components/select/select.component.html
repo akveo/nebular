@@ -8,7 +8,8 @@
   [fullWidth]="fullWidth"
   [outline]="outline"
   [class.opened]="isOpened"
-  [ngClass]="overlayPosition">
+  [ngClass]="overlayPosition"
+  (blur)="trySetTouched()">
 
     <ng-container *ngIf="selectionModel?.length">
 
