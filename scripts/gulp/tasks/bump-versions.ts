@@ -8,11 +8,15 @@ const VERSION = process.env.NEBULAR_VERSION || require('../../../package.json').
   (VERSION_APPENDIX ? '-' + VERSION_APPENDIX : '');
 const FRAMEWORK_ROOT = './src/framework';
 
+const EXCLUDE = [
+  'icons',
+];
+
 
 task('version', () => {
   return fs.readdirSync(FRAMEWORK_ROOT)
-    .map(createFullPathToPackageJson)
     .filter(keepNebularPackages)
+    .map(createFullPathToPackageJson)
     .concat('./package.json')
     .map(bumpVersionAndNebularPeers);
 });
@@ -22,7 +26,7 @@ function createFullPathToPackageJson(pkgName: string): string {
 }
 
 function keepNebularPackages(pkgPath: string): boolean {
-  return !pkgPath.includes('icons');
+  return !EXCLUDE.includes(pkgPath);
 }
 
 function bumpVersionAndNebularPeers(pkgPath: string) {
