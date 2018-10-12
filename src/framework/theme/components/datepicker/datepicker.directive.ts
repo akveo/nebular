@@ -15,8 +15,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
-import { fromEvent, Observable } from 'rxjs';
-import { map, takeWhile } from 'rxjs/operators';
+import { fromEvent, Observable, merge } from 'rxjs';
+import { map, takeWhile, filter, take } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit';
@@ -99,6 +99,10 @@ export abstract class NbDatepicker<T> {
   abstract hide();
 
   abstract shouldHide(): boolean;
+
+  abstract get isShown(): boolean;
+
+  abstract get blur(): Observable<void>;
 }
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
@@ -225,8 +229,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * */
   protected picker: NbDatepicker<D>;
   protected alive: boolean = true;
-  protected onChange: (D) => void = () => {
-  };
+  protected onChange: (D) => void = () => {};
+  protected onTouched: () => void = () => {};
 
   /**
    * Form control validators will be called in validators context, so, we need to bind them.
@@ -276,9 +280,11 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.input.disabled = isDisabled;
   }
 
   /**
@@ -367,6 +373,16 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
           this.hidePicker();
         }
       });
+
+    merge(
+      this.picker.blur,
+      fromEvent(this.input, 'blur').pipe(
+        filter(() => !this.picker.isShown && this.document.activeElement !== this.input),
+      ),
+    ).pipe(
+      takeWhile(() => this.alive),
+      take(1),
+    ).subscribe(() => this.onTouched());
   }
 
   protected writePicker(value: D) {

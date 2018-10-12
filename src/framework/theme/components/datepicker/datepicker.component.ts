@@ -151,6 +151,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   protected queue: T;
 
+  protected blur$: Subject<void> = new Subject<void>();
+
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
@@ -170,6 +172,17 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   get valueChange(): Observable<T> {
     return this.onChange$.asObservable();
+  }
+
+  get isShown(): boolean {
+    return this.ref && this.ref.hasAttached();
+  }
+
+  /**
+   * Emits when datepicker looses focus.
+   */
+  get blur(): Observable<void> {
+    return this.blur$.asObservable();
   }
 
   protected abstract get pickerValueChange(): Observable<T>;
@@ -250,7 +263,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   protected subscribeOnTriggers() {
     const triggerStrategy = this.createTriggerStrategy();
     triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
+      this.blur$.next();
+      this.hide();
+    });
   }
 
   protected instantiatePicker() {
