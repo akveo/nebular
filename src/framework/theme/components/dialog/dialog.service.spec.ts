@@ -33,7 +33,7 @@ describe('dialog-service', () => {
     TestBed.configureTestingModule({
       imports: [
         NbTestDialogModule,
-        NbThemeModule.forRoot({ name: 'default' }),
+        NbThemeModule.forRoot(),
         NbDialogModule.forRoot(),
       ],
     });
