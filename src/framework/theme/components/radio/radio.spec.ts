@@ -8,6 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbRadioModule } from './radio.module';
 import { NbRadioComponent } from './radio.component';
+import { NB_DOCUMENT } from '../../theme.options';
 
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -35,6 +36,7 @@ describe('radio', () => {
     TestBed.configureTestingModule({
       imports: [NbRadioModule],
       declarations: [NbRadioTestComponent],
+      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
     });
 
     fixture = TestBed.createComponent(NbRadioTestComponent);
