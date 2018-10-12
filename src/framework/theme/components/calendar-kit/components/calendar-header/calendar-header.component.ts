@@ -15,7 +15,7 @@ import { NbDateService } from '../../services';
   template: `
     <div class="header">
       <span class="title" (click)="navigateToday.emit()">
-        {{ date | nbCalendarDate }}
+        {{ date | nbCalendarDate : 'full' }}
         <i [ngClass]="{ 'nb-arrow-dropright': isLtr, 'nb-arrow-dropleft': isRtl }"></i>
       </span>
       <span class="sub-title">Today</span>

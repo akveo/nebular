@@ -14,7 +14,11 @@ export class NbCalendarDatePipe<D> implements PipeTransform {
   constructor(protected dateService: NbDateService<D>) {
   }
 
-  transform(date: D): string {
-    return date ? `${this.dateService.getMonthName(date)} ${this.dateService.getYear(date)}` : '';
+  transform(date: D, dateFormat: 'short' | 'full' = 'short'): string {
+    if (dateFormat === 'short') {
+      return date ? `${this.dateService.getMonthName(date)} ${this.dateService.getYear(date)}` : '';
+    }
+    return date ?
+      `${this.dateService.getMonthName(date)} ${this.dateService.getDate(date)} ${this.dateService.getYear(date)}` : '';
   }
 }
