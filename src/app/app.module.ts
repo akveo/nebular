@@ -30,7 +30,7 @@ import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme
         loadChildren: '../playground/playground.module#NbPlaygroundModule',
       },
     ], { useHash: true }),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot(),
     NbPlaygroundSharedModule,
   ],
   declarations: [

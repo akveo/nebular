@@ -92,7 +92,7 @@ describe('Component: NbSelectComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot({ name: 'default' }),
+        NbThemeModule.forRoot(),
         NbLayoutModule,
         NbSelectModule,
       ],

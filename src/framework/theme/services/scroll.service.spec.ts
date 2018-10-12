@@ -56,7 +56,7 @@ describe('NbScrollService', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule ],
+      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot(), NbLayoutModule ],
       providers: [ NbLayoutScrollService, NbThemeService, { provide: APP_BASE_HREF, useValue: '/' } ],
       declarations: [ ScrollTestComponent ],
     })
