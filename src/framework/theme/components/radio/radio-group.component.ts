@@ -16,12 +16,17 @@ import {
   OnDestroy,
   Output,
   QueryList,
+  PLATFORM_ID,
+  Inject,
+  ElementRef,
 } from '@angular/core';
-import { NbRadioComponent } from './radio.component';
-import { merge } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, merge } from 'rxjs';
+import { filter, switchMap, take, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
+import { NB_DOCUMENT } from '../../theme.options';
+import { NbRadioComponent } from './radio.component';
 
 
 /**
@@ -29,7 +34,7 @@ import { convertToBoolProperty } from '../helpers';
  * It provides form bindings:
  *
  * ```html
- * <nb-radio-group [(ngModule)]="selectedOption">
+ * <nb-radio-group [(ngModel)]="selectedOption">
  *   <nb-radio>Option 1</nb-radio>
  *   <nb-radio>Option 2</nb-radio>
  *   <nb-radio>Option 3</nb-radio>
@@ -104,14 +109,21 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected name: string;
   protected alive: boolean = true;
   protected onChange = (value: any) => {};
+  protected onTouched = () => {};
 
-  constructor(protected cd: ChangeDetectorRef) {}
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected hostElement: ElementRef<HTMLElement>,
+    @Inject(PLATFORM_ID) protected platformId,
+    @Inject(NB_DOCUMENT) protected document,
+  ) {}
 
   ngAfterContentInit() {
     this.updateNames();
     this.updateValues();
     this.updateDisabled();
     this.subscribeOnRadiosValueChange();
+    this.subscribeOnRadiosBlur();
   }
 
   ngOnDestroy() {
@@ -123,10 +135,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   writeValue(value: any): void {
     this.value = value;
+
+    if (typeof value !== 'undefined') {
+      this.updateValues();
+    }
   }
 
   protected updateNames() {
@@ -137,19 +154,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateValues() {
-    if (this.radios) {
+    if (this.radios && typeof this.value !== 'undefined') {
       this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
       this.markRadiosForCheck();
     }
   }
 
   protected updateDisabled() {
-    if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => {
-        if (!radio.hasOwnProperty('disabled')) {
-          radio.setDisabled = this.disabled
-        }
-      });
+    if (this.radios && typeof this.disabled !== 'undefined') {
+      this.radios.forEach((radio: NbRadioComponent) => radio.setDisabled = this.disabled);
       this.markRadiosForCheck();
     }
   }
@@ -170,5 +183,24 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected markRadiosForCheck() {
     this.radios.forEach((radio: NbRadioComponent) => radio.markForCheck());
+  }
+
+  protected subscribeOnRadiosBlur() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const hostElement = this.hostElement.nativeElement;
+    fromEvent<Event>(hostElement, 'focusin')
+      .pipe(
+        filter(event => hostElement.contains(event.target as Node)),
+        switchMap(() => merge(
+          fromEvent<Event>(this.document, 'focusin'),
+          fromEvent<Event>(this.document, 'click'),
+        )),
+        filter(event => !hostElement.contains(event.target as Node)),
+        take(1),
+      )
+      .subscribe(() => this.onTouched());
   }
 }

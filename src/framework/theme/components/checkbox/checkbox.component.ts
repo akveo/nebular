@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
@@ -54,19 +54,19 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="customised-control customised-checkbox">
+    <label class="customised-control">
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
              (change)="value = !value"
-             (focus)="setFocus()"
-             (blur)="removeFocus()">
+             (blur)="setTouched()">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
         <ng-content></ng-content>
       </span>
     </label>
   `,
+  styleUrls: [ `./checkbox.component.scss` ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbCheckboxComponent),
@@ -114,9 +114,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     return this.status === 'danger';
   }
 
-  @HostBinding('class.focus')
-  focus: boolean = false;
-
   onChange: any = () => { };
   onTouched: any = () => { };
 
@@ -127,8 +124,9 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   set value(val) {
     this._value = val;
     this.onChange(val);
-    this.onTouched();
   }
+
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -139,18 +137,15 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
 
   writeValue(val: any) {
-    this.value = val;
+    this._value = val;
+    this.changeDetector.detectChanges();
   }
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
   }
 
-  setFocus() {
-    this.focus = true;
-  }
-
-  removeFocus() {
-    this.focus = false;
+  setTouched() {
+    this.onTouched();
   }
 }

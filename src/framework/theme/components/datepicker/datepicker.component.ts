@@ -6,6 +6,7 @@
 
 import {
   Component,
+  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   EventEmitter,
@@ -150,9 +151,12 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   protected queue: T;
 
+  protected blur$: Subject<void> = new Subject<void>();
+
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
-              protected overlay: NbOverlayService) {
+              protected overlay: NbOverlayService,
+              protected cfr: ComponentFactoryResolver) {
     super();
   }
 
@@ -168,6 +172,17 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   get valueChange(): Observable<T> {
     return this.onChange$.asObservable();
+  }
+
+  get isShown(): boolean {
+    return this.ref && this.ref.hasAttached();
+  }
+
+  /**
+   * Emits when datepicker looses focus.
+   */
+  get blur(): Observable<void> {
+    return this.blur$.asObservable();
   }
 
   protected abstract get pickerValueChange(): Observable<T>;
@@ -199,7 +214,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent));
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
@@ -248,11 +263,14 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   protected subscribeOnTriggers() {
     const triggerStrategy = this.createTriggerStrategy();
     triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
+      this.blur$.next();
+      this.hide();
+    });
   }
 
   protected instantiatePicker() {
-    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass));
+    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null, this.cfr));
   }
 
   /**
@@ -369,12 +387,12 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     }
   }
 
-  shouldHide(): boolean {
-    return super.shouldHide() && !!(this.value.start && this.value.end);
-  }
-
   protected get pickerValueChange(): Observable<NbCalendarRange<D>> {
     return this.picker.rangeChange;
+  }
+
+  shouldHide(): boolean {
+    return super.shouldHide() && !!(this.value.start && this.value.end);
   }
 
   protected writeQueue() {

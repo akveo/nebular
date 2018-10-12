@@ -35,7 +35,6 @@ import {
   NbListModule,
   NbButtonModule,
   NbInputModule,
-  NbOverlayModule,
   NbToastrModule,
   NbTooltipModule,
   NbDialogModule,
@@ -250,6 +249,7 @@ import { NbDatepickerValidationComponent } from './datepicker/datepicker-validat
 import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
+import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -283,13 +283,12 @@ export const NB_MODULES = [
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCalendarKitModule,
-  NbOverlayModule.forRoot(),
   NbToastrModule.forRoot(),
   NbDialogModule.forRoot(),
   NbTooltipModule,
   NbSelectModule,
   NbWindowModule.forRoot(),
-  NbDatepickerModule,
+  NbDatepickerModule.forRoot(),
   NbRadioModule,
 ];
 
@@ -441,6 +440,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbCalendarFilterComponent,
   NbCalendarMinMaxComponent,
   NbCalendarSizeComponent,
+  NbCalendarWithoutHeaderComponent,
   NbCalendarKitFullCalendarShowcaseComponent,
   NbCalendarKitMonthCellComponent,
   NbOverlayShowcaseComponent,

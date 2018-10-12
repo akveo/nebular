@@ -41,6 +41,7 @@ import {
   NbTriggerStrategyBuilder,
 } from '../cdk';
 import { NbOptionComponent } from './option.component';
+import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 
@@ -112,7 +113,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select statuses, select/select-status.component)
  *
- * There are three select sizes:
+ * There are four select sizes:
  *
  * @stacked-example(Select sizes, select/select-sizes.component)
  *
@@ -233,6 +234,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
+  @ViewChild(NbButtonComponent, { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
+
   multiple: boolean = false;
 
   /**
@@ -270,10 +273,11 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Function passed through control value accessor to propagate changes.
    * */
   protected onChange: Function = () => {};
+  protected onTouched: Function = () => {};
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
-              protected hostRef: ElementRef,
+              protected hostRef: ElementRef<HTMLElement>,
               protected positionBuilder: NbPositionBuilderService,
               protected cd: ChangeDetectorRef) {
   }
@@ -349,9 +353,12 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.cd.detectChanges();
   }
 
   writeValue(value: T | T[]): void {
@@ -386,6 +393,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
     this.selectionModel = [];
     this.hide();
+    this.button.nativeElement.focus();
     this.emitSelected(null);
   }
 
@@ -413,6 +421,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.selectionModel = [option];
     option.select();
     this.hide();
+    this.button.nativeElement.focus();
 
     this.emitSelected(option.value);
   }
@@ -464,7 +473,12 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
     triggerStrategy.hide$
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
+      .subscribe(($event: Event) => {
+        this.hide();
+        if (!this.isClickedWithinComponent($event)) {
+          this.onTouched();
+        }
+      });
   }
 
   protected subscribeOnPositionChange() {
@@ -540,5 +554,19 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       corresponding.select();
       this.selectionModel.push(corresponding);
     }
+  }
+
+  /**
+   * Sets touched if focus moved outside of button and overlay,
+   * ignoring the case when focus moved to options overlay.
+   */
+  trySetTouched() {
+    if (this.isHidden) {
+      this.onTouched();
+    }
+  }
+
+  protected isClickedWithinComponent($event: Event) {
+    return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
   }
 }

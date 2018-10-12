@@ -34,7 +34,7 @@ export class NbShowcaseDialogComponent {
 
 @Component({
   selector: 'nb-dialog-showcase',
-  template: '<button class="btn btn-primary" (click)="open()">Open Dialog</button>',
+  template: '<button nbButton (click)="open()">Open Dialog</button>',
   styles: [` /deep/ nb-layout-column {
     height: 80vw;
   } `],

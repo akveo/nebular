@@ -449,6 +449,25 @@ export const structure = [
         icon: 'calendar.svg',
         source: [
           'NbCalendarComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar Range',
+        icon: 'calendar.svg',
+        source: [
+          'NbCalendarRangeComponent',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'CDK',
+      },
+      {
+        type: 'tabs',
+        name: 'Calendar Kit',
+        icon: 'calendar.svg',
+        source: [
           'NbCalendarKitModule',
         ],
       },

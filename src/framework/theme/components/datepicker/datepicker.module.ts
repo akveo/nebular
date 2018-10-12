@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { NB_DATE_ADAPTER, NbDatepickerDirective } from './datepicker.directive';
@@ -23,21 +23,24 @@ import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapte
   exports: [NbDatepickerDirective, NbDatepickerComponent, NbRangepickerComponent],
   declarations: [NbDatepickerDirective, NbDatepickerContainerComponent, NbDatepickerComponent, NbRangepickerComponent],
   entryComponents: [NbCalendarComponent, NbCalendarRangeComponent, NbDatepickerContainerComponent],
-  providers: [
-    DatePipe,
-    {
-      provide: NB_DATE_ADAPTER,
-      multi: true,
-      useClass: NbDateAdapterService,
-    },
-    {
-      provide: NB_DATE_ADAPTER,
-      multi: true,
-      useClass: NbRangeAdapterService,
-    },
-  ],
 })
 export class NbDatepickerModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: NbDatepickerModule,
+      providers: [
+        DatePipe,
+        {
+          provide: NB_DATE_ADAPTER,
+          multi: true,
+          useClass: NbDateAdapterService,
+        },
+        {
+          provide: NB_DATE_ADAPTER,
+          multi: true,
+          useClass: NbRangeAdapterService,
+        },
+      ],
+    };
+  }
 }
-
-

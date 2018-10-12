@@ -9,7 +9,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { NbDatepickerModule } from './datepicker.module';
-import { NbOverlayModule } from '../cdk';
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
 import { NbDatepickerComponent } from './datepicker.component';
@@ -47,9 +46,8 @@ describe('nb-datepicker', () => {
       imports: [
         RouterTestingModule.withRoutes([]),
         NbThemeModule.forRoot({ name: 'default' }),
-        NbOverlayModule.forRoot(),
         NbLayoutModule,
-        NbDatepickerModule,
+        NbDatepickerModule.forRoot(),
       ],
       declarations: [NbDatepickerTestComponent],
     });

@@ -201,6 +201,7 @@ import { NbDatepickerValidationComponent } from './datepicker/datepicker-validat
 import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcase.component';
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
+import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
 
 
 export const routes: Routes = [
@@ -445,6 +446,10 @@ export const routes: Routes = [
           {
             path: 'calendar-size.component',
             component: NbCalendarSizeComponent,
+          },
+          {
+            path: 'calendar-without-header.component',
+            component: NbCalendarWithoutHeaderComponent,
           },
         ],
       },
