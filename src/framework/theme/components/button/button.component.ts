@@ -256,9 +256,8 @@ export class NbButtonComponent {
    */
   @Input('disabled')
   set setDisabled(val: boolean) {
-    const isDisabled = convertToBoolProperty(val);
-    this.disabled = isDisabled;
-    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', isDisabled);
+    this.disabled = convertToBoolProperty(val);
+    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
   }
 
   /**
