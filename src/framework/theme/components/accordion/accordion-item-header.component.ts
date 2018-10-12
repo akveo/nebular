@@ -58,6 +58,7 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     return !this.accordionItem.collapsed;
   }
 
+  // issue #794
   @HostBinding('attr.tabindex')
   get tabbable(): string {
     return this.accordionItem.disabled ? '-1' : '0';

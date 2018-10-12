@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
@@ -58,7 +58,8 @@ import { convertToBoolProperty } from '../helpers';
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
-             (change)="value = !value">
+             (change)="value = !value"
+             (blur)="setTouched()">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
         <ng-content></ng-content>
@@ -123,8 +124,9 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   set value(val) {
     this._value = val;
     this.onChange(val);
-    this.onTouched();
   }
+
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -135,10 +137,15 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
 
   writeValue(val: any) {
-    this.value = val;
+    this._value = val;
+    this.changeDetector.detectChanges();
   }
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+  }
+
+  setTouched() {
+    this.onTouched();
   }
 }
