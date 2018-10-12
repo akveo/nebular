@@ -21,7 +21,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbThemeModule.forRoot({ name: 'default' })],
+      imports: [NbThemeModule.forRoot()],
       declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
       providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });

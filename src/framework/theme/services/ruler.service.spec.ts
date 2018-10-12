@@ -51,7 +51,7 @@ describe('NbLayoutRulerService', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule ],
+      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot(), NbLayoutModule ],
       providers: [ NbLayoutRulerService, NbThemeService, { provide: APP_BASE_HREF, useValue: '/' } ],
       declarations: [ RulerTestComponent ],
     })

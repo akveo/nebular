@@ -28,7 +28,7 @@ import { NbThemeModule } from '@nebular/theme';
 @NgModule({
   imports: [
     RouterModule.forRoot([ ... ]), // Router is required by Nebular
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot(),
   ]
 })
 export class AppModule { }
