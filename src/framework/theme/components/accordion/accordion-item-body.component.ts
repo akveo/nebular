@@ -8,7 +8,6 @@ import {
   Component,
   ChangeDetectionStrategy,
   Host,
-  ElementRef,
   ChangeDetectorRef,
   OnInit,
   OnDestroy,
@@ -32,9 +31,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
     style({
       overflow: 'hidden',
       visibility: 'visible',
-      height: '{{ contentHeight }}',
     }),
-    { params: { contentHeight: '1rem' } },
   ),
   transition('collapsed => expanded', animate('100ms ease-in')),
   transition('expanded => collapsed', animate('100ms ease-out')),
@@ -46,7 +43,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
 @Component({
   selector: 'nb-accordion-item-body',
   template: `
-    <div [@accordionItemBody]="{ value: state, params: { contentHeight: contentHeight } }">
+    <div [@accordionItemBody]="{ value: state }">
       <div class="item-body">
         <ng-content></ng-content>
       </div>
@@ -56,23 +53,15 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
-
-  contentHeight: string;
-
   private alive: boolean = true;
 
-  constructor(
-    @Host() private accordionItem: NbAccordionItemComponent,
-    private el: ElementRef,
-    private cd: ChangeDetectorRef) {
-  }
+  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {}
 
   get state(): string {
     return this.accordionItem.collapsed ? 'collapsed' : 'expanded';
   }
 
   ngOnInit() {
-    this.contentHeight = `${this.el.nativeElement.clientHeight}px`;
     this.accordionItem.accordionItemInvalidate
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.cd.markForCheck());
