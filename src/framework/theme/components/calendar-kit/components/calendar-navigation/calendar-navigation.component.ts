@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   `],
   template: `
     <button nbButton (click)="changeMode.emit()">
-      {{ date | nbCalendarDate }}
+      {{ date | date: 'MMM yyyy' }}
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
