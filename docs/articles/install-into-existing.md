@@ -38,7 +38,8 @@ import { NbThemeModule } from '@nebular/theme';
 @NgModule({
   imports: [
     ...
-    NbThemeModule.forRoot({ name: 'default' }), // this will enable the default theme, you can change this to `cosmic` to enable the dark theme
+    // this will enable the default theme, you can change this by passing `{ name: 'cosmic' }` to enable the dark theme
+    NbThemeModule.forRoot(),
   ]
 })
 export class AppModule {

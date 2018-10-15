@@ -40,7 +40,7 @@ const docs = require('../output.json');
     NbCheckboxModule,
     NbProgressBarModule,
     NbMenuModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot(),
     NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false }),
