@@ -133,6 +133,14 @@ export class NbStepperComponent {
 
   set selected(step: NbStepComponent) {
     this.selectedIndex = this.steps ? this.steps.toArray().indexOf(step) : -1;
+    this.steps.forEach((item, index) => {
+      if (index < this.selectedIndex) {
+        item.completed = true;
+      } else {
+        item.interacted = false;
+        item.completed = false;
+      }
+    });
   }
 
   /**
