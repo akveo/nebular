@@ -89,7 +89,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
     .pipe(
       switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
         .pipe(
-          debounceTime(100),
+          delay(100),
           takeWhile(() => !!this.container()),
           filter(event => !this.host.contains(event.target as Node)
             && !this.container().location.nativeElement.contains(event.target as Node),
