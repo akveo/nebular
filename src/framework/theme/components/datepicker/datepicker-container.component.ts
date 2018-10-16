@@ -6,7 +6,7 @@
 
 import { Component, ComponentRef, ViewChild } from '@angular/core';
 
-import { NbComponentPortal, NbPortalOutletDirective, NbPositionedContainer } from '../cdk';
+import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer } from '../cdk';
 
 
 @Component({
@@ -14,13 +14,13 @@ import { NbComponentPortal, NbPortalOutletDirective, NbPositionedContainer } fro
   styleUrls: ['./datepicker-container.component.scss'],
   template: `
     <span class="arrow"></span>
-    <ng-template nbPortalOutlet></ng-template>
+    <nb-overlay-container></nb-overlay-container>
   `,
 })
 export class NbDatepickerContainerComponent extends NbPositionedContainer {
-  @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
+  @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   attach<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
-    return this.portalOutlet.attachComponentPortal(portal);
+    return this.overlayContainer.attachComponentPortal(portal);
   }
 }

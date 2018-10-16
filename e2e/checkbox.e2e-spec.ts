@@ -152,12 +152,4 @@ describe('nb-checkbox', () => {
     expect(danger.getCssValue('border-color')).toEqual(danger_color);
 
   });
-
-  it('should apply focus class when receive focus', () => {
-    const firstCheckbox = element(by.css('nb-checkbox#first'));
-    const firstCheckboxInput = element(by.css('#first .customised-control-indicator'));
-
-    firstCheckboxInput.click();
-    expect(firstCheckbox.getAttribute('class')).toContain('focus');
-  });
 });

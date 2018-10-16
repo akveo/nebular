@@ -9,7 +9,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbSelectModule } from './select.module';
 import { NbThemeModule } from '../../theme.module';
-import { NbOverlayModule } from '../cdk';
 import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbSelectComponent } from './select.component';
@@ -93,8 +92,7 @@ describe('Component: NbSelectComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot({ name: 'default' }),
-        NbOverlayModule.forRoot(),
+        NbThemeModule.forRoot(),
         NbLayoutModule,
         NbSelectModule,
       ],

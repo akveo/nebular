@@ -84,8 +84,10 @@ import { convertToBoolProperty } from '../helpers';
     </label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./radio.component.scss'],
 })
 export class NbRadioComponent {
+
   @Input() name: string;
 
   @Input() checked: boolean;
@@ -98,6 +100,8 @@ export class NbRadioComponent {
   }
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
+
+  @Output() blur: EventEmitter<void> = new EventEmitter();
 
   disabled: boolean;
 

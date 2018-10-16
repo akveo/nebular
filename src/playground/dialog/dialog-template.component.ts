@@ -14,7 +14,7 @@ import { NbDialogService } from '@nebular/theme';
         </nb-card-footer>
       </nb-card>
     </ng-template>
-    <button class="btn btn-primary" (click)="open(dialog)">Open Dialog</button>
+    <button nbButton (click)="open(dialog)">Open Dialog</button>
   `,
   styles: [`
     /deep/ nb-layout-column {

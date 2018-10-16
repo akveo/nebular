@@ -70,6 +70,11 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   @Input() visibleDate: D;
 
   /**
+   * Determines should we show calendars header or not.
+   * */
+  @Input() showHeader: boolean = true;
+
+  /**
    * Value which will be rendered as selected.
    * */
   @Input() date: T;

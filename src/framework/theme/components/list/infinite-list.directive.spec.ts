@@ -76,7 +76,7 @@ describe('Directive: NbScrollDirective', () => {
     fixture = TestBed.configureTestingModule({
         imports: [
           RouterModule.forRoot([]),
-          NbThemeModule.forRoot({ name: 'default' }),
+          NbThemeModule.forRoot(),
           NbLayoutModule,
           NbListModule,
         ],

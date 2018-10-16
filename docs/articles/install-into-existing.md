@@ -20,9 +20,9 @@ At this step, we assume you already have Angular modules installed.
 ## Install Nebular modules
 
 ```bash
-npm i -S @nebular/theme @nebular/auth @nebular/security
+npm install --save @nebular/theme @angular/cdk @angular/animations
 ```
-You can remove `@nebular/auth` and `@nebular/security` from the command if you don't need authentication/security parts in your project.
+Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 <hr>
 
 ## Configure Nebular
@@ -38,7 +38,8 @@ import { NbThemeModule } from '@nebular/theme';
 @NgModule({
   imports: [
     ...
-    NbThemeModule.forRoot({ name: 'default' }), // this will enable the default theme, you can change this to `cosmic` to enable the dark theme
+    // this will enable the default theme, you can change this by passing `{ name: 'cosmic' }` to enable the dark theme
+    NbThemeModule.forRoot(),
   ]
 })
 export class AppModule {

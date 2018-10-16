@@ -44,6 +44,10 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * In order to use it, you have to import `NbCalendarRangeModule`.
  * @stacked-example(Range, calendar/calendar-range-showcase.component)
  *
+ * The calendar component is supplied with a calendar header that contains navigate today button.
+ * If you do not want to use it you can hide calendar header using `showHeader` property.
+ * @stacked-example(Header, calendar/calendar-without-header.component)
+ *
  * As you can see in the basic usage example calendar contains previous and next month days
  * which can be disabled using `boundingMonth` property.
  * @stacked-example(Bounding months, calendar/calendar-bounding-month.component)
@@ -73,7 +77,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * @styles
  *
  * calendar-width
- * calendar-height
+ * calendar-body-height
  * calendar-header-title-font-size
  * calendar-header-title-font-weight
  * calendar-header-sub-title-font-size
@@ -102,7 +106,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * calendar-weekday-holiday-fg
  * calendar-range-bg-in-range
  * calendar-large-width
- * calendar-large-height
+ * calendar-large-body-height
  * calendar-day-cell-large-width
  * calendar-day-cell-large-height
  * calendar-month-cell-large-width
@@ -125,6 +129,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
       [yearCellComponent]="yearCellComponent"
       [size]="size"
       [visibleDate]="visibleDate"
+      [showHeader]="showHeader"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -179,6 +184,11 @@ export class NbCalendarComponent<D> {
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Input() visibleDate: D;
+
+  /**
+   * Determines should we show calendars header or not.
+   * */
+  @Input() showHeader: boolean = true;
 
   /**
    * Date which will be rendered as selected.

@@ -1,3 +1,153 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/akveo/nebular/compare/v2.0.0...v2.0.1) (2018-10-03)
+
+
+### Bug Fixes
+
+* **datepicker:** fix datepicker spec ([#850](https://github.com/akveo/nebular/issues/850)) ([a69e681](https://github.com/akveo/nebular/commit/a69e681))
+* **playground:** use nebular buttons in examples ([#849](https://github.com/akveo/nebular/issues/849)) ([b8c3148](https://github.com/akveo/nebular/commit/b8c3148))
+* **theme:** fix overlay components providers import ([#858](https://github.com/akveo/nebular/issues/858)) ([843a6c6](https://github.com/akveo/nebular/commit/843a6c6))
+* **theme:** inline cdk styles ([#857](https://github.com/akveo/nebular/issues/857)) ([e218df4](https://github.com/akveo/nebular/commit/e218df4)), closes [#856](https://github.com/akveo/nebular/issues/856)
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/akveo/nebular/compare/2.0.0-rc.10...2.0.0) (2018-10-02)
+
+### Highlights
+
+Nebular 2.0 is stable now! After 10 release candidates and a year of work we finally made it with a great help of Nebular community and we cannot be more grateful for all of your contributions! :tada: 
+
+
+### Bug Fixes
+
+* **auth:**  fix OAuth2 strategy grant_type password to send username, not email ([#659](https://github.com/akveo/nebular/issues/659)) ([3a708dd](https://github.com/akveo/nebular/commit/3a708dd)), closes [#653](https://github.com/akveo/nebular/issues/653)
+* **auth:** fix `isAuthenticatedOrRefresh` to not refresh token with no value ([#708](https://github.com/akveo/nebular/issues/708)) ([b29418f](https://github.com/akveo/nebular/commit/b29418f))
+* **button:** fix outline button ([0bcad95](https://github.com/akveo/nebular/commit/0bcad95))
+* **calendar:** use nbButton in calendar navigation ([#837](https://github.com/akveo/nebular/issues/837)) ([f460f85](https://github.com/akveo/nebular/commit/f460f85)), closes [#827](https://github.com/akveo/nebular/issues/827)
+* **checkbox, radio:** check mark positioning in IE ([#830](https://github.com/akveo/nebular/issues/830)) ([ac52315](https://github.com/akveo/nebular/commit/ac52315)), closes [#743](https://github.com/akveo/nebular/issues/743)
+* **docs:**  fix warning `Invalid value for $grid-breakpoints..` ([#736](https://github.com/akveo/nebular/issues/736)) ([23e7804](https://github.com/akveo/nebular/commit/23e7804))
+* **docs:** add radio icon ([#748](https://github.com/akveo/nebular/issues/748)) ([9110266](https://github.com/akveo/nebular/commit/9110266))
+* **docs:** fix mention of angular-cli.json file to `angular.json` ([#701](https://github.com/akveo/nebular/issues/701)) ([3211c54](https://github.com/akveo/nebular/commit/3211c54))
+* **e2e:** add redundance note in protractor.conf.ci.js ([#839](https://github.com/akveo/nebular/issues/839)) ([a7ed638](https://github.com/akveo/nebular/commit/a7ed638))
+* **infinite-list:** fix example file path ([60d0d1e](https://github.com/akveo/nebular/commit/60d0d1e))
+* **login:** take into account remember me setting ([#644](https://github.com/akveo/nebular/issues/644)) ([d35b65b](https://github.com/akveo/nebular/commit/d35b65b)), closes [#330](https://github.com/akveo/nebular/issues/330)
+* **menu:** height calculation ([#621](https://github.com/akveo/nebular/issues/621)) ([7542d5e](https://github.com/akveo/nebular/commit/7542d5e)), closes [#620](https://github.com/akveo/nebular/issues/620) [#369](https://github.com/akveo/nebular/issues/369) [#532](https://github.com/akveo/nebular/issues/532) [#307](https://github.com/akveo/nebular/issues/307) [#444](https://github.com/akveo/nebular/issues/444) [#392](https://github.com/akveo/nebular/issues/392) [akveo/ngx-admin#1703](https://github.com/akveo/ngx-admin/issues/1703) [akveo/ngx-admin#1819](https://github.com/akveo/ngx-admin/issues/1819)
+* **modal:** rtl modal header ([#632](https://github.com/akveo/nebular/issues/632)) ([0370abe](https://github.com/akveo/nebular/commit/0370abe)), closes [#419](https://github.com/akveo/nebular/issues/419)
+* **overlay:** z-index ([#735](https://github.com/akveo/nebular/issues/735)) ([9c22a52](https://github.com/akveo/nebular/commit/9c22a52))
+* **popover:** fix popover component example ([#711](https://github.com/akveo/nebular/issues/711)) ([9980664](https://github.com/akveo/nebular/commit/9980664)), closes [#618](https://github.com/akveo/nebular/issues/618) [#619](https://github.com/akveo/nebular/issues/619)
+* **radio:** radio group ngModel doesn't setup initial value ([#842](https://github.com/akveo/nebular/issues/842)) ([92b6f6b](https://github.com/akveo/nebular/commit/92b6f6b))
+* **radio:** radio group now has bigger priority when setting value and disabled ([#841](https://github.com/akveo/nebular/issues/841)) ([99acd25](https://github.com/akveo/nebular/commit/99acd25))
+* **scripts:** add moment and date-fns bundles ([#818](https://github.com/akveo/nebular/issues/818)) ([c78ae5f](https://github.com/akveo/nebular/commit/c78ae5f))
+* **tabset:** removes bold emphasize for hovered tab ([#651](https://github.com/akveo/nebular/issues/651)) ([22e39eb](https://github.com/akveo/nebular/commit/22e39eb)), closes [#540](https://github.com/akveo/nebular/issues/540)
+* **theme:** add nebular-icons as peer dependency ([#749](https://github.com/akveo/nebular/issues/749)) ([3e3fe1d](https://github.com/akveo/nebular/commit/3e3fe1d)), closes [#195](https://github.com/akveo/nebular/issues/195)
+* **theme:** use existing variable for bootstrap ([#807](https://github.com/akveo/nebular/issues/807)) ([e91f557](https://github.com/akveo/nebular/commit/e91f557)), closes [#739](https://github.com/akveo/nebular/issues/739)
+
+
+### Code Refactoring
+
+* **auth:** rejects malformed tokens ([#597](https://github.com/akveo/nebular/issues/597)) ([127b5d2](https://github.com/akveo/nebular/commit/127b5d2)), closes [#517](https://github.com/akveo/nebular/issues/517)
+* **menu:** emit itemClick event after clicking on item with link ([#728](https://github.com/akveo/nebular/issues/728)) ([94342e0](https://github.com/akveo/nebular/commit/94342e0)), closes [#423](https://github.com/akveo/nebular/issues/423)
+* **menu:** replace item click ReplaySubject with plain Subject ([#724](https://github.com/akveo/nebular/issues/724)) ([eb6e74b](https://github.com/akveo/nebular/commit/eb6e74b)), closes [#695](https://github.com/akveo/nebular/issues/695)
+* **theme:** refactor popover, context-menu and search components to use overlays ([#684](https://github.com/akveo/nebular/issues/684)) ([d3ba6ab](https://github.com/akveo/nebular/commit/d3ba6ab)), closes [#683](https://github.com/akveo/nebular/issues/683) [#664](https://github.com/akveo/nebular/issues/664) [#668](https://github.com/akveo/nebular/issues/668)
+* **theme:** remove angular2-toaster styling ([#721](https://github.com/akveo/nebular/issues/721)) ([026974e](https://github.com/akveo/nebular/commit/026974e))
+* **theme:** separate bootstrap styles into [@nebular](https://github.com/nebular)/bootstrap ([#707](https://github.com/akveo/nebular/issues/707)) ([a25f615](https://github.com/akveo/nebular/commit/a25f615)), closes [#230](https://github.com/akveo/nebular/issues/230)
+
+
+### Features
+
+* **auth:** add new `isAuthenticatedOrRefresh` method, update `NbAuthJWTInterceptor` to refresh the token ([#649](https://github.com/akveo/nebular/issues/649)) ([c8e8964](https://github.com/akveo/nebular/commit/c8e8964))
+* **auth:** remove bootstrap, use custom styles ([#738](https://github.com/akveo/nebular/issues/738)) ([b585490](https://github.com/akveo/nebular/commit/b585490))
+* **calendar:** add capability to hide header ([#838](https://github.com/akveo/nebular/issues/838)) ([df9b21c](https://github.com/akveo/nebular/commit/df9b21c)), closes [#828](https://github.com/akveo/nebular/issues/828)
+* **checkbox:** add outline on focus ([#731](https://github.com/akveo/nebular/issues/731)) ([cc892d5](https://github.com/akveo/nebular/commit/cc892d5))
+* **docs:** add groups to components list ([#646](https://github.com/akveo/nebular/issues/646)) ([73cf1b4](https://github.com/akveo/nebular/commit/73cf1b4))
+* **docs:** add installation guides ([#740](https://github.com/akveo/nebular/issues/740)) ([d08c4d5](https://github.com/akveo/nebular/commit/d08c4d5))
+* **docs:** add star & download badges into the hero section ([#813](https://github.com/akveo/nebular/issues/813)) ([c3c755a](https://github.com/akveo/nebular/commit/c3c755a))
+* **docs:** fix typo in security docs ([#717](https://github.com/akveo/nebular/issues/717)) ([fc3b2d4](https://github.com/akveo/nebular/commit/fc3b2d4))
+* **docs:** update akveo logo ([#674](https://github.com/akveo/nebular/issues/674)) ([5d79c2a](https://github.com/akveo/nebular/commit/5d79c2a))
+* **icons:** add new icons ([#722](https://github.com/akveo/nebular/issues/722)) ([be06906](https://github.com/akveo/nebular/commit/be06906))
+* **playground:** automatic refresh token ([#658](https://github.com/akveo/nebular/issues/658)) ([b4fc624](https://github.com/akveo/nebular/commit/b4fc624))
+* **sidebar:** add ability fix sidebar container ([#642](https://github.com/akveo/nebular/issues/642)) ([7939344](https://github.com/akveo/nebular/commit/7939344))
+* **sidebar:** add ability fix sidebar container on low resolutions ([#645](https://github.com/akveo/nebular/issues/645)) ([efa16ef](https://github.com/akveo/nebular/commit/efa16ef))
+* **tabset:** update background fot tabset selected ([#643](https://github.com/akveo/nebular/issues/643)) ([ff8e9b6](https://github.com/akveo/nebular/commit/ff8e9b6))
+* **theme:** add cdk ([#679](https://github.com/akveo/nebular/issues/679)) ([b9283d3](https://github.com/akveo/nebular/commit/b9283d3)), closes [#661](https://github.com/akveo/nebular/issues/661) [#660](https://github.com/akveo/nebular/issues/660)
+* **theme:** add new DatePicker component ([#732](https://github.com/akveo/nebular/issues/732)) ([c00cc23](https://github.com/akveo/nebular/commit/c00cc23))
+* **theme:** add new Dialog component ([#688](https://github.com/akveo/nebular/issues/688)) ([2edd9b3](https://github.com/akveo/nebular/commit/2edd9b3)), closes [#666](https://github.com/akveo/nebular/issues/666) [#665](https://github.com/akveo/nebular/issues/665)
+* **theme:** add new Radio component ([#746](https://github.com/akveo/nebular/issues/746)) ([9e04681](https://github.com/akveo/nebular/commit/9e04681))
+* **theme:** add new Select component ([#698](https://github.com/akveo/nebular/issues/698)) ([d6a211f](https://github.com/akveo/nebular/commit/d6a211f)), closes [#671](https://github.com/akveo/nebular/issues/671)
+* **theme:** add new Toastr component ([#692](https://github.com/akveo/nebular/issues/692)) ([29e4fef](https://github.com/akveo/nebular/commit/29e4fef)), closes [#667](https://github.com/akveo/nebular/issues/667)
+* **theme:** add new Tooltip component ([#703](https://github.com/akveo/nebular/issues/703)) ([0e05034](https://github.com/akveo/nebular/commit/0e05034)), closes [#663](https://github.com/akveo/nebular/issues/663)
+* **theme:** add new Window component ([#713](https://github.com/akveo/nebular/issues/713)) ([60a65cb](https://github.com/akveo/nebular/commit/60a65cb)), closes [#669](https://github.com/akveo/nebular/issues/669)
+
+
+### HOW TO UPGRADE/BREAKING CHANGES
+
+#### Steps
+
+This release has introduced a number of changes which may required some manual update steps, depending on your setup:
+
+1. In case if you use Nebular overrides of bootstrap styles - you need to manually install new `@nebular/bootstrap` package. To do that:
+  - install Nebular Bootstrap `npm i @nebular/bootstrap`
+  - then add it into your `styles.scss`
+  ```
+  @import '~@nebular/bootstrap/styles/globals';
+  // ...
+  
+  @include nb-install() {
+    // ...
+    @include nb-bootstrap-global();
+  }
+  ```
+  - if you import `~@nebular/theme/styles/global/bootstrap/breakpoints` in your code, replace it with `~@nebular/theme/styles/global/breakpoints`
+  - if you import `~@nebular/theme/styles/global/bootstrap/*.scss` somewhere in your code, replace it with `~@nebular/bootstrap/styles/*.scss`
+
+2. Nebular 2.0 introduced a new peer dependency - @angular/cdk. A lot of out of the box functionality provided by @angular team gives our components a solid foundation. To do that:
+- install @angular/cdk
+`npm i @angular/cdk`
+
+#### Breaking Changes
+Here's a list of other possibly breaking changes that you may need to take into account:
+
+* **menu:** `NbMenuComponent` and `NbContextMenuDirective` now fire itemClick even if item with `routerLink` was clicked.
+* **menu:** The `NbMenuService` not reply the last click event. To update: if you use the knowledge that the last click event is replied you can wrap `onItemClick` stream in the custom stream based on `ReplaySubject`.
+* **theme:** angular2-toaster styles were removed from Nebular.
+Instead, we suggest using our new `NbToastrService`. To update:  add `NbToastrModule` into imports of your `app.module`.
+Inject `NbToastrService` into the required component.
+call `NbToastrService.show(...)` to render toasts.
+For more information check [toastr documentation](https://akveo.github.io/nebular/docs/components/toastr).
+* **theme:** All bootstrap override styles were moved from the @nebular/theme package to the new @nebular/bootstrap package. If you don't need bootstrap support you can simply no use this package.
+@nebular/theme package introduced a dependency of normalize.css. To update:
+  - install Nebular Bootstrap `npm i @nebular/bootstrap`
+  - then add it into your `styles.scss`
+   ```scss
+   @import '~@nebular/bootstrap/styles/globals';
+   // ...
+   
+   @include nb-install() {
+     // ...
+     @include nb-bootstrap-global();
+   }
+   ```
+* **theme:** `appendToLayoutTop` and `clearLayoutTop` methods was removed from `NbThemeService`. Instead of this methods, you have to use `NbOverlayService`. It's the extension of @angular/cdk overlays, so, check [documentation](https://material.angular.io/cdk/overlay/overview) first of all.  Basic usage of overlays may look like this:
+  ```ts
+  constructor(protected overlay: NbOverlayService) {
+  }
+  
+  const overlayRef = overlay.create();
+  const overlayComponentPortal = new ComponentPortal(MyOverlayComponent);
+  overlayRef.attach(overlayComponentPortal);
+  ```
+* **tabset:** Possibly a breaking change since tabs won't be bold in hover state.
+* **auth:** According to RFC6749 section 4.3.2, the OAuth2 token request body with grant-type='password' must provide `username` to the auth server and not `email`.
+* **auth:** `NbAuthJWTInterceptor` now always tries to refresh the token.
+Urls for token sending can be filtered using a filter function:
+```
+{ provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: (req) => filter(req)},
+```
+* **auth:** `failWhenNoToken` has been removed from password strategy as it was still not released and becoming redundant
+
+
+
 <a name="2.0.0-rc.10"></a>
 # [2.0.0-rc.10](https://github.com/akveo/nebular/compare/2.0.0-rc.9...2.0.0-rc.10) (2018-08-08)
 

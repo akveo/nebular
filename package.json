@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "2.0.0-rc.10",
+  "version": "2.0.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -64,7 +64,7 @@
     "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp test:wp --watch=false",
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
-    "publish": "npm publish --access=public src/.lib/theme && npm publish --access=public src/.lib/auth && npm publish --access=public src/.lib/security",
+    "publish": "./scripts/publish.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
     "postinstall": "npm run cli:firefox-fix"
   },
@@ -129,12 +129,10 @@
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
     "gulp-clean-css": "3.0.4",
-    "gulp-json-modify": "^1.0.2",
     "gulp-rename": "1.2.2",
     "gulp-replace": "0.5.4",
     "gulp-rollup": "2.13.0",
     "gulp-sass": "3.1.0",
-    "gulp-sequence": "1.0.0",
     "gulp-sourcemaps": "2.6.0",
     "gulp-typedoc": "2.0.2",
     "husky": "0.13.3",
@@ -155,6 +153,7 @@
     "rimraf": "2.6.1",
     "rollup-plugin-node-resolve": "3.0.0",
     "stylelint": "7.13.0",
+    "through2": "^2.0.3",
     "ts-node": "3.2.2",
     "tslint": "5.7.0",
     "tslint-language-service": "0.9.6",
