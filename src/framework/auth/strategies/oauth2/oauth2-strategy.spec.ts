@@ -687,7 +687,7 @@ describe('oauth2-auth-strategy', () => {
           expect(result.getToken().getValue()).toEqual(successToken.getValue());
           expect(result.getToken().getOwnerStrategyName()).toEqual(successToken.getOwnerStrategyName());
           expect(result.getMessages()).toEqual(successMessages);
-          expect(result.getErrors()).toEqual(([])); // no error message, response is success
+          expect(result.getErrors()).toEqual([]); // no error message, response is success
           expect(result.getRedirect()).toEqual('/');
           done();
         });

@@ -223,7 +223,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildRefreshRequestData(token), {headers: this.buildAuthHeader()})
+    return this.http.post(url, this.buildRefreshRequestData(token), { headers: this.buildAuthHeader() })
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -243,14 +243,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    let headers = this.buildAuthHeader();
-    if (!headers) {
-      headers = new HttpHeaders();
-    }
+    let headers = this.buildAuthHeader() || new HttpHeaders() ;
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post(url, this.buildPasswordRequestData(username, password),
-                  {headers: headers})
+    return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: headers })
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -397,10 +393,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     };
 
     const endpoint = this.getActionEndpoint('authorize');
-    const query = Object.entries(params)
-      .filter(([key, val]) => !!val)
-      .map(([key, val]: [string, string]) => `${key}=${encodeURIComponent(val)}`)
-      .join('&');
+    const query = this.urlEncodeParameters(this.cleanParams(params));
 
     return `${endpoint}?${query}`;
   }
