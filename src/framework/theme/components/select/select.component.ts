@@ -327,6 +327,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   ngAfterContentInit() {
     if (this.queue) {
       this.writeValue(this.queue);
+      this.cd.detectChanges();
     }
   }
 
