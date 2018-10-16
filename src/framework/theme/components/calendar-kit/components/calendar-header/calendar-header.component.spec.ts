@@ -23,7 +23,7 @@ describe('Component: NbCalendarHeader', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbThemeModule.forRoot({ name: 'default' })],
+      imports: [NbThemeModule.forRoot()],
       providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
       declarations: [NbCalendarHeaderComponent, NbCalendarDatePipe],
     });

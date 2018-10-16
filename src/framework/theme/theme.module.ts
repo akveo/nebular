@@ -54,7 +54,7 @@ export class NbThemeModule {
    *
    * @returns {ModuleWithProviders}
    */
-  static forRoot(nbThemeOptions: NbThemeOptions,
+  static forRoot(nbThemeOptions: NbThemeOptions = { name: 'default' },
                  nbJSThemes?: NbJSThemeOptions[],
                  nbMediaBreakpoints?: NbMediaBreakpoint[],
                  layoutDirection?: NbLayoutDirection): ModuleWithProviders {

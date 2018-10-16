@@ -41,7 +41,7 @@ describe('window-service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        NbThemeModule.forRoot({ name: 'default' }),
+        NbThemeModule.forRoot(),
         NbWindowModule.forRoot(),
         NbTestWindowModule,
       ],
