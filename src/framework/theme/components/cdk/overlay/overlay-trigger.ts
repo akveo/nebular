@@ -1,7 +1,6 @@
-import { fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
-import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { ComponentRef } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
+import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile, map } from 'rxjs/operators';
 
 
 export enum NbTrigger {
@@ -57,9 +56,9 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
   // of the container and then later on decide should we hide it or show
   // if we track the click & state separately this will case a behavior when the container is getting shown
   // and then hidden right away
-  protected click$: Observable<any[]> = observableFromEvent<Event>(this.document, 'click')
+  protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
-      map(event => [!this.container() && this.isOnHost(event), event]),
+      map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
       share(),
     );
 
@@ -71,9 +70,8 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
 
   readonly hide$: Observable<Event> = this.click$
     .pipe(
-      filter(([shouldShow]) => !shouldShow),
+      filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
       map(([, event]) => event),
-      filter((event: Event) => !this.isOnContainer(event)),
     );
 }
 
@@ -97,7 +95,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
         .pipe(
           debounceTime(100),
           takeWhile(() => !!this.container()),
-          filter(event => !this.isOnHostOrContainer(event),
+          filter(event => this.isNotOnHostOrContainer(event),
           ),
         ),
       ),
@@ -115,7 +113,7 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
       delay(100),
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
-      // meaning that if one event occurs in some time afther the initial one we won't react to it
+      // meaning that if one event occurs in some time after the initial one we won't react to it
       repeat(),
     );
 

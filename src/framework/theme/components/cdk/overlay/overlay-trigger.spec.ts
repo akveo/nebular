@@ -6,7 +6,7 @@ import { NbTrigger, NbTriggerStrategyBuilder } from './overlay-trigger';
 import { NB_DOCUMENT } from '../../../theme.options';
 import createSpy = jasmine.createSpy;
 
-
+// TODO: move into a separate file
 const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
 const createElement = (name = 'div') => {
   const el = document.createElement(name);
@@ -38,7 +38,7 @@ describe('click-trigger-strategy', () => {
 
   beforeEach(() => {
     host = createElement();
-    container = createElement('li');
+    container = createElement();
     triggerStrategyBuilder = new NbTriggerStrategyBuilder()
       .document(document)
       .trigger(NbTrigger.CLICK)
