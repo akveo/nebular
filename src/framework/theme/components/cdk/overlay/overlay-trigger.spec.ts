@@ -7,17 +7,29 @@ import { NB_DOCUMENT } from '../../../theme.options';
 import createSpy = jasmine.createSpy;
 
 
+const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
+const createElement = (name = 'div') => {
+  const el = document.createElement(name);
+  document.body.appendChild(el);
+  return el;
+};
+const click = el => el.dispatchEvent(new Event('click', { bubbles: true }));
+const mouseMove = el => el.dispatchEvent(new Event('mousemove'));
+const mouseEnter = el => el.dispatchEvent(new Event('mouseenter'));
+const mouseLeave = el => el.dispatchEvent(new Event('mouseleave'));
+const focus = el => el.dispatchEvent(new Event('focusin', { bubbles: true }));
+const blur = el => el.dispatchEvent(new Event('focusout', { bubbles: true }));
+const tab = (el) => el.dispatchEvent(new KeyboardEvent('keydown', <any> {
+  bubbles: true,
+  keyCode: 9,
+}));
+
 describe('click-trigger-strategy', () => {
   let triggerStrategyBuilder: NbTriggerStrategyBuilder;
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
 
-  const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
-
-  const click = el => el.dispatchEvent(new Event('click'));
-
-  const createElement = () => document.createElement('div');
 
   beforeEach(() => {
     const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
@@ -26,7 +38,7 @@ describe('click-trigger-strategy', () => {
 
   beforeEach(() => {
     host = createElement();
-    container = createElement();
+    container = createElement('li');
     triggerStrategyBuilder = new NbTriggerStrategyBuilder()
       .document(document)
       .trigger(NbTrigger.CLICK)
@@ -72,16 +84,6 @@ describe('hover-trigger-strategy', () => {
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
-
-  const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
-
-  const mouseMove = el => el.dispatchEvent(new Event('mousemove'));
-
-  const mouseEnter = el => el.dispatchEvent(new Event('mouseenter'));
-
-  const mouseLeave = el => el.dispatchEvent(new Event('mouseleave'));
-
-  const createElement = () => document.createElement('div');
 
   beforeEach(() => {
     const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
@@ -131,14 +133,6 @@ describe('hint-trigger-strategy', () => {
   let host: HTMLElement;
   let container: HTMLElement;
 
-  const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
-
-  const mouseEnter = el => el.dispatchEvent(new Event('mouseenter'));
-
-  const mouseLeave = el => el.dispatchEvent(new Event('mouseleave'));
-
-  const createElement = () => document.createElement('div');
-
   beforeEach(() => {
     const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
     document = bed.get(NB_DOCUMENT);
@@ -172,21 +166,6 @@ describe('focus-trigger-strategy', () => {
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
-
-  const withContainer = el => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
-
-  const focus = el => el.dispatchEvent(new Event('focusin', { bubbles: true }));
-
-  const blur = el => el.dispatchEvent(new Event('focusout', { bubbles: true }));
-
-  const click = el => el.dispatchEvent(new Event('click', { bubbles: true }));
-
-  const tab = (el, target) => el.dispatchEvent(new KeyboardEvent('keydown', <any> {
-    target: target,
-    keyCode: 9,
-  }));
-
-  const createElement = () => document.createElement('div');
 
   beforeEach(() => {
     const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
@@ -228,7 +207,7 @@ describe('focus-trigger-strategy', () => {
   it('should fire hide$ when tab pressed', done => {
     const triggerStrategy = triggerStrategyBuilder.build();
     triggerStrategy.hide$.subscribe(done);
-    tab(document, host);
+    tab(host);
   });
 
   it('should fire hide$ when focusout', done => {
