@@ -77,7 +77,7 @@ describe('nb-datepicker', () => {
 
     datepicker.dateChange.subscribe(e => {
       expect(e).toEqual(date);
-      expect(e).toEqual(input.value);
+      expect(input.value).toEqual('Sep 17, 2018');
     });
 
     const cell = overlay.querySelectorAll('.day-cell')[22]; // it's visible date cell
