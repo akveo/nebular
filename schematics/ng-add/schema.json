@@ -13,8 +13,13 @@
     },
     "theme": {
       "type": "string",
-      "description": "The theme will be installed.",
+      "description": "The theme which will be installed.",
       "default": "default"
+    },
+    "prebuiltStyles": {
+      "type": "boolean",
+      "description": "Use prebuilt css styles or import customizable scss.",
+      "default": true
     }
   }
 }

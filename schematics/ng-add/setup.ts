@@ -9,7 +9,15 @@ import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/work
 import { getWorkspace } from '@schematics/angular/utility/config';
 
 import { Schema } from './schema';
-import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectTargetOptions } from '../util';
+import {
+  addModuleImportToRootModule,
+  getProjectFromWorkspace,
+  getProjectStyleFile,
+  getProjectTargetOptions,
+} from '../util';
+import { createThemeContent, stylesContent } from './theme-content';
+import { join, normalize, Path } from '@angular-devkit/core';
+import { InsertChange } from '@schematics/angular/utility/change';
 
 const nebularThemePackageName = '@nebular/theme';
 const angularRouterPackageName = '@angular/router';
@@ -40,7 +48,13 @@ function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
-    insertPrebuiltTheme(project, host, options.theme, workspace);
+
+    if (options.prebuiltStyles) {
+      insertPrebuiltTheme(project, host, options.theme, workspace);
+    } else {
+      importCustomizableTheme(project, host, options.theme);
+    }
+
     return host;
   }
 }
@@ -52,6 +66,20 @@ function insertPrebuiltTheme(project: WorkspaceProject, host: Tree, theme: strin
   const themePath = createNebularThemeStylesPrebuiltPath(theme);
 
   addStyleToTarget(project, 'build', host, themePath, workspace);
+}
+
+function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: string) {
+  const stylesPath = getProjectStyleFile(project, 'scss') as string;
+  const themeContent = createThemeContent(theme);
+
+  const customThemePath = normalize(join((project.sourceRoot as Path), 'themes.scss'));
+  host.create(customThemePath, themeContent);
+
+  const insertion = new InsertChange(stylesPath, 0, stylesContent);
+  const recorder = host.beginUpdate(stylesPath);
+
+  recorder.insertLeft(insertion.pos, insertion.toAdd);
+  host.commitUpdate(recorder);
 }
 
 /** Adds a style entry to the given project target. */
