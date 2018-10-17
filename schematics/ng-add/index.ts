@@ -4,77 +4,33 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { chain, Rule, Tree } from '@angular-devkit/schematics';
-
-import { getWorkspace } from '@schematics/angular/utility/config';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 import { Schema } from './schema';
-import { getProjectFromWorkspace } from '../util/get-project';
-import { addModuleImportToRootModule } from '../util/ast';
-import { getProjectTargetOptions } from '../util/project-targets';
-import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
+import { addPackageToPackageJson, getPackageVersionFromPackageJson } from '../util';
 
-const nebularThemePackageName = '@nebular/theme';
-const nebularThemeModuleName = (themeName: string) => {
-  return `NbThemeModule.forRoot({ name: ${themeName} })`;
-};
 
-const nebularThemeStylesPrebuilt = (themeName: string) => {
-  return `./node_modules/@nebular/theme/styles/prebuilt/${themeName}.css`;
-};
+const angularCorePackageName = '@angular/core';
+const angularCDKPackageName = '@angular/cdk';
+const angularAnimationsPackageName = '@angular/animations';
+const setupSchematicsTask = 'ng-add-setup';
 
 export default function (options: Schema): Rule {
-  return chain([
-    addNebularThemeModule(options),
-    addNebularStyles(options),
-  ]);
-}
-
-function addNebularThemeModule(options: Schema): Rule {
-  return (host: Tree) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-
-    addModuleImportToRootModule(host, nebularThemeModuleName(options.theme), nebularThemePackageName, project);
-
-    return host;
+  return (host: Tree, context: SchematicContext) => {
+    addPeerDependenciesToPackageJson(host);
+    runNgAddSetupSchematics(context, options);
   }
 }
 
-function addNebularStyles(options: Schema): Rule {
-  return (host: Tree) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-    insertPrebuiltTheme(project, host, options.theme, workspace);
-    return host;
-  }
+function addPeerDependenciesToPackageJson(host: Tree) {
+  const ngCoreVersionTag = getPackageVersionFromPackageJson(host, angularCorePackageName);
+
+  addPackageToPackageJson(host, angularCDKPackageName, ngCoreVersionTag);
+  addPackageToPackageJson(host, angularAnimationsPackageName, ngCoreVersionTag);
 }
 
-function insertPrebuiltTheme(project: WorkspaceProject, host: Tree, theme: string,
-                             workspace: WorkspaceSchema) {
-
-  // Path needs to be always relative to the `package.json` or workspace root.
-  const themePath = nebularThemeStylesPrebuilt(theme);
-
-  addStyleToTarget(project, 'build', host, themePath, workspace);
-}
-
-/** Adds a style entry to the given project target. */
-function addStyleToTarget(project: WorkspaceProject, targetName: string, host: Tree,
-                          assetPath: string, workspace: WorkspaceSchema) {
-  const targetOptions = getProjectTargetOptions(project, targetName);
-
-  if (!targetOptions.styles) {
-    targetOptions.styles = [assetPath];
-  } else {
-    const existingStyles = targetOptions.styles.map((s: any) => typeof s === 'string' ? s : s.input);
-    const hasGivenTheme = existingStyles.find((s: any) => s.includes(assetPath));
-    const hasOtherTheme = existingStyles.find((s: any) => s.includes('@nebular/theme/styles/prebuilt'));
-
-    if (!hasGivenTheme && !hasOtherTheme) {
-      targetOptions.styles.unshift(assetPath);
-    }
-  }
-
-  host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
+function runNgAddSetupSchematics(context: SchematicContext, options: Schema) {
+  const installTaskId = context.addTask(new NodePackageInstallTask());
+  context.addTask(new RunSchematicTask(setupSchematicsTask, options), [installTaskId]);
 }

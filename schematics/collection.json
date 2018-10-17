@@ -6,6 +6,12 @@
       "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json"
     },
+    "ng-add-setup": {
+      "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+      "private": true,
+      "factory": "./ng-add/setup",
+      "schema": "./ng-add/schema.json"
+    },
     "new-component": {
       "description": "A new Nebular component schematic.",
       "factory": "./new-component/index#newComponent",
