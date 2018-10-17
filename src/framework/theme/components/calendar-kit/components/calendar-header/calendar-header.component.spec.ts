@@ -40,7 +40,7 @@ describe('Component: NbCalendarHeader', () => {
   it('should render today date', () => {
     component.date = new Date(2018, 6, 30);
     fixture.detectChanges();
-    expect(componentEl.query(By.css('.title')).nativeElement.textContent).toContain('Jul 2018');
+    expect(componentEl.query(By.css('.title')).nativeElement.textContent).toContain('Jul 30, 2018');
   });
 
   it('should fire navigateToday when click on title', () => {
