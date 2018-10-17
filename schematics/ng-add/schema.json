@@ -10,6 +10,11 @@
       "$default": {
         "$source": "projectName"
       }
+    },
+    "theme": {
+      "type": "string",
+      "description": "The theme will be installed.",
+      "default": "default"
     }
   }
 }

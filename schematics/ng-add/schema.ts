@@ -6,4 +6,5 @@
 
 export interface Schema {
   project: string;
+  theme: string;
 }

@@ -14,8 +14,11 @@ import { addModuleImportToRootModule } from '../util/ast';
 import { getProjectTargetOptions } from '../util/project-targets';
 import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
 
-const nebularThemeModuleName = 'NbThemeModule.forRoot()';
 const nebularThemePackageName = '@nebular/theme';
+const nebularThemeModuleName = (themeName: string) => {
+  return `NbThemeModule.forRoot({ name: ${themeName} })`;
+};
+
 const nebularThemeStylesPrebuilt = (themeName: string) => {
   return `./node_modules/@nebular/theme/styles/prebuilt/${themeName}.css`;
 };
@@ -32,7 +35,7 @@ function addNebularThemeModule(options: Schema): Rule {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
 
-    addModuleImportToRootModule(host, nebularThemeModuleName, nebularThemePackageName, project);
+    addModuleImportToRootModule(host, nebularThemeModuleName(options.theme), nebularThemePackageName, project);
 
     return host;
   }
@@ -42,7 +45,7 @@ function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
-    insertPrebuiltTheme(project, host, 'default', workspace);
+    insertPrebuiltTheme(project, host, options.theme, workspace);
     return host;
   }
 }
@@ -75,4 +78,3 @@ function addStyleToTarget(project: WorkspaceProject, targetName: string, host: T
 
   host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
 }
-
