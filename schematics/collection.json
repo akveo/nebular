@@ -1,6 +1,11 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
+    "ng-add": {
+      "description": "Adds Nebular Theme to the application.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json"
+    },
     "new-component": {
       "description": "A new Nebular component schematic.",
       "factory": "./new-component/index#newComponent",
