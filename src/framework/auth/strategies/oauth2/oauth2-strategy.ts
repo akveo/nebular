@@ -275,8 +275,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildCodeRequestData(code),
-      {headers: this.buildAuthHeader()})
+    return this.http.post(url, this.buildCodeRequestData(code), { headers: this.buildAuthHeader() })
       .pipe(
         map((res) => {
           return new NbAuthResult(
