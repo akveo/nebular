@@ -14,7 +14,7 @@ import { addPackageToPackageJson, getPackageVersionFromPackageJson } from '../ut
 const angularCorePackageName = '@angular/core';
 const angularCDKPackageName = '@angular/cdk';
 const angularAnimationsPackageName = '@angular/animations';
-const setupSchematicsTask = 'ng-add-setup';
+const setupSchematicsTask = 'setup';
 
 export default function (options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {

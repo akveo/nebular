@@ -13,8 +13,7 @@ import { getWorkspace } from '@schematics/angular/utility/config';
 import { findModuleFromOptions as internalFindModule } from '@schematics/angular/utility/find-module';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getProjectMainFile } from './project-main-file';
-import { ts } from './version-agnostic-typescript';
-
+import * as ts from 'typescript';
 
 /** Reads file given path and returns TypeScript source file. */
 export function getSourceFile(host: Tree, path: string): any {

@@ -10,5 +10,4 @@ export * from './ng-module-imports';
 export * from './package-config';
 export * from './project-main-file';
 export * from './project-targets';
-export * from './version-agnostic-typescript';
 export * from './project-style-file';
