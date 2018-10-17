@@ -2,7 +2,7 @@ import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpRequest } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 
 import {
   NbAlertModule,
@@ -95,7 +95,6 @@ export function nbNoOpInterceptorFilter(req: HttpRequest<any>): boolean {
     NbButtonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    HttpClientModule,
   ],
   declarations: [
     NbAuthComponent,
