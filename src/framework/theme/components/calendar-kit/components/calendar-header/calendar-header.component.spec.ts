@@ -9,7 +9,6 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbDateService, NbNativeDateService } from '../../services';
-import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { NbThemeModule } from '../../../../theme.module';
 import { DatePipe } from '@angular/common';
@@ -25,7 +24,7 @@ describe('Component: NbCalendarHeader', () => {
     TestBed.configureTestingModule({
       imports: [NbThemeModule.forRoot()],
       providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
-      declarations: [NbCalendarHeaderComponent, NbCalendarDatePipe],
+      declarations: [NbCalendarHeaderComponent],
     });
     fixture = TestBed.createComponent<NbCalendarHeaderComponent<Date>>(NbCalendarHeaderComponent);
     component = fixture.componentInstance;

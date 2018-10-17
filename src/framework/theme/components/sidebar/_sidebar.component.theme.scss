@@ -10,6 +10,7 @@
 
     font-size: nb-theme(sidebar-font-size);
     line-height: nb-theme(sidebar-line-height);
+    box-shadow: nb-theme(sidebar-shadow);
 
     @include nb-scrollbars(
         nb-theme(scrollbar-fg),
@@ -21,7 +22,6 @@
       height: nb-theme(sidebar-height);
       width: nb-theme(sidebar-width);
       background: nb-theme(sidebar-bg);
-      box-shadow: nb-theme(sidebar-shadow);
     }
 
     .scrollable {
