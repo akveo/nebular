@@ -76,7 +76,7 @@ List of component style variables is specified in the component documentation, f
 
 ## Variables Usage
 
-Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](docs/guides/enabling-theme-system) is to call `nb-theme(var-name)` function:
+Now, if you want to use the variables in your custom style files, all you need to do (of course, after the [successful setup of the Theme System](docs/guides/enable-theme-system) is to call `nb-theme(var-name)` function:
 
 ```scss
 @import '../../../@theme/styles/themes';

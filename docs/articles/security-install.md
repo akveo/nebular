@@ -17,7 +17,7 @@ npm i @nebular/security
 ## Import the module:
 
 ```ts
-import { NbSecurityModule } from '@nebular/security
+import { NbSecurityModule } from '@nebular/security';
 ```
 <hr>
 ## Register it
