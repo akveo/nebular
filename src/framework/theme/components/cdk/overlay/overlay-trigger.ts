@@ -1,6 +1,6 @@
-import { fromEvent as observableFromEvent, merge as observableMerge, Observable, Subject } from 'rxjs';
-import { debounceTime, delay, filter, repeat, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { ComponentRef } from '@angular/core';
+import { fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
+import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile, map } from 'rxjs/operators';
 
 
 export enum NbTrigger {
@@ -20,6 +20,23 @@ export enum NbTrigger {
  * Renderer provides capability use it in service worker, ssr and so on.
  * */
 export abstract class NbTriggerStrategy {
+
+  protected isNotOnHostOrContainer(event: Event): boolean {
+    return !this.isOnHost(event) && !this.isOnContainer(event);
+  }
+
+  protected isOnHostOrContainer(event: Event): boolean {
+    return this.isOnHost(event) || this.isOnContainer(event);
+  }
+
+  protected isOnHost({ target }: Event): boolean {
+    return this.host.contains(target as Node);
+  }
+
+  protected isOnContainer({ target }: Event): boolean {
+    return this.container() && this.container().location.nativeElement.contains(target);
+  }
+
   abstract show$: Observable<Event>;
   abstract hide$: Observable<Event>;
 
@@ -34,41 +51,28 @@ export abstract class NbTriggerStrategy {
  * not on the host or container.
  * */
 export class NbClickTriggerStrategy extends NbTriggerStrategy {
-  protected show: Subject<Event> = new Subject();
-  readonly show$: Observable<Event> = this.show.asObservable();
 
-  protected hide: Subject<Event> = new Subject();
-  readonly hide$: Observable<Event> = observableMerge(
-    this.hide.asObservable(),
-    observableFromEvent<Event>(this.document, 'click')
-      .pipe(filter((event: Event) => this.isNotHostOrContainer(event))),
-  );
+  // since we should track click for both SHOW and HIDE event we firstly need to track the click and the state
+  // of the container and then later on decide should we hide it or show
+  // if we track the click & state separately this will case a behavior when the container is getting shown
+  // and then hidden right away
+  protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
+    .pipe(
+      map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
+      share(),
+    );
 
-  constructor(protected document: Document, protected host: HTMLElement, protected container: () => ComponentRef<any>) {
-    super(document, host, container);
-    this.subscribeOnHostClick();
-  }
+  readonly show$: Observable<Event> = this.click$
+    .pipe(
+      filter(([shouldShow]) => shouldShow),
+      map(([, event]) => event),
+    );
 
-  protected subscribeOnHostClick() {
-    observableFromEvent(this.host, 'click')
-      .subscribe((event: Event) => {
-        if (this.isContainerExists()) {
-          this.hide.next(event);
-        } else {
-          this.show.next(event);
-        }
-      })
-  }
-
-  protected isContainerExists(): boolean {
-    return !!this.container();
-  }
-
-  protected isNotHostOrContainer(event: Event): boolean {
-    return !this.host.contains(event.target as Node)
-      && this.isContainerExists()
-      && !this.container().location.nativeElement.contains(event.target as Node);
-  }
+  readonly hide$: Observable<Event> = this.click$
+    .pipe(
+      filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
+      map(([, event]) => event),
+    );
 }
 
 /**
@@ -91,8 +95,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
         .pipe(
           debounceTime(100),
           takeWhile(() => !!this.container()),
-          filter(event => !this.host.contains(event.target as Node)
-            && !this.container().location.nativeElement.contains(event.target as Node),
+          filter(event => this.isNotOnHostOrContainer(event),
           ),
         ),
       ),
@@ -109,6 +112,8 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
     .pipe(
       delay(100),
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
+      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+      // meaning that if one event occurs in some time after the initial one we won't react to it
       repeat(),
     );
 
@@ -122,18 +127,6 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
  * Fires close event when the focus leaves the host element.
  * */
 export class NbFocusTriggerStrategy extends NbTriggerStrategy {
-
-  protected isNotOnHostOrContainer(event: Event): boolean {
-    return !this.isOnHost(event) && !this.isOnContainer(event);
-  }
-
-  protected isOnHost({ target }: Event): boolean {
-    return this.host.contains(target as Node);
-  }
-
-  protected isOnContainer({ target }: Event): boolean {
-    return this.container() && this.container().location.nativeElement.contains(target);
-  }
 
   protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
     .pipe(
