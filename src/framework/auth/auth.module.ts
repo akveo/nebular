@@ -52,7 +52,6 @@ import { NbLogoutComponent } from './components/logout/logout.component';
 import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
 import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
-import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
@@ -93,7 +92,7 @@ export function nbNoOpInterceptorFilter(req: HttpRequest<any>): boolean {
     NbAlertModule,
     NbInputModule,
     NbButtonModule,
-    RouterModule.forChild(routes),
+    RouterModule,
     FormsModule,
     HttpClientModule,
   ],
