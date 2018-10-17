@@ -68,7 +68,7 @@ export class NbStepComponent {
    */
   @Input()
   get completed(): boolean {
-    return this.completedValue || this.isCompleted;
+    return this.completedValue || this.interacted;
   }
 
   set completed(value: boolean) {
@@ -77,11 +77,11 @@ export class NbStepComponent {
 
   private completedValue: boolean = false;
 
-  private get isCompleted() {
-    return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;
-  }
-
   interacted = false;
+
+  get isValid(): boolean {
+    return this.stepControl && this.stepControl.valid || false;
+  }
 
   constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
   }
@@ -101,5 +101,12 @@ export class NbStepComponent {
     if (this.stepControl) {
       this.stepControl.reset();
     }
+  }
+
+  /**
+   * Mark step as interacted
+   */
+  visit() {
+    this.interacted = true;
   }
 }

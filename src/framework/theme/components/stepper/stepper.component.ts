@@ -113,7 +113,7 @@ export class NbStepperComponent {
 
   set selectedIndex(index: number) {
     if (this.steps) {
-      if (this.index !== index && this.isStepValid(index)) {
+      if (this.index !== index) {
         this.index = index;
       }
     } else {
@@ -128,11 +128,11 @@ export class NbStepperComponent {
    */
   @Input()
   get selected(): NbStepComponent | undefined {
-    return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
+    return this.steps && this.steps.toArray()[this.selectedIndex];
   }
 
   set selected(step: NbStepComponent) {
-    this.selectedIndex = this.steps ? this.steps.toArray().indexOf(step) : -1;
+    this.selectedIndex = this.steps ? this.getStepIndex(step) : -1;
   }
 
   /**
@@ -147,14 +147,35 @@ export class NbStepperComponent {
    * Navigate to next step
    * */
   next() {
-    this.selectedIndex = Math.min(this.index + 1, this.steps.length - 1);
+    const nextStepIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
+    const selectedStep = this.steps.toArray()[this.selectedIndex];
+    if (selectedStep.stepControl) {
+      if (selectedStep.isValid) {
+        this.navigateStep(nextStepIndex);
+      }
+    } else {
+      this.navigateStep(nextStepIndex);
+    }
   }
 
   /**
    * Navigate to previous step
    * */
   previous() {
-    this.selectedIndex = Math.max(this.index - 1, 0);
+    const prevStepIndex = Math.max(this.selectedIndex - 1, 0);
+    const prevStep = this.steps.toArray()[prevStepIndex];
+    if (prevStep.stepControl) {
+      if (prevStep.isValid) {
+        this.navigateStep(prevStepIndex);
+      }
+    } else {
+      this.navigateStep(prevStepIndex);
+    }
+  }
+
+  private navigateStep(index: number) {
+    this.visitStep();
+    this.selectedIndex = index;
   }
 
   /**
@@ -165,20 +186,23 @@ export class NbStepperComponent {
     this.steps.forEach(step => step.reset());
   }
 
-  isStepSelected(step: NbStepComponent) {
-    return this.index === this.steps.toArray().indexOf(step);
+  isStepSelected(step: NbStepComponent): boolean {
+    return this.selectedIndex === this.getStepIndex(step);
   }
 
-  private isStepValid(index: number): boolean {
-    const steps = this.steps.toArray();
+  isStepCompleted(step: NbStepComponent): boolean {
+    return !this.isStepSelected(step) && step.completed;
+  }
 
-    steps[this.index].interacted = true;
+  selectStep(step: NbStepComponent) {
+    step.select();
+  }
 
-    if (index >= this.index && index > 0) {
-      const currentStep = steps[this.index];
-      return currentStep.completed;
-    }
+  private getStepIndex(step: NbStepComponent): number {
+    return this.steps.toArray().indexOf(step);
+  }
 
-    return true;
+  private visitStep() {
+    this.steps.toArray()[this.selectedIndex].visit();
   }
 }
