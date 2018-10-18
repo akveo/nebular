@@ -10,10 +10,8 @@ export function createThemeContent(themeName: string): string {
 @import '~@nebular/theme/styles/themes/${themeName}';
 
 $nb-themes: nb-register-theme((
-  color-bg: #4ca6ff,
-  shadow: 0 1px 2px 0 #3780c0,
-  layout-bg: #ffffff,
-  color-fg: #222222
+  // add your variables here like:
+  // color-bg: #4ca6ff,
 ), ${themeName}, ${themeName});
 
 `;
