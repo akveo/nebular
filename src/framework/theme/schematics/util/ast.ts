@@ -12,7 +12,7 @@ import { InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { findModuleFromOptions as internalFindModule } from '@schematics/angular/utility/find-module';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import { getProjectMainFile } from './project-main-file';
+import { getProjectMainFilePath } from './project-main-file';
 import * as ts from 'typescript';
 
 /** Reads file given path and returns TypeScript source file. */
@@ -28,7 +28,7 @@ export function getSourceFile(host: Tree, path: string): any {
 /** Import and add module to root app module. */
 export function addModuleImportToRootModule(host: Tree, moduleName: string, src: string,
                                             project: WorkspaceProject) {
-  const modulePath = getAppModulePath(host, getProjectMainFile(project));
+  const modulePath = getAppModulePath(host, getProjectMainFilePath(project));
   addModuleImportToModule(host, modulePath, moduleName, src);
 }
 

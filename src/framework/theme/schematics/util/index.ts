@@ -11,3 +11,4 @@ export * from './package-config';
 export * from './project-main-file';
 export * from './project-targets';
 export * from './project-style-file';
+export * from './read-file';

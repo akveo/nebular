@@ -8,4 +8,5 @@ export interface Schema {
   project: string;
   theme: string;
   prebuiltStyles: boolean;
+  addLayout: boolean;
 }

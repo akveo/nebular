@@ -20,6 +20,11 @@
       "type": "boolean",
       "description": "Use prebuilt css styles or import customizable scss.",
       "default": true
+    },
+    "addLayout": {
+      "type": "boolean",
+      "description": "Add layout",
+      "default": true
     }
   }
 }

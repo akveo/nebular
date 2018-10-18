@@ -7,6 +7,8 @@
  */
 
 import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
+import { getWorkspace } from '@schematics/angular/utility/config';
+import { Tree } from '@angular-devkit/schematics';
 
 /**
  * Finds the specified project configuration in the workspace. Throws an error if the project
@@ -14,13 +16,18 @@ import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/work
  */
 export function getProjectFromWorkspace(
   workspace: WorkspaceSchema,
-  projectName?: string): WorkspaceProject {
+  projectName: string): WorkspaceProject {
 
-  const project = workspace.projects[projectName || workspace.defaultProject];
+  const project = workspace.projects[projectName || workspace.defaultProject as string];
 
   if (!project) {
     throw new Error(`Could not find project in workspace: ${projectName}`);
   }
 
   return project;
+}
+
+export function getProject(host: Tree, project: string): WorkspaceProject {
+  const workspace = getWorkspace(host);
+  return getProjectFromWorkspace(workspace, project);
 }

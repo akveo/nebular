@@ -18,8 +18,8 @@ export const angularRouterModule = 'RouterModule.forRoot([])';
 export const setupSchematicsTask = 'setup';
 export const angularJson = 'angular.json';
 
-export const createThemeModule = themeName =>
+export const createThemeModule = (themeName: string) =>
   `NbThemeModule.forRoot({ name: ${themeName} })`;
 
-export const createStylesPrebuiltPath = themeName =>
+export const createStylesPrebuiltPath = (themeName: string) =>
   `./node_modules/${nebularStylesPrebuiltPrefix}/${themeName}.css`;
