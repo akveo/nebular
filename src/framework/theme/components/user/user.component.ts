@@ -199,6 +199,10 @@ export class NbUserComponent {
   showInitialsValue: boolean = true;
   isMenuShown: boolean = false;
 
+  get onlyPictureMode(): boolean {
+    return !(this.showNameValue || this.showTitleValue);
+  }
+
   constructor(private domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
