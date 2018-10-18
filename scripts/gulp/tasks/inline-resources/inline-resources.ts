@@ -10,7 +10,7 @@ task('inline-resources', () => {
     `${BUILD_DIR}/**/LICENSE.txt`,
     `${BUILD_DIR}/**/README.md`,
     `${BUILD_DIR}/**/package.json`,
-    `${BUILD_DIR}/**/collection.json`,
+    `${BUILD_DIR}/**/schematics/**/*.json`,
   ])
     .pipe(dest(LIB_DIR))
     .on('end', () => copyResources(LIB_DIR));
