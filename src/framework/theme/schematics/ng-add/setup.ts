@@ -6,6 +6,8 @@
 
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
 import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
+import { join, normalize, Path } from '@angular-devkit/core';
+import { InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
 
 import { Schema } from './schema';
@@ -16,13 +18,18 @@ import {
   getProjectTargetOptions,
 } from '../util';
 import { createThemeContent, stylesContent } from './theme-content';
-import { join, normalize, Path } from '@angular-devkit/core';
-import { InsertChange } from '@schematics/angular/utility/change';
+import {
+  angularJson,
+  angularRouterModule,
+  angularRouterPackage,
+  createStylesPrebuiltPath,
+  createThemeModule,
+  nebularLayoutModule,
+  nebularStylesPrebuiltPrefix,
+  nebularThemePackage,
+  nebularThemesFile,
+} from './constants';
 
-const nebularThemePackageName = '@nebular/theme';
-const angularRouterPackageName = '@angular/router';
-
-const angularRouterModule = 'RouterModule.forRoot([])';
 
 export default function (options: Schema) {
   return chain([
@@ -35,10 +42,11 @@ function addNebularThemeModule(options: Schema): Rule {
   return (host: Tree) => {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
-    const nebularThemeModule = createNebularThemeModule(options.theme);
+    const nebularThemeModule = createThemeModule(options.theme);
 
-    addModuleImportToRootModule(host, nebularThemeModule, nebularThemePackageName, project);
-    addModuleImportToRootModule(host, angularRouterModule, angularRouterPackageName, project);
+    addModuleImportToRootModule(host, nebularThemeModule, nebularThemePackage, project);
+    addModuleImportToRootModule(host, nebularLayoutModule, nebularThemePackage, project);
+    addModuleImportToRootModule(host, angularRouterModule, angularRouterPackage, project);
 
     return host;
   }
@@ -63,7 +71,7 @@ function insertPrebuiltTheme(project: WorkspaceProject, host: Tree, theme: strin
                              workspace: WorkspaceSchema) {
 
   // Path needs to be always relative to the `package.json` or workspace root.
-  const themePath = createNebularThemeStylesPrebuiltPath(theme);
+  const themePath = createStylesPrebuiltPath(theme);
 
   addStyleToTarget(project, 'build', host, themePath, workspace);
 }
@@ -72,7 +80,7 @@ function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: s
   const stylesPath = getProjectStyleFile(project, 'scss') as string;
   const themeContent = createThemeContent(theme);
 
-  const customThemePath = normalize(join((project.sourceRoot as Path), 'themes.scss'));
+  const customThemePath = normalize(join((project.sourceRoot as Path), nebularThemesFile));
   host.create(customThemePath, themeContent);
 
   const insertion = new InsertChange(stylesPath, 0, stylesContent);
@@ -92,20 +100,12 @@ function addStyleToTarget(project: WorkspaceProject, targetName: string, host: T
   } else {
     const existingStyles = targetOptions.styles.map((s: any) => typeof s === 'string' ? s : s.input);
     const hasGivenTheme = existingStyles.find((s: any) => s.includes(assetPath));
-    const hasOtherTheme = existingStyles.find((s: any) => s.includes('@nebular/theme/styles/prebuilt'));
+    const hasOtherTheme = existingStyles.find((s: any) => s.includes(nebularStylesPrebuiltPrefix));
 
     if (!hasGivenTheme && !hasOtherTheme) {
       targetOptions.styles.unshift(assetPath);
     }
   }
 
-  host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
-}
-
-function createNebularThemeModule(themeName: string): string {
-  return `NbThemeModule.forRoot({ name: ${themeName} })`;
-}
-
-function createNebularThemeStylesPrebuiltPath(themeName: string): string {
-  return `./node_modules/@nebular/theme/styles/prebuilt/${themeName}.css`;
+  host.overwrite(angularJson, JSON.stringify(workspace, null, 2));
 }

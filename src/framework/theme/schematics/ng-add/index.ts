@@ -9,12 +9,13 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 
 import { Schema } from './schema';
 import { addPackageToPackageJson, getPackageVersionFromPackageJson } from '../util';
+import {
+  angularAnimationsPackageName,
+  angularCDKPackageName,
+  angularCorePackageName,
+  setupSchematicsTask,
+} from './constants';
 
-
-const angularCorePackageName = '@angular/core';
-const angularCDKPackageName = '@angular/cdk';
-const angularAnimationsPackageName = '@angular/animations';
-const setupSchematicsTask = 'setup';
 
 export default function (options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
