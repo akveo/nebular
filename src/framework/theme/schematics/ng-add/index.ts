@@ -8,12 +8,6 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 import { Schema } from './schema';
-import {
-  angularAnimationsPackage,
-  angularCDKPackage,
-  angularCorePackage,
-  setupSchematicsTask,
-} from './constants';
 import { addPackageToPackageJson, getPackageVersionFromPackageJson } from '../util';
 
 
@@ -28,13 +22,13 @@ export default function (options: Schema): Rule {
 }
 
 function addPeerDependenciesToPackageJson(host: Tree) {
-  const angularCoreVersion = getPackageVersionFromPackageJson(host, angularCorePackage);
+  const angularCoreVersion = getPackageVersionFromPackageJson(host, '@angular/core');
 
-  addPackageToPackageJson(host, angularCDKPackage, angularCoreVersion);
-  addPackageToPackageJson(host, angularAnimationsPackage, angularCoreVersion);
+  addPackageToPackageJson(host, '@angular/cdk', angularCoreVersion);
+  addPackageToPackageJson(host, '@angular/animations', angularCoreVersion);
 }
 
 function runNgAddSetupSchematics(context: SchematicContext, options: Schema) {
   const installTaskId = context.addTask(new NodePackageInstallTask());
-  context.addTask(new RunSchematicTask(setupSchematicsTask, options), [installTaskId]);
+  context.addTask(new RunSchematicTask('setup', options), [installTaskId]);
 }
