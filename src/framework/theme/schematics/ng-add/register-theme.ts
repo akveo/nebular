@@ -5,7 +5,7 @@
  */
 
 import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
-import { Rule, Tree, UpdateRecorder } from '@angular-devkit/schematics';
+import { Rule, SchematicsException, Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
@@ -14,6 +14,9 @@ import { join, normalize, Path } from '@angular-devkit/core';
 import { createThemeContent, stylesContent } from './theme-content';
 import { Schema } from './schema';
 
+/**
+ * Register Nebular theme in the given project.
+ * */
 export function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
     const workspace = getWorkspace(host);
@@ -38,8 +41,16 @@ function insertPrebuiltTheme(project: WorkspaceProject, host: Tree, theme: strin
   addStyleToTarget(project, 'build', host, themePath, workspace);
 }
 
+/**
+ * TODO maybe we may use prompt to ask to change styles from scss to css?
+ * */
 function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: string) {
   const stylesPath: string = getProjectStyleFile(project, 'scss') as string;
+
+  if (!host.exists(stylesPath)) {
+    throwSCSSRequiredForCustomizableThemes();
+  }
+
   const themeContent: string = createThemeContent(theme);
 
   const customThemePath: Path = normalize(join((project.sourceRoot as Path), 'themes.scss'));
@@ -53,7 +64,6 @@ function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: s
 }
 
 /** Adds a style entry to the given project target. */
-// TODO raises the exception if no styles.scss found
 function addStyleToTarget(project: WorkspaceProject, targetName: string, host: Tree,
                           assetPath: string, workspace: WorkspaceSchema) {
   const targetOptions = getProjectTargetOptions(project, targetName);
@@ -73,3 +83,6 @@ function addStyleToTarget(project: WorkspaceProject, targetName: string, host: T
   host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
 }
 
+function throwSCSSRequiredForCustomizableThemes() {
+  throw new SchematicsException('No scss root found. Customizable theme requires scss to be enabled in the project.');
+}
