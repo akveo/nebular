@@ -13,11 +13,10 @@
 
 1) Then you just need to include a CSS file of a theme you want to use into your `.angular-cli.json` file like this:
 
-```scss
+```json5
 "styles": [
-        "../node_modules/@nebular/theme/styles/prebuilt/cosmic.css", // or default.css
-      ],
-
+  "../node_modules/@nebular/theme/styles/prebuilt/cosmic.css", // or default.css
+],
 ```
 
 And that is all. In the future, if you need any of the advanced features - you can easily start using them by going through the Normal/Advanced setup steps.

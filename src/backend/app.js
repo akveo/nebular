@@ -18,6 +18,7 @@ const moment = require('moment');
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(auth.initialize());
 
 app.use(function(req, res, next) {
@@ -70,7 +71,7 @@ app.post('/api/auth/login', function (req, res) {
 app.post('/api/auth/token', function (req, res) {
 
   if (req.body.username && req.body.password) {
-    var email = req.body.username;
+    var email = decodeURIComponent(req.body.username);
     var password = req.body.password;
     var user = users.find(function (u) {
       return u.email === email && u.password === password;
