@@ -7,3 +7,4 @@
 export * from './package';
 export * from './file';
 export * from './project';
+export * from './component';

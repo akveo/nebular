@@ -20,7 +20,7 @@ export function registerModules(options: Schema): Rule {
 function addNebularThemeModule(options: Schema): Rule {
   return (host: Tree) => {
     const project = getProject(host, options.project);
-    const nebularThemeModule = `NbThemeModule.forRoot({ name: ${options.theme} })`;
+    const nebularThemeModule = `NbThemeModule.forRoot({ name: '${options.theme}' })`;
 
     addModuleImportToRootModule(host, nebularThemeModule, '@nebular/theme', project);
 
