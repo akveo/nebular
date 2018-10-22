@@ -10,9 +10,9 @@ export const nebularThemesFile = 'themes.scss';
 export const nebularLayoutModule = 'NbLayoutModule';
 
 export const angularRouterPackage = '@angular/router';
-export const angularCorePackageName = '@angular/core';
-export const angularCDKPackageName = '@angular/cdk';
-export const angularAnimationsPackageName = '@angular/animations';
+export const angularCorePackage = '@angular/core';
+export const angularCDKPackage = '@angular/cdk';
+export const angularAnimationsPackage = '@angular/animations';
 export const angularRouterModule = 'RouterModule.forRoot([])';
 
 export const setupSchematicsTask = 'setup';

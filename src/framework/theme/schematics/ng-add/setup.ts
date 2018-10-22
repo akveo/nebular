@@ -4,6 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { Component } from '@angular/core';
+import {
+  addModuleImportToRootModule,
+  getProjectFromWorkspace,
+  getProjectStyleFile,
+  getProjectTargetOptions,
+} from '@angular/cdk/schematics';
 import { chain, Rule, SchematicContext, Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';
@@ -11,14 +18,6 @@ import { InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
 
 import { Schema } from './schema';
-import {
-  addModuleImportToRootModule,
-  getProject,
-  getProjectFromWorkspace,
-  getProjectStyleFile,
-  getProjectTargetOptions,
-  read,
-} from '../util';
 import { createThemeContent, stylesContent } from './theme-content';
 import {
   angularJson,
@@ -31,7 +30,7 @@ import {
   nebularThemePackage,
   nebularThemesFile,
 } from './constants';
-import { Component } from '@angular/core';
+import { getProject, readText } from '../util';
 
 
 export default function (options: Schema) {
@@ -139,7 +138,7 @@ function wrapRootComponentInLayout(_options: Schema): Rule {
     try {
       // const project: WorkspaceProject = getProject(host, options.project);
       const appComponentPath: string = './src/app/app.component.ts';
-      const appComponent: string = read(host, appComponentPath).replace(/(?:\r\n|\r|\n)/g, ' ');
+      const appComponent: string = readText(host, appComponentPath).replace(/(?:\r\n|\r|\n)/g, ' ');
       // const mainPath: string = getProjectMainFilePath(project);
       // const mainFile: string = read(host, mainPath);
       // const rootModule: string = mainFile.match(/bootstrapModule\((.*)\)/)[1];
@@ -160,7 +159,7 @@ function wrapRootComponentInLayout(_options: Schema): Rule {
         } else {
           path = componentDescriptor.templateUrl as string;
           startOffset = 0;
-          endOffset = read(host, path).length;
+          endOffset = readText(host, path).length;
         }
 
         const recordedChange = host
