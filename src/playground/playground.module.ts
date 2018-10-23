@@ -40,7 +40,9 @@ import {
   NbDialogModule,
   NbSelectModule,
   NbWindowModule,
-  NbDatepickerModule, NbRadioModule,
+  NbDatepickerModule,
+  NbRadioModule,
+  NbFileUploaderModule,
 } from '@nebular/theme';
 
 import { NbPlaygroundRoutingModule } from './playground-routing.module';
@@ -250,6 +252,7 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbFileUploaderShowcaseComponent } from './file-uploader/file-uploader-showcase.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -290,6 +293,7 @@ export const NB_MODULES = [
   NbWindowModule.forRoot(),
   NbDatepickerModule.forRoot(),
   NbRadioModule,
+  NbFileUploaderModule,
 ];
 
 export const NB_EXAMPLE_COMPONENTS = [
@@ -493,6 +497,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbRangepickerShowcaseComponent,
   NbRadioShowcaseComponent,
   NbRadioDisabledComponent,
+  NbFileUploaderShowcaseComponent,
 ];
 
 @NgModule({

@@ -81,3 +81,6 @@ export * from './components/window';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/radio/radio.module';
+export * from './components/file-uploader/file-uploader.component';
+export * from './components/file-uploader/file-uploader.module';
+export * from './components/file-uploader/file-uploader.model';

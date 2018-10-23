@@ -1,0 +1,24 @@
+<div class="file-uploader">
+  <ng-container *ngIf="!options.directory">
+    <input #inputEl type="file" style="display: none;"
+      [accept]="accept"
+      [multiple]="options.multiple"
+      (change)="onChange()">
+  </ng-container>
+
+  <ng-container *ngIf="options.directory">
+    <input #inputEl type="file" style="display: none;"
+      [accept]="accept"
+      [multiple]="options.multiple"
+      webkitdirectory
+      (change)="onChange()">
+  </ng-container>
+
+  <button class="button browse-button" (click)="browse()">
+    <i class="nb-arrow-thin-up"></i>
+    <span>Click to Upload</span>
+  </button>
+</div>
+
+<nb-upload-queue *ngIf="(uploader.uploadQueue$ | async).length && options.showUploadQueue"
+  [items]="uploader.uploadQueue$ | async"></nb-upload-queue>

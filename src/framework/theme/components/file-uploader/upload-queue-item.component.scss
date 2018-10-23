@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+
+  .file-item-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
+
+  .file-progress {
+    color: gray;
+  }
+
+  .file-item:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
+
+  ::ng-deep nb-progress-bar .progress-container {
+    height: 0.25rem;
+  }
+}

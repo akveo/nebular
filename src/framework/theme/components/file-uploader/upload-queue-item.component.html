@@ -1,0 +1,6 @@
+<span class="file-item-caption">
+  <span>{{ item.name }}</span>
+  <span class="file-progress">{{ item.progress + '%' }}</span>
+</span>
+
+<nb-progress-bar [value]="item.progress" [status]="status"></nb-progress-bar>

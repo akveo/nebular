@@ -202,6 +202,7 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbFileUploaderShowcaseComponent } from './file-uploader/file-uploader-showcase.component';
 
 
 export const routes: Routes = [
@@ -963,6 +964,15 @@ export const routes: Routes = [
           {
             path: 'rangepicker-showcase.component',
             component: NbRangepickerShowcaseComponent,
+          },
+        ],
+      },
+      {
+        path: 'file-uploader',
+        children: [
+          {
+            path: 'file-uploader-showcase.component',
+            component: NbFileUploaderShowcaseComponent,
           },
         ],
       },
