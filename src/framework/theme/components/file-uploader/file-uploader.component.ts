@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 
 import { NbFileUploaderService } from './file-uploader.service';
