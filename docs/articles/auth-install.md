@@ -17,6 +17,24 @@ npm i @nebular/auth
 ```
 <hr>
 
+## HttpClientModule
+
+Auth module utilizes features of `HttpClientModule` and since it should only be imported in the root module, please make sure you've done this:
+
+```ts
+import { HttpClientModule } from '@angular/common/http';
+
+// ...
+
+@NgModule({
+  imports: [
+    HttpClientModule
+  ],
+})
+export class AppModule {
+
+```
+
 ## Import
 
 Import the module and `NbPasswordAuthStrategy` strategy:
@@ -109,7 +127,7 @@ export const routes: Routes = [
 
 ## Enable Styles
 
-Last but not least - install the component styles into your styles.scss ([more details](docs/guides/enabling-theme-system)):
+Last but not least - install the component styles into your styles.scss ([more details](docs/guides/enable-theme-system)):
 
 ```scss
 @import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/{theme-name}';

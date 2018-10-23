@@ -59,11 +59,6 @@ export class NbMenuItem {
    */
   children?: NbMenuItem[];
   /**
-   * Children items height
-   * @type {number}
-   */
-  subMenuHeight?: number = 0;
-  /**
    * HTML Link target
    * @type {string}
    */

@@ -6,7 +6,6 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbCalendarDatePipe } from '../calendar-date/calendar-date.pipe';
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
 import { NbDateService, NbNativeDateService } from '../../services';
@@ -22,7 +21,7 @@ describe('Component: NbCalendarPageableNavigation', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NbThemeModule.forRoot()],
-      declarations: [NbCalendarDatePipe, NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
+      declarations: [NbCalendarNavigationComponent, NbCalendarPageableNavigationComponent],
       providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
     fixture =

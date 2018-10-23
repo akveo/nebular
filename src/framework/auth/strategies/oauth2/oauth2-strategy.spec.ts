@@ -19,6 +19,14 @@ function createURL(params: any) {
   }).join('&');
 }
 
+function parseQueryParams(params: string): { [key: string]: string } {
+  return params ? params.split('&').reduce((acc: any, part: string) => {
+    const item = part.split('=');
+    acc[item[0]] = decodeURIComponent(item[1]);
+    return acc;
+  }, {}) : {};
+}
+
 describe('oauth2-auth-strategy', () => {
 
   let strategy: NbOAuth2AuthStrategy;
@@ -67,7 +75,6 @@ describe('oauth2-auth-strategy', () => {
   // tslint:disable-next-line
   const refreshedToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenPayload, 'strategy') as NbAuthOAuth2Token;
   const refreshedTokenWithRefreshToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenResponse, 'strategy') as NbAuthOAuth2Token;
-
 
   beforeEach(() => {
     windowMock = { location: { href: '' } };
@@ -664,7 +671,7 @@ describe('oauth2-auth-strategy', () => {
         endpoint: 'token',
         scope: scope,
       },
-    }
+    };
 
     beforeEach(() => {
       strategy.setOptions(basicOptions);
@@ -672,7 +679,6 @@ describe('oauth2-auth-strategy', () => {
 
     it('handle success login with NO client auth', (done: DoneFn) => {
       const credentials = { email: 'example@akveo.com', password: '123456' };
-
       strategy.authenticate(credentials)
         .subscribe((result: NbAuthResult) => {
           expect(result).toBeTruthy();
@@ -687,12 +693,17 @@ describe('oauth2-auth-strategy', () => {
         });
 
       httpMock.expectOne(
-        req => req.url === 'http://example.com/token'
-          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['username'] === credentials.email
-          && req.body['password'] === credentials.password
-          && req.body['scope'] === scope,
-      ).flush(tokenSuccessResponse);
+        req => {
+          const params = parseQueryParams(req.body);
+          return (req.url === 'http://example.com/token'
+            && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+            && decodeURIComponent(params['grant_type']) === NbOAuth2GrantType.PASSWORD
+            && decodeURIComponent(params['username']) === credentials.email
+            && decodeURIComponent(params['password']) === credentials.password
+            && decodeURIComponent(params['scope']) === scope)
+        },
+      )
+        .flush(tokenSuccessResponse);
     });
 
     it('handle success login with BASIC client auth', (done: DoneFn) => {
@@ -717,12 +728,16 @@ describe('oauth2-auth-strategy', () => {
         });
 
       httpMock.expectOne(
-        req => req.url === 'http://example.com/token'
-          && req.headers.get('Authorization') === authHeader
-          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['username'] === credentials.email
-          && req.body['scope'] === scope
-          && req.body['password'] === credentials.password,
+        req => {
+          const params = parseQueryParams(req.body);
+          return (req.url === 'http://example.com/token'
+            && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+            && req.headers.get('Authorization') === authHeader
+            && decodeURIComponent(params['grant_type']) === NbOAuth2GrantType.PASSWORD
+            && decodeURIComponent(params['username']) === credentials.email
+            && decodeURIComponent(params['password']) === credentials.password
+            && decodeURIComponent(params['scope']) === scope)
+        },
       ).flush(tokenSuccessResponse);
     });
 
@@ -748,13 +763,17 @@ describe('oauth2-auth-strategy', () => {
         });
 
       httpMock.expectOne(
-        req => req.url === 'http://example.com/token'
-          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['username'] === credentials.email
-          && req.body['password'] === credentials.password
-          && req.body['scope'] === scope
-          && req.body['client_id'] === strategy.getOption('clientId')
-          && req.body['client_secret'] === strategy.getOption('clientSecret'),
+        req => {
+          const params = parseQueryParams(req.body);
+          return (req.url === 'http://example.com/token'
+          && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+          && decodeURIComponent(params['grant_type']) === NbOAuth2GrantType.PASSWORD
+          && decodeURIComponent(params['username']) === credentials.email
+          && decodeURIComponent(params['password']) === credentials.password
+          && decodeURIComponent(params['scope']) === scope
+          && decodeURIComponent(params['client_id']) === strategy.getOption('clientId')
+          && decodeURIComponent(params['client_secret']) === strategy.getOption('clientSecret'))
+        },
       ).flush(tokenSuccessResponse);
     });
 
@@ -776,12 +795,16 @@ describe('oauth2-auth-strategy', () => {
         });
 
        httpMock.expectOne(
-        req => req.url === 'http://example.com/token'
-          && req.body['grant_type'] === NbOAuth2GrantType.PASSWORD
-          && req.body['username'] === credentials.email
-          && req.body['password'] === credentials.password
-          && req.body['scope'] === scope,
-      ).flush(tokenErrorResponse, {status: 401, statusText: 'unauthorized'});
+         req => {
+           const params = parseQueryParams(req.body);
+           return (req.url === 'http://example.com/token'
+             && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+             && decodeURIComponent(params['grant_type']) === NbOAuth2GrantType.PASSWORD
+             && decodeURIComponent(params['username']) === credentials.email
+             && decodeURIComponent(params['password']) === credentials.password
+             && decodeURIComponent(params['scope']) === scope)
+         },
+       ).flush(tokenErrorResponse, {status: 401, statusText: 'unauthorized'});
     });
   });
 });

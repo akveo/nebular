@@ -16,4 +16,3 @@ export { NbCalendarMonthCellComponent } from './calendar-month-picker/calendar-m
 export { NbCalendarYearCellComponent } from './calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './calendar-picker/calendar-picker-row.component';
 export { NbCalendarPickerComponent }from './calendar-picker/calendar-picker.component';
-export { NbCalendarDatePipe } from './calendar-date/calendar-date.pipe';

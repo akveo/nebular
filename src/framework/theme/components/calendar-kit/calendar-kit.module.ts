@@ -13,7 +13,6 @@ import { NbButtonModule } from '../button/button.module';
 import { NbCalendarMonthModelService, NbDateService  } from './services';
 
 import {
-  NbCalendarDatePipe,
   NbCalendarDayCellComponent,
   NbCalendarDayPickerComponent,
   NbCalendarDaysNamesComponent,
@@ -51,10 +50,6 @@ const COMPONENTS = [
   NbCalendarPickerComponent,
 ];
 
-const PIPES = [
-  NbCalendarDatePipe,
-];
-
 /**
  * `NbCalendarKitModule` is a module that contains multiple useful components for building custom calendars.
  * So if you think our calendars is not enough powerful for you just use calendar-kit and build your own calendar!
@@ -75,8 +70,8 @@ const PIPES = [
  * */
 @NgModule({
   imports: [NbSharedModule, NbButtonModule],
-  exports: [...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  exports: [...COMPONENTS],
+  declarations: [...COMPONENTS],
   providers: [...SERVICES],
   entryComponents: [
     NbCalendarDayCellComponent,
