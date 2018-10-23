@@ -12,14 +12,14 @@
         nb-theme(scrollbar-bg),
         nb-theme(scrollbar-width));
 
-    ul {
+    .route-tabset {
       font-family: nb-theme(route-tabs-font-family);
       font-size: nb-theme(route-tabs-font-size);
 
       padding: 0 nb-theme(route-tabs-padding);
       border-bottom: 1px solid nb-theme(route-tabs-separator);
 
-      li {
+      .route-tab {
         background: nb-theme(route-tabs-header-bg);
         min-width: nb-theme(route-tabs-header-min-width);
 
