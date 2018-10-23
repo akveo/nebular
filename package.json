@@ -26,7 +26,7 @@
     "docs:prepare": "npm-run-all docs:parse",
     "docs:start": "npm start -- docs --port 4100",
     "docs:serve": "npm-run-all docs:prepare docs:start",
-    "docs:build": "npm run docs:prepare &&  && npm run docs:dirs",
+    "docs:build": "npm-run-all docs:prepare docs:prod docs:dirs",
     "docs:prod": "npm run build -- docs --prod --aot --base-href '/nebular/'",
     "docs:dirs": "gulp create-docs-dirs",
     "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
