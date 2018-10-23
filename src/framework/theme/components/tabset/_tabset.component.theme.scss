@@ -13,14 +13,14 @@
         nb-theme(scrollbar-bg),
         nb-theme(scrollbar-width));
 
-    ul {
+    .tabset {
       font-family: nb-theme(tabs-font-family);
       font-size: nb-theme(tabs-font-size);
 
       padding: 0 nb-theme(tabs-padding);
       border-bottom: 1px solid nb-theme(tabs-separator);
 
-      li {
+      .tab {
         background: nb-theme(tabs-header-bg);
 
         a {

@@ -63,13 +63,14 @@ import { convertToBoolProperty } from '../helpers';
   selector: 'nb-route-tabset',
   styleUrls: ['./route-tabset.component.scss'],
   template: `
-    <ul>
+    <ul class="route-tabset">
       <li *ngFor="let tab of tabs"
           (click)="$event.preventDefault(); selectTab(tab)"
           routerLink="{{tab.route}}"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          [class.responsive]="tab.responsive">
+          [class.responsive]="tab.responsive"
+          class="route-tab">
         <a href>
           <i *ngIf="tab.icon" [class]="tab.icon"></i>
           <span *ngIf="tab.title">{{ tab.title }}</span>

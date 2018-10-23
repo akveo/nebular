@@ -10,7 +10,7 @@
   display: block;
 
 
-  &.full-width ul {
+  &.full-width .tabset {
     justify-content: space-around;
   }
 
@@ -23,13 +23,14 @@
       display: block;
     }
   }
-  ul {
+
+  .tabset {
     display: flex;
     flex-direction: row;
     list-style-type: none;
     margin: 0;
 
-    li {
+    .tab {
       cursor: pointer;
       margin-bottom: -1px;
       text-align: center;
