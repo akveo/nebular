@@ -1,0 +1,17 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-file-uploader-theme() {
+  nb-upload-queue-item {
+    .file-progress {
+      color: nb-theme(file-uploader-progress-label-color);
+    }
+  }
+
+  nb-upload-queue {
+    border: 0.125rem solid nb-theme(file-uploader-uploading-queue-border-color);
+  }
+}
