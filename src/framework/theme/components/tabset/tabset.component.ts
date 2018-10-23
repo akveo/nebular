@@ -196,11 +196,12 @@ export class NbTabComponent {
   selector: 'nb-tabset',
   styleUrls: ['./tabset.component.scss'],
   template: `
-    <ul>
+    <ul class="tabset">
       <li *ngFor="let tab of tabs"
           (click)="selectTab(tab)"
           [class.responsive]="tab.responsive"
-          [class.active]="tab.active">
+          [class.active]="tab.active"
+          class="tab">
         <a href (click)="$event.preventDefault()">
           <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
           <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
