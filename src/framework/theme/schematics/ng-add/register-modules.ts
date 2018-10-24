@@ -4,47 +4,80 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Schema } from './schema';
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
-import { getProject } from '../util';
 import { addModuleImportToRootModule } from '@angular/cdk/schematics';
+import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
+
+import { Schema } from './schema';
+import { getProject, isImportedInMainModule } from '../util';
+
 
 export function registerModules(options: Schema): Rule {
   return chain([
-    addNebularThemeModule(options),
-    addNebularLayoutModule(options),
-    addAngularRouterModule(options),
+    registerNebularModules(options),
+    registerRouterIfNeeded(options),
   ]);
 }
 
-function addNebularThemeModule(options: Schema): Rule {
-  return (host: Tree) => {
-    const project = getProject(host, options.project);
+function registerNebularModules(options: Schema): Rule {
+  return (tree: Tree) => {
+    const project = getProject(tree, options.project);
     const nebularThemeModule = `NbThemeModule.forRoot({ name: '${options.theme}' })`;
 
-    addModuleImportToRootModule(host, nebularThemeModule, '@nebular/theme', project);
-
-    return host;
+    addModuleImportToRootModule(tree, nebularThemeModule, '@nebular/theme', project);
+    addModuleImportToRootModule(tree, 'NbLayoutModule', '@nebular/theme', project);
   }
 }
 
-function addAngularRouterModule(options: Schema): Rule {
-  return (host: Tree) => {
-    const project = getProject(host, options.project);
+/**
+ * Creates `AppRoutingModule` if no either `RouterModule` or `AppRoutingModule` already imported
+ * in the `AppModule`.
+ * */
+function registerRouterIfNeeded(options: Schema): Rule {
+  return (tree: Tree) => {
+    const project = getProject(tree, options.project);
 
-    // TODO create ng module instead
-    addModuleImportToRootModule(host, 'RouterModule.forRoot([])', '@angular/router', project);
+    if (shouldRegisterRouter(tree, project)) {
+      registerRoutingModule(tree, options.project);
+    }
 
-    return host;
+    return tree;
   }
 }
 
-function addNebularLayoutModule(options: Schema): Rule {
-  return (host: Tree) => {
-    const project = getProject(host, options.project);
+/**
+ * Checks if `RouterModule` or `AppRoutingModule` already imported in the `AppModule`.
+ * */
+function shouldRegisterRouter(tree: Tree, project: WorkspaceProject): boolean {
+  const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project,
+    'AppRoutingModule', './app-routing-module.ts');
+  const routerModuleAlreadyImported = isImportedInMainModule(tree, project,
+    'RouterModule', '@angular/router');
 
-    addModuleImportToRootModule(host, 'NbLayoutModule', '@nebular/theme', project);
+  return !(appRoutingModuleAlreadyImported || routerModuleAlreadyImported);
+}
 
-    return host;
-  }
+function registerRoutingModule(tree: Tree, projectName: string) {
+  registerAppRoutingModule(tree, projectName);
+  createAppRoutingModule(tree);
+}
+
+function createAppRoutingModule(tree: Tree) {
+  tree.create('./src/app/app-routing.module.ts', `import { NgModule } from '@angular/core';
+
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule { }
+`);
+}
+
+function registerAppRoutingModule(tree: Tree, projectName: string) {
+  const project = getProject(tree, projectName);
+  addModuleImportToRootModule(tree, 'AppRoutingModule', './app-routing.module', project);
 }

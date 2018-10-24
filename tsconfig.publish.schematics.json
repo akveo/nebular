@@ -28,5 +28,8 @@
   },
   "include": [
     "./.ng_build/**/schematics/**/*"
+  ],
+  "exclude": [
+    "./.ng_build/**/schematics/**/files/**/*"
   ]
 }
