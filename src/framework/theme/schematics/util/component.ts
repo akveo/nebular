@@ -11,19 +11,40 @@ import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
 
 
-interface TemplateInfo {
-  templateProp?: ts.PropertyAssignment;
-  templateUrlProp?: ts.PropertyAssignment;
+export class TemplateDescriptor {
+  constructor(public templateProp: ts.PropertyAssignment,
+              public templateUrlProp: ts.PropertyAssignment,
+              public componentPath: string,
+              public template: string) {
+  }
+
+  isInline(): boolean {
+    return !!this.templateProp;
+  }
 }
 
-export function getComponentTemplateInfo(host: Tree, componentPath: string): TemplateInfo {
+interface TemplateInfo {
+  templateProp?: ts.PropertyAssignment,
+  templateUrlProp?: ts.PropertyAssignment,
+}
+
+export function getComponentTemplateDescriptor(host: Tree, componentPath: string): TemplateDescriptor {
   const compSource: ts.SourceFile = getSourceFile(host, componentPath);
   const compMetadata: ts.Node = getDecoratorMetadata(compSource, 'Component', '@angular/core')[0];
+  const templateProp = getMetadataProperty(compMetadata, 'template');
+  const templateUrlProp = getMetadataProperty(compMetadata, 'templateUrl');
 
-  return {
-    templateProp: getMetadataProperty(compMetadata, 'template'),
-    templateUrlProp: getMetadataProperty(compMetadata, 'templateUrl'),
-  };
+  const template: string = getComponentTemplate(host, componentPath, {
+    templateProp,
+    templateUrlProp,
+  });
+
+  return new TemplateDescriptor(
+    templateProp,
+    templateUrlProp,
+    componentPath,
+    template,
+  );
 }
 
 export function getComponentTemplate(host: Tree, compPath: string, tmplInfo: TemplateInfo): string {

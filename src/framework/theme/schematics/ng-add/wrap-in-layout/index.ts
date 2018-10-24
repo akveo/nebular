@@ -4,63 +4,50 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { Rule, Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
 
 import { Schema } from '../schema';
-import { getComponentTemplate, getComponentTemplateInfo, writeText } from '../../util';
-import { layoutEnd, layoutStart } from './layout-content';
+import { getComponentTemplateDescriptor, TemplateDescriptor, writeText } from '../../util';
+import { wrapHtmlFileTemplateInLayout, wrapInlineTemplateInLayout } from './layout-content';
 
 /**
  * Wraps `AppComponent` in `NbLayoutComponent`. It's required for correct
  * work of Nebular components.
  * */
-export function wrapRootComponentInLayout(_options: Schema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    try {
-      const componentPath: string = './src/app/app.component.ts';
-      const tmpl = getComponentTemplateInfo(host, componentPath);
-      const template = getComponentTemplate(host, componentPath, tmpl);
-      const wrappedTemplate = wrapTemplateInLayout(template);
+export function wrapRootComponentInLayout(): Rule {
+  return (tree: Tree) => {
+    const componentPath: string = './src/app/app.component.ts';
+    const templateDescriptor: TemplateDescriptor = getComponentTemplateDescriptor(tree, componentPath);
 
-      if (tmpl.templateProp) {
-        const recorder = host.beginUpdate(componentPath)
-          .remove(tmpl.templateProp.initializer.pos, template.length)
-          .insertLeft(tmpl.templateProp.initializer.pos, wrappedTemplate);
-        host.commitUpdate(recorder);
-      } else if (tmpl.templateUrlProp) {
-        const templateUrl = (tmpl.templateUrlProp.initializer as ts.StringLiteral).text;
-        const dir = dirname(normalize(componentPath));
-        const templatePath = join(dir, templateUrl);
-        writeText(host, templatePath, wrapForHtml(template));
-      }
-
-    } catch (e) {
-      context.logger.error(e.stack);
+    if (templateDescriptor.isInline()) {
+      wrapInlineTemplate(tree, templateDescriptor);
+    } else {
+      wrapHtmlFileTemplate(tree, templateDescriptor);
     }
-    return host;
+
+    return tree;
   }
 }
 
-function wrapTemplateInLayout(template: string): string {
-  return ` \`
-    ${layoutStart}
-${padd(template, 8)}
-    ${layoutEnd}
-`;
+function wrapInlineTemplate(tree: Tree, templateDescriptor: TemplateDescriptor) {
+  const { templateProp, componentPath, template } = templateDescriptor;
+
+  const wrappedTemplate = wrapInlineTemplateInLayout(template);
+  const recorder = tree.beginUpdate(componentPath)
+    .remove(templateProp.initializer.pos, template.length)
+    .insertLeft(templateProp.initializer.pos, wrappedTemplate);
+
+  tree.commitUpdate(recorder);
 }
 
-function wrapForHtml(template: string): string {
-  return `${layoutStart}
-${padd(template, 4)}
-${layoutEnd}
-`;
-}
+function wrapHtmlFileTemplate(tree: Tree, templateDescriptor: TemplateDescriptor) {
+  const { templateUrlProp, componentPath, template } = templateDescriptor;
 
-function padd(text: string, paddLen: number): string {
-  return text
-    .split('\n')
-    .map(line => `${' '.repeat(paddLen)}${line}`)
-    .join('\n');
+  const templateUrl = (templateUrlProp.initializer as ts.StringLiteral).text;
+  const dir = dirname(normalize(componentPath));
+  const templatePath = join(dir, templateUrl);
+
+  writeText(tree, templatePath, wrapHtmlFileTemplateInLayout(template));
 }

@@ -19,32 +19,28 @@ import { Schema } from '../schema';
  * */
 export function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-
     if (options.prebuiltStyles) {
-      insertPrebuiltTheme(project, host, options.theme, workspace);
+      insertPrebuiltTheme(host, options.theme);
     } else {
-      importCustomizableTheme(project, host, options.theme);
+      importCustomizableTheme(host, options.theme);
     }
 
     return host;
   }
 }
 
-function insertPrebuiltTheme(project: WorkspaceProject, host: Tree, theme: string,
-                             workspace: WorkspaceSchema) {
+function insertPrebuiltTheme(host: Tree, theme: string) {
+  const workspace = getWorkspace(host);
+  const project = getProjectFromWorkspace(workspace, options.project);
 
-  // Path needs to be always relative to the `package.json` or workspace root.
   const themePath = `./node_modules/@nebular/theme/styles/prebuilt/${theme}.css`;
 
   addStyleToTarget(project, 'build', host, themePath, workspace);
 }
 
-/**
- * TODO maybe we may use prompt to ask to change styles from scss to css?
- * */
-function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: string) {
+function importCustomizableTheme(host: Tree, theme: string) {
+  const workspace = getWorkspace(host);
+  const project = getProjectFromWorkspace(workspace, options.project);
   const stylesPath: string = getProjectStyleFile(project, 'scss') as string;
 
   if (!host.exists(stylesPath)) {
@@ -63,7 +59,9 @@ function importCustomizableTheme(project: WorkspaceProject, host: Tree, theme: s
   host.commitUpdate(recorder);
 }
 
-/** Adds a style entry to the given project target. */
+/**
+ * Adds a style entry to the given project target.
+ * */
 function addStyleToTarget(project: WorkspaceProject, targetName: string, host: Tree,
                           assetPath: string, workspace: WorkspaceSchema) {
   const targetOptions = getProjectTargetOptions(project, targetName);

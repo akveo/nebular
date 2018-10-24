@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { chain } from '@angular-devkit/schematics';
+import { chain, noop } from '@angular-devkit/schematics';
 
 import { Schema } from './schema';
 import { registerModules } from './register-modules';
@@ -20,6 +20,6 @@ export default function (options: Schema) {
   return chain([
     registerModules(options),
     addNebularStyles(options),
-    wrapRootComponentInLayout(options),
+    options.addLayout ? wrapRootComponentInLayout() : noop(),
   ]);
 }
