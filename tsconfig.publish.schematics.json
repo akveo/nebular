@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "tsconfig",
+    "baseUrl": ".",
     "lib": [
       "es2017",
       "dom"
@@ -9,7 +9,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./src/.lib",
-    "rootDir": "./.ng_build",
+    "rootDir": "./src/framework",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
@@ -20,16 +20,15 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es6",
-    "types": [
-      "jasmine",
-      "node"
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
     ]
   },
   "include": [
-    "./.ng_build/**/schematics/**/*"
+    "./src/framework/**/schematics/**/*"
   ],
   "exclude": [
-    "./.ng_build/**/schematics/**/files/**/*"
+    "./src/framework/**/schematics/**/files/**/*"
   ]
 }

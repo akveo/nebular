@@ -5,12 +5,17 @@
  */
 
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import * as ts from 'typescript';
-import { Schema } from './schema';
-import { getComponentTemplate, getComponentTemplateInfo, writeText } from '../util';
 import { dirname, join, normalize } from '@angular-devkit/core';
+import * as ts from 'typescript';
 
+import { Schema } from '../schema';
+import { getComponentTemplate, getComponentTemplateInfo, writeText } from '../../util';
+import { layoutEnd, layoutStart } from './layout-content';
 
+/**
+ * Wraps `AppComponent` in `NbLayoutComponent`. It's required for correct
+ * work of Nebular components.
+ * */
 export function wrapRootComponentInLayout(_options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
     try {
@@ -59,20 +64,3 @@ function padd(text: string, paddLen: number): string {
     .map(line => `${' '.repeat(paddLen)}${line}`)
     .join('\n');
 }
-
-const layoutStart = `<nb-layout>
-
-  <nb-layout-header fixed>
-  <!-- insert your header here -->
-  </nb-layout-header>
-
-  <nb-layout-column>
-`;
-
-const layoutEnd = `</nb-layout-column>
-
-  <nb-layout-footer fixed>
-  <!-- insert your footer here -->
-  </nb-layout-footer>
-
-</nb-layout>`;

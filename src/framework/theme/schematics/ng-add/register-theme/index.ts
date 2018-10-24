@@ -12,7 +12,7 @@ import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/work
 import { join, normalize, Path } from '@angular-devkit/core';
 
 import { createThemeContent, stylesContent } from './theme-content';
-import { Schema } from './schema';
+import { Schema } from '../schema';
 
 /**
  * Register Nebular theme in the given project.

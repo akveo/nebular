@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule } from '@angular/core';
+export const appRoutingModuleContent = `import { NgModule } from '@angular/core';
+
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [];
@@ -14,3 +15,4 @@ const routes: Routes = [];
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
+`;

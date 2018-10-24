@@ -8,8 +8,9 @@ import { chain, Rule, Tree } from '@angular-devkit/schematics';
 import { addModuleImportToRootModule } from '@angular/cdk/schematics';
 import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
 
-import { Schema } from './schema';
-import { getProject, isImportedInMainModule } from '../util';
+import { Schema } from '../schema';
+import { getProject, isImportedInMainModule } from '../../util';
+import { appRoutingModuleContent } from './app-routing-module-content';
 
 
 export function registerModules(options: Schema): Rule {
@@ -62,19 +63,13 @@ function registerRoutingModule(tree: Tree, projectName: string) {
   createAppRoutingModule(tree);
 }
 
+/**
+ * We're just adding app-routing.module without any interpolations
+ * and customization. So, I don't think we have to use schematics
+ * template files.
+ * */
 function createAppRoutingModule(tree: Tree) {
-  tree.create('./src/app/app-routing.module.ts', `import { NgModule } from '@angular/core';
-
-import { Routes, RouterModule } from '@angular/router';
-
-const routes: Routes = [];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule { }
-`);
+  tree.create('./src/app/app-routing.module.ts', appRoutingModuleContent);
 }
 
 function registerAppRoutingModule(tree: Tree, projectName: string) {
