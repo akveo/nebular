@@ -19,5 +19,5 @@ import { Component } from '@angular/core';
 })
 
 export class NbSelectShowcaseComponent {
-  selectedItem = 2;
+  selectedItem = '2';
 }
