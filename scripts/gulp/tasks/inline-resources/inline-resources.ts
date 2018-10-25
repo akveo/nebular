@@ -10,7 +10,6 @@ task('inline-resources', ['inline-schematics-resources'], () => {
     `${BUILD_DIR}/**/LICENSE.txt`,
     `${BUILD_DIR}/**/README.md`,
     `${BUILD_DIR}/**/package.json`,
-    `${BUILD_DIR}/**/schematics/**/*.json`,
   ])
     .pipe(dest(LIB_DIR))
     .on('end', () => copyResources(LIB_DIR));
@@ -19,7 +18,5 @@ task('inline-resources', ['inline-schematics-resources'], () => {
 task('inline-schematics-resources', () => {
   src([
     `./src/framework/**/schematics/**/*.json`,
-  ])
-    .pipe(dest(LIB_DIR))
-    .on('end', () => copyResources(LIB_DIR));
+  ]).pipe(dest(LIB_DIR));
 });
