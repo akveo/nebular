@@ -83,6 +83,9 @@
             "assets": [
               "src/assets",
               "src/favicon.ico"
+            ],
+            "exclude": [
+              "./src/framework/**/schematics/**/*"
             ]
           }
         },
