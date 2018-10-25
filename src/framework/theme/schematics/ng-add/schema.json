@@ -12,14 +12,16 @@
       }
     },
     "theme": {
-      "enum": ["cosmic", "default", "corporate"],
+      "enum": ["default", "cosmic", "corporate"],
       "description": "The theme which will be installed.",
-      "default": "default"
+      "default": "default",
+      "x-prompt": "Which Nebular theme do you want to use:"
     },
     "prebuiltStyles": {
       "type": "boolean",
       "description": "Use prebuilt css styles or import customizable scss.",
-      "default": true
+      "default": true,
+      "x-prompt": "Use prebuilt css?"
     },
     "addLayout": {
       "type": "boolean",
