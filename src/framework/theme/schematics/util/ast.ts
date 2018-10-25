@@ -47,9 +47,8 @@ export function isImported(source: ts.SourceFile,
 export function getAppModulePath(host: Tree, mainPath: string): string {
   const moduleRelativePath = findBootstrapModulePath(host, mainPath);
   const mainDir = dirname(mainPath as Path);
-  const modulePath = normalize(`/${mainDir}/${moduleRelativePath}.ts`);
 
-  return modulePath;
+  return normalize(`/${mainDir}/${moduleRelativePath}.ts`);
 }
 
 /**

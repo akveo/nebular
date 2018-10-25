@@ -42,7 +42,7 @@ function getPackageDependencies(tree: Tree): any {
   return packageJson.dependencies;
 }
 
-fdescribe('simple-schematic', () => {
+describe('simple-schematic', () => {
   let runner: SchematicTestRunner;
   let appTree: Tree;
 
@@ -82,7 +82,7 @@ fdescribe('simple-schematic', () => {
     const tree = runSetupSchematic();
     const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
 
-    expect(appModuleContent).toContain(`NbThemeModule.forRoot()`);
+    expect(appModuleContent).toContain(`NbThemeModule.forRoot({ name: 'default' })`);
   });
 
   it('should register NbThemeModule with specified theme', () => {
@@ -118,11 +118,20 @@ fdescribe('simple-schematic', () => {
 
   it('should create theme.scss and plug it into the project', () => {
     appTree = createTestWorkspace(runner, { style: 'scss' });
-    const tree = runSetupSchematic({ theme: 'cosmic' });
+    const tree = runSetupSchematic({ theme: 'cosmic', prebuiltStyles: false });
     const styles = tree.readContent('/projects/nebular/src/styles.scss');
-    const theme = tree.readContent('/projects/nebular/src/theme.scss');
+    const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
-    expect(styles).toContain(`@import '~@nebular/theme/styles/theming';
+    expect(styles).toContain(`@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+`);
+
+    expect(themes).toContain(`@import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/cosmic';
 
 $nb-themes: nb-register-theme((
@@ -131,18 +140,5 @@ $nb-themes: nb-register-theme((
 ), cosmic, cosmic);
 `);
 
-    expect(theme).toContain(`@import 'themes';
-
-@import '~@nebular/theme/styles/globals';
-
-@include nb-install() {
-  @include nb-theme-global();
-};
-`);
-  });
-
-  it('should throw if project built with css but we\'re injecting scss themes', () => {
-    expect(() => runSetupSchematic())
-      .toThrowError('No scss root found. Customizable theme requires scss to be enabled in the project.');
   });
 });

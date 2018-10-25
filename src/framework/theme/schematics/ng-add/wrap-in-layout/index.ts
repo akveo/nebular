@@ -7,17 +7,18 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
-import { getComponentTemplateDescriptor, TemplateDescriptor, writeText } from '../../util';
+
+import { getAppComponentPath, getComponentTemplateDescriptor, TemplateDescriptor, writeText } from '../../util';
 import { wrapHtmlFileTemplateInLayout, wrapInlineTemplateInLayout } from './layout-content';
+import { Schema } from '../schema';
 
 /**
  * Wraps `AppComponent` in `NbLayoutComponent`. It's required for correct
  * work of Nebular components.
  * */
-export function wrapRootComponentInLayout(): Rule {
+export function wrapRootComponentInLayout(options: Schema): Rule {
   return (tree: Tree) => {
-    // TODO root component path has to be found from bootstrapped module, not hardcoded
-    const componentPath: string = './src/app/app.component.ts';
+    const componentPath: string = getAppComponentPath(tree, options.project);
     const templateDescriptor: TemplateDescriptor = getComponentTemplateDescriptor(tree, componentPath);
 
     if (templateDescriptor.isInline()) {

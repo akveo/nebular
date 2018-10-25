@@ -10,6 +10,8 @@ import { Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
 
+import { getProject } from './project';
+
 
 export class TemplateDescriptor {
   constructor(public templateProp: ts.PropertyAssignment,
@@ -21,11 +23,6 @@ export class TemplateDescriptor {
   isInline(): boolean {
     return !!this.templateProp;
   }
-}
-
-interface TemplateInfo {
-  templateProp?: ts.PropertyAssignment,
-  templateUrlProp?: ts.PropertyAssignment,
 }
 
 export function getComponentTemplateDescriptor(host: Tree, componentPath: string): TemplateDescriptor {
@@ -47,7 +44,17 @@ export function getComponentTemplateDescriptor(host: Tree, componentPath: string
   );
 }
 
-export function getComponentTemplate(host: Tree, compPath: string, tmplInfo: TemplateInfo): string {
+export function getAppComponentPath(tree: Tree, projectName: string): string {
+  const project = getProject(tree, projectName);
+  return normalize(`${project.sourceRoot}/app/app.component.ts`);
+}
+
+interface TemplateInfo {
+  templateProp?: ts.PropertyAssignment,
+  templateUrlProp?: ts.PropertyAssignment,
+}
+
+function getComponentTemplate(host: Tree, compPath: string, tmplInfo: TemplateInfo): string {
   let template = '';
 
   if (tmplInfo.templateProp) {

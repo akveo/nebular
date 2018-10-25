@@ -11,6 +11,7 @@ import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
 import { Schema } from '../schema';
 import { getProject, isImportedInMainModule } from '../../util';
 import { appRoutingModuleContent } from './app-routing-module-content';
+import { normalize } from '@angular-devkit/core';
 
 
 export function registerModules(options: Schema): Rule {
@@ -60,7 +61,7 @@ function shouldRegisterRouter(tree: Tree, project: WorkspaceProject): boolean {
 
 function registerRoutingModule(tree: Tree, projectName: string) {
   registerAppRoutingModule(tree, projectName);
-  createAppRoutingModule(tree);
+  createAppRoutingModule(tree, projectName);
 }
 
 /**
@@ -68,8 +69,11 @@ function registerRoutingModule(tree: Tree, projectName: string) {
  * and customization. So, I don't think we have to use schematics
  * template files.
  * */
-function createAppRoutingModule(tree: Tree) {
-  tree.create('./src/app/app-routing.module.ts', appRoutingModuleContent);
+function createAppRoutingModule(tree: Tree, projectName: string) {
+  const project = getProject(tree, projectName);
+  const appRoutingModulePath = normalize(`${project.sourceRoot}/app/app-routing.module.ts`);
+
+  tree.create(appRoutingModulePath, appRoutingModuleContent);
 }
 
 function registerAppRoutingModule(tree: Tree, projectName: string) {
