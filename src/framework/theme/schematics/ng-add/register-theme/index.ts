@@ -20,25 +20,25 @@ import { Schema } from '../schema';
 export function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
     if (options.prebuiltStyles) {
-      insertPrebuiltTheme(host, options.theme);
+      insertPrebuiltTheme(host, options);
     } else {
-      importCustomizableTheme(host, options.theme);
+      importCustomizableTheme(host, options);
     }
 
     return host;
   }
 }
 
-function insertPrebuiltTheme(host: Tree, theme: string) {
+function insertPrebuiltTheme(host: Tree, options: Schema) {
   const workspace = getWorkspace(host);
   const project = getProjectFromWorkspace(workspace, options.project);
 
-  const themePath = `./node_modules/@nebular/theme/styles/prebuilt/${theme}.css`;
+  const themePath = `./node_modules/@nebular/theme/styles/prebuilt/${options.theme}.css`;
 
   addStyleToTarget(project, 'build', host, themePath, workspace);
 }
 
-function importCustomizableTheme(host: Tree, theme: string) {
+function importCustomizableTheme(host: Tree, options: Schema) {
   const workspace = getWorkspace(host);
   const project = getProjectFromWorkspace(workspace, options.project);
   const stylesPath: string = getProjectStyleFile(project, 'scss') as string;
