@@ -42,5 +42,5 @@ export function writeText(tree: Tree, fileName: string, content: string) {
  * Writes specified JSON to the given tree
  * */
 export function writeJSON(tree: Tree, fileName: string, content: any) {
-  writeText(tree, fileName, JSON.stringify(content));
+  writeText(tree, fileName, JSON.stringify(content, null, 2));
 }

@@ -8,7 +8,7 @@ import { chain, noop } from '@angular-devkit/schematics';
 
 import { Schema } from './schema';
 import { registerModules } from './register-modules';
-import { addNebularStyles } from './register-theme';
+import { registerCustomizableTheme, registerPrebuiltTheme } from './register-theme';
 import { wrapRootComponentInLayout } from './wrap-in-layout';
 
 
@@ -19,7 +19,7 @@ import { wrapRootComponentInLayout } from './wrap-in-layout';
 export default function (options: Schema) {
   return chain([
     registerModules(options),
-    addNebularStyles(options),
+    options.customization ? registerCustomizableTheme(options) : registerPrebuiltTheme(options),
     options.layout ? wrapRootComponentInLayout(options) : noop(),
   ]);
 }
