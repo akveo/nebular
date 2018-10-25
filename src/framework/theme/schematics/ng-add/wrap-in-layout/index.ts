@@ -7,8 +7,6 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
-
-import { Schema } from '../schema';
 import { getComponentTemplateDescriptor, TemplateDescriptor, writeText } from '../../util';
 import { wrapHtmlFileTemplateInLayout, wrapInlineTemplateInLayout } from './layout-content';
 
@@ -18,6 +16,7 @@ import { wrapHtmlFileTemplateInLayout, wrapInlineTemplateInLayout } from './layo
  * */
 export function wrapRootComponentInLayout(): Rule {
   return (tree: Tree) => {
+    // TODO root component path has to be found from bootstrapped module, not hardcoded
     const componentPath: string = './src/app/app.component.ts';
     const templateDescriptor: TemplateDescriptor = getComponentTemplateDescriptor(tree, componentPath);
 
