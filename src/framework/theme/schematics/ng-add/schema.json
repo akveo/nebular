@@ -12,7 +12,7 @@
       }
     },
     "theme": {
-      "type": "string",
+      "enum": ["cosmic", "default", "corporate"],
       "description": "The theme which will be installed.",
       "default": "default"
     },
@@ -23,8 +23,14 @@
     },
     "addLayout": {
       "type": "boolean",
-      "description": "Add layout",
+      "description": "Whether root component has to be wrapped in nb-layout or not.",
       "default": true
+    },
+    "animations": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Angular browser animations should be set up or not.",
+      "x-prompt": "Set up browser animations for Nebular?"
     }
   }
 }

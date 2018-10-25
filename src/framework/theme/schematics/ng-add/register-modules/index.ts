@@ -5,20 +5,50 @@
  */
 
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
-import { addModuleImportToRootModule } from '@angular/cdk/schematics';
+import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
 import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
+import { normalize } from '@angular-devkit/core';
+import { bold, red } from '@angular-devkit/core/src/terminal';
 
 import { Schema } from '../schema';
-import { getProject, isImportedInMainModule } from '../../util';
+import { getAppModulePath, getProject, isImportedInMainModule } from '../../util';
 import { appRoutingModuleContent } from './app-routing-module-content';
-import { normalize } from '@angular-devkit/core';
 
 
 export function registerModules(options: Schema): Rule {
   return chain([
+    registerAnimationsModule(options),
     registerNebularModules(options),
     registerRouterIfNeeded(options),
   ]);
+}
+
+function registerAnimationsModule(options: Schema) {
+  return (tree: Tree) => {
+    const project = getProject(tree, options.project);
+    const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
+    const browserAnimationsModuleName = 'BrowserAnimationsModule';
+    const noopAnimationsModuleName = 'NoopAnimationsModule';
+    const animationsPackage = '@angular/platform-browser/animations';
+
+    if (options.animations) {
+      // In case the project explicitly uses the NoopAnimationsModule, we should print a warning
+      // message that makes the user aware of the fact that we won't automatically set up
+      // animations. If we would add the BrowserAnimationsModule while the NoopAnimationsModule
+      // is already configured, we would cause unexpected behavior and runtime exceptions.
+      if (hasNgModuleImport(tree, appModulePath, noopAnimationsModuleName)) {
+        return console.warn(red(`Could not set up "${bold(browserAnimationsModuleName)}" ` +
+          `because "${bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
+          `set up browser animations.`));
+      }
+
+      addModuleImportToRootModule(tree, browserAnimationsModuleName, animationsPackage, project);
+    } else if (!hasNgModuleImport(tree, appModulePath, browserAnimationsModuleName)) {
+      // Do not add the NoopAnimationsModule module if the project already explicitly uses
+      // the BrowserAnimationsModule.
+      addModuleImportToRootModule(tree, noopAnimationsModuleName, animationsPackage, project);
+    }
+  }
 }
 
 function registerNebularModules(options: Schema): Rule {
