@@ -4,6 +4,23 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+const layoutStart = `<nb-layout>
+
+  <nb-layout-header fixed>
+  <!-- Insert header here -->
+  </nb-layout-header>
+
+  <nb-layout-column>
+`;
+
+const layoutEnd = `</nb-layout-column>
+
+  <nb-layout-footer fixed>
+  <!-- Insert footer here -->
+  </nb-layout-footer>
+
+</nb-layout>`;
+
 export function wrapInlineTemplateInLayout(template: string): string {
   return ` \`
     ${layoutStart}
@@ -28,20 +45,3 @@ function padd(text: string, paddLen: number): string {
     .map(line => `${' '.repeat(paddLen)}${line}`)
     .join('\n');
 }
-
-const layoutStart = `<nb-layout>
-
-  <nb-layout-header fixed>
-  <!-- Insert header here -->
-  </nb-layout-header>
-
-  <nb-layout-column>
-`;
-
-const layoutEnd = `</nb-layout-column>
-
-  <nb-layout-footer fixed>
-  <!-- Insert footer here -->
-  </nb-layout-footer>
-
-</nb-layout>`;
