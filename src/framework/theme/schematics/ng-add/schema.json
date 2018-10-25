@@ -17,13 +17,13 @@
       "default": "default",
       "x-prompt": "Which Nebular theme do you want to use:"
     },
-    "prebuiltStyles": {
+    "customization": {
       "type": "boolean",
       "description": "Use prebuilt css styles or import customizable scss.",
       "default": true,
-      "x-prompt": "Use prebuilt css?"
+      "x-prompt": "Use customizable scss themes?"
     },
-    "addLayout": {
+    "layout": {
       "type": "boolean",
       "description": "Whether root component has to be wrapped in nb-layout or not.",
       "default": true

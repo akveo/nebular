@@ -19,10 +19,10 @@ import { Schema } from '../schema';
  * */
 export function addNebularStyles(options: Schema): Rule {
   return (host: Tree) => {
-    if (options.prebuiltStyles) {
-      insertPrebuiltTheme(host, options);
-    } else {
+    if (options.customization) {
       importCustomizableTheme(host, options);
+    } else {
+      insertPrebuiltTheme(host, options);
     }
 
     return host;

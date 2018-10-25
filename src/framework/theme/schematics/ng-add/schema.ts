@@ -7,7 +7,7 @@
 export interface Schema {
   project: string;
   theme: 'cosmic' | 'default' | 'corporate';
-  prebuiltStyles: boolean;
-  addLayout: boolean;
+  customization: boolean;
+  layout: boolean;
   animations: boolean;
 }

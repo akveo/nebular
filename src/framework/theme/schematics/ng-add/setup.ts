@@ -20,6 +20,6 @@ export default function (options: Schema) {
   return chain([
     registerModules(options),
     addNebularStyles(options),
-    options.addLayout ? wrapRootComponentInLayout(options) : noop(),
+    options.layout ? wrapRootComponentInLayout(options) : noop(),
   ]);
 }

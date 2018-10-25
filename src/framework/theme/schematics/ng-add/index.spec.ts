@@ -26,7 +26,7 @@ const defaultAppOptions: ApplicationOptions = {
   inlineStyle: false,
   inlineTemplate: false,
   routing: false,
-  style: 'css',
+  style: 'scss',
   skipTests: false,
   skipPackageJson: false,
 };
@@ -108,7 +108,7 @@ describe('simple-schematic', () => {
   });
 
   it('should register inline theme if no theme already registered', () => {
-    const tree = runSetupSchematic({ prebuiltStyles: true, theme: 'cosmic' });
+    const tree = runSetupSchematic({ customization: false, theme: 'cosmic' });
     const workspace = getWorkspace(tree);
     const project = getProjectFromWorkspace(workspace);
     const styles = getProjectTargetOptions(project, 'build').styles;
@@ -118,7 +118,7 @@ describe('simple-schematic', () => {
 
   it('should create theme.scss and plug it into the project', () => {
     appTree = createTestWorkspace(runner, { style: 'scss' });
-    const tree = runSetupSchematic({ theme: 'cosmic', prebuiltStyles: false });
+    const tree = runSetupSchematic({ theme: 'cosmic', customization: true });
     const styles = tree.readContent('/projects/nebular/src/styles.scss');
     const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
