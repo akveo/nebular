@@ -42,7 +42,7 @@ function getPackageDependencies(tree: Tree): any {
   return packageJson.dependencies;
 }
 
-describe('simple-schematic', () => {
+describe('ng-add', () => {
   let runner: SchematicTestRunner;
   let appTree: Tree;
 
@@ -108,17 +108,17 @@ describe('simple-schematic', () => {
   });
 
   it('should register inline theme if no theme already registered', () => {
-    const tree = runSetupSchematic({ customization: false, theme: 'cosmic' });
+    const tree = runSetupSchematic({ customization: false });
     const workspace = getWorkspace(tree);
     const project = getProjectFromWorkspace(workspace);
     const styles = getProjectTargetOptions(project, 'build').styles;
 
-    expect(styles).toContain('./node_modules/@nebular/theme/styles/prebuilt/cosmic.css')
+    expect(styles).toContain('./node_modules/@nebular/theme/styles/prebuilt/default.css')
   });
 
   it('should create theme.scss and plug it into the project', () => {
     appTree = createTestWorkspace(runner, { style: 'scss' });
-    const tree = runSetupSchematic({ theme: 'cosmic', customization: true });
+    const tree = runSetupSchematic({ customization: true });
     const styles = tree.readContent('/projects/nebular/src/styles.scss');
     const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
@@ -132,14 +132,20 @@ describe('simple-schematic', () => {
 `);
 
     expect(themes).toContain(`@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/cosmic';
+@import '~@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
   // add your variables here like:
   // color-bg: #4ca6ff,
-), cosmic, cosmic);
+), default, default);
 `);
 
+  });
+
+  it('should throw error if adding scss themes in css project', () => {
+    appTree = createTestWorkspace(runner, { style: 'css' });
+
+    expect(() => runSetupSchematic({ customization: true })).toThrow();
   });
 
   it('should add the BrowserAnimationsModule to the project module', () => {
