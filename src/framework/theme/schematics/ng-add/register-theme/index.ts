@@ -47,7 +47,7 @@ function importCustomizableTheme(host: Tree, options: Schema) {
     throwSCSSRequiredForCustomizableThemes();
   }
 
-  const themeContent: string = createThemeContent(theme);
+  const themeContent: string = createThemeContent(options.theme);
 
   const customThemePath: Path = normalize(join((project.sourceRoot as Path), 'themes.scss'));
   host.create(customThemePath, themeContent);
