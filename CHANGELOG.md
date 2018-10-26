@@ -1,3 +1,25 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/akveo/nebular/compare/v2.0.1...v2.0.2) (2018-10-23)
+
+
+### Bug Fixes
+
+* **auth:** don't import child routes as it will rewrite the app routes ([#920](https://github.com/akveo/nebular/issues/920)) ([d054a73](https://github.com/akveo/nebular/commit/d054a73))
+* **auth:** don't import http module ([#919](https://github.com/akveo/nebular/issues/919)) ([995de58](https://github.com/akveo/nebular/commit/995de58)), closes [#631](https://github.com/akveo/nebular/issues/631)
+* **calendar:** show day in today's date ([#899](https://github.com/akveo/nebular/issues/899)) ([e023aa3](https://github.com/akveo/nebular/commit/e023aa3))
+* **checkbox:** hide check mark when unchecked and disabled ([#863](https://github.com/akveo/nebular/issues/863)) ([c7205d4](https://github.com/akveo/nebular/commit/c7205d4)), closes [#862](https://github.com/akveo/nebular/issues/862)
+* **docs:** fix dead links and code examples ([#905](https://github.com/akveo/nebular/issues/905)) ([d8307c9](https://github.com/akveo/nebular/commit/d8307c9))
+* **form controls:** mark as touched ([#864](https://github.com/akveo/nebular/issues/864)) ([e06d3a7](https://github.com/akveo/nebular/commit/e06d3a7))
+* **nbButton:** set disabled DOM property ([#871](https://github.com/akveo/nebular/issues/871)) ([23a709d](https://github.com/akveo/nebular/commit/23a709d))
+* **oauth2:**  grant_type now sends credentials in x-www-form-urlencoded form ([#832](https://github.com/akveo/nebular/issues/832)) ([57fda28](https://github.com/akveo/nebular/commit/57fda28)), closes [#716](https://github.com/akveo/nebular/issues/716)
+* **overlay:** fix click trigger ([#912](https://github.com/akveo/nebular/issues/912)) ([08c2eb6](https://github.com/akveo/nebular/commit/08c2eb6)), closes [#907](https://github.com/akveo/nebular/issues/907)
+* **select:** run change detection after setting initial value ([#898](https://github.com/akveo/nebular/issues/898)) ([5cf94f2](https://github.com/akveo/nebular/commit/5cf94f2))
+* **theme:** fix sidebar shadow styles for Safari ([#909](https://github.com/akveo/nebular/issues/909)) ([031b1e6](https://github.com/akveo/nebular/commit/031b1e6)), closes [#562](https://github.com/akveo/nebular/issues/562)
+* **theme:** remove a fixed content height ([#882](https://github.com/akveo/nebular/issues/882)) ([a85eaf2](https://github.com/akveo/nebular/commit/a85eaf2)), closes [#836](https://github.com/akveo/nebular/issues/836)
+* **tabset:** add style incapsulation for tabset components ([#911](https://github.com/akveo/nebular/issues/911)) ([33162af](https://github.com/akveo/nebular/commit/33162af)), closes [#561](https://github.com/akveo/nebular/issues/561)
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/akveo/nebular/compare/v2.0.0...v2.0.1) (2018-10-03)
 
