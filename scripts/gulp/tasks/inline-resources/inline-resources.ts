@@ -18,5 +18,6 @@ task('inline-resources', ['inline-schematics-resources'], () => {
 task('inline-schematics-resources', () => {
   src([
     `./src/framework/**/schematics/**/*.json`,
+    `./src/framework/**/package.json`,
   ]).pipe(dest(LIB_DIR));
 });

@@ -10,17 +10,32 @@ import { readJSON, writeJSON } from './file';
 const packageJsonName = 'package.json';
 
 interface PackageJson {
+  version: string;
   dependencies: { [key: string]: string },
+  peerDependencies: { [key: string]: string },
 }
 
 export function getNebularVersion(): string {
-  return require('../../package.json').version;
+  return getNebularPackageJson().version;
 }
 
 /**
- * Gets the version of the specified package by looking at the package.json in the specified tree
+ * Gets the version of the specified Nebular peerDependency
  * */
-export function getPackageVersionFromPackageJson(tree: Tree, packageName: string): string {
+export function getNebularPeerDependencyVersionFromPackageJson(packageName: string): string {
+  const packageJson: PackageJson = getNebularPackageJson();
+
+  if (noInfoAboutPeerDependency(packageJson, packageName)) {
+    throwNoPackageInfoInPackageJson(packageName);
+  }
+
+  return packageJson.peerDependencies[packageName];
+}
+
+/**
+ * Gets the version of the specified dependency by looking at the package.json in the specified tree
+ * */
+export function getDependencyVersionFromPackageJson(tree: Tree, packageName: string): string {
   if (!tree.exists(packageJsonName)) {
     throwNoPackageJsonError();
   }
@@ -62,17 +77,31 @@ function throwNoPackageInfoInPackageJson(packageName: string) {
 }
 
 /**
- * Validates packageJson has dependencies, also specified dependency exists.
+ * Validates packageJson has dependencies, also as specified dependency not exists.
  * */
 function noInfoAboutDependency(packageJson: PackageJson, packageName: string): boolean {
   return !dependencyAlreadyExists(packageJson, packageName);
 }
 
 /**
- * Validates packageJson has dependencies, also specified dependency exists.
+ * Validates packageJson has peerDependencies, also as specified peerDependency not exists.
+ * */
+function noInfoAboutPeerDependency(packageJson: PackageJson, packageName: string): boolean {
+  return !peerDependencyAlreadyExists(packageJson, packageName);
+}
+
+/**
+ * Validates packageJson has dependencies, also as specified dependency exists.
  * */
 function dependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
   return !!(packageJson.dependencies && packageJson.dependencies[packageName]);
+}
+
+/**
+ * Validates packageJson has peerDependencies, also as specified peerDependency exists.
+ * */
+function peerDependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
+  return !!(packageJson.peerDependencies && packageJson.peerDependencies[packageName]);
 }
 
 /**
@@ -81,4 +110,8 @@ function dependencyAlreadyExists(packageJson: PackageJson, packageName: string):
  */
 function sortObjectByKeys(obj: object) {
   return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, {});
+}
+
+function getNebularPackageJson(): PackageJson {
+  return require('../../package.json');
 }

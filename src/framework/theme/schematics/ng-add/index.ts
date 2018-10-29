@@ -8,7 +8,12 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 import { Schema } from './schema';
-import { addPackageToPackageJson, getNebularVersion, getPackageVersionFromPackageJson } from '../util';
+import {
+  addPackageToPackageJson,
+  getDependencyVersionFromPackageJson,
+  getNebularPeerDependencyVersionFromPackageJson,
+  getNebularVersion,
+} from '../util';
 
 
 /**
@@ -25,12 +30,14 @@ export default function (options: Schema): Rule {
  * Add required peer dependencies in package.json if needed.
  * */
 function registerPeerDependencies(host: Tree) {
-  const angularCoreVersion = getPackageVersionFromPackageJson(host, '@angular/core');
+  const angularCoreVersion = getDependencyVersionFromPackageJson(host, '@angular/core');
   const nebularThemeVersion = getNebularVersion();
+  const nebularIconsVersion = getNebularPeerDependencyVersionFromPackageJson('nebular-icons');
 
   addPackageToPackageJson(host, '@angular/cdk', angularCoreVersion);
   addPackageToPackageJson(host, '@angular/animations', angularCoreVersion);
   addPackageToPackageJson(host, '@nebular/theme', nebularThemeVersion);
+  addPackageToPackageJson(host, 'nebular-icons', nebularIconsVersion);
 }
 
 /**
