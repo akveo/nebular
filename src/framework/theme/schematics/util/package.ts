@@ -13,6 +13,10 @@ interface PackageJson {
   dependencies: { [key: string]: string },
 }
 
+export function getNebularVersion(): string {
+  return require('../../package.json').version;
+}
+
 /**
  * Gets the version of the specified package by looking at the package.json in the specified tree
  * */

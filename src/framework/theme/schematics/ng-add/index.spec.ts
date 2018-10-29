@@ -78,6 +78,15 @@ describe('ng-add', () => {
     expect(dependencies['@angular/animations']).toBe(angularCoreVersion);
   });
 
+  it('should add @nebular/theme in package.json', function () {
+    const tree = runNgAddSchematic();
+    const dependencies = getPackageDependencies(tree);
+    const nebularThemeVersion = require('../../package.json').version;
+
+    expect(dependencies['@nebular/theme']).toBeDefined();
+    expect(dependencies['@nebular/theme']).toBe(nebularThemeVersion);
+  });
+
   it('should register NbThemeModule.forRoot()', () => {
     const tree = runSetupSchematic();
     const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
