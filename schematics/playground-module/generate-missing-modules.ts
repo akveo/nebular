@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { join, Path, PathFragment, strings } from '@angular-devkit/core';
 import { apply, chain, filter, mergeWith, Rule, template, Tree, url } from '@angular-devkit/schematics';
 import { getPlaygroundDir } from '../utils';
