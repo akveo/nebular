@@ -21,7 +21,7 @@ export function generateMissingModules(tree: Tree): Rule {
 
 function fromTemplate(tree: Tree, path: Path, moduleName: PathFragment): Rule {
   const templateSource = apply(
-    url('./files/modules'),
+    url('./files/example'),
     [
       template({ ...strings, path, moduleName }),
       filter(filePath => !tree.exists(filePath)),
