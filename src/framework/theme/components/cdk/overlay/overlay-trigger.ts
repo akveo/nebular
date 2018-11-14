@@ -84,6 +84,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
+      filter(() => !this.container()),
       delay(100),
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
