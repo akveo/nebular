@@ -12,6 +12,7 @@ const packageJsonName = 'package.json';
 interface PackageJson {
   version: string;
   dependencies: { [key: string]: string },
+  devDependencies: { [key: string]: string },
   peerDependencies: { [key: string]: string },
 }
 
@@ -49,7 +50,7 @@ export function getDependencyVersionFromPackageJson(tree: Tree, packageName: str
   return packageJson.dependencies[packageName];
 }
 
-export function addPackageToPackageJson(tree: Tree, packageName: string, packageVersion: string) {
+export function addDependencyToPackageJson(tree: Tree, packageName: string, packageVersion: string) {
   if (!tree.exists(packageJsonName)) {
     throwNoPackageJsonError();
   }
@@ -63,6 +64,25 @@ export function addPackageToPackageJson(tree: Tree, packageName: string, package
   if (!packageJson.dependencies[packageName]) {
     packageJson.dependencies[packageName] = packageVersion;
     packageJson.dependencies = sortObjectByKeys(packageJson.dependencies);
+  }
+
+  writeJSON(tree, packageJsonName, packageJson);
+}
+
+export function addDevDependencyToPackageJson(tree: Tree, packageName: string, packageVersion: string) {
+  if (!tree.exists(packageJsonName)) {
+    throwNoPackageJsonError();
+  }
+
+  const packageJson: PackageJson = readJSON(tree, packageJsonName);
+
+  if (!packageJson.devDependencies) {
+    packageJson.devDependencies = {};
+  }
+
+  if (!packageJson.devDependencies[packageName]) {
+    packageJson.devDependencies[packageName] = packageVersion;
+    packageJson.devDependencies = sortObjectByKeys(packageJson.devDependencies);
   }
 
   writeJSON(tree, packageJsonName, packageJson);

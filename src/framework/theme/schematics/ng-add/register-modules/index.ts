@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { chain, Rule, Tree } from '@angular-devkit/schematics';
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
 import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
 import { normalize } from '@angular-devkit/core';
@@ -24,7 +24,7 @@ export function registerModules(options: Schema): Rule {
 }
 
 function registerAnimationsModule(options: Schema) {
-  return (tree: Tree) => {
+  return (tree: Tree, context: SchematicContext) => {
     const project = getProject(tree, options.project);
     const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
     const browserAnimationsModuleName = 'BrowserAnimationsModule';
@@ -37,7 +37,7 @@ function registerAnimationsModule(options: Schema) {
       // animations. If we would add the BrowserAnimationsModule while the NoopAnimationsModule
       // is already configured, we would cause unexpected behavior and runtime exceptions.
       if (hasNgModuleImport(tree, appModulePath, noopAnimationsModuleName)) {
-        return console.warn(red(`Could not set up "${bold(browserAnimationsModuleName)}" ` +
+        return context.logger.warn(red(`Could not set up "${bold(browserAnimationsModuleName)}" ` +
           `because "${bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
           `set up browser animations.`));
       }
@@ -82,7 +82,7 @@ function registerRouterIfNeeded(options: Schema): Rule {
  * */
 function shouldRegisterRouter(tree: Tree, project: WorkspaceProject): boolean {
   const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project,
-    'AppRoutingModule', './app-routing-module.ts');
+    'AppRoutingModule', './app-routing.module');
   const routerModuleAlreadyImported = isImportedInMainModule(tree, project,
     'RouterModule', '@angular/router');
 

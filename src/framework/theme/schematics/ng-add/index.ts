@@ -9,7 +9,8 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 
 import { Schema } from './schema';
 import {
-  addPackageToPackageJson,
+  addDependencyToPackageJson,
+  addDevDependencyToPackageJson,
   getDependencyVersionFromPackageJson,
   getNebularPeerDependencyVersionFromPackageJson,
   getNebularVersion,
@@ -34,11 +35,12 @@ function registerPeerDependencies(host: Tree) {
   const nebularThemeVersion = getNebularVersion();
   const nebularIconsVersion = getNebularPeerDependencyVersionFromPackageJson('nebular-icons');
 
-  addPackageToPackageJson(host, '@angular/cdk', angularCoreVersion);
-  addPackageToPackageJson(host, '@angular/animations', angularCoreVersion);
-  addPackageToPackageJson(host, '@schematics/angular', angularCoreVersion);
-  addPackageToPackageJson(host, '@nebular/theme', nebularThemeVersion);
-  addPackageToPackageJson(host, 'nebular-icons', nebularIconsVersion);
+  addDependencyToPackageJson(host, '@angular/cdk', angularCoreVersion);
+  addDependencyToPackageJson(host, '@angular/animations', angularCoreVersion);
+  addDependencyToPackageJson(host, '@nebular/theme', nebularThemeVersion);
+  addDependencyToPackageJson(host, 'nebular-icons', nebularIconsVersion);
+
+  addDevDependencyToPackageJson(host, '@schematics/angular', angularCoreVersion);
 }
 
 /**
