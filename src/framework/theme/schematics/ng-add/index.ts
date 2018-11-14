@@ -36,6 +36,7 @@ function registerPeerDependencies(host: Tree) {
 
   addPackageToPackageJson(host, '@angular/cdk', angularCoreVersion);
   addPackageToPackageJson(host, '@angular/animations', angularCoreVersion);
+  addPackageToPackageJson(host, '@schematics/angular', angularCoreVersion);
   addPackageToPackageJson(host, '@nebular/theme', nebularThemeVersion);
   addPackageToPackageJson(host, 'nebular-icons', nebularIconsVersion);
 }

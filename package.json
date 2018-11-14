@@ -117,6 +117,7 @@
     "@angular/cli": "7.0.2",
     "@angular/compiler-cli": "7.0.0",
     "@angular/language-service": "7.0.0",
+    "@schematics/angular": "^7.0.5",
     "@types/gulp": "3.8.36",
     "@types/highlight.js": "9.12.2",
     "@types/jasmine": "2.8.3",
