@@ -8,7 +8,7 @@ import {
   Component,
   ComponentFactoryResolver,
   ComponentRef,
-  DoCheck,
+  OnChanges,
   ElementRef,
   EventEmitter,
   Inject,
@@ -50,7 +50,7 @@ import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements DoCheck, OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, OnDestroy {
   /**
    * Datepicker date format.
    * */
@@ -196,7 +196,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements D
 
   protected abstract get pickerValueChange(): Observable<T>;
 
-  ngDoCheck() {
+  ngOnChanges() {
     if (this.dateService instanceof NbNativeDateService && this.format) {
       throw new Error('Can\'t format native date. To use custom formatting you have to use @nebular/moment or ' +
       '@nebular/date-fns date adapters. See "Formatting issue" at ' +
