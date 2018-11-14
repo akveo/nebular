@@ -1,73 +1,91 @@
-import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NB_WINDOW } from '@nebular/theme';
-import { takeWhile, filter, publish, refCount } from 'rxjs/operators';
-import { NgdTocElement, NgdTocStateService } from '../../services';
-import { delay } from 'rxjs/internal/operators';
+import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { timer } from 'rxjs';
+import { takeWhile, publish, refCount, filter, tap, debounce } from 'rxjs/operators';
+import { NB_WINDOW, NbLayoutScrollService } from '@nebular/theme';
+import { NgdVisibilityService } from '../../../@theme/services';
+
+const OBSERVER_OPTIONS = { rootMargin: `150px 0px -50% 0px` };
 
 @Directive({
-  // tslint:disable-next-line
   selector: '[ngdFragment]',
 })
-export class NgdFragmentTargetDirective implements OnInit, OnDestroy, NgdTocElement {
+export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
+
+  private readonly marginFromTop = 120;
+  private visible: boolean = false;
+  private isScrolling: boolean = false;
+  private alive = true;
+
   @Input() ngdFragment: string;
   @Input() ngdFragmentClass: string;
   @Input() ngdFragmentSync: boolean = true;
 
-  private inView = false;
-  private alive = true;
-  private readonly marginFromTop = 120;
-
-  get fragment(): string {
-    return this.ngdFragment;
-  }
-
-  get element(): any {
-    return this.el.nativeElement;
-  }
-
-  get y(): number {
-    return this.element.getBoundingClientRect().y;
-  }
-
   constructor(
     private activatedRoute: ActivatedRoute,
     @Inject(NB_WINDOW) private window,
-    private tocState: NgdTocStateService,
-    private el: ElementRef,
+    private el: ElementRef<HTMLElement>,
     private renderer: Renderer2,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId,
+    private visibilityService: NgdVisibilityService,
+    private scrollService: NbLayoutScrollService,
   ) {}
 
   ngOnInit() {
-    this.ngdFragmentSync && this.tocState.add(this);
-
     this.activatedRoute.fragment
-      .pipe(publish(null), refCount(), takeWhile(() => this.alive), delay(10))
+      .pipe(
+        publish(null),
+        refCount(),
+        takeWhile(() => this.alive),
+        filter(() => this.ngdFragmentSync),
+      )
       .subscribe((fragment: string) => {
-        if (fragment && this.fragment === fragment && !this.inView) {
+        if (fragment && this.ngdFragment === fragment) {
           this.selectFragment();
         } else {
           this.deselectFragment();
         }
       });
+
+    this.visibilityService.observe(this.el.nativeElement, OBSERVER_OPTIONS)
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(this.onVisibilityChange.bind(this));
+
+    this.scrollService.onScroll()
+      .pipe(
+        takeWhile(() => this.alive),
+        tap(() => this.isScrolling = true),
+        debounce(() => timer(100)),
+      )
+      .subscribe(() => this.isScrolling = false);
   }
 
   selectFragment() {
     this.ngdFragmentClass && this.renderer.addClass(this.el.nativeElement, this.ngdFragmentClass);
-    this.setInView(true);
-    this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
+
+    const shouldScroll = !this.visible || !this.isScrolling;
+    if (shouldScroll) {
+      this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
+    }
   }
 
   deselectFragment() {
     this.renderer.removeClass(this.el.nativeElement, this.ngdFragmentClass);
   }
 
-  setInView(val: boolean) {
-    this.inView = val;
+  onVisibilityChange(entry: IntersectionObserverEntry) {
+    this.visible = entry.isIntersecting;
+
+    const urlFragment = this.activatedRoute.snapshot.fragment;
+    const alreadyThere = urlFragment && urlFragment.includes(this.ngdFragment);
+    if (this.visible && !alreadyThere) {
+      this.router.navigate([], { fragment: this.ngdFragment, replaceUrl: true });
+    }
   }
 
   ngOnDestroy() {
     this.alive = false;
-    this.ngdFragmentSync && this.tocState.remove(this);
+    this.visibilityService.unobserve(this.el.nativeElement, OBSERVER_OPTIONS);
   }
 }
