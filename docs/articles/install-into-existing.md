@@ -15,40 +15,53 @@ In case you want to start based on our ngx-admin starter kit, please check out [
 
 ## Using Angular CLI
 
-<hr>
-
-### Installation
-
-We strongly recommend to develop Angular with @angular/cli, you can install it with the following command.
-
-```bash
-npm install -g @angular/cli
-```
-<hr>
-
-### Create a New Project
-
-A new project can be created using Angular CLI tools.
-
-```bash
-ng new PROJECT-NAME
-```
-<hr>
-
-### Install Nebular
-
 Nebular support init configuration with schematics. So, you may just add it to your project.
 
 ```bash
 ng add @nebular/theme
 ```
 
-That's it. Nebular has to be ready to go now.
+And that's it. Nebular has to be ready to go now.
+
+The ng-add schematic may be configured differently depends on your needs with the following parameters:
+
+- **theme**
+
+The theme you're going to use.
+
+available: default, cosmic and corporate
+
+default: default
+
+`ng add @nebular/theme --theme=cosmic`
+
+- **Customization**
+
+Use prebuilt css styles or import customizable scss.
+
+default: true
+
+`ng add @nebular/theme --customization=true`
+
+- **Layout**
+
+Whether root component has to be wrapped in nb-layout or not. Nebular requires root component to be wrapped in nb-layout, so, be sure you'll add the layout manually.
+
+default: true
+
+`ng add @nebular/theme --layout=true`
+
+- **Animations** 
+
+Whether Angular browser animations should be set up or not.
+
+default: true
+
+`ng add @nebular/theme --animations=true`
+
 <hr>
 
 ## Manually
-
-<hr>
 
 ### Installing dependencies
 
