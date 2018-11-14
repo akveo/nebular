@@ -8,6 +8,7 @@ import {
   Component,
   ComponentFactoryResolver,
   ComponentRef,
+  DoCheck,
   ElementRef,
   EventEmitter,
   Inject,
@@ -36,14 +37,20 @@ import { NbDatepickerContainerComponent } from './datepicker-container.component
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbDateService,
+  NbNativeDateService,
+} from '../calendar-kit';
 import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements DoCheck, OnDestroy {
   /**
    * Datepicker date format.
    * */
@@ -156,7 +163,9 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              protected cfr: ComponentFactoryResolver) {
+              protected cfr: ComponentFactoryResolver,
+              protected dateService: NbDateService<D>,
+  ) {
     super();
   }
 
@@ -186,6 +195,14 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected abstract get pickerValueChange(): Observable<T>;
+
+  ngDoCheck() {
+    if (this.dateService instanceof NbNativeDateService && this.format) {
+      throw new Error('Can\'t format native date. To use custom formatting you have to use @nebular/moment or ' +
+      '@nebular/date-fns date adapters. See "Formatting issue" at ' +
+      'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent for details.');
+    }
+  }
 
   ngOnDestroy() {
     this.alive = false;
