@@ -414,7 +414,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
           this.collapse();
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
         }
-        if (!isCollapsed && !isCollapsed && prev.width < current.width) {
+        if (!isCollapsed && !isCompacted && prev.width < current.width) {
           this.expand();
           this.fixed = false;
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
