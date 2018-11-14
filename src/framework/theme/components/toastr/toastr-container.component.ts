@@ -17,7 +17,10 @@ import { takeWhile } from 'rxjs/operators';
 const voidState = style({
   transform: 'translateX({{ direction }}110%)',
   height: 0,
-  margin: 0,
+  marginLeft: '0',
+  marginRight: '0',
+  marginTop: '0',
+  marginBottom: '0',
 });
 
 const defaultOptions = { params: { direction: '' } };

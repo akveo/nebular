@@ -17,6 +17,24 @@ npm i @nebular/auth
 ```
 <hr>
 
+## HttpClientModule
+
+Auth module utilizes features of `HttpClientModule` and since it should only be imported in the root module, please make sure you've done this:
+
+```ts
+import { HttpClientModule } from '@angular/common/http';
+
+// ...
+
+@NgModule({
+  imports: [
+    HttpClientModule
+  ],
+})
+export class AppModule {
+
+```
+
 ## Import
 
 Import the module and `NbPasswordAuthStrategy` strategy:

@@ -6,13 +6,13 @@
 
 @import '../../styles/core/mixins';
 
-ul {
+.route-tabset {
   display: flex;
   flex-direction: row;
   list-style-type: none;
   margin: 0;
 
-  li {
+  .route-tab {
     cursor: pointer;
     margin-bottom: -1px;
     text-align: center;
@@ -50,6 +50,6 @@ ul {
   }
 }
 
-:host.full-width ul {
+:host.full-width .route-tabset {
   justify-content: space-around;
 }

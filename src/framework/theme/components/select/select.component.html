@@ -9,7 +9,8 @@
   [outline]="outline"
   [class.opened]="isOpened"
   [ngClass]="overlayPosition"
-  (blur)="trySetTouched()">
+  (blur)="trySetTouched()"
+  type="button">
 
     <ng-container *ngIf="selectionModel?.length">
 

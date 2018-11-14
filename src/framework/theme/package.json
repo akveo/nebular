@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "@nebular/theme",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -29,7 +29,6 @@
     "@angular/core": "^7.0.0",
     "@angular/router": "^7.0.0",
     "@angular/cdk": "^7.0.0",
-    "@schematics/angular": "^7.0.0",
     "rxjs": "^6.3.0",
     "nebular-icons": "^1.1.0"
   },

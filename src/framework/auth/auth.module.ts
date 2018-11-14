@@ -2,7 +2,7 @@ import { Injector, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpRequest } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 
 import {
   NbAlertModule,
@@ -52,7 +52,6 @@ import { NbLogoutComponent } from './components/logout/logout.component';
 import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
 import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
-import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
@@ -93,9 +92,8 @@ export function nbNoOpInterceptorFilter(req: HttpRequest<any>): boolean {
     NbAlertModule,
     NbInputModule,
     NbButtonModule,
-    RouterModule.forChild(routes),
+    RouterModule,
     FormsModule,
-    HttpClientModule,
   ],
   declarations: [
     NbAuthComponent,
