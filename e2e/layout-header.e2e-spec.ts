@@ -17,23 +17,4 @@ describe('nb-layout-header', () => {
       expect(value).toBeDefined();
     });
   });
-
-  it('should stick fixed header', () => {
-    element(by.css('nb-layout-header[fixed]')).getCssValue('position').then(value => {
-      expect(value).toEqual('fixed');
-    });
-  });
-
-  it('should be flex', () => {
-    element(by.css('nb-layout-header nav')).getCssValue('display').then(value => {
-      expect(value).toEqual('flex');
-    });
-  });
-
-  it('should align items vertically', () => {
-    element(by.css('nb-layout-header nav')).getCssValue('justify-content').then(value => {
-      expect(value).toEqual('flex-start');
-    });
-  });
-
 });
