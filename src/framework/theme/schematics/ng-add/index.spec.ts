@@ -174,23 +174,6 @@ $nb-themes: nb-register-theme((
       'Expected the project app module to import the "BrowserAnimationsModule".');
   });
 
-  it('should not add BrowserAnimationsModule if NoopAnimationsModule is set up', () => {
-    const workspace = getWorkspace(appTree);
-    const project = getProjectFromWorkspace(workspace);
-
-    // Simulate the case where a developer uses `ng-add` on an Angular CLI project which already
-    // explicitly uses the `NoopAnimationsModule`. It would be wrong to forcibly enable browser
-    // animations without knowing what other components would be affected. In this case, we
-    // just print a warning message.
-    addModuleImportToRootModule(appTree, 'NoopAnimationsModule',
-      '@angular/platform-browser/animations', project);
-
-    spyOn(console, 'warn');
-    runSetupSchematic();
-
-    expect(console.warn).toHaveBeenCalled();
-  });
-
   it('should add the NoopAnimationsModule to the project module', () => {
     const tree = runSetupSchematic({ animations: false });
     const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
