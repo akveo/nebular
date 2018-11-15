@@ -13,7 +13,7 @@ const layoutStart = `<nb-layout>
   <nb-layout-column>
 `;
 
-const layoutEnd = `</nb-layout-column>
+const layoutEnd = `  </nb-layout-column>
 
   <nb-layout-footer fixed>
   <!-- Insert footer here -->
@@ -23,9 +23,9 @@ const layoutEnd = `</nb-layout-column>
 
 export function wrapInlineTemplateInLayout(template: string): string {
   return ` \`
-    ${layoutStart}
-${padd(template, 8)}
-    ${layoutEnd}
+${padd(layoutStart, 4)}
+${padd(template, 4)}
+${padd(layoutEnd, 4)}
 `;
 }
 
@@ -45,3 +45,4 @@ function padd(text: string, paddLen: number): string {
     .map(line => `${' '.repeat(paddLen)}${line}`)
     .join('\n');
 }
+
