@@ -1,3 +1,30 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/akveo/nebular/compare/v2.0.2...v3.0.0) (2018-11-15)
+
+
+### Bug Fixes
+
+* **overlay:** hover trigger stop fire show if container already exists ([#947](https://github.com/akveo/nebular/issues/947)) ([2988a4b](https://github.com/akveo/nebular/commit/2988a4b))
+* **schematics:** inline template indentation ([#988](https://github.com/akveo/nebular/issues/988)) ([31b7184](https://github.com/akveo/nebular/commit/31b7184))
+* **select:** add type button, stop form submitting ([#945](https://github.com/akveo/nebular/issues/945)) ([255fca9](https://github.com/akveo/nebular/commit/255fca9))
+* **sidebar:** expand if not compacted or collapsed ([#984](https://github.com/akveo/nebular/issues/984)) ([33a0990](https://github.com/akveo/nebular/commit/33a0990))
+* **theme:** provide component factory resolver in tooltip ([#981](https://github.com/akveo/nebular/issues/981)) ([57777f8](https://github.com/akveo/nebular/commit/57777f8)), closes [#979](https://github.com/akveo/nebular/issues/979)
+* **toastr:** animations in firefox and edge ([#944](https://github.com/akveo/nebular/issues/944)) ([27e4a6a](https://github.com/akveo/nebular/commit/27e4a6a)), closes [#865](https://github.com/akveo/nebular/issues/865)
+
+
+### Features
+
+* **datepicker:** throw error when setting format for native date ([#986](https://github.com/akveo/nebular/issues/986)) ([3e9df5d](https://github.com/akveo/nebular/commit/3e9df5d))
+* **docs:** add eva icons link in the footer ([#963](https://github.com/akveo/nebular/issues/963)) ([c230986](https://github.com/akveo/nebular/commit/c230986))
+* **theme:** ng-add schematic ([#942](https://github.com/akveo/nebular/issues/942)) ([5d5a874](https://github.com/akveo/nebular/commit/5d5a874))
+
+
+### BREAKING CHANGES
+
+* Angular 7+ now required.
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/akveo/nebular/compare/v2.0.1...v2.0.2) (2018-10-23)
 
