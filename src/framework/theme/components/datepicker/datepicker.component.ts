@@ -200,7 +200,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   ngOnChanges() {
     if (this.dateService instanceof NbNativeDateService && this.format) {
       throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
-      '@nebular/date-fns packages and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
+      '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
       'More information at "Formatting issue" ' +
       'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
     }
