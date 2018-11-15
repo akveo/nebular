@@ -30,7 +30,8 @@
   ],
   "exclude": [
     "./.ng_build/**/*.e2e.ts",
-    "./.ng_build/**/*.spec.ts"
+    "./.ng_build/**/*.spec.ts",
+    "./.ng_build/**/schematics/*"
   ],
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
