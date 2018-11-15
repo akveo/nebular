@@ -83,6 +83,9 @@
             "assets": [
               "src/assets",
               "src/favicon.ico"
+            ],
+            "exclude": [
+              "./src/framework/**/schematics/**/*"
             ]
           }
         },
@@ -94,7 +97,9 @@
               "src/tsconfig.spec.json",
               "scripts/gulp/tsconfig.json"
             ],
-            "exclude": []
+            "exclude": [
+              "node_modules/**"
+            ]
           }
         }
       }
