@@ -13,11 +13,48 @@ In case you want to start based on our ngx-admin starter kit, please check out [
 </div>
 <hr>
 
-## Installing dependencies
+## Using Angular CLI
+
+<hr>
+
+### Installation
+
+We strongly recommend to develop Angular with @angular/cli, you can install it with the following command.
+
+```bash
+npm install -g @angular/cli
+```
+<hr>
+
+### Create a New Project
+
+A new project can be created using Angular CLI tools.
+
+```bash
+ng new PROJECT-NAME
+```
+<hr>
+
+### Install Nebular
+
+Nebular support init configuration with schematics. So, you may just add it to your project.
+
+```bash
+ng add @nebular/theme
+```
+
+That's it. Nebular has to be ready to go now.
+<hr>
+
+## Manually
+
+<hr>
+
+### Installing dependencies
 
 At this step, we assume you already have Angular modules installed.
 
-## Install Nebular modules
+### Install Nebular modules
 
 ```bash
 npm install --save @nebular/theme @angular/cdk @angular/animations
@@ -25,7 +62,7 @@ npm install --save @nebular/theme @angular/cdk @angular/animations
 Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 <hr>
 
-## Configure Nebular
+### Configure Nebular
 
 At this stage you have everything in place, let's configure Nebular in the app module.
 
@@ -48,7 +85,7 @@ export class AppModule {
 Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](docs/auth/conceptsinstall) article).
 <hr>
 
-## Install Styles
+### Install Styles
 Now, let's import Nebular styles
 
 Include default Nebular theme CSS files into your `angular.json` file:
@@ -68,7 +105,7 @@ Include default Nebular theme CSS files into your `angular.json` file:
 </div>
 <hr>
 
-## Create a page
+### Create a page
 
 Now, let's create a simple Nebular page (header + sidebar) in your project. We suppose that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 

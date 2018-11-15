@@ -17,20 +17,4 @@ export default function badgeTests (badgesConfig) {
       expect(badgeEl.getText()).toEqual(badges[i].text);
     }
   });
-
-  it('should display badge with correct status', () => {
-    for (let i = 0; i < badges.length; i++) {
-      waitFor(selector(i));
-      const badgeEl = element(by.css(selector(i)));
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].status);
-    }
-  });
-
-  it('should display badge in correct position', () => {
-    for (let i = 0; i < badges.length; i++) {
-      waitFor(selector(i));
-      const badgeEl = element(by.css(selector(i)));
-      expect(badgeEl.getAttribute('class')).toContain(badges[i].position);
-    }
-  });
 }
