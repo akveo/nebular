@@ -71,10 +71,12 @@ describe('oauth2-auth-strategy', () => {
     error_uri: 'some',
   };
 
-  const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse, 'strategy') as NbAuthOAuth2Token;
-  // tslint:disable-next-line
-  const refreshedToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenPayload, 'strategy') as NbAuthOAuth2Token;
-  const refreshedTokenWithRefreshToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenResponse, 'strategy') as NbAuthOAuth2Token;
+  const successToken = nbAuthCreateToken(NbAuthOAuth2Token, tokenSuccessResponse,
+    'strategy') as NbAuthOAuth2Token;
+  const refreshedToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenPayload,
+    'strategy') as NbAuthOAuth2Token;
+  const refreshedTokenWithRefreshToken = nbAuthCreateToken(NbAuthOAuth2Token, refreshedTokenResponse,
+    'strategy') as NbAuthOAuth2Token;
 
   beforeEach(() => {
     windowMock = { location: { href: '' } };

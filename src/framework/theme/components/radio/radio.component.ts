@@ -34,7 +34,7 @@ import { convertToBoolProperty } from '../helpers';
  * Radio buttons should be wrapped in `nb-radio-group` to provide form bindings.
  *
  * ```html
- * <nb-radio-group [(ngModule)]="selectedOption">
+ * <nb-radio-group [(ngModel)]="selectedOption">
  *   <nb-radio>Option 1</nb-radio>
  *   <nb-radio>Option 2</nb-radio>
  *   <nb-radio>Option 3</nb-radio>
