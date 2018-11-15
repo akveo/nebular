@@ -153,6 +153,7 @@
     "karma-sauce-launcher": "1.2.0",
     "karma-spec-reporter": "0.0.32",
     "npm-run-all": "4.0.1",
+    "parse5": "^5.0.0",
     "protractor": "^5.3.2",
     "pump": "1.0.2",
     "rimraf": "2.6.1",

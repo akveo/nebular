@@ -7,8 +7,6 @@
 import { browser, element, by } from 'protractor';
 import { cardSizes as sizes } from './component-shared';
 
-const waitTime = 500;
-
 const cards = sizes.map((size, i) => ({ size, i }));
 
 describe('nb-flip-card', () => {
@@ -27,31 +25,6 @@ describe('nb-flip-card', () => {
       }
 
       it(`should show front card`, shouldShowFrontCard);
-
-      it(`should flip`, () => {
-        const flipCard = element.all(by.tagName('nb-flip-card')).get(c.i);
-        const frontCardFlipButton = flipCard.all(by.css('.flip-button')).first();
-
-        frontCardFlipButton.click().then(() => {
-          expect(flipCard.getAttribute('class')).toContain('flipped', 'flip card should be flipped');
-        });
-      });
-
-      it(`should flip again`, () => {
-        const flipCard = element.all(by.tagName('nb-flip-card')).get(c.i);
-        const frontCardFlipButton = flipCard.all(by.css('.front-container .flip-button')).first();
-        const backCardFlipButton = flipCard.all(by.css('.back-container .flip-button')).first();
-
-        frontCardFlipButton.click()
-          .then(() => {
-            browser.sleep(waitTime);
-            return backCardFlipButton.click()
-          })
-          .then(() => {
-            browser.sleep(waitTime);
-            shouldShowFrontCard();
-          });
-      });
     });
   });
 });

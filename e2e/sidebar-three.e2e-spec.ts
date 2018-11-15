@@ -17,10 +17,4 @@ describe('nb-sidebar-three', () => {
       expect(sidebarSize.width).toEqual(0);
     });
   });
-
-  it('should render sidebar compacted', () => {
-    element.all(by.css('nb-sidebar[state="compacted"]')).get(0).getSize().then(sidebarSize => {
-      expect(sidebarSize.width).toEqual(56);
-    });
-  });
 });
