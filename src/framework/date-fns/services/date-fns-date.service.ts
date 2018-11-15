@@ -10,7 +10,7 @@ import { NbNativeDateService } from '@nebular/theme';
 
 import * as dateFnsParse from 'date-fns/parse';
 // @ts-ignore
-import { default as rollupParse} from 'moment';
+import { default as rollupParse} from 'date-fns/parse';
 
 const parse = rollupParse || dateFnsParse;
 
