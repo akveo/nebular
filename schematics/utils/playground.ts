@@ -12,7 +12,7 @@ export const INCLUDE_DIRS: string[] = [ 'layout', 'no-layout' ];
 export const PREFIX = 'Nb';
 export const FEATURE_MODULE_FILE_POSTFIX = '.module.ts';
 export const ROUTING_MODULE_FILE_POSTFIX = '-routing.module.ts';
-export const COMPONENT_POSTFIX = '.component.ts';
+export const COMPONENT_FILE_POSTFIX = '.component.ts';
 
 type FileNamePredicate = (fileName: PathFragment) => boolean;
 
@@ -23,7 +23,7 @@ type FileNamePredicate = (fileName: PathFragment) => boolean;
  * use `getPlaygroundDirs` instead.
  * @param tree
  */
-function getPlaygroundDir(tree: Tree): DirEntry {
+function getPlaygroundRootDir(tree: Tree): DirEntry {
   return tree.getDir(PLAYGROUND_PATH);
 }
 
@@ -32,7 +32,7 @@ function getPlaygroundDir(tree: Tree): DirEntry {
  * @param tree
  */
 function getPlaygroundDirs(tree: Tree): DirEntry[] {
-  const pgDir = getPlaygroundDir(tree);
+  const pgDir = getPlaygroundRootDir(tree);
 
   return pgDir.subdirs
     .filter((dirName: PathFragment) => INCLUDE_DIRS.includes(dirName))
@@ -55,7 +55,7 @@ export function getModuleDirs(tree: Tree): DirEntry[] {
  * @param tree
  */
 export function getComponentsPaths(tree: Tree): Path[] {
-  return findPlaygroundFilesByPredicate(tree, f => f.endsWith(COMPONENT_POSTFIX));
+  return findPlaygroundFilesByPredicate(tree, f => f.endsWith(COMPONENT_FILE_POSTFIX));
 }
 
 /**
@@ -65,7 +65,7 @@ export function getComponentsPaths(tree: Tree): Path[] {
  */
 function findPlaygroundFilesByPredicate(tree: Tree, predicate: FileNamePredicate): Path[] {
   return getModuleDirs(tree)
-    .reduce((paths: Path[], dir: DirEntry) => paths.concat(findInDirAndSubDirs(dir, predicate)), []);
+    .reduce((paths: Path[], dir: DirEntry) => paths.concat(findInDirAndDown(dir, predicate)), []);
 }
 
 /**
@@ -73,11 +73,11 @@ function findPlaygroundFilesByPredicate(tree: Tree, predicate: FileNamePredicate
  * @param dir
  * @param predicate
  */
-function findInDirAndSubDirs(dir: DirEntry, predicate: FileNamePredicate): Path[] {
+function findInDirAndDown(dir: DirEntry, predicate: FileNamePredicate): Path[] {
   const paths = dir.subfiles.filter(predicate).map(fileName => join(dir.path, fileName));
 
   for (const subDir of dir.subdirs) {
-    paths.push(...findInDirAndSubDirs(dir.dir(subDir), predicate));
+    paths.push(...findInDirAndDown(dir.dir(subDir), predicate));
   }
 
   return paths;
@@ -119,7 +119,7 @@ export function generateRoutingModuleClassName(dashedName: string): string {
 }
 
 export function findComponentFeatureModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParent(tree, tree.getDir(dirPath), file => file.endsWith(FEATURE_MODULE_FILE_POSTFIX));
+  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(FEATURE_MODULE_FILE_POSTFIX));
   if (module == null) {
     throw new SchematicsException(`Can't find feature module in ${dirPath} and parent dirs.`);
   }
@@ -128,25 +128,24 @@ export function findComponentFeatureModule(tree: Tree, dirPath: Path): Path {
 }
 
 export function findComponentRoutingModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParent(tree, tree.getDir(dirPath), file => file.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(ROUTING_MODULE_FILE_POSTFIX));
   if (module == null) {
     throw new SchematicsException(`Can't find routing module in ${dirPath} and parent dirs.`);
   }
   return module;
 }
 
-function findInDirOrParent(tree: Tree, dir: DirEntry, predicate: FileNamePredicate): Path | null {
-  const moduleFile = dir.subfiles.find(predicate);
-  if (moduleFile) {
-    return join(dir.path, moduleFile);
-  }
-  if (isRoot(dir)) {
+function findInDirOrParentDir(dir: DirEntry, predicate: FileNamePredicate): Path | null {
+  if (isPlaygroundRoot(dir)) {
     return null;
   }
 
-  return findInDirOrParent(tree, dir.parent as DirEntry, predicate);
+  const moduleFile = dir.subfiles.find(predicate);
+  return moduleFile
+    ? join(dir.path, moduleFile)
+    : findInDirOrParentDir(dir.parent as DirEntry, predicate);
 }
 
-function isRoot(dir: DirEntry): boolean {
+function isPlaygroundRoot(dir: DirEntry): boolean {
   return dir.path === PLAYGROUND_PATH;
 }
