@@ -44,19 +44,6 @@ export function isNodeExported(node: ts.Declaration): boolean {
   );
 }
 
-export function hasPropertyInObject(
-  objectLiteral: ts.ObjectLiteralExpression,
-  propertyName: string,
-  value?: string,
-): boolean {
-  const skipValueCheck = !value;
-
-  return objectLiteral.properties
-    .filter(property => property.kind === ts.SyntaxKind.PropertyAssignment)
-    .filter(({ name }: ts.PropertyAssignment) => name.getText() === propertyName)
-    .some(({ initializer }: ts.PropertyAssignment) => skipValueCheck || initializer.getText() === value);
-}
-
 export function findDeclarationByIdentifier(source: ts.SourceFile, identifier: ts.Identifier): ts.VariableDeclaration {
   return getSourceNodes(source)
     .filter(node => node.kind === ts.SyntaxKind.VariableDeclaration)

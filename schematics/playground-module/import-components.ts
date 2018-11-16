@@ -5,46 +5,54 @@
  */
 
 import * as ts from 'typescript';
-import { basename, dirname, join, normalize, NormalizedSep, Path } from '@angular-devkit/core';
-import { SchematicsException, Tree } from '@angular-devkit/schematics';
+import { dirname, normalize, Path } from '@angular-devkit/core';
+import { SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
-import {
-  addDeclarationToModule, getDecoratorMetadata, insertImport,
-} from '@schematics/angular/utility/ast-utils';
+import { addDeclarationToModule, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 import {
-  fileNameWithoutExtension,
-  findRoutesArray,
+  addRoute,
+  generateComponentRoute,
+  generateImportPath,
   getAllComponentDeclarations,
-  getPlaygroundComponents,
-  hasPropertyInObject,
+  getComponentsPaths,
+  findComponentFeatureModule,
+  findComponentRoutingModule,
   multilineArrayLiteral,
-  parentDirName,
+  withoutExtension,
 } from '../utils';
 
-export function addComponentsToModules(tree: Tree): Tree {
-  const paths = getPlaygroundComponents(tree);
-
-  for (const path of paths) {
-    const dirPath = dirname(normalize(path));
-    const dirName = parentDirName(path);
-    const importPath = `.${NormalizedSep}${fileNameWithoutExtension(path)}`;
-
-    for (const declaration of getAllComponentDeclarations(tree, path)) {
-      const className = (declaration.name as ts.Identifier).getText();
-      const featureModulePath = join(dirPath, `${dirName}.module.ts`);
-      const routingModulePath = join(dirPath, `${dirName}-routing.module.ts`);
-
-      addToFeatureModule(tree, featureModulePath, className, importPath);
-      multilineDeclarations(tree, featureModulePath);
-      addToRoutingModule(tree, routingModulePath, className, importPath);
+export function addComponentsDeclarations(tree: Tree, context: SchematicContext): Tree {
+  for (const componentPath of getComponentsPaths(tree)) {
+    const declarations = getAllComponentDeclarations(tree, componentPath);
+    if (declarations.length === 0) {
+      continue;
     }
+
+    const className = (declarations[0].name as ts.Identifier).getText();
+    if (declarations.length > 1) {
+      context.logger.warn(
+        `Found more than one component declaration in file ${componentPath}. Using only first(${className}).`,
+      );
+    }
+
+    const dirPath = dirname(normalize(componentPath));
+    const featureModulePath = findComponentFeatureModule(tree, dirPath);
+    const routingModulePath = findComponentRoutingModule(tree, dirPath);
+    const importPathFeatureModule = generateImportPath(featureModulePath, componentPath);
+    const importPathRoutingModule = generateImportPath(routingModulePath, componentPath);
+    const baseFileName = withoutExtension(componentPath);
+    const route = generateComponentRoute(baseFileName, className);
+
+    addDeclaration(tree, featureModulePath, className, importPathFeatureModule);
+    multilineDeclarationsArray(tree, featureModulePath);
+    addRoute(tree, routingModulePath, route, className, importPathRoutingModule);
   }
 
   return tree;
 }
 
-function addToFeatureModule(tree: Tree, modulePath: Path, componentClass: string, importPath: string): void {
+function addDeclaration(tree: Tree, modulePath: Path, componentClass: string, importPath: string): void {
   const source = getSourceFile(tree, modulePath);
   const moduleDirPath = dirname(normalize(source.fileName));
 
@@ -56,7 +64,7 @@ function addToFeatureModule(tree: Tree, modulePath: Path, componentClass: string
   tree.commitUpdate(recorder);
 }
 
-function multilineDeclarations(tree: Tree, modulePath: Path): void {
+function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   const source = getSourceFile(tree, modulePath);
   const decoratorNode = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] as ts.ObjectLiteralExpression;
 
@@ -86,45 +94,5 @@ function multilineDeclarations(tree: Tree, modulePath: Path): void {
     recorder.remove(pos, oldText.length);
     recorder.insertLeft(pos, newText);
   });
-  tree.commitUpdate(recorder);
-}
-
-function addToRoutingModule(tree: Tree, modulePath: Path, componentClass: string, importPath: string): void {
-  const source = getSourceFile(tree, modulePath);
-  const routesArray = findRoutesArray(tree, modulePath);
-
-  const alreadyInRoutes = routesArray.elements
-    .filter(el => el.kind === ts.SyntaxKind.ObjectLiteralExpression)
-    .some((el: ts.ObjectLiteralExpression) => hasPropertyInObject(el, 'component', componentClass));
-
-  if (alreadyInRoutes) {
-    return;
-  }
-
-  let position: number;
-  let toRemove = '';
-  if (routesArray.elements.length === 0) {
-    position = routesArray.elements.pos;
-  } else {
-    const lastEl = routesArray.elements[routesArray.elements.length - 1];
-    position = lastEl.getEnd();
-    toRemove = source.getFullText().slice(position, routesArray.getEnd() - 1);
-  }
-
-  const toAdd = `${routesArray.elements.length > 0 ? ',' : ''}
-  {
-    path: '${basename(normalize(importPath))}',
-    component: ${componentClass},
-  },\n`;
-
-  const recorder = tree.beginUpdate(source.fileName);
-  if (toRemove.length > 0) {
-    recorder.remove(position, toRemove.length);
-  }
-  recorder.insertLeft(position, toAdd);
-  const importChange = insertImport(source, source.fileName, componentClass, importPath);
-  if (importChange instanceof InsertChange) {
-    recorder.insertLeft(importChange.pos, importChange.toAdd);
-  }
   tree.commitUpdate(recorder);
 }

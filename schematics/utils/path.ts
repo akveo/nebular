@@ -5,13 +5,21 @@
  */
 
 import { parse } from 'path';
-import { normalize, PathFragment, split } from '@angular-devkit/core';
+import { NormalizedSep, Path, relative, basename, dirname } from '@angular-devkit/core';
 
-export function fileNameWithoutExtension(filePath: string): string {
+export function withoutExtension(filePath: string): string {
   return parse(filePath).name;
 }
 
-export function parentDirName(path: string): PathFragment {
-  const { dir } = parse(path);
-  return split(normalize(dir)).pop() as PathFragment;
+export function generateCurrentDirImport(fileName: string): string {
+  return `.${NormalizedSep}${withoutExtension(fileName)}`;
+}
+
+/**
+ * Returns import string for the 'to' parameter relative to 'from' parameter. Both paths must be absolute.
+ * @param from path to file which should import 'to' file
+ * @param to path to file which should be imported
+ */
+export function generateImportPath(from: Path, to: Path): string {
+  return relative(dirname(from), dirname(to)) || generateCurrentDirImport(basename(to));
 }
