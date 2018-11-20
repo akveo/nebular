@@ -10,10 +10,10 @@ import {
   HostBinding,
   ViewChild,
   ElementRef,
-  AfterViewChecked,
   ContentChildren,
   QueryList, AfterViewInit,
 } from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 import { NbChatMessageComponent } from './chat-message.component';
 
 /**
@@ -143,7 +143,7 @@ import { NbChatMessageComponent } from './chat-message.component';
     </div>
   `,
 })
-export class NbChatComponent implements AfterViewChecked, AfterViewInit {
+export class NbChatComponent implements AfterViewInit {
 
   static readonly SIZE_XXSMALL = 'xxsmall';
   static readonly SIZE_XSMALL = 'xsmall';
@@ -164,6 +164,7 @@ export class NbChatComponent implements AfterViewChecked, AfterViewInit {
   size: string;
   status: string;
   accent: string;
+  scrollBottom: boolean = true;
 
   @Input() title: string;
 
@@ -262,15 +263,35 @@ export class NbChatComponent implements AfterViewChecked, AfterViewInit {
     this.status = val;
   }
 
+  /**
+   * Scroll chat to the bottom of the list when a new message arrives
+   * @param {boolean} val
+   */
+  @Input('scrollBottom')
+  private set setScrollBottom(val: boolean) {
+    this.scrollBottom = convertToBoolProperty(val);
+  }
+
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
 
-  ngAfterViewChecked() {
-    this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
-  }
-
   ngAfterViewInit() {
     this.messages.changes
-      .subscribe((messages) => this.messages = messages);
+      .subscribe((messages) => {
+        this.messages = messages;
+        this.updateView();
+      });
+
+    this.updateView();
+  }
+
+  updateView() {
+    if (this.scrollBottom) {
+      this.scrollListBottom();
+    }
+  }
+
+  scrollListBottom() {
+    this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
   }
 }
