@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds Nebular Theme to the application.",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json"
+    },
+    "setup": {
+      "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+      "private": true,
+      "factory": "./ng-add/setup",
+      "schema": "./ng-add/schema.json"
+    }
+  }
+}

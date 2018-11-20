@@ -94,7 +94,9 @@
               "src/tsconfig.spec.json",
               "scripts/gulp/tsconfig.json"
             ],
-            "exclude": []
+            "exclude": [
+              "node_modules/**"
+            ]
           }
         }
       }

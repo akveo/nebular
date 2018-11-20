@@ -91,7 +91,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   @Input('name')
-  set setName(name: string){
+  set setName(name: string) {
     this.name = name;
     this.updateNames();
   }

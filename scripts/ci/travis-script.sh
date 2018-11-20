@@ -51,6 +51,7 @@ elif [[ "${MODE}" =~ ^.*_(e2e)$ ]]; then
 elif [[ "${MODE}" =~ ^.*_(unit_test)$ ]]; then
   npm run ci:test
   npm install codecov -g && codecov
+  npm run test:schematics
 elif [[ "${MODE}" = docs ]]; then
   npm run ci:docs
 elif [[ "${MODE}" = deploy_dev ]]; then

@@ -101,7 +101,9 @@ describe('hover-trigger-strategy', () => {
   });
 
   it('should fire show$ when hover on host', done => {
-    const triggerStrategy = triggerStrategyBuilder.build();
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
     triggerStrategy.show$.subscribe(done);
     mouseEnter(host);
   });
