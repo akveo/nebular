@@ -4,11 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
+import { fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
 import { DirEntry, SchematicsException, Tree } from '@angular-devkit/schematics';
 
+const MODULES_WITH_LAYOUT_DIR = 'layout';
+const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
+const INCLUDE_DIRS: string[] = [ MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR ];
 export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
-export const INCLUDE_DIRS: string[] = [ 'layout', 'no-layout' ];
 export const PREFIX = 'Nb';
 export const FEATURE_MODULE_FILE_POSTFIX = '.module.ts';
 export const ROUTING_MODULE_FILE_POSTFIX = '-routing.module.ts';
@@ -93,15 +95,15 @@ export function getPlaygroundRoutingModule(): Path {
 /**
  * Returns dashed module file name.
  */
-export function generateFeatureModuleFileName(moduleName: string) {
-  return strings.dasherize(moduleName) + FEATURE_MODULE_FILE_POSTFIX;
+export function generateFeatureModuleFileName(moduleName: string): PathFragment {
+  return fragment(strings.dasherize(moduleName) + FEATURE_MODULE_FILE_POSTFIX);
 }
 
 /**
  * Returns dashed module file name.
  */
-export function generateRoutingModuleFileName(moduleName: string) {
-  return strings.dasherize(moduleName) + ROUTING_MODULE_FILE_POSTFIX;
+export function generateRoutingModuleFileName(moduleName: string): PathFragment {
+  return fragment(strings.dasherize(moduleName) + ROUTING_MODULE_FILE_POSTFIX);
 }
 
 /**
@@ -148,4 +150,8 @@ function findInDirOrParentDir(dir: DirEntry, predicate: FileNamePredicate): Path
 
 function isPlaygroundRoot(dir: DirEntry): boolean {
   return dir.path === PLAYGROUND_PATH;
+}
+
+export function isNoLayoutModule(modulePath: Path): boolean {
+  return modulePath.startsWith(join(PLAYGROUND_PATH, MODULES_WITHOUT_LAYOUT_DIR))
 }

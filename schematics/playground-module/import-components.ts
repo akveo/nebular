@@ -46,7 +46,7 @@ export function addComponentsDeclarations(tree: Tree, context: SchematicContext)
 
     addDeclaration(tree, featureModulePath, className, importPathFeatureModule);
     multilineDeclarationsArray(tree, featureModulePath);
-    addRoute(tree, routingModulePath, route, className, importPathRoutingModule);
+    addRoute(tree, routingModulePath, route, null, className, importPathRoutingModule);
   }
 
   return tree;

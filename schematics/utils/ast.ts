@@ -9,6 +9,7 @@ import { Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
 import { findNodes, getSourceNodes } from '@schematics/angular/utility/ast-utils';
+import { getNodeIndentation } from './formatting';
 
 export function getAllComponentDeclarations(tree: Tree, path: Path): ts.ClassDeclaration[] {
   return findNodes(getSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
@@ -30,11 +31,11 @@ export function hasComponentDecorator(classDeclaration: ts.ClassDeclaration): bo
   return classDeclaration.decorators
     .filter(d => d.expression.kind === ts.SyntaxKind.CallExpression)
     .map(d => (d.expression as ts.CallExpression).expression)
-    .some(decoratorFactoryCallExpression => decoratorFactoryCallExpression.getFullText() === 'Component');
+    .some(decoratorFactoryCall => decoratorFactoryCall.getFullText() === 'Component');
 }
 
 /**
- * True if this is visible outside this file, false otherwise
+ * True if node is visible outside this file, false otherwise
  * github.com/Microsoft/TypeScript-wiki/blob/d6867c43218212eff796dd971f54040234c2233a/Using-the-Compiler-API.md#L757
  * */
 export function isNodeExported(node: ts.Declaration): boolean {
@@ -48,4 +49,59 @@ export function findDeclarationByIdentifier(source: ts.SourceFile, identifier: t
   return getSourceNodes(source)
     .filter(node => node.kind === ts.SyntaxKind.VariableDeclaration)
     .find((node: ts.VariableDeclaration) => node.name.getText() === identifier.text) as ts.VariableDeclaration;
+}
+
+export function addObjectProperty(
+  tree: Tree,
+  source: ts.SourceFile,
+  node: ts.ObjectLiteralExpression,
+  property: string,
+) {
+  addNodeArrayElement(tree, source, node, property);
+}
+
+export function addArrayElement(
+  tree: Tree,
+  source: ts.SourceFile,
+  node: ts.ArrayLiteralExpression,
+  element: string,
+) {
+  addNodeArrayElement(tree, source, node, element);
+}
+
+function addNodeArrayElement(
+  tree: Tree,
+  source: ts.SourceFile,
+  node: ts.ObjectLiteralExpression | ts.ArrayLiteralExpression,
+  element: string,
+): void {
+  const elements = (node as ts.ObjectLiteralExpression).properties || (node as ts.ArrayLiteralExpression).elements;
+
+  const hasElements = elements.length > 0;
+  let insertPosition: number;
+  let toRemove = '';
+  if (hasElements) {
+    const lastEl = elements[elements.length - 1];
+    insertPosition = lastEl.getFullStart() + lastEl.getFullText().length;
+    toRemove = source.getFullText().slice(insertPosition, node.getEnd() - 1);
+  } else {
+    insertPosition = elements.pos;
+  }
+
+  const prevElementTrailingComma = hasElements ? ',' : '';
+  const nodeIndentation = ' '.repeat(getNodeIndentation(source.getFullText(), node));
+  const elementIndentation = nodeIndentation + '  ';
+  const indentedElement = elementIndentation + element.replace(/\n/gm, `\n${elementIndentation}`);
+  const closingBracketIndentation = nodeIndentation;
+
+  const toAdd = prevElementTrailingComma + '\n' +
+    indentedElement + ',\n' +
+    closingBracketIndentation;
+
+  const recorder = tree.beginUpdate(source.fileName);
+  if (toRemove.length) {
+    recorder.remove(insertPosition, toRemove.length);
+  }
+  recorder.insertLeft(insertPosition, toAdd);
+  tree.commitUpdate(recorder);
 }
