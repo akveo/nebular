@@ -133,6 +133,8 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+
+    this.triggerStrategy.destroy();
   }
 
   show() {

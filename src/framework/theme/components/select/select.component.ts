@@ -260,6 +260,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected ref: NbOverlayRef;
 
+  protected triggerStrategy: NbTriggerStrategy;
+
   protected alive: boolean = true;
 
   /**
@@ -319,6 +321,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   ngAfterViewInit() {
+    this.triggerStrategy = this.createTriggerStrategy();
+
     this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
     this.subscribeOnSelectionChange();
@@ -332,6 +336,9 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   ngOnDestroy() {
+    this.alive = false;
+
+    this.triggerStrategy.destroy();
     this.ref.dispose();
   }
 
@@ -460,19 +467,21 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.overlay.scrollStrategies.block();
   }
 
-  protected subscribeOnTriggers() {
-    const triggerStrategy: NbTriggerStrategy = new NbTriggerStrategyBuilder()
+  protected createTriggerStrategy(): NbTriggerStrategy {
+    return new NbTriggerStrategyBuilder()
       .document(this.document)
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
       .container(() => this.getContainer())
       .build();
+  }
 
-    triggerStrategy.show$
+  protected subscribeOnTriggers() {
+    this.triggerStrategy.show$
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.show());
 
-    triggerStrategy.hide$
+    this.triggerStrategy.hide$
       .pipe(takeWhile(() => this.alive))
       .subscribe(($event: Event) => {
         this.hide();
