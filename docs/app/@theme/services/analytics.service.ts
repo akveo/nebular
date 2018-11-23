@@ -25,20 +25,18 @@ export class NgdAnalytics {
         delay(50),
       )
         .subscribe((location: string) => {
-          ga('send', { hitType: 'pageview', page: location });
+          this.emitGaCallbackWhenLoaded(() => {
+            ga('send', { hitType: 'pageview', page: location });
+          });
         });
     }
   }
 
   trackEvent(eventName: string, eventVal: string = '') {
-    if (this.enabled && this.window.ga) {
-      ga('send', 'event', eventName, eventVal);
-    }
-
-    if (!this.window.ga) {
-      setTimeout(() => {
-        this.trackEvent(eventName, eventVal);
-      }, 500);
+    if (this.enabled) {
+      this.emitGaCallbackWhenLoaded(() => {
+        ga('send', 'event', eventName, eventVal);
+      });
     }
   }
 
@@ -50,5 +48,23 @@ export class NgdAnalytics {
       return !!path.match(/\/components\/components-overview\/?$/);
     }
     return true;
+  }
+
+  private gaIsLoaded() {
+    return this.window.ga;
+  }
+
+  /**
+   * Emit google analytics
+   * if it is loaded
+   */
+  private emitGaCallbackWhenLoaded(callback, timeout?: number) {
+    if (this.gaIsLoaded()) {
+      callback();
+    } else {
+      setTimeout(() => {
+        callback();
+      }, timeout || 500);
+    }
   }
 }
