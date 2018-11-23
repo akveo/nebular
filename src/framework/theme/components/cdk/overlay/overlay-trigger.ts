@@ -37,11 +37,11 @@ export abstract class NbTriggerStrategy {
     return this.container() && this.container().location.nativeElement.contains(target);
   }
 
-  protected isElementInBody(element: HTMLElement) {
+  protected isElementInBody(element: HTMLElement): boolean {
     return this.document.body.contains(element);
   }
 
-  protected isHostInBody() {
+  protected isHostInBody(): boolean {
     return this.isElementInBody(this.host);
   }
 
