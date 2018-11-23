@@ -338,7 +338,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   ngOnDestroy() {
     this.alive = false;
 
-    this.triggerStrategy.destroy();
     this.ref.dispose();
   }
 

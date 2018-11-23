@@ -153,7 +153,6 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
     this.hide();
-    this.triggerStrategy.destroy();
   }
 
   show() {

@@ -193,7 +193,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.alive = false;
 
     this.hide();
-    this.triggerStrategy.destroy();
     this.ref.dispose();
   }
 
