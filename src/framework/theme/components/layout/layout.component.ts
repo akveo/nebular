@@ -439,10 +439,11 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.scrollService
       .onScrollableChange()
+      .pipe(
+        filter(() => this.withScrollValue),
+      )
       .subscribe((scrollable: boolean) => {
-        if (this.withScrollValue) {
-          this.overlayScrollBlock = !scrollable;
-        }
+        this.overlayScrollBlock = !scrollable;
       });
 
     if (isPlatformBrowser(this.platformId)) {
