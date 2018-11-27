@@ -55,7 +55,7 @@ export class NgdStackedExampleComponent {
   }
 
   changeView(view: NgdExampleView) {
-    this.analytics.trackEvent('change-example-view', view);
+    this.analytics.trackEvent('changeExampleView', view);
     this.isLive = view === NgdExampleView.LIVE;
   }
 }

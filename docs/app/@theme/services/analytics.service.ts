@@ -25,18 +25,14 @@ export class NgdAnalytics {
         delay(50),
       )
         .subscribe((location: string) => {
-          this.emitGaCallbackWhenLoaded(() => {
-            ga('send', { hitType: 'pageview', page: location });
-          });
+          this.gtmPushToDataLayer({event: 'pageView' , path: location});
         });
     }
   }
 
   trackEvent(eventName: string, eventVal: string = '') {
     if (this.enabled) {
-      this.emitGaCallbackWhenLoaded(() => {
-        ga('send', 'event', eventName, eventVal);
-      });
+      this.gtmPushToDataLayer({ event: eventName, eventValue: eventVal });
     }
   }
 
@@ -50,21 +46,7 @@ export class NgdAnalytics {
     return true;
   }
 
-  private gaIsLoaded() {
-    return this.window.ga;
-  }
-
-  /**
-   * Emit google analytics
-   * if it is loaded
-   */
-  private emitGaCallbackWhenLoaded(callback, timeout?: number) {
-    if (this.gaIsLoaded()) {
-      callback();
-    } else {
-      setTimeout(() => {
-        callback();
-      }, timeout || 500);
-    }
+  private gtmPushToDataLayer(params) {
+    this.window.dataLayer.push(params);
   }
 }
