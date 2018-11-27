@@ -44,6 +44,8 @@ export abstract class NbPositionedContainer {
   `,
 })
 export class NbOverlayContainerComponent {
+  isAttached: boolean = false;
+
   content: string;
 
   constructor(protected vcr: ViewContainerRef, protected injector: Injector) {
@@ -56,15 +58,20 @@ export class NbOverlayContainerComponent {
   attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
     const factory = portal.cfr.resolveComponentFactory(portal.component);
     const injector = this.createChildInjector(portal.cfr);
-    return this.vcr.createComponent(factory, null, injector);
+    const componentRef = this.vcr.createComponent(factory, null, injector);
+    this.isAttached = true;
+    return componentRef;
   }
 
   attachTemplatePortal<C>(portal: NbTemplatePortal<C>): EmbeddedViewRef<C> {
-    return this.vcr.createEmbeddedView(portal.templateRef, portal.context);
+    const embeddedView = this.vcr.createEmbeddedView(portal.templateRef, portal.context);
+    this.isAttached = true;
+    return embeddedView;
   }
 
   attachStringContent(content: string) {
     this.content = content;
+    this.isAttached = true;
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
