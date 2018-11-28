@@ -25,14 +25,14 @@ export class NgdAnalytics {
         delay(50),
       )
         .subscribe((location: string) => {
-          ga('send', { hitType: 'pageview', page: location });
+          this.gtmPushToDataLayer({event: 'pageView' , path: location});
         });
     }
   }
 
   trackEvent(eventName: string, eventVal: string = '') {
     if (this.enabled) {
-      ga('send', 'event', eventName, eventVal);
+      this.gtmPushToDataLayer({ event: eventName, eventValue: eventVal });
     }
   }
 
@@ -44,5 +44,9 @@ export class NgdAnalytics {
       return !!path.match(/\/components\/components-overview\/?$/);
     }
     return true;
+  }
+
+  private gtmPushToDataLayer(params) {
+    this.window.dataLayer.push(params);
   }
 }
