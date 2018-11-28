@@ -95,7 +95,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   switchTheme(theme: string) {
-    this.analytics.trackEvent('change-theme', theme);
+    this.analytics.trackEvent('changeTheme', theme);
     this.communicator.send({ id: this.content.id, theme }, this.iframeWindow);
   }
 
