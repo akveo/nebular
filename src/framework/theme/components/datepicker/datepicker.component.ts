@@ -218,13 +218,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   attach(hostRef: ElementRef) {
     this.hostRef = hostRef;
-
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.subscribeOnPositionChange();
     this.subscribeOnTriggers();
   }
 
@@ -233,11 +226,11 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
-    this.instantiatePicker();
-    this.subscribeOnValueChange();
-    this.writeQueue();
-    this.patchWithInputs();
+    if (!this.ref) {
+      this.createOverlay();
+    }
+
+    this.openDatepicker();
   }
 
   shouldHide(): boolean {
@@ -256,6 +249,23 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected abstract writeQueue();
+
+  protected createOverlay() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+    this.subscribeOnPositionChange();
+  }
+
+  protected openDatepicker() {
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
+    this.instantiatePicker();
+    this.subscribeOnValueChange();
+    this.writeQueue();
+    this.patchWithInputs();
+  }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
