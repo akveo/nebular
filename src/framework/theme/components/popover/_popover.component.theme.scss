@@ -7,7 +7,6 @@
 @mixin nb-popover-theme {
   nb-popover {
     $arrow-size: nb-theme(popover-arrow-size);
-    $arrow-content-size: calc(#{$arrow-size} - 2px);
 
     border: 2px solid nb-theme(popover-border);
     border-radius: nb-theme(popover-border-radius);
@@ -23,17 +22,17 @@
       border-right: $arrow-size solid transparent;
       border-bottom: $arrow-size solid nb-theme(popover-border);
 
-
       &::after {
         position: absolute;
         content: ' ';
         width: 0;
         height: 0;
         top: 3px;
-        left: calc(50% - #{$arrow-content-size});
-        border-left: $arrow-content-size solid transparent;
-        border-right: $arrow-content-size solid transparent;
-        border-bottom: $arrow-content-size solid nb-theme(popover-bg);
+        left: calc(50% - #{$arrow-size});
+        border-left: $arrow-size solid transparent;
+        border-right: $arrow-size solid transparent;
+        border-bottom: $arrow-size solid nb-theme(popover-bg);
+        clip-path: inset(0 0 2px);
       }
     }
 
