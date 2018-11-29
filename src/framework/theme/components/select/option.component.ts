@@ -15,6 +15,7 @@ import {
   HostListener,
   Inject,
   Input,
+  OnDestroy,
   Output,
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
@@ -39,7 +40,7 @@ import { NbSelectComponent } from './select.component';
     </ng-template>
   `,
 })
-export class NbOptionComponent<T> {
+export class NbOptionComponent<T> implements OnDestroy {
   /**
    * Option value that will be fired on selection.
    * */
@@ -57,10 +58,15 @@ export class NbOptionComponent<T> {
 
   selected: boolean = false;
   disabled: boolean = false;
+  private alive: boolean = true;
 
   constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
               protected elementRef: ElementRef,
               protected cd: ChangeDetectorRef) {
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   /**
@@ -100,6 +106,14 @@ export class NbOptionComponent<T> {
   }
 
   deselect() {
+    /**
+     * In case of changing options in runtime the reference to the selected option will be kept in select component.
+     * This may lead to exceptions with detecting changes in destroyed component.
+     * */
+    if (!this.alive) {
+      return;
+    }
+
     this.selected = false;
     this.cd.markForCheck();
     this.cd.detectChanges();
