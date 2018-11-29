@@ -135,6 +135,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
 
+  protected triggerStrategy: NbTriggerStrategy;
+
   /**
    * HTML input reference to which datepicker connected.
    * */
@@ -208,6 +210,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   ngOnDestroy() {
     this.alive = false;
+
     this.hide();
     this.ref.dispose();
   }
@@ -220,10 +223,12 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.hostRef = hostRef;
 
     this.positionStrategy = this.createPositionStrategy();
+    this.triggerStrategy = this.createTriggerStrategy();
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
+
     this.subscribeOnPositionChange();
     this.subscribeOnTriggers();
   }
@@ -280,9 +285,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
+    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
       this.blur$.next();
       this.hide();
     });

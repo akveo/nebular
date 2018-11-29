@@ -37,6 +37,14 @@ export abstract class NbTriggerStrategy {
     return this.container() && this.container().location.nativeElement.contains(target);
   }
 
+  protected isElementInBody(element: HTMLElement): boolean {
+    return this.document.body.contains(element);
+  }
+
+  protected isHostInBody(): boolean {
+    return this.isElementInBody(this.host);
+  }
+
   abstract show$: Observable<Event>;
   abstract hide$: Observable<Event>;
 
@@ -58,18 +66,21 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
   // and then hidden right away
   protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
       share(),
     );
 
   readonly show$: Observable<Event> = this.click$
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(([shouldShow]) => shouldShow),
       map(([, event]) => event),
     );
 
   readonly hide$: Observable<Event> = this.click$
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
       map(([, event]) => event),
     );
@@ -84,6 +95,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(() => !this.container()),
       delay(100),
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
@@ -92,8 +104,10 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
         .pipe(
+          takeWhile(() => this.isHostInBody()),
           debounceTime(100),
           takeWhile(() => !!this.container()),
           filter(event => this.isNotOnHostOrContainer(event),
@@ -111,6 +125,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
 export class NbHintTriggerStrategy extends NbTriggerStrategy {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       delay(100),
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
@@ -131,6 +146,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategy {
 
   protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       switchMap(() => observableFromEvent<Event>(this.document, 'focusin')
         .pipe(
           takeWhile(() => !!this.container()),
@@ -141,30 +157,35 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategy {
 
   protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(() => !this.container()),
     );
 
   protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(() => !!this.container()),
       filter(event => this.isNotOnHostOrContainer(event)),
     );
 
   protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter((event: KeyboardEvent) => event.keyCode === 9),
       filter(() => !!this.container()),
     );
 
   show$: Observable<Event> = observableMerge(observableFromEvent<Event>(this.host, 'focusin'), this.clickIn$)
     .pipe(
+      takeWhile(() => this.isHostInBody()),
       filter(() => !this.container()),
       debounceTime(100),
       takeUntil(observableFromEvent(this.host, 'focusout')),
       repeat(),
     );
 
-  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$);
+  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
+    .pipe(takeWhile(() => this.isHostInBody()));
 }
 
 export class NbTriggerStrategyBuilder {
