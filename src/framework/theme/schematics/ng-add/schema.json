@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ng-add",
+  "title": "Nebular Theme ng-add schematics",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "theme": {
+      "enum": ["default", "cosmic", "corporate"],
+      "description": "The theme which will be installed.",
+      "default": "default",
+      "x-prompt": "Which Nebular theme do you want to use:"
+    },
+    "customization": {
+      "type": "boolean",
+      "description": "Use prebuilt css styles or import customizable scss.",
+      "default": true,
+      "x-prompt": "Use customizable scss themes?"
+    },
+    "layout": {
+      "type": "boolean",
+      "description": "Whether root component has to be wrapped in nb-layout or not.",
+      "default": true
+    },
+    "animations": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Angular browser animations should be set up or not.",
+      "x-prompt": "Set up browser animations for Nebular?"
+    }
+  }
+}

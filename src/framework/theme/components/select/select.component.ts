@@ -26,7 +26,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { take, takeWhile } from 'rxjs/operators';
-import { defer, merge, Observable } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -35,7 +35,8 @@ import {
   NbOverlayService,
   NbPortalDirective,
   NbPosition,
-  NbPositionBuilderService, NbScrollStrategy,
+  NbPositionBuilderService,
+  NbScrollStrategy,
   NbTrigger,
   NbTriggerStrategy,
   NbTriggerStrategyBuilder,
@@ -254,9 +255,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   /**
    * Stream of events that will fire when one of the options fire selectionChange event.
    * */
-  selectionChange: Observable<NbOptionComponent<T>> = defer(() => {
-    return merge(...this.options.map(it => it.selectionChange));
-  });
+  protected selectionChange$: Subject<NbOptionComponent<T>> = new Subject();
+  readonly selectionChange: Observable<NbOptionComponent<T>> = this.selectionChange$.asObservable();
 
   protected ref: NbOverlayRef;
 
@@ -501,6 +501,15 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   protected subscribeOnSelectionChange() {
+    this.subscribeOnOptionsSelectionChange();
+    /**
+     * If the user changes provided options list in the runtime we have to handle this
+     * and resubscribe on options selection changes event.
+     * Otherwise, the user will not be able to select new options.
+     * */
+    this.options.changes
+      .subscribe(() => this.subscribeOnOptionsSelectionChange());
+
     this.selectionChange
       .pipe(takeWhile(() => this.alive))
       .subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
@@ -577,5 +586,11 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
+  }
+
+  protected subscribeOnOptionsSelectionChange() {
+    merge(...this.options.map(it => it.selectionChange))
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((change: NbOptionComponent<T>) => this.selectionChange$.next(change));
   }
 }

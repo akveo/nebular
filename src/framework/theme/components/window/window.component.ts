@@ -7,7 +7,11 @@ import {
   OnInit,
   TemplateRef,
   Renderer2,
-  ViewChild, AfterViewInit, Type, ComponentFactoryResolver, Input,
+  ViewChild,
+  Type,
+  ComponentFactoryResolver,
+  Input,
+  AfterViewChecked,
 } from '@angular/core';
 import {
   NbComponentPortal,
@@ -49,7 +53,7 @@ import { NbWindowRef } from './window-ref';
   `,
   styleUrls: ['./window.component.scss'],
 })
-export class NbWindowComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   @Input() cfr: ComponentFactoryResolver;
 
   @HostBinding('class.full-screen')
@@ -91,7 +95,11 @@ export class NbWindowComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
+    if (!this.overlayContainer || this.overlayContainer.isAttached) {
+      return;
+    }
+
     if (this.content instanceof TemplateRef) {
       this.attachTemplate();
     } else {
