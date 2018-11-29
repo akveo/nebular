@@ -24,7 +24,7 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.setupId();
     this.subscribeOnThemeSwitch();
-    this.analytics.trackEvent('example-view', this.id);
+    this.analytics.trackEvent('initExampleView', this.id);
   }
 
   ngAfterViewInit() {
