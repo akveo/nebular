@@ -35,6 +35,7 @@ export class NbLayoutScrollService {
   private scrollPositionReq$ = new Subject<any>();
   private manualScroll$ = new Subject<NbScrollPosition>();
   private scroll$ = new Subject<any>();
+  private scrollable$ = new Subject<boolean>();
 
   /**
    * Returns scroll position
@@ -86,11 +87,19 @@ export class NbLayoutScrollService {
     return this.scrollPositionReq$;
   }
 
+  onScrollableChange(): Observable<boolean> {
+    return this.scrollable$.pipe(share());
+  }
+
   /**
    * @private
    * @param {any} event
    */
   fireScrollChange(event: any) {
     this.scroll$.next(event);
+  }
+
+  scrollable(scrollable: boolean) {
+    this.scrollable$.next(scrollable);
   }
 }

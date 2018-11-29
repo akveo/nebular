@@ -48,6 +48,10 @@
     }
   }
 
+  nb-layout.overlay-scroll-block .scrollable-container {
+    overflow: hidden;
+  }
+
   .layout {
     // TODO: check this prop name
     min-width: nb-theme(layout-window-mode-min-width);

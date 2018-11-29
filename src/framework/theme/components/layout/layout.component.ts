@@ -297,6 +297,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
   @HostBinding('class.with-subheader') withSubheader: boolean = false;
+  @HostBinding('class.overlay-scroll-block') overlayScrollBlock: boolean = false;
 
   /**
    * Defines whether the layout columns will be centered after some width
@@ -434,6 +435,15 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       )
       .subscribe(() => {
         this.scroll(0, 0);
+      });
+
+    this.scrollService
+      .onScrollableChange()
+      .pipe(
+        filter(() => this.withScrollValue),
+      )
+      .subscribe((scrollable: boolean) => {
+        this.overlayScrollBlock = !scrollable;
       });
 
     if (isPlatformBrowser(this.platformId)) {
