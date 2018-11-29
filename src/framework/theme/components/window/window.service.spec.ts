@@ -183,4 +183,24 @@ describe('window-service', () => {
     firstWindow.componentRef.changeDetectorRef.detectChanges();
     expect(queryBackdrop().hasAttribute('hidden')).toBeFalsy();
   });
+
+  it(`shouldn't render window content when minimized`, function() {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    windowRef.minimize();
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+
+    const windowElement: HTMLElement = windowRef.componentRef.location.nativeElement;
+    expect(windowElement.querySelector('nb-card-body')).toBeNull();
+  });
+
+  it(`should render window content when unminimized`, function() {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    windowRef.minimize();
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    windowRef.maximize();
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+
+    const windowElement: HTMLElement = windowRef.componentRef.location.nativeElement;
+    expect(windowElement.querySelector('nb-card-body')).not.toBeNull();
+  });
 });
