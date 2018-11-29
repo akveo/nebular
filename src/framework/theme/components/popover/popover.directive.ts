@@ -173,7 +173,10 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
     this.container = null;
   }
 
