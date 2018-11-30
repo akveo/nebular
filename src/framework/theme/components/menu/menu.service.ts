@@ -362,8 +362,18 @@ export class NbMenuInternalService {
 
   private isSelectedInUrl(item: NbMenuItem): boolean {
     const exact: boolean = item.pathMatch === 'full';
+    let link: string = item.link;
+
+    /**
+     * By default, `item.link` doesn't contain a fragment. But `this.location.path()` does.
+     * And when we're going to compare them we have to append fragment to the link.
+     * */
+    if (item.fragment) {
+      link += `#${item.fragment}`;
+    }
+
     return exact
-      ? isUrlPathEqual(this.location.path(), item.link)
-      : isUrlPathContain(this.location.path(), item.link);
+      ? isUrlPathEqual(this.location.path(), link)
+      : isUrlPathContain(this.location.path(), link);
   }
 }
