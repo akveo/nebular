@@ -25,6 +25,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Professional Services',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'professional-services.md',
+          },
+        ],
+      },
     ],
   },
   {
