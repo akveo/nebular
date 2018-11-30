@@ -22,6 +22,7 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/portal': 'ng.cdk.portal',
   '@angular/cdk/a11y': 'ng.cdk.a11y',
   '@angular/cdk/bidi': 'ng.cdk.bidi',
+  '@angular/cdk/scrolling': 'ng.cdk.scrolling',
 
 
   // RxJS dependencies
