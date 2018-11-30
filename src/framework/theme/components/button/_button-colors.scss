@@ -112,7 +112,6 @@
 @mixin btn-outline-focus($focus) {
   &:focus,
   &.focus {
-    color: nb-theme(btn-outline-hover-fg);
     border-color: $focus;
     box-shadow: none;
   }
