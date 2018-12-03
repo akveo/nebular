@@ -2,7 +2,7 @@
 Evolve your products and apps to expand your markets. Nebular Services are set to help speed up the evolution of your business. 
 The Nebular team is ready to bring you their expertise with following services.
 
-### Components customization
+### Theme customization
 Let Akveo’s experts help you get more out of your Nebular experience. Modify, extend, and tailor Nebular components and controls to fit your needs. Our developers know the products inside and out, so there's no need to spend hours searching for a solution. We create themes, modules, and components to match your company branding.
 
 ### Custom development
@@ -20,7 +20,7 @@ Sometimes effective troubleshooters are hard to come by. And sometimes, a little
 
 <hr>
 ## Support
-The mission of the Akveo support team is to help you to solve technical challenges,use best practices with Nebular, and employ the most effective programming techniques for your project. If you need an extra boost, we can quickly become an extension of your team, ensuring your business has all the strategic support it needs. Our Nebular Support Service offers a number of solutions to meet your support level and needs:
+The mission of the Akveo support team is to help you to solve technical challenges, use best practices with Nebular, and employ the most effective programming techniques for your project. If you need an extra boost, we can quickly become an extension of your team, ensuring your business has all the strategic support it needs. Our Nebular Support Service offers a number of solutions to meet your support level and needs:
 - Assured response to every client request
 - Debugging
 - Deployment consulting
