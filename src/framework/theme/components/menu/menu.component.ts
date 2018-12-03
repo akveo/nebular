@@ -23,6 +23,7 @@ import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './m
 import { convertToBoolProperty } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 
 export enum NbToggleStates {
   Expanded = 'expanded',
@@ -50,8 +51,11 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
 
   private alive = true;
   toggleState: NbToggleStates;
+  get isLtr(): boolean {
+    return this.directionService.isLtr();
+  };
 
-  constructor(private menuService: NbMenuService) {}
+  constructor(private menuService: NbMenuService, private directionService: NbLayoutDirectionService) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
