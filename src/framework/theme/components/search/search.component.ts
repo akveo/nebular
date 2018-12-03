@@ -51,9 +51,10 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
         <i class="nb-close-circled"></i>
       </button>
       <div class="form-wrapper">
-        <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
+        <form class="form" (keyup.enter)="submitSearch(searchInput.value); emitClose()">
           <div class="form-content">
             <input class="search-input"
+                   (input)="submitSearch(searchInput.value)"
                    #searchInput
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
@@ -317,7 +318,7 @@ export class NbSearchComponent implements OnInit, OnDestroy {
 
   search(term) {
     this.searchService.submitSearch(term, this.tag);
-    this.hideSearch();
+    // this.hideSearch();
   }
 
   private removeLayoutClasses() {
