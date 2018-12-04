@@ -15,6 +15,7 @@ import {
   AfterViewInit,
   Inject,
   DoCheck,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -55,7 +56,9 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
     return this.directionService.isLtr();
   };
 
-  constructor(private menuService: NbMenuService, private directionService: NbLayoutDirectionService) {}
+  constructor(private menuService: NbMenuService,
+              private directionService: NbLayoutDirectionService,
+              private changeDetector: ChangeDetectorRef) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
@@ -69,6 +72,10 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
         map(({ item }: NbMenuBag) => item.expanded),
       )
       .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
+
+    this.directionService.onDirectionChange()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.changeDetector.detectChanges());
   }
 
   ngOnDestroy() {
