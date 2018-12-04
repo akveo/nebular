@@ -14,6 +14,7 @@ import {
   generateRoutingModuleClassName,
   generateRoutingModuleFileName,
   getModuleDirs,
+  isFeatureModule,
   PLAYGROUND_PATH,
   ROUTING_MODULE_EXT,
 } from '../utils';
@@ -29,20 +30,19 @@ function fromTemplate(tree: Tree, options: Object): Rule {
     url('./files/example'),
     [
       template(options),
-      filter(existingModuleFilter.bind(null, tree)),
+      filter(hasNoModuleInDir.bind(null, tree)),
     ],
   );
 
   return mergeWith(transformedSource);
 }
 
-function existingModuleFilter(tree: Tree, filePath: Path) {
-  const dir = tree.getDir(dirname(filePath));
-  const isFeatureModule = filePath.endsWith(FEATURE_MODULE_EXT);
-  const ext = isFeatureModule ? FEATURE_MODULE_EXT : ROUTING_MODULE_EXT;
-  const hasModuleFile = dir.subfiles.some(file => file.endsWith(ext));
+function hasNoModuleInDir(tree: Tree, filePath: Path): boolean {
+  const ext = isFeatureModule(basename(filePath)) ? FEATURE_MODULE_EXT : ROUTING_MODULE_EXT;
 
-  return !tree.exists(filePath) && !hasModuleFile;
+  return !tree.getDir(dirname(filePath))
+    .subfiles
+    .some(file => file.endsWith(ext));
 }
 
 function optionsFromDir(moduleDir: DirEntry): Object {
