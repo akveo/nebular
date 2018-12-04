@@ -202,6 +202,18 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbInputFormComponent } from './input/input-form.component';
+import { NbMenuAutoCollapseComponent } from './menu/menu-autocollapse.component';
+import { NbMenuLinkParamsComponent } from './menu/menu-link-params.component';
+import { NbMenuServiceItem1Component,
+  NbMenuServiceItem2Component,
+  NbMenuServiceItem31Component,
+  NbMenuServiceItem32Component,
+  NbMenuServiceItem331Component,
+  NbMenuServiceItem332Component,
+  NbMenuServiceItem33Component,
+  NbMenuServiceItem3Component,
+  NbMenuServicesComponent } from './menu/menu-services.component';
 
 
 export const routes: Routes = [
@@ -589,6 +601,56 @@ export const routes: Routes = [
             path: 'menu-children.component',
             component: NbMenuChildrenComponent,
           },
+          {
+            path: 'menu-autocollapse.component',
+            component: NbMenuAutoCollapseComponent,
+          },
+          {
+            path: 'menu-link-params.component',
+            component: NbMenuLinkParamsComponent,
+          },
+          {
+            path: 'menu-services.component',
+            component: NbMenuServicesComponent,
+            children: [
+              {
+                path: '1',
+                component: NbMenuServiceItem1Component,
+              },
+              {
+                path: '2',
+                component: NbMenuServiceItem2Component,
+              },
+              {
+                path: '3',
+                component: NbMenuServiceItem3Component,
+                children: [
+                  {
+                    path: '1',
+                    component: NbMenuServiceItem31Component,
+                  },
+                  {
+                    path: '2',
+                    component: NbMenuServiceItem32Component,
+                  },
+                  {
+                    path: '3',
+                    component: NbMenuServiceItem33Component,
+                    children: [
+                      {
+                        path: '1',
+                        component: NbMenuServiceItem331Component,
+                      },
+                      {
+                        path: '2',
+                        component: NbMenuServiceItem332Component,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
         ],
       },
       {
@@ -846,6 +908,10 @@ export const routes: Routes = [
           {
             path: 'input-full-width.component',
             component: NbInputFullWidthComponent,
+          },
+          {
+            path: 'input-form.component',
+            component: NbInputFormComponent,
           },
         ],
       },

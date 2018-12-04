@@ -49,7 +49,7 @@ export class NbMenuItem {
    */
   icon?: string;
   /**
-   * Expanded by defaul
+   * Expanded by default
    * @type {boolean}
    */
   expanded?: boolean;

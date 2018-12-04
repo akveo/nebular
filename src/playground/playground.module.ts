@@ -250,6 +250,20 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbInputFormComponent } from './input/input-form.component';
+import { NbMenuAutoCollapseComponent } from './menu/menu-autocollapse.component';
+import { NbMenuLinkParamsComponent } from './menu/menu-link-params.component';
+import {
+  NbMenuServiceItem1Component,
+  NbMenuServiceItem2Component,
+  NbMenuServiceItem31Component,
+  NbMenuServiceItem32Component,
+  NbMenuServiceItem331Component,
+  NbMenuServiceItem332Component,
+  NbMenuServiceItem33Component, NbMenuServiceItem3Component,
+  NbMenuServiceItem4Component,
+  NbMenuServicesComponent,
+} from './menu/menu-services.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -354,9 +368,21 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbMenuItem33Component,
   NbMenuItem3Component,
   NbMenuItem4Component,
+  NbMenuServiceItem1Component,
+  NbMenuServiceItem2Component,
+  NbMenuServiceItem31Component,
+  NbMenuServiceItem32Component,
+  NbMenuServiceItem331Component,
+  NbMenuServiceItem332Component,
+  NbMenuServiceItem33Component,
+  NbMenuServiceItem3Component,
+  NbMenuServiceItem4Component,
   NbMenuTestComponent,
   NbMenuShowcaseComponent,
   NbMenuChildrenComponent,
+  NbMenuAutoCollapseComponent,
+  NbMenuLinkParamsComponent,
+  NbMenuServicesComponent,
   NbActionShowcaseComponent,
   NbActionSizesComponent,
   NbActionBadgeComponent,
@@ -430,6 +456,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputShapesComponent,
   NbInputTypesComponent,
   NbInputFullWidthComponent,
+  NbInputFormComponent,
   NbScrollWindowComponent,
   NbCalendarShowcaseComponent,
   NbCalendarBoundingMonthComponent,
