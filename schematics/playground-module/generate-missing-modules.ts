@@ -7,12 +7,13 @@
 import { basename } from '@angular-devkit/core';
 import { apply, chain, DirEntry, filter, mergeWith, Rule, template, Tree, url } from '@angular-devkit/schematics';
 import {
+  FEATURE_MODULE_FILE_POSTFIX,
   generateCurrentDirImport,
   generateFeatureModuleClassName,
   generateFeatureModuleFileName,
   generateRoutingModuleClassName,
   generateRoutingModuleFileName,
-  getModuleDirs,
+  getModuleDirs, ROUTING_MODULE_FILE_POSTFIX,
 } from '../utils';
 
 export function generateMissingModules(tree: Tree): Rule {
@@ -35,7 +36,15 @@ function fromTemplate(tree: Tree, moduleDir: DirEntry): Rule {
 
   const templateSource = apply(
     url('./files/example'),
-    [ template(options), filter(filePath => !tree.exists(filePath)) ],
+    [
+      template(options),
+      filter(filePath => {
+        const isFeatureModule = filePath.endsWith(FEATURE_MODULE_FILE_POSTFIX);
+        const ext = isFeatureModule ? FEATURE_MODULE_FILE_POSTFIX : ROUTING_MODULE_FILE_POSTFIX;
+
+        return !tree.exists(filePath) && !moduleDir.subfiles.some(file => file.endsWith(ext));
+      }),
+    ],
   );
 
   return mergeWith(templateSource);

@@ -6,14 +6,14 @@
 
 import { chain, Rule } from '@angular-devkit/schematics';
 import { generateMissingModules } from './generate-missing-modules';
-import { addComponentsDeclarations } from './import-components';
+import { addToModules } from './add-to-modules';
 import { generatePlaygroundModules } from './playground-modules';
 
 export function playgroundModule(): Rule {
   return () => {
     return chain([
       generateMissingModules,
-      addComponentsDeclarations,
+      addToModules,
       generatePlaygroundModules,
     ]);
   };

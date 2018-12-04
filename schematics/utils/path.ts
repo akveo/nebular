@@ -20,6 +20,6 @@ export function generateCurrentDirImport(fileName: string): string {
  * @param from path to file which should import 'to' file
  * @param to path to file which should be imported
  */
-export function generateImportPath(from: Path, to: Path): string {
+export function importPath(from: Path, to: Path): string {
   return relative(dirname(from), dirname(to)) || generateCurrentDirImport(basename(to));
 }

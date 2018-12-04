@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
+import { dirname, fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
 import { DirEntry, SchematicsException, Tree } from '@angular-devkit/schematics';
 
-const MODULES_WITH_LAYOUT_DIR = 'layout';
-const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
-const INCLUDE_DIRS: string[] = [ MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR ];
+export const MODULES_WITH_LAYOUT_DIR = 'layout';
+export const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
+export const INCLUDE_DIRS: string[] = [ MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR ];
 export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
 export const PREFIX = 'Nb';
 export const FEATURE_MODULE_FILE_POSTFIX = '.module.ts';
@@ -54,7 +54,6 @@ export function getModuleDirs(tree: Tree): DirEntry[] {
 
 /**
  * Returns all playground components paths (deep).
- * @param tree
  */
 export function getComponentsPaths(tree: Tree): Path[] {
   return findPlaygroundFilesByPredicate(tree, f => f.endsWith(COMPONENT_FILE_POSTFIX));
@@ -152,6 +151,64 @@ function isPlaygroundRoot(dir: DirEntry): boolean {
   return dir.path === PLAYGROUND_PATH;
 }
 
-export function isNoLayoutModule(modulePath: Path): boolean {
-  return modulePath.startsWith(join(PLAYGROUND_PATH, MODULES_WITHOUT_LAYOUT_DIR))
+export function isLayoutPath(modulePath: Path): boolean {
+  return modulePath.startsWith(join(PLAYGROUND_PATH, MODULES_WITH_LAYOUT_DIR))
+}
+
+export function isService(fileName: PathFragment): boolean {
+  return fileName.endsWith('.service.ts');
+}
+
+export function isDirective(fileName: PathFragment): boolean {
+  return fileName.endsWith('.directive.ts');
+}
+
+export function isComponent(fileName: PathFragment): boolean {
+  return fileName.endsWith('.component.ts');
+}
+
+export function isFeatureModule(fileName: PathFragment): boolean {
+  return fileName.endsWith(FEATURE_MODULE_FILE_POSTFIX) && !isRoutingModule(fileName);
+}
+
+export function isRoutingModule(fileName: PathFragment): boolean {
+  return fileName.endsWith(ROUTING_MODULE_FILE_POSTFIX);
+}
+
+export function getServicesFromDir(dir: DirEntry): Path[] {
+  return dir.subfiles.filter(isService).map(fileName => join(dir.path, fileName));
+}
+
+export function getComponentsFromDir(dir: DirEntry): Path[] {
+  return dir.subfiles.filter(isComponent).map(fileName => join(dir.path, fileName));
+}
+
+export function getDirectivesFromDir(dir: DirEntry): Path[] {
+  return dir.subfiles.filter(isDirective).map(fileName => join(dir.path, fileName));
+}
+
+export function getFeatureModuleFromDir(dir: DirEntry): Path | null {
+  const moduleFileName = dir.subfiles.find(isFeatureModule);
+  return moduleFileName ? join(dir.path, moduleFileName) : null;
+}
+
+export function getRoutingModulesFromDir(dir: DirEntry): Path | null {
+  const moduleFileName = dir.subfiles.find(isRoutingModule);
+  return moduleFileName ? join(dir.path, moduleFileName) : null;
+}
+
+export function hasRoutingModuleInDir(dir: DirEntry): boolean {
+  return dir.subfiles.some(f => f.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+}
+
+export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
+  const moduleFile = tree.getDir(path).subfiles
+    .find(fileName => fileName.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+  if (moduleFile) {
+    return join(path, moduleFile);
+  }
+
+  return path === getPlaygroundRootDir(tree).path
+    ? undefined
+    : findRoutingModule(tree, dirname(path));
 }

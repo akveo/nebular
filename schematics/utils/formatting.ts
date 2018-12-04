@@ -5,19 +5,14 @@
  */
 
 import * as ts from 'typescript';
-
-export interface TextReplace {
-  pos: number;
-  oldText: string;
-  newText: string;
-}
+import { ReplaceChange } from './change';
 
 export function multilineArrayLiteral(
   fullText: string,
   arrayLiteralNode: ts.ArrayLiteralExpression,
   elementIndentation: number,
-): TextReplace[] {
-  const replaces: TextReplace[] = [];
+): ReplaceChange[] {
+  const replaces: ReplaceChange[] = [];
 
   arrayLiteralNode.elements.forEach(el => {
     const start = el.getFullStart();

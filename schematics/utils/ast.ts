@@ -5,17 +5,21 @@
  */
 
 import * as ts from 'typescript';
-import { Path } from '@angular-devkit/core';
+import { normalize, Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
-import { findNodes, getSourceNodes } from '@schematics/angular/utility/ast-utils';
+import { addDeclarationToModule, findNodes, getSourceNodes } from '@schematics/angular/utility/ast-utils';
+import { applyInsertChange } from './change';
 import { getNodeIndentation } from './formatting';
 
-export function getAllComponentDeclarations(tree: Tree, path: Path): ts.ClassDeclaration[] {
+/**
+ * Returns all exported and named class declarations with given decorator.
+ */
+export function getClassWithDecorator(tree: Tree, path: Path, decoratorName: string): ts.ClassDeclaration[] {
   return findNodes(getSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
     .filter(node => isNodeExported(node as ts.Declaration))
     .filter(node => (node as ts.ClassDeclaration).name != null)
-    .filter(node => hasComponentDecorator(node as ts.ClassDeclaration)) as ts.ClassDeclaration[];
+    .filter((node: ts.ClassDeclaration) => hasDecoratorCall(node, decoratorName)) as ts.ClassDeclaration[];
 }
 
 /**
@@ -23,7 +27,7 @@ export function getAllComponentDeclarations(tree: Tree, path: Path): ts.ClassDec
  * https://github.com/angular
  * /angular-cli/blob/e3f56ebc71d57c79528fb4926a267e5ed4f9c74d/packages/schematics/angular/utility/ast-utils.ts#L282
  */
-export function hasComponentDecorator(classDeclaration: ts.ClassDeclaration): boolean {
+export function hasDecoratorCall(classDeclaration: ts.ClassDeclaration, decoratorName: string): boolean {
   if (classDeclaration.decorators == null) {
     return false;
   }
@@ -31,7 +35,7 @@ export function hasComponentDecorator(classDeclaration: ts.ClassDeclaration): bo
   return classDeclaration.decorators
     .filter(d => d.expression.kind === ts.SyntaxKind.CallExpression)
     .map(d => (d.expression as ts.CallExpression).expression)
-    .some(decoratorFactoryCall => decoratorFactoryCall.getFullText() === 'Component');
+    .some(decoratorFactoryCall => decoratorFactoryCall.getText() === decoratorName);
 }
 
 /**
@@ -104,4 +108,10 @@ function addNodeArrayElement(
   }
   recorder.insertLeft(insertPosition, toAdd);
   tree.commitUpdate(recorder);
+}
+
+export function addDeclaration(tree: Tree, modulePath: Path, componentClass: string, importPath: string): void {
+  const source = getSourceFile(tree, modulePath);
+  const declarationsChanges = addDeclarationToModule(source, modulePath, componentClass, importPath);
+  applyInsertChange(tree, normalize(source.fileName), ...declarationsChanges);
 }
