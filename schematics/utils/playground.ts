@@ -118,7 +118,7 @@ export function getFeatureModuleFromDir(dir: DirEntry): Path | null {
   return moduleFileName ? join(dir.path, moduleFileName) : null;
 }
 
-export function getRoutingModulesFromDir(dir: DirEntry): Path | null {
+export function getRoutingModuleFromDir(dir: DirEntry): Path | null {
   const moduleFileName = dir.subfiles.find(isRoutingModule);
   return moduleFileName ? join(dir.path, moduleFileName) : null;
 }
@@ -127,14 +127,24 @@ export function hasRoutingModuleInDir(dir: DirEntry): boolean {
   return dir.subfiles.some(f => f.endsWith(ROUTING_MODULE_EXT));
 }
 
-export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
-  const moduleFile = tree.getDir(path).subfiles
-    .find(fileName => fileName.endsWith(ROUTING_MODULE_EXT));
-  if (moduleFile) {
-    return join(path, moduleFile);
+function isOutsidePlayground(path: Path): boolean {
+  return !path.startsWith(PLAYGROUND_PATH);
+}
+
+export function findFeatureModule(tree: Tree, path: Path): Path | undefined {
+  if (isOutsidePlayground(path)) {
+    return;
   }
 
-  return path === getPlaygroundRootDir(tree).path
-    ? undefined
-    : findRoutingModule(tree, dirname(path));
+  const moduleFile = tree.getDir(path).subfiles.find(isFeatureModule);
+  return moduleFile ? join(path, moduleFile) : findFeatureModule(tree, dirname(path));
+}
+
+export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
+  if (isOutsidePlayground(path)) {
+    return;
+  }
+
+  const moduleFile = tree.getDir(path).subfiles.find(isRoutingModule);
+  return moduleFile ? join(path, moduleFile) : findRoutingModule(tree, dirname(path));
 }

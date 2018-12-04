@@ -9,7 +9,6 @@ import { dirname, Path, basename } from '@angular-devkit/core';
 import { DirEntry, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
 import { addImportToModule, addProviderToModule, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
-import { findModule } from '@schematics/angular/utility/find-module';
 import {
   addRoute,
   generateComponentRoute,
@@ -25,12 +24,13 @@ import {
   getComponentsFromDir,
   getDirectivesFromDir,
   getFeatureModuleFromDir,
-  getRoutingModulesFromDir,
+  getRoutingModuleFromDir,
   generateLazyModulePath,
   generateLazyModuleRoute,
   routePredicateFromPath,
   applyReplaceChange,
   findRoutingModule,
+  findFeatureModule,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -40,11 +40,11 @@ export function addToModules(tree: Tree, context: SchematicContext): Tree {
 
 function processDirs(tree: Tree, context: SchematicContext, dirs: DirEntry[]): void {
   for (const dir of dirs) {
+    processDir(tree, context, dir);
+
     if (dir.subdirs.length > 0) {
       processDirs(tree, context, dir.subdirs.map(d => dir.dir(d)));
     }
-
-    processDir(tree, context, dir);
   }
 }
 
@@ -58,14 +58,17 @@ function processDir(tree: Tree, context: SchematicContext, dir: DirEntry, isRoot
     processFeatureModule(tree, context, modulePath, isRoot);
   }
 
-  const routingModulePath = getRoutingModulesFromDir(dir);
+  const routingModulePath = getRoutingModuleFromDir(dir);
   if (routingModulePath) {
     processRoutingModule(tree, context, routingModulePath);
   }
 }
 
 function processService(tree: Tree, servicePath: Path): void {
-  const modulePath = findModule(tree, dirname(servicePath));
+  const modulePath = findFeatureModule(tree, dirname(servicePath));
+  if (modulePath == null) {
+    throw new SchematicsException(`Can't find module for service ${servicePath}.`);
+  }
   const serviceDeclarations = getClassWithDecorator(tree, servicePath, 'Injectable');
 
   for (const service of serviceDeclarations) {
@@ -79,14 +82,17 @@ function processService(tree: Tree, servicePath: Path): void {
 }
 
 function processComponent(tree: Tree, context: SchematicContext, componentPath: Path): void {
+  const dirPath = dirname(componentPath);
+  const modulePath = findFeatureModule(tree, dirPath);
+  if (modulePath == null) {
+    throw new SchematicsException(`Can't find module for service ${componentPath}.`);
+  }
+
   const componentDeclarations = getClassWithDecorator(tree, componentPath, 'Component');
   if (componentDeclarations.length === 0) {
     return;
   }
-
-  const dirPath = dirname(componentPath);
   for (const component of componentDeclarations) {
-    const modulePath = findModule(tree, dirPath);
     const componentClassName = (component.name as ts.Identifier).getText();
     const moduleImportString = importPath(modulePath, componentPath);
     addDeclaration(tree, modulePath, componentClassName, moduleImportString);
@@ -109,11 +115,14 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
 }
 
 function processDirectives(tree: Tree, directivePath: Path): void {
-  const directiveDeclarations = getClassWithDecorator(tree, directivePath, 'Directive');
-
   const dirPath = dirname(directivePath);
+  const modulePath = findFeatureModule(tree, dirPath);
+  if (modulePath == null) {
+    throw new SchematicsException(`Can't find module for service ${directivePath}.`);
+  }
+
+  const directiveDeclarations = getClassWithDecorator(tree, directivePath, 'Directive');
   for (const directive of directiveDeclarations) {
-    const modulePath = findModule(tree, dirPath);
     const directiveClassName = (directive.name as ts.Identifier).getText();
     const moduleImportString = importPath(modulePath, directivePath);
     addDeclaration(tree, modulePath, directiveClassName, moduleImportString);
@@ -139,7 +148,7 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
 
   const routingModulePath = findRoutingModule(tree, parentDir);
   if (routingModulePath == null) {
-    return
+    return;
   }
   const moduleDirName = basename(dirname(modulePath));
   const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
@@ -159,10 +168,13 @@ function processRoutingModule(tree: Tree, context: SchematicContext, modulePath:
       'Route will be created only for the first one.');
   }
 
-  const className = (moduleDeclarations[0].name as ts.Identifier).getText();
-  const featureModulePath = findModule(tree, dirname(modulePath));
+  const featureModulePath = findFeatureModule(tree, dirname(modulePath));
+  if (featureModulePath  == null) {
+    throw new SchematicsException(`Can't find module for service ${featureModulePath }.`);
+  }
   const featureModuleSource = getSourceFile(tree, featureModulePath);
   const importString = importPath(featureModulePath, modulePath);
+  const className = (moduleDeclarations[0].name as ts.Identifier).getText();
   const changes = addImportToModule(featureModuleSource, featureModulePath, className, importString);
   applyInsertChange(tree, featureModulePath, ...changes);
 }
