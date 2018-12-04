@@ -227,7 +227,7 @@ function deepRoutePredicate(predicates: RoutePredicate[], node: ts.Node): boolea
     return deepRoutePredicate(predicates, node.parent);
   }
 
-  const predicate = predicates[predicates.length - 1];
-  const remaining = predicates.slice(0, predicates.length - 1);
+  const predicate = predicates[0];
+  const remaining = predicates.slice(1);
   return predicate(node as ts.ObjectLiteralExpression) && deepRoutePredicate(remaining, node.parent);
 }
