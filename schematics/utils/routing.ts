@@ -139,37 +139,38 @@ export function addRoute(
 }
 
 function findRoute(
-  routesArray: ts.ArrayLiteralExpression | null,
+  routesArray: ts.ArrayLiteralExpression,
   predicate: RoutePredicate,
-): ts.ObjectLiteralExpression | null {
-  if (routesArray == null) {
-    return null;
+): ts.ObjectLiteralExpression | undefined {
+  const queue: ts.ObjectLiteralExpression[] = getRoutesFromArray(routesArray);
+
+  while (queue.length > 0) {
+    const route = queue.shift() as ts.ObjectLiteralExpression;
+    if (predicate(route)) {
+      return route;
+    }
+
+    const routeChildren = getRouteChildren(route);
+    if (routeChildren) {
+      queue.push(...getRoutesFromArray(routeChildren));
+    }
   }
 
-  let route = null;
-  // make breadth first
-  // https://medium.com/basecs/breaking-down-breadth-first-search-cebe696709d9
-  // https://medium.com/@kenny.hom27/breadth-first-vs-depth-first-tree-traversal-in-javascript-48df2ebfc6d1
-  routesArray.elements
-    .filter(el => el.kind === ts.SyntaxKind.ObjectLiteralExpression)
-    .some((el: ts.ObjectLiteralExpression) => {
-      if (predicate(el)) {
-        route = el;
-      } else {
-        route = findRoute(getRouteChildren(el), predicate);
-      }
-      return route != null;
-    });
-  return route;
+  return undefined;
 }
 
-function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | null {
+function getRoutesFromArray(routesArray: ts.ArrayLiteralExpression): ts.ObjectLiteralExpression[] {
+  return routesArray.elements
+    .filter(node => node.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
+}
+
+function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | undefined {
   const children = route.properties
     .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'children') as ts.PropertyAssignment;
 
   if (children == null) {
-    return null;
+    return undefined;
   }
   if (children.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression) {
     throw new SchematicsException(`Expecting children to be an array.`);

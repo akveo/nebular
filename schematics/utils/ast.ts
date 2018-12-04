@@ -13,7 +13,7 @@ import { applyInsertChange } from './change';
 import { getNodeIndentation } from './formatting';
 
 /**
- * Returns all exported and named class declarations with given decorator.
+ * Returns all exported and named class declarations with a given decorator.
  */
 export function getClassWithDecorator(tree: Tree, path: Path, decoratorName: string): ts.ClassDeclaration[] {
   return findNodes(getSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
