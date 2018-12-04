@@ -22,7 +22,7 @@ export const ROUTING_MODULE_EXT = '-routing.module.ts';
  * use `getPlaygroundDirs` instead.
  * @param tree
  */
-function getPlaygroundRootDir(tree: Tree): DirEntry {
+export function getPlaygroundRootDir(tree: Tree): DirEntry {
   return tree.getDir(PLAYGROUND_PATH);
 }
 

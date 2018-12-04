@@ -14,13 +14,13 @@ import {
   generateRoutingModuleClassName,
   generateRoutingModuleFileName,
   getModuleDirs,
+  getPlaygroundRootDir,
   isFeatureModule,
-  PLAYGROUND_PATH,
   ROUTING_MODULE_EXT,
 } from '../utils';
 
 export function generateMissingModules(tree: Tree): Rule {
-  const moduleDirs = [ tree.getDir(PLAYGROUND_PATH), ...getModuleDirs(tree) ];
+  const moduleDirs = [ getPlaygroundRootDir(tree), ...getModuleDirs(tree) ];
 
   return chain(moduleDirs.map(moduleDir => fromTemplate(tree, optionsFromDir(moduleDir))));
 }
