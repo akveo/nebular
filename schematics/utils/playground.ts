@@ -12,11 +12,11 @@ export const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
 export const INCLUDE_DIRS: string[] = [ MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR ];
 export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
 export const PREFIX = 'Nb';
-export const FEATURE_MODULE_FILE_POSTFIX = '.module.ts';
-export const ROUTING_MODULE_FILE_POSTFIX = '-routing.module.ts';
+export const FEATURE_MODULE_EXT = '.module.ts';
+export const ROUTING_MODULE_EXT = '-routing.module.ts';
 export const COMPONENT_FILE_POSTFIX = '.component.ts';
 
-type FileNamePredicate = (fileName: PathFragment) => boolean;
+export type FileNamePredicate = (fileName: PathFragment) => boolean;
 
 /**
  * Returns root playground directory.
@@ -88,21 +88,21 @@ function findInDirAndDown(dir: DirEntry, predicate: FileNamePredicate): Path[] {
  * Returns playground routing module path.
  */
 export function getPlaygroundRoutingModule(): Path {
-  return join(PLAYGROUND_PATH, 'playground' + ROUTING_MODULE_FILE_POSTFIX);
+  return join(PLAYGROUND_PATH, 'playground' + ROUTING_MODULE_EXT);
 }
 
 /**
  * Returns dashed module file name.
  */
 export function generateFeatureModuleFileName(moduleName: string): PathFragment {
-  return fragment(strings.dasherize(moduleName) + FEATURE_MODULE_FILE_POSTFIX);
+  return fragment(strings.dasherize(moduleName) + FEATURE_MODULE_EXT);
 }
 
 /**
  * Returns dashed module file name.
  */
 export function generateRoutingModuleFileName(moduleName: string): PathFragment {
-  return fragment(strings.dasherize(moduleName) + ROUTING_MODULE_FILE_POSTFIX);
+  return fragment(strings.dasherize(moduleName) + ROUTING_MODULE_EXT);
 }
 
 /**
@@ -120,7 +120,7 @@ export function generateRoutingModuleClassName(dashedName: string): string {
 }
 
 export function findComponentFeatureModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(FEATURE_MODULE_FILE_POSTFIX));
+  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(FEATURE_MODULE_EXT));
   if (module == null) {
     throw new SchematicsException(`Can't find feature module in ${dirPath} and parent dirs.`);
   }
@@ -129,7 +129,7 @@ export function findComponentFeatureModule(tree: Tree, dirPath: Path): Path {
 }
 
 export function findComponentRoutingModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(ROUTING_MODULE_EXT));
   if (module == null) {
     throw new SchematicsException(`Can't find routing module in ${dirPath} and parent dirs.`);
   }
@@ -168,11 +168,11 @@ export function isComponent(fileName: PathFragment): boolean {
 }
 
 export function isFeatureModule(fileName: PathFragment): boolean {
-  return fileName.endsWith(FEATURE_MODULE_FILE_POSTFIX) && !isRoutingModule(fileName);
+  return fileName.endsWith(FEATURE_MODULE_EXT) && !isRoutingModule(fileName);
 }
 
 export function isRoutingModule(fileName: PathFragment): boolean {
-  return fileName.endsWith(ROUTING_MODULE_FILE_POSTFIX);
+  return fileName.endsWith(ROUTING_MODULE_EXT);
 }
 
 export function getServicesFromDir(dir: DirEntry): Path[] {
@@ -198,12 +198,12 @@ export function getRoutingModulesFromDir(dir: DirEntry): Path | null {
 }
 
 export function hasRoutingModuleInDir(dir: DirEntry): boolean {
-  return dir.subfiles.some(f => f.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+  return dir.subfiles.some(f => f.endsWith(ROUTING_MODULE_EXT));
 }
 
 export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
   const moduleFile = tree.getDir(path).subfiles
-    .find(fileName => fileName.endsWith(ROUTING_MODULE_FILE_POSTFIX));
+    .find(fileName => fileName.endsWith(ROUTING_MODULE_EXT));
   if (moduleFile) {
     return join(path, moduleFile);
   }
