@@ -5,7 +5,7 @@
  */
 
 import { dirname, fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
-import { DirEntry, SchematicsException, Tree } from '@angular-devkit/schematics';
+import { DirEntry, Tree } from '@angular-devkit/schematics';
 
 export const MODULES_WITH_LAYOUT_DIR = 'layout';
 export const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
@@ -14,9 +14,6 @@ export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
 export const PREFIX = 'Nb';
 export const FEATURE_MODULE_EXT = '.module.ts';
 export const ROUTING_MODULE_EXT = '-routing.module.ts';
-export const COMPONENT_FILE_POSTFIX = '.component.ts';
-
-export type FileNamePredicate = (fileName: PathFragment) => boolean;
 
 /**
  * Returns root playground directory.
@@ -53,45 +50,6 @@ export function getModuleDirs(tree: Tree): DirEntry[] {
 }
 
 /**
- * Returns all playground components paths (deep).
- */
-export function getComponentsPaths(tree: Tree): Path[] {
-  return findPlaygroundFilesByPredicate(tree, f => f.endsWith(COMPONENT_FILE_POSTFIX));
-}
-
-/**
- * Searches in all playground included subdirectories
- * @param tree
- * @param predicate predicate to apply on playground files
- */
-function findPlaygroundFilesByPredicate(tree: Tree, predicate: FileNamePredicate): Path[] {
-  return getModuleDirs(tree)
-    .reduce((paths: Path[], dir: DirEntry) => paths.concat(findInDirAndDown(dir, predicate)), []);
-}
-
-/**
- * Applies predicate on all files in a given directory and its sub directories
- * @param dir
- * @param predicate
- */
-function findInDirAndDown(dir: DirEntry, predicate: FileNamePredicate): Path[] {
-  const paths = dir.subfiles.filter(predicate).map(fileName => join(dir.path, fileName));
-
-  for (const subDir of dir.subdirs) {
-    paths.push(...findInDirAndDown(dir.dir(subDir), predicate));
-  }
-
-  return paths;
-}
-
-/**
- * Returns playground routing module path.
- */
-export function getPlaygroundRoutingModule(): Path {
-  return join(PLAYGROUND_PATH, 'playground' + ROUTING_MODULE_EXT);
-}
-
-/**
  * Returns dashed module file name.
  */
 export function generateFeatureModuleFileName(moduleName: string): PathFragment {
@@ -117,38 +75,6 @@ export function generateFeatureModuleClassName(moduleName: string): string {
  */
 export function generateRoutingModuleClassName(dashedName: string): string {
   return `${PREFIX}${strings.classify(dashedName)}RoutingModule`;
-}
-
-export function findComponentFeatureModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(FEATURE_MODULE_EXT));
-  if (module == null) {
-    throw new SchematicsException(`Can't find feature module in ${dirPath} and parent dirs.`);
-  }
-
-  return module;
-}
-
-export function findComponentRoutingModule(tree: Tree, dirPath: Path): Path {
-  const module = findInDirOrParentDir(tree.getDir(dirPath), file => file.endsWith(ROUTING_MODULE_EXT));
-  if (module == null) {
-    throw new SchematicsException(`Can't find routing module in ${dirPath} and parent dirs.`);
-  }
-  return module;
-}
-
-function findInDirOrParentDir(dir: DirEntry, predicate: FileNamePredicate): Path | null {
-  if (isPlaygroundRoot(dir)) {
-    return null;
-  }
-
-  const moduleFile = dir.subfiles.find(predicate);
-  return moduleFile
-    ? join(dir.path, moduleFile)
-    : findInDirOrParentDir(dir.parent as DirEntry, predicate);
-}
-
-function isPlaygroundRoot(dir: DirEntry): boolean {
-  return dir.path === PLAYGROUND_PATH;
 }
 
 export function isLayoutPath(modulePath: Path): boolean {
