@@ -10,9 +10,13 @@ import { ReplaceChange } from './change';
 export function multilineArrayLiteral(
   fullText: string,
   arrayLiteralNode: ts.ArrayLiteralExpression,
-  elementIndentation: number,
 ): ReplaceChange[] {
   const replaces: ReplaceChange[] = [];
+
+  const arrayIndentation = getNodeIndentation(fullText, arrayLiteralNode);
+  const elementIndentation = arrayLiteralNode.elements.length > 0
+    ? getNodeIndentation(fullText, arrayLiteralNode.elements[0])
+    : 0;
 
   arrayLiteralNode.elements.forEach(el => {
     const start = el.getFullStart();
@@ -27,7 +31,7 @@ export function multilineArrayLiteral(
   replaces.push({
     pos: lastElementEnd,
     oldText: fullText.slice(lastElementEnd, closingBracketPos),
-    newText: `,\n${' '.repeat(elementIndentation / 2)}]`,
+    newText: `,\n${' '.repeat(arrayIndentation)}]`,
   });
 
   return replaces.reverse();

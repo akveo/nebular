@@ -16,7 +16,6 @@ import {
   getClassWithDecorator,
   multilineArrayLiteral,
   withoutExtension,
-  getModuleDirs,
   getServicesFromDir,
   applyInsertChange,
   hasRoutingModuleInDir,
@@ -31,10 +30,11 @@ import {
   applyReplaceChange,
   findRoutingModule,
   findFeatureModule,
+  getPlaygroundRootDir,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
-  processDirs(tree, context, getModuleDirs(tree));
+  processDirs(tree, context, [getPlaygroundRootDir(tree)]);
   return tree;
 }
 
@@ -203,6 +203,6 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
     return;
   }
 
-  const replaces = multilineArrayLiteral(source.getFullText(), declarationsArray, 4);
+  const replaces = multilineArrayLiteral(source.getFullText(), declarationsArray);
   applyReplaceChange(tree, modulePath, ...replaces);
 }
