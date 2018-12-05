@@ -185,6 +185,8 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
  * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
  *
  * It is also possible to handle search event using `NbSearchService`:
+ * Search event can be limit with RxJx operators, example can be found on:
+ * https://angular.io/tutorial/toh-pt6#chaining-rxjs-operators
  *
  * @stacked-example(Search Event, search/search-event.component)
  *
@@ -318,7 +320,6 @@ export class NbSearchComponent implements OnInit, OnDestroy {
 
   search(term) {
     this.searchService.submitSearch(term, this.tag);
-    // this.hideSearch();
   }
 
   private removeLayoutClasses() {
