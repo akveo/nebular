@@ -318,7 +318,6 @@ export class NbSearchComponent implements OnInit, OnDestroy {
 
   search(term) {
     this.searchService.submitSearch(term, this.tag);
-    // this.hideSearch();
   }
 
   private removeLayoutClasses() {
