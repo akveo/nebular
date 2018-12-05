@@ -3,17 +3,16 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-
+import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 
-import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
-import { Component } from '@angular/core';
 import { NbMenuModule } from './menu.module';
 import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service'
 import { NbMenuItem } from './menu.service';
 import { NbThemeModule } from '../../theme.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 
 @Component({
   template: '<nb-menu [items]="items"></nb-menu>',
@@ -28,9 +27,9 @@ class NbMenuArrowTestComponent {
           title: 'Inner 1',
         },
         {
-          title: 'Inner 2'
+          title: 'Inner 2',
         },
-      ]
+      ],
     },
   ]
 }
@@ -44,7 +43,7 @@ describe('menu helpers', () => {
         NbThemeModule.forRoot(),
         NbMenuModule.forRoot(),
         RouterTestingModule.withRoutes([]),
-        NoopAnimationsModule
+        NoopAnimationsModule,
       ],
       declarations: [NbMenuArrowTestComponent],
     });
