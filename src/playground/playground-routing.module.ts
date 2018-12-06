@@ -205,7 +205,9 @@ import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-he
 import { NbInputFormComponent } from './input/input-form.component';
 import { NbMenuAutoCollapseComponent } from './menu/menu-autocollapse.component';
 import { NbMenuLinkParamsComponent } from './menu/menu-link-params.component';
-import { NbMenuServiceItem1Component,
+import { NbMenuServiceComponent } from './menu/menu-service.component';
+import {
+  NbMenuServiceItem1Component,
   NbMenuServiceItem2Component,
   NbMenuServiceItem31Component,
   NbMenuServiceItem32Component,
@@ -213,7 +215,9 @@ import { NbMenuServiceItem1Component,
   NbMenuServiceItem332Component,
   NbMenuServiceItem33Component,
   NbMenuServiceItem3Component,
-  NbMenuServicesComponent } from './menu/menu-services.component';
+} from './menu/menu-service-childrens.component';
+import { NbUserAvatarSettingsComponent } from './user/user-avatar-settings.component';
+import { NbUserHideCaptionsComponent } from './user/user-hide-captions.component';
 
 
 export const routes: Routes = [
@@ -610,13 +614,9 @@ export const routes: Routes = [
             component: NbMenuLinkParamsComponent,
           },
           {
-            path: 'menu-services.component',
-            component: NbMenuServicesComponent,
+            path: 'menu-service.component',
+            component: NbMenuServiceComponent,
             children: [
-              {
-                path: '1',
-                component: NbMenuServiceItem1Component,
-              },
               {
                 path: '2',
                 component: NbMenuServiceItem2Component,
@@ -650,6 +650,10 @@ export const routes: Routes = [
                 ],
               },
             ],
+          },
+          {
+            path: '',
+            component: NbMenuServiceItem1Component,
           },
         ],
       },
@@ -757,6 +761,14 @@ export const routes: Routes = [
           {
             path: 'user-sizes.component',
             component: NbUserSizesComponent,
+          },
+          {
+            path: 'user-avatar-settings.component',
+            component: NbUserAvatarSettingsComponent,
+          },
+          {
+            path: 'user-hide-captions.component',
+            component: NbUserHideCaptionsComponent,
           },
         ],
       },

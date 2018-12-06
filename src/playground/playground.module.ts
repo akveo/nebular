@@ -253,6 +253,7 @@ import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-he
 import { NbInputFormComponent } from './input/input-form.component';
 import { NbMenuAutoCollapseComponent } from './menu/menu-autocollapse.component';
 import { NbMenuLinkParamsComponent } from './menu/menu-link-params.component';
+import { NbMenuServiceComponent } from './menu/menu-service.component';
 import {
   NbMenuServiceItem1Component,
   NbMenuServiceItem2Component,
@@ -260,10 +261,11 @@ import {
   NbMenuServiceItem32Component,
   NbMenuServiceItem331Component,
   NbMenuServiceItem332Component,
-  NbMenuServiceItem33Component, NbMenuServiceItem3Component,
-  NbMenuServiceItem4Component,
-  NbMenuServicesComponent,
-} from './menu/menu-services.component';
+  NbMenuServiceItem33Component,
+  NbMenuServiceItem3Component,
+} from './menu/menu-service-childrens.component';
+import { NbUserAvatarSettingsComponent } from './user/user-avatar-settings.component';
+import { NbUserHideCaptionsComponent } from './user/user-hide-captions.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -376,13 +378,12 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbMenuServiceItem332Component,
   NbMenuServiceItem33Component,
   NbMenuServiceItem3Component,
-  NbMenuServiceItem4Component,
   NbMenuTestComponent,
   NbMenuShowcaseComponent,
   NbMenuChildrenComponent,
   NbMenuAutoCollapseComponent,
   NbMenuLinkParamsComponent,
-  NbMenuServicesComponent,
+  NbMenuServiceComponent,
   NbActionShowcaseComponent,
   NbActionSizesComponent,
   NbActionBadgeComponent,
@@ -403,6 +404,8 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbUserTestComponent,
   NbUserShowcaseComponent,
   NbUserSizesComponent,
+  NbUserAvatarSettingsComponent,
+  NbUserHideCaptionsComponent,
   NbBadgeShowcaseComponent,
   NbContextMenuShowcaseComponent,
   NbContextMenuClickComponent,

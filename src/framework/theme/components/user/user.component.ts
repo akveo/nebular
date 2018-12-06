@@ -33,6 +33,14 @@ import { convertToBoolProperty } from '../helpers';
  * Available in multiple sizes:
  * @stacked-example(Multiple Sizes, user/user-sizes.component)
  *
+ *
+ * You can hide unnecessary captions (name, title or both):
+ * @stacked-example(Hide captions in user component, user/user-hide-captions.component)
+ *
+ *
+ * You can set custom avatar background-color, user image (as link or BASE64 string) and disable user initials:
+ * @stacked-example(Avatar image settings, user/user-avatar-settings.component)
+ *
  * @styles
  *
  * user-font-size:
@@ -118,7 +126,7 @@ export class NbUserComponent {
   @Input() color: string;
 
   /**
-   * Size of the component, small|medium|large
+   * Size of the component, small|medium|large|xlarge
    * @type string
    */
   @Input()

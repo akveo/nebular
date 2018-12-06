@@ -143,13 +143,6 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * @stacked-example(Autocollapse Menu, menu/menu-autocollapse.component)
  *
  *
- * Menu link parameters example
- * @stacked-example(Menu Link Parameters, menu/menu-link-params.component)
- *
- *
- * Menu services example
- * @stacked-example(Menu Services, menu/menu-services.component)
- *
  *
  * @styles
  *
