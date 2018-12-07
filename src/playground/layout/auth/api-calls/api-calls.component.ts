@@ -9,9 +9,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
-import { NbAuthResult, NbAuthService, NbAuthToken } from '../../../framework/auth/services';
-import { NB_AUTH_OPTIONS } from '../../../framework/auth/auth.options';
-import { getDeepFromObject } from '../../../framework/auth/helpers';
+import { NbAuthResult, NbAuthService, NbAuthToken, NB_AUTH_OPTIONS } from '@nebular/auth';
+import { getDeepFromObject } from '@nebular/auth/helpers';
 import { Wine } from './wine';
 
 @Component({
