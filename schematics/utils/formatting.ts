@@ -14,9 +14,7 @@ export function multilineArrayLiteral(
   const replaces: ReplaceChange[] = [];
 
   const arrayIndentation = getNodeIndentation(fullText, arrayLiteralNode);
-  const elementIndentation = arrayLiteralNode.elements.length > 0
-    ? getNodeIndentation(fullText, arrayLiteralNode.elements[0])
-    : 0;
+  const elementIndentation = arrayIndentation + 2;
 
   arrayLiteralNode.elements.forEach(el => {
     const start = el.getFullStart();
