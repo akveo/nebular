@@ -74,6 +74,13 @@ export class NbOverlayContainerComponent {
     this.isAttached = true;
   }
 
+  detach() {
+    if (this.isAttached) {
+      this.vcr.remove();
+      this.isAttached = false;
+    }
+  }
+
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
     return new NbPortalInjector(this.injector, new WeakMap([
       [ComponentFactoryResolver, cfr],
