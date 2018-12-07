@@ -5,10 +5,11 @@
  */
 
 import * as ts from 'typescript';
-import { dirname, normalize, NormalizedSep, Path, join } from '@angular-devkit/core';
+import { basename, dirname, join, normalize, NormalizedSep, Path } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
 import { getDecoratorMetadata, insertImport } from '@schematics/angular/utility/ast-utils';
+import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import {
   addArrayElement,
   addObjectProperty,
@@ -16,10 +17,12 @@ import {
   findDeclarationByIdentifier,
   importPath as routeImportPath,
   isLayoutPath,
-  MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR,
-  PLAYGROUND_PATH,
-  withoutExtension,
+  isPlaygroundRoutingModule,
+  removeBasePath,
 } from '../utils';
+
+const LAYOUT_COMPONENT_CLASS = 'NbPlaygroundLayoutComponent';
+const NO_LAYOUT_COMPONENT_CLASS = 'NbPlaygroundBaseComponent';
 
 export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralExpression {
   const source = getSourceFile(tree, modulePath);
@@ -73,14 +76,14 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
 }
 
 export function generateComponentRoute(path: string, component: string, ...routeFields: string[]): string {
-  return generateRoute(`path: '${path}'`, `component: ${component}`, ...routeFields);
+  return generatePathRoute(path, `component: ${component}`, ...routeFields);
 }
 
-export function generateLazyModuleRoute(path: string, modulePath: string, ...routeFields: string[]): string {
-  return generateRoute(`path: '${path}'`, `loadChildren: '${modulePath}'`, ...routeFields);
+export function generatePathRoute(path: string, ...routeFields: string[]): string {
+  return generateRoute(`path: '${path}'`, ...routeFields);
 }
 
-function generateRoute(...routeFields: string[]) {
+export function generateRoute(...routeFields: string[]) {
   return `{
   ${routeFields.join(',\n  ')},
 }`;
@@ -89,48 +92,83 @@ function generateRoute(...routeFields: string[]) {
 export type RoutePredicate = (route: ts.ObjectLiteralExpression) => boolean;
 
 export function generateLazyModulePath(from: Path, to: Path, moduleClassName: string): string {
-  const path = routeImportPath(from, to);
-  return `./${dirname(normalize(path))}/${withoutExtension(path)}#${moduleClassName}`;
+  const path = normalize(routeImportPath(from, to));
+  return `./${dirname(path)}/${basename(path)}#${moduleClassName}`;
+}
+
+/**
+ * @param routingModulePath full path to routing module
+ * @param targetDirPath full path to directory containing component or module file for the route
+ */
+export function addMissingChildRoutes(
+  tree: Tree,
+  routingModulePath: Path,
+  targetDirPath: Path,
+): void {
+  const pathsToAdd = routePathsFromPath(targetDirPath);
+  if (pathsToAdd.length === 0) {
+    return;
+  }
+
+  const basePathEnd = targetDirPath.indexOf(removeBasePath(targetDirPath));
+  let existingPath = normalize(targetDirPath.slice(0, basePathEnd));
+  let routesArray = findRoutesArray(tree, routingModulePath);
+
+  if (isPlaygroundRoutingModule(routingModulePath)) {
+    let rootRoute = findRoute(routesArray, rootComponentPredicate(targetDirPath)) as ts.ObjectLiteralExpression;
+    if (rootRoute == null) {
+      throw new SchematicsException(`Can't find root component in root playground routing.`);
+    }
+    routesArray = getRouteChildren(rootRoute) as ts.ArrayLiteralExpression;
+    if (routesArray == null) {
+      addRouteChildrenProp(tree, getSourceFile(tree, routingModulePath), rootRoute);
+      rootRoute = findRoute(
+        findRoutesArray(tree, routingModulePath),
+        rootComponentPredicate(targetDirPath),
+      ) as ts.ObjectLiteralExpression;
+      routesArray = getRouteChildren(rootRoute) as ts.ArrayLiteralExpression;
+    }
+  }
+
+  for (const path of pathsToAdd) {
+    let currentRoute = findRoute(routesArray, pathRoutePredicate.bind(null, path));
+    if (currentRoute == null) {
+      addRoute(tree, routingModulePath, routesArray, generatePathRoute(path));
+      currentRoute = findRouteDeep(
+        findRoutesArray(tree, routingModulePath),
+        routePredicatesFromPath(routingModulePath, existingPath),
+      ) as ts.ObjectLiteralExpression;
+    }
+    existingPath = join(existingPath, path);
+
+    let children = getRouteChildren(currentRoute);
+    if (children == null) {
+      addRouteChildrenProp(tree, getSourceFile(tree, routingModulePath), currentRoute);
+      currentRoute = findRouteDeep(
+        findRoutesArray(tree, routingModulePath),
+        routePredicatesFromPath(routingModulePath, existingPath),
+      ) as ts.ObjectLiteralExpression;
+      children = getRouteChildren(currentRoute) as ts.ArrayLiteralExpression;
+    }
+    routesArray = children;
+  }
 }
 
 export function addRoute(
   tree: Tree,
   routingModulePath: Path,
+  routes: ts.ArrayLiteralExpression,
   route: string,
-  parentPredicate?: RoutePredicate | null,
   componentClass?: string,
   importPath?: string,
 ): void {
-  let source = getSourceFile(tree, routingModulePath);
-
-  let routesArray;
-
-  if (parentPredicate) {
-    let parentRoute = findRoute(findRoutesArray(tree, routingModulePath), parentPredicate);
-    if (parentRoute == null) {
-      throw new SchematicsException(`Error in ${routingModulePath}. Can't find parent route for ${route}.`);
-    }
-    try {
-      routesArray = getRouteChildren(parentRoute) as ts.ArrayLiteralExpression;
-    } catch (e) {
-      throw new SchematicsException(`Error in ${routingModulePath}. ${e.message}`);
-    }
-    if (routesArray == null) {
-      addRouteChildrenProp(tree, source, parentRoute);
-      source = getSourceFile(tree, routingModulePath);
-      parentRoute = findRoute(findRoutesArray(tree, routingModulePath), parentPredicate) as ts.ObjectLiteralExpression;
-      routesArray = getRouteChildren(parentRoute) as ts.ArrayLiteralExpression;
-    }
-  } else {
-    routesArray = findRoutesArray(tree, routingModulePath);
-  }
-
-  const alreadyInRoutes = routesArray.getFullText().includes(route);
+  const source = getSourceFile(tree, routingModulePath);
+  const alreadyInRoutes = routes.getFullText().includes(route);
   if (alreadyInRoutes) {
     return;
   }
 
-  addArrayElement(tree, source, routesArray, route);
+  addArrayElement(tree, source, routes, route);
 
   if (componentClass && importPath) {
     const importChange = insertImport(source, source.fileName, componentClass, importPath);
@@ -138,7 +176,7 @@ export function addRoute(
   }
 }
 
-function findRoute(
+export function findRoute(
   routesArray: ts.ArrayLiteralExpression,
   predicate: RoutePredicate,
 ): ts.ObjectLiteralExpression | undefined {
@@ -159,12 +197,43 @@ function findRoute(
   return undefined;
 }
 
+/**
+ * @param routesArray array to search in
+ * @param predicates predicate for each level
+ */
+export function findRouteDeep(
+  routesArray: ts.ArrayLiteralExpression,
+  predicates: RoutePredicate[],
+): ts.ObjectLiteralExpression | undefined {
+  const routes = routesArray.elements
+    .filter(e => e.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
+
+  for (const route of routes) {
+    const isMatch = predicates[0](route);
+    const isLastMatch = isMatch && predicates.length === 1;
+    if (!isMatch) {
+      continue;
+    }
+    if (isLastMatch) {
+      return route;
+    }
+
+    const children = getRouteChildren(route);
+    const foundRoute = children && findRouteDeep(children, predicates.slice(1));
+    if (foundRoute) {
+      return foundRoute;
+    }
+  }
+
+  return undefined;
+}
+
 function getRoutesFromArray(routesArray: ts.ArrayLiteralExpression): ts.ObjectLiteralExpression[] {
   return routesArray.elements
     .filter(node => node.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
 }
 
-function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | undefined {
+export function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | undefined {
   const children = route.properties
     .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'children') as ts.PropertyAssignment;
@@ -179,36 +248,55 @@ function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExp
   return children.initializer as ts.ArrayLiteralExpression;
 }
 
-function addRouteChildrenProp(tree: Tree, source: ts.SourceFile, route: ts.ObjectLiteralExpression): void {
+export function getRouteLazyModule(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
+  return route.properties
+    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
+    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'loadChildren') as ts.PropertyAssignment;
+}
+
+export function addRouteChildrenProp(tree: Tree, source: ts.SourceFile, route: ts.ObjectLiteralExpression): void {
   if (getRouteChildren(route) == null) {
     addObjectProperty(tree, source, route, 'children: []');
   }
 }
 
 /**
- * @param filePath file path!!
+ * Returns array of route paths relative to playground.
  */
-export function routePredicateFromPath(filePath: Path): RoutePredicate {
-  const isLayout = isLayoutPath(filePath);
-  const rootPath = join(PLAYGROUND_PATH, isLayout ? MODULES_WITH_LAYOUT_DIR : MODULES_WITHOUT_LAYOUT_DIR);
-  const routePaths = dirname(filePath).replace(rootPath, '').split(NormalizedSep).filter(dir => dir);
-  const predicates = [
-    componentRoutePredicate.bind(null, isLayout ? 'NbPlaygroundLayoutComponent' : 'NbPlaygroundBaseComponent'),
-    ...routePaths.map(path => pathRoutePredicate.bind(null, path)),
-  ];
-
-  return deepRoutePredicate.bind(null, predicates);
+export function routePathsFromPath(dirPath: Path): string[] {
+  return removeBasePath(dirPath).split(NormalizedSep).filter(dir => dir);
 }
 
-function pathRoutePredicate(routePath: string, route: ts.ObjectLiteralExpression): boolean {
+/**
+ * Returns predicate bound to array of predicates which will check route and it's children to conform routing path
+ * for a given file path.
+ * @param routingModulePath full path to routing module
+ * @param targetDirPath full path to directory containing component or module file for the route
+ */
+export function routePredicatesFromPath(routingModulePath: Path, targetDirPath: Path): RoutePredicate[] {
+  const predicates = [];
+  const isRootRouting = isPlaygroundRoutingModule(routingModulePath);
+  if (isRootRouting) {
+    predicates.push(rootComponentPredicate(targetDirPath));
+  }
+
+  const path = isRootRouting
+    ? targetDirPath
+    : normalize(buildRelativePath(routingModulePath, targetDirPath));
+  predicates.push(...routePathsFromPath(path).map(p => pathRoutePredicate.bind(null, p)));
+
+  return predicates;
+}
+
+export function pathRoutePredicate(routePath: string, route: ts.ObjectLiteralExpression): boolean {
   const path = route.properties
     .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.initializer.getText() === 'path');
+    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'path');
 
-  return !!path && (path as ts.PropertyAssignment).initializer.getText() === routePath;
+  return !!path && (path as ts.PropertyAssignment).initializer.getText() === `'${routePath}'`;
 }
 
-function componentRoutePredicate(componentClass: string, route: ts.ObjectLiteralExpression): boolean {
+export function componentRoutePredicate(componentClass: string, route: ts.ObjectLiteralExpression): boolean {
   const component = route.properties
     .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'component');
@@ -216,18 +304,7 @@ function componentRoutePredicate(componentClass: string, route: ts.ObjectLiteral
   return !!component && (component as ts.PropertyAssignment).initializer.getText() === componentClass;
 }
 
-function deepRoutePredicate(predicates: RoutePredicate[], node: ts.Node): boolean {
-  if (predicates.length === 0) {
-    return true;
-  }
-  if (node == null) {
-    return false;
-  }
-  if (node.kind !== ts.SyntaxKind.ObjectLiteralExpression) {
-    return deepRoutePredicate(predicates, node.parent);
-  }
-
-  const predicate = predicates[0];
-  const remaining = predicates.slice(1);
-  return predicate(node as ts.ObjectLiteralExpression) && deepRoutePredicate(remaining, node.parent);
+export function rootComponentPredicate(modulePath: Path): RoutePredicate {
+  const rootComponentClass = isLayoutPath(modulePath) ? LAYOUT_COMPONENT_CLASS : NO_LAYOUT_COMPONENT_CLASS;
+  return componentRoutePredicate.bind(null, rootComponentClass);
 }

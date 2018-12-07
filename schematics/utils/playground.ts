@@ -7,10 +7,10 @@
 import { dirname, fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
 import { DirEntry, Tree } from '@angular-devkit/schematics';
 
-export const MODULES_WITH_LAYOUT_DIR = 'layout';
-export const MODULES_WITHOUT_LAYOUT_DIR = 'no-layout';
-export const INCLUDE_DIRS: string[] = [ MODULES_WITH_LAYOUT_DIR, MODULES_WITHOUT_LAYOUT_DIR ];
 export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
+export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'layout');
+export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'no-layout');
+export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
 export const PREFIX = 'Nb';
 export const FEATURE_MODULE_EXT = '.module.ts';
 export const ROUTING_MODULE_EXT = '-routing.module.ts';
@@ -34,7 +34,7 @@ function getPlaygroundDirs(tree: Tree): DirEntry[] {
   const pgDir = getPlaygroundRootDir(tree);
 
   return pgDir.subdirs
-    .filter((dirName: PathFragment) => INCLUDE_DIRS.includes(dirName))
+    .filter((dirName: PathFragment) => INCLUDE_DIRS.includes(join(pgDir.path, dirName)))
     .map(path => pgDir.dir(path));
 }
 
@@ -78,7 +78,7 @@ export function generateRoutingModuleClassName(dashedName: string): string {
 }
 
 export function isLayoutPath(modulePath: Path): boolean {
-  return modulePath.startsWith(join(PLAYGROUND_PATH, MODULES_WITH_LAYOUT_DIR))
+  return modulePath.startsWith(LAYOUT_DIR_PATH);
 }
 
 export function isService(fileName: PathFragment): boolean {
@@ -147,4 +147,17 @@ export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
 
   const moduleFile = tree.getDir(path).subfiles.find(isRoutingModule);
   return moduleFile ? join(path, moduleFile) : findRoutingModule(tree, dirname(path));
+}
+
+export function isInPlaygroundRoot(filePath: Path): boolean {
+  return dirname(filePath) === PLAYGROUND_PATH;
+}
+
+export function removeBasePath(dirPath: Path): string {
+  const basePaths = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
+  return basePaths.reduce((path, basePath) => path.replace(basePath, ''), dirPath);
+}
+
+export function isPlaygroundRoutingModule(routingModulePath: Path): boolean {
+  return dirname(routingModulePath).endsWith(PLAYGROUND_PATH);
 }

@@ -5,7 +5,7 @@
  */
 
 import * as ts from 'typescript';
-import { dirname, Path, basename } from '@angular-devkit/core';
+import { dirname, Path } from '@angular-devkit/core';
 import { DirEntry, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getSourceFile } from '@angular/cdk/schematics';
 import { addImportToModule, addProviderToModule, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
@@ -15,7 +15,7 @@ import {
   importPath,
   getClassWithDecorator,
   multilineArrayLiteral,
-  withoutExtension,
+  removeExtension,
   getServicesFromDir,
   applyInsertChange,
   hasRoutingModuleInDir,
@@ -25,12 +25,17 @@ import {
   getFeatureModuleFromDir,
   getRoutingModuleFromDir,
   generateLazyModulePath,
-  generateLazyModuleRoute,
-  routePredicateFromPath,
+  routePredicatesFromPath,
   applyReplaceChange,
   findRoutingModule,
   findFeatureModule,
   getPlaygroundRootDir,
+  findRoutesArray,
+  addMissingChildRoutes,
+  isInPlaygroundRoot,
+  getRouteLazyModule,
+  addObjectProperty,
+  findRouteDeep,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -48,14 +53,14 @@ function processDirs(tree: Tree, context: SchematicContext, dirs: DirEntry[]): v
   }
 }
 
-function processDir(tree: Tree, context: SchematicContext, dir: DirEntry, isRoot: boolean = false): void {
+function processDir(tree: Tree, context: SchematicContext, dir: DirEntry): void {
   getComponentsFromDir(dir).forEach(path => processComponent(tree, context, path));
   getDirectivesFromDir(dir).forEach(path => processDirectives(tree, path));
   getServicesFromDir(dir).forEach(path => processService(tree, path));
 
   const modulePath = getFeatureModuleFromDir(dir);
   if (modulePath) {
-    processFeatureModule(tree, context, modulePath, isRoot);
+    processFeatureModule(tree, context, modulePath);
   }
 
   const routingModulePath = getRoutingModuleFromDir(dir);
@@ -85,7 +90,7 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
   const dirPath = dirname(componentPath);
   const modulePath = findFeatureModule(tree, dirPath);
   if (modulePath == null) {
-    throw new SchematicsException(`Can't find module for service ${componentPath}.`);
+    throw new SchematicsException(`Can't find module for component ${componentPath}.`);
   }
 
   const componentDeclarations = getClassWithDecorator(tree, componentPath, 'Component');
@@ -108,8 +113,12 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
     if (routingModulePath) {
       const componentClassName = (componentDeclarations[0].name as ts.Identifier).getText();
       const routingImport = importPath(routingModulePath, componentPath);
-      const route = generateComponentRoute(withoutExtension(componentPath), componentClassName);
-      addRoute(tree, routingModulePath, route, null, componentClassName, routingImport);
+      const routes = findRoutesArray(tree, routingModulePath);
+      const routePath = isInPlaygroundRoot(componentPath)
+        ? ''
+        : removeExtension(componentPath);
+      const route = generateComponentRoute(routePath, componentClassName);
+      addRoute(tree, routingModulePath, routes, route, componentClassName, routingImport);
     }
   }
 }
@@ -118,7 +127,7 @@ function processDirectives(tree: Tree, directivePath: Path): void {
   const dirPath = dirname(directivePath);
   const modulePath = findFeatureModule(tree, dirPath);
   if (modulePath == null) {
-    throw new SchematicsException(`Can't find module for service ${directivePath}.`);
+    throw new SchematicsException(`Can't find module for directive ${directivePath}.`);
   }
 
   const directiveDeclarations = getClassWithDecorator(tree, directivePath, 'Directive');
@@ -129,11 +138,18 @@ function processDirectives(tree: Tree, directivePath: Path): void {
   }
 }
 
-function processFeatureModule(tree: Tree, context: SchematicContext, modulePath: Path, isRoot: boolean = false): void {
+function processFeatureModule(tree: Tree, context: SchematicContext, modulePath: Path): void {
   const parentDir = dirname(dirname(modulePath));
   const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
 
   if (moduleDeclarations.length === 0) {
+    return;
+  }
+
+  multilineDeclarationsArray(tree, modulePath);
+
+  const routingModulePath = findRoutingModule(tree, parentDir);
+  if (routingModulePath == null) {
     return;
   }
   if (moduleDeclarations.length > 1) {
@@ -141,21 +157,20 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
       'Route will be created only for the first one.');
   }
 
-  multilineDeclarationsArray(tree, modulePath);
-  if (isRoot) {
+  const routePredicates = routePredicatesFromPath(routingModulePath, dirname(modulePath));
+  let route = findRouteDeep(findRoutesArray(tree, routingModulePath), routePredicates);
+  if (route == null) {
+    addMissingChildRoutes(tree, routingModulePath, dirname(modulePath));
+    route = findRouteDeep(findRoutesArray(tree, routingModulePath), routePredicates) as ts.ObjectLiteralExpression;
+  }
+
+  if (getRouteLazyModule(route)) {
     return;
   }
 
-  const routingModulePath = findRoutingModule(tree, parentDir);
-  if (routingModulePath == null) {
-    return;
-  }
-  const moduleDirName = basename(dirname(modulePath));
   const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
-  const routePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
-  const route = generateLazyModuleRoute(moduleDirName, routePath);
-  const parentRoutePredicate = routePredicateFromPath(modulePath);
-  addRoute(tree, routingModulePath, route, parentRoutePredicate);
+  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
+  addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, `loadChildren: '${lazyModulePath}'`);
 }
 
 function processRoutingModule(tree: Tree, context: SchematicContext, modulePath: Path) {
