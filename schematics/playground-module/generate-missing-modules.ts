@@ -27,7 +27,7 @@ export function generateMissingModules(tree: Tree): Rule {
 
 function fromTemplate(tree: Tree, options: Object): Rule {
   const transformedSource = apply(
-    url('./files/example'),
+    url('./files'),
     [
       template(options),
       filter(hasNoModuleInDir.bind(null, tree)),
