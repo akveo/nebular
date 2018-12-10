@@ -11,7 +11,7 @@ export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
 export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'layout');
 export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'no-layout');
 export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
-export const PREFIX = 'Nb';
+export const PREFIX = 'Nbp';
 export const FEATURE_MODULE_EXT = '.module.ts';
 export const ROUTING_MODULE_EXT = '-routing.module.ts';
 
