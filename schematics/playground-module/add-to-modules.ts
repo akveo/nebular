@@ -35,7 +35,10 @@ import {
   isInPlaygroundRoot,
   getRouteLazyModule,
   addObjectProperty,
-  findRouteDeep,
+  findRouteWithPath,
+  LAYOUT_DIR_PATH,
+  NO_LAYOUT_DIR_PATH,
+  generatePathRoute,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -139,7 +142,8 @@ function processDirectives(tree: Tree, directivePath: Path): void {
 }
 
 function processFeatureModule(tree: Tree, context: SchematicContext, modulePath: Path): void {
-  const parentDir = dirname(dirname(modulePath));
+  const moduleDir = dirname(modulePath);
+  const parentDir = dirname(moduleDir);
   const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
 
   if (moduleDeclarations.length === 0) {
@@ -157,19 +161,28 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
       'Route will be created only for the first one.');
   }
 
-  const routePredicates = routePredicatesFromPath(routingModulePath, dirname(modulePath));
-  let route = findRouteDeep(findRoutesArray(tree, routingModulePath), routePredicates);
-  if (route == null) {
-    addMissingChildRoutes(tree, routingModulePath, dirname(modulePath));
-    route = findRouteDeep(findRoutesArray(tree, routingModulePath), routePredicates) as ts.ObjectLiteralExpression;
-  }
+  const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
+  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
 
-  if (getRouteLazyModule(route)) {
+  const isBaseModule = moduleDir === LAYOUT_DIR_PATH || moduleDir === NO_LAYOUT_DIR_PATH;
+  if (isBaseModule) {
+    const routes = findRoutesArray(tree, routingModulePath);
+    addRoute(tree, routingModulePath, routes, generatePathRoute('', `loadChildren: '${lazyModulePath}'`));
     return;
   }
 
-  const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
-  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
+  const routePredicates = routePredicatesFromPath(routingModulePath, moduleDir);
+  let route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates);
+  if (route == null) {
+    addMissingChildRoutes(tree, routingModulePath, modulePath);
+    route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates) as ts.ObjectLiteralExpression;
+  }
+
+  const alreadyHasLazyModule = !!getRouteLazyModule(route);
+  if (alreadyHasLazyModule) {
+    return;
+  }
+
   addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, `loadChildren: '${lazyModulePath}'`);
 }
 

@@ -43,10 +43,11 @@ function getPlaygroundDirs(tree: Tree): DirEntry[] {
  * @param tree
  */
 export function getModuleDirs(tree: Tree): DirEntry[] {
-  return getPlaygroundDirs(tree)
-    .reduce((dirs: DirEntry[], dir: DirEntry) => {
-      return dirs.concat(dir.subdirs.map(subDir => dir.dir(subDir)));
-    }, []);
+  const baseDirs = getPlaygroundDirs(tree);
+  const baseDirectChildren = baseDirs.reduce((dirs: DirEntry[], dir: DirEntry) => {
+    return dirs.concat(dir.subdirs.map(subDir => dir.dir(subDir)));
+  }, []);
+  return baseDirs.concat(baseDirectChildren);
 }
 
 /**
