@@ -107,7 +107,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return this.getOption('clientAuthMethod');
   }
 
-  protected redirectResultHandlers = {
+  protected redirectResultHandlers: { [key: string]: Function } = {
     [NbOAuth2ResponseType.CODE]: () => {
       return observableOf(this.route.snapshot.queryParams).pipe(
         switchMap((params: any) => {
@@ -168,7 +168,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     },
   };
 
-  protected redirectResults = {
+  protected redirectResults: { [key: string]: Function } = {
     [NbOAuth2ResponseType.CODE]: () => {
       return observableOf(this.route.snapshot.queryParams).pipe(
         map((params: any) => !!(params && (params.code || params.error))),
@@ -185,8 +185,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   protected defaultOptions: NbOAuth2AuthStrategyOptions = auth2StrategyOptions;
 
   constructor(protected http: HttpClient,
-              private route: ActivatedRoute,
-              @Inject(NB_WINDOW) private window: any) {
+              protected route: ActivatedRoute,
+              @Inject(NB_WINDOW) protected window: any) {
     super();
   }
 
