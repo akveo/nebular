@@ -223,7 +223,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildRefreshRequestData(token), { headers: this.buildAuthHeader() })
+    let headers = this.buildAuthHeader() || new HttpHeaders() ;
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.post(url, this.buildRefreshRequestData(token), { headers: headers })
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -275,7 +278,10 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildCodeRequestData(code), { headers: this.buildAuthHeader() })
+    let headers = this.buildAuthHeader() || new HttpHeaders() ;
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.post(url, this.buildCodeRequestData(code), { headers: headers })
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -297,7 +303,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       redirect_uri: this.getOption('token.redirectUri'),
       client_id: this.getOption('clientId'),
     };
-    return this.cleanParams(this.addCredentialsToParams(params));
+    return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }
 
   protected buildRefreshRequestData(token: NbAuthRefreshableToken): any {
@@ -306,7 +312,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
     };
-    return this.cleanParams(this.addCredentialsToParams(params));
+    return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }
 
   protected buildPasswordRequestData(username: string, password: string ): string {
