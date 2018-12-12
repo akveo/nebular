@@ -109,7 +109,6 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected triggerStrategy: NbTriggerStrategy;
   protected alive: boolean = true;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -120,15 +119,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.triggerStrategy = this.createTriggerStrategy();
-
     this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
   }
 
   ngOnDestroy() {
@@ -136,12 +127,11 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   show() {
-    this.container = createContainer(this.ref, NbTooltipComponent, {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    }, this.componentFactoryResolver);
+    if (!this.ref) {
+      this.createOverlay();
+    }
+
+    this.openTooltip();
   }
 
   hide() {
@@ -154,6 +144,24 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
     } else {
       this.show();
     }
+  }
+
+  protected createOverlay() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+    this.subscribeOnPositionChange();
+  }
+
+  protected openTooltip() {
+    this.container = createContainer(this.ref, NbTooltipComponent, {
+      position: this.position,
+      content: this.content,
+      context: this.context,
+      cfr: this.componentFactoryResolver,
+    }, this.componentFactoryResolver);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -180,7 +188,8 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    const triggerStrategy = this.createTriggerStrategy();
+    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 }
