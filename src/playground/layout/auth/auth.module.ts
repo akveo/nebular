@@ -28,7 +28,7 @@ import {
 } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
-import { NbAuthPlaygroundComponent } from './auth.component';
+import { NbAuthPlaygroundComponent } from './components/auth.component';
 import { NbAuthPlaygroundRoutingModule } from './auth-routing.module';
 import { NbCustomRoleProvider } from './role.provider';
 import { NbAclTestComponent } from './acl/acl-test.component';
