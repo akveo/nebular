@@ -109,7 +109,8 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
   if (hasRoutingModuleInDir(tree.getDir(dirPath))) {
     if (componentDeclarations.length > 1) {
       context.logger.warn(`Found more than one component declaration in ${componentPath}. ` +
-        'Route will be created only for the first one.');
+        'Route will be created only for the first one.\n' +
+        'Move all helper components which don\'t need own routes to sub directory without routing module in it.');
     }
 
     const routingModulePath = findRoutingModule(tree, dirPath);
