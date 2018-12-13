@@ -23,6 +23,7 @@ import {
 } from '@nebular/auth';
 
 import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
+import { NbpOauth2PasswordRoutingModule } from './oauth2-password-routing.module';
 
 
 @NgModule({
@@ -30,13 +31,6 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: NbOAuth2PasswordLoginComponent,
-      },
-    ]),
 
     NbAuthModule.forRoot({
       forms: {
@@ -73,6 +67,7 @@ import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.componen
     NbLayoutModule,
     NbAlertModule,
     NbInputModule,
+    NbpOauth2PasswordRoutingModule,
   ],
   declarations: [
     NbOAuth2PasswordLoginComponent,

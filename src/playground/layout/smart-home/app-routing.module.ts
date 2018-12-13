@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: './auth/auth.module#NgxAuthModule',
+    loadChildren: './auth/smart-home-auth.module#NgxAuthModule',
   },
 ];
 

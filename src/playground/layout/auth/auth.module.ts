@@ -7,7 +7,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpRequest } from '@angular/common/http';
 
 import {
@@ -47,7 +46,6 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
     NbAuthPlaygroundRoutingModule,
 
     NbCardModule,

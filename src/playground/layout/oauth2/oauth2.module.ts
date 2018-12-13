@@ -7,7 +7,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -23,6 +22,7 @@ import {
 
 import { NbOAuth2LoginComponent } from './oauth2-login.component';
 import { NbOAuth2CallbackComponent } from './oauth2-callback.component';
+import { NbpOauth2RoutingModule } from './oauth2-routing.module';
 
 
 @NgModule({
@@ -30,17 +30,6 @@ import { NbOAuth2CallbackComponent } from './oauth2-callback.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: NbOAuth2LoginComponent,
-      },
-      {
-        path: 'callback',
-        component: NbOAuth2CallbackComponent,
-      },
-    ]),
 
     NbAuthModule.forRoot({
       strategies: [
@@ -64,6 +53,7 @@ import { NbOAuth2CallbackComponent } from './oauth2-callback.component';
 
     NbCardModule,
     NbLayoutModule,
+    NbpOauth2RoutingModule,
   ],
   declarations: [
     NbOAuth2LoginComponent,

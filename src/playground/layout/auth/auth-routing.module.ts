@@ -27,7 +27,7 @@ export const routes: Routes = [
     component: NbAuthPlaygroundComponent,
     children: [
       {
-        path: 'auth',
+        path: '',
         component: NbAuthComponent,
         children: [
           {
@@ -60,16 +60,16 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'auth/acl/acl-test.component',
+    path: 'acl/acl-test.component',
     component: NbAclTestComponent,
   },
   {
-    path: 'auth/auth-guard.service',
+    path: 'auth-guard.service',
     canActivate: [NbAuthGuard],
     component: NbAuthPlaygroundComponent,
   },
   {
-    path: 'auth/api-calls.component',
+    path: 'api-calls.component',
     canActivate: [NbAuthGuard],
     component: NbPlaygroundApiCallsComponent,
   },
