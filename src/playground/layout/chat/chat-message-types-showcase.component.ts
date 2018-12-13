@@ -81,7 +81,6 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
 })
-
-export class NbChatMessageTypesShowcaseComponent {
+export class ChatMessageTypesShowcaseComponent {
   date = new Date();
 }

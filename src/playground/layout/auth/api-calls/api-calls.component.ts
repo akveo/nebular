@@ -42,7 +42,7 @@ import { Wine } from './wine';
   `,
 })
 
-export class NbPlaygroundApiCallsComponent {
+export class PlaygroundApiCallsComponent {
 
   token: NbAuthToken;
   wines$: Observable<Wine[]>;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbShowcaseDialogComponent } from './components/showcase-dialog.component';
+import { ShowcaseDialogComponent } from './components/showcase-dialog.component';
 
 @Component({
   selector: 'nb-dialog-showcase',
@@ -9,12 +9,12 @@ import { NbShowcaseDialogComponent } from './components/showcase-dialog.componen
     height: 80vw;
   } `],
 })
-export class NbDialogShowcaseComponent {
+export class DialogShowcaseComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
   open() {
-    this.dialogService.open(NbShowcaseDialogComponent, {
+    this.dialogService.open(ShowcaseDialogComponent, {
       context: {
         title: 'This is a title passed to the dialog component',
       },

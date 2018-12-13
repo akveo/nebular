@@ -19,5 +19,5 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbLayoutColumnLeftComponent {
+export class LayoutColumnLeftComponent {
 }

@@ -120,7 +120,7 @@ import { NbBadgeComponent } from '@nebular/theme';
     </nb-layout>
   `,
 })
-export class NbUserTestComponent {
+export class UserTestComponent {
 
   badge = NbBadgeComponent;
 }

@@ -11,7 +11,7 @@ import { NewsPost } from '../news.service';
     </article>
   `,
 })
-export class NbNewsPostComponent {
+export class NewsPostComponent {
   @Input()
   post: NewsPost;
 }

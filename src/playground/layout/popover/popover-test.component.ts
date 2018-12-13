@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbDynamicToAddComponent } from '../shared/components/dynamic.component';
+import { DynamicToAddComponent } from '../shared/components/dynamic.component';
 
 @Component({
   selector: 'nb-popover-example',
@@ -144,9 +144,9 @@ import { NbDynamicToAddComponent } from '../shared/components/dynamic.component'
     </nb-card>
   `,
 })
-export class NbPopoverTestComponent {
+export class PopoverTestComponent {
 
-  customPopoverComponent = NbDynamicToAddComponent;
+  customPopoverComponent = DynamicToAddComponent;
 
   items = [{ title: 'Profile', link: '/card' }, { title: 'Log out', link: '/auth' }];
 }

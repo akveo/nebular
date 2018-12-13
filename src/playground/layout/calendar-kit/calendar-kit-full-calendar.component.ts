@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbCalendarKitMonthCellComponent } from './components/calendar-kit-month-cell.component';
+import { CalendarKitMonthCellComponent } from './components/calendar-kit-month-cell.component';
 
 @Component({
   selector: 'nb-calendar-kit-full-calendar-showcase',
@@ -13,9 +13,9 @@ import { NbCalendarKitMonthCellComponent } from './components/calendar-kit-month
       </nb-card-body>
     </nb-card>
   `,
-  entryComponents: [NbCalendarKitMonthCellComponent],
+  entryComponents: [CalendarKitMonthCellComponent],
 })
-export class NbCalendarKitFullCalendarShowcaseComponent {
+export class CalendarKitFullCalendarShowcaseComponent {
   month = new Date();
-  monthCellComponent = NbCalendarKitMonthCellComponent;
+  monthCellComponent = CalendarKitMonthCellComponent;
 }

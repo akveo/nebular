@@ -17,5 +17,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbPopoverTemplateRefComponent {
+export class PopoverTemplateRefComponent {
 }

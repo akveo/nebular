@@ -19,8 +19,7 @@ import { NbToastrService } from '@nebular/theme';
     `,
   ],
 })
-
-export class NbToastrShowcaseComponent {
+export class ToastrShowcaseComponent {
   private index: number = 0;
 
   constructor(private toastrService: NbToastrService) {

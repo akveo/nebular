@@ -70,5 +70,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbLayoutTestComponent {
+export class LayoutTestComponent {
 }

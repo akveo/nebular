@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `],
 })
-export class NbButtonTypesComponent {
+export class ButtonTypesComponent {
 
 
   onClick() {

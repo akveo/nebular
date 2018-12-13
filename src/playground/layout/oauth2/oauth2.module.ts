@@ -20,9 +20,9 @@ import {
   NbOAuth2ResponseType,
 } from '@nebular/auth';
 
-import { NbOAuth2LoginComponent } from './oauth2-login.component';
-import { NbOAuth2CallbackComponent } from './oauth2-callback.component';
-import { NbpOauth2RoutingModule } from './oauth2-routing.module';
+import { OAuth2LoginComponent } from './oauth2-login.component';
+import { OAuth2CallbackComponent } from './oauth2-callback.component';
+import { Oauth2RoutingModule } from './oauth2-routing.module';
 
 
 @NgModule({
@@ -53,12 +53,12 @@ import { NbpOauth2RoutingModule } from './oauth2-routing.module';
 
     NbCardModule,
     NbLayoutModule,
-    NbpOauth2RoutingModule,
+    Oauth2RoutingModule,
   ],
   declarations: [
-    NbOAuth2LoginComponent,
-    NbOAuth2CallbackComponent,
+    OAuth2LoginComponent,
+    OAuth2CallbackComponent,
   ],
 })
-export class NbOAuth2PlaygroundModule {
+export class OAuth2PlaygroundModule {
 }

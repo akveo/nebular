@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbBackdropClickDialogComponent } from './components/backdrop-click-dialog.component';
+import { BackdropClickDialogComponent } from './components/backdrop-click-dialog.component';
 
 @Component({
   selector: 'nb-dialog-backdrop-click',
@@ -20,7 +20,7 @@ import { NbBackdropClickDialogComponent } from './components/backdrop-click-dial
     }
   `],
 })
-export class NbDialogBackdropClickComponent {
+export class DialogBackdropClickComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
@@ -33,6 +33,6 @@ export class NbDialogBackdropClickComponent {
   }
 
   protected open(closeOnBackdropClick: boolean) {
-    this.dialogService.open(NbBackdropClickDialogComponent, { closeOnBackdropClick });
+    this.dialogService.open(BackdropClickDialogComponent, { closeOnBackdropClick });
   }
 }

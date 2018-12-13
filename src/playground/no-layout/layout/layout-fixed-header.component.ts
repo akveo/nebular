@@ -13,5 +13,5 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbLayoutFixedHeaderComponent {
+export class LayoutFixedHeaderComponent {
 }

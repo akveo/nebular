@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbpCalendarCustomDayCellComponent } from './components/calendar-custom-day-cell.component';
+import { CalendarCustomDayCellComponent } from './components/calendar-custom-day-cell.component';
 
 @Component({
   selector: 'nb-calendar-custom-day-cell-showcase',
@@ -17,9 +17,9 @@ import { NbpCalendarCustomDayCellComponent } from './components/calendar-custom-
       size="large"
     ></nb-calendar>
   `,
-  entryComponents: [NbpCalendarCustomDayCellComponent],
+  entryComponents: [CalendarCustomDayCellComponent],
 })
-export class NbCalendarCustomDayCellShowcaseComponent {
+export class CalendarCustomDayCellShowcaseComponent {
   date = new Date();
-  dayCellComponent = NbpCalendarCustomDayCellComponent;
+  dayCellComponent = CalendarCustomDayCellComponent;
 }

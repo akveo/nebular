@@ -51,7 +51,7 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSpinnerButtonComponent {
+export class SpinnerButtonComponent {
 
   loading = false;
 

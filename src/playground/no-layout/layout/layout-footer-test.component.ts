@@ -16,5 +16,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbLayoutFooterTestComponent {
+export class LayoutFooterTestComponent {
 }

@@ -14,6 +14,6 @@ import { Component } from '@angular/core';
     </nb-calendar>
   `,
 })
-export class NbCalendarWithoutHeaderComponent {
+export class CalendarWithoutHeaderComponent {
   date = new Date();
 }

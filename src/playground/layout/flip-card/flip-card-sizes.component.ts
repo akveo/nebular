@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flip-card-sizes.component.html',
 })
-export class NbFlipCardSizesComponent {
+export class FlipCardSizesComponent {
 }

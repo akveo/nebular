@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbDialogNamePromptComponent } from './components/name-prompt-dialog.component';
+import { DialogNamePromptComponent } from './components/name-prompt-dialog.component';
 
 @Component({
   selector: 'nb-dialog-result',
@@ -18,14 +18,14 @@ import { NbDialogNamePromptComponent } from './components/name-prompt-dialog.com
     }
   `],
 })
-export class NbDialogResultComponent {
+export class DialogResultComponent {
   names: string[] = [];
 
   constructor(private dialogService: NbDialogService) {
   }
 
   open() {
-    this.dialogService.open(NbDialogNamePromptComponent)
+    this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(name => name && this.names.push(name));
   }
 }

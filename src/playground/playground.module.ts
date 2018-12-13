@@ -43,7 +43,7 @@ import {
   NbDatepickerModule, NbRadioModule,
 } from '@nebular/theme';
 
-import { NbPlaygroundRoutingModule } from './playground-routing.module';
+import { PlaygroundRoutingModule } from './playground-routing.module';
 import { NbPlaygroundBaseComponent } from './playground-base.component';
 import { NbPlaygroundLayoutComponent } from './playground-layout.component';
 
@@ -500,7 +500,7 @@ export const NB_EXAMPLE_COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
-    NbPlaygroundRoutingModule,
+    PlaygroundRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     ...NB_MODULES,
@@ -521,5 +521,5 @@ export const NB_EXAMPLE_COMPONENTS = [
     NbFormComponent,
   ],
 })
-export class NbPlaygroundModule {
+export class PlaygroundModule {
 }

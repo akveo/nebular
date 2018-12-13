@@ -11,7 +11,8 @@ import {
   NbAuthService,
   NB_AUTH_OPTIONS,
   nbAuthCreateToken,
-  NbAuthJWTToken, NbAuthToken,
+  NbAuthJWTToken,
+  NbAuthToken,
 } from '@nebular/auth';
 import { getDeepFromObject } from '@nebular/auth/helpers';
 
@@ -20,7 +21,7 @@ import { getDeepFromObject } from '@nebular/auth/helpers';
   templateUrl: './oauth2-password-login.component.html',
   styleUrls: ['./oauth2-password-login.component.scss'],
 })
-export class NbOAuth2PasswordLoginComponent {
+export class OAuth2PasswordLoginComponent {
 
   token: NbAuthToken;
   redirectDelay: number = 0;

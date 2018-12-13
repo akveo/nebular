@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
 })
-export class NbRouteTabsetShowcaseComponent {
+export class RouteTabsetShowcaseComponent {
   tabs: any[] = [
     {
       title: 'Users',

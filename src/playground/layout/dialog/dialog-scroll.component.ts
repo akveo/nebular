@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbScrollDialogComponent } from './components/scroll-dialog.component';
+import { ScrollDialogComponent } from './components/scroll-dialog.component';
 
 @Component({
   selector: 'nb-dialog-scroll',
@@ -20,7 +20,7 @@ import { NbScrollDialogComponent } from './components/scroll-dialog.component';
     }
   `],
 })
-export class NbDialogScrollComponent {
+export class DialogScrollComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
@@ -33,6 +33,6 @@ export class NbDialogScrollComponent {
   }
 
   protected open(hasScroll: boolean) {
-    this.dialogService.open(NbScrollDialogComponent, { hasScroll });
+    this.dialogService.open(ScrollDialogComponent, { hasScroll });
   }
 }

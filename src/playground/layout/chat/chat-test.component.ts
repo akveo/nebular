@@ -31,7 +31,7 @@ import { Component } from '@angular/core';
     </nb-chat>
   `,
 })
-export class NbChatTestComponent {
+export class ChatTestComponent {
   messages = [];
   sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];

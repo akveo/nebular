@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './alert-colors.component.html',
 })
-export class NbAlertColorsComponent {
+export class AlertColorsComponent {
 }

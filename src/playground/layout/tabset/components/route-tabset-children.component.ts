@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbRouteTabsetShowcaseChild1Component {
+export class RouteTabsetShowcaseChild1Component {
 }
 
 @Component({
@@ -21,5 +21,5 @@ export class NbRouteTabsetShowcaseChild1Component {
     }
   `],
 })
-export class NbRouteTabsetShowcaseChild2Component {
+export class RouteTabsetShowcaseChild2Component {
 }

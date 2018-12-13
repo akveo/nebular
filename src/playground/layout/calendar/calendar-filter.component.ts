@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     </nb-calendar>
   `,
 })
-export class NbCalendarFilterComponent {
+export class CalendarFilterComponent {
   date = new Date();
   filter = date => date.getDay() !== 0 && date.getDay() !== 6;
 }

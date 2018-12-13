@@ -33,5 +33,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbSidebarTwoTestComponent {
+export class SidebarTwoTestComponent {
 }

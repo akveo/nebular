@@ -16,5 +16,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `],
 })
-export class NbTabsetBadgeComponent {
+export class TabsetBadgeComponent {
 }

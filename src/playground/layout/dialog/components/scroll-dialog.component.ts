@@ -20,10 +20,10 @@ import { NbDialogRef } from '@nebular/theme';
     </nb-card>
   `,
 })
-export class NbScrollDialogComponent {
+export class ScrollDialogComponent {
   @Input() title: string;
 
-  constructor(protected ref: NbDialogRef<NbScrollDialogComponent>) {
+  constructor(protected ref: NbDialogRef<ScrollDialogComponent>) {
   }
 
   dismiss() {

@@ -20,10 +20,10 @@ import { NbDialogRef } from '@nebular/theme';
     </nb-card>
   `,
 })
-export class NbBackdropClickDialogComponent {
+export class BackdropClickDialogComponent {
   @Input() title: string;
 
-  constructor(protected ref: NbDialogRef<NbBackdropClickDialogComponent>) {
+  constructor(protected ref: NbDialogRef<BackdropClickDialogComponent>) {
   }
 
   dismiss() {

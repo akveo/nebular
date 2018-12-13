@@ -6,12 +6,12 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
-import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
+import { OAuth2PasswordLoginComponent } from './oauth2-password-login.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: NbOAuth2PasswordLoginComponent,
+    component: OAuth2PasswordLoginComponent,
   },
 ];
 
@@ -19,4 +19,4 @@ const routes: Route[] = [
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ],
 })
-export class NbpOauth2PasswordRoutingModule {}
+export class Oauth2PasswordRoutingModule {}

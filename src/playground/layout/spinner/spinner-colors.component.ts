@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './spinner-colors.component.html',
 })
-export class NbSpinnerColorsComponent {
+export class SpinnerColorsComponent {
 }

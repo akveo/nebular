@@ -16,5 +16,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `],
 })
-export class NbButtonFullWidthComponent {
+export class ButtonFullWidthComponent {
 }

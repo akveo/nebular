@@ -28,7 +28,7 @@ import { NbAccessChecker } from '@nebular/security';
     </nb-layout>
   `,
 })
-export class NbAclTestComponent {
+export class AclTestComponent {
 
   constructor(public accessChecker: NbAccessChecker) {
   }

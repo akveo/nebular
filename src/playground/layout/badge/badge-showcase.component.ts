@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './badge-showcase.component.html',
 })
-export class NbBadgeShowcaseComponent {
+export class BadgeShowcaseComponent {
 }

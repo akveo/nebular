@@ -26,7 +26,7 @@ import { takeWhile } from 'rxjs/operators';
     </nb-layout>
   `,
 })
-export class NbOAuth2LoginComponent implements OnDestroy {
+export class OAuth2LoginComponent implements OnDestroy {
 
   token: NbAuthOAuth2Token;
 

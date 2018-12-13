@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './progress-bar-showcase.component.html',
 })
 
-export class NbProgressBarShowcaseComponent {
+export class ProgressBarShowcaseComponent {
 }

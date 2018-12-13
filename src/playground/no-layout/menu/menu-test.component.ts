@@ -41,7 +41,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
     </nb-layout>
   `,
 })
-export class NbMenuTestComponent implements OnInit, OnDestroy {
+export class MenuTestComponent implements OnInit, OnDestroy {
   sidebarMenuItems = [
     {
       title: 'Menu Items',

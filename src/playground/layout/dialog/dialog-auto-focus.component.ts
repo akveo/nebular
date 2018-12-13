@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbAutoFocusDialogComponent } from './components/auto-focus-dialog.component';
+import { AutoFocusDialogComponent } from './components/auto-focus-dialog.component';
 
 @Component({
   selector: 'nb-dialog-auto-focus',
@@ -20,7 +20,7 @@ import { NbAutoFocusDialogComponent } from './components/auto-focus-dialog.compo
     }
   `],
 })
-export class NbDialogAutoFocusComponent {
+export class DialogAutoFocusComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
@@ -33,6 +33,6 @@ export class NbDialogAutoFocusComponent {
   }
 
   protected open(autoFocus: boolean) {
-    this.dialogService.open(NbAutoFocusDialogComponent, { autoFocus });
+    this.dialogService.open(AutoFocusDialogComponent, { autoFocus });
   }
 }

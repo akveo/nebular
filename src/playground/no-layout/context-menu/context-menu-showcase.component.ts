@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbContextMenuShowcaseComponent {
+export class ContextMenuShowcaseComponent {
   items = [
     { title: 'Profile' },
     { title: 'Logout' },

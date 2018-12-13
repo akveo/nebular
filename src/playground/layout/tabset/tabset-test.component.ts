@@ -147,7 +147,7 @@ import { NbBadgeComponent } from '@nebular/theme';
     </nb-tabset>
   `,
 })
-export class NbTabsetTestComponent {
+export class TabsetTestComponent {
 
   badge = NbBadgeComponent;
 

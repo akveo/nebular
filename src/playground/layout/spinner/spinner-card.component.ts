@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
 })
-export class NbSpinnerCardComponent {
+export class SpinnerCardComponent {
 
   loading = false;
 

@@ -20,10 +20,10 @@ import { NbDialogRef } from '@nebular/theme';
     </nb-card>
   `,
 })
-export class NbAutoFocusDialogComponent {
+export class AutoFocusDialogComponent {
   @Input() title: string;
 
-  constructor(protected ref: NbDialogRef<NbAutoFocusDialogComponent>) {
+  constructor(protected ref: NbDialogRef<AutoFocusDialogComponent>) {
   }
 
   dismiss() {

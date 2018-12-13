@@ -22,5 +22,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbTooltipPlacementsComponent {
+export class TooltipPlacementsComponent {
 }

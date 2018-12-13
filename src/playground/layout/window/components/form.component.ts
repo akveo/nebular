@@ -12,7 +12,7 @@ import { NbWindowRef } from '@nebular/theme';
     </form>
   `,
 })
-export class NbFormComponent {
+export class FormComponent {
   constructor(public windowRef: NbWindowRef) {}
 
   close() {

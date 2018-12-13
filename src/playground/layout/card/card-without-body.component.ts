@@ -33,6 +33,6 @@ import { fruits } from '../list/fruits-list';
     }
   `],
 })
-export class NbCardWithoutBodyComponent {
+export class CardWithoutBodyComponent {
   fruits = fruits;
 }

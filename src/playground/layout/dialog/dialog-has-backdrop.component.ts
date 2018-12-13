@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbHasBackdropDialogComponent } from './components/has-backdrop-dialog.component';
+import { HasBackdropDialogComponent } from './components/has-backdrop-dialog.component';
 
 @Component({
   selector: 'nb-dialog-has-backdrop',
@@ -20,7 +20,7 @@ import { NbHasBackdropDialogComponent } from './components/has-backdrop-dialog.c
     }
   `],
 })
-export class NbDialogHasBackdropComponent {
+export class DialogHasBackdropComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
@@ -33,6 +33,6 @@ export class NbDialogHasBackdropComponent {
   }
 
   protected open(hasBackdrop: boolean) {
-    this.dialogService.open(NbHasBackdropDialogComponent, { hasBackdrop });
+    this.dialogService.open(HasBackdropDialogComponent, { hasBackdrop });
   }
 }

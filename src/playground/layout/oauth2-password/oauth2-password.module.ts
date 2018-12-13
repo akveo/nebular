@@ -7,7 +7,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -22,8 +21,8 @@ import {
   NbOAuth2GrantType,
 } from '@nebular/auth';
 
-import { NbOAuth2PasswordLoginComponent } from './oauth2-password-login.component';
-import { NbpOauth2PasswordRoutingModule } from './oauth2-password-routing.module';
+import { OAuth2PasswordLoginComponent } from './oauth2-password-login.component';
+import { Oauth2PasswordRoutingModule } from './oauth2-password-routing.module';
 
 
 @NgModule({
@@ -67,11 +66,11 @@ import { NbpOauth2PasswordRoutingModule } from './oauth2-password-routing.module
     NbLayoutModule,
     NbAlertModule,
     NbInputModule,
-    NbpOauth2PasswordRoutingModule,
+    Oauth2PasswordRoutingModule,
   ],
   declarations: [
-    NbOAuth2PasswordLoginComponent,
+    OAuth2PasswordLoginComponent,
   ],
 })
-export class NbOAuth2PasswordPlaygroundModule {
+export class OAuth2PasswordPlaygroundModule {
 }

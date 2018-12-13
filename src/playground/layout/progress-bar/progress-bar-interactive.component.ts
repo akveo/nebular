@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbProgressBarInteractiveComponent {
+export class ProgressBarInteractiveComponent {
 
   value = 25;
 

@@ -32,7 +32,7 @@ import { FormControl } from '@angular/forms';
     }
   `],
 })
-export class NbDatepickerFormsComponent {
+export class DatepickerFormsComponent {
   formControl = new FormControl(new Date());
   ngModelDate = new Date();
 }

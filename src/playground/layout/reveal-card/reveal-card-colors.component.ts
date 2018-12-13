@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reveal-card-colors.component.html',
 })
-export class NbRevealCardColorsComponent {
+export class RevealCardColorsComponent {
 }

@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './spinner-sizes.component.html',
 })
-export class NbSpinnerSizesComponent {
+export class SpinnerSizesComponent {
 }

@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './checkbox-status.component.html',
 })
 
-export class NbCheckboxStatusComponent {
+export class CheckboxStatusComponent {
 }

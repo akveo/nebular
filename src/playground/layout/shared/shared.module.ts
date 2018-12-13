@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbDynamicToAddComponent } from './components/dynamic.component';
+import { DynamicToAddComponent } from './components/dynamic.component';
 
 
 @NgModule({
@@ -14,14 +14,14 @@ import { NbDynamicToAddComponent } from './components/dynamic.component';
     CommonModule,
   ],
   exports: [
-    NbDynamicToAddComponent,
+    DynamicToAddComponent,
   ],
   declarations: [
-    NbDynamicToAddComponent,
+    DynamicToAddComponent,
   ],
   entryComponents: [
-    NbDynamicToAddComponent,
+    DynamicToAddComponent,
   ],
 })
-export class NbPlaygroundSharedModule {
+export class PlaygroundSharedModule {
 }

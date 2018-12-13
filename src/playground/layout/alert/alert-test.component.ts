@@ -27,7 +27,7 @@ import { Component } from '@angular/core';
     </nb-alert>
   `,
 })
-export class NbAlertTestComponent {
+export class AlertTestComponent {
 
   sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];

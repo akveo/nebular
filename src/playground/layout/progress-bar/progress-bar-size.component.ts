@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbProgressBarSizeComponent {
+export class ProgressBarSizeComponent {
 }

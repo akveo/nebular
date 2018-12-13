@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `,
 })
-export class NbDynamicToAddComponent {
+export class DynamicToAddComponent {
 
   @Input()
   text: string = '';

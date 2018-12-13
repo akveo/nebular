@@ -28,5 +28,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbDatepickerShowcaseComponent {
+export class DatepickerShowcaseComponent {
 }

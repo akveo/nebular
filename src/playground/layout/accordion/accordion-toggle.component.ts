@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
   templateUrl: './accordion-toggle.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAccordionToggleComponent {
+export class AccordionToggleComponent {
 
   @ViewChild('item') accordion;
 

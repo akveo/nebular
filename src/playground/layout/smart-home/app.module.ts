@@ -15,8 +15,8 @@ import {
 } from '@nebular/theme';
 
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { NgxAppComponent } from './components/app.component';
-import { NgxAppRouting } from './app-routing.module';
+import { AppComponent } from './components/app.component';
+import { AppRouting } from './app-routing.module';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { NgxAppRouting } from './app-routing.module';
     NbLayoutModule,
     NbCardModule,
     NbButtonModule,
-    NgxAppRouting,
+    AppRouting,
 
     NbAuthModule.forRoot({
       strategies: [
@@ -40,8 +40,8 @@ import { NgxAppRouting } from './app-routing.module';
     }),
   ],
   declarations: [
-    NgxAppComponent,
+    AppComponent,
   ],
 })
-export class NgxAppModule {
+export class AppModule {
 }

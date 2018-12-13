@@ -15,7 +15,7 @@ import 'style-loader!../styles/styles.scss';
     <router-outlet></router-outlet>
   `,
 })
-export class NbPlaygroundBaseComponent implements OnInit {
+export class PlaygroundBaseComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }
 

@@ -20,7 +20,7 @@ import {
     </nb-calendar-day-picker>
   `,
 })
-export class NbCalendarKitMonthCellComponent extends NbCalendarDayPickerComponent<Date, Date>
+export class CalendarKitMonthCellComponent extends NbCalendarDayPickerComponent<Date, Date>
   implements NbCalendarCell<Date, Date> {
   select: EventEmitter<Date> = new EventEmitter();
   selectedValue: Date;

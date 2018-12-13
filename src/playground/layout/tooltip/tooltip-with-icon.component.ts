@@ -21,5 +21,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbTooltipWithIconComponent {
+export class TooltipWithIconComponent {
 }

@@ -1230,5 +1230,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NbPlaygroundRoutingModule {
+export class PlaygroundRoutingModule {
 }

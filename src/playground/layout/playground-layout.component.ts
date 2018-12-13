@@ -19,7 +19,7 @@ import 'style-loader!../styles/styles.scss';
     </nb-layout>
   `,
 })
-export class NbPlaygroundLayoutComponent implements OnInit {
+export class PlaygroundLayoutComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }
 

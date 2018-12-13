@@ -15,7 +15,7 @@ import { NbOverlayRef, NbOverlayService, NbPositionBuilderService, NbTemplatePor
     <button nbButton hero status="primary" (click)="createOverlay()">Create overlay</button>
   `,
 })
-export class NbOverlayShowcaseComponent implements OnInit {
+export class OverlayShowcaseComponent implements OnInit {
   @ViewChild('overlay') overlayTemplate: TemplateRef<any>;
   protected ref: NbOverlayRef;
 

@@ -51,7 +51,7 @@ import { NbSidebarService } from '@nebular/theme';
     </nb-layout>
 `,
 })
-export class NbSidebarTestComponent implements OnInit {
+export class SidebarTestComponent implements OnInit {
 
   content = 'First ';
 

@@ -26,7 +26,7 @@ import { NbToastrService } from '@nebular/theme';
   ],
 })
 
-export class NbToastrPositionsComponent {
+export class ToastrPositionsComponent {
   private index: number = 0;
 
   constructor(private toastrService: NbToastrService) {

@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './checkbox-disabled.component.html',
 })
 
-export class NbCheckboxDisabledComponent {
+export class CheckboxDisabledComponent {
 }

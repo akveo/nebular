@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NbAuthPlaygroundComponent } from './components/auth.component';
+import { AuthPlaygroundComponent } from './components/auth.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -16,15 +16,15 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { NbAclTestComponent } from './acl/acl-test.component';
-import { NbAuthGuard } from './auth-guard.service';
-import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
+import { AclTestComponent } from './acl/acl-test.component';
+import { AuthGuard } from './auth-guard.service';
+import { PlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: NbAuthPlaygroundComponent,
+    component: AuthPlaygroundComponent,
     children: [
       {
         path: '',
@@ -61,17 +61,17 @@ export const routes: Routes = [
   },
   {
     path: 'acl/acl-test.component',
-    component: NbAclTestComponent,
+    component: AclTestComponent,
   },
   {
     path: 'auth-guard.service',
-    canActivate: [NbAuthGuard],
-    component: NbAuthPlaygroundComponent,
+    canActivate: [AuthGuard],
+    component: AuthPlaygroundComponent,
   },
   {
     path: 'api-calls.component',
-    canActivate: [NbAuthGuard],
-    component: NbPlaygroundApiCallsComponent,
+    canActivate: [AuthGuard],
+    component: PlaygroundApiCallsComponent,
   },
 ];
 
@@ -79,5 +79,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NbAuthPlaygroundRoutingModule {
+export class AuthPlaygroundRoutingModule {
 }

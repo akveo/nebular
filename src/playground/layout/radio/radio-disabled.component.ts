@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
   selector: 'nb-radio-disabled',
   templateUrl: './radio-disabled.component.html',
 })
-export class NbRadioDisabledComponent {
+export class RadioDisabledComponent {
   options = [
     { value: 'This is value 1', label: 'Option 1' },
     { value: 'This is value 2', label: 'Option 2', disabled: true },

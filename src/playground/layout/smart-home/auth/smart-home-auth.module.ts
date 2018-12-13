@@ -8,11 +8,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxAuthRoutingModule } from './auth-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { NbAuthModule } from '@nebular/auth';
 import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
 
-import { NgxLoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -23,13 +23,13 @@ import { NgxLoginComponent } from './login/login.component';
     NbInputModule,
     NbButtonModule,
     NbCheckboxModule,
-    NgxAuthRoutingModule,
+    AuthRoutingModule,
 
     NbAuthModule,
   ],
   declarations: [
-    NgxLoginComponent,
+    LoginComponent,
   ],
 })
-export class NgxAuthModule {
+export class AuthModule {
 }

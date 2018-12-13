@@ -17,5 +17,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `],
 })
-export class NbButtonShowcaseComponent {
+export class ButtonShowcaseComponent {
 }

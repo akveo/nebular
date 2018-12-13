@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
   selector: 'nb-radio-showcase',
   templateUrl: './radio-showcase.component.html',
 })
-export class NbRadioShowcaseComponent {
+export class RadioShowcaseComponent {
   options = [
     { value: 'This is value 1', label: 'Option 1' },
     { value: 'This is value 2', label: 'Option 2' },

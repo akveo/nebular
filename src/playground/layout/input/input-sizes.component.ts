@@ -18,4 +18,4 @@ import { Component } from '@angular/core';
   `,
   styleUrls: ['./input-component.scss'],
 })
-export class NbInputSizesComponent {}
+export class InputSizesComponent {}

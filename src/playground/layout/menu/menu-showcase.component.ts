@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-showcase.component.html',
 })
-export class NbMenuShowcaseComponent {
+export class MenuShowcaseComponent {
 
   items = [
     {

@@ -11,7 +11,7 @@ import { NbWindowService } from '@nebular/theme';
   `,
   styleUrls: [ './window.scss' ],
 })
-export class NbTemplateWindowComponent {
+export class TemplateWindowComponent {
 
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 

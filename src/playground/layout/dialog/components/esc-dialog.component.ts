@@ -20,10 +20,10 @@ import { NbDialogRef } from '@nebular/theme';
     </nb-card>
   `,
 })
-export class NbEscDialogComponent {
+export class EscDialogComponent {
   @Input() title: string;
 
-  constructor(protected ref: NbDialogRef<NbEscDialogComponent>) {
+  constructor(protected ref: NbDialogRef<EscDialogComponent>) {
   }
 
   dismiss() {

@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
     </nb-layout>
   `,
 })
-export class NbContextMenuTestComponent {
+export class ContextMenuTestComponent {
 
   items = [
     { title: 'Profile', link: '/user' },

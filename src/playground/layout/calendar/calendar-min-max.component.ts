@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     </nb-calendar>
   `,
 })
-export class NbCalendarMinMaxComponent {
+export class CalendarMinMaxComponent {
   date = new Date();
   min = new Date(2018, 6, 15);
   max = new Date(2018, 8, 15);

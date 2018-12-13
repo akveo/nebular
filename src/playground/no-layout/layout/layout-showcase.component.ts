@@ -16,5 +16,5 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbLayoutShowcaseComponent {
+export class LayoutShowcaseComponent {
 }

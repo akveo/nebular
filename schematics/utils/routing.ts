@@ -21,8 +21,8 @@ import {
   removeBasePath,
 } from '../utils';
 
-const LAYOUT_COMPONENT_CLASS = 'NbPlaygroundLayoutComponent';
-const NO_LAYOUT_COMPONENT_CLASS = 'NbPlaygroundBaseComponent';
+const LAYOUT_COMPONENT_CLASS = 'PlaygroundLayoutComponent';
+const NO_LAYOUT_COMPONENT_CLASS = 'PlaygroundBaseComponent';
 
 export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralExpression {
   const source = getSourceFile(tree, modulePath);

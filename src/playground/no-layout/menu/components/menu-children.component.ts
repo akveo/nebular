@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     <h1>Menu Item #1</h1>
   `,
 })
-export class NbMenuItem1Component { }
+export class MenuItem1Component { }
 
 @Component({
   selector: 'nb-menu-item2',
@@ -14,7 +14,7 @@ export class NbMenuItem1Component { }
     <h1>Menu Item #2</h1>
   `,
 })
-export class NbMenuItem2Component { }
+export class MenuItem2Component { }
 
 @Component({
   selector: 'nb-menu-item3',
@@ -22,7 +22,7 @@ export class NbMenuItem2Component { }
     <router-outlet></router-outlet>
   `,
 })
-export class NbMenuItem3Component { }
+export class MenuItem3Component { }
 
 @Component({
   selector: 'nb-menu-item31',
@@ -30,7 +30,7 @@ export class NbMenuItem3Component { }
     <h1>Menu Item #3.1</h1>
   `,
 })
-export class NbMenuItem31Component { }
+export class MenuItem31Component { }
 
 @Component({
   selector: 'nb-menu-item32',
@@ -38,7 +38,7 @@ export class NbMenuItem31Component { }
     <h1>Menu Item #3.2</h1>
   `,
 })
-export class NbMenuItem32Component { }
+export class MenuItem32Component { }
 
 @Component({
   selector: 'nb-menu-item33',
@@ -46,7 +46,7 @@ export class NbMenuItem32Component { }
     <router-outlet></router-outlet>
   `,
 })
-export class NbMenuItem33Component { }
+export class MenuItem33Component { }
 
 @Component({
   selector: 'nb-menu-item331',
@@ -54,7 +54,7 @@ export class NbMenuItem33Component { }
     <h1>Menu Item #3.3.1</h1>
   `,
 })
-export class NbMenuItem331Component { }
+export class MenuItem331Component { }
 
 @Component({
   selector: 'nb-menu-item332',
@@ -62,7 +62,7 @@ export class NbMenuItem331Component { }
     <h1>Menu Item #3.3.2</h1>
   `,
 })
-export class NbMenuItem332Component { }
+export class MenuItem332Component { }
 
 @Component({
   selector: 'nb-menu-item4',
@@ -70,4 +70,4 @@ export class NbMenuItem332Component { }
     <h1>Menu Item #4</h1>
   `,
 })
-export class NbMenuItem4Component { }
+export class MenuItem4Component { }

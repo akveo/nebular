@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NbEscDialogComponent } from './components/esc-dialog.component';
+import { EscDialogComponent } from './components/esc-dialog.component';
 
 @Component({
   selector: 'nb-dialog-esc',
@@ -20,7 +20,7 @@ import { NbEscDialogComponent } from './components/esc-dialog.component';
     }
   `],
 })
-export class NbDialogEscComponent {
+export class DialogEscComponent {
   constructor(private dialogService: NbDialogService) {
   }
 
@@ -33,6 +33,6 @@ export class NbDialogEscComponent {
   }
 
   protected open(closeOnEsc: boolean) {
-    this.dialogService.open(NbEscDialogComponent, { closeOnEsc });
+    this.dialogService.open(EscDialogComponent, { closeOnEsc });
   }
 }
