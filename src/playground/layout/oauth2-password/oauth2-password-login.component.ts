@@ -5,6 +5,7 @@
  */
 
 import { Component, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   NbAuthResult,
   NbAuthService,
@@ -12,8 +13,7 @@ import {
   nbAuthCreateToken,
   NbAuthJWTToken, NbAuthToken,
 } from '@nebular/auth';
-import { Router } from '@angular/router';
-import { getDeepFromObject } from '../../framework/auth/helpers';
+import { getDeepFromObject } from '@nebular/auth/helpers';
 
 @Component({
   selector: 'nb-playground-auth',
