@@ -5,26 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-
-import { NbCalendarDayCellComponent } from '@nebular/theme';
-
-
-@Component({
-  selector: 'nb-calendar-custom-day-cell',
-  styles: [`
-    :host { text-align: center; }
-    span { font-size: 75%; opacity: 0.75; }
-  `],
-  template: `
-    <div>
-      <div>{{ day }}</div>
-      <span>{{ (day + 100) * day }}$</span>
-    </div>
-  `,
-  host: { '(click)': 'onClick()', 'class': 'day-cell' },
-})
-export class NbCalendarCustomDayCellComponent extends NbCalendarDayCellComponent<Date> {
-}
+import { NbpCalendarCustomDayCellComponent } from './components/calendar-custom-day-cell.component';
 
 @Component({
   selector: 'nb-calendar-custom-day-cell-showcase',
@@ -36,9 +17,9 @@ export class NbCalendarCustomDayCellComponent extends NbCalendarDayCellComponent
       size="large"
     ></nb-calendar>
   `,
-  entryComponents: [NbCalendarCustomDayCellComponent],
+  entryComponents: [NbpCalendarCustomDayCellComponent],
 })
 export class NbCalendarCustomDayCellShowcaseComponent {
   date = new Date();
-  dayCellComponent = NbCalendarCustomDayCellComponent;
+  dayCellComponent = NbpCalendarCustomDayCellComponent;
 }
