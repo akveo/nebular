@@ -15,7 +15,7 @@ import {
 } from '@nebular/theme';
 
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { AppComponent } from './components/app.component';
+import { AppComponent } from './app.component';
 import { AppRouting } from './app-routing.module';
 
 
