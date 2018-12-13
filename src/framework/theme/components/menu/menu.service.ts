@@ -4,17 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Injectable} from '@angular/core';
-import {Location} from '@angular/common';
-import {Params} from '@angular/router';
-import {Observable, BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
-import {share} from 'rxjs/operators';
-import {isUrlPathContain, isUrlPathEqual} from './url-matching-helpers';
+import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+import { Params } from '@angular/router';
+import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { share } from 'rxjs/operators';
+import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 
-export interface NbMenuBag {
-  tag: string;
-  item: NbMenuItem
-}
+export interface NbMenuBag { tag: string; item: NbMenuItem }
 
 const itemClick$ = new Subject<NbMenuBag>();
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
@@ -135,7 +132,7 @@ export class NbMenuService {
    * @param {string} tag
    */
   addItems(items: NbMenuItem[], tag?: string) {
-    addItems$.next({tag, items});
+    addItems$.next({ tag, items });
   }
 
   /**
@@ -143,7 +140,7 @@ export class NbMenuService {
    * @param {string} tag
    */
   collapseAll(tag?: string) {
-    collapseAll$.next({tag});
+    collapseAll$.next({ tag });
   }
 
   /**
@@ -151,7 +148,7 @@ export class NbMenuService {
    * @param {string} tag
    */
   navigateHome(tag?: string) {
-    navigateHome$.next({tag});
+    navigateHome$.next({ tag });
   }
 
   /**
@@ -162,7 +159,7 @@ export class NbMenuService {
   getSelectedItem(tag?: string): Observable<NbMenuBag> {
     const listener = new BehaviorSubject<NbMenuBag>(null);
 
-    getSelectedItem$.next({tag, listener});
+    getSelectedItem$.next({ tag, listener });
 
     return listener.asObservable();
   }
@@ -187,8 +184,7 @@ export class NbMenuService {
 @Injectable()
 export class NbMenuInternalService {
 
-  constructor(private location: Location) {
-  }
+  constructor(private location: Location) {}
 
   prepareItems(items: NbMenuItem[]) {
     const defaultItem = new NbMenuItem();
