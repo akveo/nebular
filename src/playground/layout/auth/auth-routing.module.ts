@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NbAuthPlaygroundComponent } from './auth.component';
+import { NbAuthPlaygroundComponent } from './components/auth.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
