@@ -39,6 +39,8 @@ import {
   LAYOUT_DIR_PATH,
   NO_LAYOUT_DIR_PATH,
   generatePathRoute,
+  findRoute,
+  componentRoutePredicate,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -101,30 +103,39 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
     return;
   }
   for (const component of componentDeclarations) {
-    const componentClassName = (component.name as ts.Identifier).getText();
+    const className = (component.name as ts.Identifier).getText();
     const moduleImportString = importPath(modulePath, componentPath);
-    addDeclaration(tree, modulePath, componentClassName, moduleImportString);
+    addDeclaration(tree, modulePath, className, moduleImportString);
   }
 
-  if (hasRoutingModuleInDir(tree.getDir(dirPath))) {
-    if (componentDeclarations.length > 1) {
-      context.logger.warn(`Found more than one component declaration in ${componentPath}. ` +
-        'Route will be created only for the first one.\n' +
-        'Move all helper components which don\'t need own routes to sub directory without routing module in it.');
-    }
-
-    const routingModulePath = findRoutingModule(tree, dirPath);
-    if (routingModulePath) {
-      const componentClassName = (componentDeclarations[0].name as ts.Identifier).getText();
-      const routingImport = importPath(routingModulePath, componentPath);
-      const routes = findRoutesArray(tree, routingModulePath);
-      const routePath = isInPlaygroundRoot(componentPath)
-        ? ''
-        : removeExtension(componentPath);
-      const route = generateComponentRoute(routePath, componentClassName);
-      addRoute(tree, routingModulePath, routes, route, componentClassName, routingImport);
-    }
+  if (!hasRoutingModuleInDir(tree.getDir(dirPath))) {
+    return;
   }
+
+  const routingModulePath = findRoutingModule(tree, dirPath);
+  if (!routingModulePath) {
+    throw new SchematicsException(`Can't find routing module for module ${modulePath}.`);
+  }
+
+  if (componentDeclarations.length > 1) {
+    context.logger.warn(`Found more than one component declaration in ${componentPath}. ` +
+      'Route will be created only for the first one.\n' +
+      'Move all helper components which don\'t need own routes to sub directory without routing module in it.');
+  }
+
+  const componentClassName = (componentDeclarations[0].name as ts.Identifier).getText();
+  const routes = findRoutesArray(tree, routingModulePath);
+
+  if (findRoute(routes, componentRoutePredicate.bind(null, componentClassName))) {
+    return;
+  }
+
+  const routingImport = importPath(routingModulePath, componentPath);
+  const routePath = isInPlaygroundRoot(componentPath)
+    ? ''
+    : removeExtension(componentPath);
+  const route = generateComponentRoute(routePath, componentClassName);
+  addRoute(tree, routingModulePath, routes, route, componentClassName, routingImport);
 }
 
 function processDirectives(tree: Tree, directivePath: Path): void {
