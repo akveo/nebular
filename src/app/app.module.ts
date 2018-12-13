@@ -14,7 +14,7 @@ import { NbThemeModule } from '@nebular/theme';
 
 import { NbAppComponent } from './app.component';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
-import { NbDynamicToAddComponent } from '../playground/layout/shared/dynamic.component';
+import { NbDynamicToAddComponent } from '../playground/layout/shared/components/dynamic.component';
 import { NbPlaygroundSharedModule } from '../playground/layout/shared/shared.module';
 import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 

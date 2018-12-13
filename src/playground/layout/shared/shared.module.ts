@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbDynamicToAddComponent } from './dynamic.component';
+import { NbDynamicToAddComponent } from './components/dynamic.component';
 
 
 @NgModule({
