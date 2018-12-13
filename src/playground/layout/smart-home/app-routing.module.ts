@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NgxAppComponent } from './app.component';
+import { NgxAppComponent } from './components/app.component';
 
 export const routes: Routes = [
   {
