@@ -124,8 +124,16 @@ export function getRoutingModuleFromDir(dir: DirEntry): Path | null {
   return moduleFileName ? join(dir.path, moduleFileName) : null;
 }
 
+export function hasFeatureModuleInDir(dir: DirEntry): boolean {
+  return dir.subfiles.some(isFeatureModule);
+}
+
 export function hasRoutingModuleInDir(dir: DirEntry): boolean {
-  return dir.subfiles.some(f => f.endsWith(ROUTING_MODULE_EXT));
+  return dir.subfiles.some(isRoutingModule);
+}
+
+export function hasComponentsInDir(dir: DirEntry): boolean {
+  return dir.subfiles.some(isComponent);
 }
 
 function isOutsidePlayground(path: Path): boolean {

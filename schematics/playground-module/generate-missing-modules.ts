@@ -4,10 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { basename, dirname, Path } from '@angular-devkit/core';
+import { basename, dirname, normalize, Path } from '@angular-devkit/core';
 import { apply, chain, DirEntry, filter, mergeWith, Rule, template, Tree, url } from '@angular-devkit/schematics';
 import {
-  FEATURE_MODULE_EXT,
   generateCurrentDirImport,
   generateFeatureModuleClassName,
   generateFeatureModuleFileName,
@@ -15,8 +14,10 @@ import {
   generateRoutingModuleFileName,
   getModuleDirs,
   getPlaygroundRootDir,
+  hasComponentsInDir,
+  hasFeatureModuleInDir,
+  hasRoutingModuleInDir,
   isFeatureModule,
-  ROUTING_MODULE_EXT,
 } from '../utils';
 
 export function generateMissingModules(tree: Tree): Rule {
@@ -30,19 +31,27 @@ function fromTemplate(tree: Tree, options: Object): Rule {
     url('./files'),
     [
       template(options),
-      filter(hasNoModuleInDir.bind(null, tree)),
+      filter(shouldCreateModule.bind(null, tree)),
     ],
   );
 
   return mergeWith(transformedSource);
 }
 
-function hasNoModuleInDir(tree: Tree, filePath: Path): boolean {
-  const ext = isFeatureModule(basename(filePath)) ? FEATURE_MODULE_EXT : ROUTING_MODULE_EXT;
+function shouldCreateModule(tree: Tree, filePath: Path): boolean {
+  const dir = tree.getDir(normalize(dirname(filePath)));
+  const fileName = basename(filePath);
+  const isModuleExist = isFeatureModule(fileName)
+    ? hasFeatureModuleInDir(dir)
+    : hasRoutingModuleInDir(dir);
 
-  return !tree.getDir(dirname(filePath))
-    .subfiles
-    .some(file => file.endsWith(ext));
+  if (isModuleExist) {
+    return false;
+  }
+
+  return isFeatureModule(fileName)
+    ? true
+    : hasComponentsInDir(dir);
 }
 
 function optionsFromDir(moduleDir: DirEntry): Object {
