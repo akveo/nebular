@@ -3,13 +3,6 @@
 Nebular is a set of essential modules for your next Angular application.
 
 The purpose of the modules is to solve generic tasks faster and more efficient so that you can focus on business logic and leave routine behind.
-
-<div class="note note-info">
-  <div class="note-title">Current state</div>
-  <div class="note-body">
-    Nebular is in <i>RC</i> now, meaning that we are on the final path to the release.
-  </div>
-</div>
 <hr>
 
 ## What's included
