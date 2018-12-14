@@ -1204,6 +1204,10 @@ export const routes: Routes = [
     loadChildren: './oauth2/oauth2.module#NbOAuth2PlaygroundModule',
   },
   {
+    path: 'azure',
+    loadChildren: './azure/azure.module#NbAzurePlaygroundModule',
+  },
+  {
     path: 'oauth2-password',
     loadChildren: './oauth2-password/oauth2-password.module#NbOAuth2PasswordPlaygroundModule',
   },
