@@ -31,7 +31,7 @@ You can use the built-in components or create your custom ones.
   - `NbAuthService` - facade service to communicate with a configured strategy;
   - `NbTokenService` - service that allows you to manage authentication token - get, set, clear and also listen to token changes over time;
   - `NbTokenLocalStorage` - storage service for storing tokens in a browser local storage;
-  - `NbAuthJWTToken`, NbAuthSimpleToken`, `NbAuthOAuth2Token`, `NbAuthOAuth2JWTToken` - helper classes to work with your token;
+  - `NbAuthJWTToken`, `NbAuthSimpleToken`, `NbAuthOAuth2Token`, `NbAuthOAuth2JWTToken` - helper classes to work with your token;
   - `NbAuthJWTInterceptor` and `NbAuthSimpleInterceptor` - http interceptors to inject token value into http requests.
 <hr>
 
