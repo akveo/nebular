@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: './without-layout/with-layout.module#WithoutLayoutModule',
+    loadChildren: './without-layout/without-layout.module#WithoutLayoutModule',
   },
 ];
 
