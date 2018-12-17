@@ -239,10 +239,6 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   }
 
   const declarationsArray = declarationsNode.initializer as ts.ArrayLiteralExpression;
-  if (declarationsArray.elements.length <= 1) {
-    return;
-  }
-
   const replaces = multilineArrayLiteral(source.getFullText(), declarationsArray);
   applyReplaceChange(tree, modulePath, ...replaces);
 }
