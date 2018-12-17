@@ -8,8 +8,8 @@ import { dirname, fragment, join, normalize, Path, PathFragment, strings } from 
 import { DirEntry, Tree } from '@angular-devkit/schematics';
 
 export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
-export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'layout');
-export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'no-layout');
+export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'with-layout');
+export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'without-layout');
 export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
 export const PREFIX = '';
 export const FEATURE_MODULE_EXT = '.module.ts';
