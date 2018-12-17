@@ -14,8 +14,6 @@ import { NbThemeModule } from '@nebular/theme';
 
 import { NbAppComponent } from './app.component';
 import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
-import { DynamicToAddComponent } from '../playground/with-layout/shared/components/dynamic.component';
-import { PlaygroundSharedModule } from '../playground/with-layout/shared/shared.module';
 import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 
 @NgModule({
@@ -31,15 +29,11 @@ import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme
       },
     ], { useHash: true }),
     NbThemeModule.forRoot(),
-    PlaygroundSharedModule,
   ],
   declarations: [
     NbAppComponent,
     NbLayoutDirectionToggleComponent,
     NbLayoutThemeToggleComponent,
-  ],
-  entryComponents: [
-    DynamicToAddComponent,
   ],
   bootstrap: [NbAppComponent],
 })

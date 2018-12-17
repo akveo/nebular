@@ -10,40 +10,42 @@ import { PlaygroundBaseComponent } from './playground-base.component';
 
 const routes: Route[] = [
   {
-    path: 'playground-base.component',
+    path: '',
     component: PlaygroundBaseComponent,
-  },
-  {
-    path: 'bootstrap',
-    loadChildren: './bootstrap/bootstrap.module#BootstrapModule',
-  },
-  {
-    path: 'context-menu',
-    loadChildren: './context-menu/context-menu.module#ContextMenuModule',
-  },
-  {
-    path: 'layout',
-    loadChildren: './layout/layout.module#LayoutModule',
-  },
-  {
-    path: 'scroll',
-    loadChildren: './scroll/scroll.module#ScrollModule',
-  },
-  {
-    path: 'search',
-    loadChildren: './search/search.module#SearchModule',
-  },
-  {
-    path: 'sidebar',
-    loadChildren: './sidebar/sidebar.module#SidebarModule',
-  },
-  {
-    path: 'menu',
-    loadChildren: './menu/menu-test.module#MenuTestModule',
-  },
-  {
-    path: 'user',
-    loadChildren: './user/user-test.module#UserTestModule',
+    children: [
+      {
+        path: 'bootstrap',
+        loadChildren: './bootstrap/bootstrap.module#BootstrapModule',
+      },
+      {
+        path: 'context-menu',
+        loadChildren: './context-menu/context-menu.module#ContextMenuModule',
+      },
+      {
+        path: 'layout',
+        loadChildren: './layout/layout.module#LayoutModule',
+      },
+      {
+        path: 'scroll',
+        loadChildren: './scroll/scroll.module#ScrollModule',
+      },
+      {
+        path: 'search',
+        loadChildren: './search/search.module#SearchModule',
+      },
+      {
+        path: 'sidebar',
+        loadChildren: './sidebar/sidebar.module#SidebarModule',
+      },
+      {
+        path: 'menu',
+        loadChildren: './menu/menu-test.module#MenuTestModule',
+      },
+      {
+        path: 'user',
+        loadChildren: './user/user-test.module#UserTestModule',
+      },
+    ],
   },
 ];
 

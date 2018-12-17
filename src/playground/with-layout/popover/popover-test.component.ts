@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DynamicToAddComponent } from '../shared/components/dynamic.component';
+import { DynamicToAddComponent } from './components/dynamic.component';
 
 @Component({
   selector: 'nb-popover-example',
