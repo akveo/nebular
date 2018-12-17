@@ -83,6 +83,10 @@ export class NbMenuItem {
    * @type {boolean}
    */
   group?: boolean;
+  /** Whether the item skipLocationChange is true or false
+   *@type {boolean}
+   */
+  skipLocationChange?: boolean;
   /** Map of query parameters
    *@type {Params}
    */
