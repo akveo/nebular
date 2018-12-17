@@ -138,6 +138,11 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * Two-level menu example
  * @stacked-example(Two Levels, menu/menu-children.component)
  *
+ *
+ * Autocollapse menu example
+ * @stacked-example(Autocollapse Menu, menu/menu-autocollapse.component)
+ *
+ *
  * @styles
  *
  * menu-font-family:
