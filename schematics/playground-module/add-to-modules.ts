@@ -36,11 +36,10 @@ import {
   getRouteLazyModule,
   addObjectProperty,
   findRouteWithPath,
-  LAYOUT_DIR_PATH,
-  NO_LAYOUT_DIR_PATH,
   generatePathRoute,
   findRoute,
   componentRoutePredicate,
+  lazyModulePredicate,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -175,11 +174,15 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
 
   const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
   const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
+  const loadChildren = `loadChildren: '${lazyModulePath}'`;
 
-  const isBaseModule = moduleDir === LAYOUT_DIR_PATH || moduleDir === NO_LAYOUT_DIR_PATH;
-  if (isBaseModule) {
+  const isRootRouting = isInPlaygroundRoot(routingModulePath);
+  if (isRootRouting) {
     const routes = findRoutesArray(tree, routingModulePath);
-    addRoute(tree, routingModulePath, routes, generatePathRoute('', `loadChildren: '${lazyModulePath}'`));
+    if (!findRoute(routes, lazyModulePredicate.bind(null, lazyModulePath))) {
+      addRoute(tree, routingModulePath, routes, generatePathRoute('', loadChildren));
+    }
+
     return;
   }
 
@@ -190,12 +193,11 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
     route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates) as ts.ObjectLiteralExpression;
   }
 
-  const alreadyHasLazyModule = !!getRouteLazyModule(route);
-  if (alreadyHasLazyModule) {
+  if (getRouteLazyModule(route)) {
     return;
   }
 
-  addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, `loadChildren: '${lazyModulePath}'`);
+  addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, loadChildren);
 }
 
 function processRoutingModule(tree: Tree, context: SchematicContext, modulePath: Path) {

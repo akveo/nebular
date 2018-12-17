@@ -50,6 +50,10 @@ export function getModuleDirs(tree: Tree): DirEntry[] {
   return baseDirs.concat(baseDirectChildren);
 }
 
+export function isBasePlaygroundModule(moduleDir: Path): boolean {
+  return moduleDir === LAYOUT_DIR_PATH || moduleDir === NO_LAYOUT_DIR_PATH;
+}
+
 /**
  * Returns dashed module file name.
  */
@@ -165,8 +169,4 @@ export function isInPlaygroundRoot(filePath: Path): boolean {
 export function removeBasePath(dirPath: Path): string {
   const basePaths = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
   return basePaths.reduce((path, basePath) => path.replace(basePath, ''), dirPath);
-}
-
-export function isPlaygroundRoutingModule(routingModulePath: Path): boolean {
-  return dirname(routingModulePath).endsWith(PLAYGROUND_PATH);
 }

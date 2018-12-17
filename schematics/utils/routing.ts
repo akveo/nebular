@@ -16,8 +16,8 @@ import {
   applyInsertChange,
   findDeclarationByIdentifier,
   importPath,
+  isBasePlaygroundModule,
   isLayoutPath,
-  isPlaygroundRoutingModule,
   removeBasePath,
 } from '../utils';
 
@@ -107,7 +107,7 @@ export function addMissingChildRoutes(
 ): void {
   let routesArray = findRoutesArray(tree, routingModulePath);
 
-  if (isPlaygroundRoutingModule(routingModulePath)) {
+  if (isBasePlaygroundModule(routingModulePath)) {
     const rootRoute = findRoute(routesArray, rootComponentPredicate(targetFile)) as ts.ObjectLiteralExpression;
     if (rootRoute == null) {
       addRoute(tree, routingModulePath, routesArray, generatePathRoute(''));
@@ -274,7 +274,7 @@ export function routePathsFromPath(dirPath: Path): string[] {
  */
 export function routePredicatesFromPath(routingModulePath: Path, targetDirPath: Path): RoutePredicate[] {
   const predicates = [];
-  const isRootRouting = isPlaygroundRoutingModule(routingModulePath);
+  const isRootRouting = isBasePlaygroundModule(dirname(routingModulePath));
   if (isRootRouting) {
     predicates.push(rootComponentPredicate(targetDirPath));
   }
@@ -301,6 +301,18 @@ export function componentRoutePredicate(componentClass: string, route: ts.Object
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'component');
 
   return !!component && (component as ts.PropertyAssignment).initializer.getText() === componentClass;
+}
+
+export function lazyModulePredicate(lazyModulePath: string, route: ts.ObjectLiteralExpression): boolean {
+  const loadChildren = route.properties
+    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
+    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'loadChildren');
+
+  if (!loadChildren) {
+    return false;
+  }
+
+  return (loadChildren as ts.PropertyAssignment).initializer.getText() === `'${lazyModulePath}'`;
 }
 
 export function rootComponentPredicate(modulePath: Path): RoutePredicate {
