@@ -47,6 +47,9 @@ import { convertToBoolProperty } from '../helpers';
  * You can add `fullWidth` attribute to make element fill container:
  * @stacked-example(Full width inputs, input/input-full-width.component)
  *
+ * Or you can bind control with form controls or ngModel:
+ * @stacked-example(Input form binding, input/input-form.component)
+ *
  * @styles
  *
  * form-control-bg:
