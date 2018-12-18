@@ -49,10 +49,10 @@ export function isNodeExported(node: ts.Declaration): boolean {
   );
 }
 
-export function findDeclarationByIdentifier(source: ts.SourceFile, identifier: ts.Identifier): ts.VariableDeclaration {
+export function findDeclarationByIdentifier(source: ts.SourceFile, identifierText: string): ts.VariableDeclaration {
   return getSourceNodes(source)
     .filter(node => node.kind === ts.SyntaxKind.VariableDeclaration)
-    .find((node: ts.VariableDeclaration) => node.name.getText() === identifier.text) as ts.VariableDeclaration;
+    .find((node: ts.VariableDeclaration) => node.name.getText() === identifierText) as ts.VariableDeclaration;
 }
 
 export function addObjectProperty(

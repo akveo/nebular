@@ -61,7 +61,7 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
     throw new SchematicsException(`Expecting RouterModule.forChild to be provided with array or variable identifier.`);
   }
 
-  const declaration = findDeclarationByIdentifier(source, routesArgument as ts.Identifier);
+  const declaration = findDeclarationByIdentifier(source, (routesArgument as ts.Identifier).getText());
   if (declaration == null) {
     throw new SchematicsException(`Can't find declaration of '${routesArgument.getText()}' in ${modulePath}.`);
   }
