@@ -247,10 +247,25 @@ export function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLit
   return children.initializer as ts.ArrayLiteralExpression;
 }
 
-export function getRouteLazyModule(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
+export function getRouteProps(route: ts.ObjectLiteralExpression): ts.PropertyAssignment[] {
   return route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'loadChildren') as ts.PropertyAssignment;
+    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment) as ts.PropertyAssignment[];
+}
+
+export function findRouteProp(route: ts.ObjectLiteralExpression, propName: string): ts.PropertyAssignment | undefined {
+  return getRouteProps(route).find(prop => prop.name.getText() === propName);
+}
+
+export function getRouteLazyModule(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
+  return findRouteProp(route, 'loadChildren');
+}
+
+export function getRouteComponent(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
+  return findRouteProp(route, 'component');
+}
+
+export function getRoutePath(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
+  return findRouteProp(route, 'path');
 }
 
 export function addRouteChildrenProp(tree: Tree, source: ts.SourceFile, route: ts.ObjectLiteralExpression): void {
@@ -288,31 +303,18 @@ export function routePredicatesFromPath(routingModulePath: Path, targetDirPath: 
 }
 
 export function pathRoutePredicate(routePath: string, route: ts.ObjectLiteralExpression): boolean {
-  const path = route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'path');
-
-  return !!path && (path as ts.PropertyAssignment).initializer.getText() === `'${routePath}'`;
+  const path = getRoutePath(route);
+  return !!path && path.initializer.getText() === `'${routePath}'`;
 }
 
 export function componentRoutePredicate(componentClass: string, route: ts.ObjectLiteralExpression): boolean {
-  const component = route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'component');
-
-  return !!component && (component as ts.PropertyAssignment).initializer.getText() === componentClass;
+  const component = getRouteComponent(route);
+  return !!component && component.initializer.getText() === componentClass;
 }
 
 export function lazyModulePredicate(lazyModulePath: string, route: ts.ObjectLiteralExpression): boolean {
-  const loadChildren = route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'loadChildren');
-
-  if (!loadChildren) {
-    return false;
-  }
-
-  return (loadChildren as ts.PropertyAssignment).initializer.getText() === `'${lazyModulePath}'`;
+  const loadChildren = getRouteLazyModule(route);
+  return !!loadChildren && loadChildren.initializer.getText() === `'${lazyModulePath}'`;
 }
 
 export function rootComponentPredicate(modulePath: Path): RoutePredicate {
