@@ -227,15 +227,13 @@ export function findRouteWithPath(
   return undefined;
 }
 
-function getRoutesFromArray(routesArray: ts.ArrayLiteralExpression): ts.ObjectLiteralExpression[] {
+export function getRoutesFromArray(routesArray: ts.ArrayLiteralExpression): ts.ObjectLiteralExpression[] {
   return routesArray.elements
     .filter(node => node.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
 }
 
 export function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | undefined {
-  const children = route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'children') as ts.PropertyAssignment;
+  const children = findRouteProp(route, 'children');
 
   if (children == null) {
     return undefined;
