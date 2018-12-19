@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbActionsModule, NbCardModule, NbUserModule } from '@nebular/theme';
+import { NbActionsModule, NbCardModule, NbLayoutModule, NbUserModule } from '@nebular/theme';
 import { ActionRoutingModule } from './action-routing.module';
 import { ActionBadgeComponent } from './action-badge.component';
 import { ActionShowcaseComponent } from './action-showcase.component';
@@ -23,6 +23,7 @@ import { ActionWidthComponent } from './action-width.component';
   ],
   imports: [
     NbActionsModule,
+    NbLayoutModule,
     NbCardModule,
     NbUserModule,
     ActionRoutingModule,
