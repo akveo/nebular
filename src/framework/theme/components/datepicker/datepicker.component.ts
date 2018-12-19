@@ -209,7 +209,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   ngOnDestroy() {
     this.alive = false;
     this.hide();
-    this.ref.dispose();
+    if (this.ref !== undefined) this.ref.dispose();
   }
 
   /**
@@ -238,7 +238,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref !== undefined) this.ref.detach();
     // save current value if picker was rendered
     if (this.picker) {
       this.queue = this.value;
