@@ -12,9 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule } from '@nebular/theme';
 
-import { NbAppComponent } from './app.component';
-import { NbLayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
-import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
+import { AppComponent } from './app.component';
+import { LayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
+import { LayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 
 @NgModule({
   imports: [
@@ -31,11 +31,10 @@ import { NbLayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme
     NbThemeModule.forRoot(),
   ],
   declarations: [
-    NbAppComponent,
-    NbLayoutDirectionToggleComponent,
-    NbLayoutThemeToggleComponent,
+    AppComponent,
+    LayoutDirectionToggleComponent,
+    LayoutThemeToggleComponent,
   ],
-  bootstrap: [NbAppComponent],
+  bootstrap: [ AppComponent ],
 })
-export class NbAppModule {
-}
+export class AppModule {}
