@@ -162,7 +162,9 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
     this.hide();
-    this.ref.dispose();
+    if(this.ref){
+      this.ref.dispose();
+    }
   }
 
   show() {
