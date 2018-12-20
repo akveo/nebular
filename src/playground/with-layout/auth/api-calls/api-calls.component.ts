@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { NbAuthResult, NbAuthService, NbAuthToken, NB_AUTH_OPTIONS } from '@nebular/auth';
-import { getDeepFromObject } from '@nebular/auth/helpers';
+import { getDeepFromObject } from '../../../../framework/auth/helpers';
 import { Wine } from './wine';
 
 @Component({
