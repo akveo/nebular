@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule } from '@nebular/theme';
 import { ButtonRoutingModule } from './button-routing.module';
 import { ButtonColorsComponent } from './button-colors.component';
 import { ButtonFullWidthComponent } from './button-full-width.component';
@@ -27,6 +27,6 @@ import { ButtonTypesComponent } from './button-types.component';
     ButtonSizesComponent,
     ButtonTypesComponent,
   ],
-  imports: [ NbCardModule, ButtonRoutingModule ],
+  imports: [ NbCardModule, NbButtonModule, ButtonRoutingModule ],
 })
 export class ButtonModule {}
