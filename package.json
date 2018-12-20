@@ -19,7 +19,7 @@
     "gulp": "gulp",
     "firebase": "firebase",
     "conventional-changelog": "conventional-changelog",
-    "start": "run-p \"ng serve\" \"gulp -- watch:gen:playground-modules\"",
+    "start": "run-p \"ng -- serve {@}\" \"gulp -- watch:gen:playground-modules\" -- ",
     "start:prod": "npm run start -- --prod --aot",
     "start:wp": "npm run start:prod -- playground-wp",
     "docs:parse": "gulp docs",
