@@ -69,13 +69,13 @@ function processDir(tree: Tree, context: SchematicContext, dir: DirEntry): void 
 
   const routingModulePath = getRoutingModuleFromDir(dir);
   if (routingModulePath) {
-    processRoutingModule(tree, context, routingModulePath);
+    processRoutingModule(tree, routingModulePath);
   }
 }
 
 function processService(tree: Tree, servicePath: Path): void {
   const modulePath = findFeatureModule(tree, dirname(servicePath));
-  if (modulePath == null) {
+  if (!modulePath) {
     throw new SchematicsException(`Can't find module for service ${servicePath}.`);
   }
   const serviceDeclarations = getClassWithDecorator(tree, servicePath, 'Injectable');
@@ -91,31 +91,47 @@ function processService(tree: Tree, servicePath: Path): void {
 }
 
 function processComponent(tree: Tree, context: SchematicContext, componentPath: Path): void {
-  const dirPath = dirname(componentPath);
-  const modulePath = findFeatureModule(tree, dirPath);
-  if (modulePath == null) {
+  const componentDir = tree.getDir(dirname(componentPath));
+  const modulePath = findFeatureModule(tree, componentDir.path);
+  if (!modulePath) {
     throw new SchematicsException(`Can't find module for component ${componentPath}.`);
   }
 
   const componentDeclarations = getClassWithDecorator(tree, componentPath, 'Component');
-  if (componentDeclarations.length === 0) {
+  if (!componentDeclarations.length) {
     return;
   }
-  for (const component of componentDeclarations) {
+  addComponentToModule(tree, componentDeclarations, componentPath, modulePath);
+
+  if (hasRoutingModuleInDir(componentDir)) {
+    addComponentRoute(tree, componentDeclarations, modulePath, context, componentPath);
+  }
+}
+
+function addComponentToModule(
+  tree: Tree,
+  declarations: ts.ClassDeclaration[],
+  componentPath: Path,
+  modulePath: Path,
+): void {
+  for (const component of declarations) {
     const className = (component.name as ts.Identifier).getText();
     const moduleImportString = importPath(modulePath, componentPath);
     addDeclaration(tree, modulePath, className, moduleImportString);
   }
+}
 
-  if (!hasRoutingModuleInDir(tree.getDir(dirPath))) {
-    return;
-  }
-
-  const routingModulePath = findRoutingModule(tree, dirPath);
+function addComponentRoute(
+  tree: Tree,
+  componentDeclarations: ts.ClassDeclaration[],
+  modulePath: Path,
+  context: SchematicContext,
+  componentPath: Path,
+): void {
+  const routingModulePath = findRoutingModule(tree, dirname(componentPath));
   if (!routingModulePath) {
     throw new SchematicsException(`Can't find routing module for module ${modulePath}.`);
   }
-
   if (componentDeclarations.length > 1) {
     context.logger.warn(`Found more than one component declaration in ${componentPath}. ` +
       'Route will be created only for the first one.\n' +
@@ -130,9 +146,7 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
   }
 
   const routingImport = importPath(routingModulePath, componentPath);
-  const routePath = isInPlaygroundRoot(componentPath)
-    ? ''
-    : removeExtension(componentPath);
+  const routePath = isInPlaygroundRoot(componentPath) ? '' : removeExtension(componentPath);
   const route = generateComponentRoute(routePath, componentClassName);
   addRoute(tree, routingModulePath, routes, route, componentClassName, routingImport);
 }
@@ -140,7 +154,7 @@ function processComponent(tree: Tree, context: SchematicContext, componentPath: 
 function processDirectives(tree: Tree, directivePath: Path): void {
   const dirPath = dirname(directivePath);
   const modulePath = findFeatureModule(tree, dirPath);
-  if (modulePath == null) {
+  if (!modulePath) {
     throw new SchematicsException(`Can't find module for directive ${directivePath}.`);
   }
 
@@ -153,42 +167,51 @@ function processDirectives(tree: Tree, directivePath: Path): void {
 }
 
 function processFeatureModule(tree: Tree, context: SchematicContext, modulePath: Path): void {
-  const moduleDir = dirname(modulePath);
-  const parentDir = dirname(moduleDir);
-  const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
 
-  if (moduleDeclarations.length === 0) {
+  const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
+  if (!moduleDeclarations.length) {
     return;
   }
 
   multilineDeclarationsArray(tree, modulePath);
 
+  const parentDir = dirname(dirname(modulePath));
   const routingModulePath = findRoutingModule(tree, parentDir);
-  if (routingModulePath == null) {
+  if (!routingModulePath) {
     return;
   }
+
   if (moduleDeclarations.length > 1) {
     context.logger.warn(`Found more than one module declaration in ${modulePath}. ` +
       'Route will be created only for the first one.');
   }
+  addModuleRoute(tree, moduleDeclarations[0], modulePath, routingModulePath);
+}
 
-  const moduleClassName = (moduleDeclarations[0].name as ts.Identifier).getText();
+function addModuleRoute(
+  tree: Tree,
+  moduleDeclaration: ts.ClassDeclaration,
+  modulePath: Path,
+  routingModulePath: Path,
+): void {
+  const moduleClassName = (moduleDeclaration.name as ts.Identifier).getText();
   const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
   const loadChildren = `loadChildren: '${lazyModulePath}'`;
 
   const isRootRouting = isInPlaygroundRoot(routingModulePath);
   if (isRootRouting) {
     const routes = findRoutesArray(tree, routingModulePath);
-    if (!findRoute(routes, lazyModulePredicate.bind(null, lazyModulePath))) {
+    const alreadyHas = findRoute(routes, lazyModulePredicate.bind(null, lazyModulePath));
+    if (!alreadyHas) {
       addRoute(tree, routingModulePath, routes, generatePathRoute('', loadChildren));
     }
 
     return;
   }
 
-  const routePredicates = routePredicatesFromPath(routingModulePath, moduleDir);
+  const routePredicates = routePredicatesFromPath(routingModulePath, dirname(modulePath));
   let route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates);
-  if (route == null) {
+  if (!route) {
     addMissingChildRoutes(tree, routingModulePath, modulePath);
     route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates) as ts.ObjectLiteralExpression;
   }
@@ -200,32 +223,11 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
   addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, loadChildren);
 }
 
-function processRoutingModule(tree: Tree, context: SchematicContext, modulePath: Path) {
-  const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
-  if (moduleDeclarations.length === 0) {
-    return;
-  }
-  if (moduleDeclarations.length > 1) {
-    context.logger.warn(`Found more than one module declaration in ${modulePath}. ` +
-      'Route will be created only for the first one.');
-  }
-
-  const featureModulePath = findFeatureModule(tree, dirname(modulePath));
-  if (featureModulePath  == null) {
-    throw new SchematicsException(`Can't find module for service ${featureModulePath }.`);
-  }
-  const featureModuleSource = getSourceFile(tree, featureModulePath);
-  const importString = importPath(featureModulePath, modulePath);
-  const className = (moduleDeclarations[0].name as ts.Identifier).getText();
-  const changes = addImportToModule(featureModuleSource, featureModulePath, className, importString);
-  applyInsertChange(tree, featureModulePath, ...changes);
-}
-
 function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   const source = getSourceFile(tree, modulePath);
   const decoratorNode = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] as ts.ObjectLiteralExpression;
 
-  if (decoratorNode == null) {
+  if (!decoratorNode) {
     throw new SchematicsException(`Can't find NgModule decorator in ${modulePath}`);
   }
 
@@ -233,7 +235,7 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
     .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'declarations') as ts.PropertyAssignment;
 
-  if (declarationsNode == null) {
+  if (!declarationsNode) {
     return;
   }
   if (declarationsNode.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression) {
@@ -243,4 +245,24 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   const declarationsArray = declarationsNode.initializer as ts.ArrayLiteralExpression;
   const replaces = multilineArrayLiteral(source.getFullText(), declarationsArray);
   applyReplaceChange(tree, modulePath, ...replaces);
+}
+
+function processRoutingModule(tree: Tree, modulePath: Path) {
+  const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
+  if (!moduleDeclarations.length) {
+    return;
+  }
+
+  const featureModulePath = findFeatureModule(tree, dirname(modulePath));
+  if (!featureModulePath) {
+    throw new SchematicsException(`Can't find module for routing module ${featureModulePath }.`);
+  }
+
+  const featureModuleSource = getSourceFile(tree, featureModulePath);
+  const importString = importPath(featureModulePath, modulePath);
+  for (const moduleDeclaration of moduleDeclarations) {
+    const className = (moduleDeclaration.name as ts.Identifier).getText();
+    const changes = addImportToModule(featureModuleSource, featureModulePath, className, importString);
+    applyInsertChange(tree, featureModulePath, ...changes);
+  }
 }
