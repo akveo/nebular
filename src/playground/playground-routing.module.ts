@@ -202,6 +202,7 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbInputFormComponent } from './input/input-form.component';
 
 
 export const routes: Routes = [
@@ -846,6 +847,10 @@ export const routes: Routes = [
           {
             path: 'input-full-width.component',
             component: NbInputFullWidthComponent,
+          },
+          {
+            path: 'input-form.component',
+            component: NbInputFormComponent,
           },
         ],
       },

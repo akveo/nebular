@@ -250,6 +250,7 @@ import { NbRangepickerShowcaseComponent } from './datepicker/rangepicker-showcas
 import { NbRadioShowcaseComponent } from './radio/radio-showcase.component';
 import { NbRadioDisabledComponent } from './radio/radio-disabled.component';
 import { NbCalendarWithoutHeaderComponent } from './calendar/calendar-without-header.component';
+import { NbInputFormComponent } from './input/input-form.component';
 
 export const NB_MODULES = [
   NbCardModule,
@@ -430,6 +431,7 @@ export const NB_EXAMPLE_COMPONENTS = [
   NbInputShapesComponent,
   NbInputTypesComponent,
   NbInputFullWidthComponent,
+  NbInputFormComponent,
   NbScrollWindowComponent,
   NbCalendarShowcaseComponent,
   NbCalendarBoundingMonthComponent,
