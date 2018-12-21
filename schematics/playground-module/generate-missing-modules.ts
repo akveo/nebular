@@ -31,8 +31,13 @@ interface ModuleOptions {
 
 export function generateMissingModules(tree: Tree): Rule {
   const moduleDirs = [ getPlaygroundRootDir(tree), ...getModuleDirs(tree) ];
+  const moduleRules = moduleDirs.map(moduleDir => dirRule(tree, moduleDir));
 
-  return chain(moduleDirs.map(moduleDir => fromTemplate(tree, optionsFromDir(moduleDir))));
+  return chain(moduleRules);
+}
+
+function dirRule(tree: Tree, moduleDir: DirEntry): Rule {
+  return fromTemplate(tree, optionsFromDir(moduleDir));
 }
 
 function fromTemplate(tree: Tree, options: Object): Rule {
@@ -40,7 +45,7 @@ function fromTemplate(tree: Tree, options: Object): Rule {
     url('./files'),
     [
       template(options),
-      filter(shouldCreateModule.bind(null, tree)),
+      filter((filePath: Path) => shouldCreateModule(tree, filePath)),
     ],
   );
 
@@ -58,9 +63,7 @@ function shouldCreateModule(tree: Tree, filePath: Path): boolean {
     return false;
   }
 
-  return isFeatureModule(fileName)
-    ? true
-    : hasComponentsInDir(dir);
+  return isFeatureModule(fileName) || hasComponentsInDir(dir);
 }
 
 function optionsFromDir(moduleDir: DirEntry): ModuleOptions {
