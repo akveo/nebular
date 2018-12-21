@@ -100,11 +100,7 @@ export function generateLazyModulePath(from: Path, to: Path, moduleClassName: st
  * @param routingModulePath full path to routing module
  * @param targetFile full path to file containing component or module for the route
  */
-export function addMissingChildRoutes(
-  tree: Tree,
-  routingModulePath: Path,
-  targetFile: Path,
-): void {
+export function addMissingChildRoutes(tree: Tree, routingModulePath: Path, targetFile: Path): void {
   let routesArray = findRoutesArray(tree, routingModulePath);
 
   if (isBasePlaygroundModule(routingModulePath)) {
@@ -115,19 +111,15 @@ export function addMissingChildRoutes(
     }
   }
 
-  const targetDir = dirname(targetFile);
-  const routesToAdd = routePathsFromPath(targetDir);
-  if (routesToAdd.length === 0) {
-    return;
-  }
-
-  const basePathEnd = targetFile.indexOf(removeBasePath(targetDir));
+  const targetDirPath = dirname(targetFile);
+  const routesToAdd = routePathsFromPath(targetDirPath);
+  const basePathEnd = targetFile.indexOf(removeBasePath(targetDirPath));
   let existingPath = normalize(targetFile.slice(0, basePathEnd));
 
   for (let i = 0; i < routesToAdd.length; i++) {
     const path = routesToAdd[i];
     let currentRoute = findRoute(routesArray, pathRoutePredicate.bind(null, path));
-    if (currentRoute == null) {
+    if (!currentRoute) {
       addRoute(tree, routingModulePath, routesArray, generatePathRoute(path));
     }
     existingPath = join(existingPath, path);
@@ -141,7 +133,7 @@ export function addMissingChildRoutes(
     }
 
     let children = getRouteChildren(currentRoute);
-    if (children == null) {
+    if (!children) {
       addRouteChildrenProp(tree, getSourceFile(tree, routingModulePath), currentRoute);
       currentRoute = findRouteWithPath(
         findRoutesArray(tree, routingModulePath),
@@ -204,9 +196,7 @@ export function findRouteWithPath(
   routesArray: ts.ArrayLiteralExpression,
   predicates: RoutePredicate[],
 ): ts.ObjectLiteralExpression | undefined {
-  const routes = routesArray.elements
-    .filter(e => e.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
-
+  const routes = getRoutesFromArray(routesArray);
   for (const route of routes) {
     const isMatch = predicates[0](route);
     const isLastMatch = isMatch && predicates.length === 1;
