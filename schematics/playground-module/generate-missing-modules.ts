@@ -20,6 +20,15 @@ import {
   isFeatureModule,
 } from '../utils';
 
+interface ModuleOptions {
+  path: string;
+  featureModuleFileName: string;
+  featureModuleClassName: string;
+  routingModuleFileName: string;
+  routingModuleClassName: string;
+  routingModuleImportPath: string;
+}
+
 export function generateMissingModules(tree: Tree): Rule {
   const moduleDirs = [ getPlaygroundRootDir(tree), ...getModuleDirs(tree) ];
 
@@ -54,7 +63,7 @@ function shouldCreateModule(tree: Tree, filePath: Path): boolean {
     : hasComponentsInDir(dir);
 }
 
-function optionsFromDir(moduleDir: DirEntry): Object {
+function optionsFromDir(moduleDir: DirEntry): ModuleOptions {
   const moduleName = basename(moduleDir.path);
   const routingModuleFileName = generateRoutingModuleFileName(moduleName);
 
