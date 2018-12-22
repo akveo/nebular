@@ -37,38 +37,58 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
     throw new SchematicsException(`Error in ${modulePath}. Can't find NgModule decorator.`);
   }
 
-  const imports = decoratorNode.properties
+  try {
+    const imports = getImports(decoratorNode);
+    const routerModuleCall = getRouterModuleCall(imports);
+    const routesArgument = routerModuleCall.arguments[0];
+    if (routesArgument.kind === ts.SyntaxKind.ArrayLiteralExpression) {
+      return routesArgument as ts.ArrayLiteralExpression;
+    }
+    if (routesArgument.kind === ts.SyntaxKind.Identifier) {
+      const declaration = getRoutesVariableDeclaration(source, (routesArgument as ts.Identifier));
+      return declaration.initializer as ts.ArrayLiteralExpression;
+    }
+
+    throw new SchematicsException(`Expecting RouterModule.forChild parameter to be an array or variable identifier.`);
+  } catch (e) {
+    throw new SchematicsException(`Error in ${modulePath}. ${e.message}`);
+  }
+}
+
+function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAssignment {
+  const imports = moduleDecorator.properties
     .filter(p => p.kind === ts.SyntaxKind.PropertyAssignment)
     .find((p: ts.PropertyAssignment) => p.name.getText() === 'imports') as ts.PropertyAssignment;
+
   if (imports == null) {
-    throw new SchematicsException(`Error in ${modulePath}. Can't find imports in module.`);
+    throw new SchematicsException(`Can't find imports in module.`);
   }
   if (imports.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression) {
-    throw new SchematicsException(`Error in ${modulePath}. 'imports' property should be initialized with array.`);
+    throw new SchematicsException(`'imports' property should be initialized with array.`);
   }
 
-  const routerModuleCall = (imports.initializer as ts.ArrayLiteralExpression)
+  return imports;
+}
+
+function getRouterModuleCall(importsNode: ts.PropertyAssignment): ts.CallExpression {
+  const routerModuleCall = (importsNode.initializer as ts.ArrayLiteralExpression)
     .elements
     .filter(el => el.kind === ts.SyntaxKind.CallExpression)
     .find((el: ts.CallExpression) => el.expression.getText() === 'RouterModule.forChild') as ts.CallExpression;
   if (routerModuleCall == null) {
-    throw new SchematicsException(`Can't find RouterModule.forChild call in module imports. ${modulePath}`);
+    throw new SchematicsException(`Can't find RouterModule.forChild call in module imports.`);
   }
   if (routerModuleCall.arguments.length === 0) {
-    throw new SchematicsException(`RouterModule.forChild should be called with arguments. ${modulePath}`);
+    throw new SchematicsException(`RouterModule.forChild should be called with arguments.`);
   }
 
-  const routesArgument = routerModuleCall.arguments[0];
-  if (routesArgument.kind === ts.SyntaxKind.ArrayLiteralExpression) {
-    return routesArgument as ts.ArrayLiteralExpression;
-  }
-  if (routesArgument.kind !== ts.SyntaxKind.Identifier) {
-    throw new SchematicsException(`Expecting RouterModule.forChild to be provided with array or variable identifier.`);
-  }
+  return routerModuleCall;
+}
 
-  const declaration = findDeclarationByIdentifier(source, (routesArgument as ts.Identifier).getText());
+function getRoutesVariableDeclaration(source: ts.SourceFile, identifier: ts.Identifier): ts.VariableDeclaration {
+  const declaration = findDeclarationByIdentifier(source, (identifier as ts.Identifier).getText());
   if (declaration == null) {
-    throw new SchematicsException(`Can't find declaration of '${routesArgument.getText()}' in ${modulePath}.`);
+    throw new SchematicsException(`Can't find declaration of '${identifier.getText()}'.`);
   }
   if (declaration.initializer == null) {
     throw new SchematicsException(`Routes variable should be initialized during declaration.`);
@@ -77,7 +97,7 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
     throw new SchematicsException(`Routes variable should be initialized with array.`);
   }
 
-  return declaration.initializer as ts.ArrayLiteralExpression;
+  return declaration;
 }
 
 export function generateComponentRoute(path: string, component: string, ...routeFields: string[]): string {
