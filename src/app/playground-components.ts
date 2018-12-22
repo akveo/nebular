@@ -554,6 +554,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'InputTypesComponent',
         name: 'Input Types',
       },
+      {
+        path: 'input-form.component',
+        link: '/input/input-form.component',
+        component: 'InputFormComponent',
+        name: 'Input Form',
+      },
     ],
   },
   {
@@ -1119,7 +1125,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
   },
   {
     path: 'oauth2-password',
-    children: [],
   },
   {
     path: 'smart-home',
@@ -1426,6 +1431,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/user/user-test.component',
         component: 'UserTestComponent',
         name: 'User Test',
+      },
+    ],
+  },
+  {
+    path: 'azure',
+    children: [
+      {
+        path: 'callback',
+        link: '/azure/callback',
+        component: 'AzureCallbackComponent',
+        name: 'Azure Callback',
       },
     ],
   },
