@@ -35,7 +35,7 @@ const COMPONENTS_VARIABLE_NAME = 'PLAYGROUND_COMPONENTS';
 interface ComponentLink {
   path: string;
   name?: string;
-  component?: string
+  component?: string;
   link?: any[] | string;
   children?: ComponentLink[];
 }
@@ -47,7 +47,7 @@ export function playgroundComponents(): Rule {
 function generateComponentsList(tree: Tree): void {
   const componentsListFile = getSourceFile(tree, COMPONENTS_LIST_FILE_PATH);
   const componentsListArray = getComponentsListArray(componentsListFile);
-  const routes = removeEmptyRoutes(findRoutesInDir(tree, getPlaygroundRootDir(tree)));
+  const routes = removeRoutesWithoutPath(findRoutesInDir(tree, getPlaygroundRootDir(tree)));
   updateComponentsFile(tree, componentsListFile, componentsListArray, routes);
 }
 
@@ -126,21 +126,22 @@ function getLazyModuleRoutes(
   return [];
 }
 
-function removeEmptyRoutes(routes: ComponentLink[], startPath: string = ''): ComponentLink[] {
+function removeRoutesWithoutPath(routes: ComponentLink[], startPath: string = ''): ComponentLink[] {
   const routesWithPath: ComponentLink[] = [];
 
   for (const { path, component, children } of routes) {
     const fullPath = path ? startPath + '/' + path : startPath;
     let routeChildren;
     if (children) {
-      routeChildren = removeEmptyRoutes(children, fullPath);
+      routeChildren = removeRoutesWithoutPath(children, fullPath);
     }
 
     const toAdd: ComponentLink[] = [];
     if (path) {
       const link = component ? fullPath : undefined;
       const name = component ? splitClassName(component) : undefined;
-      toAdd.push({ path: path, link, component: component, name, children: routeChildren });
+      const childRoutes = routeChildren && routeChildren.length ? routeChildren : undefined;
+      toAdd.push({ path, link, component, name, children: childRoutes });
     } else if (routeChildren) {
       toAdd.push(...routeChildren);
     }
