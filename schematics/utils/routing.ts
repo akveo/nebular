@@ -199,12 +199,16 @@ export function addBaseRoute(tree: Tree, targetFile: Path): void {
   const isLayout = isLayoutPath(targetFile);
   const baseModulePath = isLayout ? LAYOUT_ROUTING_MODULE_PATH : NO_LAYOUT_ROUTING_MODULE_PATH;
   const routesArray = findRoutesArray(tree, baseModulePath);
-  if (findRouteWithPath(routesArray, [baseComponentPredicate(targetFile)])) {
+  const baseRoute = findRouteWithPath(routesArray, [baseComponentPredicate(targetFile)]);
+  if (baseRoute) {
+    if (!getRouteChildren(baseRoute)) {
+      addObjectProperty(tree, getSourceFile(tree, baseModulePath), baseRoute, 'children: []');
+    }
     return;
   }
 
   const baseModuleComponent = isLayout ? LAYOUT_COMPONENT_CLASS : NO_LAYOUT_COMPONENT_CLASS;
-  const routeString = generateComponentRoute('', baseModuleComponent);
+  const routeString = generateComponentRoute('', baseModuleComponent, `children: []`);
   addRoute(tree, baseModulePath, routesArray, routeString);
 }
 
