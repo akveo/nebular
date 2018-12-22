@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
     <router-outlet></router-outlet>
   `,
 })
-export class NbAppComponent {
+export class AppComponent {
 
   optionsVisible = true;
 
