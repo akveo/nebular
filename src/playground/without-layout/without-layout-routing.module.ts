@@ -45,6 +45,10 @@ const routes: Route[] = [
         path: 'user',
         loadChildren: './user/user-test.module#UserTestModule',
       },
+      {
+        path: 'azure',
+        loadChildren: './azure/azure.module#NbAzurePlaygroundModule',
+      },
     ],
   },
 ];

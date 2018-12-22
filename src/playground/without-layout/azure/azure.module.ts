@@ -7,7 +7,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -20,6 +19,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbAzureLoginComponent } from './azure-login.component';
 import { NbAzureCallbackComponent } from './azure-callback.component';
 import { NbAuthAzureToken, NbAzureADB2CAuthStrategy } from './azure-adb2c-auth-strategy';
+import { AzureRoutingModule } from './azure-routing.module';
 
 
 @NgModule({
@@ -27,18 +27,6 @@ import { NbAuthAzureToken, NbAzureADB2CAuthStrategy } from './azure-adb2c-auth-s
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: NbAzureLoginComponent,
-      },
-      {
-        path: 'callback',
-        component: NbAzureCallbackComponent,
-      },
-    ]),
-
     NbAuthModule.forRoot({
       strategies: [
         NbAzureADB2CAuthStrategy.setup({
@@ -66,6 +54,7 @@ import { NbAuthAzureToken, NbAzureADB2CAuthStrategy } from './azure-adb2c-auth-s
 
     NbCardModule,
     NbLayoutModule,
+    AzureRoutingModule,
   ],
   declarations: [
     NbAzureLoginComponent,
