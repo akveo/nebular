@@ -14,7 +14,7 @@ function startWatch() {
 
 function stopWatchRunSchematic(watcher) {
   watcher.close();
-  exec('npm run gen:playground-module', logAndRestart);
+  exec('npm run gen:playground', logAndRestart);
 }
 
 function logAndRestart(error: Error, stdout: string, stderr: string): void {
@@ -31,4 +31,4 @@ function logAndRestart(error: Error, stdout: string, stderr: string): void {
   startWatch();
 }
 
-task('watch:gen:playground-modules', startWatch);
+task('watch:gen:playground', startWatch);
