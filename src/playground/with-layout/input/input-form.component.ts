@@ -22,7 +22,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./input-component.scss'],
 })
 
-export class NbInputFormComponent {
+export class InputFormComponent {
   inputItemNgModel;
   textareaItemNgModel;
   inputItemFormControl = new FormControl();

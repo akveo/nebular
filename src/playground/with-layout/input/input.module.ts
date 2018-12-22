@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbCardModule, NbInputModule } from '@nebular/theme';
 import { InputRoutingModule } from './input-routing.module';
 import { InputColorsComponent } from './input-colors.component';
@@ -13,6 +14,7 @@ import { InputShapesComponent } from './input-shapes.component';
 import { InputsShowcaseComponent } from './input-showcase.component';
 import { InputSizesComponent } from './input-sizes.component';
 import { InputTypesComponent } from './input-types.component';
+import { InputFormComponent } from './input-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,14 @@ import { InputTypesComponent } from './input-types.component';
     InputsShowcaseComponent,
     InputSizesComponent,
     InputTypesComponent,
+    InputFormComponent,
   ],
-  imports: [ NbInputModule, NbCardModule, InputRoutingModule ],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    NbInputModule,
+    NbCardModule,
+    InputRoutingModule,
+  ],
 })
 export class InputModule {}

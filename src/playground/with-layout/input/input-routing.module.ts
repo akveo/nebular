@@ -12,6 +12,7 @@ import { InputShapesComponent } from './input-shapes.component';
 import { InputsShowcaseComponent } from './input-showcase.component';
 import { InputSizesComponent } from './input-sizes.component';
 import { InputTypesComponent } from './input-types.component';
+import { InputFormComponent } from './input-form.component';
 
 const routes: Route[] = [
   {
@@ -37,6 +38,10 @@ const routes: Route[] = [
   {
     path: 'input-types.component',
     component: InputTypesComponent,
+  },
+  {
+    path: 'input-form.component',
+    component: InputFormComponent,
   },
 ];
 
