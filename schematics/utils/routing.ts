@@ -383,3 +383,11 @@ export function rootRoutePredicate(modulePath: Path): RoutePredicate {
 
   return (route: ts.ObjectLiteralExpression) => lazyModulePredicate(lazyModulePath, route);
 }
+
+export function isLazyRoute(route: ts.ObjectLiteralExpression): boolean {
+  return !!getRouteLazyModule(route);
+}
+
+export function isComponentRoute(route: ts.ObjectLiteralExpression): boolean {
+  return !!getRouteComponent(route);
+}
