@@ -4,12 +4,21 @@ import { watch } from 'chokidar';
 import { PLAYGROUND_ROOT } from '../config';
 
 const PG_GLOB = PLAYGROUND_ROOT + '**/*.ts';
+const DEBOUNCE_TIME = 3000;
+
+function debounce(callback, delay: number = DEBOUNCE_TIME) {
+  let timeoutId;
+  return function debounced() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(callback, delay);
+  }
+}
 
 function startWatch() {
-  const watcher = watch(PG_GLOB, { awaitWriteFinish: true, ignoreInitial: true });
-  const cb = stopWatchRunSchematic.bind(null, watcher);
-  watcher.on('add', cb);
-  watcher.on('change', cb);
+  const watcher = watch(PG_GLOB, { ignoreInitial: true });
+  const debouncedSchematic = debounce(() => stopWatchRunSchematic(watcher));
+  watcher.on('add', debouncedSchematic);
+  watcher.on('change', debouncedSchematic);
 }
 
 function stopWatchRunSchematic(watcher) {
