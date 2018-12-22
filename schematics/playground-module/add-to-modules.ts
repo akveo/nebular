@@ -50,7 +50,7 @@ function processDirs(tree: Tree, context: SchematicContext, dirs: DirEntry[]): v
   for (const dir of dirs) {
     processDir(tree, context, dir);
 
-    if (dir.subdirs.length > 0) {
+    if (dir.subdirs.length) {
       processDirs(tree, context, dir.subdirs.map(d => dir.dir(d)));
     }
   }
