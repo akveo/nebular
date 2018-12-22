@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'nb-components-overlay',
   styleUrls: [ './components-overlay.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button (click)="emitCloseClick()">Close</button>
 

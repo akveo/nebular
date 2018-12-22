@@ -1,4 +1,6 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, Input, QueryList, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, QueryList, ViewChildren,
+} from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 import { ComponentLink } from '../playground-components';
@@ -6,6 +8,7 @@ import { ComponentLink } from '../playground-components';
 @Component({
   selector: 'nb-components-list',
   styleUrls: [ './components-list.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *ngFor="let component of components" class="component-block">
       <span *ngIf="!component.component">{{ component.path }}</span>
