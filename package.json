@@ -71,7 +71,8 @@
     "publish": "./scripts/publish.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
     "postinstall": "npm run cli:firefox-fix",
-    "gen:playground-module": "ng g .:playground-module"
+    "gen:playground-module": "ng g .:playground-module",
+    "gen:playground-components": "ng g .:playground-components"
   },
   "keywords": [
     "angular",
