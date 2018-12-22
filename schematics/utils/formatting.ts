@@ -7,10 +7,11 @@
 import * as ts from 'typescript';
 import { ReplaceChange } from './change';
 
-export function multilineArrayLiteral(
-  fullText: string,
-  arrayLiteralNode: ts.ArrayLiteralExpression,
-): ReplaceChange[] {
+export function multilineArrayLiteral(fullText: string, arrayLiteralNode: ts.ArrayLiteralExpression): ReplaceChange[] {
+  if (!arrayLiteralNode.elements.length) {
+    return [];
+  }
+
   const replaces: ReplaceChange[] = [];
   const arrayIndentation = getNodeIndentation(fullText, arrayLiteralNode);
   const elementIndentation = arrayIndentation + 2;

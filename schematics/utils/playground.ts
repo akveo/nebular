@@ -7,13 +7,27 @@
 import { dirname, fragment, join, normalize, Path, PathFragment, strings } from '@angular-devkit/core';
 import { DirEntry, Tree } from '@angular-devkit/schematics';
 
-export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
-export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'with-layout');
-export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, 'without-layout');
-export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
 export const PREFIX = '';
 export const FEATURE_MODULE_EXT = '.module.ts';
 export const ROUTING_MODULE_EXT = '-routing.module.ts';
+export const PLAYGROUND_PATH: Path = normalize('/src/playground/');
+export const PLAYGROUND_ROUTING_MODULE_PATH: Path = join(PLAYGROUND_PATH, `playground${ROUTING_MODULE_EXT}`);
+
+export const LAYOUT_DIR_NAME = 'with-layout';
+export const LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, LAYOUT_DIR_NAME);
+export const LAYOUT_MODULE_PATH = join(LAYOUT_DIR_PATH, `${LAYOUT_DIR_NAME}${FEATURE_MODULE_EXT}`);
+export const LAYOUT_ROUTING_MODULE_PATH = join(LAYOUT_DIR_PATH, `${LAYOUT_DIR_NAME}${ROUTING_MODULE_EXT}`);
+export const LAYOUT_MODULE_CLASS = 'WithLayoutModule';
+export const LAYOUT_COMPONENT_CLASS = 'PlaygroundLayoutComponent';
+
+export const NO_LAYOUT_DIR_NAME = 'without-layout';
+export const NO_LAYOUT_DIR_PATH = join(PLAYGROUND_PATH, NO_LAYOUT_DIR_NAME);
+export const NO_LAYOUT_MODULE_PATH = join(NO_LAYOUT_DIR_PATH, `${NO_LAYOUT_DIR_NAME}${FEATURE_MODULE_EXT}`);
+export const NO_LAYOUT_ROUTING_MODULE_PATH = join(NO_LAYOUT_DIR_PATH, `${NO_LAYOUT_DIR_NAME}${ROUTING_MODULE_EXT}`);
+export const NO_LAYOUT_MODULE_CLASS = 'WithoutLayoutModule';
+export const NO_LAYOUT_COMPONENT_CLASS = 'PlaygroundBaseComponent';
+
+export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
 
 /**
  * Returns root playground directory.
@@ -48,6 +62,10 @@ export function getModuleDirs(tree: Tree): DirEntry[] {
     return dirs.concat(dir.subdirs.map(subDir => dir.dir(subDir)));
   }, []);
   return baseDirs.concat(baseDirectChildren);
+}
+
+export function isRootPlaygroundModule(moduleDir: Path): boolean {
+  return moduleDir === PLAYGROUND_PATH;
 }
 
 export function isBasePlaygroundModule(moduleDir: Path): boolean {
@@ -164,9 +182,4 @@ export function findRoutingModule(tree: Tree, path: Path): Path | undefined {
 
 export function isInPlaygroundRoot(filePath: Path): boolean {
   return dirname(filePath) === PLAYGROUND_PATH;
-}
-
-export function removeBasePath(dirPath: Path): string {
-  const basePaths = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
-  return basePaths.reduce((path, basePath) => path.replace(basePath, ''), dirPath);
 }

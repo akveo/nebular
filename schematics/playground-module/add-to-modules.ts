@@ -36,10 +36,9 @@ import {
   getRouteLazyModule,
   addObjectProperty,
   findRouteWithPath,
-  generatePathRoute,
   findRoute,
   componentRoutePredicate,
-  lazyModulePredicate,
+  isRootPlaygroundModule,
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
@@ -167,7 +166,6 @@ function processDirectives(tree: Tree, directivePath: Path): void {
 }
 
 function processFeatureModule(tree: Tree, context: SchematicContext, modulePath: Path): void {
-
   const moduleDeclarations = getClassWithDecorator(tree, modulePath, 'NgModule');
   if (!moduleDeclarations.length) {
     return;
@@ -194,22 +192,12 @@ function addModuleRoute(
   modulePath: Path,
   routingModulePath: Path,
 ): void {
-  const moduleClassName = (moduleDeclaration.name as ts.Identifier).getText();
-  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
-  const loadChildren = `loadChildren: '${lazyModulePath}'`;
-
-  const isRootRouting = isInPlaygroundRoot(routingModulePath);
-  if (isRootRouting) {
-    const routes = findRoutesArray(tree, routingModulePath);
-    const alreadyHas = findRoute(routes, lazyModulePredicate.bind(null, lazyModulePath));
-    if (!alreadyHas) {
-      addRoute(tree, routingModulePath, routes, generatePathRoute('', loadChildren));
-    }
-
+  const moduleDir = dirname(modulePath);
+  if (isRootPlaygroundModule(moduleDir)) {
     return;
   }
 
-  const routePredicates = routePredicatesFromPath(routingModulePath, dirname(modulePath));
+  const routePredicates = routePredicatesFromPath(routingModulePath, moduleDir);
   let route = findRouteWithPath(findRoutesArray(tree, routingModulePath), routePredicates);
   if (!route) {
     addMissingChildRoutes(tree, routingModulePath, modulePath);
@@ -220,6 +208,9 @@ function addModuleRoute(
     return;
   }
 
+  const moduleClassName = (moduleDeclaration.name as ts.Identifier).getText();
+  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
+  const loadChildren = `loadChildren: '${lazyModulePath}'`;
   addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, loadChildren);
 }
 
