@@ -7,7 +7,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthResult, NbAuthService } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators';
-import { NbAuthAzureToken } from './azure-adb2c-auth-strategy';
+import { AuthAzureToken } from './azure-adb2c-auth-strategy';
 
 @Component({
   selector: 'nb-playground-azure',
@@ -27,16 +27,16 @@ import { NbAuthAzureToken } from './azure-adb2c-auth-strategy';
     </nb-layout>
   `,
 })
-export class NbAzureLoginComponent implements OnDestroy {
+export class AzureLoginComponent implements OnDestroy {
 
-  token: NbAuthAzureToken;
+  token: AuthAzureToken;
 
   alive = true;
 
   constructor(private authService: NbAuthService) {
     this.authService.onTokenChange()
       .pipe(takeWhile(() => this.alive))
-      .subscribe((token: NbAuthAzureToken) => {
+      .subscribe((token: AuthAzureToken) => {
         this.token = null;
         if (token && token.isValid()) {
           this.token = token;

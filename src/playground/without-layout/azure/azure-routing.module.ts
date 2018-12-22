@@ -6,17 +6,17 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
-import { NbAzureCallbackComponent } from './azure-callback.component';
-import { NbAzureLoginComponent } from './azure-login.component';
+import { AzureCallbackComponent } from './azure-callback.component';
+import { AzureLoginComponent } from './azure-login.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: NbAzureLoginComponent,
+    component: AzureLoginComponent,
   },
   {
     path: 'callback',
-    component: NbAzureCallbackComponent,
+    component: AzureCallbackComponent,
   },
 ];
 

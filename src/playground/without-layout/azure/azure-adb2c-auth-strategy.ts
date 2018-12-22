@@ -15,7 +15,7 @@ import {
 
 
 // Create new token for Azure auth so it returns id_token instead of access_token
-export class NbAuthAzureToken extends NbAuthOAuth2JWTToken {
+export class AuthAzureToken extends NbAuthOAuth2JWTToken {
 
   // let's rename it to exclude name clashes
   static NAME = 'nb:auth:azure:token';
@@ -26,11 +26,11 @@ export class NbAuthAzureToken extends NbAuthOAuth2JWTToken {
 }
 
 @Injectable()
-export class NbAzureADB2CAuthStrategy extends NbOAuth2AuthStrategy {
+export class AzureADB2CAuthStrategy extends NbOAuth2AuthStrategy {
 
   // we need this method for strategy setup
   static setup(options: NbOAuth2AuthStrategyOptions): [NbAuthStrategyClass, NbOAuth2AuthStrategyOptions] {
-    return [NbAzureADB2CAuthStrategy, options];
+    return [AzureADB2CAuthStrategy, options];
   }
 
   protected redirectResultHandlers = {

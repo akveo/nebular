@@ -47,7 +47,7 @@ const routes: Route[] = [
       },
       {
         path: 'azure',
-        loadChildren: './azure/azure.module#NbAzurePlaygroundModule',
+        loadChildren: './azure/azure.module#AzurePlaygroundModule',
       },
     ],
   },

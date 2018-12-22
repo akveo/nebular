@@ -16,9 +16,9 @@ import {
 
 import { NbAuthModule } from '@nebular/auth';
 
-import { NbAzureLoginComponent } from './azure-login.component';
-import { NbAzureCallbackComponent } from './azure-callback.component';
-import { NbAuthAzureToken, NbAzureADB2CAuthStrategy } from './azure-adb2c-auth-strategy';
+import { AzureLoginComponent } from './azure-login.component';
+import { AzureCallbackComponent } from './azure-callback.component';
+import { AuthAzureToken, AzureADB2CAuthStrategy } from './azure-adb2c-auth-strategy';
 import { AzureRoutingModule } from './azure-routing.module';
 
 
@@ -29,7 +29,7 @@ import { AzureRoutingModule } from './azure-routing.module';
     HttpClientModule,
     NbAuthModule.forRoot({
       strategies: [
-        NbAzureADB2CAuthStrategy.setup({
+        AzureADB2CAuthStrategy.setup({
           name: 'azure',
           clientId: 'bde728e2-2809-4ff1-bc9c-7fcb23800ebe',
           clientSecret: '',
@@ -43,7 +43,7 @@ import { AzureRoutingModule } from './azure-routing.module';
             },
           },
           token: {
-            class: NbAuthAzureToken,
+            class: AuthAzureToken,
           },
           redirect: {
             success: '/example/azure',
@@ -57,12 +57,12 @@ import { AzureRoutingModule } from './azure-routing.module';
     AzureRoutingModule,
   ],
   declarations: [
-    NbAzureLoginComponent,
-    NbAzureCallbackComponent,
+    AzureLoginComponent,
+    AzureCallbackComponent,
   ],
   providers: [
-    NbAzureADB2CAuthStrategy,
+    AzureADB2CAuthStrategy,
   ],
 })
-export class NbAzurePlaygroundModule {
+export class AzurePlaygroundModule {
 }

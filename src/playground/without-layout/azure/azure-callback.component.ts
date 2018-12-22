@@ -17,7 +17,7 @@ import { takeWhile } from 'rxjs/operators';
     </nb-layout>
   `,
 })
-export class NbAzureCallbackComponent implements OnDestroy {
+export class AzureCallbackComponent implements OnDestroy {
 
   alive = true;
 
