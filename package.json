@@ -19,7 +19,8 @@
     "gulp": "gulp",
     "firebase": "firebase",
     "conventional-changelog": "conventional-changelog",
-    "start": "run-p \"ng -- serve {@}\" \"gulp -- watch:gen:playground-modules\" -- ",
+    "prestart": "run-s build:schematics gen:playground",
+    "start": "run-p \"ng -- serve {@}\" \"gulp -- watch:gen:playground\" -- ",
     "start:prod": "npm run start -- --prod --aot",
     "start:wp": "npm run start:prod -- playground-wp",
     "docs:parse": "gulp docs",
@@ -71,7 +72,9 @@
     "publish": "./scripts/publish.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
     "postinstall": "npm run cli:firefox-fix",
-    "gen:playground-module": "ng g .:playground-module"
+    "gen:playground": "ng g .:playground",
+    "gen:playground-module": "ng g .:playground-module",
+    "gen:playground-components": "ng g .:playground-components"
   },
   "keywords": [
     "angular",

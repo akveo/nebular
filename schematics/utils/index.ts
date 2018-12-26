@@ -10,3 +10,4 @@ export * from './playground';
 export * from './path';
 export * from './routing';
 export * from './change';
+export * from './strings';

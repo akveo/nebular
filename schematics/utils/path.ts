@@ -5,7 +5,7 @@
  */
 
 import { parse } from 'path';
-import { NormalizedSep, Path, relative, dirname, join, normalize, basename } from '@angular-devkit/core';
+import { NormalizedSep, Path, relative, dirname, join, normalize, basename, PathFragment } from '@angular-devkit/core';
 
 export function removeExtension(filePath: Path): string {
   return parse(filePath).name;
@@ -38,4 +38,10 @@ export function importPath(from: Path, to: Path): string {
   }
 
   return generateCurrentDirImport(join(relativePath, basename(to)));
+}
+
+export function lazyRoutePathToFilePath(lazyRoutePath: string): string {
+  const path = lazyRoutePath.slice(0, lazyRoutePath.indexOf('#'));
+
+  return path + '.ts' as PathFragment;
 }
