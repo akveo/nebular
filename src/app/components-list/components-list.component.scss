@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:host(.column) {
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.component-block:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.component-link {
+  display: block;
+
+  &:focus {
+    transform: scale(1.02);
+  }
+
+  &.active {
+    color: #00f;
+  }
+}

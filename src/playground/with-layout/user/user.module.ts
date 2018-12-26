@@ -1,0 +1,20 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import { NgModule } from '@angular/core';
+import { NbCardModule, NbUserModule } from '@nebular/theme';
+import { UserRoutingModule } from './user-routing.module';
+import { UserShowcaseComponent } from './user-showcase.component';
+import { UserSizesComponent } from './user-sizes.component';
+
+@NgModule({
+  declarations: [
+    UserShowcaseComponent,
+    UserSizesComponent,
+  ],
+  imports: [ NbUserModule, NbCardModule, UserRoutingModule ],
+})
+export class UserModule {}

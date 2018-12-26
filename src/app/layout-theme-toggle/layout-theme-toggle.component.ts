@@ -12,7 +12,7 @@ import { NbThemeService } from '@nebular/theme';
     </label>
   `,
 })
-export class NbLayoutThemeToggleComponent {
+export class LayoutThemeToggleComponent {
   constructor(private themeService: NbThemeService) {}
 
   enable(theme: string) {
