@@ -57,10 +57,10 @@ describe('menu helpers', () => {
     service.setDirection(NbLayoutDirection.RTL);
     fixture.detectChanges();
     const chevron = fixture.nativeElement.querySelector('.chevron');
-    expect(chevron.classList).toContain('nb-chevron-left');
+    expect(chevron.classList).toContain('nb-chevron-right');
     service.setDirection(NbLayoutDirection.LTR);
     fixture.detectChanges();
-    expect(chevron.classList).toContain('nb-chevron-right');
+    expect(chevron.classList).toContain('nb-chevron-left');
   });
 
   describe('menu URL helpers', () => {

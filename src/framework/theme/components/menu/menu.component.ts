@@ -15,10 +15,9 @@ import {
   AfterViewInit,
   Inject,
   DoCheck,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { takeWhile, filter, map } from 'rxjs/operators';
 import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
 import { convertToBoolProperty } from '../helpers';
@@ -52,13 +51,20 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
 
   private alive = true;
   toggleState: NbToggleStates;
-  get isLtr(): boolean {
-    return this.directionService.isLtr();
-  };
+  isLtr$: Observable<boolean>;
+  isRtl$: Observable<boolean>;
 
   constructor(private menuService: NbMenuService,
-              private directionService: NbLayoutDirectionService,
-              private changeDetector: ChangeDetectorRef) {}
+              private directionService: NbLayoutDirectionService) {
+    this.isLtr$ = this.directionService.onDirectionChange()
+      .pipe(
+        map(() => this.directionService.isLtr()),
+      );
+    this.isRtl$ = this.directionService.onDirectionChange()
+      .pipe(
+        map(() => this.directionService.isRtl()),
+      );
+  }
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
@@ -72,10 +78,6 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
         map(({ item }: NbMenuBag) => item.expanded),
       )
       .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
-
-    this.directionService.onDirectionChange()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.changeDetector.detectChanges());
   }
 
   ngOnDestroy() {
