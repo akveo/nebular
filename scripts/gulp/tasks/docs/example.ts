@@ -1,12 +1,23 @@
 import { dest, src, task } from 'gulp';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
-import { DOCS_OUTPUT, EXTENSIONS, PLAYGROUND_ROOT } from '../config';
+import { DOCS_OUTPUT, EXTENSIONS } from '../config';
 import { join } from 'path';
 
 const del = require('del');
 const replace = require('gulp-replace');
 
-const EXAMPLES_SRC = './src/playground/**/*.*';
+/**
+ * Copy everything from with-layout and without-layout dirs
+ * directly into examples dir. This way we can reference examples
+ * without specifying this dirs.
+ * For example, @stacked-example(..., button/button-showcase.component)
+ * instead of @stacked-example(..., layout/button/button-showcase.component)
+ */
+const EXAMPLES_SRC = [
+  './src/playground/*.*',
+  './src/playground/with-layout/**/*.*',
+  './src/playground/without-layout/**/*.*',
+];
 const EXAMPLES_DEST = './docs/assets/examples';
 
 task('copy-examples', () => {
@@ -96,7 +107,7 @@ function isComponentExists(path): boolean {
 
 function isFileExists(file): boolean {
   try {
-    const path = join(PLAYGROUND_ROOT, file);
+    const path = join(EXAMPLES_DEST, file);
     accessSync(path);
     return true;
   } catch (e) {

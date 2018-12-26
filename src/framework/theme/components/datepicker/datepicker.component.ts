@@ -8,6 +8,7 @@ import {
   Component,
   ComponentFactoryResolver,
   ComponentRef,
+  OnChanges,
   ElementRef,
   EventEmitter,
   Inject,
@@ -36,16 +37,23 @@ import { NbDatepickerContainerComponent } from './datepicker-container.component
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
 import { NbCalendarComponent } from '../calendar/calendar.component';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbDateService,
+  NbNativeDateService,
+} from '../calendar-kit';
 import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, OnDestroy {
   /**
-   * Datepicker date format.
+   * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
+   * object doesn't support formatting.
    * */
   @Input() format: string;
 
@@ -156,7 +164,9 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
-              protected cfr: ComponentFactoryResolver) {
+              protected cfr: ComponentFactoryResolver,
+              protected dateService: NbDateService<D>,
+  ) {
     super();
   }
 
@@ -187,6 +197,15 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   protected abstract get pickerValueChange(): Observable<T>;
 
+  ngOnChanges() {
+    if (this.dateService instanceof NbNativeDateService && this.format) {
+      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
+      '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
+      'More information at "Formatting issue" ' +
+      'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+    }
+  }
+
   ngOnDestroy() {
     this.alive = false;
     this.hide();
@@ -199,13 +218,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   attach(hostRef: ElementRef) {
     this.hostRef = hostRef;
-
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.subscribeOnPositionChange();
     this.subscribeOnTriggers();
   }
 
@@ -214,11 +226,11 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   show() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
-    this.instantiatePicker();
-    this.subscribeOnValueChange();
-    this.writeQueue();
-    this.patchWithInputs();
+    if (!this.ref) {
+      this.createOverlay();
+    }
+
+    this.openDatepicker();
   }
 
   shouldHide(): boolean {
@@ -237,6 +249,23 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected abstract writeQueue();
+
+  protected createOverlay() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+    this.subscribeOnPositionChange();
+  }
+
+  protected openDatepicker() {
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
+    this.instantiatePicker();
+    this.subscribeOnValueChange();
+    this.writeQueue();
+    this.patchWithInputs();
+  }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder

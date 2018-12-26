@@ -145,7 +145,6 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected triggerStrategy: NbTriggerStrategy;
   protected alive: boolean = true;
 
   constructor(@Inject(NB_DOCUMENT) protected document,
@@ -156,13 +155,6 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.triggerStrategy = this.createTriggerStrategy();
-
     this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
   }
@@ -170,19 +162,24 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
     this.hide();
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   show() {
-    this.container = createContainer(this.ref, NbPopoverComponent, {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    }, this.componentFactoryResolver);
+    if (!this.ref) {
+      this.createOverlay();
+    }
+
+    this.openPopover();
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
     this.container = null;
   }
 
@@ -192,6 +189,22 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
     } else {
       this.show();
     }
+  }
+
+  protected createOverlay() {
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+  }
+
+  protected openPopover() {
+    this.container = createContainer(this.ref, NbPopoverComponent, {
+      position: this.position,
+      content: this.content,
+      context: this.context,
+      cfr: this.componentFactoryResolver,
+    }, this.componentFactoryResolver);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -211,13 +224,15 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   }
 
   protected subscribeOnPositionChange() {
+    this.positionStrategy = this.createPositionStrategy();
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
       .subscribe((position: NbPosition) => patch(this.container, { position }));
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy();
+    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 }

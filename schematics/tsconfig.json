@@ -27,7 +27,10 @@
     ]
   },
   "include": [
-    "./**/*"
+    "./**/*",
+    "../src/.lib/theme/schematics/util",
+    "../node_modules/@angular/cdk/schematics/utils",
+    "../node_modules/@schematics/angular/utility"
   ],
   "exclude": [
     "./*/files/**/*",

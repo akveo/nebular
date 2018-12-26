@@ -27,7 +27,8 @@
     "**/*.spec.ts",
     "../src/framework/**/*.spec.ts",
     "assets/**/*.ts",
-    "dist/**/*"
+    "dist/**/*",
+    "../src/framework/**/schematics/**/*"
   ],
   "include": [
     "../docs/**/*",

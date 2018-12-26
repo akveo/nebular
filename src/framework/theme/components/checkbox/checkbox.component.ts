@@ -20,7 +20,7 @@ import { convertToBoolProperty } from '../helpers';
  * @NgModule({
  *   imports: [
  *   	// ...
- *     NbCheckboxComponent,
+ *     NbCheckboxModule,
  *   ],
  * })
  * export class PageModule { }

@@ -1,12 +1,18 @@
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { NbOverlayContainerAdapter, NbOverlayService } from '../cdk';
+import { NbOverlayContainerAdapter, NbOverlayService, NbViewportRulerAdapter } from '../cdk';
 import { NbDialogService } from './dialog.service';
 import { NbDialogModule } from './dialog.module';
 import { NbThemeModule } from '../../theme.module';
 import { NB_DOCUMENT } from '../../theme.options';
 
+
+export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
+  getViewportSize(): Readonly<{ width: number; height: number; }> {
+    return { width: 1600, height: 900 };
+  }
+}
 
 @Component({ selector: 'nb-test-dialog', template: '<button class="test-focusable-button"></button>' })
 class NbTestDialogComponent {
@@ -36,6 +42,7 @@ describe('dialog-service', () => {
         NbThemeModule.forRoot(),
         NbDialogModule.forRoot(),
       ],
+      providers: [{ provide: NbViewportRulerAdapter, useClass: NbViewportRulerMockAdapter }],
     });
 
     dialog = TestBed.get(NbDialogService);

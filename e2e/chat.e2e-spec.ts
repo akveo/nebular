@@ -53,25 +53,4 @@ describe('nb-chat', () => {
         });
     });
   });
-
-  it('should add on message', () => {
-    const all: any = element.all(by.css('nb-chat:nth-child(1) nb-chat-message'));
-    all.count().then(allCount => {
-      element(by.css('nb-chat:nth-child(1) nb-chat-form  input')).sendKeys('akveo');
-      element(by.css('nb-chat:nth-child(1) nb-chat-form .btn')).click();
-      expect(all.count()).toEqual(allCount + 1);
-    });
-  });
-
-  it('should not add on an empty message', () => {
-    const all: any = element.all(by.css('nb-chat:nth-child(1) nb-chat-message'));
-    all.count().then(allCount => {
-      element(by.css('nb-chat:nth-child(1) nb-chat-form .btn')).click();
-      expect(all.count()).toEqual(allCount);
-
-      element(by.css('nb-chat:nth-child(1) nb-chat-form  input')).sendKeys('  ');
-      element(by.css('nb-chat:nth-child(1) nb-chat-form .btn')).click();
-      expect(all.count()).toEqual(allCount);
-    });
-  });
 });

@@ -72,23 +72,4 @@ describe('nb-alert', () => {
         });
     });
   });
-
-  const accentAlerts = prepareAccentAlerts(alerts.length);
-  accentAlerts.forEach(c => {
-    it(`should display ${c.colorKey} alert with ${c.accentKey} accent`, () => {
-      element.all(by.css(`nb-alert`))
-        .get(c.elementNumber)
-        .getCssValue('border-top-color').then(borderColor => {
-          expect(borderColor).toEqual(c.accentColor, 'Accent is not correct');
-        });
-    });
-  });
-
-  it('should react on close click', () => {
-    const all: any = element.all(by.css('nb-alert'));
-    all.count().then(allCount => {
-      element(by.css('nb-alert:nth-child(1) > .close')).click();
-      expect(all.count()).toEqual(allCount - 1);
-    });
-  });
 });

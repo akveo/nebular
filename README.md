@@ -15,6 +15,20 @@ At the same time, Nebular allows you to use it together with any other UI librar
 
 ## Installation
 
+### Angular CLI
+
+Install Nebular with Angular CLI
+
+```bash
+ng add @nebular/theme
+```
+
+And that's it. Configuration will be done automatically.
+
+If you want to have more control over setup process you may use manual setup guide.
+
+### Manual
+
 1. Install Nebular modules
 
 ```bash
