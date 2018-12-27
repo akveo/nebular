@@ -42,10 +42,10 @@
    href="#">
   <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
   <span class="menu-title">{{ menuItem.title }}</span>
-  <i class="ion chevron"
-     [class.nb-chevron-right]="(isRtl$ | async) && !menuItem.expanded"
-     [class.nb-chevron-left]="(isLtr$ | async) && !menuItem.expanded"
-     [class.nb-chevron-down]="menuItem.expanded">
+  <i class="chevron"
+     [class.nb-arrow-right]="(isRtl$ | async) && !menuItem.expanded"
+     [class.nb-arrow-left]="(isLtr$ | async) && !menuItem.expanded"
+     [class.nb-arrow-down]="menuItem.expanded">
   </i>
 </a>
 <ul *ngIf="menuItem.children"
