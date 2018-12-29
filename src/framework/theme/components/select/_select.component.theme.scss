@@ -49,6 +49,7 @@
 
     nb-option {
       padding: nb-theme(select-option-padding);
+      user-select: none;
     }
 
     &.primary {
