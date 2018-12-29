@@ -25,6 +25,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Professional Services',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'professional-services.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -675,6 +686,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth-oauth2.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Configuring Azure OAuth2',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-azure.md',
           },
         ],
       },
