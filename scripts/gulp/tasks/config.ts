@@ -4,3 +4,4 @@ export const PLAYGROUND_ROOT = './src/playground/';
 export const DOCS_OUTPUT = './docs/output.json';
 export const EXTENSIONS = ['ts', 'html', 'scss'];
 export const DOCS_DIST = './docs/dist';
+export const LIB_DIST = './.lib_dist';

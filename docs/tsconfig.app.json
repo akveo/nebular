@@ -11,16 +11,10 @@
       "dom"
     ],
     "outDir": "../out-tsc/app",
-    "target": "es5",
+    "target": "es2015",
     "module": "es2015",
     "baseUrl": ".",
-    "types": [],
-    "paths": {
-      "@nebular/theme": ["../src/framework/theme"],
-      "@nebular/theme/*": ["../src/framework/theme/*"],
-      "@nebular/auth": ["../src/framework/auth"],
-      "@nebular/security": ["../src/framework/security"]
-    }
+    "types": []
   },
   "exclude": [
     "test.ts",
@@ -33,7 +27,6 @@
   "include": [
     "../docs/**/*",
     "../src/playground/**/*",
-    "../src/framework/**/*",
     "../src/app/dynamic.component.ts"
   ]
 }

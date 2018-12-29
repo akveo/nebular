@@ -23,9 +23,9 @@ task('bundle:rename-dev', bundleRenameDev);
 
 function bundleUmdModule(name: string) {
   bundle({
-    src: `${LIB_DIR}/${name}/esm5/**/*.js`,
+    src: `${LIB_DIR}/${name}/**/*.js`,
     moduleName: `nb.${name}`,
-    entry: `${LIB_DIR}/${name}/esm5/index.js`,
+    entry: `${LIB_DIR}/${name}/index.js`,
     format: 'umd',
     output: `${name}.umd.js`,
     dest: `${LIB_DIR}/${name}/bundles`,

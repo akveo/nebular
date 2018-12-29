@@ -4,10 +4,10 @@
   "description": "@nebular/date-fns",
   "es2015": "./esm2015/index.js",
   "esm2015": "./esm2015/index.js",
-  "esm5": "./esm5/index.js",
+  "esm5": "./index.js",
   "main": "./bundles/theme.umd.js",
-  "module": "./esm5/index.js",
-  "typings": "./src/index.d.ts",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {

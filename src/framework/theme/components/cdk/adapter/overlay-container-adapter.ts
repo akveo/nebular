@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-
-import { NbOverlayContainer } from '../overlay/mapping';
+import { Inject, Injectable } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { NB_DOCUMENT } from '@nebular/theme';
 
 
 /**
@@ -11,8 +11,13 @@ import { NbOverlayContainer } from '../overlay/mapping';
  * This case important only if you switch between multiple layouts.
  * */
 @Injectable()
-export class NbOverlayContainerAdapter extends NbOverlayContainer {
+export class NbOverlayContainerAdapter extends OverlayContainer {
   protected container: HTMLElement;
+
+  constructor(@Inject(NB_DOCUMENT) document) {
+    console.info('Im here');
+    super(document);
+  }
 
   setContainer(container: HTMLElement) {
     this.container = container;

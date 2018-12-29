@@ -219,9 +219,6 @@ export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
   }
 }
 
-export class NbOverlayContainer extends OverlayContainer {
-}
-
 export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {
 }
 
