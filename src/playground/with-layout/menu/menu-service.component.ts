@@ -14,13 +14,13 @@ import { MENU_ITEMS } from './menu-service-items';
   template: `
     <nb-card size="xxlarge">
       <nb-card-body>
-        <nb-menu id="menu" tag="menu" [items]="menuItems"></nb-menu>
+        <nb-menu tag="menu" [items]="menuItems"></nb-menu>
         <router-outlet></router-outlet>
         <h3>Selected item: {{ selectedItem }}</h3>
-        <button nbButton id="addBtn" (click)="addMenuItem()">Add Menu Item</button>
-        <button nbButton id="collapseBtn" (click)="collapseAll()">Collapse all menu items</button>
-        <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
-        <button nbButton id="getSelectedItemBtn" (click)="getSelectedItem()">Get Selected Item</button>
+        <button nbButton (click)="addMenuItem()">Add Menu Item</button>
+        <button nbButton (click)="collapseAll()">Collapse all menu items</button>
+        <button nbButton (click)="navigateHome()">Home</button>
+        <button nbButton (click)="getSelectedItem()">Get Selected Item</button>
       </nb-card-body>
     </nb-card>
   `,
