@@ -76,6 +76,7 @@ export class NbStepComponent {
   }
 
   private completedValue: boolean = false;
+  private stepper: NbStepperComponent;
 
   private get isCompleted() {
     return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;
@@ -83,7 +84,8 @@ export class NbStepComponent {
 
   interacted = false;
 
-  constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
+  constructor(@Inject(forwardRef(() => NbStepperComponent)) stepper) {
+    this.stepper = stepper;
   }
 
   /**

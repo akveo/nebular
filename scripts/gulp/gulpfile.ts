@@ -6,5 +6,6 @@ import './tasks/docs/docs';
 import './tasks/copy-sources';
 import './tasks/bump-versions';
 import './tasks/playground/playground-schematic';
+import './tasks/build/build';
 
 task('default', ['copy-sources']);

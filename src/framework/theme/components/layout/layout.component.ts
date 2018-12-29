@@ -107,8 +107,11 @@ export class NbLayoutHeaderComponent {
   @HostBinding('class.fixed') fixedValue: boolean;
   @HostBinding('class.subheader') subheaderValue: boolean;
 
+  private layout: NbLayoutComponent;
+
   // tslint:disable-next-line
-  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
+  constructor(@Inject(forwardRef(() => NbLayoutComponent)) layout) {
+    this.layout = layout;
   }
 
   /**
