@@ -125,7 +125,6 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected triggerStrategy: NbTriggerStrategy;
   protected alive: boolean = true;
   private items: NbMenuItem[] = [];
 
@@ -138,15 +137,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.triggerStrategy = this.createTriggerStrategy();
-
     this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
     this.subscribeOnItemClick();
   }
 
@@ -156,15 +147,18 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   }
 
   show() {
-    this.container = createContainer(this.ref, NbContextMenuComponent, {
-      position: this.position,
-      items: this.items,
-      tag: this.tag,
-    }, this.componentFactoryResolver);
+    if (!this.ref) {
+      this.createOverlay();
+    }
+
+    this.openContextMenu();
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
     this.container = null;
   }
 
@@ -174,6 +168,23 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
     } else {
       this.show();
     }
+  }
+
+  protected createOverlay() {
+    this.positionStrategy = this.createPositionStrategy();
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+    this.subscribeOnPositionChange();
+  }
+
+  protected openContextMenu() {
+    this.container = createContainer(this.ref, NbContextMenuComponent, {
+      position: this.position,
+      items: this.items,
+      tag: this.tag,
+    }, this.componentFactoryResolver);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -199,8 +210,9 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    this.triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+    const triggerStrategy = this.createTriggerStrategy();
+    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
+    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
   }
 
   /*

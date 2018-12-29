@@ -1,3 +1,22 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/akveo/nebular/compare/v3.0.0...v3.0.1) (2018-12-13)
+
+
+### Bug Fixes
+
+* **button:** return text color on focus ([#1030](https://github.com/akveo/nebular/issues/1030)) ([230c83e](https://github.com/akveo/nebular/commit/230c83e))
+* **popover:** inner triangle size ([#1020](https://github.com/akveo/nebular/issues/1020)) ([fe078c7](https://github.com/akveo/nebular/commit/fe078c7))
+* **select:** disable layout scrolling ([#1012](https://github.com/akveo/nebular/issues/1012)) ([1bd8214](https://github.com/akveo/nebular/commit/1bd8214)), closes [#992](https://github.com/akveo/nebular/issues/992)
+* **select:** resubscribe on options changes ([#1009](https://github.com/akveo/nebular/issues/1009)) ([949b050](https://github.com/akveo/nebular/commit/949b050))
+* **window:** reattach overlay after window expand ([#1022](https://github.com/akveo/nebular/issues/1022)) ([4b9c648](https://github.com/akveo/nebular/commit/4b9c648))
+
+
+### Features
+
+* **chat:** add `scrollBottom` chat option ([#1001](https://github.com/akveo/nebular/issues/1001)) ([d393f33](https://github.com/akveo/nebular/commit/d393f33)), closes [#921](https://github.com/akveo/nebular/issues/921)
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/akveo/nebular/compare/v2.0.2...v3.0.0) (2018-11-15)
 
