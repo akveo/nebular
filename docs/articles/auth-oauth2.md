@@ -1,4 +1,4 @@
-# Configuring Google OAuth2
+# Configuring Google OAuth2 with Nebular Auth
 
 Using `NbOAuth2AuthStrategy` gives possibility to configure authentication with a lot of 3rd party authentication providers, such as Google, Facebook, etc.
 There is no need in any backend implementation, as [OAuth2](https://tools.ietf.org/html/rfc6749) protocol enables completely server-less authentication flow as one of the options.

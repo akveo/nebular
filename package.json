@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -19,7 +19,8 @@
     "gulp": "gulp",
     "firebase": "firebase",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve",
+    "prestart": "run-s build:schematics gen:playground",
+    "start": "run-p \"ng -- serve {@}\" \"gulp -- watch:gen:playground\" -- ",
     "start:prod": "npm run start -- --prod --aot",
     "start:wp": "npm run start:prod -- playground-wp",
     "docs:parse": "gulp docs",
@@ -70,7 +71,10 @@
     "release": "npm-run-all release:validate publish",
     "publish": "./scripts/publish.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
-    "postinstall": "npm run cli:firefox-fix"
+    "postinstall": "npm run cli:firefox-fix",
+    "gen:playground": "ng g .:playground",
+    "gen:playground-module": "ng g .:playground-module",
+    "gen:playground-components": "ng g .:playground-components"
   },
   "keywords": [
     "angular",
@@ -126,6 +130,7 @@
     "@types/node": "6.0.90",
     "angular-cli-ghpages": "0.5.0",
     "browserstack-local": "^1.3.7",
+    "chokidar": "^2.0.4",
     "codelyzer": "4.5.0",
     "conventional-changelog-cli": "1.3.4",
     "del": "3.0.0",

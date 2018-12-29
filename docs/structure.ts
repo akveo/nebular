@@ -691,6 +691,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Configuring Azure OAuth2',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth-azure.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
