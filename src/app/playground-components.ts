@@ -1034,6 +1034,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'UserSizesComponent',
         name: 'User Sizes',
       },
+      {
+        path: 'user-avatar-settings.component',
+        link: '/user/user-avatar-settings.component',
+        component: 'UserAvatarSettingsComponent',
+        name: 'User Avatar Settings',
+      },
+      {
+        path: 'user-hide-captions.component',
+        link: '/user/user-hide-captions.component',
+        component: 'UserHideCaptionsComponent',
+        name: 'User Hide Captions',
+      },
     ],
   },
   {
