@@ -1,5 +1,5 @@
 <a name="3.1.0"></a>
-# [3.1.0](https://github.com/akveo/nebular/compare/v3.0.1...v3.1.0) (2018-12-31) `:christmas_tree:`
+# [3.1.0](https://github.com/akveo/nebular/compare/v3.0.1...v3.1.0) (2018-12-31) :christmas_tree:
 
 Happy New Year!
 
