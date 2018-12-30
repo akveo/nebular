@@ -25,4 +25,8 @@ export class NbDateFnsDateService extends NbNativeDateService {
   parse(date: string, format: string): Date {
     return parse(date, format, new Date());
   }
+
+  getId(): string {
+    return 'date-fns';
+  }
 }

@@ -42,7 +42,6 @@ import {
   NbCalendarSize,
   NbCalendarViewMode,
   NbDateService,
-  NbNativeDateService,
 } from '../calendar-kit';
 import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
@@ -198,7 +197,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnChanges() {
-    if (this.dateService instanceof NbNativeDateService && this.format) {
+    if (this.dateService.getId() === 'native' && this.format) {
       throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
       '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
       'More information at "Formatting issue" ' +

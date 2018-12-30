@@ -177,4 +177,6 @@ export abstract class NbDateService<D> {
    * Returns date with added number of years.
    * */
   abstract addYear(date: D, years: number): D;
+
+  abstract getId(): string;
 }

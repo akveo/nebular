@@ -155,4 +155,8 @@ export class NbNativeDateService extends NbDateService<Date> {
   isSameYear(date1: Date, date2: Date): boolean {
     return date1.getFullYear() === date2.getFullYear();
   }
+
+  getId(): string {
+    return 'native';
+  }
 }
