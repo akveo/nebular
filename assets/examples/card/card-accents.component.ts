@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card-accents.component.html',
 })
-export class NbCardAccentsComponent {
+export class CardAccentsComponent {
 }

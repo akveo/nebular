@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-badge.component.html',
 })
-export class NbActionBadgeComponent {
+export class ActionBadgeComponent {
 }

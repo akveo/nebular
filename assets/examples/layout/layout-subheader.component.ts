@@ -18,7 +18,7 @@ import { NbSidebarService } from '@nebular/theme';
   `],
 })
 
-export class NbLayoutSubheaderComponent {
+export class LayoutSubheaderComponent {
 
   constructor(private sidebarService: NbSidebarService) {
   }

@@ -16,6 +16,6 @@ import { fruits } from './fruits-list';
   `,
   styleUrls: [ './simple-list-showcase.component.scss' ],
 })
-export class NbSimpleListShowcaseComponent {
+export class SimpleListShowcaseComponent {
   fruits = fruits;
 }

@@ -13,4 +13,4 @@ import { Component } from '@angular/core';
   `,
   styleUrls: ['./input-component.scss'],
 })
-export class NbInputFullWidthComponent {}
+export class InputFullWidthComponent {}

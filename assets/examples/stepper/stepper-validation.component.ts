@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './stepper-validation.component.html',
 })
 
-export class NbStepperValidationComponent implements OnInit {
+export class StepperValidationComponent implements OnInit {
 
   firstForm: FormGroup;
   secondForm: FormGroup;

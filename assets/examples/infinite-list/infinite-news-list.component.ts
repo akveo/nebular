@@ -32,7 +32,7 @@ import { NewsService } from './news.service';
   styleUrls: [ 'infinite-news-list.component.scss' ],
   providers: [ NewsService ],
 })
-export class NbInfiniteNewsListComponent implements OnInit, OnDestroy {
+export class InfiniteNewsListComponent implements OnInit, OnDestroy {
 
   news = [];
   placeholders = [];

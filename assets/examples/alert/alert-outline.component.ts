@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './alert-outline.component.html',
 })
-export class NbAlertOutlineComponent {
+export class AlertOutlineComponent {
 }

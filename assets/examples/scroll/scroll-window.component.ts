@@ -10,7 +10,7 @@ enum LayoutMode {
   selector: 'nb-scroll-window',
   templateUrl: './scroll-window.component.html',
 })
-export class NbScrollWindowComponent {
+export class ScrollWindowComponent {
 
   mode = LayoutMode.WINDOW;
   text = 'Hello World! '.repeat(1024 * 10);

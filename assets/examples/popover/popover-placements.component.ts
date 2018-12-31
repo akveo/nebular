@@ -19,5 +19,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbPopoverPlacementsComponent {
+export class PopoverPlacementsComponent {
 }

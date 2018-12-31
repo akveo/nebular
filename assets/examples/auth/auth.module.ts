@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpRequest } from '@angular/common/http';
 
 import {
@@ -22,12 +21,12 @@ import {
 } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
-import { NbAuthPlaygroundComponent } from './auth.component';
-import { NbAuthPlaygroundRoutingModule } from './auth-routing.module';
-import { NbCustomRoleProvider } from './role.provider';
-import { NbAclTestComponent } from './acl/acl-test.component';
-import { NbAuthGuard } from './auth-guard.service';
-import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
+import { AuthPlaygroundComponent } from './auth.component';
+import { AuthPlaygroundRoutingModule } from './auth-routing.module';
+import { CustomRoleProvider } from './role.provider';
+import { AclTestComponent } from './acl/acl-test.component';
+import { AuthGuard } from './auth-guard.service';
+import { PlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
 export function filterInterceptorRequest(req: HttpRequest<any>) {
   return ['http://localhost:4400/api/auth/',
@@ -41,8 +40,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    NbAuthPlaygroundRoutingModule,
+    AuthPlaygroundRoutingModule,
 
     NbCardModule,
     NbLayoutModule,
@@ -144,16 +142,16 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
     }),
   ],
   declarations: [
-    NbAuthPlaygroundComponent,
-    NbAclTestComponent,
-    NbPlaygroundApiCallsComponent,
+    AuthPlaygroundComponent,
+    AclTestComponent,
+    PlaygroundApiCallsComponent,
   ],
   providers: [
-    NbAuthGuard,
+    AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
     { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest },
-    { provide: NbRoleProvider, useClass: NbCustomRoleProvider },
+    { provide: NbRoleProvider, useClass: CustomRoleProvider },
   ],
 })
-export class NbAuthPlaygroundModule {
+export class AuthPlaygroundModule {
 }

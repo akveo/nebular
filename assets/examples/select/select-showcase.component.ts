@@ -18,6 +18,6 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbSelectShowcaseComponent {
+export class SelectShowcaseComponent {
   selectedItem = '2';
 }

@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card-full.component.html',
 })
-export class NbCardFullComponent {
+export class CardFullComponent {
 }

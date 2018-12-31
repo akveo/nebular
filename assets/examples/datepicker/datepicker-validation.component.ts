@@ -29,7 +29,7 @@ import { NbDateService } from '@nebular/theme';
     }
   `],
 })
-export class NbDatepickerValidationComponent {
+export class DatepickerValidationComponent {
   min: Date;
   max: Date;
 

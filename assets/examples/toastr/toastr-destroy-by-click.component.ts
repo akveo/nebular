@@ -20,7 +20,7 @@ import { NbToastrService } from '@nebular/theme';
   ],
 })
 
-export class NbToastrDestroyByClickComponent {
+export class ToastrDestroyByClickComponent {
   private index: number = 0;
 
   constructor(private toastrService: NbToastrService) {

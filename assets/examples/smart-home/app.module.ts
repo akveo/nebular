@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -10,19 +9,18 @@ import {
 } from '@nebular/theme';
 
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { NgxAppComponent } from './app.component';
-import { NgxAppRouting } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AppRouting } from './app-routing.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule,
     NbLayoutModule,
     NbCardModule,
     NbButtonModule,
-    NgxAppRouting,
+    AppRouting,
 
     NbAuthModule.forRoot({
       strategies: [
@@ -36,8 +34,8 @@ import { NgxAppRouting } from './app-routing.module';
     }),
   ],
   declarations: [
-    NgxAppComponent,
+    AppComponent,
   ],
 })
-export class NgxAppModule {
+export class AppModule {
 }

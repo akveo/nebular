@@ -13,8 +13,7 @@ import { Component } from '@angular/core';
     }`],
   templateUrl: './chat-size.component.html',
 })
-
-export class NbChatSizesComponent {
+export class ChatSizesComponent {
   chats: any[] = [
     {
       title: 'Nebular Conversational UI Small',

@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-sizes.component.html',
 })
-export class NbActionSizesComponent {
+export class ActionSizesComponent {
 }

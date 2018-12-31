@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
   `,
   styleUrls: ['./simple-list-showcase.component.scss'],
 })
-export class NbUsersListShowcaseComponent {
+export class UsersListShowcaseComponent {
   users: { name: string, title: string }[] = [
     { name: 'Carla Espinosa', title: 'Nurse' },
     { name: 'Bob Kelso', title: 'Doctor of Medicine' },

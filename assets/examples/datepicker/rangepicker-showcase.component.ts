@@ -28,5 +28,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbRangepickerShowcaseComponent {
+export class RangepickerShowcaseComponent {
 }

@@ -22,5 +22,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSelectCleanComponent {
+export class SelectCleanComponent {
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NbChatShowcaseService } from './chat-showcase.service';
+import { ChatShowcaseService } from './chat-showcase.service';
 
 @Component({
   selector: 'nb-chat-showcase',
   templateUrl: './chat-showcase.component.html',
-  providers: [ NbChatShowcaseService ],
+  providers: [ ChatShowcaseService ],
   styles: [`
     ::ng-deep nb-layout-column {
       justify-content: center;
@@ -15,11 +15,11 @@ import { NbChatShowcaseService } from './chat-showcase.service';
     }
   `],
 })
-export class NbChatShowcaseComponent {
+export class ChatShowcaseComponent {
 
   messages: any[];
 
-  constructor(protected chatShowcaseService: NbChatShowcaseService) {
+  constructor(protected chatShowcaseService: ChatShowcaseService) {
     this.messages = this.chatShowcaseService.loadMessages();
   }
 

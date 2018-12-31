@@ -23,7 +23,7 @@ import { FormControl } from '@angular/forms';
     }
   `],
 })
-export class NbSelectFormComponent {
+export class SelectFormComponent {
   selectedItemNgModel;
 
   selectedItemFormControl = new FormControl();

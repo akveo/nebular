@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
     </nb-calendar>
   `,
 })
-export class NbCalendarShowcaseComponent {
+export class CalendarShowcaseComponent {
   date = new Date();
 }

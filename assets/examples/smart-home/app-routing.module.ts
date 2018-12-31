@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NgxAppComponent } from './app.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: NgxAppComponent,
+    component: AppComponent,
   },
   {
     path: 'auth',
-    loadChildren: './auth/auth.module#NgxAuthModule',
+    loadChildren: './auth/smart-home-auth.module#AuthModule',
   },
 ];
 
@@ -18,5 +18,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgxAppRouting {
+export class AppRouting {
 }

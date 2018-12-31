@@ -10,5 +10,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     }
   `],
 })
-export class NbTabsetWidthComponent {
+export class TabsetWidthComponent {
 }

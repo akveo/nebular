@@ -19,7 +19,7 @@ import { filter, map } from 'rxjs/operators';
     }
   `],
 })
-export class NbContextMenuClickComponent implements OnInit {
+export class ContextMenuClickComponent implements OnInit {
   items = [
     { title: 'Profile' },
     { title: 'Logout' },

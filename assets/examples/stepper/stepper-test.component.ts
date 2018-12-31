@@ -38,5 +38,5 @@ import { Component } from '@angular/core';
     </nb-stepper>
   `,
 })
-export class NbStepperTestComponent {
+export class StepperTestComponent {
 }

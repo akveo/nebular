@@ -97,7 +97,7 @@ import { Component } from '@angular/core';
     </nb-flip-card>
   `,
 })
-export class NbCardTestComponent {
+export class CardTestComponent {
 
   sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];

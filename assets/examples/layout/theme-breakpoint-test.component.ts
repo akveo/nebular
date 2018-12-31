@@ -28,7 +28,7 @@ import { NbThemeService } from '@nebular/theme';
     </nb-layout>
   `,
 })
-export class NbThemeBreakpointTestComponent {
+export class ThemeBreakpointTestComponent {
 
   change: any = [];
 

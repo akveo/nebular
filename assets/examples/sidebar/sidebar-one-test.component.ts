@@ -21,5 +21,5 @@ import { Component } from '@angular/core';
     </nb-layout>
 `,
 })
-export class NbSidebarOneTestComponent {
+export class SidebarOneTestComponent {
 }

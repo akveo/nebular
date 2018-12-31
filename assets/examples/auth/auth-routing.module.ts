@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NbAuthPlaygroundComponent } from './auth.component';
+import { AuthPlaygroundComponent } from './auth.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -10,18 +10,18 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { NbAclTestComponent } from './acl/acl-test.component';
-import { NbAuthGuard } from './auth-guard.service';
-import { NbPlaygroundApiCallsComponent } from './api-calls/api-calls.component';
+import { AclTestComponent } from './acl/acl-test.component';
+import { AuthGuard } from './auth-guard.service';
+import { PlaygroundApiCallsComponent } from './api-calls/api-calls.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: NbAuthPlaygroundComponent,
+    component: AuthPlaygroundComponent,
     children: [
       {
-        path: 'auth',
+        path: '',
         component: NbAuthComponent,
         children: [
           {
@@ -54,18 +54,18 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'auth/acl/acl-test.component',
-    component: NbAclTestComponent,
+    path: 'acl/acl-test.component',
+    component: AclTestComponent,
   },
   {
-    path: 'auth/auth-guard.service',
-    canActivate: [NbAuthGuard],
-    component: NbAuthPlaygroundComponent,
+    path: 'auth-guard.service',
+    canActivate: [AuthGuard],
+    component: AuthPlaygroundComponent,
   },
   {
-    path: 'auth/api-calls.component',
-    canActivate: [NbAuthGuard],
-    component: NbPlaygroundApiCallsComponent,
+    path: 'api-calls.component',
+    canActivate: [AuthGuard],
+    component: PlaygroundApiCallsComponent,
   },
 ];
 
@@ -73,5 +73,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NbAuthPlaygroundRoutingModule {
+export class AuthPlaygroundRoutingModule {
 }

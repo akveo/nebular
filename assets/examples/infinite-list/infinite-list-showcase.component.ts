@@ -21,7 +21,7 @@ import { NewsService } from './news.service';
   styleUrls: [ 'infinite-news-list.component.scss' ],
   providers: [ NewsService ],
 })
-export class NbInfiniteListShowcaseComponent {
+export class InfiniteListShowcaseComponent {
 
   news = [];
   placeholders = [];

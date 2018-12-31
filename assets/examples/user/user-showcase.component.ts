@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-showcase.component.html',
 })
-export class NbUserShowcaseComponent {
+export class UserShowcaseComponent {
 }

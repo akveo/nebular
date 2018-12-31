@@ -41,7 +41,7 @@ import { NewsService } from './news.service';
   styleUrls: [ 'infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss' ],
   providers: [ NewsService ],
 })
-export class NbInfiniteListScrollModesComponent {
+export class InfiniteListScrollModesComponent {
 
   firstCard = {
     news: [],

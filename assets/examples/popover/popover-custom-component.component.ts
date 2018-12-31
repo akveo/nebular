@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDynamicToAddComponent } from '../shared/dynamic.component';
+import { DynamicToAddComponent } from './components/dynamic.component';
 
 @Component({
   selector: 'nb-popover-custom-component',
@@ -11,9 +11,9 @@ import { NbDynamicToAddComponent } from '../shared/dynamic.component';
     }
   `],
 })
-export class NbPopoverCustomComponentComponent {
+export class PopoverCustomComponentComponent {
 
-  customComponent = NbDynamicToAddComponent;
+  customComponent = DynamicToAddComponent;
 }
 
 

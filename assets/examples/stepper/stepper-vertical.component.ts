@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   templateUrl: './stepper-vertical.component.html',
 })
 
-export class NbStepperVerticalComponent {
+export class StepperVerticalComponent {
 }

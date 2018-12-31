@@ -15,7 +15,7 @@ import { NbWindowService } from '@nebular/theme';
   `,
   styleUrls: [ './window.scss' ],
 })
-export class NbWindowsBackdropComponent {
+export class WindowsBackdropComponent {
 
   @ViewChild('escClose', { read: TemplateRef }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef }) disabledEscTemplate: TemplateRef<HTMLElement>;

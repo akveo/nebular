@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
   templateUrl: './chat-conversation-showcase.component.html',
 })
 
-export class NbChatConversationShowcaseComponent {
+export class ChatConversationShowcaseComponent {
 
   messages: any[] = [];
 

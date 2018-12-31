@@ -30,7 +30,7 @@ import { NbThemeService } from '@nebular/theme';
     </nb-layout>
 `,
 })
-export class NbThemeChangeTestComponent {
+export class ThemeChangeTestComponent {
   currentTheme = 'default';
 
   constructor(private themeService: NbThemeService) {}

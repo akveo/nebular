@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flip-card-accents.component.html',
 })
-export class NbFlipCardAccentsComponent {
+export class FlipCardAccentsComponent {
 }

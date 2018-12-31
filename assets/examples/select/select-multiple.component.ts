@@ -18,5 +18,5 @@ import { Component } from '@angular/core';
   `],
 })
 
-export class NbSelectMultipleComponent {
+export class SelectMultipleComponent {
 }

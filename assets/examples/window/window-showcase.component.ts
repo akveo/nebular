@@ -1,34 +1,16 @@
 import { Component } from '@angular/core';
-import { NbWindowRef, NbWindowService } from '@nebular/theme';
-
-@Component({
-  template: `
-    <form class="form">
-      <label for="subject">Subject:</label>
-      <input nbInput id="subject" type="text">
-
-      <label class="text-label" for="text">Text:</label>
-      <textarea nbInput id="text"></textarea>
-    </form>
-  `,
-})
-export class NbFormComponent {
-  constructor(public windowRef: NbWindowRef) {}
-
-  close() {
-    this.windowRef.close();
-  }
-}
+import { NbWindowService } from '@nebular/theme';
+import { FormComponent } from './components/form.component';
 
 @Component({
   template: `<button (click)="openWindow()" nbButton>Open window</button>`,
   styleUrls: [ './window.scss' ],
 })
-export class NbWindowShowcaseComponent {
+export class WindowShowcaseComponent {
 
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(NbFormComponent, { title: `Window` });
+    this.windowService.open(FormComponent, { title: `Window` });
   }
 }

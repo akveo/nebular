@@ -5,5 +5,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reveal-card-sizes.component.html',
 })
-export class NbRevealCardSizesComponent {
+export class RevealCardSizesComponent {
 }

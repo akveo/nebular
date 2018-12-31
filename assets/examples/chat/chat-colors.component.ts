@@ -14,8 +14,7 @@ import { Component } from '@angular/core';
     }
   `],
 })
-
-export class NbChatColorsComponent {
+export class ChatColorsComponent {
   chats: any[] = [
     {
       status: 'success',

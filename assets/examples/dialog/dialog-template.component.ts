@@ -22,7 +22,7 @@ import { NbDialogService } from '@nebular/theme';
     }
   `],
 })
-export class NbDialogTemplateComponent {
+export class DialogTemplateComponent {
   constructor(private dialogService: NbDialogService) {
   }
 

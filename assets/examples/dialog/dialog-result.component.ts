@@ -1,38 +1,6 @@
 import { Component } from '@angular/core';
-import { NbDialogRef, NbDialogService } from '@nebular/theme';
-
-@Component({
-  selector: 'nb-name-prompt',
-  template: `
-    <nb-card>
-      <nb-card-header>Enter your name</nb-card-header>
-      <nb-card-body>
-        <input #name nbInput placeholder="Name">
-      </nb-card-body>
-      <nb-card-footer>
-        <button nbButton hero status="danget" (click)="cancel()">Cancel</button>
-        <button nbButton hero status="success" (click)="submit(name.value)">Submit</button>
-      </nb-card-footer>
-    </nb-card>
-  `,
-  styles: [`
-    button {
-      margin: 1rem;
-    }
-  `],
-})
-export class NbDialogNamePromptComponent {
-  constructor(protected dialogRef: NbDialogRef<NbDialogNamePromptComponent>) {
-  }
-
-  cancel() {
-    this.dialogRef.close();
-  }
-
-  submit(name) {
-    this.dialogRef.close(name);
-  }
-}
+import { NbDialogService } from '@nebular/theme';
+import { DialogNamePromptComponent } from './components/name-prompt-dialog.component';
 
 @Component({
   selector: 'nb-dialog-result',
@@ -50,14 +18,14 @@ export class NbDialogNamePromptComponent {
     }
   `],
 })
-export class NbDialogResultComponent {
+export class DialogResultComponent {
   names: string[] = [];
 
   constructor(private dialogService: NbDialogService) {
   }
 
   open() {
-    this.dialogService.open(NbDialogNamePromptComponent)
+    this.dialogService.open(DialogNamePromptComponent)
       .onClose.subscribe(name => name && this.names.push(name));
   }
 }

@@ -22,6 +22,6 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSelectLabelShowcaseComponent {
+export class SelectLabelShowcaseComponent {
   selectedItem;
 }

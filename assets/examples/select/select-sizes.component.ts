@@ -22,5 +22,5 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSelectSizesComponent {
+export class SelectSizesComponent {
 }

@@ -31,7 +31,7 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class NbSpinnerTabsComponent {
+export class SpinnerTabsComponent {
 
   loading = false;
 

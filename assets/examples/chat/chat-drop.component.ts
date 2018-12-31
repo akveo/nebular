@@ -14,8 +14,7 @@ import { Component } from '@angular/core';
   `],
   templateUrl: './chat-drop.component.html',
 })
-
-export class NbChatDropComponent {
+export class ChatDropComponent {
 
   messages: any[] = [
     {

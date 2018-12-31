@@ -19,8 +19,7 @@ import { NbToastrService } from '@nebular/theme';
     `,
   ],
 })
-
-export class NbToastrPreventDuplicatesComponent {
+export class ToastrPreventDuplicatesComponent {
   constructor(private toastrService: NbToastrService) {
   }
 

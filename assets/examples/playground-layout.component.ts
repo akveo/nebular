@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import 'style-loader!./styles/styles.scss';
+import 'style-loader!../styles/styles.scss';
 
 
 @Component({
@@ -13,7 +13,7 @@ import 'style-loader!./styles/styles.scss';
     </nb-layout>
   `,
 })
-export class NbPlaygroundLayoutComponent implements OnInit {
+export class PlaygroundLayoutComponent implements OnInit {
   constructor(private themeService: NbThemeService) {
   }
 

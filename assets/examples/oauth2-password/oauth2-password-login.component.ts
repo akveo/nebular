@@ -1,20 +1,21 @@
 import { Component, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   NbAuthResult,
   NbAuthService,
   NB_AUTH_OPTIONS,
   nbAuthCreateToken,
-  NbAuthJWTToken, NbAuthToken,
+  NbAuthJWTToken,
+  NbAuthToken,
 } from '@nebular/auth';
-import { Router } from '@angular/router';
-import { getDeepFromObject } from '../../framework/auth/helpers';
+import { getDeepFromObject } from '../../../framework/auth/helpers';
 
 @Component({
   selector: 'nb-playground-auth',
   templateUrl: './oauth2-password-login.component.html',
   styleUrls: ['./oauth2-password-login.component.scss'],
 })
-export class NbOAuth2PasswordLoginComponent {
+export class OAuth2PasswordLoginComponent {
 
   token: NbAuthToken;
   redirectDelay: number = 0;

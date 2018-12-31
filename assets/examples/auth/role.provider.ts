@@ -6,7 +6,7 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
 
 @Injectable()
-export class NbCustomRoleProvider implements NbRoleProvider {
+export class CustomRoleProvider implements NbRoleProvider {
 
   constructor(private authService: NbAuthService) {
   }

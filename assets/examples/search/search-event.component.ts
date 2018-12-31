@@ -11,7 +11,7 @@ import { NbSearchService } from '@nebular/theme';
     }
   `],
 })
-export class NbSearchEventComponent {
+export class SearchEventComponent {
 
   value = '';
 

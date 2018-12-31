@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './checkbox-showcase.component.html',
 })
 
-export class NbCheckboxShowcaseComponent {
+export class CheckboxShowcaseComponent {
 }

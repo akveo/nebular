@@ -12,7 +12,7 @@ import { NbSidebarService } from '@nebular/theme';
   `],
 })
 
-export class NbSidebarFixedComponent {
+export class SidebarFixedComponent {
 
   constructor(private sidebarService: NbSidebarService) {
   }

@@ -11,7 +11,7 @@ import { NbCalendarRange, NbDateService } from '@nebular/theme';
     </nb-calendar-range>
   `,
 })
-export class NbCalendarRangeShowcaseComponent {
+export class CalendarRangeShowcaseComponent {
   range: NbCalendarRange<Date>;
 
   constructor(protected dateService: NbDateService<Date>) {

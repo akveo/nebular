@@ -136,5 +136,5 @@ import { Component } from '@angular/core';
     </nb-layout>
   `,
 })
-export class NbBootstrapTestComponent {
+export class BootstrapTestComponent {
 }

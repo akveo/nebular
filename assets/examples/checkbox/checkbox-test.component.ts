@@ -26,5 +26,5 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class NbCheckboxTestComponent {
+export class CheckboxTestComponent {
 }
