@@ -26,7 +26,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
   createContainer,
 } from '../cdk';
@@ -150,6 +150,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   constructor(@Inject(NB_DOCUMENT) protected document,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
+              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               private overlay: NbOverlayService,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -215,8 +216,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(this.mode)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)

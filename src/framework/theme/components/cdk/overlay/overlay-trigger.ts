@@ -1,7 +1,7 @@
-import { ComponentRef } from '@angular/core';
+import { ComponentRef, Inject, Injectable } from '@angular/core';
 import { fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
 import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile, map } from 'rxjs/operators';
-
+import { NB_DOCUMENT } from '../../../theme.options';
 
 export enum NbTrigger {
   CLICK = 'click',
@@ -188,11 +188,17 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategy {
     .pipe(takeWhile(() => this.isHostInBody()));
 }
 
-export class NbTriggerStrategyBuilder {
+@Injectable()
+export class NbTriggerStrategyBuilderService {
+
   protected _host: HTMLElement;
   protected _container: () => ComponentRef<any>;
   protected _trigger: NbTrigger;
   protected _document: Document;
+
+  constructor(@Inject(NB_DOCUMENT) document) {
+    this.document(document);
+  }
 
   document(document: Document): this {
     this._document = document;
