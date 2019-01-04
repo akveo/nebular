@@ -25,7 +25,12 @@ const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
 
 // TODO: check if we need both URL and LINK
 /**
- * Menu Item options
+ *
+ *
+ * Menu Item options example
+ * @stacked-example(Menu Link Parameters, menu/menu-link-params.component)
+ *
+ *
  */
 export class NbMenuItem {
   /**
@@ -49,7 +54,7 @@ export class NbMenuItem {
    */
   icon?: string;
   /**
-   * Expanded by defaul
+   * Expanded by default
    * @type {boolean}
    */
   expanded?: boolean;
@@ -121,7 +126,12 @@ export class NbMenuItem {
 // TODO: map select events to router change events
 // TODO: review the interface
 /**
+ *
+ *
  * Menu Service. Allows you to listen to menu events, or to interact with a menu.
+ * @stacked-example(Menu Service, menu/menu-service.component)
+ *
+ *
  */
 @Injectable()
 export class NbMenuService {

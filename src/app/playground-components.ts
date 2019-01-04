@@ -594,6 +594,72 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'MenuShowcaseComponent',
         name: 'Menu Showcase',
       },
+      {
+        path: 'menu-autocollapse.component',
+        link: '/menu/menu-autocollapse.component',
+        component: 'MenuAutoCollapseComponent',
+        name: 'Menu Auto Collapse',
+      },
+      {
+        path: 'menu-link-params.component',
+        link: '/menu/menu-link-params.component',
+        component: 'MenuLinkParamsComponent',
+        name: 'Menu Link Params',
+      },
+      {
+        path: 'menu-service.component',
+        link: '/menu/menu-service.component',
+        component: 'MenuServiceComponent',
+        name: 'Menu Service',
+        children: [
+          {
+            path: '2',
+            link: '/menu/menu-service.component/2',
+            component: 'MenuServiceItem2Component',
+            name: 'Menu Service Item2',
+          },
+          {
+            path: '3',
+            link: '/menu/menu-service.component/3',
+            component: 'MenuServiceItem3Component',
+            name: 'Menu Service Item3',
+            children: [
+              {
+                path: '1',
+                link: '/menu/menu-service.component/3/1',
+                component: 'MenuServiceItem31Component',
+                name: 'Menu Service Item31',
+              },
+              {
+                path: '2',
+                link: '/menu/menu-service.component/3/2',
+                component: 'MenuServiceItem32Component',
+                name: 'Menu Service Item32',
+              },
+              {
+                path: '3',
+                link: '/menu/menu-service.component/3/3',
+                component: 'MenuServiceItem33Component',
+                name: 'Menu Service Item33',
+                children: [
+                  {
+                    path: '1',
+                    link: '/menu/menu-service.component/3/3/1',
+                    component: 'MenuServiceItem331Component',
+                    name: 'Menu Service Item331',
+                  },
+                  {
+                    path: '2',
+                    link: '/menu/menu-service.component/3/3/2',
+                    component: 'MenuServiceItem332Component',
+                    name: 'Menu Service Item332',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
@@ -1033,6 +1099,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/user/user-sizes.component',
         component: 'UserSizesComponent',
         name: 'User Sizes',
+      },
+      {
+        path: 'user-avatar-settings.component',
+        link: '/user/user-avatar-settings.component',
+        component: 'UserAvatarSettingsComponent',
+        name: 'User Avatar Settings',
+      },
+      {
+        path: 'user-hide-captions.component',
+        link: '/user/user-hide-captions.component',
+        component: 'UserHideCaptionsComponent',
+        name: 'User Hide Captions',
       },
     ],
   },
