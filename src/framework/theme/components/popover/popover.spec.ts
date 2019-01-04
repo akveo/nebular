@@ -1,14 +1,22 @@
-import { Component, ElementRef, Input, NgModule, ViewChild } from '@angular/core';
+import { Component, ComponentRef, ElementRef, Inject, Injectable, Input, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Subject } from 'rxjs';
+import { of as observableOf, Subject } from 'rxjs';
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
 import { NbPopoverModule } from './popover.module';
 import { NbPopoverDirective } from './popover.directive';
-import { NbAdjustment, NbPosition, NbPositionBuilderService, NbTrigger } from '../cdk';
+import {
+  NbAdjustment,
+  NbPosition,
+  NbPositionBuilderService,
+  NbTrigger,
+  NbTriggerStrategy,
+  NbTriggerStrategyBuilderService,
+} from '../cdk';
+import { NB_DOCUMENT } from '@nebular/theme';
 
 
 @Component({
@@ -54,12 +62,28 @@ export class NbPopoverTemplateTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbPopover="test" [nbPopoverMode]="mode"></button>
+        <button #button nbPopover="test" [nbPopoverTrigger]="trigger"></button>
       </nb-layout-column>
     </nb-layout>
   `,
 })
 export class NbPopoverStringTestComponent {
+  @Input() trigger: NbTrigger = NbTrigger.CLICK;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+}
+
+@Component({
+  selector: 'nb-popover-mode-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <button #button nbPopover="test" [nbPopoverMode]="mode"></button>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbPopoverModeTestComponent {
   @Input() mode: NbTrigger = NbTrigger.CLICK;
   @ViewChild('button') button: ElementRef;
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
@@ -77,6 +101,7 @@ export class NbPopoverStringTestComponent {
     NbPopoverTemplateTestComponent,
     NbPopoverComponentTestComponent,
     NbPopoverComponentContentTestComponent,
+    NbPopoverModeTestComponent,
   ],
   entryComponents: [NbPopoverComponentContentTestComponent],
 })
@@ -117,6 +142,45 @@ export class MockPositionBuilder {
   };
 }
 
+@Injectable()
+export class MockTriggerStrategyBuilder {
+
+  _host: HTMLElement;
+  _container: () => ComponentRef<any>;
+  _trigger: NbTrigger;
+  _document: Document;
+
+  constructor(@Inject(NB_DOCUMENT) document) {
+    this.document(document);
+  }
+
+  document(document: Document): this {
+    this._document = document;
+    return this;
+  }
+
+  trigger(trigger: NbTrigger): this {
+    this._trigger = trigger;
+    return this;
+  }
+
+  host(host: HTMLElement): this {
+    this._host = host;
+    return this;
+  }
+
+  container(container: () => ComponentRef<any>): this {
+    this._container = container;
+    return this;
+  }
+
+  build(): NbTriggerStrategy {
+    return {
+      show$: observableOf(null),
+      hide$: observableOf(null),
+    } as NbTriggerStrategy;
+  }
+}
 
 describe('Directive: NbPopoverDirective', () => {
   beforeEach(() => {
@@ -170,6 +234,47 @@ describe('Directive: NbPopoverDirective', () => {
       expect(mockPositionBuilder._connectedTo.nativeElement).toBe(fixture.componentInstance.button.nativeElement);
       expect(mockPositionBuilder._position).toBe(NbPosition.TOP);
       expect(mockPositionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
+    });
+
+    it('should build with default trigger strategy', () => {
+      TestBed.resetTestingModule();
+      const bed = TestBed.configureTestingModule({
+        imports: [PopoverTestModule],
+        providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+      });
+      const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
+      fixture = TestBed.createComponent(NbPopoverStringTestComponent);
+      fixture.detectChanges();
+
+      expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
+    });
+
+    it('should build with custom trigger strategy', () => {
+      TestBed.resetTestingModule();
+      const bed = TestBed.configureTestingModule({
+        imports: [PopoverTestModule],
+        providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+      });
+      const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
+      fixture = TestBed.createComponent(NbPopoverStringTestComponent);
+      fixture.componentInstance.trigger = NbTrigger.HOVER;
+      fixture.detectChanges();
+
+      expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HOVER);
+    });
+
+    it('should build with custom mode strategy', () => {
+      TestBed.resetTestingModule();
+      const bed = TestBed.configureTestingModule({
+        imports: [PopoverTestModule],
+        providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+      });
+      const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
+      const modeFixture = TestBed.createComponent(NbPopoverModeTestComponent);
+      modeFixture.componentInstance.mode = NbTrigger.HOVER;
+      modeFixture.detectChanges();
+
+      expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HOVER);
     });
   });
 
