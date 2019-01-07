@@ -30,7 +30,7 @@ import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
 
 export function nbWindowFactory() {
-  return window;
+  return window ? window : {};
 }
 
 @NgModule({
