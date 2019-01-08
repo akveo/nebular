@@ -1258,6 +1258,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ContextMenuTestComponent',
         name: 'Context Menu Test',
       },
+      {
+        path: 'context-menu-modes.component',
+        link: '/context-menu/context-menu-modes.component',
+        component: 'ContextMenuModesComponent',
+        name: 'Context Menu Modes',
+      },
+      {
+        path: 'context-menu-noop.component',
+        link: '/context-menu/context-menu-noop.component',
+        component: 'ContextMenuNoopComponent',
+        name: 'Context Menu Noop',
+      },
     ],
   },
   {
