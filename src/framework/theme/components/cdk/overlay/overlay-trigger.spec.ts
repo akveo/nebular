@@ -252,3 +252,58 @@ describe('focus-trigger-strategy', () => {
     expect(showSpy).toHaveBeenCalledTimes(1);
   }));
 });
+
+describe('noop-trigger-strategy', () => {
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
+  let document: Document;
+  let host: HTMLElement;
+  let container: HTMLElement;
+
+  beforeEach(() => {
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
+    document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+  });
+
+  beforeEach(() => {
+    host = createElement();
+    container = createElement();
+    triggerStrategyBuilder
+      .trigger(NbTrigger.NOOP)
+      .host(host)
+      .container(withContainer(container));
+  });
+
+  it('should NOT fire show$ when hover/click/focus on host', fakeAsync(() => {
+    const showSpy = createSpy('showSpy');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+    triggerStrategy.show$.subscribe(showSpy);
+
+    focus(host);
+    click(host);
+    mouseEnter(host);
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(0);
+  }));
+
+  it('should NOT fire hide$ when hover out from host', fakeAsync(() => {
+    const showSpy = createSpy('showSpy');
+    const triggerStrategy = triggerStrategyBuilder.build();
+
+    triggerStrategy.hide$.subscribe(showSpy);
+    mouseLeave(host);
+    blur(host);
+    focus(document);
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(0);
+  }));
+});
