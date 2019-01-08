@@ -41,7 +41,7 @@ export enum NbToggleStates {
     ]),
   ],
 })
-export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
+export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy, OnInit {
   @Input() menuItem = <NbMenuItem>null;
 
   @Output() hoverItem = new EventEmitter<any>();
@@ -55,16 +55,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   isRtl$: Observable<boolean>;
 
   constructor(private menuService: NbMenuService,
-              private directionService: NbLayoutDirectionService) {
-    this.isLtr$ = this.directionService.onDirectionChange()
-      .pipe(
-        map(() => this.directionService.isLtr()),
-      );
-    this.isRtl$ = this.directionService.onDirectionChange()
-      .pipe(
-        map(() => this.directionService.isRtl()),
-      );
-  }
+              private directionService: NbLayoutDirectionService) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
@@ -78,6 +69,18 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
         map(({ item }: NbMenuBag) => item.expanded),
       )
       .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
+  }
+
+  ngOnInit() {
+    this.isLtr$ = this.directionService.onDirectionChange()
+      .pipe(
+        map(() => this.directionService.isLtr()),
+      );
+
+    this.isRtl$ = this.directionService.onDirectionChange()
+      .pipe(
+        map(() => this.directionService.isRtl()),
+      );
   }
 
   ngOnDestroy() {
