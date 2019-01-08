@@ -194,15 +194,8 @@ export class NbTriggerStrategyBuilderService {
   protected _host: HTMLElement;
   protected _container: () => ComponentRef<any>;
   protected _trigger: NbTrigger;
-  protected _document: Document;
 
-  constructor(@Inject(NB_DOCUMENT) document) {
-    this.document(document);
-  }
-
-  document(document: Document): this {
-    this._document = document;
-    return this;
+  constructor(@Inject(NB_DOCUMENT) protected _document) {
   }
 
   trigger(trigger: NbTrigger): this {
