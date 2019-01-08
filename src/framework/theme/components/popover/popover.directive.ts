@@ -92,14 +92,21 @@ import { NbPopoverComponent } from './popover.component';
  *
  * Also popover has some different modes which provides capability show$ and hide$ popover in different ways:
  *
- * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
+ * - Click popover mode shows when a user clicking on the host element and hides when the user clicks
  * somewhere on the document except popover.
  * - Hint mode provides capability show$ popover when the user hovers on the host element
  * and hide$ popover when user hovers out of the host.
  * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
  * the container element popover will not be hidden.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the popover won't react based on user interaction.
  *
  * @stacked-example(Available Modes, popover/popover-modes.component.html)
+ *
+ * Noop mode is especially useful when you need to control Popover programmatically, for example show/hide
+ * as a result of some third-party action, like HTTP request or validation check:
+ *
+ * @stacked-example(Manual control, popover/popover-noop.component)
  *
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
@@ -153,7 +160,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
 
   /**
    * Describes when the container will be shown.
-   * Available options: click, hover and hint
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
    * */
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
