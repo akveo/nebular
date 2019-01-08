@@ -136,11 +136,27 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
+   * Deprecated, use `trigger`
+   * @deprecated
+   * @breaking-change 4.0.0
+   * */
+  @Input('nbPopoverMode')
+  set mode(mode) {
+    console.warn(`Popover 'nbPopoverMode' input is deprecated and will be removed as of 4.0.0.
+      Use 'nbPopoverTrigger' instead.`);
+    this.trigger = mode;
+  }
+
+  get mode() {
+    return this.trigger;
+  }
+
+  /**
    * Describes when the container will be shown.
    * Available options: click, hover and hint
    * */
-  @Input('nbPopoverMode')
-  mode: NbTrigger = NbTrigger.CLICK;
+  @Input('nbPopoverTrigger')
+  trigger: NbTrigger = NbTrigger.CLICK;
 
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
@@ -217,7 +233,7 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
 
   protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerStrategyBuilder
-      .trigger(this.mode)
+      .trigger(this.trigger)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
       .build();
