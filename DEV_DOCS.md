@@ -399,16 +399,38 @@ e2e/your-component.e2e-spec.ts if you need to test complex actions such as user 
 ````
 add it to docs/structure.ts
 
-src/playground/your-component/your-component-showcase.component.ts (create example usage of your component)
-src/playground/your-component/your-component-showcase.component.html (most probably looks like <nb-your-component></nb-your-component>)
-
-src/playground/playground.module.ts (register your component in module)
-src/playground/playground-routing.module.ts (routing)
+create example usage of your component
+src/playground/[with-layout|without-layout]/your-component/your-component-showcase.component.ts
+module and route will be created automatically if you running playground or docs app.
 
 your-component.component.ts  (add line in docs section-  * @stacked-example(Your component, your-component/your-component-showcase.component)
 ````
 - after `npm run docs:serve` you can see your component at `http://localhost:4100/#/docs/components/your-component` 
 
+# Playground
+
+Playground is a set of modules containing all nebular examples.
+
+## Structure
+It has two base directories: `with-layout` and `without-layout`. All components in `with-layout` directory will be nested inside of `nb-layout` component. Components from `without-layout` directory will be direct children of router outlet. Put components into `without-layout` directory, if they don't need to or can't be children of layout component, such as a layout itself.
+
+## Playground schematic
+Playground schematic watches playground files and generates all boilerplate code for you. Basically, after adding a new component, directive or service declaration, all needed modules and components routes will be generated or modified.
+
+Schematic starts if you run playground or docs app with `npm start` or `npm run docs:serve` commands.
+
+### How it works
+
+Schematic goes through all playground directories deeply.
+For direct children of [base](#structure) playground directories, it generates feature and routing modules.
+
+Each component, directive or service declaration found, will be declared in the closest module.
+Also for each component which has a routing module in directory schematic adds a route. Route path set to file name without extension.
+If a component is just a helper and shouldn't has it's own route, you can put in a subdirectory (typically './components').
+
+Each module found will be added as a lazy route for closest parent module. Route path will be set to a module directory name.
+
+Then schematic will collect all component routes and write list into `./src/app/playground-components.ts` (used by docs app).
 
 # TODO
  - steps to start the development
