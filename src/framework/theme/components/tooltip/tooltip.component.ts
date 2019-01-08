@@ -63,7 +63,7 @@ export class NbTooltipComponent {
 
   @HostBinding('class')
   get binding() {
-    return `${this.position} ${this.context.status}-tooltip`;
+    return `${this.position} ${this.statusClass}`;
   }
 
   @HostBinding('@showTooltip')
@@ -73,4 +73,8 @@ export class NbTooltipComponent {
 
   @Input()
   context: { icon?: string, status?: string } = {};
+
+  get statusClass() {
+    return this.context.status ? `${this.context.status}-tooltip` : '';
+  }
 }
