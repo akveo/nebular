@@ -16,7 +16,7 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
 } from '../cdk';
-import { NB_DOCUMENT } from '@nebular/theme';
+import { NB_DOCUMENT } from '../../theme.options';
 
 
 @Component({

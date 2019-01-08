@@ -17,7 +17,7 @@ import {
 } from '../cdk';
 import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
-import { NB_DOCUMENT } from '@nebular/theme';
+import { NB_DOCUMENT } from '../../theme.options';
 
 
 @Component({
