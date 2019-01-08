@@ -26,7 +26,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
@@ -114,6 +114,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   constructor(@Inject(NB_DOCUMENT) protected document,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               private overlay: NbOverlayService,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -173,8 +174,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(NbTrigger.HINT)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
