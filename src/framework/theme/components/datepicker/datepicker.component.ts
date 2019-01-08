@@ -30,7 +30,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';
@@ -42,7 +42,6 @@ import {
   NbCalendarSize,
   NbCalendarViewMode,
   NbDateService,
-  NbNativeDateService,
 } from '../calendar-kit';
 import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
@@ -163,6 +162,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected overlay: NbOverlayService,
               protected cfr: ComponentFactoryResolver,
               protected dateService: NbDateService<D>,
@@ -198,7 +198,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnChanges() {
-    if (this.dateService instanceof NbNativeDateService && this.format) {
+    if (this.dateService.getId() === 'native' && this.format) {
       throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
       '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
       'More information at "Formatting issue" ' +
@@ -209,7 +209,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   ngOnDestroy() {
     this.alive = false;
     this.hide();
-    this.ref.dispose();
+
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   /**
@@ -238,7 +241,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
     // save current value if picker was rendered
     if (this.picker) {
       this.queue = this.value;
@@ -281,8 +287,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(NbTrigger.FOCUS)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
