@@ -712,6 +712,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'PopoverTestComponent',
         name: 'Popover Test',
       },
+      {
+        path: 'popover-noop.component',
+        link: '/popover/popover-noop.component',
+        component: 'PopoverNoopComponent',
+        name: 'Popover Noop',
+      },
     ],
   },
   {
