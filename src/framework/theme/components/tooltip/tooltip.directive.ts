@@ -121,10 +121,15 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
   }
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   show() {
@@ -136,7 +141,11 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
+    this.container = null;
   }
 
   toggle() {
@@ -148,12 +157,10 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createOverlay() {
-    this.positionStrategy = this.createPositionStrategy();
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
-    this.subscribeOnPositionChange();
   }
 
   protected openTooltip() {
@@ -182,6 +189,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected subscribeOnPositionChange() {
+    this.positionStrategy = this.createPositionStrategy();
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
       .subscribe((position: NbPosition) => patch(this.container, { position }));
