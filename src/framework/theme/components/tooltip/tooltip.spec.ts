@@ -1,15 +1,23 @@
-import { Component, ElementRef, Input, NgModule, ViewChild } from '@angular/core';
+import { Component, ComponentRef, ElementRef, Inject, Injectable, Input, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Subject } from 'rxjs';
+import { of as observableOf, Subject } from 'rxjs';
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
-import { NbAdjustment, NbPosition, NbPositionBuilderService } from '../cdk';
+import {
+  NbAdjustment,
+  NbPosition,
+  NbPositionBuilderService,
+  NbTrigger,
+  NbTriggerStrategy,
+  NbTriggerStrategyBuilderService,
+} from '../cdk';
 import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
+import { NB_DOCUMENT } from '@nebular/theme';
 
 
 @Component({
@@ -17,7 +25,8 @@ import { NbTooltipModule } from './tooltip.module';
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbTooltip="test" [nbTooltipIcon]="icon" [nbTooltipStatus]="status"></button>
+        <button #button nbTooltip="test" [nbTooltipIcon]="icon" [nbTooltipStatus]="status" [nbTooltipTrigger]="trigger">
+        </button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -25,6 +34,7 @@ import { NbTooltipModule } from './tooltip.module';
 export class NbTooltipStringTestComponent {
   @Input() icon;
   @Input() status;
+  @Input() trigger: NbTrigger = NbTrigger.HINT;
   @ViewChild('button') button: ElementRef;
   @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
 }
@@ -82,6 +92,38 @@ export class MockPositionBuilder {
   };
 }
 
+@Injectable()
+export class MockTriggerStrategyBuilder {
+
+  _host: HTMLElement;
+  _container: () => ComponentRef<any>;
+  _trigger: NbTrigger;
+
+  constructor(@Inject(NB_DOCUMENT) public _document: Document) {
+  }
+
+  trigger(trigger: NbTrigger): this {
+    this._trigger = trigger;
+    return this;
+  }
+
+  host(host: HTMLElement): this {
+    this._host = host;
+    return this;
+  }
+
+  container(container: () => ComponentRef<any>): this {
+    this._container = container;
+    return this;
+  }
+
+  build(): NbTriggerStrategy {
+    return {
+      show$: observableOf(null),
+      hide$: observableOf(null),
+    } as NbTriggerStrategy;
+  }
+}
 
 describe('Directive: NbTooltipDirective', () => {
   beforeEach(() => {
@@ -177,5 +219,32 @@ describe('Directive: NbTooltipDirective', () => {
     expect(mockPositionBuilder._connectedTo.nativeElement).toBe(fixture.componentInstance.button.nativeElement);
     expect(mockPositionBuilder._position).toBe(NbPosition.TOP);
     expect(mockPositionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
+  });
+
+  it('should build with default trigger strategy', () => {
+    TestBed.resetTestingModule();
+    const bed = TestBed.configureTestingModule({
+      imports: [TooltipTestModule],
+      providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+    });
+    const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
+    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
+    fixture.detectChanges();
+
+    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HINT);
+  });
+
+  it('should build with custom trigger strategy', () => {
+    TestBed.resetTestingModule();
+    const bed = TestBed.configureTestingModule({
+      imports: [TooltipTestModule],
+      providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+    });
+    const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
+    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
+    fixture.componentInstance.trigger = NbTrigger.CLICK;
+    fixture.detectChanges();
+
+    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
   });
 });
