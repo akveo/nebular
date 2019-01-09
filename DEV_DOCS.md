@@ -409,7 +409,7 @@ your-component.component.ts  (add line in docs section-  * @stacked-example(Your
 
 # Playground
 
-Playground is a set of modules containing all nebular examples.
+Playground is a set of modules containing all Nebular examples.
 
 ## Structure
 It has two base directories: `with-layout` and `without-layout`. All components in `with-layout` directory will be nested inside of `nb-layout` component. Components from `without-layout` directory will be direct children of router outlet. Put components into `without-layout` directory, if they don't need to or can't be children of layout component, such as a layout itself.
