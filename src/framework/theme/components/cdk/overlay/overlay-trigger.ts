@@ -201,7 +201,7 @@ export class NbTriggerStrategyBuilderService {
   protected _container: () => ComponentRef<any>;
   protected _trigger: NbTrigger;
 
-  constructor(@Inject(NB_DOCUMENT) protected _document: Document) {
+  constructor(@Inject(NB_DOCUMENT) protected _document) {
   }
 
   trigger(trigger: NbTrigger): this {
