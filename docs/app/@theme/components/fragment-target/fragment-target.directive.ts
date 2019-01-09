@@ -50,7 +50,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
 
     this.visibilityService.observe(this.el.nativeElement, OBSERVER_OPTIONS)
       .pipe(takeWhile(() => this.alive))
-      .subscribe(this.onVisibilityChange.bind(this));
+      .subscribe((entry: IntersectionObserverEntry) => this.onVisibilityChange(entry));
 
     this.scrollService.onScroll()
       .pipe(
