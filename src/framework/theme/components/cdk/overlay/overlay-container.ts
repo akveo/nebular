@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -42,13 +44,16 @@ export abstract class NbPositionedContainer {
   template: `
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbOverlayContainerComponent {
   isAttached: boolean = false;
 
   content: string;
 
-  constructor(protected vcr: ViewContainerRef, protected injector: Injector) {
+  constructor(protected vcr: ViewContainerRef,
+              protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
+
   }
 
   get isStringContent(): boolean {
@@ -72,6 +77,8 @@ export class NbOverlayContainerComponent {
   attachStringContent(content: string) {
     this.content = content;
     this.isAttached = true;
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
   }
 
   detach() {

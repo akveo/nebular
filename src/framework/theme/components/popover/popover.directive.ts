@@ -30,7 +30,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
@@ -94,16 +94,23 @@ import { isFirstChange } from '../helpers';
  * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
  * ```
  *
- * Also popover has some different modes which provides capability show$ and hide$ popover in different ways:
+ * Popover has a number of triggers which provides an ability to show and hide the component in different ways:
  *
- * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
- * somewhere on the document except popover.
- * - Hint mode provides capability show$ popover when the user hovers on the host element
- * and hide$ popover when user hovers out of the host.
- * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
- * the container element popover will not be hidden.
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
  *
- * @stacked-example(Available Modes, popover/popover-modes.component.html)
+ * @stacked-example(Available Triggers, popover/popover-modes.component.html)
+ *
+ * Noop mode is especially useful when you need to control Popover programmatically, for example show/hide
+ * as a result of some third-party action, like HTTP request or validation check:
+ *
+ * @stacked-example(Manual Control, popover/popover-noop.component)
  *
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
@@ -140,11 +147,27 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
-   * Describes when the container will be shown.
-   * Available options: click, hover and hint
+   * Deprecated, use `trigger`
+   * @deprecated
+   * @breaking-change 4.0.0
    * */
   @Input('nbPopoverMode')
-  mode: NbTrigger = NbTrigger.CLICK;
+  set mode(mode) {
+    console.warn(`Popover 'nbPopoverMode' input is deprecated and will be removed as of 4.0.0.
+      Use 'nbPopoverTrigger' instead.`);
+    this.trigger = mode;
+  }
+
+  get mode() {
+    return this.trigger;
+  }
+
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbPopoverTrigger')
+  trigger: NbTrigger = NbTrigger.CLICK;
 
   protected ref: NbOverlayRef;
   protected container: ComponentRef<NbPopoverComponent>;
@@ -156,6 +179,7 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
   constructor(@Inject(NB_DOCUMENT) protected document,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
+              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               private overlay: NbOverlayService,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -198,7 +222,9 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
     this.hide();
-    this.ref.dispose();
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   show() {
@@ -312,9 +338,8 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(this.mode)
+    return this.triggerStrategyBuilder
+      .trigger(this.trigger)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
       .build();

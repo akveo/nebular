@@ -21,6 +21,16 @@ import { NbToast, NbToastStatus } from './model';
 import { NbToastComponent } from './toast.component';
 
 
+export class NbToastRef {
+  constructor(private toastContainer: NbToastContainer,
+              private toast: NbToast) {
+  }
+
+  close() {
+    this.toastContainer.destroy(this.toast);
+  }
+}
+
 export class NbToastContainer {
   protected toasts: NbToast[] = [];
   protected prevToast: NbToast;
@@ -30,7 +40,7 @@ export class NbToastContainer {
               protected positionHelper: NbPositionHelper) {
   }
 
-  attach(toast: NbToast) {
+  attach(toast: NbToast): NbToastRef {
     if (toast.config.preventDuplicates && this.isDuplicate(toast)) {
       return;
     }
@@ -46,6 +56,13 @@ export class NbToastContainer {
     }
 
     this.prevToast = toast;
+
+    return new NbToastRef(this, toast);
+  }
+
+  destroy(toast: NbToast) {
+    this.toasts = this.toasts.filter(t => t !== toast);
+    this.updateContainer();
   }
 
   protected isDuplicate(toast: NbToast): boolean {
@@ -80,11 +97,6 @@ export class NbToastContainer {
 
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
     toastComponent.destroy.subscribe(() => this.destroy(toast));
-  }
-
-  protected destroy(toast: NbToast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
-    this.updateContainer();
   }
 
   protected updateContainer() {
@@ -148,6 +160,14 @@ export class NbToastrContainerRegistry {
  *
  * ### Usage
  *
+ * Calling `NbToastrService.show(...)` will render new toast and return `NbToastrRef` with
+ * help of which you may close newly created toast by calling `close` method.
+ *
+ * ```ts
+ * const toastRef: NbToastRef = this.toastrService.show(...);
+ * toastRef.close();
+ * ```
+ *
  * Config accepts following options:
  *
  * `position` - determines where on the screen toast will be rendered.
@@ -190,52 +210,52 @@ export class NbToastrService {
   /**
    * Shows toast with message, title and user config.
    * */
-  show(message, title?, userConfig?: Partial<NbToastrConfig>) {
+  show(message, title?, userConfig?: Partial<NbToastrConfig>): NbToastRef {
     const config = new NbToastrConfig({ ...this.globalConfig, ...userConfig });
     const container = this.containerRegistry.get(config.position);
     const toast = { message, title, config };
-    container.attach(toast);
+    return container.attach(toast);
   }
 
   /**
    * Shows success toast with message, title and user config.
    * */
-  success(message, title?, config?: Partial<NbToastrConfig>) {
+  success(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
   }
 
   /**
    * Shows info toast with message, title and user config.
    * */
-  info(message, title?, config?: Partial<NbToastrConfig>) {
+  info(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.INFO });
   }
 
   /**
    * Shows warning toast with message, title and user config.
    * */
-  warning(message, title?, config?: Partial<NbToastrConfig>) {
+  warning(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
   }
 
   /**
    * Shows primary toast with message, title and user config.
    * */
-  primary(message, title?, config?: Partial<NbToastrConfig>) {
+  primary(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
   }
 
   /**
    * Shows danger toast with message, title and user config.
    * */
-  danger(message, title?, config?: Partial<NbToastrConfig>) {
+  danger(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
   }
 
   /**
    * Shows default toast with message, title and user config.
    * */
-  default(message, title?, config?: Partial<NbToastrConfig>) {
+  default(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
   }
 }

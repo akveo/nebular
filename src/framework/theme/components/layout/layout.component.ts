@@ -521,6 +521,10 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
    * @returns {NbScrollPosition}
    */
   getScrollPosition(): NbScrollPosition {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { x: 0, y: 0 };
+    }
+
     if (this.withScrollValue) {
       const container = this.scrollableContainerRef.nativeElement;
       return { x: container.scrollLeft, y: container.scrollTop };

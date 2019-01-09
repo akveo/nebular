@@ -142,6 +142,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return moment();
   }
 
+  getId(): string {
+    return 'moment';
+  }
+
   protected setMomentLocaleData(locale: string) {
     const momentLocaleData = moment.localeData(locale);
 
