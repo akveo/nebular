@@ -5,23 +5,35 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbContextMenuModule, NbLayoutModule, NbMenuModule, NbUserModule } from '@nebular/theme';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbContextMenuModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbUserModule,
+} from '@nebular/theme';
 import { ContextMenuRoutingModule } from './context-menu-routing.module';
 import { ContextMenuClickComponent } from './context-menu-click.component';
 import { ContextMenuShowcaseComponent } from './context-menu-showcase.component';
 import { ContextMenuTestComponent } from './context-menu-test.component';
+import { ContextMenuModesComponent } from './context-menu-modes.component';
+import { ContextMenuNoopComponent } from './context-menu-noop.component';
 
 @NgModule({
   declarations: [
     ContextMenuClickComponent,
     ContextMenuShowcaseComponent,
     ContextMenuTestComponent,
+    ContextMenuModesComponent,
+    ContextMenuNoopComponent,
   ],
   imports: [
     NbContextMenuModule,
     NbLayoutModule,
     NbUserModule,
     NbCardModule,
+    NbButtonModule,
     NbMenuModule.forRoot(),
     ContextMenuRoutingModule,
   ],
