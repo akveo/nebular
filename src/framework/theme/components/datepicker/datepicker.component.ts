@@ -30,7 +30,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';
@@ -162,6 +162,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected overlay: NbOverlayService,
               protected cfr: ComponentFactoryResolver,
               protected dateService: NbDateService<D>,
@@ -286,8 +287,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(NbTrigger.FOCUS)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)

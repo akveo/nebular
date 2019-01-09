@@ -26,7 +26,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
@@ -132,6 +132,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
               private menuService: NbMenuService,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
+              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               private overlay: NbOverlayService,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -195,8 +196,7 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)

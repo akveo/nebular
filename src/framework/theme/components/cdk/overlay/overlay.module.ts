@@ -8,6 +8,7 @@ import { NbOverlayContainerComponent } from './overlay-container';
 import { NbOverlayService } from './overlay';
 import { NbCdkAdapterModule } from '../adapter/adapter.module';
 import { NbPositionHelper } from './position-helper';
+import { NbTriggerStrategyBuilderService } from './overlay-trigger';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ export class NbOverlayModule {
       ngModule: NbOverlayModule,
       providers: [
         NbPositionBuilderService,
+        NbTriggerStrategyBuilderService,
         NbOverlayService,
         NbPositionHelper,
         ...NbCdkMappingModule.forRoot().providers,
