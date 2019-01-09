@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { NB_WINDOW } from '@nebular/theme';
-import { Observable, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class NgdVisibilityService {
@@ -21,7 +21,7 @@ export class NgdVisibilityService {
 
   observe(target: Element, options: IntersectionObserverInit): Observable<IntersectionObserverEntry> {
     if (!this.isBrowser || !this.hasIntersectionObserver) {
-      return;
+      return EMPTY;
     }
 
     if (!this.observersByConf.has(options)) {
