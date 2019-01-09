@@ -70,8 +70,11 @@ import { convertToBoolProperty } from '../helpers';
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           [class.responsive]="tab.responsive"
+          [class.disabled]="tab.disabled"
+          [attr.disabled]="tab.disabled"
+          [attr.aria-disabled]="tab.disabled"
           class="route-tab">
-        <a href>
+        <a href (click)="$event.preventDefault()">
           <i *ngIf="tab.icon" [class]="tab.icon"></i>
           <span *ngIf="tab.title">{{ tab.title }}</span>
         </a>
@@ -86,7 +89,7 @@ export class NbRouteTabsetComponent {
 
   /**
    * Tabs configuration
-   * @param Object{route: string, title: string, tag?: string}
+   * @param Object{route: string, title: string, tag?: string, responsive?: boolean, disabled?: boolean}
    */
   @Input() tabs: any[];
 
@@ -109,8 +112,9 @@ export class NbRouteTabsetComponent {
   }
 
   selectTab(tab: any) {
-    this.changeTab.emit(tab);
-
-    this.router.navigate([tab.route]);
+    if (!tab.disabled) {
+      this.changeTab.emit(tab);
+      this.router.navigate([tab.route]);
+    }
   }
 }

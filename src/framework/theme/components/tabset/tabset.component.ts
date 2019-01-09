@@ -54,6 +54,19 @@ export class NbTabComponent {
   @Input() tabIcon: string;
 
   /**
+   * Item is disabled and cannot be opened.
+   * @type {boolean}
+   */
+  @Input('disabled')
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this.disabledValue;
+  }
+  set disabled(val: boolean) {
+    this.disabledValue = convertToBoolProperty(val);
+  }
+
+  /**
    * Show only icons when width is smaller than `tabs-icon-only-max-width`
    * @type {boolean}
    */
@@ -72,6 +85,7 @@ export class NbTabComponent {
   activeValue: boolean = false;
 
   responsiveValue: boolean = false;
+  disabledValue = false;
 
   /**
    * Specifies active tab
@@ -201,6 +215,9 @@ export class NbTabComponent {
           (click)="selectTab(tab)"
           [class.responsive]="tab.responsive"
           [class.active]="tab.active"
+          [class.disabled]="tab.disabled"
+          [attr.disabled]="tab.disabled"
+          [attr.aria-disabled]="tab.disabled"
           class="tab">
         <a href (click)="$event.preventDefault()">
           <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
@@ -266,7 +283,9 @@ export class NbTabsetComponent implements AfterContentInit {
 
   // TODO: navigate to routeParam
   selectTab(selectedTab: NbTabComponent) {
-    this.tabs.forEach(tab => tab.active = tab === selectedTab);
-    this.changeTab.emit(selectedTab);
+    if (!selectedTab.disabled) {
+      this.tabs.forEach(tab => tab.active = tab === selectedTab);
+      this.changeTab.emit(selectedTab);
+    }
   }
 }
