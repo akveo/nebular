@@ -88,6 +88,23 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ```ts
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
+ * Context menu has a number of triggers which provides an ability to show and hide the component in different ways:
+ *
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
+ *
+ * @stacked-example(Available Triggers, context-menu/context-menu-modes.component.html)
+ *
+ * Noop mode is especially useful when you need to control Popover programmatically, for example show/hide
+ * as a result of some third-party action, like HTTP request or validation check:
+ *
+ * @stacked-example(Manual Control, context-menu/context-menu-noop.component)
  * */
 @Directive({ selector: '[nbContextMenu]' })
 export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
@@ -122,6 +139,13 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
     this.items = items;
   };
 
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbContextMenuTrigger')
+  trigger: NbTrigger = NbTrigger.CLICK;
+
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -140,11 +164,15 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.subscribeOnTriggers();
     this.subscribeOnItemClick();
+    this.subscribeOnPositionChange();
   }
 
   ngOnDestroy() {
     this.alive = false;
     this.hide();
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   show() {
@@ -172,12 +200,10 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createOverlay() {
-    this.positionStrategy = this.createPositionStrategy();
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
-    this.subscribeOnPositionChange();
   }
 
   protected openContextMenu() {
@@ -197,13 +223,14 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
 
   protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerStrategyBuilder
-      .trigger(NbTrigger.CLICK)
+      .trigger(this.trigger)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
       .build();
   }
 
   protected subscribeOnPositionChange() {
+    this.positionStrategy = this.createPositionStrategy();
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
       .subscribe((position: NbPosition) => patch(this.container, { position }));
