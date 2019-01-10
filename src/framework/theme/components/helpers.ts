@@ -3,6 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { SimpleChange, SimpleChanges } from '@angular/core';
 
 export function convertToBoolProperty(val: any): boolean {
   if (typeof val === 'string') {
@@ -14,7 +15,7 @@ export function convertToBoolProperty(val: any): boolean {
   return !!val;
 }
 
-export function getElementHeight (el) {
+export function getElementHeight(el) {
   /**
    *
    * TODO: Move helpers in separate common module.
@@ -24,4 +25,9 @@ export function getElementHeight (el) {
   const marginTop = parseInt(style.getPropertyValue('margin-top'), 10);
   const marginBottom = parseInt(style.getPropertyValue('margin-bottom'), 10);
   return el.offsetHeight + marginTop + marginBottom;
+}
+
+export function isFirstChange(simpleChanges: SimpleChanges): boolean {
+  const changes: SimpleChange[] = Object.values(simpleChanges);
+  return changes.some((change: SimpleChange) => change.isFirstChange());
 }
