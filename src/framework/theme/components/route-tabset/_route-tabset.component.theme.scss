@@ -65,6 +65,7 @@
           a {
             color: nb-theme(route-tabs-fg-disabled);
             cursor: default;
+            pointer-events: none;
             &:hover {
               color: nb-theme(route-tabs-fg-disabled);
             }

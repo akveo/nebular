@@ -186,6 +186,9 @@ export class NbTabComponent {
  *
  * @stacked-example(Icon, tabset/tabset-icon.component)
  *
+ * It is also possible to disable a tab using `disabled` property:
+ * @stacked-example(Disabled Tab, tabset/tabset-disabled.component)
+ *
  * @styles
  *
  * tabs-font-family:
@@ -216,10 +219,9 @@ export class NbTabComponent {
           [class.responsive]="tab.responsive"
           [class.active]="tab.active"
           [class.disabled]="tab.disabled"
-          [attr.disabled]="tab.disabled"
-          [attr.aria-disabled]="tab.disabled"
+          [attr.tabindex]="tab.disabled ? -1 : 0"
           class="tab">
-        <a href (click)="$event.preventDefault()">
+        <a href (click)="$event.preventDefault()" tabindex="-1">
           <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
           <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
         </a>
