@@ -2,66 +2,70 @@ import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { NB_WINDOW } from '@nebular/theme';
 import { EMPTY, Observable, Subject } from 'rxjs';
+import { filter, finalize, map, publish, refCount, takeUntil } from 'rxjs/operators';
+
+interface ObserverWithStream {
+  observer: IntersectionObserver;
+  observable: Observable<IntersectionObserverEntry[]>;
+}
 
 @Injectable()
 export class NgdVisibilityService {
 
   private readonly isBrowser: boolean;
-  private readonly hasIntersectionObserver: boolean;
-  private readonly observersByConf = new WeakMap<IntersectionObserverInit, IntersectionObserver>();
-  private readonly subscriptions = new WeakMap<Element, Subject<IntersectionObserverEntry>>();
+  private readonly supportsIntersectionObserver: boolean;
+
+  private readonly observers = new Map<IntersectionObserverInit, ObserverWithStream>();
+  private readonly unobserve$ = new Subject<{ target: Element, options: IntersectionObserverInit }>();
 
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     @Inject(NB_WINDOW) private window,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.hasIntersectionObserver = !!this.window.IntersectionObserver;
+    this.supportsIntersectionObserver = !!this.window.IntersectionObserver;
   }
 
   observe(target: Element, options: IntersectionObserverInit): Observable<IntersectionObserverEntry> {
-    if (!this.isBrowser || !this.hasIntersectionObserver) {
+    if (!this.isBrowser || !this.supportsIntersectionObserver) {
       return EMPTY;
     }
 
-    if (!this.observersByConf.has(options)) {
-      this.observersByConf.set(options, new IntersectionObserver(this.emitForTarget.bind(this), options));
-    }
-    const observer = this.observersByConf.get(options);
-    const subscription = new Subject<IntersectionObserverEntry>();
-
+    const { observer, observable } = this.observers.get(options) || this.addObserver(options);
     observer.observe(target);
-    this.subscriptions.set(target, subscription);
 
-    return subscription.asObservable();
+    const targetUnobserved$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
+
+    return observable.pipe(
+      map((entries: IntersectionObserverEntry[]) => entries.find(entry => entry.target === target)),
+      filter(entry => !!entry),
+      finalize(() => observer.unobserve(target)),
+      takeUntil(targetUnobserved$),
+    );
   }
 
   unobserve(target: Element, options: IntersectionObserverInit): void {
-    const observer = this.observersByConf.get(options);
-    if (observer) {
-      observer.unobserve(target);
-
-      if (observer.takeRecords().length === 0) {
-        observer.disconnect();
-        this.observersByConf.delete(options);
-      }
-    }
-
-    const subscription = this.subscriptions.get(target);
-    if (subscription) {
-      subscription.complete();
-      this.subscriptions.delete(target);
-    }
+    this.unobserve$.next({ target, options });
   }
 
-  private emitForTarget(entries: IntersectionObserverEntry[]): void {
-    for (const entry of entries) {
-      const sub = this.subscriptions.get(entry.target);
-      if (sub == null) {
-        continue;
-      }
+  private addObserver(options: IntersectionObserverInit): ObserverWithStream {
+    const observerStream = new Subject<IntersectionObserverEntry[]>();
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => observerStream.next(entries),
+      options,
+    );
+    const refCountedObserver = observerStream.pipe(
+      finalize(() => {
+        this.observers.delete(options);
+        observer.disconnect();
+      }),
+      publish(),
+      refCount(),
+    );
 
-      sub.next(entry);
-    }
+    const data: ObserverWithStream = { observer, observable: refCountedObserver };
+    this.observers.set(options, data);
+
+    return data;
   }
 }
