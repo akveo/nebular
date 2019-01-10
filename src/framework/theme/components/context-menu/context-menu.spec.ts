@@ -15,43 +15,45 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
 } from '../cdk';
-import { NbTooltipDirective } from './tooltip.directive';
-import { NbTooltipModule } from './tooltip.module';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbContextMenuDirective } from './context-menu.directive';
+import { NbMenuModule } from '../menu/menu.module';
+import { NbContextMenuModule } from './context-menu.module';
 
 
 @Component({
-  selector: 'nb-tooltip-string-test',
+  selector: 'nb-context-menu-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbTooltip="test" [nbTooltipIcon]="icon" [nbTooltipStatus]="status" [nbTooltipTrigger]="trigger">
+        <button #button [nbContextMenu]="items" [nbContextMenuTrigger]="trigger">
         </button>
       </nb-layout-column>
     </nb-layout>
   `,
 })
-export class NbTooltipStringTestComponent {
-  @Input() icon;
-  @Input() status;
-  @Input() trigger: NbTrigger = NbTrigger.HINT;
+export class NbContextMenuTestComponent {
+  @Input() trigger: NbTrigger = NbTrigger.CLICK;
   @ViewChild('button') button: ElementRef;
-  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
+
+  items = [{ title: 'User' }, { title: 'Log Out' }];
 }
 
 @NgModule({
   imports: [
     RouterTestingModule.withRoutes([]),
+    NoopAnimationsModule,
     NbThemeModule.forRoot(),
     NbLayoutModule,
-    NoopAnimationsModule,
-    NbTooltipModule,
+    NbMenuModule.forRoot(),
+    NbContextMenuModule,
   ],
   declarations: [
-    NbTooltipStringTestComponent,
+    NbContextMenuTestComponent,
   ],
 })
-export class TooltipTestModule {
+export class ContextMenuTestModule {
 }
 
 export class MockPositionBuilder {
@@ -125,15 +127,15 @@ export class MockTriggerStrategyBuilder {
   }
 }
 
-describe('Directive: NbTooltipDirective', () => {
+describe('Directive: NbContextMenuDirective', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [TooltipTestModule] });
+    TestBed.configureTestingModule({ imports: [ContextMenuTestModule] });
   });
 
-  let fixture: ComponentFixture<NbTooltipStringTestComponent>;
+  let fixture: ComponentFixture<NbContextMenuTestComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
+    fixture = TestBed.createComponent(NbContextMenuTestComponent);
     fixture.detectChanges();
   });
 
@@ -141,110 +143,92 @@ describe('Directive: NbTooltipDirective', () => {
     fixture.destroy();
   });
 
-  it('should render string', () => {
-    fixture.componentInstance.tooltip.show();
+  it('should render context menu', () => {
+    fixture.componentInstance.contextMenu.show();
     fixture.detectChanges();
 
-    const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
+    const menu = fixture.nativeElement.querySelector('nb-context-menu nb-menu');
+    expect(menu).toBeTruthy();
   });
 
   it('should hide', fakeAsync(() => {
-    fixture.componentInstance.tooltip.show();
+    let menu;
+    fixture.componentInstance.contextMenu.show();
     fixture.detectChanges();
 
 
-    const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-    fixture.componentInstance.tooltip.hide();
+    menu = fixture.nativeElement.querySelector('nb-context-menu nb-menu');
+    expect(menu).toBeTruthy();
+    fixture.componentInstance.contextMenu.hide();
     fixture.detectChanges();
 
     tick(); // we need this tick for animations
-    const tooltip = fixture.nativeElement.querySelector('nb-tooltip');
-    expect(tooltip).toBeNull();
+    menu = fixture.nativeElement.querySelector('nb-context-menu nb-menu');
+    expect(menu).toBeFalsy();
   }));
 
   it('should toogle', fakeAsync(() => {
-    let textContainer;
+    let menu;
 
-    fixture.componentInstance.tooltip.show();
+    fixture.componentInstance.contextMenu.show();
     fixture.detectChanges();
 
-    textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-    fixture.componentInstance.tooltip.toggle();
+    menu = fixture.nativeElement.querySelector('nb-context-menu nb-menu');
+    expect(menu).toBeTruthy();
+    fixture.componentInstance.contextMenu.toggle();
     fixture.detectChanges();
 
     tick(); // we need this tick for animations
-    const tooltip = fixture.nativeElement.querySelector('nb-tooltip');
+    const tooltip = fixture.nativeElement.querySelector('nb-context-menu');
     expect(tooltip).toBeNull();
 
-    fixture.componentInstance.tooltip.toggle();
+    fixture.componentInstance.contextMenu.toggle();
     fixture.detectChanges();
+    tick();
 
-    textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
+    menu = fixture.nativeElement.querySelector('nb-context-menu nb-menu');
+    expect(menu).toBeTruthy();
   }));
-
-  it('should display icon', () => {
-    fixture.componentInstance.icon = 'some-icon';
-    fixture.detectChanges();
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content i');
-    expect(iconContainer.className).toContain('icon some-icon');
-  });
-
-  it('should display status', () => {
-    fixture.componentInstance.status = 'danger';
-    fixture.detectChanges();
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
-    expect(iconContainer.className).toContain('danger-tooltip');
-  });
 
   it('should build position strategy', () => {
     const mockPositionBuilder = new MockPositionBuilder();
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
+      imports: [ContextMenuTestModule],
       providers: [{ provide: NbPositionBuilderService, useValue: mockPositionBuilder }],
     });
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
+    fixture = TestBed.createComponent(NbContextMenuTestComponent);
     fixture.detectChanges();
 
     expect(mockPositionBuilder._connectedTo.nativeElement).toBe(fixture.componentInstance.button.nativeElement);
-    expect(mockPositionBuilder._position).toBe(NbPosition.TOP);
+    expect(mockPositionBuilder._position).toBe(NbPosition.BOTTOM);
     expect(mockPositionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
   });
 
   it('should build with default trigger strategy', () => {
     TestBed.resetTestingModule();
     const bed = TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
+      imports: [ContextMenuTestModule],
       providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
     });
     const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
+    fixture = TestBed.createComponent(NbContextMenuTestComponent);
     fixture.detectChanges();
 
-    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HINT);
+    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
   });
 
   it('should build with custom trigger strategy', () => {
     TestBed.resetTestingModule();
     const bed = TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
+      imports: [ContextMenuTestModule],
       providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
     });
     const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
-    fixture.componentInstance.trigger = NbTrigger.CLICK;
+    fixture = TestBed.createComponent(NbContextMenuTestComponent);
+    fixture.componentInstance.trigger = NbTrigger.HOVER;
     fixture.detectChanges();
 
-    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
+    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HOVER);
   });
 });

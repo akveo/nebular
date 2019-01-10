@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbPopoverModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbInputModule, NbPopoverModule } from '@nebular/theme';
 import { DynamicToAddComponent } from './components/dynamic.component';
 import { PopoverRoutingModule } from './popover-routing.module';
 import { PopoverCustomComponentComponent } from './popover-custom-component.component';
@@ -14,6 +14,7 @@ import { PopoverPlacementsComponent } from './popover-placements.component';
 import { PopoverShowcaseComponent } from './popover-showcase.component';
 import { PopoverTemplateRefComponent } from './popover-template-ref.component';
 import { PopoverTestComponent } from './popover-test.component';
+import { PopoverNoopComponent } from './popover-noop.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { PopoverTestComponent } from './popover-test.component';
     PopoverShowcaseComponent,
     PopoverTemplateRefComponent,
     PopoverTestComponent,
+    PopoverNoopComponent,
   ],
-  imports: [ NbPopoverModule, NbCardModule, PopoverRoutingModule ],
+  imports: [ NbPopoverModule, NbCardModule, NbButtonModule, NbInputModule, PopoverRoutingModule ],
   entryComponents: [ DynamicToAddComponent ],
 })
 export class PopoverModule {}

@@ -712,6 +712,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'PopoverTestComponent',
         name: 'Popover Test',
       },
+      {
+        path: 'popover-noop.component',
+        link: '/popover/popover-noop.component',
+        component: 'PopoverNoopComponent',
+        name: 'Popover Noop',
+      },
     ],
   },
   {
@@ -1251,6 +1257,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/context-menu/context-menu-test.component',
         component: 'ContextMenuTestComponent',
         name: 'Context Menu Test',
+      },
+      {
+        path: 'context-menu-modes.component',
+        link: '/context-menu/context-menu-modes.component',
+        component: 'ContextMenuModesComponent',
+        name: 'Context Menu Modes',
+      },
+      {
+        path: 'context-menu-noop.component',
+        link: '/context-menu/context-menu-noop.component',
+        component: 'ContextMenuNoopComponent',
+        name: 'Context Menu Noop',
       },
     ],
   },
