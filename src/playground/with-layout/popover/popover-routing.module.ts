@@ -12,6 +12,7 @@ import { PopoverPlacementsComponent } from './popover-placements.component';
 import { PopoverShowcaseComponent } from './popover-showcase.component';
 import { PopoverTemplateRefComponent } from './popover-template-ref.component';
 import { PopoverTestComponent } from './popover-test.component';
+import { PopoverNoopComponent } from './popover-noop.component';
 
 const routes: Route[] = [
   {
@@ -37,6 +38,10 @@ const routes: Route[] = [
   {
     path: 'popover-test.component',
     component: PopoverTestComponent,
+  },
+  {
+    path: 'popover-noop.component',
+    component: PopoverNoopComponent,
   },
 ];
 

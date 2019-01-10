@@ -26,7 +26,7 @@ import {
   NbPositionBuilderService,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
   patch,
 } from '../cdk';
 import { NB_DOCUMENT } from '../../theme.options';
@@ -61,6 +61,16 @@ import { NbTooltipComponent } from './tooltip.component';
  * It is also possible to specify tooltip color using `nbTooltipStatus` property:
  * @stacked-example(Colored Tooltips, tooltip/tooltip-colors.component)
  *
+ * Tooltip has a number of triggers which provides an ability to show and hide the component in different ways:
+ *
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
  */
 @Directive({ selector: '[nbTooltip]' })
 export class NbTooltipDirective implements AfterViewInit, OnDestroy {
@@ -68,9 +78,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   context: Object = {};
 
   /**
-   * Popover content which will be rendered in NbTooltipComponent.
-   * Available content: template ref, component and any primitive.
-   *
+   * Tooltip message
    */
   @Input('nbTooltip')
   content: string;
@@ -106,6 +114,13 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
     this.context = Object.assign(this.context, { status });
   }
 
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbTooltipTrigger')
+  trigger: NbTrigger = NbTrigger.HINT;
+
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -114,16 +129,22 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   constructor(@Inject(NB_DOCUMENT) protected document,
               private hostRef: ElementRef,
               private positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               private overlay: NbOverlayService,
               private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngAfterViewInit() {
     this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
   }
 
   ngOnDestroy() {
     this.alive = false;
+    this.hide();
+    if (this.ref) {
+      this.ref.dispose();
+    }
   }
 
   show() {
@@ -135,7 +156,11 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   hide() {
-    this.ref.detach();
+    if (this.ref) {
+      this.ref.detach();
+    }
+
+    this.container = null;
   }
 
   toggle() {
@@ -147,12 +172,10 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createOverlay() {
-    this.positionStrategy = this.createPositionStrategy();
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
-    this.subscribeOnPositionChange();
   }
 
   protected openTooltip() {
@@ -173,15 +196,15 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(NbTrigger.HINT)
+    return this.triggerStrategyBuilder
+      .trigger(this.trigger)
       .host(this.hostRef.nativeElement)
       .container(() => this.container)
       .build();
   }
 
   protected subscribeOnPositionChange() {
+    this.positionStrategy = this.createPositionStrategy();
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
       .subscribe((position: NbPosition) => patch(this.container, { position }));

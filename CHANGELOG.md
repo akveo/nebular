@@ -1,3 +1,29 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/akveo/nebular/compare/v3.0.1...v3.1.0) (2018-12-31) :christmas_tree:
+
+Happy New Year!
+
+### Bug Fixes
+
+* **datepicker:** fix datepicker format not available error ([#1117](https://github.com/akveo/nebular/issues/1117)) ([83cda23](https://github.com/akveo/nebular/commit/83cda23)), closes [#1088](https://github.com/akveo/nebular/issues/1088)
+* **docs:** add missed backtick ([#1069](https://github.com/akveo/nebular/issues/1069)) ([3324fd5](https://github.com/akveo/nebular/commit/3324fd5))
+* **docs:** remove rc version mention ([#1068](https://github.com/akveo/nebular/issues/1068)) ([ba1983c](https://github.com/akveo/nebular/commit/ba1983c))
+* **layout:** prevent dom api calls on server ([#1107](https://github.com/akveo/nebular/issues/1107)) ([7511bb0](https://github.com/akveo/nebular/commit/7511bb0)), closes [#1060](https://github.com/akveo/nebular/issues/1060)
+* **oauth2:** body requests in x-www-form-urlencoded ([#1066](https://github.com/akveo/nebular/issues/1066)) ([3ee11f2](https://github.com/akveo/nebular/commit/3ee11f2))
+* **popover:** null check the ref before disposing ([#1086](https://github.com/akveo/nebular/issues/1086)) ([b3f7d39](https://github.com/akveo/nebular/commit/b3f7d39))
+* **select:** options text selection disabled ([#1033](https://github.com/akveo/nebular/issues/1033)) ([fef2a9a](https://github.com/akveo/nebular/commit/fef2a9a))
+* **theme:** check ref before detaching ([#1116](https://github.com/akveo/nebular/issues/1116)) ([af58d3f](https://github.com/akveo/nebular/commit/af58d3f))
+* **theme:** fix normalize import to not include file type extension ([#1114](https://github.com/akveo/nebular/issues/1114)) ([40fa356](https://github.com/akveo/nebular/commit/40fa356))
+
+
+### Features
+
+* **menu:** add an option to set skipLocationChange ([#1043](https://github.com/akveo/nebular/issues/1043)) ([3d3ee03](https://github.com/akveo/nebular/commit/3d3ee03)), closes [#1028](https://github.com/akveo/nebular/issues/1028)
+* **playground:** components list ([#1106](https://github.com/akveo/nebular/issues/1106)) ([4ab7508](https://github.com/akveo/nebular/commit/4ab7508)), closes [#1077](https://github.com/akveo/nebular/issues/1077)
+* **toastr:** show method now returns toast reference ([#1058](https://github.com/akveo/nebular/issues/1058)) ([aeeedf1](https://github.com/akveo/nebular/commit/aeeedf1))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/akveo/nebular/compare/v3.0.0...v3.0.1) (2018-12-13)
 
