@@ -22,6 +22,7 @@
 
       .tab {
         background: nb-theme(tabs-header-bg);
+        cursor: pointer;
 
         a {
           padding: nb-theme(tabs-padding);
@@ -56,6 +57,19 @@
           @media screen and (max-width: nb-theme(tabs-icon-only-max-width)) {
             a span {
               display: none;
+            }
+          }
+        }
+
+        &.disabled {
+          cursor: default;
+          pointer-events: none;
+          a {
+            color: nb-theme(tabs-fg-disabled);
+            cursor: default;
+            pointer-events: none;
+            &:hover {
+              color: nb-theme(tabs-fg-disabled);
             }
           }
         }
