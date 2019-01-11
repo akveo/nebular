@@ -71,7 +71,7 @@ import { convertToBoolProperty } from '../helpers';
           [class.disabled]="tab.disabled"
           [attr.tabindex]="tab.disabled ? -1 : 0"
           class="route-tab">
-        <a href (click)="$event.preventDefault()" tabindex="-1">
+        <a (click)="$event.preventDefault()" tabindex="-1">
           <i *ngIf="tab.icon" [class]="tab.icon"></i>
           <span *ngIf="tab.title">{{ tab.title }}</span>
         </a>
