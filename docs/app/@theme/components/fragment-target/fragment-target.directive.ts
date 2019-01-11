@@ -5,7 +5,7 @@ import { takeWhile, publish, refCount, filter, tap, debounce } from 'rxjs/operat
 import { NB_WINDOW, NbLayoutScrollService } from '@nebular/theme';
 import { NgdVisibilityService } from '../../../@theme/services';
 
-const OBSERVER_OPTIONS = { rootMargin: `150px 0px -50% 0px` };
+const OBSERVER_OPTIONS = { rootMargin: '-30% 0px -50%' };
 
 @Directive({
   selector: '[ngdFragment]',
@@ -49,7 +49,10 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
       });
 
     this.visibilityService.observe(this.el.nativeElement, OBSERVER_OPTIONS)
-      .pipe(takeWhile(() => this.alive))
+      .pipe(
+        takeWhile(() => this.alive),
+        tap((e: IntersectionObserverEntry) => console.info(`${this.ngdFragment} - ${e.isIntersecting}`)),
+      )
       .subscribe((entry: IntersectionObserverEntry) => this.onVisibilityChange(entry));
 
     this.scrollService.onScroll()
