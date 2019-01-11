@@ -64,7 +64,7 @@ import { convertToBoolProperty } from '../helpers';
     <ul class="route-tabset">
       <li *ngFor="let tab of tabs"
           (click)="$event.preventDefault(); selectTab(tab)"
-          routerLink="{{tab.route}}"
+          [routerLink]="tab.route"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           [class.responsive]="tab.responsive"
