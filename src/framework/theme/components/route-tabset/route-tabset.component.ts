@@ -5,8 +5,6 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -107,13 +105,9 @@ export class NbRouteTabsetComponent {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private router: Router) {
-  }
-
   selectTab(tab: any) {
     if (!tab.disabled) {
       this.changeTab.emit(tab);
-      this.router.navigate([tab.route]);
     }
   }
 }
