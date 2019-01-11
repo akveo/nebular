@@ -21,13 +21,13 @@ export class RouteTabsetShowcaseComponent {
     {
       title: 'Users',
       icon: 'nb-person',
-      route: '/tabset/route-tabset-showcase.component/tab1',
+      route: './tab1',
     },
     {
       title: 'Orders',
       icon: 'nb-notifications',
       responsive: true,
-      route: '/tabset/route-tabset-showcase.component/tab2',
+      route: [ './tab2' ],
     },
     {
       title: 'Transaction',
