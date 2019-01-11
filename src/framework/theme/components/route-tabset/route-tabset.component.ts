@@ -62,20 +62,32 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./route-tabset.component.scss'],
   template: `
     <ul class="route-tabset">
-      <li *ngFor="let tab of tabs"
-          (click)="$event.preventDefault(); selectTab(tab)"
-          [routerLink]="tab.route"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [class.responsive]="tab.responsive"
-          [class.disabled]="tab.disabled"
-          [attr.tabindex]="tab.disabled ? -1 : 0"
-          class="route-tab">
-        <a (click)="$event.preventDefault()" tabindex="-1">
-          <i *ngIf="tab.icon" [class]="tab.icon"></i>
-          <span *ngIf="tab.title">{{ tab.title }}</span>
-        </a>
-      </li>
+      <ng-container *ngFor="let tab of tabs">
+        <li *ngIf="tab.disabled; else enabled"
+            [class.responsive]="tab.responsive"
+            class="route-tab disabled"
+            tabindex="-1">
+          <a tabindex="-1">
+            <i *ngIf="tab.icon" [class]="tab.icon"></i>
+            <span *ngIf="tab.title">{{ tab.title }}</span>
+          </a>
+        </li>
+
+        <ng-template #enabled>
+          <li (click)="$event.preventDefault(); selectTab(tab)"
+              [routerLink]="tab.route"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [class.responsive]="tab.responsive"
+              tabindex="0"
+              class="route-tab">
+            <a tabindex="-1">
+              <i *ngIf="tab.icon" [class]="tab.icon"></i>
+              <span *ngIf="tab.title">{{ tab.title }}</span>
+            </a>
+          </li>
+        </ng-template>
+      </ng-container>
     </ul>
     <router-outlet></router-outlet>
   `,
@@ -106,8 +118,6 @@ export class NbRouteTabsetComponent {
   @Output() changeTab = new EventEmitter<any>();
 
   selectTab(tab: any) {
-    if (!tab.disabled) {
-      this.changeTab.emit(tab);
-    }
+    this.changeTab.emit(tab);
   }
 }
