@@ -16,6 +16,7 @@ import { TabsetIconComponent } from './tabset-icon.component';
 import { TabsetShowcaseComponent } from './tabset-showcase.component';
 import { TabsetTestComponent } from './tabset-test.component';
 import { TabsetWidthComponent } from './tabset-width.component';
+import { TabsetDisabledComponent } from './tabset-disabled.component';
 
 const routes: Route[] = [
   {
@@ -60,6 +61,10 @@ const routes: Route[] = [
   {
     path: 'tabset-width.component',
     component: TabsetWidthComponent,
+  },
+  {
+    path: 'tabset-disabled.component',
+    component: TabsetDisabledComponent,
   },
 ];
 
