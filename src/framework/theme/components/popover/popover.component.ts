@@ -5,7 +5,13 @@
  */
 
 import { Component, ComponentFactoryResolver, Input, TemplateRef, Type, ViewChild } from '@angular/core';
-import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer, NbTemplatePortal } from '../cdk';
+import {
+  NbComponentPortal,
+  NbOverlayContainerComponent,
+  NbPositionedContainer,
+  NbRenderableContainer,
+  NbTemplatePortal,
+} from '../cdk';
 
 
 /**
@@ -27,7 +33,7 @@ import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer, 
     <nb-overlay-container></nb-overlay-container>
   `,
 })
-export class NbPopoverComponent extends NbPositionedContainer {
+export class NbPopoverComponent extends NbPositionedContainer implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   @Input() content: any;

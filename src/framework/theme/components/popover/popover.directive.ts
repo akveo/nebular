@@ -5,37 +5,22 @@
  */
 
 import {
-  AfterViewInit,
-  ComponentFactoryResolver,
-  ComponentRef,
+  AfterViewInit, ComponentFactoryResolver,
   Directive,
   ElementRef,
-  Inject,
   Input,
   OnChanges,
-  OnDestroy,
-  SimpleChanges,
+  OnDestroy, OnInit,
 } from '@angular/core';
-import { takeUntil, takeWhile } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 import {
-  createContainer,
-  NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbOverlayContent,
-  NbOverlayRef,
-  NbOverlayService,
   NbPosition,
-  NbPositionBuilderService,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-  patch,
+  NbSuperOverlayBuilder, NbSuperOverlay,
 } from '../cdk';
-import { NB_DOCUMENT } from '../../theme.options';
 import { NbPopoverComponent } from './popover.component';
-import { isFirstChange } from '../helpers';
 
 
 /**
@@ -115,8 +100,11 @@ import { isFirstChange } from '../helpers';
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
-@Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbPopover]',
+  providers: [NbSuperOverlayBuilder, NbSuperOverlay],
+})
+export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
@@ -157,7 +145,6 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
       Use 'nbPopoverTrigger' instead.`);
     this.trigger = mode;
   }
-
   get mode() {
     return this.trigger;
   }
@@ -169,218 +156,54 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy {
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
-  protected ref: NbOverlayRef;
-  protected container: ComponentRef<NbPopoverComponent>;
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected positionStrategyChange$ = new Subject();
-  protected triggerStrategyChange$ = new Subject();
-  protected alive = true;
+  superOverlay: NbSuperOverlay;
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private hostRef: ElementRef,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private superOverlayBuilder: NbSuperOverlayBuilder) {
   }
 
-  get isAttached(): boolean {
-    return this.ref && this.ref.hasAttached();
+  ngOnInit() {
+    this.superOverlayBuilder
+      .host(this.hostRef)
+      .componentType(NbPopoverComponent, this.componentFactoryResolver);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    /**
-     * Skip ngOnChanges callback if it's first change.
-     * Setup popover in the ngAfterViewInit callback.
-     * */
-    if (isFirstChange(changes)) {
-      return;
-    }
-
-    if (this.isPositionStrategyUpdateRequired(changes)) {
-      this.updatePositionStrategy();
-    }
-
-    if (this.isTriggerStrategyUpdateRequired(changes)) {
-      this.updateTriggerStrategy();
-    }
-
-    if (this.isContainerRerenderRequired(changes)) {
-      /**
-       * Other updates may require the container update.
-       * That's why we're updating container the last operation.
-       * */
-      this.scheduleContainerUpdate();
-    }
+  ngOnChanges() {
+    this.superOverlay = this.superOverlayBuilder
+      .position(this.position)
+      .trigger(this.trigger)
+      .adjustment(this.adjustment)
+      .content(this.content)
+      .context(this.context)
+      .rebuild();
   }
 
   ngAfterViewInit() {
-    this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-    if (this.ref) {
-      this.ref.dispose();
-    }
-  }
-
-  show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.renderContainer();
-  }
-
-  hide() {
-    if (!this.ref) {
-      return;
-    }
-
-    this.ref.detach();
-    this.container = null;
-  }
-
-  toggle() {
-    if (this.isAttached) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
-  protected createOverlay() {
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-  }
-
-  protected renderContainer() {
-    const containerContext = this.createContainerContext();
-    this.container = createContainer(this.ref, NbPopoverComponent, containerContext, this.componentFactoryResolver);
-    this.container.instance.renderContent();
-  }
-
-  protected scheduleContainerUpdate() {
-    /**
-     * In case of triggering container update inside the container by clicking somewhere
-     * we also triggering hide event in click trigger strategy. This strategy listens click events
-     * on the container element, but when we update the container we're removing previous container
-     * element from DOM and inserting a new one. But the click event was fired on the previous element
-     * and now it's outside of the active container.
-     * So, we have to update container after handling click by trigger strategy.
-     * */
-    setTimeout(() => this.updateContainer());
-  }
-
-  protected updateContainer() {
-    const containerContext = this.createContainerContext();
-    Object.assign(this.container.instance, containerContext);
-    this.container.instance.renderContent();
-    this.container.changeDetectorRef.detectChanges();
-
-    /**
-     * Dimensions of the container may be changed after updating the content, so, we have to update
-     * container position.
-     * */
-    this.ref.updatePosition();
-  }
-
-  protected updatePositionStrategy() {
-    this.positionStrategyChange$.next();
-    this.subscribeOnPositionChange();
-
-    if (this.ref) {
-      this.ref.updatePositionStrategy(this.positionStrategy);
-    }
-  }
-
-  protected updateTriggerStrategy() {
-    this.triggerStrategyChange$.next();
-    this.subscribeOnTriggers();
-  }
-
-  protected subscribeOnPositionChange() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.positionStrategy.positionChange
-      .pipe(
-        takeWhile(() => this.alive),
-        takeUntil(this.positionStrategyChange$),
-      )
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
-  }
-
-  protected subscribeOnTriggers() {
-    const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy();
-
-    triggerStrategy.show$.pipe(
-      takeWhile(() => this.alive),
-      takeUntil(this.triggerStrategyChange$),
-    )
-      .subscribe(() => this.show());
-
-    triggerStrategy.hide$.pipe(
-      takeWhile(() => this.alive),
-      takeUntil(this.triggerStrategyChange$),
-    )
-      .subscribe(() => this.hide());
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
+    this.superOverlay = this.superOverlayBuilder
       .position(this.position)
-      .adjustment(this.adjustment);
-  }
-
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return this.triggerStrategyBuilder
       .trigger(this.trigger)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
+      .adjustment(this.adjustment)
+      .content(this.content)
+      .context(this.context)
       .build();
   }
 
-  protected createContainerContext(): Object {
-    return {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    };
+  ngOnDestroy() {
+    this.superOverlay.dispose();
+    // TODO: disconnect!
+    this.superOverlayBuilder.destroy();
   }
 
-  protected isContainerRerenderRequired(changes: SimpleChanges) {
-    return this.isContentUpdateRequired(changes)
-      || this.isContextUpdateRequired(changes)
-      || this.isPositionStrategyUpdateRequired(changes);
+  show() {
+    this.superOverlay.show();
   }
 
-  protected isContentUpdateRequired(changes: SimpleChanges): boolean {
-    /**
-     * We're rerendering container each time we're showing it, so we don't need to update content
-     * if popover isn't attached.
-     * */
-    return this.isAttached && !!changes.content;
+  hide() {
+    this.superOverlay.hide();
   }
 
-  /**
-   * We're rerendering container each time we're showing it, so we don't need to update context
-   * if popover isn't attached.
-   * */
-  protected isContextUpdateRequired(changes: SimpleChanges): boolean {
-    return this.isAttached && !!changes.context;
-  }
-
-  protected isPositionStrategyUpdateRequired(changes: SimpleChanges): boolean {
-    return !!changes.adjustment || !!changes.position;
-  }
-
-  protected isTriggerStrategyUpdateRequired(changes: SimpleChanges): boolean {
-    return !!changes.mode;
+  toggle() {
+    this.superOverlay.toggle();
   }
 }

@@ -14,6 +14,10 @@ import {
 import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbPortalInjector, NbTemplatePortal } from './mapping';
 
+export interface NbRenderableContainer {
+  renderContent();
+}
+
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
 
