@@ -35,5 +35,11 @@ export class RouteTabsetShowcaseComponent {
       responsive: true,
       route: '/tabset/route-tabset-showcase.component/tab2',
     },
+    {
+      title: 'Transaction',
+      icon: 'nb-notifications',
+      responsive: true,
+      disabled: true,
+    },
   ];
 }
