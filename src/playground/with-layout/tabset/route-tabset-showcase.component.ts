@@ -11,12 +11,6 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
-      </nb-card-body>
-    </nb-card>
-
-    <nb-card>
-      <nb-card-body>
         <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
       </nb-card-body>
     </nb-card>
