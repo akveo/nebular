@@ -55,7 +55,7 @@ export class AppModule { }
 
 ```scss
 "styles": [
-  "../node_modules/@nebular/theme/styles/prebuilt/default.css",
+  "node_modules/@nebular/theme/styles/prebuilt/default.css",
 ],
 ```
 
