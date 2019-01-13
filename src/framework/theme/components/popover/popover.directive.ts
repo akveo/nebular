@@ -18,7 +18,8 @@ import {
   NbOverlayContent,
   NbPosition,
   NbTrigger,
-  NbSuperOverlayBuilder, NbSuperOverlay,
+  NbDynamicOverlayHandler,
+  NbDynamicOverlay,
 } from '../cdk';
 import { NbPopoverComponent } from './popover.component';
 
@@ -102,7 +103,7 @@ import { NbPopoverComponent } from './popover.component';
  * */
 @Directive({
   selector: '[nbPopover]',
-  providers: [NbSuperOverlayBuilder, NbSuperOverlay],
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
 })
 export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy, OnInit {
 
@@ -156,54 +157,53 @@ export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy, 
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
-  superOverlay: NbSuperOverlay;
+  dynamicOverlay: NbDynamicOverlay;
 
   constructor(private hostRef: ElementRef,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private superOverlayBuilder: NbSuperOverlayBuilder) {
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
   ngOnInit() {
-    this.superOverlayBuilder
+    this.dynamicOverlayHandler
       .host(this.hostRef)
       .componentType(NbPopoverComponent, this.componentFactoryResolver);
   }
 
   ngOnChanges() {
-    this.superOverlay = this.superOverlayBuilder
-      .position(this.position)
-      .trigger(this.trigger)
-      .adjustment(this.adjustment)
-      .content(this.content)
-      .context(this.context)
-      .rebuild();
+    this.rebuild();
   }
 
   ngAfterViewInit() {
-    this.superOverlay = this.superOverlayBuilder
+    this.dynamicOverlay = this.configureDynamicOverlay().build();
+  }
+
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay().rebuild();
+  }
+
+  show() {
+    this.dynamicOverlay.show();
+  }
+
+  hide() {
+    this.dynamicOverlay.hide();
+  }
+
+  toggle() {
+    this.dynamicOverlay.toggle();
+  }
+
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
+  }
+
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
       .position(this.position)
       .trigger(this.trigger)
       .adjustment(this.adjustment)
       .content(this.content)
-      .context(this.context)
-      .build();
-  }
-
-  ngOnDestroy() {
-    this.superOverlay.dispose();
-    // TODO: disconnect!
-    this.superOverlayBuilder.destroy();
-  }
-
-  show() {
-    this.superOverlay.show();
-  }
-
-  hide() {
-    this.superOverlay.hide();
-  }
-
-  toggle() {
-    this.superOverlay.toggle();
+      .context(this.context);
   }
 }

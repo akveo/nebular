@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, ComponentRef, ElementRef, Injectable, Type } from '@angular/core';
-import { takeUntil, takeWhile, skip } from 'rxjs/operators';
+import { takeUntil, takeWhile } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from './overlay-trigger';
@@ -14,13 +14,13 @@ import { NbRenderableContainer } from './overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from './overlay';
 import { NbOverlayRef } from './mapping';
 
-interface NbSuperOverlayChange {
+interface NbDynamicOverlayChange {
   [propName: string]: any;
 }
 
 
 @Injectable()
-export class NbSuperOverlay {
+export class NbDynamicOverlay {
 
   protected ref: NbOverlayRef;
   protected container: ComponentRef<NbRenderableContainer>;
@@ -40,7 +40,6 @@ export class NbSuperOverlay {
   constructor(private overlay: NbOverlayService) {
   }
 
-
   create(componentType: Type<NbRenderableContainer>,
          componentFactoryResolver: ComponentFactoryResolver,
          content: NbOverlayContent,
@@ -55,9 +54,8 @@ export class NbSuperOverlay {
     return this;
   }
 
-  // TODO: something about schedule
   setContent(content: NbOverlayContent) {
-   this.content = content;
+    this.content = content;
 
     if (this.container) {
       this.updateContext();
@@ -90,16 +88,16 @@ export class NbSuperOverlay {
 
     this.positionStrategy = positionStrategy;
 
-    if (this.ref) {
-      this.ref.updatePositionStrategy(this.positionStrategy);
-    }
-
     this.positionStrategy.positionChange
       .pipe(
         takeWhile(() => this.alive),
-        takeUntil(this.positionStrategyChange$.pipe(skip(1))),
+        takeUntil(this.positionStrategyChange$),
       )
       .subscribe((position: NbPosition) => patch(this.container, { position }));
+
+    if (this.ref) {
+      this.ref.updatePositionStrategy(this.positionStrategy);
+    }
   }
 
   show() {
@@ -175,10 +173,8 @@ export class NbSuperOverlay {
   }
 }
 
-
-
 @Injectable()
-export class NbSuperOverlayBuilder {
+export class NbDynamicOverlayHandler {
 
   protected _componentFactoryResolver: ComponentFactoryResolver;
   protected _componentType: any;
@@ -189,29 +185,18 @@ export class NbSuperOverlayBuilder {
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
 
-  protected superOverlay: NbSuperOverlay;
+  protected dynamicOverlay: NbDynamicOverlay;
 
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected triggerStrategyChange$ = new Subject();
+  protected disconnect$ = new Subject();
 
-  protected alive = true;
-  protected changes: NbSuperOverlayChange = {};
-
-  protected built = false;
+  protected changes: NbDynamicOverlayChange = {};
 
   constructor(private positionBuilder: NbPositionBuilderService,
               private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private superOverlayService: NbSuperOverlay) {
+              private dynamicOverlayService: NbDynamicOverlay) {
   }
 
-
-  destroy() {
-    this.alive = false;
-
-    // this.dispose();
-  }
-
-  // TODO: what do we need to UPDATE?
   host(host: ElementRef) {
     this.collectChanges('_host', host);
     return this;
@@ -232,8 +217,7 @@ export class NbSuperOverlayBuilder {
     return this;
   }
 
-  // TODO: type of component class
-  componentType(componentType: any, componentFactoryResolver: ComponentFactoryResolver) {
+  componentType(componentType: Type<NbRenderableContainer>, componentFactoryResolver: ComponentFactoryResolver) {
     this.collectChanges('_componentType', componentType);
     this.collectChanges('_componentFactoryResolver', componentFactoryResolver);
     return this;
@@ -250,50 +234,90 @@ export class NbSuperOverlayBuilder {
   }
 
   build() {
-    this.superOverlay = this.superOverlayService.create(
+    this.dynamicOverlay = this.dynamicOverlayService.create(
       this._componentType,
       this._componentFactoryResolver,
       this._content,
       this._context,
       this.createPositionStrategy());
 
-    this.subscribeOnTriggers(this.superOverlay);
+    this.connect();
     this.clearChanges();
 
-
-    this.built = true;
-    return this.superOverlay;
+    return this.dynamicOverlay;
   }
 
   rebuild() {
-
-    if (!this.built) {
+    if (!this.dynamicOverlay) {
       return;
     }
 
-    /**
-     * In case there is a new component we may need to rebuild everything
-     * And hence there is no sense to check other properties
-     */
-    if (this.isComponentTypeUpdateRequired(this.changes)) {
-      this.superOverlay.setComponent(this._componentType, this._componentFactoryResolver);
-    }
-
     if (this.isPositionStrategyUpdateRequired(this.changes)) {
-      this.superOverlay.setPositionStrategy(this.createPositionStrategy());
+      this.dynamicOverlay.setPositionStrategy(this.createPositionStrategy());
     }
 
     if (this.isTriggerStrategyUpdateRequired(this.changes)) {
-      this.subscribeOnTriggers(this.superOverlay);
+      this.connect();
     }
 
     if (this.isContainerRerenderRequired(this.changes)) {
-      this.superOverlay.setContext(this._context);
-      this.superOverlay.setContent(this._content);
+      this.dynamicOverlay.setContext(this._context);
+      this.dynamicOverlay.setContent(this._content);
+    }
+
+    if (this.isComponentTypeUpdateRequired(this.changes)) {
+      this.dynamicOverlay.setComponent(this._componentType, this._componentFactoryResolver);
     }
 
     this.clearChanges();
-    return this.superOverlay;
+    return this.dynamicOverlay;
+  }
+
+  connect() {
+    if (!this.dynamicOverlay) {
+      throw new Error(`NbDynamicOverlayHandler: cannot connect to DynamicOverlay
+      as it is not created yet. Call build() first`);
+    }
+    this.disconnect();
+    this.subscribeOnTriggers(this.dynamicOverlay);
+  }
+
+  disconnect() {
+    this.disconnect$.next();
+  }
+
+  destroy() {
+    this.disconnect();
+    this.clearChanges();
+    if (this.dynamicOverlay) {
+      this.dynamicOverlay.dispose();
+    }
+  }
+
+  protected createPositionStrategy() {
+    return this.positionBuilder
+      .connectedTo(this._host)
+      .position(this._position)
+      .adjustment(this._adjustment);
+  }
+
+  protected subscribeOnTriggers(dynamicOverlay: NbDynamicOverlay) {
+
+    const triggerStrategy: NbTriggerStrategy = this.triggerStrategyBuilder
+      .trigger(this._trigger)
+      .host(this._host.nativeElement)
+      .container(() => dynamicOverlay.getContainer())
+      .build();
+
+    triggerStrategy.show$.pipe(
+      takeUntil(this.disconnect$),
+    )
+      .subscribe(() => dynamicOverlay.show());
+
+    triggerStrategy.hide$.pipe(
+      takeUntil(this.disconnect$),
+    )
+      .subscribe(() => dynamicOverlay.hide());
   }
 
   protected collectChanges(key: string, newValue: any) {
@@ -308,58 +332,29 @@ export class NbSuperOverlayBuilder {
     this.changes = {};
   }
 
-  protected createPositionStrategy() {
-    return this.positionBuilder
-      .connectedTo(this._host)
-      .position(this._position)
-      .adjustment(this._adjustment);
-  }
-
-  protected subscribeOnTriggers(superOverlay: NbSuperOverlay) {
-    this.triggerStrategyChange$.next();
-
-    const triggerStrategy: NbTriggerStrategy = this.triggerStrategyBuilder
-      .trigger(this._trigger)
-      .host(this._host.nativeElement)
-      .container(() => superOverlay.getContainer())
-      .build();
-
-    triggerStrategy.show$.pipe(
-      takeWhile(() => this.alive),
-      takeUntil(this.triggerStrategyChange$.pipe(skip(1))),
-    )
-      .subscribe(() => superOverlay.show());
-
-    triggerStrategy.hide$.pipe(
-      takeWhile(() => this.alive),
-      takeUntil(this.triggerStrategyChange$.pipe(skip(1))),
-    )
-      .subscribe(() => superOverlay.hide());
-  }
-
-  protected isContainerRerenderRequired(changes: NbSuperOverlayChange) {
+  protected isContainerRerenderRequired(changes: NbDynamicOverlayChange) {
     return this.isContentUpdateRequired(changes)
       || this.isContextUpdateRequired(changes)
       || this.isPositionStrategyUpdateRequired(changes);
   }
 
-  protected isContentUpdateRequired(changes: NbSuperOverlayChange): boolean {
+  protected isContentUpdateRequired(changes: NbDynamicOverlayChange): boolean {
     return !!changes._content;
   }
 
-  protected isContextUpdateRequired(changes: NbSuperOverlayChange): boolean {
+  protected isContextUpdateRequired(changes: NbDynamicOverlayChange): boolean {
     return !!changes._context;
   }
 
-  protected isPositionStrategyUpdateRequired(changes: NbSuperOverlayChange): boolean {
-    return !!changes._adjustment || !!changes._position;
+  protected isPositionStrategyUpdateRequired(changes: NbDynamicOverlayChange): boolean {
+    return !!changes._adjustment || !!changes._position || !!changes._host;
   }
 
-  protected isTriggerStrategyUpdateRequired(changes: NbSuperOverlayChange): boolean {
-    return !!changes._trigger;
+  protected isTriggerStrategyUpdateRequired(changes: NbDynamicOverlayChange): boolean {
+    return !!changes._trigger || !!changes._host;
   }
 
-  protected isComponentTypeUpdateRequired(changes: NbSuperOverlayChange): boolean {
+  protected isComponentTypeUpdateRequired(changes: NbDynamicOverlayChange): boolean {
     return !!changes._componentType || !!changes._componentFactoryResolver;
   }
 }

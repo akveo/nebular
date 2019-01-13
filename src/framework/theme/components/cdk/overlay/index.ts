@@ -5,4 +5,4 @@ export * from './overlay-container';
 export * from './overlay-trigger';
 export * from './mapping';
 export * from './position-helper';
-export * from './super-overlay';
+export * from './dynamic-overlay';
