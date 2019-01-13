@@ -150,14 +150,6 @@ export class NbDynamicOverlay {
     this.container.instance.renderContent();
   }
 
-  protected createContainerContext(): Object {
-    return {
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    };
-  }
-
   protected updateContext() {
     const containerContext = this.createContainerContext();
     Object.assign(this.container.instance, containerContext);
@@ -169,5 +161,13 @@ export class NbDynamicOverlay {
      * container position.
      * */
     this.ref.updatePosition();
+  }
+
+  protected createContainerContext(): Object {
+    return {
+      content: this.content,
+      context: this.context,
+      cfr: this.componentFactoryResolver,
+    };
   }
 }
