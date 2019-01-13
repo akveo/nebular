@@ -20,6 +20,7 @@ import {
   NbTrigger,
   NbDynamicOverlayHandler,
   NbDynamicOverlay,
+  NbDynamicOverlayController,
 } from '../cdk';
 import { NbPopoverComponent } from './popover.component';
 
@@ -105,7 +106,7 @@ import { NbPopoverComponent } from './popover.component';
   selector: '[nbPopover]',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
 })
-export class NbPopoverDirective implements OnChanges, AfterViewInit, OnDestroy, OnInit {
+export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.

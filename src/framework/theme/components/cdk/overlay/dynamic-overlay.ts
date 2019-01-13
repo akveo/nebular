@@ -14,6 +14,13 @@ import { NbRenderableContainer } from './overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from './overlay';
 import { NbOverlayRef } from './mapping';
 
+export interface NbDynamicOverlayController {
+  show();
+  hide();
+  toggle();
+  rebuild();
+}
+
 interface NbDynamicOverlayChange {
   [propName: string]: any;
 }
