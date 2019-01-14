@@ -13,25 +13,9 @@ import { Component } from '@angular/core';
   styles: [`
     :host {
       display: block;
-      margin: 10rem;
+      margin: 5rem;
     }
   `],
 })
 export class PopoverShowcaseComponent {
-  placement = 'left';
-  trigger = 'click';
-  text = 'Hello from Popover: ';
-
-  changePlacement(placement) {
-    this.placement = placement;
-  }
-  changeTrigger(trigger) {
-    this.trigger = trigger;
-  }
-
-  // ngOnInit() {
-  //   setInterval(() => {
-  //     this.text = `${this.text}1`;
-  //   }, 3000);
-  // }
 }
