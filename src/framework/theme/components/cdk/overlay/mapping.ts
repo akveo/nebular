@@ -1,9 +1,7 @@
 import {
   ApplicationRef,
   ComponentFactoryResolver,
-  ComponentRef,
   Directive,
-  EmbeddedViewRef,
   Inject,
   Injectable,
   Injector,
@@ -55,67 +53,9 @@ export class NbPortalOutletDirective extends CdkPortalOutlet {
 }
 
 export class NbComponentPortal<T = any> extends ComponentPortal<T> {
-  constructor(component: ComponentType<T>,
-              vcr?: ViewContainerRef,
-              injector?: Injector,
-              public cfr?: ComponentFactoryResolver) {
-    super(component, vcr, injector);
-  }
 }
 
-/**
- * TODO remove after @angular/cdk@7.0.0 relased
- * */
 export class NbDomPortalOutlet extends DomPortalOutlet {
-  constructor(
-    /** Element into which the content is projected. */
-    public outletElement: Element,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private appRef: ApplicationRef,
-    private defaultInjector: Injector) {
-    super(outletElement, componentFactoryResolver, appRef, defaultInjector);
-  }
-
-  /**
-   * Attach the given ComponentPortal to DOM element using the ComponentFactoryResolver.
-   * @param portal Portal to be attached
-   * @returns Reference to the created component.
-   */
-  attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
-    const resolver = portal.cfr || this.componentFactoryResolver;
-    const componentFactory = resolver.resolveComponentFactory(portal.component);
-    let componentRef: ComponentRef<T>;
-
-    // If the portal specifies a ViewContainerRef, we will use that as the attachment point
-    // for the component (in terms of Angular's component tree, not rendering).
-    // When the ViewContainerRef is missing, we use the factory to create the component directly
-    // and then manually attach the view to the application.
-    if (portal.viewContainerRef) {
-      componentRef = portal.viewContainerRef.createComponent(
-        componentFactory,
-        portal.viewContainerRef.length,
-        portal.injector || portal.viewContainerRef.parentInjector);
-
-      this.setDisposeFn(() => componentRef.destroy());
-    } else {
-      componentRef = componentFactory.create(portal.injector || this.defaultInjector);
-      this.appRef.attachView(componentRef.hostView);
-      this.setDisposeFn(() => {
-        this.appRef.detachView(componentRef.hostView);
-        componentRef.destroy();
-      });
-    }
-    // At this point the component has been instantiated, so we move it to the location in the DOM
-    // where we want it to be rendered.
-    this.outletElement.appendChild(this.getComponentRootNode(componentRef));
-
-    return componentRef;
-  }
-
-  /** Gets the root HTMLElement for an instantiated component. */
-  private getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement {
-    return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-  }
 }
 
 @Injectable()

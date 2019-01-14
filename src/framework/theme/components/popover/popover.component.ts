@@ -45,7 +45,8 @@ export class NbPopoverComponent extends NbPositionedContainer implements AfterVi
   }
 
   protected attachTemplate() {
-    this.overlayContainer.attachTemplatePortal(new NbTemplatePortal(this.content, null, this.context));
+    this.overlayContainer
+      .attachTemplatePortal(new NbTemplatePortal(this.content, null, <any>{ $implicit: this.context }));
   }
 
   protected attachComponent() {

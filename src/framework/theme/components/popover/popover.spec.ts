@@ -291,7 +291,7 @@ describe('Directive: NbPopoverDirective', () => {
       expect(primitiveOverlay.textContent).toContain('test');
     });
 
-    xit('should provide context', () => {
+    it('should provide context', () => {
       fixture.componentInstance.popover.show();
       fixture.detectChanges();
 
