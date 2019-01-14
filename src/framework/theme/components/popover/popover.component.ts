@@ -40,12 +40,6 @@ export class NbPopoverComponent extends NbPositionedContainer implements NbRende
   @Input() context: Object;
   @Input() cfr: ComponentFactoryResolver;
 
-  /**
-   * A renderContent method renders content with provided context.
-   * Naturally, this job has to be done by ngOnChanges lifecycle hook, but
-   * ngOnChanges hook will be triggered only if we update content or context properties
-   * through template property binding syntax. But in our case we're updating these properties programmatically.
-   * */
   renderContent() {
     this.detachContent();
     this.attachContent();

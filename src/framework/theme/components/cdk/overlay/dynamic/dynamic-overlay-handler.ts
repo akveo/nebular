@@ -9,7 +9,6 @@ import {
   NbPosition,
   NbPositionBuilderService,
 } from '../overlay-position';
-
 import { NbRenderableContainer } from '../overlay-container';
 import { NbOverlayContent } from '../overlay';
 import { NbDynamicOverlay } from './dynamic-overlay';
@@ -23,7 +22,7 @@ interface NbDynamicOverlayChange {
 export class NbDynamicOverlayHandler {
 
   protected _componentFactoryResolver: ComponentFactoryResolver;
-  protected _componentType: any;
+  protected _componentType: Type<NbRenderableContainer>;
   protected _host: ElementRef;
   protected _context: Object = {};
   protected _content: NbOverlayContent;
@@ -69,12 +68,12 @@ export class NbDynamicOverlayHandler {
     return this;
   }
 
-  content(content: any) {
+  content(content: NbOverlayContent) {
     this.collectChanges('_content', content);
     return this;
   }
 
-  context(context: any) {
+  context(context: {}) {
     this.collectChanges('_context', context);
     return this;
   }
