@@ -10,6 +10,7 @@ import {
   Input,
   QueryList,
 } from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 import { NbStepComponent } from './step.component';
 
 export enum NbStepperOrientation {
@@ -112,11 +113,8 @@ export class NbStepperComponent {
   }
 
   set selectedIndex(index: number) {
-    if (this.steps) {
-      if (this.index !== index && this.isStepValid(index)) {
-        this.index = index;
-      }
-    } else {
+    this.markCurrentStepInteracted();
+    if (this.canBeSelected(index)) {
       this.index = index;
     }
   }
@@ -132,7 +130,7 @@ export class NbStepperComponent {
   }
 
   set selected(step: NbStepComponent) {
-    this.selectedIndex = this.steps ? this.steps.toArray().indexOf(step) : -1;
+    this.selectedIndex = this.steps.toArray().indexOf(step);
   }
 
   /**
@@ -141,44 +139,75 @@ export class NbStepperComponent {
    */
   @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
 
+  /**
+   * In linear mode, stepper allows moving forward only if the current step is complete
+   * @default false
+   */
+  @Input()
+  set linear(value: boolean) {
+    this.linearValue = convertToBoolProperty(value);
+  }
+  get linear(): boolean {
+    return this.linearValue;
+  }
+  private linearValue = false;
+
   private index = 0;
 
   /**
    * Navigate to next step
    * */
   next() {
-    this.selectedIndex = Math.min(this.index + 1, this.steps.length - 1);
+    this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
   }
 
   /**
    * Navigate to previous step
    * */
   previous() {
-    this.selectedIndex = Math.max(this.index - 1, 0);
+    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
   }
 
   /**
    * Reset stepper and stepControls to initial state
    * */
   reset() {
-    this.selectedIndex = 0;
+    this.index = 0;
     this.steps.forEach(step => step.reset());
   }
 
   isStepSelected(step: NbStepComponent) {
-    return this.index === this.steps.toArray().indexOf(step);
+    return this.selected === step;
   }
 
   private isStepValid(index: number): boolean {
-    const steps = this.steps.toArray();
+    return this.steps.toArray()[index].completed;
+  }
 
-    steps[this.index].interacted = true;
-
-    if (index >= this.index && index > 0) {
-      const currentStep = steps[this.index];
-      return currentStep.completed;
+  private canBeSelected(indexToCheck: number): boolean {
+    const noSteps = !this.steps || this.steps.length === 0;
+    const outsideOfRange = indexToCheck < 0 || indexToCheck >= this.steps.length;
+    if (noSteps || outsideOfRange) {
+      return false;
     }
 
-    return true;
+    if (indexToCheck <= this.selectedIndex || !this.linear) {
+      return true;
+    }
+
+    let isAllStepsValid = true;
+    for (let i = this.selectedIndex; i < indexToCheck; i++) {
+      if (!this.isStepValid(i)) {
+        isAllStepsValid = false;
+        break;
+      }
+    }
+    return isAllStepsValid;
+  }
+
+  private markCurrentStepInteracted() {
+    if (this.selected) {
+      this.selected.interacted = true;
+    }
   }
 }
