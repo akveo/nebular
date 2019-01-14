@@ -23,7 +23,6 @@ export class NbDynamicOverlay {
 
   protected ref: NbOverlayRef;
   protected container: ComponentRef<NbRenderableContainer>;
-  protected componentFactoryResolver: ComponentFactoryResolver;
   protected componentType: Type<NbRenderableContainer>;
   protected context: Object = {};
   protected content: NbOverlayContent;
@@ -36,18 +35,17 @@ export class NbDynamicOverlay {
     return this.ref && this.ref.hasAttached();
   }
 
-  constructor(private overlay: NbOverlayService) {
+  constructor(private overlay: NbOverlayService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   create(componentType: Type<NbRenderableContainer>,
-         componentFactoryResolver: ComponentFactoryResolver,
          content: NbOverlayContent,
          context: Object,
          positionStrategy: NbAdjustableConnectedPositionStrategy) {
 
     this.setContext(context);
     this.setContent(content);
-    this.setComponent(componentType, componentFactoryResolver);
+    this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
 
     return this;
@@ -69,9 +67,8 @@ export class NbDynamicOverlay {
     }
   }
 
-  setComponent(componentType: Type<NbRenderableContainer>, componentFactoryResolver: ComponentFactoryResolver) {
+  setComponent(componentType: Type<NbRenderableContainer>) {
     this.componentType = componentType;
-    this.componentFactoryResolver = componentFactoryResolver;
 
     // in case the component is shown we recreate it and show it back
     if (this.ref && this.isAttached) {

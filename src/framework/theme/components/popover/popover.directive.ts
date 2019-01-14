@@ -5,7 +5,7 @@
  */
 
 import {
-  AfterViewInit, ComponentFactoryResolver,
+  AfterViewInit,
   Directive,
   ElementRef,
   Input,
@@ -158,17 +158,16 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
-  dynamicOverlay: NbDynamicOverlay;
+  private dynamicOverlay: NbDynamicOverlay;
 
   constructor(private hostRef: ElementRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
               private dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
   ngOnInit() {
     this.dynamicOverlayHandler
       .host(this.hostRef)
-      .componentType(NbPopoverComponent, this.componentFactoryResolver);
+      .componentType(NbPopoverComponent);
   }
 
   ngOnChanges() {
@@ -176,11 +175,13 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   }
 
   ngAfterViewInit() {
-    this.dynamicOverlay = this.configureDynamicOverlay().build();
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .build();
   }
 
   rebuild() {
-    this.dynamicOverlay = this.configureDynamicOverlay().rebuild();
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
   show() {
