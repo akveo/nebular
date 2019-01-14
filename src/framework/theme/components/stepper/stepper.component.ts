@@ -54,7 +54,12 @@ export enum NbStepperOrientation {
  *   <nb-step>
  * </nb-stepper>
  * ```
- * Specify `[stepControl]="form"` and user can navigates only if submit previous step's form.
+ *
+ * When linear mode enabled user can't move forward unless current step is complete.
+ * @stacked-example(Linear, stepper/stepper-linear.component)
+ *
+ * Specify `[stepControl]="form"` and stepper allow go to the next step only if form is valid.
+ * You can disable it via `linear` mode setting.
  * ```html
  * // ...
  * <nb-stepper  orientation="horizontal">
@@ -140,8 +145,8 @@ export class NbStepperComponent {
   @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
 
   /**
-   * In linear mode, stepper allows moving forward only if the current step is complete
-   * @default false
+   * Allow moving forward only if the current step is complete
+   * @default true
    */
   @Input()
   set linear(value: boolean) {
@@ -150,7 +155,7 @@ export class NbStepperComponent {
   get linear(): boolean {
     return this.linearValue;
   }
-  private linearValue = false;
+  private linearValue = true;
 
   private index = 0;
 
