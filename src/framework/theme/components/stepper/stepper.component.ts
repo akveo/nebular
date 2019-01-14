@@ -120,6 +120,7 @@ export class NbStepperComponent {
   set selectedIndex(index: number) {
     if (!this.steps) {
       this.index = index;
+      return;
     }
 
     this.markCurrentStepInteracted();
