@@ -1,1 +1,23 @@
-<nb-tree-grid></nb-tree-grid>
+<table nb-tree-grid [dataSource]="dataSource">
+
+  <tr nb-header-row *nbHeaderRowDef="columnsToDisplay"></tr>
+
+  <tr nb-row *nbRowDef="let element; columns: columnsToDisplay"
+      (click)="toggle(element)">
+  </tr>
+
+  <ng-container nbColumnDef="name">
+    <th nb-header-cell *nbHeaderCellDef> Name</th>
+    <td nb-cell *nbCellDef="let element">
+      <div [style.padding-left.px]="element.padding">
+        {{ element.name }}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container nbColumnDef="{{column}}" *ngFor="let column of cols">
+    <th nb-header-cell *nbHeaderCellDef> {{column}} </th>
+    <td nb-cell *nbCellDef="let element"> {{element[ column ]}} </td>
+  </ng-container>
+
+</table>

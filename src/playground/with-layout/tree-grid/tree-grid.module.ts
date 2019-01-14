@@ -5,13 +5,14 @@
  */
 
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NbTreeGridModule } from '@nebular/theme';
 
 import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
 
 @NgModule({
-  imports: [NbTreeGridModule, TreeGridRoutingModule],
+  imports: [CommonModule, NbTreeGridModule, TreeGridRoutingModule],
   declarations: [
     TreeGridShowcaseComponent,
   ],
