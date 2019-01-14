@@ -118,6 +118,10 @@ export class NbStepperComponent {
   }
 
   set selectedIndex(index: number) {
+    if (!this.steps) {
+      this.index = index;
+    }
+
     this.markCurrentStepInteracted();
     if (this.canBeSelected(index)) {
       this.index = index;
@@ -135,6 +139,9 @@ export class NbStepperComponent {
   }
 
   set selected(step: NbStepComponent) {
+    if (!this.steps) {
+      return;
+    }
     this.selectedIndex = this.steps.toArray().indexOf(step);
   }
 
@@ -191,8 +198,7 @@ export class NbStepperComponent {
 
   private canBeSelected(indexToCheck: number): boolean {
     const noSteps = !this.steps || this.steps.length === 0;
-    const outsideOfRange = indexToCheck < 0 || indexToCheck >= this.steps.length;
-    if (noSteps || outsideOfRange) {
+    if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length) {
       return false;
     }
 
