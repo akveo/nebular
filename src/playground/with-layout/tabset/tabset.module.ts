@@ -17,6 +17,7 @@ import {
   RouteTabsetShowcaseChild1Component,
   RouteTabsetShowcaseChild2Component,
 } from './components/route-tabset-children.component';
+import { TabsetDisabledComponent } from './tabset-disabled.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {
     TabsetWidthComponent,
     RouteTabsetShowcaseChild1Component,
     RouteTabsetShowcaseChild2Component,
+    TabsetDisabledComponent,
   ],
   imports: [
     NbTabsetModule,

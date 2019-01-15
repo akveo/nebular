@@ -1013,6 +1013,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TabsetWidthComponent',
         name: 'Tabset Width',
       },
+      {
+        path: 'tabset-disabled.component',
+        link: '/tabset/tabset-disabled.component',
+        component: 'TabsetDisabledComponent',
+        name: 'Tabset Disabled',
+      },
     ],
   },
   {
