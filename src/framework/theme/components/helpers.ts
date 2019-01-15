@@ -27,7 +27,3 @@ export function getElementHeight(el) {
   return el.offsetHeight + marginTop + marginBottom;
 }
 
-export function isFirstChange(simpleChanges: SimpleChanges): boolean {
-  const changes: SimpleChange[] = Object.values(simpleChanges);
-  return changes.some((change: SimpleChange) => change.isFirstChange());
-}
