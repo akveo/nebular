@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
@@ -12,19 +12,37 @@ import { NbMenuBag, NbMenuItem, NbMenuService } from './menu.service';
 import { NbThemeModule } from '../../theme.module';
 import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
+import { NbMenuComponent } from './menu.component';
 
 
 let menuService;
 
 @Component({
-  template: `<nb-menu [items]="items" tag="menu"></nb-menu>`,
+  template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
 })
 export class MenuTestComponent {
   constructor (public menuPublicService: NbMenuService) {}
   @Input() items: NbMenuItem[];
+  @Input() menuTag: string;
+  @ViewChild(NbMenuComponent) menuComponent: NbMenuComponent;
 }
 
-function createTestComponent(menuItems) {
+@Component({
+  template: `
+    <nb-menu [items]="firstMenuItems" [tag]="firstMenuTag"></nb-menu>
+    <nb-menu [items]="secondMenuItems" [tag]="secondMenuTag"></nb-menu>
+  `,
+})
+export class TwoMenuTestComponent {
+  constructor (public menuPublicService: NbMenuService) {}
+  @Input() firstMenuItems: NbMenuItem[];
+  @Input() secondMenuItems: NbMenuItem[];
+  @Input() firstMenuTag: string;
+  @Input() secondMenuTag: string;
+  @ViewChildren(NbMenuComponent) menuComponent: QueryList<NbMenuComponent>;
+}
+
+function createTestBed() {
   TestBed.configureTestingModule({
     imports: [
       NbThemeModule.forRoot(),
@@ -32,17 +50,32 @@ function createTestComponent(menuItems) {
       RouterTestingModule.withRoutes([]),
       NoopAnimationsModule,
     ],
-    declarations: [ MenuTestComponent ],
-    providers: [ NbMenuService ],
+    declarations: [MenuTestComponent, TwoMenuTestComponent],
+    providers: [NbMenuService],
   });
+}
+
+function createTestComponent(menuItems, menuTag = 'menu') {
+  createTestBed();
   const fixture = TestBed.createComponent( MenuTestComponent );
   fixture.componentInstance.items = menuItems;
+  fixture.componentInstance.menuTag = menuTag;
   menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
   return fixture;
 }
 
 describe('NbMenuItem', () => {
+
+  it('should set tag attribute for menu services', () => {
+    const fixture = createTestComponent([
+      {
+        title: 'Home',
+      },
+    ], 'menu');
+    const nbMenuTag = fixture.componentInstance.menuComponent.tag;
+    expect(nbMenuTag).toEqual('menu');
+  });
 
   it('should set icon to menu item', () => {
     const fixture = createTestComponent([
@@ -176,6 +209,40 @@ describe('NbMenuItem', () => {
 });
 
 describe('menu services', () => {
+
+  it('menu services should operate with menu by tag', () => {
+    createTestBed();
+    const twoMenuFixture = TestBed.createComponent(TwoMenuTestComponent);
+    twoMenuFixture.componentInstance.firstMenuItems = [{ title: 'Home'}];
+    twoMenuFixture.componentInstance.secondMenuItems = [{ title: 'Home'}];
+    twoMenuFixture.componentInstance.firstMenuTag = 'menuFirst';
+    twoMenuFixture.componentInstance.secondMenuTag = 'menuSecond';
+    menuService = twoMenuFixture.componentInstance.menuPublicService;
+    twoMenuFixture.detectChanges();
+    const addItemObject = {
+      title: 'Added item',
+    };
+    const firstMenuListOnInit = twoMenuFixture.nativeElement
+      .querySelector('nb-menu:first-child')
+      .querySelectorAll('[nbmenuitem]')
+      .length;
+    const secondMenuListOnInit = twoMenuFixture.nativeElement
+      .querySelector('nb-menu:last-child')
+      .querySelectorAll('[nbmenuitem]')
+      .length;
+    menuService.addItems([addItemObject], 'menuFirst');
+    twoMenuFixture.detectChanges();
+    const firstMenuListItemAdded = twoMenuFixture.nativeElement
+      .querySelector('nb-menu:first-child')
+      .querySelectorAll('[nbmenuitem]')
+      .length;
+    const secondMenuListItemAdded = twoMenuFixture.nativeElement
+      .querySelector('nb-menu:last-child')
+      .querySelectorAll('[nbmenuitem]')
+      .length;
+    expect(firstMenuListItemAdded).toEqual(firstMenuListOnInit + 1);
+    expect(secondMenuListItemAdded).toEqual(secondMenuListOnInit);
+  });
 
   it('addItems() should add new item to DOM', () => {
     const fixture = createTestComponent([
