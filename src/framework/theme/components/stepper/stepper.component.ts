@@ -10,6 +10,7 @@ import {
   Input,
   QueryList,
 } from '@angular/core';
+import { convertToBoolProperty } from '../helpers';
 import { NbStepComponent } from './step.component';
 
 export enum NbStepperOrientation {
@@ -120,6 +121,19 @@ export class NbStepperComponent {
       this.index = index;
     }
   }
+
+  /**
+   * Disables navigation by clicking on steps. False by default
+   * @param {boolean} value
+   */
+  @Input()
+  set disableStepNavigation(value: boolean) {
+    this.disableStepNavigationValue = convertToBoolProperty(value);
+  }
+  get disableStepNavigation(): boolean {
+    return this.disableStepNavigationValue;
+  }
+  disableStepNavigationValue: boolean = false;
 
   /**
    * Selected step component
