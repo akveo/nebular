@@ -49,10 +49,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
       });
 
     this.visibilityService.observe(this.el.nativeElement, OBSERVER_OPTIONS)
-      .pipe(
-        takeWhile(() => this.alive),
-        tap((e: IntersectionObserverEntry) => console.info(`${this.ngdFragment} - ${e.isIntersecting}`)),
-      )
+      .pipe(takeWhile(() => this.alive))
       .subscribe((entry: IntersectionObserverEntry) => this.onVisibilityChange(entry));
 
     this.scrollService.onScroll()
