@@ -6,13 +6,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbInputModule, NbStepperModule } from '@nebular/theme';
 import { StepperRoutingModule } from './stepper-routing.module';
 import { StepperShowcaseComponent } from './stepper-showcase.component';
 import { StepperTestComponent } from './stepper-test.component';
 import { StepperValidationComponent } from './stepper-validation.component';
 import { StepperVerticalComponent } from './stepper-vertical.component';
+import { StepperLinearComponent } from './stepper-linear.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,11 @@ import { StepperVerticalComponent } from './stepper-vertical.component';
     StepperTestComponent,
     StepperValidationComponent,
     StepperVerticalComponent,
+    StepperLinearComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     NbStepperModule,
     NbCardModule,
