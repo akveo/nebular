@@ -90,6 +90,10 @@ export class NbDynamicOverlayHandler {
   }
 
   build() {
+    if (!this._componentType) {
+      throw Error(`NbDynamicOverlayHandler: at least 'componentType should be
+      passed before building a dynamic overlay.`)
+    }
     this.dynamicOverlay = this.dynamicOverlayService.create(
       this._componentType,
       this._content,

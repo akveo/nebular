@@ -3,7 +3,6 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { SimpleChange, SimpleChanges } from '@angular/core';
 
 export function convertToBoolProperty(val: any): boolean {
   if (typeof val === 'string') {

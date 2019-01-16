@@ -101,7 +101,6 @@ describe('dynamic-overlay', () => {
   beforeEach(() => {
     dynamicOverlay = dynamicOverlayService.create(
       NbDynamicOverlayMockComponent,
-      componentFactoryResolver,
       content,
       context,
       bottomPositionStrategy,
@@ -276,7 +275,7 @@ describe('dynamic-overlay', () => {
     const attachSpy = spyOn(ref, 'attach').and.callThrough();
     const hasAttacheSpy = spyOn(ref, 'hasAttached');
 
-    dynamicOverlay.setComponent(NbDynamicOverlayMock2Component, componentFactoryResolver);
+    dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
     expect(detachSpy).toHaveBeenCalledTimes(0);
     expect(disposeSpy).toHaveBeenCalledTimes(0);
@@ -290,7 +289,7 @@ describe('dynamic-overlay', () => {
     expect(disposeSpy).toHaveBeenCalledTimes(0);
     expect(attachSpy).toHaveBeenCalledTimes(1);
 
-    dynamicOverlay.setComponent(NbDynamicOverlayMockComponent, componentFactoryResolver);
+    dynamicOverlay.setComponent(NbDynamicOverlayMockComponent);
 
     expect(ref.portal.component).toBe(NbDynamicOverlayMockComponent);
     expect(detachSpy).toHaveBeenCalledTimes(1);
@@ -300,7 +299,7 @@ describe('dynamic-overlay', () => {
     dynamicOverlay.hide();
     hasAttacheSpy.and.returnValue(false);
 
-    dynamicOverlay.setComponent(NbDynamicOverlayMock2Component, componentFactoryResolver);
+    dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
     expect(detachSpy).toHaveBeenCalledTimes(3);
     expect(disposeSpy).toHaveBeenCalledTimes(2);
