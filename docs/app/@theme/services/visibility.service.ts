@@ -15,8 +15,8 @@ export class NgdVisibilityService {
   private readonly isBrowser: boolean;
   private readonly supportsIntersectionObserver: boolean;
 
-  private readonly visibilityStream = new Map<IntersectionObserverInit, ObserverWithStream>();
-  private readonly topmostStream = new Map<IntersectionObserverInit, Observable<Element>>();
+  private readonly visibilityObservers = new Map<IntersectionObserverInit, ObserverWithStream>();
+  private readonly topmostObservers = new Map<IntersectionObserverInit, Observable<Element>>();
   private readonly visibleElements = new Map<IntersectionObserverInit, Element[]>();
   private readonly unobserve$ = new Subject<{ target: Element, options: IntersectionObserverInit }>();
 
@@ -33,8 +33,11 @@ export class NgdVisibilityService {
       return EMPTY;
     }
 
-    const { intersectionObserver, visibilityChange$ } =
-      this.visibilityStream.get(options) || this.addVisibilityChangeObserver(options);
+    let visibilityObserver = this.visibilityObservers.get(options);
+    if (visibilityObserver) {
+      visibilityObserver = this.addVisibilityChangeObserver(options);
+    }
+    const { intersectionObserver, visibilityChange$ } = visibilityObserver;
     intersectionObserver.observe(target);
 
     const targetUnobserved$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
@@ -56,9 +59,9 @@ export class NgdVisibilityService {
     }
 
     const targetUnobserve$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
-    const topmostChange$ = this.topmostStream.get(options) || this.addTopmostChangeObserver(options);
+    const topmostChange$ = this.topmostObservers.get(options) || this.addTopmostChangeObserver(options);
 
-    const { intersectionObserver } = this.visibilityStream.get(options);
+    const { intersectionObserver } = this.visibilityObservers.get(options);
     intersectionObserver.observe(target);
 
     return topmostChange$.pipe(
@@ -84,7 +87,7 @@ export class NgdVisibilityService {
     );
     const refCountedObserver = visibilityChange$.pipe(
       finalize(() => {
-        this.visibilityStream.delete(options);
+        this.visibilityObservers.delete(options);
         this.visibleElements.delete(options);
         intersectionObserver.disconnect();
       }),
@@ -94,12 +97,12 @@ export class NgdVisibilityService {
     );
 
     const observerWithStream = { intersectionObserver, visibilityChange$: refCountedObserver };
-    this.visibilityStream.set(options, observerWithStream);
+    this.visibilityObservers.set(options, observerWithStream);
     return observerWithStream;
   }
 
   private addTopmostChangeObserver(options: IntersectionObserverInit): Observable<Element> {
-    const { visibilityChange$ } = this.visibilityStream.get(options) || this.addVisibilityChangeObserver(options);
+    const { visibilityChange$ } = this.visibilityObservers.get(options) || this.addVisibilityChangeObserver(options);
 
     const topmostChange$ = visibilityChange$.pipe(
       map(() => this.findTopmostElement(options)),
@@ -108,7 +111,7 @@ export class NgdVisibilityService {
       refCount(),
     );
 
-    this.topmostStream.set(options, topmostChange$);
+    this.topmostObservers.set(options, topmostChange$);
     return topmostChange$;
   }
 
