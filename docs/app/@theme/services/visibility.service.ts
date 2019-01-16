@@ -5,8 +5,8 @@ import { EMPTY, Observable, Observer, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map, publish, refCount, takeUntil, tap } from 'rxjs/operators';
 
 interface ObserverWithStream {
-  observer: IntersectionObserver;
-  observable: Observable<IntersectionObserverEntry[]>;
+  intersectionObserver: IntersectionObserver;
+  visibilityChange$: Observable<IntersectionObserverEntry[]>;
 }
 
 @Injectable()
@@ -15,8 +15,8 @@ export class NgdVisibilityService {
   private readonly isBrowser: boolean;
   private readonly supportsIntersectionObserver: boolean;
 
-  private readonly observers = new Map<IntersectionObserverInit, ObserverWithStream>();
-  private readonly topmostChange$ = new Map<IntersectionObserverInit, Observable<Element>>();
+  private readonly visibilityStream = new Map<IntersectionObserverInit, ObserverWithStream>();
+  private readonly topmostStream = new Map<IntersectionObserverInit, Observable<Element>>();
   private readonly visibleElements = new Map<IntersectionObserverInit, Element[]>();
   private readonly unobserve$ = new Subject<{ target: Element, options: IntersectionObserverInit }>();
 
@@ -28,20 +28,21 @@ export class NgdVisibilityService {
     this.supportsIntersectionObserver = !!this.window.IntersectionObserver;
   }
 
-  observe(target: Element, options: IntersectionObserverInit): Observable<IntersectionObserverEntry> {
+  visibilityChange(target: Element, options: IntersectionObserverInit): Observable<IntersectionObserverEntry> {
     if (!this.isBrowser || !this.supportsIntersectionObserver) {
       return EMPTY;
     }
 
-    const { observer, observable } = this.observers.get(options) || this.addObserver(options);
-    observer.observe(target);
+    const { intersectionObserver, visibilityChange$ } =
+      this.visibilityStream.get(options) || this.addVisibilityChangeObserver(options);
+    intersectionObserver.observe(target);
 
     const targetUnobserved$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
 
-    return observable.pipe(
+    return visibilityChange$.pipe(
       map((entries: IntersectionObserverEntry[]) => entries.find(entry => entry.target === target)),
       filter((entry: IntersectionObserverEntry | undefined) => !!entry),
-      finalize(() => observer.unobserve(target)),
+      finalize(() => intersectionObserver.unobserve(target)),
       takeUntil(targetUnobserved$),
     );
   }
@@ -52,14 +53,14 @@ export class NgdVisibilityService {
     }
 
     const targetUnobserve$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
-    const topmostChange$ = this.topmostChange$.get(options) || this.listenTopmostChange(options);
+    const topmostChange$ = this.topmostStream.get(options) || this.addTopmostChangeObserver(options);
 
-    const { observer } = this.observers.get(options);
-    observer.observe(target);
+    const { intersectionObserver } = this.visibilityStream.get(options);
+    intersectionObserver.observe(target);
 
     return topmostChange$.pipe(
       finalize(() => {
-        observer.unobserve(target);
+        intersectionObserver.unobserve(target);
         this.removeFromVisible(options, target);
       }),
       map((element: Element) => element === target),
@@ -72,33 +73,32 @@ export class NgdVisibilityService {
     this.unobserve$.next({ target, options });
   }
 
-  private addObserver(options: IntersectionObserverInit): ObserverWithStream {
-    const observerStream = new Subject<IntersectionObserverEntry[]>();
-    const observer = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => observerStream.next(entries),
+  private addVisibilityChangeObserver(options: IntersectionObserverInit): ObserverWithStream {
+    const visibilityChange$ = new Subject<IntersectionObserverEntry[]>();
+    const intersectionObserver = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => visibilityChange$.next(entries),
       options,
     );
-    const refCountedObserver = observerStream.pipe(
+    const refCountedObserver = visibilityChange$.pipe(
       finalize(() => {
-        this.observers.delete(options);
-        observer.disconnect();
+        this.visibilityStream.delete(options);
+        intersectionObserver.disconnect();
       }),
       tap((entries: IntersectionObserverEntry[]) => this.updateVisibleItems(options, entries)),
       publish(),
       refCount(),
     );
 
-    const data: ObserverWithStream = { observer, observable: refCountedObserver };
-    this.observers.set(options, data);
-
-    return data;
+    const observerWithStream = { intersectionObserver, visibilityChange$: refCountedObserver };
+    this.visibilityStream.set(options, observerWithStream);
+    return observerWithStream;
   }
 
-  private listenTopmostChange(options: IntersectionObserverInit): Observable<Element> {
-    const { observable } = this.observers.get(options) || this.addObserver(options);
+  private addTopmostChangeObserver(options: IntersectionObserverInit): Observable<Element> {
+    const { visibilityChange$ } = this.visibilityStream.get(options) || this.addVisibilityChangeObserver(options);
 
-    const visibilityChange$ = Observable.create((observer: Observer<IntersectionObserverEntry[]>) => {
-      const sub = observable.subscribe((entries: IntersectionObserverEntry[]) => observer.next(entries));
+    const visibility$ = Observable.create((observer: Observer<IntersectionObserverEntry[]>) => {
+      const sub = visibilityChange$.subscribe((entries: IntersectionObserverEntry[]) => observer.next(entries));
 
       return () => {
         this.visibleElements.delete(options);
@@ -106,14 +106,14 @@ export class NgdVisibilityService {
       }
     });
 
-    const topmostChange$ = visibilityChange$.pipe(
+    const topmostChange$ = visibility$.pipe(
       map(() => this.findTopmostElement(options)),
       distinctUntilChanged(),
       publish(),
       refCount(),
     );
 
-    this.topmostChange$.set(options, topmostChange$);
+    this.topmostStream.set(options, topmostChange$);
     return topmostChange$;
   }
 
