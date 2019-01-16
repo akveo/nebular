@@ -10,6 +10,8 @@ import { StepperShowcaseComponent } from './stepper-showcase.component';
 import { StepperTestComponent } from './stepper-test.component';
 import { StepperValidationComponent } from './stepper-validation.component';
 import { StepperVerticalComponent } from './stepper-vertical.component';
+import { StepperDisabledStepNavComponent } from './stepper-disabled-step-nav.component';
+import { StepperLinearComponent } from './stepper-linear.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +29,14 @@ const routes: Route[] = [
   {
     path: 'stepper-vertical.component',
     component: StepperVerticalComponent,
+  },
+  {
+    path: 'stepper-disabled-step-nav.component',
+    component: StepperDisabledStepNavComponent,
+  },
+  {
+    path: 'stepper-linear.component',
+    component: StepperLinearComponent,
   },
 ];
 

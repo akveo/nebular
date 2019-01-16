@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { NbOverlayContainerAdapter, NbOverlayService, NbViewportRulerAdapter } from '../cdk';
 import { NbDialogService } from './dialog.service';
@@ -126,28 +126,32 @@ describe('dialog-service', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
-  it('should close on backdrop click if closeOnBackdropClick is true', () => {
+  it('should close on backdrop click if closeOnBackdropClick is true', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnBackdropClick: true, autoFocus: false });
     queryBackdrop().dispatchEvent(new Event('click'));
+    tick(500);
     expect(queryBackdrop()).toBeFalsy();
-  });
+  }));
 
-  it('should not close on backdrop click if closeOnBackdropClick is false', () => {
+  it('should not close on backdrop click if closeOnBackdropClick is false', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
     queryBackdrop().dispatchEvent(new Event('click'));
+    tick(500);
     expect(queryBackdrop()).toBeTruthy();
-  });
+  }));
 
-  it('should close on escape press if closeOnEsc is true', () => {
+  it('should close on escape press if closeOnEsc is true', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnEsc: true });
     document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    tick(500);
     expect(queryBackdrop()).toBeFalsy();
-  });
+  }));
 
-  it('should not close on escape press if closeOnEsc is false', () => {
+  it('should not close on escape press if closeOnEsc is false', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnEsc: false });
     document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    tick(500);
     expect(queryBackdrop()).toBeTruthy();
-  });
+  }));
 });
 

@@ -401,7 +401,8 @@ add it to docs/structure.ts
 
 create example usage of your component
 src/playground/[with-layout|without-layout]/your-component/your-component-showcase.component.ts
-module and route will be created automatically if you running playground or docs app.
+
+run 'npm run gen:playground' to generate boilerplate code, such as modules, routes, etc.
 
 your-component.component.ts  (add line in docs section-  * @stacked-example(Your component, your-component/your-component-showcase.component)
 ````
@@ -415,9 +416,9 @@ Playground is a set of modules containing all Nebular examples.
 It has two base directories: `with-layout` and `without-layout`. All components in `with-layout` directory will be nested inside of `nb-layout` component. Components from `without-layout` directory will be direct children of router outlet. Put components into `without-layout` directory, if they don't need to or can't be children of layout component, such as a layout itself.
 
 ## Playground schematic
-Playground schematic watches playground files and generates all boilerplate code for you. Basically, after adding a new component, directive or service declaration, all needed modules and components routes will be generated or modified.
+Playground schematic generates all boilerplate code for you. Basically, after adding a new component, directive or service declaration, all needed modules and components routes will be generated or modified.
 
-Schematic starts if you run playground or docs app with `npm start` or `npm run docs:serve` commands.
+You can run it via 'npm run gen:playground' command.
 
 ### How it works
 
