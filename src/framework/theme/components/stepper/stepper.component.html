@@ -3,7 +3,7 @@
   <ng-container *ngFor="let step of steps; let index = index; let first = first">
 
     <div *ngIf="!first && !step.hidden"
-         [class.connector-past]="index < selectedIndex"
+         [class.connector-past]="index <= selectedIndex"
          class="connector"></div>
 
     <div *ngIf="!step.hidden" class="step"
