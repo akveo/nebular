@@ -953,6 +953,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Stepper Vertical',
       },
       {
+        path: 'stepper-disabled-step-nav.component',
+        link: '/stepper/stepper-disabled-step-nav.component',
+        component: 'StepperDisabledStepNavComponent',
+        name: 'Stepper Disabled Step Nav',
+      },
+      {
         path: 'stepper-linear.component',
         link: '/stepper/stepper-linear.component',
         component: 'StepperLinearComponent',

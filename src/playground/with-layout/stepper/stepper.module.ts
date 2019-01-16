@@ -13,6 +13,7 @@ import { StepperShowcaseComponent } from './stepper-showcase.component';
 import { StepperTestComponent } from './stepper-test.component';
 import { StepperValidationComponent } from './stepper-validation.component';
 import { StepperVerticalComponent } from './stepper-vertical.component';
+import { StepperDisabledStepNavComponent } from './stepper-disabled-step-nav.component';
 import { StepperLinearComponent } from './stepper-linear.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { StepperLinearComponent } from './stepper-linear.component';
     StepperTestComponent,
     StepperValidationComponent,
     StepperVerticalComponent,
+    StepperDisabledStepNavComponent,
     StepperLinearComponent,
   ],
   imports: [

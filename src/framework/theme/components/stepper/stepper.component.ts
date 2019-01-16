@@ -77,6 +77,10 @@ export enum NbStepperOrientation {
  * Stepper component has two layout options - `vertical` & `horizontal`
  * @stacked-example(Vertical, stepper/stepper-vertical.component)
  *
+ * `disableStepNavigation` disables navigation by clicking on steps, so user can navigate only using
+ * 'nbStepperPrevious' and 'nbStepperNext' buttons.
+ * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
+ *
  * @styles
  *
  * stepper-index-size:
@@ -128,6 +132,19 @@ export class NbStepperComponent {
       this.index = index;
     }
   }
+
+  /**
+   * Disables navigation by clicking on steps. False by default
+   * @param {boolean} value
+   */
+  @Input()
+  set disableStepNavigation(value: boolean) {
+    this.disableStepNavigationValue = convertToBoolProperty(value);
+  }
+  get disableStepNavigation(): boolean {
+    return this.disableStepNavigationValue;
+  }
+  disableStepNavigationValue: boolean = false;
 
   /**
    * Selected step component
