@@ -5,7 +5,7 @@ import { takeWhile, publish, refCount, filter, tap, debounce } from 'rxjs/operat
 import { NB_WINDOW, NbLayoutScrollService } from '@nebular/theme';
 import { NgdVisibilityService } from '../../../@theme/services';
 
-const OBSERVER_OPTIONS = { rootMargin: '-30% 0px -50%' };
+const OBSERVER_OPTIONS = { rootMargin: '-100px 0px 0px' };
 
 @Directive({
   selector: '[ngdFragment]',
@@ -13,7 +13,7 @@ const OBSERVER_OPTIONS = { rootMargin: '-30% 0px -50%' };
 export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
 
   private readonly marginFromTop = 120;
-  private visible: boolean = false;
+  private isCurrentlyViewed: boolean = false;
   private isScrolling: boolean = false;
   private alive = true;
 
@@ -48,9 +48,14 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
         }
       });
 
-    this.visibilityService.observe(this.el.nativeElement, OBSERVER_OPTIONS)
+    this.visibilityService.isTopmostVisible(this.el.nativeElement, OBSERVER_OPTIONS)
       .pipe(takeWhile(() => this.alive))
-      .subscribe((entry: IntersectionObserverEntry) => this.onVisibilityChange(entry));
+      .subscribe((isTopmost: boolean) => {
+        this.isCurrentlyViewed = isTopmost;
+        if (isTopmost) {
+          this.updateUrl();
+        }
+      });
 
     this.scrollService.onScroll()
       .pipe(
@@ -64,7 +69,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
   selectFragment() {
     this.ngdFragmentClass && this.renderer.addClass(this.el.nativeElement, this.ngdFragmentClass);
 
-    const shouldScroll = !this.visible || !this.isScrolling;
+    const shouldScroll = !this.isCurrentlyViewed || !this.isScrolling;
     if (shouldScroll) {
       this.window.scrollTo(0, this.el.nativeElement.offsetTop - this.marginFromTop);
     }
@@ -74,12 +79,10 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
     this.renderer.removeClass(this.el.nativeElement, this.ngdFragmentClass);
   }
 
-  onVisibilityChange(entry: IntersectionObserverEntry) {
-    this.visible = entry.isIntersecting;
-
+  updateUrl() {
     const urlFragment = this.activatedRoute.snapshot.fragment;
     const alreadyThere = urlFragment && urlFragment.includes(this.ngdFragment);
-    if (this.visible && !alreadyThere) {
+    if (!alreadyThere) {
       this.router.navigate([], { fragment: this.ngdFragment, replaceUrl: true });
     }
   }
