@@ -90,8 +90,8 @@ export class NbDynamicOverlayHandler {
   }
 
   build() {
-    if (!this._componentType) {
-      throw Error(`NbDynamicOverlayHandler: at least 'componentType should be
+    if (!this._componentType || !this._host) {
+      throw Error(`NbDynamicOverlayHandler: at least 'componentType' and 'host' should be
       passed before building a dynamic overlay.`)
     }
     this.dynamicOverlay = this.dynamicOverlayService.create(
@@ -107,6 +107,12 @@ export class NbDynamicOverlayHandler {
   }
 
   rebuild() {
+    /**
+     * we should not throw here
+     * as we use rebuilt in lifecycle hooks
+     * which it could be called before the build
+     * so we just ignore this call
+     */
     if (!this.dynamicOverlay) {
       return;
     }
