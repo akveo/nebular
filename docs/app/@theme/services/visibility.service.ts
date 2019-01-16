@@ -105,6 +105,7 @@ export class NgdVisibilityService {
     const { visibilityChange$ } = this.visibilityObservers.get(options) || this.addVisibilityChangeObserver(options);
 
     const topmostChange$ = visibilityChange$.pipe(
+      finalize(() => this.topmostObservers.delete(options)),
       map(() => this.findTopmostElement(options)),
       distinctUntilChanged(),
       publish(),
