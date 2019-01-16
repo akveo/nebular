@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { NB_WINDOW } from '@nebular/theme';
-import { EMPTY, Observable, Observer, Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map, publish, refCount, takeUntil, tap } from 'rxjs/operators';
 
 interface ObserverWithStream {
@@ -42,7 +42,10 @@ export class NgdVisibilityService {
     return visibilityChange$.pipe(
       map((entries: IntersectionObserverEntry[]) => entries.find(entry => entry.target === target)),
       filter((entry: IntersectionObserverEntry | undefined) => !!entry),
-      finalize(() => intersectionObserver.unobserve(target)),
+      finalize(() => {
+        intersectionObserver.unobserve(target);
+        this.removeFromVisible(options, target);
+      }),
       takeUntil(targetUnobserved$),
     );
   }
@@ -82,6 +85,7 @@ export class NgdVisibilityService {
     const refCountedObserver = visibilityChange$.pipe(
       finalize(() => {
         this.visibilityStream.delete(options);
+        this.visibleElements.delete(options);
         intersectionObserver.disconnect();
       }),
       tap((entries: IntersectionObserverEntry[]) => this.updateVisibleItems(options, entries)),
@@ -97,16 +101,7 @@ export class NgdVisibilityService {
   private addTopmostChangeObserver(options: IntersectionObserverInit): Observable<Element> {
     const { visibilityChange$ } = this.visibilityStream.get(options) || this.addVisibilityChangeObserver(options);
 
-    const visibility$ = Observable.create((observer: Observer<IntersectionObserverEntry[]>) => {
-      const sub = visibilityChange$.subscribe((entries: IntersectionObserverEntry[]) => observer.next(entries));
-
-      return () => {
-        this.visibleElements.delete(options);
-        sub.unsubscribe();
-      }
-    });
-
-    const topmostChange$ = visibility$.pipe(
+    const topmostChange$ = visibilityChange$.pipe(
       map(() => this.findTopmostElement(options)),
       distinctUntilChanged(),
       publish(),
