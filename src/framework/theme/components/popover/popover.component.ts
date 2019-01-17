@@ -4,7 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ComponentFactoryResolver, Input, TemplateRef, Type, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  TemplateRef,
+  Type,
+  ViewChild,
+} from '@angular/core';
 import {
   NbComponentPortal,
   NbOverlayContainerComponent,

@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, Type } from '@angular/core';
-import { takeUntil, takeWhile } from 'rxjs/operators';
+import { filter, takeUntil, takeWhile } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import {
@@ -67,6 +67,15 @@ export class NbDynamicOverlay {
     }
   }
 
+  setContentAndContext(content: NbOverlayContent, context: Object) {
+    this.content = content;
+    this.context = context;
+
+    if (this.container) {
+      this.updateContext();
+    }
+  }
+
   setComponent(componentType: Type<NbRenderableContainer>) {
     this.componentType = componentType;
 
@@ -88,6 +97,7 @@ export class NbDynamicOverlay {
       .pipe(
         takeWhile(() => this.alive),
         takeUntil(this.positionStrategyChange$),
+        filter(() => !!this.container),
       )
       .subscribe((position: NbPosition) => patch(this.container, { position }));
 
@@ -155,9 +165,9 @@ export class NbDynamicOverlay {
 
     /**
      * Dimensions of the container may be changed after updating the content, so, we have to update
-     * container position.
+     * container position. But we need to delay the execution because of how the portalOverlay gets detached
      * */
-    this.ref.updatePosition();
+    setTimeout(() => this.ref.updatePosition());
   }
 
   protected createContainerContext(): Object {

@@ -68,7 +68,6 @@ export class NbOverlayContainerComponent {
 
   constructor(protected vcr: ViewContainerRef,
               protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
-
   }
 
   get isStringContent(): boolean {
@@ -78,6 +77,8 @@ export class NbOverlayContainerComponent {
   attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
     portal.injector = this.createChildInjector(portal.componentFactoryResolver);
     const componentRef = this.portalOutlet.attachComponentPortal(portal);
+    componentRef.changeDetectorRef.markForCheck();
+    componentRef.changeDetectorRef.detectChanges();
     this.isAttached = true;
     return componentRef;
   }
@@ -85,21 +86,23 @@ export class NbOverlayContainerComponent {
   attachTemplatePortal<C>(portal: NbTemplatePortal<C>): EmbeddedViewRef<C> {
     const templateRef = this.portalOutlet.attachTemplatePortal(portal);
     templateRef.detectChanges();
+    this.isAttached = true;
     return templateRef;
   }
 
   attachStringContent(content: string) {
     this.content = content;
-    this.isAttached = true;
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
+    this.isAttached = true;
   }
 
   detach() {
-    if (this.isAttached) {
-      this.vcr.remove();
-      this.isAttached = false;
+    if (this.portalOutlet.hasAttached()) {
+      this.portalOutlet.detach();
     }
+    this.attachStringContent(null);
+    this.isAttached = false
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {

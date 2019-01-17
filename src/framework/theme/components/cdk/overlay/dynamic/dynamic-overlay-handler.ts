@@ -126,8 +126,7 @@ export class NbDynamicOverlayHandler {
     }
 
     if (this.isContainerRerenderRequired()) {
-      this.dynamicOverlay.setContext(this._context);
-      this.dynamicOverlay.setContent(this._content);
+      this.dynamicOverlay.setContentAndContext(this._content, this._context);
     }
 
     if (this.isComponentTypeUpdateRequired()) {
