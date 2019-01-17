@@ -34,7 +34,7 @@ export class NgdVisibilityService {
     }
 
     let visibilityObserver = this.visibilityObservers.get(options);
-    if (visibilityObserver) {
+    if (!visibilityObserver) {
       visibilityObserver = this.addVisibilityChangeObserver(options);
     }
     const { intersectionObserver, visibilityChange$ } = visibilityObserver;
