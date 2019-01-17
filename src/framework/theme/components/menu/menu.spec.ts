@@ -15,8 +15,6 @@ import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
 
 
-let menuService;
-
 @Component({
   template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
 })
@@ -60,9 +58,9 @@ function createSingleMenuComponent(menuItems, menuTag = 'menu') {
   const fixture = TestBed.createComponent( SingleMenuTestComponent );
   fixture.componentInstance.items = menuItems;
   fixture.componentInstance.menuTag = menuTag;
-  menuService = fixture.componentInstance.menuPublicService;
+  const menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
-  return fixture;
+  return { fixture, menuService };
 }
 
 function createDoubleMenuComponent( firstMenuItems, firstMenuTag, secondMenuItems, secondMenuTag ) {
@@ -72,33 +70,33 @@ function createDoubleMenuComponent( firstMenuItems, firstMenuTag, secondMenuItem
   fixture.componentInstance.secondMenuItems = secondMenuItems;
   fixture.componentInstance.firstMenuTag = firstMenuTag;
   fixture.componentInstance.secondMenuTag = secondMenuTag;
-  menuService = fixture.componentInstance.menuPublicService;
+  const menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
-  return fixture;
+  return { fixture, menuService };
 }
 
 describe('NbMenuItem', () => {
 
   it('should set tag attribute for menu services', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Home' }], 'menu');
+    const { fixture } = createSingleMenuComponent([{ title: 'Home' }], 'menu');
     const nbMenuTag = fixture.componentInstance.menuComponent.tag;
     expect(nbMenuTag).toEqual('menu');
   });
 
   it('should set icon to menu item', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Home', icon: 'test-icon' }]);
+    const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'test-icon' }]);
     const iconWrapper = fixture.nativeElement.querySelector('.menu-icon');
     expect(iconWrapper.classList).toContain('test-icon');
   });
 
   it('should set title to menu item', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Test title' }]);
+    const { fixture } = createSingleMenuComponent([{ title: 'Test title' }]);
     const titleWrapper = fixture.nativeElement.querySelector('.menu-title').innerHTML;
     expect(titleWrapper).toEqual('Test title');
   });
 
   it('should set link target to menu item', () => {
-    const fixture = createSingleMenuComponent([
+    const { fixture } = createSingleMenuComponent([
       { title: 'Link with _blank target', target: '_blank' },
       { title: 'Link with _self target', target: '_self' },
       { title: 'Link with any not valid target', target: 'anyNotValid' },
@@ -110,14 +108,14 @@ describe('NbMenuItem', () => {
   });
 
   it('should have only span, without link on group element', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Group item', group: true }]);
+    const { fixture } = createSingleMenuComponent([{ title: 'Group item', group: true }]);
     const menuItem = fixture.nativeElement.querySelector('.menu-item');
     expect(menuItem.querySelector('a')).toBeNull();
     expect(menuItem.querySelector('span')).not.toBeNull();
   });
 
   it('should not render hidden element', () => {
-    const fixture = createSingleMenuComponent([
+    const { fixture } = createSingleMenuComponent([
       { title: 'Visible item' },
       { title: 'Hidden item', hidden: true },
       { title: 'Visible item' },
@@ -127,7 +125,7 @@ describe('NbMenuItem', () => {
   });
 
   it('should set child menu items', () => {
-    const fixture = createSingleMenuComponent([
+    const { fixture } = createSingleMenuComponent([
       {
         title: 'Parent item',
         expanded: true,
@@ -139,7 +137,7 @@ describe('NbMenuItem', () => {
   });
 
   it('should expand child menu items', () => {
-    const fixture = createSingleMenuComponent([
+    const { fixture } = createSingleMenuComponent([
       { title: 'Parent item', expanded: true, children: [{  title: 'Child item' }] },
     ]);
     const childList = fixture.nativeElement.querySelector('.menu-item > ul.menu-items');
@@ -147,14 +145,14 @@ describe('NbMenuItem', () => {
   });
 
   it('should set URL', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Menu Item with link', url: 'https://test.link' }]);
+    const { fixture } = createSingleMenuComponent([{ title: 'Menu Item with link', url: 'https://test.link' }]);
     const menuItem = fixture.nativeElement.querySelector('.menu-item');
     expect(menuItem.querySelector('a').getAttribute('href')).toEqual('https://test.link');
   });
 
   it('should set selected item', () => {
     const selectedItem = { title: 'Menu item selected', selected: true };
-    const fixture = createSingleMenuComponent([
+    const { fixture } = createSingleMenuComponent([
       { title: 'Menu item not selected' }, selectedItem,
     ]);
     const activeItem = fixture.nativeElement.querySelector('a.active');
@@ -166,27 +164,27 @@ describe('NbMenuItem', () => {
 describe('menu services', () => {
 
   it('should operate with menu by tag', () => {
-    const twoMenuFixture = createDoubleMenuComponent(
+    const { fixture, menuService } = createDoubleMenuComponent(
       [{ title: 'Home'}],
       'menuFirst',
       [{ title: 'Home'}],
       'menuSecond' );
     const itemToAdd = { title: 'Added item' };
-    const initialFirstMenuItemsCount = twoMenuFixture.nativeElement
+    const initialFirstMenuItemsCount = fixture.nativeElement
       .querySelector('nb-menu:first-child')
       .querySelectorAll('.menu-item')
       .length;
-    const initialSecondMenuItemsCount = twoMenuFixture.nativeElement
+    const initialSecondMenuItemsCount = fixture.nativeElement
       .querySelector('nb-menu:last-child')
       .querySelectorAll('.menu-item')
       .length;
     menuService.addItems([itemToAdd], 'menuFirst');
-    twoMenuFixture.detectChanges();
-    const afterAddFirstMenuItemsCount = twoMenuFixture.nativeElement
+    fixture.detectChanges();
+    const afterAddFirstMenuItemsCount = fixture.nativeElement
       .querySelector('nb-menu:first-child')
       .querySelectorAll('.menu-item')
       .length;
-    const afterAddSecondMenuItemsCount = twoMenuFixture.nativeElement
+    const afterAddSecondMenuItemsCount = fixture.nativeElement
       .querySelector('nb-menu:last-child')
       .querySelectorAll('.menu-item')
       .length;
@@ -195,7 +193,7 @@ describe('menu services', () => {
   });
 
   it('should add new items to DOM', () => {
-    const fixture = createSingleMenuComponent([{ title: 'Existing item' }]);
+    const { fixture, menuService } = createSingleMenuComponent([{ title: 'Existing item' }]);
     const itemToAdd = { title: 'Added item' };
     const menuListOnInit = fixture.nativeElement.querySelectorAll('li').length;
     menuService.addItems([itemToAdd], 'menu');
@@ -206,7 +204,7 @@ describe('menu services', () => {
 
   it('should get selected menu item', (done) => {
     const selectedItem = { title: 'Menu item selected', selected: true };
-    createSingleMenuComponent([{ title: 'Menu item not selected' }, selectedItem ]);
+    const { menuService } = createSingleMenuComponent([{ title: 'Menu item not selected' }, selectedItem ]);
     menuService.getSelectedItem('menu').subscribe((menuBag: NbMenuBag) => {
       expect(menuBag.item.title).toEqual(selectedItem.title);
       done();
@@ -214,7 +212,7 @@ describe('menu services', () => {
   }, 1000);
 
   it('should hide all expanded menu items', (done) => {
-    const fixture = createSingleMenuComponent([
+    const { fixture, menuService } = createSingleMenuComponent([
       {
         title: 'Menu item collapsed',
         children: [{ title: 'Menu item inner' }],
