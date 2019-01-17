@@ -199,7 +199,7 @@ describe('menu services', () => {
     menuService.addItems([itemToAdd], 'menu');
     fixture.detectChanges();
     const menuListItemAdded = fixture.nativeElement.querySelectorAll('li').length;
-    expect(menuListItemAdded).toBeGreaterThan(menuListOnInit);
+    expect(menuListItemAdded).toEqual(menuListOnInit + 1);
   });
 
   it('should get selected menu item', (done) => {
