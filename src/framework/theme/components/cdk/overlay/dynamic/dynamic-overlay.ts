@@ -43,8 +43,7 @@ export class NbDynamicOverlay {
          context: Object,
          positionStrategy: NbAdjustableConnectedPositionStrategy) {
 
-    this.setContext(context);
-    this.setContent(content);
+    this.setContentAndContext(content, context);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
 
@@ -70,7 +69,6 @@ export class NbDynamicOverlay {
   setContentAndContext(content: NbOverlayContent, context: Object) {
     this.content = content;
     this.context = context;
-
     if (this.container) {
       this.updateContext();
     }

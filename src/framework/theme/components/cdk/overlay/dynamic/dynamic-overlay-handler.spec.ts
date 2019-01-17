@@ -70,6 +70,11 @@ export class NbMockDynamicOverlay {
     this._componentType = componentType;
   }
 
+  setContentAndContext(content: NbOverlayContent, context: Object) {
+    this._content = content;
+    this._context = context;
+  }
+
   setPositionStrategy(positionStrategy: NbAdjustableConnectedPositionStrategy) {
     this._positionStrategy = positionStrategy;
   }

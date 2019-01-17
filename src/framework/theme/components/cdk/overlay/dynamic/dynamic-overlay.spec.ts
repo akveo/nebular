@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, ComponentFactoryResolver, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ScrollStrategy } from '@angular/cdk/overlay';
@@ -227,33 +227,35 @@ describe('dynamic-overlay', () => {
     expect(dynamicOverlay.getContainer()).toBe(container as any);
   });
 
-  it('should set content when shown', () => {
+  it('should set content when shown', fakeAsync(() => {
     const renderContentSpy = spyOn(instance, 'renderContent').and.callThrough();
     const updatePositionSpy = spyOn(ref, 'updatePosition').and.callThrough();
 
     dynamicOverlay.show();
     const newContent = 'new content';
     dynamicOverlay.setContent(newContent);
+    tick(); // we have setTimeout here
 
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
     expect(updatePositionSpy).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('should set context when shown', () => {
+  it('should set context when shown', fakeAsync(() => {
     const renderContentSpy = spyOn(instance, 'renderContent').and.callThrough();
     const updatePositionSpy = spyOn(ref, 'updatePosition').and.callThrough();
 
     dynamicOverlay.show();
     const newContext = { some: 'thing' };
     dynamicOverlay.setContext(newContext);
+    tick(); // we have setTimeout here
 
     expect(instance.context).toBe(newContext);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
     expect(updatePositionSpy).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('should set context & content when shown', () => {
+  it('should set context & content when shown', fakeAsync(() => {
     const renderContentSpy = spyOn(instance, 'renderContent').and.callThrough();
     const updatePositionSpy = spyOn(ref, 'updatePosition').and.callThrough();
 
@@ -261,13 +263,15 @@ describe('dynamic-overlay', () => {
     const newContext = { some: 'thing' };
     const newContent = 'new content';
     dynamicOverlay.setContent(newContent);
+    tick(); // we have setTimeout here
     dynamicOverlay.setContext(newContext);
+    tick(); // we have setTimeout here
 
     expect(instance.context).toBe(newContext);
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(3);
     expect(updatePositionSpy).toHaveBeenCalledTimes(2);
-  });
+  }));
 
   it('should set component', () => {
     const detachSpy = spyOn(ref, 'detach').and.callThrough();
