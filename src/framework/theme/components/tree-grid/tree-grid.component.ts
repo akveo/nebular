@@ -9,34 +9,24 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, Inject,
+  ElementRef,
+  Inject,
   Input,
   IterableDiffers,
 } from '@angular/core';
-import { CdkTable } from '@angular/cdk/table';
+import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
 import { Directionality } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
-import { ReplaySubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridNode } from './data-source/tree-grid-data-source';
 
-// TODO do we need to move search in the separate component and make it configurable?
 @Component({
   selector: 'nb-tree-grid, table[nb-tree-grid]',
-  template: `
-    <input nbInput (input)="searchQuery.next($event.target.value)">
-    <table>
-      <ng-container headerRowOutlet></ng-container>
-      <ng-container rowOutlet></ng-container>
-      <ng-container footerRowOutlet></ng-container>
-    </table>
-  `,
+  template: CDK_TABLE_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTreeGridComponent<T> extends CdkTable<T> {
-  readonly searchQuery = new ReplaySubject();
 
   // TODO get rid of this
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
@@ -60,11 +50,5 @@ export class NbTreeGridComponent<T> extends CdkTable<T> {
       this._source = this.dataSourceBuilder.create(data);
     }
     this.dataSource = this._source;
-
-    this.searchQuery
-      .pipe(
-        debounceTime(300),
-      )
-      .subscribe((searchQuery: string) => this._source.filter(searchQuery));
   }
 }

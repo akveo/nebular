@@ -45,7 +45,11 @@ export interface NbSortable {
   sort(sortRequest: NbSortRequest);
 }
 
-export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable {
+export interface NbFilterable {
+  filter(filterRequest: string);
+}
+
+export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable, NbFilterable {
   /** Stream that emits when a new data array is set on the data source. */
   private data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
 

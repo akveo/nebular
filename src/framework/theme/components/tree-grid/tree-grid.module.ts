@@ -30,6 +30,7 @@ import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source
 import { NbTreeGridSortService } from './data-source/tree-grid-sort.service';
 import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service';
 import { NbTreeGridService } from './data-source/tree-grid.service';
+import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
 
 const COMPONENTS = [
   // Tree Grid
@@ -54,9 +55,13 @@ const COMPONENTS = [
   NbRowComponent,
   NbFooterRowComponent,
 
-  // Sort directive
+  // Sort directives
   NbSortDirective,
   NbSortHeaderDirective,
+
+  // Filter directives
+  NbFilterDirective,
+  NbFilterInputDirective,
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
-<nb-tree-grid [nbSort]="dataSource" [source]="dataSource">
+<input nbInput [nbFilterInput]="dataSource">
 
+<table nb-tree-grid [nbSort]="dataSource" [source]="dataSource">
   <tr nb-header-row *nbHeaderRowDef="columnsToDisplay"></tr>
 
   <tr nb-row *nbRowDef="let element; columns: columnsToDisplay"
@@ -16,4 +17,4 @@
     <td nb-cell *nbCellDef="let element"> {{element[ column ]}} </td>
   </ng-container>
 
-</nb-tree-grid>
+</table>
