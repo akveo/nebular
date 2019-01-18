@@ -31,66 +31,86 @@ export type NbTreeGridDataSourceInput<T> =
   Observable<NbTreeGridNode<T>[]> |
   NbTreeGridNode<T>[];
 
-export class NbTreeGridDataSource<T> extends DataSource<T> {
+export interface NbSortRequest {
+  column: string;
+  direction: 'asc' | 'desc';
+}
+
+export interface NbSortable {
+  sort(sortRequest: NbSortRequest);
+}
+
+export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable {
   /** Stream that emits when a new data array is set on the data source. */
-  private readonly _data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
+  private readonly data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
 
   /** Stream emitting render data to the table (depends on ordered data changes). */
-  private readonly _renderData = new BehaviorSubject<T[]>([]);
+  private readonly renderData = new BehaviorSubject<T[]>([]);
 
-  private readonly _searchQuery = new BehaviorSubject<string>('');
+  private readonly searchQuery = new BehaviorSubject<string>('');
+
+  private readonly sortRequest = new BehaviorSubject<NbSortRequest>(null);
 
   constructor(data: NbTreeGridNode<T>[]) {
     super();
     const presentationData: NbTreeGridPresentationNode<T>[] = this.convertToPresentationNodes(data);
-    this._data = new BehaviorSubject(presentationData);
+    this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
   }
 
   expand(row: T) {
     const node: NbTreeGridPresentationNode<T> = this.find(row);
     node.expanded = true;
-    this._data.next(this._data.value);
+    this.data.next(this.data.value);
   }
 
   collapse(row: T) {
     const node: NbTreeGridPresentationNode<T> = this.find(row);
     node.expanded = false;
-    this._data.next(this._data.value);
+    this.data.next(this.data.value);
   }
 
   toggle(row: T) {
     const node: NbTreeGridPresentationNode<T> = this.find(row);
     node.expanded = !node.expanded;
-    this._data.next(this._data.value);
+    this.data.next(this.data.value);
   }
 
   filter(searchQuery: string) {
-    this._searchQuery.next(searchQuery);
+    this.searchQuery.next(searchQuery);
   }
 
   connect(collectionViewer: CollectionViewer): Observable<T[] | ReadonlyArray<T>> {
-    return this._renderData;
+    return this.renderData;
   }
 
   disconnect(collectionViewer: CollectionViewer) {
   }
 
+  sort(sortRequest: NbSortRequest) {
+    this.sortRequest.next(sortRequest);
+  }
+
   protected updateChangeSubscription() {
-    const dataStream = this._data.pipe(
+    const dataStream = this.data.pipe(
       map((nodes: NbTreeGridPresentationNode<T>[]) => this.copy(nodes)),
     );
 
-    const filteredData = combineLatest(dataStream, this._searchQuery)
+    const filteredData = combineLatest(dataStream, this.searchQuery)
       .pipe(
         map(([data]) => this.filterData(data)),
       );
 
-    filteredData
+    const sortedData = combineLatest(filteredData, this.sortRequest)
+      .pipe(
+        map(([data]) => this.sortData(data)),
+      );
+
+    sortedData
       .pipe(
         map((data: NbTreeGridPresentationNode<T>[]) => this.convertToData(data)),
       )
-      .subscribe((data: T[]) => this._renderData.next(data));
+      .subscribe((data: T[]) => this.renderData.next(data));
   }
 
   private convertToPresentationNodes(nodes: NbTreeGridNode<T>[]): NbTreeGridPresentationNode<T>[] {
@@ -118,7 +138,7 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
   }
 
   private find(row: T): NbTreeGridPresentationNode<T> {
-    const toCheck: NbTreeGridPresentationNode<T>[] = [...this._data.value];
+    const toCheck: NbTreeGridPresentationNode<T>[] = [...this.data.value];
 
     for (const node of toCheck) {
       if (node.node.data === row) {
@@ -130,7 +150,7 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
   }
 
   private filterData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
-    if (!this._searchQuery.value) {
+    if (!this.searchQuery.value) {
       return data;
     }
 
@@ -144,7 +164,7 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
       if (filteredChildren && filteredChildren.length) {
         node.expanded = true;
         filtered.push(node);
-      } else if (this.filterPredicate(node.node.data, this._searchQuery.value)) {
+      } else if (this.filterPredicate(node.node.data, this.searchQuery.value)) {
         filtered.push(node);
       }
 
@@ -152,6 +172,7 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
     }, []);
   }
 
+  // TODO has to be configurable
   private filterPredicate(data: T, searchQuery: string): boolean {
     const preparedQuery = searchQuery.trim().toLocaleLowerCase();
     for (const val of Object.values(data)) {
@@ -162,6 +183,35 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
     }
 
     return false;
+  }
+
+  private sortData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    if (!this.sortRequest.value) {
+      return data;
+    }
+
+    // TODO provide comparator somehow
+    const sorted = data.sort((na, nb) => {
+      const key = this.sortRequest.value.column;
+      const dir = this.sortRequest.value.direction;
+      const a = na.node.data[key];
+      const b = nb.node.data[key];
+
+      let res = 0;
+
+      if (a > b) {
+        res = 1
+      }
+      if (a < b) {
+        res = -1
+      }
+
+      return dir === 'asc' ? res : res * -1;
+    });
+    for (const node of data) {
+      node.children = this.sortData(node.children);
+    }
+    return sorted;
   }
 
   private copy(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {

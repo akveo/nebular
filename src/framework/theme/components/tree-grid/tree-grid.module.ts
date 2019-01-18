@@ -25,6 +25,7 @@ import {
   NbRowComponent,
   NbRowDefDirective,
 } from './tree-grid-row';
+import { NbSortDirective, NbSortHeaderDirective } from './tree-grid-sort';
 
 const COMPONENTS = [
   // Tree Grid
@@ -44,10 +45,14 @@ const COMPONENTS = [
   NbCellDirective,
   NbFooterCellDirective,
 
-  // Row directions
+  // Row directives
   NbHeaderRowComponent,
   NbRowComponent,
   NbFooterRowComponent,
+
+  // Sort directive
+  NbSortDirective,
+  NbSortHeaderDirective,
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-<nb-tree-grid nb-tree-grid [source]="dataSource">
+<nb-tree-grid nb-tree-grid [nbSort]="dataSource" [source]="dataSource">
 
   <tr nb-header-row *nbHeaderRowDef="columnsToDisplay"></tr>
 
@@ -7,14 +7,12 @@
   </tr>
 
   <ng-container nbColumnDef="name">
-    <th nb-header-cell *nbHeaderCellDef> Name</th>
-    <td nb-cell *nbCellDef="let element">
-      {{ element.name }}
-    </td>
+    <th nb-header-cell nbSortHeader="asc" *nbHeaderCellDef> Name</th>
+    <td nb-cell *nbCellDef="let element"> {{ element.name }} </td>
   </ng-container>
 
   <ng-container nbColumnDef="{{column}}" *ngFor="let column of cols">
-    <th nb-header-cell *nbHeaderCellDef> {{column}} </th>
+    <th nb-header-cell nbSortHeader="desc" *nbHeaderCellDef> {{column}} </th>
     <td nb-cell *nbCellDef="let element"> {{element[ column ]}} </td>
   </ng-container>
 
