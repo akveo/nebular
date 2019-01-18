@@ -31,11 +31,6 @@ export class NbTreeGridPresentationNode<T> {
   }
 }
 
-export type NbTreeGridDataSourceInput<T> =
-  NbTreeGridDataSource<NbTreeGridNode<T>> |
-  Observable<NbTreeGridNode<T>[]> |
-  NbTreeGridNode<T>[];
-
 export interface NbSortRequest {
   column: string;
   direction: 'asc' | 'desc';
@@ -103,13 +98,12 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
   }
 
   protected updateChangeSubscription() {
-    const dataStream = this.data.pipe(
-      map((nodes: NbTreeGridPresentationNode<T>[]) => this.copy(nodes)),
-    );
+    const dataStream = this.data;
 
     const filteredData = combineLatest(dataStream, this.searchQuery)
       .pipe(
-        map(([data]) => this.filterData(data)),
+        map(([data]) => this.copy(data)),
+        map(data => this.filterData(data)),
       );
 
     const sortedData = combineLatest(filteredData, this.sortRequest)
@@ -153,7 +147,7 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
       const presentationNode = new NbTreeGridPresentationNode(node.node);
       presentationNode.expanded = node.expanded;
 
-      if (node.children) {
+      if (node.hasChildren()) {
         presentationNode.children = this.copy(node.children);
       }
 
