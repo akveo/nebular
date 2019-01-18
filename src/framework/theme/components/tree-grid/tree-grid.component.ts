@@ -5,16 +5,27 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
+import { CdkTable } from '@angular/cdk/table';
 
 import { NbTreeGridDataSource, NbTreeGridNode } from './tree-grid-data-source';
+import { ReplaySubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-tree-grid, table[nb-tree-grid]',
-  template: CDK_TABLE_TEMPLATE,
+  template: `
+    <input nbInput (input)="searchQuery.next($event.target.value)">
+    <table>
+      <ng-container headerRowOutlet></ng-container>
+      <ng-container rowOutlet></ng-container>
+      <ng-container footerRowOutlet></ng-container>
+    </table>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTreeGridComponent<T> extends CdkTable<T> {
+  readonly searchQuery = new ReplaySubject();
+
   private _source: NbTreeGridDataSource<T>;
 
   @Input() set source(source: NbTreeGridNode<T>[]) {
@@ -24,5 +35,11 @@ export class NbTreeGridComponent<T> extends CdkTable<T> {
       this._source = new NbTreeGridDataSource<T>(source);
     }
     this.dataSource = this._source;
+
+    this.searchQuery
+      .pipe(
+        debounceTime(300),
+      )
+      .subscribe((searchQuery: string) => this._source.filter(searchQuery));
   }
 }

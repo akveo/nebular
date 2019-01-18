@@ -6,7 +6,7 @@
 
 import { DataSource } from '@angular/cdk/table';
 import { CollectionViewer } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface NbTreeGridNode<T> {
@@ -38,6 +38,8 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
   /** Stream emitting render data to the table (depends on ordered data changes). */
   private readonly _renderData = new BehaviorSubject<T[]>([]);
 
+  private readonly _searchQuery = new BehaviorSubject<string>('');
+
   constructor(data: NbTreeGridNode<T>[]) {
     super();
     const presentationData: NbTreeGridPresentationNode<T>[] = this.convertToPresentationNodes(data);
@@ -63,6 +65,10 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
     this._data.next(this._data.value);
   }
 
+  filter(searchQuery: string) {
+    this._searchQuery.next(searchQuery);
+  }
+
   connect(collectionViewer: CollectionViewer): Observable<T[] | ReadonlyArray<T>> {
     return this._renderData;
   }
@@ -71,7 +77,16 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
   }
 
   protected updateChangeSubscription() {
-    this._data
+    const dataStream = this._data.pipe(
+      map((nodes: NbTreeGridPresentationNode<T>[]) => this.copy(nodes)),
+    );
+
+    const filteredData = combineLatest(dataStream, this._searchQuery)
+      .pipe(
+        map(([data]) => this.filterData(data)),
+      );
+
+    filteredData
       .pipe(
         map((data: NbTreeGridPresentationNode<T>[]) => this.convertToData(data)),
       )
@@ -112,5 +127,53 @@ export class NbTreeGridDataSource<T> extends DataSource<T> {
 
       toCheck.push(...node.children);
     }
+  }
+
+  private filterData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    if (!this._searchQuery.value) {
+      return data;
+    }
+
+    return data.reduce((filtered: NbTreeGridPresentationNode<T>[], node: NbTreeGridPresentationNode<T>) => {
+      const filteredChildren = this.filterData(node.children);
+
+      node.children = filteredChildren;
+
+      node.expanded = false;
+
+      if (filteredChildren && filteredChildren.length) {
+        node.expanded = true;
+        filtered.push(node);
+      } else if (this.filterPredicate(node.node.data, this._searchQuery.value)) {
+        filtered.push(node);
+      }
+
+      return filtered;
+    }, []);
+  }
+
+  private filterPredicate(data: T, searchQuery: string): boolean {
+    const preparedQuery = searchQuery.trim().toLocaleLowerCase();
+    for (const val of Object.values(data)) {
+      const preparedVal = `${val}`.trim().toLocaleLowerCase();
+      if (preparedVal.includes(preparedQuery)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private copy(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    return nodes.map((node: NbTreeGridPresentationNode<T>) => {
+      const presentationNode = new NbTreeGridPresentationNode(node.node);
+      presentationNode.expanded = node.expanded;
+
+      if (node.children) {
+        presentationNode.children = this.copy(node.children);
+      }
+
+      return presentationNode;
+    });
   }
 }

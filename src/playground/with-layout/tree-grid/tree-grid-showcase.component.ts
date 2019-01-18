@@ -30,23 +30,42 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', collapsed: true },
 ];
 
-const data = ELEMENT_DATA.map((element: PeriodicElement) => {
-  return {
-    data: { ...element },
-    children: ELEMENT_DATA.map((el: PeriodicElement) => {
-      return {
-        data: { ...el },
-        padding: 16,
-        children: ELEMENT_DATA.map((el1: PeriodicElement) => {
-          return {
-            data: { ...el1 },
-            padding: 32,
-          }
-        }),
-      }
-    }),
-  };
-});
+const data = [
+  {
+    data: {
+      position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', collapsed: true,
+    },
+    children: [
+      {
+        data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', collapsed: true },
+      },
+      {
+        data: { position: 5, name: 'Boron', weight: 10.811, symbol: 'B', collapsed: true },
+        children: [
+          {
+            data: { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', collapsed: true },
+          },
+        ],
+      },
+      {
+        data: { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', collapsed: true },
+      },
+    ],
+  },
+  {
+    data: { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', collapsed: true },
+    children: [
+      { data: { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', collapsed: true } },
+      { data: { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', collapsed: true } },
+    ],
+  },
+  {
+    data: { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', collapsed: true },
+    children: [
+      { data: { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', collapsed: true } },
+    ],
+  },
+];
 
 
 @Component({

@@ -1,4 +1,4 @@
-<table nb-tree-grid [source]="dataSource">
+<nb-tree-grid nb-tree-grid [source]="dataSource">
 
   <tr nb-header-row *nbHeaderRowDef="columnsToDisplay"></tr>
 
@@ -9,9 +9,7 @@
   <ng-container nbColumnDef="name">
     <th nb-header-cell *nbHeaderCellDef> Name</th>
     <td nb-cell *nbCellDef="let element">
-      <div [style.padding-left.px]="element.padding">
-        {{ element.name }}
-      </div>
+      {{ element.name }}
     </td>
   </ng-container>
 
@@ -20,4 +18,4 @@
     <td nb-cell *nbCellDef="let element"> {{element[ column ]}} </td>
   </ng-container>
 
-</table>
+</nb-tree-grid>
