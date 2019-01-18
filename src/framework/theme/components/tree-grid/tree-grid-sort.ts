@@ -4,15 +4,26 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, HostListener, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, Inject, Input } from '@angular/core';
 
-import { NbSortable, NbSortRequest } from './data-source/tree-grid-data-source';
 import { NB_SORT_HEADER_COLUMN_DEF } from './tree-grid-cell';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
 interface NbSortHeaderColumnDef {
   name: string;
 }
+
+export interface NbSortRequest {
+  column: string;
+  direction: NbSortDirection;
+}
+
+export interface NbSortable {
+  sort(sortRequest: NbSortRequest);
+}
+
+export type NbSortDirection = 'asc' | 'desc' | '';
+const sortDirections: NbSortDirection[] = ['asc', 'desc', ''];
 
 @Directive({ selector: '[nbSort]' })
 export class NbSortDirective {
@@ -23,21 +34,41 @@ export class NbSortDirective {
   }
 }
 
-@Directive({ selector: '[nbSortHeader]' })
+@Component({
+  selector: '[nbSortHeader]',
+  template: `
+    <button type="button" (click)="sortData()">
+      <ng-content></ng-content>
+      <span *ngIf="direction === 'asc'">⬆</span>
+      <span *ngIf="direction === 'desc'">⬇</span>
+    </button>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
 export class NbSortHeaderDirective {
 
-  @Input('nbSortHeader') direction: 'asc' | 'desc' = 'asc';
+  @Input('nbSortHeader') direction: NbSortDirection = '';
 
   constructor(private sort: NbSortDirective,
               @Inject(NB_SORT_HEADER_COLUMN_DEF) private columnDef: NbSortHeaderColumnDef) {
   }
 
-  @HostListener('click')
   sortData() {
-    this.sort.sort({
-      column: this.columnDef.name,
-      direction: this.direction,
-    });
+    const sortRequest = this.createSortRequest();
+    this.sort.sort(sortRequest);
+  }
+
+  private createSortRequest(): NbSortRequest {
+    this.direction = this.getNextDirection();
+    return { direction: this.direction, column: this.columnDef.name };
+  }
+
+  private getNextDirection(): NbSortDirection {
+    const sortDirectionCycle = sortDirections;
+    let nextDirectionIndex = sortDirectionCycle.indexOf(this.direction) + 1;
+    if (nextDirectionIndex >= sortDirectionCycle.length) {
+      nextDirectionIndex = 0;
+    }
+    return sortDirectionCycle[nextDirectionIndex];
   }
 }
-

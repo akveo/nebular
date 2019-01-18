@@ -14,32 +14,11 @@ import { NbTreeGridSortService } from './tree-grid-sort.service';
 import { NbTreeGridFilterService } from './tree-grid-filter.service';
 import { NbTreeGridService } from './tree-grid.service';
 import { NbTreeGridDataService } from './tree-grid-data.service';
-
-export interface NbTreeGridNode<T> {
-  data: T,
-  children?: NbTreeGridNode<T>[];
-}
-
-export class NbTreeGridPresentationNode<T> {
-  public expanded: boolean = false;
-  public children: NbTreeGridPresentationNode<T>[] = [];
-
-  constructor(readonly node: NbTreeGridNode<T>) {
-  }
-
-  hasChildren(): boolean {
-    return !!this.children && !!this.children.length;
-  }
-}
-
-export interface NbSortRequest {
-  column: string;
-  direction: 'asc' | 'desc';
-}
-
-export interface NbSortable {
-  sort(sortRequest: NbSortRequest);
-}
+import { NbSortable, NbSortRequest } from '../tree-grid-sort';
+import {
+  NbTreeGridNode,
+  NbTreeGridPresentationNode,
+} from './tree-grid.model';
 
 export interface NbFilterable {
   filter(filterRequest: string);

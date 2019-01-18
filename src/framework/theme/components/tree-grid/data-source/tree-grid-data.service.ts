@@ -5,7 +5,7 @@
  */
 import { Injectable } from '@angular/core';
 
-import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid-data-source';
+import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 
 @Injectable()
 export class NbTreeGridDataService<T> {

@@ -19,7 +19,8 @@ import { Directionality } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
 
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridNode } from './data-source/tree-grid-data-source';
+import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
+import { NbTreeGridNode } from './data-source/tree-grid.model';
 
 @Component({
   selector: 'nb-tree-grid, table[nb-tree-grid]',

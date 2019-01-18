@@ -7,7 +7,8 @@
 
 import { Injectable } from '@angular/core';
 
-import { NbSortRequest, NbTreeGridPresentationNode } from './tree-grid-data-source';
+import { NbTreeGridPresentationNode } from './tree-grid.model';
+import { NbSortRequest } from '../tree-grid-sort';
 
 @Injectable()
 export class NbTreeGridSortService<T> {

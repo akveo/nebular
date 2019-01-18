@@ -32,6 +32,7 @@ import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service'
 import { NbTreeGridService } from './data-source/tree-grid.service';
 import { NbTreeGridDataService } from './data-source/tree-grid-data.service';
 import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
+import { CommonModule } from '@angular/common';
 
 const COMPONENTS = [
   // Tree Grid
@@ -66,7 +67,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CdkTableModule],
+  imports: [CommonModule, CdkTableModule],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
   providers: [
