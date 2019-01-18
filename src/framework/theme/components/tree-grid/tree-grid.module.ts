@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { NbTreeGridComponent } from './tree-grid.component';
 import {
@@ -24,10 +25,9 @@ import {
   NbRowComponent,
   NbRowDefDirective,
 } from './tree-grid-row';
-import { CdkTableModule } from '@angular/cdk/table';
 
 const COMPONENTS = [
-  // Table
+  // Tree Grid
   NbTreeGridComponent,
 
   // Template defs

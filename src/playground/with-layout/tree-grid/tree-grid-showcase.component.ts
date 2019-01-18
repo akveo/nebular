@@ -5,8 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { BehaviorSubject } from 'rxjs';
+import { NbTreeGridDataSource } from '@nebular/theme/components/tree-grid/tree-grid-data-source';
 
 export interface PeriodicElement {
   name: string;
@@ -33,14 +32,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 const data = ELEMENT_DATA.map((element: PeriodicElement) => {
   return {
-    ...element,
-    childrenElements: ELEMENT_DATA.map((el: PeriodicElement) => {
+    data: { ...element },
+    children: ELEMENT_DATA.map((el: PeriodicElement) => {
       return {
-        ...el,
+        data: { ...el },
         padding: 16,
-        childrenElements: ELEMENT_DATA.map((el1: PeriodicElement) => {
+        children: ELEMENT_DATA.map((el1: PeriodicElement) => {
           return {
-            ...el1,
+            data: { ...el1 },
             padding: 32,
           }
         }),
@@ -62,43 +61,13 @@ const data = ELEMENT_DATA.map((element: PeriodicElement) => {
       background-color: red;
     }
   `],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
 export class TreeGridShowcaseComponent {
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   cols = ['weight', 'symbol', 'position'];
-  expandedElement: PeriodicElement | null;
-  dataSource = new BehaviorSubject(data);
+  dataSource = new NbTreeGridDataSource(data);
 
   toggle(element: PeriodicElement) {
-    if (!element.childrenElements || !element.childrenElements.length) {
-      return;
-    }
-
-    if (element.collapsed) {
-      this.expand(element);
-    } else {
-      this.collapse(element);
-    }
-  }
-
-  private expand(element: PeriodicElement) {
-    element.collapsed = false;
-    const expandedIndex = data.findIndex((e: PeriodicElement) => e === element);
-    data.splice(expandedIndex + 1, 0, ...element.childrenElements as any);
-    this.dataSource.next(data);
-  }
-
-  private collapse(element: PeriodicElement) {
-    element.collapsed = true;
-    const expandedIndex = data.findIndex((e: PeriodicElement) => e === element);
-    data.splice(expandedIndex + 1, element.childrenElements.length);
-    this.dataSource.next(data);
+    this.dataSource.toggle(element);
   }
 }
