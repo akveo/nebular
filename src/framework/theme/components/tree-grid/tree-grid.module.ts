@@ -30,6 +30,7 @@ import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source
 import { NbTreeGridSortService } from './data-source/tree-grid-sort.service';
 import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service';
 import { NbTreeGridService } from './data-source/tree-grid.service';
+import { NbTreeGridDataService } from './data-source/tree-grid-data.service';
 import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
 
 const COMPONENTS = [
@@ -72,6 +73,7 @@ const COMPONENTS = [
     NbTreeGridSortService,
     NbTreeGridFilterService,
     NbTreeGridService,
+    NbTreeGridDataService,
     NbTreeGridDataSourceBuilder,
   ],
 })
