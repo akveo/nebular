@@ -11,6 +11,7 @@ import { NbTreeGridDataSource, NbTreeGridNode } from './tree-grid-data-source';
 import { ReplaySubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+// TODO do we need to move search in the separate component and make it configurable?
 @Component({
   selector: 'nb-tree-grid, table[nb-tree-grid]',
   template: `
