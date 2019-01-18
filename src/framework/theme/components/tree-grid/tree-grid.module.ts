@@ -26,6 +26,10 @@ import {
   NbRowDefDirective,
 } from './tree-grid-row';
 import { NbSortDirective, NbSortHeaderDirective } from './tree-grid-sort';
+import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
+import { NbTreeGridSortService } from './data-source/tree-grid-sort.service';
+import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service';
+import { NbTreeGridService } from './data-source/tree-grid.service';
 
 const COMPONENTS = [
   // Tree Grid
@@ -59,6 +63,12 @@ const COMPONENTS = [
   imports: [CdkTableModule],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
+  providers: [
+    NbTreeGridSortService,
+    NbTreeGridFilterService,
+    NbTreeGridService,
+    NbTreeGridDataSourceBuilder,
+  ],
 })
 export class NbTreeGridModule {
 }

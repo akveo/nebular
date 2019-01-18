@@ -4,10 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { Injectable } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { CollectionViewer } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { NbTreeGridSortService } from './tree-grid-sort.service';
+import { NbTreeGridFilterService } from './tree-grid-filter.service';
+import { NbTreeGridService } from './tree-grid.service';
 
 export interface NbTreeGridNode<T> {
   data: T,
@@ -42,7 +47,7 @@ export interface NbSortable {
 
 export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable {
   /** Stream that emits when a new data array is set on the data source. */
-  private readonly data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
+  private data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
 
   /** Stream emitting render data to the table (depends on ordered data changes). */
   private readonly renderData = new BehaviorSubject<T[]>([]);
@@ -51,33 +56,16 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
 
   private readonly sortRequest = new BehaviorSubject<NbSortRequest>(null);
 
-  constructor(data: NbTreeGridNode<T>[]) {
+  constructor(private sortService: NbTreeGridSortService<T>,
+              private filterService: NbTreeGridFilterService<T>,
+              private treeGridService: NbTreeGridService<T>) {
     super();
+  }
+
+  setData(data: NbTreeGridNode<T>[]) {
     const presentationData: NbTreeGridPresentationNode<T>[] = this.convertToPresentationNodes(data);
     this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
-  }
-
-  expand(row: T) {
-    const node: NbTreeGridPresentationNode<T> = this.find(row);
-    node.expanded = true;
-    this.data.next(this.data.value);
-  }
-
-  collapse(row: T) {
-    const node: NbTreeGridPresentationNode<T> = this.find(row);
-    node.expanded = false;
-    this.data.next(this.data.value);
-  }
-
-  toggle(row: T) {
-    const node: NbTreeGridPresentationNode<T> = this.find(row);
-    node.expanded = !node.expanded;
-    this.data.next(this.data.value);
-  }
-
-  filter(searchQuery: string) {
-    this.searchQuery.next(searchQuery);
   }
 
   connect(collectionViewer: CollectionViewer): Observable<T[] | ReadonlyArray<T>> {
@@ -87,8 +75,27 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
   disconnect(collectionViewer: CollectionViewer) {
   }
 
+  expand(row: T) {
+    this.treeGridService.expand(this.data.value, row);
+    this.data.next(this.data.value);
+  }
+
+  collapse(row: T) {
+    this.treeGridService.collapse(this.data.value, row);
+    this.data.next(this.data.value);
+  }
+
+  toggle(row: T) {
+    this.treeGridService.toggle(this.data.value, row);
+    this.data.next(this.data.value);
+  }
+
   sort(sortRequest: NbSortRequest) {
     this.sortRequest.next(sortRequest);
+  }
+
+  filter(searchQuery: string) {
+    this.searchQuery.next(searchQuery);
   }
 
   protected updateChangeSubscription() {
@@ -137,83 +144,6 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
     }, []);
   }
 
-  private find(row: T): NbTreeGridPresentationNode<T> {
-    const toCheck: NbTreeGridPresentationNode<T>[] = [...this.data.value];
-
-    for (const node of toCheck) {
-      if (node.node.data === row) {
-        return node;
-      }
-
-      toCheck.push(...node.children);
-    }
-  }
-
-  private filterData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
-    if (!this.searchQuery.value) {
-      return data;
-    }
-
-    return data.reduce((filtered: NbTreeGridPresentationNode<T>[], node: NbTreeGridPresentationNode<T>) => {
-      const filteredChildren = this.filterData(node.children);
-
-      node.children = filteredChildren;
-
-      node.expanded = false;
-
-      if (filteredChildren && filteredChildren.length) {
-        node.expanded = true;
-        filtered.push(node);
-      } else if (this.filterPredicate(node.node.data, this.searchQuery.value)) {
-        filtered.push(node);
-      }
-
-      return filtered;
-    }, []);
-  }
-
-  // TODO has to be configurable
-  private filterPredicate(data: T, searchQuery: string): boolean {
-    const preparedQuery = searchQuery.trim().toLocaleLowerCase();
-    for (const val of Object.values(data)) {
-      const preparedVal = `${val}`.trim().toLocaleLowerCase();
-      if (preparedVal.includes(preparedQuery)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private sortData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
-    if (!this.sortRequest.value) {
-      return data;
-    }
-
-    // TODO provide comparator somehow
-    const sorted = data.sort((na, nb) => {
-      const key = this.sortRequest.value.column;
-      const dir = this.sortRequest.value.direction;
-      const a = na.node.data[key];
-      const b = nb.node.data[key];
-
-      let res = 0;
-
-      if (a > b) {
-        res = 1
-      }
-      if (a < b) {
-        res = -1
-      }
-
-      return dir === 'asc' ? res : res * -1;
-    });
-    for (const node of data) {
-      node.children = this.sortData(node.children);
-    }
-    return sorted;
-  }
-
   private copy(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
     return nodes.map((node: NbTreeGridPresentationNode<T>) => {
       const presentationNode = new NbTreeGridPresentationNode(node.node);
@@ -225,5 +155,27 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
 
       return presentationNode;
     });
+  }
+
+  private filterData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    return this.filterService.filter(this.searchQuery.value, data);
+  }
+
+  private sortData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    return this.sortService.sort(this.sortRequest.value, data);
+  }
+}
+
+@Injectable()
+export class NbTreeGridDataSourceBuilder<T> {
+  constructor(private filterService: NbTreeGridFilterService<T>,
+              private sortService: NbTreeGridSortService<T>,
+              private treeGridService: NbTreeGridService<T>) {
+  }
+
+  create(data: NbTreeGridNode<T>[]): NbTreeGridDataSource<T> {
+    const dataSource = new NbTreeGridDataSource<T>(this.sortService, this.filterService, this.treeGridService);
+    dataSource.setData(data);
+    return dataSource;
   }
 }

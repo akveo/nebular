@@ -6,7 +6,7 @@
 
 import { Directive, HostListener, Inject, Input } from '@angular/core';
 
-import { NbSortable, NbSortRequest } from './tree-grid-data-source';
+import { NbSortable, NbSortRequest } from './data-source/tree-grid-data-source';
 import { NB_SORT_HEADER_COLUMN_DEF } from './tree-grid-cell';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
