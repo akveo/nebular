@@ -22,8 +22,8 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import {of as observableOf, Subject} from 'rxjs';
-import {filter, delay, takeWhile, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {of as observableOf} from 'rxjs';
+import {filter, delay, takeWhile} from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
