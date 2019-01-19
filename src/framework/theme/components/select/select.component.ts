@@ -39,7 +39,7 @@ import {
   NbScrollStrategy,
   NbTrigger,
   NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
+  NbTriggerStrategyBuilderService,
 } from '../cdk';
 import { NbOptionComponent } from './option.component';
 import { NbButtonComponent } from '../button/button.component';
@@ -281,6 +281,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef<HTMLElement>,
               protected positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected cd: ChangeDetectorRef) {
   }
 
@@ -467,8 +468,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
+    return this.triggerStrategyBuilder
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
       .container(() => this.getContainer())

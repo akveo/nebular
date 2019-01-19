@@ -22,7 +22,7 @@
       .route-tab {
         background: nb-theme(route-tabs-header-bg);
         min-width: nb-theme(route-tabs-header-min-width);
-
+        cursor: pointer;
         a {
           padding: nb-theme(route-tabs-padding);
           color: nb-theme(route-tabs-fg);
@@ -54,6 +54,20 @@
           @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
             a span {
               display: none;
+            }
+          }
+        }
+
+
+        &.disabled {
+          pointer-events: none;
+          cursor: default;
+          a {
+            color: nb-theme(route-tabs-fg-disabled);
+            cursor: default;
+            pointer-events: none;
+            &:hover {
+              color: nb-theme(route-tabs-fg-disabled);
             }
           }
         }

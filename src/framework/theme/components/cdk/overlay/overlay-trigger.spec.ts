@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ComponentRef } from '@angular/core';
 
-import { NbTrigger, NbTriggerStrategyBuilder } from './overlay-trigger';
+import { NbTrigger, NbTriggerStrategyBuilderService } from './overlay-trigger';
 import { NB_DOCUMENT } from '../../../theme.options';
 import createSpy = jasmine.createSpy;
 
@@ -25,22 +25,27 @@ const tab = (el) => el.dispatchEvent(new KeyboardEvent('keydown', <any> {
 }));
 
 describe('click-trigger-strategy', () => {
-  let triggerStrategyBuilder: NbTriggerStrategyBuilder;
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
 
 
   beforeEach(() => {
-    const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
     document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
     host = createElement();
     container = createElement();
-    triggerStrategyBuilder = new NbTriggerStrategyBuilder()
-      .document(document)
+    triggerStrategyBuilder
       .trigger(NbTrigger.CLICK)
       .host(host)
       .container(withContainer(container));
@@ -80,21 +85,26 @@ describe('click-trigger-strategy', () => {
 });
 
 describe('hover-trigger-strategy', () => {
-  let triggerStrategyBuilder: NbTriggerStrategyBuilder;
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
 
   beforeEach(() => {
-    const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
     document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
     host = createElement();
     container = createElement();
-    triggerStrategyBuilder = new NbTriggerStrategyBuilder()
-      .document(document)
+    triggerStrategyBuilder
       .trigger(NbTrigger.HOVER)
       .host(host)
       .container(withContainer(container));
@@ -130,21 +140,26 @@ describe('hover-trigger-strategy', () => {
 });
 
 describe('hint-trigger-strategy', () => {
-  let triggerStrategyBuilder: NbTriggerStrategyBuilder;
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
 
   beforeEach(() => {
-    const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
     document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
     host = createElement();
     container = createElement();
-    triggerStrategyBuilder = new NbTriggerStrategyBuilder()
-      .document(document)
+    triggerStrategyBuilder
       .trigger(NbTrigger.HINT)
       .host(host)
       .container(withContainer(container));
@@ -164,21 +179,26 @@ describe('hint-trigger-strategy', () => {
 });
 
 describe('focus-trigger-strategy', () => {
-  let triggerStrategyBuilder: NbTriggerStrategyBuilder;
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
   let document: Document;
   let host: HTMLElement;
   let container: HTMLElement;
 
   beforeEach(() => {
-    const bed = TestBed.configureTestingModule({ providers: [{ provide: NB_DOCUMENT, useExisting: DOCUMENT }] });
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
     document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
     host = createElement();
     container = createElement();
-    triggerStrategyBuilder = new NbTriggerStrategyBuilder()
-      .document(document)
+    triggerStrategyBuilder
       .trigger(NbTrigger.FOCUS)
       .host(host)
       .container(withContainer(container));
@@ -230,5 +250,60 @@ describe('focus-trigger-strategy', () => {
     tick(100);
 
     expect(showSpy).toHaveBeenCalledTimes(1);
+  }));
+});
+
+describe('noop-trigger-strategy', () => {
+  let triggerStrategyBuilder: NbTriggerStrategyBuilderService;
+  let document: Document;
+  let host: HTMLElement;
+  let container: HTMLElement;
+
+  beforeEach(() => {
+    const bed = TestBed.configureTestingModule({
+      providers: [
+        NbTriggerStrategyBuilderService,
+        { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+      ],
+    });
+    document = bed.get(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+  });
+
+  beforeEach(() => {
+    host = createElement();
+    container = createElement();
+    triggerStrategyBuilder
+      .trigger(NbTrigger.NOOP)
+      .host(host)
+      .container(withContainer(container));
+  });
+
+  it('should NOT fire show$ when hover/click/focus on host', fakeAsync(() => {
+    const showSpy = createSpy('showSpy');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+    triggerStrategy.show$.subscribe(showSpy);
+
+    focus(host);
+    click(host);
+    mouseEnter(host);
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(0);
+  }));
+
+  it('should NOT fire hide$ when hover out from host', fakeAsync(() => {
+    const showSpy = createSpy('showSpy');
+    const triggerStrategy = triggerStrategyBuilder.build();
+
+    triggerStrategy.hide$.subscribe(showSpy);
+    mouseLeave(host);
+    blur(host);
+    focus(document);
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(0);
   }));
 });

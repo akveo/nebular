@@ -30,9 +30,8 @@ If you are able to illustrate the bug or feature request with an example, please
 
 A sample application via GitHub
 
-StackBlitz (https://stackblitz.com)
+StackBlitz [StackBlitz Seed Project](https://stackblitz.com/github/akveo/nebular-seed)
 
-Plunker (http://plnkr.co/edit/cpeRJs?p=preview)
 
 -->
 

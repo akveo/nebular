@@ -70,6 +70,19 @@ describe('nb-datepicker', () => {
     expect(calendar).toBeTruthy();
   });
 
+  it('should not render overlay on load', () => {
+    const datepickerContainer = overlay.querySelector('nb-datepicker-container');
+    expect(datepickerContainer).toBeNull();
+  });
+
+  it('should render overlay lazily', () => {
+    const datepickerContainer = overlay.querySelector('nb-datepicker-container');
+    expect(datepickerContainer).toBeNull();
+    showDatepicker();
+    const calendar = overlay.querySelector('nb-calendar');
+    expect(calendar).toBeTruthy();
+  });
+
   it('should write selected date in the input', () => {
     const date = new Date(2018, 8, 17);
     datepicker.visibleDate = date;
