@@ -51,10 +51,9 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
         <i class="nb-close-circled"></i>
       </button>
       <div class="form-wrapper">
-        <form class="form" (keyup.enter)="submitSearch(searchInput.value); emitClose()">
+        <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
           <div class="form-content">
             <input class="search-input"
-                   (input)="submitSearch(searchInput.value)"
                    #searchInput
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
@@ -185,8 +184,6 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
  * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
  *
  * It is also possible to handle search event using `NbSearchService`:
- * Search event can be limit with RxJx operators, example can be found on:
- * https://angular.io/tutorial/toh-pt6#chaining-rxjs-operators
  *
  * @stacked-example(Search Event, search/search-event.component)
  *
@@ -206,7 +203,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button #searchButton class="start-search" (click)="openSearch()">
+    <button #searchButton class="start-search" (click)="emitActivate()">
       <i class="nb-search"></i>
     </button>
     <nb-search-field
@@ -216,7 +213,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
       [placeholder]="placeholder"
       [hint]="hint"
       (search)="search($event)"
-      (close)="hideSearch()">
+      (close)="emitDeactivate()">
     </nb-search-field>
   `,
 })
@@ -320,6 +317,15 @@ export class NbSearchComponent implements OnInit, OnDestroy {
 
   search(term) {
     this.searchService.submitSearch(term, this.tag);
+    this.hideSearch();
+  }
+
+  emitActivate() {
+    this.searchService.activateSearch(this.type, this.tag);
+  }
+
+  emitDeactivate() {
+    this.searchService.deactivateSearch(this.type, this.tag);
   }
 
   private removeLayoutClasses() {
