@@ -22,8 +22,8 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { of as observableOf } from 'rxjs';
-import { filter, delay, takeWhile } from 'rxjs/operators';
+import {of as observableOf, Subject} from 'rxjs';
+import {filter, delay, takeWhile, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
@@ -55,6 +55,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
           <div class="form-content">
             <input class="search-input"
                    #searchInput
+                   (input)="submitSearchOnInput(searchInput.value)"
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
                    tabindex="-1"
@@ -83,6 +84,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
   @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
+  @Output() searchOnInput = new EventEmitter();
 
   @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
@@ -146,6 +148,12 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   submitSearch(term) {
     if (term) {
       this.search.emit(term);
+    }
+  }
+
+  submitSearchOnInput(term: string) {
+    if (term) {
+      this.searchOnInput.emit(term);
     }
   }
 
@@ -213,6 +221,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
       [placeholder]="placeholder"
       [hint]="hint"
       (search)="search($event)"
+      (searchOnInput)="searchOnInput($event)"
       (close)="emitDeactivate()">
     </nb-search-field>
   `,
@@ -318,6 +327,10 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   search(term) {
     this.searchService.submitSearch(term, this.tag);
     this.hideSearch();
+  }
+
+  searchOnInput(term: string) {
+    this.searchService.submitSearch(term, this.tag);
   }
 
   emitActivate() {
