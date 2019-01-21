@@ -16,9 +16,10 @@ import {
   OnDestroy,
   Output,
   Type,
+  AfterViewInit,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -49,7 +50,7 @@ import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -139,6 +140,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   protected hostRef: ElementRef;
 
+  protected init$: ReplaySubject<void> = new ReplaySubject<void>();
+
   /**
    * Stream of picker changes. Required to be the subject because picker hides and shows and picker
    * change stream becomes recreated.
@@ -188,6 +191,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     return this.ref && this.ref.hasAttached();
   }
 
+  get init(): Observable<void> {
+    return this.init$.asObservable();
+  }
+
   /**
    * Emits when datepicker looses focus.
    */
@@ -206,9 +213,14 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     }
   }
 
+  ngAfterViewInit() {
+    this.init$.next();
+  }
+
   ngOnDestroy() {
     this.alive = false;
     this.hide();
+    this.init$.complete();
 
     if (this.ref) {
       this.ref.dispose();

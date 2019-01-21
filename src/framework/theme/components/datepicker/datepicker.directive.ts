@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  forwardRef,
+  Inject,
+  InjectionToken,
+  Input,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALIDATORS,
@@ -16,7 +25,7 @@ import {
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
 import { fromEvent, Observable, merge } from 'rxjs';
-import { map, takeWhile, filter, take } from 'rxjs/operators';
+import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit';
@@ -83,6 +92,8 @@ export abstract class NbDatepicker<T> {
   abstract set value(value: T);
 
   abstract get valueChange(): Observable<T>;
+
+  abstract get init(): Observable<void>;
 
   /**
    * Attaches datepicker to the native input element.
@@ -229,6 +240,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * */
   protected picker: NbDatepicker<D>;
   protected alive: boolean = true;
+  protected isDatepickerReady: boolean = false;
+  protected queue: D | undefined;
   protected onChange: (D) => void = () => {};
   protected onTouched: () => void = () => {};
 
@@ -245,7 +258,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   constructor(@Inject(NB_DOCUMENT) protected document,
               @Inject(NB_DATE_ADAPTER) protected datepickerAdapters: NbDatepickerAdapter<D>[],
               protected hostRef: ElementRef,
-              protected dateService: NbDateService<D>) {
+              protected dateService: NbDateService<D>,
+              protected changeDetector: ChangeDetectorRef) {
     this.subscribeOnInputChange();
   }
 
@@ -271,8 +285,12 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Writes value in picker and html input element.
    * */
   writeValue(value: D) {
-    this.writePicker(value);
-    this.writeInput(value);
+    if (this.isDatepickerReady) {
+      this.writePicker(value);
+      this.writeInput(value);
+    } else {
+      this.queue = value;
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -358,8 +376,27 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     this.chooseDatepickerAdapter();
     this.picker.attach(this.hostRef);
 
-    if (this.hostRef.nativeElement.value) {
-      this.picker.value = this.datepickerAdapter.parse(this.hostRef.nativeElement.value, this.picker.format);
+    if (this.inputValue) {
+      this.picker.value = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
+    }
+
+    // In case datepicker component placed after the input with datepicker directive,
+    // we can't read `this.picker.format` on first change detection run,
+    // since it's not bound yet, so we have to wait for datepicker component initialization.
+    if (!this.isDatepickerReady) {
+      this.picker.init
+        .pipe(
+          takeWhile(() => this.alive),
+          take(1),
+          tap(() => this.isDatepickerReady = true),
+          filter(() => !!this.queue),
+        )
+        .subscribe(() => {
+          this.writeValue(this.queue);
+          this.onChange(this.queue);
+          this.changeDetector.detectChanges();
+          this.queue = undefined;
+        });
     }
 
     this.picker.valueChange
