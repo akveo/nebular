@@ -17,6 +17,7 @@ import {
   Output,
   Type,
   AfterViewInit,
+  OnInit,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -50,7 +51,9 @@ import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, AfterViewInit, OnDestroy {
+export abstract class NbBasePicker<D, T, P>
+                extends NbDatepicker<T>
+                implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -203,6 +206,12 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
   }
 
   protected abstract get pickerValueChange(): Observable<T>;
+
+  ngOnInit() {
+    if (this.dateService.getId() === 'date-fns' && !this.format) {
+      console.warn('format is required for date-fns service');
+    }
+  }
 
   ngOnChanges() {
     if (this.dateService.getId() === 'native' && this.format) {
