@@ -30,6 +30,7 @@ import {
   NgdColorSwatchDirective,
   NgdDescriptionDirective,
   NgdSearchComponent,
+  NgdBannerComponent,
 } from './components/';
 
 import {
@@ -70,6 +71,7 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdSearchComponent,
+    NgdBannerComponent,
   ],
   exports: [
     CommonModule,
@@ -92,6 +94,7 @@ import {
     NgdPageTabsComponent,
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
+    NgdBannerComponent,
   ],
 })
 export class NgdThemeModule {
