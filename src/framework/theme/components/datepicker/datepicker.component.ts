@@ -159,7 +159,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * Queue contains the last value that was applied to the picker when it was hidden.
    * This value will be passed to the picker as soon as it shown.
    * */
-  protected queue: T;
+  protected queue: T | undefined;
 
   protected blur$: Subject<void> = new Subject<void>();
 
@@ -367,8 +367,8 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
     return this.valueChange as EventEmitter<D>;
   }
 
-  get value(): D {
-    return this.picker.date;
+  get value(): D | undefined {
+    return this.picker ? this.picker.date : undefined;
   }
 
   set value(date: D) {
@@ -417,8 +417,8 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     return this.valueChange as EventEmitter<NbCalendarRange<D>>;
   }
 
-  get value(): NbCalendarRange<D> {
-    return this.picker.range;
+  get value(): NbCalendarRange<D> | undefined {
+    return this.picker ? this.picker.range : undefined;
   }
 
   set value(range: NbCalendarRange<D>) {
@@ -438,7 +438,7 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
   }
 
   shouldHide(): boolean {
-    return super.shouldHide() && !!(this.value.start && this.value.end);
+    return super.shouldHide() && !!(this.value && this.value.start && this.value.end);
   }
 
   protected writeQueue() {

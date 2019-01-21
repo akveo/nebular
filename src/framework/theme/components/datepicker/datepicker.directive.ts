@@ -87,7 +87,7 @@ export abstract class NbDatepicker<T> {
    * */
   abstract format: string;
 
-  abstract get value(): T;
+  abstract get value(): T | undefined;
 
   abstract set value(value: T);
 
