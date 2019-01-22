@@ -14,40 +14,35 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-action',
   template: `
-    <a
-      class="icon-container"
-      [routerLink]="link"
-      [title]="title"
-      *ngIf="icon && link"
-      (click)="$event.preventDefault()"
-    >
+    <a class="icon-container"
+       [routerLink]="link"
+       [title]="title"
+       *ngIf="icon && link"
+       (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
-    <a
-      class="icon-container"
-      [href]="href"
-      [title]="title"
-      *ngIf="icon && href && !link"
-      (click)="$event.preventDefault()"
-    >
+    <a class="icon-container"
+       [href]="href"
+       [title]="title"
+       *ngIf="icon && href && !link"
+       (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
-    <a
-      class="icon-container"
-      href="#"
-      [title]="title"
-      *ngIf="icon && !href && !link; else: showContent"
-      (click)="$event.preventDefault()"
-    >
+    <a class="icon-container"
+       href="#"
+       [title]="title"
+       *ngIf="icon && !href && !link; else: showContent"
+       (click)="$event.preventDefault()">
       <i class="control-icon {{ icon }}"></i>
     </a>
-    <ng-template #showContent> <ng-content></ng-content> </ng-template>
-    <nb-badge
-      *ngIf="badgeText"
-      [text]="badgeText"
-      [status]="badgeStatus"
-      [position]="badgePosition"
-    ></nb-badge>
+    <ng-template #showContent>
+      <ng-content></ng-content>
+    </ng-template>
+    <nb-badge *ngIf="badgeText"
+              [text]="badgeText"
+              [status]="badgeStatus"
+              [position]="badgePosition">
+    </nb-badge>
   `,
 })
 export class NbActionComponent {
