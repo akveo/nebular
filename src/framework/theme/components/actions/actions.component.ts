@@ -18,15 +18,13 @@ import { convertToBoolProperty } from '../helpers';
       <a class="icon-container"
          [routerLink]="link"
          [title]="title"
-         *ngIf="link"
-         (click)="$event.preventDefault()">
+         *ngIf="link">
         <i class="control-icon {{ icon }}"></i>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
-         *ngIf="href && !link"
-         (click)="$event.preventDefault()">
+         *ngIf="href && !link">
         <i class="control-icon {{ icon }}"></i>
       </a>
       <a class="icon-container"
