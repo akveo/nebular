@@ -1,9 +1,9 @@
-<div class="popover">
+<div class="popover-container">
   <button [nbPopover]="component" [nbPopoverPlacement]="position" [nbPopoverTrigger]="trigger" nbButton>Show popover</button>
 </div>
 
-<div>
-  <h4>Change Content</h4>
+<div class="section">
+  <h6>Change Content</h6>
   <button nbButton size="small" status="success" (click)="changeComponent(componentList)">Use List Component</button>
   <button nbButton size="small" status="success" (click)="changeComponent(componentTabs)">Use Tabs Component</button>
   <button nbButton size="small" status="success" (click)="changeComponent(list)">Use List Template</button>
@@ -15,13 +15,17 @@
   <div>
     <small>When "Runtime Change" is enabled, open the Popover to see a component change every 2 seconds.</small>
   </div>
+</div>
 
-  <h4>Change trigger</h4>
+<div class="section">
+  <h6>Change trigger</h6>
   <button nbButton size="small" status="success" (click)="changeTrigger('click')">Click Trigger</button>
   <button nbButton size="small" status="success" (click)="changeTrigger('hover')">Hover Trigger</button>
   <button nbButton size="small" status="success" (click)="changeTrigger('hint')">Hint Trigger</button>
+</div>
 
-  <h4>Change placement</h4>
+<div class="section">
+  <h6>Change placement</h6>
   <button nbButton size="small" status="success" (click)="changePlacement('top')">Top Placement</button>
   <button nbButton size="small" status="success" (click)="changePlacement('right')">Right Placement</button>
   <button nbButton size="small" status="success" (click)="changePlacement('bottom')">Bottom Placement</button>

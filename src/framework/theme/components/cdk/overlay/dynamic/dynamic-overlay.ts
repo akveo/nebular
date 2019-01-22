@@ -1,5 +1,5 @@
-import { ComponentFactoryResolver, ComponentRef, Injectable, Type } from '@angular/core';
-import { filter, takeUntil, takeWhile } from 'rxjs/operators';
+import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
+import { filter, take, takeUntil, takeWhile } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import {
@@ -35,7 +35,10 @@ export class NbDynamicOverlay {
     return this.ref && this.ref.hasAttached();
   }
 
-  constructor(private overlay: NbOverlayService, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(
+    private overlay: NbOverlayService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private zone: NgZone) {
   }
 
   create(componentType: Type<NbRenderableContainer>,
@@ -151,8 +154,12 @@ export class NbDynamicOverlay {
 
   protected renderContainer() {
     const containerContext = this.createContainerContext();
-    this.container = createContainer(this.ref, this.componentType, containerContext, this.componentFactoryResolver);
+    if (!this.container) {
+      this.container = createContainer(this.ref, this.componentType, containerContext, this.componentFactoryResolver);
+    }
     this.container.instance.renderContent();
+
+    this.updatePositionWhenStable();
   }
 
   protected updateContext() {
@@ -165,7 +172,7 @@ export class NbDynamicOverlay {
      * Dimensions of the container may be changed after updating the content, so, we have to update
      * container position. But we need to delay the execution because of how the portalOverlay gets detached
      * */
-    setTimeout(() => this.ref.updatePosition());
+    this.updatePositionWhenStable();
   }
 
   protected createContainerContext(): Object {
@@ -174,5 +181,13 @@ export class NbDynamicOverlay {
       context: this.context,
       cfr: this.componentFactoryResolver,
     };
+  }
+
+  protected updatePositionWhenStable() {
+    this.zone.onStable
+      .pipe(take(1))
+      .subscribe(() => {
+        this.ref && this.ref.updatePosition();
+      });
   }
 }

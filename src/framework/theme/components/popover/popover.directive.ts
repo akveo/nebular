@@ -99,6 +99,13 @@ import { NbPopoverComponent } from './popover.component';
  *
  * @stacked-example(Manual Control, popover/popover-noop.component)
  *
+ * Below are examples for manual popover settings control, both via template binding and code.
+ * @stacked-example(Popover Settings, popover/popover-dynamic.component)
+ *
+ * Please note, while manipulating Popover setting via code, you need to call `rebuild()` method to apply the settings
+ * changed.
+ * @stacked-example(Popover Settings Code, popover/popover-dynamic-code.component)
+ *
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */

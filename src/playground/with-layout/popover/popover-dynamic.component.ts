@@ -21,7 +21,10 @@ import { PopoverListComponent, PopoverTabsComponent } from './components/dynamic
     .margin-bottom-0 {
       margin-bottom: 0;
     }
-    .popover {
+    .section {
+      margin-bottom: 2rem;
+    }
+    .popover-container {
       display: flex;
       justify-content: center;
       padding: 12rem;
@@ -47,25 +50,6 @@ export class PopoverDynamicComponent implements OnDestroy, AfterViewInit {
   items = [];
   interval: any;
 
-  ngAfterViewInit() {
-    this.items = [
-      this.componentList,
-      this.componentTabs,
-      this.templateList,
-      this.templateTabs,
-      this.textContent,
-    ];
-  }
-
-  startRuntimeChange() {
-    if (!this.interval) {
-      this.interval = setInterval(() => {
-        const random = this.items[Math.floor(Math.random() * this.items.length)];
-        this.changeComponent(random);
-      }, 2000);
-    }
-  }
-
   stopRuntimeChange() {
     if (this.interval) {
       clearInterval(this.interval);
@@ -83,6 +67,25 @@ export class PopoverDynamicComponent implements OnDestroy, AfterViewInit {
 
   changePlacement(placement) {
     this.position = placement;
+  }
+
+  startRuntimeChange() {
+    if (!this.interval) {
+      this.interval = setInterval(() => {
+        const random = this.items[Math.floor(Math.random() * this.items.length)];
+        this.changeComponent(random);
+      }, 2000);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.items = [
+      this.componentList,
+      this.componentTabs,
+      this.templateList,
+      this.templateTabs,
+      this.textContent,
+    ];
   }
 
   ngOnDestroy() {

@@ -20,7 +20,10 @@ import { NbPopoverDirective } from '@nebular/theme';
     .margin-bottom-0 {
       margin-bottom: 0;
     }
-    .popover {
+    .section {
+      margin-bottom: 2rem;
+    }
+    .popover-container {
       display: flex;
       justify-content: center;
       padding: 12rem;
@@ -45,25 +48,6 @@ export class PopoverDynamicCodeComponent implements OnDestroy, AfterViewInit {
 
   interval: any;
 
-  ngAfterViewInit() {
-    this.items = [
-      this.componentList,
-      this.componentTabs,
-      this.templateList,
-      this.templateTabs,
-      this.textContent,
-    ];
-  }
-
-  startRuntimeChange() {
-    if (!this.interval) {
-      this.interval = setInterval(() => {
-        const random = this.items[Math.floor(Math.random() * this.items.length)];
-        this.changeComponent(random);
-      }, 2000);
-    }
-  }
-
   stopRuntimeChange() {
     if (this.interval) {
       clearInterval(this.interval);
@@ -84,6 +68,25 @@ export class PopoverDynamicCodeComponent implements OnDestroy, AfterViewInit {
   changePlacement(placement) {
     this.popover.position = placement;
     this.popover.rebuild();
+  }
+
+  startRuntimeChange() {
+    if (!this.interval) {
+      this.interval = setInterval(() => {
+        const random = this.items[Math.floor(Math.random() * this.items.length)];
+        this.changeComponent(random);
+      }, 2000);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.items = [
+      this.componentList,
+      this.componentTabs,
+      this.templateList,
+      this.templateTabs,
+      this.textContent,
+    ];
   }
 
   ngOnDestroy() {
