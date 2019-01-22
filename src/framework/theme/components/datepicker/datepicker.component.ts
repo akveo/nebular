@@ -18,6 +18,8 @@ import {
   Type,
   AfterViewInit,
   OnInit,
+  SimpleChanges,
+  Optional,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -45,7 +47,7 @@ import {
   NbCalendarViewMode,
   NbDateService,
 } from '../calendar-kit';
-import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
+import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 
 /**
@@ -172,6 +174,7 @@ export abstract class NbBasePicker<D, T, P>
               protected overlay: NbOverlayService,
               protected cfr: ComponentFactoryResolver,
               protected dateService: NbDateService<D>,
+              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) protected dateServiceOptions,
   ) {
     super();
   }
@@ -208,17 +211,12 @@ export abstract class NbBasePicker<D, T, P>
   protected abstract get pickerValueChange(): Observable<T>;
 
   ngOnInit() {
-    if (this.dateService.getId() === 'date-fns' && !this.format) {
-      console.warn('format is required for date-fns service');
-    }
+    this.checkFormat();
   }
 
-  ngOnChanges() {
-    if (this.dateService.getId() === 'native' && this.format) {
-      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
-      '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
-      'More information at "Formatting issue" ' +
-      'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.format && !changes.format.isFirstChange()) {
+      this.checkFormat();
     }
   }
 
@@ -348,6 +346,20 @@ export abstract class NbBasePicker<D, T, P>
     this.picker._yearCellComponent = this.yearCellComponent;
     this.picker.size = this.size;
     this.picker.visibleDate = this.visibleDate;
+  }
+
+  protected checkFormat() {
+    if (this.dateService.getId() === 'native' && this.format) {
+      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
+        '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
+        'More information at "Formatting issue" ' +
+        'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+    }
+
+    const isFormatSet = this.format || (this.dateServiceOptions && this.dateServiceOptions.format);
+    if (this.dateService.getId() === 'date-fns' && !isFormatSet) {
+      throw new Error('format is required when using NbDateFnsDateModule');
+    }
   }
 }
 

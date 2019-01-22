@@ -118,6 +118,7 @@ export abstract class NbDatepicker<T> {
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
 
+export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options');
 
 /**
  * The `NbDatepickerDirective` is form control that gives you ability to select dates and ranges. The datepicker
