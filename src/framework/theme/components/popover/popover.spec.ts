@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Type, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, NgModule, TemplateRef, Type, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -25,42 +25,12 @@ export class NbPopoverComponentContentTestComponent {
   text: string;
 }
 
-// @Component({
-//   selector: 'nb-popover-component-test',
-//   template: `
-//     <nb-layout>
-//       <nb-layout-column>
-//         <button #button [nbPopover]="content" [nbPopoverContext]="{ text: 'some context data' }"></button>
-//       </nb-layout-column>
-//     </nb-layout>
-//   `,
-// })
-// export class NbPopoverComponentTestComponent {
-//   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-//   content = NbPopoverComponentContentTestComponent;
-// }
-//
-// @Component({
-//   selector: 'nb-popover-template-test',
-//   template: `
-//     <nb-layout>
-//       <nb-layout-column>
-//         <button #button [nbPopover]="t" [nbPopoverContext]="{ text: 'some context data' }"></button>
-//         <ng-template #t let-data>test, {{ data.text }}</ng-template>
-//       </nb-layout-column>
-//     </nb-layout>
-//   `,
-// })
-// export class NbPopoverTemplateTestComponent {
-//   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-// }
-
 @Component({
   selector: 'nb-popover-default-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbPopover="test"></button>
+        <button #button nbPopover="test">show popover</button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -83,15 +53,37 @@ export class NbPopoverDefaultTestComponent {
         </button>
       </nb-layout-column>
     </nb-layout>
+
+    <ng-template let-data>Some Template {{ data.text }}</ng-template>
   `,
 })
 export class NbPopoverBindingsTestComponent {
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-  @Input() content = '';
-  @Input() context = {};
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(TemplateRef) template: TemplateRef<any>;
+  @Input() content: any = '';
+  @Input() context: any = { text: 'hello world' };
   @Input() trigger = NbTrigger.CLICK;
   @Input() position = NbPosition.TOP;
   @Input() adjustment = NbAdjustment.CLOCKWISE;
+}
+
+@Component({
+  selector: 'nb-popover-instance-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <button #button [nbPopover]="test"></button>
+      </nb-layout-column>
+    </nb-layout>
+
+    <ng-template>Some Template</ng-template>
+  `,
+})
+export class NbPopoverInstanceTestComponent {
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(TemplateRef) template: TemplateRef<any>;
 }
 
 @Component({
@@ -118,7 +110,6 @@ const dynamicOverlay = {
 };
 
 export class NbDynamicOverlayHandlerMock {
-
   _componentType: Type<NbRenderableContainer>;
   _host: ElementRef;
   _context: Object = {};
@@ -126,8 +117,6 @@ export class NbDynamicOverlayHandlerMock {
   _trigger: NbTrigger = NbTrigger.NOOP;
   _position: NbPosition = NbPosition.TOP;
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
-
-
 
   constructor() {
   }
@@ -185,6 +174,21 @@ export class NbDynamicOverlayHandlerMock {
   }
 }
 
+const TEST_COMPONENTS = [
+  NbPopoverDefaultTestComponent,
+  NbPopoverBindingsTestComponent,
+  NbPopoverInstanceTestComponent,
+  NbPopoverComponentContentTestComponent,
+];
+
+@NgModule({
+  imports: [NbLayoutModule, NbPopoverModule],
+  exports: [...TEST_COMPONENTS],
+  declarations: [...TEST_COMPONENTS],
+  entryComponents: [NbPopoverComponentContentTestComponent],
+})
+class PopoverTestModule { }
+
 describe('Directive: NbPopoverDirective', () => {
 
   const overlayHandler = new NbDynamicOverlayHandlerMock();
@@ -195,67 +199,101 @@ describe('Directive: NbPopoverDirective', () => {
       imports: [
         RouterTestingModule.withRoutes([]),
         NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbPopoverModule,
+        PopoverTestModule,
       ],
-      declarations: [
-        NbPopoverDefaultTestComponent,
-        // NbPopoverTemplateTestComponent,
-        // NbPopoverComponentTestComponent,
-        // NbPopoverComponentContentTestComponent,
-        // NbPopoverModeTestComponent,
-      ],
-    })
-      .overrideComponent(NbPopoverDirective, {
-        set: {
-          providers: [
-            { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
-          ],
-        },
-      });
+    });
   }));
 
-  describe('with string content', () => {
-    let fixture: ComponentFixture<NbPopoverDefaultTestComponent>;
+  describe('smoke ', () => {
 
-
+    let fixture: ComponentFixture<any>;
 
     afterEach(() => {
       fixture.destroy();
     });
 
-    describe('smoke ', () => {
 
-      it('should render string', () => {
-        fixture.detectChanges();
+    it('should render string', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
 
-        fixture.componentInstance.popover.show();
-        fixture.detectChanges();
+      fixture.detectChanges();
 
-        const primitiveOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
-        expect(primitiveOverlay.textContent).toContain('test');
-      });
-
-      it('should hide', () => {
-        fixture.detectChanges();
-
-        fixture.componentInstance.popover.show();
-        fixture.detectChanges();
-
-        const openedOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
-        expect(openedOverlay.textContent).toContain('test');
-
-        fixture.componentInstance.popover.hide();
-        fixture.detectChanges();
-
-        const noOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
-        expect(noOverlay).toBeNull();
-      });
-
+      fixture.componentInstance.popover.show();
+      fixture.detectChanges();
+      const primitiveOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
+      expect(primitiveOverlay.textContent).toContain('test');
     });
 
-    describe('unit', () => {
+    it('should hide', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
 
+      fixture.detectChanges();
+
+      fixture.componentInstance.popover.show();
+      fixture.detectChanges();
+
+      const openedOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
+      expect(openedOverlay.textContent).toContain('test');
+
+      fixture.componentInstance.popover.hide();
+      fixture.detectChanges();
+
+      const noOverlay = fixture.nativeElement.querySelector('.primitive-overlay');
+      expect(noOverlay).toBeNull();
+    });
+
+    it('should render different content type', () => {
+
+      fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
+      fixture.detectChanges();
+
+      fixture.componentInstance.popover.show();
+      fixture.detectChanges();
+
+      fixture.componentInstance.content = 'new string';
+      fixture.detectChanges();
+      const stringPopover = fixture.nativeElement.querySelector('nb-popover');
+      expect(stringPopover.textContent).toContain('new string');
+
+      fixture.componentInstance.content = NbPopoverComponentContentTestComponent;
+      fixture.detectChanges();
+      const componentPopover = fixture.nativeElement.querySelector('nb-popover-component-content-test');
+      expect(componentPopover.textContent).toContain('hello world');
+
+      fixture.componentInstance.content = fixture.componentInstance.template;
+      fixture.detectChanges();
+      const templatePopover = fixture.nativeElement.querySelector('nb-popover');
+      expect(templatePopover.textContent).toContain('hello world');
+    });
+
+  });
+
+  describe('mocked services', () => {
+
+    beforeEach(async(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([]),
+          NbThemeModule.forRoot(),
+          PopoverTestModule,
+        ],
+      })
+        .overrideComponent(NbPopoverDirective, {
+          set: {
+            providers: [
+              { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
+            ],
+          },
+        });
+    }));
+    describe('default popover', () => {
+
+      let fixture: ComponentFixture<NbPopoverDefaultTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
 
       it('should build', () => {
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
@@ -320,118 +358,155 @@ describe('Directive: NbPopoverDirective', () => {
       });
     });
 
-    // it('should build position strategy', () => {
-    //   const mockPositionBuilder = new MockPositionBuilder();
-    //   TestBed.resetTestingModule();
-    //   TestBed.configureTestingModule({
-    //     imports: [PopoverTestModule],
-    //     providers: [{ provide: NbPositionBuilderService, useValue: mockPositionBuilder }],
-    //   });
-    //   fixture = TestBed.createComponent(NbPopoverStringTestComponent);
-    //   fixture.detectChanges();
-    //
-    //   expect(mockPositionBuilder._connectedTo.nativeElement).toBe(fixture.componentInstance.button.nativeElement);
-    //   expect(mockPositionBuilder._position).toBe(NbPosition.TOP);
-    //   expect(mockPositionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
-    // });
-    //
-    // it('should build with default trigger strategy', () => {
-    //   TestBed.resetTestingModule();
-    //   const bed = TestBed.configureTestingModule({
-    //     imports: [PopoverTestModule],
-    //     providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
-    //   });
-    //   const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    //   fixture = TestBed.createComponent(NbPopoverStringTestComponent);
-    //   fixture.detectChanges();
-    //
-    //   expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
-    // });
-    //
-    // it('should build with custom trigger strategy', () => {
-    //   TestBed.resetTestingModule();
-    //   const bed = TestBed.configureTestingModule({
-    //     imports: [PopoverTestModule],
-    //     providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
-    //   });
-    //   const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    //   fixture = TestBed.createComponent(NbPopoverStringTestComponent);
-    //   fixture.componentInstance.trigger = NbTrigger.HOVER;
-    //   fixture.detectChanges();
-    //
-    //   expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HOVER);
-    // });
-    //
-    // it('should build with custom mode strategy', () => {
-    //   TestBed.resetTestingModule();
-    //   const bed = TestBed.configureTestingModule({
-    //     imports: [PopoverTestModule],
-    //     providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
-    //   });
-    //   const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    //   const modeFixture = TestBed.createComponent(NbPopoverModeTestComponent);
-    //   modeFixture.componentInstance.mode = NbTrigger.HOVER;
-    //   modeFixture.detectChanges();
-    //
-    //   expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HOVER);
-    // });
-  });
+    describe('binding popover', () => {
 
-  // describe('with template content', () => {
-  //   let fixture: ComponentFixture<NbPopoverTemplateTestComponent>;
-  //
-  //   beforeEach(() => {
-  //     fixture = TestBed.createComponent(NbPopoverTemplateTestComponent);
-  //     fixture.detectChanges();
-  //   });
-  //
-  //   afterEach(() => {
-  //     fixture.destroy();
-  //   });
-  //
-  //   it('should render template', () => {
-  //     fixture.componentInstance.popover.show();
-  //     fixture.detectChanges();
-  //
-  //     const primitiveOverlay = fixture.nativeElement.querySelector('nb-popover');
-  //     expect(primitiveOverlay.textContent).toContain('test');
-  //   });
-  //
-  //   it('should provide context', () => {
-  //     fixture.componentInstance.popover.show();
-  //     fixture.detectChanges();
-  //
-  //     const primitiveOverlay = fixture.nativeElement.querySelector('nb-popover');
-  //     expect(primitiveOverlay.textContent).toContain('some context data');
-  //   });
-  // });
-  //
-  // describe('with component content', () => {
-  //   let fixture: ComponentFixture<NbPopoverComponentTestComponent>;
-  //
-  //   beforeEach(() => {
-  //     fixture = TestBed.createComponent(NbPopoverComponentTestComponent);
-  //     fixture.detectChanges();
-  //   });
-  //
-  //   afterEach(() => {
-  //     fixture.destroy();
-  //   });
-  //
-  //   it('should render component', () => {
-  //     fixture.componentInstance.popover.show();
-  //     fixture.detectChanges();
-  //
-  //     const primitiveOverlay = fixture.nativeElement.querySelector('nb-popover-component-content-test');
-  //     expect(primitiveOverlay.textContent).toContain('test');
-  //   });
-  //
-  //   it('should provide context', () => {
-  //     fixture.componentInstance.popover.show();
-  //     fixture.detectChanges();
-  //
-  //     const primitiveOverlay = fixture.nativeElement.querySelector('nb-popover-component-content-test');
-  //     expect(primitiveOverlay.textContent).toContain('some context data');
-  //   });
-  // });
+      let fixture: ComponentFixture<NbPopoverBindingsTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
+
+      it('should rebuild', () => {
+
+        const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
+        const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
+        const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
+        const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
+        const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
+        const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
+        const rebuildSpy = spyOn(overlayHandler, 'rebuild').and.callThrough();
+
+        fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
+        fixture.componentInstance.trigger = NbTrigger.HINT;
+        fixture.componentInstance.content = 'new string';
+        fixture.componentInstance.context = { context: 'new' };
+        fixture.componentInstance.position = NbPosition.LEFT;
+
+        fixture.detectChanges();
+
+        expect(componentSpy).toHaveBeenCalledTimes(1);
+        expect(componentSpy).toHaveBeenCalledWith(NbPopoverComponent);
+        expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
+        expect(hostSpy).toHaveBeenCalledTimes(1);
+        expect(positionSpy).toHaveBeenCalledTimes(3);
+        expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
+        expect(triggerSpy).toHaveBeenCalledTimes(3);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.HINT);
+        expect(adjustmentSpy).toHaveBeenCalledTimes(3);
+        expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contextSpy).toHaveBeenCalledTimes(3);
+        expect(contextSpy).toHaveBeenCalledWith({ context: 'new' });
+        expect(buildSpy).toHaveBeenCalledTimes(1);
+        expect(rebuildSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it('should accept different content type', () => {
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+
+        fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.content = 'new string';
+        fixture.detectChanges();
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+
+        fixture.componentInstance.content = NbPopoverComponentContentTestComponent;
+        fixture.detectChanges();
+
+        expect(contentSpy).toHaveBeenCalledTimes(4);
+        expect(contentSpy).toHaveBeenCalledWith(NbPopoverComponentContentTestComponent);
+
+        fixture.componentInstance.content = fixture.componentInstance.template;
+        fixture.detectChanges();
+
+        expect(contentSpy).toHaveBeenCalledTimes(5);
+        expect(contentSpy).toHaveBeenCalledWith(fixture.componentInstance.template);
+      });
+    });
+
+    describe('instance popover', () => {
+
+      let fixture: ComponentFixture<NbPopoverInstanceTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
+
+      it('should rebuild', () => {
+
+        const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
+        const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
+        const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
+        const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
+        const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
+        const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
+        const rebuildSpy = spyOn(overlayHandler, 'rebuild').and.callThrough();
+
+        fixture = TestBed.createComponent(NbPopoverInstanceTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.popover.adjustment = NbAdjustment.HORIZONTAL;
+        fixture.componentInstance.popover.trigger = NbTrigger.HINT;
+        fixture.componentInstance.popover.content = 'new string';
+        fixture.componentInstance.popover.context = { context: 'new' };
+        fixture.componentInstance.popover.position = NbPosition.LEFT;
+
+        fixture.componentInstance.popover.rebuild();
+
+        expect(componentSpy).toHaveBeenCalledTimes(1);
+        expect(componentSpy).toHaveBeenCalledWith(NbPopoverComponent);
+        expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
+        expect(hostSpy).toHaveBeenCalledTimes(1);
+        expect(positionSpy).toHaveBeenCalledTimes(3);
+        expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
+        expect(triggerSpy).toHaveBeenCalledTimes(3);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.HINT);
+        expect(adjustmentSpy).toHaveBeenCalledTimes(3);
+        expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contextSpy).toHaveBeenCalledTimes(3);
+        expect(contextSpy).toHaveBeenCalledWith({ context: 'new' });
+        expect(buildSpy).toHaveBeenCalledTimes(1);
+        expect(rebuildSpy).toHaveBeenCalledTimes(2);
+      });
+
+
+      it('should accept different content type', () => {
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+
+        fixture = TestBed.createComponent(NbPopoverInstanceTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.popover.content = 'new string';
+        fixture.componentInstance.popover.rebuild();
+
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+
+        fixture.componentInstance.popover.content = NbPopoverComponentContentTestComponent;
+        fixture.componentInstance.popover.rebuild();
+
+        expect(contentSpy).toHaveBeenCalledTimes(4);
+        expect(contentSpy).toHaveBeenCalledWith(NbPopoverComponentContentTestComponent);
+
+        fixture.componentInstance.popover.content = fixture.componentInstance.template;
+        fixture.componentInstance.popover.rebuild();
+
+        expect(contentSpy).toHaveBeenCalledTimes(5);
+        expect(contentSpy).toHaveBeenCalledWith(fixture.componentInstance.template);
+      });
+
+    });
+  });
 });
