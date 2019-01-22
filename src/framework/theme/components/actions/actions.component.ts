@@ -14,30 +14,34 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-action',
   template: `
-    <a class="icon-container"
-       [routerLink]="link"
-       [title]="title"
-       *ngIf="icon && link"
-       (click)="$event.preventDefault()">
-      <i class="control-icon {{ icon }}"></i>
-    </a>
-    <a class="icon-container"
-       [href]="href"
-       [title]="title"
-       *ngIf="icon && href && !link"
-       (click)="$event.preventDefault()">
-      <i class="control-icon {{ icon }}"></i>
-    </a>
-    <a class="icon-container"
-       href="#"
-       [title]="title"
-       *ngIf="icon && !href && !link; else: showContent"
-       (click)="$event.preventDefault()">
-      <i class="control-icon {{ icon }}"></i>
-    </a>
-    <ng-template #showContent>
+    <ng-container *ngIf="icon; else projectedContent">
+      <a class="icon-container"
+         [routerLink]="link"
+         [title]="title"
+         *ngIf="link"
+         (click)="$event.preventDefault()">
+        <i class="control-icon {{ icon }}"></i>
+      </a>
+      <a class="icon-container"
+         [href]="href"
+         [title]="title"
+         *ngIf="href && !link"
+         (click)="$event.preventDefault()">
+        <i class="control-icon {{ icon }}"></i>
+      </a>
+      <a class="icon-container"
+         href="#"
+         [title]="title"
+         *ngIf="!href && !link"
+         (click)="$event.preventDefault()">
+        <i class="control-icon {{ icon }}"></i>
+      </a>
+    </ng-container>
+
+    <ng-template #projectedContent>
       <ng-content></ng-content>
     </ng-template>
+
     <nb-badge *ngIf="badgeText"
               [text]="badgeText"
               [status]="badgeStatus"
