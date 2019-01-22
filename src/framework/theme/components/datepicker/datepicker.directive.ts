@@ -197,6 +197,27 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * Because date-fns is treeshakable, tiny and operates native date objects. If you want to use it you have to
  * install it: `npm i @nebular/date-fns`, and import `NbDateFnsDateModule` from this package.
  *
+ * ### NbDateFnsDateModule
+ *
+ * Format is required when using `NbDateFnsDateModule`. You can set it via `format` input on datepicker component:
+ * ```html
+ * <nb-datepicker format="dd.MM.yyyy"></nb-datepicker>
+ * ```
+ * Also format can be set globally with `NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' })` and
+ * `NbDateFnsDateModule.forChild({ format: 'dd.MM.yyyy' })` methods.
+ *
+ * Please note to use some of the formatting tokens you also need to pass `{ awareOfUnicodeTokens: true }` to date-fns
+ * parse and format functions. You can configure options passed this functions by setting `formatOptions` and
+ * `parseOptions` of options object passed to `NbDateFnsDateModule.forRoot` and `NbDateFnsDateModule.forChild` methods.
+ * ```ts
+ * NbDateFnsDateModule.forRoot({
+ *   parseOptions: { awareOfUnicodeTokens: true },
+ *   formatOptions: { awareOfUnicodeTokens: true },
+ * })
+ * ```
+ * Further info on `date-fns` formatting tokens could be found at
+ * [date-fns docs](https://date-fns.org/v2.0.0-alpha.27/docs/Unicode-Tokens).
+ *
  * @styles
  *
  * datepicker-fg
