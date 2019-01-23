@@ -4,8 +4,21 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, ComponentFactoryResolver, Input, TemplateRef, Type, ViewChild } from '@angular/core';
-import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer, NbTemplatePortal } from '../cdk';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  TemplateRef,
+  Type,
+  ViewChild,
+} from '@angular/core';
+import {
+  NbComponentPortal,
+  NbOverlayContainerComponent,
+  NbPositionedContainer,
+  NbRenderableContainer,
+  NbTemplatePortal,
+} from '../cdk';
 
 
 /**
@@ -27,14 +40,23 @@ import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer, 
     <nb-overlay-container></nb-overlay-container>
   `,
 })
-export class NbPopoverComponent extends NbPositionedContainer implements AfterViewInit {
+export class NbPopoverComponent extends NbPositionedContainer implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   @Input() content: any;
   @Input() context: Object;
   @Input() cfr: ComponentFactoryResolver;
 
-  ngAfterViewInit() {
+  renderContent() {
+    this.detachContent();
+    this.attachContent();
+  }
+
+  protected detachContent() {
+    this.overlayContainer.detach();
+  }
+
+  protected attachContent() {
     if (this.content instanceof TemplateRef) {
       this.attachTemplate();
     } else if (this.content instanceof Type) {

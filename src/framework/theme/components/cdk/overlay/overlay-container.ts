@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
@@ -14,6 +13,17 @@ import {
 
 import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbPortalInjector, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
+
+export interface NbRenderableContainer {
+
+  /**
+   * A renderContent method renders content with provided context.
+   * Naturally, this job has to be done by ngOnChanges lifecycle hook, but
+   * ngOnChanges hook will be triggered only if we update content or context properties
+   * through template property binding syntax. But in our case we're updating these properties programmatically.
+   * */
+  renderContent();
+}
 
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
@@ -46,7 +56,6 @@ export abstract class NbPositionedContainer {
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbOverlayContainerComponent {
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
@@ -57,7 +66,6 @@ export class NbOverlayContainerComponent {
 
   constructor(protected vcr: ViewContainerRef,
               protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
-
   }
 
   get isStringContent(): boolean {
@@ -67,6 +75,8 @@ export class NbOverlayContainerComponent {
   attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
     portal.injector = this.createChildInjector(portal.componentFactoryResolver);
     const componentRef = this.portalOutlet.attachComponentPortal(portal);
+    componentRef.changeDetectorRef.markForCheck();
+    componentRef.changeDetectorRef.detectChanges();
     this.isAttached = true;
     return componentRef;
   }
@@ -74,14 +84,23 @@ export class NbOverlayContainerComponent {
   attachTemplatePortal<C>(portal: NbTemplatePortal<C>): EmbeddedViewRef<C> {
     const templateRef = this.portalOutlet.attachTemplatePortal(portal);
     templateRef.detectChanges();
+    this.isAttached = true;
     return templateRef;
   }
 
   attachStringContent(content: string) {
     this.content = content;
-    this.isAttached = true;
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
+    this.isAttached = true;
+  }
+
+  detach() {
+    if (this.portalOutlet.hasAttached()) {
+      this.portalOutlet.detach();
+    }
+    this.attachStringContent(null);
+    this.isAttached = false
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
