@@ -1,20 +1,20 @@
 <input nbInput [nbFilterInput]="dataSource">
 
-<table nb-tree-grid [nbSort]="dataSource" [source]="dataSource">
-  <tr nb-header-row *nbHeaderRowDef="columnsToDisplay"></tr>
+<table nbTreeGrid [nbSort]="dataSource" [source]="dataSource">
+  <tr nbHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
 
-  <tr nb-row *nbRowDef="let element; columns: columnsToDisplay"
+  <tr nbRow *nbRowDef="let element; columns: columnsToDisplay"
       (click)="toggle(element)">
   </tr>
 
   <ng-container nbColumnDef="name">
-    <th nb-header-cell nbSortHeader="asc" *nbHeaderCellDef> Name</th>
-    <td nb-cell *nbCellDef="let element"> {{'*'.repeat(element.level)}} {{ element.name }} </td>
+    <th nbHeaderCell nbSortHeader="asc" *nbHeaderCellDef> Name</th>
+    <td nbCell *nbCellDef="let element"> {{'*'.repeat(element.level)}} {{ element.name }} </td>
   </ng-container>
 
   <ng-container nbColumnDef="{{column}}" *ngFor="let column of cols">
-    <th nb-header-cell nbSortHeader="desc" *nbHeaderCellDef> {{column}} </th>
-    <td nb-cell *nbCellDef="let element"> {{element[ column ]}} </td>
+    <th nbHeaderCell nbSortHeader="desc" *nbHeaderCellDef> {{column}} </th>
+    <td nbCell *nbCellDef="let element"> {{element[ column ]}} </td>
   </ng-container>
 
 </table>

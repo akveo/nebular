@@ -76,7 +76,7 @@ export class NbColumnDefDirective extends CdkColumnDef {
 
 /** Header cell template container that adds the right classes and role. */
 @Directive({
-  selector: 'nb-header-cell, th[nb-header-cell]',
+  selector: 'nb-header-cell, th[nbHeaderCell]',
   host: {
     'class': 'nb-header-cell',
     'role': 'columnheader',
@@ -92,7 +92,7 @@ export class NbHeaderCellDirective extends CdkHeaderCell {
 
 /** Footer cell template container that adds the right classes and role. */
 @Directive({
-  selector: 'nb-footer-cell, td[nb-footer-cell]',
+  selector: 'nb-footer-cell, td[nbFooterCell]',
   host: {
     'class': 'nb-footer-cell',
     'role': 'gridcell',
@@ -108,7 +108,7 @@ export class NbFooterCellDirective extends CdkFooterCell {
 
 /** Cell template container that adds the right classes and role. */
 @Directive({
-  selector: 'nb-cell, td[nb-cell]',
+  selector: 'nb-cell, td[nbCell]',
   host: {
     'class': 'nb-cell',
     'role': 'gridcell',

@@ -23,7 +23,7 @@ import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source
 import { NbTreeGridNode } from './data-source/tree-grid.model';
 
 @Component({
-  selector: 'nb-tree-grid, table[nb-tree-grid]',
+  selector: 'nb-tree-grid, table[nbTreeGrid]',
   template: CDK_TABLE_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
