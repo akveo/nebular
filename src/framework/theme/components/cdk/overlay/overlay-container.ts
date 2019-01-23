@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
@@ -57,7 +56,6 @@ export abstract class NbPositionedContainer {
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbOverlayContainerComponent {
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;

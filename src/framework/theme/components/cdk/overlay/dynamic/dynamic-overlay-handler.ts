@@ -98,7 +98,8 @@ export class NbDynamicOverlayHandler {
       this._componentType,
       this._content,
       this._context,
-      this.createPositionStrategy());
+      this.createPositionStrategy(),
+    );
 
     this.connect();
     this.clearChanges();

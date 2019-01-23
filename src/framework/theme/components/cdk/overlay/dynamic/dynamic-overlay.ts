@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, take, takeUntil, takeWhile } from 'rxjs/operators';
+import { filter, takeUntil, takeWhile } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import {
@@ -150,6 +150,7 @@ export class NbDynamicOverlay {
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
+    this.updatePositionWhenStable();
   }
 
   protected renderContainer() {
@@ -158,8 +159,6 @@ export class NbDynamicOverlay {
       this.container = createContainer(this.ref, this.componentType, containerContext, this.componentFactoryResolver);
     }
     this.container.instance.renderContent();
-
-    this.updatePositionWhenStable();
   }
 
   protected updateContext() {
@@ -167,12 +166,6 @@ export class NbDynamicOverlay {
     Object.assign(this.container.instance, containerContext);
     this.container.instance.renderContent();
     this.container.changeDetectorRef.detectChanges();
-
-    /**
-     * Dimensions of the container may be changed after updating the content, so, we have to update
-     * container position. But we need to delay the execution because of how the portalOverlay gets detached
-     * */
-    this.updatePositionWhenStable();
   }
 
   protected createContainerContext(): Object {
@@ -183,9 +176,13 @@ export class NbDynamicOverlay {
     };
   }
 
+  /**
+   * Dimensions of the container may change after content update. So we listen to zone.stable event to
+   * reposition the container.
+   */
   protected updatePositionWhenStable() {
     this.zone.onStable
-      .pipe(take(1))
+      .pipe(takeWhile(() => this.alive))
       .subscribe(() => {
         this.ref && this.ref.updatePosition();
       });
