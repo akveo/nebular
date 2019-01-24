@@ -2,10 +2,8 @@ import { Component, ElementRef, Input, NgModule, TemplateRef, Type, ViewChild } 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
-import { NbPopoverDirective } from './popover.directive';
 import {
   NbAdjustment,
   NbDynamicOverlayHandler,
@@ -14,8 +12,9 @@ import {
   NbRenderableContainer,
   NbTrigger,
 } from '../cdk';
-import { NbPopoverComponent } from '@nebular/theme/components/popover/popover.component';
-import { NbPopoverModule } from '@nebular/theme';
+import { NbPopoverDirective } from './popover.directive';
+import { NbPopoverComponent } from './popover.component';
+import { NbPopoverModule } from './popover.module';
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -73,7 +72,7 @@ export class NbPopoverBindingsTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button [nbPopover]="test"></button>
+        <button #button nbPopover="test"></button>
       </nb-layout-column>
     </nb-layout>
 
@@ -84,22 +83,6 @@ export class NbPopoverInstanceTestComponent {
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
   @ViewChild('button') button: ElementRef;
   @ViewChild(TemplateRef) template: TemplateRef<any>;
-}
-
-@Component({
-  selector: 'nb-popover-mode-test',
-  template: `
-    <nb-layout>
-      <nb-layout-column>
-        <button #button nbPopover="test" [nbPopoverMode]="mode"></button>
-      </nb-layout-column>
-    </nb-layout>
-  `,
-})
-export class NbPopoverModeTestComponent {
-  @Input() mode: NbTrigger = NbTrigger.CLICK;
-  @ViewChild('button') button: ElementRef;
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 }
 
 const dynamicOverlay = {

@@ -6,7 +6,7 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NbPosition } from '../cdk';
+import { NbPosition, NbRenderableContainer } from '../cdk';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
@@ -50,7 +50,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
   ],
 })
-export class NbTooltipComponent {
+export class NbTooltipComponent implements NbRenderableContainer {
 
   @Input()
   content: string;
@@ -77,4 +77,10 @@ export class NbTooltipComponent {
   get statusClass() {
     return this.context.status ? `${this.context.status}-tooltip` : '';
   }
+
+  /**
+   * The method is empty since we don't need to do anything additionally
+   * render is handled by change detection
+   */
+  renderContent() {}
 }
