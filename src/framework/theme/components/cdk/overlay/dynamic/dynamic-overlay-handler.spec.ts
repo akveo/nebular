@@ -101,6 +101,7 @@ export class MockPositionBuilder {
   _connectedTo: ElementRef<any>;
   _position: NbPosition;
   _adjustment: NbAdjustment;
+  _offset: number;
 
   connectedTo(connectedTo: ElementRef<any>) {
     this._connectedTo = connectedTo;
@@ -114,6 +115,11 @@ export class MockPositionBuilder {
 
   adjustment(adjustment: NbAdjustment) {
     this._adjustment = adjustment;
+    return this;
+  }
+
+  offset(offset) {
+    this._offset = offset;
     return this;
   }
 
@@ -400,7 +406,7 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host1);
     expect(positionBuilder._position).toBe(NbPosition.TOP);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
-
+    expect(positionBuilder._offset).toBe(0);
 
     configure().host(host2).rebuild();
     expect(triggerStrategyBuilder._host).toBe(host2.nativeElement);
@@ -409,6 +415,7 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host2);
     expect(positionBuilder._position).toBe(NbPosition.TOP);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
+    expect(positionBuilder._offset).toBe(0);
   });
 
   it('should set and update position', () => {
@@ -435,6 +442,21 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host);
     expect(positionBuilder._position).toBe(NbPosition.TOP);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.COUNTERCLOCKWISE);
+  });
+
+  it('should set and update offset', () => {
+    const host = new ElementRef(document.createElement('b'));
+    configure(host).offset(34).build();
+    expect(positionBuilder._connectedTo).toBe(host);
+    expect(positionBuilder._position).toBe(NbPosition.TOP);
+    expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
+    expect(positionBuilder._offset).toBe(34);
+
+    configure(host).offset(2).rebuild();
+    expect(positionBuilder._connectedTo).toBe(host);
+    expect(positionBuilder._position).toBe(NbPosition.TOP);
+    expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
+    expect(positionBuilder._offset).toBe(2);
   });
 
   it('should set and update content', () => {

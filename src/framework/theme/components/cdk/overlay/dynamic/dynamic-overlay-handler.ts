@@ -34,6 +34,7 @@ export class NbDynamicOverlayHandler {
   protected _trigger: NbTrigger = NbTrigger.NOOP;
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
+  protected _offset: number = 0;
 
   protected dynamicOverlay: NbDynamicOverlay;
 
@@ -86,6 +87,12 @@ export class NbDynamicOverlayHandler {
   context(context: {}) {
     this.changes.context = new NbDynamicOverlayChange(this._context, context);
     this._context = context;
+    return this;
+  }
+
+  offset(offset: number) {
+    this.changes.offset = new NbDynamicOverlayChange(this._offset, offset);
+    this._offset = offset;
     return this;
   }
 
@@ -163,7 +170,8 @@ export class NbDynamicOverlayHandler {
     return this.positionBuilder
       .connectedTo(this._host)
       .position(this._position)
-      .adjustment(this._adjustment);
+      .adjustment(this._adjustment)
+      .offset(this._offset);
   }
 
   protected subscribeOnTriggers(dynamicOverlay: NbDynamicOverlay) {
@@ -192,7 +200,7 @@ export class NbDynamicOverlayHandler {
   }
 
   protected isPositionStrategyUpdateRequired(): boolean {
-    return this.isAdjustmentUpdated() || this.isPositionUpdated() || this.isHostUpdated();
+    return this.isAdjustmentUpdated() || this.isPositionUpdated() || this.isOffsetUpdated() || this.isHostUpdated();
   }
 
   protected isTriggerStrategyUpdateRequired(): boolean {
@@ -229,6 +237,10 @@ export class NbDynamicOverlayHandler {
 
   protected isTriggerUpdated(): boolean {
     return this.changes.trigger && this.changes.trigger.isChanged();
+  }
+
+  protected isOffsetUpdated(): boolean {
+    return this.changes.offset && this.changes.offset.isChanged();
   }
 
   protected clearChanges() {
