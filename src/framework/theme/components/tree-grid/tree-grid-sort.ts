@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, Directive, Inject, Input } from '@angular/core';
 
-import { NB_SORT_HEADER_COLUMN_DEF } from './tree-grid-cell';
+import { NB_SORT_HEADER_COLUMN_DEF } from '../cdk/table';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
 interface NbSortHeaderColumnDef {
@@ -45,7 +45,7 @@ export class NbSortDirective {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbSortHeaderDirective {
+export class NbSortHeaderComponent {
 
   @Input('nbSortHeader') direction: NbSortDirection = '';
 

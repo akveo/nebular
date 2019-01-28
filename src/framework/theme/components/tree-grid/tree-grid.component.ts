@@ -14,20 +14,20 @@ import {
   Input,
   IterableDiffers,
 } from '@angular/core';
-import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
-import { Directionality } from '@angular/cdk/bidi';
-import { Platform } from '@angular/cdk/platform';
 
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbPlatform } from '../cdk/platform';
+import { NbDirectionality } from '../cdk/bidi';
+import { NB_TABLE_TEMPLATE, NbBaseTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NbTreeGridNode } from './data-source/tree-grid.model';
 
 @Component({
   selector: 'nb-tree-grid, table[nbTreeGrid]',
-  template: CDK_TABLE_TEMPLATE,
+  template: NB_TABLE_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbTreeGridComponent<T> extends CdkTable<T> {
+export class NbTreeGridComponent<T> extends NbBaseTable<T> {
 
   // TODO get rid of this
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
@@ -35,9 +35,9 @@ export class NbTreeGridComponent<T> extends CdkTable<T> {
               changeDetectorRef: ChangeDetectorRef,
               elementRef: ElementRef,
               @Attribute('role') role: string,
-              dir: Directionality,
+              dir: NbDirectionality,
               @Inject(NB_DOCUMENT) document: any,
-              platform: Platform | undefined,
+              platform: NbPlatform  | undefined,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
   }

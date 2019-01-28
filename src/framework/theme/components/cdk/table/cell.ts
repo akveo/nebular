@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license infornbion.
  */
 
-
 import { Directive, ElementRef, InjectionToken, Input } from '@angular/core';
 import {
   CdkCell,
@@ -15,7 +14,6 @@ import {
   CdkHeaderCell,
   CdkHeaderCellDef,
 } from '@angular/cdk/table';
-
 
 /**
  * Cell definition for the nb-table.
@@ -83,7 +81,7 @@ export class NbColumnDefDirective extends CdkColumnDef {
   },
 })
 export class NbHeaderCellDirective extends CdkHeaderCell {
-  constructor(columnDef: CdkColumnDef,
+  constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef<HTMLElement>) {
     super(columnDef, elementRef);
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);
@@ -99,7 +97,7 @@ export class NbHeaderCellDirective extends CdkHeaderCell {
   },
 })
 export class NbFooterCellDirective extends CdkFooterCell {
-  constructor(columnDef: CdkColumnDef,
+  constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef) {
     super(columnDef, elementRef);
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);
@@ -115,7 +113,7 @@ export class NbFooterCellDirective extends CdkFooterCell {
   },
 })
 export class NbCellDirective extends CdkCell {
-  constructor(columnDef: CdkColumnDef,
+  constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef<HTMLElement>) {
     super(columnDef, elementRef);
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);

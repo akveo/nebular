@@ -1,12 +1,40 @@
-/*
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
-
 import { ChangeDetectionStrategy, Component, Directive, Input } from '@angular/core';
-import { CdkFooterRow, CdkFooterRowDef, CdkHeaderRow, CdkHeaderRowDef, CdkRow, CdkRowDef } from '@angular/cdk/table';
+import {
+  CdkFooterRow,
+  CdkFooterRowDef,
+  CdkHeaderRow,
+  CdkHeaderRowDef,
+  CdkRow,
+  CdkRowDef,
+  CdkCellOutlet,
+  DataRowOutlet,
+  HeaderRowOutlet,
+  FooterRowOutlet,
+} from '@angular/cdk/table';
+
+@Directive({
+  selector: '[nbRowOutlet]',
+  providers: [{ provide: DataRowOutlet, useExisting: NbDataRowOutletDirective }],
+})
+export class NbDataRowOutletDirective extends DataRowOutlet {}
+
+@Directive({
+  selector: '[nbHeaderRowOutlet]',
+  providers: [{ provide: HeaderRowOutlet, useExisting: NbHeaderRowOutletDirective }],
+})
+export class NbHeaderRowOutletDirective extends HeaderRowOutlet {}
+
+@Directive({
+  selector: '[nbFooterRowOutlet]',
+  providers: [{ provide: FooterRowOutlet, useExisting: NbBaseFooterRowOutletDirective }],
+})
+export class NbBaseFooterRowOutletDirective extends FooterRowOutlet {}
+
+@Directive({
+  selector: '[nbCellOutlet]',
+  providers: [{ provide: CdkCellOutlet, useExisting: NbCellOutletDirective }],
+})
+export class NbCellOutletDirective extends CdkCellOutlet {}
 
 /**
  * Header row definition for the nb-table.
@@ -52,7 +80,7 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
 @Component({
   selector: 'nb-header-row, tr[nbHeaderRow]',
   template: `
-    <ng-container cdkCellOutlet></ng-container>`,
+    <ng-container nbCellOutlet></ng-container>`,
   host: {
     'class': 'nb-header-row',
     'role': 'row',
@@ -67,7 +95,7 @@ export class NbHeaderRowComponent extends CdkHeaderRow {
 @Component({
   selector: 'nb-footer-row, tr[nbFooterRow]',
   template: `
-    <ng-container cdkCellOutlet></ng-container>`,
+    <ng-container nbCellOutlet></ng-container>`,
   host: {
     'class': 'nb-footer-row',
     'role': 'row',
@@ -82,7 +110,7 @@ export class NbFooterRowComponent extends CdkFooterRow {
 @Component({
   selector: 'nb-row, tr[nbRow]',
   template: `
-    <ng-container cdkCellOutlet></ng-container>`,
+    <ng-container nbCellOutlet></ng-container>`,
   host: {
     'class': 'nb-row',
     'role': 'row',

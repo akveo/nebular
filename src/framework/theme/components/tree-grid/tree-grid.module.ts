@@ -5,61 +5,25 @@
  */
 
 import { NgModule } from '@angular/core';
-import { CdkTableModule } from '@angular/cdk/table';
+import { CommonModule } from '@angular/common';
 
+import { NbBaseTableModule } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
-import {
-  NbCellDefDirective,
-  NbCellDirective,
-  NbColumnDefDirective,
-  NbFooterCellDefDirective,
-  NbFooterCellDirective,
-  NbHeaderCellDefDirective,
-  NbHeaderCellDirective,
-} from './tree-grid-cell';
-import {
-  NbFooterRowComponent,
-  NbFooterRowDefDirective,
-  NbHeaderRowComponent,
-  NbHeaderRowDefDirective,
-  NbRowComponent,
-  NbRowDefDirective,
-} from './tree-grid-row';
-import { NbSortDirective, NbSortHeaderDirective } from './tree-grid-sort';
+import { NbSortDirective, NbSortHeaderComponent } from './tree-grid-sort';
 import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NbTreeGridSortService } from './data-source/tree-grid-sort.service';
 import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service';
 import { NbTreeGridService } from './data-source/tree-grid.service';
 import { NbTreeGridDataService } from './data-source/tree-grid-data.service';
 import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
-import { CommonModule } from '@angular/common';
 
 const COMPONENTS = [
   // Tree Grid
   NbTreeGridComponent,
 
-  // Template defs
-  NbHeaderCellDefDirective,
-  NbHeaderRowDefDirective,
-  NbColumnDefDirective,
-  NbCellDefDirective,
-  NbRowDefDirective,
-  NbFooterCellDefDirective,
-  NbFooterRowDefDirective,
-
-  // Cell directives
-  NbHeaderCellDirective,
-  NbCellDirective,
-  NbFooterCellDirective,
-
-  // Row directives
-  NbHeaderRowComponent,
-  NbRowComponent,
-  NbFooterRowComponent,
-
   // Sort directives
   NbSortDirective,
-  NbSortHeaderDirective,
+  NbSortHeaderComponent,
 
   // Filter directives
   NbFilterDirective,
@@ -67,9 +31,9 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, CdkTableModule],
-  declarations: [...COMPONENTS],
-  exports: [...COMPONENTS],
+  imports: [ CommonModule, NbBaseTableModule ],
+  declarations: [ ...COMPONENTS ],
+  exports: [ NbBaseTableModule, ...COMPONENTS ],
   providers: [
     NbTreeGridSortService,
     NbTreeGridFilterService,
@@ -78,5 +42,4 @@ const COMPONENTS = [
     NbTreeGridDataSourceBuilder,
   ],
 })
-export class NbTreeGridModule {
-}
+export class NbTreeGridModule {}
