@@ -5,7 +5,7 @@ There is no need in any backend implementation, as [OAuth2](https://tools.ietf.o
 
 ## Complete example
 
-A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/azure).
+A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/without-layout/azure).
 And here the playground example available to play around with [Azure OAuth2 Nebular Example](/example/azure).
 
 <hr>
