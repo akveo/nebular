@@ -52,7 +52,7 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     return this.renderData;
   }
 
-  disconnect(collectionViewer: CollectionViewer) {
+  disconnect(collectionViewer: NbCollectionViewer) {
   }
 
   expand(row: T) {
