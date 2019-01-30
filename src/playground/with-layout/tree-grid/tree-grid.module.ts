@@ -12,12 +12,9 @@ import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
 
 @NgModule({
-  imports: [CommonModule, NbTreeGridModule, TreeGridRoutingModule],
+  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule ],
   declarations: [
     TreeGridShowcaseComponent,
   ],
 })
-export class NameModule {
-}
-
-
+export class TreeGridModule {}
