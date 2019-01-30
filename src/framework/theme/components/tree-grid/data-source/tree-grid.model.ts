@@ -13,7 +13,7 @@ export class NbTreeGridPresentationNode<T> {
   public expanded: boolean = false;
   public children: NbTreeGridPresentationNode<T>[] = [];
 
-  constructor(readonly node: NbTreeGridNode<T>) {
+  constructor(readonly node: NbTreeGridNode<T>, public readonly level: number) {
   }
 
   hasChildren(): boolean {

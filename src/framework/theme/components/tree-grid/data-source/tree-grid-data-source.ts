@@ -5,31 +5,29 @@
  */
 
 import { Injectable } from '@angular/core';
-import { DataSource } from '@angular/cdk/table';
-import { CollectionViewer } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { NbDataSource } from '../../cdk/table';
+import { NbCollectionViewer } from '../../cdk/collections';
 import { NbTreeGridSortService } from './tree-grid-sort.service';
 import { NbTreeGridFilterService } from './tree-grid-filter.service';
 import { NbTreeGridService } from './tree-grid.service';
 import { NbTreeGridDataService } from './tree-grid-data.service';
 import { NbSortable, NbSortRequest } from '../tree-grid-sort';
-import {
-  NbTreeGridNode,
-  NbTreeGridPresentationNode,
-} from './tree-grid.model';
+import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 
 export interface NbFilterable {
   filter(filterRequest: string);
 }
 
-export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable, NbFilterable {
+export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentationNode<T>>
+                                     implements NbSortable, NbFilterable {
   /** Stream that emits when a new data array is set on the data source. */
   private data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
 
   /** Stream emitting render data to the table (depends on ordered data changes). */
-  private readonly renderData = new BehaviorSubject<T[]>([]);
+  private readonly renderData = new BehaviorSubject<NbTreeGridPresentationNode<T>[]>([]);
 
   private readonly filterRequest = new BehaviorSubject<string>('');
 
@@ -48,7 +46,9 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
     this.updateChangeSubscription();
   }
 
-  connect(collectionViewer: CollectionViewer): Observable<T[] | ReadonlyArray<T>> {
+  connect(
+    collectionViewer: NbCollectionViewer,
+  ): Observable<NbTreeGridPresentationNode<T>[] | ReadonlyArray<NbTreeGridPresentationNode<T>>> {
     return this.renderData;
   }
 
@@ -68,6 +68,18 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
   toggle(row: T) {
     this.treeGridService.toggle(this.data.value, row);
     this.data.next(this.data.value);
+  }
+
+  toggleByIndex(rowIndex: number) {
+    const row: NbTreeGridPresentationNode<T> = this.renderData.value && this.renderData.value[rowIndex];
+    if (row) {
+      this.toggle(row.node.data);
+    }
+  }
+
+  getLevel(rowIndex: number): number {
+    const row = this.renderData.value[rowIndex];
+    return row ? row.level : 0;
   }
 
   sort(sortRequest: NbSortRequest) {
@@ -94,9 +106,9 @@ export class NbTreeGridDataSource<T> extends DataSource<T> implements NbSortable
 
     sortedData
       .pipe(
-        map((data: NbTreeGridPresentationNode<T>[]) => this.treeGridDataService.flatten(data)),
+        map((data: NbTreeGridPresentationNode<T>[]) => this.treeGridDataService.flattenExpanded(data)),
       )
-      .subscribe((data: T[]) => this.renderData.next(data));
+      .subscribe((data: NbTreeGridPresentationNode<T>[]) => this.renderData.next(data));
   }
 
   private filterData(data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {

@@ -10,24 +10,24 @@ import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 @Injectable()
 export class NbTreeGridDataService<T> {
 
-  toPresentationNodes(nodes: NbTreeGridNode<T>[]): NbTreeGridPresentationNode<T>[] {
+  toPresentationNodes(nodes: NbTreeGridNode<T>[], level: number = 1): NbTreeGridPresentationNode<T>[] {
     return nodes.map((node: NbTreeGridNode<T>) => {
-      const presentationNode = new NbTreeGridPresentationNode(node);
+      const presentationNode = new NbTreeGridPresentationNode(node, level);
 
       if (node.children) {
-        presentationNode.children = this.toPresentationNodes(node.children);
+        presentationNode.children = this.toPresentationNodes(node.children, level + 1);
       }
 
       return presentationNode;
     });
   }
 
-  flatten(nodes: NbTreeGridPresentationNode<T>[]): T[] {
-    return nodes.reduce((res: T[], node: NbTreeGridPresentationNode<T>) => {
-      res.push(node.node.data);
+  flattenExpanded(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
+    return nodes.reduce((res: NbTreeGridPresentationNode<T>[], node: NbTreeGridPresentationNode<T>) => {
+      res.push(node);
 
       if (node.expanded && node.hasChildren()) {
-        res.push(...this.flatten(node.children));
+        res.push(...this.flattenExpanded(node.children));
       }
 
       return res;
@@ -36,7 +36,7 @@ export class NbTreeGridDataService<T> {
 
   copy(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
     return nodes.map((node: NbTreeGridPresentationNode<T>) => {
-      const presentationNode = new NbTreeGridPresentationNode(node.node);
+      const presentationNode = new NbTreeGridPresentationNode(node.node, node.level);
       presentationNode.expanded = node.expanded;
 
       if (node.hasChildren()) {
