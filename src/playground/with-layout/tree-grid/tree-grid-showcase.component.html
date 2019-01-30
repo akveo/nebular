@@ -14,7 +14,7 @@
 
   <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
     <th nbHeaderCell nbSortHeader="desc" *nbHeaderCellDef>{{ column }}</th>
-    <td nbTreeGridCell *nbCellDef="let row">{{ row.node.data[column] }}</td>
+    <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
   </ng-container>
 
 </table>

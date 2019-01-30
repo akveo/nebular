@@ -77,6 +77,6 @@ export class TreeGridShowcaseComponent {
 
   getNameColumnText(row: NbTreeGridPresentationNode<PeriodicElement>): string {
     const childrenText = row.hasChildren() ? `(${row.children.length})` : '';
-    return `${row.node.data.name} ${childrenText}`;
+    return `${row.data.name} ${childrenText}`;
   }
 }
