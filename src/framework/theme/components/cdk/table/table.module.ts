@@ -45,6 +45,8 @@ export class NbBaseTable<T> extends CdkTable<T> {
 }
 
 const COMPONENTS = [
+  NbBaseTable,
+
   // Template defs
   NbHeaderCellDefDirective,
   NbHeaderRowDefDirective,
