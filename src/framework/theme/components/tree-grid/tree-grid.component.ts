@@ -21,7 +21,7 @@ import {
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
-import { NB_TABLE_TEMPLATE, NbBaseTable } from '../cdk/table';
+import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NbTreeGridNode, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbRowComponent } from '../cdk/table';
@@ -35,7 +35,7 @@ import { NbRowComponent } from '../cdk/table';
   template: NB_TABLE_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbTreeGridComponent<T> extends NbBaseTable<NbTreeGridPresentationNode<T>> implements AfterViewInit {
+export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit {
 
   // TODO get rid of this
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,

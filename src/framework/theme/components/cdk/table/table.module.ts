@@ -15,7 +15,7 @@ import {
 import {
   NbCellOutletDirective,
   NbDataRowOutletDirective,
-  NbBaseFooterRowOutletDirective,
+  NbFooterRowOutletDirective,
   NbHeaderRowOutletDirective,
   NbFooterRowComponent,
   NbFooterRowDefDirective,
@@ -30,7 +30,7 @@ export const NB_TABLE_TEMPLATE = `
   <ng-container nbRowOutlet></ng-container>
   <ng-container nbFooterRowOutlet></ng-container>`;
 
-export class NbBaseTable<T> extends CdkTable<T> {
+export class NbTable<T> extends CdkTable<T> {
   constructor(
     differs: IterableDiffers,
     changeDetectorRef: ChangeDetectorRef,
@@ -45,7 +45,7 @@ export class NbBaseTable<T> extends CdkTable<T> {
 }
 
 const COMPONENTS = [
-  NbBaseTable,
+  NbTable,
 
   // Template defs
   NbHeaderCellDefDirective,
@@ -59,7 +59,7 @@ const COMPONENTS = [
   // Outlets
   NbDataRowOutletDirective,
   NbHeaderRowOutletDirective,
-  NbBaseFooterRowOutletDirective,
+  NbFooterRowOutletDirective,
   NbCellOutletDirective,
 
   // Cell directives

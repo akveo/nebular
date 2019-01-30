@@ -26,9 +26,9 @@ export class NbHeaderRowOutletDirective extends HeaderRowOutlet {}
 
 @Directive({
   selector: '[nbFooterRowOutlet]',
-  providers: [{ provide: FooterRowOutlet, useExisting: NbBaseFooterRowOutletDirective }],
+  providers: [{ provide: FooterRowOutlet, useExisting: NbFooterRowOutletDirective }],
 })
-export class NbBaseFooterRowOutletDirective extends FooterRowOutlet {}
+export class NbFooterRowOutletDirective extends FooterRowOutlet {}
 
 @Directive({
   selector: '[nbCellOutlet]',
