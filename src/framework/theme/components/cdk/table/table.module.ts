@@ -78,4 +78,4 @@ const COMPONENTS = [
   declarations: [ ...COMPONENTS ],
   exports: [ ...COMPONENTS ],
 })
-export class NbBaseTableModule extends CdkTableModule {}
+export class NbTableModule extends CdkTableModule {}

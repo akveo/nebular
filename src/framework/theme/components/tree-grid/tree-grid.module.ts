@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbBaseTableModule } from '../cdk/table';
+import { NbTableModule } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbSortDirective, NbSortHeaderComponent } from './tree-grid-sort';
@@ -34,9 +34,9 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [ CommonModule, NbBaseTableModule ],
+  imports: [ CommonModule, NbTableModule ],
   declarations: [ ...COMPONENTS ],
-  exports: [ NbBaseTableModule, ...COMPONENTS ],
+  exports: [ NbTableModule, ...COMPONENTS ],
   providers: [
     NbTreeGridSortService,
     NbTreeGridFilterService,
