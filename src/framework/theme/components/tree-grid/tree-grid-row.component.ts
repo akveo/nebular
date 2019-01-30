@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener } from '@angular/core';
-import { NbRowComponent } from '../cdk/table';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy } from '@angular/core';
+import { Subject, timer } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { NbRowComponent, NbTable } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
 
 @Component({
@@ -13,9 +15,13 @@ import { NbTreeGridComponent } from './tree-grid.component';
   providers: [{ provide: NbRowComponent, useExisting: NbTreeGridRowComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbTreeGridRowComponent extends NbRowComponent {
-  constructor(public tree: NbTreeGridComponent<any>) {
+export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy {
+  private doubleClick$ = new Subject();
+  private readonly tree: NbTreeGridComponent<any>;
+
+  constructor(tree: NbTable<any>) {
     super();
+    this.tree = tree as NbTreeGridComponent<any>;
   }
 
   @HostBinding('attr.level')
@@ -25,6 +31,21 @@ export class NbTreeGridRowComponent extends NbRowComponent {
 
   @HostListener('click')
   toggleNode(): void {
-    this.tree.toggle(this);
+    timer(200)
+      .pipe(
+        take(1),
+        takeUntil(this.doubleClick$),
+      )
+      .subscribe(() => this.tree.toggle(this));
+  }
+
+  @HostListener('dblclick')
+  toggleNodeDeep() {
+    this.doubleClick$.next();
+    this.tree.toggle(this, { deep: true });
+  }
+
+  ngOnDestroy() {
+    this.doubleClick$.complete();
   }
 }

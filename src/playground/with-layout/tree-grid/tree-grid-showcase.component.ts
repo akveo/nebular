@@ -29,6 +29,22 @@ const DATA: NbTreeGridNode<PeriodicElement>[] = [
         data: { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
         children: [
           { data: { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' } },
+          { data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' } },
+          { data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' } },
+          {
+            data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+          },
+          {
+            data: { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+            children: [
+              { data: { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' } },
+              { data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' } },
+              { data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' } },
+              {
+                data: { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+              },
+            ],
+          },
         ],
       },
       { data: { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' } },
@@ -76,7 +92,15 @@ export class TreeGridShowcaseComponent {
   }
 
   getNameColumnText(row: NbTreeGridPresentationNode<PeriodicElement>): string {
-    const childrenText = row.hasChildren() ? `(${row.children.length})` : '';
-    return `${row.data.name} ${childrenText}`;
+    const childrenCountText = row.hasChildren() ? `(${this.countChildren(row.children)})` : '';
+    return `${row.data.name} ${childrenCountText}`;
+  }
+
+  private countChildren(nodes: NbTreeGridPresentationNode<PeriodicElement>[]): number {
+    if (!nodes) {
+      return 0;
+    }
+
+    return nodes.reduce((count, n) => count + 1 + this.countChildren(n.children), 0);
   }
 }

@@ -24,7 +24,8 @@ import { NbDirectionality } from '../cdk/bidi';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NbTreeGridNode, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
-import { NbRowComponent } from '../cdk/table';
+import { NbToggleOptions } from './data-source/tree-grid.service';
+import { NbTreeGridRowComponent } from './tree-grid-row.component';
 
 /**
  * NbTreeGridComponent
@@ -34,6 +35,9 @@ import { NbRowComponent } from '../cdk/table';
   selector: 'nb-tree-grid, table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    { provide: NbTable, useExisting: NbTreeGridComponent },
+  ],
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit {
 
@@ -61,21 +65,21 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     this.dataSource = this._source;
   }
 
-  @ContentChildren(NbRowComponent) private rows: QueryList<NbRowComponent>;
+  @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
 
   ngAfterViewInit() {
     this._changeDetectorRef.detectChanges();
   }
 
-  getLevel(row: NbRowComponent): number {
+  getLevel(row: NbTreeGridRowComponent): number {
     return this._source.getLevel(this.getRowIndex(row));
   }
 
-  toggle(row: NbRowComponent): void {
-    return this._source.toggleByIndex(this.getRowIndex(row));
+  toggle(row: NbTreeGridRowComponent, options?: NbToggleOptions): void {
+    return this._source.toggleByIndex(this.getRowIndex(row), options);
   }
 
-  private getRowIndex(row: NbRowComponent): number {
+  private getRowIndex(row: NbTreeGridRowComponent): number {
     return this.rows.toArray().indexOf(row);
   }
 }
