@@ -78,7 +78,7 @@ import { NbPopoverComponent } from './popover.component';
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
- * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
+ * <button nbPopover="Hello, Popover!" [nbPopoverAdjustment]="false"></button>
  * ```
  *
  * Popover has a number of triggers which provides an ability to show and hide the component in different ways:

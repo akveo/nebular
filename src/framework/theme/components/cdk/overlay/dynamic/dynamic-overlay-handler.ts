@@ -34,7 +34,7 @@ export class NbDynamicOverlayHandler {
   protected _trigger: NbTrigger = NbTrigger.NOOP;
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
-  protected _offset: number = 0;
+  protected _offset: number = 15;
 
   protected dynamicOverlay: NbDynamicOverlay;
 
