@@ -455,9 +455,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(direction => {
-        this.renderer.setProperty(this.document, 'dir', direction);
-      });
+      .subscribe(direction => this.document.dir = direction);
 
     this.scrollService.onManualScroll()
       .pipe(takeWhile(() => this.alive))

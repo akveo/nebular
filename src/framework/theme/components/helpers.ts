@@ -14,7 +14,7 @@ export function convertToBoolProperty(val: any): boolean {
   return !!val;
 }
 
-export function getElementHeight (el) {
+export function getElementHeight(el) {
   /**
    *
    * TODO: Move helpers in separate common module.
@@ -25,3 +25,4 @@ export function getElementHeight (el) {
   const marginBottom = parseInt(style.getPropertyValue('margin-bottom'), 10);
   return el.offsetHeight + marginTop + marginBottom;
 }
+
