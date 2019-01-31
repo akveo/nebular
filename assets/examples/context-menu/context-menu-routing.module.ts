@@ -3,6 +3,8 @@ import { RouterModule, Route} from '@angular/router';
 import { ContextMenuClickComponent } from './context-menu-click.component';
 import { ContextMenuShowcaseComponent } from './context-menu-showcase.component';
 import { ContextMenuTestComponent } from './context-menu-test.component';
+import { ContextMenuModesComponent } from './context-menu-modes.component';
+import { ContextMenuNoopComponent } from './context-menu-noop.component';
 
 const routes: Route[] = [
   {
@@ -16,6 +18,14 @@ const routes: Route[] = [
   {
     path: 'context-menu-test.component',
     component: ContextMenuTestComponent,
+  },
+  {
+    path: 'context-menu-modes.component',
+    component: ContextMenuModesComponent,
+  },
+  {
+    path: 'context-menu-noop.component',
+    component: ContextMenuNoopComponent,
   },
 ];
 

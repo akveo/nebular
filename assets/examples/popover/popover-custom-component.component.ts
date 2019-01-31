@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicToAddComponent } from './components/dynamic.component';
+import { DynamicToAddComponent } from './components/dynamic.components';
 
 @Component({
   selector: 'nb-popover-custom-component',

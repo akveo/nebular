@@ -6,6 +6,9 @@ import { PopoverPlacementsComponent } from './popover-placements.component';
 import { PopoverShowcaseComponent } from './popover-showcase.component';
 import { PopoverTemplateRefComponent } from './popover-template-ref.component';
 import { PopoverTestComponent } from './popover-test.component';
+import { PopoverNoopComponent } from './popover-noop.component';
+import { PopoverDynamicComponent } from './popover-dynamic.component';
+import { PopoverDynamicCodeComponent } from './popover-dynamic-code.component';
 
 const routes: Route[] = [
   {
@@ -31,6 +34,18 @@ const routes: Route[] = [
   {
     path: 'popover-test.component',
     component: PopoverTestComponent,
+  },
+  {
+    path: 'popover-noop.component',
+    component: PopoverNoopComponent,
+  },
+  {
+    path: 'popover-dynamic.component',
+    component: PopoverDynamicComponent,
+  },
+  {
+    path: 'popover-dynamic-code.component',
+    component: PopoverDynamicCodeComponent,
   },
 ];
 
