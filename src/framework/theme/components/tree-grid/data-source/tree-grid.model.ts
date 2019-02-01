@@ -7,11 +7,17 @@
 export interface NbTreeGridNode<T> {
   data: T,
   children?: NbTreeGridNode<T>[];
+  expanded?: boolean;
 }
 
 export class NbTreeGridPresentationNode<T> {
-  public expanded: boolean = false;
-  public children: NbTreeGridPresentationNode<T>[] = [];
+  get expanded(): boolean {
+    return this.node.expanded;
+  }
+  set expanded(value: boolean) {
+    this.node.expanded = value;
+  }
+  children: NbTreeGridPresentationNode<T>[] = [];
 
   get data(): T {
     return this.node.data;
