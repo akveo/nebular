@@ -1,3 +1,42 @@
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/akveo/nebular/compare/v3.2.0...v3.2.1) (2019-01-31)
+
+
+### Bug Fixes
+
+* **popover:** get back default 15px offset ([#1201](https://github.com/akveo/nebular/issues/1201)) ([f7433e7](https://github.com/akveo/nebular/commit/f7433e7))
+
+
+
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/akveo/nebular/compare/v3.1.0...v3.2.0) (2019-01-31)
+
+Popover and Tooltip components can accept dynamic :rocket: content through bindings or code.
+
+### Bug Fixes
+
+* **docs:** prevent scrolling when user scroll ([#982](https://github.com/akveo/nebular/issues/982)) ([bc2ab1d](https://github.com/akveo/nebular/commit/bc2ab1d)), closes [#810](https://github.com/akveo/nebular/issues/810)
+* **layout:** set document dir directly ([#1164](https://github.com/akveo/nebular/issues/1164)) ([37eaea7](https://github.com/akveo/nebular/commit/37eaea7))
+* **popover:** fix template context not being passed, update cdk to 7.2.1 ([#1153](https://github.com/akveo/nebular/issues/1153)) ([c83188c](https://github.com/akveo/nebular/commit/c83188c)), closes [#1084](https://github.com/akveo/nebular/issues/1084) [#848](https://github.com/akveo/nebular/issues/848)
+* **router-tabset:** navigate using router link ([#1146](https://github.com/akveo/nebular/issues/1146)) ([cb1c21e](https://github.com/akveo/nebular/commit/cb1c21e)), closes [#188](https://github.com/akveo/nebular/issues/188)
+* **search:** emit activate and deactivate events ([#1162](https://github.com/akveo/nebular/issues/1162)) ([67c5718](https://github.com/akveo/nebular/commit/67c5718))
+* **tooltip:** fix tooltip not being hide + tests ([#1123](https://github.com/akveo/nebular/issues/1123)) ([9360a4b](https://github.com/akveo/nebular/commit/9360a4b))
+
+
+### Features
+
+* **action:** provide new attributes for link and title ([#1046](https://github.com/akveo/nebular/issues/1046)) ([30bd394](https://github.com/akveo/nebular/commit/30bd394)), closes [#814](https://github.com/akveo/nebular/issues/814)
+* **context-menu:** add `nbContextMenuTrigger` parameter ([#1139](https://github.com/akveo/nebular/issues/1139)) ([27b291e](https://github.com/akveo/nebular/commit/27b291e)), closes [#1112](https://github.com/akveo/nebular/issues/1112)
+* **overlay:** add noop trigger strategy ([#1133](https://github.com/akveo/nebular/issues/1133)) ([1e43929](https://github.com/akveo/nebular/commit/1e43929))
+* **popover:** add ability for dynamic input ([#1149](https://github.com/akveo/nebular/issues/1149)) ([d427e59](https://github.com/akveo/nebular/commit/d427e59)), closes [#953](https://github.com/akveo/nebular/issues/953) [#1142](https://github.com/akveo/nebular/issues/1142)
+* **stepper:** add disable step navigation setting ([#1155](https://github.com/akveo/nebular/issues/1155)) ([e1503cc](https://github.com/akveo/nebular/commit/e1503cc)), closes [#902](https://github.com/akveo/nebular/issues/902)
+* **stepper:** add linear mode ([#1151](https://github.com/akveo/nebular/issues/1151)) ([db5d214](https://github.com/akveo/nebular/commit/db5d214)), closes [#1040](https://github.com/akveo/nebular/issues/1040)
+* **tabs:** add `disabled` property ([#1141](https://github.com/akveo/nebular/issues/1141)) ([ea7b209](https://github.com/akveo/nebular/commit/ea7b209)), closes [#387](https://github.com/akveo/nebular/issues/387)
+* **tooltip:** add new `nbTooltipTrigger` parameter ([#1138](https://github.com/akveo/nebular/issues/1138)) ([113d3b0](https://github.com/akveo/nebular/commit/113d3b0))
+* **tooltip:** dynamic inputs support ([#1184](https://github.com/akveo/nebular/issues/1184)) ([9ce7019](https://github.com/akveo/nebular/commit/9ce7019)), closes [#1052](https://github.com/akveo/nebular/issues/1052) [#1159](https://github.com/akveo/nebular/issues/1159)
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/akveo/nebular/compare/v3.0.1...v3.1.0) (2018-12-31) :christmas_tree:
 

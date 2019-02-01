@@ -406,7 +406,7 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host1);
     expect(positionBuilder._position).toBe(NbPosition.TOP);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
-    expect(positionBuilder._offset).toBe(0);
+    expect(positionBuilder._offset).toBe(15);
 
     configure().host(host2).rebuild();
     expect(triggerStrategyBuilder._host).toBe(host2.nativeElement);
@@ -415,7 +415,7 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host2);
     expect(positionBuilder._position).toBe(NbPosition.TOP);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.NOOP);
-    expect(positionBuilder._offset).toBe(0);
+    expect(positionBuilder._offset).toBe(15);
   });
 
   it('should set and update position', () => {
