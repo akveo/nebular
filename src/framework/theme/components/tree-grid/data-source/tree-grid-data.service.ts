@@ -5,12 +5,12 @@
  */
 import { Injectable } from '@angular/core';
 
-import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
+import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 
 @Injectable()
 export class NbTreeGridDataService<T> {
 
-  toPresentationNodes(nodes: NbTreeGridNode<T>[], level: number = 1): NbTreeGridPresentationNode<T>[] {
+  toPresentationNodes(nodes: NbTreeGridNode<T>[], level: number = DEFAULT_ROW_LEVEL): NbTreeGridPresentationNode<T>[] {
     return nodes.map((node: NbTreeGridNode<T>) => {
       const presentationNode = new NbTreeGridPresentationNode(node, level);
 

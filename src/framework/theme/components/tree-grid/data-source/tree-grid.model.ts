@@ -10,6 +10,8 @@ export interface NbTreeGridNode<T> {
   expanded?: boolean;
 }
 
+export const DEFAULT_ROW_LEVEL: number = 0;
+
 export class NbTreeGridPresentationNode<T> {
   get expanded(): boolean {
     return this.node.expanded;
@@ -23,8 +25,10 @@ export class NbTreeGridPresentationNode<T> {
     return this.node.data;
   }
 
-  constructor(readonly node: NbTreeGridNode<T>, public readonly level: number) {
-  }
+  constructor(
+    readonly node: NbTreeGridNode<T>,
+    public readonly level: number = DEFAULT_ROW_LEVEL,
+  ) {}
 
   hasChildren(): boolean {
     return !!this.children && !!this.children.length;

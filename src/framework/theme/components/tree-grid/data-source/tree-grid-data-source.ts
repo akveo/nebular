@@ -15,7 +15,7 @@ import { NbTreeGridFilterService } from './tree-grid-filter.service';
 import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
 import { NbTreeGridDataService } from './tree-grid-data.service';
 import { NbSortable, NbSortRequest } from '../tree-grid-sort';
-import { NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
+import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 
 export interface NbFilterable {
   filter(filterRequest: string);
@@ -79,7 +79,7 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
 
   getLevel(rowIndex: number): number {
     const row = this.renderData.value[rowIndex];
-    return row ? row.level : 0;
+    return row ? row.level : DEFAULT_ROW_LEVEL;
   }
 
   sort(sortRequest: NbSortRequest) {
