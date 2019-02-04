@@ -84,6 +84,7 @@ export * from './components/radio/radio.module';
 export * from './components/tree-grid/tree-grid.module';
 export * from './components/tree-grid/tree-grid.component';
 export * from './components/tree-grid/tree-grid-row.component';
+export * from './components/tree-grid/tree-grid-injection-tokens';
 export * from './components/tree-grid/data-source/tree-grid.model';
 export * from './components/tree-grid/data-source/tree-grid-data-source';
 export * from './components/tree-grid/data-source/tree-grid-data.service';

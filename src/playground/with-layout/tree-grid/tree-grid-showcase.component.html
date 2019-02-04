@@ -6,14 +6,12 @@
   <tr nbTreeGridRow *nbRowDef="let row; columns: columnsToDisplay"></tr>
 
   <ng-container nbColumnDef="name">
-    <th nbHeaderCell nbSortHeader="asc" *nbHeaderCellDef>Name</th>
-    <td nbTreeGridCell *nbCellDef="let row" [style.padding-left.rem]="row.level">
-      {{ getNameColumnText(row) }}
-    </td>
+    <th nbTreeGridHeaderCell nbSortHeader="asc" *nbHeaderCellDef>Name</th>
+    <td nbTreeGridCell *nbCellDef="let row">{{ getNameColumnText(row) }}</td>
   </ng-container>
 
   <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
-    <th nbHeaderCell nbSortHeader="desc" *nbHeaderCellDef>{{ column }}</th>
+    <th nbTreeGridHeaderCell nbSortHeader="desc" *nbHeaderCellDef>{{ column }}</th>
     <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
   </ng-container>
 

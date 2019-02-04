@@ -1,33 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { NbRowComponent, NbTable } from '../cdk/table';
+import { NbRowComponent } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
+import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 
 @Component({
   selector: 'nb-tree-grid-row, tr[nbTreeGridRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  template: `<ng-container nbCellOutlet></ng-container>`,
   host: {
-    'class': 'nb-row',
+    'class': 'nb-tree-grid-row',
     'role': 'row',
   },
   providers: [{ provide: NbRowComponent, useExisting: NbTreeGridRowComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy {
-  private doubleClick$ = new Subject();
+  private readonly doubleClick$ = new Subject();
   private readonly tree: NbTreeGridComponent<any>;
-
-  constructor(tree: NbTable<any>) {
-    super();
-    this.tree = tree as NbTreeGridComponent<any>;
-  }
-
-  @HostBinding('attr.level')
-  get level(): number {
-    return this.tree.getLevel(this);
-  }
 
   @HostListener('click')
   toggleNode(): void {
@@ -36,13 +26,18 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
         take(1),
         takeUntil(this.doubleClick$),
       )
-      .subscribe(() => this.tree.toggle(this));
+      .subscribe(() => this.tree.toggleRow(this));
   }
 
   @HostListener('dblclick')
   toggleNodeDeep() {
     this.doubleClick$.next();
-    this.tree.toggle(this, { deep: true });
+    this.tree.toggleRow(this, { deep: true });
+  }
+
+  constructor(@Inject(NB_TREE_GRID) tree) {
+    super();
+    this.tree = tree as NbTreeGridComponent<any>;
   }
 
   ngOnDestroy() {
