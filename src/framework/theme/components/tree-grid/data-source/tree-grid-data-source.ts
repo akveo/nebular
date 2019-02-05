@@ -14,7 +14,7 @@ import { NbTreeGridSortService } from './tree-grid-sort.service';
 import { NbTreeGridFilterService } from './tree-grid-filter.service';
 import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
 import { NbTreeGridDataService } from './tree-grid-data.service';
-import { NbSortable, NbSortRequest } from '../tree-grid-sort';
+import { NbSortable, NbSortRequest } from '../tree-grid-sort.component';
 import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
 
 export interface NbFilterable {

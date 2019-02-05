@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import './tree-grid-sort.component.theme';
+
 @mixin nb-tree-grid-theme() {
   $border-width: nb-theme(tree-grid-cell-border-width);
   $border-style: nb-theme(tree-grid-cell-border-style);
@@ -31,4 +33,6 @@
       min-height: nb-theme(tree-grid-row-min-height);
     }
   }
+
+  @include nb-tree-grid-sort-header-theme();
 }

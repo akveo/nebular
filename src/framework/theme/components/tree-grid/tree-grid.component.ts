@@ -78,7 +78,6 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
   @ContentChildren(NbTreeGridRowComponent, { read: ElementRef }) private rowElements: QueryList<ElementRef<Element>>;
-  @ContentChildren(NbTreeGridCellDirective, { descendants: true }) private cells: QueryList<NbTreeGridCellDirective>;
 
   ngAfterViewInit() {
     this._changeDetectorRef.detectChanges();

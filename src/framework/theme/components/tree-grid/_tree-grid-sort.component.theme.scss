@@ -1,0 +1,16 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-tree-grid-sort-header-theme() {
+  [nbSortHeader] {
+    .change-sort-button {
+      background: nb-theme(tree-grid-sort-header-button-background);
+      border: nb-theme(tree-grid-sort-header-button-border);
+      padding: nb-theme(tree-grid-sort-header-button-padding);
+      font-weight: nb-theme(tree-grid-sort-header-button-font-weight);
+    }
+  }
+}

@@ -685,6 +685,10 @@ $theme: (
   tree-grid-cell-border-color: separator,
   tree-grid-row-min-height: 2rem,
   tree-grid-cell-padding: 0.875rem 1.25rem,
+  tree-grid-sort-header-button-background: transparent,
+  tree-grid-sort-header-button-border: none,
+  tree-grid-sort-header-button-padding: 0,
+  tree-grid-sort-header-button-font-weight: bold,
 );
 
 // register the theme

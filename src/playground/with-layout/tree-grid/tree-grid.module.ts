@@ -10,11 +10,13 @@ import { NbTreeGridModule } from '@nebular/theme';
 
 import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
+import { SortIconComponent } from './components/sort-icon.component';
 
 @NgModule({
   imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule ],
   declarations: [
     TreeGridShowcaseComponent,
+    SortIconComponent,
   ],
 })
 export class TreeGridModule {}

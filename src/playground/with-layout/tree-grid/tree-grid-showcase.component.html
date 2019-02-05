@@ -6,7 +6,10 @@
   <tr nbTreeGridRow *nbRowDef="let row; columns: columnsToDisplay"></tr>
 
   <ng-container nbColumnDef="name">
-    <th nbTreeGridHeaderCell nbSortHeader="asc" *nbHeaderCellDef>Name</th>
+    <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+      name
+      <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
+    </th>
     <td nbTreeGridCell *nbCellDef="let row">
       <button *ngIf="row.hasChildren()"
               nbTreeGridRowToggle
@@ -18,7 +21,10 @@
   </ng-container>
 
   <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
-    <th nbTreeGridHeaderCell nbSortHeader="desc" *nbHeaderCellDef>{{ column }}</th>
+    <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+      {{ column }}
+      <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
+    </th>
     <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
   </ng-container>
 

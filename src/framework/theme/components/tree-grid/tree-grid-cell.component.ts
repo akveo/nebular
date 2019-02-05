@@ -101,7 +101,6 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   private readonly tree: NbTreeGridComponent<any>;
-  private readonly columnDef: NbColumnDefDirective;
 
   @HostBinding('style.width')
   get columnWidth(): string {
@@ -115,6 +114,5 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   ) {
     super(columnDef, elementRef);
     this.tree = tree as NbTreeGridComponent<any>;
-    this.columnDef = columnDef;
   }
 }

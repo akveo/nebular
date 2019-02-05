@@ -11,7 +11,7 @@ import { NbTableModule } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective, NbTreeGridHeaderCellDirective } from './tree-grid-cell.component';
-import { NbSortDirective, NbSortHeaderComponent } from './tree-grid-sort';
+import { NbSortDirective, NbSortHeaderComponent, NbSortHeaderIconDirective } from './tree-grid-sort.component';
 import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NbTreeGridSortService } from './data-source/tree-grid-sort.service';
 import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service';
@@ -37,6 +37,7 @@ const COMPONENTS = [
   NbTreeGridCellDirective,
 
   NbTreeGridRowToggleDirective,
+  NbSortHeaderIconDirective,
 ];
 
 @NgModule({
