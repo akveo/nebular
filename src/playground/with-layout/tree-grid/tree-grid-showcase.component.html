@@ -7,7 +7,14 @@
 
   <ng-container nbColumnDef="name">
     <th nbTreeGridHeaderCell nbSortHeader="asc" *nbHeaderCellDef>Name</th>
-    <td nbTreeGridCell *nbCellDef="let row">{{ getNameColumnText(row) }}</td>
+    <td nbTreeGridCell *nbCellDef="let row">
+      <button *ngIf="row.hasChildren()"
+              nbTreeGridRowToggle
+              [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
+        <i [class.nb-arrow-right]="!row.expanded" [class.nb-arrow-down]="row.expanded" aria-hidden="true"></i>
+      </button>
+      {{ row.data.name }}
+    </td>
   </ng-container>
 
   <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
