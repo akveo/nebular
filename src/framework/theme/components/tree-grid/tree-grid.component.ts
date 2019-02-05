@@ -39,6 +39,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 @Component({
   selector: 'nb-tree-grid, table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
+  styleUrls: ['./tree-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NbTable, useExisting: NbTreeGridComponent },
@@ -93,22 +94,25 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   toggleRow(row: NbTreeGridRowComponent, options?: NbToggleOptions): void {
-    return this._source.toggleByIndex(this.getRowIndex(row), options);
+    this._source.toggleByIndex(this.getRowIndex(row), options);
+  }
+
+  toggleCellRow(cell: NbTreeGridCellDirective): void {
+    this.toggleRow(this.findCellRow(cell));
   }
 
   getColumnWidth(): string {
     return `${100 / this.getColumnsCount()}%`;
   }
 
-  getCellPadding(cell: NbTreeGridCellDirective, columnName: string): string {
+  getCellPadding(cell: NbTreeGridCellDirective, columnName: string): number {
     const isFirstColumn = this.isFirstColumn(columnName);
     const row = isFirstColumn && this.findCellRow(cell);
     if (isFirstColumn && row) {
-      const nestingLevel = this.getRowLevel(row);
-      return `${nestingLevel * this.levelPadding}${this.levelPaddingUnit}`;
+      return this.getRowLevel(row) * this.levelPadding;
     }
 
-    return '0';
+    return 0;
   }
 
   private getRowIndex(row: NbTreeGridRowComponent): number {

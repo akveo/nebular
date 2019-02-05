@@ -18,6 +18,7 @@ import { NbTreeGridFilterService } from './data-source/tree-grid-filter.service'
 import { NbTreeGridService } from './data-source/tree-grid.service';
 import { NbTreeGridDataService } from './data-source/tree-grid-data.service';
 import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
+import { NbTreeGridRowToggleDirective } from './tree-grid-row-toggle.directive';
 
 const COMPONENTS = [
   // Tree Grid
@@ -34,6 +35,8 @@ const COMPONENTS = [
   NbTreeGridHeaderCellDirective,
   NbTreeGridRowComponent,
   NbTreeGridCellDirective,
+
+  NbTreeGridRowToggleDirective,
 ];
 
 @NgModule({

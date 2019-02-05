@@ -679,6 +679,12 @@ $theme: (
   radio-disabled-border-size: 2px,
   radio-disabled-border-color: radio-border-color,
   radio-disabled-checkmark: radio-checkmark,
+
+  tree-grid-cell-border-width: 1px,
+  tree-grid-cell-border-style: solid,
+  tree-grid-cell-border-color: separator,
+  tree-grid-row-min-height: 2rem,
+  tree-grid-cell-padding: 0.875rem 1.25rem,
 );
 
 // register the theme
