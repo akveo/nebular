@@ -8,7 +8,6 @@
     },
     "setup": {
       "description": "Sets up the specified project after the ng-add dependencies have been installed.",
-      "private": true,
       "factory": "./ng-add/setup",
       "schema": "./ng-add/schema.json"
     }

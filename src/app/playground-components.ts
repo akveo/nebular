@@ -718,6 +718,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'PopoverNoopComponent',
         name: 'Popover Noop',
       },
+      {
+        path: 'popover-dynamic.component',
+        link: '/popover/popover-dynamic.component',
+        component: 'PopoverDynamicComponent',
+        name: 'Popover Dynamic',
+      },
+      {
+        path: 'popover-dynamic-code.component',
+        link: '/popover/popover-dynamic-code.component',
+        component: 'PopoverDynamicCodeComponent',
+        name: 'Popover Dynamic Code',
+      },
     ],
   },
   {
@@ -951,6 +963,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/stepper/stepper-vertical.component',
         component: 'StepperVerticalComponent',
         name: 'Stepper Vertical',
+      },
+      {
+        path: 'stepper-disabled-step-nav.component',
+        link: '/stepper/stepper-disabled-step-nav.component',
+        component: 'StepperDisabledStepNavComponent',
+        name: 'Stepper Disabled Step Nav',
+      },
+      {
+        path: 'stepper-linear.component',
+        link: '/stepper/stepper-linear.component',
+        component: 'StepperLinearComponent',
+        name: 'Stepper Linear',
       },
     ],
   },
