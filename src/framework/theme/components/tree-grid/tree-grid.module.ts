@@ -19,6 +19,8 @@ import { NbTreeGridService } from './data-source/tree-grid.service';
 import { NbTreeGridDataService } from './data-source/tree-grid-data.service';
 import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
 import { NbTreeGridRowToggleDirective } from './tree-grid-row-toggle.directive';
+import { NbTreeGridRowDefDirective } from './tree-grid-row-def.component';
+import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 
 const COMPONENTS = [
   // Tree Grid
@@ -32,8 +34,10 @@ const COMPONENTS = [
   NbFilterDirective,
   NbFilterInputDirective,
 
-  NbTreeGridHeaderCellDirective,
+  NbTreeGridRowDefDirective,
   NbTreeGridRowComponent,
+  NbTreeGridColumnDefDirective,
+  NbTreeGridHeaderCellDirective,
   NbTreeGridCellDirective,
 
   NbTreeGridRowToggleDirective,

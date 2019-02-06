@@ -12,15 +12,15 @@ import { NB_WINDOW } from '../../theme.options';
 import { NbCellDirective, NbColumnDefDirective, NbHeaderCellDirective } from '../cdk/table';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
+import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 
 @Directive({
   selector: 'nb-tree-grid-cell, td[nbTreeGridCell]',
   host: {
     'class': 'nb-tree-grid-cell',
+    'role': 'gridcell',
   },
-  providers: [
-    { provide: NbCellDirective, useExisting: NbTreeGridCellDirective },
-  ],
+  providers: [{ provide: NbCellDirective, useExisting: NbTreeGridCellDirective }],
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   private readonly tree: NbTreeGridComponent<any>;
@@ -46,7 +46,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   }
 
   constructor(
-    columnDef: NbColumnDefDirective,
+    columnDef: NbTreeGridColumnDefDirective,
     elementRef: ElementRef<HTMLElement>,
     @Inject(NB_TREE_GRID) tree,
     @Inject(PLATFORM_ID) private platformId,
@@ -108,7 +108,7 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   }
 
   constructor(
-    columnDef: NbColumnDefDirective,
+    columnDef: NbTreeGridColumnDefDirective,
     elementRef: ElementRef<HTMLElement>,
     @Inject(NB_TREE_GRID) tree,
   ) {

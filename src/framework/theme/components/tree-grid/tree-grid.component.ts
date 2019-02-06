@@ -41,12 +41,10 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: NbTable, useExisting: NbTreeGridComponent },
-    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
-  ],
+  providers: [{ provide: NB_TREE_GRID, useExisting: NbTreeGridComponent }],
 })
-export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
+export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
+                                    implements AfterViewInit, OnDestroy {
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
               differs: IterableDiffers,
@@ -79,8 +77,6 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   @ContentChildren(NbTreeGridRowComponent, { read: ElementRef }) private rowElements: QueryList<ElementRef<Element>>;
 
   ngAfterViewInit() {
-    this._changeDetectorRef.detectChanges();
-
     this.checkDefsCount();
     merge(this._contentRowDefs.changes, this._contentHeaderRowDefs.changes)
       .pipe(takeWhile(() => this.alive))
@@ -88,6 +84,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
     this.alive = false;
   }
 
