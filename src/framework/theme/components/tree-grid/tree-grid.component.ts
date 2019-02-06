@@ -48,7 +48,6 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
 
-  // TODO get rid of this
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
               differs: IterableDiffers,
               changeDetectorRef: ChangeDetectorRef,

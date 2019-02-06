@@ -43,13 +43,7 @@ const DATA: NbTreeGridNode<PeriodicElement>[] = [
 @Component({
   selector: 'nb-tree-grid-showcase',
   templateUrl: './tree-grid-showcase.component.html',
-  styles: [`
-    button[nbTreeGridRowToggle] {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-  `],
+  styleUrls: ['./tree-grid-showcase.component.scss'],
 })
 export class TreeGridShowcaseComponent {
   customColumn = 'name';

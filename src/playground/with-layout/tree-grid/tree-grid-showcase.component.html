@@ -1,31 +1,38 @@
-<input nbInput [nbFilterInput]="dataSource">
+<nb-card>
+  <nb-card-body>
 
-<table nbTreeGrid [nbSort]="dataSource" [source]="dataSource">
+    <label class="search-label" for="search">Search:</label>
+    <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
 
-  <tr nbHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
-  <tr nbTreeGridRow *nbRowDef="let row; columns: columnsToDisplay"></tr>
+    <table nbTreeGrid [nbSort]="dataSource" [source]="dataSource" levelPadding="1.3">
 
-  <ng-container nbColumnDef="name">
-    <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
-      name
-      <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
-    </th>
-    <td nbTreeGridCell *nbCellDef="let row">
-      <button *ngIf="row.hasChildren()"
-              nbTreeGridRowToggle
-              [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
-        <i [class.nb-arrow-right]="!row.expanded" [class.nb-arrow-down]="row.expanded" aria-hidden="true"></i>
-      </button>
-      {{ row.data.name }}
-    </td>
-  </ng-container>
+      <tr nbHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
+      <tr nbTreeGridRow *nbRowDef="let row; columns: columnsToDisplay"></tr>
 
-  <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
-    <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
-      {{ column }}
-      <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
-    </th>
-    <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
-  </ng-container>
+      <ng-container nbColumnDef="name">
+        <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+          name
+          <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
+        </th>
+        <td nbTreeGridCell *nbCellDef="let row">
+          <button *ngIf="row.hasChildren()"
+                  nbTreeGridRowToggle
+                  [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
+            <i [class.nb-arrow-right]="!row.expanded" [class.nb-arrow-down]="row.expanded" aria-hidden="true"></i>
+          </button>
+          {{row.data.name}}
+        </td>
+      </ng-container>
 
-</table>
+      <ng-container *ngFor="let column of defaultColumns" [nbColumnDef]="column">
+        <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+          {{column}}
+          <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
+        </th>
+        <td nbTreeGridCell *nbCellDef="let row">{{row.data[column]}}</td>
+      </ng-container>
+
+    </table>
+
+  </nb-card-body>
+</nb-card>

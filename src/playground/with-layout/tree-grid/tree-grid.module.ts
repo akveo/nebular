@@ -6,14 +6,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbTreeGridModule } from '@nebular/theme';
+import { NbCardModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 
 import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
 import { SortIconComponent } from './components/sort-icon.component';
 
 @NgModule({
-  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule ],
+  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
   declarations: [
     TreeGridShowcaseComponent,
     SortIconComponent,
