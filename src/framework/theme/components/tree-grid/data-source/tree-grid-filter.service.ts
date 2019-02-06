@@ -34,8 +34,7 @@ export class NbTreeGridFilterService<T> {
     }, []);
   }
 
-  // TODO has to be configurable
-  private filterPredicate(data: T, searchQuery: string): boolean {
+  protected filterPredicate(data: T, searchQuery: string): boolean {
     const preparedQuery = searchQuery.trim().toLocaleLowerCase();
     for (const val of Object.values(data)) {
       const preparedVal = `${val}`.trim().toLocaleLowerCase();

@@ -6,9 +6,8 @@
 
 
 import { Injectable } from '@angular/core';
-
+import { NbSortDirection, NbSortRequest } from '../tree-grid-sort.component';
 import { NbTreeGridPresentationNode } from './tree-grid.model';
-import { NbSortRequest } from '../tree-grid-sort.component';
 
 @Injectable()
 export class NbTreeGridSortService<T> {
@@ -18,27 +17,32 @@ export class NbTreeGridSortService<T> {
       return data;
     }
 
-    // TODO provide comparator somehow
-    const sorted = data.sort((na, nb) => {
-      const key = request.column;
-      const dir = request.direction;
-      const a = na.node.data[key];
-      const b = nb.node.data[key];
-
-      let res = 0;
-
-      if (a > b) {
-        res = 1
-      }
-      if (a < b) {
-        res = -1
-      }
-
-      return dir === 'asc' ? res : res * -1;
-    });
+    const sorted = data.sort((na, nb) => this.comparator(request, na, nb));
     for (const node of data) {
       node.children = this.sort(request, node.children);
     }
     return sorted;
+  }
+
+  protected comparator(
+    request: NbSortRequest,
+    na: NbTreeGridPresentationNode<T>,
+    nb: NbTreeGridPresentationNode<T>,
+  ): number {
+    const key = request.column;
+    const dir = request.direction;
+    const a = na.data[key];
+    const b = nb.data[key];
+
+    let res = 0;
+
+    if (a > b) {
+      res = 1
+    }
+    if (a < b) {
+      res = -1
+    }
+
+    return dir === NbSortDirection.ASCENDING ? res : res * -1;
   }
 }
