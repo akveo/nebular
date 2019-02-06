@@ -1,8 +1,13 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, QueryList, Type, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import {
-  NB_DOCUMENT, NbTreeGridComponent, NbTreeGridDataSource, NbTreeGridModule, NbTreeGridNode, NbTreeGridRowComponent,
+  NbThemeModule,
+  NbTreeGridComponent,
+  NbTreeGridDataSource,
+  NbTreeGridModule,
+  NbTreeGridNode,
+  NbTreeGridRowComponent,
+  NB_ROW_DOUBLE_CLICK_DELAY,
 } from '@nebular/theme';
 
 class BaseTreeGridTestComponent {
@@ -31,7 +36,7 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
   template: `
     <table nbTreeGrid [source]="dataSource">
       <tr nbHeaderRow *nbHeaderRowDef="columns"></tr>
-        <tr nbTreeGridRow *nbRowDef="let row; columns: columns"></tr>
+      <tr nbTreeGridRow *nbRowDef="let row; columns: columns"></tr>
 
       <ng-container *ngFor="let column of columns" [nbColumnDef]="column">
         <th nbHeaderCell *nbHeaderCellDef>{{ column }}</th>
@@ -49,9 +54,8 @@ function setupFixture(
   ): ComponentFixture<any> {
 
   TestBed.configureTestingModule({
-    imports: [ NbTreeGridModule ],
+    imports: [ NbThemeModule.forRoot(), NbTreeGridModule ],
     declarations: [ componentType ],
-    providers: [ { provide: NB_DOCUMENT, useExisting: DOCUMENT } ],
   });
 
   const fixture = TestBed.createComponent(componentType);
@@ -64,124 +68,113 @@ function setupFixture(
   return fixture;
 }
 
+const abcColumns: string[] = [ 'a', 'b', 'c' ];
+const twoRowsData: NbTreeGridNode<any>[] = [
+  { data: { a: 'a1', b: 'b1', c: 'c1' } },
+  { data: { a: 'a2', b: 'b2', c: 'c2' } },
+];
+const nestedRowData: NbTreeGridNode<any>[] = [
+  {
+    data: { a: 'a1', b: 'b1', c: 'c1' },
+    children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
+  },
+];
+const nestedExpandedRowData: NbTreeGridNode<any>[] = [
+  {
+    data: { a: 'a1', b: 'b1', c: 'c1' },
+    expanded: true,
+    children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
+  },
+];
 
-fdescribe('NbTreeGridComponent', () => {
-  const columns: string[] = [ 'a', 'b', 'c' ];
-  const twoRowsData: NbTreeGridNode<any>[] = [
-    { data: { a: 'a1', b: 'b1', c: 'c1' } },
-    { data: { a: 'a2', b: 'b2', c: 'c2' } },
-  ];
-  const nestedRowData: NbTreeGridNode<any>[] = [
-    {
-      data: { a: 'a1', b: 'b1', c: 'c1' },
-      children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
-    },
-  ];
-  const nestedExpandedRowData: NbTreeGridNode<any>[] = [
-    {
-      data: { a: 'a1', b: 'b1', c: 'c1' },
-      expanded: true,
-      children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
-    },
-  ];
+
+describe('NbTreeGridComponent', () => {
 
   it('should convert plain data to NbTreeGridDataSource', () => {
     const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, twoRowsData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
     expect(fixture.componentInstance.treeGridComponent.dataSource instanceof NbTreeGridDataSource).toEqual(true);
   });
 
   it('should render rows', () => {
     const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, twoRowsData);
-    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('tr');
+      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
+    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('[nbTreeGrid] [nbTreeGridRow]');
     expect(rows.length).toEqual(twoRowsData.length);
   });
 
   it('should render data in row', () => {
     const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, twoRowsData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
     const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('tr');
 
     rows.forEach((row: HTMLElement, rowIndex: number) => {
       const dataCell = row.querySelectorAll('td');
 
       dataCell.forEach((cell: HTMLElement, cellIndex: number) => {
-        expect(cell.innerText).toEqual(twoRowsData[rowIndex].data[columns[cellIndex]]);
+        expect(cell.innerText).toEqual(twoRowsData[rowIndex].data[abcColumns[cellIndex]]);
       });
     });
   });
 
   it('should render header row if provided', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridWithHeaderTestComponent, columns, twoRowsData);
+      setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
     const headerRow: HTMLElement = fixture.nativeElement.querySelector('tr');
     expect(headerRow).not.toBeNull();
 
     const headerCells = headerRow.querySelectorAll('th');
-    expect(headerCells.length).toEqual(columns.length);
+    expect(headerCells.length).toEqual(abcColumns.length);
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
-      expect(cell.innerText).toEqual(columns[cellIndex]);
+      expect(cell.innerText).toEqual(abcColumns[cellIndex]);
     });
   });
 
   it('should render column text in header cell', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridWithHeaderTestComponent, columns, twoRowsData);
+      setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
     const headerRow: HTMLElement = fixture.nativeElement.querySelector('tr');
     const headerCells = headerRow.querySelectorAll('th');
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
-      expect(cell.innerText).toEqual(columns[cellIndex]);
+      expect(cell.innerText).toEqual(abcColumns[cellIndex]);
     });
   });
 
   it('should not render collapsed rows', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, nestedRowData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
     const rows = fixture.nativeElement.querySelectorAll('tr');
     expect(rows.length).toEqual(1);
   });
 
   it('should render initially expanded row', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, nestedExpandedRowData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
     const rows = fixture.nativeElement.querySelectorAll('tr');
     expect(rows.length).toEqual(2);
   });
 
-  it('should remove collapsed rows', () => {
+  it('should remove collapsed rows', fakeAsync(() => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, nestedExpandedRowData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
     const row: HTMLElement = fixture.nativeElement.querySelector('tr');
     row.click();
     fixture.detectChanges();
+    tick(NB_ROW_DOUBLE_CLICK_DELAY);
     const rows = fixture.nativeElement.querySelectorAll('tr');
     expect(rows.length).toEqual(1);
-  });
+  }));
 
-  it('should add expanded row children', () => {
+  it('should add expanded row children', fakeAsync(() => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, nestedRowData);
+      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
     const row: HTMLElement = fixture.nativeElement.querySelector('tr');
     row.click();
     fixture.detectChanges();
+    tick(NB_ROW_DOUBLE_CLICK_DELAY);
     const rows = fixture.nativeElement.querySelectorAll('tr');
     expect(rows.length).toEqual(2);
-  });
-
-  fit('should return one based row nesting level', (done) => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, columns, nestedExpandedRowData);
-
-    setTimeout(() => {
-      debugger
-      const treeGridComponent = fixture.componentInstance.treeGridComponent;
-      const [ firstRow, secondRow ] = fixture.componentInstance.rowComponents.toArray();
-      expect(treeGridComponent.getRowLevel(firstRow)).toEqual(1);
-      expect(treeGridComponent.getRowLevel(secondRow)).toEqual(2);
-      done();
-    }, 1000);
-  });
+  }));
 });

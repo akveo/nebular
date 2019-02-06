@@ -5,6 +5,8 @@ import { NbRowComponent } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 
+export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
+
 @Component({
   selector: 'nb-tree-grid-row, tr[nbTreeGridRow]',
   template: `<ng-container nbCellOutlet></ng-container>`,
@@ -21,7 +23,7 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
 
   @HostListener('click')
   toggleNode(): void {
-    timer(200)
+    timer(NB_ROW_DOUBLE_CLICK_DELAY)
       .pipe(
         take(1),
         takeUntil(this.doubleClick$),
