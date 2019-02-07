@@ -6,32 +6,23 @@
 
 import {
   AfterViewInit,
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
-  Inject,
-  Input,
-  OnDestroy,
+  Input, OnChanges,
+  OnDestroy, OnInit,
 } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
-  createContainer,
   NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
+  NbAdjustment, NbDynamicOverlay, NbDynamicOverlayController, NbDynamicOverlayHandler,
   NbOverlayRef,
-  NbOverlayService,
   NbPosition,
-  NbPositionBuilderService,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-  patch,
 } from '../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
-import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * Full featured context menu directive.
@@ -106,8 +97,11 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Manual Control, context-menu/context-menu-noop.component)
  * */
-@Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbContextMenu]',
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+})
+export class NbContextMenuDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Position will be calculated relatively host element based on the position.
@@ -152,94 +146,60 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
   protected alive: boolean = true;
   private items: NbMenuItem[] = [];
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
+  private dynamicOverlay: NbDynamicOverlay;
+
+  constructor(private hostRef: ElementRef,
               private menuService: NbMenuService,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  }
+
+  ngOnInit() {
+    this.dynamicOverlayHandler
+      .host(this.hostRef)
+      .componentType(NbContextMenuComponent);
+  }
+
+  ngOnChanges() {
+    this.rebuild();
   }
 
   ngAfterViewInit() {
-    this.subscribeOnTriggers();
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .build();
     this.subscribeOnItemClick();
-    this.subscribeOnPositionChange();
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-    if (this.ref) {
-      this.ref.dispose();
-    }
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
   show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.openContextMenu();
+    this.dynamicOverlay.show();
   }
 
   hide() {
-    if (this.ref) {
-      this.ref.detach();
-    }
-
-    this.container = null;
+    this.dynamicOverlay.hide();
   }
 
   toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.dynamicOverlay.toggle();
   }
 
-  protected createOverlay() {
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
   }
 
-  protected openContextMenu() {
-    this.container = createContainer(this.ref, NbContextMenuComponent, {
-      position: this.position,
-      items: this.items,
-      tag: this.tag,
-    }, this.componentFactoryResolver);
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
       .position(this.position)
-      .adjustment(this.adjustment);
-  }
-
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return this.triggerStrategyBuilder
       .trigger(this.trigger)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
-      .build();
-  }
-
-  protected subscribeOnPositionChange() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
-  }
-
-  protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+      .adjustment(this.adjustment)
+      .context({
+        position: this.position,
+        items: this.items,
+        tag: this.tag,
+      });
   }
 
   /*
