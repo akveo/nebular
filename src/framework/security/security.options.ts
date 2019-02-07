@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface NbAclRole {
   parent?: string,
-  [permission: string]: string|string[],
+  [permission: string]: string|string[]|undefined,
 }
 
 export interface NbAccessControl {
