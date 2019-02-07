@@ -1300,6 +1300,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ContextMenuNoopComponent',
         name: 'Context Menu Noop',
       },
+      {
+        path: 'context-menu-right-click.component',
+        link: '/context-menu/context-menu-right-click.component',
+        component: 'ContextMenuRightClickComponent',
+        name: 'Context Menu Right Click',
+      },
     ],
   },
   {
