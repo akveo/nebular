@@ -128,9 +128,9 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
-  set setItems(items: NbMenuItem[]) {
+  set items(items: NbMenuItem[]) {
     this.validateItems(items);
-    this.items = items;
+    this._items = items;
   };
 
   /**
@@ -144,7 +144,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected alive: boolean = true;
-  private items: NbMenuItem[] = [];
+  private _items: NbMenuItem[] = [];
 
   private dynamicOverlay: NbDynamicOverlay;
 
@@ -197,7 +197,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
       .adjustment(this.adjustment)
       .context({
         position: this.position,
-        items: this.items,
+        items: this._items,
         tag: this.tag,
       });
   }

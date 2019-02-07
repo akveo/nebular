@@ -295,7 +295,7 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(contentSpy).toHaveBeenCalledTimes(0);
         expect(contextSpy).toHaveBeenCalledTimes(2);
         expect(contextSpy).toHaveBeenCalledWith({
-          position: 'bottom',
+          position: NbPosition.BOTTOM,
           items: [{ title: 'User' }, { title: 'Log Out' }],
           tag: undefined,
         });
@@ -349,7 +349,7 @@ describe('Directive: NbContextMenuDirective', () => {
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
         const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
         const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
-        // const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
         const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
         const offsetSpy = spyOn(overlayHandler, 'offset').and.callThrough();
         const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
@@ -359,8 +359,9 @@ describe('Directive: NbContextMenuDirective', () => {
         fixture.detectChanges();
 
         fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
-        fixture.componentInstance.trigger = NbTrigger.CLICK;
-        // fixture.componentInstance.content = 'new string';
+        fixture.componentInstance.trigger = NbTrigger.HOVER;
+        fixture.componentInstance.items = [{ title: 'New' }];
+        fixture.componentInstance.tag = 'new';
         fixture.componentInstance.position = NbPosition.LEFT;
 
         fixture.detectChanges();
@@ -369,33 +370,23 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(componentSpy).toHaveBeenCalledWith(NbContextMenuComponent);
         expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
         expect(hostSpy).toHaveBeenCalledTimes(1);
-        expect(offsetSpy).toHaveBeenCalledTimes(1);
-        expect(offsetSpy).toHaveBeenCalledWith(8);
+        expect(offsetSpy).toHaveBeenCalledTimes(0);
         expect(positionSpy).toHaveBeenCalledTimes(3);
         expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
         expect(triggerSpy).toHaveBeenCalledTimes(3);
-        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.CLICK);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.HOVER);
         expect(adjustmentSpy).toHaveBeenCalledTimes(3);
         expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
-        // expect(contentSpy).toHaveBeenCalledTimes(3);
-        // expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contentSpy).toHaveBeenCalledTimes(0);
         expect(contextSpy).toHaveBeenCalledTimes(3);
-        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'nb-home' });
+        expect(contextSpy).toHaveBeenCalledWith({
+          position: NbPosition.LEFT,
+          items: [{ title: 'New' }],
+          tag: 'new',
+        });
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
-
-      // it('should accept different content', () => {
-      //   const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
-      //
-      //   fixture = TestBed.createComponent(NbContextMenuBindingsTestComponent);
-      //   fixture.detectChanges();
-      //
-      //   fixture.componentInstance.content = 'new string';
-      //   fixture.detectChanges();
-      //   expect(contentSpy).toHaveBeenCalledTimes(3);
-      //   expect(contentSpy).toHaveBeenCalledWith('new string');
-      // });
     });
 
     describe('instance context-menu', () => {
@@ -413,7 +404,7 @@ describe('Directive: NbContextMenuDirective', () => {
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
         const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
         const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
-        // const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
         const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
         const offsetSpy = spyOn(overlayHandler, 'offset').and.callThrough();
         const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
@@ -423,8 +414,9 @@ describe('Directive: NbContextMenuDirective', () => {
         fixture.detectChanges();
 
         fixture.componentInstance.contextMenu.adjustment = NbAdjustment.HORIZONTAL;
-        fixture.componentInstance.contextMenu.trigger = NbTrigger.CLICK;
-        // fixture.componentInstance.contextMenu.content = 'new string';
+        fixture.componentInstance.contextMenu.trigger = NbTrigger.HOVER;
+        fixture.componentInstance.contextMenu.items = [{ title: 'New' }];
+        fixture.componentInstance.contextMenu.tag = 'new';
         fixture.componentInstance.contextMenu.position = NbPosition.LEFT;
 
         fixture.componentInstance.contextMenu.rebuild();
@@ -436,15 +428,17 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(positionSpy).toHaveBeenCalledTimes(3);
         expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
         expect(triggerSpy).toHaveBeenCalledTimes(3);
-        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.CLICK);
-        expect(offsetSpy).toHaveBeenCalledTimes(1);
-        expect(offsetSpy).toHaveBeenCalledWith(8);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.HOVER);
+        expect(offsetSpy).toHaveBeenCalledTimes(0);
         expect(adjustmentSpy).toHaveBeenCalledTimes(3);
         expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
-        // expect(contentSpy).toHaveBeenCalledTimes(3);
-        // expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contentSpy).toHaveBeenCalledTimes(0);
         expect(contextSpy).toHaveBeenCalledTimes(3);
-        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'nb-home' });
+        expect(contextSpy).toHaveBeenCalledWith({
+          position: NbPosition.LEFT,
+          items: [{ title: 'New' }],
+          tag: 'new',
+        });
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
