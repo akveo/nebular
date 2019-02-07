@@ -30,12 +30,11 @@ export class SearchWithInputEventComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchService.onSearchSubmit().pipe(
+    this.searchService.onSearchInput().pipe(
       debounceTime(300),
       distinctUntilChanged(),
     ).subscribe((data: { term: string, tag: string }) => {
       this.value = data.term;
-      console.info(`term: ${data.term}, from search: ${data.tag}`);
     });
   }
 

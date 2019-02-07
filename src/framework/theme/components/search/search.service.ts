@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {share} from 'rxjs/operators';
 
 /**
  * Search component service, connects your code to a page-level search component.
@@ -45,6 +45,15 @@ export class NbSearchService {
   }
 
   /**
+   * Trigger search submit by input event
+   * @param {string} term
+   * @param {string} tag
+   */
+  searchInput(term: string, tag?: string) {
+    this.searchSubmittings$.next({term, tag});
+  }
+
+  /**
    * Subscribe to 'activate' event
    * @returns Observable<{searchType: string; tag?: string}>
    */
@@ -65,6 +74,14 @@ export class NbSearchService {
    * @returns Observable<{term: string; tag?: string}>
    */
   onSearchSubmit(): Observable<{ term: string, tag?: string }> {
+    return this.searchSubmittings$.pipe(share());
+  }
+
+  /**
+   * Subscribe to input event
+   * @returns Observable<{term: string; tag?: string}>
+   */
+  onSearchInput(): Observable<{ term: string, tag?: string }> {
     return this.searchSubmittings$.pipe(share());
   }
 }

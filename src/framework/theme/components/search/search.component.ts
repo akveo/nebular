@@ -7,27 +7,27 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
-  ChangeDetectorRef,
-  OnChanges,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 import {of as observableOf} from 'rxjs';
-import {filter, delay, takeWhile} from 'rxjs/operators';
+import {delay, filter, takeWhile} from 'rxjs/operators';
 
-import { NbSearchService } from './search.service';
-import { NbThemeService } from '../../services/theme.service';
-import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
+import {NbSearchService} from './search.service';
+import {NbThemeService} from '../../services/theme.service';
+import {NbOverlayRef, NbOverlayService, NbPortalDirective} from '../cdk';
 
 /**
  * search-field-component is used under the hood by nb-search component
@@ -55,7 +55,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
           <div class="form-content">
             <input class="search-input"
                    #searchInput
-                   (input)="submitSearchOnInput(searchInput.value)"
+                   (input)="submitSearchInput(searchInput.value)"
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
                    tabindex="-1"
@@ -84,7 +84,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
   @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
-  @Output() searchOnInput = new EventEmitter();
+  @Output() searchInput = new EventEmitter();
 
   @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
@@ -151,10 +151,8 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  submitSearchOnInput(term: string) {
-    if (term) {
-      this.searchOnInput.emit(term);
-    }
+  submitSearchInput(term: string) {
+    this.searchInput.emit(term);
   }
 
   focusInput() {
@@ -221,7 +219,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
       [placeholder]="placeholder"
       [hint]="hint"
       (search)="search($event)"
-      (searchOnInput)="searchOnInput($event)"
+      (searchInput)="emitInput($event)"
       (close)="emitDeactivate()">
     </nb-search-field>
   `,
@@ -329,8 +327,8 @@ export class NbSearchComponent implements OnInit, OnDestroy {
     this.hideSearch();
   }
 
-  searchOnInput(term: string) {
-    this.searchService.submitSearch(term, this.tag);
+  emitInput(term: string) {
+    this.searchService.searchInput(term, this.tag);
   }
 
   emitActivate() {
