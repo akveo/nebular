@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 
 import { NbTableModule } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
-import { NbTreeGridRowComponent } from './tree-grid-row.component';
+import { NbTreeGridHeaderRowComponent, NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective, NbTreeGridHeaderCellDirective } from './tree-grid-cell.component';
 import { NbSortDirective, NbSortHeaderComponent, NbSortHeaderIconDirective } from './tree-grid-sort.component';
 import { NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
@@ -37,6 +37,7 @@ const COMPONENTS = [
 
   NbTreeGridRowDefDirective,
   NbTreeGridRowComponent,
+  NbTreeGridHeaderRowComponent,
   NbTreeGridColumnDefDirective,
   NbTreeGridHeaderCellDirective,
   NbTreeGridCellDirective,

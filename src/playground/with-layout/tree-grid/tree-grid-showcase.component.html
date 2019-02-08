@@ -6,7 +6,7 @@
 
     <table nbTreeGrid [nbSort]="dataSource" [source]="dataSource" levelPadding="1.3">
 
-      <tr nbHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
+      <tr nbTreeGridHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>
 
       <ng-container nbTreeGridColumnDef="name">
