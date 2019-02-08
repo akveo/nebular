@@ -15,11 +15,7 @@
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
         </th>
         <td nbTreeGridCell *nbCellDef="let row">
-          <button *ngIf="row.hasChildren()"
-                  nbTreeGridRowToggle
-                  [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
-            <i [class.nb-arrow-right]="!row.expanded" [class.nb-arrow-down]="row.expanded" aria-hidden="true"></i>
-          </button>
+          <nb-tree-grid-row-toggle [row]="row"></nb-tree-grid-row-toggle>
           {{row.data.name}}
         </td>
       </ng-container>

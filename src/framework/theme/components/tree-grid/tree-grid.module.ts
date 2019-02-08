@@ -21,6 +21,7 @@ import { NbFilterDirective, NbFilterInputDirective } from './tree-grid-filter';
 import { NbTreeGridRowToggleDirective } from './tree-grid-row-toggle.directive';
 import { NbTreeGridRowDefDirective } from './tree-grid-row-def.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
+import { NbTreeGridRowToggleComponent } from './tree-grid-row-toggle.component';
 
 const COMPONENTS = [
   // Tree Grid
@@ -41,6 +42,7 @@ const COMPONENTS = [
   NbTreeGridCellDirective,
 
   NbTreeGridRowToggleDirective,
+  NbTreeGridRowToggleComponent,
   NbSortHeaderIconDirective,
 ];
 

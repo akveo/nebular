@@ -86,6 +86,7 @@ export * from './components/tree-grid/tree-grid.component';
 export * from './components/tree-grid/tree-grid-row.component';
 export * from './components/tree-grid/tree-grid-injection-tokens';
 export * from './components/tree-grid/tree-grid-sort.component';
+export * from './components/tree-grid/tree-grid-row-toggle.component';
 export * from './components/tree-grid/data-source/tree-grid.model';
 export * from './components/tree-grid/data-source/tree-grid-data-source';
 export * from './components/tree-grid/data-source/tree-grid-data.service';

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, Inject, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { NbRowComponent } from '../cdk/table';
+import { NbHeaderRowComponent, NbRowComponent } from '../cdk/table';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 
@@ -46,3 +46,17 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
     this.doubleClick$.complete();
   }
 }
+
+@Component({
+  selector: 'tr[nbTreeGridHeaderRow]',
+  template: `
+    <ng-container nbCellOutlet></ng-container>`,
+  host: {
+    'class': 'nb-tree-grid-header-row',
+    'role': 'row',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NbHeaderRowComponent, useExisting: NbTreeGridHeaderRowComponent }],
+})
+export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
+
