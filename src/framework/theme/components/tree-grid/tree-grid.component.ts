@@ -37,7 +37,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * @stacked-example(Showcase, tree-grid/tree-grid-showcase.component)
  */
 @Component({
-  selector: 'nb-tree-grid, table[nbTreeGrid]',
+  selector: 'table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

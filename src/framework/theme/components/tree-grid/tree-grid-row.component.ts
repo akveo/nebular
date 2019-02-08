@@ -8,7 +8,7 @@ import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
 
 @Component({
-  selector: 'nb-tree-grid-row, tr[nbTreeGridRow]',
+  selector: 'tr[nbTreeGridRow]',
   template: `<ng-container nbCellOutlet></ng-container>`,
   host: {
     'class': 'nb-tree-grid-row',

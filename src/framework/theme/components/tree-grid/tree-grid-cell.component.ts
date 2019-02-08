@@ -15,7 +15,7 @@ import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 
 @Directive({
-  selector: 'nb-tree-grid-cell, td[nbTreeGridCell]',
+  selector: 'td[nbTreeGridCell]',
   host: {
     'class': 'nb-tree-grid-cell',
     'role': 'gridcell',
@@ -93,7 +93,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
 }
 
 @Directive({
-  selector: 'nb-tree-grid-header-cell, th[nbTreeGridHeaderCell]',
+  selector: 'th[nbTreeGridHeaderCell]',
   host: {
     'class': 'nb-tree-grid-header-cell',
     'role': 'columnheader',
