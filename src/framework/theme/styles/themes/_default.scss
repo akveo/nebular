@@ -689,6 +689,11 @@ $theme: (
   tree-grid-sort-header-button-border: none,
   tree-grid-sort-header-button-padding: 0,
   tree-grid-sort-header-button-font-weight: bold,
+  tree-grid-header-bg: color-bg,
+  tree-grid-footer-bg: color-bg,
+  tree-grid-row-bg: color-bg,
+  tree-grid-row-bg-even: color-bg,
+  tree-grid-row-hover-bg: color-bg,
 );
 
 // register the theme

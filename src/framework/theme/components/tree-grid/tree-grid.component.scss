@@ -4,9 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host(table) {
+:host {
   table-layout: fixed;
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
+  max-width: 100%;
+  overflow: auto;
 }

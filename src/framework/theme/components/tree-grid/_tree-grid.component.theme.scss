@@ -11,26 +11,28 @@
   $border-style: nb-theme(tree-grid-cell-border-style);
   $border-color: nb-theme(tree-grid-cell-border-color);
 
-  table[nbTreeGrid],
-  nb-tree-grid {
-    .nb-tree-grid-header-cell,
-    .nb-tree-grid-cell {
-      border: $border-width $border-style $border-color;
-    }
+  .nb-tree-grid-header-cell,
+  .nb-tree-grid-cell {
+    height: nb-theme(tree-grid-row-min-height);
+    padding: nb-theme(tree-grid-cell-padding);
+    border: $border-width $border-style $border-color;
   }
 
-  table[nbTreeGrid] {
-    .nb-tree-grid-header-cell,
-    .nb-tree-grid-cell {
-      height: nb-theme(tree-grid-row-min-height);
-      padding: nb-theme(tree-grid-cell-padding);
-    }
+  .nb-tree-grid-header-row {
+    background: nb-theme(tree-grid-header-bg);
   }
 
-  nb-tree-grid {
-    .nb-tree-grid-header-cell,
-    .nb-tree-grid-cell {
-      min-height: nb-theme(tree-grid-row-min-height);
+  .nb-tree-grid-footer-row {
+    background: nb-theme(tree-grid-footer-bg);
+  }
+
+  .nb-tree-grid-row {
+    background: nb-theme(tree-grid-row-bg);
+    &:hover {
+      background: nb-theme(tree-grid-row-hover-bg);
+    }
+    &:nth-child(2n):not(:hover) {
+      background-color: nb-theme(tree-grid-row-bg-even);
     }
   }
 
