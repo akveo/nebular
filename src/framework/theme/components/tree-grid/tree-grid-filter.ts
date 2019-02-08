@@ -17,6 +17,9 @@ export class NbFilterDirective {
   }
 }
 
+/**
+ * Helper directive to trigger data source's filter method when user types in input
+ */
 @Directive({
   selector: '[nbFilterInput]',
   providers: [{ provide: NbFilterDirective, useExisting: NbFilterInputDirective }],

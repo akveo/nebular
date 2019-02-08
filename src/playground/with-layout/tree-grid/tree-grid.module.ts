@@ -11,12 +11,18 @@ import { NbCardModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
 import { SortIconComponent } from './components/sort-icon.component';
+import { TreeGridSortableComponent } from './tree-grid-sortable.component';
+import { TreeGridFilterableComponent } from './tree-grid-filterable.component';
+import { TreeGridBasicComponent } from './tree-grid-basic.component';
 
 @NgModule({
   imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
   declarations: [
     TreeGridShowcaseComponent,
     SortIconComponent,
+    TreeGridSortableComponent,
+    TreeGridFilterableComponent,
+    TreeGridBasicComponent,
   ],
 })
 export class TreeGridModule {}

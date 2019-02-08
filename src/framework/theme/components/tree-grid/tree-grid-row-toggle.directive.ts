@@ -7,6 +7,9 @@
 import { Directive, HostListener } from '@angular/core';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 
+/**
+ * NbTreeGridRowToggleDirective
+ */
 @Directive({
   selector: '[nbTreeGridRowToggle]',
 })

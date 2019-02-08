@@ -33,8 +33,44 @@ import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 
 /**
- * NbTreeGridComponent
+ * Tree grid component that can be used to display nested rows of data.
+ * Supports filtering and sorting.
  * @stacked-example(Showcase, tree-grid/tree-grid-showcase.component)
+ *
+ * Data provided to source should match [NbTreeGridNode](docs/components/treegrid/api#nbtreegridnode) interface.
+ * As the most basic usage you need to define [nbTreeGridRowDef](docs/components/treegrid/api#nbtreegridrowdefdirective)
+ * where you should pass columns to display in rows and
+ * [nbTreeGridColumnDef](docs/components/treegrid/api#nbtreegridcolumndefdirective) - a column definition for each
+ * column passed to row definition.
+ * @stacked-example(Basic, tree-grid/tree-grid-basic.component)
+ *
+ * To use sorting you can add `nbSort` directive to table and subscribe to `sort` method. When user click on header,
+ * sort event will be emitted. Event object contain clicked column name and desired sort direction.
+ * @stacked-example(Sortable, tree-grid/tree-grid-sortable.component)
+ *
+ * You can use `NbTreeGridDataSourceBuilder` to create `NbTreeGridDataSource` which would have toggle, sort and
+ * filter methods. Then you can call this methods to change sort or toggle rows programmatically. Also `nbSort` and
+ * `nbFilterInput` directives both support `NbTreeGridDataSource`, so you can pass it directly as an input and
+ * directives will trigger sort, toggle themselves.
+ * @stacked-example(NbTreeGridDataSource, tree-grid/tree-grid-showcase.component)
+ *
+ * @styles
+ *
+ * tree-grid-cell-border-width
+ * tree-grid-cell-border-style
+ * tree-grid-cell-border-color
+ * tree-grid-row-min-height
+ * tree-grid-cell-padding
+ * tree-grid-sort-header-button-background
+ * tree-grid-sort-header-button-border
+ * tree-grid-sort-header-button-padding
+ * tree-grid-sort-header-button-font-weight
+ * tree-grid-header-bg
+ * tree-grid-footer-bg
+ * tree-grid-row-bg
+ * tree-grid-row-bg-even
+ * tree-grid-row-hover-bg
+ * tree-grid-sort-header-button-color
  */
 @Component({
   selector: 'table[nbTreeGrid]',
@@ -61,6 +97,11 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   private alive: boolean = true;
   private _source: NbTreeGridDataSource<T>;
 
+  /**
+   * The table's data
+   * @param data
+   * @type {NbTreeGridNode<T>[] | NbTreeGridDataSource}
+   */
   @Input() set source(data: NbTreeGridNode<T>[]) {
     if (data instanceof NbTreeGridDataSource) {
       this._source = data;

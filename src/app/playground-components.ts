@@ -1241,6 +1241,24 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TreeGridShowcaseComponent',
         name: 'Tree Grid Showcase',
       },
+      {
+        path: 'tree-grid-sortable.component',
+        link: '/tree-grid/tree-grid-sortable.component',
+        component: 'TreeGridSortableComponent',
+        name: 'Tree Grid Sortable',
+      },
+      {
+        path: 'tree-grid-filterable.component',
+        link: '/tree-grid/tree-grid-filterable.component',
+        component: 'TreeGridFilterableComponent',
+        name: 'Tree Grid Filterable',
+      },
+      {
+        path: 'tree-grid-basic.component',
+        link: '/tree-grid/tree-grid-basic.component',
+        component: 'TreeGridBasicComponent',
+        name: 'Tree Grid Basic',
+      },
     ],
   },
   {

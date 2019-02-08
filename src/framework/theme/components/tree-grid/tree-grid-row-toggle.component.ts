@@ -8,6 +8,9 @@ import { Component, HostListener, Input } from '@angular/core';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
 
+/**
+ * NbTreeGridRowToggleComponent
+ */
 @Component({
   selector: 'nb-tree-grid-row-toggle',
   template: `
@@ -25,6 +28,9 @@ import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
   `],
 })
 export class NbTreeGridRowToggleComponent {
+  /**
+   * row
+   */
   @Input() row: NbTreeGridPresentationNode<any>;
 
   @HostListener('click', ['$event'])

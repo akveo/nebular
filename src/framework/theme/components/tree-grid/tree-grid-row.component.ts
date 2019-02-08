@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Inject, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { NbHeaderRowComponent, NbRowComponent } from '../cdk/table';
@@ -28,7 +28,10 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
         take(1),
         takeUntil(this.doubleClick$),
       )
-      .subscribe(() => this.tree.toggleRow(this));
+      .subscribe(() => {
+        this.changeDetectorRef.markForCheck();
+        this.tree.toggleRow(this);
+      });
   }
 
   @HostListener('dblclick')
@@ -37,7 +40,10 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
     this.tree.toggleRow(this, { deep: true });
   }
 
-  constructor(@Inject(NB_TREE_GRID) tree) {
+  constructor(
+    @Inject(NB_TREE_GRID) tree,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {
     super();
     this.tree = tree as NbTreeGridComponent<any>;
   }

@@ -9,6 +9,9 @@ import { Injectable } from '@angular/core';
 
 import { NbTreeGridPresentationNode } from './tree-grid.model';
 
+/**
+ * NbTreeGridFilterService
+ */
 @Injectable()
 export class NbTreeGridFilterService<T> {
   filter(query: string, data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
