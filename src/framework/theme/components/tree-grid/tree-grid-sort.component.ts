@@ -8,10 +8,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  Directive, HostBinding,
+  Directive,
+  EventEmitter,
+  HostBinding,
   HostListener,
   Inject,
   Input,
+  Output,
   TemplateRef,
 } from '@angular/core';
 
@@ -43,25 +46,43 @@ const sortDirections: NbSortDirection[] = [
   NbSortDirection.NONE,
 ];
 
+/**
+ * Directive triggers sort method of passed object when sort header changes direction
+ */
 @Directive({ selector: '[nbSort]' })
 export class NbSortDirective {
   @Input('nbSort') sortable: NbSortable;
 
-  sort(sortRequest: NbSortRequest) {
-    this.sortable.sort(sortRequest);
+  @Output() sort: EventEmitter<NbSortRequest> = new EventEmitter<NbSortRequest>();
+
+  emitSort(sortRequest: NbSortRequest) {
+    if (this.sortable && this.sortable.sort) {
+      this.sortable.sort(sortRequest);
+    } else {
+      this.sort.emit(sortRequest);
+    }
   }
 }
-
 
 export interface NbSortHeaderIconDirectiveContext {
   $implicit: NbSortDirection;
   isAscending: boolean;
   isDescending: boolean;
+  isNone: boolean;
 }
 
+/**
+ * Directive for headers sort icons. Mark you icon implementation with this structural directive and
+ * it'll set template's implicit context with current direction. Context also has `isAscending`,
+ * `isDescending` and `isNone` properties.
+ */
+// TODO: stacked-example(Header icon, tree-grid/tree-grid-header-icon)
 @Directive({ selector: '[nbSortHeaderIcon]' })
 export class NbSortHeaderIconDirective {}
 
+/**
+ * Marks header as sort header so it emitting sort event when clicked.
+ */
 @Component({
   selector: '[nbSortHeader]',
   template: `
@@ -80,10 +101,17 @@ export class NbSortHeaderComponent {
 
   @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef }) sortIcon: TemplateRef<any>;
 
+  /**
+   * Current sort direction. Possible values: `asc`, `desc`, ``(none)
+   * @type {NbSortDirection}
+   */
   @Input('nbSortHeader') direction: NbSortDirection;
 
   private disabledValue: boolean = false;
 
+  /**
+   * Disable sort header
+   */
   @Input()
   @HostBinding('class.disabled')
   set disabled(value) {
@@ -115,7 +143,7 @@ export class NbSortHeaderComponent {
 
   sortData(): void {
     const sortRequest = this.createSortRequest();
-    this.sort.sort(sortRequest);
+    this.sort.emitSort(sortRequest);
   }
 
   getIconContext(): NbSortHeaderIconDirectiveContext {
@@ -123,6 +151,7 @@ export class NbSortHeaderComponent {
       $implicit: this.direction,
       isAscending: this.isAscending(),
       isDescending: this.isDescending(),
+      isNone: !this.isAscending() && !this.isDescending(),
     };
   }
 
