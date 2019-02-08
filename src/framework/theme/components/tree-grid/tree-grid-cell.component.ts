@@ -29,6 +29,11 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   private initialRightPadding: string = '';
   elementRef: ElementRef<HTMLElement>;
 
+  @HostBinding('style.width')
+  get columnWidth(): string {
+    return this.tree.getColumnWidth();
+  }
+
   @HostBinding('style.padding-left')
   get leftPadding(): string | SafeStyle | null {
     if (this.directionService.isLtr()) {
