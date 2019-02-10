@@ -198,10 +198,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Renders select placeholder if nothing selected.
    * */
   @Input() placeholder: string = '';
-  
+
   /**
    * Custom comparing algorithm
-   **/
+   */
   @Input() compareWith: (o1: any, o2: any) => boolean = looseIdentical;
 
   /**
