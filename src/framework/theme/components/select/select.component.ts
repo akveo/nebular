@@ -23,6 +23,7 @@ import {
   Output,
   QueryList,
   ViewChild,
+  ɵlooseIdentical as looseIdentical,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { take, takeWhile } from 'rxjs/operators';
@@ -197,6 +198,11 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Renders select placeholder if nothing selected.
    * */
   @Input() placeholder: string = '';
+  
+  /**
+   * Custom comparing algorithm
+   **/
+  @Input() compareWith: (o1: any, o2: any) => boolean = looseIdentical;
 
   /**
    * Will be emitted when selected value changes.
@@ -422,7 +428,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   protected handleSingleSelect(option: NbOptionComponent<T>) {
     const selected = this.selectionModel.pop();
 
-    if (selected && selected !== option) {
+    if (selected && !this.compareWith(selected, option)) {
       selected.deselect();
     }
 
@@ -439,7 +445,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent<T>) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
+      this.selectionModel = this.selectionModel.filter(s => !this.compareWith(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -566,7 +572,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value: T) {
-    const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
+    const corresponding = this.options.find((option: NbOptionComponent<T>) => this.compareWith(option.value, value));
 
     if (corresponding) {
       corresponding.select();
