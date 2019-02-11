@@ -19,13 +19,14 @@ import { DATA } from './data';
             </td>
           </ng-container>
 
-          <ng-container
-            *ngFor="let column of defaultColumns; let index = index"
-            [nbTreeGridColumnDef]="column"
-            [hideOn]="400 + index * 100">
-            <!--      hide last remaining column every 100px starting from 600px -->
-            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
-            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+          <ng-container nbTreeGridColumnDef="weight" [hideOn]="800">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Weight</th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.weight}}</td>
+          </ng-container>
+
+          <ng-container nbTreeGridColumnDef="symbol" [hideOn]="1000">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>symbol</th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data.symbol}}</td>
           </ng-container>
 
         </table>
@@ -39,7 +40,7 @@ export class TreeGridResponsiveComponent {
   data = DATA;
 
   customColumn = 'name';
-  defaultColumns = ['weight', 'symbol', 'position'];
+  defaultColumns = ['weight', 'symbol'];
   get columnsToDisplay(): string[] {
     return [ this.customColumn, ...this.defaultColumns ];
   }
