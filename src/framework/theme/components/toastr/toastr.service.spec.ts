@@ -166,7 +166,14 @@ describe('toastr-container-registry', () => {
     const cfr = TestBed.configureTestingModule({
       imports: [NbToastrModule.forRoot()],
     }).get(ComponentFactoryResolver);
-    toastrContainerRegistry = new NbToastrContainerRegistry(overlayStub, positionBuilder, positionHelper, cfr);
+
+    toastrContainerRegistry = new NbToastrContainerRegistry(
+      overlayStub,
+      positionBuilder,
+      positionHelper,
+      cfr,
+      document,
+    );
   });
 
   it('should create new container if not exists for requested position', () => {
