@@ -6,7 +6,7 @@ import { DATA } from './data';
     <nb-card>
       <nb-card-body>
 
-        <table nbTreeGrid [source]="data">
+        <table [nbTreeGrid]="data">
 
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>
 

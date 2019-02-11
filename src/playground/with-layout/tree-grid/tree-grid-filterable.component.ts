@@ -10,7 +10,7 @@ import { DATA, PeriodicElement } from './data';
         <label class="search-label" for="search">Type to filter:</label>
         <input nbInput (input)="filter($event)" id="search" class="search-input">
 
-        <table nbTreeGrid [source]="dataSource">
+        <table [nbTreeGrid]="dataSource">
 
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columnsToDisplay"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>

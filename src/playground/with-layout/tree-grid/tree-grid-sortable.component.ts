@@ -7,7 +7,7 @@ import { DATA, PeriodicElement } from './data';
     <nb-card>
       <nb-card-body>
 
-        <table nbTreeGrid [source]="dataSource" nbSort (sort)="changeSort($event)">
+        <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)">
 
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columnsToDisplay"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>
