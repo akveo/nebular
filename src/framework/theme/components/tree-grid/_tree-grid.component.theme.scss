@@ -12,7 +12,8 @@
   $border-color: nb-theme(tree-grid-cell-border-color);
 
   .nb-tree-grid-header-cell,
-  .nb-tree-grid-cell {
+  .nb-tree-grid-cell,
+  .nb-tree-grid-footer-cell {
     height: nb-theme(tree-grid-row-min-height);
     padding: nb-theme(tree-grid-cell-padding);
     border: $border-width $border-style $border-color;
