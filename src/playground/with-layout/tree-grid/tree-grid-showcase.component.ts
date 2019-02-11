@@ -11,7 +11,7 @@ import { DATA, PeriodicElement } from './data';
 @Component({
   selector: 'nb-tree-grid-showcase',
   templateUrl: './tree-grid-showcase.component.html',
-  styleUrls: ['./tree-grid-showcase.component.scss'],
+  styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
 })
 export class TreeGridShowcaseComponent {
   customColumn = 'name';

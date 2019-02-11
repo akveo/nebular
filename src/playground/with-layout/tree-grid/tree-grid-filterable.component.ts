@@ -36,7 +36,7 @@ import { DATA, PeriodicElement } from './data';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./tree-grid-showcase.component.scss'],
+  styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
 })
 export class TreeGridFilterableComponent {
   customColumn = 'name';

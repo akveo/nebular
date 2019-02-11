@@ -40,6 +40,7 @@ import { DATA, PeriodicElement } from './data';
       </nb-card-body>
     </nb-card>
   `,
+  styleUrls: ['./tree-grid-shared.scss'],
 })
 export class TreeGridSortableComponent {
   customColumn = 'name';

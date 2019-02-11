@@ -26,6 +26,7 @@ import { DATA } from './data';
       </nb-card-body>
     </nb-card>
   `,
+  styleUrls: ['./tree-grid-shared.scss'],
 })
 export class TreeGridBasicComponent {
   data = DATA;
