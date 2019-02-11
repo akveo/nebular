@@ -14,6 +14,7 @@ import { SortIconComponent } from './components/sort-icon.component';
 import { TreeGridSortableComponent } from './tree-grid-sortable.component';
 import { TreeGridFilterableComponent } from './tree-grid-filterable.component';
 import { TreeGridBasicComponent } from './tree-grid-basic.component';
+import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
 
 @NgModule({
   imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
@@ -23,6 +24,7 @@ import { TreeGridBasicComponent } from './tree-grid-basic.component';
     TreeGridSortableComponent,
     TreeGridFilterableComponent,
     TreeGridBasicComponent,
+    TreeGridResponsiveComponent,
   ],
 })
 export class TreeGridModule {}

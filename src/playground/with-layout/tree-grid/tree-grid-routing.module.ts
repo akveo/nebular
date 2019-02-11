@@ -10,6 +10,7 @@ import { TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridSortableComponent } from './tree-grid-sortable.component';
 import { TreeGridFilterableComponent } from './tree-grid-filterable.component';
 import { TreeGridBasicComponent } from './tree-grid-basic.component';
+import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +28,10 @@ const routes: Route[] = [
   {
     path: 'tree-grid-basic.component',
     component: TreeGridBasicComponent,
+  },
+  {
+    path: 'tree-grid-responsive.component',
+    component: TreeGridResponsiveComponent,
   },
 ];
 

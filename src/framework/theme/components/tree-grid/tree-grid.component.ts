@@ -56,6 +56,11 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * directives will trigger sort, toggle themselves.
  * @stacked-example(NbTreeGridDataSource, tree-grid/tree-grid-showcase.component)
  *
+ * You can create responsive grid by setting `hideOn` and `showOn` inputs of
+ * [nbTreeGridColumnDef](docs/components/tree-grid/api#nbtreegridcolumndefdirective) directive.
+ * When viewport reaches specified width grid hides or shows columns.
+ * @stacked-example(Responsive columns, tree-grid/tree-grid-responsive.component)
+ *
  * @styles
  *
  * tree-grid-cell-border-width

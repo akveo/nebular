@@ -1259,6 +1259,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TreeGridBasicComponent',
         name: 'Tree Grid Basic',
       },
+      {
+        path: 'tree-grid-responsive.component',
+        link: '/tree-grid/tree-grid-responsive.component',
+        component: 'TreeGridResponsiveComponent',
+        name: 'Tree Grid Responsive',
+      },
     ],
   },
   {
