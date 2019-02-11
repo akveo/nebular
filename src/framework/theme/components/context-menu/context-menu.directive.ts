@@ -9,14 +9,19 @@ import {
   ComponentRef,
   Directive,
   ElementRef,
-  Input, OnChanges,
-  OnDestroy, OnInit,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
-  NbAdjustment, NbDynamicOverlay, NbDynamicOverlayController, NbDynamicOverlayHandler,
+  NbAdjustment,
+  NbDynamicOverlay,
+  NbDynamicOverlayController,
+  NbDynamicOverlayHandler,
   NbOverlayRef,
   NbPosition,
   NbTrigger,
