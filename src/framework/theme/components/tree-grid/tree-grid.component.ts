@@ -18,10 +18,12 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { merge } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { NbTreeGridColumnDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-column-def.directive';
+import { NbTreeGridHeaderRowDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-def.component';
+import { fromEvent, merge } from 'rxjs';
+import { debounceTime, takeWhile } from 'rxjs/operators';
 
-import { NB_DOCUMENT } from '../../theme.options';
+import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
@@ -90,12 +92,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               dir: NbDirectionality,
               @Inject(NB_DOCUMENT) document: any,
               platform: NbPlatform | undefined,
+              @Inject(NB_WINDOW) private window,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
+    this.platform = platform;
   }
 
   private alive: boolean = true;
   private _source: NbTreeGridDataSource<T>;
+  private platform: NbPlatform;
 
   /**
    * The table's data
@@ -121,6 +126,14 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     merge(this._contentRowDefs.changes, this._contentHeaderRowDefs.changes, this._contentFooterRowDefs.changes)
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.checkDefsCount());
+
+    if (this.platform.isBrowser) {
+      this.updateVisibleColumns();
+
+      merge(this._contentColumnDefs.changes, fromEvent(this.window, 'resize').pipe(debounceTime(50)))
+        .pipe(takeWhile(() => this.alive))
+        .subscribe(() => this.updateVisibleColumns());
+    }
   }
 
   ngOnDestroy() {
@@ -200,6 +213,39 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     }
     if (this._contentFooterRowDefs.length > 1) {
       throw new Error(`Found multiple footer row definitions`);
+    }
+  }
+
+  private updateVisibleColumns(): void {
+    const width = this.window.innerWidth;
+    const columnDefs = (this._contentColumnDefs as QueryList<NbTreeGridColumnDefDirective>);
+
+    const columnsToHide: string[] = columnDefs
+      .filter((col: NbTreeGridColumnDefDirective) => col.shouldHide(width))
+      .map(col => col.name);
+
+    const columnsToShow: string[] = columnDefs
+      .filter((col: NbTreeGridColumnDefDirective) => col.shouldShow(width))
+      .map(col => col.name);
+
+    if (!columnsToHide.length && !columnsToShow.length) {
+      return;
+    }
+
+    const rowDefs = [
+      this._contentHeaderRowDefs.first,
+      this._contentRowDefs.first,
+      this._contentFooterRowDefs.first,
+    ].filter(d => !!d) as NbTreeGridHeaderRowDefDirective[];
+
+    for (const rowDef of rowDefs) {
+      for (const column of columnsToHide) {
+        rowDef.hideColumn(column);
+      }
+
+      for (const column of columnsToShow) {
+        rowDef.showColumn(column);
+      }
     }
   }
 }
