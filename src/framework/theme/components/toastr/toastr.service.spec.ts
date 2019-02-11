@@ -127,23 +127,25 @@ describe('toastr-container-registry', () => {
   let positionBuilder: any;
   let positionHelper: any;
   let containerStub: any;
+  let documentStub: any;
 
   beforeEach(() => {
     containerStub = {
+
+      location: {
+        nativeElement: 'element',
+      },
+
       attach() {
       },
-    }
-  });
+    };
 
-  beforeEach(() => {
     overlayStub = {
       create() {
         return containerStub;
       },
     };
-  });
 
-  beforeEach(() => {
     positionBuilder = {
       global() {
         return {
@@ -152,14 +154,20 @@ describe('toastr-container-registry', () => {
         }
       },
     };
-  });
 
-  beforeEach(() => {
     positionHelper = {
       toLogicalPosition(position) {
         return position;
       },
     };
+
+    documentStub = {
+      hasElement: true,
+
+      contains: () => {
+        return this.hasElement;
+      },
+    }
   });
 
   beforeEach(() => {
@@ -172,7 +180,7 @@ describe('toastr-container-registry', () => {
       positionBuilder,
       positionHelper,
       cfr,
-      document,
+      documentStub,
     );
   });
 
@@ -191,6 +199,17 @@ describe('toastr-container-registry', () => {
     toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
 
     expect(overlayCreateSpy).toHaveBeenCalledTimes(1);
+  });
+
+
+  it('should re-create when unattached from document', () => {
+    const overlayCreateSpy = spyOn(overlayStub, 'create').and.returnValue(containerStub);
+
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
+    documentStub.hasElement = false;
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
+
+    expect(overlayCreateSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should return the same position for top-end and top-right when ltr', () => {
