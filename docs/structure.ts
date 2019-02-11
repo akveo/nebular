@@ -484,11 +484,11 @@ export const structure = [
       },
       {
         type: 'group',
-        name: 'Tree',
+        name: 'Data Table',
       },
       {
         type: 'tabs',
-        name: 'Tree-grid',
+        name: 'Tree Grid',
         icon: 'tree-grid.svg',
         source: [
           'NbTreeGridComponent',
@@ -500,9 +500,6 @@ export const structure = [
           'NbTreeGridRowToggleDirective',
           'NbSortDirective',
           'NbSortHeaderComponent',
-          // 'NbSortHeaderIconDirective',
-          // 'NbTreeGridFilterService',
-          // 'NbTreeGridSortService',
         ],
       },
     ],
