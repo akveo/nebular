@@ -101,6 +101,8 @@ import { NbMenuItem, NbMenuService } from '../menu/menu.service';
  * as a result of some third-party action, like HTTP request or validation check:
  *
  * @stacked-example(Manual Control, context-menu/context-menu-noop.component)
+ *
+ * @stacked-example(Manual Control, context-menu/context-menu-right-click.component)
  * */
 @Directive({
   selector: '[nbContextMenu]',
