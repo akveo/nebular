@@ -28,7 +28,7 @@ export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implement
     return this.hideOnValue;
   }
   set hideOn(value: number | null) {
-    this.hideOnValue = value == null
+    this.hideOnValue = !value && value !== 0
       ? null
       : parseInt(value as unknown as string, 10);
   }
@@ -43,7 +43,7 @@ export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implement
     return this.showOnValue;
   }
   set showOn(value: number | null) {
-    this.showOnValue = value == null
+    this.showOnValue = !value && value !== 0
       ? null
       : parseInt(value as unknown as string, 10);
   }
