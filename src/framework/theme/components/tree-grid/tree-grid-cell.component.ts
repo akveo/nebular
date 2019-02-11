@@ -130,7 +130,7 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   },
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective {
-  constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef) {
+  constructor(columnDef: NbTreeGridColumnDefDirective, elementRef: ElementRef) {
     super(columnDef, elementRef);
   }
 }
