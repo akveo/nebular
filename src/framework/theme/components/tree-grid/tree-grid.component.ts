@@ -115,7 +115,6 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   @Input() levelPaddingUnit: string = 'rem';
 
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
-  @ContentChildren(NbTreeGridRowComponent, { read: ElementRef }) private rowElements: QueryList<ElementRef<Element>>;
 
   ngAfterViewInit() {
     this.checkDefsCount();
@@ -130,7 +129,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   toggleRow(row: NbTreeGridRowComponent, options?: NbToggleOptions): void {
-    this._source.toggleByIndex(this.getRowIndex(row), options);
+    this._source.toggleByIndex(this.getDataIndex(row), options);
   }
 
   toggleCellRow(cell: NbTreeGridCellDirective): void {
@@ -151,12 +150,20 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     return 0;
   }
 
-  private getRowIndex(row: NbTreeGridRowComponent): number {
-    return this.rows.toArray().indexOf(row);
+  private getDataIndex(row: NbTreeGridRowComponent): number {
+    const rowEl = row.elementRef.nativeElement;
+    const parent = rowEl.parentElement;
+    if (parent) {
+      return Array.from(parent.children)
+        .filter((child: Element) => child.hasAttribute('nbtreegridrow'))
+        .indexOf(rowEl);
+    }
+
+    return -1;
   }
 
   private getRowLevel(row: NbTreeGridRowComponent): number {
-    return this._source.getLevel(this.getRowIndex(row));
+    return this._source.getLevel(this.getDataIndex(row));
   }
 
   private getColumns(): string[] {
@@ -177,10 +184,11 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   private findCellRow(cell: NbTreeGridCellDirective): NbTreeGridRowComponent | undefined {
     const cellRowElement = cell.elementRef.nativeElement.parentElement;
-    const rowIndex = this.rowElements.toArray()
-      .findIndex((rowElement: ElementRef) => rowElement.nativeElement === cellRowElement);
 
-    return this.rows.toArray()[rowIndex];
+    return this.rows.toArray()
+      .find((row: NbTreeGridRowComponent) => {
+        return row.elementRef.nativeElement === cellRowElement;
+      });
   }
 
   private checkDefsCount(): void {

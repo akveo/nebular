@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Inject, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component, ElementRef,
+  HostListener,
+  Inject,
+  OnDestroy,
+} from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import {
@@ -50,6 +57,7 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
   constructor(
     @Inject(NB_TREE_GRID) tree,
     private changeDetectorRef: ChangeDetectorRef,
+    public elementRef: ElementRef<HTMLElement>,
   ) {
     super();
     this.tree = tree as NbTreeGridComponent<any>;

@@ -70,10 +70,10 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     this.data.next(this.data.value);
   }
 
-  toggleByIndex(rowIndex: number, options?: NbToggleOptions) {
-    const row: NbTreeGridPresentationNode<T> = this.renderData.value && this.renderData.value[rowIndex];
-    if (row) {
-      this.toggle(row.node.data, options);
+  toggleByIndex(dataIndex: number, options?: NbToggleOptions) {
+    const node: NbTreeGridPresentationNode<T> = this.renderData.value && this.renderData.value[dataIndex];
+    if (node) {
+      this.toggle(node.data, options);
     }
   }
 
