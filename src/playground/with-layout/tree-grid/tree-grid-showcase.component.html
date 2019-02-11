@@ -6,26 +6,26 @@
 
     <table nbTreeGrid [nbSort]="dataSource" [source]="dataSource" levelPadding="1.3">
 
-      <tr nbTreeGridHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columnsToDisplay"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>
 
       <ng-container nbTreeGridColumnDef="name">
-        <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+        <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
           name
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
         </th>
-        <td nbTreeGridCell *nbCellDef="let row">
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
           <nb-tree-grid-row-toggle [row]="row"></nb-tree-grid-row-toggle>
           {{row.data.name}}
         </td>
       </ng-container>
 
       <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
-        <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+        <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
           {{column}}
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
         </th>
-        <td nbTreeGridCell *nbCellDef="let row">{{row.data[column]}}</td>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
       </ng-container>
 
     </table>

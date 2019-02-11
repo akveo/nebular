@@ -9,7 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NB_WINDOW } from '../../theme.options';
-import { NbCellDirective, NbColumnDefDirective, NbHeaderCellDirective } from '../cdk/table';
+import { NbCellDirective, NbColumnDefDirective, NbFooterCellDirective, NbHeaderCellDirective } from '../cdk/table';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
@@ -119,5 +119,18 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   ) {
     super(columnDef, elementRef);
     this.tree = tree as NbTreeGridComponent<any>;
+  }
+}
+
+@Directive({
+  selector: 'td[nbTreeGridFooterCell]',
+  host: {
+    'class': 'nb-tree-grid-footer-cell',
+    'role': 'gridcell',
+  },
+})
+export class NbTreeGridFooterCellDirective extends NbFooterCellDirective {
+  constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef) {
+    super(columnDef, elementRef);
   }
 }

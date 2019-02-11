@@ -89,7 +89,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               @Attribute('role') role: string,
               dir: NbDirectionality,
               @Inject(NB_DOCUMENT) document: any,
-              platform: NbPlatform  | undefined,
+              platform: NbPlatform | undefined,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
   }

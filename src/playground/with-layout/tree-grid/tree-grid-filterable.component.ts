@@ -12,23 +12,23 @@ import { DATA, PeriodicElement } from './data';
 
         <table nbTreeGrid [source]="dataSource">
 
-          <tr nbTreeGridHeaderRow *nbHeaderRowDef="columnsToDisplay"></tr>
+          <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columnsToDisplay"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columnsToDisplay"></tr>
 
           <ng-container [nbTreeGridColumnDef]="customColumn">
-            <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
               {{customColumn}}
             </th>
 
-            <td nbTreeGridCell *nbCellDef="let row">
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
               <nb-tree-grid-row-toggle [row]="row"></nb-tree-grid-row-toggle>
               {{row.data.name}}
             </td>
           </ng-container>
 
           <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
-            <th nbTreeGridHeaderCell nbSortHeader *nbHeaderCellDef>{{column}}</th>
-            <td nbTreeGridCell *nbCellDef="let row">{{row.data[column]}}</td>
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
           </ng-container>
 
         </table>
