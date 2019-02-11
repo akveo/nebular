@@ -54,7 +54,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * filter methods. Then you can call this methods to change sort or toggle rows programmatically. Also `nbSort` and
  * `nbFilterInput` directives both support `NbTreeGridDataSource`, so you can pass it directly as an input and
  * directives will trigger sort, toggle themselves.
- * @stacked-example(NbTreeGridDataSource, tree-grid/tree-grid-showcase.component)
+ * @stacked-example(Data Source Builder, tree-grid/tree-grid-showcase.component)
  *
  * You can create responsive grid by setting `hideOn` and `showOn` inputs of
  * [nbTreeGridColumnDef](docs/components/tree-grid/api#nbtreegridcolumndefdirective) directive.

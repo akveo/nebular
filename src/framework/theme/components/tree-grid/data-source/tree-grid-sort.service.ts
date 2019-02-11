@@ -10,7 +10,8 @@ import { NbSortDirection, NbSortRequest } from '../tree-grid-sort.component';
 import { NbTreeGridPresentationNode } from './tree-grid.model';
 
 /**
- * NbTreeGridSortService
+ * Service used to sort tree grid data. Uses Array.prototype.sort method.
+ * If you need custom sorting, you can extend this service and override comparator or whole sort method.
  */
 @Injectable()
 export class NbTreeGridSortService<T> {

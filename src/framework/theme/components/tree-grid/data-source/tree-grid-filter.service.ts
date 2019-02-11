@@ -10,7 +10,8 @@ import { Injectable } from '@angular/core';
 import { NbTreeGridPresentationNode } from './tree-grid.model';
 
 /**
- * NbTreeGridFilterService
+ * Service used to filter tree grid data. Searched searchString in all object values.
+ * If you need custom filter, you can extend this service and override filterPredicate or whole filter method.
  */
 @Injectable()
 export class NbTreeGridFilterService<T> {
