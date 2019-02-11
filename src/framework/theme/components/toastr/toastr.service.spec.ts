@@ -132,11 +132,12 @@ describe('toastr-container-registry', () => {
   beforeEach(() => {
     containerStub = {
 
-      location: {
-        nativeElement: 'element',
-      },
-
       attach() {
+        return {
+          location: {
+            nativeElement: 'element',
+          },
+        }
       },
     };
 
@@ -162,10 +163,10 @@ describe('toastr-container-registry', () => {
     };
 
     documentStub = {
-      hasElement: true,
+      _contains: true,
 
       contains: () => {
-        return this.hasElement;
+        return documentStub._contains;
       },
     }
   });
@@ -206,7 +207,7 @@ describe('toastr-container-registry', () => {
     const overlayCreateSpy = spyOn(overlayStub, 'create').and.returnValue(containerStub);
 
     toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
-    documentStub.hasElement = false;
+    documentStub._contains = false;
     toastrContainerRegistry.get(NbGlobalLogicalPosition.BOTTOM_START);
 
     expect(overlayCreateSpy).toHaveBeenCalledTimes(2);
