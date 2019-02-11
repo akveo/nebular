@@ -1,9 +1,12 @@
 import {
+  CdkCell,
   CdkCellDef,
   CdkColumnDef,
+  CdkFooterCell,
   CdkFooterCellDef,
   CdkFooterRow,
   CdkFooterRowDef,
+  CdkHeaderCell,
   CdkHeaderCellDef,
   CdkHeaderRow,
   CdkHeaderRowDef,
@@ -24,3 +27,7 @@ export const NbCdkFooterRow = CdkFooterRow;
 export const NbCdkFooterCellDef = CdkFooterCellDef;
 
 export const NbCdkColumnDef = CdkColumnDef;
+
+export const NbCdkCell = CdkCell;
+export const NbCdkHeaderCell = CdkHeaderCell;
+export const NbCdkFooterCell = CdkFooterCell;

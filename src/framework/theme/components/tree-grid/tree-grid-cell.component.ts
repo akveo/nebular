@@ -9,7 +9,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NB_WINDOW } from '../../theme.options';
-import { NbCellDirective, NbColumnDefDirective, NbFooterCellDirective, NbHeaderCellDirective } from '../cdk/table';
+import {
+  NbCdkCell,
+  NbCdkFooterCell,
+  NbCellDirective,
+  NbFooterCellDirective,
+  NbHeaderCellDirective,
+  NbCdkHeaderCell,
+} from '../cdk/table';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
@@ -20,11 +27,11 @@ import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
     'class': 'nb-tree-grid-cell',
     'role': 'gridcell',
   },
-  providers: [{ provide: NbCellDirective, useExisting: NbTreeGridCellDirective }],
+  providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   private readonly tree: NbTreeGridComponent<any>;
-  private readonly columnDef: NbColumnDefDirective;
+  private readonly columnDef: NbTreeGridColumnDefDirective;
   private initialLeftPadding: string = '';
   private initialRightPadding: string = '';
   elementRef: ElementRef<HTMLElement>;
@@ -103,6 +110,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
     'class': 'nb-tree-grid-header-cell',
     'role': 'columnheader',
   },
+  providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   private readonly tree: NbTreeGridComponent<any>;
@@ -128,6 +136,7 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
     'class': 'nb-tree-grid-footer-cell',
     'role': 'gridcell',
   },
+  providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective {
   constructor(columnDef: NbTreeGridColumnDefDirective, elementRef: ElementRef) {
