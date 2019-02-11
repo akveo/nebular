@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "3.1.0",
+  "version": "3.2.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -19,8 +19,8 @@
     "gulp": "gulp",
     "firebase": "firebase",
     "conventional-changelog": "conventional-changelog",
-    "prestart": "run-s build:schematics gen:playground",
-    "start": "run-p \"ng -- serve {@}\" \"gulp -- watch:gen:playground\" -- ",
+    "prestart": "npm run gen:playground",
+    "start": "ng serve",
     "start:prod": "npm run start -- --prod --aot",
     "start:wp": "npm run start:prod -- playground-wp",
     "docs:parse": "gulp docs",
@@ -117,7 +117,7 @@
     "@angular-devkit/build-angular": "0.10.2",
     "@angular-devkit/core": "7.0.2",
     "@angular-devkit/schematics": "7.0.2",
-    "@angular/cdk": "7.0.0",
+    "@angular/cdk": "7.2.1",
     "@angular/cli": "7.0.2",
     "@angular/compiler-cli": "7.0.0",
     "@angular/language-service": "7.0.0",

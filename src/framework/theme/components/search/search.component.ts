@@ -203,7 +203,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button #searchButton class="start-search" (click)="openSearch()">
+    <button #searchButton class="start-search" (click)="emitActivate()">
       <i class="nb-search"></i>
     </button>
     <nb-search-field
@@ -213,7 +213,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
       [placeholder]="placeholder"
       [hint]="hint"
       (search)="search($event)"
-      (close)="hideSearch()">
+      (close)="emitDeactivate()">
     </nb-search-field>
   `,
 })
@@ -318,6 +318,14 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   search(term) {
     this.searchService.submitSearch(term, this.tag);
     this.hideSearch();
+  }
+
+  emitActivate() {
+    this.searchService.activateSearch(this.type, this.tag);
+  }
+
+  emitDeactivate() {
+    this.searchService.deactivateSearch(this.type, this.tag);
   }
 
   private removeLayoutClasses() {
