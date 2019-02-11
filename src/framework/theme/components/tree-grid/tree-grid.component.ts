@@ -196,7 +196,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       throw new Error(`Found multiple row definitions`);
     }
     if (this._contentHeaderRowDefs.length > 1) {
-      throw new Error(`Found multiple cell definitions`);
+      throw new Error(`Found multiple header row definitions`);
+    }
+    if (this._contentFooterRowDefs.length > 1) {
+      throw new Error(`Found multiple footer row definitions`);
     }
   }
 }
