@@ -118,7 +118,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   ngAfterViewInit() {
     this.checkDefsCount();
-    merge(this._contentRowDefs.changes, this._contentHeaderRowDefs.changes)
+    merge(this._contentRowDefs.changes, this._contentHeaderRowDefs.changes, this._contentFooterRowDefs.changes)
       .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.checkDefsCount());
   }
