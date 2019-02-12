@@ -43,8 +43,8 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * Data provided to source should match [NbTreeGridNode](docs/components/treegrid/api#nbtreegridnode) interface.
  * As the most basic usage you need to define [nbTreeGridRowDef](docs/components/treegrid/api#nbtreegridrowdefdirective)
  * where you should pass columns to display in rows and
- * [nbTreeGridColumnDef](docs/components/treegrid/api#nbtreegridcolumndefdirective) - a column definition for each
- * column passed to row definition.
+ * [nbTreeGridColumnDef](docs/components/treegrid/api#nbtreegridcolumndefdirective) - component containing cell
+ * definitions for each column passed to row definition.
  * @stacked-example(Basic, tree-grid/tree-grid-basic.component)
  *
  * To use sorting you can add `nbSort` directive to table and subscribe to `sort` method. When user click on header,
@@ -61,6 +61,11 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * [nbTreeGridColumnDef](docs/components/tree-grid/api#nbtreegridcolumndefdirective) directive.
  * When viewport reaches specified width grid hides or shows columns.
  * @stacked-example(Responsive columns, tree-grid/tree-grid-responsive.component)
+ *
+ * To customize sort or row toggle icons you can use `nbSortHeaderIcon` and `nbTreeGridRowToggle` directives
+ * respectively. `nbSortHeaderIcon` is a structural directive and it's implicit context set to current direction.
+ * Also context has three properties: `isAscending`, `isDescending` and `isNone`.
+ * @stacked-example(Custom icons, tree-grid/tree-grid-custom-icons.component)
  *
  * @styles
  *

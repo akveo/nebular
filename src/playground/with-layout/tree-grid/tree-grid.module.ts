@@ -15,16 +15,18 @@ import { TreeGridFilterableComponent } from './tree-grid-filterable.component';
 import { TreeGridBasicComponent } from './tree-grid-basic.component';
 import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
 import { FsIconComponent } from './components/fs-icon.component';
+import { TreeGridCustomIconsComponent } from './tree-grid-custom-icons.component';
 
 @NgModule({
   imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
   declarations: [
+    FsIconComponent,
     TreeGridShowcaseComponent,
     TreeGridSortableComponent,
     TreeGridFilterableComponent,
     TreeGridBasicComponent,
     TreeGridResponsiveComponent,
-    FsIconComponent,
+    TreeGridCustomIconsComponent,
   ],
 })
 export class TreeGridModule {}

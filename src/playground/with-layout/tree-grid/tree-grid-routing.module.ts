@@ -11,6 +11,7 @@ import { TreeGridSortableComponent } from './tree-grid-sortable.component';
 import { TreeGridFilterableComponent } from './tree-grid-filterable.component';
 import { TreeGridBasicComponent } from './tree-grid-basic.component';
 import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
+import { TreeGridCustomIconsComponent } from './tree-grid-custom-icons.component';
 
 const routes: Route[] = [
   {
@@ -32,6 +33,10 @@ const routes: Route[] = [
   {
     path: 'tree-grid-responsive.component',
     component: TreeGridResponsiveComponent,
+  },
+  {
+    path: 'tree-grid-custom-icons.component',
+    component: TreeGridCustomIconsComponent,
   },
 ];
 

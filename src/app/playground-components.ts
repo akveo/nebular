@@ -1289,6 +1289,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TreeGridResponsiveComponent',
         name: 'Tree Grid Responsive',
       },
+      {
+        path: 'tree-grid-custom-icons.component',
+        link: '/tree-grid/tree-grid-custom-icons.component',
+        component: 'TreeGridCustomIconsComponent',
+        name: 'Tree Grid Custom Icons',
+      },
     ],
   },
   {
