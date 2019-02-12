@@ -13,8 +13,9 @@
   overflow: auto;
 }
 
-.nb-tree-grid-cell,
-.nb-tree-grid-header-cell,
-.nb-tree-grid-footer-cell {
+
+/deep/ .nb-tree-grid-cell,
+/deep/ .nb-tree-grid-header-cell,
+/deep/ .nb-tree-grid-footer-cell {
   overflow: hidden;
 }
