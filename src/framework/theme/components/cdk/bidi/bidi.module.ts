@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BidiModule, Directionality } from '@angular/cdk/bidi';
-import { NbDirectionality } from '@nebular/theme/components/cdk/bidi/bidi';
+import { NbDirectionality } from './bidi';
 
 @NgModule({
   providers: [

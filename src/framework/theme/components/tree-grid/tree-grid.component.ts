@@ -18,9 +18,6 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { convertToBoolProperty } from '@nebular/theme/components/helpers';
-import { NbTreeGridColumnDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-column-def.directive';
-import { NbTreeGridHeaderRowDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-def.component';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, takeWhile } from 'rxjs/operators';
 
@@ -34,6 +31,9 @@ import { NbToggleOptions } from './data-source/tree-grid.service';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
+import { convertToBoolProperty } from '../helpers';
+import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
+import { NbTreeGridHeaderRowDefDirective } from './tree-grid-def.component';
 
 /**
  * Tree grid component that can be used to display nested rows of data.
