@@ -12,3 +12,9 @@
   max-width: 100%;
   overflow: auto;
 }
+
+.nb-tree-grid-cell,
+.nb-tree-grid-header-cell,
+.nb-tree-grid-footer-cell {
+  overflow: hidden;
+}
