@@ -28,7 +28,7 @@ import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
-import { NbTreeGridNode, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
+import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
@@ -121,8 +121,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     this.dataSource = this._source;
   }
 
-  @Input() levelPadding: number = 1;
-  @Input() levelPaddingUnit: string = 'rem';
+  @Input() levelPadding: string = '';
 
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
 
@@ -158,14 +157,14 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     return `${100 / this.getColumnsCount()}%`;
   }
 
-  getCellPadding(cell: NbTreeGridCellDirective, columnName: string): number {
+  getCellLevel(cell: NbTreeGridCellDirective, columnName: string): number {
     const isFirstColumn = this.isFirstColumn(columnName);
     const row = isFirstColumn && this.findCellRow(cell);
-    if (isFirstColumn && row) {
-      return this.getRowLevel(row) * this.levelPadding;
+    const level = row && this.getRowLevel(row);
+    if (level || level === 0) {
+      return level;
     }
-
-    return 0;
+    return DEFAULT_ROW_LEVEL;
   }
 
   private getDataIndex(row: NbTreeGridRowComponent): number {

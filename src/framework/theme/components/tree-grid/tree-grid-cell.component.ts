@@ -20,6 +20,7 @@ import {
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
+import { DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
 
 @Directive({
   selector: 'td[nbTreeGridCell]',
@@ -85,22 +86,30 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   }
 
   private get initialStartPadding(): string {
-    return this.directionService.isLtr()
+      return this.directionService.isLtr()
       ? this.initialLeftPadding
       : this.initialRightPadding;
   }
 
   private getStartPadding(): string | SafeStyle | null {
-    const levelPadding = this.tree.getCellPadding(this, this.columnDef.name);
-    if (!levelPadding) {
+    const rowLevel = this.tree.getCellLevel(this, this.columnDef.name);
+    if (rowLevel === DEFAULT_ROW_LEVEL) {
       return null;
     }
 
-    let startPadding: string | SafeStyle = `${levelPadding}${this.tree.levelPaddingUnit}`;
-    if (this.initialStartPadding) {
-      startPadding = this.sanitizer.bypassSecurityTrustStyle(`calc(${this.initialStartPadding} + ${startPadding})`);
+    const nestingLevel = rowLevel + 1;
+    let padding: string = '';
+    if (this.tree.levelPadding) {
+      padding = `calc(${this.tree.levelPadding} * ${nestingLevel})`;
+    } else if (this.initialStartPadding) {
+      padding = `calc(${this.initialStartPadding} * ${nestingLevel})`;
     }
-    return startPadding;
+
+    if (!padding) {
+      return null;
+    }
+
+    return this.sanitizer.bypassSecurityTrustStyle(padding);
   }
 }
 
