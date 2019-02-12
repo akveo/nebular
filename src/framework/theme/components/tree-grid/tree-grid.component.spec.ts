@@ -20,12 +20,12 @@ class BaseTreeGridTestComponent {
 
 @Component({
   template: `
-    <table nbTreeGrid [source]="dataSource">
-      <tr nbTreeGridRow *nbRowDef="let row; columns: columns"></tr>
+    <table [nbTreeGrid]="dataSource">
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
-      <ng-container *ngFor="let column of columns" [nbColumnDef]="column">
-        <th nbHeaderCell *nbHeaderCellDef>{{ column }}</th>
-        <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
+      <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
       </ng-container>
     </table>
   `,
@@ -34,13 +34,13 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
 
 @Component({
   template: `
-    <table nbTreeGrid [source]="dataSource">
-      <tr nbHeaderRow *nbHeaderRowDef="columns"></tr>
-      <tr nbTreeGridRow *nbRowDef="let row; columns: columns"></tr>
+    <table [nbTreeGrid]="dataSource">
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columns"></tr>
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
-      <ng-container *ngFor="let column of columns" [nbColumnDef]="column">
-        <th nbHeaderCell *nbHeaderCellDef>{{ column }}</th>
-        <td nbTreeGridCell *nbCellDef="let row">{{ row.data[column] }}</td>
+      <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
       </ng-container>
     </table>
   `,
