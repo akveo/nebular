@@ -6,7 +6,6 @@
 
 import { Component, HostListener, Input } from '@angular/core';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
-import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
 
 /**
  * NbTreeGridRowToggleComponent
@@ -14,9 +13,8 @@ import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
 @Component({
   selector: 'nb-tree-grid-row-toggle',
   template: `
-    <button *ngIf="row.hasChildren()"
-            [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
-      <i [class.nb-arrow-right]="!row.expanded" [class.nb-arrow-down]="row.expanded" aria-hidden="true"></i>
+    <button [attr.aria-label]="expanded ? 'collapse' : 'expand'">
+      <span [class.nb-arrow-right]="!expanded" [class.nb-arrow-down]="expanded" aria-hidden="true"></span>
     </button>
   `,
   styles: [`
@@ -28,11 +26,14 @@ import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
   `],
 })
 export class NbTreeGridRowToggleComponent {
-  // TODO: remove
-  /**
-   * row
-   */
-  @Input() row: NbTreeGridPresentationNode<any>;
+  private expandedValue: boolean;
+  @Input()
+  set expanded(value: boolean) {
+    this.expandedValue = value;
+  }
+  get expanded(): boolean {
+    return this.expandedValue;
+  }
 
   @HostListener('click', ['$event'])
   toggleRow($event: Event) {

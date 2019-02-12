@@ -21,7 +21,7 @@ interface FSEntry {
           <ng-container nbTreeGridColumnDef="name">
             <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>name</th>
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
-              <nb-tree-grid-row-toggle [row]="row"></nb-tree-grid-row-toggle>
+              <nb-tree-grid-row-toggle [expanded]="row.expanded" *ngIf="row.hasChildren()"></nb-tree-grid-row-toggle>
               {{row.data.name}}
             </td>
           </ng-container>
