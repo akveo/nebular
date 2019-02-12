@@ -28,6 +28,7 @@ import { NbTreeGridPresentationNode } from './data-source/tree-grid.model'
   `],
 })
 export class NbTreeGridRowToggleComponent {
+  // TODO: remove
   /**
    * row
    */

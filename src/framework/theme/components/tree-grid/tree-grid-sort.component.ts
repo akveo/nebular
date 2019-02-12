@@ -58,9 +58,8 @@ export class NbSortDirective {
   emitSort(sortRequest: NbSortRequest) {
     if (this.sortable && this.sortable.sort) {
       this.sortable.sort(sortRequest);
-    } else {
-      this.sort.emit(sortRequest);
     }
+    this.sort.emit(sortRequest);
   }
 }
 
@@ -76,7 +75,6 @@ export interface NbSortHeaderIconDirectiveContext {
  * it'll set template's implicit context with current direction. Context also has `isAscending`,
  * `isDescending` and `isNone` properties.
  */
-// TODO: stacked-example(Header icon, tree-grid/tree-grid-header-icon)
 @Directive({ selector: '[nbSortHeaderIcon]' })
 export class NbSortHeaderIconDirective {}
 
@@ -87,7 +85,7 @@ export class NbSortHeaderIconDirective {}
   selector: '[nbSortHeader]',
   template: `
     <button
-      class="change-sort-button"
+      class="nb-tree-grid-header-change-sort-button"
       type="button"
       [attr.disabled]="getDisabledAttributeValue()"
       (click)="sortData()">
