@@ -94,4 +94,10 @@ export class TreeGridShowcaseComponent {
       ],
     },
   ];
+
+  getShowOn(index: number) {
+    const minWithForMultipleColumns = 400;
+    const nextColumnStep = 100;
+    return minWithForMultipleColumns + (nextColumnStep * index);
+  }
 }

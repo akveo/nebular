@@ -4,7 +4,10 @@
     <label class="search-label" for="search">Search:</label>
     <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
 
-    <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)" levelPadding="1.3rem">
+    <table [nbTreeGrid]="dataSource"
+           [nbSort]="dataSource"
+           (sort)="updateSort($event)"
+           levelPadding="1.3rem">
 
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
@@ -20,7 +23,9 @@
         </td>
       </ng-container>
 
-      <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
+      <ng-container *ngFor="let column of defaultColumns; let index = index"
+                    [nbTreeGridColumnDef]="column"
+                    [showOn]="getShowOn(index)">
         <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
           {{column}}
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
