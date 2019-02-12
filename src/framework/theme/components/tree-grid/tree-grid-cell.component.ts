@@ -39,7 +39,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
 
   @HostBinding('style.width')
   get columnWidth(): string {
-    return this.tree.getColumnWidth();
+    return this.tree.getColumnWidth() || null;
   }
 
   @HostBinding('style.padding-left')
@@ -126,7 +126,7 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
 
   @HostBinding('style.width')
   get columnWidth(): string {
-    return this.tree.getColumnWidth();
+    return this.tree.getColumnWidth() || null;
   }
 
   constructor(
@@ -148,7 +148,19 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective {
-  constructor(columnDef: NbTreeGridColumnDefDirective, elementRef: ElementRef) {
+  private readonly tree: NbTreeGridComponent<any>;
+
+  @HostBinding('style.width')
+  get columnWidth(): string {
+    return this.tree.getColumnWidth() || null;
+  }
+
+  constructor(
+    columnDef: NbTreeGridColumnDefDirective,
+    elementRef: ElementRef,
+    @Inject(NB_TREE_GRID) tree,
+  ) {
     super(columnDef, elementRef);
+    this.tree = tree as NbTreeGridComponent<any>;
   }
 }

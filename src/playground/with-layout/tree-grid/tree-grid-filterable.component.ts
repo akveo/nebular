@@ -16,7 +16,7 @@ interface FSEntry {
         <label class="search-label" for="search">Type to filter:</label>
         <input nbInput (input)="filter($event)" id="search" class="search-input">
 
-        <table [nbTreeGrid]="dataSource">
+        <table [nbTreeGrid]="dataSource" equalColumnsWidth>
 
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>

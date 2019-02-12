@@ -18,7 +18,7 @@ interface FSEntry {
     <nb-card>
       <nb-card-body>
 
-        <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)">
+        <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
 
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>

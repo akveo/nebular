@@ -18,6 +18,7 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
+import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 import { NbTreeGridColumnDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-column-def.directive';
 import { NbTreeGridHeaderRowDefDirective } from '@nebular/theme/components/tree-grid/tree-grid-def.component';
 import { fromEvent, merge } from 'rxjs';
@@ -123,6 +124,18 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   @Input() levelPadding: string = '';
 
+  /**
+   * Make all columns equal width. False by default.
+   */
+  @Input()
+  set equalColumnsWidth(value: boolean) {
+    this.equalColumnsWidthValue = convertToBoolProperty(value);
+  }
+  get equalColumnsWidth(): boolean {
+    return this.equalColumnsWidthValue;
+  }
+  private equalColumnsWidthValue: boolean = false;
+
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
 
   ngAfterViewInit() {
@@ -154,7 +167,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   getColumnWidth(): string {
-    return `${100 / this.getColumnsCount()}%`;
+    if (this.equalColumnsWidth) {
+      return `${100 / this.getColumnsCount()}%`;
+    }
+    return '';
   }
 
   getCellLevel(cell: NbTreeGridCellDirective, columnName: string): number {
