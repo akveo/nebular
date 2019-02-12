@@ -4,9 +4,11 @@ import { NbSortDirection } from '@nebular/theme';
 @Component({
   selector: 'nb-sort-icon',
   template: `
-    <i [class.nb-arrow-down]="isAscending()"
-       [class.nb-arrow-up]="isDescending()">
-    </i>
+    <ng-container *ngIf="isDirectionSet()">
+      <i [class.nb-arrow-down]="isAscending()"
+         [class.nb-arrow-up]="isDescending()">
+      </i>
+    </ng-container>
   `,
 })
 export class SortIconComponent {
@@ -19,5 +21,9 @@ export class SortIconComponent {
 
   isDescending(): boolean {
     return this.direction === NbSortDirection.DESCENDING;
+  }
+
+  isDirectionSet(): boolean {
+    return this.isAscending() || this.isDescending();
   }
 }
