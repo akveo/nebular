@@ -26,7 +26,6 @@ interface FSEntry {
           <ng-container [nbTreeGridColumnDef]="customColumn">
             <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
               {{customColumn}}
-              <nb-sort-icon *nbSortHeaderIcon [direction]="getSortDirection(customColumn)"></nb-sort-icon>
             </th>
 
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
@@ -38,7 +37,6 @@ interface FSEntry {
           <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
             <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
               {{column}}
-              <nb-sort-icon *nbSortHeaderIcon [direction]="getSortDirection(column)"></nb-sort-icon>
             </th>
 
             <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>

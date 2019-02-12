@@ -78,6 +78,33 @@ export interface NbSortHeaderIconDirectiveContext {
 @Directive({ selector: '[nbSortHeaderIcon]' })
 export class NbSortHeaderIconDirective {}
 
+@Component({
+  selector: 'nb-sort-icon',
+  template: `
+    <ng-container *ngIf="isDirectionSet()">
+      <i [class.nb-arrow-down]="isAscending()"
+         [class.nb-arrow-up]="isDescending()"
+         aria-hidden="true">
+      </i>
+    </ng-container>
+  `,
+})
+export class NbSortIconComponent {
+  @Input() direction: NbSortDirection = NbSortDirection.NONE;
+
+  isAscending(): boolean {
+    return this.direction === NbSortDirection.ASCENDING;
+  }
+
+  isDescending(): boolean {
+    return this.direction === NbSortDirection.DESCENDING;
+  }
+
+  isDirectionSet(): boolean {
+    return this.isAscending() || this.isDescending();
+  }
+}
+
 /**
  * Marks header as sort header so it emitting sort event when clicked.
  */
@@ -91,13 +118,15 @@ export class NbSortHeaderIconDirective {}
       (click)="sortData()">
       <ng-content></ng-content>
     </button>
-    <ng-container *ngTemplateOutlet="sortIcon; context: getIconContext()"></ng-container>
+    <nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
+    <ng-template #customIcon [ngTemplateOutlet]="sortIcon" [ngTemplateOutletContext]="getIconContext()"></ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbSortHeaderComponent {
 
-  @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef }) sortIcon: TemplateRef<any>;
+  @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef })
+  sortIcon: TemplateRef<NbSortHeaderIconDirectiveContext>;
 
   /**
    * Current sort direction. Possible values: `asc`, `desc`, ``(none)
