@@ -6,19 +6,18 @@
 
     <table [nbTreeGrid]="dataSource"
            [nbSort]="dataSource"
-           (sort)="updateSort($event)"
-           levelPadding="1.3rem">
+           (sort)="updateSort($event)">
 
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
       <ng-container [nbTreeGridColumnDef]="customColumn">
-        <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
+        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
           {{customColumn}}
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
         </th>
         <td nbTreeGridCell *nbTreeGridCellDef="let row">
-          <nb-tree-grid-row-toggle [expanded]="row.expanded" *ngIf="row.hasChildren()"></nb-tree-grid-row-toggle>
+          <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>
           {{row.data[customColumn]}}
         </td>
       </ng-container>
@@ -26,7 +25,7 @@
       <ng-container *ngFor="let column of defaultColumns; let index = index"
                     [nbTreeGridColumnDef]="column"
                     [showOn]="getShowOn(index)">
-        <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
+        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
           {{column}}
           <nb-sort-icon *nbSortHeaderIcon="let direction" [direction]="direction"></nb-sort-icon>
         </th>

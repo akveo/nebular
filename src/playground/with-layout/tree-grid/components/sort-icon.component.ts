@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NbSortDirection } from '@nebular/theme';
 
 @Component({
@@ -6,13 +6,13 @@ import { NbSortDirection } from '@nebular/theme';
   template: `
     <ng-container *ngIf="isDirectionSet()">
       <i [class.nb-arrow-down]="isAscending()"
-         [class.nb-arrow-up]="isDescending()">
+         [class.nb-arrow-up]="isDescending()"
+         aria-hidden="true">
       </i>
     </ng-container>
   `,
 })
 export class SortIconComponent {
-  @HostBinding('attr.aria-hidden') readonly ariaHidden = true;
   @Input() direction: NbSortDirection = NbSortDirection.NONE;
 
   isAscending(): boolean {

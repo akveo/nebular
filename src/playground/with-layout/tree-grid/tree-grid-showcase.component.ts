@@ -44,7 +44,7 @@ export class TreeGridShowcaseComponent {
     this.sortDirection = sortRequest.direction;
   }
 
-  getDirection(column: string): NbSortDirection {
+  getSortDirection(column: string): NbSortDirection {
     if (this.sortColumn === column) {
       return this.sortDirection;
     }
