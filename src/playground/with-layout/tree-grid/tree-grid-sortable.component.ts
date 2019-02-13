@@ -3,7 +3,8 @@ import {
   NbSortDirection,
   NbSortRequest,
   NbTreeGridDataSource,
-  NbTreeGridDataSourceBuilder, NbTreeGridNode,
+  NbTreeGridDataSourceBuilder,
+  NbTreeGridNode,
 } from '@nebular/theme';
 
 interface FSEntry {
@@ -24,7 +25,7 @@ interface FSEntry {
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
           <ng-container [nbTreeGridColumnDef]="customColumn">
-            <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
+            <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
               {{customColumn}}
             </th>
 
@@ -35,7 +36,7 @@ interface FSEntry {
           </ng-container>
 
           <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
-            <th nbTreeGridHeaderCell nbSortHeader *nbTreeGridHeaderCellDef>
+            <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
               {{column}}
             </th>
 
@@ -67,6 +68,13 @@ export class TreeGridSortableComponent {
     this.dataSource.sort(sortRequest);
     this.sortColumn = sortRequest.column;
     this.sortDirection = sortRequest.direction;
+  }
+
+  getDirection(column: string): NbSortDirection {
+    if (column === this.sortColumn) {
+      return this.sortDirection;
+    }
+    return NbSortDirection.NONE;
   }
 
   private data: NbTreeGridNode<FSEntry>[] = [
