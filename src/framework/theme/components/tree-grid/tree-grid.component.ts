@@ -11,7 +11,7 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
-  ElementRef,
+  ElementRef, HostBinding,
   Inject,
   Input,
   IterableDiffers,
@@ -39,6 +39,16 @@ import {
   NbTreeGridRowDefDirective,
 } from './tree-grid-def.component';
 import { NbColumnsService } from './tree-grid-columns.service';
+
+interface Link {
+  link: string;
+  icon?: string;
+}
+
+interface LinkGroup {
+  title: string;
+  links: Link[];
+}
 
 /**
  * Tree grid component that can be used to display nested rows of data.
@@ -154,6 +164,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   private equalColumnsWidthValue: boolean = false;
 
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
+
+  @HostBinding('class.nb-tree-grid') private treeClass = true;
+
+
 
   ngAfterViewInit() {
     this.checkDefsCount();
