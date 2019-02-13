@@ -41,7 +41,9 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
   }
 
   setData(data: NbTreeGridNode<T>[]) {
-    const presentationData: NbTreeGridPresentationNode<T>[] = this.treeGridDataService.toPresentationNodes(data);
+    const presentationData: NbTreeGridPresentationNode<T>[] = data
+      ? this.treeGridDataService.toPresentationNodes(data)
+      : [];
     this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
   }

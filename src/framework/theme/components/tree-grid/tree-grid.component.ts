@@ -127,6 +127,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
    * @type {NbTreeGridNode<T>[] | NbTreeGridDataSource}
    */
   @Input('nbTreeGrid') set source(data: NbTreeGridNode<T>[]) {
+    if (!data) {
+      return;
+    }
+
     if (data instanceof NbTreeGridDataSource) {
       this._source = data;
     } else {
