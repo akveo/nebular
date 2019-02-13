@@ -1,4 +1,4 @@
-import { Directive, Injectable, Input, IterableDiffer, IterableDiffers, TemplateRef } from '@angular/core';
+import { Directive, Input, IterableDiffers, TemplateRef } from '@angular/core';
 import {
   NbCdkCellDef,
   NbCdkFooterCellDef,
@@ -13,75 +13,7 @@ import {
   NbHeaderRowDefDirective,
   NbRowDefDirective,
 } from '../cdk/table';
-
-@Injectable()
-export class NbColumnsService {
-  private allColumns: string[];
-  private visibleColumns: string[];
-  private _changesDiffer: IterableDiffer<any>;
-
-  constructor(private differs: IterableDiffers) {}
-
-  setColumns(columns: Iterable<string>): void {
-    if (!this._changesDiffer) {
-      this._changesDiffer = this.differs.find(columns || []).create();
-    }
-
-    if (this._changesDiffer.diff(columns)) {
-      this.allColumns = Array.from(columns);
-      this.visibleColumns = Array.from(columns);
-    }
-  }
-
-  getVisibleColumns(): string[] {
-    return this.visibleColumns;
-  }
-
-  hideColumn(column: string): void {
-    const toRemove = this.visibleColumns.indexOf(column);
-    if (toRemove > -1) {
-      this.visibleColumns.splice(toRemove, 1);
-    }
-  }
-
-  showColumn(column: string): void {
-    if (this.visibleColumns.includes(column)) {
-      return;
-    }
-    this.visibleColumns.splice(this.findInsertIndex(column), 0, column);
-  }
-
-  private findInsertIndex(column: string): number {
-    const initialIndex = this.allColumns.indexOf(column);
-
-    if (initialIndex === 0 || !this.visibleColumns.length) {
-      return 0;
-    }
-    if (initialIndex === this.allColumns.length - 1) {
-      return this.visibleColumns.length;
-    }
-
-    const leftSiblingIndex = initialIndex - 1;
-    for (let i = leftSiblingIndex; i >= 0; i--) {
-      const leftSibling = this.allColumns[i];
-      const index = this.visibleColumns.indexOf(leftSibling);
-      if (index !== -1) {
-        return index + 1;
-      }
-    }
-
-    const rightSiblingIndex = initialIndex + 1;
-    for (let i = rightSiblingIndex; i < this.allColumns.length; i++) {
-      const rightSibling = this.allColumns[i];
-      const index = this.visibleColumns.indexOf(rightSibling);
-      if (index !== -1) {
-        return index;
-      }
-    }
-
-    throw new Error(`Can't restore column position.`);
-  }
-}
+import { NbColumnsService } from './tree-grid-columns.service';
 
 export interface NbTreeGridResponsiveRowDef {
   hideColumn(column: string);
@@ -94,10 +26,7 @@ export interface NbTreeGridResponsiveRowDef {
  */
 @Directive({
   selector: '[nbTreeGridRowDef]',
-  providers: [
-    { provide: NbCdkRowDef, useExisting: NbTreeGridRowDefDirective },
-    NbColumnsService,
-  ],
+  providers: [{ provide: NbCdkRowDef, useExisting: NbTreeGridRowDefDirective }],
 })
 export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T> implements NbTreeGridResponsiveRowDef {
   /**
@@ -132,10 +61,7 @@ export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T> implement
 
 @Directive({
   selector: '[nbTreeGridHeaderRowDef]',
-  providers: [
-    { provide: NbCdkHeaderRowDef, useExisting: NbTreeGridHeaderRowDefDirective },
-    NbColumnsService,
-  ],
+  providers: [{ provide: NbCdkHeaderRowDef, useExisting: NbTreeGridHeaderRowDefDirective }],
 })
 export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective implements NbTreeGridResponsiveRowDef {
   /**
@@ -170,10 +96,7 @@ export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective imp
 
 @Directive({
   selector: '[nbTreeGridFooterRowDef]',
-  providers: [
-    { provide: NbCdkFooterRowDef, useExisting: NbTreeGridFooterRowDefDirective },
-    NbColumnsService,
-  ],
+  providers: [{ provide: NbCdkFooterRowDef, useExisting: NbTreeGridFooterRowDefDirective }],
 })
 export class NbTreeGridFooterRowDefDirective extends NbFooterRowDefDirective implements NbTreeGridResponsiveRowDef {
   /**

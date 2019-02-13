@@ -33,7 +33,12 @@ import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 import { convertToBoolProperty } from '../helpers';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
-import { NbTreeGridHeaderRowDefDirective } from './tree-grid-def.component';
+import {
+  NbTreeGridFooterRowDefDirective,
+  NbTreeGridHeaderRowDefDirective,
+  NbTreeGridRowDefDirective,
+} from './tree-grid-def.component';
+import { NbColumnsService } from './tree-grid-columns.service';
 
 /**
  * Tree grid component that can be used to display nested rows of data.
@@ -90,7 +95,10 @@ import { NbTreeGridHeaderRowDefDirective } from './tree-grid-def.component';
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NB_TREE_GRID, useExisting: NbTreeGridComponent }],
+  providers: [
+    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
+    NbColumnsService,
+  ],
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
                                     implements AfterViewInit, OnDestroy {
@@ -145,14 +153,19 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   ngAfterViewInit() {
     this.checkDefsCount();
-    merge(this._contentRowDefs.changes, this._contentHeaderRowDefs.changes, this._contentFooterRowDefs.changes)
-      .pipe(takeWhile(() => this.alive))
+    const rowsChange$ = merge(
+      this._contentRowDefs.changes,
+      this._contentHeaderRowDefs.changes,
+      this._contentFooterRowDefs.changes,
+    );
+    rowsChange$.pipe(takeWhile(() => this.alive))
       .subscribe(() => this.checkDefsCount());
 
     if (this.platform.isBrowser) {
       this.updateVisibleColumns();
 
-      merge(this._contentColumnDefs.changes, fromEvent(this.window, 'resize').pipe(debounceTime(50)))
+      const windowResize$ = fromEvent(this.window, 'resize').pipe(debounceTime(50));
+      merge(rowsChange$, this._contentColumnDefs.changes, windowResize$)
         .pipe(takeWhile(() => this.alive))
         .subscribe(() => this.updateVisibleColumns());
     }
@@ -258,10 +271,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     }
 
     const rowDefs = [
-      this._contentHeaderRowDefs.first,
-      this._contentRowDefs.first,
-      this._contentFooterRowDefs.first,
-    ].filter(d => !!d) as NbTreeGridHeaderRowDefDirective[];
+      this._contentHeaderRowDefs.first as NbTreeGridHeaderRowDefDirective,
+      this._contentRowDefs.first as NbTreeGridRowDefDirective<any>,
+      this._contentFooterRowDefs.first as NbTreeGridFooterRowDefDirective,
+    ].filter(d => !!d);
 
     for (const rowDef of rowDefs) {
       for (const column of columnsToHide) {

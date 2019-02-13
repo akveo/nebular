@@ -4,9 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, HostBinding, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Inject,
+  OnInit,
+  OnDestroy,
+  PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { filter, takeWhile } from 'rxjs/operators';
+
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NB_WINDOW } from '../../theme.options';
 import {
@@ -21,6 +32,7 @@ import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 import { DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
+import { NbColumnsService } from './tree-grid-columns.service';
 
 @Directive({
   selector: 'td[nbTreeGridCell]',
@@ -30,16 +42,19 @@ import { DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
   },
   providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
 })
-export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
+export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, OnDestroy {
+  private alive: boolean = true;
   private readonly tree: NbTreeGridComponent<any>;
   private readonly columnDef: NbTreeGridColumnDefDirective;
   private initialLeftPadding: string = '';
   private initialRightPadding: string = '';
+  private latestWidth: string;
   elementRef: ElementRef<HTMLElement>;
 
   @HostBinding('style.width')
   get columnWidth(): string {
-    return this.tree.getColumnWidth() || null;
+    this.latestWidth = this.tree.getColumnWidth();
+    return this.latestWidth || null;
   }
 
   @HostBinding('style.padding-left')
@@ -66,6 +81,8 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
     @Inject(NB_WINDOW) private window,
     private sanitizer: DomSanitizer,
     private directionService: NbLayoutDirectionService,
+    private columnService: NbColumnsService,
+    private cd: ChangeDetectorRef,
   ) {
     super(columnDef, elementRef);
     this.tree = tree as NbTreeGridComponent<any>;
@@ -79,6 +96,17 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
       this.initialLeftPadding = style.paddingLeft;
       this.initialRightPadding = style.paddingRight;
     }
+
+    this.columnService.onColumnsChange()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.latestWidth !== this.tree.getColumnWidth()),
+      )
+      .subscribe(() => this.cd.detectChanges());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   toggleRow(): void {
@@ -121,21 +149,39 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit {
   },
   providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
 })
-export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
+export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective implements OnInit, OnDestroy {
+  private alive: boolean = true;
+  private latestWidth: string;
   private readonly tree: NbTreeGridComponent<any>;
 
   @HostBinding('style.width')
   get columnWidth(): string {
-    return this.tree.getColumnWidth() || null;
+    this.latestWidth = this.tree.getColumnWidth();
+    return this.latestWidth || null;
   }
 
   constructor(
     columnDef: NbTreeGridColumnDefDirective,
     elementRef: ElementRef<HTMLElement>,
     @Inject(NB_TREE_GRID) tree,
+    private columnService: NbColumnsService,
+    private cd: ChangeDetectorRef,
   ) {
     super(columnDef, elementRef);
     this.tree = tree as NbTreeGridComponent<any>;
+  }
+
+  ngOnInit() {
+    this.columnService.onColumnsChange()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.latestWidth !== this.tree.getColumnWidth()),
+      )
+      .subscribe(() => this.cd.detectChanges());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 }
 
@@ -147,20 +193,38 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective {
   },
   providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
 })
-export class NbTreeGridFooterCellDirective extends NbFooterCellDirective {
+export class NbTreeGridFooterCellDirective extends NbFooterCellDirective implements OnInit, OnDestroy {
+  private alive: boolean = true;
+  private latestWidth: string;
   private readonly tree: NbTreeGridComponent<any>;
 
   @HostBinding('style.width')
   get columnWidth(): string {
-    return this.tree.getColumnWidth() || null;
+    this.latestWidth = this.tree.getColumnWidth();
+    return this.latestWidth || null;
   }
 
   constructor(
     columnDef: NbTreeGridColumnDefDirective,
     elementRef: ElementRef,
     @Inject(NB_TREE_GRID) tree,
+    private columnService: NbColumnsService,
+    private cd: ChangeDetectorRef,
   ) {
     super(columnDef, elementRef);
     this.tree = tree as NbTreeGridComponent<any>;
+  }
+
+  ngOnInit() {
+    this.columnService.onColumnsChange()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.latestWidth !== this.tree.getColumnWidth()),
+      )
+      .subscribe(() => this.cd.detectChanges());
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 }
