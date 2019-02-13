@@ -99,17 +99,17 @@ describe('NbTreeGridComponent', () => {
   it('should render rows', () => {
     const fixture: ComponentFixture<TreeGridBasicTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
-    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('[nbTreeGrid] [nbTreeGridRow]');
+    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('.nb-tree-grid .nb-tree-grid-row');
     expect(rows.length).toEqual(twoRowsData.length);
   });
 
   it('should render data in row', () => {
     const fixture: ComponentFixture<TreeGridBasicTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
-    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('tr');
+    const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
 
     rows.forEach((row: HTMLElement, rowIndex: number) => {
-      const dataCell = row.querySelectorAll('td');
+      const dataCell = row.querySelectorAll('.nb-tree-grid-cell');
 
       dataCell.forEach((cell: HTMLElement, cellIndex: number) => {
         expect(cell.innerText).toEqual(twoRowsData[rowIndex].data[abcColumns[cellIndex]]);
@@ -120,10 +120,10 @@ describe('NbTreeGridComponent', () => {
   it('should render header row if provided', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
-    const headerRow: HTMLElement = fixture.nativeElement.querySelector('tr');
+    const headerRow: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-header-row');
     expect(headerRow).not.toBeNull();
 
-    const headerCells = headerRow.querySelectorAll('th');
+    const headerCells = headerRow.querySelectorAll('.nb-tree-grid-header-cell');
     expect(headerCells.length).toEqual(abcColumns.length);
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
@@ -134,8 +134,8 @@ describe('NbTreeGridComponent', () => {
   it('should render column text in header cell', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
-    const headerRow: HTMLElement = fixture.nativeElement.querySelector('tr');
-    const headerCells = headerRow.querySelectorAll('th');
+    const headerRow: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-header-row');
+    const headerCells = headerRow.querySelectorAll('.nb-tree-grid-header-cell');
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
       expect(cell.innerText).toEqual(abcColumns[cellIndex]);
@@ -145,36 +145,36 @@ describe('NbTreeGridComponent', () => {
   it('should not render collapsed rows', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
-    const rows = fixture.nativeElement.querySelectorAll('tr');
+    const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(1);
   });
 
   it('should render initially expanded row', () => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
-    const rows = fixture.nativeElement.querySelectorAll('tr');
+    const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(2);
   });
 
   it('should remove collapsed rows', fakeAsync(() => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
-    const row: HTMLElement = fixture.nativeElement.querySelector('tr');
+    const row: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-row');
     row.click();
     fixture.detectChanges();
     tick(NB_ROW_DOUBLE_CLICK_DELAY);
-    const rows = fixture.nativeElement.querySelectorAll('tr');
+    const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(1);
   }));
 
   it('should add expanded row children', fakeAsync(() => {
     const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
       setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
-    const row: HTMLElement = fixture.nativeElement.querySelector('tr');
+    const row: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-row');
     row.click();
     fixture.detectChanges();
     tick(NB_ROW_DOUBLE_CLICK_DELAY);
-    const rows = fixture.nativeElement.querySelectorAll('tr');
+    const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(2);
   }));
 });
