@@ -69,13 +69,6 @@ export class TreeGridSortableComponent {
     this.sortDirection = sortRequest.direction;
   }
 
-  getSortDirection(column: string): NbSortDirection {
-    if (column === this.sortColumn) {
-      return this.sortDirection;
-    }
-    return NbSortDirection.NONE;
-  }
-
   private data: NbTreeGridNode<FSEntry>[] = [
     {
       data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
