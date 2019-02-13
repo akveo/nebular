@@ -165,9 +165,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
 
-  @HostBinding('class.nb-tree-grid') private treeClass = true;
-
-
+  @HostBinding('class.nb-tree-grid') readonly treeClass = true;
 
   ngAfterViewInit() {
     this.checkDefsCount();
