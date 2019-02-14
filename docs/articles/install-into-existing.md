@@ -92,7 +92,7 @@ Include default Nebular theme CSS files into your `angular.json` file:
 
 ```scss
 "styles": [
-  "../node_modules/@nebular/theme/styles/prebuilt/default.css", // or cosmic.css
+  "node_modules/@nebular/theme/styles/prebuilt/default.css", // or cosmic.css
 ],
 ```
 

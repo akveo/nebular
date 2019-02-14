@@ -39,7 +39,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 
 ## Setup API configuration
 
-Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](docs/auth/NbPasswordAuthStrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
+Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documentation](docs/auth/nbpasswordauthstrategy), we have `baseEndpoint` setting, and also an `endpoint` setting for each function (login/register/etc):
 
 ```typescript
 
