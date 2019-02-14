@@ -144,10 +144,28 @@ $nb-themes-export: () !global;
     @content;
   }
 }
+    
+// Add content for theme into a list of themes
+@mixin nb-for-themes($names...) {
+  @each $name in $names {
+    @include nb-for-theme($name) {
+      @content;
+    }
+  }
+}
 
 @mixin nb-except-theme($name) {
   @if ($theme-name != $name) {
     @content;
+  }
+}
+
+// Add content except for theme into a list of themes
+@mixin nb-except-for-themes($names...) {
+  @each $name in $names {
+    @include nb-except-theme($name) {
+      @content;
+    }
   }
 }
 
