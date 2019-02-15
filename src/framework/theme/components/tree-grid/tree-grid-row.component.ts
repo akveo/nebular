@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostListener,
-  Inject,
-  OnDestroy,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import {
@@ -22,6 +14,9 @@ import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 
 export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
 
+/**
+ * Cells container. Adds the right class and role.
+ */
 @Component({
   selector: 'tr[nbTreeGridRow]',
   template: `<ng-container nbCellOutlet></ng-container>`,
@@ -36,28 +31,43 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
   private readonly doubleClick$ = new Subject();
   private readonly tree: NbTreeGridComponent<any>;
 
+  /**
+   * Time to wait for second click to expand row deeply.
+   * 200ms by default.
+   */
+  @Input() doubleClickDelay: number = NB_ROW_DOUBLE_CLICK_DELAY;
+
+  /**
+   * Toggle row on click. Enabled by default.
+   */
+  @Input() clickToToggle: boolean = true;
+
   @HostListener('click')
-  toggleNode(): void {
+  toggleIfEnabledNode(): void {
+    if (!this.clickToToggle) {
+      return;
+    }
+
     timer(NB_ROW_DOUBLE_CLICK_DELAY)
       .pipe(
         take(1),
         takeUntil(this.doubleClick$),
       )
-      .subscribe(() => {
-        this.changeDetectorRef.markForCheck();
-        this.tree.toggleRow(this);
-      });
+      .subscribe(() => this.tree.toggleRow(this));
   }
 
   @HostListener('dblclick')
-  toggleNodeDeep() {
+  toggleIfEnabledNodeDeep() {
+    if (!this.clickToToggle) {
+      return;
+    }
+
     this.doubleClick$.next();
     this.tree.toggleRow(this, { deep: true });
   }
 
   constructor(
     @Inject(NB_TREE_GRID) tree,
-    private changeDetectorRef: ChangeDetectorRef,
     public elementRef: ElementRef<HTMLElement>,
   ) {
     super();

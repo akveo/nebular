@@ -498,6 +498,7 @@ export const structure = [
           'NbTreeGridFilterService',
           'NbTreeGridColumnDefDirective',
           'NbTreeGridRowDefDirective',
+          'NbTreeGridRowComponent',
           'NbSortDirective',
           'NbSortHeaderComponent',
           'NbFilterInputDirective',
