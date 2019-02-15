@@ -8,7 +8,7 @@ import { Directive, HostListener } from '@angular/core';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
 
 /**
- * NbTreeGridRowToggleDirective
+ * When using custom row toggle, apply this directive on your toggle to toggle row on element click.
  */
 @Directive({
   selector: '[nbTreeGridRowToggle]',
