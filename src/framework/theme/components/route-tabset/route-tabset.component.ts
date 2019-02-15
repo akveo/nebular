@@ -77,7 +77,7 @@ import { convertToBoolProperty } from '../helpers';
           <li (click)="$event.preventDefault(); selectTab(tab)"
               [routerLink]="tab.route"
               routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
+              [routerLinkActiveOptions]="activeLinkOptions"
               [class.responsive]="tab.responsive"
               tabindex="0"
               class="route-tab">
@@ -101,6 +101,12 @@ export class NbRouteTabsetComponent {
    * @param Object{route: string, title: string, tag?: string, responsive?: boolean, disabled?: boolean}
    */
   @Input() tabs: any[];
+
+  /**
+   * Options passed to `routerLinkActiveOptions` directive which set on tab links.
+   * `{ exact: true }` by default.
+   */
+  @Input() activeLinkOptions = { exact: true };
 
   /**
    * Take full width of a parent
