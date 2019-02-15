@@ -16,6 +16,7 @@ import { TreeGridBasicComponent } from './tree-grid-basic.component';
 import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
 import { FsIconComponent } from './components/fs-icon.component';
 import { TreeGridCustomIconsComponent } from './tree-grid-custom-icons.component';
+import { TreeGridDisableClickToggleComponent } from './tree-grid-disable-click-toggle.component';
 
 @NgModule({
   imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
@@ -27,6 +28,7 @@ import { TreeGridCustomIconsComponent } from './tree-grid-custom-icons.component
     TreeGridBasicComponent,
     TreeGridResponsiveComponent,
     TreeGridCustomIconsComponent,
+    TreeGridDisableClickToggleComponent,
   ],
 })
 export class TreeGridModule {}

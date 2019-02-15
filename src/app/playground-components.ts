@@ -1295,6 +1295,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TreeGridCustomIconsComponent',
         name: 'Tree Grid Custom Icons',
       },
+      {
+        path: 'tree-grid-disable-click-toggle.component',
+        link: '/tree-grid/tree-grid-disable-click-toggle.component',
+        component: 'TreeGridDisableClickToggleComponent',
+        name: 'Tree Grid Disable Click Toggle',
+      },
     ],
   },
   {

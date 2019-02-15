@@ -72,6 +72,10 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * Also context has three properties: `isAscending`, `isDescending` and `isNone`.
  * @stacked-example(Custom icons, tree-grid/tree-grid-custom-icons.component)
  *
+ * By default, row to toggle happens when user clicks anywhere in the row. Also double click expands row deeply.
+ * To disable this you can set `[clickToToggle]="false"` input of `nbTreeGridRow`.
+ * @stacked-example(Disable click toggle, tree-grid/tree-grid-disable-click-toggle.component)
+ *
  * @styles
  *
  * tree-grid-cell-border-width
