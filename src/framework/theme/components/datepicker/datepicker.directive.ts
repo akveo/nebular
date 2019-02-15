@@ -218,6 +218,20 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * Further info on `date-fns` formatting tokens could be found at
  * [date-fns docs](https://date-fns.org/v2.0.0-alpha.27/docs/Unicode-Tokens).
  *
+ * You can also use `parseOptions` and `formatOptions` to provide locale.
+ * ```ts
+ * import { eo } from 'date-fns/locale';
+ *
+ * @NgModule({
+ *   imports: [
+ *     NbDateFnsDateModule.forRoot({
+ *       parseOptions: { locale: eo },
+ *       formatOptions: { locale: eo },
+ *     }),
+ *   ],
+ * })
+ * ```
+ *
  * @styles
  *
  * datepicker-fg
