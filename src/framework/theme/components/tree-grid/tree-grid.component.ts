@@ -40,16 +40,6 @@ import {
 } from './tree-grid-def.component';
 import { NbColumnsService } from './tree-grid-columns.service';
 
-interface Link {
-  link: string;
-  icon?: string;
-}
-
-interface LinkGroup {
-  title: string;
-  links: Link[];
-}
-
 /**
  * Tree grid component that can be used to display nested rows of data.
  * Supports filtering and sorting.
