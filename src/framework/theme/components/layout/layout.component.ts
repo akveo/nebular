@@ -183,7 +183,7 @@ export class NbLayoutFooterComponent {
  * ```html
  * <nb-layout>
  *  <nb-layout-header></nb-layout-header>
- *  <nb-layout-footer></nb-layout-column>
+ *  <nb-layout-footer></nb-layout-footer>
  *  <nb-layout-column></nb-layout-column>
  *  <nb-sidebar></nb-sidebar>
  * </nb-layout>
@@ -455,9 +455,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(direction => {
-        this.renderer.setProperty(this.document, 'dir', direction);
-      });
+      .subscribe(direction => this.document.dir = direction);
 
     this.scrollService.onManualScroll()
       .pipe(takeWhile(() => this.alive))

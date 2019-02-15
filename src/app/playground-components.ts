@@ -718,6 +718,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'PopoverNoopComponent',
         name: 'Popover Noop',
       },
+      {
+        path: 'popover-dynamic.component',
+        link: '/popover/popover-dynamic.component',
+        component: 'PopoverDynamicComponent',
+        name: 'Popover Dynamic',
+      },
+      {
+        path: 'popover-dynamic-code.component',
+        link: '/popover/popover-dynamic-code.component',
+        component: 'PopoverDynamicCodeComponent',
+        name: 'Popover Dynamic Code',
+      },
     ],
   },
   {
@@ -1287,6 +1299,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/context-menu/context-menu-noop.component',
         component: 'ContextMenuNoopComponent',
         name: 'Context Menu Noop',
+      },
+      {
+        path: 'context-menu-right-click.component',
+        link: '/context-menu/context-menu-right-click.component',
+        component: 'ContextMenuRightClickComponent',
+        name: 'Context Menu Right Click',
       },
     ],
   },
