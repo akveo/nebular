@@ -56,7 +56,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * sort event will be emitted. Event object contain clicked column name and desired sort direction.
  * @stacked-example(Sortable, tree-grid/tree-grid-sortable.component)
  *
- * You can use `NbTreeGridDataSourceBuilder` to create `NbTreeGridDataSource` which would have toggle, sort and
+ * You can use `Data Source Builder` to create `NbTreeGridDataSource` which would have toggle, sort and
  * filter methods. Then you can call this methods to change sort or toggle rows programmatically. Also `nbSort` and
  * `nbFilterInput` directives both support `NbTreeGridDataSource`, so you can pass it directly as an input and
  * directives will trigger sort, toggle themselves.
