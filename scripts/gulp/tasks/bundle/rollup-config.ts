@@ -36,6 +36,7 @@ const ROLLUP_GLOBALS = {
   // date libs for date service
   'moment': 'moment',
   'date-fns/parse': 'date-fns.parse',
+  'date-fns/format': 'date-fns.format',
 
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',
