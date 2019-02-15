@@ -205,10 +205,12 @@ describe('menu services', () => {
   it('should get selected menu item', (done) => {
     const selectedItem = { title: 'Menu item selected', selected: true };
     const { menuService } = createSingleMenuComponent([{ title: 'Menu item not selected' }, selectedItem ]);
-    menuService.getSelectedItem('menu').subscribe((menuBag: NbMenuBag) => {
-      expect(menuBag.item.title).toEqual(selectedItem.title);
-      done();
-    });
+    menuService.getSelectedItem('menu')
+      .pipe(take(1))
+      .subscribe((menuBag: NbMenuBag) => {
+        expect(menuBag.item.title).toEqual(selectedItem.title);
+        done();
+      });
   }, 1000);
 
   it('should hide all expanded menu items', (done) => {
