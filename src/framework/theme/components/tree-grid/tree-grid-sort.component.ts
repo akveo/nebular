@@ -84,6 +84,7 @@ export class NbSortHeaderIconDirective {}
     <ng-container *ngIf="isDirectionSet()">
       <i [class.nb-arrow-down]="isAscending()"
          [class.nb-arrow-up]="isDescending()"
+         class="icon"
          aria-hidden="true">
       </i>
     </ng-container>

@@ -37,5 +37,10 @@
     }
   }
 
+  nb-tree-grid-row-toggle .row-toggle-button .icon,
+  nb-sort-icon .icon {
+    color: nb-theme(tree-grid-icon-color);
+  }
+
   @include nb-tree-grid-sort-header-theme();
 }

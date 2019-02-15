@@ -93,6 +93,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * tree-grid-row-bg-even
  * tree-grid-row-hover-bg
  * tree-grid-sort-header-button-color
+ * tree-grid-icon-color
  */
 @Component({
   selector: 'table[nbTreeGrid]',
