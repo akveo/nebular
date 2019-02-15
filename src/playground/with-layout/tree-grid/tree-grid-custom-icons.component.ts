@@ -13,7 +13,7 @@ interface FSEntry {
     <nb-card>
       <nb-card-body>
 
-        <table [nbTreeGrid]="dataSource" nbSort="dataSource" equalColumnsWidth>
+        <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" equalColumnsWidth>
 
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
