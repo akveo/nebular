@@ -4,9 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, Input, Renderer2, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 import { ThemeBlockModel } from './theme-block.model';
