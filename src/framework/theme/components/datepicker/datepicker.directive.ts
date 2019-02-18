@@ -306,8 +306,21 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Validates that we can parse value correctly.
    * */
   protected parseValidator(): ValidationErrors | null {
-    const isValid = this.datepickerAdapter.isValid(this.inputValue, this.picker.format);
-    return isValid ? null : { nbDatepickerParse: { value: this.inputValue } };
+    const valid = this.datepickerAdapter.isValid(this.inputValue, this.picker.format);
+
+    if (valid) {
+      return null;
+    }
+
+    /**
+     * Date services treat empty string as invalid date.
+     * That's why we're getting invalid formControl in case of empty input which is not required.
+     * */
+    if (!valid && this.inputValue === '') {
+      return null;
+    }
+
+    return { nbDatepickerParse: { value: this.inputValue } };
   }
 
   /**
