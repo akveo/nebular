@@ -6,6 +6,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NgdMetadataService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-props-block',
@@ -42,10 +43,12 @@ export class NgdPropsBlockComponent {
 
   @Input('source')
   set setSource(source: any) {
-    this.inputs = source.props.filter(item => item.kind === 'input');
-    this.outputs = source.props.filter(item => item.kind === 'output');
-    this.props = source.props.filter(item => item.kind === 'property');
+    this.inputs = source.props.filter(item => item.kind === 'input').filter(m => this.metadataService.isPublic(m));
+    this.outputs = source.props.filter(item => item.kind === 'output').filter(m => this.metadataService.isPublic(m));
+    this.props = source.props.filter(item => item.kind === 'property').filter(m => this.metadataService.isPublic(m));
     this.name = source.name;
     this.slag = source.slag;
   }
+
+  constructor(private metadataService: NgdMetadataService) {}
 }
