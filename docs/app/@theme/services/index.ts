@@ -10,3 +10,4 @@ export * from './visibility.service';
 export * from './pagination.service';
 export * from './analytics.service';
 export * from './menu.service';
+export * from './metadata.service';
