@@ -143,6 +143,10 @@ const routes: Route[] = [
         path: 'smart-home',
         loadChildren: './smart-home/app.module#AppModule',
       },
+      {
+        path: 'tree-grid',
+        loadChildren: './tree-grid/tree-grid.module#TreeGridModule',
+      },
     ],
   },
 ];
