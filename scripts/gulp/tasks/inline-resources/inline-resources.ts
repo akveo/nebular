@@ -1,6 +1,6 @@
 import { dest, src, task } from 'gulp';
 import { copyResources } from './copy-resources';
-import { BUILD_DIR, LIB_DIR } from '../config';
+import { BUILD_DIR, ES_2015_LIB_DIR, LIB_DIR } from '../config';
 
 task('inline-resources', ['inline-schematics-resources'], () => {
   src([
@@ -12,6 +12,7 @@ task('inline-resources', ['inline-schematics-resources'], () => {
     `${BUILD_DIR}/**/package.json`,
   ])
     .pipe(dest(LIB_DIR))
+    .pipe(dest(ES_2015_LIB_DIR))
     .on('end', () => copyResources(LIB_DIR));
 });
 
