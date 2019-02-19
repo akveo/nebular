@@ -4,6 +4,7 @@
   "description": "@nebular/security",
   "main": "./bundles/security.umd.js",
   "module": "./index.js",
+  "es2015": "./es2015/index.js",
   "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",

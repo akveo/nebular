@@ -4,6 +4,7 @@
   "description": "@nebular/moment",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
+  "es2015": "./es2015/index.js",
   "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
