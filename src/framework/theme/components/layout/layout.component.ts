@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
