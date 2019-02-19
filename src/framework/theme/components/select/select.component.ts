@@ -45,6 +45,7 @@ import { NbOptionComponent } from './option.component';
 import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
+import { NB_SELECT_INJECTION_TOKEN } from './injection-tokens';
 
 
 @Component({
@@ -153,6 +154,7 @@ export class NbSelectLabelComponent {
       useExisting: forwardRef(() => NbSelectComponent),
       multi: true,
     },
+    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
   ],
 })
 export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {

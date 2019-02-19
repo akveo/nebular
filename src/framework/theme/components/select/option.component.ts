@@ -10,7 +10,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostBinding,
   HostListener,
   Inject,
@@ -20,6 +19,7 @@ import {
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 import { NbSelectComponent } from './select.component';
+import { NB_SELECT_INJECTION_TOKEN } from './injection-tokens';
 
 
 @Component({
@@ -58,11 +58,13 @@ export class NbOptionComponent<T> implements OnDestroy {
 
   selected: boolean = false;
   disabled: boolean = false;
+  protected parent: NbSelectComponent<T>;
   private alive: boolean = true;
 
-  constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
+  constructor(@Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
               protected cd: ChangeDetectorRef) {
+    this.parent = parent as NbSelectComponent<T>;
   }
 
   ngOnDestroy() {

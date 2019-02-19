@@ -1,14 +1,8 @@
-import {
-  Component,
-  forwardRef,
-  Inject,
-  Input,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { NbStepperComponent } from './stepper.component';
 import { convertToBoolProperty } from '../helpers';
+import { NbStepperComponent } from './stepper.component';
+import { NB_STEPPER_INJECTION_TOKEN } from './injection-tokens';
 
 /**
  * Component intended to be used within  the `<nb-stepper>` component.
@@ -82,8 +76,10 @@ export class NbStepComponent {
   }
 
   interacted = false;
+  private stepper: NbStepperComponent;
 
-  constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
+  constructor(@Inject(NB_STEPPER_INJECTION_TOKEN) stepper) {
+    this.stepper = stepper as NbStepperComponent;
   }
 
   /**

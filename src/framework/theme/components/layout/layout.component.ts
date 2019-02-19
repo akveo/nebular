@@ -65,75 +65,6 @@ export class NbLayoutColumnComponent {
 }
 
 /**
- * Page header component.
- * Located on top of the page above the layout columns and sidebars.
- * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
- * sticky to the top of the nb-layout (to of the page). Here's an example:
- *
- * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
- *
- * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
- * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
- * ```html
- * <nb-layout-header subheader></nb-layout-header>
- * ```
- * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
- * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
- *
- * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
- *
- * @stacked-example(Subheader, layout/layout-subheader.component)
- *
- * @styles
- *
- * header-font-family
- * header-line-height
- * header-fg
- * header-bg
- * header-height
- * header-padding
- * header-shadow
- */
-@Component({
-  selector: 'nb-layout-header',
-  template: `
-    <nav [class.fixed]="fixedValue">
-      <ng-content></ng-content>
-    </nav>
-  `,
-})
-export class NbLayoutHeaderComponent {
-
-  @HostBinding('class.fixed') fixedValue: boolean;
-  @HostBinding('class.subheader') subheaderValue: boolean;
-
-  // tslint:disable-next-line
-  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
-  }
-
-  /**
-   * Makes the header sticky to the top of the nb-layout.
-   * @param {boolean} val
-   */
-  @Input()
-  set fixed(val: boolean) {
-    this.fixedValue = convertToBoolProperty(val);
-  }
-
-  /**
-   * Places header on a side of the sidebar, and not above.
-   * Disables fixed mode for this header and remove a shadow from the sidebar.
-   * @param {boolean} val
-   */
-  @Input()
-  set subheader(val: boolean) {
-    this.subheaderValue = convertToBoolProperty(val);
-    this.fixedValue = false;
-    this.layout.withSubheader = this.subheaderValue;
-  }
-}
-
-/**
  * Page footer.
  * Located under the nb-layout content (specifically, under the columns).
  * Could be made `fixed`, becoming sticky to the bottom of the view port (window).
@@ -571,5 +502,73 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     } else {
       this.window.scrollTo(x, y);
     }
+  }
+}
+
+/**
+ * Page header component.
+ * Located on top of the page above the layout columns and sidebars.
+ * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
+ * sticky to the top of the nb-layout (to of the page). Here's an example:
+ *
+ * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
+ *
+ * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
+ * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
+ *
+ * @stacked-example(Subheader, layout/layout-subheader.component)
+ *
+ * @styles
+ *
+ * header-font-family
+ * header-line-height
+ * header-fg
+ * header-bg
+ * header-height
+ * header-padding
+ * header-shadow
+ */
+@Component({
+  selector: 'nb-layout-header',
+  template: `
+    <nav [class.fixed]="fixedValue">
+      <ng-content></ng-content>
+    </nav>
+  `,
+})
+export class NbLayoutHeaderComponent {
+
+  @HostBinding('class.fixed') fixedValue: boolean;
+  @HostBinding('class.subheader') subheaderValue: boolean;
+
+  constructor(private layout: NbLayoutComponent) {
+  }
+
+  /**
+   * Makes the header sticky to the top of the nb-layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set fixed(val: boolean) {
+    this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Places header on a side of the sidebar, and not above.
+   * Disables fixed mode for this header and remove a shadow from the sidebar.
+   * @param {boolean} val
+   */
+  @Input()
+  set subheader(val: boolean) {
+    this.subheaderValue = convertToBoolProperty(val);
+    this.fixedValue = false;
+    this.layout.withSubheader = this.subheaderValue;
   }
 }
