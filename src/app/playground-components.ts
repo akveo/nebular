@@ -1257,6 +1257,53 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'tree-grid',
+    children: [
+      {
+        path: 'tree-grid-showcase.component',
+        link: '/tree-grid/tree-grid-showcase.component',
+        component: 'TreeGridShowcaseComponent',
+        name: 'Tree Grid Showcase',
+      },
+      {
+        path: 'tree-grid-sortable.component',
+        link: '/tree-grid/tree-grid-sortable.component',
+        component: 'TreeGridSortableComponent',
+        name: 'Tree Grid Sortable',
+      },
+      {
+        path: 'tree-grid-filterable.component',
+        link: '/tree-grid/tree-grid-filterable.component',
+        component: 'TreeGridFilterableComponent',
+        name: 'Tree Grid Filterable',
+      },
+      {
+        path: 'tree-grid-basic.component',
+        link: '/tree-grid/tree-grid-basic.component',
+        component: 'TreeGridBasicComponent',
+        name: 'Tree Grid Basic',
+      },
+      {
+        path: 'tree-grid-responsive.component',
+        link: '/tree-grid/tree-grid-responsive.component',
+        component: 'TreeGridResponsiveComponent',
+        name: 'Tree Grid Responsive',
+      },
+      {
+        path: 'tree-grid-custom-icons.component',
+        link: '/tree-grid/tree-grid-custom-icons.component',
+        component: 'TreeGridCustomIconsComponent',
+        name: 'Tree Grid Custom Icons',
+      },
+      {
+        path: 'tree-grid-disable-click-toggle.component',
+        link: '/tree-grid/tree-grid-disable-click-toggle.component',
+        component: 'TreeGridDisableClickToggleComponent',
+        name: 'Tree Grid Disable Click Toggle',
+      },
+    ],
+  },
+  {
     path: 'bootstrap',
     children: [
       {

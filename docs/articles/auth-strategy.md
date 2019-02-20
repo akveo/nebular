@@ -12,7 +12,7 @@ Each Strategy has a list of configurations available with the default values set
   
 ## Configure a strategy
 
-As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/NbPasswordAuthStrategy) if you need any custom behaviour.
+As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/nbpasswordauthstrategy) if you need any custom behaviour.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
