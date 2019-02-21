@@ -4,32 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  AfterViewInit,
-  ComponentFactoryResolver,
-  ComponentRef,
-  Directive,
-  ElementRef,
-  Inject,
-  Input,
-  OnDestroy,
-} from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
-import {
-  createContainer,
-  NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
-  NbOverlayRef,
-  NbOverlayService,
-  NbPosition,
-  NbPositionBuilderService,
-  NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
-  patch,
-} from '../cdk';
-import { NB_DOCUMENT } from '../../theme.options';
+import { NbAdjustment, NbDynamicOverlay, NbDynamicOverlayHandler, NbPosition, NbTrigger } from '../cdk';
 import { NbTooltipComponent } from './tooltip.component';
 
 /**
@@ -61,16 +38,27 @@ import { NbTooltipComponent } from './tooltip.component';
  * It is also possible to specify tooltip color using `nbTooltipStatus` property:
  * @stacked-example(Colored Tooltips, tooltip/tooltip-colors.component)
  *
+ * Tooltip has a number of triggers which provides an ability to show and hide the component in different ways:
+ *
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
  */
-@Directive({ selector: '[nbTooltip]' })
-export class NbTooltipDirective implements AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbTooltip]',
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+})
+export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   context: Object = {};
 
   /**
-   * Popover content which will be rendered in NbTooltipComponent.
-   * Available content: template ref, component and any primitive.
-   *
+   * Tooltip message
    */
   @Input('nbTooltip')
   content: string;
@@ -94,7 +82,7 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
    */
   @Input('nbTooltipIcon')
   set icon(icon: string) {
-    this.context = Object.assign(this.context, { icon });
+    this.context = Object.assign(this.context, {icon});
   }
 
   /**
@@ -103,93 +91,65 @@ export class NbTooltipDirective implements AfterViewInit, OnDestroy {
    */
   @Input('nbTooltipStatus')
   set status(status: string) {
-    this.context = Object.assign(this.context, { status });
+    this.context = Object.assign(this.context, {status});
   }
 
-  protected ref: NbOverlayRef;
-  protected container: ComponentRef<any>;
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected alive: boolean = true;
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbTooltipTrigger')
+  trigger: NbTrigger = NbTrigger.HINT;
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+  private dynamicOverlay: NbDynamicOverlay;
+
+  constructor(private hostRef: ElementRef,
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
-  ngAfterViewInit() {
-    this.subscribeOnTriggers();
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-  }
-
-  show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.openTooltip();
-  }
-
-  hide() {
-    this.ref.detach();
-  }
-
-  toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
-  protected createOverlay() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.subscribeOnPositionChange();
-  }
-
-  protected openTooltip() {
-    this.container = createContainer(this.ref, NbTooltipComponent, {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    }, this.componentFactoryResolver);
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(this.position)
-      .adjustment(this.adjustment)
+  ngOnInit() {
+    this.dynamicOverlayHandler
+      .host(this.hostRef)
+      .componentType(NbTooltipComponent)
       .offset(8);
   }
 
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(NbTrigger.HINT)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
+  ngOnChanges() {
+    this.rebuild();
+  }
+
+  ngAfterViewInit() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
       .build();
   }
 
-  protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
-  protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+  show() {
+    this.dynamicOverlay.show();
+  }
+
+  hide() {
+    this.dynamicOverlay.hide();
+  }
+
+  toggle() {
+    this.dynamicOverlay.toggle();
+  }
+
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
+  }
+
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
+      .position(this.position)
+      .trigger(this.trigger)
+      .adjustment(this.adjustment)
+      .content(this.content)
+      .context(this.context);
   }
 }

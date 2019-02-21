@@ -6,32 +6,28 @@
 
 import {
   AfterViewInit,
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   ElementRef,
-  Inject,
   Input,
+  OnChanges,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import {
-  createContainer,
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
+  NbDynamicOverlay,
+  NbDynamicOverlayController,
+  NbDynamicOverlayHandler,
   NbOverlayRef,
-  NbOverlayService,
   NbPosition,
-  NbPositionBuilderService,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
-  patch,
 } from '../cdk';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
-import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * Full featured context menu directive.
@@ -88,9 +84,31 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ```ts
  * items = [{ title: 'Profile' }, { title: 'Log out' }];
  * ```
+ * Context menu has a number of triggers which provides an ability to show and hide the component in different ways:
+ *
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
+ *
+ * @stacked-example(Available Triggers, context-menu/context-menu-modes.component.html)
+ *
+ * Noop mode is especially useful when you need to control Popover programmatically, for example show/hide
+ * as a result of some third-party action, like HTTP request or validation check:
+ *
+ * @stacked-example(Manual Control, context-menu/context-menu-noop.component)
+ *
+ * @stacked-example(Manual Control, context-menu/context-menu-right-click.component)
  * */
-@Directive({ selector: '[nbContextMenu]' })
-export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbContextMenu]',
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+})
+export class NbContextMenuDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Position will be calculated relatively host element based on the position.
@@ -117,102 +135,78 @@ export class NbContextMenuDirective implements AfterViewInit, OnDestroy {
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
-  set setItems(items: NbMenuItem[]) {
+  set items(items: NbMenuItem[]) {
     this.validateItems(items);
-    this.items = items;
+    this._items = items;
   };
+
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbContextMenuTrigger')
+  trigger: NbTrigger = NbTrigger.CLICK;
 
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected alive: boolean = true;
-  private items: NbMenuItem[] = [];
+  private _items: NbMenuItem[] = [];
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
+  private dynamicOverlay: NbDynamicOverlay;
+
+  constructor(private hostRef: ElementRef,
               private menuService: NbMenuService,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  }
+
+  ngOnInit() {
+    this.dynamicOverlayHandler
+      .host(this.hostRef)
+      .componentType(NbContextMenuComponent);
+  }
+
+  ngOnChanges() {
+    this.rebuild();
   }
 
   ngAfterViewInit() {
-    this.subscribeOnTriggers();
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .build();
     this.subscribeOnItemClick();
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
   show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.openContextMenu();
+    this.dynamicOverlay.show();
   }
 
   hide() {
-    if (this.ref) {
-      this.ref.detach();
-    }
-
-    this.container = null;
+    this.dynamicOverlay.hide();
   }
 
   toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
+    this.dynamicOverlay.toggle();
   }
 
-  protected createOverlay() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-    this.subscribeOnPositionChange();
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
   }
 
-  protected openContextMenu() {
-    this.container = createContainer(this.ref, NbContextMenuComponent, {
-      position: this.position,
-      items: this.items,
-      tag: this.tag,
-    }, this.componentFactoryResolver);
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
       .position(this.position)
-      .adjustment(this.adjustment);
-  }
-
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(NbTrigger.CLICK)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
-      .build();
-  }
-
-  protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
-  }
-
-  protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+      .trigger(this.trigger)
+      .adjustment(this.adjustment)
+      .context({
+        position: this.position,
+        items: this._items,
+        tag: this.tag,
+      });
   }
 
   /*

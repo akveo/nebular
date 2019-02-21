@@ -19,18 +19,32 @@ import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast, NbToastStatus } from './model';
 import { NbToastComponent } from './toast.component';
+import { NB_DOCUMENT } from '../../theme.options';
 
+export class NbToastRef {
+  constructor(private toastContainer: NbToastContainer,
+              private toast: NbToast) {
+  }
+
+  close() {
+    this.toastContainer.destroy(this.toast);
+  }
+}
 
 export class NbToastContainer {
   protected toasts: NbToast[] = [];
   protected prevToast: NbToast;
+
+  get nativeElement() {
+    return this.containerRef.location.nativeElement;
+  }
 
   constructor(protected position: NbGlobalPosition,
               protected containerRef: ComponentRef<NbToastrContainerComponent>,
               protected positionHelper: NbPositionHelper) {
   }
 
-  attach(toast: NbToast) {
+  attach(toast: NbToast): NbToastRef {
     if (toast.config.preventDuplicates && this.isDuplicate(toast)) {
       return;
     }
@@ -46,6 +60,13 @@ export class NbToastContainer {
     }
 
     this.prevToast = toast;
+
+    return new NbToastRef(this, toast);
+  }
+
+  destroy(toast: NbToast) {
+    this.toasts = this.toasts.filter(t => t !== toast);
+    this.updateContainer();
   }
 
   protected isDuplicate(toast: NbToast): boolean {
@@ -82,11 +103,6 @@ export class NbToastContainer {
     toastComponent.destroy.subscribe(() => this.destroy(toast));
   }
 
-  protected destroy(toast: NbToast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
-    this.updateContainer();
-  }
-
   protected updateContainer() {
     patch(this.containerRef, { content: this.toasts, position: this.position });
   }
@@ -100,13 +116,15 @@ export class NbToastrContainerRegistry {
   constructor(protected overlay: NbOverlayService,
               protected positionBuilder: NbPositionBuilderService,
               protected positionHelper: NbPositionHelper,
-              protected cfr: ComponentFactoryResolver) {
+              protected cfr: ComponentFactoryResolver,
+              @Inject(NB_DOCUMENT) protected document: any) {
   }
 
   get(position: NbGlobalPosition): NbToastContainer {
     const logicalPosition: NbGlobalLogicalPosition = this.positionHelper.toLogicalPosition(position);
 
-    if (!this.overlays.has(logicalPosition)) {
+    const container = this.overlays.get(logicalPosition);
+    if (!container || !this.existsInDom(container)) {
       this.instantiateContainer(logicalPosition);
     }
 
@@ -123,6 +141,10 @@ export class NbToastrContainerRegistry {
     const ref = this.overlay.create({ positionStrategy });
     const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
     return new NbToastContainer(position, containerRef, this.positionHelper);
+  }
+
+  protected existsInDom(toastContainer: NbToastContainer): boolean {
+    return this.document.contains(toastContainer.nativeElement);
   }
 }
 
@@ -147,6 +169,14 @@ export class NbToastrContainerRegistry {
  * ```
  *
  * ### Usage
+ *
+ * Calling `NbToastrService.show(...)` will render new toast and return `NbToastrRef` with
+ * help of which you may close newly created toast by calling `close` method.
+ *
+ * ```ts
+ * const toastRef: NbToastRef = this.toastrService.show(...);
+ * toastRef.close();
+ * ```
  *
  * Config accepts following options:
  *
@@ -190,52 +220,52 @@ export class NbToastrService {
   /**
    * Shows toast with message, title and user config.
    * */
-  show(message, title?, userConfig?: Partial<NbToastrConfig>) {
+  show(message, title?, userConfig?: Partial<NbToastrConfig>): NbToastRef {
     const config = new NbToastrConfig({ ...this.globalConfig, ...userConfig });
     const container = this.containerRegistry.get(config.position);
     const toast = { message, title, config };
-    container.attach(toast);
+    return container.attach(toast);
   }
 
   /**
    * Shows success toast with message, title and user config.
    * */
-  success(message, title?, config?: Partial<NbToastrConfig>) {
+  success(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
   }
 
   /**
    * Shows info toast with message, title and user config.
    * */
-  info(message, title?, config?: Partial<NbToastrConfig>) {
+  info(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.INFO });
   }
 
   /**
    * Shows warning toast with message, title and user config.
    * */
-  warning(message, title?, config?: Partial<NbToastrConfig>) {
+  warning(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
   }
 
   /**
    * Shows primary toast with message, title and user config.
    * */
-  primary(message, title?, config?: Partial<NbToastrConfig>) {
+  primary(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
   }
 
   /**
    * Shows danger toast with message, title and user config.
    * */
-  danger(message, title?, config?: Partial<NbToastrConfig>) {
+  danger(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
   }
 
   /**
    * Shows default toast with message, title and user config.
    * */
-  default(message, title?, config?: Partial<NbToastrConfig>) {
+  default(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
   }
 }

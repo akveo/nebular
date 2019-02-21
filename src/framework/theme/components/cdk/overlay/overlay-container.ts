@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -6,11 +7,23 @@ import {
   HostBinding,
   Injector,
   Input,
+  ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 
 import { NbPosition } from './overlay-position';
-import { NbComponentPortal, NbPortalInjector, NbTemplatePortal } from './mapping';
+import { NbComponentPortal, NbPortalInjector, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
+
+export interface NbRenderableContainer {
+
+  /**
+   * A renderContent method renders content with provided context.
+   * Naturally, this job has to be done by ngOnChanges lifecycle hook, but
+   * ngOnChanges hook will be triggered only if we update content or context properties
+   * through template property binding syntax. But in our case we're updating these properties programmatically.
+   * */
+  renderContent();
+}
 
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
@@ -41,14 +54,18 @@ export abstract class NbPositionedContainer {
   selector: 'nb-overlay-container',
   template: `
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
+    <ng-template nbPortalOutlet></ng-template>
   `,
 })
 export class NbOverlayContainerComponent {
+  @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
+
   isAttached: boolean = false;
 
   content: string;
 
-  constructor(protected vcr: ViewContainerRef, protected injector: Injector) {
+  constructor(protected vcr: ViewContainerRef,
+              protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   get isStringContent(): boolean {
@@ -56,22 +73,34 @@ export class NbOverlayContainerComponent {
   }
 
   attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
-    const factory = portal.cfr.resolveComponentFactory(portal.component);
-    const injector = this.createChildInjector(portal.cfr);
-    const componentRef = this.vcr.createComponent(factory, null, injector);
+    portal.injector = this.createChildInjector(portal.componentFactoryResolver);
+    const componentRef = this.portalOutlet.attachComponentPortal(portal);
+    componentRef.changeDetectorRef.markForCheck();
+    componentRef.changeDetectorRef.detectChanges();
     this.isAttached = true;
     return componentRef;
   }
 
   attachTemplatePortal<C>(portal: NbTemplatePortal<C>): EmbeddedViewRef<C> {
-    const embeddedView = this.vcr.createEmbeddedView(portal.templateRef, portal.context);
+    const templateRef = this.portalOutlet.attachTemplatePortal(portal);
+    templateRef.detectChanges();
     this.isAttached = true;
-    return embeddedView;
+    return templateRef;
   }
 
   attachStringContent(content: string) {
     this.content = content;
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
     this.isAttached = true;
+  }
+
+  detach() {
+    if (this.portalOutlet.hasAttached()) {
+      this.portalOutlet.detach();
+    }
+    this.attachStringContent(null);
+    this.isAttached = false
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {

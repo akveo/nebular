@@ -6,31 +6,22 @@
 
 import {
   AfterViewInit,
-  ComponentFactoryResolver,
-  ComponentRef,
   Directive,
   ElementRef,
-  Inject,
   Input,
-  OnDestroy,
+  OnChanges,
+  OnDestroy, OnInit,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
 
 import {
-  NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbOverlayContent,
-  NbOverlayRef,
-  NbOverlayService,
   NbPosition,
-  NbPositionBuilderService,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilder,
-  patch,
-  createContainer,
+  NbDynamicOverlayHandler,
+  NbDynamicOverlay,
+  NbDynamicOverlayController,
 } from '../cdk';
-import { NB_DOCUMENT } from '../../theme.options';
 import { NbPopoverComponent } from './popover.component';
 
 
@@ -87,25 +78,42 @@ import { NbPopoverComponent } from './popover.component';
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
- * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
+ * <button nbPopover="Hello, Popover!" [nbPopoverAdjustment]="false"></button>
  * ```
  *
- * Also popover has some different modes which provides capability show$ and hide$ popover in different ways:
+ * Popover has a number of triggers which provides an ability to show and hide the component in different ways:
  *
- * - Click mode popover shows when a user clicking on the host element and hides when the user clicks
- * somewhere on the document except popover.
- * - Hint mode provides capability show$ popover when the user hovers on the host element
- * and hide$ popover when user hovers out of the host.
- * - Hover mode works like hint mode with one exception - when the user moves mouse from host element to
- * the container element popover will not be hidden.
+ * - Click mode shows the component when a user clicks on the host element and hides when the user clicks
+ * somewhere on the document outside the component.
+ * - Hint provides capability to show the component when the user hovers over the host element
+ * and hide when the user hovers out of the host.
+ * - Hover works like hint mode with one exception - when the user moves mouse from host element to
+ * the container element the component remains open, so that it is possible to interact with it content.
+ * - Focus mode is applied when user focuses the element.
+ * - Noop mode - the component won't react to the user interaction.
  *
- * @stacked-example(Available Modes, popover/popover-modes.component.html)
+ * @stacked-example(Available Triggers, popover/popover-modes.component.html)
+ *
+ * Noop mode is especially useful when you need to control Popover programmatically, for example show/hide
+ * as a result of some third-party action, like HTTP request or validation check:
+ *
+ * @stacked-example(Manual Control, popover/popover-noop.component)
+ *
+ * Below are examples for manual popover settings control, both via template binding and code.
+ * @stacked-example(Popover Settings, popover/popover-dynamic.component)
+ *
+ * Please note, while manipulating Popover setting via code, you need to call `rebuild()` method to apply the settings
+ * changed.
+ * @stacked-example(Popover Settings Code, popover/popover-dynamic-code.component)
  *
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
-@Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbPopover]',
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+})
+export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
@@ -136,101 +144,75 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
-   * Describes when the container will be shown.
-   * Available options: click, hover and hint
+   * Deprecated, use `trigger`
+   * @deprecated
+   * @breaking-change 4.0.0
    * */
   @Input('nbPopoverMode')
-  mode: NbTrigger = NbTrigger.CLICK;
+  set mode(mode) {
+    console.warn(`Popover 'nbPopoverMode' input is deprecated and will be removed as of 4.0.0.
+      Use 'nbPopoverTrigger' instead.`);
+    this.trigger = mode;
+  }
+  get mode() {
+    return this.trigger;
+  }
 
-  protected ref: NbOverlayRef;
-  protected container: ComponentRef<any>;
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected alive: boolean = true;
+  /**
+   * Describes when the container will be shown.
+   * Available options: `click`, `hover`, `hint`, `focus` and `noop`
+   * */
+  @Input('nbPopoverTrigger')
+  trigger: NbTrigger = NbTrigger.CLICK;
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+  private dynamicOverlay: NbDynamicOverlay;
+
+  constructor(private hostRef: ElementRef,
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  }
+
+  ngOnInit() {
+    this.dynamicOverlayHandler
+      .host(this.hostRef)
+      .componentType(NbPopoverComponent);
+  }
+
+  ngOnChanges() {
+    this.rebuild();
   }
 
   ngAfterViewInit() {
-    this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-    this.ref.dispose();
-  }
-
-  show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.openPopover();
-  }
-
-  hide() {
-    if (this.ref) {
-      this.ref.detach();
-    }
-
-    this.container = null;
-  }
-
-  toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
-  protected createOverlay() {
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-  }
-
-  protected openPopover() {
-    this.container = createContainer(this.ref, NbPopoverComponent, {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    }, this.componentFactoryResolver);
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(this.position)
-      .adjustment(this.adjustment);
-  }
-
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return new NbTriggerStrategyBuilder()
-      .document(this.document)
-      .trigger(this.mode)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
+    this.dynamicOverlay = this.configureDynamicOverlay()
       .build();
   }
 
-  protected subscribeOnPositionChange() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
-  protected subscribeOnTriggers() {
-    const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+  show() {
+    this.dynamicOverlay.show();
+  }
+
+  hide() {
+    this.dynamicOverlay.hide();
+  }
+
+  toggle() {
+    this.dynamicOverlay.toggle();
+  }
+
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
+  }
+
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
+      .position(this.position)
+      .trigger(this.trigger)
+      .adjustment(this.adjustment)
+      .content(this.content)
+      .context(this.context);
   }
 }

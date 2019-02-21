@@ -589,6 +589,28 @@ describe('password-auth-strategy', () => {
         .flush(successResponse);
     });
 
+    it('logout with no endpoint', (done: DoneFn) => {
+
+      strategy.setOptions({
+        name: ownerStrategyName,
+        baseEndpoint: '/api/auth/custom/',
+        logout: {
+          endpoint: '',
+        },
+      });
+
+      strategy.logout()
+        .subscribe((result: NbAuthResult) => {
+          expect(result).toBeTruthy();
+          expect(result.isFailure()).toBe(false);
+          expect(result.isSuccess()).toBe(true);
+
+          done();
+        });
+
+      httpMock.expectNone('/api/auth/custom/');
+    });
+
     it('refreshToken', (done: DoneFn) => {
       strategy.refreshToken()
         .subscribe((result: NbAuthResult) => {

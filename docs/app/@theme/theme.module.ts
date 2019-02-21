@@ -41,10 +41,11 @@ import {
   NgdIframeCommunicatorService,
   NgdStylesService,
   NgdVersionService,
-  NgdTocStateService,
+  NgdVisibilityService,
   NgdPaginationService,
   NgdAnalytics,
   NgdMenuService,
+  NgdMetadataService,
 } from './services';
 
 
@@ -107,10 +108,11 @@ export class NgdThemeModule {
         NgdIframeCommunicatorService,
         NgdStylesService,
         NgdVersionService,
-        NgdTocStateService,
         NgdPaginationService,
         NgdAnalytics,
         NgdMenuService,
+        NgdVisibilityService,
+        NgdMetadataService,
       ],
     };
   }

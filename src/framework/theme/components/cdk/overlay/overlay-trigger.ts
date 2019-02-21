@@ -1,9 +1,10 @@
-import { ComponentRef } from '@angular/core';
-import { fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
+import { ComponentRef, Inject, Injectable } from '@angular/core';
+import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Observable } from 'rxjs';
 import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile, map } from 'rxjs/operators';
-
+import { NB_DOCUMENT } from '../../../theme.options';
 
 export enum NbTrigger {
+  NOOP = 'noop',
   CLICK = 'click',
   HOVER = 'hover',
   HINT = 'hint',
@@ -15,11 +16,16 @@ export enum NbTrigger {
  * Each stream provides different events depends on implementation.
  * We have three main trigger strategies: click, hint and hover.
  * */
+export interface NbTriggerStrategy {
+  show$: Observable<never | Event>;
+  hide$: Observable<never | Event>;
+}
+
 /**
  * TODO maybe we have to use renderer.listen instead of observableFromEvent?
  * Renderer provides capability use it in service worker, ssr and so on.
  * */
-export abstract class NbTriggerStrategy {
+export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
 
   protected isNotOnHostOrContainer(event: Event): boolean {
     return !this.isOnHost(event) && !this.isOnContainer(event);
@@ -58,7 +64,7 @@ export abstract class NbTriggerStrategy {
  * Fires close event when the click was performed on the document but
  * not on the host or container.
  * */
-export class NbClickTriggerStrategy extends NbTriggerStrategy {
+export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
 
   // since we should track click for both SHOW and HIDE event we firstly need to track the click and the state
   // of the container and then later on decide should we hide it or show
@@ -91,7 +97,7 @@ export class NbClickTriggerStrategy extends NbTriggerStrategy {
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element and stops out of the host and popover container.
  * */
-export class NbHoverTriggerStrategy extends NbTriggerStrategy {
+export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
 
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
@@ -122,7 +128,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategy {
  * Fires open event when a mouse hovers over the host element and stay over at least 100 milliseconds.
  * Fires close event when the mouse leaves the host element.
  * */
-export class NbHintTriggerStrategy extends NbTriggerStrategy {
+export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
       takeWhile(() => this.isHostInBody()),
@@ -142,7 +148,7 @@ export class NbHintTriggerStrategy extends NbTriggerStrategy {
  * Fires open event when a focus is on the host element and stay over at least 100 milliseconds.
  * Fires close event when the focus leaves the host element.
  * */
-export class NbFocusTriggerStrategy extends NbTriggerStrategy {
+export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
 
   protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
     .pipe(
@@ -188,15 +194,14 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategy {
     .pipe(takeWhile(() => this.isHostInBody()));
 }
 
-export class NbTriggerStrategyBuilder {
+@Injectable()
+export class NbTriggerStrategyBuilderService {
+
   protected _host: HTMLElement;
   protected _container: () => ComponentRef<any>;
   protected _trigger: NbTrigger;
-  protected _document: Document;
 
-  document(document: Document): this {
-    this._document = document;
-    return this;
+  constructor(@Inject(NB_DOCUMENT) protected _document) {
   }
 
   trigger(trigger: NbTrigger): this {
@@ -224,6 +229,11 @@ export class NbTriggerStrategyBuilder {
         return new NbHoverTriggerStrategy(this._document, this._host, this._container);
       case NbTrigger.FOCUS:
         return new NbFocusTriggerStrategy(this._document, this._host, this._container);
+      case NbTrigger.NOOP:
+        return {
+          show$: EMPTY,
+          hide$: EMPTY,
+        };
       default:
         throw new Error('Trigger have to be provided');
     }

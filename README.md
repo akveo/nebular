@@ -11,7 +11,7 @@ At the same time, Nebular allows you to use it together with any other UI librar
 [Help us to make Nebular better!](https://goo.gl/forms/3vRrw7hdp6v9Gjmo1)
 
 ## Getting started
-[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [ngx-admin demo](http://github.com/akveo/ngx-admin)
+[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [ngx-admin demo](http://github.com/akveo/ngx-admin) | [StackBlitz Seed Project](https://stackblitz.com/github/akveo/nebular-seed)
 
 ## Installation
 
@@ -55,7 +55,7 @@ export class AppModule { }
 
 ```scss
 "styles": [
-  "../node_modules/@nebular/theme/styles/prebuilt/default.css",
+  "node_modules/@nebular/theme/styles/prebuilt/default.css",
 ],
 ```
 
