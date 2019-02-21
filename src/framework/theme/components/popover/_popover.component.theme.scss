@@ -37,24 +37,24 @@
     }
 
     &.nb-overlay-bottom .arrow {
-      top: calc(-#{$arrow-size} + 1px);
+      top: calc(-1 * #{$arrow-size} + 1px);
       left: calc(50% - #{$arrow-size});
     }
 
     &.nb-overlay-left .arrow {
-      right: round(-$arrow-size - $arrow-size / 2 + 2px);
+      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
       top: calc(50% - #{$arrow-size / 2});
       transform: rotate(90deg);
     }
 
     &.nb-overlay-top .arrow {
-      bottom: calc(-#{$arrow-size} + 1px);
+      bottom: calc(-1 * #{$arrow-size} + 1px);
       left: calc(50% - #{$arrow-size});
       transform: rotate(180deg);
     }
 
     &.nb-overlay-right .arrow {
-      left: round(-$arrow-size - $arrow-size / 2 + 2px);
+      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
       top: calc(50% - #{$arrow-size / 2});
       transform: rotate(270deg);
     }

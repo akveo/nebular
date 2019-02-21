@@ -11,7 +11,8 @@
 
   &:hover .customised-control-input:enabled + .customised-control-indicator,
   .customised-control-input:focus:enabled + .customised-control-indicator {
-    border-color: lighten($color, 10%);
+    border-color: $color;
+    opacity: 0.6;
   }
 }
 

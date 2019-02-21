@@ -46,10 +46,6 @@
 
   nb-calendar-navigation button[nbButton] {
     width: nb-theme(calendar-navigation-button-width);
-
-    @include nb-for-theme(default) {
-      @include btn-success();
-    }
   }
 
   nb-calendar-day-picker .day-cell,
@@ -102,10 +98,6 @@
       background: nb-theme(calendar-hover-item-bg);
       color: nb-theme(calendar-selected-fg);
       font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
     }
 
     &:active {
@@ -151,10 +143,6 @@
       background: nb-theme(calendar-hover-item-bg);
       color: nb-theme(calendar-selected-fg);
       font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
     }
 
     &:active {
@@ -198,10 +186,6 @@
       background: nb-theme(calendar-hover-item-bg);
       color: nb-theme(calendar-selected-fg);
       font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
     }
 
     &.selected {
