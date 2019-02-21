@@ -5,10 +5,15 @@ import {
   NbTreeGridComponent,
   NbTreeGridDataSource,
   NbTreeGridModule,
-  NbTreeGridNode,
   NbTreeGridRowComponent,
   NB_ROW_DOUBLE_CLICK_DELAY,
 } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  expanded?: boolean,
+  children?: TreeNode<T>[];
+}
 
 class BaseTreeGridTestComponent {
   columns: string[];
@@ -50,7 +55,7 @@ export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {
 function setupFixture(
     componentType: Type<any>,
     columns: string[],
-    data?: NbTreeGridNode<any>[],
+    data?: TreeNode<any>[],
   ): ComponentFixture<any> {
 
   TestBed.configureTestingModule({
@@ -69,17 +74,17 @@ function setupFixture(
 }
 
 const abcColumns: string[] = [ 'a', 'b', 'c' ];
-const twoRowsData: NbTreeGridNode<any>[] = [
+const twoRowsData: TreeNode<any>[] = [
   { data: { a: 'a1', b: 'b1', c: 'c1' } },
   { data: { a: 'a2', b: 'b2', c: 'c2' } },
 ];
-const nestedRowData: NbTreeGridNode<any>[] = [
+const nestedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
     children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
   },
 ];
-const nestedExpandedRowData: NbTreeGridNode<any>[] = [
+const nestedExpandedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
     expanded: true,

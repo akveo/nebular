@@ -492,7 +492,6 @@ export const structure = [
         icon: 'tree-grid.svg',
         source: [
           'NbTreeGridComponent',
-          'NbTreeGridNode',
           'NbTreeGridPresentationNode',
           'NbTreeGridSortService',
           'NbTreeGridFilterService',

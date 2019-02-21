@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { NbTreeGridNode } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  children?: TreeNode<T>[];
+  expanded?: boolean;
+}
 
 interface FSEntry {
   name: string;
@@ -50,7 +55,7 @@ interface FSEntry {
 export class TreeGridResponsiveComponent {
   allColumns = [ 'name', 'size', 'kind', 'items' ];
 
-  data: NbTreeGridNode<FSEntry>[] = [
+  data: TreeNode<FSEntry>[] = [
     {
       data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
       children: [

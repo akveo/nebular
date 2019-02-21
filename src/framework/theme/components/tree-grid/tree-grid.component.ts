@@ -11,7 +11,8 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
-  ElementRef, HostBinding,
+  ElementRef,
+  HostBinding,
   Inject,
   Input,
   IterableDiffers,
@@ -26,7 +27,7 @@ import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
-import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
+import { DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
@@ -45,12 +46,16 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * Supports filtering and sorting.
  * @stacked-example(Showcase, tree-grid/tree-grid-showcase.component)
  *
- * Data provided to source should match [NbTreeGridNode](docs/components/treegrid/api#nbtreegridnode) interface.
  * As the most basic usage you need to define [nbTreeGridRowDef](docs/components/treegrid/api#nbtreegridrowdefdirective)
  * where you should pass columns to display in rows and
  * [nbTreeGridColumnDef](docs/components/treegrid/api#nbtreegridcolumndefdirective) - component containing cell
  * definitions for each column passed to row definition.
  * @stacked-example(Basic, tree-grid/tree-grid-basic.component)
+ *
+ * `NbTreeGridComponent`'s source input and `NbTreeGridDataSourceBuilder.create` expecting data to be an array of
+ * objects with `data`, `children` and `expanded` properties. If your data doesn't match this interface, you can pass
+ * getter functions for each property as arguments to `NbTreeGridDataSourceBuilder.create` method.
+ * @stacked-example(Custom node structure, tree-grid/tree-grid-custom-node-structure.component)
  *
  * To use sorting you can add `nbSort` directive to table and subscribe to `sort` method. When user click on header,
  * sort event will be emitted. Event object contain clicked column name and desired sort direction.
@@ -129,9 +134,9 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   /**
    * The table's data
    * @param data
-   * @type {NbTreeGridNode<T>[] | NbTreeGridDataSource}
+   * @type {<T>[] | NbTreeGridDataSource}
    */
-  @Input('nbTreeGrid') set source(data: NbTreeGridNode<T>[]) {
+  @Input('nbTreeGrid') set source(data: T[] | NbTreeGridDataSource<T>) {
     if (!data) {
       return;
     }

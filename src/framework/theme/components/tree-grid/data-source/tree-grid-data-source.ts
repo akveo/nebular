@@ -8,14 +8,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { NbDataSource } from '../../cdk/table';
 import { NbCollectionViewer } from '../../cdk/collections';
-import { NbTreeGridSortService } from './tree-grid-sort.service';
-import { NbTreeGridFilterService } from './tree-grid-filter.service';
-import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
-import { NbTreeGridDataService } from './tree-grid-data.service';
+import { NbDataSource } from '../../cdk/table';
 import { NbSortable, NbSortRequest } from '../tree-grid-sort.component';
-import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
+import { NbTreeGridDataService } from './tree-grid-data.service';
+import { NbTreeGridFilterService } from './tree-grid-filter.service';
+import { NbTreeGridSortService } from './tree-grid-sort.service';
+import {
+  ChildrenGetter,
+  DataGetter,
+  DEFAULT_ROW_LEVEL, ExpandedGetter,
+  NbTreeGridPresentationNode,
+} from './tree-grid.model';
+import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
 
 export interface NbFilterable {
   filter(filterRequest: string);
@@ -40,9 +45,14 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     super();
   }
 
-  setData(data: NbTreeGridNode<T>[]) {
+  setData<N>(
+    data: N[],
+    dataGetter?: DataGetter<N, T>,
+    childrenGetter?: ChildrenGetter<N, T>,
+    expandedGetter?: ExpandedGetter<N, T>,
+  ) {
     const presentationData: NbTreeGridPresentationNode<T>[] = data
-      ? this.treeGridDataService.toPresentationNodes(data)
+      ? this.treeGridDataService.toPresentationNodes(data, dataGetter, childrenGetter, expandedGetter)
       : [];
     this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
@@ -130,7 +140,12 @@ export class NbTreeGridDataSourceBuilder<T> {
               private treeGridDataService: NbTreeGridDataService<T>) {
   }
 
-  create(data: NbTreeGridNode<T>[]): NbTreeGridDataSource<T> {
+  create<N>(
+    data: N[],
+    dataGetter?: DataGetter<N, T>,
+    childrenGetter?: ChildrenGetter<N, T>,
+    expandedGetter?: ExpandedGetter<N, T>,
+  ): NbTreeGridDataSource<T> {
     const dataSource = new NbTreeGridDataSource<T>(
       this.sortService,
       this.filterService,
@@ -138,7 +153,7 @@ export class NbTreeGridDataSourceBuilder<T> {
       this.treeGridDataService,
     );
 
-    dataSource.setData(data);
+    dataSource.setData(data, dataGetter, childrenGetter, expandedGetter);
     return dataSource;
   }
 }
