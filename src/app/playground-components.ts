@@ -1257,6 +1257,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'typography',
+    children: [
+      {
+        path: 'typography-showcase.component',
+        link: '/typography/typography-showcase.component',
+        component: 'TypographyShowcaseComponent',
+        name: 'Typography Showcase',
+      },
+    ],
+  },
+  {
     path: 'bootstrap',
     children: [
       {

@@ -149,6 +149,10 @@ const routes: Route[] = [
         path: 'smart-home',
         loadChildren: './smart-home/app.module#AppModule',
       },
+      {
+        path: 'typography',
+        loadChildren: './typography/typography.module#TypographyModule',
+      },
     ],
   },
 ];

@@ -46,7 +46,7 @@
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
+        background-color: nb-theme(color-success);
         color: nb-theme(toastr-color-fg);
 
         i {
@@ -68,7 +68,7 @@
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-info-gradient();
+        background-color: nb-theme(color-info);
         color: nb-theme(toastr-color-fg);
 
         i {
@@ -90,7 +90,7 @@
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-warning-gradient();
+        background-color: nb-theme(color-warning);
         color: nb-theme(toastr-color-fg);
 
         i {
@@ -112,7 +112,7 @@
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-primary-gradient();
+        background-color: nb-theme(color-primary);
         color: nb-theme(toastr-color-fg);
 
         i {
@@ -134,7 +134,7 @@
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-danger-gradient();
+        background-color: nb-theme(color-danger);
         color: nb-theme(toastr-color-fg);
 
         i {

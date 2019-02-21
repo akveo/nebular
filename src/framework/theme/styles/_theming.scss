@@ -54,6 +54,35 @@ $nb-themes-export: () !global;
   @return $theme;
 }
 
+@function create-colors-palette($theme) {
+  $color-keys: (
+    color-primary: 20deg,
+    color-success:  20deg,
+    color-info: -10deg,
+    color-warning: 10deg,
+    color-danger: -20deg,
+  );
+
+  @each $key, $degree in $color-keys {
+    $color: map-get($theme, $key);
+
+    $color-300: tint($color, 14%);
+    $color-400: adjust-hue($color, $degree);
+    $color-200: tint($color-400, 14%);
+    $color-600: mix($color-400, $color);
+    $color-700: shade($color, 14%);
+    $color-800: shade($color-600, 14%);
+
+    $theme: map-set($theme, #{$key}-300, $color-300);
+    $theme: map-set($theme, #{$key}-200, $color-200);
+    $theme: map-set($theme, #{$key}-400, $color-400);
+    $theme: map-set($theme, #{$key}-600, $color-600);
+    $theme: map-set($theme, #{$key}-700, $color-700);
+    $theme: map-set($theme, #{$key}-600, $color-800);
+  }
+  @return $theme;
+}
+
 @function nb-register-theme($theme, $name, $default: null) {
 
   $theme-data: ();

@@ -20,6 +20,7 @@
 
 @include nb-install-component() {
   [class$='placeholder'] {
-    background: rgba(nb-theme(layout-bg), 0.6);
+    background: nb-theme(layout-bg);
+    opacity: 0.6;
   }
 }

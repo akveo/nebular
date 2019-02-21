@@ -100,7 +100,7 @@
   }
 }
 
-@mixin install-placeholder($color, $font-size) {
+@mixin install-placeholder($color, $font-size, $opacity: 1) {
   $placeholder-selectors: (
     '::-webkit-input-placeholder'
     '::-moz-placeholder'
@@ -109,12 +109,12 @@
   );
 
   &::placeholder {
-    @include placeholder($color, $font-size);
+    @include placeholder($color, $font-size, $opacity);
   }
 
   @each $selector in $placeholder-selectors {
     &#{$selector} {
-      @include placeholder($color, $font-size);
+      @include placeholder($color, $font-size, $opacity);
     }
 
     &:focus#{$selector} {
@@ -123,10 +123,10 @@
   }
 }
 
-@mixin placeholder($color, $font-size) {
+@mixin placeholder($color, $font-size, $opacity) {
   color: $color;
   font-size: $font-size;
-  opacity: 1;
+  opacity: $opacity;
   transition: opacity 0.3s ease;
   text-overflow: ellipsis;
 }
