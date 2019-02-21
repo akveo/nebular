@@ -7,6 +7,7 @@
 import { ApplicationRef, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NbDatepickerDirective } from '@nebular/theme';
 
 import { NbDatepickerModule } from './datepicker.module';
 import { NbThemeModule } from '../../theme.module';
@@ -27,12 +28,14 @@ import { NbDatepickerComponent } from './datepicker.component';
 })
 export class NbDatepickerTestComponent {
   @ViewChild(NbDatepickerComponent) datepicker: NbDatepickerComponent<Date>;
+  @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
 describe('nb-datepicker', () => {
   let fixture: ComponentFixture<NbDatepickerTestComponent>;
   let appRef: ApplicationRef;
   let datepicker: NbDatepickerComponent<Date>;
+  let datepickerDirective: NbDatepickerDirective<Date>;
   let overlay: HTMLElement;
   let input: HTMLInputElement;
 
@@ -60,6 +63,7 @@ describe('nb-datepicker', () => {
 
   beforeEach(() => {
     datepicker = fixture.componentInstance.datepicker;
+    datepickerDirective = fixture.componentInstance.datepickerDirective;
     overlay = fixture.nativeElement.querySelector('nb-layout');
     input = fixture.nativeElement.querySelector('input');
   });
@@ -107,5 +111,17 @@ describe('nb-datepicker', () => {
     const cell = overlay.querySelector('.day-cell.selected'); // it's input value date cell
 
     expect(cell.textContent).toContain('17');
+  });
+
+  it('should be valid if empty', () => {
+    expect(datepickerDirective.validate()).toBe(null);
+  });
+
+  it('should not be valid if empty contain incorrectly formatted date', () => {
+    input.value = 'somecurruptedinput';
+    input.dispatchEvent(new Event('input'));
+    showDatepicker();
+
+    expect(datepickerDirective.validate()).not.toBe(null);
   });
 });
