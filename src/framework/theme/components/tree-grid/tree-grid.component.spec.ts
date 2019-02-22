@@ -12,9 +12,7 @@ import {
   NB_ROW_DOUBLE_CLICK_DELAY,
   NbTreeGridDataSourceBuilder,
   NbTreeGridPresentationNode,
-  DataGetter,
-  ChildrenGetter,
-  ExpandedGetter,
+  Getters,
 } from '@nebular/theme';
 
 interface TreeNode<T> {
@@ -206,9 +204,11 @@ describe('NbTreeGridComponent', () => {
 
   describe('NbTreeGridDataSourceBuilder custom node getters', () => {
     const mockConnectionViewer = { viewChange: EMPTY };
-    const dataGetter: DataGetter<CustomStructure, CustomStructure> = node => node;
-    const childrenGetter: ChildrenGetter<CustomStructure, CustomStructure> = node => node.childNodes;
-    const expandedGetter: ExpandedGetter<CustomStructure> = node => !!node.expanded;
+    const getters: Getters<CustomStructure, CustomStructure> = {
+      dataGetter: node => node,
+      childrenGetter: node => node.childNodes,
+      expandedGetter: node => !!node.expanded,
+    };
     let dataSourceBuilder: NbTreeGridDataSourceBuilder<CustomStructure>;
 
     beforeEach(() => {
@@ -221,9 +221,10 @@ describe('NbTreeGridComponent', () => {
     }));
 
     it('should use custom data accessor if provided', fakeAsync(() => {
-      const dataGetterSpy = createSpy('dataGetter', dataGetter).and.callThrough();
+      const dataGetterSpy = createSpy('dataGetter', getters.dataGetter).and.callThrough();
+      const spyGetters = { ...getters, dataGetter: dataGetterSpy };
 
-      const dataSource = dataSourceBuilder.create(customStructureData, dataGetterSpy, childrenGetter, expandedGetter);
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
       expect(dataGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
@@ -237,9 +238,10 @@ describe('NbTreeGridComponent', () => {
     }));
 
     it('should use custom children accessor if provided', fakeAsync(() => {
-      const childrenGetterSpy = createSpy('childrenGetter', childrenGetter).and.callThrough();
+      const childrenGetterSpy = createSpy('childrenGetter', getters.childrenGetter).and.callThrough();
+      const spyGetters = { ...getters, childrenGetter: childrenGetterSpy };
 
-      const dataSource = dataSourceBuilder.create(customStructureData, dataGetter, childrenGetterSpy, expandedGetter);
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
       expect(childrenGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
@@ -252,9 +254,10 @@ describe('NbTreeGridComponent', () => {
     }));
 
     it('should use custom expanded accessor if provided', fakeAsync(() => {
-      const expandedGetterSpy = createSpy('expandedGetter', expandedGetter).and.callThrough();
+      const expandedGetterSpy = createSpy('expandedGetter', getters.expandedGetter).and.callThrough();
+      const spyGetters = { ...getters, expandedGetter: expandedGetterSpy };
 
-      const dataSource = dataSourceBuilder.create(customStructureData, dataGetter, childrenGetter, expandedGetterSpy);
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
       expect(expandedGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];

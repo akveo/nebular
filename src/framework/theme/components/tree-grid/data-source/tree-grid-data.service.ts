@@ -6,31 +6,38 @@
 
 import { Injectable } from '@angular/core';
 
-import {
-  ChildrenGetter,
-  DataGetter,
-  DEFAULT_ROW_LEVEL,
-  ExpandedGetter,
-  NbTreeGridPresentationNode,
-} from './tree-grid.model';
+import { Getters, DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './tree-grid.model';
 
 @Injectable()
 export class NbTreeGridDataService<T> {
 
+  private defaultGetters: Getters<any, T> = {
+    dataGetter: node => node.dataGetter,
+    childrenGetter: d => d.childrenGetter || undefined,
+    expandedGetter: d => d.expandedGetter,
+  };
+
   toPresentationNodes<N>(
     nodes: N[],
-    dataGetter: DataGetter<N, T> = node => node.data,
-    childrenGetter: ChildrenGetter<N, T> = d => d.children || undefined,
-    expandedGetter: ExpandedGetter<T> = d => d.expanded,
+    customGetters?: Getters<N, T>,
     level: number = DEFAULT_ROW_LEVEL,
   ): NbTreeGridPresentationNode<T>[] {
-    return nodes.map(node => {
-      const children = childrenGetter(node);
-      const presentationChildren: NbTreeGridPresentationNode<T>[] = children
-        ? this.toPresentationNodes(children, dataGetter, childrenGetter, expandedGetter, level + 1)
-        : undefined;
+    const getters: Getters<N, T> = { ...this.defaultGetters, ...customGetters };
 
-      return new NbTreeGridPresentationNode(dataGetter(node), presentationChildren, expandedGetter(node), level);
+    return this.mapNodes(nodes, getters, level);
+  }
+
+  private mapNodes<N>(nodes: N[], getters: Getters<N, T>, level: number): NbTreeGridPresentationNode<T>[] {
+    const { dataGetter, childrenGetter, expandedGetter } = getters;
+
+    return nodes.map(node => {
+      const childrenNodes = childrenGetter(node);
+      let children: NbTreeGridPresentationNode<T>[];
+      if (childrenNodes) {
+        children = this.toPresentationNodes(childrenNodes, getters, level + 1);
+      }
+
+      return new NbTreeGridPresentationNode(dataGetter(node), children, expandedGetter(node), level);
     });
   }
 
@@ -48,10 +55,10 @@ export class NbTreeGridDataService<T> {
 
   copy(nodes: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
     return nodes.map((node: NbTreeGridPresentationNode<T>) => {
-      const children: NbTreeGridPresentationNode<T>[] = node.hasChildren()
-        ? this.copy(node.children)
-        : undefined;
-
+      let children: NbTreeGridPresentationNode<T>[];
+      if (node.hasChildren()) {
+        children = this.copy(node.children);
+      }
       return new NbTreeGridPresentationNode(node.data, children, node.expanded, node.level);
     });
   }

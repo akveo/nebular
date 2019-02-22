@@ -14,12 +14,7 @@ import { NbSortable, NbSortRequest } from '../tree-grid-sort.component';
 import { NbTreeGridDataService } from './tree-grid-data.service';
 import { NbTreeGridFilterService } from './tree-grid-filter.service';
 import { NbTreeGridSortService } from './tree-grid-sort.service';
-import {
-  ChildrenGetter,
-  DataGetter,
-  DEFAULT_ROW_LEVEL, ExpandedGetter,
-  NbTreeGridPresentationNode,
-} from './tree-grid.model';
+import { Getters, DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './tree-grid.model';
 import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
 
 export interface NbFilterable {
@@ -45,15 +40,12 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     super();
   }
 
-  setData<N>(
-    data: N[],
-    dataGetter?: DataGetter<N, T>,
-    childrenGetter?: ChildrenGetter<N, T>,
-    expandedGetter?: ExpandedGetter<T>,
-  ) {
-    const presentationData: NbTreeGridPresentationNode<T>[] = data
-      ? this.treeGridDataService.toPresentationNodes(data, dataGetter, childrenGetter, expandedGetter)
-      : [];
+  setData<N>(data: N[], customGetters?: Getters<N, T>) {
+    let presentationData: NbTreeGridPresentationNode<T>[] = [];
+    if (data) {
+      presentationData = this.treeGridDataService.toPresentationNodes(data, customGetters);
+    }
+
     this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
   }
@@ -140,12 +132,7 @@ export class NbTreeGridDataSourceBuilder<T> {
               private treeGridDataService: NbTreeGridDataService<T>) {
   }
 
-  create<N>(
-    data: N[],
-    dataGetter?: DataGetter<N, T>,
-    childrenGetter?: ChildrenGetter<N, T>,
-    expandedGetter?: ExpandedGetter<T>,
-  ): NbTreeGridDataSource<T> {
+  create<N>(data: N[], customGetters?: Getters<N, T>): NbTreeGridDataSource<T> {
     const dataSource = new NbTreeGridDataSource<T>(
       this.sortService,
       this.filterService,
@@ -153,7 +140,7 @@ export class NbTreeGridDataSourceBuilder<T> {
       this.treeGridDataService,
     );
 
-    dataSource.setData(data, dataGetter, childrenGetter, expandedGetter);
+    dataSource.setData(data, customGetters);
     return dataSource;
   }
 }
