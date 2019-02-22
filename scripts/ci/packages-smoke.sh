@@ -14,6 +14,7 @@ packages_smoke() {
   npm install
 
   echo "Installing built packages"
+  mkdir -p node_modules/@nebular
   cp -r ../nebular/src/.lib/* node_modules/@nebular
 
   echo "Verifying application build"
