@@ -12,9 +12,9 @@ import { NbGetters, NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './t
 export class NbTreeGridDataService<T> {
 
   private defaultGetters: NbGetters<any, T> = {
-    dataGetter: node => node.dataGetter,
-    childrenGetter: d => d.childrenGetter || undefined,
-    expandedGetter: d => d.expandedGetter,
+    dataGetter: node => node.data,
+    childrenGetter: d => d.children || undefined,
+    expandedGetter: d => !!d.expanded,
   };
 
   toPresentationNodes<N>(
