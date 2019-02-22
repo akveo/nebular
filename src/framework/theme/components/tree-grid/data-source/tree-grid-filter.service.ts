@@ -30,7 +30,7 @@ export class NbTreeGridFilterService<T> {
       if (filteredChildren && filteredChildren.length) {
         node.expanded = true;
         filtered.push(node);
-      } else if (this.filterPredicate(node.node.data, query)) {
+      } else if (this.filterPredicate(node.data, query)) {
         filtered.push(node);
       }
 

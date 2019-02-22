@@ -31,7 +31,7 @@ import {
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
-import { DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
+import { NB_DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
 import { NbColumnsService } from './tree-grid-columns.service';
 
 @Directive({
@@ -121,7 +121,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
 
   private getStartPadding(): string | SafeStyle | null {
     const rowLevel = this.tree.getCellLevel(this, this.columnDef.name);
-    if (rowLevel === DEFAULT_ROW_LEVEL) {
+    if (rowLevel === NB_DEFAULT_ROW_LEVEL) {
       return null;
     }
 
