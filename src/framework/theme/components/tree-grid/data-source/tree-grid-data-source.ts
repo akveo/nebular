@@ -49,7 +49,7 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     data: N[],
     dataGetter?: DataGetter<N, T>,
     childrenGetter?: ChildrenGetter<N, T>,
-    expandedGetter?: ExpandedGetter<N, T>,
+    expandedGetter?: ExpandedGetter<T>,
   ) {
     const presentationData: NbTreeGridPresentationNode<T>[] = data
       ? this.treeGridDataService.toPresentationNodes(data, dataGetter, childrenGetter, expandedGetter)
@@ -144,7 +144,7 @@ export class NbTreeGridDataSourceBuilder<T> {
     data: N[],
     dataGetter?: DataGetter<N, T>,
     childrenGetter?: ChildrenGetter<N, T>,
-    expandedGetter?: ExpandedGetter<N, T>,
+    expandedGetter?: ExpandedGetter<T>,
   ): NbTreeGridDataSource<T> {
     const dataSource = new NbTreeGridDataSource<T>(
       this.sortService,

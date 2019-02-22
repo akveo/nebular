@@ -21,7 +21,7 @@ export class NbTreeGridDataService<T> {
     nodes: N[],
     dataGetter: DataGetter<N, T> = node => node.data,
     childrenGetter: ChildrenGetter<N, T> = d => d.children || undefined,
-    expandedGetter: ExpandedGetter<N, T> = d => d.expanded,
+    expandedGetter: ExpandedGetter<T> = d => d.expanded,
     level: number = DEFAULT_ROW_LEVEL,
   ): NbTreeGridPresentationNode<T>[] {
     return nodes.map(node => {

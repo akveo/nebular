@@ -8,7 +8,7 @@ export const DEFAULT_ROW_LEVEL: number = 0;
 
 export type DataGetter<N, T> = (N) => T;
 export type ChildrenGetter<N, T> = (N) => (T[] | undefined);
-export type ExpandedGetter<N, T> = (N) => boolean;
+export type ExpandedGetter<T> = (T) => boolean;
 
 /**
  * Implicit context of cells and rows
