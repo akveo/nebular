@@ -27,7 +27,7 @@ import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
-import { DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
+import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
@@ -214,7 +214,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     if (level || level === 0) {
       return level;
     }
-    return DEFAULT_ROW_LEVEL;
+    return NB_DEFAULT_ROW_LEVEL;
   }
 
   private getDataIndex(row: NbTreeGridRowComponent): number {

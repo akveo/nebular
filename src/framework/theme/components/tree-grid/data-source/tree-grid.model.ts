@@ -4,16 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-export const DEFAULT_ROW_LEVEL: number = 0;
+export const NB_DEFAULT_ROW_LEVEL: number = 0;
 
-export type DataGetter<N, T> = (N) => T;
-export type ChildrenGetter<N, T> = (N) => (T[] | undefined);
-export type ExpandedGetter<N> = (N) => boolean;
+export type NbDataGetter<N, T> = (N) => T;
+export type NbChildrenGetter<N, T> = (N) => (T[] | undefined);
+export type NbExpandedGetter<N> = (N) => boolean;
 
-export interface Getters<N, T> {
-  dataGetter?: DataGetter<N, T>;
-  childrenGetter?: ChildrenGetter<N, T>;
-  expandedGetter?: ExpandedGetter<N>;
+export interface NbGetters<N, T> {
+  dataGetter?: NbDataGetter<N, T>;
+  childrenGetter?: NbChildrenGetter<N, T>;
+  expandedGetter?: NbExpandedGetter<N>;
 }
 
 /**

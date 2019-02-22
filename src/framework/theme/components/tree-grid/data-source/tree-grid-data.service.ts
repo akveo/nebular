@@ -6,12 +6,12 @@
 
 import { Injectable } from '@angular/core';
 
-import { Getters, DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './tree-grid.model';
+import { NbGetters, NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './tree-grid.model';
 
 @Injectable()
 export class NbTreeGridDataService<T> {
 
-  private defaultGetters: Getters<any, T> = {
+  private defaultGetters: NbGetters<any, T> = {
     dataGetter: node => node.dataGetter,
     childrenGetter: d => d.childrenGetter || undefined,
     expandedGetter: d => d.expandedGetter,
@@ -19,15 +19,15 @@ export class NbTreeGridDataService<T> {
 
   toPresentationNodes<N>(
     nodes: N[],
-    customGetters?: Getters<N, T>,
-    level: number = DEFAULT_ROW_LEVEL,
+    customGetters?: NbGetters<N, T>,
+    level: number = NB_DEFAULT_ROW_LEVEL,
   ): NbTreeGridPresentationNode<T>[] {
-    const getters: Getters<N, T> = { ...this.defaultGetters, ...customGetters };
+    const getters: NbGetters<N, T> = { ...this.defaultGetters, ...customGetters };
 
     return this.mapNodes(nodes, getters, level);
   }
 
-  private mapNodes<N>(nodes: N[], getters: Getters<N, T>, level: number): NbTreeGridPresentationNode<T>[] {
+  private mapNodes<N>(nodes: N[], getters: NbGetters<N, T>, level: number): NbTreeGridPresentationNode<T>[] {
     const { dataGetter, childrenGetter, expandedGetter } = getters;
 
     return nodes.map(node => {

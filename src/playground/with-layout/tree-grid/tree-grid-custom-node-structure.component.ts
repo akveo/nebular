@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Getters, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { NbGetters, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 
 interface FSEntry {
   name: string;
@@ -45,7 +45,7 @@ export class TreeGridCustomNodeStructureComponent {
   source: NbTreeGridDataSource<FSEntry>;
 
   constructor(dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-    const getters: Getters<FSEntry, FSEntry> = {
+    const getters: NbGetters<FSEntry, FSEntry> = {
       dataGetter: (node: FSEntry) => node,
       childrenGetter: (node: FSEntry) => node.childEntries || undefined,
       expandedGetter: (node: FSEntry) => !!node.expanded,

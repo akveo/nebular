@@ -12,7 +12,7 @@ import {
   NB_ROW_DOUBLE_CLICK_DELAY,
   NbTreeGridDataSourceBuilder,
   NbTreeGridPresentationNode,
-  Getters,
+  NbGetters,
 } from '@nebular/theme';
 
 interface TreeNode<T> {
@@ -204,7 +204,7 @@ describe('NbTreeGridComponent', () => {
 
   describe('NbTreeGridDataSourceBuilder custom node getters', () => {
     const mockConnectionViewer = { viewChange: EMPTY };
-    const getters: Getters<CustomStructure, CustomStructure> = {
+    const getters: NbGetters<CustomStructure, CustomStructure> = {
       dataGetter: node => node,
       childrenGetter: node => node.childNodes,
       expandedGetter: node => !!node.expanded,
