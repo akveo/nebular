@@ -68,6 +68,24 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "production-2015": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "tsConfig": "./tsconfig.es2015.json"
             }
           }
         },
@@ -79,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "packages-smoke:build:production"
+            },
+            "production-2015": {
+              "browserTarget": "packages-smoke:build:production-2015"
             }
           }
         },
@@ -132,6 +153,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "packages-smoke:serve:production"
+            },
+            "production-2015": {
+              "devServerTarget": "packages-smoke:serve:production-2015"
             }
           }
         },
