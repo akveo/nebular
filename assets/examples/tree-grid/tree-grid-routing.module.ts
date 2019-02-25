@@ -7,6 +7,7 @@ import { TreeGridBasicComponent } from './tree-grid-basic.component';
 import { TreeGridResponsiveComponent } from './tree-grid-responsive.component';
 import { TreeGridCustomIconsComponent } from './tree-grid-custom-icons.component';
 import { TreeGridDisableClickToggleComponent } from './tree-grid-disable-click-toggle.component';
+import { TreeGridCustomNodeStructureComponent } from './tree-grid-custom-node-structure.component';
 
 const routes: Route[] = [
   {
@@ -36,6 +37,10 @@ const routes: Route[] = [
   {
     path: 'tree-grid-disable-click-toggle.component',
     component: TreeGridDisableClickToggleComponent,
+  },
+  {
+    path: 'tree-grid-custom-node-structure.component',
+    component: TreeGridCustomNodeStructureComponent,
   },
 ];
 
