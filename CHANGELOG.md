@@ -1,3 +1,20 @@
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/akveo/nebular/compare/v3.3.0...v3.4.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* **datepicker:** make it valid in case of empty input ([#1247](https://github.com/akveo/nebular/issues/1247)) ([799b8b8](https://github.com/akveo/nebular/commit/799b8b8)), closes [#1182](https://github.com/akveo/nebular/issues/1182)
+* **docs:** fix password strategy link ([#1245](https://github.com/akveo/nebular/issues/1245)) ([c71d9fd](https://github.com/akveo/nebular/commit/c71d9fd))
+
+
+### Features
+
+* **route-tabset:** configurable routerLinkActiveOptions ([#1239](https://github.com/akveo/nebular/issues/1239)) ([3cf29d8](https://github.com/akveo/nebular/commit/3cf29d8))
+* **tree-grid:** allow specify getters for node properties ([#1254](https://github.com/akveo/nebular/issues/1254)) ([a263a2e](https://github.com/akveo/nebular/commit/a263a2e))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/akveo/nebular/compare/v3.2.1...v3.3.0) (2019-02-18)
 
