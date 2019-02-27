@@ -25,10 +25,10 @@ class NbTestWindowComponent {}
 class NbTestWindowWithTemplateComponent {
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
-  constructor(private windowService: NbWindowService) {}
+  constructor(private ws: NbWindowService) {}
 
   openWindow() {
-    return this.windowService.open(
+    return this.ws.open(
       this.contentTemplate,
       { title: 'Window content from template', context: { text: 'hello world' } },
     );
