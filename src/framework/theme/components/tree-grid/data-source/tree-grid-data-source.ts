@@ -8,14 +8,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { NbDataSource } from '../../cdk/table';
 import { NbCollectionViewer } from '../../cdk/collections';
-import { NbTreeGridSortService } from './tree-grid-sort.service';
-import { NbTreeGridFilterService } from './tree-grid-filter.service';
-import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
-import { NbTreeGridDataService } from './tree-grid-data.service';
+import { NbDataSource } from '../../cdk/table';
 import { NbSortable, NbSortRequest } from '../tree-grid-sort.component';
-import { DEFAULT_ROW_LEVEL, NbTreeGridNode, NbTreeGridPresentationNode } from './tree-grid.model';
+import { NbTreeGridDataService } from './tree-grid-data.service';
+import { NbTreeGridFilterService } from './tree-grid-filter.service';
+import { NbTreeGridSortService } from './tree-grid-sort.service';
+import { NbGetters, NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './tree-grid.model';
+import { NbToggleOptions, NbTreeGridService } from './tree-grid.service';
 
 export interface NbFilterable {
   filter(filterRequest: string);
@@ -40,10 +40,12 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     super();
   }
 
-  setData(data: NbTreeGridNode<T>[]) {
-    const presentationData: NbTreeGridPresentationNode<T>[] = data
-      ? this.treeGridDataService.toPresentationNodes(data)
-      : [];
+  setData<N>(data: N[], customGetters?: NbGetters<N, T>) {
+    let presentationData: NbTreeGridPresentationNode<T>[] = [];
+    if (data) {
+      presentationData = this.treeGridDataService.toPresentationNodes(data, customGetters);
+    }
+
     this.data = new BehaviorSubject(presentationData);
     this.updateChangeSubscription();
   }
@@ -81,7 +83,7 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
 
   getLevel(rowIndex: number): number {
     const row = this.renderData.value[rowIndex];
-    return row ? row.level : DEFAULT_ROW_LEVEL;
+    return row ? row.level : NB_DEFAULT_ROW_LEVEL;
   }
 
   sort(sortRequest: NbSortRequest) {
@@ -130,7 +132,7 @@ export class NbTreeGridDataSourceBuilder<T> {
               private treeGridDataService: NbTreeGridDataService<T>) {
   }
 
-  create(data: NbTreeGridNode<T>[]): NbTreeGridDataSource<T> {
+  create<N>(data: N[], customGetters?: NbGetters<N, T>): NbTreeGridDataSource<T> {
     const dataSource = new NbTreeGridDataSource<T>(
       this.sortService,
       this.filterService,
@@ -138,7 +140,7 @@ export class NbTreeGridDataSourceBuilder<T> {
       this.treeGridDataService,
     );
 
-    dataSource.setData(data);
+    dataSource.setData(data, customGetters);
     return dataSource;
   }
 }
