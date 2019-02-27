@@ -7,7 +7,6 @@
 import {
   AfterContentInit,
   AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentRef,
@@ -146,7 +145,6 @@ export class NbSelectLabelComponent {
   selector: 'nb-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -371,6 +369,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   writeValue(value: T | T[]): void {
     if (!value) {
+      this.cleanSelection();
       return;
     }
 
