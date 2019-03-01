@@ -62,7 +62,7 @@
   @include btn-hero-warning-border();
   @include btn-hero-disabled();
   @include btn-hero-line-height();
-  @include btn-hero-success-pulse();
+  @include btn-hero-warning-pulse();
 }
 
 @mixin btn-hero-info() {
@@ -75,7 +75,7 @@
   @include btn-hero-info-border();
   @include btn-hero-disabled();
   @include btn-hero-line-height();
-  @include btn-hero-success-pulse();
+  @include btn-hero-info-pulse();
 }
 
 @mixin btn-hero-danger() {
@@ -88,7 +88,7 @@
   @include btn-hero-danger-border();
   @include btn-hero-disabled();
   @include btn-hero-line-height();
-  @include btn-hero-success-pulse();
+  @include btn-hero-danger-pulse();
 }
 
 @function btn-hero-primary-light-gradient() {
