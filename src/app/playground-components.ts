@@ -1310,17 +1310,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
-    path: 'bootstrap',
-    children: [
-      {
-        path: 'bootstrap-test.component',
-        link: '/bootstrap/bootstrap-test.component',
-        component: 'BootstrapTestComponent',
-        name: 'Bootstrap Test',
-      },
-    ],
-  },
-  {
     path: 'context-menu',
     children: [
       {
@@ -1627,6 +1616,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/azure/callback',
         component: 'AzureCallbackComponent',
         name: 'Azure Callback',
+      },
+    ],
+  },
+  {
+    path: 'bootstrap',
+    children: [
+      {
+        path: 'bootstrap-test.component',
+        link: '/bootstrap/bootstrap-test.component',
+        component: 'BootstrapTestComponent',
+        name: 'Bootstrap Test',
       },
     ],
   },
