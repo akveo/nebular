@@ -1310,6 +1310,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'icon',
+    children: [
+      {
+        path: 'icon-showcase.component',
+        link: '/icon/icon-showcase.component',
+        component: 'IconShowcaseComponent',
+        name: 'Icon Showcase',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {

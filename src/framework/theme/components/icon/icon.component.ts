@@ -6,7 +6,8 @@
 
 import { Component, Input, HostBinding } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import { icons } from 'eva-icons';
+
+import { NbIconLibraryService } from './icon-library.service';
 
 /**
  * Icon component.
@@ -104,11 +105,13 @@ export class NbIconComponent {
 
   @Input()
   set icon(icon: string) {
-    this.iconSVG = this.sanitizer.bypassSecurityTrustHtml(icons[icon].toSvg({
-      width: '100%',
-      height: '100%',
-      fill: 'currentColor',
-    }));
+    // this.iconSVG = this.sanitizer.bypassSecurityTrustHtml(icons[icon].toSvg({
+    //   width: '100%',
+    //   height: '100%',
+    //   fill: 'currentColor',
+    // }));
+
+    this.iconSVG = this.sanitizer.bypassSecurityTrustHtml(this.iconLibrary.getSvgIcon(icon));
   }
 
   /**
@@ -153,6 +156,6 @@ export class NbIconComponent {
     this.status = val;
   }
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private iconLibrary: NbIconLibraryService) {
   }
 }

@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NbIconComponent } from './icon.component';
+import { NbIconLibraryService } from './icon-library.service';
+import { NbEvaIconsService } from './eva-icons.service';
 
 @NgModule({
   imports: [
@@ -15,6 +17,10 @@ import { NbIconComponent } from './icon.component';
   ],
   declarations: [
     NbIconComponent,
+  ],
+  providers: [
+    NbIconLibraryService,
+    NbEvaIconsService,
   ],
   exports: [
     NbIconComponent,

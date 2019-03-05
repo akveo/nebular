@@ -101,3 +101,4 @@ export * from './components/tree-grid/data-source/tree-grid.service';
 export * from './components/tree-grid/data-source/tree-grid-sort.service';
 export * from './components/icon/icon.module';
 export * from './components/icon/icon.component';
+export * from './components/icon/icon-library.service';
