@@ -1,0 +1,46 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import './tree-grid-sort.component.theme';
+
+@mixin nb-tree-grid-theme() {
+  $border-width: nb-theme(tree-grid-cell-border-width);
+  $border-style: nb-theme(tree-grid-cell-border-style);
+  $border-color: nb-theme(tree-grid-cell-border-color);
+
+  .nb-tree-grid-header-cell,
+  .nb-tree-grid-cell,
+  .nb-tree-grid-footer-cell {
+    height: nb-theme(tree-grid-row-min-height);
+    padding: nb-theme(tree-grid-cell-padding);
+    border: $border-width $border-style $border-color;
+  }
+
+  .nb-tree-grid-header-row {
+    background: nb-theme(tree-grid-header-bg);
+  }
+
+  .nb-tree-grid-footer-row {
+    background: nb-theme(tree-grid-footer-bg);
+  }
+
+  .nb-tree-grid-row {
+    background: nb-theme(tree-grid-row-bg);
+    &:hover {
+      background: nb-theme(tree-grid-row-hover-bg);
+    }
+    &:nth-child(2n):not(:hover) {
+      background-color: nb-theme(tree-grid-row-bg-even);
+    }
+  }
+
+  nb-tree-grid-row-toggle .row-toggle-button .icon,
+  nb-sort-icon .icon {
+    color: nb-theme(tree-grid-icon-color);
+  }
+
+  @include nb-tree-grid-sort-header-theme();
+}
