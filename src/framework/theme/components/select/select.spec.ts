@@ -61,6 +61,9 @@ const TEST_GROUPS = [
           <nb-option-group *ngFor="let group of groups" [title]="group.title">
             <nb-option *ngFor="let option of group.options" [value]="option.value">{{ option.title }}</nb-option>
           </nb-option-group>
+          <ng-container *ngIf="groups">
+            <nb-option>ng-container option</nb-option>
+          </ng-container>
         </nb-select>
       </nb-layout-column>
     </nb-layout>
@@ -220,5 +223,14 @@ describe('Component: NbSelectComponent', () => {
       const button = fixture.nativeElement.querySelector('button');
       expect(button.textContent).toContain('1 noitpO');
     })
+  });
+
+  fit('should render option wrapped in ng-container', () => {
+    select.multiple = true;
+    setSelectedAndOpen([]);
+
+    const options = overlayContainer.querySelectorAll('nb-option');
+    const lastOption = options[options.length - 1];
+    expect(lastOption.textContent).toEqual('ng-container option');
   });
 });
