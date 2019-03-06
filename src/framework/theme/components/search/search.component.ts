@@ -55,7 +55,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
           <div class="form-content">
             <input class="search-input"
                    #searchInput
-                   (input)="submitSearchInput(searchInput.value)"
+                   (input)="emitSearchInput(searchInput.value)"
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
                    tabindex="-1"
@@ -151,7 +151,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  submitSearchInput(term: string) {
+  emitSearchInput(term: string) {
     this.searchInput.emit(term);
   }
 
