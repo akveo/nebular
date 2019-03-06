@@ -20,14 +20,14 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
-import {of as observableOf} from 'rxjs';
-import {delay, filter, takeWhile} from 'rxjs/operators';
+import { of as observableOf } from 'rxjs';
+import { filter, delay, takeWhile } from 'rxjs/operators';
 
-import {NbSearchService} from './search.service';
-import {NbThemeService} from '../../services/theme.service';
-import {NbOverlayRef, NbOverlayService, NbPortalDirective} from '../cdk';
+import { NbSearchService } from './search.service';
+import { NbThemeService } from '../../services/theme.service';
+import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
 
 /**
  * search-field-component is used under the hood by nb-search component

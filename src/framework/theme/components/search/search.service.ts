@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {share} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 /**
  * Search component service, connects your code to a page-level search component.
