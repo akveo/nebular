@@ -225,7 +225,7 @@ describe('Component: NbSelectComponent', () => {
     })
   });
 
-  fit('should render option wrapped in ng-container', () => {
+  it('should render option wrapped in ng-container', () => {
     select.multiple = true;
     setSelectedAndOpen([]);
 
