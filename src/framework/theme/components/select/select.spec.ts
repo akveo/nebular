@@ -48,6 +48,7 @@ const TEST_GROUPS = [
       { title: 'Option 41', value: '' },
       { title: 'Option 42', value: '0' },
       { title: 'Option 43', value: 0 },
+      { title: 'Option 44'}
     ],
   },
 ];
@@ -228,6 +229,18 @@ describe('Component: NbSelectComponent', () => {
       const button = fixture.nativeElement.querySelector('button');
       expect(button.textContent).toContain('1 noitpO');
     });
+  });
+
+  it('should clean selection when selected option does not have a value', () => {
+    setSelectedAndOpen('Option 1');
+
+    const option = overlayContainer.querySelectorAll('nb-option')[13];
+    option.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+    select.show();
+
+    expect(overlayContainer.querySelectorAll('nb-option.selected').length).toBe(0);
   });
 
   it('should render default label when selecting option with value of empty string', () => {
