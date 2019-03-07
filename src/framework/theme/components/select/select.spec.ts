@@ -48,7 +48,7 @@ const TEST_GROUPS = [
       { title: 'Option 41', value: '' },
       { title: 'Option 42', value: '0' },
       { title: 'Option 43', value: 0 },
-      { title: 'Option 44'}
+      { title: 'Option 44'},
     ],
   },
 ];
