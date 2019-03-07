@@ -230,7 +230,7 @@ describe('Component: NbSelectComponent', () => {
     });
   });
 
-  fit('should render default label when selecting option with value of empty string', () => {
+  it('should render default label when selecting option with value of empty string', () => {
     setSelectedAndOpen('');
     const selected = overlayContainer.querySelector('nb-option.selected');
 
@@ -238,7 +238,7 @@ describe('Component: NbSelectComponent', () => {
     expect(selected.textContent).toEqual('Option 41');
   });
 
-  fit('should render default label when option with value of empty string is clicked', () => {
+  it('should render default label when option with value of empty string is clicked', () => {
     setSelectedAndOpen('Option 1');
 
     const option = overlayContainer.querySelectorAll('nb-option')[10];
