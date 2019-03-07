@@ -42,6 +42,14 @@ const TEST_GROUPS = [
       { title: 'Option 33', value: 'Option 33' },
     ],
   },
+  {
+    title: 'Group 4',
+    options: [
+      { title: 'Option 41', value: '' },
+      { title: 'Option 42', value: '0' },
+      { title: 'Option 43', value: 0 },
+    ],
+  },
 ];
 
 @Component({
@@ -219,6 +227,72 @@ describe('Component: NbSelectComponent', () => {
 
       const button = fixture.nativeElement.querySelector('button');
       expect(button.textContent).toContain('1 noitpO');
-    })
+    });
+  });
+
+  fit('should render default label when selecting option with value of empty string', () => {
+    setSelectedAndOpen('');
+    const selected = overlayContainer.querySelector('nb-option.selected');
+
+    expect(selected).toBeTruthy();
+    expect(selected.textContent).toEqual('Option 41');
+  });
+
+  fit('should render default label when option with value of empty string is clicked', () => {
+    setSelectedAndOpen('Option 1');
+
+    const option = overlayContainer.querySelectorAll('nb-option')[10];
+    option.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+    select.show();
+
+    const selected = overlayContainer.querySelectorAll('nb-option.selected');
+    expect(selected.length).toBe(1);
+    expect(selected[0].textContent).toEqual('Option 41');
+  });
+
+  it('should render default label when selecting option with value "0"', () => {
+    setSelectedAndOpen('0');
+    const selected = overlayContainer.querySelector('nb-option.selected');
+
+    expect(selected).toBeTruthy();
+    expect(selected.textContent).toEqual('Option 42');
+  });
+
+  it('should render default label when option with value of "0" is clicked', () => {
+    setSelectedAndOpen('Option 1');
+
+    const option = overlayContainer.querySelectorAll('nb-option')[11];
+    option.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+    select.show();
+
+    const selected = overlayContainer.querySelectorAll('nb-option.selected');
+    expect(selected.length).toBe(1);
+    expect(selected[0].textContent).toEqual('Option 42');
+  });
+
+  it('should render default label when selecting option with value of 0', () => {
+    setSelectedAndOpen(0);
+    const selected = overlayContainer.querySelector('nb-option.selected');
+
+    expect(selected).toBeTruthy();
+    expect(selected.textContent).toEqual('Option 43');
+  });
+
+  it('should render default label when option with value of 0 is clicked', () => {
+    setSelectedAndOpen('Option 1');
+
+    const option = overlayContainer.querySelectorAll('nb-option')[12];
+    option.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+    select.show();
+
+    const selected = overlayContainer.querySelectorAll('nb-option.selected');
+    expect(selected.length).toBe(1);
+    expect(selected[0].textContent).toEqual('Option 43');
   });
 });

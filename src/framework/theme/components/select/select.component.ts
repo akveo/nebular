@@ -370,10 +370,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   writeValue(value: T | T[]): void {
-    if (!value) {
-      return;
-    }
-
     if (this.options) {
       this.setSelection(value);
     } else {
@@ -385,7 +381,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Selects option or clear all selected options if value is null.
    * */
   protected handleSelect(option: NbOptionComponent<T>) {
-    if (option.value) {
+    if (this.options.some((opt) => opt.content === option.content)) {
       this.selectOption(option);
     } else {
       this.reset();
