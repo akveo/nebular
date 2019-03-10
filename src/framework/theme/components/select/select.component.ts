@@ -201,7 +201,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   /**
    * Custom comparing algorithm
    */
-  @Input() compareWith: (o1: any, o2: any) => boolean = areIdentical;
+  @Input() compareWith: (o1: any, o2: any) => boolean = this.areIdentical;
 
   /**
    * Will be emitted when selected value changes.
