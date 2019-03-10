@@ -150,7 +150,8 @@ export class NbDialogService {
   /**
    * Opens new instance of the dialog, may receive optional config.
    * */
-  open<T>(content: Type<T> | TemplateRef<T>, userConfig: Partial<NbDialogConfig<T>> = {}): NbDialogRef<T> {
+  open<T>(content: Type<T> | TemplateRef<T>,
+          userConfig: Partial<NbDialogConfig<Partial<T> | string>> = {}): NbDialogRef<T> {
     const config = new NbDialogConfig({ ...this.globalConfig, ...userConfig });
     const overlayRef = this.createOverlay(config);
     const dialogRef = new NbDialogRef<T>(overlayRef);

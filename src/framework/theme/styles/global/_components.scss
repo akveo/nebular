@@ -37,6 +37,7 @@
 @import '../../components/window/window.component.theme';
 @import '../../components/datepicker/datepicker-container.component.theme';
 @import '../../components/radio/radio.component.theme';
+@import '../../components/tree-grid/tree-grid.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -73,4 +74,5 @@
   @include nb-window-theme();
   @include nb-datepicker-theme();
   @include nb-radio-theme();
+  @include nb-tree-grid-theme();
 }

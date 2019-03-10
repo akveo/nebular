@@ -19,7 +19,7 @@ import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast, NbToastStatus } from './model';
 import { NbToastComponent } from './toast.component';
-
+import { NB_DOCUMENT } from '../../theme.options';
 
 export class NbToastRef {
   constructor(private toastContainer: NbToastContainer,
@@ -34,6 +34,10 @@ export class NbToastRef {
 export class NbToastContainer {
   protected toasts: NbToast[] = [];
   protected prevToast: NbToast;
+
+  get nativeElement() {
+    return this.containerRef.location.nativeElement;
+  }
 
   constructor(protected position: NbGlobalPosition,
               protected containerRef: ComponentRef<NbToastrContainerComponent>,
@@ -112,13 +116,15 @@ export class NbToastrContainerRegistry {
   constructor(protected overlay: NbOverlayService,
               protected positionBuilder: NbPositionBuilderService,
               protected positionHelper: NbPositionHelper,
-              protected cfr: ComponentFactoryResolver) {
+              protected cfr: ComponentFactoryResolver,
+              @Inject(NB_DOCUMENT) protected document: any) {
   }
 
   get(position: NbGlobalPosition): NbToastContainer {
     const logicalPosition: NbGlobalLogicalPosition = this.positionHelper.toLogicalPosition(position);
 
-    if (!this.overlays.has(logicalPosition)) {
+    const container = this.overlays.get(logicalPosition);
+    if (!container || !this.existsInDom(container)) {
       this.instantiateContainer(logicalPosition);
     }
 
@@ -135,6 +141,10 @@ export class NbToastrContainerRegistry {
     const ref = this.overlay.create({ positionStrategy });
     const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
     return new NbToastContainer(position, containerRef, this.positionHelper);
+  }
+
+  protected existsInDom(toastContainer: NbToastContainer): boolean {
+    return this.document.contains(toastContainer.nativeElement);
   }
 }
 

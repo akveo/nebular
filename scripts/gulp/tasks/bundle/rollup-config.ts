@@ -22,6 +22,8 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/portal': 'ng.cdk.portal',
   '@angular/cdk/a11y': 'ng.cdk.a11y',
   '@angular/cdk/scrolling': 'ng.cdk.scrolling',
+  '@angular/cdk/table': 'ng.cdk.table',
+  '@angular/cdk/bidi': 'ng.cdk.bidi',
 
 
   // RxJS dependencies
@@ -34,6 +36,7 @@ const ROLLUP_GLOBALS = {
   // date libs for date service
   'moment': 'moment',
   'date-fns/parse': 'date-fns.parse',
+  'date-fns/format': 'date-fns.format',
 
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',

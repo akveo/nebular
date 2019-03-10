@@ -14,10 +14,6 @@ const routes: Route[] = [
     component: PlaygroundBaseComponent,
     children: [
       {
-        path: 'bootstrap',
-        loadChildren: './bootstrap/bootstrap.module#BootstrapModule',
-      },
-      {
         path: 'context-menu',
         loadChildren: './context-menu/context-menu.module#ContextMenuModule',
       },
