@@ -23,7 +23,6 @@ import {
   Output,
   QueryList,
   ViewChild,
-  ɵlooseIdentical as looseIdentical,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { take, takeWhile } from 'rxjs/operators';
@@ -202,7 +201,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   /**
    * Custom comparing algorithm
    */
-  @Input() compareWith: (o1: any, o2: any) => boolean = looseIdentical;
+  @Input() compareWith: (o1: any, o2: any) => boolean = areIdentical;
 
   /**
    * Will be emitted when selected value changes.
@@ -385,6 +384,13 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     } else {
       this.queue = value;
     }
+  }
+
+  /**
+   * Determines if two objects are strict identical.
+   * */
+  private areIdentical(o1: any, o2: any): boolean {
+    return o1 === o2;
   }
 
   /**
