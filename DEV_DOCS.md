@@ -343,7 +343,7 @@ To start a new release (publish the framework packages on NPM) you need:
 5. 
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
-  * update `package-lock.json`
+  * update version in `package-lock.json` and `packages-smoke/package-lock.json`
   * update dependent modules with correct peer module versions 
 6. 
   * `npm run version:changelog`
