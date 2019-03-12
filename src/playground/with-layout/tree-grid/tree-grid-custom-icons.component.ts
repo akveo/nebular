@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridNode } from '@nebular/theme';
+import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  children?: TreeNode<T>[];
+  expanded?: boolean;
+}
 
 interface FSEntry {
   name: string;
@@ -64,7 +70,7 @@ export class TreeGridCustomIconsComponent {
     this.dataSource = dataSourceBuilder.create(this.data);
   }
 
-  private data: NbTreeGridNode<FSEntry>[] = [
+  private data: TreeNode<FSEntry>[] = [
     {
       data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
       children: [

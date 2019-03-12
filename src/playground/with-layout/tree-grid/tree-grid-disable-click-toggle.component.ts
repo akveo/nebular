@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { NbTreeGridNode } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  children?: TreeNode<T>[];
+  expanded?: boolean;
+}
 
 interface FSEntry {
   name: string;
@@ -40,7 +45,7 @@ export class TreeGridDisableClickToggleComponent {
   defaultColumns = [ 'size', 'kind', 'items' ];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
-  data: NbTreeGridNode<FSEntry>[] = [
+  data: TreeNode<FSEntry>[] = [
     {
       data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
       children: [

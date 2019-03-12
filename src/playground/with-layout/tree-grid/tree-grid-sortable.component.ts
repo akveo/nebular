@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  NbSortDirection,
-  NbSortRequest,
-  NbTreeGridDataSource,
-  NbTreeGridDataSourceBuilder,
-  NbTreeGridNode,
-} from '@nebular/theme';
+import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  children?: TreeNode<T>[];
+  expanded?: boolean;
+}
 
 interface FSEntry {
   name: string;
@@ -77,7 +77,7 @@ export class TreeGridSortableComponent {
     return NbSortDirection.NONE;
   }
 
-  private data: NbTreeGridNode<FSEntry>[] = [
+  private data: TreeNode<FSEntry>[] = [
     {
       data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
       children: [
