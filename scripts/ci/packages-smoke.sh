@@ -16,6 +16,8 @@ packages_smoke() {
   echo "Installing built packages"
   mkdir -p node_modules/@nebular
   cp -r ../nebular/src/.lib/* node_modules/@nebular
+  # calling npm install again to install peer dependencies of @nebular/* packages
+  npm install
 
   echo "Verifying application build"
   npm run build --prod --aot
