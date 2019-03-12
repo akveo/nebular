@@ -1301,16 +1301,11 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TreeGridDisableClickToggleComponent',
         name: 'Tree Grid Disable Click Toggle',
       },
-    ],
-  },
-  {
-    path: 'bootstrap',
-    children: [
       {
-        path: 'bootstrap-test.component',
-        link: '/bootstrap/bootstrap-test.component',
-        component: 'BootstrapTestComponent',
-        name: 'Bootstrap Test',
+        path: 'tree-grid-custom-node-structure.component',
+        link: '/tree-grid/tree-grid-custom-node-structure.component',
+        component: 'TreeGridCustomNodeStructureComponent',
+        name: 'Tree Grid Custom Node Structure',
       },
     ],
   },
@@ -1621,6 +1616,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/azure/callback',
         component: 'AzureCallbackComponent',
         name: 'Azure Callback',
+      },
+    ],
+  },
+  {
+    path: 'bootstrap',
+    children: [
+      {
+        path: 'bootstrap-test.component',
+        link: '/bootstrap/bootstrap-test.component',
+        component: 'BootstrapTestComponent',
+        name: 'Bootstrap Test',
       },
     ],
   },

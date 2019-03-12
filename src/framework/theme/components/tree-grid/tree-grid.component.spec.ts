@@ -1,14 +1,33 @@
 import { Component, QueryList, Type, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { EMPTY } from 'rxjs';
+import { take } from 'rxjs/operators';
+import createSpy = jasmine.createSpy;
 import {
   NbThemeModule,
   NbTreeGridComponent,
   NbTreeGridDataSource,
   NbTreeGridModule,
-  NbTreeGridNode,
   NbTreeGridRowComponent,
   NB_ROW_DOUBLE_CLICK_DELAY,
+  NbTreeGridDataSourceBuilder,
+  NbTreeGridPresentationNode,
+  NbGetters,
 } from '@nebular/theme';
+
+interface TreeNode<T> {
+  data: T;
+  expanded?: boolean,
+  children?: TreeNode<T>[];
+}
+
+interface CustomStructure {
+  a: string;
+  b: string;
+  c: string;
+  childNodes?: CustomStructure[];
+  expanded?: boolean;
+}
 
 class BaseTreeGridTestComponent {
   columns: string[];
@@ -50,7 +69,7 @@ export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {
 function setupFixture(
     componentType: Type<any>,
     columns: string[],
-    data?: NbTreeGridNode<any>[],
+    data?: TreeNode<any>[],
   ): ComponentFixture<any> {
 
   TestBed.configureTestingModule({
@@ -69,24 +88,29 @@ function setupFixture(
 }
 
 const abcColumns: string[] = [ 'a', 'b', 'c' ];
-const twoRowsData: NbTreeGridNode<any>[] = [
+const twoRowsData: TreeNode<any>[] = [
   { data: { a: 'a1', b: 'b1', c: 'c1' } },
   { data: { a: 'a2', b: 'b2', c: 'c2' } },
 ];
-const nestedRowData: NbTreeGridNode<any>[] = [
+const nestedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
     children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
   },
 ];
-const nestedExpandedRowData: NbTreeGridNode<any>[] = [
+const nestedExpandedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
     expanded: true,
     children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
   },
 ];
-
+const customStructureData: CustomStructure[] = [
+  {
+    a: 'a1', b: 'b1', c: 'c1', expanded: true,
+    childNodes: [{ a: 'a2', b: 'b2', c: 'c2' }],
+  },
+];
 
 describe('NbTreeGridComponent', () => {
 
@@ -177,4 +201,72 @@ describe('NbTreeGridComponent', () => {
     const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(2);
   }));
+
+  describe('NbTreeGridDataSourceBuilder custom node getters', () => {
+    const mockConnectionViewer = { viewChange: EMPTY };
+    const getters: NbGetters<CustomStructure, CustomStructure> = {
+      dataGetter: node => node,
+      childrenGetter: node => node.childNodes,
+      expandedGetter: node => !!node.expanded,
+    };
+    let dataSourceBuilder: NbTreeGridDataSourceBuilder<CustomStructure>;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [ NbThemeModule.forRoot(), NbTreeGridModule ],
+      });
+    });
+    beforeEach(inject([ NbTreeGridDataSourceBuilder ], builder => {
+      dataSourceBuilder = builder;
+    }));
+
+    it('should use custom data accessor if provided', fakeAsync(() => {
+      const dataGetterSpy = createSpy('dataGetter', getters.dataGetter).and.callThrough();
+      const spyGetters = { ...getters, dataGetter: dataGetterSpy };
+
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
+      expect(dataGetterSpy).toHaveBeenCalledTimes(2);
+
+      let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
+      dataSource.connect(mockConnectionViewer)
+        .pipe(take(1))
+        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+      tick();
+
+      expect(presentationNodes[0].data).toEqual(customStructureData[0]);
+      expect(presentationNodes[1].data).toEqual(customStructureData[0].childNodes[0]);
+    }));
+
+    it('should use custom children accessor if provided', fakeAsync(() => {
+      const childrenGetterSpy = createSpy('childrenGetter', getters.childrenGetter).and.callThrough();
+      const spyGetters = { ...getters, childrenGetter: childrenGetterSpy };
+
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
+      expect(childrenGetterSpy).toHaveBeenCalledTimes(2);
+
+      let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
+      dataSource.connect(mockConnectionViewer)
+        .pipe(take(1))
+        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+      tick();
+
+      expect(presentationNodes[0].data.childNodes[0]).toEqual(customStructureData[0].childNodes[0]);
+    }));
+
+    it('should use custom expanded accessor if provided', fakeAsync(() => {
+      const expandedGetterSpy = createSpy('expandedGetter', getters.expandedGetter).and.callThrough();
+      const spyGetters = { ...getters, expandedGetter: expandedGetterSpy };
+
+      const dataSource = dataSourceBuilder.create(customStructureData, spyGetters);
+      expect(expandedGetterSpy).toHaveBeenCalledTimes(2);
+
+      let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
+      dataSource.connect(mockConnectionViewer)
+        .pipe(take(1))
+        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+      tick();
+
+      expect(presentationNodes[0].expanded).toEqual(true);
+    }));
+  });
 });

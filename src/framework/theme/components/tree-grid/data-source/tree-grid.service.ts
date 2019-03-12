@@ -46,7 +46,7 @@ export class NbTreeGridService<T> {
     const toCheck: NbTreeGridPresentationNode<T>[] = [...data];
 
     for (const node of toCheck) {
-      if (node.node.data === row) {
+      if (node.data === row) {
         return node;
       }
 
