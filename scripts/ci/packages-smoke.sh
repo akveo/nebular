@@ -14,10 +14,7 @@ packages_smoke() {
   npm install
 
   echo "Installing built packages"
-  mkdir -p node_modules/@nebular
   cp -r ../nebular/src/.lib/* node_modules/@nebular
-  # calling npm install again to install new dependencies of @nebular/* packages (added in current pull request)
-  npm install
 
   echo "Verifying application build"
   npm run build --prod --aot
