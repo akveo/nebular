@@ -98,12 +98,35 @@ describe('Date Adapters', () => {
       expect(spy.calls.argsFor(1)).toEqual([ endDate, format ]);
     });
 
-    it('should use format valid date range', () => {
+    it('should format valid date range', () => {
       const range: NbCalendarRange<Date> = { start: new Date(), end: new Date() };
       const format = 'mm/dd/yyyy';
       const spy = spyOn(dateService, 'isValidDateString').and.returnValues(true, true);
 
       expect(adapterService.format(range, format)).toEqual('undefined - undefined');
+      expect(spy).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not format if range isn\'t passed', () => {
+      const spy = spyOn(dateService, 'isValidDateString').and.returnValues(false, false);
+
+      expect(adapterService.format(null, '')).toEqual('');
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should not format if start date is invalid', () => {
+      const range: NbCalendarRange<Date> = { start: new Date(), end: new Date() };
+      const spy = spyOn(dateService, 'isValidDateString').and.returnValue(false);
+
+      expect(adapterService.format(range, '')).toEqual('');
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return only start date if end is invalid', () => {
+      const range: NbCalendarRange<Date> = { start: new Date(), end: new Date() };
+      const spy = spyOn(dateService, 'isValidDateString').and.returnValues(true, false);
+
+      expect(adapterService.format(range, '')).toEqual(undefined);
       expect(spy).toHaveBeenCalledTimes(2);
     });
 
