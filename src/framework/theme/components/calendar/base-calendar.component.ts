@@ -6,8 +6,7 @@
 
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
-import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
-
+import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode, YEARS_IN_VIEW } from '../calendar-kit';
 
 /**
  * The basis for calendar and range calendar components.
@@ -139,6 +138,6 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   }
 
   private changeVisibleYear(direction: number) {
-    this.visibleDate = this.dateService.addYear(this.visibleDate, direction * 20);
+    this.visibleDate = this.dateService.addYear(this.visibleDate, direction * YEARS_IN_VIEW);
   }
 }
