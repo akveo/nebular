@@ -399,6 +399,7 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
     }
 
     if (date) {
+      this.visibleDate = date;
       this.picker.visibleDate = date;
       this.picker.date = date;
     }
@@ -449,7 +450,9 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     }
 
     if (range) {
-      this.picker.visibleDate = range && range.start;
+      const visibleDate = range && range.start;
+      this.visibleDate = visibleDate;
+      this.picker.visibleDate = visibleDate;
       this.picker.range = range;
     }
   }
