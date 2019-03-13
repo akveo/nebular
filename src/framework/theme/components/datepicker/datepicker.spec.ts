@@ -101,8 +101,7 @@ describe('nb-datepicker', () => {
     cell.dispatchEvent(new Event('click'));
   });
 
-  it('should select date typed in to the input', () => {
-    datepicker.visibleDate = new Date(2018, 8, 17);
+  it('should start from date typed into the input', () => {
     input.value = 'Sep 17, 2018';
     input.dispatchEvent(new Event('input'));
     showDatepicker();
@@ -111,6 +110,37 @@ describe('nb-datepicker', () => {
     const cell = overlay.querySelector('.day-cell.selected'); // it's input value date cell
 
     expect(cell.textContent).toContain('17');
+  });
+
+  it('should start from current date if input is empty', () => {
+    showDatepicker();
+    appRef.tick();
+    expect(overlay.querySelector('.day-cell.today')).toBeDefined();
+  });
+
+  it('should start from current date if input value is invalid', () => {
+    input.value = 'definitely not a date';
+    input.dispatchEvent(new Event('input'));
+    showDatepicker();
+    appRef.tick();
+    expect(overlay.querySelector('.day-cell.today')).toBeDefined();
+  });
+
+  it('should update visible date if input value changed', () => {
+    const initialDate = new Date(2000, 0, 1);
+    datepicker.visibleDate = initialDate;
+
+    const date = 17;
+    const month = 8;
+    const year = 2018;
+    input.value = 'Sep 17, 2018';
+    input.dispatchEvent(new Event('input'));
+    showDatepicker();
+    appRef.tick();
+
+    expect(datepicker.visibleDate.getDate()).toEqual(date);
+    expect(datepicker.visibleDate.getMonth()).toEqual(month);
+    expect(datepicker.visibleDate.getFullYear()).toEqual(year);
   });
 
   it('should be valid if empty', () => {
