@@ -410,7 +410,11 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const date = this.queue;
+      this.queue = null;
+      this.value = date;
+    }
   }
 }
 
@@ -466,6 +470,10 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const range = this.queue;
+      this.queue = null;
+      this.value = range;
+    }
   }
 }
