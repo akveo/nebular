@@ -327,7 +327,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       // When writing is finished, change detection starts again, since
       // microtasks queue is empty.
       // Prevents ExpressionChangedAfterItHasBeenCheckedError.
-      Promise.resolve().then(() => this.writeValue(this.queue));
+      Promise.resolve().then(() => {
+        this.writeValue(this.queue);
+        this.queue = null;
+      });
     }
   }
 
