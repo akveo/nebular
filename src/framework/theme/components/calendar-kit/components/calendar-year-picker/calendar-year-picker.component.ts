@@ -19,8 +19,8 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
 import { NbDateService } from '../../services';
 
-
-const defaultYearCount = 20;
+export const YEARS_IN_VIEW = 20;
+export const YEARS_IN_COLUMN = 4;
 
 @Component({
   selector: 'nb-calendar-year-picker',
@@ -83,9 +83,9 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
   initYears() {
     const selectedYear = this.dateService.getYear(this.year);
-    const startYear = Math.ceil(selectedYear - defaultYearCount / 2);
-    const years = range(defaultYearCount).map(i => this.createYearDateByIndex(i + startYear));
-    this.years = batch(years, 4);
+    const startYear = Math.ceil(selectedYear - YEARS_IN_VIEW / 2);
+    const years = range(YEARS_IN_VIEW).map(i => this.createYearDateByIndex(i + startYear));
+    this.years = batch(years, YEARS_IN_COLUMN);
   }
 
   onSelect(year) {
