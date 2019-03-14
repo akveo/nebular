@@ -38,7 +38,11 @@ export class NbDateFnsDateService extends NbNativeDateService {
   }
 
   format(date: Date, format: string): string {
-    return formatDate(date, format || this.options.format, this.options.formatOptions);
+    if (date) {
+      return formatDate(date, format || this.options.format, this.options.formatOptions);
+    }
+
+    return '';
   }
 
   parse(date: string, format: string): Date {
