@@ -17,7 +17,7 @@ task('version', () => {
   return fs.readdirSync(FRAMEWORK_ROOT)
     .filter(keepNebularPackages)
     .map(createFullPathToPackageJson)
-    .concat('./package.json')
+    .concat(['./package.json', './packages-smoke/package.json'])
     .map(bumpVersionAndNebularPeers);
 });
 
@@ -39,6 +39,11 @@ function bumpVersionAndNebularPeers(pkgPath: string) {
         Object.keys(pkgJson.peerDependencies)
           .filter(peer => peer.includes('@nebular'))
           .forEach(peer => pkgJson.peerDependencies[peer] = VERSION);
+      }
+      if (pkgJson.dependencies) {
+        Object.keys(pkgJson.dependencies)
+          .filter(dep => dep.includes('@nebular'))
+          .forEach(dep => pkgJson.dependencies[dep] = VERSION);
       }
 
       file.contents = Buffer.from(JSON.stringify(pkgJson, null, 2));
