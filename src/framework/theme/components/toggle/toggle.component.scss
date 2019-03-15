@@ -1,0 +1,43 @@
+@import '../../styles/core/mixins';
+
+:host {
+  display: inline-flex;
+  outline: none;
+
+  .toggle-label {
+    position: relative;
+    display: inline-flex;
+    border-radius: inherit;
+
+    input {
+      display: none;
+
+      &:not(:checked) + .toggle {
+        > .toggle-switcher::after {
+          content: none;
+        }
+      }
+    }
+
+    .toggle {
+      position: relative;
+      display: inline-flex;
+      border-radius: inherit;
+      box-sizing: content-box;
+
+      .toggle-switcher {
+        position: absolute;
+        border-radius: 50%;
+
+        // TODO: use svg icon instead
+        &::after {
+          content: '';
+          border-top: none;
+          border-right: none;
+          position: absolute;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}

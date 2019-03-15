@@ -18,6 +18,7 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbButtonModule,
+  NbToggleModule,
   NbSelectModule,
   NbInputModule,
 } from '@nebular/theme';
@@ -96,6 +97,7 @@ import {
     NbMenuModule,
     NbTabsetModule,
     NbCheckboxModule,
+    NbToggleModule,
     NgdHeaderComponent,
     NgdHeroComponent,
     NgdIconCardComponent,

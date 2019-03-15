@@ -1,0 +1,117 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin toggle-styles($border-size, $color) {
+  .toggle {
+    background-color: $color;
+    border: $border-size solid $color;
+  }
+}
+
+@mixin toggle-outline($size, $color) {
+  &:not(.disabled):focus .toggle, &:not(.disabled):hover .toggle {
+    // TODO: rid of SASS color functions
+    box-shadow: 0 0 0 $size rgba($color, nb-theme(toggle-outline-opacity));
+  }
+}
+
+@mixin toggle-off-styles($color) {
+  input {
+    &:not(:checked) + .toggle {
+      // TODO: rid of SASS color functions
+      background-color: rgba($color, nb-theme(toggle-off-opacity));
+    }
+  }
+}
+
+@mixin toggle-switcher-styles($color) {
+  .toggle-switcher {
+    background-color: nb-theme(toggle-switcher-bg);
+
+    &::after {
+      border-color: $color;
+    }
+  }
+}
+
+@mixin nb-toggle-theme() {
+  nb-toggle {
+    margin: nb-theme(toggle-outline-size) 0;
+    border-radius: nb-theme(toggle-size);
+
+    @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-primary));
+
+    input {
+      &:not(:checked) + .toggle {
+        // TODO: rid of SASS color functions
+        background-color: rgba(nb-theme(color-primary), nb-theme(toggle-off-opacity));
+      }
+    }
+
+    &.disabled .toggle {
+      opacity: nb-theme(toggle-disabled-opacity);
+    }
+
+    .toggle {
+      height: nb-theme(toggle-size);
+      width: calc(#{nb-theme(toggle-size)} * 2);
+      background-color: nb-theme(toggle-bg);
+      border: nb-theme(toggle-borders-size) solid nb-theme(toggle-bg);
+
+      @include toggle-switcher-styles(nb-theme(color-primary));
+    }
+
+    .toggle-switcher {
+      width: nb-theme(toggle-size);
+      height: nb-theme(toggle-size);
+
+      // TODO: use svg icon instead
+      &::after {
+        height: calc(#{nb-theme(toggle-size)} / 4);
+        width: calc(#{nb-theme(toggle-size)} / 2 - 1px);
+        top: calc(#{nb-theme(toggle-size)} / 4);
+        left: calc(#{nb-theme(toggle-size)} / 4);
+        border-width: calc(#{nb-theme(toggle-size)} / 10);
+        border-style: solid;
+      }
+    }
+
+    &.primary {
+      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-primary));
+      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-primary));
+      @include toggle-off-styles(nb-theme(color-primary));
+      @include toggle-switcher-styles(nb-theme(color-primary));
+    }
+
+    &.success {
+      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-success));
+      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-success));
+      @include toggle-off-styles(nb-theme(color-success));
+      @include toggle-switcher-styles(nb-theme(color-success));
+    }
+
+    &.warning {
+      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-warning));
+      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-warning));
+      @include toggle-off-styles(nb-theme(color-warning));
+      @include toggle-switcher-styles(nb-theme(color-warning));
+    }
+
+    &.danger {
+      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-danger));
+      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-danger));
+      @include toggle-off-styles(nb-theme(color-danger));
+      @include toggle-switcher-styles(nb-theme(color-danger));
+    }
+
+    &.info {
+      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-info));
+      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-info));
+      @include toggle-off-styles(nb-theme(color-info));
+      @include toggle-switcher-styles(nb-theme(color-info));
+    }
+  }
+}

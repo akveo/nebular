@@ -1324,6 +1324,35 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'toggle',
+    children: [
+      {
+        path: 'toggle-disabled.component',
+        link: '/toggle/toggle-disabled.component',
+        component: 'ToggleDisabledComponent',
+        name: 'Toggle Disabled',
+      },
+      {
+        path: 'toggle-showcase.component',
+        link: '/toggle/toggle-showcase.component',
+        component: 'ToggleShowcaseComponent',
+        name: 'Toggle Showcase',
+      },
+      {
+        path: 'toggle-status.component',
+        link: '/toggle/toggle-status.component',
+        component: 'ToggleStatusComponent',
+        name: 'Toggle Status',
+      },
+      {
+        path: 'toggle-test.component',
+        link: '/toggle/toggle-test.component',
+        component: 'ToggleTestComponent',
+        name: 'Toggle Test',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {
