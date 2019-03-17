@@ -144,9 +144,8 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   protected attachTemplate() {
-    this.overlayContainer.attachTemplatePortal(new NbTemplatePortal(this.content as TemplateRef<any>, null, {
-      $implicit: this.context,
-    }));
+    this.overlayContainer
+      .attachTemplatePortal(new NbTemplatePortal(this.content as TemplateRef<any>, null, this.context));
   }
 
   protected attachComponent() {

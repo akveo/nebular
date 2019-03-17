@@ -173,7 +173,7 @@ export class NbWindowService {
     const ref = this.windowsContainerViewRef.createComponent(windowFactory, null, injector);
     ref.instance.cfr = this.cfr;
     ref.changeDetectorRef.detectChanges();
-    return ref
+    return ref;
   }
 
   protected subscribeToEvents(windowRef: NbWindowRef) {
