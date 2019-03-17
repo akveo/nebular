@@ -62,7 +62,11 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   format(date: Moment, format: string): string {
-    return date.format(format || this.localeData.defaultFormat);
+    if (date) {
+      return date.format(format || this.localeData.defaultFormat);
+    }
+
+    return '';
   }
 
   getDate(date: Moment): number {

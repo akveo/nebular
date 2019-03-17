@@ -44,7 +44,7 @@ export function getPlaygroundRootDir(tree: Tree): DirEntry {
  * Returns DirEntries of root playground directories excluding ignored.
  * @param tree
  */
-function getPlaygroundDirs(tree: Tree): DirEntry[] {
+export function getPlaygroundDirs(tree: Tree): DirEntry[] {
   const pgDir = getPlaygroundRootDir(tree);
 
   return pgDir.subdirs
