@@ -10,6 +10,10 @@ export const routes: Routes = [
     path: '',
     loadChildren: './without-layout/without-layout.module#WithoutLayoutModule',
   },
+  {
+    path: '',
+    loadChildren: './without-styles/without-styles.module#WithoutStylesModule',
+  },
 ];
 
 @NgModule({
