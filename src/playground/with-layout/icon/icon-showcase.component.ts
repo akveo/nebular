@@ -18,7 +18,6 @@ export class IconShowcaseComponent {
     this.iconsLibrary.registerFontPack('nebular', { packClass: 'nb', iconPrefix: 'nb' });
 
     // package release setup
-    // tests
     // on push
     // update all icon components
     // migration strategy (for nebular icons, and when eva becomes default)

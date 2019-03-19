@@ -10,7 +10,7 @@ export enum NbIconPackType  {
 }
 
 export interface NbIconPackParams {
-  packClass: string,
+  packClass?: string,
   iconPrefix?: string,
   [name: string]: any,
 }

@@ -11,29 +11,33 @@ export interface NbIcon {
 
 export class NbFontIcon implements NbIcon {
 
-  constructor(protected name, protected content: any, protected params: NbIconPackParams) {}
+  constructor(protected name, protected content: any, protected params: NbIconPackParams = {}) {}
 
   getAttributes(options?: NbIconOptions) {
     const name = this.params.iconPrefix ? `${this.params.iconPrefix}-${this.name}` : this.name;
 
     return {
-      'class': `${name} ${this.params.packClass}`,
+      'class': this.params.packClass ? `${name} ${this.params.packClass}` : name,
     };
   }
 
   render(options?: NbIconOptions): string {
-    return '';
+    return this.content;
   }
 }
 
 export class NbSvgIcon implements NbIcon {
 
-  constructor(protected name, protected content: any, protected params: NbIconPackParams) {}
+  constructor(protected name, protected content: any, protected params: NbIconPackParams = {}) {}
 
   getAttributes(options?: NbIconOptions) {
-    return {
-      'class': `${this.params.packClass}`,
-    };
+    if (this.params.packClass) {
+      return {
+        'class': `${this.params.packClass}`,
+      };
+
+    }
+    return {};
   }
 
   render(options?: NbIconOptions): string {
