@@ -7,6 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbIconModule, NbButtonModule, NbCardModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { IconRoutingModule } from './icon-routing.module';
 import { IconShowcaseComponent } from './icon-showcase.component';
@@ -18,6 +19,7 @@ import { IconShowcaseComponent } from './icon-showcase.component';
   imports: [
     CommonModule,
     NbIconModule,
+    NbEvaIconsModule,
     NbButtonModule,
     NbCardModule,
     IconRoutingModule,

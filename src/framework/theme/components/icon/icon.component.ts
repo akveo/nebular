@@ -4,10 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges, OnInit,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { NbIconLibraryService } from './icon-library.service';
+import { NbIconsLibrary } from '../../services/icons';
 
 /**
  * Icon component.
@@ -88,11 +96,9 @@ import { NbIconLibraryService } from './icon-library.service';
 @Component({
   selector: 'nb-icon',
   styleUrls: [`./icon.component.scss`],
-  template: `
-    <ng-template>{{ iconSVG }}</ng-template>
-  `,
+  template: '',
 })
-export class NbIconComponent {
+export class NbIconComponent implements OnChanges, OnInit {
 
   static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
@@ -100,26 +106,10 @@ export class NbIconComponent {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
+  private iconDef;
+
   @HostBinding('innerHtml')
-  iconSVG: SafeHtml;
-
-  @Input()
-  set icon(icon: string) {
-    // this.iconSVG = this.sanitizer.bypassSecurityTrustHtml(icons[icon].toSvg({
-    //   width: '100%',
-    //   height: '100%',
-    //   fill: 'currentColor',
-    // }));
-
-    this.iconSVG = this.sanitizer.bypassSecurityTrustHtml(this.iconLibrary.getSvgIcon(icon));
-  }
-
-  /**
-   * Icon status (adds specific styles):
-   * primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input() status: string;
+  html: SafeHtml;
 
   @HostBinding('class.primary-icon')
   get primary() {
@@ -146,16 +136,44 @@ export class NbIconComponent {
     return this.status === NbIconComponent.STATUS_DANGER;
   }
 
+  @Input() icon: string;
+
+  @Input() pack: string;
+
+  @Input() options: { [name: string]: any };
+
   /**
    * Icon status (adds specific styles):
    * primary, info, success, warning, danger
    * @param {string} val
    */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
+  @Input() status: string;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private iconLibrary: NbIconsLibrary,
+    private el: ElementRef,
+    private renderer: Renderer2,
+  ) {}
+
+  ngOnInit() {
+    this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
   }
 
-  constructor(private sanitizer: DomSanitizer, private iconLibrary: NbIconLibraryService) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.iconDef) {
+      this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
+    }
+  }
+
+  renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
+    const icon = this.iconLibrary.getIcon(name, pack);
+
+    this.html = this.sanitizer.bypassSecurityTrustHtml(icon.icon.render(options));
+
+    Object.entries(icon.icon.getAttributes(options)).forEach(([attr, value]: [string, string]) => {
+      this.renderer.setAttribute(this.el.nativeElement, attr, value);
+    });
+    return icon;
   }
 }
