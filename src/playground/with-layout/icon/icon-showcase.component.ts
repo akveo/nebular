@@ -5,7 +5,6 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbIconsLibrary } from '@nebular/theme';
 
 @Component({
   selector: 'nb-icon-showcase',
@@ -14,11 +13,9 @@ import { NbIconsLibrary } from '@nebular/theme';
 })
 export class IconShowcaseComponent {
 
-  constructor(private iconsLibrary: NbIconsLibrary) {
-    this.iconsLibrary.registerFontPack('nebular', { packClass: 'nb', iconPrefix: 'nb' });
+  constructor() {
 
     // package release setup
-    // on push
     // update all icon components
     // migration strategy (for nebular icons, and when eva becomes default)
     // do examples:

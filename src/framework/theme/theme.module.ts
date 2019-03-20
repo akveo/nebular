@@ -70,6 +70,7 @@ export class NbThemeModule {
         { provide: NB_WINDOW, useFactory: nbWindowFactory },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
         NbJSThemesRegistry,
+        NbIconsLibrary,
         NbThemeService,
         NbMediaBreakpointsService,
         NbSpinnerService,
@@ -78,7 +79,6 @@ export class NbThemeModule {
         NbLayoutScrollService,
         NbLayoutRulerService,
         ...NbOverlayModule.forRoot().providers,
-        NbIconsLibrary,
       ],
     };
   }
