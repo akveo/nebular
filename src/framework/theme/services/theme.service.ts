@@ -37,6 +37,7 @@ export class NbThemeService {
     }
     // @breaking-change 4.0.0 remove and replace with eva-icons module
     this.iconsLibrary.registerFontPack('nebular', { iconPrefix: 'nb' });
+    this.iconsLibrary.setDefaultPack('nebular');
   }
 
   /**
