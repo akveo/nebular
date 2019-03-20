@@ -5,11 +5,13 @@
  */
 
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostBinding,
   Input,
-  OnChanges, OnInit,
+  OnChanges,
+  OnInit,
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
@@ -97,6 +99,7 @@ import { NbIconsLibrary } from '../../services/icons';
   selector: 'nb-icon',
   styleUrls: [`./icon.component.scss`],
   template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbIconComponent implements OnChanges, OnInit {
 

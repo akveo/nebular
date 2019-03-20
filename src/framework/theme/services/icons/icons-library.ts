@@ -89,7 +89,7 @@ export class NbIconsLibrary {
       name,
       pack: iconsPack.name,
       type: NbIconPackType.FONT,
-      icon: this.createFontIcon(name, icon, iconsPack.params),
+      icon: this.createFontIcon(name, icon ? icon : '', iconsPack.params),
     };
   }
 

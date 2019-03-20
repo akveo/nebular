@@ -119,7 +119,7 @@ describe('icons-library', () => {
 
     const icon = iconsLibrary.getFontIcon('home');
 
-    expect(icon.icon.render()).toEqual(undefined);
+    expect(icon.icon.render()).toEqual('');
     expect(icon.icon.getAttributes().class).toEqual('fp-home font');
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('font-pack');
@@ -136,7 +136,7 @@ describe('icons-library', () => {
     const icon = iconsLibrary.getIcon('home');
     const svgIcon = iconsLibrary.getIcon('home', 'super-pack');
 
-    expect(icon.icon.render()).toEqual(undefined);
+    expect(icon.icon.render()).toEqual('');
     expect(icon.icon.getAttributes().class).toEqual('fp-home font');
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('font-pack');
