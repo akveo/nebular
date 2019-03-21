@@ -42,7 +42,31 @@ $theme: (
   color-fg-text: #4b4b4b,
   color-fg-highlight: #40dc7e,
 
-  separator: #ebeef2,
+  separator: #ebeef2,// TODO: move to constants
+  social-color-facebook: #3b5998,
+  social-color-twitter: #55acee,
+  social-color-google: #dd4b39,
+  social-color-linkedin: #0177b5,
+  social-color-github: #6b6b6b,
+  social-color-stackoverflow: #2f96e8,
+  social-color-dribble: #f26798,
+  social-color-behance: #0093fa,
+
+  shadow: 0 2px 12px 0 #dfe3eb,
+
+  link-color: #3dcc6d,
+  link-color-hover: #2ee56b,
+  link-color-visited: link-color,
+
+  scrollbar-fg: #dadada,
+  scrollbar-bg: #f2f2f2,
+  scrollbar-width: 5px,
+  scrollbar-thumb-radius: 2.5px,
+
+  radial-gradient: none,
+  linear-gradient: none,
+
+  /* new */
 
   color-white: #ffffff,
   color-black: #000000,
@@ -116,30 +140,6 @@ $theme: (
   color-basic-700: #6a7385,
   color-basic-800: #4b5466,
   color-basic-900: #2c3547,
-
-  // TODO: move to constants
-  social-color-facebook: #3b5998,
-  social-color-twitter: #55acee,
-  social-color-google: #dd4b39,
-  social-color-linkedin: #0177b5,
-  social-color-github: #6b6b6b,
-  social-color-stackoverflow: #2f96e8,
-  social-color-dribble: #f26798,
-  social-color-behance: #0093fa,
-
-  shadow: 0 2px 12px 0 #dfe3eb,
-
-  link-color: #3dcc6d,
-  link-color-hover: #2ee56b,
-  link-color-visited: link-color,
-
-  scrollbar-fg: #dadada,
-  scrollbar-bg: #f2f2f2,
-  scrollbar-width: 5px,
-  scrollbar-thumb-radius: 2.5px,
-
-  radial-gradient: none,
-  linear-gradient: none,
 
   outline-width: 6px,
   outline-color: color-basic-300,
