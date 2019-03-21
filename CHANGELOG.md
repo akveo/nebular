@@ -1,3 +1,69 @@
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/akveo/nebular/compare/v3.4.0...v3.4.1) (2019-03-18)
+
+
+### Bug Fixes
+
+* **context-menu:** updated context menu arrow left position calculation ([#1268](https://github.com/akveo/nebular/issues/1268)) ([0db8c2c](https://github.com/akveo/nebular/commit/0db8c2c)), closes [#973](https://github.com/akveo/nebular/issues/973)
+* **date service:** prevent format calls if date isn't passed ([#1291](https://github.com/akveo/nebular/issues/1291)) ([a3d6035](https://github.com/akveo/nebular/commit/a3d6035))
+* **datepicker:**  start from date typed in input ([#1300](https://github.com/akveo/nebular/issues/1300)) ([dfc75f0](https://github.com/akveo/nebular/commit/dfc75f0))
+* **docs:** add search container class ([#1270](https://github.com/akveo/nebular/issues/1270)) ([e1a84f4](https://github.com/akveo/nebular/commit/e1a84f4))
+* **select:** update selected after cd run is finished ([#1299](https://github.com/akveo/nebular/issues/1299)) ([2a1f113](https://github.com/akveo/nebular/commit/2a1f113))
+* **window:** Fixed window.component.ts creating incorrect context ([#1266](https://github.com/akveo/nebular/issues/1266)) ([30f4a5d](https://github.com/akveo/nebular/commit/30f4a5d))
+
+
+### Features
+
+* **playground:** add without-styles folder for bootstrap like use-cases ([#1271](https://github.com/akveo/nebular/issues/1271)) ([8e852ca](https://github.com/akveo/nebular/commit/8e852ca))
+* **smoke:** include packages-smoke update into release ([#1258](https://github.com/akveo/nebular/issues/1258)) ([8db4b29](https://github.com/akveo/nebular/commit/8db4b29))
+
+
+
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/akveo/nebular/compare/v3.3.0...v3.4.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* **datepicker:** make it valid in case of empty input ([#1247](https://github.com/akveo/nebular/issues/1247)) ([799b8b8](https://github.com/akveo/nebular/commit/799b8b8)), closes [#1182](https://github.com/akveo/nebular/issues/1182)
+* **docs:** fix password strategy link ([#1245](https://github.com/akveo/nebular/issues/1245)) ([c71d9fd](https://github.com/akveo/nebular/commit/c71d9fd))
+
+
+### Dev Features
+
+* **route-tabset:** configurable routerLinkActiveOptions ([#1239](https://github.com/akveo/nebular/issues/1239)) ([3cf29d8](https://github.com/akveo/nebular/commit/3cf29d8))
+* **tree-grid:** allow specify getters for node properties ([#1254](https://github.com/akveo/nebular/issues/1254)) ([a263a2e](https://github.com/akveo/nebular/commit/a263a2e))
+
+
+
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/akveo/nebular/compare/v3.2.1...v3.3.0) (2019-02-18)
+
+
+### Highlights
+
+New [Tree Grid](https://akveo.github.io/nebular/docs/components/tree-grid/overview) component is here! :palm_tree:
+
+### Bug Fixes
+
+* **auth:** allow empty logout endpoint ([#1211](https://github.com/akveo/nebular/issues/1211)) ([564138d](https://github.com/akveo/nebular/commit/564138d))
+* **datepicker:** date fns date format ([#1172](https://github.com/akveo/nebular/issues/1172)) ([257eb9a](https://github.com/akveo/nebular/commit/257eb9a))
+* **dialog:** accept partial of component in NbDialogService open context  ([#1175](https://github.com/akveo/nebular/issues/1175)) ([9a5f4d9](https://github.com/akveo/nebular/commit/9a5f4d9)), closes [#1173](https://github.com/akveo/nebular/issues/1173)
+* **docs:** footer email link ([#1206](https://github.com/akveo/nebular/issues/1206)) ([2e44bbc](https://github.com/akveo/nebular/commit/2e44bbc))
+* **layout:** typo in basic usage example ([#1213](https://github.com/akveo/nebular/issues/1213)) ([6b21fe3](https://github.com/akveo/nebular/commit/6b21fe3)), closes [#1212](https://github.com/akveo/nebular/issues/1212)
+* **menu:** correct example property usage ([#1216](https://github.com/akveo/nebular/issues/1216)) ([87ecccf](https://github.com/akveo/nebular/commit/87ecccf))
+* **security:** make config work with strict ts mode ([#1215](https://github.com/akveo/nebular/issues/1215)) ([7c78d6c](https://github.com/akveo/nebular/commit/7c78d6c)), closes [#1166](https://github.com/akveo/nebular/issues/1166)
+* **toastr:** recreate container if it's not attached to dom ([#1224](https://github.com/akveo/nebular/issues/1224)) ([3343136](https://github.com/akveo/nebular/commit/3343136)), closes [#1099](https://github.com/akveo/nebular/issues/1099)
+
+
+### Features
+
+* **context-menu:** add dynamic inputs ([#1221](https://github.com/akveo/nebular/issues/1221)) ([9f8d659](https://github.com/akveo/nebular/commit/9f8d659)), closes [#1101](https://github.com/akveo/nebular/issues/1101) [#1073](https://github.com/akveo/nebular/issues/1073)
+* **docs:** [@docs-private](https://github.com/docs-private) support ([#1231](https://github.com/akveo/nebular/issues/1231)) ([dc33127](https://github.com/akveo/nebular/commit/dc33127))
+* **theme:** multiple values for nb-(except-)for-theme ([#1218](https://github.com/akveo/nebular/issues/1218)) ([6c9e11c](https://github.com/akveo/nebular/commit/6c9e11c))
+* **theme:** add new TreeGrid component ([#1226](https://github.com/akveo/nebular/issues/1226)) ([6c9e11c](https://github.com/akveo/nebular/commit/3d64818))
+
+
 <a name="3.2.1"></a>
 ## [3.2.1](https://github.com/akveo/nebular/compare/v3.2.0...v3.2.1) (2019-01-31)
 

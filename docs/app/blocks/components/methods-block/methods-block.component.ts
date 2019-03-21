@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NgdMetadataService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-methods-block',
@@ -49,6 +50,8 @@ export class NgdMethodsBlockComponent {
 
   @Input('source')
   set setSource(source: any) {
-    this.methods = source.methods;
+    this.methods = source.methods.filter(m => this.metadataService.isPublic(m));
   };
+
+  constructor(private metadataService: NgdMetadataService) {}
 }

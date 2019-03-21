@@ -45,6 +45,7 @@ import {
   NgdPaginationService,
   NgdAnalytics,
   NgdMenuService,
+  NgdMetadataService,
 } from './services';
 
 
@@ -111,6 +112,7 @@ export class NgdThemeModule {
         NgdAnalytics,
         NgdMenuService,
         NgdVisibilityService,
+        NgdMetadataService,
       ],
     };
   }

@@ -1,6 +1,6 @@
 {
   "name": "@nebular/security",
-  "version": "3.2.1",
+  "version": "3.4.1",
   "description": "@nebular/security",
   "main": "./bundles/security.umd.js",
   "module": "./index.js",

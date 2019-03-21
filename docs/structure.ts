@@ -482,6 +482,28 @@ export const structure = [
           'NbCalendarKitModule',
         ],
       },
+      {
+        type: 'group',
+        name: 'Data Table',
+      },
+      {
+        type: 'tabs',
+        name: 'Tree Grid',
+        icon: 'tree-grid.svg',
+        source: [
+          'NbTreeGridComponent',
+          'NbTreeGridPresentationNode',
+          'NbTreeGridSortService',
+          'NbTreeGridFilterService',
+          'NbTreeGridColumnDefDirective',
+          'NbTreeGridRowDefDirective',
+          'NbTreeGridRowComponent',
+          'NbSortDirective',
+          'NbSortHeaderComponent',
+          'NbFilterInputDirective',
+          'NbTreeGridRowToggleDirective',
+        ],
+      },
     ],
   },
   {

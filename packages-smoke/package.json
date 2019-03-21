@@ -1,6 +1,6 @@
 {
   "name": "packages-smoke",
-  "version": "0.0.0",
+  "version": "3.4.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,9 +21,11 @@
     "@angular/platform-browser": "7.0.0",
     "@angular/platform-browser-dynamic": "7.0.0",
     "@angular/router": "7.0.0",
-    "@nebular/auth": "2.0.1",
-    "@nebular/security": "2.0.1",
-    "@nebular/theme": "2.0.1",
+    "@nebular/auth": "^3.0.0",
+    "@nebular/date-fns": "^3.0.0",
+    "@nebular/moment": "^3.0.0",
+    "@nebular/security": "^3.0.0",
+    "@nebular/theme": "^3.0.0",
     "core-js": "^2.5.4",
     "date-fns": "^1.29.0",
     "moment": "^2.22.2",

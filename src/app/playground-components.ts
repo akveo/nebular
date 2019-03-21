@@ -1257,24 +1257,55 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
-    path: 'typography',
+    path: 'tree-grid',
     children: [
       {
-        path: 'typography-showcase.component',
-        link: '/typography/typography-showcase.component',
-        component: 'TypographyShowcaseComponent',
-        name: 'Typography Showcase',
+        path: 'tree-grid-showcase.component',
+        link: '/tree-grid/tree-grid-showcase.component',
+        component: 'TreeGridShowcaseComponent',
+        name: 'Tree Grid Showcase',
       },
-    ],
-  },
-  {
-    path: 'bootstrap',
-    children: [
       {
-        path: 'bootstrap-test.component',
-        link: '/bootstrap/bootstrap-test.component',
-        component: 'BootstrapTestComponent',
-        name: 'Bootstrap Test',
+        path: 'tree-grid-sortable.component',
+        link: '/tree-grid/tree-grid-sortable.component',
+        component: 'TreeGridSortableComponent',
+        name: 'Tree Grid Sortable',
+      },
+      {
+        path: 'tree-grid-filterable.component',
+        link: '/tree-grid/tree-grid-filterable.component',
+        component: 'TreeGridFilterableComponent',
+        name: 'Tree Grid Filterable',
+      },
+      {
+        path: 'tree-grid-basic.component',
+        link: '/tree-grid/tree-grid-basic.component',
+        component: 'TreeGridBasicComponent',
+        name: 'Tree Grid Basic',
+      },
+      {
+        path: 'tree-grid-responsive.component',
+        link: '/tree-grid/tree-grid-responsive.component',
+        component: 'TreeGridResponsiveComponent',
+        name: 'Tree Grid Responsive',
+      },
+      {
+        path: 'tree-grid-custom-icons.component',
+        link: '/tree-grid/tree-grid-custom-icons.component',
+        component: 'TreeGridCustomIconsComponent',
+        name: 'Tree Grid Custom Icons',
+      },
+      {
+        path: 'tree-grid-disable-click-toggle.component',
+        link: '/tree-grid/tree-grid-disable-click-toggle.component',
+        component: 'TreeGridDisableClickToggleComponent',
+        name: 'Tree Grid Disable Click Toggle',
+      },
+      {
+        path: 'tree-grid-custom-node-structure.component',
+        link: '/tree-grid/tree-grid-custom-node-structure.component',
+        component: 'TreeGridCustomNodeStructureComponent',
+        name: 'Tree Grid Custom Node Structure',
       },
     ],
   },
@@ -1310,6 +1341,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/context-menu/context-menu-noop.component',
         component: 'ContextMenuNoopComponent',
         name: 'Context Menu Noop',
+      },
+      {
+        path: 'context-menu-right-click.component',
+        link: '/context-menu/context-menu-right-click.component',
+        component: 'ContextMenuRightClickComponent',
+        name: 'Context Menu Right Click',
       },
     ],
   },
@@ -1579,6 +1616,28 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/azure/callback',
         component: 'AzureCallbackComponent',
         name: 'Azure Callback',
+      },
+    ],
+  },
+  {
+    path: 'typography',
+    children: [
+      {
+        path: 'typography-showcase.component',
+        link: '/typography/typography-showcase.component',
+        component: 'TypographyShowcaseComponent',
+        name: 'Typography Showcase',
+      },
+    ],
+  },
+  {
+    path: 'bootstrap',
+    children: [
+      {
+        path: 'bootstrap-test.component',
+        link: '/bootstrap/bootstrap-test.component',
+        component: 'BootstrapTestComponent',
+        name: 'Bootstrap Test',
       },
     ],
   },

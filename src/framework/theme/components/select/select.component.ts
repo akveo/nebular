@@ -321,19 +321,25 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.createOverlay();
   }
 
+  ngAfterContentInit() {
+    if (this.queue) {
+      // Call 'writeValue' when current change detection run is finished.
+      // When writing is finished, change detection starts again, since
+      // microtasks queue is empty.
+      // Prevents ExpressionChangedAfterItHasBeenCheckedError.
+      Promise.resolve().then(() => {
+        this.writeValue(this.queue);
+        this.queue = null;
+      });
+    }
+  }
+
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
     this.subscribeOnSelectionChange();
-  }
-
-  ngAfterContentInit() {
-    if (this.queue) {
-      this.writeValue(this.queue);
-      this.cd.detectChanges();
-    }
   }
 
   ngOnDestroy() {

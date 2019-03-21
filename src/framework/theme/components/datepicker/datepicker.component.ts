@@ -16,9 +16,13 @@ import {
   OnDestroy,
   Output,
   Type,
+  AfterViewInit,
+  OnInit,
+  SimpleChanges,
+  Optional,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -43,13 +47,15 @@ import {
   NbCalendarViewMode,
   NbDateService,
 } from '../calendar-kit';
-import { NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
+import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements OnChanges, OnDestroy {
+export abstract class NbBasePicker<D, T, P>
+                extends NbDatepicker<T>
+                implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -139,6 +145,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * */
   protected hostRef: ElementRef;
 
+  protected init$: ReplaySubject<void> = new ReplaySubject<void>();
+
   /**
    * Stream of picker changes. Required to be the subject because picker hides and shows and picker
    * change stream becomes recreated.
@@ -156,7 +164,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
    * Queue contains the last value that was applied to the picker when it was hidden.
    * This value will be passed to the picker as soon as it shown.
    * */
-  protected queue: T;
+  protected queue: T | undefined;
 
   protected blur$: Subject<void> = new Subject<void>();
 
@@ -166,6 +174,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
               protected overlay: NbOverlayService,
               protected cfr: ComponentFactoryResolver,
               protected dateService: NbDateService<D>,
+              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) protected dateServiceOptions,
   ) {
     super();
   }
@@ -188,6 +197,10 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     return this.ref && this.ref.hasAttached();
   }
 
+  get init(): Observable<void> {
+    return this.init$.asObservable();
+  }
+
   /**
    * Emits when datepicker looses focus.
    */
@@ -197,18 +210,24 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
 
   protected abstract get pickerValueChange(): Observable<T>;
 
-  ngOnChanges() {
-    if (this.dateService.getId() === 'native' && this.format) {
-      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
-      '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
-      'More information at "Formatting issue" ' +
-      'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+  ngOnInit() {
+    this.checkFormat();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.format && !changes.format.isFirstChange()) {
+      this.checkFormat();
     }
+  }
+
+  ngAfterViewInit() {
+    this.init$.next();
   }
 
   ngOnDestroy() {
     this.alive = false;
     this.hide();
+    this.init$.complete();
 
     if (this.ref) {
       this.ref.dispose();
@@ -328,6 +347,20 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> implements O
     this.picker.size = this.size;
     this.picker.visibleDate = this.visibleDate;
   }
+
+  protected checkFormat() {
+    if (this.dateService.getId() === 'native' && this.format) {
+      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
+        '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
+        'More information at "Formatting issue" ' +
+        'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+    }
+
+    const isFormatSet = this.format || (this.dateServiceOptions && this.dateServiceOptions.format);
+    if (this.dateService.getId() === 'date-fns' && !isFormatSet) {
+      throw new Error('format is required when using NbDateFnsDateModule');
+    }
+  }
 }
 
 /**
@@ -355,8 +388,8 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
     return this.valueChange as EventEmitter<D>;
   }
 
-  get value(): D {
-    return this.picker.date;
+  get value(): D | undefined {
+    return this.picker ? this.picker.date : undefined;
   }
 
   set value(date: D) {
@@ -366,6 +399,7 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
     }
 
     if (date) {
+      this.visibleDate = date;
       this.picker.visibleDate = date;
       this.picker.date = date;
     }
@@ -376,7 +410,11 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const date = this.queue;
+      this.queue = null;
+      this.value = date;
+    }
   }
 }
 
@@ -405,8 +443,8 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     return this.valueChange as EventEmitter<NbCalendarRange<D>>;
   }
 
-  get value(): NbCalendarRange<D> {
-    return this.picker.range;
+  get value(): NbCalendarRange<D> | undefined {
+    return this.picker ? this.picker.range : undefined;
   }
 
   set value(range: NbCalendarRange<D>) {
@@ -416,7 +454,9 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     }
 
     if (range) {
-      this.picker.visibleDate = range && range.start;
+      const visibleDate = range && range.start;
+      this.visibleDate = visibleDate;
+      this.picker.visibleDate = visibleDate;
       this.picker.range = range;
     }
   }
@@ -426,10 +466,14 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
   }
 
   shouldHide(): boolean {
-    return super.shouldHide() && !!(this.value.start && this.value.end);
+    return super.shouldHide() && !!(this.value && this.value.start && this.value.end);
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const range = this.queue;
+      this.queue = null;
+      this.value = range;
+    }
   }
 }
