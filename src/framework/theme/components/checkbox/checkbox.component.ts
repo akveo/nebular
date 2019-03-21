@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { convertToBoolProperty } from '../helpers';
 
@@ -111,6 +111,8 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
   private _indeterminate: boolean = false;
 
+  @Output() change = new EventEmitter();
+
   @HostBinding('class.status-primary')
   get primary() {
     return this.status === 'primary';
@@ -150,6 +152,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   set value(val) {
     this._value = val;
+    this.change.emit(val);
     this.onChange(val);
   }
 
