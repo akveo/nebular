@@ -19,20 +19,20 @@ import { convertToBoolProperty } from '../helpers';
          [routerLink]="link"
          [title]="title"
          *ngIf="link">
-        <i class="control-icon {{ icon }}"></i>
+        <nb-icon [icon]="icon"></nb-icon>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
          *ngIf="href && !link">
-        <i class="control-icon {{ icon }}"></i>
+        <nb-icon [icon]="icon"></nb-icon>
       </a>
       <a class="icon-container"
          href="#"
          [title]="title"
          *ngIf="!href && !link"
          (click)="$event.preventDefault()">
-        <i class="control-icon {{ icon }}"></i>
+        <nb-icon [icon]="icon"></nb-icon>
       </a>
     </ng-container>
 

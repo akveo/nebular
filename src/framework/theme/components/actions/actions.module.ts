@@ -11,6 +11,7 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbActionComponent, NbActionsComponent } from './actions.component';
 
 import { NbBadgeModule } from '../badge/badge.module';
+import { NbIconModule } from '../icon/icon.module';
 
 const NB_ACTIONS_COMPONENTS = [
   NbActionComponent,
@@ -21,6 +22,7 @@ const NB_ACTIONS_COMPONENTS = [
   imports: [
     NbSharedModule,
     NbBadgeModule,
+    NbIconModule,
   ],
   declarations: [
     ...NB_ACTIONS_COMPONENTS,
