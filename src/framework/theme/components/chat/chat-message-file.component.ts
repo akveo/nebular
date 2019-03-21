@@ -23,7 +23,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     <ng-container *ngIf="readyFiles?.length > 1">
       <div class="message-content-group">
         <a *ngFor="let file of readyFiles" [href]="file.url" target="_blank">
-          <span [class]="file.icon" *ngIf="!file.urlStyle"></span>
+          <nb-icon [icon]="file.icon" *ngIf="!file.urlStyle"></nb-icon>
           <div *ngIf="file.isImage" [style.background-image]="file.urlStyle"></div>
         </a>
       </div>
@@ -31,7 +31,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
     <ng-container *ngIf="readyFiles?.length === 1">
       <a [href]="readyFiles[0].url" target="_blank">
-        <span [class]="readyFiles[0].icon"  *ngIf="!readyFiles[0].urlStyle"></span>
+        <nb-icon [icon]="readyFiles[0].icon" *ngIf="!readyFiles[0].urlStyle"></nb-icon>
         <div *ngIf="readyFiles[0].isImage" [style.background-image]="readyFiles[0].urlStyle"></div>
       </a>
     </ng-container>

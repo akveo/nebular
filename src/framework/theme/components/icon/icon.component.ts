@@ -172,7 +172,10 @@ export class NbIconComponent implements OnChanges, OnInit {
   renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
     const icon = this.iconLibrary.getIcon(name, pack);
 
-    this.html = this.sanitizer.bypassSecurityTrustHtml(icon.icon.render(options));
+    const content = icon.icon.render(options);
+    if (content) {
+      this.html = this.sanitizer.bypassSecurityTrustHtml(content);
+    }
 
     Object.entries(icon.icon.getAttributes(options)).forEach(([attr, value]: [string, string]) => {
       this.renderer.setAttribute(this.el.nativeElement, attr, value);

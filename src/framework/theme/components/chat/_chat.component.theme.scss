@@ -12,6 +12,10 @@
     border-radius: nb-theme(chat-border-radius);
     box-shadow: nb-theme(chat-shadow);
 
+    nb-icon {
+      font-size: inherit;
+    }
+
     .header {
       color: nb-theme(chat-fg-text);
       padding: nb-theme(chat-padding);
