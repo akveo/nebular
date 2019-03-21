@@ -33,14 +33,7 @@
           }
 
           &::before {
-            $color-right: nb-theme(tabs-selected);
-            $color-left: adjust-hue(
-                nb-theme(tabs-selected-second-color),
-                nb-theme(tabs-selected-degrees));
-
             background: nb-theme(tabs-selected);
-
-            @include nb-right-gradient($color-left, $color-right);
           }
         }
 

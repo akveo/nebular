@@ -33,11 +33,6 @@
 
           &::before {
             background: nb-theme(route-tabs-selected);
-
-            @include nb-for-theme(cosmic) {
-              @include btn-hero-success-gradient();
-              box-shadow: 0 0 16px -2px btn-hero-success-middle-color();
-            }
           }
         }
 

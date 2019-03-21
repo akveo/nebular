@@ -97,18 +97,6 @@
   }
 }
 
-@function btn-hover-color($bg, $percentage: 14%) {
-  @return tint(nb-theme($bg), $percentage);
-}
-
-@function btn-focus-color($bg, $percentage: 14%) {
-  @return tint(nb-theme($bg), $percentage);
-}
-
-@function btn-active-color($bg, $percentage: 14%) {
-  @return shade(nb-theme($bg), $percentage);
-}
-
 @mixin btn-outline-focus($focus) {
   &:focus,
   &.focus {
@@ -149,77 +137,77 @@
 
 // Focus
 @mixin btn-primary-focus() {
-  @include btn-focus(btn-focus-color(btn-primary-bg));
+  @include btn-focus(nb-theme(btn-primary-hover-bg));
 }
 
 @mixin btn-success-focus() {
-  @include btn-focus(btn-focus-color(btn-success-bg));
+  @include btn-focus(nb-theme(btn-success-hover-bg));
 }
 
 @mixin btn-warning-focus() {
-  @include btn-focus(btn-focus-color(btn-warning-bg));
+  @include btn-focus(nb-theme(btn-warning-hover-bg));
 }
 
 @mixin btn-info-focus() {
-  @include btn-focus(btn-focus-color(btn-info-bg));
+  @include btn-focus(nb-theme(btn-info-hover-bg));
 }
 
 @mixin btn-danger-focus() {
-  @include btn-focus(btn-focus-color(btn-danger-bg));
+  @include btn-focus(nb-theme(btn-danger-hover-bg));
 }
 
 @mixin btn-secondary-focus() {
-  @include btn-outline-focus(btn-focus-color(btn-secondary-border, 20%));
+  @include btn-outline-focus(nb-theme(btn-secondary-hover-bg));
 }
 
 // Hover
 @mixin btn-primary-hover() {
-  @include btn-hover(btn-hover-color(btn-primary-bg));
+  @include btn-hover(nb-theme(btn-primary-hover-bg));
 }
 
 @mixin btn-success-hover() {
-  @include btn-hover(btn-hover-color(btn-success-bg));
+  @include btn-hover(nb-theme(btn-success-hover-bg));
 }
 
 @mixin btn-warning-hover() {
-  @include btn-hover(btn-hover-color(btn-warning-bg));
+  @include btn-hover(nb-theme(btn-warning-hover-bg));
 }
 
 @mixin btn-info-hover() {
-  @include btn-hover(btn-hover-color(btn-info-bg));
+  @include btn-hover(nb-theme(btn-info-hover-bg));
 }
 
 @mixin btn-danger-hover() {
-  @include btn-hover(btn-hover-color(btn-danger-bg));
+  @include btn-hover(nb-theme(btn-danger-hover-bg));
 }
 
 @mixin btn-secondary-hover() {
-  @include btn-hover(btn-hover-color(btn-secondary-border));
+  @include btn-hover(nb-theme(btn-secondary-hover-bg));
 }
 
 // Active
 @mixin btn-primary-active() {
-  @include btn-active(btn-active-color(btn-primary-bg));
+  @include btn-active(nb-theme(btn-primary-active-bg));
 }
 
 @mixin btn-success-active() {
-  @include btn-active(btn-active-color(btn-success-bg));
+  @include btn-active(nb-theme(btn-success-active-bg));
 }
 
 @mixin btn-warning-active() {
-  @include btn-active(btn-active-color(btn-warning-bg));
+  @include btn-active(nb-theme(btn-warning-active-bg));
 }
 
 @mixin btn-info-active() {
-  @include btn-active(btn-active-color(btn-info-bg));
+  @include btn-active(nb-theme(btn-info-active-bg));
 }
 
 @mixin btn-danger-active() {
-  @include btn-active(btn-active-color(btn-danger-bg));
+  @include btn-active(nb-theme(btn-danger-active-bg));
 }
 
 @mixin btn-secondary-active() {
-  @include btn-active(btn-active-color(btn-secondary-border));
+  @include btn-active(nb-theme(btn-secondary-active-bg));
 }
 
 // Disabled

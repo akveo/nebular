@@ -160,7 +160,7 @@
     }
 
     &:hover {
-      @include label(lighten(nb-theme(checkbox-checked-border-color), 10%), 1);
+      @include label(nb-theme(checkbox-checked-border-color), 1);
     }
 
     &:disabled {
@@ -216,7 +216,7 @@
     }
 
     &:hover {
-      @include label(lighten(nb-theme(checkbox-checked-border-color), 10%), 1);
+      @include label(nb-theme(checkbox-checked-border-color), 1);
     }
 
     &:disabled {
