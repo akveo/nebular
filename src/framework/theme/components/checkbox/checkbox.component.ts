@@ -58,7 +58,7 @@ import { convertToBoolProperty } from '../helpers';
       <input type="checkbox" class="customised-control-input"
              [disabled]="disabled"
              [checked]="value"
-             (change)="value = !value"
+             (change)="updateValueAndIndeterminate($event)"
              (blur)="setTouched()">
       <span class="customised-control-indicator"></span>
       <span class="customised-control-description">
@@ -98,6 +98,18 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   set setStatus(val: string) {
     this.status = val;
   }
+
+  /**
+   * Controls checkbox indeterminate state
+   */
+  @Input('indeterminate')
+  set indeterminate(value: boolean) {
+    this._indeterminate = convertToBoolProperty(value);
+  }
+  get indeterminate(): boolean {
+    return this._indeterminate;
+  }
+  private _indeterminate: boolean = false;
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -162,5 +174,11 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setTouched() {
     this.onTouched();
+  }
+
+  updateValueAndIndeterminate(event: Event): void {
+    const input = (event.target as HTMLInputElement);
+    this.value = input.checked;
+    this.indeterminate = input.indeterminate;
   }
 }
