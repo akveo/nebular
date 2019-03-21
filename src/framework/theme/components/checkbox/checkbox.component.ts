@@ -75,7 +75,7 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
 
-  status: string;
+  status: string = 'primary';
 
   /**
    * Checkbox value
@@ -91,7 +91,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
 
   /**
-   * Checkbox status (success, warning, danger)
+   * Checkbox status (primary (default), success, warning, danger, info, white)
    * @param {string} val
    */
   @Input('status')
@@ -99,19 +99,34 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     this.status = val;
   }
 
-  @HostBinding('class.success')
+  @HostBinding('class.status-primary')
+  get primary() {
+    return this.status === 'primary';
+  }
+
+  @HostBinding('class.status-success')
   get success() {
     return this.status === 'success';
   }
 
-  @HostBinding('class.warning')
+  @HostBinding('class.status-warning')
   get warning() {
     return this.status === 'warning';
   }
 
-  @HostBinding('class.danger')
+  @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-info')
+  get info() {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-white')
+  get white() {
+    return this.status === 'white';
   }
 
   onChange: any = () => { };
