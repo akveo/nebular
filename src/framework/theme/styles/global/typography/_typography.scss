@@ -5,46 +5,6 @@
   }
 }
 
-@function main-to-text-color($color, $count: 15%) {
-  @return tint($color, $count);
-}
-
-@function text-heading() {
-  @return nb-theme(color-fg-heading);
-}
-
-@function text-body() {
-  @return nb-theme(color-fg-text);
-}
-
-@function text-hint() {
-  @return nb-theme(color-fg);
-}
-
-@function text-primary() {
-  @return main-to-text-color(nb-theme(color-primary));
-}
-
-@function text-warning() {
-  @return main-to-text-color(nb-theme(color-warning));
-}
-
-@function text-success() {
-  @return main-to-text-color(nb-theme(color-success));
-}
-
-@function text-info() {
-  @return main-to-text-color(nb-theme(color-info));
-}
-
-@function text-danger() {
-  @return main-to-text-color(nb-theme(color-danger));
-}
-
-@function text-white() {
-  @return nb-theme(color-white);
-}
-
 @mixin nb-alert-variant($body-color) {
   background-color: nb-theme(layout-bg);
   border: none;
@@ -54,9 +14,6 @@
     color: $body-color!important;
   }
 
-  hr {
-    border-top-color: darken($body-color, 10%);
-  }
   .alert-link {
     color: $body-color;
     text-decoration: none;
@@ -100,59 +57,59 @@
   }
 
   .text-primary {
-    color: text-primary() !important;
+    color: nb-theme(color-primary) !important;
   }
   .text-warning {
-    color: text-warning() !important;
+    color: nb-theme(color-warning) !important;
   }
   .text-success {
-    color: text-success() !important;
+    color: nb-theme(color-success) !important;
   }
   .text-info {
-    color: text-info() !important;
+    color: nb-theme(color-info) !important;
   }
   .text-danger {
-    color: text-danger() !important;
+    color: nb-theme(color-danger) !important;
   }
   .text-heading {
-    color: text-heading() !important;
+    color: nb-theme(color-fg-heading) !important;
   }
   .text-body {
-    color: text-body() !important;
+    color: nb-theme(color-fg-text) !important;
   }
   .text-hint {
-    color: text-hint() !important;
+    color: nb-theme(color-fg) !important;
   }
   .text-white {
-    color: text-white() !important;
+    color: nb-theme(color-white) !important;
   }
 
   .bg-primary {
-    background-color: text-primary() !important;
+    background-color: nb-theme(color-primary) !important;
   }
   .bg-warning {
-    background-color: text-warning() !important;
+    background-color: nb-theme(color-warning) !important;
   }
   .bg-success {
-    background-color: text-success() !important;
+    background-color: nb-theme(color-success) !important;
   }
   .bg-info {
-    background-color: text-info() !important;
+    background-color: nb-theme(color-info) !important;
   }
   .bg-danger {
-    background-color: text-danger() !important;
+    background-color: nb-theme(color-danger) !important;
   }
   .bg-heading {
-    background-color: text-heading() !important;
+    background-color: nb-theme(color-fg-heading) !important;
   }
   .bg-body {
-    background-color: text-body() !important;
+    background-color: nb-theme(color-fg-text) !important;
   }
   .bg-hint {
-    background-color: text-hint() !important;
+    background-color: nb-theme(color-fg) !important;
   }
   .bg-white {
-    background-color: text-white() !important;
+    background-color: nb-theme(color-white) !important;
   }
   .text-indent {
     text-indent: 2rem;
@@ -184,8 +141,8 @@
 
   mark, .mark {
     padding: 0.05em;
-    background-color: text-primary();
-    color: text-white();
+    background-color: nb-theme(color-primary);
+    color: nb-theme(color-white);
   }
 
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -216,22 +173,22 @@
   }
 
   .alert-success {
-    @include nb-alert-variant(text-success());
+    @include nb-alert-variant(nb-theme(color-success));
   }
   .alert-info {
-    @include nb-alert-variant(text-info());
+    @include nb-alert-variant(nb-theme(color-info));
   }
   .alert-warning {
-    @include nb-alert-variant(text-warning());
+    @include nb-alert-variant(nb-theme(color-warning));
   }
   .alert-danger {
-    @include nb-alert-variant(text-danger());
+    @include nb-alert-variant(nb-theme(color-danger));
   }
   .alert-primary {
-    @include nb-alert-variant(text-primary());
+    @include nb-alert-variant(nb-theme(color-primary));
   }
   .alert-hint {
-    @include nb-alert-variant(text-hint());
+    @include nb-alert-variant(nb-theme(color-fg));
   }
 
 }
