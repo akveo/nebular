@@ -17,6 +17,10 @@
     height: nb-theme(tree-grid-row-min-height);
     padding: nb-theme(tree-grid-cell-padding);
     border: $border-width $border-style $border-color;
+
+    nb-icon {
+      font-size: 1rem;
+    }
   }
 
   .nb-tree-grid-header-row {
@@ -37,8 +41,8 @@
     }
   }
 
-  nb-tree-grid-row-toggle .row-toggle-button .icon,
-  nb-sort-icon .icon {
+  nb-tree-grid-row-toggle .row-toggle-button nb-icon,
+  nb-sort-icon nb-icon {
     color: nb-theme(tree-grid-icon-color);
   }
 

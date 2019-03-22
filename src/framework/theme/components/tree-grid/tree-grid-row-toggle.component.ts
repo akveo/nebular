@@ -14,7 +14,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
   selector: 'nb-tree-grid-row-toggle',
   template: `
     <button class="row-toggle-button" [attr.aria-label]="expanded ? 'collapse' : 'expand'">
-      <span class="icon" [class.nb-arrow-right]="!expanded" [class.nb-arrow-down]="expanded" aria-hidden="true"></span>
+      <nb-icon [icon]="expanded ? 'arrow-down' : 'arrow-right'" aria-hidden="true"></nb-icon>
     </button>
   `,
   styles: [`
