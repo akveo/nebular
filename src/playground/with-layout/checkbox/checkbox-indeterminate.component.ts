@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
       <button nbButton (click)="checkbox.indeterminate = true">Set indetermiate</button>
     </div>
   `,
+  styleUrls: ['./checkbox-indeterminate.component.scss'],
 })
 export class CheckboxIndeterminateComponent {}
