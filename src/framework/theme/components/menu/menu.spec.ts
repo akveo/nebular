@@ -86,7 +86,7 @@ describe('NbMenuItem', () => {
   it('should set icon to menu item', () => {
     const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'test-icon' }]);
     const iconWrapper = fixture.nativeElement.querySelector('.menu-icon');
-    expect(iconWrapper.classList).toContain('test-icon');
+    expect(iconWrapper.classList).toContain('nb-test-icon');
   });
 
   it('should set title to menu item', () => {
