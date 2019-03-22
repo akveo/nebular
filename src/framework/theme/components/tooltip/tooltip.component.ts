@@ -33,7 +33,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   template: `
     <span class="arrow"></span>
     <div class="content">
-      <i *ngIf="context?.icon" class="icon {{ context?.icon }}"></i>
+      <nb-icon *ngIf="context?.icon" [icon]="context.icon"></nb-icon>
       <span *ngIf="content">{{ content }}</span>
     </div>
   `,
