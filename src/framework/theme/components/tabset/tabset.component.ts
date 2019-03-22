@@ -222,7 +222,7 @@ export class NbTabComponent {
           [attr.tabindex]="tab.disabled ? -1 : 0"
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1">
-          <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
+          <nb-icon *ngIf="tab.tabIcon" [icon]="tab.tabIcon"></nb-icon>
           <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
         </a>
         <nb-badge *ngIf="tab.badgeText"

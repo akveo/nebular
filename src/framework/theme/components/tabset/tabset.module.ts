@@ -10,6 +10,7 @@ import { NbSharedModule } from '../shared/shared.module';
 
 import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
+import { NbIconModule } from '../icon/icon.module';
 
 const NB_TABSET_COMPONENTS = [
   NbTabsetComponent,
@@ -20,6 +21,7 @@ const NB_TABSET_COMPONENTS = [
   imports: [
     NbSharedModule,
     NbBadgeModule,
+    NbIconModule,
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,
