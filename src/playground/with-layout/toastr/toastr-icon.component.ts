@@ -6,7 +6,7 @@ import { NbToastrService } from '@nebular/theme';
   template: `
     <button nbButton (click)="showDefaultIcon()">With icon</button>
     <button nbButton (click)="showToast('')">Without icon</button>
-    <button nbButton (click)="showToast('nb-audio')">Custom icon</button>
+    <button nbButton (click)="showToast('audio')">Custom icon</button>
   `,
   styles: [
       `

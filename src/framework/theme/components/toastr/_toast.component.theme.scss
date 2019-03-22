@@ -12,7 +12,7 @@
     border: nb-theme(toastr-border);
     border-radius: nb-theme(toastr-border-radius);
 
-    .icon {
+    nb-icon {
       @include nb-ltr(margin-right, 1.25rem);
       @include nb-rtl(margin-left, 1.25rem);
     }
@@ -39,7 +39,7 @@
       border-color: nb-theme(color-success);
       color: nb-theme(color-success);
 
-      i {
+      nb-icon {
         background-color: nb-theme(color-success);
 
         color: nb-theme(color-white);
@@ -49,7 +49,7 @@
         @include btn-hero-success-gradient();
         color: nb-theme(toastr-color-fg);
 
-        i {
+        nb-icon {
           background-color: nb-theme(color-white);
 
           color: nb-theme(color-success);
@@ -61,7 +61,7 @@
       border-color: nb-theme(color-info);
       color: nb-theme(color-info);
 
-      i {
+      nb-icon {
         background-color: nb-theme(color-info);
 
         color: nb-theme(color-white);
@@ -71,7 +71,7 @@
         @include btn-hero-info-gradient();
         color: nb-theme(toastr-color-fg);
 
-        i {
+        nb-icon {
           background-color: nb-theme(color-white);
 
           color: nb-theme(color-info);
@@ -83,7 +83,7 @@
       border-color: nb-theme(color-warning);
       color: nb-theme(color-warning);
 
-      i {
+      nb-icon {
         background-color: nb-theme(color-warning);
 
         color: nb-theme(color-white);
@@ -93,7 +93,7 @@
         @include btn-hero-warning-gradient();
         color: nb-theme(toastr-color-fg);
 
-        i {
+        nb-icon {
           background-color: nb-theme(color-white);
 
           color: nb-theme(color-warning);
@@ -105,7 +105,7 @@
       border-color: nb-theme(color-primary);
       color: nb-theme(color-primary);
 
-      i {
+      nb-icon {
         background-color: nb-theme(color-primary);
 
         color: nb-theme(color-white);
@@ -115,7 +115,7 @@
         @include btn-hero-primary-gradient();
         color: nb-theme(toastr-color-fg);
 
-        i {
+        nb-icon {
           background-color: nb-theme(color-white);
 
           color: nb-theme(color-primary);
@@ -127,7 +127,7 @@
       border-color: nb-theme(color-danger);
       color: nb-theme(color-danger);
 
-      i {
+      nb-icon {
         background-color: nb-theme(color-danger);
 
         color: nb-theme(color-white);
@@ -137,7 +137,7 @@
         @include btn-hero-danger-gradient();
         color: nb-theme(toastr-color-fg);
 
-        i {
+        nb-icon {
           background-color: nb-theme(color-white);
 
           color: nb-theme(color-danger);

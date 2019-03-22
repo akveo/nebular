@@ -43,16 +43,16 @@ export class NbToastrConfig {
   /**
    * Icon class that can be provided to render custom icon.
    * */
-  icon: string = 'nb-email';
+  icon: string = 'email';
   /**
    * Toast status icon-class mapping.
    * */
   protected icons = {
-    [NbToastStatus.DANGER]: 'nb-danger',
-    [NbToastStatus.SUCCESS]: 'nb-checkmark-circle',
-    [NbToastStatus.INFO]: 'nb-help',
-    [NbToastStatus.WARNING]: 'nb-alert',
-    [NbToastStatus.PRIMARY]: 'nb-email',
+    [NbToastStatus.DANGER]: 'danger',
+    [NbToastStatus.SUCCESS]: 'checkmark-circle',
+    [NbToastStatus.INFO]: 'help',
+    [NbToastStatus.WARNING]: 'alert',
+    [NbToastStatus.PRIMARY]: 'email',
   };
 
   constructor(config: Partial<NbToastrConfig>) {
