@@ -145,9 +145,9 @@ $theme: (
   outline-color: color-basic-300,
 
   font-primary-family: unquote('Raleway, open sans, sans-serif'),
-  font-primary-regular-text-size: 0.8125rem,
-  font-primary-regular-text-weight: 600,
-  font-primary-regular-text-line-height: 1.5rem,
+  font-primary-text-size: 0.8125rem,
+  font-primary-text-weight: 600,
+  font-primary-text-line-height: 1.5rem,
 
   text-color: #0d1d30,
   text-disabled-color: #c7cedb,
@@ -542,9 +542,9 @@ $theme: (
   checkbox-outline-color: outline-color,
   checkbox-text-color: text-color,
   checkbox-text-font-family: font-primary-family,
-  checkbox-text-font-size: font-primary-regular-text-size,
-  checkbox-text-font-weight: font-primary-regular-text-weight,
-  checkbox-text-line-height: font-primary-regular-text-line-height,
+  checkbox-text-font-size: font-primary-text-size,
+  checkbox-text-font-weight: font-primary-text-weight,
+  checkbox-text-line-height: font-primary-text-line-height,
 
   checkbox-disabled-background-color: color-basic-400,
   checkbox-disabled-border-color: color-basic-400,
