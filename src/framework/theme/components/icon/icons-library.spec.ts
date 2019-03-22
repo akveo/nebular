@@ -40,7 +40,7 @@ describe('icons-library', () => {
     const icon = iconsLibrary.getSvgIcon('home');
 
     expect(icon.icon.render()).toEqual('<svg><rect></rect></svg>');
-    expect(icon.icon.getAttributes().class).toEqual('sp');
+    expect(icon.icon.getClasses()).toEqual(['sp']);
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('super-pack');
     expect(icon.type).toEqual('svg');
@@ -62,7 +62,7 @@ describe('icons-library', () => {
     const icon = iconsLibrary.getSvgIcon('home');
 
     expect(icon.icon.render()).toEqual('custom');
-    expect(icon.icon.getAttributes().class).toEqual('sp');
+    expect(icon.icon.getClasses()).toEqual(['sp']);
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('super-pack');
     expect(icon.type).toEqual('svg');
@@ -78,8 +78,8 @@ describe('icons-library', () => {
       .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'`);
   });
 
-  it('should throw for unknown pack', () => {
-    expect(() => iconsLibrary.getSvgIcon('unknown')).toThrowError(`Icon Pack 'undefined' is not registered`);
+  it('should throw for no default pack', () => {
+    expect(() => iconsLibrary.getSvgIcon('unknown')).toThrowError('Default pack is not registered.');
   });
 
   it('should throw for wrong pack type', () => {
@@ -120,7 +120,7 @@ describe('icons-library', () => {
     const icon = iconsLibrary.getFontIcon('home');
 
     expect(icon.icon.render()).toEqual('');
-    expect(icon.icon.getAttributes().class).toEqual('fp-home font');
+    expect(icon.icon.getClasses()).toEqual(['font', 'fp-home']);
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('font-pack');
     expect(icon.type).toEqual('font');
@@ -137,7 +137,7 @@ describe('icons-library', () => {
     const svgIcon = iconsLibrary.getIcon('home', 'super-pack');
 
     expect(icon.icon.render()).toEqual('');
-    expect(icon.icon.getAttributes().class).toEqual('fp-home font');
+    expect(icon.icon.getClasses()).toEqual(['font', 'fp-home']);
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('font-pack');
     expect(icon.type).toEqual('font');

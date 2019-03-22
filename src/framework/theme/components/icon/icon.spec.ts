@@ -4,56 +4,72 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NbIconModule } from './icon.module';
-import { NbIconsLibrary } from '../../services/icons/icons-library';
+import { NbFontIcon, NbSvgIcon } from './icon';
 
 
-@Component({
-  template: `
-    <nb-icon #iconEl [icon]="icon"></nb-icon>
-  `,
-})
-class IconTestComponent {
-  @ViewChild('iconEl', { read: ElementRef }) iconElement;
+describe('icon', () => {
+  let fontIcon: NbFontIcon;
+  let svgIcon: NbSvgIcon;
 
-  @Input() icon;
-}
 
-describe('Component: NbIcon', () => {
+  it(`font icon renders`, () => {
 
-  let iconTestComponent: IconTestComponent;
-  let fixture: ComponentFixture<IconTestComponent>;
-  let iconElement: ElementRef;
-  let iconsLibrary: NbIconsLibrary;
-
-  beforeEach(() => {
-
-    const bed = TestBed.configureTestingModule({
-      imports: [ NbIconModule ],
-      providers: [ NbIconsLibrary ],
-      declarations: [ IconTestComponent ],
+    fontIcon = new NbFontIcon('home', 'custom', {
+      packClass: 'custom-pack',
+      iconPrefix: 'cp',
     });
 
-    fixture = bed.createComponent(IconTestComponent);
-    iconsLibrary = bed.get(NbIconsLibrary);
-
-    iconsLibrary
-      .registerSvgPack('svg-pack', { home: '<svg><rect></rect></svg>' }, { packClass: 'custom-pack' });
-    iconsLibrary.setDefaultPack('svg-pack');
-
-    iconTestComponent = fixture.componentInstance;
-    iconElement = iconTestComponent.iconElement;
+    expect(fontIcon.render()).toEqual('custom');
   });
 
-  it('should render icon', () => {
-    iconTestComponent.icon = 'home';
-    fixture.detectChanges();
-    const svg = iconElement.nativeElement.querySelector('svg');
+  it(`font icon getClasses return classes`, () => {
 
-    expect(iconElement.nativeElement.classList.contains('custom-pack')).toBeTruthy();
-    expect(svg.innerHTML).toContain('<rect></rect>');
+    fontIcon = new NbFontIcon('home', '', {
+      packClass: 'custom-pack',
+    });
+
+    expect(fontIcon.getClasses()).toEqual(['custom-pack', 'home']);
+  });
+
+  it(`font icon getClasses return class with prefix`, () => {
+
+    fontIcon = new NbFontIcon('home', '', {
+      packClass: 'custom-pack',
+      iconPrefix: 'cp',
+    });
+
+    expect(fontIcon.getClasses()).toEqual(['custom-pack', 'cp-home']);
+  });
+
+  it(`font icon getClasses return class with name only`, () => {
+
+    fontIcon = new NbFontIcon('home', '');
+
+    expect(fontIcon.getClasses()).toEqual(['home']);
+  });
+
+  it(`svg icon renders`, () => {
+
+    svgIcon = new NbSvgIcon('home', 'content', {
+      packClass: 'custom-pack',
+    });
+
+    expect(svgIcon.render()).toEqual('content');
+  });
+
+  it(`svg icon getClasses return class`, () => {
+
+    svgIcon = new NbSvgIcon('home', '', {
+      packClass: 'custom-pack',
+    });
+
+    expect(svgIcon.getClasses()).toEqual(['custom-pack']);
+  });
+
+  it(`svg icon getClasses return class without name`, () => {
+
+    svgIcon = new NbSvgIcon('home', '');
+
+    expect(svgIcon.getClasses()).toEqual([]);
   });
 });

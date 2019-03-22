@@ -19,6 +19,10 @@ function throwPackNotFoundError(name: string) {
   throw Error(`Icon Pack '${name}' is not registered`);
 }
 
+function throwNoDefaultPackError() {
+  throw Error('Default pack is not registered.');
+}
+
 function throwIconNotFoundError(name: string, pack: string) {
   throw Error(`Icon '${name}' is not registered in pack '${pack}'`);
 }
@@ -26,7 +30,7 @@ function throwIconNotFoundError(name: string, pack: string) {
 /**
  * NbIconsLibrary
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class NbIconsLibrary {
 
   protected packs: Map<string, NbIconPack> = new Map();
@@ -116,7 +120,12 @@ export class NbIconsLibrary {
     const iconsPack = name ? this.packs.get(name) : this.defaultPack;
 
     if (!iconsPack) {
-      throwPackNotFoundError(name);
+
+      if (!this.defaultPack) {
+        throwNoDefaultPackError();
+      } else {
+        throwPackNotFoundError(name);
+      }
     }
     return iconsPack;
   }

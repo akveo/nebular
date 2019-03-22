@@ -29,7 +29,6 @@ import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from
 import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
 import { NbOverlayModule } from './components/cdk';
-import { NbIconsLibrary } from './services/icons/icons-library';
 
 export function nbWindowFactory() {
   return window;
@@ -70,7 +69,6 @@ export class NbThemeModule {
         { provide: NB_WINDOW, useFactory: nbWindowFactory },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
         NbJSThemesRegistry,
-        NbIconsLibrary,
         NbThemeService,
         NbMediaBreakpointsService,
         NbSpinnerService,

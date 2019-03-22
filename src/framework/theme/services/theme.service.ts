@@ -13,7 +13,6 @@ import { NB_THEME_OPTIONS } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { NbJSThemesRegistry } from './js-themes-registry.service';
 import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.service';
-import { NbIconsLibrary } from './icons/icons-library';
 
 /**
  * Main Nebular service. Includes various helper methods.
@@ -30,14 +29,10 @@ export class NbThemeService {
 
   constructor(@Inject(NB_THEME_OPTIONS) protected options: any,
               private breakpointService: NbMediaBreakpointsService,
-              private jsThemesRegistry: NbJSThemesRegistry,
-              private iconsLibrary: NbIconsLibrary) {
+              private jsThemesRegistry: NbJSThemesRegistry) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
-    // @breaking-change 4.0.0 remove and replace with eva-icons module
-    this.iconsLibrary.registerFontPack('nebular', { iconPrefix: 'nb' });
-    this.iconsLibrary.setDefaultPack('nebular');
   }
 
   /**

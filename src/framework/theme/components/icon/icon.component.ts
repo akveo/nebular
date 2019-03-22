@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { NbIconsLibrary } from '../../services/icons';
+import { NbIconsLibrary } from './icons-library';
 
 /**
  * Icon component.
@@ -110,6 +110,7 @@ export class NbIconComponent implements OnChanges, OnInit {
   static readonly STATUS_DANGER = 'danger';
 
   private iconDef;
+  private prevClasses = [];
 
   @HostBinding('innerHtml')
   html: SafeHtml;
@@ -177,9 +178,19 @@ export class NbIconComponent implements OnChanges, OnInit {
       this.html = this.sanitizer.bypassSecurityTrustHtml(content);
     }
 
-    Object.entries(icon.icon.getAttributes(options)).forEach(([attr, value]: [string, string]) => {
-      this.renderer.setAttribute(this.el.nativeElement, attr, value);
-    });
+    this.assignClasses(icon.icon.getClasses(options));
     return icon;
+  }
+
+  protected assignClasses(classes: string[]) {
+    this.prevClasses.forEach((klass: string) => {
+      this.renderer.removeClass(this.el.nativeElement, klass);
+    });
+
+    classes.forEach((klass: string) => {
+      this.renderer.addClass(this.el.nativeElement, klass);
+    });
+
+    this.prevClasses = classes;
   }
 }

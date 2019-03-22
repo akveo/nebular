@@ -5,7 +5,7 @@ export interface NbIconOptions {
 }
 
 export interface NbIcon {
-  getAttributes(options?: NbIconOptions): any;
+  getClasses(options?: NbIconOptions): string[];
   render(options?: NbIconOptions): string;
 }
 
@@ -13,12 +13,16 @@ export class NbFontIcon implements NbIcon {
 
   constructor(protected name, protected content: any, protected params: NbIconPackParams = {}) {}
 
-  getAttributes(options?: NbIconOptions) {
-    const name = this.params.iconPrefix ? `${this.params.iconPrefix}-${this.name}` : this.name;
+  getClasses(options?: NbIconOptions) {
+    const classes = [];
 
-    return {
-      'class': this.params.packClass ? `${name} ${this.params.packClass}` : name,
-    };
+    if (this.params.packClass) {
+      classes.push(this.params.packClass);
+    }
+
+    const name = this.params.iconPrefix ? `${this.params.iconPrefix}-${this.name}` : this.name;
+    classes.push(name);
+    return classes;
   }
 
   render(options?: NbIconOptions): string {
@@ -30,14 +34,13 @@ export class NbSvgIcon implements NbIcon {
 
   constructor(protected name, protected content: any, protected params: NbIconPackParams = {}) {}
 
-  getAttributes(options?: NbIconOptions) {
-    if (this.params.packClass) {
-      return {
-        'class': `${this.params.packClass}`,
-      };
+  getClasses(options?: NbIconOptions) {
+    const classes = [];
 
+    if (this.params.packClass) {
+      classes.push(this.params.packClass);
     }
-    return {};
+    return classes;
   }
 
   render(options?: NbIconOptions): string {
