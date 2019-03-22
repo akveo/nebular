@@ -373,6 +373,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'CheckboxTestComponent',
         name: 'Checkbox Test',
       },
+      {
+        path: 'checkbox-indeterminate.component',
+        link: '/checkbox/checkbox-indeterminate.component',
+        component: 'CheckboxIndeterminateComponent',
+        name: 'Checkbox Indeterminate',
+      },
     ],
   },
   {
