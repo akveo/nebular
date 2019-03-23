@@ -6,12 +6,12 @@
 
 @mixin input-shapes() {
   &.input-rectangle {
-    border-radius: nb-theme(form-control-border-radius);
+    border-radius: nb-theme(input-border-radius);
   }
   &.input-semi-round {
-    border-radius: nb-theme(form-control-semi-round-border-radius);
+    border-radius: nb-theme(input-semi-round-border-radius);
   }
   &.input-round {
-    border-radius: nb-theme(form-control-round-border-radius);
+    border-radius: nb-theme(input-round-border-radius);
   }
 }

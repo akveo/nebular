@@ -9,27 +9,46 @@
 @import './input-shapes';
 
 @mixin nb-input-theme() {
-  $border-width: nb-theme(form-control-border-width);
-  $border-type: nb-theme(form-control-border-type);
-  $border-color: nb-theme(form-control-border-color);
+  $border-width: nb-theme(input-border-width);
+  $border-color: nb-theme(input-border-color);
 
   [nbInput] {
-    background-color: nb-theme(form-control-bg);
-    border: $border-width $border-type $border-color;
-    color: nb-theme(form-control-text-primary-color);
+    background-color: nb-theme(input-background-color);
+    border: $border-width solid $border-color;
+    color: nb-theme(input-text-color);
+    font-family: nb-theme(input-text-font-family);
+    font-weight: nb-theme(input-text-font-weight);
+    line-height: nb-theme(input-text-line-height);
+    transition-property: border, background-color, color;
+    transition-duration: nb-theme(input-state-transition-duration);
+    transition-timing-function: nb-theme(input-state-transition-timing-function);
+
+    &::placeholder {
+      color: nb-theme(input-placeholder-text-color);
+      font-family: nb-theme(input-placeholder-text-font-family);
+      font-size: nb-theme(input-placeholder-text-font-size);
+      font-weight: nb-theme(input-placeholder-text-font-weight);
+      line-height: nb-theme(input-placeholder-text-line-height);
+      text-overflow: ellipsis;
+    }
 
     &:focus {
       outline: none;
-      background-color: nb-theme(form-control-focus-bg);
-      border-color: nb-theme(form-control-selected-border-color);
+      border-color: nb-theme(input-focus-border-color);
     }
 
-    &[disabled] {
-      @include install-placeholder(
-        nb-theme(form-control-placeholder-color),
-        nb-theme(form-control-placeholder-font-size),
-        0.5
-      );
+    &:hover {
+      border-color: nb-theme(input-hover-border-color);
+    }
+
+    &:disabled {
+      background-color: nb-theme(input-disabled-background-color);
+      border-color: nb-theme(input-disabled-border-color);
+      color: nb-theme(input-disabled-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-disabled-placeholder-text-color);
+      }
     }
 
     &.input-full-width {
@@ -39,10 +58,5 @@
     @include input-statuses();
     @include input-sizes();
     @include input-shapes();
-
-    @include install-placeholder(
-      nb-theme(form-control-placeholder-color),
-      nb-theme(form-control-placeholder-font-size)
-    );
   }
 }

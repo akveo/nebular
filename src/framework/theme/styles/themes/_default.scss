@@ -574,20 +574,24 @@ $theme: (
   input-padding: 0.75rem 1rem,
   input-placeholder-text-color: text-hint-color,
   // TODO: make sure this is a proper typographic setting to read from
+  input-placeholder-text-font-family: font-primary-family,
+  // TODO: make sure this is a proper typographic setting to read from
   input-placeholder-text-font-size: text-paragraph-font-size,
-  input-placeholder-text-font-weight: 600, // TODO: use setting from typography
-  input-placeholder-text-line-height: 20, // TODO: use setting from typography
+  input-placeholder-text-font-weight: 400, // TODO: use setting from typography
+  input-placeholder-text-line-height: 1.25, // TODO: use setting from typography
   input-text-font-family: font-primary-family,
   // TODO: make sure this is a proper typographic setting to read from
   input-text-font-size: text-paragraph-font-size,
   input-text-font-weight: 600, // TODO: use setting from typography
-  input-text-line-height: 24, // TODO: use setting from typography
+  input-text-line-height: 1.5, // TODO: use setting from typography
 
   input-border-color: color-basic-100,
   input-focus-border-color: color-primary-700,
-  input-hover-border-color: color-basic-300,
+  input-hover-border-color: color-primary-400,
   input-disabled-border-color: color-basic-200,
   input-disabled-background-color: color-basic-200,
+  input-disabled-text-color: text-disabled-color,
+  input-disabled-placeholder-text-color: text-disabled-color,
 
   input-primary-border-color: color-primary-500,
   input-primary-focus-border-color: color-primary-700,

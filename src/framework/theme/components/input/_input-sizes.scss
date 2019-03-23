@@ -6,15 +6,15 @@
 
 @mixin input-sizes() {
   &.input-sm {
-    font-size: nb-theme(form-control-font-size-sm);
-    padding: nb-theme(form-control-padding-sm);
+    font-size: nb-theme(input-small-font-size);
+    padding: nb-theme(input-small-padding);
   }
   &.input-md {
-    font-size: nb-theme(form-control-font-size);
-    padding: nb-theme(form-control-padding);
+    font-size: nb-theme(input-text-font-size);
+    padding: nb-theme(input-padding);
   }
   &.input-lg {
-    font-size: nb-theme(form-control-font-size-lg);
-    padding: nb-theme(form-control-padding-lg);
+    font-size: nb-theme(input-large-font-size);
+    padding: nb-theme(input-large-padding);
   }
 }

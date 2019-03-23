@@ -5,7 +5,7 @@
  */
 
 @mixin input-statuses() {
-  &.status-primary {
+  &:enabled.status-primary {
     border-color: nb-theme(input-primary-border-color);
     &:hover {
       border-color: nb-theme(input-primary-focus-border-color);
@@ -14,7 +14,8 @@
       border-color: nb-theme(input-primary-hover-border-color);
     }
   }
-  &.status-info {
+
+  &:enabled.status-info {
     border-color: nb-theme(input-info-border-color);
     &:hover {
       border-color: nb-theme(input-info-focus-border-color);
@@ -23,7 +24,8 @@
       border-color: nb-theme(input-info-hover-border-color);
     }
   }
-  &.status-success {
+
+  &:enabled.status-success {
     border-color: nb-theme(input-success-border-color);
     &:hover {
       border-color: nb-theme(input-success-focus-border-color);
@@ -32,7 +34,8 @@
       border-color: nb-theme(input-success-hover-border-color);
     }
   }
-  &.status-warning {
+
+  &:enabled.status-warning {
     border-color: nb-theme(input-warning-border-color);
     &:hover {
       border-color: nb-theme(input-warning-focus-border-color);
@@ -41,7 +44,8 @@
       border-color: nb-theme(input-warning-hover-border-color);
     }
   }
-  &.status-danger {
+
+  &:enabled.status-danger {
     border-color: nb-theme(input-danger-border-color);
     &:hover {
       border-color: nb-theme(input-danger-focus-border-color);
@@ -50,7 +54,8 @@
       border-color: nb-theme(input-danger-hover-border-color);
     }
   }
-  &.status-basic {
+
+  &:enabled.status-basic {
     border-color: nb-theme(input-basic-border-color);
     &:hover {
       border-color: nb-theme(input-basic-focus-border-color);
