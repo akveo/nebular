@@ -83,6 +83,9 @@
       border-width: nb-theme(checkbox-border-width);
       border-style: solid;
       border-radius: nb-theme(checkbox-border-radius);
+      transition-property: background-color, border, box-shadow;
+      transition-duration: nb-theme(checkbox-state-transition-duration);
+      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
     }
 
     .native-input:focus + .custom-checkbox {
