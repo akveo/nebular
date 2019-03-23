@@ -5,15 +5,15 @@
  */
 
 @mixin input-sizes() {
-  &.input-sm {
+  &.size-small {
     font-size: nb-theme(input-small-font-size);
     padding: nb-theme(input-small-padding);
   }
-  &.input-md {
+  &.size-medium {
     font-size: nb-theme(input-text-font-size);
     padding: nb-theme(input-padding);
   }
-  &.input-lg {
+  &.size-large {
     font-size: nb-theme(input-large-font-size);
     padding: nb-theme(input-large-padding);
   }

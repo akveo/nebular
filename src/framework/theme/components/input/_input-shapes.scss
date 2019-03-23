@@ -5,13 +5,13 @@
  */
 
 @mixin input-shapes() {
-  &.input-rectangle {
+  &.shape-rectangle {
     border-radius: nb-theme(input-border-radius);
   }
-  &.input-semi-round {
+  &.shape-semi-round {
     border-radius: nb-theme(input-semi-round-border-radius);
   }
-  &.input-round {
+  &.shape-round {
     border-radius: nb-theme(input-round-border-radius);
   }
 }

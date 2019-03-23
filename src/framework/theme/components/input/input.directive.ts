@@ -134,17 +134,17 @@ export class NbInputDirective {
   @HostBinding('class.input-full-width')
   fullWidth = false;
 
-  @HostBinding('class.input-sm')
+  @HostBinding('class.size-small')
   get small() {
     return this.size === NbInputDirective.SIZE_SMALL;
   }
 
-  @HostBinding('class.input-md')
+  @HostBinding('class.size-medium')
   get medium() {
     return this.size === NbInputDirective.SIZE_MEDIUM;
   }
 
-  @HostBinding('class.input-lg')
+  @HostBinding('class.size-large')
   get large() {
     return this.size === NbInputDirective.SIZE_LARGE;
   }
@@ -179,17 +179,17 @@ export class NbInputDirective {
     return this.status === NbInputDirective.STATUS_BASIC;
   }
 
-  @HostBinding('class.input-rectangle')
+  @HostBinding('class.shape-rectangle')
   get rectangle() {
     return this.shape === NbInputDirective.SHAPE_RECTANGLE;
   }
 
-  @HostBinding('class.input-semi-round')
+  @HostBinding('class.shape-semi-round')
   get semiRound() {
     return this.shape === NbInputDirective.SHAPE_SEMI_ROUND;
   }
 
-  @HostBinding('class.input-round')
+  @HostBinding('class.shape-round')
   get round() {
     return this.shape === NbInputDirective.SHAPE_ROUND;
   }
