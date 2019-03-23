@@ -54,10 +54,6 @@ $theme: (
 
   shadow: 0 2px 12px 0 #dfe3eb,
 
-  link-color: #3dcc6d,
-  link-color-hover: #2ee56b,
-  link-color-visited: link-color,
-
   scrollbar-fg: #dadada,
   scrollbar-bg: #f2f2f2,
   scrollbar-width: 5px,
@@ -69,7 +65,7 @@ $theme: (
   /* new */
 
   color-white: #ffffff,
-  color-black: #000000,
+  color-black: #0d1c2e,
 
   color-primary: #3366ff,
   color-primary-100: #f2f6ff,
@@ -144,13 +140,20 @@ $theme: (
   outline-width: 6px,
   outline-color: color-basic-300,
 
-  font-primary-family: unquote('Raleway, open sans, sans-serif'),
+  font-primary-family: unquote('Open Sans, sans-serif'),
   font-primary-text-size: 0.8125rem,
   font-primary-text-weight: 600,
   font-primary-text-line-height: 1.5rem,
 
-  text-color: #0d1d30,
-  text-disabled-color: #c7cedb,
+  text-color: color-black,
+  text-disabled-color: color-basic-400,
+  text-hint-color: color-basic-600,
+
+  text-paragraph-font-size: 0.9375rem,
+
+  link-color: color-primary,
+  link-color-hover: color-primary-400,
+  link-color-visited: link-color,
 
   /* mappings */
 
