@@ -52,28 +52,45 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * form-control-bg:
- * form-control-border-width:
- * form-control-border-type:
- * form-control-border-color:
- * form-control-text-primary-color:
- * form-control-focus-bg:
- * form-control-selected-border-color:
- * form-control-placeholder-font-size:
- * form-control-placeholder-color:
- * form-control-font-size:
- * form-control-padding:
- * form-control-font-size-sm:
- * form-control-padding-sm:
- * form-control-font-size-lg:
- * form-control-padding-lg:
- * form-control-border-radius:
- * form-control-semi-round-border-radius:
- * form-control-round-border-radius:
- * form-control-info-border-color:
- * form-control-success-border-color:
- * form-control-warning-border-color:
- * form-control-danger-border-color:
+ * input-background-color:
+ * input-border-width:
+ * input-border-radius:
+ * input-text-color:
+ * input-padding:
+ * input-placeholder-text-color:
+ * input-placeholder-text-font-family:
+ * input-placeholder-text-font-size:
+ * input-placeholder-text-font-weight:
+ * input-placeholder-text-line-height:
+ * input-text-font-family:
+ * input-text-font-size:
+ * input-text-font-weight:
+ * input-text-line-height:
+ * input-border-color:
+ * input-focus-border-color:
+ * input-hover-border-color:
+ * input-disabled-border-color:
+ * input-disabled-background-color:
+ * input-disabled-text-color:
+ * input-disabled-placeholder-text-color:
+ * input-primary-border-color:
+ * input-primary-focus-border-color:
+ * input-primary-hover-border-color:
+ * input-success-border-color:
+ * input-success-focus-border-color:
+ * input-success-hover-border-color:
+ * input-info-border-color:
+ * input-info-focus-border-color:
+ * input-info-hover-border-color:
+ * input-warning-border-color:
+ * input-warning-focus-border-color:
+ * input-warning-hover-border-color:
+ * input-danger-border-color:
+ * input-danger-focus-border-color:
+ * input-danger-hover-border-color:
+ * input-basic-border-color:
+ * input-basic-focus-border-color:
+ * input-basic-hover-border-color:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
