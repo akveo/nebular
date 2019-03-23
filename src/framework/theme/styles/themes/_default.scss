@@ -567,37 +567,59 @@ $theme: (
   btn-group-fg: color-fg-heading,
   btn-group-separator: #dadfe6,
 
-  form-control-text-primary-color: color-fg-heading,
-  form-control-bg: color-bg,
-  form-control-focus-bg: color-bg,
+  input-background-color: color-basic-100,
+  input-border-width: 2px,
+  input-border-radius: 8px,
+  input-text-color: text-color,
+  input-padding: 0.75rem 1rem,
+  input-placeholder-text-color: text-hint-color,
+  // TODO: make sure this is a proper typographic setting to read from
+  input-placeholder-text-font-size: text-paragraph-font-size,
+  input-placeholder-text-font-weight: 600, // TODO: use setting from typography
+  input-placeholder-text-line-height: 20, // TODO: use setting from typography
+  input-text-font-family: font-primary-family,
+  // TODO: make sure this is a proper typographic setting to read from
+  input-text-font-size: text-paragraph-font-size,
+  input-text-font-weight: 600, // TODO: use setting from typography
+  input-text-line-height: 24, // TODO: use setting from typography
 
-  form-control-border-width: 2px,
-  form-control-border-type: solid,
-  form-control-border-radius: radius,
-  form-control-semi-round-border-radius: 0.75rem,
-  form-control-round-border-radius: 1.5rem,
-  form-control-border-color: #dadfe6,
-  form-control-selected-border-color: color-success,
+  input-border-color: color-basic-100,
+  input-focus-border-color: color-primary-700,
+  input-hover-border-color: color-basic-300,
+  input-disabled-border-color: color-basic-200,
+  input-disabled-background-color: color-basic-200,
 
-  form-control-info-border-color: color-info,
-  form-control-success-border-color: color-success,
-  form-control-danger-border-color: color-danger,
-  form-control-warning-border-color: color-warning,
+  input-primary-border-color: color-primary-500,
+  input-primary-focus-border-color: color-primary-700,
+  input-primary-hover-border-color: color-primary-400,
 
-  form-control-placeholder-color: color-fg,
-  form-control-placeholder-font-size: 1rem,
+  input-success-border-color: color-success-500,
+  input-success-focus-border-color: color-success-700,
+  input-success-hover-border-color: color-success-400,
 
-  form-control-font-size: 1rem,
-  form-control-padding: 0.75rem 1.125rem,
-  form-control-font-size-sm: font-size-sm,
-  form-control-padding-sm: 0.375rem 1.125rem,
-  form-control-font-size-lg: font-size-lg,
-  form-control-padding-lg: 1.125rem,
+  input-info-border-color: color-info-500,
+  input-info-focus-border-color: color-info-700,
+  input-info-hover-border-color: color-info-400,
 
-  form-control-label-font-weight: 400,
+  input-warning-border-color: color-warning-500,
+  input-warning-focus-border-color: color-warning-700,
+  input-warning-hover-border-color: color-warning-400,
 
-  form-control-feedback-font-size: 0.875rem,
-  form-control-feedback-font-weight: font-weight-normal,
+  input-danger-border-color: color-danger-500,
+  input-danger-focus-border-color: color-danger-700,
+  input-danger-hover-border-color: color-danger-400,
+
+  input-basic-border-color: color-basic-500,
+  input-basic-focus-border-color: color-basic-700,
+  input-basic-hover-border-color: color-basic-400,
+
+  // Nebular only input properties:
+  input-semi-round-border-radius: 0.75rem,
+  input-round-border-radius: 1.5rem,
+  input-small-font-size: font-size-sm,
+  input-small-padding: 0.375rem 1.125rem,
+  input-large-font-size: font-size-lg,
+  input-large-padding: 1.125rem,
 
   checkbox-height: 1.125rem,
   checkbox-width: 1.125rem,
@@ -913,8 +935,8 @@ $theme: (
   select-max-height: 20rem,
   select-bg: color-bg,
 
-  select-checkbox-color: form-control-border-color,
-  select-checkmark-color: form-control-border-color,
+  select-checkbox-color: input-border-color,
+  select-checkmark-color: input-border-color,
 
   select-option-disabled-bg: #f2f4f7,
   select-option-disabled-opacity: 0.3,
@@ -931,7 +953,7 @@ $theme: (
   radio-fg: color-fg-text,
   radio-size: 1.25rem,
   radio-border-size: 2px,
-  radio-border-color: form-control-border-color,
+  radio-border-color: input-border-color,
   radio-checkmark: transparent,
   radio-checked-bg: transparent,
   radio-checked-size: 1.25rem,
