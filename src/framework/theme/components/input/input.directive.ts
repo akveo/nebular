@@ -84,10 +84,12 @@ export class NbInputDirective {
   static readonly SIZE_MEDIUM = 'medium';
   static readonly SIZE_LARGE = 'large';
 
+  static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
   static readonly STATUS_SUCCESS = 'success';
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
+  static readonly STATUS_BASIC = 'basic';
 
   static readonly SHAPE_RECTANGLE = 'rectangle';
   static readonly SHAPE_SEMI_ROUND = 'semi-round';
@@ -147,24 +149,34 @@ export class NbInputDirective {
     return this.size === NbInputDirective.SIZE_LARGE;
   }
 
-  @HostBinding('class.input-info')
+  @HostBinding('class.status-primary')
+  get primary() {
+    return this.status === NbInputDirective.STATUS_PRIMARY;
+  }
+
+  @HostBinding('class.status-info')
   get info() {
     return this.status === NbInputDirective.STATUS_INFO;
   }
 
-  @HostBinding('class.input-success')
+  @HostBinding('class.status-success')
   get success() {
     return this.status === NbInputDirective.STATUS_SUCCESS;
   }
 
-  @HostBinding('class.input-warning')
+  @HostBinding('class.status-warning')
   get warning() {
     return this.status === NbInputDirective.STATUS_WARNING;
   }
 
-  @HostBinding('class.input-danger')
+  @HostBinding('class.status-danger')
   get danger() {
     return this.status === NbInputDirective.STATUS_DANGER;
+  }
+
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === NbInputDirective.STATUS_BASIC;
   }
 
   @HostBinding('class.input-rectangle')

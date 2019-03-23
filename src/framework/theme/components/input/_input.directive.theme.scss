@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './input-colors';
+@import './input-statuses';
 @import './input-sizes';
 @import './input-shapes';
 
@@ -36,7 +36,7 @@
       width: 100%;
     }
 
-    @include input-colors();
+    @include input-statuses();
     @include input-sizes();
     @include input-shapes();
 

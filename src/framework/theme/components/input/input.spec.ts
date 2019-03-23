@@ -61,8 +61,8 @@ describe('Directive: NbInput', () => {
     inputTestComponent.status = NbInputDirective.STATUS_DANGER;
     fixture.detectChanges();
 
-    expect(inputElement.classList).toContain('input-danger');
-    expect(textareaElement.classList).toContain('input-danger');
+    expect(inputElement.classList).toContain('status-danger');
+    expect(textareaElement.classList).toContain('status-danger');
   });
 
   it('should set size', () => {
