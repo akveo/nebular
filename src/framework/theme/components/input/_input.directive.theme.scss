@@ -14,7 +14,9 @@
 
   [nbInput] {
     background-color: nb-theme(input-background-color);
-    border: $border-width solid $border-color;
+    border-width: $border-width;
+    border-style: solid;
+    border-color: $border-color;
     color: nb-theme(input-text-color);
     font-family: nb-theme(input-text-font-family);
     font-weight: nb-theme(input-text-font-weight);
