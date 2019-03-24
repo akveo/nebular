@@ -100,13 +100,40 @@ describe('NbRadioGroupComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should update radio properties when radios added after radio group initialization', () => {
+  it('should update radio value when radios added after radio group initialization', () => {
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
     radioTestComponent.radioGroupComponent.setValue = 1;
     fixture.detectChanges();
 
     expect(radioTestComponent.radioComponents.first.checked).toEqual(true);
+    const otherRadios = radioTestComponent.radioComponents.toArray().slice(1);
+    for (const radio of otherRadios) {
+      expect(radio.checked).toBeFalsy();
+    }
+  });
+
+  it('should update radio name when radios added after radio group initialization', () => {
+    const groupName = 'my-radio-group-name';
+    radioTestComponent.radioValues = [1, 2, 3];
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setName = groupName;
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.name).toEqual(groupName);
+    }
+  });
+
+  it('should update radio disabled state when radios added after radio group initialization', () => {
+    radioTestComponent.radioValues = [1, 2, 3];
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setDisabled = true;
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.disabled).toEqual(true);
+    }
   });
 
   it('should update subscription to radio change when radios added after radio group initialization', fakeAsync(() => {
@@ -125,7 +152,7 @@ describe('NbRadioGroupComponent', () => {
     expect(valueChangeSpy).toHaveBeenCalledWith(radioValue);
   }));
 
-  it('should update radio properties when radios change', () => {
+  it('should update radio value when radios change', () => {
     radioTestComponent.showRadios = true;
     radioTestComponent.radioGroupComponent.setValue = 1;
     fixture.detectChanges();
@@ -134,6 +161,37 @@ describe('NbRadioGroupComponent', () => {
     fixture.detectChanges();
 
     expect(radioTestComponent.radioComponents.first.checked).toEqual(true);
+    const otherRadios = radioTestComponent.radioComponents.toArray().slice(1);
+    for (const radio of otherRadios) {
+      expect(radio.checked).toBeFalsy();
+    }
+  });
+
+  it('should update radio name when radios change', () => {
+    const groupName = 'my-radio-group-name';
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setName = groupName;
+    fixture.detectChanges();
+
+    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.name).toEqual(groupName);
+    }
+  });
+
+  it('should update radio disabled state when radios change', () => {
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setDisabled = true;
+    fixture.detectChanges();
+
+    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.disabled).toEqual(true);
+    }
   });
 
   it('should update subscription to radio change when radios change', fakeAsync(() => {
