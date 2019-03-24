@@ -961,7 +961,7 @@ $theme: (
 
   radio-width: 1.125rem,
   radio-height: 1.125rem,
-  radio-border-width: 0.125rem,
+  radio-border-width: 0.0625rem,
   radio-text-color: text-color,
   radio-text-font-family: font-primary-family,
   radio-text-font-size: font-primary-text-size,
@@ -970,12 +970,9 @@ $theme: (
   radio-outline-color: outline-color,
   radio-outline-width: outline-width,
 
-  radio-border-color: color-primary,
-  radio-inner-circle-color: transparent,
-
   radio-disabled-border-color: color-basic,
   radio-disabled-text-color: text-disabled-color,
-  radio-disabled-inner-circle: color-basic,
+  radio-disabled-inner-circle-color: color-basic,
 
   radio-primary-border-color: color-primary,
   radio-primary-inner-circle-color: color-primary,
