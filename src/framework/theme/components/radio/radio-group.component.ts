@@ -59,13 +59,12 @@ import { NbRadioStatus } from './radio-status.component';
  * </nb-radio-group>
  * ```
  *
- * Also, you can disable the whole group using `disabled` attribute.
+ * You can change radio group status by setting `status` input.
+ * @stacked-example(Statuses, radio/radio-statuses.component)
  *
- * ```html
- * <nb-radio-group disabled>
- *   ...
- * </nb-radio-group>
- * ```
+ * Also, you can disable the whole group using `disabled` attribute.
+ * @stacked-example(Disabled group, radio/radio-disabled-group.component)
+ *
  * */
 @Component({
   selector: 'nb-radio-group',
@@ -103,7 +102,8 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   /**
-   * Radio buttons status.
+   * Radio buttons status. Primary by default.
+   * Possible values are 'primary', 'success', 'warning', 'danger', 'info', 'white'.
    */
   @Input('status')
   set setStatus(status: NbRadioStatus) {
