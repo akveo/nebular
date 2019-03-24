@@ -17,19 +17,7 @@
     padding: 0.375rem 1.5rem 0.375rem 0;
   }
 
-  input {
-    position: absolute;
-    opacity: 0;
-
-    &:disabled {
-      & + .radio-indicator,
-      & ~ .radio-description {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  .radio-indicator {
+  .radio-circle {
     border-radius: 50%;
     flex-shrink: 0;
     display: flex;
@@ -38,12 +26,11 @@
 
     &::before {
       content: '';
-      transition: all 0.1s;
       border-radius: 50%;
     }
   }
 
-  .radio-description {
+  .text {
     @include nb-ltr(padding-left, 0.5rem);
     @include nb-rtl(padding-right, 0.5rem);
   }

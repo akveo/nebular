@@ -5,8 +5,8 @@
  */
 
 @mixin input-border-color($color) {
-  input:checked + .radio-indicator,
-  input:hover:not(:disabled) + .radio-indicator {
+  .native-input:checked + .radio-circle,
+  .native-input:hover:not(:disabled) + .radio-circle {
     border-color: $color;
   }
 }
@@ -42,7 +42,7 @@
 
 @mixin nb-radio-theme() {
   nb-radio {
-    .radio-indicator {
+    .radio-circle {
       @include set-box-style(
           nb-theme(radio-bg),
           nb-theme(radio-size),
@@ -53,8 +53,8 @@
       @include nb-radio-check-mark(nb-theme(radio-size), nb-theme(radio-checkmark));
     }
 
-    input:checked + .radio-indicator,
-    input:disabled:checked + .radio-indicator {
+    .native-input:checked + .radio-circle,
+    .native-input:disabled:checked + .radio-circle {
       @include set-box-style(
           nb-theme(radio-checked-bg),
           nb-theme(radio-checked-size),
@@ -64,7 +64,7 @@
       @include nb-radio-check-mark(nb-theme(radio-checked-size), nb-theme(radio-checked-checkmark));
     }
 
-    input:disabled + .radio-indicator {
+    .native-input:disabled + .radio-circle {
       @include set-box-style(
           nb-theme(radio-disabled-bg),
           nb-theme(radio-disabled-size),
@@ -76,7 +76,7 @@
 
     @include nb-input-status-color(nb-theme(radio-checked-border-color));
 
-    .radio-description {
+    .text {
       color: nb-theme(radio-fg);
     }
   }

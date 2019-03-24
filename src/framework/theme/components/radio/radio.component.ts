@@ -22,7 +22,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbRadioModule,
  *   ],
  * })
@@ -71,14 +71,15 @@ import { convertToBoolProperty } from '../helpers';
     <label>
       <input
         type="radio"
+        class="native-input visually-hidden"
         [name]="name"
         [value]="value"
         [checked]="checked"
         [disabled]="disabled"
         (change)="onChange($event)"
         (click)="onClick($event)">
-      <span class="radio-indicator"></span>
-      <span class="radio-description">
+      <span class="radio-circle"></span>
+      <span class="text">
         <ng-content></ng-content>
       </span>
     </label>
