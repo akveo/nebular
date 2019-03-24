@@ -22,6 +22,7 @@ import { NbRadioModule } from './radio.module';
 import { NbRadioComponent } from './radio.component';
 import { NbRadioGroupComponent } from './radio-group.component';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbRadioStatus } from './radio-status.component';
 
 @Component({
   selector: 'nb-radio-test',
@@ -136,6 +137,17 @@ describe('NbRadioGroupComponent', () => {
     }
   });
 
+  it('should update radio status when radios added after radio group initialization', () => {
+    radioTestComponent.radioValues = [1, 2, 3];
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setStatus = NbRadioStatus.INFO;
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.status).toEqual(NbRadioStatus.INFO);
+    }
+  });
+
   it('should update subscription to radio change when radios added after radio group initialization', fakeAsync(() => {
     const radioValue = 333;
     radioTestComponent.radioValues = [radioValue];
@@ -191,6 +203,19 @@ describe('NbRadioGroupComponent', () => {
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
       expect(radio.disabled).toEqual(true);
+    }
+  });
+
+  it('should update radio status when radios change', () => {
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setStatus = NbRadioStatus.INFO;
+    fixture.detectChanges();
+
+    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.detectChanges();
+
+    for (const radio of radioTestComponent.radioComponents.toArray()) {
+      expect(radio.status).toEqual(NbRadioStatus.INFO);
     }
   });
 

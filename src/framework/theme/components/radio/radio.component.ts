@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
-
+import { NbRadioStatus } from './radio-status.component';
 
 /**
  * The `NbRadioComponent` provides the same functionality as native `<input type="radio">`
@@ -78,7 +78,14 @@ import { convertToBoolProperty } from '../helpers';
         [disabled]="disabled"
         (change)="onChange($event)"
         (click)="onClick($event)">
-      <span class="radio-circle"></span>
+      <span class="radio-circle"
+            [class.status-primary]="isPrimary"
+            [class.status-success]="isSuccess"
+            [class.status-warning]="isWarning"
+            [class.status-danger]="isDanger"
+            [class.status-info]="isInfo"
+            [class.status-white]="isWhite">
+      </span>
       <span class="text">
         <ng-content></ng-content>
       </span>
@@ -100,6 +107,8 @@ export class NbRadioComponent {
     this.disabled = convertToBoolProperty(disabled);
   }
 
+  @Input() status: NbRadioStatus;
+
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
   @Output() blur: EventEmitter<void> = new EventEmitter();
@@ -107,6 +116,30 @@ export class NbRadioComponent {
   disabled: boolean;
 
   constructor(protected cd: ChangeDetectorRef) {}
+
+  get isPrimary(): boolean {
+    return this.status === NbRadioStatus.PRIMARY;
+  }
+
+  get isSuccess(): boolean {
+    return this.status === NbRadioStatus.SUCCESS;
+  }
+
+  get isWarning(): boolean {
+    return this.status === NbRadioStatus.WARNING;
+  }
+
+  get isDanger(): boolean {
+    return this.status === NbRadioStatus.DANGER;
+  }
+
+  get isInfo(): boolean {
+    return this.status === NbRadioStatus.INFO;
+  }
+
+  get isWhite(): boolean {
+    return this.status === NbRadioStatus.WHITE;
+  }
 
   markForCheck() {
     this.cd.markForCheck();

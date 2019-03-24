@@ -27,7 +27,7 @@ import { filter, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
-
+import { NbRadioStatus } from './radio-status.component';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -102,6 +102,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.updateDisabled();
   }
 
+  /**
+   * Radio buttons status.
+   */
+  @Input('status')
+  set setStatus(status: NbRadioStatus) {
+    this.status = status;
+    this.updateStatus();
+  }
+
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
   protected disabled: boolean;
@@ -109,6 +118,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected name: string;
   protected alive: boolean = true;
   protected isTouched: boolean = false;
+  protected status: NbRadioStatus = NbRadioStatus.PRIMARY;
   protected onChange = (value: any) => {};
   protected onTouched = () => {};
 
@@ -151,6 +161,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.updateNames();
     this.updateValues();
     this.updateDisabled();
+    this.updateStatus();
     this.subscribeOnRadiosValueChange();
     this.subscribeOnRadiosBlur();
   }
@@ -221,5 +232,14 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected markTouched() {
     this.isTouched = true;
     this.onTouched();
+  }
+
+  protected updateStatus() {
+    if (this.radios) {
+      this.radios.forEach((radio: NbRadioComponent) => {
+        radio.status = this.status;
+        radio.markForCheck();
+      });
+    }
   }
 }
