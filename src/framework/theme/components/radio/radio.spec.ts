@@ -4,14 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  Component,
+  DebugElement,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import { By } from '@angular/platform-browser';
+import createSpy = jasmine.createSpy;
 
 import { NbRadioModule } from './radio.module';
 import { NbRadioComponent } from './radio.component';
+import { NbRadioGroupComponent } from './radio-group.component';
 import { NB_DOCUMENT } from '../../theme.options';
-
-import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'nb-radio-test',
@@ -26,6 +36,23 @@ import { By } from '@angular/platform-browser';
 export class NbRadioTestComponent {
   @Input() value;
   @Output() valueChange = new EventEmitter();
+}
+
+@Component({
+  template: `
+    <nb-radio-group [value]="value">
+      <ng-template [ngIf]="showRadios">
+        <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{radio}}</nb-radio>
+      </ng-template>
+    </nb-radio-group>
+  `,
+})
+export class NbRadioWithDynamicValuesTestComponent {
+  radioValues: number[] = [];
+  showRadios: boolean = false;
+
+  @ViewChild(NbRadioGroupComponent) radioGroupComponent: NbRadioGroupComponent;
+  @ViewChildren(NbRadioComponent) radioComponents: QueryList<NbRadioComponent>;
 }
 
 describe('radio', () => {
@@ -55,4 +82,75 @@ describe('radio', () => {
     const input = secondRadio.query(By.css('input'));
     input.nativeElement.click();
   });
+});
+
+describe('NbRadioGroupComponent', () => {
+  let fixture: ComponentFixture<NbRadioWithDynamicValuesTestComponent>;
+  let radioTestComponent: NbRadioWithDynamicValuesTestComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ NbRadioModule ],
+      declarations: [ NbRadioWithDynamicValuesTestComponent ],
+      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
+    });
+
+    fixture = TestBed.createComponent(NbRadioWithDynamicValuesTestComponent);
+    radioTestComponent = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should update radio properties when radios added after radio group initialization', () => {
+    radioTestComponent.radioValues = [1, 2, 3];
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setValue = 1;
+    fixture.detectChanges();
+
+    expect(radioTestComponent.radioComponents.first.checked).toEqual(true);
+  });
+
+  it('should update subscription to radio change when radios added after radio group initialization', fakeAsync(() => {
+    const radioValue = 333;
+    radioTestComponent.radioValues = [radioValue];
+    radioTestComponent.showRadios = true;
+    fixture.detectChanges();
+
+    const valueChangeSpy = createSpy('valueChange');
+    radioTestComponent.radioGroupComponent.valueChange.subscribe(valueChangeSpy);
+    radioTestComponent.radioComponents.first.valueChange.emit(radioValue);
+
+    tick();
+
+    expect(valueChangeSpy).toHaveBeenCalledTimes(1);
+    expect(valueChangeSpy).toHaveBeenCalledWith(radioValue);
+  }));
+
+  it('should update radio properties when radios change', () => {
+    radioTestComponent.showRadios = true;
+    radioTestComponent.radioGroupComponent.setValue = 1;
+    fixture.detectChanges();
+
+    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.detectChanges();
+
+    expect(radioTestComponent.radioComponents.first.checked).toEqual(true);
+  });
+
+  it('should update subscription to radio change when radios change', fakeAsync(() => {
+    radioTestComponent.showRadios = true;
+    fixture.detectChanges();
+
+    const valueChangeSpy = createSpy('valueChange');
+    radioTestComponent.radioGroupComponent.valueChange.subscribe(valueChangeSpy);
+
+    const radioValue = 333;
+    radioTestComponent.radioValues = [radioValue];
+    fixture.detectChanges();
+
+    radioTestComponent.radioComponents.first.valueChange.emit(radioValue);
+    tick();
+
+    expect(valueChangeSpy).toHaveBeenCalledTimes(1);
+    expect(valueChangeSpy).toHaveBeenCalledWith(radioValue);
+  }));
 });
