@@ -5,40 +5,47 @@
  */
 
 @mixin nb-tooltip-status($status) {
-  $color: nb-theme(tooltip-#{$status}-bg);
+  $background-color: nb-theme(tooltip-#{$status}-background-color);
+  $text-color: nb-theme(tooltip-#{$status}-text-color);
 
-  &.#{$status}-tooltip {
-    background: $color;
+  &.status-#{$status} {
+    background: $background-color;
     .arrow {
-      border-bottom-color: $color;
+      border-bottom-color: $background-color;
     }
 
     .content {
-      color: nb-theme(tooltip-status-fg);
+      color: $text-color;
     }
   }
 }
 
 @mixin nb-tooltip-theme {
   nb-tooltip {
-    $arrow-size: 5px;
-    $arrow-content-size: 3px;
+    $arrow-size: 6px;
 
-    background: nb-theme(tooltip-bg);
+    background: nb-theme(tooltip-background-color);
+    border: nb-theme(tooltip-border-width) solid nb-theme(tooltip-border-color);
+    border-radius: nb-theme(tooltip-border-radius);
+    padding: nb-theme(tooltip-padding);
+    max-width: nb-theme(tooltip-max-width);
 
     .content {
-      font-size: nb-theme(tooltip-font-size);
-      color: nb-theme(tooltip-fg);
+      color: nb-theme(tooltip-text-color);
+      font-family: nb-theme(tooltip-text-font-family);
+      font-size: nb-theme(tooltip-text-font-size);
+      font-weight: nb-theme(tooltip-text-font-weight);
+      line-height: nb-theme(tooltip-text-line-height);
     }
 
     .arrow {
-      border-bottom: $arrow-size solid nb-theme(tooltip-bg);
+      border-bottom: $arrow-size solid nb-theme(tooltip-background-color);
     }
 
-    @include nb-tooltip-status('primary');
-    @include nb-tooltip-status('danger');
-    @include nb-tooltip-status('success');
-    @include nb-tooltip-status('warning');
-    @include nb-tooltip-status('info');
+    @each $status in nb-get-statuses() {
+      @if ($status != 'basic') {
+        @include nb-tooltip-status($status);
+      }
+    }
   }
 }
