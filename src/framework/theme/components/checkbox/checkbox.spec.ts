@@ -24,8 +24,6 @@ describe('Component: NbCheckbox', () => {
 
     checkboxInput = fixture.debugElement.query(By.css('input'));
     label = fixture.debugElement.query(By.css('label'));
-    fixture.debugElement.query(By.css('customised-control-indicator'));
-    fixture.debugElement.query(By.css('customised-control-description'));
   });
 
   it('Setting disabled to true disables checkbox input', () => {

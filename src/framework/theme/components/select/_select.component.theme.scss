@@ -83,15 +83,15 @@
     }
 
     nb-checkbox {
-      .customised-control-description {
+      .text {
         color: inherit;
       }
 
-      .customised-control-input:checked ~ .customised-control-indicator {
+      .native-input:checked + .custom-checkbox {
         border-color: nb-theme(select-checkbox-color);
 
-        &::before {
-          border-color: nb-theme(select-checkmark-color);
+        svg use {
+          fill: nb-theme(select-checkmark-color);
         }
       }
     }
