@@ -74,10 +74,9 @@ describe('icons-library', () => {
     iconsLibrary.setDefaultPack('super-pack');
 
 
-    // ts-lint: disable
     expect(() => iconsLibrary.getSvgIcon('unknown'))
+      // tslint:disable-next-line:max-line-length
       .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
-    // ts-lint: enable
   });
 
   it('should throw for no default pack', () => {
@@ -101,10 +100,9 @@ describe('icons-library', () => {
     iconsLibrary.registerFontPack('font-pack');
     iconsLibrary.setDefaultPack('super-pack');
 
-    // ts-lint: disable
     expect(() => iconsLibrary.getSvgIcon('unknown'))
+      // tslint:disable-next-line:max-line-length
       .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
-    // ts-lint: enable
   });
 
   it('should throw for wrong pack when setting default', () => {

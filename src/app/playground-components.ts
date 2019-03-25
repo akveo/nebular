@@ -1318,6 +1318,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'IconShowcaseComponent',
         name: 'Icon Showcase',
       },
+      {
+        path: 'icon-colors.component',
+        link: '/icon/icon-colors.component',
+        component: 'IconColorsComponent',
+        name: 'Icon Colors',
+      },
     ],
   },
   {
