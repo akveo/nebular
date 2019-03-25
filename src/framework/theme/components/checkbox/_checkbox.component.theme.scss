@@ -4,6 +4,81 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@mixin nb-checkbox-status($status) {
+  nb-checkbox.status-#{$status} {
+    .custom-checkbox {
+      background-color: nb-theme(checkbox-#{$status}-background-color);
+      border-color: nb-theme(checkbox-#{$status}-border-color);
+    }
+
+    .custom-checkbox.checked {
+      background-color: nb-theme(checkbox-#{$status}-checked-background-color);
+      border-color: nb-theme(checkbox-#{$status}-checked-border-color);
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        width: 50%;
+
+        use {
+          fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
+        }
+      }
+    }
+
+    .custom-checkbox.indeterminate {
+      background-color: nb-theme(checkbox-#{$status}-indeterminate-background-color);
+      border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        width: 50%;
+
+        use {
+          fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
+        }
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: nb-theme(checkbox-#{$status}-focus-background-color);
+    }
+
+    .custom-checkbox:hover {
+      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
+    }
+
+    .native-input:active + .custom-checkbox {
+      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
+    }
+
+    .native-input:disabled {
+      & + .custom-checkbox {
+        background-color: nb-theme(checkbox-disabled-background-color);
+        border-color: nb-theme(checkbox-disabled-border-color);
+
+        svg use {
+          fill: nb-theme(checkbox-disabled-checkmark-color);
+        }
+      }
+      & ~ .text {
+        color: nb-theme(checkbox-disabled-text-color);
+      }
+    }
+  }
+}
+
 @mixin nb-checkbox-theme() {
   nb-checkbox {
     .custom-checkbox {
@@ -28,77 +103,8 @@
   }
 
   @each $status in nb-get-statuses() {
-    nb-checkbox.status-#{$status} {
-      .custom-checkbox {
-        background-color: nb-theme(checkbox-#{$status}-background-color);
-        border-color: nb-theme(checkbox-#{$status}-border-color);
-      }
-
-      .custom-checkbox.checked {
-        background-color: nb-theme(checkbox-#{$status}-checked-background-color);
-        border-color: nb-theme(checkbox-#{$status}-checked-border-color);
-        position: relative;
-
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          height: auto;
-          width: 50%;
-
-          use {
-            fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
-          }
-        }
-      }
-
-      .custom-checkbox.indeterminate {
-        background-color: nb-theme(checkbox-#{$status}-indeterminate-background-color);
-        border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
-        position: relative;
-
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          height: auto;
-          width: 50%;
-
-          use {
-            fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
-          }
-        }
-      }
-
-      .native-input:focus + .custom-checkbox {
-        border-color: nb-theme(checkbox-#{$status}-focus-background-color);
-      }
-
-      .custom-checkbox:hover {
-        background-color: nb-theme(checkbox-#{$status}-hover-background-color);
-        border-color: nb-theme(checkbox-#{$status}-hover-border-color);
-      }
-
-      .native-input:active + .custom-checkbox {
-        background-color: nb-theme(checkbox-#{$status}-hover-background-color);
-        border-color: nb-theme(checkbox-#{$status}-hover-border-color);
-      }
-
-      .native-input:disabled {
-        & + .custom-checkbox {
-          background-color: nb-theme(checkbox-disabled-background-color);
-          border-color: nb-theme(checkbox-disabled-border-color);
-
-          svg use {
-            fill: nb-theme(checkbox-disabled-checkmark-color);
-          }
-        }
-        & ~ .text {
-          color: nb-theme(checkbox-disabled-text-color);
-        }
-      }
+    @if ($status != 'basic') {
+      @include nb-checkbox-status($status);
     }
   }
 }
