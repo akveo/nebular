@@ -23,7 +23,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     <ng-container *ngIf="readyFiles?.length > 1">
       <div class="message-content-group">
         <a *ngFor="let file of readyFiles" [href]="file.url" target="_blank">
-          <nb-icon [icon]="file.icon" *ngIf="!file.urlStyle"></nb-icon>
+          <nb-icon [icon]="file.icon" pack="essentials" *ngIf="!file.urlStyle"></nb-icon>
           <div *ngIf="file.isImage" [style.background-image]="file.urlStyle"></div>
         </a>
       </div>

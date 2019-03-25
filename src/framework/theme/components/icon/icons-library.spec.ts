@@ -74,8 +74,10 @@ describe('icons-library', () => {
     iconsLibrary.setDefaultPack('super-pack');
 
 
+    // ts-lint: disable
     expect(() => iconsLibrary.getSvgIcon('unknown'))
-      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'`);
+      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
+    // ts-lint: enable
   });
 
   it('should throw for no default pack', () => {
@@ -99,9 +101,10 @@ describe('icons-library', () => {
     iconsLibrary.registerFontPack('font-pack');
     iconsLibrary.setDefaultPack('super-pack');
 
-
+    // ts-lint: disable
     expect(() => iconsLibrary.getSvgIcon('unknown'))
-      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'`);
+      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
+    // ts-lint: enable
   });
 
   it('should throw for wrong pack when setting default', () => {
@@ -137,6 +140,7 @@ describe('icons-library', () => {
     const svgIcon = iconsLibrary.getIcon('home', 'super-pack');
 
     expect(icon.icon.render()).toEqual('');
+    expect(icon.icon.getClasses()).toEqual(['font', 'fp-home']);
     expect(icon.icon.getClasses()).toEqual(['font', 'fp-home']);
     expect(icon.name).toEqual('home');
     expect(icon.pack).toEqual('font-pack');

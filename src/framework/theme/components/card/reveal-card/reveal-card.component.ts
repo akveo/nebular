@@ -63,7 +63,7 @@ import { Component, Input, HostBinding } from '@angular/core';
       <ng-content select="nb-card-back"></ng-content>
     </div>
     <a *ngIf="showToggleButton" class="reveal-button" (click)="toggle()">
-      <i class="nb-arrow-dropdown" aria-hidden="true"></i>
+      <nb-icon icon="chevron-down-outline" aria-hidden="true"></nb-icon>
     </a>
   `,
 })

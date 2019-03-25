@@ -18,6 +18,8 @@ export class IconShowcaseComponent {
     // package release setup
     // update all icon components
     // migration strategy (for nebular icons, and when eva becomes default)
+    // packages smoke
+    // check icons in all playground components
     // do examples:
     // icon in button
     // icon prefix
@@ -26,5 +28,6 @@ export class IconShowcaseComponent {
     // 3. custom font pack
     // 4. custom svg pack
     // 5 custom svg icon rendering
+    // TODO: STATUS ICONS
   }
 }

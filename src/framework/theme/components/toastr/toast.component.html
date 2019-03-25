@@ -1,4 +1,6 @@
-<nb-icon [icon]="icon" *ngIf="hasIcon"></nb-icon>
+<div class="icon-container" *ngIf="hasIcon && icon">
+  <nb-icon [icon]="icon" [pack]="iconPack ? iconPack : 'essentials'"></nb-icon>
+</div>
 <div class="content-container">
   <span class="title">{{ toast.title }}</span>
   <div class="message">{{ toast.message }}</div>

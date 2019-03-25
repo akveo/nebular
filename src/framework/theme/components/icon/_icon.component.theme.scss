@@ -8,6 +8,8 @@
   nb-icon {
     font-size: nb-theme(icon-font-size);
     line-height: nb-theme(icon-line-height);
+    width: 1em;
+    height: 1em;
 
     &.primary-icon {
       color: nb-theme(icon-primary-fg);

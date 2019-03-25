@@ -33,16 +33,16 @@ import { NbWindowRef } from './window-ref';
 
         <div class="buttons">
           <button class="button" (click)="minimize()">
-            <i class="nb-fold"></i>
+            <nb-icon icon="minus-outline" pack="essentials"></nb-icon>
           </button>
           <button class="button" *ngIf="isFullScreen" (click)="maximize()">
-            <i class="nb-minimize"></i>
+            <nb-icon icon="collapse-outline" pack="essentials"></nb-icon>
           </button>
           <button class="button" *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
-            <i class="nb-maximize"></i>
+            <nb-icon icon="expand-outline" pack="essentials"></nb-icon>
           </button>
           <button class="button" (click)="close()">
-            <i class="nb-close"></i>
+            <nb-icon icon="close-outline" pack="essentials"></nb-icon>
           </button>
         </div>
       </nb-card-header>

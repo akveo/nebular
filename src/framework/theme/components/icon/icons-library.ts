@@ -24,7 +24,7 @@ function throwNoDefaultPackError() {
 }
 
 function throwIconNotFoundError(name: string, pack: string) {
-  throw Error(`Icon '${name}' is not registered in pack '${pack}'`);
+  throw Error(`Icon '${name}' is not registered in pack '${pack}'. Check icon name or consider switching icon pack.`);
 }
 
 /**
@@ -52,6 +52,10 @@ export class NbIconsLibrary {
       icons: new Map(),
       type: NbIconPackType.FONT,
     });
+  }
+
+  getPack(name: string) {
+    return this.packs.get(name);
   }
 
   setDefaultPack(name: string) {

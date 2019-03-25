@@ -265,12 +265,17 @@
         @include nb-rtl(border-bottom-right-radius, 0);
         @include nb-rtl(border-top-right-radius, 0);
         padding: 0 1.5rem;
+        color: white;
 
         &.with-icon {
-          font-size: 3rem;
+          font-size: 1.25rem;
           line-height: 1;
           padding: 0 1.25rem 0 0.875rem;
           text-align: center;
+
+          nb-icon {
+            vertical-align: middle;
+          }
         }
       }
 
