@@ -5,9 +5,10 @@
  */
 
 import { Component, HostBinding, Input } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { NbPosition, NbRenderableContainer } from '../cdk';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NbTooltipStatus } from './tooltip-status';
 
 
 /**
@@ -72,7 +73,7 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string, status?: string } = {};
+  context: { icon?: string, status?: NbTooltipStatus } = {};
 
   get statusClass() {
     return this.context.status ? `status-${this.context.status}` : '';

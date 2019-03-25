@@ -8,6 +8,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnIn
 
 import { NbAdjustment, NbDynamicOverlay, NbDynamicOverlayHandler, NbPosition, NbTrigger } from '../cdk';
 import { NbTooltipComponent } from './tooltip.component';
+import { NbTooltipStatus } from './tooltip-status';
 
 /**
  *
@@ -19,7 +20,7 @@ import { NbTooltipComponent } from './tooltip.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbTooltipModule,
  *   ],
  * })
@@ -90,7 +91,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * @param {string} status
    */
   @Input('nbTooltipStatus')
-  set status(status: string) {
+  set status(status: NbTooltipStatus) {
     this.context = Object.assign(this.context, {status});
   }
 
