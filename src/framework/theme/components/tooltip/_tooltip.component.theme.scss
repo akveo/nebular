@@ -23,6 +23,7 @@
 @mixin nb-tooltip-theme {
   nb-tooltip {
     $arrow-size: 6px;
+    box-shadow: nb-theme(tooltip-shadow);
 
     background: nb-theme(tooltip-background-color);
     border: nb-theme(tooltip-border-width) solid nb-theme(tooltip-border-color);
