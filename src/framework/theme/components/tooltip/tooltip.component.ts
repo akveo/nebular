@@ -17,15 +17,30 @@ import { NbTooltipStatus } from './tooltip-status';
  *
  * @styles
  *
- * tooltip-bg
- * tooltip-primary-bg
- * tooltip-info-bg
- * tooltip-success-bg
- * tooltip-warning-bg
- * tooltip-danger-bg
- * tooltip-fg
- * tooltip-shadow
- * tooltip-font-size
+ * tooltip-background-color:
+ * tooltip-border-color:
+ * tooltip-border-width:
+ * tooltip-border-radius:
+ * tooltip-padding:
+ * tooltip-text-color:
+ * tooltip-text-font-family:
+ * tooltip-text-font-size:
+ * tooltip-text-font-weight:
+ * tooltip-text-line-height:
+ * tooltip-max-width:
+ * tooltip-primary-background-color:
+ * tooltip-primary-text-color:
+ * tooltip-info-background-color:
+ * tooltip-info-text-color:
+ * tooltip-success-background-color:
+ * tooltip-success-text-color:
+ * tooltip-warning-background-color:
+ * tooltip-warning-text-color:
+ * tooltip-danger-background-color:
+ * tooltip-danger-text-color:
+ * tooltip-white-background-color:
+ * tooltip-white-text-color:
+ * tooltip-shadow:
  *
  */
 @Component({
