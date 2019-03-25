@@ -6,6 +6,7 @@
 
 import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NbCheckboxStatus } from './checkbox-status';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -194,7 +195,7 @@ import { convertToBoolProperty } from '../helpers';
 export class NbCheckboxComponent implements ControlValueAccessor {
 
   isFocused: boolean;
-  status: string = 'primary';
+  status: NbCheckboxStatus = NbCheckboxStatus.PRIMARY;
 
   /**
    * Checkbox value
@@ -214,8 +215,8 @@ export class NbCheckboxComponent implements ControlValueAccessor {
    * @param {string} val
    */
   @Input('status')
-  set setStatus(val: string) {
-    this.status = val;
+  set setStatus(value: NbCheckboxStatus) {
+    this.status = value;
   }
 
   /**
@@ -234,32 +235,32 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === 'primary';
+    return this.status === NbCheckboxStatus.PRIMARY;
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === 'success';
+    return this.status === NbCheckboxStatus.SUCCESS;
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === 'warning';
+    return this.status === NbCheckboxStatus.WARNING;
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === 'danger';
+    return this.status === NbCheckboxStatus.DANGER;
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === 'info';
+    return this.status === NbCheckboxStatus.INFO;
   }
 
   @HostBinding('class.status-white')
   get white() {
-    return this.status === 'white';
+    return this.status === NbCheckboxStatus.WHITE;
   }
 
   onChange: any = () => { };
