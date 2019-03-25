@@ -281,3 +281,7 @@ $nb-themes-export: () !global;
     }
   }
 }
+
+@function nb-get-statuses() {
+  @return 'primary', 'success', 'warning', 'danger', 'info', 'white', 'basic';
+}
