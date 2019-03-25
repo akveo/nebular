@@ -15,11 +15,11 @@ export class IconShowcaseComponent {
 
   constructor() {
 
-    // package release setup
-    // update all icon components
     // migration strategy (for nebular icons, and when eva becomes default)
+    // - essential icons
+    // - nebular eva icons
+    // - how to use nebular font
     // packages smoke
-    // check icons in all playground components
     // do examples:
     // icon in button
     // icon prefix

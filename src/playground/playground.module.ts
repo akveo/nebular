@@ -5,9 +5,11 @@
  */
 
 import { NgModule } from '@angular/core';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 import { PlaygroundRoutingModule } from './playground-routing.module';
 
 @NgModule({
-  imports: [ PlaygroundRoutingModule ],
+  imports: [ PlaygroundRoutingModule, NbEvaIconsModule ],
 })
 export class PlaygroundModule {}

@@ -62,7 +62,7 @@ export const messages = [
     files: [
       {
         url: 'https://i.gifer.com/no.gif',
-        icon: 'compose',
+        icon: 'file-text-outline',
       },
     ],
     user: {

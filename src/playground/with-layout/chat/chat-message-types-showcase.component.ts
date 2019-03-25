@@ -51,7 +51,7 @@ import { Component } from '@angular/core';
             sender="John Doe"
             [reply]="true"
             [date]="date"
-            [files]="[ { url: 'http://google.com', icon: 'compose' } ]"
+            [files]="[ { url: 'http://google.com', icon: 'file-text-outline' } ]"
             [avatar]="'https://i.gifer.com/no.gif'">
           </nb-chat-message>
           <nb-chat-message
@@ -70,7 +70,7 @@ import { Component } from '@angular/core';
             [reply]="true"
             [date]="date"
             [files]="[
-              { url: 'http://google.com', icon: 'compose' },
+              { url: 'http://google.com', icon: 'file-text-outline' },
               { url: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' },
               { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' }
              ]"

@@ -13,14 +13,14 @@ import { NbBadgeComponent } from '@nebular/theme';
     <nb-layout>
       <nb-layout-header>
         <nb-actions>
-          <nb-action icon="email" (click)="actionOnClick('first')"></nb-action>
-          <nb-action icon="email"></nb-action>
+          <nb-action icon="search-outline" (click)="actionOnClick('first')"></nb-action>
+          <nb-action icon="search-outline"></nb-action>
           <nb-action>
             <nb-user></nb-user>
           </nb-action>
-          <nb-action icon="email"></nb-action>
-          <nb-action icon="email"></nb-action>
-          <nb-action icon="email" disabled></nb-action>
+          <nb-action icon="search-outline"></nb-action>
+          <nb-action icon="search-outline"></nb-action>
+          <nb-action icon="search-outline" disabled></nb-action>
           <nb-action>
             Hello
           </nb-action>
@@ -31,14 +31,14 @@ import { NbBadgeComponent } from '@nebular/theme';
         <nb-card>
           <nb-card-body>
             <nb-actions inverse>
-              <nb-action icon="email" (click)="actionOnClick('first')"></nb-action>
-              <nb-action icon="email"></nb-action>
+              <nb-action icon="search-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
               <nb-action>
                 <nb-user></nb-user>
               </nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email" disabled></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline" disabled></nb-action>
               <nb-action>
                 Hello
               </nb-action>
@@ -49,14 +49,14 @@ import { NbBadgeComponent } from '@nebular/theme';
         <nb-card>
           <nb-card-body>
             <nb-actions inverse size="medium">
-              <nb-action icon="email" (click)="actionOnClick('first')"></nb-action>
-              <nb-action icon="email"></nb-action>
+              <nb-action icon="search-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
               <nb-action>
                 <nb-user></nb-user>
               </nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email" disabled></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline" disabled></nb-action>
               <nb-action>
                 Hello
               </nb-action>
@@ -67,14 +67,14 @@ import { NbBadgeComponent } from '@nebular/theme';
         <nb-card>
           <nb-card-body>
             <nb-actions inverse size="large">
-              <nb-action icon="email" (click)="actionOnClick('first')"></nb-action>
-              <nb-action icon="email"></nb-action>
+              <nb-action icon="search-outline" (click)="actionOnClick('first')"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
               <nb-action>
                 <nb-user></nb-user>
               </nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email"></nb-action>
-              <nb-action icon="email" disabled></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline"></nb-action>
+              <nb-action icon="search-outline" disabled></nb-action>
               <nb-action>
                 Hello
               </nb-action>
@@ -95,31 +95,31 @@ import { NbBadgeComponent } from '@nebular/theme';
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_DANGER"
                 [badgePosition]="badge.TOP_LEFT"
-                icon="email">
+                icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_WARNING"
                 [badgePosition]="badge.BOTTOM_RIGHT"
-                icon="email">
+                icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_SUCCESS"
                 [badgePosition]="badge.BOTTOM_LEFT"
-                icon="email">
+                icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_INFO"
                 [badgePosition]="badge.TOP_RIGHT"
-                icon="email">
+                icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
                 [badgeStatus]="badge.STATUS_INFO"
                 [badgePosition]="badge.TOP_RIGHT"
-                icon="email"
+                icon="search-outline"
                 disabled>
               </nb-action>
               <nb-action badgeText="29">Badge</nb-action>

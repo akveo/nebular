@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
     </nb-tree-grid-row-toggle>
     <ng-template #fileIcon>
-      <nb-icon icon="compose"></nb-icon>
+      <nb-icon icon="file-text-outline"></nb-icon>
     </ng-template>
   `,
 })

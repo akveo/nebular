@@ -34,7 +34,7 @@ export class ChatShowcaseComponent {
       return {
         url: file.src,
         type: file.type,
-        icon: 'compose',
+        icon: 'file-text-outline',
       };
     });
 

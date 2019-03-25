@@ -16,22 +16,22 @@ export class MenuShowcaseComponent {
   items = [
     {
       title: 'Profile',
-      icon: 'person',
+      icon: 'person-outline',
       link: [],
     },
     {
       title: 'Change Password',
-      icon: 'locked',
+      icon: 'lock-outline',
       link: [],
     },
     {
       title: 'Privacy Policy',
-      icon: 'checkmark',
+      icon: 'checkmark-outline',
       link: [],
     },
     {
       title: 'Logout',
-      icon: 'arrow-thin-left',
+      icon: 'unlock-outline',
       link: [],
     },
   ];
