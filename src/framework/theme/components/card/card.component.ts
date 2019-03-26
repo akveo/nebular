@@ -17,20 +17,19 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * card-header-font-family:
- * card-header-font-size:
- * card-header-font-weight:
- * card-header-fg:
- * card-header-fg-heading:
- * card-header-active-bg:
- * card-header-active-fg:
- * card-header-disabled-bg:
- * card-header-primary-bg:
- * card-header-info-bg:
- * card-header-success-bg:
- * card-header-warning-bg:
- * card-header-danger-bg:
- *
+ * card-header-text-color:
+ * card-header-text-font-family:
+ * card-header-text-font-size:
+ * card-header-text-font-weight:
+ * card-header-text-line-height:
+ * card-header-disabled-background-color:
+ * card-header-disabled-text-color:
+ * card-header-primary-background-color:
+ * card-header-info-background-color:
+ * card-header-success-background-color:
+ * card-header-warning-background-color:
+ * card-header-danger-background-color:
+ * card-header-white-background-color:
  */
 @Component({
   selector: 'nb-card-header',
@@ -100,7 +99,7 @@ export class NbCardFooterComponent {
  * so `nb-card-body` styling will not be applied.
  *
  * Consider an example with `nb-list` component:
- * @stacked-example(Showcase, card/card-without-body.component)
+ * @stacked-example(Card with list, card/card-without-body.component)
  *
  * Colored cards could be simply configured by providing a `status` property:
  * @stacked-example(Colored Card, card/card-colors.component)
@@ -113,10 +112,19 @@ export class NbCardFooterComponent {
  *
  * @styles
  *
- * card-line-height:
- * card-font-weight:
- * card-fg-text:
- * card-bg:
+ * card-background-color:
+ * card-text-color:
+ * card-text-font-family:
+ * card-text-font-size:
+ * card-text-font-weight:
+ * card-text-line-height:
+ * card-border-width:
+ * card-border-style:
+ * card-border-color:
+ * card-border-radius:
+ * card-padding:
+ * card-divider-color:
+ * card-divider-width:
  * card-height-xxsmall:
  * card-height-xsmall:
  * card-height-small:
@@ -125,11 +133,10 @@ export class NbCardFooterComponent {
  * card-height-xlarge:
  * card-height-xxlarge:
  * card-shadow:
- * card-border-radius:
- * card-padding:
- * card-margin:
- * card-separator:
- *
+ * card-margin-bottom:
+ * card-scrollbar-color:
+ * card-scrollbar-background-color:
+ * card-scrollbar-width:
  */
 @Component({
   selector: 'nb-card',
