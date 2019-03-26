@@ -16,6 +16,7 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-bootstrap-global();
+  @include nb-icon-theme();
 
   @include nb-typography();
 

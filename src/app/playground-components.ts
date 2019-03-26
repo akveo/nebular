@@ -174,6 +174,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonTypesComponent',
         name: 'Button Types',
       },
+      {
+        path: 'button-icon.component',
+        link: '/button/button-icon.component',
+        component: 'ButtonIconComponent',
+        name: 'Button Icon',
+      },
     ],
   },
   {
