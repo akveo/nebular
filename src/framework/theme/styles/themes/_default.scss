@@ -419,12 +419,13 @@ $theme: (
   user-size-large: 3.25rem,
   user-size-xlarge: 4rem,
 
-  popover-fg: color-fg-heading,
-  popover-bg: color-bg,
-  popover-border: color-success,
-  popover-border-radius: radius,
+  popover-text-color: color-black,
+  popover-background-color: color-white,
+  popover-border-width: 2px,
+  popover-border-color: transparent,
+  popover-border-radius: 0.5rem,
   popover-shadow: none,
-  popover-arrow-size: 11px,
+  popover-arrow-size: 0.6875rem,
 
   context-menu-fg: color-fg-heading,
   context-menu-bg: color-bg,
