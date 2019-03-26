@@ -27,8 +27,6 @@ export class NbSpinnerComponent {
   static readonly SIZE_XLARGE = 'xlarge';
   static readonly SIZE_XXLARGE = 'xxlarge';
 
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
   static readonly STATUS_PRIMARY = 'primary';
   static readonly STATUS_INFO = 'info';
   static readonly STATUS_SUCCESS = 'success';
@@ -36,7 +34,7 @@ export class NbSpinnerComponent {
   static readonly STATUS_DANGER = 'danger';
 
   size: string = NbSpinnerComponent.SIZE_MEDIUM;
-  status: string = NbSpinnerComponent.STATUS_ACTIVE;
+  status: string = NbSpinnerComponent.STATUS_PRIMARY;
 
   /**
    * Loading text that is shown near the icon
@@ -56,7 +54,7 @@ export class NbSpinnerComponent {
 
   /**
    * Spiiner status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
+   * primary, info, success, warning, danger
    * @param {string} val
    */
   @Input('status')
