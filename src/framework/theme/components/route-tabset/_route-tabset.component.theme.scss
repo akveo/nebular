@@ -8,63 +8,103 @@
 
   nb-route-tabset {
     @include nb-scrollbars(
-        nb-theme(scrollbar-fg),
-        nb-theme(scrollbar-bg),
-        nb-theme(scrollbar-width));
+        nb-theme(route-tabset-scrollbar-color),
+        nb-theme(route-tabset-scrollbar-background-color),
+        nb-theme(route-tabset-scrollbar-width));
+
+    background-color: nb-theme(route-tabset-background-color);
+    border-radius: nb-theme(route-tabset-border-radius);
+    box-shadow: nb-theme(route-tabset-shadow);
 
     .route-tabset {
-      font-family: nb-theme(route-tabs-font-family);
-      font-size: nb-theme(route-tabs-font-size);
+      border-bottom: nb-theme(route-tabset-divider-width) solid nb-theme(route-tabset-divider-color);
+    }
 
-      padding: 0 nb-theme(route-tabs-padding);
-      border-bottom: 1px solid nb-theme(route-tabs-separator);
+    .tab-link {
+      background-color: nb-theme(route-tabset-tab-background-color);
+      cursor: pointer;
+      padding: nb-theme(route-tabset-tab-padding);
 
-      .route-tab {
-        background: nb-theme(route-tabs-header-bg);
-        min-width: nb-theme(route-tabs-header-min-width);
-        cursor: pointer;
-        a {
-          padding: nb-theme(route-tabs-padding);
-          color: nb-theme(route-tabs-fg);
+      &::before {
+        background-color: nb-theme(route-tabset-tab-underline-color);
+        height: nb-theme(route-tabset-tab-underline-width);
+      }
+    }
 
-          &:hover {
-            color: nb-theme(route-tabs-fg-heading);
-          }
+    .tab-text {
+      color: nb-theme(route-tabset-tab-text-color);
+      font-family: nb-theme(route-tabset-tab-text-font-family);
+      font-size: nb-theme(route-tabset-tab-text-font-size);
+      font-weight: nb-theme(route-tabset-tab-text-font-weight);
+      line-height: nb-theme(route-tabset-tab-text-line-height);
+      text-transform: nb-theme(route-tabset-tab-text-transform);
+    }
 
-          &::before {
-            background: nb-theme(route-tabs-selected);
-          }
+    .route-tab {
+      min-width: nb-theme(route-tabs-header-min-width);
+    }
+
+    .route-tab.active {
+      .tab-text {
+        color: nb-theme(tabset-tab-active-text-color);
+      }
+
+      .tab-link {
+        background-color: nb-theme(tabset-tab-active-background-color);
+        &::before {
+          background-color: nb-theme(tabset-tab-active-underline-color);
         }
+      }
+    }
 
-        &.active {
-          background: nb-theme(route-tabs-active-bg);
+    .route-tab:focus {
+      .tab-text {
+        color: nb-theme(route-tabset-tab-focus-text-color);
+      }
 
-          a {
-            font-weight: nb-theme(route-tabs-active-font-weight);
-            color: nb-theme(route-tabs-fg-heading);
-          }
+      .tab-link {
+        background-color: nb-theme(route-tabset-tab-focus-background-color);
+        &::before {
+          background-color: nb-theme(route-tabset-tab-focus-underline-color);
         }
+      }
+    }
 
-        &.responsive {
-          @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
-            a span {
-              display: none;
-            }
-          }
+    .route-tab:hover {
+      .tab-text {
+        color: nb-theme(route-tabset-tab-hover-text-color);
+      }
+
+      .tab-link {
+        background-color: nb-theme(route-tabset-tab-hover-background-color);
+        &::before {
+          background-color: nb-theme(route-tabset-tab-hover-underline-color);
         }
+      }
+    }
 
+    .route-tab.disabled {
+      cursor: default;
+      pointer-events: none;
 
-        &.disabled {
-          pointer-events: none;
-          cursor: default;
-          a {
-            color: nb-theme(route-tabs-fg-disabled);
-            cursor: default;
-            pointer-events: none;
-            &:hover {
-              color: nb-theme(route-tabs-fg-disabled);
-            }
-          }
+      .tab-text {
+        color: nb-theme(route-tabset-tab-disabled-text-color);
+      }
+
+      .tab-link {
+        background-color: nb-theme(route-tabset-tab-disabled-background-color);
+        cursor: default;
+        pointer-events: none;
+        &::before {
+          background-color: nb-theme(route-tabset-tab-disabled-underline-color);
+        }
+      }
+    }
+
+    .route-tab.responsive {
+      @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
+        .tab-text {
+          display: none;
         }
       }
     }
