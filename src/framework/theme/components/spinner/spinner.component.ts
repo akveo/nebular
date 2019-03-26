@@ -51,72 +51,62 @@ export class NbSpinnerComponent {
     this.status = value;
   }
 
-  @HostBinding('class.xxsmall-spinner')
+  @HostBinding('class.size-xxsmall')
   get xxsmall() {
     return this.size === NbSpinnerSize.XXSMALL;
   }
 
-  @HostBinding('class.xsmall-spinner')
+  @HostBinding('class.size-xsmall')
   get xsmall() {
     return this.size === NbSpinnerSize.XSMALL;
   }
 
-  @HostBinding('class.small-spinner')
+  @HostBinding('class.size-small')
   get small() {
     return this.size === NbSpinnerSize.SMALL;
   }
 
-  @HostBinding('class.medium-spinner')
+  @HostBinding('class.size-medium')
   get medium() {
     return this.size === NbSpinnerSize.MEDIUM;
   }
 
-  @HostBinding('class.large-spinner')
+  @HostBinding('class.size-large')
   get large() {
     return this.size === NbSpinnerSize.LARGE;
   }
 
-  @HostBinding('class.xlarge-spinner')
+  @HostBinding('class.size-xlarge')
   get xlarge() {
     return this.size === NbSpinnerSize.XLARGE;
   }
 
-  @HostBinding('class.xxlarge-spinner')
+  @HostBinding('class.size-xxlarge')
   get xxlarge() {
     return this.size === NbSpinnerSize.XXLARGE;
   }
 
-  @HostBinding('class.active-spinner')
-  get active() {
-    return this.status === NbSpinnerComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.disabled-spinner')
-  get disabled() {
-    return this.status === NbSpinnerComponent.STATUS_DISABLED;
-  }
-
-  @HostBinding('class.primary-spinner')
+  @HostBinding('class.status-primary')
   get primary() {
     return this.status === NbSpinnerStatus.PRIMARY;
   }
 
-  @HostBinding('class.info-spinner')
+  @HostBinding('class.status-info')
   get info() {
     return this.status === NbSpinnerStatus.INFO;
   }
 
-  @HostBinding('class.success-spinner')
+  @HostBinding('class.status-success')
   get success() {
     return this.status === NbSpinnerStatus.SUCCESS;
   }
 
-  @HostBinding('class.warning-spinner')
+  @HostBinding('class.status-warning')
   get warning() {
     return this.status === NbSpinnerStatus.WARNING;
   }
 
-  @HostBinding('class.danger-spinner')
+  @HostBinding('class.status-danger')
   get danger() {
     return this.status === NbSpinnerStatus.DANGER;
   }
