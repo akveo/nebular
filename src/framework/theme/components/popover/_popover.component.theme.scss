@@ -8,19 +8,19 @@
   nb-popover {
     $arrow-size: nb-theme(popover-arrow-size);
 
-    border: 2px solid nb-theme(popover-border);
+    border: nb-theme(popover-border-width) solid nb-theme(popover-border-color);
     border-radius: nb-theme(popover-border-radius);
-    background: nb-theme(popover-bg);
+    background: nb-theme(popover-background-color);
     box-shadow: nb-theme(popover-shadow);
 
     .primitive-overlay {
-      color: nb-theme(popover-fg);
+      color: nb-theme(popover-text-color);
     }
 
     .arrow {
       border-left: $arrow-size solid transparent;
       border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid nb-theme(popover-border);
+      border-bottom: $arrow-size solid nb-theme(popover-border-color);
 
       &::after {
         position: absolute;
@@ -31,7 +31,7 @@
         left: calc(50% - #{$arrow-size});
         border-left: $arrow-size solid transparent;
         border-right: $arrow-size solid transparent;
-        border-bottom: $arrow-size solid nb-theme(popover-bg);
+        border-bottom: $arrow-size solid nb-theme(popover-background-color);
         clip-path: inset(0 0 2px);
       }
     }
