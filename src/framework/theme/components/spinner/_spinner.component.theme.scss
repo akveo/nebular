@@ -11,64 +11,42 @@
   }
 
   nb-spinner {
-    background-color: nb-theme(spinner-bg);
-
-    &.active-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-active-bg);
-    }
-    &.disabled-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-disabled-bg);
-    }
-    &.primary-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-primary-bg);
-    }
-    &.info-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-info-bg);
-    }
-    &.success-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-success-bg);
-    }
-    &.warning-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-warning-bg);
-    }
-    &.danger-spinner .spin-circle {
-      border-right-color: nb-theme(spinner-danger-bg);
-    }
+    background-color: nb-theme(spinner-background-color);
 
     .spin-circle {
-      border-left-color: nb-theme(spinner-circle-bg);
-      border-top-color: nb-theme(spinner-circle-bg);
-      border-bottom-color: nb-theme(spinner-circle-bg);
+      border-right-color: nb-theme(spinner-circle-filled-color);
+      border-left-color: nb-theme(spinner-circle-empty-color);
+      border-top-color: nb-theme(spinner-circle-empty-color);
+      border-bottom-color: nb-theme(spinner-circle-empty-color);
     }
 
     .message {
-      color: nb-theme(spinner-fg);
-    }
-
-    &.xxsmall-spinner {
-      font-size: nb-theme(spinner-xxsmall);
-    }
-    &.xsmall-spinner {
-      font-size: nb-theme(spinner-xsmall);
-    }
-    &.small-spinner {
-      font-size: nb-theme(spinner-small);
-    }
-    &.medium-spinner {
-      font-size: nb-theme(spinner-medium);
-    }
-    &.large-spinner {
-      font-size: nb-theme(spinner-large);
-    }
-    &.xlarge-spinner {
-      font-size: nb-theme(spinner-xlarge);
-    }
-    &.xxlarge-spinner {
-      font-size: nb-theme(spinner-xxlarge);
+      color: nb-theme(spinner-text-color);
+      font-family: nb-theme(spinner-text-font-family);
+      font-size: nb-theme(spinner-text-font-size);
+      font-weight: nb-theme(spinner-text-font-weight);
+      line-height: nb-theme(spinner-text-line-height);
     }
   }
 
-  @-webkit-keyframes spin {
+  @each $status in nb-get-statuses() {
+    @if ($status != 'basic') {
+      nb-spinner.status-#{$status} .spin-circle {
+        border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
+        border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
+        border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
+        border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
+      }
+    }
+  }
+
+  @each $size in 'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge' {
+    nb-spinner.size-#{$size} {
+      font-size: nb-theme(spinner-height-#{$size});
+    }
+  }
+
+  @keyframes spin {
     0% {
       transform: rotate(0deg);
     }
