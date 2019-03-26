@@ -13,9 +13,13 @@ import {
   Input,
   OnInit,
   Renderer2,
-  ViewContainerRef, HostBinding,
+  ViewContainerRef,
+  HostBinding,
 } from '@angular/core';
+
 import { NbSpinnerComponent } from './spinner.component';
+import { NbSpinnerSize } from './spinner-size';
+import { NbSpinnerStatus } from './spinner-status';
 
 /**
  * Styled spinner directive
@@ -72,16 +76,16 @@ export class NbSpinnerDirective implements OnInit {
   @Input('nbSpinnerMessage') spinnerMessage: string;
 
   /**
-   * Spinner status color active, disabled, primary, info, success, warning, danger
+   * Spinner status color primary, info, success, warning, danger, white
    * @type {string}
    */
-  @Input('nbSpinnerStatus') spinnerStatus: string;
+  @Input('nbSpinnerStatus') spinnerStatus: NbSpinnerStatus;
 
   /**
    * Spinner size, available sizes: xxsmall, xsmall, small, medium, large, xlarge, xxlarge
    * @type {string}
    */
-  @Input('nbSpinnerSize') spinnerSize: string;
+  @Input('nbSpinnerSize') spinnerSize: NbSpinnerSize;
 
   /**
    * Directive value - show or hide spinner

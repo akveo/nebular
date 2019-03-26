@@ -6,6 +6,9 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
+import { NbSpinnerStatus } from './spinner-status';
+import { NbSpinnerSize } from './spinner-size';
+
 /**
  * Styled spinner component
  */
@@ -19,22 +22,8 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class NbSpinnerComponent {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
-
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  size: string = NbSpinnerComponent.SIZE_MEDIUM;
-  status: string = NbSpinnerComponent.STATUS_PRIMARY;
+  size: NbSpinnerSize = NbSpinnerSize.MEDIUM;
+  status: NbSpinnerStatus;
 
   /**
    * Loading text that is shown near the icon
@@ -43,58 +32,58 @@ export class NbSpinnerComponent {
   @Input() message: string = 'Loading...';
 
   /**
-   * Spiiner size, available sizes:
+   * Spinner size, available sizes:
    * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
+   * @param {string} value
    */
   @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
+  private set setSize(value: NbSpinnerSize) {
+    this.size = value;
   }
 
   /**
-   * Spiiner status (adds specific styles):
-   * primary, info, success, warning, danger
-   * @param {string} val
+   * Spinner status (adds specific styles):
+   * primary, info, success, warning, danger, white
+   * @param {string} value
    */
   @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
+  private set setStatus(value: NbSpinnerStatus) {
+    this.status = value;
   }
 
   @HostBinding('class.xxsmall-spinner')
   get xxsmall() {
-    return this.size === NbSpinnerComponent.SIZE_XXSMALL;
+    return this.size === NbSpinnerSize.XXSMALL;
   }
 
   @HostBinding('class.xsmall-spinner')
   get xsmall() {
-    return this.size === NbSpinnerComponent.SIZE_XSMALL;
+    return this.size === NbSpinnerSize.XSMALL;
   }
 
   @HostBinding('class.small-spinner')
   get small() {
-    return this.size === NbSpinnerComponent.SIZE_SMALL;
+    return this.size === NbSpinnerSize.SMALL;
   }
 
   @HostBinding('class.medium-spinner')
   get medium() {
-    return this.size === NbSpinnerComponent.SIZE_MEDIUM;
+    return this.size === NbSpinnerSize.MEDIUM;
   }
 
   @HostBinding('class.large-spinner')
   get large() {
-    return this.size === NbSpinnerComponent.SIZE_LARGE;
+    return this.size === NbSpinnerSize.LARGE;
   }
 
   @HostBinding('class.xlarge-spinner')
   get xlarge() {
-    return this.size === NbSpinnerComponent.SIZE_XLARGE;
+    return this.size === NbSpinnerSize.XLARGE;
   }
 
   @HostBinding('class.xxlarge-spinner')
   get xxlarge() {
-    return this.size === NbSpinnerComponent.SIZE_XXLARGE;
+    return this.size === NbSpinnerSize.XXLARGE;
   }
 
   @HostBinding('class.active-spinner')
@@ -109,26 +98,31 @@ export class NbSpinnerComponent {
 
   @HostBinding('class.primary-spinner')
   get primary() {
-    return this.status === NbSpinnerComponent.STATUS_PRIMARY;
+    return this.status === NbSpinnerStatus.PRIMARY;
   }
 
   @HostBinding('class.info-spinner')
   get info() {
-    return this.status === NbSpinnerComponent.STATUS_INFO;
+    return this.status === NbSpinnerStatus.INFO;
   }
 
   @HostBinding('class.success-spinner')
   get success() {
-    return this.status === NbSpinnerComponent.STATUS_SUCCESS;
+    return this.status === NbSpinnerStatus.SUCCESS;
   }
 
   @HostBinding('class.warning-spinner')
   get warning() {
-    return this.status === NbSpinnerComponent.STATUS_WARNING;
+    return this.status === NbSpinnerStatus.WARNING;
   }
 
   @HostBinding('class.danger-spinner')
   get danger() {
-    return this.status === NbSpinnerComponent.STATUS_DANGER;
+    return this.status === NbSpinnerStatus.DANGER;
+  }
+
+  @HostBinding('class.status-white')
+  get white() {
+    return this.status === NbSpinnerStatus.WHITE;
   }
 }
