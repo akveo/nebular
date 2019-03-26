@@ -5,7 +5,7 @@ import { NB_WINDOW } from '@nebular/theme';
   selector: 'ngd-search',
   styleUrls: ['./search.component.scss'],
   template: `
-    <i class="icon feather-search"></i>
+    <nb-icon icon="search-outline"></nb-icon>
     <input type="text" id="doc-search" placeholder="Start typing...">
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
