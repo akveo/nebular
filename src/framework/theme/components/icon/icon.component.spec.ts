@@ -8,7 +8,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbIconModule } from './icon.module';
-import { NbIconsLibrary } from './icons-library';
+import { NbIconLibraries } from './icon-libraries';
 
 
 @Component({
@@ -27,18 +27,18 @@ describe('Component: NbIcon', () => {
   let iconTestComponent: IconTestComponent;
   let fixture: ComponentFixture<IconTestComponent>;
   let iconElement: ElementRef;
-  let iconsLibrary: NbIconsLibrary;
+  let iconsLibrary: NbIconLibraries;
 
   beforeEach(() => {
 
     const bed = TestBed.configureTestingModule({
       imports: [ NbIconModule ],
-      providers: [ NbIconsLibrary ],
+      providers: [ NbIconLibraries ],
       declarations: [ IconTestComponent ],
     });
 
     fixture = bed.createComponent(IconTestComponent);
-    iconsLibrary = bed.get(NbIconsLibrary);
+    iconsLibrary = bed.get(NbIconLibraries);
 
     iconsLibrary
       .registerSvgPack('svg-pack', { home: '<svg><rect></rect></svg>' }, { packClass: 'custom-pack' });

@@ -28,14 +28,20 @@ function throwIconNotFoundError(name: string, pack: string) {
 }
 
 /**
- * NbIconsLibrary
+ * This service allows to register multiple icon packs to use them later within `<nb-icon></nb-icon>` component.
  */
 @Injectable({providedIn: 'root'})
-export class NbIconsLibrary {
+export class NbIconLibraries {
 
   protected packs: Map<string, NbIconPack> = new Map();
   protected defaultPack: NbIconPack;
 
+  /**
+   * Registers new Svg icon pack
+   * @param {string} name
+   * @param {NbIcon} icons
+   * @param {NbIconPackParams} params
+   */
   registerSvgPack(name: string, icons: NbIcons, params: NbIconPackParams = { packClass: '' }) {
     this.packs.set(name, {
       name,
@@ -45,6 +51,11 @@ export class NbIconsLibrary {
     });
   }
 
+  /**
+   * Registers new font pack
+   * @param {string} name
+   * @param {NbIconPackParams} params
+   */
   registerFontPack(name: string, params: NbIconPackParams = { packClass: '' }) {
     this.packs.set(name, {
       name,
@@ -54,10 +65,18 @@ export class NbIconsLibrary {
     });
   }
 
+  /**
+   * Returns pack by name
+   * @param {string} name
+   */
   getPack(name: string) {
     return this.packs.get(name);
   }
 
+  /**
+   * Sets pack as a default
+   * @param {string} name
+   */
   setDefaultPack(name: string) {
     if (!this.packs.has(name)) {
       throwPackNotFoundError(name);
@@ -66,6 +85,13 @@ export class NbIconsLibrary {
     this.defaultPack = this.packs.get(name);
   }
 
+  /**
+   * Returns Svg icon
+   * @param {string} name
+   * @param {string} pack
+   *
+   * @returns NbIconDefinition
+   */
   getSvgIcon(name: string, pack?: string): NbIconDefinition {
 
     const iconsPack = this.getPackOrDefault(pack);
@@ -84,6 +110,13 @@ export class NbIconsLibrary {
     };
   }
 
+  /**
+   * Returns Font icon
+   * @param {string} name
+   * @param {string} pack
+   *
+   * @returns NbIconDefinition
+   */
   getFontIcon(name: string, pack?: string): NbIconDefinition {
     const iconsPack = this.getPackOrDefault(pack);
 
@@ -101,6 +134,13 @@ export class NbIconsLibrary {
     };
   }
 
+  /**
+   * Returns an icon
+   * @param {string} name
+   * @param {string} pack
+   *
+   * @returns NbIconDefinition
+   */
   getIcon(name: string, pack?: string) {
 
     const iconsPack = this.getPackOrDefault(pack);

@@ -20,6 +20,11 @@ export class IconShowcaseComponent {
     // - nebular eva icons
     // - how to use nebular font
     // packages smoke
+    // remove nebular icons
+    // replace feather icons
+    // add icons docs ICON
+    // update schematics
+    // breaking changes
     // do examples:
     // icon in button
     // icon prefix

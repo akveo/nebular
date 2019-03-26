@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NbIconsLibrary } from './icons-library';
+import { NbIconLibraries } from './icon-libraries';
 import { NbSvgIcon } from './icon';
 
 
 describe('icons-library', () => {
-  let iconsLibrary: NbIconsLibrary;
+  let iconsLibrary: NbIconLibraries;
 
   beforeEach(() => {
     TestBed.resetTestingModule();
     const bed = TestBed.configureTestingModule({
       providers: [
-        NbIconsLibrary,
+        NbIconLibraries,
       ],
     });
-    iconsLibrary = bed.get(NbIconsLibrary);
+    iconsLibrary = bed.get(NbIconLibraries);
   });
 
   it('should register raw svg icon', () => {

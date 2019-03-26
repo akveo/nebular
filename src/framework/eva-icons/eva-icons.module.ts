@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbIconsLibrary, NbSvgIcon, NbIconPackParams, NbIcons } from '@nebular/theme';
+import { NbIconLibraries, NbSvgIcon, NbIconPackParams, NbIcons } from '@nebular/theme';
 import { icons } from 'eva-icons';
 
 interface NbOriginalEvaIcon {
@@ -44,7 +44,7 @@ export class NbEvaIconsModule {
 
   private NAME = 'eva';
 
-  constructor(iconLibrary: NbIconsLibrary) {
+  constructor(iconLibrary: NbIconLibraries) {
     iconLibrary.registerSvgPack(this.NAME, this.createIcons());
     iconLibrary.setDefaultPack(this.NAME);
   }

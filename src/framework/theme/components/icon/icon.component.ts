@@ -17,83 +17,82 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { NbIconsLibrary } from './icons-library';
+import { NbIconLibraries } from './icon-libraries';
 
 /**
- * Icon component.
+ * Icon component. Allows to render both `svg` and `font` icons.
+ * Starting from Nebular 4.0 uses [Eva Icons](https://akveo.github.io/eva-icons/) pack by default.
  *
- * Basic alert example:
- * @stacked-example(Showcase, alert/alert-showcase.component)
+ * Basic icon example:
+ * @stacked-example(Showcase, icon/icon-showcase.component)
  *
- * Alert configuration:
+ * Icon configuration:
  *
  * ```html
- * <nb-alert status="success">
- *   You have been successfully authenticated!
- * </nb-alert>
+ * <nb-icon icon="star"></nb-icon>
  * ```
  * ### Installation
  *
- * Import `NbButtonModule` to your feature module.
+ * By default Nebular comes without any pre-installed icon pack.
+ * Starting with Nebular 4.0.0 we ship separate package called `@nebular/eva-icons`
+ * which integrates SVG [Eva Icons](https://akveo.github.io/eva-icons/) pack to Nebular. To add it to your
+ * project run:
+ * ```sh
+ * npm i @nebular/eva-icons
+ * ```
+ * This command will install Nebular Eva Icons pack. Then register `NbEvaIconsModule` into your app module or any child
+ * module you need to have the icons in:
+ * ```ts
+ * import { NbEvaIconsModule } form '@nebular/eva-icons';
+ *
+ * @NgModule({
+ *   imports: [
+ *   	// ...
+ *     NbEvaIconsModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * Last thing, import `NbIconModule` to your feature module where you need to show an icon:
  * ```ts
  * @NgModule({
  *   imports: [
  *   	// ...
- *     NbAlertModule,
+ *     NbIconModule,
  *   ],
  * })
  * export class PageModule { }
  * ```
  * ### Usage
  *
- * Alert could additionally have a `close` button when `closable` property is set:
+ * Icon can be colored using `status` input:
  * ```html
- * <nb-alert status="success" closable (close)="onClose()">
- *   You have been successfully authenticated!
- * </nb-alert>
+ * <nb-icon icon="star" status="warning"></nb-icon>
  * ```
  *
- * Colored alerts could be simply configured by providing a `status` property:
- * @stacked-example(Colored Alert, alert/alert-colors.component)
+ * Colored icons:
+ * @stacked-example(Colored Icons, icon/icon-colors.component)
  *
- * It is also possible to assign an `accent` property for a slight alert highlight
- * as well as combine it with `status`:
- * @stacked-example(Accent Alert, alert/alert-accents.component)
+ * In case you need to specify an icon from a specific icon pack, this could be done using `pack` input property:
+ * ```html
+ * <nb-icon icon="star" pack="font-awesome"></nb-icon>
+ * ```
+ * Additional icon settings (if available by the icon pack) could be passed using `options` input:
  *
- * And `outline` property:
- * @stacked-example(Outline Alert, alert/alert-outline.component)
- *
- * @additional-example(Multiple Sizes, alert/alert-sizes.component)
+ * ```html
+ * <nb-icon icon="star" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+ * ```
  *
  * @styles
  *
- * alert-font-size:
- * alert-line-height:
- * alert-font-weight:
- * alert-fg:
- * alert-outline-fg:
- * alert-bg:
- * alert-active-bg:
- * alert-disabled-bg:
- * alert-disabled-fg:
- * alert-primary-bg:
- * alert-info-bg:
- * alert-success-bg:
- * alert-warning-bg:
- * alert-danger-bg:
- * alert-height-xxsmall:
- * alert-height-xsmall:
- * alert-height-small:
- * alert-height-medium:
- * alert-height-large:
- * alert-height-xlarge:
- * alert-height-xxlarge:
- * alert-shadow:
- * alert-border-radius:
- * alert-padding:
- * alert-closable-padding:
- * alert-button-padding:
- * alert-margin:
+ * icon-font-size:
+ * icon-width:
+ * icon-height:
+ * icon-primary-fg:
+ * icon-info-fg:
+ * icon-success-fg:
+ * icon-warning-fg:
+ * icon-danger-fg:
  */
 @Component({
   selector: 'nb-icon',
@@ -140,22 +139,34 @@ export class NbIconComponent implements OnChanges, OnInit {
     return this.status === NbIconComponent.STATUS_DANGER;
   }
 
+  /**
+   * Icon name
+   * @param {string} status
+   */
   @Input() icon: string;
 
+  /**
+   * Icon pack name
+   * @param {string} status
+   */
   @Input() pack: string;
 
+  /**
+   * Additional icon settings
+   * @param {[name: string]: any}
+   */
   @Input() options: { [name: string]: any };
 
   /**
    * Icon status (adds specific styles):
    * primary, info, success, warning, danger
-   * @param {string} val
+   * @param {string} status
    */
   @Input() status: string;
 
   constructor(
     private sanitizer: DomSanitizer,
-    private iconLibrary: NbIconsLibrary,
+    private iconLibrary: NbIconLibraries,
     private el: ElementRef,
     private renderer: Renderer2,
   ) {}

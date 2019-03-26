@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NbIconComponent } from './icon.component';
-import { NbIconsLibrary } from './icons-library';
+import { NbIconLibraries } from './icon-libraries';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ export class NbIconModule {
 
   private essentialsPackName = 'essentials';
 
-  constructor(private iconsLibrary: NbIconsLibrary) {
+  constructor(private iconsLibrary: NbIconLibraries) {
 
     // in case of consequent calls we don't need to enable `essentials` pack again
     if (this.iconsLibrary.getPack(this.essentialsPackName)) {

@@ -103,4 +103,4 @@ export * from './components/icon/icon.module';
 export * from './components/icon/icon.component';
 export * from './components/icon/icon';
 export * from './components/icon/icon-pack';
-export * from './components/icon/icons-library';
+export * from './components/icon/icon-libraries';
