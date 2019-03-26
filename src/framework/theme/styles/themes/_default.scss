@@ -265,8 +265,8 @@ $theme: (
   card-border-width: 0,
   card-border-style: solid,
   card-border-color: transparent,
-  card-border-radius: radius,
-  card-padding: padding,
+  card-border-radius: 0.75rem,
+  card-padding: 1.25rem,
   card-divider-color: divider-color,
   card-divider-width: 1px,
 
@@ -284,7 +284,7 @@ $theme: (
   card-height-xlarge: 696px,
   card-height-xxlarge: 816px,
   card-shadow: none,
-  card-margin: margin,
+  card-margin-bottom: 1.5rem,
 
   card-scrollbar-color: scrollbar-fg,
   card-scrollbar-background-color: scrollbar-bg,
