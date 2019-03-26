@@ -435,6 +435,7 @@ export const structure = [
         icon: 'spinner.svg',
         source: [
           'NbSpinnerDirective',
+          'NbSpinnerComponent',
         ],
       },
       {
