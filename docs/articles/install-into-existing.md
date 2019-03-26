@@ -59,6 +59,12 @@ At this step, we assume you already have Angular modules installed.
 ```bash
 npm install --save @nebular/theme @angular/cdk @angular/animations
 ```
+Also, you may want to install Eva Icons pack, which is a recommended SVG icons library starting from Nebular 4.0.
+```bash
+npm install --save @nebular/eva-icons
+```
+More details on [how to use Nebular Icons are here](docs/components/icon/overview#nbiconcomponent). 
+
 Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 <hr>
 
