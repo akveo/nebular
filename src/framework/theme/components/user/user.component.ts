@@ -118,8 +118,8 @@ export class NbUserComponent {
    * @type string
    */
   @Input()
-  set size(val: string) {
-    this.sizeValue = val;
+  set size(value: NbUserSize) {
+    this.sizeValue = value;
   }
 
   /**
