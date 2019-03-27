@@ -13,7 +13,6 @@ import {
   OnChanges,
   OnInit,
   Renderer2,
-  SimpleChanges,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -175,31 +174,31 @@ export class NbIconComponent implements OnChanges, OnInit {
     this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     if (this.iconDef) {
       this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
     }
   }
 
   renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
-    const icon = this.iconLibrary.getIcon(name, pack);
+    const iconDefinition = this.iconLibrary.getIcon(name, pack);
 
-    const content = icon.icon.render(options);
+    const content = iconDefinition.icon.getContent(options);
     if (content) {
       this.html = this.sanitizer.bypassSecurityTrustHtml(content);
     }
 
-    this.assignClasses(icon.icon.getClasses(options));
-    return icon;
+    this.assignClasses(iconDefinition.icon.getClasses(options));
+    return iconDefinition;
   }
 
   protected assignClasses(classes: string[]) {
-    this.prevClasses.forEach((klass: string) => {
-      this.renderer.removeClass(this.el.nativeElement, klass);
+    this.prevClasses.forEach((className: string) => {
+      this.renderer.removeClass(this.el.nativeElement, className);
     });
 
-    classes.forEach((klass: string) => {
-      this.renderer.addClass(this.el.nativeElement, klass);
+    classes.forEach((className: string) => {
+      this.renderer.addClass(this.el.nativeElement, className);
     });
 
     this.prevClasses = classes;

@@ -62,7 +62,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         </div>
 
         <div>
-          <nb-icon *ngIf="!file.urlStyle" icon="file-text-outline" pack="essentials"></nb-icon>
+          <nb-icon *ngIf="!file.urlStyle" icon="file-text-outline" pack="nebular-essentials"></nb-icon>
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
       </ng-container>
@@ -74,7 +74,7 @@ import { DomSanitizer } from '@angular/platform-browser';
              placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
              (keyup.enter)="sendMessage()">
       <button *ngIf="showButton" class="btn" [class.with-icon]="!buttonTitle" (click)="sendMessage()">
-        {{ buttonTitle }}<nb-icon *ngIf="!buttonTitle" [icon]="buttonIcon" pack="essentials"></nb-icon>
+        {{ buttonTitle }}<nb-icon *ngIf="!buttonTitle" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
       </button>
     </div>
   `,

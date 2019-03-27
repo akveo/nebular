@@ -33,12 +33,12 @@
      vertical-align: top;
    }
 
-  &.icon-left:not(.icon-right) ::ng-deep nb-icon {
+  &.icon-start:not(.icon-end) ::ng-deep nb-icon {
     @include nb-ltr(margin-right, 0.75rem);
     @include nb-rtl(margin-left, 0.75rem);
   }
 
-  &.icon-right:not(.icon-left) ::ng-deep nb-icon {
+  &.icon-end:not(.icon-start) ::ng-deep nb-icon {
     @include nb-ltr(margin-left, 0.75rem);
     @include nb-rtl(margin-right, 0.75rem);
   }

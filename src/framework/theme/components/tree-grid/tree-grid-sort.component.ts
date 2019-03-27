@@ -82,8 +82,8 @@ export class NbSortHeaderIconDirective {}
   selector: 'nb-sort-icon',
   template: `
     <ng-container *ngIf="isDirectionSet()">
-      <nb-icon *ngIf="isAscending()" icon="chevron-down-outline" pack="essentials" aria-hidden="true"></nb-icon>
-      <nb-icon *ngIf="isDescending()" icon="chevron-up-outline" pack="essentials" aria-hidden="true"></nb-icon>
+      <nb-icon *ngIf="isAscending()" icon="chevron-down-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
+      <nb-icon *ngIf="isDescending()" icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
     </ng-container>
   `,
 })

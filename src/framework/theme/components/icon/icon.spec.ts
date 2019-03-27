@@ -16,10 +16,10 @@ describe('icon', () => {
 
     fontIcon = new NbFontIcon('home', 'custom', {
       packClass: 'custom-pack',
-      iconPrefix: 'cp',
+      iconClassPrefix: 'cp',
     });
 
-    expect(fontIcon.render()).toEqual('custom');
+    expect(fontIcon.getContent()).toEqual('custom');
   });
 
   it(`font icon getClasses return classes`, () => {
@@ -35,7 +35,7 @@ describe('icon', () => {
 
     fontIcon = new NbFontIcon('home', '', {
       packClass: 'custom-pack',
-      iconPrefix: 'cp',
+      iconClassPrefix: 'cp',
     });
 
     expect(fontIcon.getClasses()).toEqual(['custom-pack', 'cp-home']);
@@ -54,7 +54,7 @@ describe('icon', () => {
       packClass: 'custom-pack',
     });
 
-    expect(svgIcon.render()).toEqual('content');
+    expect(svgIcon.getContent()).toEqual('content');
   });
 
   it(`svg icon getClasses return class`, () => {

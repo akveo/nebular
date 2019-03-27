@@ -29,7 +29,7 @@ export class NbEvaSvgIcon extends NbSvgIcon {
     super(name, '', params);
   }
 
-  render(options): string {
+  getContent(options): string {
     return this.content.toSvg({
       width: '100%',
       height: '100%',
@@ -55,9 +55,9 @@ export class NbEvaIconsModule {
       .map(([name, icon]) => {
         return [name, new NbEvaSvgIcon(name, icon, {packClass: ''})] as [string, NbSvgIcon];
       })
-      .reduce((prev, curr) => {
-        prev[curr[0]] = curr[1];
-        return prev;
+      .reduce((newIcons, [name, icon]: [string, NbSvgIcon]) => {
+        newIcons[name] = icon;
+        return newIcons;
       }, {});
   }
 }

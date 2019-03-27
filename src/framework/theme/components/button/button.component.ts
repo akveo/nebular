@@ -212,14 +212,14 @@ export class NbButtonComponent {
     return this.disabled ? '-1' : '0';
   }
 
-  @HostBinding('class.icon-left')
+  @HostBinding('class.icon-start')
   get iconLeft(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
     return !!(icon && el.firstChild === icon);
   }
 
-  @HostBinding('class.icon-right')
+  @HostBinding('class.icon-end')
   get iconRight(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;

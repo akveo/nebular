@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NbIconPack, NbIconPackParams, NbIconPackType, NbIcons } from './icon-pack';
+import { NbFontIconPackParams, NbIconPack, NbIconPackParams, NbIconPackType, NbIcons } from './icon-pack';
 import { NbFontIcon, NbIcon, NbSvgIcon } from './icon';
 
 export class NbIconDefinition {
@@ -27,6 +27,10 @@ function throwIconNotFoundError(name: string, pack: string) {
   throw Error(`Icon '${name}' is not registered in pack '${pack}'. Check icon name or consider switching icon pack.`);
 }
 
+function throwWrongPackTypeError(name: string, type: string, desiredType: string) {
+  throw Error(`Pack '${name}' is not an '${desiredType}' Pack and its type is '${type}'`);
+}
+
 /**
  * This service allows to register multiple icon packs to use them later within `<nb-icon></nb-icon>` component.
  */
@@ -42,7 +46,7 @@ export class NbIconLibraries {
    * @param {NbIcon} icons
    * @param {NbIconPackParams} params
    */
-  registerSvgPack(name: string, icons: NbIcons, params: NbIconPackParams = { packClass: '' }) {
+  registerSvgPack(name: string, icons: NbIcons, params: NbIconPackParams= {}) {
     this.packs.set(name, {
       name,
       icons: new Map(Object.entries(icons)),
@@ -56,7 +60,7 @@ export class NbIconLibraries {
    * @param {string} name
    * @param {NbIconPackParams} params
    */
-  registerFontPack(name: string, params: NbIconPackParams = { packClass: '' }) {
+  registerFontPack(name: string, params: NbFontIconPackParams = {}) {
     this.packs.set(name, {
       name,
       params,
@@ -69,7 +73,7 @@ export class NbIconLibraries {
    * Returns pack by name
    * @param {string} name
    */
-  getPack(name: string) {
+  getPack(name: string): NbIconPack {
     return this.packs.get(name);
   }
 
@@ -93,11 +97,10 @@ export class NbIconLibraries {
    * @returns NbIconDefinition
    */
   getSvgIcon(name: string, pack?: string): NbIconDefinition {
-
-    const iconsPack = this.getPackOrDefault(pack);
+    const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type !== NbIconPackType.SVG) {
-      throw Error(`Pack '${iconsPack.name}' is not an SVG Pack and its type is '${iconsPack.type}'`);
+      throwWrongPackTypeError(iconsPack.name, iconsPack.type, 'SVG');
     }
 
     const icon = this.getIconFromPack(name, iconsPack);
@@ -118,10 +121,10 @@ export class NbIconLibraries {
    * @returns NbIconDefinition
    */
   getFontIcon(name: string, pack?: string): NbIconDefinition {
-    const iconsPack = this.getPackOrDefault(pack);
+    const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type !== NbIconPackType.FONT) {
-      throw Error(`Pack '${iconsPack.name}' is not a Font Pack and its type is '${iconsPack.type}'`);
+      throwWrongPackTypeError(iconsPack.name, iconsPack.type, 'Font');
     }
 
     const icon = this.getIconFromPack(name, iconsPack, false);
@@ -141,9 +144,8 @@ export class NbIconLibraries {
    *
    * @returns NbIconDefinition
    */
-  getIcon(name: string, pack?: string) {
-
-    const iconsPack = this.getPackOrDefault(pack);
+  getIcon(name: string, pack?: string): NbIconDefinition {
+    const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type === NbIconPackType.SVG) {
       return this.getSvgIcon(name, pack);
@@ -152,29 +154,32 @@ export class NbIconLibraries {
     return this.getFontIcon(name, pack);
   }
 
-  protected createSvgIcon(name: string, content: NbIcon | string, params: NbIconPackParams) {
+  protected createSvgIcon(name: string, content: NbIcon | string, params: NbIconPackParams): NbSvgIcon {
     return content instanceof NbSvgIcon ? content : new NbSvgIcon(name, content, params);
   }
 
-  protected createFontIcon(name: string, content: NbIcon | string, params: NbIconPackParams) {
+  protected createFontIcon(name: string, content: NbIcon | string, params: NbFontIconPackParams): NbFontIcon {
     return content instanceof NbFontIcon ? content : new NbFontIcon(name, content, params);
   }
 
-  protected getPackOrDefault(name: string) {
-    const iconsPack = name ? this.packs.get(name) : this.defaultPack;
+  protected getPackOrThrow(name: string): NbIconPack {
 
-    if (!iconsPack) {
-
-      if (!this.defaultPack) {
-        throwNoDefaultPackError();
-      } else {
-        throwPackNotFoundError(name);
-      }
+    const pack: NbIconPack = this.packs.get(name);
+    if (!pack) {
+      throwPackNotFoundError(name);
     }
-    return iconsPack;
+    return pack;
   }
 
-  protected getIconFromPack(name: string, pack: NbIconPack, shouldThrow = true) {
+  protected getDefaultPackOrThrow(): NbIconPack {
+
+    if (!this.defaultPack) {
+      throwNoDefaultPackError();
+    }
+    return this.defaultPack;
+  }
+
+  protected getIconFromPack(name: string, pack: NbIconPack, shouldThrow = true): NbIcon | string {
     if (shouldThrow && !pack.icons.has(name)) {
       throwIconNotFoundError(name, pack.name);
     }
