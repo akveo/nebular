@@ -16,6 +16,7 @@ import {
 import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
+import { NbIconLibraries } from '../icon/icon-libraries';
 
 @Component({
   selector: 'nb-tooltip-default-test',
@@ -181,6 +182,10 @@ describe('Directive: NbTooltipDirective', () => {
         PopoverTestModule,
       ],
     });
+
+    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+    iconLibs.setDefaultPack('test')
   }));
 
   describe('smoke ', () => {
@@ -241,8 +246,8 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
 
-      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content i');
-      expect(iconContainer.className).toContain('icon some-icon');
+      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content nb-icon');
+      expect(iconContainer.textContent).toContain('some-icon');
     });
 
     it('should display status', () => {

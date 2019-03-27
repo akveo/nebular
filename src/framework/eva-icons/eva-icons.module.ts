@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbIconLibraries, NbSvgIcon, NbIconPackParams, NbIcons } from '@nebular/theme';
+import { NbIconLibraries, NbSvgIcon, NbIcons } from '@nebular/theme';
 import { icons } from 'eva-icons';
 
 interface NbOriginalEvaIcon {
@@ -25,8 +25,8 @@ export interface NbEvaIconOptions {
 
 export class NbEvaSvgIcon extends NbSvgIcon {
 
-  constructor(protected name, protected content: NbOriginalEvaIcon, protected params: NbIconPackParams) {
-    super(name, '', params);
+  constructor(protected name, protected content: NbOriginalEvaIcon) {
+    super(name, '');
   }
 
   getContent(options): string {
@@ -53,7 +53,7 @@ export class NbEvaIconsModule {
     return Object
       .entries<NbOriginalEvaIcon>(icons)
       .map(([name, icon]) => {
-        return [name, new NbEvaSvgIcon(name, icon, {packClass: ''})] as [string, NbSvgIcon];
+        return [name, new NbEvaSvgIcon(name, icon)] as [string, NbSvgIcon];
       })
       .reduce((newIcons, [name, icon]: [string, NbSvgIcon]) => {
         newIcons[name] = icon;

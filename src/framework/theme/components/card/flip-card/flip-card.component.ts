@@ -63,13 +63,13 @@ import { Component, Input, HostBinding } from '@angular/core';
       <div class="front-container">
         <ng-content select="nb-card-front"></ng-content>
         <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
-          <nb-icon icon="chevron-left-outline" aria-hidden="true"></nb-icon>
+          <nb-icon icon="chevron-left-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
         </a>
       </div>
       <div class="back-container">
         <ng-content select="nb-card-back"></ng-content>
         <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
-          <nb-icon icon="chevron-left-outline" aria-hidden="true"></nb-icon>
+          <nb-icon icon="chevron-left-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
         </a>
       </div>
     </div>

@@ -91,7 +91,7 @@ describe('icons-library', () => {
 
 
     expect(() => iconsLibrary.getSvgIcon('unknown'))
-      .toThrowError(`Pack 'font-pack' is not an SVG Pack and its type is 'font'`);
+      .toThrowError(`Pack 'font-pack' is not an 'SVG' Pack and its type is 'font'`);
   });
 
   it('should throw for wrong pack', () => {

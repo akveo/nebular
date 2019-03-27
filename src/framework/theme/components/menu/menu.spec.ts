@@ -13,6 +13,7 @@ import { NbThemeModule } from '../../theme.module';
 import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
+import { NbIconLibraries } from '@nebular/theme';
 
 
 @Component({
@@ -51,6 +52,10 @@ function createTestBed() {
     declarations: [SingleMenuTestComponent, DoubleMenusTestComponent],
     providers: [NbMenuService],
   });
+
+  const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+  iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+  iconLibs.setDefaultPack('test')
 }
 
 function createSingleMenuComponent(menuItems, menuTag = 'menu') {
@@ -84,9 +89,9 @@ describe('NbMenuItem', () => {
   });
 
   it('should set icon to menu item', () => {
-    const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'test-icon' }]);
+    const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'some-icon' }]);
     const iconWrapper = fixture.nativeElement.querySelector('.menu-icon');
-    expect(iconWrapper.classList).toContain('nb-test-icon');
+    expect(iconWrapper.textContent).toContain('some-icon');
   });
 
   it('should set title to menu item', () => {
