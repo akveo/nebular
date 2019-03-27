@@ -4,8 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+
+import { NbUserSize } from './user-size';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -22,7 +24,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbUserModule,
  *   ],
  * })
@@ -62,39 +64,26 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbUserComponent {
 
-  // TODO: it makes sense use object instead of list of variables (or even enum)
-  /*
-    static readonly SIZE = {
-     SMALL: 'small',
-     MEDIUM: 'medium',
-     LARGE: 'large',
-    };
-   */
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-
-  private sizeValue: string;
+  private sizeValue: NbUserSize = NbUserSize.MEDIUM;
 
   @HostBinding('class.small')
   get small() {
-    return this.sizeValue === NbUserComponent.SIZE_SMALL;
+    return this.sizeValue === NbUserSize.SMALL;
   }
 
   @HostBinding('class.medium')
   get medium() {
-    return this.sizeValue === NbUserComponent.SIZE_MEDIUM;
+    return this.sizeValue === NbUserSize.MEDIUM;
   }
 
   @HostBinding('class.large')
   get large() {
-    return this.sizeValue === NbUserComponent.SIZE_LARGE;
+    return this.sizeValue === NbUserSize.LARGE;
   }
 
   @HostBinding('class.xlarge')
   get xlarge() {
-    return this.sizeValue === NbUserComponent.SIZE_XLARGE;
+    return this.sizeValue === NbUserSize.XLARGE;
   }
 
   /**
@@ -104,14 +93,14 @@ export class NbUserComponent {
   @Input() name: string = 'Anonymous';
 
   /**
-   * Specifies a title (written in a smaller font) to be shown under the **name**
+   * Specifies a title to be shown under the **name**
    * @type string
    */
   @Input() title: string;
 
   /**
-   * Absolute path to a user picture. Or base64 image
-   * User name initials (JD for John Doe) will be shown if no picture specified
+   * Absolute path to a user picture or base64 image.
+   * User name initials will be shown if no picture specified (JD for John Doe).
    * @type string
    */
   @Input() set picture(value: string) {
