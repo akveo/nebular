@@ -72,23 +72,23 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
   // and then hidden right away
   protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
-      takeUntil(this.destroyed$),
       map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
       share(),
+      takeUntil(this.destroyed$),
     );
 
   readonly show$: Observable<Event> = this.click$
     .pipe(
-      takeUntil(this.destroyed$),
       filter(([shouldShow]) => shouldShow),
       map(([, event]) => event),
+      takeUntil(this.destroyed$),
     );
 
   readonly hide$: Observable<Event> = this.click$
     .pipe(
-      takeUntil(this.destroyed$),
       filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
       map(([, event]) => event),
+      takeUntil(this.destroyed$),
     );
 }
 
@@ -101,24 +101,27 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
 
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
-      takeUntil(this.destroyed$),
       filter(() => !this.container()),
       delay(100),
-      takeUntil(observableFromEvent(this.host, 'mouseleave')),
+      takeUntil(
+        observableMerge(
+          observableFromEvent(this.host, 'mouseleave'),
+          this.destroyed$,
+        ),
+      ),
       repeat(),
     );
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
     .pipe(
-      takeUntil(this.destroyed$),
       switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
         .pipe(
-          takeUntil(this.destroyed$),
           debounceTime(100),
           takeWhile(() => !!this.container()),
           filter(event => this.isNotOnHostOrContainer(event)),
         ),
       ),
+      takeUntil(this.destroyed$),
     );
 }
 
@@ -130,9 +133,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
 export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
-      takeUntil(this.destroyed$),
       delay(100),
-      takeUntil(observableFromEvent(this.host, 'mouseleave')),
+      takeUntil(
+        observableMerge(
+          observableFromEvent(this.host, 'mouseleave'),
+          this.destroyed$,
+        ),
+      ),
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
       repeat(),
@@ -152,41 +159,45 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
 
   protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
     .pipe(
-      takeUntil(this.destroyed$),
       switchMap(() => observableFromEvent<Event>(this.document, 'focusin')
         .pipe(
           takeWhile(() => !!this.container()),
           filter(event => this.isNotOnHostOrContainer(event)),
         ),
       ),
+      takeUntil(this.destroyed$),
     );
 
   protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click')
     .pipe(
-      takeUntil(this.destroyed$),
       filter(() => !this.container()),
+      takeUntil(this.destroyed$),
     );
 
   protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
-      takeUntil(this.destroyed$),
       filter(() => !!this.container()),
       filter(event => this.isNotOnHostOrContainer(event)),
+      takeUntil(this.destroyed$),
     );
 
   protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
     .pipe(
-      takeUntil(this.destroyed$),
       filter((event: KeyboardEvent) => event.keyCode === 9),
       filter(() => !!this.container()),
+      takeUntil(this.destroyed$),
     );
 
   show$: Observable<Event> = observableMerge(observableFromEvent<Event>(this.host, 'focusin'), this.clickIn$)
     .pipe(
-      takeUntil(this.destroyed$),
       filter(() => !this.container()),
       debounceTime(100),
-      takeUntil(observableFromEvent(this.host, 'focusout')),
+      takeUntil(
+        observableMerge(
+          observableFromEvent(this.host, 'focusout'),
+          this.destroyed$,
+        ),
+      ),
       repeat(),
     );
 
