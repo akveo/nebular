@@ -66,22 +66,22 @@ export class NbUserComponent {
 
   private sizeValue: NbUserSize = NbUserSize.MEDIUM;
 
-  @HostBinding('class.small')
+  @HostBinding('class.size-small')
   get small() {
     return this.sizeValue === NbUserSize.SMALL;
   }
 
-  @HostBinding('class.medium')
+  @HostBinding('class.size-medium')
   get medium() {
     return this.sizeValue === NbUserSize.MEDIUM;
   }
 
-  @HostBinding('class.large')
+  @HostBinding('class.size-large')
   get large() {
     return this.sizeValue === NbUserSize.LARGE;
   }
 
-  @HostBinding('class.xlarge')
+  @HostBinding('class.size-xlarge')
   get xlarge() {
     return this.sizeValue === NbUserSize.XLARGE;
   }
