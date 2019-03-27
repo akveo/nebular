@@ -206,7 +206,6 @@ export class NbUserComponent {
   showNameValue: boolean = true;
   showTitleValue: boolean = true;
   showInitialsValue: boolean = true;
-  isMenuShown: boolean = false;
 
   constructor(private domSanitizer: DomSanitizer) { }
 
