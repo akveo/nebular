@@ -63,7 +63,7 @@ Also, you may want to install Eva Icons pack, which is a recommended SVG icons l
 ```bash
 npm install --save @nebular/eva-icons
 ```
-More details on [how to use Nebular Icons are here](docs/components/icon/overview#nbiconcomponent). 
+More details on [how to use Nebular Eva Icons are here](docs/components/icon/overview#nbiconcomponent). 
 
 Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 <hr>
