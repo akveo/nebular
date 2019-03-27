@@ -32,10 +32,6 @@
     }
   }
 
-  .user-title {
-    font-size: 0.75rem;
-  }
-
   .user-name,
   .user-title {
     @include nb-rtl(text-align, right);
