@@ -19,6 +19,8 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 import { NbDateService } from '../../services';
 
+export const MONTHS_IN_VIEW = 12;
+export const MONTHS_IN_COLUMN = 4;
 
 @Component({
   selector: 'nb-calendar-month-picker',
@@ -73,8 +75,8 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnInit {
   }
 
   initMonths() {
-    const months: D[] = range(12).map(i => this.createMonthDateByIndex(i));
-    this.months = batch(months, 4);
+    const months: D[] = range(MONTHS_IN_VIEW).map(i => this.createMonthDateByIndex(i));
+    this.months = batch(months, MONTHS_IN_COLUMN);
   }
 
   onSelect(month: D) {

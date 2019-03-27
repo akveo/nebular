@@ -5,7 +5,7 @@
  */
 
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
 import { NbSelectModule } from './select.module';
 import { NbThemeModule } from '../../theme.module';
@@ -75,6 +75,24 @@ export class NbSelectTestComponent {
   groups = TEST_GROUPS;
 }
 
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <nb-select [selected]="selected">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithInitiallySelectedOptionComponent {
+  @Input() selected = 1;
+  @Input() options = [ 1, 2, 3 ];
+
+  @ViewChild(NbSelectComponent) select: NbSelectComponent<number>;
+}
+
 describe('Component: NbSelectComponent', () => {
   let fixture: ComponentFixture<NbSelectTestComponent>;
   let overlayContainerService: NbOverlayContainerAdapter;
@@ -96,7 +114,7 @@ describe('Component: NbSelectComponent', () => {
         NbLayoutModule,
         NbSelectModule,
       ],
-      declarations: [NbSelectTestComponent],
+      declarations: [ NbSelectTestComponent, NbSelectWithInitiallySelectedOptionComponent ],
     });
 
     fixture = TestBed.createComponent(NbSelectTestComponent);
@@ -221,4 +239,15 @@ describe('Component: NbSelectComponent', () => {
       expect(button.textContent).toContain('1 noitpO');
     })
   });
+
+  it('should select initially specified value without errors', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectWithInitiallySelectedOptionComponent);
+    selectFixture.detectChanges();
+    flush();
+
+    const selectedOption = selectFixture.componentInstance.select.options.find(o => o.selected);
+    expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
+    const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
+    expect(selectButton.textContent).toEqual(selectedOption.value.toString());
+  }));
 });

@@ -101,6 +101,11 @@ describe('moment-date-service', () => {
     expect(parsed.date()).toEqual(15);
   });
 
+  it('should not format if date isn\'t passed', () => {
+    expect(() => dateService.format(undefined, 'DD.MM.YYYY')).not.toThrow();
+    expect(dateService.format(undefined, 'DD.MM.YYYY')).toEqual('');
+  });
+
   it('should get year end', () => {
     const date = moment().year(2018).month(5).date(15);
     const yearEnd = dateService.getYearEnd(date);
