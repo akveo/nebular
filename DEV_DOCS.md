@@ -29,6 +29,9 @@
 - add the package into bundle.ts which build umd modules for our packages
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
 
+# New Package Dependency Checklist
+- run `npm run update-packages-smoke-lock` to update packages-smoke/package-lock.json and commit updated package lock
+
 # Objectives
 The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 
@@ -338,9 +341,9 @@ To start a new release (publish the framework packages on NPM) you need:
 3. `npm run release:validate` - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
 4. MANUALLY update a version in main ./package.json to a new one
 5. 
+  * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
-  * update `package-lock.json`
-  * update dependent modules with correct peer module versions 
+  * update version in `package-lock.json` and `packages-smoke/package-lock.json`
 6. 
   * `npm run version:changelog`
   * fix/expand changelog manually

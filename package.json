@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -71,6 +71,7 @@
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
     "publish": "./scripts/publish.sh",
+    "update-packages-smoke-lock": "./scripts/update-packages-smoke-lock.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
     "postinstall": "npm run cli:firefox-fix",
     "gen:playground": "ng g .:playground",
