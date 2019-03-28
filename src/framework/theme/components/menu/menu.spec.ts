@@ -10,7 +10,7 @@ import { TestBed } from '@angular/core/testing';
 import { NbMenuModule } from './menu.module';
 import { NbMenuBag, NbMenuItem, NbMenuService } from './menu.service';
 import { NbThemeModule } from '../../theme.module';
-import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import { getFragmentPartOfUrl, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
 
@@ -269,6 +269,31 @@ describe('menu URL helpers', () => {
 
   it('isUrlPathEqual should work for url with query strings', () => {
     expect(isUrlPathEqual('/a/b/c?a=1;b=2&c=3', '/a/b/c')).toBeTruthy();
+  });
+
+  it('getFragmentPartOfUrl should return empty string for path without fragment', () => {
+    expect(getFragmentPartOfUrl('/a/b')).toBeFalsy();
+    expect(getFragmentPartOfUrl('/a/b/c?a=1;b=2&c=3')).toBeFalsy();
+  });
+
+  it('getFragmentPartOfUrl should return fragment part when it presented', () => {
+    expect(getFragmentPartOfUrl('/a/b#f')).toEqual('f');
+    expect(getFragmentPartOfUrl('/a/b/c?a=1;b=2&c=3#fragment')).toEqual('fragment');
+  });
+
+  it('isFragmentEqual should return false for path without fragments', () => {
+    expect(isFragmentEqual('/a/b', 'fragment')).toBeFalsy();
+    expect(isFragmentEqual('/a/b/c?a=1;b=2&c=3', 'fragment')).toBeFalsy();
+  });
+
+  it('isFragmentEqual should return false for path with different fragments', () => {
+    expect(isFragmentEqual('/a/b#f', 'fragment')).toBeFalsy();
+    expect(isFragmentEqual('/a/b/c?a=1;b=2&c=3#f', 'fragment')).toBeFalsy();
+  });
+
+  it('isFragmentEqual should return true for path with same fragments', () => {
+    expect(isFragmentEqual('/a/b#fragment', 'fragment')).toBeTruthy();
+    expect(isFragmentEqual('/a/b/c?a=1;b=2&c=3#fragment', 'fragment')).toBeTruthy();
   });
 
 });

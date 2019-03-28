@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { Params } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import { isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -376,18 +376,16 @@ export class NbMenuInternalService {
 
   private isSelectedInUrl(item: NbMenuItem): boolean {
     const exact: boolean = item.pathMatch === 'full';
-    let link: string = item.link;
+    const link: string = item.link;
 
-    /**
-     * By default, `item.link` doesn't contain a fragment. But `this.location.path()` does.
-     * And when we're going to compare them we have to append fragment to the link.
-     * */
-    if (item.fragment) {
-      link += `#${item.fragment}`;
-    }
-
-    return exact
+    const isSelectedInPath = exact
       ? isUrlPathEqual(this.location.path(), link)
       : isUrlPathContain(this.location.path(), link);
+
+    if (isSelectedInPath && item.fragment != null) {
+      return isFragmentEqual(this.location.path(), item.fragment);
+    }
+
+    return isSelectedInPath;
   }
 }
