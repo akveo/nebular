@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { NbCheckboxComponent } from './checkbox.component';
-import { NbCheckboxStatus } from './checkbox-status';
 
 describe('Component: NbCheckbox', () => {
 
@@ -53,39 +52,33 @@ describe('Component: NbCheckbox', () => {
   });
 
   it('Setting status to success apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.SUCCESS;
+    checkbox.status = 'success';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-success')).toBeTruthy();
   });
 
   it('Setting status to warning apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.WARNING;
+    checkbox.status = 'warning';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-warning')).toBeTruthy();
   });
 
   it('Setting status to danger apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.DANGER;
+    checkbox.status = 'danger';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-danger')).toBeTruthy();
   });
 
   it('Setting status to primary apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.PRIMARY;
+    checkbox.status = 'primary';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-primary')).toBeTruthy();
   });
 
   it('Setting status to info apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.INFO;
+    checkbox.status = 'info';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
-  });
-
-  it('Setting status to white apply corresponding class to host element', () => {
-    checkbox.status = NbCheckboxStatus.WHITE;
-    fixture.detectChanges();
-    expect(testContainerEl.classList.contains('status-white')).toBeTruthy();
   });
 
   it('should emit change event when changed', fakeAsync(() => {
