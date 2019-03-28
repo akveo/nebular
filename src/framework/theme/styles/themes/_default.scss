@@ -61,7 +61,7 @@ $theme: (
   radial-gradient: none,
   linear-gradient: none,
 
-  /* new */
+  /* Eva theme variables */
 
   color-white: #ffffff,
   color-black: #0d1c2e,
@@ -136,25 +136,88 @@ $theme: (
   color-basic-800: #4b5466,
   color-basic-900: #2c3547,
 
+  text-dark-color: color-black,
+  text-disabled-color: color-basic-400,
+  text-hint-color: color-basic-600,
+  text-light-color: color-white,
+
+  text-primary-color: color-primary,
+  text-primary-focus-color: color-primary-700,
+  text-primary-hover-color: color-primary-400,
+  text-primary-active-color: color-primary-600,
+
+  text-success-color: color-success,
+  text-success-focus-color: color-success-700,
+  text-success-hover-color: color-success-400,
+  text-success-active-color: color-success-600,
+
+  text-info-color: color-info,
+  text-info-focus-color: color-info-700,
+  text-info-hover-color: color-info-400,
+  text-info-active-color: color-info-600,
+
+  text-warning-color: color-warning,
+  text-warning-focus-color: color-warning-700,
+  text-warning-hover-color: color-warning-400,
+  text-warning-active-color: color-warning-600,
+
+  text-danger-color: color-danger,
+  text-danger-focus-color: color-danger-700,
+  text-danger-hover-color: color-danger-400,
+  text-danger-active-color: color-danger-600,
+
+  font-family-primary: unquote('Open Sans, sans-serif'),
+  font-family-secondary: unquote('Raleway, sans-serif'),
+
+  text-heading-6-font-family: font-family-secondary,
+  text-heading-6-font-size: 1.25rem,
+  text-heading-6-font-weight: 800,
+  text-heading-6-line-height: 1.75rem,
+
+  text-subtitle-2-font-family: font-family-primary,
+  text-subtitle-2-font-size: 0.8125rem,
+  text-subtitle-2-font-weight: 600,
+  text-subtitle-2-line-height: 1.5rem,
+
+  text-paragraph-font-family: font-family-primary,
+  text-paragraph-font-size: 0.9375rem,
+  text-paragraph-font-weight: 400,
+  text-paragraph-line-height: 1.25rem,
+
+  text-paragraph-2-font-family: font-family-primary,
+  text-paragraph-2-font-size: 0.8125rem,
+  text-paragraph-2-font-weight: 400,
+  text-paragraph-2-line-height: 1rem,
+
+  text-caption-font-family: font-family-primary,
+  text-caption-font-size: 0.6875rem,
+  text-caption-font-weight: 400,
+  text-caption-line-height: 1rem,
+
+  text-button-font-family: font-family-primary,
+  text-button-font-weight: 800,
+  text-button-tiny-font-size: 0.625rem,
+  text-button-tiny-line-height: 0.75rem,
+  text-button-small-font-size: 0.75rem,
+  text-button-small-line-height: 1rem,
+  text-button-medium-font-size: 0.875rem,
+  text-button-medium-line-height: 1rem,
+  text-button-large-font-size: 1rem,
+  text-button-large-line-height: 1.25rem,
+  text-button-giant-font-size: 1.125rem,
+  text-button-giant-line-height: 1.5rem,
+
+  /* Strict tokens */
+
+  divider-color: color-basic-200,
+
   outline-width: 6px,
   outline-color: color-basic-300,
 
-  font-primary-family: unquote('Open Sans, sans-serif'),
-  font-primary-text-size: 0.8125rem,
-  font-primary-text-weight: 600,
-  font-primary-text-line-height: 1.5rem,
+  state-transition-duration: 0.15s,
+  state-transition-timing-function: ease-in,
 
-  text-color: color-black,
-  text-disabled-color: color-basic-400,
-  text-hint-color: color-basic-600,
-
-  text-paragraph-font-size: 0.9375rem,
-
-  link-color: color-primary,
-  link-color-hover: color-primary-400,
-  link-color-visited: link-color,
-
-  /* mappings */
+  /* Components mappings */
 
   card-font-size: font-size,
   card-line-height: line-height,
@@ -542,11 +605,11 @@ $theme: (
   checkbox-border-radius: 3px,
   checkbox-outline-width: outline-width,
   checkbox-outline-color: outline-color,
-  checkbox-text-color: text-color,
-  checkbox-text-font-family: font-primary-family,
-  checkbox-text-font-size: font-primary-text-size,
-  checkbox-text-font-weight: font-primary-text-weight,
-  checkbox-text-line-height: font-primary-text-line-height,
+  checkbox-text-color: text-dark-color,
+  checkbox-text-font-family: text-subtitle-2-font-family,
+  checkbox-text-font-size: text-subtitle-2-font-size,
+  checkbox-text-font-weight: text-subtitle-2-font-weight,
+  checkbox-text-line-height: text-subtitle-2-line-height,
 
   checkbox-disabled-background-color: color-basic-400,
   checkbox-disabled-border-color: color-basic-400,
