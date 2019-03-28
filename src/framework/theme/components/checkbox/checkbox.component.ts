@@ -6,7 +6,8 @@
 
 import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NbCheckboxStatus } from './checkbox-status';
+
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -20,7 +21,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCheckboxModule,
  *   ],
  * })
@@ -231,13 +232,13 @@ export class NbCheckboxComponent implements ControlValueAccessor {
    * @param {string} value
    */
   @Input()
-  get status(): string {
+  get status(): NbComponentStatus {
     return this._status;
   }
-  set status(value: string) {
-    this._status = (value as NbCheckboxStatus);
+  set status(value: NbComponentStatus) {
+    this._status = value;
   }
-  private _status: NbCheckboxStatus = NbCheckboxStatus.PRIMARY;
+  private _status: NbComponentStatus = 'primary';
 
 
   /**
@@ -256,32 +257,27 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbCheckboxStatus.PRIMARY;
+    return this.status === 'primary';
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === NbCheckboxStatus.SUCCESS;
+    return this.status === 'success';
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbCheckboxStatus.WARNING;
+    return this.status === 'warning';
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbCheckboxStatus.DANGER;
+    return this.status === 'danger';
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === NbCheckboxStatus.INFO;
-  }
-
-  @HostBinding('class.status-white')
-  get white() {
-    return this.status === NbCheckboxStatus.WHITE;
+    return this.status === 'info';
   }
 
   constructor(private changeDetector: ChangeDetectorRef) {}

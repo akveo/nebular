@@ -14,6 +14,7 @@ export * from './services/color.helper';
 export * from './services/direction.service';
 export * from './services/scroll.service';
 export * from './services/ruler.service';
+export * from './components/component-status';
 export * from './components/card/card.module';
 export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
