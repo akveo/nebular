@@ -36,6 +36,7 @@ env:
 branches:
   only:
   - master
+  - next
 
 matrix:
   fast_finish: true
