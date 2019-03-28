@@ -195,39 +195,60 @@ import { convertToBoolProperty } from '../helpers';
 export class NbCheckboxComponent implements ControlValueAccessor {
 
   isFocused: boolean;
-  status: NbCheckboxStatus = NbCheckboxStatus.PRIMARY;
+
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   /**
    * Checkbox value
    * @type {boolean}
-   * @private
    */
-  @Input('value') _value: boolean = false;
-
-  disabled: boolean = false;
-  @Input('disabled')
-  set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
+  @Input()
+  get value(): boolean {
+    return this._value;
   }
+  set value(value: boolean) {
+    this._value = value;
+    this.change.emit(value);
+    this.onChange(value);
+  }
+  private _value: boolean = false;
 
   /**
-   * Checkbox status (primary (default), success, warning, danger, info, white)
-   * @param {string} val
+   * Controls input disabled state
    */
-  @Input('status')
-  set setStatus(value: NbCheckboxStatus) {
-    this.status = value;
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  private _disabled: boolean = false;
+
+  /**
+   * Checkbox status. Possible values are : primary (default), success, warning, danger, info, white
+   * @param {string} value
+   */
+  @Input()
+  get status(): string {
+    return this._status;
+  }
+  set status(value: string) {
+    this._status = (value as NbCheckboxStatus);
+  }
+  private _status: NbCheckboxStatus = NbCheckboxStatus.PRIMARY;
+
 
   /**
    * Controls checkbox indeterminate state
    */
-  @Input('indeterminate')
-  set indeterminate(value: boolean) {
-    this._indeterminate = convertToBoolProperty(value);
-  }
+  @Input()
   get indeterminate(): boolean {
     return this._indeterminate;
+  }
+  set indeterminate(value: boolean) {
+    this._indeterminate = convertToBoolProperty(value);
   }
   private _indeterminate: boolean = false;
 
@@ -261,19 +282,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   @HostBinding('class.status-white')
   get white() {
     return this.status === NbCheckboxStatus.WHITE;
-  }
-
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = val;
-    this.change.emit(val);
-    this.onChange(val);
   }
 
   constructor(private changeDetector: ChangeDetectorRef) {}
