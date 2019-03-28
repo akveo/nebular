@@ -1341,6 +1341,7 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'IconColorsComponent',
         name: 'Icon Colors',
       },
+    ],
   },
   {
     path: 'context-menu',
