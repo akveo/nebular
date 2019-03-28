@@ -208,7 +208,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
 /**
  * Creates empty show and hide event streams.
  * */
-export class NbDummyTriggerStrategy extends NbTriggerStrategyBase {
+export class NbNoopTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = EMPTY;
   hide$: Observable<Event> = EMPTY;
 }
@@ -249,7 +249,7 @@ export class NbTriggerStrategyBuilderService {
       case NbTrigger.FOCUS:
         return new NbFocusTriggerStrategy(this._document, this._host, this._container);
       case NbTrigger.NOOP:
-        return new NbDummyTriggerStrategy(this._document, this._host, this._container);
+        return new NbNoopTriggerStrategy(this._document, this._host, this._container);
       default:
         throw new Error('Trigger have to be provided');
     }
