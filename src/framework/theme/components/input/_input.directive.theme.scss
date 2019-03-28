@@ -26,8 +26,9 @@
 
     &[disabled] {
       @include install-placeholder(
-        rgba(nb-theme(form-control-placeholder-color), 0.5),
-        nb-theme(form-control-placeholder-font-size)
+        nb-theme(form-control-placeholder-color),
+        nb-theme(form-control-placeholder-font-size),
+        0.5
       );
     }
 
