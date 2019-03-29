@@ -40,7 +40,7 @@
     display: flex;
     width: 100%;
 
-    .icon {
+    nb-icon {
       font-size: 0.95rem;
     }
   }
@@ -73,7 +73,7 @@
       color: transparent;
     }
 
-    .icon {
+    nb-icon {
       color: $action-fg;
       position: absolute;
       top: 50%;
@@ -156,7 +156,7 @@
         padding: 0 2.5rem;
       }
 
-      .icon {
+      nb-icon {
         left: 1.25rem;
         transform: translate(0, -50%);
       }

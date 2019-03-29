@@ -17,6 +17,7 @@ import { LayoutDirectionToggleComponent } from './layout-direction-toggle/layout
 import { LayoutThemeToggleComponent } from './layout-theme-toggle/layout-theme-toggle.component';
 import { ComponentsOverlayComponent } from './components-list/components-overlay.component';
 import { ComponentsListComponent} from './components-list/components-list.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ComponentsListComponent} from './components-list/components-list.compon
       },
     ], { useHash: true }),
     NbThemeModule.forRoot(),
+    NbEvaIconsModule,
   ],
   declarations: [
     AppComponent,

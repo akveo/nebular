@@ -26,7 +26,6 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -77,7 +76,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
             "assets": [
@@ -147,7 +145,6 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -198,7 +195,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
             "assets": [
@@ -266,7 +262,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/docsearch.js/dist/cdn/docsearch.min.css",
               "node_modules/highlight.js/styles/dracula.css",
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": [
@@ -321,7 +316,6 @@
             ],
             "styles": [
               "node_modules/highlight.js/styles/dracula.css",
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "docs/app/@theme/styles/styles.scss"
             ],
             "assets": [

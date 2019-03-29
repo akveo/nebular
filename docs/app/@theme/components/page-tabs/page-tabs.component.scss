@@ -28,9 +28,15 @@
       font-weight: 500;
     }
 
-    .icon {
-      font-size: 1.5rem;
-      padding-bottom: 1rem;
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ::ng-deep nb-icon {
+      font-size: 1.875rem;
+      margin-bottom: 1rem;
     }
 
     &.selected {
@@ -46,12 +52,6 @@
       }
     }
   }
-
-  .icon,
-  .title {
-    display: block;
-    text-align: center;
-  }
 }
 
 :host(.horizontal) {
@@ -62,19 +62,15 @@
     padding: 0 1rem;
 
     .title,
-    .icon {
-      display: inline;
-      padding-bottom: 0;
-      vertical-align: middle;
-    }
-
-    .icon {
+    ::ng-deep nb-icon {
+      margin-bottom: 1rem;
       margin-right: 0.5rem;
     }
   }
 
   .text-container {
-    padding-bottom: 1.3rem;
+    flex-direction: row;
+    padding-bottom: 0;
   }
 
   .line {
@@ -87,6 +83,7 @@
 
     a {
       flex: 1 1 0;
+      margin-bottom: 0;
 
       &.selected::after {
         content: '';

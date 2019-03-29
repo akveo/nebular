@@ -334,6 +334,8 @@ To give the user capability switch between live and inline representation of the
 
 # Release
 
+0. For major version, search for `@breaking-change` to make sure all breaking changes are covered.
+
 To start a new release (publish the framework packages on NPM) you need:
 
 1. create a new release branch called `release:v1.0.2`

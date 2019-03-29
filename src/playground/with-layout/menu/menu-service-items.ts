@@ -2,43 +2,43 @@ export const MENU_ITEMS = [
   {
     title: 'Home',
     link: '/example/menu/menu-service.component',
-    icon: 'nb-home',
+    icon: 'home-outline',
     home: true,
   },
   {
     title: 'User account',
     link: '/example/menu/menu-service.component/2',
-    icon: 'nb-person',
+    icon: 'person-outline',
   },
   {
     title: 'Shop',
-    icon: 'nb-e-commerce',
+    icon: 'shopping-cart-outline',
     expanded: true,
     children: [
       {
         title: 'Services',
         link: '/example/menu/menu-service.component/3/1',
-        icon: 'nb-gear',
+        icon: 'settings-outline',
       },
       {
         title: 'Hardware',
         link: '/example/menu/menu-service.component/3/2',
-        icon: 'nb-lightbulb',
+        icon: 'bulb-outline',
       },
       {
         title: 'Software',
-        icon: 'nb-grid-a-outline',
+        icon: 'grid-outline',
         expanded: true,
         children: [
           {
             title: 'Open Source',
             link: '/example/menu/menu-service.component/3/3/1',
-            icon: 'nb-grid-b',
+            icon: 'grid-outline',
           },
           {
             title: 'Commercial',
             link: '/example/menu/menu-service.component/3/3/2',
-            icon: 'nb-grid-b-outline',
+            icon: 'grid-outline',
             queryParams: {param: 2},
             fragment: 'fragment',
           },

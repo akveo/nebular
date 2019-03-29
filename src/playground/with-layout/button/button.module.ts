@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
 import { ButtonRoutingModule } from './button-routing.module';
 import { ButtonColorsComponent } from './button-colors.component';
 import { ButtonFullWidthComponent } from './button-full-width.component';
@@ -15,6 +15,7 @@ import { ButtonShapesComponent } from './button-shapes.component';
 import { ButtonShowcaseComponent } from './button-showcase.component';
 import { ButtonSizesComponent } from './button-sizes.component';
 import { ButtonTypesComponent } from './button-types.component';
+import { ButtonIconComponent } from './button-icon.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ButtonTypesComponent } from './button-types.component';
     ButtonShowcaseComponent,
     ButtonSizesComponent,
     ButtonTypesComponent,
+    ButtonIconComponent,
   ],
-  imports: [ NbCardModule, NbButtonModule, ButtonRoutingModule ],
+  imports: [ NbCardModule, NbButtonModule, NbIconModule, ButtonRoutingModule ],
 })
 export class ButtonModule {}

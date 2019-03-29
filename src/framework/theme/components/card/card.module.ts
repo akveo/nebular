@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-
+import { NbIconModule } from '../icon/icon.module';
 import {
   NbCardComponent,
   NbCardBodyComponent,
@@ -33,6 +33,7 @@ const NB_CARD_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [
     ...NB_CARD_COMPONENTS,

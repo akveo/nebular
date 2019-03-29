@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NbTableModule } from '../cdk/table';
+import { NbIconModule } from '../icon/icon.module';
 import { NbTreeGridComponent } from './tree-grid.component';
 import {
   NbTreeGridCellDefDirective,
@@ -79,7 +80,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [ CommonModule, NbTableModule ],
+  imports: [ CommonModule, NbTableModule, NbIconModule ],
   declarations: [ ...COMPONENTS ],
   exports: [ NbTableModule, ...COMPONENTS ],
   providers: [
