@@ -82,6 +82,26 @@ describe('click-trigger-strategy', () => {
 
     expect(spy).toHaveBeenCalledTimes(0);
   });
+
+  it('should not destroy when host reattached', () => {
+    const showSpy = jasmine.createSpy('show');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+
+    triggerStrategy.show$.subscribe(showSpy);
+
+    click(host);
+
+    expect(showSpy).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(host);
+    document.body.appendChild(host);
+
+    click(host);
+
+    expect(showSpy).toHaveBeenCalledTimes(2);
+  });
 });
 
 describe('hover-trigger-strategy', () => {
@@ -137,6 +157,32 @@ describe('hover-trigger-strategy', () => {
 
     expect(spy).toHaveBeenCalledTimes(0);
   });
+
+  it('should not destroy when host reattached', fakeAsync(() => {
+    const showSpy = jasmine.createSpy('show');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+
+    triggerStrategy.show$.subscribe(showSpy);
+
+    mouseEnter(host);
+
+    // hover trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(host);
+    document.body.appendChild(host);
+
+    mouseEnter(host);
+
+    // hover trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(2);
+  }));
 });
 
 describe('hint-trigger-strategy', () => {
@@ -176,6 +222,31 @@ describe('hint-trigger-strategy', () => {
     triggerStrategy.hide$.subscribe(done);
     mouseLeave(host);
   });
+
+  it('should not destroy when host reattached', fakeAsync(() => {
+    const showSpy = jasmine.createSpy('show');
+    const triggerStrategy = triggerStrategyBuilder
+      .build();
+
+    triggerStrategy.show$.subscribe(showSpy);
+
+    mouseEnter(host);
+
+    // hint trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(host);
+    document.body.appendChild(host);
+
+    mouseEnter(host);
+
+    // hint trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(2);
+  }));
 });
 
 describe('focus-trigger-strategy', () => {
@@ -250,6 +321,32 @@ describe('focus-trigger-strategy', () => {
     tick(100);
 
     expect(showSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should not destroy when host reattached', fakeAsync(() => {
+    const showSpy = jasmine.createSpy('show');
+    const triggerStrategy = triggerStrategyBuilder
+      .container(() => null)
+      .build();
+
+    triggerStrategy.show$.subscribe(showSpy);
+
+    focus(host);
+
+    // focus trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(host);
+    document.body.appendChild(host);
+
+    focus(host);
+
+    // focus trigger strategy has 100 milliseconds delay before firing show$
+    tick(100);
+
+    expect(showSpy).toHaveBeenCalledTimes(2);
   }));
 });
 
