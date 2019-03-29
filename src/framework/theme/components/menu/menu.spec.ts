@@ -4,13 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 import { NbMenuModule } from './menu.module';
-import { NbMenuBag, NbMenuItem, NbMenuService } from './menu.service';
+import { NbMenuBag, NbMenuInternalService, NbMenuItem, NbMenuService } from './menu.service';
 import { NbThemeModule } from '../../theme.module';
-import { getFragmentPartOfUrl, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import {
+  getFragmentPartOfUrl, isFragmentContain,
+  isFragmentEqual,
+  isUrlPathContain,
+  isUrlPathEqual,
+} from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
 
@@ -243,6 +249,28 @@ describe('menu services', () => {
 
 });
 
+fdescribe('NbMenuInternalService', () => {
+  beforeEach(() => createTestBed());
+
+  it('should select menu item by fragment', (done) => {
+    const service: NbMenuInternalService = TestBed.get(NbMenuInternalService);
+    const router: Router = TestBed.get(Router);
+    const items = [{ title: 'Item 1', link: '/', fragment: '1' }];
+    service.prepareItems(items);
+    const menuItem: NbMenuItem = items[0];
+
+    expect(menuItem.selected).toEqual(undefined);
+
+    router.navigate(['.'], { fragment: '1' })
+      .then(() => {
+        service.selectFromUrl(items, '');
+        expect(menuItem.selected).toEqual(true);
+        done();
+      })
+      .catch(() => { throw new Error('Navigation failed') });
+  });
+});
+
 describe('menu URL helpers', () => {
 
   it('isUrlPathContain should work by url segments', () => {
@@ -294,6 +322,26 @@ describe('menu URL helpers', () => {
   it('isFragmentEqual should return true for path with same fragments', () => {
     expect(isFragmentEqual('/a/b#fragment', 'fragment')).toBeTruthy();
     expect(isFragmentEqual('/a/b/c?a=1;b=2&c=3#fragment', 'fragment')).toBeTruthy();
+  });
+
+  it('isFragmentContain should return true for url with exact fragment', () => {
+    expect(isFragmentContain('/a/b#1', '1')).toBeTruthy();
+    expect(isFragmentContain('/#2', '2')).toBeTruthy();
+  });
+
+  it('isFragmentContain should return true for url containing fragments', () => {
+    expect(isFragmentContain('/a/b#12', '1')).toBeTruthy();
+    expect(isFragmentContain('/a/b?a=1;b=2&c=3#21', '1')).toBeTruthy();
+  });
+
+  it('isFragmentContain should return false for url without fragment', () => {
+    expect(isFragmentContain('/a1/b', '1')).toBeFalsy();
+    expect(isFragmentContain('/a1/b?a=1;b=2&c=3', '1')).toBeFalsy();
+  });
+
+  it('isFragmentContain should return false for url with different fragment', () => {
+    expect(isFragmentContain('/a1/b#222', '1')).toBeTruthy();
+    expect(isFragmentContain('/a1/b?a=1;b=2&c=3#222', '1')).toBeTruthy();
   });
 
 });
