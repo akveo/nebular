@@ -9,6 +9,7 @@ import {
   Input,
   Type,
 } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 
 import { NbRenderableContainer } from '../overlay-container';
 import {
@@ -146,6 +147,8 @@ export class MockTriggerStrategyBuilder {
   show$ = new Subject<any>();
   hide$ = new Subject<any>();
 
+  private destroyed$ = new Subject();
+
   trigger(trigger: NbTrigger): this {
     this._trigger = trigger;
     return this;
@@ -163,9 +166,10 @@ export class MockTriggerStrategyBuilder {
 
   build(): NbTriggerStrategy {
     return {
-      show$: this.show$,
-      hide$: this.hide$,
-    } as NbTriggerStrategy;
+      show$: this.show$.asObservable().pipe(takeUntil(this.destroyed$)),
+      hide$: this.hide$.asObservable().pipe(takeUntil(this.destroyed$)),
+      destroy: () => this.destroyed$.next(),
+    };
   }
 }
 

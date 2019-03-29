@@ -6,6 +6,9 @@
 
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { from, zip } from 'rxjs';
 
 import { NbSelectModule } from './select.module';
 import { NbThemeModule } from '../../theme.module';
@@ -13,8 +16,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbSelectComponent } from './select.component';
 import { NbLayoutModule } from '../layout/layout.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { from, zip } from 'rxjs';
+import { NbOptionComponent } from './option.component';
 
 
 const TEST_GROUPS = [
@@ -93,6 +95,27 @@ export class NbSelectWithInitiallySelectedOptionComponent {
   @ViewChild(NbSelectComponent) select: NbSelectComponent<number>;
 }
 
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select *ngIf="showSelect" [formControl]="formControl">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbReactiveFormSelectComponent {
+  options: number[] = [ 1 ];
+  showSelect: boolean = true;
+  formControl: FormControl = new FormControl();
+
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
+}
+
 describe('Component: NbSelectComponent', () => {
   let fixture: ComponentFixture<NbSelectTestComponent>;
   let overlayContainerService: NbOverlayContainerAdapter;
@@ -110,11 +133,17 @@ describe('Component: NbSelectComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
         NbThemeModule.forRoot(),
         NbLayoutModule,
         NbSelectModule,
       ],
-      declarations: [ NbSelectTestComponent, NbSelectWithInitiallySelectedOptionComponent ],
+      declarations: [
+        NbSelectTestComponent,
+        NbSelectWithInitiallySelectedOptionComponent,
+        NbReactiveFormSelectComponent,
+      ],
     });
 
     fixture = TestBed.createComponent(NbSelectTestComponent);
@@ -244,10 +273,35 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbSelectWithInitiallySelectedOptionComponent);
     selectFixture.detectChanges();
     flush();
+    selectFixture.detectChanges();
 
     const selectedOption = selectFixture.componentInstance.select.options.find(o => o.selected);
     expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
     const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
+
+  describe('NbOptionComponent', () => {
+    it('should ignore selection change if destroyed', () => {
+      const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
+      const testSelectComponent = selectFixture.componentInstance;
+      selectFixture.detectChanges();
+
+      const option = testSelectComponent.optionComponent;
+      const markForCheckSpy = spyOn((option as any).cd, 'markForCheck').and.callThrough();
+
+      testSelectComponent.formControl.setValue(1);
+      selectFixture.detectChanges();
+
+      expect(option.selected).toEqual(true);
+      expect(markForCheckSpy).toHaveBeenCalledTimes(1);
+
+      testSelectComponent.showSelect = false;
+      selectFixture.detectChanges();
+
+      expect(() => testSelectComponent.formControl.setValue(2)).not.toThrow();
+      expect(option.selected).toEqual(true);
+      expect(markForCheckSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });
