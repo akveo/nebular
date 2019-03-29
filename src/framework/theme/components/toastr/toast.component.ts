@@ -85,6 +85,10 @@ export class NbToastComponent {
     return this.toast.config.icon;
   }
 
+  get iconPack(): string {
+    return this.toast.config.iconPack;
+  }
+
   @HostListener('click')
   onClick() {
     this.destroy.emit();

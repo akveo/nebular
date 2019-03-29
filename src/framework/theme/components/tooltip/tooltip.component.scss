@@ -26,7 +26,7 @@
     height: 0;
   }
 
-  .icon {
+  nb-icon {
     font-size: 1.25rem;
   }
 
@@ -34,10 +34,10 @@
     line-height: 1.25rem;
   }
 
-  .icon + span {
+  nb-icon + span {
     margin-left: 0.5rem;
   }
-  &.right .icon + span {
+  &.right nb-icon + span {
     margin-right: 0.5rem;
   }
 

@@ -19,6 +19,10 @@
     border: $border-width $border-style $border-color;
   }
 
+  .nb-tree-grid-header-cell {
+    line-height: 1.5;
+  }
+
   .nb-tree-grid-header-row {
     background: nb-theme(tree-grid-header-bg);
   }
@@ -37,9 +41,18 @@
     }
   }
 
-  nb-tree-grid-row-toggle .row-toggle-button .icon,
-  nb-sort-icon .icon {
-    color: nb-theme(tree-grid-icon-color);
+  .nb-tree-grid-header-cell {
+    button {
+      vertical-align: middle;
+    }
+  }
+
+  nb-tree-grid-row-toggle, nb-sort-icon {
+    nb-icon {
+      font-size: inherit;
+      vertical-align: middle;
+      color: nb-theme(tree-grid-icon-color);
+    }
   }
 
   @include nb-tree-grid-sort-header-theme();

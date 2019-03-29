@@ -44,7 +44,7 @@ describe('Directive: NbInput', () => {
   let inputElement: Element;
   let textareaElement: Element;
 
-  beforeEach(() => {;
+  beforeEach(() => {
 
     fixture = TestBed.configureTestingModule({
         imports: [ NbInputModule ],

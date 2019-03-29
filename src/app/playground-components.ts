@@ -174,6 +174,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonTypesComponent',
         name: 'Button Types',
       },
+      {
+        path: 'button-icon.component',
+        link: '/button/button-icon.component',
+        component: 'ButtonIconComponent',
+        name: 'Button Icon',
+      },
     ],
   },
   {
@@ -1317,6 +1323,23 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/typography/typography-showcase.component',
         component: 'TypographyShowcaseComponent',
         name: 'Typography Showcase',
+      },
+    ],
+  },
+  {
+    path: 'icon',
+    children: [
+      {
+        path: 'icon-showcase.component',
+        link: '/icon/icon-showcase.component',
+        component: 'IconShowcaseComponent',
+        name: 'Icon Showcase',
+      },
+      {
+        path: 'icon-colors.component',
+        link: '/icon/icon-colors.component',
+        component: 'IconColorsComponent',
+        name: 'Icon Colors',
       },
     ],
   },

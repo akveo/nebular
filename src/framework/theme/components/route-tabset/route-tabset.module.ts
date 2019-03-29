@@ -9,10 +9,12 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 
 import { NbRouteTabsetComponent } from './route-tabset.component';
+import { NbIconModule } from '../icon/icon.module';
 
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [
     NbRouteTabsetComponent,

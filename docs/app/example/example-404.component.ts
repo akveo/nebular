@@ -4,9 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 @Component({
   selector: 'ngd-example-404',
   template: `
-    <nb-layout>
-      <nb-layout-column>Example not found.</nb-layout-column>
-    </nb-layout>
+    Example not found.
   `,
   styleUrls: ['./example-404.component.scss'],
 })
