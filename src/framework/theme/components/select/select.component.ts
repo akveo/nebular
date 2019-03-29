@@ -346,6 +346,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.alive = false;
 
     this.ref.dispose();
+    this.triggerStrategy.destroy();
   }
 
   show() {
@@ -482,18 +483,13 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
-
-    this.triggerStrategy.hide$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(($event: Event) => {
-        this.hide();
-        if (!this.isClickedWithinComponent($event)) {
-          this.onTouched();
-        }
-      });
+    this.triggerStrategy.show$.subscribe(() => this.show());
+    this.triggerStrategy.hide$.subscribe(($event: Event) => {
+      this.hide();
+      if (!this.isClickedWithinComponent($event)) {
+        this.onTouched();
+      }
+    });
   }
 
   protected subscribeOnPositionChange() {

@@ -141,6 +141,11 @@ export abstract class NbBasePicker<D, T, P>
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
 
   /**
+   * Trigger strategy used by overlay
+   * */
+  protected triggerStrategy: NbTriggerStrategy;
+
+  /**
    * HTML input reference to which datepicker connected.
    * */
   protected hostRef: ElementRef;
@@ -232,6 +237,8 @@ export abstract class NbBasePicker<D, T, P>
     if (this.ref) {
       this.ref.dispose();
     }
+
+    this.triggerStrategy.destroy();
   }
 
   /**
@@ -314,9 +321,9 @@ export abstract class NbBasePicker<D, T, P>
   }
 
   protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
+    this.triggerStrategy = this.createTriggerStrategy();
+    this.triggerStrategy.show$.subscribe(() => this.show());
+    this.triggerStrategy.hide$.subscribe(() => {
       this.blur$.next();
       this.hide();
     });
