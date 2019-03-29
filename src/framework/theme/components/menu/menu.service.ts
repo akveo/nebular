@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { Params } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -383,7 +383,9 @@ export class NbMenuInternalService {
       : isUrlPathContain(this.location.path(), link);
 
     if (isSelectedInPath && item.fragment != null) {
-      return isFragmentEqual(this.location.path(), item.fragment);
+      return exact
+        ? isFragmentEqual(this.location.path(), item.fragment)
+        : isFragmentContain(this.location.path(), item.fragment);
     }
 
     return isSelectedInPath;

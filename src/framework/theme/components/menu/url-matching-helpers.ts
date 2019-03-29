@@ -28,3 +28,7 @@ export function getFragmentPartOfUrl(url: string): string {
 export function isFragmentEqual(path: string, fragment: string): boolean {
   return getFragmentPartOfUrl(path) === fragment;
 }
+
+export function isFragmentContain(path: string, fragment: string): boolean {
+  return getFragmentPartOfUrl(path).includes(fragment);
+}
