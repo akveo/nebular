@@ -14,6 +14,7 @@ import { ButtonShapesComponent } from './button-shapes.component';
 import { ButtonShowcaseComponent } from './button-showcase.component';
 import { ButtonSizesComponent } from './button-sizes.component';
 import { ButtonTypesComponent } from './button-types.component';
+import { ButtonIconComponent } from './button-icon.component';
 
 const routes: Route[] = [
   {
@@ -47,6 +48,10 @@ const routes: Route[] = [
   {
     path: 'button-types.component',
     component: ButtonTypesComponent,
+  },
+  {
+    path: 'button-icon.component',
+    component: ButtonIconComponent,
   },
 ];
 

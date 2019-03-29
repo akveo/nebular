@@ -48,7 +48,7 @@
         color: nb-theme(stepper-fg);
         font-weight: nb-theme(stepper-label-font-weight);
 
-        .icon {
+        nb-icon {
           font-size: nb-theme(stepper-completed-icon-size);
           font-weight: nb-theme(stepper-completed-icon-weight);
         }

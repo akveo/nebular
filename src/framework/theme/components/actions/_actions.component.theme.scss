@@ -26,7 +26,7 @@
         }
       }
 
-      i.control-icon {
+      nb-icon {
         color: nb-theme(actions-fg);
         font-size: nb-theme(actions-size-small);
       }
@@ -39,7 +39,7 @@
 
     &.inverse {
       nb-action {
-        i.control-icon {
+        nb-icon {
           color: nb-theme(actions-bg);
         }
 
@@ -51,7 +51,7 @@
     &.small {
       nb-action {
         height: nb-theme(actions-size-small);
-        i.control-icon {
+        nb-icon {
           font-size: nb-theme(actions-size-small);
         }
       }
@@ -59,7 +59,7 @@
     &.medium {
       nb-action {
         height: nb-theme(actions-size-medium);
-        i.control-icon {
+        nb-icon {
           font-size: nb-theme(actions-size-medium);
         }
       }
@@ -67,7 +67,7 @@
     &.large {
       nb-action {
         height: nb-theme(actions-size-large);
-        i.control-icon {
+        nb-icon {
           font-size: nb-theme(actions-size-large);
         }
       }

@@ -43,7 +43,7 @@ export class MenuServiceComponent implements OnDestroy {
     this.menuService.addItems([{
       title: '@nebular/theme',
       target: '_blank',
-      icon: 'nb-plus',
+      icon: 'plus-outline',
       url: 'https://github.com/akveo/ngx-admin',
     }], 'menu');
   }

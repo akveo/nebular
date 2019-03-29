@@ -41,18 +41,22 @@ export class NbToastrConfig {
    * */
   hasIcon: boolean = true;
   /**
-   * Icon class that can be provided to render custom icon.
+   * Icon name that can be provided to render custom icon.
    * */
-  icon: string = 'nb-email';
+  icon: string = 'email';
+  /**
+   * Icon pack to look for the icon in.
+   * */
+  iconPack: string;
   /**
    * Toast status icon-class mapping.
    * */
   protected icons = {
-    [NbToastStatus.DANGER]: 'nb-danger',
-    [NbToastStatus.SUCCESS]: 'nb-checkmark-circle',
-    [NbToastStatus.INFO]: 'nb-help',
-    [NbToastStatus.WARNING]: 'nb-alert',
-    [NbToastStatus.PRIMARY]: 'nb-email',
+    [NbToastStatus.DANGER]: 'flash-outline',
+    [NbToastStatus.SUCCESS]: 'checkmark-outline',
+    [NbToastStatus.INFO]: 'question-mark-outline',
+    [NbToastStatus.WARNING]: 'alert-triangle-outline',
+    [NbToastStatus.PRIMARY]: 'email-outline',
   };
 
   constructor(config: Partial<NbToastrConfig>) {
@@ -63,6 +67,7 @@ export class NbToastrConfig {
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
       config.icon = this.icons[config.status || NbToastStatus.PRIMARY];
+      config.iconPack = 'nebular-essentials';
     }
   }
 }

@@ -19,7 +19,8 @@
       "@nebular/theme": ["../src/framework/theme"],
       "@nebular/theme/*": ["../src/framework/theme/*"],
       "@nebular/auth": ["../src/framework/auth"],
-      "@nebular/security": ["../src/framework/security"]
+      "@nebular/security": ["../src/framework/security"],
+      "@nebular/eva-icons": ["../src/framework/eva-icons"]
     }
   },
   "exclude": [

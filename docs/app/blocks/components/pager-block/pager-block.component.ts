@@ -11,7 +11,7 @@ import { NgdPaginationService } from '../../../@theme/services';
         <a *ngIf="paginationItem.prev" [routerLink]="paginationItem.prev.link"
           [attr.title]="paginationItem.prev.title">
           <div class="page-title">
-            <i class="icon feather-arrow-left"></i>
+            <nb-icon icon="arrow-back-outline"></nb-icon>
             <span>{{ paginationItem.prev.title }}</span>
           </div>
           <div class="description">Previous page</div>
@@ -23,7 +23,7 @@ import { NgdPaginationService } from '../../../@theme/services';
           [attr.title]="paginationItem.next.title">
           <div class="page-title">
             <span>{{ paginationItem.next.title }}</span>
-            <i class="icon feather-arrow-right"></i>
+            <nb-icon icon="arrow-forward-outline"></nb-icon>
           </div>
           <div class="description">Next page</div>
         </a>

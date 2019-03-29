@@ -55,6 +55,9 @@ import { convertToBoolProperty } from '../helpers';
  * Button can be made `fullWidth`:
  * @stacked-example(Full Width Button, button/button-full-width.component.html)
  *
+ * Icon can be placed inside of a button as a child element:
+ * @stacked-example(Icon Button, button/button-icon.component.html)
+ *
  * @styles
  *
  * btn-fg:
@@ -209,6 +212,20 @@ export class NbButtonComponent {
     return this.disabled ? '-1' : '0';
   }
 
+  @HostBinding('class.icon-start')
+  get iconLeft(): boolean {
+    const el = this.hostElement.nativeElement;
+    const icon = this.iconElement;
+    return !!(icon && el.firstChild === icon);
+  }
+
+  @HostBinding('class.icon-end')
+  get iconRight(): boolean {
+    const el = this.hostElement.nativeElement;
+    const icon = this.iconElement;
+    return !!(icon && el.lastChild === icon);
+  }
+
   @HostBinding('class.btn-full-width')
   fullWidth = false;
 
@@ -239,6 +256,11 @@ export class NbButtonComponent {
   @Input('shape')
   private set setShape(val: string) {
     this.shape = val;
+  }
+
+  private get iconElement() {
+    const el = this.hostElement.nativeElement;
+    return el.querySelector('nb-icon');
   }
 
   /**
