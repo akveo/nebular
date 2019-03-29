@@ -18,6 +18,7 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { convertToBoolProperty } from '../helpers';
 import { NbSelectComponent } from './select.component';
 
@@ -52,9 +53,17 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   /**
-   * Fires value on click.
+   * Fires value when option selection change.
    * */
   @Output() selectionChange: EventEmitter<NbOptionComponent<T>> = new EventEmitter();
+
+  /**
+   * Fires when option clicked
+   */
+  private click$: Subject<NbOptionComponent<T>> = new Subject<NbOptionComponent<T>>();
+  get click(): Observable<NbOptionComponent<T>> {
+    return this.click$.asObservable();
+  }
 
   selected: boolean = false;
   disabled: boolean = false;
@@ -84,19 +93,17 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.parent.multiple;
   }
 
-  @HostBinding('class.selected')
-  get selectedClass(): boolean {
+  @HostBinding('class.selected') get selectedClass(): boolean {
     return this.selected;
   }
 
-  @HostBinding('class.disabled')
-  get disabledClass(): boolean {
+  @HostBinding('class.disabled') get disabledClass(): boolean {
     return this.disabled;
   }
 
   @HostListener('click')
   onClick() {
-    this.selectionChange.emit(this);
+    this.click$.next(this);
   }
 
   select() {
@@ -115,10 +122,10 @@ export class NbOptionComponent<T> implements OnDestroy {
      * Also Angular can call writeValue on destroyed view (select implements ControlValueAccessor).
      * angular/angular#27803
      * */
-    if (this.alive) {
+    if (this.alive && this.selected !== isSelected) {
       this.selected = isSelected;
+      this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
   }
 }
-
