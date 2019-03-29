@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ApplicationRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from '@angular/core/testing';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, zip } from 'rxjs';

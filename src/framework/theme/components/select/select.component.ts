@@ -377,7 +377,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   writeValue(value: T | T[]): void {
-    if (!value) {
+    if (!value || !this.alive) {
       return;
     }
 
