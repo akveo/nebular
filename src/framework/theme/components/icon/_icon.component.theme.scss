@@ -1,0 +1,31 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-icon-theme() {
+  nb-icon {
+    font-size: nb-theme(icon-font-size);
+    line-height: nb-theme(icon-line-height);
+    width: 1em;
+    height: 1em;
+
+    &.primary-icon {
+      color: nb-theme(icon-primary-fg);
+    }
+    &.info-icon {
+      color: nb-theme(icon-info-fg);
+    }
+    &.success-icon {
+      color: nb-theme(icon-success-fg);
+    }
+    &.warning-icon {
+      color: nb-theme(icon-warning-fg);
+    }
+    &.danger-icon {
+      color: nb-theme(icon-danger-fg);
+    }
+  }
+}
+

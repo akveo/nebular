@@ -6,14 +6,16 @@
 
 import { NgModule } from '@angular/core';
 
-import { NbTooltipComponent } from './tooltip.component';
 import { NbSharedModule } from '../shared/shared.module';
-import { NbTooltipDirective } from './tooltip.directive';
 import { NbOverlayModule } from '../cdk';
+import { NbIconModule } from '../icon/icon.module';
+
+import { NbTooltipComponent } from './tooltip.component';
+import { NbTooltipDirective } from './tooltip.directive';
 
 
 @NgModule({
-  imports: [NbSharedModule, NbOverlayModule],
+  imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbTooltipComponent, NbTooltipDirective],
   exports: [NbTooltipDirective],
   entryComponents: [NbTooltipComponent],

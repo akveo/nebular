@@ -216,7 +216,7 @@ $theme: (
   menu-group-padding: 1rem 1.25rem,
   menu-item-padding: 0.675rem 0.75rem,
   menu-item-separator: separator,
-  menu-icon-font-size: 2.5rem,
+  menu-icon-font-size: 1.5rem,
   menu-icon-margin: 0 0.25rem 0,
   menu-icon-color: color-fg,
   menu-icon-active-color: color-fg-heading,
@@ -640,7 +640,7 @@ $theme: (
   stepper-accent-color: color-primary,
   stepper-completed-fg: color-white,
   stepper-fg: color-fg,
-  stepper-completed-icon-size: 1.5rem,
+  stepper-completed-icon-size: 1.25rem,
   stepper-completed-icon-weight: font-weight-ultra-bold,
   stepper-step-padding: padding,
 
@@ -769,6 +769,15 @@ $theme: (
   tree-grid-row-hover-bg: color-bg,
   tree-grid-sort-header-button-color: color-fg-text,
   tree-grid-icon-color: color-fg-text,
+
+  icon-font-size: 1.25rem,
+  icon-width: icon-font-size,
+  icon-height: icon-font-size,
+  icon-primary-fg: color-primary,
+  icon-info-fg: color-info,
+  icon-success-fg: color-success,
+  icon-warning-fg: color-warning,
+  icon-danger-fg: color-danger,
 );
 
 // register the theme

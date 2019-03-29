@@ -157,6 +157,10 @@ const routes: Route[] = [
         path: 'typography',
         loadChildren: './typography/typography.module#TypographyModule',
       },
+      {
+        path: 'icon',
+        loadChildren: './icon/icon.module#IconModule',
+      },
     ],
   },
 ];

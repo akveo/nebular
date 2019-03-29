@@ -60,7 +60,9 @@ import { DomSanitizer } from '@angular/platform-browser';
         <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle">
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
-        <div *ngIf="!file.urlStyle" class="nb-compose">
+
+        <div>
+          <nb-icon *ngIf="!file.urlStyle" icon="file-text-outline" pack="nebular-essentials"></nb-icon>
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
       </ng-container>
@@ -72,7 +74,7 @@ import { DomSanitizer } from '@angular/platform-browser';
              placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
              (keyup.enter)="sendMessage()">
       <button *ngIf="showButton" class="btn" [class.with-icon]="!buttonTitle" (click)="sendMessage()">
-        {{ buttonTitle }}<span *ngIf="!buttonTitle" [class]="buttonIcon"></span>
+        {{ buttonTitle }}<nb-icon *ngIf="!buttonTitle" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
       </button>
     </div>
   `,
@@ -99,7 +101,7 @@ export class NbChatFormComponent {
    * Send button icon, shown if `buttonTitle` is empty
    * @type {string}
    */
-  @Input() buttonIcon: string = 'nb-paper-plane';
+  @Input() buttonIcon: string = 'paper-plane-outline';
 
   /**
    * Show send button

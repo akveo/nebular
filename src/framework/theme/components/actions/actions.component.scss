@@ -15,10 +15,8 @@
     align-items: center;
     position: relative;
 
-    i.control-icon {
-      &:hover {
-        cursor: pointer;
-      }
+    nb-icon:hover {
+      cursor: pointer;
     }
 
     &.disabled {

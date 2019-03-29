@@ -8,6 +8,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbOverlayModule } from '../cdk';
 import { NbSharedModule } from '../shared/shared.module';
+import { NbIconModule } from '../icon/icon.module';
 
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbToastComponent } from './toast.component';
@@ -16,7 +17,7 @@ import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 
 
 @NgModule({
-  imports: [NbSharedModule, NbOverlayModule],
+  imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbToastrContainerComponent, NbToastComponent],
   entryComponents: [NbToastrContainerComponent, NbToastComponent],
 })

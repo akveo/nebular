@@ -87,13 +87,13 @@ describe('ng-add', () => {
     expect(dependencies['@nebular/theme']).toBe(nebularThemeVersion);
   });
 
-  it('should add nebular-icons in package.json', function () {
+  it('should add @nebular/eva-icons in package.json', function () {
     const tree = runNgAddSchematic();
     const dependencies = getPackageDependencies(tree);
-    const nebularIconsVersion = require('../../package.json').peerDependencies['nebular-icons'];
+    const nebularEvaIconsVersion = require('../../package.json').version;
 
-    expect(dependencies['nebular-icons']).toBeDefined();
-    expect(dependencies['nebular-icons']).toBe(nebularIconsVersion);
+    expect(dependencies['@nebular/eva-icons']).toBeDefined();
+    expect(dependencies['@nebular/eva-icons']).toBe(nebularEvaIconsVersion);
   });
 
   it('should register NbThemeModule.forRoot()', () => {

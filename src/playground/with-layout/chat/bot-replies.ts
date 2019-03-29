@@ -100,7 +100,7 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'nb-compose',
+          icon: 'file-text-outline',
         },
         {
           url: '',
@@ -111,7 +111,7 @@ export const botReplies = [
           type: 'image/jpeg',
         },
       ],
-      icon: 'nb-compose',
+      icon: 'file-text-outline',
       user: {
         name: 'Bot',
         avatar: botAvatar,
@@ -130,10 +130,10 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'nb-compose',
+          icon: 'file-text-outline',
         },
       ],
-      icon: 'nb-compose',
+      icon: 'file-text-outline',
       user: {
         name: 'Bot',
         avatar: botAvatar,
