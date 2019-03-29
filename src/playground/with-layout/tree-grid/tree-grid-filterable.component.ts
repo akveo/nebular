@@ -33,8 +33,14 @@ interface FSEntry {
             </th>
 
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
-              <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>
+
+              <nb-tree-grid-row-toggle
+                [expanded]="row.expanded"
+                *ngIf="row.data.kind === 'dir'">
+              </nb-tree-grid-row-toggle>
+
               {{row.data.name}}
+
             </td>
           </ng-container>
 
