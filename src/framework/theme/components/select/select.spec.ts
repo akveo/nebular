@@ -100,11 +100,9 @@ export class NbSelectWithInitiallySelectedOptionComponent {
     <nb-layout>
       <nb-layout-column>
 
-        <div *ngIf="showSelect">
-          <nb-select [formControl]="formControl">
-            <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
-          </nb-select>
-        </div>
+        <nb-select *ngIf="showSelect" [formControl]="formControl">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
 
       </nb-layout-column>
     </nb-layout>
