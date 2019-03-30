@@ -31,9 +31,9 @@ class InputTestComponent {
     return this.textareaElementRef.nativeElement;
   }
 
-  @Input() size = NbInputDirective.SIZE_MEDIUM;
+  @Input() size;
   @Input() status;
-  @Input() shape = NbInputDirective.SHAPE_RECTANGLE;
+  @Input() shape;
   @Input() fullWidth = false;
 }
 

@@ -5,9 +5,6 @@
  */
 
 @mixin input-shapes() {
-  &.shape-rectangle {
-    border-radius: nb-theme(input-border-radius);
-  }
   &.shape-semi-round {
     border-radius: nb-theme(input-semi-round-border-radius);
   }

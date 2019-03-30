@@ -17,11 +17,13 @@
     border-width: $border-width;
     border-style: solid;
     border-color: $border-color;
+    border-radius: nb-theme(input-border-radius);
     color: nb-theme(input-text-color);
     font-size: nb-theme(input-text-font-size);
     font-family: nb-theme(input-text-font-family);
     font-weight: nb-theme(input-text-font-weight);
     line-height: nb-theme(input-text-line-height);
+    padding: nb-theme(input-padding);
     transition-property: border, background-color, color;
     transition-duration: nb-theme(input-state-transition-duration);
     transition-timing-function: nb-theme(input-state-transition-timing-function);

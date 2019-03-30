@@ -98,7 +98,6 @@ import { convertToBoolProperty } from '../helpers';
 export class NbInputDirective {
 
   static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
   static readonly SIZE_LARGE = 'large';
 
   static readonly STATUS_PRIMARY = 'primary';
@@ -107,15 +106,14 @@ export class NbInputDirective {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  static readonly SHAPE_RECTANGLE = 'rectangle';
   static readonly SHAPE_SEMI_ROUND = 'semi-round';
   static readonly SHAPE_ROUND = 'round';
 
-  size: string = NbInputDirective.SIZE_MEDIUM;
+  size: string;
 
   /**
    * Field size, available sizes:
-   * `small`, `medium`, `large`
+   * `small`, `medium` (default), `large`
    * @param {string} value
    */
   @Input('fieldSize')
@@ -125,18 +123,18 @@ export class NbInputDirective {
 
   /**
    * Field status (adds specific styles):
-   * `info`, `success`, `warning`, `danger`
+   * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
   @Input('status')
   status: string;
 
   /**
-   * Field shapes: `rectangle`, `round`, `semi-round`
+   * Field shapes: `rectangle` (default), `round`, `semi-round`
    * @param {string} val
    */
   @Input('shape')
-  shape: string = NbInputDirective.SHAPE_RECTANGLE;
+  shape: string;
 
   /**
    * If set element will fill container
@@ -153,11 +151,6 @@ export class NbInputDirective {
   @HostBinding('class.size-small')
   get small() {
     return this.size === NbInputDirective.SIZE_SMALL;
-  }
-
-  @HostBinding('class.size-medium')
-  get medium() {
-    return this.size === NbInputDirective.SIZE_MEDIUM;
   }
 
   @HostBinding('class.size-large')
@@ -188,11 +181,6 @@ export class NbInputDirective {
   @HostBinding('class.status-danger')
   get danger() {
     return this.status === NbInputDirective.STATUS_DANGER;
-  }
-
-  @HostBinding('class.shape-rectangle')
-  get rectangle() {
-    return this.shape === NbInputDirective.SHAPE_RECTANGLE;
   }
 
   @HostBinding('class.shape-semi-round')
