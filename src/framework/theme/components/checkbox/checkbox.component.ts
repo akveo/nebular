@@ -120,19 +120,6 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-info-hover-border-color:
  * checkbox-info-active-background-color:
  * checkbox-info-active-border-color:
- * checkbox-white-background-color:
- * checkbox-white-border-color:
- * checkbox-white-checked-background-color:
- * checkbox-white-checked-border-color:
- * checkbox-white-checked-checkmark-color:
- * checkbox-white-indeterminate-background-color:
- * checkbox-white-indeterminate-border-color:
- * checkbox-white-indeterminate-checkmark-color:
- * checkbox-white-focus-background-color:
- * checkbox-white-hover-background-color:
- * checkbox-white-hover-border-color:
- * checkbox-white-active-background-color:
- * checkbox-white-active-border-color:
  */
 @Component({
   selector: 'nb-checkbox',
@@ -228,7 +215,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   private _disabled: boolean = false;
 
   /**
-   * Checkbox status. Possible values are : primary (default), success, warning, danger, info, white
+   * Checkbox status. Possible values are : primary (default), success, warning, danger, info
    * @param {string} value
    */
   @Input()

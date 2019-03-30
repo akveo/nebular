@@ -103,8 +103,6 @@
   }
 
   @each $status in nb-get-statuses() {
-    @if ($status != 'basic') {
-      @include nb-checkbox-status($status);
-    }
+    @include nb-checkbox-status($status);
   }
 }
