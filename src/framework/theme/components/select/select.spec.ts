@@ -324,9 +324,11 @@ describe('NbOptionComponent', () => {
     });
   });
 
-  it('should ignore selection change if destroyed', () => {
+  it('should ignore selection change if destroyed', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testSelectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
     selectFixture.detectChanges();
 
     const option = testSelectComponent.optionComponent;
@@ -344,11 +346,13 @@ describe('NbOptionComponent', () => {
     expect(() => testSelectComponent.formControl.setValue(2)).not.toThrow();
     expect(option.selected).toEqual(true);
     expect(markForCheckSpy).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('should emit selection change when changed through formControl binding', function() {
+  it('should emit selection change when changed through formControl binding', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
     selectFixture.detectChanges();
     const selectionChangeSpy = createSpy('selectionChangeSpy');
 
@@ -363,11 +367,13 @@ describe('NbOptionComponent', () => {
     expect(testComponent.optionComponent.selected).toEqual(true);
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
     expect(selectionChangeSpy).toHaveBeenCalledWith(testComponent.optionComponent);
-  });
+  }));
 
-  it('should emit selection change when changed through select selected binding', function() {
+  it('should emit selection change when changed through select selected binding', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
     selectFixture.detectChanges();
     const selectionChangeSpy = createSpy('selectionChangeSpy');
 
@@ -382,17 +388,18 @@ describe('NbOptionComponent', () => {
     expect(optionToSelect.selected).toEqual(true);
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
     expect(selectionChangeSpy).toHaveBeenCalledWith(optionToSelect);
-  });
+  }));
 
-  it('should emit selection change when changed through ngModel binding', function() {
+  it('should emit selection change when changed through ngModel binding', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbNgModelSelectComponent);
     const testComponent = selectFixture.componentInstance;
-    selectFixture.detectChanges();
     const selectionChangeSpy = createSpy('selectionChangeSpy');
+    selectFixture.detectChanges();
+    flush();
+    selectFixture.detectChanges();
 
     testComponent.optionComponent.selectionChange
       .subscribe(selectionChangeSpy);
-
     expect(testComponent.optionComponent.selected).toEqual(false);
 
     testComponent.selectedValue = 1;
@@ -401,5 +408,5 @@ describe('NbOptionComponent', () => {
     expect(testComponent.optionComponent.selected).toEqual(true);
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
     expect(selectionChangeSpy).toHaveBeenCalledWith(testComponent.optionComponent);
-  });
+  }));
 });
