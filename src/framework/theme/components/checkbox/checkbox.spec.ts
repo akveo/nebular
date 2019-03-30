@@ -179,4 +179,13 @@ describe('Component: NbCheckbox with form control', () => {
       expect(checkboxInstance.disabled).toBeFalsy();
       expect(inputElement.disabled).toBeFalsy();
   });
+
+  it('should mark touched on blur', () => {
+    expect(testComponent.formControl.touched).toEqual(false);
+
+    inputElement.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
+    expect(testComponent.formControl.touched).toEqual(true);
+  });
 });
