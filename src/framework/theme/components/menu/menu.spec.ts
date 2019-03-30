@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
@@ -20,6 +20,8 @@ import {
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
 
+@Component({ template: '' })
+export class NoopComponent {}
 
 @Component({
   template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
@@ -46,15 +48,15 @@ export class DoubleMenusTestComponent {
   @ViewChildren(NbMenuComponent) menuComponent: QueryList<NbMenuComponent>;
 }
 
-function createTestBed() {
+function createTestBed(routes: Routes = []) {
   TestBed.configureTestingModule({
     imports: [
       NbThemeModule.forRoot(),
       NbMenuModule.forRoot(),
-      RouterTestingModule.withRoutes([]),
+      RouterTestingModule.withRoutes(routes),
       NoopAnimationsModule,
     ],
-    declarations: [SingleMenuTestComponent, DoubleMenusTestComponent],
+    declarations: [SingleMenuTestComponent, DoubleMenusTestComponent, NoopComponent],
     providers: [NbMenuService],
   });
 }
@@ -79,6 +81,11 @@ function createDoubleMenuComponent( firstMenuItems, firstMenuTag, secondMenuItem
   const menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
   return { fixture, menuService };
+}
+
+function createMenuItems(items: Partial<NbMenuItem>[], menuInternaleService: NbMenuInternalService): NbMenuItem[] {
+  menuInternaleService.prepareItems(items as NbMenuItem[]);
+  return items as NbMenuItem[];
 }
 
 describe('NbMenuItem', () => {
@@ -249,25 +256,239 @@ describe('menu services', () => {
 
 });
 
-fdescribe('NbMenuInternalService', () => {
-  beforeEach(() => createTestBed());
+describe('NbMenuInternalService', () => {
+  let router: Router;
+  let menuInternalService: NbMenuInternalService;
 
-  it('should select menu item by fragment', (done) => {
-    const service: NbMenuInternalService = TestBed.get(NbMenuInternalService);
-    const router: Router = TestBed.get(Router);
-    const items = [{ title: 'Item 1', link: '/', fragment: '1' }];
-    service.prepareItems(items);
-    const menuItem: NbMenuItem = items[0];
+  beforeEach(() => {
+    const routes = [
+      { path: 'menu-1', component: NoopComponent },
+      { path: 'menu-1/2', component: NoopComponent },
+      {
+        path: 'menu-2',
+        component: NoopComponent,
+        children: [{ path: 'menu-2-level-2', component: NoopComponent }],
+      },
+    ];
+    createTestBed(routes);
+    router = TestBed.get(Router);
+    menuInternalService = TestBed.get(NbMenuInternalService);
+  });
 
-    expect(menuItem.selected).toEqual(undefined);
+  describe('selectFromUrl pathMatch full', () => {
 
-    router.navigate(['.'], { fragment: '1' })
-      .then(() => {
-        service.selectFromUrl(items, '');
-        expect(menuItem.selected).toEqual(true);
-        done();
-      })
-      .catch(() => { throw new Error('Navigation failed') });
+    it('should select menu item with matching path', (done) => {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link])
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should select menu item with matching path and fragment', (done) => {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link], { fragment: menuItem.fragment })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should select child menu item and its parent', (done) => {
+      const items: Partial<NbMenuItem>[] = [{
+        link: '/menu-2',
+        children: [{ link: '/menu-2/menu-2-level-2' }] as NbMenuItem[],
+      }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const parentMenuItem: NbMenuItem = menuItems[0];
+      const childMenuItem: NbMenuItem = parentMenuItem.children[0];
+
+      expect(parentMenuItem.selected).toBeFalsy();
+      expect(childMenuItem.selected).toBeFalsy();
+
+      router.navigate([childMenuItem.link])
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(parentMenuItem.selected).toEqual(true);
+          expect(childMenuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should select child menu item with fragment', (done) => {
+      const items: Partial<NbMenuItem>[] = [{
+        link: '/menu-2',
+        children: [{ link: '/menu-2/menu-2-level-2', fragment: '22' }] as NbMenuItem[],
+      }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const parentMenuItem: NbMenuItem = menuItems[0];
+      const childMenuItem: NbMenuItem = parentMenuItem.children[0];
+
+      expect(parentMenuItem.selected).toBeFalsy();
+      expect(childMenuItem.selected).toBeFalsy();
+
+      router.navigate([childMenuItem.link], { fragment: childMenuItem.fragment })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(parentMenuItem.selected).toEqual(true);
+          expect(childMenuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should not select menu item with matching path if fragment doesn\'t match', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link], { fragment: menuItem.fragment + 'random-fragment' })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+
+    it('should not select menu item with matching fragment if path doesn\'t match', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      const url = menuItem.link + '/2';
+      router.navigate([url], { fragment: menuItem.fragment })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+
+    it('should not select menu item with fragment if no fragment in url', (done) => {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link])
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+
+    it('should not select menu item if path not matches fully', (done) => {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      const url = menuItem.link + '/2';
+      router.navigate([url], { fragment: menuItem.fragment })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+
+    it('should not select menu item if path and fragment not matches fully', (done) => {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link], { fragment: menuItem.fragment + '1' })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+  });
+
+  describe('selectFromUrl pathMatch prefix', () => {
+
+    it('should select menu item if url contains menu link', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', pathMatch: 'prefix' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      const url = menuItem.link + '/2';
+      router.navigate([url])
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should select menu item if url contains menu link and fragment', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1', pathMatch: 'prefix' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link], { fragment: menuItem.fragment + '1' })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toEqual(true);
+          done();
+        });
+    });
+
+    it('should not select menu item if url contains link without fragment', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1', pathMatch: 'prefix' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate([menuItem.link])
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
+
+    it('should not select menu item if url contains fragment without link', function(done) {
+      const items: Partial<NbMenuItem>[] = [{ link: '/menu-1', fragment: '1', pathMatch: 'prefix' }];
+      const menuItems: NbMenuItem[] = createMenuItems(items, menuInternalService);
+      const menuItem: NbMenuItem = menuItems[0];
+
+      expect(menuItem.selected).toBeFalsy();
+
+      router.navigate(['menu-2'], { fragment: menuItem.fragment })
+        .then(() => {
+          menuInternalService.selectFromUrl(menuItems, '');
+          expect(menuItem.selected).toBeFalsy();
+          done();
+        });
+    });
   });
 });
 
