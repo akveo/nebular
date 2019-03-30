@@ -123,7 +123,7 @@ export class NbReactiveFormSelectComponent {
     <nb-layout>
       <nb-layout-column>
 
-        <nb-select [ngModel]="selectedValue">
+        <nb-select [(ngModel)]="selectedValue">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
         </nb-select>
 
@@ -403,6 +403,10 @@ describe('NbOptionComponent', () => {
     expect(testComponent.optionComponent.selected).toEqual(false);
 
     testComponent.selectedValue = 1;
+    selectFixture.detectChanges();
+    // need to call flush because NgModelDirective updates value on
+    // resolvedPromise.then
+    flush();
     selectFixture.detectChanges();
 
     expect(testComponent.optionComponent.selected).toEqual(true);
