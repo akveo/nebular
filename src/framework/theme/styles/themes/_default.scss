@@ -688,6 +688,10 @@ $theme: (
   checkbox-info-active-background-color: color-info-600,
   checkbox-info-active-border-color: color-info-600,
 
+  // Nebular only checkbox properties:
+  checkbox-state-transition-duration: state-transition-duration,
+  checkbox-state-transition-timing-function: state-transition-timing-function,
+
   modal-font-size: font-size,
   modal-line-height: line-height,
   modal-font-weight: font-weight-normal,
