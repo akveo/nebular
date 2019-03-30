@@ -136,42 +136,13 @@ import { convertToBoolProperty } from '../helpers';
             [class.checked]="value"
             [class.focus]="isFocused"
             class="custom-checkbox">
-        <ng-container *ngIf="indeterminate || value"
-                      [ngTemplateOutlet]="indeterminate ? minus : checkMark">
-        </ng-container>
+        <nb-icon *ngIf="indeterminate" icon="minus-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
       </span>
       <span class="text">
         <ng-content></ng-content>
       </span>
     </label>
-
-    <ng-template #checkMark>
-      <svg viewBox="0 0 8 7"
-           width="10"
-           height="10"
-           xmlns="http://www.w3.org/2000/svg"
-           xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-        <path id="nb-checkbox-checkmark" d="M6.039 1.43a1.11 1.11 0 0 1 1.517-.228c.483.342.588.998.234 1.466L4.431
-            7.1a1 1 0 0 1-1.492.115L.317 4.677a1.023 1.023 0 0 1 .002-1.483 1.113 1.113 0 0 1 1.535.002l1.641 1.59L6.04
-            1.428z"/>
-        </defs>
-        <use fill="#FFF" xlink:href="#nb-checkbox-checkmark" transform="translate(0 -1)" fill-rule="evenodd"/>
-      </svg>
-    </ng-template>
-
-    <ng-template #minus>
-      <svg viewBox="0 0 8 2"
-           width="10"
-           height="10"
-           xmlns="http://www.w3.org/2000/svg"
-           xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-          <rect id="nb-checkbox-minus" y="3" width="8" height="2" rx="1"/>
-        </defs>
-        <use fill="#FFF" xlink:href="#nb-checkbox-minus" transform="translate(0 -3)" fill-rule="evenodd"/>
-      </svg>
-    </ng-template>
   `,
   styleUrls: [ `./checkbox.component.scss` ],
   providers: [{

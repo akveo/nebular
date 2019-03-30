@@ -7,11 +7,13 @@
 import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
+import { NbIconModule } from '../icon/icon.module';
 import { NbCheckboxComponent } from './checkbox.component';
 
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [NbCheckboxComponent],
   exports: [NbCheckboxComponent],

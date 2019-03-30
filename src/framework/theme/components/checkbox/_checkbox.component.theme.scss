@@ -16,17 +16,8 @@
       border-color: nb-theme(checkbox-#{$status}-checked-border-color);
       position: relative;
 
-      svg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: auto;
-        width: 50%;
-
-        use {
-          fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
-        }
+      nb-icon {
+        color: nb-theme(checkbox-#{$status}-checked-checkmark-color);
       }
     }
 
@@ -35,17 +26,19 @@
       border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
       position: relative;
 
-      svg {
+      nb-icon {
+        color: nb-theme(checkbox-#{$status}-indeterminate-checkmark-color);
+      }
+    }
+
+    .custom-checkbox.checked,
+    .custom-checkbox.indeterminate {
+      nb-icon {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        height: auto;
-        width: 50%;
-
-        use {
-          fill: nb-theme(checkbox-#{$status}-checked-checkmark-color);
-        }
+        width: 80%;
       }
     }
 
@@ -68,8 +61,8 @@
         background-color: nb-theme(checkbox-disabled-background-color);
         border-color: nb-theme(checkbox-disabled-border-color);
 
-        svg use {
-          fill: nb-theme(checkbox-disabled-checkmark-color);
+        nb-icon {
+          color: nb-theme(checkbox-disabled-checkmark-color);
         }
       }
       & ~ .text {
