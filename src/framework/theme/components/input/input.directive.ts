@@ -106,7 +106,6 @@ export class NbInputDirective {
   static readonly STATUS_SUCCESS = 'success';
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
-  static readonly STATUS_BASIC = 'basic';
 
   static readonly SHAPE_RECTANGLE = 'rectangle';
   static readonly SHAPE_SEMI_ROUND = 'semi-round';
@@ -117,7 +116,7 @@ export class NbInputDirective {
   /**
    * Field size, available sizes:
    * `small`, `medium`, `large`
-   * @param {string} val
+   * @param {string} value
    */
   @Input('fieldSize')
   set setSize(value: string) {
@@ -189,11 +188,6 @@ export class NbInputDirective {
   @HostBinding('class.status-danger')
   get danger() {
     return this.status === NbInputDirective.STATUS_DANGER;
-  }
-
-  @HostBinding('class.status-basic')
-  get basic() {
-    return this.status === NbInputDirective.STATUS_BASIC;
   }
 
   @HostBinding('class.shape-rectangle')

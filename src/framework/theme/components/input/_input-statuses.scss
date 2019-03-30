@@ -54,14 +54,4 @@
       border-color: nb-theme(input-danger-focus-border-color);
     }
   }
-
-  &:enabled.status-basic {
-    border-color: nb-theme(input-basic-border-color);
-    &:focus {
-      border-color: nb-theme(input-basic-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-basic-focus-border-color);
-    }
-  }
 }
