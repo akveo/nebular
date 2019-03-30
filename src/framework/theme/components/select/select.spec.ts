@@ -75,7 +75,7 @@ export class NbSelectTestComponent {
   @Input() customLabel: boolean;
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @ViewChild(NbSelectComponent) select: NbSelectComponent<any>;
-  @ViewChildren(NbSelectComponent) options: QueryList<NbOptionComponent<any>>;
+  @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
   groups = TEST_GROUPS;
 }
 
@@ -382,7 +382,7 @@ describe('NbOptionComponent', () => {
       .subscribe(selectionChangeSpy);
     expect(optionToSelect.selected).toEqual(false);
 
-    testComponent.selected = optionToSelect;
+    testComponent.selected = optionToSelect.value;
     selectFixture.detectChanges();
 
     expect(optionToSelect.selected).toEqual(true);
