@@ -391,7 +391,7 @@ describe('Component: NbSelectComponent', () => {
     expect(selectedOption.selected).toEqual(false);
   }));
 
-  it('should not change selection if option stays selected', fakeAsync(() => {
+  it('should not deselect option if option stays selected', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testSelectComponent = selectFixture.componentInstance;
     testSelectComponent.selected = TEST_GROUPS[0].options[0].value;
@@ -400,8 +400,7 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.detectChanges();
 
     const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find(o => o.selected);
-    const selectionChangeSpy = createSpy('selectionChangeSpy');
-    selectedOption.selectionChange.subscribe(selectionChangeSpy);
+    const selectionChangeSpy = spyOn(selectedOption, 'deselect');
 
     testSelectComponent.selected = selectedOption.value;
     selectFixture.detectChanges();
