@@ -3,6 +3,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { NbIconModule } from '@nebular/theme';
 
 import { NbCheckboxComponent } from './checkbox.component';
 
@@ -16,6 +17,7 @@ describe('Component: NbCheckbox', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [NbIconModule],
       declarations: [NbCheckboxComponent],
     });
 
@@ -145,7 +147,7 @@ describe('Component: NbCheckbox with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, NbIconModule],
       declarations: [NbCheckboxComponent, CheckboxWithFormControlComponent],
     });
 
