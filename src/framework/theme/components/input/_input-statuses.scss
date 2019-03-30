@@ -5,53 +5,15 @@
  */
 
 @mixin input-statuses() {
-  &:enabled.status-primary {
-    border-color: nb-theme(input-primary-border-color);
-    &:focus {
-      border-color: nb-theme(input-primary-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-primary-focus-border-color);
-    }
-  }
-
-  &:enabled.status-info {
-    border-color: nb-theme(input-info-border-color);
-    &:focus {
-      border-color: nb-theme(input-info-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-info-focus-border-color);
-    }
-  }
-
-  &:enabled.status-success {
-    border-color: nb-theme(input-success-border-color);
-    &:focus {
-      border-color: nb-theme(input-success-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-success-focus-border-color);
-    }
-  }
-
-  &:enabled.status-warning {
-    border-color: nb-theme(input-warning-border-color);
-    &:focus {
-      border-color: nb-theme(input-warning-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-warning-focus-border-color);
-    }
-  }
-
-  &:enabled.status-danger {
-    border-color: nb-theme(input-danger-border-color);
-    &:focus {
-      border-color: nb-theme(input-danger-hover-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(input-danger-focus-border-color);
+  @each $status in nb-get-statuses() {
+    &:enabled.status-#{$status} {
+      border-color: nb-theme(input-#{$status}-border-color);
+      &:focus {
+        border-color: nb-theme(input-#{$status}-hover-border-color);
+      }
+      &:hover {
+        border-color: nb-theme(input-#{$status}-focus-border-color);
+      }
     }
   }
 }
