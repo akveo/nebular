@@ -566,7 +566,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
     // find options which were selected before and trigger deselect
     previouslySelectedOptions
-      .filter((option: NbOptionComponent<T>) => this.selectionModel.includes(option))
+      .filter((option: NbOptionComponent<T>) => !this.selectionModel.includes(option))
       .forEach((option: NbOptionComponent<T>) => option.deselect());
 
     this.cd.markForCheck();
