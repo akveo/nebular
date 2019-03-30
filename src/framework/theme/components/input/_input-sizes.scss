@@ -5,16 +5,12 @@
  */
 
 @mixin input-sizes() {
-  &.size-small {
-    font-size: nb-theme(input-small-font-size);
-    padding: nb-theme(input-small-padding);
-  }
-  &.size-medium {
-    font-size: nb-theme(input-text-font-size);
-    padding: nb-theme(input-padding);
-  }
-  &.size-large {
-    font-size: nb-theme(input-large-font-size);
-    padding: nb-theme(input-large-padding);
+  @each $size in ('small', 'large') {
+    &.size-#{$size} {
+      font-size: nb-theme(input-#{$size}-text-font-size);
+      font-weight: nb-theme(input-#{$size}-text-font-weight);
+      line-height: nb-theme(input-#{$size}-text-line-height);
+      padding: nb-theme(input-#{$size}-padding);
+    }
   }
 }
