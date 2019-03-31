@@ -6,10 +6,10 @@
 
 import { Component, Input, HostBinding } from '@angular/core';
 
-import { NbCardAccent } from './card-accent';
-import { NbCardSize } from './card-size';
-import { NbCardStatus } from './card-status';
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentStatus } from '../component-status';
+
+export type NbCardSize = 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
 
 /**
  * Component intended to be used within the `<nb-card>` component.
@@ -29,7 +29,6 @@ import { convertToBoolProperty } from '../helpers';
  * card-header-success-background-color:
  * card-header-warning-background-color:
  * card-header-danger-background-color:
- * card-header-white-background-color:
  */
 @Component({
   selector: 'nb-card-header',
@@ -82,7 +81,7 @@ export class NbCardFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCardModule,
  *   ],
  * })
@@ -150,76 +149,103 @@ export class NbCardFooterComponent {
 })
 export class NbCardComponent {
 
-  size: string;
-  status: string;
-  accent: string;
+  size: NbCardSize;
+  status: NbComponentStatus;
+  accent: NbComponentStatus;
+
+  /**
+   * Card size, available sizes:
+   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   */
+  @Input('size')
+  private set setSize(value: NbCardSize) {
+    this.size = value;
+  }
+
+  /**
+   * Card status:
+   * primary, info, success, warning, danger
+   */
+  @Input('status')
+  private set setStatus(value: NbComponentStatus) {
+    this.status = value;
+  }
+
+  /**
+   * Card accent (color of the top border):
+   * primary, info, success, warning, danger
+   */
+  @Input('accent')
+  private set setAccent(value: NbComponentStatus) {
+    this.accent = value;
+  }
+
+  @Input('disabled')
+  private set setDisabled(value: any) {
+    this.disabled = convertToBoolProperty(value) ? '' : null;
+  }
 
   @HostBinding('attr.disabled')
   disabled: string | null = null;
 
   @HostBinding('class.size-xxsmall')
   get xxsmall() {
-    return this.size === NbCardSize.XXSMALL;
+    return this.size === 'xxsmall';
   }
 
   @HostBinding('class.size-xsmall')
   get xsmall() {
-    return this.size === NbCardSize.XSMALL;
+    return this.size === 'xsmall';
   }
 
   @HostBinding('class.size-small')
   get small() {
-    return this.size === NbCardSize.SMALL;
+    return this.size === 'small';
   }
 
   @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbCardSize.MEDIUM;
+    return this.size === 'medium';
   }
 
   @HostBinding('class.size-large')
   get large() {
-    return this.size === NbCardSize.LARGE;
+    return this.size === 'large';
   }
 
   @HostBinding('class.size-xlarge')
   get xlarge() {
-    return this.size === NbCardSize.XLARGE;
+    return this.size === 'xlarge';
   }
 
   @HostBinding('class.size-xxlarge')
   get xxlarge() {
-    return this.size === NbCardSize.XXLARGE;
+    return this.size === 'xxlarge';
   }
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbCardStatus.PRIMARY;
+    return this.status === 'primary';
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === NbCardStatus.INFO;
+    return this.status === 'info';
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === NbCardStatus.SUCCESS;
+    return this.status === 'success';
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbCardStatus.WARNING;
+    return this.status === 'warning';
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbCardStatus.DANGER;
-  }
-
-  @HostBinding('class.status-white')
-  get active() {
-    return this.status === NbCardStatus.WHITE;
+    return this.status === 'danger';
   }
 
   @HostBinding('class.accent')
@@ -229,66 +255,26 @@ export class NbCardComponent {
 
   @HostBinding('class.accent-primary')
   get primaryAccent() {
-    return this.accent === NbCardAccent.PRIMARY;
+    return this.accent === 'primary';
   }
 
   @HostBinding('class.accent-info')
   get infoAccent() {
-    return this.accent === NbCardAccent.INFO;
+    return this.accent === 'info';
   }
 
   @HostBinding('class.accent-success')
   get successAccent() {
-    return this.accent === NbCardAccent.SUCCESS;
+    return this.accent === 'success';
   }
 
   @HostBinding('class.accent-warning')
   get warningAccent() {
-    return this.accent === NbCardAccent.WARNING;
+    return this.accent === 'warning';
   }
 
   @HostBinding('class.accent-danger')
   get dangerAccent() {
-    return this.accent === NbCardAccent.DANGER;
-  }
-
-  @HostBinding('class.accent-white')
-  get activeAccent() {
-    return this.accent === NbCardAccent.WHITE;
-  }
-
-  /**
-   * Card size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
-   */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
-
-  /**
-   * Card status:
-   * primary, info, success, warning, danger, white
-   * @param {string} val
-   */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
-
-  /**
-   * Card accent (color of the top border):
-   * primary, info, success, warning, danger, white
-   * @param {string} val
-   */
-  @Input('accent')
-  private set setAccent(val: string) {
-    this.accent = val;
-  }
-
-  @Input('disabled')
-  private set setDisabled(value: any) {
-    this.disabled = convertToBoolProperty(value) ? '' : null;
+    return this.accent === 'danger';
   }
 }

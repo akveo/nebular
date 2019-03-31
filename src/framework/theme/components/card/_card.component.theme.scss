@@ -54,18 +54,16 @@
     }
 
     @each $status in nb-get-statuses() {
-      @if ($status != 'basic') {
-        &.status-#{$status} {
-          nb-card-header {
-            background-color: nb-theme(card-header-#{$status}-background-color);
-            border-bottom-width: 0;
-            border-bottom-color: nb-theme(card-header-#{$status}-background-color);
-          }
+      &.status-#{$status} {
+        nb-card-header {
+          background-color: nb-theme(card-header-#{$status}-background-color);
+          border-bottom-width: 0;
+          border-bottom-color: nb-theme(card-header-#{$status}-background-color);
         }
+      }
 
-        &.accent-#{$status} {
-          border-top-color: nb-theme(card-header-#{$status}-background-color);
-        }
+      &.accent-#{$status} {
+        border-top-color: nb-theme(card-header-#{$status}-background-color);
       }
     }
 
