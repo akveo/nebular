@@ -24,7 +24,7 @@ export type NbInputShape = 'semi-round' | 'rectangle' | '' | 'round';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbInputModule,
  *   ],
  * })
@@ -110,53 +110,53 @@ export type NbInputShape = 'semi-round' | 'rectangle' | '' | 'round';
 })
 export class NbInputDirective {
 
-  size: NbInputSize;
-
   /**
    * Field size, available sizes:
-   * `small`, `medium` or `` (default), `large`
-   * @param {string} value
+   * `small`, `medium` or ` ` (default), `large`
    */
-  @Input('fieldSize')
-  set setSize(value: NbInputSize) {
-    this.size = value;
+  @Input()
+  get fieldSize(): NbInputSize {
+    return this._size;
   }
+  set fieldSize(value: NbInputSize) {
+    this._size = value;
+  }
+  private _size: NbInputSize;
 
   /**
    * Field status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
-   * @param {string} val
    */
-  @Input('status')
+  @Input()
   status: NbComponentStatus;
 
   /**
-   * Field shapes: `rectangle` or `` (default), `round`, `semi-round`
-   * @param {string} val
+   * Field shapes: `rectangle` or ` ` (default), `round`, `semi-round`
    */
-  @Input('shape')
+  @Input()
   shape: NbInputShape;
 
   /**
    * If set element will fill container
-   * @param {string}
    */
-  @Input('fullWidth')
-  set setFullWidth(value) {
-    this.fullWidth = convertToBoolProperty(value);
-  }
-
+  @Input()
   @HostBinding('class.input-full-width')
-  fullWidth = false;
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  private _fullWidth = false;
 
   @HostBinding('class.size-small')
   get small() {
-    return this.size === 'small';
+    return this.fieldSize === 'small';
   }
 
   @HostBinding('class.size-large')
   get large() {
-    return this.size === 'large';
+    return this.fieldSize === 'large';
   }
 
   @HostBinding('class.status-primary')
