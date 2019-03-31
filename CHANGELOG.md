@@ -1,3 +1,14 @@
+<a name="3.4.2"></a>
+## [3.4.2](https://github.com/akveo/nebular/compare/v3.4.1...v3.4.2) (2019-03-31)
+
+
+### Bug Fixes
+
+* **docs:** keep nb-fs-icon in tree-grid showcase only ([#1330](https://github.com/akveo/nebular/issues/1330)) ([0e1f432](https://github.com/akveo/nebular/commit/0e1f432))
+* **menu:** highlight when active anchors ([#1034](https://github.com/akveo/nebular/issues/1034)) ([c14215a](https://github.com/akveo/nebular/commit/c14215a)), closes [#875](https://github.com/akveo/nebular/issues/875)
+* **select:** prevent change detection of destroyed option ([#1329](https://github.com/akveo/nebular/issues/1329)) ([9e2245f](https://github.com/akveo/nebular/commit/9e2245f))
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/akveo/nebular/compare/v3.4.0...v3.4.1) (2019-03-18)
 
