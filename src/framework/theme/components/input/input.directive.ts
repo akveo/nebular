@@ -55,13 +55,13 @@ import { convertToBoolProperty } from '../helpers';
  * input-background-color:
  * input-border-width:
  * input-border-radius:
- * input-text-color:
  * input-padding:
  * input-placeholder-text-color:
  * input-placeholder-text-font-family:
  * input-placeholder-text-font-size:
  * input-placeholder-text-font-weight:
  * input-placeholder-text-line-height:
+ * input-text-color:
  * input-text-font-family:
  * input-text-font-size:
  * input-text-font-weight:
@@ -88,9 +88,18 @@ import { convertToBoolProperty } from '../helpers';
  * input-danger-border-color:
  * input-danger-focus-border-color:
  * input-danger-hover-border-color:
- * input-basic-border-color:
- * input-basic-focus-border-color:
- * input-basic-hover-border-color:
+ * input-semi-round-border-radius:
+ * input-round-border-radius:
+ * input-small-text-font-size:
+ * input-small-text-font-weight:
+ * input-small-text-line-height:
+ * input-small-padding:
+ * input-large-text-font-size:
+ * input-large-text-font-weight:
+ * input-large-text-line-height:
+ * input-large-padding:
+ * input-state-transition-duration:
+ * input-state-transition-timing-function:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
