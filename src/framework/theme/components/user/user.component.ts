@@ -66,24 +66,29 @@ export class NbUserComponent {
 
   private sizeValue: NbComponentSize = 'medium';
 
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.sizeValue === 'tiny';
+  }
+
   @HostBinding('class.size-small')
   get small() {
-    return this.sizeValue === NbUserSize.SMALL;
+    return this.sizeValue === 'small';
   }
 
   @HostBinding('class.size-medium')
   get medium() {
-    return this.sizeValue === NbUserSize.MEDIUM;
+    return this.sizeValue === 'medium';
   }
 
   @HostBinding('class.size-large')
   get large() {
-    return this.sizeValue === NbUserSize.LARGE;
+    return this.sizeValue === 'large';
   }
 
-  @HostBinding('class.size-xlarge')
-  get xlarge() {
-    return this.sizeValue === NbUserSize.XLARGE;
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.sizeValue === 'giant';
   }
 
   /**
