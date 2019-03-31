@@ -81,46 +81,58 @@ import { NbRadioStatus } from './radio-status.component';
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
-  @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
+  protected alive: boolean = true;
+  protected isTouched: boolean = false;
+  protected onChange = (value: any) => {};
+  protected onTouched = () => {};
 
-  @Input('value')
-  set setValue(value: any) {
-    this.value = value;
+  @Input()
+  get value(): any {
+    return this._value;
+  }
+  set value(value: any) {
+    this._value = value;
     this.updateValues();
   }
+  protected _value: any;
 
-  @Input('name')
-  set setName(name: string) {
-    this.name = name;
+  @Input()
+  get name(): string {
+    return this._name;
+  }
+  set name(name: string) {
+    this._name = name;
     this.updateNames();
   }
+  protected _name: string;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(disabled: boolean) {
+    this._disabled = convertToBoolProperty(disabled);
     this.updateDisabled();
   }
+  protected _disabled: boolean;
 
   /**
    * Radio buttons status. Primary by default.
    * Possible values are 'primary', 'success', 'warning', 'danger', 'info'.
    */
-  @Input('status')
-  set setStatus(status: NbRadioStatus) {
-    this.status = status;
+  @Input()
+  get status(): NbRadioStatus {
+    return this._status;
+  }
+  set status(status: NbRadioStatus) {
+    this._status = status;
     this.updateStatus();
   }
+  protected _status: NbRadioStatus = NbRadioStatus.PRIMARY;
+
+  @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
-
-  protected disabled: boolean;
-  protected value: any;
-  protected name: string;
-  protected alive: boolean = true;
-  protected isTouched: boolean = false;
-  protected status: NbRadioStatus = NbRadioStatus.PRIMARY;
-  protected onChange = (value: any) => {};
-  protected onTouched = () => {};
 
   constructor(
     protected cd: ChangeDetectorRef,
@@ -182,7 +194,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateDisabled() {
     if (this.radios && typeof this.disabled !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.setDisabled = this.disabled);
+      this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
       this.markRadiosForCheck();
     }
   }

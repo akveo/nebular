@@ -41,7 +41,7 @@ export class NbRadioTestComponent {
 
 @Component({
   template: `
-    <nb-radio-group [value]="value">
+    <nb-radio-group>
       <ng-template [ngIf]="showRadios">
         <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{radio}}</nb-radio>
       </ng-template>
@@ -104,7 +104,7 @@ describe('NbRadioGroupComponent', () => {
   it('should update radio value when radios added after radio group initialization', () => {
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setValue = 1;
+    radioTestComponent.radioGroupComponent.value = 1;
     fixture.detectChanges();
 
     expect(radioTestComponent.radioComponents.first.checked).toEqual(true);
@@ -118,7 +118,7 @@ describe('NbRadioGroupComponent', () => {
     const groupName = 'my-radio-group-name';
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setName = groupName;
+    radioTestComponent.radioGroupComponent.name = groupName;
     fixture.detectChanges();
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
@@ -129,7 +129,7 @@ describe('NbRadioGroupComponent', () => {
   it('should update radio disabled state when radios added after radio group initialization', () => {
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setDisabled = true;
+    radioTestComponent.radioGroupComponent.disabled = true;
     fixture.detectChanges();
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
@@ -140,7 +140,7 @@ describe('NbRadioGroupComponent', () => {
   it('should update radio status when radios added after radio group initialization', () => {
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setStatus = NbRadioStatus.INFO;
+    radioTestComponent.radioGroupComponent.status = NbRadioStatus.INFO;
     fixture.detectChanges();
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
@@ -166,7 +166,7 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio value when radios change', () => {
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setValue = 1;
+    radioTestComponent.radioGroupComponent.value = 1;
     fixture.detectChanges();
 
     radioTestComponent.radioValues = [1, 2, 3];
@@ -182,7 +182,7 @@ describe('NbRadioGroupComponent', () => {
   it('should update radio name when radios change', () => {
     const groupName = 'my-radio-group-name';
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setName = groupName;
+    radioTestComponent.radioGroupComponent.name = groupName;
     fixture.detectChanges();
 
     radioTestComponent.radioValues = [1, 2, 3];
@@ -195,7 +195,7 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio disabled state when radios change', () => {
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setDisabled = true;
+    radioTestComponent.radioGroupComponent.disabled = true;
     fixture.detectChanges();
 
     radioTestComponent.radioValues = [1, 2, 3];
@@ -208,7 +208,7 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio status when radios change', () => {
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.setStatus = NbRadioStatus.INFO;
+    radioTestComponent.radioGroupComponent.status = NbRadioStatus.INFO;
     fixture.detectChanges();
 
     radioTestComponent.radioValues = [1, 2, 3];

@@ -35,9 +35,9 @@ import { NbRadioStatus } from './radio-status.component';
  *
  * ```html
  * <nb-radio-group [(ngModel)]="selectedOption">
- *   <nb-radio>Option 1</nb-radio>
- *   <nb-radio>Option 2</nb-radio>
- *   <nb-radio>Option 3</nb-radio>
+ *   <nb-radio [value]="1">Option 1</nb-radio>
+ *   <nb-radio [value]="2">Option 2</nb-radio>
+ *   <nb-radio [value]="3">Option 3</nb-radio>
  * </nb-radio-group>
  * ```
  *
@@ -138,18 +138,20 @@ export class NbRadioComponent {
 
   @Input() value: any;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(disabled: boolean) {
+    this._disabled = convertToBoolProperty(disabled);
+  }
+  private _disabled: boolean;
 
   @Input() status: NbRadioStatus;
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
   @Output() blur: EventEmitter<void> = new EventEmitter();
-
-  disabled: boolean;
 
   constructor(protected cd: ChangeDetectorRef) {}
 
