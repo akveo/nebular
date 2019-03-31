@@ -6,9 +6,9 @@
 
 import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
+import { NbComponentStatus } from '../component-status';
 import { NbAdjustment, NbDynamicOverlay, NbDynamicOverlayHandler, NbPosition, NbTrigger } from '../cdk';
 import { NbTooltipComponent } from './tooltip.component';
-import { NbTooltipStatus } from './tooltip-status';
 
 /**
  *
@@ -33,7 +33,7 @@ import { NbTooltipStatus } from './tooltip-status';
  * Tooltip can accept a hint text and/or an icon:
  * @stacked-example(With Icon, tooltip/tooltip-with-icon.component)
  *
- * Same way as Popover, tooltip can accept placement position with `nbTooltipPlacement` proprety:
+ * Same way as Popover, tooltip can accept placement position with `nbTooltipPlacement` property:
  * @stacked-example(Placements, tooltip/tooltip-placements.component)
  *
  * It is also possible to specify tooltip color using `nbTooltipStatus` property:
@@ -91,7 +91,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * @param {string} status
    */
   @Input('nbTooltipStatus')
-  set status(status: NbTooltipStatus) {
+  set status(status: NbComponentStatus) {
     this.context = Object.assign(this.context, {status});
   }
 
