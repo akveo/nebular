@@ -50,6 +50,7 @@ import { NbComponentStatus } from '../component-status';
  *
  * radio-width:
  * radio-height:
+ * radio-background-color:
  * radio-border-width:
  * radio-text-color:
  * radio-text-font-family:
@@ -100,7 +101,6 @@ import { NbComponentStatus } from '../component-status';
  * radio-info-hover-border-color:
  * radio-info-hover-inner-circle-color:
  * radio-info-active-border-color:
- * radio-info-active-inner-circle-color:
  * */
 @Component({
   selector: 'nb-radio',
