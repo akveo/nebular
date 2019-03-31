@@ -11,6 +11,7 @@
 
   .content {
     display: flex;
+    align-items: center;
   }
 
   &.right .content {
@@ -25,7 +26,8 @@
   }
 
   nb-icon {
-    font-size: 1.25rem;
+    font-size: 1.1em;
+    min-width: 1em;
   }
 
   nb-icon + span {
