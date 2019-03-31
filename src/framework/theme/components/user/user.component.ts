@@ -7,8 +7,8 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { NbUserSize } from './user-size';
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
@@ -64,7 +64,7 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbUserComponent {
 
-  private sizeValue: NbUserSize = NbUserSize.MEDIUM;
+  private sizeValue: NbComponentSize = 'medium';
 
   @HostBinding('class.size-small')
   get small() {
@@ -118,7 +118,7 @@ export class NbUserComponent {
    * @type string
    */
   @Input()
-  set size(value: NbUserSize) {
+  set size(value: NbComponentSize) {
     this.sizeValue = value;
   }
 

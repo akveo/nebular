@@ -30,7 +30,7 @@
     }
   }
 
-  @each $size in 'small', 'medium', 'large', 'xlarge' {
+  @each $size in nb-get-sizes() {
     nb-user.size-#{$size} {
       .user-picture {
         height: nb-theme(user-#{$size}-height);
