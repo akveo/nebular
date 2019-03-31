@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
-import { NbRadioStatus } from './radio-status.component';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * The `NbRadioComponent` provides the same functionality as native `<input type="radio">`
@@ -147,7 +147,7 @@ export class NbRadioComponent {
   }
   private _disabled: boolean;
 
-  @Input() status: NbRadioStatus;
+  @Input() status: NbComponentStatus;
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
@@ -156,23 +156,23 @@ export class NbRadioComponent {
   constructor(protected cd: ChangeDetectorRef) {}
 
   get isPrimary(): boolean {
-    return this.status === NbRadioStatus.PRIMARY;
+    return this.status === 'primary';
   }
 
   get isSuccess(): boolean {
-    return this.status === NbRadioStatus.SUCCESS;
+    return this.status === 'success';
   }
 
   get isWarning(): boolean {
-    return this.status === NbRadioStatus.WARNING;
+    return this.status === 'warning';
   }
 
   get isDanger(): boolean {
-    return this.status === NbRadioStatus.DANGER;
+    return this.status === 'danger';
   }
 
   get isInfo(): boolean {
-    return this.status === NbRadioStatus.INFO;
+    return this.status === 'info';
   }
 
   markForCheck() {

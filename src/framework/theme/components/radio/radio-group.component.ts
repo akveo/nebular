@@ -27,7 +27,7 @@ import { filter, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
-import { NbRadioStatus } from './radio-status.component';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -121,14 +121,14 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
    * Possible values are 'primary', 'success', 'warning', 'danger', 'info'.
    */
   @Input()
-  get status(): NbRadioStatus {
+  get status(): NbComponentStatus {
     return this._status;
   }
-  set status(status: NbRadioStatus) {
+  set status(status: NbComponentStatus) {
     this._status = status;
     this.updateStatus();
   }
-  protected _status: NbRadioStatus = NbRadioStatus.PRIMARY;
+  protected _status: NbComponentStatus = 'primary';
 
   @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 

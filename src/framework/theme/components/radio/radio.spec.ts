@@ -22,7 +22,6 @@ import { NbRadioModule } from './radio.module';
 import { NbRadioComponent } from './radio.component';
 import { NbRadioGroupComponent } from './radio-group.component';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbRadioStatus } from './radio-status.component';
 
 @Component({
   selector: 'nb-radio-test',
@@ -140,11 +139,11 @@ describe('NbRadioGroupComponent', () => {
   it('should update radio status when radios added after radio group initialization', () => {
     radioTestComponent.radioValues = [1, 2, 3];
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.status = NbRadioStatus.INFO;
+    radioTestComponent.radioGroupComponent.status = 'info';
     fixture.detectChanges();
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
-      expect(radio.status).toEqual(NbRadioStatus.INFO);
+      expect(radio.status).toEqual('info');
     }
   });
 
@@ -208,14 +207,14 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio status when radios change', () => {
     radioTestComponent.showRadios = true;
-    radioTestComponent.radioGroupComponent.status = NbRadioStatus.INFO;
+    radioTestComponent.radioGroupComponent.status = 'info';
     fixture.detectChanges();
 
     radioTestComponent.radioValues = [1, 2, 3];
     fixture.detectChanges();
 
     for (const radio of radioTestComponent.radioComponents.toArray()) {
-      expect(radio.status).toEqual(NbRadioStatus.INFO);
+      expect(radio.status).toEqual('info');
     }
   });
 
