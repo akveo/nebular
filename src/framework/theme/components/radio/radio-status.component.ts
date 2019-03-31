@@ -4,5 +4,4 @@ export enum NbRadioStatus {
   WARNING = 'warning',
   DANGER = 'danger',
   INFO = 'info',
-  WHITE = 'white',
 }

@@ -26,8 +26,7 @@
       color: nb-theme(radio-disabled-text-color);
     }
 
-    $status-variants: 'primary', 'success', 'warning', 'danger', 'info', 'white';
-    @each $status in $status-variants {
+    @each $status in nb-get-statuses() {
       .native-input:enabled + .radio-circle.status-#{$status} {
         border-color: nb-theme(radio-#{$status}-border-color);
       }

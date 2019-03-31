@@ -101,14 +101,6 @@ import { NbRadioStatus } from './radio-status.component';
  * radio-info-hover-inner-circle-color:
  * radio-info-active-border-color:
  * radio-info-active-inner-circle-color:
- * radio-white-border-color:
- * radio-white-inner-circle-color:
- * radio-white-focus-border-color:
- * radio-white-focus-inner-circle-color:
- * radio-white-hover-border-color:
- * radio-white-hover-inner-circle-color:
- * radio-white-active-border-color:
- * radio-white-active-inner-circle-color:
  * */
 @Component({
   selector: 'nb-radio',
@@ -128,8 +120,7 @@ import { NbRadioStatus } from './radio-status.component';
             [class.status-success]="isSuccess"
             [class.status-warning]="isWarning"
             [class.status-danger]="isDanger"
-            [class.status-info]="isInfo"
-            [class.status-white]="isWhite">
+            [class.status-info]="isInfo">
       </span>
       <span class="text">
         <ng-content></ng-content>
@@ -180,10 +171,6 @@ export class NbRadioComponent {
 
   get isInfo(): boolean {
     return this.status === NbRadioStatus.INFO;
-  }
-
-  get isWhite(): boolean {
-    return this.status === NbRadioStatus.WHITE;
   }
 
   markForCheck() {

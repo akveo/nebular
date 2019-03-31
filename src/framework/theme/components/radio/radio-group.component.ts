@@ -103,7 +103,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   /**
    * Radio buttons status. Primary by default.
-   * Possible values are 'primary', 'success', 'warning', 'danger', 'info', 'white'.
+   * Possible values are 'primary', 'success', 'warning', 'danger', 'info'.
    */
   @Input('status')
   set setStatus(status: NbRadioStatus) {
