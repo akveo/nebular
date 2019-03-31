@@ -40,7 +40,7 @@
         nb-theme(card-scrollbar-background-color),
         nb-theme(card-scrollbar-width));
 
-    @each $size in 'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge' {
+    @each $size in 'tiny', 'small', 'medium', 'large', 'giant' {
       &.size-#{$size} {
         height: nb-theme(card-height-#{$size});
       }

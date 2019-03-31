@@ -9,7 +9,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 
-export type NbCardSize = 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
+export type NbCardSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
 
 /**
  * Component intended to be used within the `<nb-card>` component.
@@ -124,13 +124,11 @@ export class NbCardFooterComponent {
  * card-padding:
  * card-divider-color:
  * card-divider-width:
- * card-height-xxsmall:
- * card-height-xsmall:
+ * card-height-tiny:
  * card-height-small:
  * card-height-medium:
  * card-height-large:
- * card-height-xlarge:
- * card-height-xxlarge:
+ * card-height-giant:
  * card-shadow:
  * card-margin-bottom:
  * card-scrollbar-color:
@@ -149,13 +147,13 @@ export class NbCardFooterComponent {
 })
 export class NbCardComponent {
 
-  size: NbCardSize;
+  size: NbCardSize = 'medium';
   status: NbComponentStatus;
   accent: NbComponentStatus;
 
   /**
    * Card size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * tiny, small, medium, large, giant
    */
   @Input('size')
   private set setSize(value: NbCardSize) {
@@ -188,14 +186,9 @@ export class NbCardComponent {
   @HostBinding('attr.disabled')
   disabled: string | null = null;
 
-  @HostBinding('class.size-xxsmall')
-  get xxsmall() {
-    return this.size === 'xxsmall';
-  }
-
-  @HostBinding('class.size-xsmall')
-  get xsmall() {
-    return this.size === 'xsmall';
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
   @HostBinding('class.size-small')
@@ -213,14 +206,9 @@ export class NbCardComponent {
     return this.size === 'large';
   }
 
-  @HostBinding('class.size-xlarge')
-  get xlarge() {
-    return this.size === 'xlarge';
-  }
-
-  @HostBinding('class.size-xxlarge')
-  get xxlarge() {
-    return this.size === 'xxlarge';
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
   }
 
   @HostBinding('class.status-primary')
