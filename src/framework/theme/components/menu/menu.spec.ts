@@ -561,8 +561,8 @@ describe('menu URL helpers', () => {
   });
 
   it('isFragmentContain should return false for url with different fragment', () => {
-    expect(isFragmentContain('/a1/b#222', '1')).toBeTruthy();
-    expect(isFragmentContain('/a1/b?a=1;b=2&c=3#222', '1')).toBeTruthy();
+    expect(isFragmentContain('/a1/b#222', '1')).toBeFalsy();
+    expect(isFragmentContain('/a1/b?a=1;b=2&c=3#222', '1')).toBeFalsy();
   });
 
 });
