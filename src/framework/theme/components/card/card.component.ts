@@ -147,44 +147,54 @@ export class NbCardFooterComponent {
 })
 export class NbCardComponent {
 
-  size: NbCardSize = 'medium';
-  status: NbComponentStatus;
-  accent: NbComponentStatus;
-
   /**
    * Card size, available sizes:
    * tiny, small, medium, large, giant
    */
-  @Input('size')
-  private set setSize(value: NbCardSize) {
-    this.size = value;
+  @Input()
+  get size(): NbCardSize {
+    return this._size;
   }
+  set size(value: NbCardSize) {
+    this._size = value;
+  }
+  _size: NbCardSize = 'medium';
 
   /**
    * Card status:
    * primary, info, success, warning, danger
    */
-  @Input('status')
-  private set setStatus(value: NbComponentStatus) {
-    this.status = value;
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
   }
+  set status(value: NbComponentStatus) {
+    this._status = value;
+  }
+  _status: NbComponentStatus;
 
   /**
    * Card accent (color of the top border):
    * primary, info, success, warning, danger
    */
-  @Input('accent')
-  private set setAccent(value: NbComponentStatus) {
-    this.accent = value;
+  @Input()
+  get accent(): NbComponentStatus {
+    return this._accent;
   }
-
-  @Input('disabled')
-  private set setDisabled(value: any) {
-    this.disabled = convertToBoolProperty(value) ? '' : null;
+  set accent(value: NbComponentStatus) {
+    this._accent = value;
   }
+  _accent: NbComponentStatus;
 
+  @Input()
   @HostBinding('attr.disabled')
-  disabled: string | null = null;
+  get disabled(): string | null {
+    return this._disabled;
+  }
+  set disabled(value: string | null) {
+    this._disabled = convertToBoolProperty(value) ? '' : null;
+  }
+  _disabled: string | null = null;
 
   @HostBinding('class.size-tiny')
   get tiny() {
