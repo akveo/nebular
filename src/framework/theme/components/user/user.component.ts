@@ -64,32 +64,7 @@ import { NbComponentSize } from '../component-size';
 })
 export class NbUserComponent {
 
-  private sizeValue: NbComponentSize = 'medium';
-
-  @HostBinding('class.size-tiny')
-  get tiny() {
-    return this.sizeValue === 'tiny';
-  }
-
-  @HostBinding('class.size-small')
-  get small() {
-    return this.sizeValue === 'small';
-  }
-
-  @HostBinding('class.size-medium')
-  get medium() {
-    return this.sizeValue === 'medium';
-  }
-
-  @HostBinding('class.size-large')
-  get large() {
-    return this.sizeValue === 'large';
-  }
-
-  @HostBinding('class.size-giant')
-  get giant() {
-    return this.sizeValue === 'giant';
-  }
+  imageBackgroundStyle: SafeStyle;
 
   /**
    * Specifies a name to be shown on the right of a user picture
@@ -108,7 +83,8 @@ export class NbUserComponent {
    * User name initials will be shown if no picture specified (JD for John Doe).
    * @type string
    */
-  @Input() set picture(value: string) {
+  @Input()
+  set picture(value: string) {
     this.imageBackgroundStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
   }
 
@@ -119,48 +95,66 @@ export class NbUserComponent {
   @Input() color: string;
 
   /**
-   * Size of the component, small|medium|large|xlarge
-   * @type string
+   * Size of the component.
+   * Possible values: `tiny`, `small`, `medium` (default), `large`, 'giant'.
    */
   @Input()
-  set size(value: NbComponentSize) {
-    this.sizeValue = value;
+  get size(): NbComponentSize {
+    return this._size;
   }
+  set size(value: NbComponentSize) {
+    this._size = value;
+  }
+  private _size: NbComponentSize = 'medium';
 
   /**
    * Whether to show a user name or not
-   * @type boolean
    */
   @Input()
-  set showName(val: boolean) {
-    this.showNameValue = convertToBoolProperty(val);
+  get showName(): boolean {
+    return this._showName;
   }
+  set showName(val: boolean) {
+    this._showName = convertToBoolProperty(val);
+  }
+  private _showName: boolean = true;
 
   /**
    * Whether to show a user title or not
    * @type boolean
    */
   @Input()
-  set showTitle(val: boolean) {
-    this.showTitleValue = convertToBoolProperty(val);
+  get showTitle(): boolean {
+    return this._showTitle;
   }
+  set showTitle(val: boolean) {
+    this._showTitle = convertToBoolProperty(val);
+  }
+  private _showTitle: boolean = true;
 
   /**
    * Whether to show a user initials (if no picture specified) or not
    * @type boolean
    */
   @Input()
-  set showInitials(val: boolean) {
-    this.showInitialsValue = convertToBoolProperty(val);
+  get showInitials(): boolean {
+    return this._showInitials;
   }
+  set showInitials(val: boolean) {
+    this._showInitials = convertToBoolProperty(val);
+  }
+  private _showInitials: boolean = true;
 
   /**
    * Whether to show only a picture or also show the name and title
    * @type boolean
    */
   @Input()
+  get onlyPicture(): boolean {
+    return !this.showName && !this.showTitle;
+  }
   set onlyPicture(val: boolean) {
-    this.showNameValue = this.showTitleValue = !convertToBoolProperty(val);
+    this.showName = this.showTitle = !convertToBoolProperty(val);
   }
 
   /**
@@ -185,10 +179,30 @@ export class NbUserComponent {
    */
   @Input() badgePosition: string;
 
-  imageBackgroundStyle: SafeStyle;
-  showNameValue: boolean = true;
-  showTitleValue: boolean = true;
-  showInitialsValue: boolean = true;
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
+  get small() {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.size-medium')
+  get medium() {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large() {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
+  }
 
   constructor(private domSanitizer: DomSanitizer) { }
 
