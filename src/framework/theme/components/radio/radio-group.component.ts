@@ -35,9 +35,9 @@ import { NbComponentStatus } from '../component-status';
  *
  * ```html
  * <nb-radio-group [(ngModel)]="selectedOption">
- *   <nb-radio>Option 1</nb-radio>
- *   <nb-radio>Option 2</nb-radio>
- *   <nb-radio>Option 3</nb-radio>
+ *   <nb-radio value="1">Option 1</nb-radio>
+ *   <nb-radio value="2">Option 2</nb-radio>
+ *   <nb-radio value="3">Option 3</nb-radio>
  * </nb-radio-group>
  * ```
  *
@@ -45,9 +45,9 @@ import { NbComponentStatus } from '../component-status';
  *
  * ```html
  * <nb-radio-group [(value)]="selectedOption">
- *   <nb-radio>Option 1</nb-radio>
- *   <nb-radio>Option 2</nb-radio>
- *   <nb-radio>Option 3</nb-radio>
+ *   <nb-radio value="1">Option 1</nb-radio>
+ *   <nb-radio value="2">Option 2</nb-radio>
+ *   <nb-radio value="3">Option 3</nb-radio>
  * </nb-radio-group>
  * ```
  *
