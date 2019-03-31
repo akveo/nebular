@@ -6,6 +6,10 @@
 
 import { Directive, Input, HostBinding } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentStatus } from '../component-status';
+
+export type NbInputSize = 'small' |  'medium' | '' | 'large';
+export type NbInputShape = 'semi-round' | 'rectangle' | '' | 'round';
 
 /**
  * Basic input directive.
@@ -106,27 +110,15 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbInputDirective {
 
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_LARGE = 'large';
-
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  static readonly SHAPE_SEMI_ROUND = 'semi-round';
-  static readonly SHAPE_ROUND = 'round';
-
-  size: string;
+  size: NbInputSize;
 
   /**
    * Field size, available sizes:
-   * `small`, `medium` (default), `large`
+   * `small`, `medium` or `` (default), `large`
    * @param {string} value
    */
   @Input('fieldSize')
-  set setSize(value: string) {
+  set setSize(value: NbInputSize) {
     this.size = value;
   }
 
@@ -136,14 +128,14 @@ export class NbInputDirective {
    * @param {string} val
    */
   @Input('status')
-  status: string;
+  status: NbComponentStatus;
 
   /**
-   * Field shapes: `rectangle` (default), `round`, `semi-round`
+   * Field shapes: `rectangle` or `` (default), `round`, `semi-round`
    * @param {string} val
    */
   @Input('shape')
-  shape: string;
+  shape: NbInputShape;
 
   /**
    * If set element will fill container
@@ -159,46 +151,46 @@ export class NbInputDirective {
 
   @HostBinding('class.size-small')
   get small() {
-    return this.size === NbInputDirective.SIZE_SMALL;
+    return this.size === 'small';
   }
 
   @HostBinding('class.size-large')
   get large() {
-    return this.size === NbInputDirective.SIZE_LARGE;
+    return this.size === 'large';
   }
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbInputDirective.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === NbInputDirective.STATUS_INFO;
+    return this.status === 'info';
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === NbInputDirective.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbInputDirective.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbInputDirective.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
   @HostBinding('class.shape-semi-round')
   get semiRound() {
-    return this.shape === NbInputDirective.SHAPE_SEMI_ROUND;
+    return this.shape === 'semi-round';
   }
 
   @HostBinding('class.shape-round')
   get round() {
-    return this.shape === NbInputDirective.SHAPE_ROUND;
+    return this.shape === 'round';
   }
 }
