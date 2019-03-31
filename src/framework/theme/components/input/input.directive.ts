@@ -8,8 +8,8 @@ import { Directive, Input, HostBinding } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 
-export type NbInputSize = 'small' |  'medium' | '' | 'large';
-export type NbInputShape = 'semi-round' | 'rectangle' | '' | 'round';
+export type NbInputSize = '' | 'small' | 'large';
+export type NbInputShape = '' | 'semi-round' | 'round';
 
 /**
  * Basic input directive.
@@ -111,8 +111,8 @@ export type NbInputShape = 'semi-round' | 'rectangle' | '' | 'round';
 export class NbInputDirective {
 
   /**
-   * Field size, available sizes:
-   * `small`, `medium` or ` ` (default), `large`
+   * Field size modifications. Possible values: `small`, `large`.
+   * If isn't set or set to '' has a medium size.
    */
   @Input()
   get fieldSize(): NbInputSize {
@@ -121,23 +121,24 @@ export class NbInputDirective {
   set fieldSize(value: NbInputSize) {
     this._size = value;
   }
-  private _size: NbInputSize;
+  private _size: NbInputSize = '';
 
   /**
    * Field status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
   @Input()
-  status: NbComponentStatus;
+  status: NbComponentStatus = '';
 
   /**
-   * Field shapes: `rectangle` or ` ` (default), `round`, `semi-round`
+   * Field shapes modifications. Possible values: `round`, `semi-round`.
+   * If isn't set or set to '' has a rectangle shape.
    */
   @Input()
-  shape: NbInputShape;
+  shape: NbInputShape = '';
 
   /**
-   * If set element will fill container
+   * If set element will fill container. `false` by default.
    */
   @Input()
   @HostBinding('class.input-full-width')
