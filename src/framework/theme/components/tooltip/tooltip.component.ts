@@ -38,8 +38,6 @@ import { NbTooltipStatus } from './tooltip-status';
  * tooltip-warning-text-color:
  * tooltip-danger-background-color:
  * tooltip-danger-text-color:
- * tooltip-white-background-color:
- * tooltip-white-text-color:
  * tooltip-shadow:
  *
  */

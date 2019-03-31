@@ -4,5 +4,4 @@
   WARNING = 'warning',
   DANGER = 'danger',
   INFO = 'info',
-  WHITE = 'white',
 }

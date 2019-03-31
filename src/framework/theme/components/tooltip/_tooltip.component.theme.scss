@@ -44,9 +44,7 @@
     }
 
     @each $status in nb-get-statuses() {
-      @if ($status != 'basic') {
-        @include nb-tooltip-status($status);
-      }
+      @include nb-tooltip-status($status);
     }
   }
 }
