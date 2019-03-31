@@ -54,12 +54,11 @@
           left: 0;
         }
 
-        i {
-          font-size: 1.5rem;
+        nb-icon {
           vertical-align: middle;
         }
 
-        i + span {
+        nb-icon + span {
           @include nb-ltr(margin-left, 0.5rem);
           @include nb-rtl(margin-right, 0.5rem);
         }

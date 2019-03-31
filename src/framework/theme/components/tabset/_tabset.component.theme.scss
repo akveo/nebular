@@ -24,6 +24,12 @@
       background-color: nb-theme(tabset-tab-background-color);
       cursor: pointer;
       padding: nb-theme(tabset-tab-padding);
+      color: nb-theme(tabset-tab-text-color);
+      font-family: nb-theme(tabset-tab-text-font-family);
+      font-size: nb-theme(tabset-tab-text-font-size);
+      font-weight: nb-theme(tabset-tab-text-font-weight);
+      line-height: nb-theme(tabset-tab-text-line-height);
+      text-transform: nb-theme(tabset-tab-text-transform);
 
       &::before {
         background-color: nb-theme(tabset-tab-underline-color);
@@ -31,22 +37,10 @@
       }
     }
 
-    .tab-text {
-      color: nb-theme(tabset-tab-text-color);
-      font-family: nb-theme(tabset-tab-text-font-family);
-      font-size: nb-theme(tabset-tab-text-font-size);
-      font-weight: nb-theme(tabset-tab-text-font-weight);
-      line-height: nb-theme(tabset-tab-text-line-height);
-      text-transform: nb-theme(tabset-tab-text-transform);
-    }
-
     .tab.active {
-      .tab-text {
-        color: nb-theme(tabset-tab-active-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(tabset-tab-active-background-color);
+        color: nb-theme(tabset-tab-active-text-color);
         &::before {
           background-color: nb-theme(tabset-tab-active-underline-color);
         }
@@ -54,12 +48,9 @@
     }
 
     .tab:focus {
-      .tab-text {
-        color: nb-theme(tabset-tab-focus-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(tabset-tab-focus-background-color);
+        color: nb-theme(tabset-tab-focus-text-color);
         &::before {
           background-color: nb-theme(tabset-tab-focus-underline-color);
         }
@@ -67,11 +58,8 @@
     }
 
     .tab:hover {
-      .tab-text {
-        color: nb-theme(tabset-tab-hover-text-color);
-      }
-
       .tab-link {
+        color: nb-theme(tabset-tab-hover-text-color);
         background-color: nb-theme(tabset-tab-hover-background-color);
         &::before {
           background-color: nb-theme(tabset-tab-hover-underline-color);
@@ -83,12 +71,9 @@
       cursor: default;
       pointer-events: none;
 
-      .tab-text {
-        color: nb-theme(tabset-tab-disabled-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(tabset-tab-disabled-background-color);
+        color: nb-theme(tabset-tab-disabled-text-color);
         cursor: default;
         pointer-events: none;
         &::before {

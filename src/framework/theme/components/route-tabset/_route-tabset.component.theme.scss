@@ -24,6 +24,12 @@
       background-color: nb-theme(route-tabset-tab-background-color);
       cursor: pointer;
       padding: nb-theme(route-tabset-tab-padding);
+      color: nb-theme(route-tabset-tab-text-color);
+      font-family: nb-theme(route-tabset-tab-text-font-family);
+      font-size: nb-theme(route-tabset-tab-text-font-size);
+      font-weight: nb-theme(route-tabset-tab-text-font-weight);
+      line-height: nb-theme(route-tabset-tab-text-line-height);
+      text-transform: nb-theme(route-tabset-tab-text-transform);
 
       &::before {
         background-color: nb-theme(route-tabset-tab-underline-color);
@@ -31,26 +37,14 @@
       }
     }
 
-    .tab-text {
-      color: nb-theme(route-tabset-tab-text-color);
-      font-family: nb-theme(route-tabset-tab-text-font-family);
-      font-size: nb-theme(route-tabset-tab-text-font-size);
-      font-weight: nb-theme(route-tabset-tab-text-font-weight);
-      line-height: nb-theme(route-tabset-tab-text-line-height);
-      text-transform: nb-theme(route-tabset-tab-text-transform);
-    }
-
     .route-tab {
       min-width: nb-theme(route-tabs-header-min-width);
     }
 
     .route-tab.active {
-      .tab-text {
-        color: nb-theme(tabset-tab-active-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(tabset-tab-active-background-color);
+        color: nb-theme(tabset-tab-active-text-color);
         &::before {
           background-color: nb-theme(tabset-tab-active-underline-color);
         }
@@ -58,12 +52,9 @@
     }
 
     .route-tab:focus {
-      .tab-text {
-        color: nb-theme(route-tabset-tab-focus-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(route-tabset-tab-focus-background-color);
+        color: nb-theme(route-tabset-tab-focus-text-color);
         &::before {
           background-color: nb-theme(route-tabset-tab-focus-underline-color);
         }
@@ -71,12 +62,9 @@
     }
 
     .route-tab:hover {
-      .tab-text {
-        color: nb-theme(route-tabset-tab-hover-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(route-tabset-tab-hover-background-color);
+        color: nb-theme(route-tabset-tab-hover-text-color);
         &::before {
           background-color: nb-theme(route-tabset-tab-hover-underline-color);
         }
@@ -87,12 +75,9 @@
       cursor: default;
       pointer-events: none;
 
-      .tab-text {
-        color: nb-theme(route-tabset-tab-disabled-text-color);
-      }
-
       .tab-link {
         background-color: nb-theme(route-tabset-tab-disabled-background-color);
+        color: nb-theme(route-tabset-tab-disabled-text-color);
         cursor: default;
         pointer-events: none;
         &::before {
