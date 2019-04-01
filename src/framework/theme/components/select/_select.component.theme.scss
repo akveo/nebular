@@ -90,8 +90,8 @@
       .native-input:checked + .custom-checkbox {
         border-color: nb-theme(select-checkbox-color);
 
-        svg use {
-          fill: nb-theme(select-checkmark-color);
+        nb-icon {
+          color: nb-theme(select-checkmark-color);
         }
       }
     }
