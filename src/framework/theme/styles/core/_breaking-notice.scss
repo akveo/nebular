@@ -2,10 +2,6 @@ $nb-breaking-notice-enable: true !global;
 
 @function nb-breaking-notice-show($theme) {
 
-  @debug '$nb-breaking-notice-enable';
-  @debug $nb-breaking-notice-enable;
-  @debug '$nb-breaking-notice-enable';
-
   @if($nb-breaking-notice-enable) {
     /* stylelint-disable string-no-newline */
     @warn '
