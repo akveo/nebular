@@ -4,77 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-checkbox-status($status) {
-  nb-checkbox.status-#{$status} {
-    .custom-checkbox {
-      background-color: nb-theme(checkbox-#{$status}-background-color);
-      border-color: nb-theme(checkbox-#{$status}-border-color);
-
-      transition-duration: nb-theme(checkbox-state-transition-duration);
-      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
-    }
-
-    .custom-checkbox.checked {
-      background-color: nb-theme(checkbox-#{$status}-checked-background-color);
-      border-color: nb-theme(checkbox-#{$status}-checked-border-color);
-      position: relative;
-
-      nb-icon {
-        color: nb-theme(checkbox-#{$status}-checked-checkmark-color);
-      }
-    }
-
-    .custom-checkbox.indeterminate {
-      background-color: nb-theme(checkbox-#{$status}-indeterminate-background-color);
-      border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
-      position: relative;
-
-      nb-icon {
-        color: nb-theme(checkbox-#{$status}-indeterminate-checkmark-color);
-      }
-    }
-
-    .custom-checkbox.checked,
-    .custom-checkbox.indeterminate {
-      nb-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50%;
-      }
-    }
-
-    .native-input:focus + .custom-checkbox {
-      border-color: nb-theme(checkbox-#{$status}-focus-background-color);
-    }
-
-    .custom-checkbox:hover {
-      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
-      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
-    }
-
-    .native-input:active + .custom-checkbox {
-      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
-      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
-    }
-
-    .native-input:disabled {
-      & + .custom-checkbox {
-        background-color: nb-theme(checkbox-disabled-background-color);
-        border-color: nb-theme(checkbox-disabled-border-color);
-
-        nb-icon {
-          color: nb-theme(checkbox-disabled-checkmark-color);
-        }
-      }
-      & ~ .text {
-        color: nb-theme(checkbox-disabled-text-color);
-      }
-    }
-  }
-}
-
 @mixin nb-checkbox-theme() {
   nb-checkbox {
     .custom-checkbox {
@@ -98,7 +27,83 @@
     }
   }
 
+  @include nb-checkbox-status();
+
   @each $status in nb-get-statuses() {
     @include nb-checkbox-status($status);
+  }
+}
+
+@mixin nb-checkbox-status($status: '') {
+  $status: if($status == '', '', -#{$status});
+  $status-class: if($status == '', '', '.status#{$status}');
+
+  nb-checkbox#{$status-class} {
+    .custom-checkbox {
+      background-color: nb-theme(checkbox#{$status}-background-color);
+      border-color: nb-theme(checkbox#{$status}-border-color);
+
+      transition-duration: nb-theme(checkbox-state-transition-duration);
+      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
+    }
+
+    .custom-checkbox.checked {
+      background-color: nb-theme(checkbox#{$status}-checked-background-color);
+      border-color: nb-theme(checkbox#{$status}-checked-border-color);
+      position: relative;
+
+      nb-icon {
+        color: nb-theme(checkbox#{$status}-checked-checkmark-color);
+      }
+    }
+
+    .custom-checkbox.indeterminate {
+      background-color: nb-theme(checkbox#{$status}-indeterminate-background-color);
+      border-color: nb-theme(checkbox#{$status}-indeterminate-border-color);
+      position: relative;
+
+      nb-icon {
+        color: nb-theme(checkbox#{$status}-indeterminate-checkmark-color);
+      }
+    }
+
+    .custom-checkbox.checked,
+    .custom-checkbox.indeterminate {
+      nb-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: nb-theme(checkbox#{$status}-focus-background-color);
+    }
+
+    .custom-checkbox:hover {
+      background-color: nb-theme(checkbox#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox#{$status}-hover-border-color);
+    }
+
+    .native-input:active + .custom-checkbox {
+      background-color: nb-theme(checkbox#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox#{$status}-hover-border-color);
+    }
+
+    .native-input:disabled {
+      & + .custom-checkbox {
+        background-color: nb-theme(checkbox-disabled-background-color);
+        border-color: nb-theme(checkbox-disabled-border-color);
+
+        nb-icon {
+          color: nb-theme(checkbox-disabled-checkmark-color);
+        }
+      }
+      & ~ .text {
+        color: nb-theme(checkbox-disabled-text-color);
+      }
+    }
   }
 }

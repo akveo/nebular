@@ -601,8 +601,11 @@ $theme: (
 
   checkbox-height: 1.125rem,
   checkbox-width: 1.125rem,
+  checkbox-background-color: color-basic-400,
+  checkbox-border-color: color-primary,
   checkbox-border-width: 1px,
   checkbox-border-radius: 3px,
+  checkbox-checkmark-color: color-white,
   checkbox-outline-width: outline-width,
   checkbox-outline-color: outline-color,
   checkbox-text-color: text-dark-color,
@@ -611,11 +614,22 @@ $theme: (
   checkbox-text-font-weight: text-subtitle-2-font-weight,
   checkbox-text-line-height: text-subtitle-2-line-height,
 
+  checkbox-checked-background-color: color-primary,
+  checkbox-checked-border-color: color-primary,
+  checkbox-checked-checkmark-color: color-white,
+
+  checkbox-indeterminate-background-color: color-primary,
+  checkbox-indeterminate-border-color: color-primary,
+  checkbox-indeterminate-checkmark-color: color-white,
+
+  checkbox-focus-background-color: color-primary-700,
+  checkbox-hover-background-color: color-primary-400,
+  checkbox-hover-border-color: color-primary-400,
+  checkbox-active-background-color: color-primary-600,
+  checkbox-active-border-color: color-primary-600,
   checkbox-disabled-background-color: color-basic-400,
   checkbox-disabled-border-color: color-basic-400,
   checkbox-disabled-checkmark-color: color-white,
-  checkbox-disabled-outline-width: 0,
-  checkbox-disabled-outline-color: transparent,
   checkbox-disabled-text-color: text-disabled-color,
 
   checkbox-primary-background-color: color-primary-200,

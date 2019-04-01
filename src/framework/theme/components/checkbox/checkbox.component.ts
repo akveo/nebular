@@ -186,8 +186,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   private _disabled: boolean = false;
 
   /**
-   * Checkbox status. Possible values are : primary (default), success, warning, danger, info
-   * @param {string} value
+   * Checkbox status. Possible values are : primary, success, warning, danger, info
    */
   @Input()
   get status(): NbComponentStatus {
@@ -196,7 +195,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   set status(value: NbComponentStatus) {
     this._status = value;
   }
-  private _status: NbComponentStatus = 'primary';
+  private _status: NbComponentStatus = '';
 
 
   /**
