@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "3.5.0",
+  "version": "4.0.0-beta.0",
   "description": "@nebular/theme",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
