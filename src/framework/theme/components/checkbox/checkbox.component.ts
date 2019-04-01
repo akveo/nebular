@@ -136,8 +136,8 @@ import { convertToBoolProperty } from '../helpers';
             [class.checked]="value"
             [class.focus]="isFocused"
             class="custom-checkbox">
-        <nb-icon *ngIf="indeterminate" icon="minus-outline" pack="nebular-essentials"></nb-icon>
-        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
       </span>
       <span class="text">
         <ng-content></ng-content>
