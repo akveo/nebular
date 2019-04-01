@@ -10,7 +10,7 @@
       width: nb-theme(checkbox-width);
       height: nb-theme(checkbox-height);
       border-width: nb-theme(checkbox-border-width);
-      border-style: solid;
+      border-style: nb-theme(checkbox-border-style);
       border-radius: nb-theme(checkbox-border-radius);
     }
 
