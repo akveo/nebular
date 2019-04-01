@@ -40,8 +40,11 @@ import { convertToBoolProperty } from '../helpers';
  *
  * checkbox-height:
  * checkbox-width:
+ * checkbox-background-color:
+ * checkbox-border-color:
  * checkbox-border-width:
  * checkbox-border-radius:
+ * checkbox-checkmark-color:
  * checkbox-outline-width:
  * checkbox-outline-color:
  * checkbox-text-color:
@@ -49,11 +52,20 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-text-font-size:
  * checkbox-text-font-weight:
  * checkbox-text-line-height:
+ * checkbox-checked-background-color:
+ * checkbox-checked-border-color:
+ * checkbox-checked-checkmark-color:
+ * checkbox-indeterminate-background-color:
+ * checkbox-indeterminate-border-color:
+ * checkbox-indeterminate-checkmark-color:
+ * checkbox-focus-background-color:
+ * checkbox-hover-background-color:
+ * checkbox-hover-border-color:
+ * checkbox-active-background-color:
+ * checkbox-active-border-color:
  * checkbox-disabled-background-color:
  * checkbox-disabled-border-color:
  * checkbox-disabled-checkmark-color:
- * checkbox-disabled-outline-width:
- * checkbox-disabled-outline-color:
  * checkbox-disabled-text-color:
  * checkbox-primary-background-color:
  * checkbox-primary-border-color:
@@ -120,6 +132,9 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-info-hover-border-color:
  * checkbox-info-active-background-color:
  * checkbox-info-active-border-color:
+ * checkbox-state-transition-duration:
+ * checkbox-state-transition-timing-function:
+ *
  */
 @Component({
   selector: 'nb-checkbox',
@@ -160,7 +175,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   /**
    * Checkbox value
-   * @type {boolean}
    */
   @Input()
   get value(): boolean {
