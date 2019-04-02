@@ -1,3 +1,98 @@
+<a name="4.0.0-beta.0"></a>
+# [4.0.0-beta.0](https://github.com/akveo/nebular/compare/v3.4.2...v4.0.0-beta.0) (2019-04-01)
+
+
+### Code Refactoring
+
+* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([164a0c8](https://github.com/akveo/nebular/commit/164a0c8)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
+
+
+### Features
+
+* **icons:** new `nb-icon` component, icons library, and [@nebular](https://github.com/nebular)/eva-icons package ([#1319](https://github.com/akveo/nebular/issues/1319)) ([435a6ac](https://github.com/akveo/nebular/commit/435a6ac))
+* **theme:** css variables support ([#1257](https://github.com/akveo/nebular/issues/1257)) ([d1123e2](https://github.com/akveo/nebular/commit/d1123e2)), closes [#46](https://github.com/akveo/nebular/issues/46)
+
+
+### BREAKING CHANGES
+
+* **icons:** Starting from version 4.0, Nebular introduces new `nb-icon` component and `NbIconLibraries` service to host SVG and Font icon packs. As a breaking change, Nebular moves from `nebular-icons` package to much more popular [Eva Icons pack](https://akveo.github.io/eva-icons/) consisting of 480+ beautiful SVG icons. We believe this will bring more quality and variety to interfaces based on Nebular.
+
+Now all Nebular components internally use `<nb-icon></nb-icon>` component utilizing Eva Icons SVG icons. More details on [nb-icon](https://akveo.github.io/nebular/docs/components/icon) component.
+
+There are two ways to upgrade:
+**Migrate to Eva Icons** (recommended):
+1) install Eva Icons Nebular package `npm i @nebular/eva-icons`
+2) register `NbEvaIconsModule` in the `app.module.ts`
+```
+import { NbEvaIconsModule } form '@nebular/eva-icons';
+
+@NgModule({
+  imports: [
+  	// ...
+    NbEvaIconsModule,
+  ],
+})
+```
+3) Search for all usages of `<span icon="nb-*"` or ``<i icon="nb-*"``and replace with `<nb-icon icon="icon-name"></nb-icon>`. Full icons list https://akveo.github.io/eva-icons/.
+
+4) Search for `icon: 'nb-*'` references in properties for such components as Menu, Actions, Tabs, etc. Replace those with `icon: 'icon-name'`. Please note, there is no need to specify any icon prefix (such as `eva-` or `nb-`) since prefix is specified when the icon package is registered in Nebular.
+
+4) Update styles if necessary.
+
+5) if you have `nebular-icons` installed, remove the package and all references.
+
+**Continue using nebular-icons**
+This option is also possible, but please note, Nebular Component will still use Eva Icons pack for internal component icons, such as `close`, `arrow-down`, `arrow-up`, etc.
+
+1) Register nebular-icons as a pack for Nebular in your `app.component.ts`
+```
+  import { NbIconLibraries } from '@nebular/theme';
+
+  constructor(private iconLibraries: NbIconLibraries) {
+    this.iconLibraries.registerFontPack('nebular', { iconClassPrefix: 'nb' });
+    this.iconLibraries.setDefaultPack('nebular');
+  }
+```
+
+3) Search for all usages of `<span icon="nb-*"` or ``<i icon="nb-*"`` and replace with `<nb-icon icon="icon-name"></nb-icon>` without the `nb-` prefix  since prefix is specified when the icon package is registered in Nebular.
+
+4) Search for `icon: 'nb-*'` references in properties for such components as Menu, Actions, Tabs, etc. Replace those with `icon: 'icon-name'` without `nb-` prefix since it is unnecessary and covered under the hood.
+
+Please open an issue if you have any questions or having difficulties to migrate.
+
+
+* **theme:** - calendar - use primary button in cosmic theme
+- checkbox - `opacity` instead of `lightning`
+- context-menu, popover, datepicker - `calc` instead of `round` and scss calculations
+- input - `opacity` for placeholder instead of `lightning`
+- tabs - remove gradient for tab bottom separator in cosmic theme
+- toastr - use `background-color` instead of the gradient in cosmic theme
+- text colors are now used from success/primary/warning/etc colors
+- add color palette instead of generating colors using scss-functions, an example for `primary`
+`color-primary-200`
+`color-primary-300`
+`color-primary-400`
+`color-primary-600`
+`color-primary-700`
+
+`create-colors-palette()` scss function that can be used during the theme installation process to generate palette automatically
+
+
+
+<a name="3.4.2"></a>
+## [3.4.2](https://github.com/akveo/nebular/compare/v3.4.1...v3.4.2) (2019-03-31)
+
+### Highlights
+Fixed [regressing in all overlay components failing](https://github.com/akveo/nebular/issues/1289) to open after host component being destroyed and re-created.
+
+### Bug Fixes
+
+* **cdk:**  destroy overlay triggers manually ([#1316](https://github.com/akveo/nebular/pull/1316)) ([77b737](https://github.com/akveo/nebular/commit/77b737)), closes [#1292](https://github.com/akveo/nebular/issues/1292), [#1290](https://github.com/akveo/nebular/issues/1290), [#1273](https://github.com/akveo/nebular/issues/1273), [#1289](https://github.com/akveo/nebular/issues/1289)
+* **docs:** keep nb-fs-icon in tree-grid showcase only ([#1330](https://github.com/akveo/nebular/issues/1330)) ([0e1f432](https://github.com/akveo/nebular/commit/0e1f432))
+* **menu:** highlight when active anchors ([#1034](https://github.com/akveo/nebular/issues/1034)) ([c14215a](https://github.com/akveo/nebular/commit/c14215a)), closes [#875](https://github.com/akveo/nebular/issues/875)
+* **select:** prevent change detection of destroyed option ([#1329](https://github.com/akveo/nebular/issues/1329)) ([9e2245f](https://github.com/akveo/nebular/commit/9e2245f))
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/akveo/nebular/compare/v3.4.0...v3.4.1) (2019-03-18)
 

@@ -4,14 +4,39 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-checkbox-status($status) {
+@mixin nb-checkbox-theme() {
+  nb-checkbox {
+    .custom-checkbox {
+      width: nb-theme(checkbox-width);
+      height: nb-theme(checkbox-height);
+      border-style: nb-theme(checkbox-border-style);
+      border-width: nb-theme(checkbox-border-width);
+      border-radius: nb-theme(checkbox-border-radius);
+    }
+
+    .native-input:focus + .custom-checkbox {
+      box-shadow: 0 0 0 nb-theme(checkbox-outline-width) nb-theme(checkbox-outline-color);
+    }
+
+    .text {
+      color: nb-theme(checkbox-text-color);
+      font-family: nb-theme(checkbox-text-font-family);
+      font-size: nb-theme(checkbox-text-font-size);
+      font-weight: nb-theme(checkbox-text-font-weight);
+      line-height: nb-theme(checkbox-text-line-height);
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    @include nb-checkbox-status($status);
+  }
+}
+
+@mixin nb-checkbox-status($status: '') {
   nb-checkbox.status-#{$status} {
     .custom-checkbox {
       background-color: nb-theme(checkbox-#{$status}-background-color);
       border-color: nb-theme(checkbox-#{$status}-border-color);
-
-      transition-duration: nb-theme(checkbox-state-transition-duration);
-      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
     }
 
     .custom-checkbox.checked {
@@ -41,7 +66,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 80%;
+        width: 50%;
       }
     }
 
@@ -72,36 +97,5 @@
         color: nb-theme(checkbox-disabled-text-color);
       }
     }
-  }
-}
-
-@mixin nb-checkbox-theme() {
-  nb-checkbox {
-    .custom-checkbox {
-      width: nb-theme(checkbox-width);
-      height: nb-theme(checkbox-height);
-      border-width: nb-theme(checkbox-border-width);
-      border-style: solid;
-      border-radius: nb-theme(checkbox-border-radius);
-      transition-property: background-color, border, box-shadow;
-      transition-duration: nb-theme(checkbox-state-transition-duration);
-      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
-    }
-
-    .native-input:focus + .custom-checkbox {
-      box-shadow: 0 0 0 nb-theme(checkbox-outline-width) nb-theme(checkbox-outline-color);
-    }
-
-    .text {
-      color: nb-theme(checkbox-text-color);
-      font-family: nb-theme(checkbox-text-font-family);
-      font-size: nb-theme(checkbox-text-font-size);
-      font-weight: nb-theme(checkbox-text-font-weight);
-      line-height: nb-theme(checkbox-text-line-height);
-    }
-  }
-
-  @each $status in nb-get-statuses() {
-    @include nb-checkbox-status($status);
   }
 }

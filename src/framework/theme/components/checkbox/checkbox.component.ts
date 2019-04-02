@@ -40,6 +40,7 @@ import { convertToBoolProperty } from '../helpers';
  *
  * checkbox-height:
  * checkbox-width:
+ * checkbox-border-style:
  * checkbox-border-width:
  * checkbox-border-radius:
  * checkbox-outline-width:
@@ -52,8 +53,6 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-disabled-background-color:
  * checkbox-disabled-border-color:
  * checkbox-disabled-checkmark-color:
- * checkbox-disabled-outline-width:
- * checkbox-disabled-outline-color:
  * checkbox-disabled-text-color:
  * checkbox-primary-background-color:
  * checkbox-primary-border-color:
@@ -129,15 +128,11 @@ import { convertToBoolProperty } from '../helpers';
              [disabled]="disabled"
              [checked]="value"
              (change)="updateValueAndIndeterminate($event)"
-             (fosus)="setFocus()"
-             (blur)="removeFocusAndMarkTouched()"
+             (blur)="setTouched()"
              [indeterminate]="indeterminate">
-      <span [class.indeterminate]="indeterminate"
-            [class.checked]="value"
-            [class.focus]="isFocused"
-            class="custom-checkbox">
-        <nb-icon *ngIf="indeterminate" icon="minus-outline" pack="nebular-essentials"></nb-icon>
-        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
+      <span [class.indeterminate]="indeterminate" [class.checked]="value" class="custom-checkbox">
+        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
       </span>
       <span class="text">
         <ng-content></ng-content>
@@ -153,14 +148,11 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
 
-  isFocused: boolean;
-
   onChange: any = () => { };
   onTouched: any = () => { };
 
   /**
    * Checkbox value
-   * @type {boolean}
    */
   @Input()
   get value(): boolean {
@@ -186,17 +178,22 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   private _disabled: boolean = false;
 
   /**
-   * Checkbox status. Possible values are : primary (default), success, warning, danger, info
-   * @param {string} value
+   * Checkbox status.
+   * Possible values are: `primary` (default), `success`, `warning`, `danger`, `info`
    */
   @Input()
   get status(): NbComponentStatus {
     return this._status;
   }
   set status(value: NbComponentStatus) {
-    this._status = value;
+    if (value === '') {
+      this._status = this._defaultStatus;
+    } else {
+      this._status = value;
+    }
   }
-  private _status: NbComponentStatus = 'primary';
+  private readonly _defaultStatus: NbComponentStatus = 'primary';
+  private _status: NbComponentStatus = this._defaultStatus;
 
 
   /**
@@ -259,19 +256,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setTouched() {
     this.onTouched();
-  }
-
-  removeFocusAndMarkTouched(): void {
-    this.removeFocus();
-    this.setTouched();
-  }
-
-  setFocus(): void {
-    this.isFocused = true;
-  }
-
-  removeFocus(): void {
-    this.isFocused = false;
   }
 
   updateValueAndIndeterminate(event: Event): void {

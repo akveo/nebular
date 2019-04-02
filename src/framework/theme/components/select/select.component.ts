@@ -25,8 +25,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { take, takeWhile } from 'rxjs/operators';
 import { merge, Observable, Subject } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -346,6 +346,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.alive = false;
 
     this.ref.dispose();
+    this.triggerStrategy.destroy();
   }
 
   show() {
@@ -372,11 +373,11 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   writeValue(value: T | T[]): void {
-    if (!value) {
+    if (!value || !this.alive) {
       return;
     }
 
@@ -397,7 +398,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       this.reset();
     }
 
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   /**
@@ -482,28 +483,22 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
-
-    this.triggerStrategy.hide$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(($event: Event) => {
-        this.hide();
-        if (!this.isClickedWithinComponent($event)) {
-          this.onTouched();
-        }
-      });
+    this.triggerStrategy.show$.subscribe(() => this.show());
+    this.triggerStrategy.hide$.subscribe(($event: Event) => {
+      this.hide();
+      if (!this.isClickedWithinComponent($event)) {
+        this.onTouched();
+      }
+    });
   }
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => this.overlayPosition = position);
-
-    this.positionStrategy.positionChange
-      .pipe(take(1))
-      .subscribe(() => this.cd.detectChanges());
+      .subscribe((position: NbPosition) => {
+        this.overlayPosition = position;
+        this.cd.detectChanges();
+      });
   }
 
   protected subscribeOnSelectionChange() {
@@ -560,7 +555,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     }
 
     this.cd.markForCheck();
-    this.cd.detectChanges();
   }
 
   protected cleanSelection() {

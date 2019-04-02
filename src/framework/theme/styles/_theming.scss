@@ -11,6 +11,7 @@
 
 @import 'core/mixins';
 @import 'core/functions';
+@import 'core/breaking-notice';
 
 $nb-enabled-themes: () !global;
 $nb-enable-css-custom-properties: false !global !default;
@@ -253,6 +254,28 @@ $nb-themes-export: () !global;
       @content;
     }
   }
+
+  $temp: nb-breaking-notice-show($theme);
+}
+
+@mixin nb-install-global() {
+  @if ($nb-enable-css-custom-properties) {
+    @include nb-install-global-with-css-props() {
+      @content;
+    }
+  } @else {
+    @include nb-install-global-with-scss-vars() {
+      @content;
+    }
+  }
+}
+
+@function nb-get-statuses() {
+  @return 'primary', 'success', 'warning', 'danger', 'info';
+}
+
+@function nb-get-sizes() {
+  @return 'tiny', 'small', 'medium', 'large', 'giant';
 }
 
 @mixin nb-install-global() {

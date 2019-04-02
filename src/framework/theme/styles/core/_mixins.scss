@@ -136,6 +136,12 @@
   transition: opacity 0.3s ease;
 }
 
+@mixin nb-component-animation($properties...) {
+  transition-duration: 0.15s;
+  transition-property: $properties;
+  transition-timing-function: ease-in;
+}
+
 @mixin animation($animate...) {
   $max: length($animate);
   $animations: '';
