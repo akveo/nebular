@@ -128,7 +128,7 @@ import { convertToBoolProperty } from '../helpers';
              [disabled]="disabled"
              [checked]="value"
              (change)="updateValueAndIndeterminate($event)"
-             (fosus)="setFocus()"
+             (focus)="setFocus()"
              (blur)="removeFocusAndMarkTouched()"
              [indeterminate]="indeterminate">
       <span [class.indeterminate]="indeterminate"
