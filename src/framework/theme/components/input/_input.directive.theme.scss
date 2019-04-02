@@ -17,23 +17,17 @@
     border-width: $border-width;
     border-style: solid;
     border-color: $border-color;
-    border-radius: nb-theme(input-border-radius);
     color: nb-theme(input-text-color);
     font-size: nb-theme(input-text-font-size);
     font-family: nb-theme(input-text-font-family);
     font-weight: nb-theme(input-text-font-weight);
     line-height: nb-theme(input-text-line-height);
     padding: nb-theme(input-padding);
-    transition-property: border, background-color, color;
-    transition-duration: nb-theme(input-state-transition-duration);
-    transition-timing-function: nb-theme(input-state-transition-timing-function);
+    @include nb-component-animation(border, background-color, color);
 
     &::placeholder {
       color: nb-theme(input-placeholder-text-color);
       font-family: nb-theme(input-placeholder-text-font-family);
-      font-size: nb-theme(input-placeholder-text-font-size);
-      font-weight: nb-theme(input-placeholder-text-font-weight);
-      line-height: nb-theme(input-placeholder-text-line-height);
       text-overflow: ellipsis;
     }
 
