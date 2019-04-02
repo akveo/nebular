@@ -281,6 +281,11 @@ describe('Component: NbSelectComponent', () => {
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
+  it(`should not call dispose on initialized resources`, () => {
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
+    expect(() => selectFixture.ngOnDestroy()).not.toThrow();
+  });
+
   describe('NbOptionComponent', () => {
     it('should ignore selection change if destroyed', () => {
       const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
