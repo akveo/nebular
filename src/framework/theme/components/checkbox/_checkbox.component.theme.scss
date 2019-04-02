@@ -9,8 +9,8 @@
     .custom-checkbox {
       width: nb-theme(checkbox-width);
       height: nb-theme(checkbox-height);
-      border-width: nb-theme(checkbox-border-width);
       border-style: nb-theme(checkbox-border-style);
+      border-width: nb-theme(checkbox-border-width);
       border-radius: nb-theme(checkbox-border-radius);
     }
 
@@ -27,40 +27,35 @@
     }
   }
 
-  @include nb-checkbox-status();
-
   @each $status in nb-get-statuses() {
     @include nb-checkbox-status($status);
   }
 }
 
 @mixin nb-checkbox-status($status: '') {
-  $status: if($status == '', '', -#{$status});
-  $status-class: if($status == '', '', '.status#{$status}');
-
-  nb-checkbox#{$status-class} {
+  nb-checkbox.status-#{$status} {
     .custom-checkbox {
-      background-color: nb-theme(checkbox#{$status}-background-color);
-      border-color: nb-theme(checkbox#{$status}-border-color);
+      background-color: nb-theme(checkbox-#{$status}-background-color);
+      border-color: nb-theme(checkbox-#{$status}-border-color);
     }
 
     .custom-checkbox.checked {
-      background-color: nb-theme(checkbox#{$status}-checked-background-color);
-      border-color: nb-theme(checkbox#{$status}-checked-border-color);
+      background-color: nb-theme(checkbox-#{$status}-checked-background-color);
+      border-color: nb-theme(checkbox-#{$status}-checked-border-color);
       position: relative;
 
       nb-icon {
-        color: nb-theme(checkbox#{$status}-checked-checkmark-color);
+        color: nb-theme(checkbox-#{$status}-checked-checkmark-color);
       }
     }
 
     .custom-checkbox.indeterminate {
-      background-color: nb-theme(checkbox#{$status}-indeterminate-background-color);
-      border-color: nb-theme(checkbox#{$status}-indeterminate-border-color);
+      background-color: nb-theme(checkbox-#{$status}-indeterminate-background-color);
+      border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
       position: relative;
 
       nb-icon {
-        color: nb-theme(checkbox#{$status}-indeterminate-checkmark-color);
+        color: nb-theme(checkbox-#{$status}-indeterminate-checkmark-color);
       }
     }
 
@@ -76,17 +71,17 @@
     }
 
     .native-input:focus + .custom-checkbox {
-      border-color: nb-theme(checkbox#{$status}-focus-background-color);
+      border-color: nb-theme(checkbox-#{$status}-focus-background-color);
     }
 
     .custom-checkbox:hover {
-      background-color: nb-theme(checkbox#{$status}-hover-background-color);
-      border-color: nb-theme(checkbox#{$status}-hover-border-color);
+      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
     }
 
     .native-input:active + .custom-checkbox {
-      background-color: nb-theme(checkbox#{$status}-hover-background-color);
-      border-color: nb-theme(checkbox#{$status}-hover-border-color);
+      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
+      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
     }
 
     .native-input:disabled {
