@@ -12,7 +12,7 @@
 
   .custom-checkbox {
     flex-shrink: 0;
-    transition-property: background-color, border, box-shadow;
+    @include nb-component-animation(background-color, border, box-shadow);
   }
 
   .text {

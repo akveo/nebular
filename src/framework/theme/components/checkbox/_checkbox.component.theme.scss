@@ -42,9 +42,6 @@
     .custom-checkbox {
       background-color: nb-theme(checkbox#{$status}-background-color);
       border-color: nb-theme(checkbox#{$status}-border-color);
-
-      transition-duration: nb-theme(checkbox-state-transition-duration);
-      transition-timing-function: nb-theme(checkbox-state-transition-timing-function);
     }
 
     .custom-checkbox.checked {

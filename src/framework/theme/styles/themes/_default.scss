@@ -214,9 +214,6 @@ $theme: (
   outline-width: 6px,
   outline-color: color-basic-300,
 
-  state-transition-duration: 0.15s,
-  state-transition-timing-function: ease-in,
-
   /* Components mappings */
 
   card-font-size: font-size,
@@ -702,10 +699,6 @@ $theme: (
   checkbox-info-hover-border-color: color-info-400,
   checkbox-info-active-background-color: color-info-600,
   checkbox-info-active-border-color: color-info-600,
-
-  // Nebular only checkbox properties:
-  checkbox-state-transition-duration: state-transition-duration,
-  checkbox-state-transition-timing-function: state-transition-timing-function,
 
   modal-font-size: font-size,
   modal-line-height: line-height,
