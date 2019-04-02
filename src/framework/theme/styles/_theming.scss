@@ -269,3 +269,11 @@ $nb-themes-export: () !global;
     }
   }
 }
+
+@function nb-get-statuses() {
+  @return 'primary', 'success', 'warning', 'danger', 'info';
+}
+
+@function nb-get-sizes() {
+  @return 'tiny', 'small', 'medium', 'large', 'giant';
+}

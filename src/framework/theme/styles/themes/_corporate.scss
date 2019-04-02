@@ -65,8 +65,6 @@ $theme: (
 
   sidebar-bg: #e3e9ee,
 
-  border-color: #d5dbe0,
-
   menu-font-weight: font-weight-bolder,
   menu-fg: color-fg-text,
   menu-bg: #e3e9ee,
@@ -107,7 +105,7 @@ $theme: (
 
   card-shadow: none,
   card-border-width: 1px,
-  card-border-color: border-color,
+  card-border-color: #d5dbe0,
   card-header-border-width: 0,
 
   link-color: #5dcfe3,
@@ -116,7 +114,7 @@ $theme: (
 
   actions-separator: #f1f4f5,
 
-  modal-separator: border-color,
+  modal-separator: #d5dbe0,
 
   tabs-selected: color-primary,
   tabs-selected-second-color: color-primary,
@@ -129,7 +127,7 @@ $theme: (
   popover-border: color-primary,
 
   footer-shadow: none,
-  footer-separator: border-color,
+  footer-separator: #d5dbe0,
   footer-fg-highlight: #2a2a2a,
 
   calendar-today-item-bg: #a2b2c7,
