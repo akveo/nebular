@@ -83,6 +83,11 @@ describe('Component: NbCheckbox', () => {
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
   });
 
+  it(`should set default status if no status was passed`, () => {
+    checkbox.status = '';
+    expect(checkbox.status).toEqual('primary');
+  });
+
   it('should emit change event when changed', fakeAsync(() => {
     checkbox.change
       .pipe(take(1))
