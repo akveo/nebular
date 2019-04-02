@@ -277,31 +277,3 @@ $nb-themes-export: () !global;
 @function nb-get-sizes() {
   @return 'tiny', 'small', 'medium', 'large', 'giant';
 }
-
-@mixin nb-install-global() {
-  @if ($nb-enable-css-custom-properties) {
-    @include nb-install-global-with-css-props() {
-      @content;
-    }
-  } @else {
-    @include nb-install-global-with-scss-vars() {
-      @content;
-    }
-  }
-}
-
-@function nb-get-statuses() {
-  @return 'primary', 'success', 'warning', 'danger', 'info';
-}
-
-@function nb-get-statuses-except($except: ()) {
-  $filtered-statuses: ();
-
-  @each $status in nb-get-statuses() {
-    @if index($except, $status) == null {
-      $filtered-statuses: append($filtered-statuses, $status);
-    }
-  }
-
-  @return $filtered-statuses;
-}
