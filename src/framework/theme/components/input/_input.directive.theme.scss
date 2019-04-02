@@ -9,14 +9,12 @@
 @import './input-shapes';
 
 @mixin nb-input-theme() {
-  $border-width: nb-theme(input-border-width);
-  $border-color: nb-theme(input-border-color);
 
   [nbInput] {
     background-color: nb-theme(input-background-color);
-    border-width: $border-width;
-    border-style: solid;
-    border-color: $border-color;
+    border-color: nb-theme(input-border-color);
+    border-style: nb-theme(input-border-style);
+    border-width: nb-theme(input-border-width);
     color: nb-theme(input-text-color);
     font-size: nb-theme(input-text-font-size);
     font-family: nb-theme(input-text-font-family);
