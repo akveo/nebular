@@ -274,14 +274,6 @@ $nb-themes-export: () !global;
   @return 'primary', 'success', 'warning', 'danger', 'info';
 }
 
-@function nb-get-statuses-except($except: ()) {
-  $filtered-statuses: ();
-
-  @each $status in nb-get-statuses() {
-    @if index($except, $status) == null {
-      $filtered-statuses: append($filtered-statuses, $status);
-    }
-  }
-
-  @return $filtered-statuses;
+@function nb-get-sizes() {
+  @return 'tiny', 'small', 'medium', 'large', 'giant';
 }
