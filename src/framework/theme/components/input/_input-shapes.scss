@@ -5,10 +5,9 @@
  */
 
 @mixin input-shapes() {
-  &.shape-semi-round {
-    border-radius: nb-theme(input-semi-round-border-radius);
-  }
-  &.shape-round {
-    border-radius: nb-theme(input-round-border-radius);
+  @each $shape in nb-get-shapes() {
+    &.shape-#{$shape} {
+      border-radius: nb-theme(input-#{$shape}-border-radius);
+    }
   }
 }

@@ -5,11 +5,11 @@
  */
 
 import { Directive, Input, HostBinding } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
-import { NbComponentStatus } from '../component-status';
 
-export type NbInputSize = '' | 'small' | 'large';
-export type NbInputShape = '' | 'semi-round' | 'round';
+import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * Basic input directive.
@@ -111,17 +111,16 @@ export type NbInputShape = '' | 'semi-round' | 'round';
 export class NbInputDirective {
 
   /**
-   * Field size modifications. Possible values: `small`, `large`.
-   * If isn't set or set to '' has a medium size.
+   * Field size modifications. Possible values: `small`, `medium` (default), `large`.
    */
   @Input()
-  get fieldSize(): NbInputSize {
+  get fieldSize(): NbComponentSize {
     return this._size;
   }
-  set fieldSize(value: NbInputSize) {
+  set fieldSize(value: NbComponentSize) {
     this._size = value;
   }
-  private _size: NbInputSize = '';
+  private _size: NbComponentSize = 'medium';
 
   /**
    * Field status (adds specific styles):
@@ -131,11 +130,10 @@ export class NbInputDirective {
   status: NbComponentStatus = '';
 
   /**
-   * Field shapes modifications. Possible values: `round`, `semi-round`.
-   * If isn't set or set to '' has a rectangle shape.
+   * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
    */
   @Input()
-  shape: NbInputShape = '';
+  shape: NbComponentShape = 'rectangle';
 
   /**
    * If set element will fill container. `false` by default.
@@ -150,14 +148,29 @@ export class NbInputDirective {
   }
   private _fullWidth = false;
 
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.fieldSize === 'tiny';
+  }
+
   @HostBinding('class.size-small')
   get small() {
     return this.fieldSize === 'small';
   }
 
+  @HostBinding('class.size-medium')
+  get medium() {
+    return this.fieldSize === 'medium';
+  }
+
   @HostBinding('class.size-large')
   get large() {
     return this.fieldSize === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.fieldSize === 'giant';
   }
 
   @HostBinding('class.status-primary')
@@ -183,6 +196,11 @@ export class NbInputDirective {
   @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.shape-rectangle')
+  get rectangle() {
+    return this.shape === 'rectangle';
   }
 
   @HostBinding('class.shape-semi-round')

@@ -5,12 +5,18 @@
  */
 
 @mixin input-sizes() {
-  @each $size in ('small', 'large') {
+  @each $size in nb-get-sizes() {
     &.size-#{$size} {
       font-size: nb-theme(input-#{$size}-text-font-size);
       font-weight: nb-theme(input-#{$size}-text-font-weight);
       line-height: nb-theme(input-#{$size}-text-line-height);
       padding: nb-theme(input-#{$size}-padding);
+
+      &::placeholder {
+        font-size: nb-theme(input-#{$size}-placeholder-text-font-size);
+        font-weight: nb-theme(input-#{$size}-placeholder-text-font-weight);
+        line-height: nb-theme(input-#{$size}-placeholder-text-line-height);
+      }
     }
   }
 }
