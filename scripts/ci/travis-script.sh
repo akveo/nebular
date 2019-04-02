@@ -27,7 +27,11 @@ fi
 CURRENT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 
 # Get commit diff
-fileDiff=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
+if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  fileDiff=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
+else
+  fileDiff=$(git diff --name-only $TRAVIS_BRANCH...HEAD)
+fi
 
 # Check if tests can be skipped
 if [[ ${fileDiff} =~ ^(.*\.md\s*)*$ ]]; then
