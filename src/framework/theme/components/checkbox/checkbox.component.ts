@@ -128,13 +128,9 @@ import { convertToBoolProperty } from '../helpers';
              [disabled]="disabled"
              [checked]="value"
              (change)="updateValueAndIndeterminate($event)"
-             (focus)="setFocus()"
-             (blur)="removeFocusAndMarkTouched()"
+             (blur)="setTouched()"
              [indeterminate]="indeterminate">
-      <span [class.indeterminate]="indeterminate"
-            [class.checked]="value"
-            [class.focus]="isFocused"
-            class="custom-checkbox">
+      <span [class.indeterminate]="indeterminate" [class.checked]="value" class="custom-checkbox">
         <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
         <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
       </span>
@@ -151,8 +147,6 @@ import { convertToBoolProperty } from '../helpers';
   }],
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
-
-  isFocused: boolean = false;
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -262,21 +256,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setTouched() {
     this.onTouched();
-  }
-
-  removeFocusAndMarkTouched(): void {
-    this.removeFocus();
-    this.setTouched();
-  }
-
-  setFocus(): void {
-    this.isFocused = true;
-    this.changeDetector.detectChanges();
-  }
-
-  removeFocus(): void {
-    this.isFocused = false;
-    this.changeDetector.detectChanges();
   }
 
   updateValueAndIndeterminate(event: Event): void {
