@@ -58,18 +58,10 @@ import { NbComponentStatus } from '../component-status';
  *
  * input-background-color:
  * input-border-width:
- * input-border-radius:
- * input-padding:
  * input-placeholder-text-color:
  * input-placeholder-text-font-family:
- * input-placeholder-text-font-size:
- * input-placeholder-text-font-weight:
- * input-placeholder-text-line-height:
  * input-text-color:
  * input-text-font-family:
- * input-text-font-size:
- * input-text-font-weight:
- * input-text-line-height:
  * input-border-color:
  * input-focus-border-color:
  * input-hover-border-color:
@@ -92,18 +84,44 @@ import { NbComponentStatus } from '../component-status';
  * input-danger-border-color:
  * input-danger-focus-border-color:
  * input-danger-hover-border-color:
+ * input-rectangle-border-radius:
  * input-semi-round-border-radius:
  * input-round-border-radius:
+ * input-tiny-text-font-size:
+ * input-tiny-text-font-weight:
+ * input-tiny-text-line-height:
+ * input-tiny-placeholder-text-font-size:
+ * input-tiny-placeholder-text-font-weight:
+ * input-tiny-placeholder-text-line-height:
+ * input-tiny-padding:
  * input-small-text-font-size:
  * input-small-text-font-weight:
  * input-small-text-line-height:
+ * input-small-placeholder-text-font-size:
+ * input-small-placeholder-text-font-weight:
+ * input-small-placeholder-text-line-height:
  * input-small-padding:
+ * input-medium-text-font-size:
+ * input-medium-text-font-weight:
+ * input-medium-text-line-height:
+ * input-medium-placeholder-text-font-size:
+ * input-medium-placeholder-text-font-weight:
+ * input-medium-placeholder-text-line-height:
+ * input-medium-padding:
  * input-large-text-font-size:
  * input-large-text-font-weight:
  * input-large-text-line-height:
+ * input-large-placeholder-text-font-size:
+ * input-large-placeholder-text-font-weight:
+ * input-large-placeholder-text-line-height:
  * input-large-padding:
- * input-state-transition-duration:
- * input-state-transition-timing-function:
+ * input-giant-text-font-size:
+ * input-giant-text-font-weight:
+ * input-giant-text-line-height:
+ * input-giant-placeholder-text-font-size:
+ * input-giant-placeholder-text-font-weight:
+ * input-giant-placeholder-text-line-height:
+ * input-giant-padding:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
