@@ -152,7 +152,7 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
 
-  isFocused: boolean;
+  isFocused: boolean = false;
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -271,10 +271,12 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setFocus(): void {
     this.isFocused = true;
+    this.changeDetector.detectChanges();
   }
 
   removeFocus(): void {
     this.isFocused = false;
+    this.changeDetector.detectChanges();
   }
 
   updateValueAndIndeterminate(event: Event): void {
