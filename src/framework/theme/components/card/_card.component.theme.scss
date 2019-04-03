@@ -68,7 +68,7 @@
     }
 
     &.accent {
-      border-top-style: solid;
+      border-top-style: nb-theme(card-border-style);
       border-top-width: nb-theme(card-border-radius);
 
       & nb-card-header {
