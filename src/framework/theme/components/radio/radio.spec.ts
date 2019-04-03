@@ -8,6 +8,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import {
   Component,
   DebugElement,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
@@ -55,6 +56,22 @@ export class NbRadioWithDynamicValuesTestComponent {
   @ViewChildren(NbRadioComponent) radioComponents: QueryList<NbRadioComponent>;
 }
 
+@Component({
+  template: `
+    <nb-radio-group #firstGroup name="1">
+      <nb-radio checked value="1"></nb-radio>
+    </nb-radio-group>
+    <nb-radio-group #secondGroup name="2">
+      <nb-radio checked value="2"></nb-radio>
+    </nb-radio-group>
+  `,
+})
+export class NbTwoRadioGroupsComponent {
+  @ViewChild('firstGroup', { read: NbRadioGroupComponent }) firstGroup: NbRadioGroupComponent;
+  @ViewChild('secondGroup', { read: NbRadioGroupComponent }) secondGroup: NbRadioGroupComponent;
+  @ViewChildren(NbRadioComponent, { read: ElementRef }) radios: QueryList<ElementRef>;
+}
+
 describe('radio', () => {
   let fixture: ComponentFixture<NbRadioTestComponent>;
   let comp: NbRadioTestComponent;
@@ -99,7 +116,7 @@ describe('NbRadioGroupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ NbRadioModule ],
-      declarations: [ NbRadioWithDynamicValuesTestComponent ],
+      declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent ],
       providers: [ { provide: NB_DOCUMENT, useValue: document } ],
     });
 
@@ -250,5 +267,19 @@ describe('NbRadioGroupComponent', () => {
 
     radioFixture.componentInstance.status = null;
     expect(radioFixture.componentInstance.status).toEqual('primary');
+  });
+
+  it(`should set options name right away so it won't overlap with options from another groups`, () => {
+    const radioFixture = TestBed.createComponent(NbTwoRadioGroupsComponent);
+    radioFixture.detectChanges();
+
+    const { firstGroup, secondGroup, radios } = radioFixture.componentInstance;
+    const radioFromFirstGroup = radios.first.nativeElement.querySelector('input');
+    const radioFromSecondGroup = radios.last.nativeElement.querySelector('input');
+
+    expect(firstGroup.radios.first.checked).toEqual(true);
+    expect(radioFromFirstGroup.checked).toEqual(true);
+    expect(secondGroup.radios.first.checked).toEqual(true);
+    expect(radioFromSecondGroup.checked).toEqual(true);
   });
 });

@@ -142,6 +142,12 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   ) {}
 
   ngAfterContentInit() {
+    // In case option 'name' isn't set on nb-radio component,
+    // we need to set it's name right away, so it won't overlap with options
+    // without names from other radio groups. Otherwise they all would have
+    // same name and will be considered as options from one group so only the
+    // last option will stay selected.
+    this.updateNames();
     Promise.resolve().then(() => this.updateAndSubscribeToRadios());
 
     this.radios.changes
