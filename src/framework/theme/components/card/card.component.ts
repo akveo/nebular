@@ -24,10 +24,15 @@ import { NbComponentStatus } from '../component-status';
  * card-header-disabled-background-color:
  * card-header-disabled-text-color:
  * card-header-primary-background-color:
+ * card-header-primary-text-color:
  * card-header-info-background-color:
+ * card-header-info-text-color:
  * card-header-success-background-color:
+ * card-header-success-text-color:
  * card-header-warning-background-color:
+ * card-header-warning-text-color:
  * card-header-danger-background-color:
+ * card-header-danger-text-color:
  */
 @Component({
   selector: 'nb-card-header',

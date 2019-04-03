@@ -277,6 +277,20 @@ $theme: (
   card-header-text-font-weight: text-subtitle-font-weight,
   card-header-text-line-height: text-subtitle-line-height,
 
+  card-header-disabled-background-color: color-basic-disabled,
+  card-header-disabled-text-color: text-disabled-color,
+
+  card-header-primary-background-color: color-primary,
+  card-header-primary-text-color: text-light-color,
+  card-header-info-background-color: color-info,
+  card-header-info-text-color: text-light-color,
+  card-header-success-background-color: color-success,
+  card-header-success-text-color: text-dark-color,
+  card-header-warning-background-color: color-warning,
+  card-header-warning-text-color: text-dark-color,
+  card-header-danger-background-color: color-danger,
+  card-header-danger-text-color: text-dark-color,
+
   card-height-tiny: 6rem,
   card-height-small: 21rem,
   card-height-medium: 28.5rem,
@@ -288,15 +302,6 @@ $theme: (
   card-scrollbar-color: scrollbar-fg,
   card-scrollbar-background-color: scrollbar-bg,
   card-scrollbar-width: scrollbar-width,
-
-  card-header-disabled-background-color: color-basic-disabled,
-  card-header-disabled-text-color: text-disabled-color,
-
-  card-header-primary-background-color: color-primary,
-  card-header-info-background-color: color-info,
-  card-header-success-background-color: color-success,
-  card-header-warning-background-color: color-warning,
-  card-header-danger-background-color: color-danger,
 
   header-font-family: font-secondary,
   header-font-size: font-size,
