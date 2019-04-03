@@ -122,6 +122,7 @@ export class NbCardFooterComponent {
  * card-border-radius:
  * card-padding:
  * card-divider-color:
+ * card-divider-style:
  * card-divider-width:
  * card-height-tiny:
  * card-height-small:
