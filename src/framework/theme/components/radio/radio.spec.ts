@@ -82,6 +82,14 @@ describe('radio', () => {
     const input = secondRadio.query(By.css('input'));
     input.nativeElement.click();
   });
+
+  it(`should set default status if value isn't passed`, () => {
+    const radioFixture = TestBed.createComponent(NbRadioComponent);
+    radioFixture.detectChanges();
+
+    radioFixture.componentInstance.status = null;
+    expect(radioFixture.componentInstance.status).toEqual('primary');
+  });
 });
 
 describe('NbRadioGroupComponent', () => {
@@ -235,4 +243,12 @@ describe('NbRadioGroupComponent', () => {
     expect(valueChangeSpy).toHaveBeenCalledTimes(1);
     expect(valueChangeSpy).toHaveBeenCalledWith(radioValue);
   }));
+
+  it(`should set default status if value isn't passed`, () => {
+    const radioFixture = TestBed.createComponent(NbRadioGroupComponent);
+    radioFixture.detectChanges();
+
+    radioFixture.componentInstance.status = null;
+    expect(radioFixture.componentInstance.status).toEqual('primary');
+  });
 });

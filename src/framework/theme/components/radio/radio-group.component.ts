@@ -125,7 +125,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     return this._status;
   }
   set status(status: NbComponentStatus) {
-    if (status === '') {
+    if (!status) {
       this._status = this._defaultStatus;
     } else {
       this._status = status;

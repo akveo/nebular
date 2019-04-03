@@ -151,7 +151,19 @@ export class NbRadioComponent {
   }
   private _disabled: boolean;
 
-  @Input() status: NbComponentStatus;
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if (!value) {
+      this._status = this._defaultStatus;
+    } else {
+      this._status = value;
+    }
+  }
+  private readonly _defaultStatus: NbComponentStatus = 'primary';
+  private _status: NbComponentStatus = this._defaultStatus;
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
