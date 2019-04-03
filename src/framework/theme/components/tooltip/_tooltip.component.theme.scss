@@ -26,7 +26,7 @@
     box-shadow: nb-theme(tooltip-shadow);
 
     background: nb-theme(tooltip-background-color);
-    border: nb-theme(tooltip-border-width) solid nb-theme(tooltip-border-color);
+    border: nb-theme(tooltip-border-width) nb-theme(tooltip-border-style) nb-theme(tooltip-border-color);
     border-radius: nb-theme(tooltip-border-radius);
     padding: nb-theme(tooltip-padding);
     max-width: nb-theme(tooltip-max-width);
@@ -40,7 +40,7 @@
     }
 
     .arrow {
-      border-bottom: $arrow-size solid nb-theme(tooltip-background-color);
+      border-bottom: $arrow-size nb-theme(tooltip-border-style) nb-theme(tooltip-background-color);
     }
 
     @each $status in nb-get-statuses() {

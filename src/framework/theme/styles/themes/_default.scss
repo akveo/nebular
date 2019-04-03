@@ -932,6 +932,7 @@ $theme: (
 
   tooltip-background-color: color-black,
   tooltip-border-color: transparent,
+  tooltip-border-style: dashed,
   tooltip-border-width: 0,
   tooltip-border-radius: 0.5rem,
   tooltip-padding: 0.6rem 1rem 0.5rem,
@@ -942,7 +943,6 @@ $theme: (
   tooltip-text-line-height: text-caption-line-height,
   tooltip-max-width: 16rem,
 
-  // Nebular only tooltip properties:
   tooltip-primary-background-color: color-primary,
   tooltip-primary-text-color: text-light-color,
   tooltip-info-background-color: color-info,
