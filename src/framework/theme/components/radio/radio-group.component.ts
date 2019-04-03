@@ -147,7 +147,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   ) {}
 
   ngAfterContentInit() {
-    this.updateAndSubscribeToRadios();
+    Promise.resolve().then(() => this.updateAndSubscribeToRadios());
 
     this.radios.changes
       .pipe(takeWhile(() => this.alive))
