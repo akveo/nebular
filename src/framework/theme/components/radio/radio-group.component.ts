@@ -7,7 +7,6 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChildren,
   EventEmitter,
@@ -137,7 +136,6 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    protected cd: ChangeDetectorRef,
     protected hostElement: ElementRef<HTMLElement>,
     @Inject(PLATFORM_ID) protected platformId,
     @Inject(NB_DOCUMENT) protected document,
@@ -183,21 +181,18 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected updateNames() {
     if (this.radios) {
       this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
-      this.markRadiosForCheck();
     }
   }
 
   protected updateValues() {
     if (this.radios && typeof this.value !== 'undefined') {
       this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
-      this.markRadiosForCheck();
     }
   }
 
   protected updateDisabled() {
     if (this.radios && typeof this.disabled !== 'undefined') {
       this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
-      this.markRadiosForCheck();
     }
   }
 
@@ -216,10 +211,6 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   protected propagateValue(value: any) {
     this.valueChange.emit(value);
     this.onChange(value);
-  }
-
-  protected markRadiosForCheck() {
-    this.radios.forEach((radio: NbRadioComponent) => radio.markForCheck());
   }
 
   protected subscribeOnRadiosBlur() {
@@ -250,10 +241,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateStatus() {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => {
-        radio.status = this.status;
-        radio.markForCheck();
-      });
+      this.radios.forEach((radio: NbRadioComponent) => radio.status = this.status);
     }
   }
 }

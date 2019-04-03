@@ -136,18 +136,53 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbRadioComponent {
 
-  @Input() name: string;
+  @Input()
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    if (this._name !== value) {
+      this._name = value;
+      this.cd.detectChanges();
+    }
+  }
+  private _name: string;
 
-  @Input() checked: boolean;
+  @Input()
+  get checked(): boolean {
+    return this._checked;
+  }
+  set checked(value: boolean) {
+    const boolValue = convertToBoolProperty(value);
+    if (this._checked !== boolValue) {
+      this._checked = boolValue;
+      this.cd.markForCheck();
+    }
+  }
+  private _checked: boolean;
 
-  @Input() value: any;
+  @Input()
+  get value(): any {
+    return this._value;
+  }
+  set value(value: any) {
+    if (this._value !== value) {
+      this._value = value;
+      this.cd.markForCheck();
+    }
+  }
+  private _value: any;
 
   @Input()
   get disabled(): boolean {
     return this._disabled;
   }
   set disabled(disabled: boolean) {
-    this._disabled = convertToBoolProperty(disabled);
+    const boolValue = convertToBoolProperty(disabled);
+    if (this._disabled !== boolValue) {
+      this._disabled = boolValue;
+      this.cd.markForCheck();
+    }
   }
   private _disabled: boolean;
 
@@ -156,14 +191,12 @@ export class NbRadioComponent {
     return this._status;
   }
   set status(value: NbComponentStatus) {
-    if (!value) {
-      this._status = this._defaultStatus;
-    } else {
+    if (this._status !== value) {
       this._status = value;
+      this.cd.markForCheck();
     }
   }
-  private readonly _defaultStatus: NbComponentStatus = 'primary';
-  private _status: NbComponentStatus = this._defaultStatus;
+  private _status: NbComponentStatus = 'primary';
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
@@ -194,11 +227,6 @@ export class NbRadioComponent {
   @HostBinding('class.status-info')
   get isInfo(): boolean {
     return this.status === 'info';
-  }
-
-  markForCheck() {
-    this.cd.markForCheck();
-    this.cd.detectChanges();
   }
 
   onChange(event: Event) {
