@@ -19,6 +19,7 @@ import { NbPosition, NbRenderableContainer } from '../cdk';
  *
  * tooltip-background-color:
  * tooltip-border-color:
+ * tooltip-border-style:
  * tooltip-border-width:
  * tooltip-border-radius:
  * tooltip-padding:
@@ -39,7 +40,6 @@ import { NbPosition, NbRenderableContainer } from '../cdk';
  * tooltip-danger-background-color:
  * tooltip-danger-text-color:
  * tooltip-shadow:
- *
  */
 @Component({
   selector: 'nb-tooltip',
