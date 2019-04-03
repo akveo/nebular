@@ -6,7 +6,7 @@
 
 @mixin nb-card-header() {
   padding: nb-theme(card-padding);
-  border-bottom: nb-theme(card-divider-width) solid nb-theme(card-divider-color);
+  border-bottom: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
   border-top-left-radius: nb-theme(card-border-radius);
   border-top-right-radius: nb-theme(card-border-radius);
 
@@ -91,7 +91,7 @@
 
   nb-card-footer {
     padding: nb-theme(card-padding);
-    border-top: nb-theme(card-divider-width) solid nb-theme(card-divider-color);
+    border-top: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
     border-bottom-left-radius: nb-theme(card-border-radius);
     border-bottom-right-radius: nb-theme(card-border-radius);
   }
