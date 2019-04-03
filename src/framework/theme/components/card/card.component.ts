@@ -7,9 +7,8 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-
-export type NbCardSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
 
 /**
  * Component intended to be used within the `<nb-card>` component.
@@ -152,13 +151,13 @@ export class NbCardComponent {
    * tiny, small, medium, large, giant
    */
   @Input()
-  get size(): NbCardSize {
+  get size(): NbComponentSize {
     return this._size;
   }
-  set size(value: NbCardSize) {
+  set size(value: NbComponentSize) {
     this._size = value;
   }
-  _size: NbCardSize = 'medium';
+  _size: NbComponentSize = '';
 
   /**
    * Card status:
