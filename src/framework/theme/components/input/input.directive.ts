@@ -137,9 +137,14 @@ export class NbInputDirective {
     return this._size;
   }
   set fieldSize(value: NbComponentSize) {
-    this._size = value;
+    if (!value) {
+      this._size = this._defaultSize;
+    } else {
+      this._size = value;
+    }
   }
-  private _size: NbComponentSize = 'medium';
+  private readonly _defaultSize = 'medium';
+  private _size: NbComponentSize = this._defaultSize;
 
   /**
    * Field status (adds specific styles):
@@ -152,7 +157,18 @@ export class NbInputDirective {
    * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
    */
   @Input()
-  shape: NbComponentShape = 'rectangle';
+  get shape(): NbComponentShape {
+    return this._shape;
+  }
+  set shape(value: NbComponentShape) {
+    if (!value) {
+      this._shape = this._defaultShape;
+    } else {
+      this._shape = value;
+    }
+  }
+  private _defaultShape: NbComponentShape = 'rectangle';
+  private _shape: NbComponentShape = this._defaultShape;
 
   /**
    * If set element will fill container. `false` by default.
