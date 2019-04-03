@@ -124,16 +124,13 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   get status(): NbComponentStatus {
     return this._status;
   }
-  set status(status: NbComponentStatus) {
-    if (!status) {
-      this._status = this._defaultStatus;
-    } else {
-      this._status = status;
+  set status(value: NbComponentStatus) {
+    if (this._status !== value) {
+      this._status = value;
+      this.updateStatus();
     }
-    this.updateStatus();
   }
-  protected readonly _defaultStatus: NbComponentStatus = 'primary';
-  protected _status: NbComponentStatus = this._defaultStatus;
+  protected _status: NbComponentStatus = 'primary';
 
   @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 
