@@ -4,7 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentStatus } from '../component-status';
@@ -117,13 +125,7 @@ import { NbComponentStatus } from '../component-status';
         [disabled]="disabled"
         (change)="onChange($event)"
         (click)="onClick($event)">
-      <span class="radio-circle"
-            [class.status-primary]="isPrimary"
-            [class.status-success]="isSuccess"
-            [class.status-warning]="isWarning"
-            [class.status-danger]="isDanger"
-            [class.status-info]="isInfo">
-      </span>
+      <span class="radio-circle"></span>
       <span class="text">
         <ng-content></ng-content>
       </span>
@@ -157,22 +159,27 @@ export class NbRadioComponent {
 
   constructor(protected cd: ChangeDetectorRef) {}
 
+  @HostBinding('class.status-primary')
   get isPrimary(): boolean {
     return this.status === 'primary';
   }
 
+  @HostBinding('class.status-success')
   get isSuccess(): boolean {
     return this.status === 'success';
   }
 
+  @HostBinding('class.status-warning')
   get isWarning(): boolean {
     return this.status === 'warning';
   }
 
+  @HostBinding('class.status-danger')
   get isDanger(): boolean {
     return this.status === 'danger';
   }
 
+  @HostBinding('class.status-info')
   get isInfo(): boolean {
     return this.status === 'info';
   }

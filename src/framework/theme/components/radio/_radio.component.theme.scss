@@ -29,31 +29,31 @@
     }
 
     @each $status in nb-get-statuses() {
-      .native-input:enabled + .radio-circle.status-#{$status} {
+      &.status-#{$status} .native-input:enabled + .radio-circle {
         border-color: nb-theme(radio-#{$status}-border-color);
       }
-      .native-input:enabled:checked + .radio-circle.status-#{$status}::before {
+      &.status-#{$status} .native-input:enabled:checked + .radio-circle::before {
         background-color: nb-theme(radio-#{$status}-inner-circle-color);;
       }
 
-      .native-input:enabled:focus + .radio-circle.status-#{$status} {
+      &.status-#{$status} .native-input:enabled:focus + .radio-circle {
         border-color: nb-theme(radio-#{$status}-focus-border-color);
       }
-      .native-input:enabled:checked:focus + .radio-circle.status-#{$status}::before {
+      &.status-#{$status} .native-input:enabled:checked:focus + .radio-circle::before {
         background-color: nb-theme(radio-#{$status}-focus-inner-circle-color);
       }
 
-      label:hover .native-input:enabled + .radio-circle.status-#{$status} {
+      &.status-#{$status} label:hover .native-input:enabled + .radio-circle {
         border-color: nb-theme(radio-#{$status}-hover-border-color);
       }
-      label:hover .native-input:checked:enabled + .radio-circle.status-#{$status}::before {
+      &.status-#{$status} label:hover .native-input:checked:enabled + .radio-circle::before {
         background-color: nb-theme(radio-#{$status}-hover-inner-circle-color);
       }
 
-      .native-input:enabled:active + .radio-circle.status-#{$status} {
+      &.status-#{$status} .native-input:enabled:active + .radio-circle {
         border-color: nb-theme(radio-#{$status}-active-border-color);
       }
-      .native-input:enabled:checked:active + .radio-circle.status-#{$status}::before {
+      &.status-#{$status} .native-input:enabled:checked:active + .radio-circle::before {
         background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
       }
     }
