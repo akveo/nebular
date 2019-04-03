@@ -80,28 +80,12 @@ describe('Directive: NbInput', () => {
     expect(textareaElement.classList).toContain('size-large');
   });
 
-  it(`should set default size if value isn't passed`, () => {
-    inputTestComponent.size = null;
-    fixture.detectChanges();
-
-    expect(inputDirective.fieldSize).toEqual('medium');
-    expect(inputElement.classList).toContain('size-medium');
-  });
-
   it('should set shape class', () => {
     inputTestComponent.shape = 'semi-round';
     fixture.detectChanges();
 
     expect(inputElement.classList).toContain('shape-semi-round');
     expect(textareaElement.classList).toContain('shape-semi-round');
-  });
-
-  it(`should set default shape if value isn't passed`, () => {
-    inputTestComponent.shape = null;
-    fixture.detectChanges();
-
-    expect(inputDirective.shape).toEqual('rectangle');
-    expect(inputElement.classList).toContain('shape-rectangle');
   });
 
   it('should set full width', () => {
