@@ -157,39 +157,39 @@ export class NbCardComponent {
    * tiny, small, medium, large, giant
    */
   @Input()
-  get size(): NbComponentSize {
+  get size(): '' | NbComponentSize {
     return this._size;
   }
-  set size(value: NbComponentSize) {
+  set size(value: '' | NbComponentSize) {
     this._size = value;
   }
-  _size: NbComponentSize = '';
+  _size: '' | NbComponentSize = '';
 
   /**
    * Card status:
    * primary, info, success, warning, danger
    */
   @Input()
-  get status(): NbComponentStatus {
+  get status(): '' | NbComponentStatus {
     return this._status;
   }
-  set status(value: NbComponentStatus) {
+  set status(value: '' | NbComponentStatus) {
     this._status = value;
   }
-  _status: NbComponentStatus;
+  _status: '' | NbComponentStatus = '';
 
   /**
    * Card accent (color of the top border):
    * primary, info, success, warning, danger
    */
   @Input()
-  get accent(): NbComponentStatus {
+  get accent(): '' | NbComponentStatus {
     return this._accent;
   }
-  set accent(value: NbComponentStatus) {
+  set accent(value: '' | NbComponentStatus) {
     this._accent = value;
   }
-  _accent: NbComponentStatus;
+  _accent: '' | NbComponentStatus;
 
   @Input()
   @HostBinding('attr.disabled')
