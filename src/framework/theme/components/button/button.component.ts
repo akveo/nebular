@@ -5,6 +5,10 @@
  */
 
 import { Component, Input, HostBinding, HostListener, Renderer2, ElementRef } from '@angular/core';
+
+import { NbComponentStatus } from '../component-status';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentSize } from '../component-size';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -22,7 +26,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbButtonModule,
  *   ],
  * })
@@ -120,84 +124,73 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbButtonComponent {
 
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
+  size: NbComponentSize;
+  status: NbComponentStatus;
+  shape: NbComponentShape;
 
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  static readonly SHAPE_RECTANGLE = 'rectangle';
-  static readonly SHAPE_ROUND = 'round';
-  static readonly SHAPE_SEMI_ROUND = 'semi-round';
-
-  size: string;
-  status: string;
-  accent: string;
-  shape: string;
-
-  @HostBinding('class.btn-xsmall')
-  get xsmall() {
-    return this.size === NbButtonComponent.SIZE_XSMALL;
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.btn-small')
+  @HostBinding('class.size-small')
   get small() {
-    return this.size === NbButtonComponent.SIZE_SMALL;
+    return this.size === 'small';
   }
 
-  @HostBinding('class.btn-medium')
+  @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbButtonComponent.SIZE_MEDIUM;
+    return this.size === 'medium';
   }
 
-  @HostBinding('class.btn-large')
+  @HostBinding('class.size-large')
   get large() {
-    return this.size === NbButtonComponent.SIZE_LARGE;
+    return this.size === 'large';
   }
 
-  @HostBinding('class.btn-primary')
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
+  }
+
+  @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbButtonComponent.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.btn-info')
+  @HostBinding('class.status-info')
   get info() {
-    return this.status === NbButtonComponent.STATUS_INFO;
+    return this.status === 'info';
   }
 
-  @HostBinding('class.btn-success')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbButtonComponent.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.btn-warning')
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbButtonComponent.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.btn-danger')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbButtonComponent.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
-  @HostBinding('class.btn-rectangle')
+  @HostBinding('class.shape-rectangle')
   get rectangle() {
-    return this.shape === NbButtonComponent.SHAPE_RECTANGLE;
+    return this.shape === 'rectangle';
   }
 
-  @HostBinding('class.btn-round')
+  @HostBinding('class.shape-round')
   get round() {
-    return this.shape === NbButtonComponent.SHAPE_ROUND;
+    return this.shape === 'round';
   }
 
-  @HostBinding('class.btn-semi-round')
+  @HostBinding('class.shape-semi-round')
   get semiRound() {
-    return this.shape === NbButtonComponent.SHAPE_SEMI_ROUND;
+    return this.shape === 'semi-round';
   }
 
   @HostBinding('class.btn-hero') hero: boolean;
@@ -231,30 +224,27 @@ export class NbButtonComponent {
 
   /**
    * Button size, available sizes:
-   * `xxsmall`, `xsmall`, `small`, `medium`, `large`
-   * @param {string} val
+   * `tiny`, `small`, `medium`, `large`, `giant`
    */
   @Input('size')
-  private set setSize(val: string) {
+  private set setSize(val: NbComponentSize) {
     this.size = val;
   }
 
   /**
    * Button status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
-   * @param {string} val
    */
   @Input('status')
-  private set setStatus(val: string) {
+  private set setStatus(val: NbComponentStatus) {
     this.status = val;
   }
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
-   * @param {string} val
    */
   @Input('shape')
-  private set setShape(val: string) {
+  private set setShape(val: NbComponentShape) {
     this.shape = val;
   }
 
