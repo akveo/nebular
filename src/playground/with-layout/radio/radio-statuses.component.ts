@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
 
-interface Option {
-  value: string;
-  label: string;
-  checked?: boolean;
-  disabled?: boolean;
-}
-type Options = Option[];
-
 @Component({
   template: `
     <nb-radio-group *ngFor="let status of statuses" [name]="status" [status]="status">
@@ -22,7 +14,7 @@ type Options = Option[];
   styleUrls: ['./radio-statuses-group.component.scss'],
 })
 export class RadioStatusesComponent {
-  options: Options = [
+  options = [
     { value: 'This is value 1', label: 'Option 1', checked: true },
     { value: 'This is value 2', label: 'Option 2' },
     { value: 'This is value 3', label: 'Option 3' },
