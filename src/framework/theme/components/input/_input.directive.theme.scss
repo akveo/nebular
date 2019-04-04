@@ -4,45 +4,56 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './input-colors';
+@import './input-statuses';
 @import './input-sizes';
 @import './input-shapes';
 
 @mixin nb-input-theme() {
-  $border-width: nb-theme(form-control-border-width);
-  $border-type: nb-theme(form-control-border-type);
-  $border-color: nb-theme(form-control-border-color);
 
   [nbInput] {
-    background-color: nb-theme(form-control-bg);
-    border: $border-width $border-type $border-color;
-    color: nb-theme(form-control-text-primary-color);
+    background-color: nb-theme(input-background-color);
+    border-color: nb-theme(input-border-color);
+    border-style: nb-theme(input-border-style);
+    border-width: nb-theme(input-border-width);
+    color: nb-theme(input-text-color);
+    font-size: nb-theme(input-text-font-size);
+    font-family: nb-theme(input-text-font-family);
+    font-weight: nb-theme(input-text-font-weight);
+    line-height: nb-theme(input-text-line-height);
+    padding: nb-theme(input-padding);
+    @include nb-component-animation(border, background-color, color);
+
+    &::placeholder {
+      color: nb-theme(input-placeholder-text-color);
+      font-family: nb-theme(input-placeholder-text-font-family);
+      text-overflow: ellipsis;
+    }
 
     &:focus {
       outline: none;
-      background-color: nb-theme(form-control-focus-bg);
-      border-color: nb-theme(form-control-selected-border-color);
+      border-color: nb-theme(input-focus-border-color);
     }
 
-    &[disabled] {
-      @include install-placeholder(
-        nb-theme(form-control-placeholder-color),
-        nb-theme(form-control-placeholder-font-size),
-        0.5
-      );
+    &:hover {
+      border-color: nb-theme(input-hover-border-color);
+    }
+
+    &:disabled {
+      background-color: nb-theme(input-disabled-background-color);
+      border-color: nb-theme(input-disabled-border-color);
+      color: nb-theme(input-disabled-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-disabled-placeholder-text-color);
+      }
     }
 
     &.input-full-width {
       width: 100%;
     }
 
-    @include input-colors();
+    @include input-statuses();
     @include input-sizes();
     @include input-shapes();
-
-    @include install-placeholder(
-      nb-theme(form-control-placeholder-color),
-      nb-theme(form-control-placeholder-font-size)
-    );
   }
 }
