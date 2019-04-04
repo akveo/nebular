@@ -130,18 +130,23 @@ export class NbButtonComponent {
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
    */
-  @Input() size: NbComponentSize;
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Button status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: NbComponentStatus;
+  @Input() status: NbComponentStatus = 'primary';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
    */
-  @Input() shape: NbComponentShape;
+  @Input() shape: NbComponentShape = 'rectangle';
+
+  /**
+   * Button appearance: `filled`, `outline`, `ghost`, `hero`
+   */
+  @Input() appearance: NbButtonAppearance = 'filled';
 
   /**
    * Sets `filled` appearance
