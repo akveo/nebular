@@ -100,6 +100,15 @@ describe('NbUserComponent', () => {
     expect(userElement.querySelector(INITIALS_SELECTOR)).toEqual(null);
   });
 
+  it('should set color of initials if set color property is set', () => {
+    const color = 'red';
+    userComponent.color = color;
+    fixture.detectChanges();
+
+    const initialsStyle = (userElement.querySelector(INITIALS_SELECTOR) as HTMLElement).style;
+    expect(initialsStyle.backgroundColor).toEqual(color);
+  });
+
   describe('onlyPicture', () => {
     it(`should not show title and name if onlyPicture is set to true`, () => {
       userComponent.name = 'Name';
@@ -218,7 +227,7 @@ describe('NbUserComponent', () => {
     expect(userComponent.size).toEqual('medium');
   });
 
-  it(`only only one size property should be true`, () => {
+  it(`only one size property should be true`, () => {
     const currentSize: NbComponentSize = 'tiny';
     const otherSizes = COMPONENT_SIZES.filter(s => s !== currentSize);
 
@@ -227,5 +236,16 @@ describe('NbUserComponent', () => {
     for (const size of otherSizes) {
       expect(userComponent[size]).toEqual(false);
     }
+  });
+
+  it('should be round shaped by default', () => {
+    expect(userComponent.shape).toEqual('round');
+  });
+
+  it(`only one shape property should be true`, () => {
+    userComponent.shape = 'semi-round';
+    expect(userComponent.semiRound).toEqual(true);
+    expect(userComponent.rectangle).toEqual(false);
+    expect(userComponent.round).toEqual(false);
   });
 });

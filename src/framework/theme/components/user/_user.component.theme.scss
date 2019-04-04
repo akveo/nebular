@@ -50,4 +50,10 @@
       }
     }
   }
+
+  @each $shape in nb-get-shapes() {
+    nb-user.shape-#{$shape} .user-picture {
+      border-radius: nb-theme(user-#{$shape}-border-radius);
+    }
+  }
 }

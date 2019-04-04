@@ -6,6 +6,7 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { NbComponentShape } from '@nebular/theme';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
@@ -43,6 +44,8 @@ import { NbComponentSize } from '../component-size';
  * You can set custom avatar background-color, user image (as link or BASE64 string) and disable user initials:
  * @stacked-example(Avatar image settings, user/user-avatar-settings.component)
  *
+ * Component shape could be controlled with `shape` input.
+ * @stacked-example(Shapes, user/user-shape.component)
  *
  * @styles
  *
@@ -58,6 +61,9 @@ import { NbComponentSize } from '../component-size';
  * user-title-text-color:
  * user-title-text-font-family:
  * user-title-text-font-weight:
+ * user-rectangle-border-radius:
+ * user-semi-round-border-radius:
+ * user-round-border-radius:
  * user-tiny-height:
  * user-tiny-width:
  * user-tiny-initials-text-font-size:
@@ -95,9 +101,6 @@ import { NbComponentSize } from '../component-size';
  * user-giant-initials-text-font-size:
  * user-giant-initials-text-line-height:
  * user-giant-name-text-font-size:
- * user-giant-name-text-line-height:
- * user-giant-title-text-font-size:
- * user-giant-title-text-line-height:
  */
 @Component({
   selector: 'nb-user',
@@ -141,6 +144,12 @@ export class NbUserComponent {
    * Possible values: `tiny`, `small`, `medium` (default), `large`, 'giant'.
    */
   @Input() size: NbComponentSize = 'medium';
+
+  /**
+   * Shape of the picture box.
+   * Possible values: `rectangle`, `semi-round`, `round`.
+   */
+  @Input() shape: NbComponentShape = 'round';
 
   /**
    * Whether to show a user name or not
@@ -200,7 +209,7 @@ export class NbUserComponent {
 
   /**
    * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
+   * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
   @Input() badgeStatus: string;
@@ -215,28 +224,43 @@ export class NbUserComponent {
   @Input() badgePosition: string;
 
   @HostBinding('class.size-tiny')
-  get tiny() {
+  get tiny(): boolean {
     return this.size === 'tiny';
   }
 
   @HostBinding('class.size-small')
-  get small() {
+  get small(): boolean {
     return this.size === 'small';
   }
 
   @HostBinding('class.size-medium')
-  get medium() {
+  get medium(): boolean {
     return this.size === 'medium';
   }
 
   @HostBinding('class.size-large')
-  get large() {
+  get large(): boolean {
     return this.size === 'large';
   }
 
   @HostBinding('class.size-giant')
-  get giant() {
+  get giant(): boolean {
     return this.size === 'giant';
+  }
+
+  @HostBinding('class.shape-rectangle')
+  get rectangle(): boolean {
+    return this.shape === 'rectangle';
+  }
+
+  @HostBinding('class.shape-semi-round')
+  get semiRound(): boolean {
+    return this.shape === 'semi-round';
+  }
+
+  @HostBinding('class.shape-round')
+  get round(): boolean {
+    return this.shape === 'round';
   }
 
   constructor(private domSanitizer: DomSanitizer) { }
