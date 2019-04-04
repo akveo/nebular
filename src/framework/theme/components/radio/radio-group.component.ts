@@ -148,6 +148,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     // same name and will be considered as options from one group so only the
     // last option will stay selected.
     this.updateNames();
+
     Promise.resolve().then(() => this.updateAndSubscribeToRadios());
 
     this.radios.changes
@@ -203,6 +204,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected subscribeOnRadiosValueChange() {
+    if (!this.radios || !this.radios.length) {
+      return;
+    }
+
     merge(...this.radios.map((radio: NbRadioComponent) => radio.valueChange))
       .pipe(
         takeWhile(() => this.alive),
@@ -220,7 +225,8 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected subscribeOnRadiosBlur() {
-    if (!isPlatformBrowser(this.platformId) || this.isTouched) {
+    const hasNoRadios = !this.radios || !this.radios.length;
+    if (!isPlatformBrowser(this.platformId) || this.isTouched || hasNoRadios) {
       return;
     }
 
