@@ -159,7 +159,7 @@ export class NbRadioComponent {
       this.cd.markForCheck();
     }
   }
-  private _checked: boolean;
+  private _checked: boolean = false;
 
   @Input()
   get value(): any {
@@ -184,7 +184,7 @@ export class NbRadioComponent {
       this.cd.markForCheck();
     }
   }
-  private _disabled: boolean;
+  private _disabled: boolean = false;
 
   @Input()
   get status(): NbComponentStatus {
