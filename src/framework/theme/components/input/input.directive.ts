@@ -5,7 +5,11 @@
  */
 
 import { Directive, Input, HostBinding } from '@angular/core';
+
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * Basic input directive.
@@ -20,7 +24,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbInputModule,
  *   ],
  * })
@@ -52,133 +56,173 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * form-control-bg:
- * form-control-border-width:
- * form-control-border-type:
- * form-control-border-color:
- * form-control-text-primary-color:
- * form-control-focus-bg:
- * form-control-selected-border-color:
- * form-control-placeholder-font-size:
- * form-control-placeholder-color:
- * form-control-font-size:
- * form-control-padding:
- * form-control-font-size-sm:
- * form-control-padding-sm:
- * form-control-font-size-lg:
- * form-control-padding-lg:
- * form-control-border-radius:
- * form-control-semi-round-border-radius:
- * form-control-round-border-radius:
- * form-control-info-border-color:
- * form-control-success-border-color:
- * form-control-warning-border-color:
- * form-control-danger-border-color:
+ * input-background-color:
+ * input-border-width:
+ * input-border-style:
+ * input-placeholder-text-color:
+ * input-placeholder-text-font-family:
+ * input-text-color:
+ * input-text-font-family:
+ * input-border-color:
+ * input-focus-border-color:
+ * input-hover-border-color:
+ * input-disabled-border-color:
+ * input-disabled-background-color:
+ * input-disabled-text-color:
+ * input-disabled-placeholder-text-color:
+ * input-primary-border-color:
+ * input-primary-focus-border-color:
+ * input-primary-hover-border-color:
+ * input-success-border-color:
+ * input-success-focus-border-color:
+ * input-success-hover-border-color:
+ * input-info-border-color:
+ * input-info-focus-border-color:
+ * input-info-hover-border-color:
+ * input-warning-border-color:
+ * input-warning-focus-border-color:
+ * input-warning-hover-border-color:
+ * input-danger-border-color:
+ * input-danger-focus-border-color:
+ * input-danger-hover-border-color:
+ * input-rectangle-border-radius:
+ * input-semi-round-border-radius:
+ * input-round-border-radius:
+ * input-tiny-text-font-size:
+ * input-tiny-text-font-weight:
+ * input-tiny-text-line-height:
+ * input-tiny-placeholder-text-font-size:
+ * input-tiny-placeholder-text-font-weight:
+ * input-tiny-placeholder-text-line-height:
+ * input-tiny-padding:
+ * input-small-text-font-size:
+ * input-small-text-font-weight:
+ * input-small-text-line-height:
+ * input-small-placeholder-text-font-size:
+ * input-small-placeholder-text-font-weight:
+ * input-small-placeholder-text-line-height:
+ * input-small-padding:
+ * input-medium-text-font-size:
+ * input-medium-text-font-weight:
+ * input-medium-text-line-height:
+ * input-medium-placeholder-text-font-size:
+ * input-medium-placeholder-text-font-weight:
+ * input-medium-placeholder-text-line-height:
+ * input-medium-padding:
+ * input-large-text-font-size:
+ * input-large-text-font-weight:
+ * input-large-text-line-height:
+ * input-large-placeholder-text-font-size:
+ * input-large-placeholder-text-font-weight:
+ * input-large-placeholder-text-line-height:
+ * input-large-padding:
+ * input-giant-text-font-size:
+ * input-giant-text-font-weight:
+ * input-giant-text-line-height:
+ * input-giant-placeholder-text-font-size:
+ * input-giant-placeholder-text-font-weight:
+ * input-giant-placeholder-text-line-height:
+ * input-giant-padding:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
 })
 export class NbInputDirective {
 
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  static readonly SHAPE_RECTANGLE = 'rectangle';
-  static readonly SHAPE_SEMI_ROUND = 'semi-round';
-  static readonly SHAPE_ROUND = 'round';
-
-  size: string = NbInputDirective.SIZE_MEDIUM;
-
   /**
-   * Field size, available sizes:
-   * `small`, `medium`, `large`
-   * @param {string} val
+   * Field size modifications. Possible values: `small`, `medium` (default), `large`.
    */
-  @Input('fieldSize')
-  set setSize(value: string) {
-    this.size = value;
-  }
+  @Input()
+  fieldSize: NbComponentSize = 'medium';
 
   /**
    * Field status (adds specific styles):
-   * `info`, `success`, `warning`, `danger`
-   * @param {string} val
+   * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input('status')
-  status: string;
+  @Input()
+  status: '' | NbComponentStatus = '';
 
   /**
-   * Field shapes: `rectangle`, `round`, `semi-round`
-   * @param {string} val
+   * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
    */
-  @Input('shape')
-  shape: string = NbInputDirective.SHAPE_RECTANGLE;
+  @Input()
+  shape: NbComponentShape = 'rectangle';
 
   /**
-   * If set element will fill container
-   * @param {string}
+   * If set element will fill container. `false` by default.
    */
-  @Input('fullWidth')
-  set setFullWidth(value) {
-    this.fullWidth = convertToBoolProperty(value);
-  }
-
+  @Input()
   @HostBinding('class.input-full-width')
-  fullWidth = false;
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  private _fullWidth = false;
 
-  @HostBinding('class.input-sm')
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.fieldSize === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
   get small() {
-    return this.size === NbInputDirective.SIZE_SMALL;
+    return this.fieldSize === 'small';
   }
 
-  @HostBinding('class.input-md')
+  @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbInputDirective.SIZE_MEDIUM;
+    return this.fieldSize === 'medium';
   }
 
-  @HostBinding('class.input-lg')
+  @HostBinding('class.size-large')
   get large() {
-    return this.size === NbInputDirective.SIZE_LARGE;
+    return this.fieldSize === 'large';
   }
 
-  @HostBinding('class.input-info')
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.fieldSize === 'giant';
+  }
+
+  @HostBinding('class.status-primary')
+  get primary() {
+    return this.status === 'primary';
+  }
+
+  @HostBinding('class.status-info')
   get info() {
-    return this.status === NbInputDirective.STATUS_INFO;
+    return this.status === 'info';
   }
 
-  @HostBinding('class.input-success')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbInputDirective.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.input-warning')
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbInputDirective.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.input-danger')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbInputDirective.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
-  @HostBinding('class.input-rectangle')
+  @HostBinding('class.shape-rectangle')
   get rectangle() {
-    return this.shape === NbInputDirective.SHAPE_RECTANGLE;
+    return this.shape === 'rectangle';
   }
 
-  @HostBinding('class.input-semi-round')
+  @HostBinding('class.shape-semi-round')
   get semiRound() {
-    return this.shape === NbInputDirective.SHAPE_SEMI_ROUND;
+    return this.shape === 'semi-round';
   }
 
-  @HostBinding('class.input-round')
+  @HostBinding('class.shape-round')
   get round() {
-    return this.shape === NbInputDirective.SHAPE_ROUND;
+    return this.shape === 'round';
   }
 }
