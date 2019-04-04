@@ -98,14 +98,7 @@ export class NbUserComponent {
    * Size of the component.
    * Possible values: `tiny`, `small`, `medium` (default), `large`, 'giant'.
    */
-  @Input()
-  get size(): NbComponentSize {
-    return this._size;
-  }
-  set size(value: NbComponentSize) {
-    this._size = value;
-  }
-  private _size: NbComponentSize = 'medium';
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Whether to show a user name or not
