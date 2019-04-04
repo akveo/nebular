@@ -86,7 +86,7 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string, status?: NbComponentStatus } = {};
+  context: { icon?: string, status?: '' | NbComponentStatus } = {};
 
   get statusClass() {
     return this.context.status ? `status-${this.context.status}` : '';
