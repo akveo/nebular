@@ -80,9 +80,9 @@ export class NbSpinnerDirective implements OnInit {
   @Input('nbSpinnerStatus') spinnerStatus: '' | NbComponentStatus;
 
   /**
-   * Spinner size. Possible values: tiny, small, medium, large, giant
+   * Spinner size. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`
    */
-  @Input('nbSpinnerSize') spinnerSize: NbComponentSize;
+  @Input('nbSpinnerSize') spinnerSize: NbComponentSize = 'medium';
 
   /**
    * Directive value - show or hide spinner
