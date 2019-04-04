@@ -124,6 +124,83 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbButtonComponent {
 
+  /**
+   * Button size, available sizes:
+   * `tiny`, `small`, `medium`, `large`, `giant`
+   */
+  @Input() size: NbComponentSize;
+
+  /**
+   * Button status (adds specific styles):
+   * `primary`, `info`, `success`, `warning`, `danger`
+   */
+  @Input() status: NbComponentStatus;
+
+  /**
+   * Button shapes: `rectangle`, `round`, `semi-round`
+   */
+  @Input() shape: NbComponentShape;
+
+  /**
+   * Adds `hero` styles
+   */
+  @Input()
+  @HostBinding('class.btn-hero')
+  get hero(): boolean {
+    return this._hero;
+  }
+  set hero(value: boolean) {
+    this._hero = convertToBoolProperty(value);
+  }
+  private _hero: boolean = false;
+
+  /**
+   * Disables the button
+   */
+  @Input()
+  @HostBinding('attr.aria-disabled')
+  @HostBinding('class.btn-disabled')
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
+  }
+  private _disabled: boolean = false;
+
+  // issue #794
+  @HostBinding('attr.tabindex')
+  get tabbable(): string {
+    return this.disabled ? '-1' : '0';
+  }
+
+  /**
+   * If set element will fill its container
+   */
+  @Input()
+  @HostBinding('class.btn-full-width')
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  private _fullWidth = false;
+
+  /**
+   * Adds `outline` styles
+   */
+  @Input()
+  @HostBinding('class.btn-outline')
+  get outline(): boolean {
+    return this._outline;
+  }
+  set outline(value: boolean) {
+    this._outline = convertToBoolProperty(value);
+  }
+  private _outline: boolean;
+
   @HostBinding('class.size-tiny')
   get tiny() {
     return this.size === 'tiny';
@@ -189,18 +266,6 @@ export class NbButtonComponent {
     return this.shape === 'semi-round';
   }
 
-  @HostBinding('class.btn-hero') hero: boolean;
-  @HostBinding('class.btn-outline') outline: boolean;
-
-  @HostBinding('attr.aria-disabled')
-  @HostBinding('class.btn-disabled') disabled: boolean;
-
-  // issue #794
-  @HostBinding('attr.tabindex')
-  get tabbable(): string {
-    return this.disabled ? '-1' : '0';
-  }
-
   @HostBinding('class.icon-start')
   get iconLeft(): boolean {
     const el = this.hostElement.nativeElement;
@@ -213,68 +278,6 @@ export class NbButtonComponent {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
     return !!(icon && el.lastChild === icon);
-  }
-
-  @HostBinding('class.btn-full-width')
-  fullWidth = false;
-
-  /**
-   * Button size, available sizes:
-   * `tiny`, `small`, `medium`, `large`, `giant`
-   */
-  @Input() size: NbComponentSize;
-
-  /**
-   * Button status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
-   */
-  @Input() status: NbComponentStatus;
-
-  /**
-   * Button shapes: `rectangle`, `round`, `semi-round`
-   */
-  @Input() shape: NbComponentShape;
-
-  private get iconElement() {
-    const el = this.hostElement.nativeElement;
-    return el.querySelector('nb-icon');
-  }
-
-  /**
-   * Adds `hero` styles
-   * @param {boolean} val
-   */
-  @Input('hero')
-  set setHero(val: boolean) {
-    this.hero = convertToBoolProperty(val);
-  }
-
-  /**
-   * Disables the button
-   * @param {boolean} val
-   */
-  @Input('disabled')
-  set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
-    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
-  }
-
-  /**
-   * If set element will fill its container
-   * @param {boolean}
-   */
-  @Input('fullWidth')
-  set setFullWidth(value) {
-    this.fullWidth = convertToBoolProperty(value);
-  }
-
-  /**
-   * Adds `outline` styles
-   * @param {boolean} val
-   */
-  @Input('outline')
-  set setOutline(val: boolean) {
-    this.outline = convertToBoolProperty(val);
   }
 
   /**
@@ -299,4 +302,9 @@ export class NbButtonComponent {
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
   ) {}
+
+  private get iconElement() {
+    const el = this.hostElement.nativeElement;
+    return el.querySelector('nb-icon');
+  }
 }
