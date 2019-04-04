@@ -153,7 +153,13 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
     this.radios.changes
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.updateAndSubscribeToRadios());
+      .subscribe(() => {
+        // 'changes' emit during change detection run and we can't update
+        // option properties right of since they already was initialized.
+        // Instead we schedule microtask to update radios after change detection
+        // run is finished.
+        Promise.resolve().then(() => this.updateAndSubscribeToRadios());
+      });
   }
 
   ngOnDestroy() {
