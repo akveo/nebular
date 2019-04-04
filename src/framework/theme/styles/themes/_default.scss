@@ -838,7 +838,7 @@ $theme: (
   chat-warning-bg: color-warning,
   chat-danger-bg: color-danger,
 
-  spinner-background-color: color-basic-100,
+  spinner-background-color: rgba(237, 240, 245, 0.5), // color-basic-200 with 0.5 opacity
   spinner-circle-filled-color: color-white,
   spinner-circle-empty-color: transparent,
   spinner-text-color: text-dark-color,
