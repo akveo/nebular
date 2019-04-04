@@ -67,7 +67,7 @@ export class NbSpinnerComponent {
 
   /**
    * Spinner status (adds specific styles):
-   * primary, info, success, warning, danger, white
+   * primary, info, success, warning, danger
    */
   @Input()
   status: '' | NbComponentStatus;
