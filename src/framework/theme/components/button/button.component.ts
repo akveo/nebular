@@ -11,6 +11,8 @@ import { NbComponentShape } from '../component-shape';
 import { NbComponentSize } from '../component-size';
 import { convertToBoolProperty } from '../helpers';
 
+export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
+
 /**
  * Basic button component.
  *
@@ -142,17 +144,73 @@ export class NbButtonComponent {
   @Input() shape: NbComponentShape;
 
   /**
-   * Adds `hero` styles
+   * Sets `filled` appearance
    */
   @Input()
-  @HostBinding('class.btn-hero')
+  @HostBinding('class.appearance-filled')
+  get filled(): boolean {
+    return this.appearance === 'filled';
+  }
+  set filled(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'filled';
+    }
+  }
+
+  /**
+   * Sets `outline` appearance
+   */
+  @Input()
+  @HostBinding('class.appearance-outline')
+  get outline(): boolean {
+    return this.appearance === 'outline';
+  }
+  set outline(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'outline';
+    }
+  }
+
+  /**
+   * Sets `ghost` appearance
+   */
+  @Input()
+  @HostBinding('class.appearance-ghost')
+  get ghost(): boolean {
+    return this.appearance === 'ghost';
+  }
+  set ghost(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'ghost';
+    }
+  }
+
+  /**
+   * Sets `hero` appearance
+   */
+  @Input()
+  @HostBinding('class.appearance-hero')
   get hero(): boolean {
-    return this._hero;
+    return this.appearance === 'hero';
   }
   set hero(value: boolean) {
-    this._hero = convertToBoolProperty(value);
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'hero';
+    }
   }
-  private _hero: boolean = false;
+
+  /**
+   * If set element will fill its container
+   */
+  @Input()
+  @HostBinding('class.btn-full-width')
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  private _fullWidth = false;
 
   /**
    * Disables the button
@@ -174,32 +232,6 @@ export class NbButtonComponent {
   get tabbable(): string {
     return this.disabled ? '-1' : '0';
   }
-
-  /**
-   * If set element will fill its container
-   */
-  @Input()
-  @HostBinding('class.btn-full-width')
-  get fullWidth(): boolean {
-    return this._fullWidth;
-  }
-  set fullWidth(value: boolean) {
-    this._fullWidth = convertToBoolProperty(value);
-  }
-  private _fullWidth = false;
-
-  /**
-   * Adds `outline` styles
-   */
-  @Input()
-  @HostBinding('class.btn-outline')
-  get outline(): boolean {
-    return this._outline;
-  }
-  set outline(value: boolean) {
-    this._outline = convertToBoolProperty(value);
-  }
-  private _outline: boolean;
 
   @HostBinding('class.size-tiny')
   get tiny() {
