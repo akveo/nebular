@@ -40,7 +40,7 @@
     }
   }
 
-  @each $size in 'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge' {
+  @each $size in nb-get-sizes() {
     nb-spinner.size-#{$size} {
       font-size: nb-theme(spinner-height-#{$size});
     }

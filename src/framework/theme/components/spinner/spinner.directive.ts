@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 
 import { NbSpinnerComponent } from './spinner.component';
-import { NbSpinnerSize } from './spinner-size';
+import { NbComponentSize } from '../component-size';
 import { NbSpinnerStatus } from './spinner-status';
 
 /**
@@ -82,10 +82,9 @@ export class NbSpinnerDirective implements OnInit {
   @Input('nbSpinnerStatus') spinnerStatus: NbSpinnerStatus;
 
   /**
-   * Spinner size, available sizes: xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @type {string}
+   * Spinner size. Possible values: tiny, small, medium, large, giant
    */
-  @Input('nbSpinnerSize') spinnerSize: NbSpinnerSize;
+  @Input('nbSpinnerSize') spinnerSize: NbComponentSize;
 
   /**
    * Directive value - show or hide spinner

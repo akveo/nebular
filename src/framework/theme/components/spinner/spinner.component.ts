@@ -6,8 +6,8 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
+import { NbComponentSize } from '../component-size';
 import { NbSpinnerStatus } from './spinner-status';
-import { NbSpinnerSize } from './spinner-size';
 
 /**
  * Styled spinner component
@@ -52,24 +52,22 @@ import { NbSpinnerSize } from './spinner-size';
 })
 export class NbSpinnerComponent {
 
-  size: NbSpinnerSize = NbSpinnerSize.MEDIUM;
   status: NbSpinnerStatus;
 
   /**
    * Loading text that is shown near the icon
    * @type string
    */
-  @Input() message: string = 'Loading...';
+  @Input()
+  message: string = 'Loading...';
 
   /**
    * Spinner size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * tiny, small, medium, large, giant
    * @param {string} value
    */
-  @Input('size')
-  private set setSize(value: NbSpinnerSize) {
-    this.size = value;
-  }
+  @Input()
+  size: NbComponentSize = 'medium';
 
   /**
    * Spinner status (adds specific styles):
@@ -81,39 +79,29 @@ export class NbSpinnerComponent {
     this.status = value;
   }
 
-  @HostBinding('class.size-xxsmall')
-  get xxsmall() {
-    return this.size === NbSpinnerSize.XXSMALL;
-  }
-
-  @HostBinding('class.size-xsmall')
-  get xsmall() {
-    return this.size === NbSpinnerSize.XSMALL;
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
   @HostBinding('class.size-small')
   get small() {
-    return this.size === NbSpinnerSize.SMALL;
+    return this.size === 'small';
   }
 
   @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbSpinnerSize.MEDIUM;
+    return this.size === 'medium';
   }
 
   @HostBinding('class.size-large')
   get large() {
-    return this.size === NbSpinnerSize.LARGE;
+    return this.size === 'large';
   }
 
-  @HostBinding('class.size-xlarge')
-  get xlarge() {
-    return this.size === NbSpinnerSize.XLARGE;
-  }
-
-  @HostBinding('class.size-xxlarge')
-  get xxlarge() {
-    return this.size === NbSpinnerSize.XXLARGE;
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
   }
 
   @HostBinding('class.status-primary')
