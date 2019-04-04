@@ -124,10 +124,6 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbButtonComponent {
 
-  size: NbComponentSize;
-  status: NbComponentStatus;
-  shape: NbComponentShape;
-
   @HostBinding('class.size-tiny')
   get tiny() {
     return this.size === 'tiny';
@@ -226,27 +222,18 @@ export class NbButtonComponent {
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
    */
-  @Input('size')
-  private set setSize(val: NbComponentSize) {
-    this.size = val;
-  }
+  @Input() size: NbComponentSize;
 
   /**
    * Button status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input('status')
-  private set setStatus(val: NbComponentStatus) {
-    this.status = val;
-  }
+  @Input() status: NbComponentStatus;
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
    */
-  @Input('shape')
-  private set setShape(val: NbComponentShape) {
-    this.shape = val;
-  }
+  @Input() shape: NbComponentShape;
 
   private get iconElement() {
     const el = this.hostElement.nativeElement;
