@@ -46,16 +46,58 @@ import { NbComponentSize } from '../component-size';
  *
  * @styles
  *
- * user-font-size:
- * user-line-height:
- * user-bg:
- * user-fg:
- * user-fg-highlight:
- * user-font-family-secondary:
- * user-size-small:
- * user-size-medium:
- * user-size-large:
- * user-size-xlarge:
+ * user-picture-box-background-color:
+ * user-picture-box-border-color:
+ * user-picture-box-border-width:
+ * user-initials-text-color:
+ * user-initials-text-font-family:
+ * user-initials-text-font-weight:
+ * user-name-text-color:
+ * user-name-text-font-family:
+ * user-name-text-font-weight:
+ * user-title-text-color:
+ * user-title-text-font-family:
+ * user-title-text-font-weight:
+ * user-tiny-height:
+ * user-tiny-width:
+ * user-tiny-initials-text-font-size:
+ * user-tiny-initials-text-line-height:
+ * user-tiny-name-text-font-size:
+ * user-tiny-name-text-line-height:
+ * user-tiny-title-text-font-size:
+ * user-tiny-title-text-line-height:
+ * user-small-height:
+ * user-small-width:
+ * user-small-initials-text-font-size:
+ * user-small-initials-text-line-height:
+ * user-small-name-text-font-size:
+ * user-small-name-text-line-height:
+ * user-small-title-text-font-size:
+ * user-small-title-text-line-height:
+ * user-medium-height:
+ * user-medium-width:
+ * user-medium-initials-text-font-size:
+ * user-medium-initials-text-line-height:
+ * user-medium-name-text-font-size:
+ * user-medium-name-text-line-height:
+ * user-medium-title-text-font-size:
+ * user-medium-title-text-line-height:
+ * user-large-height:
+ * user-large-width:
+ * user-large-initials-text-font-size:
+ * user-large-initials-text-line-height:
+ * user-large-name-text-font-size:
+ * user-large-name-text-line-height:
+ * user-large-title-text-font-size:
+ * user-large-title-text-line-height:
+ * user-giant-height:
+ * user-giant-width:
+ * user-giant-initials-text-font-size:
+ * user-giant-initials-text-line-height:
+ * user-giant-name-text-font-size:
+ * user-giant-name-text-line-height:
+ * user-giant-title-text-font-size:
+ * user-giant-title-text-line-height:
  */
 @Component({
   selector: 'nb-user',
