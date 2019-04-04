@@ -30,13 +30,11 @@
   }
 
   @each $status in nb-get-statuses() {
-    @if ($status != 'basic') {
-      nb-spinner.status-#{$status} .spin-circle {
-        border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
-        border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
-        border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
-        border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
-      }
+    nb-spinner.status-#{$status} .spin-circle {
+      border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
+      border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
+      border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
+      border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
     }
   }
 

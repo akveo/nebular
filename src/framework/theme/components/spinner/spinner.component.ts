@@ -7,7 +7,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
-import { NbSpinnerStatus } from './spinner-status';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * Styled spinner component
@@ -52,8 +52,6 @@ import { NbSpinnerStatus } from './spinner-status';
 })
 export class NbSpinnerComponent {
 
-  status: NbSpinnerStatus;
-
   /**
    * Loading text that is shown near the icon
    * @type string
@@ -72,12 +70,9 @@ export class NbSpinnerComponent {
   /**
    * Spinner status (adds specific styles):
    * primary, info, success, warning, danger, white
-   * @param {string} value
    */
-  @Input('status')
-  private set setStatus(value: NbSpinnerStatus) {
-    this.status = value;
-  }
+  @Input()
+  status: '' | NbComponentStatus;
 
   @HostBinding('class.size-tiny')
   get tiny() {
@@ -106,31 +101,26 @@ export class NbSpinnerComponent {
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbSpinnerStatus.PRIMARY;
+    return this.status === 'primary';
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === NbSpinnerStatus.INFO;
+    return this.status === 'info';
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === NbSpinnerStatus.SUCCESS;
+    return this.status === 'success';
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbSpinnerStatus.WARNING;
+    return this.status === 'warning';
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbSpinnerStatus.DANGER;
-  }
-
-  @HostBinding('class.status-white')
-  get white() {
-    return this.status === NbSpinnerStatus.WHITE;
+    return this.status === 'danger';
   }
 }

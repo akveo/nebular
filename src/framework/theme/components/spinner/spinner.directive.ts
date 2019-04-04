@@ -17,9 +17,9 @@ import {
   HostBinding,
 } from '@angular/core';
 
-import { NbSpinnerComponent } from './spinner.component';
 import { NbComponentSize } from '../component-size';
-import { NbSpinnerStatus } from './spinner-status';
+import { NbComponentStatus } from '../component-status';
+import { NbSpinnerComponent } from './spinner.component';
 
 /**
  * Styled spinner directive
@@ -39,7 +39,7 @@ import { NbSpinnerStatus } from './spinner-status';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSpinnerModule,
  *   ],
  * })
@@ -64,10 +64,9 @@ import { NbSpinnerStatus } from './spinner-status';
 @Directive({selector: '[nbSpinner]'})
 export class NbSpinnerDirective implements OnInit {
 
+  private shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;
   componentFactory: ComponentFactory<NbSpinnerComponent>;
-
-  @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
   /**
    * Spinner message shown next to the icon
@@ -76,10 +75,9 @@ export class NbSpinnerDirective implements OnInit {
   @Input('nbSpinnerMessage') spinnerMessage: string;
 
   /**
-   * Spinner status color primary, info, success, warning, danger, white
-   * @type {string}
+   * Spinner status color primary, info, success, warning, danger
    */
-  @Input('nbSpinnerStatus') spinnerStatus: NbSpinnerStatus;
+  @Input('nbSpinnerStatus') spinnerStatus: '' | NbComponentStatus;
 
   /**
    * Spinner size. Possible values: tiny, small, medium, large, giant
@@ -103,7 +101,7 @@ export class NbSpinnerDirective implements OnInit {
     }
   }
 
-  private shouldShow = false;
+  @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
   constructor(private directiveView: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver,
