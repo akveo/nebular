@@ -34,13 +34,11 @@ import { NbComponentStatus } from '../component-status';
  * spinner-danger-circle-empty-color:
  * spinner-white-circle-filled-color:
  * spinner-white-circle-empty-color:
- * spinner-height-xxsmall:
- * spinner-height-xsmall:
+ * spinner-height-tiny:
  * spinner-height-small:
  * spinner-height-medium:
  * spinner-height-large:
- * spinner-height-xlarge:
- * spinner-height-xxlarge:
+ * spinner-height-giant:
  */
 @Component({
   selector: 'nb-spinner',
