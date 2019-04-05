@@ -45,7 +45,7 @@ import { NbPopoverComponent } from './popover.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbPopoverModule,
  *   ],
  * })

@@ -260,7 +260,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.detectChanges();
 
       const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
-      expect(iconContainer.className).toContain('danger-tooltip');
+      expect(iconContainer.className).toContain('status-danger');
     });
 
   });

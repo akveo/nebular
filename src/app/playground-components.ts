@@ -794,6 +794,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RadioShowcaseComponent',
         name: 'Radio Showcase',
       },
+      {
+        path: 'radio-statuses.component',
+        link: '/radio/radio-statuses.component',
+        component: 'RadioStatusesComponent',
+        name: 'Radio Statuses',
+      },
+      {
+        path: 'radio-disabled-group.component',
+        link: '/radio/radio-disabled-group.component',
+        component: 'RadioDisabledGroupComponent',
+        name: 'Radio Disabled Group',
+      },
     ],
   },
   {
