@@ -29,6 +29,7 @@
     flex-direction: row;
     list-style-type: none;
     margin: 0;
+    padding: 0;
 
     .tab {
       margin-bottom: -1px;
@@ -45,22 +46,19 @@
         text-decoration: none;
 
         &::before {
-          display: none;
           position: absolute;
           content: '';
           width: 100%;
-          height: 6px;
           border-radius: 3px;
           bottom: -2px;
           left: 0;
         }
 
-        i {
-          font-size: 1.5rem;
+        nb-icon {
           vertical-align: middle;
         }
 
-        i + span {
+        nb-icon + span {
           @include nb-ltr(margin-left, 0.5rem);
           @include nb-rtl(margin-right, 0.5rem);
         }
