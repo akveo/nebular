@@ -7,19 +7,14 @@
 @import '../../styles/core/mixins';
 
 :host {
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  border: 2px solid transparent;
-  transition: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
+  @include nb-component-animation(border-color, color, box-shadow);
 
   &:hover, &:focus {
     text-decoration: none;
@@ -30,8 +25,8 @@
   }
 
   ::ng-deep nb-icon {
-     vertical-align: top;
-   }
+    vertical-align: top;
+  }
 
   &.icon-start:not(.icon-end) ::ng-deep nb-icon {
     @include nb-ltr(margin-right, 0.75rem);
