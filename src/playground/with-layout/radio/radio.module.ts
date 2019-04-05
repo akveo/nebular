@@ -11,11 +11,16 @@ import { NbCardModule, NbRadioModule } from '@nebular/theme';
 import { RadioRoutingModule } from './radio-routing.module';
 import { RadioDisabledComponent } from './radio-disabled.component';
 import { RadioShowcaseComponent } from './radio-showcase.component';
+import { RadioStatusesComponent } from './radio-statuses.component';
+import { RadioDisabledGroupComponent } from './radio-disabled-group.component';
 
 @NgModule({
   declarations: [
     RadioDisabledComponent,
     RadioShowcaseComponent,
+    RadioDisabledComponent,
+    RadioStatusesComponent,
+    RadioDisabledGroupComponent,
   ],
   imports: [
     CommonModule,
