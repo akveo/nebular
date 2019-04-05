@@ -1172,6 +1172,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'UserHideCaptionsComponent',
         name: 'User Hide Captions',
       },
+      {
+        path: 'user-shape.component',
+        link: '/user/user-shape.component',
+        component: 'NbUserShapeComponent',
+        name: 'Nb User Shape',
+      },
     ],
   },
   {
