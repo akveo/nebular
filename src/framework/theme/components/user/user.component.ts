@@ -101,6 +101,9 @@ import { NbComponentSize } from '../component-size';
  * user-giant-initials-text-font-size:
  * user-giant-initials-text-line-height:
  * user-giant-name-text-font-size:
+ * user-giant-name-text-line-height:
+ * user-giant-title-text-font-size:
+ * user-giant-title-text-line-height:
  */
 @Component({
   selector: 'nb-user',
