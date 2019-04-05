@@ -7,74 +7,97 @@
 @mixin nb-tabset-theme() {
 
   nb-tabset {
-    // TODO: move to global mixin
     @include nb-scrollbars(
-        nb-theme(scrollbar-fg),
-        nb-theme(scrollbar-bg),
-        nb-theme(scrollbar-width));
+        nb-theme(tabset-scrollbar-color),
+        nb-theme(tabset-scrollbar-background-color),
+        nb-theme(tabset-scrollbar-width));
+
+    background-color: nb-theme(tabset-background-color);
+    border-radius: nb-theme(tabset-border-radius);
+    box-shadow: nb-theme(tabset-shadow);
 
     .tabset {
-      font-family: nb-theme(tabs-font-family);
-      font-size: nb-theme(tabs-font-size);
+      border-bottom: nb-theme(tabset-divider-width) solid nb-theme(tabset-divider-color);
+    }
 
-      padding: 0 nb-theme(tabs-padding);
-      border-bottom: 1px solid nb-theme(tabs-separator);
+    .tab-link {
+      background-color: nb-theme(tabset-tab-background-color);
+      cursor: pointer;
+      padding: nb-theme(tabset-tab-padding);
+      color: nb-theme(tabset-tab-text-color);
+      font-family: nb-theme(tabset-tab-text-font-family);
+      font-size: nb-theme(tabset-tab-text-font-size);
+      font-weight: nb-theme(tabset-tab-text-font-weight);
+      line-height: nb-theme(tabset-tab-text-line-height);
+      text-transform: nb-theme(tabset-tab-text-transform);
 
-      .tab {
-        background: nb-theme(tabs-header-bg);
-        cursor: pointer;
+      &::before {
+        background-color: nb-theme(tabset-tab-underline-color);
+        height: nb-theme(tabset-tab-underline-width);
+      }
+    }
 
-        a {
-          padding: nb-theme(tabs-padding);
-          color: nb-theme(tabs-fg);
-
-          &:hover {
-            color: nb-theme(tabs-fg-heading);
-          }
-
-          &::before {
-            background: nb-theme(tabs-selected);
-          }
+    .tab.active {
+      .tab-link {
+        background-color: nb-theme(tabset-tab-active-background-color);
+        color: nb-theme(tabset-tab-active-text-color);
+        &::before {
+          background-color: nb-theme(tabset-tab-active-underline-color);
         }
+      }
+    }
 
-        &.active {
-          background: nb-theme(tabs-active-bg);
-
-          a {
-            font-weight: nb-theme(tabs-active-font-weight);
-            color: nb-theme(tabs-fg-heading);
-          }
+    .tab:focus {
+      .tab-link {
+        background-color: nb-theme(tabset-tab-focus-background-color);
+        color: nb-theme(tabset-tab-focus-text-color);
+        &::before {
+          background-color: nb-theme(tabset-tab-focus-underline-color);
         }
+      }
+    }
 
-        &.responsive {
-          @media screen and (max-width: nb-theme(tabs-icon-only-max-width)) {
-            a span {
-              display: none;
-            }
-          }
+    .tab:hover {
+      .tab-link {
+        color: nb-theme(tabset-tab-hover-text-color);
+        background-color: nb-theme(tabset-tab-hover-background-color);
+        &::before {
+          background-color: nb-theme(tabset-tab-hover-underline-color);
         }
+      }
+    }
 
-        &.disabled {
-          cursor: default;
-          pointer-events: none;
-          a {
-            color: nb-theme(tabs-fg-disabled);
-            cursor: default;
-            pointer-events: none;
-            &:hover {
-              color: nb-theme(tabs-fg-disabled);
-            }
-          }
+    .tab.disabled {
+      cursor: default;
+      pointer-events: none;
+
+      .tab-link {
+        background-color: nb-theme(tabset-tab-disabled-background-color);
+        color: nb-theme(tabset-tab-disabled-text-color);
+        cursor: default;
+        pointer-events: none;
+        &::before {
+          background-color: nb-theme(tabset-tab-disabled-underline-color);
+        }
+      }
+    }
+
+    .tab.responsive {
+      @media screen and (max-width: nb-theme(tabset-tab-text-hide-breakpoint)) {
+        .tab-text {
+          display: none;
         }
       }
     }
 
     nb-tab {
-      font-family: nb-theme(tabs-content-font-family);
-      font-size: nb-theme(tabs-content-font-size);
-      color: nb-theme(tabs-fg-text);
-      background-color: nb-theme(tabs-bg);
-      padding: nb-theme(tabs-content-padding);
+      background-color: nb-theme(tabset-content-background-color);
+      color: nb-theme(tabset-content-text-color);
+      font-family: nb-theme(tabset-content-text-font-family);
+      font-size: nb-theme(tabset-content-text-font-size);
+      font-weight: nb-theme(tabset-content-text-font-weight);
+      line-height: nb-theme(tabset-content-text-line-height);
+      padding: nb-theme(tabset-content-padding);
     }
   }
 }
