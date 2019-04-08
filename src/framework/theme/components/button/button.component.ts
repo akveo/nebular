@@ -5,7 +5,9 @@
  */
 
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostBinding,
@@ -335,7 +337,9 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbButtonComponent {
+export class NbButtonComponent implements AfterViewInit {
+
+  protected isInitialized: boolean = false;
 
   /**
    * Button size, available sizes:
@@ -528,6 +532,11 @@ export class NbButtonComponent {
     return !!(icon && el.lastChild === icon);
   }
 
+  @HostBinding('class.transitions')
+  get transitions(): boolean {
+    return this.isInitialized;
+  }
+
   /**
    * @private
    * Keep this handler to partially support anchor disabling.
@@ -549,9 +558,17 @@ export class NbButtonComponent {
   constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
+    protected cd: ChangeDetectorRef,
   ) {}
 
-  private get iconElement() {
+  ngAfterViewInit() {
+    Promise.resolve().then(() => {
+      this.isInitialized = true;
+      this.cd.markForCheck();
+    });
+  }
+
+  protected get iconElement() {
     const el = this.hostElement.nativeElement;
     return el.querySelector('nb-icon');
   }

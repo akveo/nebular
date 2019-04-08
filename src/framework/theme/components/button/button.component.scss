@@ -15,7 +15,6 @@
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  @include nb-component-animation(border-color, color, box-shadow);
 
   &:hover, &:focus {
     text-decoration: none;
@@ -38,4 +37,8 @@
     @include nb-ltr(margin-left, 0.75rem);
     @include nb-rtl(margin-right, 0.75rem);
   }
+}
+
+:host(.transitions) {
+  @include nb-component-animation(background-color, border-color, box-shadow, color);
 }
