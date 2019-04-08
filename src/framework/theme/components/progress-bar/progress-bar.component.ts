@@ -46,26 +46,44 @@ import { NbComponentSize, NbComponentStatus } from '@nebular/theme';
  *
  * @styles
  *
- * progress-bar-height-xlg:
- * progress-bar-height-lg:
- * progress-bar-height:
- * progress-bar-height-sm:
- * progress-bar-height-xs:
- * progress-bar-font-size-xlg:
- * progress-bar-font-size-lg:
- * progress-bar-font-size:
- * progress-bar-font-size-sm:
- * progress-bar-font-size-xs:
- * progress-bar-radius:
- * progress-bar-bg-color:
- * progress-bar-font-color:
- * progress-bar-font-weight:
- * progress-bar-default-bg-color:
- * progress-bar-primary-bg-color:
- * progress-bar-success-bg-color:
- * progress-bar-info-bg-color:
- * progress-bar-warning-bg-color:
- * progress-bar-danger-bg-color:
+ * progress-bar-animation-duration:
+ * progress-bar-border-radius:
+ * progress-bar-text-font-family:
+ * progress-bar-tiny-height:
+ * progress-bar-tiny-text-font-size:
+ * progress-bar-tiny-text-font-weight:
+ * progress-bar-tiny-text-line-height:
+ * progress-bar-small-height:
+ * progress-bar-small-text-font-size:
+ * progress-bar-small-text-font-weight:
+ * progress-bar-small-text-line-height:
+ * progress-bar-medium-height:
+ * progress-bar-medium-text-font-size:
+ * progress-bar-medium-text-font-weight:
+ * progress-bar-medium-text-line-height:
+ * progress-bar-large-height:
+ * progress-bar-large-text-font-size:
+ * progress-bar-large-text-font-weight:
+ * progress-bar-large-text-line-height:
+ * progress-bar-giant-height:
+ * progress-bar-giant-text-font-size:
+ * progress-bar-giant-text-font-weight:
+ * progress-bar-giant-text-line-height:
+ * progress-bar-primary-background-color:
+ * progress-bar-primary-filled-background-color:
+ * progress-bar-primary-text-color:
+ * progress-bar-success-background-color:
+ * progress-bar-success-filled-background-color:
+ * progress-bar-success-text-color:
+ * progress-bar-info-background-color:
+ * progress-bar-info-filled-background-color:
+ * progress-bar-info-text-color:
+ * progress-bar-warning-background-color:
+ * progress-bar-warning-filled-background-color:
+ * progress-bar-warning-text-color:
+ * progress-bar-danger-background-color:
+ * progress-bar-danger-filled-background-color:
+ * progress-bar-danger-text-color:
  */
 @Component({
   selector: 'nb-progress-bar',
