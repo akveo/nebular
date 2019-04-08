@@ -281,7 +281,7 @@ describe('Component: NbSelectComponent', () => {
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
-  it(`should not call dispose on initialized resources`, () => {
+  it(`should not call dispose on uninitialized resources`, () => {
     const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
