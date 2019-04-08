@@ -93,11 +93,13 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.parent.multiple;
   }
 
-  @HostBinding('class.selected') get selectedClass(): boolean {
+  @HostBinding('class.selected')
+  get selectedClass(): boolean {
     return this.selected;
   }
 
-  @HostBinding('class.disabled') get disabledClass(): boolean {
+  @HostBinding('class.disabled')
+  get disabledClass(): boolean {
     return this.disabled;
   }
 
