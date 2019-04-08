@@ -2,15 +2,15 @@
   <div *ngIf="imageBackgroundStyle" class="user-picture image" [style.background-image]="imageBackgroundStyle">
     <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
   </div>
-  <div *ngIf="!imageBackgroundStyle" class="user-picture background" [style.background-color]="color">
-    <ng-container *ngIf="showInitialsValue">
+  <div *ngIf="!imageBackgroundStyle" class="user-picture initials" [style.background-color]="color">
+    <ng-container *ngIf="showInitials">
       {{ getInitials() }}
     </ng-container>
     <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
   </div>
 
   <div class="info-container">
-    <div *ngIf="showNameValue && name" class="user-name">{{ name }}</div>
-    <div *ngIf="showTitleValue && title" class="user-title">{{ title }}</div>
+    <div *ngIf="showName && name" class="user-name">{{ name }}</div>
+    <div *ngIf="showTitle && title" class="user-title">{{ title }}</div>
   </div>
 </div>
