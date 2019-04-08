@@ -4,7 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, HostListener, Renderer2, ElementRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Input,
+  Renderer2,
+} from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
@@ -63,6 +71,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  *
  * Icon can be placed inside of a button as a child element:
  * @stacked-example(Icon Button, button/button-icon.component.html)
+ *
+ * @additional-example(Interactive example, button/button-interactive.component))
  *
  * @styles
  *
@@ -323,6 +333,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbButtonComponent {
 
