@@ -423,7 +423,7 @@ export class NbButtonComponent implements AfterViewInit {
    * If set element will fill its container
    */
   @Input()
-  @HostBinding('class.btn-full-width')
+  @HostBinding('class.full-width')
   get fullWidth(): boolean {
     return this._fullWidth;
   }
