@@ -18,19 +18,16 @@
 
     <button nbButton (click)="enableAll = !enableAll">{{ enableAll ? 'Show disabled' : 'Enable all'  }}</button>
 
-    <div class="row" *ngFor="let appearance of appearances">
+    <div *ngFor="let appearance of appearances">
+      <p class="appearance-name">{{ appearance }}:</p>
       <ng-container *ngFor="let status of statuses">
-        <div class="column">
-          <div class="row">
-            <button nbButton [appearance]="appearance" [status]="status" [size]="selectedSize" [shape]="selectedShape">
-              {{ status }}
-            </button>
-            <button nbButton [disabled]="!enableAll" [appearance]="appearance" [status]="status" [size]="selectedSize"
-                    [shape]="selectedShape">
-              {{ status }}
-            </button>
-          </div>
-        </div>
+        <button nbButton [appearance]="appearance" [status]="status" [size]="selectedSize" [shape]="selectedShape">
+          {{ status }}
+        </button>
+        <button nbButton [disabled]="!enableAll" [appearance]="appearance" [status]="status" [size]="selectedSize"
+                [shape]="selectedShape">
+          {{ status }}
+        </button>
       </ng-container>
     </div>
 

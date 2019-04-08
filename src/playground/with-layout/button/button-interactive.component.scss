@@ -1,19 +1,15 @@
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
 fieldset {
   border: 0;
 }
 
 nb-radio-group {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
+}
+
+.appearance-name {
+  text-transform: capitalize;
 }
 
 [nbButton] {
