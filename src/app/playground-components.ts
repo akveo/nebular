@@ -800,6 +800,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RadioShowcaseComponent',
         name: 'Radio Showcase',
       },
+      {
+        path: 'radio-statuses.component',
+        link: '/radio/radio-statuses.component',
+        component: 'RadioStatusesComponent',
+        name: 'Radio Statuses',
+      },
+      {
+        path: 'radio-disabled-group.component',
+        link: '/radio/radio-disabled-group.component',
+        component: 'RadioDisabledGroupComponent',
+        name: 'Radio Disabled Group',
+      },
     ],
   },
   {
@@ -1165,6 +1177,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/user/user-hide-captions.component',
         component: 'UserHideCaptionsComponent',
         name: 'User Hide Captions',
+      },
+      {
+        path: 'user-shape.component',
+        link: '/user/user-shape.component',
+        component: 'NbUserShapeComponent',
+        name: 'Nb User Shape',
       },
     ],
   },

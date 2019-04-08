@@ -5,14 +5,13 @@
  */
 
 :host {
-  $arrow-size: 5px;
+  $arrow-size: 6px;
 
   z-index: 10000;
-  border-radius: 5px;
 
   .content {
-    padding: 0.5rem 1.25rem;
     display: flex;
+    align-items: center;
   }
 
   &.right .content {
@@ -27,11 +26,8 @@
   }
 
   nb-icon {
-    font-size: 1.25rem;
-  }
-
-  span {
-    line-height: 1.25rem;
+    font-size: 1.1em;
+    min-width: 1em;
   }
 
   nb-icon + span {

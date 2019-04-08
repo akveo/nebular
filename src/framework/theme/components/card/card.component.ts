@@ -6,25 +6,33 @@
 
 import { Component, Input, HostBinding } from '@angular/core';
 
+import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
+
 /**
  * Component intended to be used within the `<nb-card>` component.
  * It adds styles for a preset header section.
  *
  * @styles
  *
- * card-header-font-family:
- * card-header-font-size:
- * card-header-font-weight:
- * card-header-fg:
- * card-header-fg-heading:
- * card-header-active-bg:
- * card-header-active-fg:
- * card-header-disabled-bg:
- * card-header-primary-bg:
- * card-header-info-bg:
- * card-header-success-bg:
- * card-header-warning-bg:
- * card-header-danger-bg:
+ * card-header-text-color:
+ * card-header-text-font-family:
+ * card-header-text-font-size:
+ * card-header-text-font-weight:
+ * card-header-text-line-height:
+ * card-header-disabled-background-color:
+ * card-header-disabled-text-color:
+ * card-header-primary-background-color:
+ * card-header-primary-text-color:
+ * card-header-info-background-color:
+ * card-header-info-text-color:
+ * card-header-success-background-color:
+ * card-header-success-text-color:
+ * card-header-warning-background-color:
+ * card-header-warning-text-color:
+ * card-header-danger-background-color:
+ * card-header-danger-text-color:
  */
 @Component({
   selector: 'nb-card-header',
@@ -77,7 +85,7 @@ export class NbCardFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCardModule,
  *   ],
  * })
@@ -94,7 +102,7 @@ export class NbCardFooterComponent {
  * so `nb-card-body` styling will not be applied.
  *
  * Consider an example with `nb-list` component:
- * @stacked-example(Showcase, card/card-without-body.component)
+ * @stacked-example(Card with list, card/card-without-body.component)
  *
  * Colored cards could be simply configured by providing a `status` property:
  * @stacked-example(Colored Card, card/card-colors.component)
@@ -107,23 +115,30 @@ export class NbCardFooterComponent {
  *
  * @styles
  *
- * card-line-height:
- * card-font-weight:
- * card-fg-text:
- * card-bg:
- * card-height-xxsmall:
- * card-height-xsmall:
+ * card-background-color:
+ * card-text-color:
+ * card-text-font-family:
+ * card-text-font-size:
+ * card-text-font-weight:
+ * card-text-line-height:
+ * card-border-width:
+ * card-border-style:
+ * card-border-color:
+ * card-border-radius:
+ * card-padding:
+ * card-divider-color:
+ * card-divider-style:
+ * card-divider-width:
+ * card-height-tiny:
  * card-height-small:
  * card-height-medium:
  * card-height-large:
- * card-height-xlarge:
- * card-height-xxlarge:
+ * card-height-giant:
  * card-shadow:
- * card-border-radius:
- * card-padding:
- * card-margin:
- * card-separator:
- *
+ * card-margin-bottom:
+ * card-scrollbar-color:
+ * card-scrollbar-background-color:
+ * card-scrollbar-width:
  */
 @Component({
   selector: 'nb-card',
@@ -137,102 +152,103 @@ export class NbCardFooterComponent {
 })
 export class NbCardComponent {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
+  /**
+   * Card size, available sizes:
+   * tiny, small, medium, large, giant
+   */
+  @Input()
+  get size(): '' | NbComponentSize {
+    return this._size;
+  }
+  set size(value: '' | NbComponentSize) {
+    this._size = value;
+  }
+  _size: '' | NbComponentSize = '';
 
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
+  /**
+   * Card status:
+   * primary, info, success, warning, danger
+   */
+  @Input()
+  get status(): '' | NbComponentStatus {
+    return this._status;
+  }
+  set status(value: '' | NbComponentStatus) {
+    this._status = value;
+  }
+  _status: '' | NbComponentStatus = '';
 
-  static readonly ACCENT_ACTIVE = 'active';
-  static readonly ACCENT_DISABLED = 'disabled';
-  static readonly ACCENT_PRIMARY = 'primary';
-  static readonly ACCENT_INFO = 'info';
-  static readonly ACCENT_SUCCESS = 'success';
-  static readonly ACCENT_WARNING = 'warning';
-  static readonly ACCENT_DANGER = 'danger';
+  /**
+   * Card accent (color of the top border):
+   * primary, info, success, warning, danger
+   */
+  @Input()
+  get accent(): '' | NbComponentStatus {
+    return this._accent;
+  }
+  set accent(value: '' | NbComponentStatus) {
+    this._accent = value;
+  }
+  _accent: '' | NbComponentStatus;
 
-  size: string;
-  status: string;
-  accent: string;
+  @Input()
+  @HostBinding('attr.disabled')
+  get disabled(): string | null {
+    return this._disabled;
+  }
+  set disabled(value: string | null) {
+    this._disabled = convertToBoolProperty(value) ? '' : null;
+  }
+  _disabled: string | null = null;
 
-  @HostBinding('class.xxsmall-card')
-  get xxsmall() {
-    return this.size === NbCardComponent.SIZE_XXSMALL;
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.xsmall-card')
-  get xsmall() {
-    return this.size === NbCardComponent.SIZE_XSMALL;
-  }
-
-  @HostBinding('class.small-card')
+  @HostBinding('class.size-small')
   get small() {
-    return this.size === NbCardComponent.SIZE_SMALL;
+    return this.size === 'small';
   }
 
-  @HostBinding('class.medium-card')
+  @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbCardComponent.SIZE_MEDIUM;
+    return this.size === 'medium';
   }
 
-  @HostBinding('class.large-card')
+  @HostBinding('class.size-large')
   get large() {
-    return this.size === NbCardComponent.SIZE_LARGE;
+    return this.size === 'large';
   }
 
-  @HostBinding('class.xlarge-card')
-  get xlarge() {
-    return this.size === NbCardComponent.SIZE_XLARGE;
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
   }
 
-  @HostBinding('class.xxlarge-card')
-  get xxlarge() {
-    return this.size === NbCardComponent.SIZE_XXLARGE;
-  }
-
-  @HostBinding('class.active-card')
-  get active() {
-    return this.status === NbCardComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.disabled-card')
-  get disabled() {
-    return this.status === NbCardComponent.STATUS_DISABLED;
-  }
-
-  @HostBinding('class.primary-card')
+  @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbCardComponent.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.info-card')
+  @HostBinding('class.status-info')
   get info() {
-    return this.status === NbCardComponent.STATUS_INFO;
+    return this.status === 'info';
   }
 
-  @HostBinding('class.success-card')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbCardComponent.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.warning-card')
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbCardComponent.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.danger-card')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbCardComponent.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
   @HostBinding('class.accent')
@@ -242,67 +258,26 @@ export class NbCardComponent {
 
   @HostBinding('class.accent-primary')
   get primaryAccent() {
-    return this.accent === NbCardComponent.ACCENT_PRIMARY;
+    return this.accent === 'primary';
   }
 
   @HostBinding('class.accent-info')
   get infoAccent() {
-    return this.accent === NbCardComponent.ACCENT_INFO;
+    return this.accent === 'info';
   }
 
   @HostBinding('class.accent-success')
   get successAccent() {
-    return this.accent === NbCardComponent.ACCENT_SUCCESS;
+    return this.accent === 'success';
   }
 
   @HostBinding('class.accent-warning')
   get warningAccent() {
-    return this.accent === NbCardComponent.ACCENT_WARNING;
+    return this.accent === 'warning';
   }
 
   @HostBinding('class.accent-danger')
   get dangerAccent() {
-    return this.accent === NbCardComponent.ACCENT_DANGER;
+    return this.accent === 'danger';
   }
-
-  @HostBinding('class.accent-active')
-  get activeAccent() {
-    return this.accent === NbCardComponent.ACCENT_ACTIVE;
-  }
-
-  @HostBinding('class.accent-disabled')
-  get disabledAccent() {
-    return this.accent === NbCardComponent.ACCENT_DISABLED;
-  }
-
-  /**
-   * Card size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
-   */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
-
-  /**
-   * Card status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
-
-  /**
-   * Card accent (color of the top border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('accent')
-  private set setAccent(val: string) {
-    this.accent = val;
-  }
-
 }
