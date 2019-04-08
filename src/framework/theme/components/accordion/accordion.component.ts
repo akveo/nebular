@@ -72,14 +72,6 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbAccordionComponent {
 
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
   openCloseItems = new Subject<boolean>();
 
   /**
