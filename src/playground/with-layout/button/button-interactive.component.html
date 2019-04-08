@@ -2,8 +2,6 @@
   <nb-card-header>Button Colors</nb-card-header>
   <nb-card-body>
 
-    <button nbButton (click)="enableAll = !enableAll">{{ enableAll ? 'Show disabled' : 'Enable all'  }}</button>
-
     <fieldset>
       <legend>Size:</legend>
       <nb-radio-group [(value)]="selectedSize" name="size">
@@ -12,11 +10,13 @@
     </fieldset>
 
     <fieldset>
-      <legend></legend>
+      <legend>Shape:</legend>
       <nb-radio-group [(value)]="selectedShape" name="shape">
         <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
       </nb-radio-group>
     </fieldset>
+
+    <button nbButton (click)="enableAll = !enableAll">{{ enableAll ? 'Show disabled' : 'Enable all'  }}</button>
 
     <div class="row" *ngFor="let appearance of appearances">
       <ng-container *ngFor="let status of statuses">
