@@ -46,22 +46,24 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
+ * accordion-border-radius:
  * accordion-padding:
- * accordion-separator:
- * accordion-header-font-family:
- * accordion-header-font-size:
- * accordion-header-font-weight:
- * accordion-header-fg-heading:
- * accordion-header-disabled-fg:
- * accordion-header-border-width:
- * accordion-header-border-type:
+ * accordion-shadow:
+ * accordion-header-text-color:
+ * accordion-header-text-font-family:
+ * accordion-header-text-font-size:
+ * accordion-header-text-font-weight:
+ * accordion-header-text-line-height:
+ * accordion-header-disabled-text-color:
  * accordion-header-border-color:
- * accordion-item-bg:
- * accordion-item-font-size:
- * accordion-item-font-weight:
- * accordion-item-font-family:
- * accordion-item-fg-text:
- * accordion-item-shadow:
+ * accordion-header-border-style:
+ * accordion-header-border-width:
+ * accordion-item-background-color:
+ * accordion-item-text-color:
+ * accordion-item-text-font-family:
+ * accordion-item-text-font-size:
+ * accordion-item-text-font-weight:
+ * accordion-item-text-line-height:
  */
 @Component({
   selector: 'nb-accordion',
