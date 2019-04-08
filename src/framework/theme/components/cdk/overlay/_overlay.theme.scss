@@ -9,3 +9,14 @@
     z-index: 1040;
   }
 }
+
+/**
+ * In case when Nebular Layout custom scroll `withScroll` mode is enabled
+ * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
+ * so that it won't add additional positioning.
+ */
+.nebular-global-scrollblock {
+  position: static;
+  width: auto;
+  overflow: hidden;
+}
