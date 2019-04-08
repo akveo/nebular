@@ -1,7 +1,7 @@
 @mixin nd-flip-card-theme {
   .flip-button {
-    line-height: nb-theme(card-line-height);
-    margin-bottom: nb-theme(card-margin);
+    line-height: nb-theme(card-text-line-height);
+    margin-bottom: nb-theme(card-margin-bottom);
     padding: nb-theme(card-padding);
   }
 

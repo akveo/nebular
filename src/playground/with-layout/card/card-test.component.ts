@@ -13,10 +13,10 @@ import { Component } from '@angular/core';
       <nb-card-header>
         <span>Header</span>
       </nb-card-header>
-      <nb-card-body *ngIf="card.size !== 'xxsmall'">
+      <nb-card-body *ngIf="card.size !== 'tiny'">
         <span>Body</span>
       </nb-card-body>
-      <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+      <nb-card-footer *ngIf="card.size !== 'tiny'">
         <span>Footer</span>
       </nb-card-footer>
     </nb-card>
@@ -45,26 +45,26 @@ import { Component } from '@angular/core';
     <nb-reveal-card *ngFor="let card of enhancedCards.revealCards">
       <nb-card-front>
         <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
+          <nb-card-header *ngIf="card.size !== 'tiny'">
             <span>Front Header</span>
           </nb-card-header>
           <nb-card-body>
             <span>Front Reveal Card Body</span>
           </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+          <nb-card-footer *ngIf="card.size !== 'tiny'">
             <span>Front Footer</span>
           </nb-card-footer>
         </nb-card>
       </nb-card-front>
       <nb-card-back>
         <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
+          <nb-card-header *ngIf="card.size !== 'tiny'">
             <span>Back Header</span>
           </nb-card-header>
           <nb-card-body>
             <span>Back Reveal Card Body</span>
           </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+          <nb-card-footer *ngIf="card.size !== 'tiny'">
             <span>Back Footer</span>
           </nb-card-footer>
         </nb-card>
@@ -76,26 +76,26 @@ import { Component } from '@angular/core';
     <nb-flip-card *ngFor="let card of enhancedCards.flipCards">
       <nb-card-front>
         <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
+          <nb-card-header *ngIf="card.size !== 'tiny'">
             <span>Front Header</span>
           </nb-card-header>
           <nb-card-body>
             <span>Front Flip Card Body</span>
           </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+          <nb-card-footer *ngIf="card.size !== 'tiny'">
             <span>Front Footer</span>
           </nb-card-footer>
         </nb-card>
       </nb-card-front>
       <nb-card-back>
         <nb-card [accent]="card.accent" [status]="card.status" [size]="card.size">
-          <nb-card-header *ngIf="card.size !== 'xxsmall'">
+          <nb-card-header *ngIf="card.size !== 'tiny'">
             <span>Back Header</span>
           </nb-card-header>
           <nb-card-body>
             <span>Back Flip Card Body</span>
           </nb-card-body>
-          <nb-card-footer *ngIf="card.size !== 'xxsmall'">
+          <nb-card-footer *ngIf="card.size !== 'tiny'">
             <span>Back Footer</span>
           </nb-card-footer>
         </nb-card>
@@ -105,9 +105,9 @@ import { Component } from '@angular/core';
 })
 export class CardTestComponent {
 
-  sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
-  statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
-  accents = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
+  sizes = ['tiny', 'small', 'medium', 'large', 'giant'];
+  statuses = ['primary', 'success', 'info', 'warning', 'danger'];
+  accents = ['primary', 'success', 'info', 'warning', 'danger'];
 
   cards: any[];
   enhancedCards: any;
