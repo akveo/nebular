@@ -12,33 +12,28 @@ import { Component } from '@angular/core';
      <nb-card accent="primary" size="small">
       <nb-card-body>
         <div class="d-flex align-items-start">
-          <button nbButton status="success" size="large" (click)="toggleLoadingAnimation()"
+          <button nbButton status="success" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button nbButton status="primary" size="large" (click)="toggleLoadingAnimation()"
+          <button nbButton status="primary" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button nbButton status="warning" size="large" (click)="toggleLoadingAnimation()"
+          <button nbButton status="warning" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button nbButton status="danger" size="medium" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerMessage="">
+          <button nbButton status="danger" (click)="toggleLoadingAnimation()"
+                  [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
 
-          <button nbButton status="info" size="medium" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="small" nbSpinnerMessage="">
-            Download
-          </button>
-
-          <button nbButton status="info" size="medium" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xsmall" nbSpinnerMessage="">
+          <button nbButton status="info" (click)="toggleLoadingAnimation()"
+                  [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">
             Download
           </button>
         </div>
