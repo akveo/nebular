@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>Button Colors</nb-card-header>
+  <nb-card-body>
+
+    <button nbButton (click)="enableAll = !enableAll">{{ enableAll ? 'Show disabled' : 'Enable all'  }}</button>
+
+    <fieldset>
+      <legend>Size:</legend>
+      <nb-radio-group [(value)]="selectedSize" name="size">
+        <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <legend></legend>
+      <nb-radio-group [(value)]="selectedShape" name="shape">
+        <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <div class="row" *ngFor="let appearance of appearances">
+      <ng-container *ngFor="let status of statuses">
+        <div class="column">
+          <div class="row">
+            <button nbButton [appearance]="appearance" [status]="status" [size]="selectedSize" [shape]="selectedShape">
+              {{ status }}
+            </button>
+            <button nbButton [disabled]="!enableAll" [appearance]="appearance" [status]="status" [size]="selectedSize"
+                    [shape]="selectedShape">
+              {{ status }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </nb-card-body>
+</nb-card>

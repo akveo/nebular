@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: 0;
+}
+
+nb-radio-group {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+[nbButton] {
+  margin-right: 0.75rem;
+  margin-bottom: 1rem;
+}
