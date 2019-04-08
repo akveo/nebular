@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, zip } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 import { NbSelectModule } from './select.module';
 import { NbThemeModule } from '../../theme.module';
@@ -74,6 +75,7 @@ export class NbSelectTestComponent {
   @Input() customLabel: boolean;
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @ViewChild(NbSelectComponent) select: NbSelectComponent<any>;
+  @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
   groups = TEST_GROUPS;
 }
 
@@ -113,6 +115,27 @@ export class NbReactiveFormSelectComponent {
   showSelect: boolean = true;
   formControl: FormControl = new FormControl();
 
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
+}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select [(ngModel)]="selectedValue">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbNgModelSelectComponent {
+  options: number[] = [ 1 ];
+  selectedValue: number = null;
+
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
@@ -143,6 +166,7 @@ describe('Component: NbSelectComponent', () => {
         NbSelectTestComponent,
         NbSelectWithInitiallySelectedOptionComponent,
         NbReactiveFormSelectComponent,
+        NbNgModelSelectComponent,
       ],
     });
 
@@ -218,7 +242,7 @@ describe('Component: NbSelectComponent', () => {
     expect(overlayContainer.querySelectorAll('nb-option.selected').length).toBe(0);
   });
 
-  it('should deselect all items when clicking on reselect item in multiple select', () => {
+  it('should deselect all items when clicking on reset item in multiple select', () => {
     select.multiple = true;
     setSelectedAndOpen(['Option 1', 'Option 2']);
 
@@ -281,32 +305,182 @@ describe('Component: NbSelectComponent', () => {
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
+  it('should ignore selection change if destroyed', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
+    const testSelectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const setSelectionSpy = spyOn((testSelectComponent.selectComponent as any), 'setSelection').and.callThrough();
+    testSelectComponent.showSelect = false;
+    selectFixture.detectChanges();
+
+    expect(() => testSelectComponent.formControl.setValue(1)).not.toThrow();
+    expect(setSelectionSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should select option set through formControl binding', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
+    const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const optionSelectSpy = spyOn(testComponent.optionComponent, 'select').and.callThrough();
+
+    expect(testComponent.optionComponent.selected).toEqual(false);
+
+    testComponent.formControl.setValue(1);
+    selectFixture.detectChanges();
+
+    expect(testComponent.optionComponent.selected).toEqual(true);
+    expect(optionSelectSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should select option set through select "selected" binding', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const optionToSelect = testComponent.options.last;
+    const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
+
+    expect(optionToSelect.selected).toEqual(false);
+
+    testComponent.selected = optionToSelect.value;
+    selectFixture.detectChanges();
+
+    expect(optionToSelect.selected).toEqual(true);
+    expect(optionSelectSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should select option set through ngModel binding', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbNgModelSelectComponent);
+    const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const optionToSelect = testComponent.optionComponent;
+    const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
+
+    expect(optionToSelect.selected).toEqual(false);
+
+    testComponent.selectedValue = optionToSelect.value;
+    selectFixture.detectChanges();
+    // need to call flush because NgModelDirective updates value on
+    // resolvedPromise.then
+    flush();
+    selectFixture.detectChanges();
+
+    expect(optionToSelect.selected).toEqual(true);
+    expect(optionSelectSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should unselect previously selected option', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    const testSelectComponent = selectFixture.componentInstance;
+    testSelectComponent.selected = TEST_GROUPS[0].options[0].value;
+    selectFixture.detectChanges();
+    flush();
+    selectFixture.detectChanges();
+
+    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find(o => o.selected);
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    selectedOption.selectionChange.subscribe(selectionChangeSpy);
+
+    testSelectComponent.selected = TEST_GROUPS[0].options[1].value;
+    selectFixture.detectChanges();
+
+    expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
+    expect(selectedOption.selected).toEqual(false);
+  }));
+
+  it('should not deselect option if option stays selected', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    const testSelectComponent = selectFixture.componentInstance;
+    testSelectComponent.selected = TEST_GROUPS[0].options[0].value;
+    selectFixture.detectChanges();
+    flush();
+    selectFixture.detectChanges();
+
+    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find(o => o.selected);
+    const selectionChangeSpy = spyOn(selectedOption, 'deselect');
+
+    testSelectComponent.selected = selectedOption.value;
+    selectFixture.detectChanges();
+
+    expect(selectionChangeSpy).not.toHaveBeenCalled();
+  }));
+
   it(`should not call dispose on uninitialized resources`, () => {
     const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
+});
 
-  describe('NbOptionComponent', () => {
-    it('should ignore selection change if destroyed', () => {
-      const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
-      const testSelectComponent = selectFixture.componentInstance;
-      selectFixture.detectChanges();
+describe('NbOptionComponent', () => {
+  let fixture: ComponentFixture<NbReactiveFormSelectComponent>;
+  let testSelectComponent: NbReactiveFormSelectComponent;
+  let option: NbOptionComponent<number>;
 
-      const option = testSelectComponent.optionComponent;
-      const markForCheckSpy = spyOn((option as any).cd, 'markForCheck').and.callThrough();
-
-      testSelectComponent.formControl.setValue(1);
-      selectFixture.detectChanges();
-
-      expect(option.selected).toEqual(true);
-      expect(markForCheckSpy).toHaveBeenCalledTimes(1);
-
-      testSelectComponent.showSelect = false;
-      selectFixture.detectChanges();
-
-      expect(() => testSelectComponent.formControl.setValue(2)).not.toThrow();
-      expect(option.selected).toEqual(true);
-      expect(markForCheckSpy).toHaveBeenCalledTimes(1);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [
+        NbNgModelSelectComponent,
+        NbSelectTestComponent,
+        NbReactiveFormSelectComponent,
+      ],
     });
+
+    fixture = TestBed.createComponent(NbReactiveFormSelectComponent);
+    testSelectComponent = fixture.componentInstance;
+    fixture.detectChanges();
+    option = testSelectComponent.optionComponent;
   });
+
+  it('should ignore selection change if destroyed', fakeAsync(() => {
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    option.selectionChange.subscribe(selectionChangeSpy);
+
+    expect(option.selected).toEqual(false);
+    testSelectComponent.showSelect = false;
+    fixture.detectChanges();
+
+    expect((option as any).alive).toEqual(false);
+
+    option.select();
+
+    expect(option.selected).toEqual(false);
+    expect(selectionChangeSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should not emit selection change when already selected', fakeAsync(() => {
+    option.select();
+    fixture.detectChanges();
+    expect(option.selected).toEqual(true);
+
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    option.selectionChange.subscribe(selectionChangeSpy);
+    option.select();
+
+    expect(option.selected).toEqual(true);
+    expect(selectionChangeSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should emit selection change when deselected', fakeAsync(() => {
+    option.select();
+    fixture.detectChanges();
+    expect(option.selected).toEqual(true);
+
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    option.selectionChange.subscribe(selectionChangeSpy);
+    option.deselect();
+
+    expect(option.selected).toEqual(false);
+    expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
+  }));
 });

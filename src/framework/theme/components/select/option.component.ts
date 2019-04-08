@@ -18,6 +18,7 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { convertToBoolProperty } from '../helpers';
 import { NbSelectComponent } from './select.component';
 
@@ -52,9 +53,17 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   /**
-   * Fires value on click.
+   * Fires value when option selection change.
    * */
   @Output() selectionChange: EventEmitter<NbOptionComponent<T>> = new EventEmitter();
+
+  /**
+   * Fires when option clicked
+   */
+  private click$: Subject<NbOptionComponent<T>> = new Subject<NbOptionComponent<T>>();
+  get click(): Observable<NbOptionComponent<T>> {
+    return this.click$.asObservable();
+  }
 
   selected: boolean = false;
   disabled: boolean = false;
@@ -96,7 +105,7 @@ export class NbOptionComponent<T> implements OnDestroy {
 
   @HostListener('click')
   onClick() {
-    this.selectionChange.emit(this);
+    this.click$.next(this);
   }
 
   select() {
@@ -107,7 +116,7 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
-  private setSelection(isSelected: boolean): void {
+  private setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
      * This may lead to exceptions with detecting changes in destroyed component.
@@ -115,10 +124,10 @@ export class NbOptionComponent<T> implements OnDestroy {
      * Also Angular can call writeValue on destroyed view (select implements ControlValueAccessor).
      * angular/angular#27803
      * */
-    if (this.alive) {
-      this.selected = isSelected;
+    if (this.alive && this.selected !== selected) {
+      this.selected = selected;
+      this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
   }
 }
-
