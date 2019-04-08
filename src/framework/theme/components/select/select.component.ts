@@ -252,7 +252,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    */
   overlayPosition: NbPosition = '' as NbPosition;
 
-  /* @deprecated */
   protected selectionChange$: Subject<NbOptionComponent<T>> = new Subject();
   /**
    * Stream of events that will fire when one of the options is clicked.
