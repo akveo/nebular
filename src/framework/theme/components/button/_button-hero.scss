@@ -54,21 +54,21 @@
           background-image: linear-gradient(to right, $left-disabled-color, $right-disabled-color);
         }
 
-        //&.button-pulse {
-        //  animation: button-hero-#{$status}-pulse 0.75s infinite alternate;
-        //}
+        &.button-pulse {
+          animation: button-hero-#{$status}-pulse 0.75s infinite alternate;
+        }
 
-        //keyframes button-#{$status}-pulse {
-        //  0% {
-        //    box-shadow: none;
-        //    opacity: nb-theme(button-disabled-opacity);
-        //  }
-        //
-        //  100% {
-        //    box-shadow: 0 0 1rem 0 nb-theme(color-#{$status});
-        //    opacity: 0.8;
-        //  }
-        //}
+        keyframes button-#{$status}-pulse {
+          0% {
+            box-shadow: none;
+            opacity: nb-theme(button-disabled-opacity);
+          }
+
+          100% {
+            box-shadow: 0 0 1rem 0 nb-theme(color-#{$status});
+            opacity: 0.8;
+          }
+        }
       }
     }
   }
