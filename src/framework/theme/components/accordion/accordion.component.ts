@@ -30,7 +30,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbAccordionModule,
  *   ],
  * })
@@ -38,11 +38,11 @@ import { convertToBoolProperty } from '../helpers';
  * ```
  * ### Usage
  *
- * With `multi` mode acordion can have multiple items expanded:
- * @stacked-example(Showcase, accordion/accordion-multi.component)
+ * With `multi` mode accordion can have multiple items expanded:
+ * @stacked-example(Multiple expanded items, accordion/accordion-multi.component)
  *
- * `NbAccordionItemComponent` has several method, for example it is possible to trigger item click/toggle:
- * @stacked-example(Showcase, accordion/accordion-toggle.component)
+ * `NbAccordionItemComponent` has several methods, for example it is possible to trigger item click/toggle:
+ * @stacked-example(Expand API, accordion/accordion-toggle.component)
  *
  * @styles
  *
