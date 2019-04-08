@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
+import { NbComponentSize, NbComponentStatus } from '@nebular/theme';
 
 /**
  * Progress Bar is a component for indicating progress.
@@ -82,26 +83,21 @@ export class NbProgressBarComponent {
 
   /**
    * Progress bar value in percent (0 - 100)
-   * @type {number}
-   * @private
    */
   @Input() value: number = 0;
 
   /**
-   * Progress bar background (primary, info success, warning, danger)
-   * @param {string} val
+   * Progress bar background (`primary` (default), `info`, `success`, `warning`, `danger`)
    */
-  @Input() status: string;
+  @Input() status: NbComponentStatus = 'primary';
 
   /**
-   * Progress bar size (xs, sm, lg, xlg)
-   * @param {string} val
+   * Progress bar size (`tiny`, `small`, `medium` (default), `large`, `giant`)
    */
-  @Input() size: string;
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Displays value inside progress bar
-   * @param {string} val
    */
   @Input() displayValue: boolean = false;
 
