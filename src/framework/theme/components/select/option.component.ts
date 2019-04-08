@@ -116,7 +116,7 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
-  private setSelection(isSelected: boolean): void {
+  private setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
      * This may lead to exceptions with detecting changes in destroyed component.
@@ -124,8 +124,8 @@ export class NbOptionComponent<T> implements OnDestroy {
      * Also Angular can call writeValue on destroyed view (select implements ControlValueAccessor).
      * angular/angular#27803
      * */
-    if (this.alive && this.selected !== isSelected) {
-      this.selected = isSelected;
+    if (this.alive && this.selected !== selected) {
+      this.selected = selected;
       this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
