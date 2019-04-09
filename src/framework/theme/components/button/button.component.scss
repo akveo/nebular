@@ -7,16 +7,12 @@
 @import '../../styles/core/mixins';
 
 :host {
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  border: 2px solid transparent;
-  transition: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
@@ -25,13 +21,13 @@
     text-decoration: none;
   }
 
-  &.btn-full-width {
+  &.full-width {
     width: 100%;
   }
 
   ::ng-deep nb-icon {
-     vertical-align: top;
-   }
+    vertical-align: top;
+  }
 
   &.icon-start:not(.icon-end) ::ng-deep nb-icon {
     @include nb-ltr(margin-right, 0.75rem);
@@ -42,4 +38,8 @@
     @include nb-ltr(margin-left, 0.75rem);
     @include nb-rtl(margin-right, 0.75rem);
   }
+}
+
+:host(.transitions) {
+  @include nb-component-animation(background-color, border-color, box-shadow, color);
 }
