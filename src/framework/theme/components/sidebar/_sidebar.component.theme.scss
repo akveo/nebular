@@ -18,9 +18,9 @@
     width: nb-theme(sidebar-width);
 
     @include nb-scrollbars(
-        nb-theme(scrollbar-fg),
-        nb-theme(scrollbar-bg),
-        nb-theme(scrollbar-width));
+        nb-theme(sidebar-scrollbar-color),
+        nb-theme(sidebar-scrollbar-background-color),
+        nb-theme(sidebar-scrollbar-width));
 
     .main-container {
       background-color: nb-theme(sidebar-background-color);
