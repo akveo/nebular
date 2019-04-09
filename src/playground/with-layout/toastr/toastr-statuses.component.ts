@@ -9,7 +9,7 @@ import { NbToastrService } from '@nebular/theme';
     <button nbButton status="warning" (click)="showToast('warning')">Warning</button>
     <button nbButton status="primary" (click)="showToast('primary')">Primary</button>
     <button nbButton status="danger" (click)="showToast('danger')">Danger</button>
-    <button nbButton status="default" (click)="showToast('default')">Default</button>
+    <button nbButton (click)="showToast('default')">Default</button>
   `,
   styles: [
       `
