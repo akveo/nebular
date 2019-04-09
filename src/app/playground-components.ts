@@ -180,6 +180,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonIconComponent',
         name: 'Button Icon',
       },
+      {
+        path: 'button-interactive.component',
+        link: '/button/button-interactive.component',
+        component: 'ButtonInteractiveComponent',
+        name: 'Button Interactive',
+      },
     ],
   },
   {
