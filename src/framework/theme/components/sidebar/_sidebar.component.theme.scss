@@ -8,20 +8,24 @@
 
   nb-sidebar {
 
-    font-size: nb-theme(sidebar-font-size);
-    line-height: nb-theme(sidebar-line-height);
+    background-color: nb-theme(sidebar-background-color);
     box-shadow: nb-theme(sidebar-shadow);
+    color: nb-theme(sidebar-text-color);
+    font-family: nb-theme(sidebar-text-font-family);
+    font-size: nb-theme(sidebar-text-font-size);
+    font-weight: nb-theme(sidebar-text-font-weight);
+    line-height: nb-theme(sidebar-text-line-height);
+    width: nb-theme(sidebar-width);
 
     @include nb-scrollbars(
         nb-theme(scrollbar-fg),
         nb-theme(scrollbar-bg),
         nb-theme(scrollbar-width));
 
-
     .main-container {
+      background-color: nb-theme(sidebar-background-color);
       height: nb-theme(sidebar-height);
       width: nb-theme(sidebar-width);
-      background: nb-theme(sidebar-bg);
     }
 
     .scrollable {
@@ -34,10 +38,6 @@
         -webkit-overflow-scrolling: touch;
       }
     }
-
-    width: nb-theme(sidebar-width);
-    background: nb-theme(sidebar-bg);
-    color: nb-theme(sidebar-fg);
 
     // TODO: width used to use transition on width
     &.collapsed {
@@ -80,7 +80,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: nb-theme(color-fg-highlight);
+            background: nb-theme(sidebar-menu-item-highlight-color);
           }
         }
 
