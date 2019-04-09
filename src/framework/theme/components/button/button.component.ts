@@ -562,7 +562,7 @@ export class NbButtonComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    Promise.resolve().then(() => {
+    setTimeout(() => {
       this.isInitialized = true;
       this.cd.markForCheck();
     });
