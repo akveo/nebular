@@ -12,6 +12,7 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
@@ -20,7 +21,7 @@
     text-decoration: none;
   }
 
-  &.btn-full-width {
+  &.full-width {
     width: 100%;
   }
 
