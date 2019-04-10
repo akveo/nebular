@@ -30,7 +30,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbAccordionModule,
  *   ],
  * })
@@ -38,30 +38,32 @@ import { convertToBoolProperty } from '../helpers';
  * ```
  * ### Usage
  *
- * With `multi` mode acordion can have multiple items expanded:
- * @stacked-example(Showcase, accordion/accordion-multi.component)
+ * With `multi` mode accordion can have multiple items expanded:
+ * @stacked-example(Multiple expanded items, accordion/accordion-multi.component)
  *
- * `NbAccordionItemComponent` has several method, for example it is possible to trigger item click/toggle:
- * @stacked-example(Showcase, accordion/accordion-toggle.component)
+ * `NbAccordionItemComponent` has several methods, for example it is possible to trigger item click/toggle:
+ * @stacked-example(Expand API, accordion/accordion-toggle.component)
  *
  * @styles
  *
+ * accordion-border-radius:
  * accordion-padding:
- * accordion-separator:
- * accordion-header-font-family:
- * accordion-header-font-size:
- * accordion-header-font-weight:
- * accordion-header-fg-heading:
- * accordion-header-disabled-fg:
- * accordion-header-border-width:
- * accordion-header-border-type:
+ * accordion-shadow:
+ * accordion-header-text-color:
+ * accordion-header-text-font-family:
+ * accordion-header-text-font-size:
+ * accordion-header-text-font-weight:
+ * accordion-header-text-line-height:
+ * accordion-header-disabled-text-color:
  * accordion-header-border-color:
- * accordion-item-bg:
- * accordion-item-font-size:
- * accordion-item-font-weight:
- * accordion-item-font-family:
- * accordion-item-fg-text:
- * accordion-item-shadow:
+ * accordion-header-border-style:
+ * accordion-header-border-width:
+ * accordion-item-background-color:
+ * accordion-item-text-color:
+ * accordion-item-text-font-family:
+ * accordion-item-text-font-size:
+ * accordion-item-text-font-weight:
+ * accordion-item-text-line-height:
  */
 @Component({
   selector: 'nb-accordion',
@@ -71,14 +73,6 @@ import { convertToBoolProperty } from '../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionComponent {
-
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
 
   openCloseItems = new Subject<boolean>();
 
