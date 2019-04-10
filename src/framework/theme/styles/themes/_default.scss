@@ -53,9 +53,8 @@ $theme: (
 
   shadow: 0 2px 12px 0 #dfe3eb,
 
-  scrollbar-fg: #dadada,
-  scrollbar-bg: #f2f2f2,
-  scrollbar-width: 5px,
+  scrollbar-fg: scrollbar-color,
+  scrollbar-bg: scrollbar-background-color,
   scrollbar-thumb-radius: 2.5px,
 
   radial-gradient: none,
@@ -254,6 +253,10 @@ $theme: (
   outline-width: 0.375rem,
   outline-color: color-basic-300,
 
+  scrollbar-color: color-basic-300,
+  scrollbar-background-color: color-basic-100,
+  scrollbar-width: 0.3125rem,
+
   /* Components mappings */
 
   card-background-color: color-white,
@@ -299,8 +302,8 @@ $theme: (
   card-shadow: none,
   card-margin-bottom: 1.5rem,
 
-  card-scrollbar-color: scrollbar-fg,
-  card-scrollbar-background-color: scrollbar-bg,
+  card-scrollbar-color: scrollbar-color,
+  card-scrollbar-background-color: scrollbar-background-color,
   card-scrollbar-width: scrollbar-width,
 
   header-font-family: font-secondary,
@@ -336,10 +339,12 @@ $theme: (
   layout-medium-padding: 1.5rem 1.5rem 0.5rem,
   layout-small-padding: 1rem 1rem 0,
 
-  sidebar-font-size: font-size,
-  sidebar-line-height: line-height,
-  sidebar-fg: color-fg-heading,
-  sidebar-bg: color-bg,
+  sidebar-background-color: color-basic-100,
+  sidebar-text-color: text-dark-color,
+  sidebar-text-font-family: text-paragraph-font-family,
+  sidebar-text-font-size: text-paragraph-font-size,
+  sidebar-text-font-weight: text-paragraph-font-weight,
+  sidebar-text-line-height: text-paragraph-line-height,
   sidebar-height: 100vh,
   sidebar-width: 16rem,
   sidebar-width-compact: 3.5rem,
@@ -347,6 +352,10 @@ $theme: (
   sidebar-header-height: 3.5rem,
   sidebar-footer-height: 3.5rem,
   sidebar-shadow: shadow,
+  sidebar-menu-item-highlight-color: color-primary,
+  sidebar-scrollbar-background-color: scrollbar-background-color,
+  sidebar-scrollbar-color: scrollbar-color,
+  sidebar-scrollbar-width: scrollbar-width,
 
   menu-font-family: font-secondary,
   menu-font-size: font-size,
@@ -420,8 +429,8 @@ $theme: (
   tabset-content-text-font-weight: text-paragraph-font-weight,
   tabset-content-text-line-height: text-paragraph-line-height,
 
-  tabset-scrollbar-color: scrollbar-fg,
-  tabset-scrollbar-background-color: scrollbar-bg,
+  tabset-scrollbar-color: scrollbar-color,
+  tabset-scrollbar-background-color: scrollbar-background-color,
   tabset-scrollbar-width: scrollbar-width,
   tabset-tab-text-hide-breakpoint: 36rem,
 
@@ -459,8 +468,8 @@ $theme: (
   route-tabset-divider-color: divider-color,
   route-tabset-divider-width: 1px,
 
-  route-tabset-scrollbar-color: scrollbar-fg,
-  route-tabset-scrollbar-background-color: scrollbar-bg,
+  route-tabset-scrollbar-color: scrollbar-color,
+  route-tabset-scrollbar-background-color: scrollbar-background-color,
   route-tabset-scrollbar-width: scrollbar-width,
   route-tabset-tab-text-hide-breakpoint: 36rem,
 
