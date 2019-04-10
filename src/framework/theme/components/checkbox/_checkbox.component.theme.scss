@@ -71,7 +71,7 @@
     }
 
     .native-input:focus + .custom-checkbox {
-      border-color: nb-theme(checkbox-#{$status}-focus-background-color);
+      border-color: nb-theme(checkbox-#{$status}-focus-border-color);
     }
 
     .custom-checkbox:hover {
@@ -80,8 +80,8 @@
     }
 
     .native-input:active + .custom-checkbox {
-      background-color: nb-theme(checkbox-#{$status}-hover-background-color);
-      border-color: nb-theme(checkbox-#{$status}-hover-border-color);
+      background-color: nb-theme(checkbox-#{$status}-active-background-color);
+      border-color: nb-theme(checkbox-#{$status}-active-border-color);
     }
 
     .native-input:disabled {
