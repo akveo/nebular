@@ -1,0 +1,47 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin button-outline() {
+  [nbButton].appearance-outline {
+    background-color: transparent;
+    border-style: nb-theme(button-outline-border-style);
+    border-width: nb-theme(button-outline-border-width);
+    text-transform: nb-theme(button-outline-text-transform);
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        padding: nb-theme(button-outline-#{$size}-padding);
+      }
+    }
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        border-color: nb-theme(button-outline-#{$status}-border-color);
+        color: nb-theme(button-outline-#{$status}-text-color);
+
+        &:focus {
+          border-color: nb-theme(button-outline-#{$status}-focus-border-color);
+          color: nb-theme(button-outline-#{$status}-focus-text-color);
+        }
+
+        &:hover {
+          border-color: nb-theme(button-outline-#{$status}-hover-border-color);
+          color: nb-theme(button-outline-#{$status}-hover-text-color);
+        }
+
+        &:active {
+          border-color: nb-theme(button-outline-#{$status}-active-border-color);
+          color: nb-theme(button-outline-#{$status}-active-text-color);
+        }
+
+        &[disabled] {
+          border-color: nb-theme(button-outline-#{$status}-disabled-border-color);
+          color: nb-theme(button-outline-#{$status}-disabled-text-color);
+        }
+      }
+    }
+  }
+}
