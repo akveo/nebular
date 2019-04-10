@@ -42,7 +42,6 @@ $nb-themes-export: () !global;
     $result: map-set($result, $var, '--var(#{$var})');
   }
 
-  @debug $result;
   @return $result;
 }
 
@@ -145,7 +144,7 @@ $nb-themes-export: () !global;
     @content;
   }
 }
-    
+
 // Add content for theme into a list of themes
 @mixin nb-for-themes($names...) {
   @each $name in $names {
