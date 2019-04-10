@@ -442,9 +442,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       .pipe(
         filter(() => this.withScrollValue),
       )
-      .subscribe((scrollable) => {
+      .subscribe((scrollable: boolean) => {
         const root = this.document.documentElement;
-        const scrollBlockClass = 'nebular-global-scrollblock';
+        const scrollBlockClass = 'nb-global-scrollblock';
 
         this.overlayScrollBlock = !scrollable;
 
@@ -454,9 +454,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
          * so that it won't add additional positioning.
          */
         if (!scrollable) {
-          root.classList.add(scrollBlockClass);
+          this.renderer.addClass(root, scrollBlockClass);
         } else {
-          root.classList.remove(scrollBlockClass);
+          this.renderer.removeClass(root, scrollBlockClass);
         }
       });
 

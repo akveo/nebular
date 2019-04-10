@@ -15,7 +15,7 @@
  * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
  * so that it won't add additional positioning.
  */
-.nebular-global-scrollblock {
+.nb-global-scrollblock {
   position: static;
   width: auto;
   overflow: hidden;
