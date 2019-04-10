@@ -1365,12 +1365,12 @@ $theme: (
   select-option-disabled-opacity: 0.3,
   select-option-padding: 0.75rem 1.5rem,
 
-  datepicker-fg: color-fg-heading,
-  datepicker-bg: color-bg,
-  datepicker-border: color-success,
-  datepicker-border-radius: radius,
+  datepicker-text-color: text-dark-color,
+  datepicker-background-color: color-white,
+  datepicker-border-color: color-primary,
+  datepicker-border-radius: 0.75rem,
   datepicker-shadow: none,
-  datepicker-arrow-size: 11px,
+  datepicker-arrow-size: 0.6875rem,
 
   radio-width: 1.125rem,
   radio-height: 1.125rem,
