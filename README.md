@@ -20,7 +20,7 @@ At the same time, Nebular allows you to use it together with any other UI librar
 Install Nebular with Angular CLI
 
 ```bash
-ng add @nebular/theme
+ng add @nebular/theme@3
 ```
 
 And that's it. Configuration will be done automatically.
@@ -32,9 +32,9 @@ If you want to have more control over setup process you may use manual setup gui
 1. Install Nebular modules
 
 ```bash
-npm install --save @nebular/theme @angular/cdk @angular/animations
+npm install --save @nebular/theme@3 @angular/cdk @angular/animations
 ```
-Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
+Additionally you can install Auth and Security `npm install --save @nebular/auth@3 @nebular/security@3`
 
 2. Register Nebular theme module into `app.module`:
 
