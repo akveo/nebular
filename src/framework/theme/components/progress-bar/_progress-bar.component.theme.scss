@@ -5,58 +5,47 @@
  */
 
 @mixin nb-progress-bar-theme() {
+  nb-progress-bar {
+    .progress-container {
+      border-radius: nb-theme(progress-bar-border-radius);
+    }
 
-  .progress-container {
-    height: nb-theme(progress-bar-height);
-    border-radius: nb-theme(progress-bar-radius);
-    background-color: nb-theme(progress-bar-bg);
-    &.xlg {
-      .progress-value {
-        font-size: nb-theme(progress-bar-font-size-xlg);
-      }
-      height: nb-theme(progress-bar-height-xlg);
-    }
-    &.lg {
-      .progress-value {
-        font-size: nb-theme(progress-bar-font-size-lg);
-      }
-      height: nb-theme(progress-bar-height-lg);
-    }
-    &.sm {
-      .progress-value {
-        font-size: nb-theme(progress-bar-font-size-sm);
-      }
-      height: nb-theme(progress-bar-height-sm);
-    }
-    &.xs {
-      .progress-value {
-        font-size: nb-theme(progress-bar-font-size-xs);
-      }
-      height: nb-theme(progress-bar-height-xs);
+    .progress-value {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: nb-theme(progress-bar-text-font-family);
+      transition-duration: nb-theme(progress-bar-animation-duration);
+      transition-property: width, background-color;
     }
   }
-  .progress-value {
-    background-color: nb-theme(progress-bar-default-bg);
-    color: nb-theme(progress-bar-font-color);
-    font-size: nb-theme(progress-bar-font-size);
-    font-weight: nb-theme(progress-bar-font-weight);
-    line-height: nb-theme(progress-bar-line-height);
-    transition-duration: nb-theme(progress-bar-animation-duration);
-    transition-property: width, background-color;
-    &.primary {
-      background-color: nb-theme(progress-bar-primary-bg);
+
+  @each $size in nb-get-sizes() {
+
+    nb-progress-bar.size-#{$size} {
+      .progress-container {
+        height: nb-theme(progress-bar-#{$size}-height);
+      }
+
+      .progress-value {
+        font-size: nb-theme(progress-bar-#{$size}-text-font-size);
+        font-weight: nb-theme(progress-bar-#{$size}-text-font-weight);
+        line-height: nb-theme(progress-bar-#{$size}-text-line-height);
+      }
     }
-    &.info {
-      background-color: nb-theme(progress-bar-info-bg);
-    }
-    &.success {
-      background-color: nb-theme(progress-bar-success-bg);
-    }
-    &.warning {
-      background-color: nb-theme(progress-bar-warning-bg);
-    }
-    &.danger {
-      background-color: nb-theme(progress-bar-danger-bg);
+  }
+
+  @each $status in nb-get-statuses() {
+
+    nb-progress-bar.status-#{$status} {
+      .progress-container {
+        background-color: nb-theme(progress-bar-#{$status}-background-color);
+      }
+
+      .progress-value {
+        background-color: nb-theme(progress-bar-#{$status}-filled-background-color);
+        color: nb-theme(progress-bar-#{$status}-text-color);
+      }
     }
   }
 }
