@@ -1,0 +1,75 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin button-hero() {
+  [nbButton].appearance-hero {
+    text-shadow: nb-theme(button-hero-text-shadow);
+    text-transform: nb-theme(button-hero-text-transform);
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        padding: nb-theme(button-hero-#{$size}-padding);
+      }
+    }
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        $left-color: nb-theme(button-hero-#{$status}-left-background-color);
+        $right-color: nb-theme(button-hero-#{$status}-right-background-color);
+        $bevel: nb-theme(button-hero-bevel-size) nb-theme(button-hero-#{$status}-bevel-color);
+        $glow: nb-theme(button-hero-glow-size) nb-theme(button-hero-#{$status}-glow-color);
+        $shadow: nb-theme(button-hero-shadow);
+        $hero-box-shadows: $bevel, $glow, $shadow;
+
+        background-image: linear-gradient(to right, $left-color, $right-color);
+        border: none;
+        box-shadow: $hero-box-shadows;
+        color: nb-theme(button-hero-#{$status}-text-color);
+
+        &:focus {
+          $left-focus-color: nb-theme(button-hero-#{$status}-focus-left-background-color);
+          $right-focus-color: nb-theme(button-hero-#{$status}-focus-right-background-color);
+          background-image: linear-gradient(to right, $left-focus-color, $right-focus-color);
+          box-shadow: $hero-box-shadows, 0 0 0 nb-theme(button-hero-outline-width) nb-theme(button-hero-outline-color);
+        }
+
+        &:hover {
+          $left-hover-color: nb-theme(button-hero-#{$status}-hover-left-background-color);
+          $right-hover-color: nb-theme(button-hero-#{$status}-hover-right-background-color);
+          background-image: linear-gradient(to right, $left-hover-color, $right-hover-color);
+        }
+
+        &:active {
+          $left-active-color: nb-theme(button-hero-#{$status}-active-left-background-color);
+          $right-active-color: nb-theme(button-hero-#{$status}-active-right-background-color);
+          background-image: linear-gradient(to right, $left-active-color, $right-active-color);
+        }
+
+        &[disabled] {
+          $left-disabled-color: nb-theme(button-hero-#{$status}-disabled-left-background-color);
+          $right-disabled-color: nb-theme(button-hero-#{$status}-disabled-right-background-color);
+          background-image: linear-gradient(to right, $left-disabled-color, $right-disabled-color);
+        }
+
+        &.button-pulse {
+          animation: button-hero-#{$status}-pulse 0.75s infinite alternate;
+        }
+
+        keyframes button-#{$status}-pulse {
+          0% {
+            box-shadow: none;
+            opacity: nb-theme(button-disabled-opacity);
+          }
+
+          100% {
+            box-shadow: 0 0 1rem 0 nb-theme(color-#{$status});
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
