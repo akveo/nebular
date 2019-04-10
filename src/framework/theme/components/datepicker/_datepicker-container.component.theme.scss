@@ -9,19 +9,19 @@
     $arrow-size: nb-theme(datepicker-arrow-size);
     $arrow-content-size: calc(#{$arrow-size} - 2px);
 
-    border: 2px solid nb-theme(datepicker-border);
+    border: 2px solid nb-theme(datepicker-border-color);
     border-radius: nb-theme(datepicker-border-radius);
-    background: nb-theme(datepicker-bg);
+    background: nb-theme(datepicker-background-color);
     box-shadow: nb-theme(datepicker-shadow);
 
     .primitive-overlay {
-      color: nb-theme(datepicker-fg);
+      color: nb-theme(datepicker-text-color);
     }
 
     .arrow {
       border-left: $arrow-size solid transparent;
       border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid nb-theme(datepicker-border);
+      border-bottom: $arrow-size solid nb-theme(datepicker-border-color);
 
 
       &::after {
@@ -33,7 +33,7 @@
         left: calc(50% - #{$arrow-content-size});
         border-left: $arrow-content-size solid transparent;
         border-right: $arrow-content-size solid transparent;
-        border-bottom: $arrow-content-size solid nb-theme(datepicker-bg);
+        border-bottom: $arrow-content-size solid nb-theme(datepicker-background-color);
       }
     }
 
