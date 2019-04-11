@@ -45,7 +45,7 @@ describe('Component: NbCalendarMonthPicker', () => {
       .dispatchEvent(new CustomEvent('select'));
   });
 
-  it('should not has duplicate months', () => {
+  it('should not have duplicate months', () => {
     component.month = new Date(2019, 0, 30);
     component.initMonths();
 
