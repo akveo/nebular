@@ -1,0 +1,12 @@
+<button #searchButton class="start-search" (click)="emitActivate()">
+  <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
+</button>
+<nb-search-field
+  *nbPortal
+  [show]="showSearchField"
+  [type]="type"
+  [placeholder]="placeholder"
+  [hint]="hint"
+  (search)="search($event)"
+  (close)="emitDeactivate()">
+</nb-search-field>

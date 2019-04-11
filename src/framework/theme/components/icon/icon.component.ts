@@ -96,7 +96,7 @@ import { NbIconLibraries } from './icon-libraries';
 @Component({
   selector: 'nb-icon',
   styleUrls: [`./icon.component.scss`],
-  template: '',
+  templateUrl: './icon.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbIconComponent implements OnChanges, OnInit {

@@ -21,10 +21,7 @@ import { NbPositionedContainer, NbRenderableContainer } from '../cdk';
 @Component({
   selector: 'nb-context-menu',
   styleUrls: ['./context-menu.component.scss'],
-  template: `
-    <span class="arrow"></span>
-    <nb-menu class="context-menu" [items]="context.items" [tag]="context.tag"></nb-menu>
-  `,
+  templateUrl: './context-menu.component.html',
 })
 export class NbContextMenuComponent extends NbPositionedContainer implements NbRenderableContainer {
 

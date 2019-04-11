@@ -24,18 +24,7 @@ export const YEARS_IN_COLUMN = 4;
 
 @Component({
   selector: 'nb-calendar-year-picker',
-  template: `
-    <nb-calendar-picker
-      [data]="years"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      [selectedValue]="date"
-      [visibleDate]="year"
-      [cellComponent]="cellComponent"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
-  `,
+  templateUrl: './calendar-year-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarYearPickerComponent<D> implements OnChanges {

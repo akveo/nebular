@@ -25,7 +25,7 @@ import { debounceTime, takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform';
 import { NbDirectionality } from '../cdk/bidi';
-import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
+import { NbTable } from '../cdk/table';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
@@ -117,7 +117,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
  */
 @Component({
   selector: 'table[nbTreeGrid]',
-  template: NB_TABLE_TEMPLATE,
+  templateUrl: './tree-grid.component.html',
   styleUrls: ['./tree-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

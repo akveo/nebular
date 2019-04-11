@@ -19,7 +19,7 @@ import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-year-cell',
-  template: `{{ year }}`,
+  templateUrl: './calendar-year-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'year-cell' },
 })

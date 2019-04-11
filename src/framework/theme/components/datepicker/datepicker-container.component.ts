@@ -12,10 +12,7 @@ import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer }
 @Component({
   selector: 'nb-datepicker-container',
   styleUrls: ['./datepicker-container.component.scss'],
-  template: `
-    <span class="arrow"></span>
-    <nb-overlay-container></nb-overlay-container>
-  `,
+  templateUrl: './datepicker-container.component.html',
 })
 export class NbDatepickerContainerComponent extends NbPositionedContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;

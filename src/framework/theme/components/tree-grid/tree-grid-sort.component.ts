@@ -80,12 +80,7 @@ export class NbSortHeaderIconDirective {}
 
 @Component({
   selector: 'nb-sort-icon',
-  template: `
-    <ng-container *ngIf="isDirectionSet()">
-      <nb-icon *ngIf="isAscending()" icon="chevron-down-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
-      <nb-icon *ngIf="isDescending()" icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
-    </ng-container>
-  `,
+  templateUrl: './sort-icon.component.html',
 })
 export class NbSortIconComponent {
   @Input() direction: NbSortDirection = NbSortDirection.NONE;
@@ -108,17 +103,7 @@ export class NbSortIconComponent {
  */
 @Component({
   selector: '[nbSortHeader]',
-  template: `
-    <button
-      class="nb-tree-grid-header-change-sort-button"
-      type="button"
-      [attr.disabled]="getDisabledAttributeValue()"
-      (click)="sortData()">
-      <ng-content></ng-content>
-    </button>
-    <nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
-    <ng-template #customIcon [ngTemplateOutlet]="sortIcon" [ngTemplateOutletContext]="getIconContext()"></ng-template>
-  `,
+  templateUrl: './sort-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbSortHeaderComponent {

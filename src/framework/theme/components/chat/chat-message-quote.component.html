@@ -1,0 +1,7 @@
+<p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date  | date:'shortTime' }}</time></p>
+<p class="quote">
+  {{ quote }}
+</p>
+<nb-chat-message-text [message]="message">
+  {{ message }}
+</nb-chat-message-text>

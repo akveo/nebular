@@ -54,30 +54,7 @@ import { DomSanitizer } from '@angular/platform-browser';
  */
 @Component({
   selector: 'nb-chat-form',
-  template: `
-    <div class="dropped-files" *ngIf="droppedFiles?.length">
-      <ng-container *ngFor="let file of droppedFiles">
-        <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle">
-          <span class="remove" (click)="removeFile(file)">&times;</span>
-        </div>
-
-        <div>
-          <nb-icon *ngIf="!file.urlStyle" icon="file-text-outline" pack="nebular-essentials"></nb-icon>
-          <span class="remove" (click)="removeFile(file)">&times;</span>
-        </div>
-      </ng-container>
-    </div>
-    <div class="message-row">
-      <input [(ngModel)]="message"
-             [class.with-button]="showButton"
-             type="text"
-             placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
-             (keyup.enter)="sendMessage()">
-      <button *ngIf="showButton" class="btn" [class.with-icon]="!buttonTitle" (click)="sendMessage()">
-        {{ buttonTitle }}<nb-icon *ngIf="!buttonTitle" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
-      </button>
-    </div>
-  `,
+  templateUrl: './chat-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatFormComponent {

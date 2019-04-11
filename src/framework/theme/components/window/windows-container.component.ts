@@ -2,7 +2,7 @@ import { Component, ViewContainerRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'nb-windows-container',
-  template: `<ng-container #viewContainerRef></ng-container>`,
+  templateUrl: './windows-container.component.html',
   styleUrls: ['./windows-container.component.scss'],
 })
 export class NbWindowsContainerComponent {

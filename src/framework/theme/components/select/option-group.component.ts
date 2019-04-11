@@ -12,10 +12,7 @@ import { convertToBoolProperty } from '../helpers';
   selector: 'nb-option-group',
   styleUrls: ['./option-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <span>{{ title }}</span>
-    <ng-content select="nb-option, ng-container"></ng-content>
-  `,
+  templateUrl: './option-group.component.html',
 })
 export class NbOptionGroupComponent {
   @Input() title: string;

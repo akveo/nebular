@@ -55,34 +55,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
  */
 @Component({
   selector: 'nb-chat-message',
-  template: `
-    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!replyValue">
-      <ng-container *ngIf="!avatarStyle">
-        {{ getInitials() }}
-      </ng-container>
-    </div>
-    <div class="message">
-      <ng-container [ngSwitch]="type">
-
-        <nb-chat-message-file *ngSwitchCase="'file'"
-                              [sender]="sender" [date]="date" [message]="message" [files]="files">
-        </nb-chat-message-file>
-
-        <nb-chat-message-quote *ngSwitchCase="'quote'"
-                              [sender]="sender" [date]="date" [message]="message" [quote]="quote">
-        </nb-chat-message-quote>
-
-        <nb-chat-message-map *ngSwitchCase="'map'"
-                              [sender]="sender" [date]="date"
-                              [message]="message" [latitude]="latitude" [longitude]="longitude">
-        </nb-chat-message-map>
-
-        <nb-chat-message-text *ngSwitchDefault
-                              [sender]="sender" [date]="date" [message]="message">
-        </nb-chat-message-text>
-      </ng-container>
-    </div>
-  `,
+  templateUrl: './chat-message.component.html',
   animations: [
     trigger('flyInOut', [
       state('in', style({ transform: 'translateX(0)' })),

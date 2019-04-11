@@ -25,13 +25,7 @@ import { NbAccordionItemComponent } from './accordion-item.component';
 @Component({
   selector: 'nb-accordion-item-header',
   styleUrls: ['./accordion-item-header.component.scss'],
-  template: `
-    <ng-content select="nb-accordion-item-title"></ng-content>
-    <ng-content select="nb-accordion-item-description"></ng-content>
-    <ng-content></ng-content>
-    <nb-icon icon="chevron-down-outline" pack="nebular-essentials" [@expansionIndicator]="state" *ngIf="!disabled" >
-    </nb-icon>
-  `,
+  templateUrl: './accordion-item-header.component.html',
   animations: [
     trigger('expansionIndicator', [
       state(

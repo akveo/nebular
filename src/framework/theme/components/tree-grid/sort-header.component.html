@@ -1,0 +1,9 @@
+<button
+  class="nb-tree-grid-header-change-sort-button"
+  type="button"
+  [attr.disabled]="getDisabledAttributeValue()"
+  (click)="sortData()">
+  <ng-content></ng-content>
+</button>
+<nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
+<ng-template #customIcon [ngTemplateOutlet]="sortIcon" [ngTemplateOutletContext]="getIconContext()"></ng-template>

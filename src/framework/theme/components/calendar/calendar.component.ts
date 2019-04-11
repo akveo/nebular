@@ -141,23 +141,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * */
 @Component({
   selector: 'nb-calendar',
-  template: `
-    <nb-base-calendar
-      [boundingMonth]="boundingMonth"
-      [startView]="startView"
-      [date]="date"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      [dayCellComponent]="dayCellComponent"
-      [monthCellComponent]="monthCellComponent"
-      [yearCellComponent]="yearCellComponent"
-      [size]="size"
-      [visibleDate]="visibleDate"
-      [showHeader]="showHeader"
-      (dateChange)="dateChange.emit($event)"
-    ></nb-base-calendar>
-  `,
+  templateUrl: './calendar.component.html',
 })
 export class NbCalendarComponent<D> {
 

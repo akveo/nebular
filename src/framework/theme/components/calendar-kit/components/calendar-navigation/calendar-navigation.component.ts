@@ -9,21 +9,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 @Component({
   selector: 'nb-calendar-navigation',
-  styles: [`
-    :host {
-      display: flex;
-      justify-content: center;
-    }
-
-    :host button {
-      height: 3.125rem;
-    }
-  `],
-  template: `
-    <button nbButton (click)="changeMode.emit()">
-      {{ date | date: 'MMM yyyy' }}
-    </button>
-  `,
+  styleUrls: ['./calendar-navigation.component.scss'],
+  templateUrl: './calendar-navigation.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarNavigationComponent<D> {

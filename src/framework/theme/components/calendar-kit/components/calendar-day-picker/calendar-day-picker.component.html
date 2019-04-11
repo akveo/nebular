@@ -1,0 +1,11 @@
+<nb-calendar-days-names></nb-calendar-days-names>
+<nb-calendar-picker
+  [data]="weeks"
+  [visibleDate]="visibleDate"
+  [selectedValue]="date"
+  [cellComponent]="cellComponent"
+  [min]="min"
+  [max]="max"
+  [filter]="filter"
+  (select)="onSelect($event)">
+</nb-calendar-picker>

@@ -12,9 +12,7 @@ import { NbDateService } from '../../services';
 @Component({
   selector: 'nb-calendar-days-names',
   styleUrls: ['./calendar-days-names.component.scss'],
-  template: `
-    <div class="day" *ngFor="let day of days" [class.holiday]="day.isHoliday">{{ day.name }}</div>
-  `,
+  templateUrl: './calendar-days-names.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDaysNamesComponent<D> implements OnInit {

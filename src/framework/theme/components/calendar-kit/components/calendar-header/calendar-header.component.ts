@@ -12,15 +12,7 @@ import { NbDateService } from '../../services';
 
 @Component({
   selector: 'nb-calendar-header',
-  template: `
-    <div class="header">
-      <span class="title" (click)="navigateToday.emit()">
-        {{ date | date: 'mediumDate' }}
-        <i [ngClass]="{ 'nb-arrow-dropright': isLtr, 'nb-arrow-dropleft': isRtl }"></i>
-      </span>
-      <span class="sub-title">Today</span>
-    </div>
-  `,
+  templateUrl: './calendar-header.component.html',
 })
 export class NbCalendarHeaderComponent<D> {
   @Input() date: D;

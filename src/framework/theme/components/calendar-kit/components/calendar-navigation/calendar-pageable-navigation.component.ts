@@ -12,11 +12,7 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
 @Component({
   selector: 'nb-calendar-pageable-navigation',
   styleUrls: ['./calendar-pageable-navigation.component.scss'],
-  template: `
-    <i [ngClass]="{'nb-arrow-left': isLtr, 'nb-arrow-right': isRtl }" (click)="prev.emit()"></i>
-    <nb-calendar-navigation [date]="date" (changeMode)="changeMode.emit()"></nb-calendar-navigation>
-    <i [ngClass]="{'nb-arrow-right': isLtr, 'nb-arrow-left': isRtl }" (click)="next.emit()"></i>
-  `,
+  templateUrl: './calendar-pageable-navigation.component.html',
 })
 export class NbCalendarPageableNavigationComponent<D> {
   @Input() date: D;

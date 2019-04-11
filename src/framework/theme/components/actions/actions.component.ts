@@ -13,39 +13,7 @@ import { convertToBoolProperty } from '../helpers';
  */
 @Component({
   selector: 'nb-action',
-  template: `
-    <ng-container *ngIf="icon; else projectedContent">
-      <a class="icon-container"
-         [routerLink]="link"
-         [title]="title"
-         *ngIf="link">
-        <nb-icon [icon]="icon"></nb-icon>
-      </a>
-      <a class="icon-container"
-         [href]="href"
-         [title]="title"
-         *ngIf="href && !link">
-        <nb-icon [icon]="icon"></nb-icon>
-      </a>
-      <a class="icon-container"
-         href="#"
-         [title]="title"
-         *ngIf="!href && !link"
-         (click)="$event.preventDefault()">
-        <nb-icon [icon]="icon"></nb-icon>
-      </a>
-    </ng-container>
-
-    <ng-template #projectedContent>
-      <ng-content></ng-content>
-    </ng-template>
-
-    <nb-badge *ngIf="badgeText"
-              [text]="badgeText"
-              [status]="badgeStatus"
-              [position]="badgePosition">
-    </nb-badge>
-  `,
+  templateUrl: './action.component.html',
 })
 export class NbActionComponent {
   @HostBinding('class.disabled') disabledValue: boolean = false;
@@ -160,9 +128,7 @@ export class NbActionComponent {
 @Component({
   selector: 'nb-actions',
   styleUrls: ['./actions.component.scss'],
-  template: `
-    <ng-content select="nb-action"></ng-content>
-  `,
+  templateUrl: './actions.component.html',
 })
 export class NbActionsComponent {
   static readonly SIZE_SMALL = 'small';

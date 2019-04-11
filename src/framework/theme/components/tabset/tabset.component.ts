@@ -33,11 +33,7 @@ import { convertToBoolProperty } from '../helpers';
  */
 @Component({
   selector: 'nb-tab',
-  template: `
-    <ng-container *ngIf="init">
-      <ng-content></ng-content>
-    </ng-container>
-  `,
+  templateUrl: './tab.component.html',
 })
 export class NbTabComponent {
 
@@ -233,30 +229,7 @@ export class NbTabComponent {
 @Component({
   selector: 'nb-tabset',
   styleUrls: ['./tabset.component.scss'],
-  template: `
-    <ul class="tabset">
-      <li *ngFor="let tab of tabs"
-          (click)="selectTab(tab)"
-          (keyup.space)="selectTab(tab)"
-          (keyup.enter)="selectTab(tab)"
-          [class.responsive]="tab.responsive"
-          [class.active]="tab.active"
-          [class.disabled]="tab.disabled"
-          [attr.tabindex]="tab.disabled ? -1 : 0"
-          class="tab">
-        <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
-          <nb-icon *ngIf="tab.tabIcon" [icon]="tab.tabIcon"></nb-icon>
-          <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
-        </a>
-        <nb-badge *ngIf="tab.badgeText"
-          [text]="tab.badgeText"
-          [status]="tab.badgeStatus"
-          [position]="tab.badgePosition">
-        </nb-badge>
-      </li>
-    </ul>
-    <ng-content select="nb-tab"></ng-content>
-  `,
+  templateUrl: './tabset.component.html',
 })
 export class NbTabsetComponent implements AfterContentInit {
 

@@ -1,0 +1,6 @@
+<div class="progress-container">
+  <div class="progress-value" [style.width.%]="value">
+    <span *ngIf="displayValue">{{ value }}%</span>
+    <ng-content></ng-content>
+  </div>
+</div>

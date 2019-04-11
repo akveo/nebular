@@ -122,23 +122,7 @@ import { convertToBoolProperty } from '../helpers';
  */
 @Component({
   selector: 'nb-checkbox',
-  template: `
-    <label class="label">
-      <input type="checkbox" class="native-input visually-hidden"
-             [disabled]="disabled"
-             [checked]="value"
-             (change)="updateValueAndIndeterminate($event)"
-             (blur)="setTouched()"
-             [indeterminate]="indeterminate">
-      <span [class.indeterminate]="indeterminate" [class.checked]="value" class="custom-checkbox">
-        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
-        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
-      </span>
-      <span class="text">
-        <ng-content></ng-content>
-      </span>
-    </label>
-  `,
+  templateUrl: './checkbox.component.html',
   styleUrls: [ `./checkbox.component.scss` ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,

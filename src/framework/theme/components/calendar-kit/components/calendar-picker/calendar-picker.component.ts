@@ -11,19 +11,7 @@ import { NbCalendarCell } from '../../model';
 
 @Component({
   selector: 'nb-calendar-picker',
-  template: `
-    <nb-calendar-picker-row
-      *ngFor="let row of data"
-      [row]="row"
-      [visibleDate]="visibleDate"
-      [selectedValue]="selectedValue"
-      [component]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="select.emit($event)">
-    </nb-calendar-picker-row>
-  `,
+  templateUrl: 'calendar-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarPickerComponent<D, T> {

@@ -23,7 +23,7 @@ import { NbDialogConfig } from './dialog-config';
  * */
 @Component({
   selector: 'nb-dialog-container',
-  template: '<ng-template nbPortalOutlet></ng-template>',
+  templateUrl: './dialog-container.html',
 })
 export class NbDialogContainerComponent implements OnInit, OnDestroy {
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;

@@ -1,0 +1,11 @@
+<nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</nb-checkbox>
+
+<ng-container *ngIf="!withCheckbox">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

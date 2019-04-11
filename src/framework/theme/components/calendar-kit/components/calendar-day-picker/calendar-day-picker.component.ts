@@ -26,20 +26,8 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
  * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [` :host { display: block; } `],
-  template: `
-    <nb-calendar-days-names></nb-calendar-days-names>
-    <nb-calendar-picker
-      [data]="weeks"
-      [visibleDate]="visibleDate"
-      [selectedValue]="date"
-      [cellComponent]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
-  `,
+  styleUrls: ['./calendar-day-picker.component.scss'],
+  templateUrl: './calendar-day-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {

@@ -43,10 +43,7 @@ import {
 @Component({
   selector: 'nb-popover',
   styleUrls: ['./popover.component.scss'],
-  template: `
-    <span class="arrow"></span>
-    <nb-overlay-container></nb-overlay-container>
-  `,
+  templateUrl: './popover.component.html',
 })
 export class NbPopoverComponent extends NbPositionedContainer implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;

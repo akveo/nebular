@@ -36,7 +36,7 @@ import { NbComponentStatus } from '../component-status';
  */
 @Component({
   selector: 'nb-card-header',
-  template: `<ng-content></ng-content>`,
+  templateUrl: './card-header.component.html',
 })
 export class NbCardHeaderComponent {
 }
@@ -47,7 +47,7 @@ export class NbCardHeaderComponent {
  */
 @Component({
   selector: 'nb-card-body',
-  template: `<ng-content></ng-content>`,
+  templateUrl: './card-body.component.html',
 })
 export class NbCardBodyComponent {
 }
@@ -58,7 +58,7 @@ export class NbCardBodyComponent {
  */
 @Component({
   selector: 'nb-card-footer',
-  template: `<ng-content></ng-content>`,
+  templateUrl: './card-footer.component.html',
 })
 export class NbCardFooterComponent {
 }
@@ -143,12 +143,7 @@ export class NbCardFooterComponent {
 @Component({
   selector: 'nb-card',
   styleUrls: ['./card.component.scss'],
-  template: `
-    <ng-content select="nb-card-header"></ng-content>
-    <ng-content select="nb-card-body"></ng-content>
-    <ng-content></ng-content>
-    <ng-content select="nb-card-footer"></ng-content>
-  `,
+  templateUrl: './card.component.html',
 })
 export class NbCardComponent {
 

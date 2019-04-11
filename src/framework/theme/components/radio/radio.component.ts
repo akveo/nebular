@@ -114,23 +114,7 @@ import { NbComponentStatus } from '../component-status';
  * */
 @Component({
   selector: 'nb-radio',
-  template: `
-    <label>
-      <input
-        type="radio"
-        class="native-input visually-hidden"
-        [name]="name"
-        [value]="value"
-        [checked]="checked"
-        [disabled]="disabled"
-        (change)="onChange($event)"
-        (click)="onClick($event)">
-      <span class="radio-circle"></span>
-      <span class="text">
-        <ng-content></ng-content>
-      </span>
-    </label>
-  `,
+  templateUrl: './radio.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./radio.component.scss'],
 })

@@ -111,23 +111,7 @@ export interface NbCalendarRange<D> {
  * */
 @Component({
   selector: 'nb-calendar-range',
-  template: `
-    <nb-base-calendar
-      [date]="range"
-      (dateChange)="onChange($event)"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      [startView]="startView"
-      [boundingMonth]="boundingMonth"
-      [dayCellComponent]="dayCellComponent"
-      [monthCellComponent]="monthCellComponent"
-      [yearCellComponent]="yearCellComponent"
-      [visibleDate]="visibleDate"
-      [showHeader]="showHeader"
-      [size]="size"
-    ></nb-base-calendar>
-  `,
+  templateUrl: './calendar-range.component.html',
 })
 export class NbCalendarRangeComponent<D> {
   /**

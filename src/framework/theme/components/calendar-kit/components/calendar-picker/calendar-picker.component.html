@@ -1,0 +1,11 @@
+<nb-calendar-picker-row
+  *ngFor="let row of data"
+  [row]="row"
+  [visibleDate]="visibleDate"
+  [selectedValue]="selectedValue"
+  [component]="cellComponent"
+  [min]="min"
+  [max]="max"
+  [filter]="filter"
+  (select)="select.emit($event)">
+</nb-calendar-picker-row>

@@ -1,0 +1,18 @@
+<div class="search" (keyup.esc)="emitClose()">
+<button (click)="emitClose()">
+  <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
+  </button>
+  <div class="form-wrapper">
+<form class="form" (keyup.enter)="submitSearch(searchInput.value)">
+<div class="form-content">
+<input class="search-input"
+#searchInput
+autocomplete="off"
+  [attr.placeholder]="placeholder"
+tabindex="-1"
+(blur)="focusInput()"/>
+  </div>
+  <span class="info">{{ hint }}</span>
+</form>
+</div>
+</div>

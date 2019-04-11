@@ -14,19 +14,7 @@ import { NbCalendarRange } from './calendar-range.component';
 
 @Component({
   selector: 'nb-calendar-range-day-cell',
-  template: `
-    <div
-      class="day-cell"
-      [class.today]="today"
-      [class.selected]="selected"
-      [class.bounding-month]="boundingMonth"
-      [class.start]="start"
-      [class.end]="end"
-      [class.in-range]="inRange"
-      [class.disabled]="disabled">
-      {{ day }}
-    </div>
-  `,
+  templateUrl: './calendar-range-day-cell.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '(click)': 'onClick()', 'class': 'range-cell' },
 })
@@ -112,7 +100,7 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
 
 @Component({
   selector: 'nb-calendar-range-year-cell',
-  template: `{{ year }}`,
+  templateUrl: './calendar-range-year-cell.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'year-cell' },
 })

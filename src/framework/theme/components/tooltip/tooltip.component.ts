@@ -44,13 +44,7 @@ import { NbPosition, NbRenderableContainer } from '../cdk';
 @Component({
   selector: 'nb-tooltip',
   styleUrls: ['./tooltip.component.scss'],
-  template: `
-    <span class="arrow"></span>
-    <div class="content">
-      <nb-icon *ngIf="context?.icon" [icon]="context.icon"></nb-icon>
-      <span *ngIf="content">{{ content }}</span>
-    </div>
-  `,
+  templateUrl: './tooltip.component.html',
   animations: [
     trigger('showTooltip', [
       state('in', style({ opacity: 1 })),

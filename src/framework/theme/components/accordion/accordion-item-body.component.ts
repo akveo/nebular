@@ -42,13 +42,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
  */
 @Component({
   selector: 'nb-accordion-item-body',
-  template: `
-    <div [@accordionItemBody]="{ value: state }">
-      <div class="item-body">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `,
+  templateUrl: './accordion-item-body.component.html',
   animations: [accordionItemBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

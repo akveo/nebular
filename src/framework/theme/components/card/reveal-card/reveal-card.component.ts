@@ -57,15 +57,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 @Component({
   selector: 'nb-reveal-card',
   styleUrls: ['./reveal-card.component.scss'],
-  template: `
-    <ng-content select="nb-card-front"></ng-content>
-    <div class="second-card-container">
-      <ng-content select="nb-card-back"></ng-content>
-    </div>
-    <a *ngIf="showToggleButton" class="reveal-button" (click)="toggle()">
-      <nb-icon icon="chevron-down-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
-    </a>
-  `,
+  templateUrl: './reveal-card.component.html',
 })
 export class NbRevealCardComponent {
   /**

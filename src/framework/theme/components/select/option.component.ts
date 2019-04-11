@@ -26,19 +26,7 @@ import { NbSelectComponent } from './select.component';
   selector: 'nb-option',
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </nb-checkbox>
-
-    <ng-container *ngIf="!withCheckbox">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </ng-container>
-
-    <ng-template #content>
-      <ng-content></ng-content>
-    </ng-template>
-  `,
+  templateUrl: './option.component.html',
 })
 export class NbOptionComponent<T> implements OnDestroy {
   /**

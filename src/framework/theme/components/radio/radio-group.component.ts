@@ -67,8 +67,7 @@ import { NbComponentStatus } from '../component-status';
  * */
 @Component({
   selector: 'nb-radio-group',
-  template: `
-    <ng-content select="nb-radio"></ng-content>`,
+  templateUrl: './radio-group.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

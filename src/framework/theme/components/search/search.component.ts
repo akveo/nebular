@@ -45,26 +45,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
     'styles/search.component.modal-drop.scss',
     'styles/search.component.modal-half.scss',
   ],
-  template: `
-    <div class="search" (keyup.esc)="emitClose()">
-      <button (click)="emitClose()">
-        <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
-      </button>
-      <div class="form-wrapper">
-        <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
-          <div class="form-content">
-            <input class="search-input"
-                   #searchInput
-                   autocomplete="off"
-                   [attr.placeholder]="placeholder"
-                   tabindex="-1"
-                   (blur)="focusInput()"/>
-          </div>
-          <span class="info">{{ hint }}</span>
-        </form>
-      </div>
-    </div>
-  `,
+  templateUrl: './search-field.component.html',
 })
 export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
@@ -202,20 +183,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   selector: 'nb-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
-  template: `
-    <button #searchButton class="start-search" (click)="emitActivate()">
-      <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
-    </button>
-    <nb-search-field
-      *nbPortal
-      [show]="showSearchField"
-      [type]="type"
-      [placeholder]="placeholder"
-      [hint]="hint"
-      (search)="search($event)"
-      (close)="emitDeactivate()">
-    </nb-search-field>
-  `,
+  templateUrl: './search.component.html',
 })
 export class NbSearchComponent implements OnInit, OnDestroy {
 

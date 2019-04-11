@@ -26,31 +26,7 @@ import { NbWindowRef } from './window-ref';
 
 @Component({
   selector: 'nb-window',
-  template: `
-    <nb-card>
-      <nb-card-header>
-        <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
-
-        <div class="buttons">
-          <button class="button" (click)="minimize()">
-            <nb-icon icon="minus-outline" pack="nebular-essentials"></nb-icon>
-          </button>
-          <button class="button" *ngIf="isFullScreen" (click)="maximize()">
-            <nb-icon icon="collapse-outline" pack="nebular-essentials"></nb-icon>
-          </button>
-          <button class="button" *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
-            <nb-icon icon="expand-outline" pack="nebular-essentials"></nb-icon>
-          </button>
-          <button class="button" (click)="close()">
-            <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
-          </button>
-        </div>
-      </nb-card-header>
-      <nb-card-body *ngIf="maximized || isFullScreen">
-        <nb-overlay-container></nb-overlay-container>
-      </nb-card-body>
-    </nb-card>
-  `,
+  templateUrl: './window.component.html',
   styleUrls: ['./window.component.scss'],
 })
 export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {

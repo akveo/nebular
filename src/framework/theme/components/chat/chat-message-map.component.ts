@@ -15,9 +15,7 @@ import { NbChatOptions } from './chat.options';
  */
 @Component({
   selector: 'nb-chat-message-map',
-  template: `
-    <nb-chat-message-file [files]="[file]" [message]="message" [sender]="sender" [date]="date"></nb-chat-message-file>
-  `,
+  templateUrl: './chat-message-map.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageMapComponent {

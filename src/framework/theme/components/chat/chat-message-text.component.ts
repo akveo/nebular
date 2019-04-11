@@ -14,10 +14,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
  */
 @Component({
   selector: 'nb-chat-message-text',
-  template: `
-    <p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date  | date:'shortTime' }}</time></p>
-    <p class="text" *ngIf="message">{{ message }}</p>
-  `,
+  templateUrl: './chat-message-text.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageTextComponent {

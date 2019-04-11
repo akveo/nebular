@@ -19,7 +19,7 @@ import { NbDateService } from '../../services';
 
 @Component({
   selector: 'nb-calendar-month-cell',
-  template: `{{ month }}`,
+  templateUrl: './calendar-month-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'month-cell' },
 })

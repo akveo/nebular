@@ -16,11 +16,7 @@ import { convertToBoolProperty } from '../helpers';
  */
 @Component({
   selector: 'nb-step',
-  template: `
-    <ng-template>
-      <ng-content></ng-content>
-    </ng-template>
-  `,
+  templateUrl: './step.component.html',
 })
 export class NbStepComponent {
 

@@ -19,7 +19,7 @@ export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
  */
 @Component({
   selector: 'tr[nbTreeGridRow]',
-  template: `<ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './tree-grid-row.component.html',
   host: {
     'class': 'nb-tree-grid-row',
     'role': 'row',
@@ -81,8 +81,7 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
 
 @Component({
   selector: 'tr[nbTreeGridHeaderRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './tree-grid-header-row.component.html',
   host: {
     'class': 'nb-tree-grid-header-row',
     'role': 'row',
@@ -94,8 +93,7 @@ export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
 
 @Component({
   selector: 'tr[nbTreeGridFooterRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './tree-grid-footer-row.component.html',
   host: {
     'class': 'nb-tree-grid-footer-row',
     'role': 'row',

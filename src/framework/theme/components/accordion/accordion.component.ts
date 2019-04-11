@@ -67,9 +67,7 @@ import { convertToBoolProperty } from '../helpers';
  */
 @Component({
   selector: 'nb-accordion',
-  template: `
-    <ng-content select="nb-accordion-item"></ng-content>
-  `,
+  templateUrl: './accordion.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionComponent {

@@ -1,0 +1,19 @@
+<nb-chat-message-text [sender]="sender" [date]="date" [message]="message">
+  {{ message }}
+</nb-chat-message-text>
+
+<ng-container *ngIf="readyFiles?.length > 1">
+  <div class="message-content-group">
+    <a *ngFor="let file of readyFiles" [href]="file.url" target="_blank">
+      <nb-icon [icon]="file.icon" *ngIf="!file.urlStyle && file.icon"></nb-icon>
+      <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle"></div>
+    </a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="readyFiles?.length === 1">
+  <a [href]="readyFiles[0].url" target="_blank">
+    <nb-icon [icon]="readyFiles[0].icon" *ngIf="!readyFiles[0].urlStyle && readyFiles[0].icon"></nb-icon>
+    <div *ngIf="readyFiles[0].urlStyle" [style.background-image]="readyFiles[0].urlStyle"></div>
+  </a>
+</ng-container>

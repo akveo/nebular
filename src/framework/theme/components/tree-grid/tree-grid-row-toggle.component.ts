@@ -12,21 +12,8 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  */
 @Component({
   selector: 'nb-tree-grid-row-toggle',
-  template: `
-    <button class="row-toggle-button" [attr.aria-label]="expanded ? 'collapse' : 'expand'">
-      <nb-icon [icon]="expanded ? 'chevron-down-outline' : 'chevron-right-outline'"
-               pack="nebular-essentials"
-               aria-hidden="true">
-      </nb-icon>
-    </button>
-  `,
-  styles: [`
-    button {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-  `],
+  templateUrl: './tree-grid-row-toggle.component.html',
+  styleUrls: ['./tree-grid-row-toggle.component.scss'],
 })
 export class NbTreeGridRowToggleComponent {
   private expandedValue: boolean;

@@ -87,12 +87,7 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-alert',
   styleUrls: ['./alert.component.scss'],
-  template: `
-    <button *ngIf="closableValue" type="button" class="close" aria-label="Close" (click)="onClose()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <ng-content></ng-content>
-  `,
+  templateUrl: './alert.component.html',
 })
 export class NbAlertComponent {
 

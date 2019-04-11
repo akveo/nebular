@@ -49,7 +49,7 @@ import { convertToBoolProperty } from '../helpers';
 
 @Component({
   selector: 'nb-select-label',
-  template: '<ng-content></ng-content>',
+  templateUrl: './select-label.component.html',
 })
 export class NbSelectLabelComponent {
 }

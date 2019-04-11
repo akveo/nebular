@@ -332,9 +332,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 @Component({
   selector: 'button[nbButton],a[nbButton],input[type="button"][nbButton],input[type="submit"][nbButton]',
   styleUrls: ['./button.component.scss'],
-  template: `
-    <ng-content></ng-content>
-  `,
+  templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbButtonComponent implements AfterViewInit {

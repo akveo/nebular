@@ -376,7 +376,7 @@ export abstract class NbBasePicker<D, T, P>
  */
 @Component({
   selector: 'nb-datepicker',
-  template: '',
+  templateUrl: './datepicker.component.html',
 })
 export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
@@ -431,7 +431,7 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
  */
 @Component({
   selector: 'nb-rangepicker',
-  template: '',
+  templateUrl: './rangepicker.component.html',
 })
 export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
   protected pickerClass: Type<NbCalendarRangeComponent<D>> = NbCalendarRangeComponent;

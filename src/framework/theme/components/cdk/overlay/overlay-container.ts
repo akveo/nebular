@@ -52,10 +52,7 @@ export abstract class NbPositionedContainer {
 
 @Component({
   selector: 'nb-overlay-container',
-  template: `
-    <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
-    <ng-template nbPortalOutlet></ng-template>
-  `,
+  templateUrl: './overlay-container.component.html',
 })
 export class NbOverlayContainerComponent {
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;

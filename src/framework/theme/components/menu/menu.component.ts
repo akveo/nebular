@@ -180,21 +180,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
 @Component({
   selector: 'nb-menu',
   styleUrls: ['./menu.component.scss'],
-  template: `
-    <ul class="menu-items">
-      <ng-container *ngFor="let item of items">
-        <li nbMenuItem *ngIf="!item.hidden"
-            [menuItem]="item"
-            [class.menu-group]="item.group"
-            (hoverItem)="onHoverItem($event)"
-            (toggleSubMenu)="onToggleSubMenu($event)"
-            (selectItem)="onSelectItem($event)"
-            (itemClick)="onItemClick($event)"
-            class="menu-item">
-        </li>
-      </ng-container>
-    </ul>
-  `,
+  templateUrl: './menu.component.html',
 })
 export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class.inverse') inverseValue: boolean;

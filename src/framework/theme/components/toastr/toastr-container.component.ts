@@ -27,8 +27,7 @@ const defaultOptions = { params: { direction: '' } };
 
 @Component({
   selector: 'nb-toastr-container',
-  template: `
-    <nb-toast [@fadeIn]="fadeIn" *ngFor="let toast of content" [toast]="toast"></nb-toast>`,
+  templateUrl: './toastr-container.component.html',
   animations: [
     trigger('fadeIn', [
       transition(':enter', [voidState, animate(100)], defaultOptions),

@@ -1,0 +1,8 @@
+<div class="main-container"
+     [class.main-container-fixed]="containerFixedValue">
+  <ng-content select="nb-sidebar-header"></ng-content>
+  <div class="scrollable" (click)="onClick($event)">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="nb-sidebar-footer"></ng-content>
+</div>

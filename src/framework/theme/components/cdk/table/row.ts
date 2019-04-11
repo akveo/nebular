@@ -79,8 +79,7 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-header-row, tr[nbHeaderRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './header-row.html',
   host: {
     'class': 'nb-header-row',
     'role': 'row',
@@ -94,8 +93,7 @@ export class NbHeaderRowComponent extends CdkHeaderRow {
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-footer-row, tr[nbFooterRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './footer-row.html',
   host: {
     'class': 'nb-footer-row',
     'role': 'row',
@@ -109,8 +107,7 @@ export class NbFooterRowComponent extends CdkFooterRow {
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-row, tr[nbRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  templateUrl: './row.html',
   host: {
     'class': 'nb-row',
     'role': 'row',

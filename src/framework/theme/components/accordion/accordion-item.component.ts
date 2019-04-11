@@ -30,10 +30,7 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-accordion-item',
   styleUrls: ['./accordion-item.component.scss'],
-  template: `
-    <ng-content select="nb-accordion-item-header"></ng-content>
-    <ng-content select="nb-accordion-item-body"></ng-content>
-  `,
+  templateUrl: './accordion-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {

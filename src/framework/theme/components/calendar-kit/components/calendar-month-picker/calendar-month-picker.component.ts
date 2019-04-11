@@ -24,17 +24,7 @@ export const MONTHS_IN_COLUMN = 4;
 
 @Component({
   selector: 'nb-calendar-month-picker',
-  template: `
-    <nb-calendar-picker
-      [data]="months"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      [selectedValue]="month"
-      [cellComponent]="cellComponent"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
-  `,
+  templateUrl: './calendar-month-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarMonthPickerComponent<D, T> implements OnInit {

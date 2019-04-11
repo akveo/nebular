@@ -22,9 +22,7 @@ import { NbSidebarService } from './sidebar.service';
  */
 @Component({
   selector: 'nb-sidebar-header',
-  template: `
-    <ng-content></ng-content>
-  `,
+  templateUrl: './sidebar-header.component.html',
 })
 export class NbSidebarHeaderComponent {
 }
@@ -37,9 +35,7 @@ export class NbSidebarHeaderComponent {
  */
 @Component({
   selector: 'nb-sidebar-footer',
-  template: `
-    <ng-content></ng-content>
-  `,
+  templateUrl: './sidebar-footer.component.html',
 })
 export class NbSidebarFooterComponent {
 }
@@ -119,16 +115,7 @@ export class NbSidebarFooterComponent {
 @Component({
   selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
-  template: `
-    <div class="main-container"
-         [class.main-container-fixed]="containerFixedValue">
-      <ng-content select="nb-sidebar-header"></ng-content>
-      <div class="scrollable" (click)="onClick($event)">
-        <ng-content></ng-content>
-      </div>
-      <ng-content select="nb-sidebar-footer"></ng-content>
-    </div>
-  `,
+  templateUrl: './sidebar.component.html',
 })
 export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 

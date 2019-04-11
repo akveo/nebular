@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'nb-card-front',
-  template: '<ng-content select="nb-card"></ng-content>',
+  templateUrl: './card-front.component.html',
 })
 export class NbCardFrontComponent { }
 
@@ -18,6 +18,6 @@ export class NbCardFrontComponent { }
  */
 @Component({
   selector: 'nb-card-back',
-  template: '<ng-content select="nb-card"></ng-content>',
+  templateUrl: './card-back.component.html',
 })
 export class NbCardBackComponent { }

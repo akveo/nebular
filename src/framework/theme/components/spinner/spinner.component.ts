@@ -42,10 +42,7 @@ import { NbComponentStatus } from '../component-status';
  */
 @Component({
   selector: 'nb-spinner',
-  template: `
-    <span class="spin-circle"></span>
-    <span class="message" *ngIf="message">{{ message }}</span>
-  `,
+  templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
 })
 export class NbSpinnerComponent {

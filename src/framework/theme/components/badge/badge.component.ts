@@ -58,9 +58,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `
-    <span class="nb-badge {{positionClass}} nb-badge-{{colorClass}}">{{text}}</span>
-  `,
+  templateUrl: './badge.component.html',
 })
 export class NbBadgeComponent {
   static readonly TOP_LEFT = 'top left';

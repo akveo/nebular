@@ -20,7 +20,7 @@ import { NbDateService } from '../../services';
 
 @Component({
   selector: 'nb-calendar-day-cell',
-  template: '{{ day }}',
+  templateUrl: './calendar-day-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'class': 'day-cell' },
 })

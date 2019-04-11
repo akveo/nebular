@@ -34,9 +34,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  */
 @Component({
   selector: 'nb-layout-column',
-  template: `
-    <ng-content></ng-content>
-  `,
+  templateUrl: './layout-column.component.html',
 })
 export class NbLayoutColumnComponent {
 
@@ -96,11 +94,7 @@ export class NbLayoutColumnComponent {
  */
 @Component({
   selector: 'nb-layout-header',
-  template: `
-    <nav [class.fixed]="fixedValue">
-      <ng-content></ng-content>
-    </nav>
-  `,
+  templateUrl: './layout-header.component.html',
 })
 export class NbLayoutHeaderComponent {
 
@@ -149,11 +143,7 @@ export class NbLayoutHeaderComponent {
  */
 @Component({
   selector: 'nb-layout-footer',
-  template: `
-    <nav [class.fixed]="fixedValue">
-      <ng-content></ng-content>
-    </nav>
-  `,
+  templateUrl: './layout-footer.component.html',
 })
 export class NbLayoutFooterComponent {
 
@@ -271,23 +261,7 @@ export class NbLayoutFooterComponent {
 @Component({
   selector: 'nb-layout',
   styleUrls: ['./layout.component.scss'],
-  template: `
-    <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
-      <div class="layout">
-        <ng-content select="nb-layout-header:not([subheader])"></ng-content>
-        <div class="layout-container">
-          <ng-content select="nb-sidebar"></ng-content>
-          <div class="content" [class.center]="centerValue">
-            <ng-content select="nb-layout-header[subheader]"></ng-content>
-            <div class="columns">
-              <ng-content select="nb-layout-column"></ng-content>
-            </div>
-            <ng-content select="nb-layout-footer"></ng-content>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './layout.component.html',
 })
 export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 

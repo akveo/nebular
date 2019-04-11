@@ -25,11 +25,6 @@ import {
   NbRowDefDirective,
 } from './row';
 
-export const NB_TABLE_TEMPLATE = `
-  <ng-container nbHeaderRowOutlet></ng-container>
-  <ng-container nbRowOutlet></ng-container>
-  <ng-container nbFooterRowOutlet></ng-container>`;
-
 export class NbTable<T> extends CdkTable<T> {
   constructor(
     differs: IterableDiffers,

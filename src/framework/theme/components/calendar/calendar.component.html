@@ -1,0 +1,15 @@
+<nb-base-calendar
+  [boundingMonth]="boundingMonth"
+  [startView]="startView"
+  [date]="date"
+  [min]="min"
+  [max]="max"
+  [filter]="filter"
+  [dayCellComponent]="dayCellComponent"
+  [monthCellComponent]="monthCellComponent"
+  [yearCellComponent]="yearCellComponent"
+  [size]="size"
+  [visibleDate]="visibleDate"
+  [showHeader]="showHeader"
+  (dateChange)="dateChange.emit($event)">
+</nb-base-calendar>

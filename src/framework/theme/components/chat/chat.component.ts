@@ -130,18 +130,7 @@ import { NbChatMessageComponent } from './chat-message.component';
 @Component({
   selector: 'nb-chat',
   styleUrls: ['./chat.component.scss'],
-  template: `
-    <div class="header">{{ title }}</div>
-    <div class="scrollable" #scrollable>
-      <div class="messages">
-        <ng-content select="nb-chat-message"></ng-content>
-        <p class="no-messages" *ngIf="!messages?.length">No messages yet.</p>
-      </div>
-    </div>
-    <div class="form">
-      <ng-content select="nb-chat-form"></ng-content>
-    </div>
-  `,
+  templateUrl: './chat.component.html',
 })
 export class NbChatComponent implements AfterViewInit {
 

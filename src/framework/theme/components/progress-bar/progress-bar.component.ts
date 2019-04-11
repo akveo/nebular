@@ -88,14 +88,7 @@ import { NbComponentSize, NbComponentStatus } from '@nebular/theme';
 @Component({
   selector: 'nb-progress-bar',
   styleUrls: ['./progress-bar.component.scss'],
-  template: `
-    <div class="progress-container">
-      <div class="progress-value" [style.width.%]="value">
-        <span *ngIf="displayValue">{{ value }}%</span>
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `,
+  templateUrl: './progress-bar.component.html',
 })
 export class NbProgressBarComponent {
 
