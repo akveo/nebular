@@ -1,6 +1,6 @@
 import { dest, src, task } from 'gulp';
 import * as path from 'path';
-import { BUILD_DIR } from './config';
+import { BUILD_DIR, LIB_DIR } from './config';
 
 const sass = require('gulp-sass');
 const replace = require('gulp-replace');
@@ -8,8 +8,16 @@ const replace = require('gulp-replace');
 task('copy-sources', () => {
   src('./src/framework/**/*')
     .pipe(dest(BUILD_DIR))
-    .on('end', replaceScssWithCss);
+    .on('end', () => {
+      copyHtmlAndScss();
+      replaceScssWithCss();
+    });
 });
+
+function copyHtmlAndScss() {
+  src([`${BUILD_DIR}/theme/**/*.html`, `${BUILD_DIR}/theme/**/*.scss`])
+    .pipe(dest(`${LIB_DIR}/theme`));
+}
 
 task('copy-schematics', () => {
   src([
