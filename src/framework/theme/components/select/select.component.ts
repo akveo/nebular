@@ -25,8 +25,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { take, takeWhile } from 'rxjs/operators';
 import { merge, Observable, Subject } from 'rxjs';
+import { startWith, switchMap, takeWhile } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -252,10 +252,13 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    */
   overlayPosition: NbPosition = '' as NbPosition;
 
-  /**
-   * Stream of events that will fire when one of the options fire selectionChange event.
-   * */
   protected selectionChange$: Subject<NbOptionComponent<T>> = new Subject();
+  /**
+   * Stream of events that will fire when one of the options is clicked.
+   * @deprecated
+   * Use nb-select (selected) binding to track selection change and <nb-option (click)=""> to track option click.
+   * @breaking-change 4.0.0
+   **/
   readonly selectionChange: Observable<NbOptionComponent<T>> = this.selectionChange$.asObservable();
 
   protected ref: NbOverlayRef;
@@ -321,25 +324,36 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.createOverlay();
   }
 
+  ngAfterContentInit() {
+    if (this.queue) {
+      // Call 'writeValue' when current change detection run is finished.
+      // When writing is finished, change detection starts again, since
+      // microtasks queue is empty.
+      // Prevents ExpressionChangedAfterItHasBeenCheckedError.
+      Promise.resolve().then(() => {
+        this.writeValue(this.queue);
+        this.queue = null;
+      });
+    }
+  }
+
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
-    this.subscribeOnSelectionChange();
-  }
-
-  ngAfterContentInit() {
-    if (this.queue) {
-      this.writeValue(this.queue);
-      this.cd.detectChanges();
-    }
+    this.subscribeOnOptionClick();
   }
 
   ngOnDestroy() {
     this.alive = false;
 
-    this.ref.dispose();
+    if (this.ref) {
+      this.ref.dispose();
+    }
+    if (this.triggerStrategy) {
+      this.triggerStrategy.destroy();
+    }
   }
 
   show() {
@@ -366,10 +380,14 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   writeValue(value: T | T[]): void {
+    if (!value || !this.alive) {
+      return;
+    }
+
     if (this.options) {
       this.setSelection(value);
     } else {
@@ -380,14 +398,14 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   /**
    * Selects option or clear all selected options if value is null.
    * */
-  protected handleSelect(option: NbOptionComponent<T>) {
+  protected handleOptionClick(option: NbOptionComponent<T>) {
     if (option.value != null) {
       this.selectOption(option);
     } else {
       this.reset();
     }
 
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   /**
@@ -472,43 +490,42 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.show());
-
-    this.triggerStrategy.hide$
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(($event: Event) => {
-        this.hide();
-        if (!this.isClickedWithinComponent($event)) {
-          this.onTouched();
-        }
-      });
+    this.triggerStrategy.show$.subscribe(() => this.show());
+    this.triggerStrategy.hide$.subscribe(($event: Event) => {
+      this.hide();
+      if (!this.isClickedWithinComponent($event)) {
+        this.onTouched();
+      }
+    });
   }
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
       .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => this.overlayPosition = position);
-
-    this.positionStrategy.positionChange
-      .pipe(take(1))
-      .subscribe(() => this.cd.detectChanges());
+      .subscribe((position: NbPosition) => {
+        this.overlayPosition = position;
+        this.cd.detectChanges();
+      });
   }
 
-  protected subscribeOnSelectionChange() {
-    this.subscribeOnOptionsSelectionChange();
+  protected subscribeOnOptionClick() {
     /**
      * If the user changes provided options list in the runtime we have to handle this
      * and resubscribe on options selection changes event.
      * Otherwise, the user will not be able to select new options.
      * */
     this.options.changes
-      .subscribe(() => this.subscribeOnOptionsSelectionChange());
-
-    this.selectionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((option: NbOptionComponent<T>) => this.handleSelect(option));
+      .pipe(
+        startWith(this.options),
+        switchMap((options: QueryList<NbOptionComponent<T>>) => {
+          return merge(...options.map(option => option.click));
+        }),
+        takeWhile(() => this.alive),
+      )
+      .subscribe((clickedOption: NbOptionComponent<T>) => {
+        this.handleOptionClick(clickedOption);
+        this.selectionChange$.next(clickedOption);
+      });
   }
 
   protected getContainer() {
@@ -541,7 +558,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       throw new Error('Can\'t assign array if select is not marked as multiple');
     }
 
-    this.cleanSelection();
+    const previouslySelectedOptions = this.selectionModel;
+    this.selectionModel = [];
 
     if (isArray) {
       (<T[]> value).forEach((option: T) => this.selectValue(option));
@@ -549,13 +567,12 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
       this.selectValue(<T> value);
     }
 
-    this.cd.markForCheck();
-    this.cd.detectChanges();
-  }
+    // find options which were selected before and trigger deselect
+    previouslySelectedOptions
+      .filter((option: NbOptionComponent<T>) => !this.selectionModel.includes(option))
+      .forEach((option: NbOptionComponent<T>) => option.deselect());
 
-  protected cleanSelection() {
-    this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
-    this.selectionModel = [];
+    this.cd.markForCheck();
   }
 
   /**
@@ -582,11 +599,5 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
-  }
-
-  protected subscribeOnOptionsSelectionChange() {
-    merge(...this.options.map(it => it.selectionChange))
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((change: NbOptionComponent<T>) => this.selectionChange$.next(change));
   }
 }

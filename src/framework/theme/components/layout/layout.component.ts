@@ -443,7 +443,21 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         filter(() => this.withScrollValue),
       )
       .subscribe((scrollable: boolean) => {
+        const root = this.document.documentElement;
+        const scrollBlockClass = 'nb-global-scrollblock';
+
         this.overlayScrollBlock = !scrollable;
+
+        /**
+         * In case when Nebular Layout custom scroll `withScroll` mode is enabled
+         * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
+         * so that it won't add additional positioning.
+         */
+        if (!scrollable) {
+          this.renderer.addClass(root, scrollBlockClass);
+        } else {
+          this.renderer.removeClass(root, scrollBlockClass);
+        }
       });
 
     if (isPlatformBrowser(this.platformId)) {

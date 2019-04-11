@@ -29,7 +29,7 @@ import {
   applyReplaceChange,
   findRoutingModule,
   findFeatureModule,
-  getPlaygroundRootDir,
+  getPlaygroundDirs,
   findRoutesArray,
   addMissingChildRoutes,
   isInPlaygroundRoot,
@@ -42,7 +42,7 @@ import {
 } from '../utils';
 
 export function addToModules(tree: Tree, context: SchematicContext): Tree {
-  processDirs(tree, context, [getPlaygroundRootDir(tree)]);
+  processDirs(tree, context, getPlaygroundDirs(tree));
   return tree;
 }
 

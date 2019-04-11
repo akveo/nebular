@@ -1,6 +1,4 @@
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -37,9 +35,9 @@ export class NbDynamicOverlayHandler {
   protected _offset: number = 15;
 
   protected dynamicOverlay: NbDynamicOverlay;
+  protected triggerStrategy: NbTriggerStrategy;
 
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected disconnect$ = new Subject();
 
   protected changes: { [key: string]: NbDynamicOverlayChange } = {};
 
@@ -155,7 +153,9 @@ export class NbDynamicOverlayHandler {
   }
 
   disconnect() {
-    this.disconnect$.next();
+    if (this.triggerStrategy) {
+      this.triggerStrategy.destroy();
+    }
   }
 
   destroy() {
@@ -175,22 +175,14 @@ export class NbDynamicOverlayHandler {
   }
 
   protected subscribeOnTriggers(dynamicOverlay: NbDynamicOverlay) {
-
-    const triggerStrategy: NbTriggerStrategy = this.triggerStrategyBuilder
+    this.triggerStrategy = this.triggerStrategyBuilder
       .trigger(this._trigger)
       .host(this._host.nativeElement)
       .container(() => dynamicOverlay.getContainer())
       .build();
 
-    triggerStrategy.show$.pipe(
-      takeUntil(this.disconnect$),
-    )
-      .subscribe(() => dynamicOverlay.show());
-
-    triggerStrategy.hide$.pipe(
-      takeUntil(this.disconnect$),
-    )
-      .subscribe(() => dynamicOverlay.hide());
+    this.triggerStrategy.show$.subscribe(() => dynamicOverlay.show());
+    this.triggerStrategy.hide$.subscribe(() => dynamicOverlay.hide());
   }
 
   protected isContainerRerenderRequired() {

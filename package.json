@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "3.4.0",
+  "version": "3.4.2",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -32,6 +32,7 @@
     "docs:dirs": "gulp create-docs-dirs",
     "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
     "build": "ng build",
+    "build:prod": "npm run build -- --prod",
     "build:wp": "npm run build -- playground-wp --prod --aot",
     "build:package": "npm-run-all -s clean:tmp:lib gulp build:ts build:schematics:package build:inline-resources build:bundle clean:tmp",
     "build:ts": "tsc -p tsconfig.publish.json && ngc -p tsconfig.publish.json",
@@ -70,6 +71,7 @@
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
     "publish": "./scripts/publish.sh",
+    "update-packages-smoke-lock": "./scripts/update-packages-smoke-lock.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
     "postinstall": "npm run cli:firefox-fix",
     "gen:playground": "ng g .:playground",
@@ -135,7 +137,7 @@
     "conventional-changelog-cli": "1.3.4",
     "del": "3.0.0",
     "doc-prsr": "2.2.0",
-    "firebase-tools": "^3.18.6",
+    "firebase-tools": "^5.1.1",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
     "gulp-clean-css": "3.0.4",

@@ -14,11 +14,13 @@ import {
   Output,
   Type,
 } from '@angular/core';
-import { batch, range } from '../../helpers';
+import { batch } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 import { NbDateService } from '../../services';
 
+export const MONTHS_IN_VIEW = 12;
+export const MONTHS_IN_COLUMN = 4;
 
 @Component({
   selector: 'nb-calendar-month-picker',
@@ -73,15 +75,19 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnInit {
   }
 
   initMonths() {
-    const months: D[] = range(12).map(i => this.createMonthDateByIndex(i));
-    this.months = batch(months, 4);
+    const date = this.dateService.getDate(this.month);
+    const year = this.dateService.getYear(this.month);
+    const firstMonth = this.dateService.createDate(year, 0, date);
+    const months = [ firstMonth ];
+
+    for (let monthIndex = 1; monthIndex < MONTHS_IN_VIEW; monthIndex++) {
+      months.push(this.dateService.addMonth(firstMonth, monthIndex));
+    }
+
+    this.months = batch(months, MONTHS_IN_COLUMN);
   }
 
   onSelect(month: D) {
     this.monthChange.emit(month);
-  }
-
-  private createMonthDateByIndex(i: number): D {
-    return this.dateService.createDate(this.dateService.getYear(this.month), i, this.dateService.getDate(this.month));
   }
 }
