@@ -16,6 +16,7 @@ export class NbSearchService {
   private searchSubmittings$ = new Subject<{ term: string, tag?: string }>();
   private searchActivations$ = new Subject<{ searchType: string, tag?: string }>();
   private searchDeactivations$ = new Subject<{ searchType: string, tag?: string }>();
+  private searchInput$ = new Subject<{ term: string, tag?: string }>();
 
   /***
    * Activate (open) search component
@@ -45,6 +46,15 @@ export class NbSearchService {
   }
 
   /**
+   * Trigger search submit by input event
+   * @param {string} term
+   * @param {string} tag
+   */
+  searchInput(term: string, tag?: string) {
+    this.searchInput$.next({term, tag});
+  }
+
+  /**
    * Subscribe to 'activate' event
    * @returns Observable<{searchType: string; tag?: string}>
    */
@@ -66,5 +76,13 @@ export class NbSearchService {
    */
   onSearchSubmit(): Observable<{ term: string, tag?: string }> {
     return this.searchSubmittings$.pipe(share());
+  }
+
+  /**
+   * Subscribe to input event
+   * @returns Observable<{term: string; tag?: string}>
+   */
+  onSearchInput(): Observable<{ term: string, tag?: string }> {
+    return this.searchInput$.pipe(share());
   }
 }
