@@ -13,7 +13,7 @@ First, let's install the module as it's distributed as npm package. Make sure yo
 Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.  
 
 ```bash
-npm i @nebular/auth
+npm i @nebular/auth@3
 ```
 <hr>
 
@@ -130,7 +130,7 @@ export const routes: Routes = [
 Last but not least - install the component styles into your styles.scss ([more details](docs/guides/enable-theme-system)):
 
 ```scss
-@import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/{theme-name}';
+@import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/theme/{theme-name}';
 
 // ... 
 
@@ -139,6 +139,13 @@ Last but not least - install the component styles into your styles.scss ([more d
   @include nb-auth-global(); // append the install mixin inside of the nb-install
 };
 
+```
+
+`@import '~@nebular/auth/styles/all'` means import auth styles for all themes (default, cosmic, corporate). If you have only one or portion of themes enabled, then you need to import auth styles only for enabled themes. For example, when only default and corporate themes enabled, auth imports should look like this:
+```scss
+@import '~@nebular/auth/styles/themes/default';
+@import '~@nebular/auth/styles/themes/corporate';
+@import '~@nebular/auth/styles/globals';
 ```
 
 At this point, if you navigate to http://localhost:4200/#/auth/login the login form is shown.

@@ -1,3 +1,38 @@
+<a name="3.4.2"></a>
+## [3.4.2](https://github.com/akveo/nebular/compare/v3.4.1...v3.4.2) (2019-03-31)
+
+### Highlights
+Fixed [regressing in all overlay components failing](https://github.com/akveo/nebular/issues/1289) to open after host component being destroyed and re-created.
+
+### Bug Fixes
+
+* **cdk:**  destroy overlay triggers manually ([#1316](https://github.com/akveo/nebular/pull/1316)) ([77b737](https://github.com/akveo/nebular/commit/77b737)), closes [#1292](https://github.com/akveo/nebular/issues/1292), [#1290](https://github.com/akveo/nebular/issues/1290), [#1273](https://github.com/akveo/nebular/issues/1273), [#1289](https://github.com/akveo/nebular/issues/1289)
+* **docs:** keep nb-fs-icon in tree-grid showcase only ([#1330](https://github.com/akveo/nebular/issues/1330)) ([0e1f432](https://github.com/akveo/nebular/commit/0e1f432))
+* **menu:** highlight when active anchors ([#1034](https://github.com/akveo/nebular/issues/1034)) ([c14215a](https://github.com/akveo/nebular/commit/c14215a)), closes [#875](https://github.com/akveo/nebular/issues/875)
+* **select:** prevent change detection of destroyed option ([#1329](https://github.com/akveo/nebular/issues/1329)) ([9e2245f](https://github.com/akveo/nebular/commit/9e2245f))
+
+
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/akveo/nebular/compare/v3.4.0...v3.4.1) (2019-03-18)
+
+
+### Bug Fixes
+
+* **context-menu:** updated context menu arrow left position calculation ([#1268](https://github.com/akveo/nebular/issues/1268)) ([0db8c2c](https://github.com/akveo/nebular/commit/0db8c2c)), closes [#973](https://github.com/akveo/nebular/issues/973)
+* **date service:** prevent format calls if date isn't passed ([#1291](https://github.com/akveo/nebular/issues/1291)) ([a3d6035](https://github.com/akveo/nebular/commit/a3d6035))
+* **datepicker:**  start from date typed in input ([#1300](https://github.com/akveo/nebular/issues/1300)) ([dfc75f0](https://github.com/akveo/nebular/commit/dfc75f0))
+* **docs:** add search container class ([#1270](https://github.com/akveo/nebular/issues/1270)) ([e1a84f4](https://github.com/akveo/nebular/commit/e1a84f4))
+* **select:** update selected after cd run is finished ([#1299](https://github.com/akveo/nebular/issues/1299)) ([2a1f113](https://github.com/akveo/nebular/commit/2a1f113))
+* **window:** Fixed window.component.ts creating incorrect context ([#1266](https://github.com/akveo/nebular/issues/1266)) ([30f4a5d](https://github.com/akveo/nebular/commit/30f4a5d))
+
+
+### Features
+
+* **playground:** add without-styles folder for bootstrap like use-cases ([#1271](https://github.com/akveo/nebular/issues/1271)) ([8e852ca](https://github.com/akveo/nebular/commit/8e852ca))
+* **smoke:** include packages-smoke update into release ([#1258](https://github.com/akveo/nebular/issues/1258)) ([8db4b29](https://github.com/akveo/nebular/commit/8db4b29))
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/akveo/nebular/compare/v3.3.0...v3.4.0) (2019-02-25)
 
@@ -8,7 +43,7 @@
 * **docs:** fix password strategy link ([#1245](https://github.com/akveo/nebular/issues/1245)) ([c71d9fd](https://github.com/akveo/nebular/commit/c71d9fd))
 
 
-### Features
+### Dev Features
 
 * **route-tabset:** configurable routerLinkActiveOptions ([#1239](https://github.com/akveo/nebular/issues/1239)) ([3cf29d8](https://github.com/akveo/nebular/commit/3cf29d8))
 * **tree-grid:** allow specify getters for node properties ([#1254](https://github.com/akveo/nebular/issues/1254)) ([a263a2e](https://github.com/akveo/nebular/commit/a263a2e))

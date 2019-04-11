@@ -96,7 +96,11 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   addMonth(date: Date, num: number): Date {
-    return this.createDate(date.getFullYear(), date.getMonth() + num, date.getDate());
+    const month = this.createDate(date.getFullYear(), date.getMonth() + num, 1);
+    // In case of date has more days than calculated month js Date will change that month to the next one
+    // because of the date overflow.
+    month.setDate(Math.min(date.getDate(), this.getMonthEnd(month).getDate()));
+    return month;
   }
 
   addYear(date: Date, num: number): Date {

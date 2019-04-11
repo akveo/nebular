@@ -46,6 +46,21 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * Supports filtering and sorting.
  * @stacked-example(Showcase, tree-grid/tree-grid-showcase.component)
  *
+ * ### Installation
+ *
+ * Import `NbTreeGridModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTreeGridModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ *
+ * ### Usage
+ *
  * As the most basic usage you need to define [nbTreeGridRowDef](docs/components/treegrid/api#nbtreegridrowdefdirective)
  * where you should pass columns to display in rows and
  * [nbTreeGridColumnDef](docs/components/treegrid/api#nbtreegridcolumndefdirective) - component containing cell

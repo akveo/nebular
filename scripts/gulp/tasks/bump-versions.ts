@@ -17,7 +17,7 @@ task('version', () => {
   return fs.readdirSync(FRAMEWORK_ROOT)
     .filter(keepNebularPackages)
     .map(createFullPathToPackageJson)
-    .concat('./package.json')
+    .concat(['./package.json', './packages-smoke/package.json'])
     .map(bumpVersionAndNebularPeers);
 });
 

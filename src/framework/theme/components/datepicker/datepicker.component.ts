@@ -141,6 +141,11 @@ export abstract class NbBasePicker<D, T, P>
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
 
   /**
+   * Trigger strategy used by overlay
+   * */
+  protected triggerStrategy: NbTriggerStrategy;
+
+  /**
    * HTML input reference to which datepicker connected.
    * */
   protected hostRef: ElementRef;
@@ -232,6 +237,8 @@ export abstract class NbBasePicker<D, T, P>
     if (this.ref) {
       this.ref.dispose();
     }
+
+    this.triggerStrategy.destroy();
   }
 
   /**
@@ -314,9 +321,9 @@ export abstract class NbBasePicker<D, T, P>
   }
 
   protected subscribeOnTriggers() {
-    const triggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => {
+    this.triggerStrategy = this.createTriggerStrategy();
+    this.triggerStrategy.show$.subscribe(() => this.show());
+    this.triggerStrategy.hide$.subscribe(() => {
       this.blur$.next();
       this.hide();
     });
@@ -399,6 +406,7 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
     }
 
     if (date) {
+      this.visibleDate = date;
       this.picker.visibleDate = date;
       this.picker.date = date;
     }
@@ -409,7 +417,11 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const date = this.queue;
+      this.queue = null;
+      this.value = date;
+    }
   }
 }
 
@@ -449,7 +461,9 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
     }
 
     if (range) {
-      this.picker.visibleDate = range && range.start;
+      const visibleDate = range && range.start;
+      this.visibleDate = visibleDate;
+      this.picker.visibleDate = visibleDate;
       this.picker.range = range;
     }
   }
@@ -463,6 +477,10 @@ export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D
   }
 
   protected writeQueue() {
-    this.value = this.queue;
+    if (this.queue) {
+      const range = this.queue;
+      this.queue = null;
+      this.value = range;
+    }
   }
 }

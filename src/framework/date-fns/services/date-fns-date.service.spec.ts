@@ -24,6 +24,11 @@ describe('date-fns-date-service', () => {
     expect(dateService.parse(date, 'MM.dd.yyyy')).toEqual(new Date(2018, 5, 15));
   });
 
+  it('should not format if date isn\'t passed', () => {
+    expect(() => dateService.format(undefined, 'DD.MM.YYYY')).not.toThrow();
+    expect(dateService.format(undefined, 'DD.MM.YYYY')).toEqual('');
+  });
+
   describe('service global config', () => {
     const SEPARATOR = '_';
     const FORMAT = `MM${SEPARATOR}dd${SEPARATOR}yyyy`;
