@@ -399,10 +399,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Selects option or clear all selected options if value is null.
    * */
   protected handleOptionClick(option: NbOptionComponent<T>) {
-    if (option.value != null) {
-      this.selectOption(option);
-    } else {
+    if (option.value == null) {
       this.reset();
+    } else {
+      this.selectOption(option);
     }
 
     this.cd.markForCheck();
