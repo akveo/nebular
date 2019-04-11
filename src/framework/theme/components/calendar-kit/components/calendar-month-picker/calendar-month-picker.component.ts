@@ -75,15 +75,19 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnInit {
   }
 
   initMonths() {
-    const months: D[] = range(MONTHS_IN_VIEW).map(i => this.createMonthDateByIndex(i));
+    const date = this.dateService.getDate(this.month);
+    const year = this.dateService.getYear(this.month);
+    const firstMonth = this.dateService.createDate(year, 0, date);
+    const months = [ firstMonth ];
+
+    for (let monthIndex = 1; monthIndex < MONTHS_IN_VIEW; monthIndex++) {
+      months.push(this.dateService.addMonth(firstMonth, monthIndex));
+    }
+
     this.months = batch(months, MONTHS_IN_COLUMN);
   }
 
   onSelect(month: D) {
     this.monthChange.emit(month);
-  }
-
-  private createMonthDateByIndex(i: number): D {
-    return this.dateService.createDate(this.dateService.getYear(this.month), i, this.dateService.getDate(this.month));
   }
 }
