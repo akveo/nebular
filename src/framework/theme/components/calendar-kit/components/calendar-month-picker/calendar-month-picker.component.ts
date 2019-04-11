@@ -14,7 +14,7 @@ import {
   Output,
   Type,
 } from '@angular/core';
-import { batch, range } from '../../helpers';
+import { batch } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 import { NbDateService } from '../../services';
