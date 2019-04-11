@@ -21,7 +21,6 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
         </nb-card>
       </nb-layout-column>
     </nb-layout>
-
   `,
 })
 export class SearchWithInputEventComponent implements OnInit {
