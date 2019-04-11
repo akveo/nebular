@@ -1459,6 +1459,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SearchTestComponent',
         name: 'Search Test',
       },
+      {
+        path: 'search-with-input-event.component',
+        link: '/search/search-with-input-event.component',
+        component: 'SearchWithInputEventComponent',
+        name: 'Search With Input Event',
+      },
     ],
   },
   {
