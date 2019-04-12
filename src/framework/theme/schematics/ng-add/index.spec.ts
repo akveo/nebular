@@ -63,10 +63,10 @@ describe('ng-add', () => {
   it('should add @angular/cdk in package.json', () => {
     const tree = runNgAddSchematic();
     const dependencies = getPackageDependencies(tree);
-    const angularCoreVersion = dependencies['@angular/core'];
+    const angularCdkVersion = require('../../package.json').peerDependencies['@angular/cdk'];
 
     expect(dependencies['@angular/cdk']).toBeDefined();
-    expect(dependencies['@angular/cdk']).toBe(angularCoreVersion);
+    expect(dependencies['@angular/cdk']).toBe(angularCdkVersion);
   });
 
   it('should add @angular/animations in package.json', function () {
@@ -91,9 +91,12 @@ describe('ng-add', () => {
     const tree = runNgAddSchematic();
     const dependencies = getPackageDependencies(tree);
     const nebularEvaIconsVersion = require('../../package.json').version;
+    const evaIconsVersion = require('../../../eva-icons/package.json').peerDependencies['eva-icons'];
 
     expect(dependencies['@nebular/eva-icons']).toBeDefined();
     expect(dependencies['@nebular/eva-icons']).toBe(nebularEvaIconsVersion);
+    expect(dependencies['eva-icons']).toBeDefined();
+    expect(dependencies['eva-icons']).toBe(evaIconsVersion);
   });
 
   it('should register NbThemeModule.forRoot()', () => {
