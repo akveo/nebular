@@ -45,7 +45,7 @@ function installMainPeerDependencies(tree) {
 }
 
 /**
- * Runs `npm install` and after complete runs `setup` schematics.
+ * Runs `npm install`, then `post-install` schematic and after complete runs `setup` schematics.
  * The rest part of the ng-add schematics uses `@angular/cdk/schematics` and `@schematics/angular`
  * utilities. That's why we have to install `@angular/cdk` and `@schematics/angular` package
  * before running Nebular setup in the project.
