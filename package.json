@@ -41,6 +41,7 @@
     "build:inline-schematics-resources": "gulp inline-schematics-resources",
     "build:inline-resources": "gulp inline-resources",
     "build:bundle": "gulp bundle",
+    "build:bundle-theme": "gulp bundle:umd:theme",
     "build:rename:dev": "gulp bundle:rename-dev",
     "build:schematics": "rimraf ./schematics/dist && tsc -p ./schematics/tsconfig.json && gulp copy-schematics",
     "test": "ng test",
@@ -55,7 +56,7 @@
     "e2e": "ng e2e playground-e2e",
     "e2e:wp": "ng e2e playground-wp-e2e",
     "prepush": "npm run ci:lint",
-    "clean:tmp": "rimraf .ng_build .ng_compiled",
+    "clean:tmp": "rimraf .ng_build .ng_compiled tsconfig-custom.publish.json",
     "clean:tmp:lib": "npm run clean:tmp && rimraf src/.lib",
     "ci:lint": "npm run lint && npm run lint:styles",
     "ci:docs": "npm-run-all docs:prepare docs:build ",
@@ -76,7 +77,10 @@
     "postinstall": "npm run cli:firefox-fix",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
-    "gen:playground-components": "ng g .:playground-components"
+    "gen:playground-components": "ng g .:playground-components",
+    "gulp:change-prefix": "gulp change-prefix",
+    "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
+    "build:custom-prefix": "npm-run-all -s clean:tmp:lib \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle-theme clean:tmp --"
   },
   "keywords": [
     "angular",
