@@ -13,7 +13,7 @@ First, let's install the module as it's distributed as npm package. Make sure yo
 Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.  
 
 ```bash
-npm i @nebular/auth@3
+npm i @nebular/auth
 ```
 <hr>
 

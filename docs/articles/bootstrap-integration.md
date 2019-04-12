@@ -14,7 +14,7 @@ To enable bootstrap support you have to do the following:
 - Install nebular bootstrap and bootstrap itself packages: 
 
 ```bash
-npm i @nebular/bootstrap@3 bootstrap
+npm i @nebular/bootstrap bootstrap
 ```
 
 - Add bootstrap in `angular.json`: 
