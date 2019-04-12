@@ -6,10 +6,10 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { NbComponentShape } from '@nebular/theme';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
