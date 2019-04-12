@@ -40,7 +40,7 @@ ng new PROJECT-NAME
 Nebular support init configuration with schematics. So, you may just add it to your project.
 
 ```bash
-ng add @nebular/theme@3
+ng add @nebular/theme
 ```
 
 That's it. Nebular has to be ready to go now.
@@ -59,7 +59,7 @@ At this step, we assume you already have Angular modules installed.
 ```bash
 npm install --save @nebular/theme @angular/cdk @angular/animations
 ```
-Additionally you can install Auth and Security `npm install --save @nebular/auth@3 @nebular/security@3`
+Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 <hr>
 
 ### Configure Nebular
