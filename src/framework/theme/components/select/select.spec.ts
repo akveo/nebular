@@ -148,6 +148,58 @@ export class NbNgModelSelectComponent {
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select>
+          <nb-option>No value option</nb-option>
+          <nb-option [value]="null">undefined value</nb-option>
+          <nb-option [value]="undefined">undefined value</nb-option>
+          <nb-option [value]="false">false value</nb-option>
+          <nb-option [value]="0">0 value</nb-option>
+          <nb-option [value]="''">empty string value</nb-option>
+          <nb-option [value]="nanValue">NaN value</nb-option>
+          <nb-option value="1">truthy value</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithFalsyOptionValuesComponent {
+  nanValue = NaN;
+
+  @ViewChild(NbSelectComponent) select: NbSelectComponent<any>;
+  @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
+
+  get noValueOption(): NbOptionComponent<any> {
+    return this.options.toArray()[0];
+  }
+  get nullOption(): NbOptionComponent<any> {
+    return this.options.toArray()[1];
+  }
+  get undefinedOption(): NbOptionComponent<any> {
+    return this.options.toArray()[2];
+  }
+  get falseOption(): NbOptionComponent<any> {
+    return this.options.toArray()[3];
+  }
+  get zeroOption(): NbOptionComponent<any> {
+    return this.options.toArray()[4];
+  }
+  get emptyStringOption(): NbOptionComponent<any> {
+    return this.options.toArray()[5];
+  }
+  get nanOption(): NbOptionComponent<any> {
+    return this.options.toArray()[6];
+  }
+  get truthyOption(): NbOptionComponent<any> {
+    return this.options.toArray()[7];
+  }
+}
+
 describe('Component: NbSelectComponent', () => {
   let fixture: ComponentFixture<NbSelectTestComponent>;
   let overlayContainerService: NbOverlayContainerAdapter;
@@ -302,84 +354,6 @@ describe('Component: NbSelectComponent', () => {
     });
   });
 
-  it('should clean selection when selected option does not have a value', () => {
-    setSelectedAndOpen('Option 1');
-
-    const option = overlayContainer.querySelectorAll('nb-option')[13];
-    option.dispatchEvent(new Event('click'));
-
-    fixture.detectChanges();
-    select.show();
-
-    expect(overlayContainer.querySelectorAll('nb-option.selected').length).toBe(0);
-  });
-
-  it('should render default label when selecting option with value of empty string', () => {
-    setSelectedAndOpen('');
-    const selected = overlayContainer.querySelector('nb-option.selected');
-
-    expect(selected).toBeTruthy();
-    expect(selected.textContent).toEqual('Option 41');
-  });
-
-  it('should render default label when option with value of empty string is clicked', () => {
-    setSelectedAndOpen('Option 1');
-
-    const option = overlayContainer.querySelectorAll('nb-option')[10];
-    option.dispatchEvent(new Event('click'));
-
-    fixture.detectChanges();
-    select.show();
-
-    const selected = overlayContainer.querySelectorAll('nb-option.selected');
-    expect(selected.length).toBe(1);
-    expect(selected[0].textContent).toEqual('Option 41');
-  });
-
-  it('should render default label when selecting option with value "0"', () => {
-    setSelectedAndOpen('0');
-    const selected = overlayContainer.querySelector('nb-option.selected');
-
-    expect(selected).toBeTruthy();
-    expect(selected.textContent).toEqual('Option 42');
-  });
-
-  it('should render default label when option with value of "0" is clicked', () => {
-    setSelectedAndOpen('Option 1');
-
-    const option = overlayContainer.querySelectorAll('nb-option')[11];
-    option.dispatchEvent(new Event('click'));
-
-    fixture.detectChanges();
-    select.show();
-
-    const selected = overlayContainer.querySelectorAll('nb-option.selected');
-    expect(selected.length).toBe(1);
-    expect(selected[0].textContent).toEqual('Option 42');
-  });
-
-  it('should render default label when selecting option with value of 0', () => {
-    setSelectedAndOpen(0);
-    const selected = overlayContainer.querySelector('nb-option.selected');
-
-    expect(selected).toBeTruthy();
-    expect(selected.textContent).toEqual('Option 43');
-  });
-
-  it('should render default label when option with value of 0 is clicked', () => {
-    setSelectedAndOpen('Option 1');
-
-    const option = overlayContainer.querySelectorAll('nb-option')[12];
-    option.dispatchEvent(new Event('click'));
-
-    fixture.detectChanges();
-    select.show();
-
-    const selected = overlayContainer.querySelectorAll('nb-option.selected');
-    expect(selected.length).toBe(1);
-    expect(selected[0].textContent).toEqual('Option 43');
-  });
-
   it('should select initially specified value without errors', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectWithInitiallySelectedOptionComponent);
     selectFixture.detectChanges();
@@ -499,6 +473,101 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
+});
+
+describe('NbSelectComponent - falsy values', () => {
+  let fixture: ComponentFixture<NbSelectWithFalsyOptionValuesComponent>;
+  let testComponent: NbSelectWithFalsyOptionValuesComponent;
+  let select: NbSelectComponent<any>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [ NbSelectWithFalsyOptionValuesComponent ],
+    });
+
+    fixture = TestBed.createComponent(NbSelectWithFalsyOptionValuesComponent);
+    testComponent = fixture.componentInstance;
+    select = testComponent.select;
+
+    fixture.detectChanges();
+    flush();
+  }));
+
+  it('should clean selection when selected option does not have a value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.noValueOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should clean selection when selected option has null value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.nullOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should clean selection when selected option has undefined value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.undefinedOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should not reset selection when selected option has false value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.falseOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has zero value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.zeroOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has empty string value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.emptyStringOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has NaN value', fakeAsync(() => {
+    select.setSelected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.nanOption.onClick();
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
 });
 
 describe('NbOptionComponent', () => {
