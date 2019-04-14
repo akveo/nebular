@@ -447,7 +447,7 @@ describe('Component: NbSelectComponent', () => {
     const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
 
-    const optionToSelect = testComponent.options.last;
+    const optionToSelect = testComponent.options.find(o => o.value != null);
     const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
 
     expect(optionToSelect.selected).toEqual(false);
