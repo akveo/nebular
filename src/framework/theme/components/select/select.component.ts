@@ -661,4 +661,57 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
   }
+
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
+  }
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
+  }
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
+  }
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
+  }
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
+  }
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
+  }
+  @HostBinding('class.shape-rectangle')
+  get rectangle(): boolean {
+    return this.shape === 'rectangle';
+  }
+  @HostBinding('class.shape-round')
+  get round(): boolean {
+    return this.shape === 'round';
+  }
+  @HostBinding('class.shape-semi-round')
+  get semiRound(): boolean {
+    return this.shape === 'semi-round';
+  }
 }
