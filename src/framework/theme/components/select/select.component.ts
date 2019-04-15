@@ -41,6 +41,9 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
 } from '../cdk';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
 import { NbOptionComponent } from './option.component';
 import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
@@ -158,20 +161,20 @@ export class NbSelectLabelComponent {
 export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
   /**
    * Select size, available sizes:
-   * `xxsmall`, `xsmall`, `small`, `medium`, `large`
+   * `tiny`, `small`, `medium` (default), `large`, `giant`
    */
-  @Input() size: string;
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Select status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: string = 'primary';
+  @Input() status: '' | NbComponentStatus = '';
 
   /**
-   * Select shapes: `rectangle`, `round`, `semi-round`
+   * Select shapes: `rectangle` (default), `round`, `semi-round`
    */
-  @Input() shape: string;
+  @Input() shape: NbComponentShape = 'rectangle';
 
   /**
    * Adds `hero` styles
