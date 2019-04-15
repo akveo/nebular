@@ -47,10 +47,14 @@ export class NbOptionComponent<T> implements OnDestroy {
    * */
   @Input() value: T;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   /**
    * Fires value when option selection change.
@@ -66,7 +70,6 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   selected: boolean = false;
-  disabled: boolean = false;
   private alive: boolean = true;
 
   constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
