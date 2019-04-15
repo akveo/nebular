@@ -1,16 +1,9 @@
-<button
-  nbButton
-  [size]="size"
-  [status]="status"
-  [shape]="shape"
-  [hero]="hero"
-  [disabled]="disabled"
-  [fullWidth]="fullWidth"
-  [outline]="outline"
-  [class.opened]="isOpened"
-  [ngClass]="overlayPosition"
-  (blur)="trySetTouched()"
-  type="button">
+<button [disabled]="disabled"
+        [class.placeholder]="!selectionModel.length"
+        [ngClass]="overlayPosition"
+        (blur)="trySetTouched()"
+        class="select-button"
+        type="button">
 
     <ng-container *ngIf="selectionModel?.length">
 
