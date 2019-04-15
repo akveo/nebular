@@ -3,7 +3,8 @@
         [ngClass]="overlayPosition"
         (blur)="trySetTouched()"
         class="select-button"
-        type="button">
+        type="button"
+        #selectButton>
 
     <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
       <ng-container *ngIf="customLabel; else defaultSelectionTemplate">

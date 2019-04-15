@@ -297,7 +297,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
-  @ViewChild(NbButtonComponent, { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectButton', { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
 
   /**
    * Determines is select opened.
