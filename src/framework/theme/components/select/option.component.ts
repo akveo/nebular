@@ -101,9 +101,9 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.selected;
   }
 
-  @HostBinding('class.disabled')
-  get disabledClass(): boolean {
-    return this.disabled;
+  @HostBinding('attr.disabled')
+  get disabledAttribute(): '' | null {
+    return this.disabled ? '' : null;
   }
 
   @HostListener('click')

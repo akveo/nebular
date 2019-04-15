@@ -12,11 +12,11 @@
     display: block;
   }
 
-  &.disabled {
-    pointer-events: none;
-  }
-
   /deep/ nb-option {
     padding: 0.75rem 0.75rem 0.75rem 2.5rem;
   }
+}
+
+:host([disabled]) {
+  pointer-events: none;
 }

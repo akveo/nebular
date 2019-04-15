@@ -7,10 +7,6 @@
 :host {
   display: block;
 
-  &.disabled {
-    pointer-events: none;
-  }
-
   &:hover {
     cursor: pointer;
   }
@@ -18,5 +14,9 @@
   nb-checkbox {
     pointer-events: none;
   }
+}
+
+:host([disabled]) {
+  pointer-events: none;
 }
 
