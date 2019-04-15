@@ -16,6 +16,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Inject,
   Input,
   OnDestroy,
@@ -49,6 +50,7 @@ import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 
+export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
 @Component({
   selector: 'nb-select-label',
@@ -177,34 +179,64 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   @Input() shape: NbComponentShape = 'rectangle';
 
   /**
-   * Adds `hero` styles
+   * Select appearances: `outline`, `filled`, `hero`
    */
-  @Input() hero: boolean;
-
-  /**
-   * Disables the select
-   */
-  @Input() disabled: boolean;
-
-  /**
-   * If set element will fill its container
-   */
-  @Input() fullWidth: boolean;
+  @Input() appearance: NbSelectAppearance = 'outline';
 
   /**
    * Adds `outline` styles
    */
-  @Input() outline: boolean;
+  @Input()
+  @HostBinding('class.appearance-outline')
+  get outline(): boolean {
+    return this.appearance === 'outline';
+  }
+  set outline(value: boolean) {
+    this._outline = convertToBoolProperty(value);
+  }
+  protected _outline: boolean = false;
+
+  /**
+   * Adds `hero` styles
+   */
+  @Input()
+  @HostBinding('class.appearance-hero')
+  get hero(): boolean {
+    return this.appearance === 'hero';
+  }
+  set hero(value: boolean) {
+    this._hero = convertToBoolProperty(value);
+  }
+  protected _hero: boolean = false;
+
+  /**
+   * Disables the select
+   */
+  @Input()
+  get disabled(): boolean {
+    return !!this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean;
+
+  /**
+   * If set element will fill its container
+   */
+  @Input()
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  protected _fullWidth: boolean = false;
 
   /**
    * Renders select placeholder if nothing selected.
    * */
   @Input() placeholder: string = '';
-
-  /**
-   * Will be emitted when selected value changes.
-   * */
-  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
 
   /**
    * Accepts selected item or array of selected items.
@@ -229,7 +261,12 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
   }
-  private _multiple: boolean = false;
+  protected _multiple: boolean = false;
+
+  /**
+   * Will be emitted when selected value changes.
+   * */
+  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
 
   /**
    * List of `NbOptionComponent`'s components passed as content.
