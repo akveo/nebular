@@ -179,7 +179,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   @Input() shape: NbComponentShape = 'rectangle';
 
   /**
-   * Select appearances: `outline`, `filled`, `hero`
+   * Select appearances: `outline` (default), `filled`, `hero`
    */
   @Input() appearance: NbSelectAppearance = 'outline';
 
@@ -195,6 +195,19 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this._outline = convertToBoolProperty(value);
   }
   protected _outline: boolean = false;
+
+  /**
+   * Adds `filled` styles
+   */
+  @Input()
+  @HostBinding('class.appearance-filled')
+  get filled(): boolean {
+    return this.appearance === 'filled';
+  }
+  set filled(value: boolean) {
+    this._filled = convertToBoolProperty(value);
+  }
+  protected _filled: boolean = false;
 
   /**
    * Adds `hero` styles
