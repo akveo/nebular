@@ -24,6 +24,7 @@
 
     <ng-container *ngIf="!selectionModel?.length">{{ placeholder }}</ng-container>
 
+    <nb-icon aria-hidden="true" icon="chevron-down-outline" pack="nebular-essentials"></nb-icon>
 </button>
 
 <nb-card *nbPortal class="select" [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
