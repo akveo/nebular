@@ -70,7 +70,7 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   selected: boolean = false;
-  private alive: boolean = true;
+  protected alive: boolean = true;
 
   constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
               protected elementRef: ElementRef,
@@ -119,7 +119,7 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
-  private setSelection(selected: boolean): void {
+  protected setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
      * This may lead to exceptions with detecting changes in destroyed component.
