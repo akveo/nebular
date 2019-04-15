@@ -5,7 +5,7 @@
         class="select-button"
         type="button">
 
-    <ng-container *ngIf="selectionModel?.length">
+    <ng-container *ngIf="selectionModel.length">
 
       <ng-container *ngIf="customLabel">
         <ng-content select="nb-select-label"></ng-content>
@@ -15,7 +15,7 @@
 
     </ng-container>
 
-    <ng-container *ngIf="!selectionModel?.length">{{ placeholder }}</ng-container>
+    <ng-container *ngIf="!selectionModel.length">{{ placeholder }}</ng-container>
 
     <nb-icon aria-hidden="true" icon="chevron-down-outline" pack="nebular-essentials"></nb-icon>
 </button>
