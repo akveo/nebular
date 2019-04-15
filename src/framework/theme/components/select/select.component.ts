@@ -300,6 +300,14 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   @ViewChild(NbButtonComponent, { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
 
   /**
+   * Determines is select opened.
+   * */
+  @HostBinding('class.open')
+  get isOpen(): boolean {
+    return this.ref && this.ref.hasAttached();
+  }
+
+  /**
    * List of selected options.
    * */
   selectionModel: NbOptionComponent<T>[] = [];
@@ -349,17 +357,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   /**
-   * Determines is select opened.
-   * */
-  get isOpened(): boolean {
-    return this.ref && this.ref.hasAttached();
-  }
-
-  /**
    * Determines is select hidden.
    * */
   get isHidden(): boolean {
-    return !this.isOpened;
+    return !this.isOpen;
   }
 
   /**
@@ -424,7 +425,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   hide() {
-    if (this.isOpened) {
+    if (this.isOpen) {
       this.ref.detach();
       this.cd.markForCheck();
     }
