@@ -209,18 +209,27 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   /**
    * Accepts selected item or array of selected items.
    * */
-  @Input('selected')
-  set setSelected(value: T | T[]) {
+  @Input()
+  set selected(value: T | T[]) {
     this.writeValue(value);
+  }
+  get selected(): T | T[] {
+    return this.multiple
+      ? this.selectionModel.map(o => o.value)
+      : this.selectionModel[0].value;
   }
 
   /**
    * Gives capability just write `multiple` over the element.
    * */
-  @Input('multiple')
-  set setMultiple(multiple: boolean) {
-    this.multiple = convertToBoolProperty(multiple);
+  @Input()
+  get multiple(): boolean {
+    return this._multiple;
   }
+  set multiple(value: boolean) {
+    this._multiple = convertToBoolProperty(value);
+  }
+  private _multiple: boolean = false;
 
   /**
    * List of `NbOptionComponent`'s components passed as content.
@@ -239,8 +248,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
   @ViewChild(NbButtonComponent, { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
-
-  multiple: boolean = false;
 
   /**
    * List of selected options.
