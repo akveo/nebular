@@ -7,11 +7,11 @@
 
     <ng-container *ngIf="selectionModel.length">
 
-      <ng-container *ngIf="customLabel">
+      <ng-container *ngIf="customLabel; else defaultSelectionView">
         <ng-content select="nb-select-label"></ng-content>
       </ng-container>
 
-      <ng-container *ngIf="!customLabel">{{ selectionView }}</ng-container>
+      <ng-template #defaultSelectionView>{{ selectionView }}</ng-template>
 
     </ng-container>
 
