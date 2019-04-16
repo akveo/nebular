@@ -1,3 +1,23 @@
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/akveo/nebular/compare/v3.4.2...v3.5.0) (2019-04-12)
+
+
+### Bug Fixes
+
+* remove scss debug calls ([#1339](https://github.com/akveo/nebular/issues/1339)) ([b9bd521](https://github.com/akveo/nebular/commit/b9bd521))
+* **calendar:** fix native date service addMonth date overflow ([#1347](https://github.com/akveo/nebular/issues/1347)) ([ffd386c](https://github.com/akveo/nebular/commit/ffd386c))
+* **cdk:** fix scroll blocker for custom `withScroll` mode ([#1364](https://github.com/akveo/nebular/issues/1364)) ([34193cc](https://github.com/akveo/nebular/commit/34193cc)), closes [#1158](https://github.com/akveo/nebular/issues/1158) [#1259](https://github.com/akveo/nebular/issues/1259)
+* **month picker:** prevent duplicates ([#1377](https://github.com/akveo/nebular/issues/1377)) ([47aff73](https://github.com/akveo/nebular/commit/47aff73))
+* **option:** emit selection change when selection is changed ([#1334](https://github.com/akveo/nebular/issues/1334)) ([788a6d4](https://github.com/akveo/nebular/commit/788a6d4))
+* **select:** prevent dispose call on uninitialized properties ([#1340](https://github.com/akveo/nebular/issues/1340)) ([a7a158d](https://github.com/akveo/nebular/commit/a7a158d))
+
+
+### Features
+
+* **search:** input event ([#1038](https://github.com/akveo/nebular/issues/1038)) ([58fa556](https://github.com/akveo/nebular/commit/58fa556))
+
+
+
 <a name="3.4.2"></a>
 ## [3.4.2](https://github.com/akveo/nebular/compare/v3.4.1...v3.4.2) (2019-03-31)
 
