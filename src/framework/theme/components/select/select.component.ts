@@ -46,7 +46,6 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NbOptionComponent } from './option.component';
-import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
 
@@ -70,7 +69,7 @@ export class NbSelectLabelComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSelectModule,
  *   ],
  * })
