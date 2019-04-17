@@ -18,6 +18,7 @@ type EmptyOrStatus = '' | NbComponentStatus;
 export class SelectInteractiveComponent {
   singleSelectValue = '1';
   multipleSelectValue = [ '1' ];
+  disabledOptionValue = '3';
 
   statuses: EmptyOrStatus[] = [ '', 'primary', 'success', 'info', 'warning', 'danger' ];
   appearances: NbSelectAppearance[] = [ 'outline', 'filled', 'hero' ];
@@ -26,4 +27,9 @@ export class SelectInteractiveComponent {
   sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
   selectedShape: NbComponentShape = 'rectangle';
   shapes: NbComponentShape[] = ['rectangle', 'semi-round', 'round'];
+
+  selectDisabledOption(): void {
+    this.singleSelectValue = this.disabledOptionValue;
+    this.multipleSelectValue = [this.disabledOptionValue];
+  }
 }

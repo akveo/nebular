@@ -7,7 +7,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbRadioModule, NbSelectModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbRadioModule, NbSelectModule } from '@nebular/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';
@@ -49,6 +49,7 @@ import { SelectInteractiveComponent } from './select-interactive.component';
     NbCardModule,
     CommonModule,
     NbRadioModule,
+    NbButtonModule,
   ],
 })
 export class SelectModule {}

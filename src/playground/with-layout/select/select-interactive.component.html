@@ -13,6 +13,8 @@
         <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
       </nb-radio-group>
     </fieldset>
+
+    <button nbButton (click)="selectDisabledOption()">Select disabled</button>
   </nb-card-body>
 </nb-card>
 
