@@ -369,6 +369,29 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.hostRef.nativeElement.getBoundingClientRect().width;
   }
 
+  get selectButtonClasses(): string[] {
+    const classes = [];
+
+    if (!this.selectionModel.length) {
+      classes.push('placeholder')
+    }
+    if (this.isOpen) {
+      classes.push(this.overlayPosition);
+    }
+
+    return classes;
+  }
+
+  get optionsListClasses(): string[] {
+    return [
+      `appearance-${this.appearance}`,
+      `size-${this.size}`,
+      `shape-${this.shape}`,
+      `status-${this.status}`,
+      this.overlayPosition,
+    ];
+  }
+
   /**
    * Content rendered in the label.
    * */
