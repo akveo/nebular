@@ -69,7 +69,7 @@
       color: nb-theme(select-filled-#{$status}-text-color);
 
       &.placeholder {
-        color: nb-theme(select-filled-primary-placeholder-text-color);
+        color: nb-theme(select-filled-#{$status}-placeholder-text-color);
       }
 
       &:focus {
