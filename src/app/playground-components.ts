@@ -930,6 +930,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SelectStatusComponent',
         name: 'Select Status',
       },
+      {
+        path: 'select-combinations.component',
+        link: '/select/select-combinations.component',
+        component: 'SelectCombinationsComponent',
+        name: 'Select Combinations',
+      },
     ],
   },
   {

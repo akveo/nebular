@@ -22,6 +22,7 @@ import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
+import { SelectCombinationsComponent } from './select-combinations.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SelectStatusComponent } from './select-status.component';
     SelectShowcaseComponent,
     SelectSizesComponent,
     SelectStatusComponent,
+    SelectCombinationsComponent,
   ],
   imports: [
     FormsModule,
