@@ -20,7 +20,7 @@
       </nb-option-group>
     </nb-select>
 
-    <nb-select multiple [selected]="multipleSelectValue" placeholder="Multiple select">
+    <nb-select multiple [(selected)]="multipleSelectValue" [appearance]="appearance" placeholder="Multiple select">
       <nb-option>Reset</nb-option>
       <nb-option value="1">Option 1</nb-option>
       <nb-option value="2">Option 2</nb-option>
@@ -36,9 +36,9 @@
       </nb-option-group>
     </nb-select>
 
-    <nb-select placeholder="Disabled select" disabled></nb-select>
+    <nb-select placeholder="Disabled select" disabled [appearance]="appearance"></nb-select>
 
-    <nb-select selected="1" disabled>
+    <nb-select selected="1" disabled [appearance]="appearance">
       <nb-option value="1">Option 1</nb-option>
     </nb-select>
   </nb-card-body>
