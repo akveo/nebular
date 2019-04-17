@@ -13,7 +13,7 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./option-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span>{{ title }}</span>
+    <span class="option-group-title">{{ title }}</span>
     <ng-content select="nb-option, ng-container"></ng-content>
   `,
 })

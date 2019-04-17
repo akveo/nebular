@@ -6,11 +6,11 @@
 
 :host {
   display: block;
+}
 
-  span {
-    padding: 1.125rem 0.5rem;
-    display: block;
-  }
+.option-group-title {
+  display: block;
+}
 
   /deep/ nb-option {
     padding: 0.75rem 0.75rem 0.75rem 2.5rem;

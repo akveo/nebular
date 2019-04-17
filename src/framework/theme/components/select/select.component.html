@@ -1,6 +1,5 @@
 <button [disabled]="disabled"
-        [class.placeholder]="!selectionModel.length"
-        [ngClass]="overlayPosition"
+        [ngClass]="selectButtonClasses"
         (blur)="trySetTouched()"
         class="select-button"
         type="button"
@@ -19,8 +18,8 @@
     <nb-icon aria-hidden="true" icon="chevron-down-outline" pack="nebular-essentials"></nb-icon>
 </button>
 
-<nb-card *nbPortal class="select" [ngClass]="[status, overlayPosition]" [style.width.px]="hostWidth">
-  <nb-card-body>
+<div *nbPortal [ngClass]="optionsListClasses" [style.width.px]="hostWidth" class="options-list-container">
+  <ul class="options-list">
     <ng-content select="nb-option, nb-option-group"></ng-content>
-  </nb-card-body>
-</nb-card>
+  </ul>
+</div>
