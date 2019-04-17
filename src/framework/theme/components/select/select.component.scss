@@ -27,7 +27,7 @@
   white-space: nowrap;
   text-transform: none;
 
-  @include nb-component-animation(border-color, border-radius, background-color, color);
+  @include nb-component-animation(background-color, border-color, border-radius, box-shadow, color);
 }
 
 nb-icon {
