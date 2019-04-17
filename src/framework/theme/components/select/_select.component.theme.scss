@@ -6,6 +6,7 @@
 
 @import './select-outline';
 @import './select-filled';
+@import './select-hero';
 
 @mixin nb-select-theme() {
   nb-select {
@@ -83,6 +84,7 @@
 
   @include select-outline;
   @include select-filled;
+  @include select-hero;
 
         nb-icon {
           color: nb-theme(select-checkmark-color);
