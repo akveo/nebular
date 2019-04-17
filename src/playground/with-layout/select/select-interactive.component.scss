@@ -7,9 +7,16 @@
 nb-card {
   flex: 1 0 auto;
   margin: 0.5rem;
+
+  &.configuration {
+    flex: 0 1 auto;
+  }
 }
 
 nb-select {
   margin: 1rem 0;
 }
 
+fieldset {
+  border: 0;
+}

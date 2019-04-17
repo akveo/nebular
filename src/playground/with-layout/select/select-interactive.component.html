@@ -1,10 +1,30 @@
+<nb-card size="large" class="configuration">
+  <nb-card-body>
+    <fieldset>
+      <legend>Select shape:</legend>
+      <nb-radio-group [(value)]="selectedShape" name="shape">
+        <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <legend>Select size:</legend>
+      <nb-radio-group [(value)]="selectedSize" name="size">
+        <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+  </nb-card-body>
+</nb-card>
+
 <nb-card size="large" *ngFor="let appearance of appearances">
   <nb-card-body>
     <nb-select placeholder="Select a value"
                *ngFor="let status of statuses"
                [(selected)]="singleSelectValue"
                [appearance]="appearance"
-               [status]="status">
+               [status]="status"
+               [size]="selectedSize"
+               [shape]="selectedShape">
       <nb-option>Reset value</nb-option>
       <nb-option value="1">Option 1</nb-option>
       <nb-option value="2">Option 2</nb-option>
@@ -20,7 +40,7 @@
       </nb-option-group>
     </nb-select>
 
-    <nb-select multiple [(selected)]="multipleSelectValue" [appearance]="appearance" placeholder="Multiple select">
+    <nb-select multiple [(selected)]="multipleSelectValue" [appearance]="appearance" placeholder="Multiple select" [size]="selectedSize" [shape]="selectedShape">
       <nb-option>Reset</nb-option>
       <nb-option value="1">Option 1</nb-option>
       <nb-option value="2">Option 2</nb-option>
@@ -36,9 +56,9 @@
       </nb-option-group>
     </nb-select>
 
-    <nb-select placeholder="Disabled select" disabled [appearance]="appearance"></nb-select>
+    <nb-select placeholder="Disabled select" disabled [appearance]="appearance" [size]="selectedSize" [shape]="selectedShape"></nb-select>
 
-    <nb-select selected="1" disabled [appearance]="appearance">
+    <nb-select selected="1" disabled [appearance]="appearance" [size]="selectedSize" [shape]="selectedShape">
       <nb-option value="1">Option 1</nb-option>
     </nb-select>
   </nb-card-body>

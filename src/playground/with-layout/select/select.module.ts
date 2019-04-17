@@ -7,7 +7,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbSelectModule } from '@nebular/theme';
+import { NbCardModule, NbRadioModule, NbSelectModule } from '@nebular/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';
@@ -22,7 +22,7 @@ import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
-import { SelectCombinationsComponent } from './select-combinations.component';
+import { SelectInteractiveComponent } from './select-interactive.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { SelectCombinationsComponent } from './select-combinations.component';
     SelectShowcaseComponent,
     SelectSizesComponent,
     SelectStatusComponent,
-    SelectCombinationsComponent,
+    SelectInteractiveComponent,
   ],
   imports: [
     FormsModule,
@@ -48,6 +48,7 @@ import { SelectCombinationsComponent } from './select-combinations.component';
     SelectRoutingModule,
     NbCardModule,
     CommonModule,
+    NbRadioModule,
   ],
 })
 export class SelectModule {}

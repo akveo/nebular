@@ -19,7 +19,7 @@ import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
-import { SelectCombinationsComponent } from 'playground/with-layout/select/select-combinations.component';
+import { SelectInteractiveComponent } from 'playground/with-layout/select/select-interactive.component';
 
 const routes: Route[] = [
   {
@@ -75,8 +75,8 @@ const routes: Route[] = [
     component: SelectStatusComponent,
   },
   {
-    path: 'select-combinations.component',
-    component: SelectCombinationsComponent,
+    path: 'select-interactive.component',
+    component: SelectInteractiveComponent,
   },
 ];
 
