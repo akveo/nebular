@@ -11,14 +11,7 @@ import { Component } from '@angular/core';
   templateUrl: './select-outline.component.html',
   styles: [`
     nb-select {
-      margin-right: 0.75rem;
       margin-bottom: 1rem;
-    }
-
-    :host {
-      display: block;
-      width: 15rem;
-      height: 30rem;
     }
   `],
 })

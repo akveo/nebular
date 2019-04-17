@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbSelectModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule } from '@nebular/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';
@@ -43,6 +44,8 @@ import { SelectStatusComponent } from './select-status.component';
     ReactiveFormsModule,
     NbSelectModule,
     SelectRoutingModule,
+    NbCardModule,
+    CommonModule,
   ],
 })
 export class SelectModule {}

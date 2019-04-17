@@ -9,13 +9,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-showcase',
   templateUrl: './select-showcase.component.html',
-  styles: [`
-    :host {
-      display: block;
-      width: 15rem;
-      height: 15rem;
-    }
-  `],
 })
 
 export class SelectShowcaseComponent {
