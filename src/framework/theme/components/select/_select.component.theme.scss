@@ -85,18 +85,4 @@
   @include select-outline;
   @include select-filled;
   @include select-hero;
-
-        nb-icon {
-          color: nb-theme(select-checkmark-color);
-        }
-      }
-    }
-
-    nb-option, nb-option-group {
-      &.disabled {
-        background-color: nb-theme(select-option-disabled-bg);
-        opacity: nb-theme(select-option-disabled-opacity);
-      }
-    }
-  }
 }
