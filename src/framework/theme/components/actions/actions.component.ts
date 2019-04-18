@@ -152,16 +152,29 @@ export class NbActionComponent {
  *
  * @styles
  *
- * actions-font-size:
- * actions-font-family:
- * actions-line-height:
- * actions-fg:
- * actions-bg:
- * actions-separator:
- * actions-padding:
- * actions-size-small:
- * actions-size-medium:
- * actions-size-large:
+ * actions-background-color:
+ * actions-divider-color:
+ * actions-divider-style:
+ * actions-divider-width:
+ * actions-text-color:
+ * actions-text-font-family:
+ * actions-text-font-weight:
+ * actions-text-line-height:
+ * actions-tiny-height:
+ * actions-tiny-padding:
+ * actions-tiny-text-font-size:
+ * actions-small-height:
+ * actions-small-padding:
+ * actions-small-text-font-size:
+ * actions-medium-height:
+ * actions-medium-padding:
+ * actions-medium-text-font-size:
+ * actions-large-height:
+ * actions-large-padding:
+ * actions-large-text-font-size:
+ * actions-giant-height:
+ * actions-giant-padding:
+ * actions-giant-text-font-size:
  */
 @Component({
   selector: 'nb-actions',
