@@ -553,7 +553,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should clean selection when selected option does not have a value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.noValueOption.onClick();
@@ -563,7 +563,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should clean selection when selected option has null value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.nullOption.onClick();
@@ -573,7 +573,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should clean selection when selected option has undefined value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.undefinedOption.onClick();
@@ -583,7 +583,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should not reset selection when selected option has false value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.falseOption.onClick();
@@ -593,7 +593,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should not reset selection when selected option has zero value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.zeroOption.onClick();
@@ -603,7 +603,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should not reset selection when selected option has empty string value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.emptyStringOption.onClick();
@@ -613,7 +613,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should not reset selection when selected option has NaN value', fakeAsync(() => {
-    select.setSelected = testComponent.truthyOption.value;
+    select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
     testComponent.nanOption.onClick();
