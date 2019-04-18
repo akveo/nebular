@@ -85,7 +85,7 @@ export class NbOptionComponent<T> implements OnDestroy {
    * Determines should we render checkbox.
    * */
   get withCheckbox(): boolean {
-    return this.multiple && !!this.value;
+    return this.multiple && this.value != null;
   }
 
   get content() {

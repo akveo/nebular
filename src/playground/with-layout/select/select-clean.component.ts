@@ -10,5 +10,4 @@ import { Component } from '@angular/core';
   selector: 'nb-select-clean',
   templateUrl: './select-clean.component.html',
 })
-export class SelectCleanComponent {
-}
+export class SelectCleanComponent {}

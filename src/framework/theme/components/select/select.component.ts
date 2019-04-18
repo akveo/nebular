@@ -82,7 +82,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Multiple, select/select-multiple.component)
  *
- * Items without values will clean selection.
+ * Items without values will clean the selection. Both `null` and `undefined` values will also clean the selection.
  *
  * @stacked-example(Clean selection, select/select-clean.component)
  *
@@ -467,7 +467,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   writeValue(value: T | T[]): void {
-    if (!value || !this.alive) {
+    if (!this.alive) {
       return;
     }
 
@@ -482,10 +482,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Selects option or clear all selected options if value is null.
    * */
   protected handleOptionClick(option: NbOptionComponent<T>) {
-    if (option.value) {
-      this.selectOption(option);
-    } else {
+    if (option.value == null) {
       this.reset();
+    } else {
+      this.selectOption(option);
     }
 
     this.cd.markForCheck();
