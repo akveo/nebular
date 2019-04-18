@@ -309,6 +309,7 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testSelectComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
     const setSelectionSpy = spyOn((testSelectComponent.selectComponent as any), 'setSelection').and.callThrough();
     testSelectComponent.showSelect = false;
@@ -322,6 +323,7 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
     const optionSelectSpy = spyOn(testComponent.optionComponent, 'select').and.callThrough();
 
@@ -338,6 +340,7 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
     const optionToSelect = testComponent.options.last;
     const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
