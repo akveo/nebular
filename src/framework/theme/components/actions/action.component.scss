@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+}
+
+nb-icon:hover {
+  cursor: pointer;
+}
+
+:host(.disabled) {
+  cursor: not-allowed;
+
+  a, nb-icon {
+    cursor: not-allowed;
+  }
+}

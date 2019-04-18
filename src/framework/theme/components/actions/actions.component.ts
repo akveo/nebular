@@ -14,6 +14,7 @@ import { NbComponentSize } from '../component-size';
  */
 @Component({
   selector: 'nb-action',
+  styleUrls: ['./action.component.scss'],
   template: `
     <ng-container *ngIf="icon; else projectedContent">
       <a class="icon-container"
@@ -75,7 +76,7 @@ export class NbActionComponent {
   @Input() icon: string;
 
   /**
-   * Disables the item (changes item opacity and mouse cursor)
+   * Visually disables the item
    * @type boolean
    */
   @Input()
