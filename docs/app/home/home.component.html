@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-column>
-    <div class="hero-image">
+    <section class="hero-image">
       <div class="content-center">
         <ngd-header [showSearch]="false"></ngd-header>
         <ngd-hero></ngd-hero>
@@ -16,28 +16,28 @@
           </g>
         </g>
       </svg>
-    </div>
+    </section>
 
-    <div class="features content-center">
+    <section class="features content-center">
       <ngd-icon-card *ngFor="let feature of features"
                      [routerLink]="feature.link"
                      [title]="feature.title"
                      [icon]="feature.icon"
                      [description]="feature.description">
       </ngd-icon-card>
-    </div>
+    </section>
 
-    <div class="advantages">
+    <section class="advantages">
       <div class="content-center">
-        <ngd-text-card *ngFor="let advantage of advantages; let index = index"
+        <ngd-text-card *ngFor="let advantage of advantages"
                        [title]="advantage.title"
-                       [index]="index"
-                       [description]="advantage.description">
+                       [description]="advantage.description"
+                       [icon]="advantage.icon">
         </ngd-text-card>
       </div>
-    </div>
+    </section>
 
-    <ngd-footer class="content-center"></ngd-footer>
+    <ngd-footer></ngd-footer>
 
   </nb-layout-column>
 </nb-layout>
