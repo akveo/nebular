@@ -7,6 +7,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
+import { NbIconModule } from '../icon/icon.module';
 
 import { NbChatComponent } from './chat.component';
 import { NbChatMessageComponent } from './chat-message.component';
@@ -30,6 +31,7 @@ const NB_CHAT_COMPONENTS = [
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [
     ...NB_CHAT_COMPONENTS,

@@ -76,6 +76,10 @@
       }
     }
 
+    nb-icon {
+      display: none;
+    }
+
     .menu-items .menu-item .menu-item a {
       &:hover, &.active, &:focus {
         text-shadow: 0.5px 0 0 currentColor;

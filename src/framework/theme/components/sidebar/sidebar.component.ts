@@ -55,7 +55,7 @@ export class NbSidebarFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSidebarModule.forRoot(),
  *   ],
  * })
@@ -65,7 +65,7 @@ export class NbSidebarFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSidebarModule,
  *   ],
  * })
@@ -98,18 +98,23 @@ export class NbSidebarFooterComponent {
  *
  * @styles
  *
- * sidebar-font-size: Sidebar content font size
- * sidebar-line-height: Sidebar content line height
- * sidebar-fg: Foreground color
- * sidebar-bg: Background color
- * sidebar-height: Content height
- * sidebar-width: Expanded width
- * sidebar-width-compact: Compacted width
- * sidebar-padding: Sidebar content padding
- * sidebar-header-height: Sidebar header height
- * sidebar-footer-height: Sidebar footer height
- * sidebar-shadow: Sidebar container shadow
- *
+ * sidebar-background-color:
+ * sidebar-text-color:
+ * sidebar-text-font-family:
+ * sidebar-text-font-size:
+ * sidebar-text-font-weight:
+ * sidebar-text-line-height:
+ * sidebar-height:
+ * sidebar-width:
+ * sidebar-width-compact:
+ * sidebar-padding:
+ * sidebar-header-height:
+ * sidebar-footer-height:
+ * sidebar-shadow:
+ * sidebar-menu-item-highlight-color:
+ * sidebar-scrollbar-background-color:
+ * sidebar-scrollbar-color:
+ * sidebar-scrollbar-width:
  */
 @Component({
   selector: 'nb-sidebar',

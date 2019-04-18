@@ -29,6 +29,9 @@
 - add the package into bundle.ts which build umd modules for our packages
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
 
+# New Package Dependency Checklist
+- run `npm run update-packages-smoke-lock` to update packages-smoke/package-lock.json and commit updated package lock
+
 # Objectives
 The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 
@@ -331,6 +334,8 @@ To give the user capability switch between live and inline representation of the
 
 # Release
 
+0. For major version, search for `@breaking-change` to make sure all breaking changes are covered.
+
 To start a new release (publish the framework packages on NPM) you need:
 
 1. create a new release branch called `release:v1.0.2`
@@ -338,9 +343,9 @@ To start a new release (publish the framework packages on NPM) you need:
 3. `npm run release:validate` - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
 4. MANUALLY update a version in main ./package.json to a new one
 5. 
+  * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
-  * update `package-lock.json`
-  * update dependent modules with correct peer module versions 
+  * update version in `package-lock.json` and `packages-smoke/package-lock.json`
 6. 
   * `npm run version:changelog`
   * fix/expand changelog manually
@@ -401,7 +406,8 @@ add it to docs/structure.ts
 
 create example usage of your component
 src/playground/[with-layout|without-layout]/your-component/your-component-showcase.component.ts
-module and route will be created automatically if you running playground or docs app.
+
+run 'npm run gen:playground' to generate boilerplate code, such as modules, routes, etc.
 
 your-component.component.ts  (add line in docs section-  * @stacked-example(Your component, your-component/your-component-showcase.component)
 ````
@@ -415,9 +421,9 @@ Playground is a set of modules containing all Nebular examples.
 It has two base directories: `with-layout` and `without-layout`. All components in `with-layout` directory will be nested inside of `nb-layout` component. Components from `without-layout` directory will be direct children of router outlet. Put components into `without-layout` directory, if they don't need to or can't be children of layout component, such as a layout itself.
 
 ## Playground schematic
-Playground schematic watches playground files and generates all boilerplate code for you. Basically, after adding a new component, directive or service declaration, all needed modules and components routes will be generated or modified.
+Playground schematic generates all boilerplate code for you. Basically, after adding a new component, directive or service declaration, all needed modules and components routes will be generated or modified.
 
-Schematic starts if you run playground or docs app with `npm start` or `npm run docs:serve` commands.
+You can run it via 'npm run gen:playground' command.
 
 ### How it works
 

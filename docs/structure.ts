@@ -422,10 +422,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'NbIconComponent',
+          'NbIconLibraries',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
         source: [
           'NbSpinnerDirective',
+          'NbSpinnerComponent',
         ],
       },
       {
@@ -480,6 +490,28 @@ export const structure = [
         icon: 'calendar.svg',
         source: [
           'NbCalendarKitModule',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Data Table',
+      },
+      {
+        type: 'tabs',
+        name: 'Tree Grid',
+        icon: 'tree-grid.svg',
+        source: [
+          'NbTreeGridComponent',
+          'NbTreeGridPresentationNode',
+          'NbTreeGridSortService',
+          'NbTreeGridFilterService',
+          'NbTreeGridColumnDefDirective',
+          'NbTreeGridRowDefDirective',
+          'NbTreeGridRowComponent',
+          'NbSortDirective',
+          'NbSortHeaderComponent',
+          'NbFilterInputDirective',
+          'NbTreeGridRowToggleDirective',
         ],
       },
     ],

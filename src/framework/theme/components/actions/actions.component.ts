@@ -4,11 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  Component,
-  Input,
-  HostBinding,
-} from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
 
@@ -18,18 +14,59 @@ import { convertToBoolProperty } from '../helpers';
 @Component({
   selector: 'nb-action',
   template: `
-    <a class="icon-container" href="#" *ngIf="icon; else showContent" (click)="$event.preventDefault()">
-      <i class="control-icon {{ icon }}"></i>
-    </a>
-    <ng-template #showContent>
+    <ng-container *ngIf="icon; else projectedContent">
+      <a class="icon-container"
+         [routerLink]="link"
+         [title]="title"
+         *ngIf="link">
+        <nb-icon [icon]="icon"></nb-icon>
+      </a>
+      <a class="icon-container"
+         [href]="href"
+         [title]="title"
+         *ngIf="href && !link">
+        <nb-icon [icon]="icon"></nb-icon>
+      </a>
+      <a class="icon-container"
+         href="#"
+         [title]="title"
+         *ngIf="!href && !link"
+         (click)="$event.preventDefault()">
+        <nb-icon [icon]="icon"></nb-icon>
+      </a>
+    </ng-container>
+
+    <ng-template #projectedContent>
       <ng-content></ng-content>
     </ng-template>
-    <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
+
+    <nb-badge *ngIf="badgeText"
+              [text]="badgeText"
+              [status]="badgeStatus"
+              [position]="badgePosition">
+    </nb-badge>
   `,
 })
 export class NbActionComponent {
-
   @HostBinding('class.disabled') disabledValue: boolean = false;
+
+  /**
+   * Router link to use
+   * @type string
+   */
+  @Input() link: string;
+
+  /**
+   * Regular HREF link
+   * @type: string
+   */
+  @Input() href: string;
+
+  /**
+   * Optional title for mouseover
+   * @type string
+   */
+  @Input() title: string = '';
 
   /**
    * Icon class to display
@@ -67,7 +104,6 @@ export class NbActionComponent {
    * @type string
    */
   @Input() badgePosition: string;
-
 }
 
 /**
@@ -129,7 +165,6 @@ export class NbActionComponent {
   `,
 })
 export class NbActionsComponent {
-
   static readonly SIZE_SMALL = 'small';
   static readonly SIZE_MEDIUM = 'medium';
   static readonly SIZE_LARGE = 'large';

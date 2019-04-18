@@ -5,8 +5,6 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -18,7 +16,7 @@ import { convertToBoolProperty } from '../helpers';
  *  {
  *    title: 'Route tab #1',
  *    route: '/pages/description',
- *    icon: 'nb-home',
+ *    icon: 'home',
  *    responsive: true, // hide title before `route-tabs-icon-only-max-width` value
  *  },
  *  {
@@ -64,20 +62,32 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./route-tabset.component.scss'],
   template: `
     <ul class="route-tabset">
-      <li *ngFor="let tab of tabs"
-          (click)="$event.preventDefault(); selectTab(tab)"
-          routerLink="{{tab.route}}"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [class.responsive]="tab.responsive"
-          [class.disabled]="tab.disabled"
-          [attr.tabindex]="tab.disabled ? -1 : 0"
-          class="route-tab">
-        <a href (click)="$event.preventDefault()" tabindex="-1">
-          <i *ngIf="tab.icon" [class]="tab.icon"></i>
-          <span *ngIf="tab.title">{{ tab.title }}</span>
-        </a>
-      </li>
+      <ng-container *ngFor="let tab of tabs">
+        <li *ngIf="tab.disabled; else enabled"
+            [class.responsive]="tab.responsive"
+            class="route-tab disabled"
+            tabindex="-1">
+          <a tabindex="-1" class="tab-link">
+            <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+            <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
+          </a>
+        </li>
+
+        <ng-template #enabled>
+          <li (click)="$event.preventDefault(); selectTab(tab)"
+              [routerLink]="tab.route"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="activeLinkOptions"
+              [class.responsive]="tab.responsive"
+              tabindex="0"
+              class="route-tab">
+            <a tabindex="-1" class="tab-link">
+              <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+              <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
+            </a>
+          </li>
+        </ng-template>
+      </ng-container>
     </ul>
     <router-outlet></router-outlet>
   `,
@@ -91,6 +101,12 @@ export class NbRouteTabsetComponent {
    * @param Object{route: string, title: string, tag?: string, responsive?: boolean, disabled?: boolean}
    */
   @Input() tabs: any[];
+
+  /**
+   * Options passed to `routerLinkActiveOptions` directive which set on tab links.
+   * `{ exact: true }` by default.
+   */
+  @Input() activeLinkOptions = { exact: true };
 
   /**
    * Take full width of a parent
@@ -107,13 +123,7 @@ export class NbRouteTabsetComponent {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private router: Router) {
-  }
-
   selectTab(tab: any) {
-    if (!tab.disabled) {
-      this.changeTab.emit(tab);
-      this.router.navigate([tab.route]);
-    }
+    this.changeTab.emit(tab);
   }
 }

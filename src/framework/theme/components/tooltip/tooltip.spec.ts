@@ -1,67 +1,109 @@
-import { Component, ComponentRef, ElementRef, Inject, Injectable, Input, NgModule, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { of as observableOf, Subject } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
 import {
   NbAdjustment,
+  NbDynamicOverlayHandler,
+  NbOverlayContent,
   NbPosition,
-  NbPositionBuilderService,
+  NbRenderableContainer,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
 } from '../cdk';
 import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
-import { NB_DOCUMENT } from '../../theme.options';
-
+import { NbTooltipComponent } from './tooltip.component';
+import { NbIconLibraries } from '../icon/icon-libraries';
 
 @Component({
-  selector: 'nb-tooltip-string-test',
+  selector: 'nb-tooltip-default-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbTooltip="test" [nbTooltipIcon]="icon" [nbTooltipStatus]="status" [nbTooltipTrigger]="trigger">
+        <button #button nbTooltip="test">show tooltip</button>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbTooltipDefaultTestComponent {
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+}
+
+@Component({
+  selector: 'nb-tooltip-bindings-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <button #button [nbTooltip]="content"
+          [nbTooltipTrigger]="trigger"
+          [nbTooltipPlacement]="position"
+          [nbTooltipAdjustment]="adjustment"
+          [nbTooltipStatus]="status"
+          [nbTooltipIcon]="icon">
         </button>
       </nb-layout-column>
     </nb-layout>
   `,
 })
-export class NbTooltipStringTestComponent {
-  @Input() icon;
-  @Input() status;
-  @Input() trigger: NbTrigger = NbTrigger.HINT;
-  @ViewChild('button') button: ElementRef;
+export class NbTooltipBindingsTestComponent {
   @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
+  @Input() content: any = '';
+  @Input() status = 'primary';
+  @Input() icon = '';
+  @Input() trigger = NbTrigger.CLICK;
+  @Input() position = NbPosition.TOP;
+  @Input() adjustment = NbAdjustment.CLOCKWISE;
 }
 
-@NgModule({
-  imports: [
-    RouterTestingModule.withRoutes([]),
-    NbThemeModule.forRoot(),
-    NbLayoutModule,
-    NoopAnimationsModule,
-    NbTooltipModule,
-  ],
-  declarations: [
-    NbTooltipStringTestComponent,
-  ],
+@Component({
+  selector: 'nb-tooltip-instance-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <button #button nbTooltip="test"></button>
+      </nb-layout-column>
+    </nb-layout>
+
+    <ng-template>Some Template</ng-template>
+  `,
 })
-export class TooltipTestModule {
+export class NbTooltipInstanceTestComponent {
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
 }
 
-export class MockPositionBuilder {
-  positionChange = new Subject();
-  _connectedTo: ElementRef<any>;
-  _position: NbPosition;
-  _adjustment: NbAdjustment;
+const dynamicOverlay = {
+  show() {},
+  hide() {},
+  toggle() {},
+  destroy() {},
+};
 
-  connectedTo(connectedTo: ElementRef<any>) {
-    this._connectedTo = connectedTo;
+export class NbDynamicOverlayHandlerMock {
+  _componentType: Type<NbRenderableContainer>;
+  _host: ElementRef;
+  _context: Object = {};
+  _content: NbOverlayContent;
+  _trigger: NbTrigger = NbTrigger.NOOP;
+  _position: NbPosition = NbPosition.TOP;
+  _adjustment: NbAdjustment = NbAdjustment.NOOP;
+  _offset: number;
+
+  constructor() {
+  }
+
+  host(host: ElementRef) {
+    this._host = host;
+    return this;
+  }
+
+  trigger(trigger: NbTrigger) {
+    this._trigger = trigger;
     return this;
   }
 
@@ -75,176 +117,366 @@ export class MockPositionBuilder {
     return this;
   }
 
-  offset() {
+  componentType(componentType: Type<NbRenderableContainer>) {
+    this._componentType = componentType;
     return this;
-  };
+  }
 
-  attach() {
-  };
+  content(content: NbOverlayContent) {
+    this._content = content;
+    return this;
+  }
 
-  apply() {
-  };
+  context(context: {}) {
+    this._context = context;
+    return this;
+  }
 
-  detach() {
-  };
+  offset(offset: number) {
+    this._offset = offset;
+    return this;
+  }
 
-  dispose() {
-  };
+  build() {
+    return dynamicOverlay;
+  }
+
+  rebuild() {
+    return dynamicOverlay;
+  }
+
+  connect() {
+  }
+
+  disconnect() {
+  }
+
+  destroy() {
+  }
 }
 
-@Injectable()
-export class MockTriggerStrategyBuilder {
+const TEST_COMPONENTS = [
+  NbTooltipDefaultTestComponent,
+  NbTooltipBindingsTestComponent,
+  NbTooltipInstanceTestComponent,
+];
 
-  _host: HTMLElement;
-  _container: () => ComponentRef<any>;
-  _trigger: NbTrigger;
-
-  constructor(@Inject(NB_DOCUMENT) public _document: Document) {
-  }
-
-  trigger(trigger: NbTrigger): this {
-    this._trigger = trigger;
-    return this;
-  }
-
-  host(host: HTMLElement): this {
-    this._host = host;
-    return this;
-  }
-
-  container(container: () => ComponentRef<any>): this {
-    this._container = container;
-    return this;
-  }
-
-  build(): NbTriggerStrategy {
-    return {
-      show$: observableOf(null),
-      hide$: observableOf(null),
-    } as NbTriggerStrategy;
-  }
-}
+@NgModule({
+  imports: [NbLayoutModule, NbTooltipModule],
+  exports: [...TEST_COMPONENTS],
+  declarations: [...TEST_COMPONENTS],
+})
+class PopoverTestModule { }
 
 describe('Directive: NbTooltipDirective', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [TooltipTestModule] });
-  });
 
-  let fixture: ComponentFixture<NbTooltipStringTestComponent>;
+  const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
-    fixture.detectChanges();
-  });
-
-  afterEach(() => {
-    fixture.destroy();
-  });
-
-  it('should render string', () => {
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-  });
-
-  it('should hide', fakeAsync(() => {
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-
-    const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-    fixture.componentInstance.tooltip.hide();
-    fixture.detectChanges();
-
-    tick(); // we need this tick for animations
-    const tooltip = fixture.nativeElement.querySelector('nb-tooltip');
-    expect(tooltip).toBeNull();
-  }));
-
-  it('should toogle', fakeAsync(() => {
-    let textContainer;
-
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-    fixture.componentInstance.tooltip.toggle();
-    fixture.detectChanges();
-
-    tick(); // we need this tick for animations
-    const tooltip = fixture.nativeElement.querySelector('nb-tooltip');
-    expect(tooltip).toBeNull();
-
-    fixture.componentInstance.tooltip.toggle();
-    fixture.detectChanges();
-
-    textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
-    expect(textContainer.textContent).toContain('test');
-  }));
-
-  it('should display icon', () => {
-    fixture.componentInstance.icon = 'some-icon';
-    fixture.detectChanges();
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content i');
-    expect(iconContainer.className).toContain('icon some-icon');
-  });
-
-  it('should display status', () => {
-    fixture.componentInstance.status = 'danger';
-    fixture.detectChanges();
-    fixture.componentInstance.tooltip.show();
-    fixture.detectChanges();
-
-    const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
-    expect(iconContainer.className).toContain('danger-tooltip');
-  });
-
-  it('should build position strategy', () => {
-    const mockPositionBuilder = new MockPositionBuilder();
+  beforeEach(async(() => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
-      providers: [{ provide: NbPositionBuilderService, useValue: mockPositionBuilder }],
+      imports: [
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        PopoverTestModule,
+      ],
     });
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
-    fixture.detectChanges();
 
-    expect(mockPositionBuilder._connectedTo.nativeElement).toBe(fixture.componentInstance.button.nativeElement);
-    expect(mockPositionBuilder._position).toBe(NbPosition.TOP);
-    expect(mockPositionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
+    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+    iconLibs.setDefaultPack('test')
+  }));
+
+  describe('smoke ', () => {
+
+    let fixture: ComponentFixture<any>;
+
+    afterEach(() => {
+      fixture.destroy();
+    });
+
+
+    it('should render string', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      fixture.componentInstance.tooltip.show();
+      fixture.detectChanges();
+
+      const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
+      expect(textContainer.textContent).toContain('test');
+    });
+
+    it('should hide', () => fakeAsync(() => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      fixture.componentInstance.tooltip.show();
+      fixture.detectChanges();
+
+
+      const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
+      expect(textContainer.textContent).toContain('test');
+      fixture.componentInstance.tooltip.hide();
+      fixture.detectChanges();
+
+      tick(); // we need this tick for animations
+      const tooltip = fixture.nativeElement.querySelector('nb-tooltip');
+      expect(tooltip).toBeNull();
+    }));
+
+    it('should render different content', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+
+      fixture.componentInstance.tooltip.show();
+      fixture.detectChanges();
+
+      fixture.componentInstance.content = 'new string';
+      fixture.detectChanges();
+      const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
+      expect(textContainer.textContent).toContain('test');
+    });
+
+    it('should display icon', () => {
+      fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
+      fixture.detectChanges();
+
+      fixture.componentInstance.icon = 'some-icon';
+      fixture.detectChanges();
+      fixture.componentInstance.tooltip.show();
+      fixture.detectChanges();
+
+      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content nb-icon');
+      expect(iconContainer.textContent).toContain('some-icon');
+    });
+
+    it('should display status', () => {
+      fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
+      fixture.detectChanges();
+
+      fixture.componentInstance.status = 'danger';
+      fixture.detectChanges();
+      fixture.componentInstance.tooltip.show();
+      fixture.detectChanges();
+
+      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
+      expect(iconContainer.className).toContain('status-danger');
+    });
+
   });
 
-  it('should build with default trigger strategy', () => {
-    TestBed.resetTestingModule();
-    const bed = TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
-      providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+  describe('mocked services', () => {
+
+    beforeEach(async(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([]),
+          NbThemeModule.forRoot(),
+          PopoverTestModule,
+        ],
+      })
+        .overrideComponent(NbTooltipDirective, {
+          set: {
+            providers: [
+              { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
+            ],
+          },
+        });
+    }));
+    describe('default tooltip', () => {
+
+      let fixture: ComponentFixture<NbTooltipDefaultTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
+
+      it('should build', () => {
+        const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
+        const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
+        const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
+        const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
+        const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
+        const offsetSpy = spyOn(overlayHandler, 'offset').and.callThrough();
+        const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
+        const rebuildSpy = spyOn(overlayHandler, 'rebuild').and.callThrough();
+
+        fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+        fixture.detectChanges();
+
+        expect(componentSpy).toHaveBeenCalledTimes(1);
+        expect(componentSpy).toHaveBeenCalledWith(NbTooltipComponent);
+        expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
+        expect(hostSpy).toHaveBeenCalledTimes(1);
+        expect(offsetSpy).toHaveBeenCalledTimes(1);
+        expect(offsetSpy).toHaveBeenCalledWith(8);
+        expect(positionSpy).toHaveBeenCalledTimes(2);
+        expect(positionSpy).toHaveBeenCalledWith(NbPosition.TOP);
+        expect(triggerSpy).toHaveBeenCalledTimes(2);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.HINT);
+        expect(adjustmentSpy).toHaveBeenCalledTimes(2);
+        expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.CLOCKWISE);
+        expect(contentSpy).toHaveBeenCalledTimes(2);
+        expect(contentSpy).toHaveBeenCalledWith('test');
+        expect(contextSpy).toHaveBeenCalledTimes(2);
+        expect(contextSpy).toHaveBeenCalledWith({});
+        expect(buildSpy).toHaveBeenCalledTimes(1);
+        expect(rebuildSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should show/hide/toggle', () => {
+        fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+        fixture.detectChanges();
+        const showSpy = spyOn(dynamicOverlay, 'show').and.callThrough();
+        const hideSpy = spyOn(dynamicOverlay, 'hide').and.callThrough();
+        const toggleSpy = spyOn(dynamicOverlay, 'toggle').and.callThrough();
+
+        fixture.componentInstance.tooltip.show();
+        fixture.detectChanges();
+
+        expect(showSpy).toHaveBeenCalledTimes(1);
+        expect(hideSpy).toHaveBeenCalledTimes(0);
+        expect(toggleSpy).toHaveBeenCalledTimes(0);
+
+        fixture.componentInstance.tooltip.hide();
+        fixture.detectChanges();
+
+        expect(showSpy).toHaveBeenCalledTimes(1);
+        expect(hideSpy).toHaveBeenCalledTimes(1);
+        expect(toggleSpy).toHaveBeenCalledTimes(0);
+
+
+        fixture.componentInstance.tooltip.toggle();
+        fixture.detectChanges();
+
+        expect(showSpy).toHaveBeenCalledTimes(1);
+        expect(hideSpy).toHaveBeenCalledTimes(1);
+        expect(toggleSpy).toHaveBeenCalledTimes(1);
+      });
     });
-    const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
-    fixture.detectChanges();
 
-    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.HINT);
-  });
+    describe('binding tooltip', () => {
 
-  it('should build with custom trigger strategy', () => {
-    TestBed.resetTestingModule();
-    const bed = TestBed.configureTestingModule({
-      imports: [TooltipTestModule],
-      providers: [{ provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder }],
+      let fixture: ComponentFixture<NbTooltipBindingsTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
+
+      it('should rebuild', () => {
+
+        const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
+        const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
+        const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
+        const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
+        const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
+        const offsetSpy = spyOn(overlayHandler, 'offset').and.callThrough();
+        const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
+        const rebuildSpy = spyOn(overlayHandler, 'rebuild').and.callThrough();
+
+        fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
+        fixture.componentInstance.trigger = NbTrigger.CLICK;
+        fixture.componentInstance.content = 'new string';
+        fixture.componentInstance.status = 'success';
+        fixture.componentInstance.icon = 'home';
+        fixture.componentInstance.position = NbPosition.LEFT;
+
+        fixture.detectChanges();
+
+        expect(componentSpy).toHaveBeenCalledTimes(1);
+        expect(componentSpy).toHaveBeenCalledWith(NbTooltipComponent);
+        expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
+        expect(hostSpy).toHaveBeenCalledTimes(1);
+        expect(offsetSpy).toHaveBeenCalledTimes(1);
+        expect(offsetSpy).toHaveBeenCalledWith(8);
+        expect(positionSpy).toHaveBeenCalledTimes(3);
+        expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
+        expect(triggerSpy).toHaveBeenCalledTimes(3);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.CLICK);
+        expect(adjustmentSpy).toHaveBeenCalledTimes(3);
+        expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contextSpy).toHaveBeenCalledTimes(3);
+        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'home' });
+        expect(buildSpy).toHaveBeenCalledTimes(1);
+        expect(rebuildSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it('should accept different content', () => {
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+
+        fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.content = 'new string';
+        fixture.detectChanges();
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+      });
     });
-    const mockTriggerStrategy = bed.get(NbTriggerStrategyBuilderService);
-    fixture = TestBed.createComponent(NbTooltipStringTestComponent);
-    fixture.componentInstance.trigger = NbTrigger.CLICK;
-    fixture.detectChanges();
 
-    expect(mockTriggerStrategy._trigger).toBe(NbTrigger.CLICK);
+    describe('instance tooltip', () => {
+
+      let fixture: ComponentFixture<NbTooltipInstanceTestComponent>;
+
+      afterEach(() => {
+        fixture.destroy();
+      });
+
+      it('should rebuild', () => {
+
+        const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
+        const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
+        const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
+        const triggerSpy = spyOn(overlayHandler, 'trigger').and.callThrough();
+        const adjustmentSpy = spyOn(overlayHandler, 'adjustment').and.callThrough();
+        const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
+        const contextSpy = spyOn(overlayHandler, 'context').and.callThrough();
+        const offsetSpy = spyOn(overlayHandler, 'offset').and.callThrough();
+        const buildSpy = spyOn(overlayHandler, 'build').and.callThrough();
+        const rebuildSpy = spyOn(overlayHandler, 'rebuild').and.callThrough();
+
+        fixture = TestBed.createComponent(NbTooltipInstanceTestComponent);
+        fixture.detectChanges();
+
+        fixture.componentInstance.tooltip.adjustment = NbAdjustment.HORIZONTAL;
+        fixture.componentInstance.tooltip.trigger = NbTrigger.CLICK;
+        fixture.componentInstance.tooltip.content = 'new string';
+        fixture.componentInstance.tooltip.status = 'success';
+        fixture.componentInstance.tooltip.icon = 'home';
+        fixture.componentInstance.tooltip.position = NbPosition.LEFT;
+
+        fixture.componentInstance.tooltip.rebuild();
+
+        expect(componentSpy).toHaveBeenCalledTimes(1);
+        expect(componentSpy).toHaveBeenCalledWith(NbTooltipComponent);
+        expect(hostSpy).toHaveBeenCalledWith(fixture.componentInstance.button);
+        expect(hostSpy).toHaveBeenCalledTimes(1);
+        expect(positionSpy).toHaveBeenCalledTimes(3);
+        expect(positionSpy).toHaveBeenCalledWith(NbPosition.LEFT);
+        expect(triggerSpy).toHaveBeenCalledTimes(3);
+        expect(triggerSpy).toHaveBeenCalledWith(NbTrigger.CLICK);
+        expect(offsetSpy).toHaveBeenCalledTimes(1);
+        expect(offsetSpy).toHaveBeenCalledWith(8);
+        expect(adjustmentSpy).toHaveBeenCalledTimes(3);
+        expect(adjustmentSpy).toHaveBeenCalledWith(NbAdjustment.HORIZONTAL);
+        expect(contentSpy).toHaveBeenCalledTimes(3);
+        expect(contentSpy).toHaveBeenCalledWith('new string');
+        expect(contextSpy).toHaveBeenCalledTimes(3);
+        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'home' });
+        expect(buildSpy).toHaveBeenCalledTimes(1);
+        expect(rebuildSpy).toHaveBeenCalledTimes(2);
+      });
+
+    });
   });
 });

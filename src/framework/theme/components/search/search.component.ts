@@ -7,18 +7,18 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
-  ChangeDetectorRef,
-  OnChanges,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -48,13 +48,14 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
   template: `
     <div class="search" (keyup.esc)="emitClose()">
       <button (click)="emitClose()">
-        <i class="nb-close-circled"></i>
+        <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
       </button>
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
           <div class="form-content">
             <input class="search-input"
                    #searchInput
+                   (input)="emitSearchInput(searchInput.value)"
                    autocomplete="off"
                    [attr.placeholder]="placeholder"
                    tabindex="-1"
@@ -83,6 +84,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
   @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
+  @Output() searchInput = new EventEmitter();
 
   @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
@@ -149,6 +151,10 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  emitSearchInput(term: string) {
+    this.searchInput.emit(term);
+  }
+
   focusInput() {
     if (this.show && this.inputElement) {
       this.inputElement.nativeElement.focus();
@@ -203,8 +209,8 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button #searchButton class="start-search" (click)="openSearch()">
-      <i class="nb-search"></i>
+    <button #searchButton class="start-search" (click)="emitActivate()">
+      <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
     </button>
     <nb-search-field
       *nbPortal
@@ -213,7 +219,8 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
       [placeholder]="placeholder"
       [hint]="hint"
       (search)="search($event)"
-      (close)="hideSearch()">
+      (searchInput)="emitInput($event)"
+      (close)="emitDeactivate()">
     </nb-search-field>
   `,
 })
@@ -318,6 +325,18 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   search(term) {
     this.searchService.submitSearch(term, this.tag);
     this.hideSearch();
+  }
+
+  emitInput(term: string) {
+    this.searchService.searchInput(term, this.tag);
+  }
+
+  emitActivate() {
+    this.searchService.activateSearch(this.type, this.tag);
+  }
+
+  emitDeactivate() {
+    this.searchService.deactivateSearch(this.type, this.tag);
   }
 
   private removeLayoutClasses() {

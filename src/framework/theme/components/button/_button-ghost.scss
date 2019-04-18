@@ -1,0 +1,43 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin button-ghost() {
+  [nbButton].appearance-ghost {
+    background-color: nb-theme(button-ghost-background-color);
+    border-color: nb-theme(button-ghost-border-color);
+    border-style: nb-theme(button-ghost-border-style);
+    border-width: nb-theme(button-ghost-border-width);
+    text-transform: nb-theme(button-ghost-text-transform);
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        padding: nb-theme(button-ghost-#{$size}-padding);
+      }
+    }
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        color: nb-theme(button-ghost-#{$status}-text-color);
+
+        &:focus {
+          color: nb-theme(button-ghost-#{$status}-focus-text-color);
+        }
+
+        &:hover {
+          color: nb-theme(button-ghost-#{$status}-hover-color);
+        }
+
+        &:active {
+          color: nb-theme(button-ghost-#{$status}-active-text-color);
+        }
+
+        &[disabled] {
+          color: nb-theme(button-ghost-#{$status}-disabled-text-color);
+        }
+      }
+    }
+  }
+}

@@ -16,7 +16,10 @@ import {
   NbSidebarModule,
   NbCardModule,
   NbCheckboxModule,
+  NbIconModule,
 } from '@nebular/theme';
+
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import {
   NgdHeaderComponent,
@@ -41,10 +44,11 @@ import {
   NgdIframeCommunicatorService,
   NgdStylesService,
   NgdVersionService,
-  NgdTocStateService,
+  NgdVisibilityService,
   NgdPaginationService,
   NgdAnalytics,
   NgdMenuService,
+  NgdMetadataService,
 } from './services';
 
 
@@ -56,6 +60,8 @@ import {
     NbCardModule,
     NbMenuModule,
     NbTabsetModule,
+    NbIconModule,
+    NbEvaIconsModule,
     RouterModule,
   ],
   declarations: [
@@ -76,6 +82,7 @@ import {
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    NbIconModule,
     NbLayoutModule,
     NbSidebarModule,
     NbCardModule,
@@ -107,10 +114,11 @@ export class NgdThemeModule {
         NgdIframeCommunicatorService,
         NgdStylesService,
         NgdVersionService,
-        NgdTocStateService,
         NgdPaginationService,
         NgdAnalytics,
         NgdMenuService,
+        NgdVisibilityService,
+        NgdMetadataService,
       ],
     };
   }

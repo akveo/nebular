@@ -5,15 +5,15 @@
  */
 
 @mixin nb-accordion-item-header() {
-  padding: nb-theme(accordion-padding);
   border-bottom-width: nb-theme(accordion-header-border-width);
-  border-bottom-style: nb-theme(accordion-header-border-type);
+  border-bottom-style: nb-theme(accordion-header-border-style);
   border-bottom-color: nb-theme(accordion-header-border-color);
-  color: nb-theme(accordion-header-fg-heading);
-
-  font-family: nb-theme(accordion-header-font-family);
-  font-size: nb-theme(accordion-header-font-size);
-  font-weight: nb-theme(accordion-header-font-weight);
+  color: nb-theme(accordion-header-text-color);
+  font-family: nb-theme(accordion-header-text-font-family);
+  font-size: nb-theme(accordion-header-text-font-size);
+  font-weight: nb-theme(accordion-header-text-font-weight);
+  line-height: nb-theme(accordion-header-text-line-height);
+  padding: nb-theme(accordion-padding);
 
   @include nb-headings();
 }
@@ -22,14 +22,14 @@
 
   nb-accordion {
     display: block;
-    box-shadow: nb-theme(accordion-item-shadow);
+    box-shadow: nb-theme(accordion-shadow);
     border-radius: nb-theme(accordion-border-radius);
 
     nb-accordion-item-header {
       position: relative;
       @include nb-accordion-item-header();
 
-      i {
+      nb-icon {
         position: absolute;
         @include nb-ltr(right, 1rem);
         @include nb-rtl(left, 1rem);
@@ -37,13 +37,15 @@
     }
 
     nb-accordion-item {
-      font-family: nb-theme(accordion-item-font-family);
-      font-weight: nb-theme(accordion-item-font-weight);
-      background: nb-theme(accordion-item-bg);
-      color: nb-theme(accordion-item-fg-text);
+      background-color: nb-theme(accordion-item-background-color);
+      color: nb-theme(accordion-item-text-color);
+      font-family: nb-theme(accordion-item-text-font-family);
+      font-size: nb-theme(accordion-item-text-font-size);
+      font-weight: nb-theme(accordion-item-text-font-weight);
+      line-height: nb-theme(accordion-item-text-line-height);
 
       &.disabled nb-accordion-item-header {
-        color: nb-theme(accordion-header-disabled-fg);
+        color: nb-theme(accordion-header-disabled-text-color);
         cursor: default;
       }
 
@@ -61,16 +63,16 @@
       }
     }
     nb-accordion-item:not(.collapsed) + nb-accordion-item nb-accordion-item-header {
-      border-top-width: nb-theme(accordion-header-border-width);
-      border-top-style: nb-theme(accordion-header-border-type);
       border-top-color: nb-theme(accordion-header-border-color);
+      border-top-style: nb-theme(accordion-header-border-style);
+      border-top-width: nb-theme(accordion-header-border-width);
     }
 
     nb-accordion-item-body .item-body {
       flex: 1;
       -ms-flex: 1 1 auto;
       overflow: auto;
-      padding: nb-theme(card-padding);
+      padding: nb-theme(accordion-padding);
       position: relative;
     }
   }

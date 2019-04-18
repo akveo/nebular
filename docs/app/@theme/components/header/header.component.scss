@@ -22,8 +22,10 @@
     flex: 1 0 auto;
     padding: 0 0.5rem;
 
-    .nb-menu {
+    nb-icon {
       vertical-align: middle;
+      font-size: 1.75rem;
+      color: $version-fg;
     }
   }
 

@@ -11,12 +11,6 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
-      </nb-card-body>
-    </nb-card>
-
-    <nb-card>
-      <nb-card-body>
         <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
       </nb-card-body>
     </nb-card>
@@ -26,18 +20,18 @@ export class RouteTabsetShowcaseComponent {
   tabs: any[] = [
     {
       title: 'Users',
-      icon: 'nb-person',
-      route: '/tabset/route-tabset-showcase.component/tab1',
+      icon: 'person',
+      route: './tab1',
     },
     {
       title: 'Orders',
-      icon: 'nb-notifications',
+      icon: 'notifications',
       responsive: true,
-      route: '/tabset/route-tabset-showcase.component/tab2',
+      route: [ './tab2' ],
     },
     {
       title: 'Transaction',
-      icon: 'nb-notifications',
+      icon: 'notifications',
       responsive: true,
       disabled: true,
     },

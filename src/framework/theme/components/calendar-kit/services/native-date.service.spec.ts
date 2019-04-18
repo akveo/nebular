@@ -139,6 +139,11 @@ describe('native-date-service', () => {
     expect(newDate.getTime()).toBe(new Date(2019, 0, 16).getTime());
   });
 
+  it('should add month if number of days will be less than current date', () => {
+    const newDate = dateService.addMonth(new Date(2018, 11, 31), -1);
+    expect(newDate.getTime()).toBe(new Date(2018, 10, 30).getTime());
+  });
+
   it('should add year', () => {
     const newDate = dateService.addYear(new Date(2018, 11, 16), 1);
     expect(newDate.getTime()).toBe(new Date(2019, 11, 16).getTime());

@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, ElementRef, forwardRef, Inject, InjectionToken, Input, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  forwardRef,
+  Inject,
+  InjectionToken,
+  Input,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALIDATORS,
@@ -16,7 +25,7 @@ import {
 } from '@angular/forms';
 import { Type } from '@angular/core/src/type';
 import { fromEvent, Observable, merge } from 'rxjs';
-import { map, takeWhile, filter, take } from 'rxjs/operators';
+import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit';
@@ -78,11 +87,13 @@ export abstract class NbDatepicker<T> {
    * */
   abstract format: string;
 
-  abstract get value(): T;
+  abstract get value(): T | undefined;
 
   abstract set value(value: T);
 
   abstract get valueChange(): Observable<T>;
+
+  abstract get init(): Observable<void>;
 
   /**
    * Attaches datepicker to the native input element.
@@ -107,6 +118,7 @@ export abstract class NbDatepicker<T> {
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
 
+export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options');
 
 /**
  * The `NbDatepickerDirective` is form control that gives you ability to select dates and ranges. The datepicker
@@ -185,6 +197,41 @@ export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Dat
  * Because date-fns is treeshakable, tiny and operates native date objects. If you want to use it you have to
  * install it: `npm i @nebular/date-fns`, and import `NbDateFnsDateModule` from this package.
  *
+ * ### NbDateFnsDateModule
+ *
+ * Format is required when using `NbDateFnsDateModule`. You can set it via `format` input on datepicker component:
+ * ```html
+ * <nb-datepicker format="dd.MM.yyyy"></nb-datepicker>
+ * ```
+ * Also format can be set globally with `NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' })` and
+ * `NbDateFnsDateModule.forChild({ format: 'dd.MM.yyyy' })` methods.
+ *
+ * Please note to use some of the formatting tokens you also need to pass `{ awareOfUnicodeTokens: true }` to date-fns
+ * parse and format functions. You can configure options passed this functions by setting `formatOptions` and
+ * `parseOptions` of options object passed to `NbDateFnsDateModule.forRoot` and `NbDateFnsDateModule.forChild` methods.
+ * ```ts
+ * NbDateFnsDateModule.forRoot({
+ *   parseOptions: { awareOfUnicodeTokens: true },
+ *   formatOptions: { awareOfUnicodeTokens: true },
+ * })
+ * ```
+ * Further info on `date-fns` formatting tokens could be found at
+ * [date-fns docs](https://date-fns.org/v2.0.0-alpha.27/docs/Unicode-Tokens).
+ *
+ * You can also use `parseOptions` and `formatOptions` to provide locale.
+ * ```ts
+ * import { eo } from 'date-fns/locale';
+ *
+ * @NgModule({
+ *   imports: [
+ *     NbDateFnsDateModule.forRoot({
+ *       parseOptions: { locale: eo },
+ *       formatOptions: { locale: eo },
+ *     }),
+ *   ],
+ * })
+ * ```
+ *
  * @styles
  *
  * datepicker-fg
@@ -229,6 +276,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * */
   protected picker: NbDatepicker<D>;
   protected alive: boolean = true;
+  protected isDatepickerReady: boolean = false;
+  protected queue: D | undefined;
   protected onChange: (D) => void = () => {};
   protected onTouched: () => void = () => {};
 
@@ -245,7 +294,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   constructor(@Inject(NB_DOCUMENT) protected document,
               @Inject(NB_DATE_ADAPTER) protected datepickerAdapters: NbDatepickerAdapter<D>[],
               protected hostRef: ElementRef,
-              protected dateService: NbDateService<D>) {
+              protected dateService: NbDateService<D>,
+              protected changeDetector: ChangeDetectorRef) {
     this.subscribeOnInputChange();
   }
 
@@ -271,8 +321,12 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Writes value in picker and html input element.
    * */
   writeValue(value: D) {
-    this.writePicker(value);
-    this.writeInput(value);
+    if (this.isDatepickerReady) {
+      this.writePicker(value);
+      this.writeInput(value);
+    } else {
+      this.queue = value;
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -306,6 +360,14 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Validates that we can parse value correctly.
    * */
   protected parseValidator(): ValidationErrors | null {
+    /**
+     * Date services treat empty string as invalid date.
+     * That's why we're getting invalid formControl in case of empty input which is not required.
+     * */
+    if (this.inputValue === '') {
+      return null;
+    }
+
     const isValid = this.datepickerAdapter.isValid(this.inputValue, this.picker.format);
     return isValid ? null : { nbDatepickerParse: { value: this.inputValue } };
   }
@@ -358,8 +420,27 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     this.chooseDatepickerAdapter();
     this.picker.attach(this.hostRef);
 
-    if (this.hostRef.nativeElement.value) {
-      this.picker.value = this.datepickerAdapter.parse(this.hostRef.nativeElement.value, this.picker.format);
+    if (this.inputValue) {
+      this.picker.value = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
+    }
+
+    // In case datepicker component placed after the input with datepicker directive,
+    // we can't read `this.picker.format` on first change detection run,
+    // since it's not bound yet, so we have to wait for datepicker component initialization.
+    if (!this.isDatepickerReady) {
+      this.picker.init
+        .pipe(
+          takeWhile(() => this.alive),
+          take(1),
+          tap(() => this.isDatepickerReady = true),
+          filter(() => !!this.queue),
+        )
+        .subscribe(() => {
+          this.writeValue(this.queue);
+          this.onChange(this.queue);
+          this.changeDetector.detectChanges();
+          this.queue = undefined;
+        });
     }
 
     this.picker.valueChange

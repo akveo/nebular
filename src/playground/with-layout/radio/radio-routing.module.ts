@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
 import { RadioDisabledComponent } from './radio-disabled.component';
 import { RadioShowcaseComponent } from './radio-showcase.component';
+import { RadioStatusesComponent } from './radio-statuses.component';
+import { RadioDisabledGroupComponent } from './radio-disabled-group.component';
 
 const routes: Route[] = [
   {
@@ -17,6 +19,14 @@ const routes: Route[] = [
   {
     path: 'radio-showcase.component',
     component: RadioShowcaseComponent,
+  },
+  {
+    path: 'radio-statuses.component',
+    component: RadioStatusesComponent,
+  },
+  {
+    path: 'radio-disabled-group.component',
+    component: RadioDisabledGroupComponent,
   },
 ];
 

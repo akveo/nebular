@@ -11,6 +11,7 @@ import { ContextMenuShowcaseComponent } from './context-menu-showcase.component'
 import { ContextMenuTestComponent } from './context-menu-test.component';
 import { ContextMenuModesComponent } from './context-menu-modes.component';
 import { ContextMenuNoopComponent } from './context-menu-noop.component';
+import { ContextMenuRightClickComponent } from './context-menu-right-click.component';
 
 const routes: Route[] = [
   {
@@ -32,6 +33,10 @@ const routes: Route[] = [
   {
     path: 'context-menu-noop.component',
     component: ContextMenuNoopComponent,
+  },
+  {
+    path: 'context-menu-right-click.component',
+    component: ContextMenuRightClickComponent,
   },
 ];
 

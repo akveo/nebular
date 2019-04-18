@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { takeWhile,  map, filter } from 'rxjs/operators';
+import { takeWhile, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { of as observableOf,  combineLatest } from 'rxjs';
 
@@ -17,7 +17,7 @@ import { of as observableOf,  combineLatest } from 'rxjs';
       <h4>Overview</h4>
       <ul>
         <li *ngFor="let item of items" [class.selected]="item.selected">
-          <a [routerLink]="item.link" [fragment]="item.fragment">{{ item.title }}</a>
+          <a routerLink="." [fragment]="item.fragment">{{ item.title }}</a>
         </li>
       </ul>
     </ng-container>

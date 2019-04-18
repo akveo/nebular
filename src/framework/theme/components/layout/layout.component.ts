@@ -183,7 +183,7 @@ export class NbLayoutFooterComponent {
  * ```html
  * <nb-layout>
  *  <nb-layout-header></nb-layout-header>
- *  <nb-layout-footer></nb-layout-column>
+ *  <nb-layout-footer></nb-layout-footer>
  *  <nb-layout-column></nb-layout-column>
  *  <nb-sidebar></nb-sidebar>
  * </nb-layout>
@@ -443,7 +443,21 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         filter(() => this.withScrollValue),
       )
       .subscribe((scrollable: boolean) => {
+        const root = this.document.documentElement;
+        const scrollBlockClass = 'nb-global-scrollblock';
+
         this.overlayScrollBlock = !scrollable;
+
+        /**
+         * In case when Nebular Layout custom scroll `withScroll` mode is enabled
+         * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
+         * so that it won't add additional positioning.
+         */
+        if (!scrollable) {
+          this.renderer.addClass(root, scrollBlockClass);
+        } else {
+          this.renderer.removeClass(root, scrollBlockClass);
+        }
       });
 
     if (isPlatformBrowser(this.platformId)) {
@@ -455,9 +469,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(direction => {
-        this.renderer.setProperty(this.document, 'dir', direction);
-      });
+      .subscribe(direction => this.document.dir = direction);
 
     this.scrollService.onManualScroll()
       .pipe(takeWhile(() => this.alive))

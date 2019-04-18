@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbStepperComponent } from './stepper.component';
 import { NbStepComponent } from './step.component';
+import { NbIconModule } from '../icon/icon.module';
 
 // TODO: this definitely requires more testing!
 describe('Component: NbStepper', () => {
@@ -11,6 +12,7 @@ describe('Component: NbStepper', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [NbIconModule],
       declarations: [NbStepComponent, NbStepperComponent],
     });
 

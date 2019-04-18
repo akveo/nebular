@@ -192,7 +192,7 @@ Here we call the same `authenticate` method, which will determines that we are i
 
 ## Complete example
 
-A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/oauth2).
+A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/with-layout/oauth2).
 And here the playground example available to play around with [OAuth2 Nebular Example](/example/oauth2).
 
 <hr>

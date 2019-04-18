@@ -11,6 +11,7 @@ import { SearchCustomizedTestComponent } from './search-customized-test.componen
 import { SearchEventComponent } from './search-event.component';
 import { SearchShowcaseComponent } from './search-showcase.component';
 import { SearchTestComponent } from './search-test.component';
+import { SearchWithInputEventComponent } from './search-with-input-event.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SearchTestComponent } from './search-test.component';
     SearchEventComponent,
     SearchShowcaseComponent,
     SearchTestComponent,
+    SearchWithInputEventComponent,
   ],
   imports: [
     NbSearchModule,

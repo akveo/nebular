@@ -6,31 +6,22 @@
 
 import {
   AfterViewInit,
-  ComponentFactoryResolver,
-  ComponentRef,
   Directive,
   ElementRef,
-  Inject,
   Input,
-  OnDestroy,
+  OnChanges,
+  OnDestroy, OnInit,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
 
 import {
-  NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbOverlayContent,
-  NbOverlayRef,
-  NbOverlayService,
   NbPosition,
-  NbPositionBuilderService,
   NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-  patch,
-  createContainer,
+  NbDynamicOverlayHandler,
+  NbDynamicOverlay,
+  NbDynamicOverlayController,
 } from '../cdk';
-import { NB_DOCUMENT } from '../../theme.options';
 import { NbPopoverComponent } from './popover.component';
 
 
@@ -54,7 +45,7 @@ import { NbPopoverComponent } from './popover.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbPopoverModule,
  *   ],
  * })
@@ -87,7 +78,7 @@ import { NbPopoverComponent } from './popover.component';
  * If you wanna disable this behaviour just set it falsy value.
  *
  * ```html
- * <button nbPopover="Hello, Popover!" [nbPopoverAdjust]="false"></button>
+ * <button nbPopover="Hello, Popover!" [nbPopoverAdjustment]="false"></button>
  * ```
  *
  * Popover has a number of triggers which provides an ability to show and hide the component in different ways:
@@ -108,11 +99,21 @@ import { NbPopoverComponent } from './popover.component';
  *
  * @stacked-example(Manual Control, popover/popover-noop.component)
  *
+ * Below are examples for manual popover settings control, both via template binding and code.
+ * @stacked-example(Popover Settings, popover/popover-dynamic.component)
+ *
+ * Please note, while manipulating Popover setting via code, you need to call `rebuild()` method to apply the settings
+ * changed.
+ * @stacked-example(Popover Settings Code, popover/popover-dynamic-code.component)
+ *
  * @additional-example(Template Ref, popover/popover-template-ref.component)
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
-@Directive({ selector: '[nbPopover]' })
-export class NbPopoverDirective implements AfterViewInit, OnDestroy {
+@Directive({
+  selector: '[nbPopover]',
+  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+})
+export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
@@ -153,7 +154,6 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
       Use 'nbPopoverTrigger' instead.`);
     this.trigger = mode;
   }
-
   get mode() {
     return this.trigger;
   }
@@ -165,97 +165,54 @@ export class NbPopoverDirective implements AfterViewInit, OnDestroy {
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
-  protected ref: NbOverlayRef;
-  protected container: ComponentRef<any>;
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected alive: boolean = true;
+  private dynamicOverlay: NbDynamicOverlay;
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              private hostRef: ElementRef,
-              private positionBuilder: NbPositionBuilderService,
-              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private overlay: NbOverlayService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private hostRef: ElementRef,
+              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  }
+
+  ngOnInit() {
+    this.dynamicOverlayHandler
+      .host(this.hostRef)
+      .componentType(NbPopoverComponent);
+  }
+
+  ngOnChanges() {
+    this.rebuild();
   }
 
   ngAfterViewInit() {
-    this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-    this.hide();
-    if (this.ref) {
-      this.ref.dispose();
-    }
-  }
-
-  show() {
-    if (!this.ref) {
-      this.createOverlay();
-    }
-
-    this.openPopover();
-  }
-
-  hide() {
-    if (this.ref) {
-      this.ref.detach();
-    }
-
-    this.container = null;
-  }
-
-  toggle() {
-    if (this.ref && this.ref.hasAttached()) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
-  protected createOverlay() {
-    this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
-  }
-
-  protected openPopover() {
-    this.container = createContainer(this.ref, NbPopoverComponent, {
-      position: this.position,
-      content: this.content,
-      context: this.context,
-      cfr: this.componentFactoryResolver,
-    }, this.componentFactoryResolver);
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(this.position)
-      .adjustment(this.adjustment);
-  }
-
-  protected createTriggerStrategy(): NbTriggerStrategy {
-    return this.triggerStrategyBuilder
-      .trigger(this.trigger)
-      .host(this.hostRef.nativeElement)
-      .container(() => this.container)
+    this.dynamicOverlay = this.configureDynamicOverlay()
       .build();
   }
 
-  protected subscribeOnPositionChange() {
-    this.positionStrategy = this.createPositionStrategy();
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
+  rebuild() {
+    this.dynamicOverlay = this.configureDynamicOverlay()
+      .rebuild();
   }
 
-  protected subscribeOnTriggers() {
-    const triggerStrategy: NbTriggerStrategy = this.createTriggerStrategy();
-    triggerStrategy.show$.pipe(takeWhile(() => this.alive)).subscribe(() => this.show());
-    triggerStrategy.hide$.pipe(takeWhile(() => this.alive)).subscribe(() => this.hide());
+  show() {
+    this.dynamicOverlay.show();
+  }
+
+  hide() {
+    this.dynamicOverlay.hide();
+  }
+
+  toggle() {
+    this.dynamicOverlay.toggle();
+  }
+
+  ngOnDestroy() {
+    this.dynamicOverlayHandler.destroy();
+  }
+
+  protected configureDynamicOverlay() {
+    return this.dynamicOverlayHandler
+      .position(this.position)
+      .trigger(this.trigger)
+      .adjustment(this.adjustment)
+      .content(this.content)
+      .context(this.context);
   }
 }

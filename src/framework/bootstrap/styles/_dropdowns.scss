@@ -34,13 +34,8 @@
   @include dropdown-menu-background(nb-theme(btn-secondary-border));
 }
 
-
-@function dropdown-divider($color) {
-  @return shade($color, 14%);
-}
-
 @mixin dropdown-menu-border($color) {
-  border-top: 1px solid dropdown-divider($color);
+  border-top: 1px solid $color;
 }
 
 @mixin dropdown-menu-primary-border() {
@@ -69,7 +64,7 @@
 
 
 @mixin dropdown-menu-divider($color) {
-  background-color: dropdown-divider($color);
+  background-color: $color;
 }
 
 @mixin dropdown-menu-primary-divider() {

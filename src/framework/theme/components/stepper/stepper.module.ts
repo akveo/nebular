@@ -10,10 +10,12 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbStepperComponent } from './stepper.component';
 import { NbStepComponent } from './step.component';
 import { NbStepperNextDirective, NbStepperPreviousDirective } from './stepper-button.directive';
+import { NbIconModule } from '../icon/icon.module';
 
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [
     NbStepperComponent,

@@ -25,7 +25,7 @@ export class MenuAutoCollapseComponent {
         },
         {
           title: 'Privacy Policy',
-          ulr: '#', // goes directly into `href` attribute
+          url: '#', // goes directly into `href` attribute
         },
         {
           title: 'Logout',
@@ -42,7 +42,7 @@ export class MenuAutoCollapseComponent {
         },
         {
           title: 'Second Product',
-          ulr: '#', // goes directly into `href` attribute
+          url: '#', // goes directly into `href` attribute
         },
         {
           title: 'Third Product',
@@ -59,7 +59,7 @@ export class MenuAutoCollapseComponent {
         },
         {
           title: 'Second Order',
-          ulr: '#', // goes directly into `href` attribute
+          url: '#', // goes directly into `href` attribute
         },
         {
           title: 'Third Order',

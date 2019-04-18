@@ -1,11 +1,7 @@
 sudo: false
 language: node_js
 addons:
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
+  chrome: stable
 node_js:
   - '8'
 
@@ -20,22 +16,19 @@ env:
     - BROWSER_PROVIDER_ERROR_FILE=/tmp/nebular/errorfile
     - LOGS_DIR=/tmp/nebular/logs
     - DEV_DEPLOY_HOST=https://nebular-dev-demo.firebaseapp.com/
-    - secure: axHRHuw65ArY0KYUcYKOYsn+9LBqDOmUVDRVKkTlEnT5Odp+sZ6wyWPnDDzCeuhY9xEZ8lkp7C/w28s0TN6GSdVeNe9Y+gA1fecRVQH7XFeOqxDgPqjiQzsumVUoDbo+l8aVuKOwxQ/bRk5pM2q/1hxo3xaz/OMGiFtV4kqwJKos4FXcpkHwkfM387IFu6CdY7XT6oxnni78jKQHRaIPjTC7DzaZdA06jth1xvcfbZXIEpMFHl2fEhVgt9gdS1cReJHUPwR66IiiGYqfPLtrtUkF0L6HcHFS0U1PfTl9E8RFu53w66/+JtVlMwmnX6Qv/wENG0OKyh3auN54Dlp4m1ESvUlFDsjEipFNRjatwePFuqUIROFVzFavbSadK8/IlvAnNQ1ftT5OPu0cOKCwQneXZeMlkc0Ipp+JaDburQ3i0dO170oJwMAXOulKntOCfBUfgAElm8B2EWr/bYU1a2btM39NGiNspGVgav2fw6PHuqSKEN/ylDh1ZAx1iXjPqK6z/9pQvDlK6TTjIuScY27mZEuhz/Fv1K7skW02XFVwDOmAT3FJd6brJOLm03DTm36+fEGutqFe9qqHDxWmi3zZBprXtRMSofEEGEmDWhBbqiGATvoW2XI2dqYOe7ZZU/aXxZ/fVLkq8LPkvOmqvaVaNAUgpnouRf/jmmDno0o=
+    - FIREBASE_KEY=WxTLWO1mVWCO0EvbRCfF2qgBXUVUNoKxP5QULy41zVj5HNBovHEZ3ZknbAXoZ2ew/1
     - secure: iQsTgStaSZaDFyQBrDNVD9PemiEK53c2tkHGBIRAPwMgxTP3F1MlUFJDHabpeZlpAoUJ1xwSrJEtW7kF1o8gQL2uu8845BA9Ry/0fuazhKr9qj8cDkYzNPsO8F8KKeeJMseg/UCfFxAKb1AcNA4L/5oDbFO+DTN4LDIlSd86ySZ1dGv+PEeBOuyahE+8nqZvzoZE7C3xhCa4RMGC+DtRMkcK80qSvX9wvnRuRULP89Vb4zBs/YlNxn1vtAFaNgfW5c5EiTXfm2KG41k25uggnh0LX0VEQJ7N4w/1ZXoTjg06HX8VX2gjXefjtEZOiq0vh0aF5aSHfbyGbi0fpcWQcFWrBkC7CfElAoILU/IuQjNTR9wz2oSP1uLJjarCVsF3Mk1cFd1kXxqJEqr4ca8ZOwQOgcydymCa55QjgsYmG4VLF1QnJJmx7oJ+CO2DEe7haJhPcHZsKLus1ubFQNSiu2nasr1mql6IDHzcCEoj3+vGo3ersNraKQPH5M0sQoZ4A6ErwyMirgCodgCxDp42BieWIM4ZOf6ZaEmWE/n8FwTMjBvsiMl6UXshjtNO+1v+WlDF+8mBiumeLv2vhfpjhPji07i27+U4lTDVj78eqe5Vsiv4KlvPF+yQ/vI6qLXNIjSXRViMS200VSR1y2uXG6ACtHXAxtszrRmfgk8kI8E=
   matrix:
-    - MODE=sauce_e2e
-    - MODE=browserstack_e2e
     - MODE=sauce_unit_test
     - MODE=browserstack_unit_test
     - MODE=build
     - MODE=docs
     - MODE=lint
-    - MODE=deploy_dev
-    - MODE=publish_dev
     - MODE=packages_smoke
 branches:
   only:
   - master
+  - next
 
 matrix:
   fast_finish: true

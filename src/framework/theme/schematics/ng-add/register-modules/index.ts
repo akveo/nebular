@@ -58,6 +58,7 @@ function registerNebularModules(options: Schema): Rule {
 
     addModuleImportToRootModule(tree, nebularThemeModule, '@nebular/theme', project);
     addModuleImportToRootModule(tree, 'NbLayoutModule', '@nebular/theme', project);
+    addModuleImportToRootModule(tree, 'NbEvaIconsModule', '@nebular/eva-icons', project);
   }
 }
 

@@ -12,13 +12,19 @@
     border: nb-theme(toastr-border);
     border-radius: nb-theme(toastr-border-radius);
 
-    .icon {
+    .icon-container {
       @include nb-ltr(margin-right, 1.25rem);
       @include nb-rtl(margin-left, 1.25rem);
-    }
-
-    i {
       border-radius: nb-theme(toastr-icon-radius);
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      nb-icon {
+        font-size: 1.5rem;
+      }
     }
 
     @include nb-except-theme(cosmic) {
@@ -39,19 +45,17 @@
       border-color: nb-theme(color-success);
       color: nb-theme(color-success);
 
-      i {
+      .icon-container {
         background-color: nb-theme(color-success);
-
         color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
+        background-color: nb-theme(color-success);
         color: nb-theme(toastr-color-fg);
 
-        i {
+        .icon-container {
           background-color: nb-theme(color-white);
-
           color: nb-theme(color-success);
         }
       }
@@ -61,19 +65,17 @@
       border-color: nb-theme(color-info);
       color: nb-theme(color-info);
 
-      i {
+      .icon-container {
         background-color: nb-theme(color-info);
-
         color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-info-gradient();
+        background-color: nb-theme(color-info);
         color: nb-theme(toastr-color-fg);
 
-        i {
+        .icon-container {
           background-color: nb-theme(color-white);
-
           color: nb-theme(color-info);
         }
       }
@@ -83,19 +85,17 @@
       border-color: nb-theme(color-warning);
       color: nb-theme(color-warning);
 
-      i {
+      .icon-container {
         background-color: nb-theme(color-warning);
-
         color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-warning-gradient();
+        background-color: nb-theme(color-warning);
         color: nb-theme(toastr-color-fg);
 
-        i {
+        .icon-container {
           background-color: nb-theme(color-white);
-
           color: nb-theme(color-warning);
         }
       }
@@ -105,19 +105,17 @@
       border-color: nb-theme(color-primary);
       color: nb-theme(color-primary);
 
-      i {
+      .icon-container {
         background-color: nb-theme(color-primary);
-
         color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-primary-gradient();
+        background-color: nb-theme(color-primary);
         color: nb-theme(toastr-color-fg);
 
-        i {
+        .icon-container {
           background-color: nb-theme(color-white);
-
           color: nb-theme(color-primary);
         }
       }
@@ -127,19 +125,17 @@
       border-color: nb-theme(color-danger);
       color: nb-theme(color-danger);
 
-      i {
+      .icon-container {
         background-color: nb-theme(color-danger);
-
         color: nb-theme(color-white);
       }
 
       @include nb-for-theme(cosmic) {
-        @include btn-hero-danger-gradient();
+        background-color: nb-theme(color-danger);
         color: nb-theme(toastr-color-fg);
 
-        i {
+        .icon-container {
           background-color: nb-theme(color-white);
-
           color: nb-theme(color-danger);
         }
       }

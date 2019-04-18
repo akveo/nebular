@@ -19,6 +19,7 @@ import { ContextMenuShowcaseComponent } from './context-menu-showcase.component'
 import { ContextMenuTestComponent } from './context-menu-test.component';
 import { ContextMenuModesComponent } from './context-menu-modes.component';
 import { ContextMenuNoopComponent } from './context-menu-noop.component';
+import { ContextMenuRightClickComponent } from './context-menu-right-click.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ContextMenuNoopComponent } from './context-menu-noop.component';
     ContextMenuTestComponent,
     ContextMenuModesComponent,
     ContextMenuNoopComponent,
+    ContextMenuRightClickComponent,
   ],
   imports: [
     NbContextMenuModule,

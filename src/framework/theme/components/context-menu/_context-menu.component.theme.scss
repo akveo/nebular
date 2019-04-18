@@ -8,7 +8,7 @@
 @mixin nb-context-menu-theme() {
   nb-context-menu {
     $arrow-size: nb-theme(context-menu-arrow-size);
-    $arrow-content-size: calc(#{$arrow-size} - 2px);
+    $arrow-content-size: #{$arrow-size} - 2px;
 
     border: 2px solid nb-theme(context-menu-border);
     border-radius: nb-theme(context-menu-border-radius);
@@ -30,32 +30,32 @@
         width: 0;
         height: 0;
         top: 3px;
-        left: calc(50% - #{$arrow-content-size});
-        border-left: $arrow-content-size solid transparent;
-        border-right: $arrow-content-size solid transparent;
-        border-bottom: $arrow-content-size solid nb-theme(context-menu-bg);
+        left: calc(50% - (#{$arrow-content-size}));
+        border-left: calc(#{$arrow-content-size}) solid transparent;
+        border-right: calc(#{$arrow-content-size}) solid transparent;
+        border-bottom: calc(#{$arrow-content-size}) solid nb-theme(context-menu-bg);
       }
     }
 
     &.nb-overlay-bottom .arrow {
-      top: calc(-#{$arrow-size} + 1px);
+      top: calc(-1 * #{$arrow-size} + 1px);
       left: calc(50% - #{$arrow-size});
     }
 
     &.nb-overlay-left .arrow {
-      right: round(-$arrow-size - $arrow-size / 2 + 2px);
+      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
       top: calc(50% - #{$arrow-size / 2});
       transform: rotate(90deg);
     }
 
     &.nb-overlay-top .arrow {
-      bottom: calc(-#{$arrow-size} + 1px);
+      bottom: calc(-1 * #{$arrow-size} + 1px);
       left: calc(50% - #{$arrow-size});
       transform: rotate(180deg);
     }
 
     &.nb-overlay-right .arrow {
-      left: round(-$arrow-size - $arrow-size / 2 + 2px);
+      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
       top: calc(50% - #{$arrow-size / 2});
       transform: rotate(270deg);
     }

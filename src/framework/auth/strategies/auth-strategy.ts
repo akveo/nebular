@@ -63,6 +63,6 @@ export abstract class NbAuthStrategy {
   protected getActionEndpoint(action: string): string {
     const actionEndpoint: string = this.getOption(`${action}.endpoint`);
     const baseEndpoint: string = this.getOption('baseEndpoint');
-    return baseEndpoint + actionEndpoint;
+    return actionEndpoint ? baseEndpoint + actionEndpoint : '';
   }
 }

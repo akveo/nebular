@@ -251,7 +251,7 @@ export class NgxAuthRoutingModule {
 ```
 
 Now the most interesting part - as we need to modify the template, we can simply copy it from Nebular sources and adjust necessary parts.
-Unfortunately, the library isn't distributed with the sources, so we need to copy the template sources from [GitHub](https://github.com/akveo/nebular/blob/2.0.0/src/framework/auth/components/login/login.component.html). 
+Unfortunately, the library isn't distributed with the sources, so we need to copy the template sources from [GitHub](https://github.com/akveo/nebular/blob/v2.0.0/src/framework/auth/components/login/login.component.html). 
 
 <div class="note note-info">
   <div class="note-title">Note</div>
@@ -268,7 +268,7 @@ That's it! You can check your page at http://localhost:4200/#/auth.
 
 ## Complete example
 
-A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/smart-home).
+A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/with-layout/smart-home).
 And here the playground example available to play around with [OAuth2 Nebular Example](/example/smart-home).
 
 <hr>
