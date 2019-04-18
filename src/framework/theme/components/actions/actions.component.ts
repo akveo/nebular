@@ -48,7 +48,6 @@ import { convertToBoolProperty } from '../helpers';
   `,
 })
 export class NbActionComponent {
-  @HostBinding('class.disabled') disabledValue: boolean = false;
 
   /**
    * Router link to use
@@ -69,7 +68,7 @@ export class NbActionComponent {
   @Input() title: string = '';
 
   /**
-   * Icon class to display
+   * Icon name
    * @type string
    */
   @Input() icon: string;
@@ -79,9 +78,14 @@ export class NbActionComponent {
    * @type boolean
    */
   @Input()
-  set disabled(val: boolean) {
-    this.disabledValue = convertToBoolProperty(val);
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   /**
    * Badge text to display
@@ -126,7 +130,7 @@ export class NbActionComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbActionsModule,
  *   ],
  * })
@@ -169,41 +173,45 @@ export class NbActionsComponent {
   static readonly SIZE_MEDIUM = 'medium';
   static readonly SIZE_LARGE = 'large';
 
-  private sizeValue: string;
-
-  @HostBinding('class.small')
-  get small() {
-    return this.sizeValue === NbActionsComponent.SIZE_SMALL;
-  }
-
-  @HostBinding('class.medium')
-  get medium() {
-    return this.sizeValue === NbActionsComponent.SIZE_MEDIUM;
-  }
-
-  @HostBinding('class.large')
-  get large() {
-    return this.sizeValue === NbActionsComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.full-width')
-  fullWidthValue: boolean = false;
-
   /**
    * Size of the component, small|medium|large
    * @type string
    */
   @Input()
-  set size(val: string) {
-    this.sizeValue = val;
+  get size(): string {
+    return this._size;
   }
+  set size(value: string) {
+    this._size = value;
+  }
+  protected _size: string;
 
   /**
    * Component will fill full width of the container
    * @type boolean
    */
   @Input()
-  set fullWidth(val: boolean) {
-    this.fullWidthValue = convertToBoolProperty(val);
+  @HostBinding('class.full-width')
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  protected _fullWidth: boolean = false;
+
+  @HostBinding('class.small')
+  get small() {
+    return this.size === NbActionsComponent.SIZE_SMALL;
+  }
+
+  @HostBinding('class.medium')
+  get medium() {
+    return this.size === NbActionsComponent.SIZE_MEDIUM;
+  }
+
+  @HostBinding('class.large')
+  get large() {
+    return this.size === NbActionsComponent.SIZE_LARGE;
   }
 }
