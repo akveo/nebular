@@ -173,7 +173,7 @@ export class NbActionComponent {
 export class NbActionsComponent {
 
   /**
-   * Size of the component: 'tiny', 'small', 'medium', 'large', 'giant'
+   * Size of the component: 'tiny', 'small' (default), 'medium', 'large', 'giant'
    */
   @Input()
   get size(): NbComponentSize {
@@ -182,7 +182,7 @@ export class NbActionsComponent {
   set size(value: NbComponentSize) {
     this._size = value;
   }
-  protected _size: NbComponentSize = 'medium';
+  protected _size: NbComponentSize = 'small';
 
   /**
    * Component will fill full width of the container
