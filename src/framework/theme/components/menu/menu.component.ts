@@ -17,7 +17,7 @@ import {
   DoCheck,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { takeWhile, filter, map } from 'rxjs/operators';
 import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
 import { convertToBoolProperty } from '../helpers';
@@ -41,7 +41,7 @@ export enum NbToggleStates {
     ]),
   ],
 })
-export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy, OnInit {
+export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
 
   @Output() hoverItem = new EventEmitter<any>();
@@ -51,8 +51,6 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy, O
 
   private alive = true;
   toggleState: NbToggleStates;
-  isLtr$: Observable<boolean>;
-  isRtl$: Observable<boolean>;
 
   constructor(private menuService: NbMenuService,
               private directionService: NbLayoutDirectionService) {}
@@ -69,18 +67,6 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy, O
         map(({ item }: NbMenuBag) => item.expanded),
       )
       .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
-  }
-
-  ngOnInit() {
-    this.isLtr$ = this.directionService.onDirectionChange()
-      .pipe(
-        map(() => this.directionService.isLtr()),
-      );
-
-    this.isRtl$ = this.directionService.onDirectionChange()
-      .pipe(
-        map(() => this.directionService.isRtl()),
-      );
   }
 
   ngOnDestroy() {
@@ -101,6 +87,16 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy, O
 
   onItemClick(item: NbMenuItem) {
     this.itemClick.emit(item);
+  }
+
+  getExpandStateIcon(): string {
+    if (this.menuItem.expanded) {
+      return 'chevron-down-outline';
+    }
+
+    return this.directionService.isLtr()
+      ? 'chevron-left-outline'
+      : 'chevron-right-outline';
   }
 }
 
