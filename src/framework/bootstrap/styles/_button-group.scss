@@ -6,61 +6,57 @@
 
 @import 'default-buttons';
 
-@mixin btn-group-separator($color) {
-  background-color: shade($color, 20%);
-}
-
 @mixin btn-group-primary-separator() {
-  @include btn-group-separator(nb-theme(color-primary));
+  @include nb-theme(color-primary-600);
 }
 
 @mixin btn-group-success-separator() {
-  @include btn-group-separator(nb-theme(color-success));
+  @include nb-theme(color-success-600);
 }
 
 @mixin btn-group-warning-separator() {
-  @include btn-group-separator(nb-theme(color-warning));
+  @include nb-theme(color-warning-600);
 }
 
 @mixin btn-group-info-separator() {
-  @include btn-group-separator(nb-theme(color-info));
+  @include nb-theme(color-info-600);
 }
 
 @mixin btn-group-danger-separator() {
-  @include btn-group-separator(nb-theme(color-danger));
+  @include nb-theme(color-danger-600);
 }
 
 @mixin btn-group-secondary-separator() {
-  @include btn-group-separator(nb-theme(color-primary));
+  @include nb-theme(color-primary-600);
 }
 
 
 @mixin dropdown-separator($color) {
-  border-left: 1px solid shade($color, 14%);
+  border-left: 1px solid $color;
 }
 
 @mixin dropdown-primary-separator() {
-  @include dropdown-separator(nb-theme(btn-primary-bg));
+  @include dropdown-separator(nb-theme(btn-primary-active-bg));
 }
 
 @mixin dropdown-success-separator() {
-  @include dropdown-separator(nb-theme(btn-success-bg));
+  @include dropdown-separator(nb-theme(btn-success-active-bg));
 }
 
 @mixin dropdown-warning-separator() {
-  @include dropdown-separator(nb-theme(btn-warning-bg));
+  @include dropdown-separator(nb-theme(btn-warning-active-bg));
 }
 
 @mixin dropdown-info-separator() {
-  @include dropdown-separator(nb-theme(btn-info-bg));
+  @include dropdown-separator(nb-theme(btn-info-active-bg));
 }
 
 @mixin dropdown-danger-separator() {
-  @include dropdown-separator(nb-theme(btn-danger-bg));
+  @include dropdown-separator(nb-theme(btn-danger-active-bg));
 }
 
 @mixin dropdown-secondary-separator() {
-  @include dropdown-separator(nb-theme(btn-secondary-bg));
+  @include dropdown-separator(nb-theme(btn-secondary-active-bg));
 }
 
 

@@ -174,6 +174,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonTypesComponent',
         name: 'Button Types',
       },
+      {
+        path: 'button-icon.component',
+        link: '/button/button-icon.component',
+        component: 'ButtonIconComponent',
+        name: 'Button Icon',
+      },
+      {
+        path: 'button-interactive.component',
+        link: '/button/button-interactive.component',
+        component: 'ButtonInteractiveComponent',
+        name: 'Button Interactive',
+      },
     ],
   },
   {
@@ -366,6 +378,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/checkbox/checkbox-test.component',
         component: 'CheckboxTestComponent',
         name: 'Checkbox Test',
+      },
+      {
+        path: 'checkbox-indeterminate.component',
+        link: '/checkbox/checkbox-indeterminate.component',
+        component: 'CheckboxIndeterminateComponent',
+        name: 'Checkbox Indeterminate',
       },
     ],
   },
@@ -782,6 +800,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RadioShowcaseComponent',
         name: 'Radio Showcase',
       },
+      {
+        path: 'radio-statuses.component',
+        link: '/radio/radio-statuses.component',
+        component: 'RadioStatusesComponent',
+        name: 'Radio Statuses',
+      },
+      {
+        path: 'radio-disabled-group.component',
+        link: '/radio/radio-disabled-group.component',
+        component: 'RadioDisabledGroupComponent',
+        name: 'Radio Disabled Group',
+      },
     ],
   },
   {
@@ -1148,6 +1178,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'UserHideCaptionsComponent',
         name: 'User Hide Captions',
       },
+      {
+        path: 'user-shape.component',
+        link: '/user/user-shape.component',
+        component: 'NbUserShapeComponent',
+        name: 'Nb User Shape',
+      },
     ],
   },
   {
@@ -1306,6 +1342,34 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/tree-grid/tree-grid-custom-node-structure.component',
         component: 'TreeGridCustomNodeStructureComponent',
         name: 'Tree Grid Custom Node Structure',
+      },
+    ],
+  },
+  {
+    path: 'typography',
+    children: [
+      {
+        path: 'typography-showcase.component',
+        link: '/typography/typography-showcase.component',
+        component: 'TypographyShowcaseComponent',
+        name: 'Typography Showcase',
+      },
+    ],
+  },
+  {
+    path: 'icon',
+    children: [
+      {
+        path: 'icon-showcase.component',
+        link: '/icon/icon-showcase.component',
+        component: 'IconShowcaseComponent',
+        name: 'Icon Showcase',
+      },
+      {
+        path: 'icon-colors.component',
+        link: '/icon/icon-colors.component',
+        component: 'IconColorsComponent',
+        name: 'Icon Colors',
       },
     ],
   },

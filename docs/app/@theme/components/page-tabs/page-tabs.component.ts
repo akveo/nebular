@@ -15,7 +15,7 @@ import { Observable, of as observableOf, combineLatest } from 'rxjs';
   template: `
     <a *ngFor="let item of items$ | async" [class.selected]="item.selected" [routerLink]="['../', item.tab]">
       <div class="text-container">
-        <i class="icon {{ item.icon }}"></i>
+        <nb-icon [icon]="item.icon"></nb-icon>
         <span class="title">{{ item.title }}</span>
       </div>
       <i class="line"></i>
@@ -57,23 +57,23 @@ export class NgdPageTabsComponent implements OnDestroy {
       {
         tab: 'overview',
         title: 'Overview',
-        icon: 'feather-eye',
+        icon: 'eye-outline',
         selected: true,
       },
       {
         tab: 'api',
         title: 'API',
-        icon: 'feather-settings',
+        icon: 'settings-outline',
       },
       {
         tab: 'theme',
         title: 'Theme',
-        icon: 'feather-droplet',
+        icon: 'droplet-outline',
       },
       {
         tab: 'examples',
         title: 'Examples',
-        icon: 'feather-image',
+        icon: 'image-outline',
       },
     ];
   private alive = true;

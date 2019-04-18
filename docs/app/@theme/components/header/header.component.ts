@@ -8,7 +8,7 @@ import { NgdVersionService } from '../../services';
   template: `
     <div class="section left">
       <button *ngIf="sidebarTag" class="sidebar-toggle" (click)="toggleSidebar()">
-        <i class="nb-menu"></i>
+        <nb-icon icon="menu-2"></nb-icon>
       </button>
       <div class="logo">
         <a routerLink="/">Nebular</a>

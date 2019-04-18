@@ -6,8 +6,39 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
+
 /**
  * Styled spinner component
+ *
+ * @styles
+ *
+ * spinner-background-color:
+ * spinner-circle-filled-color:
+ * spinner-circle-empty-color:
+ * spinner-text-color:
+ * spinner-text-font-family:
+ * spinner-text-font-size:
+ * spinner-text-font-weight:
+ * spinner-text-line-height:
+ * spinner-primary-circle-filled-color:
+ * spinner-primary-circle-empty-color:
+ * spinner-info-circle-filled-color:
+ * spinner-info-circle-empty-color:
+ * spinner-success-circle-filled-color:
+ * spinner-success-circle-empty-color:
+ * spinner-warning-circle-filled-color:
+ * spinner-warning-circle-empty-color:
+ * spinner-danger-circle-filled-color:
+ * spinner-danger-circle-empty-color:
+ * spinner-white-circle-filled-color:
+ * spinner-white-circle-empty-color:
+ * spinner-height-tiny:
+ * spinner-height-small:
+ * spinner-height-medium:
+ * spinner-height-large:
+ * spinner-height-giant:
  */
 @Component({
   selector: 'nb-spinner',
@@ -19,118 +50,75 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class NbSpinnerComponent {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
-
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  size: string = NbSpinnerComponent.SIZE_MEDIUM;
-  status: string = NbSpinnerComponent.STATUS_ACTIVE;
-
   /**
    * Loading text that is shown near the icon
    * @type string
    */
-  @Input() message: string = 'Loading...';
+  @Input()
+  message: string = 'Loading...';
 
   /**
-   * Spiiner size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
+   * Spinner size, available sizes:
+   * tiny, small, medium, large, giant
+   * @param {string} value
    */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
+  @Input()
+  size: NbComponentSize = 'medium';
 
   /**
-   * Spiiner status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
+   * Spinner status (adds specific styles):
+   * primary, info, success, warning, danger
    */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
+  @Input()
+  status: '' | NbComponentStatus;
+
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.xxsmall-spinner')
-  get xxsmall() {
-    return this.size === NbSpinnerComponent.SIZE_XXSMALL;
-  }
-
-  @HostBinding('class.xsmall-spinner')
-  get xsmall() {
-    return this.size === NbSpinnerComponent.SIZE_XSMALL;
-  }
-
-  @HostBinding('class.small-spinner')
+  @HostBinding('class.size-small')
   get small() {
-    return this.size === NbSpinnerComponent.SIZE_SMALL;
+    return this.size === 'small';
   }
 
-  @HostBinding('class.medium-spinner')
+  @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbSpinnerComponent.SIZE_MEDIUM;
+    return this.size === 'medium';
   }
 
-  @HostBinding('class.large-spinner')
+  @HostBinding('class.size-large')
   get large() {
-    return this.size === NbSpinnerComponent.SIZE_LARGE;
+    return this.size === 'large';
   }
 
-  @HostBinding('class.xlarge-spinner')
-  get xlarge() {
-    return this.size === NbSpinnerComponent.SIZE_XLARGE;
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
   }
 
-  @HostBinding('class.xxlarge-spinner')
-  get xxlarge() {
-    return this.size === NbSpinnerComponent.SIZE_XXLARGE;
-  }
-
-  @HostBinding('class.active-spinner')
-  get active() {
-    return this.status === NbSpinnerComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.disabled-spinner')
-  get disabled() {
-    return this.status === NbSpinnerComponent.STATUS_DISABLED;
-  }
-
-  @HostBinding('class.primary-spinner')
+  @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbSpinnerComponent.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.info-spinner')
+  @HostBinding('class.status-info')
   get info() {
-    return this.status === NbSpinnerComponent.STATUS_INFO;
+    return this.status === 'info';
   }
 
-  @HostBinding('class.success-spinner')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbSpinnerComponent.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.warning-spinner')
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbSpinnerComponent.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.danger-spinner')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbSpinnerComponent.STATUS_DANGER;
+    return this.status === 'danger';
   }
 }

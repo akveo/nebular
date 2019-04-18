@@ -33,7 +33,7 @@ export class ContextMenuTestComponent {
   ];
 
   itemsWithIcons = [
-    { title: 'Profile', link: '/user', icon: 'nb-compose' },
-    { title: 'Logout', link: '/popover', icon: 'nb-gear' },
+    { title: 'Profile', link: '/user', icon: 'person-outline' },
+    { title: 'Logout', link: '/popover', icon: 'settings-outline' },
   ];
 }

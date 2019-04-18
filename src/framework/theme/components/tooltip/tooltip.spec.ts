@@ -16,6 +16,7 @@ import {
 import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
+import { NbIconLibraries } from '../icon/icon-libraries';
 
 @Component({
   selector: 'nb-tooltip-default-test',
@@ -181,6 +182,10 @@ describe('Directive: NbTooltipDirective', () => {
         PopoverTestModule,
       ],
     });
+
+    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+    iconLibs.setDefaultPack('test')
   }));
 
   describe('smoke ', () => {
@@ -241,8 +246,8 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
 
-      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content i');
-      expect(iconContainer.className).toContain('icon some-icon');
+      const iconContainer = fixture.nativeElement.querySelector('nb-tooltip .content nb-icon');
+      expect(iconContainer.textContent).toContain('some-icon');
     });
 
     it('should display status', () => {
@@ -255,7 +260,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.detectChanges();
 
       const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
-      expect(iconContainer.className).toContain('danger-tooltip');
+      expect(iconContainer.className).toContain('status-danger');
     });
 
   });
@@ -381,7 +386,7 @@ describe('Directive: NbTooltipDirective', () => {
         fixture.componentInstance.trigger = NbTrigger.CLICK;
         fixture.componentInstance.content = 'new string';
         fixture.componentInstance.status = 'success';
-        fixture.componentInstance.icon = 'nb-home';
+        fixture.componentInstance.icon = 'home';
         fixture.componentInstance.position = NbPosition.LEFT;
 
         fixture.detectChanges();
@@ -401,7 +406,7 @@ describe('Directive: NbTooltipDirective', () => {
         expect(contentSpy).toHaveBeenCalledTimes(3);
         expect(contentSpy).toHaveBeenCalledWith('new string');
         expect(contextSpy).toHaveBeenCalledTimes(3);
-        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'nb-home' });
+        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'home' });
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
@@ -447,7 +452,7 @@ describe('Directive: NbTooltipDirective', () => {
         fixture.componentInstance.tooltip.trigger = NbTrigger.CLICK;
         fixture.componentInstance.tooltip.content = 'new string';
         fixture.componentInstance.tooltip.status = 'success';
-        fixture.componentInstance.tooltip.icon = 'nb-home';
+        fixture.componentInstance.tooltip.icon = 'home';
         fixture.componentInstance.tooltip.position = NbPosition.LEFT;
 
         fixture.componentInstance.tooltip.rebuild();
@@ -467,7 +472,7 @@ describe('Directive: NbTooltipDirective', () => {
         expect(contentSpy).toHaveBeenCalledTimes(3);
         expect(contentSpy).toHaveBeenCalledWith('new string');
         expect(contextSpy).toHaveBeenCalledTimes(3);
-        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'nb-home' });
+        expect(contextSpy).toHaveBeenCalledWith({ status: 'success', icon: 'home' });
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });

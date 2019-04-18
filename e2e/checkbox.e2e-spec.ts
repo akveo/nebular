@@ -14,7 +14,7 @@ describe('nb-checkbox', () => {
 
   it('should apply check on click', () => {
     const input = element(by.css('#first input'));
-    const indicator = element(by.css('#first .customised-control-indicator'));
+    const indicator = element(by.css('#first .custom-checkbox'));
 
     expect(input.getAttribute('checked')).toBeFalsy();
     indicator.click();

@@ -153,6 +153,14 @@ const routes: Route[] = [
         path: 'tree-grid',
         loadChildren: './tree-grid/tree-grid.module#TreeGridModule',
       },
+      {
+        path: 'typography',
+        loadChildren: './typography/typography.module#TypographyModule',
+      },
+      {
+        path: 'icon',
+        loadChildren: './icon/icon.module#IconModule',
+      },
     ],
   },
 ];

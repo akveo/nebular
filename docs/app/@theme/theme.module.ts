@@ -16,7 +16,10 @@ import {
   NbSidebarModule,
   NbCardModule,
   NbCheckboxModule,
+  NbIconModule,
 } from '@nebular/theme';
+
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import {
   NgdHeaderComponent,
@@ -57,6 +60,8 @@ import {
     NbCardModule,
     NbMenuModule,
     NbTabsetModule,
+    NbIconModule,
+    NbEvaIconsModule,
     RouterModule,
   ],
   declarations: [
@@ -77,6 +82,7 @@ import {
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    NbIconModule,
     NbLayoutModule,
     NbSidebarModule,
     NbCardModule,

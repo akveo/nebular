@@ -422,10 +422,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'NbIconComponent',
+          'NbIconLibraries',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
         source: [
           'NbSpinnerDirective',
+          'NbSpinnerComponent',
         ],
       },
       {

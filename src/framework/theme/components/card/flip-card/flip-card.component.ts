@@ -34,7 +34,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCardModule,
  *   ],
  * })
@@ -63,13 +63,13 @@ import { Component, Input, HostBinding } from '@angular/core';
       <div class="front-container">
         <ng-content select="nb-card-front"></ng-content>
         <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
-          <i class="nb-arrow-dropleft" aria-hidden="true"></i>
+          <nb-icon icon="chevron-left-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
         </a>
       </div>
       <div class="back-container">
         <ng-content select="nb-card-back"></ng-content>
         <a *ngIf="showToggleButton" class="flip-button" (click)="toggle()">
-          <i class="nb-arrow-dropleft" aria-hidden="true"></i>
+          <nb-icon icon="chevron-left-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
         </a>
       </div>
     </div>

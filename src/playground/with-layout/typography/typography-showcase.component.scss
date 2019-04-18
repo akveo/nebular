@@ -1,0 +1,25 @@
+.colors {
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .color {
+    width: 86px;
+    height: 60px;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    margin-right: 1rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.25rem;
+  }
+}

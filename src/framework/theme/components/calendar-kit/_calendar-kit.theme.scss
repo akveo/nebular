@@ -10,14 +10,17 @@
     .header {
       display: flex;
       flex-direction: column;
+
+      color: nb-theme(calendar-header-text-color);
+      font-family: nb-theme(calendar-header-text-font-family);
     }
 
     .title {
       display: flex;
       align-items: center;
-      color: nb-theme(calendar-fg);
-      font-weight: nb-theme(calendar-header-title-font-weight);
-      font-size: nb-theme(calendar-header-title-font-size);
+      font-size: nb-theme(calendar-header-title-text-font-size);
+      font-weight: nb-theme(calendar-header-title-text-font-weight);
+      line-height: nb-theme(calendar-header-title-text-line-height);
 
       .nb-arrow-dropright {
         margin-left: 0.5rem;
@@ -28,139 +31,36 @@
       }
 
       &:hover {
-        color: nb-theme(calendar-hover-item-bg);
+        color: nb-theme(calendar-cell-hover-background-color);
         cursor: pointer;
       }
 
       &:active {
-        color: nb-theme(calendar-active-item-bg);
+        color: nb-theme(calendar-cell-active-background-color);
       }
     }
 
     .sub-title {
-      color: nb-theme(calendar-weekday-fg);
-      font-weight: nb-theme(calendar-header-sub-title-font-weight);
-      font-size: nb-theme(calendar-header-sub-title-font-size);
+      font-size: nb-theme(calendar-header-sub-title-text-font-size);
+      font-weight: nb-theme(calendar-header-sub-title-text-font-weight);
+      line-height: nb-theme(calendar-header-sub-title-text-line-height);
     }
   }
 
   nb-calendar-navigation button[nbButton] {
     width: nb-theme(calendar-navigation-button-width);
-
-    @include nb-for-theme(default) {
-      @include btn-success();
-    }
   }
 
-  nb-calendar-day-picker .day-cell,
-  nb-calendar-month-picker .month-cell,
-  nb-calendar-year-picker .year-cell {
-    color: nb-theme(calendar-fg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1px;
+  nb-calendar-days-names .day {
+    width: nb-theme(calendar-weekday-width);
+    height: nb-theme(calendar-weekday-height);
+    color: nb-theme(calendar-weekday-text-color);
+    font-size: nb-theme(calendar-weekday-text-font-size);
+    font-weight: nb-theme(calendar-weekday-text-font-weight);
+    line-height: nb-theme(calendar-weekday-text-line-height);
 
-    &:not(.empty):not(.disabled) {
-      cursor: pointer;
-    }
-  }
-
-  nb-calendar-year-picker {
-    &.medium .year-cell {
-      width: nb-theme(calendar-year-cell-width);
-      height: nb-theme(calendar-year-cell-height);
-    }
-
-    &.large .year-cell {
-      width: nb-theme(calendar-year-cell-large-width);
-      height: nb-theme(calendar-year-cell-large-height);
-    }
-  }
-
-  nb-calendar-year-picker .year-cell {
-    border-radius: nb-theme(calendar-border-radius);
-
-    &.disabled {
-      background: nb-theme(calendar-today-item-bg);
-      opacity: nb-theme(calendar-disabled-opacity);
-    }
-
-    &.today {
-      background: nb-theme(calendar-today-item-bg);
-      font-weight: nb-theme(font-weight-bold);
-      color: nb-theme(calendar-today-fg);
-    }
-
-    &.selected {
-      background: nb-theme(calendar-selected-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-    }
-
-    &:hover, &:hover:active {
-      background: nb-theme(calendar-hover-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
-    }
-
-    &:active {
-      background: nb-theme(calendar-active-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-    }
-  }
-
-  nb-calendar-month-picker {
-    &.medium .month-cell {
-      width: nb-theme(calendar-month-cell-width);
-      height: nb-theme(calendar-month-cell-height);
-    }
-
-    &.large .month-cell {
-      width: nb-theme(calendar-month-cell-large-width);
-      height: nb-theme(calendar-month-cell-large-height);
-    }
-  }
-
-  nb-calendar-month-picker .month-cell {
-    border-radius: nb-theme(calendar-border-radius);
-
-    &.disabled {
-      background: nb-theme(calendar-today-item-bg);
-      opacity: nb-theme(calendar-disabled-opacity);
-    }
-
-    &.today {
-      background: nb-theme(calendar-today-item-bg);
-      font-weight: nb-theme(font-weight-bold);
-      color: nb-theme(calendar-today-fg);
-    }
-
-    &.selected {
-      background: nb-theme(calendar-selected-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-    }
-
-    &:hover, &:hover:active {
-      background: nb-theme(calendar-hover-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
-    }
-
-    &:active {
-      background: nb-theme(calendar-active-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
+    &.holiday {
+      color: nb-theme(calendar-weekday-holiday-text-color);
     }
   }
 
@@ -176,50 +76,101 @@
     }
   }
 
-  nb-calendar-day-picker .day-cell {
-    border-radius: nb-theme(calendar-border-radius);
-
-    &.today {
-      background: nb-theme(calendar-today-item-bg);
-      font-weight: nb-theme(font-weight-bold);
-      color: nb-theme(calendar-today-fg);
+  nb-calendar-month-picker {
+    &.medium .month-cell {
+      width: nb-theme(calendar-month-cell-width);
+      height: nb-theme(calendar-month-cell-height);
     }
 
-    &.bounding-month {
-      opacity: nb-theme(calendar-inactive-opacity);
-    }
-
-    &.disabled {
-      background: nb-theme(calendar-today-item-bg);
-      opacity: nb-theme(calendar-disabled-opacity);
-    }
-
-    &:not(.disabled):not(.empty):hover {
-      background: nb-theme(calendar-hover-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
-
-      @include nb-for-theme(cosmic) {
-        @include btn-hero-success-gradient();
-      }
-    }
-
-    &.selected {
-      background: nb-theme(calendar-active-item-bg);
-      color: nb-theme(calendar-selected-fg);
-      font-weight: nb-theme(font-weight-bold);
+    &.large .month-cell {
+      width: nb-theme(calendar-month-cell-large-width);
+      height: nb-theme(calendar-month-cell-large-height);
     }
   }
 
-  nb-calendar-days-names .day {
-    width: nb-theme(calendar-weekday-width);
-    height: nb-theme(calendar-weekday-height);
-    font-size: nb-theme(calendar-weekday-font-size);
-    font-weight: nb-theme(calendar-weekday-font-weight);
-    color: nb-theme(calendar-weekday-fg);
+  nb-calendar-year-picker {
+    &.medium .year-cell {
+      width: nb-theme(calendar-year-cell-width);
+      height: nb-theme(calendar-year-cell-height);
+    }
 
-    &.holiday {
-      color: nb-theme(calendar-weekday-holiday-fg);
+    &.large .year-cell {
+      width: nb-theme(calendar-year-cell-large-width);
+      height: nb-theme(calendar-year-cell-large-height);
+    }
+  }
+
+  nb-calendar-day-picker .day-cell,
+  nb-calendar-month-picker .month-cell,
+  nb-calendar-year-picker .year-cell {
+    border-radius: nb-theme(calendar-border-radius);
+    color: nb-theme(calendar-text-color);
+    font-family: nb-theme(calendar-text-font-family);
+    font-size: nb-theme(calendar-text-font-size);
+    font-weight: nb-theme(calendar-text-font-weight);
+    line-height: nb-theme(calendar-text-line-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+
+    &:not(.empty):not(.disabled) {
+      cursor: pointer;
+    }
+
+    &.disabled {
+      background-color: nb-theme(calendar-cell-disabled-background-color);
+      color: nb-theme(calendar-cell-disabled-text-color);
+    }
+
+    &.today {
+      background-color: nb-theme(calendar-cell-today-background-color);
+      color: nb-theme(calendar-cell-today-text-color);
+      font-size: nb-theme(calendar-cell-today-text-font-size);
+      font-weight: nb-theme(calendar-cell-today-text-font-weight);
+      line-height: nb-theme(calendar-cell-today-text-line-height);
+    }
+
+    &.selected {
+      background-color: nb-theme(calendar-cell-selected-background-color);
+      color: nb-theme(calendar-cell-selected-text-color);
+      font-size: nb-theme(calendar-cell-selected-text-font-size);
+      font-weight: nb-theme(calendar-cell-selected-text-font-weight);
+      line-height: nb-theme(calendar-cell-selected-text-line-height);
+    }
+  }
+
+  nb-calendar-month-picker .month-cell,
+  nb-calendar-year-picker .year-cell {
+    &:hover, &:hover:active {
+      background-color: nb-theme(calendar-cell-hover-background-color);
+      color: nb-theme(calendar-cell-hover-text-color);
+      font-size: nb-theme(calendar-cell-hover-text-font-size);
+      font-weight: nb-theme(calendar-cell-hover-text-font-weight);
+      line-height: nb-theme(calendar-cell-hover-text-line-height);
+    }
+
+    &:active {
+      background-color: nb-theme(calendar-cell-active-background-color);
+      color: nb-theme(calendar-cell-active-text-color);
+      font-size: nb-theme(calendar-cell-active-text-font-size);
+      font-weight: nb-theme(calendar-cell-active-text-font-weight);
+      line-height: nb-theme(calendar-cell-active-text-line-height);
+    }
+  }
+
+  nb-calendar-day-picker .day-cell {
+    &.bounding-month {
+      color: nb-theme(calendar-cell-inactive-text-color);
+    }
+
+    &:not(.disabled):not(.empty):hover {
+      background-color: nb-theme(calendar-cell-hover-background-color);
+      color: nb-theme(calendar-cell-hover-text-color);
+      font-size: nb-theme(calendar-cell-hover-text-font-size);
+      font-weight: nb-theme(calendar-cell-hover-text-font-weight);
+      line-height: nb-theme(calendar-cell-hover-text-line-height);
     }
   }
 }
