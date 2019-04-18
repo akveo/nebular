@@ -7,6 +7,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
 
 /**
  * Action item, display a link with an icon, or any other content provided instead.
@@ -169,26 +170,21 @@ export class NbActionComponent {
   `,
 })
 export class NbActionsComponent {
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
 
   /**
-   * Size of the component, small|medium|large
-   * @type string
+   * Size of the component: 'tiny', 'small', 'medium', 'large', 'giant'
    */
   @Input()
-  get size(): string {
+  get size(): NbComponentSize {
     return this._size;
   }
-  set size(value: string) {
+  set size(value: NbComponentSize) {
     this._size = value;
   }
-  protected _size: string;
+  protected _size: NbComponentSize = 'medium';
 
   /**
    * Component will fill full width of the container
-   * @type boolean
    */
   @Input()
   @HostBinding('class.full-width')
@@ -200,18 +196,28 @@ export class NbActionsComponent {
   }
   protected _fullWidth: boolean = false;
 
-  @HostBinding('class.small')
-  get small() {
-    return this.size === NbActionsComponent.SIZE_SMALL;
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.medium')
-  get medium() {
-    return this.size === NbActionsComponent.SIZE_MEDIUM;
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
   }
 
-  @HostBinding('class.large')
-  get large() {
-    return this.size === NbActionsComponent.SIZE_LARGE;
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
   }
 }
