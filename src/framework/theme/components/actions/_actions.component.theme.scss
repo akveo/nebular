@@ -37,17 +37,6 @@
       background: transparent;
     }
 
-    &.inverse {
-      nb-action {
-        nb-icon {
-          color: nb-theme(actions-bg);
-        }
-
-        @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
-        @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
-      }
-    }
-
     &.small {
       nb-action {
         height: nb-theme(actions-size-small);
