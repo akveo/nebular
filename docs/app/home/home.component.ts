@@ -59,18 +59,22 @@ export class NgdHomeComponent {
     {
       title: 'Modular',
       description: `Each feature is a separate npm module. Use only what you need.`,
+      icon: 'assets/img/modular.svg',
     },
     {
       title: 'Native',
       description: `Components are written in pure Angular with no 3rd-party dependencies.`,
+      icon: 'assets/img/native.svg',
     },
     {
       title: 'Open',
       description: `Modules source code is free and available under MIT licence.`,
+      icon: 'assets/img/open-sourced.svg',
     },
     {
       title: 'Extendable',
       description: `Can be used in a mix with any UI library.`,
+      icon: 'assets/img/extendable.svg',
     },
   ];
 

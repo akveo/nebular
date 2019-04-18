@@ -13,6 +13,8 @@
   flex: 1 0 auto;
   flex-direction: row;
   align-items: center;
+  margin-left: -15px;
+  margin-right: -15px;
 
   .sidebar-toggle {
     border: none;
@@ -152,6 +154,8 @@
   }
 
   &.docs-page {
+    margin-left: 0;
+    margin-right: 0;
     .section {
       &.left {
         align-items: center;

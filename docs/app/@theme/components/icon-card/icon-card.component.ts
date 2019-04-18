@@ -5,8 +5,9 @@ import { SafeHtml } from '@angular/platform-browser';
   selector: 'ngd-icon-card',
   styleUrls: ['./icon-card.component.scss'],
   template: `
-    <div class="icon"></div>
-    <img [src]="icon" />
+    <div class="icon">
+      <img [src]="icon" />
+    </div>
     <h2>{{ title }}</h2>
     <p>{{ description }}</p>
   `,
