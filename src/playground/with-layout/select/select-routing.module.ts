@@ -19,7 +19,7 @@ import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
-import { SelectInteractiveComponent } from 'playground/with-layout/select/select-interactive.component';
+import { SelectInteractiveComponent } from './select-interactive.component';
 
 const routes: Route[] = [
   {
