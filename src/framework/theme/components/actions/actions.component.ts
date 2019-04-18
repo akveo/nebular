@@ -171,8 +171,6 @@ export class NbActionsComponent {
 
   private sizeValue: string;
 
-  @HostBinding('class.inverse') inverseValue: boolean;
-
   @HostBinding('class.small')
   get small() {
     return this.sizeValue === NbActionsComponent.SIZE_SMALL;
@@ -198,15 +196,6 @@ export class NbActionsComponent {
   @Input()
   set size(val: string) {
     this.sizeValue = val;
-  }
-
-  /**
-   * Makes colors inverse based on current theme
-   * @type boolean
-   */
-  @Input()
-  set inverse(val: boolean) {
-    this.inverseValue = convertToBoolProperty(val);
   }
 
   /**
