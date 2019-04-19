@@ -11,8 +11,16 @@
   max-width: 100%;
 
   .select-button {
-    @include nb-ltr(text-align, left);
-    @include nb-rtl(text-align, right);
+    @include nb-ltr(text-align, left) {
+      nb-icon {
+        right: 0.2em;
+      }
+    }
+    @include nb-rtl(text-align, right) {
+      nb-icon {
+        left: 0.2em;
+      }
+    }
   }
 
   .select-button.bottom {
