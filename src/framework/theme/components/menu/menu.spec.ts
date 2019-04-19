@@ -3,9 +3,10 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, DebugElement, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed } from '@angular/core/testing';
 import { NbMenuModule } from './menu.module';
@@ -19,7 +20,7 @@ import {
 } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
-import { NbIconLibraries } from '@nebular/theme';
+import { NbIconComponent, NbIconLibraries, NbLayoutDirection, NbLayoutDirectionService } from '@nebular/theme';
 
 @Component({ template: '' })
 export class NoopComponent {}
@@ -175,6 +176,20 @@ describe('NbMenuItem', () => {
     ]);
     const activeItem = fixture.nativeElement.querySelector('a.active');
     expect(activeItem.querySelector('span').innerHTML).toEqual(selectedItem.title);
+  });
+
+  it('should change arrow direction when document direction changes', () => {
+    const menuItems = [{ title: '', children: [{ title: '' }] }];
+    const { fixture } = createSingleMenuComponent(menuItems);
+    const iconComponent = fixture.debugElement.query(By.directive(NbIconComponent)) as DebugElement;
+    const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+
+    expect(iconComponent.componentInstance.icon).toEqual('chevron-left-outline');
+
+    directionService.setDirection(NbLayoutDirection.RTL);
+    fixture.detectChanges();
+
+    expect(iconComponent.componentInstance.icon).toEqual('chevron-right-outline');
   });
 
 });
