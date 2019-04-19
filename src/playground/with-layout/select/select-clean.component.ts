@@ -22,5 +22,4 @@ import { Component } from '@angular/core';
     }
   `],
 })
-export class SelectCleanComponent {
-}
+export class SelectCleanComponent {}
