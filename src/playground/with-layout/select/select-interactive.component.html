@@ -1,4 +1,4 @@
-<nb-card size="large" class="configuration">
+<nb-card size="giant" class="configuration">
   <nb-card-body>
     <fieldset>
       <legend>Select shape:</legend>
@@ -18,7 +18,8 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card size="large" *ngFor="let appearance of appearances">
+<nb-card size="giant" *ngFor="let appearance of appearances">
+  <nb-card-header class="appearance-name">{{ appearance }}</nb-card-header>
   <nb-card-body>
     <nb-select placeholder="Select a value"
                *ngFor="let status of statuses"

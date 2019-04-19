@@ -13,6 +13,10 @@ nb-card {
   }
 }
 
+.appearance-name {
+  text-transform: capitalize;
+}
+
 nb-select {
   margin: 1rem 0;
 }
