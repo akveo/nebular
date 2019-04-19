@@ -8,7 +8,8 @@ import {
   NbActionsComponent,
   NbActionsModule,
   NbBadgeComponent,
-  NbBadgeModule, NbComponentSize,
+  NbBadgeModule,
+  NbComponentSize,
   NbIconComponent,
   NbIconLibraries,
   NbThemeModule,
@@ -229,7 +230,7 @@ describe('NbActionComponent content projection', () => {
     expect(action.nativeElement.textContent).toEqual(testComponent.projectedText);
   });
 
-  it('should not contain link and icon if has projected content', () => {
+  it('should not render projected content if icon input set', () => {
     testComponent.icon = ICON_NAME;
     testComponent.link = '/';
     testComponent.projectContent = true;
@@ -238,8 +239,9 @@ describe('NbActionComponent content projection', () => {
     const action = fixture.debugElement.query(By.directive(NbActionComponent));
     const link = action.query(By.css('a'));
     const icon = action.query(By.directive(NbIconComponent));
-    expect(link).toBeNull();
-    expect(icon).toBeNull();
+    expect(link).not.toBeNull();
+    expect(icon).not.toBeNull();
+    expect(action.nativeElement.textContent).toEqual('');
   });
 });
 
