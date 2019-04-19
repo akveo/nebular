@@ -27,9 +27,14 @@ export class SelectInteractiveComponent {
   sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
   selectedShape: NbComponentShape = 'rectangle';
   shapes: NbComponentShape[] = ['rectangle', 'semi-round', 'round'];
+  fullWidth: boolean = false;
 
   selectDisabledOption(): void {
     this.singleSelectValue = this.disabledOptionValue;
     this.multipleSelectValue = [this.disabledOptionValue];
+  }
+
+  toggleFullWidth(): void {
+    this.fullWidth = !this.fullWidth;
   }
 }

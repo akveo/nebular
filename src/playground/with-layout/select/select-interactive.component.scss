@@ -9,18 +9,38 @@ nb-card {
   margin: 0.5rem;
 
   &.configuration {
-    flex: 0 1 auto;
+    flex: 1 0 100%;
   }
+}
+
+.configuration .controls-container {
+  margin: 0 -0.5rem;
+
+  > * {
+    margin: 0 0.5rem;
+  }
+}
+
+fieldset {
+  border: 0;
+}
+
+nb-radio-group {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .appearance-name {
   text-transform: capitalize;
 }
 
-nb-select {
-  margin: 1rem 0;
+.select-column {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: -0.5rem 0;
 }
 
-fieldset {
-  border: 0;
+nb-select {
+  margin: 0.5rem 0;
 }
