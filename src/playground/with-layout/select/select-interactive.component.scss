@@ -38,9 +38,15 @@ nb-radio-group {
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin: -0.5rem 0;
 }
 
 nb-select {
   margin: 0.5rem 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
