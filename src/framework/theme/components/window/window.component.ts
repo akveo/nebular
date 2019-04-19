@@ -150,8 +150,7 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   protected attachComponent() {
     const portal = new NbComponentPortal(this.content as Type<any>, null, null, this.cfr);
-    const ref = this.overlayContainer.attachComponentPortal(portal);
-    Object.assign(ref.instance, this.context);
+    const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
     ref.changeDetectorRef.detectChanges();
   }
 }
