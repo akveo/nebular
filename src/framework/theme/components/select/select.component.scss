@@ -8,6 +8,7 @@
 
 :host {
   display: inline-block;
+  max-width: 100%;
 
   .select-button {
     @include nb-ltr(text-align, left);
