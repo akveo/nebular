@@ -543,6 +543,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * If set element will fill its container
    */
   @Input()
+  @HostBinding('class.full-width')
   get fullWidth(): boolean {
     return this._fullWidth;
   }

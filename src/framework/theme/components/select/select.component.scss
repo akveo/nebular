@@ -24,6 +24,10 @@
   }
 }
 
+:host(.full-width) {
+  width: 100%;
+}
+
 .select-button {
   position: relative;
   width: 100%;

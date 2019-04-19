@@ -7,6 +7,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, zip } from 'rxjs';
 import createSpy = jasmine.createSpy;
@@ -621,6 +622,14 @@ describe('NbSelectComponent - falsy values', () => {
 
     expect(select.selectionModel.length).toEqual(1);
   }));
+
+  it('should set class if fullWidth input set to true', () => {
+    select.fullWidth = true;
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.directive(NbSelectComponent));
+    expect(button.classes['full-width']).toEqual(true);
+  });
 
   describe('multiple', () => {
     beforeEach(fakeAsync(() => {
