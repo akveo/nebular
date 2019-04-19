@@ -11,6 +11,7 @@
 @mixin nb-select-theme() {
   nb-select {
     .select-button {
+      min-width: nb-theme(select-min-width);
       cursor: nb-theme(select-cursor);
 
       &:focus {
