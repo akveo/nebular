@@ -9,6 +9,11 @@
 :host {
   display: block;
 
+  .select-button {
+    @include nb-ltr(text-align, left);
+    @include nb-rtl(text-align, right);
+  }
+
   .select-button.bottom {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -24,8 +29,8 @@
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   text-transform: none;
+  white-space: nowrap;
 
   @include nb-component-animation(background-color, border-color, border-radius, box-shadow, color);
 }
