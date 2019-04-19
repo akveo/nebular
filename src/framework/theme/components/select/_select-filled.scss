@@ -39,29 +39,6 @@
     }
   }
 
-  .appearance-filled nb-option-group,
-  .appearance-filled nb-option {
-    background-color: nb-theme(select-option-filled-background-color);
-    color: nb-theme(select-option-filled-text-color);
-
-    &[disabled] {
-      background-color: nb-theme(select-option-filled-disabled-background-color);
-      color: nb-theme(select-option-filled-disabled-text-color);
-    }
-  }
-
-  .appearance-filled nb-option {
-    &.selected {
-      background-color: nb-theme(select-option-filled-selected-background-color);
-    }
-    &:focus {
-      background-color: nb-theme(select-option-filled-focus-background-color);
-    }
-    &:hover {
-      background-color: nb-theme(select-option-filled-hover-background-color);
-    }
-  }
-
   @each $status in nb-get-statuses() {
     nb-select.appearance-filled.status-#{$status} .select-button {
       background-color: nb-theme(select-filled-#{$status}-background-color);
@@ -83,29 +60,6 @@
       &[disabled] {
         background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
         border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
-      }
-    }
-
-    .appearance-filled.status-#{$status} nb-option-group,
-    .appearance-filled.status-#{$status} nb-option {
-      background-color: nb-theme(select-option-filled-#{$status}-background-color);
-      color: nb-theme(select-option-filled-#{$status}-text-color);
-
-      &[disabled] {
-        background-color: nb-theme(select-option-filled-#{$status}-disabled-background-color);
-        color: nb-theme(select-option-filled-#{$status}-disabled-text-color);
-      }
-    }
-
-    .appearance-filled.status-#{$status} nb-option {
-      &.selected {
-        background-color: nb-theme(select-option-filled-#{$status}-selected-background-color);
-      }
-      &:focus {
-        background-color: nb-theme(select-option-filled-#{$status}-focus-background-color);
-      }
-      &:hover {
-        background-color: nb-theme(select-option-filled-#{$status}-hover-background-color);
       }
     }
   }

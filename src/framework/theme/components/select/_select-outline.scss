@@ -52,27 +52,4 @@
       }
     }
   }
-
-  .appearance-outline nb-option-group,
-  .appearance-outline nb-option {
-    background-color: nb-theme(select-option-outline-background-color);
-    color: nb-theme(select-option-outline-text-color);
-
-    &[disabled] {
-      background-color: nb-theme(select-option-outline-disabled-background-color);
-      color: nb-theme(select-option-outline-disabled-text-color);
-    }
-  }
-
-  .appearance-outline nb-option {
-    &.selected {
-      background-color: nb-theme(select-option-outline-selected-background-color);
-    }
-    &:focus {
-      background-color: nb-theme(select-option-outline-focus-background-color);
-    }
-    &:hover {
-      background-color: nb-theme(select-option-outline-hover-background-color);
-    }
-  }
 }

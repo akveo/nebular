@@ -45,29 +45,6 @@
     }
   }
 
-  .appearance-hero nb-option-group,
-  .appearance-hero nb-option {
-    background-color: nb-theme(select-option-hero-background-color);
-    color: nb-theme(select-option-hero-text-color);
-
-    &[disabled] {
-      background-color: nb-theme(select-option-hero-disabled-background-color);
-      color: nb-theme(select-option-hero-disabled-text-color);
-    }
-  }
-
-  .appearance-hero nb-option {
-    &.selected {
-      background-color: nb-theme(select-option-hero-selected-background-color);
-    }
-    &:focus {
-      background-color: nb-theme(select-option-hero-focus-background-color);
-    }
-    &:hover {
-      background-color: nb-theme(select-option-hero-hover-background-color);
-    }
-  }
-
   @each $status in nb-get-statuses() {
     nb-select.appearance-hero.status-#{$status} .select-button {
       $left-color: nb-theme(select-hero-#{$status}-left-background-color);
@@ -94,29 +71,6 @@
         $left-color: nb-theme(select-hero-#{$status}-disabled-left-background-color);
         $right-color: nb-theme(select-hero-#{$status}-disabled-right-background-color);
         background-image: linear-gradient(to right, $left-color, $right-color);
-      }
-    }
-
-    .appearance-hero.status-#{$status} nb-option-group,
-    .appearance-hero.status-#{$status} nb-option {
-      background-color: nb-theme(select-option-hero-#{$status}-background-color);
-      color: nb-theme(select-option-hero-#{$status}-text-color);
-
-      &[disabled] {
-        background-color: nb-theme(select-option-hero-#{$status}-disabled-background-color);
-        color: nb-theme(select-option-hero-#{$status}-disabled-text-color);
-      }
-    }
-
-    .appearance-hero.status-#{$status} nb-option {
-      &.selected {
-        background-color: nb-theme(select-option-hero-#{$status}-selected-background-color);
-      }
-      &:focus {
-        background-color: nb-theme(select-option-hero-#{$status}-focus-background-color);
-      }
-      &:hover {
-        background-color: nb-theme(select-option-hero-#{$status}-hover-background-color);
       }
     }
   }
