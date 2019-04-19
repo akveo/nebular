@@ -19,7 +19,7 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card size="giant" *ngFor="let appearance of appearances">
+<nb-card *ngFor="let appearance of appearances">
   <nb-card-header class="appearance-name">{{ appearance }}</nb-card-header>
   <nb-card-body class="select-column">
     <nb-select placeholder="Select a value"

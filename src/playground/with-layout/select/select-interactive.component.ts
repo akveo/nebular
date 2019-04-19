@@ -8,8 +8,6 @@ import { Component } from '@angular/core';
 import { NbComponentShape, NbComponentSize, NbComponentStatus } from '@nebular/theme';
 import { NbSelectAppearance } from '@nebular/theme/components/select/select.component';
 
-type EmptyOrStatus = '' | NbComponentStatus;
-
 @Component({
   selector: 'nb-select-interactive',
   templateUrl: './select-interactive.component.html',
@@ -20,14 +18,15 @@ export class SelectInteractiveComponent {
   multipleSelectValue = [ '1' ];
   disabledOptionValue = '3';
 
-  statuses: EmptyOrStatus[] = [ '', 'primary', 'success', 'info', 'warning', 'danger' ];
-  appearances: NbSelectAppearance[] = [ 'outline', 'filled', 'hero' ];
-
   selectedSize: NbComponentSize = 'medium';
-  sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
   selectedShape: NbComponentShape = 'rectangle';
-  shapes: NbComponentShape[] = ['rectangle', 'semi-round', 'round'];
-  fullWidth: boolean = false;
+
+  fullWidth: boolean = true;
+
+  appearances: NbSelectAppearance[] = [ 'outline', 'filled', 'hero' ];
+  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+  shapes: NbComponentShape[] = [ 'rectangle', 'semi-round', 'round' ];
+  statuses: ('' | NbComponentStatus)[] = [ '', 'primary', 'success', 'info', 'warning', 'danger' ];
 
   selectDisabledOption(): void {
     this.singleSelectValue = this.disabledOptionValue;
