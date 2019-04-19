@@ -134,6 +134,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select shapes, select/select-shapes.component)
  *
+ * @additional-example(Interactive, select/select-interactive.component)
  *
  * @styles
  *
