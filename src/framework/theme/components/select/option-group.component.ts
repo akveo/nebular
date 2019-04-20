@@ -72,7 +72,7 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
    * Sets disabled state for each option to current group disabled state.
    */
   protected updateOptionsDisabledState(): void {
-    this.options.forEach((option: NbOptionComponent<any>) => option.setDisabledState(this.disabled));
+    this.options.forEach((option: NbOptionComponent<any>) => option.setDisabledByGroupState(this.disabled));
   }
 
   /**

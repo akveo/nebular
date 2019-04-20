@@ -100,7 +100,7 @@ describe('NbOptionGroupComponent', () => {
   });
 
   it('should disable options if set disabled', () => {
-    const setDisabledSpy = spyOn(optionComponent, 'setDisabledState');
+    const setDisabledSpy = spyOn(optionComponent, 'setDisabledByGroupState');
 
     optionGroupComponent.disabled = true;
     fixture.detectChanges();
@@ -115,7 +115,7 @@ describe('NbOptionGroupComponent', () => {
 
     expect(optionComponent.disabled).toEqual(true);
 
-    const setDisabledSpy = spyOn(optionComponent, 'setDisabledState');
+    const setDisabledSpy = spyOn(optionComponent, 'setDisabledByGroupState');
     optionGroupComponent.disabled = false;
 
     expect(setDisabledSpy).toHaveBeenCalledTimes(1);
@@ -133,7 +133,7 @@ describe('NbOptionGroupComponent', () => {
     flush();
     fixture.detectChanges();
 
-    expect(testComponent.optionComponent.disabled).toEqual(true);
+    expect(optionComponent.disabledAttribute).toEqual('');
   }));
 
   it('should update options state after content initialisation', fakeAsync(() => {
@@ -143,6 +143,6 @@ describe('NbOptionGroupComponent', () => {
     fixture.detectChanges();
     flush();
 
-    expect(testComponent.optionComponent.disabled).toEqual(false);
+    expect(testComponent.optionComponent.disabledAttribute).toEqual('');
   }));
 });
