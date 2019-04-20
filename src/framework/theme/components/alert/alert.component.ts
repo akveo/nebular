@@ -27,7 +27,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbAlertModule,
  *   ],
  * })
@@ -88,7 +88,7 @@ import { convertToBoolProperty } from '../helpers';
   selector: 'nb-alert',
   styleUrls: ['./alert.component.scss'],
   template: `
-    <button *ngIf="closableValue" type="button" class="close" aria-label="Close" (click)="onClose()">
+    <button *ngIf="closable" type="button" class="close" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
     <ng-content></ng-content>
@@ -128,20 +128,78 @@ export class NbAlertComponent {
   static readonly OUTLINE_WARNING = 'warning';
   static readonly OUTLINE_DANGER = 'danger';
 
-  size: string;
-  status: string;
-  accent: string;
-  outline: string;
+  /**
+   * Alert size, available sizes:
+   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * @param {string} val
+   */
+  @Input() size: string;
 
-  @HostBinding('class.closable')
-  closableValue: boolean = false;
+  /**
+   * Alert status (adds specific styles):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} value
+   */
+  @Input() status: string;
+
+  /**
+   * Alert accent (color of the top border):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} val
+   */
+  @Input() accent: string;
+
+  /**
+   * Alert outline (color of the border):
+   * active, disabled, primary, info, success, warning, danger
+   * @param {string} value
+   */
+  @Input() outline: string;
 
   /**
    * Shows `close` icon
    */
   @Input()
-  set closable(val: boolean) {
-    this.closableValue = convertToBoolProperty(val);
+  @HostBinding('class.closable')
+  get closable(): boolean {
+    return this._closable;
+  }
+  set closable(value: boolean) {
+    this._closable = convertToBoolProperty(value);
+  }
+  protected _closable: boolean = false;
+
+  /**
+   * Emits when chip is removed
+   * @type EventEmitter<any>
+   */
+  @Output() close = new EventEmitter();
+
+  /**
+   * Emits the removed chip event
+   */
+  onClose() {
+    this.close.emit();
+  }
+
+  @HostBinding('class.disabled-alert')
+  get disabled() {
+    return this.status === NbAlertComponent.STATUS_DISABLED;
+  }
+
+  @HostBinding('class.accent')
+  get hasAccent() {
+    return this.accent;
+  }
+
+  @HostBinding('class.status')
+  get hasStatus() {
+    return this.status;
+  }
+
+  @HostBinding('class.outline')
+  get hasOutline() {
+    return this.outline;
   }
 
   @HostBinding('class.xxsmall-alert')
@@ -184,11 +242,6 @@ export class NbAlertComponent {
     return this.status === NbAlertComponent.STATUS_ACTIVE;
   }
 
-  @HostBinding('class.disabled-alert')
-  get disabled() {
-    return this.status === NbAlertComponent.STATUS_DISABLED;
-  }
-
   @HostBinding('class.primary-alert')
   get primary() {
     return this.status === NbAlertComponent.STATUS_PRIMARY;
@@ -212,16 +265,6 @@ export class NbAlertComponent {
   @HostBinding('class.danger-alert')
   get danger() {
     return this.status === NbAlertComponent.STATUS_DANGER;
-  }
-
-  @HostBinding('class.accent')
-  get hasAccent() {
-    return this.accent;
-  }
-
-  @HostBinding('class.status')
-  get hasStatus() {
-    return this.status;
   }
 
   @HostBinding('class.accent-primary')
@@ -259,11 +302,6 @@ export class NbAlertComponent {
     return this.accent === NbAlertComponent.ACCENT_DISABLED;
   }
 
-  @HostBinding('class.outline')
-  get hasOutline() {
-    return this.outline;
-  }
-
   @HostBinding('class.outline-primary')
   get primaryOutline() {
     return this.outline === NbAlertComponent.OUTLINE_PRIMARY;
@@ -297,58 +335,5 @@ export class NbAlertComponent {
   @HostBinding('class.outline-disabled')
   get disabledOutline() {
     return this.outline === NbAlertComponent.OUTLINE_DISABLED;
-  }
-
-  /**
-   * Alert size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
-   */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
-
-  /**
-   * Alert status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
-
-  /**
-   * Alert accent (color of the top border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('accent')
-  private set setAccent(val: string) {
-    this.accent = val;
-  }
-
-  /**
-   * Alert outline (color of the border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('outline')
-  private set setOutline(val: string) {
-    this.outline = val;
-  }
-
-  /**
-   * Emits when chip is removed
-   * @type EventEmitter<any>
-   */
-  @Output() close = new EventEmitter();
-
-  /**
-   * Emits the removed chip event
-   */
-  onClose() {
-    this.close.emit();
   }
 }
