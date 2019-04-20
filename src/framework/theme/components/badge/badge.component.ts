@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
@@ -66,7 +66,7 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
   template: `
-    <span class="nb-badge {{positionClass}} status-{{status}}">{{text}}</span>
+    <span class="nb-badge {{positionClass}}">{{text}}</span>
   `,
 })
 export class NbBadgeComponent {
@@ -100,6 +100,31 @@ export class NbBadgeComponent {
     return this.position
       .replace(/\bstart\b/, startValue)
       .replace(/\bend\b/, endValue);
+  }
+
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
+  }
+
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
+  }
+
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
+  }
+
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
   }
 
   constructor(private layoutDirectionService: NbLayoutDirectionService) {}
