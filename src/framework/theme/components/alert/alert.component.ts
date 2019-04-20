@@ -59,33 +59,48 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * alert-font-size:
- * alert-line-height:
- * alert-font-weight:
- * alert-fg:
- * alert-outline-fg:
- * alert-bg:
- * alert-active-bg:
- * alert-disabled-bg:
- * alert-disabled-fg:
- * alert-primary-bg:
- * alert-info-bg:
- * alert-success-bg:
- * alert-warning-bg:
- * alert-danger-bg:
- * alert-height-xxsmall:
- * alert-height-xsmall:
- * alert-height-small:
- * alert-height-medium:
- * alert-height-large:
- * alert-height-xlarge:
- * alert-height-xxlarge:
- * alert-shadow:
+ * alert-background-color:
  * alert-border-radius:
+ * alert-bottom-margin:
  * alert-padding:
- * alert-closable-padding:
- * alert-button-padding:
- * alert-margin:
+ * alert-scrollbar-color:
+ * alert-scrollbar-background-color:
+ * alert-scrollbar-width:
+ * alert-shadow:
+ * alert-text-color:
+ * alert-text-font-family:
+ * alert-text-font-size:
+ * alert-text-font-weight:
+ * alert-text-line-height:
+ * alert-closable-start-padding:
+ * alert-tiny-height:
+ * alert-small-height:
+ * alert-medium-height:
+ * alert-medium-padding:
+ * alert-large-height:
+ * alert-giant-height:
+ * alert-disabled-background-color:
+ * alert-disabled-text-color:
+ * alert-primary-background-color:
+ * alert-primary-text-color:
+ * alert-success-background-color:
+ * alert-success-text-color:
+ * alert-info-background-color:
+ * alert-info-text-color:
+ * alert-warning-background-color:
+ * alert-warning-text-color:
+ * alert-danger-background-color:
+ * alert-danger-text-color:
+ * alert-accent-primary-color:
+ * alert-accent-info-color:
+ * alert-accent-success-color:
+ * alert-accent-warning-color:
+ * alert-accent-danger-color:
+ * alert-outline-primary-color:
+ * alert-outline-info-color:
+ * alert-outline-success-color:
+ * alert-outline-warning-color:
+ * alert-outline-danger-color:
  */
 @Component({
   selector: 'nb-alert',
