@@ -119,6 +119,18 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
+  /**
+   * Sets disabled state and marks component for check.
+   * Use it when updating state not from a template.
+   * @param disabled disabled state
+   */
+  setDisabledState(disabled: boolean): void {
+    if (this.disabled !== disabled) {
+      this.disabled = disabled;
+      this.cd.markForCheck();
+    }
+  }
+
   protected setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
