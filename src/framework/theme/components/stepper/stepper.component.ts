@@ -29,7 +29,7 @@ export enum NbStepperOrientation {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbStepperModule,
  *   ],
  * })
