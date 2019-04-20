@@ -5,6 +5,9 @@
  */
 
 import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 
@@ -96,65 +99,33 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbAlertComponent {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
-
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  static readonly ACCENT_ACTIVE = 'active';
-  static readonly ACCENT_DISABLED = 'disabled';
-  static readonly ACCENT_PRIMARY = 'primary';
-  static readonly ACCENT_INFO = 'info';
-  static readonly ACCENT_SUCCESS = 'success';
-  static readonly ACCENT_WARNING = 'warning';
-  static readonly ACCENT_DANGER = 'danger';
-
-  static readonly OUTLINE_ACTIVE = 'active';
-  static readonly OUTLINE_DISABLED = 'disabled';
-  static readonly OUTLINE_PRIMARY = 'primary';
-  static readonly OUTLINE_INFO = 'info';
-  static readonly OUTLINE_SUCCESS = 'success';
-  static readonly OUTLINE_WARNING = 'warning';
-  static readonly OUTLINE_DANGER = 'danger';
-
   /**
    * Alert size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
+   * `tiny`, `small`, `medium`, `large`, `giant`
+   * Unset by default.
    */
-  @Input() size: string;
+  @Input() size: '' | NbComponentSize = '';
 
   /**
    * Alert status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} value
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
    */
-  @Input() status: string;
+  @Input() status: '' | NbComponentStatus = '';
 
   /**
    * Alert accent (color of the top border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
    */
-  @Input() accent: string;
+  @Input() accent: '' | NbComponentStatus = '';
 
   /**
    * Alert outline (color of the border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} value
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
    */
-  @Input() outline: string;
+  @Input() outline: '' | NbComponentStatus = '';
 
   /**
    * Shows `close` icon
@@ -169,6 +140,16 @@ export class NbAlertComponent {
   }
   protected _closable: boolean = false;
 
+  @Input()
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
+
   /**
    * Emits when chip is removed
    * @type EventEmitter<any>
@@ -182,158 +163,103 @@ export class NbAlertComponent {
     this.close.emit();
   }
 
-  @HostBinding('class.disabled-alert')
-  get disabled() {
-    return this.status === NbAlertComponent.STATUS_DISABLED;
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.accent')
-  get hasAccent() {
-    return this.accent;
-  }
-
-  @HostBinding('class.status')
-  get hasStatus() {
-    return this.status;
-  }
-
-  @HostBinding('class.outline')
-  get hasOutline() {
-    return this.outline;
-  }
-
-  @HostBinding('class.xxsmall-alert')
-  get xxsmall() {
-    return this.size === NbAlertComponent.SIZE_XXSMALL;
-  }
-
-  @HostBinding('class.xsmall-alert')
-  get xsmall() {
-    return this.size === NbAlertComponent.SIZE_XSMALL;
-  }
-
-  @HostBinding('class.small-alert')
+  @HostBinding('class.size-small')
   get small() {
-    return this.size === NbAlertComponent.SIZE_SMALL;
+    return this.size === 'small';
   }
 
-  @HostBinding('class.medium-alert')
+  @HostBinding('class.size-medium')
   get medium() {
-    return this.size === NbAlertComponent.SIZE_MEDIUM;
+    return this.size === 'medium';
   }
 
-  @HostBinding('class.large-alert')
+  @HostBinding('class.size-large')
   get large() {
-    return this.size === NbAlertComponent.SIZE_LARGE;
+    return this.size === 'large';
   }
 
-  @HostBinding('class.xlarge-alert')
-  get xlarge() {
-    return this.size === NbAlertComponent.SIZE_XLARGE;
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
   }
 
-  @HostBinding('class.xxlarge-alert')
-  get xxlarge() {
-    return this.size === NbAlertComponent.SIZE_XXLARGE;
-  }
-
-  @HostBinding('class.active-alert')
-  get active() {
-    return this.status === NbAlertComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.primary-alert')
+  @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbAlertComponent.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.info-alert')
-  get info() {
-    return this.status === NbAlertComponent.STATUS_INFO;
-  }
-
-  @HostBinding('class.success-alert')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbAlertComponent.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.warning-alert')
+  @HostBinding('class.status-info')
+  get info() {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbAlertComponent.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.danger-alert')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbAlertComponent.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
   @HostBinding('class.accent-primary')
   get primaryAccent() {
-    return this.accent === NbAlertComponent.ACCENT_PRIMARY;
-  }
-
-  @HostBinding('class.accent-info')
-  get infoAccent() {
-    return this.accent === NbAlertComponent.ACCENT_INFO;
+    return this.accent === 'primary';
   }
 
   @HostBinding('class.accent-success')
   get successAccent() {
-    return this.accent === NbAlertComponent.ACCENT_SUCCESS;
+    return this.accent === 'success';
+  }
+
+  @HostBinding('class.accent-info')
+  get infoAccent() {
+    return this.accent === 'info';
   }
 
   @HostBinding('class.accent-warning')
   get warningAccent() {
-    return this.accent === NbAlertComponent.ACCENT_WARNING;
+    return this.accent === 'warning';
   }
 
   @HostBinding('class.accent-danger')
   get dangerAccent() {
-    return this.accent === NbAlertComponent.ACCENT_DANGER;
-  }
-
-  @HostBinding('class.accent-active')
-  get activeAccent() {
-    return this.accent === NbAlertComponent.ACCENT_ACTIVE;
-  }
-
-  @HostBinding('class.accent-disabled')
-  get disabledAccent() {
-    return this.accent === NbAlertComponent.ACCENT_DISABLED;
+    return this.accent === 'danger';
   }
 
   @HostBinding('class.outline-primary')
   get primaryOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_PRIMARY;
-  }
-
-  @HostBinding('class.outline-info')
-  get infoOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_INFO;
+    return this.outline === 'primary';
   }
 
   @HostBinding('class.outline-success')
   get successOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_SUCCESS;
+    return this.outline === 'success';
+  }
+
+  @HostBinding('class.outline-info')
+  get infoOutline() {
+    return this.outline === 'info';
   }
 
   @HostBinding('class.outline-warning')
   get warningOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_WARNING;
+    return this.outline === 'warning';
   }
 
   @HostBinding('class.outline-danger')
   get dangerOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_DANGER;
-  }
-
-  @HostBinding('class.outline-active')
-  get activeOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_ACTIVE;
-  }
-
-  @HostBinding('class.outline-disabled')
-  get disabledOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_DISABLED;
+    return this.outline === 'danger';
   }
 }
