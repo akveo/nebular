@@ -9,6 +9,9 @@ import { Component, Input } from '@angular/core';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end';
+export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
 
 /**
@@ -67,15 +70,6 @@ import { NbComponentStatus } from '../component-status';
   `,
 })
 export class NbBadgeComponent {
-  static readonly TOP_LEFT = 'top left';
-  static readonly TOP_RIGHT = 'top right';
-  static readonly BOTTOM_LEFT = 'bottom left';
-  static readonly BOTTOM_RIGHT = 'bottom right';
-
-  static readonly TOP_START = 'top start';
-  static readonly TOP_END = 'top end';
-  static readonly BOTTOM_START = 'bottom start';
-  static readonly BOTTOM_END = 'bottom end';
 
   /**
    * Text to display
@@ -91,7 +85,7 @@ export class NbBadgeComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() position: string;
+  @Input() position: NbBadgePosition = 'top right';
 
   /**
    * Badge status (adds specific styles):
@@ -100,10 +94,6 @@ export class NbBadgeComponent {
   @Input() status: NbComponentStatus = 'primary';
 
   get positionClass() {
-    if (!this.position) {
-      return NbBadgeComponent.TOP_RIGHT;
-    }
-
     const isLtr = this.layoutDirectionService.isLtr();
     const startValue = isLtr ? 'left' : 'right';
     const endValue = isLtr ? 'right' : 'left';
