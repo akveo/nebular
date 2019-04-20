@@ -86,13 +86,14 @@ import { NbIconLibraries } from './icon-libraries';
  * @styles
  *
  * icon-font-size:
+ * icon-line-height:
  * icon-width:
  * icon-height:
- * icon-primary-fg:
- * icon-info-fg:
- * icon-success-fg:
- * icon-warning-fg:
- * icon-danger-fg:
+ * icon-primary-color:
+ * icon-info-color:
+ * icon-success-color:
+ * icon-warning-color:
+ * icon-danger-color:
  */
 @Component({
   selector: 'nb-icon',
