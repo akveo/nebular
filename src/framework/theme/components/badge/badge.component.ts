@@ -6,7 +6,6 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
 export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
@@ -65,9 +64,7 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `
-    <span class="nb-badge {{positionClass}}">{{text}}</span>
-  `,
+  template: `{{text}}`,
 })
 export class NbBadgeComponent {
 
@@ -92,15 +89,6 @@ export class NbBadgeComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    */
   @Input() status: NbComponentStatus = 'primary';
-
-  get positionClass() {
-    const isLtr = this.layoutDirectionService.isLtr();
-    const startValue = isLtr ? 'left' : 'right';
-    const endValue = isLtr ? 'right' : 'left';
-    return this.position
-      .replace(/\bstart\b/, startValue)
-      .replace(/\bend\b/, endValue);
-  }
 
   @HostBinding('class.status-primary')
   get primary(): boolean {
@@ -127,5 +115,33 @@ export class NbBadgeComponent {
     return this.status === 'danger';
   }
 
-  constructor(private layoutDirectionService: NbLayoutDirectionService) {}
+  @HostBinding('class.position-top')
+  get topLeft(): boolean {
+    return this.position.includes('top');
+  }
+
+  @HostBinding('class.position-right')
+  get topRight(): boolean {
+    return this.position.includes('right');
+  }
+
+  @HostBinding('class.position-bottom')
+  get bottomRight(): boolean {
+    return this.position.includes('bottom');
+  }
+
+  @HostBinding('class.position-left')
+  get bottomLeft(): boolean {
+    return this.position.includes('left');
+  }
+
+  @HostBinding('class.position-start')
+  get bottomStart(): boolean {
+    return this.position.includes('start');
+  }
+
+  @HostBinding('class.position-end')
+  get bottomEnd(): boolean {
+    return this.position.includes('end');
+  }
 }
