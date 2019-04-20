@@ -6,12 +6,18 @@
 
 @mixin nb-badge-theme() {
   nb-badge {
-    color: nb-theme(badge-fg-text);
+    border-radius: nb-theme(badge-border-radius);
+    font-family: nb-theme(badge-text-font-family);
+    font-size: nb-theme(badge-text-font-size);
+    font-weight: nb-theme(badge-text-font-weight);
+    line-height: nb-theme(badge-text-line-height);
+    padding: nb-theme(badge-padding);
   }
 
   @each $status in nb-get-statuses() {
     nb-badge.status-#{$status} {
-      background-color: nb-theme(badge-#{$status}-bg-color);
+      color: nb-theme(badge-#{$status}-text-color);
+      background-color: nb-theme(badge-#{$status}-background-color);
     }
   }
 }
