@@ -5,7 +5,11 @@
  */
 
 import { Component, Input } from '@angular/core';
+
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbComponentStatus } from '../component-status';
+
+
 
 /**
  * Badge is a simple labeling component.
@@ -22,7 +26,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbBadgeModule,
  *   ],
  * })
@@ -59,7 +63,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
   template: `
-    <span class="nb-badge {{positionClass}} nb-badge-{{colorClass}}">{{text}}</span>
+    <span class="nb-badge {{positionClass}} status-{{status}}">{{text}}</span>
   `,
 })
 export class NbBadgeComponent {
@@ -72,14 +76,6 @@ export class NbBadgeComponent {
   static readonly TOP_END = 'top end';
   static readonly BOTTOM_START = 'bottom start';
   static readonly BOTTOM_END = 'bottom end';
-
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
    * Text to display
@@ -100,14 +96,8 @@ export class NbBadgeComponent {
   /**
    * Badge status (adds specific styles):
    * 'primary', 'info', 'success', 'warning', 'danger'
-   * @param {string} val
-   * @type string
    */
-  @Input() set status(value) {
-    if (value) {
-      this.colorClass = value;
-    }
-  }
+  @Input() status: NbComponentStatus = 'primary';
 
   get positionClass() {
     if (!this.position) {
