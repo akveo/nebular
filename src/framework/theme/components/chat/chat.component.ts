@@ -152,13 +152,13 @@ export class NbChatComponent implements AfterViewInit {
 
   /**
    * Chat size, available sizes:
-   * tiny, small, medium, large, giant
+   * `tiny`, `small`, `medium`, `large`, `giant`
    */
   @Input() size: NbComponentSize;
 
   /**
    * Chat status color (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
+   * `primary`, `success`, `info`, `warning`, `danger`
    */
   @Input() status: NbComponentStatus;
 
