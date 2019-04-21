@@ -55,7 +55,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbChatModule,
  *   ],
  * })
@@ -69,7 +69,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
  *   ],
  * })
@@ -161,10 +161,7 @@ export class NbChatComponent implements AfterViewInit {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  size: string;
-  status: string;
   accent: string;
-  scrollBottom: boolean = true;
 
   @Input() title: string;
 
@@ -246,31 +243,26 @@ export class NbChatComponent implements AfterViewInit {
   /**
    * Chat size, available sizes:
    * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
    */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
+  @Input() size: string;
 
   /**
    * Chat status color (adds specific styles):
    * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
    */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
+  @Input() status: string;
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
-   * @param {boolean} val
    */
-  @Input('scrollBottom')
-  private set setScrollBottom(val: boolean) {
-    this.scrollBottom = convertToBoolProperty(val);
+  @Input()
+  get scrollBottom(): boolean {
+    return this._scrollBottom
   }
+  set scrollBottom(value: boolean) {
+    this._scrollBottom = convertToBoolProperty(value);
+  }
+  protected _scrollBottom: boolean = true;
 
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
