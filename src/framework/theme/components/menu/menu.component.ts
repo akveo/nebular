@@ -129,7 +129,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbMenuModule.forRoot(),
  *   ],
  * })
@@ -139,7 +139,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbMenuModule,
  *   ],
  * })
@@ -209,7 +209,6 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   `,
 })
 export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
-  @HostBinding('class.inverse') inverseValue: boolean;
 
   /**
    * Tags a menu with some ID, can be later used in the menu service
@@ -224,15 +223,6 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
    * @type List<NbMenuItem> | List<any> | any
    */
   @Input() items: NbMenuItem[];
-
-  /**
-   * Makes colors inverse based on current theme
-   * @type boolean
-   */
-  @Input()
-  set inverse(val: boolean) {
-    this.inverseValue = convertToBoolProperty(val);
-  }
 
   /**
    * Collapse all opened submenus on the toggle event

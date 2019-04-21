@@ -98,26 +98,4 @@
       }
     }
   }
-
-  nb-menu.inverse {
-    .menu-item {
-      a {
-        color: nb-theme(menu-bg);
-      }
-
-      a:hover {
-        background-color: nb-theme(menu-active-fg);
-        color: nb-theme(menu-active-bg);
-      }
-
-      a.active {
-        background-color: nb-theme(menu-active-fg);
-        color: nb-theme(menu-active-bg);
-      }
-    }
-
-    .menu-group {
-      color: nb-theme(menu-bg);
-    }
-  }
 }
