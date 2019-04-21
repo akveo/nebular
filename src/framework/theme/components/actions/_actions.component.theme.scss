@@ -38,5 +38,13 @@
     nb-icon {
       color: nb-theme(actions-text-color);
     }
+
+    &.disabled {
+      color: nb-theme(actions-disabled-text-color);
+
+      nb-icon {
+        color: nb-theme(actions-disabled-icon-color);
+      }
+    }
   }
 }
