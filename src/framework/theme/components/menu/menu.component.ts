@@ -48,11 +48,11 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Output() selectItem = new EventEmitter<any>();
   @Output() itemClick = new EventEmitter<any>();
 
-  private alive = true;
+  protected alive = true;
   toggleState: NbToggleStates;
 
-  constructor(private menuService: NbMenuService,
-              private directionService: NbLayoutDirectionService) {}
+  constructor(protected menuService: NbMenuService,
+              protected directionService: NbLayoutDirectionService) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
@@ -237,11 +237,11 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   protected _autoCollapse: boolean = false;
 
-  private alive: boolean = true;
+  protected alive: boolean = true;
 
-  constructor(@Inject(NB_WINDOW) private window,
-              private menuInternalService: NbMenuInternalService,
-              private router: Router) {
+  constructor(@Inject(NB_WINDOW) protected window,
+              protected menuInternalService: NbMenuInternalService,
+              protected router: Router) {
   }
 
   ngOnInit() {
@@ -327,7 +327,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.alive = false;
   }
 
-  private navigateHome() {
+  protected navigateHome() {
     const homeItem = this.getHomeItem(this.items);
 
     if (homeItem) {
@@ -341,11 +341,11 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private collapseAll() {
+  protected collapseAll() {
     this.menuInternalService.collapseAll(this.items, this.tag);
   }
 
-  private getHomeItem(items: NbMenuItem[]): NbMenuItem {
+  protected getHomeItem(items: NbMenuItem[]): NbMenuItem {
     for (const item of items) {
       if (item.home) {
         return item;
@@ -358,11 +358,11 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private compareTag(tag: string) {
+  protected compareTag(tag: string) {
     return !tag || tag === this.tag;
   }
 
-  private getSelectedItem(items: NbMenuItem[]): NbMenuItem {
+  protected getSelectedItem(items: NbMenuItem[]): NbMenuItem {
     let selected = null;
     items.forEach((item: NbMenuItem) => {
       if (item.selected) {
