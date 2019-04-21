@@ -11,6 +11,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
+import { NB_STEPPER } from './stepper-tokens';
 import { NbStepComponent } from './step.component';
 
 export type NbStepperOrientation = 'vertical' | 'horizontal';
@@ -106,6 +107,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
   selector: 'nb-stepper',
   styleUrls: ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
+  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
 export class NbStepperComponent {
 
