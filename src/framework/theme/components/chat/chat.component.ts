@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -147,14 +148,6 @@ import { NbChatMessageComponent } from './chat-message.component';
 })
 export class NbChatComponent implements AfterViewInit {
 
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
   @Input() title: string;
 
   /**
@@ -167,7 +160,7 @@ export class NbChatComponent implements AfterViewInit {
    * Chat status color (adds specific styles):
    * active, disabled, primary, info, success, warning, danger
    */
-  @Input() status: string;
+  @Input() status: NbComponentStatus;
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
@@ -180,6 +173,15 @@ export class NbChatComponent implements AfterViewInit {
     this._scrollBottom = convertToBoolProperty(value);
   }
   protected _scrollBottom: boolean = true;
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
@@ -229,38 +231,28 @@ export class NbChatComponent implements AfterViewInit {
     return this.size === 'giant';
   }
 
-  @HostBinding('class.active-chat')
-  get active() {
-    return this.status === NbChatComponent.STATUS_ACTIVE;
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.disabled-chat')
-  get disabled() {
-    return this.status === NbChatComponent.STATUS_DISABLED;
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
   }
 
-  @HostBinding('class.primary-chat')
-  get primary() {
-    return this.status === NbChatComponent.STATUS_PRIMARY;
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
   }
 
-  @HostBinding('class.info-chat')
-  get info() {
-    return this.status === NbChatComponent.STATUS_INFO;
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.success-chat')
-  get success() {
-    return this.status === NbChatComponent.STATUS_SUCCESS;
-  }
-
-  @HostBinding('class.warning-chat')
-  get warning() {
-    return this.status === NbChatComponent.STATUS_WARNING;
-  }
-
-  @HostBinding('class.danger-chat')
-  get danger() {
-    return this.status === NbChatComponent.STATUS_DANGER;
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
   }
 }
