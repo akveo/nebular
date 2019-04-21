@@ -135,8 +135,7 @@ export class NbChatFormComponent {
       this.fileOver = false;
       if (event.dataTransfer && event.dataTransfer.files) {
 
-        // tslint:disable-next-line
-        for (let file of event.dataTransfer.files) {
+        for (const file of event.dataTransfer.files) {
           const res = file;
 
           if (this.imgDropTypes.includes(file.type)) {
