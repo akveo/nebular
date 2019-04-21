@@ -7,6 +7,8 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
+import { NbButtonModule } from '../button/button.module';
+import { NbInputModule } from '../input/input.module';
 import { NbIconModule } from '../icon/icon.module';
 
 import { NbChatComponent } from './chat.component';
@@ -32,6 +34,8 @@ const NB_CHAT_COMPONENTS = [
   imports: [
     NbSharedModule,
     NbIconModule,
+    NbInputModule,
+    NbButtonModule,
   ],
   declarations: [
     ...NB_CHAT_COMPONENTS,

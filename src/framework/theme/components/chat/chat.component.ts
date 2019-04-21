@@ -11,12 +11,18 @@ import {
   ViewChild,
   ElementRef,
   ContentChildren,
-  QueryList, AfterViewInit,
+  QueryList,
+  AfterViewInit,
+  ContentChild,
+  SimpleChanges,
+  AfterContentInit,
+  OnChanges,
 } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
+import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 
 /**
@@ -146,7 +152,7 @@ import { NbChatMessageComponent } from './chat-message.component';
     </div>
   `,
 })
-export class NbChatComponent implements AfterViewInit {
+export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
   @Input() title: string;
 
@@ -176,6 +182,17 @@ export class NbChatComponent implements AfterViewInit {
 
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
+  @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('status' in changes) {
+      this.updateFormStatus();
+    }
+  }
+
+  ngAfterContentInit() {
+    this.updateFormStatus();
+  }
 
   ngAfterViewInit() {
     this.messages.changes
@@ -195,6 +212,12 @@ export class NbChatComponent implements AfterViewInit {
 
   scrollListBottom() {
     this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
+  }
+
+  protected updateFormStatus(): void {
+    if (this.chatForm) {
+      this.chatForm.setStatus(this.status);
+    }
   }
 
   @HostBinding('class.size-tiny')
