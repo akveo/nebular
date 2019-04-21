@@ -28,13 +28,17 @@
   ::ng-deep nb-icon {
     vertical-align: top;
   }
+}
 
-  &.icon-start:not(.icon-end) ::ng-deep nb-icon {
+:host(.icon-start:not(.icon-end)) {
+  ::ng-deep nb-icon {
     @include nb-ltr(margin-right, 0.75rem);
     @include nb-rtl(margin-left, 0.75rem);
   }
+}
 
-  &.icon-end:not(.icon-start) ::ng-deep nb-icon {
+:host(.icon-end:not(.icon-start)) {
+  ::ng-deep nb-icon {
     @include nb-ltr(margin-left, 0.75rem);
     @include nb-rtl(margin-right, 0.75rem);
   }

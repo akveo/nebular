@@ -522,14 +522,14 @@ export class NbButtonComponent implements AfterViewInit {
   get iconLeft(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && el.firstChild === icon);
+    return !!(icon && el.firstElementChild === icon);
   }
 
   @HostBinding('class.icon-end')
   get iconRight(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && el.lastChild === icon);
+    return !!(icon && el.lastElementChild === icon);
   }
 
   @HostBinding('class.transitions')
