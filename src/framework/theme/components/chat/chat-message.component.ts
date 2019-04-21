@@ -56,7 +56,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!replyValue">
+    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!reply">
       <ng-container *ngIf="!avatarStyle">
         {{ getInitials() }}
       </ng-container>
@@ -105,12 +105,9 @@ export class NbChatMessageComponent {
     return true;
   }
 
-  @HostBinding('class.reply')
-  replyValue: boolean = false;
-
   @HostBinding('class.not-reply')
   get notReply() {
-    return !this.replyValue;
+    return !this.reply;
   }
 
   avatarStyle: SafeStyle;
@@ -119,9 +116,14 @@ export class NbChatMessageComponent {
    * Determines if a message is a reply
    */
   @Input()
-  set reply(val: boolean) {
-    this.replyValue = convertToBoolProperty(val);
+  @HostBinding('class.reply')
+  get reply(): boolean {
+    return this._reply;
   }
+  set reply(value: boolean) {
+    this._reply = convertToBoolProperty(value);
+  }
+  protected _reply: boolean = false;
 
   /**
    * Message sender
