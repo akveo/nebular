@@ -11,7 +11,6 @@ import {
   EventEmitter,
   OnInit,
   OnDestroy,
-  HostBinding,
   AfterViewInit,
   Inject,
   DoCheck,
