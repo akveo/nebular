@@ -163,6 +163,53 @@ export class NbChatComponent implements AfterViewInit {
 
   @Input() title: string;
 
+  /**
+   * Chat size, available sizes:
+   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   */
+  @Input() size: string;
+
+  /**
+   * Chat status color (adds specific styles):
+   * active, disabled, primary, info, success, warning, danger
+   */
+  @Input() status: string;
+
+  /**
+   * Scroll chat to the bottom of the list when a new message arrives
+   */
+  @Input()
+  get scrollBottom(): boolean {
+    return this._scrollBottom
+  }
+  set scrollBottom(value: boolean) {
+    this._scrollBottom = convertToBoolProperty(value);
+  }
+  protected _scrollBottom: boolean = true;
+
+  @ViewChild('scrollable') scrollable: ElementRef;
+  @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
+
+  ngAfterViewInit() {
+    this.messages.changes
+      .subscribe((messages) => {
+        this.messages = messages;
+        this.updateView();
+      });
+
+    this.updateView();
+  }
+
+  updateView() {
+    if (this.scrollBottom) {
+      this.scrollListBottom();
+    }
+  }
+
+  scrollListBottom() {
+    this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
+  }
+
   @HostBinding('class.xxsmall-chat')
   get xxsmall() {
     return this.size === NbChatComponent.SIZE_XXSMALL;
@@ -231,52 +278,5 @@ export class NbChatComponent implements AfterViewInit {
   @HostBinding('class.danger-chat')
   get danger() {
     return this.status === NbChatComponent.STATUS_DANGER;
-  }
-
-  /**
-   * Chat size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   */
-  @Input() size: string;
-
-  /**
-   * Chat status color (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   */
-  @Input() status: string;
-
-  /**
-   * Scroll chat to the bottom of the list when a new message arrives
-   */
-  @Input()
-  get scrollBottom(): boolean {
-    return this._scrollBottom
-  }
-  set scrollBottom(value: boolean) {
-    this._scrollBottom = convertToBoolProperty(value);
-  }
-  protected _scrollBottom: boolean = true;
-
-  @ViewChild('scrollable') scrollable: ElementRef;
-  @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
-
-  ngAfterViewInit() {
-    this.messages.changes
-      .subscribe((messages) => {
-        this.messages = messages;
-        this.updateView();
-      });
-
-    this.updateView();
-  }
-
-  updateView() {
-    if (this.scrollBottom) {
-      this.scrollListBottom();
-    }
-  }
-
-  scrollListBottom() {
-    this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
   }
 }
