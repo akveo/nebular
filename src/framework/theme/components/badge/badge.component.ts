@@ -116,32 +116,32 @@ export class NbBadgeComponent {
   }
 
   @HostBinding('class.position-top')
-  get topLeft(): boolean {
+  get top(): boolean {
     return this.position.includes('top');
   }
 
   @HostBinding('class.position-right')
-  get topRight(): boolean {
+  get right(): boolean {
     return this.position.includes('right');
   }
 
   @HostBinding('class.position-bottom')
-  get bottomRight(): boolean {
+  get bottom(): boolean {
     return this.position.includes('bottom');
   }
 
   @HostBinding('class.position-left')
-  get bottomLeft(): boolean {
+  get left(): boolean {
     return this.position.includes('left');
   }
 
   @HostBinding('class.position-start')
-  get bottomStart(): boolean {
+  get start(): boolean {
     return this.position.includes('start');
   }
 
   @HostBinding('class.position-end')
-  get bottomEnd(): boolean {
+  get end(): boolean {
     return this.position.includes('end');
   }
 }
