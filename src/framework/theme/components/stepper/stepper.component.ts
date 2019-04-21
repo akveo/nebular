@@ -83,14 +83,27 @@ export enum NbStepperOrientation {
  *
  * @styles
  *
- * stepper-index-size:
- * stepper-label-font-size:
- * stepper-label-font-weight:
- * stepper-accent-color:
- * stepper-completed-fg:
- * stepper-fg:
- * stepper-completed-icon-size:
- * stepper-completed-icon-weight:
+ * stepper-step-text-color:
+ * stepper-step-text-font-family:
+ * stepper-step-text-font-size:
+ * stepper-step-text-font-weight:
+ * stepper-step-text-line-height:
+ * stepper-step-active-text-color:
+ * stepper-step-completed-text-color:
+ * stepper-step-index-border-color:
+ * stepper-step-index-border-style:
+ * stepper-step-index-border-width:
+ * stepper-step-index-border-radius:
+ * stepper-step-index-width:
+ * stepper-step-index-active-border-color:
+ * stepper-step-index-completed-background-color:
+ * stepper-step-index-completed-border-color:
+ * stepper-step-index-completed-text-color:
+ * stepper-connector-background-color:
+ * stepper-connector-completed-background-color:
+ * stepper-horizontal-connector-margin:
+ * stepper-vertical-connector-margin:
+ * stepper-step-content-padding:
  */
 @Component({
   selector: 'nb-stepper',
