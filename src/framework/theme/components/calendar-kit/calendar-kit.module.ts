@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbButtonModule } from '../button/button.module';
+import { NbIconModule } from '../icon/icon.module';
 
 import { NbCalendarMonthModelService, NbDateService  } from './services';
 
@@ -69,7 +70,7 @@ const COMPONENTS = [
  * @stacked-example(Full calendar, calendar-kit/calendar-kit-full-calendar.component)
  * */
 @NgModule({
-  imports: [NbSharedModule, NbButtonModule],
+  imports: [ NbSharedModule, NbButtonModule, NbIconModule ],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
   providers: [...SERVICES],
