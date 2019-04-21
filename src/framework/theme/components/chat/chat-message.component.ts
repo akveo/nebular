@@ -42,16 +42,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
  *
  * @styles
  *
- * chat-message-fg:
- * chat-message-bg:
- * chat-message-reply-bg:
- * chat-message-reply-fg:
- * chat-message-avatar-bg:
- * chat-message-sender-fg:
- * chat-message-quote-fg:
- * chat-message-quote-bg:
- * chat-message-file-fg:
- * chat-message-file-bg:
+ * chat-message-background:
+ * chat-message-text-color:
+ * chat-message-reply-background-color:
+ * chat-message-reply-text-color:
+ * chat-message-avatar-background-color:
+ * chat-message-sender-text-color:
+ * chat-message-quote-background-color:
+ * chat-message-quote-text-color:
+ * chat-message-file-text-color:
+ * chat-message-file-background-color:
  */
 @Component({
   selector: 'nb-chat-message',

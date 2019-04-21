@@ -9,9 +9,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Chat message component.
- *
- * @styles
- *
  */
 @Component({
   selector: 'nb-chat-message-file',

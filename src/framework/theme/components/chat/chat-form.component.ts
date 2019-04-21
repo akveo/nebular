@@ -45,14 +45,6 @@ import { NbComponentStatus } from '../component-status';
  *   this.service.sendToServer(message, files);
  * }
  * ```
- *
- * @styles
- *
- * chat-form-bg:
- * chat-form-fg:
- * chat-form-border:
- * chat-form-active-border:
- *
  */
 @Component({
   selector: 'nb-chat-form',

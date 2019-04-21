@@ -9,9 +9,6 @@ import { NbChatOptions } from './chat.options';
 
 /**
  * Chat message component.
- *
- * @styles
- *
  */
 @Component({
   selector: 'nb-chat-message-map',

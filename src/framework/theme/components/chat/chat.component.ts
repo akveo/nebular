@@ -111,30 +111,39 @@ import { NbChatMessageComponent } from './chat-message.component';
  *
  * @styles
  *
- * chat-font-size:
- * chat-fg:
- * chat-bg:
- * chat-border-radius:
- * chat-fg-text:
- * chat-height-xxsmall:
- * chat-height-xsmall:
- * chat-height-small:
- * chat-height-medium:
- * chat-height-large:
- * chat-height-xlarge:
- * chat-height-xxlarge:
+ * chat-background-color:
  * chat-border:
- * chat-padding:
+ * chat-border-radius:
  * chat-shadow:
- * chat-separator:
- * chat-active-bg:
- * chat-disabled-bg:
- * chat-disabled-fg:
- * chat-primary-bg:
- * chat-info-bg:
- * chat-success-bg:
- * chat-warning-bg:
- * chat-danger-bg:
+ * chat-padding:
+ * chat-text-color:
+ * chat-text-font-family:
+ * chat-text-font-size:
+ * chat-text-font-weight:
+ * chat-text-line-height:
+ * chat-header-text-color:
+ * chat-header-text-font-family:
+ * chat-header-text-font-size:
+ * chat-header-text-font-weight:
+ * chat-header-text-line-height:
+ * chat-tiny-height:
+ * chat-small-height:
+ * chat-medium-height:
+ * chat-large-height:
+ * chat-giant-height:
+ * chat-primary-background-color:
+ * chat-primary-text-color:
+ * chat-success-background-color:
+ * chat-success-text-color:
+ * chat-info-background-color:
+ * chat-info-text-color:
+ * chat-warning-background-color:
+ * chat-warning-text-color:
+ * chat-danger-background-color:
+ * chat-danger-text-color:
+ * chat-divider-color:
+ * chat-divider-style:
+ * chat-divider-width:
  */
 @Component({
   selector: 'nb-chat',
