@@ -161,8 +161,6 @@ export class NbChatComponent implements AfterViewInit {
   static readonly STATUS_WARNING = 'warning';
   static readonly STATUS_DANGER = 'danger';
 
-  accent: string;
-
   @Input() title: string;
 
   @HostBinding('class.xxsmall-chat')
@@ -233,11 +231,6 @@ export class NbChatComponent implements AfterViewInit {
   @HostBinding('class.danger-chat')
   get danger() {
     return this.status === NbChatComponent.STATUS_DANGER;
-  }
-
-  @HostBinding('class.accent')
-  get hasAccent() {
-    return this.accent;
   }
 
   /**
