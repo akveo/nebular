@@ -79,8 +79,6 @@ import { convertToBoolProperty } from '../helpers';
  * alert-medium-padding:
  * alert-large-height:
  * alert-giant-height:
- * alert-disabled-background-color:
- * alert-disabled-text-color:
  * alert-primary-background-color:
  * alert-primary-text-color:
  * alert-success-background-color:
@@ -154,16 +152,6 @@ export class NbAlertComponent {
     this._closable = convertToBoolProperty(value);
   }
   protected _closable: boolean = false;
-
-  @Input()
-  @HostBinding('class.disabled')
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = convertToBoolProperty(value);
-  }
-  protected _disabled: boolean = false;
 
   /**
    * Emits when chip is removed

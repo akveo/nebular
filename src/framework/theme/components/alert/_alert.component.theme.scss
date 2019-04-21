@@ -34,11 +34,6 @@
         nb-theme(alert-scrollbar-background-color),
         nb-theme(alert-scrollbar-width));
 
-    &.disabled {
-      color: nb-theme(alert-disabled-text-color);
-      background-color: nb-theme(alert-disabled-background-color);
-    }
-
     &.closable {
       @include nb-ltr(padding-right, nb-theme(alert-closable-start-padding));
       @include nb-rtl(padding-left, nb-theme(alert-closable-start-padding));
