@@ -13,6 +13,8 @@ import {
   ContentChildren,
   QueryList, AfterViewInit,
 } from '@angular/core';
+
+import { NbComponentSize } from '../component-size';
 import { convertToBoolProperty } from '../helpers';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -145,14 +147,6 @@ import { NbChatMessageComponent } from './chat-message.component';
 })
 export class NbChatComponent implements AfterViewInit {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
-
   static readonly STATUS_ACTIVE = 'active';
   static readonly STATUS_DISABLED = 'disabled';
   static readonly STATUS_PRIMARY = 'primary';
@@ -165,9 +159,9 @@ export class NbChatComponent implements AfterViewInit {
 
   /**
    * Chat size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
+   * tiny, small, medium, large, giant
    */
-  @Input() size: string;
+  @Input() size: NbComponentSize;
 
   /**
    * Chat status color (adds specific styles):
@@ -210,39 +204,29 @@ export class NbChatComponent implements AfterViewInit {
     this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
   }
 
-  @HostBinding('class.xxsmall-chat')
-  get xxsmall() {
-    return this.size === NbChatComponent.SIZE_XXSMALL;
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
   }
 
-  @HostBinding('class.xsmall-chat')
-  get xsmall() {
-    return this.size === NbChatComponent.SIZE_XSMALL;
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
   }
 
-  @HostBinding('class.small-chat')
-  get small() {
-    return this.size === NbChatComponent.SIZE_SMALL;
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
   }
 
-  @HostBinding('class.medium-chat')
-  get medium() {
-    return this.size === NbChatComponent.SIZE_MEDIUM;
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
   }
 
-  @HostBinding('class.large-chat')
-  get large() {
-    return this.size === NbChatComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.xlarge-chat')
-  get xlarge() {
-    return this.size === NbChatComponent.SIZE_XLARGE;
-  }
-
-  @HostBinding('class.xxlarge-chat')
-  get xxlarge() {
-    return this.size === NbChatComponent.SIZE_XXLARGE;
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
   }
 
   @HostBinding('class.active-chat')
