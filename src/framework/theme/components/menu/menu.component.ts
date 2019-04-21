@@ -229,12 +229,15 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
    * @type boolean
    */
   @Input()
-  set autoCollapse(val: boolean) {
-    this.autoCollapseValue = convertToBoolProperty(val);
+  get autoCollapse(): boolean {
+    return this._autoCollapse;
   }
+  set autoCollapse(value: boolean) {
+    this._autoCollapse = convertToBoolProperty(value);
+  }
+  protected _autoCollapse: boolean = false;
 
   private alive: boolean = true;
-  private autoCollapseValue: boolean = false;
 
   constructor(@Inject(NB_WINDOW) private window,
               private menuInternalService: NbMenuInternalService,
@@ -284,19 +287,19 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(event => event instanceof NavigationEnd),
       )
       .subscribe(() => {
-        this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
+        this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapse);
       });
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue));
+    setTimeout(() => this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapse));
   }
 
   onAddItem(data: { tag: string; items: NbMenuItem[] }) {
     this.items.push(...data.items);
 
     this.menuInternalService.prepareItems(this.items);
-    this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapseValue);
+    this.menuInternalService.selectFromUrl(this.items, this.tag, this.autoCollapse);
   }
 
   onHoverItem(item: NbMenuItem) {
@@ -304,7 +307,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onToggleSubMenu(item: NbMenuItem) {
-    if (this.autoCollapseValue) {
+    if (this.autoCollapse) {
       this.menuInternalService.collapseAll(this.items, this.tag, item);
     }
     item.expanded = !item.expanded;
@@ -313,7 +316,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO: is not fired on page reload
   onSelectItem(item: NbMenuItem) {
-    this.menuInternalService.selectItem(item, this.items, this.autoCollapseValue, this.tag);
+    this.menuInternalService.selectItem(item, this.items, this.autoCollapse, this.tag);
   }
 
   onItemClick(item: NbMenuItem) {
