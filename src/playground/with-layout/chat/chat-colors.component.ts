@@ -91,36 +91,6 @@ export class ChatColorsComponent {
         },
       ],
     },
-    {
-      status: 'active',
-      title: 'Nebular Conversational UI Active',
-      messages: [
-        {
-          text: 'Active!',
-          date: new Date(),
-          reply: false,
-          user: {
-            name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
-          },
-        },
-      ],
-    },
-    {
-      status: 'disabled',
-      title: 'Nebular Conversational UI Disabled',
-      messages: [
-        {
-          text: 'Disabled!',
-          date: new Date(),
-          reply: false,
-          user: {
-            name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
-          },
-        },
-      ],
-    },
   ];
 
   sendMessage(messages, event) {

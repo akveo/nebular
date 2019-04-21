@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-chat title="Message Types" [size]="'large'">
+        <nb-chat title="Message Types" size="large">
           <nb-chat-message
             message="Gif message"
             type="file"
