@@ -13,10 +13,7 @@ import {
 import { convertToBoolProperty } from '../helpers';
 import { NbStepComponent } from './step.component';
 
-export enum NbStepperOrientation {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
-}
+export type NbStepperOrientation = 'vertical' | 'horizontal';
 
 /**
  * Stepper component
@@ -116,12 +113,12 @@ export class NbStepperComponent {
 
   @HostBinding('class.vertical')
   get vertical() {
-    return this.orientation === NbStepperOrientation.VERTICAL;
+    return this.orientation === 'vertical';
   }
 
   @HostBinding('class.horizontal')
   get horizontal() {
-    return this.orientation === NbStepperOrientation.HORIZONTAL;
+    return this.orientation === 'horizontal';
   }
 
   /**
@@ -180,7 +177,7 @@ export class NbStepperComponent {
    * Stepper orientation - `horizontal`|`vertical`
    * @type {string}
    */
-  @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
+  @Input() orientation: NbStepperOrientation = 'horizontal';
 
   /**
    * Allow moving forward only if the current step is complete
