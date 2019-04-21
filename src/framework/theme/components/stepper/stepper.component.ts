@@ -109,39 +109,25 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
 })
 export class NbStepperComponent {
 
-  @ContentChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
-
-  @HostBinding('class.vertical')
-  get vertical() {
-    return this.orientation === 'vertical';
-  }
-
-  @HostBinding('class.horizontal')
-  get horizontal() {
-    return this.orientation === 'horizontal';
-  }
-
   /**
    * Selected step index
-   *
-   * @type {boolean}
    */
   @Input()
   get selectedIndex() {
-    return this.index;
+    return this._selectedIndex;
   }
-
   set selectedIndex(index: number) {
     if (!this.steps) {
-      this.index = index;
+      this._selectedIndex = index;
       return;
     }
 
     this.markCurrentStepInteracted();
     if (this.canBeSelected(index)) {
-      this.index = index;
+      this._selectedIndex = index;
     }
   }
+  protected _selectedIndex: number = 0;
 
   /**
    * Disables navigation by clicking on steps. False by default
@@ -149,23 +135,20 @@ export class NbStepperComponent {
    */
   @Input()
   set disableStepNavigation(value: boolean) {
-    this.disableStepNavigationValue = convertToBoolProperty(value);
+    this._disableStepNavigation = convertToBoolProperty(value);
   }
   get disableStepNavigation(): boolean {
-    return this.disableStepNavigationValue;
+    return this._disableStepNavigation;
   }
-  disableStepNavigationValue: boolean = false;
+  protected _disableStepNavigation: boolean = false;
 
   /**
    * Selected step component
-   *
-   * @type {boolean}
    */
   @Input()
   get selected(): NbStepComponent | undefined {
     return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
-
   set selected(step: NbStepComponent) {
     if (!this.steps) {
       return;
@@ -175,7 +158,6 @@ export class NbStepperComponent {
 
   /**
    * Stepper orientation - `horizontal`|`vertical`
-   * @type {string}
    */
   @Input() orientation: NbStepperOrientation = 'horizontal';
 
@@ -185,14 +167,23 @@ export class NbStepperComponent {
    */
   @Input()
   set linear(value: boolean) {
-    this.linearValue = convertToBoolProperty(value);
+    this._linear = convertToBoolProperty(value);
   }
   get linear(): boolean {
-    return this.linearValue;
+    return this._linear;
   }
-  private linearValue = true;
+  protected _linear = true;
 
-  private index = 0;
+  @HostBinding('class.vertical')
+  get vertical() {
+    return this.orientation === 'vertical';
+  }
+  @HostBinding('class.horizontal')
+  get horizontal() {
+    return this.orientation === 'horizontal';
+  }
+
+  @ContentChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
 
   /**
    * Navigate to next step
@@ -212,7 +203,7 @@ export class NbStepperComponent {
    * Reset stepper and stepControls to initial state
    * */
   reset() {
-    this.index = 0;
+    this._selectedIndex = 0;
     this.steps.forEach(step => step.reset());
   }
 
@@ -220,11 +211,11 @@ export class NbStepperComponent {
     return this.selected === step;
   }
 
-  private isStepValid(index: number): boolean {
+  protected isStepValid(index: number): boolean {
     return this.steps.toArray()[index].completed;
   }
 
-  private canBeSelected(indexToCheck: number): boolean {
+  protected canBeSelected(indexToCheck: number): boolean {
     const noSteps = !this.steps || this.steps.length === 0;
     if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length) {
       return false;
@@ -244,7 +235,7 @@ export class NbStepperComponent {
     return isAllStepsValid;
   }
 
-  private markCurrentStepInteracted() {
+  protected markCurrentStepInteracted() {
     if (this.selected) {
       this.selected.interacted = true;
     }
