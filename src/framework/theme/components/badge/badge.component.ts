@@ -54,12 +54,22 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
  *
  * @styles
  *
- * badge-fg-text:
- * badge-primary-bg-color:
- * badge-success-bg-color:
- * badge-info-bg-color:
- * badge-warning-bg-color:
- * badge-danger-bg-color:
+ * badge-border-radius:
+ * badge-text-font-family:
+ * badge-text-font-size:
+ * badge-text-font-weight:
+ * badge-text-line-height:
+ * badge-padding:
+ * badge-primary-background-color:
+ * badge-primary-text-color:
+ * badge-success-background-color:
+ * badge-success-text-color:
+ * badge-info-background-color:
+ * badge-info-text-color:
+ * badge-warning-background-color:
+ * badge-warning-text-color:
+ * badge-danger-background-color:
+ * badge-danger-text-color:
  */
 @Component({
   selector: 'nb-badge',
