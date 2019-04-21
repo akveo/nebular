@@ -92,7 +92,15 @@ export class NbBadgeComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() position: NbBadgePosition = 'top right';
+  @Input()
+  get position(): NbBadgePosition {
+    return this._position;
+  }
+  set position(value: NbBadgePosition) {
+    this._position = value || this._defaultPosition;
+  }
+  protected _defaultPosition: NbBadgePosition = 'top right';
+  protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
    * Badge status (adds specific styles):
