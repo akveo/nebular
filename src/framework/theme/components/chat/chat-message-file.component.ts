@@ -77,7 +77,7 @@ export class NbChatMessageFileComponent {
     this.cd.detectChanges();
   }
 
-  constructor(private cd: ChangeDetectorRef, private domSanitizer: DomSanitizer) {
+  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {
   }
 
 

@@ -180,7 +180,7 @@ export class NbChatMessageComponent {
    */
   @Input() type: string;
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(protected domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
     if (this.sender) {
