@@ -32,16 +32,16 @@ import { NbWindowRef } from './window-ref';
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
-          <button class="button" (click)="minimize()">
+          <button nbButton ghost (click)="minimize()">
             <nb-icon icon="minus-outline" pack="nebular-essentials"></nb-icon>
           </button>
-          <button class="button" *ngIf="isFullScreen" (click)="maximize()">
+          <button nbButton ghost *ngIf="isFullScreen" (click)="maximize()">
             <nb-icon icon="collapse-outline" pack="nebular-essentials"></nb-icon>
           </button>
-          <button class="button" *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
+          <button nbButton ghost *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
             <nb-icon icon="expand-outline" pack="nebular-essentials"></nb-icon>
           </button>
-          <button class="button" (click)="close()">
+          <button nbButton ghost (click)="close()">
             <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
           </button>
         </div>
