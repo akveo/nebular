@@ -6,16 +6,34 @@
 
 @mixin nb-toast-theme() {
   nb-toast {
-    background-color: nb-theme(toastr-bg);
-    padding: nb-theme(toastr-padding);
-    color: nb-theme(toastr-fg);
-    border: nb-theme(toastr-border);
+    background-color: nb-theme(toastr-background);
+    border-color: nb-theme(toastr-border-color);
+    border-style: nb-theme(toastr-border-style);
+    border-width: nb-theme(toastr-border-width);
     border-radius: nb-theme(toastr-border-radius);
+    padding: nb-theme(toastr-padding);
+    box-shadow: nb-theme(toastr-shadow);
+
+    color: nb-theme(toastr-text-color);
+
+    .title {
+      font-family: nb-theme(toastr-subtitle-text-font-family);
+      font-size: nb-theme(toastr-subtitle-text-font-size);
+      font-weight: nb-theme(toastr-subtitle-text-font-weight);
+      line-height: nb-theme(toastr-subtitle-text-line-height);
+    }
+
+    .message {
+      font-family: nb-theme(toastr-text-font-family);
+      font-size: nb-theme(toastr-text-font-size);
+      font-weight: nb-theme(toastr-text-font-weight);
+      line-height: nb-theme(toastr-text-line-height);
+    }
 
     .icon-container {
       @include nb-ltr(margin-right, 1.25rem);
       @include nb-rtl(margin-left, 1.25rem);
-      border-radius: nb-theme(toastr-icon-radius);
+      border-radius: nb-theme(toastr-border-radius);
       width: 2.5rem;
       height: 2.5rem;
       display: flex;
@@ -26,118 +44,17 @@
         font-size: 1.5rem;
       }
     }
+  }
 
-    @include nb-except-theme(cosmic) {
-      box-shadow: nb-theme(toastr-shadow);
-    }
-
-    &.default {
-      border-color: nb-theme(toastr-border-color);
-      padding: calc(#{nb-theme(toastr-padding)} / 2) nb-theme(toastr-padding);
-
-      @include nb-for-theme(cosmic) {
-        color: nb-theme(toastr-color-fg);
-        background-color: nb-theme(toastr-default-background);
-      }
-    }
-
-    &.success {
-      border-color: nb-theme(color-success);
-      color: nb-theme(color-success);
+  @each $status in nb-get-statuses() {
+    nb-toast.status-#{$status} {
+      background: nb-theme(toastr-#{$status}-background);
+      border-color: nb-theme(toastr-#{$status}-border-color);
+      color: nb-theme(toastr-#{$status}-text-color);
 
       .icon-container {
-        background-color: nb-theme(color-success);
-        color: nb-theme(color-white);
-      }
-
-      @include nb-for-theme(cosmic) {
-        background-color: nb-theme(color-success);
-        color: nb-theme(toastr-color-fg);
-
-        .icon-container {
-          background-color: nb-theme(color-white);
-          color: nb-theme(color-success);
-        }
-      }
-    }
-
-    &.info {
-      border-color: nb-theme(color-info);
-      color: nb-theme(color-info);
-
-      .icon-container {
-        background-color: nb-theme(color-info);
-        color: nb-theme(color-white);
-      }
-
-      @include nb-for-theme(cosmic) {
-        background-color: nb-theme(color-info);
-        color: nb-theme(toastr-color-fg);
-
-        .icon-container {
-          background-color: nb-theme(color-white);
-          color: nb-theme(color-info);
-        }
-      }
-    }
-
-    &.warning {
-      border-color: nb-theme(color-warning);
-      color: nb-theme(color-warning);
-
-      .icon-container {
-        background-color: nb-theme(color-warning);
-        color: nb-theme(color-white);
-      }
-
-      @include nb-for-theme(cosmic) {
-        background-color: nb-theme(color-warning);
-        color: nb-theme(toastr-color-fg);
-
-        .icon-container {
-          background-color: nb-theme(color-white);
-          color: nb-theme(color-warning);
-        }
-      }
-    }
-
-    &.primary {
-      border-color: nb-theme(color-primary);
-      color: nb-theme(color-primary);
-
-      .icon-container {
-        background-color: nb-theme(color-primary);
-        color: nb-theme(color-white);
-      }
-
-      @include nb-for-theme(cosmic) {
-        background-color: nb-theme(color-primary);
-        color: nb-theme(toastr-color-fg);
-
-        .icon-container {
-          background-color: nb-theme(color-white);
-          color: nb-theme(color-primary);
-        }
-      }
-    }
-
-    &.danger {
-      border-color: nb-theme(color-danger);
-      color: nb-theme(color-danger);
-
-      .icon-container {
-        background-color: nb-theme(color-danger);
-        color: nb-theme(color-white);
-      }
-
-      @include nb-for-theme(cosmic) {
-        background-color: nb-theme(color-danger);
-        color: nb-theme(toastr-color-fg);
-
-        .icon-container {
-          background-color: nb-theme(color-white);
-          color: nb-theme(color-danger);
-        }
+        background: nb-theme(toastr-icon-#{$status}-background);
+        color: nb-theme(toastr-icon-#{$status}-color);
       }
     }
   }
