@@ -7,9 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-outline',
-  templateUrl: './select-outline.component.html',
+  selector: 'nb-select-filled',
+  templateUrl: './select-filled.component.html',
   styleUrls: ['./select-example.scss'],
 })
-export class SelectOutlineComponent {
+export class SelectFilledComponent {
 }

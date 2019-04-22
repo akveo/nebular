@@ -895,10 +895,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Select Multiple',
       },
       {
-        path: 'select-outline.component',
-        link: '/select/select-outline.component',
-        component: 'SelectOutlineComponent',
-        name: 'Select Outline',
+        path: 'select-filled.component',
+        link: '/select/select-filled.component',
+        component: 'SelectFilledComponent',
+        name: 'Select Filled',
       },
       {
         path: 'select-placeholder.component',

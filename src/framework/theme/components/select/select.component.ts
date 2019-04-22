@@ -122,9 +122,9 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select sizes, select/select-sizes.component)
  *
- * And two additional style types - `outline`:
+ * And two additional style types - `filled`:
  *
- * @stacked-example(Outline select, select/select-outline.component)
+ * @stacked-example(Filled select, select/select-filled.component)
  *
  * and `hero`:
  *

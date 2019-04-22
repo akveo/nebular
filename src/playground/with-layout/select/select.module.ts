@@ -16,7 +16,7 @@ import { SelectGroupsComponent } from './select-groups.component';
 import { SelectHeroComponent } from './select-hero.component';
 import { SelectLabelShowcaseComponent } from './select-label.component';
 import { SelectMultipleComponent } from './select-multiple.component';
-import { SelectOutlineComponent } from './select-outline.component';
+import { SelectFilledComponent } from './select-filled.component';
 import { SelectPlaceholderComponent } from './select-placeholder.component';
 import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
@@ -33,7 +33,7 @@ import { SelectInteractiveComponent } from './select-interactive.component';
     SelectHeroComponent,
     SelectLabelShowcaseComponent,
     SelectMultipleComponent,
-    SelectOutlineComponent,
+    SelectFilledComponent,
     SelectPlaceholderComponent,
     SelectShapeComponent,
     SelectShowcaseComponent,
