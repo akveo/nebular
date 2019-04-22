@@ -161,7 +161,7 @@ export class NbToastrContainerRegistry {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbToastrModule.forRoot(config),
  *   ],
  * })

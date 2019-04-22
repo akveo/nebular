@@ -21,10 +21,6 @@ import { NbToast, NbToastStatus } from './model';
  * toastr-border-radius
  * toastr-border-color
  * */
-/**
- * TODO
- * Remove svg icons, include them in font.
- * */
 @Component({
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
