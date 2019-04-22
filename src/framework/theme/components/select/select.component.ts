@@ -416,7 +416,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.selectionModel = [];
     this.hide();
     this.button.nativeElement.focus();
-    this.emitSelected(null);
+    this.emitSelected(this.multiple ? [] : null);
   }
 
   /**

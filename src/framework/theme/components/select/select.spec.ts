@@ -360,6 +360,31 @@ describe('Component: NbSelectComponent', () => {
     expect(overlayContainer.querySelectorAll('nb-option.selected').length).toBe(0);
   });
 
+  it('should emit selectionChange with empty array when reset option selected in multiple select', () => {
+    select.multiple = true;
+    setSelectedAndOpen(['Option 1', 'Option 2']);
+
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    select.selectedChange.subscribe(selectionChangeSpy);
+
+    const option = overlayContainer.querySelector('nb-option');
+    option.dispatchEvent(new Event('click'));
+
+    expect(selectionChangeSpy).toHaveBeenCalledWith([]);
+  });
+
+  it('should emit selectionChange with null when reset option selected in single select', () => {
+    setSelectedAndOpen('Option 1');
+
+    const selectionChangeSpy = createSpy('selectionChangeSpy');
+    select.selectedChange.subscribe(selectionChangeSpy);
+
+    const option = overlayContainer.querySelector('nb-option');
+    option.dispatchEvent(new Event('click'));
+
+    expect(selectionChangeSpy).toHaveBeenCalledWith(null);
+  });
+
   it('should deselect only clicked item in multiple select', () => {
     select.multiple = true;
     setSelectedAndOpen(['Option 1', 'Option 2']);
