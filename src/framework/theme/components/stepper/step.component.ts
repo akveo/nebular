@@ -1,13 +1,7 @@
-import {
-  Component,
-  forwardRef,
-  Inject,
-  Input,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
+import { NB_STEPPER } from './stepper-tokens';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -23,6 +17,8 @@ import { convertToBoolProperty } from '../helpers';
   `,
 })
 export class NbStepComponent {
+
+  protected stepper: NbStepperComponent;
 
   /**
    * Step content
@@ -68,22 +64,21 @@ export class NbStepComponent {
    */
   @Input()
   get completed(): boolean {
-    return this.completedValue || this.isCompleted;
+    return this._completed || this.isCompleted;
   }
-
   set completed(value: boolean) {
-    this.completedValue = convertToBoolProperty(value);
+    this._completed = convertToBoolProperty(value);
   }
+  protected _completed: boolean = false;
 
-  private completedValue: boolean = false;
-
-  private get isCompleted() {
+  protected get isCompleted() {
     return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;
   }
 
   interacted = false;
 
-  constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
+  constructor(@Inject(NB_STEPPER) stepper) {
+    this.stepper = stepper;
   }
 
   /**

@@ -6,10 +6,12 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { NbComponentShape } from '@nebular/theme';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
+import { NbBadgePosition } from '../badge/badge.component';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
@@ -215,7 +217,7 @@ export class NbUserComponent {
    * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() badgeStatus: string;
+  @Input() badgeStatus: NbComponentStatus;
 
   /**
    * Badge position.
@@ -224,7 +226,7 @@ export class NbUserComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() badgePosition: string;
+  @Input() badgePosition: NbBadgePosition;
 
   @HostBinding('class.size-tiny')
   get tiny(): boolean {
