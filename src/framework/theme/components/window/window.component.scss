@@ -9,7 +9,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 0;
     overflow: hidden;
   }
   .title {
@@ -24,11 +23,8 @@
     display: flex;
     justify-content: space-evenly;
 
-    .button {
-      background: none;
-      border: none;
+    [nbButton] {
       flex: 0 0 3rem;
-      padding: 0 0.8rem;
     }
   }
 }

@@ -7,12 +7,14 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
 
 /**
  * Action item, display a link with an icon, or any other content provided instead.
  */
 @Component({
   selector: 'nb-action',
+  styleUrls: ['./action.component.scss'],
   template: `
     <ng-container *ngIf="icon; else projectedContent">
       <a class="icon-container"
@@ -48,7 +50,6 @@ import { convertToBoolProperty } from '../helpers';
   `,
 })
 export class NbActionComponent {
-  @HostBinding('class.disabled') disabledValue: boolean = false;
 
   /**
    * Router link to use
@@ -69,19 +70,24 @@ export class NbActionComponent {
   @Input() title: string = '';
 
   /**
-   * Icon class to display
+   * Icon name
    * @type string
    */
   @Input() icon: string;
 
   /**
-   * Disables the item (changes item opacity and mouse cursor)
+   * Visually disables the item
    * @type boolean
    */
   @Input()
-  set disabled(val: boolean) {
-    this.disabledValue = convertToBoolProperty(val);
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   /**
    * Badge text to display
@@ -126,7 +132,7 @@ export class NbActionComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbActionsModule,
  *   ],
  * })
@@ -146,16 +152,29 @@ export class NbActionComponent {
  *
  * @styles
  *
- * actions-font-size:
- * actions-font-family:
- * actions-line-height:
- * actions-fg:
- * actions-bg:
- * actions-separator:
- * actions-padding:
- * actions-size-small:
- * actions-size-medium:
- * actions-size-large:
+ * actions-background-color:
+ * actions-divider-color:
+ * actions-divider-style:
+ * actions-divider-width:
+ * actions-text-color:
+ * actions-text-font-family:
+ * actions-text-font-weight:
+ * actions-text-line-height:
+ * actions-tiny-height:
+ * actions-tiny-padding:
+ * actions-tiny-text-font-size:
+ * actions-small-height:
+ * actions-small-padding:
+ * actions-small-text-font-size:
+ * actions-medium-height:
+ * actions-medium-padding:
+ * actions-medium-text-font-size:
+ * actions-large-height:
+ * actions-large-padding:
+ * actions-large-text-font-size:
+ * actions-giant-height:
+ * actions-giant-padding:
+ * actions-giant-text-font-size:
  */
 @Component({
   selector: 'nb-actions',
@@ -165,56 +184,54 @@ export class NbActionComponent {
   `,
 })
 export class NbActionsComponent {
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-
-  private sizeValue: string;
-
-  @HostBinding('class.inverse') inverseValue: boolean;
-
-  @HostBinding('class.small')
-  get small() {
-    return this.sizeValue === NbActionsComponent.SIZE_SMALL;
-  }
-
-  @HostBinding('class.medium')
-  get medium() {
-    return this.sizeValue === NbActionsComponent.SIZE_MEDIUM;
-  }
-
-  @HostBinding('class.large')
-  get large() {
-    return this.sizeValue === NbActionsComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.full-width')
-  fullWidthValue: boolean = false;
 
   /**
-   * Size of the component, small|medium|large
-   * @type string
+   * Size of the component: 'tiny', 'small' (default), 'medium', 'large', 'giant'
    */
   @Input()
-  set size(val: string) {
-    this.sizeValue = val;
+  get size(): NbComponentSize {
+    return this._size;
   }
-
-  /**
-   * Makes colors inverse based on current theme
-   * @type boolean
-   */
-  @Input()
-  set inverse(val: boolean) {
-    this.inverseValue = convertToBoolProperty(val);
+  set size(value: NbComponentSize) {
+    this._size = value;
   }
+  protected _size: NbComponentSize = 'small';
 
   /**
    * Component will fill full width of the container
-   * @type boolean
    */
   @Input()
-  set fullWidth(val: boolean) {
-    this.fullWidthValue = convertToBoolProperty(val);
+  @HostBinding('class.full-width')
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  protected _fullWidth: boolean = false;
+
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
   }
 }
