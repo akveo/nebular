@@ -13,9 +13,13 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
   selector: 'nb-calendar-pageable-navigation',
   styleUrls: ['./calendar-pageable-navigation.component.scss'],
   template: `
-    <i [ngClass]="{'nb-arrow-left': isLtr, 'nb-arrow-right': isRtl }" (click)="prev.emit()"></i>
+    <button nbButton (click)="prev.emit()" ghost>
+      <nb-icon [icon]="isLtr ? 'chevron-left-outline' : 'chevron-right-outline'" pack="nebular-essentials"></nb-icon>
+    </button>
     <nb-calendar-navigation [date]="date" (changeMode)="changeMode.emit()"></nb-calendar-navigation>
-    <i [ngClass]="{'nb-arrow-right': isLtr, 'nb-arrow-left': isRtl }" (click)="next.emit()"></i>
+    <button nbButton (click)="next.emit()" ghost>
+      <nb-icon [icon]="isLtr ? 'chevron-right-outline' : 'chevron-left-outline'" pack="nebular-essentials"></nb-icon>
+    </button>
   `,
 })
 export class NbCalendarPageableNavigationComponent<D> {

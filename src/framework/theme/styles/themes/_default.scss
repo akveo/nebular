@@ -1359,7 +1359,7 @@ $theme: (
   calendar-year-cell-large-width: calendar-month-cell-width,
   calendar-year-cell-large-height: calendar-month-cell-height,
 
-  overlay-backdrop-bg: rgba(0, 0, 0, 0.288),
+  overlay-backdrop-background-color: rgba(0, 0, 0, 0.288),
 
   tooltip-background-color: color-black,
   tooltip-border-color: transparent,
@@ -1484,13 +1484,14 @@ $theme: (
   tree-grid-icon-color: color-fg-text,
 
   icon-font-size: 1.25rem,
-  icon-width: icon-font-size,
-  icon-height: icon-font-size,
-  icon-primary-fg: color-primary,
-  icon-info-fg: color-info,
-  icon-success-fg: color-success,
-  icon-warning-fg: color-warning,
-  icon-danger-fg: color-danger,
+  icon-line-height: 1,
+  icon-width: 1em,
+  icon-height: 1em,
+  icon-primary-color: color-primary,
+  icon-info-color: color-info,
+  icon-success-color: color-success,
+  icon-warning-color: color-warning,
+  icon-danger-color: color-danger,
 );
 
 // register the theme
