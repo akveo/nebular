@@ -38,6 +38,7 @@ export * from './components/tabset/tabset.component';
 export * from './components/user/user.module';
 export * from './components/user/user.component';
 export * from './components/actions/actions.module';
+export * from './components/actions/actions.component';
 export * from './components/search/search.module';
 export * from './components/search/search.service';
 export * from './components/search/search.component';
