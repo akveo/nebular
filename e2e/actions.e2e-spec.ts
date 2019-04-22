@@ -5,7 +5,6 @@
  */
 
 import { browser } from 'protractor';
-import { NbBadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-action', () => {
@@ -19,7 +18,7 @@ describe('nb-action', () => {
     const badgesConf = {
       selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`,
       badges: [
-        { position: NbBadgeComponent.BOTTOM_LEFT, status: NbBadgeComponent.STATUS_SUCCESS, text: badgeText },
+        { position: 'bottom left', status: 'success', text: badgeText },
       ],
     };
     badgeTests(badgesConf);

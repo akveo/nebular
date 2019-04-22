@@ -5,7 +5,6 @@
  */
 
 import { Component } from '@angular/core';
-import { NbBadgeComponent } from '@nebular/theme';
 
 @Component({
   selector: 'nb-action-test',
@@ -87,38 +86,38 @@ import { NbBadgeComponent } from '@nebular/theme';
             <nb-actions size="large">
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_SUCCESS"
-                [badgePosition]="badge.BOTTOM_LEFT">
+                badgeStatus="success"
+                badgePosition="bottom left">
                 <nb-user></nb-user>
               </nb-action>
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_DANGER"
-                [badgePosition]="badge.TOP_LEFT"
+                badgeStatus="danger"
+                badgePosition="top left"
                 icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_WARNING"
-                [badgePosition]="badge.BOTTOM_RIGHT"
+                badgeStatus="warning"
+                badgePosition="bottom right"
                 icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_SUCCESS"
-                [badgePosition]="badge.BOTTOM_LEFT"
+                badgeStatus="success"
+                badgePosition="bottom left"
                 icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_INFO"
-                [badgePosition]="badge.TOP_RIGHT"
+                badgeStatus="info"
+                badgePosition="top right"
                 icon="search-outline">
               </nb-action>
               <nb-action
                 badgeText="29"
-                [badgeStatus]="badge.STATUS_INFO"
-                [badgePosition]="badge.TOP_RIGHT"
+                badgeStatus="info"
+                badgePosition="top right"
                 icon="search-outline"
                 disabled>
               </nb-action>
@@ -131,8 +130,6 @@ import { NbBadgeComponent } from '@nebular/theme';
   `,
 })
 export class ActionTestComponent {
-
-  badge = NbBadgeComponent;
 
   actionOnClick(event: any) {
     console.info(event);
