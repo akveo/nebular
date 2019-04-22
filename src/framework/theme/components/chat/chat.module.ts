@@ -50,7 +50,7 @@ export class NbChatModule {
     return <ModuleWithProviders> {
       ngModule: NbChatModule,
       providers: [
-        { provide: NbChatOptions, useValue: options },
+        { provide: NbChatOptions, useValue: options || {} },
       ],
     };
   }
@@ -59,7 +59,7 @@ export class NbChatModule {
     return <ModuleWithProviders> {
       ngModule: NbChatModule,
       providers: [
-        { provide: NbChatOptions, useValue: options },
+        { provide: NbChatOptions, useValue: options || {} },
       ],
     };
   }

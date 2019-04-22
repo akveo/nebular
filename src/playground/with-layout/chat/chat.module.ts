@@ -28,7 +28,7 @@ import { ChatTestComponent } from './chat-test.component';
   ],
   imports: [
     CommonModule,
-    NbChatModule.forRoot({}),
+    NbChatModule.forRoot(),
     NbCardModule,
     ChatRoutingModule ],
 })
