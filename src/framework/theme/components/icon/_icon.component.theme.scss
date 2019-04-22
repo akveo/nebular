@@ -8,23 +8,13 @@
   nb-icon {
     font-size: nb-theme(icon-font-size);
     line-height: nb-theme(icon-line-height);
-    width: 1em;
-    height: 1em;
+    width: nb-theme(icon-width);
+    height: nb-theme(icon-height);
+  }
 
-    &.primary-icon {
-      color: nb-theme(icon-primary-fg);
-    }
-    &.info-icon {
-      color: nb-theme(icon-info-fg);
-    }
-    &.success-icon {
-      color: nb-theme(icon-success-fg);
-    }
-    &.warning-icon {
-      color: nb-theme(icon-warning-fg);
-    }
-    &.danger-icon {
-      color: nb-theme(icon-danger-fg);
+  @each $status in nb-get-statuses() {
+    nb-icon.status-#{$status} {
+      color: nb-theme(icon-#{$status}-color);
     }
   }
 }
