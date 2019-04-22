@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbComponentSize } from '@nebular/theme';
 
 @Component({
   selector: 'nb-select-sizes',
@@ -16,4 +17,5 @@ import { Component } from '@angular/core';
   `],
 })
 export class SelectSizesComponent {
+  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
 }
