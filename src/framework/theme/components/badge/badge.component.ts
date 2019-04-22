@@ -4,8 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input } from '@angular/core';
-import { NbLayoutDirectionService } from '../../services/direction.service';
+import { Component, HostBinding, Input } from '@angular/core';
+
+import { NbComponentStatus } from '../component-status';
+
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end';
+export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
+
 
 /**
  * Badge is a simple labeling component.
@@ -22,7 +28,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbBadgeModule,
  *   ],
  * })
@@ -48,38 +54,29 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
  *
  * @styles
  *
- * badge-fg-text:
- * badge-primary-bg-color:
- * badge-success-bg-color:
- * badge-info-bg-color:
- * badge-warning-bg-color:
- * badge-danger-bg-color:
+ * badge-border-radius:
+ * badge-text-font-family:
+ * badge-text-font-size:
+ * badge-text-font-weight:
+ * badge-text-line-height:
+ * badge-padding:
+ * badge-primary-background-color:
+ * badge-primary-text-color:
+ * badge-success-background-color:
+ * badge-success-text-color:
+ * badge-info-background-color:
+ * badge-info-text-color:
+ * badge-warning-background-color:
+ * badge-warning-text-color:
+ * badge-danger-background-color:
+ * badge-danger-text-color:
  */
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `
-    <span class="nb-badge {{positionClass}} nb-badge-{{colorClass}}">{{text}}</span>
-  `,
+  template: `{{text}}`,
 })
 export class NbBadgeComponent {
-  static readonly TOP_LEFT = 'top left';
-  static readonly TOP_RIGHT = 'top right';
-  static readonly BOTTOM_LEFT = 'bottom left';
-  static readonly BOTTOM_RIGHT = 'bottom right';
-
-  static readonly TOP_START = 'top start';
-  static readonly TOP_END = 'top end';
-  static readonly BOTTOM_START = 'bottom start';
-  static readonly BOTTOM_END = 'bottom end';
-
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  colorClass: string = NbBadgeComponent.STATUS_PRIMARY;
 
   /**
    * Text to display
@@ -95,32 +92,74 @@ export class NbBadgeComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() position: string;
+  @Input()
+  get position(): NbBadgePosition {
+    return this._position;
+  }
+  set position(value: NbBadgePosition) {
+    this._position = value || this._defaultPosition;
+  }
+  protected _defaultPosition: NbBadgePosition = 'top right';
+  protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
    * Badge status (adds specific styles):
    * 'primary', 'info', 'success', 'warning', 'danger'
-   * @param {string} val
-   * @type string
    */
-  @Input() set status(value) {
-    if (value) {
-      this.colorClass = value;
-    }
+  @Input() status: NbComponentStatus = 'primary';
+
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
   }
 
-  get positionClass() {
-    if (!this.position) {
-      return NbBadgeComponent.TOP_RIGHT;
-    }
-
-    const isLtr = this.layoutDirectionService.isLtr();
-    const startValue = isLtr ? 'left' : 'right';
-    const endValue = isLtr ? 'right' : 'left';
-    return this.position
-      .replace(/\bstart\b/, startValue)
-      .replace(/\bend\b/, endValue);
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
   }
 
-  constructor(private layoutDirectionService: NbLayoutDirectionService) {}
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
+  }
+
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
+  }
+
+  @HostBinding('class.position-top')
+  get top(): boolean {
+    return this.position.includes('top');
+  }
+
+  @HostBinding('class.position-right')
+  get right(): boolean {
+    return this.position.includes('right');
+  }
+
+  @HostBinding('class.position-bottom')
+  get bottom(): boolean {
+    return this.position.includes('bottom');
+  }
+
+  @HostBinding('class.position-left')
+  get left(): boolean {
+    return this.position.includes('left');
+  }
+
+  @HostBinding('class.position-start')
+  get start(): boolean {
+    return this.position.includes('start');
+  }
+
+  @HostBinding('class.position-end')
+  get end(): boolean {
+    return this.position.includes('end');
+  }
 }

@@ -188,14 +188,14 @@ describe('NbActionComponent link with icon', () => {
 
   it('should pass set badge position and status to badge component', () => {
     actionComponent.badgeText = '1';
-    actionComponent.badgePosition = NbBadgeComponent.BOTTOM_RIGHT;
-    actionComponent.badgeStatus = NbBadgeComponent.STATUS_INFO;
+    actionComponent.badgePosition = 'bottom right';
+    actionComponent.badgeStatus = 'info';
     fixture.detectChanges();
 
     const badge = fixture.debugElement.query(By.directive(NbBadgeComponent));
     const badgeComponent: NbBadgeComponent = badge.componentInstance;
-    expect(badgeComponent.position).toEqual(NbBadgeComponent.BOTTOM_RIGHT);
-    expect(badgeComponent.colorClass).toEqual(NbBadgeComponent.STATUS_INFO);
+    expect(badgeComponent.position).toEqual('bottom right');
+    expect(badgeComponent.status).toEqual('info');
   });
 });
 
