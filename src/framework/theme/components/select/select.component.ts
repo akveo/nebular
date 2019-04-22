@@ -118,7 +118,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select statuses, select/select-status.component)
  *
- * There are four select sizes:
+ * There are five select sizes:
  *
  * @stacked-example(Select sizes, select/select-sizes.component)
  *
