@@ -10,6 +10,5 @@ import { Component } from '@angular/core';
   selector: 'nb-select-multiple',
   templateUrl: './select-multiple.component.html',
 })
-
 export class SelectMultipleComponent {
 }

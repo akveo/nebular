@@ -9,11 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-disabled',
   templateUrl: './select-disabled.component.html',
-  styles: [`
-    nb-select {
-      margin-bottom: 1rem;
-    }
-  `],
+  styleUrls: ['./select-example.scss'],
 })
 export class SelectDisabledComponent {
 }

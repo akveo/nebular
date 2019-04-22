@@ -1,0 +1,9 @@
+nb-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+nb-select:not(:only-child):not(:last-child) {
+  margin-bottom: 1rem;
+}

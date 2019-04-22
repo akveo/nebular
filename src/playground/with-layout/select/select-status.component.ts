@@ -9,11 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-status',
   templateUrl: './select-status.component.html',
-  styles: [`
-    nb-select {
-      margin-bottom: 1rem;
-    }
-  `],
+  styleUrls: ['./select-example.scss'],
 })
 export class SelectStatusComponent {
 }
