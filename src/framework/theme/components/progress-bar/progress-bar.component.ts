@@ -5,7 +5,9 @@
  */
 
 import { Component, HostBinding, Input } from '@angular/core';
-import { NbComponentSize, NbComponentStatus } from '@nebular/theme';
+
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
 
 /**
  * Progress Bar is a component for indicating progress.

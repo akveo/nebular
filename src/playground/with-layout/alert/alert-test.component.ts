@@ -29,9 +29,9 @@ import { Component } from '@angular/core';
 })
 export class AlertTestComponent {
 
-  sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
-  statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
-  accents = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
+  sizes = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+  statuses = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  accents = [ 'primary', 'success', 'info', 'warning', 'danger' ];
 
   alerts: any[];
   accentAlerts: any;

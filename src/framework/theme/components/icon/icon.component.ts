@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+import { NbComponentStatus } from '../component-status';
 import { NbIconLibraries } from './icon-libraries';
 
 /**
@@ -46,7 +47,7 @@ import { NbIconLibraries } from './icon-libraries';
  *
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbEvaIconsModule,
  *   ],
  * })
@@ -56,7 +57,7 @@ import { NbIconLibraries } from './icon-libraries';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbIconModule,
  *   ],
  * })
@@ -85,13 +86,14 @@ import { NbIconLibraries } from './icon-libraries';
  * @styles
  *
  * icon-font-size:
+ * icon-line-height:
  * icon-width:
  * icon-height:
- * icon-primary-fg:
- * icon-info-fg:
- * icon-success-fg:
- * icon-warning-fg:
- * icon-danger-fg:
+ * icon-primary-color:
+ * icon-info-color:
+ * icon-success-color:
+ * icon-warning-color:
+ * icon-danger-color:
  */
 @Component({
   selector: 'nb-icon',
@@ -101,41 +103,35 @@ import { NbIconLibraries } from './icon-libraries';
 })
 export class NbIconComponent implements OnChanges, OnInit {
 
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  private iconDef;
-  private prevClasses = [];
+  protected iconDef;
+  protected prevClasses = [];
 
   @HostBinding('innerHtml')
   html: SafeHtml;
 
-  @HostBinding('class.primary-icon')
+  @HostBinding('class.status-primary')
   get primary() {
-    return this.status === NbIconComponent.STATUS_PRIMARY;
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.info-icon')
+  @HostBinding('class.status-info')
   get info() {
-    return this.status === NbIconComponent.STATUS_INFO;
+    return this.status === 'info';
   }
 
-  @HostBinding('class.success-icon')
+  @HostBinding('class.status-success')
   get success() {
-    return this.status === NbIconComponent.STATUS_SUCCESS;
+    return this.status === 'success';
   }
 
-  @HostBinding('class.warning-icon')
+  @HostBinding('class.status-warning')
   get warning() {
-    return this.status === NbIconComponent.STATUS_WARNING;
+    return this.status === 'warning';
   }
 
-  @HostBinding('class.danger-icon')
+  @HostBinding('class.status-danger')
   get danger() {
-    return this.status === NbIconComponent.STATUS_DANGER;
+    return this.status === 'danger';
   }
 
   /**
@@ -158,16 +154,15 @@ export class NbIconComponent implements OnChanges, OnInit {
 
   /**
    * Icon status (adds specific styles):
-   * primary, info, success, warning, danger
-   * @param {string} status
+   * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: string;
+  @Input() status: NbComponentStatus;
 
   constructor(
-    private sanitizer: DomSanitizer,
-    private iconLibrary: NbIconLibraries,
-    private el: ElementRef,
-    private renderer: Renderer2,
+    protected sanitizer: DomSanitizer,
+    protected iconLibrary: NbIconLibraries,
+    protected el: ElementRef,
+    protected renderer: Renderer2,
   ) {}
 
   ngOnInit() {

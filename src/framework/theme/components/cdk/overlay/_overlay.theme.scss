@@ -2,7 +2,7 @@
 
 @mixin nb-overlay-theme {
   .overlay-backdrop {
-    background: nb-theme(overlay-backdrop-bg);
+    background: nb-theme(overlay-backdrop-background-color);
   }
 
   .cdk-overlay-container {

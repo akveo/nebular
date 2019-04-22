@@ -5,23 +5,19 @@
  */
 
 @mixin nb-badge-theme() {
-  .nb-badge {
-    color: nb-theme(badge-fg-text);
+  nb-badge {
+    border-radius: nb-theme(badge-border-radius);
+    font-family: nb-theme(badge-text-font-family);
+    font-size: nb-theme(badge-text-font-size);
+    font-weight: nb-theme(badge-text-font-weight);
+    line-height: nb-theme(badge-text-line-height);
+    padding: nb-theme(badge-padding);
+  }
 
-    &.nb-badge-primary {
-      background-color: nb-theme(badge-primary-bg-color);
-    }
-    &.nb-badge-info {
-      background-color: nb-theme(badge-info-bg-color);
-    }
-    &.nb-badge-success {
-      background-color: nb-theme(badge-success-bg-color);
-    }
-    &.nb-badge-warning {
-      background-color: nb-theme(badge-warning-bg-color);
-    }
-    &.nb-badge-danger {
-      background-color: nb-theme(badge-danger-bg-color);
+  @each $status in nb-get-statuses() {
+    nb-badge.status-#{$status} {
+      color: nb-theme(badge-#{$status}-text-color);
+      background-color: nb-theme(badge-#{$status}-background-color);
     }
   }
 }
