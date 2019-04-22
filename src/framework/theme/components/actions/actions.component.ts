@@ -8,6 +8,8 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
+import { NbBadgePosition } from '../badge/badge.component';
 
 /**
  * Action item, display a link with an icon, or any other content provided instead.
@@ -100,7 +102,7 @@ export class NbActionComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: string;
+  @Input() badgeStatus: NbComponentStatus;
 
   /**
    * Badge position.
@@ -109,7 +111,7 @@ export class NbActionComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() badgePosition: string;
+  @Input() badgePosition: NbBadgePosition;
 }
 
 /**
