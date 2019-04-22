@@ -498,9 +498,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.appearance === 'outline';
   }
   set outline(value: boolean) {
-    this._outline = convertToBoolProperty(value);
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'outline';
+    }
   }
-  protected _outline: boolean = false;
 
   /**
    * Adds `filled` styles
@@ -511,9 +512,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.appearance === 'filled';
   }
   set filled(value: boolean) {
-    this._filled = convertToBoolProperty(value);
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'filled';
+    }
   }
-  protected _filled: boolean = false;
 
   /**
    * Adds `hero` styles
@@ -524,9 +526,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.appearance === 'hero';
   }
   set hero(value: boolean) {
-    this._hero = convertToBoolProperty(value);
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'hero';
+    }
   }
-  protected _hero: boolean = false;
 
   /**
    * Disables the select
