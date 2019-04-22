@@ -16,6 +16,11 @@
 
     color: nb-theme(toastr-text-color);
 
+    &.destroy-by-click:hover {
+      background: nb-theme(toastr-destroyable-hover-background);
+      border-color: nb-theme(toastr-destroyable-hover-border-color);
+    }
+
     .title {
       font-family: nb-theme(toastr-subtitle-text-font-family);
       font-size: nb-theme(toastr-subtitle-text-font-size);
@@ -51,6 +56,11 @@
       background: nb-theme(toastr-#{$status}-background);
       border-color: nb-theme(toastr-#{$status}-border-color);
       color: nb-theme(toastr-#{$status}-text-color);
+
+      &.destroy-by-click:hover {
+        background: nb-theme(toastr-destroyable-hover-#{$status}-background);
+        border-color: nb-theme(toastr-destroyable-hover-#{$status}-border-color);
+      }
 
       .icon-container {
         background: nb-theme(toastr-icon-#{$status}-background);
