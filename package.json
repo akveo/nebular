@@ -41,7 +41,6 @@
     "build:inline-schematics-resources": "gulp inline-schematics-resources",
     "build:inline-resources": "gulp inline-resources",
     "build:bundle": "gulp bundle",
-    "build:bundle-theme": "gulp bundle:umd:theme",
     "build:rename:dev": "gulp bundle:rename-dev",
     "build:schematics": "rimraf ./schematics/dist && tsc -p ./schematics/tsconfig.json && gulp copy-schematics",
     "test": "ng test",
@@ -80,7 +79,7 @@
     "gen:playground-components": "ng g .:playground-components",
     "gulp:change-prefix": "gulp change-prefix",
     "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
-    "build:custom-prefix": "npm-run-all -s clean:tmp:lib \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle-theme clean:tmp --"
+    "build:custom-prefix": "npm-run-all -s clean:tmp:lib \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --"
   },
   "keywords": [
     "angular",
