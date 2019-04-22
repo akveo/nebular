@@ -6,8 +6,7 @@
 
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
-import { NbToast, NbToastStatus } from './model';
-
+import { NbToast } from './model';
 
 /**
  * The `NbToastComponent` is responsible for rendering each toast with appropriate styles.
@@ -32,34 +31,29 @@ export class NbToastComponent {
 
   @Output() destroy: EventEmitter<void> = new EventEmitter();
 
-  @HostBinding('class.success')
+  @HostBinding('class.status-success')
   get success(): boolean {
-    return this.toast.config.status === NbToastStatus.SUCCESS;
+    return this.toast.config.status === 'success';
   }
 
-  @HostBinding('class.info')
+  @HostBinding('class.status-info')
   get info(): boolean {
-    return this.toast.config.status === NbToastStatus.INFO;
+    return this.toast.config.status === 'info';
   }
 
-  @HostBinding('class.warning')
+  @HostBinding('class.status-warning')
   get warning(): boolean {
-    return this.toast.config.status === NbToastStatus.WARNING;
+    return this.toast.config.status === 'warning';
   }
 
-  @HostBinding('class.primary')
+  @HostBinding('class.status-primary')
   get primary(): boolean {
-    return this.toast.config.status === NbToastStatus.PRIMARY;
+    return this.toast.config.status === 'primary';
   }
 
-  @HostBinding('class.danger')
+  @HostBinding('class.status-danger')
   get danger(): boolean {
-    return this.toast.config.status === NbToastStatus.DANGER;
-  }
-
-  @HostBinding('class.default')
-  get default(): boolean {
-    return this.toast.config.status === NbToastStatus.DEFAULT;
+    return this.toast.config.status === 'danger';
   }
 
   @HostBinding('class.destroy-by-click')
@@ -69,7 +63,7 @@ export class NbToastComponent {
 
   @HostBinding('class.has-icon')
   get hasIcon(): boolean {
-    return this.toast.config.hasIcon && this.toast.config.status !== NbToastStatus.DEFAULT;
+    return this.toast.config.hasIcon && !!this.toast.config.status;
   }
 
   @HostBinding('class.custom-icon')

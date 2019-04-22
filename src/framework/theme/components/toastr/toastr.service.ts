@@ -17,7 +17,7 @@ import {
 } from '../cdk';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
-import { NbToast, NbToastStatus } from './model';
+import { NbToast } from './model';
 import { NbToastComponent } from './toast.component';
 import { NB_DOCUMENT } from '../../theme.options';
 
@@ -231,41 +231,41 @@ export class NbToastrService {
    * Shows success toast with message, title and user config.
    * */
   success(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.SUCCESS });
+    return this.show(message, title, { ...config, status: 'success' });
   }
 
   /**
    * Shows info toast with message, title and user config.
    * */
   info(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.INFO });
+    return this.show(message, title, { ...config, status: 'info' });
   }
 
   /**
    * Shows warning toast with message, title and user config.
    * */
   warning(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.WARNING });
+    return this.show(message, title, { ...config, status: 'warning' });
   }
 
   /**
    * Shows primary toast with message, title and user config.
    * */
   primary(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.PRIMARY });
+    return this.show(message, title, { ...config, status: 'primary' });
   }
 
   /**
    * Shows danger toast with message, title and user config.
    * */
   danger(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.DANGER });
+    return this.show(message, title, { ...config, status: 'danger' });
   }
 
   /**
    * Shows default toast with message, title and user config.
    * */
   default(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: NbToastStatus.DEFAULT });
+    return this.show(message, title, { ...config, status: '' });
   }
 }
