@@ -108,7 +108,7 @@
     }
   }
 
-  @include select-outline;
+  @include select-outline();
   @include select-filled;
   @include select-hero;
 }
