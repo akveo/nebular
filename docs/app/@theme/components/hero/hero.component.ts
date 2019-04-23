@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
-      <h1>Angular 7: Components, Auth&nbsp;&&nbsp;Security</h1>
+      <h1>Angular 7: UI Kit, Auth&nbsp;&&nbsp;Security</h1>
       <div class="btns-wrapper">
         <a class="btn get-started" routerLink="docs">Get Started</a>
         <a class="btn" href="http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_button"
@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             35+
           </div>
           <h3 class="feature-title">
-            Native Components
+            Angular Components
           </h3>
         </div>
         <div class="hero-feature">

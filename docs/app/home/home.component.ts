@@ -62,8 +62,8 @@ export class NgdHomeComponent {
       icon: 'assets/img/modular.svg',
     },
     {
-      title: 'Native',
-      description: `Components are written in pure Angular with no 3rd-party dependencies.`,
+      title: 'Angular',
+      description: `Components are written in pure Angular without 3rd-party dependencies.`,
       icon: 'assets/img/native.svg',
     },
     {
