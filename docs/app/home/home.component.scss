@@ -4,6 +4,7 @@
 
   $convex-bg: linear-gradient(to bottom, #f1f3f6 0, transparent 18%);
   $content-width: nb-theme(content-width);
+  $max-width: 960px;
 
   .content-center {
     max-width: $content-width;
@@ -49,7 +50,7 @@
   .features {
     margin-top: 5rem;
     justify-content: center;
-    max-width: 960px;
+    max-width: $max-width;
   }
 
   .features, .advantages {
@@ -61,8 +62,13 @@
     overflow: hidden;
 
     > .content-center {
-      max-width: 960px;
+      max-width: $max-width;
     }
+  }
+
+  ngd-footer {
+    max-width: $max-width;
+    margin: 0 auto;
   }
 
   @include media-breakpoint-up(is) {

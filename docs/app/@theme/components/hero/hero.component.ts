@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <div class="hero-features">
         <div class="hero-feature">
           <div class="feature-key">
-            30+
+            35+
           </div>
           <h3 class="feature-title">
             Native Components
@@ -38,7 +38,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         </div>
         <div class="hero-feature">
           <div class="feature-key">
-            icon
+            <nb-icon icon="lock"></nb-icon>
           </div>
           <h3 class="feature-title">
             Security

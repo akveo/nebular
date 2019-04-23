@@ -51,10 +51,6 @@ import {
   NgdMetadataService,
 } from './services';
 
-import {
-  EvaIconsPipe,
-} from './pipes';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -79,7 +75,6 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdSearchComponent,
-    EvaIconsPipe,
   ],
   exports: [
     CommonModule,
@@ -103,7 +98,6 @@ import {
     NgdPageTabsComponent,
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
-    EvaIconsPipe,
   ],
 })
 export class NgdThemeModule {
