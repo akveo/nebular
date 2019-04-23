@@ -330,7 +330,7 @@
     <g>
       <path d="M76.67 162.327h395a8 8 0 0 1 8 8v35a8 8 0 0 1-8 8h-395a8 8 0 0 1-8-8v-35a8 8 0 0 1 8-8z" fill="#FFF" fill-rule="nonzero"/>
       <path d="M388.728 169.362h73.584c3.566 0 4.86.371 6.163 1.068a7.27 7.27 0 0 1 3.024 3.025c.697 1.303 1.069 2.596 1.069 6.162v16.42c0 3.566-.372 4.86-1.069 6.163a7.27 7.27 0 0 1-3.024 3.024c-1.304.698-2.597 1.069-6.163 1.069h-73.584c-3.566 0-4.86-.371-6.163-1.069a7.27 7.27 0 0 1-3.024-3.024c-.697-1.303-1.068-2.597-1.068-6.163v-16.42c0-3.566.37-4.859 1.068-6.162a7.27 7.27 0 0 1 3.024-3.025c1.304-.697 2.597-1.068 6.163-1.068z" fill="#598BFF"/>
-      <text font-family="OpenSans-ExtraBold, Open Sans" font-size="14.4" font-weight="600" fill="#FFF" transform="translate(378.473 169.362)">
+      <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" font-size="14.4" font-weight="600" fill="#FFF" transform="translate(378.473 169.362)">
         <tspan x="18" y="24.466">SEARCH</tspan>
       </text>
       <path d="M105.118 184.922c-.28 6.323-5.631 11.223-11.955 10.944-6.324-.28-11.224-5.632-10.945-11.956.28-6.323 5.632-11.223 11.956-10.944 6.324.279 11.223 5.632 10.944 11.956" fill="#97BDFF"/>
