@@ -188,5 +188,3 @@ enableDarkTheme() {
 ## Related Articles
 
 - [Theme System Concepts](docs/guides/theme-system).
-- [Default Theme variables table](docs/themes/default).
-- [Cosmic Theme variables table](docs/themes/cosmic).

@@ -19,9 +19,10 @@ export class NgdStylesService {
         prop.themedValues = [];
         for (const themeName in this.docs.themes) {
           if (this.docs.themes.hasOwnProperty(themeName)) {
+            const theme = this.docs.themes[themeName];
             prop.themedValues.push({
-              theme: this.docs.themes[themeName].name,
-              value: this.docs.themes[themeName].data[prop.name].value,
+              theme: theme.name,
+              value: theme.data[prop.name] ? theme.data[prop.name].value : 'unknown',
             });
           }
         }
