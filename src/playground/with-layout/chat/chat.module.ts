@@ -26,6 +26,10 @@ import { ChatTestComponent } from './chat-test.component';
     ChatSizesComponent,
     ChatTestComponent,
   ],
-  imports: [ CommonModule, NbChatModule, NbCardModule, ChatRoutingModule ],
+  imports: [
+    CommonModule,
+    NbChatModule.forRoot(),
+    NbCardModule,
+    ChatRoutingModule ],
 })
 export class ChatModule {}

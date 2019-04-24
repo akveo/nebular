@@ -9,7 +9,7 @@ import { NbButtonModule } from '../button/button.module';
 import { NbSelectComponent, NbSelectLabelComponent } from './select.component';
 import { NbOptionComponent } from './option.component';
 import { NbOptionGroupComponent } from './option-group.component';
-
+import { NbIconModule } from '../icon/icon.module';
 
 const NB_SELECT_COMPONENTS = [
   NbSelectComponent,
@@ -19,7 +19,15 @@ const NB_SELECT_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [NbSharedModule, NbOverlayModule, NbButtonModule, NbInputModule, NbCardModule, NbCheckboxModule],
+  imports: [
+    NbSharedModule,
+    NbOverlayModule,
+    NbButtonModule,
+    NbInputModule,
+    NbCardModule,
+    NbCheckboxModule,
+    NbIconModule,
+  ],
   exports: [...NB_SELECT_COMPONENTS],
   declarations: [...NB_SELECT_COMPONENTS],
 })

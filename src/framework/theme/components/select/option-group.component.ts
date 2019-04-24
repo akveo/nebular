@@ -13,23 +13,25 @@ import { convertToBoolProperty } from '../helpers';
   styleUrls: ['./option-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span>{{ title }}</span>
+    <span class="option-group-title">{{ title }}</span>
     <ng-content select="nb-option, ng-container"></ng-content>
   `,
 })
 export class NbOptionGroupComponent {
   @Input() title: string;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
-  disabled: boolean = false;
-
-  @HostBinding('class.disabled')
-  get disabledClass(): boolean {
-    return this.disabled;
+  @HostBinding('attr.disabled')
+  get disabledAttribute(): '' | null {
+    return this.disabled ? '' : null;
   }
 }
 
