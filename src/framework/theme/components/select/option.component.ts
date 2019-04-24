@@ -19,7 +19,9 @@ import {
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
 import { convertToBoolProperty } from '../helpers';
+import { NbFocusableOption } from '../cdk';
 import { NbSelectComponent } from './select.component';
 
 
@@ -41,7 +43,8 @@ import { NbSelectComponent } from './select.component';
     </ng-template>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy {
+export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
+
   /**
    * Option value that will be fired on selection.
    * */
@@ -106,9 +109,19 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.disabled ? '' : null;
   }
 
-  @HostListener('click')
-  onClick() {
+  @HostBinding('tabIndex')
+  get tabindex() {
+    return '-1';
+  }
+
+  @HostListener('click', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  @HostListener('keydown.enter', ['$event'])
+  onClick(event: Event) {
     this.click$.next(this);
+
+    // Prevent scroll on space click, etc.
+    event.preventDefault();
   }
 
   select() {
@@ -132,5 +145,13 @@ export class NbOptionComponent<T> implements OnDestroy {
       this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
+  }
+
+  focus(): void {
+    this.elementRef.nativeElement.focus();
+  }
+
+  getLabel(): string {
+    return this.content;
   }
 }
