@@ -867,7 +867,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
           this.button.nativeElement.focus();
           this.hide();
         } else {
-          this.keyManager.onKeydown(event)
+          this.keyManager.onKeydown(event);
         }
       });
 
