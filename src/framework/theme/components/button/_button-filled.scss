@@ -39,6 +39,7 @@
         &[disabled] {
           background-color: nb-theme(button-filled-#{$status}-disabled-background-color);
           border-color: nb-theme(button-filled-#{$status}-disabled-border-color);
+          color: nb-theme(button-filled-#{$status}-disabled-text-color);
         }
       }
     }

@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
     <nb-card>
       <nb-card-body>
         <input type="text" nbInput placeholder="Text field">
+        <input type="text" nbInput placeholder="Disabled Text field" disabled>
       </nb-card-body>
     </nb-card>
   `,
