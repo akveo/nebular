@@ -99,7 +99,7 @@ describe('NbOptionGroupComponent', () => {
     expect(optionGroup.attributes.disabled).toEqual(null);
   });
 
-  it('should disable options if set disabled', () => {
+  it('should disable group options if group disabled', () => {
     const setDisabledSpy = spyOn(optionComponent, 'setDisabledByGroupState');
 
     optionGroupComponent.disabled = true;
@@ -109,7 +109,7 @@ describe('NbOptionGroupComponent', () => {
     expect(setDisabledSpy).toHaveBeenCalledWith(true);
   });
 
-  it('should enable options if set enabled', () => {
+  it('should enable group options if group enabled', () => {
     testComponent.optionDisabled = true;
     fixture.detectChanges();
 
