@@ -26,7 +26,7 @@ describe('Component: NbAlert', () => {
     fixture.detectChanges();
     expect(
       fixture
-        .debugElement.nativeElement.classList.contains('danger-alert'))
+        .debugElement.nativeElement.classList.contains('status-danger'))
       .toBeTruthy()
   });
 
@@ -49,11 +49,11 @@ describe('Component: NbAlert', () => {
   });
 
   it('should set size class', () => {
-    alert.size = 'xxsmall';
+    alert.size = 'small';
     fixture.detectChanges();
     expect(
       fixture
-        .debugElement.nativeElement.classList.contains('xxsmall-alert'))
+        .debugElement.nativeElement.classList.contains('size-small'))
       .toBeTruthy()
   });
 });

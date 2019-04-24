@@ -6,7 +6,6 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbBadgeComponent } from '@nebular/theme';
 
 @Component({
   selector: 'nb-tabset-test',
@@ -79,26 +78,26 @@ import { NbBadgeComponent } from '@nebular/theme';
       </nb-tab>
       <nb-tab tabTitle="Tab #2"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_INFO"
-        [badgePosition]="badge.TOP_LEFT">
+        badgeStatus="info"
+        badgePosition="top left">
         <span>Content #2</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #3"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_SUCCESS"
-        [badgePosition]="badge.BOTTOM_RIGHT">
+        badgeStatus="success"
+        badgePosition="bottom right">
         <span>Content #3</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #4"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_DANGER"
-        [badgePosition]="badge.BOTTOM_LEFT">
+        badgeStatus="danger"
+        badgePosition="bottom left">
         <span>Content #4</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #5"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_WARNING"
-        [badgePosition]="badge.BOTTOM_RIGHT">
+        badgeStatus="warning"
+        badgePosition="bottom right">
         <span>Content #5</span>
       </nb-tab>
     </nb-tabset>
@@ -108,26 +107,26 @@ import { NbBadgeComponent } from '@nebular/theme';
       </nb-tab>
       <nb-tab tabTitle="Tab #2"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_INFO"
-        [badgePosition]="badge.BOTTOM_RIGHT">
+        badgeStatus="info"
+        badgePosition="bottom right">
         <span>Content #2</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #3"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_SUCCESS"
-        [badgePosition]="badge.TOP_LEFT">
+        badgeStatus="success"
+        badgePosition="top left">
         <span>Content #3</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #4"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_DANGER"
-        [badgePosition]="badge.BOTTOM_LEFT">
+        badgeStatus="danger"
+        badgePosition="bottom left">
         <span>Content #4</span>
       </nb-tab>
       <nb-tab tabTitle="Tab #5"
         badgeText="29"
-        [badgeStatus]="badge.STATUS_WARNING"
-        [badgePosition]="badge.BOTTOM_RIGHT">
+        badgeStatus="warning"
+        badgePosition="bottom right">
         <span>Content #5</span>
       </nb-tab>
     </nb-tabset>
@@ -148,8 +147,6 @@ import { NbBadgeComponent } from '@nebular/theme';
   `,
 })
 export class TabsetTestComponent {
-
-  badge = NbBadgeComponent;
 
   constructor(private router: Router) {
   }

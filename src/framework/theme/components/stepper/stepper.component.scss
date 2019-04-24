@@ -1,5 +1,5 @@
-:host {
-  &.horizontal .header {
+:host(.horizontal) {
+  .header {
     .step {
       flex-direction: column;
     }
@@ -9,20 +9,24 @@
     }
   }
 
-  &.vertical {
-    display: flex;
-    height: 100%;
+  .label-index {
+    margin-bottom: 10px;
+  }
+}
 
-    .header {
-      flex-direction: column;
+:host(.vertical) {
+  display: flex;
+  height: 100%;
 
-      .label {
-        margin: 0 10px;
-      }
+  .header {
+    flex-direction: column;
 
-      .connector {
-        width: 2px;
-      }
+    .label {
+      margin: 0 10px;
+    }
+
+    .connector {
+      width: 2px;
     }
   }
 }
@@ -41,13 +45,13 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+
     &.noninteractive {
       cursor: default;
     }
   }
 
   .label-index {
-    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

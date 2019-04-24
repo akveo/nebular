@@ -5,6 +5,9 @@
  */
 
 import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 
@@ -27,7 +30,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbAlertModule,
  *   ],
  * })
@@ -56,39 +59,52 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * alert-font-size:
- * alert-line-height:
- * alert-font-weight:
- * alert-fg:
- * alert-outline-fg:
- * alert-bg:
- * alert-active-bg:
- * alert-disabled-bg:
- * alert-disabled-fg:
- * alert-primary-bg:
- * alert-info-bg:
- * alert-success-bg:
- * alert-warning-bg:
- * alert-danger-bg:
- * alert-height-xxsmall:
- * alert-height-xsmall:
- * alert-height-small:
- * alert-height-medium:
- * alert-height-large:
- * alert-height-xlarge:
- * alert-height-xxlarge:
- * alert-shadow:
+ * alert-background-color:
  * alert-border-radius:
+ * alert-bottom-margin:
  * alert-padding:
- * alert-closable-padding:
- * alert-button-padding:
- * alert-margin:
+ * alert-scrollbar-color:
+ * alert-scrollbar-background-color:
+ * alert-scrollbar-width:
+ * alert-shadow:
+ * alert-text-color:
+ * alert-text-font-family:
+ * alert-text-font-size:
+ * alert-text-font-weight:
+ * alert-text-line-height:
+ * alert-closable-start-padding:
+ * alert-tiny-height:
+ * alert-small-height:
+ * alert-medium-height:
+ * alert-medium-padding:
+ * alert-large-height:
+ * alert-giant-height:
+ * alert-primary-background-color:
+ * alert-primary-text-color:
+ * alert-success-background-color:
+ * alert-success-text-color:
+ * alert-info-background-color:
+ * alert-info-text-color:
+ * alert-warning-background-color:
+ * alert-warning-text-color:
+ * alert-danger-background-color:
+ * alert-danger-text-color:
+ * alert-accent-primary-color:
+ * alert-accent-info-color:
+ * alert-accent-success-color:
+ * alert-accent-warning-color:
+ * alert-accent-danger-color:
+ * alert-outline-primary-color:
+ * alert-outline-info-color:
+ * alert-outline-success-color:
+ * alert-outline-warning-color:
+ * alert-outline-danger-color:
  */
 @Component({
   selector: 'nb-alert',
   styleUrls: ['./alert.component.scss'],
   template: `
-    <button *ngIf="closableValue" type="button" class="close" aria-label="Close" (click)="onClose()">
+    <button *ngIf="closable" type="button" class="close" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
     <ng-content></ng-content>
@@ -96,248 +112,46 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbAlertComponent {
 
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
+  /**
+   * Alert size, available sizes:
+   * `tiny`, `small`, `medium`, `large`, `giant`
+   * Unset by default.
+   */
+  @Input() size: '' | NbComponentSize = '';
 
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
+  /**
+   * Alert status (adds specific styles):
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
+   */
+  @Input() status: '' | NbComponentStatus = '';
 
-  static readonly ACCENT_ACTIVE = 'active';
-  static readonly ACCENT_DISABLED = 'disabled';
-  static readonly ACCENT_PRIMARY = 'primary';
-  static readonly ACCENT_INFO = 'info';
-  static readonly ACCENT_SUCCESS = 'success';
-  static readonly ACCENT_WARNING = 'warning';
-  static readonly ACCENT_DANGER = 'danger';
+  /**
+   * Alert accent (color of the top border):
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
+   */
+  @Input() accent: '' | NbComponentStatus = '';
 
-  static readonly OUTLINE_ACTIVE = 'active';
-  static readonly OUTLINE_DISABLED = 'disabled';
-  static readonly OUTLINE_PRIMARY = 'primary';
-  static readonly OUTLINE_INFO = 'info';
-  static readonly OUTLINE_SUCCESS = 'success';
-  static readonly OUTLINE_WARNING = 'warning';
-  static readonly OUTLINE_DANGER = 'danger';
-
-  size: string;
-  status: string;
-  accent: string;
-  outline: string;
-
-  @HostBinding('class.closable')
-  closableValue: boolean = false;
+  /**
+   * Alert outline (color of the border):
+   * `primary`, `success`, `info`, `warning`, `danger`.
+   * Unset by default.
+   */
+  @Input() outline: '' | NbComponentStatus = '';
 
   /**
    * Shows `close` icon
    */
   @Input()
-  set closable(val: boolean) {
-    this.closableValue = convertToBoolProperty(val);
+  @HostBinding('class.closable')
+  get closable(): boolean {
+    return this._closable;
   }
-
-  @HostBinding('class.xxsmall-alert')
-  get xxsmall() {
-    return this.size === NbAlertComponent.SIZE_XXSMALL;
+  set closable(value: boolean) {
+    this._closable = convertToBoolProperty(value);
   }
-
-  @HostBinding('class.xsmall-alert')
-  get xsmall() {
-    return this.size === NbAlertComponent.SIZE_XSMALL;
-  }
-
-  @HostBinding('class.small-alert')
-  get small() {
-    return this.size === NbAlertComponent.SIZE_SMALL;
-  }
-
-  @HostBinding('class.medium-alert')
-  get medium() {
-    return this.size === NbAlertComponent.SIZE_MEDIUM;
-  }
-
-  @HostBinding('class.large-alert')
-  get large() {
-    return this.size === NbAlertComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.xlarge-alert')
-  get xlarge() {
-    return this.size === NbAlertComponent.SIZE_XLARGE;
-  }
-
-  @HostBinding('class.xxlarge-alert')
-  get xxlarge() {
-    return this.size === NbAlertComponent.SIZE_XXLARGE;
-  }
-
-  @HostBinding('class.active-alert')
-  get active() {
-    return this.status === NbAlertComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.disabled-alert')
-  get disabled() {
-    return this.status === NbAlertComponent.STATUS_DISABLED;
-  }
-
-  @HostBinding('class.primary-alert')
-  get primary() {
-    return this.status === NbAlertComponent.STATUS_PRIMARY;
-  }
-
-  @HostBinding('class.info-alert')
-  get info() {
-    return this.status === NbAlertComponent.STATUS_INFO;
-  }
-
-  @HostBinding('class.success-alert')
-  get success() {
-    return this.status === NbAlertComponent.STATUS_SUCCESS;
-  }
-
-  @HostBinding('class.warning-alert')
-  get warning() {
-    return this.status === NbAlertComponent.STATUS_WARNING;
-  }
-
-  @HostBinding('class.danger-alert')
-  get danger() {
-    return this.status === NbAlertComponent.STATUS_DANGER;
-  }
-
-  @HostBinding('class.accent')
-  get hasAccent() {
-    return this.accent;
-  }
-
-  @HostBinding('class.status')
-  get hasStatus() {
-    return this.status;
-  }
-
-  @HostBinding('class.accent-primary')
-  get primaryAccent() {
-    return this.accent === NbAlertComponent.ACCENT_PRIMARY;
-  }
-
-  @HostBinding('class.accent-info')
-  get infoAccent() {
-    return this.accent === NbAlertComponent.ACCENT_INFO;
-  }
-
-  @HostBinding('class.accent-success')
-  get successAccent() {
-    return this.accent === NbAlertComponent.ACCENT_SUCCESS;
-  }
-
-  @HostBinding('class.accent-warning')
-  get warningAccent() {
-    return this.accent === NbAlertComponent.ACCENT_WARNING;
-  }
-
-  @HostBinding('class.accent-danger')
-  get dangerAccent() {
-    return this.accent === NbAlertComponent.ACCENT_DANGER;
-  }
-
-  @HostBinding('class.accent-active')
-  get activeAccent() {
-    return this.accent === NbAlertComponent.ACCENT_ACTIVE;
-  }
-
-  @HostBinding('class.accent-disabled')
-  get disabledAccent() {
-    return this.accent === NbAlertComponent.ACCENT_DISABLED;
-  }
-
-  @HostBinding('class.outline')
-  get hasOutline() {
-    return this.outline;
-  }
-
-  @HostBinding('class.outline-primary')
-  get primaryOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_PRIMARY;
-  }
-
-  @HostBinding('class.outline-info')
-  get infoOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_INFO;
-  }
-
-  @HostBinding('class.outline-success')
-  get successOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_SUCCESS;
-  }
-
-  @HostBinding('class.outline-warning')
-  get warningOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_WARNING;
-  }
-
-  @HostBinding('class.outline-danger')
-  get dangerOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_DANGER;
-  }
-
-  @HostBinding('class.outline-active')
-  get activeOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_ACTIVE;
-  }
-
-  @HostBinding('class.outline-disabled')
-  get disabledOutline() {
-    return this.outline === NbAlertComponent.OUTLINE_DISABLED;
-  }
-
-  /**
-   * Alert size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
-   */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
-
-  /**
-   * Alert status (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
-
-  /**
-   * Alert accent (color of the top border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('accent')
-  private set setAccent(val: string) {
-    this.accent = val;
-  }
-
-  /**
-   * Alert outline (color of the border):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
-   */
-  @Input('outline')
-  private set setOutline(val: string) {
-    this.outline = val;
-  }
+  protected _closable: boolean = false;
 
   /**
    * Emits when chip is removed
@@ -350,5 +164,105 @@ export class NbAlertComponent {
    */
   onClose() {
     this.close.emit();
+  }
+
+  @HostBinding('class.size-tiny')
+  get tiny() {
+    return this.size === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
+  get small() {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.size-medium')
+  get medium() {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large() {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant() {
+    return this.size === 'giant';
+  }
+
+  @HostBinding('class.status-primary')
+  get primary() {
+    return this.status === 'primary';
+  }
+
+  @HostBinding('class.status-success')
+  get success() {
+    return this.status === 'success';
+  }
+
+  @HostBinding('class.status-info')
+  get info() {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-warning')
+  get warning() {
+    return this.status === 'warning';
+  }
+
+  @HostBinding('class.status-danger')
+  get danger() {
+    return this.status === 'danger';
+  }
+
+  @HostBinding('class.accent-primary')
+  get primaryAccent() {
+    return this.accent === 'primary';
+  }
+
+  @HostBinding('class.accent-success')
+  get successAccent() {
+    return this.accent === 'success';
+  }
+
+  @HostBinding('class.accent-info')
+  get infoAccent() {
+    return this.accent === 'info';
+  }
+
+  @HostBinding('class.accent-warning')
+  get warningAccent() {
+    return this.accent === 'warning';
+  }
+
+  @HostBinding('class.accent-danger')
+  get dangerAccent() {
+    return this.accent === 'danger';
+  }
+
+  @HostBinding('class.outline-primary')
+  get primaryOutline() {
+    return this.outline === 'primary';
+  }
+
+  @HostBinding('class.outline-success')
+  get successOutline() {
+    return this.outline === 'success';
+  }
+
+  @HostBinding('class.outline-info')
+  get infoOutline() {
+    return this.outline === 'info';
+  }
+
+  @HostBinding('class.outline-warning')
+  get warningOutline() {
+    return this.outline === 'warning';
+  }
+
+  @HostBinding('class.outline-danger')
+  get dangerOutline() {
+    return this.outline === 'danger';
   }
 }
