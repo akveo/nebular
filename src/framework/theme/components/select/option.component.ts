@@ -43,7 +43,7 @@ import { NbSelectComponent } from './select.component';
 })
 export class NbOptionComponent<T> implements OnDestroy {
 
-  protected disabledByGroup: boolean = false;
+  protected disabledByGroup = false;
 
   /**
    * Option value that will be fired on selection.

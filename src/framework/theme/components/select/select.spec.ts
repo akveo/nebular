@@ -265,8 +265,8 @@ export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWith
   `,
 })
 export class NbOptionDisabledTestComponent {
-  optionGroupDisabled: boolean = false;
-  optionDisabled: boolean = false;
+  optionGroupDisabled = false;
+  optionDisabled = false;
 
   @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
   @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;

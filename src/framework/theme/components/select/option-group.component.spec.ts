@@ -27,11 +27,11 @@ import {
   `,
 })
 export class NbOptionGroupTestComponent {
-  selectDisabled: boolean = false;
-  optionGroupDisabled: boolean = false;
-  optionDisabled: boolean = false;
-  showOption: boolean = true;
-  optionGroupTitle: string = '';
+  selectDisabled = false;
+  optionGroupDisabled = false;
+  optionDisabled = false;
+  showOption = true;
+  optionGroupTitle = '';
 
   @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
   @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;

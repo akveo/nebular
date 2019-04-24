@@ -30,7 +30,7 @@ import { NbOptionComponent } from './option.component';
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
 
-  protected alive: boolean = true;
+  protected alive = true;
 
   @Input() title: string;
 
