@@ -46,10 +46,10 @@
 
     }
 
-		&.modal-half {
-			.form-wrapper {
-				background: nb-theme(search-bg);
-			}
+    &.modal-half {
+      .form-wrapper {
+        background: nb-theme(search-bg);
+      }
       .search::before {
         background: nb-theme(search-bg-secondary);
       }
@@ -73,7 +73,7 @@
       }
     }
 
-		&.column-curtain {
+    &.column-curtain {
       &::before {
         background: nb-theme(search-bg);
       }
@@ -83,7 +83,7 @@
       &.show::after {
         background: nb-theme(search-bg-secondary);
       }
-		}
+    }
   }
 
   nb-search {
