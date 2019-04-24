@@ -4,103 +4,111 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-select-status($status) {
-  border: nb-theme(select-border-width) solid nb-theme(color-#{$status});
-
-  nb-option {
-    &:hover, &.selected {
-      background-color: nb-theme(color-#{$status});
-      color: nb-theme(color-white);
-    }
-  }
-}
+@import './select-outline';
+@import './select-filled';
+@import './select-hero';
 
 @mixin nb-select-theme() {
-  nb-select > button[nbButton] {
-    transition: all 0.1s;
+  nb-select {
+    .select-button {
+      min-width: nb-theme(select-min-width);
+      cursor: nb-theme(select-cursor);
 
-    &::after {
-      @include nb-rtl(left, 0.75rem);
-      @include nb-rtl(right, auto);
-    }
-
-    &.opened {
-      &.top {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+      &.placeholder {
+        font-weight: nb-theme(select-placeholder-text-font-weight);
       }
-
-      &.bottom {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+      &:focus {
+        box-shadow: 0 0 0 nb-theme(select-outline-width) nb-theme(select-outline-color);
+        outline: none;
+      }
+      &[disabled] {
+        cursor: nb-theme(select-disabled-cursor);
       }
     }
   }
 
-  nb-card.select {
-    background-color: nb-theme(select-bg);
-    max-height: nb-theme(select-max-height);
-    margin-bottom: 0;
-    box-shadow: none;
+  .options-list-container {
+    overflow: hidden;
 
-    nb-card-body {
+    & > .options-list {
+      margin: 0;
       padding: 0;
     }
+  }
 
-    nb-option {
-      padding: nb-theme(select-option-padding);
-      user-select: none;
+  .options-list {
+    max-height: nb-theme(select-options-list-max-height);
+    height: 100%;
+    overflow: auto;
+  }
+
+  nb-option {
+    user-select: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  nb-select .select-button,
+  nb-option,
+  nb-option-group {
+    font-family: nb-theme(select-text-font-family);
+    font-weight: nb-theme(select-text-font-weight);
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select.size-#{$size} .select-button,
+    .size-#{$size} nb-option {
+      font-size: nb-theme(select-#{$size}-text-font-size);
+      line-height: nb-theme(select-#{$size}-text-line-height);
+    }
+  }
+
+  @each $shape in nb-get-shapes() {
+    nb-select.shape-#{$shape} .select-button {
+      border-radius: nb-theme(select-#{$shape}-border-radius);
     }
 
-    &.primary {
-      @include nb-select-status(primary);
-    }
-
-    &.danger {
-      @include nb-select-status(danger);
-    }
-
-    &.warning {
-      @include nb-select-status(warning);
-    }
-
-    &.info {
-      @include nb-select-status(info);
-    }
-
-    &.success {
-      @include nb-select-status(success);
-    }
-
-    &.bottom {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-
-    &.top {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    nb-checkbox {
-      .text {
-        color: inherit;
+    .options-list-container.shape-#{$shape} {
+      &.bottom {
+        border-bottom-left-radius: nb-theme(select-#{$shape}-border-radius);
+        border-bottom-right-radius: nb-theme(select-#{$shape}-border-radius);
       }
-
-      .native-input:checked + .custom-checkbox {
-        border-color: nb-theme(select-checkbox-color);
-
-        nb-icon {
-          color: nb-theme(select-checkmark-color);
-        }
-      }
-    }
-
-    nb-option, nb-option-group {
-      &.disabled {
-        background-color: nb-theme(select-option-disabled-bg);
-        opacity: nb-theme(select-option-disabled-opacity);
+      &.top {
+        border-top-left-radius: nb-theme(select-#{$shape}-border-radius);
+        border-top-right-radius: nb-theme(select-#{$shape}-border-radius);
       }
     }
   }
+
+  nb-option-group,
+  nb-option {
+    background-color: nb-theme(select-option-background-color);
+    color: nb-theme(select-option-text-color);
+
+    &[disabled] {
+      background-color: nb-theme(select-option-disabled-background-color);
+      color: nb-theme(select-option-disabled-text-color);
+    }
+  }
+
+  nb-option {
+    &.selected {
+      background-color: nb-theme(select-option-selected-background-color);
+      color: nb-theme(select-option-selected-text-color);
+    }
+    &:focus {
+      background-color: nb-theme(select-option-focus-background-color);
+      color: nb-theme(select-option-focus-text-color);
+    }
+    &:hover {
+      background-color: nb-theme(select-option-hover-background-color);
+      color: nb-theme(select-option-hover-text-color);
+    }
+  }
+
+  @include select-outline();
+  @include select-filled();
+  @include select-hero();
 }

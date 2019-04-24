@@ -47,10 +47,14 @@ export class NbOptionComponent<T> implements OnDestroy {
    * */
   @Input() value: T;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   /**
    * Fires value when option selection change.
@@ -66,8 +70,7 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   selected: boolean = false;
-  disabled: boolean = false;
-  private alive: boolean = true;
+  protected alive: boolean = true;
 
   constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
               protected elementRef: ElementRef,
@@ -98,9 +101,9 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.selected;
   }
 
-  @HostBinding('class.disabled')
-  get disabledClass(): boolean {
-    return this.disabled;
+  @HostBinding('attr.disabled')
+  get disabledAttribute(): '' | null {
+    return this.disabled ? '' : null;
   }
 
   @HostListener('click')
@@ -116,7 +119,7 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
-  private setSelection(selected: boolean): void {
+  protected setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
      * This may lead to exceptions with detecting changes in destroyed component.
