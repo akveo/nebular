@@ -162,6 +162,9 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   }
 }
 
+export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
+  'curtain' | 'column-curtain' | 'modal-drop' | 'modal-half';
+
 /**
  * Beautiful full-page search control.
  *
@@ -256,7 +259,7 @@ export class NbSearchComponent implements OnInit, OnDestroy {
    * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
    * @type {string}
    */
-  @Input() type: string;
+  @Input() type: NbSearchType;
 
   @ViewChild(NbPortalDirective) searchFieldPortal: NbPortalDirective;
   @ViewChild('searchButton', { read: ElementRef }) searchButton: ElementRef<HTMLElement>;
