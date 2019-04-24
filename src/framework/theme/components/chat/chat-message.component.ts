@@ -42,21 +42,21 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
  *
  * @styles
  *
- * chat-message-fg:
- * chat-message-bg:
- * chat-message-reply-bg:
- * chat-message-reply-fg:
- * chat-message-avatar-bg:
- * chat-message-sender-fg:
- * chat-message-quote-fg:
- * chat-message-quote-bg:
- * chat-message-file-fg:
- * chat-message-file-bg:
+ * chat-message-background:
+ * chat-message-text-color:
+ * chat-message-reply-background-color:
+ * chat-message-reply-text-color:
+ * chat-message-avatar-background-color:
+ * chat-message-sender-text-color:
+ * chat-message-quote-background-color:
+ * chat-message-quote-text-color:
+ * chat-message-file-text-color:
+ * chat-message-file-background-color:
  */
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!replyValue">
+    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!reply">
       <ng-container *ngIf="!avatarStyle">
         {{ getInitials() }}
       </ng-container>
@@ -105,12 +105,9 @@ export class NbChatMessageComponent {
     return true;
   }
 
-  @HostBinding('class.reply')
-  replyValue: boolean = false;
-
   @HostBinding('class.not-reply')
   get notReply() {
-    return !this.replyValue;
+    return !this.reply;
   }
 
   avatarStyle: SafeStyle;
@@ -119,9 +116,14 @@ export class NbChatMessageComponent {
    * Determines if a message is a reply
    */
   @Input()
-  set reply(val: boolean) {
-    this.replyValue = convertToBoolProperty(val);
+  @HostBinding('class.reply')
+  get reply(): boolean {
+    return this._reply;
   }
+  set reply(value: boolean) {
+    this._reply = convertToBoolProperty(value);
+  }
+  protected _reply: boolean = false;
 
   /**
    * Message sender
@@ -180,7 +182,7 @@ export class NbChatMessageComponent {
    */
   @Input() type: string;
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(protected domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
     if (this.sender) {

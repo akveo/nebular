@@ -9,9 +9,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Chat message component.
- *
- * @styles
- *
  */
 @Component({
   selector: 'nb-chat-message-file',
@@ -77,7 +74,7 @@ export class NbChatMessageFileComponent {
     this.cd.detectChanges();
   }
 
-  constructor(private cd: ChangeDetectorRef, private domSanitizer: DomSanitizer) {
+  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {
   }
 
 
