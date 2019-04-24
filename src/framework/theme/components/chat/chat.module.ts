@@ -7,6 +7,8 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
+import { NbButtonModule } from '../button/button.module';
+import { NbInputModule } from '../input/input.module';
 import { NbIconModule } from '../icon/icon.module';
 
 import { NbChatComponent } from './chat.component';
@@ -32,6 +34,8 @@ const NB_CHAT_COMPONENTS = [
   imports: [
     NbSharedModule,
     NbIconModule,
+    NbInputModule,
+    NbButtonModule,
   ],
   declarations: [
     ...NB_CHAT_COMPONENTS,
@@ -46,7 +50,7 @@ export class NbChatModule {
     return <ModuleWithProviders> {
       ngModule: NbChatModule,
       providers: [
-        { provide: NbChatOptions, useValue: options },
+        { provide: NbChatOptions, useValue: options || {} },
       ],
     };
   }
@@ -55,7 +59,7 @@ export class NbChatModule {
     return <ModuleWithProviders> {
       ngModule: NbChatModule,
       providers: [
-        { provide: NbChatOptions, useValue: options },
+        { provide: NbChatOptions, useValue: options || {} },
       ],
     };
   }
