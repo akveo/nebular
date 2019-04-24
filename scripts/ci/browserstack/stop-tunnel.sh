@@ -5,7 +5,7 @@ set -e -o pipefail
 
 echo "Shutting down Browserstack tunnel"
 
-killall BrowserStackLocal
+pkill BrowserStack
 
 while [[ -n `ps -ef | grep "BrowserStackLocal" | grep -v "grep"` ]]; do
   printf "."
