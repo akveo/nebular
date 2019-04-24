@@ -19,6 +19,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbSelectComponent } from './select.component';
 import { NbLayoutModule } from '../layout/layout.module';
 import { NbOptionComponent } from './option.component';
+import { NbOptionGroupComponent } from './option-group.component';
 
 
 const TEST_GROUPS = [
@@ -247,6 +248,30 @@ export class NbSelectWithFalsyOptionValuesComponent {
   `,
 })
 export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWithFalsyOptionValuesComponent {}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select>
+          <nb-option-group [disabled]="optionGroupDisabled">
+            <nb-option [value]="1" [disabled]="optionDisabled">1</nb-option>
+          </nb-option-group>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbOptionDisabledTestComponent {
+  optionGroupDisabled = false;
+  optionDisabled = false;
+
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
+}
 
 describe('Component: NbSelectComponent', () => {
   let fixture: ComponentFixture<NbSelectTestComponent>;
@@ -727,5 +752,63 @@ describe('NbOptionComponent', () => {
 
     expect(option.selected).toEqual(false);
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
+  }));
+});
+
+describe('NbOptionComponent disabled', () => {
+  let fixture: ComponentFixture<NbOptionDisabledTestComponent>;
+  let testComponent: NbOptionDisabledTestComponent;
+  let selectComponent: NbSelectComponent<number>;
+  let optionGroupComponent: NbOptionGroupComponent;
+  let optionComponent: NbOptionComponent<number>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [ NbOptionDisabledTestComponent ],
+    });
+
+    fixture = TestBed.createComponent(NbOptionDisabledTestComponent);
+    testComponent = fixture.componentInstance;
+    fixture.detectChanges();
+    flush();
+
+    selectComponent = testComponent.selectComponent;
+    optionGroupComponent = testComponent.optionGroupComponent;
+    optionComponent = testComponent.optionComponent;
+  }));
+
+  it('should has disabled attribute if disabled set to true', () => {
+    selectComponent.show();
+    testComponent.optionDisabled = true;
+    fixture.detectChanges();
+
+    const option = fixture.debugElement.query(By.directive(NbOptionComponent));
+    expect(option.attributes.disabled).toEqual('');
+  });
+
+  it('should has disabled attribute if group disabled set to true', fakeAsync(() => {
+    selectComponent.show();
+    testComponent.optionGroupDisabled = true;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    const option = fixture.debugElement.query(By.directive(NbOptionComponent));
+    expect(option.attributes.disabled).toEqual('');
+  }));
+
+  it('should not change disabled property if group disabled changes', fakeAsync(() => {
+    testComponent.optionGroupDisabled = true;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    expect(optionComponent.disabled).toEqual(false);
   }));
 });
