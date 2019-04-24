@@ -106,7 +106,8 @@ export class NbOptionComponent<T> implements OnDestroy {
 
   @HostBinding('attr.disabled')
   get disabledAttribute(): '' | null {
-    return (this.disabledByGroup || this.disabled) ? '' : null;
+    const disabled = this.disabledByGroup || this.disabled;
+    return disabled ? '' : null;
   }
 
   @HostListener('click')
@@ -124,7 +125,6 @@ export class NbOptionComponent<T> implements OnDestroy {
 
   /**
    * Sets disabled by group state and marks component for check.
-   * @param disabled group disabled state
    */
   setDisabledByGroupState(disabled: boolean): void {
     if (this.disabledByGroup !== disabled) {
