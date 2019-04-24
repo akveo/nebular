@@ -30,17 +30,12 @@ import { NbSelectComponent } from './select.component';
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
+    <nb-checkbox *ngIf="withCheckbox"
+                 [value]="selected"
+                 [disabled]="disabledAttribute"
+                 aria-hidden="true">
     </nb-checkbox>
-
-    <ng-container *ngIf="!withCheckbox">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </ng-container>
-
-    <ng-template #content>
-      <ng-content></ng-content>
-    </ng-template>
+    <ng-content></ng-content>
   `,
 })
 export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
