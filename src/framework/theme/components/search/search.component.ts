@@ -47,7 +47,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
   ],
   template: `
     <div class="search" (keyup.esc)="emitClose()">
-      <button (click)="emitClose()">
+      <button (click)="emitClose()" nbButton ghost>
         <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
       </button>
       <div class="form-wrapper">
@@ -209,7 +209,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button #searchButton class="start-search" (click)="emitActivate()">
+    <button #searchButton class="start-search" (click)="emitActivate()" nbButton ghost>
       <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
     </button>
     <nb-search-field
@@ -259,7 +259,7 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   @Input() type: string;
 
   @ViewChild(NbPortalDirective) searchFieldPortal: NbPortalDirective;
-  @ViewChild('searchButton') searchButton: ElementRef<HTMLElement>;
+  @ViewChild('searchButton', { read: ElementRef }) searchButton: ElementRef<HTMLElement>;
 
   constructor(
     private searchService: NbSearchService,
