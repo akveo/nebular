@@ -81,7 +81,8 @@ export class NbPopoverComponent extends NbPositionedContainer implements NbRende
 
   protected attachComponent() {
     const portal = new NbComponentPortal(this.content, null, null, this.cfr);
-    const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
+    const ref = this.overlayContainer.attachComponentPortal(portal);
+    Object.assign(ref.instance, this.context);
     ref.changeDetectorRef.detectChanges();
   }
 

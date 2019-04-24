@@ -72,12 +72,9 @@ export class NbOverlayContainerComponent {
     return !!this.content;
   }
 
-  attachComponentPortal<T>(portal: NbComponentPortal<T>, context?: Object): ComponentRef<T> {
+  attachComponentPortal<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
     portal.injector = this.createChildInjector(portal.componentFactoryResolver);
     const componentRef = this.portalOutlet.attachComponentPortal(portal);
-    if (context) {
-      Object.assign(componentRef.instance, context);
-    }
     componentRef.changeDetectorRef.markForCheck();
     componentRef.changeDetectorRef.detectChanges();
     this.isAttached = true;
