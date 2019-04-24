@@ -41,7 +41,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  * <nb-stepper orientation="horizontal">
  *   <nb-step label="step number one">
  *       // ... step content here
- *   <nb-step>
+ *   </nb-step>
  *   <nb-step label="stepLabel">
  *       <ng-template #stepLabel>
  *           <div>
@@ -49,7 +49,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  *           </div>
  *       </ng-template>
  *       // ... step content here
- *   <nb-step>
+ *   </nb-step>
  * </nb-stepper>
  * ```
  *
@@ -65,7 +65,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  *     <form [formGroup]="form">
  *       // ...
  *     </form>
- *   <nb-step>
+ *   </nb-step>
  *    // ...
  * </nb-stepper>
  * ```
