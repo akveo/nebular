@@ -670,19 +670,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   show() {
     if (this.isHidden) {
-      if (!this.ref) {
-        this.createOverlay();
-        this.subscribeOnPositionChange();
-        this.createKeyManager();
-        this.subscribeOnOverlayKeys();
-      }
-
-      this.ref.attach(this.portal);
-      if (this.selectionModel.length) {
-        this.keyManager.setActiveItem(this.selectionModel[0]);
-      } else {
-        this.keyManager.setFirstItemActive();
-      }
+      this.attachToOverlay();
+      this.setActiveOption();
       this.cd.markForCheck();
     }
   }
@@ -785,6 +774,25 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     }
 
     this.emitSelected(this.selectionModel.map((opt: NbOptionComponent<T>) => opt.value));
+  }
+
+  protected attachToOverlay() {
+    if (!this.ref) {
+      this.createOverlay();
+      this.subscribeOnPositionChange();
+      this.createKeyManager();
+      this.subscribeOnOverlayKeys();
+    }
+
+    this.ref.attach(this.portal);
+  }
+
+  protected setActiveOption() {
+    if (this.selectionModel.length) {
+      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
+    } else {
+      this.keyManager.setFirstItemActive();
+    }
   }
 
   protected createOverlay() {
