@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbToastrModule } from '@nebular/theme';
+import { NbButtonModule, NbToastrModule } from '@nebular/theme';
 import { ToastrRoutingModule } from './toastr-routing.module';
 import { ToastrDestroyByClickComponent } from './toastr-destroy-by-click.component';
 import { ToastrDurationComponent } from './toastr-duration.component';
@@ -27,6 +27,7 @@ import { ToastrStatusesComponent } from './toastr-statuses.component';
   ],
   imports: [
     NbToastrModule.forRoot(),
+    NbButtonModule,
     ToastrRoutingModule,
   ],
 })

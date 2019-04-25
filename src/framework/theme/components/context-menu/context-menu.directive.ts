@@ -47,7 +47,7 @@ import { NbMenuItem, NbMenuService } from '../menu/menu.service';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbContextMenuModule,
  *   ],
  * })

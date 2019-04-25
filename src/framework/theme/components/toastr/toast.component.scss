@@ -9,7 +9,6 @@
   align-items: center;
   width: 25rem;
   margin: 0.5rem;
-  opacity: 0.9;
 
   .title {
     font-weight: 800;
@@ -33,10 +32,6 @@
 
   &.destroy-by-click {
     cursor: pointer;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
   nb-icon {

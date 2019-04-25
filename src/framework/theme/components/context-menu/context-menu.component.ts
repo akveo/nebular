@@ -14,15 +14,18 @@ import { NbPositionedContainer, NbRenderableContainer } from '../cdk';
  *
  * @styles
  *
- * context-menu-fg
- * context-menu-active-fg
- * context-menu-active-bg
+ * context-menu-background-color
+ * context-menu-border-color
+ * context-menu-border-style
+ * context-menu-border-width
+ * context-menu-border-radius
+ * context-menu-min-width
+ * context-menu-max-width
+ * context-menu-shadow
  * */
 @Component({
   selector: 'nb-context-menu',
-  styleUrls: ['./context-menu.component.scss'],
   template: `
-    <span class="arrow"></span>
     <nb-menu class="context-menu" [items]="context.items" [tag]="context.tag"></nb-menu>
   `,
 })
