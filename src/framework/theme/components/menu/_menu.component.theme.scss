@@ -75,13 +75,6 @@
       .menu-item:first-child {
         border-top: $divider;
       }
-      .menu-item:last-child {
-        border-bottom: $divider;
-
-        .menu-item:last-child {
-          border-bottom: none;
-        }
-      }
     }
 
     .menu-item > .menu-items {
