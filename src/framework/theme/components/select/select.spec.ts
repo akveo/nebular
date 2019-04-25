@@ -21,6 +21,7 @@ import { NbLayoutModule } from '../layout/layout.module';
 import { NbOptionComponent } from './option.component';
 import { NbOptionGroupComponent } from './option-group.component';
 
+const eventMock = { preventDefault() {} } as Event;
 
 const TEST_GROUPS = [
   {
@@ -582,7 +583,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.noValueOption.onClick();
+    testComponent.noValueOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(0);
@@ -592,7 +593,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.nullOption.onClick();
+    testComponent.nullOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(0);
@@ -602,7 +603,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.undefinedOption.onClick();
+    testComponent.undefinedOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(0);
@@ -612,7 +613,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.falseOption.onClick();
+    testComponent.falseOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(1);
@@ -622,7 +623,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.zeroOption.onClick();
+    testComponent.zeroOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(1);
@@ -632,7 +633,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.emptyStringOption.onClick();
+    testComponent.emptyStringOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(1);
@@ -642,7 +643,7 @@ describe('NbSelectComponent - falsy values', () => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
 
-    testComponent.nanOption.onClick();
+    testComponent.nanOption.onClick(eventMock);
     fixture.detectChanges();
 
     expect(select.selectionModel.length).toEqual(1);
