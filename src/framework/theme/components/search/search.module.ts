@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbIconModule } from '../icon/icon.module';
+import { NbButtonModule } from '../button/button.module';
 
 import { NbSearchComponent, NbSearchFieldComponent } from './search.component';
 import { NbSearchService } from './search.service';
@@ -18,6 +19,7 @@ import { NbSearchService } from './search.service';
     NbSharedModule,
     NbOverlayModule,
     NbIconModule,
+    NbButtonModule,
   ],
   declarations: [
     NbSearchComponent,
