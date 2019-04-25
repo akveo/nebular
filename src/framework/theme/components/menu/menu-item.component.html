@@ -43,7 +43,7 @@
    href="#">
   <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
-  <nb-icon [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
+  <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>
 <ul *ngIf="menuItem.children"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"
