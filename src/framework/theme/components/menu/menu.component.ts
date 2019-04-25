@@ -166,6 +166,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * menu-item-border-radius:
  * menu-item-padding:
  * menu-item-hover-background-color:
+ * menu-item-hover-cursor:
  * menu-item-hover-text-color:
  * menu-item-icon-hover-color:
  * menu-item-active-background-color:

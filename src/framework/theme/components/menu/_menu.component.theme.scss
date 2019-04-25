@@ -45,6 +45,7 @@
       a:hover {
         background-color: nb-theme(menu-item-hover-background-color);
         color: nb-theme(menu-item-hover-text-color);
+        cursor: nb-theme(menu-item-hover-cursor);
 
         .menu-icon {
           color: nb-theme(menu-item-icon-hover-color);
