@@ -178,7 +178,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSearchModule,
  *   ],
  * })

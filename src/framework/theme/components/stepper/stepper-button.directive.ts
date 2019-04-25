@@ -8,7 +8,7 @@ export class NbStepperNextDirective {
 
   @Input() @HostBinding('attr.type') type: string = 'submit';
 
-  constructor(private stepper: NbStepperComponent) {
+  constructor(protected stepper: NbStepperComponent) {
   }
 
   @HostListener('click')
@@ -24,7 +24,7 @@ export class NbStepperPreviousDirective {
 
   @Input() @HostBinding('attr.type') type: string = 'button';
 
-  constructor(private stepper: NbStepperComponent) {
+  constructor(protected stepper: NbStepperComponent) {
   }
 
   @HostListener('click')

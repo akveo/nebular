@@ -5,7 +5,6 @@
  */
 
 import { browser, element, by } from 'protractor';
-import { NbBadgeComponent } from '../src/framework/theme/components/badge/badge.component';
 import badgeTests from './badge.e2e-spec';
 
 describe('nb-user', () => {
@@ -20,7 +19,7 @@ describe('nb-user', () => {
     const badgesConf = {
       selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`,
       badges: [
-        { position: NbBadgeComponent.TOP_RIGHT, status: NbBadgeComponent.STATUS_PRIMARY, text: badgeText },
+        { position: 'top right', status: 'primary', text: badgeText },
       ],
     };
     badgeTests(badgesConf);

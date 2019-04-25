@@ -8,9 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
  * Chat message component.
- *
- * @styles
- *
  */
 @Component({
   selector: 'nb-chat-message-text',

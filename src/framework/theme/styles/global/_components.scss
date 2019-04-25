@@ -34,7 +34,6 @@
 @import '../../components/select/select.component.theme';
 @import '../../components/toastr/toast.component.theme';
 @import '../../components/tooltip/tooltip.component.theme';
-@import '../../components/window/window.component.theme';
 @import '../../components/datepicker/datepicker-container.component.theme';
 @import '../../components/radio/radio.component.theme';
 @import '../../components/tree-grid/tree-grid.component.theme';
@@ -72,7 +71,6 @@
   @include nb-select-theme();
   @include nb-toast-theme();
   @include nb-tooltip-theme();
-  @include nb-window-theme();
   @include nb-datepicker-theme();
   @include nb-radio-theme();
   @include nb-tree-grid-theme();

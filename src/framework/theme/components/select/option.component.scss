@@ -4,12 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
   display: block;
-
-  &.disabled {
-    pointer-events: none;
-  }
+  @include nb-component-animation(background-color, color);
 
   &:hover {
     cursor: pointer;
@@ -18,5 +17,9 @@
   nb-checkbox {
     pointer-events: none;
   }
+}
+
+:host([disabled]) {
+  pointer-events: none;
 }
 

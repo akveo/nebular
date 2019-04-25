@@ -4,19 +4,37 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host .nb-badge {
+@import '../../styles/core/mixins';
+
+:host {
   position: absolute;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0.25rem;
+}
 
-  &.top { top: 0; }
-  &.right { right: 0; }
-  &.bottom { bottom: 0; }
-  &.left { left: 0; }
+:host(.position-top) {
+  top: 0;
+}
+
+:host(.position-right) {
+  right: 0;
+}
+
+:host(.position-bottom) {
+  bottom: 0;
+}
+
+:host(.position-left) {
+  left: 0;
+}
+
+:host(.position-start) {
+  @include nb-ltr(left, 0);
+  @include nb-rtl(right, 0);
+}
+
+:host(.position-end) {
+  @include nb-ltr(right, 0);
+  @include nb-rtl(left, 0);
 }
