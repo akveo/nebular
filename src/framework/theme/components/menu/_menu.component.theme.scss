@@ -6,95 +6,115 @@
 
 @mixin nb-menu-theme() {
   nb-menu {
-    font-family: nb-theme(menu-font-family);
-    font-size: nb-theme(menu-font-size);
-    font-weight: nb-theme(menu-font-weight);
-    background: nb-theme(menu-bg);
-    color: nb-theme(menu-fg);
+    background-color: nb-theme(menu-background-color);
 
     ul.menu-items {
       margin: 0;
       padding: 0;
     }
 
-    .menu-group {
-      font-weight: nb-theme(menu-group-font-weight);
-      font-size: nb-theme(menu-group-font-size);
-      color: nb-theme(menu-group-fg);
-      padding: nb-theme(menu-group-padding);
+    .menu-group,
+    .menu-item a {
+      font-family: nb-theme(menu-text-font-family);
+      font-size: nb-theme(menu-text-font-size);
+      font-weight: nb-theme(menu-text-font-weight);
+      line-height: nb-theme(menu-text-line-height);
+      padding: nb-theme(menu-item-padding);
+    }
+
+    .menu-group,
+    .menu-group nb-icon.menu-icon {
+      color: nb-theme(menu-group-text-color);
     }
 
     .menu-item {
       a {
-        padding: nb-theme(menu-item-padding);
-        border-radius: nb-theme(menu-submenu-item-border-radius);
+        color: nb-theme(menu-text-color);
+        border-radius: nb-theme(menu-item-border-radius);
       }
 
-      a:hover,
       a.active {
-        background-color: nb-theme(menu-active-bg);
-        color: nb-theme(menu-active-fg);
-        font-weight: nb-theme(menu-active-font-weight);
+        background-color: nb-theme(menu-item-active-background-color);
+        color: nb-theme(menu-item-active-text-color);
 
-        .menu-icon,
-        .chevron {
-          color: nb-theme(menu-icon-active-color);
+        .menu-icon {
+          color: nb-theme(menu-item-icon-active-color);
+        }
+      }
+
+      a:hover {
+        background-color: nb-theme(menu-item-hover-background-color);
+        color: nb-theme(menu-item-hover-text-color);
+
+        .menu-icon {
+          color: nb-theme(menu-item-icon-hover-color);
         }
       }
 
       .menu-icon {
-        font-size: nb-theme(menu-icon-font-size);
-        width: nb-theme(menu-icon-font-size);
-        margin: nb-theme(menu-icon-margin);
+        color: nb-theme(menu-item-icon-color);
+        font-size: nb-theme(menu-item-icon-width);
+        margin: nb-theme(menu-item-icon-margin);
+        width: 1em;
         text-align: center;
-        color: nb-theme(menu-icon-color);
-      }
-
-      .chevron {
-        font-size: 1rem;
-        color: nb-theme(menu-icon-color);
       }
     }
 
+    $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);
     .menu-items > .menu-item {
-      border-bottom: 1px solid nb-theme(menu-item-separator);
+      border-bottom: $divider;
+
       &:first-child {
-        border-top: 1px solid nb-theme(menu-item-separator);
+        border-top: $divider;
       }
     }
 
     .menu-item > .menu-items {
-      background-color: nb-theme(menu-submenu-bg);
+      background-color: nb-theme(menu-submenu-background-color);
+      margin: nb-theme(menu-submenu-margin);
+      padding: nb-theme(menu-submenu-padding);
     }
 
     .menu-item > .menu-items > .menu-item {
       border: none;
-      background: nb-theme(menu-submenu-bg);
-      color: nb-theme(menu-submenu-fg);
-      padding: nb-theme(menu-submenu-item-container-padding);
-
-      &:first-child {
-        margin-top: nb-theme(menu-submenu-padding);
-      }
-      &:last-child {
-        margin-bottom: nb-theme(menu-submenu-padding);
-      }
+      background: nb-theme(menu-submenu-background-color);
+      color: nb-theme(menu-submenu-text-color);
 
       a {
-        border: nb-theme(menu-submenu-item-border-width) solid nb-theme(menu-submenu-bg);
+        border-color: nb-theme(menu-submenu-item-border-color);
+        border-style: nb-theme(menu-submenu-item-border-style);
+        border-width: nb-theme(menu-submenu-item-border-width);
         padding: nb-theme(menu-submenu-item-padding);
       }
 
-      a:hover {
-        color: nb-theme(menu-submenu-hover-fg);
-        background: nb-theme(menu-submenu-hover-bg);
+      a.active {
+        background-color: nb-theme(menu-submenu-item-active-background-color);
+        border-color: nb-theme(menu-submenu-item-active-border-color);
+        color: nb-theme(menu-submenu-item-active-text-color);
+
+        .menu-icon {
+          color: nb-theme(menu-submenu-item-icon-active-color);
+        }
       }
 
-      a.active {
-        background-color: nb-theme(menu-submenu-active-bg);
-        color: nb-theme(menu-submenu-active-fg);
-        border-color: nb-theme(menu-submenu-active-border-color);
-        box-shadow: nb-theme(menu-submenu-active-shadow);
+      a:hover {
+        background-color: nb-theme(menu-submenu-item-hover-background-color);
+        border-color: nb-theme(menu-submenu-item-hover-border-color);
+        color: nb-theme(menu-submenu-item-hover-text-color);
+
+        .menu-icon {
+          color: nb-theme(menu-submenu-item-icon-hover-color);
+        }
+      }
+
+      a.active:hover {
+        background-color: nb-theme(menu-submenu-item-active-hover-background-color);
+        border-color: nb-theme(menu-submenu-item-active-hover-border-color);
+        color: nb-theme(menu-submenu-item-active-hover-text-color);
+
+        .menu-icon {
+          color: nb-theme(menu-submenu-item-icon-active-hover-color);
+        }
       }
     }
   }
