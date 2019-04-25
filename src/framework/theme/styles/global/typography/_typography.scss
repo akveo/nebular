@@ -165,10 +165,10 @@
   }
 
   a {
-    color: nb-theme(link-color);
+    color: nb-theme(link-text-color);
 
     @include hover-focus {
-      color: nb-theme(link-hover-color);
+      color: nb-theme(link-text-hover-color);
     }
   }
 
