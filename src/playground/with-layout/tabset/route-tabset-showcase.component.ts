@@ -25,13 +25,13 @@ export class RouteTabsetShowcaseComponent {
     },
     {
       title: 'Orders',
-      icon: 'notifications',
+      icon: 'paper-plane-outline',
       responsive: true,
       route: [ './tab2' ],
     },
     {
       title: 'Transaction',
-      icon: 'notifications',
+      icon: 'flash-outline',
       responsive: true,
       disabled: true,
     },
