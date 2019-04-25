@@ -156,37 +156,48 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  *
  * @styles
  *
- * menu-font-family:
- * menu-font-size:
- * menu-font-weight:
- * menu-fg:
- * menu-bg:
- * menu-active-fg:
- * menu-active-bg:
- * menu-active-font-weight:
- * menu-submenu-bg:
- * menu-submenu-fg:
- * menu-submenu-active-fg:
- * menu-submenu-active-bg:
- * menu-submenu-active-border-color:
- * menu-submenu-active-shadow:
- * menu-submenu-hover-fg:
- * menu-submenu-hover-bg:
+ * menu-background-color:
+ * menu-text-color:
+ * menu-text-font-family:
+ * menu-text-font-size:
+ * menu-text-font-weight:
+ * menu-text-line-height:
+ * menu-group-text-color:
+ * menu-item-border-radius:
+ * menu-item-padding:
+ * menu-item-hover-background-color:
+ * menu-item-hover-text-color:
+ * menu-item-icon-hover-color:
+ * menu-item-active-background-color:
+ * menu-item-active-text-color:
+ * menu-item-icon-active-color:
+ * menu-item-icon-color:
+ * menu-item-icon-margin:
+ * menu-item-icon-width:
+ * menu-item-divider-color:
+ * menu-item-divider-style:
+ * menu-item-divider-width:
+ * menu-submenu-background-color:
+ * menu-submenu-text-color:
+ * menu-submenu-margin:
+ * menu-submenu-padding:
+ * menu-submenu-item-border-color:
+ * menu-submenu-item-border-style:
  * menu-submenu-item-border-width:
  * menu-submenu-item-border-radius:
  * menu-submenu-item-padding:
- * menu-submenu-item-container-padding:
- * menu-submenu-padding:
- * menu-group-font-weight:
- * menu-group-font-size:
- * menu-group-fg:
- * menu-group-padding
- * menu-item-padding:
- * menu-item-separator:
- * menu-icon-font-size:
- * menu-icon-margin:
- * menu-icon-color:
- * menu-icon-active-color:
+ * menu-submenu-item-hover-background-color:
+ * menu-submenu-item-hover-border-color:
+ * menu-submenu-item-hover-text-color:
+ * menu-submenu-item-icon-hover-color:
+ * menu-submenu-item-active-background-color:
+ * menu-submenu-item-active-border-color:
+ * menu-submenu-item-active-text-color:
+ * menu-submenu-item-icon-active-color:
+ * menu-submenu-item-active-hover-background-color:
+ * menu-submenu-item-active-hover-border-color:
+ * menu-submenu-item-active-hover-text-color:
+ * menu-submenu-item-icon-active-hover-color:
  */
 @Component({
   selector: 'nb-menu',
