@@ -375,7 +375,7 @@ $theme: (
 
   menu-group-text-color: text-hint-color,
 
-  menu-item-border-radius: 0.75rem,
+  menu-item-border-radius: 0,
   menu-item-padding: 0.75rem 1rem,
 
   menu-item-hover-background-color: menu-background-color,
@@ -401,9 +401,9 @@ $theme: (
 
   menu-submenu-item-border-color: menu-submenu-background-color,
   menu-submenu-item-border-style: solid,
-  menu-submenu-item-border-width: 0.125rem,
-  menu-submenu-item-border-radius: 0.5rem,
-  menu-submenu-item-padding: 0.625rem 0.875rem,
+  menu-submenu-item-border-width: 0,
+  menu-submenu-item-border-radius: 0,
+  menu-submenu-item-padding: menu-item-padding,
 
   menu-submenu-item-hover-background-color: menu-background-color,
   menu-submenu-item-hover-border-color: menu-submenu-item-border-color,
