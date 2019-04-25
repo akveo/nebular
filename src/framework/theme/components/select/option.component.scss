@@ -7,7 +7,7 @@
 @import '../../styles/core/mixins';
 
 :host {
-  display: block;
+  display: flex;
   @include nb-component-animation(background-color, color);
 
   &:hover {
@@ -15,7 +15,12 @@
   }
 
   nb-checkbox {
+    display: flex;
     pointer-events: none;
+
+    ::ng-deep .label {
+      padding: 0;
+    }
   }
 }
 
