@@ -1,6 +1,8 @@
 <button [disabled]="disabled"
         [ngClass]="selectButtonClasses"
         (blur)="trySetTouched()"
+        (keydown.arrowDown)="show()"
+        (keydown.arrowUp)="show()"
         class="select-button"
         type="button"
         #selectButton>
