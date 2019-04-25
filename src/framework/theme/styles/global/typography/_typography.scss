@@ -159,7 +159,7 @@
     color: nb-theme(link-color);
 
     @include hover-focus {
-      color: nb-theme(link-color-hover);
+      color: nb-theme(link-hover-color);
     }
   }
 
