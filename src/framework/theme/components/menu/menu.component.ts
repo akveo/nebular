@@ -34,7 +34,7 @@ export enum NbToggleStates {
   templateUrl: './menu-item.component.html',
   animations: [
     trigger('toggle', [
-      state(NbToggleStates.Collapsed, style({ height: '0' })),
+      state(NbToggleStates.Collapsed, style({ height: '0', margin: '0' })),
       state(NbToggleStates.Expanded, style({ height: '*' })),
       transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
     ]),
