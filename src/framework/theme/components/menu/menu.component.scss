@@ -26,4 +26,8 @@
       @include nb-rtl(text-align, right);
     }
   }
+
+  .menu-group span {
+    display: flex;
+  }
 }
