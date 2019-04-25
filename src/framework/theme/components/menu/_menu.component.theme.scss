@@ -61,11 +61,25 @@
     }
 
     $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);
-    .menu-items > .menu-item {
+    .menu-item {
       border-bottom: $divider;
 
       &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .menu-item:first-child {
         border-top: $divider;
+      }
+      .menu-item:last-child {
+        border-bottom: $divider;
+
+        .menu-item:last-child {
+          border-bottom: none;
+        }
       }
     }
 
@@ -76,7 +90,6 @@
     }
 
     .menu-item > .menu-items > .menu-item {
-      border: none;
       background: nb-theme(menu-submenu-background-color);
       color: nb-theme(menu-submenu-text-color);
 
