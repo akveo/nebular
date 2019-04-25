@@ -19,7 +19,9 @@ import {
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
 import { convertToBoolProperty } from '../helpers';
+import { NbFocusableOption } from '../cdk';
 import { NbSelectComponent } from './select.component';
 
 
@@ -28,20 +30,15 @@ import { NbSelectComponent } from './select.component';
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
+    <nb-checkbox *ngIf="withCheckbox"
+                 [value]="selected"
+                 [disabled]="disabledAttribute"
+                 aria-hidden="true">
     </nb-checkbox>
-
-    <ng-container *ngIf="!withCheckbox">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </ng-container>
-
-    <ng-template #content>
-      <ng-content></ng-content>
-    </ng-template>
+    <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy {
+export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
 
   protected disabledByGroup = false;
 
@@ -110,9 +107,19 @@ export class NbOptionComponent<T> implements OnDestroy {
     return disabled ? '' : null;
   }
 
-  @HostListener('click')
-  onClick() {
+  @HostBinding('tabIndex')
+  get tabindex() {
+    return '-1';
+  }
+
+  @HostListener('click', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  @HostListener('keydown.enter', ['$event'])
+  onClick(event: Event) {
     this.click$.next(this);
+
+    // Prevent scroll on space click, etc.
+    event.preventDefault();
   }
 
   select() {
@@ -146,5 +153,13 @@ export class NbOptionComponent<T> implements OnDestroy {
       this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
+  }
+
+  focus(): void {
+    this.elementRef.nativeElement.focus();
+  }
+
+  getLabel(): string {
+    return this.content;
   }
 }

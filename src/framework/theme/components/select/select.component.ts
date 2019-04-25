@@ -20,14 +20,13 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
-import { startWith, switchMap, takeWhile } from 'rxjs/operators';
+import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -45,8 +44,9 @@ import {
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
-import { NbOptionComponent } from './option.component';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbFocusKeyManager, ESCAPE } from '../cdk';
+import { NbOptionComponent } from './option.component';
 import { convertToBoolProperty } from '../helpers';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
@@ -386,7 +386,8 @@ export class NbSelectLabelComponent {
     },
   ],
 })
-export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+
   /**
    * Select size, available sizes:
    * `tiny`, `small`, `medium` (default), `large`, `giant`
@@ -565,6 +566,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected alive: boolean = true;
 
+  protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
+
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
    * And then applied after content rendered.
@@ -634,10 +637,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     return this.selectionModel[0].content;
   }
 
-  ngOnInit() {
-    this.createOverlay();
-  }
-
   ngAfterContentInit() {
     if (this.queue) {
       // Call 'writeValue' when current change detection run is finished.
@@ -655,7 +654,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
     this.subscribeOnOptionClick();
   }
 
@@ -672,7 +670,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   show() {
     if (this.isHidden) {
-      this.ref.attach(this.portal);
+      this.attachToOverlay();
+      this.setActiveOption();
       this.cd.markForCheck();
     }
   }
@@ -777,10 +776,33 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.emitSelected(this.selectionModel.map((opt: NbOptionComponent<T>) => opt.value));
   }
 
+  protected attachToOverlay() {
+    if (!this.ref) {
+      this.createOverlay();
+      this.subscribeOnPositionChange();
+      this.createKeyManager();
+      this.subscribeOnOverlayKeys();
+    }
+
+    this.ref.attach(this.portal);
+  }
+
+  protected setActiveOption() {
+    if (this.selectionModel.length) {
+      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
+    } else {
+      this.keyManager.setFirstItemActive();
+    }
+  }
+
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.positionStrategy = this.createPositionStrategy();
     this.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
+  }
+
+  protected createKeyManager(): void {
+    this.keyManager = new NbFocusKeyManager<NbOptionComponent<T>>(this.options).withTypeAhead(200);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -840,6 +862,26 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
         this.handleOptionClick(clickedOption);
         this.selectionChange$.next(clickedOption);
       });
+  }
+
+  protected subscribeOnOverlayKeys(): void {
+    this.ref.keydownEvents()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.isOpen),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        if (event.keyCode === ESCAPE) {
+          this.button.nativeElement.focus();
+          this.hide();
+        } else {
+          this.keyManager.onKeydown(event);
+        }
+      });
+
+    this.keyManager.tabOut
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.hide());
   }
 
   protected getContainer() {
