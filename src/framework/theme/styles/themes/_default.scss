@@ -983,6 +983,7 @@ $theme: (
   button-hero-primary-active-right-background-color: color-primary-600,
   button-hero-primary-disabled-left-background-color: color-primary-100,
   button-hero-primary-disabled-right-background-color: color-primary-200,
+  button-hero-primary-disabled-text-color: text-primary-disabled-color,
 
   button-hero-success-text-color: text-alternate-color,
   button-hero-success-bevel-color: color-success-600,
@@ -997,6 +998,7 @@ $theme: (
   button-hero-success-active-right-background-color: color-success-600,
   button-hero-success-disabled-left-background-color: color-success-100,
   button-hero-success-disabled-right-background-color: color-success-200,
+  button-hero-success-disabled-text-color: text-success-disabled-color,
 
   button-hero-info-text-color: text-alternate-color,
   button-hero-info-bevel-color: color-info-600,
@@ -1011,6 +1013,7 @@ $theme: (
   button-hero-info-active-right-background-color: color-info-600,
   button-hero-info-disabled-left-background-color: color-info-100,
   button-hero-info-disabled-right-background-color: color-info-200,
+  button-hero-info-disabled-text-color: text-info-disabled-color,
 
   button-hero-warning-text-color: text-alternate-color,
   button-hero-warning-bevel-color: color-warning-600,
@@ -1025,6 +1028,7 @@ $theme: (
   button-hero-warning-active-right-background-color: color-warning-600,
   button-hero-warning-disabled-left-background-color: color-warning-100,
   button-hero-warning-disabled-right-background-color: color-warning-200,
+  button-hero-warning-disabled-text-color: text-warning-disabled-color,
 
   button-hero-danger-text-color: text-alternate-color,
   button-hero-danger-bevel-color: color-danger-600,
@@ -1039,6 +1043,7 @@ $theme: (
   button-hero-danger-active-right-background-color: color-danger-600,
   button-hero-danger-disabled-left-background-color: color-danger-100,
   button-hero-danger-disabled-right-background-color: color-danger-200,
+  button-hero-danger-disabled-text-color: text-danger-disabled-color,
 
   input-background-color: background-primary-color-2,
   input-border-style: solid,
@@ -1612,22 +1617,27 @@ $theme: (
   select-outline-primary-border-color: color-primary-500,
   select-outline-primary-focus-border-color: color-primary-focus,
   select-outline-primary-hover-border-color: color-primary-hover,
+  select-outline-primary-disabled-border-color: color-primary-disabled,
 
   select-outline-success-border-color: color-success-500,
   select-outline-success-focus-border-color: color-success-focus,
   select-outline-success-hover-border-color: color-success-hover,
+  select-outline-success-disabled-border-color: color-success-disabled,
 
   select-outline-info-border-color: color-info-500,
   select-outline-info-focus-border-color: color-info-focus,
   select-outline-info-hover-border-color: color-info-hover,
+  select-outline-info-disabled-border-color: color-info-disabled,
 
   select-outline-warning-border-color: color-warning-500,
   select-outline-warning-focus-border-color: color-warning-focus,
   select-outline-warning-hover-border-color: color-warning-hover,
+  select-outline-warning-disabled-border-color: color-warning-disabled,
 
   select-outline-danger-border-color: color-danger-500,
   select-outline-danger-focus-border-color: color-danger-focus,
   select-outline-danger-hover-border-color: color-danger-hover,
+  select-outline-danger-disabled-border-color: color-danger-disabled,
 
   select-option-outline-tiny-padding: select-outline-tiny-padding,
   select-option-outline-small-padding: select-outline-small-padding,
@@ -1672,6 +1682,7 @@ $theme: (
   select-filled-primary-hover-border-color: color-primary-hover,
   select-filled-primary-disabled-background-color: color-primary-disabled,
   select-filled-primary-disabled-border-color: color-primary-disabled,
+  select-filled-primary-disabled-text-color: text-primary-disabled-color,
 
   select-filled-success-background-color: color-success-500,
   select-filled-success-border-color: color-success-500,
@@ -1684,6 +1695,7 @@ $theme: (
   select-filled-success-hover-border-color: color-success-hover,
   select-filled-success-disabled-background-color: color-success-disabled,
   select-filled-success-disabled-border-color: color-success-disabled,
+  select-filled-success-disabled-text-color: text-success-disabled-color,
 
   select-filled-info-background-color: color-info-500,
   select-filled-info-border-color: color-info-500,
@@ -1696,6 +1708,7 @@ $theme: (
   select-filled-info-hover-border-color: color-info-hover,
   select-filled-info-disabled-background-color: color-info-disabled,
   select-filled-info-disabled-border-color: color-info-disabled,
+  select-filled-info-disabled-text-color: text-info-disabled-color,
 
   select-filled-warning-background-color: color-warning-500,
   select-filled-warning-border-color: color-warning-500,
@@ -1708,6 +1721,7 @@ $theme: (
   select-filled-warning-hover-border-color: color-warning-hover,
   select-filled-warning-disabled-background-color: color-warning-disabled,
   select-filled-warning-disabled-border-color: color-warning-disabled,
+  select-filled-warning-disabled-text-color: text-warning-disabled-color,
 
   select-filled-danger-background-color: color-danger-500,
   select-filled-danger-border-color: color-danger-500,
@@ -1720,6 +1734,7 @@ $theme: (
   select-filled-danger-hover-border-color: color-danger-hover,
   select-filled-danger-disabled-background-color: color-danger-disabled,
   select-filled-danger-disabled-border-color: color-danger-disabled,
+  select-filled-danger-disabled-text-color: text-danger-disabled-color,
 
   select-option-filled-tiny-padding: select-filled-tiny-padding,
   select-group-option-filled-tiny-padding-start: 1.125rem,
@@ -1765,7 +1780,7 @@ $theme: (
   select-hero-primary-hover-right-background-color: color-primary-400,
   select-hero-primary-disabled-left-background-color: color-primary-100,
   select-hero-primary-disabled-right-background-color: color-primary-200,
-  select-hero-primary-disabled-text-color: text-disabled-color,
+  select-hero-primary-disabled-text-color: text-primary-disabled-color,
 
   select-hero-success-left-background-color: color-success-400,
   select-hero-success-right-background-color: color-success-500,
@@ -1778,7 +1793,7 @@ $theme: (
   select-hero-success-hover-right-background-color: color-success-400,
   select-hero-success-disabled-left-background-color: color-success-100,
   select-hero-success-disabled-right-background-color: color-success-200,
-  select-hero-success-disabled-text-color: text-disabled-color,
+  select-hero-success-disabled-text-color: text-success-disabled-color,
 
   select-hero-info-left-background-color: color-info-400,
   select-hero-info-right-background-color: color-info-500,
@@ -1791,7 +1806,7 @@ $theme: (
   select-hero-info-hover-right-background-color: color-info-400,
   select-hero-info-disabled-left-background-color: color-info-100,
   select-hero-info-disabled-right-background-color: color-info-200,
-  select-hero-info-disabled-text-color: text-disabled-color,
+  select-hero-info-disabled-text-color: text-info-disabled-color,
 
   select-hero-warning-left-background-color: color-warning-400,
   select-hero-warning-right-background-color: color-warning-500,
@@ -1804,7 +1819,7 @@ $theme: (
   select-hero-warning-hover-right-background-color: color-warning-400,
   select-hero-warning-disabled-left-background-color: color-warning-100,
   select-hero-warning-disabled-right-background-color: color-warning-200,
-  select-hero-warning-disabled-text-color: text-disabled-color,
+  select-hero-warning-disabled-text-color: text-warning-disabled-color,
 
   select-hero-danger-left-background-color: color-danger-400,
   select-hero-danger-right-background-color: color-danger-500,
@@ -1817,7 +1832,7 @@ $theme: (
   select-hero-danger-hover-right-background-color: color-danger-400,
   select-hero-danger-disabled-left-background-color: color-danger-100,
   select-hero-danger-disabled-right-background-color: color-danger-200,
-  select-hero-danger-disabled-text-color: text-disabled-color,
+  select-hero-danger-disabled-text-color: text-danger-disabled-color,
 
   select-option-hero-tiny-padding: select-hero-tiny-padding,
   select-group-option-hero-tiny-padding-start: 1.125rem,
