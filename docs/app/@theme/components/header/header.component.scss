@@ -64,7 +64,6 @@
           &:hover, &.active, &:focus {
             color: $menu-item-fg-active;
             text-shadow: 0.5px 0 0 currentColor;
-            font-weight: normal;
             outline: none!important;
           }
         }
