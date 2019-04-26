@@ -20,7 +20,7 @@
   }
 
   .nb-tree-grid-header-row {
-    background: nb-theme(tree-grid-header-background);
+    background: nb-theme(tree-grid-header-background-color);
     color: nb-theme(tree-grid-header-text-color);
     font-family: nb-theme(tree-grid-header-text-font-family);
     font-size: nb-theme(tree-grid-header-text-font-size);
@@ -29,7 +29,7 @@
   }
 
   .nb-tree-grid-footer-row {
-    background: nb-theme(tree-grid-footer-background);
+    background: nb-theme(tree-grid-footer-background-color);
     color: nb-theme(tree-grid-footer-text-color);
     font-family: nb-theme(tree-grid-footer-text-font-family);
     font-size: nb-theme(tree-grid-footer-text-font-size);
@@ -38,17 +38,17 @@
   }
 
   .nb-tree-grid-row {
-    background: nb-theme(tree-grid-row-background);
+    background: nb-theme(tree-grid-row-background-color);
     color: nb-theme(tree-grid-row-text-color);
     font-family: nb-theme(tree-grid-row-text-font-family);
     font-size: nb-theme(tree-grid-row-text-font-size);
     font-weight: nb-theme(tree-grid-row-text-font-weight);
     line-height: nb-theme(tree-grid-row-text-line-height);
     &:hover {
-      background: nb-theme(tree-grid-row-hover-background);
+      background: nb-theme(tree-grid-row-hover-background-color);
     }
     &:nth-child(2n):not(:hover) {
-      background-color: nb-theme(tree-grid-row-even-background);
+      background-color: nb-theme(tree-grid-row-even-background-color);
     }
   }
 
