@@ -28,6 +28,7 @@
   }
 
   .options-list-container {
+    box-shadow: nb-theme(select-options-list-shadow);
     overflow: hidden;
 
     & > .options-list {
