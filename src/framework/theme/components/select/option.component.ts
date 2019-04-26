@@ -19,7 +19,9 @@ import {
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
 import { convertToBoolProperty } from '../helpers';
+import { NbFocusableOption } from '../cdk';
 import { NbSelectComponent } from './select.component';
 
 
@@ -28,29 +30,31 @@ import { NbSelectComponent } from './select.component';
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nb-checkbox *ngIf="withCheckbox" [(ngModel)]="selected">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
+    <nb-checkbox *ngIf="withCheckbox"
+                 [value]="selected"
+                 [disabled]="disabledAttribute"
+                 aria-hidden="true">
     </nb-checkbox>
-
-    <ng-container *ngIf="!withCheckbox">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </ng-container>
-
-    <ng-template #content>
-      <ng-content></ng-content>
-    </ng-template>
+    <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy {
+export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
+
+  protected disabledByGroup = false;
+
   /**
    * Option value that will be fired on selection.
    * */
   @Input() value: T;
 
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean = false;
 
   /**
    * Fires value when option selection change.
@@ -66,8 +70,7 @@ export class NbOptionComponent<T> implements OnDestroy {
   }
 
   selected: boolean = false;
-  disabled: boolean = false;
-  private alive: boolean = true;
+  protected alive: boolean = true;
 
   constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
               protected elementRef: ElementRef,
@@ -98,14 +101,25 @@ export class NbOptionComponent<T> implements OnDestroy {
     return this.selected;
   }
 
-  @HostBinding('class.disabled')
-  get disabledClass(): boolean {
-    return this.disabled;
+  @HostBinding('attr.disabled')
+  get disabledAttribute(): '' | null {
+    const disabled = this.disabledByGroup || this.disabled;
+    return disabled ? '' : null;
   }
 
-  @HostListener('click')
-  onClick() {
+  @HostBinding('tabIndex')
+  get tabindex() {
+    return '-1';
+  }
+
+  @HostListener('click', ['$event'])
+  @HostListener('keydown.space', ['$event'])
+  @HostListener('keydown.enter', ['$event'])
+  onClick(event: Event) {
     this.click$.next(this);
+
+    // Prevent scroll on space click, etc.
+    event.preventDefault();
   }
 
   select() {
@@ -116,7 +130,17 @@ export class NbOptionComponent<T> implements OnDestroy {
     this.setSelection(false);
   }
 
-  private setSelection(selected: boolean): void {
+  /**
+   * Sets disabled by group state and marks component for check.
+   */
+  setDisabledByGroupState(disabled: boolean): void {
+    if (this.disabledByGroup !== disabled) {
+      this.disabledByGroup = disabled;
+      this.cd.markForCheck();
+    }
+  }
+
+  protected setSelection(selected: boolean): void {
     /**
      * In case of changing options in runtime the reference to the selected option will be kept in select component.
      * This may lead to exceptions with detecting changes in destroyed component.
@@ -129,5 +153,13 @@ export class NbOptionComponent<T> implements OnDestroy {
       this.selectionChange.emit(this);
       this.cd.markForCheck();
     }
+  }
+
+  focus(): void {
+    this.elementRef.nativeElement.focus();
+  }
+
+  getLabel(): string {
+    return this.content;
   }
 }

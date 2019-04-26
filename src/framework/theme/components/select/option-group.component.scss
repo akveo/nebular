@@ -6,17 +6,8 @@
 
 :host {
   display: block;
+}
 
-  span {
-    padding: 1.125rem 0.5rem;
-    display: block;
-  }
-
-  &.disabled {
-    pointer-events: none;
-  }
-
-  /deep/ nb-option {
-    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-  }
+.option-group-title {
+  display: block;
 }

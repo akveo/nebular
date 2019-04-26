@@ -895,10 +895,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Select Multiple',
       },
       {
-        path: 'select-outline.component',
-        link: '/select/select-outline.component',
-        component: 'SelectOutlineComponent',
-        name: 'Select Outline',
+        path: 'select-filled.component',
+        link: '/select/select-filled.component',
+        component: 'SelectFilledComponent',
+        name: 'Select Filled',
       },
       {
         path: 'select-placeholder.component',
@@ -929,6 +929,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/select/select-status.component',
         component: 'SelectStatusComponent',
         name: 'Select Status',
+      },
+      {
+        path: 'select-interactive.component',
+        link: '/select/select-interactive.component',
+        component: 'SelectInteractiveComponent',
+        name: 'Select Interactive',
       },
     ],
   },
@@ -1342,17 +1348,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/tree-grid/tree-grid-custom-node-structure.component',
         component: 'TreeGridCustomNodeStructureComponent',
         name: 'Tree Grid Custom Node Structure',
-      },
-    ],
-  },
-  {
-    path: 'typography',
-    children: [
-      {
-        path: 'typography-showcase.component',
-        link: '/typography/typography-showcase.component',
-        component: 'TypographyShowcaseComponent',
-        name: 'Typography Showcase',
       },
     ],
   },

@@ -11,7 +11,6 @@
 
 @import 'core/mixins';
 @import 'core/functions';
-@import 'core/breaking-notice';
 
 $nb-enabled-themes: () !global;
 $nb-enable-css-custom-properties: false !global !default;
@@ -254,8 +253,6 @@ $nb-themes-export: () !global;
       @content;
     }
   }
-
-  $temp: nb-breaking-notice-show($theme);
 }
 
 @mixin nb-install-global() {
