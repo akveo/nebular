@@ -20,11 +20,12 @@ $grid-breakpoints: (
 
 $nb-enabled-themes: (docs-home, docs-page);
 
-/* stylelint-disable */
+/* stylelint-disable max-line-length */
 $nb-themes: nb-register-theme((
   font-main: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
+
   // custom
-  content-width: 1144px,
+  content-width: 1140px,
   settings-col-width: 0,
   settings-col-margin: 0,
   color-fg-heading-light: #ffffff,
@@ -35,7 +36,7 @@ $nb-themes: nb-register-theme((
   separator: transparent,
   color-bg: transparent,
   color-fg: white,
-  color-fg-heading: #546d8d,
+  color-fg-heading: #0d1c2e,
   color-fg-text: #919fb1,
   shadow: none,
   layout-bg: transparent,
@@ -54,7 +55,8 @@ $nb-themes: nb-register-theme((
   menu-font-weight: font-weight-normal,
   footer-fg: color-fg-text,
 ), docs-home, default);
-/* stylelint-enable foo */
+/* stylelint-enable max-line-length */
+
 $nb-themes: nb-register-theme((
   // custom
   content-width: 1440px,

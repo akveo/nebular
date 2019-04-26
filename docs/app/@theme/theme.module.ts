@@ -51,7 +51,6 @@ import {
   NgdMetadataService,
 } from './services';
 
-
 @NgModule({
   imports: [
     CommonModule,
