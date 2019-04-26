@@ -35,6 +35,9 @@
       &:hover {
         border-color: nb-theme(select-outline-#{$status}-hover-border-color);
       }
+      &[disabled] {
+        border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+      }
     }
   }
 

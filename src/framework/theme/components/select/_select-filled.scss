@@ -60,6 +60,7 @@
       &[disabled] {
         background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
         border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
+        color: nb-theme(select-filled-#{$status}-disabled-text-color);
       }
     }
   }
