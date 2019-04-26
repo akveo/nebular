@@ -803,13 +803,4 @@ describe('NbOptionComponent disabled', () => {
     const option = fixture.debugElement.query(By.directive(NbOptionComponent));
     expect(option.attributes.disabled).toEqual('');
   }));
-
-  it('should not change disabled property if group disabled changes', fakeAsync(() => {
-    testComponent.optionGroupDisabled = true;
-    fixture.detectChanges();
-    flush();
-    fixture.detectChanges();
-
-    expect(optionComponent.disabled).toEqual(false);
-  }));
 });

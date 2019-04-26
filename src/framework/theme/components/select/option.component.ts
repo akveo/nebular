@@ -32,7 +32,7 @@ import { NbSelectComponent } from './select.component';
   template: `
     <nb-checkbox *ngIf="withCheckbox"
                  [value]="selected"
-                 [disabled]="disabledAttribute"
+                 [disabled]="disabled"
                  aria-hidden="true">
     </nb-checkbox>
     <ng-content></ng-content>
@@ -49,7 +49,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
 
   @Input()
   get disabled(): boolean {
-    return this._disabled;
+    return this._disabled || this.disabledByGroup;
   }
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
@@ -103,8 +103,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
 
   @HostBinding('attr.disabled')
   get disabledAttribute(): '' | null {
-    const disabled = this.disabledByGroup || this.disabled;
-    return disabled ? '' : null;
+    return this.disabled ? '' : null;
   }
 
   @HostBinding('tabIndex')
