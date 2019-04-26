@@ -6,7 +6,7 @@
 
 @mixin nb-toast-theme() {
   nb-toast {
-    background-color: nb-theme(toastr-background);
+    background-color: nb-theme(toastr-background-color);
     border-color: nb-theme(toastr-border-color);
     border-style: nb-theme(toastr-border-style);
     border-width: nb-theme(toastr-border-width);
@@ -17,7 +17,7 @@
     color: nb-theme(toastr-text-color);
 
     &.destroy-by-click:hover {
-      background: nb-theme(toastr-destroyable-hover-background);
+      background: nb-theme(toastr-destroyable-hover-background-color);
       border-color: nb-theme(toastr-destroyable-hover-border-color);
     }
 
@@ -53,17 +53,17 @@
 
   @each $status in nb-get-statuses() {
     nb-toast.status-#{$status} {
-      background: nb-theme(toastr-#{$status}-background);
+      background: nb-theme(toastr-#{$status}-background-color);
       border-color: nb-theme(toastr-#{$status}-border-color);
       color: nb-theme(toastr-#{$status}-text-color);
 
       &.destroy-by-click:hover {
-        background: nb-theme(toastr-destroyable-hover-#{$status}-background);
+        background: nb-theme(toastr-destroyable-hover-#{$status}-background-color);
         border-color: nb-theme(toastr-destroyable-hover-#{$status}-border-color);
       }
 
       .icon-container {
-        background: nb-theme(toastr-icon-#{$status}-background);
+        background: nb-theme(toastr-icon-#{$status}-background-color);
         color: nb-theme(toastr-icon-#{$status}-color);
       }
     }
