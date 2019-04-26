@@ -589,48 +589,6 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Themes',
-    children: [
-      {
-        type: 'page',
-        name: 'Default',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Default',
-            source: 'default',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Cosmic',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Cosmic',
-            source: 'cosmic',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Corporate',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Corporate',
-            source: 'corporate',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
     name: 'Auth',
     children: [
       {
