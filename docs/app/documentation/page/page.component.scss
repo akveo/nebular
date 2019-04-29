@@ -3,15 +3,15 @@
 @include nb-install-component() {
   display: flex;
 
-  $note-fg-info: nb-theme(color-info);
+  $note-fg-info: nb-theme(color-info-500);
   $note-bg-info: #f0f6ff;
-  $note-fg-warning: nb-theme(color-warning);
+  $note-fg-warning: nb-theme(color-warning-500);
   $note-bg-warning: #fffae4;
   $settings-width: nb-theme(settings-col-width);
   $settings-margin: nb-theme(settings-col-margin);
   $heading-light: nb-theme(color-fg-heading-light);
   $code-bg: #f1f2f3;
-  $code-fg: nb-theme(color-info);
+  $code-fg: nb-theme(color-info-500);
   $code-block-bg: nb-theme(code-block-bg);
   $table-head-fg: #8994a3;
   $table-border: 1px solid #f1f2f3;
@@ -26,7 +26,11 @@
     flex: 3;
     min-width: 0;
 
-    /deep/ nb-card {
+    .page-header {
+      margin: 0;
+    }
+
+    ::ng-deep nb-card {
 
       nb-card-body {
         padding: 2rem 1rem;
@@ -41,9 +45,22 @@
       }
 
       h1, h2, h3, h4, h5, h6 {
-        line-height: 1.25;
         margin-bottom: 1.25rem;
-        font-weight: bold;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:not(:first-child) {
+          margin-top: 3rem;
+        }
+      }
+
+      h1, h2, h3 {
+        font-family: nb-theme(text-heading-4-font-family);
+        font-size: nb-theme(text-heading-4-font-size);
+        font-weight: nb-theme(text-heading-4-font-weight);
+        line-height: nb-theme(text-heading-4-line-height);
       }
 
       h3 {
