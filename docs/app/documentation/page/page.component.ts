@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, publishReplay, refCount, tap, takeWhile } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
+import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
 import { NgdStructureService } from '../../@theme/services';
 
 @Component({
@@ -20,6 +21,8 @@ export class NgdPageComponent implements OnInit, OnDestroy {
 
   currentItem;
   private alive = true;
+
+  @ViewChild(NgdTabbedBlockComponent) tabbedBlock: NgdTabbedBlockComponent;
 
   constructor(@Inject(NB_WINDOW) private window,
               private ngZone: NgZone,

@@ -168,7 +168,7 @@
 
           nav {
             background-color: nb-theme(footer-background-color);
-            border-top: 1px solid nb-theme(footer-divider-color);
+            border-top: nb-theme(footer-divider-width) nb-theme(footer-divider-style) nb-theme(footer-divider-color);
             color: nb-theme(footer-text-color);
             font-family: nb-theme(footer-text-font-family);
             font-size: nb-theme(footer-text-font-size);

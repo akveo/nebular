@@ -124,5 +124,12 @@
         }
       }
     }
+
+    .menu-item > .menu-items > .menu-group {
+      &,
+      & nb-icon.menu-icon {
+        color: nb-theme(menu-group-text-color);
+      }
+    }
   }
 }

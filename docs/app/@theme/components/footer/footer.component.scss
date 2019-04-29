@@ -2,8 +2,8 @@
 
 @include nb-install-component() {
 
-  $text-fg: nb-theme(footer-fg);
-  $social-fg: nb-theme(color-fg-icon);
+  $text-fg: nb-theme(footer-text-color);
+  $icon-color: nb-theme(footer-icon-color);
   $title-fg: nb-theme(color-fg-heading);
 
   display: flex;
@@ -19,10 +19,6 @@
     width: 100%;
     &:last-child {
       margin-right: 0;
-    }
-
-    a {
-      color: $text-fg;
     }
 
     ul {
@@ -61,7 +57,7 @@
       a {
         font-size: 3rem;
         text-decoration: none;
-        color: $social-fg;
+        color: $icon-color;
         margin-right: 1rem;
       }
     }
