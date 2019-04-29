@@ -11,7 +11,7 @@ First, let's install the module as it's distributed as an npm package. Security 
 
 
 ```bash
-npm i @nebular/security
+npm i @nebular/security@next
 ```
 <hr>   
 ## Import the module:
