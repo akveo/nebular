@@ -22,7 +22,8 @@ $nb-enabled-themes: (docs-home, docs-page);
 
 /* stylelint-disable max-line-length */
 $nb-themes: nb-register-theme((
-  font-main: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
+  font-family-primary: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
+  font-family-secondary: font-family-primary,
 
   // custom
   content-width: 1140px,
@@ -33,8 +34,6 @@ $nb-themes: nb-register-theme((
   header-menu-fg-active: color-fg,
   footer-menu-fg: color-fg-text,
 
-  separator: transparent,
-  color-bg: transparent,
   color-fg: white,
   color-fg-heading: #0d1c2e,
   color-fg-text: #919fb1,
@@ -90,7 +89,6 @@ $nb-themes: nb-register-theme((
   menu-fg: black,
   menu-submenu-fg: color-fg-heading-light,
   menu-active-fg: menu-fg,
-  menu-submenu-padding: 0,
   menu-submenu-item-container-padding: 0 1rem,
   menu-submenu-active-border-color: transparent,
   menu-submenu-active-fg: color-fg-highlight,
