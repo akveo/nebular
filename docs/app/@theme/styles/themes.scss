@@ -30,7 +30,6 @@ $nb-themes: nb-register-theme((
   settings-col-width: 0,
   settings-col-margin: 0,
   color-fg-heading-light: #ffffff,
-  color-fg-icon: #cdd6e3,
   header-menu-fg-active: color-fg,
   footer-menu-fg: color-fg-text,
 
@@ -42,6 +41,8 @@ $nb-themes: nb-register-theme((
   layout-padding: 0,
   layout-medium-padding: 0,
   layout-small-padding: 0,
+  footer-text-color: color-fg-text,
+  footer-icon-color: #cdd6e3,
   footer-background-color: transparent,
   footer-divider-width: 0,
   header-padding: 0 0,
@@ -54,7 +55,6 @@ $nb-themes: nb-register-theme((
   footer-padding: 1.25rem 0,
   menu-font-size: 0.95rem,
   menu-font-weight: font-weight-normal,
-  footer-fg: color-fg-text,
 ), docs-home, default);
 /* stylelint-enable max-line-length */
 
@@ -101,5 +101,5 @@ $nb-themes: nb-register-theme((
   card-header-fg-heading: black,
   card-margin: 2.5rem,
   footer-shadow: none,
-  footer-fg: color-fg-heading-light,
+  footer-text-color: color-fg-heading-light,
 ), docs-page, docs-home);
