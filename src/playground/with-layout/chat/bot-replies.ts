@@ -1,4 +1,4 @@
-const botAvatar: string = 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg';
+const botAvatar: string = 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png';
 
 export const gifsLinks: string[] = [
   'https://media.tenor.com/images/ac287fd06319e47b1533737662d5bfe8/tenor.gif',
@@ -100,7 +100,7 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'nb-compose',
+          icon: 'file-text-outline',
         },
         {
           url: '',
@@ -111,7 +111,7 @@ export const botReplies = [
           type: 'image/jpeg',
         },
       ],
-      icon: 'nb-compose',
+      icon: 'file-text-outline',
       user: {
         name: 'Bot',
         avatar: botAvatar,
@@ -130,10 +130,10 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'nb-compose',
+          icon: 'file-text-outline',
         },
       ],
-      icon: 'nb-compose',
+      icon: 'file-text-outline',
       user: {
         name: 'Bot',
         avatar: botAvatar,

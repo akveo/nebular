@@ -24,6 +24,7 @@
     }
 
     nb-card {
+      border: none;
       margin: 0;
     }
 
@@ -43,7 +44,7 @@
     }
 
     &.in-range {
-      background: nb-theme(calendar-range-bg-in-range);
+      background: nb-theme(calendar-cell-in-range-background-color);
 
       &:not(.today, :hover) {
         border-radius: 0;
@@ -52,7 +53,7 @@
 
     &.start, &.end {
       @extend .selected;
-      background: nb-theme(calendar-range-bg-in-range);
+      background: nb-theme(calendar-cell-in-range-background-color);
     }
 
     &.start {

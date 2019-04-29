@@ -17,7 +17,6 @@ import {
   addDependencyToPackageJson,
   addDevDependencyToPackageJson,
   getDependencyVersionFromPackageJson,
-  getNebularPeerDependencyVersionFromPackageJson,
   getNebularVersion,
 } from '../util/package';
 
@@ -38,12 +37,11 @@ export default function (options: Schema): Rule {
 function registerPeerDependencies(host: Tree) {
   const angularCoreVersion = getDependencyVersionFromPackageJson(host, '@angular/core');
   const nebularThemeVersion = getNebularVersion();
-  const nebularIconsVersion = getNebularPeerDependencyVersionFromPackageJson('nebular-icons');
 
   addDependencyToPackageJson(host, '@angular/cdk', angularCoreVersion);
   addDependencyToPackageJson(host, '@angular/animations', angularCoreVersion);
   addDependencyToPackageJson(host, '@nebular/theme', nebularThemeVersion);
-  addDependencyToPackageJson(host, 'nebular-icons', nebularIconsVersion);
+  addDependencyToPackageJson(host, '@nebular/eva-icons', nebularThemeVersion);
 
   addDevDependencyToPackageJson(host, '@schematics/angular', angularCoreVersion);
 }

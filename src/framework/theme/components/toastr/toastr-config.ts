@@ -6,9 +6,12 @@
 
 import { InjectionToken } from '@angular/core';
 
-import { NbToastStatus } from './model';
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk';
+import { NbComponentStatus } from '../component-status';
 
+type IconToClassMap = {
+  [status in NbComponentStatus]: string;
+}
 
 export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toastr options');
 
@@ -23,7 +26,7 @@ export class NbToastrConfig {
   /**
    * Status chooses color scheme for the toast.
    * */
-  status: NbToastStatus = NbToastStatus.PRIMARY;
+  status: '' | NbComponentStatus = 'primary';
   /**
    * Duration is timeout between toast appears and disappears.
    * */
@@ -41,18 +44,22 @@ export class NbToastrConfig {
    * */
   hasIcon: boolean = true;
   /**
-   * Icon class that can be provided to render custom icon.
+   * Icon name that can be provided to render custom icon.
    * */
-  icon: string = 'nb-email';
+  icon: string = 'email';
+  /**
+   * Icon pack to look for the icon in.
+   * */
+  iconPack: string;
   /**
    * Toast status icon-class mapping.
    * */
-  protected icons = {
-    [NbToastStatus.DANGER]: 'nb-danger',
-    [NbToastStatus.SUCCESS]: 'nb-checkmark-circle',
-    [NbToastStatus.INFO]: 'nb-help',
-    [NbToastStatus.WARNING]: 'nb-alert',
-    [NbToastStatus.PRIMARY]: 'nb-email',
+  protected icons: IconToClassMap = {
+    danger: 'flash-outline',
+    success: 'checkmark-outline',
+    info: 'question-mark-outline',
+    warning: 'alert-triangle-outline',
+    primary: 'email-outline',
   };
 
   constructor(config: Partial<NbToastrConfig>) {
@@ -62,7 +69,8 @@ export class NbToastrConfig {
 
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
-      config.icon = this.icons[config.status || NbToastStatus.PRIMARY];
+      config.icon = this.icons[config.status || 'primary'];
+      config.iconPack = 'nebular-essentials';
     }
   }
 }

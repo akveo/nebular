@@ -29,21 +29,13 @@ describe('Component: NbProgressBar', () => {
   it('Setting status danger should set class danger', () => {
     progressBar.status = 'danger';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement
-        .query(By.css('.progress-value')).nativeElement.classList.contains('danger'))
-      .toBeTruthy()
+    expect(fixture.nativeElement.classList).toContain('status-danger')
   });
 
-  it('Setting size sm should set class sm', () => {
-    progressBar.size = 'sm';
+  it('Setting size should set class', () => {
+    progressBar.size = 'small';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement
-        .query(By.css('.progress-container')).nativeElement.classList.contains('sm'))
-      .toBeTruthy()
+    expect((fixture.nativeElement as HTMLElement).classList).toContain('size-small');
   });
 
   it('Setting displayValue should create span with value label', () => {

@@ -20,7 +20,7 @@ task('copy-schematics', () => {
     .pipe(dest('./schematics/dist/'));
 });
 
-function replaceScssWithCss() {
+export function replaceScssWithCss() {
   src(`${BUILD_DIR}/**/*.ts`)
     .pipe(replace('.scss', '.css'))
     .pipe(dest(BUILD_DIR))

@@ -16,17 +16,17 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
-import { startWith, switchMap, takeWhile } from 'rxjs/operators';
+import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -41,11 +41,15 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
 } from '../cdk';
-import { NbOptionComponent } from './option.component';
-import { NbButtonComponent } from '../button/button.component';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbFocusKeyManager, ESCAPE } from '../cdk';
+import { NbOptionComponent } from './option.component';
 import { convertToBoolProperty } from '../helpers';
 
+export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
 @Component({
   selector: 'nb-select-label',
@@ -65,7 +69,7 @@ export class NbSelectLabelComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSelectModule,
  *   ],
  * })
@@ -78,7 +82,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Multiple, select/select-multiple.component)
  *
- * Items without values will clean selection.
+ * Items without values will clean the selection. Both `null` and `undefined` values will also clean the selection.
  *
  * @stacked-example(Clean selection, select/select-clean.component)
  *
@@ -114,13 +118,13 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select statuses, select/select-status.component)
  *
- * There are four select sizes:
+ * There are five select sizes:
  *
  * @stacked-example(Select sizes, select/select-sizes.component)
  *
- * And two additional style types - `outline`:
+ * And two additional style types - `filled`:
  *
- * @stacked-example(Outline select, select/select-outline.component)
+ * @stacked-example(Filled select, select/select-filled.component)
  *
  * and `hero`:
  *
@@ -130,17 +134,244 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Select shapes, select/select-shapes.component)
  *
+ * @additional-example(Interactive, select/select-interactive.component)
  *
  * @styles
  *
- * select-border-width:
- * select-max-height:
- * select-bg:
- * select-checkbox-color:
- * select-checkmark-color:
- * select-option-disabled-bg:
- * select-option-disabled-opacity:
- * select-option-padding:
+ * select-cursor:
+ * select-disabled-cursor:
+ * select-min-width:
+ * select-options-list-max-height:
+ * select-outline-width:
+ * select-outline-color:
+ * select-text-font-family:
+ * select-text-font-weight:
+ * select-placeholder-text-font-weight:
+ * select-option-background-color:
+ * select-option-text-color:
+ * select-option-selected-background-color:
+ * select-option-selected-text-color:
+ * select-option-focus-background-color:
+ * select-option-focus-text-color:
+ * select-option-hover-background-color:
+ * select-option-hover-text-color:
+ * select-option-disabled-background-color:
+ * select-option-disabled-text-color:
+ * select-tiny-text-font-size:
+ * select-tiny-text-line-height:
+ * select-small-text-font-size:
+ * select-small-text-line-height:
+ * select-medium-text-font-size:
+ * select-medium-text-line-height:
+ * select-large-text-font-size:
+ * select-large-text-line-height:
+ * select-giant-text-font-size:
+ * select-giant-text-line-height:
+ * select-rectangle-border-radius:
+ * select-semi-round-border-radius:
+ * select-round-border-radius:
+ * select-outline-background-color:
+ * select-outline-border-color:
+ * select-outline-border-style:
+ * select-outline-border-width:
+ * select-outline-text-color:
+ * select-outline-placeholder-text-color:
+ * select-outline-focus-border-color:
+ * select-outline-hover-border-color:
+ * select-outline-disabled-border-color:
+ * select-outline-disabled-background-color:
+ * select-outline-disabled-text-color:
+ * select-outline-tiny-padding:
+ * select-outline-small-padding:
+ * select-outline-medium-padding:
+ * select-outline-large-padding:
+ * select-outline-giant-padding:
+ * select-outline-primary-border-color:
+ * select-outline-primary-focus-border-color:
+ * select-outline-primary-hover-border-color:
+ * select-outline-success-border-color:
+ * select-outline-success-focus-border-color:
+ * select-outline-success-hover-border-color:
+ * select-outline-info-border-color:
+ * select-outline-info-focus-border-color:
+ * select-outline-info-hover-border-color:
+ * select-outline-warning-border-color:
+ * select-outline-warning-focus-border-color:
+ * select-outline-warning-hover-border-color:
+ * select-outline-danger-border-color:
+ * select-outline-danger-focus-border-color:
+ * select-outline-danger-hover-border-color:
+ * select-option-outline-tiny-padding:
+ * select-option-outline-small-padding:
+ * select-option-outline-medium-padding:
+ * select-option-outline-large-padding:
+ * select-option-outline-giant-padding:
+ * select-group-option-outline-tiny-start-padding:
+ * select-group-option-outline-small-start-padding:
+ * select-group-option-outline-medium-start-padding:
+ * select-group-option-outline-large-start-padding:
+ * select-group-option-outline-giant-start-padding:
+ * select-filled-background-color:
+ * select-filled-border-color:
+ * select-filled-border-style:
+ * select-filled-border-width:
+ * select-filled-text-color:
+ * select-filled-placeholder-text-color:
+ * select-filled-focus-border-color:
+ * select-filled-hover-background-color:
+ * select-filled-hover-border-color:
+ * select-filled-disabled-background-color:
+ * select-filled-disabled-border-color:
+ * select-filled-disabled-text-color:
+ * select-filled-tiny-padding:
+ * select-filled-small-padding:
+ * select-filled-medium-padding:
+ * select-filled-large-padding:
+ * select-filled-giant-padding:
+ * select-filled-primary-background-color:
+ * select-filled-primary-border-color:
+ * select-filled-primary-text-color:
+ * select-filled-primary-placeholder-text-color:
+ * select-filled-primary-focus-background-color:
+ * select-filled-primary-focus-border-color:
+ * select-filled-primary-hover-background-color:
+ * select-filled-primary-hover-border-color:
+ * select-filled-primary-disabled-background-color:
+ * select-filled-primary-disabled-border-color:
+ * select-filled-success-background-color:
+ * select-filled-success-border-color:
+ * select-filled-success-text-color:
+ * select-filled-success-placeholder-text-color:
+ * select-filled-success-focus-background-color:
+ * select-filled-success-focus-border-color:
+ * select-filled-success-hover-background-color:
+ * select-filled-success-hover-border-color:
+ * select-filled-success-disabled-background-color:
+ * select-filled-success-disabled-border-color:
+ * select-filled-info-background-color:
+ * select-filled-info-border-color:
+ * select-filled-info-text-color:
+ * select-filled-info-placeholder-text-color:
+ * select-filled-info-focus-background-color:
+ * select-filled-info-focus-border-color:
+ * select-filled-info-hover-background-color:
+ * select-filled-info-hover-border-color:
+ * select-filled-info-disabled-background-color:
+ * select-filled-info-disabled-border-color:
+ * select-filled-warning-background-color:
+ * select-filled-warning-border-color:
+ * select-filled-warning-text-color:
+ * select-filled-warning-placeholder-text-color:
+ * select-filled-warning-focus-background-color:
+ * select-filled-warning-focus-border-color:
+ * select-filled-warning-hover-background-color:
+ * select-filled-warning-hover-border-color:
+ * select-filled-warning-disabled-background-color:
+ * select-filled-warning-disabled-border-color:
+ * select-filled-danger-background-color:
+ * select-filled-danger-border-color:
+ * select-filled-danger-text-color:
+ * select-filled-danger-placeholder-text-color:
+ * select-filled-danger-focus-background-color:
+ * select-filled-danger-focus-border-color:
+ * select-filled-danger-hover-background-color:
+ * select-filled-danger-hover-border-color:
+ * select-filled-danger-disabled-background-color:
+ * select-filled-danger-disabled-border-color:
+ * select-option-filled-tiny-padding:
+ * select-group-option-filled-tiny-padding-start:
+ * select-option-filled-small-padding:
+ * select-group-option-filled-small-padding-start:
+ * select-option-filled-medium-padding:
+ * select-group-option-filled-medium-padding-start:
+ * select-option-filled-large-padding:
+ * select-group-option-filled-large-padding-start:
+ * select-option-filled-giant-padding:
+ * select-group-option-filled-giant-padding-start:
+ * select-hero-left-background-color:
+ * select-hero-right-background-color:
+ * select-hero-border-color:
+ * select-hero-border-style:
+ * select-hero-border-width:
+ * select-hero-text-color:
+ * select-hero-placeholder-text-color:
+ * select-hero-focus-left-background-color:
+ * select-hero-focus-right-background-color:
+ * select-hero-hover-left-background-color:
+ * select-hero-hover-right-background-color:
+ * select-hero-disabled-left-background-color:
+ * select-hero-disabled-right-background-color:
+ * select-hero-disabled-text-color:
+ * select-hero-tiny-padding:
+ * select-hero-small-padding:
+ * select-hero-medium-padding:
+ * select-hero-large-padding:
+ * select-hero-giant-padding:
+ * select-hero-primary-left-background-color:
+ * select-hero-primary-right-background-color:
+ * select-hero-primary-text-color:
+ * select-hero-primary-placeholder-text-color:
+ * select-hero-primary-focus-left-background-color:
+ * select-hero-primary-focus-right-background-color:
+ * select-hero-primary-hover-left-background-color:
+ * select-hero-primary-hover-right-background-color:
+ * select-hero-primary-disabled-left-background-color:
+ * select-hero-primary-disabled-right-background-color:
+ * select-hero-primary-disabled-text-color:
+ * select-hero-success-left-background-color:
+ * select-hero-success-right-background-color:
+ * select-hero-success-text-color:
+ * select-hero-success-placeholder-text-color:
+ * select-hero-success-focus-left-background-color:
+ * select-hero-success-focus-right-background-color:
+ * select-hero-success-hover-left-background-color:
+ * select-hero-success-hover-right-background-color:
+ * select-hero-success-disabled-left-background-color:
+ * select-hero-success-disabled-right-background-color:
+ * select-hero-success-disabled-text-color:
+ * select-hero-info-left-background-color:
+ * select-hero-info-right-background-color:
+ * select-hero-info-text-color:
+ * select-hero-info-placeholder-text-color:
+ * select-hero-info-focus-left-background-color:
+ * select-hero-info-focus-right-background-color:
+ * select-hero-info-hover-left-background-color:
+ * select-hero-info-hover-right-background-color:
+ * select-hero-info-disabled-left-background-color:
+ * select-hero-info-disabled-right-background-color:
+ * select-hero-info-disabled-text-color:
+ * select-hero-warning-left-background-color:
+ * select-hero-warning-right-background-color:
+ * select-hero-warning-text-color:
+ * select-hero-warning-placeholder-text-color:
+ * select-hero-warning-focus-left-background-color:
+ * select-hero-warning-focus-right-background-color:
+ * select-hero-warning-hover-left-background-color:
+ * select-hero-warning-hover-right-background-color:
+ * select-hero-warning-disabled-left-background-color:
+ * select-hero-warning-disabled-right-background-color:
+ * select-hero-warning-disabled-text-color:
+ * select-hero-danger-left-background-color:
+ * select-hero-danger-right-background-color:
+ * select-hero-danger-text-color:
+ * select-hero-danger-placeholder-text-color:
+ * select-hero-danger-focus-left-background-color:
+ * select-hero-danger-focus-right-background-color:
+ * select-hero-danger-hover-left-background-color:
+ * select-hero-danger-hover-right-background-color:
+ * select-hero-danger-disabled-left-background-color:
+ * select-hero-danger-disabled-right-background-color:
+ * select-hero-danger-disabled-text-color:
+ * select-option-hero-tiny-padding:
+ * select-group-option-hero-tiny-padding-start:
+ * select-option-hero-small-padding:
+ * select-group-option-hero-small-padding-start:
+ * select-option-hero-medium-padding:
+ * select-group-option-hero-medium-padding-start:
+ * select-option-hero-large-padding:
+ * select-group-option-hero-large-padding-start:
+ * select-option-hero-giant-padding:
+ * select-group-option-hero-giant-padding-start:
  * */
 @Component({
   selector: 'nb-select',
@@ -155,43 +386,96 @@ export class NbSelectLabelComponent {
     },
   ],
 })
-export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+
   /**
    * Select size, available sizes:
-   * `xxsmall`, `xsmall`, `small`, `medium`, `large`
+   * `tiny`, `small`, `medium` (default), `large`, `giant`
    */
-  @Input() size: string;
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Select status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: string = 'primary';
+  @Input() status: '' | NbComponentStatus = '';
 
   /**
-   * Select shapes: `rectangle`, `round`, `semi-round`
+   * Select shapes: `rectangle` (default), `round`, `semi-round`
    */
-  @Input() shape: string;
+  @Input() shape: NbComponentShape = 'rectangle';
 
   /**
-   * Adds `hero` styles
+   * Select appearances: `outline` (default), `filled`, `hero`
    */
-  @Input() hero: boolean;
-
-  /**
-   * Disables the select
-   */
-  @Input() disabled: boolean;
-
-  /**
-   * If set element will fill its container
-   */
-  @Input() fullWidth: boolean;
+  @Input() appearance: NbSelectAppearance = 'outline';
 
   /**
    * Adds `outline` styles
    */
-  @Input() outline: boolean;
+  @Input()
+  @HostBinding('class.appearance-outline')
+  get outline(): boolean {
+    return this.appearance === 'outline';
+  }
+  set outline(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'outline';
+    }
+  }
+
+  /**
+   * Adds `filled` styles
+   */
+  @Input()
+  @HostBinding('class.appearance-filled')
+  get filled(): boolean {
+    return this.appearance === 'filled';
+  }
+  set filled(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'filled';
+    }
+  }
+
+  /**
+   * Adds `hero` styles
+   */
+  @Input()
+  @HostBinding('class.appearance-hero')
+  get hero(): boolean {
+    return this.appearance === 'hero';
+  }
+  set hero(value: boolean) {
+    if (convertToBoolProperty(value)) {
+      this.appearance = 'hero';
+    }
+  }
+
+  /**
+   * Disables the select
+   */
+  @Input()
+  get disabled(): boolean {
+    return !!this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  protected _disabled: boolean;
+
+  /**
+   * If set element will fill its container
+   */
+  @Input()
+  @HostBinding('class.full-width')
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
+  }
+  protected _fullWidth: boolean = false;
 
   /**
    * Renders select placeholder if nothing selected.
@@ -199,25 +483,34 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   @Input() placeholder: string = '';
 
   /**
-   * Will be emitted when selected value changes.
-   * */
-  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
-
-  /**
    * Accepts selected item or array of selected items.
    * */
-  @Input('selected')
-  set setSelected(value: T | T[]) {
+  @Input()
+  set selected(value: T | T[]) {
     this.writeValue(value);
+  }
+  get selected(): T | T[] {
+    return this.multiple
+      ? this.selectionModel.map(o => o.value)
+      : this.selectionModel[0].value;
   }
 
   /**
    * Gives capability just write `multiple` over the element.
    * */
-  @Input('multiple')
-  set setMultiple(multiple: boolean) {
-    this.multiple = convertToBoolProperty(multiple);
+  @Input()
+  get multiple(): boolean {
+    return this._multiple;
   }
+  set multiple(value: boolean) {
+    this._multiple = convertToBoolProperty(value);
+  }
+  protected _multiple: boolean = false;
+
+  /**
+   * Will be emitted when selected value changes.
+   * */
+  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
 
   /**
    * List of `NbOptionComponent`'s components passed as content.
@@ -235,9 +528,15 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
-  @ViewChild(NbButtonComponent, { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectButton', { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
 
-  multiple: boolean = false;
+  /**
+   * Determines is select opened.
+   * */
+  @HostBinding('class.open')
+  get isOpen(): boolean {
+    return this.ref && this.ref.hasAttached();
+  }
 
   /**
    * List of selected options.
@@ -267,6 +566,8 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected alive: boolean = true;
 
+  protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
+
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
    * And then applied after content rendered.
@@ -289,17 +590,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   /**
-   * Determines is select opened.
-   * */
-  get isOpened(): boolean {
-    return this.ref && this.ref.hasAttached();
-  }
-
-  /**
    * Determines is select hidden.
    * */
   get isHidden(): boolean {
-    return !this.isOpened;
+    return !this.isOpen;
   }
 
   /**
@@ -307,6 +601,29 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * */
   get hostWidth(): number {
     return this.hostRef.nativeElement.getBoundingClientRect().width;
+  }
+
+  get selectButtonClasses(): string[] {
+    const classes = [];
+
+    if (!this.selectionModel.length) {
+      classes.push('placeholder')
+    }
+    if (this.isOpen) {
+      classes.push(this.overlayPosition);
+    }
+
+    return classes;
+  }
+
+  get optionsListClasses(): string[] {
+    return [
+      `appearance-${this.appearance}`,
+      `size-${this.size}`,
+      `shape-${this.shape}`,
+      `status-${this.status}`,
+      this.overlayPosition,
+    ];
   }
 
   /**
@@ -318,10 +635,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     }
 
     return this.selectionModel[0].content;
-  }
-
-  ngOnInit() {
-    this.createOverlay();
   }
 
   ngAfterContentInit() {
@@ -341,7 +654,6 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.triggerStrategy = this.createTriggerStrategy();
 
     this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
     this.subscribeOnOptionClick();
   }
 
@@ -358,13 +670,14 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   show() {
     if (this.isHidden) {
-      this.ref.attach(this.portal);
+      this.attachToOverlay();
+      this.setActiveOption();
       this.cd.markForCheck();
     }
   }
 
   hide() {
-    if (this.isOpened) {
+    if (this.isOpen) {
       this.ref.detach();
       this.cd.markForCheck();
     }
@@ -384,7 +697,7 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
   }
 
   writeValue(value: T | T[]): void {
-    if (!value || !this.alive) {
+    if (!this.alive) {
       return;
     }
 
@@ -399,10 +712,10 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
    * Selects option or clear all selected options if value is null.
    * */
   protected handleOptionClick(option: NbOptionComponent<T>) {
-    if (option.value) {
-      this.selectOption(option);
-    } else {
+    if (option.value == null) {
       this.reset();
+    } else {
+      this.selectOption(option);
     }
 
     this.cd.markForCheck();
@@ -463,10 +776,33 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
     this.emitSelected(this.selectionModel.map((opt: NbOptionComponent<T>) => opt.value));
   }
 
+  protected attachToOverlay() {
+    if (!this.ref) {
+      this.createOverlay();
+      this.subscribeOnPositionChange();
+      this.createKeyManager();
+      this.subscribeOnOverlayKeys();
+    }
+
+    this.ref.attach(this.portal);
+  }
+
+  protected setActiveOption() {
+    if (this.selectionModel.length) {
+      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
+    } else {
+      this.keyManager.setFirstItemActive();
+    }
+  }
+
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.positionStrategy = this.createPositionStrategy();
     this.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
+  }
+
+  protected createKeyManager(): void {
+    this.keyManager = new NbFocusKeyManager<NbOptionComponent<T>>(this.options).withTypeAhead(200);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -526,6 +862,26 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
         this.handleOptionClick(clickedOption);
         this.selectionChange$.next(clickedOption);
       });
+  }
+
+  protected subscribeOnOverlayKeys(): void {
+    this.ref.keydownEvents()
+      .pipe(
+        takeWhile(() => this.alive),
+        filter(() => this.isOpen),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        if (event.keyCode === ESCAPE) {
+          this.button.nativeElement.focus();
+          this.hide();
+        } else {
+          this.keyManager.onKeydown(event);
+        }
+      });
+
+    this.keyManager.tabOut
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => this.hide());
   }
 
   protected getContainer() {
@@ -599,5 +955,58 @@ export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContent
 
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
+  }
+
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
+  }
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
+  }
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
+  }
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
+  }
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
+  }
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
+  }
+  @HostBinding('class.shape-rectangle')
+  get rectangle(): boolean {
+    return this.shape === 'rectangle';
+  }
+  @HostBinding('class.shape-round')
+  get round(): boolean {
+    return this.shape === 'round';
+  }
+  @HostBinding('class.shape-semi-round')
+  get semiRound(): boolean {
+    return this.shape === 'semi-round';
   }
 }

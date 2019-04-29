@@ -1,5 +1,5 @@
 <span *ngIf="menuItem.group">
-  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   {{ menuItem.title }}
 </span>
 <a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
@@ -12,7 +12,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="onItemClick(menuItem);">
-  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
@@ -22,7 +22,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="onSelectItem(menuItem)">
-  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
@@ -31,7 +31,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="$event.preventDefault(); onItemClick(menuItem);">
-  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="menuItem.children"
@@ -41,10 +41,9 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    href="#">
-  <i class="menu-icon {{ menuItem.icon }}" *ngIf="menuItem.icon"></i>
+  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
-  <i class="ion chevron" [class.ion-chevron-left]="!menuItem.expanded"
-     [class.ion-chevron-down]="menuItem.expanded"></i>
+  <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>
 <ul *ngIf="menuItem.children"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"

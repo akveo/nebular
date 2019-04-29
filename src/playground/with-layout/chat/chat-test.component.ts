@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbComponentSize } from '@nebular/theme';
 
 @Component({
   selector: 'nb-chat-test',
@@ -33,8 +34,8 @@ import { Component } from '@angular/core';
 })
 export class ChatTestComponent {
   messages = [];
-  sizes = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
-  statuses = ['primary', 'success', 'info', 'warning', 'danger', 'active', 'disabled'];
+  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+  statuses = [ 'primary', 'success', 'info', 'warning', 'danger' ];
 
   chats: any[];
 

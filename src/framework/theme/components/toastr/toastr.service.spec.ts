@@ -1,6 +1,5 @@
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk';
-import { NbToastStatus } from './model';
 import { TestBed } from '@angular/core/testing';
 import { ComponentFactoryResolver } from '@angular/core';
 import { NbToastrModule } from '@nebular/theme';
@@ -53,7 +52,7 @@ describe('toastr-service', () => {
     expect(attachSpy).toHaveBeenCalled();
     const [[{ config }]] = attachSpy.calls.allArgs();
     expect(config.position).toBe(NbGlobalLogicalPosition.BOTTOM_START, 'incorrect position');
-    expect(config.status).toBe(NbToastStatus.PRIMARY, 'incorrect status');
+    expect(config.status).toBe('primary', 'incorrect status');
     expect(config.duration).toBe(1234, 'incorrect duration');
     expect(config.destroyByClick).toBe(true, 'incorrect destroyByClick');
     expect(config.preventDuplicates).toBe(true, 'incorrect preventDuplicates');
@@ -67,7 +66,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.SUCCESS);
+    expect(status).toBe('success');
   });
 
   it('should call show with info status when info called', () => {
@@ -77,7 +76,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.INFO);
+    expect(status).toBe('info');
   });
 
   it('should call show with warning status when warning called', () => {
@@ -87,7 +86,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.WARNING);
+    expect(status).toBe('warning');
   });
 
   it('should call show with primary status when primary called', () => {
@@ -97,7 +96,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.PRIMARY);
+    expect(status).toBe('primary');
   });
 
   it('should call show with danger status when danger called', () => {
@@ -107,7 +106,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.DANGER);
+    expect(status).toBe('danger');
   });
 
   it('should call show with default status when default called', () => {
@@ -117,7 +116,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe(NbToastStatus.DEFAULT);
+    expect(status).toBe('');
   });
 });
 

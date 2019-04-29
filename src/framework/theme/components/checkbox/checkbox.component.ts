@@ -4,8 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -19,7 +21,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCheckboxModule,
  *   ],
  * })
@@ -32,36 +34,107 @@ import { convertToBoolProperty } from '../helpers';
  * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
  * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
+ * @additional-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
  *
  * @styles
  *
- * checkbox-bg:
- * checkbox-size:
- * checkbox-border-size:
- * checkbox-border-color:
- * checkbox-checkmark:
- * checkbox-checked-bg:
- * checkbox-checked-size:
- * checkbox-checked-border-size:
- * checkbox-checked-border-color:
- * checkbox-checked-checkmark:
- * checkbox-disabled-bg:
- * checkbox-disabled-size:
- * checkbox-disabled-border-size:
+ * checkbox-height:
+ * checkbox-width:
+ * checkbox-border-style:
+ * checkbox-border-width:
+ * checkbox-border-radius:
+ * checkbox-outline-width:
+ * checkbox-outline-color:
+ * checkbox-text-color:
+ * checkbox-text-font-family:
+ * checkbox-text-font-size:
+ * checkbox-text-font-weight:
+ * checkbox-text-line-height:
+ * checkbox-disabled-background-color:
  * checkbox-disabled-border-color:
- * checkbox-disabled-checkmark:
+ * checkbox-disabled-checkmark-color:
+ * checkbox-disabled-text-color:
+ * checkbox-primary-background-color:
+ * checkbox-primary-border-color:
+ * checkbox-primary-checked-background-color:
+ * checkbox-primary-checked-border-color:
+ * checkbox-primary-checked-checkmark-color:
+ * checkbox-primary-indeterminate-background-color:
+ * checkbox-primary-indeterminate-border-color:
+ * checkbox-primary-indeterminate-checkmark-color:
+ * checkbox-primary-focus-background-color:
+ * checkbox-primary-hover-background-color:
+ * checkbox-primary-hover-border-color:
+ * checkbox-primary-active-background-color:
+ * checkbox-primary-active-border-color:
+ * checkbox-success-background-color:
+ * checkbox-success-border-color:
+ * checkbox-success-checked-background-color:
+ * checkbox-success-checked-border-color:
+ * checkbox-success-checked-checkmark-color:
+ * checkbox-success-indeterminate-background-color:
+ * checkbox-success-indeterminate-border-color:
+ * checkbox-success-indeterminate-checkmark-color:
+ * checkbox-success-focus-background-color:
+ * checkbox-success-hover-background-color:
+ * checkbox-success-hover-border-color:
+ * checkbox-success-active-background-color:
+ * checkbox-success-active-border-color:
+ * checkbox-warning-background-color:
+ * checkbox-warning-border-color:
+ * checkbox-warning-checked-background-color:
+ * checkbox-warning-checked-border-color:
+ * checkbox-warning-checked-checkmark-color:
+ * checkbox-warning-indeterminate-background-color:
+ * checkbox-warning-indeterminate-border-color:
+ * checkbox-warning-indeterminate-checkmark-color:
+ * checkbox-warning-focus-background-color:
+ * checkbox-warning-hover-background-color:
+ * checkbox-warning-hover-border-color:
+ * checkbox-warning-active-background-color:
+ * checkbox-warning-active-border-color:
+ * checkbox-danger-background-color:
+ * checkbox-danger-border-color:
+ * checkbox-danger-checked-background-color:
+ * checkbox-danger-checked-border-color:
+ * checkbox-danger-checked-checkmark-color:
+ * checkbox-danger-indeterminate-background-color:
+ * checkbox-danger-indeterminate-border-color:
+ * checkbox-danger-indeterminate-checkmark-color:
+ * checkbox-danger-focus-background-color:
+ * checkbox-danger-hover-background-color:
+ * checkbox-danger-hover-border-color:
+ * checkbox-danger-active-background-color:
+ * checkbox-danger-active-border-color:
+ * checkbox-info-background-color:
+ * checkbox-info-border-color:
+ * checkbox-info-checked-background-color:
+ * checkbox-info-checked-border-color:
+ * checkbox-info-checked-checkmark-color:
+ * checkbox-info-indeterminate-background-color:
+ * checkbox-info-indeterminate-border-color:
+ * checkbox-info-indeterminate-checkmark-color:
+ * checkbox-info-focus-background-color:
+ * checkbox-info-hover-background-color:
+ * checkbox-info-hover-border-color:
+ * checkbox-info-active-background-color:
+ * checkbox-info-active-border-color:
  */
 @Component({
   selector: 'nb-checkbox',
   template: `
-    <label class="customised-control">
-      <input type="checkbox" class="customised-control-input"
+    <label class="label">
+      <input type="checkbox" class="native-input visually-hidden"
              [disabled]="disabled"
              [checked]="value"
-             (change)="value = !value"
-             (blur)="setTouched()">
-      <span class="customised-control-indicator"></span>
-      <span class="customised-control-description">
+             (change)="updateValueAndIndeterminate($event)"
+             (blur)="setTouched()"
+             [indeterminate]="indeterminate">
+      <span [class.indeterminate]="indeterminate" [class.checked]="value" class="custom-checkbox">
+        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
+      </span>
+      <span class="text">
         <ng-content></ng-content>
       </span>
     </label>
@@ -75,55 +148,80 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
 
-  status: string;
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   /**
    * Checkbox value
-   * @type {boolean}
-   * @private
    */
-  @Input('value') _value: boolean = false;
-
-  disabled: boolean = false;
-  @Input('disabled')
-  set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
+  @Input()
+  get value(): boolean {
+    return this._value;
   }
+  set value(value: boolean) {
+    this._value = value;
+    this.change.emit(value);
+    this.onChange(value);
+  }
+  private _value: boolean = false;
 
   /**
-   * Checkbox status (success, warning, danger)
-   * @param {string} val
+   * Controls input disabled state
    */
-  @Input('status')
-  set setStatus(val: string) {
-    this.status = val;
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  private _disabled: boolean = false;
+
+  /**
+   * Checkbox status.
+   * Possible values are: `primary` (default), `success`, `warning`, `danger`, `info`
+   */
+  @Input()
+  status: NbComponentStatus = 'primary';
+
+
+  /**
+   * Controls checkbox indeterminate state
+   */
+  @Input()
+  get indeterminate(): boolean {
+    return this._indeterminate;
+  }
+  set indeterminate(value: boolean) {
+    this._indeterminate = convertToBoolProperty(value);
+  }
+  private _indeterminate: boolean = false;
+
+  @Output() change = new EventEmitter();
+
+  @HostBinding('class.status-primary')
+  get primary() {
+    return this.status === 'primary';
   }
 
-  @HostBinding('class.success')
+  @HostBinding('class.status-success')
   get success() {
     return this.status === 'success';
   }
 
-  @HostBinding('class.warning')
+  @HostBinding('class.status-warning')
   get warning() {
     return this.status === 'warning';
   }
 
-  @HostBinding('class.danger')
+  @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
   }
 
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = val;
-    this.onChange(val);
+  @HostBinding('class.status-info')
+  get info() {
+    return this.status === 'info';
   }
 
   constructor(private changeDetector: ChangeDetectorRef) {}
@@ -147,5 +245,11 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   setTouched() {
     this.onTouched();
+  }
+
+  updateValueAndIndeterminate(event: Event): void {
+    const input = (event.target as HTMLInputElement);
+    this.value = input.checked;
+    this.indeterminate = input.indeterminate;
   }
 }

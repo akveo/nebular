@@ -5,11 +5,10 @@
   $content-width: nb-theme(content-width);
   $settings-width: nb-theme(settings-col-width);
   $settings-margin: nb-theme(settings-col-margin);
-  $layout-bg: nb-theme(layout-bg);
-  $color-heading: nb-theme(color-fg-heading-light);
+  $layout-background-color: nb-theme(layout-background-color);
 
   .menu-sidebar {
-    background-color: $layout-bg;
+    background-color: $layout-background-color;
 
     &.fixed {
       box-shadow: 8px 0 20px 0 rgba(218, 224, 235, 0.6);
@@ -27,17 +26,21 @@
 
   .contact-us {
     padding: 5rem 1rem;
+
     h2 {
-      color: black;
+      font-family: nb-theme(text-heading-4-font-family);
+      font-size: nb-theme(text-heading-4-font-size);
+      font-weight: normal;
+      line-height: nb-theme(text-heading-4-line-height);
     }
   }
 
   .collapse-all {
     position: absolute;
-    right: 1px;
-    top: 0.75rem;
+    right: 0.5rem;
+    top: 1.05rem;
     font-size: 0.75rem;
-    color: $color-heading;
+    color: nb-theme(text-hint-color);
     appearance: none;
     background: none;
     border: none;
@@ -59,27 +62,20 @@
   }
 
   /deep/ nb-sidebar nb-menu {
-    > .menu-items > .menu-item {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      a:hover {
-        font-weight: bold;
-      }
-      li {
-        font-size: 0.875rem;
-        font-weight: normal;
-      }
-      li.menu-group {
-        font-weight: bold;
-        padding-top: 1.25rem;
-        padding-bottom: 1rem;
-      }
+    .menu-group {
+      padding-left: 0;
+    }
+
+    nb-icon {
+      display: none;
+    }
+
+    .menu-item {
+      border: none!important;
     }
 
     .menu-items .menu-item .menu-item a {
       &:hover, &.active, &:focus {
-        text-shadow: 0.5px 0 0 currentColor;
-        font-weight: normal;
         outline: none!important;
       }
     }

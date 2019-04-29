@@ -19,8 +19,6 @@ env:
     - FIREBASE_KEY=WxTLWO1mVWCO0EvbRCfF2qgBXUVUNoKxP5QULy41zVj5HNBovHEZ3ZknbAXoZ2ew/1
     - secure: iQsTgStaSZaDFyQBrDNVD9PemiEK53c2tkHGBIRAPwMgxTP3F1MlUFJDHabpeZlpAoUJ1xwSrJEtW7kF1o8gQL2uu8845BA9Ry/0fuazhKr9qj8cDkYzNPsO8F8KKeeJMseg/UCfFxAKb1AcNA4L/5oDbFO+DTN4LDIlSd86ySZ1dGv+PEeBOuyahE+8nqZvzoZE7C3xhCa4RMGC+DtRMkcK80qSvX9wvnRuRULP89Vb4zBs/YlNxn1vtAFaNgfW5c5EiTXfm2KG41k25uggnh0LX0VEQJ7N4w/1ZXoTjg06HX8VX2gjXefjtEZOiq0vh0aF5aSHfbyGbi0fpcWQcFWrBkC7CfElAoILU/IuQjNTR9wz2oSP1uLJjarCVsF3Mk1cFd1kXxqJEqr4ca8ZOwQOgcydymCa55QjgsYmG4VLF1QnJJmx7oJ+CO2DEe7haJhPcHZsKLus1ubFQNSiu2nasr1mql6IDHzcCEoj3+vGo3ersNraKQPH5M0sQoZ4A6ErwyMirgCodgCxDp42BieWIM4ZOf6ZaEmWE/n8FwTMjBvsiMl6UXshjtNO+1v+WlDF+8mBiumeLv2vhfpjhPji07i27+U4lTDVj78eqe5Vsiv4KlvPF+yQ/vI6qLXNIjSXRViMS200VSR1y2uXG6ACtHXAxtszrRmfgk8kI8E=
   matrix:
-    - MODE=sauce_e2e
-    - MODE=browserstack_e2e
     - MODE=sauce_unit_test
     - MODE=browserstack_unit_test
     - MODE=build

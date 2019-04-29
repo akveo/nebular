@@ -422,10 +422,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'NbIconComponent',
+          'NbIconLibraries',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
         source: [
           'NbSpinnerDirective',
+          'NbSpinnerComponent',
         ],
       },
       {
@@ -572,48 +582,6 @@ export const structure = [
             type: 'block',
             block: 'component',
             source: 'NbLayoutDimensions',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Themes',
-    children: [
-      {
-        type: 'page',
-        name: 'Default',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Default',
-            source: 'default',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Cosmic',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Cosmic',
-            source: 'cosmic',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Corporate',
-        children: [
-          {
-            type: 'block',
-            block: 'theme',
-            name: 'Corporate',
-            source: 'corporate',
           },
         ],
       },

@@ -31,9 +31,9 @@
 
   nb-layout {
     @include nb-scrollbars(
-        nb-theme(scrollbar-fg),
-        nb-theme(scrollbar-bg),
-        nb-theme(scrollbar-width));
+        nb-theme(layout-scrollbar-color),
+        nb-theme(layout-scrollbar-background-color),
+        nb-theme(layout-scrollbar-width));
   }
 
 
@@ -59,7 +59,7 @@
 
   nb-layout.window-mode {
 
-    background: nb-theme(layout-window-mode-bg);
+    background: nb-theme(layout-window-mode-background-color);
     display: block;
 
     .scrollable-container {
@@ -110,31 +110,33 @@
   }
 
   nb-layout .layout {
-    // TODO: probably we need to separate this form here and move it to the typography scss module
-    font-family: nb-theme(layout-font-family);
-    font-size: nb-theme(layout-font-size);
-    line-height: nb-theme(layout-line-height);
-    color: nb-theme(layout-fg);
-    background: nb-theme(layout-bg);
+    background-color: nb-theme(layout-background-color);
+    color: nb-theme(layout-text-color);
+    font-family: nb-theme(layout-text-font-family);
+    font-size: nb-theme(layout-text-font-size);
+    font-weight: nb-theme(layout-text-font-weight);
+    line-height: nb-theme(layout-text-line-height);
     min-height: nb-theme(layout-min-height);
 
     nb-layout-header {
-      font-family: nb-theme(header-font-family);
-      font-size: nb-theme(header-font-size);
-      line-height: nb-theme(header-line-height);
+      color: nb-theme(header-text-color);
+      font-family: nb-theme(header-text-font-family);
+      font-size: nb-theme(header-text-font-size);
+      font-weight: nb-theme(header-text-font-weight);
+      line-height: nb-theme(header-text-line-height);
 
       nav {
+        background: nb-theme(header-background-color);
+        color: nb-theme(header-text-color);
         box-shadow: nb-theme(header-shadow);
         height: nb-theme(header-height);
         padding: nb-theme(header-padding);
-        background: nb-theme(header-bg);
-        color: nb-theme(header-fg);
 
         a {
-          color: nb-theme(header-fg);
+          color: nb-theme(header-text-color);
 
           @include hover-focus-active {
-            color: nb-theme(header-fg);
+            color: nb-theme(header-text-color);
           }
         }
       }
@@ -165,16 +167,20 @@
           box-shadow: nb-theme(footer-shadow);
 
           nav {
+            background-color: nb-theme(footer-background-color);
+            border-top: nb-theme(footer-divider-width) nb-theme(footer-divider-style) nb-theme(footer-divider-color);
+            color: nb-theme(footer-text-color);
+            font-family: nb-theme(footer-text-font-family);
+            font-size: nb-theme(footer-text-font-size);
+            font-weight: nb-theme(footer-text-font-weight);
+            line-height: nb-theme(footer-text-line-height);
             padding: nb-theme(footer-padding);
-            background: nb-theme(footer-bg);
-            color: nb-theme(footer-fg);
-            border-top: 1px solid nb-theme(footer-separator);
 
             a {
-              color: nb-theme(footer-fg-highlight);
+              color: nb-theme(footer-text-highlight-color);
 
               @include hover-focus-active {
-                color: nb-theme(footer-fg-highlight);
+                color: nb-theme(footer-text-highlight-color);
               }
             }
           }

@@ -40,7 +40,7 @@ ng new PROJECT-NAME
 Nebular support init configuration with schematics. So, you may just add it to your project.
 
 ```bash
-ng add @nebular/theme
+ng add @nebular/theme@next
 ```
 
 That's it. Nebular has to be ready to go now.
@@ -57,9 +57,15 @@ At this step, we assume you already have Angular modules installed.
 ### Install Nebular modules
 
 ```bash
-npm install --save @nebular/theme @angular/cdk @angular/animations
+npm install --save @nebular/theme@next @angular/cdk @angular/animations
 ```
-Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
+Also, you may want to install Eva Icons pack, which is a recommended SVG icons library starting from Nebular 4.0.
+```bash
+npm install --save @nebular/eva-icons@next
+```
+More details on [how to use Nebular Eva Icons are here](docs/components/icon/overview#nbiconcomponent). 
+
+Additionally you can install Auth and Security `npm install --save @nebular/auth@next @nebular/security@next`
 <hr>
 
 ### Configure Nebular

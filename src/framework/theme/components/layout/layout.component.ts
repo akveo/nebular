@@ -86,13 +86,15 @@ export class NbLayoutColumnComponent {
  *
  * @styles
  *
- * header-font-family
- * header-line-height
- * header-fg
- * header-bg
- * header-height
- * header-padding
- * header-shadow
+ * header-background-color:
+ * header-text-color:
+ * header-text-font-family:
+ * header-text-font-size:
+ * header-text-font-weight:
+ * header-text-line-height:
+ * header-height:
+ * header-padding:
+ * header-shadow:
  */
 @Component({
   selector: 'nb-layout-header',
@@ -140,12 +142,19 @@ export class NbLayoutHeaderComponent {
  *
  * @styles
  *
- * footer-height
- * footer-padding
- * footer-fg
- * footer-bg
- * footer-separator
- * footer-shadow
+ * footer-background-color:
+ * footer-text-color:
+ * footer-text-font-family:
+ * footer-text-font-size:
+ * footer-text-font-weight:
+ * footer-text-line-height:
+ * footer-text-highlight-color:
+ * footer-height:
+ * footer-padding:
+ * footer-divider-color:
+ * footer-divider-style:
+ * footer-divider-width:
+ * footer-shadow:
  */
 @Component({
   selector: 'nb-layout-footer',
@@ -194,7 +203,7 @@ export class NbLayoutFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbLayoutModule.forRoot(),
  *   ],
  * })
@@ -204,7 +213,7 @@ export class NbLayoutFooterComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbLayoutModule,
  *   ],
  * })
@@ -252,21 +261,25 @@ export class NbLayoutFooterComponent {
  *
  * @styles
  *
- * layout-font-family
- * layout-font-size
- * layout-line-height
- * layout-fg
- * layout-bg
- * layout-min-height
- * layout-content-width
- * layout-window-mode-min-width
- * layout-window-mode-max-width: window mode only, after this value layout turns into a floating window
- * layout-window-mode-bg: window mode only, background
- * layout-window-mode-padding-top: window mode only, max padding from top
- * layout-window-shadow: window mode shadow
- * layout-padding
- * layout-medium-padding
- * layout-small-padding
+ * layout-background-color:
+ * layout-text-color:
+ * layout-text-font-family:
+ * layout-text-font-size:
+ * layout-text-font-weight:
+ * layout-text-line-height:
+ * layout-min-height:
+ * layout-content-width:
+ * layout-window-mode-min-width:
+ * layout-window-mode-max-width:
+ * layout-window-mode-background-color:
+ * layout-window-mode-padding-top:
+ * layout-window-shadow:
+ * layout-padding:
+ * layout-medium-padding:
+ * layout-small-padding:
+ * layout-scrollbar-background-color:
+ * layout-scrollbar-color:
+ * layout-scrollbar-width:
  */
 @Component({
   selector: 'nb-layout',

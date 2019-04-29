@@ -10,7 +10,7 @@ import { NbDialogRef } from '@nebular/theme';
         <input #name nbInput placeholder="Name">
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton hero status="danget" (click)="cancel()">Cancel</button>
+        <button nbButton hero status="danger" (click)="cancel()">Cancel</button>
         <button nbButton hero status="success" (click)="submit(name.value)">Submit</button>
       </nb-card-footer>
     </nb-card>

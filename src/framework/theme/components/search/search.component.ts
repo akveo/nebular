@@ -47,8 +47,8 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
   ],
   template: `
     <div class="search" (keyup.esc)="emitClose()">
-      <button (click)="emitClose()">
-        <i class="nb-close-circled"></i>
+      <button (click)="emitClose()" nbButton ghost>
+        <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
       </button>
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
@@ -162,6 +162,9 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   }
 }
 
+export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
+  'curtain' | 'column-curtain' | 'modal-drop' | 'modal-half';
+
 /**
  * Beautiful full-page search control.
  *
@@ -178,7 +181,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbSearchModule,
  *   ],
  * })
@@ -209,8 +212,8 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['styles/search.component.scss'],
   template: `
-    <button #searchButton class="start-search" (click)="emitActivate()">
-      <i class="nb-search"></i>
+    <button #searchButton class="start-search" (click)="emitActivate()" nbButton ghost>
+      <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
     </button>
     <nb-search-field
       *nbPortal
@@ -256,10 +259,10 @@ export class NbSearchComponent implements OnInit, OnDestroy {
    * modal-zoomin, rotate-layout, modal-move, curtain, column-curtain, modal-drop, modal-half
    * @type {string}
    */
-  @Input() type: string;
+  @Input() type: NbSearchType;
 
   @ViewChild(NbPortalDirective) searchFieldPortal: NbPortalDirective;
-  @ViewChild('searchButton') searchButton: ElementRef<HTMLElement>;
+  @ViewChild('searchButton', { read: ElementRef }) searchButton: ElementRef<HTMLElement>;
 
   constructor(
     private searchService: NbSearchService,

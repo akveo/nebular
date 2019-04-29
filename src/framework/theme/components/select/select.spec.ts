@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { from, zip } from 'rxjs';
 import createSpy = jasmine.createSpy;
@@ -18,7 +19,9 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbSelectComponent } from './select.component';
 import { NbLayoutModule } from '../layout/layout.module';
 import { NbOptionComponent } from './option.component';
+import { NbOptionGroupComponent } from './option-group.component';
 
+const eventMock = { preventDefault() {} } as Event;
 
 const TEST_GROUPS = [
   {
@@ -43,6 +46,15 @@ const TEST_GROUPS = [
       { title: 'Option 31', value: 'Option 31' },
       { title: 'Option 32', value: 'Option 32' },
       { title: 'Option 33', value: 'Option 33' },
+    ],
+  },
+  {
+    title: 'Group 4',
+    options: [
+      { title: 'Option 41', value: '' },
+      { title: 'Option 42', value: '0' },
+      { title: 'Option 43', value: 0 },
+      { title: 'Option 44'},
     ],
   },
 ];
@@ -136,6 +148,129 @@ export class NbNgModelSelectComponent {
   options: number[] = [ 1 ];
   selectedValue: number = null;
 
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
+}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select>
+          <nb-option>No value option</nb-option>
+          <nb-option [value]="null">undefined value</nb-option>
+          <nb-option [value]="undefined">undefined value</nb-option>
+          <nb-option [value]="false">false value</nb-option>
+          <nb-option [value]="0">0 value</nb-option>
+          <nb-option [value]="''">empty string value</nb-option>
+          <nb-option [value]="nanValue">NaN value</nb-option>
+          <nb-option value="1">truthy value</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithFalsyOptionValuesComponent {
+  nanValue = NaN;
+
+  @ViewChild(NbSelectComponent) select: NbSelectComponent<any>;
+  @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
+  @ViewChildren(NbOptionComponent, { read: ElementRef }) optionElements: QueryList<ElementRef<HTMLElement>>;
+
+  get noValueOption(): NbOptionComponent<any> {
+    return this.options.toArray()[0];
+  }
+  get noValueOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[0];
+  }
+  get nullOption(): NbOptionComponent<any> {
+    return this.options.toArray()[1];
+  }
+  get nullOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[1];
+  }
+  get undefinedOption(): NbOptionComponent<any> {
+    return this.options.toArray()[2];
+  }
+  get undefinedOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[2];
+  }
+  get falseOption(): NbOptionComponent<any> {
+    return this.options.toArray()[3];
+  }
+  get falseOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[3];
+  }
+  get zeroOption(): NbOptionComponent<any> {
+    return this.options.toArray()[4];
+  }
+  get zeroOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[4];
+  }
+  get emptyStringOption(): NbOptionComponent<any> {
+    return this.options.toArray()[5];
+  }
+  get emptyStringOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[5];
+  }
+  get nanOption(): NbOptionComponent<any> {
+    return this.options.toArray()[6];
+  }
+  get nanOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[6];
+  }
+  get truthyOption(): NbOptionComponent<any> {
+    return this.options.toArray()[7];
+  }
+  get truthyOptionElement(): ElementRef<HTMLElement> {
+    return this.optionElements.toArray()[7];
+  }
+}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select multiple>
+          <nb-option>No value option</nb-option>
+          <nb-option [value]="null">undefined value</nb-option>
+          <nb-option [value]="undefined">undefined value</nb-option>
+          <nb-option [value]="false">false value</nb-option>
+          <nb-option [value]="0">0 value</nb-option>
+          <nb-option [value]="''">empty string value</nb-option>
+          <nb-option [value]="nanValue">NaN value</nb-option>
+          <nb-option value="1">truthy value</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWithFalsyOptionValuesComponent {}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select>
+          <nb-option-group [disabled]="optionGroupDisabled">
+            <nb-option [value]="1" [disabled]="optionDisabled">1</nb-option>
+          </nb-option-group>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbOptionDisabledTestComponent {
+  optionGroupDisabled = false;
+  optionDisabled = false;
+
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
@@ -315,7 +450,7 @@ describe('Component: NbSelectComponent', () => {
 
       const button = fixture.nativeElement.querySelector('button');
       expect(button.textContent).toContain('1 noitpO');
-    })
+    });
   });
 
   it('should select initially specified value without errors', fakeAsync(() => {
@@ -334,6 +469,7 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testSelectComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
     const setSelectionSpy = spyOn((testSelectComponent.selectComponent as any), 'setSelection').and.callThrough();
     testSelectComponent.showSelect = false;
@@ -347,6 +483,7 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
     const optionSelectSpy = spyOn(testComponent.optionComponent, 'select').and.callThrough();
 
@@ -363,8 +500,9 @@ describe('Component: NbSelectComponent', () => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
+    flush();
 
-    const optionToSelect = testComponent.options.last;
+    const optionToSelect = testComponent.options.find(o => o.value != null);
     const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
 
     expect(optionToSelect.selected).toEqual(false);
@@ -439,6 +577,139 @@ describe('Component: NbSelectComponent', () => {
   });
 });
 
+describe('NbSelectComponent - falsy values', () => {
+  let fixture: ComponentFixture<NbSelectWithFalsyOptionValuesComponent>;
+  let testComponent: NbSelectWithFalsyOptionValuesComponent;
+  let select: NbSelectComponent<any>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [
+        NbSelectWithFalsyOptionValuesComponent,
+        NbMultipleSelectWithFalsyOptionValuesComponent,
+      ],
+    });
+
+    fixture = TestBed.createComponent(NbSelectWithFalsyOptionValuesComponent);
+    testComponent = fixture.componentInstance;
+    select = testComponent.select;
+
+    fixture.detectChanges();
+    flush();
+  }));
+
+  it('should clean selection when selected option does not have a value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.noValueOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should clean selection when selected option has null value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.nullOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should clean selection when selected option has undefined value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.undefinedOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(0);
+  }));
+
+  it('should not reset selection when selected option has false value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.falseOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has zero value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.zeroOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has empty string value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.emptyStringOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should not reset selection when selected option has NaN value', fakeAsync(() => {
+    select.selected = testComponent.truthyOption.value;
+    fixture.detectChanges();
+
+    testComponent.nanOption.onClick(eventMock);
+    fixture.detectChanges();
+
+    expect(select.selectionModel.length).toEqual(1);
+  }));
+
+  it('should set class if fullWidth input set to true', () => {
+    select.fullWidth = true;
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.directive(NbSelectComponent));
+    expect(button.classes['full-width']).toEqual(true);
+  });
+
+  describe('multiple', () => {
+    beforeEach(fakeAsync(() => {
+      fixture = TestBed.createComponent(NbMultipleSelectWithFalsyOptionValuesComponent);
+      testComponent = fixture.componentInstance;
+      select = testComponent.select;
+
+      fixture.detectChanges();
+      flush();
+      select.show();
+      fixture.detectChanges();
+    }));
+
+    it('should not render checkbox on options with reset values', () => {
+      expect(testComponent.noValueOptionElement.nativeElement.querySelector('nb-checkbox')).toEqual(null);
+      expect(testComponent.nullOptionElement.nativeElement.querySelector('nb-checkbox')).toEqual(null);
+      expect(testComponent.undefinedOptionElement.nativeElement.querySelector('nb-checkbox')).toEqual(null);
+    });
+
+    it('should render checkbox on options with falsy non-reset values', () => {
+      expect(testComponent.falseOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
+      expect(testComponent.zeroOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
+      expect(testComponent.emptyStringOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
+      expect(testComponent.nanOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
+      expect(testComponent.truthyOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
+    });
+  });
+});
+
 describe('NbOptionComponent', () => {
   let fixture: ComponentFixture<NbReactiveFormSelectComponent>;
   let testSelectComponent: NbReactiveFormSelectComponent;
@@ -507,5 +778,54 @@ describe('NbOptionComponent', () => {
 
     expect(option.selected).toEqual(false);
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
+  }));
+});
+
+describe('NbOptionComponent disabled', () => {
+  let fixture: ComponentFixture<NbOptionDisabledTestComponent>;
+  let testComponent: NbOptionDisabledTestComponent;
+  let selectComponent: NbSelectComponent<number>;
+  let optionGroupComponent: NbOptionGroupComponent;
+  let optionComponent: NbOptionComponent<number>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [ NbOptionDisabledTestComponent ],
+    });
+
+    fixture = TestBed.createComponent(NbOptionDisabledTestComponent);
+    testComponent = fixture.componentInstance;
+    fixture.detectChanges();
+    flush();
+
+    selectComponent = testComponent.selectComponent;
+    optionGroupComponent = testComponent.optionGroupComponent;
+    optionComponent = testComponent.optionComponent;
+  }));
+
+  it('should has disabled attribute if disabled set to true', () => {
+    selectComponent.show();
+    testComponent.optionDisabled = true;
+    fixture.detectChanges();
+
+    const option = fixture.debugElement.query(By.directive(NbOptionComponent));
+    expect(option.attributes.disabled).toEqual('');
+  });
+
+  it('should has disabled attribute if group disabled set to true', fakeAsync(() => {
+    selectComponent.show();
+    testComponent.optionGroupDisabled = true;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    const option = fixture.debugElement.query(By.directive(NbOptionComponent));
+    expect(option.attributes.disabled).toEqual('');
   }));
 });

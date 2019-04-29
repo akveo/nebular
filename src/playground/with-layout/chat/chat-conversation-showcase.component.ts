@@ -27,7 +27,7 @@ export class ChatConversationShowcaseComponent {
       return {
         url: file.src,
         type: file.type,
-        icon: 'nb-compose',
+        icon: 'file-text-outline',
       };
     });
 

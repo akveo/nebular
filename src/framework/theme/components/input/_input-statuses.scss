@@ -1,0 +1,19 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin input-statuses() {
+  @each $status in nb-get-statuses() {
+    &:enabled.status-#{$status} {
+      border-color: nb-theme(input-#{$status}-border-color);
+      &:focus {
+        border-color: nb-theme(input-#{$status}-hover-border-color);
+      }
+      &:hover {
+        border-color: nb-theme(input-#{$status}-focus-border-color);
+      }
+    }
+  }
+}

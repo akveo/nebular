@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
+import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 
 import { FsIconComponent, TreeGridShowcaseComponent } from './tree-grid-showcase.component';
 import { TreeGridRoutingModule } from './tree-grid-routing.module';
@@ -19,7 +19,7 @@ import { TreeGridDisableClickToggleComponent } from './tree-grid-disable-click-t
 import { TreeGridCustomNodeStructureComponent } from './tree-grid-custom-node-structure.component';
 
 @NgModule({
-  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule ],
+  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule, NbIconModule ],
   declarations: [
     FsIconComponent,
     TreeGridShowcaseComponent,

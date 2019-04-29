@@ -13,7 +13,8 @@
          (click)="!disableStepNavigation && step.select()">
       <div class="label-index">
         <span *ngIf="!step.completed || isStepSelected(step)">{{ index + 1 }}</span>
-        <i *ngIf="!isStepSelected(step) && step.completed" class="icon nb-checkmark"></i>
+        <nb-icon *ngIf="!isStepSelected(step) && step.completed" icon="checkmark-outline" pack="nebular-essentials">
+        </nb-icon>
       </div>
       <div class="label">
         <ng-container *ngIf="step.isLabelTemplate">

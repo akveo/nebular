@@ -1,18 +1,23 @@
-import { NbCheckboxComponent } from './checkbox.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { take } from 'rxjs/operators';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { NbIconModule } from '@nebular/theme';
+
+import { NbCheckboxComponent } from './checkbox.component';
 
 describe('Component: NbCheckbox', () => {
 
   let checkbox: NbCheckboxComponent;
+  let label: DebugElement;
   let fixture: ComponentFixture<NbCheckboxComponent>;
   let checkboxInput: DebugElement;
   let testContainerEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [NbIconModule],
       declarations: [NbCheckboxComponent],
     });
 
@@ -21,9 +26,7 @@ describe('Component: NbCheckbox', () => {
     testContainerEl = fixture.elementRef.nativeElement;
 
     checkboxInput = fixture.debugElement.query(By.css('input'));
-    fixture.debugElement.query(By.css('label'));
-    fixture.debugElement.query(By.css('customised-control-indicator'));
-    fixture.debugElement.query(By.css('customised-control-description'));
+    label = fixture.debugElement.query(By.css('label'));
   });
 
   it('Setting disabled to true disables checkbox input', () => {
@@ -53,19 +56,76 @@ describe('Component: NbCheckbox', () => {
   it('Setting status to success apply corresponding class to host element', () => {
     checkbox.status = 'success';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('success')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-success')).toBeTruthy();
   });
 
   it('Setting status to warning apply corresponding class to host element', () => {
     checkbox.status = 'warning';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('warning')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-warning')).toBeTruthy();
   });
 
   it('Setting status to danger apply corresponding class to host element', () => {
     checkbox.status = 'danger';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('danger')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-danger')).toBeTruthy();
+  });
+
+  it('Setting status to primary apply corresponding class to host element', () => {
+    checkbox.status = 'primary';
+    fixture.detectChanges();
+    expect(testContainerEl.classList.contains('status-primary')).toBeTruthy();
+  });
+
+  it('Setting status to info apply corresponding class to host element', () => {
+    checkbox.status = 'info';
+    fixture.detectChanges();
+    expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
+  });
+
+  it('should emit change event when changed', fakeAsync(() => {
+    checkbox.change
+      .pipe(take(1))
+      .subscribe((value: boolean) => expect(value).toEqual(true));
+
+    checkbox.value = true;
+    fixture.detectChanges();
+    tick();
+  }));
+
+  it('should change value to opposite when clicked', () => {
+    label.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(checkbox.value).toEqual(true);
+
+    label.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(checkbox.value).toEqual(false);
+  });
+
+  it('should reset indeterminate state when clicked on unchecked checkbox', () => {
+    checkbox.indeterminate = true;
+    fixture.detectChanges();
+
+    expect(checkbox.indeterminate).toEqual(true);
+
+    label.nativeElement.click();
+    fixture.detectChanges();
+    expect(checkbox.indeterminate).toEqual(false);
+  });
+
+  it('should reset indeterminate state when clicked on unchecked checkbox', () => {
+    checkbox.value = false;
+    checkbox.indeterminate = true;
+    fixture.detectChanges();
+
+    expect(checkbox.indeterminate).toEqual(true);
+
+    label.nativeElement.click();
+    fixture.detectChanges();
+    expect(checkbox.indeterminate).toEqual(false);
   });
 });
 
@@ -87,7 +147,7 @@ describe('Component: NbCheckbox with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, NbIconModule],
       declarations: [NbCheckboxComponent, CheckboxWithFormControlComponent],
     });
 
@@ -118,5 +178,14 @@ describe('Component: NbCheckbox with form control', () => {
 
       expect(checkboxInstance.disabled).toBeFalsy();
       expect(inputElement.disabled).toBeFalsy();
+  });
+
+  it('should mark touched on blur', () => {
+    expect(testComponent.formControl.touched).toEqual(false);
+
+    inputElement.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
+    expect(testComponent.formControl.touched).toEqual(true);
   });
 });

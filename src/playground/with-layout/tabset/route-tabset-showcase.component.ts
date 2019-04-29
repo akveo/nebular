@@ -20,18 +20,18 @@ export class RouteTabsetShowcaseComponent {
   tabs: any[] = [
     {
       title: 'Users',
-      icon: 'nb-person',
+      icon: 'person',
       route: './tab1',
     },
     {
       title: 'Orders',
-      icon: 'nb-notifications',
+      icon: 'paper-plane-outline',
       responsive: true,
       route: [ './tab2' ],
     },
     {
       title: 'Transaction',
-      icon: 'nb-notifications',
+      icon: 'flash-outline',
       responsive: true,
       disabled: true,
     },

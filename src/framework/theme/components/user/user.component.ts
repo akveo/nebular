@@ -4,9 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
+import { NbComponentStatus } from '../component-status';
+import { NbBadgePosition } from '../badge/badge.component';
 
 /**
  * Represents a component showing a user avatar (picture) with a user name on the right.
@@ -22,7 +27,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbUserModule,
  *   ],
  * })
@@ -41,19 +46,66 @@ import { convertToBoolProperty } from '../helpers';
  * You can set custom avatar background-color, user image (as link or BASE64 string) and disable user initials:
  * @stacked-example(Avatar image settings, user/user-avatar-settings.component)
  *
+ * Component shape could be controlled with `shape` input.
+ * @stacked-example(Shapes, user/user-shape.component)
  *
  * @styles
  *
- * user-font-size:
- * user-line-height:
- * user-bg:
- * user-fg:
- * user-fg-highlight:
- * user-font-family-secondary:
- * user-size-small:
- * user-size-medium:
- * user-size-large:
- * user-size-xlarge:
+ * user-picture-box-background-color:
+ * user-picture-box-border-color:
+ * user-picture-box-border-width:
+ * user-initials-text-color:
+ * user-initials-text-font-family:
+ * user-initials-text-font-weight:
+ * user-name-text-color:
+ * user-name-text-font-family:
+ * user-name-text-font-weight:
+ * user-title-text-color:
+ * user-title-text-font-family:
+ * user-title-text-font-weight:
+ * user-rectangle-border-radius:
+ * user-semi-round-border-radius:
+ * user-round-border-radius:
+ * user-tiny-height:
+ * user-tiny-width:
+ * user-tiny-initials-text-font-size:
+ * user-tiny-initials-text-line-height:
+ * user-tiny-name-text-font-size:
+ * user-tiny-name-text-line-height:
+ * user-tiny-title-text-font-size:
+ * user-tiny-title-text-line-height:
+ * user-small-height:
+ * user-small-width:
+ * user-small-initials-text-font-size:
+ * user-small-initials-text-line-height:
+ * user-small-name-text-font-size:
+ * user-small-name-text-line-height:
+ * user-small-title-text-font-size:
+ * user-small-title-text-line-height:
+ * user-medium-height:
+ * user-medium-width:
+ * user-medium-initials-text-font-size:
+ * user-medium-initials-text-line-height:
+ * user-medium-name-text-font-size:
+ * user-medium-name-text-line-height:
+ * user-medium-title-text-font-size:
+ * user-medium-title-text-line-height:
+ * user-large-height:
+ * user-large-width:
+ * user-large-initials-text-font-size:
+ * user-large-initials-text-line-height:
+ * user-large-name-text-font-size:
+ * user-large-name-text-line-height:
+ * user-large-title-text-font-size:
+ * user-large-title-text-line-height:
+ * user-giant-height:
+ * user-giant-width:
+ * user-giant-initials-text-font-size:
+ * user-giant-initials-text-line-height:
+ * user-giant-name-text-font-size:
+ * user-giant-name-text-line-height:
+ * user-giant-title-text-font-size:
+ * user-giant-title-text-line-height:
  */
 @Component({
   selector: 'nb-user',
@@ -62,42 +114,7 @@ import { convertToBoolProperty } from '../helpers';
 })
 export class NbUserComponent {
 
-  // TODO: it makes sense use object instead of list of variables (or even enum)
-  /*
-    static readonly SIZE = {
-     SMALL: 'small',
-     MEDIUM: 'medium',
-     LARGE: 'large',
-    };
-   */
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-
-  private sizeValue: string;
-
-  @HostBinding('class.inverse') inverseValue: boolean;
-
-  @HostBinding('class.small')
-  get small() {
-    return this.sizeValue === NbUserComponent.SIZE_SMALL;
-  }
-
-  @HostBinding('class.medium')
-  get medium() {
-    return this.sizeValue === NbUserComponent.SIZE_MEDIUM;
-  }
-
-  @HostBinding('class.large')
-  get large() {
-    return this.sizeValue === NbUserComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.xlarge')
-  get xlarge() {
-    return this.sizeValue === NbUserComponent.SIZE_XLARGE;
-  }
+  imageBackgroundStyle: SafeStyle;
 
   /**
    * Specifies a name to be shown on the right of a user picture
@@ -106,17 +123,18 @@ export class NbUserComponent {
   @Input() name: string = 'Anonymous';
 
   /**
-   * Specifies a title (written in a smaller font) to be shown under the **name**
+   * Specifies a title to be shown under the **name**
    * @type string
    */
   @Input() title: string;
 
   /**
-   * Absolute path to a user picture. Or base64 image
-   * User name initials (JD for John Doe) will be shown if no picture specified
+   * Absolute path to a user picture or base64 image.
+   * User name initials will be shown if no picture specified (JD for John Doe).
    * @type string
    */
-  @Input() set picture(value: string) {
+  @Input()
+  set picture(value: string) {
     this.imageBackgroundStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
   }
 
@@ -127,57 +145,65 @@ export class NbUserComponent {
   @Input() color: string;
 
   /**
-   * Size of the component, small|medium|large|xlarge
-   * @type string
+   * Size of the component.
+   * Possible values: `tiny`, `small`, `medium` (default), `large`, 'giant'.
    */
-  @Input()
-  set size(val: string) {
-    this.sizeValue = val;
-  }
+  @Input() size: NbComponentSize = 'medium';
+
+  /**
+   * Shape of the picture box.
+   * Possible values: `rectangle`, `semi-round`, `round`.
+   */
+  @Input() shape: NbComponentShape = 'round';
 
   /**
    * Whether to show a user name or not
-   * @type boolean
    */
   @Input()
-  set showName(val: boolean) {
-    this.showNameValue = convertToBoolProperty(val);
+  get showName(): boolean {
+    return this._showName;
   }
+  set showName(val: boolean) {
+    this._showName = convertToBoolProperty(val);
+  }
+  private _showName: boolean = true;
 
   /**
    * Whether to show a user title or not
    * @type boolean
    */
   @Input()
-  set showTitle(val: boolean) {
-    this.showTitleValue = convertToBoolProperty(val);
+  get showTitle(): boolean {
+    return this._showTitle;
   }
+  set showTitle(val: boolean) {
+    this._showTitle = convertToBoolProperty(val);
+  }
+  private _showTitle: boolean = true;
 
   /**
    * Whether to show a user initials (if no picture specified) or not
    * @type boolean
    */
   @Input()
-  set showInitials(val: boolean) {
-    this.showInitialsValue = convertToBoolProperty(val);
+  get showInitials(): boolean {
+    return this._showInitials;
   }
+  set showInitials(val: boolean) {
+    this._showInitials = convertToBoolProperty(val);
+  }
+  private _showInitials: boolean = true;
 
   /**
    * Whether to show only a picture or also show the name and title
    * @type boolean
    */
   @Input()
-  set onlyPicture(val: boolean) {
-    this.showNameValue = this.showTitleValue = !convertToBoolProperty(val);
+  get onlyPicture(): boolean {
+    return !this.showName && !this.showTitle;
   }
-
-  /**
-   * Makes colors inverse based on current theme
-   * @type boolean
-   */
-  @Input()
-  set inverse(val: boolean) {
-    this.inverseValue = convertToBoolProperty(val);
+  set onlyPicture(val: boolean) {
+    this.showName = this.showTitle = !convertToBoolProperty(val);
   }
 
   /**
@@ -188,10 +214,10 @@ export class NbUserComponent {
 
   /**
    * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
+   * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() badgeStatus: string;
+  @Input() badgeStatus: NbComponentStatus;
 
   /**
    * Badge position.
@@ -200,13 +226,47 @@ export class NbUserComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() badgePosition: string;
+  @Input() badgePosition: NbBadgePosition;
 
-  imageBackgroundStyle: SafeStyle;
-  showNameValue: boolean = true;
-  showTitleValue: boolean = true;
-  showInitialsValue: boolean = true;
-  isMenuShown: boolean = false;
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
+  }
+
+  @HostBinding('class.shape-rectangle')
+  get rectangle(): boolean {
+    return this.shape === 'rectangle';
+  }
+
+  @HostBinding('class.shape-semi-round')
+  get semiRound(): boolean {
+    return this.shape === 'semi-round';
+  }
+
+  @HostBinding('class.shape-round')
+  get round(): boolean {
+    return this.shape === 'round';
+  }
 
   constructor(private domSanitizer: DomSanitizer) { }
 

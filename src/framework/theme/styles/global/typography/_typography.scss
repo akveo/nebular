@@ -1,237 +1,25 @@
-@mixin hover-focus {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
-
-@function main-to-text-color($color, $count: 15%) {
-  @return tint($color, $count);
-}
-
-@function text-heading() {
-  @return nb-theme(color-fg-heading);
-}
-
-@function text-body() {
-  @return nb-theme(color-fg-text);
-}
-
-@function text-hint() {
-  @return nb-theme(color-fg);
-}
-
-@function text-primary() {
-  @return main-to-text-color(nb-theme(color-primary));
-}
-
-@function text-warning() {
-  @return main-to-text-color(nb-theme(color-warning));
-}
-
-@function text-success() {
-  @return main-to-text-color(nb-theme(color-success));
-}
-
-@function text-info() {
-  @return main-to-text-color(nb-theme(color-info));
-}
-
-@function text-danger() {
-  @return main-to-text-color(nb-theme(color-danger));
-}
-
-@function text-white() {
-  @return nb-theme(color-white);
-}
-
-@mixin nb-alert-variant($body-color) {
-  background-color: nb-theme(layout-bg);
-  border: none;
-  color: $body-color;
-
-  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: $body-color!important;
-  }
-
-  hr {
-    border-top-color: darken($body-color, 10%);
-  }
-  .alert-link {
-    color: $body-color;
-    text-decoration: none;
-    font-weight: nb-theme(font-weight-normal);
-    border-bottom: 1px dashed $body-color;
-
-    @include hover-focus {
-      border-bottom: 1px solid $body-color;
-    }
-  }
-}
-
 @mixin nb-typography {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: nb-theme(text-color);
+  }
 
-  .font-secondary {
-    font-family: nb-theme(font-secondary);
-
-    .header .name {
-      font-size: 4.5rem;
+  @each $size in (1, 2, 3, 4, 5, 6) {
+    h#{$size},
+    .h#{$size} {
+      font-size: nb-theme(text-heading-#{$size}-font-size);
+      font-family: nb-theme(text-heading-#{$size}-font-family);
+      font-weight: nb-theme(text-heading-#{$size}-font-weight);
+      line-height: nb-theme(text-heading-#{$size}-line-height);
     }
-  }
-
-  .font-main {
-    font-family: nb-theme(font-main);
-
-    .header .name {
-      font-size: 2.5rem;
-    }
-  }
-
-  .font-w-light {
-    font-weight: nb-theme(font-weight-light);
-  }
-
-  .font-w-regular {
-    font-weight: nb-theme(font-weight-normal);
-  }
-
-  .font-w-bold {
-    font-weight: nb-theme(font-weight-bold);
-  }
-
-  .text-primary {
-    color: text-primary() !important;
-  }
-  .text-warning {
-    color: text-warning() !important;
-  }
-  .text-success {
-    color: text-success() !important;
-  }
-  .text-info {
-    color: text-info() !important;
-  }
-  .text-danger {
-    color: text-danger() !important;
-  }
-  .text-heading {
-    color: text-heading() !important;
-  }
-  .text-body {
-    color: text-body() !important;
-  }
-  .text-hint {
-    color: text-hint() !important;
-  }
-  .text-white {
-    color: text-white() !important;
-  }
-
-  .bg-primary {
-    background-color: text-primary() !important;
-  }
-  .bg-warning {
-    background-color: text-warning() !important;
-  }
-  .bg-success {
-    background-color: text-success() !important;
-  }
-  .bg-info {
-    background-color: text-info() !important;
-  }
-  .bg-danger {
-    background-color: text-danger() !important;
-  }
-  .bg-heading {
-    background-color: text-heading() !important;
-  }
-  .bg-body {
-    background-color: text-body() !important;
-  }
-  .bg-hint {
-    background-color: text-hint() !important;
-  }
-  .bg-white {
-    background-color: text-white() !important;
-  }
-  .text-indent {
-    text-indent: 2rem;
-  }
-
-  .blockquote {
-    font-size: nb-theme(font-size);
-    color: nb-theme(color-fg-text);
-
-    @include nb-ltr(border-left, 0.25rem solid nb-theme(color-fg-highlight));
-    @include nb-rtl(border-right, 0.25rem solid nb-theme(color-fg-highlight));
-  }
-  .blockquote-reverse {
-    font-size: nb-theme(font-size);
-    color: nb-theme(color-fg-text);
-
-    @include nb-ltr(border-right, 0.25rem solid nb-theme(color-fg-highlight));
-    @include nb-rtl(border-left, 0.25rem solid nb-theme(color-fg-highlight));
-  }
-  .blockquote-footer {
-    color: nb-theme(color-fg);
-    font-style: italic;
-    font-size: 100%;
-  }
-
-  small, .small {
-    font-size: 87.5%;
-  }
-
-  mark, .mark {
-    padding: 0.05em;
-    background-color: text-primary();
-    color: text-white();
-  }
-
-  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: nb-theme(font-secondary);
-    color: nb-theme(color-fg-heading);
-    font-weight: nb-theme(font-weight-bolder);
-  }
-
-  strong, b {
-    font-weight: nb-theme(font-weight-bold);
   }
 
   a {
-    color: nb-theme(link-color);
+    color: nb-theme(link-text-color);
 
-    @include hover-focus {
-      color: nb-theme(link-color-hover);
+    &:hover,
+    &:focus {
+      color: nb-theme(link-text-hover-color);
     }
   }
-
-  ol,ul {
-    @include nb-ltr(padding-left, 1.25rem);
-    @include nb-rtl(padding-right, 1.25rem);
-  }
-
-  .alert {
-    border: none!important;
-  }
-
-  .alert-success {
-    @include nb-alert-variant(text-success());
-  }
-  .alert-info {
-    @include nb-alert-variant(text-info());
-  }
-  .alert-warning {
-    @include nb-alert-variant(text-warning());
-  }
-  .alert-danger {
-    @include nb-alert-variant(text-danger());
-  }
-  .alert-primary {
-    @include nb-alert-variant(text-primary());
-  }
-  .alert-hint {
-    @include nb-alert-variant(text-hint());
-  }
-
 }

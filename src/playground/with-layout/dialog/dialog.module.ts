@@ -6,7 +6,7 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbDialogModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbInputModule } from '@nebular/theme';
 import { DialogRoutingModule } from './dialog-routing.module';
 import { DialogAutoFocusComponent } from './dialog-auto-focus.component';
 import { DialogBackdropClickComponent } from './dialog-backdrop-click.component';
@@ -45,6 +45,8 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
   imports: [
     CommonModule,
     NbDialogModule.forRoot(),
+    NbButtonModule,
+    NbInputModule,
     NbCardModule,
     DialogRoutingModule,
   ],

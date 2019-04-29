@@ -6,77 +6,45 @@
 
 @mixin nb-actions-theme() {
   nb-actions {
+    background-color: nb-theme(actions-background-color);
+    color: nb-theme(actions-text-color);
+    font-family: nb-theme(actions-text-font-family);
+    font-weight: nb-theme(actions-text-font-weight);
+    line-height: nb-theme(actions-text-line-height);
+  }
 
-    font-size: nb-theme(actions-font-size);
-    font-family: nb-theme(actions-font-family);
-    line-height: nb-theme(actions-line-height);
+  @each $size in nb-get-sizes() {
+    nb-actions.size-#{$size} nb-action {
+      font-size: nb-theme(actions-#{$size}-text-font-size);
+      height: nb-theme(actions-#{$size}-height);
+      padding: nb-theme(actions-#{$size}-padding);
 
-    nb-action {
-      height: nb-theme(actions-size-small);
-      padding: 0 nb-theme(actions-padding);
-
-      &:first-child {
-        @include nb-ltr(border-left, none!important);
-        @include nb-rtl(border-right, none!important);
-      }
-
-      a.icon-container {
-        &:hover, &:focus {
-          text-decoration: none;
-        }
-      }
-
-      i.control-icon {
-        color: nb-theme(actions-fg);
-        font-size: nb-theme(actions-size-small);
-      }
-
-      @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
-      @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
-
-      background: transparent;
-    }
-
-    &.inverse {
-      nb-action {
-        i.control-icon {
-          color: nb-theme(actions-bg);
-        }
-
-        @include nb-ltr(border-left, 1px solid nb-theme(actions-separator));
-        @include nb-rtl(border-right, 1px solid nb-theme(actions-separator));
+      nb-icon {
+        font-size: nb-theme(actions-#{$size}-icon-height);
       }
     }
+  }
 
-    &.small {
-      nb-action {
-        height: nb-theme(actions-size-small);
-        i.control-icon {
-          font-size: nb-theme(actions-size-small);
-        }
-      }
-    }
-    &.medium {
-      nb-action {
-        height: nb-theme(actions-size-medium);
-        i.control-icon {
-          font-size: nb-theme(actions-size-medium);
-        }
-      }
-    }
-    &.large {
-      nb-action {
-        height: nb-theme(actions-size-large);
-        i.control-icon {
-          font-size: nb-theme(actions-size-large);
-        }
-      }
+  nb-action {
+    $divider: nb-theme(actions-divider-width) nb-theme(actions-divider-style) nb-theme(actions-divider-color);
+    @include nb-ltr(border-left, $divider);
+    @include nb-rtl(border-right, $divider);
+
+    &:first-child {
+      @include nb-ltr(border-left, none!important);
+      @include nb-rtl(border-right, none!important);
     }
 
-    &.full-width nb-action {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+    nb-icon {
+      color: nb-theme(actions-icon-color);
+    }
+
+    &.disabled {
+      color: nb-theme(actions-disabled-text-color);
+
+      nb-icon {
+        color: nb-theme(actions-disabled-icon-color);
+      }
     }
   }
 }

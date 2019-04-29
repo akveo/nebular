@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbAccordionModule, NbCardModule } from '@nebular/theme';
+import { NbAccordionModule, NbButtonModule, NbCardModule } from '@nebular/theme';
 import { AccordionRoutingModule } from './accordion-routing.module';
 import { AccordionMultiComponent } from './accordion-multi.component';
 import { AccordionShowcaseComponent } from './accordion-showcase.component';
@@ -19,6 +19,11 @@ import { AccordionToggleComponent } from './accordion-toggle.component';
     AccordionTestComponent,
     AccordionToggleComponent,
   ],
-  imports: [ NbAccordionModule, NbCardModule, AccordionRoutingModule ],
+  imports: [
+    NbAccordionModule,
+    NbCardModule,
+    NbButtonModule,
+    AccordionRoutingModule,
+  ],
 })
 export class AccordionModule {}

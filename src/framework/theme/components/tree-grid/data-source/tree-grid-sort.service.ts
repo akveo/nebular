@@ -23,7 +23,9 @@ export class NbTreeGridSortService<T> {
 
     const sorted = data.sort((na, nb) => this.comparator(request, na, nb));
     for (const node of data) {
-      node.children = this.sort(request, node.children);
+      if (node.children) {
+        node.children = this.sort(request, node.children);
+      }
     }
     return sorted;
   }

@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "3.5.0",
+  "version": "4.0.0-beta.0",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -55,7 +55,7 @@
     "e2e": "ng e2e playground-e2e",
     "e2e:wp": "ng e2e playground-wp-e2e",
     "prepush": "npm run ci:lint",
-    "clean:tmp": "rimraf .ng_build .ng_compiled",
+    "clean:tmp": "rimraf .ng_build .ng_compiled tsconfig-custom.publish.json",
     "clean:tmp:lib": "npm run clean:tmp && rimraf src/.lib",
     "ci:lint": "npm run lint && npm run lint:styles",
     "ci:docs": "npm-run-all docs:prepare docs:build ",
@@ -76,7 +76,10 @@
     "postinstall": "npm run cli:firefox-fix",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
-    "gen:playground-components": "ng g .:playground-components"
+    "gen:playground-components": "ng g .:playground-components",
+    "gulp:change-prefix": "gulp change-prefix",
+    "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
+    "build:custom-prefix": "npm-run-all -s clean:tmp:lib \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --"
   },
   "keywords": [
     "angular",
@@ -101,6 +104,7 @@
     "core-js": "2.5.7",
     "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27",
     "docsearch.js": "^2.5.2",
+    "eva-icons": "^1.1.1",
     "gulp-bump": "2.7.0",
     "highlight.js": "9.12.0",
     "intersection-observer": "0.5.0",
@@ -109,7 +113,6 @@
     "leaflet": "1.0.3",
     "marked": "0.3.9",
     "moment": "^2.22.2",
-    "nebular-icons": "1.1.0",
     "normalize.css": "8.0.0",
     "rxjs": "6.3.0",
     "socicon": "3.0.5",
@@ -159,6 +162,7 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-sauce-launcher": "1.2.0",
     "karma-spec-reporter": "0.0.32",
+    "minimist": "^1.2.0",
     "npm-run-all": "4.1.5",
     "parse5": "^5.0.0",
     "protractor": "^5.3.2",

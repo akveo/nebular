@@ -6,7 +6,7 @@ import { NbToastrService } from '@nebular/theme';
   template: `
     <button nbButton (click)="showDefaultIcon()">With icon</button>
     <button nbButton (click)="showToast('')">Without icon</button>
-    <button nbButton (click)="showToast('nb-audio')">Custom icon</button>
+    <button nbButton (click)="showToast('headphones-outline')">Custom icon</button>
   `,
   styles: [
       `
@@ -32,6 +32,6 @@ export class ToastrIconComponent {
   }
 
   showToast(icon) {
-    this.toastrService.show('Message', `Toast: ${++this.index}`, { icon });
+    this.toastrService.show('Message', `Toast: ${++this.index}`, { icon, iconPack: 'eva' });
   }
 }

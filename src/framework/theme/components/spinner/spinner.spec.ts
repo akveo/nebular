@@ -26,7 +26,7 @@ describe('Component: NbSpinner', () => {
     fixture.detectChanges();
     expect(
       fixture
-        .debugElement.nativeElement.classList.contains('danger-spinner'))
+        .debugElement.nativeElement.classList.contains('status-danger'))
       .toBeTruthy()
   });
 
@@ -35,7 +35,7 @@ describe('Component: NbSpinner', () => {
     fixture.detectChanges();
     expect(
       fixture
-        .debugElement.nativeElement.classList.contains('small-spinner'))
+        .debugElement.nativeElement.classList.contains('size-small'))
       .toBeTruthy()
   });
 

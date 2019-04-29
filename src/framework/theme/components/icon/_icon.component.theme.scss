@@ -1,0 +1,21 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-icon-theme() {
+  nb-icon {
+    font-size: nb-theme(icon-font-size);
+    line-height: nb-theme(icon-line-height);
+    width: nb-theme(icon-width);
+    height: nb-theme(icon-height);
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-icon.status-#{$status} {
+      color: nb-theme(icon-#{$status}-color);
+    }
+  }
+}
+
