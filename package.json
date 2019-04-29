@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-rc.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "browserslist": [
@@ -67,7 +67,7 @@
     "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:prepare": "npm run build:package",
     "release:prepare:dev": "npm-run-all version:bump release:prepare build:rename:dev ",
-    "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp && npm run test:wp -- --watch=false",
+    "release:validate": "npm-run-all release:prepare build:wp ci:lint && npm run test:wp -- --watch=false",
     "release:dev": "npm-run-all release:prepare:dev publish",
     "release": "npm-run-all release:validate publish",
     "publish": "./scripts/publish.sh",
