@@ -25,7 +25,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge, Observable, Subject } from 'rxjs';
+import { merge } from 'rxjs';
 import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
 
 import {
@@ -551,15 +551,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
    */
   overlayPosition: NbPosition = '' as NbPosition;
 
-  protected selectionChange$: Subject<NbOptionComponent<T>> = new Subject();
-  /**
-   * Stream of events that will fire when one of the options is clicked.
-   * @deprecated
-   * Use nb-select (selected) binding to track selection change and <nb-option (click)=""> to track option click.
-   * @breaking-change 4.0.0
-   **/
-  readonly selectionChange: Observable<NbOptionComponent<T>> = this.selectionChange$.asObservable();
-
   protected ref: NbOverlayRef;
 
   protected triggerStrategy: NbTriggerStrategy;
@@ -858,10 +849,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
         }),
         takeWhile(() => this.alive),
       )
-      .subscribe((clickedOption: NbOptionComponent<T>) => {
-        this.handleOptionClick(clickedOption);
-        this.selectionChange$.next(clickedOption);
-      });
+      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
 
   protected subscribeOnOverlayKeys(): void {
