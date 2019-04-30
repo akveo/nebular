@@ -307,7 +307,7 @@ export class NbTabsetComponent implements AfterContentInit {
       .subscribe((tabToSelect: NbTabComponent) => {
         this.selectTab(tabToSelect);
         this.changeDetectorRef.markForCheck();
-    });
+      });
   }
 
   // TODO: navigate to routeParam
