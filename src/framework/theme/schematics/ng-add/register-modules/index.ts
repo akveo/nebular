@@ -6,7 +6,7 @@
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
+import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 import { normalize } from '@angular-devkit/core';
 import { bold, red } from '@angular-devkit/core/src/terminal';
 
