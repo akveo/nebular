@@ -24,6 +24,7 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/scrolling': 'ng.cdk.scrolling',
   '@angular/cdk/table': 'ng.cdk.table',
   '@angular/cdk/bidi': 'ng.cdk.bidi',
+  '@angular/cdk/keycodes': 'ng.cdk.keycodes',
 
 
   // RxJS dependencies

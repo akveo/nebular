@@ -2,8 +2,9 @@
 
 @include nb-install-component() {
 
-  $convex-bg: linear-gradient(to top, #f1f3f6 0, transparent 18%);
+  $convex-bg: linear-gradient(to bottom, #f1f3f6 0, transparent 18%);
   $content-width: nb-theme(content-width);
+  $max-width: 960px;
 
   .content-center {
     max-width: $content-width;
@@ -12,10 +13,14 @@
     margin-right: auto;
     display: flex;
     flex-wrap: wrap;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .hero-image {
-    background: url('/assets/img/bg.svg');
+    overflow: hidden;
+    background-color: #3366ff;
+    background-image: url('/assets/img/bg.svg');
     background-repeat: no-repeat;
     background-size: cover;
     .content-center {
@@ -25,11 +30,27 @@
 
   .concave {
     margin-bottom: -5px;
+    margin-top: -5rem;
+    margin-left: -20%;
+    margin-right: -20%;
+
+    @include media-breakpoint-up(md) {
+      margin-top: -7rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: -8.5rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: -15rem;
+    }
   }
 
   .features {
-    margin-top: -8rem;
+    margin-top: 5rem;
     justify-content: center;
+    max-width: $max-width;
   }
 
   .features, .advantages {
@@ -41,8 +62,13 @@
     overflow: hidden;
 
     > .content-center {
-      padding: 0 2rem;
+      max-width: $max-width;
     }
+  }
+
+  ngd-footer {
+    max-width: $max-width;
+    margin: 0 auto;
   }
 
   @include media-breakpoint-up(is) {
@@ -53,41 +79,24 @@
 
   @include media-breakpoint-up(md) {
     ngd-hero {
-      margin-top: 6rem;
+      margin-top: 2rem;
     }
 
     .advantages {
+      padding-top: 5.5rem;
       padding-bottom: 5.5rem;
 
       &::after {
         content: '';
         position: absolute;
-        top: 300px;
-        bottom: 0;
-        right: -30%;
-        left: -30%;
+        top: 0;
+        height: 24rem;
+        right: -20%;
+        left: -20%;
         background: $convex-bg;
         z-index: -1;
         border-radius: 50%;
       }
-    }
-  }
-
-  @include media-breakpoint-up(xl) {
-    .features {
-      margin-top: -9rem;
-    }
-  }
-
-  @include media-breakpoint-up(xxl) {
-    .features {
-      margin-top: -10rem;
-    }
-  }
-
-  @include media-breakpoint-up(xxxl) {
-    .features {
-      margin-top: -12.5rem;
     }
   }
 }

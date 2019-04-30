@@ -9,6 +9,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
+  NbIconModule,
   NbInputModule,
   NbLayoutModule,
 } from '@nebular/theme';
@@ -94,6 +95,7 @@ export function nbNoOpInterceptorFilter(req: HttpRequest<any>): boolean {
     NbButtonModule,
     RouterModule,
     FormsModule,
+    NbIconModule,
   ],
   declarations: [
     NbAuthComponent,

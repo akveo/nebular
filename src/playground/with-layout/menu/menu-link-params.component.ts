@@ -41,7 +41,7 @@ export class MenuLinkParamsComponent {
         {
           title: 'Menu item with icon',
           link: '/example/menu/menu-link-params.component',
-          icon: 'nb-search',
+          icon: 'search-outline',
         },
         {
           title: 'Hidden menu item',

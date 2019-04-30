@@ -108,7 +108,7 @@ export class TreeGridShowcaseComponent {
     <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
     </nb-tree-grid-row-toggle>
     <ng-template #fileIcon>
-      <span class="nb-compose"></span>
+      <nb-icon icon="file-text-outline"></nb-icon>
     </ng-template>
   `,
 })

@@ -28,6 +28,7 @@
 - add the package external dependencies into rollup-config.ts which gives rollup capability build package correctly
 - add the package into bundle.ts which build umd modules for our packages
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
+- add the package into change-prefix.ts which builds our packages with custom prefix.
 
 # New Package Dependency Checklist
 - run `npm run update-packages-smoke-lock` to update packages-smoke/package-lock.json and commit updated package lock
@@ -333,6 +334,8 @@ in your typedoc comment, docs'll try to find component with name `my-example` an
 To give the user capability switch between live and inline representation of the example.
 
 # Release
+
+0. For major version, search for `@breaking-change` to make sure all breaking changes are covered.
 
 To start a new release (publish the framework packages on NPM) you need:
 

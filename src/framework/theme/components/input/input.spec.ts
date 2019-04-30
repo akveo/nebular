@@ -6,7 +6,10 @@
 
 import { Component, ViewChild, ElementRef, Input } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbInputDirective } from './input.directive';
+import { NbInputDirective } from '@nebular/theme';
+import { NbComponentStatus } from '../component-status';
+import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
 import { NbInputModule } from './input.module';
 
 @Component({
@@ -17,6 +20,8 @@ import { NbInputModule } from './input.module';
   `,
 })
 class InputTestComponent {
+  @ViewChild('inputEl', { read: NbInputDirective }) inputDirective: NbInputDirective;
+
   @ViewChild('inputEl', { read: ElementRef })
   inputElementRef: ElementRef;
 
@@ -31,9 +36,9 @@ class InputTestComponent {
     return this.textareaElementRef.nativeElement;
   }
 
-  @Input() size = NbInputDirective.SIZE_MEDIUM;
-  @Input() status;
-  @Input() shape = NbInputDirective.SHAPE_RECTANGLE;
+  @Input() size: NbComponentSize;
+  @Input() status: NbComponentStatus;
+  @Input() shape: NbComponentShape;
   @Input() fullWidth = false;
 }
 
@@ -43,8 +48,9 @@ describe('Directive: NbInput', () => {
   let fixture: ComponentFixture<InputTestComponent>;
   let inputElement: Element;
   let textareaElement: Element;
+  let inputDirective: NbInputDirective;
 
-  beforeEach(() => {;
+  beforeEach(() => {
 
     fixture = TestBed.configureTestingModule({
         imports: [ NbInputModule ],
@@ -53,32 +59,33 @@ describe('Directive: NbInput', () => {
       .createComponent(InputTestComponent);
 
     inputTestComponent = fixture.componentInstance;
+    inputDirective = inputTestComponent.inputDirective;
     inputElement = inputTestComponent.inputElement;
     textareaElement = inputTestComponent.textareaElement;
   });
 
   it('should set status', () => {
-    inputTestComponent.status = NbInputDirective.STATUS_DANGER;
+    inputTestComponent.status = 'danger';
     fixture.detectChanges();
 
-    expect(inputElement.classList).toContain('input-danger');
-    expect(textareaElement.classList).toContain('input-danger');
+    expect(inputElement.classList).toContain('status-danger');
+    expect(textareaElement.classList).toContain('status-danger');
   });
 
   it('should set size', () => {
-    inputTestComponent.size = NbInputDirective.SIZE_LARGE;
+    inputTestComponent.size = 'large';
     fixture.detectChanges();
 
-    expect(inputElement.classList).toContain('input-lg');
-    expect(textareaElement.classList).toContain('input-lg');
+    expect(inputElement.classList).toContain('size-large');
+    expect(textareaElement.classList).toContain('size-large');
   });
 
   it('should set shape class', () => {
-    inputTestComponent.shape = NbInputDirective.SHAPE_SEMI_ROUND;
+    inputTestComponent.shape = 'semi-round';
     fixture.detectChanges();
 
-    expect(inputElement.classList).toContain('input-semi-round');
-    expect(textareaElement.classList).toContain('input-semi-round');
+    expect(inputElement.classList).toContain('shape-semi-round');
+    expect(textareaElement.classList).toContain('shape-semi-round');
   });
 
   it('should set full width', () => {
@@ -88,4 +95,5 @@ describe('Directive: NbInput', () => {
     expect(inputElement.classList).toContain('input-full-width');
     expect(textareaElement.classList).toContain('input-full-width');
   });
+
 });

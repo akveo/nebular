@@ -1,6 +1,6 @@
 {
   "name": "packages-smoke",
-  "version": "3.4.2",
+  "version": "4.0.0-rc.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

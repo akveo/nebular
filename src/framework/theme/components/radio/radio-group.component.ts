@@ -7,7 +7,6 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChildren,
   EventEmitter,
@@ -23,11 +22,11 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge } from 'rxjs';
-import { filter, switchMap, take, takeWhile } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
-
+import { NbComponentStatus } from '../component-status';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -35,9 +34,9 @@ import { NbRadioComponent } from './radio.component';
  *
  * ```html
  * <nb-radio-group [(ngModel)]="selectedOption">
- *   <nb-radio>Option 1</nb-radio>
- *   <nb-radio>Option 2</nb-radio>
- *   <nb-radio>Option 3</nb-radio>
+ *   <nb-radio value="1">Option 1</nb-radio>
+ *   <nb-radio value="2">Option 2</nb-radio>
+ *   <nb-radio value="3">Option 3</nb-radio>
  * </nb-radio-group>
  * ```
  *
@@ -45,9 +44,9 @@ import { NbRadioComponent } from './radio.component';
  *
  * ```html
  * <nb-radio-group [(value)]="selectedOption">
- *   <nb-radio>Option 1</nb-radio>
- *   <nb-radio>Option 2</nb-radio>
- *   <nb-radio>Option 3</nb-radio>
+ *   <nb-radio value="1">Option 1</nb-radio>
+ *   <nb-radio value="2">Option 2</nb-radio>
+ *   <nb-radio value="3">Option 3</nb-radio>
  * </nb-radio-group>
  * ```
  *
@@ -59,13 +58,12 @@ import { NbRadioComponent } from './radio.component';
  * </nb-radio-group>
  * ```
  *
- * Also, you can disable the whole group using `disabled` attribute.
+ * You can change radio group status by setting `status` input.
+ * @stacked-example(Statuses, radio/radio-statuses.component)
  *
- * ```html
- * <nb-radio-group disabled>
- *   ...
- * </nb-radio-group>
- * ```
+ * Also, you can disable the whole group using `disabled` attribute.
+ * @stacked-example(Disabled group, radio/radio-disabled-group.component)
+ *
  * */
 @Component({
   selector: 'nb-radio-group',
@@ -82,48 +80,86 @@ import { NbRadioComponent } from './radio.component';
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
-  @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
-
-  @Input('value')
-  set setValue(value: any) {
-    this.value = value;
-    this.updateValues();
-  }
-
-  @Input('name')
-  set setName(name: string) {
-    this.name = name;
-    this.updateNames();
-  }
-
-  @Input('disabled')
-  set setDisabled(disabled: boolean) {
-    this.disabled = convertToBoolProperty(disabled);
-    this.updateDisabled();
-  }
-
-  @Output() valueChange: EventEmitter<any> = new EventEmitter();
-
-  protected disabled: boolean;
-  protected value: any;
-  protected name: string;
   protected alive: boolean = true;
+  protected isTouched: boolean = false;
   protected onChange = (value: any) => {};
   protected onTouched = () => {};
 
+  @Input()
+  get value(): any {
+    return this._value;
+  }
+  set value(value: any) {
+    this._value = value;
+    this.updateValues();
+  }
+  protected _value: any;
+
+  @Input()
+  get name(): string {
+    return this._name;
+  }
+  set name(name: string) {
+    this._name = name;
+    this.updateNames();
+  }
+  protected _name: string;
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(disabled: boolean) {
+    this._disabled = convertToBoolProperty(disabled);
+    this.updateDisabled();
+  }
+  protected _disabled: boolean;
+
+  /**
+   * Radio buttons status.
+   * Possible values are `primary` (default), `success`, `warning`, `danger`, `info`.
+   */
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if (this._status !== value) {
+      this._status = value;
+      this.updateStatus();
+    }
+  }
+  protected _status: NbComponentStatus = 'primary';
+
+  @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
+
+  @Output() valueChange: EventEmitter<any> = new EventEmitter();
+
   constructor(
-    protected cd: ChangeDetectorRef,
     protected hostElement: ElementRef<HTMLElement>,
     @Inject(PLATFORM_ID) protected platformId,
     @Inject(NB_DOCUMENT) protected document,
   ) {}
 
   ngAfterContentInit() {
+    // In case option 'name' isn't set on nb-radio component,
+    // we need to set it's name right away, so it won't overlap with options
+    // without names from other radio groups. Otherwise they all would have
+    // same name and will be considered as options from one group so only the
+    // last option will stay selected.
     this.updateNames();
-    this.updateValues();
-    this.updateDisabled();
-    this.subscribeOnRadiosValueChange();
-    this.subscribeOnRadiosBlur();
+
+    Promise.resolve().then(() => this.updateAndSubscribeToRadios());
+
+    this.radios.changes
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(() => {
+        // 'changes' emit during change detection run and we can't update
+        // option properties right of since they already was initialized.
+        // Instead we schedule microtask to update radios after change detection
+        // run is finished.
+        Promise.resolve().then(() => this.updateAndSubscribeToRadios());
+      });
   }
 
   ngOnDestroy() {
@@ -146,30 +182,43 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     }
   }
 
+  protected updateAndSubscribeToRadios() {
+    this.updateNames();
+    this.updateValues();
+    this.updateDisabled();
+    this.updateStatus();
+    this.subscribeOnRadiosValueChange();
+    this.subscribeOnRadiosBlur();
+  }
+
   protected updateNames() {
     if (this.radios) {
       this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
-      this.markRadiosForCheck();
     }
   }
 
   protected updateValues() {
     if (this.radios && typeof this.value !== 'undefined') {
       this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
-      this.markRadiosForCheck();
     }
   }
 
   protected updateDisabled() {
     if (this.radios && typeof this.disabled !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.setDisabled = this.disabled);
-      this.markRadiosForCheck();
+      this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
     }
   }
 
   protected subscribeOnRadiosValueChange() {
+    if (!this.radios || !this.radios.length) {
+      return;
+    }
+
     merge(...this.radios.map((radio: NbRadioComponent) => radio.valueChange))
-      .pipe(takeWhile(() => this.alive))
+      .pipe(
+        takeWhile(() => this.alive),
+        takeUntil(this.radios.changes),
+      )
       .subscribe((value: any) => {
         this.writeValue(value);
         this.propagateValue(value);
@@ -181,18 +230,16 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.onChange(value);
   }
 
-  protected markRadiosForCheck() {
-    this.radios.forEach((radio: NbRadioComponent) => radio.markForCheck());
-  }
-
   protected subscribeOnRadiosBlur() {
-    if (!isPlatformBrowser(this.platformId)) {
+    const hasNoRadios = !this.radios || !this.radios.length;
+    if (!isPlatformBrowser(this.platformId) || this.isTouched || hasNoRadios) {
       return;
     }
 
     const hostElement = this.hostElement.nativeElement;
     fromEvent<Event>(hostElement, 'focusin')
       .pipe(
+        takeWhile(() => this.alive),
         filter(event => hostElement.contains(event.target as Node)),
         switchMap(() => merge(
           fromEvent<Event>(this.document, 'focusin'),
@@ -200,7 +247,19 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
         )),
         filter(event => !hostElement.contains(event.target as Node)),
         take(1),
+        takeUntil(this.radios.changes),
       )
-      .subscribe(() => this.onTouched());
+      .subscribe(() => this.markTouched());
+  }
+
+  protected markTouched() {
+    this.isTouched = true;
+    this.onTouched();
+  }
+
+  protected updateStatus() {
+    if (this.radios) {
+      this.radios.forEach((radio: NbRadioComponent) => radio.status = this.status);
+    }
   }
 }

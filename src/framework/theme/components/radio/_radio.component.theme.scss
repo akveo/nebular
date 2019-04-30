@@ -4,80 +4,66 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin input-border-color($color) {
-  input:checked + .radio-indicator,
-  input:hover:not(:disabled) + .radio-indicator {
-    border-color: $color;
-  }
-}
-
-@mixin nb-input-status-color($origin-border-color) {
-  @include input-border-color($origin-border-color);
-  &.success {
-    @include input-border-color(nb-theme(color-success));
-  }
-  &.warning {
-    @include input-border-color(nb-theme(color-warning));
-  }
-  &.danger {
-    @include input-border-color(nb-theme(color-danger));
-  }
-}
-
-@mixin nb-radio-check-mark($size, $color) {
-  &::before {
-    background-color: $color;
-    height: calc(#{$size} * 0.6);
-    width: calc(#{$size} * 0.6);
-    border: solid $color;
-  }
-}
-
-@mixin set-box-style($bg, $size, $border-size, $border-color) {
-  background-color: $bg;
-  width: $size;
-  height: $size;
-  border: $border-size solid $border-color;
-}
-
 @mixin nb-radio-theme() {
   nb-radio {
-    .radio-indicator {
-      @include set-box-style(
-          nb-theme(radio-bg),
-          nb-theme(radio-size),
-          nb-theme(radio-border-size),
-          nb-theme(radio-border-color)
-      );
-
-      @include nb-radio-check-mark(nb-theme(radio-size), nb-theme(radio-checkmark));
+    .radio-circle {
+      height: nb-theme(radio-height);
+      width: nb-theme(radio-width);
+      background-color: nb-theme(radio-background-color);
+      border-style: nb-theme(radio-border-style);
+      border-width: nb-theme(radio-border-width);
     }
 
-    input:checked + .radio-indicator,
-    input:disabled:checked + .radio-indicator {
-      @include set-box-style(
-          nb-theme(radio-checked-bg),
-          nb-theme(radio-checked-size),
-          nb-theme(radio-checked-border-size),
-          nb-theme(radio-checked-border-color)
-      );
-      @include nb-radio-check-mark(nb-theme(radio-checked-size), nb-theme(radio-checked-checkmark));
+    .native-input:focus + .radio-circle {
+      box-shadow: 0 0 0 nb-theme(radio-outline-width) nb-theme(radio-outline-color);
     }
 
-    input:disabled + .radio-indicator {
-      @include set-box-style(
-          nb-theme(radio-disabled-bg),
-          nb-theme(radio-disabled-size),
-          nb-theme(radio-disabled-border-size),
-          nb-theme(radio-disabled-border-color)
-      );
-      @include nb-radio-check-mark(nb-theme(radio-disabled-size), nb-theme(radio-disabled-checkmark));
+    .native-input:disabled + .radio-circle {
+      border-color: nb-theme(radio-disabled-border-color);
+    }
+    .native-input:disabled:checked + .radio-circle::before {
+      background-color: nb-theme(radio-disabled-inner-circle-color);
+    }
+    .native-input:disabled ~ .text {
+      color: nb-theme(radio-disabled-text-color);
     }
 
-    @include nb-input-status-color(nb-theme(radio-checked-border-color));
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} .native-input:enabled + .radio-circle {
+        border-color: nb-theme(radio-#{$status}-border-color);
+      }
+      &.status-#{$status} .native-input:enabled:checked + .radio-circle::before {
+        background-color: nb-theme(radio-#{$status}-inner-circle-color);;
+      }
 
-    .radio-description {
-      color: nb-theme(radio-fg);
+      &.status-#{$status} .native-input:enabled:focus + .radio-circle {
+        border-color: nb-theme(radio-#{$status}-focus-border-color);
+      }
+      &.status-#{$status} .native-input:enabled:checked:focus + .radio-circle::before {
+        background-color: nb-theme(radio-#{$status}-focus-inner-circle-color);
+      }
+
+      &.status-#{$status} label:hover .native-input:enabled + .radio-circle {
+        border-color: nb-theme(radio-#{$status}-hover-border-color);
+      }
+      &.status-#{$status} label:hover .native-input:checked:enabled + .radio-circle::before {
+        background-color: nb-theme(radio-#{$status}-hover-inner-circle-color);
+      }
+
+      &.status-#{$status} .native-input:enabled:active + .radio-circle {
+        border-color: nb-theme(radio-#{$status}-active-border-color);
+      }
+      &.status-#{$status} .native-input:enabled:checked:active + .radio-circle::before {
+        background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
+      }
+    }
+
+    .text {
+      color: nb-theme(radio-text-color);
+      font-family: nb-theme(radio-text-font-family);
+      font-size: nb-theme(radio-text-font-size);
+      font-weight: nb-theme(radio-text-font-weight);
+      line-height: nb-theme(radio-text-line-height);
     }
   }
 }

@@ -2,11 +2,15 @@
 
 @include nb-install-component() {
 
+  .header-card .page-heading {
+    margin-bottom: 0;
+  }
+
   .components-list {
     display: flex;
     flex-wrap: wrap;
 
-    h2 {
+    .group-title {
       flex: 1 1 100%;
       color: nb-theme(color-fg-heading-light);
       margin: 1rem 0 2rem;
@@ -19,6 +23,8 @@
 
     .component-icon {
       margin-bottom: 1rem;
+      width: 4rem;
+      height: 4rem;
     }
 
     .component-name {

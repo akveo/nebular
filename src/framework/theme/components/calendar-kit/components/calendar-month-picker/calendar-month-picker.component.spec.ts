@@ -43,5 +43,18 @@ describe('Component: NbCalendarMonthPicker', () => {
     componentEl.query(By.css('nb-calendar-picker'))
       .nativeElement
       .dispatchEvent(new CustomEvent('select'));
-  })
+  });
+
+  it('should not have duplicate months', () => {
+    component.month = new Date(2019, 0, 30);
+    component.initMonths();
+
+    let expectedMonthIndex = 0;
+    for (const monthRow of component.months) {
+      for (const month of monthRow) {
+        expect(month.getMonth()).toEqual(expectedMonthIndex);
+        expectedMonthIndex++;
+      }
+    }
+  });
 });

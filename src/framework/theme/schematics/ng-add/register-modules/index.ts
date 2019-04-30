@@ -16,6 +16,10 @@ import { appRoutingModuleContent } from './app-routing-module-content';
 
 
 export function registerModules(options: Schema): Rule {
+  if (!options.theme) {
+    options.theme = 'default';
+  }
+
   return chain([
     registerAnimationsModule(options),
     registerNebularModules(options),
@@ -58,6 +62,7 @@ function registerNebularModules(options: Schema): Rule {
 
     addModuleImportToRootModule(tree, nebularThemeModule, '@nebular/theme', project);
     addModuleImportToRootModule(tree, 'NbLayoutModule', '@nebular/theme', project);
+    addModuleImportToRootModule(tree, 'NbEvaIconsModule', '@nebular/eva-icons', project);
   }
 }
 

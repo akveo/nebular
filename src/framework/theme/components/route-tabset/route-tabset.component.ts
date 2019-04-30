@@ -16,7 +16,7 @@ import { convertToBoolProperty } from '../helpers';
  *  {
  *    title: 'Route tab #1',
  *    route: '/pages/description',
- *    icon: 'nb-home',
+ *    icon: 'home',
  *    responsive: true, // hide title before `route-tabs-icon-only-max-width` value
  *  },
  *  {
@@ -67,9 +67,9 @@ import { convertToBoolProperty } from '../helpers';
             [class.responsive]="tab.responsive"
             class="route-tab disabled"
             tabindex="-1">
-          <a tabindex="-1">
-            <i *ngIf="tab.icon" [class]="tab.icon"></i>
-            <span *ngIf="tab.title">{{ tab.title }}</span>
+          <a tabindex="-1" class="tab-link">
+            <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+            <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
           </a>
         </li>
 
@@ -81,9 +81,9 @@ import { convertToBoolProperty } from '../helpers';
               [class.responsive]="tab.responsive"
               tabindex="0"
               class="route-tab">
-            <a tabindex="-1">
-              <i *ngIf="tab.icon" [class]="tab.icon"></i>
-              <span *ngIf="tab.title">{{ tab.title }}</span>
+            <a tabindex="-1" class="tab-link">
+              <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+              <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
             </a>
           </li>
         </ng-template>

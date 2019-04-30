@@ -10,77 +10,72 @@
 
     &.horizontal {
       .header .step {
-        width: nb-theme(stepper-index-size);
-        margin: 0 nb-theme(stepper-index-size) / 2;
+        width: nb-theme(stepper-step-index-width);
+        margin: 0 nb-theme(stepper-step-index-width) / 2;
       }
 
       .header .connector {
-        margin-top: nb-theme(stepper-index-size) / 2;
+        margin: nb-theme(stepper-horizontal-connector-margin);
       }
     }
 
     &.vertical {
       .header .connector {
-        margin: nb-theme(stepper-index-size) / 2;
+        margin: nb-theme(stepper-vertical-connector-margin);
       }
     }
 
     .header {
       .connector {
-        background-color: nb-theme(stepper-fg);
+        background-color: nb-theme(stepper-connector-background-color);
       }
 
       .connector-past {
-        background-color: nb-theme(stepper-accent-color);
-      }
-
-      .label {
-        font-size: nb-theme(stepper-label-font-size);
-        font-weight: nb-theme(stepper-label-font-weight);
-        color: nb-theme(stepper-fg);
+        background-color: nb-theme(stepper-connector-completed-background-color);
       }
 
       .label-index {
-        width: nb-theme(stepper-index-size);
-        height: nb-theme(stepper-index-size);
-        border-radius: nb-theme(stepper-index-size) / 2;
-        border: 2px solid nb-theme(stepper-fg);
-        color: nb-theme(stepper-fg);
-        font-weight: nb-theme(stepper-label-font-weight);
-
-        .icon {
-          font-size: nb-theme(stepper-completed-icon-size);
-          font-weight: nb-theme(stepper-completed-icon-weight);
-        }
+        border-radius: nb-theme(stepper-step-index-border-radius);
+        border-color: nb-theme(stepper-index-border-color);
+        border-style: nb-theme(stepper-step-index-border-style);
+        border-width: nb-theme(stepper-step-index-border-width);
+        width: nb-theme(stepper-step-index-width);
+        height: nb-theme(stepper-step-index-width);
       }
 
       .step {
+        color: nb-theme(stepper-step-text-color);
+        font-family: nb-theme(stepper-step-text-font-family);
+        font-size: nb-theme(stepper-step-text-font-size);
+        font-weight: nb-theme(stepper-step-text-font-weight);
+        line-height: nb-theme(stepper-step-text-line-height);
+
+        &.label-index {
+          border-color: nb-theme(stepper-step-index-border-color);
+        }
 
         &.selected {
+          color: nb-theme(stepper-step-active-text-color);
+
           .label-index {
-            border: 2px solid nb-theme(stepper-accent-color);
-            color: nb-theme(stepper-accent-color);
-          }
-          .label {
-            color: nb-theme(stepper-accent-color);
+            border-color: nb-theme(stepper-step-index-active-border-color);
           }
         }
 
         &.completed {
+          color: nb-theme(stepper-step-completed-text-color);
+
           .label-index {
-            background-color: nb-theme(stepper-accent-color);
-            border: 2px solid nb-theme(stepper-accent-color);
-            color: nb-theme(stepper-completed-fg);
-          }
-          .label {
-            color: nb-theme(stepper-accent-color);
+            background-color: nb-theme(stepper-step-index-completed-background-color);
+            border-color: nb-theme(stepper-step-index-completed-border-color);
+            color: nb-theme(stepper-step-index-completed-text-color);
           }
         }
       }
     }
 
     .step-content {
-      padding: nb-theme(stepper-step-padding);
+      padding: nb-theme(stepper-step-content-padding);
     }
   }
 }

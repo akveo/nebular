@@ -22,8 +22,9 @@
     font-weight: normal;
     font-size: 0.9rem;
 
-    .icon {
-      font-size: 0.95rem;
+    nb-icon {
+      font-size: 1rem;
+      vertical-align: middle;
     }
 
     &:focus, &:active, &:hover {

@@ -5,26 +5,49 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
-      <h1>Nebular</h1>
-      <p>Components, Auth & Security for your next Angular App</p>
-      <div class="badges">
-        <iframe class="stars"
-                src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
-                frameborder="0"
-                scrolling="0">
-        </iframe>
-        <a href="https://www.npmjs.com/package/@nebular/theme" target="_blank">
-          <img src="https://img.shields.io/npm/dt/@nebular/theme.svg">
-        </a>
+      <h1>Angular 7: UI Kit, Auth&nbsp;&&nbsp;Security</h1>
+      <div class="btns-wrapper">
+        <a class="btn get-started" routerLink="docs">Get Started</a>
+        <a class="btn" href="http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_button"
+           target="_blank">Demo</a>
       </div>
-      <a class="btn get-started" routerLink="docs">Get Started</a>
-      <a class="btn" href="http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_button"
-         target="_blank">Demo</a>
+      <div class="hero-features">
+        <div class="hero-feature">
+          <div class="feature-key">
+            35+
+          </div>
+          <h3 class="feature-title">
+            Angular Components
+          </h3>
+        </div>
+        <div class="hero-feature">
+          <div class="feature-key">
+            3
+          </div>
+          <h3 class="feature-title">
+            Visual themes
+          </h3>
+        </div>
+        <div class="hero-feature">
+          <div class="feature-key">
+            3
+          </div>
+          <h3 class="feature-title">
+            Auth strategies
+          </h3>
+        </div>
+        <div class="hero-feature">
+          <div class="feature-key">
+            <nb-icon icon="lock"></nb-icon>
+          </div>
+          <h3 class="feature-title">
+            Security
+          </h3>
+        </div>
+      </div>
     </div>
     <div class="right-block">
-      <div class="shield">
-        <h3>Not Just Another</h3>
-        <h3>UI Kit</h3>
+      <div class="hero-components">
       </div>
     </div>
   `,

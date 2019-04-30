@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { map, delay } from 'rxjs/operators';
+import { map, delay, filter } from 'rxjs/operators';
 import {
   Component,
   Input,
@@ -19,6 +19,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { convertToBoolProperty } from '../helpers';
+import { NbComponentStatus } from '../component-status';
+import { NbBadgePosition } from '../badge/badge.component';
 
 /**
  * Specific tab container.
@@ -123,7 +125,7 @@ export class NbTabComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: string;
+  @Input() badgeStatus: NbComponentStatus;
 
   /**
    * Badge position.
@@ -132,7 +134,7 @@ export class NbTabComponent {
    * 'top start', 'top end', 'bottom start', 'bottom end'
    * @type string
    */
-  @Input() badgePosition: string;
+  @Input() badgePosition: NbBadgePosition;
 
   init: boolean = false;
 }
@@ -165,7 +167,7 @@ export class NbTabComponent {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbTabsetModule,
  *   ],
  * })
@@ -191,23 +193,44 @@ export class NbTabComponent {
  *
  * @styles
  *
- * tabs-font-family:
- * tabs-font-size:
- * tabs-content-font-family:
- * tabs-content-font-size:
- * tabs-active-bg:
- * tabs-active-font-weight:
- * tabs-padding:
- * tabs-content-padding:
- * tabs-header-bg:
- * tabs-separator:
- * tabs-fg:
- * tabs-fg-text:
- * tabs-fg-heading:
- * tabs-bg:
- * tabs-selected:
- * tabs-icon-only-max-width
- *
+ * tabset-background-color:
+ * tabset-border-radius:
+ * tabset-shadow:
+ * tabset-tab-background-color:
+ * tabset-tab-padding:
+ * tabset-tab-text-color:
+ * tabset-tab-text-font-family:
+ * tabset-tab-text-font-size:
+ * tabset-tab-text-font-weight:
+ * tabset-tab-text-line-height:
+ * tabset-tab-text-transform:
+ * tabset-tab-underline-width:
+ * tabset-tab-underline-color:
+ * tabset-tab-active-background-color:
+ * tabset-tab-active-text-color:
+ * tabset-tab-active-underline-color:
+ * tabset-tab-focus-background-color:
+ * tabset-tab-focus-text-color:
+ * tabset-tab-focus-underline-color:
+ * tabset-tab-hover-background-color:
+ * tabset-tab-hover-text-color:
+ * tabset-tab-hover-underline-color:
+ * tabset-tab-disabled-background-color:
+ * tabset-tab-disabled-text-color:
+ * tabset-tab-disabled-underline-color:
+ * tabset-divider-color:
+ * tabset-divider-width:
+ * tabset-content-background-color:
+ * tabset-content-padding:
+ * tabset-content-text-color:
+ * tabset-content-text-font-family:
+ * tabset-content-text-font-size:
+ * tabset-content-text-font-weight:
+ * tabset-content-text-line-height:
+ * tabset-scrollbar-color:
+ * tabset-scrollbar-background-color:
+ * tabset-scrollbar-width:
+ * tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-tabset',
@@ -216,14 +239,16 @@ export class NbTabComponent {
     <ul class="tabset">
       <li *ngFor="let tab of tabs"
           (click)="selectTab(tab)"
+          (keyup.space)="selectTab(tab)"
+          (keyup.enter)="selectTab(tab)"
           [class.responsive]="tab.responsive"
           [class.active]="tab.active"
           [class.disabled]="tab.disabled"
           [attr.tabindex]="tab.disabled ? -1 : 0"
           class="tab">
-        <a href (click)="$event.preventDefault()" tabindex="-1">
-          <i *ngIf="tab.tabIcon" [class]="tab.tabIcon"></i>
-          <span *ngIf="tab.tabTitle">{{ tab.tabTitle }}</span>
+        <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
+          <nb-icon *ngIf="tab.tabIcon" [icon]="tab.tabIcon"></nb-icon>
+          <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
         </a>
         <nb-badge *ngIf="tab.badgeText"
           [text]="tab.badgeText"
@@ -276,11 +301,13 @@ export class NbTabsetComponent implements AfterContentInit {
             this.tabs.find((tab) => this.routeParam ? tab.route === params[this.routeParam] : tab.active),
         ),
         delay(0),
+        map((tab: NbTabComponent) => tab || this.tabs.first),
+        filter((tab: NbTabComponent) => !!tab),
       )
-      .subscribe((activeTab) => {
-        this.selectTab(activeTab || this.tabs.first);
+      .subscribe((tabToSelect: NbTabComponent) => {
+        this.selectTab(tabToSelect);
         this.changeDetectorRef.markForCheck();
-    });
+      });
   }
 
   // TODO: navigate to routeParam

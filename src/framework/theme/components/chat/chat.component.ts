@@ -11,9 +11,18 @@ import {
   ViewChild,
   ElementRef,
   ContentChildren,
-  QueryList, AfterViewInit,
+  QueryList,
+  AfterViewInit,
+  ContentChild,
+  SimpleChanges,
+  AfterContentInit,
+  OnChanges,
 } from '@angular/core';
+
+import { NbComponentSize } from '../component-size';
+import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
+import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 
 /**
@@ -55,7 +64,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbChatModule,
  *   ],
  * })
@@ -69,11 +78,12 @@ import { NbChatMessageComponent } from './chat-message.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
  *   ],
  * })
  * export class AppModule { }
+ * ```
  *
  * ### Usage
  *
@@ -102,30 +112,39 @@ import { NbChatMessageComponent } from './chat-message.component';
  *
  * @styles
  *
- * chat-font-size:
- * chat-fg:
- * chat-bg:
- * chat-border-radius:
- * chat-fg-text:
- * chat-height-xxsmall:
- * chat-height-xsmall:
- * chat-height-small:
- * chat-height-medium:
- * chat-height-large:
- * chat-height-xlarge:
- * chat-height-xxlarge:
+ * chat-background-color:
  * chat-border:
- * chat-padding:
+ * chat-border-radius:
  * chat-shadow:
- * chat-separator:
- * chat-active-bg:
- * chat-disabled-bg:
- * chat-disabled-fg:
- * chat-primary-bg:
- * chat-info-bg:
- * chat-success-bg:
- * chat-warning-bg:
- * chat-danger-bg:
+ * chat-padding:
+ * chat-text-color:
+ * chat-text-font-family:
+ * chat-text-font-size:
+ * chat-text-font-weight:
+ * chat-text-line-height:
+ * chat-header-text-color:
+ * chat-header-text-font-family:
+ * chat-header-text-font-size:
+ * chat-header-text-font-weight:
+ * chat-header-text-line-height:
+ * chat-tiny-height:
+ * chat-small-height:
+ * chat-medium-height:
+ * chat-large-height:
+ * chat-giant-height:
+ * chat-primary-background-color:
+ * chat-primary-text-color:
+ * chat-success-background-color:
+ * chat-success-text-color:
+ * chat-info-background-color:
+ * chat-info-text-color:
+ * chat-warning-background-color:
+ * chat-warning-text-color:
+ * chat-danger-background-color:
+ * chat-danger-text-color:
+ * chat-divider-color:
+ * chat-divider-style:
+ * chat-divider-width:
  */
 @Component({
   selector: 'nb-chat',
@@ -143,137 +162,47 @@ import { NbChatMessageComponent } from './chat-message.component';
     </div>
   `,
 })
-export class NbChatComponent implements AfterViewInit {
-
-  static readonly SIZE_XXSMALL = 'xxsmall';
-  static readonly SIZE_XSMALL = 'xsmall';
-  static readonly SIZE_SMALL = 'small';
-  static readonly SIZE_MEDIUM = 'medium';
-  static readonly SIZE_LARGE = 'large';
-  static readonly SIZE_XLARGE = 'xlarge';
-  static readonly SIZE_XXLARGE = 'xxlarge';
-
-  static readonly STATUS_ACTIVE = 'active';
-  static readonly STATUS_DISABLED = 'disabled';
-  static readonly STATUS_PRIMARY = 'primary';
-  static readonly STATUS_INFO = 'info';
-  static readonly STATUS_SUCCESS = 'success';
-  static readonly STATUS_WARNING = 'warning';
-  static readonly STATUS_DANGER = 'danger';
-
-  size: string;
-  status: string;
-  accent: string;
-  scrollBottom: boolean = true;
+export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
   @Input() title: string;
 
-  @HostBinding('class.xxsmall-chat')
-  get xxsmall() {
-    return this.size === NbChatComponent.SIZE_XXSMALL;
-  }
-
-  @HostBinding('class.xsmall-chat')
-  get xsmall() {
-    return this.size === NbChatComponent.SIZE_XSMALL;
-  }
-
-  @HostBinding('class.small-chat')
-  get small() {
-    return this.size === NbChatComponent.SIZE_SMALL;
-  }
-
-  @HostBinding('class.medium-chat')
-  get medium() {
-    return this.size === NbChatComponent.SIZE_MEDIUM;
-  }
-
-  @HostBinding('class.large-chat')
-  get large() {
-    return this.size === NbChatComponent.SIZE_LARGE;
-  }
-
-  @HostBinding('class.xlarge-chat')
-  get xlarge() {
-    return this.size === NbChatComponent.SIZE_XLARGE;
-  }
-
-  @HostBinding('class.xxlarge-chat')
-  get xxlarge() {
-    return this.size === NbChatComponent.SIZE_XXLARGE;
-  }
-
-  @HostBinding('class.active-chat')
-  get active() {
-    return this.status === NbChatComponent.STATUS_ACTIVE;
-  }
-
-  @HostBinding('class.disabled-chat')
-  get disabled() {
-    return this.status === NbChatComponent.STATUS_DISABLED;
-  }
-
-  @HostBinding('class.primary-chat')
-  get primary() {
-    return this.status === NbChatComponent.STATUS_PRIMARY;
-  }
-
-  @HostBinding('class.info-chat')
-  get info() {
-    return this.status === NbChatComponent.STATUS_INFO;
-  }
-
-  @HostBinding('class.success-chat')
-  get success() {
-    return this.status === NbChatComponent.STATUS_SUCCESS;
-  }
-
-  @HostBinding('class.warning-chat')
-  get warning() {
-    return this.status === NbChatComponent.STATUS_WARNING;
-  }
-
-  @HostBinding('class.danger-chat')
-  get danger() {
-    return this.status === NbChatComponent.STATUS_DANGER;
-  }
-
-  @HostBinding('class.accent')
-  get hasAccent() {
-    return this.accent;
-  }
-
   /**
    * Chat size, available sizes:
-   * xxsmall, xsmall, small, medium, large, xlarge, xxlarge
-   * @param {string} val
+   * `tiny`, `small`, `medium`, `large`, `giant`
    */
-  @Input('size')
-  private set setSize(val: string) {
-    this.size = val;
-  }
+  @Input() size: NbComponentSize;
 
   /**
    * Chat status color (adds specific styles):
-   * active, disabled, primary, info, success, warning, danger
-   * @param {string} val
+   * `primary`, `success`, `info`, `warning`, `danger`
    */
-  @Input('status')
-  private set setStatus(val: string) {
-    this.status = val;
-  }
+  @Input() status: NbComponentStatus;
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
-   * @param {boolean} val
    */
-  @Input('scrollBottom')
-  private set setScrollBottom(val: boolean) {
-    this.scrollBottom = convertToBoolProperty(val);
+  @Input()
+  get scrollBottom(): boolean {
+    return this._scrollBottom
   }
+  set scrollBottom(value: boolean) {
+    this._scrollBottom = convertToBoolProperty(value);
+  }
+  protected _scrollBottom: boolean = true;
 
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
+  @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('status' in changes) {
+      this.updateFormStatus();
+    }
+  }
+
+  ngAfterContentInit() {
+    this.updateFormStatus();
+  }
 
   ngAfterViewInit() {
     this.messages.changes
@@ -293,5 +222,61 @@ export class NbChatComponent implements AfterViewInit {
 
   scrollListBottom() {
     this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
+  }
+
+  protected updateFormStatus(): void {
+    if (this.chatForm) {
+      this.chatForm.setStatus(this.status);
+    }
+  }
+
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
+  }
+
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.status === 'primary';
+  }
+
+  @HostBinding('class.status-success')
+  get success(): boolean {
+    return this.status === 'success';
+  }
+
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.status === 'info';
+  }
+
+  @HostBinding('class.status-warning')
+  get warning(): boolean {
+    return this.status === 'warning';
+  }
+
+  @HostBinding('class.status-danger')
+  get danger(): boolean {
+    return this.status === 'danger';
   }
 }

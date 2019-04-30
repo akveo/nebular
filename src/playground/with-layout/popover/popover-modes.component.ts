@@ -15,6 +15,10 @@ import { Component } from '@angular/core';
       display: block;
       margin: 5rem;
     }
+
+    button {
+      margin: 0.5rem;
+    }
   `],
 })
 export class PopoverModesComponent {

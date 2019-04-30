@@ -4,18 +4,24 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 :host {
   display: flex;
   flex-direction: column;
   position: relative;
+
+  .close {
+    @include nb-ltr(right, 0);
+    @include nb-rtl(left, 0);
+  }
 }
 
 .close {
   position: absolute;
   top: 0;
-  right: 0;
   color: inherit;
   background-color: transparent;
   border: 0;
-  -webkit-appearance: none;
+  appearance: none;
 }

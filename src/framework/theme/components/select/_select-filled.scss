@@ -1,0 +1,67 @@
+@mixin select-filled {
+  nb-select.appearance-filled .select-button {
+    background-color: nb-theme(select-filled-background-color);
+    border-color: nb-theme(select-filled-border-color);
+    border-style: nb-theme(select-filled-border-style);
+    border-width: nb-theme(select-filled-border-width);
+    color: nb-theme(select-filled-text-color);
+
+    &.placeholder {
+      color: nb-theme(select-filled-placeholder-text-color);
+    }
+
+    &:focus {
+      border-color: nb-theme(select-filled-focus-border-color);
+    }
+    &:hover {
+      background-color: nb-theme(select-filled-hover-background-color);
+      border-color: nb-theme(select-filled-hover-border-color);
+    }
+    &[disabled] {
+      color: nb-theme(select-filled-disabled-text-color);
+      background-color: nb-theme(select-filled-disabled-background-color);
+      border-color: nb-theme(select-filled-disabled-border-color);
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select.appearance-filled.size-#{$size} .select-button {
+      padding: nb-theme(select-filled-#{$size}-padding);
+    }
+    .appearance-filled.size-#{$size} {
+      nb-option-group .option-group-title,
+      nb-option {
+        padding: nb-theme(select-option-filled-#{$size}-padding);
+      }
+      nb-option-group nb-option {
+        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
+      }
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-select.appearance-filled.status-#{$status} .select-button {
+      background-color: nb-theme(select-filled-#{$status}-background-color);
+      border-color: nb-theme(select-filled-#{$status}-border-color);
+      color: nb-theme(select-filled-#{$status}-text-color);
+
+      &.placeholder {
+        color: nb-theme(select-filled-#{$status}-placeholder-text-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(select-filled-#{$status}-focus-background-color);
+        border-color: nb-theme(select-filled-#{$status}-focus-border-color);
+      }
+      &:hover {
+        background-color: nb-theme(select-filled-#{$status}-hover-background-color);
+        border-color: nb-theme(select-filled-#{$status}-hover-border-color);
+      }
+      &[disabled] {
+        background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
+        border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
+        color: nb-theme(select-filled-#{$status}-disabled-text-color);
+      }
+    }
+  }
+}

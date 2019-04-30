@@ -11,12 +11,10 @@ import {
   QueryList,
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
+import { NB_STEPPER } from './stepper-tokens';
 import { NbStepComponent } from './step.component';
 
-export enum NbStepperOrientation {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
-}
+export type NbStepperOrientation = 'vertical' | 'horizontal';
 
 /**
  * Stepper component
@@ -29,7 +27,7 @@ export enum NbStepperOrientation {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbStepperModule,
  *   ],
  * })
@@ -43,7 +41,7 @@ export enum NbStepperOrientation {
  * <nb-stepper orientation="horizontal">
  *   <nb-step label="step number one">
  *       // ... step content here
- *   <nb-step>
+ *   </nb-step>
  *   <nb-step label="stepLabel">
  *       <ng-template #stepLabel>
  *           <div>
@@ -51,7 +49,7 @@ export enum NbStepperOrientation {
  *           </div>
  *       </ng-template>
  *       // ... step content here
- *   <nb-step>
+ *   </nb-step>
  * </nb-stepper>
  * ```
  *
@@ -67,7 +65,7 @@ export enum NbStepperOrientation {
  *     <form [formGroup]="form">
  *       // ...
  *     </form>
- *   <nb-step>
+ *   </nb-step>
  *    // ...
  * </nb-stepper>
  * ```
@@ -83,55 +81,55 @@ export enum NbStepperOrientation {
  *
  * @styles
  *
- * stepper-index-size:
- * stepper-label-font-size:
- * stepper-label-font-weight:
- * stepper-accent-color:
- * stepper-completed-fg:
- * stepper-fg:
- * stepper-completed-icon-size:
- * stepper-completed-icon-weight:
+ * stepper-step-text-color:
+ * stepper-step-text-font-family:
+ * stepper-step-text-font-size:
+ * stepper-step-text-font-weight:
+ * stepper-step-text-line-height:
+ * stepper-step-active-text-color:
+ * stepper-step-completed-text-color:
+ * stepper-step-index-border-color:
+ * stepper-step-index-border-style:
+ * stepper-step-index-border-width:
+ * stepper-step-index-border-radius:
+ * stepper-step-index-width:
+ * stepper-step-index-active-border-color:
+ * stepper-step-index-completed-background-color:
+ * stepper-step-index-completed-border-color:
+ * stepper-step-index-completed-text-color:
+ * stepper-connector-background-color:
+ * stepper-connector-completed-background-color:
+ * stepper-horizontal-connector-margin:
+ * stepper-vertical-connector-margin:
+ * stepper-step-content-padding:
  */
 @Component({
   selector: 'nb-stepper',
   styleUrls: ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
+  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
 export class NbStepperComponent {
 
-  @ContentChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
-
-  @HostBinding('class.vertical')
-  get vertical() {
-    return this.orientation === NbStepperOrientation.VERTICAL;
-  }
-
-  @HostBinding('class.horizontal')
-  get horizontal() {
-    return this.orientation === NbStepperOrientation.HORIZONTAL;
-  }
-
   /**
    * Selected step index
-   *
-   * @type {boolean}
    */
   @Input()
   get selectedIndex() {
-    return this.index;
+    return this._selectedIndex;
   }
-
   set selectedIndex(index: number) {
     if (!this.steps) {
-      this.index = index;
+      this._selectedIndex = index;
       return;
     }
 
     this.markCurrentStepInteracted();
     if (this.canBeSelected(index)) {
-      this.index = index;
+      this._selectedIndex = index;
     }
   }
+  protected _selectedIndex: number = 0;
 
   /**
    * Disables navigation by clicking on steps. False by default
@@ -139,23 +137,20 @@ export class NbStepperComponent {
    */
   @Input()
   set disableStepNavigation(value: boolean) {
-    this.disableStepNavigationValue = convertToBoolProperty(value);
+    this._disableStepNavigation = convertToBoolProperty(value);
   }
   get disableStepNavigation(): boolean {
-    return this.disableStepNavigationValue;
+    return this._disableStepNavigation;
   }
-  disableStepNavigationValue: boolean = false;
+  protected _disableStepNavigation: boolean = false;
 
   /**
    * Selected step component
-   *
-   * @type {boolean}
    */
   @Input()
   get selected(): NbStepComponent | undefined {
     return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
-
   set selected(step: NbStepComponent) {
     if (!this.steps) {
       return;
@@ -165,9 +160,8 @@ export class NbStepperComponent {
 
   /**
    * Stepper orientation - `horizontal`|`vertical`
-   * @type {string}
    */
-  @Input() orientation: string = NbStepperOrientation.HORIZONTAL;
+  @Input() orientation: NbStepperOrientation = 'horizontal';
 
   /**
    * Allow moving forward only if the current step is complete
@@ -175,14 +169,23 @@ export class NbStepperComponent {
    */
   @Input()
   set linear(value: boolean) {
-    this.linearValue = convertToBoolProperty(value);
+    this._linear = convertToBoolProperty(value);
   }
   get linear(): boolean {
-    return this.linearValue;
+    return this._linear;
   }
-  private linearValue = true;
+  protected _linear = true;
 
-  private index = 0;
+  @HostBinding('class.vertical')
+  get vertical() {
+    return this.orientation === 'vertical';
+  }
+  @HostBinding('class.horizontal')
+  get horizontal() {
+    return this.orientation === 'horizontal';
+  }
+
+  @ContentChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
 
   /**
    * Navigate to next step
@@ -202,7 +205,7 @@ export class NbStepperComponent {
    * Reset stepper and stepControls to initial state
    * */
   reset() {
-    this.index = 0;
+    this._selectedIndex = 0;
     this.steps.forEach(step => step.reset());
   }
 
@@ -210,11 +213,11 @@ export class NbStepperComponent {
     return this.selected === step;
   }
 
-  private isStepValid(index: number): boolean {
+  protected isStepValid(index: number): boolean {
     return this.steps.toArray()[index].completed;
   }
 
-  private canBeSelected(indexToCheck: number): boolean {
+  protected canBeSelected(indexToCheck: number): boolean {
     const noSteps = !this.steps || this.steps.length === 0;
     if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length) {
       return false;
@@ -234,7 +237,7 @@ export class NbStepperComponent {
     return isAllStepsValid;
   }
 
-  private markCurrentStepInteracted() {
+  protected markCurrentStepInteracted() {
     if (this.selected) {
       this.selected.interacted = true;
     }

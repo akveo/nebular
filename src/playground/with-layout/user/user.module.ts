@@ -11,6 +11,7 @@ import { UserShowcaseComponent } from './user-showcase.component';
 import { UserSizesComponent } from './user-sizes.component';
 import { UserAvatarSettingsComponent } from './user-avatar-settings.component';
 import { UserHideCaptionsComponent } from './user-hide-captions.component';
+import { NbUserShapeComponent } from './user-shape.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UserHideCaptionsComponent } from './user-hide-captions.component';
     UserSizesComponent,
     UserAvatarSettingsComponent,
     UserHideCaptionsComponent,
+    NbUserShapeComponent,
   ],
   imports: [ NbUserModule, NbCardModule, UserRoutingModule ],
 })

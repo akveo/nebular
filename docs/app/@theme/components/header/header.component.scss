@@ -13,6 +13,8 @@
   flex: 1 0 auto;
   flex-direction: row;
   align-items: center;
+  margin-left: -15px;
+  margin-right: -15px;
 
   .sidebar-toggle {
     border: none;
@@ -22,8 +24,10 @@
     flex: 1 0 auto;
     padding: 0 0.5rem;
 
-    .nb-menu {
+    nb-icon {
       vertical-align: middle;
+      font-size: 1.75rem;
+      color: $version-fg;
     }
   }
 
@@ -59,8 +63,6 @@
 
           &:hover, &.active, &:focus {
             color: $menu-item-fg-active;
-            text-shadow: 0.5px 0 0 currentColor;
-            font-weight: normal;
             outline: none!important;
           }
         }
@@ -150,6 +152,8 @@
   }
 
   &.docs-page {
+    margin-left: 0;
+    margin-right: 0;
     .section {
       &.left {
         align-items: center;

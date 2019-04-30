@@ -45,7 +45,7 @@ import { NbPopoverComponent } from './popover.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbPopoverModule,
  *   ],
  * })
@@ -142,21 +142,6 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
    * */
   @Input('nbPopoverAdjustment')
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
-
-  /**
-   * Deprecated, use `trigger`
-   * @deprecated
-   * @breaking-change 4.0.0
-   * */
-  @Input('nbPopoverMode')
-  set mode(mode) {
-    console.warn(`Popover 'nbPopoverMode' input is deprecated and will be removed as of 4.0.0.
-      Use 'nbPopoverTrigger' instead.`);
-    this.trigger = mode;
-  }
-  get mode() {
-    return this.trigger;
-  }
 
   /**
    * Describes when the container will be shown.

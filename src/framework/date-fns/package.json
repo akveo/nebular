@@ -1,6 +1,6 @@
 {
   "name": "@nebular/date-fns",
-  "version": "3.4.2",
+  "version": "4.0.0-rc.1",
   "description": "@nebular/date-fns",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -24,7 +24,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "3.4.2",
+    "@nebular/theme": "4.0.0-rc.1",
     "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
   }
 }

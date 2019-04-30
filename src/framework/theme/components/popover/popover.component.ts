@@ -27,10 +27,18 @@ import {
  *
  * @styles
  *
- * popover-fg
- * popover-bg
- * popover-border
- * popover-shadow
+ * popover-text-color:
+ * popover-text-font-family:
+ * popover-text-font-size:
+ * popover-text-font-weight:
+ * popover-text-line-height:
+ * popover-background-color:
+ * popover-border-width:
+ * popover-border-color:
+ * popover-border-radius:
+ * popover-shadow:
+ * popover-arrow-size:
+ * popover-padding:
  * */
 @Component({
   selector: 'nb-popover',
@@ -73,8 +81,7 @@ export class NbPopoverComponent extends NbPositionedContainer implements NbRende
 
   protected attachComponent() {
     const portal = new NbComponentPortal(this.content, null, null, this.cfr);
-    const ref = this.overlayContainer.attachComponentPortal(portal);
-    Object.assign(ref.instance, this.context);
+    const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
     ref.changeDetectorRef.detectChanges();
   }
 

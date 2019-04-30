@@ -1,7 +1,14 @@
-<nb-select placeholder="Cleanable">
-  <nb-option>Clean</nb-option>
-  <nb-option value="1">Option 1</nb-option>
-  <nb-option value="2">Option 2</nb-option>
-  <nb-option value="3">Option 3</nb-option>
-  <nb-option value="4">Option 4</nb-option>
-</nb-select>
+<nb-card size="small">
+  <nb-card-body>
+    <nb-select placeholder="Cleanable">
+      <nb-option>Clean with option without value</nb-option>
+      <nb-option [value]="null">Clean with null value</nb-option>
+      <nb-option [value]="undefined">Clean with null value</nb-option>
+      <nb-option [value]="0">Option 0</nb-option>
+      <nb-option [value]="1">Option 1</nb-option>
+      <nb-option [value]="2">Option 2</nb-option>
+      <nb-option [value]="3">Option 3</nb-option>
+      <nb-option [value]="4">Option 4</nb-option>
+    </nb-select>
+  </nb-card-body>
+</nb-card>

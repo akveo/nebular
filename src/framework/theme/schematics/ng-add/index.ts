@@ -21,35 +21,31 @@ import {
   getNebularVersion,
 } from '../util/package';
 
-
 /**
  * ng-add schematics, installs peer dependencies and runs project setup schematics.
  * */
 export default function (options: Schema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    registerPeerDependencies(host);
-    runSetupSchematics(context, options);
-  }
+  return runSetupSchematics(options);
 }
 
 /**
- * Add required peer dependencies in package.json if needed.
+ * Add required peer dependencies in package.json
  * */
-function registerPeerDependencies(host: Tree) {
-  const angularCoreVersion = getDependencyVersionFromPackageJson(host, '@angular/core');
+function installMainPeerDependencies(tree) {
+  const angularCoreVersion = getDependencyVersionFromPackageJson(tree, '@angular/core');
   const nebularThemeVersion = getNebularVersion();
-  const nebularIconsVersion = getNebularPeerDependencyVersionFromPackageJson('nebular-icons');
+  const angularCdkVersion = getNebularPeerDependencyVersionFromPackageJson('@angular/cdk');
 
-  addDependencyToPackageJson(host, '@angular/cdk', angularCoreVersion);
-  addDependencyToPackageJson(host, '@angular/animations', angularCoreVersion);
-  addDependencyToPackageJson(host, '@nebular/theme', nebularThemeVersion);
-  addDependencyToPackageJson(host, 'nebular-icons', nebularIconsVersion);
+  addDependencyToPackageJson(tree, '@angular/animations', angularCoreVersion);
+  addDependencyToPackageJson(tree, '@angular/cdk', angularCdkVersion, true);
+  addDependencyToPackageJson(tree, '@nebular/theme', nebularThemeVersion);
+  addDependencyToPackageJson(tree, '@nebular/eva-icons', nebularThemeVersion);
 
-  addDevDependencyToPackageJson(host, '@schematics/angular', angularCoreVersion);
+  addDevDependencyToPackageJson(tree, '@schematics/angular', angularCoreVersion);
 }
 
 /**
- * Runs `npm install` and after complete runs `setup` schematics.
+ * Runs `npm install`, then `post-install` schematic and after complete runs `setup` schematics.
  * The rest part of the ng-add schematics uses `@angular/cdk/schematics` and `@schematics/angular`
  * utilities. That's why we have to install `@angular/cdk` and `@schematics/angular` package
  * before running Nebular setup in the project.
@@ -57,7 +53,12 @@ function registerPeerDependencies(host: Tree) {
  * The only possibility to run `setup` schematics after required packages installed
  * is to use context tasks and add `npm install` task as the dependency to `setup` schematics task.
  * */
-function runSetupSchematics(context: SchematicContext, options: Schema) {
-  const installTaskId = context.addTask(new NodePackageInstallTask());
-  context.addTask(new RunSchematicTask('setup', options), [installTaskId]);
+function runSetupSchematics(options: Schema) {
+  return (tree: Tree, context: SchematicContext) => {
+    installMainPeerDependencies(tree);
+
+    const installTaskId = context.addTask(new NodePackageInstallTask());
+    const postInstallTaskId = context.addTask(new RunSchematicTask('post-install', options), [installTaskId]);
+    context.addTask(new RunSchematicTask('setup', options), [postInstallTaskId]);
+  };
 }

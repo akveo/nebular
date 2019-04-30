@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbLayoutModule, NbSidebarModule } from '@nebular/theme';
+import { NbButtonModule, NbLayoutModule, NbSidebarModule } from '@nebular/theme';
 import { SidebarRoutingModule } from './sidebar-routing.module';
 import { SidebarCompactedComponent } from './sidebar-compacted.component';
 import { SidebarFixedComponent } from './sidebar-fixed.component';
@@ -32,6 +32,7 @@ import { SidebarTwoTestComponent } from './sidebar-two-test.component';
   imports: [
     NbSidebarModule.forRoot(),
     NbLayoutModule,
+    NbButtonModule,
     SidebarRoutingModule,
   ],
 })

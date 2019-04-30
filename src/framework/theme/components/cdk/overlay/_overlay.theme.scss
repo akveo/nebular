@@ -2,10 +2,21 @@
 
 @mixin nb-overlay-theme {
   .overlay-backdrop {
-    background: nb-theme(overlay-backdrop-bg);
+    background: nb-theme(overlay-backdrop-background-color);
   }
 
   .cdk-overlay-container {
     z-index: 1040;
   }
+}
+
+/**
+ * In case when Nebular Layout custom scroll `withScroll` mode is enabled
+ * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
+ * so that it won't add additional positioning.
+ */
+.nb-global-scrollblock {
+  position: static;
+  width: auto;
+  overflow: hidden;
 }

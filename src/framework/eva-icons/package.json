@@ -1,0 +1,32 @@
+{
+  "name": "@nebular/eva-icons",
+  "version": "4.0.0-rc.1",
+  "description": "@nebular/eva-icons",
+  "main": "./bundles/eva-icons.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/nebular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/nebular/issues"
+  },
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "keywords": [
+    "angular",
+    "typescript",
+    "ng2-admin",
+    "ngx-admin",
+    "icons",
+    "theme",
+    "nebular",
+    "eva-icons"
+  ],
+  "peerDependencies": {
+    "@nebular/theme": "4.0.0-rc.1",
+    "eva-icons": "^1.1.1"
+  }
+}

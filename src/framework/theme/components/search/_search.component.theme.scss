@@ -7,24 +7,31 @@
 @mixin nb-search-theme() {
 
   nb-search-field {
+    .close-button {
+      z-index: 1;
+    }
 
     .search {
-      background: nb-theme(search-bg);
+      background: nb-theme(search-background-color);
 
-      button {
-        color: nb-theme(search-btn-close-fg);
-      }
-
-      span {
-        color: nb-theme(search-info);
+      span.info {
+        color: nb-theme(search-info-text-color);
+        font-family: nb-theme(search-info-text-font-family);
+        font-size: nb-theme(search-info-text-font-size);
+        font-weight: nb-theme(search-info-text-font-weight);
+        line-height: nb-theme(search-info-text-line-height);
       }
 
       input {
-        color: nb-theme(search-text);
-        border-bottom: 4px solid nb-theme(search-dash);
+        border-bottom: nb-theme(search-divider-width) nb-theme(search-divider-style) nb-theme(search-divider-color);
+        color: nb-theme(search-text-color);
+        font-family: nb-theme(search-text-font-family);
+        font-size: nb-theme(search-text-font-size);
+        font-weight: nb-theme(search-text-font-weight);
+        line-height: nb-theme(search-text-line-height);
 
         &::placeholder {
-          color: nb-theme(search-placeholder);
+          color: nb-theme(search-placeholder-text-color);
         }
 
         &::-ms-clear {
@@ -35,60 +42,54 @@
 
     &.rotate-layout {
       opacity: 0;
-      background: nb-theme(search-bg);
+      background: nb-theme(search-background-color);
     }
 
     &.modal-zoomin {
       .search::before,
       .search::after {
-        border: 1.5rem solid nb-theme(search-bg-secondary);
+        border: 1.5rem solid nb-theme(search-extra-background-color);
       }
 
     }
 
-		&.modal-half {
-			.form-wrapper {
-				background: nb-theme(search-bg);
-			}
+    &.modal-half {
+      .form-wrapper {
+        background: nb-theme(search-background-color);
+      }
       .search::before {
-        background: nb-theme(search-bg-secondary);
+        background: nb-theme(search-extra-background-color);
       }
     }
 
     &.modal-drop {
       .form-content::after {
-        background: nb-theme(search-dash);
+        background: nb-theme(search-divider-color);
       }
       .search::before {
-        background: nb-theme(search-bg);
+        background: nb-theme(search-background-color);
       }
     }
 
     &.curtain {
       .search::after {
-        background: nb-theme(search-bg);
+        background: nb-theme(search-background-color);
       }
       .search {
-        background: nb-theme(search-bg);
+        background: nb-theme(search-background-color);
       }
     }
 
-		&.column-curtain {
+    &.column-curtain {
       &::before {
-        background: nb-theme(search-bg);
+        background: nb-theme(search-background-color);
       }
       &::after {
         background: transparent;
       }
       &.show::after {
-        background: nb-theme(search-bg-secondary);
+        background: nb-theme(search-extra-background-color);
       }
-		}
-  }
-
-  nb-search {
-    button {
-      color: nb-theme(search-btn-open-fg);
     }
   }
 }

@@ -1,0 +1,58 @@
+@mixin select-outline {
+  nb-select.appearance-outline .select-button {
+    background-color: nb-theme(select-outline-background-color);
+    border-color: nb-theme(select-outline-border-color);
+    border-style: nb-theme(select-outline-border-style);
+    border-width: nb-theme(select-outline-border-width);
+    color: nb-theme(select-outline-text-color);
+
+    &.placeholder {
+      color: nb-theme(select-outline-placeholder-text-color);
+    }
+
+    &:focus {
+      border-color: nb-theme(select-outline-focus-border-color);
+    }
+    &:hover {
+      border-color: nb-theme(select-outline-hover-border-color);
+    }
+    &[disabled] {
+      color: nb-theme(select-outline-disabled-text-color);
+      background-color: nb-theme(select-outline-disabled-background-color);
+      border-color: nb-theme(select-outline-disabled-border-color);
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-select.appearance-outline.status-#{$status} .select-button {
+      border-color: nb-theme(select-outline-#{$status}-border-color);
+      &.selected {
+        background-color: nb-theme(select-option-outline-#{$status}-selected-background-color);
+      }
+      &:focus {
+        border-color: nb-theme(select-outline-#{$status}-focus-border-color);
+      }
+      &:hover {
+        border-color: nb-theme(select-outline-#{$status}-hover-border-color);
+      }
+      &[disabled] {
+        border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+      }
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select.appearance-outline.size-#{$size} .select-button {
+      padding: nb-theme(select-outline-#{$size}-padding);
+    }
+    .appearance-outline.size-#{$size} {
+      nb-option-group .option-group-title,
+      nb-option {
+        padding: nb-theme(select-option-outline-#{$size}-padding);
+      }
+      nb-option-group nb-option {
+        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
+      }
+    }
+  }
+}

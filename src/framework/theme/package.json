@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "3.4.2",
+  "version": "4.0.0-rc.1",
   "description": "@nebular/theme",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -29,8 +29,7 @@
     "@angular/core": "^7.0.0",
     "@angular/router": "^7.0.0",
     "@angular/cdk": "^7.2.1",
-    "rxjs": "^6.3.0",
-    "nebular-icons": "^1.1.0"
+    "rxjs": "^6.3.0"
   },
   "dependencies": {
     "intersection-observer": "0.5.0"

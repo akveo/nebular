@@ -33,7 +33,7 @@ else
   fileDiff=$(git diff --name-only $TRAVIS_BRANCH...HEAD)
 fi
 
-# Check if tests can be skipped
+ # Check if tests can be skipped
 if [[ ${fileDiff} =~ ^(.*\.md\s*)*$ ]]; then
   echo "Skipping tests since only markdown files changed."
   exit 0

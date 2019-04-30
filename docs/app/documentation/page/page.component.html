@@ -2,7 +2,10 @@
 
   <nb-card *ngIf="currentItem?.tabs" class="horizontal-nav">
     <nb-card-header>
-      {{ currentItem?.name }}
+      <h1 class="page-header h4">
+        {{ currentItem?.name }}
+        <span class="visually-hidden">{{ currentTabName }}</span>
+      </h1>
     </nb-card-header>
     <nb-card-body>
       <ngd-page-tabs [tabs]="currentItem?.tabs" horizontal></ngd-page-tabs>

@@ -10,110 +10,73 @@
 
 // default the base theme
 $theme: (
-  header-fg: #f7fafb,
-  header-bg: #111218,
-
-  layout-bg: #f1f5f8,
-
-  color-fg-heading: #181818,
-  color-fg-text: #4b4b4b,
-  color-fg-highlight: color-fg,
-
   separator: #cdd5dc,
-
   radius: 0.17rem,
 
-  scrollbar-bg: #e3e9ee,
+  header-text-color: text-alternate-color,
+  header-background-color: #111218,
 
-  color-primary: #73a1ff,
-  color-success: #5dcfe3,
-  color-info: #ba7fec,
-  color-warning: #ffa36b,
-  color-danger: #ff6b83,
+  button-hero-glow-size: 0 0 20px 0,
 
-  btn-secondary-bg: #edf2f5,
-  btn-secondary-border: #edf2f5,
+  card-border-width: 1px,
+  card-border-color: background-primary-color-4,
 
-  actions-fg: #d3dbe5,
-  actions-bg: color-bg,
+  context-menu-border-color: background-primary-color-4,
+  context-menu-border-width: 0.0625rem,
 
-  sidebar-bg: #e3e9ee,
+  modal-separator: #d5dbe0,
 
-  border-color: #d5dbe0,
+  tabs-selected: color-primary-500,
+  tabs-selected-second-color: color-primary-500,
+  tabset-divider-color: #ebecee,
 
-  menu-font-weight: font-weight-bolder,
-  menu-fg: color-fg-text,
-  menu-bg: #e3e9ee,
-  menu-active-fg: color-fg-heading,
-  menu-active-bg: menu-bg,
+  smart-table-paging-bg-active: color-primary-500,
 
-  menu-submenu-bg: menu-bg,
-  menu-submenu-fg: color-fg-text,
-  menu-submenu-active-fg: color-fg-heading,
-  menu-submenu-active-bg: #cdd5dc,
-  menu-submenu-active-border-color: menu-submenu-active-bg,
-  menu-submenu-active-shadow: none,
-  menu-submenu-hover-fg: menu-submenu-active-fg,
-  menu-submenu-hover-bg: menu-bg,
-  menu-submenu-item-border-width: 0.125rem,
-  menu-submenu-item-border-radius: radius,
-  menu-submenu-item-padding: 0.5rem 1rem,
-  menu-submenu-item-container-padding: 0 1.25rem,
-  menu-submenu-padding: 0.5rem,
+  popover-border-color: separator,
+  popover-border-width: 0.0625rem,
 
-  btn-border-radius: btn-semi-round-border-radius,
+  footer-separator: #d5dbe0,
+  footer-text-highlight-color: #2a2a2a,
 
-  btn-hero-degree: 0deg,
-  btn-hero-primary-degree: btn-hero-degree,
-  btn-hero-success-degree: btn-hero-degree,
-  btn-hero-warning-degree: btn-hero-degree,
-  btn-hero-info-degree: btn-hero-degree,
-  btn-hero-danger-degree: btn-hero-degree,
-  btn-hero-secondary-degree: btn-hero-degree,
-  btn-hero-glow-size: 0 0 20px 0,
-  btn-hero-primary-glow-size: btn-hero-glow-size,
-  btn-hero-success-glow-size: btn-hero-glow-size,
-  btn-hero-warning-glow-size: btn-hero-glow-size,
-  btn-hero-info-glow-size: btn-hero-glow-size,
-  btn-hero-danger-glow-size: btn-hero-glow-size,
-  btn-hero-secondary-glow-size: 0 0 0 0,
-  btn-hero-border-radius: btn-border-radius,
+  card-border-radius: radius,
+  tabset-border-radius: radius,
+  route-tabset-border-radius: radius,
+  user-rectangle-border-radius: radius,
+  popover-border-radius: radius,
+  context-menu-border-radius: radius,
+  smart-table-border-radius: radius,
+  toastr-border-radius: radius,
+  button-rectangle-border-radius: radius,
+  input-rectangle-border-radius: radius,
+  checkbox-border-radius: radius,
+  modal-border-radius: radius,
+  badge-border-radius: radius,
+  progress-bar-border-radius: radius,
+  alert-border-radius: radius,
+  chat-border-radius: radius,
+  accordion-border-radius: radius,
+  calendar-border-radius: radius,
+  tooltip-border-radius: radius,
+  select-rectangle-border-radius: radius,
+  datepicker-border-radius: radius,
 
   card-shadow: none,
-  card-border-width: 1px,
-  card-border-color: border-color,
-  card-header-border-width: 0,
-
-  link-color: #5dcfe3,
-  link-color-hover: #7dcfe3,
-  link-color-visited: link-color,
-
-  actions-separator: #f1f4f5,
-
-  modal-separator: border-color,
-
-  tabs-selected: color-primary,
-  tabs-selected-second-color: color-primary,
-  tabs-separator: #ebecee,
-
-  smart-table-paging-bg-active: color-primary,
-
-  route-tabs-selected: color-primary,
-
-  popover-border: color-primary,
-
+  header-shadow: none,
   footer-shadow: none,
-  footer-separator: border-color,
-  footer-fg-highlight: #2a2a2a,
-
-  calendar-today-item-bg: #a2b2c7,
-  calendar-active-item-bg: color-primary,
-  calendar-range-bg-in-range: #e3ecfe,
-  calendar-today-fg: color-white,
-
-  toastr-icon-radius: radius,
-
-  datepicker-border: color-primary,
+  layout-window-shadow: none,
+  sidebar-shadow: none,
+  tabset-shadow: none,
+  route-tabset-shadow: none,
+  popover-shadow: none,
+  context-menu-shadow: none,
+  toastr-shadow: none,
+  button-hero-shadow: none,
+  alert-shadow: none,
+  chat-shadow: none,
+  accordion-shadow: none,
+  tooltip-shadow: none,
+  select-options-list-shadow: none,
+  datepicker-shadow: none,
 );
 
 // register the theme

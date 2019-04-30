@@ -20,26 +20,50 @@
   }
 
   .nb-tree-grid-header-row {
-    background: nb-theme(tree-grid-header-bg);
+    background: nb-theme(tree-grid-header-background-color);
+    color: nb-theme(tree-grid-header-text-color);
+    font-family: nb-theme(tree-grid-header-text-font-family);
+    font-size: nb-theme(tree-grid-header-text-font-size);
+    font-weight: nb-theme(tree-grid-header-text-font-weight);
+    line-height: nb-theme(tree-grid-header-text-line-height);
   }
 
   .nb-tree-grid-footer-row {
-    background: nb-theme(tree-grid-footer-bg);
+    background: nb-theme(tree-grid-footer-background-color);
+    color: nb-theme(tree-grid-footer-text-color);
+    font-family: nb-theme(tree-grid-footer-text-font-family);
+    font-size: nb-theme(tree-grid-footer-text-font-size);
+    font-weight: nb-theme(tree-grid-footer-text-font-weight);
+    line-height: nb-theme(tree-grid-footer-text-line-height);
   }
 
   .nb-tree-grid-row {
-    background: nb-theme(tree-grid-row-bg);
+    background: nb-theme(tree-grid-row-background-color);
+    color: nb-theme(tree-grid-row-text-color);
+    font-family: nb-theme(tree-grid-row-text-font-family);
+    font-size: nb-theme(tree-grid-row-text-font-size);
+    font-weight: nb-theme(tree-grid-row-text-font-weight);
+    line-height: nb-theme(tree-grid-row-text-line-height);
     &:hover {
-      background: nb-theme(tree-grid-row-hover-bg);
+      background: nb-theme(tree-grid-row-hover-background-color);
     }
     &:nth-child(2n):not(:hover) {
-      background-color: nb-theme(tree-grid-row-bg-even);
+      background-color: nb-theme(tree-grid-row-even-background-color);
     }
   }
 
-  nb-tree-grid-row-toggle .row-toggle-button .icon,
-  nb-sort-icon .icon {
-    color: nb-theme(tree-grid-icon-color);
+  .nb-tree-grid-header-cell {
+    button {
+      vertical-align: middle;
+    }
+  }
+
+  nb-tree-grid-row-toggle, nb-sort-icon {
+    nb-icon {
+      font-size: inherit;
+      vertical-align: middle;
+      color: currentColor;
+    }
   }
 
   @include nb-tree-grid-sort-header-theme();

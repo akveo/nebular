@@ -29,7 +29,8 @@ import { NbAccordionItemComponent } from './accordion-item.component';
     <ng-content select="nb-accordion-item-title"></ng-content>
     <ng-content select="nb-accordion-item-description"></ng-content>
     <ng-content></ng-content>
-    <i [@expansionIndicator]="state" *ngIf="!disabled" class="nb-arrow-down"></i>
+    <nb-icon icon="chevron-down-outline" pack="nebular-essentials" [@expansionIndicator]="state" *ngIf="!disabled" >
+    </nb-icon>
   `,
   animations: [
     trigger('expansionIndicator', [
