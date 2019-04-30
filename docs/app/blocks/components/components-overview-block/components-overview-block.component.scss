@@ -2,6 +2,10 @@
 
 @include nb-install-component() {
 
+  .header-card .page-heading {
+    margin-bottom: 0;
+  }
+
   .components-list {
     display: flex;
     flex-wrap: wrap;

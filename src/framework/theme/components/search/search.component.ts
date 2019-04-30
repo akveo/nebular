@@ -47,7 +47,7 @@ import { NbOverlayService, NbOverlayRef, NbPortalDirective  } from '../cdk';
   ],
   template: `
     <div class="search" (keyup.esc)="emitClose()">
-      <button (click)="emitClose()" nbButton ghost>
+      <button (click)="emitClose()" nbButton ghost class="close-button">
         <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
       </button>
       <div class="form-wrapper">

@@ -83,6 +83,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  *   ],
  * })
  * export class AppModule { }
+ * ```
  *
  * ### Usage
  *

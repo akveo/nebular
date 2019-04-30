@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-calendar-bounding-month',
   template: `
-    <h1>Selected date: {{ date | date }}</h1>
+    <h1 class="h5">Selected date: {{ date | date }}</h1>
     <nb-calendar [(date)]="date" [boundingMonth]="false">
     </nb-calendar>
   `,
