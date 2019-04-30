@@ -16,6 +16,10 @@ import { appRoutingModuleContent } from './app-routing-module-content';
 
 
 export function registerModules(options: Schema): Rule {
+  if (!options.theme) {
+    options.theme = 'default';
+  }
+
   return chain([
     registerAnimationsModule(options),
     registerNebularModules(options),

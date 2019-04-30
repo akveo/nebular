@@ -6,10 +6,13 @@
       "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json"
     },
+    "post-install": {
+      "description": "Adds Nebular Theme to the application.",
+      "factory": "./ng-add/post-install"
+    },
     "setup": {
       "description": "Sets up the specified project after the ng-add dependencies have been installed.",
-      "factory": "./ng-add/setup",
-      "schema": "./ng-add/schema.json"
+      "factory": "./ng-add/setup"
     }
   }
 }
