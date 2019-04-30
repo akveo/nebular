@@ -32,6 +32,6 @@
     "@angular/common": "8.0.0-rc.2",
     "@angular/core": "8.0.0-rc.2",
     "@angular/router": "8.0.0-rc.2",
-    "rxjs": "^6.3.0"
+    "rxjs": "^6.5.1"
   }
 }

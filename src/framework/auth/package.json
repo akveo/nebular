@@ -32,6 +32,6 @@
     "@angular/router": "8.0.0-rc.2",
     "@angular/forms": "8.0.0-rc.2",
     "@nebular/theme": "4.0.0-rc.1",
-    "rxjs": "^6.3.0"
+    "rxjs": "^6.5.1"
   }
 }
