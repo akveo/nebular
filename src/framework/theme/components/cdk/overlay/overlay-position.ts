@@ -9,12 +9,12 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
-  NbOverlayContainer,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPlatform,
   NbPositionStrategy,
 } from './mapping';
+import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
@@ -178,7 +178,7 @@ export class NbPositionBuilderService {
               protected viewportRuler: NbViewportRulerAdapter,
               protected platform: NbPlatform,
               protected positionBuilder: NbOverlayPositionBuilder,
-              protected overlayContainer: NbOverlayContainer) {
+              protected overlayContainer: NbOverlayContainerAdapter) {
   }
 
   global(): NbGlobalPositionStrategy {
