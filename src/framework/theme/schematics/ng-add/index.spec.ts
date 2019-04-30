@@ -54,6 +54,10 @@ describe('ng-add', () => {
     return runner.runSchematic('setup', options, appTree);
   }
 
+  function runPostInstallSchematic(options: Partial<NgAddOptions> = {}) {
+    return runner.runSchematic('post-install', options, appTree);
+  }
+
   beforeEach(() => {
     const collectionPath = require.resolve('../collection.json');
     runner = new SchematicTestRunner('schematics', collectionPath);
@@ -88,13 +92,17 @@ describe('ng-add', () => {
   });
 
   it('should add @nebular/eva-icons in package.json', function () {
-    const tree = runNgAddSchematic();
-    const dependencies = getPackageDependencies(tree);
+    let tree = runNgAddSchematic();
+    let dependencies = getPackageDependencies(tree);
     const nebularEvaIconsVersion = require('../../package.json').version;
-    const evaIconsVersion = require('../../../eva-icons/package.json').peerDependencies['eva-icons'];
 
     expect(dependencies['@nebular/eva-icons']).toBeDefined();
     expect(dependencies['@nebular/eva-icons']).toBe(nebularEvaIconsVersion);
+
+    tree = runPostInstallSchematic();
+    dependencies = getPackageDependencies(tree);
+
+    const evaIconsVersion = require('../../../eva-icons/package.json').peerDependencies['eva-icons'];
     expect(dependencies['eva-icons']).toBeDefined();
     expect(dependencies['eva-icons']).toBe(evaIconsVersion);
   });
@@ -170,7 +178,7 @@ $nb-themes: nb-register-theme((
   });
 
   it('should add the BrowserAnimationsModule to the project module', () => {
-    const tree = runSetupSchematic();
+    const tree = runSetupSchematic({ animations: true });
     const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
 
     expect(fileContent).toContain('BrowserAnimationsModule',
