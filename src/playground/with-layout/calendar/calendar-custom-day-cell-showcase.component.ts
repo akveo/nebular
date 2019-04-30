@@ -10,7 +10,7 @@ import { CalendarCustomDayCellComponent } from './components/calendar-custom-day
 @Component({
   selector: 'nb-calendar-custom-day-cell-showcase',
   template: `
-    <h1>Selected date: {{ date | date }}</h1>
+    <h1 class="h5">Selected date: {{ date | date }}</h1>
     <nb-calendar
       [(date)]="date"
       [dayCellComponent]="dayCellComponent"
