@@ -63,12 +63,11 @@ import { NbComponentStatus } from '../component-status';
     </div>
     <div class="message-row">
       <input nbInput
-             [status]="(inputFocus || inputHover) ? status : ''"
+             [status]="getInputStatus()"
              (focus)="inputFocus = true"
              (blur)="inputFocus = false"
              (mouseenter)="inputHover = true"
              (mouseleave)="inputHover = false"
-             [status]="status"
              [(ngModel)]="message"
              [class.with-button]="showButton"
              type="text"
@@ -198,5 +197,17 @@ export class NbChatFormComponent {
       this.status = status;
       this.cd.detectChanges();
     }
+  }
+
+  getInputStatus(): NbComponentStatus | '' {
+    if (this.fileOver) {
+      return this.status || 'primary';
+    }
+
+    if (this.inputFocus || this.inputHover) {
+      return this.status;
+    }
+
+    return '';
   }
 }
