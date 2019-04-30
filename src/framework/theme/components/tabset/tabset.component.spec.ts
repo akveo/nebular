@@ -28,7 +28,7 @@ export class TabsetTestComponent {
 }
 
 export class ActivatedRouteStub {
-  private subject = new BehaviorSubject<Params>();
+  private subject = new BehaviorSubject<Params>(null);
   readonly params = this.subject.asObservable();
 
   constructor(params: Params = {}) {

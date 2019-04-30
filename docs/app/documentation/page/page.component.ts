@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Inject, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, NgZone, OnDestroy, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, publishReplay, refCount, tap, takeWhile } from 'rxjs/operators';
@@ -17,10 +17,12 @@ import { NgdStructureService } from '../../@theme/services';
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class NgdPageComponent implements OnInit, OnDestroy {
+export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   currentItem;
   private alive = true;
+
+  currentTabName: string = '';
 
   @ViewChild(NgdTabbedBlockComponent) tabbedBlock: NgdTabbedBlockComponent;
 
@@ -40,6 +42,13 @@ export class NgdPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.handlePageNavigation();
     this.window.history.scrollRestoration = 'manual';
+  }
+
+  ngAfterContentChecked() {
+    const currentTabName = this.getCurrentTabName();
+    if (this.currentTabName !== currentTabName) {
+      Promise.resolve().then(() => this.currentTabName = currentTabName);
+    }
   }
 
   ngOnDestroy() {
@@ -65,5 +74,13 @@ export class NgdPageComponent implements OnInit, OnDestroy {
       .subscribe((item) => {
         this.currentItem = item;
       });
+  }
+
+  protected getCurrentTabName(): string {
+    if (this.tabbedBlock && this.tabbedBlock.currentTab) {
+      return this.tabbedBlock.currentTab.tab;
+    }
+
+    return '';
   }
 }
