@@ -74,7 +74,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * Icon can be placed inside of a button as a child element:
  * @stacked-example(Icon Button, button/button-icon.component.html)
  *
- * @additional-example(Interactive example, button/button-interactive.component))
+ * @additional-example(Interactive example, button/button-interactive.component)
  *
  * @styles
  *

@@ -7,6 +7,9 @@
 @mixin nb-search-theme() {
 
   nb-search-field {
+    .close-button {
+      z-index: 1;
+    }
 
     .search {
       background: nb-theme(search-background-color);

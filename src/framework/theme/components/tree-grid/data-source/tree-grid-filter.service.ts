@@ -21,9 +21,12 @@ export class NbTreeGridFilterService<T> {
     }
 
     return data.reduce((filtered: NbTreeGridPresentationNode<T>[], node: NbTreeGridPresentationNode<T>) => {
-      const filteredChildren = this.filter(query, node.children);
+      let filteredChildren: NbTreeGridPresentationNode<T>[];
 
-      node.children = filteredChildren;
+      if (node.children) {
+        filteredChildren = this.filter(query, node.children);
+        node.children = filteredChildren;
+      }
 
       node.expanded = false;
 
