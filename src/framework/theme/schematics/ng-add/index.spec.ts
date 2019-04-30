@@ -11,7 +11,7 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { getFileContent } from '@schematics/angular/utility/test';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { Schema as WorkspaceOptions } from '@schematics/angular/workspace/schema';
-import { Schema as ApplicationOptions } from '@schematics/angular/application/schema';
+import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
 
 import { Schema as NgAddOptions } from './schema';
 
@@ -26,7 +26,7 @@ const defaultAppOptions: ApplicationOptions = {
   inlineStyle: false,
   inlineTemplate: false,
   routing: false,
-  style: 'scss',
+  style: Style.Scss,
   skipTests: false,
   skipPackageJson: false,
 };
@@ -146,7 +146,7 @@ describe('ng-add', () => {
   });
 
   it('should create theme.scss and plug it into the project', () => {
-    appTree = createTestWorkspace(runner, { style: 'scss' });
+    appTree = createTestWorkspace(runner, { style: Style.Scss });
     const tree = runSetupSchematic({ customization: true });
     const styles = tree.readContent('/projects/nebular/src/styles.scss');
     const themes = tree.readContent('/projects/nebular/src/themes.scss');
@@ -172,7 +172,7 @@ $nb-themes: nb-register-theme((
   });
 
   it('should throw error if adding scss themes in css project', () => {
-    appTree = createTestWorkspace(runner, { style: 'css' });
+    appTree = createTestWorkspace(runner, { style: Style.Css });
 
     expect(() => runSetupSchematic({ customization: true })).toThrow();
   });
