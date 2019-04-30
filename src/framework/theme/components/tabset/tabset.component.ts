@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { map, delay } from 'rxjs/operators';
+import { map, delay, filter } from 'rxjs/operators';
 import {
   Component,
   Input,
@@ -276,11 +276,13 @@ export class NbTabsetComponent implements AfterContentInit {
             this.tabs.find((tab) => this.routeParam ? tab.route === params[this.routeParam] : tab.active),
         ),
         delay(0),
+        map((tab: NbTabComponent) => tab || this.tabs.first),
+        filter((tab: NbTabComponent) => !!tab),
       )
-      .subscribe((activeTab) => {
-        this.selectTab(activeTab || this.tabs.first);
+      .subscribe((tabToSelect: NbTabComponent) => {
+        this.selectTab(tabToSelect);
         this.changeDetectorRef.markForCheck();
-    });
+      });
   }
 
   // TODO: navigate to routeParam

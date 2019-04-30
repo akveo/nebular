@@ -29,6 +29,7 @@ export * from './components/route-tabset/route-tabset.module';
 export * from './components/sidebar/sidebar.module';
 export * from './components/sidebar/sidebar.service';
 export * from './components/tabset/tabset.module';
+export * from './components/tabset/tabset.component';
 export * from './components/user/user.module';
 export * from './components/actions/actions.module';
 export * from './components/search/search.module';
