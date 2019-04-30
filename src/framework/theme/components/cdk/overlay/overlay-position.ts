@@ -9,6 +9,7 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
+  NbOverlayContainer,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPlatform,
@@ -176,7 +177,8 @@ export class NbPositionBuilderService {
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected viewportRuler: NbViewportRulerAdapter,
               protected platform: NbPlatform,
-              protected positionBuilder: NbOverlayPositionBuilder) {
+              protected positionBuilder: NbOverlayPositionBuilder,
+              protected overlayContainer: NbOverlayContainer) {
   }
 
   global(): NbGlobalPositionStrategy {
@@ -184,7 +186,13 @@ export class NbPositionBuilderService {
   }
 
   connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {
-    return new NbAdjustableConnectedPositionStrategy(elementRef, this.viewportRuler, this.document, this.platform)
+    return new NbAdjustableConnectedPositionStrategy(
+      elementRef,
+      this.viewportRuler,
+      this.document,
+      this.platform,
+      this.overlayContainer,
+    )
       .withFlexibleDimensions(false)
       .withPush(false);
   }
