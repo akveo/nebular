@@ -13,6 +13,7 @@ import {
   Input,
   OnDestroy,
   ChangeDetectorRef,
+  Type,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -23,7 +24,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Type } from '@angular/core/src/type';
 import { fromEvent, Observable, merge } from 'rxjs';
 import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
 
