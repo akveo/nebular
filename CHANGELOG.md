@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+* **docs:** prefix root css urls with base path ([#1453](https://github.com/akveo/nebular/issues/1453)) ([ae6e221](https://github.com/akveo/nebular/commit/ae6e221))
 * **docs:** trigger change detection if tab updated ([#1445](https://github.com/akveo/nebular/issues/1445)) ([a11c93d](https://github.com/akveo/nebular/commit/a11c93d))
 * **docs:** update examples after Eva migration ([#1448](https://github.com/akveo/nebular/issues/1448)) ([40cd424](https://github.com/akveo/nebular/commit/40cd424))
 * **docs:** use current tab component property ([#1447](https://github.com/akveo/nebular/issues/1447)) ([9e305e9](https://github.com/akveo/nebular/commit/9e305e9))
