@@ -87,7 +87,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbChatFormComponent {
 
-  status: NbComponentStatus;
+  status: NbComponentStatus | '' = '';
   inputFocus: boolean = false;
   inputHover: boolean = false;
 
