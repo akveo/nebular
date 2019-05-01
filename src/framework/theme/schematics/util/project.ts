@@ -5,7 +5,7 @@
  */
 
 import { Tree } from '@angular-devkit/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
+import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { getProjectFromWorkspace } from '@angular/cdk/schematics';
 

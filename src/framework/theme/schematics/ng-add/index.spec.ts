@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectTargetOptions } from '@angular/cdk/schematics';
+import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
+import { getWorkspace } from '@schematics/angular/utility/config';
 
 import { getFileContent } from '@schematics/angular/utility/test';
-import { getWorkspace } from '@schematics/angular/utility/config';
 import { Schema as WorkspaceOptions } from '@schematics/angular/workspace/schema';
-import { Schema as ApplicationOptions } from '@schematics/angular/application/schema';
 
 import { Schema as NgAddOptions } from './schema';
 
@@ -26,14 +26,32 @@ const defaultAppOptions: ApplicationOptions = {
   inlineStyle: false,
   inlineTemplate: false,
   routing: false,
-  style: 'scss',
+  style: Style.Scss,
   skipTests: false,
   skipPackageJson: false,
 };
 
+const EXPECTED_STYLES_SCSS = `@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+`;
+
+const EXPECTED_THEME_SCSS = `@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+$nb-themes: nb-register-theme((
+  // add your variables here like:
+  // color-bg: #4ca6ff,
+), default, default);
+`;
+
 function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
   const workspace = runner.runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions);
-  return runner.runExternalSchematic('@schematics/angular', 'application',
+  return runner.runExternalSchematicAsync('@schematics/angular', 'application',
     { ...defaultAppOptions, ...appOptions }, workspace);
 }
 
@@ -46,54 +64,65 @@ describe('ng-add', () => {
   let runner: SchematicTestRunner;
   let appTree: Tree;
 
-  function runNgAddSchematic(options: Partial<NgAddOptions> = {}): Tree {
-    return runner.runSchematic('ng-add', options, appTree);
+  function runNgAddSchematic(options: Partial<NgAddOptions> = {}) {
+    return runner.runSchematicAsync('ng-add', options, appTree);
   }
 
   function runSetupSchematic(options: Partial<NgAddOptions> = {}) {
     return runner.runSchematic('setup', options, appTree);
   }
 
-  beforeEach(() => {
+  beforeEach((done) => {
     const collectionPath = require.resolve('../collection.json');
     runner = new SchematicTestRunner('schematics', collectionPath);
-    appTree = createTestWorkspace(runner);
+
+    createTestWorkspace(runner).subscribe(tree => {
+      appTree = tree;
+      done();
+    });
   });
 
-  it('should add @angular/cdk in package.json', () => {
-    const tree = runNgAddSchematic();
-    const dependencies = getPackageDependencies(tree);
-    const angularCoreVersion = dependencies['@angular/core'];
+  describe('ng-add', () => {
+    let tree: UnitTestTree;
 
-    expect(dependencies['@angular/cdk']).toBeDefined();
-    expect(dependencies['@angular/cdk']).toBe(angularCoreVersion);
-  });
+    beforeEach((done) => {
+      runNgAddSchematic().subscribe((applicationTree: UnitTestTree) => {
+        tree = applicationTree;
+        done();
+      });
+    });
 
-  it('should add @angular/animations in package.json', function () {
-    const tree = runNgAddSchematic();
-    const dependencies = getPackageDependencies(tree);
-    const angularCoreVersion = dependencies['@angular/core'];
+    it('should add @angular/cdk in package.json', () => {
+      const dependencies = getPackageDependencies(tree);
+      const angularCoreVersion = dependencies['@angular/core'];
 
-    expect(dependencies['@angular/animations']).toBeDefined();
-    expect(dependencies['@angular/animations']).toBe(angularCoreVersion);
-  });
+      expect(dependencies['@angular/cdk']).toBeDefined();
+      expect(dependencies['@angular/cdk']).toBe(angularCoreVersion);
+    });
 
-  it('should add @nebular/theme in package.json', function () {
-    const tree = runNgAddSchematic();
-    const dependencies = getPackageDependencies(tree);
-    const nebularThemeVersion = require('../../package.json').version;
+    it('should add @angular/animations in package.json', function () {
+      const dependencies = getPackageDependencies(tree);
+      const angularCoreVersion = dependencies['@angular/core'];
 
-    expect(dependencies['@nebular/theme']).toBeDefined();
-    expect(dependencies['@nebular/theme']).toBe(nebularThemeVersion);
-  });
+      expect(dependencies['@angular/animations']).toBeDefined();
+      expect(dependencies['@angular/animations']).toBe(angularCoreVersion);
+    });
 
-  it('should add nebular-icons in package.json', function () {
-    const tree = runNgAddSchematic();
-    const dependencies = getPackageDependencies(tree);
-    const nebularIconsVersion = require('../../package.json').peerDependencies['nebular-icons'];
+    it('should add @nebular/theme in package.json', function () {
+      const dependencies = getPackageDependencies(tree);
+      const nebularThemeVersion = require('../../package.json').version;
 
-    expect(dependencies['nebular-icons']).toBeDefined();
-    expect(dependencies['nebular-icons']).toBe(nebularIconsVersion);
+      expect(dependencies['@nebular/theme']).toBeDefined();
+      expect(dependencies['@nebular/theme']).toBe(nebularThemeVersion);
+    });
+
+    it('should add nebular-icons in package.json', function () {
+      const dependencies = getPackageDependencies(tree);
+      const nebularIconsVersion = require('../../package.json').peerDependencies['nebular-icons'];
+
+      expect(dependencies['nebular-icons']).toBeDefined();
+      expect(dependencies['nebular-icons']).toBe(nebularIconsVersion);
+    });
   });
 
   it('should register NbThemeModule.forRoot()', () => {
@@ -134,36 +163,27 @@ describe('ng-add', () => {
     expect(styles).toContain('./node_modules/@nebular/theme/styles/prebuilt/default.css')
   });
 
-  it('should create theme.scss and plug it into the project', () => {
-    appTree = createTestWorkspace(runner, { style: 'scss' });
-    const tree = runSetupSchematic({ customization: true });
-    const styles = tree.readContent('/projects/nebular/src/styles.scss');
-    const themes = tree.readContent('/projects/nebular/src/themes.scss');
+  it('should create theme.scss and plug it into the project', (done) => {
+    createTestWorkspace(runner, { style: Style.Scss }).subscribe(applicationTree => {
+      appTree = applicationTree;
+      const tree = runSetupSchematic({ customization: true });
+      const styles = tree.readContent('/projects/nebular/src/styles.scss');
+      const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
-    expect(styles).toContain(`@import 'themes';
+      expect(styles).toContain(EXPECTED_STYLES_SCSS);
+      expect(themes).toContain(EXPECTED_THEME_SCSS);
 
-@import '~@nebular/theme/styles/globals';
-
-@include nb-install() {
-  @include nb-theme-global();
-};
-`);
-
-    expect(themes).toContain(`@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
-
-$nb-themes: nb-register-theme((
-  // add your variables here like:
-  // color-bg: #4ca6ff,
-), default, default);
-`);
-
+      done();
+    });
   });
 
-  it('should throw error if adding scss themes in css project', () => {
-    appTree = createTestWorkspace(runner, { style: 'css' });
+  it('should throw error if adding scss themes in css project', (done) => {
+    createTestWorkspace(runner, { style: Style.Css }).subscribe(tree => {
+      appTree = tree;
 
-    expect(() => runSetupSchematic({ customization: true })).toThrow();
+      expect(() => runSetupSchematic({ customization: true })).toThrow();
+      done();
+    });
   });
 
   it('should add the BrowserAnimationsModule to the project module', () => {

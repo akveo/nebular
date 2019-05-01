@@ -290,6 +290,7 @@ describe('Component: NbSelectComponent', () => {
   });
 
   afterEach(() => {
+    select.hide();
     overlayContainerService.clearContainer();
   });
 

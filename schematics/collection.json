@@ -8,15 +8,18 @@
     },
     "playground": {
       "description": "A schematic to call other playground schematics in order.",
-      "factory": "./playground/index#generatePlayground"
+      "factory": "./playground/index#generatePlayground",
+      "schema": "./playground/schema.json"
     },
     "playground-module": {
       "description": "A schematic to add all playground components to a given module.",
-      "factory": "./playground-module/index#playgroundModule"
+      "factory": "./playground-module/index#playgroundModule",
+      "schema": "./playground-module/schema.json"
     },
     "playground-components": {
       "description": "A schematic to generate routes array for the app.",
-      "factory": "./playground-components/index#playgroundComponents"
+      "factory": "./playground-components/index#playgroundComponents",
+      "schema": "./playground-components/schema.json"
     }
   }
 }
