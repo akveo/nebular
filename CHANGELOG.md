@@ -1,3 +1,36 @@
+<a name="4.0.0-rc.2"></a>
+# [4.0.0-rc.2](https://github.com/akveo/nebular/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2019-05-01)
+
+
+### Bug Fixes
+
+* **docs:** prefix root css urls with base path ([#1453](https://github.com/akveo/nebular/issues/1453)) ([d42c896](https://github.com/akveo/nebular/commit/d42c896))
+* **docs:** trigger change detection if tab updated ([#1445](https://github.com/akveo/nebular/issues/1445)) ([9679e3a](https://github.com/akveo/nebular/commit/9679e3a))
+* **docs:** update examples after Eva migration ([#1448](https://github.com/akveo/nebular/issues/1448)) ([bc2ee49](https://github.com/akveo/nebular/commit/bc2ee49))
+* **docs:** use current tab component property ([#1447](https://github.com/akveo/nebular/issues/1447)) ([122585a](https://github.com/akveo/nebular/commit/122585a))
+* **schematics:** fix eva-icons schematic ([#1380](https://github.com/akveo/nebular/issues/1380)) ([0c809da](https://github.com/akveo/nebular/commit/0c809da))
+* **tabset:** prevent select call if no active tab found ([#1444](https://github.com/akveo/nebular/issues/1444)) ([f738f9d](https://github.com/akveo/nebular/commit/f738f9d))
+
+
+### Chores
+
+* update angular to 8.0.0-rc.2 ([#1449](https://github.com/akveo/nebular/issues/1449)) ([3000e3b](https://github.com/akveo/nebular/commit/3000e3b))
+
+
+### Features
+
+* **docs:** add redirect to 'next' subdirectory ([#1446](https://github.com/akveo/nebular/issues/1446)) ([a3c838f](https://github.com/akveo/nebular/commit/a3c838f))
+
+
+### BREAKING CHANGES
+
+* Angular 8+ now required
+
+**Limitation:**
+For the time being Nebular doesn't have `ES2015` bundle and therefore can't be used in applications with target `ES2015`. You have to manually change target `ES5`.
+
+
+
 <a name="4.0.0-rc.1"></a>
 # [4.0.0-rc.1](https://github.com/akveo/nebular/compare/v3.5.0...v4.0.0-rc.1) (2019-05-27)
 
