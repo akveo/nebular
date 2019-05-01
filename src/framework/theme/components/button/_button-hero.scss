@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 @mixin button-hero() {
   [nbButton].appearance-hero {
     text-shadow: nb-theme(button-hero-text-shadow);
@@ -59,14 +61,14 @@
           animation: button-hero-#{$status}-pulse 0.75s infinite alternate;
         }
 
-        keyframes button-#{$status}-pulse {
+        @include keyframes(button-hero-#{$status}-pulse) {
           0% {
             box-shadow: none;
-            opacity: nb-theme(button-disabled-opacity);
+            opacity: nb-theme(0.3);
           }
 
           100% {
-            box-shadow: 0 0 1rem 0 nb-theme(color-#{$status});
+            box-shadow: 0 0 1rem 0 nb-theme($left-color);
             opacity: 0.8;
           }
         }
