@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     <nb-checkbox indeterminate #checkbox>Indeterminate</nb-checkbox>
 
     <div *ngIf="!checkbox.indeterminate">
-      <button nbButton (click)="checkbox.indeterminate = true">Set indetermiate</button>
+      <button nbButton size="small" (click)="checkbox.indeterminate = true">Set indetermiate</button>
     </div>
   `,
   styleUrls: ['./checkbox-indeterminate.component.scss'],

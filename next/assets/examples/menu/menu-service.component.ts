@@ -10,7 +10,7 @@ import { MENU_ITEMS } from './menu-service-items';
       <nb-card-body>
         <nb-menu tag="menu" [items]="menuItems"></nb-menu>
         <router-outlet></router-outlet>
-        <h3>Selected item: {{ selectedItem }}</h3>
+        <h3 class="h4">Selected item: {{ selectedItem }}</h3>
         <button nbButton (click)="addMenuItem()">Add Menu Item</button>
         <button nbButton (click)="collapseAll()">Collapse all menu items</button>
         <button nbButton (click)="navigateHome()">Home</button>
