@@ -7,7 +7,7 @@ import { DialogNamePromptComponent } from './components/name-prompt-dialog.compo
   template: `
     <button nbButton hero status="primary" (click)="open()">Enter Name</button>
     <br>
-    <h3 class="h5">Names:</h3>
+    <h3>Names:</h3>
     <ul>
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
