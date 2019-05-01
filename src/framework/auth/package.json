@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "@nebular/auth",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
@@ -31,7 +31,7 @@
     "@angular/core": "^8.0.0-rc.2",
     "@angular/router": "^8.0.0-rc.2",
     "@angular/forms": "^8.0.0-rc.2",
-    "@nebular/theme": "4.0.0-rc.1",
+    "@nebular/theme": "4.0.0-rc.2",
     "rxjs": "^6.5.1"
   }
 }
