@@ -6,7 +6,7 @@ import { NbCalendarRange, NbDateService } from '@nebular/theme';
 @Component({
   selector: 'nb-calendar-range-showcase',
   template: `
-    <h1 class="h5">Selected range: {{ range.start | date }} - {{ range.end | date }}</h1>
+    <h1>Selected range: {{ range.start | date }} - {{ range.end | date }}</h1>
     <nb-calendar-range [(range)]="range">
     </nb-calendar-range>
   `,

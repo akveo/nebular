@@ -20,11 +20,7 @@
 
 ;(function(l, projectPages) {
 
-  var paths = l.pathname.split('/');
-  var repo = projectPages ? '/' + paths[1] : '';
-  if (paths[2] === 'next') {
-    repo += '/next';
-  }
+  var repo = projectPages ? '/' + l.pathname.split('/')[1] : '';
 
   /* redirect all 404 trafic to index.html */
   function redirect() {
