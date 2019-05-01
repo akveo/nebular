@@ -12,6 +12,7 @@ task('bundle', [
   'bundle:umd:security',
   'bundle:umd:moment',
   'bundle:umd:date-fns',
+  'bundle:umd:eva-icons',
 ]);
 
 task('bundle:umd:theme', () => bundleUmdModule('theme'));
@@ -19,6 +20,7 @@ task('bundle:umd:auth', () => bundleUmdModule('auth'));
 task('bundle:umd:security', () => bundleUmdModule('security'));
 task('bundle:umd:moment', () => bundleUmdModule('moment'));
 task('bundle:umd:date-fns', () => bundleUmdModule('date-fns'));
+task('bundle:umd:eva-icons', () => bundleUmdModule('eva-icons'));
 task('bundle:rename-dev', bundleRenameDev);
 
 function bundleUmdModule(name: string) {
