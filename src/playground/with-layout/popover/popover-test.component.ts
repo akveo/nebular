@@ -70,52 +70,52 @@ import { DynamicToAddComponent } from './components/dynamic.components';
     <nb-card>
       <nb-card-header>Multiple Hints</nb-card-header>
       <nb-card-body>
-        <button nbPopover="Right Popover!" nbPopoverMode="hint">
+        <button nbPopover="Right Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Bottom Popover!" nbPopoverMode="hint">
+        <button nbPopover="Bottom Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Top Popover!" nbPopoverMode="hint">
+        <button nbPopover="Top Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Left Popover!" nbPopoverMode="hint">
+        <button nbPopover="Left Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Right Popover!" nbPopoverMode="hint">
+        <button nbPopover="Right Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Bottom Popover!" nbPopoverMode="hint">
+        <button nbPopover="Bottom Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Top Popover!" nbPopoverMode="hint">
+        <button nbPopover="Top Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Left Popover!" nbPopoverMode="hint">
+        <button nbPopover="Left Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Right Popover!" nbPopoverMode="hint">
+        <button nbPopover="Right Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Bottom Popover!" nbPopoverMode="hint">
+        <button nbPopover="Bottom Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Top Popover!" nbPopoverMode="hint">
+        <button nbPopover="Top Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Left Popover!" nbPopoverMode="hint">
+        <button nbPopover="Left Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Right Popover!" nbPopoverMode="hint">
+        <button nbPopover="Right Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Bottom Popover!" nbPopoverMode="hint">
+        <button nbPopover="Bottom Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Top Popover!" nbPopoverMode="hint">
+        <button nbPopover="Top Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
-        <button nbPopover="Left Popover!" nbPopoverMode="hint">
+        <button nbPopover="Left Popover!" nbPopoverTrigger="hint">
           show hint
         </button>
       </nb-card-body>
@@ -126,10 +126,10 @@ import { DynamicToAddComponent } from './components/dynamic.components';
         <button nbPopover="Click Popover!">
           Click
         </button>
-        <button nbPopover="Hover Popover!" nbPopoverMode="hover">
+        <button nbPopover="Hover Popover!" nbPopoverTrigger="hover">
           Hover
         </button>
-        <button nbPopover="Hint Popover!" nbPopoverMode="hint">
+        <button nbPopover="Hint Popover!" nbPopoverTrigger="hint">
           HInt
         </button>
       </nb-card-body>
