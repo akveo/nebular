@@ -12,12 +12,8 @@ import { Component } from '@angular/core';
   templateUrl: './popover-placements.component.html',
   styles: [`
     :host {
-      margin: 4rem 0;
       display: block;
-    }
-
-    nb-layout-column {
-      height: 50vw;
+      margin: 4rem 0;
     }
 
     button {

@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-dialog',
   template: `
-    <nb-card [style.width.px]="600" [style.height.px]="500">
+    <nb-card class="dialog-card">
       <nb-card-header>{{ title }}</nb-card-header>
       <nb-card-body>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis tincidunt tincidunt.

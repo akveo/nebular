@@ -33,6 +33,7 @@
     margin-top: -5rem;
     margin-left: -20%;
     margin-right: -20%;
+    fill: nb-theme(layout-background-color);
 
     @include media-breakpoint-up(md) {
       margin-top: -7rem;

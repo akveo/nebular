@@ -5,9 +5,7 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
 @Component({
   selector: 'nb-dialog-showcase',
   template: '<button nbButton (click)="open()">Open Dialog</button>',
-  styles: [` /deep/ nb-layout-column {
-    height: 80vw;
-  } `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogShowcaseComponent {
   constructor(private dialogService: NbDialogService) {
