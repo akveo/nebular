@@ -1850,7 +1850,9 @@ $theme: (
 
   datepicker-text-color: text-color,
   datepicker-background-color: background-primary-color-1,
-  datepicker-border-color: color-primary-500,
+  datepicker-border-color: background-primary-color-1,
+  datepicker-border-style: solid,
+  datepicker-border-width: 0,
   datepicker-border-radius: 0.75rem,
   datepicker-shadow: shadow,
   datepicker-arrow-size: 0.6875rem,
