@@ -6,7 +6,7 @@
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/workspace';
+import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 import { normalize } from '@angular-devkit/core';
 import { bold, red } from '@angular-devkit/core/src/terminal';
 
@@ -16,6 +16,10 @@ import { appRoutingModuleContent } from './app-routing-module-content';
 
 
 export function registerModules(options: Schema): Rule {
+  if (!options.theme) {
+    options.theme = 'default';
+  }
+
   return chain([
     registerAnimationsModule(options),
     registerNebularModules(options),

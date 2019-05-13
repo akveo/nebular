@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-rc.2",
   "description": "@nebular/auth",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
@@ -27,12 +27,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/router": "^7.0.0",
-    "@angular/forms": "^7.0.0",
-    "@angular/http": "^7.0.0",
-    "@nebular/theme": "4.0.0-beta.0",
-    "rxjs": "^6.3.0"
+    "@angular/common": "^8.0.0-rc.2",
+    "@angular/core": "^8.0.0-rc.2",
+    "@angular/router": "^8.0.0-rc.2",
+    "@angular/forms": "^8.0.0-rc.2",
+    "@nebular/theme": "4.0.0-rc.2",
+    "rxjs": "^6.5.1"
   }
 }

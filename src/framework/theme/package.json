@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-rc.2",
   "description": "@nebular/theme",
   "main": "./bundles/theme.umd.js",
   "module": "./index.js",
@@ -24,12 +24,12 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^7.0.0",
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/router": "^7.0.0",
-    "@angular/cdk": "^7.2.1",
-    "rxjs": "^6.3.0"
+    "@angular/animations": "^8.0.0-rc.2",
+    "@angular/common": "^8.0.0-rc.2",
+    "@angular/core": "^8.0.0-rc.2",
+    "@angular/router": "^8.0.0-rc.2",
+    "@angular/cdk": "^8.0.0-rc.0",
+    "rxjs": "6.5.1"
   },
   "dependencies": {
     "intersection-observer": "0.5.0"

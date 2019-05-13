@@ -451,7 +451,7 @@ $theme: (
 
   tabset-background-color: transparent,
   tabset-border-radius: 0,
-  tabset-shadow: shadow,
+  tabset-shadow: none,
 
   tabset-tab-background-color: transparent,
   tabset-tab-padding: 1rem 2rem,
@@ -494,7 +494,7 @@ $theme: (
 
   route-tabset-background-color: transparent,
   route-tabset-border-radius: 0,
-  route-tabset-shadow: shadow,
+  route-tabset-shadow: none,
 
   route-tabset-tab-background-color: transparent,
   route-tabset-tab-padding: 1rem 2rem,
@@ -650,7 +650,7 @@ $theme: (
   actions-giant-text-font-size: text-button-giant-font-size,
 
   search-background-color: background-primary-color-1,
-  search-divider-color: divider-color,
+  search-divider-color: border-primary-color-3,
   search-divider-style: solid,
   search-divider-width: 0.25rem,
   search-extra-background-color: color-primary-500,

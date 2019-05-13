@@ -7,7 +7,7 @@
 import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
-import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
+import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';
 
 import { createThemeContent, stylesContent } from './theme-content';

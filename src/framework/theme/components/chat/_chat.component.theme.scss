@@ -56,10 +56,6 @@
     .no-messages {
       text-align: center;
     }
-
-    &.file-over nb-chat-form input {
-      @extend [nbInput]:focus;
-    }
   }
 
   @each $size in nb-get-sizes() {
@@ -73,10 +69,6 @@
       .header {
         background-color: nb-theme(chat-#{$status}-background-color);
         color: nb-theme(chat-#{$status}-text-color);
-      }
-
-      &.file-over nb-chat-form input {
-        @extend [nbInput]:enabled.status-#{$status};
       }
     }
   }
