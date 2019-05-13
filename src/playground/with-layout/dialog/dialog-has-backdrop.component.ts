@@ -10,15 +10,7 @@ import { HasBackdropDialogComponent } from './components/has-backdrop-dialog.com
       <button nbButton hero (click)="openWithoutBackdrop()">Open without backdrop</button>
     </div>
   `,
-  styles: [`
-    /deep/ nb-layout-column {
-      height: 80vw;
-    }
-
-    button {
-      margin: 1rem;
-    }
-  `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogHasBackdropComponent {
   constructor(private dialogService: NbDialogService) {
