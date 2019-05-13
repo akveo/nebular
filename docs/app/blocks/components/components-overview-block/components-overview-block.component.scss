@@ -74,6 +74,7 @@
 
   @include media-breakpoint-up(md) {
     .components-list {
+      margin: 0 -1.5rem;
 
       .component-card-wrapper {
         flex: 1 0 auto;
