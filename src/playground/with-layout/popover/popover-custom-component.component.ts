@@ -13,7 +13,11 @@ import { DynamicToAddComponent } from './components/dynamic.components';
   styles: [`
     :host {
       display: block;
-      margin: 5rem;
+      padding-bottom: 3rem;
+    }
+
+    ::ng-deep nb-popover {
+      padding: 1rem;
     }
   `],
 })

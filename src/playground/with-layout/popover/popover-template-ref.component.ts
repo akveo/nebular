@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
   styles: [`
     :host {
       display: block;
-      margin: 5rem;
+      margin-bottom: 5rem;
     }
   `],
 })

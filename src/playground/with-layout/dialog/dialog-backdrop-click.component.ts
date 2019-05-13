@@ -10,15 +10,7 @@ import { BackdropClickDialogComponent } from './components/backdrop-click-dialog
       <button nbButton hero (click)="openWithoutBackdropClick()">Open without backdrop click close</button>
     </div>
   `,
-  styles: [`
-    /deep/ nb-layout-column {
-      height: 80vw;
-    }
-
-    button {
-      margin: 1rem;
-    }
-  `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogBackdropClickComponent {
   constructor(private dialogService: NbDialogService) {
