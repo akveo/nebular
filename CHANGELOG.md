@@ -1,6 +1,5 @@
-<a name="4.0.0-rc.3"></a>
-# [4.0.0-rc.3](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.3) (2019-05-14)
-
+<a name="4.0.0-rc.4"></a>
+# [4.0.0-rc.4](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.4) (2019-05-14)
 
 ### Bug Fixes
 
