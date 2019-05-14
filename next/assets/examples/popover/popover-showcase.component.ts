@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styles: [`
     :host {
       display: block;
-      margin: 5rem;
+      padding-bottom: 5rem;
     }
   `],
 })

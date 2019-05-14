@@ -12,11 +12,7 @@ import { DialogNamePromptComponent } from './components/name-prompt-dialog.compo
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   `,
-  styles: [`
-    /deep/ nb-layout-column {
-      height: 80vw;
-    }
-  `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogResultComponent {
   names: string[] = [];
