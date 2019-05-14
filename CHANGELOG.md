@@ -1,22 +1,21 @@
-<a name="4.0.0-rc.3"></a>
-# [4.0.0-rc.3](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.3) (2019-05-14)
-
+<a name="4.0.0-rc.4"></a>
+# [4.0.0-rc.4](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.4) (2019-05-14)
 
 ### Bug Fixes
 
-* **docs:** 4.0 fixes ([#1465](https://github.com/akveo/nebular/issues/1465)) ([b80bb91](https://github.com/akveo/nebular/commit/b80bb91))
-* **docs:** use new popover trigger input name ([#1462](https://github.com/akveo/nebular/issues/1462)) ([b807e85](https://github.com/akveo/nebular/commit/b807e85))
+* **docs:** 4.0 fixes ([#1465](https://github.com/akveo/nebular/issues/1465)) ([46a022c](https://github.com/akveo/nebular/commit/46a022c))
+* **docs:** use new popover trigger input name ([#1462](https://github.com/akveo/nebular/issues/1462)) ([8cf7edb](https://github.com/akveo/nebular/commit/8cf7edb))
 
 
 ### Code Refactoring
 
-* **tabset:** remove shadow ([#1461](https://github.com/akveo/nebular/issues/1461)) ([66b520a](https://github.com/akveo/nebular/commit/66b520a))
-* **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([4f20457](https://github.com/akveo/nebular/commit/4f20457))
+* **tabset:** remove shadow ([#1461](https://github.com/akveo/nebular/issues/1461)) ([2c11768](https://github.com/akveo/nebular/commit/2c11768))
+* **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([f722a48](https://github.com/akveo/nebular/commit/f722a48))
 
 
 ### Chores
 
-* **release:** add step to update releases issue ([#1442](https://github.com/akveo/nebular/issues/1442)) ([5159823](https://github.com/akveo/nebular/commit/5159823))
+* **release:** add step to update releases issue ([#1442](https://github.com/akveo/nebular/issues/1442)) ([284c031](https://github.com/akveo/nebular/commit/284c031))
 
 
 <a name="4.0.0-rc.2"></a>
