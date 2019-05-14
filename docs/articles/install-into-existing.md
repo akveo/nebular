@@ -22,7 +22,7 @@ In case you want to start based on our ngx-admin starter kit, please check out [
 We strongly recommend to develop Angular with @angular/cli, you can install it with the following command.
 
 ```bash
-npm install -g @angular/cli
+npm install -g @angular/cli@next
 ```
 <hr>
 
@@ -57,7 +57,7 @@ At this step, we assume you already have Angular modules installed.
 ### Install Nebular modules
 
 ```bash
-npm install --save @nebular/theme@next @angular/cdk @angular/animations
+npm install --save @nebular/theme@next @angular/cdk@next @angular/animations@next
 ```
 Also, you may want to install Eva Icons pack, which is a recommended SVG icons library starting from Nebular 4.0.
 ```bash

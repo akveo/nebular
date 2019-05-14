@@ -1,6 +1,6 @@
 {
   "name": "@nebular/eva-icons",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.4",
   "description": "@nebular/eva-icons",
   "main": "./bundles/eva-icons.umd.js",
   "module": "./index.js",
@@ -26,7 +26,7 @@
     "eva-icons"
   ],
   "peerDependencies": {
-    "@nebular/theme": "4.0.0-rc.1",
+    "@nebular/theme": "4.0.0-rc.4",
     "eva-icons": "^1.1.1"
   }
 }

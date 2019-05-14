@@ -1,3 +1,55 @@
+<a name="4.0.0-rc.4"></a>
+# [4.0.0-rc.4](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.4) (2019-05-14)
+
+### Bug Fixes
+
+* **docs:** 4.0 fixes ([#1465](https://github.com/akveo/nebular/issues/1465)) ([b80bb91](https://github.com/akveo/nebular/commit/b80bb91))
+* **docs:** use new popover trigger input name ([#1462](https://github.com/akveo/nebular/issues/1462)) ([b807e85](https://github.com/akveo/nebular/commit/b807e85))
+
+
+### Code Refactoring
+
+* **tabset:** remove shadow ([#1461](https://github.com/akveo/nebular/issues/1461)) ([66b520a](https://github.com/akveo/nebular/commit/66b520a))
+* **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([4f20457](https://github.com/akveo/nebular/commit/4f20457))
+
+
+### Chores
+
+* **release:** add step to update releases issue ([#1442](https://github.com/akveo/nebular/issues/1442)) ([5159823](https://github.com/akveo/nebular/commit/5159823))
+
+
+<a name="4.0.0-rc.2"></a>
+# [4.0.0-rc.2](https://github.com/akveo/nebular/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2019-05-01)
+
+
+### Bug Fixes
+
+* **docs:** prefix root css urls with base path ([#1453](https://github.com/akveo/nebular/issues/1453)) ([ae6e221](https://github.com/akveo/nebular/commit/ae6e221))
+* **docs:** trigger change detection if tab updated ([#1445](https://github.com/akveo/nebular/issues/1445)) ([a11c93d](https://github.com/akveo/nebular/commit/a11c93d))
+* **docs:** update examples after Eva migration ([#1448](https://github.com/akveo/nebular/issues/1448)) ([40cd424](https://github.com/akveo/nebular/commit/40cd424))
+* **docs:** use current tab component property ([#1447](https://github.com/akveo/nebular/issues/1447)) ([9e305e9](https://github.com/akveo/nebular/commit/9e305e9))
+* **schematics:** fix eva-icons schematic ([#1380](https://github.com/akveo/nebular/issues/1380)) ([0e66c56](https://github.com/akveo/nebular/commit/0e66c56))
+* **tabset:** prevent select call if no active tab found ([#1444](https://github.com/akveo/nebular/issues/1444)) ([3ca5b06](https://github.com/akveo/nebular/commit/3ca5b06))
+
+
+### Chores
+
+* update angular to 8.0.0-rc.2 ([#1449](https://github.com/akveo/nebular/issues/1449)) ([17bdb28](https://github.com/akveo/nebular/commit/17bdb28))
+
+
+### Features
+
+* **docs:** add redirect to 'next' subdirectory ([#1446](https://github.com/akveo/nebular/issues/1446)) ([b245105](https://github.com/akveo/nebular/commit/b245105))
+
+
+### BREAKING CHANGES
+
+* Angular 8+ now required
+
+**Limitation:**
+For the time being Nebular doesn't have `ES2015` bundle and therefore can't be used in applications with target `ES2015`. You have to manually change target `ES5`.
+
+
 <a name="4.0.0-rc.1"></a>
 # [4.0.0-rc.1](https://github.com/akveo/nebular/compare/v3.5.0...v4.0.0-rc.1) (2019-04-29)
 

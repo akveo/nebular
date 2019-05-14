@@ -13,6 +13,7 @@ import {
   Input,
   OnDestroy,
   ChangeDetectorRef,
+  Type,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -23,7 +24,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Type } from '@angular/core/src/type';
 import { fromEvent, Observable, merge } from 'rxjs';
 import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
 
@@ -234,12 +234,14 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @styles
  *
- * datepicker-fg
- * datepicker-bg
- * datepicker-border
- * datepicker-border-radius
- * datepicker-shadow
- * datepicker-arrow-size
+ * datepicker-text-color:
+ * datepicker-background-color:
+ * datepicker-border-color:
+ * datepicker-border-style:
+ * datepicker-border-width:
+ * datepicker-border-radius:
+ * datepicker-shadow:
+ * datepicker-arrow-size:
  * */
 @Directive({
   selector: 'input[nbDatepicker]',

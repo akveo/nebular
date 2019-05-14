@@ -38,7 +38,7 @@ import { NbIconLibraries } from './icon-libraries';
  * which integrates SVG [Eva Icons](https://akveo.github.io/eva-icons/) pack to Nebular. To add it to your
  * project run:
  * ```sh
- * npm i @nebular/eva-icons
+ * npm i @nebular/eva-icons@next
  * ```
  * This command will install Nebular Eva Icons pack. Then register `NbEvaIconsModule` into your app module or any child
  * module you need to have the icons in:

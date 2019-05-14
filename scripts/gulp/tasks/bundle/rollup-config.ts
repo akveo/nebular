@@ -45,6 +45,9 @@ const ROLLUP_GLOBALS = {
   '@nebular/security': 'nb.security',
   '@nebular/moment': 'nb.moment',
   '@nebular/date-fns': 'nb.date-fns',
+  '@nebular/eva-icons': 'nb.eva-icons',
+
+  'eva-icons': 'eva-icons',
 };
 
 export const ROLLUP_COMMON_CONFIG = {

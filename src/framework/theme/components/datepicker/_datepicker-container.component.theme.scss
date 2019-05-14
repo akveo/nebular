@@ -9,13 +9,19 @@
     $arrow-size: nb-theme(datepicker-arrow-size);
     $arrow-content-size: calc(#{$arrow-size} - 2px);
 
-    border: 2px solid nb-theme(datepicker-border-color);
+    border-color: nb-theme(datepicker-border-color);
+    border-style: nb-theme(datepicker-border-style);
+    border-width: nb-theme(datepicker-border-width);
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
     box-shadow: nb-theme(datepicker-shadow);
 
     .primitive-overlay {
       color: nb-theme(datepicker-text-color);
+    }
+
+    nb-card {
+      box-shadow: none;
     }
 
     .arrow {
