@@ -10,7 +10,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostBinding,
   HostListener,
   Inject,
@@ -23,7 +22,7 @@ import { Observable, Subject } from 'rxjs';
 import { convertToBoolProperty } from '../helpers';
 import { NbFocusableOption } from '../cdk';
 import { NbSelectComponent } from './select.component';
-
+import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 
 @Component({
   selector: 'nb-option',
@@ -70,11 +69,13 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   }
 
   selected: boolean = false;
+  protected parent: NbSelectComponent<T>;
   protected alive: boolean = true;
 
-  constructor(@Inject(forwardRef(() => NbSelectComponent)) protected parent,
+  constructor(@Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
               protected cd: ChangeDetectorRef) {
+    this.parent = parent;
   }
 
   ngOnDestroy() {

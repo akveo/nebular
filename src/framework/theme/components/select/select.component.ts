@@ -48,6 +48,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbFocusKeyManager, ESCAPE } from '../cdk';
 import { NbOptionComponent } from './option.component';
 import { convertToBoolProperty } from '../helpers';
+import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
@@ -384,6 +385,7 @@ export class NbSelectLabelComponent {
       useExisting: forwardRef(() => NbSelectComponent),
       multi: true,
     },
+    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
   ],
 })
 export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
