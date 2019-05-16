@@ -8,7 +8,7 @@ import {
   NbPositionBuilderService,
 } from '../overlay-position';
 import { NbRenderableContainer } from '../overlay-container';
-import { NbOverlayContent } from '../overlay';
+import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlay } from './dynamic-overlay';
 
 export class NbDynamicOverlayChange extends SimpleChange {

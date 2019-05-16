@@ -1,2 +1,2 @@
 export * from './platform.module';
-export * from './platform';
+export * from './platform-service';

@@ -1,2 +1,2 @@
-export * from './bidi';
+export * from './bidi-service';
 export * from './bidi.module';
