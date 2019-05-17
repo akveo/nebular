@@ -17,7 +17,7 @@ import {
 import { batch } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 
 export const MONTHS_IN_VIEW = 12;
 export const MONTHS_IN_COLUMN = 4;

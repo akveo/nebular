@@ -7,7 +7,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../../services/direction.service';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 
 
 @Component({

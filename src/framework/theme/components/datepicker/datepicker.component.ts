@@ -41,8 +41,8 @@ import {
   NbCalendarCell,
   NbCalendarSize,
   NbCalendarViewMode,
-  NbDateService,
-} from '../calendar-kit';
+} from '../calendar-kit/model';
+import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 
 

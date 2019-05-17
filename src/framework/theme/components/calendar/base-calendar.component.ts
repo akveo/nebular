@@ -6,7 +6,9 @@
 
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
-import { NbDateService, NbCalendarCell, NbCalendarSize, NbCalendarViewMode, YEARS_IN_VIEW } from '../calendar-kit';
+import { YEARS_IN_VIEW } from '../calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { NbDateService } from '../calendar-kit/services/date.service';
 
 /**
  * The basis for calendar and range calendar components.

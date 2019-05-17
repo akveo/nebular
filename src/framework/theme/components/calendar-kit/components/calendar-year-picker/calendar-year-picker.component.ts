@@ -17,7 +17,7 @@ import {
 import { batch, range } from '../../helpers';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 
 export const YEARS_IN_VIEW = 20;
 export const YEARS_IN_COLUMN = 4;
