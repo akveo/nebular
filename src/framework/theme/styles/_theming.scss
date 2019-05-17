@@ -10,13 +10,46 @@
  */
 
 $nb-enable-css-custom-properties: false !global !default;
-$nb-enable-preprocess-mode: false !global !default;
 $nb-current-theme-name: 'default' !global;
+$nb-theme-process-mode: null !global;
+
+$nb-theme: () !global;
+$nb-processed-theme: () !global;
 
 @import 'core/mixins';
 @import 'core/functions';
 @import 'core/variants';
 @import 'core/register-theme';
+
+
+@mixin nb-install-css-variables($theme-name, $theme) {
+  .nb-theme-#{$theme-name} {
+
+    @each $var, $value in $theme {
+      @if (type-of($value) == 'string' and map-get($theme, $value)) {
+        --#{$var}: var(--#{$value});
+      } @else {
+        --#{$var}: #{$value};
+      }
+    }
+  }
+}
+
+@mixin nb-pre-process-context($theme-name) {
+  $nb-theme-process-mode: 'pre-process' !global;
+
+  $nb-current-theme-name: $theme-name !global;
+  $nb-theme: nb-get-registered-theme($theme-name) !global;
+  $nb-processed-theme: nb-process-theme($nb-theme) !global;
+}
+
+@mixin nb-lazy-process-context($theme-name) {
+  $nb-theme-process-mode: 'lazy-process' !global;
+
+  $nb-current-theme-name: $theme-name !global;
+  $nb-theme: nb-get-registered-theme($theme-name) !global;
+  $nb-processed-theme: () !global;
+}
 
 @mixin nb-install-component-with-css-props() {
   @warn '`nb-install-component` is unnecessary with css-variables. Deprecated and will be removed as of 5.0.0';
@@ -29,13 +62,14 @@ $nb-current-theme-name: 'default' !global;
   $enabled-themes: nb-get-enabled-themes();
 
   @each $theme-name in $enabled-themes {
-    $nb-current-theme-name: $theme-name !global;
+
+    @include nb-lazy-process-context($theme-name);
 
     /*
       :host can be prefixed
       https://github.com/angular/angular/blob/8d0ee34939f14c07876d222c25b405ed458a34d3/packages/compiler/src/shadow_css.ts#L441
 
-      We have to use :host insted of :host-context($theme), to be able to prefix theme class
+      We have to use :host instead of :host-context($theme), to be able to prefix theme class
       with something defined inside of @content, by prefixing &.
       For example this scss code:
         .nb-theme-default {
@@ -74,38 +108,18 @@ $nb-current-theme-name: 'default' !global;
   }
 }
 
-@mixin nb-install-css-variables($theme-name, $theme) {
-  .nb-theme-#{$theme-name} {
-
-    @each $var, $value in $theme {
-      @if (type-of($value) == 'string' and map-get($theme, $value)) {
-        --#{$var}: var(--#{$value});
-      } @else {
-        --#{$var}: #{$value};
-      }
-    }
-  }
-}
-
 @mixin nb-install-global-with-css-props() {
   @content;
 
-  $enabled-themes: nb-get-enabled-themes();
-  @each $theme-name in $enabled-themes {
+  @each $theme-name in nb-get-enabled-themes() {
     @include nb-install-css-variables($theme-name, nb-get-registered-theme($theme-name));
   }
 }
 
 @mixin nb-install-global-with-scss-vars() {
-  $enabled-themes: nb-get-enabled-themes();
 
-  @each $theme-name in $enabled-themes {
-
-    // process sass map ahead of time, so that later on nb-theme has access to ready variables
-    $nb-processed-theme: nb-process-theme(nb-get-registered-theme($theme-name)) !global;
-
-    // we also set a theme name as a context for @content code
-    $nb-current-theme-name: $theme-name !global;
+  @each $theme-name in nb-get-enabled-themes() {
+    @include nb-pre-process-context($theme-name);
 
     .nb-theme-#{$theme-name} {
       @content;
@@ -114,12 +128,6 @@ $nb-current-theme-name: 'default' !global;
 }
 
 @mixin nb-install-global() {
-  // this mode later on indicates nb-theme function on how to get a value for a variable
-  // in a case, when nb-theme is called within `nb-install-global` call, we process variables ahead of time
-  // in a case, then nb-theme is called in a user component OR css variables mode is enabled - we search for
-  // variable value _lazily_ in a time of nb-theme call
-  $nb-enable-preprocess-mode: true !global;
-
   @if ($nb-enable-css-custom-properties) {
     @include nb-install-global-with-css-props() {
       @content;

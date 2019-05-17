@@ -7,7 +7,6 @@
 $nb-themes: () !global;
 $nb-themes-export: () !global;
 $nb-enabled-themes: () !global;
-$nb-processed-theme: () !global;
 
 @function nb-get-enabled-themes() {
 
@@ -75,24 +74,21 @@ $nb-processed-theme: () !global;
   $value: ();
 
   // in case of css custom properties - just returns var(--var-name) - the rest is a browser job
-  @if ($nb-enable-css-custom-properties) {
+  @if ($nb-theme-process-mode == null) {
+    // there is no way to check if variable exists as current execution context is outside of particular theme
+    // because we process css in this mode only once! (and not for each theme)
+    $value: var(--#{$key});
+  }
 
-    // TODO: we can also create global context variable for this check
-    $theme: nb-get-registered-theme($nb-current-theme-name);
-    @if (map-get($theme, $key) != null) {
-      $value: var(--#{$key});
-    }
-  } @else {
-
-    // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
-    @if ($nb-enable-preprocess-mode) {
-      $value: map-get($nb-processed-theme, $key);
+  // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
+  @if ($nb-theme-process-mode == 'pre-process') {
+    $value: map-get($nb-processed-theme, $key);
 
     // otherwise lazily search for variable value
-    } @else {
-      $theme: nb-get-registered-theme($nb-current-theme-name);
-      $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
-    }
+  }
+  @if ($nb-theme-process-mode == 'lazy-process') {
+    $theme: nb-get-registered-theme($nb-current-theme-name);
+    $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
   }
 
   @if ($value == null) {
