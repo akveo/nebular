@@ -27,7 +27,7 @@
     nb-select.appearance-outline.status-#{$status} .select-button {
       border-color: nb-theme(select-outline-#{$status}-border-color);
       &.selected {
-        background-color: nb-theme(select-option-outline-#{$status}-selected-background-color);
+        //background-color: nb-theme(select-option-outline-#{$status}-selected-background-color);
       }
       &:focus {
         border-color: nb-theme(select-outline-#{$status}-focus-border-color);

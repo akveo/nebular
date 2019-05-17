@@ -8,7 +8,6 @@
 @import '../core/mixins';
 @import 'default';
 
-// default the base theme
 $theme: (
   separator: #cdd5dc,
   radius: 0.17rem,
@@ -79,5 +78,4 @@ $theme: (
   datepicker-shadow: none,
 );
 
-// register the theme
 $nb-themes: nb-register-theme($theme, corporate, default);

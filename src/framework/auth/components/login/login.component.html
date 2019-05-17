@@ -76,7 +76,7 @@
 
   <button nbButton
           fullWidth
-          status="success"
+          status="primary"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Log In
@@ -91,12 +91,18 @@
          [routerLink]="socialLink.link"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <ng-container *ngIf="!socialLink.icon">{{ socialLink.title }}</ng-container>
+        <ng-container *ngIf="socialLink.icon"><nb-icon [icon]="socialLink.icon"></nb-icon></ng-container>
+      </a>
       <a *ngIf="socialLink.url"
          [attr.href]="socialLink.url"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <ng-container *ngIf="!socialLink.icon">{{ socialLink.title }}</ng-container>
+        <ng-container *ngIf="socialLink.icon"><nb-icon [icon]="socialLink.icon"></nb-icon></ng-container>
+      </a>
     </ng-container>
   </div>
 </section>

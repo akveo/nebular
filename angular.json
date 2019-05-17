@@ -25,9 +25,7 @@
               "src/assets",
               "src/favicon.ico"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": [],
             "scripts": []
           },
           "configurations": {
@@ -75,9 +73,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": [],
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -144,9 +140,7 @@
               "src/assets",
               "src/favicon.ico"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": [],
             "scripts": []
           },
           "configurations": {
@@ -194,9 +188,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": [],
             "assets": [
               "src/assets",
               "src/favicon.ico"
