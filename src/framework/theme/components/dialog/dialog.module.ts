@@ -7,7 +7,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbDialogService } from './dialog.service';
 import { NbDialogContainerComponent } from './dialog-container';
 import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';

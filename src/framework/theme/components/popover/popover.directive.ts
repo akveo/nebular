@@ -13,15 +13,11 @@ import {
   OnDestroy, OnInit,
 } from '@angular/core';
 
-import {
-  NbAdjustment,
-  NbOverlayContent,
-  NbPosition,
-  NbTrigger,
-  NbDynamicOverlayHandler,
-  NbDynamicOverlay,
-  NbDynamicOverlayController,
-} from '../cdk';
+import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
+import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
+import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbOverlayContent } from '../cdk/overlay/overlay-service';
+import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverComponent } from './popover.component';
 
 

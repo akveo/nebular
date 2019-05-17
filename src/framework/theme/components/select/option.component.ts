@@ -20,7 +20,7 @@ import {
 import { Observable, Subject } from 'rxjs';
 
 import { convertToBoolProperty } from '../helpers';
-import { NbFocusableOption } from '../cdk';
+import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
 import { NbSelectComponent } from './select.component';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 

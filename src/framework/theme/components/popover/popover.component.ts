@@ -12,13 +12,12 @@ import {
   Type,
   ViewChild,
 } from '@angular/core';
+import { NbComponentPortal, NbTemplatePortal } from '../cdk/overlay/mapping';
 import {
-  NbComponentPortal,
   NbOverlayContainerComponent,
   NbPositionedContainer,
   NbRenderableContainer,
-  NbTemplatePortal,
-} from '../cdk';
+} from '../cdk/overlay/overlay-container';
 
 
 /**

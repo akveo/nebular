@@ -24,19 +24,15 @@ import {
 import { takeWhile } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 
+import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbComponentPortal,
-  NbOverlayRef,
-  NbOverlayService,
   NbPosition,
   NbPositionBuilderService,
-  NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-  patch,
-} from '../cdk';
+} from '../cdk/overlay/overlay-position';
+import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
+import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
