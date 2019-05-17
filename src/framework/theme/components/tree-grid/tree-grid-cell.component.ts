@@ -20,14 +20,8 @@ import { filter, takeWhile } from 'rxjs/operators';
 
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NB_WINDOW } from '../../theme.options';
-import {
-  NbCdkCell,
-  NbCdkFooterCell,
-  NbCellDirective,
-  NbFooterCellDirective,
-  NbHeaderCellDirective,
-  NbCdkHeaderCell,
-} from '../cdk/table';
+import { NbCellDirective, NbFooterCellDirective, NbHeaderCellDirective } from '../cdk/table/cell';
+import { NbCdkCell, NbCdkFooterCell, NbCdkHeaderCell } from '../cdk/table/type-mappings';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
