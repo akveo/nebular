@@ -7,6 +7,7 @@
 $nb-themes: () !global;
 $nb-themes-export: () !global;
 $nb-enabled-themes: () !global;
+$nb-processed-theme: () !global;
 
 @function nb-get-enabled-themes() {
 
@@ -29,6 +30,7 @@ $nb-enabled-themes: () !global;
 @function nb-get-registered-theme($name) {
   $theme: map-get($nb-themes, $name);
 
+  // TODO: check if optimal place
   @if ($theme == null) {
     @error 'Nebular Theme: theme `' + $name + '` is not registered with `nb-register-theme` function.';
   }
@@ -60,17 +62,42 @@ $nb-enabled-themes: () !global;
   @return $value;
 }
 
+@function nb-process-theme($theme) {
+  $processed-theme: ();
+  @each $key, $value in $theme {
+    $processed-theme: map-set($processed-theme, $key, nb-deep-find-value($theme, $key, $value));
+  }
+  @return $processed-theme;
+}
+
 @function nb-theme($key) {
-  $theme: nb-get-registered-theme($nb-current-theme-name);
-  $value: map-get($theme, $key);
+
+  $value: ();
+
+  // in case of css custom properties - just returns var(--var-name) - the rest is a browser job
+  @if ($nb-enable-css-custom-properties) {
+
+    // TODO: we can also create global context variable for this check
+    $theme: nb-get-registered-theme($nb-current-theme-name);
+    @if (map-get($theme, $key) != null) {
+      $value: var(--#{$key});
+    }
+  } @else {
+
+    // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
+    @if ($nb-enable-preprocess-mode) {
+      $value: map-get($nb-processed-theme, $key);
+
+    // otherwise lazily search for variable value
+    } @else {
+      $theme: nb-get-registered-theme($nb-current-theme-name);
+      $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
+    }
+  }
 
   @if ($value == null) {
     @error 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '`';
   }
 
-  @if ($nb-enable-css-custom-properties) {
-    @return var(--#{$key});
-  }
-
-  @return nb-deep-find-value($theme, $key, $value);
+  @return $value;
 }

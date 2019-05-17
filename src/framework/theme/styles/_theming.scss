@@ -10,6 +10,7 @@
  */
 
 $nb-enable-css-custom-properties: false !global !default;
+$nb-enable-preprocess-mode: false !global !default;
 $nb-current-theme-name: 'default' !global;
 
 @import 'core/mixins';
@@ -99,7 +100,13 @@ $nb-current-theme-name: 'default' !global;
   $enabled-themes: nb-get-enabled-themes();
 
   @each $theme-name in $enabled-themes {
+
+    // process sass map ahead of time, so that later on nb-theme has access to ready variables
+    $nb-processed-theme: nb-process-theme(nb-get-registered-theme($theme-name)) !global;
+
+    // we also set a theme name as a context for @content code
     $nb-current-theme-name: $theme-name !global;
+
     .nb-theme-#{$theme-name} {
       @content;
     }
@@ -107,6 +114,12 @@ $nb-current-theme-name: 'default' !global;
 }
 
 @mixin nb-install-global() {
+  // this mode later on indicates nb-theme function on how to get a value for a variable
+  // in a case, when nb-theme is called within `nb-install-global` call, we process variables ahead of time
+  // in a case, then nb-theme is called in a user component OR css variables mode is enabled - we search for
+  // variable value _lazily_ in a time of nb-theme call
+  $nb-enable-preprocess-mode: true !global;
+
   @if ($nb-enable-css-custom-properties) {
     @include nb-install-global-with-css-props() {
       @content;
