@@ -4,7 +4,8 @@
 
 @include nb-install() {
   @include nb-theme-global();
-  @include nb-auth-global();
+  //@include nb-auth-global();
+
 };
 
 body {

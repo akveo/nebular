@@ -38,7 +38,7 @@
     }
 
     .route-tab {
-      min-width: nb-theme(route-tabs-header-min-width);
+      //min-width: nb-theme(route-tabs-header-min-width);
     }
 
     .route-tab.active {
@@ -87,11 +87,11 @@
     }
 
     .route-tab.responsive {
-      @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
-        .tab-text {
-          display: none;
-        }
-      }
+      //@media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
+      //  .tab-text {
+      //    display: none;
+      //  }
+      //}
     }
   }
 }

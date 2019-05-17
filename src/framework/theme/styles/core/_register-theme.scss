@@ -1,0 +1,113 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+$nb-themes: () !global;
+$nb-processed-themes: () !global;
+$nb-themes-export: () !global;
+$nb-enabled-themes: () !global;
+
+@function nb-get-enabled-themes() {
+  $themes-to-install: ();
+
+  @if (length($nb-enabled-themes) == 0) {
+    @each $theme-name in $nb-themes {
+      $themes-to-install: append($themes-to-install, $theme-name);
+    }
+  }
+
+  @return $nb-enabled-themes;
+}
+
+@function nb-set-for-export($theme, $name, $default: null) {
+  $theme-data: (
+    data: $theme,
+    parent: $default,
+  );
+  @return map-set($nb-themes-export, $name, $theme-data);
+}
+
+@function nb-get-registered-theme($name) {
+  $theme: map-get($nb-themes, $name);
+
+  @if ($theme == null) {
+    @error 'Nebular Theme: theme `' + $name + '` is not registered with `nb-register-theme` function.';
+  }
+
+  @return $theme;
+}
+
+@function nb-register-theme($theme, $name, $default: null) {
+
+  $theme-data: ();
+
+  @if ($default != null) {
+    $default-theme: map-get($nb-themes, $default);
+    $theme: map-merge($default-theme, $theme);
+  }
+  $nb-themes: map-set($nb-themes, $name, $theme) !global;
+  $nb-themes-export: nb-set-for-export($theme, $name, $default) !global;
+
+  @return $nb-themes;
+}
+
+@function nb-deep-find-value($theme, $key, $value) {
+  @if (type-of($value) == 'string') {
+    $tmp: map-get($theme, $value);
+
+    @if ($tmp != null) {
+      @if ($nb-enable-css-custom-properties) {
+        @return var(--#{$value});
+      } @else {
+        @return nb-deep-find-value($theme, $value, $tmp);
+      }
+    }
+  }
+
+  @return map-get($theme, $key);
+}
+
+@function nb-get-processed-theme($name) {
+  $theme: map-get($nb-processed-themes, $name);
+  @if ($theme == null) {
+    $theme: ();
+  }
+  @return $theme;
+}
+
+@function nb-process-theme-key($name, $processed-theme, $key) {
+  $theme: nb-get-registered-theme($name);
+  $value: map-get($theme, $key);
+  $value: nb-deep-find-value($theme, $key, $value);
+
+  @if ($value != null) {
+    $processed-theme: map-set($processed-theme, $key, $value);
+    $nb-processed-themes: map-set($nb-processed-themes, $name, $processed-theme) !global;
+  }
+  @return $value;
+}
+
+@function nb-store-processed-key($theme, $name, $key, $value) {
+  $theme: map-set($theme, $key, $value);
+  $nb-processed-themes: map-set($nb-processed-themes, $name, $theme) !global;
+
+  @return $value;
+}
+
+// TODO: we can process values lazy, so only those in use!!!!
+@function nb-theme($key) {
+
+  $processed-theme: nb-get-processed-theme($nb-current-theme-name);
+  $value: map-get($processed-theme, $key);
+
+  @if ($value == null) {
+    $value: nb-process-theme-key($nb-current-theme-name, $processed-theme, $key);
+  }
+
+  @if ($value == null) {
+    @error 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '`';
+  }
+  @return $value;
+}

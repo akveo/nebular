@@ -9,134 +9,13 @@
  * This is a starting point where we declare the maps of themes and globally available functions/mixins
  */
 
+$nb-enable-css-custom-properties: false !global !default;
+$nb-current-theme-name: 'default' !global;
+
 @import 'core/mixins';
 @import 'core/functions';
-
-$nb-enabled-themes: () !global;
-$nb-enable-css-custom-properties: false !global !default;
-
-$nb-themes: () !global;
-$nb-themes-non-processed: () !global;
-$nb-themes-export: () !global;
-
-@function nb-theme($key) {
-  @return map-get($theme, $key);
-}
-
-@function nb-get-value($theme, $key, $value) {
-  @if (type-of($value) == 'string') {
-    $tmp: map-get($theme, $value);
-
-    @if ($tmp != null) {
-      @if ($nb-enable-css-custom-properties) {
-        @return var(--#{$value});
-      } @else {
-        @return nb-get-value($theme, $value, $tmp);
-      }
-    }
-  }
-
-  @return map-get($theme, $key);
-}
-
-@function convert-to-css-custom-properties($variables) {
-  $result: ();
-  @each $var, $value in $variables {
-    $result: map-set($result, $var, unquote('var(--#{$var})'));
-  }
-
-  @return $result;
-}
-
-@function set-global-theme-vars($theme, $theme-name) {
-  $theme: $theme !global;
-  $theme-name: $theme-name !global;
-  @if ($nb-enable-css-custom-properties) {
-    $theme: convert-to-css-custom-properties($theme) !global;
-  }
-  @return $theme;
-}
-
-@function create-colors-palette($theme) {
-  $color-keys: (
-    color-primary: 20deg,
-    color-success:  20deg,
-    color-info: -10deg,
-    color-warning: 10deg,
-    color-danger: -20deg,
-  );
-
-  @each $key, $degree in $color-keys {
-    $color: map-get($theme, $key);
-
-    $color-300: tint($color, 14%);
-    $color-400: adjust-hue($color, $degree);
-    $color-200: tint($color-400, 14%);
-    $color-600: mix($color-400, $color);
-    $color-700: shade($color, 14%);
-    $color-800: shade($color-600, 14%);
-
-    $theme: map-set($theme, #{$key}-300, $color-300);
-    $theme: map-set($theme, #{$key}-200, $color-200);
-    $theme: map-set($theme, #{$key}-400, $color-400);
-    $theme: map-set($theme, #{$key}-600, $color-600);
-    $theme: map-set($theme, #{$key}-700, $color-700);
-    $theme: map-set($theme, #{$key}-600, $color-800);
-  }
-  @return $theme;
-}
-
-@function nb-register-theme($theme, $name, $default: null) {
-
-  $theme-data: ();
-
-
-  @if ($default != null) {
-
-    $theme: map-merge(map-get($nb-themes-non-processed, $default), $theme);
-    $nb-themes-non-processed: map-set($nb-themes-non-processed, $name, $theme) !global;
-
-    $theme-data: map-set($theme-data, data, $theme);
-    $nb-themes-export: map-set($nb-themes-export, $name, map-set($theme-data, parent, $default)) !global;
-
-  } @else {
-    $nb-themes-non-processed: map-set($nb-themes-non-processed, $name, $theme) !global;
-
-    $theme-data: map-set($theme-data, data, $theme);
-    $nb-themes-export: map-set($nb-themes-export, $name, map-set($theme-data, parent, null)) !global;
-  }
-
-  $theme-parsed: ();
-  @each $key, $value in $theme {
-    $theme-parsed: map-set($theme-parsed, $key, nb-get-value($theme, $key, $value));
-  }
-
-  // enable right away when installed
-  $theme-parsed: set-global-theme-vars($theme-parsed, $name);
-  @return map-set($nb-themes, $name, $theme-parsed);
-}
-
-@function get-enabled-themes() {
-  $themes-to-install: ();
-
-  @if (length($nb-enabled-themes) > 0) {
-    @each $theme-name in $nb-enabled-themes {
-      $themes-to-install: map-set($themes-to-install, $theme-name, map-get($nb-themes, $theme-name));
-    }
-  } @else {
-    $themes-to-install: $nb-themes;
-  }
-
-  @return $themes-to-install;
-}
-
-@mixin install-css-variables($theme-name, $variables) {
-  .nb-theme-#{$theme-name} {
-    @each $var, $value in $variables {
-      --#{$var}: #{$value};
-    }
-  }
-}
+@import 'core/variants';
+@import 'core/register-theme';
 
 @mixin nb-install-component-with-css-props() {
   @warn '`nb-install-component` is unnecessary with css-variables. Deprecated and will be removed as of 5.0.0';
@@ -146,9 +25,11 @@ $nb-themes-export: () !global;
 }
 
 @mixin nb-install-component-with-scss-vars() {
-  $themes-to-install: get-enabled-themes();
+  $enabled-themes: nb-get-enabled-themes();
 
-  @each $theme-name, $theme in $themes-to-install {
+  @each $theme-name in $enabled-themes {
+    $nb-current-theme-name: $theme-name !global;
+
     /*
       :host can be prefixed
       https://github.com/angular/angular/blob/8d0ee34939f14c07876d222c25b405ed458a34d3/packages/compiler/src/shadow_css.ts#L441
@@ -170,7 +51,6 @@ $nb-themes-export: () !global;
       prefix in one of the selectors.
     */
     .nb-theme-#{$theme-name} :host {
-      $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }
   }
@@ -193,63 +73,34 @@ $nb-themes-export: () !global;
   }
 }
 
-@mixin nb-for-theme($name) {
-  @if ($theme-name == $name) {
-    @content;
-  }
-}
+@mixin nb-install-css-variables($theme-name, $theme) {
+  .nb-theme-#{$theme-name} {
 
-// Add content for theme into a list of themes
-@mixin nb-for-themes($names...) {
-  @each $name in $names {
-    @include nb-for-theme($name) {
-      @content;
+    @each $var, $value in $theme {
+      @if (type-of($value) == 'string' and map-get($theme, $value)) {
+        --#{$var}: var(--#{$value});
+      } @else {
+        --#{$var}: #{$value};
+      }
     }
-  }
-}
-
-@mixin nb-except-theme($name) {
-  @if ($theme-name != $name) {
-    @content;
-  }
-}
-
-// Add content except for theme into a list of themes
-@mixin nb-except-for-themes($names...) {
-  @each $name in $names {
-    @include nb-except-theme($name) {
-      @content;
-    }
-  }
-}
-
-// TODO: another mixing for the almost same thing
-@mixin nb-install-root-component() {
-  @warn '`nb-install-root-component` is deprecated, replace with `nb-install-component`, as `body` is root element now';
-
-  @include nb-install-component() {
-    @content;
   }
 }
 
 @mixin nb-install-global-with-css-props() {
-  $themes-to-install: get-enabled-themes();
-
-  $theme: map-get($themes-to-install, 'default');
-  $theme: set-global-theme-vars($theme, 'default');
   @content;
 
-  @each $theme-name, $theme in $themes-to-install {
-    @include install-css-variables($theme-name, $theme);
+  $enabled-themes: nb-get-enabled-themes();
+  @each $theme-name in $enabled-themes {
+    @include nb-install-css-variables($theme-name, nb-get-registered-theme($theme-name));
   }
 }
 
 @mixin nb-install-global-with-scss-vars() {
-  $themes-to-install: get-enabled-themes();
+  $enabled-themes: nb-get-enabled-themes();
 
-  @each $theme-name, $theme in $themes-to-install {
+  @each $theme-name in $enabled-themes {
+    $nb-current-theme-name: $theme-name !global;
     .nb-theme-#{$theme-name} {
-      $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }
   }
@@ -267,14 +118,30 @@ $nb-themes-export: () !global;
   }
 }
 
-@function nb-get-statuses() {
-  @return 'primary', 'success', 'warning', 'danger', 'info';
+@mixin nb-for-theme($name) {
+  @if ($nb-current-theme-name == $name) {
+    @content;
+  }
 }
 
-@function nb-get-sizes() {
-  @return 'tiny', 'small', 'medium', 'large', 'giant';
+@mixin nb-for-themes($names...) {
+  @each $name in $names {
+    @include nb-for-theme($name) {
+      @content;
+    }
+  }
 }
 
-@function nb-get-shapes() {
-  @return 'rectangle', 'semi-round', 'round';
+@mixin nb-except-theme($name) {
+  @if ($nb-current-theme-name != $name) {
+    @content;
+  }
+}
+
+@mixin nb-except-for-themes($names...) {
+  @each $name in $names {
+    @include nb-except-theme($name) {
+      @content;
+    }
+  }
 }
