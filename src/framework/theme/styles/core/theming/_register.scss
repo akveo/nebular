@@ -1,0 +1,50 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@function nb-get-enabled-themes() {
+
+  @if (length($nb-enabled-themes) == 0) {
+    @each $theme-name, $theme in $nb-themes {
+      $nb-enabled-themes: append($nb-enabled-themes, $theme-name) !global;
+    }
+  }
+  @return $nb-enabled-themes;
+}
+
+@function nb-set-for-export($theme, $name, $default: null) {
+  $theme-data: (
+    data: $theme,
+    parent: $default,
+  );
+  @return map-set($nb-themes-export, $name, $theme-data);
+}
+
+@function nb-get-registered-theme($name) {
+  $theme: map-get($nb-themes, $name);
+
+  // TODO: check if optimal place
+  @if ($theme == null) {
+    @error 'Nebular Theme: theme `' + $name + '` is not registered with `nb-register-theme` function.';
+  }
+
+  @return $theme;
+}
+
+// Entry point
+// Registers a new theme
+@function nb-register-theme($theme, $name, $default: null) {
+
+  $theme-data: ();
+
+  @if ($default != null) {
+    $default-theme: map-get($nb-themes, $default);
+    $theme: map-merge($default-theme, $theme);
+  }
+  $nb-themes: map-set($nb-themes, $name, $theme) !global;
+  $nb-themes-export: nb-set-for-export($theme, $name, $default) !global;
+
+  @return $nb-themes;
+}
