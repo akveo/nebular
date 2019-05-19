@@ -172,6 +172,7 @@
     "pump": "1.0.2",
     "rimraf": "2.6.1",
     "rollup-plugin-node-resolve": "3.0.0",
+    "run-sequence": "^2.2.1",
     "stylelint": "7.13.0",
     "through2": "^2.0.3",
     "ts-node": "8.1.0",
