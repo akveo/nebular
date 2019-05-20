@@ -45,7 +45,7 @@
   }
 
   @if ($value == null) {
-    @error 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '`';
+    @error 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '` for theme `'+ $nb-theme-name +'`';
   }
 
   @return $value;
