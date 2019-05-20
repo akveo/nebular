@@ -92,16 +92,16 @@
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
          [class.with-icon]="socialLink.icon">
-        <ng-container *ngIf="!socialLink.icon">{{ socialLink.title }}</ng-container>
-        <ng-container *ngIf="socialLink.icon"><nb-icon [icon]="socialLink.icon"></nb-icon></ng-container>
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
       </a>
       <a *ngIf="socialLink.url"
          [attr.href]="socialLink.url"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
          [class.with-icon]="socialLink.icon">
-        <ng-container *ngIf="!socialLink.icon">{{ socialLink.title }}</ng-container>
-        <ng-container *ngIf="socialLink.icon"><nb-icon [icon]="socialLink.icon"></nb-icon></ng-container>
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
       </a>
     </ng-container>
   </div>
