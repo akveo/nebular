@@ -14,10 +14,10 @@
   @return $nb-enabled-themes;
 }
 
-@function nb-set-for-export($theme, $name, $parent-theme: null) {
+@function nb-set-for-export($theme, $name, $parent-name: null) {
   $theme-data: (
     data: $theme,
-    parent: $parent-theme,
+    parent: $parent-name,
   );
   @return map-set($nb-themes-export, $name, $theme-data);
 }
