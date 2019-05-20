@@ -4,11 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../components/auth.component.theme';
 @import '../../components/auth-block/auth-block.component.theme';
 
 // Create a theme
 @mixin nb-auth-components() {
-  @include nb-auth-theme();
   @include nb-auth-block-theme();
 }
