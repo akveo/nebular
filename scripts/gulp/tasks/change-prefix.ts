@@ -6,7 +6,7 @@ import * as replace from 'gulp-replace';
 import * as minimist from 'minimist';
 import { capitalize, dasherize } from '@angular-devkit/core/src/utils/strings';
 
-import { replaceScssWithCss } from './copy-sources';
+// import { replaceScssWithCss } from './copy-sources';
 
 import { BUILD_DIR } from './config';
 
@@ -218,7 +218,7 @@ task('change-prefix', ['copy-build-dir-and-rename', 'generate-ts-config', 'patch
 
   return stream
     .pipe(dest(BUILD_DIR))
-    .on('end', replaceScssWithCss);
+    // .on('end', replaceScssWithCss);
 });
 
 function throwNoPrefixSpecified() {
