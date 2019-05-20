@@ -36,9 +36,9 @@
   // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
   @if ($nb-theme-process-mode == 'pre-process') {
     $value: map-get($nb-processed-theme, $key);
-
-    // otherwise lazily search for variable value
   }
+
+  // otherwise lazily search for variable value
   @if ($nb-theme-process-mode == 'lazy-process') {
     $theme: nb-get-registered-theme($nb-theme-name);
     $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
