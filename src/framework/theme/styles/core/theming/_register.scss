@@ -1,0 +1,53 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@function nb-get-enabled-themes() {
+
+  @if (length($nb-enabled-themes) == 0) {
+    @each $theme-name, $theme in $nb-themes {
+      $nb-enabled-themes: append($nb-enabled-themes, $theme-name) !global;
+    }
+  }
+  @return $nb-enabled-themes;
+}
+
+@function nb-set-for-export($theme, $name, $parent-name: null) {
+  $theme-data: (
+    data: $theme,
+    parent: $parent-name,
+  );
+  @return map-set($nb-themes-export, $name, $theme-data);
+}
+
+@function nb-get-registered-theme($name) {
+  $theme: map-get($nb-themes, $name);
+
+  // TODO: check if optimal place
+  @if ($theme == null) {
+    @error 'Nebular Theme: theme `' + $name + '` is not registered with `nb-register-theme` function.';
+  }
+
+  @return $theme;
+}
+
+// Entry point
+// Registers a new theme
+@function nb-register-theme($theme, $name, $parent-name: null) {
+
+  $theme-data: ();
+
+  @if ($parent-name != null) {
+    $parent-theme: map-get($nb-themes, $parent-name);
+    @if ($parent-theme == null) {
+      @error 'Nebular Theme: parent theme `' + $parent-name + '` is not registered or imported.';
+    }
+    $theme: map-merge($parent-theme, $theme);
+  }
+  $nb-themes: map-set($nb-themes, $name, $theme) !global;
+  $nb-themes-export: nb-set-for-export($theme, $name, $parent-name) !global;
+
+  @return $nb-themes;
+}
