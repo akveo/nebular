@@ -14,10 +14,10 @@
   @return $nb-enabled-themes;
 }
 
-@function nb-set-for-export($theme, $name, $default: null) {
+@function nb-set-for-export($theme, $name, $parent-theme: null) {
   $theme-data: (
     data: $theme,
-    parent: $default,
+    parent: $parent-theme,
   );
   @return map-set($nb-themes-export, $name, $theme-data);
 }
@@ -35,16 +35,19 @@
 
 // Entry point
 // Registers a new theme
-@function nb-register-theme($theme, $name, $default: null) {
+@function nb-register-theme($theme, $name, $parent-name: null) {
 
   $theme-data: ();
 
-  @if ($default != null) {
-    $default-theme: map-get($nb-themes, $default);
-    $theme: map-merge($default-theme, $theme);
+  @if ($parent-name != null) {
+    $parent-theme: map-get($nb-themes, $parent-name);
+    @if ($parent-theme == null) {
+      @error 'Nebular Theme: parent theme `' + $parent-name + '` is not registered or imported.';
+    }
+    $theme: map-merge($parent-theme, $theme);
   }
   $nb-themes: map-set($nb-themes, $name, $theme) !global;
-  $nb-themes-export: nb-set-for-export($theme, $name, $default) !global;
+  $nb-themes-export: nb-set-for-export($theme, $name, $parent-name) !global;
 
   @return $nb-themes;
 }
