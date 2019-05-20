@@ -32,7 +32,7 @@
   }
 }
 
-@mixin nb-install-css-variables($theme-name, $theme) {
+@mixin nb-install-css-properties($theme-name, $theme) {
   .nb-theme-#{$theme-name} {
 
     @each $var, $value in $theme {
@@ -62,7 +62,8 @@
 }
 
 @mixin nb-install-component-with-css-props() {
-  @warn '`nb-install-component` is unnecessary with css-variables. Deprecated and will be removed as of 5.0.0';
+  // @breaking-change 5.0.0
+  @warn '`nb-install-component` is unnecessary with css properties. Deprecated and will be removed as of 5.0.0';
   :host {
     @content;
   }
@@ -124,7 +125,7 @@
   @content;
 
   @each $theme-name in nb-get-enabled-themes() {
-    @include nb-install-css-variables($theme-name, nb-get-registered-theme($theme-name));
+    @include nb-install-css-properties($theme-name, nb-get-registered-theme($theme-name));
   }
 }
 
