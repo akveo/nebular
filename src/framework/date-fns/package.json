@@ -23,5 +23,6 @@
   "peerDependencies": {
     "@nebular/theme": "4.0.0-rc.4",
     "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
-  }
+  },
+  "sideEffects": false
 }

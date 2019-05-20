@@ -31,5 +31,6 @@
   "dependencies": {
     "intersection-observer": "0.5.0"
   },
-  "schematics": "./schematics/collection.json"
+  "schematics": "./schematics/collection.json",
+  "sideEffects": false
 }
