@@ -1332,6 +1332,7 @@ $theme: (
   alert-accent-warning-color: color-warning-500,
   alert-accent-danger-color: color-danger-500,
 
+  alert-outline-width: 3px,
   alert-outline-primary-color: color-primary-500,
   alert-outline-info-color: color-info-500,
   alert-outline-success-color: color-success-500,
@@ -1425,7 +1426,7 @@ $theme: (
   stepper-step-active-text-color: text-primary-active-color,
   stepper-step-completed-text-color: text-primary-color,
 
-  stepper-step-index-border-color: border-primary-color-3,
+  stepper-step-index-border-color: border-primary-color-4,
   stepper-step-index-border-style: solid,
   stepper-step-index-border-width: 0.125rem,
   stepper-step-index-border-radius: 50%,
@@ -1963,5 +1964,4 @@ $theme: (
   icon-danger-color: color-danger-500,
 );
 
-// register the theme
 $nb-themes: nb-register-theme($theme, default);

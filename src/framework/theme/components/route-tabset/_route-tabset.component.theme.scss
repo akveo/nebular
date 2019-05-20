@@ -37,10 +37,6 @@
       }
     }
 
-    .route-tab {
-      min-width: nb-theme(route-tabs-header-min-width);
-    }
-
     .route-tab.active {
       .tab-link {
         background-color: nb-theme(tabset-tab-active-background-color);
@@ -87,7 +83,7 @@
     }
 
     .route-tab.responsive {
-      @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
+      @media screen and (max-width: nb-theme(route-tabset-tab-text-hide-breakpoint)) {
         .tab-text {
           display: none;
         }

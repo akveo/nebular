@@ -16,11 +16,7 @@
     border-style: nb-theme(input-border-style);
     border-width: nb-theme(input-border-width);
     color: nb-theme(input-text-color);
-    font-size: nb-theme(input-text-font-size);
     font-family: nb-theme(input-text-font-family);
-    font-weight: nb-theme(input-text-font-weight);
-    line-height: nb-theme(input-text-line-height);
-    padding: nb-theme(input-padding);
     @include nb-component-animation(border, background-color, color);
 
     &::placeholder {

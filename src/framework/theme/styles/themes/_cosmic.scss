@@ -101,5 +101,4 @@ $theme: (
   outline-color: color-basic-600,
 );
 
-// register the theme
 $nb-themes: nb-register-theme($theme, cosmic, default);
