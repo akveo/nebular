@@ -141,7 +141,7 @@ Last but not least - install the component styles into your styles.scss ([more d
 
 ```
 
-`@import '~@nebular/auth/styles/all'` means import auth styles for all themes (default, cosmic, corporate). If you have only one or portion of themes enabled, then you need to import auth styles only for enabled themes. For example, when only default and corporate themes enabled, auth imports should look like this:
+`@import '~@nebular/auth/styles/all'` means import auth styles for all themes (default, dark, corporate, cosmic). If you have only one or portion of themes enabled, then you need to import auth styles only for enabled themes. For example, when only default and corporate themes enabled, auth imports should look like this:
 ```scss
 @import '~@nebular/auth/styles/themes/default';
 @import '~@nebular/auth/styles/themes/corporate';

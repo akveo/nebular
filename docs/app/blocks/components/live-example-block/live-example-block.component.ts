@@ -45,11 +45,17 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     return this.currentTheme === 'corporate';
   }
 
+  @HostBinding('class.theme-dark')
+  private get isDark() {
+    return this.currentTheme === 'dark';
+  }
+
   iframeHeight = 0;
   alive: boolean = true;
 
   themes: {label: string; value: string}[] = [
     { label: 'Default', value: 'default' },
+    { label: 'Dark', value: 'dark' },
     { label: 'Cosmic', value: 'cosmic' },
     { label: 'Corporate', value: 'corporate' },
   ];

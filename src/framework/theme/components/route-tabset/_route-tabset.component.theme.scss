@@ -17,7 +17,7 @@
     box-shadow: nb-theme(route-tabset-shadow);
 
     .route-tabset {
-      border-bottom: nb-theme(route-tabset-divider-width) solid nb-theme(route-tabset-divider-color);
+      border-bottom: nb-theme(route-tabset-divider-width) nb-theme(route-tabset-divider-style) nb-theme(route-tabset-divider-color);
     }
 
     .tab-link {

@@ -1,0 +1,42 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../core/functions';
+@import '../core/mixins';
+@import 'default';
+
+$theme: (
+
+  color-primary-disabled: color-primary-700,
+  color-success-disabled: color-success-700,
+  color-info-disabled: color-info-700,
+  color-warning-disabled: color-warning-700,
+  color-danger-disabled: color-danger-700,
+  color-basic-disabled: color-basic-700,
+
+  background-primary-color-1: color-basic-800,
+  background-primary-color-2: color-basic-900,
+  background-primary-color-3: color-basic-1000,
+  background-primary-color-4: color-basic-1100,
+
+  border-primary-color-1: color-basic-800,
+  border-primary-color-2: color-basic-900,
+  border-primary-color-3: color-basic-1000,
+  border-primary-color-4: color-basic-1100,
+  border-primary-color-5: color-basic-1100,
+
+  text-color: color-basic-100,
+  text-alternate-color: color-basic-100,
+  text-disabled-color: color-basic-700,
+  text-hint-color: color-basic-500,
+
+  shadow: 0 0.5rem 1rem 0 rgba(23, 27, 71, 0.24),
+  outline-color: color-basic-600,
+  divider-color: border-primary-color-2,
+);
+
+// register the theme
+$nb-themes: nb-register-theme($theme, dark, default);

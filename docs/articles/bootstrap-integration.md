@@ -29,9 +29,10 @@ Then if you just want to use predefined themes you have to import prebuilt style
 
 ```json
 "styles": [
-  "node_modules/@nebular/bootstrap/styles/prebuilt/cosmic.css",
+  "node_modules/@nebular/bootstrap/styles/prebuilt/dark.css",
   "node_modules/@nebular/bootstrap/styles/prebuilt/default.css",
   "node_modules/@nebular/bootstrap/styles/prebuilt/corporate.css",
+  "node_modules/@nebular/bootstrap/styles/prebuilt/cosmic.css"
 ]
 ```
 

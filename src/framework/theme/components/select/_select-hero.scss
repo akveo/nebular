@@ -24,9 +24,8 @@
     }
     &[disabled] {
       color: nb-theme(select-hero-disabled-text-color);
-      $left-color: nb-theme(select-hero-disabled-left-background-color);
-      $right-color: nb-theme(select-hero-disabled-right-background-color);
-      background-image: linear-gradient(to right, $left-color, $right-color);
+      background-color: nb-theme(select-hero-disabled-background-color);
+      background-image: none;
     }
   }
 
@@ -68,9 +67,8 @@
       }
       &[disabled] {
         color: nb-theme(select-hero-#{$status}-disabled-text-color);
-        $left-color: nb-theme(select-hero-#{$status}-disabled-left-background-color);
-        $right-color: nb-theme(select-hero-#{$status}-disabled-right-background-color);
-        background-image: linear-gradient(to right, $left-color, $right-color);
+        background-color: nb-theme(select-hero-#{$status}-disabled-background-color);
+        background-image: none;
       }
     }
   }

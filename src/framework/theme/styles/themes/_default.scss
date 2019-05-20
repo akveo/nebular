@@ -112,14 +112,15 @@ $theme: (
 
   color-basic-100: white,
   color-basic-200: #f7f8fa,
-  color-basic-300: #edf0f5,
+  color-basic-300: #edf0f4,
   color-basic-400: #dde1eb,
   color-basic-500: #c8cedb,
-  color-basic-600: #a6aebd,
-  color-basic-700: #8992a3,
-  color-basic-800: #6a7385,
-  color-basic-900: #4b5466,
-  color-basic-1000: #0d2540,
+  color-basic-600: #a7b0c1,
+  color-basic-700: #657084,
+  color-basic-800: #2e384f,
+  color-basic-900: #232a39,
+  color-basic-1000: #1a1f32,
+  color-basic-1100: #131728,
 
   color-alternate: color-basic-100,
 
@@ -151,6 +152,7 @@ $theme: (
   color-basic-focus: color-basic-700,
   color-basic-hover: color-basic-400,
   color-basic-active: color-basic-600,
+  color-basic-disabled: color-basic-300,
 
   background-primary-color-1: color-basic-100,
   background-primary-color-2: color-basic-200,
@@ -283,6 +285,10 @@ $theme: (
   link-text-color: text-primary-color,
   link-text-hover-color: text-primary-hover-color,
 
+  divider-color: border-primary-color-3,
+  divider-style: solid,
+  divider-width: 1px,
+
   /* Components mappings */
 
   card-background-color: background-primary-color-1,
@@ -297,9 +303,9 @@ $theme: (
   card-border-radius: 0.75rem,
   card-padding: 1rem 1.25rem,
   card-shadow: shadow,
-  card-divider-color: border-primary-color-3,
-  card-divider-style: solid,
-  card-divider-width: 1px,
+  card-divider-color: divider-color,
+  card-divider-style: divider-style,
+  card-divider-width: divider-width,
 
   card-header-text-color: text-color,
   card-header-text-font-family: text-subtitle-font-family,
@@ -351,9 +357,9 @@ $theme: (
   footer-text-highlight-color: color-primary-hover,
   footer-height: 4.725rem,
   footer-padding: 1.25rem,
-  footer-divider-color: border-primary-color-3,
-  footer-divider-style: solid,
-  footer-divider-width: 0.0625rem,
+  footer-divider-color: divider-color,
+  footer-divider-style: divider-style,
+  footer-divider-width: divider-width,
   footer-shadow: shadow,
 
   layout-background-color: background-primary-color-2,
@@ -419,9 +425,9 @@ $theme: (
   menu-item-icon-margin: 0 0.25rem 0 0,
   menu-item-icon-width: 1.5rem,
 
-  menu-item-divider-color: border-primary-color-3,
-  menu-item-divider-style: solid,
-  menu-item-divider-width: 0.0625rem,
+  menu-item-divider-color: divider-color,
+  menu-item-divider-style: divider-style,
+  menu-item-divider-width: divider-width,
 
   menu-submenu-background-color: menu-background-color,
   menu-submenu-text-color: text-color,
@@ -476,8 +482,9 @@ $theme: (
   tabset-tab-disabled-text-color: text-disabled-color,
   tabset-tab-disabled-underline-color: transparent,
 
-  tabset-divider-color: border-primary-color-3,
-  tabset-divider-width: 1px,
+  tabset-divider-color: divider-color,
+  tabset-divider-style: divider-style,
+  tabset-divider-width: divider-width,
 
   tabset-content-background-color: transparent,
   tabset-content-padding: 1rem 2rem,
@@ -523,8 +530,9 @@ $theme: (
   route-tabset-tab-disabled-text-color: text-disabled-color,
   route-tabset-tab-disabled-underline-color: transparent,
 
-  route-tabset-divider-color: border-primary-color-3,
-  route-tabset-divider-width: 1px,
+  route-tabset-divider-color: divider-color,
+  route-tabset-divider-style: divider-style,
+  route-tabset-divider-width: divider-width,
 
   route-tabset-scrollbar-color: scrollbar-color,
   route-tabset-scrollbar-background-color: scrollbar-background-color,
@@ -616,9 +624,9 @@ $theme: (
   context-menu-shadow: shadow,
 
   actions-background-color: transparent,
-  actions-divider-color: border-primary-color-3,
-  actions-divider-style: solid,
-  actions-divider-width: 0.0625rem,
+  actions-divider-color: divider-color,
+  actions-divider-style: divider-style,
+  actions-divider-width: divider-width,
   actions-icon-color: text-hint-color,
   actions-text-color: text-color,
   actions-text-font-family: text-button-font-family,
@@ -650,9 +658,9 @@ $theme: (
   actions-giant-text-font-size: text-button-giant-font-size,
 
   search-background-color: background-primary-color-1,
-  search-divider-color: border-primary-color-3,
-  search-divider-style: solid,
-  search-divider-width: 0.25rem,
+  search-divider-color: divider-color,
+  search-divider-style: divider-style,
+  search-divider-width: divider-width,
   search-extra-background-color: color-primary-500,
   search-text-color: text-color,
   search-text-font-family: text-heading-1-font-family,
@@ -983,8 +991,7 @@ $theme: (
   button-hero-primary-hover-right-background-color: color-primary-400,
   button-hero-primary-active-left-background-color: color-primary-500,
   button-hero-primary-active-right-background-color: color-primary-600,
-  button-hero-primary-disabled-left-background-color: color-primary-100,
-  button-hero-primary-disabled-right-background-color: color-primary-200,
+  button-hero-primary-disabled-background-color: color-primary-disabled,
   button-hero-primary-disabled-text-color: text-primary-disabled-color,
 
   button-hero-success-text-color: text-alternate-color,
@@ -998,8 +1005,7 @@ $theme: (
   button-hero-success-hover-right-background-color: color-success-400,
   button-hero-success-active-left-background-color: color-success-500,
   button-hero-success-active-right-background-color: color-success-600,
-  button-hero-success-disabled-left-background-color: color-success-100,
-  button-hero-success-disabled-right-background-color: color-success-200,
+  button-hero-success-disabled-background-color: color-success-disabled,
   button-hero-success-disabled-text-color: text-success-disabled-color,
 
   button-hero-info-text-color: text-alternate-color,
@@ -1013,8 +1019,7 @@ $theme: (
   button-hero-info-hover-right-background-color: color-info-400,
   button-hero-info-active-left-background-color: color-info-500,
   button-hero-info-active-right-background-color: color-info-600,
-  button-hero-info-disabled-left-background-color: color-info-100,
-  button-hero-info-disabled-right-background-color: color-info-200,
+  button-hero-info-disabled-background-color: color-info-disabled,
   button-hero-info-disabled-text-color: text-info-disabled-color,
 
   button-hero-warning-text-color: text-alternate-color,
@@ -1028,8 +1033,7 @@ $theme: (
   button-hero-warning-hover-right-background-color: color-warning-400,
   button-hero-warning-active-left-background-color: color-warning-500,
   button-hero-warning-active-right-background-color: color-warning-600,
-  button-hero-warning-disabled-left-background-color: color-warning-100,
-  button-hero-warning-disabled-right-background-color: color-warning-200,
+  button-hero-warning-disabled-background-color: color-warning-disabled,
   button-hero-warning-disabled-text-color: text-warning-disabled-color,
 
   button-hero-danger-text-color: text-alternate-color,
@@ -1043,8 +1047,7 @@ $theme: (
   button-hero-danger-hover-right-background-color: color-danger-400,
   button-hero-danger-active-left-background-color: color-danger-500,
   button-hero-danger-active-right-background-color: color-danger-600,
-  button-hero-danger-disabled-left-background-color: color-danger-100,
-  button-hero-danger-disabled-right-background-color: color-danger-200,
+  button-hero-danger-disabled-background-color: color-danger-disabled,
   button-hero-danger-disabled-text-color: text-danger-disabled-color,
 
   input-background-color: background-primary-color-2,
@@ -1377,9 +1380,9 @@ $theme: (
   chat-danger-background-color: color-danger-500,
   chat-danger-text-color: text-alternate-color,
 
-  chat-divider-color: border-primary-color-3,
-  chat-divider-style: solid,
-  chat-divider-width: 0.0625rem,
+  chat-divider-color: divider-color,
+  chat-divider-style: divider-style,
+  chat-divider-width: divider-width,
 
   chat-message-background: linear-gradient(to right, #4ca6ff, #59bfff),
   chat-message-text-color: text-alternate-color,
@@ -1462,7 +1465,9 @@ $theme: (
   accordion-item-text-font-weight: text-paragraph-font-size,
   accordion-item-text-line-height: text-paragraph-line-height,
 
-  list-item-border-color: border-primary-color-3,
+  list-item-divider-color: divider-color,
+  list-item-divider-style: divider-style,
+  list-item-divider-width: divider-width,
   list-item-padding: 1rem,
 
   calendar-width: 21.875rem,
@@ -1763,8 +1768,7 @@ $theme: (
   select-hero-focus-right-background-color: color-basic-800,
   select-hero-hover-left-background-color: color-basic-300,
   select-hero-hover-right-background-color: color-basic-400,
-  select-hero-disabled-left-background-color: background-primary-color-3,
-  select-hero-disabled-right-background-color: background-primary-color-3,
+  select-hero-disabled-background-color: background-primary-color-3,
   select-hero-disabled-text-color: text-disabled-color,
 
   select-hero-tiny-padding: 0.375rem 0.625rem,
@@ -1782,8 +1786,7 @@ $theme: (
   select-hero-primary-focus-right-background-color: color-primary-800,
   select-hero-primary-hover-left-background-color: color-primary-300,
   select-hero-primary-hover-right-background-color: color-primary-400,
-  select-hero-primary-disabled-left-background-color: color-primary-100,
-  select-hero-primary-disabled-right-background-color: color-primary-200,
+  select-hero-primary-disabled-background-color: color-primary-disabled,
   select-hero-primary-disabled-text-color: text-primary-disabled-color,
 
   select-hero-success-left-background-color: color-success-400,
@@ -1795,8 +1798,7 @@ $theme: (
   select-hero-success-focus-right-background-color: color-success-800,
   select-hero-success-hover-left-background-color: color-success-300,
   select-hero-success-hover-right-background-color: color-success-400,
-  select-hero-success-disabled-left-background-color: color-success-100,
-  select-hero-success-disabled-right-background-color: color-success-200,
+  select-hero-success-disabled-background-color: color-success-disabled,
   select-hero-success-disabled-text-color: text-success-disabled-color,
 
   select-hero-info-left-background-color: color-info-400,
@@ -1808,8 +1810,7 @@ $theme: (
   select-hero-info-focus-right-background-color: color-info-800,
   select-hero-info-hover-left-background-color: color-info-300,
   select-hero-info-hover-right-background-color: color-info-400,
-  select-hero-info-disabled-left-background-color: color-info-100,
-  select-hero-info-disabled-right-background-color: color-info-200,
+  select-hero-info-disabled-background-color: color-info-disabled,
   select-hero-info-disabled-text-color: text-info-disabled-color,
 
   select-hero-warning-left-background-color: color-warning-400,
@@ -1821,8 +1822,7 @@ $theme: (
   select-hero-warning-focus-right-background-color: color-warning-800,
   select-hero-warning-hover-left-background-color: color-warning-300,
   select-hero-warning-hover-right-background-color: color-warning-400,
-  select-hero-warning-disabled-left-background-color: color-warning-100,
-  select-hero-warning-disabled-right-background-color: color-warning-200,
+  select-hero-warning-disabled-background-color: color-warning-disabled,
   select-hero-warning-disabled-text-color: text-warning-disabled-color,
 
   select-hero-danger-left-background-color: color-danger-400,
@@ -1834,8 +1834,7 @@ $theme: (
   select-hero-danger-focus-right-background-color: color-danger-800,
   select-hero-danger-hover-left-background-color: color-danger-300,
   select-hero-danger-hover-right-background-color: color-danger-400,
-  select-hero-danger-disabled-left-background-color: color-danger-100,
-  select-hero-danger-disabled-right-background-color: color-danger-200,
+  select-hero-danger-disabled-background-color: color-danger-disabled,
   select-hero-danger-disabled-text-color: text-danger-disabled-color,
 
   select-option-hero-tiny-padding: select-hero-tiny-padding,
