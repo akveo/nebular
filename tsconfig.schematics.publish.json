@@ -29,6 +29,7 @@
     "./src/framework/**/schematics/**/*"
   ],
   "exclude": [
-    "./src/framework/**/schematics/**/files/**/*"
+    "./src/framework/**/schematics/**/files/**/*",
+    "./src/framework/**/schematics/**/*.spec.ts"
   ]
 }

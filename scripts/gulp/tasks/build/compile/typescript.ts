@@ -12,6 +12,10 @@ task('compile-packages-schematics', () => {
   return tsCompile('tsc', ['-p', 'tsconfig.schematics.publish.json']);
 });
 
+task('compile-packages-schematics-for-test', () => {
+  return tsCompile('tsc', ['-p', 'tsconfig.schematics.json']);
+});
+
 task('compile-development-schematics', () => {
   return tsCompile('tsc', ['-p', `${DEV_SCHEMATICS_PATH}/tsconfig.json`]);
 });

@@ -16,12 +16,18 @@ task('copy-packages-resources', () => {
 
 task('copy-packages-schematics-resources', () => {
   const paths = JS_PACKAGES.reduce((allPaths: string[], packageName: string) => {
-    const packagePaths = schematicFilePaths(`${SOURCE_DIR}/${packageName}/schematics`);
-
-    return allPaths.concat(packagePaths);
+    return allPaths.concat(schematicFilePaths(`${SOURCE_DIR}/${packageName}/schematics`));
   }, []);
 
   return src(paths, { base: SOURCE_DIR }).pipe(dest(LIB_DIR));
+});
+
+task('copy-packages-schematics-resources-for-test', ['copy-packages-schematics-resources'], () => {
+  return src(
+    JS_PACKAGES.map(packageName => `${SOURCE_DIR}/${packageName}/package.json`),
+    { base: SOURCE_DIR },
+  )
+    .pipe(dest(LIB_DIR));
 });
 
 task('copy-development-schematics-resources', () => {

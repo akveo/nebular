@@ -38,6 +38,14 @@ task('build-packages-schematics', (done) => {
   );
 });
 
+task('build-packages-schematics-for-test', (done) => {
+  runSequence(
+    'compile-packages-schematics-for-test',
+    'copy-packages-schematics-resources-for-test',
+    done,
+  );
+});
+
 task('build-development-schematics', (done) => {
   runSequence(
     'compile-development-schematics',
