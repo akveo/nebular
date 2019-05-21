@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
-// import 'style-loader!./styles.scss';
+import 'style-loader!./styles.scss';
 
 @Component({
   selector: 'nb-bootstrap-test',
