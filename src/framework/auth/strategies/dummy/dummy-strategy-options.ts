@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { NbAuthStrategyOptions } from '../auth-strategy-options';
-import { NbAuthSimpleToken } from '../../services/';
+import { NbAuthSimpleToken } from '../../services/token/token';
 
 export class NbDummyAuthStrategyOptions extends NbAuthStrategyOptions {
   token? = {
