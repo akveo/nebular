@@ -2,7 +2,7 @@ import * as path from 'path';
 import { dest, src, task } from 'gulp';
 import * as sass from 'gulp-sass';
 
-import { BUILD_DIR } from '../config';
+import { BUILD_DIR } from '../../config';
 
 task('compile-scss', () => {
   return src(`${BUILD_DIR}/**/*.scss`)

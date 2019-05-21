@@ -1,16 +1,9 @@
-import { task } from 'gulp';
-
-import './tasks/inline-resources/inline-resources';
-import './tasks/docs/docs';
-import './tasks/copy-sources';
+import './tasks/build/build';
+import './tasks/build/resources';
+import './tasks/build/compile/scss';
+import './tasks/build/compile/typescript';
+import './tasks/build/bundle/bundle';
+import './tasks/build/bundle/bundles-paths';
 import './tasks/bump-versions';
-import './tasks/build';
-import './tasks/resources';
-import './tasks/compile/typescript';
-import './tasks/compile/scss';
-import './tasks/bundle/bundle';
-import './tasks/packages-path';
-
 import './tasks/change-prefix';
-
-task('default', ['copy-sources']);
+import './tasks/docs/docs';

@@ -1,10 +1,21 @@
+import { basename, dirname } from 'path';
 import * as through from 'through2';
 import { dest, src, task } from 'gulp';
 
-import { JS_PACKAGES, LIB_DIR } from './config';
+import { JS_PACKAGES, LIB_DIR } from '../../config';
 
-function setPackagePathStream(packageName) {
+task('set-bundles-paths', () => {
+  return src(
+    JS_PACKAGES.map(packageName => `${LIB_DIR}/${packageName}/package.json`),
+    { base: LIB_DIR },
+  )
+    .pipe(setBundlesPathStream())
+    .pipe(dest(LIB_DIR));
+});
+
+function setBundlesPathStream() {
   return through.obj(function (file, encoding, callback) {
+    const packageName = basename(dirname(file.path));
     const packageJson = JSON.parse(file.contents.toString(encoding));
 
     packageJson['main'] = `bundles/${packageName}.umd.js`;
@@ -21,15 +32,3 @@ function setPackagePathStream(packageName) {
     callback(null, file);
   });
 }
-
-function setBundlePaths() {
-  JS_PACKAGES.forEach(packageName => {
-    const packagePath = `${LIB_DIR}/${packageName}`;
-
-    src(`${packagePath}/package.json`)
-      .pipe(setPackagePathStream(packageName))
-      .pipe(dest(packagePath));
-  });
-}
-
-task('set-bundles-paths', setBundlePaths);

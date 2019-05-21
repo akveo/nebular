@@ -3,7 +3,7 @@ import * as rollup from 'gulp-rollup';
 import * as rename from 'gulp-rename';
 import * as replace from 'gulp-replace';
 
-import { JS_PACKAGES, LIB_DIR } from '../config';
+import { JS_PACKAGES, LIB_DIR } from '../../config';
 import { ROLLUP_COMMON_CONFIG } from './rollup-config';
 
 task('bundle', [
@@ -65,7 +65,7 @@ function bundle(config: any) {
 }
 
 function bundleRenameDev() {
-  src([
+  return src([
     `${LIB_DIR}/**/*.*`,
   ], { base: './' })
     .pipe(replace('@nebular', '@nebular-dev'))
