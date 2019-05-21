@@ -17,7 +17,6 @@
     "types": [],
     "paths": {
       "@nebular/theme": ["../src/framework/theme/public_api.ts"],
-      "@nebular/theme/*": ["../src/framework/theme/*"],
       "@nebular/auth": ["../src/framework/auth/public_api.ts"],
       "@nebular/security": ["../src/framework/security/public_api.ts"],
       "@nebular/eva-icons": ["../src/framework/eva-icons/public_api.ts"]

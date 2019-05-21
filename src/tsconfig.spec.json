@@ -15,6 +15,9 @@
       ],
       "@nebular/theme/*": [
         "./framework/theme/*"
+      ],
+      "@nebular/auth/*": [
+        "./framework/auth/*"
       ]
     }
   },

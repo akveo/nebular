@@ -8,9 +8,6 @@
     "paths": {
       "@nebular/*": [
         "./framework/*/public_api.ts"
-      ],
-      "@nebular/theme/*": [
-        "./framework/theme/*"
       ]
     }
   },
