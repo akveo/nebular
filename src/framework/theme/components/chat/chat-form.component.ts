@@ -79,7 +79,8 @@ import { NbComponentStatus } from '../component-status';
               [class.with-icon]="!buttonTitle"
               (click)="sendMessage()"
               class="send-button">
-        {{ buttonTitle }}<nb-icon *ngIf="!buttonTitle" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="!buttonTitle; else title" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
+        <ng-template #title>{{ buttonTitle }}</ng-template>
       </button>
     </div>
   `,

@@ -1,8 +1,6 @@
 @mixin select-hero {
   nb-select.appearance-hero .select-button {
-    $left-color: nb-theme(select-hero-left-background-color);
-    $right-color: nb-theme(select-hero-right-background-color);
-    background-image: linear-gradient(to right, $left-color, $right-color);
+    background-color: nb-theme(select-hero-background-color);
     border-color: nb-theme(select-hero-border-color);
     border-style: nb-theme(select-hero-border-style);
     border-width: nb-theme(select-hero-border-width);
@@ -13,14 +11,10 @@
     }
 
     &:focus {
-      $left-color: nb-theme(select-hero-focus-left-background-color);
-      $right-color: nb-theme(select-hero-focus-right-background-color);
-      background-image: linear-gradient(to right, $left-color, $right-color);
+      border-color: nb-theme(select-hero-focus-border-color);
     }
     &:hover {
-      $left-color: nb-theme(select-hero-hover-left-background-color);
-      $right-color: nb-theme(select-hero-hover-right-background-color);
-      background-image: linear-gradient(to right, $left-color, $right-color);
+      border-color: nb-theme(select-hero-hover-border-color);
     }
     &[disabled] {
       color: nb-theme(select-hero-disabled-text-color);

@@ -9,33 +9,37 @@
 @import 'default';
 
 $theme: (
+  background-default-color-1: color-basic-800,
+  background-default-color-2: color-basic-900,
+  background-default-color-3: color-basic-1000,
+  background-default-color-4: color-basic-1100,
 
-  color-primary-disabled: color-primary-700,
-  color-success-disabled: color-success-700,
-  color-info-disabled: color-info-700,
-  color-warning-disabled: color-warning-700,
-  color-danger-disabled: color-danger-700,
-  color-basic-disabled: color-basic-700,
+  border-default-color-1: color-basic-800,
+  border-default-color-2: color-basic-900,
+  border-default-color-3: color-basic-1000,
+  border-default-color-4: color-basic-1100,
+  border-default-color-5: color-basic-1100,
 
-  background-primary-color-1: color-basic-800,
-  background-primary-color-2: color-basic-900,
-  background-primary-color-3: color-basic-1000,
-  background-primary-color-4: color-basic-1100,
+  background-alternative-color-1: color-basic-100,
+  background-alternative-color-2: color-basic-200,
+  background-alternative-color-3: color-basic-300,
+  background-alternative-color-4: color-basic-400,
 
-  border-primary-color-1: color-basic-800,
-  border-primary-color-2: color-basic-900,
-  border-primary-color-3: color-basic-1000,
-  border-primary-color-4: color-basic-1100,
-  border-primary-color-5: color-basic-1100,
+  border-alternative-color-1: color-basic-100,
+  border-alternative-color-2: color-basic-200,
+  border-alternative-color-3: color-basic-300,
+  border-alternative-color-4: color-basic-400,
+  border-alternative-color-5: color-basic-500,
 
   text-color: color-basic-100,
-  text-alternate-color: color-basic-100,
+  text-alternate-color: color-basic-900,
+  text-control-color: color-basic-100,
   text-disabled-color: color-basic-700,
   text-hint-color: color-basic-500,
 
-  shadow: 0 0.5rem 1rem 0 rgba(23, 27, 71, 0.24),
-  outline-color: color-basic-600,
-  divider-color: border-primary-color-2,
+  shadow: 0 0.5rem 1rem 0 #1a1f33,
+  outline-color: color-basic-700,
+  divider-color: border-default-color-2,
 );
 
 // register the theme

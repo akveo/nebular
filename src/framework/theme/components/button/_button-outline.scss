@@ -6,7 +6,7 @@
 
 @mixin button-outline() {
   [nbButton].appearance-outline {
-    background-color: transparent;
+    background-color: nb-theme(button-outline-background-color);
     border-style: nb-theme(button-outline-border-style);
     border-width: nb-theme(button-outline-border-width);
     text-transform: nb-theme(button-outline-text-transform);
