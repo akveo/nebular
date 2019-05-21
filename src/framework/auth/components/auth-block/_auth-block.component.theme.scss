@@ -7,28 +7,15 @@
 @mixin nb-auth-block-theme() {
   nb-auth-block {
     .text-link {
-      color: nb-theme(color-fg);
-      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(text-hint-color);
     }
 
     .error-message {
-      color: nb-theme(color-danger);
-    }
-
-    .accept-group {
-      a {
-        color: nb-theme(accept-group-link-color);
-      }
+      color: nb-theme(color-danger-500);
     }
 
     .socials a {
-      &::before {
-        color: nb-theme(socials-color);
-      }
-
-      &:hover::before {
-        color: nb-theme(socials-hover-color);
-      }
+      color: nb-theme(text-hint-color);
     }
   }
 }

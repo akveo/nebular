@@ -64,11 +64,11 @@
         @include keyframes(button-hero-#{$status}-pulse) {
           0% {
             box-shadow: none;
-            opacity: nb-theme(0.3);
+            opacity: 0.3;
           }
 
           100% {
-            box-shadow: 0 0 1rem 0 nb-theme($left-color);
+            box-shadow: 0 0 1rem 0 $left-color;
             opacity: 0.8;
           }
         }

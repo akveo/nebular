@@ -4,9 +4,9 @@
 
   $inherited-fg: nb-theme(color-fg);
   $search-fg: nb-theme(color-fg);
-  $search-bg: nb-theme(color-white);
   $search-border: 1px solid nb-theme(color-gray-light);
   $selected-row-bg: nb-theme(color-gray-light);
+  $search-bg: white;
 
   .inheritance-icon {
     font-size: 1rem;

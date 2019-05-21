@@ -22,7 +22,7 @@ const EXAMPLES_DEST = './docs/assets/examples';
 
 task('copy-examples', () => {
   del.sync(EXAMPLES_DEST);
-  src(EXAMPLES_SRC)
+  return src(EXAMPLES_SRC)
     .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
     .pipe(dest(EXAMPLES_DEST));
 });
@@ -36,7 +36,7 @@ task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
 });
 
-task('validate-examples', ['parse-themes'], () => {
+task('validate-examples', ['parse-themes', 'copy-examples'], () => {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
   docs.classes.forEach(cls => validate(cls));
 });
