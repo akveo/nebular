@@ -1216,59 +1216,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
-    path: 'auth',
-    children: [
-      {
-        path: 'login',
-        link: '/auth/login',
-        component: 'NbLoginComponent',
-        name: 'Nb Login',
-      },
-      {
-        path: 'register',
-        link: '/auth/register',
-        component: 'NbRegisterComponent',
-        name: 'Nb Register',
-      },
-      {
-        path: 'logout',
-        link: '/auth/logout',
-        component: 'NbLogoutComponent',
-        name: 'Nb Logout',
-      },
-      {
-        path: 'request-password',
-        link: '/auth/request-password',
-        component: 'NbRequestPasswordComponent',
-        name: 'Nb Request Password',
-      },
-      {
-        path: 'reset-password',
-        link: '/auth/reset-password',
-        component: 'NbResetPasswordComponent',
-        name: 'Nb Reset Password',
-      },
-      {
-        path: 'acl/acl-test.component',
-        link: '/auth/acl/acl-test.component',
-        component: 'AclTestComponent',
-        name: 'Acl Test',
-      },
-      {
-        path: 'auth-guard.service',
-        link: '/auth/auth-guard.service',
-        component: 'AuthPlaygroundComponent',
-        name: 'Auth Playground',
-      },
-      {
-        path: 'api-calls.component',
-        link: '/auth/api-calls.component',
-        component: 'PlaygroundApiCallsComponent',
-        name: 'Playground Api Calls',
-      },
-    ],
-  },
-  {
     path: 'oauth2',
     children: [
       {
@@ -1281,22 +1228,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
   },
   {
     path: 'oauth2-password',
-  },
-  {
-    path: 'smart-home',
-    children: [
-      {
-        path: 'auth',
-        children: [
-          {
-            path: 'login',
-            link: '/smart-home/auth/login',
-            component: 'LoginComponent',
-            name: 'Login',
-          },
-        ],
-      },
-    ],
   },
   {
     path: 'tree-grid',
@@ -1681,6 +1612,75 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/azure/callback',
         component: 'AzureCallbackComponent',
         name: 'Azure Callback',
+      },
+    ],
+  },
+  {
+    path: 'auth',
+    children: [
+      {
+        path: 'login',
+        link: '/auth/login',
+        component: 'NbLoginComponent',
+        name: 'Nb Login',
+      },
+      {
+        path: 'register',
+        link: '/auth/register',
+        component: 'NbRegisterComponent',
+        name: 'Nb Register',
+      },
+      {
+        path: 'logout',
+        link: '/auth/logout',
+        component: 'NbLogoutComponent',
+        name: 'Nb Logout',
+      },
+      {
+        path: 'request-password',
+        link: '/auth/request-password',
+        component: 'NbRequestPasswordComponent',
+        name: 'Nb Request Password',
+      },
+      {
+        path: 'reset-password',
+        link: '/auth/reset-password',
+        component: 'NbResetPasswordComponent',
+        name: 'Nb Reset Password',
+      },
+      {
+        path: 'acl/acl-test.component',
+        link: '/auth/acl/acl-test.component',
+        component: 'AclTestComponent',
+        name: 'Acl Test',
+      },
+      {
+        path: 'auth-guard.service',
+        link: '/auth/auth-guard.service',
+        component: 'AuthPlaygroundComponent',
+        name: 'Auth Playground',
+      },
+      {
+        path: 'api-calls.component',
+        link: '/auth/api-calls.component',
+        component: 'PlaygroundApiCallsComponent',
+        name: 'Playground Api Calls',
+      },
+    ],
+  },
+  {
+    path: 'smart-home',
+    children: [
+      {
+        path: 'auth',
+        children: [
+          {
+            path: 'login',
+            link: '/smart-home/auth/login',
+            component: 'LoginComponent',
+            name: 'Login',
+          },
+        ],
       },
     ],
   },
