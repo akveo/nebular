@@ -17,7 +17,7 @@
     box-shadow: nb-theme(tabset-shadow);
 
     .tabset {
-      border-bottom: nb-theme(tabset-divider-width) solid nb-theme(tabset-divider-color);
+      border-bottom: nb-theme(tabset-divider-width) nb-theme(tabset-divider-style) nb-theme(tabset-divider-color);
     }
 
     .tab-link {

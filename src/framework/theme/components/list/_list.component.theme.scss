@@ -1,10 +1,17 @@
 @mixin nb-list-theme() {
   nb-list-item {
-    border-bottom: 1px solid nb-theme(list-item-border-color);
+    border-bottom:
+      nb-theme(list-item-divider-width)
+      nb-theme(list-item-divider-style)
+      nb-theme(list-item-divider-color);
+
     padding: nb-theme(list-item-padding);
 
     &:first-child {
-      border-top: 1px solid nb-theme(list-item-border-color);
+      border-top:
+        nb-theme(list-item-divider-width)
+        nb-theme(list-item-divider-style)
+        nb-theme(list-item-divider-color);
     }
   }
 }

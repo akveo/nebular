@@ -6,7 +6,7 @@
 
 @import '../core/functions';
 @import '../core/mixins';
-@import 'default';
+@import 'dark';
 
 $theme: (
 
@@ -20,46 +20,6 @@ $theme: (
   color-primary-800: #240f7a,
   color-primary-900: #180957,
 
-  color-success-100: #edfff3,
-  color-success-200: #b3ffd6,
-  color-success-300: #8cfac7,
-  color-success-400: #51f0b0,
-  color-success-500: #00e096,
-  color-success-600: #00b383,
-  color-success-700: #008f72,
-  color-success-800: #007566,
-  color-success-900: #00524c,
-
-  color-info-100: #f2f8ff,
-  color-info-200: #c7e2ff,
-  color-info-300: #94cbff,
-  color-info-400: #42aaff,
-  color-info-500: #0095ff,
-  color-info-600: #006fd6,
-  color-info-700: #0057c2,
-  color-info-800: #0041a8,
-  color-info-900: #002885,
-
-  color-warning-100: #fffdf2,
-  color-warning-200: #fff1c2,
-  color-warning-300: #ffe59e,
-  color-warning-400: #ffc94d,
-  color-warning-500: #ffaa00,
-  color-warning-600: #db8b00,
-  color-warning-700: #b86e00,
-  color-warning-800: #945400,
-  color-warning-900: #703c00,
-
-  color-danger-100: #fff2f2,
-  color-danger-200: #ffd6d9,
-  color-danger-300: #ffa8b4,
-  color-danger-400: #ff708d,
-  color-danger-500: #ff3d71,
-  color-danger-600: #db2c66,
-  color-danger-700: #b81d5b,
-  color-danger-800: #94124e,
-  color-danger-900: #700940,
-
   color-basic-100: #e8e9fa,
   color-basic-200: #e8e9fa,
   color-basic-300: #d3d4f0,
@@ -70,15 +30,7 @@ $theme: (
   color-basic-800: #171b47,
   color-basic-900: #171b47,
   color-basic-1000: #1d2057,
-
-  color-alternate: color-basic-100,
-
-  color-primary-disabled: color-primary-700,
-  color-success-disabled: color-success-700,
-  color-info-disabled: color-info-700,
-  color-warning-disabled: color-warning-700,
-  color-danger-disabled: color-danger-700,
-  color-basic-disabled: color-basic-700,
+  color-basic-1100: #171a3b,
 
   background-primary-color-1: color-basic-500,
   background-primary-color-2: color-basic-600,
@@ -96,9 +48,7 @@ $theme: (
   text-disabled-color: color-basic-400,
   text-hint-color: color-basic-300,
 
-  shadow: 0 0.5rem 1rem 0 rgba(23, 27, 71, 0.24),
-
   outline-color: color-basic-600,
 );
 
-$nb-themes: nb-register-theme($theme, cosmic, default);
+$nb-themes: nb-register-theme($theme, cosmic, dark);

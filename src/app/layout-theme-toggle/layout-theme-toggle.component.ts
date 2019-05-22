@@ -6,8 +6,9 @@ import { NbThemeService } from '@nebular/theme';
   styleUrls: ['./layout-theme-toggle.component.scss'],
   template: `
     <label dir="ltr">
-      <button (click)="enable('cosmic')">Cosmic</button>
       <button (click)="enable('default')">Default</button>
+      <button (click)="enable('dark')">Dark</button>
+      <button (click)="enable('cosmic')">Cosmic</button>
       <button (click)="enable('corporate')">Corporate</button>
     </label>
   `,

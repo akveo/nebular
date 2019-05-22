@@ -1,6 +1,6 @@
 # Change Current Theme
 
-Nebular Theme System provides 3 color schemes out of the box - `default`, `corporate` and `cosmic`. It is both possible to change the theme statically and dynamically during the runtime.
+Nebular Theme System provides 4 color schemes out of the box - `default`, `dark`, `corporate` and `cosmic`. It is both possible to change the theme statically and dynamically during the runtime.
 
 
 ## Switch from Cosmic to Default

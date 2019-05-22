@@ -15,6 +15,7 @@
       &::placeholder {
         font-size: nb-theme(input-#{$size}-placeholder-text-font-size);
         font-weight: nb-theme(input-#{$size}-placeholder-text-font-weight);
+        // TODO: this seems to be unused
         line-height: nb-theme(input-#{$size}-placeholder-text-line-height);
       }
     }

@@ -6,7 +6,6 @@
 
 import { Component, Input, HostBinding } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 
@@ -21,8 +20,6 @@ import { NbComponentStatus } from '../component-status';
  * card-header-text-font-size:
  * card-header-text-font-weight:
  * card-header-text-line-height:
- * card-header-disabled-background-color:
- * card-header-disabled-text-color:
  * card-header-primary-background-color:
  * card-header-primary-text-color:
  * card-header-info-background-color:
@@ -190,16 +187,6 @@ export class NbCardComponent {
     this._accent = value;
   }
   _accent: '' | NbComponentStatus;
-
-  @Input()
-  @HostBinding('attr.disabled')
-  get disabled(): string | null {
-    return this._disabled;
-  }
-  set disabled(value: string | null) {
-    this._disabled = convertToBoolProperty(value) ? '' : null;
-  }
-  _disabled: string | null = null;
 
   @HostBinding('class.size-tiny')
   get tiny() {
