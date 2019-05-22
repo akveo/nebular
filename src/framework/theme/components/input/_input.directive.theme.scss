@@ -19,6 +19,8 @@
     font-family: nb-theme(input-text-font-family);
     -webkit-appearance: none; // removes inner shadow on iOS
 
+    @include nb-component-animation(border, background-color, color, box-shadow);
+
     &::placeholder {
       color: nb-theme(input-placeholder-text-color);
       font-family: nb-theme(input-placeholder-text-font-family);
@@ -28,6 +30,7 @@
     &:focus {
       outline: none;
       border-color: nb-theme(input-focus-border-color);
+      box-shadow: 0 0 0 nb-theme(input-outline-width) nb-theme(input-outline-color);
     }
 
     &:hover {
