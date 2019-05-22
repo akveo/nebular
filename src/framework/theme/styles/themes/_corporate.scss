@@ -9,33 +9,21 @@
 @import 'default';
 
 $theme: (
-  separator: #cdd5dc,
   radius: 0.17rem,
-
-  header-text-color: text-alternate-color,
-  header-background-color: #111218,
 
   button-hero-glow-size: 0 0 20px 0,
 
   card-border-width: 1px,
-  card-border-color: background-primary-color-4,
+  card-border-color: border-basic-color-4,
 
-  context-menu-border-color: background-primary-color-4,
-  context-menu-border-width: 0.0625rem,
-
-  modal-separator: #d5dbe0,
+  context-menu-border-width: 1px,
+  context-menu-border-color: border-basic-color-4,
 
   tabs-selected: color-primary-500,
   tabs-selected-second-color: color-primary-500,
-  tabset-divider-color: #ebecee,
 
-  smart-table-paging-bg-active: color-primary-500,
-
-  popover-border-color: separator,
-  popover-border-width: 0.0625rem,
-
-  footer-separator: #d5dbe0,
-  footer-text-highlight-color: #2a2a2a,
+  popover-border-width: 1px,
+  popover-border-color: border-basic-color-4,
 
   card-border-radius: radius,
   tabset-border-radius: radius,
