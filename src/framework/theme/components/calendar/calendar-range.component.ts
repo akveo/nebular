@@ -6,7 +6,8 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbDateService } from '../calendar-kit';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRangeDayCellComponent, NbCalendarRangeYearCellComponent } from './calendar-range-cells';
 
 

@@ -8,8 +8,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { NbCollectionViewer } from '../../cdk/collections';
-import { NbDataSource } from '../../cdk/table';
+import { NbCollectionViewer } from '../../cdk/collections/collection-viewer';
+import { NbDataSource } from '../../cdk/table/data-source';
 import { NbSortable, NbSortRequest } from '../tree-grid-sort.component';
 import { NbTreeGridDataService } from './tree-grid-data.service';
 import { NbTreeGridFilterService } from './tree-grid-filter.service';

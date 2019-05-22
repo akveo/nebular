@@ -8,7 +8,8 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbDateService, NbNativeDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
+import { NbNativeDateService } from '../../services/native-date.service';
 import { NbCalendarHeaderComponent } from '../calendar-header/calendar-header.component';
 import { NbThemeModule } from '../../../../theme.module';
 import { DatePipe } from '@angular/common';

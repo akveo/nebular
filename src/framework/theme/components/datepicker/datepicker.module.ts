@@ -8,7 +8,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { NB_DATE_ADAPTER, NbDatepickerDirective } from './datepicker.directive';
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbCalendarModule } from '../calendar/calendar.module';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';

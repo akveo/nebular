@@ -2,9 +2,6 @@
   "name": "@nebular/auth",
   "version": "4.0.0-rc.4",
   "description": "@nebular/auth",
-  "main": "./bundles/auth.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -33,5 +30,6 @@
     "@angular/forms": "^8.0.0-rc.2",
     "@nebular/theme": "4.0.0-rc.4",
     "rxjs": "^6.5.1"
-  }
+  },
+  "sideEffects": false
 }

@@ -2,7 +2,8 @@ import { Component, ElementRef, NgModule, ViewChild, TemplateRef } from '@angula
 import { TestBed } from '@angular/core/testing';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbThemeModule } from '../../theme.module';
-import { NbOverlayContainerAdapter, NbViewportRulerAdapter } from '../cdk';
+import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
+import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
 import { NbWindowModule } from './window.module';
 import { NbWindowService } from './window.service';
 import createSpy = jasmine.createSpy;

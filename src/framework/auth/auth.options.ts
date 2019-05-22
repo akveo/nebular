@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { NbAuthStrategy, NbAuthStrategyOptions } from './strategies';
+import { NbAuthStrategy } from './strategies/auth-strategy';
+import { NbAuthStrategyOptions } from './strategies/auth-strategy-options';
 import { NbAuthToken, NbAuthTokenClass } from './services/token/token';
 
 export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;

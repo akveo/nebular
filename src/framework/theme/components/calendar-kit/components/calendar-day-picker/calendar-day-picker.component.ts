@@ -16,7 +16,7 @@ import {
   Type,
 } from '@angular/core';
 
-import { NbCalendarMonthModelService } from '../../services';
+import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
 

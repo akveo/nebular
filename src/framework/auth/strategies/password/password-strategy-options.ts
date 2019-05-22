@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthSimpleToken, NbAuthTokenClass } from '../../services';
+import { NbAuthSimpleToken, NbAuthTokenClass } from '../../services/token/token';
 import { NbAuthStrategyOptions } from '../auth-strategy-options';
 import { getDeepFromObject } from '../../helpers';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
