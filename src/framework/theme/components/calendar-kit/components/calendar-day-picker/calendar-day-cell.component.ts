@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 
 import { NbCalendarCell } from '../../model';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 
 
 @Component({

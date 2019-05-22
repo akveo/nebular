@@ -6,7 +6,8 @@
 
 import { Component, ComponentRef, ViewChild } from '@angular/core';
 
-import { NbComponentPortal, NbOverlayContainerComponent, NbPositionedContainer } from '../cdk';
+import { NbComponentPortal } from '../cdk/overlay/mapping';
+import { NbOverlayContainerComponent, NbPositionedContainer } from '../cdk/overlay/overlay-container';
 
 
 @Component({

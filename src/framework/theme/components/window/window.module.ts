@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbOverlayModule } from '../cdk/overlay';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbCardModule } from '../card/card.module';
 import { NbIconModule } from '../icon/icon.module';
 import { NbButtonModule } from '../button/button.module';

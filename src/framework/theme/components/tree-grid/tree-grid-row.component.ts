@@ -1,14 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import {
-  NbCdkFooterRow,
-  NbCdkHeaderRow,
-  NbCdkRow,
-  NbFooterRowComponent,
-  NbHeaderRowComponent,
-  NbRowComponent,
-} from '../cdk/table';
+import { NbCdkFooterRow, NbCdkHeaderRow, NbCdkRow } from '../cdk/table/type-mappings';
+import { NbFooterRowComponent, NbHeaderRowComponent, NbRowComponent } from '../cdk/table/row';
 import { NbTreeGridComponent } from './tree-grid.component';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 

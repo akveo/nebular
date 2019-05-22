@@ -1,7 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { NbOverlayContainerAdapter, NbOverlayService, NbViewportRulerAdapter } from '../cdk';
+import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
+import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbDialogService } from './dialog.service';
 import { NbDialogModule } from './dialog.module';
 import { NbThemeModule } from '../../theme.module';

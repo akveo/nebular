@@ -2,9 +2,6 @@
   "name": "@nebular/date-fns",
   "version": "4.0.0-rc.4",
   "description": "@nebular/date-fns",
-  "main": "./bundles/theme.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -26,5 +23,6 @@
   "peerDependencies": {
     "@nebular/theme": "4.0.0-rc.4",
     "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
-  }
+  },
+  "sideEffects": false
 }

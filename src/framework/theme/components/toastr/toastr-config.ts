@@ -6,7 +6,7 @@
 
 import { InjectionToken } from '@angular/core';
 
-import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk';
+import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 import { NbComponentStatus } from '../component-status';
 
 type IconToClassMap = {

@@ -6,13 +6,9 @@ import {
   NbCdkHeaderCellDef,
   NbCdkHeaderRowDef,
   NbCdkRowDef,
-  NbCellDefDirective,
-  NbFooterCellDefDirective,
-  NbFooterRowDefDirective,
-  NbHeaderCellDefDirective,
-  NbHeaderRowDefDirective,
-  NbRowDefDirective,
-} from '../cdk/table';
+} from '../cdk/table/type-mappings';
+import { NbCellDefDirective, NbFooterCellDefDirective, NbHeaderCellDefDirective } from '../cdk/table/cell';
+import { NbFooterRowDefDirective, NbHeaderRowDefDirective, NbRowDefDirective } from '../cdk/table/row';
 import { NbColumnsService } from './tree-grid-columns.service';
 
 export interface NbTreeGridResponsiveRowDef {

@@ -4,30 +4,26 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2017",
-      "dom"
+      "dom",
+      "es2018"
     ],
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
-    "outDir": "./src/.lib",
     "rootDir": "./.ng_build",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es2015",
     "inlineSources": true,
     "stripInternal": true,
     "baseUrl": ".",
     "paths": {
-      "@nebular/theme": ["./.ng_build/theme"]
+      "@nebular/theme": ["./src/.lib/theme"]
     },
     "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ]
   },
-  "include": [
-    "./.ng_build/**/*"
-  ],
   "exclude": [
     "./.ng_build/**/*.e2e.ts",
     "./.ng_build/**/*.spec.ts",
@@ -37,6 +33,9 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
-    "genDir": "./.ng_compiled"
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "skipMetadataEmit": false,
+    "strictTypeChecks": true
   }
 }

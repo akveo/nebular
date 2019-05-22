@@ -10,14 +10,13 @@ import { filter } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
-  NbGlobalPositionStrategy,
   NbOverlayRef,
-  NbOverlayService,
   NbPortalInjector,
-  NbPositionBuilderService,
   NbScrollStrategy,
   NbTemplatePortal,
-} from '../cdk';
+} from '../cdk/overlay/mapping';
+import { NbGlobalPositionStrategy, NbPositionBuilderService } from '../cdk/overlay/overlay-position';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';

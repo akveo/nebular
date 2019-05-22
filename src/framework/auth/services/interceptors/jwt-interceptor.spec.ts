@@ -16,7 +16,7 @@ import { NbAuthJWTInterceptor, NbAuthService } from '@nebular/auth';
 import { NbTokenService } from '@nebular/auth/services/token/token.service';
 import { NbTokenLocalStorage, NbTokenStorage } from '@nebular/auth/services/token/token-storage';
 import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from '@nebular/auth/services/token/token-parceler';
-import { NbDummyAuthStrategy } from '@nebular/auth/strategies';
+import { NbDummyAuthStrategy } from '@nebular/auth';
 import { nbOptionsFactory, nbStrategiesFactory } from '@nebular/auth/auth.module';
 import { NbAuthJWTToken, NbAuthSimpleToken} from '@nebular/auth/services/token/token';
 

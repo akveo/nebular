@@ -11,12 +11,8 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
 
 import { NbAuthStrategy } from '../auth-strategy';
-import {
-  NbAuthIllegalTokenError,
-  NbAuthRefreshableToken,
-  NbAuthResult,
-  NbAuthToken,
-} from '../../services/';
+import { NbAuthIllegalTokenError, NbAuthRefreshableToken, NbAuthToken } from '../../services/token/token';
+import { NbAuthResult } from '../../services/auth-result';
 import {
   NbOAuth2AuthStrategyOptions,
   NbOAuth2ResponseType,

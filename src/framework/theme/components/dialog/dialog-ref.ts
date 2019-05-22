@@ -7,7 +7,7 @@
 import { ComponentRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { NbOverlayRef } from '../cdk';
+import { NbOverlayRef } from '../cdk/overlay/mapping';
 
 
 /**
