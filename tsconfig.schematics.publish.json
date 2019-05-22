@@ -18,7 +18,7 @@
     "noUnusedLocals": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
     "target": "es5",
     "typeRoots": [
@@ -29,6 +29,7 @@
     "./src/framework/**/schematics/**/*"
   ],
   "exclude": [
-    "./src/framework/**/schematics/**/files/**/*"
+    "./src/framework/**/schematics/**/files/**/*",
+    "./src/framework/**/schematics/**/*.spec.ts"
   ]
 }

@@ -16,16 +16,11 @@ import {
 } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
 
-import {
-  NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
-  NbDynamicOverlay,
-  NbDynamicOverlayController,
-  NbDynamicOverlayHandler,
-  NbOverlayRef,
-  NbPosition,
-  NbTrigger,
-} from '../cdk';
+import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
+import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
+import { NbOverlayRef } from '../cdk/overlay/mapping';
+import { NbAdjustableConnectedPositionStrategy, NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 

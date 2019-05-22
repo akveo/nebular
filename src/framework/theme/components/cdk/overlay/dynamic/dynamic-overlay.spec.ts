@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { ScrollStrategy } from '@angular/cdk/overlay';
 
 import { NbDynamicOverlay } from './dynamic-overlay';
-import { NbOverlayService } from '../overlay';
+import { NbOverlayService } from '../overlay-service';
 import { NbRenderableContainer } from '../overlay-container';
 import { NbComponentPortal, NbOverlayConfig } from '../mapping';
 

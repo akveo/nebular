@@ -10,7 +10,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { NbToastComponent } from './toast.component';
 import { NbToast } from './model';
 import { NbLayoutDirectionService } from '../../services/direction.service';
-import { NbGlobalPosition, NbPositionHelper } from '../cdk';
+import { NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
 import { takeWhile } from 'rxjs/operators';
 
 

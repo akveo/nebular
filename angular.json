@@ -26,8 +26,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "src/styles.scss"
+              "node_modules/nebular-icons/scss/nebular-icons.scss"
             ],
             "scripts": []
           },
@@ -77,8 +76,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "src/styles.scss"
+              "node_modules/nebular-icons/scss/nebular-icons.scss"
             ],
             "assets": [
               "src/assets",
@@ -147,8 +145,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "src/styles.scss"
+              "node_modules/nebular-icons/scss/nebular-icons.scss"
             ],
             "scripts": []
           },
@@ -198,8 +195,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "src/styles.scss"
+              "node_modules/nebular-icons/scss/nebular-icons.scss"
             ],
             "assets": [
               "src/assets",

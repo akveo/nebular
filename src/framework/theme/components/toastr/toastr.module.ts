@@ -6,7 +6,7 @@
 
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbSharedModule } from '../shared/shared.module';
 
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';

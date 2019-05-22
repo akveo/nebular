@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbTooltipDirective } from './tooltip.directive';
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
+
 
 
 @NgModule({

@@ -6,7 +6,8 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NbPosition, NbRenderableContainer } from '../cdk';
+import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
+import { NbPosition } from '../cdk/overlay/overlay-position';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 

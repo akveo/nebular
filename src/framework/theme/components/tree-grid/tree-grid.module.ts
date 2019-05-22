@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NbTableModule } from '../cdk/table';
+import { NbTableModule } from '../cdk/table/table.module';
 import { NbTreeGridComponent } from './tree-grid.component';
 import {
   NbTreeGridCellDefDirective,

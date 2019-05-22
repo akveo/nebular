@@ -13,7 +13,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 import { NbCalendarCell } from '../../model';
 
 

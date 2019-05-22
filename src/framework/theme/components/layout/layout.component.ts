@@ -6,7 +6,7 @@
 
 import {
   AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID, forwardRef,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -21,154 +21,6 @@ import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.s
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
-
-/**
- * A container component which determines a content position inside of the layout.
- * The layout could contain unlimited columns (not including the sidebars).
- *
- * By default the columns are ordered from the left to the right,
- * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
- * moving it to the very first position:
- *
- * @stacked-example(Column Left, layout/layout-column-left.component)
- */
-@Component({
-  selector: 'nb-layout-column',
-  template: `
-    <ng-content></ng-content>
-  `,
-})
-export class NbLayoutColumnComponent {
-
-  @HostBinding('class.left') leftValue: boolean;
-  @HostBinding('class.start') startValue: boolean;
-
-  /**
-   * Move the column to the very left position in the layout.
-   * @param {boolean} val
-   */
-  @Input()
-  set left(val: boolean) {
-    this.leftValue = convertToBoolProperty(val);
-    this.startValue = false;
-  }
-
-  /**
-   * Make columnt first in the layout.
-   * @param {boolean} val
-   */
-  @Input()
-  set start(val: boolean) {
-    this.startValue = convertToBoolProperty(val);
-    this.leftValue = false;
-  }
-}
-
-/**
- * Page header component.
- * Located on top of the page above the layout columns and sidebars.
- * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
- * sticky to the top of the nb-layout (to of the page). Here's an example:
- *
- * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
- *
- * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
- * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
- * ```html
- * <nb-layout-header subheader></nb-layout-header>
- * ```
- * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
- * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
- *
- * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
- *
- * @stacked-example(Subheader, layout/layout-subheader.component)
- *
- * @styles
- *
- * header-font-family
- * header-line-height
- * header-fg
- * header-bg
- * header-height
- * header-padding
- * header-shadow
- */
-@Component({
-  selector: 'nb-layout-header',
-  template: `
-    <nav [class.fixed]="fixedValue">
-      <ng-content></ng-content>
-    </nav>
-  `,
-})
-export class NbLayoutHeaderComponent {
-
-  @HostBinding('class.fixed') fixedValue: boolean;
-  @HostBinding('class.subheader') subheaderValue: boolean;
-
-  // tslint:disable-next-line
-  constructor(@Inject(forwardRef(() => NbLayoutComponent)) private layout: NbLayoutComponent) {
-  }
-
-  /**
-   * Makes the header sticky to the top of the nb-layout.
-   * @param {boolean} val
-   */
-  @Input()
-  set fixed(val: boolean) {
-    this.fixedValue = convertToBoolProperty(val);
-  }
-
-  /**
-   * Places header on a side of the sidebar, and not above.
-   * Disables fixed mode for this header and remove a shadow from the sidebar.
-   * @param {boolean} val
-   */
-  @Input()
-  set subheader(val: boolean) {
-    this.subheaderValue = convertToBoolProperty(val);
-    this.fixedValue = false;
-    this.layout.withSubheader = this.subheaderValue;
-  }
-}
-
-/**
- * Page footer.
- * Located under the nb-layout content (specifically, under the columns).
- * Could be made `fixed`, becoming sticky to the bottom of the view port (window).
- *
- * @styles
- *
- * footer-height
- * footer-padding
- * footer-fg
- * footer-bg
- * footer-separator
- * footer-shadow
- */
-@Component({
-  selector: 'nb-layout-footer',
-  template: `
-    <nav [class.fixed]="fixedValue">
-      <ng-content></ng-content>
-    </nav>
-  `,
-})
-export class NbLayoutFooterComponent {
-
-  @HostBinding('class.fixed') fixedValue: boolean;
-
-  /**
-   * Makes the footer sticky to the bottom of the window.
-   * @param {boolean} val
-   */
-  @Input()
-  set fixed(val: boolean) {
-    this.fixedValue = convertToBoolProperty(val);
-  }
-
-}
 
 /**
  * Layout container component.
@@ -586,4 +438,150 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       this.window.scrollTo(x, y);
     }
   }
+}
+
+/**
+ * A container component which determines a content position inside of the layout.
+ * The layout could contain unlimited columns (not including the sidebars).
+ *
+ * By default the columns are ordered from the left to the right,
+ * but it's also possible to overwrite this behavior by setting a `left` attribute to the column,
+ * moving it to the very first position:
+ *
+ * @stacked-example(Column Left, layout/layout-column-left.component)
+ */
+@Component({
+  selector: 'nb-layout-column',
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class NbLayoutColumnComponent {
+
+  @HostBinding('class.left') leftValue: boolean;
+  @HostBinding('class.start') startValue: boolean;
+
+  /**
+   * Move the column to the very left position in the layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set left(val: boolean) {
+    this.leftValue = convertToBoolProperty(val);
+    this.startValue = false;
+  }
+
+  /**
+   * Make columnt first in the layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set start(val: boolean) {
+    this.startValue = convertToBoolProperty(val);
+    this.leftValue = false;
+  }
+}
+
+/**
+ * Page header component.
+ * Located on top of the page above the layout columns and sidebars.
+ * Could be made `fixed` by setting the corresponding property. In the fixed mode the header becomes
+ * sticky to the top of the nb-layout (to of the page). Here's an example:
+ *
+ * @stacked-example(Fixed Header, layout/layout-fixed-header.component)
+ *
+ * In a pair with sidebar it is possible to setup a configuration when header is placed on a side of the sidebar
+ * and not on top of it. To achieve this simply put a `subheader` property to the header like this:
+ * ```html
+ * <nb-layout-header subheader></nb-layout-header>
+ * ```
+ * @stacked-example(Subheader, layout/layout-sidebar-subheader.component)
+ * Note that in such configuration sidebar shadow is removed and header cannot be make `fixed`.
+ *
+ * Same way you can put both `fixed` and `clipped` headers adding creating a sub-header for your app:
+ *
+ * @stacked-example(Subheader, layout/layout-subheader.component)
+ *
+ * @styles
+ *
+ * header-font-family
+ * header-line-height
+ * header-fg
+ * header-bg
+ * header-height
+ * header-padding
+ * header-shadow
+ */
+@Component({
+  selector: 'nb-layout-header',
+  template: `
+    <nav [class.fixed]="fixedValue">
+      <ng-content></ng-content>
+    </nav>
+  `,
+})
+export class NbLayoutHeaderComponent {
+
+  @HostBinding('class.fixed') fixedValue: boolean;
+  @HostBinding('class.subheader') subheaderValue: boolean;
+
+  constructor(private layout: NbLayoutComponent) {}
+
+  /**
+   * Makes the header sticky to the top of the nb-layout.
+   * @param {boolean} val
+   */
+  @Input()
+  set fixed(val: boolean) {
+    this.fixedValue = convertToBoolProperty(val);
+  }
+
+  /**
+   * Places header on a side of the sidebar, and not above.
+   * Disables fixed mode for this header and remove a shadow from the sidebar.
+   * @param {boolean} val
+   */
+  @Input()
+  set subheader(val: boolean) {
+    this.subheaderValue = convertToBoolProperty(val);
+    this.fixedValue = false;
+    this.layout.withSubheader = this.subheaderValue;
+  }
+}
+
+/**
+ * Page footer.
+ * Located under the nb-layout content (specifically, under the columns).
+ * Could be made `fixed`, becoming sticky to the bottom of the view port (window).
+ *
+ * @styles
+ *
+ * footer-height
+ * footer-padding
+ * footer-fg
+ * footer-bg
+ * footer-separator
+ * footer-shadow
+ */
+@Component({
+  selector: 'nb-layout-footer',
+  template: `
+    <nav [class.fixed]="fixedValue">
+      <ng-content></ng-content>
+    </nav>
+  `,
+})
+export class NbLayoutFooterComponent {
+
+  @HostBinding('class.fixed') fixedValue: boolean;
+
+  /**
+   * Makes the footer sticky to the bottom of the window.
+   * @param {boolean} val
+   */
+  @Input()
+  set fixed(val: boolean) {
+    this.fixedValue = convertToBoolProperty(val);
+  }
+
 }

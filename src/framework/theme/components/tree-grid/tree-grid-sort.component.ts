@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 
 import { convertToBoolProperty } from '../helpers';
-import { NB_SORT_HEADER_COLUMN_DEF } from '../cdk/table';
+import { NB_SORT_HEADER_COLUMN_DEF } from '../cdk/table/cell';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
 interface NbSortHeaderColumnDef {

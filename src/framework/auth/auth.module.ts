@@ -13,23 +13,16 @@ import {
   NbLayoutModule,
 } from '@nebular/theme';
 
-import {
-  NB_AUTH_FALLBACK_TOKEN,
-  NbAuthService,
-  NbAuthSimpleToken,
-  NbAuthTokenClass,
-  NbAuthTokenParceler,
-  NbTokenLocalStorage,
-  NbTokenService,
-  NbTokenStorage,
-} from './services';
-import {
-  NbAuthStrategy,
-  NbAuthStrategyOptions,
-  NbDummyAuthStrategy,
-  NbOAuth2AuthStrategy,
-  NbPasswordAuthStrategy,
-} from './strategies';
+import { NbAuthService } from './services/auth.service';
+import { NbAuthSimpleToken, NbAuthTokenClass } from './services/token/token';
+import { NbTokenLocalStorage, NbTokenStorage } from './services/token/token-storage';
+import { NbTokenService } from './services/token/token.service';
+import { NbAuthTokenParceler, NB_AUTH_FALLBACK_TOKEN } from './services/token/token-parceler';
+import { NbAuthStrategy } from './strategies/auth-strategy';
+import { NbAuthStrategyOptions } from './strategies/auth-strategy-options';
+import { NbDummyAuthStrategy } from './strategies/dummy/dummy-strategy';
+import { NbOAuth2AuthStrategy } from './strategies/oauth2/oauth2-strategy';
+import { NbPasswordAuthStrategy } from './strategies/password/password-strategy';
 
 import {
   defaultAuthOptions,

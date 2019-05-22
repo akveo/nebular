@@ -3,7 +3,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, filter, map } from 'rxjs/operators';
 import { NbListItemComponent, NbLayoutScrollService, NB_WINDOW } from '@nebular/theme';
-import { getElementHeight } from '@nebular/theme/components/helpers';
 import { NewsService } from './news.service';
 
 @Component({
@@ -127,9 +126,16 @@ export class InfiniteNewsListComponent implements OnInit, OnDestroy {
         let heightOfAddedItems = 0;
         for (const { nativeElement } of this.listItems.toArray()) {
           if (nativeElement === previousFirstItem) { break }
-          heightOfAddedItems += getElementHeight(nativeElement);
+          heightOfAddedItems += getElementHeight(this.window, nativeElement);
         }
         this.scrollService.scrollTo(null, heightOfAddedItems);
       });
   }
+}
+
+export function getElementHeight(window, el) {
+  const style = window.getComputedStyle(el);
+  const marginTop = parseInt(style.getPropertyValue('margin-top'), 10);
+  const marginBottom = parseInt(style.getPropertyValue('margin-bottom'), 10);
+  return el.offsetHeight + marginTop + marginBottom;
 }

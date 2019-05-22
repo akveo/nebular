@@ -1,5 +1,5 @@
 import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
-import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk';
+import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
 import { NbToastStatus } from './model';
 import { TestBed } from '@angular/core/testing';
 import { ComponentFactoryResolver } from '@angular/core';

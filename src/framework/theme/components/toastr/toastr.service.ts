@@ -6,15 +6,11 @@
 
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
 
-import {
-  NbComponentPortal,
-  NbGlobalLogicalPosition,
-  NbGlobalPosition,
-  NbOverlayService,
-  NbPositionBuilderService,
-  NbPositionHelper,
-  patch,
-} from '../cdk';
+import { NbComponentPortal } from '../cdk/overlay/mapping';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
+import { NbPositionBuilderService } from '../cdk/overlay/overlay-position';
+import { NbGlobalLogicalPosition, NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
+import { patch } from '../cdk/overlay/overlay-service';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast, NbToastStatus } from './model';

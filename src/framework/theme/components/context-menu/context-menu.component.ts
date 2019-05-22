@@ -7,7 +7,7 @@
 import { Component, Input } from '@angular/core';
 
 import { NbMenuItem } from '../../components/menu/menu.service';
-import { NbPositionedContainer, NbRenderableContainer } from '../cdk';
+import { NbPositionedContainer, NbRenderableContainer } from '../cdk/overlay/overlay-container';
 
 /**
  * Context menu component used as content within NbContextMenuDirective.

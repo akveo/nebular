@@ -23,9 +23,9 @@ import { fromEvent, merge } from 'rxjs';
 import { debounceTime, takeWhile } from 'rxjs/operators';
 
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
-import { NbPlatform } from '../cdk/platform';
-import { NbDirectionality } from '../cdk/bidi';
-import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table';
+import { NbPlatform } from '../cdk/platform/platform-service';
+import { NbDirectionality } from '../cdk/bidi/bidi-service';
+import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table/table.module';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';

@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
 
 
 /**
@@ -26,7 +26,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCalendarModule,
  *   ],
  * })

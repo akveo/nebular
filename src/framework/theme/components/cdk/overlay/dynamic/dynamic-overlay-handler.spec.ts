@@ -19,7 +19,7 @@ import {
   NbPositionBuilderService,
 } from '../overlay-position';
 import { NbDynamicOverlay } from './dynamic-overlay';
-import { NbOverlayContent } from '../overlay';
+import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlayChange, NbDynamicOverlayHandler } from './dynamic-overlay-handler';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 

@@ -8,7 +8,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbCalendarNavigationComponent } from './calendar-navigation.component';
 import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
-import { NbDateService, NbNativeDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
+import { NbNativeDateService } from '../../services/native-date.service';
 import { NbThemeModule } from '../../../../theme.module';
 import { DatePipe } from '@angular/common';
 

@@ -5,7 +5,7 @@ import { NbA11yModule } from '../a11y/a11y.module';
 import { NbCdkMappingModule } from './mapping';
 import { NbPositionBuilderService } from './overlay-position';
 import { NbOverlayContainerComponent } from './overlay-container';
-import { NbOverlayService } from './overlay';
+import { NbOverlayService } from './overlay-service';
 import { NbCdkAdapterModule } from '../adapter/adapter.module';
 import { NbPositionHelper } from './position-helper';
 import { NbTriggerStrategyBuilderService } from './overlay-trigger';

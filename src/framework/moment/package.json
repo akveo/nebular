@@ -2,9 +2,6 @@
   "name": "@nebular/moment",
   "version": "3.5.0",
   "description": "@nebular/moment",
-  "main": "./bundles/theme.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -26,5 +23,6 @@
   "peerDependencies": {
     "@nebular/theme": "3.5.0",
     "moment": "^2.22.2"
-  }
+  },
+  "sideEffects": false
 }

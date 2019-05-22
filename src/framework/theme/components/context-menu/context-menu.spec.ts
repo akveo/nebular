@@ -5,14 +5,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
-import {
-  NbAdjustment,
-  NbDynamicOverlayHandler,
-  NbOverlayContent,
-  NbPosition,
-  NbRenderableContainer,
-  NbTrigger,
-} from '../cdk';
+import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
+import { NbOverlayContent } from '../cdk/overlay/overlay-service';
+import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
+import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbMenuModule } from '../menu/menu.module';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';

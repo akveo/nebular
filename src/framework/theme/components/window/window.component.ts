@@ -13,14 +13,9 @@ import {
   Input,
   AfterViewChecked,
 } from '@angular/core';
-import {
-  NbComponentPortal,
-  NbFocusTrap,
-  NbFocusTrapFactoryService,
-  NbOverlayContainerComponent,
-  NbTemplatePortal,
-} from '../cdk';
-import { NbComponentType } from '../cdk/overlay';
+import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk/a11y/focus-trap';
+import { NbComponentPortal, NbComponentType, NbTemplatePortal } from '../cdk/overlay/mapping';
+import { NbOverlayContainerComponent } from '../cdk/overlay/overlay-container';
 import { NB_WINDOW_CONTENT, NbWindowConfig, NbWindowState, NB_WINDOW_CONTEXT } from './window.options';
 import { NbWindowRef } from './window-ref';
 

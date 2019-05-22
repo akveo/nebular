@@ -31,20 +31,17 @@ import { startWith, switchMap, takeWhile } from 'rxjs/operators';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbOverlayRef,
-  NbOverlayService,
-  NbPortalDirective,
   NbPosition,
   NbPositionBuilderService,
-  NbScrollStrategy,
-  NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-} from '../cdk';
+} from '../cdk/overlay/overlay-position';
+import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overlay/mapping';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
+import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOptionComponent } from './option.component';
 import { NbButtonComponent } from '../button/button.component';
 import { NB_DOCUMENT } from '../../theme.options';
 import { convertToBoolProperty } from '../helpers';
+import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 
 
 @Component({
@@ -153,6 +150,7 @@ export class NbSelectLabelComponent {
       useExisting: forwardRef(() => NbSelectComponent),
       multi: true,
     },
+    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
   ],
 })
 export class NbSelectComponent<T> implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {

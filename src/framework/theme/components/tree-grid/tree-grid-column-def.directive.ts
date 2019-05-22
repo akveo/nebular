@@ -1,5 +1,6 @@
 import { Directive, Input, OnChanges } from '@angular/core';
-import { NbCdkColumnDef, NB_SORT_HEADER_COLUMN_DEF, NbColumnDefDirective } from '../cdk/table';
+import { NbCdkColumnDef } from '../cdk/table/type-mappings';
+import { NB_SORT_HEADER_COLUMN_DEF, NbColumnDefDirective } from '../cdk/table/cell';
 
 /**
  * Column definition for the tree-grid.

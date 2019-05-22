@@ -7,7 +7,7 @@
 import { InjectionToken } from '@angular/core';
 
 import { NbToastStatus } from './model';
-import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk';
+import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 
 
 export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toastr options');

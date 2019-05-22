@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "tsconfig",
+    "baseUrl": ".",
     "lib": [
       "es2017",
       "dom"
@@ -15,7 +15,10 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "./",
+    "rootDir": ".",
+    "rootDirs": [
+      "../src/framework/theme/schematics/util"
+    ],
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -27,13 +30,10 @@
     ]
   },
   "include": [
-    "./**/*",
-    "../src/.lib/theme/schematics/util",
-    "../node_modules/@angular/cdk/schematics/utils",
-    "../node_modules/@schematics/angular/utility"
+    "./**/*"
   ],
   "exclude": [
-    "./*/files/**/*",
+    "./**/files/**/*",
     "dist"
   ]
 }

@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbCalendarDay } from '../../model';
-import { NbDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
 
 
 @Component({

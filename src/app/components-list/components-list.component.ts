@@ -2,8 +2,17 @@ import {
   AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, QueryList, ViewChildren,
 } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
-import { convertToBoolProperty } from '@nebular/theme/components/helpers';
 import { ComponentLink } from '../playground-components';
+
+export function convertToBoolProperty(val: any): boolean {
+  if (typeof val === 'string') {
+    val = val.toLowerCase().trim();
+
+    return (val === 'true' || val === '');
+  }
+
+  return !!val;
+}
 
 @Component({
   selector: 'nb-components-list',

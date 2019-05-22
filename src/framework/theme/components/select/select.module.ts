@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { NbOverlayModule } from '../cdk';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbSharedModule } from '../shared/shared.module';
 import { NbInputModule } from '../input/input.module';
 import { NbCardModule } from '../card/card.module';

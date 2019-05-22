@@ -1,6 +1,5 @@
 import {
   Component,
-  forwardRef,
   Inject,
   Input,
   TemplateRef,
@@ -8,6 +7,7 @@ import {
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
+import { NB_STEPPER } from './stepper-tokens';
 import { convertToBoolProperty } from '../helpers';
 
 /**
@@ -23,6 +23,8 @@ import { convertToBoolProperty } from '../helpers';
   `,
 })
 export class NbStepComponent {
+
+  protected stepper: NbStepperComponent;
 
   /**
    * Step content
@@ -83,7 +85,8 @@ export class NbStepComponent {
 
   interacted = false;
 
-  constructor(@Inject(forwardRef(() => NbStepperComponent)) private stepper: NbStepperComponent) {
+  constructor(@Inject(NB_STEPPER) stepper) {
+    this.stepper = stepper;
   }
 
   /**
