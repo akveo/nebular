@@ -8,9 +8,9 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell, NbDateService } from '../calendar-kit';
+import { NbCalendarCell } from '../calendar-kit/model';
+import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRange } from './calendar-range.component';
-
 
 @Component({
   selector: 'nb-calendar-range-day-cell',

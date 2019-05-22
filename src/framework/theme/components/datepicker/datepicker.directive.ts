@@ -28,7 +28,7 @@ import { fromEvent, Observable, merge } from 'rxjs';
 import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbDateService } from '../calendar-kit';
+import { NbDateService } from '../calendar-kit/services/date.service';
 
 
 /**

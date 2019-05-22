@@ -7,7 +7,7 @@
     "types": [],
     "paths": {
       "@nebular/*": [
-        "./framework/*"
+        "./framework/*/public_api.ts"
       ]
     }
   },

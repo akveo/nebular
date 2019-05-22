@@ -11,8 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NB_WINDOW } from '@nebular/theme';
 import { NbOAuth2AuthStrategy } from './oauth2-strategy';
 import { NbOAuth2ClientAuthMethod, NbOAuth2GrantType, NbOAuth2ResponseType } from './oauth2-strategy.options';
-import { NbAuthResult, nbAuthCreateToken, NbAuthOAuth2Token } from '../../services';
-
+import { NbAuthResult } from '../../services/auth-result';
+import { nbAuthCreateToken, NbAuthOAuth2Token } from '../../services/token/token';
 function createURL(params: any) {
   return Object.keys(params).map((k) => {
     return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;

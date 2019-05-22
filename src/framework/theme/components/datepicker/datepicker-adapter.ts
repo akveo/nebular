@@ -9,7 +9,7 @@ import { Injectable, Type } from '@angular/core';
 import { NbCalendarRange } from '../calendar/calendar-range.component';
 import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
 import { NbDatepickerAdapter } from './datepicker.directive';
-import { NbDateService } from '../calendar-kit';
+import { NbDateService } from '../calendar-kit/services/date.service';
 
 
 @Injectable()

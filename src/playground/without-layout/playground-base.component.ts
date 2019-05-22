@@ -6,7 +6,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-// import 'style-loader!../styles/styles.scss';
+import 'style-loader!../styles/styles.scss';
 
 
 @Component({

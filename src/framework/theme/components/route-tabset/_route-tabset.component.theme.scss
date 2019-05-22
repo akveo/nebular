@@ -17,7 +17,10 @@
     box-shadow: nb-theme(route-tabset-shadow);
 
     .route-tabset {
-      border-bottom: nb-theme(route-tabset-divider-width) solid nb-theme(route-tabset-divider-color);
+      border-bottom:
+        nb-theme(route-tabset-divider-width)
+        nb-theme(route-tabset-divider-style)
+        nb-theme(route-tabset-divider-color);
     }
 
     .tab-link {
@@ -35,10 +38,6 @@
         background-color: nb-theme(route-tabset-tab-underline-color);
         height: nb-theme(route-tabset-tab-underline-width);
       }
-    }
-
-    .route-tab {
-      min-width: nb-theme(route-tabs-header-min-width);
     }
 
     .route-tab.active {
@@ -87,7 +86,7 @@
     }
 
     .route-tab.responsive {
-      @media screen and (max-width: nb-theme(route-tabs-icon-only-max-width)) {
+      @media screen and (max-width: nb-theme(route-tabset-tab-text-hide-breakpoint)) {
         .tab-text {
           display: none;
         }

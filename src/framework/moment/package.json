@@ -1,10 +1,7 @@
 {
   "name": "@nebular/moment",
-  "version": "4.0.0-rc.4",
+  "version": "4.0.0-rc.5",
   "description": "@nebular/moment",
-  "main": "./bundles/theme.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -24,7 +21,8 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "4.0.0-rc.4",
+    "@nebular/theme": "4.0.0-rc.5",
     "moment": "^2.22.2"
-  }
+  },
+  "sideEffects": false
 }

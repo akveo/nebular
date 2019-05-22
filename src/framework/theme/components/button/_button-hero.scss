@@ -51,9 +51,8 @@
         }
 
         &[disabled] {
-          $left-disabled-color: nb-theme(button-hero-#{$status}-disabled-left-background-color);
-          $right-disabled-color: nb-theme(button-hero-#{$status}-disabled-right-background-color);
-          background-image: linear-gradient(to right, $left-disabled-color, $right-disabled-color);
+          background-color: nb-theme(button-hero-#{$status}-disabled-background-color);
+          background-image: none;
           color: nb-theme(button-hero-#{$status}-disabled-text-color);
         }
 
@@ -64,11 +63,11 @@
         @include keyframes(button-hero-#{$status}-pulse) {
           0% {
             box-shadow: none;
-            opacity: nb-theme(0.3);
+            opacity: 0.3;
           }
 
           100% {
-            box-shadow: 0 0 1rem 0 nb-theme($left-color);
+            box-shadow: 0 0 1rem 0 $left-color;
             opacity: 0.8;
           }
         }

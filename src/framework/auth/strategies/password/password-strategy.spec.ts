@@ -11,7 +11,7 @@ import { NbAuthResult } from '../../services/auth-result';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { nbAuthCreateToken, NbAuthSimpleToken } from '../../services';
+import { nbAuthCreateToken, NbAuthSimpleToken } from '../../services/token/token';
 
 const ownerStrategyName = 'strategy';
 

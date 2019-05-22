@@ -8,7 +8,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbDateService, NbNativeDateService } from '../../services';
+import { NbDateService } from '../../services/date.service';
+import { NbNativeDateService } from '../../services/native-date.service';
 
 
 describe('Component: NbCalendarDayCell', () => {

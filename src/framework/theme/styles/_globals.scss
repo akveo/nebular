@@ -13,9 +13,3 @@
   @include nb-theme-components();
   @include nb-theme-overrides();
 }
-
-@mixin nb-install() {
-  @include nb-install-global() {
-    @content;
-  }
-}

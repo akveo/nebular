@@ -14,16 +14,45 @@ export * from './services/color.helper';
 export * from './services/direction.service';
 export * from './services/scroll.service';
 export * from './services/ruler.service';
-export * from './components/component-status';
+export * from './services/js-themes-registry.service';
 export * from './components/component-size';
 export * from './components/component-shape';
 export * from './components/component-status';
 export * from './components/card/card.module';
+export * from './components/card/card.component';
+export * from './components/card/flip-card/flip-card.component';
+export * from './components/card/reveal-card/reveal-card.component';
 export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
 export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
-export * from './components/calendar-kit';
+// tslint:disable:max-line-length
+export { NbCalendarHeaderComponent } from './components/calendar-kit/components/calendar-header/calendar-header.component';
+export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
+export {
+  NbCalendarYearPickerComponent,
+  YEARS_IN_VIEW,
+  YEARS_IN_COLUMN,
+} from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
+export {
+  NbCalendarMonthPickerComponent,
+  MONTHS_IN_VIEW,
+  MONTHS_IN_COLUMN,
+} from './components/calendar-kit/components/calendar-month-picker/calendar-month-picker.component';
+export { NbCalendarDayPickerComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-picker.component';
+export { NbCalendarNavigationComponent } from './components/calendar-kit/components/calendar-navigation/calendar-navigation.component';
+export { NbCalendarPageableNavigationComponent } from './components/calendar-kit/components/calendar-navigation/calendar-pageable-navigation.component';
+export { NbCalendarDaysNamesComponent } from './components/calendar-kit/components/calendar-days-names/calendar-days-names.component';
+export { NbCalendarMonthCellComponent } from './components/calendar-kit/components/calendar-month-picker/calendar-month-cell.component';
+export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
+export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
+export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
+// tslint:enable:max-line-length
+export { NbCalendarMonthModelService } from './components/calendar-kit/services/calendar-month-model.service';
+export { NbNativeDateService } from './components/calendar-kit/services/native-date.service';
+export { NbDateService } from './components/calendar-kit/services/date.service';
+export * from './components/calendar-kit/model';
+export * from './components/calendar-kit/calendar-kit.module';
 export * from './components/layout/layout.module';
 export * from './components/layout/layout.component';
 export * from './components/layout/restore-scroll-top.service';
@@ -84,8 +113,19 @@ export * from './components/list/list-page-tracker.directive';
 export * from './components/list/infinite-list.directive';
 export * from './components/input/input.directive';
 export * from './components/input/input.module';
-export * from './components/cdk/overlay';
-export * from './components/dialog';
+export * from './components/cdk/overlay/overlay.module';
+export * from './components/cdk/overlay/overlay-service';
+export * from './components/cdk/overlay/overlay-position';
+export * from './components/cdk/overlay/overlay-container';
+export * from './components/cdk/overlay/overlay-trigger';
+export * from './components/cdk/overlay/mapping';
+export * from './components/cdk/overlay/position-helper';
+export * from './components/cdk/overlay/dynamic/dynamic-overlay';
+export * from './components/cdk/overlay/dynamic/dynamic-overlay-handler';
+export * from './components/dialog/dialog-config';
+export * from './components/dialog/dialog-ref';
+export * from './components/dialog/dialog.service';
+export * from './components/dialog/dialog.module';
 export * from './components/toastr/toastr.module';
 export * from './components/toastr/toastr.service';
 export * from './components/tooltip/tooltip.module';
@@ -94,7 +134,12 @@ export * from './components/select/select.module';
 export * from './components/select/select.component';
 export * from './components/select/option.component';
 export * from './components/select/option-group.component';
-export * from './components/window';
+export * from './components/window/window.module';
+export * from './components/window/window.service';
+export * from './components/window/window-ref';
+export {
+  NbWindowConfig, NbWindowState, NB_WINDOW_CONFIG, NbWindowStateChange,
+} from './components/window/window.options';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/radio/radio.module';

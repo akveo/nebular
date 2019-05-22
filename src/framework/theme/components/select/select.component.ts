@@ -31,23 +31,21 @@ import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
-  NbOverlayRef,
-  NbOverlayService,
-  NbPortalDirective,
   NbPosition,
   NbPositionBuilderService,
-  NbScrollStrategy,
-  NbTrigger,
-  NbTriggerStrategy,
-  NbTriggerStrategyBuilderService,
-} from '../cdk';
+} from '../cdk/overlay/overlay-position';
+import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overlay/mapping';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
+import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
+import { NbFocusKeyManager } from '../cdk/a11y/focus-key-manager';
+import { ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbFocusKeyManager, ESCAPE } from '../cdk';
 import { NbOptionComponent } from './option.component';
 import { convertToBoolProperty } from '../helpers';
+import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
@@ -384,6 +382,7 @@ export class NbSelectLabelComponent {
       useExisting: forwardRef(() => NbSelectComponent),
       multi: true,
     },
+    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
   ],
 })
 export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {

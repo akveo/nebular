@@ -26,7 +26,8 @@
            placeholder="Full name"
            autofocus
            fullWidth
-           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+           fieldSize="giant"
+           [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.fullName.required')"
            [minlength]="getConfigValue('forms.validation.fullName.minLength')"
            [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
@@ -54,6 +55,7 @@
            pattern=".+@.+..+"
            placeholder="Email address"
            fullWidth
+           fieldSize="giant"
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
@@ -77,7 +79,8 @@
            name="password"
            placeholder="Password"
            fullWidth
-           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+           fieldSize="giant"
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
            [maxlength]="getConfigValue('forms.validation.password.maxLength')"
@@ -105,7 +108,8 @@
            name="rePass"
            placeholder="Confirm Password"
            fullWidth
-           [status]="email.dirty ? (email.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
+           fieldSize="giant"
+           [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
     <ng-container *ngIf="rePass.invalid && rePass.touched">
@@ -126,7 +130,8 @@
 
   <button nbButton
           fullWidth
-          status="success"
+          status="primary"
+          size="giant"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Register
@@ -141,12 +146,18 @@
          [routerLink]="socialLink.link"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
       <a *ngIf="socialLink.url"
          [attr.href]="socialLink.url"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
     </ng-container>
   </div>
 </section>

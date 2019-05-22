@@ -6,8 +6,6 @@ import * as replace from 'gulp-replace';
 import * as minimist from 'minimist';
 import { capitalize, dasherize } from '@angular-devkit/core/src/utils/strings';
 
-import { replaceScssWithCss } from './copy-sources';
-
 import { BUILD_DIR } from './config';
 
 type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security';
@@ -216,9 +214,7 @@ task('change-prefix', ['copy-build-dir-and-rename', 'generate-ts-config', 'patch
     stream = stream.pipe(replace(from, to));
   }
 
-  return stream
-    .pipe(dest(BUILD_DIR))
-    .on('end', replaceScssWithCss);
+  return stream.pipe(dest(BUILD_DIR));
 });
 
 function throwNoPrefixSpecified() {

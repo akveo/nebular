@@ -27,6 +27,7 @@
            id="input-email"
            pattern=".+@.+\..+"
            placeholder="Email address"
+           fieldSize="giant"
            autofocus
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
@@ -51,6 +52,7 @@
            type="password"
            id="input-password"
            placeholder="Password"
+           fieldSize="giant"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -76,7 +78,8 @@
 
   <button nbButton
           fullWidth
-          status="success"
+          status="primary"
+          size="giant"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Log In
@@ -91,12 +94,18 @@
          [routerLink]="socialLink.link"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
       <a *ngIf="socialLink.url"
          [attr.href]="socialLink.url"
          [attr.target]="socialLink.target"
          [attr.class]="socialLink.icon"
-         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
     </ng-container>
   </div>
 </section>

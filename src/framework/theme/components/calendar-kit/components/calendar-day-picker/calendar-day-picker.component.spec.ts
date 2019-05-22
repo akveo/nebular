@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 
 import { NbCalendarDayPickerComponent } from './calendar-day-picker.component';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarMonthModelService } from '../../services';
+import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 

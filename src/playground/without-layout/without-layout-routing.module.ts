@@ -45,6 +45,14 @@ const routes: Route[] = [
         path: 'azure',
         loadChildren: './azure/azure.module#AzurePlaygroundModule',
       },
+      {
+        path: 'auth',
+        loadChildren: './auth/auth.module#AuthPlaygroundModule',
+      },
+      {
+        path: 'smart-home',
+        loadChildren: './smart-home/app.module#AppModule',
+      },
     ],
   },
 ];

@@ -1,10 +1,7 @@
 {
   "name": "@nebular/eva-icons",
-  "version": "4.0.0-rc.4",
+  "version": "4.0.0-rc.5",
   "description": "@nebular/eva-icons",
-  "main": "./bundles/eva-icons.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -26,7 +23,8 @@
     "eva-icons"
   ],
   "peerDependencies": {
-    "@nebular/theme": "4.0.0-rc.4",
+    "@nebular/theme": "4.0.0-rc.5",
     "eva-icons": "^1.1.1"
-  }
+  },
+  "sideEffects": false
 }
