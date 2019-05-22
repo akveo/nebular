@@ -17,7 +17,7 @@ packages_smoke() {
   cp -r ../nebular/src/.lib/* node_modules/@nebular
 
   echo "Verifying application build"
-  npm run build -- --prod --aot
+  npm run build -- --prod
   npm run build -- --configuration=production-2015
   npm run e2e
   npm run e2e -- --configuration=production-2015
