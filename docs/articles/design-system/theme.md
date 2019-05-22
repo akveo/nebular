@@ -1,27 +1,25 @@
 # Eva Design System Theme
 
-Nebular Theme is a set of rules we put into how sass files and variables are organized to achieve the following goals:
+In Eva Design System **theme** is a set of semantic variables and connections between them, that represents application's look & feel to achieves the following goals:
 
-- create various visual themes easily;
-- flexibly change looks & feel of the application by managing variables, without changing component styles;
-- switch between visual themes in app runtime without reloading the page;
+- create new visual themes easily;
+- flexibly change look & feel of the application by managing variables, without changing components' styles;
+- switch between visual themes in app runtime without page reload;
 - support of CSS properties.
+<hr>
 
 ## A Theme
 
-In Eva Design System **theme** is a set of variables that represents application look & feel.
-In Nebular terms - **theme** is simply a sass map, structured in a particular way, here's a gist of what it looks like:
+In Nebular terms - **theme** is a sass map, structured in a particular way. Here's a gist of how it looks like:
 
 ```scss
 $theme: (
+  // ...
   color-danger-100: #fff2f2,
   color-danger-200: #ffd6d9,
   color-danger-300: #ffa8b4,
   color-danger-400: #ff708d,
-  color-danger-500: #ff3d71,
-  color-danger-600: #db2c66,
-  color-danger-700: #b81d5b,
-  color-danger-800: #94124e,
+  // ...
   color-danger-900: #700940,
 
   /* Basic colors - for backgrounds and borders and texts */
@@ -30,12 +28,7 @@ $theme: (
   color-basic-200: #f7f8fa,
   color-basic-300: #edf0f4,
   color-basic-400: #dde1eb,
-  color-basic-500: #c8cedb,
-  color-basic-600: #a7b0c1,
-  color-basic-700: #657084,
-  color-basic-800: #2e384f,
-  color-basic-900: #232a40,
-  color-basic-1000: #1a1f33,
+  // ...
   color-basic-1100: #131729,
 
   /* Status colors states - focus, hover, default, active, disabled  */
@@ -49,48 +42,116 @@ $theme: (
 );
 ```
 
-Each theme is divided in the following semantic groups:
+Each theme is divided into the following semantic groups:
 
-- **Colors** 
-
-- **Backgrounds & Borders** - each theme has 3 backgrounds (`basic`, `alternative`, `primary`) each of 4 shades and also 3 borders, each of 5 shades (backgrounds count + 1).
-`basic` and `alternative` backgrounds and borders utilizes `basic` color shades a source. `primary` backgrounds and borders uses `primary` color.
-
-- **Text Colors** - 
-
-
-Below you can find a list of concepts a theme consist of, and how these variables affect the look & feel.
+- Colors
+- Backgrounds & Borders
+- Text Colors
+- Fonts & Text Styles
+- General Theme Variables
+<hr>
 
 ## Colors
 
-All available color within the theme. Five semantic colors (`primary`, `success`, `info`, `warning`, `danger`) and `basic` color (backgrounds and texts).
+All available color within the theme. 5 semantic colors (`primary`, `success`, `info`, `warning`, `danger`) and `basic` color (backgrounds and texts).
 Each color has a pallet of 9 shades, except for `basic`, which has 11 shades. These colors mostly used by `status` variants of the components.
+
+Primary color shades:
+```scss
+color-primary-100: #f2f6ff,
+color-primary-200: #d9e4ff,
+color-primary-300: #a6c1ff,
+color-primary-400: #598bff,
+color-primary-500: #3366ff,
+color-primary-600: #284de0,
+color-primary-700: #2541cc,
+color-primary-800: #192f9e,
+color-primary-900: #14236e,
+```
+<hr>
 
 ## Backgrounds & Borders
 
+Theme has 3 backgrounds (`basic`, `alternative`, `primary`) each of 4 shades and also 3 borders, each of 5 shades (background shades count + 1).
+`basic` and `alternative` backgrounds and borders utilizes `basic` color shades as a source. `primary` backgrounds and borders uses `primary` color.
+Basic backgrounds and borders heavily used by components (cards, accordions, menu, etc), when alternative and primary only for particular use cases,
+to distinguish some of the components.
+
+Basic backgrounds and borders:
+```scss
+background-basic-color-1: color-basic-100,
+background-basic-color-2: color-basic-200,
+background-basic-color-3: color-basic-300,
+background-basic-color-4: color-basic-400,
+
+border-basic-color-1: color-basic-100,
+border-basic-color-2: color-basic-200,
+border-basic-color-3: color-basic-300,
+border-basic-color-4: color-basic-400,
+border-basic-color-5: color-basic-500,
+```
+
+And vice-versa for dark themes:
+
+```scss
+background-basic-color-1: color-basic-800, // <- notice how we start
+background-basic-color-2: color-basic-900, // with the end part
+background-basic-color-3: color-basic-1000,// of the basic shades
+background-basic-color-4: color-basic-1100,
+
+border-basic-color-1: color-basic-800,
+border-basic-color-2: color-basic-900,
+border-basic-color-3: color-basic-1000,
+border-basic-color-4: color-basic-1100,
+border-basic-color-5: color-basic-1100,
+```
+<hr>
+
 ## Text Colors
+
+There are 5 colors within the theme: `basic` - main text color, used on top of `basic` backgrounds `alternate` - alternative color used on top of `alternate` backgrounds,
+`control` - used on top of `status` colors (`primary`, `success`, etc), `disabled` color - to indicate text/component disabled state
+and `hint` - for secondary texts (for example placeholders and captions).
+ 
+Text colors use `basic` shades as a source:
+```scss
+text-basic-color: color-basic-1000,
+text-alternate-color: color-basic-100,
+text-control-color: color-basic-100,
+text-disabled-color: color-basic-500,
+text-hint-color: color-basic-700,
+```
+<hr>
 
 ## Fonts & Text Styles
 
-Eva is a customizable Design System based on Atomic Design Principles. All components are built based on basic elements with shared styles, connected with a single Visual Language.
-Most importantly, Eva is built to be customizable, meaning architectural support of multiple themes across all components and supporting platforms.  
+Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while default for the rest of the elements.
+
+There are 13 text styles:
+- 6 `heading` styles, h1-h2
+- 2 `subtitle` styles
+- 2 `paragraph` styles
+- 2 `caption` styles
+- `button` text style
+
+Each styles describes text `font-family`, `font-size`, `font-width` and `line-height`, for instance, caption text style:
+```scss
+text-caption-font-family: font-family-primary,
+text-caption-font-size: 0.75rem,
+text-caption-font-weight: 400,
+text-caption-line-height: 1rem,
+```
+<hr>
 
 ## General Theme Variables
 
-## Implementations
-
-Eva Design System is implemented for two platforms:
-
-- Web - Nebular
-- Mobile - [React Kitten](https://github.com/akveo/react-native-ui-kitten/)
-
-Both implementations have single source of truth for styles, and unified theming system.
-
-## Enterprise ready
-
-Being a part of Eva ecosystem, Nebular is a great choice for Enterprise grade products, sharing ideas, process and implementation among multiple platforms. 
-
+This section contains other supporting theme variables, such as `border-radius`, `outline-width` & `outline-color`, `shadow`, etc. 
+<hr>
 
 ## Related Articles
 
-- [Design System Rules](docs/auth/design-system-rules)
+- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
+- [Create Custom Theme](docs/design-system/create-custom-theme)
+- [Default Theme Variables](docs/auth/design-system-rules) // TODO
+- [Dark Theme Variables](docs/auth/design-system-rules) // TODO
+

@@ -121,13 +121,35 @@ export const structure = [
           {
             type: 'block',
             block: 'markdown',
-            source: 'design-system/rules.md',
+            source: 'design-system/theme.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Creating Custom Theme',
+        name: 'Enable Customizable Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/enable-customizable-theme.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Use Theme Variables',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/use-theme-variables.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Create Custom Theme',
         children: [
           {
             type: 'block',
@@ -136,28 +158,28 @@ export const structure = [
           },
         ],
       },
-      {
-        type: 'page',
-        name: 'Enabling CSS Properties mode',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/css-properties.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Enabling Multiple Runtime Themes',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/multiple-runtime-themes.md',
-          },
-        ],
-      },
+      // {
+      //   type: 'page',
+      //   name: 'Enable CSS Properties mode',
+      //   children: [
+      //     {
+      //       type: 'block',
+      //       block: 'markdown',
+      //       source: 'design-system/css-properties.md',
+      //     },
+      //   ],
+      // },
+      // {
+      //   type: 'page',
+      //   name: 'Enabling Multiple Runtime Themes',
+      //   children: [
+      //     {
+      //       type: 'block',
+      //       block: 'markdown',
+      //       source: 'design-system/multiple-runtime-themes.md',
+      //     },
+      //   ],
+      // },
       {
         type: 'page',
         name: 'Changing Theme',

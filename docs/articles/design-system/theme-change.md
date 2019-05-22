@@ -51,4 +51,5 @@ And of course it is possible to subscribe to an event when the current theme get
 
 ## Related Articles
 
-- [Enable Theme System](docs/guides/enable-theme-system)
+- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
+- [Create Custom Theme](docs/design-system/create-custom-theme)
