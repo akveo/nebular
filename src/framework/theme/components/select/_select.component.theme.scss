@@ -64,6 +64,11 @@
       font-size: nb-theme(select-#{$size}-text-font-size);
       line-height: nb-theme(select-#{$size}-text-line-height);
     }
+
+    nb-select.size-#{$size}:not(.full-width),
+    .options-list:not(.full-width) {
+      max-width: nb-theme(select-#{$size}-max-width);
+    }
   }
 
   @each $shape in nb-get-shapes() {
