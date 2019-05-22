@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         </div>
         <div class="hero-feature">
           <div class="feature-key">
-            3
+            4
           </div>
           <h3 class="feature-title">
             Visual themes

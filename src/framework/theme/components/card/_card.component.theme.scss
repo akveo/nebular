@@ -46,13 +46,6 @@
       }
     }
 
-    &[disabled] {
-      nb-card-header {
-        background-color: nb-theme(card-header-disabled-background-color);
-        color: nb-theme(card-header-disabled-text-color);
-      }
-    }
-
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
         nb-card-header {

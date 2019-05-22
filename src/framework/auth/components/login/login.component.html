@@ -27,6 +27,7 @@
            id="input-email"
            pattern=".+@.+\..+"
            placeholder="Email address"
+           fieldSize="giant"
            autofocus
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
@@ -51,6 +52,7 @@
            type="password"
            id="input-password"
            placeholder="Password"
+           fieldSize="giant"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -77,6 +79,7 @@
   <button nbButton
           fullWidth
           status="primary"
+          size="giant"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Log In

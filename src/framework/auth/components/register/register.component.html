@@ -26,6 +26,7 @@
            placeholder="Full name"
            autofocus
            fullWidth
+           fieldSize="giant"
            [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.fullName.required')"
            [minlength]="getConfigValue('forms.validation.fullName.minLength')"
@@ -54,6 +55,7 @@
            pattern=".+@.+..+"
            placeholder="Email address"
            fullWidth
+           fieldSize="giant"
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
@@ -77,6 +79,7 @@
            name="password"
            placeholder="Password"
            fullWidth
+           fieldSize="giant"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -105,6 +108,7 @@
            name="rePass"
            placeholder="Confirm Password"
            fullWidth
+           fieldSize="giant"
            [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
@@ -127,6 +131,7 @@
   <button nbButton
           fullWidth
           status="primary"
+          size="giant"
           [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Register
