@@ -1,3 +1,29 @@
+<a name="4.0.0-rc.5"></a>
+# [4.0.0-rc.5](https://github.com/akveo/nebular/compare/v4.0.0-rc.4...v4.0.0-rc.5) (2019-05-22)
+
+
+### Code Refactoring
+
+* **themes:** make map processing lazy, add variable existence check ([#1471](https://github.com/akveo/nebular/issues/1471)) ([48d8f03](https://github.com/akveo/nebular/commit/48d8f03))
+
+
+### Features
+
+* angular package format ([#1474](https://github.com/akveo/nebular/issues/1474)) ([bbed8c1](https://github.com/akveo/nebular/commit/bbed8c1))
+* **themes:** add new Dark theme! ([#1472](https://github.com/akveo/nebular/issues/1472)) ([3b5ad6c](https://github.com/akveo/nebular/commit/3b5ad6c))
+
+
+### BREAKING CHANGES
+
+* **themes:** - remove `disabled` status for card
+- auth now uses `giant` size buttons and inputs
+* **themes:** - `nb-theme` function now throws an error if an unused variable is accessed
+- custom auth variables are removed and replaced with @nebular/theme variables
+- `nb-install` function moved into `@nebular/theme/styles/theming`
+- auth components now use `nb-icon` instead of icon css class
+- everything not mentioned in packages `public_api.ts` now private so direct imports from `@nebular/theme/*` will stop working.
+
+
 <a name="4.0.0-rc.4"></a>
 # [4.0.0-rc.4](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.4) (2019-05-14)
 
