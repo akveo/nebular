@@ -8,57 +8,14 @@
 @import '../core/mixins';
 
 $theme: (
-  /* theme and strict tokens */
 
-  font-main: unquote('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
-  font-secondary: font-main,
+  /**
+   * Sass map contains a list of all Theme variables and also their mappings into Component variables
+   * A theme contains of a list of colors, backgrounds, borders, text styles and supporting variables.
+   */
 
-  font-weight-thin: 200,
-  font-weight-light: 300,
-  font-weight-normal: 400,
-  font-weight-bolder: 500,
-  font-weight-bold: 600,
-  font-weight-ultra-bold: 800,
 
-  // TODO: use it as a default font-size
-  base-font-size: 16px,
-
-  font-size-xlg: 1.25rem,
-  font-size-lg: 1.125rem,
-  font-size: 1rem,
-  font-size-sm: 0.875rem,
-  font-size-xs: 0.75rem,
-
-  radius: 0.375rem,
-  padding: 1.25rem,
-  margin: 1.5rem,
-  line-height: 1.25,
-
-  color-bg: #ffffff,
-  color-bg-active: #e9edf2,
-  color-fg: #a4abb3,
-  color-fg-heading: #2a2a2a,
-  color-fg-text: #4b4b4b,
-  color-fg-highlight: #40dc7e,
-
-  separator: #ebeef2,// TODO: move to constants
-  social-color-facebook: #3b5998,
-  social-color-twitter: #55acee,
-  social-color-google: #dd4b39,
-  social-color-linkedin: #0177b5,
-  social-color-github: #6b6b6b,
-  social-color-stackoverflow: #2f96e8,
-  social-color-dribble: #f26798,
-  social-color-behance: #0093fa,
-
-  scrollbar-fg: scrollbar-color,
-  scrollbar-bg: scrollbar-background-color,
-  scrollbar-thumb-radius: 2.5px,
-
-  radial-gradient: none,
-  linear-gradient: none,
-
-  /* Eva theme variables */
+  /* Status colors: primary, success, info, warning, danger - for colored elements (buttons, etc) */
 
   color-primary-100: #f2f6ff,
   color-primary-200: #d9e4ff,
@@ -110,6 +67,8 @@ $theme: (
   color-danger-800: #94124e,
   color-danger-900: #700940,
 
+  /* Basic colors - for backgrounds and borders and texts */
+
   color-basic-100: white,
   color-basic-200: #f7f8fa,
   color-basic-300: #edf0f4,
@@ -122,7 +81,7 @@ $theme: (
   color-basic-1000: #1a1f33,
   color-basic-1100: #131729,
 
-  color-alternate: color-basic-100,
+  /* Status colors states - focus, hover, default, active, disabled  */
 
   color-primary-focus: color-primary-700,
   color-primary-hover: color-primary-400,
@@ -160,6 +119,8 @@ $theme: (
   color-basic-active: color-basic-600,
   color-basic-disabled: color-basic-300,
 
+  /* Backgrounds and borders - basic, alternative and primary  */
+
   background-basic-color-1: color-basic-100,
   background-basic-color-2: color-basic-200,
   background-basic-color-3: color-basic-300,
@@ -192,6 +153,8 @@ $theme: (
   border-primary-color-3: color-basic-700,
   border-primary-color-4: color-basic-800,
   border-primary-color-5: color-basic-900,
+
+  /* Text colors - general and status */
 
   text-basic-color: color-basic-1000,
   text-alternate-color: color-basic-100,
@@ -228,6 +191,8 @@ $theme: (
   text-danger-hover-color: color-danger-hover,
   text-danger-active-color: color-danger-active,
   text-danger-disabled-color: color-danger-400,
+
+  /* Fonts and text styles - headings, subtitles, paragraphs, captions, button */
 
   font-family-primary: unquote('Open Sans, sans-serif'),
   font-family-secondary: unquote('Raleway, sans-serif'),
@@ -305,7 +270,7 @@ $theme: (
   text-button-giant-font-size: 1.125rem,
   text-button-giant-line-height: 1.5rem,
 
-  /* Strict tokens */
+  /* Supporting variables - border radius, outline, shadow, divider */
 
   border-radius: 0.25rem,
 
@@ -318,14 +283,14 @@ $theme: (
 
   shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, 0.1),
 
-  link-text-color: text-primary-color,
-  link-text-hover-color: text-primary-hover-color,
-
   divider-color: border-basic-color-3,
   divider-style: solid,
   divider-width: 1px,
 
-  /* Components mappings */
+  /* Components mappings - maps theme variables onto component variables */
+
+  link-text-color: text-primary-color,
+  link-text-hover-color: text-primary-hover-color,
 
   card-background-color: background-basic-color-1,
   card-text-color: text-basic-color,
@@ -424,7 +389,7 @@ $theme: (
   sidebar-height: 100vh,
   sidebar-width: 16rem,
   sidebar-width-compact: 3.5rem,
-  sidebar-padding: padding,
+  sidebar-padding: 1.25rem,
   sidebar-header-height: 3.5rem,
   sidebar-footer-height: 3.5rem,
   sidebar-shadow: shadow,
@@ -707,30 +672,30 @@ $theme: (
   search-info-text-font-weight: text-subtitle-font-weight,
   search-info-text-line-height: text-subtitle-line-height,
 
-  smart-table-header-font-family: font-secondary,
-  smart-table-header-font-size: font-size,
-  smart-table-header-font-weight: font-weight-bold,
-  smart-table-header-line-height: line-height,
-  smart-table-header-fg: color-fg-heading,
-  smart-table-header-bg: color-bg,
+  smart-table-header-font-family: text-paragraph-font-family,
+  smart-table-header-font-size: text-paragraph-font-size,
+  smart-table-header-font-weight: text-paragraph-font-weight,
+  smart-table-header-line-height: text-paragraph-line-height,
+  smart-table-header-fg: text-color,
+  smart-table-header-bg: color-,
 
-  smart-table-font-family: font-main,
-  smart-table-font-size: font-size,
-  smart-table-font-weight: font-weight-normal,
-  smart-table-line-height: line-height,
-  smart-table-fg: color-fg-heading,
-  smart-table-bg: color-bg,
+  smart-table-font-family: text-paragraph-font-family,
+  smart-table-font-size: text-paragraph-font-size,
+  smart-table-font-weight: text-paragraph-font-weight,
+  smart-table-line-height: text-paragraph-line-height,
+  smart-table-fg: text-color,
+  smart-table-bg: background-default-color-1,
 
   smart-table-bg-even: #f5f7fc,
-  smart-table-fg-secondary: color-fg,
+  smart-table-fg-secondary: text-color,
   smart-table-bg-active: #e6f3ff,
   smart-table-padding: 0.875rem 1.25rem,
   smart-table-filter-padding: 0.375rem 0.5rem,
-  smart-table-separator: separator,
-  smart-table-border-radius: radius,
+  smart-table-separator: divider-color,
+  smart-table-border-radius: border-radius,
 
-  smart-table-paging-border-color: separator,
-  smart-table-paging-border-width: 1px,
+  smart-table-paging-border-color: divider-color,
+  smart-table-paging-border-width: divider-width,
   smart-table-paging-fg-active: #ffffff,
   smart-table-paging-bg-active: color-success-default,
   smart-table-paging-hover: rgba(0, 0, 0, 0.05),
@@ -1180,17 +1145,17 @@ $theme: (
 
   checkbox-disabled-background-color: background-basic-color-3,
   checkbox-disabled-border-color: border-basic-color-4,
-  checkbox-disabled-checkmark-color: color-alternate,
+  checkbox-disabled-checkmark-color: background-default-color-1,
   checkbox-disabled-text-color: text-disabled-color,
 
   checkbox-primary-background-color: color-primary-200,
   checkbox-primary-border-color: color-primary-default,
   checkbox-primary-checked-background-color: color-primary-default,
   checkbox-primary-checked-border-color: color-primary-default,
-  checkbox-primary-checked-checkmark-color: color-alternate,
+  checkbox-primary-checked-checkmark-color: background-default-color-1,
   checkbox-primary-indeterminate-background-color: color-primary-default,
   checkbox-primary-indeterminate-border-color: color-primary-default,
-  checkbox-primary-indeterminate-checkmark-color: color-alternate,
+  checkbox-primary-indeterminate-checkmark-color: background-default-color-1,
   checkbox-primary-focus-border-color: color-primary-700,
   checkbox-primary-hover-background-color: color-primary-400,
   checkbox-primary-hover-border-color: color-primary-400,
@@ -1201,10 +1166,10 @@ $theme: (
   checkbox-success-border-color: color-success-default,
   checkbox-success-checked-background-color: color-success-default,
   checkbox-success-checked-border-color: color-success-default,
-  checkbox-success-checked-checkmark-color: color-alternate,
+  checkbox-success-checked-checkmark-color: background-default-color-1,
   checkbox-success-indeterminate-background-color: color-success-default,
   checkbox-success-indeterminate-border-color: color-success-default,
-  checkbox-success-indeterminate-checkmark-color: color-alternate,
+  checkbox-success-indeterminate-checkmark-color: background-default-color-1,
   checkbox-success-focus-border-color: color-success-700,
   checkbox-success-hover-background-color: color-success-400,
   checkbox-success-hover-border-color: color-success-400,
@@ -1215,10 +1180,10 @@ $theme: (
   checkbox-warning-border-color: color-warning-default,
   checkbox-warning-checked-background-color: color-warning-default,
   checkbox-warning-checked-border-color: color-warning-default,
-  checkbox-warning-checked-checkmark-color: color-alternate,
+  checkbox-warning-checked-checkmark-color: background-default-color-1,
   checkbox-warning-indeterminate-background-color: color-warning-default,
   checkbox-warning-indeterminate-border-color: color-warning-default,
-  checkbox-warning-indeterminate-checkmark-color: color-alternate,
+  checkbox-warning-indeterminate-checkmark-color: background-default-color-1,
   checkbox-warning-focus-border-color: color-warning-700,
   checkbox-warning-hover-background-color: color-warning-400,
   checkbox-warning-hover-border-color: color-warning-400,
@@ -1229,10 +1194,10 @@ $theme: (
   checkbox-danger-border-color: color-danger-default,
   checkbox-danger-checked-background-color: color-danger-default,
   checkbox-danger-checked-border-color: color-danger-default,
-  checkbox-danger-checked-checkmark-color: color-alternate,
+  checkbox-danger-checked-checkmark-color: background-default-color-1,
   checkbox-danger-indeterminate-background-color: color-danger-default,
   checkbox-danger-indeterminate-border-color: color-danger-default,
-  checkbox-danger-indeterminate-checkmark-color: color-alternate,
+  checkbox-danger-indeterminate-checkmark-color: background-default-color-1,
   checkbox-danger-focus-border-color: color-danger-700,
   checkbox-danger-hover-background-color: color-danger-400,
   checkbox-danger-hover-border-color: color-danger-400,
@@ -1243,32 +1208,15 @@ $theme: (
   checkbox-info-border-color: color-info-default,
   checkbox-info-checked-background-color: color-info-default,
   checkbox-info-checked-border-color: color-info-default,
-  checkbox-info-checked-checkmark-color: color-alternate,
+  checkbox-info-checked-checkmark-color: background-default-color-1,
   checkbox-info-indeterminate-background-color: color-info-default,
   checkbox-info-indeterminate-border-color: color-info-default,
-  checkbox-info-indeterminate-checkmark-color: color-alternate,
+  checkbox-info-indeterminate-checkmark-color: background-default-color-1,
   checkbox-info-focus-border-color: color-info-700,
   checkbox-info-hover-background-color: color-info-400,
   checkbox-info-hover-border-color: color-info-400,
   checkbox-info-active-background-color: color-info-600,
   checkbox-info-active-border-color: color-info-600,
-
-  modal-font-size: font-size,
-  modal-line-height: line-height,
-  modal-font-weight: font-weight-normal,
-  modal-fg: color-fg-text,
-  modal-fg-heading: color-fg-heading,
-  modal-bg: color-bg,
-  modal-border: transparent,
-  modal-border-radius: radius,
-  modal-padding: padding,
-  modal-header-font-family: font-secondary,
-  modal-header-font-weight: font-weight-bolder,
-  modal-header-font-size: font-size-lg,
-  modal-body-font-family: font-main,
-  modal-body-font-weight: font-weight-normal,
-  modal-body-font-size: font-size,
-  modal-separator: separator,
 
   badge-border-radius: 0.5rem,
   badge-text-font-family: text-button-font-family,
@@ -1478,10 +1426,10 @@ $theme: (
   stepper-horizontal-connector-margin: 1rem,
   stepper-vertical-connector-margin: 1rem,
 
-  stepper-step-content-padding: padding,
+  stepper-step-content-padding: 1.25rem,
 
   accordion-border-radius: border-radius,
-  accordion-padding: padding,
+  accordion-padding: 1.25rem,
   accordion-shadow: shadow,
   accordion-header-text-color: text-basic-color,
   accordion-header-text-font-family: text-subtitle-font-family,
