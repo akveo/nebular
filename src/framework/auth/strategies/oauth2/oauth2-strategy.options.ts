@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthOAuth2Token, NbAuthTokenClass } from '../../services';
+import { NbAuthOAuth2Token, NbAuthTokenClass } from '../../services/token/token';
 import { NbAuthStrategyOptions } from '../auth-strategy-options';
 
 export enum NbOAuth2ResponseType {

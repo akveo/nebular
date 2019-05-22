@@ -11,22 +11,24 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbButtonModule } from '../button/button.module';
 import { NbIconModule } from '../icon/icon.module';
 
-import { NbCalendarMonthModelService, NbDateService  } from './services';
+import { NbCalendarMonthModelService } from './services/calendar-month-model.service';
+import { NbDateService } from './services/date.service';
 
+import { NbCalendarDayCellComponent } from './components/calendar-day-picker/calendar-day-cell.component';
+import { NbCalendarDayPickerComponent } from './components/calendar-day-picker/calendar-day-picker.component';
+import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/calendar-days-names.component';
+import { NbCalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { NbCalendarMonthCellComponent } from './components/calendar-month-picker/calendar-month-cell.component';
+import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
+import { NbCalendarNavigationComponent } from './components/calendar-navigation/calendar-navigation.component';
 import {
-  NbCalendarDayCellComponent,
-  NbCalendarDayPickerComponent,
-  NbCalendarDaysNamesComponent,
-  NbCalendarHeaderComponent,
-  NbCalendarMonthCellComponent,
-  NbCalendarMonthPickerComponent,
-  NbCalendarNavigationComponent,
   NbCalendarPageableNavigationComponent,
-  NbCalendarPickerComponent,
-  NbCalendarPickerRowComponent,
-  NbCalendarYearCellComponent,
-  NbCalendarYearPickerComponent,
-} from './components';
+} from './components/calendar-navigation/calendar-pageable-navigation.component';
+import { NbCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
+import { NbCalendarPickerRowComponent } from './components/calendar-picker/calendar-picker-row.component';
+import { NbCalendarYearCellComponent } from './components/calendar-year-picker/calendar-year-cell.component';
+import { NbCalendarYearPickerComponent } from './components/calendar-year-picker/calendar-year-picker.component';
+
 import { NbNativeDateService } from './services/native-date.service';
 
 

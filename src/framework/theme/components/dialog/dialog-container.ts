@@ -6,13 +6,8 @@
 
 import { Component, ComponentRef, ElementRef, EmbeddedViewRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import {
-  NbComponentPortal,
-  NbFocusTrap,
-  NbFocusTrapFactoryService,
-  NbPortalOutletDirective,
-  NbTemplatePortal,
-} from '../cdk';
+import { NbComponentPortal, NbPortalOutletDirective, NbTemplatePortal } from '../cdk/overlay/mapping';
+import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk/a11y/focus-trap';
 import { NbDialogConfig } from './dialog-config';
 
 

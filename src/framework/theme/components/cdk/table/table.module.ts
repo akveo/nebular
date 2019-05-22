@@ -1,7 +1,9 @@
 import { Attribute, ChangeDetectorRef, ElementRef, Inject, IterableDiffers, NgModule } from '@angular/core';
 import { CdkTable, CdkTableModule } from '@angular/cdk/table';
-import { NbBidiModule, NbDirectionality } from '../bidi';
-import { NbPlatformModule, NbPlatform } from '../platform';
+import { NbBidiModule } from '../bidi/bidi.module';
+import { NbDirectionality } from '../bidi/bidi-service';
+import { NbPlatformModule } from '../platform/platform.module';
+import { NbPlatform } from '../platform/platform-service';
 import { NB_DOCUMENT } from '../../../theme.options';
 import {
   NbCellDefDirective,

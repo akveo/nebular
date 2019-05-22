@@ -2,9 +2,6 @@
   "name": "@nebular/security",
   "version": "4.0.0-rc.4",
   "description": "@nebular/security",
-  "main": "./bundles/security.umd.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -33,5 +30,6 @@
     "@angular/core": "^8.0.0-rc.2",
     "@angular/router": "^8.0.0-rc.2",
     "rxjs": "^6.5.1"
-  }
+  },
+  "sideEffects": false
 }

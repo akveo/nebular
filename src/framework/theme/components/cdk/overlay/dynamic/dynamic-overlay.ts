@@ -8,7 +8,7 @@ import {
 } from '../overlay-position';
 
 import { NbRenderableContainer } from '../overlay-container';
-import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay';
+import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
 import { NbOverlayRef } from '../mapping';
 
 export interface NbDynamicOverlayController {

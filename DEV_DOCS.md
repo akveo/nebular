@@ -27,6 +27,7 @@
 - add the package into bump-version.ts which bumps package version and its dependencies
 - add the package external dependencies into rollup-config.ts which gives rollup capability build package correctly
 - add the package into bundle.ts which build umd modules for our packages
+- add the package into `JS_PACKAGES` in `scripts/gulp/tasks/config.ts` which used to add es2015 bundles for our packages
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
 - add the package into change-prefix.ts which builds our packages with custom prefix.
 

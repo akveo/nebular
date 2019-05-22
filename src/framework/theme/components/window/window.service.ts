@@ -13,8 +13,8 @@ import {
   NbComponentType,
   NbOverlayPositionBuilder,
   NbOverlayRef,
-  NbOverlayService,
-} from '../cdk/overlay';
+} from '../cdk/overlay/mapping';
+import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbBlockScrollStrategyAdapter } from '../cdk/adapter/block-scroll-strategy-adapter';
 import {
   NB_WINDOW_CONFIG,
