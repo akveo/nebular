@@ -18,4 +18,12 @@
 @import 'layout';
 
 @mixin nb-bootstrap-global() {
+  @include nb-b-buttons-theme();
+  //@include nb-b-button-group-theme();
+  //@include nb-b-dropdowns-theme();
+  //@include nb-b-icon-buttons-theme();
+  //@include nb-b-forms-theme();
+  //@include nb-b-input-group-theme();
+  //@include nb-b-modals-theme();
+  //@include nb-b-layout-theme();
 }

@@ -6,40 +6,32 @@
 
 @import 'shape-buttons';
 @import 'size-buttons';
-@import 'default-buttons';
+@import 'status-buttons';
 @import 'hero-buttons';
 @import 'outline-buttons';
 
 @mixin nb-b-buttons-theme() {
 
   .btn {
-    color: nb-theme(btn-fg);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    font-weight: nb-theme(font-weight-bolder);
-    font-family: nb-theme(btn-font-family);
-    border: 2px solid transparent;
-    transition: none;
-    cursor: nb-theme(btn-cursor);
+    cursor: nb-theme(button-cursor);
+    font-family: nb-theme(button-text-font-family);
+    font-weight: nb-theme(button-text-font-weight);
 
-    &:focus, .focus,
-    &:hover, .hover,
-    &:active, .active {
-      color: nb-theme(btn-fg);
-      cursor: nb-theme(btn-cursor);
+    &:focus {
+      box-shadow: 0 0 0 nb-theme(button-outline-width) nb-theme(button-outline-color);
+      outline: none;
     }
 
-    &:not(:disabled):not(.disabled) {
-      cursor: nb-theme(btn-cursor);
+    &[disabled] {
+      cursor: nb-theme(button-disabled-cursor);
     }
 
-    @include btn-md();
+    @include b-btn-size(medium);
   }
 
-  @include btn-shape();
-  @include btn-size();
-
-  @include btn-default();
-  @include btn-hero();
-  @include btn-outline();
+  @include b-btn-shapes();
+  @include b-btn-sizes();
+  @include b-btn-statuses();
+  @include b-btn-heros();
+  @include b-btn-outlines();
 }

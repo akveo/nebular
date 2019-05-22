@@ -4,52 +4,26 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin btn-size() {
+@mixin b-btn-size($size) {
+  font-size: nb-theme(button-#{$size}-text-font-size);
+  line-height: nb-theme(button-#{$size}-text-line-height);
+  padding: nb-theme(button-filled-#{$size}-padding);
+}
+
+@mixin b-btn-sizes() {
   .btn.btn-lg {
-    @include btn-lg();
+    @include b-btn-size(large);
   }
 
   .btn.btn-md {
-    @include btn-md();
+    @include b-btn-size(medium);
   }
 
   .btn.btn-sm {
-    @include btn-sm();
+    @include b-btn-size(small);
   }
 
   .btn.btn-xs {
-    @include btn-xs();
+    @include b-btn-size(tiny);
   }
-}
-
-@mixin btn-lg() {
-  @include button-size(nb-theme(btn-padding-y-lg),
-                       nb-theme(btn-padding-x-lg),
-                       nb-theme(btn-font-size-lg),
-                       nb-theme(btn-line-height),
-                       nb-theme(btn-border-radius));
-}
-
-@mixin btn-md() {
-  @include button-size(nb-theme(btn-padding-y-md),
-                       nb-theme(btn-padding-x-md),
-                       nb-theme(btn-font-size-md),
-                       nb-theme(btn-line-height),
-                       nb-theme(btn-border-radius));
-}
-
-@mixin btn-sm() {
-  @include button-size(nb-theme(btn-padding-y-sm),
-                       nb-theme(btn-padding-x-sm),
-                       nb-theme(btn-font-size-sm),
-                       nb-theme(btn-line-height),
-                       nb-theme(btn-border-radius));
-}
-
-@mixin btn-xs() {
-  @include button-size(nb-theme(btn-padding-y-xs),
-                       nb-theme(btn-padding-x-xs),
-                       nb-theme(btn-font-size-xs),
-                       nb-theme(btn-line-height),
-                       nb-theme(btn-border-radius));
 }
