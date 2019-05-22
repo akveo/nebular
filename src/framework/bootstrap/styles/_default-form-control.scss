@@ -24,24 +24,24 @@
 
 @mixin form-control-success() {
   &, &:focus {
-    border-color: nb-theme(form-control-success-border-color);
+    border-color: nb-theme(input-success-border-color);
   }
 }
 
 @mixin form-control-info() {
   &, &:focus {
-    border-color: nb-theme(form-control-info-border-color);
+    border-color: nb-theme(input-info-border-color);
   }
 }
 
 @mixin form-control-danger() {
   &, &:focus {
-    border-color: nb-theme(form-control-danger-border-color);
+    border-color: nb-theme(input-danger-border-color);
   }
 }
 
 @mixin form-control-warning() {
   &, &:focus {
-    border-color: nb-theme(form-control-warning-border-color);
+    border-color: nb-theme(input-warning-border-color);
   }
 }

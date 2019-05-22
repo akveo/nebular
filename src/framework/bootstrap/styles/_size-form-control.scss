@@ -4,28 +4,33 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@mixin size($size) {
+  font-size: nb-theme(input-#{$size}-text-font-size);
+  font-weight: nb-theme(input-#{$size}-text-font-weight);
+  line-height: nb-theme(input-#{$size}-text-line-height);
+  padding: nb-theme(input-#{$size}-padding);
+
+  &::placeholder {
+    font-size: nb-theme(input-#{$size}-placeholder-text-font-size);
+    font-weight: nb-theme(input-#{$size}-placeholder-text-font-weight);
+    // TODO: this seems to be unused
+    line-height: nb-theme(input-#{$size}-placeholder-text-line-height);
+  }
+}
+
 @mixin form-control-size() {
+  .input-group-md .form-control,
   .form-control {
-    @include form-control-md();
+    @include size(medium);
   }
 
+  .input-group-sm .form-control,
   .form-control.input-sm {
-    @include form-control-sm();
+    @include size(small);
   }
 
+  .input-group-lg .form-control,
   .form-control.input-lg {
-    @include form-control-lg();
+    @include size(large);
   }
-}
-
-@mixin form-control-sm() {
-  font-size: nb-theme(form-control-font-size-sm);
-}
-
-@mixin form-control-md() {
-  font-size: nb-theme(form-control-font-size);
-}
-
-@mixin form-control-lg() {
-  font-size: nb-theme(form-control-font-size-lg);
 }
