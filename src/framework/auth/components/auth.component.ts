@@ -18,7 +18,9 @@ import { takeWhile } from 'rxjs/operators';
         <nb-card>
           <nb-card-header>
             <nav class="navigation">
-              <a href="#" (click)="back()" class="link" aria-label="Back"><nb-icon icon="arrow-back"></nb-icon></a>
+              <a href="#" (click)="back()" class="link back-link" aria-label="Back">
+                <nb-icon icon="arrow-back"></nb-icon>
+              </a>
             </nav>
           </nb-card-header>
           <nb-card-body>
