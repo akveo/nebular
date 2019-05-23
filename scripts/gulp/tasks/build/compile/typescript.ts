@@ -51,7 +51,7 @@ task('replace-scss-with-css', () => {
 });
 
 // github.com/angular/components/blob/3a237bd254cd3c02a913e3cd2faef8546203c252/tools/package-tools/ts-compile.ts#L11
-function tsCompile(binary: 'ngc' | 'tsc', flags: string[]): Promise<void> {
+export function tsCompile(binary: 'ngc' | 'tsc', flags: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     const binaryPath = resolvePath(`./node_modules/.bin/${binary}`);
     const childProcess = spawn(binaryPath, flags, {shell: true});

@@ -1,222 +1,189 @@
-import { renameSync as fsRenameSync } from 'fs';
-import { join } from 'path';
 import { dest, src, task } from 'gulp';
-import * as rename from 'gulp-rename';
 import * as replace from 'gulp-replace';
 import * as minimist from 'minimist';
-import { capitalize, dasherize } from '@angular-devkit/core/src/utils/strings';
+import * as runSequence from 'run-sequence';
+import { BUILD_DIR, LIB_DIR } from './config';
+import { tsCompile } from './build/compile/typescript';
+import { writeFileSync } from 'fs';
+import { bundleFesm2015Module, bundleFesm5Module, bundleUmdModule } from './build/bundle/bundle';
+import { setBundlesPathStream } from './build/bundle/bundles-paths';
 
-import { BUILD_DIR } from './config';
+const THEME_SRC_DIR = './src/framework/theme/**/*';
 
-type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security';
-
-interface PackagePrefix {
+interface ChangePrefixArguments {
   prefix: string;
+  packageName: string;
 }
-type ParsedArguments = PackagePrefix & { [P in NebularPackage]?: string };
-type PackageNamesConfig = PackagePrefix &
-  { unscopedPrefix: string } &
-  { [P in NebularPackage]: string } &
-  { unprefixed: { [P in NebularPackage]: string } };
-
-interface StringReplacement {
-  from: string | RegExp;
-  to: string;
-}
-
-const ROLLUP_CONFIG_DIR = './scripts/gulp/tasks/bundle';
-const ROLLUP_CONFIG_PATH = `${ROLLUP_CONFIG_DIR}/rollup-config.ts`;
-const NEBULAR_PACKAGES: NebularPackage[] = ['auth', 'bootstrap', 'dateFns', 'evaIcons', 'moment', 'theme', 'security'];
 
 /**
- * Reads package prefix and all package names passed as command line arguments.
+ * Reads package prefix and custom theme package name passed as command line arguments.
  * List of supported arguments:
- * --prefix    - prefix of the package. Also used as prefix in class names, selector prefixes etc.
- * --auth      - replacement for @nebular/auth
- * --bootstrap - replacement for @nebular/bootstrap
- * --date-fns  - replacement for @nebular/date-fns
- * --eva-icons - replacement for @nebular/eva-icons
- * --moment    - replacement for @nebular/moment
- * --theme     - replacement for @nebular/theme
- * --security  - replacement for @nebular/security
- * @param argv command line arguments
+ * --prefix        - prefix for class names, selector prefixes etc.
+ * --package-name  - replacement for @nebular/theme
  * @returns ParsedArguments
  */
-function parseArguments(argv: string[]): ParsedArguments {
-  const args = minimist(argv.slice(2));
-  const prefix = args.prefix;
+function getArguments(): ChangePrefixArguments {
+  const args = minimist(process.argv.slice(2));
+  return { prefix: args.prefix, packageName: args['package-name'] || args.prefix };
+}
+
+/**
+ * Replaces Nebular prefixes with custom one and builds theme package
+ * with custom package name. Custom prefix and package name are passed as command line arguments.
+ * See full list of arguments in `parseArguments` doc comment.
+ *
+ * This task not mean to be used directly. Rather you should use following command:
+ * `$npm run build:custom-prefix -- --prefix @custom-prefix --package-name @package-name`.
+ * It will create ready to publish bundle for theme package in `src/.lib/[package-name]` directory.
+ */
+task('custom-theme-prefix', (done) => {
+  runSequence(
+    'copy-to-build-dir:custom-theme',
+    'change-prefix',
+    'compile-scss',
+    'replace-scss-with-css',
+    'compile:custom-theme',
+    'copy-custom-theme-resources',
+    'bundle:custom-theme',
+    'set-bundle-paths',
+    done,
+  );
+});
+
+task('copy-to-build-dir:custom-theme', () => {
+  const { packageName }: ChangePrefixArguments = getArguments();
+  return src([THEME_SRC_DIR]).pipe(dest(`${BUILD_DIR}/${packageName}`));
+});
+
+task('change-prefix', () => {
+  const { packageName, prefix }: ChangePrefixArguments = getArguments();
 
   if (!prefix) {
     throwNoPrefixSpecified();
   }
 
-  const parsedArguments = { prefix };
-  for (const packageName of NEBULAR_PACKAGES) {
-    parsedArguments[packageName] = args[dasherize(packageName)];
-  }
+  const replacePairs = generatePrefixes(prefix);
+  let stream = src(`${BUILD_DIR}/**/*`);
 
-  return parsedArguments;
-}
-
-/**
- * Prefixes packages and fills config with default package names for packages
- * not passed as `--[package-name]` argument.
- * Default package name is `${prefix}/${dasherize(packageName)}`.
- * For example, with prefix set `@custom`, `@nebular/auth` would ne `@custom/auth`.
- * @param parsedArguments parsed command line arguments
- * @returns PackageNamesConfig
- */
-function applyDefaults(parsedArguments: ParsedArguments): PackageNamesConfig {
-  const { prefix } = parsedArguments;
-  const config = {
-    prefix,
-    unscopedPrefix: prefix.replace(/^@/, ''),
-    unprefixed: {},
-  };
-
-  for (const nbPackageName of NEBULAR_PACKAGES) {
-    const packageName = parsedArguments[nbPackageName] || dasherize(nbPackageName);
-    config.unprefixed[nbPackageName] = packageName;
-    config[nbPackageName] = `${prefix}/${packageName}`;
-  }
-
-  return config as PackageNamesConfig;
-}
-
-/**
- * Parses command line arguments and fills packageNames not set in it.
- * @param argv
- */
-function getPackageNamesConfig(argv: string[]): PackageNamesConfig {
-  return applyDefaults(parseArguments(argv));
-}
-
-/**
- * Generates replacements for classes, component, css selectors etc.
- * @param prefix unscoped package prefix
- * @returns StringReplacement[]
- */
-function generatePrefixReplacements(prefix: string): StringReplacement[] {
-  return [
-    { from: /^nb/g, to: prefix.toLowerCase() },
-    { from: /^NB/g, to: prefix.toUpperCase() },
-    { from: /^Nb/g, to: capitalize(prefix) },
-  ];
-}
-
-/**
- * Returns all strings to replace with appropriate new value.
- * This includes package names and all class, selector, etc. combinations.
- * @param packageNamesConfig
- * @returns StringReplacement[]
- */
-function getReplacements(packageNamesConfig: PackageNamesConfig): StringReplacement[] {
-  const { unscopedPrefix } = packageNamesConfig;
-
-  const prefixReplacements: StringReplacement[] = generatePrefixReplacements(unscopedPrefix);
-  const projectReplacements: StringReplacement[] = NEBULAR_PACKAGES.map((packageName) => {
-    return { from: `@nebular/${packageName}`, to: packageNamesConfig[packageName] };
-  });
-
-  return prefixReplacements.concat(projectReplacements);
-}
-
-/**
- * Copies nebular publish ts config and replaces nebular packages names with custom ones.
- */
-task('generate-ts-config', () => {
-  const { theme }: PackageNamesConfig = getPackageNamesConfig(process.argv);
-  let stream = src('tsconfig.publish.json');
-
-  for (const packageName of NEBULAR_PACKAGES) {
-    stream = stream.pipe(replace(`@nebular/${dasherize(packageName)}`, theme))
+  for (const [ oldPrefix, newPrefix ] of replacePairs) {
+    stream = stream.pipe(replace(oldPrefix, newPrefix));
   }
 
   return stream
-    .pipe(rename('tsconfig-custom.publish.json'))
-    .pipe(dest('.'));
+    .pipe(replace('nebular/theme', packageName))
+    .pipe(dest(BUILD_DIR));
 });
 
-/**
- * Copies sources to build dir and renames package dirs to custom ones.
- */
-task('copy-build-dir-and-rename', () => {
-  return src('./src/framework/**/*')
-    .pipe(dest(BUILD_DIR))
-    .on('end', renameDirs);
+task(`compile:custom-theme`, () => {
+  const { packageName } = getArguments();
+  const esm2015configFileName = createCustomTsConfigEsm2015(packageName);
+  const esm5configFileName = createCustomTsConfigEsm5(packageName);
+
+  return Promise.all([
+    tsCompile('ngc', ['-p', esm2015configFileName]),
+    tsCompile('ngc', ['-p', esm5configFileName]),
+  ]);
 });
 
-/**
- * Renames package directories if custom names for packages were specified.
- */
-function renameDirs () {
-  const config: PackageNamesConfig = getPackageNamesConfig(process.argv);
+task(`bundle:custom-theme`, () => {
+  const { packageName } = getArguments();
+  bundleFesm2015Module(packageName);
+  bundleFesm5Module(packageName);
+  bundleUmdModule(packageName);
+});
 
-  for (const packageName of NEBULAR_PACKAGES) {
-    const nbPackageDirName = dasherize(packageName);
-    const fromDir = join(BUILD_DIR, nbPackageDirName);
-    const toDir = join(BUILD_DIR, config.unprefixed[packageName]);
-    fsRenameSync(fromDir, toDir);
-  }
+task('copy-custom-theme-resources', () => {
+  const { packageName } = getArguments();
+  return src([
+    `${BUILD_DIR}/${packageName}/**/*.html`,
+    `${BUILD_DIR}/${packageName}/**/*.css`,
+    `${BUILD_DIR}/${packageName}/**/*.scss`,
+    `${BUILD_DIR}/${packageName}/**/package.json`,
+    `${BUILD_DIR}/${packageName}/**/LICENSE.txt`,
+    `${BUILD_DIR}/${packageName}/**/README.md`,
+    '!./**/dist/**/*',
+  ])
+    .pipe(dest(`${LIB_DIR}/${packageName}`));
+});
+
+task('set-bundle-paths', () => {
+  const { packageName } = getArguments();
+  return src(
+    `${LIB_DIR}/${packageName}/package.json`,
+    { base: LIB_DIR },
+  )
+    .pipe(setBundlesPathStream())
+    .pipe(dest(LIB_DIR));
+});
+
+function generatePrefixes(prefix: string): string[][] {
+  return [
+    [ 'nb', prefix.toLowerCase() ],
+    [ 'NB', prefix.toUpperCase() ],
+    [ 'Nb', prefix[0].toUpperCase() + prefix.slice(1).toLowerCase() ],
+  ];
 }
 
-/**
- * Patches rollup config in place. Replaces all nebular tokens with custom ones.
- */
-task('patch-rollup-config', () => {
-  let stream = src(ROLLUP_CONFIG_PATH);
-  const config: PackageNamesConfig = getPackageNamesConfig(process.argv);
-  const { unscopedPrefix, unprefixed: unprefixedPackageNames } = config;
-  const replacements: StringReplacement[] = getReplacements(config);
-
-  // Add replacers for `nb.[package-name]`
-  for (const [ nbPackageName, customPackageName ] of Object.entries(unprefixedPackageNames)) {
-    replacements.push({
-      from: `nb.${dasherize(nbPackageName)}`,
-      to: `${unscopedPrefix}.${customPackageName}`,
-    });
+function createCustomTsConfigEsm2015(packageName): string {
+  const config = `{
+  "extends": "./tsconfig.publish",
+  "compilerOptions": {
+    "outDir": "./src/.lib/${packageName}/esm2015",
+    "declaration": true,
+    "declarationDir": "./src/.lib/${packageName}",
+    "rootDir": "./.ng_build/${packageName}"
+  },
+  "files": ["./.ng_build/${packageName}/public_api.ts"],
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "skipMetadataEmit": false,
+    "strictTypeChecks": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "${packageName}"
   }
+}`;
 
+  const configName = `tsconfig.build-esm2015-custom.json`;
+  writeFileSync(configName, config);
 
-  for (const { from, to } of replacements) {
-    stream = stream.pipe(replace(from, to));
+  return configName;
+}
+
+function createCustomTsConfigEsm5(packageName): string {
+  const config = `
+{
+  "extends": "./tsconfig.publish",
+  "compilerOptions": {
+    "outDir": "./src/.lib/${packageName}/esm5",
+    "declaration": false,
+    "target": "es5",
+    "rootDir": "./.ng_build/${packageName}"
+  },
+  "files": ["./.ng_build/${packageName}/public_api.ts"],
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "skipMetadataEmit": true,
+    "strictTypeChecks": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "${packageName}"
   }
+}`;
 
-  return stream.pipe(dest(ROLLUP_CONFIG_DIR));
-});
+  const configName = `tsconfig.build-esm5-custom.json`;
+  writeFileSync(configName, config);
 
-/**
- * Copies sources to build dir, generates ts config and replaces Nebular prefixes and package names with
- * custom passed as command line arguments. See full list of arguments in `parseArguments` doc comment.
- *
- * Usage:
- * `$gulp change-prefix -- --prefix @custom-prefix`
- * Results in `@custom-prefix/theme`, `@custom-prefix/auth`, etc.
- *
- * Each package name could be configured individually. For example:
- * `$gulp change-prefix -- --prefix @custom-prefix --theme ui-kit --eva-icons icons`
- * Result:
- * `@nebular/theme`     -> `@custom-prefix/ui-kit`
- * `@nebular/eva-icons` -> `@custom-prefix/icons`
- * `@nebular/auth`      -> `@custom-prefix/auth`,
- * `@nebular/date-fns`  -> `@custom-prefix/date-fns`, etc.
- *
- * This task not mean to be used directly. Rather you should use following command:
- * `$npm run build:custom-prefix -- --prefix @custom-prefix --theme @custom-prefix/ui-kit`.
- * It will create ready to publish bundles for each package in `src/.lib/[package-name]` directory.
- */
-task('change-prefix', ['copy-build-dir-and-rename', 'generate-ts-config', 'patch-rollup-config'], () => {
-  const replacements: StringReplacement[] = getReplacements(getPackageNamesConfig(process.argv));
+  return configName;
+}
 
-  let stream = src(`${BUILD_DIR}/**/*`);
-
-  for (const { from, to } of replacements) {
-    stream = stream.pipe(replace(from, to));
-  }
-
-  return stream.pipe(dest(BUILD_DIR));
-});
 
 function throwNoPrefixSpecified() {
-  throw new Error(`'--prefix' parameter must be specified`);
+  throw new Error(`--prefix parameter must be specified`);
 }

@@ -20,7 +20,7 @@ for (const packageName of JS_PACKAGES) {
 
 task('bundle:rename-dev', bundleRenameDev);
 
-function bundleFesm2015Module(name: string) {
+export function bundleFesm2015Module(name: string) {
   return bundle({
     src: `${LIB_DIR}/${name}/esm2015/**/*.js`,
     moduleName: `nb.${name}`,
@@ -31,7 +31,7 @@ function bundleFesm2015Module(name: string) {
   });
 }
 
-function bundleFesm5Module(name: string) {
+export function bundleFesm5Module(name: string) {
   return bundle({
     src: `${LIB_DIR}/${name}/esm5/**/*.js`,
     moduleName: `nb.${name}`,
@@ -42,7 +42,7 @@ function bundleFesm5Module(name: string) {
   });
 }
 
-function bundleUmdModule(name: string) {
+export function bundleUmdModule(name: string) {
   return bundle({
     src: `${LIB_DIR}/${name}/esm5/**/*.js`,
     moduleName: `nb.${name}`,

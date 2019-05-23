@@ -13,7 +13,7 @@ task('set-bundles-paths', () => {
     .pipe(dest(LIB_DIR));
 });
 
-function setBundlesPathStream() {
+export function setBundlesPathStream() {
   return through.obj(function (file, encoding, callback) {
     const packageName = basename(dirname(file.path));
     const packageJson = JSON.parse(file.contents.toString(encoding));

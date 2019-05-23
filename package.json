@@ -72,9 +72,8 @@
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
     "gen:playground-components": "ng g .:playground-components",
-    "gulp:change-prefix": "gulp change-prefix",
-    "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
-    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --"
+    "gulp:custom-prefix": "gulp custom-theme-prefix",
+    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:custom-prefix -- {@}\" clean:tmp --"
   },
   "keywords": [
     "angular",

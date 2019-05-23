@@ -29,7 +29,6 @@
 - add the package into bundle.ts which build umd modules for our packages
 - add the package into `JS_PACKAGES` in `scripts/gulp/tasks/config.ts` which used to add es2015 bundles for our packages
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
-- add the package into change-prefix.ts which builds our packages with custom prefix.
 
 # New Package Dependency Checklist
 - run `npm run update-packages-smoke-lock` to update packages-smoke/package-lock.json and commit updated package lock
