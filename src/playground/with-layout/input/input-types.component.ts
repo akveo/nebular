@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
     <nb-card>
       <nb-card-body>
         <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input">
-        <textarea nbInput fullWidth shape="round" placeholder="Textarea"></textarea>
+        <textarea nbInput fullWidth placeholder="Textarea"></textarea>
       </nb-card-body>
     </nb-card>
   `,
