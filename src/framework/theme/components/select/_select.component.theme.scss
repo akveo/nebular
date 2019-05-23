@@ -29,6 +29,9 @@
 
   .options-list-container {
     box-shadow: nb-theme(select-options-list-shadow);
+    border-color: nb-theme(select-options-list-border-color);
+    border-style: nb-theme(select-options-list-border-style);
+    border-width: nb-theme(select-options-list-border-width);
     overflow: hidden;
 
     & > .options-list {
