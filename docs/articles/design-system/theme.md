@@ -1,6 +1,6 @@
 # Eva Design System Theme
 
-In Eva Design System **theme** is a set of semantic variables and connections between them, that represents application's look & feel to achieves the following goals:
+In Eva Design System a **theme** is a set of semantic variables and connections between them, that represents application's look & feel to achieves the following goals:
 
 - create new visual themes easily;
 - flexibly change look & feel of the application by managing variables, without changing components' styles;

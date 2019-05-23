@@ -84,5 +84,6 @@ Last thing, find your `styles.scss` (or create one and add it into `.angular-cli
 
 - [Use Theme Variables](docs/design-system/use-theme-variables)
 - [Create Custom Theme](docs/design-system/create-custom-theme)
+- [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes)
 
 

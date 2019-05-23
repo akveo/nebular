@@ -4,7 +4,7 @@ Custom theme creation is a very similar process to [Theme Customization](docs/de
 Only in this case we suggest follow simple but very important rules, so that we can minimize amount of necessary changes 
 and avoid repeated code.
 
-<div class="note note-warning section-end">
+<div class="note note-info section-end">
   <div class="note-title">Setup Required</div>
   <div class="note-body">
     This guide assumes you already enabled [Theme Customization](docs/design-system/enable-customizable-theme)
@@ -249,3 +249,4 @@ That's it. In a similar way the rest of the available theme variables could be c
 
 - [Use Theme Variables](docs/design-system/use-theme-variables)
 - [Enable Theme Customization](docs/design-system/enable-customizable-theme)
+- [Enable CSS Properties Mode](docs/design-system/enable-css-properties-mode)

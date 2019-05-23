@@ -6,7 +6,8 @@ This means that components visual style and behavior are based on Design System 
 
 ## Principles
 
-Eva is a customizable Design System based on Atomic Design Principles. All components are built based on basic elements with shared styles, connected with a single Visual Language.
+Eva is a customizable Design System based on Atomic Design Principles.
+All components are built based on basic elements with shared styles, connected with a single Visual Language for both Mobile and Web platforms.
 Most importantly, Eva is built to be customizable, meaning architectural support of multiple themes across all components and supporting platforms.  
 <hr>
 
@@ -22,21 +23,21 @@ Both implementations have single source of truth for styles, and unified theming
 
 ## Built-in themes
 
-Currently, there are 3 built-in themes: 
+Currently, there are 4 built-in themes: 
 - `default` - clean white theme
 - `dark` - dark theme
 - `cosmic` - alternative dark violet theme
 - `corporate` - firm business theme
 
-Themes can also be inherited from each other, `cosmic`, for instance, is inherited from the `dark` theme.
+Theme extension mechanism allows theme inheritance,  for instance, is inherited from the `dark` theme.
 <hr>
 
 ## Enterprise ready
 
-Being a part of Eva ecosystem, Nebular is a great choice for Enterprise grade products, providing complete control over application look & feel.  
+Being a part of Eva Ecosystem, Nebular is a great choice for Enterprise grade products, providing complete control over application look & feel.  
 <hr>
 
 ## Related Articles
 
-- [Design System Rules](docs/auth/design-system-rules)
+- [Design System Rules](docs/design-system/eva-design-system-theme)
 - [Create Custom Theme](docs/design-system/create-custom-theme)

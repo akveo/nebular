@@ -28,6 +28,26 @@ Now we can simply call `nb-theme(variable-name)` to access a variable:
 ```
 <hr>
 
+## Access with Multiples Theme Mode
+
+In a case when you have [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes), you also need to cover your component styles
+using `nb-install-component` mixin like this:
+
+```scss
+
+@import '../../../themes';
+
+@include nb-install-component {
+
+  background: nb-theme(background-basic-color-1);
+}
+
+```
+
+The mixin will multiple the component styles per each enabled theme, giving ability to use run-time themes. 
+Note, in case when [Custom CSS Properties](docs/design-system/enable-css-properties-mode) mode enables, 
+the mixin **is not needed**, since there is no need to multiple the styles.
+
 ## Related Articles
 
 - [Design System Theme](docs/design-system/eva-design-system-theme)

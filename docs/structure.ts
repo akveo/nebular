@@ -158,28 +158,28 @@ export const structure = [
           },
         ],
       },
-      // {
-      //   type: 'page',
-      //   name: 'Enable CSS Properties mode',
-      //   children: [
-      //     {
-      //       type: 'block',
-      //       block: 'markdown',
-      //       source: 'design-system/css-properties.md',
-      //     },
-      //   ],
-      // },
-      // {
-      //   type: 'page',
-      //   name: 'Enabling Multiple Runtime Themes',
-      //   children: [
-      //     {
-      //       type: 'block',
-      //       block: 'markdown',
-      //       source: 'design-system/multiple-runtime-themes.md',
-      //     },
-      //   ],
-      // },
+      {
+        type: 'page',
+        name: 'Enable CSS Properties mode',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/css-properties.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Enable Multiple Runtime Themes',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/multiple-runtime-themes.md',
+          },
+        ],
+      },
       {
         type: 'page',
         name: 'Changing Theme',
