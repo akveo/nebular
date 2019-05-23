@@ -17,8 +17,11 @@
   a {
     color: nb-theme(link-text-color);
 
-    &:hover,
     &:focus {
+      color: nb-theme(link-text-focus-color);
+    }
+
+    &:hover {
       color: nb-theme(link-text-hover-color);
     }
   }
