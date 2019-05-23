@@ -30,3 +30,4 @@ export * from './strategies/password/password-strategy';
 export * from './strategies/password/password-strategy-options';
 export * from './strategies/oauth2/oauth2-strategy';
 export * from './strategies/oauth2/oauth2-strategy.options';
+export * from './models/user';
