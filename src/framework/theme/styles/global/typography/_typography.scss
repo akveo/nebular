@@ -16,6 +16,10 @@
 
   a {
     color: nb-theme(link-text-color);
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
 
     &:focus {
       color: nb-theme(link-text-focus-color);
@@ -23,6 +27,39 @@
 
     &:hover {
       color: nb-theme(link-text-hover-color);
+    }
+  }
+
+  .label {
+    color: nb-theme(text-hint-color);
+    font-family: nb-theme(text-label-font-family);
+    font-size: nb-theme(text-label-font-size);
+    font-weight: nb-theme(text-label-font-weight);
+    line-height: nb-theme(text-label-line-height);
+  }
+
+  .caption {
+    font-family: nb-theme(text-caption-font-family);
+    font-size: nb-theme(text-caption-font-size);
+    font-weight: nb-theme(text-caption-font-weight);
+    line-height: nb-theme(text-caption-line-height);
+  }
+
+  .caption-2 {
+    font-family: nb-theme(text-caption-2-font-family);
+    font-size: nb-theme(text-caption-2-font-size);
+    font-weight: nb-theme(text-caption-2-font-weight);
+    line-height: nb-theme(text-caption-2-line-height);
+  }
+
+  .caption,
+  .caption-2 {
+    color: nb-theme(text-hint-color);
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        color: nb-theme(text-#{$status}-color);
+      }
     }
   }
 }
