@@ -64,6 +64,9 @@ $theme: (
   tooltip-shadow: none,
   select-options-list-shadow: none,
   datepicker-shadow: none,
+
+  select-options-list-border-width: 0.0625rem,
+  select-options-list-border-color: border-basic-color-3,
 );
 
 $nb-themes: nb-register-theme($theme, corporate, default);
