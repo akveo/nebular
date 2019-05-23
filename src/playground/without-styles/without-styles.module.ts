@@ -5,7 +5,6 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { WithoutStylesRoutingModule } from './without-styles-routing.module';
 import { WithoutStylesComponent } from './without-styles.component';
@@ -15,7 +14,6 @@ import { WithoutStylesComponent } from './without-styles.component';
     WithoutStylesComponent,
   ],
   imports: [
-    NgbModule,
     WithoutStylesRoutingModule,
   ],
 })
