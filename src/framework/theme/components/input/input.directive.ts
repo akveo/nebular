@@ -57,8 +57,8 @@ import { NbComponentStatus } from '../component-status';
  * @styles
  *
  * input-background-color:
- * input-border-width:
  * input-border-style:
+ * input-border-width:
  * input-placeholder-text-color:
  * input-placeholder-text-font-family:
  * input-text-color:
@@ -95,6 +95,7 @@ import { NbComponentStatus } from '../component-status';
  * input-tiny-placeholder-text-font-weight:
  * input-tiny-placeholder-text-line-height:
  * input-tiny-padding:
+ * input-tiny-max-width:
  * input-small-text-font-size:
  * input-small-text-font-weight:
  * input-small-text-line-height:
@@ -102,6 +103,7 @@ import { NbComponentStatus } from '../component-status';
  * input-small-placeholder-text-font-weight:
  * input-small-placeholder-text-line-height:
  * input-small-padding:
+ * input-small-max-width:
  * input-medium-text-font-size:
  * input-medium-text-font-weight:
  * input-medium-text-line-height:
@@ -109,6 +111,7 @@ import { NbComponentStatus } from '../component-status';
  * input-medium-placeholder-text-font-weight:
  * input-medium-placeholder-text-line-height:
  * input-medium-padding:
+ * input-medium-max-width:
  * input-large-text-font-size:
  * input-large-text-font-weight:
  * input-large-text-line-height:
@@ -116,6 +119,7 @@ import { NbComponentStatus } from '../component-status';
  * input-large-placeholder-text-font-weight:
  * input-large-placeholder-text-line-height:
  * input-large-padding:
+ * input-large-max-width:
  * input-giant-text-font-size:
  * input-giant-text-font-weight:
  * input-giant-text-line-height:
@@ -123,6 +127,7 @@ import { NbComponentStatus } from '../component-status';
  * input-giant-placeholder-text-font-weight:
  * input-giant-placeholder-text-line-height:
  * input-giant-padding:
+ * input-giant-max-width:
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
