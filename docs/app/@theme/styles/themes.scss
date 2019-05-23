@@ -2,6 +2,8 @@
 @import '../../../../src/framework/theme/styles/themes/default';
 @import '../../../../src/framework/theme/styles/global/breakpoints';
 
+$nb-enable-css-custom-properties: true;
+
 /*
 We have to overwrite breakpoints because we need to add *macpro* breakpoint.
 But if we add it using *map-merge* function we'll get the warning and *media-breakpoint-down* will stop working.
