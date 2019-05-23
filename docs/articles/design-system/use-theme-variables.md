@@ -50,7 +50,7 @@ the mixin **is not needed**, since there is no need to multiple the styles.
 
 ## Related Articles
 
-- [Design System Theme](docs/design-system/eva-design-system-theme)
+- [Design System Theme](docs/design-system/design-system-theme)
 - [Enable Customizable Theme](docs/design-system/enable-customizable-theme) 
 - [Create Custom Theme](docs/design-system/create-custom-theme) 
 

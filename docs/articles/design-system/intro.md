@@ -1,6 +1,6 @@
 # Eva Design System
 
-Starting with version 4.0 Nebular becomes an Angular implementation of [Eva Design System](eva.design).
+Starting with version 4.0 Nebular becomes an Angular implementation of [Eva Design System](https://eva.design?utm_source=nebular_docs&utm_medium=intro).
 This means that components visual style and behavior are based on Design System rules and agreements.  
 <hr>
 
@@ -16,7 +16,7 @@ Most importantly, Eva is built to be customizable, meaning architectural support
 Eva Design System is implemented for two platforms:
 
 - Web - Nebular
-- Mobile - [React Kitten](https://github.com/akveo/react-native-ui-kitten/)
+- Mobile - [React Kitten](https://github.com/akveo/react-native-ui-kitten?utm_source=nebular_docs&utm_medium=intro)
 
 Both implementations have a single source of truth for styles and unified theming system.
 <hr>
@@ -39,5 +39,5 @@ Being a part of Eva Ecosystem, Nebular is a great choice for Enterprise-grade pr
 
 ## Related Articles
 
-- [Design System Rules](docs/design-system/eva-design-system-theme)
+- [Design System Rules](docs/design-system/design-system-theme)
 - [Create Custom Theme](docs/design-system/create-custom-theme)

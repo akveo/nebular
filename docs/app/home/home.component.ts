@@ -35,11 +35,11 @@ export class NgdHomeComponent {
       link: 'docs/components/components-overview',
     },
     {
-      title: 'Theme System',
-      description: `Three built-in themes & hundreds of variables to create your own.
+      title: 'Design System',
+      description: `Based on Eva Design System, with 4 visual themes & handy variables to create your own.
                     With hot-reload out of the box`,
       icon: 'assets/img/themes.svg',
-      link: 'docs/guides/theme-system',
+      link: 'docs/design-system/eva-design-system-intro',
     },
     {
       title: 'Auth',

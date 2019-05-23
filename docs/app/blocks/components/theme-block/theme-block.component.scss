@@ -5,6 +5,10 @@
   $inherited-fg: nb-theme(color-fg);
   $selected-row-bg: nb-theme(color-gray-light);
 
+  h2 {
+    text-transform: capitalize;
+  }
+
   .inheritance-icon {
     font-size: 1rem;
     margin: 0 0.25rem;
@@ -21,5 +25,10 @@
 
   .highlighted-row {
     background-color: $selected-row-bg !important;
+  }
+
+  nb-card table.striped tbody tr.not-found {
+    background: nb-theme(backround-basic-color-1);
+    color: nb-theme(text-disabled-color);
   }
 }

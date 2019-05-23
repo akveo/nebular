@@ -210,8 +210,8 @@ export const structure = [
           {
             type: 'block',
             block: 'theme',
-            name: 'Default',
-            source: 'default',
+            name: 'Dark',
+            source: 'dark',
           },
         ],
       },

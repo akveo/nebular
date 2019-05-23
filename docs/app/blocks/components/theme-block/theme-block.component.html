@@ -17,10 +17,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let prop of properties"
-            [ngdFragment]="prop.name"
-            [ngdFragmentSync]="false"
-            ngdFragmentClass="highlighted-row">
+        <tr *ngFor="let prop of filtered">
           <td>
             <a [routerLink]="" fragment="{{ prop.name }}">{{ prop.name }}</a>
           </td>
@@ -29,7 +26,7 @@
 
           <td>
             <a *ngFor="let parent of prop.parents; let index = index; trackBy: trackByFn"
-              [routerLink]="['/docs/themes', parent.theme]"
+              [routerLink]="['/docs/design-system', parent.theme + '-theme']"
               fragment="{{ parent.prop }}"
               [class.inheritance-property]="index > 0">
 
@@ -39,6 +36,9 @@
             </a>
           </td>
         </tr>
+      <tr *ngIf="filtered.length ==0" class="not-found">
+        <td colspan="3">Theme variable not found.</td>
+      </tr>
       </tbody>
     </table>
   </nb-card-body>
