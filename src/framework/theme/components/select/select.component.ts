@@ -140,6 +140,7 @@ export class NbSelectLabelComponent {
  * select-disabled-cursor:
  * select-min-width:
  * select-options-list-max-height:
+ * select-options-list-shadow:
  * select-outline-width:
  * select-outline-color:
  * select-text-font-family:
@@ -157,14 +158,19 @@ export class NbSelectLabelComponent {
  * select-option-disabled-text-color:
  * select-tiny-text-font-size:
  * select-tiny-text-line-height:
+ * select-tiny-max-width:
  * select-small-text-font-size:
  * select-small-text-line-height:
+ * select-small-max-width:
  * select-medium-text-font-size:
  * select-medium-text-line-height:
+ * select-medium-max-width:
  * select-large-text-font-size:
  * select-large-text-line-height:
+ * select-large-max-width:
  * select-giant-text-font-size:
  * select-giant-text-line-height:
+ * select-giant-max-width:
  * select-rectangle-border-radius:
  * select-semi-round-border-radius:
  * select-round-border-radius:
@@ -176,8 +182,8 @@ export class NbSelectLabelComponent {
  * select-outline-placeholder-text-color:
  * select-outline-focus-border-color:
  * select-outline-hover-border-color:
- * select-outline-disabled-border-color:
  * select-outline-disabled-background-color:
+ * select-outline-disabled-border-color:
  * select-outline-disabled-text-color:
  * select-outline-tiny-padding:
  * select-outline-small-padding:
@@ -187,18 +193,23 @@ export class NbSelectLabelComponent {
  * select-outline-primary-border-color:
  * select-outline-primary-focus-border-color:
  * select-outline-primary-hover-border-color:
+ * select-outline-primary-disabled-border-color:
  * select-outline-success-border-color:
  * select-outline-success-focus-border-color:
  * select-outline-success-hover-border-color:
+ * select-outline-success-disabled-border-color:
  * select-outline-info-border-color:
  * select-outline-info-focus-border-color:
  * select-outline-info-hover-border-color:
+ * select-outline-info-disabled-border-color:
  * select-outline-warning-border-color:
  * select-outline-warning-focus-border-color:
  * select-outline-warning-hover-border-color:
+ * select-outline-warning-disabled-border-color:
  * select-outline-danger-border-color:
  * select-outline-danger-focus-border-color:
  * select-outline-danger-hover-border-color:
+ * select-outline-danger-disabled-border-color:
  * select-option-outline-tiny-padding:
  * select-option-outline-small-padding:
  * select-option-outline-medium-padding:
@@ -216,7 +227,6 @@ export class NbSelectLabelComponent {
  * select-filled-text-color:
  * select-filled-placeholder-text-color:
  * select-filled-focus-border-color:
- * select-filled-hover-background-color:
  * select-filled-hover-border-color:
  * select-filled-disabled-background-color:
  * select-filled-disabled-border-color:
@@ -236,6 +246,7 @@ export class NbSelectLabelComponent {
  * select-filled-primary-hover-border-color:
  * select-filled-primary-disabled-background-color:
  * select-filled-primary-disabled-border-color:
+ * select-filled-primary-disabled-text-color:
  * select-filled-success-background-color:
  * select-filled-success-border-color:
  * select-filled-success-text-color:
@@ -246,6 +257,7 @@ export class NbSelectLabelComponent {
  * select-filled-success-hover-border-color:
  * select-filled-success-disabled-background-color:
  * select-filled-success-disabled-border-color:
+ * select-filled-success-disabled-text-color:
  * select-filled-info-background-color:
  * select-filled-info-border-color:
  * select-filled-info-text-color:
@@ -256,6 +268,7 @@ export class NbSelectLabelComponent {
  * select-filled-info-hover-border-color:
  * select-filled-info-disabled-background-color:
  * select-filled-info-disabled-border-color:
+ * select-filled-info-disabled-text-color:
  * select-filled-warning-background-color:
  * select-filled-warning-border-color:
  * select-filled-warning-text-color:
@@ -266,6 +279,7 @@ export class NbSelectLabelComponent {
  * select-filled-warning-hover-border-color:
  * select-filled-warning-disabled-background-color:
  * select-filled-warning-disabled-border-color:
+ * select-filled-warning-disabled-text-color:
  * select-filled-danger-background-color:
  * select-filled-danger-border-color:
  * select-filled-danger-text-color:
@@ -276,6 +290,7 @@ export class NbSelectLabelComponent {
  * select-filled-danger-hover-border-color:
  * select-filled-danger-disabled-background-color:
  * select-filled-danger-disabled-border-color:
+ * select-filled-danger-disabled-text-color:
  * select-option-filled-tiny-padding:
  * select-group-option-filled-tiny-padding-start:
  * select-option-filled-small-padding:
@@ -286,19 +301,15 @@ export class NbSelectLabelComponent {
  * select-group-option-filled-large-padding-start:
  * select-option-filled-giant-padding:
  * select-group-option-filled-giant-padding-start:
- * select-hero-left-background-color:
- * select-hero-right-background-color:
+ * select-hero-background-color:
  * select-hero-border-color:
  * select-hero-border-style:
  * select-hero-border-width:
  * select-hero-text-color:
  * select-hero-placeholder-text-color:
- * select-hero-focus-left-background-color:
- * select-hero-focus-right-background-color:
- * select-hero-hover-left-background-color:
- * select-hero-hover-right-background-color:
- * select-hero-disabled-left-background-color:
- * select-hero-disabled-right-background-color:
+ * select-hero-focus-border-color:
+ * select-hero-hover-border-color:
+ * select-hero-disabled-background-color:
  * select-hero-disabled-text-color:
  * select-hero-tiny-padding:
  * select-hero-small-padding:
@@ -313,8 +324,7 @@ export class NbSelectLabelComponent {
  * select-hero-primary-focus-right-background-color:
  * select-hero-primary-hover-left-background-color:
  * select-hero-primary-hover-right-background-color:
- * select-hero-primary-disabled-left-background-color:
- * select-hero-primary-disabled-right-background-color:
+ * select-hero-primary-disabled-background-color:
  * select-hero-primary-disabled-text-color:
  * select-hero-success-left-background-color:
  * select-hero-success-right-background-color:
@@ -324,8 +334,7 @@ export class NbSelectLabelComponent {
  * select-hero-success-focus-right-background-color:
  * select-hero-success-hover-left-background-color:
  * select-hero-success-hover-right-background-color:
- * select-hero-success-disabled-left-background-color:
- * select-hero-success-disabled-right-background-color:
+ * select-hero-success-disabled-background-color:
  * select-hero-success-disabled-text-color:
  * select-hero-info-left-background-color:
  * select-hero-info-right-background-color:
@@ -335,8 +344,7 @@ export class NbSelectLabelComponent {
  * select-hero-info-focus-right-background-color:
  * select-hero-info-hover-left-background-color:
  * select-hero-info-hover-right-background-color:
- * select-hero-info-disabled-left-background-color:
- * select-hero-info-disabled-right-background-color:
+ * select-hero-info-disabled-background-color:
  * select-hero-info-disabled-text-color:
  * select-hero-warning-left-background-color:
  * select-hero-warning-right-background-color:
@@ -346,8 +354,7 @@ export class NbSelectLabelComponent {
  * select-hero-warning-focus-right-background-color:
  * select-hero-warning-hover-left-background-color:
  * select-hero-warning-hover-right-background-color:
- * select-hero-warning-disabled-left-background-color:
- * select-hero-warning-disabled-right-background-color:
+ * select-hero-warning-disabled-background-color:
  * select-hero-warning-disabled-text-color:
  * select-hero-danger-left-background-color:
  * select-hero-danger-right-background-color:
@@ -357,8 +364,7 @@ export class NbSelectLabelComponent {
  * select-hero-danger-focus-right-background-color:
  * select-hero-danger-hover-left-background-color:
  * select-hero-danger-hover-right-background-color:
- * select-hero-danger-disabled-left-background-color:
- * select-hero-danger-disabled-right-background-color:
+ * select-hero-danger-disabled-background-color:
  * select-hero-danger-disabled-text-color:
  * select-option-hero-tiny-padding:
  * select-group-option-hero-tiny-padding-start:
@@ -607,13 +613,19 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   }
 
   get optionsListClasses(): string[] {
-    return [
+    const classes = [
       `appearance-${this.appearance}`,
       `size-${this.size}`,
       `shape-${this.shape}`,
       `status-${this.status}`,
       this.overlayPosition,
     ];
+
+    if (this.fullWidth) {
+      classes.push('full-width');
+    }
+
+    return classes;
   }
 
   /**
