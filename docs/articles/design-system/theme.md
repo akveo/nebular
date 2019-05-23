@@ -152,6 +152,6 @@ This section contains other supporting theme variables, such as `border-radius`,
 
 - [Enable Theme Customization](docs/design-system/enable-customizable-theme)
 - [Create Custom Theme](docs/design-system/create-custom-theme)
-- [Default Theme Variables](docs/auth/design-system-rules) // TODO
-- [Dark Theme Variables](docs/auth/design-system-rules) // TODO
+- [Default Theme Variables](docs/design-system/default-theme)
+- [Dark Theme Variables](docs/design-system/dark-theme)
 

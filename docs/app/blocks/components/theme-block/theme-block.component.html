@@ -1,10 +1,10 @@
 <nb-card>
   <nb-card-body>
-    <h2>{{ vm.themeTitle }} Theme</h2>
-    <p *ngIf="vm.parentTheme">inherited from {{ vm.parentTheme }} theme</p>
+    <h2>{{ themeName }} Theme</h2>
+    <p *ngIf="parentThemeName">inherited from {{ parentThemeName }} theme</p>
 
     <div class="search-wrapper">
-      <input class="search-control" placeholder="Search for..." [formControl]="searchControl">
+      <input nbInput fullWidth class="search-control" placeholder="Search for..." [formControl]="searchControl">
     </div>
 
     <table class="striped">
@@ -17,7 +17,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let prop of vm.filteredThemeProperties | async"
+        <tr *ngFor="let prop of properties"
             [ngdFragment]="prop.name"
             [ngdFragmentSync]="false"
             ngdFragmentClass="highlighted-row">
@@ -28,12 +28,14 @@
           <td ngdColorSwatch>{{ prop.value }}</td>
 
           <td>
-            <a [routerLink]="['/docs/themes', parent.theme]" fragment="{{ parent.prop }}"
-              [class.inheritance-property]="index > 0"
-              *ngFor="let parent of prop.parents; let index = index">
-              <nb-icon *ngIf="index > 0" class="inheritance-icon" icon="arrow-back-outline"></nb-icon>
-              <span>{{ parent.prop }}</span>
-              <span *ngIf="parent.theme !== vm.themeName" class="parent-theme-name">({{ parent.theme }})</span>
+            <a *ngFor="let parent of prop.parents; let index = index; trackBy: trackByFn"
+              [routerLink]="['/docs/themes', parent.theme]"
+              fragment="{{ parent.prop }}"
+              [class.inheritance-property]="index > 0">
+
+                <nb-icon *ngIf="index > 0" class="inheritance-icon" icon="arrow-back-outline"></nb-icon>
+                <span>{{ parent.prop }}</span>
+                <span *ngIf="parent.theme !== themeName" class="parent-theme-name">({{ parent.theme }})</span>
             </a>
           </td>
         </tr>

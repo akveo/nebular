@@ -4,19 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, Input, Renderer2, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
-import { ThemeBlockModel } from './theme-block.model';
-import { ThemeBlockViewModel } from './theme-block.viewmodel';
 
 @Component({
   selector: 'ngd-theme-block',
   styleUrls: ['./theme-block.component.scss'],
   templateUrl: './theme-block.component.html',
-  providers: [ThemeBlockModel, ThemeBlockViewModel],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdThemeComponent implements OnInit, OnDestroy {
@@ -24,20 +20,38 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
 
   private alive: boolean = true;
 
-  @Input('block')
-  set setBlock(block: any) {
-    this.vm.themeTitle = block.name;
-    this.vm.themeName = block.source.name;
-    this.vm.parentTheme = block.source.parent;
-    this.vm.themeProperties = block.source.data;
-  }
+  properties = [];
+  themeName = '';
+  parentThemeName = '';
 
-  constructor(public vm: ThemeBlockViewModel) {}
+
+  @Input('block')
+  set _block(block: any) {
+    this.themeName = block.source.name;
+    this.parentThemeName = block.source.parent;
+
+    this.properties = Object.entries(block.source.data).map(([key, data]: [string, any]) => {
+      const propertyValue = data.value;
+      return {
+        name: key,
+        value: Array.isArray(propertyValue) ? propertyValue.join(' ') : propertyValue,
+        parents: data.parents,
+      };
+    });
+  }
 
   ngOnInit() {
     this.searchControl.valueChanges
       .pipe(skip(1), distinctUntilChanged(), debounceTime(300), takeWhile(() => this.alive))
-      .subscribe(value => this.vm.changeSearch(value));
+      .subscribe((value: string) => {
+        console.log(value);
+        this.properties = this.properties
+          .filter(({ name }) => name.toLowerCase().includes(value.toLowerCase()));
+      });
+  }
+
+  trackByFn(index, item) {
+    return item.name;
   }
 
   ngOnDestroy() {

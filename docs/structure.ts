@@ -191,6 +191,54 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Default Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Default',
+            source: 'default',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Dark Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Default',
+            source: 'default',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Cosmic Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Cosmic',
+            source: 'cosmic',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Corporate Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Corporate',
+            source: 'corporate',
+          },
+        ],
+      },
     ],
   },
   {
