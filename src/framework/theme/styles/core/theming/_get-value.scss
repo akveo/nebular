@@ -27,25 +27,25 @@
   $value: ();
 
   // in case of css custom properties - just returns var(--var-name) - the rest is a browser job
-  @if ($nb-enable-css-custom-properties == true) {
+  @if ($nb-theme-process-mode == null) {
     // there is no way to check if variable exists as current execution context is outside of particular theme
     // because we process css in this mode only once! (and not for each theme)
     $value: var(--#{$key});
-  } @else {
-    // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
-    @if ($nb-theme-process-mode == 'pre-process') {
-      $value: map-get($nb-processed-theme, $key);
-    }
+  }
 
-    // otherwise lazily search for variable value
-    @if ($nb-theme-process-mode == 'lazy-process') {
-      $theme: nb-get-registered-theme($nb-theme-name);
-      $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
-    }
+  // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
+  @if ($nb-theme-process-mode == 'pre-process') {
+    $value: map-get($nb-processed-theme, $key);
+  }
+
+  // otherwise lazily search for variable value
+  @if ($nb-theme-process-mode == 'lazy-process') {
+    $theme: nb-get-registered-theme($nb-theme-name);
+    $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
   }
 
   @if ($value == null) {
-    @warn 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '` for theme `'+ $nb-theme-name +'`';
+    @error 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '` for theme `'+ $nb-theme-name +'`';
   }
 
   @return $value;
