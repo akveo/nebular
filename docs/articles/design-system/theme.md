@@ -1,6 +1,6 @@
 # Eva Design System Theme
 
-In Eva Design System a **theme** is a set of semantic variables and connections between them, that represents application's look & feel to achieves the following goals:
+In Eva Design System a **theme** is a set of semantic variables and connections between them, that represents the application's look & feel to achieves the following goals:
 
 - create new visual themes easily;
 - flexibly change look & feel of the application by managing variables, without changing components' styles;
@@ -72,8 +72,8 @@ color-primary-900: #14236e,
 
 ## Backgrounds & Borders
 
-Theme has 3 backgrounds (`basic`, `alternative`, `primary`) each of 4 shades and also 3 borders, each of 5 shades (background shades count + 1).
-`basic` and `alternative` backgrounds and borders utilizes `basic` color shades as a source. `primary` backgrounds and borders uses `primary` color.
+A theme has 3 backgrounds (`basic`, `alternative`, `primary`) each of 4 shades and also 3 borders, each of 5 shades (background shades count + 1).
+`basic` and `alternative` backgrounds and borders utilize `basic` color shades as a source. `primary` backgrounds and borders use `primary` color.
 Basic backgrounds and borders heavily used by components (cards, accordions, menu, etc), when alternative and primary only for particular use cases,
 to distinguish some of the components.
 
@@ -125,7 +125,7 @@ text-hint-color: color-basic-700,
 
 ## Fonts & Text Styles
 
-Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while default for the rest of the elements.
+Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while the default for the rest of the elements.
 
 There are 13 text styles:
 - 6 `heading` styles, h1-h2

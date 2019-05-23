@@ -32,7 +32,7 @@ $nb-themes: nb-register-theme((
 
 ```
 
-Basically that's it. Now you have two themes registered.
+Basically, that's it. Now you have two themes registered.
 <hr>
 
 ## Related Articles

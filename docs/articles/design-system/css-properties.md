@@ -1,7 +1,7 @@
 # Enable CSS Custom Properties Mode
 
 Custom CSS properties - custom variables that could be declared in CSS, changed and resolved in browser runtime.
-This allows dynamically change application themes with no need to reload the page. Moreover, no additional CSS is loaded, resulting in a good performance achievements.
+This allows dynamically change application themes with no need to reload the page. Moreover, no additional CSS is loaded, resulting in good performance achievements.
 
 Starting with Nebular 4, Nebular can run in custom CSS properties mode in a simple configuration change.  
 
@@ -45,3 +45,10 @@ As a result, all theme properties will be placed under `body` element as custom 
 
 When you change a theme, the theme class will be changed, resulting in a new set of css properties, and changing all the component styles dynamically, in the runtime. 
 <hr>  
+
+
+## Related Articles
+
+- [Use Theme Variables](docs/design-system/use-theme-variables)
+- [Create Custom Theme](docs/design-system/create-custom-theme)
+- [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes)

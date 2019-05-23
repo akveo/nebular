@@ -1,7 +1,7 @@
 # Enable Customizable Themes
 
 Nebular styles come as a css file by default.
-In order to be able to customize theme variables scss files should be enabled.
+In order to be able to customize theme variables, scss files should be enabled.
 
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
@@ -64,7 +64,7 @@ $nb-themes: nb-register-theme((
 
 ## Enable Nebular Styles
 
-Last thing, find your `styles.scss` (or create one and add it into `.angular-cli.json` under `"styles": [..]`) and paste the following:
+The last thing, find your `styles.scss` (or create one and add it into `.angular-cli.json` under `"styles": [..]`) and paste the following:
 
 ```scss
 // this is our just created themes.scss file, make sure the path to the file is correct

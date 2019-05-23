@@ -18,7 +18,7 @@ Eva Design System is implemented for two platforms:
 - Web - Nebular
 - Mobile - [React Kitten](https://github.com/akveo/react-native-ui-kitten/)
 
-Both implementations have single source of truth for styles, and unified theming system.
+Both implementations have a single source of truth for styles and unified theming system.
 <hr>
 
 ## Built-in themes
@@ -34,7 +34,7 @@ Theme extension mechanism allows theme inheritance,  for instance, is inherited 
 
 ## Enterprise ready
 
-Being a part of Eva Ecosystem, Nebular is a great choice for Enterprise grade products, providing complete control over application look & feel.  
+Being a part of Eva Ecosystem, Nebular is a great choice for Enterprise-grade products, providing complete control over application look & feel.  
 <hr>
 
 ## Related Articles

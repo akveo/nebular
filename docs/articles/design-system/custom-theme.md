@@ -1,7 +1,7 @@
 # Create Custom Theme
 
 Custom theme creation is a very similar process to [Theme Customization](docs/design-system/enable-customizable-theme).
-Only in this case we suggest follow simple but very important rules, so that we can minimize amount of necessary changes 
+Only in this case, we suggest following simple but very important rules so that we can minimize the number of necessary changes 
 and avoid repeated code.
 
 <div class="note note-info section-end">
@@ -12,12 +12,12 @@ and avoid repeated code.
   </div>
 </div>
 
-Before we start, let's pretend we want to create a `aquamarine` theme with a violet primary color. 
+Before we start, let's pretend we want to create an `aquamarine` theme with a violet primary color. 
 <hr>
 
 ## Select parent Theme
 
-In order to minify amount of work, parent theme selection is a very important step.
+In order to minify the amount of work, parent theme selection is a very important step.
 Though it is very simple - for colored and dark themes - use `dark` base theme, otherwise - `default` theme.
 In our case `aquamarine` theme is a colored one, let's use `dark` as a parent.
 <hr>
@@ -38,7 +38,7 @@ $nb-themes: nb-register-theme((
 
 ```
 
-Next, find your `NbThemeModule.forRoot` declaration and change a value of the `name` setting:
+Next, find your `NbThemeModule.forRoot` declaration and change the value of the `name` setting:
 
 ```ts
   @NgModule({
@@ -49,7 +49,7 @@ Next, find your `NbThemeModule.forRoot` declaration and change a value of the `n
   }
 ```
 
-Now new theme is enable, let's modify it.
+Now the new theme is enabled, let's modify it.
 <hr>
 
 ## Start with Basic
@@ -195,7 +195,7 @@ $nb-themes: nb-register-theme((
 
 ## Primary Color
 
-Lastly, let's make the final change and replace primary blue color with desired violet one:
+Lastly, let's make the final change and replace the primary blue color with desired violet one:
 
 ```scss
 $nb-themes: nb-register-theme((
@@ -242,7 +242,7 @@ Simple as that, here's our result:
 
 ![image](assets/images/articles/design-system/aquamarine-theme.png)
 
-That's it. In a similar way the rest of the available theme variables could be changed to achieve the desired result.
+That's it. In a similar way, the rest of the available theme variables could be changed to achieve the desired result.
 <hr>
 
 ## Related Articles

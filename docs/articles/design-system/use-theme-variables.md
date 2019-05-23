@@ -44,7 +44,7 @@ using `nb-install-component` mixin like this:
 
 ```
 
-The mixin will multiple the component styles per each enabled theme, giving ability to use run-time themes. 
+The mixin will multiple the component styles per each enabled theme, giving the ability to use run-time themes. 
 Note, in case when [Custom CSS Properties](docs/design-system/enable-css-properties-mode) mode enables, 
 the mixin **is not needed**, since there is no need to multiple the styles.
 
