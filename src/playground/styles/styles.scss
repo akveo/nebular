@@ -2,6 +2,8 @@
 @import '../../framework/theme/styles/globals';
 @import '../../framework/auth/styles/globals';
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:400,600,800&display=swap');
+
 @include nb-install() {
   @include nb-theme-global();
   @include nb-auth-global();

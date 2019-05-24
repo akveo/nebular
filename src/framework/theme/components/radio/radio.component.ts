@@ -187,16 +187,16 @@ export class NbRadioComponent {
   private _disabled: boolean = false;
 
   @Input()
-  get status(): NbComponentStatus {
+  get status(): '' | NbComponentStatus {
     return this._status;
   }
-  set status(value: NbComponentStatus) {
+  set status(value: '' | NbComponentStatus) {
     if (this._status !== value) {
       this._status = value;
       this.cd.markForCheck();
     }
   }
-  private _status: NbComponentStatus = 'primary';
+  private _status: '' | NbComponentStatus;
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 

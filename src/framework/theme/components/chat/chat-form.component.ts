@@ -63,6 +63,7 @@ import { NbComponentStatus } from '../component-status';
     </div>
     <div class="message-row">
       <input nbInput
+             fullWidth
              [status]="getInputStatus()"
              (focus)="inputFocus = true"
              (blur)="inputFocus = false"

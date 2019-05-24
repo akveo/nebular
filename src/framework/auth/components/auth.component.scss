@@ -9,10 +9,12 @@
   }
 
   .navigation .link {
+    display: inline-block;
     text-decoration: none;
 
     nb-icon {
       font-size: 2rem;
+      vertical-align: middle;
     }
   }
 
