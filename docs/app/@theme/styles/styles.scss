@@ -1,6 +1,5 @@
 @import 'themes';
 @import 'common';
-@import 'small-social';
 
 @import '../../../../src/framework/theme/styles/global/normalize';
 @import '../../../../src/framework/theme/styles/global/components';
@@ -16,7 +15,7 @@
   @include nb-search-theme();
   @include nb-bootstrap-global();
   @include nb-icon-theme();
-
+  @include nb-input-theme();
   @include nb-typography();
 
   @include nbd-common();
