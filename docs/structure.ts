@@ -44,6 +44,17 @@ export const structure = [
     children: [
       {
         type: 'page',
+        name: 'Install Nebular',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/install.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Install based on starter kit',
         children: [
           {
@@ -55,12 +66,12 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Add into existing project',
+        name: 'Create Nebular Page',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-into-existing.md',
+            source: 'guides/create-page.md',
           },
         ],
       },
@@ -83,17 +94,6 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'guides/server-deployment.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Bootstrap Integration',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/bootstrap-integration.md',
           },
         ],
       },
