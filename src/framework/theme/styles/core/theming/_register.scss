@@ -1,3 +1,5 @@
+@import '../../themes/mapping';
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -15,6 +17,12 @@
 }
 
 @function nb-set-for-export($theme, $name, $parent-name: null) {
+
+  $parent-theme: map-get($nb-themes-export, $parent-name);
+  @if ($parent-theme != null) {
+    $theme: map-merge(map-get($parent-theme, data), $theme);
+  }
+
   $theme-data: (
     data: $theme,
     parent: $parent-name,
@@ -37,6 +45,10 @@
 // Registers a new theme
 @function nb-register-theme($theme, $name, $parent-name: null) {
 
+  @if ($nb-theme-export-mode == true) {
+    $nb-themes-export: nb-set-for-export($theme, $name, $parent-name) !global;
+  }
+
   $theme-data: ();
 
   @if ($parent-name != null) {
@@ -46,8 +58,8 @@
     }
     $theme: map-merge($parent-theme, $theme);
   }
+  $theme: map-merge($eva-mapping, $theme);
   $nb-themes: map-set($nb-themes, $name, $theme) !global;
-  $nb-themes-export: nb-set-for-export($theme, $name, $parent-name) !global;
 
   @return $nb-themes;
 }
