@@ -10,12 +10,39 @@
       height: nb-theme(radio-height);
       width: nb-theme(radio-width);
       background-color: nb-theme(radio-background-color);
+      border-color: nb-theme(radio-border-color);
       border-style: nb-theme(radio-border-style);
       border-width: nb-theme(radio-border-width);
     }
 
-    .native-input:focus + .radio-circle {
+    .native-input:enabled:checked + .radio-circle {
+      border-color: nb-theme(radio-primary-border-color);
+
+      &::before {
+        background-color: nb-theme(radio-primary-inner-circle-color);;
+      }
+    }
+
+    .native-input:enabled:focus + .radio-circle {
+      border-color: nb-theme(radio-primary-focus-border-color);
       box-shadow: 0 0 0 nb-theme(radio-outline-width) nb-theme(radio-outline-color);
+    }
+    .native-input:enabled:checked:focus + .radio-circle::before {
+      background-color: nb-theme(radio-primary-focus-inner-circle-color);
+    }
+
+    label:hover .native-input:enabled + .radio-circle {
+      border-color: nb-theme(radio-primary-hover-border-color);
+    }
+    label:hover .native-input:checked:enabled + .radio-circle::before {
+      background-color: nb-theme(radio-primary-hover-inner-circle-color);
+    }
+
+    label .native-input:enabled:active + .radio-circle {
+      border-color: nb-theme(radio-primary-active-border-color);
+    }
+    label .native-input:enabled:checked:active + .radio-circle::before {
+      background-color: nb-theme(radio-primary-active-inner-circle-color);
     }
 
     .native-input:disabled + .radio-circle {
@@ -50,10 +77,10 @@
         background-color: nb-theme(radio-#{$status}-hover-inner-circle-color);
       }
 
-      &.status-#{$status} .native-input:enabled:active + .radio-circle {
+      &.status-#{$status} label .native-input:enabled:active + .radio-circle {
         border-color: nb-theme(radio-#{$status}-active-border-color);
       }
-      &.status-#{$status} .native-input:enabled:checked:active + .radio-circle::before {
+      &.status-#{$status} label .native-input:enabled:checked:active + .radio-circle::before {
         background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
       }
     }

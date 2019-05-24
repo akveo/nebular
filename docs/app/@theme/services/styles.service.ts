@@ -7,6 +7,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCS } from '../../app.options';
 
+const DEFAULT_THEME_NAME = 'default';
+
 @Injectable()
 export class NgdStylesService {
 
@@ -14,21 +16,34 @@ export class NgdStylesService {
   }
 
   mapThemedValues(classStyles: any): any {
+    const defaultTheme = this.docs.themes[DEFAULT_THEME_NAME].data;
+
     return classStyles.map(item => {
-      item.styles.map(prop => {
-        prop.themedValues = [];
-        for (const themeName in this.docs.themes) {
-          if (this.docs.themes.hasOwnProperty(themeName)) {
-            const theme = this.docs.themes[themeName];
-            prop.themedValues.push({
-              theme: theme.name,
-              value: theme.data[prop.name] ? theme.data[prop.name].value : 'unknown',
-            });
-          }
-        }
-        return prop;
+      return item.styles.map(prop => {
+        return {
+          ...prop,
+          parent: this.getPropParent(defaultTheme, prop),
+          value: this.getPropValue(defaultTheme, prop),
+        };
       });
-      return item;
     })
+  }
+
+  protected getPropValue(theme, prop) {
+    const resolved = theme[prop.name];
+
+    if (resolved && resolved.value) {
+      return resolved.value;
+    }
+    return null;
+  }
+
+  protected getPropParent(theme, prop) {
+    const resolved = theme[prop.name];
+
+    if (resolved && resolved.parents && resolved.parents[0]) {
+      return resolved.parents[0].prop
+    }
+    return null;
   }
 }

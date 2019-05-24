@@ -15,6 +15,7 @@ $nb-theme-process-mode: null !global;
 $nb-theme-name: 'default' !global;
 $nb-theme: () !global;
 $nb-processed-theme: () !global;
+$nb-theme-export-mode: false !global !default;
 $nb-themes-export: () !global;
 
 @import 'core/mixins';
