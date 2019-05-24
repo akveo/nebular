@@ -34,7 +34,7 @@ export class NbScrollableContainerDimentions {
  *
  * @stacked-example(Simple infinite list, infinite-list/infinite-list-showcase.component)
  *
- * Directive will notify when list scrolled up or down to given a threshold.
+ * Directive will notify when list scrolled up or down to a given threshold.
  * By default it listen to scroll of list on which applied, but also can be set to listen to window scroll.
  *
  * @stacked-example(Scroll modes, infinite-list/infinite-list-scroll-modes.component)

@@ -10,7 +10,6 @@ import { NbComponentSize } from '@nebular/theme';
 @Component({
   selector: 'nb-select-sizes',
   templateUrl: './select-sizes.component.html',
-  styleUrls: ['./select-example.scss'],
 })
 export class SelectSizesComponent {
   sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];

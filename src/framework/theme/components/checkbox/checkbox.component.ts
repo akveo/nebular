@@ -33,8 +33,10 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
+ * Indeterminate state is also supported:
+ * @stacked-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
+ *
  * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
- * @additional-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
  *
  * @styles
  *

@@ -8,11 +8,11 @@ import { NbOverlayRef, NbOverlayService, NbPositionBuilderService, NbTemplatePor
       <nb-card>
         <nb-card-header>This is overlay</nb-card-header>
         <nb-card-body>
-          <button nbButton hero status="success" (click)="dismissOverlay()">Dismiss overlay</button>
+          <button nbButton status="success" (click)="dismissOverlay()">Dismiss overlay</button>
         </nb-card-body>
       </nb-card>
     </ng-template>
-    <button nbButton hero status="primary" (click)="createOverlay()">Create overlay</button>
+    <button nbButton status="primary" (click)="createOverlay()">Create overlay</button>
   `,
 })
 export class OverlayShowcaseComponent implements OnInit {
