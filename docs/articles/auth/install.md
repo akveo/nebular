@@ -127,7 +127,7 @@ export const routes: Routes = [
 
 ## Enable Styles
 
-Last but not least - install the component styles into your styles.scss ([more details](docs/guides/enable-theme-system)):
+Last but not least - install the component styles into your styles.scss ([more details](docs/design-system/enable-customizable-themes)):
 
 ```scss
 @import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/theme/{theme-name}';
