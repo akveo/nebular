@@ -182,7 +182,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
    * Possible values are: `primary` (default), `success`, `warning`, `danger`, `info`
    */
   @Input()
-  status: NbComponentStatus = 'primary';
+  status: '' | NbComponentStatus = '';
 
 
   /**

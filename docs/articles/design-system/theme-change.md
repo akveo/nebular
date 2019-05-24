@@ -5,7 +5,7 @@ Nebular Theme System provides 4 color schemes out of the box - `default`, `dark`
 
 ## Switch from Cosmic to Default
 It is extremely simple to replace a theme from one to another.
-All you need to do is to find your `NbThemeModule.forRoot` declaration and change a value of the `name` setting:
+All you need to do is to find your `NbThemeModule.forRoot` declaration and change the value of the `name` setting:
 
 ```ts
   @NgModule({
@@ -18,7 +18,7 @@ All you need to do is to find your `NbThemeModule.forRoot` declaration and chang
 <hr>
 
 ## Runtime Theme Switch
-In case you want to have a better control when a theme is changed, or for instance need to change it based on a user role,
+In case you want to have better control when a theme is changed, or for instance need to change it based on a user role,
 it is possible to dynamically tell Nebular which theme should be enabled. 
 `NbThemeService` is our friend in this case and particularly the `changeTheme` method:
 
@@ -51,4 +51,5 @@ And of course it is possible to subscribe to an event when the current theme get
 
 ## Related Articles
 
-- [Enable Theme System](docs/guides/enable-theme-system)
+- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
+- [Create Custom Theme](docs/design-system/create-custom-theme)

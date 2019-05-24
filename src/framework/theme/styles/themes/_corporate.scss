@@ -9,73 +9,37 @@
 @import 'default';
 
 $theme: (
-  separator: #cdd5dc,
-  radius: 0.17rem,
-
-  header-text-color: text-alternate-color,
-  header-background-color: #111218,
+  border-radius: 0.17rem,
+  shadow: none,
 
   button-hero-glow-size: 0 0 20px 0,
 
   card-border-width: 1px,
-  card-border-color: background-primary-color-4,
+  card-border-color: border-basic-color-4,
 
-  context-menu-border-color: background-primary-color-4,
-  context-menu-border-width: 0.0625rem,
-
-  modal-separator: #d5dbe0,
+  context-menu-border-width: 1px,
+  context-menu-border-color: border-basic-color-4,
 
   tabs-selected: color-primary-500,
   tabs-selected-second-color: color-primary-500,
-  tabset-divider-color: #ebecee,
 
-  smart-table-paging-bg-active: color-primary-500,
+  popover-border-width: 1px,
+  popover-border-color: border-basic-color-4,
 
-  popover-border-color: separator,
-  popover-border-width: 0.0625rem,
+  tabset-border-radius: border-radius,
+  route-tabset-border-radius: border-radius,
+  user-rectangle-border-radius: border-radius,
+  checkbox-border-radius: border-radius,
+  modal-border-radius: border-radius,
 
-  footer-separator: #d5dbe0,
-  footer-text-highlight-color: #2a2a2a,
-
-  card-border-radius: radius,
-  tabset-border-radius: radius,
-  route-tabset-border-radius: radius,
-  user-rectangle-border-radius: radius,
-  popover-border-radius: radius,
-  context-menu-border-radius: radius,
-  smart-table-border-radius: radius,
-  toastr-border-radius: radius,
-  button-rectangle-border-radius: radius,
-  input-rectangle-border-radius: radius,
-  checkbox-border-radius: radius,
-  modal-border-radius: radius,
-  badge-border-radius: radius,
-  progress-bar-border-radius: radius,
-  alert-border-radius: radius,
-  chat-border-radius: radius,
-  accordion-border-radius: radius,
-  calendar-border-radius: radius,
-  tooltip-border-radius: radius,
-  select-rectangle-border-radius: radius,
-  datepicker-border-radius: radius,
-
-  card-shadow: none,
-  header-shadow: none,
-  footer-shadow: none,
-  layout-window-shadow: none,
-  sidebar-shadow: none,
   tabset-shadow: none,
   route-tabset-shadow: none,
-  popover-shadow: none,
-  context-menu-shadow: none,
-  toastr-shadow: none,
   button-hero-shadow: none,
   alert-shadow: none,
-  chat-shadow: none,
   accordion-shadow: none,
-  tooltip-shadow: none,
-  select-options-list-shadow: none,
-  datepicker-shadow: none,
+
+  select-options-list-border-width: 0.0625rem,
+  select-options-list-border-color: border-basic-color-3,
 );
 
 $nb-themes: nb-register-theme($theme, corporate, default);
