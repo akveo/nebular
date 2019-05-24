@@ -64,7 +64,7 @@ $nb-themes: nb-register-theme((
 
 ## Enable Nebular Styles
 
-The last thing, find your `styles.scss` (or create one and add it into `.angular-cli.json` under `"styles": [..]`) and paste the following:
+The last thing, find your `styles.scss` (or create one and add it into `angular.json` under `"styles": [..]`) or your app and paste the following:
 
 ```scss
 // this is our just created themes.scss file, make sure the path to the file is correct

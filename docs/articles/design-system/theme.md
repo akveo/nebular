@@ -128,10 +128,11 @@ text-hint-color: color-basic-700,
 Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while the default for the rest of the elements.
 
 There are 13 text styles:
-- 6 `heading` styles, h1-h2
+- 6 `heading` styles, `h1`-`h2`
 - 2 `subtitle` styles
 - 2 `paragraph` styles
 - 2 `caption` styles
+- `label` style
 - `button` text style
 
 Each styles describes text `font-family`, `font-size`, `font-width` and `line-height`, for instance, caption text style:
