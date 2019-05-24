@@ -9,16 +9,16 @@
 @import 'default';
 
 $theme: (
-  background-default-color-1: color-basic-800,
-  background-default-color-2: color-basic-900,
-  background-default-color-3: color-basic-1000,
-  background-default-color-4: color-basic-1100,
+  background-basic-color-1: color-basic-800,
+  background-basic-color-2: color-basic-900,
+  background-basic-color-3: color-basic-1000,
+  background-basic-color-4: color-basic-1100,
 
-  border-default-color-1: color-basic-800,
-  border-default-color-2: color-basic-900,
-  border-default-color-3: color-basic-1000,
-  border-default-color-4: color-basic-1100,
-  border-default-color-5: color-basic-1100,
+  border-basic-color-1: color-basic-800,
+  border-basic-color-2: color-basic-900,
+  border-basic-color-3: color-basic-1000,
+  border-basic-color-4: color-basic-1100,
+  border-basic-color-5: color-basic-1100,
 
   background-alternative-color-1: color-basic-100,
   background-alternative-color-2: color-basic-200,
@@ -31,7 +31,7 @@ $theme: (
   border-alternative-color-4: color-basic-400,
   border-alternative-color-5: color-basic-500,
 
-  text-color: color-basic-100,
+  text-basic-color: color-basic-100,
   text-alternate-color: color-basic-900,
   text-control-color: color-basic-100,
   text-disabled-color: color-basic-700,
@@ -39,7 +39,6 @@ $theme: (
 
   shadow: 0 0.5rem 1rem 0 #1a1f33,
   outline-color: color-basic-700,
-  divider-color: border-default-color-2,
 );
 
 // register the theme

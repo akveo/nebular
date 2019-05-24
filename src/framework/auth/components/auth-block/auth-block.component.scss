@@ -19,7 +19,12 @@
       margin-bottom: 0.5rem;
     }
 
-    .error-message {
+    .forgot-password {
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .caption {
       margin-top: 0.5rem;
     }
 
@@ -38,13 +43,6 @@
       text-align: center;
     }
 
-    .checkbox {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-weight: normal;
-    }
-
     .form-control-group {
       margin-bottom: 2rem;
     }
@@ -53,10 +51,11 @@
       display: flex;
       justify-content: space-between;
       margin: 2rem 0;
+    }
 
-      .forgot-password {
-        line-height: 2;
-      }
+    .label-with-link {
+      display: flex;
+      justify-content: space-between;
     }
 
     .links {
@@ -70,7 +69,6 @@
       .socials a {
         margin: 0 1rem;
         text-decoration: none;
-        font-size: 1rem;
         vertical-align: middle;
 
         &.with-icon {

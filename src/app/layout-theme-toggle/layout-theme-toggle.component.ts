@@ -5,12 +5,12 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'nb-layout-theme-toggle',
   styleUrls: ['./layout-theme-toggle.component.scss'],
   template: `
-    <label dir="ltr">
+    <div dir="ltr">
       <button (click)="enable('default')">Default</button>
       <button (click)="enable('dark')">Dark</button>
       <button (click)="enable('cosmic')">Cosmic</button>
       <button (click)="enable('corporate')">Corporate</button>
-    </label>
+    </div>
   `,
 })
 export class LayoutThemeToggleComponent {
