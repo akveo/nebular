@@ -13,9 +13,9 @@ describe('nb-route-tabset', () => {
 
   it('should display default route-tabset', () => {
     expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(1)'))
-      .getText()).toEqual('Users');
+      .getText()).toEqual('USERS');
 
     expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(2)'))
-      .getText()).toEqual('Orders');
+      .getText()).toEqual('ORDERS');
   });
 });
