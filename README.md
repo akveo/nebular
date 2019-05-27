@@ -15,8 +15,6 @@ At the same time, Nebular allows you to use it together with any other UI librar
 
 ## Installation
 
-### Angular CLI
-
 Install Nebular with Angular CLI
 
 ```bash
@@ -25,69 +23,8 @@ ng add @nebular/theme
 
 And that's it. Configuration will be done automatically.
 
-If you want to have more control over setup process you may use manual setup guide.
+If you want to have more control over setup process you can [use manual setup guide](https://akveo.github.io/nebular/docs/guides/install-nebular#manually).
 
-### Manual
-
-1. Install Nebular modules
-
-```bash
-npm install --save @nebular/theme @angular/cdk @angular/animations
-```
-Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
-
-2. Register Nebular theme module into `app.module`:
-
-```ts
-import { RouterModule } from '@angular/router';
-import { NbThemeModule } from '@nebular/theme';
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot([ ... ]), // Router is required by Nebular
-    NbThemeModule.forRoot(),
-  ]
-})
-export class AppModule { }
-```
-
-3. Register theme styles
-
-```scss
-"styles": [
-  "node_modules/@nebular/theme/styles/prebuilt/default.css",
-],
-```
-
-4. Create a page with Nebular components
-
-```ts
-import { NbLayoutModule, NbButtonModule } from '@nebular/theme';
-
-@NgModule({
-  imports: [
-    NbLayoutModule,
-    NbButtonModule,
-  ],
-})
-export class SomePageModule { }
-```
-
-```ts
-@Component({
-  template: `
-    <nb-layout>
-      <nb-layout-header fixed>Awesome Nebular</nb-layout-header>
-      
-      <nb-layout-column>
-        <button nbButton>Hello World!</button>
-      </nb-layout-column>
-    </nb-layout>
-  `,
-})
-export class SomePageComponent { }
-```
-That's it. Check [Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) for more details.
 
 ## Browser Support
 
